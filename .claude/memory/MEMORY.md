@@ -1,0 +1,1 @@
+- [Estado del Proyecto](project_status.md) — Progreso actual: 94% completado (47/50 calculadoras)
