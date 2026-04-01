@@ -1,12 +1,12 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, Suspense } from 'react';
 import { initGA, pageview } from '@/lib/analytics';
 
-export function GAProvider({ children }: { children: React.ReactNode }) {
+// Componente interno que usa useSearchParams (requiere Suspense)
+function AnalyticsTracker() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   useEffect(() => {
@@ -17,10 +17,20 @@ export function GAProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (gaId && pathname) {
-      const url = pathname + (searchParams?.toString() || '');
+      // Usamos window.location.search en lugar de useSearchParams para evitar el Suspense
+      const url = pathname + (typeof window !== 'undefined' ? window.location.search : '');
       pageview(url);
     }
-  }, [pathname, searchParams, gaId]);
+  }, [pathname, gaId]);
 
-  return <>{children}</>;
+  return null;
+}
+
+export function GAProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={null}>
+      <AnalyticsTracker />
+      {children}
+    </Suspense>
+  );
 }
