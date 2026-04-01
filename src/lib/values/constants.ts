@@ -114,7 +114,6 @@ export const TOPE_IMPOSITIVO = {
   seguro_cesantia: 117.2, // UF
   gratificacion: 90,      // UF
 };
-
 export const IMPUESTO_SEGUNDA_CATEGORIA = {
   tramos: [
     { desde: 0, hasta: 13.5, exento: 0, factor: 0, rebaja: 0 },
@@ -125,5 +124,125 @@ export const IMPUESTO_SEGUNDA_CATEGORIA = {
     { desde: 90, hasta: 120, exento: 90, factor: 0.304, rebaja: 16.9 },
     { desde: 120, hasta: 310, exento: 120, factor: 0.35, rebaja: 22.42 },
     { desde: 310, hasta: Infinity, exento: 310, factor: 0.40, rebaja: 37.92 },
+  ],
+};
+
+// ===========================================
+// UTA (Unidad Tributaria Anual)
+// ===========================================
+// UTA = 12 x UTM
+export const UTA_2026 = 69889 * 12; // $838.668
+
+// ===========================================
+// Subsidio Habitacional DS49 / DS01
+// ===========================================
+export const SUBSIDIO_HABITACIONAL = {
+  ds49: {
+    montoMaximoUF: 450, // Valor aproximado en UF
+    tramo1: { ingresoMaximoUF: 12, subsidioMaximoUF: 450 },
+    tramo2: { ingresoMaximoUF: 18, subsidioMaximoUF: 380 },
+    tramo3: { ingresoMaximoUF: 24, subsidioMaximoUF: 310 },
+  },
+  ds01: {
+    montoMaximoUF: 650,
+    tramo1: { ingresoMaximoUF: 15, subsidioMaximoUF: 650 },
+    tramo2: { ingresoMaximoUF: 22, subsidioMaximoUF: 520 },
+  },
+};
+
+// ===========================================
+// Subsidio al Agua Potable
+// ===========================================
+export const SUBSIDIO_AGUA = {
+  montoMaximoCLP: 14000, // Aproximado mensual
+  porcentajeSubsidio: 0.60, // 60% del consumo
+  tramos: [
+    { consumoMaximoM3: 15, subsidio: 0.60 },
+    { consumoMaximoM3: 25, subsidio: 0.40 },
+  ],
+};
+
+// ===========================================
+// Costo TAG (Telepeaje)
+// ===========================================
+export const TAG_RUTAS = {
+  'santiago-rancagua': {
+    categoria1: 3500, // Auto liviano
+    categoria2: 5200, // Camión 2 ejes
+    categoria3: 7800, // Camión 3+ ejes
+  },
+  'santiago-valparaiso': {
+    categoria1: 4200,
+    categoria2: 6300,
+    categoria3: 9500,
+  },
+  'santiago-losandes': {
+    categoria1: 3800,
+    categoria2: 5700,
+    categoria3: 8600,
+  },
+};
+
+// ===========================================
+// Tarifa Eléctrica BT1 (Residencial)
+// ===========================================
+export const TARIFA_BT1 = {
+  cargoFijoCLP: 2800, // Cargo fijo mensual aproximado
+  precioEnergiaCLPKWh: 180, // Precio por kWh (promedio)
+  tramosConsumo: [
+    { maximoKWh: 150, precioCLPKWh: 160 },
+    { maximoKWh: 300, precioCLPKWh: 180 },
+    { maximoKWh: Infinity, precioCLPKWh: 220 },
+  ],
+};
+
+// ===========================================
+// Bono Bodas de Oro (Ley 21.674)
+// ===========================================
+export const BONO_BODAS_ORO = {
+  montoCLP: 150000, // Monto aproximado
+  requisitos: [
+    'Tener 65 años o más',
+    'Estar casado o en unión civil',
+    'Pertenecer al 80% de menores ingresos',
+  ],
+};
+
+// ===========================================
+// PGU (Pensión Garantizada Universal)
+// ===========================================
+export const PGU_2026 = {
+  montoMaximoCLP: 260000, // Aproximado 2026
+  edadMinima: 65,
+  tramos: [
+    { ingresoMaximoCLP: 349800, pguCompleta: true },
+    { ingresoMaximoCLP: 614000, pguCompleta: false },
+  ],
+};
+
+// ===========================================
+// Asignación Familiar
+// ===========================================
+export const ASIGNACION_FAMILIAR_2026 = {
+  tramoA: { ingresoMaximoCLP: 349800, montoPorCargaCLP: 24668 },
+  tramoB: { ingresoMaximoCLP: 509000, montoPorCargaCLP: 18056 },
+  tramoC: { ingresoMaximoCLP: 712000, montoPorCargaCLP: 10031 },
+  tramoD: { ingresoMaximoCLP: 950000, montoPorCargaCLP: 5016 },
+  tramoE: { ingresoMaximoCLP: 1187000, montoPorCargaCLP: 2508 },
+};
+
+// ===========================================
+// Impuesto Segunda Categoría 2026
+// ===========================================
+export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
+  tramos: [
+    { limiteInferiorUTA: 0, limiteSuperiorUTA: 8, tasa: 0, factor: 0 },
+    { limiteInferiorUTA: 8, limiteSuperiorUTA: 16, tasa: 0.04, factor: 0 },
+    { limiteInferiorUTA: 16, limiteSuperiorUTA: 24, tasa: 0.08, factor: 0.64 },
+    { limiteInferiorUTA: 24, limiteSuperiorUTA: 32, tasa: 0.135, factor: 1.96 },
+    { limiteInferiorUTA: 32, limiteSuperiorUTA: 48, tasa: 0.23, factor: 4.92 },
+    { limiteInferiorUTA: 48, limiteSuperiorUTA: 64, tasa: 0.30, factor: 8.44 },
+    { limiteInferiorUTA: 64, limiteSuperiorUTA: 96, tasa: 0.35, factor: 11.64 },
+    { limiteInferiorUTA: 96, limiteSuperiorUTA: Infinity, tasa: 0.40, factor: 16.44 },
   ],
 };

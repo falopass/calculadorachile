@@ -16,6 +16,7 @@ import {
 const navLinks = [
   { href: '/', label: 'Inicio', icon: Sparkles },
   { href: '/#calculadoras', label: 'Calculadoras', icon: Calculator },
+  { href: '/calculadoras', label: 'Todas las calculadoras', icon: Calculator },
 ];
 
 export default function Header() {
