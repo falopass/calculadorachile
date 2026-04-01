@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ToastProvider } from "@/components/ui/Toast";
 import { ValuesProvider } from "@/lib/context/ValuesContext";
+import { GAProvider } from '@/components/analytics/GAProvider';
 
 // Fuente Inter optimizada
 const inter = Inter({
@@ -14,6 +15,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://calculadorachile.cl'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: "CalculaChile - Calculadoras Laborales para Chile",
     template: "%s | CalculaChile",
@@ -36,11 +41,13 @@ export const metadata: Metadata = {
     siteName: "CalculaChile",
     title: "CalculaChile - Calculadoras Laborales para Chile",
     description: "Calculadoras de sueldo líquido, finiquito, UF, IVA y más. Herramientas gratuitas para trabajadores chilenos.",
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CalculaChile - Calculadoras Financieras de Chile' }],
   },
   twitter: {
     card: "summary_large_image",
     title: "CalculaChile - Calculadoras Laborales para Chile",
     description: "Calculadoras de sueldo líquido, finiquito, UF, IVA y más. Herramientas gratuitas para trabajadores chilenos.",
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CalculaChile - Calculadoras Financieras de Chile' }],
   },
 };
 
@@ -89,11 +96,13 @@ export default function RootLayout({
       <body className="antialiased min-h-screen flex flex-col font-sans">
         <ValuesProvider>
           <ToastProvider>
-            <Header />
-            <main id="main-content" className="flex-grow pt-16 md:pt-20" role="main" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
+            <GAProvider>
+              <Header />
+              <main id="main-content" className="flex-grow pt-16 md:pt-20" role="main" tabIndex={-1}>
+                {children}
+              </main>
+              <Footer />
+            </GAProvider>
           </ToastProvider>
         </ValuesProvider>
       </body>
