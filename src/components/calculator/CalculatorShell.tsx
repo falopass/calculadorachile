@@ -11,6 +11,7 @@ import EmptyState from './EmptyState';
 import HistoryPanel from './HistoryPanel';
 import { useCalculationHistory } from '@/hooks/useCalculationHistory';
 import { Calculator as CalculatorIcon, RotateCcw, CheckCircle2, AlertCircle, Zap, History } from 'lucide-react';
+import LegalNote from './LegalNote';
 
 export interface CalculatorShellProps {
   /** Datos de la calculadora */
@@ -518,6 +519,54 @@ export default function CalculatorShell({ calculator, calculateFn }: CalculatorS
             transition={{ duration: 0.3 }}
             className="px-6 pb-6"
           >
+            {/* Disclaimer legal para calculadoras de alto riesgo */}
+            {(calculator.id === 'pension-alimenticia' || calculator.id === 'finiquito' ||
+              calculator.id === 'indemnizacion-anos-servicio' || calculator.id === 'sueldo-liquido') && (
+              <LegalNote type="legal">
+                {calculator.id === 'pension-alimenticia' && (
+                  <>
+                    ⚠️ <strong>Aviso Legal:</strong> Esta calculadora proporciona una estimación basada en porcentajes generales.
+                    El monto real de la pensión alimenticia lo determina un juez de familia considerando múltiples
+                    factores: necesidades del menor, capacidad económica del obligado, nivel de vida anterior,
+                    y circunstancias específicas de cada caso. Consulte con un abogado de familia para su situación particular.
+                    <br /><br />
+                    <strong>Base legal:</strong> Ley 14.908, Ley 19.968.
+                  </>
+                )}
+                {calculator.id === 'finiquito' && (
+                  <>
+                    ⚠️ <strong>Aviso Legal:</strong> Esta calculadora proporciona una estimación general. El finiquito real depende
+                    de la causal de término del contrato (art. 159-161 del Código del Trabajo), antigüedad,
+                    remuneraciones, vacaciones pendientes, y otros factores específicos. Este cálculo no reemplaza
+                    el asesoramiento de un abogado laboral. Consulte con la Dirección del Trabajo o un profesional
+                    para su caso particular.
+                    <br /><br />
+                    <strong>Base legal:</strong> Código del Trabajo, Arts. 159-178.
+                  </>
+                )}
+                {calculator.id === 'indemnizacion-anos-servicio' && (
+                  <>
+                    ⚠️ <strong>Aviso Legal:</strong> Esta calculadora proporciona una estimación basada en el Art. 163 del Código
+                    del Trabajo. La indemnización real puede variar según la causal de despido, topes legales
+                    (11 años, 30 días por año), remuneraciones variables, y circunstancias específicas.
+                    Este cálculo no constituye asesoría legal. Consulte con un abogado laboral para su caso.
+                    <br /><br />
+                    <strong>Base legal:</strong> Código del Trabajo, Arts. 163, 168.
+                  </>
+                )}
+                {calculator.id === 'sueldo-liquido' && (
+                  <>
+                    ⚠️ <strong>Aviso Legal:</strong> Esta calculadora proporciona una estimación del sueldo líquido basada en
+                    descuentos legales estándar (AFP, salud, seguro de cesantía). El sueldo real puede variar
+                    según convenios colectivos, descuentos adicionales, asignaciones familiares, bonos,
+                    y otros factores específicos de su empleador. Consulte con su departamento de RRHH
+                    o un contador para verificaciones exactas.
+                    <br /><br />
+                    <strong>Base legal:</strong> Código del Trabajo, DFL 150, Ley 21.630.
+                  </>
+                )}
+              </LegalNote>
+            )}
             <ResultCard
               results={results}
               title="Resultados"
