@@ -82,25 +82,15 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
 
           {/* ── Logo ── */}
-          <Link href="/" className="flex items-center gap-2.5 group" aria-label="Ir a la página de inicio">
-            <motion.div
-              whileHover={{ rotate: 180, scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="w-9 h-9 rounded-xl bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-accent-500)] flex items-center justify-center shadow-md shadow-[var(--color-primary-500)]/20 group-hover:shadow-[var(--color-primary-500)]/40 transition-shadow"
-            >
-              <Calculator className="w-5 h-5 text-white" />
-            </motion.div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight leading-none">
-                <span className="text-gradient">Calcula</span>
-                <span className="text-[var(--foreground)]">Chile</span>
-              </span>
-              <span className="text-[10px] text-[var(--foreground-muted)] leading-none mt-0.5 hidden sm:block">
-                Calculadoras para Chile
-              </span>
-            </div>
-          </Link>
+           <Link href="/" className="flex items-center gap-2.5 group" aria-label="Ir a la página de inicio">
+             <img
+               src="/logo.png"
+               alt="CalculaChile"
+               className="h-8 w-auto object-contain"
+               width={32}
+               height={32}
+             />
+           </Link>
 
           {/* ── Desktop Nav ── */}
           <div className="hidden md:flex items-center gap-1 bg-[var(--background-secondary)]/60 backdrop-blur-sm rounded-xl p-1 border border-[var(--border)]/50">
