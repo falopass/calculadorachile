@@ -65,11 +65,25 @@ export const calculators: Calculator[] = [
     inputs: [
       { id: 'ultimoSueldo', label: 'Último Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
       { id: 'añosTrabajados', label: 'Años Trabajados', type: 'number', placeholder: '5', required: true, min: 0 },
+      { id: 'mesesTrabajados', label: 'Meses Trabajados', type: 'number', placeholder: '0', required: false, min: 0, max: 11, defaultValue: 0 },
+      { id: 'diasVacacionesPendientes', label: 'Días de Vacaciones Pendientes', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
       { id: 'causaTermino', label: 'Causa de Término', type: 'select', required: true, options: [
         { value: 'renuncia', label: 'Renuncia' },
         { value: 'despido', label: 'Despido' },
         { value: 'mutuo_acuerdo', label: 'Mutuo Acuerdo' },
+        { value: 'necesidades_empresa', label: 'Necesidades de la Empresa' },
+        { value: 'incumplimiento', label: 'Incumplimiento de Obligaciones' },
+        { value: 'vencimiento_plazo', label: 'Vencimiento de Plazo' },
+        { value: 'obra_faena', label: 'Obra o Faena' },
+        { value: 'caso_fortuito', label: 'Caso Fortuito' },
+        { value: 'muerte_trabajador', label: 'Muerte del Trabajador' },
+        { value: 'jubilacion', label: 'Jubilación' },
       ]},
+      { id: 'tieneGratificacion', label: '¿Tiene Gratificación?', type: 'boolean', required: false, defaultValue: true },
+      { id: 'horasExtraPromedio', label: 'Horas Extra Promedio (últimos 3 meses)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
+      { id: 'bonosHabituales', label: 'Bonos Habituales (promedio últimos 3 meses)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
+      { id: 'diasTrabajadosUltimoMes', label: 'Días Trabajados en Último Mes', type: 'number', placeholder: '0', required: false, min: 0, max: 31, defaultValue: 0 },
+      { id: 'sueldoBase', label: 'Sueldo Base (sin bonificaciones)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
     ],
     faq: [
       {
@@ -90,7 +104,7 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Cuál es el tope de la indemnización?',
-        answer: 'La indemnización por años de servicio tiene un tope máximo de 11 años de servicio (330 días de remuneración), según el Art. 163 del Código del Trabajo. Además, la base de cálculo no puede exceder de 90 UF mensuales. Esto significa que hay un límite máximo legal que puede recibir el trabajador.',
+        answer: 'La indemnización por años de servicio tiene un tope máximo de 11 años de servicio (330 días), según el Art. 163 del Código del Trabajo. Además, la base de cálculo no puede exceder de 90 UF mensuales. Esto significa que hay un límite máximo legal que puede recibir el trabajador.',
       },
     ],
   },
@@ -938,7 +952,7 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Cuánto puedo ahorrar en APV?',
-        answer: 'Puedes ahorrar hasta 600 UF anuales (aproximadamente $24 millones) con beneficio tributario. El mínimo depende de la administradora. Puedes hacer aportes únicos o mensuales, y cambiar el monto cuando quieras.'
+        answer: 'Puedes ahorrar hasta 600 UF anuales (aproximadamente $24 millones) con beneficio tributario completo. El mínimo depende de la administradora. Puedes hacer aportes únicos o mensuales, y cambiar el monto cuando quieras.'
       },
       {
         question: '¿Cuándo puedo retirar el APV?',

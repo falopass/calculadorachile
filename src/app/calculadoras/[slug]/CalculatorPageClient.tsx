@@ -1,54 +1,54 @@
-'use client';
+"use client";
 
-import { notFound } from 'next/navigation';
-import { use } from 'react';
-import type { CalculatorResult } from '@/types/calculator';
-import CalculatorShell from '@/components/calculator/CalculatorShell';
-import FAQ from '@/components/calculator/FAQ';
-import SeoStructuredData from '@/components/calculator/SeoStructuredData';
-import { calculateSueldoLiquido, sueldoLiquidoToResults } from '@/lib/calculations/sueldo-liquido';
-import { calculateFiniquito, finiquitoToResults } from '@/lib/calculations/finiquito';
-import { calculateUFCLP, ufclpToResults } from '@/lib/calculations/uf-clp';
-import { calculateIVA, ivaToResults } from '@/lib/calculations/iva';
-import { calculateUTMCLP, utmClpToResults } from '@/lib/calculations/utm-clp';
-import { calculateGratificacion, gratificacionToResults } from '@/lib/calculations/gratificacion';
-import { calculateIndemnizacion, indemnizacionToResults } from '@/lib/calculations/indemnizacion';
-import { calculatePensionAlimenticia, pensionAlimenticiaToResults } from '@/lib/calculations/pension-alimenticia';
-import { calculateReajusteArriendo, reajusteArriendoToResults } from '@/lib/calculations/reajuste-arriendo';
-import { calculatePermisoCirculacion, permisoCirculacionToResults } from '@/lib/calculations/permiso-circulacion';
-import { calculateCostoEmpleado, costoEmpleadoToResults } from '@/lib/calculations/costo-empleado';
-import { calculateHorasExtra, horasExtraToResults } from '@/lib/calculations/horas-extra';
-import { calculateVacaciones, vacacionesToResults } from '@/lib/calculations/vacaciones';
-import { calculateBoletaHonorarios, boletaHonorariosToResults } from '@/lib/calculations/boleta-honorarios';
-import { calculateCreditoHipotecario, creditoHipotecarioToResults } from '@/lib/calculations/credito-hipotecario';
-import { calculateOperacionRenta, operacionRentaToResults } from '@/lib/calculations/operacion-renta';
-import { calculateContribuciones, contribucionesToResults } from '@/lib/calculations/contribuciones';
-import { calculateCostoNotaria, costoNotariaToResults } from '@/lib/calculations/costo-notaria';
-import { calculatePlusvalia, plusvaliaToResults } from '@/lib/calculations/plusvalia';
-import { calculateSubsidioHabitacional, subsidioHabitacionalToResults } from '@/lib/calculations/subsidio-habitacional';
-import { calculatePatenteComercial, patenteComercialToResults } from '@/lib/calculations/patente-comercial';
-import { calculateComparadorAFP, comparadorAFPToResults } from '@/lib/calculations/comparador-afp';
-import { calculateSimuladorAPV, simuladorAPVToResults } from '@/lib/calculations/simulador-apv';
-import { calculateInteresesMora, interesesMoraToResults } from '@/lib/calculations/intereses-mora';
-import { calculateAsignacionFamiliar, asignacionFamiliarToResults } from '@/lib/calculations/asignacion-familiar';
-import { calculateCreditoCAE, creditoCAEToResults } from '@/lib/calculations/credito-cae';
-import { calculateCreditoAutomotriz, creditoAutomotrizToResults } from '@/lib/calculations/credito-automotriz';
-import { calculateMultasTransito, multasTransitoToResults } from '@/lib/calculations/multas-transito';
-import { calculateCostoTag, costoTagToResults } from '@/lib/calculations/costo-tag';
-import { calculateCuentaLuz, cuentaLuzToResults } from '@/lib/calculations/cuenta-luz';
-import { calculateImpuestoSegundaCategoria, impuestoSegundaCategoriaToResults } from '@/lib/calculations/impuesto-segunda-categoria';
-import { calculatePPM, ppmToResults } from '@/lib/calculations/ppm';
-import { calculateBonoBodasOro, bonoBodasOroToResults } from '@/lib/calculations/bono-bodas-oro';
-import { calculateSubsidioAgua, subsidioAguaToResults } from '@/lib/calculations/subsidio-agua';
-import { calculateCotizacionIndependientes, cotizacionIndependientesToResults } from '@/lib/calculations/cotizacion-independientes';
-import { calculatePropinaLegal, propinaLegalToResults } from '@/lib/calculations/propina-legal';
-import { calculateGastosComunes, gastosComunesToResults } from '@/lib/calculations/gastos-comunes';
-import { calculateConversorDivisas, conversorDivisasToResults } from '@/lib/calculations/conversor-divisas';
-import { calculateAguinaldo, aguinaldoToResults } from '@/lib/calculations/aguinaldo';
-import { calculatePGU, pguToResults } from '@/lib/calculations/pgu';
-import { UF, UTM, INGRESO_MINIMO, IVA } from '@/lib/values/constants';
-import { formatCLP, formatUF } from '@/lib/formatters';
-import { useValues } from '@/lib/context/ValuesContext';
+import { notFound } from "next/navigation";
+import { use } from "react";
+import type { CalculatorResult } from "@/types/calculator";
+import CalculatorShell from "@/components/calculator/CalculatorShell";
+import FAQ from "@/components/calculator/FAQ";
+import SeoStructuredData from "@/components/calculator/SeoStructuredData";
+import { calculateSueldoLiquido, sueldoLiquidoToResults } from "@/lib/calculations/sueldo-liquido";
+import { calculateFiniquito, finiquitoToResults } from "@/lib/calculations/finiquito";
+import { calculateUFCLP, ufclpToResults } from "@/lib/calculations/uf-clp";
+import { calculateIVA, ivaToResults } from "@/lib/calculations/iva";
+import { calculateUTMCLP, utmClpToResults } from "@/lib/calculations/utm-clp";
+import { calculateGratificacion, gratificacionToResults } from "@/lib/calculations/gratificacion";
+import { calculateIndemnizacion, indemnizacionToResults } from "@/lib/calculations/indemnizacion";
+import { calculatePensionAlimenticia, pensionAlimenticiaToResults } from "@/lib/calculations/pension-alimenticia";
+import { calculateReajusteArriendo, reajusteArriendoToResults } from "@/lib/calculations/reajuste-arriendo";
+import { calculatePermisoCirculacion, permisoCirculacionToResults } from "@/lib/calculations/permiso-circulacion";
+import { calculateCostoEmpleado, costoEmpleadoToResults } from "@/lib/calculations/costo-empleado";
+import { calculateHorasExtra, horasExtraToResults } from "@/lib/calculations/horas-extra";
+import { calculateVacaciones, vacacionesToResults } from "@/lib/calculations/vacaciones";
+import { calculateBoletaHonorarios, boletaHonorariosToResults } from "@/lib/calculations/boleta-honorarios";
+import { calculateCreditoHipotecario, creditoHipotecarioToResults } from "@/lib/calculations/credito-hipotecario";
+import { calculateOperacionRenta, operacionRentaToResults } from "@/lib/calculations/operacion-renta";
+import { calculateContribuciones, contribucionesToResults } from "@/lib/calculations/contribuciones";
+import { calculateCostoNotaria, costoNotariaToResults } from "@/lib/calculations/costo-notaria";
+import { calculatePlusvalia, plusvaliaToResults } from "@/lib/calculations/plusvalia";
+import { calculateSubsidioHabitacional, subsidioHabitacionalToResults } from "@/lib/calculations/subsidio-habitacional";
+import { calculatePatenteComercial, patenteComercialToResults } from "@/lib/calculations/patente-comercial";
+import { calculateComparadorAFP, comparadorAFPToResults } from "@/lib/calculations/comparador-afp";
+import { calculateSimuladorAPV, simuladorAPVToResults } from "@/lib/calculations/simulador-apv";
+import { calculateInteresesMora, interesesMoraToResults } from "@/lib/calculations/intereses-mora";
+import { calculateAsignacionFamiliar, asignacionFamiliarToResults } from "@/lib/calculations/asignacion-familiar";
+import { calculateCreditoCAE, creditoCAEToResults } from "@/lib/calculations/credito-cae";
+import { calculateCreditoAutomotriz, creditoAutomotrizToResults } from "@/lib/calculations/credito-automotriz";
+import { calculateMultasTransito, multasTransitoToResults } from "@/lib/calculations/multas-transito";
+import { calculateCostoTag, costoTagToResults } from "@/lib/calculations/costo-tag";
+import { calculateCuentaLuz, cuentaLuzToResults } from "@/lib/calculations/cuenta-luz";
+import { calculateImpuestoSegundaCategoria, impuestoSegundaCategoriaToResults } from "@/lib/calculations/impuesto-segunda-categoria";
+import { calculatePPM, ppmToResults } from "@/lib/calculations/ppm";
+import { calculateBonoBodasOro, bonoBodasOroToResults } from "@/lib/calculations/bono-bodas-oro";
+import { calculateSubsidioAgua, subsidioAguaToResults } from "@/lib/calculations/subsidio-agua";
+import { calculateCotizacionIndependientes, cotizacionIndependientesToResults } from "@/lib/calculations/cotizacion-independientes";
+import { calculatePropinaLegal, propinaLegalToResults } from "@/lib/calculations/propina-legal";
+import { calculateGastosComunes, gastosComunesToResults } from "@/lib/calculations/gastos-comunes";
+import { calculateConversorDivisas, conversorDivisasToResults } from "@/lib/calculations/conversor-divisas";
+import { calculateAguinaldo, aguinaldoToResults } from "@/lib/calculations/aguinaldo";
+import { calculatePGU, pguToResults } from "@/lib/calculations/pgu";
+import { UF, UTM, INGRESO_MINIMO, IVA } from "@/lib/values/constants";
+import { formatCLP, formatUF } from "@/lib/formatters";
+import { useValues } from "@/lib/context/ValuesContext";
 
 /**
  * LiveValuesSection - Muestra valores actualizados del BCentral en tiempo real
@@ -60,7 +60,7 @@ function LiveValuesSection() {
     <>
       <h3 className="text-lg font-semibold text-[var(--foreground)] mt-6 mb-3">
         Valores actualizados 2026
-        {source === 'bcentral' && (
+        {source === "bcentral" && (
           <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--color-success-50)] text-[var(--color-success-600)] text-xs font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success-500)] animate-pulse" />
             En vivo
@@ -70,15 +70,11 @@ function LiveValuesSection() {
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 not-prose">
         <li className="flex items-center justify-between p-3 rounded-lg bg-[var(--background-secondary)]">
           <span className="text-sm text-[var(--foreground-muted)]">UF</span>
-          <span className="font-medium text-[var(--foreground)]">
-            {loading ? '...' : formatCLP(uf)}
-          </span>
+          <span className="font-medium text-[var(--foreground)]">{loading ? "..." : formatCLP(uf)}</span>
         </li>
         <li className="flex items-center justify-between p-3 rounded-lg bg-[var(--background-secondary)]">
           <span className="text-sm text-[var(--foreground-muted)]">UTM</span>
-          <span className="font-medium text-[var(--foreground)]">
-            {loading ? '...' : formatCLP(utm)}
-          </span>
+          <span className="font-medium text-[var(--foreground)]">{loading ? "..." : formatCLP(utm)}</span>
         </li>
         <li className="flex items-center justify-between p-3 rounded-lg bg-[var(--background-secondary)]">
           <span className="text-sm text-[var(--foreground-muted)]">Ingreso mínimo</span>
@@ -94,59 +90,66 @@ function LiveValuesSection() {
 }
 
 interface CalculatorPageClientProps {
-  calculator: import('@/types/calculator').Calculator;
+  calculator: import("@/types/calculator").Calculator;
   canonicalUrl?: string;
 }
 
 // Mapa de funciones de cálculo por ID de calculadora
 const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => CalculatorResult[]> = {
-  'sueldo-liquido': (inputs) => {
+  "sueldo-liquido": (inputs) => {
     const result = calculateSueldoLiquido({
       sueldoBruto: inputs.sueldoBruto as number,
-      afp: inputs.afp as 'capital' | 'cuprum' | 'habitat' | 'modelo' | 'planvital' | 'provida' | 'uno',
-      saludTipo: inputs.saludTipo as 'fonasa' | 'isapre',
+      afp: inputs.afp as "capital" | "cuprum" | "habitat" | "modelo" | "planvital" | "provida" | "uno",
+      saludTipo: inputs.saludTipo as "fonasa" | "isapre",
     });
     return sueldoLiquidoToResults(result);
   },
-  'finiquito': (inputs) => {
+  finiquito: (inputs) => {
     const result = calculateFiniquito({
       ultimoSueldo: inputs.ultimoSueldo as number,
       añosTrabajados: inputs.añosTrabajados as number,
-      causaTermino: inputs.causaTermino as 'renuncia' | 'despido' | 'mutuo_acuerdo',
+      mesesTrabajados: inputs.mesesTrabajados as number | undefined,
+      diasVacacionesPendientes: inputs.diasVacacionesPendientes as number | undefined,
+      causaTermino: inputs.causaTermino as "renuncia" | "despido" | "mutuo_acuerdo" | "necesidades_empresa" | "incumplimiento" | "vencimiento_plazo" | "obra_faena" | "caso_fortuito" | "muerte_trabajador" | "jubilacion",
+      tieneGratificacion: inputs.tieneGratificacion as boolean | undefined,
+      horasExtraPromedio: inputs.horasExtraPromedio as number | undefined,
+      bonosHabituales: inputs.bonosHabituales as number | undefined,
+      diasTrabajadosUltimoMes: inputs.diasTrabajadosUltimoMes as number | undefined,
+      sueldoBase: inputs.sueldoBase as number | undefined,
     });
     return finiquitoToResults(result);
   },
-  'uf-clp': (inputs) => {
+  "uf-clp": (inputs) => {
     const result = calculateUFCLP({
       monto: inputs.monto as number,
-      direccion: inputs.direccion as 'uf-a-clp' | 'clp-a-uf',
+      direccion: inputs.direccion as "uf-a-clp" | "clp-a-uf",
     });
     return ufclpToResults(result);
   },
-  'iva': (inputs) => {
+  iva: (inputs) => {
     const result = calculateIVA({
       monto: inputs.monto as number,
-      tipo: inputs.tipo as 'agregar-iva' | 'quitar-iva',
+      tipo: inputs.tipo as "agregar-iva" | "quitar-iva",
     });
     return ivaToResults(result);
   },
   // Nuevas calculadoras FASE 1
-  'utm-clp': (inputs) => {
+  "utm-clp": (inputs) => {
     const result = calculateUTMCLP({
       monto: inputs.monto as number,
-      direccion: inputs.direccion as 'utm-a-clp' | 'clp-a-utm',
+      direccion: inputs.direccion as "utm-a-clp" | "clp-a-utm",
     });
     return utmClpToResults(result);
   },
-  'gratificacion-legal': (inputs) => {
+  "gratificacion-legal": (inputs) => {
     const result = calculateGratificacion({
       sueldoBruto: inputs.sueldoBruto as number,
       mesesTrabajados: inputs.mesesTrabajados as number,
-      tipoGratificacion: inputs.tipoGratificacion as 'mensual' | 'anual',
+      tipoGratificacion: inputs.tipoGratificacion as "mensual" | "anual",
     });
     return gratificacionToResults(result);
   },
-  'indemnizacion-anos-servicio': (inputs) => {
+  "indemnizacion-anos-servicio": (inputs) => {
     const result = calculateIndemnizacion({
       ultimoSueldo: inputs.ultimoSueldo as number,
       añosTrabajados: inputs.añosTrabajados as number,
@@ -155,7 +158,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return indemnizacionToResults(result);
   },
-  'pension-alimenticia': (inputs) => {
+  "pension-alimenticia": (inputs) => {
     const result = calculatePensionAlimenticia({
       sueldoBruto: inputs.sueldoBruto as number,
       numeroHijos: inputs.numeroHijos as number,
@@ -164,7 +167,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return pensionAlimenticiaToResults(result);
   },
-  'reajuste-arriendo': (inputs) => {
+  "reajuste-arriendo": (inputs) => {
     const result = calculateReajusteArriendo({
       arriendoActual: inputs.arriendoActual as number,
       arriendoEnUF: inputs.arriendoEnUF as boolean,
@@ -173,21 +176,21 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return reajusteArriendoToResults(result);
   },
-  'permiso-circulacion': (inputs) => {
+  "permiso-circulacion": (inputs) => {
     const result = calculatePermisoCirculacion({
       valorVehiculo: inputs.valorVehiculo as number,
-      tipoVehiculo: inputs.tipoVehiculo as 'automovil' | 'motocicleta' | 'carga' | 'bus' | 'taxi' | 'camion',
+      tipoVehiculo: inputs.tipoVehiculo as "automovil" | "motocicleta" | "carga" | "bus" | "taxi" | "camion",
       antiguedadVehiculo: inputs.antiguedadVehiculo as number,
       esZonaCarga: inputs.esZonaCarga as boolean,
       esPrimeraVez: inputs.esPrimeraVez as boolean,
     });
     return permisoCirculacionToResults(result);
   },
-  'costo-empleado-pyme': (inputs) => {
+  "costo-empleado-pyme": (inputs) => {
     const result = calculateCostoEmpleado({
       sueldoBruto: inputs.sueldoBruto as number,
-      afp: inputs.afp as keyof typeof import('@/lib/values/constants').AFP,
-      saludTipo: inputs.saludTipo as 'fonasa' | 'isapre',
+      afp: inputs.afp as keyof typeof import("@/lib/values/constants").AFP,
+      saludTipo: inputs.saludTipo as "fonasa" | "isapre",
       contratoIndefinido: inputs.contratoIndefinido as boolean,
       gratificacionIncluida: inputs.gratificacionIncluida as boolean,
       horasExtra: (inputs.horasExtra as number) || 0,
@@ -195,7 +198,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return costoEmpleadoToResults(result);
   },
-  'horas-extra': (inputs) => {
+  "horas-extra": (inputs) => {
     const result = calculateHorasExtra({
       sueldoBruto: inputs.sueldoBruto as number,
       horasExtra: inputs.horasExtra as number,
@@ -203,7 +206,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return horasExtraToResults(result);
   },
-  'vacaciones-proporcionales': (inputs) => {
+  "vacaciones-proporcionales": (inputs) => {
     const result = calculateVacaciones({
       sueldoBruto: inputs.sueldoBruto as number,
       mesesTrabajados: inputs.mesesTrabajados as number,
@@ -211,13 +214,13 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return vacacionesToResults(result);
   },
-  'boleta-honorarios': (inputs) => {
+  "boleta-honorarios": (inputs) => {
     const result = calculateBoletaHonorarios({
       montoBruto: inputs.montoBruto as number,
     });
     return boletaHonorariosToResults(result);
   },
-  'credito-hipotecario': (inputs) => {
+  "credito-hipotecario": (inputs) => {
     const result = calculateCreditoHipotecario({
       montoUF: inputs.montoUF as number,
       plazoAnos: inputs.plazoAnos as number,
@@ -226,7 +229,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return creditoHipotecarioToResults(result);
   },
-  'operacion-renta': (inputs) => {
+  "operacion-renta": (inputs) => {
     const result = calculateOperacionRenta({
       ingresosAnuales: inputs.ingresosAnuales as number,
       gastosAnuales: inputs.gastosAnuales as number,
@@ -235,22 +238,22 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return operacionRentaToResults(result);
   },
-  'contribuciones': (inputs) => {
+  contribuciones: (inputs) => {
     const result = calculateContribuciones({
       avaluoFiscal: inputs.avaluoFiscal as number,
-      destino: inputs.destino as 'habitacional' | 'comercial' | 'industrial' | 'sitio_eriado' | 'agrario',
+      destino: inputs.destino as "habitacional" | "comercial" | "industrial" | "sitio_eriado" | "agrario",
     });
     return contribucionesToResults(result);
   },
-  'costo-notaria': (inputs) => {
+  "costo-notaria": (inputs) => {
     const result = calculateCostoNotaria({
       valorPropiedad: inputs.valorPropiedad as number,
-      tipo: inputs.tipo as 'compraventa' | 'hipoteca' | 'donacion' | 'testamento',
+      tipo: inputs.tipo as "compraventa" | "hipoteca" | "donacion" | "testamento",
       notariaAdicional: inputs.notariaAdicional as boolean | undefined,
     });
     return costoNotariaToResults(result);
   },
-  'plusvalia': (inputs) => {
+  plusvalia: (inputs) => {
     const result = calculatePlusvalia({
       precioCompra: inputs.precioCompra as number,
       precioVenta: inputs.precioVenta as number,
@@ -259,32 +262,32 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return plusvaliaToResults(result);
   },
-  'subsidio-habitacional': (inputs) => {
+  "subsidio-habitacional": (inputs) => {
     const result = calculateSubsidioHabitacional({
       valorPropiedad: inputs.valorPropiedad as number,
       ahorro: inputs.ahorro as number,
-      tipoSubsidio: inputs.tipoSubsidio as 'ds49' | 'ds01',
-      tramo: inputs.tramo as 'tramo1' | 'tramo2',
+      tipoSubsidio: inputs.tipoSubsidio as "ds49" | "ds01",
+      tramo: inputs.tramo as "tramo1" | "tramo2",
     });
     return subsidioHabitacionalToResults(result);
   },
-  'patente-comercial': (inputs) => {
+  "patente-comercial": (inputs) => {
     const result = calculatePatenteComercial({
       capitalInvertido: inputs.capitalInvertido as number,
-      actividad: inputs.actividad as 'comercio' | 'industria' | 'servicios' | 'transporte',
-      comuna: inputs.comuna as 'santiago' | 'providencia' | 'las_condes' | 'otra',
+      actividad: inputs.actividad as "comercio" | "industria" | "servicios" | "transporte",
+      comuna: inputs.comuna as "santiago" | "providencia" | "las_condes" | "otra",
     });
     return patenteComercialToResults(result);
   },
-  'comparador-afp': (inputs) => {
+  "comparador-afp": (inputs) => {
     const result = calculateComparadorAFP({
       sueldoBruto: inputs.sueldoBruto as number,
-      afpActual: inputs.afpActual as keyof typeof import('@/lib/values/constants').AFP,
+      afpActual: inputs.afpActual as keyof typeof import("@/lib/values/constants").AFP,
       anosPension: inputs.anosPension as number,
     });
     return comparadorAFPToResults(result);
   },
-  'simulador-apv': (inputs) => {
+  "simulador-apv": (inputs) => {
     const result = calculateSimuladorAPV({
       sueldoBruto: inputs.sueldoBruto as number,
       montoMensualAPV: inputs.montoMensualAPV as number,
@@ -293,7 +296,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return simuladorAPVToResults(result);
   },
-  'intereses-mora': (inputs) => {
+  "intereses-mora": (inputs) => {
     const result = calculateInteresesMora({
       montoDeuda: inputs.montoDeuda as number,
       diasMora: inputs.diasMora as number,
@@ -301,15 +304,15 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return interesesMoraToResults(result);
   },
-  'asignacion-familiar': (inputs) => {
+  "asignacion-familiar": (inputs) => {
     const result = calculateAsignacionFamiliar({
       sueldoBruto: inputs.sueldoBruto as number,
       numeroHijos: inputs.numeroHijos as number,
-      tramo: inputs.tramo as 'a' | 'b' | 'c' | undefined,
+      tramo: inputs.tramo as "a" | "b" | "c" | undefined,
     });
     return asignacionFamiliarToResults(result);
   },
-  'credito-cae': (inputs) => {
+  "credito-cae": (inputs) => {
     const result = calculateCreditoCAE({
       montoCredito: inputs.montoCredito as number,
       tasaAnual: inputs.tasaAnual as number,
@@ -318,7 +321,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return creditoCAEToResults(result);
   },
-  'credito-automotriz': (inputs) => {
+  "credito-automotriz": (inputs) => {
     const result = calculateCreditoAutomotriz({
       valorVehiculo: inputs.valorVehiculo as number,
       pie: inputs.pie as number,
@@ -328,45 +331,45 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return creditoAutomotrizToResults(result);
   },
-  'multas-transito': (inputs) => {
+  "multas-transito": (inputs) => {
     const result = calculateMultasTransito({
-      tipoMulta: inputs.tipoMulta as 'leve' | 'menos_grave' | 'grave' | 'gravisima',
+      tipoMulta: inputs.tipoMulta as "leve" | "menos_grave" | "grave" | "gravisima",
       cantidadMultas: inputs.cantidadMultas as number | undefined,
     });
     return multasTransitoToResults(result);
   },
-  'costo-tag': (inputs) => {
+  "costo-tag": (inputs) => {
     const result = calculateCostoTag({
-      peajes: inputs.peajes as 'santiago_rancagua' | 'santiago_valparaiso' | 'santiago_los_andes' | 'santiago_san_fernando' | 'urbano_santiago',
+      peajes: inputs.peajes as "santiago_rancagua" | "santiago_valparaiso" | "santiago_los_andes" | "santiago_san_fernando" | "urbano_santiago",
       viajesMes: inputs.viajesMes as number,
       tieneConvenio: inputs.tieneConvenio as boolean | undefined,
     });
     return costoTagToResults(result);
   },
-  'cuenta-luz': (inputs) => {
+  "cuenta-luz": (inputs) => {
     const result = calculateCuentaLuz({
       consumoKWH: inputs.consumoKWH as number,
-      tipoTarifa: inputs.tipoTarifa as 'bt1_residencial' | 'bt1_comercial' | 'bt1_industrial' | undefined,
-      zona: inputs.zona as 'norte' | 'central' | 'sur' | undefined,
+      tipoTarifa: inputs.tipoTarifa as "bt1_residencial" | "bt1_comercial" | "bt1_industrial" | undefined,
+      zona: inputs.zona as "norte" | "central" | "sur" | undefined,
     });
     return cuentaLuzToResults(result);
   },
-  'impuesto-segunda-categoria': (inputs) => {
+  "impuesto-segunda-categoria": (inputs) => {
     const result = calculateImpuestoSegundaCategoria({
       sueldoBrutoMensual: inputs.sueldoBrutoMensual as number,
       mesesTrabajados: inputs.mesesTrabajados as number | undefined,
     });
     return impuestoSegundaCategoriaToResults(result);
   },
-  'ppm': (inputs) => {
+  ppm: (inputs) => {
     const result = calculatePPM({
       ingresosBrutosAnuales: inputs.ingresosBrutosAnuales as number,
       gastosPresuntos: inputs.gastosPresuntos as number | undefined,
-      actividad: inputs.actividad as 'profesional' | 'comercio' | 'transporte' | 'construccion',
+      actividad: inputs.actividad as "profesional" | "comercio" | "transporte" | "construccion",
     });
     return ppmToResults(result);
   },
-  'bono-bodas-oro': (inputs) => {
+  "bono-bodas-oro": (inputs) => {
     const result = calculateBonoBodasOro({
       anosTrabajados: inputs.anosTrabajados as number,
       esPublico: inputs.esPublico as boolean,
@@ -374,23 +377,23 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return bonoBodasOroToResults(result);
   },
-  'subsidio-agua': (inputs) => {
+  "subsidio-agua": (inputs) => {
     const result = calculateSubsidioAgua({
       consumoM3: inputs.consumoM3 as number,
       numeroPersonas: inputs.numeroPersonas as number,
-      tramo: inputs.tramo as 'tramo1' | 'tramo2',
+      tramo: inputs.tramo as "tramo1" | "tramo2",
     });
     return subsidioAguaToResults(result);
   },
-  'cotizacion-independientes': (inputs) => {
+  "cotizacion-independientes": (inputs) => {
     const result = calculateCotizacionIndependientes({
       rentaBrutaMensual: inputs.rentaBrutaMensual as number,
-      afp: inputs.afp as keyof typeof import('@/lib/values/constants').AFP,
-      salud: inputs.salud as 'fonasa' | 'isapre',
+      afp: inputs.afp as keyof typeof import("@/lib/values/constants").AFP,
+      salud: inputs.salud as "fonasa" | "isapre",
     });
     return cotizacionIndependientesToResults(result);
   },
-  'propina-legal': (inputs) => {
+  "propina-legal": (inputs) => {
     const result = calculatePropinaLegal({
       montoConsumo: inputs.montoConsumo as number,
       incluyePropina: inputs.incluyePropina as boolean,
@@ -398,7 +401,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return propinaLegalToResults(result);
   },
-  'gastos-comunes': (inputs) => {
+  "gastos-comunes": (inputs) => {
     const result = calculateGastosComunes({
       superficieM2: inputs.superficieM2 as number,
       valorM2: inputs.valorM2 as number | undefined,
@@ -410,23 +413,23 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     });
     return gastosComunesToResults(result);
   },
-  'conversor-divisas': (inputs) => {
+  "conversor-divisas": (inputs) => {
     const result = calculateConversorDivisas({
       monto: inputs.monto as number,
-      moneda: inputs.moneda as 'usd' | 'eur',
-      direccion: inputs.direccion as 'a_clp' | 'desde_clp',
+      moneda: inputs.moneda as "usd" | "eur",
+      direccion: inputs.direccion as "a_clp" | "desde_clp",
     });
     return conversorDivisasToResults(result);
   },
-  'aguinaldo': (inputs) => {
+  aguinaldo: (inputs) => {
     const result = calculateAguinaldo({
-      tipo: inputs.tipo as 'fiestas_patrias' | 'navidad' | 'escolar',
+      tipo: inputs.tipo as "fiestas_patrias" | "navidad" | "escolar",
       sueldoBruto: inputs.sueldoBruto as number,
       mesesTrabajados: inputs.mesesTrabajados as number,
     });
     return aguinaldoToResults(result);
   },
-  'pgu': (inputs) => {
+  pgu: (inputs) => {
     const result = calculatePGU({
       pensionActual: inputs.pensionActual as number,
       anosCotizados: inputs.anosCotizados as number,
@@ -452,12 +455,8 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold text-[var(--foreground)] mb-2">
-              Calculadora en desarrollo
-            </h2>
-            <p className="text-[var(--foreground-secondary)]">
-              Esta calculadora estará disponible próximamente.
-            </p>
+            <h2 className="text-xl font-semibold text-[var(--foreground)] mb-2">Calculadora en desarrollo</h2>
+            <p className="text-[var(--foreground-secondary)]">Esta calculadora estará disponible próximamente.</p>
           </div>
         </div>
       </div>
@@ -473,22 +472,15 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
       <div className="bg-gradient-to-b from-[var(--color-primary-600)]/5 to-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
           <div className="text-center">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-2">
-              {calculator.name}
-            </h1>
-            <p className="text-base md:text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto">
-              {calculator.description}
-            </p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-2">{calculator.name}</h1>
+            <p className="text-base md:text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto">{calculator.description}</p>
           </div>
         </div>
       </div>
 
       {/* Contenido principal */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <CalculatorShell
-          calculator={calculator}
-          calculateFn={calculateFn}
-        />
+        <CalculatorShell calculator={calculator} calculateFn={calculateFn} />
 
         {/* SEO Content */}
         <div className="mt-10 md:mt-12">
@@ -500,11 +492,7 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
               ¿Cómo usar la calculadora de {calculator.name.toLowerCase()}?
             </h2>
             <div className="prose prose-sm md:prose-base max-w-none text-[var(--foreground-secondary)]">
-              <p className="leading-relaxed">
-                Ingresa los datos solicitados en el formulario y haz clic en "Calcular"
-                para obtener los resultados instantáneamente. Todos nuestros cálculos utilizan
-                valores actualizados de 2026.
-              </p>
+              <p className="leading-relaxed">Ingresa los datos solicitados en el formulario y haz clic en "Calcular" para obtener los resultados instantáneamente. Todos nuestros cálculos utilizan valores actualizados de 2026.</p>
 
               <LiveValuesSection />
             </div>
@@ -514,10 +502,7 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
         {/* FAQ Section */}
         {calculator.faq && calculator.faq.length > 0 && (
           <div className="mt-8 md:mt-10">
-            <FAQ
-              items={calculator.faq}
-              title={`Preguntas Frecuentes sobre ${calculator.name}`}
-            />
+            <FAQ items={calculator.faq} title={`Preguntas Frecuentes sobre ${calculator.name}`} />
           </div>
         )}
       </div>
