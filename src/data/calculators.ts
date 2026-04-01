@@ -11,6 +11,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu sueldo líquido a partir del bruto, considerando AFP, salud y seguro de cesantía.',
     slug: 'calculadora-sueldo-liquido',
     category: 'sueldo',
+    featured: true,
+    phase: 1,
     keywords: ['sueldo líquido', 'calculadora sueldo', 'descuentos AFP', 'sueldo bruto a líquido', 'descuentos legales Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -57,6 +59,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el monto de tu finiquito considerando indemnización, vacaciones y gratificación proporcional.',
     slug: 'calculadora-finiquito',
     category: 'beneficios',
+    featured: true,
+    phase: 1,
     keywords: ['finiquito', 'calculadora finiquito', 'indemnización por años de servicio', 'vacaciones proporcionales', 'renuncia trabajo Chile'],
     inputs: [
       { id: 'ultimoSueldo', label: 'Último Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -96,6 +100,8 @@ export const calculators: Calculator[] = [
     description: 'Convierte entre UF y pesos chilenos con el valor actualizado.',
     slug: 'calculadora-uf-clp',
     category: 'conversiones',
+    featured: true,
+    phase: 1,
     keywords: ['UF a CLP', 'convertir UF', 'valor UF hoy', 'calculadora UF', 'UF pesos chilenos'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
@@ -133,6 +139,8 @@ export const calculators: Calculator[] = [
     description: 'Agrega o quita IVA (19%) a cualquier monto.',
     slug: 'calculadora-iva',
     category: 'impuestos',
+    featured: true,
+    phase: 1,
     keywords: ['IVA Chile', 'calculadora IVA', 'agregar IVA', 'quitar IVA', '19% IVA', 'precio neto bruto'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '$100.000', required: true, min: 0 },
@@ -170,6 +178,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el pago de tus horas extra: recargo 50%, 100% domingos y festivos. Conoce el tope legal y cómo se calcula según el Código del Trabajo.',
     slug: 'calculadora-horas-extra',
     category: 'beneficios',
+    featured: true,
+    phase: 1,
     keywords: ['horas extra', 'pago horas extraordinarias', 'recargo 50%', 'horas extra domingo', 'Código del Trabajo horas extra'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -205,6 +215,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tus vacaciones proporcionales al finiquito o renuncia. Días de feriado legal según meses trabajados. Basado en Código del Trabajo Art. 67.',
     slug: 'calculadora-vacaciones-proporcionales',
     category: 'beneficios',
+    featured: true,
+    phase: 1,
     keywords: ['vacaciones proporcionales', 'feriado proporcional', 'días de vacaciones', 'finiquito vacaciones', 'Código del Trabajo Art. 67'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -240,6 +252,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula la retención de boleta de honorarios: 15.25% impuesto, monto líquido y bruto. Actualizado para independientes Chile 2026.',
     slug: 'calculadora-boleta-honorarios',
     category: 'impuestos',
+    featured: true,
+    phase: 1,
     keywords: ['boleta de honorarios', 'retención honorarios', 'impuesto independientes', '15.25% retención', 'honorarios Chile'],
     inputs: [
       { id: 'montoBruto', label: 'Monto Bruto', type: 'number', placeholder: '$100.000', required: true, min: 0 },
@@ -276,6 +290,8 @@ export const calculators: Calculator[] = [
     description: 'Convierte entre UTM y pesos chilenos con el valor actualizado de marzo 2026. Calcula multas, permisos y trámites tributarios.',
     slug: 'calculadora-utm-clp',
     category: 'conversiones',
+    featured: true,
+    phase: 1,
     keywords: ['UTM a CLP', 'convertir UTM', 'valor UTM hoy', 'calculadora UTM', 'UTM pesos chilenos', 'unidad tributaria mensual'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '10', required: true, min: 0 },
@@ -313,6 +329,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu gratificación legal según el Art. 47 del Código del Trabajo. Conoce el tope anual de 4.75 UTA y cómo afecta tu sueldo.',
     slug: 'calculadora-gratificacion-legal',
     category: 'beneficios',
+    featured: true,
+    phase: 1,
     keywords: ['gratificación legal', 'calculadora gratificación', '25% remuneración', '4.75 UTA', 'Art. 47 Código del Trabajo', 'aguinaldo legal'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -351,6 +369,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu indemnización por años de servicio según el Art. 163 del Código del Trabajo. 30 días por año, tope 11 años.',
     slug: 'calculadora-indemnizacion-anos-servicio',
     category: 'beneficios',
+    featured: true,
+    phase: 1,
     keywords: ['indemnización años de servicio', 'calculadora indemnización', '30 días por año', 'Art. 163 Código del Trabajo', 'despido injustificado', 'tope 11 años'],
     inputs: [
       { id: 'ultimoSueldo', label: 'Último Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -387,6 +407,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula la pensión de alimentos sugerida según número de hijos e ingresos. Basado en la Ley 14.908 de Chile.',
     slug: 'calculadora-pension-alimenticia',
     category: 'familia',
+    featured: true,
+    phase: 1,
     keywords: ['pensión alimenticia', 'calculadora pensión', 'Ley 14.908', 'alimentos hijos', 'porcentaje pensión', 'alimentos Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -423,6 +445,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el reajuste de tu arriendo según variación UF o IPC. Conoce cuánto puede subir tu arriendo legalmente en Chile.',
     slug: 'calculadora-reajuste-arriendo',
     category: 'vivienda',
+    featured: true,
+    phase: 1,
     keywords: ['reajuste arriendo', 'aumento arriendo', 'IPC arriendo', 'UF arriendo', 'reajuste contrato arriendo', 'tope aumento arriendo Chile'],
     inputs: [
       { id: 'arriendoActual', label: 'Arriendo Actual', type: 'number', placeholder: '$300.000', required: true, min: 0 },
@@ -459,6 +483,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el costo de tu permiso de circulación según tipo de vehículo y antigüedad. Incluye descuentos por años.',
     slug: 'calculadora-permiso-circulacion',
     category: 'vehiculos',
+    featured: true,
+    phase: 1,
     keywords: ['permiso de circulación', 'costo permiso circulación', 'permiso municipal', 'patente vehículo', 'descuento antigüedad vehículo', 'permiso 2026'],
     inputs: [
       { id: 'valorVehiculo', label: 'Valor del Vehículo', type: 'number', placeholder: '$15.000.000', required: true, min: 0 },
@@ -503,6 +529,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el costo real de un empleado para tu PYME: sueldo, cotizaciones, gratificación y aportes del empleador.',
     slug: 'calculadora-costo-empleado-pyme',
     category: 'empresas',
+    featured: true,
+    phase: 1,
     keywords: ['costo empleado PYME', 'cuánto cuesta un empleado', 'gasto empleador', 'cotizaciones patronales', 'costo total trabajador Chile', 'sueldo real empresa'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -555,6 +583,8 @@ export const calculators: Calculator[] = [
     description: 'Simula tu dividendo mensual de crédito hipotecario en UF y CLP. Calcula interés total, costo del crédito y cuota con amortización francesa.',
     slug: 'calculadora-credito-hipotecario',
     category: 'vivienda',
+    featured: true,
+    phase: 1,
     keywords: ['crédito hipotecario', 'simulador dividendo', 'crédito vivienda Chile', 'hipoteca UF', 'amortización francesa', 'dividendo mensual'],
     inputs: [
       { id: 'montoUF', label: 'Monto del Crédito (UF)', type: 'number', placeholder: '2000', required: true, min: 0, tooltip: 'Monto que solicitas al banco en UF. Ej: 2000 UF para una propiedad de 2500 UF con 500 UF de pie.' },
@@ -594,6 +624,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu impuesto a la renta como trabajador independiente. Deduce gastos, cotizaciones y ahorro previsional voluntario.',
     slug: 'calculadora-operacion-renta',
     category: 'impuestos',
+    featured: true,
+    phase: 2,
     keywords: ['operación renta', 'impuesto independientes', 'renta trabajo independiente', 'formulario 22', 'impuesto anual Chile'],
     inputs: [
       { id: 'ingresosAnuales', label: 'Ingresos Brutos Anuales', type: 'number', placeholder: '$12.000.000', required: true, min: 0, tooltip: 'Suma de todos tus ingresos del año como independiente. Incluye boletas de honorarios y otros ingresos.' },
@@ -630,6 +662,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el monto de tus contribuciones semestrales según avalúo fiscal y tipo de propiedad. Actualizado 2026.',
     slug: 'calculadora-contribuciones',
     category: 'vivienda',
+    featured: true,
+    phase: 2,
     keywords: ['contribuciones', 'impuesto territorial', 'avalúo fiscal', 'contribuciones semestrales', 'impuesto bienes raíces Chile'],
     inputs: [
       { id: 'avaluoFiscal', label: 'Avalúo Fiscal', type: 'number', placeholder: '$50.000.000', required: true, min: 0, tooltip: 'Valor asignado por el SII a tu propiedad. No es el valor comercial. Aparece en el certificado de dominio vigente.' },
@@ -670,6 +704,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el costo total de notaría, derechos registrales e impuestos en la compraventa de un inmueble en Chile.',
     slug: 'calculadora-costo-notaria',
     category: 'vivienda',
+    featured: true,
+    phase: 2,
     keywords: ['costo notaría', 'compraventa inmueble', 'derechos registrales', 'impuesto timbres', 'notaría Chile'],
     inputs: [
       { id: 'valorPropiedad', label: 'Valor de la Propiedad', type: 'number', placeholder: '$100.000.000', required: true, min: 0, tooltip: 'Valor de venta de la propiedad. Se usa para calcular honorarios notariales e impuestos.' },
@@ -710,6 +746,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el impuesto por plusvalía al vender una propiedad. Tasa decreciente según años de tenencia. Exento después de 10 años.',
     slug: 'calculadora-plusvalia',
     category: 'impuestos',
+    featured: true,
+    phase: 2,
     keywords: ['plusvalía', 'impuesto venta propiedad', 'ganancia capital Chile', 'venta inmueble impuesto', 'plusvalía años tenencia'],
     inputs: [
       { id: 'precioCompra', label: 'Precio de Compra', type: 'number', placeholder: '$80.000.000', required: true, min: 0, tooltip: 'Valor que pagaste originalmente por la propiedad. Debe estar en la escritura de compraventa.' },
@@ -746,6 +784,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el subsidio habitacional según tramo, ahorro requerido y monto máximo de propiedad. Incluye zona extrema.',
     slug: 'calculadora-subsidio-habitacional',
     category: 'vivienda',
+    featured: true,
+    phase: 2,
     keywords: ['subsidio habitacional', 'DS49', 'DS01', 'subsidio vivienda Chile', 'tramo subsidio', 'ahorro requerido'],
     inputs: [
       { id: 'valorPropiedad', label: 'Valor de la Propiedad (UF)', type: 'number', placeholder: '2000', required: true, min: 0, tooltip: 'Valor total de la propiedad en UF. El subsidio cubre parte de este valor según tu tramo.' },
@@ -786,6 +826,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el costo de la patente comercial según capital invertido, actividad y comuna. Semestral con topes UTM.',
     slug: 'calculadora-patente-comercial',
     category: 'empresas',
+    featured: true,
+    phase: 2,
     keywords: ['patente comercial', 'patente municipal', 'costo patente Chile', 'capital invertido patente', 'tasa municipal'],
     inputs: [
       { id: 'capitalInvertido', label: 'Capital Invertido', type: 'number', placeholder: '$10.000.000', required: true, min: 0, tooltip: 'Valor total de activos fijos: equipos, mobiliario, instalaciones, mercadería. No incluye el local si es arrendado.' },
@@ -831,6 +873,8 @@ export const calculators: Calculator[] = [
     description: 'Compara las comisiones de las 7 AFP y calcula cuánto ahorras cambiándote a la más barata. Proyección a años de pensión.',
     slug: 'calculadora-comparador-afp',
     category: 'pension',
+    featured: true,
+    phase: 2,
     keywords: ['comparador AFP', 'comisiones AFP', 'mejor AFP', 'cambio AFP', 'ahorro pensiones Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$800.000', required: true, min: 0, tooltip: 'Tu sueldo bruto mensual. La comisión AFP se calcula como porcentaje de este monto.' },
@@ -874,6 +918,8 @@ export const calculators: Calculator[] = [
     description: 'Simula cuánto acumularás con ahorro previsional voluntario. Incluye beneficio tributario y rentabilidad compuesta.',
     slug: 'calculadora-simulador-apv',
     category: 'pension',
+    featured: true,
+    phase: 2,
     keywords: ['APV', 'ahorro previsional voluntario', 'simulador APV', 'beneficio tributario APV', 'ahorro pensiones'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$1.000.000', required: true, min: 0, tooltip: 'Tu sueldo bruto determina el beneficio tributario. A mayor sueldo, mayor el ahorro de impuestos.' },
@@ -910,6 +956,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula los intereses por mora en pagos laborales. Tasa máxima convencional sobre deuda impaga.',
     slug: 'calculadora-intereses-mora',
     category: 'beneficios',
+    featured: true,
+    phase: 2,
     keywords: ['intereses mora', 'mora laboral Chile', 'TMC', 'deuda laboral', 'intereses por mora trabajo'],
     inputs: [
       { id: 'montoDeuda', label: 'Monto de la Deuda', type: 'number', placeholder: '$500.000', required: true, min: 0, tooltip: 'Monto adeudado en pesos. Puede ser sueldo, indemnización, horas extra, etc.' },
@@ -944,6 +992,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu asignación familiar según tramo de ingresos y número de hijos causantes.',
     slug: 'calculadora-asignacion-familiar',
     category: 'familia',
+    featured: true,
+    phase: 2,
     keywords: ['asignación familiar', 'asignación por hijo', 'tramo asignación', 'subsidio familiar Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0, tooltip: 'Tu sueldo bruto mensual determina el tramo. Incluye todas las remuneraciones imponibles.' },
@@ -978,6 +1028,8 @@ export const calculators: Calculator[] = [
     description: 'Simula tu dividendo del Crédito con Aval del Estado para estudios superiores. Garantía estatal hasta 90%.',
     slug: 'calculadora-credito-cae',
     category: 'educacion',
+    featured: true,
+    phase: 2,
     keywords: ['CAE', 'crédito aval estado', 'credito universidad Chile', 'dividendo CAE', 'crédito estudios'],
     inputs: [
       { id: 'montoCredito', label: 'Monto del Crédito', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Monto total solicitado. El CAE cubre hasta 90% con garantía estatal.' },
@@ -1014,6 +1066,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula la cuota mensual de tu crédito automotriz. Incluye pie, intereses, seguro y costo total del crédito.',
     slug: 'calculadora-credito-automotriz',
     category: 'vehiculos',
+    featured: true,
+    phase: 2,
     keywords: ['crédito automotriz', 'simulador auto', 'crédito vehículo Chile', 'pie auto', 'cuota mensual auto'],
     inputs: [
       { id: 'valorVehiculo', label: 'Valor del Vehículo', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Valor total del vehículo nuevo o usado.' },
@@ -1051,6 +1105,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el valor de multas de tránsito en UTM y pesos chilenos según gravedad de la infracción.',
     slug: 'calculadora-multas-transito',
     category: 'vehiculos',
+    featured: true,
+    phase: 2,
     keywords: ['multas tránsito', 'multa UTM', 'infracción tránsito Chile', 'valor multa', 'multa leve grave gravísima'],
     inputs: [
       { id: 'tipoMulta', label: 'Tipo de Infracción', type: 'select', required: true, options: [
@@ -1090,6 +1146,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el costo mensual y anual del TAG en autopistas chilenas. Incluye descuento por convenio frecuente.',
     slug: 'calculadora-costo-tag',
     category: 'vehiculos',
+    featured: true,
+    phase: 2,
     keywords: ['costo TAG', 'autopista Chile', 'peaje TAG', 'santiago rancagua TAG', 'descuento frecuente'],
     inputs: [
       { id: 'peajes', label: 'Ruta', type: 'select', required: true, options: [
@@ -1131,6 +1189,8 @@ export const calculators: Calculator[] = [
     description: 'Estima tu cuenta de luz según consumo kWh, zona y tipo de tarifa. Incluye cargo fijo, energía e IVA.',
     slug: 'calculadora-cuenta-luz',
     category: 'hogar',
+    featured: true,
+    phase: 2,
     keywords: ['cuenta de luz', 'tarifa BT1', 'costo electricidad Chile', 'consumo kWh', 'cuenta electrica'],
     inputs: [
       { id: 'consumoKWH', label: 'Consumo (kWh)', type: 'number', placeholder: '250', required: true, min: 0, tooltip: 'Consumo mensual en kWh. Aparece en tu boleta. Un hogar promedio consume 200-300 kWh.' },
@@ -1177,6 +1237,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu impuesto de segunda categoría según sueldo mensual y tramo progresivo. Actualizado con tramos 2026.',
     slug: 'calculadora-impuesto-segunda-categoria',
     category: 'impuestos',
+    featured: false,
+    phase: 3,
     keywords: ['impuesto segunda categoría', 'retención impuesto', 'tramos impuesto Chile', 'impuesto sueldo 2026'],
     inputs: [
       { id: 'sueldoBrutoMensual', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$800.000', required: true, min: 0, tooltip: 'Sueldo bruto antes de descuentos. El impuesto se calcula sobre la renta imponible anual.' },
@@ -1211,6 +1273,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tus pagos provisionales mensuales según actividad y ingresos brutos anuales.',
     slug: 'calculadora-ppm',
     category: 'impuestos',
+    featured: false,
+    phase: 3,
     keywords: ['PPM', 'pagos provisionales mensuales', 'PPM independientes', 'retención mensual Chile'],
     inputs: [
       { id: 'ingresosBrutosAnuales', label: 'Ingresos Brutos Anuales', type: 'number', placeholder: '$12.000.000', required: true, min: 0, tooltip: 'Ingresos brutos del año anterior. El SII usa este monto para calcular el PPM del año siguiente.' },
@@ -1251,6 +1315,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el bono por bodas de oro según años trabajados y tipo de empleado (público o privado).',
     slug: 'calculadora-bono-bodas-oro',
     category: 'beneficios',
+    featured: false,
+    phase: 3,
     keywords: ['bono bodas de oro', '20 años trabajo', 'bono trayectoria laboral', 'premio años servicio Chile'],
     inputs: [
       { id: 'anosTrabajados', label: 'Años Trabajados', type: 'number', placeholder: '25', required: true, min: 0, max: 50, tooltip: 'Años continuos en la misma empresa. El bono se activa desde los 20 años.' },
@@ -1267,6 +1333,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula el subsidio al pago de agua potable según consumo, número de personas y tramo de subsidio.',
     slug: 'calculadora-subsidio-agua',
     category: 'hogar',
+    featured: false,
+    phase: 3,
     keywords: ['subsidio agua potable', 'descuento agua', 'subsidio servicios básicos Chile'],
     inputs: [
       { id: 'consumoM3', label: 'Consumo Mensual (m³)', type: 'number', placeholder: '15', required: true, min: 0 },
@@ -1292,6 +1360,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tus cotizaciones previsionales como trabajador independiente: AFP, salud y SIS.',
     slug: 'calculadora-cotizacion-independientes',
     category: 'pension',
+    featured: false,
+    phase: 3,
     keywords: ['cotización independientes', 'Ley 21.133', 'cotización AFP independiente', 'base imponible 80%'],
     inputs: [
       { id: 'rentaBrutaMensual', label: 'Renta Bruta Mensual', type: 'number', placeholder: '$800.000', required: true, min: 0 },
@@ -1319,6 +1389,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula o extrae la propina del 10%. Ideal para dividir cuentas en restaurantes chilenos.',
     slug: 'calculadora-propina-legal',
     category: 'servicios',
+    featured: false,
+    phase: 3,
     keywords: ['propina 10%', 'calculadora propina', 'propina restaurante Chile', 'dividir cuenta'],
     inputs: [
       { id: 'montoConsumo', label: 'Monto', type: 'number', placeholder: '$25.000', required: true, min: 0 },
@@ -1335,6 +1407,8 @@ export const calculators: Calculator[] = [
     description: 'Estima tus gastos comunes mensuales según superficie, estacionamiento y amenities del edificio.',
     slug: 'calculadora-gastos-comunes',
     category: 'hogar',
+    featured: false,
+    phase: 3,
     keywords: ['gastos comunes', 'condominio Chile', 'gasto común m²', 'departamento gastos'],
     inputs: [
       { id: 'superficieM2', label: 'Superficie (m²)', type: 'number', placeholder: '65', required: true, min: 0 },
@@ -1354,6 +1428,8 @@ export const calculators: Calculator[] = [
     description: 'Convierte entre dólares americanos, euros y pesos chilenos con tasas aproximadas actualizadas.',
     slug: 'calculadora-conversor-divisas',
     category: 'conversiones',
+    featured: false,
+    phase: 3,
     keywords: ['dólar a peso', 'euro a peso', 'conversor divisas Chile', 'USD CLP', 'EUR CLP'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
@@ -1376,6 +1452,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu aguinaldo de Fiestas Patrias, Navidad o escolar según sueldo y meses trabajados.',
     slug: 'calculadora-aguinaldo',
     category: 'beneficios',
+    featured: false,
+    phase: 3,
     keywords: ['aguinaldo', 'aguinaldo fiestas patrias', 'aguinaldo navidad', 'aguinaldo escolar Chile'],
     inputs: [
       { id: 'tipo', label: 'Tipo de Aguinaldo', type: 'select', required: true, options: [
@@ -1396,6 +1474,8 @@ export const calculators: Calculator[] = [
     description: 'Calcula tu Pensión Garantizada Universal según pensión actual y años cotizados. Ley 21.400.',
     slug: 'calculadora-pgu',
     category: 'pension',
+    featured: false,
+    phase: 3,
     keywords: ['PGU', 'pensión garantizada universal', 'PGU Chile', 'bono pensión', 'Ley 21.400'],
     inputs: [
       { id: 'pensionActual', label: 'Pensión Actual', type: 'number', placeholder: '$250.000', required: true, min: 0 },

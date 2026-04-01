@@ -40,4 +40,8 @@ export interface Calculator {
   faq?: FAQItem[];
   /** Keywords para metadata SEO */
   keywords?: string[];
+  /** Para destacar calculadoras en la home */
+  featured: boolean;
+  /** Para organizar por prioridad: 1 (core), 2 (nicho), 3 (complementarias) */
+  phase: 1 | 2 | 3;
 }

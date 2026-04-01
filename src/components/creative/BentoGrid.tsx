@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import {
@@ -104,17 +104,20 @@ export default function BentoGrid({
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
-  // Limitar a las primeras 24 calculadoras para rendimiento
-  const displayCalculators = useMemo(() => calculators.slice(0, 24), [calculators]);
+  // Mostrar todas las 48 calculadoras
+  const displayCalculators = useMemo(() => calculators.slice(0, 48), [calculators]);
+  const [showAll, setShowAll] = useState(false);
+  const visibleCalculators = showAll ? displayCalculators : displayCalculators.slice(0, 24);
 
   return (
-    <div
-      ref={containerRef}
-      className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[minmax(140px,auto)]"
-      role="list"
-      aria-label="Lista de calculadoras disponibles"
-    >
-      {displayCalculators.map((calc, index) => {
+    <>
+      <div
+        ref={containerRef}
+        className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[minmax(140px,auto)]"
+        role="list"
+        aria-label="Lista de calculadoras disponibles"
+      >
+        {visibleCalculators.map((calc, index) => {
         const layout = GRID_LAYOUT[index % GRID_LAYOUT.length];
         const isLarge = layout.size === 'large';
         const isWide = layout.size === 'wide';
@@ -149,7 +152,19 @@ export default function BentoGrid({
           </motion.div>
         );
       })}
-    </div>
+      </div>
+      
+      {/* Botón "Ver todas" */}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-[#0f172a]"
+          aria-expanded={showAll}
+        >
+          {showAll ? 'Ver menos calculadoras' : 'Ver todas las calculadoras'}
+        </button>
+      </div>
+    </>
   );
 }
 
