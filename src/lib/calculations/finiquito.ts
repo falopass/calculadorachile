@@ -112,7 +112,7 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
   const indemnizacion = calcularIndemnizacion(ultimoSueldo, añosTrabajados, causaTermino);
   const vacacionesProporcionales = calcularVacacionesProporcionales(
     ultimoSueldo,
-    mesesTrabajados + (añosTrabajados * 12),
+    mesesTrabajados,
     diasVacacionesPendientes
   );
   const gratificacionProporcional = calcularGratificacionProporcional(
@@ -132,7 +132,7 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     totalFiniquito: Math.round(totalFiniquito),
     desglose: {
       añosIndemnizacion: Math.min(añosTrabajados, INDEMNIZACION.tope_años),
-      diasVacaciones: Math.round((VACACIONES.dias_anuales / 12) * (mesesTrabajados + añosTrabajados * 12) + diasVacacionesPendientes),
+      diasVacaciones: Math.round((VACACIONES.dias_anuales / 12) * mesesTrabajados + diasVacacionesPendientes),
       mesesGratificacion: mesesTrabajados,
     },
   };

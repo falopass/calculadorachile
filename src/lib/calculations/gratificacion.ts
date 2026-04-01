@@ -43,7 +43,7 @@ export function calculateGratificacion(input: GratificacionInput): Gratificacion
   const gratificacionTope = topeAnual / 12; // Mensual equivalente
   
   // Se paga el mayor de los dos (mensual)
-  const gratificacionMensual = Math.min(gratificacion25Porciento, gratificacionTope);
+  const gratificacionMensual = Math.max(gratificacion25Porciento, gratificacionTope);
   
   // Gratificación anual completa
   const gratificacionAnual = gratificacionMensual * 12;
@@ -52,7 +52,7 @@ export function calculateGratificacion(input: GratificacionInput): Gratificacion
   const gratificacionProporcional = (gratificacionAnual / 12) * mesesTrabajados;
   
   // Determinar método aplicado
-  const metodo = gratificacion25Porciento <= gratificacionTope ? '25%' : '4.75%';
+  const metodo = gratificacion25Porciento >= gratificacionTope ? '25%' : '4.75%';
   
   return {
     sueldoBruto,

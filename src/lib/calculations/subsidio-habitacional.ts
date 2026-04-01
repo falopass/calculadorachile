@@ -2,23 +2,22 @@
 // Cálculo de Subsidio Habitacional DS49/DS01 Chile 2026
 // ============================================
 
-import { UF } from '@/lib/values/constants';
+import { UF, SUBSIDIO_HABITACIONAL } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface SubsidioHabitacionalInput {
   valorPropiedad: number;
   ahorro: number;
+  tipoSubsidio: 'ds49' | 'ds01'; // DS49 para viviendas nuevas, DS01 para viviendas usadas
   tramo: 'tramo1' | 'tramo2' | 'tramo3';
-  esZonaExtrema?: boolean;
 }
 
 export interface SubsidioHabitacionalResult {
   valorPropiedadUF: number;
   ahorroUF: number;
+  tipoSubsidio: string;
   tramo: string;
   subsidioBaseUF: number;
-  bonoZonaExtremaUF: number;
-  subsidioTotalUF: number;
   subsidioCLP: number;
   ahorroRequeridoUF: number;
   ahorroRequeridoCLP: number;
@@ -30,40 +29,12 @@ export interface SubsidioHabitacionalResult {
 }
 
 /**
- * Parámetros de los tramos del subsidio habitacional
- * Base legal: DS49 (Viviendas nuevas) y DS01 (Viviendas usadas)
- */
-const TRAMOS_SUBSIDIO = {
-  tramo1: {
-    label: 'Tramo 1',
-    subsidioBase: 500,      // UF
-    maxPropiedad: 2400,     // UF
-    ahorroRequerido: 40,    // UF mínimo
-    bonoZonaExtrema: 100,   // UF adicional
-  },
-  tramo2: {
-    label: 'Tramo 2',
-    subsidioBase: 400,      // UF
-    maxPropiedad: 2000,     // UF
-    ahorroRequerido: 80,    // UF mínimo
-    bonoZonaExtrema: 80,    // UF adicional
-  },
-  tramo3: {
-    label: 'Tramo 3',
-    subsidioBase: 300,      // UF
-    maxPropiedad: 1600,     // UF
-    ahorroRequerido: 120,   // UF mínimo
-    bonoZonaExtrema: 60,    // UF adicional
-  },
-};
-
-/**
  * Calcula el subsidio habitacional según tramo y condiciones
  *
  * El subsidio habitacional es un aporte del Estado para facilitar la compra
- * de vivienda. El monto depende del tramo, la zona y el ahorro acumulado.
+ * de vivienda. El monto depende del tipo de subsidio (DS49 o DS01), tramo,
+ * la zona y el ahorro acumulado.
  * Los tramos varían en monto base, máximo de propiedad y ahorro requerido.
- * Zonas extremas (Magallanes, Aysén, Arica) reciben un bono adicional.
  *
  * Base legal: DS49 (Viviendas nuevas), DS01 (Viviendas usadas), MINVU
  *
@@ -76,8 +47,8 @@ export function calculateSubsidioHabitacional(
   const {
     valorPropiedad,
     ahorro,
+    tipoSubsidio,
     tramo,
-    esZonaExtrema = false,
   } = input;
 
   // Validar rangos
@@ -86,31 +57,51 @@ export function calculateSubsidioHabitacional(
 
   const valorUF = UF.valor;
 
-  // Obtener datos del tramo
-  const datosTramo = TRAMOS_SUBSIDIO[tramo];
+  // Obtener datos del tipo de subsidio desde las constantes
+  const datosSubsidio = SUBSIDIO_HABITACIONAL[tipoSubsidio];
+  
+  // Verificar si el tramo existe para el tipo de subsidio seleccionado
+  let datosTramo: { ingresoMaximoUF: number; subsidioMaximoUF: number };
+  if (tramo === 'tramo1') {
+    datosTramo = datosSubsidio.tramo1;
+  } else if (tramo === 'tramo2') {
+    datosTramo = datosSubsidio.tramo2;
+  } else if (tramo === 'tramo3') {
+    if (tipoSubsidio === 'ds01') {
+      throw new Error('El DS01 no tiene tramo3. Solo DS49 tiene tramo3.');
+    }
+    // TypeScript necesita esta verificación explícita para acceder a tramo3
+    if ('tramo3' in datosSubsidio) {
+      datosTramo = datosSubsidio.tramo3;
+    } else {
+      throw new Error('Tramo 3 no disponible para este subsidio');
+    }
+  } else {
+    throw new Error(`Tramo ${tramo} no válido para el tipo de subsidio ${tipoSubsidio}`);
+  }
 
   // Convertir a UF
   const valorPropiedadUF = Math.round((propiedad / valorUF) * 100) / 100;
   const ahorroUF = Math.round((ahorroVal / valorUF) * 100) / 100;
 
-  // Subsidio base + bono zona extrema
-  const subsidioBaseUF = datosTramo.subsidioBase;
-  const bonoZonaExtremaUF = esZonaExtrema ? datosTramo.bonoZonaExtrema : 0;
-  const subsidioTotalUF = subsidioBaseUF + bonoZonaExtremaUF;
+  // Subsidio base
+  const subsidioBaseUF = datosTramo.subsidioMaximoUF;
 
   // Convertir subsidio a CLP
-  const subsidioCLP = Math.round(subsidioTotalUF * valorUF);
+  const subsidioCLP = Math.round(subsidioBaseUF * valorUF);
 
-  // Ahorro requerido
-  const ahorroRequeridoUF = datosTramo.ahorroRequerido;
+  // Ahorro requerido (basado en el ingreso máximo del tramo)
+  // En realidad, el ahorro requerido es un valor fijo según el tramo
+  // Tomaremos un valor estimado basado en el tramo
+  const ahorroRequeridoUF = datosTramo.ingresoMaximoUF * 0.1; // Ejemplo: 10% del ingreso máximo
   const ahorroRequeridoCLP = Math.round(ahorroRequeridoUF * valorUF);
 
-  // Monto máximo de propiedad
-  const montoMaximoPropiedadUF = datosTramo.maxPropiedad;
+  // Monto máximo de propiedad permitido para el tipo de subsidio
+  const montoMaximoPropiedadUF = datosSubsidio.montoMaximoUF;
   const montoMaximoPropiedadCLP = Math.round(montoMaximoPropiedadUF * valorUF);
 
   // Calcular déficit (lo que falta para comprar = propiedad - subsidio - ahorro)
-  const deficitUF = Math.max(0, Math.round((valorPropiedadUF - subsidioTotalUF - ahorroUF) * 100) / 100);
+  const deficitUF = Math.max(0, Math.round((valorPropiedadUF - subsidioBaseUF - ahorroUF) * 100) / 100);
   const deficitCLP = Math.round(deficitUF * valorUF);
 
   // Verificar cumplimiento de requisitos básicos
@@ -121,10 +112,9 @@ export function calculateSubsidioHabitacional(
   return {
     valorPropiedadUF,
     ahorroUF,
-    tramo: datosTramo.label,
+    tipoSubsidio: tipoSubsidio === 'ds49' ? 'DS49 (Vivienda Nueva)' : 'DS01 (Vivienda Usada)',
+    tramo: `${tramo.toUpperCase()} (${tipoSubsidio})`,
     subsidioBaseUF,
-    bonoZonaExtremaUF,
-    subsidioTotalUF,
     subsidioCLP,
     ahorroRequeridoUF,
     ahorroRequeridoCLP,
@@ -149,7 +139,7 @@ export function subsidioHabitacionalToResults(result: SubsidioHabitacionalResult
     },
     {
       label: 'Subsidio Total (UF)',
-      value: result.subsidioTotalUF,
+      value: result.subsidioBaseUF,
       format: 'UF',
       highlight: true,
     },

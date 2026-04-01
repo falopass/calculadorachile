@@ -263,8 +263,8 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     const result = calculateSubsidioHabitacional({
       valorPropiedad: inputs.valorPropiedad as number,
       ahorro: inputs.ahorro as number,
-      tramo: inputs.tramo as 'tramo1' | 'tramo2' | 'tramo3',
-      esZonaExtrema: inputs.esZonaExtrema as boolean | undefined,
+      tipoSubsidio: inputs.tipoSubsidio as 'ds49' | 'ds01',
+      tramo: inputs.tramo as 'tramo1' | 'tramo2',
     });
     return subsidioHabitacionalToResults(result);
   },
@@ -378,8 +378,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     const result = calculateSubsidioAgua({
       consumoM3: inputs.consumoM3 as number,
       numeroPersonas: inputs.numeroPersonas as number,
-      tramo: inputs.tramo as 'tramo1' | 'tramo2' | 'tramo3',
-      zona: inputs.zona as 'norte' | 'central' | 'sur',
+      tramo: inputs.tramo as 'tramo1' | 'tramo2',
     });
     return subsidioAguaToResults(result);
   },

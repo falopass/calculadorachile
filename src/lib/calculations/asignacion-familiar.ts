@@ -46,8 +46,8 @@ function determinarTramo(sueldoBruto: number): 'a' | 'b' | 'c' {
  * Calcula la asignación familiar por tramo
  *
  * El tramo se determina automáticamente según el sueldo bruto si no se
- * especifica explícitamente. Tramo A: hasta $430.560, Tramo B: hasta
- * $630.816, Tramo C: sin asignación.
+ * especifica explícitamente. Tramo A: hasta $631.976, Tramo B: hasta
+ * $923.067, Tramo C: hasta $1.439.668.
  *
  * @param input - Datos para el cálculo de la asignación familiar
  * @returns Desglose completo de la asignación familiar
@@ -63,10 +63,10 @@ export function calculateAsignacionFamiliar(input: AsignacionFamiliarInput): Asi
   const tramo = tramoForzado ?? determinarTramo(sueldoValido);
 
   // Monto por hijo según tramo
-    const montoPorHijo =
-      tramo === 'a' ? ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP :
-      tramo === 'b' ? ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP :
-      ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP;
+  const montoPorHijo =
+    tramo === 'a' ? ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP :
+    tramo === 'b' ? ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP :
+    ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP;
 
   // Cálculo mensual y anual
   const asignacionMensual = montoPorHijo * hijosValidos;

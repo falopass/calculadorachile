@@ -27,9 +27,9 @@ export interface PensionAlimenticiaResult {
  * Calcula la pensión de alimentos sugerida según la Ley 14.908
  * 
  * La pensión alimenticia se calcula como un porcentaje del ingreso del padre/madre obligado:
- * - 1-2 hijos: 40%
- * - 3-4 hijos: 45%
- * - 5+ hijos: 50%
+ * - 1 hijo: 40%
+ * - 2-4 hijos: 30% por hijo
+ * - 5+ hijos: 30% por hijo
  * 
  * Además, existe un mínimo por hijo que debe garantizarse.
  * 
@@ -47,13 +47,13 @@ export function calculatePensionAlimenticia(input: PensionAlimenticiaInput): Pen
   
   // Determinar porcentaje según número de hijos
   let porcentajeAplicable = 40;
-  let tramoAplicado = '1-2 hijos';
+  let tramoAplicado = '1 hijo';
   
   for (const tramo of PENSION_ALIMENTICIA.tramos) {
     if (numeroHijos > tramo.min && numeroHijos <= tramo.max) {
       porcentajeAplicable = tramo.porcentaje;
-      if (tramo.max === 2) tramoAplicado = '1-2 hijos';
-      else if (tramo.max === 4) tramoAplicado = '3-4 hijos';
+      if (tramo.max === 1) tramoAplicado = '1 hijo';
+      else if (tramo.max === 4) tramoAplicado = '2-4 hijos';
       else tramoAplicado = '5+ hijos';
       break;
     }

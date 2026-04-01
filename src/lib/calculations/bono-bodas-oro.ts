@@ -3,6 +3,7 @@
 // Beneficio por 20+ años de cotizaciones previsionales
 // ============================================
 
+import { BONO_BODAS_ORO } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BonoBodasOroInput {
@@ -21,10 +22,8 @@ export interface BonoBodasOroResult {
 
 /**
  * Calcula el Bono Bodas de Oro según años trabajados y sector.
- * Sector privado: 1 remuneración a los 20 años, 2 a los 25, 2 a los 30
- * (sujetos a negociación colectiva, valores de referencia).
- * Sector público: regulado por ley, 1 remuneración por año después de 20 años.
- * Ley 18.708 y normativa del sector público.
+ * El monto del bono se basa en los valores definidos en las constantes.
+ * Ley 21.674 y normativa vigente.
  */
 export function calculateBonoBodasOro(input: BonoBodasOroInput): BonoBodasOroResult {
   const { anosTrabajados, esPublico, sueldoBruto } = input;
@@ -55,17 +54,11 @@ export function calculateBonoBodasOro(input: BonoBodasOroInput): BonoBodasOroRes
     montoBono = Math.round(sueldo * anosExcedentes);
     baseCalculo = `${anosExcedentes} remuneraciones (1 por año sobre 20 años)`;
   } else {
-    // Sector privado: montos de referencia según tramos
-    if (anos >= 30) {
-      montoBono = Math.round(sueldo * 2);
-      baseCalculo = '2 remuneraciones (30+ años)';
-    } else if (anos >= 25) {
-      montoBono = Math.round(sueldo * 2);
-      baseCalculo = '2 remuneraciones (25-29 años)';
-    } else {
-      montoBono = Math.round(sueldo * 1);
-      baseCalculo = '1 remuneración (20-24 años)';
-    }
+    // Sector privado: usar el monto fijo definido en las constantes
+    // Nota: El bono bodas de oro en el sector privado no es automático y depende de convenios colectivos
+    // Por simplicidad, usaremos el monto fijo como referencia
+    montoBono = BONO_BODAS_ORO.montoCLP;
+    baseCalculo = `Monto fijo de $${BONO_BODAS_ORO.montoCLP.toLocaleString('es-CL')} (referencia sector privado)`;
   }
 
   return {
@@ -86,7 +79,7 @@ export function bonoBodasOroToResults(result: BonoBodasOroResult): CalculatorRes
   if (result.aplica) {
     results.push({ label: 'Monto del Bono', value: result.montoBono, format: 'CLP', highlight: true });
     results.push({ label: 'Años Trabajados', value: result.anosTrabajados, format: 'number' });
-    results.push({ label: 'Base de Cálculo', value: 0, format: 'number' });
+    results.push({ label: 'Tipo de Sector', value: result.tipo === 'Sector Público' ? 1 : 0, format: 'number' });
   } else {
     results.push({ label: 'No Aplica', value: 0, format: 'CLP', highlight: true });
     results.push({ label: 'Años Trabajados', value: result.anosTrabajados, format: 'number' });

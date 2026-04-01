@@ -91,9 +91,9 @@ export const VACACIONES = {
 
 export const PENSION_ALIMENTICIA = {
   tramos: [
-    { min: 0, max: 2, porcentaje: 40 },      // 1-2 hijos: 40%
-    { min: 2, max: 4, porcentaje: 45 },      // 3-4 hijos: 45%
-    { min: 4, max: Infinity, porcentaje: 50 }, // 5+ hijos: 50%
+    { min: 0, max: 1, porcentaje: 40 },      // 1 hijo: 40%
+    { min: 1, max: 4, porcentaje: 30 },      // 2-4 hijos: 30% por hijo
+    { min: 4, max: Infinity, porcentaje: 30 }, // 5+ hijos: 30% por hijo
   ],
   minimo_por_hijo: 10000,  // Mínimo $10.000 por hijo
 };
@@ -246,4 +246,13 @@ export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
     { limiteInferiorUTA: 64, limiteSuperiorUTA: 96, tasa: 0.35, factor: 11.64 },
     { limiteInferiorUTA: 96, limiteSuperiorUTA: Infinity, tasa: 0.40, factor: 16.44 },
   ],
+};
+
+// ===========================================
+// Aguinaldo
+// ===========================================
+export const AGUINALDO_2026 = {
+  fiestas_patrias: 35000,  // Monto para aguinaldo de Fiestas Patrias
+  navidad: 35000,          // Monto para aguinaldo de Navidad
+  escolar: 20000,          // Monto para aguinaldo escolar
 };

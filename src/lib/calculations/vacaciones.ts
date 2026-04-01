@@ -25,13 +25,12 @@ export interface VacacionesResult {
 
 /**
  * Calcula los días de vacaciones progresivas
- * +1 día por cada 3 años después del 10° año, máximo 5 días adicionales
+ * +1 día por cada 3 años completos de servicio, máximo 5 días adicionales
  */
 function calcularDiasProgresivos(añosTrabajados: number): number {
-  if (añosTrabajados <= 10) return 0;
+  if (añosTrabajados < 3) return 0;
   
-  const añosAdicionales = añosTrabajados - 10;
-  const diasProgresivos = Math.floor(añosAdicionales / 3);
+  const diasProgresivos = Math.floor(añosTrabajados / 3);
   
   return Math.min(diasProgresivos, VACACIONES.tope_progresivos);
 }

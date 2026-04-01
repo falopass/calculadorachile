@@ -25,10 +25,9 @@ export interface HorasExtraResult {
  * Calcula el valor de una hora de trabajo
  */
 function calcularValorHora(sueldoBruto: number): number {
-  // Jornada mensual: 45 horas semanales * 52 semanas / 12 meses = 195 horas aprox
-  // Pero legalmente se usa 30 días * horas diarias
-  // Para simplificar: sueldo / 30 / horas diarias (8) = valor hora
-  return sueldoBruto / 30 / 8;
+  // Jornada legal: 45 horas semanales
+  // Promedio mensual: 45 * 52 / 12 = 195 horas mensuales
+  return sueldoBruto / 195;
 }
 
 /**

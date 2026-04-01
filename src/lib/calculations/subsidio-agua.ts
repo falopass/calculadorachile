@@ -3,50 +3,27 @@
 // Beneficio del Estado para el pago del servicio de agua potable
 // ============================================
 
+import { SUBSIDIO_AGUA } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface SubsidioAguaInput {
   consumoM3: number;
   numeroPersonas: number;
-  tramo: 'tramo1' | 'tramo2' | 'tramo3';
-  zona: 'norte' | 'central' | 'sur';
+  tramo: 'tramo1' | 'tramo2';
 }
 
 export interface SubsidioAguaResult {
   consumoM3: number;
-  tarifaM3: number;
   consumoSubsidiado: number;
   subsidioPct: number;
   montoSubsidio: number;
   montoPagar: number;
+  montoSinSubsidio: number;
 }
 
 /**
- * Tarifas aproximadas por m3 según zona geográfica.
- * Sur tiene tarifas más altas por clima y tratamiento.
- * Valores de referencia 2026.
- */
-const TARIFAS_M3: Record<SubsidioAguaInput['zona'], number> = {
-  norte: 800,
-  central: 950,
-  sur: 1200,
-};
-
-/**
- * Subsidio por tramo del Registro Social de Hogares.
- * Tramo 1: 100% hasta 15m3/persona, Tramo 2: 70%, Tramo 3: 50%.
- * D.S. N° 235 del MOP y Ley N° 21.064.
- */
-const SUBSIDIO_POR_TRAMO: Record<SubsidioAguaInput['tramo'], number> = {
-  tramo1: 100,
-  tramo2: 70,
-  tramo3: 50,
-};
-
-/**
- * Calcula el subsidio de agua potable según consumo, tramo y zona.
- * El consumo subsidiado se calcula como 15m3 por persona.
- * El subsidio se aplica al menor entre consumo real y consumo subsidiado.
+ * Calcula el subsidio de agua potable según consumo y tramo.
+ * El subsidio se aplica según los tramos definidos en el Registro Social de Hogares.
  * D.S. N° 235 del MOP, Ley N° 21.064.
  */
 export function calculateSubsidioAgua(input: SubsidioAguaInput): SubsidioAguaResult {
@@ -54,37 +31,49 @@ export function calculateSubsidioAgua(input: SubsidioAguaInput): SubsidioAguaRes
     consumoM3,
     numeroPersonas,
     tramo,
-    zona,
   } = input;
 
   // Validar rangos
   const consumo = Math.max(0, consumoM3);
   const personas = Math.max(1, Math.round(numeroPersonas));
 
-  // Tarifa según zona
-  const tarifaM3 = TARIFAS_M3[zona];
+  // Determinar porcentaje de subsidio según tramo
+  let subsidioPct = 0;
+  if (tramo === 'tramo1') {
+    subsidioPct = SUBSIDIO_AGUA.tramos[0].subsidio * 100; // 60%
+  } else if (tramo === 'tramo2') {
+    subsidioPct = SUBSIDIO_AGUA.tramos[1].subsidio * 100; // 40%
+  }
 
-  // Consumo subsidiado: 15m3 por persona
-  const consumoSubsidiado = 15 * personas;
+  // Consumo subsidiado: se aplica subsidio según los tramos de consumo
+  let consumoSubsidiado = 0;
+  if (consumo <= SUBSIDIO_AGUA.tramos[0].consumoMaximoM3) {
+    // Todo el consumo está en el primer tramo
+    consumoSubsidiado = consumo;
+  } else if (consumo <= SUBSIDIO_AGUA.tramos[1].consumoMaximoM3) {
+    // Parte del consumo está en el primer tramo y parte en el segundo
+    consumoSubsidiado = SUBSIDIO_AGUA.tramos[0].consumoMaximoM3;
+  } else {
+    // Todo el consumo superior al segundo tramo no recibe subsidio
+    consumoSubsidiado = SUBSIDIO_AGUA.tramos[1].consumoMaximoM3;
+  }
 
-  // Porcentaje de subsidio según tramo
-  const subsidioPct = SUBSIDIO_POR_TRAMO[tramo];
+  // Calcular monto del subsidio
+  const montoSubsidio = Math.round(consumoSubsidiado * SUBSIDIO_AGUA.montoMaximoCLP * (subsidioPct / 100));
 
-  // Consumo efectivo a subsidiar: el menor entre consumo real y subsidiable
-  const consumoASubsidiar = Math.min(consumo, consumoSubsidiado);
+  // Calcular monto sin subsidio (monto total)
+  const montoSinSubsidio = Math.round(consumo * SUBSIDIO_AGUA.montoMaximoCLP);
 
-  // Montos
-  const costoTotal = Math.round(consumo * tarifaM3);
-  const montoSubsidio = Math.round(consumoASubsidiar * tarifaM3 * (subsidioPct / 100));
-  const montoPagar = Math.max(0, costoTotal - montoSubsidio);
+  // Calcular monto a pagar
+  const montoPagar = Math.max(0, montoSinSubsidio - montoSubsidio);
 
   return {
     consumoM3: consumo,
-    tarifaM3,
     consumoSubsidiado,
     subsidioPct,
     montoSubsidio,
     montoPagar,
+    montoSinSubsidio,
   };
 }
 
@@ -95,9 +84,9 @@ export function subsidioAguaToResults(result: SubsidioAguaResult): CalculatorRes
   return [
     { label: 'Monto a Pagar', value: result.montoPagar, format: 'CLP', highlight: true },
     { label: 'Monto Subsidio', value: result.montoSubsidio, format: 'CLP' },
+    { label: 'Monto Sin Subsidio', value: result.montoSinSubsidio, format: 'CLP' },
     { label: 'Subsidio', value: result.subsidioPct, format: 'percentage' },
     { label: 'Consumo Subsidiado', value: result.consumoSubsidiado, format: 'number' },
-    { label: 'Tarifa por m³', value: result.tarifaM3, format: 'CLP' },
     { label: 'Consumo m³', value: result.consumoM3, format: 'number' },
   ];
 }

@@ -3,6 +3,7 @@
 // Beneficio adicional para trabajadores del sector público y algunos privados
 // ============================================
 
+import { AGUINALDO_2026 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface AguinaldoInput {
@@ -18,18 +19,6 @@ export interface AguinaldoResult {
   montoProporcional: number;
   sueldoBruto: number;
 }
-
-/**
- * Montos base de aguinaldo según tipo (valores de referencia 2026).
- * Fiestas Patrias: ~$35.000, Navidad: ~$35.000, Escolar: ~$20.000.
- * Sector público: regulado por ley y decretos supremos.
- * Sector privado: depende de negociación colectiva o contrato individual.
- */
-const MONTOS_BASE: Record<AguinaldoInput['tipo'], number> = {
-  fiestas_patrias: 35000,
-  navidad: 35000,
-  escolar: 20000,
-};
 
 const NOMBRES_TIPO: Record<AguinaldoInput['tipo'], string> = {
   fiestas_patrias: 'Fiestas Patrias',
@@ -51,7 +40,7 @@ export function calculateAguinaldo(input: AguinaldoInput): AguinaldoResult {
   const meses = Math.max(1, Math.min(12, mesesTrabajados));
 
   // Monto base según tipo de aguinaldo
-  const montoBase = MONTOS_BASE[tipo];
+  const montoBase = AGUINALDO_2026[tipo];
 
   // Factor proporcional (meses trabajados / 12)
   const factorProporcional = Number((meses / 12).toFixed(2));

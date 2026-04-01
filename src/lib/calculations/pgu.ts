@@ -22,15 +22,6 @@ export interface PGUResult {
 }
 
 /**
- * Monto base PGU 2026: ~$214.296 para pensionados con 0-10 años de cotizaciones.
- * Escala progresivamente con más años de cotización hasta un máximo.
- * Umbral de reducción: pensiones sobre 1 UF tienen reducción progresiva.
- * D.L. 3500, Ley 21.396 y modificaciones.
- */
-// El monto base de PGU se obtiene de los valores constantes actualizados
-// La PGU ahora tiene montos diferenciados por edad (65-81 años vs 82+ años)
-
-/**
  * Factor máximo por años de cotización (a más años, mayor PGU).
  * Escala desde 0.5 (pocos años) hasta 1.0 (30+ años).
  */
@@ -45,8 +36,10 @@ function calcularFactorAnios(anosCotizados: number): number {
 /**
  * Calcula la Pensión Garantizada Universal (PGU).
  * El monto depende de los años de cotización y se reduce para pensiones altas.
- * Reducción: 0% si la pensión es menor a 1 UF, progresiva por encima de 1 UF.
- * La pensión base se calcula en UF para la reducción y se convierte a CLP.
+ * La ley establece tramos con diferentes reglas:
+ * - Hasta $789.139: PGU completa
+ * - Entre $789.139 y $1.252.602: PGU parcial (variable)
+ * - Sobre $1.252.602: No aplica PGU
  * Ley 21.396, D.L. 3500.
  */
 export function calculatePGU(input: PGUInput): PGUResult {
@@ -60,22 +53,27 @@ export function calculatePGU(input: PGUInput): PGUResult {
   const factorAniosCotizados = Number(calcularFactorAnios(anos).toFixed(2));
 
   // PGU base ajustada por años de cotización
-    // Usar el monto base para 65-81 años como referencia (el más común)
-    const pguBase = Math.round(PGU_2026.montoMaximo65a81CLP * factorAniosCotizados);
+  // Usar el monto base para 65-81 años como referencia (el más común)
+  const pguBase = Math.round(PGU_2026.montoMaximo65a81CLP * factorAniosCotizados);
 
-  // Umbral de reducción en CLP (1 UF)
-  const umbralUF1 = Math.round(1 * UF.valor);
-
-  // Calcular reducción si la pensión supera 1 UF
+  // Determinar monto de PGU según tramos de ingreso
   let pguMensual: number;
-  if (pension <= umbralUF1) {
-    // Sin reducción
+  
+  if (pension <= PGU_2026.tramos[0].ingresoMaximoCLP) {
+    // Pensión base hasta $789.139: PGU completa
     pguMensual = pguBase;
+  } else if (pension <= PGU_2026.tramos[1].ingresoMaximoCLP) {
+    // Pensión entre $789.139 y $1.252.602: PGU parcial (variable)
+    // La PGU se reduce proporcionalmente en este tramo
+    const tramoInferior = PGU_2026.tramos[0].ingresoMaximoCLP;
+    const tramoSuperior = PGU_2026.tramos[1].ingresoMaximoCLP;
+    
+    // Calcular reducción proporcional
+    const posicionEnTramo = (pension - tramoInferior) / (tramoSuperior - tramoInferior);
+    pguMensual = Math.round(pguBase * (1 - posicionEnTramo));
   } else {
-    // Reducción progresiva: 9.57% por cada UF sobre el umbral
-    const ufExcedentes = (pension - umbralUF1) / UF.valor;
-    const reduccionPct = Math.min(1, ufExcedentes * 0.0957);
-    pguMensual = Math.round(pguBase * (1 - reduccionPct));
+    // Pensión sobre $1.252.602: No aplica PGU
+    pguMensual = 0;
   }
 
   // Asegurar PGU no negativa

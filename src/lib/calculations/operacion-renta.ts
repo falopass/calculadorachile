@@ -80,8 +80,9 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
   // Tasa efectiva de impuesto sobre renta bruta
   const tasaEfectiva = rentaBruta > 0 ? (impuesto / rentaBruta) * 100 : 0;
 
-  // Retención sugerida: 10% de la renta bruta
-  const retencionSugerida = rentaBruta * 0.1;
+  // Retención sugerida: para boletas de honorarios, típicamente 15.25% de la base imponible
+  // (10% de impuesto + 5.25% adicional según reforma tributaria)
+  const retencionSugerida = rentaBruta * 0.1525;
 
   return {
     rentaBruta: Math.round(rentaBruta),
@@ -143,7 +144,7 @@ export function operacionRentaToResults(result: OperacionRentaResult): Calculato
       format: 'percentage',
     },
     {
-      label: 'Retención Sugerida (10%)',
+      label: 'Retención Sugerida (15.25%)',
       value: result.retencionSugerida,
       format: 'CLP',
     },
