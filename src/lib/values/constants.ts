@@ -95,7 +95,6 @@ export const PENSION_ALIMENTICIA = {
     { min: 1, max: 4, porcentaje: 30 },      // 2-4 hijos: 30% por hijo
     { min: 4, max: Infinity, porcentaje: 30 }, // 5+ hijos: 30% por hijo
   ],
-  minimo_por_hijo: 10000,  // Mínimo $10.000 por hijo
 };
 
 export const IVA = {

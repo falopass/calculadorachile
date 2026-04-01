@@ -18,8 +18,6 @@ export interface PensionAlimenticiaResult {
   numeroHijos: number;
   porcentajeAplicable: number;
   pensionSugerida: number;
-  minimoPorHijo: number;
-  pensionMinima: number;
   tramoAplicado: string;
 }
 
@@ -62,18 +60,12 @@ export function calculatePensionAlimenticia(input: PensionAlimenticiaInput): Pen
   // Calcular pensión sugerida
   const pensionSugerida = totalIngresos * (porcentajeAplicable / 100);
   
-  // Calcular mínimo por hijo
-  const minimoPorHijo = PENSION_ALIMENTICIA.minimo_por_hijo;
-  const pensionMinima = minimoPorHijo * numeroHijos;
-  
   return {
     sueldoBruto,
     totalIngresos: Math.round(totalIngresos),
     numeroHijos,
     porcentajeAplicable,
     pensionSugerida: Math.round(pensionSugerida),
-    minimoPorHijo,
-    pensionMinima,
     tramoAplicado,
   };
 }
@@ -84,14 +76,8 @@ export function calculatePensionAlimenticia(input: PensionAlimenticiaInput): Pen
 export function pensionAlimenticiaToResults(result: PensionAlimenticiaResult): CalculatorResult[] {
   return [
     {
-      label: 'Pensión Sugerida',
+      label: 'Pensión Mensual Sugerida',
       value: result.pensionSugerida,
-      format: 'CLP',
-      highlight: true,
-    },
-    {
-      label: 'Pensión Mínima',
-      value: result.pensionMinima,
       format: 'CLP',
       highlight: true,
     },
@@ -108,11 +94,6 @@ export function pensionAlimenticiaToResults(result: PensionAlimenticiaResult): C
     {
       label: 'Total Ingresos',
       value: result.totalIngresos,
-      format: 'CLP',
-    },
-    {
-      label: 'Mínimo por Hijo',
-      value: result.minimoPorHijo,
       format: 'CLP',
     },
   ];
