@@ -10,6 +10,7 @@ import {
   Shield,
   Zap
 } from 'lucide-react';
+import { SearchBar } from '@/components/calculator/SearchBar';
 
 /**
  * HeroSection - Hero inmersivo optimizado
@@ -137,11 +138,21 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-base md:text-lg lg:text-xl text-white/70 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed"
+          className="text-base md:text-lg lg:text-xl text-white/70 max-w-2xl mx-auto mb-4 md:mb-6 leading-relaxed"
         >
           Herramientas precisas y actualizadas para calcular sueldos, impuestos, beneficios y más.
           <span className="text-[#67e8f9] font-medium"> 100% gratis.</span>
         </motion.p>
+
+        {/* SearchBar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.8 }}
+          className="max-w-xl mx-auto mb-6 md:mb-8"
+        >
+          <SearchBar />
+        </motion.div>
 
         {/* CTAs */}
         <motion.div

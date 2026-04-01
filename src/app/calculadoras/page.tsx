@@ -3,6 +3,7 @@
 import { calculators } from '@/data/calculators';
 import CalculatorCard from '@/components/home/CalculatorCard';
 import AdBanner from '@/components/ads/AdBanner';
+import { SearchBar } from '@/components/calculator/SearchBar';
 import { Grid, List } from 'lucide-react';
 import { useState } from 'react';
 
@@ -25,6 +26,11 @@ export default function CalculadorasPage() {
           <p className="text-muted-foreground">
             {calculators.length} calculadoras gratuitas disponibles
           </p>
+        </div>
+
+        {/* SearchBar */}
+        <div className="mb-6">
+          <SearchBar />
         </div>
 
         {/* Filtros */}
