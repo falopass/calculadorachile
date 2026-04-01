@@ -79,16 +79,16 @@ export default function Header() {
       role="banner"
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8" aria-label="Navegación principal">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
 
           {/* ── Logo ── */}
            <Link href="/" className="flex items-center gap-2.5 group" aria-label="Ir a la página de inicio">
              <img
                src="/logo.png"
                alt="CalculaChile"
-               className="h-12 w-auto md:h-14 object-contain"
-               width={40}
-               height={40}
+               className="h-16 w-auto md:h-20 object-contain"
+               width={64}
+               height={64}
              />
            </Link>
 
