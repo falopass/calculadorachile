@@ -3,7 +3,7 @@
 // Beneficio previsional del Estado para pensionados con bajas pensiones
 // ============================================
 
-import { UF } from '@/lib/values/constants';
+import { UF, PGU_2026 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PGUInput {
@@ -27,7 +27,8 @@ export interface PGUResult {
  * Umbral de reducción: pensiones sobre 1 UF tienen reducción progresiva.
  * D.L. 3500, Ley 21.396 y modificaciones.
  */
-const PGU_BASE_2026 = 214296;
+// El monto base de PGU se obtiene de los valores constantes actualizados
+// La PGU ahora tiene montos diferenciados por edad (65-81 años vs 82+ años)
 
 /**
  * Factor máximo por años de cotización (a más años, mayor PGU).
@@ -59,7 +60,8 @@ export function calculatePGU(input: PGUInput): PGUResult {
   const factorAniosCotizados = Number(calcularFactorAnios(anos).toFixed(2));
 
   // PGU base ajustada por años de cotización
-  const pguBase = Math.round(PGU_BASE_2026 * factorAniosCotizados);
+    // Usar el monto base para 65-81 años como referencia (el más común)
+    const pguBase = Math.round(PGU_2026.montoMaximo65a81CLP * factorAniosCotizados);
 
   // Umbral de reducción en CLP (1 UF)
   const umbralUF1 = Math.round(1 * UF.valor);

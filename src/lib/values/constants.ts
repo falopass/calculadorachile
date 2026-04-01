@@ -12,7 +12,7 @@ export const INGRESO_MINIMO = {
 };
 
 export const UF = {
-  valor: 39841.72,        // Valor UF 31/03/2026 (Fuente: BCentral)
+  valor: 39824.68,        // Valor UF marzo 2026 (Fuente: BCentral)
   fecha_actualizacion: '2026-03-31',
 };
 
@@ -23,7 +23,7 @@ export const UTM = {
 };
 
 export const DOLAR = {
-  observado: 931.57,      // Dólar observado 30/03/2026 (Fuente: BCentral)
+  observado: 907.66,      // Dólar observado marzo 2026 (Fuente: BCentral)
   venta: 960,             // Dólar venta (estimado)
   fecha_actualizacion: '2026-03-31',
 };
@@ -35,7 +35,7 @@ export const AFP = {
   modelo: { nombre: 'Modelo', comision: 0.58, sis: 1.15 },
   planvital: { nombre: 'PlanVital', comision: 1.16, sis: 1.15 },
   provida: { nombre: 'ProVida', comision: 1.45, sis: 1.15 },
-  uno: { nombre: 'Uno', comision: 0.49, sis: 1.15 },
+  uno: { nombre: 'Uno', comision: 0.46, sis: 1.15 },  // 0.46% según spensiones.cl
 };
 
 export const SALUD = {
@@ -212,11 +212,13 @@ export const BONO_BODAS_ORO = {
 // PGU (Pensión Garantizada Universal)
 // ===========================================
 export const PGU_2026 = {
-  montoMaximoCLP: 260000, // Aproximado 2026
+  // Reforma previsional: montos diferenciados por edad
+  montoMaximo65a81CLP: 231732,   // 65-81 años (feb 2026)
+  montoMaximo82MasCLP: 250275,   // 82+ años (feb 2026)
   edadMinima: 65,
   tramos: [
-    { ingresoMaximoCLP: 349800, pguCompleta: true },
-    { ingresoMaximoCLP: 614000, pguCompleta: false },
+    { ingresoMaximoCLP: 789139, pguCompleta: true },    // Pensión base hasta $789.139
+    { ingresoMaximoCLP: 1252602, pguCompleta: false },  // $789.139 - $1.252.602 (variable)
   ],
 };
 
@@ -224,11 +226,10 @@ export const PGU_2026 = {
 // Asignación Familiar
 // ===========================================
 export const ASIGNACION_FAMILIAR_2026 = {
-  tramoA: { ingresoMaximoCLP: 349800, montoPorCargaCLP: 24668 },
-  tramoB: { ingresoMaximoCLP: 509000, montoPorCargaCLP: 18056 },
-  tramoC: { ingresoMaximoCLP: 712000, montoPorCargaCLP: 10031 },
-  tramoD: { ingresoMaximoCLP: 950000, montoPorCargaCLP: 5016 },
-  tramoE: { ingresoMaximoCLP: 1187000, montoPorCargaCLP: 2508 },
+  // Ley 21.751: Reducido de 5 a 3 tramos desde enero 2026
+  tramoA: { ingresoMaximoCLP: 631976, montoPorCargaCLP: 22007 },   // Hasta $631.976
+  tramoB: { ingresoMaximoCLP: 923067, montoPorCargaCLP: 13505 },   // $631.977 - $923.067
+  tramoC: { ingresoMaximoCLP: 1439668, montoPorCargaCLP: 4267 },   // $923.068 - $1.439.668
 };
 
 // ===========================================

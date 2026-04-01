@@ -2,6 +2,7 @@
 // Cálculo de Asignación Familiar por Tramo Chile 2026
 // ============================================
 
+import { ASIGNACION_FAMILIAR_2026 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface AsignacionFamiliarInput {
@@ -29,27 +30,15 @@ export interface AsignacionFamiliarResult {
  * Base legal: DFL 150, Art. 1 y ss. (Cajas de Compensación y Asignación Familiar)
  *             Decreto Supremo N° 3 de 2025 (fija montos vigentes)
  */
-const TRAMOS_ASIGNACION = {
-  a: {
-    limiteSuperior: 430560,
-    montoPorHijo: 18624,
-  },
-  b: {
-    limiteSuperior: 630816,
-    montoPorHijo: 11358,
-  },
-  c: {
-    limiteSuperior: Infinity,
-    montoPorHijo: 0,
-  },
-} as const;
+// Usar los valores actualizados desde constants.ts
+// Los tramos ahora siguen la Ley 21.751 con 3 tramos actualizados
 
 /**
  * Determina el tramo de asignación familiar según el sueldo bruto
  */
 function determinarTramo(sueldoBruto: number): 'a' | 'b' | 'c' {
-  if (sueldoBruto <= TRAMOS_ASIGNACION.a.limiteSuperior) return 'a';
-  if (sueldoBruto <= TRAMOS_ASIGNACION.b.limiteSuperior) return 'b';
+  if (sueldoBruto <= ASIGNACION_FAMILIAR_2026.tramoA.ingresoMaximoCLP) return 'a';
+  if (sueldoBruto <= ASIGNACION_FAMILIAR_2026.tramoB.ingresoMaximoCLP) return 'b';
   return 'c';
 }
 
@@ -74,7 +63,10 @@ export function calculateAsignacionFamiliar(input: AsignacionFamiliarInput): Asi
   const tramo = tramoForzado ?? determinarTramo(sueldoValido);
 
   // Monto por hijo según tramo
-  const montoPorHijo = TRAMOS_ASIGNACION[tramo].montoPorHijo;
+    const montoPorHijo =
+      tramo === 'a' ? ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP :
+      tramo === 'b' ? ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP :
+      ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP;
 
   // Cálculo mensual y anual
   const asignacionMensual = montoPorHijo * hijosValidos;
