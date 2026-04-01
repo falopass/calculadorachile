@@ -86,9 +86,9 @@ export default function Header() {
              <img
                src="/logo.png"
                alt="CalculaChile"
-               className="h-8 w-auto object-contain"
-               width={32}
-               height={32}
+               className="h-12 w-auto md:h-14 object-contain"
+               width={40}
+               height={40}
              />
            </Link>
 
