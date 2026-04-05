@@ -1,0 +1,373 @@
+/* Estilos premium para calculadoras */
+
+/* Efectos de vidrio (glassmorphism) */
+.premium-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.dark .premium-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradientes premium */
+.premium-gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+}
+
+.premium-gradient-accent {
+  background: linear-gradient(135deg, var(--color-accent-500), var(--color-accent-600));
+}
+
+.premium-gradient-subtle {
+  background: linear-gradient(135deg, var(--color-primary-500)/10, var(--color-primary-600)/5);
+}
+
+/* Sombras premium */
+.premium-shadow {
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.premium-shadow-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-shadow-hover:hover {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -6px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Animaciones premium */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+}
+
+.premium-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.premium-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Transiciones suaves */
+.premium-transition {
+  transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Efectos de hover premium */
+.premium-hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.premium-hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.premium-hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.premium-hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Bordes redondeados premium */
+.premium-rounded {
+  border-radius: 1.5rem; /* 24px */
+}
+
+.premium-rounded-lg {
+  border-radius: 1.25rem; /* 20px */
+}
+
+.premium-rounded-xl {
+  border-radius: 1rem; /* 16px */
+}
+
+/* Efectos de brillo */
+.premium-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(25deg);
+  transition: all 0.6s;
+}
+
+.premium-shine:hover::after {
+  left: 120%;
+}
+
+/* Efectos de profundidad */
+.premium-depth-1 {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}
+
+.premium-depth-2 {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+}
+
+/* Efectos de borde animado */
+.premium-border-animated {
+  position: relative;
+}
+
+.premium-border-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400), var(--color-primary-300));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Efectos de texto premium */
+.premium-text-gradient {
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Efectos de carga premium */
+.premium-loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Efectos de partición visual */
+.premium-divider {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.premium-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.premium-divider span {
+  background: var(--surface);
+  position: relative;
+  padding: 0 1rem;
+  z-index: 1;
+}
+
+/* Estilos premium para inputs */
+.premium-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.premium-input:focus {
+  outline: none;
+  border-color: rgba(30, 58, 138, 0.5);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.premium-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.premium-input-group {
+  position: relative;
+}
+
+.premium-input-prefix,
+.premium-input-suffix {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.premium-input-prefix {
+  left: 1rem;
+}
+
+.premium-input-suffix {
+  right: 1rem;
+}
+
+.premium-input-with-prefix {
+  padding-left: 2.5rem;
+}
+
+.premium-input-with-suffix {
+  padding-right: 2.5rem;
+}
+
+/* Estilos premium para botones */
+.premium-button {
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.premium-button-primary {
+  background: linear-gradient(135deg, #1E3A8A, #DC2626);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2), 0 2px 4px -2px rgba(30, 58, 138, 0.2);
+}
+
+.premium-button-primary:hover {
+  background: linear-gradient(135deg, #1E3A8A, #B91C1C);
+  box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.3), 0 4px 6px -2px rgba(30, 58, 138, 0.2);
+  transform: translateY(-1px);
+}
+
+.premium-button-primary:active {
+  transform: translateY(0);
+}
+
+.premium-button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.premium-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.premium-button-tertiary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 1rem;
+  text-decoration: underline;
+}
+
+.premium-button-tertiary:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.premium-button-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+  padding: 0.75rem 1.5rem;
+}
+
+.premium-button-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.premium-button-animated {
+  position: relative;
+}
+
+.premium-button-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.premium-button-animated:hover::before {
+  left: 100%;
+}
+
+/* Efecto de brillo en botones */
+.premium-button-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-button-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(25deg);
+  transition: all 0.6s;
+}
+
+.premium-button-shine:hover::after {
+  left: 120%;
+}

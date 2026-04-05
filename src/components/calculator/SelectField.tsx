@@ -84,7 +84,8 @@ const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
             id={selectId}
             className={`
               w-full px-4 py-3 pr-11 border rounded-xl appearance-none bg-[var(--surface)]
-              text-[var(--foreground)]
+              text-[#0f172a] dark:text-[#f8fafc]
+              font-medium
               transition-all duration-200 ease-in-out
               hover:border-[var(--border-hover)]
               focus:outline-none focus:ring-2 focus:ring-offset-0

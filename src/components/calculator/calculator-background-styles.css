@@ -1,0 +1,36 @@
+/* Animaciones para el fondo decorativo de calculadoras */
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Agregar también la animación para el movimiento suave de los blobs */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-5px, -10px) scale(1.02);
+  }
+  50% {
+    transform: translate(10px, 5px) scale(0.98);
+  }
+  75% {
+    transform: translate(-10px, 10px) scale(1.01);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}

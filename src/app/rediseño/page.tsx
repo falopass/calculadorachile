@@ -7,7 +7,7 @@ import ManifestoSection from '@/components/redesign/ManifestoSection';
 import CategoryStickyStack from '@/components/redesign/CategoryStickyStack';
 import CinematicFooter from '@/components/redesign/CinematicFooter';
 
-export default function HomePage() {
+export default function RediseñoPage() {
   return (
     <div className="min-h-screen text-white noise-overlay">
       <Navbar />

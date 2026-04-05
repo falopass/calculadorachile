@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Syne, DM_Sans, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -7,11 +7,40 @@ import { ToastProvider } from "@/components/ui/Toast";
 import { ValuesProvider } from "@/lib/context/ValuesContext";
 import { GAProvider } from '@/components/analytics/GAProvider';
 
-// Fuente Inter optimizada
+// Fuentes para el rediseño cinematográfico
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"]
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700"]
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700"],
+  style: ["italic", "normal"]
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains",
+  weight: ["400", "500", "600", "700"]
 });
 
 export const metadata: Metadata = {
@@ -77,7 +106,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={inter.variable} suppressHydrationWarning>
+    <html lang="es" className={`${inter.variable} ${syne.variable} ${dmSans.variable} ${playfair.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -103,15 +132,13 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className="antialiased min-h-screen flex flex-col font-sans">
+      <body className="antialiased min-h-screen flex flex-col font-body bg-[#0F172A] text-white">
         <ValuesProvider>
           <ToastProvider>
             <GAProvider>
-              <Header />
-              <main id="main-content" className="flex-grow pt-16 md:pt-20" role="main" tabIndex={-1}>
+              <main id="main-content" className="flex-grow" role="main" tabIndex={-1}>
                 {children}
               </main>
-              <Footer />
             </GAProvider>
           </ToastProvider>
         </ValuesProvider>

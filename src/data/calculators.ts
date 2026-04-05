@@ -29,6 +29,29 @@ export const calculators: Calculator[] = [
         { value: 'fonasa', label: 'FONASA' },
         { value: 'isapre', label: 'Isapre' },
       ]},
+      { id: 'saludTramo', label: 'Tramo de Salud (FONASA)', type: 'select', required: false, options: [
+        { value: 'A', label: 'Tramo A' },
+        { value: 'B', label: 'Tramo B' },
+        { value: 'C', label: 'Tramo C' },
+        { value: 'D', label: 'Tramo D' },
+      ], defaultValue: 'A' },
+      { id: 'isapreMonto', label: 'Monto Isapre (en UF)', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'contratoIndefinido', label: '¿Contrato Indefinido?', type: 'boolean', required: false, defaultValue: true },
+      { id: 'bonoMovilizacion', label: 'Bono Movilización', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'bonoColacion', label: 'Bono Colación', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'bonoPerdidaCaja', label: 'Bono Pérdida de Caja', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'comisiones', label: 'Comisiones', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'asignacionFamiliar', label: 'Asignación Familiar', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'prestamoEmpleador', label: 'Préstamo con Empleador', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'descuentoSindical', label: 'Descuento Sindical', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'descuentoCajaCompensacion', label: 'Descuento Caja Compensación', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'tipoCalculo', label: 'Tipo de Cálculo', type: 'select', required: false, options: [
+        { value: 'mensual', label: 'Mensual' },
+        { value: 'quincenal', label: 'Quincenal' },
+        { value: 'semanal', label: 'Semanal' },
+        { value: 'diario', label: 'Diario' },
+      ], defaultValue: 'mensual' },
+      { id: 'calculoInverso', label: '¿Cálculo Inverso (Líquido a Bruto)?', type: 'boolean', required: false, defaultValue: false },
     ],
     faq: [
       {
@@ -51,6 +74,26 @@ export const calculators: Calculator[] = [
         question: '¿Qué pasa si gano más del tope imponible?',
         answer: 'Si tu sueldo supera el tope imponible (UF 144.7 mensuales en 2026), las cotizaciones de AFP, salud y seguro de cesantía se calculan solo sobre ese tope, no sobre el total de tu sueldo. Esto significa que el porcentaje de descuento efectivo es menor para sueldos muy altos.',
       },
+      {
+        question: '¿Cómo se calcula el factor de conversión bruto a líquido?',
+        answer: 'El factor de conversión bruto a líquido es el porcentaje que representa tu sueldo líquido respecto a tu sueldo bruto. Por ejemplo, si tu sueldo bruto es $1.000.000 y tu líquido es $800.000, el factor de conversión es del 80%. Este factor varía según tus cotizaciones y descuentos.',
+      },
+      {
+        question: '¿Puedo calcular de líquido a bruto?',
+        answer: 'Sí, nuestra calculadora permite calcular el sueldo bruto necesario para obtener un sueldo líquido objetivo. Esta función es útil para negociar remuneraciones o entender cuánto debes ganar bruto para recibir un cierto monto líquido.',
+      },
+      {
+        question: '¿Se consideran bonos y asignaciones?',
+        answer: 'Sí, puedes incluir bonos de movilización, colación, pérdida de caja, comisiones y asignación familiar. Los bonos de movilización y colación son no imponibles (no afectan cotizaciones), mientras que las comisiones sí son imponibles.',
+      },
+      {
+        question: '¿Se consideran descuentos adicionales?',
+        answer: 'Sí, puedes incluir descuentos por préstamos con el empleador, sindicatos o cajas de compensación. Estos descuentos se restan del sueldo líquido final.',
+      },
+      {
+        question: '¿Cómo afectan las distintas modalidades de cálculo?',
+        answer: 'Puedes calcular tu sueldo en modalidad mensual, quincenal, semanal o diaria. Esto es útil para comparar ofertas de trabajo que se presentan en diferentes términos o para trabajadores a honorarios que facturan por diferentes periodos.',
+      },
     ],
   },
   {
@@ -63,10 +106,9 @@ export const calculators: Calculator[] = [
     phase: 1,
     keywords: ['finiquito', 'calculadora finiquito', 'indemnización por años de servicio', 'vacaciones proporcionales', 'renuncia trabajo Chile'],
     inputs: [
+      // Campos esenciales - siempre visibles
       { id: 'ultimoSueldo', label: 'Último Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
       { id: 'añosTrabajados', label: 'Años Trabajados', type: 'number', placeholder: '5', required: true, min: 0 },
-      { id: 'mesesTrabajados', label: 'Meses Trabajados', type: 'number', placeholder: '0', required: false, min: 0, max: 11, defaultValue: 0 },
-      { id: 'diasVacacionesPendientes', label: 'Días de Vacaciones Pendientes', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
       { id: 'causaTermino', label: 'Causa de Término', type: 'select', required: true, options: [
         { value: 'renuncia', label: 'Renuncia' },
         { value: 'despido', label: 'Despido' },
@@ -79,11 +121,27 @@ export const calculators: Calculator[] = [
         { value: 'muerte_trabajador', label: 'Muerte del Trabajador' },
         { value: 'jubilacion', label: 'Jubilación' },
       ]},
+      // Campos opcionales - se moverán a "Opciones avanzadas"
+      { id: 'mesesTrabajados', label: 'Meses Trabajados', type: 'number', placeholder: '0', required: false, min: 0, max: 11, defaultValue: 0 },
+      { id: 'diasVacacionesPendientes', label: 'Días de Vacaciones Pendientes', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
       { id: 'tieneGratificacion', label: '¿Tiene Gratificación?', type: 'boolean', required: false, defaultValue: true },
       { id: 'horasExtraPromedio', label: 'Horas Extra Promedio (últimos 3 meses)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
       { id: 'bonosHabituales', label: 'Bonos Habituales (promedio últimos 3 meses)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
       { id: 'diasTrabajadosUltimoMes', label: 'Días Trabajados en Último Mes', type: 'number', placeholder: '0', required: false, min: 0, max: 31, defaultValue: 0 },
       { id: 'sueldoBase', label: 'Sueldo Base (sin bonificaciones)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
+      { id: 'fechaInicio', label: 'Fecha de Inicio (dd/mm/yyyy)', type: 'text', placeholder: '01/01/2020', required: false },
+      { id: 'fechaTermino', label: 'Fecha de Término (dd/mm/yyyy)', type: 'text', placeholder: '31/12/2024', required: false },
+      { id: 'sueldoVariablePromedio', label: 'Sueldo Variable Promedio (últimos 3 meses)', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'incluyeAvisoPrevio', label: '¿Incluye Aviso Previo?', type: 'boolean', required: false, defaultValue: true },
+      { id: 'tieneMulta168', label: '¿Aplica Multa Art. 168?', type: 'boolean', required: false, defaultValue: false },
+      { id: 'tipoContrato', label: 'Tipo de Contrato', type: 'select', required: false, options: [
+        { value: 'indefinido', label: 'A Plazo Indefinido' },
+        { value: 'plazo_fijo', label: 'A Plazo Fijo' },
+        { value: 'obra_faena', label: 'Obra o Faena' },
+      ], defaultValue: 'indefinido' },
+      { id: 'vacacionesAniosAnteriores', label: 'Vacaciones Pendientes Años Anteriores', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'sueldoPromedio', label: 'Sueldo Promedio (últimos 12 meses)', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'diasAdicionalesConvenio', label: 'Días Adicionales por Convenio Colectivo', type: 'number', placeholder: '0', required: false, min: 0 },
     ],
     faq: [
       {
@@ -106,6 +164,26 @@ export const calculators: Calculator[] = [
         question: '¿Cuál es el tope de la indemnización?',
         answer: 'La indemnización por años de servicio tiene un tope máximo de 11 años de servicio (330 días), según el Art. 163 del Código del Trabajo. Además, la base de cálculo no puede exceder de 90 UF mensuales. Esto significa que hay un límite máximo legal que puede recibir el trabajador.',
       },
+      {
+        question: '¿Qué es la indemnización sustitutiva del aviso previo?',
+        answer: 'La indemnización sustitutiva del aviso previo equivale a 1 mes de sueldo y se paga cuando el empleador despide sin dar el aviso previo correspondiente (30 días). El monto está limitado al tope de 90 UF mensuales.',
+      },
+      {
+        question: '¿Cómo se calcula con fechas exactas?',
+        answer: 'Cuando se ingresan las fechas exactas de inicio y término del contrato, se puede calcular con precisión la antigüedad exacta, incluyendo años, meses y días. Esto es importante para determinar correctamente las vacaciones proporcionales y otros beneficios.',
+      },
+      {
+        question: '¿Se consideran vacaciones pendientes de años anteriores?',
+        answer: 'Sí, las vacaciones pendientes de años anteriores deben ser pagadas al momento del finiquito. Estas se suman a las vacaciones proporcionales del año en curso.',
+      },
+      {
+        question: '¿Qué es la multa del Art. 168?',
+        answer: 'La multa del Art. 168 del Código del Trabajo se aplica cuando el empleador no paga el finiquito en el plazo legal (10 días hábiles después del término del contrato). Puede equivaler hasta al 50% del total del finiquito.',
+      },
+      {
+        question: '¿Cómo afecta el tipo de contrato al finiquito?',
+        answer: 'El tipo de contrato (a plazo fijo, indefinido o obra/faena) afecta varios componentes del finiquito. Por ejemplo, en contratos a plazo fijo no se paga indemnización por años de servicio, mientras que en contratos indefinidos sí aplica bajo ciertas causales.',
+      },
     ],
   },
   {
@@ -123,6 +201,12 @@ export const calculators: Calculator[] = [
         { value: 'uf-a-clp', label: 'UF a CLP' },
         { value: 'clp-a-uf', label: 'CLP a UF' },
       ]},
+      { id: 'fechaDesde', label: 'Fecha Desde (dd/mm/yyyy)', type: 'text', placeholder: '01/01/2026', required: false, tooltip: 'Fecha de inicio para cálculo de histórico o reajuste' },
+      { id: 'fechaHasta', label: 'Fecha Hasta (dd/mm/yyyy)', type: 'text', placeholder: '31/12/2026', required: false, tooltip: 'Fecha de término para cálculo de histórico o reajuste' },
+      { id: 'montoHistorico', label: 'Monto Histórico', type: 'number', placeholder: '0', required: false, min: 0, tooltip: 'Monto original para cálculo de reajuste entre fechas' },
+      { id: 'mostrarHistorico', label: '¿Mostrar Histórico?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Mostrar valores históricos de la UF en los últimos 30 días' },
+      { id: 'mostrarProyeccion', label: '¿Mostrar Proyección?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Mostrar proyección del valor de la UF para los próximos días' },
+      { id: 'mostrarGrafico', label: '¿Mostrar Gráfico?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Mostrar gráfico de evolución del valor de la UF' },
     ],
     faq: [
       {
@@ -144,6 +228,26 @@ export const calculators: Calculator[] = [
       {
         question: '¿La UF cambia diariamente?',
         answer: 'Sí, el valor de la UF se actualiza todos los días hábiles según la variación del IPC del mes anterior. El Banco Central de Chile publica los valores con un día de anticipación. Los fines de semana y festivos mantiene el valor del último día hábil publicado.',
+      },
+      {
+        question: '¿Cómo puedo ver el histórico de la UF?',
+        answer: 'Nuestra calculadora permite ver el valor histórico de la UF en los últimos 30 días. Puedes observar la tendencia y variación del valor para tomar decisiones informadas sobre contratos o inversiones.',
+      },
+      {
+        question: '¿Cómo se calcula el reajuste entre fechas?',
+        answer: 'El reajuste entre fechas se calcula comparando el valor de la UF en dos momentos distintos. Por ejemplo, si el valor era $35.000 y ahora es $37.600, hubo un aumento del 7.4%. Esto permite reajustar montos contractuales o históricos.',
+      },
+      {
+        question: '¿Qué es la proyección de la UF?',
+        answer: 'La proyección de la UF es una estimación basada en la tendencia reciente del IPC. No es un valor oficial, sino una aproximación para fines de planificación. El valor real dependerá de la inflación futura.',
+      },
+      {
+        question: '¿Cómo afecta la UF a los créditos hipotecarios?',
+        answer: 'En los créditos hipotecarios, el monto se expresa en UF y el dividendo se ajusta mensualmente según el valor de la UF. Si la UF sube, el dividendo aumenta, y viceversa. Esto protege al banco de la inflación pero transfiere el riesgo al deudor.',
+      },
+      {
+        question: '¿Dónde puedo verificar el valor oficial de la UF?',
+        answer: 'El valor oficial de la UF se publica diariamente en el sitio web del Banco Central de Chile (www.bcentral.cl). También puedes consultarla en el sitio del Servicio de Impuestos Internos (SII) o en mindicador.cl.',
       },
     ],
   },
@@ -199,15 +303,27 @@ export const calculators: Calculator[] = [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
       { id: 'horasExtra', label: 'Horas Extra', type: 'number', placeholder: '10', required: true, min: 0 },
       { id: 'esDomingo', label: '¿Es domingo o festivo?', type: 'boolean', required: false, defaultValue: false },
+      { id: 'jornadaSemanal', label: 'Jornada Semanal', type: 'select', required: false, options: [
+        { value: '40', label: '40 horas' },
+        { value: '44', label: '44 horas' },
+        { value: '45', label: '45 horas' },
+      ], defaultValue: '45' },
+      { id: 'recargoPersonalizado', label: 'Recargo Personalizado (%)', type: 'number', placeholder: '50', required: false, min: 0, max: 100 },
+      { id: 'sueldoVariable', label: '¿Usar Sueldo Variable?', type: 'boolean', required: false, defaultValue: false },
+      { id: 'sueldoPromedio3Meses', label: 'Sueldo Promedio Últimos 3 Meses', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'horasExtraNocturnas', label: 'Horas Extra Nocturnas', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'horasExtraFestivos', label: 'Horas Extra en Festivos', type: 'number', placeholder: '0', required: false, min: 0 },
+      { id: 'calcularImpactoCotizaciones', label: '¿Calcular Impacto en Cotizaciones?', type: 'boolean', required: false, defaultValue: false },
+      { id: 'mostrarTopeLegal', label: '¿Mostrar Topes Legales?', type: 'boolean', required: false, defaultValue: false },
     ],
     faq: [
       {
         question: '¿Cuánto me pagan por una hora extra?',
-        answer: 'Las horas extraordinarias se pagan con un recargo del 50% sobre la hora ordinaria (Art. 32 Código del Trabajo). Para calcular el valor hora extra: divide tu sueldo mensual por 180 horas (jornada 45 hrs/semana) y multiplica por 1.5. Por ejemplo, con sueldo de $500.000, la hora extra vale aproximadamente $4.167.',
+        answer: 'Las horas extraordinarias se pagan con un recargo del 50% sobre la hora ordinaria (Art. 32 Código del Trabajo). Para calcular el valor hora extra: divide tu sueldo mensual por las horas mensuales (45 hrs/semana * 4.33 semanas = 195 hrs) y multiplica por 1.5. Por ejemplo, con sueldo de $500.000, la hora extra vale aproximadamente $3,846.',
       },
       {
         question: '¿Cuánto se paga la hora extra en domingo o festivo?',
-        answer: 'Las horas extra trabajadas en domingo o festivos se pagan con un recargo del 100% sobre la hora ordinaria, es decir, el doble del valor hora normal. Esto se suma al recargo del 50% base de las horas extraordinarias.',
+        answer: 'Las horas extra trabajadas en domingo o festivos se pagan con un recargo del 100% sobre la hora ordinaria, es decir, el doble del valor hora normal. Esto se suma al recargo del 50% base de las horas extraordinarias, resultando en un recargo total del 150%.',
       },
       {
         question: '¿Cuál es el tope de horas extra?',
@@ -220,6 +336,26 @@ export const calculators: Calculator[] = [
       {
         question: '¿Qué dice el Código del Trabajo sobre horas extra?',
         answer: 'El Art. 30 del Código del Trabajo establece que las horas extraordinarias solo pueden pactarse para atender necesidades o situaciones temporales. El Art. 32 establece el recargo del 50% y el Art. 31 fija los topes máximos. El empleador debe llevar un registro de horas extra trabajadas.',
+      },
+      {
+        question: '¿Cómo se calcula con jornada personalizada?',
+        answer: 'Nuestra calculadora permite seleccionar jornada semanal de 40, 44 o 45 horas. El cálculo se adapta según la jornada elegida, calculando las horas mensuales promedio (jornada * 4.33 semanas) para determinar el valor de la hora normal.',
+      },
+      {
+        question: '¿Se pueden personalizar los recargos?',
+        answer: 'Sí, puedes ingresar un porcentaje de recargo personalizado. Por defecto, el recargo es del 50% para horas extra comunes y del 100% para horas en domingo o festivo, pero puede variar según convenio colectivo.',
+      },
+      {
+        question: '¿Cómo se calculan las horas extra nocturnas?',
+        answer: 'Las horas extra nocturnas (trabajadas entre 22:00 y 06:00) tienen un recargo adicional del 25% sobre el recargo habitual. Por ejemplo, si el recargo normal es 50%, para horas nocturnas sería 75% (50% + 25%).',
+      },
+      {
+        question: '¿Cómo afectan las horas extra a las cotizaciones?',
+        answer: 'Las horas extra también están afectas a cotizaciones previsionales (AFP, salud, seguro de cesantía). Esto significa que el valor total de las horas extra también se considera para calcular estos descuentos.',
+      },
+      {
+        question: '¿Qué pasa si trabajo más horas de las permitidas?',
+        answer: 'Trabajar más horas de las permitidas legalmente (más de 2 horas diarias o 10 semanales) es ilegal y puede ser sancionado por la Inspección del Trabajo. El trabajador puede denunciar esta situación.',
       },
     ],
   },
@@ -271,11 +407,26 @@ export const calculators: Calculator[] = [
     keywords: ['boleta de honorarios', 'retención honorarios', 'impuesto independientes', '15.25% retención', 'honorarios Chile'],
     inputs: [
       { id: 'montoBruto', label: 'Monto Bruto', type: 'number', placeholder: '$100.000', required: true, min: 0 },
+      { id: 'ano', label: 'Año de Emisión', type: 'select', required: false, options: [
+        { value: '2025', label: '2025 (14.5%)' },
+        { value: '2026', label: '2026 (15.25%)' },
+        { value: '2027', label: '2027 (16%)' },
+        { value: '2028', label: '2028 (17%)' },
+      ], defaultValue: '2026' },
+      { id: 'calculoInverso', label: '¿Cálculo Inverso (Líquido a Bruto)?', type: 'boolean', required: false, defaultValue: false },
+      { id: 'incluyeCotizaciones', label: '¿Incluir Cotizaciones Prev.? (Ley 21.133)', type: 'boolean', required: false, defaultValue: false },
+      { id: 'incluyePrestamoSolidario', label: '¿Incluir Préstamo Solidario SII? (+3%)', type: 'boolean', required: false, defaultValue: false },
+      { id: 'moneda', label: 'Mostrar Resultados en', type: 'select', required: false, options: [
+        { value: 'CLP', label: 'Pesos Chilenos (CLP)' },
+        { value: 'UF', label: 'Unidades de Fomento (UF)' },
+      ], defaultValue: 'CLP' },
+      { id: 'calcularPPM', label: '¿Calcular PPM Asociado?', type: 'boolean', required: false, defaultValue: false },
+      { id: 'calcularCostoEmpleador', label: '¿Calcular Costo para Empleador?', type: 'boolean', required: false, defaultValue: false },
     ],
     faq: [
       {
         question: '¿Cuánto es la retención de boleta de honorarios?',
-        answer: 'La retención de impuesto en boletas de honorarios es del 15.25% del monto bruto. Este porcentaje incluye: 10% de impuesto de primera categoría, 5% de impuesto global complementario (crédito), y 0.25% de cotización de solidaridad. El emisor recibe el monto líquido después de esta retención.',
+        answer: 'La retención de impuesto en boletas de honorarios es del 15.25% del monto bruto en 2026. Este porcentaje incluye: 10% de impuesto de primera categoría, 5% de impuesto global complementario (crédito), y 0.25% de cotización de solidaridad. El emisor recibe el monto líquido después de esta retención.',
       },
       {
         question: '¿Cuál es la diferencia entre monto bruto y líquido?',
@@ -292,6 +443,26 @@ export const calculators: Calculator[] = [
       {
         question: '¿Cómo se emite una boleta de honorarios?',
         answer: 'Las boletas de honorarios se emiten electrónicamente a través del sitio web del SII (Servicio de Impuestos Internos) o mediante aplicaciones móviles autorizadas. Necesitas clave tributaria y los datos del pagador (RUT y razón social). El proceso es gratuito e inmediato.',
+      },
+      {
+        question: '¿Cómo cambia la retención por año?',
+        answer: 'La tasa de retención aumenta gradualmente: 14.5% en 2025, 15.25% en 2026, 16% en 2027 y 17% en 2028. Nuestra calculadora te permite seleccionar el año para calcular con la tasa correcta.',
+      },
+      {
+        question: '¿Qué son las cotizaciones previsionales para independientes?',
+        answer: 'Las cotizaciones previsionales (Ley 21.133) se calculan sobre el 80% del monto bruto: 10% AFP, 7% salud y 1.15% seguro de cesantía. Estas pueden ser obligatorias o voluntarias según tu situación.',
+      },
+      {
+        question: '¿Qué es el préstamo solidario del SII?',
+        answer: 'El préstamo solidario del SII es un crédito que puedes solicitar al SII y se cobran intereses del 3% adicional a la retención de boleta de honorarios. Si marcas esta opción, se suma al porcentaje de retención.',
+      },
+      {
+        question: '¿Qué es el PPM y cómo se calcula?',
+        answer: 'El Pago Provisional Mensual (PPM) es un adelanto de impuesto que pagan los trabajadores independientes. Para profesionales, se calcula como el 10% del monto bruto de la boleta.',
+      },
+      {
+        question: '¿Cómo se calcula el costo para el empleador?',
+        answer: 'El costo para el empleador es el monto total que debe pagar, que incluye el monto bruto de la boleta más posibles cotizaciones patronales adicionales que no se descuentan al trabajador independiente.',
       },
     ],
   },
@@ -605,6 +776,21 @@ export const calculators: Calculator[] = [
       { id: 'pieUF', label: 'Pie (UF)', type: 'number', placeholder: '200', required: false, min: 0, tooltip: 'Ahorro inicial que das. Generalmente 10-20% del valor de la propiedad.' },
       { id: 'plazoAnos', label: 'Plazo (años)', type: 'number', placeholder: '25', required: true, min: 1, max: 40, tooltip: 'Plazo típico: 20-30 años. A mayor plazo, menor dividendo pero más intereses totales.' },
       { id: 'tasaAnual', label: 'Tasa Anual (%)', type: 'number', placeholder: '4.5', required: true, min: 0, max: 20, tooltip: 'Tasa de interés anual. Promedio mercado 2026: 4-6% para clientes con buen perfil.' },
+      { id: 'ingresoMensual', label: 'Ingreso Mensual (CLP)', type: 'number', placeholder: '0', required: false, min: 0, tooltip: 'Tu ingreso mensual para calcular capacidad de endeudamiento (máximo 25% del ingreso).' },
+      { id: 'tipoTasa', label: 'Tipo de Tasa', type: 'select', required: false, options: [
+        { value: 'fija', label: 'Fija' },
+        { value: 'variable', label: 'Variable' },
+        { value: 'mixta', label: 'Mixta' },
+      ], defaultValue: 'fija', tooltip: 'Tasa fija mantiene el dividendo constante, variable cambia con el mercado, mixta combina ambas.' },
+      { id: 'incluyeSeguroDesgravamen', label: '¿Incluir Seguro de Desgravamen?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Seguro que cubre el saldo del crédito en caso de fallecimiento o invalidez.' },
+      { id: 'incluyeSeguroIncendio', label: '¿Incluir Seguro de Incendio?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Seguro que cubre daños por incendio, sismo u otros desastres naturales.' },
+      { id: 'incluyeComisionAdministracion', label: '¿Incluir Comisión de Administración?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Comisión mensual por administración del crédito hipotecario.' },
+      { id: 'periodoGraciaMeses', label: 'Período de Gracia (meses)', type: 'number', placeholder: '0', required: false, min: 0, max: 24, tooltip: 'Meses iniciales donde solo se pagan intereses, no capital.' },
+      { id: 'calcularTablaAmortizacion', label: '¿Calcular Tabla de Amortización?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Mostrar detalle mes a mes de cómo se paga el crédito.' },
+      { id: 'calcularCAE', label: '¿Calcular CAE?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Carga Anual Equivalente: tasa efectiva anual del crédito incluyendo todos los costos.' },
+      { id: 'calcularGastosNotariales', label: '¿Calcular Gastos Notariales?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Gastos de escritura, inscripción y otros trámites legales.' },
+      { id: 'simularPrepago', label: '¿Simular Prepago?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Simular ahorro por cancelación anticipada de parte del crédito.' },
+      { id: 'montoPrepago', label: 'Monto de Prepago (UF)', type: 'number', placeholder: '0', required: false, min: 0, tooltip: 'Monto que pagarías anticipadamente para reducir intereses futuros.' },
     ],
     faq: [
       {
@@ -626,6 +812,26 @@ export const calculators: Calculator[] = [
       {
         question: '¿Cuál es el costo total del crédito?',
         answer: 'El costo total incluye: monto solicitado + intereses totales + seguros. Por ejemplo, 2000 UF a 25 años con 4.5% genera aproximadamente 1218 UF de intereses totales. El costo total sería 3218 UF. Usar la calculadora te muestra el desglose exacto según tus parámetros.'
+      },
+      {
+        question: '¿Qué es la tabla de amortización?',
+        answer: 'La tabla de amortización detalla mes a mes cómo se distribuye cada dividendo entre interés y capital. Al principio, la mayor parte del dividendo paga intereses, pero con el tiempo se invierte y se paga más capital. Esto permite ver cómo disminuye el saldo deudor.'
+      },
+      {
+        question: '¿Qué es la CAE (Carga Anual Equivalente)?',
+        answer: 'La CAE es la tasa efectiva anual que incluye todos los costos del crédito: intereses, seguros, comisiones y otros gastos. Permite comparar créditos de diferentes bancos de forma estandarizada. Una CAE más baja indica un crédito más barato.'
+      },
+      {
+        question: '¿Cómo afecta el tipo de tasa al crédito?',
+        answer: 'La tasa fija mantiene el dividendo constante durante todo el plazo. La tasa variable puede subir o bajar según el mercado. La tasa mixta combina ambos: fija por un período inicial y luego variable. La elección depende de tu tolerancia al riesgo y expectativas de tasas.'
+      },
+      {
+        question: '¿Qué es el período de gracia?',
+        answer: 'El período de gracia es un tiempo inicial (generalmente 6-12 meses) donde solo pagas intereses, no capital. Esto reduce temporalmente el dividendo pero alarga el tiempo de pago y aumenta el costo total del crédito.'
+      },
+      {
+        question: '¿Cómo ahorro con prepago?',
+        answer: 'El prepago consiste en pagar parte del capital antes de lo previsto. Esto reduce el saldo deudor y por tanto los intereses futuros. Puedes reducir el plazo o el dividendo mensual. La calculadora te muestra el ahorro aproximado según el monto de prepago.'
       },
     ],
   },
