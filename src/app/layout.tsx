@@ -132,7 +132,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className="antialiased min-h-screen flex flex-col font-body bg-[#0F172A] text-white">
+      <body className="antialiased min-h-screen flex flex-col font-body bg-[#0F172A] text-white overflow-x-hidden">
         <ValuesProvider>
           <ToastProvider>
             <GAProvider>
