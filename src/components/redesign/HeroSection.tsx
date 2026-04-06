@@ -16,7 +16,6 @@ export default function HeroSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animaciones GSAP para el hero
       if (calculaRef.current) {
         gsap.from(calculaRef.current, {
           opacity: 0,
@@ -70,42 +69,40 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-[#1E3A8A] to-[#0F172A]"
+      className="relative w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#1E3A8A] to-[#0F172A]"
       aria-label="Sección principal - Calculadoras laborales para Chile"
     >
       {/* SVG de montañas chilenas */}
-      <div className="absolute bottom-0 left-0 w-full h-2/3">
+      <div className="absolute bottom-0 left-0 w-full h-2/3 overflow-hidden">
         <MountainsSVG />
       </div>
 
       {/* Overlay degradado */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1E3A8A]/30 via-[#0F172A]/60 to-[#0F172A] pointer-events-none" />
 
-      {/* Elementos decorativos flotantes */}
-      <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-[#DC2626]/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-[#1E3A8A]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      {/* Elementos decorativos flotantes - hidden on mobile */}
+      <div className="hidden md:block absolute top-1/4 right-1/4 w-64 h-64 bg-[#DC2626]/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="hidden md:block absolute bottom-1/3 left-1/3 w-48 h-48 bg-[#1E3A8A]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
 
       {/* Contenido del hero */}
-      <div className="relative z-10 flex flex-col items-start justify-center h-full px-8 md:px-16 py-20">
+      <div className="relative z-10 flex flex-col items-start justify-center min-h-screen px-4 sm:px-8 md:px-16 py-12 md:py-20">
         <div className="max-w-4xl w-full">
           {/* Badge superior */}
           <div
             ref={calculaRef}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 md:mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-            <span className="text-sm text-white/80 font-medium">Valores actualizados 2026</span>
+            <span className="text-xs sm:text-sm text-white/80 font-medium">Valores actualizados 2026</span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6">
-            <span
-              className="block text-white font-heading tracking-tight"
-            >
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6">
+            <span className="block text-white font-heading tracking-tight break-words">
               Calculadoras
             </span>
             <span
               ref={chileRef}
-              className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] font-drama italic text-7xl md:text-9xl lg:text-[10rem] leading-none"
+              className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] font-drama italic text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[10rem] leading-none"
             >
               Chile.
             </span>
@@ -113,17 +110,17 @@ export default function HeroSection() {
 
           <p
             ref={subtitleRef}
-            className="text-white/80 text-lg md:text-xl mb-10 max-w-2xl font-body"
+            className="text-white/80 text-base sm:text-lg md:text-xl mb-6 md:mb-10 max-w-2xl font-body"
           >
             50+ calculadoras laborales, tributarias y financieras. Gratis, precisas y actualizadas con los valores oficiales de Chile.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 md:mb-16">
             <Link
               href="/calculadoras"
               ref={ctaPrimaryRef}
-              className="px-8 py-4 rounded-full text-white font-semibold text-lg bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] hover:from-[#1E3A8A] hover:to-[#B91C1C] shadow-lg shadow-[#1E3A8A]/30 hover:shadow-xl hover:shadow-[#1E3A8A]/40 transition-all duration-300 inline-block text-center hover:scale-105"
+              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full text-white font-semibold text-base sm:text-lg bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] hover:from-[#1E3A8A] hover:to-[#B91C1C] shadow-lg shadow-[#1E3A8A]/30 hover:shadow-xl hover:shadow-[#1E3A8A]/40 transition-all duration-300 inline-block text-center hover:scale-105"
             >
               Explorar calculadoras
             </Link>
@@ -131,29 +128,29 @@ export default function HeroSection() {
             <Link
               href="/calculadoras"
               ref={ctaSecondaryRef}
-              className="px-8 py-4 rounded-full text-white font-semibold text-lg border-2 border-white/30 hover:border-white/50 bg-white/5 backdrop-blur-sm transition-all duration-300 inline-block text-center hover:bg-white/10"
+              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full text-white font-semibold text-base sm:text-lg border-2 border-white/30 hover:border-white/50 bg-white/5 backdrop-blur-sm transition-all duration-300 inline-block text-center hover:bg-white/10"
             >
               ¿Cómo funciona?
             </Link>
           </div>
 
           {/* Estadísticas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             <div className="text-center md:text-left">
-              <div className="text-3xl md:text-4xl font-bold text-white font-mono">50+</div>
-              <div className="text-sm text-white/60 mt-1">Calculadoras</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-mono">50+</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1">Calculadoras</div>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-3xl md:text-4xl font-bold text-white font-mono">100%</div>
-              <div className="text-sm text-white/60 mt-1">Gratis</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-mono">100%</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1">Gratis</div>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-3xl md:text-4xl font-bold text-white font-mono">2026</div>
-              <div className="text-sm text-white/60 mt-1">Actualizado</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-mono">2026</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1">Actualizado</div>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-3xl md:text-4xl font-bold text-white font-mono">24/7</div>
-              <div className="text-sm text-white/60 mt-1">Disponible</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-mono">24/7</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1">Disponible</div>
             </div>
           </div>
         </div>
