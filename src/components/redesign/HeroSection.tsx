@@ -69,11 +69,11 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full min-h-screen bg-gradient-to-b from-[#1E3A8A] to-[#0F172A]"
+      className="relative w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-[#1E3A8A] to-[#0F172A]"
       aria-label="Sección principal - Calculadoras laborales para Chile"
     >
-      {/* SVG de montañas chilenas */}
-      <div className="absolute bottom-0 left-0 w-full h-2/3 overflow-hidden">
+      {/* SVG de montañas chilenas - hidden on mobile to save space */}
+      <div className="hidden md:block absolute bottom-0 left-0 w-full h-2/3 overflow-hidden">
         <MountainsSVG />
       </div>
 
@@ -99,14 +99,14 @@ export default function HeroSection() {
           <h1 className="mb-4 md:mb-6">
             <span
               className="block text-white font-heading tracking-tight"
-              style={{ fontSize: 'clamp(1.2rem, 4.5vw, 6rem)', lineHeight: '1.1' }}
+              style={{ fontSize: 'clamp(2rem, 7vw, 6rem)', lineHeight: '1.1' }}
             >
               Calculadoras
             </span>
             <span
               ref={chileRef}
               className="block text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#DC2626] font-drama italic mt-1"
-              style={{ fontSize: 'clamp(1.5rem, 6.5vw, 10rem)', lineHeight: '1.0' }}
+              style={{ fontSize: 'clamp(2.5rem, 9vw, 10rem)', lineHeight: '1.0' }}
             >
               Chile.
             </span>
