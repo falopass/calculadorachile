@@ -69,10 +69,10 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-[#1E3A8A] to-[#0F172A]"
+      className="relative w-screen overflow-hidden bg-gradient-to-b from-[#1E3A8A] to-[#0F172A]"
       aria-label="Sección principal - Calculadoras laborales para Chile"
     >
-      {/* SVG de montañas chilenas - hidden on mobile to save space */}
+      {/* SVG de montañas chilenas - hidden on mobile */}
       <div className="hidden md:block absolute bottom-0 left-0 w-full h-2/3 overflow-hidden">
         <MountainsSVG />
       </div>
@@ -86,7 +86,7 @@ export default function HeroSection() {
 
       {/* Contenido del hero */}
       <div className="relative z-10 flex flex-col items-start justify-center min-h-screen px-4 sm:px-6 md:px-16 py-16 md:py-20">
-        <div className="w-full max-w-full">
+        <div className="w-full max-w-[calc(100vw-2rem)]">
           {/* Badge superior */}
           <div
             ref={calculaRef}
@@ -96,17 +96,17 @@ export default function HeroSection() {
             <span className="text-xs sm:text-sm text-white/80 font-medium">Valores actualizados 2026</span>
           </div>
 
-          <h1 className="mb-4 md:mb-6">
+          <h1 className="mb-4 md:mb-6 overflow-hidden">
             <span
-              className="block text-white font-heading tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 7vw, 6rem)', lineHeight: '1.1' }}
+              className="block text-white font-heading tracking-tight text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl"
+              style={{ lineHeight: '1.1' }}
             >
               Calculadoras
             </span>
             <span
               ref={chileRef}
-              className="block text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#DC2626] font-drama italic mt-1"
-              style={{ fontSize: 'clamp(2.5rem, 9vw, 10rem)', lineHeight: '1.0' }}
+              className="block text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#DC2626] font-drama italic text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[10rem] mt-1"
+              style={{ lineHeight: '1.0' }}
             >
               Chile.
             </span>
