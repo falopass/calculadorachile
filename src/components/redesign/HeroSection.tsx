@@ -99,14 +99,14 @@ export default function HeroSection() {
           <h1 className="mb-4 md:mb-6">
             <span
               className="block text-white font-heading tracking-tight"
-              style={{ fontSize: 'clamp(1.5rem, 5.5vw, 6rem)', lineHeight: '1.1' }}
+              style={{ fontSize: 'clamp(1.2rem, 4.5vw, 6rem)', lineHeight: '1.1' }}
             >
               Calculadoras
             </span>
             <span
               ref={chileRef}
               className="block text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#DC2626] font-drama italic mt-1"
-              style={{ fontSize: 'clamp(2rem, 8vw, 10rem)', lineHeight: '1.0' }}
+              style={{ fontSize: 'clamp(1.5rem, 6.5vw, 10rem)', lineHeight: '1.0' }}
             >
               Chile.
             </span>
