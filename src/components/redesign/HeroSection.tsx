@@ -96,17 +96,17 @@ export default function HeroSection() {
             <span className="text-xs sm:text-sm text-white/80 font-medium">Valores actualizados 2026</span>
           </div>
 
-          <h1 className="mb-4 md:mb-6">
+          <h1 className="mb-4 md:mb-6 overflow-hidden">
             <span
               className="block text-white font-heading tracking-tight"
-              style={{ fontSize: 'clamp(1.5rem, 6.5vw, 6rem)', lineHeight: '1.1' }}
+              style={{ fontSize: 'clamp(1.2rem, 5vw, 6rem)', lineHeight: '1.1' }}
             >
               Calculadoras
             </span>
             <span
               ref={chileRef}
               className="block text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#DC2626] font-drama italic mt-1"
-              style={{ fontSize: 'clamp(1.8rem, 8.5vw, 10rem)', lineHeight: '1.0' }}
+              style={{ fontSize: 'clamp(1.4rem, 7vw, 10rem)', lineHeight: '1.0' }}
             >
               Chile.
             </span>
