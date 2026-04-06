@@ -16,7 +16,6 @@ export default function HeroSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animaciones GSAP para el hero
       if (calculaRef.current) {
         gsap.from(calculaRef.current, {
           opacity: 0,
@@ -123,7 +122,7 @@ export default function HeroSection() {
             <Link
               href="/calculadoras"
               ref={ctaPrimaryRef}
-              className="px-6 py-3 rounded-full text-white font-semibold text-sm sm:text-base md:text-lg bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] hover:from-[#1E3A8A] hover:to-[#B91C1C] shadow-lg shadow-[#1E3A8A]/30 hover:shadow-xl hover:shadow-[#1E3A8A]/40 transition-all duration-300 inline-block text-center hover:scale-105"
+              className="px-6 py-3 rounded-full text-white font-semibold text-sm sm:text-base md:text-lg bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] hover:from-[#1E3A8A] hover:to-[#B91C1C] shadow-lg shadow-[#1E3A8A]/30 hover:shadow-xl hover:shadow-[#1E3A8A]/40 transition-all duration-300 inline-block text-center"
             >
               Explorar calculadoras
             </Link>
@@ -131,7 +130,7 @@ export default function HeroSection() {
             <Link
               href="/calculadoras"
               ref={ctaSecondaryRef}
-              className="px-6 py-3 rounded-full text-white font-semibold text-sm sm:text-base md:text-lg border-2 border-white/30 hover:border-white/50 bg-white/5 backdrop-blur-sm transition-all duration-300 inline-block text-center hover:bg-white/10"
+              className="px-6 py-3 rounded-full text-white font-semibold text-sm sm:text-base md:text-lg border-2 border-white/30 hover:border-white/50 bg-white/5 backdrop-blur-sm transition-all duration-300 inline-block text-center"
             >
               ¿Cómo funciona?
             </Link>
