@@ -2,6 +2,7 @@
 // Cálculo de Contribuciones (Impuesto Territorial) Chile 2026
 // ============================================
 
+import { UTM } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface ContribucionesInput {
@@ -68,9 +69,9 @@ export function calculateContribuciones(
   const datosTasa = TASAS_CONTRIBUCIONES[destino];
   const tasaAnual = datosTasa.tasa;
 
-  // Verificar exención habitacional
-  // Nota: se usa un valor aproximado en CLP para la exención
-  const avaluoUTM = avaluo / 67900; // UTM actual
+  // Verificar exención habitacional usando el valor UTM dinámico del snapshot
+  // (antes estaba hardcodeado en 67.900, lo que dejaba el cálculo desincronizado).
+  const avaluoUTM = UTM.valor > 0 ? avaluo / UTM.valor : 0;
   const exento = destino === 'habitacional' && avaluoUTM <= EXENCION_HABITACIONAL_UTM;
 
   // Calcular descuento habitacional (solo para habitacional)

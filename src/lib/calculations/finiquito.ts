@@ -2,34 +2,70 @@
 // Cálculo de Finiquito Chile
 // ============================================
 
-import { INDEMNIZACION, VACACIONES, GRATIFICACION, INGRESO_MINIMO, UF } from '@/lib/values/constants';
+import { INDEMNIZACION, VACACIONES, GRATIFICACION, INGRESO_MINIMO } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
+
+/**
+ * Recargos por despido injustificado (Art. 168 CdT) sobre la
+ * indemnización por años de servicio:
+ *
+ *   - Necesidades de la empresa (Art. 161): +30%
+ *   - Falta de probidad / vías de hecho (Art. 160): +80%
+ *   - Causales no demostradas (Art. 159 N°4): +50%
+ *   - Aplicación indebida del Art. 161: +100%
+ *
+ * El recargo va sobre la indemnización por años, NO sobre el sueldo.
+ */
+export type RecargoArt168 = 0 | 30 | 50 | 80 | 100;
 
 export interface FiniquitoInput {
   ultimoSueldo: number;
   añosTrabajados: number;
   mesesTrabajados?: number;
   diasVacacionesPendientes?: number;
-  causaTermino: 'renuncia' | 'despido' | 'mutuo_acuerdo' | 'necesidades_empresa' | 'incumplimiento' | 'vencimiento_plazo' | 'obra_faena' | 'caso_fortuito' | 'muerte_trabajador' | 'jubilacion';
+  causaTermino:
+    | 'renuncia'
+    | 'despido'
+    | 'mutuo_acuerdo'
+    | 'necesidades_empresa'
+    | 'incumplimiento'
+    | 'vencimiento_plazo'
+    | 'obra_faena'
+    | 'caso_fortuito'
+    | 'muerte_trabajador'
+    | 'jubilacion';
   tieneGratificacion?: boolean;
-  horasExtraPromedio?: number; // Promedio últ 3 meses
-  bonosHabituales?: number; // Promedio últ 3 meses
-  diasTrabajadosUltimoMes?: number; // Días trabajados en el mes de término
-  sueldoBase?: number; // Sueldo base sin bonificaciones
-  fechaInicio?: string; // Fecha de inicio de la relación laboral
-  fechaTermino?: string; // Fecha de término de la relación laboral
-  sueldoVariablePromedio?: number; // Promedio últimos 3 meses
+  horasExtraPromedio?: number;
+  bonosHabituales?: number;
+  diasTrabajadosUltimoMes?: number;
+  sueldoBase?: number;
+  fechaInicio?: string;
+  fechaTermino?: string;
+  sueldoVariablePromedio?: number;
+  /**
+   * Si el despido fue sin aviso previo de 30 días, se debe pagar la
+   * indemnización sustitutiva (1 mes de sueldo). Por defecto FALSE
+   * (asume que el empleador sí avisó).
+   */
   incluyeAvisoPrevio?: boolean;
-  tieneMulta168?: boolean; // Multa Art. 168 por no pago en plazo
+  /**
+   * Recargo Art. 168 sobre la indemnización por años de servicio
+   * cuando el juez declara el despido injustificado.
+   * Valores válidos: 0 | 30 | 50 | 80 | 100. Por defecto 0.
+   */
+  recargoArt168Pct?: RecargoArt168;
   mostrarDesgloseFormulas?: boolean;
   tipoContrato?: 'indefinido' | 'plazo_fijo' | 'obra_faena';
-  vacacionesAniosAnteriores?: number; // Vacaciones acumuladas de años anteriores
-  sueldoPromedio?: number; // Sueldo promedio para cálculos
-  diasAdicionalesConvenio?: number; // Días adicionales por convenio colectivo
+  vacacionesAniosAnteriores?: number;
+  sueldoPromedio?: number;
+  diasAdicionalesConvenio?: number;
 }
 
 export interface FiniquitoResult {
   ultimoSueldo: number;
+  /** Indemnización por años de servicio (Art. 163 CdT). */
+  indemnizacion: number;
+  /** Compatibilidad con el campo histórico. */
   indemnizacionAniosServicio: number;
   indemnizacionAvisoPrevio: number;
   vacacionesProporcionales: number;
@@ -38,7 +74,9 @@ export interface FiniquitoResult {
   sueldoPendiente: number;
   horasExtraPendientes: number;
   bonosPendientes: number;
-  multaArt168: number; // Multa por no pago en plazo
+  /** Recargo Art. 168 (porcentaje sobre la indemnización por años). */
+  multaArt168: number;
+  recargoArt168Pct: number;
   diasTrabajados: number;
   totalFiniquito: number;
   desglose: {
@@ -52,87 +90,60 @@ export interface FiniquitoResult {
     diasTrabajados: number;
     fechaInicio: string;
     fechaTermino: string;
-    antiguedadExacta: string; // Años, meses, días
+    antiguedadExacta: string;
   };
 }
 
 /**
- * Calcula la indemnización por años de servicio según Art. 163 del Código del Trabajo
- * Aplica solo para despido por necesidades de la empresa (Art. 161 N° 1)
+ * Indemnización por años de servicio (Art. 163 CdT). Aplica solo en
+ * caso de despido por necesidades de la empresa (causal Art. 161 N°1).
+ * Algunas calculadoras también aceptan 'despido' genérico.
  */
 function calcularIndemnizacionAniosServicio(
   ultimoSueldo: number,
   añosTrabajados: number,
-  causaTermino: FiniquitoInput['causaTermino']
+  causaTermino: FiniquitoInput['causaTermino'],
 ): number {
-  // Solo se paga indemnización por años de servicio en caso de despido por necesidades de la empresa
   if (causaTermino !== 'necesidades_empresa' && causaTermino !== 'despido') {
     return 0;
   }
-  
-  // Tope de 11 años (330 días)
   const añosTopeados = Math.min(añosTrabajados, INDEMNIZACION.tope_años);
-  
-  // 30 días de sueldo por año
   const diasIndemnizacion = añosTopeados * INDEMNIZACION.dias_por_año;
-  
-  // Sueldo diario (última remuneración mensual / 30)
   const sueldoDiario = ultimoSueldo / 30;
-  
   return diasIndemnizacion * sueldoDiario;
 }
 
 /**
- * Calcula la indemnización sustitutiva del aviso previo según Art. 168 del Código del Trabajo
- * Aplica cuando se despide sin dar aviso previo de 30 días
+ * Indemnización sustitutiva de aviso previo (Art. 162 CdT): 1 mes de
+ * sueldo cuando el empleador no avisa con 30 días de anticipación.
+ * Solo aplica para despido por necesidades de la empresa o causal
+ * genérica de "despido".
  */
 function calcularIndemnizacionAvisoPrevio(
   ultimoSueldo: number,
-  causaTermino: FiniquitoInput['causaTermino']
+  causaTermino: FiniquitoInput['causaTermino'],
 ): number {
-  // Se paga aviso previo en caso de despido por necesidades de la empresa
   if (causaTermino === 'necesidades_empresa' || causaTermino === 'despido') {
-    return ultimoSueldo; // Equivale a 1 mes de sueldo
+    return ultimoSueldo;
   }
-  
   return 0;
 }
 
-/**
- * Calcula vacaciones proporcionales según Art. 171 del Código del Trabajo
- * Se pagan en todos los casos de término de contrato
- */
 function calcularVacacionesProporcionales(
   ultimoSueldo: number,
   mesesTrabajados: number,
-  diasPendientes: number
+  diasPendientes: number,
 ): number {
-  // Días de vacaciones proporcionales por meses trabajados
-  // 15 días hábiles anuales / 12 meses * meses trabajados
   const diasProporcionales = (VACACIONES.dias_anuales / 12) * mesesTrabajados;
-  
-  // Total días a pagar (proporcionales + pendientes)
   const totalDias = diasProporcionales + diasPendientes;
-  
-  // Sueldo diario
   const sueldoDiario = ultimoSueldo / 30;
-  
   return totalDias * sueldoDiario;
 }
 
 /**
- * Calcula la gratificación proporcional pendiente.
- *
- * Base legal: Art. 50 del Código del Trabajo. La gratificación legal
- * es ANUAL, equivalente al 25% del sueldo o al tope de 4,75 ingresos
- * mínimos mensuales (lo menor). Cuando el contrato termina antes del
- * cierre del año, se paga proporcional a los meses trabajados de ese
- * año.
- *
- * Bug histórico: la versión anterior multiplicaba la gratificación
- * mensual por los meses trabajados, sobreestimando por factor 12 (un
- * trabajador con 6 meses recibía 6 veces la gratificación mensual,
- * cuando debería ser ~6/12 del aporte anual).
+ * Gratificación proporcional. La gratificación legal es ANUAL (25%
+ * del sueldo o tope 4,75 IMM, lo menor — Art. 50 CdT). Al término
+ * del contrato se paga proporcional a los meses trabajados del año.
  */
 function calcularGratificacionProporcional(
   ultimoSueldo: number,
@@ -140,54 +151,42 @@ function calcularGratificacionProporcional(
   tieneGratificacion: boolean,
 ): number {
   if (!tieneGratificacion || mesesTrabajados <= 0) return 0;
-
-  // Tope anual: 4,75 IMM (tope_475_inm × ingreso mínimo mensual).
   const topeAnual = INGRESO_MINIMO.mensual * GRATIFICACION.tope_475_inm;
-
-  // 25% del sueldo bruto anualizado.
-  const gratificacionAnualPorPorcentaje = ultimoSueldo * 12 * (GRATIFICACION.porcentaje / 100);
-
-  // Aporte legal: el menor entre 25% anual y el tope.
+  const gratificacionAnualPorPorcentaje =
+    ultimoSueldo * 12 * (GRATIFICACION.porcentaje / 100);
   const gratificacionAnual = Math.min(gratificacionAnualPorPorcentaje, topeAnual);
-
-  // Proporcional a meses trabajados (max 12).
   const meses = Math.min(mesesTrabajados, 12);
   return (gratificacionAnual / 12) * meses;
 }
 
-/**
- * Calcula sueldo pendiente del último mes
- */
 function calcularSueldoPendiente(
   ultimoSueldo: number,
-  diasTrabajadosUltimoMes: number
+  diasTrabajadosUltimoMes: number,
 ): number {
-  if (!diasTrabajadosUltimoMes || diasTrabajadosUltimoMes <= 0) {
-    return 0;
-  }
-  
-  // Sueldo diario
+  if (!diasTrabajadosUltimoMes || diasTrabajadosUltimoMes <= 0) return 0;
   const sueldoDiario = ultimoSueldo / 30;
-  
   return sueldoDiario * diasTrabajadosUltimoMes;
 }
 
-/**
- * Calcula horas extras pendientes
- */
-function calcularHorasExtraPendientes(horasExtraPromedio: number): number {
-  return horasExtraPromedio || 0;
+function clampRecargo(pct: number): RecargoArt168 {
+  if (pct >= 100) return 100;
+  if (pct >= 80) return 80;
+  if (pct >= 50) return 50;
+  if (pct >= 30) return 30;
+  return 0;
 }
 
 /**
- * Calcula bonos pendientes
- */
-function calcularBonosPendientes(bonosHabituales: number): number {
-  return bonosHabituales || 0;
-}
-
-/**
- * Calcula el finiquito completo
+ * Calcula el finiquito completo.
+ *
+ * Bugs históricos corregidos:
+ *  - `multaArt168` era `sueldo × 50%` constante, lo que no corresponde
+ *    al Art. 168 CdT. Ahora es un recargo (30/50/80/100%) opcional
+ *    sobre la indemnización por años de servicio, opt-in vía
+ *    `recargoArt168Pct`.
+ *  - `incluyeAvisoPrevio` venía con default `true`, sobreestimando el
+ *    finiquito en 1 mes para todos los casos en que el empleador sí
+ *    avisó. Ahora el default es `false` (opt-in).
  */
 export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
   const {
@@ -202,70 +201,77 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     diasTrabajadosUltimoMes = 0,
     fechaInicio,
     fechaTermino,
-    sueldoVariablePromedio = 0,
-    incluyeAvisoPrevio = true,
-    tieneMulta168 = false,
-    tipoContrato = 'indefinido',
+    incluyeAvisoPrevio = false,
+    recargoArt168Pct = 0,
     vacacionesAniosAnteriores = 0,
     sueldoPromedio = 0,
     diasAdicionalesConvenio = 0,
   } = input;
-  
-  // Usar sueldo promedio si está disponible, de lo contrario usar el último sueldo
+
   const sueldoBaseCalculo = sueldoPromedio > 0 ? sueldoPromedio : ultimoSueldo;
-  
-  // Calcular cada componente
-  const indemnizacionAniosServicio = calcularIndemnizacionAniosServicio(sueldoBaseCalculo, añosTrabajados, causaTermino);
-  
-  // Calcular indemnización por aviso previo basado en la causa de término y configuración
-  let indemnizacionAvisoPrevio = 0;
-  if (incluyeAvisoPrevio) {
-    indemnizacionAvisoPrevio = calcularIndemnizacionAvisoPrevio(sueldoBaseCalculo, causaTermino);
-  }
-  
-  // Calcular vacaciones proporcionales con posibles días adicionales por convenio
+
+  // Indemnización por años de servicio (Art. 163).
+  const indemnizacion = calcularIndemnizacionAniosServicio(
+    sueldoBaseCalculo,
+    añosTrabajados,
+    causaTermino,
+  );
+
+  // Aviso previo opt-in (Art. 162).
+  const indemnizacionAvisoPrevio = incluyeAvisoPrevio
+    ? calcularIndemnizacionAvisoPrevio(sueldoBaseCalculo, causaTermino)
+    : 0;
+
+  // Vacaciones (Art. 67) + posibles días adicionales por convenio.
   const vacacionesProporcionales = calcularVacacionesProporcionales(
     sueldoBaseCalculo,
     mesesTrabajados,
-    diasVacacionesPendientes + diasAdicionalesConvenio
+    diasVacacionesPendientes + diasAdicionalesConvenio,
   );
-  
-  // Calcular gratificación proporcional
+
   const gratificacionProporcional = calcularGratificacionProporcional(
     sueldoBaseCalculo,
     mesesTrabajados,
-    tieneGratificacion
+    tieneGratificacion,
   );
-  
-  // Calcular sueldo pendiente
-  const sueldoPendiente = calcularSueldoPendiente(sueldoBaseCalculo, diasTrabajadosUltimoMes);
-  
-  // Calcular horas extra pendientes
-  const horasExtraPendientes = calcularHorasExtraPendientes(horasExtraPromedio);
-  
-  // Calcular bonos pendientes
-  const bonosPendientes = calcularBonosPendientes(bonosHabituales);
-  
-  // Calcular multa Art. 168 si aplica
-  const multaArt168 = tieneMulta168 ? sueldoBaseCalculo * 0.5 : 0; // 50% del sueldo como multa típica
-  
-  // Calcular vacaciones pendientes de años anteriores
-  const vacacionesPendientesAniosAnteriores = (vacacionesAniosAnteriores || 0) * (sueldoBaseCalculo / 30);
-  
-  // Total finiquito
-  const totalFiniquito = indemnizacionAniosServicio + indemnizacionAvisoPrevio + vacacionesProporcionales +
-                          gratificacionProporcional + sueldoPendiente + horasExtraPendientes + bonosPendientes +
-                          multaArt168 + vacacionesPendientesAniosAnteriores;
-  
-  // Calcular antigüedad exacta si se proporcionan fechas
+
+  const sueldoPendiente = calcularSueldoPendiente(
+    sueldoBaseCalculo,
+    diasTrabajadosUltimoMes,
+  );
+
+  const horasExtraPendientes = horasExtraPromedio || 0;
+  const bonosPendientes = bonosHabituales || 0;
+
+  // Recargo Art. 168 sobre la indemnización por años (no sobre el sueldo).
+  const recargoPct = clampRecargo(recargoArt168Pct);
+  const multaArt168 = indemnizacion * (recargoPct / 100);
+
+  const vacacionesPendientesAniosAnteriores =
+    (vacacionesAniosAnteriores || 0) * (sueldoBaseCalculo / 30);
+
+  const totalFiniquito =
+    indemnizacion +
+    indemnizacionAvisoPrevio +
+    vacacionesProporcionales +
+    gratificacionProporcional +
+    sueldoPendiente +
+    horasExtraPendientes +
+    bonosPendientes +
+    multaArt168 +
+    vacacionesPendientesAniosAnteriores;
+
   let antiguedadExacta = `${añosTrabajados} años`;
   if (mesesTrabajados > 0) {
     antiguedadExacta += ` y ${mesesTrabajados} meses`;
   }
-  
+
+  const indemnizacionRedondeada = Math.round(indemnizacion);
+
   return {
     ultimoSueldo: sueldoBaseCalculo,
-    indemnizacionAniosServicio: Math.round(indemnizacionAniosServicio),
+    indemnizacion: indemnizacionRedondeada,
+    indemnizacionAniosServicio: indemnizacionRedondeada,
     indemnizacionAvisoPrevio: Math.round(indemnizacionAvisoPrevio),
     vacacionesProporcionales: Math.round(vacacionesProporcionales),
     vacacionesPendientesAniosAnteriores: Math.round(vacacionesPendientesAniosAnteriores),
@@ -274,11 +280,16 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     horasExtraPendientes: Math.round(horasExtraPendientes),
     bonosPendientes: Math.round(bonosPendientes),
     multaArt168: Math.round(multaArt168),
+    recargoArt168Pct: recargoPct,
     diasTrabajados: diasTrabajadosUltimoMes,
     totalFiniquito: Math.round(totalFiniquito),
     desglose: {
       añosIndemnizacion: Math.min(añosTrabajados, INDEMNIZACION.tope_años),
-      diasVacaciones: Math.round((VACACIONES.dias_anuales / 12) * mesesTrabajados + diasVacacionesPendientes + diasAdicionalesConvenio),
+      diasVacaciones: Math.round(
+        (VACACIONES.dias_anuales / 12) * mesesTrabajados +
+          diasVacacionesPendientes +
+          diasAdicionalesConvenio,
+      ),
       diasVacacionesAniosAnteriores: vacacionesAniosAnteriores || 0,
       mesesGratificacion: mesesTrabajados,
       diasSueldoPendiente: diasTrabajadosUltimoMes,
@@ -287,7 +298,7 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
       diasTrabajados: diasTrabajadosUltimoMes,
       fechaInicio: fechaInicio || '',
       fechaTermino: fechaTermino || '',
-      antiguedadExacta: antiguedadExacta,
+      antiguedadExacta,
     },
   };
 }
@@ -297,24 +308,22 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
  */
 export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] {
   const results: CalculatorResult[] = [];
-  
-  // Resultado principal
+
   results.push({
     label: 'Total Finiquito',
     value: result.totalFiniquito,
     format: 'CLP',
     highlight: true,
   });
-  
-  // Desglose detallado
-  if (result.indemnizacionAniosServicio > 0) {
+
+  if (result.indemnizacion > 0) {
     results.push({
       label: `Indemnización por años de servicio (${result.desglose.añosIndemnizacion} años)`,
-      value: result.indemnizacionAniosServicio,
+      value: result.indemnizacion,
       format: 'CLP',
     });
   }
-  
+
   if (result.indemnizacionAvisoPrevio > 0) {
     results.push({
       label: 'Indemnización sustitutiva del aviso previo',
@@ -322,13 +331,13 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
       format: 'CLP',
     });
   }
-  
+
   results.push({
     label: `Vacaciones proporcionales (${result.desglose.diasVacaciones} días)`,
     value: result.vacacionesProporcionales,
     format: 'CLP',
   });
-  
+
   if (result.vacacionesPendientesAniosAnteriores > 0) {
     results.push({
       label: `Vacaciones pendientes años anteriores (${result.desglose.diasVacacionesAniosAnteriores} días)`,
@@ -336,7 +345,7 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
       format: 'CLP',
     });
   }
-  
+
   if (result.gratificacionProporcional > 0) {
     results.push({
       label: 'Gratificación proporcional',
@@ -344,7 +353,7 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
       format: 'CLP',
     });
   }
-  
+
   if (result.sueldoPendiente > 0) {
     results.push({
       label: `Sueldo pendiente (${result.desglose.diasSueldoPendiente} días)`,
@@ -352,7 +361,7 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
       format: 'CLP',
     });
   }
-  
+
   if (result.horasExtraPendientes > 0) {
     results.push({
       label: 'Horas extra pendientes',
@@ -360,7 +369,7 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
       format: 'CLP',
     });
   }
-  
+
   if (result.bonosPendientes > 0) {
     results.push({
       label: 'Bonos pendientes',
@@ -368,20 +377,20 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
       format: 'CLP',
     });
   }
-  
+
   if (result.multaArt168 > 0) {
     results.push({
-      label: 'Multa Art. 168 (no pago en plazo)',
+      label: `Recargo Art. 168 (+${result.recargoArt168Pct}% sobre indemnización)`,
       value: result.multaArt168,
       format: 'CLP',
     });
   }
-  
+
   results.push({
     label: 'Último Sueldo Bruto',
     value: result.ultimoSueldo,
     format: 'CLP',
   });
-  
+
   return results;
 }

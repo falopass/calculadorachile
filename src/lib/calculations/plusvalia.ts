@@ -1,7 +1,8 @@
 // ============================================
-// Cálculo de Plusvalía por Venta de Propiedad Chile 2026
+// Cálculo de Impuesto a la Ganancia por Venta de Inmueble Chile 2026
 // ============================================
 
+import { UF } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PlusvaliaInput {
@@ -9,6 +10,8 @@ export interface PlusvaliaInput {
   precioVenta: number;
   anosTenencia: number;
   mejoras?: number;
+  /** Vivienda habitacional (única o segunda vivienda con destino habitacional). */
+  esViviendaHabitual?: boolean;
 }
 
 export interface PlusvaliaResult {
@@ -18,39 +21,54 @@ export interface PlusvaliaResult {
   anosTenencia: number;
   gananciaBruta: number;
   gananciaNeta: number;
+  /** Tope de exención en UF para vivienda habitacional (8.000 UF). */
+  exencionUF: number;
+  /** Ganancia exenta aplicada en CLP. */
+  exencionAplicada: number;
+  /** Ganancia gravada (neta - exención). */
+  baseImponible: number;
   tasaPlusvalia: number;
   impuestoPlusvalia: number;
   exento: boolean;
+  esViviendaHabitual: boolean;
 }
 
 /**
- * Tramos de tasa de plusvalía según años de tenencia
- * La tasa disminuye con mayor tiempo de tenencia.
- * Base legal: Art. 17 N°8 LIR, modificado por Ley 21.210 (2020)
+ * Tope de exención por mayor valor en venta de bienes raíces:
+ * 8.000 UF acumulados durante toda la vida del contribuyente
+ * (vivienda habitacional, persona natural). Sobre el exceso aplica
+ * el impuesto único sustitutivo del 10% (o se incluye en Global
+ * Complementario, a elección del contribuyente).
+ *
+ * Base legal: Art. 17 N°8 letra b) LIR, Ley 21.210 (2020).
  */
-const TRAMOS_PLUSVALIA = [
-  { anosMax: 1, tasa: 30 },
-  { anosMax: 2, tasa: 25 },
-  { anosMax: 3, tasa: 20 },
-  { anosMax: 4, tasa: 15 },
-  { anosMax: 5, tasa: 10 },
-  { anosMax: 10, tasa: 5 },
-  { anosMax: Infinity, tasa: 0 },
-];
+const TOPE_EXENCION_UF = 8000;
 
 /**
- * Calcula el impuesto de plusvalía por venta de un inmueble
+ * Tasa del impuesto único sustitutivo del 10%.
+ * Aplica sobre el exceso del tope para vivienda habitacional, o
+ * sobre toda la ganancia neta para inmuebles no habitacionales /
+ * de inversionistas.
+ */
+const TASA_IMPUESTO_UNICO = 10;
+
+/**
+ * Calcula el impuesto a la ganancia por venta de un inmueble
  *
- * La plusvalía es la ganancia obtenida al vender una propiedad por encima
- * de su precio de compra. El impuesto aplica solo sobre la ganancia neta
- * (precio de venta - precio de compra - mejoras) y la tasa disminuye
- * según los años de tenencia: a más años, menor tasa.
- * Propiedades mantenidas más de 10 años están exentas.
+ * Bug histórico: la versión anterior aplicaba una tabla 30%→0%
+ * decreciente por años de tenencia que no existe en la ley
+ * chilena. La normativa real es:
  *
- * Base legal: Art. 17 N°8 LIR, Ley 21.210 (2020)
+ *   - Persona natural, vivienda habitacional: exento hasta 8.000 UF
+ *     de mayor valor acumulado en su vida; sobre el exceso, 10%
+ *     impuesto único sustitutivo (o IGC).
+ *   - Inmueble no habitacional / inversionista: 10% impuesto único
+ *     sobre la ganancia neta (o IGC, a elección).
  *
- * @param input - Datos para el cálculo de plusvalía
- * @returns Desglose completo del impuesto de plusvalía
+ * Base legal: Art. 17 N°8 letra b) LIR, Ley 21.210.
+ *
+ * @param input Datos del inmueble vendido.
+ * @returns Desglose del impuesto a la ganancia.
  */
 export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
   const {
@@ -58,37 +76,41 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     precioVenta,
     anosTenencia,
     mejoras = 0,
+    esViviendaHabitual = true,
   } = input;
 
   // Validar rangos
   const compra = Math.max(0, precioCompra);
   const venta = Math.max(0, precioVenta);
-  const anos = Math.max(0, Math.min(anosTenencia, 50));
+  const anos = Math.max(0, Math.min(anosTenencia, 100));
   const mejorasVal = Math.max(0, mejoras);
 
-  // Ganancia bruta: diferencia entre venta y compra
+  // Ganancia bruta y neta (descontando compra + mejoras)
   const gananciaBruta = venta - compra;
-
-  // Ganancia neta: bruta menos mejoras documentadas
   const gananciaNeta = gananciaBruta - mejorasVal;
 
-  // Solo aplica impuesto si hay ganancia neta positiva
   const hayGanancia = gananciaNeta > 0;
 
-  // Determinar tasa según años de tenencia
-  let tasaPlusvalia = 0;
-  for (const tramo of TRAMOS_PLUSVALIA) {
-    if (anos < tramo.anosMax) {
-      tasaPlusvalia = tramo.tasa;
-      break;
-    }
-  }
+  // Exención: solo aplica para vivienda habitacional, hasta 8.000 UF de mayor valor.
+  const exencionEnCLP = TOPE_EXENCION_UF * UF.valor;
+  const exencionAplicada = esViviendaHabitual && hayGanancia
+    ? Math.min(gananciaNeta, exencionEnCLP)
+    : 0;
 
-  // Exento si más de 10 años o no hay ganancia
-  const exento = anos >= 10 || !hayGanancia;
+  // Base imponible: ganancia gravada después de la exención.
+  const baseImponible = hayGanancia ? Math.max(0, gananciaNeta - exencionAplicada) : 0;
 
-  // Calcular impuesto
-  const impuestoPlusvalia = exento ? 0 : Math.round(gananciaNeta * (tasaPlusvalia / 100));
+  // Si la vivienda es habitacional y la ganancia neta cabe completa en la
+  // exención, el contribuyente queda exento.
+  const exento = !hayGanancia || baseImponible === 0;
+
+  // Tasa fija del impuesto único sustitutivo (10%).
+  const tasaPlusvalia = exento ? 0 : TASA_IMPUESTO_UNICO;
+
+  // Impuesto a pagar
+  const impuestoPlusvalia = exento
+    ? 0
+    : Math.round(baseImponible * (TASA_IMPUESTO_UNICO / 100));
 
   return {
     precioCompra: Math.round(compra),
@@ -97,9 +119,13 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     anosTenencia: anos,
     gananciaBruta: Math.round(gananciaBruta),
     gananciaNeta: Math.round(gananciaNeta),
+    exencionUF: TOPE_EXENCION_UF,
+    exencionAplicada: Math.round(exencionAplicada),
+    baseImponible: Math.round(baseImponible),
     tasaPlusvalia,
     impuestoPlusvalia,
     exento,
+    esViviendaHabitual,
   };
 }
 
@@ -110,7 +136,7 @@ export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] 
   const results: CalculatorResult[] = [];
 
   results.push({
-    label: 'Impuesto Plusvalía',
+    label: 'Impuesto a la Ganancia',
     value: result.impuestoPlusvalia,
     format: 'CLP',
     highlight: true,
@@ -122,6 +148,20 @@ export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] 
     format: 'CLP',
   });
 
+  if (result.esViviendaHabitual) {
+    results.push({
+      label: `Exención Vivienda Habitacional (${result.exencionUF} UF)`,
+      value: result.exencionAplicada,
+      format: 'CLP',
+    });
+  }
+
+  results.push({
+    label: 'Base Imponible',
+    value: result.baseImponible,
+    format: 'CLP',
+  });
+
   results.push({
     label: 'Ganancia Bruta',
     value: result.gananciaBruta,
@@ -129,7 +169,7 @@ export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] 
   });
 
   results.push({
-    label: 'Tasa Plusvalía',
+    label: 'Tasa Aplicada',
     value: result.tasaPlusvalia,
     format: 'percentage',
   });
@@ -148,7 +188,7 @@ export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] 
 
   if (result.mejoras > 0) {
     results.push({
-      label: 'Mejas Deducidas',
+      label: 'Mejoras Deducidas',
       value: result.mejoras,
       format: 'CLP',
     });

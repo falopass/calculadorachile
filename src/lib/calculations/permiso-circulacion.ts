@@ -2,16 +2,22 @@
 // Cálculo de Permiso de Circulación Chile 2026
 // ============================================
 
-import { UTM, INGRESO_MINIMO
-} from '@/lib/values/constants';
+import { UTM } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PermisoCirculacionInput {
+  /** Tasación fiscal SII del vehículo (no el valor de compra). */
   valorVehiculo: number;
   tipoVehiculo: 'automovil' | 'motocicleta' | 'carga' | 'bus' | 'taxi' | 'camion';
   antiguedadVehiculo: number;
   esZonaCarga: boolean;
+  /**
+   * Si el permiso se compra por primera vez en mitad del año, se prorratea
+   * según meses restantes (no es un recargo).
+   */
   esPrimeraVez: boolean;
+  /** Meses restantes del año si es primera inscripción (1-12). */
+  mesesRestantes?: number;
 }
 
 export interface PermisoCirculacionResult {
@@ -21,80 +27,132 @@ export interface PermisoCirculacionResult {
   factorAntiguedad: number;
   montoBase: number;
   descuentoAntiguedad: number;
-  recargoZonaCarga: number;
-  recargoPrimeraVez: number;
+  prorrateoPrimeraVez: number;
   permisoTotal: number;
   valorUTM: number;
+  tasaEfectiva: number;
 }
 
 /**
- * Calcula el permiso de circulación según tipo de vehículo
- * 
- * El permiso de circulación es un impuesto anual que deben pagar los personas propietarias de vehículos
- * para circular en vías públicas. El monto depende del tipo de vehículo y su valor.
- * 
- * Base legal: Ley de Tránsito y Municipalidades
- * 
- * @param input - Datos para el cálculo del permiso
- * @returns Desglose completo del permiso de circulación
+ * Tabla progresiva del permiso de circulación según tasación fiscal,
+ * expresada en UTM (aproximación a la Ley 17.235 / Tabla SII 2026).
+ *
+ * La tasa marginal aumenta con el valor del vehículo:
+ *   ≤ 60 UTM:    1,0%
+ *   60 - 120:    2,0%
+ *   120 - 250:   3,0%
+ *   250 - 400:   4,0%
+ *   > 400 UTM:   4,5%
  */
-export function calculatePermisoCirculacion(input: PermisoCirculacionInput): PermisoCirculacionResult {
-  const { valorVehiculo, tipoVehiculo, antiguedadVehiculo, esZonaCarga, esPrimeraVez } = input;
-  
-  const valorUTM = UTM.valor;
-  
-  // Factores según tipo de vehículo (en UTM)
-  const factoresPorTipo: Record<string, number> = {
-    automovil: 2.5, // 2.5 UTM por cada $1 millón de valor
-    motocicleta: 0.5, // 0.5 UTM por cada $1 millón de valor
-    carga: 1.0, // 1.0 UTM por cada $1 millón de valor
-    bus: 0.5, // 0.5 UTM por cada $1 millón de valor
-    taxi: 0.1, // 0.1 UTM por cada $1 millón de valor
-    camion: 1.0, // 1.0 UTM por cada $1 millón de valor
-  };
-  
-  // Obtener factor según tipo
-  const factorBase = factoresPorTipo[tipoVehiculo] || 2.5;
-  
-  // Calcular monto base en UTM
-  const montoBaseUTM = (valorVehiculo / 1000000) * factorBase;
-  const montoBase = montoBaseUTM * valorUTM;
-  
-  // Descuento por antigüedadad (hasta 50% para vehículos > 20 años)
-  let factorAntiguedad = 0;
-  if (antiguedadVehiculo >= 20) {
-    factorAntiguedad = 0.5; // 50% de descuento
-  }
-  
-  const descuentoAntiguedad = montoBase * factorAntiguedad;
-  
-  // Recargo zona de carga (aproximadamente 20%)
-  const recargoZonaCarga = esZonaCarga ? montoBase * 0.2 : 0;
-  
-  // Recargo primera vez (aproximadamente 50%)
-  const recargoPrimeraVez = esPrimeraVez ? montoBase * 0.5 : 0;
-  
-  // Permiso total
-  const permisoTotal = montoBase - descuentoAntiguedad + recargoZonaCarga + recargoPrimeraVez;
-  
-  return {
+const TRAMOS_PERMISO_UTM: Array<{ hasta: number; tasa: number }> = [
+  { hasta: 60, tasa: 0.01 },
+  { hasta: 120, tasa: 0.02 },
+  { hasta: 250, tasa: 0.03 },
+  { hasta: 400, tasa: 0.04 },
+  { hasta: Infinity, tasa: 0.045 },
+];
+
+const LABELS_TIPO: Record<string, string> = {
+  automovil: 'Automóvil',
+  motocicleta: 'Motocicleta',
+  carga: 'Carga',
+  bus: 'Bus',
+  taxi: 'Taxi',
+  camion: 'Camión',
+};
+
+/**
+ * Calcula el permiso de circulación.
+ *
+ * Bug histórico: la versión anterior usaba "factores fijos por tipo
+ * de vehículo" inventados (auto 2.5 UTM por millón, moto 0.5, etc.).
+ * Esos factores no existen en la ley.
+ *
+ * Fix: aplicar la tabla SII en escalones progresivos sobre la tasación
+ * fiscal expresada en UTM. Ajustes:
+ *   - Motos / taxis: 50% de la tarifa.
+ *   - Vehículos > 20 años: 50% de descuento (aproximación a la
+ *     depreciación de la tabla SII).
+ *   - "Primera vez" prorratea por meses restantes en vez de recargar.
+ *
+ * Base legal: Ley 17.235 / DFL 1 (Tránsito), Tabla anual SII.
+ */
+export function calculatePermisoCirculacion(
+  input: PermisoCirculacionInput,
+): PermisoCirculacionResult {
+  const {
     valorVehiculo,
     tipoVehiculo,
+    antiguedadVehiculo,
+    esZonaCarga,
+    esPrimeraVez,
+    mesesRestantes = 12,
+  } = input;
+
+  void esZonaCarga;
+
+  const valorUTM = UTM.valor;
+  const tasacion = Math.max(0, valorVehiculo);
+
+  // Tasación en UTM
+  const tasacionUTM = valorUTM > 0 ? tasacion / valorUTM : 0;
+
+  // Calcular permiso aplicando la tabla por escalones (impuesto progresivo).
+  let permisoUTM = 0;
+  let restante = tasacionUTM;
+  let limiteAnterior = 0;
+  for (const tramo of TRAMOS_PERMISO_UTM) {
+    const ancho = Math.min(restante, tramo.hasta - limiteAnterior);
+    if (ancho <= 0) break;
+    permisoUTM += ancho * tramo.tasa;
+    restante -= ancho;
+    limiteAnterior = tramo.hasta;
+  }
+
+  let montoBase = permisoUTM * valorUTM;
+
+  // Motos y taxis: tarifa reducida (50% de la tabla general).
+  if (tipoVehiculo === 'motocicleta' || tipoVehiculo === 'taxi') {
+    montoBase *= 0.5;
+  }
+
+  // Descuento por antigüedad (vehículos > 20 años: 50%).
+  let factorAntiguedad = 0;
+  if (antiguedadVehiculo >= 20) factorAntiguedad = 0.5;
+  const descuentoAntiguedad = montoBase * factorAntiguedad;
+
+  // Prorrateo si es primera inscripción del año.
+  let prorrateoPrimeraVez = 0;
+  let permisoTotal = montoBase - descuentoAntiguedad;
+  if (esPrimeraVez && mesesRestantes > 0 && mesesRestantes < 12) {
+    const factorProrrateo = mesesRestantes / 12;
+    const permisoProrrateado = permisoTotal * factorProrrateo;
+    prorrateoPrimeraVez = permisoTotal - permisoProrrateado;
+    permisoTotal = permisoProrrateado;
+  }
+
+  const tasaEfectiva = tasacion > 0 ? (permisoTotal / tasacion) * 100 : 0;
+
+  return {
+    valorVehiculo: Math.round(tasacion),
+    tipoVehiculo: LABELS_TIPO[tipoVehiculo] || tipoVehiculo,
     antiguedadVehiculo,
     factorAntiguedad,
     montoBase: Math.round(montoBase),
     descuentoAntiguedad: Math.round(descuentoAntiguedad),
-    recargoZonaCarga: Math.round(recargoZonaCarga),
-    recargoPrimeraVez: Math.round(recargoPrimeraVez),
+    prorrateoPrimeraVez: Math.round(prorrateoPrimeraVez),
     permisoTotal: Math.round(permisoTotal),
     valorUTM,
+    tasaEfectiva: Math.round(tasaEfectiva * 100) / 100,
   };
 }
 
 /**
  * Convierte el resultado a formato de CalculatorResult[]
  */
-export function permisoCirculacionToResults(result: PermisoCirculacionResult): CalculatorResult[] {
+export function permisoCirculacionToResults(
+  result: PermisoCirculacionResult,
+): CalculatorResult[] {
   return [
     {
       label: 'Permiso Total',
@@ -103,7 +161,7 @@ export function permisoCirculacionToResults(result: PermisoCirculacionResult): C
       highlight: true,
     },
     {
-      label: 'Monto Base',
+      label: 'Monto Base (tabla SII)',
       value: result.montoBase,
       format: 'CLP',
     },
@@ -113,17 +171,12 @@ export function permisoCirculacionToResults(result: PermisoCirculacionResult): C
       format: 'CLP',
     },
     {
-      label: 'Recargo Zona Carga',
-      value: result.recargoZonaCarga,
+      label: 'Prorrateo Primera Vez',
+      value: result.prorrateoPrimeraVez,
       format: 'CLP',
     },
     {
-      label: 'Recargo Primera Vez',
-      value: result.recargoPrimeraVez,
-      format: 'CLP',
-    },
-    {
-      label: 'Valor Vehículo',
+      label: 'Tasación Fiscal',
       value: result.valorVehiculo,
       format: 'CLP',
     },
@@ -131,6 +184,11 @@ export function permisoCirculacionToResults(result: PermisoCirculacionResult): C
       label: 'Antigüedad',
       value: result.antiguedadVehiculo,
       format: 'number',
+    },
+    {
+      label: 'Tasa Efectiva',
+      value: result.tasaEfectiva,
+      format: 'percentage',
     },
   ];
 }

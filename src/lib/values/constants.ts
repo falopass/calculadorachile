@@ -203,14 +203,20 @@ export const TARIFA_BT1 = {
 };
 
 // ============================================
-// Bono Bodas de Oro (Ley 21.674)
+// Bono Bodas de Oro (Ley 20.506)
+// Beneficio único entregado a parejas que cumplen 50 años de
+// matrimonio. Pago fijo por cada cónyuge, reajustado por el IPS.
 // ============================================
 export const BONO_BODAS_ORO = {
-  montoCLP: 150000,
+  /** Monto por cada cónyuge (reajuste IPS 2026, aprox.). */
+  montoPorConyugeCLP: 372135,
+  /** Monto total para el matrimonio (≈ 2 × monto por cónyuge). */
+  montoTotalCLP: 744270,
   requisitos: [
-    'Tener 65 años o más',
-    'Estar casado o en unión civil',
-    'Pertenecer al 80% de menores ingresos',
+    'Cumplir 50 años de matrimonio',
+    'Ambos cónyuges vivos al momento del pago',
+    'Pertenecer al 80% más vulnerable según RSH',
+    'Residir en Chile',
   ],
 };
 

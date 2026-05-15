@@ -1,94 +1,86 @@
 // ============================================
 // Cálculo de Pensión Garantizada Universal (PGU) Chile 2026
-// Beneficio previsional del Estado para pensionados con bajas pensiones
+// Beneficio no contributivo del Estado para pensionados (Ley 21.419)
 // ============================================
 
-import { UF, PGU_2026 } from '@/lib/values/constants';
+import { PGU_2026 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PGUInput {
   pensionActual: number;
+  /** Años cotizados (informativo, no afecta la PGU desde Ley 21.419). */
   anosCotizados: number;
+  /** Sexo del beneficiario (informativo, la PGU no distingue por sexo). */
   esHombre: boolean;
+  /** Edad del beneficiario para elegir tramo de PGU (default 70). */
+  edad?: number;
 }
 
 export interface PGUResult {
   pensionActual: number;
   anosCotizados: number;
   pguBase: number;
-  factorAniosCotizados: number;
   pguMensual: number;
   pensionTotal: number;
-}
-
-/**
- * Factor máximo por años de cotización (a más años, mayor PGU).
- * Escala desde 0.5 (pocos años) hasta 1.0 (30+ años).
- */
-function calcularFactorAnios(anosCotizados: number): number {
-  const anos = Math.max(0, anosCotizados);
-  if (anos <= 10) return 0.5;
-  if (anos <= 20) return 0.5 + (anos - 10) * 0.03;
-  if (anos <= 30) return 0.8 + (anos - 20) * 0.02;
-  return 1.0;
+  edad: number;
+  esContributiva: false;
 }
 
 /**
  * Calcula la Pensión Garantizada Universal (PGU).
- * El monto depende de los años de cotización y se reduce para pensiones altas.
- * La ley establece tramos con diferentes reglas:
- * - Hasta $789.139: PGU completa
- * - Entre $789.139 y $1.252.602: PGU parcial (variable)
- * - Sobre $1.252.602: No aplica PGU
- * Ley 21.396, D.L. 3500.
+ *
+ * Bug histórico: la versión anterior aplicaba un "factor por años
+ * cotizados" (0.5 → 1.0) que no existe en la ley. La PGU es un
+ * beneficio NO CONTRIBUTIVO (Ley 21.419), por lo que no requiere años
+ * de cotización ni los reajusta. Adicionalmente el parámetro
+ * `esHombre` no se usa porque la PGU no distingue por sexo.
+ *
+ * Reglas correctas (Ley 21.419):
+ *   - 65 a 81 años: monto base $231.732 (PGU 2026).
+ *   - 82+: monto base $250.275 (PGU 2026).
+ *   - Pensión base ≤ $789.139: PGU completa.
+ *   - Entre $789.139 y $1.252.602: PGU se reduce linealmente hasta 0.
+ *   - Sobre $1.252.602: no recibe PGU.
+ *
+ * Base legal: Ley 21.419.
  */
 export function calculatePGU(input: PGUInput): PGUResult {
-  const { pensionActual, anosCotizados, esHombre } = input;
+  const { pensionActual, anosCotizados, edad = 70 } = input;
 
-  // Validar rangos
   const pension = Math.max(0, pensionActual);
   const anos = Math.max(0, Math.round(anosCotizados));
+  const edadVal = Math.max(0, Math.round(edad));
 
-  // Factor según años de cotización
-  const factorAniosCotizados = Number(calcularFactorAnios(anos).toFixed(2));
+  // PGU base según edad (sin factor por años cotizados).
+  const pguBase =
+    edadVal >= 82
+      ? PGU_2026.montoMaximo82MasCLP
+      : PGU_2026.montoMaximo65a81CLP;
 
-  // PGU base ajustada por años de cotización
-  // Usar el monto base para 65-81 años como referencia (el más común)
-  const pguBase = Math.round(PGU_2026.montoMaximo65a81CLP * factorAniosCotizados);
-
-  // Determinar monto de PGU según tramos de ingreso
+  // Reducción lineal entre los dos tramos de pensión base.
   let pguMensual: number;
-  
   if (pension <= PGU_2026.tramos[0].ingresoMaximoCLP) {
-    // Pensión base hasta $789.139: PGU completa
     pguMensual = pguBase;
   } else if (pension <= PGU_2026.tramos[1].ingresoMaximoCLP) {
-    // Pensión entre $789.139 y $1.252.602: PGU parcial (variable)
-    // La PGU se reduce proporcionalmente en este tramo
     const tramoInferior = PGU_2026.tramos[0].ingresoMaximoCLP;
     const tramoSuperior = PGU_2026.tramos[1].ingresoMaximoCLP;
-    
-    // Calcular reducción proporcional
     const posicionEnTramo = (pension - tramoInferior) / (tramoSuperior - tramoInferior);
     pguMensual = Math.round(pguBase * (1 - posicionEnTramo));
   } else {
-    // Pensión sobre $1.252.602: No aplica PGU
     pguMensual = 0;
   }
 
-  // Asegurar PGU no negativa
   pguMensual = Math.max(0, pguMensual);
-
-  // Pensión total = pensión actual + PGU
   const pensionTotal = pension + pguMensual;
 
   return {
     pensionActual: pension,
     anosCotizados: anos,
     pguBase,
-    factorAniosCotizados,
     pguMensual,
     pensionTotal,
+    edad: edadVal,
+    esContributiva: false,
   };
 }
 
@@ -100,8 +92,7 @@ export function pguToResults(result: PGUResult): CalculatorResult[] {
     { label: 'PGU Mensual', value: result.pguMensual, format: 'CLP', highlight: true },
     { label: 'Pensión Total', value: result.pensionTotal, format: 'CLP', highlight: true },
     { label: 'Pensión Actual', value: result.pensionActual, format: 'CLP' },
-    { label: 'PGU Base', value: result.pguBase, format: 'CLP' },
-    { label: 'Años Cotizados', value: result.anosCotizados, format: 'number' },
-    { label: 'Factor por Años', value: result.factorAniosCotizados, format: 'number' },
+    { label: 'PGU Base (según edad)', value: result.pguBase, format: 'CLP' },
+    { label: 'Edad', value: result.edad, format: 'number' },
   ];
 }

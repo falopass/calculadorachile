@@ -7,9 +7,21 @@ import { SUBSIDIO_AGUA } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface SubsidioAguaInput {
+  /** Consumo del período en m³. */
   consumoM3: number;
+  /** Personas en el hogar (informativo, no altera el cálculo). */
   numeroPersonas: number;
-  tramo: 'tramo1' | 'tramo2';
+  /**
+   * Tramo asignado por el Registro Social de Hogares:
+   *   - tramo1: 60% sobre el valor de la cuenta hasta 15 m³
+   *   - tramo2: 40% sobre el valor de la cuenta hasta 15 m³
+   *   - tramo3: 25% sobre el valor de la cuenta hasta 15 m³
+   */
+  tramo: 'tramo1' | 'tramo2' | 'tramo3';
+  /** Tarifa total de la cuenta sin subsidio (CLP). Si se entrega, se usa para el cálculo real. */
+  montoCuenta?: number;
+  /** Tarifa por m³ (CLP/m³) si se desea estimar la cuenta a partir del consumo. */
+  tarifaPorM3?: number;
 }
 
 export interface SubsidioAguaResult {
@@ -21,51 +33,58 @@ export interface SubsidioAguaResult {
   montoSinSubsidio: number;
 }
 
+/** Subsidio cubre hasta 15 m³ de consumo (DS 195/MOP). */
+const TOPE_M3 = 15;
+
+const SUBSIDIO_POR_TRAMO: Record<'tramo1' | 'tramo2' | 'tramo3', number> = {
+  tramo1: 0.6,
+  tramo2: 0.4,
+  tramo3: 0.25,
+};
+
 /**
- * Calcula el subsidio de agua potable según consumo y tramo.
- * El subsidio se aplica según los tramos definidos en el Registro Social de Hogares.
- * D.S. N° 235 del MOP, Ley N° 21.064.
+ * Calcula el subsidio de agua potable.
+ *
+ * Bug histórico: la versión anterior multiplicaba `consumo × $14.000 ×
+ * porcentaje`, lo que asume que cada m³ cuesta exactamente $14.000 (algo
+ * que NO es así — la tarifa la fija cada sanitaria). El subsidio real
+ * cubre un porcentaje del valor de la cuenta hasta 15 m³.
+ *
+ * Fix: aceptar el monto real de la cuenta (preferido) o estimar con una
+ * tarifa por m³. El subsidio se calcula como:
+ *   subsidio = (cuenta × min(consumo, 15) / consumo) × %tramo
+ *
+ * Base legal: Ley 18.778, DS 195/MOP.
  */
 export function calculateSubsidioAgua(input: SubsidioAguaInput): SubsidioAguaResult {
-  const {
-    consumoM3,
-    numeroPersonas,
-    tramo,
-  } = input;
+  const { consumoM3, tramo, montoCuenta, tarifaPorM3 } = input;
 
-  // Validar rangos
   const consumo = Math.max(0, consumoM3);
-  const personas = Math.max(1, Math.round(numeroPersonas));
+  const subsidioPct = (SUBSIDIO_POR_TRAMO[tramo] ?? 0) * 100;
 
-  // Determinar porcentaje de subsidio según tramo
-  let subsidioPct = 0;
-  if (tramo === 'tramo1') {
-    subsidioPct = SUBSIDIO_AGUA.tramos[0].subsidio * 100; // 60%
-  } else if (tramo === 'tramo2') {
-    subsidioPct = SUBSIDIO_AGUA.tramos[1].subsidio * 100; // 40%
-  }
+  // Tarifa de referencia: si no entrega cuenta ni tarifa, se usa el
+  // promedio nacional aproximado del MOP (~$1.300/m³ en 2026).
+  const tarifaRef = tarifaPorM3 && tarifaPorM3 > 0 ? tarifaPorM3 : 1300;
 
-  // Consumo subsidiado: se aplica subsidio según los tramos de consumo
-  let consumoSubsidiado = 0;
-  if (consumo <= SUBSIDIO_AGUA.tramos[0].consumoMaximoM3) {
-    // Todo el consumo está en el primer tramo
-    consumoSubsidiado = consumo;
-  } else if (consumo <= SUBSIDIO_AGUA.tramos[1].consumoMaximoM3) {
-    // Parte del consumo está en el primer tramo y parte en el segundo
-    consumoSubsidiado = SUBSIDIO_AGUA.tramos[0].consumoMaximoM3;
-  } else {
-    // Todo el consumo superior al segundo tramo no recibe subsidio
-    consumoSubsidiado = SUBSIDIO_AGUA.tramos[1].consumoMaximoM3;
-  }
+  // Monto real (o estimado) de la cuenta sin subsidio
+  const montoSinSubsidio =
+    montoCuenta && montoCuenta > 0
+      ? Math.round(montoCuenta)
+      : Math.round(consumo * tarifaRef);
 
-  // Calcular monto del subsidio
-  const montoSubsidio = Math.round(consumoSubsidiado * SUBSIDIO_AGUA.montoMaximoCLP * (subsidioPct / 100));
+  // Consumo subsidiado: hasta 15 m³ (resto se paga sin subsidio).
+  const consumoSubsidiado = Math.min(consumo, TOPE_M3);
 
-  // Calcular monto sin subsidio (monto total)
-  const montoSinSubsidio = Math.round(consumo * SUBSIDIO_AGUA.montoMaximoCLP);
+  // Proporción de la cuenta que corresponde al consumo subsidiado.
+  const proporcionSubsidiada = consumo > 0 ? consumoSubsidiado / consumo : 0;
+  const cuentaSobreSubsidio = montoSinSubsidio * proporcionSubsidiada;
 
-  // Calcular monto a pagar
+  const montoSubsidio = Math.round(cuentaSobreSubsidio * (subsidioPct / 100));
   const montoPagar = Math.max(0, montoSinSubsidio - montoSubsidio);
+
+  // SUBSIDIO_AGUA es referenciado por compatibilidad con la UI legacy.
+  // No usamos `montoMaximoCLP` para evitar el bug histórico.
+  void SUBSIDIO_AGUA;
 
   return {
     consumoM3: consumo,
@@ -86,7 +105,7 @@ export function subsidioAguaToResults(result: SubsidioAguaResult): CalculatorRes
     { label: 'Monto Subsidio', value: result.montoSubsidio, format: 'CLP' },
     { label: 'Monto Sin Subsidio', value: result.montoSinSubsidio, format: 'CLP' },
     { label: 'Subsidio', value: result.subsidioPct, format: 'percentage' },
-    { label: 'Consumo Subsidiado', value: result.consumoSubsidiado, format: 'number' },
+    { label: 'Consumo Subsidiado (hasta 15 m³)', value: result.consumoSubsidiado, format: 'number' },
     { label: 'Consumo m³', value: result.consumoM3, format: 'number' },
   ];
 }

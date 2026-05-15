@@ -35,11 +35,13 @@ const TASAS_COMUNALES: Record<string, number> = {
 };
 
 /**
- * Límites de patente en UTM (semestral)
- * Base legal: DL 3063/1979 Ley de Rentas Municipales
+ * Límites de patente en UTM (anuales).
+ * Base legal: DL 3063/1979 Art. 24.
+ *  - Mínimo: 1 UTM anual
+ *  - Máximo: 8.000 UTM anuales (no 8 — bug histórico)
  */
-const PATENTE_MINIMA_UTM = 1;   // 1 UTM semestral
-const PATENTE_MAXIMA_UTM = 8;   // 8 UTM semestral
+const PATENTE_MINIMA_ANUAL_UTM = 1;
+const PATENTE_MAXIMA_ANUAL_UTM = 8000;
 
 /**
  * Etiquetas legibles para actividades y comunas
@@ -83,33 +85,32 @@ export function calculatePatenteComercial(input: PatenteComercialInput): Patente
   // Obtener tasa comunal
   const tasaComunal = TASAS_COMUNALES[comuna];
 
-  // Calcular patente anual base (tasa del capital invertido)
+  // Patente anual base (tasa del capital propio del contribuyente)
   const patenteAnualBase = capital * (tasaComunal / 100);
 
-  // Calcular límites semestrales en CLP
-  const patenteMinimaSemestral = Math.round(PATENTE_MINIMA_UTM * valorUTM);
-  const patenteMaximaSemestral = Math.round(PATENTE_MAXIMA_UTM * valorUTM);
+  // Topes ANUALES en CLP (DL 3063 Art. 24)
+  const patenteMinimaAnual = Math.round(PATENTE_MINIMA_ANUAL_UTM * valorUTM);
+  const patenteMaximaAnual = Math.round(PATENTE_MAXIMA_ANUAL_UTM * valorUTM);
 
-  // Calcular patente semestral base
-  const patenteSemestralBase = Math.round(patenteAnualBase / 2);
-
-  // Aplicar topes
-  let patenteSemestral: number;
+  // Aplicar topes a nivel anual
+  let patenteAnual: number;
   let aplicaTope: 'minimo' | 'normal' | 'maximo';
 
-  if (patenteSemestralBase < patenteMinimaSemestral) {
-    patenteSemestral = patenteMinimaSemestral;
+  if (patenteAnualBase < patenteMinimaAnual) {
+    patenteAnual = patenteMinimaAnual;
     aplicaTope = 'minimo';
-  } else if (patenteSemestralBase > patenteMaximaSemestral) {
-    patenteSemestral = patenteMaximaSemestral;
+  } else if (patenteAnualBase > patenteMaximaAnual) {
+    patenteAnual = patenteMaximaAnual;
     aplicaTope = 'maximo';
   } else {
-    patenteSemestral = patenteSemestralBase;
+    patenteAnual = Math.round(patenteAnualBase);
     aplicaTope = 'normal';
   }
 
-  // Patente anual final
-  const patenteAnual = patenteSemestral * 2;
+  // La patente se paga semestralmente (enero y julio)
+  const patenteSemestral = Math.round(patenteAnual / 2);
+  const patenteMinimaSemestral = Math.round(patenteMinimaAnual / 2);
+  const patenteMaximaSemestral = Math.round(patenteMaximaAnual / 2);
 
   return {
     capitalInvertido: Math.round(capital),

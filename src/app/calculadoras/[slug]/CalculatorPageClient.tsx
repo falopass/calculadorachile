@@ -222,6 +222,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
       precioVenta: inputs.precioVenta as number,
       anosTenencia: inputs.anosTenencia as number,
       mejoras: inputs.mejoras as number | undefined,
+      esViviendaHabitual: inputs.esViviendaHabitual as boolean | undefined,
     });
     return plusvaliaToResults(result);
   },

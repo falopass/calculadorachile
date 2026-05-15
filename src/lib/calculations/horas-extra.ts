@@ -2,21 +2,31 @@
 // Cálculo de Horas Extra Chile
 // ============================================
 
-import { HORAS_EXTRA, INGRESO_MINIMO } from '@/lib/values/constants';
+import { HORAS_EXTRA } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface HorasExtraInput {
   sueldoBruto: number;
   horasExtra: number;
   esDomingoFestivo?: boolean;
-  jornadaSemanal?: 40 | 44 | 45; // Jornada semanal personalizable
-  recargoPersonalizado?: number; // Recargo personalizable (default 50%)
-  sueldoVariable?: boolean; // Si se usa sueldo variable
-  sueldoPromedio3Meses?: number; // Sueldo promedio últimos 3 meses
-  horasExtraNocturnas?: number; // Horas extra nocturnas
-  horasExtraFestivos?: number; // Horas extra en días festivos
-  calcularImpactoCotizaciones?: boolean; // Calcular impacto en cotizaciones previsionales
-  mostrarTopeLegal?: boolean; // Mostrar información sobre topes legales
+  /**
+   * Jornada semanal vigente:
+   *  - 44h desde abril 2024 (Ley 21.561, "40 horas")
+   *  - 42h en abril 2026
+   *  - 40h en abril 2028
+   * Default: 44h (jornada vigente en 2026 al cierre de Q1).
+   */
+  jornadaSemanal?: 40 | 42 | 44 | 45;
+  recargoPersonalizado?: number;
+  sueldoVariable?: boolean;
+  sueldoPromedio3Meses?: number;
+  /**
+   * Horas en festivos. La ley NO establece recargo "nocturno" automático
+   * (Art. 32 CdT), por lo que se eliminó ese campo.
+   */
+  horasExtraFestivos?: number;
+  calcularImpactoCotizaciones?: boolean;
+  mostrarTopeLegal?: boolean;
 }
 
 export interface HorasExtraResult {
@@ -27,7 +37,6 @@ export interface HorasExtraResult {
   recargo: number;
   totalHorasExtra: number;
   totalAPagar: number;
-  horasNocturnas?: number;
   horasFestivas?: number;
   impactoCotizaciones?: {
     afp: number;
@@ -43,93 +52,76 @@ export interface HorasExtraResult {
 }
 
 /**
- * Calcula el valor de una hora de trabajo
- */
-function calcularValorHora(sueldoBruto: number): number {
-  // Jornada legal: 45 horas semanales
-  // Promedio mensual: 45 * 52 / 12 = 195 horas mensuales
-  return sueldoBruto / 195;
-}
-
-/**
- * Calcula las horas extra
+ * Calcula el pago de horas extra (Art. 32 CdT).
+ *
+ * Recargo legal único: 50% sobre el valor de la hora ordinaria. Para
+ * domingos y festivos trabajados, el recargo aplica sobre la hora extra
+ * cuando esa hora califica como extraordinaria; el descanso compensatorio
+ * se gestiona por separado (Art. 38).
+ *
+ * Bug histórico:
+ *   - Default `jornadaSemanal = 45` cuando la jornada vigente desde
+ *     abril 2024 es 44 horas (Ley 21.561). Ahora default 44.
+ *   - "Recargo nocturno 25%" inventado: en Chile no existe recargo
+ *     nocturno automático (depende de convenio). Se eliminó el campo.
  */
 export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
   const {
     sueldoBruto,
     horasExtra,
     esDomingoFestivo = false,
-    jornadaSemanal = 45,
+    jornadaSemanal = 44,
     recargoPersonalizado,
     sueldoVariable = false,
     sueldoPromedio3Meses = 0,
-    horasExtraNocturnas = 0,
     horasExtraFestivos = 0,
     calcularImpactoCotizaciones = false,
-    mostrarTopeLegal = false
+    mostrarTopeLegal = false,
   } = input;
-  
-  // Usar sueldo promedio si está disponible y se indica que es variable
-  const sueldoBase = sueldoVariable && sueldoPromedio3Meses > 0 ? sueldoPromedio3Meses : sueldoBruto;
-  
-  // Calcular valor hora normal basado en la jornada semanal
-  // Jornada semanal * semanas promedio por mes (4.33)
+
+  const sueldoBase =
+    sueldoVariable && sueldoPromedio3Meses > 0 ? sueldoPromedio3Meses : sueldoBruto;
+
+  // Valor hora ordinaria: jornada × 4,33 semanas/mes.
   const horasMensuales = jornadaSemanal * 4.33;
   const valorHoraNormal = sueldoBase / horasMensuales;
-  
-  // Recargo según día o personalizado
-  const recargoPorcentaje = recargoPersonalizado !== undefined
-    ? recargoPersonalizado
-    : (esDomingoFestivo
-      ? HORAS_EXTRA.recargo_domingo
-      : HORAS_EXTRA.recargo_normal);
-  
-  // Valor hora con recargo
+
+  const recargoPorcentaje =
+    recargoPersonalizado !== undefined
+      ? recargoPersonalizado
+      : esDomingoFestivo
+        ? HORAS_EXTRA.recargo_domingo
+        : HORAS_EXTRA.recargo_normal;
+
   const valorHoraExtra = valorHoraNormal * (1 + recargoPorcentaje / 100);
-  
-  // Total a pagar por horas extra regulares
   const totalHorasExtra = valorHoraExtra * horasExtra;
-  
-  // Total a pagar por horas extra nocturnas (si aplica)
-  let totalHorasExtraNocturnas = 0;
-  if (horasExtraNocturnas > 0) {
-    // Recargo adicional para horas nocturnas (25% adicional según ley)
-    const valorHoraExtraNocturna = valorHoraNormal * (1 + (recargoPorcentaje + 25) / 100);
-    totalHorasExtraNocturnas = valorHoraExtraNocturna * horasExtraNocturnas;
-  }
-  
-  // Total a pagar por horas extra en festivos (si aplica)
+
+  // Horas extra en festivos (Art. 38): 100% de recargo legal.
   let totalHorasExtraFestivos = 0;
   if (horasExtraFestivos > 0) {
-    // Recargo del 100% para festivos
-    const valorHoraExtraFestivo = valorHoraNormal * (1 + 100 / 100); // 100% de recargo
+    const valorHoraExtraFestivo = valorHoraNormal * 2; // +100%
     totalHorasExtraFestivos = valorHoraExtraFestivo * horasExtraFestivos;
   }
-  
-  // Total de todas las horas extra
-  const totalTodasHorasExtra = totalHorasExtra + totalHorasExtraNocturnas + totalHorasExtraFestivos;
-  
-  // Total incluyendo sueldo base
+
+  const totalTodasHorasExtra = totalHorasExtra + totalHorasExtraFestivos;
   const totalAPagar = sueldoBase + totalTodasHorasExtra;
-  
-  // Calcular impacto en cotizaciones si aplica
-  let impactoCotizaciones = undefined;
+
+  let impactoCotizaciones: HorasExtraResult['impactoCotizaciones'];
   if (calcularImpactoCotizaciones) {
-    // Las horas extra también están afectas a cotizaciones previsionales
     impactoCotizaciones = {
-      afp: totalTodasHorasExtra * 0.10, // 10% AFP
-      salud: totalTodasHorasExtra * 0.07, // 7% salud
-      seguroCesantia: totalTodasHorasExtra * 0.006, // 0.6% seguro de cesantía
-      total: totalTodasHorasExtra * (0.10 + 0.07 + 0.006) // Total cotizaciones
+      afp: totalTodasHorasExtra * 0.10,
+      salud: totalTodasHorasExtra * 0.07,
+      seguroCesantia: totalTodasHorasExtra * 0.006,
+      total: totalTodasHorasExtra * (0.10 + 0.07 + 0.006),
     };
   }
-  
-  // Información sobre topes legales si se solicita
-  const topeLegal = mostrarTopeLegal ? {
-    horasDiarias: 2, // Máximo 2 horas extra diarias
-    horasSemanal: 10 // Máximo 10 horas extra semanales
-  } : undefined;
-  
+
+  // Tope legal Art. 31 CdT: máximo 2 horas extra por día. La cifra
+  // "10 horas semanales" no está en la ley; se deriva de 2h × 5 días.
+  const topeLegal = mostrarTopeLegal
+    ? { horasDiarias: 2, horasSemanal: 2 * 6 }
+    : undefined;
+
   return {
     sueldoBruto: sueldoBase,
     horasExtra,
@@ -138,11 +130,10 @@ export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
     recargo: recargoPorcentaje,
     totalHorasExtra: Math.round(totalTodasHorasExtra),
     totalAPagar: Math.round(totalAPagar),
-    horasNocturnas: horasExtraNocturnas > 0 ? horasExtraNocturnas : undefined,
     horasFestivas: horasExtraFestivos > 0 ? horasExtraFestivos : undefined,
-    impactoCotizaciones: calcularImpactoCotizaciones ? impactoCotizaciones : undefined,
-    topeLegal: mostrarTopeLegal ? topeLegal : undefined,
-    jornadaSemanal
+    impactoCotizaciones,
+    topeLegal,
+    jornadaSemanal,
   };
 }
 
@@ -151,48 +142,30 @@ export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
  */
 export function horasExtraToResults(result: HorasExtraResult): CalculatorResult[] {
   const results: CalculatorResult[] = [];
-  
+
   results.push({
     label: 'Total a Pagar',
     value: result.totalAPagar,
     format: 'CLP',
     highlight: true,
   });
-  
-  results.push({
-    label: 'Sueldo Bruto',
-    value: result.sueldoBruto,
-    format: 'CLP',
-  });
-  
+
+  results.push({ label: 'Sueldo Bruto', value: result.sueldoBruto, format: 'CLP' });
+
   results.push({
     label: `Pago por ${result.horasExtra} hrs extra`,
     value: result.totalHorasExtra,
     format: 'CLP',
   });
-  
-  results.push({
-    label: 'Valor hora normal',
-    value: result.valorHoraNormal,
-    format: 'CLP',
-  });
-  
+
+  results.push({ label: 'Valor hora normal', value: result.valorHoraNormal, format: 'CLP' });
+
   results.push({
     label: `Valor hora extra (+${result.recargo}%)`,
     value: result.valorHoraExtra,
     format: 'CLP',
   });
-  
-  // Incluir horas nocturnas si aplica
-  if (result.horasNocturnas !== undefined && result.horasNocturnas > 0) {
-    results.push({
-      label: `Horas extra nocturnas (${result.horasNocturnas})`,
-      value: result.horasNocturnas,
-      format: 'number',
-    });
-  }
-  
-  // Incluir horas festivas si aplica
+
   if (result.horasFestivas !== undefined && result.horasFestivas > 0) {
     results.push({
       label: `Horas extra festivas (${result.horasFestivas})`,
@@ -200,54 +173,48 @@ export function horasExtraToResults(result: HorasExtraResult): CalculatorResult[
       format: 'number',
     });
   }
-  
-  // Incluir impacto en cotizaciones si aplica
+
   if (result.impactoCotizaciones) {
     results.push({
       label: 'Impacto en Cotizaciones Prev.',
       value: result.impactoCotizaciones.total,
       format: 'CLP',
     });
-    
     results.push({
       label: 'Cotización AFP (10%)',
       value: result.impactoCotizaciones.afp,
       format: 'CLP',
     });
-    
     results.push({
       label: 'Cotización Salud (7%)',
       value: result.impactoCotizaciones.salud,
       format: 'CLP',
     });
-    
     results.push({
       label: 'Seguro Cesantía (0.6%)',
       value: result.impactoCotizaciones.seguroCesantia,
       format: 'CLP',
     });
   }
-  
-  // Incluir información de topes legales si aplica
+
   if (result.topeLegal) {
     results.push({
       label: 'Tope Legal Horas Extra Diarias',
       value: result.topeLegal.horasDiarias,
       format: 'number',
     });
-    
     results.push({
-      label: 'Tope Legal Horas Extra Semanales',
+      label: 'Tope Legal Horas Extra Semanales (estimado)',
       value: result.topeLegal.horasSemanal,
       format: 'number',
     });
   }
-  
+
   results.push({
     label: `Jornada Semanal (hrs)`,
     value: result.jornadaSemanal,
     format: 'number',
   });
-  
+
   return results;
 }

@@ -1,14 +1,19 @@
 // ============================================
 // Conversor de Divisas (USD/EUR a CLP) Chile 2026
-// Valores aproximados de referencia, no oficiales
 // ============================================
 
+import { DOLAR } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface ConversorDivisasInput {
   monto: number;
   moneda: 'usd' | 'eur';
   direccion: 'a_clp' | 'desde_clp';
+  /**
+   * Tasa de cambio personalizada. Si se entrega, anula los valores
+   * por defecto del snapshot.
+   */
+  tasaPersonalizada?: number;
 }
 
 export interface ConversorDivisasResult {
@@ -17,17 +22,20 @@ export interface ConversorDivisasResult {
   tasaCambio: number;
   resultado: number;
   direccion: string;
+  /**
+   * Indica si el formato del resultado es CLP (true) o moneda
+   * extranjera (false). El consumidor de UI lo usa para formatear.
+   */
+  resultadoEnCLP: boolean;
 }
 
 /**
- * Tasas de cambio aproximadas para 2026 (valores de referencia).
- * Estos valores son estimaciones y NO reemplazan las tasas oficiales del BCCH.
- * USD: ~960 CLP, EUR: ~1.040 CLP.
+ * Premio EUR/USD aproximado. Si el sitio aún no expone EUR en el
+ * snapshot, se usa este multiplicador sobre el dólar observado.
+ *
+ * EUR/USD ≈ 1.08 (banda histórica reciente). Cambia diariamente.
  */
-export const TASAS_DIVISAS = {
-  usd: 960,
-  eur: 1040,
-};
+const EUR_PREMIUM_VS_USD = 1.08;
 
 const NOMBRES_MONEDA: Record<ConversorDivisasInput['moneda'], string> = {
   usd: 'Dólar estadounidense (USD)',
@@ -35,46 +43,75 @@ const NOMBRES_MONEDA: Record<ConversorDivisasInput['moneda'], string> = {
 };
 
 /**
- * Convierte montos entre CLP y divisas extranjeras (USD/EUR).
- * Dirección 'a_clp': convierte moneda extranjera a pesos chilenos.
- * Dirección 'desde_clp': convierte pesos chilenos a moneda extranjera.
- * Las tasas son aproximadas. Consulte el Banco Central de Chile para valores oficiales.
+ * Calcula la tasa de cambio actual a CLP usando el snapshot del Banco
+ * Central (`DOLAR.observado`) en vez de un valor hardcodeado.
  */
-export function calculateConversorDivisas(input: ConversorDivisasInput): ConversorDivisasResult {
-  const { monto, moneda, direccion } = input;
+function obtenerTasaCambio(moneda: ConversorDivisasInput['moneda']): number {
+  const usd = DOLAR.observado || 960;
+  if (moneda === 'usd') return usd;
+  return usd * EUR_PREMIUM_VS_USD;
+}
 
-  // Validar monto
+/**
+ * Convierte montos entre CLP y divisas extranjeras (USD/EUR).
+ *
+ * Bug histórico: la versión anterior tenía USD = 960 y EUR = 1040
+ * hardcodeados, lo que daba errores >10% en el cálculo cuando el dólar
+ * real fluctuaba entre 850 y 1.000. Adicionalmente el formato del
+ * resultado se forzaba como CLP aún cuando la dirección era CLP→divisa.
+ *
+ * Fix: leer la tasa USD del snapshot del BCCH y derivar EUR con un
+ * spread aproximado. La UI puede usar `resultadoEnCLP` para formatear
+ * correctamente.
+ */
+export function calculateConversorDivisas(
+  input: ConversorDivisasInput,
+): ConversorDivisasResult {
+  const { monto, moneda, direccion, tasaPersonalizada } = input;
+
   const montoValidado = Math.max(0, monto);
+  const tasaCambio =
+    tasaPersonalizada && tasaPersonalizada > 0
+      ? tasaPersonalizada
+      : obtenerTasaCambio(moneda);
 
-  // Tasa de cambio según moneda
-  const tasaCambio = TASAS_DIVISAS[moneda];
-
-  // Calcular conversión
   let resultado: number;
+  let resultadoEnCLP: boolean;
   if (direccion === 'a_clp') {
-    // Moneda extranjera a CLP
     resultado = Math.round(montoValidado * tasaCambio);
+    resultadoEnCLP = true;
   } else {
-    // CLP a moneda extranjera (2 decimales para divisas)
     resultado = Number((montoValidado / tasaCambio).toFixed(2));
+    resultadoEnCLP = false;
   }
 
   return {
     monto: montoValidado,
     moneda: NOMBRES_MONEDA[moneda],
-    tasaCambio,
+    tasaCambio: Math.round(tasaCambio * 100) / 100,
     resultado,
-    direccion: direccion === 'a_clp' ? `CLP desde ${moneda.toUpperCase()}` : `${moneda.toUpperCase()} desde CLP`,
+    direccion:
+      direccion === 'a_clp'
+        ? `CLP desde ${moneda.toUpperCase()}`
+        : `${moneda.toUpperCase()} desde CLP`,
+    resultadoEnCLP,
   };
 }
 
 /**
  * Convierte el resultado a formato de CalculatorResult[]
  */
-export function conversorDivisasToResults(result: ConversorDivisasResult): CalculatorResult[] {
+export function conversorDivisasToResults(
+  result: ConversorDivisasResult,
+): CalculatorResult[] {
   return [
-    { label: 'Resultado', value: result.resultado, format: 'CLP', highlight: true },
+    {
+      label: 'Resultado',
+      value: result.resultado,
+      format: result.resultadoEnCLP ? 'CLP' : 'number',
+      highlight: true,
+    },
     { label: 'Monto Original', value: result.monto, format: 'number' },
-    { label: 'Tasa de Cambio', value: result.tasaCambio, format: 'number' },
+    { label: 'Tasa de Cambio', value: result.tasaCambio, format: 'CLP' },
   ];
 }

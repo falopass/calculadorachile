@@ -2,7 +2,7 @@
 // Cálculo de Operación Renta para Independientes Chile 2026
 // ============================================
 
-import { IMPUESTO_SEGUNDA_CATEGORIA, UTM } from '@/lib/values/constants';
+import { IMPUESTO_SEGUNDA_CATEGORIA_2026, UTM } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface OperacionRentaInput {
@@ -22,19 +22,22 @@ export interface OperacionRentaResult {
   impuesto: number;
   tasaEfectiva: number;
   retencionSugerida: number;
+  tramoAplicado: string;
 }
 
 /**
- * Calcula la Operación Renta para trabajadores independientes
+ * Calcula la Operación Renta para trabajadores independientes.
  *
- * Los trabajadores independientes deben declarar sus rentas anuales y pagar
- * impuesto de segunda categoría según tramos progresivos. Pueden deducir
- * gastos, cotizaciones previsionales y ahorro previsional voluntario.
+ * Bug histórico: la versión anterior aplicaba la tabla
+ * `IMPUESTO_SEGUNDA_CATEGORIA` (mensual UTM) sobre `rentaTributableUTA`
+ * (anual). Como esa tabla está expresada en UTM mensuales, aplicarla
+ * a rentas anuales en UTA subestimaba el impuesto en ~12×.
  *
- * Base legal: Art. 42 N°2 LIR, Art. 43 N°1 LIR
+ * Fix: usar la tabla `IMPUESTO_SEGUNDA_CATEGORIA_2026` que sí está en
+ * UTA (8/16/24/32/48/64/96 UTA) y calcular: impuesto = renta × tasa −
+ * factor (todo en UTA), luego convertir a CLP.
  *
- * @param input - Datos para el cálculo de Operación Renta
- * @returns Desglose completo del impuesto anual
+ * Base legal: Art. 42 N°2, 43 N°1 LIR.
  */
 export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRentaResult {
   const {
@@ -44,56 +47,55 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
     ahorroPrevisional = 0,
   } = input;
 
-  // Validar rangos
   const ingresos = Math.max(0, ingresosAnuales);
   const gastos = Math.max(0, Math.min(gastosAnuales, ingresos));
   const cotizaciones = Math.max(0, cotizacionesObligatorias);
   const ahorro = Math.max(0, ahorroPrevisional);
 
-  // Calcular renta tributable (renta bruta menos deducciones)
   const rentaBruta = ingresos;
-  const gastosDeducidos = gastos;
-  const cotizacionesDeducidas = cotizaciones;
-  const ahorroPrevisionalDeducido = ahorro;
+  const rentaTributable = Math.max(0, rentaBruta - gastos - cotizaciones - ahorro);
 
-  const rentaTributable = Math.max(0, rentaBruta - gastosDeducidos - cotizacionesDeducidas - ahorroPrevisionalDeducido);
-
-  // Convertir a UTA (UTA = UTM * 12)
   const valorUTA = UTM.valor * 12;
-  const rentaTributableUTA = rentaTributable / valorUTA;
+  const rentaTributableUTA = valorUTA > 0 ? rentaTributable / valorUTA : 0;
 
-  // Aplicar tramos progresivos de impuesto de segunda categoría
-  let impuesto = 0;
-  for (const tramo of IMPUESTO_SEGUNDA_CATEGORIA.tramos) {
-    if (rentaTributableUTA > tramo.desde && rentaTributableUTA <= tramo.hasta) {
-      const exentoUTA = tramo.exento;
-      const factor = tramo.factor;
-      const rebaja = tramo.rebaja;
+  // Tabla IMPUESTO_SEGUNDA_CATEGORIA_2026 — tramos en UTA (anual).
+  let impuestoUTA = 0;
+  let tramoAplicado = 'Exento';
 
-      // (Renta en UTA - exento) * factor - rebaja = impuesto en UTA
-      const impuestoUTA = ((rentaTributableUTA - exentoUTA) * factor) - rebaja;
-      impuesto = Math.max(0, impuestoUTA * valorUTA);
+  for (const tramo of IMPUESTO_SEGUNDA_CATEGORIA_2026.tramos) {
+    if (
+      rentaTributableUTA > tramo.limiteInferiorUTA &&
+      rentaTributableUTA <= tramo.limiteSuperiorUTA
+    ) {
+      // Impuesto (UTA) = renta UTA × tasa − factor
+      impuestoUTA = rentaTributableUTA * tramo.tasa - tramo.factor;
+      impuestoUTA = Math.max(0, impuestoUTA);
+
+      const desdeFmt = tramo.limiteInferiorUTA.toString();
+      const hastaFmt =
+        tramo.limiteSuperiorUTA === Infinity ? 'más' : tramo.limiteSuperiorUTA.toString();
+      tramoAplicado = `Desde ${desdeFmt} hasta ${hastaFmt} UTA`;
       break;
     }
   }
 
-  // Tasa efectiva de impuesto sobre renta bruta
+  const impuesto = Math.max(0, Math.round(impuestoUTA * valorUTA));
   const tasaEfectiva = rentaBruta > 0 ? (impuesto / rentaBruta) * 100 : 0;
 
-  // Retención sugerida: para boletas de honorarios, típicamente 15.25% de la base imponible
-  // (10% de impuesto + 5.25% adicional según reforma tributaria)
-  const retencionSugerida = rentaBruta * 0.1525;
+  // Retención sugerida 15.25% (boletas honorarios 2026, Ley 21.578).
+  const retencionSugerida = Math.round(rentaBruta * 0.1525);
 
   return {
     rentaBruta: Math.round(rentaBruta),
-    gastosDeducidos: Math.round(gastosDeducidos),
-    cotizacionesDeducidas: Math.round(cotizacionesDeducidas),
-    ahorroPrevisionalDeducido: Math.round(ahorroPrevisionalDeducido),
+    gastosDeducidos: Math.round(gastos),
+    cotizacionesDeducidas: Math.round(cotizaciones),
+    ahorroPrevisionalDeducido: Math.round(ahorro),
     rentaTributable: Math.round(rentaTributable),
     rentaTributableUTA: Math.round(rentaTributableUTA * 100) / 100,
-    impuesto: Math.round(impuesto),
+    impuesto,
     tasaEfectiva: Math.round(tasaEfectiva * 100) / 100,
-    retencionSugerida: Math.round(retencionSugerida),
+    retencionSugerida,
+    tramoAplicado,
   };
 }
 

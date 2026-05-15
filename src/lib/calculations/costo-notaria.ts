@@ -34,9 +34,12 @@ const COSTO_NOTARIAL_MIN_HIPOTECA = 100000;
 const DERECHOS_REGISTRALES_MIN = 30000;
 
 /**
- * Tasa de impuesto de timbres y estampillas para compraventa
+ * Tasa de impuesto de timbres y estampillas para mutuos hipotecarios.
+ * 0,066% mensual con tope 0,8% anual (DL 3475 Art. 1 N°3).
+ * La compraventa de inmuebles está EXENTA (Art. 24 N°6).
  */
-const TASA_TIMBRES_COMPRAVENTA = 0.2;
+const TASA_TIMBRES_HIPOTECA_ANUAL = 0.8;
+void TASA_TIMBRES_HIPOTECA_ANUAL;
 
 /**
  * Porcentaje adicional por notaría adicional (copias, trámites extra)
@@ -81,14 +84,19 @@ export function calculateCostoNotaria(input: CostoNotariaInput): CostoNotariaRes
       }
       costoNotarial = Math.max(COSTO_NOTARIAL_MIN, Math.min(costoNotarial, COSTO_NOTARIAL_MAX));
 
-      // Impuesto de timbres: 0.2% del valor
-      impuestoTimbres = valor * (TASA_TIMBRES_COMPRAVENTA / 100);
+      // Compraventa de inmuebles: EXENTA del impuesto de timbres
+      // (Art. 24 N°6 DL 3475/1980). El bug anterior aplicaba 0,2%
+      // sobre el valor, lo que era incorrecto.
+      impuestoTimbres = 0;
       break;
     }
     case 'hipoteca': {
       // Hipoteca: 0.3% del monto, mínimo $100.000
       costoNotarial = Math.max(COSTO_NOTARIAL_MIN_HIPOTECA, valor * 0.003);
-      impuestoTimbres = 0;
+      // Mutuo hipotecario: paga impuesto de timbres y estampillas.
+      // Tasa 0,066% por mes hasta tope 0,8% anual (DL 3475 Art. 1 N°3).
+      // Aproximación práctica: 0,8% del monto del mutuo.
+      impuestoTimbres = valor * 0.008;
       break;
     }
     case 'donacion': {

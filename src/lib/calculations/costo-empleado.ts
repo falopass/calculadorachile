@@ -2,7 +2,7 @@
 // Cálculo de Costo Total Empleado para PYME Chile 2026
 // ============================================
 
-import { AFP, SALUD, SEGURO_CESANTIA, GRATIFICACION, INGRESO_MINIMO, UF } from '@/lib/values/constants';
+import { AFP, SALUD, SEGURO_CESANTIA, GRATIFICACION } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CostoEmpleadoInput {
@@ -23,31 +23,41 @@ export interface CostoEmpleadoResult {
     afp: number;
     salud: number;
     seguroCesantia: number;
-    sis: number;
-  },
+  };
   aportesEmpleador: {
-    afp: number;
-    salud: number;
     seguroCesantia: number;
     sis: number;
-  },
+    mutual: number;
+  };
   costoTotalMensual: number;
   costoTotalAnual: number;
-  factorPrecacional: number;
+  factorPrevisional: number;
 }
 
 /**
- * Calcula el costo total de un empleado para la empresa (coto empleador)
- * 
- * Incluye todos los descuentos legales y beneficios que debe pagar el empleador
- * además del sueldo bruto:
- * - AFP: 10% + comisión (varía por AFP)
- * - Salud: 7% (FONASA o Isapre)
- * - Seguro de Cesantía: 2.4% (empleador, contrato indefinido)
- * - SIS: 1.15% (empleador, * - Gratificación: hasta 25% o 4.75% del sueldo mínimo anual
- * 
- * @param input - Datos para el cálculo
- * @returns Desglose completo del costo empleado
+ * Tasa de mutual de seguridad (Ley 16.744). Cotización básica fija
+ * del 0,90% + cotización adicional variable según giro (0% a 3,4%).
+ * Se usa el mínimo legal como aproximación razonable.
+ */
+const MUTUAL_TASA = 0.95;
+
+/**
+ * Calcula el costo total de un empleado para la empresa.
+ *
+ * Bug histórico: la versión anterior duplicaba el 10% de AFP (lo
+ * descontaba al trabajador y lo sumaba como aporte del empleador),
+ * y duplicaba el 7% de salud al sumarlo como aporte empleador.
+ * Ambos descuentos los paga íntegramente el trabajador. El empleador
+ * sólo aporta SIS, seguro de cesantía y mutual de seguridad.
+ *
+ * Bases legales:
+ *  - 10% AFP del trabajador: D.L. 3500 Art. 17.
+ *  - SIS lo paga el empleador: Ley 20.255.
+ *  - Mutual de seguridad: Ley 16.744.
+ *  - Seguro de cesantía: Ley 19.728.
+ *
+ * @param input Datos para el cálculo.
+ * @returns Desglose completo del costo empleador.
  */
 export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleadoResult {
   const {
@@ -59,62 +69,53 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
     horasExtra,
     montoHorasExtra,
   } = input;
-  
-  const valorUF = UF.valor;
-  
-  // Calcular gratificación si está incluida
+
+  // Gratificación legal mensualizada (tope 4,75 IMM/12 ya considerado en
+  // la calculadora de gratificación). Aquí se usa el 25% directo si el
+  // empleador la incluye en el sueldo. El detalle exacto vive en
+  // calculations/gratificacion.ts.
   const gratificacion = gratificacionIncluida
     ? sueldoBruto * (GRATIFICACION.porcentaje / 100)
     : 0;
-  
-  // Calcular total haberes (sueldo + gratificación)
+
   const totalHaberes = sueldoBruto + gratificacion;
-  
-  // Descuentos legales (aportes del trabajador)
+
+  // ---------- Descuentos del trabajador ----------
   const afpData = AFP[afp];
-  const descuentoAFP = totalHaberes * (10 / 100); // 10% cotización
-  const descuentoSIS = totalHaberes * (afpData.sis / 100); // SIS
-  
-  
-  // Salud
+  // 10% obligatorio + comisión variable (esta última también la paga el trabajador)
+  const descuentoAFP = totalHaberes * (10 / 100 + afpData.comision / 100);
+
   let descuentoSalud: number;
   if (saludTipo === 'fonasa') {
     descuentoSalud = totalHaberes * (SALUD.fonasa.tasa / 100);
   } else {
-    // Isapre: mínimo 7% del total haberes
     descuentoSalud = totalHaberes * 0.07;
   }
-  
-  // Seguro de cesantía (aporte del trabajador)
+
   const descuentoSeguroCesantia = contratoIndefinido
     ? totalHaberes * (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100)
     : 0;
-  
-  // Total descuentos legales del trabajador
-  const totalDescuentosTrabajador = descuentoAFP + descuentoSalud + descuentoSeguroCesantia;
-  
-  // Aportes del empleador (adicionales a los descuentos del trabajador)
-  const aporteAFP = totalHaberes * (10 / 100); // 10% cotización
-  const aporteSIS = totalHaberes * (afpData.sis / 100); // SIS (lo paga el empleador)
+
+  // ---------- Aportes del empleador ----------
+  // El empleador paga SIS, seguro de cesantía empleador y mutual.
+  // NO paga el 10% AFP ni el 7% salud (esos son del trabajador).
+  const aporteSIS = totalHaberes * (afpData.sis / 100);
   const aporteSeguroCesantia = contratoIndefinido
     ? totalHaberes * (SEGURO_CESANTIA.contrato_indefinido.empleador / 100)
     : totalHaberes * (SEGURO_CESANTIA.contrato_plazo_fijo.empleador / 100);
-  
-  // Total aportes empleador
-  const totalAportesEmpleador = aporteAFP + aporteSIS + aporteSeguroCesantia;
-  
-  // Horas extra (si las hay)
+  const aporteMutual = totalHaberes * (MUTUAL_TASA / 100);
+
+  const totalAportesEmpleador = aporteSIS + aporteSeguroCesantia + aporteMutual;
+
+  // Horas extra (pagadas además del sueldo bruto)
   const pagoHorasExtra = horasExtra * montoHorasExtra;
-  
-  // Costo total mensual para la empresa
+
+  // Costo mensual: sueldo bruto + gratificación + aportes empleador + horas extra
   const costoTotalMensual = totalHaberes + totalAportesEmpleador + pagoHorasExtra;
-  
-  // Costo total anual
   const costoTotalAnual = costoTotalMensual * 12;
-  
-  // Factor previsional (cuántas veces el sueldo bruto)
-  const factorPrecacional = costoTotalMensual / sueldoBruto;
-  
+
+  const factorPrevisional = sueldoBruto > 0 ? costoTotalMensual / sueldoBruto : 0;
+
   return {
     sueldoBruto,
     gratificacion: Math.round(gratificacion),
@@ -123,17 +124,15 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
       afp: Math.round(descuentoAFP),
       salud: Math.round(descuentoSalud),
       seguroCesantia: Math.round(descuentoSeguroCesantia),
-      sis: Math.round(descuentoSIS),
     },
     aportesEmpleador: {
-      afp: Math.round(aporteAFP),
-      salud: Math.round(descuentoSalud),
       seguroCesantia: Math.round(aporteSeguroCesantia),
       sis: Math.round(aporteSIS),
+      mutual: Math.round(aporteMutual),
     },
     costoTotalMensual: Math.round(costoTotalMensual),
     costoTotalAnual: Math.round(costoTotalAnual),
-    factorPrecacional: Math.round(factorPrecacional * 100) / 100,
+    factorPrevisional: Math.round(factorPrevisional * 100) / 100,
   };
 }
 
@@ -141,6 +140,11 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
  * Convierte el resultado a formato de CalculatorResult[]
  */
 export function costoEmpleadoToResults(result: CostoEmpleadoResult): CalculatorResult[] {
+  const totalAportes =
+    result.aportesEmpleador.sis +
+    result.aportesEmpleador.seguroCesantia +
+    result.aportesEmpleador.mutual;
+
   return [
     {
       label: 'Costo Total Mensual',
@@ -155,9 +159,9 @@ export function costoEmpleadoToResults(result: CostoEmpleadoResult): CalculatorR
       highlight: true,
     },
     {
-      label: 'Factor Previsional',
-      value: result.factorPrecacional,
-      format: 'percentage',
+      label: 'Factor Previsional (costo / sueldo)',
+      value: result.factorPrevisional,
+      format: 'number',
     },
     {
       label: 'Sueldo Bruto',
@@ -175,13 +179,23 @@ export function costoEmpleadoToResults(result: CostoEmpleadoResult): CalculatorR
       format: 'CLP',
     },
     {
-      label: 'Desc. Legal Trabajador',
-      value: result.descuentosLegales.afp + result.descuentosLegales.salud + result.descuentosLegales.seguroCesantia,
+      label: 'Aportes Empleador (SIS + Cesantía + Mutual)',
+      value: totalAportes,
       format: 'CLP',
     },
     {
-      label: 'Aportes Empleador',
-      value: result.aportesEmpleador.afp + result.aportesEmpleador.salud + result.aportesEmpleador.seguroCesantia,
+      label: 'SIS Empleador',
+      value: result.aportesEmpleador.sis,
+      format: 'CLP',
+    },
+    {
+      label: 'Seguro Cesantía Empleador',
+      value: result.aportesEmpleador.seguroCesantia,
+      format: 'CLP',
+    },
+    {
+      label: 'Mutual de Seguridad',
+      value: result.aportesEmpleador.mutual,
       format: 'CLP',
     },
   ];

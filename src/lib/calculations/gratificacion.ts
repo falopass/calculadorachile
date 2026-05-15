@@ -2,7 +2,7 @@
 // Cálculo de Gratificación Legal Chile 2026
 // ============================================
 
-import { GRATIFICACION, INGRESO_MINIMO, UF } from '@/lib/values/constants';
+import { GRATIFICACION, INGRESO_MINIMO } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface GratificacionInput {
@@ -18,42 +18,50 @@ export interface GratificacionResult {
   gratificacionAnual: number;
   gratificacionProporcional: number;
   topeAnual: number;
-  metodo: '25%' | '4.75%';
+  metodo: '25%' | '4.75 IMM';
 }
 
 /**
- * Calcula la gratificación legal según Art. 47 del Código del Trabajo
- * 
- * La gratificación es un beneficio obligatorio que el empleador debe pagar.
- * Se calcula de dos formas y se paga la que resulte MAYOR:
- * - 25% de la remuneración mensual
- * - 4.75% del ingreso mínimo anual (tope legal)
- * 
+ * Calcula la gratificación legal según Art. 50 del Código del Trabajo
+ *
+ * La gratificación legal es un beneficio anual. El empleador puede acogerse
+ * al Art. 50 (modalidad más usada): pagar el MENOR entre el 25% de la
+ * remuneración mensual y el tope mensual de 4,75 ingresos mínimos / 12.
+ *
+ * Es decir, sueldos bajos pagan el 25% (menor que el tope), y sueldos
+ * altos quedan topeados en 4,75 IMM/12 mensual.
+ *
+ * Bug histórico: la versión anterior pagaba el MAYOR, lo que sobreestimaba
+ * la gratificación 2-5x para sueldos bajos (paga el tope cuando debía
+ * pagar el 25%).
+ *
  * @param input - Datos de entrada para el cálculo
  * @returns Desglose completo de la gratificación
  */
 export function calculateGratificacion(input: GratificacionInput): GratificacionResult {
-  const { sueldoBruto, mesesTrabajados, tipoGratificacion } = input;
-  
-  // Método 1: 25% de la remuneración
+  const { sueldoBruto, mesesTrabajados } = input;
+
+  // Método 1: 25% de la remuneración mensual
   const gratificacion25Porciento = sueldoBruto * (GRATIFICACION.porcentaje / 100);
-  
-  // Método 2: Tope de 4.75 ingresos mínimos anuales
+
+  // Método 2: tope de 4,75 ingresos mínimos mensuales / 12 (mensual equivalente)
   const topeAnual = INGRESO_MINIMO.mensual * GRATIFICACION.tope_475_inm;
-  const gratificacionTope = topeAnual / 12; // Mensual equivalente
-  
-  // Se paga el mayor de los dos (mensual)
-  const gratificacionMensual = Math.max(gratificacion25Porciento, gratificacionTope);
-  
+  const gratificacionTopeMensual = topeAnual / 12;
+
+  // Art. 50 CdT: se paga el MENOR de los dos
+  const gratificacionMensual = Math.min(gratificacion25Porciento, gratificacionTopeMensual);
+
   // Gratificación anual completa
   const gratificacionAnual = gratificacionMensual * 12;
-  
-  // Gratificación proporcional por meses trabajados
-  const gratificacionProporcional = (gratificacionAnual / 12) * mesesTrabajados;
-  
-  // Determinar método aplicado
-  const metodo = gratificacion25Porciento >= gratificacionTope ? '25%' : '4.75%';
-  
+
+  // Gratificación proporcional por meses trabajados (cap 12)
+  const meses = Math.max(0, Math.min(mesesTrabajados, 12));
+  const gratificacionProporcional = (gratificacionAnual / 12) * meses;
+
+  // Determinar método aplicado: si el 25% es menor, ese es el aplicado
+  const metodo: '25%' | '4.75 IMM' =
+    gratificacion25Porciento <= gratificacionTopeMensual ? '25%' : '4.75 IMM';
+
   return {
     sueldoBruto,
     mesesTrabajados,
@@ -105,7 +113,7 @@ export function gratificacionToResults(result: GratificacionResult): CalculatorR
     {
       label: 'Método Aplicado',
       value: result.metodo === '25%' ? 25 : 4.75,
-      format: 'percentage',
+      format: result.metodo === '25%' ? 'percentage' : 'number',
     },
   ];
 }
