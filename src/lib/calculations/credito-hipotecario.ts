@@ -174,6 +174,13 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     dividendoMensualUF = montoFinanciarUF * (tasaMensual * factor) / (factor - 1);
   }
 
+  // Redondeo a 2 decimales UF: todos los derivados (totalPago, CLP,
+  // intereses, costoTotal) se calculan SOBRE este valor redondeado para
+  // que el resultado sea internamente consistente. Antes los derivados
+  // usaban el valor sin redondear y los expuestos quedaban
+  // inconsistentes (ej: dividendoMensualUF * plazoMeses ≠ totalPagoUF).
+  dividendoMensualUF = Math.round(dividendoMensualUF * 100) / 100;
+
   // Calcular capacidad de endeudamiento (máximo 25% del ingreso)
   let capacidadEndeudamiento: number | undefined;
   if (ingresoMensual > 0) {
@@ -275,7 +282,7 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     tasaAnual: Math.round(tasaAnual * 100) / 100,
     plazoAnos,
     plazoMeses,
-    dividendoMensualUF: Math.round(dividendoMensualUF * 100) / 100,
+    dividendoMensualUF,
     dividendoMensualCLP: Math.round(dividendoMensualCLP),
     montoFinanciarCLP: Math.round(montoFinanciarCLP),
     totalPagoUF: Math.round(totalPagoUF * 100) / 100,

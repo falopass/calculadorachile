@@ -165,13 +165,15 @@ describe('calculateSueldoLiquido', () => {
       expect(result.descuentos.afp).toBeGreaterThan(0);
     });
 
-    it('debería incluir descuento SIS', () => {
+    it('debería incluir aporte SIS del empleador', () => {
       const result = calculateSueldoLiquido({
         ...inputBase,
         sueldoBruto: 1000000,
       });
 
-      expect(result.descuentos.sis).toBeGreaterThan(0);
+      // Desde Ley 20.255 (2009) el SIS lo paga 100% el empleador y NO
+      // se descuenta al trabajador. Se reporta en aportesEmpleador.
+      expect(result.aportesEmpleador.sis).toBeGreaterThan(0);
     });
 
     it('debería incluir descuento de salud', () => {
@@ -191,9 +193,10 @@ describe('calculateSueldoLiquido', () => {
         sueldoBruto: 1000000,
       });
 
+      // SIS no se descuenta al trabajador (Ley 20.255), por eso no
+      // aparece en totalDescuentos.
       const sumaDescuentos =
         result.descuentos.afp +
-        result.descuentos.sis +
         result.descuentos.salud +
         result.descuentos.seguroCesantia +
         result.descuentos.impuesto;

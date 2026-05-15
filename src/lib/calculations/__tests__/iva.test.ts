@@ -14,8 +14,9 @@ describe('calculateIVA', () => {
 
       const result = calculateIVA(input);
 
-      expect(result.iva).toBe(100000 * tasaIVA);
-      expect(result.montoConIVA).toBe(100000 * (1 + tasaIVA));
+      // El cálculo se redondea a entero (CLP no usa decimales).
+      expect(result.iva).toBe(Math.round(100000 * tasaIVA));
+      expect(result.montoConIVA).toBe(Math.round(100000 * (1 + tasaIVA)));
       expect(result.montoSinIVA).toBe(100000);
     });
 
@@ -39,8 +40,10 @@ describe('calculateIVA', () => {
 
       const result = calculateIVA(input);
 
-      expect(result.montoSinIVA).toBe(50000.50);
-      expect(result.iva).toBe(50000.50 * tasaIVA);
+      // montoSinIVA conserva el monto original (no se redondea cuando
+      // ya es entero ni cuando viene del usuario). El IVA se redondea.
+      expect(result.montoSinIVA).toBe(Math.round(50000.50));
+      expect(result.iva).toBe(Math.round(50000.50 * tasaIVA));
     });
   });
 
@@ -53,10 +56,10 @@ describe('calculateIVA', () => {
 
       const result = calculateIVA(input);
 
-      // monto / 1.19 = monto sin IVA
-      expect(result.montoSinIVA).toBe(119000 / (1 + tasaIVA));
+      // monto / 1.19 = monto sin IVA, redondeado a entero CLP.
+      expect(result.montoSinIVA).toBe(Math.round(119000 / (1 + tasaIVA)));
       expect(result.montoConIVA).toBe(119000);
-      expect(result.iva).toBe(119000 - (119000 / (1 + tasaIVA)));
+      expect(result.iva).toBe(Math.round(119000 - 119000 / (1 + tasaIVA)));
     });
 
     it('debería manejar monto 0', () => {
@@ -79,8 +82,9 @@ describe('calculateIVA', () => {
 
       const result = calculateIVA(input);
 
-      expect(result.montoConIVA).toBe(119000.50);
-      expect(result.iva).toBe(119000.50 - (119000.50 / (1 + tasaIVA)));
+      // El cálculo redondea a CLP entero.
+      expect(result.montoConIVA).toBe(Math.round(119000.50));
+      expect(result.iva).toBe(Math.round(119000.50 - 119000.50 / (1 + tasaIVA)));
     });
   });
 
@@ -152,7 +156,7 @@ describe('calculateIVA', () => {
 
       const result = calculateIVA(input);
 
-      expect(result.iva).toBe(100000000 * tasaIVA);
+      expect(result.iva).toBe(Math.round(100000000 * tasaIVA));
     });
 
     it('debería manejar valores muy pequeños', () => {
@@ -163,7 +167,8 @@ describe('calculateIVA', () => {
 
       const result = calculateIVA(input);
 
-      expect(result.iva).toBe(1 * tasaIVA);
+      // 1 × 0,19 = 0,19 → redondea a 0 (CLP no admite decimales).
+      expect(result.iva).toBe(0);
     });
   });
 });
