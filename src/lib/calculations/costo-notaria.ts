@@ -2,7 +2,7 @@
 // Cálculo de Costo Notaría Compraventa Inmueble Chile 2026
 // ============================================
 
-import { UTM } from '@/lib/values/constants';
+import { UTM, ARANCEL_NOTARIOS } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CostoNotariaInput {
@@ -22,41 +22,19 @@ export interface CostoNotariaResult {
 }
 
 /**
- * Costos notariales mínimos y máximos en CLP
- */
-const COSTO_NOTARIAL_MIN = 50000;
-const COSTO_NOTARIAL_MAX = 2000000;
-const COSTO_NOTARIAL_MIN_HIPOTECA = 100000;
-
-/**
- * Derechos registrales mínimos
- */
-const DERECHOS_REGISTRALES_MIN = 30000;
-
-/**
- * Tasa de impuesto de timbres y estampillas para mutuos hipotecarios.
- * 0,066% mensual con tope 0,8% anual (DL 3475 Art. 1 N°3).
- * La compraventa de inmuebles está EXENTA (Art. 24 N°6).
- */
-const TASA_TIMBRES_HIPOTECA_ANUAL = 0.8;
-void TASA_TIMBRES_HIPOTECA_ANUAL;
-
-/**
- * Porcentaje adicional por notaría adicional (copias, trámites extra)
- */
-const RECARGO_NOTARIA_ADICIONAL = 0.15;
-
-/**
- * Calcula el costo notarial según tipo de trámite y valor de la propiedad
+ * Calcula el costo notarial según tipo de trámite y valor de la propiedad.
  *
- * Los aranceles notariales se calculan como un porcentaje del valor de la
- * propiedad, con montos mínimos y máximos establecidos por ley.
- * Se suman los derechos registrales y el impuesto de timbres según corresponda.
+ * Todos los aranceles, mínimos, máximos y tasas vienen de
+ * `ARANCEL_NOTARIOS` en constants.ts (Arancel de Notarios DFL 292/1931
+ * + Ley de Timbres DL 3475/1980).
  *
- * Base legal: Arancel de Notarios (DFL 292/1931), Ley de Timbres (DL 3475/1980)
- *
- * @param input - Datos para el cálculo de costos notariales
- * @returns Desglose completo de los costos notariales
+ * Reglas:
+ *  - Compraventa de inmuebles: tasa progresiva 0,5% / 0,3% / 0,2%.
+ *    EXENTA del impuesto de timbres (DL 3475 Art. 24 N°6).
+ *  - Mutuo hipotecario: 0,3% notarial + impuesto de timbres 0,8%
+ *    anual (DL 3475 Art. 1 N°3).
+ *  - Donación: 0,4% notarial, sin impuesto de timbres.
+ *  - Testamento: tarifa fija 2 UTM, sin impuesto de timbres.
  */
 export function calculateCostoNotaria(input: CostoNotariaInput): CostoNotariaResult {
   const {
@@ -65,67 +43,77 @@ export function calculateCostoNotaria(input: CostoNotariaInput): CostoNotariaRes
     notariaAdicional = false,
   } = input;
 
-  // Validar rango
   const valor = Math.max(0, valorPropiedad);
 
-  // Calcular costo notarial base según tipo
   let costoNotarial = 0;
   let impuestoTimbres = 0;
 
   switch (tipo) {
     case 'compraventa': {
-      // Compraventa: 0.2% a 0.5% del valor según rango progresivo
-      if (valor <= 500000000) {
-        costoNotarial = valor * 0.005;
-      } else if (valor <= 1000000000) {
-        costoNotarial = valor * 0.003;
-      } else {
-        costoNotarial = valor * 0.002;
+      // Tasa progresiva por tramos (definidos en ARANCEL_NOTARIOS).
+      let tasa = ARANCEL_NOTARIOS.compraventa_tramos[
+        ARANCEL_NOTARIOS.compraventa_tramos.length - 1
+      ].tasa;
+      for (const tramo of ARANCEL_NOTARIOS.compraventa_tramos) {
+        if (valor <= tramo.hasta_clp) {
+          tasa = tramo.tasa;
+          break;
+        }
       }
-      costoNotarial = Math.max(COSTO_NOTARIAL_MIN, Math.min(costoNotarial, COSTO_NOTARIAL_MAX));
-
-      // Compraventa de inmuebles: EXENTA del impuesto de timbres
-      // (Art. 24 N°6 DL 3475/1980). El bug anterior aplicaba 0,2%
-      // sobre el valor, lo que era incorrecto.
+      costoNotarial = valor * (tasa / 100);
+      costoNotarial = Math.max(
+        ARANCEL_NOTARIOS.costo_minimo_clp,
+        Math.min(costoNotarial, ARANCEL_NOTARIOS.costo_maximo_clp),
+      );
+      // Compraventa de inmuebles: EXENTA del impuesto de timbres.
       impuestoTimbres = 0;
       break;
     }
     case 'hipoteca': {
-      // Hipoteca: 0.3% del monto, mínimo $100.000
-      costoNotarial = Math.max(COSTO_NOTARIAL_MIN_HIPOTECA, valor * 0.003);
-      // Mutuo hipotecario: paga impuesto de timbres y estampillas.
-      // Tasa 0,066% por mes hasta tope 0,8% anual (DL 3475 Art. 1 N°3).
+      costoNotarial = Math.max(
+        ARANCEL_NOTARIOS.hipoteca_minimo_clp,
+        valor * (ARANCEL_NOTARIOS.hipoteca_tasa / 100),
+      );
+      // Mutuo hipotecario: 0,066% mensual hasta tope 0,8% anual.
       // Aproximación práctica: 0,8% del monto del mutuo.
-      impuestoTimbres = valor * 0.008;
+      impuestoTimbres = valor * (ARANCEL_NOTARIOS.timbres_hipoteca_anual / 100);
       break;
     }
     case 'donacion': {
-      // Donación: similar a compraventa con mínimo elevado
-      costoNotarial = Math.max(100000, valor * 0.004);
-      costoNotarial = Math.min(costoNotarial, COSTO_NOTARIAL_MAX);
+      costoNotarial = Math.max(
+        ARANCEL_NOTARIOS.donacion_minimo_clp,
+        valor * (ARANCEL_NOTARIOS.donacion_tasa / 100),
+      );
+      costoNotarial = Math.min(costoNotarial, ARANCEL_NOTARIOS.costo_maximo_clp);
       impuestoTimbres = 0;
       break;
     }
     case 'testamento': {
-      // Testamento: tarifa fija según UTM
-      costoNotarial = Math.round(2 * UTM.valor);
+      // Tarifa fija expresada en UTM.
+      costoNotarial = Math.round(ARANCEL_NOTARIOS.testamento_utm * UTM.valor);
       impuestoTimbres = 0;
       break;
     }
   }
 
-  // Derechos registrales: 0.2% del valor, mínimo $30.000
-  const derechosRegistrales = Math.max(DERECHOS_REGISTRALES_MIN, valor * 0.002);
+  // Derechos registrales del Conservador de Bienes Raíces.
+  const derechosRegistrales = Math.max(
+    ARANCEL_NOTARIOS.derechos_registrales_minimo_clp,
+    valor * (ARANCEL_NOTARIOS.derechos_registrales_tasa / 100),
+  );
 
-  // Recargo por notaría adicional (copias autorizadas, trámites extra)
+  // Recargo por copias autorizadas / trámites adicionales.
   if (notariaAdicional) {
-    costoNotarial = Math.round(costoNotarial * (1 + RECARGO_NOTARIA_ADICIONAL));
+    costoNotarial = Math.round(
+      costoNotarial * (1 + ARANCEL_NOTARIOS.recargo_notaria_adicional / 100),
+    );
   }
 
-  // Costo total
-  const costoTotal = Math.round(costoNotarial) + Math.round(derechosRegistrales) + Math.round(impuestoTimbres);
+  const costoTotal =
+    Math.round(costoNotarial) +
+    Math.round(derechosRegistrales) +
+    Math.round(impuestoTimbres);
 
-  // Etiqueta legible del tipo
   const tipoLabels: Record<string, string> = {
     compraventa: 'Compraventa',
     hipoteca: 'Hipoteca',

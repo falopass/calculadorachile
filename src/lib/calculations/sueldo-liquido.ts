@@ -4,6 +4,7 @@
 
 import {
   AFP,
+  AFP_OBLIGATORIA_PCT,
   SALUD,
   SEGURO_CESANTIA,
   TOPE_IMPOSITIVO,
@@ -73,9 +74,10 @@ function calcularAFP(imponible: number, afpKey: keyof typeof AFP, valorUF: numbe
   const cfg = AFP[afpKey];
   if (!cfg) return 0;
   const tope = topeCLP(TOPE_IMPOSITIVO.afp_salud, valorUF);
-  // 10% obligatorio + comisión variable de la AFP. SIS NO se descuenta al
-  // trabajador desde Ley 20.255 (2009): lo paga 100% el empleador.
-  const tasa = (10 + cfg.comision) / 100;
+  // 10% obligatorio (D.L. 3500 Art. 17) + comisión variable de la AFP.
+  // SIS NO se descuenta al trabajador desde Ley 20.255 (2009): lo paga
+  // 100% el empleador.
+  const tasa = (AFP_OBLIGATORIA_PCT + cfg.comision) / 100;
   return Math.min(imponible, tope) * tasa;
 }
 
@@ -96,7 +98,7 @@ function calcularSalud(
     return base * (SALUD.fonasa.tasa / 100);
   }
   // Isapre: 7% del imponible o el plan, lo que sea mayor.
-  const minimo = base * 0.07;
+  const minimo = base * (SALUD.isapre.tasa_minima / 100);
   const planCLP = (isapreMontoUF || 0) * valorUF;
   return Math.max(minimo, planCLP);
 }

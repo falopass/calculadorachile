@@ -2,7 +2,14 @@
 // Cálculo de Cotizaciones Independientes (Ley 21.133) Chile 2026
 // ============================================
 
-import { AFP, UF, TOPE_IMPOSITIVO, MUTUAL } from '@/lib/values/constants';
+import {
+  AFP,
+  AFP_OBLIGATORIA_PCT,
+  UF,
+  TOPE_IMPOSITIVO,
+  MUTUAL,
+  SALUD,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CotizacionIndependientesInput {
@@ -78,15 +85,20 @@ export function calculateCotizacionIndependientes(
   const baseImponibleMensual = baseImponibleAnual / 12;
   const aplicaTopeImponible = baseAnualSinTope > topeAnual;
 
-  // AFP: 10% obligatorio + comisión variable (sin SIS para indep)
+  // AFP: 10% obligatorio + comisión variable (sin SIS para indep,
+  // D.L. 3500 Art. 59).
   const afpData = AFP[afp];
   if (!afpData) {
     throw new Error(`AFP "${String(afp)}" no encontrada`);
   }
-  const cotizacionAFP = Math.round(baseImponibleMensual * ((10 + afpData.comision) / 100));
+  const cotizacionAFP = Math.round(
+    baseImponibleMensual * ((AFP_OBLIGATORIA_PCT + afpData.comision) / 100),
+  );
 
-  // Salud: 7% (FONASA o Isapre, mínimo legal)
-  const cotizacionSalud = Math.round(baseImponibleMensual * 0.07);
+  // Salud: 7% (FONASA o Isapre, mínimo legal).
+  const cotizacionSalud = Math.round(
+    baseImponibleMensual * (SALUD.fonasa.tasa / 100),
+  );
 
   // Mutual de seguridad (Ley 16.744): 0,9% mínimo
   const cotizacionMutual = Math.round(baseImponibleMensual * (MUTUAL_TASA / 100));

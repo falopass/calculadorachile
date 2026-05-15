@@ -2,7 +2,7 @@
 // Cálculo de Contribuciones (Impuesto Territorial) Chile 2026
 // ============================================
 
-import { UTM } from '@/lib/values/constants';
+import { UTM, CONTRIBUCIONES_BIENES_RAICES } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface ContribucionesInput {
@@ -21,29 +21,17 @@ export interface ContribucionesResult {
 }
 
 /**
- * Tasas de contribuciones según destino del inmueble
- * Las tasas incluyen el 0.025% de descuento para propiedades no agrícolas
- * con avalúo fiscal hasta cierto monto (solo habitacional)
+ * Etiquetas legibles por destino. Las tasas y exenciones vienen de
+ * `CONTRIBUCIONES_BIENES_RAICES` en constants.ts (Ley 17.235 +
+ * Art. 2° bis DL 3063).
  */
-const TASAS_CONTRIBUCIONES: Record<string, { tasa: number; label: string }> = {
-  habitacional: { tasa: 0.93, label: 'Habitacional' },
-  comercial: { tasa: 1.2, label: 'Comercial' },
-  industrial: { tasa: 1.2, label: 'Industrial' },
-  sitio_eriado: { tasa: 2.0, label: 'Sitio Eriado' },
-  agrario: { tasa: 0.5, label: 'Agrario' },
+const LABELS_DESTINO: Record<string, string> = {
+  habitacional: 'Habitacional',
+  comercial: 'Comercial',
+  industrial: 'Industrial',
+  sitio_eriado: 'Sitio Eriado',
+  agrario: 'Agrario',
 };
-
-/**
- * Descuento habitacional para propiedades no agrícolas
- * Se aplica un descuento de 0.025% sobre la tasa a propiedades habitacionales
- */
-const DESCUENTO_HABITACIONAL = 0.025;
-
-/**
- * Exención para propiedades habitacionales con avalúo hasta 225.96 UTM
- * (actualizar anualmente con el valor UTM)
- */
-const EXENCION_HABITACIONAL_UTM = 225.96;
 
 /**
  * Calcula las contribuciones (impuesto territorial) de un inmueble
@@ -65,28 +53,30 @@ export function calculateContribuciones(
   // Validar rango
   const avaluo = Math.max(0, avaluoFiscal);
 
-  // Obtener tasa según destino
-  const datosTasa = TASAS_CONTRIBUCIONES[destino];
-  const tasaAnual = datosTasa.tasa;
+  // Tasa anual según destino (Ley 17.235).
+  const tasaAnual = CONTRIBUCIONES_BIENES_RAICES.tasas_anuales[destino];
 
   // Verificar exención habitacional usando el valor UTM dinámico del snapshot
   // (antes estaba hardcodeado en 67.900, lo que dejaba el cálculo desincronizado).
   const avaluoUTM = UTM.valor > 0 ? avaluo / UTM.valor : 0;
-  const exento = destino === 'habitacional' && avaluoUTM <= EXENCION_HABITACIONAL_UTM;
+  const exento =
+    destino === 'habitacional' &&
+    avaluoUTM <= CONTRIBUCIONES_BIENES_RAICES.exencion_habitacional_utm;
 
-  // Calcular descuento habitacional (solo para habitacional)
-  const descuentoHabitacional = destino === 'habitacional' ? DESCUENTO_HABITACIONAL : 0;
+  // Descuento habitacional (Art. 2° bis DL 3063): 0,025 puntos % sobre la tasa.
+  const descuentoHabitacional =
+    destino === 'habitacional' ? CONTRIBUCIONES_BIENES_RAICES.descuento_habitacional : 0;
 
   // Calcular contribución anual
   const tasaEfectiva = tasaAnual - descuentoHabitacional;
   const contribucionAnual = exento ? 0 : Math.round(avaluo * (tasaEfectiva / 100));
 
-  // Contribución semestral (se paga en 2 cuotas)
+  // Contribución semestral (se paga en 2 cuotas: abril y septiembre).
   const contribucionSemestral = Math.round(contribucionAnual / 2);
 
   return {
     avaluoFiscal: Math.round(avaluo),
-    destino: datosTasa.label,
+    destino: LABELS_DESTINO[destino],
     tasaAnual: Math.round(tasaEfectiva * 100) / 100,
     descuentoHabitacional,
     contribucionAnual,

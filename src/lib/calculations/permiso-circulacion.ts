@@ -2,7 +2,11 @@
 // Cálculo de Permiso de Circulación Chile 2026
 // ============================================
 
-import { UTM, PERMISO_CIRCULACION } from '@/lib/values/constants';
+import {
+  UTM,
+  PERMISO_CIRCULACION,
+  PERMISO_CIRCULACION_DESCUENTOS_VEHICULO,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PermisoCirculacionInput {
@@ -105,10 +109,11 @@ export function calculatePermisoCirculacion(
 
   let montoBase = permisoUTM * valorUTM;
 
-  // Motos y taxis: tarifa reducida (50% de la tabla general).
-  if (tipoVehiculo === 'motocicleta' || tipoVehiculo === 'taxi') {
-    montoBase *= 0.5;
-  }
+  // Factor por tipo de vehículo: motos y taxis pagan 50% (definido
+  // en `PERMISO_CIRCULACION_DESCUENTOS_VEHICULO`).
+  const factorTipo =
+    PERMISO_CIRCULACION_DESCUENTOS_VEHICULO[tipoVehiculo] ?? 1.0;
+  montoBase *= factorTipo;
 
   // Descuento por antigüedad (vehículos > 20 años: 50%).
   let factorAntiguedad = 0;

@@ -3,7 +3,11 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
-import { UTM, RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import {
+  UTM,
+  RETENCION_HONORARIOS_CALENDARIO,
+  PPM_PRESUNCION,
+} from '@/lib/values/constants';
 
 export interface PPMInput {
   /**
@@ -37,8 +41,8 @@ export interface PPMResult {
  * Tasas de PPM por tipo de actividad.
  *
  * Para profesionales 2da categoría la tasa de PPM coincide con la
- * retención de honorarios (calendario Ley 21.578). En 2026 es 15,25%
- * — leído desde RETENCION_HONORARIOS_CALENDARIO.
+ * retención de honorarios (calendario Ley 21.578). Se usa el año
+ * vigente del calendario, calculado dinámicamente.
  *
  * Para 1ra categoría las tasas iniciales son las que el SII fija al
  * inicio de actividades; luego se recalculan trimestralmente según
@@ -47,8 +51,22 @@ export interface PPMResult {
  * Base legal: Art. 84 LIR (1ra categoría) y Art. 88 LIR + Ley
  * 21.578 (retención honorarios = PPM 2da categoría).
  */
+const aniosCalendarioPPM = Object.keys(RETENCION_HONORARIOS_CALENDARIO)
+  .map(Number)
+  .sort((a, b) => a - b);
+const ANIO_PPM_VIGENTE = (() => {
+  const actual = new Date().getFullYear();
+  if (actual <= aniosCalendarioPPM[0]) return aniosCalendarioPPM[0];
+  if (actual >= aniosCalendarioPPM[aniosCalendarioPPM.length - 1])
+    return aniosCalendarioPPM[aniosCalendarioPPM.length - 1];
+  return actual;
+})();
+
 const TASAS_PPM: Record<PPMInput['actividad'], number> = {
-  profesional: RETENCION_HONORARIOS_CALENDARIO[2026],
+  profesional:
+    RETENCION_HONORARIOS_CALENDARIO[
+      ANIO_PPM_VIGENTE as keyof typeof RETENCION_HONORARIOS_CALENDARIO
+    ] ?? 15.25,
   comercio: 1,
   transporte: 0.3,
   construccion: 0.2,
@@ -62,11 +80,11 @@ const NOMBRES_ACTIVIDAD: Record<PPMInput['actividad'], string> = {
 };
 
 /**
- * Tope de la presunción 30% para profesionales 2da categoría.
- * Art. 50 inciso 3° LIR: "no podrá deducirse más del 30% con tope
- * de 15 UTA por concepto de gastos presuntos".
+ * Tope y porcentaje de la presunción 30% para profesionales 2da
+ * categoría. Definidos en `PPM_PRESUNCION` (Art. 50 inciso 3° LIR).
  */
-const TOPE_PRESUNCION_UTA = 15;
+const TOPE_PRESUNCION_UTA = PPM_PRESUNCION.tope_uta;
+const PRESUNCION_PCT = PPM_PRESUNCION.porcentaje;
 
 /**
  * Calcula los Pagos Provisionales Mensuales (PPM).
@@ -100,8 +118,8 @@ export function calculatePPM(input: PPMInput): PPMResult {
     gastos = Math.min(gastosPresuntos, ingresos);
   } else if (actividad === 'profesional') {
     // Profesionales: presunción 30%, tope 15 UTA (Art. 50 LIR)
-    const presuncion30 = ingresos * 0.3;
-    gastos = Math.min(presuncion30, topePresuncionCLP);
+    const presuncion = ingresos * (PRESUNCION_PCT / 100);
+    gastos = Math.min(presuncion, topePresuncionCLP);
     aplicoPresuncionGastos = true;
   } else {
     // 1ra categoría sin gastos declarados: base bruta directa
@@ -139,7 +157,7 @@ export function ppmToResults(result: PPMResult): CalculatorResult[] {
 
   if (result.aplicoPresuncionGastos) {
     results.push({
-      label: 'Tope Presunción 15 UTA (Art. 50 LIR)',
+      label: `Tope Presunción ${TOPE_PRESUNCION_UTA} UTA (Art. 50 LIR)`,
       value: result.topePresuncionCLP,
       format: 'CLP',
     });

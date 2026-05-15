@@ -4,6 +4,7 @@
 
 import {
   AFP,
+  AFP_OBLIGATORIA_PCT,
   SALUD,
   SEGURO_CESANTIA,
   GRATIFICACION,
@@ -88,14 +89,17 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
 
   // ---------- Descuentos del trabajador ----------
   const afpData = AFP[afp];
-  // 10% obligatorio + comisión variable (esta última también la paga el trabajador)
-  const descuentoAFP = totalHaberes * (10 / 100 + afpData.comision / 100);
+  // 10% obligatorio (D.L. 3500 Art. 17) + comisión variable (esta
+  // última también la paga el trabajador).
+  const descuentoAFP =
+    totalHaberes * ((AFP_OBLIGATORIA_PCT + afpData.comision) / 100);
 
   let descuentoSalud: number;
   if (saludTipo === 'fonasa') {
     descuentoSalud = totalHaberes * (SALUD.fonasa.tasa / 100);
   } else {
-    descuentoSalud = totalHaberes * 0.07;
+    // Isapre: 7% mínimo legal del imponible (Art. 84 D.L. 3500).
+    descuentoSalud = totalHaberes * (SALUD.isapre.tasa_minima / 100);
   }
 
   const descuentoSeguroCesantia = contratoIndefinido

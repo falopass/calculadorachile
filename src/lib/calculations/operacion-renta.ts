@@ -26,6 +26,10 @@ export interface OperacionRentaResult {
   impuesto: number;
   tasaEfectiva: number;
   retencionSugerida: number;
+  /** Tasa de retención aplicada (% según año vigente del calendario). */
+  tasaRetencion: number;
+  /** Año del calendario Ley 21.578 efectivamente usado. */
+  anioRetencion: number;
   tramoAplicado: string;
 }
 
@@ -86,8 +90,24 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
   const impuesto = Math.max(0, Math.round(impuestoUTA * valorUTA));
   const tasaEfectiva = rentaBruta > 0 ? (impuesto / rentaBruta) * 100 : 0;
 
-  // Retención sugerida según el calendario Ley 21.578 (año actual).
-  const tasaRetencion = RETENCION_HONORARIOS_CALENDARIO[2026] ?? 15.25;
+  // Retención sugerida según el calendario Ley 21.578.
+  //
+  // El calendario solo cubre 2025-2028. Si el año actual queda fuera
+  // del rango, usamos el año más cercano dentro del calendario.
+  const aniosCalendario = Object.keys(RETENCION_HONORARIOS_CALENDARIO)
+    .map(Number)
+    .sort((a, b) => a - b);
+  const anioActual = new Date().getFullYear();
+  const anioVigente =
+    anioActual <= aniosCalendario[0]
+      ? aniosCalendario[0]
+      : anioActual >= aniosCalendario[aniosCalendario.length - 1]
+        ? aniosCalendario[aniosCalendario.length - 1]
+        : anioActual;
+  const tasaRetencion =
+    RETENCION_HONORARIOS_CALENDARIO[
+      anioVigente as keyof typeof RETENCION_HONORARIOS_CALENDARIO
+    ] ?? 15.25;
   const retencionSugerida = Math.round(rentaBruta * (tasaRetencion / 100));
 
   return {
@@ -100,6 +120,8 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
     impuesto,
     tasaEfectiva: Math.round(tasaEfectiva * 100) / 100,
     retencionSugerida,
+    tasaRetencion,
+    anioRetencion: anioVigente,
     tramoAplicado,
   };
 }
@@ -151,7 +173,7 @@ export function operacionRentaToResults(result: OperacionRentaResult): Calculato
       format: 'percentage',
     },
     {
-      label: `Retención Sugerida (${RETENCION_HONORARIOS_CALENDARIO[2026]}%)`,
+      label: `Retención Sugerida (${result.tasaRetencion}% — ${result.anioRetencion})`,
       value: result.retencionSugerida,
       format: 'CLP',
     },

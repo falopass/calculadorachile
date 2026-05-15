@@ -7,6 +7,8 @@ import {
   UTM,
   UF,
   RETENCION_HONORARIOS_CALENDARIO,
+  RETENCION_HONORARIOS_DISTRIBUCION,
+  type AnioRetencionHonorarios,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
@@ -101,7 +103,13 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   // adicionalmente.
   const montoLiquido = monto - retencion;
 
-  // Desglose informativo de la retención (cómo se reparte el 15,25% en 2026).
+  // Desglose informativo de la retención (cómo se reparte el % total
+  // del año correspondiente, según calendario Ley 21.578). Los
+  // porcentajes vienen de RETENCION_HONORARIOS_DISTRIBUCION para que
+  // se actualicen automáticamente cuando avance el calendario.
+  const distribucion =
+    RETENCION_HONORARIOS_DISTRIBUCION[ano as AnioRetencionHonorarios] ??
+    RETENCION_HONORARIOS_DISTRIBUCION[2026];
   const desgloseRetencion = exento
     ? {
         impuestoRenta: 0,
@@ -111,15 +119,19 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
         accidentesTrabajo: 0,
       }
     : {
-        impuestoRenta: Math.round(monto * 0.10),
-        afp: Math.round(monto * 0.0062),
-        salud: Math.round(monto * 0.0218),
-        seguroInvalidezSobrevivencia: Math.round(monto * 0.0152),
-        accidentesTrabajo: Math.round(monto * 0.0093),
+        impuestoRenta: Math.round(monto * (distribucion.impuesto_renta / 100)),
+        afp: Math.round(monto * (distribucion.afp / 100)),
+        salud: Math.round(monto * (distribucion.salud / 100)),
+        seguroInvalidezSobrevivencia: Math.round(monto * (distribucion.sis / 100)),
+        accidentesTrabajo: Math.round(monto * (distribucion.accidentes_trabajo / 100)),
       };
 
-  // PPM asociado (informativo)
-  const ppmAsociado = calcularPPM ? Math.round(monto * 0.10) : 0;
+  // PPM asociado: corresponde al componente "Impuesto Renta" de la
+  // distribución (Art. 84 LIR — pago provisional mensual a cuenta
+  // del impuesto anual).
+  const ppmAsociado = calcularPPM
+    ? Math.round(monto * (distribucion.impuesto_renta / 100))
+    : 0;
 
   // Costo para el pagador (mandante)
   const costoEmpleador = calcularCostoEmpleador ? monto : 0;

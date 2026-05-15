@@ -36,6 +36,12 @@ export interface CreditoHipotecarioInput {
   simularPrepago?: boolean;
   /** Monto de prepago */
   montoPrepago?: number;
+  /**
+   * Mes en que se hace el prepago (1..plazoMeses). Default 12 (al
+   * cumplirse el primer año, escenario más típico). Se usa para
+   * estimar los intereses ahorrados sobre el saldo prepagado.
+   */
+  mesPrepago?: number;
 }
 
 export interface CreditoHipotecarioResult {
@@ -205,7 +211,8 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     calcularCAE = false,
     calcularGastosNotariales = false,
     simularPrepago = false,
-    montoPrepago = 0
+    montoPrepago = 0,
+    mesPrepago = 12
   } = input;
   void tipoTasa;
   void periodoGraciaMeses;
@@ -407,7 +414,15 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     // Ahorro de intereses por prepago "puntual": calcular intereses
     // ahorrados sobre el saldo prepagado a lo largo del resto del
     // plazo. Aproximación: monto_prepago × tasa_mensual × meses_restantes.
-    const mesesRestantes = plazoMeses - 12;
+    //
+    // mesPrepago es 1-indexed (mes 1 = primer mes). El usuario puede
+    // pasar cualquier mes en (0, plazoMeses); fuera del rango se
+    // recorta para evitar valores negativos o triviales.
+    const mesPrepagoValido = Math.max(
+      1,
+      Math.min(Math.round(mesPrepago), plazoMeses - 1),
+    );
+    const mesesRestantes = plazoMeses - mesPrepagoValido;
     ahorroPrepago = montoPrepago * tasaMensual * mesesRestantes;
   }
 

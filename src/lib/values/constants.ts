@@ -699,3 +699,261 @@ export const APV_REGIMEN_B = {
  * El recargo real depende de cada concesionaria.
  */
 export const TAG_RECARGO_SIN_TAG = 50;
+
+
+// ============================================
+// Tasa AFP obligatoria (10%)
+// ----------------------------------------------
+// Cotización obligatoria a la cuenta individual
+// del trabajador (D.L. 3500 Art. 17). Es la
+// misma para dependientes e independientes y se
+// suma a la comisión variable de cada AFP.
+//
+// Centralizada aquí para evitar el "10" mágico
+// repetido en sueldo-liquido, costo-empleado,
+// cotizacion-independientes y horas-extra.
+// ============================================
+export const AFP_OBLIGATORIA_PCT = 10;
+
+// ============================================
+// Conversión semanas → mes (4.33)
+// ----------------------------------------------
+// 52 semanas / 12 meses = 4,333... Se usa para
+// derivar horas mensuales a partir de jornada
+// semanal en horas-extra y otros cálculos
+// laborales.
+// ============================================
+export const SEMANAS_POR_MES = 4.33;
+
+// ============================================
+// Distribución de la retención de honorarios
+// (Ley 21.578 — calendario por año)
+// ----------------------------------------------
+// La retención total se descompone en:
+//   - Impuesto a la renta (PPM)
+//   - AFP (escalonado)
+//   - Salud 7%
+//   - Seguro de Invalidez y Sobrevivencia
+//   - Seguro de Accidentes del Trabajo
+//
+// La suma de los componentes debe igualar la
+// tasa total del año correspondiente. Estos
+// porcentajes los publica la Subsecretaría de
+// Previsión Social cada año.
+//
+// Fuente: Subsecretaría de Previsión Social,
+//   "Calendario Ley 21.133/21.578 cotizaciones
+//   independientes 2025-2028".
+// ============================================
+export const RETENCION_HONORARIOS_DISTRIBUCION = {
+  2025: {
+    total: 14.5,
+    impuesto_renta: 10.0,
+    afp: 0.5,
+    salud: 1.75,
+    sis: 1.52,
+    accidentes_trabajo: 0.73,
+  },
+  2026: {
+    total: 15.25,
+    impuesto_renta: 10.0,
+    afp: 0.62,
+    salud: 2.18,
+    sis: 1.52,
+    accidentes_trabajo: 0.93,
+  },
+  2027: {
+    total: 16.0,
+    impuesto_renta: 10.0,
+    afp: 0.74,
+    salud: 2.61,
+    sis: 1.52,
+    accidentes_trabajo: 1.13,
+  },
+  2028: {
+    total: 17.0,
+    impuesto_renta: 10.0,
+    afp: 0.86,
+    salud: 3.05,
+    sis: 1.52,
+    accidentes_trabajo: 1.57,
+  },
+} as const;
+
+export type AnioRetencionHonorarios =
+  keyof typeof RETENCION_HONORARIOS_DISTRIBUCION;
+
+// ============================================
+// Aranceles notariales (DFL 292/1931)
+// ----------------------------------------------
+// Tarifas referenciales para el cálculo del costo
+// de escritura pública según tipo de trámite. Los
+// notarios fijan rangos dentro del DFL 292; estos
+// valores son promedios de mercado 2026.
+//
+// Mínimos y máximos en CLP, tasas en porcentaje
+// sobre el valor de la operación.
+// ============================================
+export const ARANCEL_NOTARIOS = {
+  /** Mínimo absoluto a cobrar por escritura. */
+  costo_minimo_clp: 50000,
+  /** Máximo absoluto (corte para escrituras grandes). */
+  costo_maximo_clp: 2000000,
+  /** Mínimo específico para mutuos hipotecarios. */
+  hipoteca_minimo_clp: 100000,
+  /** Mínimo específico para escrituras de donación. */
+  donacion_minimo_clp: 100000,
+  /** Derechos del Conservador de Bienes Raíces (mínimo). */
+  derechos_registrales_minimo_clp: 30000,
+  /** Tasa de derechos registrales (% sobre el valor). */
+  derechos_registrales_tasa: 0.2,
+  /** Recargo por copias autorizadas / trámites adicionales. */
+  recargo_notaria_adicional: 15,
+  /**
+   * Tasas progresivas para escritura de compraventa
+   * de inmuebles (% sobre el valor según tramos en CLP).
+   */
+  compraventa_tramos: [
+    { hasta_clp: 500_000_000, tasa: 0.5 },
+    { hasta_clp: 1_000_000_000, tasa: 0.3 },
+    { hasta_clp: Infinity, tasa: 0.2 },
+  ],
+  /** Tasa para mutuos hipotecarios (% sobre el monto). */
+  hipoteca_tasa: 0.3,
+  /** Tasa para escrituras de donación (% sobre el valor). */
+  donacion_tasa: 0.4,
+  /** Testamentos: tarifa fija en UTM. */
+  testamento_utm: 2,
+  /**
+   * Impuesto de Timbres y Estampillas para mutuos
+   * hipotecarios (DL 3475 Art. 1 N°3): 0,066% mensual,
+   * tope 0,8% anual. La compraventa de inmuebles está
+   * EXENTA (Art. 24 N°6).
+   */
+  timbres_hipoteca_anual: 0.8,
+} as const;
+
+// ============================================
+// Contribuciones de bienes raíces
+// (Ley 17.235 — Impuesto Territorial)
+// ----------------------------------------------
+// El SII fija las tasas anuales según destino.
+// Las propiedades habitacionales tienen un
+// descuento de 0,025 puntos sobre la tasa, y
+// quedan exentas si el avalúo no supera 225,96
+// UTM (Art. 2° bis DL 3063).
+//
+// Los semestres de pago son abril y septiembre.
+// ============================================
+export const CONTRIBUCIONES_BIENES_RAICES = {
+  tasas_anuales: {
+    habitacional: 0.93,
+    comercial: 1.2,
+    industrial: 1.2,
+    sitio_eriado: 2.0,
+    agrario: 0.5,
+  },
+  /** Descuento (en puntos porcentuales) para uso habitacional. */
+  descuento_habitacional: 0.025,
+  /** Exención habitacional (avalúo ≤ 225,96 UTM). */
+  exencion_habitacional_utm: 225.96,
+} as const;
+
+// ============================================
+// Tarifas TAG urbano (Santiago)
+// ----------------------------------------------
+// Promedio horario punta + valle para autopistas
+// urbanas (Costanera Norte, Vespucio, Autopista
+// del Sol, Acceso Sur). Por categoría de vehículo
+// (1 auto/moto, 2 camioneta, 3 camión).
+// Fuente: tarifarios públicos de las concesionarias.
+// ============================================
+export const TAG_URBANO_SANTIAGO = {
+  categoria1: 1200,
+  categoria2: 1800,
+  categoria3: 2700,
+} as const;
+
+// ============================================
+// Permiso de circulación: descuentos por tipo
+// ----------------------------------------------
+// La tabla SII fija una sola progresión en UTM.
+// La práctica administrativa es aplicar 50% de
+// rebaja a motocicletas y taxis (vehículos con
+// uso especializado y/o tasación reducida).
+// ============================================
+export const PERMISO_CIRCULACION_DESCUENTOS_VEHICULO = {
+  motocicleta: 0.5,
+  taxi: 0.5,
+  automovil: 1.0,
+  camion: 1.0,
+  bus: 1.0,
+  carga: 1.0,
+} as const;
+
+// ============================================
+// PPM — Presunción de gastos profesionales
+// (Art. 50 inciso 3° LIR)
+// ----------------------------------------------
+// Cuando el profesional 2da categoría no declara
+// gastos efectivos, puede deducir el 30% de sus
+// ingresos como presunción, con tope de 15 UTA
+// anuales.
+// ============================================
+export const PPM_PRESUNCION = {
+  /** Porcentaje de presunción de gastos (Art. 50 LIR). */
+  porcentaje: 30,
+  /** Tope anual de la presunción en UTA. */
+  tope_uta: 15,
+} as const;
+
+// ============================================
+// Crédito automotriz — gastos asociados
+// ----------------------------------------------
+// Gastos operacionales típicos (comisiones,
+// inscripción, seguros obligatorios) usados para
+// estimar la CAE simple cuando el usuario no
+// entrega un valor explícito. Referencial.
+// ============================================
+export const CREDITO_AUTOMOTRIZ = {
+  /** Default % gastos asociados sobre el monto del crédito. */
+  gastos_asociados_default: 2,
+} as const;
+
+// ============================================
+// Subsidio habitacional — DS19 + ahorro mínimo
+// ----------------------------------------------
+// Complementa SUBSIDIO_HABITACIONAL (DS49 / DS01)
+// con DS19 (Integración Social y Territorial,
+// MINVU) y los montos de ahorro mínimo legales
+// para postular a cada DS y tramo.
+//
+// Los ahorros son fijos por decreto (NO derivados
+// del ingreso, como asumía la versión anterior).
+// ============================================
+export const SUBSIDIO_HABITACIONAL_DS19 = {
+  monto_max_propiedad_uf: 2200,
+  tramos: {
+    tramo1: { ingresoMaximoUF: 25, subsidioMaximoUF: 800 },
+    tramo2: { ingresoMaximoUF: 40, subsidioMaximoUF: 500 },
+    tramo3: { ingresoMaximoUF: 60, subsidioMaximoUF: 200 },
+  },
+} as const;
+
+/**
+ * Ahorro mínimo en UF requerido para postular,
+ * por tipo de subsidio y tramo. Montos fijos
+ * según decreto MINVU (no son % del ingreso).
+ *
+ *  - DS49 (Fondo Solidario, vivienda nueva): 10 UF
+ *  - DS01 tramo 1 (Sectores Medios): 30 UF
+ *  - DS01 tramo 2: 50 UF
+ *  - DS01 tramo 3: 80 UF
+ *  - DS19 tramo 1: 80 UF
+ *  - DS19 tramos 2-3: 100 UF
+ */
+export const SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF = {
+  ds49: { tramo1: 10, tramo2: 10, tramo3: 10 },
+  ds01: { tramo1: 30, tramo2: 50, tramo3: 80 },
+  ds19: { tramo1: 80, tramo2: 100, tramo3: 100 },
+} as const;

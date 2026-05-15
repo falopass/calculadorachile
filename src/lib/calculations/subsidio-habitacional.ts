@@ -2,7 +2,12 @@
 // Cálculo de Subsidio Habitacional MINVU Chile 2026
 // ============================================
 
-import { UF, SUBSIDIO_HABITACIONAL } from '@/lib/values/constants';
+import {
+  UF,
+  SUBSIDIO_HABITACIONAL,
+  SUBSIDIO_HABITACIONAL_DS19,
+  SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export type TipoSubsidio = 'ds49' | 'ds01' | 'ds19';
@@ -40,37 +45,18 @@ export interface SubsidioHabitacionalResult {
 }
 
 /**
- * Ahorro mínimo requerido por tipo de subsidio y tramo (en UF).
- *
- * Estos son los montos mínimos que el postulante debe tener
- * efectivamente ahorrados para postular. NO son derivados del
- * ingreso del hogar (la versión anterior asumía 10% del ingreso
- * máximo, lo cual no corresponde a la normativa).
+ * Ahorro mínimo y tramos DS19 ahora viven en `constants.ts` para
+ * mantener un único lugar de verdad regulatorio. Aquí solo se
+ * exponen alias locales cortos.
  *
  * Base legal:
- *  - DS49 (Fondo Solidario, vivienda nueva): 10 UF
- *  - DS01 tramo 1 (Sectores medios): 30 UF
- *  - DS01 tramo 2 (Sectores medios): 50 UF
- *  - DS19 (Integración Social): 80 UF
+ *  - DS49 (Fondo Solidario, vivienda nueva)
+ *  - DS01 (Sectores Medios)
+ *  - DS19 (Integración Social y Territorial)
  */
-const AHORRO_MINIMO_UF: Record<TipoSubsidio, Record<TramoSubsidio, number>> = {
-  ds49: { tramo1: 10, tramo2: 10, tramo3: 10 },
-  ds01: { tramo1: 30, tramo2: 50, tramo3: 80 },
-  ds19: { tramo1: 80, tramo2: 100, tramo3: 100 },
-};
-
-/**
- * DS19: Subsidio de Integración Social y Territorial.
- * Para hogares con ingresos hasta 60 UF mensuales (clase media).
- * Subsidio entre 50 y 800 UF según tramo socioeconómico.
- */
-const DS19_TRAMOS: Record<TramoSubsidio, { ingresoMaximoUF: number; subsidioMaximoUF: number }> = {
-  tramo1: { ingresoMaximoUF: 25, subsidioMaximoUF: 800 },
-  tramo2: { ingresoMaximoUF: 40, subsidioMaximoUF: 500 },
-  tramo3: { ingresoMaximoUF: 60, subsidioMaximoUF: 200 },
-};
-
-const DS19_MONTO_MAX_PROPIEDAD_UF = 2200;
+const AHORRO_MINIMO_UF = SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF;
+const DS19_TRAMOS = SUBSIDIO_HABITACIONAL_DS19.tramos;
+const DS19_MONTO_MAX_PROPIEDAD_UF = SUBSIDIO_HABITACIONAL_DS19.monto_max_propiedad_uf;
 
 const NOMBRES_TIPO: Record<TipoSubsidio, string> = {
   ds49: 'DS49 (Fondo Solidario)',

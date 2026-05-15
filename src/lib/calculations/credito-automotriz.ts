@@ -3,7 +3,7 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
-import { SEGURO_VEHICULAR } from '@/lib/values/constants';
+import { SEGURO_VEHICULAR, CREDITO_AUTOMOTRIZ } from '@/lib/values/constants';
 
 export interface CreditoAutomotrizInput {
   valorVehiculo: number;
@@ -64,7 +64,7 @@ export function calculateCreditoAutomotriz(
     tasaAnual,
     plazoMeses,
     incluyeSeguro = false,
-    gastosAsociadosPct = 2,
+    gastosAsociadosPct = CREDITO_AUTOMOTRIZ.gastos_asociados_default,
   } = input;
 
   const valorValido = Math.max(0, valorVehiculo);

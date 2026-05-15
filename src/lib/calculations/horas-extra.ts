@@ -2,7 +2,14 @@
 // Cálculo de Horas Extra Chile
 // ============================================
 
-import { HORAS_EXTRA, JORNADA_LEGAL, SALUD, SEGURO_CESANTIA } from '@/lib/values/constants';
+import {
+  HORAS_EXTRA,
+  JORNADA_LEGAL,
+  SALUD,
+  SEGURO_CESANTIA,
+  SEMANAS_POR_MES,
+  AFP_OBLIGATORIA_PCT,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface HorasExtraInput {
@@ -79,8 +86,8 @@ export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
   const sueldoBase =
     sueldoVariable && sueldoPromedio3Meses > 0 ? sueldoPromedio3Meses : sueldoBruto;
 
-  // Valor hora ordinaria: jornada × 4,33 semanas/mes.
-  const horasMensuales = jornadaSemanal * 4.33;
+  // Valor hora ordinaria: jornada × SEMANAS_POR_MES (4,33).
+  const horasMensuales = jornadaSemanal * SEMANAS_POR_MES;
   const valorHoraNormal = sueldoBase / horasMensuales;
 
   const recargoPorcentaje =
@@ -109,7 +116,7 @@ export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
     // del trabajador a seguro de cesantía (0,6%) si tiene contrato
     // indefinido. La comisión variable de la AFP no se incluye aquí
     // (varía por administradora).
-    const TASA_AFP_OBLIGATORIA = 10;
+    const TASA_AFP_OBLIGATORIA = AFP_OBLIGATORIA_PCT;
     const TASA_SALUD = SALUD.fonasa.tasa;
     const TASA_CESANTIA_TRABAJADOR = SEGURO_CESANTIA.contrato_indefinido.trabajador;
 

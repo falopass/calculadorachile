@@ -2,7 +2,11 @@
 // Cálculo de Costo TAG Autopista Chile 2026
 // ============================================
 
-import { TAG_RUTAS, TAG_RECARGO_SIN_TAG } from '@/lib/values/constants';
+import {
+  TAG_RUTAS,
+  TAG_RECARGO_SIN_TAG,
+  TAG_URBANO_SANTIAGO,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export type RutaPeaje =
@@ -51,13 +55,14 @@ const RUTA_A_KEY: Record<RutaPeaje, keyof typeof TAG_RUTAS | null> = {
 };
 
 /**
- * Tarifa promedio para autopistas urbanas (Costanera Norte, Vespucio,
- * Autopista del Sol, Acceso Sur, etc.). Promedio horario punta + valle.
+ * Tarifas urbano-Santiago (Costanera Norte, Vespucio, Autopista del
+ * Sol, Acceso Sur, etc.) ahora viven en `TAG_URBANO_SANTIAGO` en
+ * constants.ts. Mapeamos por categoría de vehículo.
  */
 const URBANO_SANTIAGO_TARIFA: Record<1 | 2 | 3, number> = {
-  1: 1200,
-  2: 1800,
-  3: 2700,
+  1: TAG_URBANO_SANTIAGO.categoria1,
+  2: TAG_URBANO_SANTIAGO.categoria2,
+  3: TAG_URBANO_SANTIAGO.categoria3,
 };
 
 /**
