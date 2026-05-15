@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import { faqPageSchema, serializeSchema } from '@/lib/seo/schema';
 
 export interface FAQItem {
   question: string;
@@ -14,41 +15,43 @@ export interface FAQProps {
   items: FAQItem[];
   /** Título de la sección */
   title?: string;
+  /**
+   * Si emite o no el JSON-LD `FAQPage`. Default `true` por
+   * retrocompatibilidad. Páginas que ya inyectan su propio FAQPage
+   * (como /faq con grupos múltiples) deben pasar `false` para
+   * evitar duplicación de structured data.
+   */
+  emitSchema?: boolean;
 }
 
 /**
- * FAQ - Componente de preguntas frecuentes con Schema.org
+ * FAQ - Componente de preguntas frecuentes con Schema.org opcional.
  *
- * Incluye marcado structured data para SEO y animaciones suaves.
+ * Por defecto emite el FAQPage. Cuando se renderiza dentro de una
+ * página que ya inyecta el schema globalmente, pasar `emitSchema={false}`.
  */
-export default function FAQ({ items, title = 'Preguntas Frecuentes' }: FAQProps) {
+export default function FAQ({
+  items,
+  title = 'Preguntas Frecuentes',
+  emitSchema = true,
+}: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Schema.org FAQPage structured data
-  const schemaData = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      {/* Schema.org JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-      />
+      {/* Schema.org JSON-LD (opt-out cuando una página ya lo emite). */}
+      {emitSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeSchema(faqPageSchema(items)),
+          }}
+        />
+      )}
 
       <motion.section
         initial={{ opacity: 0, y: 20 }}

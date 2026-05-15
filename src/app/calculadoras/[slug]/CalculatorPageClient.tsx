@@ -8,6 +8,8 @@ import EnhancedFAQ from "@/components/calculator/EnhancedFAQ";
 import SeoStructuredData from "@/components/calculator/SeoStructuredData";
 import CalculatorPageLayout from "@/components/calculator/CalculatorPageLayout";
 import LiveValuesSection from "@/components/calculator/LiveValuesSection";
+import RelatedCalculators from "@/components/calculator/RelatedCalculators";
+import { calculators } from "@/data/calculators";
 import { calculateSueldoLiquido, sueldoLiquidoToResults } from "@/lib/calculations/sueldo-liquido";
 import { calculateFiniquito, finiquitoToResults } from "@/lib/calculations/finiquito";
 import { calculateUFCLP, ufclpToResults } from "@/lib/calculations/uf-clp";
@@ -531,6 +533,26 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
           </section>
         )}
       </div>
+
+      {/*
+        Calculadoras relacionadas — refuerza linking interno hacia
+        otras calculadoras de la misma categoría. Se filtra la
+        actual y se cierran 6 tarjetas máximo en un scroll horizontal.
+      */}
+      {(() => {
+        const sameCategory = calculators
+          .filter(
+            (c) => c.category === calculator.category && c.id !== calculator.id,
+          )
+          .slice(0, 6);
+        if (sameCategory.length === 0) return null;
+        return (
+          <RelatedCalculators
+            calculators={sameCategory}
+            title="También te puede interesar"
+          />
+        );
+      })()}
     </CalculatorPageLayout>
   );
 }

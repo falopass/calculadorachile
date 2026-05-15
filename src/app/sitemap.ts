@@ -1,98 +1,121 @@
 // ============================================
 // Sitemap dinámico para SEO
-// Genera automáticamente todas las URLs del sitio
+// ----------------------------------------------
+// Genera /sitemap.xml automáticamente con:
+//   - Páginas estáticas (home, catálogo, blog, guías, FAQ, legales)
+//   - 40 calculadoras con prioridad por categoría
+//   - 10 artículos del blog con fecha real de publicación
+//   - 6 guías pillar con fecha de actualización
+//
+// `lastModified` usa fechas reales del contenido (no `new Date()` en
+// cada build) para que los crawlers vean frescura solo cuando hay
+// cambio real.
 // ============================================
 
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
+import { guias } from '@/data/guias';
 import { SITE_URL } from '@/lib/site';
 
-// Prioridades según importancia del contenido
+// Prioridades por categoría de calculadora (heurística por demanda
+// de búsqueda en Chile).
 const CATEGORY_PRIORITIES: Record<string, number> = {
-  'sueldo': 0.9,
-  'impuestos': 0.85,
-  'beneficios': 0.85,
-  'conversiones': 0.8,
-  'vivienda': 0.75,
-  'vehiculos': 0.75,
-  'familia': 0.7,
-  'empresas': 0.7,
-  'pension': 0.7,
-  'educacion': 0.65,
-  'hogar': 0.65,
-  'servicios': 0.6,
+  sueldo: 0.9,
+  impuestos: 0.85,
+  beneficios: 0.85,
+  conversiones: 0.8,
+  vivienda: 0.75,
+  vehiculos: 0.75,
+  familia: 0.7,
+  empresas: 0.7,
+  pension: 0.7,
+  educacion: 0.65,
+  hogar: 0.65,
+  servicios: 0.6,
 };
 
+// Fecha estable para el sitio en general. Se actualiza solo cuando se
+// reedita estructura/contenido global (hoy: relanzamiento SEO).
+const SITE_LAST_MODIFIED = new Date('2026-05-15');
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Páginas de calculadoras con prioridad por categoría
+  // Calculadoras: prioridad por categoría, lastModified = fecha global.
   const calculatorPages = calculators.map((calc) => ({
     url: `${SITE_URL}/calculadoras/${calc.slug}`,
-    lastModified: new Date(),
+    lastModified: SITE_LAST_MODIFIED,
     changeFrequency: 'monthly' as const,
-    priority: CATEGORY_PRIORITIES[calc.category] || 0.7,
+    priority: CATEGORY_PRIORITIES[calc.category] ?? 0.7,
   }));
 
-  // Páginas del blog con fecha real
+  // Blog: fecha real de publicación.
   const blogPages = articles.map((article) => ({
     url: `${SITE_URL}/blog/${article.slug}`,
     lastModified: new Date(article.date),
     changeFrequency: 'monthly' as const,
-    priority: 0.6,
+    priority: 0.7,
   }));
 
-  // Páginas estáticas con prioridades diferenciadas
+  // Guías pillar: fecha de actualización (más reciente que la
+  // publicación si hay revisiones).
+  const guiasPages = guias.map((g) => ({
+    url: `${SITE_URL}/guias/${g.slug}`,
+    lastModified: new Date(g.updatedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.85, // las guías pillar son más profundas que el blog
+  }));
+
+  // Páginas estáticas
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 1.0
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'weekly',
+      priority: 1.0,
     },
     {
       url: `${SITE_URL}/calculadoras`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.9
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'weekly',
+      priority: 0.95,
     },
     {
       url: `${SITE_URL}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
       url: `${SITE_URL}/guias`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     {
       url: `${SITE_URL}/faq`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
-    // Páginas legales
     {
       url: `${SITE_URL}/privacidad`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3
+      lastModified: new Date('2026-03-31'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
     {
       url: `${SITE_URL}/terminos`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3
+      lastModified: new Date('2026-03-31'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
     {
       url: `${SITE_URL}/cookies`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3
+      lastModified: new Date('2026-03-31'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ];
 
-  return [...staticPages, ...calculatorPages, ...blogPages];
+  return [...staticPages, ...calculatorPages, ...guiasPages, ...blogPages];
 }

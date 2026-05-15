@@ -10,15 +10,25 @@ const footerLinks = {
       { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
       { href: '/calculadoras/calculadora-uf-clp', label: 'Conversor UF' },
       { href: '/calculadoras/calculadora-iva', label: 'IVA' },
+      { href: '/calculadoras/calculadora-credito-hipotecario', label: 'Crédito Hipotecario' },
       { href: '/calculadoras/calculadora-horas-extra', label: 'Horas Extra' },
       { href: '/calculadoras', label: 'Ver todas →' },
+    ],
+  },
+  guias: {
+    title: 'Guías',
+    links: [
+      { href: '/guias/sueldo-liquido-chile', label: 'Sueldo líquido en Chile' },
+      { href: '/guias/finiquito-laboral-chile', label: 'Finiquito laboral' },
+      { href: '/guias/uf-utm-indicadores-chile', label: 'UF, UTM e IPC' },
+      { href: '/guias/credito-hipotecario-chile', label: 'Crédito hipotecario' },
+      { href: '/guias', label: 'Todas las guías →' },
     ],
   },
   recursos: {
     title: 'Recursos',
     links: [
       { href: '/blog', label: 'Blog' },
-      { href: '/guias', label: 'Guías' },
       { href: '/faq', label: 'Preguntas frecuentes' },
     ],
   },
@@ -126,8 +136,27 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Recursos column */}
+          {/* Guías column */}
           <div className="col-span-1 md:col-span-2">
+            <h3 className="text-sm font-semibold text-[var(--foreground)] mb-3">
+              {footerLinks.guias.title}
+            </h3>
+            <ul className="space-y-2">
+              {footerLinks.guias.links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Recursos column */}
+          <div className="col-span-1 md:col-span-1">
             <h3 className="text-sm font-semibold text-[var(--foreground)] mb-3">
               {footerLinks.recursos.title}
             </h3>
@@ -146,7 +175,7 @@ export default function Footer() {
           </div>
 
           {/* Legal column */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 md:col-span-1">
             <h3 className="text-sm font-semibold text-[var(--foreground)] mb-3">
               {footerLinks.legal.title}
             </h3>

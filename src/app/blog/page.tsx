@@ -1,61 +1,158 @@
-import { Metadata } from 'next';
-import { articles } from '@/data/articles';
-import ArticleCard from '@/components/blog/ArticleCard';
+// ============================================
+// Índice del blog — /blog
+// ----------------------------------------------
+// Lista todos los artículos. Incluye CollectionPage + BreadcrumbList
+// schema y un H2 explícito para no saltar de h1 a h3 en cards.
+// ============================================
 
-export const metadata: Metadata = {
-  title: 'Blog de Finanzas y Legislación Laboral Chile | CalculaChile',
-  description: 'Artículos y guías sobre legislación laboral, impuestos, vivienda y finanzas personales en Chile. Actualizado 2026.',
-  keywords: ['blog finanzas Chile', 'guía laboral Chile', 'impuestos Chile', 'derechos trabajadores Chile'],
-};
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { BookOpen } from 'lucide-react';
+
+import Breadcrumbs from '@/components/navigation/Breadcrumbs';
+import ArticleCard from '@/components/blog/ArticleCard';
+import JsonLd from '@/components/seo/JsonLd';
+import {
+  collectionPageSchema,
+  breadcrumbSchema,
+} from '@/lib/seo/schema';
+import { buildPageMetadata } from '@/lib/seo/metadata';
+import { absoluteUrl } from '@/lib/site';
+import { articles } from '@/data/articles';
+
+const PAGE_TITLE = 'Blog de finanzas y legislación laboral chilena';
+const PAGE_DESC =
+  'Artículos prácticos sobre sueldo, finiquito, IVA, créditos hipotecarios, AFP y derechos laborales en Chile. Actualizado a 2026 con bases legales citadas.';
+
+export const metadata: Metadata = buildPageMetadata({
+  path: '/blog',
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
+  keywords: [
+    'blog finanzas chile',
+    'blog laboral chile',
+    'derechos trabajadores chile',
+    'impuestos chile blog',
+    'sueldo líquido artículos',
+    'finiquito chile',
+    'guía laboral 2026',
+  ],
+});
 
 export default function BlogPage() {
+  const url = absoluteUrl('/blog');
+
+  // Agrupar artículos por categoría para mostrarlos organizados
+  const byCategory = articles.reduce<Record<string, typeof articles>>(
+    (acc, art) => {
+      const cat = art.category;
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push(art);
+      return acc;
+    },
+    {},
+  );
+
+  const categoryOrder = [
+    'laboral',
+    'impuestos',
+    'vivienda',
+    'educacion-financiera',
+  ];
+  const categoryLabels: Record<string, string> = {
+    laboral: 'Laboral y sueldo',
+    impuestos: 'Impuestos y tributos',
+    vivienda: 'Vivienda y arriendo',
+    'educacion-financiera': 'Educación financiera',
+  };
+
+  // Schema: CollectionPage + BreadcrumbList
+  const schemas = [
+    collectionPageSchema({
+      url,
+      name: PAGE_TITLE,
+      description: PAGE_DESC,
+      items: articles.map((art) => ({
+        name: art.title,
+        url: absoluteUrl(`/blog/${art.slug}`),
+        description: art.description,
+      })),
+    }),
+    breadcrumbSchema([
+      { name: 'Inicio', path: '/' },
+      { name: 'Blog' },
+    ]),
+  ];
+
   return (
-    <div className="min-h-screen bg-[var(--background)]">
-      {/* Header */}
-      <div className="bg-gradient-to-b from-[var(--color-primary-600)]/5 to-transparent">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-primary-500)]/10 text-[var(--color-primary-600)] text-sm font-medium mb-4">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-              Blog
+    <>
+      <JsonLd id="blog-index" data={schemas} />
+
+      <div className="container-base py-8 md:py-12">
+        <Breadcrumbs
+          items={[{ label: 'Inicio', href: '/' }, { label: 'Blog' }]}
+        />
+
+        <div className="max-w-5xl mx-auto">
+          {/* Hero */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--color-primary-500)]/10 mb-4">
+              <BookOpen className="w-8 h-8 text-[var(--color-primary-500)]" />
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-3">
-              Finanzas y Legislación en Chile
+            <h1 className="heading-display text-3xl md:text-4xl text-[var(--foreground)] mb-3">
+              {PAGE_TITLE}
             </h1>
-            <p className="text-base md:text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto">
-              Guías y artículos prácticos sobre legislación laboral, impuestos, vivienda y finanzas personales.
-              Todo en lenguaje simple y con ejemplos en pesos chilenos.
+            <p className="text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto leading-relaxed">
+              {PAGE_DESC}
             </p>
+          </div>
+
+          {articles.length > 0 ? (
+            <div className="space-y-12">
+              {categoryOrder.map((cat) => {
+                const list = byCategory[cat];
+                if (!list || list.length === 0) return null;
+                return (
+                  <section key={cat}>
+                    <h2 className="text-xl font-bold text-[var(--foreground)] mb-5 capitalize">
+                      {categoryLabels[cat] ?? cat}
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {list.map((art, idx) => (
+                        <ArticleCard
+                          key={art.slug}
+                          article={art}
+                          index={idx}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center py-16 text-[var(--foreground-muted)]">
+              <p>Pronto publicaremos artículos. Vuelve en unos días.</p>
+            </div>
+          )}
+
+          {/* CTA a guías */}
+          <div className="mt-16 p-6 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] text-center">
+            <h2 className="text-lg font-semibold text-[var(--foreground)] mb-2">
+              ¿Buscas algo más profundo?
+            </h2>
+            <p className="text-sm text-[var(--foreground-secondary)] mb-4">
+              Lee nuestras guías pillar (15+ minutos) con todas las fórmulas, ejemplos numéricos y bases legales.
+            </p>
+            <Link
+              href="/guias"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-primary-600)] text-white text-sm font-medium hover:bg-[var(--color-primary-500)] transition-all"
+            >
+              Ver guías completas
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* Articles Grid */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        {articles.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
-            {articles.map((article, index) => (
-              <ArticleCard key={article.slug} article={article} index={index} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--background-secondary)] flex items-center justify-center">
-              <svg className="w-8 h-8 text-[var(--foreground-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-[var(--foreground)] mb-2">
-              No hay artículos disponibles
-            </h3>
-            <p className="text-[var(--foreground-secondary)]">
-              Pronto publicaremos nuevo contenido. ¡Vuelve pronto!
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
+    </>
   );
 }

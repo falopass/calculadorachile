@@ -7,6 +7,8 @@ import SkipLinks from '@/components/ui/SkipLinks';
 import { ToastProvider } from '@/components/ui/Toast';
 import { GAProvider } from '@/components/analytics/GAProvider';
 import { SITE_URL, SITE_NAME } from '@/lib/site';
+import JsonLd from '@/components/seo/JsonLd';
+import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
 
 // Solo dos familias: Inter (UI/body) + Syne (display/headings).
 // Pesos mínimos para reducir payload de fuentes ~70%.
@@ -37,6 +39,7 @@ const OG_IMAGE = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: '/' },
+  manifest: '/site.webmanifest',
   title: {
     default: `${SITE_NAME} — Calculadoras de Sueldo, Finiquito y UF para Chile`,
     template: `%s | ${SITE_NAME}`,
@@ -44,13 +47,28 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     'calculadora chile',
-    'sueldo líquido',
-    'finiquito',
-    'UF',
-    'UTM',
-    'IVA',
-    'crédito hipotecario',
-    'impuestos chile',
+    'calculadora sueldo líquido',
+    'calculadora finiquito',
+    'calculadora UF',
+    'calculadora UTM',
+    'calculadora IVA',
+    'calculadora crédito hipotecario',
+    'calculadora boleta de honorarios',
+    'calculadora horas extra',
+    'calculadora vacaciones proporcionales',
+    'calculadora indemnización años de servicio',
+    'calculadora gratificación legal',
+    'calculadora reajuste arriendo',
+    'calculadora permiso de circulación',
+    'AFP Chile',
+    'FONASA Isapre',
+    'descuentos legales sueldo',
+    'impuesto segunda categoría',
+    'tope imponible UF',
+    'Código del Trabajo',
+    'SII',
+    'Dirección del Trabajo',
+    'pesos chilenos CLP',
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -140,6 +158,15 @@ export default function RootLayout({
         style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}
         className="min-h-screen flex flex-col"
       >
+        {/*
+          Schemas globales: Organization + WebSite con SearchAction.
+          Se inyectan en el body (no head) porque <script type="application/ld+json">
+          es válido en cualquier parte del documento, y así no compite
+          con el theme-init synchronous script en el head.
+        */}
+        <JsonLd id="root-org" data={organizationSchema()} />
+        <JsonLd id="root-site" data={websiteSchema()} />
+
         <SkipLinks />
         <ToastProvider>
           <GAProvider>

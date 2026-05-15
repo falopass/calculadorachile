@@ -1,127 +1,124 @@
+// ============================================
+// SEO Structured Data — calculadora individual
+// ----------------------------------------------
+// Reemplaza la versión antigua que reimplementaba schemas locales.
+// Ahora delega a los generadores compartidos en src/lib/seo/schema.ts:
+//   - SoftwareApplication enriquecido (featureList, dates)
+//   - FAQPage si la calculadora tiene FAQs
+//   - BreadcrumbList con ruta completa
+//   - HowTo con 3 pasos genéricos para guiar al usuario
+//
+// Todo se inyecta vía el componente JsonLd compartido.
+// ============================================
+
 'use client';
 
 import type { Calculator } from '@/types/calculator';
-import { SITE_URL, SITE_NAME, absoluteUrl } from '@/lib/site';
+import {
+  softwareApplicationSchema,
+  faqPageSchema,
+  breadcrumbSchema,
+  howToSchema,
+} from '@/lib/seo/schema';
+import JsonLd from '@/components/seo/JsonLd';
 
 interface SeoStructuredDataProps {
   calculator: Calculator;
   url: string;
 }
 
+/** Etiquetas legibles de cada categoría para los breadcrumbs. */
+const CATEGORY_LABELS: Record<Calculator['category'], string> = {
+  sueldo: 'Sueldo y remuneraciones',
+  impuestos: 'Impuestos y tributos',
+  beneficios: 'Beneficios laborales',
+  conversiones: 'Conversores',
+  familia: 'Familia y dependientes',
+  vivienda: 'Vivienda y hogar',
+  vehiculos: 'Vehículos y transporte',
+  empresas: 'Empresas y PYMEs',
+  servicios: 'Servicios',
+  pension: 'Pensiones y previsión',
+  educacion: 'Educación',
+  hogar: 'Hogar y servicios',
+};
+
 /**
- * Genera datos estructurados Schema.org para calculadoras
- * 
- * Incluye:
- * - SoftwareApplication: Datos de la calculadora
- * - FAQPage: Preguntas frecuentes
- * - BreadcrumbList: Navegación
+ * Construye un featureList a partir de los inputs declarados en la
+ * calculadora (los nombres son indicativos del alcance funcional).
  */
-export function generateCalculatorSchema(calculator: Calculator, url: string) {
-  // Schema.org SoftwareApplication
-  const softwareApplication = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: calculator.name,
-    description: calculator.description,
-    url: url,
-    applicationCategory: 'FinanceApplication',
-    operatingSystem: 'Web Browser',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'CLP',
-    },
-    author: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    keywords: calculator.keywords?.join(', '),
-  };
+function deriveFeatures(calculator: Calculator): string[] {
+  const baseFeatures = [
+    'Cálculo en tiempo real',
+    'Valores oficiales actualizados a 2026',
+    'Sin registro ni descargas',
+    'Resultados con desglose detallado',
+  ];
 
-  // Schema.org FAQPage si hay preguntas frecuentes
-  let faqPage = null;
-  if (calculator.faq && calculator.faq.length > 0) {
-    faqPage = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: calculator.faq.map((faq) => ({
-        '@type': 'Question',
-        name: faq.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: faq.answer,
-        },
-      })),
-    };
+  // Si la calculadora tiene 5+ inputs, asume escenarios avanzados.
+  if (calculator.inputs.length >= 5) {
+    baseFeatures.push('Escenarios personalizados');
   }
-
-  // Schema.org BreadcrumbList
-  const breadcrumbList = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Inicio',
-        item: absoluteUrl('/'),
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Calculadoras',
-        item: absoluteUrl('/calculadoras'),
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: calculator.name,
-        item: url,
-      },
-    ],
-  };
-
-  return {
-    softwareApplication,
-    faqPage,
-    breadcrumbList,
-  };
+  // Si tiene FAQ con 5+ items, marca como "documentada".
+  if (calculator.faq && calculator.faq.length >= 5) {
+    baseFeatures.push('Preguntas frecuentes integradas');
+  }
+  return baseFeatures;
 }
 
 /**
- * Componente que inyecta los datos estructurados en el head de la página
+ * Componente que inyecta los structured data de una calculadora.
+ *
+ * Es un Client Component porque se monta dentro de
+ * `CalculatorPageClient` (que es 'use client'). Igualmente Next.js
+ * serializa los `<script>` en el HTML inicial.
  */
-export default function SeoStructuredData({ calculator, url }: SeoStructuredDataProps) {
-  const schemas = generateCalculatorSchema(calculator, url);
+export default function SeoStructuredData({
+  calculator,
+  url,
+}: SeoStructuredDataProps) {
+  const categoryLabel = CATEGORY_LABELS[calculator.category] ?? calculator.category;
 
-  return (
-    <>
-      {/* SoftwareApplication Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.softwareApplication),
-        }}
-      />
+  const schemas: Record<string, unknown>[] = [
+    softwareApplicationSchema({
+      name: calculator.name,
+      description: calculator.description,
+      url,
+      features: deriveFeatures(calculator),
+      keywords: calculator.keywords,
+    }),
+    breadcrumbSchema([
+      { name: 'Inicio', path: '/' },
+      { name: 'Calculadoras', path: '/calculadoras' },
+      { name: categoryLabel, path: `/calculadoras#${calculator.category}` },
+      { name: calculator.name },
+    ]),
+    howToSchema({
+      name: `Cómo usar la calculadora de ${calculator.name.toLowerCase()}`,
+      description: `Pasos para calcular ${calculator.name.toLowerCase()} en CalculaChile usando valores oficiales actualizados a 2026.`,
+      url,
+      totalTime: 'PT1M',
+      steps: [
+        {
+          name: 'Ingresa tus datos',
+          text: 'Completa los campos del formulario con la información solicitada (sueldos, montos, plazos, etc.). Los campos obligatorios están marcados.',
+        },
+        {
+          name: 'Revisa los resultados automáticos',
+          text: 'El cálculo se ejecuta en tiempo real a medida que escribes. No necesitas presionar un botón "calcular".',
+        },
+        {
+          name: 'Interpreta el desglose',
+          text: 'Cada resultado incluye su desglose con bases legales, valores oficiales empleados y referencias a artículos del Código del Trabajo, SII u otras normativas.',
+        },
+      ],
+      tools: ['Navegador web moderno', 'Datos del cálculo (sueldo, montos, fechas)'],
+    }),
+  ];
 
-      {/* FAQPage Schema */}
-      {schemas.faqPage && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.faqPage),
-          }}
-        />
-      )}
+  if (calculator.faq && calculator.faq.length > 0) {
+    schemas.push(faqPageSchema(calculator.faq));
+  }
 
-      {/* BreadcrumbList Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemas.breadcrumbList),
-        }}
-      />
-    </>
-  );
+  return <JsonLd id={`calc-${calculator.id}`} data={schemas} />;
 }
