@@ -2,7 +2,7 @@
 // Cálculo de Pensión Alimenticia Chile 2026
 // ============================================
 
-import { INGRESO_MINIMO } from '@/lib/values/constants';
+import { INGRESO_MINIMO, PENSION_ALIMENTOS } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PensionAlimenticiaInput {
@@ -32,9 +32,11 @@ export interface PensionAlimenticiaResult {
  * Porcentajes referenciales del PJUD para pensión sugerida:
  *  - 1 hijo: 40% del ingreso
  *  - 2+ hijos: 30% del ingreso por cada hijo (acumulativo)
+ *
+ * Definidos en `PENSION_ALIMENTOS` en constants.ts.
  */
-const PORCENTAJE_PRIMER_HIJO = 40;
-const PORCENTAJE_HIJO_ADICIONAL = 30;
+const PORCENTAJE_PRIMER_HIJO = PENSION_ALIMENTOS.porcentaje_primer_hijo;
+const PORCENTAJE_HIJO_ADICIONAL = PENSION_ALIMENTOS.porcentaje_hijo_adicional;
 
 /**
  * Mínimos legales por hijo expresados como porcentaje del ingreso
@@ -44,15 +46,15 @@ const PORCENTAJE_HIJO_ADICIONAL = 30;
  *
  * Base legal: Ley 14.908 (modificada por Ley 21.389/2021).
  */
-const MINIMO_IMM_PRIMER_HIJO = 0.4;
-const MINIMO_IMM_HIJO_ADICIONAL = 0.3;
+const MINIMO_IMM_PRIMER_HIJO = PENSION_ALIMENTOS.minimo_imm_primer_hijo / 100;
+const MINIMO_IMM_HIJO_ADICIONAL = PENSION_ALIMENTOS.minimo_imm_hijo_adicional / 100;
 
 /**
  * Tope legal: las retenciones por pensión de alimentos no pueden
  * exceder el 50% de la remuneración del alimentante.
  * Base legal: Art. 7 Ley 14.908.
  */
-const TOPE_INGRESO = 0.5;
+const TOPE_INGRESO = PENSION_ALIMENTOS.tope_ingreso / 100;
 
 /**
  * Calcula la pensión de alimentos sugerida según la Ley 14.908.

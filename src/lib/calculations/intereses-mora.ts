@@ -3,6 +3,7 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
+import { TMC_2026_MAYO } from '@/lib/values/constants';
 
 export interface InteresesMoraInput {
   montoDeuda: number;
@@ -32,13 +33,11 @@ export interface InteresesMoraResult {
 
 /**
  * Tasa Máxima Convencional (TMC) de referencia para mora laboral 2026.
- * La TMC real cambia mensualmente y la publica la CMF; este valor es
- * solo el default cuando el usuario no entrega `tasaAnualPersonalizada`.
- *
- * Para 2026 la TMC para operaciones no reajustables > 200 UF está en
- * torno a 9-10% anual. Bajar este valor si la CMF lo reajusta.
+ * Definida en `TMC_2026_MAYO` en constants.ts. La TMC real cambia
+ * mensualmente y la publica la CMF; este valor es solo el default
+ * cuando el usuario no entrega `tasaAnualPersonalizada`.
  */
-const TASA_MORA_DEFAULT = 9.5;
+const TASA_MORA_DEFAULT = TMC_2026_MAYO.no_reajustables_mayor_200uf;
 
 /**
  * Calcula los intereses por mora laboral.

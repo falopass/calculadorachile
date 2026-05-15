@@ -30,10 +30,12 @@ export interface ConversorDivisasResult {
 }
 
 /**
- * Premio EUR/USD aproximado. Si el sitio aún no expone EUR en el
- * snapshot, se usa este multiplicador sobre el dólar observado.
+ * Spread USD → EUR aproximado. Si el sitio aún no expone EUR en el
+ * snapshot del Banco Central, se usa este multiplicador sobre el
+ * dólar observado. Cambia diariamente (banda histórica 1.05 - 1.12).
  *
- * EUR/USD ≈ 1.08 (banda histórica reciente). Cambia diariamente.
+ * IMPORTANTE: para mayor precisión en el futuro, agregar EUR al
+ * snapshot del Banco Central (mindicador.cl/eur).
  */
 const EUR_PREMIUM_VS_USD = 1.08;
 
@@ -47,7 +49,8 @@ const NOMBRES_MONEDA: Record<ConversorDivisasInput['moneda'], string> = {
  * Central (`DOLAR.observado`) en vez de un valor hardcodeado.
  */
 function obtenerTasaCambio(moneda: ConversorDivisasInput['moneda']): number {
-  const usd = DOLAR.observado || 960;
+  // Si el snapshot del BCCh no tiene dólar, este fallback evita NaN.
+  const usd = DOLAR.observado && DOLAR.observado > 0 ? DOLAR.observado : 950;
   if (moneda === 'usd') return usd;
   return usd * EUR_PREMIUM_VS_USD;
 }

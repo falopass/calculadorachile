@@ -2,7 +2,12 @@
 // Cálculo de Boleta de Honorarios Chile
 // ============================================
 
-import { BOLETA_HONORARIOS, UTM, UF } from '@/lib/values/constants';
+import {
+  BOLETA_HONORARIOS,
+  UTM,
+  UF,
+  RETENCION_HONORARIOS_CALENDARIO,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BoletaHonorariosInput {
@@ -81,22 +86,8 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
 
   const monto = Math.max(0, montoBruto);
 
-  // Tasa según año (Ley 21.578)
-  let tasaRetencion = BOLETA_HONORARIOS.tasa_total;
-  switch (ano) {
-    case 2025:
-      tasaRetencion = 14.5;
-      break;
-    case 2026:
-      tasaRetencion = 15.25;
-      break;
-    case 2027:
-      tasaRetencion = 16;
-      break;
-    case 2028:
-      tasaRetencion = 17;
-      break;
-  }
+  // Tasa según año (Ley 21.578) — leída del calendario en constants.
+  const tasaRetencion = RETENCION_HONORARIOS_CALENDARIO[ano] ?? BOLETA_HONORARIOS.tasa_total;
 
   // Exento bajo 10 UTM mensuales
   const limiteExento = BOLETA_HONORARIOS.exento_minimo * UTM.valor;

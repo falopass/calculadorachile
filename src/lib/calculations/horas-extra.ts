@@ -2,7 +2,7 @@
 // Cálculo de Horas Extra Chile
 // ============================================
 
-import { HORAS_EXTRA } from '@/lib/values/constants';
+import { HORAS_EXTRA, JORNADA_LEGAL, SALUD, SEGURO_CESANTIA } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface HorasExtraInput {
@@ -10,11 +10,8 @@ export interface HorasExtraInput {
   horasExtra: number;
   esDomingoFestivo?: boolean;
   /**
-   * Jornada semanal vigente:
-   *  - 44h desde abril 2024 (Ley 21.561, "40 horas")
-   *  - 42h en abril 2026
-   *  - 40h en abril 2028
-   * Default: 44h (jornada vigente en 2026 al cierre de Q1).
+   * Jornada semanal vigente (Ley 21.561). Por defecto se usa la
+   * jornada legal vigente al momento del cálculo (`JORNADA_LEGAL.actual`).
    */
   jornadaSemanal?: 40 | 42 | 44 | 45;
   recargoPersonalizado?: number;
@@ -70,7 +67,7 @@ export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
     sueldoBruto,
     horasExtra,
     esDomingoFestivo = false,
-    jornadaSemanal = 44,
+    jornadaSemanal = JORNADA_LEGAL.actual as 40 | 42 | 44 | 45,
     recargoPersonalizado,
     sueldoVariable = false,
     sueldoPromedio3Meses = 0,
@@ -108,18 +105,28 @@ export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
 
   let impactoCotizaciones: HorasExtraResult['impactoCotizaciones'];
   if (calcularImpactoCotizaciones) {
+    // Tasas legales fijas: 10% AFP (D.L. 3500), 7% salud, y aporte
+    // del trabajador a seguro de cesantía (0,6%) si tiene contrato
+    // indefinido. La comisión variable de la AFP no se incluye aquí
+    // (varía por administradora).
+    const TASA_AFP_OBLIGATORIA = 10;
+    const TASA_SALUD = SALUD.fonasa.tasa;
+    const TASA_CESANTIA_TRABAJADOR = SEGURO_CESANTIA.contrato_indefinido.trabajador;
+
     impactoCotizaciones = {
-      afp: totalTodasHorasExtra * 0.10,
-      salud: totalTodasHorasExtra * 0.07,
-      seguroCesantia: totalTodasHorasExtra * 0.006,
-      total: totalTodasHorasExtra * (0.10 + 0.07 + 0.006),
+      afp: totalTodasHorasExtra * (TASA_AFP_OBLIGATORIA / 100),
+      salud: totalTodasHorasExtra * (TASA_SALUD / 100),
+      seguroCesantia: totalTodasHorasExtra * (TASA_CESANTIA_TRABAJADOR / 100),
+      total:
+        totalTodasHorasExtra *
+        ((TASA_AFP_OBLIGATORIA + TASA_SALUD + TASA_CESANTIA_TRABAJADOR) / 100),
     };
   }
 
   // Tope legal Art. 31 CdT: máximo 2 horas extra por día. La cifra
-  // "10 horas semanales" no está en la ley; se deriva de 2h × 5 días.
+  // semanal se deriva multiplicando por 6 días.
   const topeLegal = mostrarTopeLegal
-    ? { horasDiarias: 2, horasSemanal: 2 * 6 }
+    ? { horasDiarias: HORAS_EXTRA.tope_diario, horasSemanal: HORAS_EXTRA.tope_diario * 6 }
     : undefined;
 
   return {

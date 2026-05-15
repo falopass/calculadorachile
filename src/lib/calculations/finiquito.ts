@@ -2,17 +2,20 @@
 // Cálculo de Finiquito Chile
 // ============================================
 
-import { INDEMNIZACION, VACACIONES, GRATIFICACION, INGRESO_MINIMO } from '@/lib/values/constants';
+import {
+  INDEMNIZACION,
+  VACACIONES,
+  GRATIFICACION,
+  INGRESO_MINIMO,
+  UF,
+  RECARGO_ART_168,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 /**
  * Recargos por despido injustificado (Art. 168 CdT) sobre la
- * indemnización por años de servicio:
- *
- *   - Necesidades de la empresa (Art. 161): +30%
- *   - Falta de probidad / vías de hecho (Art. 160): +80%
- *   - Causales no demostradas (Art. 159 N°4): +50%
- *   - Aplicación indebida del Art. 161: +100%
+ * indemnización por años de servicio. Definidos en
+ * `RECARGO_ART_168` en constants.ts.
  *
  * El recargo va sobre la indemnización por años, NO sobre el sueldo.
  */
@@ -98,6 +101,9 @@ export interface FiniquitoResult {
  * Indemnización por años de servicio (Art. 163 CdT). Aplica solo en
  * caso de despido por necesidades de la empresa (causal Art. 161 N°1).
  * Algunas calculadoras también aceptan 'despido' genérico.
+ *
+ * Aplica el tope de 90 UF mensuales (Art. 172 CdT) sobre la base de
+ * cálculo antes de multiplicar por años.
  */
 function calcularIndemnizacionAniosServicio(
   ultimoSueldo: number,
@@ -107,9 +113,12 @@ function calcularIndemnizacionAniosServicio(
   if (causaTermino !== 'necesidades_empresa' && causaTermino !== 'despido') {
     return 0;
   }
+  // Tope 90 UF mensual (Art. 172 CdT)
+  const topeMensual = INDEMNIZACION.tope_uf_mensual * UF.valor;
+  const baseTopeada = Math.min(ultimoSueldo, topeMensual);
   const añosTopeados = Math.min(añosTrabajados, INDEMNIZACION.tope_años);
   const diasIndemnizacion = añosTopeados * INDEMNIZACION.dias_por_año;
-  const sueldoDiario = ultimoSueldo / 30;
+  const sueldoDiario = baseTopeada / 30;
   return diasIndemnizacion * sueldoDiario;
 }
 
@@ -169,10 +178,10 @@ function calcularSueldoPendiente(
 }
 
 function clampRecargo(pct: number): RecargoArt168 {
-  if (pct >= 100) return 100;
-  if (pct >= 80) return 80;
-  if (pct >= 50) return 50;
-  if (pct >= 30) return 30;
+  if (pct >= RECARGO_ART_168.aplicacion_indebida) return 100;
+  if (pct >= RECARGO_ART_168.falta_probidad) return 80;
+  if (pct >= RECARGO_ART_168.causal_no_demostrada) return 50;
+  if (pct >= RECARGO_ART_168.necesidades_empresa) return 30;
   return 0;
 }
 

@@ -2,7 +2,7 @@
 // Cálculo de Patente Comercial Municipal Chile 2026
 // ============================================
 
-import { UTM } from '@/lib/values/constants';
+import { UTM, PATENTE_COMERCIAL } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PatenteComercialInput {
@@ -35,13 +35,13 @@ const TASAS_COMUNALES: Record<string, number> = {
 };
 
 /**
- * Límites de patente en UTM (anuales).
- * Base legal: DL 3063/1979 Art. 24.
+ * Límites de patente en UTM (anuales). Definidos en
+ * `PATENTE_COMERCIAL` en constants.ts.
  *  - Mínimo: 1 UTM anual
- *  - Máximo: 8.000 UTM anuales (no 8 — bug histórico)
+ *  - Máximo: 8.000 UTM anuales (DL 3063 Art. 24)
  */
-const PATENTE_MINIMA_ANUAL_UTM = 1;
-const PATENTE_MAXIMA_ANUAL_UTM = 8000;
+const PATENTE_MINIMA_ANUAL_UTM = PATENTE_COMERCIAL.minimo_utm_anual;
+const PATENTE_MAXIMA_ANUAL_UTM = PATENTE_COMERCIAL.maximo_utm_anual;
 
 /**
  * Etiquetas legibles para actividades y comunas

@@ -2,7 +2,13 @@
 // Cálculo de Costo Total Empleado para PYME Chile 2026
 // ============================================
 
-import { AFP, SALUD, SEGURO_CESANTIA, GRATIFICACION } from '@/lib/values/constants';
+import {
+  AFP,
+  SALUD,
+  SEGURO_CESANTIA,
+  GRATIFICACION,
+  MUTUAL,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CostoEmpleadoInput {
@@ -37,9 +43,9 @@ export interface CostoEmpleadoResult {
 /**
  * Tasa de mutual de seguridad (Ley 16.744). Cotización básica fija
  * del 0,90% + cotización adicional variable según giro (0% a 3,4%).
- * Se usa el mínimo legal como aproximación razonable.
+ * Se usa el promedio referencial definido en constants.ts.
  */
-const MUTUAL_TASA = 0.95;
+const MUTUAL_TASA = MUTUAL.total_referencial;
 
 /**
  * Calcula el costo total de un empleado para la empresa.

@@ -43,8 +43,8 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
   // Base de cálculo: sueldo + gratificación si aplica
   const baseCalculo = incluyeGratificacion ? ultimoSueldo + gratificacionMensual : ultimoSueldo;
   
-  // Aplicar tope de 90 UF
-  const topeUF = 90;
+  // Aplicar tope legal (Art. 172 CdT)
+  const topeUF = INDEMNIZACION.tope_uf_mensual;
   const topeMonto = topeUF * UF.valor;
   const baseTopeada = Math.min(baseCalculo, topeMonto);
   

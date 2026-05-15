@@ -2,7 +2,13 @@
 // Cálculo de Cuenta de Luz - Tarifa BT1 Chile 2026
 // ============================================
 
-import { IVA, TARIFA_BT1 } from '@/lib/values/constants';
+import {
+  IVA,
+  TARIFA_BT1,
+  TARIFA_BT1_RECARGOS,
+  TARIFA_BT1_ZONA,
+  TARIFA_BT1_CARGO_FIJO,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export type TipoTarifa = 'bt1_residencial' | 'bt1_comercial' | 'bt1_industrial';
@@ -35,27 +41,16 @@ export interface CuentaLuzResult {
 }
 
 /**
- * Recargo por tipo de tarifa sobre la BT1 residencial. Aproximación
- * razonable: comercial paga +20% y baja tensión industrial +35%.
- * Las tarifas reales BT2/BT3 varían por distribuidora y CNE las
- * publica trimestralmente.
+ * Recargo por tipo de tarifa sobre la BT1 residencial. Definido en
+ * `TARIFA_BT1_RECARGOS` en constants.ts.
  */
-const RECARGO_TARIFA: Record<TipoTarifa, number> = {
-  bt1_residencial: 1.0,
-  bt1_comercial: 1.2,
-  bt1_industrial: 1.35,
-};
+const RECARGO_TARIFA: Record<TipoTarifa, number> = TARIFA_BT1_RECARGOS;
 
 /**
- * Ajuste por zona geográfica respecto a la zona central.
- * Las tarifas reales varían por distribuidora; valores aproximados
- * para 2026 según decretos tarifarios CNE/SEC.
+ * Ajuste por zona geográfica respecto a la zona central. Definido en
+ * `TARIFA_BT1_ZONA` en constants.ts.
  */
-const AJUSTE_ZONA: Record<Zona, number> = {
-  norte: 1.05,
-  central: 1.0,
-  sur: 1.1,
-};
+const AJUSTE_ZONA: Record<Zona, number> = TARIFA_BT1_ZONA;
 
 /**
  * Calcula la cuenta de luz BT1 con tramos progresivos por consumo.
@@ -107,12 +102,8 @@ export function calculateCuentaLuz(input: CuentaLuzInput): CuentaLuzResult {
     limiteAnterior = tramo.maximoKWh;
   }
 
-  // Cargo fijo según tipo (residencial usa el de constants).
-  const cargoFijoBase = TARIFA_BT1.cargoFijoCLP;
-  const cargoFijo = Math.round(
-    cargoFijoBase *
-      (tipoTarifa === 'bt1_comercial' ? 1.4 : tipoTarifa === 'bt1_industrial' ? 1.8 : 1),
-  );
+  // Cargo fijo según tipo (definido en constants.ts).
+  const cargoFijo = TARIFA_BT1_CARGO_FIJO[tipoTarifa];
 
   const subtotal = cargoFijo + cargoEnergia;
   const iva = subtotal * (IVA.tasa / 100);

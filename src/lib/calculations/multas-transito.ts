@@ -2,7 +2,7 @@
 // Cálculo de Multas de Tránsito en UTM Chile 2026
 // ============================================
 
-import { UTM } from '@/lib/values/constants';
+import { UTM, MULTA_TRANSITO_UTM } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export type TipoMulta =
@@ -30,28 +30,14 @@ export interface MultasTransitoResult {
 
 /**
  * Montos de multas de tránsito en UTM (Ley 18.290, Art. 196 y ss.).
- *
- * Bug histórico:
- *  - El "punto medio" para grave (1,5-3 UTM) y gravísima (3-5 UTM)
- *    se mantenía hardcoded sin documentar el rango.
- *  - Faltaba el caso especial de gravísimas con alcohol (Ley Emilia
- *    20.770 y Ley Tolerancia Cero 20.580): manejar bajo influencia
- *    del alcohol > 0,8 g/L o causando muerte/lesiones llega hasta
- *    10-15 UTM.
- *
- * Valores de referencia (punto medio del rango legal):
- *   - leve: 0,5 UTM (rango 0,1 - 1)
- *   - menos_grave: 1 UTM (rango 1 - 1,5)
- *   - grave: 2 UTM (rango 1,5 - 3)
- *   - gravisima: 4 UTM (rango 3 - 5)
- *   - gravisima_alcohol: 12 UTM (rango 10 - 15, Ley Emilia)
+ * Definidos en `MULTA_TRANSITO_UTM` en constants.ts.
  */
 const MONTOS_MULTAS: Record<TipoMulta, number> = {
-  leve: 0.5,
-  menos_grave: 1,
-  grave: 2,
-  gravisima: 4,
-  gravisima_alcohol: 12,
+  leve: MULTA_TRANSITO_UTM.leve,
+  menos_grave: MULTA_TRANSITO_UTM.menos_grave,
+  grave: MULTA_TRANSITO_UTM.grave,
+  gravisima: MULTA_TRANSITO_UTM.gravisima,
+  gravisima_alcohol: MULTA_TRANSITO_UTM.gravisima_alcohol,
 };
 
 const NOMBRES_MULTA: Record<TipoMulta, string> = {
@@ -63,7 +49,7 @@ const NOMBRES_MULTA: Record<TipoMulta, string> = {
 };
 
 /** Recargo por reincidencia dentro de 12 meses (Art. 197 Ley 18.290). */
-const RECARGO_REINCIDENCIA = 0.5;
+const RECARGO_REINCIDENCIA = MULTA_TRANSITO_UTM.recargo_reincidencia / 100;
 
 /**
  * Calcula el monto de multas de tránsito en CLP.

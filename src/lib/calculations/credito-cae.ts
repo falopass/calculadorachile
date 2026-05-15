@@ -3,6 +3,7 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
+import { CREDITO_CAE } from '@/lib/values/constants';
 
 export interface CreditoCAEInput {
   montoCredito: number;
@@ -29,15 +30,15 @@ export interface CreditoCAEResult {
 }
 
 /**
- * Tasa fija 2% anual para CAE (Ley 21.477 / reforma 2022 que
- * reemplazó la tasa variable original por una tasa fija máxima).
+ * Tasa fija anual del CAE (Ley 21.477 / reforma 2022).
+ * Definida en `CREDITO_CAE.tasa_anual_legal` en constants.ts.
  */
-const TASA_CAE_LEGAL = 2.0;
+const TASA_CAE_LEGAL = CREDITO_CAE.tasa_anual_legal;
 
 /**
- * Garantía estatal del CAE: 90% del monto del crédito (Ley 20.027).
+ * Garantía estatal del CAE (Ley 20.027).
  */
-const GARANTIA_ESTATAL_PCT = 0.9;
+const GARANTIA_ESTATAL_PCT = CREDITO_CAE.garantia_estatal / 100;
 
 const AVISO_FES =
   'El CAE está en transición al nuevo sistema FES (Financiamiento de Educación Superior). Esta calculadora sigue vigente para créditos CAE existentes. Las nuevas postulaciones desde 2025 se regirán por las normas FES cuando entren en vigor.';
@@ -120,7 +121,7 @@ export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[
       format: 'number',
     },
     {
-      label: 'Garantía Estatal (90%)',
+      label: `Garantía Estatal (${CREDITO_CAE.garantia_estatal}%)`,
       value: result.montoGarantiaEstatal,
       format: 'CLP',
     },

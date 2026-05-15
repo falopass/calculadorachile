@@ -3,7 +3,7 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
-import { UTM } from '@/lib/values/constants';
+import { UTM, RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 
 export interface PPMInput {
   /**
@@ -37,22 +37,18 @@ export interface PPMResult {
  * Tasas de PPM por tipo de actividad.
  *
  * Para profesionales 2da categoría la tasa de PPM coincide con la
- * retención de honorarios establecida por la Ley 21.578 (calendario
- * 14,5% en 2025 → 17% en 2028). En 2026 es 15,25%.
+ * retención de honorarios (calendario Ley 21.578). En 2026 es 15,25%
+ * — leído desde RETENCION_HONORARIOS_CALENDARIO.
  *
  * Para 1ra categoría las tasas iniciales son las que el SII fija al
  * inicio de actividades; luego se recalculan trimestralmente según
- * la diferencia con el impuesto del año anterior. Estas son
- * tasas iniciales referenciales:
- *   - Comercio: 1%
- *   - Transporte: 0,3%
- *   - Construcción: 0,2%
+ * la diferencia con el impuesto del año anterior.
  *
  * Base legal: Art. 84 LIR (1ra categoría) y Art. 88 LIR + Ley
  * 21.578 (retención honorarios = PPM 2da categoría).
  */
 const TASAS_PPM: Record<PPMInput['actividad'], number> = {
-  profesional: 15.25,
+  profesional: RETENCION_HONORARIOS_CALENDARIO[2026],
   comercio: 1,
   transporte: 0.3,
   construccion: 0.2,

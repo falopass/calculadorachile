@@ -2,7 +2,11 @@
 // Cálculo de Operación Renta para Independientes Chile 2026
 // ============================================
 
-import { IMPUESTO_SEGUNDA_CATEGORIA_2026, UTM } from '@/lib/values/constants';
+import {
+  IMPUESTO_SEGUNDA_CATEGORIA_2026,
+  UTM,
+  RETENCION_HONORARIOS_CALENDARIO,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface OperacionRentaInput {
@@ -82,8 +86,9 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
   const impuesto = Math.max(0, Math.round(impuestoUTA * valorUTA));
   const tasaEfectiva = rentaBruta > 0 ? (impuesto / rentaBruta) * 100 : 0;
 
-  // Retención sugerida 15.25% (boletas honorarios 2026, Ley 21.578).
-  const retencionSugerida = Math.round(rentaBruta * 0.1525);
+  // Retención sugerida según el calendario Ley 21.578 (año actual).
+  const tasaRetencion = RETENCION_HONORARIOS_CALENDARIO[2026] ?? 15.25;
+  const retencionSugerida = Math.round(rentaBruta * (tasaRetencion / 100));
 
   return {
     rentaBruta: Math.round(rentaBruta),
@@ -146,7 +151,7 @@ export function operacionRentaToResults(result: OperacionRentaResult): Calculato
       format: 'percentage',
     },
     {
-      label: 'Retención Sugerida (15.25%)',
+      label: `Retención Sugerida (${RETENCION_HONORARIOS_CALENDARIO[2026]}%)`,
       value: result.retencionSugerida,
       format: 'CLP',
     },

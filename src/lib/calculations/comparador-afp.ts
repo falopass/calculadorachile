@@ -2,7 +2,7 @@
 // Comparador de Comisiones AFP Chile 2026
 // ============================================
 
-import { AFP } from '@/lib/values/constants';
+import { AFP, TOPE_IMPOSITIVO, UF } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface ComparadorAFPInput {
@@ -53,13 +53,19 @@ export function calculateComparadorAFP(input: ComparadorAFPInput): ComparadorAFP
   const sueldo = Math.max(0, sueldoBruto);
   const anos = Math.max(1, Math.min(anosPension, 50));
 
+  // Aplicar tope imponible (89,9 UF en 2026): la comisión solo se
+  // cobra hasta el tope, no sobre el sueldo bruto total. Para sueldos
+  // altos esto reduce significativamente la comisión real.
+  const topeImponibleCLP = TOPE_IMPOSITIVO.afp_salud * UF.valor;
+  const baseImponible = Math.min(sueldo, topeImponibleCLP);
+
   // Calcular desglose para cada AFP
   const desgloseAFP: DesgloseAFP[] = Object.entries(AFP).map(([key, data]) => {
-    const costoMensual = sueldo * (data.comision / 100);
+    const costoMensual = baseImponible * (data.comision / 100);
     const costoAnual = costoMensual * 12;
 
     // Calcular ahorro vs AFP actual
-    const costoAnualActual = sueldo * (AFP[afpActual].comision / 100) * 12;
+    const costoAnualActual = baseImponible * (AFP[afpActual].comision / 100) * 12;
     const ahorroVsActual = costoAnualActual - costoAnual;
 
     return {
@@ -79,8 +85,8 @@ export function calculateComparadorAFP(input: ComparadorAFPInput): ComparadorAFP
   // Encontrar la más barata
   const mejorAFP = desgloseAFP[0];
 
-  // Costo anual de la AFP actual
-  const costoAnualActual = Math.round(sueldo * (AFP[afpActual].comision / 100) * 12);
+  // Costo anual de la AFP actual (con tope aplicado)
+  const costoAnualActual = Math.round(baseImponible * (AFP[afpActual].comision / 100) * 12);
 
   // Costo anual de la más barata
   const costoAnualMasBarata = mejorAFP.costoAnual;

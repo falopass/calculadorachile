@@ -2,7 +2,7 @@
 // Cálculo de Permiso de Circulación Chile 2026
 // ============================================
 
-import { UTM } from '@/lib/values/constants';
+import { UTM, PERMISO_CIRCULACION } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PermisoCirculacionInput {
@@ -35,22 +35,16 @@ export interface PermisoCirculacionResult {
 
 /**
  * Tabla progresiva del permiso de circulación según tasación fiscal,
- * expresada en UTM (aproximación a la Ley 17.235 / Tabla SII 2026).
+ * expresada en UTM. Definida en `PERMISO_CIRCULACION.tramos_utm` en
+ * constants.ts.
  *
- * La tasa marginal aumenta con el valor del vehículo:
- *   ≤ 60 UTM:    1,0%
- *   60 - 120:    2,0%
- *   120 - 250:   3,0%
- *   250 - 400:   4,0%
- *   > 400 UTM:   4,5%
+ * Base legal: Ley 17.235, DFL 1 (Tránsito), Tabla anual SII.
  */
-const TRAMOS_PERMISO_UTM: Array<{ hasta: number; tasa: number }> = [
-  { hasta: 60, tasa: 0.01 },
-  { hasta: 120, tasa: 0.02 },
-  { hasta: 250, tasa: 0.03 },
-  { hasta: 400, tasa: 0.04 },
-  { hasta: Infinity, tasa: 0.045 },
-];
+const TRAMOS_PERMISO_UTM: Array<{ hasta: number; tasa: number }> =
+  PERMISO_CIRCULACION.tramos_utm.map((t) => ({
+    hasta: t.hasta_utm,
+    tasa: t.tasa / 100, // convertir a decimal para cálculo
+  }));
 
 const LABELS_TIPO: Record<string, string> = {
   automovil: 'Automóvil',
@@ -118,7 +112,9 @@ export function calculatePermisoCirculacion(
 
   // Descuento por antigüedad (vehículos > 20 años: 50%).
   let factorAntiguedad = 0;
-  if (antiguedadVehiculo >= 20) factorAntiguedad = 0.5;
+  if (antiguedadVehiculo >= PERMISO_CIRCULACION.descuento_antiguedad_anios) {
+    factorAntiguedad = PERMISO_CIRCULACION.descuento_antiguedad_porcentaje / 100;
+  }
   const descuentoAntiguedad = montoBase * factorAntiguedad;
 
   // Prorrateo si es primera inscripción del año.

@@ -2,7 +2,7 @@
 // Cálculo de Cotizaciones Independientes (Ley 21.133) Chile 2026
 // ============================================
 
-import { AFP, UF } from '@/lib/values/constants';
+import { AFP, UF, TOPE_IMPOSITIVO, MUTUAL } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CotizacionIndependientesInput {
@@ -25,19 +25,19 @@ export interface CotizacionIndependientesResult {
 
 /**
  * Tope imponible para trabajadores independientes (Ley 21.133).
- * Es el mismo tope general AFP/Salud: 87,8 UF mensuales (2026).
+ * Es el mismo tope general AFP/Salud (89,9 UF en 2026).
  *
- * Nota: el tope se ajusta anualmente por la Superintendencia de
- * Pensiones según la variación real de las remuneraciones (Art. 16
- * D.L. 3500). Para 2026 es 87,8 UF; en 2025 era 84,3 UF.
+ * Fuente: `TOPE_IMPOSITIVO.afp_salud` en constants.ts.
+ * Se ajusta anualmente por la Superintendencia de Pensiones según
+ * la variación real de las remuneraciones (Art. 16 D.L. 3500).
  */
-const TOPE_IMPONIBLE_UF = 87.8;
+const TOPE_IMPONIBLE_UF = TOPE_IMPOSITIVO.afp_salud;
 
 /**
- * Mutual de seguridad: tasa básica 0,90% Ley 16.744.
- * Para independientes que cotizan voluntariamente.
+ * Mutual de seguridad: tasa básica + adicional promedio.
+ * Definido en `MUTUAL` en constants.ts (Ley 16.744).
  */
-const MUTUAL_TASA = 0.9;
+const MUTUAL_TASA = MUTUAL.total_referencial;
 
 /**
  * Calcula las cotizaciones previsionales obligatorias para
@@ -123,7 +123,7 @@ export function cotizacionIndependientesToResults(
 
   if (result.aplicaTopeImponible) {
     results.push({
-      label: 'Tope Imponible Mensual (87,8 UF)',
+      label: `Tope Imponible Mensual (${TOPE_IMPONIBLE_UF} UF)`,
       value: result.topeImponibleMensual,
       format: 'CLP',
     });

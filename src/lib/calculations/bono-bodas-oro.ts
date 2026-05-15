@@ -3,7 +3,7 @@
 // Beneficio único por 50 años de matrimonio (Ley 20.506)
 // ============================================
 
-import { BONO_BODAS_ORO } from '@/lib/values/constants';
+import { BONO_BODAS_ORO, BODAS_ORO } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BonoBodasOroInput {
@@ -41,7 +41,7 @@ export interface BonoBodasOroResult {
   motivosNoAplica: string[];
 }
 
-const ANOS_REQUERIDOS = 50;
+const ANOS_REQUERIDOS = BODAS_ORO.anios_requeridos;
 
 /**
  * Calcula el Bono Bodas de Oro (Ley 20.506).

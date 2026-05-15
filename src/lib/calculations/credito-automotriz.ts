@@ -3,6 +3,7 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
+import { SEGURO_VEHICULAR } from '@/lib/values/constants';
 
 export interface CreditoAutomotrizInput {
   valorVehiculo: number;
@@ -77,8 +78,10 @@ export function calculateCreditoAutomotriz(
   const dividendoMensual =
     montoFinanciar > 0 ? calcularPMT(montoFinanciar, tasaMensual, plazoValido) : 0;
 
-  // Seguro mensual: 0,15% del valor del vehículo (más realista que 0,3%).
-  const seguroMensual = incluyeSeguro ? Math.round(valorValido * 0.0015) : 0;
+  // Seguro mensual (tasa parametrizada en constants.ts).
+  const seguroMensual = incluyeSeguro
+    ? Math.round(valorValido * (SEGURO_VEHICULAR.tasa_mensual_porcentaje / 100))
+    : 0;
   const dividendoConSeguro = Math.round(dividendoMensual) + seguroMensual;
 
   const totalPago = Math.round(dividendoMensual) * plazoValido;

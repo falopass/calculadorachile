@@ -10,6 +10,7 @@ import {
   IMPUESTO_SEGUNDA_CATEGORIA,
   UTM,
   UF,
+  MUTUAL,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
@@ -193,7 +194,7 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
       ? SEGURO_CESANTIA.contrato_indefinido.empleador
       : SEGURO_CESANTIA.contrato_plazo_fijo.empleador) /
       100);
-  const mutualEmpleador = baseEmpleador * 0.0095; // 0.95% promedio (mutualidad de seguridad)
+  const mutualEmpleador = baseEmpleador * (MUTUAL.total_referencial / 100);
 
   return {
     bruto: sueldoBruto,

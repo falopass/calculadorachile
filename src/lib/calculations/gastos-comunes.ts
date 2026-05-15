@@ -3,6 +3,7 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
+import { GASTOS_COMUNES_REFERENCIALES } from '@/lib/values/constants';
 
 export interface GastosComunesInput {
   /** Superficie útil del departamento o casa en m². */
@@ -27,16 +28,16 @@ export interface GastosComunesResult {
 }
 
 /**
- * Costos adicionales por amenidades (valores referenciales 2026).
+ * Costos referenciales (definidos en constants.ts).
  */
 const COSTOS_EXTRAS = {
-  piscina: 15000,
-  gimnasio: 10000,
-  conserje: 20000,
+  piscina: GASTOS_COMUNES_REFERENCIALES.piscina_clp,
+  gimnasio: GASTOS_COMUNES_REFERENCIALES.gimnasio_clp,
+  conserje: GASTOS_COMUNES_REFERENCIALES.conserje_24h_clp,
 };
 
 /** Costo aproximado por estacionamiento. */
-const COSTO_ESTACIONAMIENTO = 35000;
+const COSTO_ESTACIONAMIENTO = GASTOS_COMUNES_REFERENCIALES.estacionamiento_clp;
 
 const AVISO_LEGAL =
   'Esta calculadora entrega una ESTIMACIÓN basada en valores promedio. La Ley 21.442 (Nueva Ley de Copropiedad Inmobiliaria, vigente desde abril 2024) regula la distribución de gastos comunes según el coeficiente de prorrateo de cada unidad establecido en el reglamento de copropiedad — no fija montos. Consulta tu administración para conocer los gastos reales de tu condominio.';
@@ -55,7 +56,7 @@ const AVISO_LEGAL =
 export function calculateGastosComunes(input: GastosComunesInput): GastosComunesResult {
   const {
     superficieM2,
-    valorM2 = 15000,
+    valorM2 = GASTOS_COMUNES_REFERENCIALES.precio_m2_clp,
     incluyeEstacionamiento = false,
     estacionamientos = 0,
     tienePiscina = false,

@@ -2,7 +2,7 @@
 // Cálculo de Costo TAG Autopista Chile 2026
 // ============================================
 
-import { TAG_RUTAS } from '@/lib/values/constants';
+import { TAG_RUTAS, TAG_RECARGO_SIN_TAG } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export type RutaPeaje =
@@ -62,9 +62,9 @@ const URBANO_SANTIAGO_TARIFA: Record<1 | 2 | 3, number> = {
 
 /**
  * Recargo "sin TAG" / "ocasional": MOP autoriza hasta +50% sobre la
- * tarifa con TAG. Si el usuario no tiene convenio (TAG), paga más.
+ * tarifa con TAG. Definido en `TAG_RECARGO_SIN_TAG` en constants.ts.
  */
-const RECARGO_SIN_TAG = 0.5;
+const RECARGO_SIN_TAG = TAG_RECARGO_SIN_TAG / 100;
 
 /**
  * Calcula el costo mensual y anual del TAG.

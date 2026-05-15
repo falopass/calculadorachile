@@ -2,7 +2,7 @@
 // Simulador de Ahorro Previsional Voluntario (APV) Chile 2026
 // ============================================
 
-import { UF, UTM, IMPUESTO_SEGUNDA_CATEGORIA_2026 } from '@/lib/values/constants';
+import { UF, UTM, IMPUESTO_SEGUNDA_CATEGORIA_2026, APV_REGIMEN_B } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface SimuladorAPVInput {
@@ -27,10 +27,11 @@ export interface SimuladorAPVResult {
 }
 
 /**
- * Tope anual de APV para beneficio tributario en UF (Régimen B).
+ * Tope anual de APV para beneficio tributario (Régimen B).
+ * Definido en `APV_REGIMEN_B.tope_uf_anual` en constants.ts.
  * Base legal: Art. 42 bis LIR.
  */
-const TOPE_ANUAL_APV_UF = 600;
+const TOPE_ANUAL_APV_UF = APV_REGIMEN_B.tope_uf_anual;
 
 /**
  * Calcula la simulación de Ahorro Previsional Voluntario (APV).

@@ -2,7 +2,7 @@
 // Cálculo de Impuesto a la Ganancia por Venta de Inmueble Chile 2026
 // ============================================
 
-import { UF } from '@/lib/values/constants';
+import { UF, PLUSVALIA_INMOBILIARIA } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PlusvaliaInput {
@@ -42,15 +42,13 @@ export interface PlusvaliaResult {
  *
  * Base legal: Art. 17 N°8 letra b) LIR, Ley 21.210 (2020).
  */
-const TOPE_EXENCION_UF = 8000;
+const TOPE_EXENCION_UF = PLUSVALIA_INMOBILIARIA.exencion_uf;
 
 /**
- * Tasa del impuesto único sustitutivo del 10%.
- * Aplica sobre el exceso del tope para vivienda habitacional, o
- * sobre toda la ganancia neta para inmuebles no habitacionales /
- * de inversionistas.
+ * Tasa del impuesto único sustitutivo. Definida en
+ * `PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico`.
  */
-const TASA_IMPUESTO_UNICO = 10;
+const TASA_IMPUESTO_UNICO = PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico;
 
 /**
  * Calcula el impuesto a la ganancia por venta de un inmueble

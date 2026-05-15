@@ -3,7 +3,7 @@
 // Beneficio del Estado para el pago del servicio de agua potable
 // ============================================
 
-import { SUBSIDIO_AGUA } from '@/lib/values/constants';
+import { SUBSIDIO_AGUA_POTABLE } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface SubsidioAguaInput {
@@ -33,13 +33,13 @@ export interface SubsidioAguaResult {
   montoSinSubsidio: number;
 }
 
-/** Subsidio cubre hasta 15 m³ de consumo (DS 195/MOP). */
-const TOPE_M3 = 15;
+/** Subsidio cubre hasta este número de m³ (DS 195/MOP). */
+const TOPE_M3 = SUBSIDIO_AGUA_POTABLE.tope_m3;
 
 const SUBSIDIO_POR_TRAMO: Record<'tramo1' | 'tramo2' | 'tramo3', number> = {
-  tramo1: 0.6,
-  tramo2: 0.4,
-  tramo3: 0.25,
+  tramo1: SUBSIDIO_AGUA_POTABLE.tramos.tramo1 / 100,
+  tramo2: SUBSIDIO_AGUA_POTABLE.tramos.tramo2 / 100,
+  tramo3: SUBSIDIO_AGUA_POTABLE.tramos.tramo3 / 100,
 };
 
 /**
@@ -63,8 +63,11 @@ export function calculateSubsidioAgua(input: SubsidioAguaInput): SubsidioAguaRes
   const subsidioPct = (SUBSIDIO_POR_TRAMO[tramo] ?? 0) * 100;
 
   // Tarifa de referencia: si no entrega cuenta ni tarifa, se usa el
-  // promedio nacional aproximado del MOP (~$1.300/m³ en 2026).
-  const tarifaRef = tarifaPorM3 && tarifaPorM3 > 0 ? tarifaPorM3 : 1300;
+  // promedio nacional aproximado del MOP (definido en constants.ts).
+  const tarifaRef =
+    tarifaPorM3 && tarifaPorM3 > 0
+      ? tarifaPorM3
+      : SUBSIDIO_AGUA_POTABLE.tarifa_promedio_clp_m3;
 
   // Monto real (o estimado) de la cuenta sin subsidio
   const montoSinSubsidio =
@@ -82,9 +85,8 @@ export function calculateSubsidioAgua(input: SubsidioAguaInput): SubsidioAguaRes
   const montoSubsidio = Math.round(cuentaSobreSubsidio * (subsidioPct / 100));
   const montoPagar = Math.max(0, montoSinSubsidio - montoSubsidio);
 
-  // SUBSIDIO_AGUA es referenciado por compatibilidad con la UI legacy.
-  // No usamos `montoMaximoCLP` para evitar el bug histórico.
-  void SUBSIDIO_AGUA;
+  // SUBSIDIO_AGUA_POTABLE ya proporciona el tope.
+  // No se necesita el legacy SUBSIDIO_AGUA.
 
   return {
     consumoM3: consumo,
@@ -105,7 +107,7 @@ export function subsidioAguaToResults(result: SubsidioAguaResult): CalculatorRes
     { label: 'Monto Subsidio', value: result.montoSubsidio, format: 'CLP' },
     { label: 'Monto Sin Subsidio', value: result.montoSinSubsidio, format: 'CLP' },
     { label: 'Subsidio', value: result.subsidioPct, format: 'percentage' },
-    { label: 'Consumo Subsidiado (hasta 15 m³)', value: result.consumoSubsidiado, format: 'number' },
+    { label: `Consumo Subsidiado (hasta ${TOPE_M3} m³)`, value: result.consumoSubsidiado, format: 'number' },
     { label: 'Consumo m³', value: result.consumoM3, format: 'number' },
   ];
 }
