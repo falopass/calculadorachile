@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { FALLBACK_VALUES } from '@/lib/values/fallback';
 
 export interface LiveValues {
   uf: number;
@@ -12,36 +13,45 @@ export interface LiveValues {
   source: 'bcentral' | 'fallback';
 }
 
-const DEFAULT_VALUES: Omit<LiveValues, 'loading' | 'error' | 'lastUpdated' | 'source'> = {
-  uf: 39841.72,        // UF 31/03/2026
-  utm: 69889,          // UTM Marzo 2026
-  dolar: { observado: 931.57, venta: 960 }, // Dólar 30/03/2026
-};
-
 /**
  * useLiveValues - Hook para obtener valores actualizados del BCentral
- * 
- * Obtiene UF, UTM y Dólar desde la API del BCentral vía proxy local.
+ *
+ * Obtiene UF, UTM y Dólar desde la API del BCentral vía /api/values.
  * Usa valores de fallback si la API falla.
- * 
+ *
+ * Por defecto NO hace polling (UF cambia 1 vez al día). Si una página
+ * específica necesita refresco activo, puede llamar `refresh()` manualmente
+ * o pasar `pollIntervalMs > 0`.
+ *
  * @example
- * const { uf, utm, dolar, loading } = useLiveValues();
+ *   const { uf, utm, dolar, loading, refresh } = useLiveValues();
  */
-export function useLiveValues() {
+export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
+  const { pollIntervalMs = 0 } = options;
+
   const [data, setData] = useState<LiveValues>({
-    ...DEFAULT_VALUES,
+    uf: FALLBACK_VALUES.uf,
+    utm: FALLBACK_VALUES.utm,
+    dolar: { ...FALLBACK_VALUES.dolar },
     loading: true,
     error: null,
     lastUpdated: null,
     source: 'fallback',
   });
 
-  const fetchValues = useCallback(async () => {
+  const fetchValues = useCallback(async (signal?: AbortSignal) => {
     try {
-      const response = await fetch('/api/values');
-      if (!response.ok) throw new Error('Error al obtener valores');
-      
-      const json = await response.json();
+      const response = await fetch('/api/values', { signal });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const json = (await response.json()) as {
+        uf: number;
+        utm: number;
+        dolar: { observado: number; venta: number };
+        updatedAt: string;
+        source: 'bcentral' | 'fallback';
+      };
       setData({
         uf: json.uf,
         utm: json.utm,
@@ -52,6 +62,9 @@ export function useLiveValues() {
         source: json.source,
       });
     } catch (error) {
+      // Ignorar aborts (cleanup de useEffect)
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+
       setData((prev) => ({
         ...prev,
         loading: false,
@@ -62,14 +75,22 @@ export function useLiveValues() {
   }, []);
 
   useEffect(() => {
-    fetchValues();
-    // Actualizar cada 30 minutos
-    const interval = setInterval(fetchValues, 30 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, [fetchValues]);
+    const controller = new AbortController();
+    fetchValues(controller.signal);
+
+    let interval: ReturnType<typeof setInterval> | undefined;
+    if (pollIntervalMs > 0) {
+      interval = setInterval(() => fetchValues(controller.signal), pollIntervalMs);
+    }
+
+    return () => {
+      controller.abort();
+      if (interval) clearInterval(interval);
+    };
+  }, [fetchValues, pollIntervalMs]);
 
   return {
     ...data,
-    refresh: fetchValues,
+    refresh: () => fetchValues(),
   };
 }

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import LegalPageLayout from '@/components/layout/LegalPageLayout';
+import { SITE_URL, CONTACT_EMAIL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Política de Cookies | CalculaChile',
@@ -76,8 +77,8 @@ export default function CookiesPage() {
       <h2>7. Contacto</h2>
       <p>Si tienes dudas sobre esta política de cookies:</p>
       <ul>
-        <li><strong>Email:</strong> contacto@calculachile.cl</li>
-        <li><strong>Sitio web:</strong> https://calculachile.cl</li>
+        <li><strong>Email:</strong> {CONTACT_EMAIL}</li>
+        <li><strong>Sitio web:</strong> {SITE_URL}</li>
       </ul>
     </LegalPageLayout>
   );

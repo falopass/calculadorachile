@@ -1,28 +1,51 @@
 // API Route: Proxy para la API del BCentral
 // GET /api/values - Obtiene UF, UTM, Dólar actualizados
+//
+// Estrategia de cache:
+// - Next.js cachea la respuesta `revalidate` segundos (ISR/Data Cache).
+// - Además seteamos `Cache-Control` con `s-maxage` y `stale-while-revalidate`
+//   para CDNs frente al edge.
 
 import { NextResponse } from 'next/server';
 import { fetchAllCurrentValues } from '@/lib/api/bcentral';
+import { FALLBACK_VALUES } from '@/lib/values/fallback';
 
-// Valores de fallback si la API del BCentral falla
-// Actualizados al 31 de Marzo 2026
-const FALLBACK_VALUES = {
-  uf: 39841.72,        // UF 31/03/2026
-  utm: 69889,          // UTM Marzo 2026
-  dolar: {
-    observado: 931.57, // Dólar observado 30/03/2026
-    venta: 960,        // Dólar venta estimado
-  },
-};
+const ONE_HOUR = 60 * 60;
+const ONE_DAY = 24 * ONE_HOUR;
 
-export const revalidate = 3600; // Revalidar cada hora
+// Next.js exige que `revalidate` sea un literal numérico parseable
+// estáticamente (no acepta expresiones). 3600 = 1 hora.
+export const revalidate = 3600;
+
+interface ValuesResponse {
+  uf: number;
+  utm: number;
+  dolar: { observado: number; venta: number };
+  updatedAt: string;
+  source: 'bcentral' | 'fallback';
+}
+
+function buildResponse(payload: ValuesResponse) {
+  return NextResponse.json(payload, {
+    headers: {
+      'Cache-Control': `public, s-maxage=${ONE_HOUR}, stale-while-revalidate=${ONE_DAY}`,
+      'CDN-Cache-Control': `public, s-maxage=${ONE_HOUR}`,
+    },
+  });
+}
 
 export async function GET() {
   try {
     const values = await fetchAllCurrentValues();
 
-    // Si algún valor es null, usar fallback
-    const response = {
+    // Si todos los campos volvieron, marcamos como fuente bcentral.
+    const allFresh =
+      values.uf != null &&
+      values.utm != null &&
+      values.dolar.observado != null &&
+      values.dolar.venta != null;
+
+    return buildResponse({
       uf: values.uf ?? FALLBACK_VALUES.uf,
       utm: values.utm ?? FALLBACK_VALUES.utm,
       dolar: {
@@ -30,17 +53,19 @@ export async function GET() {
         venta: values.dolar.venta ?? FALLBACK_VALUES.dolar.venta,
       },
       updatedAt: new Date().toISOString(),
-      source: (values.uf && values.utm) ? 'bcentral' : 'fallback',
-    };
-
-    return NextResponse.json(response);
+      source: allFresh ? 'bcentral' : 'fallback',
+    });
   } catch (error) {
     console.error('[BCentral API] Error fetching values:', error);
-    
-    // Retornar valores de fallback en caso de error
-    return NextResponse.json({
-      ...FALLBACK_VALUES,
-      updatedAt: new Date().toISOString(),
+
+    return buildResponse({
+      uf: FALLBACK_VALUES.uf,
+      utm: FALLBACK_VALUES.utm,
+      dolar: {
+        observado: FALLBACK_VALUES.dolar.observado,
+        venta: FALLBACK_VALUES.dolar.venta,
+      },
+      updatedAt: FALLBACK_VALUES.asOf,
       source: 'fallback',
     });
   }

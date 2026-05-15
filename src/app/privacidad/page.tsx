@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import LegalPageLayout from '@/components/layout/LegalPageLayout';
+import { SITE_URL, SITE_NAME, CONTACT_EMAIL, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Política de Privacidad | CalculaChile',
@@ -11,8 +12,8 @@ export default function PrivacidadPage() {
   const schemaData = {
     '@context': 'https://schema.org',
     '@type': 'PrivacyPolicy',
-    name: 'Política de Privacidad de CalculaChile',
-    url: 'https://calculachile.cl/privacidad',
+    name: `Política de Privacidad de ${SITE_NAME}`,
+    url: absoluteUrl('/privacidad'),
     datePublished: '2026-01-01',
     dateModified: '2026-03-31',
   };
@@ -27,7 +28,7 @@ export default function PrivacidadPage() {
       >
         <h2>1. Introducción</h2>
         <p>
-          CalculaChile ("calculachile.cl") es un sitio web que proporciona herramientas de cálculo financiero y laboral para trabajadores chilenos. 
+          {SITE_NAME} ({SITE_URL.replace(/^https?:\/\//, '')}) es un sitio web que proporciona herramientas de cálculo financiero y laboral para trabajadores chilenos.
           Nos comprometemos a proteger tu privacidad de acuerdo con la <strong>Ley 19.628 sobre Protección de la Vida Privada</strong> de Chile.
         </p>
 
@@ -63,7 +64,7 @@ export default function PrivacidadPage() {
           <li><strong>Cancelación:</strong> Solicitar la eliminación de tus datos.</li>
           <li><strong>Oposición:</strong> Oponerte al tratamiento de tus datos para ciertos fines.</li>
         </ul>
-        <p>Para ejercer estos derechos, contáctanos a <strong>contacto@calculachile.cl</strong>.</p>
+        <p>Para ejercer estos derechos, contáctanos a <strong>{CONTACT_EMAIL}</strong>.</p>
 
         <h2>6. Seguridad</h2>
         <p>Implementamos medidas de seguridad técnicas para proteger la información. El sitio utiliza HTTPS y no almacenamos datos personales en nuestros servidores.</p>
@@ -74,8 +75,8 @@ export default function PrivacidadPage() {
         <h2>8. Contacto</h2>
         <p>Si tienes dudas sobre esta política de privacidad, contáctanos:</p>
         <ul>
-          <li><strong>Email:</strong> contacto@calculachile.cl</li>
-          <li><strong>Sitio web:</strong> https://calculachile.cl</li>
+          <li><strong>Email:</strong> {CONTACT_EMAIL}</li>
+          <li><strong>Sitio web:</strong> {SITE_URL}</li>
         </ul>
       </LegalPageLayout>
     </>

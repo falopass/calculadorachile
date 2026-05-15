@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -83,12 +84,13 @@ export default function Header() {
 
           {/* ── Logo ── */}
            <Link href="/" className="flex items-center gap-2.5 group" aria-label="Ir a la página de inicio">
-             <img
+             <Image
                src="/logo.png"
                alt="CalculaChile"
+               width={80}
+               height={80}
+               priority
                className="h-16 w-auto md:h-20 object-contain"
-               width={64}
-               height={64}
              />
            </Link>
 

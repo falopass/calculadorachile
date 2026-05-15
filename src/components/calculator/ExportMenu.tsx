@@ -2,8 +2,9 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Copy, Download, FileText, Image, Share2, Check, ChevronDown } from 'lucide-react';
+import { Copy, Download, Image, Share2, Check, ChevronDown } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
+import { SITE_URL } from '@/lib/site';
 
 export interface ExportMenuProps {
   /** Título del resultado */
@@ -117,7 +118,8 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
       // Footer
       ctx.fillStyle = '#94a3b8';
       ctx.font = '10px Inter, sans-serif';
-      ctx.fillText('calculachile.cl', padding, height - 12);
+      // Mostramos sólo el host (sin protocolo) en el watermark
+      ctx.fillText(SITE_URL.replace(/^https?:\/\//, ''), padding, height - 12);
 
       // Download
       const link = document.createElement('a');
