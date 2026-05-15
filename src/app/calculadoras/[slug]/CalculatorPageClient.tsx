@@ -6,12 +6,8 @@ import type { CalculatorResult } from "@/types/calculator";
 import PremiumCalculatorShell from "@/components/calculator/PremiumCalculatorShell";
 import EnhancedFAQ from "@/components/calculator/EnhancedFAQ";
 import SeoStructuredData from "@/components/calculator/SeoStructuredData";
-import CalculatorBackground from "@/components/calculator/CalculatorBackground";
 import CalculatorPageLayout from "@/components/calculator/CalculatorPageLayout";
 import LiveValuesSection from "@/components/calculator/LiveValuesSection";
-
-// Importar estilos premium para las calculadoras
-import "@/components/calculator/premium-calculator-styles.css";
 import { calculateSueldoLiquido, sueldoLiquidoToResults } from "@/lib/calculations/sueldo-liquido";
 import { calculateFiniquito, finiquitoToResults } from "@/lib/calculations/finiquito";
 import { calculateUFCLP, ufclpToResults } from "@/lib/calculations/uf-clp";
@@ -439,64 +435,96 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
       {/* SEO Schema */}
       {canonicalUrl && <SeoStructuredData calculator={calculator} url={canonicalUrl} />}
       
-      <div className="p-4 sm:p-6 lg:p-8">
-        <PremiumCalculatorShell calculator={calculator} calculateFn={calculateFn} />
+      <PremiumCalculatorShell calculator={calculator} calculateFn={calculateFn} />
 
-        {/* SEO Content y FAQ en layout más ancho y atractivo */}
-        <div className="mt-10 md:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Sección de instrucciones */}
-          <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg rounded-2xl border border-white/60 dark:border-slate-700/60 p-6 md:p-8 shadow-xl">
-            <h2 className="text-xl md:text-2xl font-semibold text-[var(--foreground)] mb-4 flex items-center gap-2">
-              <svg className="w-5 h-5 text-[var(--color-primary-500)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      {/* SEO Content y FAQ */}
+      <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Sección de instrucciones */}
+        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-7">
+          <h2 className="flex items-center gap-2 text-lg md:text-xl font-semibold text-[var(--foreground)] mb-4">
+            <svg
+              className="w-5 h-5 text-[var(--color-primary-500)]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            ¿Cómo usar la calculadora de {calculator.name.toLowerCase()}?
+          </h2>
+          <p className="text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
+            Ingresa los datos solicitados arriba y los resultados se mostrarán
+            automáticamente, sin necesidad de hacer clic en ningún botón. Todos los
+            cálculos utilizan valores oficiales actualizados a 2026.
+          </p>
+          <LiveValuesSection />
+        </section>
+
+        {/* FAQ */}
+        {calculator.faq && calculator.faq.length > 0 && (
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-7">
+            <h2 className="flex items-center gap-2 text-lg md:text-xl font-semibold text-[var(--foreground)] mb-4">
+              <svg
+                className="w-5 h-5 text-[var(--color-primary-500)]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
-              ¿Cómo usar la calculadora de {calculator.name.toLowerCase()}?
+              Preguntas frecuentes
             </h2>
-            <div className="prose prose-sm md:prose-base max-w-none text-[var(--foreground-secondary)]">
-              <p className="leading-relaxed">Ingresa los datos solicitados en el formulario y haz clic en "Calcular" para obtener los resultados instantáneamente. Todos nuestros cálculos utilizan valores actualizados de 2026.</p>
-
-              <LiveValuesSection />
+            <div className="space-y-4 max-h-[480px] overflow-y-auto pr-1">
+              {calculator.faq.slice(0, 5).map((faq, index) => (
+                <div
+                  key={index}
+                  className="border-b border-[var(--border)] pb-4 last:border-0 last:pb-0"
+                >
+                  <h3 className="text-sm font-semibold text-[var(--foreground)] mb-1">
+                    {faq.question}
+                  </h3>
+                  <p className="text-sm text-[var(--foreground-secondary)] leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
             </div>
-          </div>
-          
-          {/* Sección de FAQ */}
-          {calculator.faq && calculator.faq.length > 0 && (
-            <div className="bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-700/50 backdrop-blur-lg rounded-2xl border border-indigo-200/40 dark:border-slate-600/40 p-6 md:p-8 shadow-xl">
-              <h2 className="text-xl md:text-2xl font-semibold text-[var(--foreground)] mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 text-[var(--color-primary-500)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Preguntas Frecuentes
-              </h2>
-              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
-                {calculator.faq.slice(0, 5).map((faq, index) => (
-                  <div key={index} className="border-b border-[var(--border)]/50 pb-4 last:border-0 last:pb-0">
-                    <h3 className="font-medium text-[var(--foreground)] mb-1">{faq.question}</h3>
-                    <p className="text-sm md:text-base text-[var(--foreground-secondary)]">{faq.answer}</p>
-                  </div>
-                ))}
-              </div>
-              {calculator.faq.length > 5 && (
-                <details className="mt-4 pt-4 border-t border-[var(--border)]/50">
-                  <summary className="cursor-pointer text-[var(--color-primary-600)] hover:text-[var(--color-primary-700)] dark:hover:text-[var(--color-primary-400)] font-medium flex items-center gap-1">
-                    Ver más preguntas ({calculator.faq.length - 5})
-                    <svg className="w-4 h-4 ml-1 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </summary>
-                  <div className="mt-4 space-y-4">
-                    {calculator.faq.slice(5).map((faq, index) => (
-                      <div key={index} className="border-b border-[var(--border)]/50 pb-4 last:border-0 last:pb-0">
-                        <h3 className="font-medium text-[var(--foreground)] mb-1">{faq.question}</h3>
-                        <p className="text-sm md:text-base text-[var(--foreground-secondary)]">{faq.answer}</p>
-                      </div>
-                    ))}
-                  </div>
-                </details>
-              )}
-            </div>
-          )}
-        </div>
+            {calculator.faq.length > 5 && (
+              <details className="mt-4 pt-4 border-t border-[var(--border)]">
+                <summary className="cursor-pointer text-sm font-medium text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] hover:text-[var(--color-primary-700)]">
+                  Ver más preguntas ({calculator.faq.length - 5})
+                </summary>
+                <div className="mt-4 space-y-4">
+                  {calculator.faq.slice(5).map((faq, index) => (
+                    <div
+                      key={index}
+                      className="border-b border-[var(--border)] pb-4 last:border-0 last:pb-0"
+                    >
+                      <h3 className="text-sm font-semibold text-[var(--foreground)] mb-1">
+                        {faq.question}
+                      </h3>
+                      <p className="text-sm text-[var(--foreground-secondary)] leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
+          </section>
+        )}
       </div>
     </CalculatorPageLayout>
   );

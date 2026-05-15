@@ -222,7 +222,7 @@ export default function PremiumResultCard({
       initial={animate ? { opacity: 0, y: 20, scale: 0.98 } : {}}
       animate={animate ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-full rounded-2xl border border-[var(--border)]/50 overflow-hidden shadow-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+      className="w-full rounded-2xl border border-[var(--border)] overflow-hidden bg-[var(--surface)] shadow-sm"
       role="region"
       aria-label="Resultados del cálculo"
       aria-live="polite"
