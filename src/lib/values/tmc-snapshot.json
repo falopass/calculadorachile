@@ -1,0 +1,16 @@
+{
+  "asOf": "2026-05-14",
+  "vigenteDesde": "2026-05-15",
+  "fuente": "CMF — Norma General N°450 (publicación mensual en el Diario Oficial)",
+  "tramos": {
+    "no_reajustables_mayor_5000uf_mayor_90d": 6.5,
+    "no_reajustables_mayor_200uf_menor_5000uf_mayor_90d": 9.5,
+    "no_reajustables_50_200uf_mayor_90d": 22.5,
+    "no_reajustables_menor_50uf_mayor_90d": 38.4,
+    "no_reajustables_mayor_5000uf_menor_90d": 6.0,
+    "reajustables_uf_mayor_1_anio": 5.2,
+    "reajustables_uf_menor_1_anio": 4.8
+  },
+  "generatedAt": "2026-05-15T14:59:06.383Z",
+  "source": "fallback"
+}

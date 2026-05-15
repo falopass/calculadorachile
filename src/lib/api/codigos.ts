@@ -15,7 +15,10 @@ export const BCENTRAL_CODES = {
   
   // Dólar venta (diario)
   DOLAR_VENTA: 'F073.TCO.VTA.Z.D',
-  
+
+  // Euro observado (diario) - paridad EUR/CLP
+  EURO_OBSERVADO: 'F072.CLP.EUR.N.O.D',
+
   // IPC - Índice de Precios al Consumidor base 2018=100 (mensual)
   IPC: 'G073.IPC.IND.2018.M',
   

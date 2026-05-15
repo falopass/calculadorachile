@@ -2,7 +2,7 @@
 // Conversor de Divisas (USD/EUR a CLP) Chile 2026
 // ============================================
 
-import { DOLAR } from '@/lib/values/constants';
+import { DOLAR, EURO } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface ConversorDivisasInput {
@@ -30,14 +30,14 @@ export interface ConversorDivisasResult {
 }
 
 /**
- * Spread USD → EUR aproximado. Si el sitio aún no expone EUR en el
- * snapshot del Banco Central, se usa este multiplicador sobre el
- * dólar observado. Cambia diariamente (banda histórica 1.05 - 1.12).
+ * Premium EUR/USD usado SOLO como respaldo si el snapshot no tiene
+ * EUR (ej. rollback a versiones previas o snapshot corrupto).
  *
- * IMPORTANTE: para mayor precisión en el futuro, agregar EUR al
- * snapshot del Banco Central (mindicador.cl/eur).
+ * En condiciones normales `EURO.valor` viene actualizado diariamente
+ * desde mindicador.cl/euro o la serie F072.CLP.EUR.N.O.D del Banco
+ * Central, así que este multiplicador no se usa.
  */
-const EUR_PREMIUM_VS_USD = 1.08;
+const EUR_PREMIUM_VS_USD_FALLBACK = 1.08;
 
 const NOMBRES_MONEDA: Record<ConversorDivisasInput['moneda'], string> = {
   usd: 'Dólar estadounidense (USD)',
@@ -45,14 +45,19 @@ const NOMBRES_MONEDA: Record<ConversorDivisasInput['moneda'], string> = {
 };
 
 /**
- * Calcula la tasa de cambio actual a CLP usando el snapshot del Banco
- * Central (`DOLAR.observado`) en vez de un valor hardcodeado.
+ * Calcula la tasa de cambio actual a CLP usando los snapshots
+ * `DOLAR.observado` y `EURO.valor` (auto-actualizados diariamente)
+ * en vez de un valor hardcodeado.
  */
 function obtenerTasaCambio(moneda: ConversorDivisasInput['moneda']): number {
   // Si el snapshot del BCCh no tiene dólar, este fallback evita NaN.
   const usd = DOLAR.observado && DOLAR.observado > 0 ? DOLAR.observado : 950;
   if (moneda === 'usd') return usd;
-  return usd * EUR_PREMIUM_VS_USD;
+  // Para EUR usamos el valor real del snapshot; si por algún motivo
+  // no está disponible, derivamos a partir del USD con el premium
+  // histórico.
+  if (EURO.valor && EURO.valor > 0) return EURO.valor;
+  return usd * EUR_PREMIUM_VS_USD_FALLBACK;
 }
 
 /**

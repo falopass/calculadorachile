@@ -107,15 +107,16 @@ export async function fetchLatestValue(codigo: string): Promise<number | null> {
 }
 
 /**
- * Obtiene UF, UTM, Dólar observado y venta en paralelo.
+ * Obtiene UF, UTM, Dólar observado/venta y Euro en paralelo.
  * Cada serie devuelve `null` si su request individual falló.
  */
 export async function fetchAllCurrentValues() {
-  const [uf, utm, dolarObs, dolarVta] = await Promise.all([
+  const [uf, utm, dolarObs, dolarVta, euro] = await Promise.all([
     fetchLatestValue(BCENTRAL_CODES.UF_DIARIO),
     fetchLatestValue(BCENTRAL_CODES.UTM_MENSUAL),
     fetchLatestValue(BCENTRAL_CODES.DOLAR_OBSERVADO),
     fetchLatestValue(BCENTRAL_CODES.DOLAR_VENTA),
+    fetchLatestValue(BCENTRAL_CODES.EURO_OBSERVADO),
   ]);
 
   return {
@@ -125,5 +126,6 @@ export async function fetchAllCurrentValues() {
       observado: dolarObs,
       venta: dolarVta,
     },
+    euro,
   };
 }

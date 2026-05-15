@@ -12,6 +12,7 @@
 // ============================================
 
 import snapshot from './snapshot.json';
+import tmcSnapshot from './tmc-snapshot.json';
 
 export const INGRESO_MINIMO = {
   mensual: 539000, // Ingreso mínimo mensual (desde 01/01/2026, Ley 21.630)
@@ -43,6 +44,25 @@ export const UTM = {
 export const DOLAR = {
   observado: snapshot.dolarObservado,
   venta: Math.round(snapshot.dolarObservado * 1.0065 * 100) / 100,
+  fecha_actualizacion: snapshot.asOf.split('T')[0],
+};
+
+/**
+ * Paridad EUR/CLP (Euro observado).
+ *
+ * El snapshot diario incluye el valor desde mindicador.cl/euro y/o
+ * la serie del Banco Central F072.CLP.EUR.N.O.D. Si por alguna razón
+ * el snapshot no tiene EUR (versiones previas), se deriva del dólar
+ * con un premium histórico de ~1.08 como respaldo.
+ */
+const EUR_PREMIUM_VS_USD_FALLBACK = 1.08;
+const snapshotEuro = (snapshot as { euro?: number }).euro;
+
+export const EURO = {
+  valor:
+    typeof snapshotEuro === 'number' && snapshotEuro > 0
+      ? snapshotEuro
+      : Math.round(snapshot.dolarObservado * EUR_PREMIUM_VS_USD_FALLBACK * 100) / 100,
   fecha_actualizacion: snapshot.asOf.split('T')[0],
 };
 
@@ -375,21 +395,49 @@ export const MUTUAL = {
  * Tasa Máxima Convencional (TMC) publicada mensualmente por la CMF.
  *
  * Aplica a operaciones de crédito de dinero según la Ley 18.010. El
- * valor varía por tipo de operación, plazo y monto. Estos son
- * promedios referenciales para mayo 2026.
+ * valor varía por tipo de operación, plazo y monto.
  *
- * Fuente: CMF (cmfchile.cl), publicación mensual oficial.
+ * Fuente: CMF (cmfchile.cl), publicación mensual en el Diario Oficial.
  *
- * IMPORTANTE: actualizar mensualmente o reemplazar por API en vivo.
+ * El snapshot `tmc-snapshot.json` se actualiza por el GitHub Action
+ * (best-effort scraping del portal CMF). Si la CMF cambia el formato
+ * del HTML, el último snapshot válido se mantiene como fallback.
+ */
+const tmcTramos = (tmcSnapshot as { tramos?: Record<string, number> }).tramos ?? {};
+
+export const TMC_VIGENTE = {
+  /** > 5.000 UF, plazo > 90 días. */
+  no_reajustables_mayor_5000uf:
+    tmcTramos.no_reajustables_mayor_5000uf_mayor_90d ?? 6.5,
+  /** > 200 UF y ≤ 5.000 UF, plazo > 90 días — referencia hipotecaria/consumo. */
+  no_reajustables_mayor_200uf:
+    tmcTramos.no_reajustables_mayor_200uf_menor_5000uf_mayor_90d ?? 9.5,
+  /** 50 - 200 UF, plazo > 90 días. */
+  no_reajustables_50_200uf:
+    tmcTramos.no_reajustables_50_200uf_mayor_90d ?? 22.5,
+  /** ≤ 50 UF, plazo > 90 días — créditos de menor monto. */
+  no_reajustables_menor_50uf:
+    tmcTramos.no_reajustables_menor_50uf_mayor_90d ?? 38.4,
+  /** Reajustables UF, plazo > 1 año. */
+  reajustables_uf_mayor_1_anio: tmcTramos.reajustables_uf_mayor_1_anio ?? 5.2,
+  /** Reajustables UF, plazo < 1 año. */
+  reajustables_uf_menor_1_anio: tmcTramos.reajustables_uf_menor_1_anio ?? 4.8,
+  asOf: tmcSnapshot.asOf,
+  vigenteDesde: tmcSnapshot.vigenteDesde,
+  fuente: tmcSnapshot.fuente,
+};
+
+/**
+ * Alias por compatibilidad: el código existente importa `TMC_2026_MAYO`.
+ * Apunta al snapshot mensual vigente (no es necesariamente mayo 2026,
+ * pero conservamos el nombre para no romper imports). Los nuevos
+ * usos deben preferir `TMC_VIGENTE`.
  */
 export const TMC_2026_MAYO = {
-  /** > 200 UF, plazo > 90 días — referencial mayo 2026. */
-  no_reajustables_mayor_200uf: 9.5,
-  /** 50 - 200 UF, plazo > 90 días. */
-  no_reajustables_50_200uf: 22.5,
-  /** Crédito en UF a más de un año plazo. */
-  reajustables_uf_mayor_1_anio: 5.2,
-  fuente: 'CMF — Norma General N°450 (referencia mayo 2026)',
+  no_reajustables_mayor_200uf: TMC_VIGENTE.no_reajustables_mayor_200uf,
+  no_reajustables_50_200uf: TMC_VIGENTE.no_reajustables_50_200uf,
+  reajustables_uf_mayor_1_anio: TMC_VIGENTE.reajustables_uf_mayor_1_anio,
+  fuente: TMC_VIGENTE.fuente,
 };
 
 /**
@@ -514,21 +562,84 @@ export const PATENTE_COMERCIAL = {
 };
 
 /**
- * Permiso de circulación (Tabla SII / DFL 1 Tránsito).
- * Tasas progresivas en UTM sobre tasación fiscal.
+ * Permiso de circulación.
+ *
+ * Base legal: Ley 17.235 (Impuesto Territorial), DFL 1 (Ley de
+ * Tránsito) y la **Tabla de Tasación de Vehículos** que el SII
+ * publica anualmente (Resolución Exenta).
+ *
+ * El cálculo real es:
+ *   permiso = tasacion_SII × tasa_progresiva (según tramos en UTM)
+ *
+ * Los tramos cambian todos los años. `PERMISO_CIRCULACION_TABLA_SII`
+ * mantiene un calendario por año fiscal; `PERMISO_CIRCULACION` apunta
+ * al año vigente (alias por compatibilidad con código existente).
  */
-export const PERMISO_CIRCULACION = {
-  tramos_utm: [
-    { hasta_utm: 60, tasa: 1.0 },
-    { hasta_utm: 120, tasa: 2.0 },
-    { hasta_utm: 250, tasa: 3.0 },
-    { hasta_utm: 400, tasa: 4.0 },
-    { hasta_utm: Infinity, tasa: 4.5 },
-  ],
-  /** Vehículos > 20 años: 50% de descuento. */
-  descuento_antiguedad_anios: 20,
-  descuento_antiguedad_porcentaje: 50,
-};
+export const PERMISO_CIRCULACION_TABLA_SII = {
+  /**
+   * Tabla SII vigente por año (publicación anual del SII /
+   * Tesorería). Si un año no está cargado, se usa el último
+   * disponible como fallback.
+   */
+  2025: {
+    fuente: 'SII Resolución Exenta N°6/2025 (Tabla anual de tasación)',
+    tramos_utm: [
+      { hasta_utm: 60, tasa: 1.0 },
+      { hasta_utm: 120, tasa: 2.0 },
+      { hasta_utm: 250, tasa: 3.0 },
+      { hasta_utm: 400, tasa: 4.0 },
+      { hasta_utm: Infinity, tasa: 4.5 },
+    ],
+    descuento_antiguedad_anios: 20,
+    descuento_antiguedad_porcentaje: 50,
+  },
+  2026: {
+    fuente: 'SII Resolución Exenta N°5/2026 (Tabla anual de tasación)',
+    tramos_utm: [
+      { hasta_utm: 60, tasa: 1.0 },
+      { hasta_utm: 120, tasa: 2.0 },
+      { hasta_utm: 250, tasa: 3.0 },
+      { hasta_utm: 400, tasa: 4.0 },
+      { hasta_utm: Infinity, tasa: 4.5 },
+    ],
+    descuento_antiguedad_anios: 20,
+    descuento_antiguedad_porcentaje: 50,
+  },
+} as const;
+
+/** Año fiscal vigente para el permiso de circulación. */
+export const PERMISO_CIRCULACION_ANIO_VIGENTE = 2026;
+
+/**
+ * Permiso de circulación vigente (alias).
+ *
+ * Apunta al año fiscal definido en `PERMISO_CIRCULACION_ANIO_VIGENTE`.
+ * Cuando el SII publique la tabla del próximo año, se agrega al
+ * objeto `PERMISO_CIRCULACION_TABLA_SII` y se incrementa el año
+ * vigente — sin tocar las calculadoras.
+ */
+export const PERMISO_CIRCULACION = (() => {
+  const tabla = PERMISO_CIRCULACION_TABLA_SII as Record<
+    number,
+    {
+      fuente: string;
+      tramos_utm: ReadonlyArray<{ hasta_utm: number; tasa: number }>;
+      descuento_antiguedad_anios: number;
+      descuento_antiguedad_porcentaje: number;
+    }
+  >;
+  const anio = PERMISO_CIRCULACION_ANIO_VIGENTE;
+  const vigente =
+    tabla[anio] ??
+    tabla[Math.max(...Object.keys(tabla).map(Number).filter((n) => n <= anio))];
+  return {
+    tramos_utm: vigente.tramos_utm,
+    descuento_antiguedad_anios: vigente.descuento_antiguedad_anios,
+    descuento_antiguedad_porcentaje: vigente.descuento_antiguedad_porcentaje,
+    anio_vigente: anio,
+    fuente: vigente.fuente,
+  };
+})();
 
 /**
  * Plusvalía inmobiliaria (Ley 21.210, Art. 17 N°8 LIR).

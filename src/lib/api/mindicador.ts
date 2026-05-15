@@ -39,6 +39,8 @@ export interface MindicadorValores {
   utm: number | null;
   /** Dólar observado del día. Mindicador no expone "venta" separado. */
   dolar: number | null;
+  /** Euro del día (paridad EUR/CLP). */
+  euro: number | null;
   /** ISO date del último valor de UF (la fuente fresca por defecto). */
   asOf: string | null;
 }
@@ -52,6 +54,7 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
     uf: null,
     utm: null,
     dolar: null,
+    euro: null,
     asOf: null,
   };
 
@@ -91,6 +94,7 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
     uf: safeNumber(data.uf?.valor),
     utm: safeNumber(data.utm?.valor),
     dolar: safeNumber(data.dolar?.valor),
+    euro: safeNumber(data.euro?.valor),
     asOf: data.uf?.fecha ?? data.dolar?.fecha ?? data.fecha ?? null,
   };
 }

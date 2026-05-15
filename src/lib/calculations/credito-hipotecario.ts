@@ -69,7 +69,7 @@ export interface CreditoHipotecarioResult {
   valorUF: number;
   /** Capacidad de endeudamiento */
   capacidadEndeudamiento?: number;
-  /** Seguros mensuales */
+  /** Seguros mensuales (referenciales del primer mes) */
   segurosMensuales?: {
     desgravamen: number;
     incendio: number;
@@ -77,7 +77,7 @@ export interface CreditoHipotecarioResult {
   };
   /** Comisión de administración mensual */
   comisionAdministracion?: number;
-  /** CAE (Carga Anual Equivalente) */
+  /** CAE (Carga Anual Equivalente, % anual basado en TIR mensual) */
   cae?: number;
   /** Gastos notariales y de inscripción */
   gastosNotariales?: number;
@@ -93,6 +93,80 @@ export interface CreditoHipotecarioResult {
   }>;
   /** Ahorro por prepago */
   ahorroPrepago?: number;
+}
+
+/**
+ * Tasa típica de mercado para seguro de desgravamen (% mensual sobre
+ * saldo insoluto). En Chile las aseguradoras cobran entre 0,02% y
+ * 0,05% mensual del saldo.
+ *
+ * Nota: el bug anterior usaba 0,1% del *dividendo* (no del saldo), lo
+ * que daba un cobro plano e irreal.
+ */
+const SEGURO_DESGRAVAMEN_TASA_MENSUAL_SALDO = 0.0003; // 0,03% mensual sobre saldo
+
+/**
+ * Tasa típica de mercado para seguro de incendio (% mensual sobre el
+ * monto del crédito original, NO sobre el saldo).
+ */
+const SEGURO_INCENDIO_TASA_MENSUAL = 0.00015; // 0,015% mensual sobre monto
+
+/**
+ * Comisión típica de administración (% mensual sobre saldo).
+ */
+const COMISION_ADMIN_TASA_MENSUAL_SALDO = 0.0005; // 0,05% mensual sobre saldo
+
+/**
+ * Calcula la TIR mensual de un flujo de caja por bisección.
+ *
+ * Para un crédito hipotecario:
+ *   - flujos[0] = +monto neto recibido (negativo si hay costos
+ *                 iniciales descontados)
+ *   - flujos[k] = -pago del mes k (dividendo + seguros + comisiones)
+ *
+ * La TIR es la tasa mensual r tal que:
+ *   Σ flujo_k / (1+r)^k = 0
+ *
+ * Se usa bisección porque es robusta para flujos hipotecarios
+ * típicos (todos los pagos negativos después del desembolso) y no
+ * requiere derivada. Newton-Raphson puede divergir si el guess
+ * inicial está lejos.
+ *
+ * @returns Tasa mensual o `null` si no converge en 100 iteraciones.
+ */
+function calcularTIRMensual(flujos: number[]): number | null {
+  const npv = (rate: number): number => {
+    let sum = 0;
+    for (let k = 0; k < flujos.length; k++) {
+      sum += flujos[k] / Math.pow(1 + rate, k);
+    }
+    return sum;
+  };
+
+  // Búsqueda binaria: NPV es monótonamente decreciente con r para
+  // flujos hipotecarios (1 entrada positiva, N salidas negativas).
+  let low = -0.99 / 12; // tasa mensual mínima realista
+  let high = 1.0; // 100% mensual como techo absurdo
+  let npvLow = npv(low);
+  const npvHigh = npv(high);
+
+  // Si los signos no encierran 0, no hay raíz en el intervalo.
+  if (npvLow * npvHigh > 0) return null;
+
+  for (let i = 0; i < 100; i++) {
+    const mid = (low + high) / 2;
+    const npvMid = npv(mid);
+    if (Math.abs(npvMid) < 1e-9 || (high - low) < 1e-10) {
+      return mid;
+    }
+    if (npvMid * npvLow > 0) {
+      low = mid;
+      npvLow = npvMid;
+    } else {
+      high = mid;
+    }
+  }
+  return (low + high) / 2;
 }
 
 /**
@@ -133,6 +207,8 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     simularPrepago = false,
     montoPrepago = 0
   } = input;
+  void tipoTasa;
+  void periodoGraciaMeses;
 
   const valorUF = UF.valor;
 
@@ -187,30 +263,132 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     capacidadEndeudamiento = ingresoMensual * 0.25; // 25% del ingreso
   }
 
-  // Calcular seguros mensuales
-  let segurosMensuales = undefined;
-  if (incluyeSeguroDesgravamen || incluyeSeguroIncendio) {
-    segurosMensuales = {
-      desgravamen: incluyeSeguroDesgravamen ? dividendoMensualUF * 0.001 : 0, // 0.1% típico
-      incendio: incluyeSeguroIncendio ? dividendoMensualUF * 0.0005 : 0, // 0.05% típico
-      total: 0
-    };
-    segurosMensuales.total = segurosMensuales.desgravamen + segurosMensuales.incendio;
+  // ============================================
+  // Construcción del flujo mensual real (con seguros sobre saldo)
+  // ----------------------------------------------
+  // Antes:
+  //   - desgravamen = 0,1% del dividendo (plano)
+  //   - incendio = 0,05% del dividendo (plano)
+  //   - Total pagado se sumaba (dividendo + seguro_plano) × n
+  //
+  // Ahora:
+  //   - desgravamen = 0,03% mensual SOBRE EL SALDO INSOLUTO (decrece)
+  //   - incendio = 0,015% mensual sobre el monto original (constante)
+  //   - comisión = 0,05% mensual sobre saldo (decrece)
+  //
+  // Esto es más realista y permite calcular un CAE veraz.
+  // ============================================
+
+  type FilaAmortizacion = NonNullable<CreditoHipotecarioResult['tablaAmortizacion']>[number];
+  const tabla: FilaAmortizacion[] = [];
+  let saldo = montoFinanciarUF;
+  let desgravamenPrimerMes = 0;
+  let incendioPrimerMes = 0;
+  let comisionPrimerMes = 0;
+  // Sumas para reportar valores agregados al usuario.
+  let sumaSeguros = 0;
+  let sumaComisiones = 0;
+  let sumaIntereses = 0;
+
+  // Flujos para CAE: el banco entrega +montoFinanciarUF en t=0 y el
+  // deudor paga (-(dividendo + seguros + comisión)) cada mes.
+  const flujosCAE: number[] = [montoFinanciarUF];
+
+  for (let mes = 1; mes <= plazoMeses; mes++) {
+    const interes = saldo * tasaMensual;
+    const capital = dividendoMensualUF - interes;
+    const nuevoSaldo = saldo - capital;
+
+    const desgravamen = incluyeSeguroDesgravamen
+      ? saldo * SEGURO_DESGRAVAMEN_TASA_MENSUAL_SALDO
+      : 0;
+    const incendio = incluyeSeguroIncendio
+      ? montoUF * SEGURO_INCENDIO_TASA_MENSUAL
+      : 0;
+    const comision = incluyeComisionAdministracion
+      ? saldo * COMISION_ADMIN_TASA_MENSUAL_SALDO
+      : 0;
+    const totalSeguros = desgravamen + incendio;
+
+    if (mes === 1) {
+      desgravamenPrimerMes = desgravamen;
+      incendioPrimerMes = incendio;
+      comisionPrimerMes = comision;
+    }
+
+    sumaSeguros += totalSeguros;
+    sumaComisiones += comision;
+    sumaIntereses += interes;
+
+    flujosCAE.push(-(dividendoMensualUF + totalSeguros + comision));
+
+    if (calcularTablaAmortizacion) {
+      tabla.push({
+        mes,
+        saldoInicial: Math.round(saldo * 100) / 100,
+        dividendo: Math.round(dividendoMensualUF * 100) / 100,
+        interes: Math.round(interes * 100) / 100,
+        capital: Math.round(capital * 100) / 100,
+        seguro: Math.round(totalSeguros * 100) / 100,
+        saldoFinal: Math.round(nuevoSaldo * 100) / 100,
+      });
+    }
+
+    saldo = nuevoSaldo;
   }
 
-  // Calcular comisión de administración
+  // Seguros del PRIMER mes (los reportamos como referencia visible).
+  // Los meses siguientes el desgravamen y la comisión bajan con el saldo.
+  let segurosMensuales = undefined as
+    | { desgravamen: number; incendio: number; total: number }
+    | undefined;
+  if (incluyeSeguroDesgravamen || incluyeSeguroIncendio) {
+    const desgravamenRound = Math.round(desgravamenPrimerMes * 10000) / 10000;
+    const incendioRound = Math.round(incendioPrimerMes * 10000) / 10000;
+    segurosMensuales = {
+      desgravamen: desgravamenRound,
+      incendio: incendioRound,
+      total: Math.round((desgravamenRound + incendioRound) * 10000) / 10000,
+    };
+  }
+
+  // Comisión de administración del primer mes.
   let comisionAdministracion: number | undefined;
   if (incluyeComisionAdministracion) {
-    comisionAdministracion = dividendoMensualUF * 0.001; // 0.1% típico
+    comisionAdministracion = Math.round(comisionPrimerMes * 10000) / 10000;
   }
 
-  // Calcular CAE (Carga Anual Equivalente)
+  // ============================================
+  // CAE real por TIR (Carga Anual Equivalente)
+  // ----------------------------------------------
+  // El CAE legal en Chile (Ley 19.496 + Reglamento de transparencia
+  // de costos del SERNAC/CMF) es la tasa anual EFECTIVA que iguala
+  // el valor presente de los pagos (incluyendo seguros y comisiones
+  // que el banco exige) al monto entregado.
+  //
+  // Antes se usaba (totalPagado/principal)^(1/n) - 1, que sobreestima
+  // el CAE porque ignora la temporalidad (un peso pagado al mes 360
+  // pesa lo mismo que uno pagado al mes 1).
+  //
+  // Ahora calculamos la TIR mensual por bisección y la convertimos
+  // a tasa anual efectiva: CAE = (1 + r_mensual)^12 - 1.
+  // ============================================
   let cae: number | undefined;
   if (calcularCAE) {
-    // Fórmula simplificada de CAE: (Total pagado / Monto financiado)^(1/n) - 1
-    const totalPagadoConSeguros = (dividendoMensualUF + (segurosMensuales?.total || 0)) * plazoMeses;
-    cae = Math.pow(totalPagadoConSeguros / montoFinanciarUF, 1/plazoAnos) - 1;
-    cae = cae * 100; // Convertir a porcentaje
+    const tirMensual = calcularTIRMensual(flujosCAE);
+    if (tirMensual != null) {
+      const caeAnual = Math.pow(1 + tirMensual, 12) - 1;
+      cae = Math.round(caeAnual * 100 * 100) / 100; // % con 2 decimales
+    } else {
+      // Fallback: si TIR no converge (caso anómalo), aproximamos.
+      const totalPagadoConCargos =
+        (dividendoMensualUF + (segurosMensuales?.total ?? 0) +
+          (comisionAdministracion ?? 0)) *
+        plazoMeses;
+      const caeAprox =
+        Math.pow(totalPagadoConCargos / montoFinanciarUF, 1 / plazoAnos) - 1;
+      cae = Math.round(caeAprox * 100 * 100) / 100;
+    }
   }
 
   // Calcular gastos notariales
@@ -220,55 +398,26 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     gastosNotariales = montoUF * 0.015 * valorUF; // 1.5% promedio en UF convertido a CLP
   }
 
-  // Calcular tabla de amortización si se solicita
-  let tablaAmortizacion: CreditoHipotecarioResult['tablaAmortizacion'] | undefined;
-  if (calcularTablaAmortizacion) {
-    tablaAmortizacion = [];
-    let saldo = montoFinanciarUF;
-    
-    for (let mes = 1; mes <= plazoMeses; mes++) {
-      // Interés del mes
-      const interes = saldo * tasaMensual;
-      
-      // Capital pagado (dividendo - interés)
-      const capital = dividendoMensualUF - interes;
-      
-      // Nuevo saldo
-      const nuevoSaldo = saldo - capital;
-      
-      // Seguro del mes
-      const seguro = segurosMensuales ? segurosMensuales.total : 0;
-      
-      tablaAmortizacion.push({
-        mes,
-        saldoInicial: Math.round(saldo * 100) / 100,
-        dividendo: Math.round(dividendoMensualUF * 100) / 100,
-        interes: Math.round(interes * 100) / 100,
-        capital: Math.round(capital * 100) / 100,
-        seguro: Math.round(seguro * 100) / 100,
-        saldoFinal: Math.round(nuevoSaldo * 100) / 100
-      });
-      
-      saldo = nuevoSaldo;
-    }
-  }
+  // Tabla de amortización (ya construida arriba si se solicitó)
+  const tablaAmortizacion = calcularTablaAmortizacion ? tabla : undefined;
 
   // Simular prepago si se solicita
   let ahorroPrepago: number | undefined;
   if (simularPrepago && montoPrepago > 0) {
-    // Calcular ahorro aproximado en intereses por prepago
-    // Simplificación: reducir el saldo y recalcular intereses restantes
-    const mesesRestantes = plazoMeses - 12; // Asumiendo prepago después de 1 año
-    const interesesOriginalesRestantes = (dividendoMensualUF * mesesRestantes) - (montoFinanciarUF - (montoFinanciarUF / plazoMeses * 12));
-    const nuevoSaldo = montoFinanciarUF - montoPrepago;
-    const interesesNuevosRestantes = (dividendoMensualUF * mesesRestantes) - (nuevoSaldo - (nuevoSaldo / plazoMeses * 12));
-    ahorroPrepago = interesesOriginalesRestantes - interesesNuevosRestantes;
+    // Ahorro de intereses por prepago "puntual": calcular intereses
+    // ahorrados sobre el saldo prepagado a lo largo del resto del
+    // plazo. Aproximación: monto_prepago × tasa_mensual × meses_restantes.
+    const mesesRestantes = plazoMeses - 12;
+    ahorroPrepago = montoPrepago * tasaMensual * mesesRestantes;
   }
 
   // Totales
   const totalPagoUF = dividendoMensualUF * plazoMeses;
   const totalInteresesUF = totalPagoUF - montoFinanciarUF;
   const costoTotal = totalPagoUF / montoFinanciarUF;
+  void sumaSeguros;
+  void sumaComisiones;
+  void sumaIntereses;
 
   // Conversiones a CLP
   const montoFinanciarCLP = montoFinanciarUF * valorUF;
@@ -293,7 +442,7 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
     capacidadEndeudamiento,
     segurosMensuales,
     comisionAdministracion,
-    cae: cae ? Math.round(cae * 100) / 100 : undefined,
+    cae: cae !== undefined ? cae : undefined,
     gastosNotariales,
     tablaAmortizacion,
     ahorroPrepago: ahorroPrepago ? Math.round(ahorroPrepago) : undefined
@@ -389,10 +538,10 @@ export function creditoHipotecarioToResults(result: CreditoHipotecarioResult): C
     });
   }
 
-  // Incluir seguros si aplica
+  // Incluir seguros si aplica (referenciales del primer mes)
   if (result.segurosMensuales) {
     results.push({
-      label: 'Seguro Desgravamen Mensual (UF)',
+      label: 'Seguro Desgravamen Mes 1 (UF, sobre saldo)',
       value: result.segurosMensuales.desgravamen,
       format: 'UF',
     });
@@ -404,7 +553,7 @@ export function creditoHipotecarioToResults(result: CreditoHipotecarioResult): C
     });
 
     results.push({
-      label: 'Total Seguros Mensuales (UF)',
+      label: 'Total Seguros Mes 1 (UF)',
       value: result.segurosMensuales.total,
       format: 'UF',
     });
@@ -413,7 +562,7 @@ export function creditoHipotecarioToResults(result: CreditoHipotecarioResult): C
   // Incluir comisión de administración si aplica
   if (result.comisionAdministracion !== undefined) {
     results.push({
-      label: 'Comisión Administración Mensual (UF)',
+      label: 'Comisión Administración Mes 1 (UF, sobre saldo)',
       value: result.comisionAdministracion,
       format: 'UF',
     });
@@ -422,7 +571,7 @@ export function creditoHipotecarioToResults(result: CreditoHipotecarioResult): C
   // Incluir CAE si aplica
   if (result.cae !== undefined) {
     results.push({
-      label: 'CAE (Carga Anual Equivalente)',
+      label: 'CAE (Carga Anual Equivalente, TIR)',
       value: result.cae,
       format: 'percentage',
     });

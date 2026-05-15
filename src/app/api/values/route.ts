@@ -1,5 +1,5 @@
 // API Route: Proxy para indicadores económicos chilenos.
-// GET /api/values → UF, UTM, Dólar actualizados.
+// GET /api/values → UF, UTM, Dólar, Euro actualizados.
 //
 // Estrategia:
 //   1. Si hay credenciales BCentral, intentamos esa fuente primero
@@ -32,6 +32,8 @@ interface ValuesResponse {
   uf: number;
   utm: number;
   dolar: { observado: number; venta: number };
+  /** Paridad EUR/CLP (Euro observado). */
+  euro: number;
   updatedAt: string;
   /** Fuente "predominante" (la que entregó UF). Compatible con la API anterior. */
   source: Source;
@@ -41,6 +43,7 @@ interface ValuesResponse {
     utm: Source;
     dolarObservado: Source;
     dolarVenta: Source;
+    euro: Source;
   };
 }
 
@@ -59,6 +62,7 @@ export async function GET() {
     uf: null,
     utm: null,
     dolar: { observado: null, venta: null },
+    euro: null,
   };
   try {
     bcentral = await fetchAllCurrentValues();
@@ -97,6 +101,8 @@ export async function GET() {
     mindicador.dolar != null ? Math.round(mindicador.dolar * 1.0065 * 100) / 100 : null,
     FALLBACK_VALUES.dolar.venta,
   );
+  // Euro: BCentral expone serie diaria oficial; Mindicador la replica.
+  const euro = pick(bcentral.euro, mindicador.euro, FALLBACK_VALUES.euro);
 
   // La "fuente predominante" sigue la del UF, que es la más visible.
   const predominantSource: Source = uf.source;
@@ -108,6 +114,7 @@ export async function GET() {
       observado: dolarObs.value,
       venta: venta.value,
     },
+    euro: euro.value,
     updatedAt: new Date().toISOString(),
     source: predominantSource,
     freshness: {
@@ -115,6 +122,7 @@ export async function GET() {
       utm: utm.source,
       dolarObservado: dolarObs.source,
       dolarVenta: venta.source,
+      euro: euro.source,
     },
   });
 }
