@@ -11,21 +11,25 @@ export const INGRESO_MINIMO = {
   zona_extrema: 571340,   // Zona extrema (Magallanes, Aysén) - 6% adicional aprox.
 };
 
+// Estos valores son sólo de referencia para cálculos que NO usan
+// el hook `useValues()` (donde sí se obtiene el valor en vivo).
+// Mantener sincronizados con `lib/values/fallback.ts`.
+// Última revisión: 14/05/2026 (Mindicador.cl).
 export const UF = {
-  valor: 39824.68,        // Valor UF marzo 2026 (Fuente: BCentral)
-  fecha_actualizacion: '2026-03-31',
+  valor: 40324.06,        // Valor UF 14/05/2026 (Fuente: BCentral / Mindicador)
+  fecha_actualizacion: '2026-05-14',
 };
 
 export const UTM = {
-  valor: 69889,           // Valor UTM marzo 2026 (Fuente: BCentral)
-  mes: 'marzo',
+  valor: 70588,           // Valor UTM mayo 2026 (Fuente: BCentral)
+  mes: 'mayo',
   año: 2026,
 };
 
 export const DOLAR = {
-  observado: 907.66,      // Dólar observado marzo 2026 (Fuente: BCentral)
-  venta: 960,             // Dólar venta (estimado)
-  fecha_actualizacion: '2026-03-31',
+  observado: 889.19,      // Dólar observado 14/05/2026 (Fuente: BCentral / Mindicador)
+  venta: 895,             // Dólar venta (estimado +0.65%)
+  fecha_actualizacion: '2026-05-14',
 };
 
 export const AFP = {
@@ -130,7 +134,7 @@ export const IMPUESTO_SEGUNDA_CATEGORIA = {
 // UTA (Unidad Tributaria Anual)
 // ===========================================
 // UTA = 12 x UTM
-export const UTA_2026 = 69889 * 12; // $838.668
+export const UTA_2026 = UTM.valor * 12; // ~$847.056 con UTM mayo 2026
 
 // ===========================================
 // Subsidio Habitacional DS49 / DS01

@@ -25,6 +25,12 @@ const formatDateTime = (iso: string | null) => {
   }
 };
 
+const SOURCE_LABEL = {
+  bcentral: 'En vivo · BCentral',
+  mindicador: 'En vivo · Mindicador',
+  fallback: 'Fuente oficial',
+} as const;
+
 /**
  * Sección compacta con UF, UTM, dólar e ingreso mínimo.
  * Diseñada para ir dentro del shell de una calculadora.
@@ -32,6 +38,7 @@ const formatDateTime = (iso: string | null) => {
 const LiveValuesSection = memo(function LiveValuesSection() {
   const { uf, utm, dolar, loading, source, lastUpdated } = useValues();
   const updated = formatDateTime(lastUpdated);
+  const isLive = source === 'bcentral' || source === 'mindicador';
 
   const items = [
     { label: 'UF', value: loading ? '…' : `$${formatCLP(uf, 2)}` },
@@ -50,12 +57,10 @@ const LiveValuesSection = memo(function LiveValuesSection() {
         <div className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
           <Wifi
             className={`h-3 w-3 ${
-              source === 'bcentral'
-                ? 'text-[var(--color-success-500)]'
-                : 'text-[var(--foreground-muted)]'
+              isLive ? 'text-[var(--color-success-500)]' : 'text-[var(--foreground-muted)]'
             }`}
           />
-          {source === 'bcentral' ? 'En vivo · BCentral' : 'Fuente oficial'}
+          {SOURCE_LABEL[source]}
           {updated && <span className="hidden sm:inline opacity-60">· {updated}</span>}
         </div>
       </div>

@@ -1,15 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { TrendingUp } from 'lucide-react';
+import { TrendingUp, Wifi } from 'lucide-react';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
 import { INGRESO_MINIMO } from '@/lib/values/constants';
+
+type Source = 'bcentral' | 'mindicador' | 'fallback';
 
 interface ValuesPayload {
   uf: number;
   utm: number;
   dolar: { observado: number; venta: number };
-  source: 'bcentral' | 'fallback';
+  source: Source;
   updatedAt: string;
 }
 
@@ -18,6 +20,23 @@ const formatCLP = (n: number, decimals = 0) =>
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
+
+const formatDate = (iso: string) => {
+  try {
+    return new Date(iso).toLocaleDateString('es-CL', {
+      day: '2-digit',
+      month: 'short',
+    });
+  } catch {
+    return null;
+  }
+};
+
+const SOURCE_LABEL: Record<Source, string> = {
+  bcentral: 'En vivo · Banco Central',
+  mindicador: 'En vivo · Mindicador',
+  fallback: 'Última actualización oficial',
+};
 
 /**
  * Tira de valores en vivo (UF, UTM, dólar, ingreso mínimo).
@@ -50,6 +69,9 @@ export default function LiveValuesStrip() {
     { label: 'Ing. Mínimo', value: `$${formatCLP(INGRESO_MINIMO.mensual)}`, hint: '2026' },
   ];
 
+  const isLive = data.source === 'bcentral' || data.source === 'mindicador';
+  const updatedAt = formatDate(data.updatedAt);
+
   return (
     <div className="card-elevated overflow-hidden">
       <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-[var(--border)] bg-[var(--background-secondary)]/60">
@@ -60,14 +82,15 @@ export default function LiveValuesStrip() {
           </span>
         </div>
         <span className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
-          <span
-            className={`h-1.5 w-1.5 rounded-full ${
-              data.source === 'bcentral'
-                ? 'bg-[var(--color-success-500)] animate-pulse-soft'
-                : 'bg-[var(--foreground-muted)]'
+          <Wifi
+            className={`h-3 w-3 ${
+              isLive ? 'text-[var(--color-success-500)]' : 'text-[var(--foreground-muted)]'
             }`}
           />
-          {data.source === 'bcentral' ? 'En vivo · Banco Central' : 'Última actualización oficial'}
+          {SOURCE_LABEL[data.source]}
+          {updatedAt && (
+            <span className="hidden sm:inline opacity-70">· {updatedAt}</span>
+          )}
         </span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-[var(--border)]">

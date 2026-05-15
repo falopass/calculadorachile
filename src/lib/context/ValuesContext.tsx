@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, type ReactNode } from 'react';
-import { useLiveValues } from '@/lib/hooks/useLiveValues';
+import { useLiveValues, type ValuesSource } from '@/lib/hooks/useLiveValues';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
 
 export interface ValuesContextType {
@@ -9,22 +9,21 @@ export interface ValuesContextType {
   utm: number;
   dolar: { observado: number; venta: number };
   loading: boolean;
-  source: 'bcentral' | 'fallback';
+  source: ValuesSource;
   lastUpdated: string | null;
 }
 
 const ValuesContext = createContext<ValuesContextType | null>(null);
 
 /**
- * Provider para valores en tiempo real (UF/UTM/dólar) del BCentral.
+ * Provider para valores en tiempo real (UF/UTM/dólar).
  *
  * Sólo debería montarse en rutas que realmente consumen los valores
- * (ej. /calculadoras). Para evitar peticiones innecesarias en blog,
- * legales o FAQ, no lo coloques en el root layout.
+ * (ej. /calculadoras). En el root layout dispararía fetches
+ * innecesarios en blog, legales y FAQ.
  */
 export function ValuesProvider({ children }: { children: ReactNode }) {
   const { uf, utm, dolar, loading, lastUpdated, source } = useLiveValues();
-
   return (
     <ValuesContext.Provider value={{ uf, utm, dolar, loading, source, lastUpdated }}>
       {children}
@@ -33,15 +32,15 @@ export function ValuesProvider({ children }: { children: ReactNode }) {
 }
 
 /**
- * Hook para consumir valores del BCentral.
+ * Hook para consumir valores en cualquier componente cliente.
  *
- * Si se usa fuera de `<ValuesProvider>` devuelve los valores de fallback
- * unificados (sin disparar fetch). Esto permite que componentes
- * compartidos no exploten al renderizarse en páginas sin provider.
+ * Fuera de `<ValuesProvider>` devuelve los fallback estáticos (sin
+ * disparar fetch). Permite que componentes compartidos rendericen
+ * en páginas sin provider sin explotar.
  */
 export function useValues(): ValuesContextType {
-  const context = useContext(ValuesContext);
-  if (context) return context;
+  const ctx = useContext(ValuesContext);
+  if (ctx) return ctx;
 
   return {
     uf: FALLBACK_VALUES.uf,
