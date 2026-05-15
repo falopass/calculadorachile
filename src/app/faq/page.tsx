@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import FAQ from '@/components/calculator/FAQ';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import { HelpCircle } from 'lucide-react';
+import { CONTACT_EMAIL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Preguntas Frecuentes | CalculaChile',
@@ -36,11 +37,11 @@ const faqItems = [
   },
   {
     question: '¿Puedo sugerir una nueva calculadora?',
-    answer: '¡Por supuesto! Nos encanta recibir sugerencias. Contáctanos a contacto@calculachile.cl o a través de nuestras redes sociales con tu idea.',
+    answer: `¡Por supuesto! Nos encanta recibir sugerencias. Contáctanos a ${CONTACT_EMAIL} o a través de nuestras redes sociales con tu idea.`,
   },
   {
     question: '¿Cómo contacto soporte?',
-    answer: 'Puedes escribirnos a contacto@calculachile.cl para cualquier consulta, reporte de error o sugerencia. Respondemos dentro de 24-48 horas hábiles.',
+    answer: `Puedes escribirnos a ${CONTACT_EMAIL} para cualquier consulta, reporte de error o sugerencia. Respondemos dentro de 24-48 horas hábiles.`,
   },
   {
     question: '¿Existe un plan Premium?',
@@ -98,7 +99,7 @@ export default function FAQPage() {
               Escríbenos y te responderemos a la brevedad
             </p>
             <a
-              href="mailto:contacto@calculachile.cl"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-500)] text-white font-semibold hover:from-[var(--color-primary-500)] hover:to-[var(--color-primary-400)] transition-all shadow-lg shadow-[var(--color-primary-500)]/20"
             >
               Contactar soporte

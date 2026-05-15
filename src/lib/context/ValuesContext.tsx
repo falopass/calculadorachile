@@ -2,6 +2,7 @@
 
 import { createContext, useContext, type ReactNode } from 'react';
 import { useLiveValues } from '@/lib/hooks/useLiveValues';
+import { FALLBACK_VALUES } from '@/lib/values/fallback';
 
 export interface ValuesContextType {
   uf: number;
@@ -15,7 +16,11 @@ export interface ValuesContextType {
 const ValuesContext = createContext<ValuesContextType | null>(null);
 
 /**
- * Provider para valores en tiempo real del BCentral
+ * Provider para valores en tiempo real (UF/UTM/dólar) del BCentral.
+ *
+ * Sólo debería montarse en rutas que realmente consumen los valores
+ * (ej. /calculadoras). Para evitar peticiones innecesarias en blog,
+ * legales o FAQ, no lo coloques en el root layout.
  */
 export function ValuesProvider({ children }: { children: ReactNode }) {
   const { uf, utm, dolar, loading, lastUpdated, source } = useLiveValues();
@@ -28,20 +33,22 @@ export function ValuesProvider({ children }: { children: ReactNode }) {
 }
 
 /**
- * Hook para consumir valores del BCentral
+ * Hook para consumir valores del BCentral.
+ *
+ * Si se usa fuera de `<ValuesProvider>` devuelve los valores de fallback
+ * unificados (sin disparar fetch). Esto permite que componentes
+ * compartidos no exploten al renderizarse en páginas sin provider.
  */
 export function useValues(): ValuesContextType {
   const context = useContext(ValuesContext);
-  if (!context) {
-    // Fallback si no hay provider - Valores actualizados Marzo 2026
-    return {
-      uf: 39841.72,        // UF 31/03/2026
-      utm: 69889,          // UTM Marzo 2026
-      dolar: { observado: 931.57, venta: 960 }, // Dólar 30/03/2026
-      loading: false,
-      source: 'fallback',
-      lastUpdated: new Date().toISOString(),
-    };
-  }
-  return context;
+  if (context) return context;
+
+  return {
+    uf: FALLBACK_VALUES.uf,
+    utm: FALLBACK_VALUES.utm,
+    dolar: { ...FALLBACK_VALUES.dolar },
+    loading: false,
+    source: 'fallback',
+    lastUpdated: FALLBACK_VALUES.asOf,
+  };
 }

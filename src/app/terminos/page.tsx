@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import LegalPageLayout from '@/components/layout/LegalPageLayout';
+import { SITE_URL, SITE_NAME, CONTACT_EMAIL, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Términos de Uso | CalculaChile',
@@ -11,8 +12,8 @@ export default function TerminosPage() {
   const schemaData = {
     '@context': 'https://schema.org',
     '@type': 'TermsOfService',
-    name: 'Términos de Uso de CalculaChile',
-    url: 'https://calculachile.cl/terminos',
+    name: `Términos de Uso de ${SITE_NAME}`,
+    url: absoluteUrl('/terminos'),
     datePublished: '2026-01-01',
     dateModified: '2026-03-31',
   };
@@ -27,8 +28,8 @@ export default function TerminosPage() {
       >
         <h2>1. Aceptación de los Términos</h2>
         <p>
-          Al acceder y utilizar el sitio web <strong>calculachile.cl</strong> (en adelante, "CalculaChile"), 
-          aceptas cumplir con estos Términos de Uso. Si no estás de acuerdo con alguno de estos términos, 
+          Al acceder y utilizar el sitio web <strong>{SITE_URL.replace(/^https?:\/\//, '')}</strong> (en adelante, &quot;{SITE_NAME}&quot;),
+          aceptas cumplir con estos Términos de Uso. Si no estás de acuerdo con alguno de estos términos,
           te pedimos que no utilices el sitio.
         </p>
 
@@ -104,8 +105,8 @@ export default function TerminosPage() {
         <h2>10. Contacto</h2>
         <p>Para consultas sobre estos términos:</p>
         <ul>
-          <li><strong>Email:</strong> contacto@calculachile.cl</li>
-          <li><strong>Sitio web:</strong> https://calculachile.cl</li>
+          <li><strong>Email:</strong> {CONTACT_EMAIL}</li>
+          <li><strong>Sitio web:</strong> {SITE_URL}</li>
         </ul>
       </LegalPageLayout>
     </>

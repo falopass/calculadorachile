@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { 
-  Calculator, 
-  Heart, 
+import {
+  Calculator,
+  Heart,
   ExternalLink,
   Mail,
   Globe,
@@ -12,6 +12,7 @@ import {
   HelpCircle,
   MessageCircle
 } from 'lucide-react';
+import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 /**
  * Footer - Pie de página moderno con diseño premium
@@ -106,7 +107,7 @@ export default function Footer() {
                 <LinkedInIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://calculachile.cl"
+                href={SITE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--border-hover)] hover:bg-[var(--surface-elevated)] hover:-translate-y-0.5 transition-all duration-200"
@@ -211,7 +212,7 @@ export default function Footer() {
         <div className="py-6 border-t border-[var(--border)]">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-[var(--foreground-muted)] text-center sm:text-left">
-              © {currentYear} CalculaChile.cl — Todos los derechos reservados
+              © {currentYear} {SITE_NAME} — Todos los derechos reservados
             </p>
             
             <div className="flex items-center gap-1.5 text-sm text-[var(--foreground-muted)]">

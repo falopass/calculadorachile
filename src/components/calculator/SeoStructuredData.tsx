@@ -1,6 +1,7 @@
 'use client';
 
 import type { Calculator } from '@/types/calculator';
+import { SITE_URL, SITE_NAME, absoluteUrl } from '@/lib/site';
 
 interface SeoStructuredDataProps {
   calculator: Calculator;
@@ -32,8 +33,8 @@ export function generateCalculatorSchema(calculator: Calculator, url: string) {
     },
     author: {
       '@type': 'Organization',
-      name: 'CalculaChile',
-      url: 'https://calculachile.cl',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     keywords: calculator.keywords?.join(', '),
   };
@@ -64,13 +65,13 @@ export function generateCalculatorSchema(calculator: Calculator, url: string) {
         '@type': 'ListItem',
         position: 1,
         name: 'Inicio',
-        item: 'https://calculachile.cl/',
+        item: absoluteUrl('/'),
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Calculadoras',
-        item: 'https://calculachile.cl/calculadoras',
+        item: absoluteUrl('/calculadoras'),
       },
       {
         '@type': 'ListItem',

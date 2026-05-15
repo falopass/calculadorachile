@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { calculators, getCalculatorBySlug } from '@/data/calculators';
+import { absoluteUrl } from '@/lib/site';
 import CalculatorPageClient from './CalculatorPageClient';
 
 interface CalculatorPageProps {
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
   }
   
   const categoryName = CATEGORY_NAMES[calculator.category] || calculator.category;
-  const canonicalUrl = `https://calculachile.cl/calculadoras/${calculator.slug}`;
+  const canonicalUrl = absoluteUrl(`/calculadoras/${calculator.slug}`);
   
   return {
     title: `${calculator.name} - Calculadora Gratuita | CalculaChile`,
@@ -84,7 +85,7 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
     notFound();
   }
   
-  const canonicalUrl = `https://calculachile.cl/calculadoras/${calculator.slug}`;
-  
+  const canonicalUrl = absoluteUrl(`/calculadoras/${calculator.slug}`);
+
   return <CalculatorPageClient calculator={calculator} canonicalUrl={canonicalUrl} />;
 }

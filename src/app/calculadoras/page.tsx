@@ -29,7 +29,7 @@ export default function CalculadorasPage() {
       // Verificar si es una categoría del rediseño
       if (categoryMapping[hash]) {
         setSelectedCategory(hash);
-      } else if (categories.includes(hash as any)) {
+      } else if ((categories as string[]).includes(hash)) {
         setSelectedCategory(hash);
       }
     }
