@@ -62,6 +62,12 @@ export async function generateMetadata({
     modifiedTime: article.date,
     section: article.category,
     tags: article.keywords,
+    ogImage: {
+      url: absoluteUrl(`/blog/${article.slug}/opengraph-image`),
+      alt: `${article.title} — Blog CalculaChile`,
+      width: 1200,
+      height: 630,
+    },
   });
 }
 
@@ -86,6 +92,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     .slice(0, 3);
 
   // Schemas: Article + BreadcrumbList
+  const ogImageUrl = absoluteUrl(`/blog/${article.slug}/opengraph-image`);
   const schemas = [
     articleSchema({
       url,
@@ -96,6 +103,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
       keywords: article.keywords,
       articleSection: article.category,
       wordCount,
+      imageUrl: ogImageUrl,
       mentions: relatedCalcs.map((c) => absoluteUrl(`/calculadoras/${c.slug}`)),
     }),
     breadcrumbSchema([

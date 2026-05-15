@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation';
 import { calculators, getCalculatorBySlug } from '@/data/calculators';
 import { absoluteUrl } from '@/lib/site';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { getGuiaForCalculator } from '@/lib/seo/calculator-guia-map';
 import CalculatorPageClient from './CalculatorPageClient';
 
 interface CalculatorPageProps {
@@ -72,6 +73,12 @@ export async function generateMetadata({
 
   const categoryLabel = CATEGORY_NAMES[calculator.category] ?? calculator.category;
 
+  // OG image dinámica generada por opengraph-image.tsx en esta misma
+  // ruta. Next la sirve en `<canonical>/opengraph-image`.
+  const ogImageUrl = absoluteUrl(
+    `/calculadoras/${calculator.slug}/opengraph-image`,
+  );
+
   const metadata = buildPageMetadata({
     path: `/calculadoras/${calculator.slug}`,
     title: titleClean,
@@ -79,6 +86,12 @@ export async function generateMetadata({
     keywords: calculator.keywords ?? [calculator.name],
     publishedTime: '2026-01-01',
     modifiedTime: new Date().toISOString().slice(0, 10),
+    ogImage: {
+      url: ogImageUrl,
+      alt: `${calculator.name} — Calculadora gratuita CalculaChile`,
+      width: 1200,
+      height: 630,
+    },
   });
 
   // `category` es un campo top-level útil para algunos crawlers
@@ -94,8 +107,22 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
   if (!calculator) notFound();
 
   const canonicalUrl = absoluteUrl(`/calculadoras/${calculator.slug}`);
+  const ogImageUrl = absoluteUrl(
+    `/calculadoras/${calculator.slug}/opengraph-image`,
+  );
+  const relatedGuia = getGuiaForCalculator(calculator);
+  const guideUrl = relatedGuia
+    ? absoluteUrl(`/guias/${relatedGuia.slug}`)
+    : undefined;
 
   return (
-    <CalculatorPageClient calculator={calculator} canonicalUrl={canonicalUrl} />
+    <CalculatorPageClient
+      calculator={calculator}
+      canonicalUrl={canonicalUrl}
+      ogImageUrl={ogImageUrl}
+      guideUrl={guideUrl}
+      guideTitle={relatedGuia?.title}
+      guideReadingTime={relatedGuia?.readingTime}
+    />
   );
 }

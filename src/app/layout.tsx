@@ -38,7 +38,6 @@ const OG_IMAGE = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: '/' },
   manifest: '/site.webmanifest',
   title: {
     default: `${SITE_NAME} — Calculadoras de Sueldo, Finiquito y UF para Chile`,
@@ -74,14 +73,30 @@ export const metadata: Metadata = {
   creator: SITE_NAME,
   publisher: SITE_NAME,
   robots: { index: true, follow: true },
-  ...(process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID &&
-  process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID !== 'ca-pub-XXXXXXX'
-    ? {
-        other: {
-          'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID,
-        },
-      }
-    : {}),
+  // Hreflang explícito apuntando a la versión es-CL. Aunque el sitio
+  // sólo tiene un idioma, declararlo permite a Google asociar el
+  // contenido al país y mejora el targeting geográfico para Chile.
+  alternates: {
+    canonical: '/',
+    languages: {
+      'es-CL': SITE_URL,
+      'x-default': SITE_URL,
+    },
+  },
+  // Meta geo (region/placename/ICBM): no son señales primarias de
+  // ranking pero sí señales de contexto que algunos crawlers usan
+  // (Bing, DuckDuckGo, agregadores locales) para SEO local.
+  // Coordenadas del centro de Santiago (-33.45, -70.66).
+  other: {
+    'geo.region': 'CL',
+    'geo.placename': 'Chile',
+    'geo.position': '-33.45;-70.66',
+    'ICBM': '-33.45, -70.66',
+    ...(process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID &&
+    process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID !== 'ca-pub-XXXXXXX'
+      ? { 'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID }
+      : {}),
+  },
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -140,7 +155,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="es"
+      lang="es-CL"
       className={`${inter.variable} ${syne.variable}`}
       suppressHydrationWarning
     >

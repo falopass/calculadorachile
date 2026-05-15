@@ -10,6 +10,11 @@
 // `lastModified` usa fechas reales del contenido (no `new Date()` en
 // cada build) para que los crawlers vean frescura solo cuando hay
 // cambio real.
+//
+// Las URLs de calculadora, artículo y guía incluyen el campo `images`
+// apuntando a la OG image dinámica generada por opengraph-image.tsx.
+// Esto habilita Google Image Search y enriquece la información que
+// Google tiene sobre cada URL.
 // ============================================
 
 import type { MetadataRoute } from 'next';
@@ -40,29 +45,33 @@ const CATEGORY_PRIORITIES: Record<string, number> = {
 const SITE_LAST_MODIFIED = new Date('2026-05-15');
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Calculadoras: prioridad por categoría, lastModified = fecha global.
-  const calculatorPages = calculators.map((calc) => ({
+  // Calculadoras: prioridad por categoría, lastModified = fecha global,
+  // images = OG dinámica de la calculadora.
+  const calculatorPages: MetadataRoute.Sitemap = calculators.map((calc) => ({
     url: `${SITE_URL}/calculadoras/${calc.slug}`,
     lastModified: SITE_LAST_MODIFIED,
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
     priority: CATEGORY_PRIORITIES[calc.category] ?? 0.7,
+    images: [`${SITE_URL}/calculadoras/${calc.slug}/opengraph-image`],
   }));
 
-  // Blog: fecha real de publicación.
-  const blogPages = articles.map((article) => ({
+  // Blog: fecha real de publicación, OG dinámica del artículo.
+  const blogPages: MetadataRoute.Sitemap = articles.map((article) => ({
     url: `${SITE_URL}/blog/${article.slug}`,
     lastModified: new Date(article.date),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
     priority: 0.7,
+    images: [`${SITE_URL}/blog/${article.slug}/opengraph-image`],
   }));
 
   // Guías pillar: fecha de actualización (más reciente que la
-  // publicación si hay revisiones).
-  const guiasPages = guias.map((g) => ({
+  // publicación si hay revisiones), OG dinámica de la guía.
+  const guiasPages: MetadataRoute.Sitemap = guias.map((g) => ({
     url: `${SITE_URL}/guias/${g.slug}`,
     lastModified: new Date(g.updatedAt),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
     priority: 0.85, // las guías pillar son más profundas que el blog
+    images: [`${SITE_URL}/guias/${g.slug}/opengraph-image`],
   }));
 
   // Páginas estáticas
@@ -72,12 +81,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'weekly',
       priority: 1.0,
+      images: [`${SITE_URL}/og-image.png`],
     },
     {
       url: `${SITE_URL}/calculadoras`,
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'weekly',
       priority: 0.95,
+      images: [`${SITE_URL}/og-image.png`],
     },
     {
       url: `${SITE_URL}/blog`,

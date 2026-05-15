@@ -18,10 +18,11 @@ import {
   articleSchema,
   breadcrumbSchema,
   webPageSchema,
+  learningResourceSchema,
 } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
-import { guias, getGuiaBySlug } from '@/data/guias';
+import { guias, getGuiaBySlug, type Guia } from '@/data/guias';
 import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
 
@@ -55,6 +56,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     modifiedTime: guia.updatedAt,
     section: guia.categoryLabel,
     tags: guia.keywords,
+    ogImage: {
+      url: absoluteUrl(`/guias/${guia.slug}/opengraph-image`),
+      alt: `${guia.title} — Guía CalculaChile`,
+      width: 1200,
+      height: 630,
+    },
   });
 }
 
@@ -75,7 +82,30 @@ export default async function GuiaPage({ params }: PageProps) {
     .map((s) => articles.find((a) => a.slug === s))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
-  // Schema: Article + BreadcrumbList + WebPage
+  // Guías relacionadas (cross-link entre pillars). Estrategia:
+  //  1. Misma categoría → primeras 2 guías distintas a la actual.
+  //  2. Si no alcanza, completa con otras guías de cualquier categoría
+  //     hasta tener un máximo de 3.
+  // Esto refuerza el grafo de linking interno entre pillars sin que
+  // tengamos que mantener un mapping manual por guía.
+  const sameCategoryGuias = guias.filter(
+    (g) => g.category === guia.category && g.slug !== guia.slug,
+  );
+  const otherCategoryGuias = guias.filter(
+    (g) => g.category !== guia.category && g.slug !== guia.slug,
+  );
+  const relatedGuias: Guia[] = [
+    ...sameCategoryGuias,
+    ...otherCategoryGuias,
+  ].slice(0, 3);
+
+  const ogImageUrl = absoluteUrl(`/guias/${guia.slug}/opengraph-image`);
+
+  // Schema: Article + LearningResource + BreadcrumbList + WebPage.
+  // - Article: para Google News / Discover y rich results clásicos.
+  // - LearningResource: para "About this result" educativo, mejora la
+  //   comprensión semántica de que es un recurso pedagógico.
+  // - WebPage: ancla la página y permite breadcrumb + dates.
   const schemas = [
     articleSchema({
       url,
@@ -85,10 +115,25 @@ export default async function GuiaPage({ params }: PageProps) {
       dateModified: guia.updatedAt,
       keywords: guia.keywords,
       articleSection: guia.categoryLabel,
+      imageUrl: ogImageUrl,
       mentions: [
         ...relatedCalcs.map((c) => absoluteUrl(`/calculadoras/${c.slug}`)),
         ...relatedArts.map((a) => absoluteUrl(`/blog/${a.slug}`)),
+        ...relatedGuias.map((g) => absoluteUrl(`/guias/${g.slug}`)),
       ],
+    }),
+    learningResourceSchema({
+      url,
+      name: guia.title,
+      description: guia.description,
+      datePublished: guia.publishedAt,
+      dateModified: guia.updatedAt,
+      about: guia.categoryLabel,
+      teaches: guia.intent,
+      timeRequired: `PT${guia.readingTime}M`,
+      audience: 'Trabajadores y contribuyentes en Chile',
+      keywords: guia.keywords,
+      imageUrl: ogImageUrl,
     }),
     breadcrumbSchema([
       { name: 'Inicio', path: '/' },
@@ -101,6 +146,7 @@ export default async function GuiaPage({ params }: PageProps) {
       description: guia.description,
       datePublished: guia.publishedAt,
       dateModified: guia.updatedAt,
+      primaryImageOfPage: ogImageUrl,
     }),
   ];
 
@@ -256,6 +302,49 @@ export default async function GuiaPage({ params }: PageProps) {
                   </li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {/*
+            Guías relacionadas — cross-link entre pillars. Refuerza el
+            grafo de linking interno entre las guías profundas, lo que
+            ayuda a Google a entender la estructura topical del sitio
+            y distribuye PageRank/autoridad entre pillars.
+          */}
+          {relatedGuias.length > 0 && (
+            <section className="mt-12 pt-10 border-t border-[var(--border)]">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl bg-[var(--color-success-500)]/10 flex items-center justify-center">
+                  <BookOpen className="w-5 h-5 text-[var(--color-success-500)]" />
+                </div>
+                <h2 className="text-xl font-bold text-[var(--foreground)]">
+                  Otras guías que te pueden interesar
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {relatedGuias.map((g) => (
+                  <Link
+                    key={g.slug}
+                    href={`/guias/${g.slug}`}
+                    className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-hover)] hover:shadow-sm transition-all"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
+                        {g.categoryLabel}
+                      </span>
+                      <span className="text-[10px] text-[var(--foreground-muted)]">
+                        · {g.readingTime} min
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors leading-snug">
+                      {g.title}
+                    </h3>
+                    <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
+                      {g.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
             </section>
           )}
 

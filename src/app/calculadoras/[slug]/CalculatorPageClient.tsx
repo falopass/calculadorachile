@@ -57,6 +57,14 @@ import { useValues } from "@/lib/context/ValuesContext";
 interface CalculatorPageClientProps {
   calculator: import("@/types/calculator").Calculator;
   canonicalUrl?: string;
+  /** URL absoluta de la imagen OG dinámica para esta calculadora. */
+  ogImageUrl?: string;
+  /** URL absoluta de la guía pillar relacionada (si existe). */
+  guideUrl?: string;
+  /** Título de la guía pillar relacionada para mostrar en el bloque. */
+  guideTitle?: string;
+  /** Tiempo de lectura estimado en minutos (para mostrar en el bloque). */
+  guideReadingTime?: number;
 }
 
 // Mapa de funciones de cálculo por ID de calculadora
@@ -409,14 +417,69 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
   },
 };
 
-export default function CalculatorPageClient({ calculator, canonicalUrl }: CalculatorPageClientProps) {
+export default function CalculatorPageClient({
+  calculator,
+  canonicalUrl,
+  ogImageUrl,
+  guideUrl,
+  guideTitle,
+  guideReadingTime,
+}: CalculatorPageClientProps) {
   const calculateFn = calculationFunctions[calculator.id];
+
+  // Texto SEO server-side único por calculadora.
+  // Estrategia: descripción base + categoría + primer FAQ resumido.
+  // Esto evita el "mismo párrafo en 40 páginas" que podría leerse
+  // como contenido duplicado/template.
+  const seoIntroText = (() => {
+    const baseDesc = calculator.description.trim();
+    const categoryText = (() => {
+      switch (calculator.category) {
+        case 'sueldo':
+          return 'cálculos de sueldo y remuneraciones';
+        case 'impuestos':
+          return 'cálculos tributarios e impuestos chilenos';
+        case 'beneficios':
+          return 'cálculos de beneficios laborales y derechos del Código del Trabajo';
+        case 'conversiones':
+          return 'conversores entre unidades chilenas';
+        case 'familia':
+          return 'cálculos familiares y dependientes';
+        case 'vivienda':
+          return 'cálculos de vivienda y bienes raíces';
+        case 'vehiculos':
+          return 'cálculos vehiculares y permisos de circulación';
+        case 'empresas':
+          return 'cálculos para empresas y PYMEs';
+        case 'pension':
+          return 'cálculos previsionales y pensiones';
+        case 'educacion':
+          return 'cálculos educacionales y créditos';
+        case 'hogar':
+          return 'cálculos del hogar y servicios básicos';
+        default:
+          return 'cálculos chilenos';
+      }
+    })();
+    const legalContext = calculator.faq?.[0]?.answer
+      ? calculator.faq[0].answer.split('. ').slice(0, 2).join('. ').trim()
+      : '';
+
+    return `${baseDesc} Forma parte del catálogo de ${categoryText} de CalculaChile, todos con valores oficiales 2026 y bases legales citadas.${legalContext ? ` ${legalContext}.` : ''}`;
+  })();
 
   if (!calculateFn) {
     return (
       <div className="min-h-screen bg-[var(--background)] py-12">
         {/* SEO Schema */}
-        {canonicalUrl && <SeoStructuredData calculator={calculator} url={canonicalUrl} />}
+        {canonicalUrl && (
+          <SeoStructuredData
+            calculator={calculator}
+            url={canonicalUrl}
+            imageUrl={ogImageUrl}
+            guideUrl={guideUrl}
+          />
+        )}
         
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="bg-[var(--color-warning-50)] dark:bg-[var(--color-warning-50)] border border-[var(--color-warning-200)] rounded-2xl p-8 text-center shadow-sm">
@@ -440,13 +503,20 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
       calculatorId={calculator.id}
     >
       {/* SEO Schema */}
-      {canonicalUrl && <SeoStructuredData calculator={calculator} url={canonicalUrl} />}
+      {canonicalUrl && (
+        <SeoStructuredData
+          calculator={calculator}
+          url={canonicalUrl}
+          imageUrl={ogImageUrl}
+          guideUrl={guideUrl}
+        />
+      )}
       
       <PremiumCalculatorShell calculator={calculator} calculateFn={calculateFn} />
 
       {/* SEO Content y FAQ */}
       <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Sección de instrucciones */}
+        {/* Sección de instrucciones / contenido SEO único */}
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-7">
           <h2 className="flex items-center gap-2 text-lg md:text-xl font-semibold text-[var(--foreground)] mb-4">
             <svg
@@ -463,12 +533,14 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            ¿Cómo usar la calculadora de {calculator.name.toLowerCase()}?
+            Sobre {calculator.name.toLowerCase()}
           </h2>
           <p className="text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
+            {seoIntroText}
+          </p>
+          <p className="mt-3 text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
             Ingresa los datos solicitados arriba y los resultados se mostrarán
-            automáticamente, sin necesidad de hacer clic en ningún botón. Todos los
-            cálculos utilizan valores oficiales actualizados a 2026.
+            automáticamente, sin necesidad de hacer clic en ningún botón.
           </p>
           <LiveValuesSection />
         </section>
@@ -533,6 +605,72 @@ export default function CalculatorPageClient({ calculator, canonicalUrl }: Calcu
           </section>
         )}
       </div>
+
+      {/*
+        Bloque "Lee la guía completa" — linking interno calculadora →
+        guía pillar. Aparece sólo si la calculadora tiene una guía
+        relacionada en el mapping (src/lib/seo/calculator-guia-map.ts).
+        Es uno de los enlaces internos con mayor impacto SEO porque
+        empuja autoridad de página de calculadora a la guía pillar.
+      */}
+      {guideUrl && guideTitle && (
+        <section className="mt-8 md:mt-10">
+          <a
+            href={guideUrl}
+            className="group block rounded-2xl border border-[var(--border)] bg-gradient-to-br from-[var(--color-primary-500)]/5 to-[var(--color-primary-500)]/[0.02] hover:from-[var(--color-primary-500)]/10 hover:to-[var(--color-primary-500)]/5 hover:border-[var(--color-primary-500)]/30 transition-all p-6 md:p-7"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-[var(--color-primary-500)]/10 flex items-center justify-center">
+                <svg
+                  className="w-5 h-5 text-[var(--color-primary-500)]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  aria-hidden
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] mb-1">
+                  Guía completa
+                </p>
+                <h2 className="text-base md:text-lg font-semibold text-[var(--foreground)] mb-1.5 group-hover:text-[var(--color-primary-600)] dark:group-hover:text-[var(--color-primary-400)] transition-colors leading-snug">
+                  {guideTitle}
+                </h2>
+                <p className="text-sm text-[var(--foreground-secondary)] leading-relaxed">
+                  Lee la guía completa con fórmulas, ejemplos numéricos en
+                  pesos chilenos y bases legales citadas.
+                  {guideReadingTime
+                    ? ` Tiempo estimado: ${guideReadingTime} minutos.`
+                    : ''}
+                </p>
+              </div>
+              <div className="flex-shrink-0 self-center">
+                <svg
+                  className="w-5 h-5 text-[var(--foreground-muted)] group-hover:text-[var(--color-primary-500)] group-hover:translate-x-0.5 transition-all"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  aria-hidden
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </div>
+            </div>
+          </a>
+        </section>
+      )}
 
       {/*
         Calculadoras relacionadas — refuerza linking interno hacia

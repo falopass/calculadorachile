@@ -125,6 +125,10 @@ export function breadcrumbSchema(
  * WebPage genérico para páginas que no caen en una categoría más
  * específica (legales, FAQ, guías, etc.). Permite `subType` para
  * casos como `AboutPage`, `ContactPage`, `FAQPage`.
+ *
+ * Soporta `mainEntity` para anclar la página a su entidad principal
+ * (por ejemplo, una `SoftwareApplication` en la página de una
+ * calculadora) y `primaryImageOfPage` para la imagen OG dinámica.
  */
 export function webPageSchema(args: {
   url: string;
@@ -134,6 +138,15 @@ export function webPageSchema(args: {
   datePublished?: string;
   dateModified?: string;
   breadcrumb?: ReadonlyArray<{ name: string; path?: string }>;
+  /**
+   * Referencia a la entidad principal de la página (por ID con `@id`
+   * o por objeto inline). En calculadoras, apuntar al `@id` del
+   * SoftwareApplication para que Google entienda que esa es la
+   * "cosa" central de la página.
+   */
+  mainEntity?: Record<string, unknown> | { '@id': string };
+  /** URL absoluta de la imagen principal (1200x630). */
+  primaryImageOfPage?: string;
 }): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -150,6 +163,15 @@ export function webPageSchema(args: {
   if (args.dateModified) schema.dateModified = args.dateModified;
   if (args.breadcrumb && args.breadcrumb.length > 0) {
     schema.breadcrumb = breadcrumbSchema(args.breadcrumb);
+  }
+  if (args.mainEntity) schema.mainEntity = args.mainEntity;
+  if (args.primaryImageOfPage) {
+    schema.primaryImageOfPage = {
+      '@type': 'ImageObject',
+      url: args.primaryImageOfPage,
+      width: 1200,
+      height: 630,
+    };
   }
   return schema;
 }
@@ -279,6 +301,9 @@ export function collectionPageSchema(args: {
  * Versión enriquecida de la previa: agrega `featureList` derivada de
  * los inputs y `aggregateRating` opcional. Mantiene retrocompat con
  * el schema anterior pero con más detalle.
+ *
+ * El `@id` se calcula como `<url>#software` para que otros schemas
+ * puedan referenciarlo (por ejemplo, `WebPage.mainEntity`).
  */
 export function softwareApplicationSchema(args: {
   name: string;
@@ -288,10 +313,13 @@ export function softwareApplicationSchema(args: {
   keywords?: string[];
   datePublished?: string;
   dateModified?: string;
+  /** URL absoluta de imagen OG (1200x630). Mejora el thumbnail en SERPs. */
+  imageUrl?: string;
 }): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
+    '@id': `${args.url}#software`,
     name: args.name,
     description: args.description,
     url: args.url,
@@ -317,9 +345,80 @@ export function softwareApplicationSchema(args: {
   if (args.keywords && args.keywords.length > 0) {
     schema.keywords = args.keywords.join(', ');
   }
+  if (args.imageUrl) {
+    schema.image = {
+      '@type': 'ImageObject',
+      url: args.imageUrl,
+      width: 1200,
+      height: 630,
+    };
+  }
   if (args.datePublished) schema.datePublished = args.datePublished;
   if (args.dateModified) schema.dateModified = args.dateModified;
 
+  return schema;
+}
+
+/**
+ * LearningResource — recurso educativo (ideal para guías pillar).
+ *
+ * Google reconoce `LearningResource` como subtipo de `CreativeWork`
+ * y le da preferencia para snippets educativos. Sirve como SEGUNDO
+ * schema en /guias/[slug] junto al `Article` clásico, no como
+ * reemplazo: cada uno cubre un caso (Article para Google News, etc.;
+ * LearningResource para Discover educativo / "About this result").
+ */
+export function learningResourceSchema(args: {
+  url: string;
+  name: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  /** Tema principal — etiqueta legible (ej. "Sueldo y derechos laborales"). */
+  about?: string;
+  /** Texto que el lector debe entender después de leer (objetivo). */
+  teaches?: string;
+  /** Nivel del recurso. `Beginner` por default. */
+  educationalLevel?: 'Beginner' | 'Intermediate' | 'Advanced';
+  /** Tiempo estimado de lectura en formato ISO 8601 (ej. PT12M). */
+  timeRequired?: string;
+  /** Audiencia (ej. "trabajadores en Chile"). */
+  audience?: string;
+  keywords?: string[];
+  imageUrl?: string;
+}): Record<string, unknown> {
+  const schema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'LearningResource',
+    url: args.url,
+    name: args.name,
+    description: args.description,
+    inLanguage: 'es-CL',
+    isAccessibleForFree: true,
+    learningResourceType: 'Guide',
+    datePublished: args.datePublished,
+    dateModified: args.dateModified ?? args.datePublished,
+    educationalLevel: args.educationalLevel ?? 'Beginner',
+    author: { '@id': SCHEMA_IDS.organization },
+    publisher: { '@id': SCHEMA_IDS.organization },
+  };
+  if (args.about) schema.about = { '@type': 'Thing', name: args.about };
+  if (args.teaches) schema.teaches = args.teaches;
+  if (args.timeRequired) schema.timeRequired = args.timeRequired;
+  if (args.audience) {
+    schema.audience = { '@type': 'Audience', audienceType: args.audience };
+  }
+  if (args.keywords && args.keywords.length > 0) {
+    schema.keywords = args.keywords.join(', ');
+  }
+  if (args.imageUrl) {
+    schema.image = {
+      '@type': 'ImageObject',
+      url: args.imageUrl,
+      width: 1200,
+      height: 630,
+    };
+  }
   return schema;
 }
 
