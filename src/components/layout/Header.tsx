@@ -2,290 +2,194 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Menu,
-  X,
-  Calculator,
-  Sun,
-  Moon,
-  Sparkles,
-  Monitor,
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Menu, X, Calculator, Sun, Moon, Monitor } from 'lucide-react';
+
+type Theme = 'light' | 'dark' | 'system';
 
 const navLinks = [
-  { href: '/', label: 'Inicio', icon: Sparkles },
-  { href: '/#calculadoras', label: 'Calculadoras', icon: Calculator },
-  { href: '/calculadoras', label: 'Todas las calculadoras', icon: Calculator },
+  { href: '/calculadoras', label: 'Calculadoras' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/guias', label: 'Guías' },
+  { href: '/faq', label: 'FAQ' },
 ];
 
+function applyTheme(t: Theme) {
+  if (typeof document === 'undefined') return;
+  const root = document.documentElement;
+  const wantDark =
+    t === 'dark' ||
+    (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  root.classList.toggle('dark', wantDark);
+  try {
+    localStorage.setItem('theme', t);
+  } catch {}
+}
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState<Theme>('system');
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = (localStorage.getItem('theme') as Theme | null) ?? 'system';
+      setTheme(saved);
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = () => setOpen(false);
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, [open]);
+
+  const Icon = theme === 'dark' ? Moon : theme === 'light' ? Sun : Monitor;
+
+  return (
+    <div className="relative" onClick={(e) => e.stopPropagation()}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Cambiar tema"
+        aria-expanded={open}
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--background-secondary)] transition-colors"
+      >
+        <Icon className="h-4 w-4" />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-full mt-2 w-36 rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] shadow-lg overflow-hidden"
+        >
+          {(
+            [
+              { value: 'light', label: 'Claro', icon: Sun },
+              { value: 'dark', label: 'Oscuro', icon: Moon },
+              { value: 'system', label: 'Sistema', icon: Monitor },
+            ] as { value: Theme; label: string; icon: typeof Sun }[]
+          ).map((opt) => (
+            <button
+              key={opt.value}
+              role="menuitemradio"
+              aria-checked={theme === opt.value}
+              onClick={() => {
+                setTheme(opt.value);
+                applyTheme(opt.value);
+                setOpen(false);
+              }}
+              className={`flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors ${
+                theme === opt.value
+                  ? 'text-[var(--color-primary-600)] bg-[var(--color-primary-50)]'
+                  : 'text-[var(--foreground-secondary)] hover:bg-[var(--background-secondary)]'
+              }`}
+            >
+              <opt.icon className="h-4 w-4" />
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'system' | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      applyTheme(savedTheme);
-    }
-  }, []);
-
-  // Cerrar dropdown al hacer click fuera
-  useEffect(() => {
-    if (!isThemeMenuOpen) return;
-    const handleClick = () => setIsThemeMenuOpen(false);
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, [isThemeMenuOpen]);
-
-  const applyTheme = (newTheme: 'light' | 'dark' | 'system') => {
-    const root = document.documentElement;
-    if (newTheme === 'dark') {
-      root.classList.add('dark');
-    } else if (newTheme === 'light') {
-      root.classList.remove('dark');
-    } else {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        root.classList.add('dark');
-      } else {
-        root.classList.remove('dark');
-      }
-    }
-    localStorage.setItem('theme', newTheme);
-  };
-
-  const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    setTheme(newTheme);
-    applyTheme(newTheme);
-    setIsThemeMenuOpen(false);
-  };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[var(--background)]/90 backdrop-blur-xl shadow-lg shadow-black/5 border-b border-[var(--border)]'
-          : 'bg-transparent'
+      className={`sticky top-0 z-40 transition-all duration-200 ${
+        scrolled
+          ? 'border-b border-[var(--border)] bg-[var(--surface-overlay)] backdrop-blur-md'
+          : 'border-b border-transparent bg-transparent'
       }`}
       role="banner"
     >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8" aria-label="Navegación principal">
-        <div className="flex justify-between items-center h-20">
+      <nav className="container-base flex h-16 items-center justify-between" aria-label="Navegación principal">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 group"
+          aria-label="CalculaChile - Inicio"
+        >
+          <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-accent-500)] text-white shadow-sm transition-transform group-hover:scale-105">
+            <Calculator className="h-4 w-4" strokeWidth={2.5} />
+          </span>
+          <span className="text-base font-bold tracking-tight">
+            <span className="text-[var(--foreground)]">Calcula</span>
+            <span className="text-gradient">Chile</span>
+          </span>
+        </Link>
 
-          {/* ── Logo ── */}
-           <Link href="/" className="flex items-center gap-2.5 group" aria-label="Ir a la página de inicio">
-             <Image
-               src="/logo.png"
-               alt="CalculaChile"
-               width={80}
-               height={80}
-               priority
-               className="h-16 w-auto md:h-20 object-contain"
-             />
-           </Link>
-
-          {/* ── Desktop Nav ── */}
-          <div className="hidden md:flex items-center gap-1 bg-[var(--background-secondary)]/60 backdrop-blur-sm rounded-xl p-1 border border-[var(--border)]/50">
-            {navLinks.map((link) => (
+        {/* Desktop nav */}
+        <ul className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <li key={link.href}>
               <Link
-                key={link.href}
                 href={link.href}
-                className="group/nav relative flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-all duration-200"
+                className="px-3 py-2 rounded-md text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--background-secondary)] transition-colors"
               >
-                <link.icon className="w-4 h-4 transition-transform duration-200 group-hover/nav:scale-110" />
                 {link.label}
-                <span className="absolute inset-0 rounded-lg bg-[var(--color-primary-500)]/0 group-hover/nav:bg-[var(--color-primary-500)]/5 transition-colors duration-200" />
               </Link>
-            ))}
-          </div>
+            </li>
+          ))}
+        </ul>
 
-          {/* ── Right Actions ── */}
-          <div className="flex items-center gap-2">
-
-            {/* Theme Toggle */}
-            <div className="relative" onClick={(e) => e.stopPropagation()}>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.92 }}
-                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className="relative p-2.5 rounded-xl bg-[var(--background-secondary)]/60 backdrop-blur-sm border border-[var(--border)]/50 text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--border-hover)] transition-all duration-300 overflow-hidden"
-                aria-label="Cambiar tema"
-              >
-                <AnimatePresence mode="wait">
-                  {theme === 'dark' ? (
-                    <motion.div
-                      key="moon"
-                      initial={{ rotate: -90, scale: 0 }}
-                      animate={{ rotate: 0, scale: 1 }}
-                      exit={{ rotate: 90, scale: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Moon className="w-[18px] h-[18px]" />
-                    </motion.div>
-                  ) : theme === 'light' ? (
-                    <motion.div
-                      key="sun"
-                      initial={{ rotate: 90, scale: 0 }}
-                      animate={{ rotate: 0, scale: 1 }}
-                      exit={{ rotate: -90, scale: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Sun className="w-[18px] h-[18px]" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="system"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Monitor className="w-[18px] h-[18px]" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-
-              {/* Theme Dropdown */}
-              <AnimatePresence>
-                {isThemeMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                    transition={{ duration: 0.15, ease: 'easeOut' }}
-                    className="absolute right-0 top-full mt-2 w-40 py-1.5 rounded-xl bg-[var(--surface)]/95 backdrop-blur-xl shadow-xl shadow-black/10 border border-[var(--border)]"
-                  >
-                    {[
-                      { value: 'light' as const, label: 'Claro', icon: Sun },
-                      { value: 'dark' as const, label: 'Oscuro', icon: Moon },
-                      { value: 'system' as const, label: 'Sistema', icon: Monitor },
-                    ].map((item) => (
-                      <button
-                        key={item.value}
-                        onClick={() => handleThemeChange(item.value)}
-                        className={`w-full flex items-center gap-3 px-3.5 py-2 text-sm transition-colors ${
-                          theme === item.value
-                            ? 'text-[var(--color-primary-600)] bg-[var(--color-primary-50)]'
-                            : 'text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--background-secondary)]'
-                        }`}
-                      >
-                        <item.icon className="w-4 h-4" />
-                        {item.label}
-                        {theme === item.value && (
-                          <motion.div
-                            layoutId="theme-check"
-                            className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--color-primary-500)]"
-                          />
-                        )}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* CTA Button */}
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/#calculadoras"
-                className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-500)] hover:from-[var(--color-primary-500)] hover:to-[var(--color-accent-500)] shadow-md shadow-[var(--color-primary-500)]/20 hover:shadow-lg hover:shadow-[var(--color-primary-500)]/30 transition-all duration-300"
-              >
-                <Calculator className="w-4 h-4" />
-                Calcular
-              </Link>
-            </motion.div>
-
-            {/* Mobile menu button */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              type="button"
-              className="md:hidden p-2.5 rounded-xl bg-[var(--background-secondary)]/60 backdrop-blur-sm border border-[var(--border)]/50 text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-expanded={isMenuOpen}
-              aria-label="Abrir menú"
-            >
-              <AnimatePresence mode="wait">
-                {isMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, scale: 0 }}
-                    animate={{ rotate: 0, scale: 1 }}
-                    exit={{ rotate: 90, scale: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    <X className="w-5 h-5" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, scale: 0 }}
-                    animate={{ rotate: 0, scale: 1 }}
-                    exit={{ rotate: -90, scale: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    <Menu className="w-5 h-5" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          </div>
+        {/* Right actions */}
+        <div className="flex items-center gap-1.5">
+          <ThemeToggle />
+          <Link href="/calculadoras" className="hidden sm:inline-flex btn-primary">
+            Calcular ahora
+          </Link>
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-lg text-[var(--foreground-secondary)] hover:bg-[var(--background-secondary)] transition-colors"
+            aria-label="Abrir menú"
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-
-        {/* ── Mobile Navigation ── */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="py-4 space-y-1 border-t border-[var(--border)]">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--background-secondary)] transition-colors font-medium"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <link.icon className="w-5 h-5" />
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-
-                <div className="pt-3 px-4">
-                  <Link
-                    href="/#calculadoras"
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-500)] shadow-md"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Calculator className="w-5 h-5" />
-                    Ver Calculadoras
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
+
+      {/* Mobile nav */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-[var(--border)] bg-[var(--surface)]">
+          <ul className="container-base py-3 space-y-1">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2.5 rounded-md text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--background-secondary)] transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li className="pt-2">
+              <Link
+                href="/calculadoras"
+                onClick={() => setMobileOpen(false)}
+                className="btn-primary w-full"
+              >
+                Calcular ahora
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

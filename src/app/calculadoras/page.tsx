@@ -1,181 +1,95 @@
-'use client';
-
-import { calculators } from '@/data/calculators';
-import CalculatorCard from '@/components/home/CalculatorCard';
-import AdBanner from '@/components/ads/AdBanner';
-import { SearchBar } from '@/components/calculator/SearchBar';
-import { Grid, List, Home, Calculator } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { calculators } from '@/data/calculators';
+import type { Calculator } from '@/types/calculator';
+import { absoluteUrl } from '@/lib/site';
+import CalculatorsCatalog from '@/components/home/CalculatorsCatalog';
 
-// Mapeo de categorías del rediseño a categorías reales
-const categoryMapping: Record<string, string[]> = {
-  'laboral': ['sueldo', 'beneficios'],
-  'tributario': ['impuestos'],
-  'previsional': ['pension', 'conversiones'],
-  'financiero': ['conversiones', 'vivienda', 'vehiculos'],
+export const metadata: Metadata = {
+  title: 'Todas las calculadoras de Chile',
+  description: `Catálogo completo de ${calculators.length}+ calculadoras laborales, tributarias y financieras de Chile. Sueldo líquido, finiquito, UF, IVA, créditos y más.`,
+  alternates: { canonical: absoluteUrl('/calculadoras') },
+  openGraph: {
+    title: 'Todas las calculadoras de Chile | CalculaChile',
+    description: `${calculators.length}+ calculadoras gratuitas, precisas y actualizadas a 2026.`,
+    url: absoluteUrl('/calculadoras'),
+    type: 'website',
+  },
 };
 
-const categories = [...new Set(calculators.map(c => c.category))];
+const CATEGORY_LABELS: Record<Calculator['category'], string> = {
+  sueldo: 'Sueldo y remuneraciones',
+  impuestos: 'Impuestos',
+  beneficios: 'Beneficios laborales',
+  conversiones: 'Conversores',
+  familia: 'Familia',
+  vivienda: 'Vivienda',
+  vehiculos: 'Vehículos',
+  empresas: 'Empresas',
+  servicios: 'Servicios',
+  pension: 'Pensiones',
+  educacion: 'Educación',
+  hogar: 'Hogar',
+};
 
 export default function CalculadorasPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  // Build-time: agrupo por categoría en el orden natural
+  const grouped = calculators.reduce<
+    Record<Calculator['category'], Calculator[]>
+  >(
+    (acc, calc) => {
+      (acc[calc.category] ??= []).push(calc);
+      return acc;
+    },
+    {} as Record<Calculator['category'], Calculator[]>,
+  );
 
-  // Leer el hash de la URL para filtrar por categoría
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-      // Verificar si es una categoría del rediseño
-      if (categoryMapping[hash]) {
-        setSelectedCategory(hash);
-      } else if ((categories as string[]).includes(hash)) {
-        setSelectedCategory(hash);
-      }
-    }
-  }, []);
+  const categoryOrder = (Object.keys(grouped) as Calculator['category'][]).sort(
+    (a, b) => grouped[b].length - grouped[a].length,
+  );
 
-  // Filtrar calculadoras según la categoría seleccionada
-  const filtered = selectedCategory === 'all'
-    ? calculators
-    : categoryMapping[selectedCategory]
-      ? calculators.filter(c => categoryMapping[selectedCategory].includes(c.category))
-      : calculators.filter(c => c.category === selectedCategory);
+  const groups = categoryOrder.map((cat) => ({
+    category: cat,
+    label: CATEGORY_LABELS[cat] ?? cat,
+    items: grouped[cat],
+  }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A]">
-      {/* Navbar premium */}
-      <nav className="sticky top-0 z-50 bg-[#0F172A]/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#1E3A8A] to-[#DC2626] flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                <Calculator className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">
-                <span className="text-white">Calculadoras</span>
-                <span className="text-white/60 italic ml-2">Chile.</span>
-              </span>
-            </Link>
-            
-            <Link
-              href="/"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-all duration-300"
-            >
-              <Home className="w-4 h-4" />
-              <span className="text-sm font-medium">Inicio</span>
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <>
+      {/* Hero del catálogo */}
+      <section className="relative overflow-hidden border-b border-[var(--border)]">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-grid opacity-[0.04]"
+        />
+        <div
+          aria-hidden
+          className="absolute -top-32 left-1/2 h-96 w-[800px] -translate-x-1/2 rounded-full bg-[var(--color-primary-500)]/10 blur-[100px]"
+        />
+        <div className="container-base relative pt-12 pb-10 md:pt-16 md:pb-12">
+          <nav aria-label="Migas de pan" className="mb-6 text-xs">
+            <ol className="flex items-center gap-1.5 text-[var(--foreground-muted)]">
+              <li>
+                <Link href="/" className="hover:text-[var(--foreground)] transition-colors">
+                  Inicio
+                </Link>
+              </li>
+              <li aria-hidden>/</li>
+              <li className="text-[var(--foreground)] font-medium">Calculadoras</li>
+            </ol>
+          </nav>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Header premium */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-            Todas las Calculadoras
+          <h1 className="heading-display text-3xl md:text-5xl">
+            Todas las <span className="text-gradient">calculadoras</span>
           </h1>
-          <p className="text-white/50 text-lg">
-            {calculators.length} calculadoras gratuitas disponibles
+          <p className="mt-3 text-base md:text-lg text-[var(--foreground-secondary)] max-w-2xl">
+            {calculators.length} herramientas gratuitas para sueldo, impuestos, vivienda,
+            pensiones y más. Datos oficiales actualizados a 2026.
           </p>
         </div>
+      </section>
 
-        {/* SearchBar premium */}
-        <div className="mb-8">
-          <div className="relative">
-            <SearchBar />
-          </div>
-        </div>
-
-        {/* Filtros premium */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          <button
-            onClick={() => setSelectedCategory('all')}
-            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-              selectedCategory === 'all'
-                ? 'bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] text-white shadow-lg shadow-[#1E3A8A]/30'
-                : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
-            }`}
-          >
-            Todas
-          </button>
-          {/* Categorías del rediseño */}
-          {Object.keys(categoryMapping).map(cat => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 capitalize ${
-                selectedCategory === cat
-                  ? 'bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] text-white shadow-lg shadow-[#1E3A8A]/30'
-                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-          {/* Categorías reales */}
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 capitalize ${
-                selectedCategory === cat
-                  ? 'bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] text-white shadow-lg shadow-[#1E3A8A]/30'
-                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Toggle vista premium */}
-        <div className="flex justify-center gap-2 mb-8">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`p-3 rounded-lg transition-all duration-300 ${
-              viewMode === 'grid'
-                ? 'bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] text-white shadow-lg'
-                : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
-            }`}
-          >
-            <Grid className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={`p-3 rounded-lg transition-all duration-300 ${
-              viewMode === 'list'
-                ? 'bg-gradient-to-r from-[#1E3A8A] to-[#DC2626] text-white shadow-lg'
-                : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/10'
-            }`}
-          >
-            <List className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Ad premium */}
-        <div className="mb-8 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <AdBanner slot="1234567890" format="horizontal" />
-        </div>
-
-        {/* Grid/List premium */}
-        <div className={
-          viewMode === 'grid'
-            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
-            : 'flex flex-col gap-4'
-        }>
-          {filtered.map(calc => (
-            <div key={calc.id} className="group">
-              <CalculatorCard calculator={calc} />
-            </div>
-          ))}
-        </div>
-
-        {/* Ad inferior premium */}
-        <div className="mt-12 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <AdBanner slot="0987654321" format="horizontal" />
-        </div>
-      </div>
-    </div>
+      <CalculatorsCatalog groups={groups} />
+    </>
   );
 }

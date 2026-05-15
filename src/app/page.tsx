@@ -1,21 +1,24 @@
-'use client';
+import HomeHero from '@/components/home/HomeHero';
+import HowItWorks from '@/components/home/HowItWorks';
+import PopularCalculators from '@/components/home/PopularCalculators';
+import CategoriesGrid from '@/components/home/CategoriesGrid';
+import HomeCTA from '@/components/home/HomeCTA';
 
-import Navbar from '@/components/redesign/Navbar';
-import HeroSection from '@/components/redesign/HeroSection';
-import FeaturesDashboard from '@/components/redesign/FeaturesDashboard';
-import ManifestoSection from '@/components/redesign/ManifestoSection';
-import CategoryStickyStack from '@/components/redesign/CategoryStickyStack';
-import CinematicFooter from '@/components/redesign/CinematicFooter';
-
+/**
+ * Página principal — Server Component.
+ *
+ * El SEO depende de que el HTML inicial tenga contenido. La home
+ * compone secciones server-first; las únicas islas cliente son el
+ * strip de valores en vivo (LiveValuesStrip) y el menú de tema.
+ */
 export default function HomePage() {
   return (
-    <div className="min-h-screen text-white noise-overlay">
-      <Navbar />
-      <HeroSection />
-      <FeaturesDashboard />
-      <ManifestoSection />
-      <CategoryStickyStack />
-      <CinematicFooter />
-    </div>
+    <>
+      <HomeHero />
+      <PopularCalculators />
+      <CategoriesGrid />
+      <HowItWorks />
+      <HomeCTA />
+    </>
   );
 }
