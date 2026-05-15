@@ -15,6 +15,7 @@ import {
   Car,
   Wallet,
   GraduationCap,
+  Users,
   Clock,
   ArrowRight,
 } from 'lucide-react';
@@ -100,6 +101,20 @@ const CATEGORY_CONFIG: CategoryConfig[] = [
     description: 'Permiso de circulación, multas, TAG y créditos automotrices.',
     icon: Car,
     gradient: 'from-[var(--color-primary-400)] to-[var(--color-primary-500)]',
+  },
+  {
+    id: 'familia',
+    label: 'Familia y dependientes',
+    description: 'Pensión alimenticia, asignación familiar, subsidios y aguinaldos.',
+    icon: Users,
+    gradient: 'from-pink-500 to-rose-600',
+  },
+  {
+    id: 'educacion',
+    label: 'Educación y créditos',
+    description: 'CAE, gratuidad, becas y financiamiento educacional.',
+    icon: GraduationCap,
+    gradient: 'from-violet-500 to-purple-600',
   },
 ];
 

@@ -10,10 +10,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, BookOpen, Calculator, ExternalLink } from 'lucide-react';
+import { ArrowLeft, BookOpen, Calculator, Clock, ExternalLink, List } from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
+import TocSticky from '@/components/article/TocSticky';
+import ReadingProgress from '@/components/article/ReadingProgress';
 import {
   articleSchema,
   breadcrumbSchema,
@@ -159,6 +161,7 @@ export default async function GuiaPage({ params }: PageProps) {
   return (
     <>
       <JsonLd id="guia-schemas" data={schemas} />
+      <ReadingProgress />
 
       <article className="container-base py-8 md:py-12">
         <Breadcrumbs
@@ -169,218 +172,247 @@ export default async function GuiaPage({ params }: PageProps) {
           ]}
         />
 
-        <div className="mx-auto max-w-3xl">
-          {/* Header */}
-          <header className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[var(--color-primary-500)]/10 text-[var(--color-primary-600)]">
-                <BookOpen className="w-3.5 h-3.5" />
-                {guia.categoryLabel}
-              </span>
-              <span className="text-xs text-[var(--foreground-muted)]">
-                {guia.readingTime} min de lectura
-              </span>
-            </div>
-            <h1 className="heading-display text-3xl md:text-4xl text-[var(--foreground)] mb-4">
-              {guia.title}
-            </h1>
-            <p className="text-lg text-[var(--foreground-secondary)] leading-relaxed">
-              {guia.description}
-            </p>
-            <p className="text-sm text-[var(--foreground-muted)] mt-3">
-              Actualizado el {formattedDate}
-            </p>
-          </header>
-
-          {/* Tabla de contenidos */}
-          <nav
-            aria-label="Tabla de contenidos"
-            className="mb-10 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
-          >
-            <h2 className="text-sm font-semibold text-[var(--foreground)] mb-3 uppercase tracking-wide">
-              En esta guía
-            </h2>
-            <ol className="space-y-1.5 text-sm">
-              {guia.sections
-                .filter((s) => s.level === 2)
-                .map((section, idx) => (
-                  <li key={section.id}>
-                    <a
-                      href={`#${section.id}`}
-                      className="text-[var(--foreground-secondary)] hover:text-[var(--color-primary-600)] transition-colors"
-                    >
-                      <span className="text-[var(--foreground-muted)] mr-2">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
-                      {section.title}
-                    </a>
-                  </li>
-                ))}
-            </ol>
-          </nav>
-
-          {/* Secciones */}
-          <div
-            className="prose prose-lg max-w-none
-              prose-headings:text-[var(--foreground)]
-              prose-headings:font-bold
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-5
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-[var(--foreground-secondary)]
-              prose-p:leading-relaxed
-              prose-strong:text-[var(--foreground)]
-              prose-a:text-[var(--color-primary-600)] prose-a:no-underline hover:prose-a:underline
-              prose-li:text-[var(--foreground-secondary)]
-              prose-table:text-sm
-              prose-th:text-[var(--foreground)] prose-th:bg-[var(--background-secondary)]
-              prose-td:text-[var(--foreground-secondary)]
-              prose-code:text-[var(--color-primary-700)] prose-code:bg-[var(--color-primary-500)]/10
-              prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-              prose-code:font-medium prose-code:before:content-none prose-code:after:content-none"
-          >
-            {guia.sections.map((section) =>
-              section.level === 2 ? (
-                <section key={section.id} id={section.id}>
-                  <h2>{section.title}</h2>
-                  <div dangerouslySetInnerHTML={{ __html: section.html }} />
-                </section>
-              ) : (
-                <div key={section.id} id={section.id}>
-                  <h3>{section.title}</h3>
-                  <div dangerouslySetInnerHTML={{ __html: section.html }} />
-                </div>
-              ),
-            )}
+        {/*
+          Header — versión "hero" más generosa: badge categoría con
+          icono, título grande tipo display, descripción larga,
+          metadatos editoriales (autor + fecha + lectura) y un
+          accent-bar superior para distinguir guías de blog y de
+          calculadoras (cada superficie tiene su acento de color).
+        */}
+        <header className="max-w-3xl mx-auto mb-10 md:mb-14">
+          <div className="flex flex-wrap items-center gap-3 mb-5">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+              <BookOpen className="w-3.5 h-3.5" />
+              Guía pillar · {guia.categoryLabel}
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
+              <Clock className="w-3.5 h-3.5" />
+              {guia.readingTime} min de lectura
+            </span>
           </div>
-
-          {/* Calculadoras relacionadas */}
-          {relatedCalcs.length > 0 && (
-            <section className="mt-14 pt-10 border-t border-[var(--border)]">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-[var(--color-primary-500)]/10 flex items-center justify-center">
-                  <Calculator className="w-5 h-5 text-[var(--color-primary-500)]" />
-                </div>
-                <h2 className="text-xl font-bold text-[var(--foreground)]">
-                  Calculadoras relacionadas
-                </h2>
+          <h1 className="heading-display text-4xl md:text-5xl text-[var(--foreground)] mb-5 leading-[1.1]">
+            {guia.title}
+          </h1>
+          <p className="text-lg md:text-xl text-[var(--foreground-secondary)] leading-relaxed">
+            {guia.description}
+          </p>
+          <div className="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] flex items-center justify-center text-white text-[10px] font-bold">
+                CC
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {relatedCalcs.map((calc) => (
-                  <Link
-                    key={calc.id}
-                    href={`/calculadoras/${calc.slug}`}
-                    className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-hover)] hover:shadow-sm transition-all"
-                  >
-                    <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors">
-                      {calc.name}
-                    </h3>
-                    <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
-                      {calc.description}
-                    </p>
-                  </Link>
-                ))}
+              <span>Equipo CalculaChile</span>
+            </div>
+            <span className="text-[var(--border)]">·</span>
+            <span>Actualizado el {formattedDate}</span>
+          </div>
+        </header>
+
+        {/*
+          Grid responsive: en >=lg, el TOC sticky queda a la izquierda
+          (3 cols) y el contenido a la derecha (8 cols, 1 col de
+          margen). En mobile/tablet, el TOC va arriba como bloque
+          colapsable y el contenido ocupa el ancho completo.
+        */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* TOC Sticky (desktop) / TOC arriba (mobile) */}
+          <aside className="lg:col-span-3 lg:order-1 order-1">
+            <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
+              {/* Mobile: bloque collapsible */}
+              <details className="lg:hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 mb-6" open>
+                <summary className="cursor-pointer flex items-center gap-2 text-sm font-semibold text-[var(--foreground)] uppercase tracking-wide select-none">
+                  <List className="w-4 h-4" />
+                  En esta guía
+                </summary>
+                <ol className="mt-3 space-y-1 list-none">
+                  {guia.sections
+                    .filter((s) => s.level === 2)
+                    .map((section, idx) => (
+                      <li key={section.id}>
+                        <a
+                          href={`#${section.id}`}
+                          className="toc-link block"
+                        >
+                          <span className="text-[var(--foreground-muted)] mr-2 tabular-nums">
+                            {String(idx + 1).padStart(2, '0')}
+                          </span>
+                          {section.title}
+                        </a>
+                      </li>
+                    ))}
+                </ol>
+              </details>
+              {/* Desktop: TOC con scroll-spy */}
+              <div className="hidden lg:block">
+                <TocSticky
+                  items={guia.sections
+                    .filter((s) => s.level === 2)
+                    .map((s) => ({ id: s.id, title: s.title }))}
+                  title="En esta guía"
+                />
               </div>
-            </section>
-          )}
+            </div>
+          </aside>
 
-          {/* Artículos del blog */}
-          {relatedArts.length > 0 && (
-            <section className="mt-10">
-              <h2 className="text-lg font-bold text-[var(--foreground)] mb-4">
-                Sigue leyendo en el blog
-              </h2>
-              <ul className="space-y-2">
-                {relatedArts.map((art) => (
-                  <li key={art.slug}>
-                    <Link
-                      href={`/blog/${art.slug}`}
-                      className="flex items-center gap-2 text-sm text-[var(--color-primary-600)] hover:underline"
-                    >
-                      <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
-                      {art.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-
-          {/*
-            Guías relacionadas — cross-link entre pillars. Refuerza el
-            grafo de linking interno entre las guías profundas, lo que
-            ayuda a Google a entender la estructura topical del sitio
-            y distribuye PageRank/autoridad entre pillars.
-          */}
-          {relatedGuias.length > 0 && (
-            <section className="mt-12 pt-10 border-t border-[var(--border)]">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-[var(--color-success-500)]/10 flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-[var(--color-success-500)]" />
-                </div>
-                <h2 className="text-xl font-bold text-[var(--foreground)]">
-                  Otras guías que te pueden interesar
-                </h2>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {relatedGuias.map((g) => (
-                  <Link
-                    key={g.slug}
-                    href={`/guias/${g.slug}`}
-                    className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-hover)] hover:shadow-sm transition-all"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
-                        {g.categoryLabel}
-                      </span>
-                      <span className="text-[10px] text-[var(--foreground-muted)]">
-                        · {g.readingTime} min
-                      </span>
-                    </div>
-                    <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors leading-snug">
-                      {g.title}
-                    </h3>
-                    <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
-                      {g.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Fuentes */}
-          {guia.sources.length > 0 && (
-            <section className="mt-10 pt-6 border-t border-[var(--border)]">
-              <h2 className="text-sm font-semibold text-[var(--foreground)] mb-3 uppercase tracking-wide">
-                Fuentes oficiales
-              </h2>
-              <ul className="space-y-1.5">
-                {guia.sources.map((source) => (
-                  <li key={source.url} className="text-sm">
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[var(--foreground-secondary)] hover:text-[var(--color-primary-600)] transition-colors"
-                    >
-                      {source.label}
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-
-          {/* Volver */}
-          <div className="mt-10">
-            <Link
-              href="/guias"
-              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary-600)] hover:underline"
+          {/* Contenido principal */}
+          <div className="lg:col-span-8 lg:col-start-5 order-2 max-w-3xl">
+            {/* Secciones */}
+            <div
+              className="prose prose-lg max-w-none
+                prose-headings:text-[var(--foreground)]
+                prose-headings:font-bold
+                prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5 prose-h2:scroll-mt-24
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-[var(--foreground-secondary)]
+                prose-p:leading-relaxed
+                prose-strong:text-[var(--foreground)]
+                prose-a:text-[var(--color-primary-600)] prose-a:no-underline hover:prose-a:underline
+                prose-li:text-[var(--foreground-secondary)]"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Volver a Guías
-            </Link>
+              {guia.sections.map((section) =>
+                section.level === 2 ? (
+                  <section key={section.id} id={section.id}>
+                    <h2>{section.title}</h2>
+                    <div dangerouslySetInnerHTML={{ __html: section.html }} />
+                  </section>
+                ) : (
+                  <div key={section.id} id={section.id}>
+                    <h3>{section.title}</h3>
+                    <div dangerouslySetInnerHTML={{ __html: section.html }} />
+                  </div>
+                ),
+              )}
+            </div>
+
+            {/* Calculadoras relacionadas */}
+            {relatedCalcs.length > 0 && (
+              <section className="mt-14 pt-10 border-t border-[var(--border)]">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--color-primary-500)]/10 flex items-center justify-center">
+                    <Calculator className="w-5 h-5 text-[var(--color-primary-500)]" />
+                  </div>
+                  <h2 className="text-xl font-bold text-[var(--foreground)]">
+                    Calculadoras relacionadas
+                  </h2>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {relatedCalcs.map((calc) => (
+                    <Link
+                      key={calc.id}
+                      href={`/calculadoras/${calc.slug}`}
+                      className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--color-primary-500)]/40 hover:shadow-sm transition-all"
+                    >
+                      <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors">
+                        {calc.name}
+                      </h3>
+                      <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
+                        {calc.description}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Artículos del blog */}
+            {relatedArts.length > 0 && (
+              <section className="mt-10">
+                <h2 className="text-lg font-bold text-[var(--foreground)] mb-4">
+                  Sigue leyendo en el blog
+                </h2>
+                <ul className="space-y-2">
+                  {relatedArts.map((art) => (
+                    <li key={art.slug}>
+                      <Link
+                        href={`/blog/${art.slug}`}
+                        className="flex items-center gap-2 text-sm text-[var(--color-primary-600)] hover:underline"
+                      >
+                        <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
+                        {art.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/*
+              Guías relacionadas — cross-link entre pillars. Refuerza el
+              grafo de linking interno entre las guías profundas, lo que
+              ayuda a Google a entender la estructura topical del sitio
+              y distribuye PageRank/autoridad entre pillars.
+            */}
+            {relatedGuias.length > 0 && (
+              <section className="mt-12 pt-10 border-t border-[var(--border)]">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--color-success-500)]/10 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-[var(--color-success-500)]" />
+                  </div>
+                  <h2 className="text-xl font-bold text-[var(--foreground)]">
+                    Otras guías que te pueden interesar
+                  </h2>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {relatedGuias.map((g) => (
+                    <Link
+                      key={g.slug}
+                      href={`/guias/${g.slug}`}
+                      className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--color-success-500)]/40 hover:shadow-sm transition-all"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
+                          {g.categoryLabel}
+                        </span>
+                        <span className="text-[10px] text-[var(--foreground-muted)]">
+                          · {g.readingTime} min
+                        </span>
+                      </div>
+                      <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors leading-snug">
+                        {g.title}
+                      </h3>
+                      <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
+                        {g.description}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Fuentes */}
+            {guia.sources.length > 0 && (
+              <section className="mt-10 pt-6 border-t border-[var(--border)]">
+                <h2 className="text-sm font-semibold text-[var(--foreground)] mb-3 uppercase tracking-wide">
+                  Fuentes oficiales
+                </h2>
+                <ul className="space-y-1.5">
+                  {guia.sources.map((source) => (
+                    <li key={source.url} className="text-sm">
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[var(--foreground-secondary)] hover:text-[var(--color-primary-600)] transition-colors"
+                      >
+                        {source.label}
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* Volver */}
+            <div className="mt-10">
+              <Link
+                href="/guias"
+                className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary-600)] hover:underline"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Volver a Guías
+              </Link>
+            </div>
           </div>
         </div>
       </article>

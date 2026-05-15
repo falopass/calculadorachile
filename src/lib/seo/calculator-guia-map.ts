@@ -48,6 +48,37 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-boleta-honorarios': 'iva-boleta-honorarios-chile',
   'calculadora-operacion-renta': 'iva-boleta-honorarios-chile',
   'calculadora-ppm': 'iva-boleta-honorarios-chile',
+
+  // Vivienda (nueva guía pillar)
+  'calculadora-credito-hipotecario': 'credito-hipotecario-chile',
+  'calculadora-subsidio-habitacional': 'comprar-vivienda-chile',
+  'calculadora-contribuciones': 'comprar-vivienda-chile',
+  'calculadora-costo-notaria': 'comprar-vivienda-chile',
+  'calculadora-plusvalia': 'comprar-vivienda-chile',
+  'calculadora-reajuste-arriendo': 'comprar-vivienda-chile',
+  'calculadora-gastos-comunes': 'comprar-vivienda-chile',
+
+  // Vehículos (nueva guía pillar)
+  'calculadora-permiso-circulacion': 'vehiculos-chile-permiso-multas',
+  'calculadora-multas-transito': 'vehiculos-chile-permiso-multas',
+  'calculadora-costo-tag': 'vehiculos-chile-permiso-multas',
+  'calculadora-credito-automotriz': 'vehiculos-chile-permiso-multas',
+  'calculadora-patente-comercial': 'vehiculos-chile-permiso-multas',
+
+  // Familia (nueva guía pillar)
+  'calculadora-pension-alimenticia': 'familia-pension-alimenticia-chile',
+  'calculadora-asignacion-familiar': 'familia-pension-alimenticia-chile',
+  'calculadora-subsidio-agua': 'familia-pension-alimenticia-chile',
+  'calculadora-bono-bodas-oro': 'familia-pension-alimenticia-chile',
+  'calculadora-aguinaldo': 'familia-pension-alimenticia-chile',
+
+  // Pensiones / previsional
+  'calculadora-simulador-apv': 'afp-pension-chile',
+  'calculadora-pgu': 'afp-pension-chile',
+  'calculadora-cotizacion-independientes': 'afp-pension-chile',
+
+  // Educación (nueva guía pillar)
+  'calculadora-credito-cae': 'credito-cae-educacion-chile',
 };
 
 /**
@@ -63,9 +94,12 @@ const CATEGORY_FALLBACK: Partial<Record<Calculator['category'], string>> = {
   beneficios: 'finiquito-laboral-chile',
   conversiones: 'uf-utm-indicadores-chile',
   impuestos: 'iva-boleta-honorarios-chile',
-  // vivienda, vehiculos, pension, familia, empresas, etc. caerán a
-  // `null` si su guía aún no existe. Es válido — el bloque "Lee la
-  // guía" simplemente no se renderiza.
+  vivienda: 'comprar-vivienda-chile',
+  vehiculos: 'vehiculos-chile-permiso-multas',
+  familia: 'familia-pension-alimenticia-chile',
+  pension: 'afp-pension-chile',
+  educacion: 'credito-cae-educacion-chile',
+  // empresas, hogar, servicios → sin guía pillar dedicada todavía.
 };
 
 /**
