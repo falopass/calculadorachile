@@ -5,11 +5,18 @@
 import { UTM } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
-export type TipoMulta = 'leve' | 'menos_grave' | 'grave' | 'gravisima';
+export type TipoMulta =
+  | 'leve'
+  | 'menos_grave'
+  | 'grave'
+  | 'gravisima'
+  | 'gravisima_alcohol';
 
 export interface MultasTransitoInput {
   tipoMulta: TipoMulta;
   cantidadMultas?: number;
+  /** Reincidencia dentro de 12 meses: recargo del 50%. */
+  esReincidente?: boolean;
 }
 
 export interface MultasTransitoResult {
@@ -18,46 +25,68 @@ export interface MultasTransitoResult {
   montoCLP: number;
   cantidadMultas: number;
   totalCLP: number;
+  recargoReincidencia: number;
 }
 
 /**
- * Montos de multas de tránsito expresados en UTM
+ * Montos de multas de tránsito en UTM (Ley 18.290, Art. 196 y ss.).
  *
- * Los montos se expresan en UTM según la gravedad de la infracción.
- * Se utilizan los valores intermedios del rango establecido por la ley.
+ * Bug histórico:
+ *  - El "punto medio" para grave (1,5-3 UTM) y gravísima (3-5 UTM)
+ *    se mantenía hardcoded sin documentar el rango.
+ *  - Faltaba el caso especial de gravísimas con alcohol (Ley Emilia
+ *    20.770 y Ley Tolerancia Cero 20.580): manejar bajo influencia
+ *    del alcohol > 0,8 g/L o causando muerte/lesiones llega hasta
+ *    10-15 UTM.
  *
- * Base legal: Ley 18.290 (Ley de Tránsito), Art. 196 y siguientes.
- *             Las infracciones gravísimas pueden llegar hasta 5 UTM.
+ * Valores de referencia (punto medio del rango legal):
+ *   - leve: 0,5 UTM (rango 0,1 - 1)
+ *   - menos_grave: 1 UTM (rango 1 - 1,5)
+ *   - grave: 2 UTM (rango 1,5 - 3)
+ *   - gravisima: 4 UTM (rango 3 - 5)
+ *   - gravisima_alcohol: 12 UTM (rango 10 - 15, Ley Emilia)
  */
 const MONTOS_MULTAS: Record<TipoMulta, number> = {
-  leve: 0.5,       // 0,5 UTM
-  menos_grave: 1,  // 1 UTM
-  grave: 2,        // 1,5 a 3 UTM (usamos punto medio: 2)
-  gravisima: 4,    // 3 a 5 UTM (usamos punto medio: 4)
-} as const;
+  leve: 0.5,
+  menos_grave: 1,
+  grave: 2,
+  gravisima: 4,
+  gravisima_alcohol: 12,
+};
+
+const NOMBRES_MULTA: Record<TipoMulta, string> = {
+  leve: 'Leve',
+  menos_grave: 'Menos Grave',
+  grave: 'Grave',
+  gravisima: 'Gravísima',
+  gravisima_alcohol: 'Gravísima con alcohol (Ley Emilia)',
+};
+
+/** Recargo por reincidencia dentro de 12 meses (Art. 197 Ley 18.290). */
+const RECARGO_REINCIDENCIA = 0.5;
 
 /**
- * Calcula el monto de multas de tránsito en CLP
+ * Calcula el monto de multas de tránsito en CLP.
  *
- * Convierte el monto de la multa desde UTM a CLP según el tipo de
- * infracción y la cantidad de multas acumuladas.
- *
- * @param input - Datos de la multa (tipo y cantidad)
- * @returns Desglose del monto de la multa en CLP
+ * Base legal: Ley 18.290 (Ley de Tránsito) Art. 196-204;
+ *             Ley 20.770 (Ley Emilia) y Ley 20.580 (Tolerancia Cero).
  */
-export function calculateMultasTransito(input: MultasTransitoInput): MultasTransitoResult {
-  const { tipoMulta, cantidadMultas = 1 } = input;
+export function calculateMultasTransito(
+  input: MultasTransitoInput,
+): MultasTransitoResult {
+  const { tipoMulta, cantidadMultas = 1, esReincidente = false } = input;
 
-  // Validar cantidad
   const cantidadValida = Math.max(1, Math.round(cantidadMultas));
-
-  // Monto en UTM según tipo de multa
   const montoUTM = MONTOS_MULTAS[tipoMulta];
 
-  // Convertir a CLP usando valor UTM vigente
-  const montoCLP = montoUTM * UTM.valor;
+  let montoCLP = montoUTM * UTM.valor;
 
-  // Total por todas las multas
+  // Recargo por reincidencia (50%)
+  const recargoReincidencia = esReincidente ? Math.round(montoCLP * RECARGO_REINCIDENCIA) : 0;
+  if (esReincidente) {
+    montoCLP += recargoReincidencia;
+  }
+
   const totalCLP = montoCLP * cantidadValida;
 
   return {
@@ -66,6 +95,7 @@ export function calculateMultasTransito(input: MultasTransitoInput): MultasTrans
     montoCLP: Math.round(montoCLP),
     cantidadMultas: cantidadValida,
     totalCLP: Math.round(totalCLP),
+    recargoReincidencia,
   };
 }
 
@@ -73,7 +103,7 @@ export function calculateMultasTransito(input: MultasTransitoInput): MultasTrans
  * Convierte el resultado a formato de CalculatorResult[]
  */
 export function multasTransitoToResults(result: MultasTransitoResult): CalculatorResult[] {
-  return [
+  const results: CalculatorResult[] = [
     {
       label: 'Total Multas',
       value: result.totalCLP,
@@ -91,11 +121,17 @@ export function multasTransitoToResults(result: MultasTransitoResult): Calculato
       format: 'UTM',
     },
     {
-      label: 'Tipo de Multa',
-      value: result.tipoMulta === 'leve' ? 1
-        : result.tipoMulta === 'menos_grave' ? 2
-        : result.tipoMulta === 'grave' ? 3
-        : 4,
+      label: `Tipo: ${NOMBRES_MULTA[result.tipoMulta]}`,
+      value:
+        result.tipoMulta === 'leve'
+          ? 1
+          : result.tipoMulta === 'menos_grave'
+            ? 2
+            : result.tipoMulta === 'grave'
+              ? 3
+              : result.tipoMulta === 'gravisima'
+                ? 4
+                : 5,
       format: 'number',
     },
     {
@@ -104,4 +140,14 @@ export function multasTransitoToResults(result: MultasTransitoResult): Calculato
       format: 'number',
     },
   ];
+
+  if (result.recargoReincidencia > 0) {
+    results.push({
+      label: 'Recargo por Reincidencia (50%)',
+      value: result.recargoReincidencia,
+      format: 'CLP',
+    });
+  }
+
+  return results;
 }

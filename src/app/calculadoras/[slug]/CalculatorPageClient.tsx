@@ -230,8 +230,8 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
     const result = calculateSubsidioHabitacional({
       valorPropiedad: inputs.valorPropiedad as number,
       ahorro: inputs.ahorro as number,
-      tipoSubsidio: inputs.tipoSubsidio as "ds49" | "ds01",
-      tramo: inputs.tramo as "tramo1" | "tramo2",
+      tipoSubsidio: inputs.tipoSubsidio as "ds49" | "ds01" | "ds19",
+      tramo: inputs.tramo as "tramo1" | "tramo2" | "tramo3",
     });
     return subsidioHabitacionalToResults(result);
   },
@@ -297,8 +297,9 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
   },
   "multas-transito": (inputs) => {
     const result = calculateMultasTransito({
-      tipoMulta: inputs.tipoMulta as "leve" | "menos_grave" | "grave" | "gravisima",
+      tipoMulta: inputs.tipoMulta as "leve" | "menos_grave" | "grave" | "gravisima" | "gravisima_alcohol",
       cantidadMultas: inputs.cantidadMultas as number | undefined,
+      esReincidente: inputs.esReincidente as boolean | undefined,
     });
     return multasTransitoToResults(result);
   },
@@ -307,6 +308,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
       peajes: inputs.peajes as "santiago_rancagua" | "santiago_valparaiso" | "santiago_los_andes" | "santiago_san_fernando" | "urbano_santiago",
       viajesMes: inputs.viajesMes as number,
       tieneConvenio: inputs.tieneConvenio as boolean | undefined,
+      categoria: inputs.categoria as 1 | 2 | 3 | undefined,
     });
     return costoTagToResults(result);
   },
@@ -390,6 +392,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
       tipo: inputs.tipo as "fiestas_patrias" | "navidad" | "escolar",
       sueldoBruto: inputs.sueldoBruto as number,
       mesesTrabajados: inputs.mesesTrabajados as number,
+      esSectorPublico: inputs.esSectorPublico as boolean | undefined,
     });
     return aguinaldoToResults(result);
   },
@@ -398,6 +401,7 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
       pensionActual: inputs.pensionActual as number,
       anosCotizados: inputs.anosCotizados as number,
       esHombre: inputs.esHombre as boolean,
+      edad: inputs.edad as number | undefined,
     });
     return pguToResults(result);
   },

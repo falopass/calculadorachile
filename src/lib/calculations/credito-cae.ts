@@ -6,8 +6,12 @@ import type { CalculatorResult } from '@/types/calculator';
 
 export interface CreditoCAEInput {
   montoCredito: number;
-  tasaAnual: number; // Tasa de interés anual (típico 2-5%)
-  plazoMeses: number; // Plazo en meses (típico 120-180)
+  /**
+   * Tasa anual fija establecida por ley desde 2022. Default 2%.
+   * Reformas posteriores podrían cambiar esta tasa.
+   */
+  tasaAnual?: number;
+  plazoMeses: number;
   tieneGarantiaEstatal: boolean;
 }
 
@@ -18,63 +22,57 @@ export interface CreditoCAEResult {
   dividendoMensual: number;
   totalIntereses: number;
   totalPago: number;
-  costoCredito: number; // Multiplicador (totalPago / montoCredito)
+  costoCredito: number;
   montoGarantiaEstatal: number;
+  /** Aviso sobre la transición CAE → FES. */
+  aviso: string;
 }
 
 /**
- * Calcula el dividendo mensual con amortización francesa (cuota fija)
- *
- * PMT = P * [r(1+r)^n] / [(1+r)^n - 1]
- * donde P = monto, r = tasa mensual, n = número de cuotas
+ * Tasa fija 2% anual para CAE (Ley 21.477 / reforma 2022 que
+ * reemplazó la tasa variable original por una tasa fija máxima).
  */
+const TASA_CAE_LEGAL = 2.0;
+
+/**
+ * Garantía estatal del CAE: 90% del monto del crédito (Ley 20.027).
+ */
+const GARANTIA_ESTATAL_PCT = 0.9;
+
+const AVISO_FES =
+  'El CAE está en transición al nuevo sistema FES (Financiamiento de Educación Superior). Esta calculadora sigue vigente para créditos CAE existentes. Las nuevas postulaciones desde 2025 se regirán por las normas FES cuando entren en vigor.';
+
 function calcularPMT(monto: number, tasaMensual: number, plazoMeses: number): number {
   if (tasaMensual === 0) return monto / plazoMeses;
-
   const factor = Math.pow(1 + tasaMensual, plazoMeses);
-  return monto * (tasaMensual * factor) / (factor - 1);
+  return (monto * (tasaMensual * factor)) / (factor - 1);
 }
 
 /**
- * Calcula el crédito con Aval del Estado (CAE)
+ * Calcula el crédito con Aval del Estado (CAE).
  *
- * El CAE es un crédito para estudios superiores con garantía estatal
- * de hasta el 90% del monto. Utiliza amortización francesa (cuota fija)
- * con tasas que varían entre 2% y 5% anual según institución y año.
+ * Bug histórico:
+ *  - Default tasa 2-5% como rango sin tope. La tasa CAE es FIJA al
+ *    2% anual desde la reforma 2022. Ahora el default es 2% y el
+ *    parámetro es opcional.
+ *  - No mencionaba la transición a FES (Financiamiento de Educación
+ *    Superior) que reemplaza al CAE para nuevos créditos desde 2025.
  *
- * Base legal: Ley 20.027 (Crédito con Aval del Estado para Estudios
- *             de Educación Superior), y sus modificaciones.
- *
- * @param input - Datos para el cálculo del crédito CAE
- * @returns Desglose completo del crédito con aval del estado
+ * Base legal: Ley 20.027 (CAE), reformas 2022 (tasa fija 2%).
  */
 export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
-  const { montoCredito, tasaAnual, plazoMeses, tieneGarantiaEstatal } = input;
+  const { montoCredito, tasaAnual = TASA_CAE_LEGAL, plazoMeses, tieneGarantiaEstatal } = input;
 
-  // Validar rangos
   const montoValido = Math.max(0, montoCredito);
   const tasaValida = Math.max(0, Math.min(100, tasaAnual));
   const plazoValido = Math.max(1, Math.round(plazoMeses));
 
-  // Tasa mensual
   const tasaMensual = tasaValida / 100 / 12;
-
-  // Dividendo mensual (amortización francesa)
   const dividendoMensual = calcularPMT(montoValido, tasaMensual, plazoValido);
-
-  // Total a pagar
   const totalPago = dividendoMensual * plazoValido;
-
-  // Total de intereses
   const totalIntereses = totalPago - montoValido;
-
-  // Costo del crédito (multiplicador)
-  const costoCredito = montoValido > 0
-    ? Math.round((totalPago / montoValido) * 100) / 100
-    : 0;
-
-  // Garantía estatal: 90% del monto del crédito si aplica
-  const montoGarantiaEstatal = tieneGarantiaEstatal ? montoValido * 0.9 : 0;
+  const costoCredito = montoValido > 0 ? Math.round((totalPago / montoValido) * 100) / 100 : 0;
+  const montoGarantiaEstatal = tieneGarantiaEstatal ? montoValido * GARANTIA_ESTATAL_PCT : 0;
 
   return {
     montoCredito: Math.round(montoValido),
@@ -85,6 +83,7 @@ export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
     totalPago: Math.round(totalPago),
     costoCredito,
     montoGarantiaEstatal: Math.round(montoGarantiaEstatal),
+    aviso: AVISO_FES,
   };
 }
 
@@ -121,12 +120,12 @@ export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[
       format: 'number',
     },
     {
-      label: 'Garantía Estatal',
+      label: 'Garantía Estatal (90%)',
       value: result.montoGarantiaEstatal,
       format: 'CLP',
     },
     {
-      label: 'Tasa Anual',
+      label: 'Tasa Anual (legal)',
       value: result.tasaAnual,
       format: 'percentage',
     },

@@ -7,9 +7,15 @@ import type { CalculatorResult } from '@/types/calculator';
 export interface CreditoAutomotrizInput {
   valorVehiculo: number;
   pie: number;
-  tasaAnual: number; // Tasa de interés anual (típico 4-8%)
-  plazoMeses: number; // Plazo en meses (24-60)
+  /** Tasa anual nominal (típico 8-15% para automotriz en 2026). */
+  tasaAnual: number;
+  plazoMeses: number;
   incluyeSeguro?: boolean;
+  /**
+   * Costos adicionales (gastos operacionales, comisiones, seguros
+   * obligatorios) para calcular CAE simple. Default 2% del crédito.
+   */
+  gastosAsociadosPct?: number;
 }
 
 export interface CreditoAutomotrizResult {
@@ -24,67 +30,68 @@ export interface CreditoAutomotrizResult {
   totalIntereses: number;
   totalPago: number;
   costoTotal: number;
+  /** CAE estimada (incluye gastos asociados). */
+  caeAproximada: number;
 }
 
-/**
- * Calcula la cuota mensual con amortización francesa (cuota fija)
- *
- * PMT = P * [r(1+r)^n] / [(1+r)^n - 1]
- */
 function calcularPMT(monto: number, tasaMensual: number, plazoMeses: number): number {
   if (tasaMensual === 0) return monto / plazoMeses;
-
   const factor = Math.pow(1 + tasaMensual, plazoMeses);
-  return monto * (tasaMensual * factor) / (factor - 1);
+  return (monto * (tasaMensual * factor)) / (factor - 1);
 }
 
 /**
- * Calcula el crédito automotriz
+ * Calcula el crédito automotriz con amortización francesa.
  *
- * Simula un crédito de consumo destinado a la compra de un vehículo,
- * con amortización francesa (cuota fija). Opcionalmente incluye seguro
- * vehicular estimado en 0,3% mensual del valor del vehículo.
+ * Notas sobre tasas:
+ *  - Tasas reales 2026 para crédito automotriz: 8-15% anual nominal,
+ *    según institución, plazo y perfil del cliente.
+ *  - El seguro de vehículo NO se modela como % del valor mensual
+ *    (eso era 0,3% mensual = 3,6% anual, sobreestimado). Se ajusta
+ *    a un valor más realista: ~0,15% mensual del valor.
  *
  * Base legal: Ley 18.010 (Operaciones de Crédito de Dinero),
- *             Ley 19.496 (Protección de los Derechos de los Consumidores)
- *
- * @param input - Datos para el cálculo del crédito automotriz
- * @returns Desglose completo del crédito automotriz
+ *             Ley 19.496 (Protección al Consumidor),
+ *             Ley 20.555 (SERNAC Financiero - obliga a informar CAE).
  */
-export function calculateCreditoAutomotriz(input: CreditoAutomotrizInput): CreditoAutomotrizResult {
-  const { valorVehiculo, pie, tasaAnual, plazoMeses, incluyeSeguro = false } = input;
+export function calculateCreditoAutomotriz(
+  input: CreditoAutomotrizInput,
+): CreditoAutomotrizResult {
+  const {
+    valorVehiculo,
+    pie,
+    tasaAnual,
+    plazoMeses,
+    incluyeSeguro = false,
+    gastosAsociadosPct = 2,
+  } = input;
 
-  // Validar rangos
   const valorValido = Math.max(0, valorVehiculo);
   const pieValido = Math.max(0, Math.min(pie, valorValido));
   const tasaValida = Math.max(0, Math.min(100, tasaAnual));
   const plazoValido = Math.max(1, Math.round(plazoMeses));
 
-  // Monto a financiar
   const montoFinanciar = valorValido - pieValido;
-
-  // Tasa mensual
   const tasaMensual = tasaValida / 100 / 12;
 
-  // Dividendo mensual sin seguro
-  const dividendoMensual = montoFinanciar > 0
-    ? calcularPMT(montoFinanciar, tasaMensual, plazoValido)
-    : 0;
+  const dividendoMensual =
+    montoFinanciar > 0 ? calcularPMT(montoFinanciar, tasaMensual, plazoValido) : 0;
 
-  // Seguro vehicular: 0,3% mensual del valor del vehículo
-  const seguroMensual = incluyeSeguro ? Math.round(valorValido * 0.003) : 0;
-
-  // Dividendo con seguro incluido
+  // Seguro mensual: 0,15% del valor del vehículo (más realista que 0,3%).
+  const seguroMensual = incluyeSeguro ? Math.round(valorValido * 0.0015) : 0;
   const dividendoConSeguro = Math.round(dividendoMensual) + seguroMensual;
 
-  // Total a pagar (solo crédito, sin seguro)
   const totalPago = Math.round(dividendoMensual) * plazoValido;
-
-  // Total de intereses
   const totalIntereses = totalPago - montoFinanciar;
+  const costoTotal = totalPago + seguroMensual * plazoValido;
 
-  // Costo total incluyendo pie + crédito + seguros
-  const costoTotal = totalPago + (seguroMensual * plazoValido);
+  // CAE simple: tasa anual + gastos prorrateados anualmente.
+  // Aproximación: tasa nominal + (gastos% / años).
+  const anios = plazoValido / 12;
+  const caeAproximada =
+    montoFinanciar > 0 && anios > 0
+      ? Math.round((tasaValida + gastosAsociadosPct / anios) * 100) / 100
+      : tasaValida;
 
   return {
     valorVehiculo: Math.round(valorValido),
@@ -98,13 +105,16 @@ export function calculateCreditoAutomotriz(input: CreditoAutomotrizInput): Credi
     totalIntereses: Math.round(totalIntereses),
     totalPago: Math.round(totalPago),
     costoTotal: Math.round(costoTotal),
+    caeAproximada,
   };
 }
 
 /**
  * Convierte el resultado a formato de CalculatorResult[]
  */
-export function creditoAutomotrizToResults(result: CreditoAutomotrizResult): CalculatorResult[] {
+export function creditoAutomotrizToResults(
+  result: CreditoAutomotrizResult,
+): CalculatorResult[] {
   const results: CalculatorResult[] = [
     {
       label: 'Dividendo Mensual',
@@ -143,6 +153,11 @@ export function creditoAutomotrizToResults(result: CreditoAutomotrizResult): Cal
       format: 'percentage',
     },
     {
+      label: 'CAE Aproximada',
+      value: result.caeAproximada,
+      format: 'percentage',
+    },
+    {
       label: 'Plazo (meses)',
       value: result.plazoMeses,
       format: 'number',
@@ -163,7 +178,7 @@ export function creditoAutomotrizToResults(result: CreditoAutomotrizResult): Cal
         highlight: true,
       },
       {
-        label: 'Costo Total (pie + crédito + seguro)',
+        label: 'Costo Total (crédito + seguro)',
         value: result.costoTotal,
         format: 'CLP',
       },

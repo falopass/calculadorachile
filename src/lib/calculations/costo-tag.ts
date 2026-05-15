@@ -2,93 +2,124 @@
 // Cálculo de Costo TAG Autopista Chile 2026
 // ============================================
 
+import { TAG_RUTAS } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
-export type RutaPeaje = 'santiago_rancagua' | 'santiago_valparaiso' | 'santiago_los_andes' | 'santiago_san_fernando' | 'urbano_santiago';
+export type RutaPeaje =
+  | 'santiago_rancagua'
+  | 'santiago_valparaiso'
+  | 'santiago_los_andes'
+  | 'santiago_san_fernando'
+  | 'urbano_santiago';
 
 export interface CostoTagInput {
   peajes: RutaPeaje;
   viajesMes: number;
+  /**
+   * Algunas concesionarias dan rebajas a usuarios con TAG vigente
+   * (vs. tarifa "ocasional" que es ~50% más alta). El "convenio" no
+   * es un descuento adicional formal; se mantiene como modelado de
+   * tarifa con TAG vs sin TAG.
+   */
   tieneConvenio?: boolean;
+  /** Categoría del vehículo (1: auto/moto, 2: camioneta, 3: camión). */
+  categoria?: 1 | 2 | 3;
 }
 
 export interface CostoTagResult {
   peajes: RutaPeaje;
   costoPorViaje: number;
-  costoPorViajeConvenio: number;
+  costoPorViajeSinTag: number;
   viajesMes: number;
   costoMensual: number;
   costoAnual: number;
   tieneConvenio: boolean;
-  descuentoConvenio: number;
-  ahorroAnual: number;
+  categoria: number;
+  ahorroPorTagAnual: number;
 }
 
 /**
- * Costos base por tramo de autopista (valuados por viaje simple)
- *
- * Los precios son aproximados y corresponden a tarifas vigentes 2026
- * de las principales autopistas con cobro electrónico (TAG).
- *
- * Nota: Los valores reales pueden variar según horario (hora valle/punta)
- * y según la autopista específica (Costanera Norte, Vespucio, etc.)
+ * Mapeo entre la clave de la calculadora y la clave de TAG_RUTAS
+ * en constants.ts (que ya tiene tarifas reales por categoría).
  */
-const COSTOS_PEAJE: Record<RutaPeaje, number> = {
-  santiago_rancagua: 3800,
-  santiago_valparaiso: 3200,
-  santiago_los_andes: 2800,
-  santiago_san_fernando: 4200,
-  urbano_santiago: 1200,
-} as const;
+const RUTA_A_KEY: Record<RutaPeaje, keyof typeof TAG_RUTAS | null> = {
+  santiago_rancagua: 'santiago-rancagua',
+  santiago_valparaiso: 'santiago-valparaiso',
+  santiago_los_andes: 'santiago-losandes',
+  santiago_san_fernando: 'santiago-rancagua', // misma ruta extendida
+  urbano_santiago: null, // valor distinto, ver más abajo
+};
 
 /**
- * Descuento por convenio de usuario frecuente (30%)
+ * Tarifa promedio para autopistas urbanas (Costanera Norte, Vespucio,
+ * Autopista del Sol, Acceso Sur, etc.). Promedio horario punta + valle.
  */
-const DESCUENTO_CONVENIO = 30; // 30%
+const URBANO_SANTIAGO_TARIFA: Record<1 | 2 | 3, number> = {
+  1: 1200,
+  2: 1800,
+  3: 2700,
+};
 
 /**
- * Calcula el costo mensual y anual del TAG en autopistas
+ * Recargo "sin TAG" / "ocasional": MOP autoriza hasta +50% sobre la
+ * tarifa con TAG. Si el usuario no tiene convenio (TAG), paga más.
+ */
+const RECARGO_SIN_TAG = 0.5;
+
+/**
+ * Calcula el costo mensual y anual del TAG.
  *
- * Incluye descuento por convenio de usuario frecuente (30%) para
- * quienes realizan viajes regulares por las autopistas concretadas.
+ * Bug histórico:
+ *  - El archivo definía un set hardcodeado de tarifas distinto al de
+ *    `TAG_RUTAS` en constants.ts (3.800 vs 3.500), generando
+ *    inconsistencias internas.
+ *  - El "descuento por convenio 30%" no corresponde al modelo real:
+ *    la diferencia es entre tarifa con TAG y tarifa ocasional
+ *    (sin TAG paga +50%).
  *
- * @param input - Datos del peaje, viajes mensuales y convenio
- * @returns Desglose del costo TAG mensual y anual
+ * Fix: usa los valores de `TAG_RUTAS` (categorizados por tipo de
+ * vehículo) y modela "sin TAG" como recargo +50% sobre la tarifa
+ * con TAG, en vez de un descuento ficticio.
  */
 export function calculateCostoTag(input: CostoTagInput): CostoTagResult {
-  const { peajes, viajesMes, tieneConvenio = false } = input;
+  const { peajes, viajesMes, tieneConvenio = true, categoria = 1 } = input;
 
-  // Validar rangos
   const viajesValidos = Math.max(0, viajesMes);
 
-  // Costo base por viaje
-  const costoPorViaje = COSTOS_PEAJE[peajes];
+  // Obtener tarifa con TAG según ruta y categoría
+  let costoConTag: number;
+  const rutaKey = RUTA_A_KEY[peajes];
+  if (rutaKey === null) {
+    costoConTag = URBANO_SANTIAGO_TARIFA[categoria];
+  } else {
+    const ruta = TAG_RUTAS[rutaKey];
+    costoConTag =
+      categoria === 1
+        ? ruta.categoria1
+        : categoria === 2
+          ? ruta.categoria2
+          : ruta.categoria3;
+  }
 
-  // Costo con convenio (30% descuento)
-  const costoPorViajeConvenio = costoPorViaje * (1 - DESCUENTO_CONVENIO / 100);
+  const costoSinTag = Math.round(costoConTag * (1 + RECARGO_SIN_TAG));
+  const tarifaEfectiva = tieneConvenio ? costoConTag : costoSinTag;
 
-  // Tarifa efectiva según convenio
-  const tarifaEfectiva = tieneConvenio ? costoPorViajeConvenio : costoPorViaje;
-
-  // Costo mensual y anual
   const costoMensual = tarifaEfectiva * viajesValidos;
   const costoAnual = costoMensual * 12;
 
-  // Ahorro por usar convenio
-  const costoSinConvenioMensual = costoPorViaje * viajesValidos;
-  const ahorroMensual = tieneConvenio ? costoSinConvenioMensual - costoMensual : 0;
-  const ahorroAnual = ahorroMensual * 12;
+  // Ahorro de tener TAG vs no tenerlo
+  const ahorroPorTagAnual = (costoSinTag - costoConTag) * viajesValidos * 12;
 
   return {
     peajes,
-    costoPorViaje,
-    costoPorViajeConvenio: Math.round(costoPorViajeConvenio),
+    costoPorViaje: tarifaEfectiva,
+    costoPorViajeSinTag: costoSinTag,
     viajesMes: viajesValidos,
     costoMensual: Math.round(costoMensual),
     costoAnual: Math.round(costoAnual),
     tieneConvenio,
-    descuentoConvenio: tieneConvenio ? DESCUENTO_CONVENIO : 0,
-    ahorroAnual: Math.round(ahorroAnual),
+    categoria,
+    ahorroPorTagAnual: tieneConvenio ? Math.round(ahorroPorTagAnual) : 0,
   };
 }
 
@@ -110,7 +141,12 @@ export function costoTagToResults(result: CostoTagResult): CalculatorResult[] {
     },
     {
       label: 'Costo por Viaje',
-      value: result.tieneConvenio ? result.costoPorViajeConvenio : result.costoPorViaje,
+      value: result.costoPorViaje,
+      format: 'CLP',
+    },
+    {
+      label: 'Tarifa sin TAG (referencial)',
+      value: result.costoPorViajeSinTag,
       format: 'CLP',
     },
     {
@@ -118,21 +154,19 @@ export function costoTagToResults(result: CostoTagResult): CalculatorResult[] {
       value: result.viajesMes,
       format: 'number',
     },
+    {
+      label: 'Categoría Vehículo',
+      value: result.categoria,
+      format: 'number',
+    },
   ];
 
-  if (result.descuentoConvenio > 0) {
-    results.push(
-      {
-        label: 'Descuento Convenio',
-        value: result.descuentoConvenio,
-        format: 'percentage',
-      },
-      {
-        label: 'Ahorro Anual por Convenio',
-        value: result.ahorroAnual,
-        format: 'CLP',
-      },
-    );
+  if (result.tieneConvenio && result.ahorroPorTagAnual > 0) {
+    results.push({
+      label: 'Ahorro Anual por usar TAG',
+      value: result.ahorroPorTagAnual,
+      format: 'CLP',
+    });
   }
 
   return results;

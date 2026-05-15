@@ -8,67 +8,81 @@ import type { CalculatorResult } from '@/types/calculator';
 export interface AsignacionFamiliarInput {
   sueldoBruto: number;
   numeroHijos: number;
-  tramo?: 'a' | 'b' | 'c';
+  /** Si se omite, se determina automáticamente según el sueldo. */
+  tramo?: 'a' | 'b' | 'c' | 'd';
 }
 
 export interface AsignacionFamiliarResult {
   sueldoBruto: number;
-  tramo: 'a' | 'b' | 'c';
+  tramo: 'a' | 'b' | 'c' | 'd';
   montoPorHijo: number;
   numeroHijos: number;
   asignacionMensual: number;
   asignacionAnual: number;
+  /** Indica si tiene derecho al beneficio. */
+  tieneDerecho: boolean;
+  motivoSinDerecho?: string;
 }
 
 /**
- * Tramos de Asignación Familiar Chile 2026
- *
- * La asignación familiar es un beneficio previsional que se paga por cada
- * carga familiar reconocida (hijos, cónyuge, etc.). El monto depende del
- * tramo en que se encuentra el trabajador según su remuneración.
- *
- * Base legal: DFL 150, Art. 1 y ss. (Cajas de Compensación y Asignación Familiar)
- *             Decreto Supremo N° 3 de 2025 (fija montos vigentes)
+ * Tope superior del tramo C: sueldos sobre este monto NO reciben
+ * asignación familiar (tramo D, monto $0).
+ * Base legal: Ley 21.751 Art. 1° letra a).
  */
-// Usar los valores actualizados desde constants.ts
-// Los tramos ahora siguen la Ley 21.751 con 3 tramos actualizados
+const INGRESO_MAXIMO_TRAMO_C = ASIGNACION_FAMILIAR_2026.tramoC.ingresoMaximoCLP;
 
 /**
- * Determina el tramo de asignación familiar según el sueldo bruto
+ * Determina el tramo según el sueldo bruto.
+ * Sobre el tope C, el trabajador queda en tramo D (sin derecho).
  */
-function determinarTramo(sueldoBruto: number): 'a' | 'b' | 'c' {
+function determinarTramo(sueldoBruto: number): 'a' | 'b' | 'c' | 'd' {
   if (sueldoBruto <= ASIGNACION_FAMILIAR_2026.tramoA.ingresoMaximoCLP) return 'a';
   if (sueldoBruto <= ASIGNACION_FAMILIAR_2026.tramoB.ingresoMaximoCLP) return 'b';
-  return 'c';
+  if (sueldoBruto <= ASIGNACION_FAMILIAR_2026.tramoC.ingresoMaximoCLP) return 'c';
+  return 'd';
 }
 
 /**
- * Calcula la asignación familiar por tramo
+ * Calcula la asignación familiar por tramo.
  *
- * El tramo se determina automáticamente según el sueldo bruto si no se
- * especifica explícitamente. Tramo A: hasta $631.976, Tramo B: hasta
- * $923.067, Tramo C: hasta $1.439.668.
+ * Bug histórico: la versión anterior siempre asignaba tramo C aunque
+ * el sueldo superara el tope ($1.439.668). Ahora retorna correctamente
+ * tramo D con monto $0 cuando el sueldo excede ese tope.
  *
- * @param input - Datos para el cálculo de la asignación familiar
- * @returns Desglose completo de la asignación familiar
+ * Base legal: Ley 21.751 (reajuste 2026), DFL 150.
  */
-export function calculateAsignacionFamiliar(input: AsignacionFamiliarInput): AsignacionFamiliarResult {
+export function calculateAsignacionFamiliar(
+  input: AsignacionFamiliarInput,
+): AsignacionFamiliarResult {
   const { sueldoBruto, numeroHijos, tramo: tramoForzado } = input;
 
-  // Validar rangos
   const sueldoValido = Math.max(0, sueldoBruto);
   const hijosValidos = Math.max(0, Math.round(numeroHijos));
 
-  // Determinar tramo (automático o forzado)
   const tramo = tramoForzado ?? determinarTramo(sueldoValido);
 
-  // Monto por hijo según tramo
-  const montoPorHijo =
-    tramo === 'a' ? ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP :
-    tramo === 'b' ? ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP :
-    ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP;
+  let montoPorHijo: number;
+  let tieneDerecho = true;
+  let motivoSinDerecho: string | undefined;
 
-  // Cálculo mensual y anual
+  switch (tramo) {
+    case 'a':
+      montoPorHijo = ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP;
+      break;
+    case 'b':
+      montoPorHijo = ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP;
+      break;
+    case 'c':
+      montoPorHijo = ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP;
+      break;
+    case 'd':
+    default:
+      montoPorHijo = 0;
+      tieneDerecho = false;
+      motivoSinDerecho = `Sueldo bruto supera el tope del tramo C ($${INGRESO_MAXIMO_TRAMO_C.toLocaleString('es-CL')}).`;
+      break;
+  }
+
   const asignacionMensual = montoPorHijo * hijosValidos;
   const asignacionAnual = asignacionMensual * 12;
 
@@ -79,14 +93,18 @@ export function calculateAsignacionFamiliar(input: AsignacionFamiliarInput): Asi
     numeroHijos: hijosValidos,
     asignacionMensual: Math.round(asignacionMensual),
     asignacionAnual: Math.round(asignacionAnual),
+    tieneDerecho,
+    motivoSinDerecho,
   };
 }
 
 /**
  * Convierte el resultado a formato de CalculatorResult[]
  */
-export function asignacionFamiliarToResults(result: AsignacionFamiliarResult): CalculatorResult[] {
-  return [
+export function asignacionFamiliarToResults(
+  result: AsignacionFamiliarResult,
+): CalculatorResult[] {
+  const results: CalculatorResult[] = [
     {
       label: 'Asignación Mensual',
       value: result.asignacionMensual,
@@ -100,7 +118,14 @@ export function asignacionFamiliarToResults(result: AsignacionFamiliarResult): C
     },
     {
       label: `Tramo ${result.tramo.toUpperCase()}`,
-      value: result.tramo === 'a' ? 1 : result.tramo === 'b' ? 2 : 3,
+      value:
+        result.tramo === 'a'
+          ? 1
+          : result.tramo === 'b'
+            ? 2
+            : result.tramo === 'c'
+              ? 3
+              : 4,
       format: 'number',
     },
     {
@@ -119,4 +144,14 @@ export function asignacionFamiliarToResults(result: AsignacionFamiliarResult): C
       format: 'CLP',
     },
   ];
+
+  if (!result.tieneDerecho) {
+    results.push({
+      label: 'Sin derecho al beneficio (tramo D)',
+      value: 1,
+      format: 'number',
+    });
+  }
+
+  return results;
 }

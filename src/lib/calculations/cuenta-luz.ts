@@ -2,7 +2,7 @@
 // Cálculo de Cuenta de Luz - Tarifa BT1 Chile 2026
 // ============================================
 
-import { IVA } from '@/lib/values/constants';
+import { IVA, TARIFA_BT1 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export type TipoTarifa = 'bt1_residencial' | 'bt1_comercial' | 'bt1_industrial';
@@ -18,93 +18,119 @@ export interface CuentaLuzResult {
   consumoKWH: number;
   tipoTarifa: TipoTarifa;
   zona: Zona;
-  tarifaKWH: number;
+  /** Tarifa promedio por kWh efectiva (cargo energía / consumo). */
+  tarifaPromedioKWH: number;
   cargoFijo: number;
   cargoEnergia: number;
   subtotal: number;
   iva: number;
   total: number;
+  desgloseTramos: Array<{
+    desdeKWH: number;
+    hastaKWH: number;
+    consumoKWH: number;
+    tarifa: number;
+    subtotal: number;
+  }>;
 }
 
 /**
- * Tarifas BT1 por zona ($/kWh)
- *
- * Las tarifas corresponden a valores aproximados 2026 para clientes
- * regulados en BT1 (baja tensión, hasta 2.000 kWh mensuales).
- * Varían según zona geográfica y distribuidora.
- *
- * Base legal: Tarifas reguladas por CNE y fijadas por resolución
- *             de la Superintendencia de Electricidad y Combustible (SEC).
- */
-const TARIFAS_KWH: Record<Zona, number> = {
-  norte: 150,
-  central: 135,
-  sur: 145,
-} as const;
-
-/**
- * Recargo por tipo de tarifa sobre la tarifa residencial
+ * Recargo por tipo de tarifa sobre la BT1 residencial. Aproximación
+ * razonable: comercial paga +20% y baja tensión industrial +35%.
+ * Las tarifas reales BT2/BT3 varían por distribuidora y CNE las
+ * publica trimestralmente.
  */
 const RECARGO_TARIFA: Record<TipoTarifa, number> = {
-  bt1_residencial: 1.0,   // Sin recargo
-  bt1_comercial: 1.2,     // +20%
-  bt1_industrial: 1.35,   // +35%
-} as const;
+  bt1_residencial: 1.0,
+  bt1_comercial: 1.2,
+  bt1_industrial: 1.35,
+};
 
 /**
- * Cargo fijo mensual según tipo de tarifa
+ * Ajuste por zona geográfica respecto a la zona central.
+ * Las tarifas reales varían por distribuidora; valores aproximados
+ * para 2026 según decretos tarifarios CNE/SEC.
  */
-const CARGO_FIJO: Record<TipoTarifa, number> = {
-  bt1_residencial: 800,
-  bt1_comercial: 1000,
-  bt1_industrial: 1200,
-} as const;
+const AJUSTE_ZONA: Record<Zona, number> = {
+  norte: 1.05,
+  central: 1.0,
+  sur: 1.1,
+};
 
 /**
- * Calcula la cuenta de luz (electricidad) tarifa BT1
+ * Calcula la cuenta de luz BT1 con tramos progresivos por consumo.
  *
- * Incluye cargo fijo mensual, cargo por energía consumida (kWh),
- * e IVA (19%). Las tarifas varían según zona y tipo de cliente.
+ * Bug histórico: la versión anterior aplicaba tarifa plana por zona
+ * (135/145/150) ignorando los tramos por consumo de TARIFA_BT1
+ * (160/180/220 según consumo). El cliente con alto consumo terminaba
+ * subestimando su cuenta hasta 30%.
  *
- * @param input - Consumo en kWh, tipo de tarifa y zona
- * @returns Desglose completo de la cuenta de electricidad
+ * Fix: aplica los tramos progresivos definidos en `TARIFA_BT1`,
+ * ajustados por tipo de tarifa y zona geográfica.
+ *
+ * Base legal: Ley 21.667 (descongelamiento tarifas), Decreto Tarifario
+ * CNE, Norma Técnica SEC.
  */
 export function calculateCuentaLuz(input: CuentaLuzInput): CuentaLuzResult {
   const { consumoKWH, tipoTarifa = 'bt1_residencial', zona = 'central' } = input;
 
-  // Validar rangos
-  const consumoValido = Math.max(0, consumoKWH);
+  const consumo = Math.max(0, consumoKWH);
+  const recargoTipo = RECARGO_TARIFA[tipoTarifa];
+  const ajusteZona = AJUSTE_ZONA[zona];
+  const factorTotal = recargoTipo * ajusteZona;
 
-  // Tarifa por kWh según zona y tipo
-  const tarifaBase = TARIFAS_KWH[zona];
-  const recargo = RECARGO_TARIFA[tipoTarifa];
-  const tarifaKWH = tarifaBase * recargo;
+  // Aplicar tramos progresivos
+  let cargoEnergia = 0;
+  let consumoRestante = consumo;
+  let limiteAnterior = 0;
+  const desgloseTramos: CuentaLuzResult['desgloseTramos'] = [];
 
-  // Cargo fijo mensual
-  const cargoFijo = CARGO_FIJO[tipoTarifa];
+  for (const tramo of TARIFA_BT1.tramosConsumo) {
+    if (consumoRestante <= 0) break;
 
-  // Cargo por energía
-  const cargoEnergia = tarifaKWH * consumoValido;
+    const anchoTramo = tramo.maximoKWh - limiteAnterior;
+    const consumoEnTramo = Math.min(consumoRestante, anchoTramo);
+    const tarifaAjustada = tramo.precioCLPKWh * factorTotal;
+    const subtotalTramo = consumoEnTramo * tarifaAjustada;
 
-  // Subtotal antes de IVA
+    cargoEnergia += subtotalTramo;
+    consumoRestante -= consumoEnTramo;
+
+    desgloseTramos.push({
+      desdeKWH: limiteAnterior,
+      hastaKWH: tramo.maximoKWh === Infinity ? limiteAnterior + consumoEnTramo : tramo.maximoKWh,
+      consumoKWH: consumoEnTramo,
+      tarifa: Math.round(tarifaAjustada),
+      subtotal: Math.round(subtotalTramo),
+    });
+
+    limiteAnterior = tramo.maximoKWh;
+  }
+
+  // Cargo fijo según tipo (residencial usa el de constants).
+  const cargoFijoBase = TARIFA_BT1.cargoFijoCLP;
+  const cargoFijo = Math.round(
+    cargoFijoBase *
+      (tipoTarifa === 'bt1_comercial' ? 1.4 : tipoTarifa === 'bt1_industrial' ? 1.8 : 1),
+  );
+
   const subtotal = cargoFijo + cargoEnergia;
-
-  // IVA (19%)
   const iva = subtotal * (IVA.tasa / 100);
-
-  // Total
   const total = subtotal + iva;
 
+  const tarifaPromedioKWH = consumo > 0 ? cargoEnergia / consumo : 0;
+
   return {
-    consumoKWH: consumoValido,
+    consumoKWH: consumo,
     tipoTarifa,
     zona,
-    tarifaKWH: Math.round(tarifaKWH * 100) / 100,
+    tarifaPromedioKWH: Math.round(tarifaPromedioKWH),
     cargoFijo,
     cargoEnergia: Math.round(cargoEnergia),
     subtotal: Math.round(subtotal),
     iva: Math.round(iva),
     total: Math.round(total),
+    desgloseTramos,
   };
 }
 
@@ -140,8 +166,8 @@ export function cuentaLuzToResults(result: CuentaLuzResult): CalculatorResult[] 
       format: 'CLP',
     },
     {
-      label: 'Tarifa por kWh',
-      value: result.tarifaKWH,
+      label: 'Tarifa Promedio por kWh',
+      value: result.tarifaPromedioKWH,
       format: 'CLP',
     },
     {

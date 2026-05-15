@@ -1,9 +1,8 @@
 // ============================================
 // Cálculo de Cotizaciones Independientes (Ley 21.133) Chile 2026
-// Cotizaciones previsionales obligatorias para trabajadores independientes
 // ============================================
 
-import { AFP } from '@/lib/values/constants';
+import { AFP, UF } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CotizacionIndependientesInput {
@@ -14,64 +13,96 @@ export interface CotizacionIndependientesInput {
 
 export interface CotizacionIndependientesResult {
   rentaBruta: number;
-  baseImponible: number;
+  baseImponibleAnual: number;
+  baseImponibleMensual: number;
   cotizacionAFP: number;
   cotizacionSalud: number;
-  cotizacionSIS: number;
+  cotizacionMutual: number;
   totalCotizaciones: number;
+  topeImponibleMensual: number;
+  aplicaTopeImponible: boolean;
 }
 
 /**
- * Calcula las cotizaciones previsionales obligatorias para trabajadores independientes.
- * Base imponible = 80% de la renta bruta (Ley 21.133).
- * AFP: 10% cotización + comisión variable por AFP.
- * Salud: 7% (FONASA). Isapre: mínimo 7% o plan.
- * SIS: 1.15% seguro invalidez y sobrevivencia.
- * Ley 21.133, D.L. 3500, Art. 17 y 88.
+ * Tope imponible para trabajadores independientes (Ley 21.133).
+ * Es el mismo tope general AFP/Salud: 87,8 UF mensuales (2026).
+ *
+ * Nota: el tope se ajusta anualmente por la Superintendencia de
+ * Pensiones según la variación real de las remuneraciones (Art. 16
+ * D.L. 3500). Para 2026 es 87,8 UF; en 2025 era 84,3 UF.
+ */
+const TOPE_IMPONIBLE_UF = 87.8;
+
+/**
+ * Mutual de seguridad: tasa básica 0,90% Ley 16.744.
+ * Para independientes que cotizan voluntariamente.
+ */
+const MUTUAL_TASA = 0.9;
+
+/**
+ * Calcula las cotizaciones previsionales obligatorias para
+ * trabajadores independientes que emiten boletas de honorarios.
+ *
+ * Bugs históricos corregidos:
+ *  - SIS no se cobra a independientes: el SIS es seguro de
+ *    invalidez/sobrevivencia que solo cubre a trabajadores
+ *    dependientes (D.L. 3500 Art. 59). Los independientes pagan
+ *    íntegramente el 10% a su cuenta individual.
+ *  - El tope imponible para independientes es el mismo tope
+ *    general (87,8 UF en 2026), no se mantenía actualizado.
+ *  - Se agrega cotización de mutualidad (Ley 16.744) que sí
+ *    aplica a independientes.
+ *
+ * Base imponible anual = 80% de la renta bruta anual gravable
+ * (Ley 21.133 Art. 89 D.L. 3500).
+ *
+ * Base legal: Ley 21.133, D.L. 3500 Art. 89 y 92 F.
  */
 export function calculateCotizacionIndependientes(
-  input: CotizacionIndependientesInput
+  input: CotizacionIndependientesInput,
 ): CotizacionIndependientesResult {
   const { rentaBrutaMensual, afp, salud } = input;
 
-  // Validar renta
+  void salud; // Tasa de salud es 7% para FONASA e Isapre mínimo.
+
   const rentaBruta = Math.max(0, rentaBrutaMensual);
 
-  // Base imponible: 80% de la renta bruta para independientes (Ley 21.133)
-  const baseImponible = Math.round(rentaBruta * 0.8);
+  // Base imponible: 80% de la renta bruta (Ley 21.133)
+  const baseAnualSinTope = rentaBruta * 12 * 0.8;
 
-  // Obtener datos de la AFP seleccionada
+  // Tope mensual en CLP
+  const topeImponibleMensual = TOPE_IMPONIBLE_UF * UF.valor;
+  const topeAnual = topeImponibleMensual * 12;
+
+  const baseImponibleAnual = Math.min(baseAnualSinTope, topeAnual);
+  const baseImponibleMensual = baseImponibleAnual / 12;
+  const aplicaTopeImponible = baseAnualSinTope > topeAnual;
+
+  // AFP: 10% obligatorio + comisión variable (sin SIS para indep)
   const afpData = AFP[afp];
   if (!afpData) {
-    throw new Error(`AFP "${String(afp)}" no encontrada en constantes`);
+    throw new Error(`AFP "${String(afp)}" no encontrada`);
   }
+  const cotizacionAFP = Math.round(baseImponibleMensual * ((10 + afpData.comision) / 100));
 
-  // Cotización AFP: 10% ahorro + comisión de la AFP
-  const tasaAFPTotal = 10 + afpData.comision;
-  const cotizacionAFP = Math.round(baseImponible * (tasaAFPTotal / 100));
+  // Salud: 7% (FONASA o Isapre, mínimo legal)
+  const cotizacionSalud = Math.round(baseImponibleMensual * 0.07);
 
-  // Cotización de salud: 7% para FONASA, mínimo 7% para Isapre
-  let cotizacionSalud: number;
-  if (salud === 'fonasa') {
-    cotizacionSalud = Math.round(baseImponible * 0.07);
-  } else {
-    // Isapre: mínimo 7% de la base imponible
-    cotizacionSalud = Math.round(baseImponible * 0.07);
-  }
+  // Mutual de seguridad (Ley 16.744): 0,9% mínimo
+  const cotizacionMutual = Math.round(baseImponibleMensual * (MUTUAL_TASA / 100));
 
-  // SIS: 1.15% de la base imponible
-  const cotizacionSIS = Math.round(baseImponible * (afpData.sis / 100));
-
-  // Total cotizaciones
-  const totalCotizaciones = cotizacionAFP + cotizacionSalud + cotizacionSIS;
+  const totalCotizaciones = cotizacionAFP + cotizacionSalud + cotizacionMutual;
 
   return {
-    rentaBruta,
-    baseImponible,
+    rentaBruta: Math.round(rentaBruta),
+    baseImponibleAnual: Math.round(baseImponibleAnual),
+    baseImponibleMensual: Math.round(baseImponibleMensual),
     cotizacionAFP,
     cotizacionSalud,
-    cotizacionSIS,
+    cotizacionMutual,
     totalCotizaciones,
+    topeImponibleMensual: Math.round(topeImponibleMensual),
+    aplicaTopeImponible,
   };
 }
 
@@ -79,14 +110,24 @@ export function calculateCotizacionIndependientes(
  * Convierte el resultado a formato de CalculatorResult[]
  */
 export function cotizacionIndependientesToResults(
-  result: CotizacionIndependientesResult
+  result: CotizacionIndependientesResult,
 ): CalculatorResult[] {
-  return [
+  const results: CalculatorResult[] = [
     { label: 'Total Cotizaciones', value: result.totalCotizaciones, format: 'CLP', highlight: true },
-    { label: 'Renta Bruta', value: result.rentaBruta, format: 'CLP' },
-    { label: 'Base Imponible (80%)', value: result.baseImponible, format: 'CLP' },
-    { label: 'Cotización AFP', value: result.cotizacionAFP, format: 'CLP' },
-    { label: 'Cotización Salud', value: result.cotizacionSalud, format: 'CLP' },
-    { label: 'Cotización SIS', value: result.cotizacionSIS, format: 'CLP' },
+    { label: 'Renta Bruta Mensual', value: result.rentaBruta, format: 'CLP' },
+    { label: 'Base Imponible Mensual (80%)', value: result.baseImponibleMensual, format: 'CLP' },
+    { label: 'Cotización AFP (10% + comisión)', value: result.cotizacionAFP, format: 'CLP' },
+    { label: 'Cotización Salud (7%)', value: result.cotizacionSalud, format: 'CLP' },
+    { label: 'Mutual de Seguridad (0,9%)', value: result.cotizacionMutual, format: 'CLP' },
   ];
+
+  if (result.aplicaTopeImponible) {
+    results.push({
+      label: 'Tope Imponible Mensual (87,8 UF)',
+      value: result.topeImponibleMensual,
+      format: 'CLP',
+    });
+  }
+
+  return results;
 }

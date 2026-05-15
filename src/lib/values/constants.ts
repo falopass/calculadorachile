@@ -125,8 +125,16 @@ export const IVA = {
 export const BOLETA_HONORARIOS = {
   tasa_base: 10,
   tasa_adicional: 5.25,
+  /** Tasa total 2026 según Ley 21.578 (calendario 14,5% → 17%). */
   tasa_total: 15.25,
   exento_minimo: 10, // UTM mensuales
+  /** Calendario completo Ley 21.578 (cotizaciones independientes). */
+  calendario: {
+    2025: 14.5,
+    2026: 15.25,
+    2027: 16,
+    2028: 17,
+  },
 };
 
 export const TOPE_IMPOSITIVO = {
@@ -190,14 +198,16 @@ export const TAG_RUTAS = {
 };
 
 // ============================================
-// Tarifa Eléctrica BT1 (Residencial) - aproximado
+// Tarifa Eléctrica BT1 (Residencial) - aproximado 2026
+// Tras Ley 21.667 (descongelamiento de tarifas), las tarifas BT1
+// están entre $165 y $220 /kWh promedio según consumo y zona.
 // ============================================
 export const TARIFA_BT1 = {
   cargoFijoCLP: 2800,
   precioEnergiaCLPKWh: 180,
   tramosConsumo: [
-    { maximoKWh: 150, precioCLPKWh: 160 },
-    { maximoKWh: 300, precioCLPKWh: 180 },
+    { maximoKWh: 150, precioCLPKWh: 165 },
+    { maximoKWh: 300, precioCLPKWh: 185 },
     { maximoKWh: Infinity, precioCLPKWh: 220 },
   ],
 };
@@ -221,15 +231,21 @@ export const BONO_BODAS_ORO = {
 };
 
 // ============================================
-// PGU 2026
+// PGU 2026 (Ley 21.735, reajuste IPC febrero 2026)
+// La PGU sube progresivamente hasta $250.000 según Ley 21.735.
+// En febrero 2026 se reajustó por IPC 2025 (aprox. +4%).
 // ============================================
 export const PGU_2026 = {
-  montoMaximo65a81CLP: 231732,
-  montoMaximo82MasCLP: 250275,
+  /** PGU base 65-81 años (febrero 2026, post-reajuste IPC). */
+  montoMaximo65a81CLP: 240931,
+  /** PGU mayorada 82+ años. */
+  montoMaximo82MasCLP: 260286,
   edadMinima: 65,
   tramos: [
-    { ingresoMaximoCLP: 789139, pguCompleta: true },
-    { ingresoMaximoCLP: 1252602, pguCompleta: false },
+    /** Pensión base hasta este monto: PGU completa. */
+    { ingresoMaximoCLP: 820704, pguCompleta: true },
+    /** Pensión base hasta este monto: PGU se reduce linealmente a 0. */
+    { ingresoMaximoCLP: 1302705, pguCompleta: false },
   ],
 };
 
