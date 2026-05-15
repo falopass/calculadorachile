@@ -125,10 +125,17 @@
 }
 
 html {
-  color-scheme: light dark;
+  /* color-scheme debe seguir al estado real del root, no anunciar
+     ambos (light dark) o el navegador pinta scrollbars / form
+     controls según el SO ignorando nuestra clase .dark. */
+  color-scheme: light;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {

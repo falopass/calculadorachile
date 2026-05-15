@@ -1,0 +1,53 @@
+name: Actualizar valores oficiales
+
+on:
+  # 12:30 UTC ≈ 08:30/09:30 hora de Chile (depende de horario verano).
+  # La UF del día ya esta disponible para esa hora en BCentral/Mindicador.
+  schedule:
+    - cron: '30 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-values
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Refrescar snapshot.json
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch valores y regenerar snapshot
+        env:
+          BCENTRAL_USER: ${{ secrets.BCENTRAL_USER }}
+          BCENTRAL_PASS: ${{ secrets.BCENTRAL_PASS }}
+        run: node scripts/update-values.mjs
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "calculachile-bot"
+          git config user.email "actions@github.com"
+
+          if git diff --quiet src/lib/values/snapshot.json; then
+            echo "No hay cambios en snapshot.json"
+            exit 0
+          fi
+
+          git add src/lib/values/snapshot.json
+          git commit -m "chore(values): actualizar snapshot diario [skip ci]"
+          git push

@@ -1,36 +1,54 @@
 // ============================================
-// CONSTANTES CHILE 2026 - Actualizar anualmente
+// CONSTANTES CHILE 2026
+// ----------------------------------------------
+// Los valores monetarios diarios (UF, UTM, dólar)
+// vienen de `snapshot.json`, que se actualiza
+// automáticamente por GitHub Action.
+//
+// Las constantes regulatorias (tasas AFP, tramos
+// de impuesto, topes legales, etc.) se mantienen
+// aquí. Actualizar manualmente cuando cambie la
+// ley o circular del SII / Superintendencia.
 // ============================================
 
+import snapshot from './snapshot.json';
+
 export const INGRESO_MINIMO = {
-  mensual: 539000,        // Ingreso mínimo mensual (desde 01/01/2026, Ley 21.630)
-  menor_18_mayor_65: 402082,  // Trabajadores menores de 18 y mayores de 65 años
-  no_remuneracional: 347434,  // Fines no remuneracionales
-  jornal: 26950,          // Ingreso mínimo diario (539000 / 20 días)
-  hora: 3593,             // Ingreso mínimo por hora (539000 / 150 horas)
-  zona_extrema: 571340,   // Zona extrema (Magallanes, Aysén) - 6% adicional aprox.
+  mensual: 539000, // Ingreso mínimo mensual (desde 01/01/2026, Ley 21.630)
+  menor_18_mayor_65: 402082,
+  no_remuneracional: 347434,
+  jornal: 26950, // 539000 / 20 días
+  hora: 3593, // 539000 / 150 horas
+  zona_extrema: 571340, // Magallanes, Aysén
 };
 
-// Estos valores son sólo de referencia para cálculos que NO usan
-// el hook `useValues()` (donde sí se obtiene el valor en vivo).
-// Mantener sincronizados con `lib/values/fallback.ts`.
-// Última revisión: 14/05/2026 (Mindicador.cl).
+// ============================================
+// Indicadores económicos (auto-actualizados)
+// ============================================
+//
+// Estos objetos exponen el último snapshot. Para acceder al valor
+// en vivo dentro de componentes React, usar `useValues()` que va
+// a /api/values y prefiere fuentes externas si responden.
+
 export const UF = {
-  valor: 40324.06,        // Valor UF 14/05/2026 (Fuente: BCentral / Mindicador)
-  fecha_actualizacion: '2026-05-14',
+  valor: snapshot.uf,
+  fecha_actualizacion: snapshot.asOf.split('T')[0],
 };
 
 export const UTM = {
-  valor: 70588,           // Valor UTM mayo 2026 (Fuente: BCentral)
-  mes: 'mayo',
-  año: 2026,
+  valor: snapshot.utm,
+  fecha_actualizacion: snapshot.asOf.split('T')[0],
 };
 
 export const DOLAR = {
-  observado: 889.19,      // Dólar observado 14/05/2026 (Fuente: BCentral / Mindicador)
-  venta: 895,             // Dólar venta (estimado +0.65%)
-  fecha_actualizacion: '2026-05-14',
+  observado: snapshot.dolarObservado,
+  venta: Math.round(snapshot.dolarObservado * 1.0065 * 100) / 100,
+  fecha_actualizacion: snapshot.asOf.split('T')[0],
 };
+
+// ============================================
+// Constantes regulatorias (manuales)
+// ============================================
 
 export const AFP = {
   capital: { nombre: 'Capital', comision: 1.44, sis: 1.15 },
@@ -39,84 +57,84 @@ export const AFP = {
   modelo: { nombre: 'Modelo', comision: 0.58, sis: 1.15 },
   planvital: { nombre: 'PlanVital', comision: 1.16, sis: 1.15 },
   provida: { nombre: 'ProVida', comision: 1.45, sis: 1.15 },
-  uno: { nombre: 'Uno', comision: 0.46, sis: 1.15 },  // 0.46% según spensiones.cl
+  uno: { nombre: 'Uno', comision: 0.46, sis: 1.15 },
 };
 
 export const SALUD = {
   fonasa: {
-    tasa: 7,              // 7% del imponible
+    tasa: 7,
     tramos: {
-      a: { nombre: 'A', cotizacion: 0 },      // Sin cotización adicional
-      b: { nombre: 'B', cotizacion: 0 },      // Sin cotización adicional
-      c: { nombre: 'C', cotizacion: 0.0067 }, // +0.67%
-      d: { nombre: 'D', cotizacion: 0.0204 }, // +2.04%
+      a: { nombre: 'A', cotizacion: 0 },
+      b: { nombre: 'B', cotizacion: 0 },
+      c: { nombre: 'C', cotizacion: 0.0067 },
+      d: { nombre: 'D', cotizacion: 0.0204 },
     },
   },
   isapre: {
-    tasa_minima: 7,       // Mínimo 7%
-    // Las isapres tienen planes específicos por persona
+    tasa_minima: 7,
   },
-  tope_imponible: 141.8,  // UF
+  tope_imponible: 141.8, // UF
 };
 
 export const SEGURO_CESANTIA = {
   contrato_indefinido: {
-    trabajador: 0.6,      // 0.6%
-    empleador: 2.4,       // 2.4%
+    trabajador: 0.6,
+    empleador: 2.4,
   },
   contrato_plazo_fijo: {
-    trabajador: 0,        // 0%
-    empleador: 3.0,       // 3%
+    trabajador: 0,
+    empleador: 3.0,
   },
-  tope_imponible: 117.2,  // UF
+  tope_imponible: 117.2, // UF
 };
 
 export const GRATIFICACION = {
-  porcentaje: 25,         // 25% de remuneración
-  tope_475_inm: 4.75,     // 4.75 ingresos mínimos
+  porcentaje: 25,
+  tope_475_inm: 4.75,
 };
 
 export const HORAS_EXTRA = {
-  recargo_normal: 50,     // 50% recargo
-  recargo_domingo: 100,   // 100% recargo domingo/festivo
-  tope_semanal: 2,        // Máximo 2 horas extra diarias (promedio semanal)
+  recargo_normal: 50,
+  recargo_domingo: 100,
+  tope_semanal: 2,
 };
 
 export const INDEMNIZACION = {
-  dias_por_año: 30,       // 30 días por año
-  tope_años: 11,          // Máximo 11 años
+  dias_por_año: 30,
+  tope_años: 11,
 };
 
 export const VACACIONES = {
-  dias_anuales: 15,       // 15 días hábiles
-  dias_progresivos: 1,    // +1 día por cada 3 años después del 10° año
-  tope_progresivos: 5,    // Máximo 5 días adicionales
+  dias_anuales: 15,
+  dias_progresivos: 1,
+  tope_progresivos: 5,
 };
 
 export const PENSION_ALIMENTICIA = {
   tramos: [
-    { min: 0, max: 1, porcentaje: 40 },      // 1 hijo: 40%
-    { min: 1, max: 4, porcentaje: 30 },      // 2-4 hijos: 30% por hijo
-    { min: 4, max: Infinity, porcentaje: 30 }, // 5+ hijos: 30% por hijo
+    { min: 0, max: 1, porcentaje: 40 },
+    { min: 1, max: 4, porcentaje: 30 },
+    { min: 4, max: Infinity, porcentaje: 30 },
   ],
 };
 
 export const IVA = {
-  tasa: 19,               // 19%
+  tasa: 19,
 };
 
 export const BOLETA_HONORARIOS = {
-  tasa_base: 10,          // 10% retención base
-  tasa_adicional: 5.25,   // 5.25% adicional (total 15.25%)
-  tasa_total: 15.25,      // 15.25% total
-  exento_minimo: 10,      // Exento hasta 10 UTM mensuales
+  tasa_base: 10,
+  tasa_adicional: 5.25,
+  tasa_total: 15.25,
+  exento_minimo: 10, // UTM mensuales
 };
 
 export const TOPE_IMPOSITIVO = {
-  afp_salud: 141.8,       // UF
+  afp_salud: 141.8, // UF
   seguro_cesantia: 117.2, // UF
-  gratificacion: 90,      // UF
+  gratificacion: 90, // UF
 };
+
 export const IMPUESTO_SEGUNDA_CATEGORIA = {
   tramos: [
     { desde: 0, hasta: 13.5, exento: 0, factor: 0, rebaja: 0 },
@@ -130,18 +148,15 @@ export const IMPUESTO_SEGUNDA_CATEGORIA = {
   ],
 };
 
-// ===========================================
-// UTA (Unidad Tributaria Anual)
-// ===========================================
-// UTA = 12 x UTM
-export const UTA_2026 = UTM.valor * 12; // ~$847.056 con UTM mayo 2026
+// UTA = 12 × UTM (derivado del snapshot)
+export const UTA_2026 = UTM.valor * 12;
 
-// ===========================================
+// ============================================
 // Subsidio Habitacional DS49 / DS01
-// ===========================================
+// ============================================
 export const SUBSIDIO_HABITACIONAL = {
   ds49: {
-    montoMaximoUF: 450, // Valor aproximado en UF
+    montoMaximoUF: 450,
     tramo1: { ingresoMaximoUF: 12, subsidioMaximoUF: 450 },
     tramo2: { ingresoMaximoUF: 18, subsidioMaximoUF: 380 },
     tramo3: { ingresoMaximoUF: 24, subsidioMaximoUF: 310 },
@@ -153,45 +168,33 @@ export const SUBSIDIO_HABITACIONAL = {
   },
 };
 
-// ===========================================
+// ============================================
 // Subsidio al Agua Potable
-// ===========================================
+// ============================================
 export const SUBSIDIO_AGUA = {
-  montoMaximoCLP: 14000, // Aproximado mensual
-  porcentajeSubsidio: 0.60, // 60% del consumo
+  montoMaximoCLP: 14000,
+  porcentajeSubsidio: 0.6,
   tramos: [
-    { consumoMaximoM3: 15, subsidio: 0.60 },
-    { consumoMaximoM3: 25, subsidio: 0.40 },
+    { consumoMaximoM3: 15, subsidio: 0.6 },
+    { consumoMaximoM3: 25, subsidio: 0.4 },
   ],
 };
 
-// ===========================================
-// Costo TAG (Telepeaje)
-// ===========================================
+// ============================================
+// Costo TAG (Telepeaje) - aproximado
+// ============================================
 export const TAG_RUTAS = {
-  'santiago-rancagua': {
-    categoria1: 3500, // Auto liviano
-    categoria2: 5200, // Camión 2 ejes
-    categoria3: 7800, // Camión 3+ ejes
-  },
-  'santiago-valparaiso': {
-    categoria1: 4200,
-    categoria2: 6300,
-    categoria3: 9500,
-  },
-  'santiago-losandes': {
-    categoria1: 3800,
-    categoria2: 5700,
-    categoria3: 8600,
-  },
+  'santiago-rancagua': { categoria1: 3500, categoria2: 5200, categoria3: 7800 },
+  'santiago-valparaiso': { categoria1: 4200, categoria2: 6300, categoria3: 9500 },
+  'santiago-losandes': { categoria1: 3800, categoria2: 5700, categoria3: 8600 },
 };
 
-// ===========================================
-// Tarifa Eléctrica BT1 (Residencial)
-// ===========================================
+// ============================================
+// Tarifa Eléctrica BT1 (Residencial) - aproximado
+// ============================================
 export const TARIFA_BT1 = {
-  cargoFijoCLP: 2800, // Cargo fijo mensual aproximado
-  precioEnergiaCLPKWh: 180, // Precio por kWh (promedio)
+  cargoFijoCLP: 2800,
+  precioEnergiaCLPKWh: 180,
   tramosConsumo: [
     { maximoKWh: 150, precioCLPKWh: 160 },
     { maximoKWh: 300, precioCLPKWh: 180 },
@@ -199,11 +202,11 @@ export const TARIFA_BT1 = {
   ],
 };
 
-// ===========================================
+// ============================================
 // Bono Bodas de Oro (Ley 21.674)
-// ===========================================
+// ============================================
 export const BONO_BODAS_ORO = {
-  montoCLP: 150000, // Monto aproximado
+  montoCLP: 150000,
   requisitos: [
     'Tener 65 años o más',
     'Estar casado o en unión civil',
@@ -211,33 +214,31 @@ export const BONO_BODAS_ORO = {
   ],
 };
 
-// ===========================================
-// PGU (Pensión Garantizada Universal)
-// ===========================================
+// ============================================
+// PGU 2026
+// ============================================
 export const PGU_2026 = {
-  // Reforma previsional: montos diferenciados por edad
-  montoMaximo65a81CLP: 231732,   // 65-81 años (feb 2026)
-  montoMaximo82MasCLP: 250275,   // 82+ años (feb 2026)
+  montoMaximo65a81CLP: 231732,
+  montoMaximo82MasCLP: 250275,
   edadMinima: 65,
   tramos: [
-    { ingresoMaximoCLP: 789139, pguCompleta: true },    // Pensión base hasta $789.139
-    { ingresoMaximoCLP: 1252602, pguCompleta: false },  // $789.139 - $1.252.602 (variable)
+    { ingresoMaximoCLP: 789139, pguCompleta: true },
+    { ingresoMaximoCLP: 1252602, pguCompleta: false },
   ],
 };
 
-// ===========================================
-// Asignación Familiar
-// ===========================================
+// ============================================
+// Asignación Familiar 2026 (Ley 21.751)
+// ============================================
 export const ASIGNACION_FAMILIAR_2026 = {
-  // Ley 21.751: Reducido de 5 a 3 tramos desde enero 2026
-  tramoA: { ingresoMaximoCLP: 631976, montoPorCargaCLP: 22007 },   // Hasta $631.976
-  tramoB: { ingresoMaximoCLP: 923067, montoPorCargaCLP: 13505 },   // $631.977 - $923.067
-  tramoC: { ingresoMaximoCLP: 1439668, montoPorCargaCLP: 4267 },   // $923.068 - $1.439.668
+  tramoA: { ingresoMaximoCLP: 631976, montoPorCargaCLP: 22007 },
+  tramoB: { ingresoMaximoCLP: 923067, montoPorCargaCLP: 13505 },
+  tramoC: { ingresoMaximoCLP: 1439668, montoPorCargaCLP: 4267 },
 };
 
-// ===========================================
-// Impuesto Segunda Categoría 2026
-// ===========================================
+// ============================================
+// Impuesto 2ª Categoría 2026 (alternativa por UTA)
+// ============================================
 export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
   tramos: [
     { limiteInferiorUTA: 0, limiteSuperiorUTA: 8, tasa: 0, factor: 0 },
@@ -251,11 +252,11 @@ export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
   ],
 };
 
-// ===========================================
+// ============================================
 // Aguinaldo
-// ===========================================
+// ============================================
 export const AGUINALDO_2026 = {
-  fiestas_patrias: 35000,  // Monto para aguinaldo de Fiestas Patrias
-  navidad: 35000,          // Monto para aguinaldo de Navidad
-  escolar: 20000,          // Monto para aguinaldo escolar
+  fiestas_patrias: 35000,
+  navidad: 35000,
+  escolar: 20000,
 };

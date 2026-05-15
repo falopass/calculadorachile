@@ -2,10 +2,33 @@
 // Tipos compartidos para calculadoras
 // ============================================
 
+/**
+ * Unidad explícita de un input numérico.
+ *
+ * Antes el shell deducía la unidad del label haciendo
+ * `label.includes('sueldo')`, `label.includes('UF')`, etc. Era
+ * frágil y agregaba 60 keywords hardcoded. Ahora cada input
+ * declara su unidad explícitamente.
+ */
+export type CalculatorInputUnit =
+  | 'CLP'
+  | 'UF'
+  | 'UTM'
+  | 'percent'
+  | 'years'
+  | 'months'
+  | 'days'
+  | 'kWh'
+  | 'count' // cantidad sin unidad (ej. nº de hijos)
+  | 'm2'
+  | 'm3';
+
 export interface CalculatorInput {
   id: string;
   label: string;
   type: 'number' | 'text' | 'select' | 'boolean';
+  /** Unidad de medida (sólo para inputs numéricos). */
+  unit?: CalculatorInputUnit;
   placeholder?: string;
   required?: boolean;
   min?: number;

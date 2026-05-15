@@ -99,12 +99,17 @@ export const viewport: Viewport = {
 };
 
 // Anti-FOUC: aplica el tema antes de la primera pintura.
+// Lee la preferencia explícita del usuario (localStorage) o, si está
+// en 'system'/no hay valor, sigue al sistema operativo (prefers-color-scheme).
 const themeInitScript = `
 (function() {
   try {
-    var t = localStorage.getItem('theme');
-    var dark = t === 'dark' || ((!t || t === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var stored = localStorage.getItem('theme');
+    var pref = (stored === 'light' || stored === 'dark' || stored === 'system') ? stored : 'system';
+    var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var dark = pref === 'dark' || (pref === 'system' && sysDark);
     document.documentElement.classList.toggle('dark', dark);
+    document.documentElement.dataset.theme = pref;
   } catch (e) {}
 })();
 `;

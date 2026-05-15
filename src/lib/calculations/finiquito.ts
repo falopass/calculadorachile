@@ -121,26 +121,38 @@ function calcularVacacionesProporcionales(
 }
 
 /**
- * Calcula gratificación proporcional
- * Aplica si el contrato contempla gratificación
+ * Calcula la gratificación proporcional pendiente.
+ *
+ * Base legal: Art. 50 del Código del Trabajo. La gratificación legal
+ * es ANUAL, equivalente al 25% del sueldo o al tope de 4,75 ingresos
+ * mínimos mensuales (lo menor). Cuando el contrato termina antes del
+ * cierre del año, se paga proporcional a los meses trabajados de ese
+ * año.
+ *
+ * Bug histórico: la versión anterior multiplicaba la gratificación
+ * mensual por los meses trabajados, sobreestimando por factor 12 (un
+ * trabajador con 6 meses recibía 6 veces la gratificación mensual,
+ * cuando debería ser ~6/12 del aporte anual).
  */
 function calcularGratificacionProporcional(
   ultimoSueldo: number,
   mesesTrabajados: number,
-  tieneGratificacion: boolean
+  tieneGratificacion: boolean,
 ): number {
-  if (!tieneGratificacion) {
-    return 0;
-  }
-  
-  // Gratificación mensual (25% del sueldo, tope 4.75 IMM)
-  const gratificacionMensual = Math.min(
-    ultimoSueldo * (GRATIFICACION.porcentaje / 100),
-    (INGRESO_MINIMO.mensual * GRATIFICACION.tope_475_inm) / 12
-  );
-  
-  // Proporcional a meses trabajados
-  return (gratificacionMensual / 30) * (mesesTrabajados * 30); // Convertimos meses a días
+  if (!tieneGratificacion || mesesTrabajados <= 0) return 0;
+
+  // Tope anual: 4,75 IMM (tope_475_inm × ingreso mínimo mensual).
+  const topeAnual = INGRESO_MINIMO.mensual * GRATIFICACION.tope_475_inm;
+
+  // 25% del sueldo bruto anualizado.
+  const gratificacionAnualPorPorcentaje = ultimoSueldo * 12 * (GRATIFICACION.porcentaje / 100);
+
+  // Aporte legal: el menor entre 25% anual y el tope.
+  const gratificacionAnual = Math.min(gratificacionAnualPorPorcentaje, topeAnual);
+
+  // Proporcional a meses trabajados (max 12).
+  const meses = Math.min(mesesTrabajados, 12);
+  return (gratificacionAnual / 12) * meses;
 }
 
 /**

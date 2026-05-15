@@ -31,7 +31,28 @@ export interface PremiumCalculatorShellProps {
    Helpers (puros)
    ============================================ */
 
+const UNIT_TO_PREFIX: Partial<Record<NonNullable<CalculatorInputType['unit']>, string>> = {
+  CLP: '$',
+};
+
+const UNIT_TO_SUFFIX: Partial<Record<NonNullable<CalculatorInputType['unit']>, string>> = {
+  UF: 'UF',
+  UTM: 'UTM',
+  percent: '%',
+  years: 'años',
+  months: 'meses',
+  days: 'días',
+  kWh: 'kWh',
+  m2: 'm²',
+  m3: 'm³',
+};
+
 function getInputPrefix(input: CalculatorInputType): string | undefined {
+  // Preferimos la unidad explícita si está declarada.
+  if (input.unit && UNIT_TO_PREFIX[input.unit]) return UNIT_TO_PREFIX[input.unit];
+  if (input.unit) return undefined; // unidad declarada pero sin prefijo (UF, %, etc.)
+
+  // Fallback heurístico para calculadoras que aún no migran a `unit`.
   const text = `${input.label} ${input.id}`.toLowerCase();
   const moneyKeywords = [
     'sueldo',
@@ -96,9 +117,13 @@ function getInputPrefix(input: CalculatorInputType): string | undefined {
 }
 
 function getInputSuffix(input: CalculatorInputType): string | undefined {
+  if (input.unit && UNIT_TO_SUFFIX[input.unit]) return UNIT_TO_SUFFIX[input.unit];
+  if (input.unit) return undefined;
+
+  // Fallback heurístico
   const text = `${input.label} ${input.id}`.toLowerCase();
-  if (text.includes('uf')) return 'UF';
-  if (text.includes('utm')) return 'UTM';
+  if (text.includes(' uf') || text.endsWith('uf') || text.includes('en uf')) return 'UF';
+  if (text.includes(' utm') || text.endsWith('utm') || text.includes('en utm')) return 'UTM';
   if (text.includes('tasa') || text.includes('porcentaje') || text.includes('%')) return '%';
   if (text.includes('año') || text.includes('plazo')) return 'años';
   if (text.includes('mes')) return 'meses';
