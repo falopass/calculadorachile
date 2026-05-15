@@ -18,13 +18,13 @@ export default function HomeCTA() {
             <h2 className="heading-display text-3xl md:text-5xl text-white">
               Calcula lo que necesitas. Ahora.
             </h2>
-            <p className="mt-4 text-base md:text-lg text-white/80 max-w-xl mx-auto">
+            <p className="mt-4 text-base md:text-lg text-white/90 max-w-xl mx-auto">
               Más de 40 herramientas listas para usar. Sin login. Sin pagos. Sin esperas.
             </p>
             <div className="mt-8">
               <Link
                 href="/calculadoras"
-                className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--color-primary-700)] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--color-primary-700)] shadow-lg hover:bg-white/95 hover:-translate-y-0.5 transition-all"
               >
                 Ver todas las calculadoras
                 <ArrowRight className="h-4 w-4" />

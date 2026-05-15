@@ -56,7 +56,7 @@ export default function HomeHero() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/calculadoras/sueldo-liquido"
+              href="/calculadoras/calculadora-sueldo-liquido"
               className="btn-secondary px-5 py-3 text-base"
             >
               Calcular sueldo líquido

@@ -6,11 +6,11 @@ const footerLinks = {
   calculadoras: {
     title: 'Calculadoras',
     links: [
-      { href: '/calculadoras/sueldo-liquido', label: 'Sueldo Líquido' },
-      { href: '/calculadoras/finiquito', label: 'Finiquito' },
-      { href: '/calculadoras/uf-clp', label: 'Conversor UF' },
-      { href: '/calculadoras/iva', label: 'IVA' },
-      { href: '/calculadoras/horas-extra', label: 'Horas Extra' },
+      { href: '/calculadoras/calculadora-sueldo-liquido', label: 'Sueldo Líquido' },
+      { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
+      { href: '/calculadoras/calculadora-uf-clp', label: 'Conversor UF' },
+      { href: '/calculadoras/calculadora-iva', label: 'IVA' },
+      { href: '/calculadoras/calculadora-horas-extra', label: 'Horas Extra' },
       { href: '/calculadoras', label: 'Ver todas →' },
     ],
   },

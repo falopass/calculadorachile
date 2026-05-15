@@ -9,15 +9,18 @@ import CalculatorCard from './CalculatorCard';
  */
 export default function PopularCalculators() {
   // Selección curada de las que más uso tienen
+  // Usamos los slugs reales (con prefijo `calculadora-`) tal como
+  // los expone src/data/calculators.ts. Cualquier inconsistencia aquí
+  // genera 404 en producción.
   const popularSlugs = [
-    'sueldo-liquido',
-    'finiquito',
-    'uf-clp',
-    'iva',
-    'credito-hipotecario',
-    'horas-extra',
-    'vacaciones-proporcionales',
-    'boleta-honorarios',
+    'calculadora-sueldo-liquido',
+    'calculadora-finiquito',
+    'calculadora-uf-clp',
+    'calculadora-iva',
+    'calculadora-credito-hipotecario',
+    'calculadora-horas-extra',
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-boleta-honorarios',
   ];
 
   const popular = popularSlugs

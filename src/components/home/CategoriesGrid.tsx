@@ -13,59 +13,65 @@ import {
 import { calculators } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
 
-const CATEGORY_META: Partial<
-  Record<
-    Calculator['category'],
-    { label: string; icon: typeof TrendingUp; description: string; accent: string }
-  >
-> = {
+interface CategoryMeta {
+  label: string;
+  icon: typeof TrendingUp;
+  description: string;
+  /**
+   * Clases para el ícono (texto + bg). Sólidas para garantizar contraste
+   * AA en ambos modos. El fondo de la tarjeta queda neutro.
+   */
+  iconClass: string;
+}
+
+const CATEGORY_META: Partial<Record<Calculator['category'], CategoryMeta>> = {
   sueldo: {
     label: 'Sueldo y remuneraciones',
     icon: TrendingUp,
     description: 'Sueldo líquido, finiquito, horas extra, gratificación.',
-    accent: 'from-emerald-500/15 to-teal-500/5',
+    iconClass: 'text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-500/15',
   },
   impuestos: {
     label: 'Impuestos',
     icon: Receipt,
     description: 'IVA, boleta de honorarios, segunda categoría, PPM.',
-    accent: 'from-blue-500/15 to-indigo-500/5',
+    iconClass: 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-500/15',
   },
   beneficios: {
     label: 'Beneficios laborales',
     icon: Gift,
     description: 'Vacaciones, indemnizaciones, asignación familiar.',
-    accent: 'from-purple-500/15 to-violet-500/5',
+    iconClass: 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-500/15',
   },
   conversiones: {
     label: 'Conversores',
     icon: RefreshCw,
     description: 'UF a CLP, UTM a CLP, divisas y más.',
-    accent: 'from-cyan-500/15 to-sky-500/5',
+    iconClass: 'text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-500/15',
   },
   vivienda: {
     label: 'Vivienda',
     icon: Home,
     description: 'Crédito hipotecario, contribuciones, gastos comunes.',
-    accent: 'from-orange-500/15 to-amber-500/5',
+    iconClass: 'text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-500/15',
   },
   vehiculos: {
     label: 'Vehículos',
     icon: Car,
     description: 'Permiso de circulación, crédito automotriz, TAG.',
-    accent: 'from-rose-500/15 to-red-500/5',
+    iconClass: 'text-rose-600 dark:text-rose-400 bg-rose-100 dark:bg-rose-500/15',
   },
   pension: {
     label: 'Pensiones',
     icon: Landmark,
     description: 'Comparador AFP, simulador APV, PGU.',
-    accent: 'from-indigo-500/15 to-blue-500/5',
+    iconClass: 'text-indigo-600 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-500/15',
   },
   empresas: {
     label: 'Empresas',
     icon: Building2,
     description: 'Costo empleado, patente comercial, PPM.',
-    accent: 'from-slate-500/15 to-zinc-500/5',
+    iconClass: 'text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-500/15',
   },
 };
 
@@ -82,10 +88,10 @@ export default function CategoriesGrid() {
     .sort((a, b) => (counts[b] ?? 0) - (counts[a] ?? 0));
 
   return (
-    <section className="section bg-[var(--background-secondary)]/50">
+    <section className="section bg-[var(--background-secondary)]/50 border-y border-[var(--border)]">
       <div className="container-base">
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
-          <h2 className="heading-display text-3xl md:text-4xl">
+          <h2 className="heading-display text-3xl md:text-4xl text-[var(--foreground)]">
             Explora por categoría
           </h2>
           <p className="mt-2 text-[var(--foreground-secondary)]">
@@ -102,29 +108,25 @@ export default function CategoriesGrid() {
               <Link
                 key={cat}
                 href={`/calculadoras#${cat}`}
-                className="group relative card overflow-hidden p-5 hover:border-[var(--border-hover)] hover:shadow-md transition-all"
+                className="group flex flex-col h-full p-5 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--color-primary-500)]/50 hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)]/40"
               >
-                <div
-                  aria-hidden
-                  className={`absolute inset-0 bg-gradient-to-br ${meta.accent} opacity-50 group-hover:opacity-100 transition-opacity`}
-                />
-                <div className="relative">
-                  <div className="flex items-start justify-between">
-                    <span className="grid h-10 w-10 place-items-center rounded-lg bg-[var(--surface)] border border-[var(--border)] text-[var(--foreground)] shadow-sm">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-[var(--foreground-muted)] group-hover:text-[var(--foreground)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold text-[var(--foreground)]">
-                    {meta.label}
-                  </h3>
-                  <p className="mt-1 text-sm text-[var(--foreground-secondary)] line-clamp-2">
-                    {meta.description}
-                  </p>
-                  <p className="mt-3 text-xs font-medium text-[var(--foreground-muted)]">
-                    {count} {count === 1 ? 'calculadora' : 'calculadoras'}
-                  </p>
+                <div className="flex items-start justify-between gap-3">
+                  <span
+                    className={`inline-grid h-10 w-10 place-items-center rounded-lg transition-transform group-hover:scale-105 ${meta.iconClass}`}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={2.25} />
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-[var(--foreground-muted)] opacity-0 group-hover:opacity-100 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
                 </div>
+                <h3 className="mt-4 text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--color-primary-600)] dark:group-hover:text-[var(--color-primary-400)] transition-colors">
+                  {meta.label}
+                </h3>
+                <p className="mt-1 text-sm text-[var(--foreground-secondary)] leading-relaxed line-clamp-2">
+                  {meta.description}
+                </p>
+                <p className="mt-4 text-xs font-medium text-[var(--foreground-muted)]">
+                  {count} {count === 1 ? 'calculadora' : 'calculadoras'}
+                </p>
               </Link>
             );
           })}
