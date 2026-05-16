@@ -146,12 +146,26 @@ export default function CalculatorsCatalog({ groups }: CalculatorsCatalogProps) 
         <div className="space-y-12">
           {visibleGroups.map((g) => (
             <div key={g.category} id={g.category} className="scroll-mt-24">
-              <h2 className="text-lg font-semibold text-[var(--foreground)] mb-4">
-                {g.label}
-                <span className="ml-2 text-sm font-normal text-[var(--foreground-muted)]">
-                  {g.items.length}
-                </span>
-              </h2>
+              <div className="mb-4 flex items-end justify-between gap-4">
+                <h2 className="text-lg font-semibold text-[var(--foreground)]">
+                  {g.label}
+                  <span className="ml-2 text-sm font-normal text-[var(--foreground-muted)]">
+                    {g.items.length}
+                  </span>
+                </h2>
+                {/*
+                  Link a la página de categoría dedicada (/categoria/<id>).
+                  Le da una salida natural al usuario que quiere ver SOLO
+                  esa categoría, y refuerza el linking interno hacia las
+                  landing pages long-tail.
+                */}
+                <a
+                  href={`/categoria/${g.category}`}
+                  className="text-xs font-medium text-[var(--color-primary-600)] hover:underline whitespace-nowrap"
+                >
+                  Ver categoría →
+                </a>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                 {g.items.map((calc, i) => (
                   <CalculatorCard key={calc.id} calculator={calc} index={i} />

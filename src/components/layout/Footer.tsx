@@ -29,6 +29,8 @@ const footerLinks = {
     title: 'Recursos',
     links: [
       { href: '/blog', label: 'Blog' },
+      { href: '/categoria', label: 'Categorías' },
+      { href: '/buscar', label: 'Buscar' },
       { href: '/faq', label: 'Preguntas frecuentes' },
       { href: '/equipo', label: 'Equipo' },
     ],

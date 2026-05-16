@@ -22,6 +22,7 @@ import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
 import { guias } from '@/data/guias';
 import { SITE_URL } from '@/lib/site';
+import { CALCULATOR_CATEGORY_LIST } from '@/lib/calculatorCategories';
 
 // Prioridades por categoría de calculadora (heurística por demanda
 // de búsqueda en Chile).
@@ -74,6 +75,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [`${SITE_URL}/guias/${g.slug}/opengraph-image`],
   }));
 
+  // Páginas de categoría: una por categoría de calculadora con
+  // calculadoras asignadas. Prioridad media-alta porque agregan
+  // landing pages long-tail "calculadoras de <X>" pero no son
+  // contenido único profundo (heredan de las calculadoras).
+  const categoryCounts = calculators.reduce<Record<string, number>>(
+    (acc, c) => {
+      acc[c.category] = (acc[c.category] ?? 0) + 1;
+      return acc;
+    },
+    {},
+  );
+  const categoryPages: MetadataRoute.Sitemap = CALCULATOR_CATEGORY_LIST
+    .filter((cat) => (categoryCounts[cat.id] ?? 0) > 0)
+    .map((cat) => ({
+      url: `${SITE_URL}/categoria/${cat.id}`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    }));
+
   // Páginas estáticas
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -89,6 +110,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.95,
       images: [`${SITE_URL}/og-image.png`],
+    },
+    {
+      url: `${SITE_URL}/categoria`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${SITE_URL}/blog`,
@@ -134,5 +161,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...staticPages, ...calculatorPages, ...guiasPages, ...blogPages];
+  // /buscar NO se incluye: la página tiene noindex y agregarla al
+  // sitemap es contraproducente (Google la rechazaría como
+  // "indexed but blocked", confundiendo el crawl budget).
+
+  return [
+    ...staticPages,
+    ...categoryPages,
+    ...calculatorPages,
+    ...guiasPages,
+    ...blogPages,
+  ];
 }

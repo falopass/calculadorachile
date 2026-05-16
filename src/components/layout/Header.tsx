@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Menu, X, Calculator, Sun, Moon, Monitor } from 'lucide-react';
+import { Menu, X, Calculator, Sun, Moon, Monitor, Search } from 'lucide-react';
+
+import SiteSearch from '@/components/search/SiteSearch';
 
 type Theme = 'light' | 'dark' | 'system';
 
@@ -146,12 +148,39 @@ function ThemeToggle() {
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Atajo de teclado: "/" o "Cmd/Ctrl+K" abren la búsqueda.
+  // Convención común (GitHub, Vercel, Linear) — usuarios power la
+  // descubren rápido y no estorba a quienes no la conocen.
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Ignorar si el usuario está tipeando en otro input.
+      const t = e.target as HTMLElement | null;
+      const isTyping =
+        t &&
+        (t.tagName === 'INPUT' ||
+          t.tagName === 'TEXTAREA' ||
+          t.isContentEditable);
+      if (!isTyping && e.key === '/') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+      if (e.key === 'Escape') setSearchOpen(false);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
   }, []);
 
   return (
@@ -195,6 +224,24 @@ export default function Header() {
 
         {/* Right actions */}
         <div className="flex items-center gap-1.5">
+          {/*
+            Botón de búsqueda. En desktop muestra atajo "/" para
+            descoberir el shortcut. En mobile sólo el ícono.
+          */}
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Buscar en el sitio"
+            className="inline-flex items-center gap-2 h-9 px-2 sm:px-3 rounded-lg text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:bg-[var(--background-secondary)] transition-colors"
+          >
+            <Search className="h-4 w-4" />
+            <kbd
+              aria-hidden
+              className="hidden md:inline-flex items-center justify-center min-w-[20px] h-5 px-1 text-[10px] font-mono font-medium rounded border border-[var(--border)] text-[var(--foreground-muted)] bg-[var(--background-secondary)]"
+            >
+              /
+            </kbd>
+          </button>
           <ThemeToggle />
           <Link href="/calculadoras" className="hidden sm:inline-flex btn-primary">
             Calcular ahora
@@ -210,6 +257,38 @@ export default function Header() {
           </button>
         </div>
       </nav>
+
+      {/*
+        Overlay de búsqueda. Se posiciona sobre todo, con un backdrop
+        oscuro. Cierra al hacer click fuera, presionar Escape o
+        seleccionar un resultado (que navega a otra página).
+      */}
+      {searchOpen && (
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Buscar en el sitio"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/40 backdrop-blur-sm"
+          onClick={() => setSearchOpen(false)}
+        >
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+          <div
+            className="w-full max-w-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <SiteSearch
+              variant="overlay"
+              // eslint-disable-next-line jsx-a11y/no-autofocus -- intencional: foco automático al abrir el overlay es la UX esperada (Cmd+K, "/").
+              autoFocus
+              maxResults={20}
+            />
+            <p className="mt-3 text-center text-xs text-[var(--foreground-muted)]">
+              Esc para cerrar · Enter para ver todos los resultados
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Mobile nav */}
       {mobileOpen && (

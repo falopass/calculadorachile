@@ -20,6 +20,7 @@ import {
   collectionPageSchema,
   breadcrumbSchema,
 } from '@/lib/seo/schema';
+import { CATEGORY_LABELS } from '@/lib/calculatorCategories';
 
 const PAGE_TITLE = 'Catálogo de calculadoras de Chile 2026';
 const PAGE_DESC = `Catálogo completo de ${calculators.length} calculadoras laborales, tributarias y financieras de Chile: sueldo líquido, finiquito, UF, IVA, crédito hipotecario, AFP, permiso de circulación y más. Gratis, sin registro, actualizadas a 2026.`;
@@ -43,21 +44,6 @@ export const metadata: Metadata = buildPageMetadata({
     'calculadoras gratuitas chile',
   ],
 });
-
-const CATEGORY_LABELS: Record<Calculator['category'], string> = {
-  sueldo: 'Sueldo y remuneraciones',
-  impuestos: 'Impuestos',
-  beneficios: 'Beneficios laborales',
-  conversiones: 'Conversores',
-  familia: 'Familia',
-  vivienda: 'Vivienda',
-  vehiculos: 'Vehículos',
-  empresas: 'Empresas',
-  servicios: 'Servicios',
-  pension: 'Pensiones',
-  educacion: 'Educación',
-  hogar: 'Hogar',
-};
 
 export default function CalculadorasPage() {
   const url = absoluteUrl('/calculadoras');

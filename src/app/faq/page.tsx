@@ -12,10 +12,11 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { HelpCircle } from 'lucide-react';
+import { HelpCircle, List } from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import FAQ from '@/components/calculator/FAQ';
+import TocSticky from '@/components/article/TocSticky';
 import JsonLd from '@/components/seo/JsonLd';
 import {
   faqPageSchema,
@@ -203,7 +204,7 @@ export default function FAQPage() {
           ]}
         />
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--color-primary-500)]/10 mb-4">
@@ -212,83 +213,140 @@ export default function FAQPage() {
             <h1 className="heading-display text-3xl md:text-4xl text-[var(--foreground)] mb-3">
               Preguntas frecuentes
             </h1>
-            <p className="text-lg text-[var(--foreground-secondary)] leading-relaxed">
+            <p className="text-lg text-[var(--foreground-secondary)] leading-relaxed max-w-2xl mx-auto">
               Respuestas concretas con bases legales, fórmulas y ejemplos en pesos
               chilenos. Si no encuentras tu pregunta, escríbenos.
             </p>
           </div>
 
-          {/* Grupos de preguntas */}
-          <div className="space-y-10">
-            {faqGroups.map((group) => (
-              <section key={group.id} aria-labelledby={`faq-${group.id}`}>
-                <h2
-                  id={`faq-${group.id}`}
-                  className="text-xl font-bold text-[var(--foreground)] mb-4"
+          {/*
+            Grid responsive: en >=lg, TOC sticky a la izquierda
+            (3 cols) y contenido a la derecha (8 cols con offset
+            de 1). En mobile, TOC arriba como bloque colapsable.
+          */}
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* TOC sticky / collapsible */}
+            <aside className="lg:col-span-3 order-1">
+              <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
+                {/* Mobile: collapsible */}
+                <details
+                  className="lg:hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 mb-6"
+                  open
                 >
-                  {group.title}
+                  <summary className="cursor-pointer flex items-center gap-2 text-sm font-semibold text-[var(--foreground)] uppercase tracking-wide select-none">
+                    <List className="w-4 h-4" />
+                    En esta página
+                  </summary>
+                  <ol className="mt-3 space-y-1 list-none">
+                    {faqGroups.map((group, idx) => (
+                      <li key={group.id}>
+                        <a
+                          href={`#faq-${group.id}`}
+                          className="toc-link block"
+                        >
+                          <span className="text-[var(--foreground-muted)] mr-2 tabular-nums">
+                            {String(idx + 1).padStart(2, '0')}
+                          </span>
+                          {group.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+                {/* Desktop: scroll-spy TOC */}
+                <div className="hidden lg:block">
+                  <TocSticky
+                    items={faqGroups.map((g) => ({
+                      id: `faq-${g.id}`,
+                      title: g.title,
+                    }))}
+                    title="En esta página"
+                  />
+                </div>
+              </div>
+            </aside>
+
+            {/* Contenido */}
+            <div className="lg:col-span-8 lg:col-start-5 order-2 max-w-3xl">
+              {/* Grupos de preguntas */}
+              <div className="space-y-10">
+                {faqGroups.map((group) => (
+                  <section
+                    key={group.id}
+                    id={`faq-${group.id}`}
+                    aria-labelledby={`faq-${group.id}-heading`}
+                    className="scroll-mt-24"
+                  >
+                    <h2
+                      id={`faq-${group.id}-heading`}
+                      className="text-xl font-bold text-[var(--foreground)] mb-4"
+                    >
+                      {group.title}
+                    </h2>
+                    {/*
+                      emitSchema={false} para evitar duplicar el FAQPage
+                      schema global. Cada grupo solo necesita el componente
+                      visual.
+                    */}
+                    <FAQ items={group.items} emitSchema={false} />
+                  </section>
+                ))}
+              </div>
+
+              {/* Contact CTA */}
+              <div className="mt-12 p-6 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] text-center">
+                <h2 className="text-lg font-semibold text-[var(--foreground)] mb-2">
+                  ¿No encontraste tu pregunta?
                 </h2>
-                {/*
-                  emitSchema={false} para evitar duplicar el FAQPage schema
-                  global. Cada grupo solo necesita el componente visual.
-                */}
-                <FAQ items={group.items} emitSchema={false} />
-              </section>
-            ))}
-          </div>
+                <p className="text-sm text-[var(--foreground-secondary)] mb-4">
+                  Escríbenos y respondemos en 24-48 horas hábiles.
+                </p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-500)] text-white font-semibold hover:from-[var(--color-primary-500)] hover:to-[var(--color-primary-400)] transition-all shadow-lg shadow-[var(--color-primary-500)]/20"
+                >
+                  Contactar soporte
+                </a>
+              </div>
 
-          {/* Contact CTA */}
-          <div className="mt-12 p-6 rounded-2xl bg-[var(--background-secondary)] border border-[var(--border)] text-center">
-            <h2 className="text-lg font-semibold text-[var(--foreground)] mb-2">
-              ¿No encontraste tu pregunta?
-            </h2>
-            <p className="text-sm text-[var(--foreground-secondary)] mb-4">
-              Escríbenos y respondemos en 24-48 horas hábiles.
-            </p>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--color-primary-600)] to-[var(--color-primary-500)] text-white font-semibold hover:from-[var(--color-primary-500)] hover:to-[var(--color-primary-400)] transition-all shadow-lg shadow-[var(--color-primary-500)]/20"
-            >
-              Contactar soporte
-            </a>
+              {/* Enlaces útiles */}
+              <nav className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                <Link
+                  href="/calculadoras"
+                  className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
+                >
+                  <h3 className="font-semibold text-[var(--foreground)] mb-1">
+                    Todas las calculadoras
+                  </h3>
+                  <p className="text-xs text-[var(--foreground-muted)]">
+                    40+ herramientas
+                  </p>
+                </Link>
+                <Link
+                  href="/guias"
+                  className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
+                >
+                  <h3 className="font-semibold text-[var(--foreground)] mb-1">
+                    Guías profundas
+                  </h3>
+                  <p className="text-xs text-[var(--foreground-muted)]">
+                    Pillar content 15min+
+                  </p>
+                </Link>
+                <Link
+                  href="/blog"
+                  className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
+                >
+                  <h3 className="font-semibold text-[var(--foreground)] mb-1">
+                    Blog
+                  </h3>
+                  <p className="text-xs text-[var(--foreground-muted)]">
+                    Artículos cortos
+                  </p>
+                </Link>
+              </nav>
+            </div>
           </div>
-
-          {/* Enlaces útiles */}
-          <nav className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-            <Link
-              href="/calculadoras"
-              className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
-            >
-              <h3 className="font-semibold text-[var(--foreground)] mb-1">
-                Todas las calculadoras
-              </h3>
-              <p className="text-xs text-[var(--foreground-muted)]">
-                40+ herramientas
-              </p>
-            </Link>
-            <Link
-              href="/guias"
-              className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
-            >
-              <h3 className="font-semibold text-[var(--foreground)] mb-1">
-                Guías profundas
-              </h3>
-              <p className="text-xs text-[var(--foreground-muted)]">
-                Pillar content 15min+
-              </p>
-            </Link>
-            <Link
-              href="/blog"
-              className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
-            >
-              <h3 className="font-semibold text-[var(--foreground)] mb-1">
-                Blog
-              </h3>
-              <p className="text-xs text-[var(--foreground-muted)]">
-                Artículos cortos
-              </p>
-            </Link>
-          </nav>
         </div>
       </div>
     </>
