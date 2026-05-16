@@ -27,6 +27,7 @@ import {
   estimateReadingTime,
 } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
+import { AUTHOR } from '@/lib/seo/author';
 import { articles, getArticleBySlug } from '@/data/articles';
 import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
@@ -160,12 +161,16 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
               {article.description}
             </p>
             <div className="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
-              <div className="flex items-center gap-2">
+              <Link
+                href="/equipo"
+                className="flex items-center gap-2 hover:text-[var(--color-primary-600)] transition-colors group"
+                aria-label={`Perfil de ${AUTHOR.name}`}
+              >
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-[10px] font-bold">
-                  CC
+                  DS
                 </div>
-                <span>Equipo CalculaChile</span>
-              </div>
+                <span className="group-hover:underline">Por {AUTHOR.name}</span>
+              </Link>
               <span className="text-[var(--border)]">·</span>
               <span>Publicado el {formattedDate}</span>
             </div>

@@ -7,7 +7,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Rss } from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import ArticleCard from '@/components/blog/ArticleCard';
@@ -105,6 +105,20 @@ export default function BlogPage() {
             <p className="text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto leading-relaxed">
               {PAGE_DESC}
             </p>
+            {/*
+              Botón "Suscribir por RSS" — pequeño, sin sobrecargar el
+              hero. Solo lo necesitan power users / lectores de feeds,
+              pero su sola presencia es señal de blog "real".
+            */}
+            <div className="mt-5 flex items-center justify-center">
+              <a
+                href="/blog/feed.xml"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--foreground-muted)] hover:text-[var(--color-accent-600)] transition-colors px-3 py-1.5 rounded-full border border-[var(--border)] hover:border-[var(--color-accent-500)]/40 bg-[var(--surface)]"
+              >
+                <Rss className="w-3.5 h-3.5" />
+                Suscríbete por RSS
+              </a>
+            </div>
           </div>
 
           {articles.length > 0 ? (

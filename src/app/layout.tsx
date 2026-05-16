@@ -161,6 +161,31 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/*
+          OpenSearch — permite que el usuario añada CalculaChile a la
+          barra de búsqueda del navegador (Firefox, Chromium-based,
+          Safari mobile). El navegador descubre el descriptor desde
+          este `<link>` y ofrece "Buscar en CalculaChile" en el menú
+          contextual de la barra de direcciones.
+        */}
+        <link
+          rel="search"
+          type="application/opensearchdescription+xml"
+          title={SITE_NAME}
+          href="/opensearch.xml"
+        />
+        {/*
+          RSS feed del blog. Los clientes RSS y los lectores tipo
+          Feedly descubren la URL automáticamente desde este
+          `<link rel="alternate">`. También Google News usa esto
+          como pista de feed de publicación.
+        */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${SITE_NAME} - Blog`}
+          href="/blog/feed.xml"
+        />
         {adsenseEnabled && (
           <script
             async

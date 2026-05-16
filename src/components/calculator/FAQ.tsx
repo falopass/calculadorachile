@@ -109,7 +109,7 @@ export default function FAQ({
                     }`}>
                       {index + 1}
                     </span>
-                    {item.question}
+                    <span className="faq-question">{item.question}</span>
                   </span>
                 </span>
                 <motion.div
@@ -134,7 +134,7 @@ export default function FAQ({
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-5 pt-2 text-[var(--foreground-secondary)] leading-relaxed border-l-2 border-[var(--color-primary-200)] ml-8">
+                    <div className="px-6 pb-5 pt-2 text-[var(--foreground-secondary)] leading-relaxed border-l-2 border-[var(--color-primary-200)] ml-8 faq-answer">
                       {item.answer}
                     </div>
                   </motion.div>

@@ -21,9 +21,11 @@ import {
   breadcrumbSchema,
   webPageSchema,
   learningResourceSchema,
+  howToSchema,
 } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
+import { AUTHOR } from '@/lib/seo/author';
 import { guias, getGuiaBySlug, type Guia } from '@/data/guias';
 import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
@@ -34,6 +36,50 @@ interface PageProps {
 
 export async function generateStaticParams() {
   return guias.map((g) => ({ slug: g.slug }));
+}
+
+/**
+ * Extrae texto plano (sin HTML) de una sección y lo limita a `max`
+ * caracteres cortando en el último espacio. Necesario porque
+ * `HowToStep.text` debe ser conciso para que Google muestre los
+ * pasos en SERPs.
+ */
+function clampSectionText(html: string, max = 220): string {
+  const flat = html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (flat.length <= max) return flat;
+  const truncated = flat.slice(0, max);
+  const lastSpace = truncated.lastIndexOf(' ');
+  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated) + '…';
+}
+
+/**
+ * Convierte las secciones H2 de una guía en pasos de HowTo. Usa el
+ * título de la sección como nombre del paso, y un resumen del HTML
+ * de su cuerpo como `text`. La URL del paso apunta al ancla de la
+ * sección dentro de la guía (deep link a la sección específica).
+ *
+ * Sólo consideramos secciones de nivel 2 (las H3 son sub-temas, no
+ * pasos del recorrido). Si la guía tiene más de 8 secciones H2 nos
+ * quedamos con las primeras 8 para mantener el HowTo tractable
+ * (Google no muestra más de ~6-8 pasos en SERPs).
+ */
+function buildGuiaHowToSteps(
+  guia: Guia,
+  baseUrl: string,
+): { name: string; text: string; url: string }[] {
+  return guia.sections
+    .filter((s) => s.level === 2)
+    .slice(0, 8)
+    .map((section) => ({
+      name: section.title,
+      text: clampSectionText(section.html),
+      url: `${baseUrl}#${section.id}`,
+    }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -103,12 +149,17 @@ export default async function GuiaPage({ params }: PageProps) {
 
   const ogImageUrl = absoluteUrl(`/guias/${guia.slug}/opengraph-image`);
 
-  // Schema: Article + LearningResource + BreadcrumbList + WebPage.
+  // Schema: Article + LearningResource + BreadcrumbList + WebPage + HowTo.
   // - Article: para Google News / Discover y rich results clásicos.
   // - LearningResource: para "About this result" educativo, mejora la
   //   comprensión semántica de que es un recurso pedagógico.
   // - WebPage: ancla la página y permite breadcrumb + dates.
-  const schemas = [
+  // - HowTo: pasos derivados de las secciones H2 de la guía. Habilita
+  //   que Google pueda mostrar los pasos como rich result en SERPs
+  //   ("Cómo calcular el sueldo líquido en Chile: 8 pasos").
+  const howToSteps = buildGuiaHowToSteps(guia, url);
+
+  const schemas: Record<string, unknown>[] = [
     articleSchema({
       url,
       headline: guia.title,
@@ -151,6 +202,24 @@ export default async function GuiaPage({ params }: PageProps) {
       primaryImageOfPage: ogImageUrl,
     }),
   ];
+
+  // HowTo sólo si la guía tiene al menos 3 secciones H2 — con menos
+  // pasos no agrega valor sobre el Article y Google puede marcarlo
+  // como "thin content".
+  if (howToSteps.length >= 3) {
+    schemas.push(
+      howToSchema({
+        name: `${guia.title}: pasos clave`,
+        description: guia.intent,
+        url,
+        // Tiempo total estimado en formato ISO 8601. Reusamos el
+        // readingTime de la guía como proxy del tiempo necesario
+        // para "ejecutar" los pasos (leyéndolos).
+        totalTime: `PT${guia.readingTime}M`,
+        steps: howToSteps,
+      }),
+    );
+  }
 
   const formattedDate = new Date(guia.updatedAt).toLocaleDateString('es-CL', {
     year: 'numeric',
@@ -197,12 +266,16 @@ export default async function GuiaPage({ params }: PageProps) {
             {guia.description}
           </p>
           <div className="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
-            <div className="flex items-center gap-2">
+            <Link
+              href="/equipo"
+              className="flex items-center gap-2 hover:text-[var(--color-primary-600)] transition-colors group"
+              aria-label={`Perfil de ${AUTHOR.name}`}
+            >
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] flex items-center justify-center text-white text-[10px] font-bold">
-                CC
+                DS
               </div>
-              <span>Equipo CalculaChile</span>
-            </div>
+              <span className="group-hover:underline">Por {AUTHOR.name}</span>
+            </Link>
             <span className="text-[var(--border)]">·</span>
             <span>Actualizado el {formattedDate}</span>
           </div>

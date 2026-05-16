@@ -30,6 +30,7 @@ const footerLinks = {
     links: [
       { href: '/blog', label: 'Blog' },
       { href: '/faq', label: 'Preguntas frecuentes' },
+      { href: '/equipo', label: 'Equipo' },
     ],
   },
   legal: {

@@ -69,10 +69,16 @@ const CalculatorPageLayout = memo(function CalculatorPageLayout({
             </ol>
           </nav>
 
-          <h1 className="heading-display text-3xl md:text-4xl text-[var(--foreground)]">
+          <h1
+            className="heading-display text-3xl md:text-4xl text-[var(--foreground)]"
+            data-speakable="title"
+          >
             {title}
           </h1>
-          <p className="mt-2 text-base text-[var(--foreground-secondary)] max-w-3xl leading-relaxed">
+          <p
+            className="mt-2 text-base text-[var(--foreground-secondary)] max-w-3xl leading-relaxed"
+            data-speakable="description"
+          >
             {description}
           </p>
         </div>

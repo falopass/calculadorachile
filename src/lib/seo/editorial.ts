@@ -13,11 +13,23 @@
 //     <p>...</p>
 //     ${callout('legal', 'Base legal', 'Art. 163 del Código del Trabajo')}
 //   `;
+//
+// Nota: para páginas TSX (no datos en HTML serializado), usar el
+// componente React reusable `@/components/ui/Callout` que comparte
+// los mismos estilos y los mismos iconos por tipo. Cuando agregues
+// un nuevo callout dentro de una página tsx, prefiere el componente
+// React: tiene tipado, evita escapado manual y te da las mismas
+// variantes (info/warning/legal/success/tip/error).
 // ============================================
 
 export type CalloutKind = 'info' | 'warning' | 'legal' | 'success' | 'tip' | 'error';
 
-const CALLOUT_ICONS: Record<CalloutKind, string> = {
+/**
+ * Iconos por variante de callout. Se usan tanto desde el helper
+ * `callout()` (HTML serializado para guias.ts/articles.ts) como
+ * desde el componente React `<Callout>` para mantenerlos sincronizados.
+ */
+export const CALLOUT_ICONS: Record<CalloutKind, string> = {
   info: 'ℹ️',
   warning: '⚠️',
   legal: '⚖️',

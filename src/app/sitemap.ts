@@ -109,6 +109,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${SITE_URL}/equipo`,
+      lastModified: SITE_LAST_MODIFIED,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+    {
       url: `${SITE_URL}/privacidad`,
       lastModified: new Date('2026-03-31'),
       changeFrequency: 'yearly',

@@ -180,6 +180,10 @@ export default function FAQPage() {
       url,
       name: PAGE_TITLE,
       description: PAGE_DESC,
+      // Speakable: en /faq las preguntas y respuestas son el "valor"
+      // de la página; le indicamos al asistente de voz exactamente
+      // qué selectores leer en alto.
+      speakableSelectors: ['.faq-question', '.faq-answer'],
     }),
     breadcrumbSchema([
       { name: 'Inicio', path: '/' },

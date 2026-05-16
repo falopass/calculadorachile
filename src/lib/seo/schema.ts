@@ -21,12 +21,14 @@
 // ============================================
 
 import { SITE_NAME, SITE_URL, absoluteUrl, CONTACT_EMAIL } from '@/lib/site';
+import { AUTHOR, AUTHOR_ID } from '@/lib/seo/author';
 
 /** Identificadores estables para nodos referenciables (`@id`). */
 export const SCHEMA_IDS = {
   organization: `${SITE_URL}/#organization`,
   website: `${SITE_URL}/#website`,
   logo: `${SITE_URL}/#logo`,
+  author: AUTHOR_ID,
 } as const;
 
 /**
@@ -70,6 +72,41 @@ export function organizationSchema(): Record<string, unknown> {
       'https://github.com/falopass/calculadorachile',
       'https://linkedin.com/company/calculachile',
     ],
+  };
+}
+
+/**
+ * Person — autor / editor humano detrás del contenido.
+ *
+ * Critical para E-E-A-T (Experience, Expertise, Authoritativeness,
+ * Trustworthiness) en YMYL (Your Money / Your Life): cuando Google
+ * ve un humano identificable, con credenciales, redes sociales
+ * verificables y página propia, le da más peso al sitio que cuando
+ * el `author` es la propia Organización.
+ *
+ * Este Person tiene `@id` estable (`AUTHOR_ID`) para que `Article`
+ * lo referencie por `@id` y no lo duplique. La fuente de verdad
+ * de los campos está en `@/lib/seo/author.ts`.
+ */
+export function personSchema(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': AUTHOR.id,
+    name: AUTHOR.name,
+    alternateName: AUTHOR.alternateName,
+    jobTitle: AUTHOR.jobTitle,
+    description: AUTHOR.bioShort,
+    url: AUTHOR.url,
+    image: {
+      '@type': 'ImageObject',
+      url: AUTHOR.imageUrl,
+      caption: AUTHOR.name,
+    },
+    email: AUTHOR.email,
+    knowsAbout: AUTHOR.expertise,
+    worksFor: { '@id': SCHEMA_IDS.organization },
+    sameAs: AUTHOR.sameAs,
   };
 }
 
@@ -134,7 +171,7 @@ export function webPageSchema(args: {
   url: string;
   name: string;
   description: string;
-  subType?: 'AboutPage' | 'ContactPage' | 'FAQPage' | 'CollectionPage' | 'WebPage';
+  subType?: 'AboutPage' | 'ContactPage' | 'FAQPage' | 'CollectionPage' | 'WebPage' | 'ProfilePage';
   datePublished?: string;
   dateModified?: string;
   breadcrumb?: ReadonlyArray<{ name: string; path?: string }>;
@@ -147,6 +184,12 @@ export function webPageSchema(args: {
   mainEntity?: Record<string, unknown> | { '@id': string };
   /** URL absoluta de la imagen principal (1200x630). */
   primaryImageOfPage?: string;
+  /**
+   * CSS selectors o XPaths que indican el contenido apto para que
+   * un asistente de voz lo lea en voz alta (Speakable). Si se omite,
+   * Google infiere los headings y el primer párrafo.
+   */
+  speakableSelectors?: string[];
 }): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -173,14 +216,25 @@ export function webPageSchema(args: {
       height: 630,
     };
   }
+  if (args.speakableSelectors && args.speakableSelectors.length > 0) {
+    schema.speakable = {
+      '@type': 'SpeakableSpecification',
+      cssSelector: args.speakableSelectors,
+    };
+  }
   return schema;
 }
 
 /**
  * Article / BlogPosting — usar para posts del blog.
  *
- * Incluye author como Organization (no fingimos un humano), publisher
- * (el mismo SITE), mainEntityOfPage para anclar al canonical, y
+ * El `author` referencia al `Person` con `@id` estable (E-E-A-T).
+ * Para mantener compatibilidad, si se pasa `authorOrganization: true`
+ * o no hay Person disponible, cae al modo Organization. La página
+ * `/equipo` debe inyectar el Person completo al menos una vez para
+ * que Google pueda seguir la referencia.
+ *
+ * Incluye publisher, mainEntityOfPage para anclar al canonical, y
  * dateModified que es lo que Google realmente usa para frescura.
  */
 export function articleSchema(args: {
@@ -189,7 +243,17 @@ export function articleSchema(args: {
   description: string;
   datePublished: string;
   dateModified?: string;
+  /**
+   * Si se pasa, sobrescribe el nombre del autor (Person). Sin valor,
+   * usa el Person editorial por defecto desde `@/lib/seo/author.ts`.
+   */
   authorName?: string;
+  /**
+   * Si es `true`, fuerza al author a ser la Organization en vez del
+   * Person editorial. Útil para contenido institucional o anuncios
+   * del propio sitio donde no hay un humano asignable.
+   */
+  authorOrganization?: boolean;
   imageUrl?: string;
   keywords?: string[];
   articleSection?: string;
@@ -197,6 +261,24 @@ export function articleSchema(args: {
   /** Lista de URLs internas mencionadas en el artículo. */
   mentions?: string[];
 }): Record<string, unknown> {
+  // Por default el autor es el Person editorial (E-E-A-T).
+  // - `@id` referencia al Person definido en /equipo
+  // - `name` y `url` se incluyen para que Google pueda renderizar el
+  //   byline aunque no siga la referencia, y para no romper la card
+  //   de validación si /equipo aún no está crawled.
+  const author: Record<string, unknown> = args.authorOrganization
+    ? {
+        '@type': 'Organization',
+        '@id': SCHEMA_IDS.organization,
+        name: args.authorName ?? SITE_NAME,
+      }
+    : {
+        '@type': 'Person',
+        '@id': SCHEMA_IDS.author,
+        name: args.authorName ?? AUTHOR.name,
+        url: AUTHOR.url,
+      };
+
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -209,11 +291,7 @@ export function articleSchema(args: {
     },
     datePublished: args.datePublished,
     dateModified: args.dateModified ?? args.datePublished,
-    author: {
-      '@type': 'Organization',
-      '@id': SCHEMA_IDS.organization,
-      name: args.authorName ?? SITE_NAME,
-    },
+    author,
     publisher: { '@id': SCHEMA_IDS.organization },
     inLanguage: 'es-CL',
     isAccessibleForFree: true,
@@ -356,6 +434,19 @@ export function softwareApplicationSchema(args: {
   if (args.datePublished) schema.datePublished = args.datePublished;
   if (args.dateModified) schema.dateModified = args.dateModified;
 
+  // Speakable — selectores que apuntan al título de la calculadora
+  // y a su descripción introductoria, para asistentes de voz.
+  // El layout `CalculatorPageLayout` renderiza el título dentro de
+  // `[data-speakable="title"]` y la descripción en
+  // `[data-speakable="description"]`.
+  schema.speakable = {
+    '@type': 'SpeakableSpecification',
+    cssSelector: [
+      '[data-speakable="title"]',
+      '[data-speakable="description"]',
+    ],
+  };
+
   return schema;
 }
 
@@ -399,7 +490,7 @@ export function learningResourceSchema(args: {
     datePublished: args.datePublished,
     dateModified: args.dateModified ?? args.datePublished,
     educationalLevel: args.educationalLevel ?? 'Beginner',
-    author: { '@id': SCHEMA_IDS.organization },
+    author: { '@id': SCHEMA_IDS.author },
     publisher: { '@id': SCHEMA_IDS.organization },
   };
   if (args.about) schema.about = { '@type': 'Thing', name: args.about };
@@ -475,6 +566,13 @@ export function howToSchema(args: {
  * FAQPage — un objeto con N preguntas. El consumidor decide si lo
  * inyecta solo en la página FAQ del sitio o también en calculadoras
  * con FAQs propios.
+ *
+ * Incluye `SpeakableSpecification` (vocabulario schema.org) que
+ * indica a asistentes de voz (Google Assistant, Alexa) qué partes
+ * del FAQ son las más adecuadas para leerse en voz alta. Apuntamos
+ * a las clases CSS reales que usan los componentes FAQ del sitio
+ * para que el selector funcione tanto en /faq como en cada
+ * calculadora.
  */
 export function faqPageSchema(
   items: ReadonlyArray<{ question: string; answer: string }>,
@@ -483,6 +581,19 @@ export function faqPageSchema(
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     inLanguage: 'es-CL',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      // Headings y respuestas dentro del componente FAQ. Los
+      // selectores son tolerantes a las dos variantes (FAQ.tsx
+      // usa botones con la pregunta + div de respuesta;
+      // EnhancedFAQ.tsx usa <span> dentro del button + <p>).
+      cssSelector: [
+        '[itemprop="name"]',
+        '[itemprop="text"]',
+        '.faq-question',
+        '.faq-answer',
+      ],
+    },
     mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,

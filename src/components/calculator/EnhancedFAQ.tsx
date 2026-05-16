@@ -51,7 +51,7 @@ const EnhancedFAQ = memo(function EnhancedFAQ({ items, title = 'Preguntas Frecue
               aria-expanded={openIndex === index}
               aria-controls={`faq-answer-${index}`}
             >
-              <span className="font-semibold text-[var(--foreground)]">{item.question}</span>
+              <span className="font-semibold text-[var(--foreground)] faq-question">{item.question}</span>
               {openIndex === index ? (
                 <ChevronUp className="w-5 h-5 text-[var(--color-primary-500)] flex-shrink-0 ml-2" />
               ) : (
@@ -66,7 +66,7 @@ const EnhancedFAQ = memo(function EnhancedFAQ({ items, title = 'Preguntas Frecue
               }`}
             >
               <div className="px-5 py-4 bg-[var(--background)]/50 border-t border-[var(--border)] text-[var(--foreground-secondary)]">
-                <p className="leading-relaxed">{item.answer}</p>
+                <p className="leading-relaxed faq-answer">{item.answer}</p>
               </div>
             </div>
           </div>
