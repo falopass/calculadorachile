@@ -146,7 +146,17 @@ export const SEGURO_SOCIAL_PREVISIONAL = {
     { vigenteDesde: '2032-08-01', tasa: 6.25 },
     { vigenteDesde: '2033-08-01', tasa: 7.0 },
   ],
-  /** Tasa vigente al cierre de Q2 2026 (segundo año del calendario). */
+  /**
+   * Tasa vigente nominal en mayo 2026.
+   *
+   * Importante: el calendario sube a 1,75% desde el 1° de agosto de 2026.
+   * Para cálculos del primer semestre 2026 se usa 1,0%; desde agosto
+   * 2026 se debe usar 1,75%.
+   *
+   * El helper `getSeguroSocialPrevisionalVigente(fecha)` debería ser
+   * la fuente preferida; este alias se mantiene por compatibilidad
+   * con código que aún consulta directamente el valor.
+   */
   tasaVigente2026: 1.0,
 };
 

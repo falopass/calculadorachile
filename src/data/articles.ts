@@ -595,6 +595,320 @@ export const articles: Article[] = [
 <p>Para el detalle completo del finiquito y cómo se integran con la indemnización, lee la <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral</a>. Calcula tus vacaciones específicas con la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a>.</p>
 <p>Fuentes: <a href="https://www.dt.gob.cl" target="_blank" rel="noopener">Dirección del Trabajo</a>, Código del Trabajo Arts. 67, 68, 70.</p>`,
   },
+  {
+    slug: 'subsidios-minvu-2026-guia',
+    title: 'Subsidios MINVU 2026: DS49, DS01, DS19 y DFL2 explicados',
+    description:
+      'Cómo postular a los subsidios habitacionales del MINVU en 2026: DS49, DS01, DS19 y DFL2. Montos en UF, requisitos por tramo RSH y combinación de beneficios.',
+    date: '2026-05-16',
+    category: 'vivienda',
+    readingTime: 9,
+    relatedGuia: 'comprar-vivienda-chile',
+    keywords: [
+      'subsidio MINVU 2026',
+      'DS49 fondo solidario',
+      'DS01 sectores medios',
+      'DS19 integración social',
+      'DFL2 vivienda económica',
+      'serviu chile',
+      'RSH 40% 70% 90%',
+      'subsidio habitacional UF',
+    ],
+    relatedCalculators: [
+      'calculadora-subsidio-habitacional',
+      'calculadora-credito-hipotecario',
+      'calculadora-contribuciones',
+    ],
+    content: `<h2>Panorama de los subsidios habitacionales 2026</h2>
+<p>El <strong>MINVU</strong> (Ministerio de Vivienda y Urbanismo) administra varios programas de subsidio según ingreso del postulante, tramo de RSH y tipo de vivienda. En 2026, con UF a $40.357, los subsidios entregan entre <strong>$10 y $34 millones</strong> según el programa y tramo.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Calendario de postulación 2026</strong><p>Las llamadas a postulación se publican en <a href="https://www.serviu.cl" target="_blank" rel="noopener">serviu.cl</a> con calendario semestral. Cada llamado tiene cupos limitados (entre 5.000 y 30.000 según programa). Postula en cuanto se abra el llamado: cuando se llena el cupo, debes esperar al siguiente.</p></div></aside>
+
+<h2>DS49 — Fondo Solidario de Elección de Vivienda</h2>
+<p>Para familias del 40% más vulnerable según RSH. <strong>NO requiere crédito hipotecario</strong>: el subsidio + ahorro previo cubre el precio total de la vivienda.</p>
+<table>
+<thead><tr><th>Tramo ingreso UF</th><th>Subsidio máximo UF</th><th>Subsidio en CLP (UF mayo 2026)</th></tr></thead>
+<tbody>
+<tr><td>0 – 12 UF</td><td>450 UF</td><td>~$18.160.000</td></tr>
+<tr><td>12 – 18 UF</td><td>380 UF</td><td>~$15.336.000</td></tr>
+<tr><td>18 – 24 UF</td><td>310 UF</td><td>~$12.510.000</td></tr>
+</tbody>
+</table>
+<p>Ahorro mínimo previo: 10 UF (~$403.000).</p>
+
+<h2>DS01 — Sectores Medios</h2>
+<p>Para clase media con RSH entre 40% y 90%. <strong>Requiere crédito hipotecario complementario</strong> (típicamente UF 700-1.500). Tiene dos tramos:</p>
+<ul>
+<li><strong>Tramo 1</strong>: ingreso ≤ 15 UF. Subsidio hasta 650 UF. Ahorro mínimo: 30 UF.</li>
+<li><strong>Tramo 2</strong>: ingreso 15-22 UF. Subsidio hasta 520 UF. Ahorro mínimo: 50 UF.</li>
+</ul>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El subsidio se pierde si la vivienda excede 2.200 UF</strong><p>El DS01 solo aplica a viviendas con valor de tasación ≤ 2.200 UF (~$88,8M en 2026). Si te enamoras de una vivienda de 2.400 UF, el subsidio se cae completo. Verifica el precio fiscal de tasación antes de pagar reserva.</p></div></aside>
+
+<h2>DS19 — Integración Social y Territorial</h2>
+<p>Subsidio <strong>adicional</strong> que se suma al DS49 o DS01 cuando el proyecto inmobiliario tiene mix social (al menos 20% de unidades destinadas a sectores vulnerables). Aporta hasta <strong>200 UF extra</strong> al beneficiario.</p>
+<div class="numeric-example"><div class="numeric-example__title">Combinación DS01 + DS19 — tramo medio</div><ul><li>Subsidio DS01: 520 UF</li><li>Subsidio DS19: 200 UF</li><li>Total subsidio: 720 UF (~$29M)</li><li>Ahorro mínimo: 50 UF (~$2M)</li><li>Capacidad de compra (sin crédito): 770 UF</li><li>Con crédito hipotecario UF 1.000 → vivienda hasta 1.770 UF (~$71,4M)</li></ul><span class="total">El crédito complementario es la palanca: el subsidio cubre el pie</span></div>
+
+<h2>DFL2 — Viviendas Económicas</h2>
+<p>El DFL2 (1959, vigente con modificaciones) NO es un subsidio sino un <strong>régimen tributario favorable</strong> para viviendas de hasta 140 m² construidos. Beneficios:</p>
+<ul>
+<li><strong>50% rebaja en contribuciones</strong> por 15 años desde la construcción.</li>
+<li>Exención de impuesto al pago de herencia o donación entre cónyuges/hijos.</li>
+<li>Renta de arriendo del DFL2 NO tributa (hasta 2 unidades por contribuyente, Ley 21.420 limitó este beneficio desde 2022).</li>
+</ul>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ley 21.420 limitó el beneficio DFL2 a 2 viviendas por persona natural</strong><p>Antes de 2022 una persona podía tener decenas de DFL2 sin tributar arriendos. Ahora el beneficio aplica solo a las primeras 2 viviendas DFL2 por contribuyente persona natural. Las viviendas DFL2 de personas jurídicas no tienen el beneficio de exención de renta.</p></div></aside>
+
+<h2>Pasos para postular</h2>
+<ol class="steps">
+<li><strong>Actualizar tu RSH</strong> en chileatiende.gob.cl. El RSH determina tu tramo de vulnerabilidad.</li>
+<li><strong>Abrir y mantener libreta de ahorro</strong> en BancoEstado o Coopeuch (mínimo 6 meses para DS49, 12 meses para DS01).</li>
+<li><strong>Esperar el llamado</strong> oficial en serviu.cl (semestral).</li>
+<li><strong>Postular online</strong> con cédula vigente, libreta y certificado RSH.</li>
+<li>Si quedas seleccionado, <strong>tienes 21 meses</strong> para usar el subsidio (renovable una vez).</li>
+</ol>
+<p>Estima tu subsidio según ingreso y tramo con la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio habitacional</a>. Para simular el dividendo del crédito complementario, usa la <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a>.</p>
+<p>Fuentes: <a href="https://www.minvu.cl" target="_blank" rel="noopener">MINVU</a>, <a href="https://www.serviu.cl" target="_blank" rel="noopener">SERVIU</a>, DS 49/2011, DS 01/2011, DS 19/2016 (todos del MINVU).</p>`,
+  },
+  {
+    slug: 'comparativa-comisiones-afp-2026',
+    title: 'Comparativa de comisiones AFP 2026: cuál te conviene',
+    description:
+      'Análisis de las 7 AFP en 2026: comisión, rentabilidad histórica y SIS. Cuánto ahorras al año cambiándote de AFP cara a la más barata.',
+    date: '2026-05-16',
+    category: 'previsional',
+    readingTime: 7,
+    relatedGuia: 'afp-pension-chile',
+    keywords: [
+      'comisión AFP 2026',
+      'cambiar de AFP',
+      'AFP Uno 0.46%',
+      'AFP Modelo 0.58%',
+      'rentabilidad AFP',
+      'tope imponible AFP',
+      'tasa AFP 10%',
+    ],
+    relatedCalculators: [
+      'calculadora-comparador-afp',
+      'calculadora-sueldo-liquido',
+      'calculadora-cotizacion-independientes',
+    ],
+    content: `<h2>Las 7 AFP en Chile 2026</h2>
+<p>El sistema chileno de pensiones tiene 7 administradoras de fondos de pensiones, cada una con su propia comisión y rentabilidad histórica. La <strong>comisión</strong> es lo que la AFP cobra por administrar tu cuenta y se descuenta de tu sueldo bruto cada mes (sumada al 10% obligatorio que va a tu cuenta individual).</p>
+<table>
+<thead><tr><th>AFP</th><th>Comisión 2026</th><th>Total descontado al trabajador</th></tr></thead>
+<tbody>
+<tr><td><strong>Uno</strong></td><td>0,46%</td><td>10,46%</td></tr>
+<tr><td>Modelo</td><td>0,58%</td><td>10,58%</td></tr>
+<tr><td>Planvital</td><td>1,16%</td><td>11,16%</td></tr>
+<tr><td>Habitat</td><td>1,27%</td><td>11,27%</td></tr>
+<tr><td>Capital</td><td>1,44%</td><td>11,44%</td></tr>
+<tr><td>Cuprum</td><td>1,44%</td><td>11,44%</td></tr>
+<tr><td><strong>ProVida</strong></td><td>1,45%</td><td>11,45%</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>La diferencia entre la más cara y la más barata es ~1 punto</strong><p>De la misma renta bruta, AFP Uno descuenta 10,46% y AFP ProVida descuenta 11,45%. Para un sueldo de $1.000.000, la diferencia es $9.900 al mes — $118.800 al año, equivalente a un sueldo líquido extra cada año.</p></div></aside>
+
+<h2>Cuánto ahorras cambiándote de AFP</h2>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo $1.500.000 — pasar de Capital (1,44%) a Uno (0,46%)</div><ul><li>Comisión actual Capital: 1,44% × $1.500.000 = $21.600/mes</li><li>Comisión nueva Uno: 0,46% × $1.500.000 = $6.900/mes</li><li>Ahorro mensual: $14.700</li><li>Ahorro anual: $176.400</li><li>Ahorro a 30 años (vida laboral típica): $5.292.000 (sin considerar capitalización)</li></ul><span class="total">Ahorrarte 1 punto en comisión equivale a 1,5 sueldos líquidos al año</span></div>
+
+<h2>¿La AFP más barata es la mejor?</h2>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Comisión vs rentabilidad: cuál pesa más</strong><p>La comisión es certera: descuenta cada mes lo mismo. La rentabilidad varía año a año. Históricamente las diferencias de rentabilidad entre AFP en mismo multifondo son menores a 0,5 puntos anual. La comisión, en cambio, se diferencia por hasta 3 veces. Para la mayoría de los trabajadores, optimizar la comisión rinde más que perseguir rentabilidad.</p></div></aside>
+<p>Hay <strong>dos excepciones</strong>: (1) si tienes pensión cercana (5 años o menos), prioriza estabilidad de rentabilidad sobre comisión; (2) si tu fondo está en multifondo agresivo (A o B), las diferencias de rentabilidad pueden ser mayores. Para multifondos C, D o E (conservadores), la comisión domina.</p>
+
+<h2>Cómo cambiarte de AFP</h2>
+<ol class="steps">
+<li>Ingresa a <a href="https://www.previred.com" target="_blank" rel="noopener">previred.com</a> con tu RUT y clave única.</li>
+<li>Selecciona "Cambio de AFP" → escoge la AFP de destino.</li>
+<li>Confirma con tu clave única. El cambio se hace efectivo el mes siguiente.</li>
+<li>NO tienes que avisar a tu empleador: PreviRed coordina automáticamente.</li>
+</ol>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El SIS NO cambia con la comisión</strong><p>El Seguro de Invalidez y Sobrevivencia (SIS) es 1,15% adicional, lo paga el empleador (no el trabajador), y es el mismo para todas las AFP. Por lo tanto el SIS NO entra en la decisión de cuál AFP elegir.</p></div></aside>
+
+<h2>Tope imponible y comisiones para sueldos altos</h2>
+<p>La comisión solo se cobra hasta el tope imponible (89,9 UF en 2026, ≈$3.626.566). Sueldos sobre el tope pagan la misma comisión absoluta independiente del bruto. Eso significa que la diferencia entre AFPs <strong>se aplana en términos absolutos</strong> para sueldos altos.</p>
+<p>Compara las 7 AFPs con tu sueldo específico y proyecta el ahorro a varios años con la <a href="/calculadoras/calculadora-comparador-afp">calculadora comparadora de AFPs</a>.</p>
+<p>Fuentes: <a href="https://www.spensiones.cl" target="_blank" rel="noopener">Superintendencia de Pensiones</a>, comisiones publicadas mensualmente.</p>`,
+  },
+  {
+    slug: 'plusvalia-dfl2-vs-comun-chile',
+    title: 'Plusvalía DFL2 vs común: ¿cuándo pagas impuesto al vender?',
+    description:
+      'Diferencias tributarias al vender una vivienda DFL2 vs una común en Chile 2026. Exención 8.000 UF, impuesto único 10% y casos donde DFL2 conviene.',
+    date: '2026-05-16',
+    category: 'vivienda',
+    readingTime: 6,
+    relatedGuia: 'comprar-vivienda-chile',
+    keywords: [
+      'plusvalía DFL2',
+      'plusvalía vivienda común',
+      'mayor valor enajenación inmueble',
+      'art 17 N°8 LIR',
+      'ley 21.210 plusvalía',
+      'exención 8000 UF',
+      'impuesto único 10%',
+    ],
+    relatedCalculators: [
+      'calculadora-plusvalia',
+      'calculadora-credito-hipotecario',
+      'calculadora-contribuciones',
+    ],
+    content: `<h2>Tributación al vender una vivienda en Chile</h2>
+<p>Cuando vendes una vivienda en Chile y obtienes una <strong>ganancia</strong> (precio venta &gt; precio compra), esa ganancia puede o no tributar según la normativa del <strong>Art. 17 N°8 letra b) LIR</strong>, modificada por la <strong>Ley 21.210 de 2020</strong>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Resumen: cuatro reglas clave</strong><p>(1) Persona natural + vivienda habitacional: exenta hasta 8.000 UF acumulados de mayor valor en su vida. (2) Sobre el exceso: 10% impuesto único sustitutivo. (3) Persona natural + inmueble no habitacional: 10% sobre toda la ganancia. (4) Persona jurídica: tributación general (IDPC + IGC al socio).</p></div></aside>
+
+<h2>Vivienda DFL2 vs común: ¿hay diferencia tributaria al vender?</h2>
+<p>Mucha gente cree que vender una <strong>DFL2</strong> está exento automáticamente. <strong>No es así</strong>. La normativa del Art. 17 N°8 aplica igual a viviendas DFL2 y a viviendas comunes. La diferencia está en otros aspectos:</p>
+<table>
+<thead><tr><th>Concepto</th><th>Vivienda común</th><th>Vivienda DFL2</th></tr></thead>
+<tbody>
+<tr><td>Plusvalía exenta (vivienda habitacional)</td><td>Hasta 8.000 UF</td><td>Hasta 8.000 UF (igual)</td></tr>
+<tr><td>Plusvalía sobre exceso</td><td>10% sustitutivo</td><td>10% sustitutivo</td></tr>
+<tr><td>Renta de arriendo</td><td>Tributa con IGC</td><td>Exenta hasta 2 viviendas (Ley 21.420)</td></tr>
+<tr><td>Contribuciones</td><td>Pago normal</td><td>50% rebaja por 15 años</td></tr>
+<tr><td>Herencia / donación cónyuge-hijos</td><td>Impuesto progresivo</td><td>Exenta</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El DFL2 conviene por arriendo y herencia, NO por plusvalía</strong><p>Si comparas dos viviendas idénticas (una DFL2 y una común) con la misma plusvalía, el impuesto al vender es exactamente el mismo. La ventaja del DFL2 está en el arriendo (exento) y la herencia (exenta), no en la enajenación.</p></div></aside>
+
+<h2>Cómo se cuenta la exención 8.000 UF</h2>
+<p>La exención de 8.000 UF es <strong>acumulada en la vida del contribuyente</strong>, no por operación. Si vendes 3 viviendas con ganancias de 4.000 UF, 4.000 UF y 4.000 UF, las dos primeras quedan dentro de la exención (8.000 acumulados); la tercera tributa completa.</p>
+<div class="numeric-example"><div class="numeric-example__title">Vendiste tu departamento por $250M, comprado en $150M</div><ul><li>Ganancia bruta: $100.000.000</li><li>Equivalente UF (UF mayo 2026 $40.357): 100M / 40.357 ≈ 2.478 UF</li><li>Exención disponible: 8.000 UF</li><li>Ganancia gravada: 0 UF (toda absorbida por exención)</li></ul><span class="total">Impuesto a pagar: $0</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Mismo caso, pero ya habías usado 7.000 UF de exención</div><ul><li>Ganancia: 2.478 UF</li><li>Exención disponible: 1.000 UF</li><li>Ganancia gravada: 1.478 UF (~$59.648.000)</li><li>Impuesto único 10%: ~$5.964.800</li></ul><span class="total">Impuesto a pagar: $5.964.800</span></div>
+
+<h2>Cómo declarar la exención al SII</h2>
+<p>El SII lleva un registro acumulado de exención por contribuyente. Cuando vendes una vivienda, debes:</p>
+<ol class="steps">
+<li>Reportar la enajenación en el Form. 22 del año tributario siguiente.</li>
+<li>Adjuntar escritura de compra, escritura de venta y certificado de avalúo fiscal vigente.</li>
+<li>El SII descuenta automáticamente el saldo de la exención disponible.</li>
+<li>Si hay impuesto, se paga vía Operación Renta de abril.</li>
+</ol>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Mejoras documentadas reducen la base imponible</strong><p>Las mejoras estructurales documentadas con factura (ampliación, remodelación cocina, baños, instalaciones eléctricas) se restan de la ganancia neta. Guarda todas las facturas: pueden bajar tu impuesto en millones. Reparaciones menores y mantención NO califican.</p></div></aside>
+
+<h2>Persona jurídica: la cosa cambia</h2>
+<p>Si la vivienda está a nombre de una sociedad (limitada, SpA, anónima), la exención de 8.000 UF NO aplica. La ganancia tributa íntegramente con el Impuesto de Primera Categoría (25% en 14D, 27% en 14A) y luego con Global Complementario al socio cuando se distribuya. Carga total típica: 35%-44%.</p>
+<p>Calcula el impuesto a la plusvalía según vivienda habitacional o de inversión con la <a href="/calculadoras/calculadora-plusvalia">calculadora de plusvalía</a>.</p>
+<p>Fuentes: <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a> Art. 17 N°8 letra b), <a href="https://www.bcn.cl/leychile/navegar?idNorma=1142667" target="_blank" rel="noopener">Ley 21.210</a> (Modernización Tributaria), <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a>.</p>`,
+  },
+  {
+    slug: 'cae-renegociacion-condonacion-2026',
+    title: 'CAE en 2026: pago contingente, renegociación y condonación',
+    description:
+      'Cómo funciona el CAE en 2026 con pago contingente al ingreso (Ley 21.605), opciones de renegociación y el estado del proyecto de condonación.',
+    date: '2026-05-16',
+    category: 'educacion',
+    readingTime: 7,
+    relatedGuia: 'credito-cae-educacion-chile',
+    keywords: [
+      'CAE 2026',
+      'pago contingente al ingreso',
+      'ley 21.605',
+      'renegociar CAE',
+      'condonación CAE 2025',
+      'INGRESA',
+      'morosidad CAE',
+      'cuota máxima 10%',
+    ],
+    relatedCalculators: [
+      'calculadora-credito-cae',
+      'calculadora-credito-hipotecario',
+      'calculadora-intereses-mora',
+    ],
+    content: `<h2>El CAE en 2026: cómo se paga ahora</h2>
+<p>Desde la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605 (2023)</a>, todos los créditos CAE pasaron al régimen de <strong>pago contingente al ingreso</strong>. La cuota mensual ya no es fija: se ajusta cada año según el ingreso bruto del deudor.</p>
+<ul class="data-grid"><li><span class="data-grid__label">Cuota máxima</span><span class="data-grid__value">10% del ingreso bruto</span></li><li><span class="data-grid__label">Tasa anual</span><span class="data-grid__value">2% real (sobre UF)</span></li><li><span class="data-grid__label">Plazo máximo</span><span class="data-grid__value">240 cuotas (20 años)</span></li><li><span class="data-grid__label">Saldo a los 20 años</span><span class="data-grid__value">Condonado</span></li></ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Si tu ingreso baja, tu cuota baja</strong><p>El nuevo régimen elimina el riesgo de "no poder pagar". Si te quedas sin trabajo, la cuota se suspende. Si tu sueldo baja a $700.000 bruto, la cuota máxima legal es $70.000 — independiente del monto original del crédito.</p></div></aside>
+
+<h2>Cómo recalcular tu cuota cada año</h2>
+<p>La Comisión INGRESA recalcula la cuota anualmente con la información del Form. 22 del año tributario anterior:</p>
+<ol class="steps">
+<li>Tu ingreso bruto del año anterior se obtiene del SII.</li>
+<li>La cuota máxima 2026 = 10% × ingreso bruto mensual promedio.</li>
+<li>Si tu cuota original (la del crédito a 20 años) supera el 10%, queda topeada al 10%.</li>
+<li>El "saldo no pagado" se aplaza, NO se condona automáticamente.</li>
+<li>El plazo se extiende hasta 240 cuotas (20 años); pasado eso, el saldo se condona.</li>
+</ol>
+<div class="numeric-example"><div class="numeric-example__title">Egresada con sueldo bruto $1.200.000 y CAE de UF 1.000</div><ul><li>Cuota original (20 años, 2% anual): ~5,1 UF/mes ≈ $206.000</li><li>Cuota máxima (10% bruto): $120.000</li><li>Cuota efectiva pagada: $120.000 (limitada por ingreso)</li><li>Saldo del mes: ~$86.000 que se aplaza al final del crédito</li></ul><span class="total">Cuota mensual real: $120.000 — el resto se difiere</span></div>
+
+<h2>Renegociación del CAE: cuándo conviene</h2>
+<p>Hay tres mecanismos de renegociación disponibles:</p>
+<h3>1. Reprogramación con descuento de mora (Ley 21.605)</h3>
+<p>Si estás en mora, puedes reprogramar la deuda con descuento de hasta 50% de los intereses moratorios acumulados. Aplicación en <a href="https://www.ingresa.cl" target="_blank" rel="noopener">ingresa.cl</a> con clave única.</p>
+<h3>2. Suspensión por desempleo o ingreso bajo</h3>
+<p>Si tu ingreso mensual es menor al sueldo mínimo, puedes solicitar suspensión temporal de la cuota. Se mantiene durante el período de cesantía con prórroga máxima de 24 meses.</p>
+<h3>3. Pago anticipado</h3>
+<p>Pagar el crédito anticipadamente NO genera comisión (Ley 21.605). Si tienes liquidez, prepagar el CAE rinde 2% real anual garantizado, mejor que la mayoría de instrumentos conservadores.</p>
+
+<h2>Estado del proyecto de condonación 2025-2026</h2>
+<p>El proyecto de ley de <strong>condonación parcial del CAE</strong> está en segundo trámite constitucional al cierre de mayo 2026. Las propuestas en discusión son:</p>
+<ul>
+<li><strong>Condonación total</strong> para deudores con CAE pagado correctamente por 10+ años.</li>
+<li><strong>Condonación parcial 50%</strong> para deudores con 5-10 años de pago sin atrasos.</li>
+<li><strong>Condonación de intereses moratorios</strong> para deudores que se acojan al beneficio antes de una fecha límite (a definir).</li>
+<li>Reemplazo del CAE por el nuevo <strong>FES</strong> (Sistema de Financiamiento Público) para nuevas generaciones, administrado directamente por el Estado.</li>
+</ul>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No tomes decisiones en base a expectativas de condonación</strong><p>El proyecto puede modificarse, postergarse o no aprobarse. Mantén pago al día y suscríbete a las actualizaciones de INGRESA. Si calificas para reprogramación con descuento bajo el régimen actual, no esperes: gana certeza ahora.</p></div></aside>
+
+<h2>Si te quedaste sin pagar: el Registro de Morosidad</h2>
+<p>Estar en el Registro de Morosidad CAE tiene consecuencias serias: aparecen en boletín comercial, retención automática del 50% de devolución de impuestos vía SII y no pueden renovar pasaporte ni licencia de conducir hasta acordar pago. Para salir del registro hay que pagar al menos 6 meses consecutivos sin atrasos.</p>
+<p>Calcula tu cuota actual y simula renegociaciones con la <a href="/calculadoras/calculadora-credito-cae">calculadora de crédito CAE</a>. Para estimar mora si estás atrasado, usa la <a href="/calculadoras/calculadora-intereses-mora">calculadora de intereses por mora</a>.</p>
+<p>Fuentes: <a href="https://www.ingresa.cl" target="_blank" rel="noopener">Comisión INGRESA</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a> (CAE original).</p>`,
+  },
+  {
+    slug: 'tope-imponible-89-9-uf-explicado',
+    title: 'Tope imponible 89,9 UF: qué es y por qué importa en 2026',
+    description:
+      'Qué es el tope imponible AFP/salud (89,9 UF en 2026), cómo se ajusta cada año y por qué reduce las cotizaciones efectivas para sueldos altos.',
+    date: '2026-05-16',
+    category: 'previsional',
+    readingTime: 5,
+    relatedGuia: 'sueldo-liquido-chile',
+    keywords: [
+      'tope imponible 89.9 UF',
+      'tope cesantía 134.9 UF',
+      'imponible AFP salud',
+      'D.L. 3500 art 16',
+      'sueldo alto Chile',
+      'cotización tope',
+      'remuneración tope',
+    ],
+    relatedCalculators: [
+      'calculadora-sueldo-liquido',
+      'calculadora-comparador-afp',
+      'calculadora-cotizacion-independientes',
+      'calculadora-costo-empleado-pyme',
+    ],
+    content: `<h2>¿Qué es el tope imponible?</h2>
+<p>El <strong>tope imponible</strong> es el monto máximo de remuneración mensual sobre el cual se calculan las cotizaciones obligatorias de AFP y salud (FONASA o Isapre). Es decir: si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese tope, y la porción que excede no cotiza.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>D.L. 3500, Art. 16</strong><p>"La remuneración y renta máximas mensuales sobre las que se efectúan las cotizaciones obligatorias se reajustarán anualmente, en el mes de febrero, considerando la variación anual del Índice de Remuneraciones Reales (ISR) determinado por el INE."</p></div></aside>
+<ul class="data-grid"><li><span class="data-grid__label">Tope AFP/Salud 2026</span><span class="data-grid__value">89,9 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP (UF mayo 2026)</span><span class="data-grid__value">~$3.626.566</span></li><li><span class="data-grid__label">Tope cesantía 2026</span><span class="data-grid__value">134,9 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP cesantía</span><span class="data-grid__value">~$5.444.235</span></li></ul>
+
+<h2>Cómo se actualiza cada año</h2>
+<p>El tope se reajusta cada febrero por la <strong>Superintendencia de Pensiones</strong> aplicando la variación real de las remuneraciones del país (ISR del INE). Histórico reciente:</p>
+<table>
+<thead><tr><th>Año</th><th>Tope AFP/Salud</th><th>Tope Cesantía</th></tr></thead>
+<tbody>
+<tr><td>2023</td><td>83,4 UF</td><td>125,1 UF</td></tr>
+<tr><td>2024</td><td>84,3 UF</td><td>126,5 UF</td></tr>
+<tr><td>2025</td><td>87,8 UF</td><td>131,9 UF</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>89,9 UF</strong></td><td><strong>134,9 UF</strong></td></tr>
+</tbody>
+</table>
+
+<h2>Cómo afecta tu sueldo líquido</h2>
+<p>Para sueldos <strong>bajo el tope</strong> (la mayoría de los trabajadores chilenos), el tope no tiene efecto: cotizan sobre el bruto completo. Para sueldos <strong>sobre el tope</strong>, el porcentaje efectivo de cotización cae a medida que sube el bruto.</p>
+<div class="numeric-example"><div class="numeric-example__title">Comparación: bruto $3.000.000 vs $5.000.000 (AFP Habitat 1,27%)</div><ul><li>Sueldo $3M (bajo tope): AFP descuenta 11,27% × $3M = $338.100 (11,27% efectivo)</li><li>Sueldo $5M (sobre tope $3,63M): AFP descuenta 11,27% × $3.626.566 = $408.711 (8,17% efectivo)</li></ul><span class="total">Sueldo más alto, descuento previsional efectivo más bajo</span></div>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por eso los altos ingresos requieren APV o ahorro complementario</strong><p>Si tu sueldo supera el tope, tu pensión futura quedará anclada al tope (no a tu sueldo real). Para mantener el nivel de vida en la jubilación necesitas APV (Régimen B) o ahorro voluntario en otro instrumento. La diferencia se nota a los 65: pensión sobre 89,9 UF sin APV vs sobre tu bruto real con APV.</p></div></aside>
+
+<h2>Tope imponible para independientes</h2>
+<p>Los <strong>trabajadores independientes</strong> (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 89,9 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope.</p>
+
+<h2>Tope cesantía: distinto y más alto</h2>
+<p>El <strong>seguro de cesantía</strong> tiene tope propio (134,9 UF en 2026), mucho más alto que el de AFP/salud. Esto fue cambio reciente: hasta 2017 el tope cesantía era el mismo que AFP. La idea fue dar mayor cobertura a sueldos medios-altos en caso de cesantía (subsidio del Fondo Solidario).</p>
+
+<h2>Por qué cambia cada año</h2>
+<p>El tope se ajusta por <strong>variación real de las remuneraciones</strong> (ISR), no por IPC. La diferencia es importante: en 2025 el ISR fue ~+2,4% real (las remuneraciones crecieron por encima de la inflación), por eso el tope subió de 87,8 a 89,9 UF (+2,4%). Si el ISR hubiera sido negativo, el tope habría bajado.</p>
+<p>Calcula tu cotización efectiva considerando el tope con la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> o la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización independiente</a>.</p>
+<p>Fuentes: <a href="https://www.spensiones.cl" target="_blank" rel="noopener">Superintendencia de Pensiones</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">D.L. 3500 Art. 16</a>, <a href="https://www.ine.cl" target="_blank" rel="noopener">INE — Índice de Remuneraciones Reales</a>.</p>`,
+  },
 ];
 
 // ============================================

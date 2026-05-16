@@ -182,13 +182,23 @@ export const guias: Guia[] = [
 <p>Para validar tu propio cálculo con tu AFP y plan de salud específicos, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>, que también permite simular cambios de AFP, FONASA vs Isapre y presupuestar el efecto de bonos imponibles.</p>`,
       },
       {
+        id: 'casos-bajo-medio-alto',
+        title: 'Casos numéricos: sueldo bajo, medio y alto',
+        level: 2,
+        html: `<p>Tres escenarios típicos para entender cómo cambia el factor bruto-líquido según el tramo del sueldo. Todos los ejemplos asumen AFP Habitat (1,27%), FONASA y contrato indefinido.</p>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $539.000 (ingreso mínimo)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$60.745</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$37.730</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.234</code></li><li><strong>Base tributable</strong>: $539.000 − $101.709 = $437.291</li><li><strong>Base UTM</strong>: $437.291 ÷ $70.588 ≈ 6,2 UTM (bajo 13,5 UTM exento)</li><li><strong>Impuesto</strong>: $0 (tramo exento)</li><li><strong>Total descuentos</strong>: $101.709</li></ul><span class="total">Líquido: $437.291 — factor 81,1% (sin impuesto único)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000 (ya calculado arriba)</div><ul><li>Total descuentos: $293.607 (incluye $10.557 de impuesto único 4% marginal)</li></ul><span class="total">Líquido: $1.206.393 — factor 80,4%</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000 (sobre tope imponible)</div><ul><li><strong>Imponible AFP/Salud</strong>: tope 89,9 UF = <code>$3.626.566</code> (no $4M)</li><li><strong>AFP (11,27% sobre tope)</strong>: <code>$408.714</code></li><li><strong>Salud FONASA (7% sobre tope)</strong>: <code>$253.860</code></li><li><strong>Imponible cesantía</strong>: $4.000.000 (bajo tope cesantía 134,9 UF ≈ $5,4M)</li><li><strong>Cesantía (0,6%)</strong>: <code>$24.000</code></li><li><strong>Base tributable</strong>: $4.000.000 − $686.574 = $3.313.426</li><li><strong>Base UTM</strong>: $3.313.426 ÷ $70.588 ≈ 46,9 UTM (tramo 30-50 UTM, factor 8%, rebaja 1,2 UTM)</li><li><strong>Impuesto</strong>: (46,9 × 0,08 − 1,2) × $70.588 ≈ <code>$179.953</code></li><li><strong>Total descuentos</strong>: $866.527</li></ul><span class="total">Líquido: $3.133.473 — factor 78,3% (a pesar del impuesto, el tope ayuda)</span></div>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Patrones que aparecen</strong><p>(1) En sueldo mínimo el factor es alto (~81%) porque no hay impuesto único. (2) En sueldo medio el factor cae al rondar 80% por el impuesto que empieza a morder. (3) En sueldo alto el factor vuelve a subir levemente porque el tope imponible "frena" las cotizaciones, aunque el impuesto crece.</p></div></aside>`,
+      },
+      {
         id: 'gratificacion-legal',
         title: 'Gratificación legal: el 25% que casi nadie entiende',
         level: 2,
         html: `<p>La <strong>gratificación legal</strong> es uno de los conceptos más confusos del derecho laboral chileno. Está regulada por los artículos 47 a 50 del Código del Trabajo: las empresas con fines de lucro y que registren utilidad líquida deben gratificar a sus trabajadores con uno de estos dos sistemas — el que les convenga al empleador:</p>
 <ol class="steps">
 <li><strong>Gratificación legal A (art. 47)</strong>: 30% de la utilidad líquida del ejercicio, repartida entre los trabajadores en proporción a sus remuneraciones.</li>
-<li><strong>Gratificación legal B (art. 50)</strong>: 25% de la remuneración mensual de cada trabajador, con tope anual de 4,75 ingresos mínimos mensuales (≈$2.731.875 en 2026 con sueldo mínimo $575.000).</li>
+<li><strong>Gratificación legal B (art. 50)</strong>: 25% de la remuneración mensual de cada trabajador, con tope anual de 4,75 ingresos mínimos mensuales (≈$2.560.250 en 2026 con sueldo mínimo $539.000).</li>
 </ol>
 <aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Art. 50 del Código del Trabajo</strong><p>"El empleador podrá eximirse de la obligación si abona a sus trabajadores el 25% de lo devengado mensualmente con tope de 4,75 ingresos mínimos mensuales al año."</p></div></aside>
 <p>En la práctica, la inmensa mayoría de empresas chilenas opta por el régimen B (más predecible y siempre acotado). Esto significa que tu sueldo bruto típicamente <em>ya incluye</em> la gratificación: cuando lees "sueldo bruto $1.000.000" en una oferta laboral, lo más probable es que $200.000 sean gratificación legal y $800.000 sueldo base.</p>
@@ -373,6 +383,17 @@ export const guias: Guia[] = [
         html: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Caso del ejemplo</strong><p>Trabajador con sueldo bruto de $900.000, contratado el 1 de marzo 2018, despedido el 15 de julio 2026 (8 años y 4 meses). No le avisaron con 30 días de anticipación. Tiene 8 días pendientes de vacaciones del año anterior.</p></div></aside>
 <div class="numeric-example"><div class="numeric-example__title">Cálculo del finiquito</div><ul><li><strong>Días trabajados último mes</strong>: 15 × ($900.000 ÷ 30) = <code>$450.000</code></li><li><strong>Vacaciones proporcionales</strong>: 4 meses × 1,25 = 5 días × $30.000 = <code>$150.000</code></li><li><strong>Vacaciones pendientes</strong>: 8 días × $30.000 = <code>$240.000</code></li><li><strong>Indemnización años servicio</strong>: 8 años × $900.000 = <code>$7.200.000</code> (sin tope, base 25,7 UF está bajo 90 UF)</li><li><strong>Indemnización sustitutiva del aviso</strong>: <code>$900.000</code></li><li>Gratificación proporcional: incluida en el sueldo mensual</li></ul><span class="total">Total finiquito: $8.940.000</span></div>
 <p>Para validar tu caso con datos reales (incluyendo gratificación, bonos, recargos por despido injustificado, vacaciones progresivas), usa la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>`,
+      },
+      {
+        id: 'finiquito-casos-bajo-medio-alto',
+        title: 'Casos numéricos: sueldo bajo, medio y alto',
+        level: 2,
+        html: `<p>Tres ejemplos de finiquito con la misma causal (necesidades de la empresa, art. 161) y misma antigüedad (5 años exactos), variando solo el sueldo. Asumimos que se avisó con 30 días de anticipación (no hay sustitutiva del aviso) y no hay vacaciones pendientes.</p>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $539.000 (ingreso mínimo), 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $539.000 = <code>$2.695.000</code></li><li><strong>Vacaciones proporcionales</strong> (asumiendo 6 meses del año en curso): 7,5 días × $17.967 = <code>$134.752</code></li><li>Base 13,4 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $2.829.752</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000, 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $1.500.000 = <code>$7.500.000</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $50.000 = <code>$375.000</code></li><li>Base 37,2 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $7.875.000</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000, 5 años</div><ul><li><strong>Base topeada</strong>: 90 UF × $40.357 = <code>$3.632.139</code> (no $4M, art. 172)</li><li><strong>Indemnización años servicio</strong>: 5 × $3.632.139 = <code>$18.160.694</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $133.333 = <code>$1.000.000</code></li></ul><span class="total">Finiquito: $19.160.694 (limitado por tope 90 UF)</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El tope de 90 UF muerde a los sueldos altos</strong><p>Si tu sueldo supera 90 UF (~$3,63M en mayo 2026), tu indemnización por años de servicio se calcula sobre $3.632.139 mensuales, no sobre tu sueldo real. Por cada año de antigüedad pierdes la diferencia. Para sueldos sobre $5M esto puede significar varias decenas de millones menos en el finiquito final.</p></div></aside>
+<p>Recuerda: las vacaciones proporcionales NO tienen tope de 90 UF, solo la indemnización por años de servicio (Art. 172 CdT). Calcula tu caso completo con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>`,
       },
       {
         id: 'plazos-legales',
@@ -1335,10 +1356,10 @@ export const guias: Guia[] = [
 <table>
 <thead><tr><th>Tramo</th><th>Ingreso mensual del trabajador</th><th>Monto por carga</th></tr></thead>
 <tbody>
-<tr><td>A</td><td>Hasta $620.251</td><td>$22.007</td></tr>
-<tr><td>B</td><td>$620.252 a $905.941</td><td>$13.505</td></tr>
-<tr><td>C</td><td>$905.942 a $1.412.957</td><td>$4.267</td></tr>
-<tr><td>D</td><td>Sobre $1.412.957</td><td>$0 (sin asignación)</td></tr>
+<tr><td>A</td><td>Hasta $631.976</td><td>$22.007</td></tr>
+<tr><td>B</td><td>$631.977 a $923.067</td><td>$13.505</td></tr>
+<tr><td>C</td><td>$923.068 a $1.439.668</td><td>$4.267</td></tr>
+<tr><td>D</td><td>Sobre $1.439.668</td><td>$0 (sin asignación)</td></tr>
 </tbody>
 </table>
 <p>Las cargas se reconocen oficialmente postulando ante el IPS o la Caja de Compensación correspondiente. Para hijos estudiantes 18-24 años, se requiere certificado anual de estudios.</p>
@@ -1496,6 +1517,486 @@ export const guias: Guia[] = [
         level: 2,
         html: `<div class="numeric-example"><div class="numeric-example__title">Carrera 5 años, arancel anual UF 200, total UF 1.000</div><ul><li>Monto crédito: UF 1.000 (≈$40.340.000 al cambio mayo 2026)</li><li>Tasa anual: 2% real</li><li>Plazo: 20 años (240 cuotas)</li><li>Cuota fija UF: ≈ 5,1 UF/mes</li><li>Cuota inicial en pesos: ≈ $205.700/mes (mayo 2026)</li><li>Total a pagar: UF 1.213 (≈$48,9M, intereses UF 213)</li></ul><span class="total">Cuota mensual ≈ $206.000 — limitada a 10% ingreso bruto</span></div>
 <p>Si tu ingreso bruto al egresar es $1.500.000, la cuota máxima legal es $150.000. La diferencia se aplaza con extensión de plazo. Con la <a href="/calculadoras/calculadora-credito-cae">calculadora de CAE</a> puedes simular distintos escenarios de ingreso y plazo.</p>`,
+      },
+    ],
+  },
+
+  // ============================================
+  // 11. Empresas y PYMEs en Chile 2026
+  // ============================================
+  {
+    slug: 'empresas-pymes-chile',
+    title: 'Empresas y PYMEs en Chile 2026: costos, impuestos y obligaciones',
+    intent: '¿Cuánto cuesta operar una PYME en Chile y qué impuestos paga?',
+    description:
+      'Guía completa para empresas y PYMEs en Chile 2026: costo empleador, régimen 14D / 14A, IVA, PPM, patente comercial, contribuciones, retención de honorarios y boletas. Con fórmulas y ejemplos.',
+    category: 'tributario',
+    categoryLabel: 'Tributario y empresas',
+    keywords: [
+      'pyme chile 2026',
+      'régimen 14D Pro PYME',
+      'régimen 14A semi integrado',
+      'costo empleador chile',
+      'patente comercial 2026',
+      'PPM 1ra categoría',
+      'IVA crédito débito',
+      'retención boleta honorarios 15.25',
+      'contribuciones bienes raíces',
+      'tasa primera categoría 25%',
+      'mutual de seguridad ley 16.744',
+      'sii chile pyme',
+      'reforma 21.713',
+      'costo total empleado chile',
+    ],
+    publishedAt: '2026-05-16',
+    updatedAt: '2026-05-16',
+    readingTime: 18,
+    relatedCalculators: [
+      'calculadora-costo-empleado-pyme',
+      'calculadora-cotizacion-independientes',
+      'calculadora-ppm',
+      'calculadora-patente-comercial',
+      'calculadora-iva',
+      'calculadora-contribuciones',
+      'calculadora-intereses-mora',
+      'calculadora-boleta-honorarios',
+      'calculadora-impuesto-segunda-categoria',
+      'calculadora-finiquito',
+      'calculadora-plusvalia',
+      'calculadora-operacion-renta',
+    ],
+    relatedArticles: [
+      'boleta-honorarios-completo',
+      'guia-iva-chile-2026',
+      'como-calcular-finiquito-chile',
+    ],
+    sources: [
+      { label: 'Servicio de Impuestos Internos (SII)', url: 'https://www.sii.cl' },
+      {
+        label: 'Ley sobre Impuesto a la Renta (LIR)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6368',
+      },
+      {
+        label: 'DL 824 — Impuesto a la Renta',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6368',
+      },
+      {
+        label: 'DL 825 — IVA',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6369',
+      },
+      {
+        label: 'DL 3063 — Rentas Municipales (patente)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=29842',
+      },
+      {
+        label: 'Ley 21.578 — Calendario cotización honorarios',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1191726',
+      },
+      {
+        label: 'Ley 21.713 — Cumplimiento de obligaciones tributarias',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1208656',
+      },
+      { label: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl' },
+    ],
+    sections: [
+      {
+        id: 'panorama-pyme',
+        title: 'Panorama: ¿qué es una PYME en Chile?',
+        level: 2,
+        html: `<p>El Servicio de Impuestos Internos (SII) clasifica a las empresas según el monto anual de sus ventas en UF (Ley 20.416 y Resolución Ex. SII N°55/2018):</p>
+<table>
+<thead><tr><th>Tamaño</th><th>Ventas anuales (UF)</th><th>Equivalente CLP (UF mayo 2026)</th></tr></thead>
+<tbody>
+<tr><td>Micro</td><td>0 – 2.400 UF</td><td>~$96,9 millones</td></tr>
+<tr><td>Pequeña</td><td>2.400 – 25.000 UF</td><td>~$96,9M – $1.009M</td></tr>
+<tr><td>Mediana</td><td>25.000 – 100.000 UF</td><td>~$1.009M – $4.036M</td></tr>
+<tr><td>Grande</td><td>+ 100.000 UF</td><td>+ $4.036M</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Régimen Pro PYME (14D)</strong><p>Las empresas con ventas anuales hasta 75.000 UF y capital efectivo de hasta 85.000 UF al inicio pueden acogerse al régimen 14D, que permite contabilidad simplificada, depreciación instantánea y tributación en base a ingresos efectivos. Es la opción más eficiente para la inmensa mayoría de PYMEs chilenas.</p></div></aside>
+<ul class="data-grid"><li><span class="data-grid__label">Tasa 1ra categoría 14D</span><span class="data-grid__value">25%</span></li><li><span class="data-grid__label">Tasa 1ra categoría 14A</span><span class="data-grid__value">27%</span></li><li><span class="data-grid__label">Tasa IVA</span><span class="data-grid__value">19%</span></li><li><span class="data-grid__label">Retención honorarios 2026</span><span class="data-grid__value">15,25%</span></li></ul>`,
+      },
+      {
+        id: 'costo-empleador',
+        title: 'Costo total de un empleado para la empresa',
+        level: 2,
+        html: `<p>Cuando una PYME contrata, el costo NO es el sueldo bruto pactado. Hay un sobrecargo previsional típico de 4%-6% que paga íntegramente el empleador. Es <strong>error común</strong> creer que la AFP (10%) y la salud (7%) son costos del empleador: esos descuentos los paga el trabajador.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Quién paga qué</strong><p>D.L. 3500 Art. 17: el 10% de AFP lo paga el trabajador. Ley 20.255: el SIS lo paga el empleador. Ley 19.728: el seguro de cesantía lo paga 0,6% trabajador / 2,4% empleador (indefinido) o 0% / 3,0% (plazo fijo). Ley 16.744: la mutual de seguridad la paga el empleador.</p></div></aside>
+<table>
+<thead><tr><th>Aporte empleador</th><th>Tasa 2026</th><th>Sobre $1.000.000 bruto</th></tr></thead>
+<tbody>
+<tr><td>SIS (Seguro Invalidez/Sobrevivencia)</td><td>1,15%</td><td>$11.500</td></tr>
+<tr><td>Seguro cesantía (indefinido)</td><td>2,40%</td><td>$24.000</td></tr>
+<tr><td>Mutual seguridad (Ley 16.744)</td><td>0,90% – 4,30%</td><td>$9.000 – $43.000</td></tr>
+<tr><td>Seguro Social Previsional (Ley 21.735)</td><td>1,0% (sube a 1,75% en agosto/2026)</td><td>$10.000</td></tr>
+</tbody>
+</table>
+<div class="numeric-example"><div class="numeric-example__title">PYME contrata empleado con sueldo bruto $1.000.000 (indefinido)</div><ul><li>Sueldo bruto: $1.000.000</li><li>SIS empleador (1,15%): $11.500</li><li>Seguro cesantía empleador (2,4%): $24.000</li><li>Mutual seguridad (0,95% promedio): $9.500</li><li>Seguro Social Previsional (1,0% en 2026): $10.000</li></ul><span class="total">Costo total mensual: $1.055.000 — factor previsional ≈ 1,055</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Calendario Ley 21.735 (reforma de pensiones)</strong><p>El Seguro Social Previsional sube progresivamente el aporte del empleador desde 1% (2025) hasta 7% (2033), con incrementos anuales de 0,75 puntos cada agosto. En 2026 son 1,0% el primer semestre y 1,75% desde agosto. Planifica tu costo laboral con ese calendario en mano.</p></div></aside>
+<p>Calcula el costo total de tu empleado considerando AFP, mutual y reforma con la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleador</a>.</p>`,
+      },
+      {
+        id: 'regimen-14d-vs-14a',
+        title: 'Régimen 14D vs 14A: cuál te conviene',
+        level: 2,
+        html: `<p>Después de la reforma tributaria (Ley 21.210 de 2020) y la modernización 21.713 de 2024, las empresas chilenas pueden tributar en uno de estos dos regímenes principales del Art. 14 LIR:</p>
+<table>
+<thead><tr><th>Característica</th><th>14D Pro PYME</th><th>14A Semi-integrado</th></tr></thead>
+<tbody>
+<tr><td>Requisitos</td><td>Ventas ≤ 75.000 UF/año + capital ≤ 85.000 UF</td><td>Cualquier empresa</td></tr>
+<tr><td>Tasa Impuesto Primera Categoría</td><td>25%</td><td>27%</td></tr>
+<tr><td>Contabilidad</td><td>Simplificada (caja)</td><td>Completa (devengado)</td></tr>
+<tr><td>Crédito IDPC para socios</td><td>100% acreditable contra IGC</td><td>65% acreditable</td></tr>
+<tr><td>Depreciación</td><td>Instantánea</td><td>Acelerada / lineal</td></tr>
+<tr><td>PPM (pago provisional mensual)</td><td>Tasa fija 0,25% – 0,5%</td><td>Tasa variable según ejercicio anterior</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Para casi todas las PYMEs, 14D gana</strong><p>El 14D no solo paga 2 puntos menos de impuesto, sino que acredita el 100% del IDPC contra el Global Complementario del socio. Una empresa rentable con utilidades retiradas paga, en promedio, 8-12 puntos menos de carga tributaria total bajo 14D que bajo 14A.</p></div></aside>
+<p>Casos donde 14A puede convenir: empresas que reinvierten todas las utilidades durante muchos años (efecto del crédito acreditable se diluye), holdings con socios extranjeros, o sociedades con flujos de gastos no reembolsables muy grandes.</p>`,
+      },
+      {
+        id: 'iva',
+        title: 'IVA: el 19% que entra y sale todos los meses',
+        level: 2,
+        html: `<p>El <strong>IVA</strong> (DL 825 de 1974) grava todas las ventas y servicios afectos con tasa del <strong>19%</strong>. Las empresas funcionan como agentes recaudadores: cobran IVA débito en sus ventas, descuentan IVA crédito de sus compras, y pagan al SII la diferencia mensualmente (Form. 29).</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Art. 23 DL 825</strong><p>"Los contribuyentes afectos al pago del tributo de este Título tendrán derecho a un crédito fiscal contra el débito fiscal determinado por el mismo período tributario, equivalente al impuesto recargado en las facturas que acrediten las adquisiciones o servicios utilizados en el giro del negocio."</p></div></aside>
+<div class="numeric-example"><div class="numeric-example__title">PYME comercial — mes de marzo 2026</div><ul><li>Ventas afectas (neto): $20.000.000</li><li>IVA débito (19%): $3.800.000</li><li>Compras afectas (neto): $14.000.000</li><li>IVA crédito (19%): $2.660.000</li></ul><span class="total">IVA a pagar al SII: $1.140.000 (déb − créd)</span></div>
+<p>Calcula la separación IVA neto/bruto y conversiones de tu mes con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a>.</p>
+<h3>Operaciones exentas y gravadas</h3>
+<ul>
+<li><strong>Exentas</strong>: arriendo de inmuebles habitacionales, servicios profesionales (boletas de honorarios), exportaciones (con derecho a recuperar crédito), educación, salud (parcial), transporte de pasajeros.</li>
+<li><strong>Gravadas</strong>: venta de bienes corporales muebles e inmuebles (con condiciones), prestaciones de servicios mercantiles, importaciones.</li>
+</ul>
+<h3>Cambio Ley 21.713 (2024) — facturación electrónica universal</h3>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Boletas electrónicas obligatorias</strong><p>Desde marzo 2025 la totalidad de las boletas y facturas deben ser electrónicas (sin excepción para microempresas). El SII rechaza el crédito fiscal sobre comprobantes en papel que se emitan después de esa fecha. Si emites boleta de honorarios en papel, también se rechaza la deducción de gasto.</p></div></aside>`,
+      },
+      {
+        id: 'ppm',
+        title: 'PPM: pagos provisionales mensuales',
+        level: 2,
+        html: `<p>El <strong>PPM</strong> (Pago Provisional Mensual, Art. 84 LIR) es un anticipo a cuenta del Impuesto a la Renta anual que la empresa paga cada mes con el Form. 29. Funciona como una retención obligatoria sobre los ingresos brutos.</p>
+<table>
+<thead><tr><th>Régimen / Actividad</th><th>Tasa PPM 2026</th></tr></thead>
+<tbody>
+<tr><td>14D Pro PYME (1er año)</td><td>0,25%</td></tr>
+<tr><td>14D Pro PYME (años siguientes)</td><td>Variable según resultado</td></tr>
+<tr><td>14A Semi-integrado</td><td>Variable según ejercicio anterior (mínimo 0,5%)</td></tr>
+<tr><td>Comercio (sin régimen específico)</td><td>1,0%</td></tr>
+<tr><td>Transporte terrestre carga/pasajeros</td><td>0,3%</td></tr>
+<tr><td>Construcción</td><td>0,2%</td></tr>
+<tr><td>Profesionales 2da categoría</td><td>15,25% (calendario 21.578)</td></tr>
+</tbody>
+</table>
+<div class="numeric-example"><div class="numeric-example__title">PYME comercial 14D — ventas $30.000.000/mes</div><ul><li>Ventas brutas con IVA: $30.000.000</li><li>Ventas netas: $30.000.000 ÷ 1,19 = $25.210.084</li><li>PPM (0,25%): $25.210.084 × 0,25% = $63.025</li></ul><span class="total">PPM a pagar al mes: $63.025</span></div>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Recargo / rebaja anual del PPM</strong><p>En abril de cada año, en la Operación Renta, se ajusta la tasa de PPM para los siguientes 12 meses según el resultado del ejercicio anterior. Si pagaste poco IDPC, la tasa baja. Si pagaste mucho, sube. Las empresas con utilidades en alza típicamente ven subidas de 0,1 a 0,2 puntos cada año.</p></div></aside>
+<p>Para profesionales independientes la tasa coincide con la <a href="/guias/iva-boleta-honorarios-chile">retención de boletas de honorarios</a> según el calendario Ley 21.578: 14,5% (2025), 15,25% (2026), 16% (2027), 17% (2028). Calcula tu PPM con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
+      },
+      {
+        id: 'patente-comercial',
+        title: 'Patente comercial municipal',
+        level: 2,
+        html: `<p>La <strong>patente comercial</strong> (DL 3063 / Ley de Rentas Municipales) es un tributo anual que pagan todas las personas naturales y jurídicas que ejerzan una actividad comercial, industrial o de servicios. La cobra la municipalidad donde tienes el domicilio comercial o sucursal.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Art. 24 DL 3063</strong><p>"La patente grava la actividad que se ejerce por un mismo contribuyente, en su local, oficina, establecimiento, kiosco o lugar determinado con prescindencia de la clase o número de giros o rubros distintos que comprenda."</p></div></aside>
+<ul class="data-grid"><li><span class="data-grid__label">Tasa legal</span><span class="data-grid__value">0,25% – 0,5% del capital propio</span></li><li><span class="data-grid__label">Mínimo anual</span><span class="data-grid__value">1 UTM (~$70.588)</span></li><li><span class="data-grid__label">Máximo anual</span><span class="data-grid__value">8.000 UTM (~$564M)</span></li><li><span class="data-grid__label">Cuotas</span><span class="data-grid__value">Enero y julio</span></li></ul>
+<table>
+<thead><tr><th>Comuna</th><th>Tasa típica</th><th>Capital $100M → patente anual</th></tr></thead>
+<tbody>
+<tr><td>Santiago</td><td>0,5%</td><td>$500.000</td></tr>
+<tr><td>Providencia</td><td>0,4%</td><td>$400.000</td></tr>
+<tr><td>Las Condes</td><td>0,35%</td><td>$350.000</td></tr>
+<tr><td>Otras comunas (default)</td><td>0,25%</td><td>$250.000</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El "capital propio" no es el patrimonio neto</strong><p>El capital propio para efectos de patente es el patrimonio inicial declarado al inicio de actividades, ajustado por la corrección monetaria del SII cada año. NO es el capital social del contrato ni el patrimonio neto del balance. Se obtiene del Form. 22 del año anterior. Empresas nuevas pueden declarar capital cero el primer año (mínimo 1 UTM).</p></div></aside>
+<p>Calcula tu patente comercial según comuna y capital con la <a href="/calculadoras/calculadora-patente-comercial">calculadora de patente comercial</a>.</p>`,
+      },
+      {
+        id: 'contribuciones-empresa',
+        title: 'Contribuciones de bienes raíces',
+        level: 2,
+        html: `<p>Si tu PYME es propietaria del local, oficina o galpón donde opera, paga <strong>contribuciones</strong> (Impuesto Territorial, Ley 17.235) anualmente, en cuatro cuotas (abril, junio, septiembre, noviembre). La tasa depende del destino del inmueble:</p>
+<table>
+<thead><tr><th>Destino</th><th>Tasa anual 2026</th><th>Sobre avalúo $200M (anual)</th></tr></thead>
+<tbody>
+<tr><td>Habitacional</td><td>0,93% (con descuento 0,025)</td><td>$1.810.000</td></tr>
+<tr><td>Comercial</td><td>1,2%</td><td>$2.400.000</td></tr>
+<tr><td>Industrial</td><td>1,2%</td><td>$2.400.000</td></tr>
+<tr><td>Sitio eriado</td><td>2,0%</td><td>$4.000.000</td></tr>
+<tr><td>Agrario</td><td>0,5%</td><td>$1.000.000</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Las contribuciones son crédito contra IDPC</strong><p>Para empresas en régimen 14A, las contribuciones del inmueble destinado al giro son <strong>crédito contra el Impuesto de Primera Categoría</strong> (Art. 20 N°1 letra a) LIR). Para 14D no aplica este crédito, pero las contribuciones sí son gasto deducible.</p></div></aside>
+<p>Calcula tus contribuciones por destino y avalúo con la <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a>.</p>`,
+      },
+      {
+        id: 'retencion-honorarios',
+        title: 'Retención de honorarios y cotizaciones de independientes',
+        level: 2,
+        html: `<p>Cuando una empresa paga a un profesional independiente que emite <strong>boleta de honorarios</strong>, debe retener un porcentaje del bruto y enterarlo en el SII. La tasa sube progresivamente (Ley 21.578) hasta cubrir las cotizaciones previsionales del trabajador independiente:</p>
+<table>
+<thead><tr><th>Año</th><th>Retención</th><th>Sobre $1.000.000 bruto</th></tr></thead>
+<tbody>
+<tr><td>2025</td><td>14,5%</td><td>$145.000 retenidos</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>15,25%</strong></td><td><strong>$152.500 retenidos</strong></td></tr>
+<tr><td>2027</td><td>16,0%</td><td>$160.000 retenidos</td></tr>
+<tr><td>2028</td><td>17,0%</td><td>$170.000 retenidos</td></tr>
+</tbody>
+</table>
+<p>La retención del 15,25% en 2026 financia <strong>internamente</strong>: 10% impuesto a la renta (PPM) + 2,18% salud + 0,62% AFP + 1,52% SIS + 0,93% accidentes del trabajo. El SII redistribuye automáticamente esos montos a las instituciones correspondientes en la Operación Renta de abril.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Independiente: no descuentes cotizaciones adicionales</strong><p>Bug común al emitir una boleta: descontar el bruto en 15,25% de retención + descuentos adicionales por AFP, salud y SIS. Eso es contabilidad doble. La retención YA financia las cotizaciones; el líquido que recibes es bruto − retención. Las cotizaciones se materializan en abril vía Operación Renta.</p></div></aside>
+<p>Calcula el líquido y el desglose interno de la retención con la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boletas</a> y la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotizaciones independientes</a>.</p>`,
+      },
+      {
+        id: 'mora-y-multas',
+        title: 'Mora tributaria: multas, recargos e intereses',
+        level: 2,
+        html: `<p>El SII aplica recargos automáticos cuando una declaración o pago se hace fuera de plazo (Art. 53 Código Tributario):</p>
+<ul class="data-grid"><li><span class="data-grid__label">Reajuste IPC</span><span class="data-grid__value">Variación IPC del período</span></li><li><span class="data-grid__label">Interés mensual</span><span class="data-grid__value">1,5% por mes o fracción</span></li><li><span class="data-grid__label">Multa Form. 29</span><span class="data-grid__value">10% si paga ≤5 meses; +2% por mes adicional, tope 30%</span></li></ul>
+<div class="numeric-example"><div class="numeric-example__title">PYME que paga IVA $1.500.000 con 90 días de atraso</div><ul><li>Capital: $1.500.000</li><li>Reajuste IPC (estim. 0,5%): $7.500</li><li>Interés (1,5% × 3 meses): $67.612 sobre reajustado</li><li>Multa (10%): $150.751</li></ul><span class="total">Total a pagar: $1.725.863 — recargo ~15% sobre el capital</span></div>
+<p>Para deudas laborales (sueldos impagos, finiquitos), aplica el Art. 63 CdT: capital reajustado por IPC + interés simple a la TMC vigente desde el día del incumplimiento. Calcula tu mora laboral con la <a href="/calculadoras/calculadora-intereses-mora">calculadora de intereses por mora</a>.</p>`,
+      },
+      {
+        id: 'cierre-checklist',
+        title: 'Checklist mensual y anual del PYME',
+        level: 2,
+        html: `<aside class="callout callout--success"><span class="callout__icon" aria-hidden="true">✅</span><div class="callout__body"><strong>Lo mínimo para no tener problemas</strong><p>Estas son las obligaciones que debes tener al día. Si delegas, asegúrate de que tu contador las cumpla mes a mes.</p></div></aside>
+<h3>Mensuales (Form. 29 — antes del día 12 del mes siguiente)</h3>
+<ul>
+<li>IVA débito y crédito (con factura electrónica al día).</li>
+<li>PPM según régimen.</li>
+<li>Retenciones de honorarios pagados (15,25% en 2026).</li>
+<li>Pago de cotizaciones previsionales del personal (PreviRed antes del día 13).</li>
+</ul>
+<h3>Trimestrales</h3>
+<ul>
+<li>Declaración Jurada IVA proporcional (si tienes ventas mixtas exentas/gravadas).</li>
+</ul>
+<h3>Anuales</h3>
+<ul>
+<li>Operación Renta (abril) — Form. 22.</li>
+<li>Patente comercial (enero y julio).</li>
+<li>Contribuciones del inmueble del giro (4 cuotas).</li>
+<li>Renovación de inicio de actividades / cambio de domicilio si aplica.</li>
+<li>Inventario y declaración de existencias al cierre del ejercicio.</li>
+</ul>
+<p>Para profundizar en aspectos laborales del PYME (despidos, finiquitos, indemnizaciones), revisa la <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral</a>. Para optimizar tu plantilla, calcula el costo total de cada empleado con la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleador</a>.</p>`,
+      },
+    ],
+  },
+
+  // ============================================
+  // 12. Hogar y servicios básicos en Chile 2026
+  // ============================================
+  {
+    slug: 'hogar-servicios-basicos-chile',
+    title: 'Hogar y servicios básicos en Chile 2026: luz, agua, gas, gastos comunes',
+    intent: '¿Cuánto se paga por servicios básicos en una casa o departamento?',
+    description:
+      'Guía de costos del hogar en Chile 2026: cuenta de la luz BT1, agua potable, subsidios, gas, internet, gastos comunes Ley 21.442, contribuciones y reajuste de arriendo (Ley 21.461).',
+    category: 'finanzas',
+    categoryLabel: 'Finanzas del hogar',
+    keywords: [
+      'cuenta de la luz chile',
+      'tarifa BT1 2026',
+      'subsidio agua potable',
+      'gas licuado vs natural',
+      'internet hogar chile',
+      'gastos comunes ley 21.442',
+      'contribuciones bienes raíces',
+      'reajuste arriendo ley 21.461',
+      'descongelamiento eléctrico ley 21.667',
+      'kWh chile precio',
+    ],
+    publishedAt: '2026-05-16',
+    updatedAt: '2026-05-16',
+    readingTime: 14,
+    relatedCalculators: [
+      'calculadora-cuenta-luz',
+      'calculadora-subsidio-agua',
+      'calculadora-gastos-comunes',
+      'calculadora-contribuciones',
+      'calculadora-reajuste-arriendo',
+      'calculadora-credito-hipotecario',
+      'calculadora-subsidio-habitacional',
+    ],
+    relatedArticles: [
+      'reajuste-arriendo-uf-2026',
+      'todo-sobre-uf-chile',
+    ],
+    sources: [
+      {
+        label: 'Comisión Nacional de Energía (CNE)',
+        url: 'https://www.cne.cl',
+      },
+      {
+        label: 'Superintendencia de Servicios Sanitarios (SISS)',
+        url: 'https://www.siss.gob.cl',
+      },
+      {
+        label: 'Subsecretaría de Telecomunicaciones (Subtel)',
+        url: 'https://www.subtel.gob.cl',
+      },
+      {
+        label: 'Ley 21.667 — Descongelamiento de tarifas eléctricas',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1203795',
+      },
+      {
+        label: 'Ley 21.442 — Nueva Ley de Copropiedad Inmobiliaria',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1175052',
+      },
+      {
+        label: 'Ley 21.461 — Mejoras al arrendamiento de predios urbanos',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1180127',
+      },
+      {
+        label: 'Ley 18.778 — Subsidio Agua Potable',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=30007',
+      },
+    ],
+    sections: [
+      {
+        id: 'panorama-hogar',
+        title: 'Cuánto cuesta el hogar promedio en Chile',
+        level: 2,
+        html: `<p>Para una familia tipo (2 adultos + 1 niño) en un departamento de 60 m² en Santiago, los servicios básicos en 2026 totalizan entre <strong>$240.000 y $420.000 mensuales</strong>, según consumo y ubicación.</p>
+<table>
+<thead><tr><th>Servicio</th><th>Mensual mínimo</th><th>Mensual promedio</th><th>Mensual alto</th></tr></thead>
+<tbody>
+<tr><td>Luz (200 kWh/mes)</td><td>$30.000</td><td>$45.000</td><td>$70.000</td></tr>
+<tr><td>Agua (15 m³/mes)</td><td>$15.000</td><td>$22.000</td><td>$35.000</td></tr>
+<tr><td>Gas licuado / red</td><td>$25.000</td><td>$45.000</td><td>$80.000</td></tr>
+<tr><td>Internet hogar (200-600 Mbps)</td><td>$15.990</td><td>$25.990</td><td>$45.000</td></tr>
+<tr><td>Gastos comunes</td><td>$50.000</td><td>$120.000</td><td>$220.000</td></tr>
+<tr><td>Contribuciones (cuota)</td><td>$0 (exento)</td><td>$25.000</td><td>$80.000</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El gasto fijo del hogar pesa fuerte sobre el presupuesto</strong><p>Con sueldo líquido $1.200.000 (típico de un profesional joven), los servicios básicos pueden absorber 25%-35% del ingreso. Reducir luz, gas e internet con simples cambios de hábito puede liberar $40.000-$60.000/mes.</p></div></aside>`,
+      },
+      {
+        id: 'cuenta-luz',
+        title: 'Cuenta de la luz: tarifa BT1 y descongelamiento',
+        level: 2,
+        html: `<p>La <strong>tarifa BT1</strong> (Baja Tensión Tipo 1, residencial) es la tarifa que aplica a la inmensa mayoría de hogares chilenos. La fija la <strong>CNE</strong> (Comisión Nacional de Energía) en decretos tarifarios semestrales. Tras la <strong>Ley 21.667 (2024)</strong> que descongeló las tarifas congeladas desde 2019, los precios subieron progresivamente entre abril 2024 y enero 2026.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Ley 21.667 — Estabilización de tarifas</strong><p>La ley creó el FET (Fondo de Estabilización de Tarifas) y un mecanismo de subsidio focalizado para hogares vulnerables. Los hogares del 40% más vulnerable según RSH reciben descuento automático en la cuenta de luz a través del subsidio eléctrico.</p></div></aside>
+<table>
+<thead><tr><th>Componente cuenta luz</th><th>Valor 2026 (Santiago, sin IVA)</th></tr></thead>
+<tbody>
+<tr><td>Cargo fijo mensual</td><td>$2.800</td></tr>
+<tr><td>Energía: 0–150 kWh</td><td>$165 / kWh</td></tr>
+<tr><td>Energía: 150–300 kWh</td><td>$185 / kWh</td></tr>
+<tr><td>Energía: + 300 kWh</td><td>$220 / kWh</td></tr>
+</tbody>
+</table>
+<div class="numeric-example"><div class="numeric-example__title">Familia con consumo 250 kWh/mes en Santiago</div><ul><li>Cargo fijo: $2.800</li><li>Tramo 0-150 kWh: 150 × $165 = $24.750</li><li>Tramo 150-300 kWh: 100 × $185 = $18.500</li><li>Subtotal neto: $46.050</li><li>IVA 19%: $8.749</li></ul><span class="total">Total cuenta luz: $54.799 — promedio ~$219/kWh con IVA</span></div>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Tres acciones que bajan la cuenta hasta 30%</strong><p>(1) Cambiar todas las ampolletas a LED (ahorra 80% vs incandescentes y 30% vs halógenas). (2) Bajar 1°C el termostato del agua caliente sanitaria (ACS). (3) Desconectar electrodomésticos en standby — pueden representar el 5%-10% del consumo total.</p></div></aside>
+<p>Calcula tu cuenta exacta y simula consumos con la <a href="/calculadoras/calculadora-cuenta-luz">calculadora de cuenta de luz</a>.</p>`,
+      },
+      {
+        id: 'agua',
+        title: 'Agua potable y subsidio (Ley 18.778)',
+        level: 2,
+        html: `<p>El servicio de agua potable lo entregan empresas sanitarias privadas reguladas por la <strong>SISS</strong> (Aguas Andinas, ESSAL, ESSBIO, etc.). La cuenta tiene tres componentes: cargo fijo, agua potable consumida (m³) y servicio de alcantarillado proporcional.</p>
+<ul class="data-grid"><li><span class="data-grid__label">Cargo fijo mensual</span><span class="data-grid__value">$1.500 – $3.500</span></li><li><span class="data-grid__label">Agua potable</span><span class="data-grid__value">$700 – $1.400 / m³</span></li><li><span class="data-grid__label">Alcantarillado</span><span class="data-grid__value">$400 – $900 / m³</span></li><li><span class="data-grid__label">Promedio nacional</span><span class="data-grid__value">$1.300 / m³ (todo incluido)</span></li></ul>
+<h3>Subsidio Agua Potable (SAP)</h3>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=30007" target="_blank" rel="noopener">Ley 18.778</a> creó el SAP para hogares vulnerables. Subsidia entre 25% y 100% del consumo según tramo de RSH y comuna. La tasa máxima del subsidio es 60% del consumo del primer tramo (15 m³).</p>
+<table>
+<thead><tr><th>Tramo RSH</th><th>Subsidio sobre primeros 15 m³</th></tr></thead>
+<tbody>
+<tr><td>0%-40% (más vulnerable)</td><td>60%</td></tr>
+<tr><td>40%-70% (vulnerable medio)</td><td>40%</td></tr>
+<tr><td>70%-90% (vulnerabilidad baja)</td><td>25%</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Cómo postular al SAP</strong><p>El SAP se postula en la municipalidad correspondiente con cédula de identidad, certificado de RSH y boletas de agua de los últimos 3 meses. Vigencia: 3 años renovables. NO es automático aunque cumplas requisitos: hay que postular activamente.</p></div></aside>
+<p>Estima el monto de tu subsidio según RSH y consumo con la <a href="/calculadoras/calculadora-subsidio-agua">calculadora de subsidio del agua</a>.</p>`,
+      },
+      {
+        id: 'gas-internet',
+        title: 'Gas e internet: dos costos que muchos sobre-pagan',
+        level: 2,
+        html: `<h3>Gas licuado (cilindros) vs gas natural por red</h3>
+<p>El gas licuado en cilindros (45 kg, 15 kg, 11 kg, 5 kg) es el más usado fuera del Gran Santiago. El gas natural por red (Lipigas, Metrogas, Gasvalpo) llega solo a comunas urbanas.</p>
+<table>
+<thead><tr><th>Tipo</th><th>Precio promedio 2026</th><th>Comparación equivalente energético</th></tr></thead>
+<tbody>
+<tr><td>Cilindro 15 kg</td><td>$25.000 – $32.000</td><td>~$2.000 / Mcal</td></tr>
+<tr><td>Cilindro 45 kg</td><td>$70.000 – $90.000</td><td>~$1.800 / Mcal</td></tr>
+<tr><td>Gas natural red (Metrogas)</td><td>~$650 – $850 / m³</td><td>~$80 / Mcal</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Gas natural vs licuado</strong><p>Si tienes acceso a red de gas natural, el precio por Megacaloría es 10-25 veces menor que el de cilindros. Para una familia que consume 30 Mcal/mes (cocina + agua caliente), el ahorro anual puede superar los $400.000.</p></div></aside>
+<h3>Internet hogar (Ley General de Telecomunicaciones)</h3>
+<p>El mercado chileno de internet residencial ofrece planes desde $15.990/mes (200 Mbps fibra) hasta $50.000+ (1 Gbps). Subtel publica indicadores trimestrales por proveedor:</p>
+<ul>
+<li><strong>Velocidad mínima exigible</strong>: el 70% de la velocidad contratada al menos el 95% del tiempo (Reglamento de Calidad de Servicio).</li>
+<li><strong>Cláusula automática de baja</strong>: puedes cambiarte a un plan más barato del mismo proveedor sin recargo (Ley 21.387 de 2021).</li>
+<li><strong>Portabilidad de número fijo</strong>: si tu plan incluye telefonía, puedes mantenerla al cambiar de proveedor.</li>
+</ul>`,
+      },
+      {
+        id: 'gastos-comunes',
+        title: 'Gastos comunes: la nueva Ley 21.442',
+        level: 2,
+        html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1175052" target="_blank" rel="noopener">Ley 21.442 (2022)</a>, vigente desde abril 2024, reemplazó la antigua Ley 19.537 y modernizó la regulación de gastos comunes en condominios.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Cambios clave Ley 21.442</strong><p>(1) Prohibición de cobrar más a quienes pagan al día para subsidiar morosos. (2) Conceptos obligatorios deben aparecer separados (administración, mantención, fondo de reserva). (3) Asambleas pueden hacerse 100% remotas con quórum reducido. (4) Multas máximas a copropietarios morosos: 1 UF por mes.</p></div></aside>
+<p>El gasto común se divide entre los copropietarios según el <strong>coeficiente de copropiedad</strong> definido en el reglamento (en general, proporcional a la superficie de cada unidad). NO existe una "tarifa por m²" obligatoria; los $/m² promedio que circulan son referenciales del mercado.</p>
+<table>
+<thead><tr><th>Concepto</th><th>% típico del gasto común</th></tr></thead>
+<tbody>
+<tr><td>Personal (conserjería, aseo)</td><td>35% – 45%</td></tr>
+<tr><td>Administración</td><td>5% – 8%</td></tr>
+<tr><td>Mantenimiento (ascensores, piscina, jardines)</td><td>15% – 25%</td></tr>
+<tr><td>Servicios (luz / agua áreas comunes)</td><td>10% – 15%</td></tr>
+<tr><td>Fondo de reserva (mín. 5% legal)</td><td>5% – 10%</td></tr>
+<tr><td>Servicios premium (gym, salón eventos)</td><td>5% – 15%</td></tr>
+</tbody>
+</table>
+<div class="numeric-example"><div class="numeric-example__title">Departamento 60 m² en Las Condes con piscina, gym y conserjería 24/7</div><ul><li>Base por superficie ($15.000/m²): $900.000 ÷ N° unidades = depende del edificio</li><li>Cuota promedio observada del mercado para departamentos similares: <strong>$120.000 – $180.000/mes</strong></li></ul><span class="total">El monto exacto sale del prorrateo del reglamento, NO de fórmulas externas</span></div>
+<p>Estima un orden de magnitud según superficie y servicios con la <a href="/calculadoras/calculadora-gastos-comunes">calculadora de gastos comunes</a>. Recuerda: tu administración te dará el cálculo legal exacto basado en el coeficiente de copropiedad.</p>`,
+      },
+      {
+        id: 'contribuciones-hogar',
+        title: 'Contribuciones de la vivienda',
+        level: 2,
+        html: `<p>Si eres propietario de tu casa o departamento, pagas contribuciones (Impuesto Territorial, Ley 17.235). Aplica una <strong>exención automática</strong> para viviendas de avalúo fiscal bajo <strong>225,96 UTM</strong> (≈$15,9 millones con UTM mayo 2026).</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Avalúo fiscal ≠ tasación comercial</strong><p>El avalúo fiscal es un valor administrativo que el SII fija para efectos de contribuciones. Suele ser 30%-60% del valor comercial real. Para departamentos en Santiago centro de 50 m², el avalúo fiscal típico es $25M-$45M (vs $80M-$150M comercial). Verifica tu avalúo en sii.cl con tu rol de propiedad.</p></div></aside>
+<table>
+<thead><tr><th>Avalúo fiscal</th><th>Estado</th><th>Contribución anual estimada (0,9%)</th></tr></thead>
+<tbody>
+<tr><td>≤ 225,96 UTM (~$15,9M)</td><td>Exenta</td><td>$0</td></tr>
+<tr><td>$30.000.000</td><td>Tributa</td><td>~$270.000 anual</td></tr>
+<tr><td>$60.000.000</td><td>Tributa</td><td>~$540.000 anual</td></tr>
+<tr><td>$120.000.000</td><td>Tributa</td><td>~$1.080.000 anual</td></tr>
+</tbody>
+</table>
+<p>Las contribuciones se pagan en 4 cuotas anuales (abril, junio, septiembre, noviembre). El SII envía aviso por correo, pero la responsabilidad del pago es del propietario aunque no llegue notificación. Calcula tu contribución por avalúo y destino con la <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a>.</p>`,
+      },
+      {
+        id: 'arriendo',
+        title: 'Reajuste de arriendo (Ley 21.461)',
+        level: 2,
+        html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1180127" target="_blank" rel="noopener">Ley 21.461</a> (2022) estableció reglas claras sobre reajuste y término de contratos de arrendamiento de predios urbanos. Cambió las reglas del juego para arrendadores y arrendatarios.</p>
+<ul class="data-grid"><li><span class="data-grid__label">Plazo mínimo entre reajustes</span><span class="data-grid__value">6 meses (en CLP)</span></li><li><span class="data-grid__label">Pacto de reajuste por UF</span><span class="data-grid__value">Permitido (sin IPC adicional)</span></li><li><span class="data-grid__label">Garantía máxima</span><span class="data-grid__value">1 mes de arriendo</span></li><li><span class="data-grid__label">Multa máxima por término anticipado</span><span class="data-grid__value">2 meses de arriendo</span></li></ul>
+<h3>Arriendo en UF vs en CLP</h3>
+<p>Si tu contrato pacta el arriendo en <strong>UF</strong>, el monto en pesos se actualiza automáticamente todos los días con el valor de la UF. <strong>NO se le suma IPC</strong> adicional, porque la UF ya se reajusta por IPC del mes anterior.</p>
+<p>Si tu contrato pacta el arriendo en <strong>CLP</strong>, debe especificar el mecanismo de reajuste. Si pacta IPC, debe esperarse al menos 6 meses entre reajustes. Si han pasado menos meses, el reajuste se prorratea linealmente.</p>
+<div class="numeric-example"><div class="numeric-example__title">Arriendo $500.000 CLP con IPC anual 5% — 6 meses transcurridos</div><ul><li>Factor reajuste: 1 + 5% × (6/12) = 1,025</li><li>Nuevo arriendo: $500.000 × 1,025 = $512.500</li></ul><span class="total">Aumento: $12.500/mes (proporcional al período)</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El arrendador NO puede reajustar a discreción</strong><p>Cualquier reajuste que no respete la cláusula del contrato y los plazos legales es inválido. Si tu arrendador sube el monto sin base legal, puedes pagar el monto antiguo y demandar la diferencia ante el Juzgado de Policía Local (causa de mediana cuantía).</p></div></aside>
+<p>Calcula tu reajuste correcto con la <a href="/calculadoras/calculadora-reajuste-arriendo">calculadora de reajuste de arriendo</a>.</p>`,
+      },
+      {
+        id: 'subsidios-vivienda',
+        title: 'Subsidios habitacionales: para comprar tu casa',
+        level: 2,
+        html: `<p>El MINVU tiene varios programas de subsidio según ingreso, tramo de RSH y tipo de vivienda:</p>
+<ul>
+<li><strong>DS49 (Fondo Solidario)</strong>: para sectores vulnerables (RSH ≤ 40%). Subsidio hasta 450 UF para vivienda nueva o usada. Sin necesidad de crédito hipotecario.</li>
+<li><strong>DS01 (Sectores Medios)</strong>: para clase media (RSH 40%-90%). Subsidio entre 250 y 650 UF según tramo. Requiere crédito hipotecario complementario.</li>
+<li><strong>DS19 (Integración Social y Territorial)</strong>: subsidio adicional al DS01/DS49 cuando el proyecto incluye mix social. Hasta 200 UF extra.</li>
+<li><strong>DFL2</strong>: viviendas de hasta 140 m² construidos con beneficios tributarios (50% rebaja en contribuciones por 15 años).</li>
+</ul>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Combinar subsidios para maximizar</strong><p>Si calificas para DS01 + DS19 puedes recibir hasta 850 UF (~$34M con UF mayo 2026), lo que cubre 50%-70% del precio de un departamento de 50 m² en comunas periféricas. Postula en serviu.cl con la documentación completa.</p></div></aside>
+<p>Estima tu subsidio según ingreso y tramo con la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio habitacional</a>. Para simular el dividendo de tu hipoteca complementaria, usa la <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a>.</p>`,
       },
     ],
   },
