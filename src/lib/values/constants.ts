@@ -129,9 +129,16 @@ export const SEGURO_CESANTIA = {
  * Tasa de cotización al nuevo Seguro Social Previsional creado por la
  * Ley 21.735 (reforma de pensiones). El empleador aporta un porcentaje
  * adicional sobre la base imponible que se incrementa gradualmente
- * cada agosto desde 2025 hasta 2033.
+ * cada 1° de agosto desde 2025 hasta 2033.
  *
  * Fuente: WTW / Superintendencia de Pensiones.
+ *
+ * Para evitar tener que actualizar manualmente la tasa cada agosto,
+ * el código debe llamar siempre a `getSeguroSocialPrevisionalVigente()`
+ * (definido más abajo en este archivo). El alias `tasaVigente2026` se
+ * mantiene **solo** por compatibilidad con código que aún consulta
+ * directamente el valor — apunta dinámicamente a la tasa vigente
+ * según la fecha del sistema, así también se actualiza solo.
  */
 export const SEGURO_SOCIAL_PREVISIONAL = {
   /** Calendario de tasas de aporte empleador (% sobre imponible). */
@@ -147,18 +154,53 @@ export const SEGURO_SOCIAL_PREVISIONAL = {
     { vigenteDesde: '2033-08-01', tasa: 7.0 },
   ],
   /**
-   * Tasa vigente nominal en mayo 2026.
+   * Tasa vigente — alias dinámico que apunta al primer escalón del
+   * calendario que está en vigor a la fecha actual. Antes era
+   * `tasaVigente2026: 1.0` (constante, requería actualización manual
+   * cada agosto). Ahora se calcula con `getSeguroSocialPrevisionalVigente()`,
+   * que también es la fuente preferida para nuevo código.
    *
-   * Importante: el calendario sube a 1,75% desde el 1° de agosto de 2026.
-   * Para cálculos del primer semestre 2026 se usa 1,0%; desde agosto
-   * 2026 se debe usar 1,75%.
-   *
-   * El helper `getSeguroSocialPrevisionalVigente(fecha)` debería ser
-   * la fuente preferida; este alias se mantiene por compatibilidad
-   * con código que aún consulta directamente el valor.
+   * @deprecated Usa `getSeguroSocialPrevisionalVigente(fecha)`.
    */
-  tasaVigente2026: 1.0,
+  get tasaVigente2026(): number {
+    return getSeguroSocialPrevisionalVigente();
+  },
 };
+
+/**
+ * Devuelve la tasa de aporte del Seguro Social Previsional (Ley 21.735)
+ * vigente en la fecha indicada.
+ *
+ * El calendario sube cada 1° de agosto desde 2025 hasta 2033. Si la
+ * fecha es anterior a 2025-08-01, retorna 0 (la tasa entra en vigor
+ * con el primer escalón). Si la fecha es posterior a 2033-08-01,
+ * retorna la tasa máxima (7,0%).
+ *
+ * @param fecha Fecha para la cual obtener la tasa. Default: ahora.
+ * @returns Tasa porcentual (1.0 = 1%, 1.75 = 1,75%).
+ *
+ * @example
+ *   getSeguroSocialPrevisionalVigente(new Date('2026-07-31'))  // 1.0
+ *   getSeguroSocialPrevisionalVigente(new Date('2026-08-01'))  // 1.75
+ *   getSeguroSocialPrevisionalVigente(new Date('2034-01-01'))  // 7.0
+ */
+export function getSeguroSocialPrevisionalVigente(
+  fecha: Date = new Date(),
+): number {
+  const t = fecha.getTime();
+
+  // El calendario está ordenado cronológicamente. Buscamos el último
+  // escalón cuyo `vigenteDesde` sea <= a la fecha solicitada.
+  let tasa = 0;
+  for (const escalon of SEGURO_SOCIAL_PREVISIONAL.calendario) {
+    if (new Date(escalon.vigenteDesde).getTime() <= t) {
+      tasa = escalon.tasa;
+    } else {
+      break;
+    }
+  }
+  return tasa;
+}
 
 export const GRATIFICACION = {
   porcentaje: 25,

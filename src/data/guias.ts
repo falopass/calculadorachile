@@ -1160,7 +1160,7 @@ export const guias: Guia[] = [
       'calculadora-credito-automotriz',
       'calculadora-patente-comercial',
     ],
-    relatedArticles: [],
+    relatedArticles: ['todo-sobre-uf-chile'],
     sources: [
       { label: 'Servicio de Impuestos Internos — Tabla de tasación', url: 'https://www.sii.cl/destacados/aranceles/' },
       { label: 'Ley 18.290 (Tránsito)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29708' },
@@ -1302,7 +1302,10 @@ export const guias: Guia[] = [
       'calculadora-aguinaldo',
       'calculadora-pgu',
     ],
-    relatedArticles: [],
+    relatedArticles: [
+      'diferencia-sueldo-bruto-liquido',
+      'comparativa-comisiones-afp-2026',
+    ],
     sources: [
       { label: 'Ley 14.908 (Abandono familia y pensiones alimenticias)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986' },
       { label: 'Tribunales de Familia', url: 'https://www.pjud.cl' },
@@ -1321,7 +1324,7 @@ export const guias: Guia[] = [
 <li>Las necesidades del alimentario (educación, salud, vivienda).</li>
 <li>La capacidad económica del alimentante (sueldo, otros ingresos, patrimonio).</li>
 </ul>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Topes legales (Art. 7 Ley 14.908)</strong><p>La pensión NO puede exceder el <strong>50% de la renta líquida</strong> del alimentante. El piso legal es del <strong>40% del ingreso mínimo mensual</strong> por hijo (≈$230.000 en 2026 con sueldo mínimo $575.000).</p></div></aside>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Topes legales (Art. 7 Ley 14.908)</strong><p>La pensión NO puede exceder el <strong>50% de la renta líquida</strong> del alimentante. El piso legal es del <strong>40% del ingreso mínimo mensual</strong> por hijo (≈$215.600 en 2026 con IMM de $539.000).</p></div></aside>
 <p>Reglas prácticas que aplican los tribunales:</p>
 <table>
 <thead><tr><th>Hijos</th><th>% típico del sueldo bruto</th><th>Ejemplo sueldo $1.000.000</th></tr></thead>
@@ -1441,7 +1444,10 @@ export const guias: Guia[] = [
       'calculadora-credito-hipotecario',
       'calculadora-intereses-mora',
     ],
-    relatedArticles: [],
+    relatedArticles: [
+      'cae-renegociacion-condonacion-2026',
+      'todo-sobre-uf-chile',
+    ],
     sources: [
       { label: 'Comisión INGRESA', url: 'https://www.ingresa.cl' },
       { label: 'Ministerio de Educación', url: 'https://www.mineduc.cl' },
@@ -1822,6 +1828,7 @@ export const guias: Guia[] = [
     relatedArticles: [
       'reajuste-arriendo-uf-2026',
       'todo-sobre-uf-chile',
+      'subsidios-minvu-2026-guia',
     ],
     sources: [
       {
