@@ -1,10 +1,10 @@
 {
-  "uf": 40712.34,
+  "uf": 40729.31,
   "utm": 71506,
   "dolarObservado": 894.99,
   "euro": 1039.72,
   "ipcMensual": -0.2,
-  "asOf": "2026-06-06T04:00:00.000Z",
+  "asOf": "2026-06-07T04:00:00.000Z",
   "sources": {
     "uf": "mindicador",
     "utm": "mindicador",
@@ -12,5 +12,5 @@
     "euro": "mindicador",
     "ipcMensual": "mindicador"
   },
-  "generatedAt": "2026-06-06T14:15:22.711Z"
+  "generatedAt": "2026-06-07T14:26:47.239Z"
 }
