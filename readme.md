@@ -1,401 +1,214 @@
-# 🇨🇱 CalculaChile - La Calculadora Más Completa de Chile
-
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?logo=tailwind-css&logoColor=white)
-![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
-![AdSense](https://img.shields.io/badge/Monetización-AdSense-4285f4?logo=google-ads&logoColor=white)
-![Tests](https://img.shields.io/badge/Tests-Vitest-6e9f18?logo=vitest&logoColor=white)
+# 🇨🇱 CalculaChile
 
-**40 calculadoras financieras y legales para chilenos**
+**Chile's most complete calculator platform**
 
-[🌐 calculadorachile.cl](https://calculadorachile.cl) • [📚 Blog](https://calculadorachile.cl/blog) • [📊 Comparador AFP](https://calculadorachile.cl/calculadoras/comparador-afp)
+40+ financial, tax, and legal calculators — updated with 2026 values from the Central Bank of Chile.
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
+[![AdSense](https://img.shields.io/badge/Monetization-AdSense-4285f4?style=for-the-badge&logo=google-ads&logoColor=white)](https://adsense.google.com)
+[![Vitest](https://img.shields.io/badge/Tests-Vitest-6e9f18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev)
+
+**[🌐 Live at calculadorachile.cl](https://calculadorachile.cl)**  ·  [📚 Blog](https://calculadorachile.cl/blog)  ·  [📊 AFP Comparator](https://calculadorachile.cl/calculadoras/comparador-afp)
 
 </div>
 
 ---
 
-## 🚀 Hero Section
+## 📖 Overview
+
+CalculaChile is a production platform serving **40+ financial and legal calculators tailored specifically for Chile**. From liquid salary and severance calculations to mortgage simulations, government subsidies, and traffic fines — everything a Chilean citizen or business needs to make informed financial decisions.
+
+Built with performance, accessibility, and SEO as first-class concerns. Live values are fetched from the **Central Bank of Chile API** (UF, UTM, USD, EUR).
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+|---------|-------------|
+| 🧮 **40+ Calculators** | Salary, mortgage, tax, AFP comparison, subsidies, and more |
+| 📈 **Interactive SVG Charts** | Real-time amortization, projections, comparisons |
+| 💾 **PNG Export** | Download results to share or archive |
+| 🔄 **Scenario Comparator** | Compare up to 3 scenarios side by side (e.g., different AFPs) |
+| 📜 **Calculation History** | Local storage of past calculations for quick access |
+| ⚡ **Live Values** | UF, UTM, USD, EUR from Banco Central de Chile |
+| 📱 **Fully Responsive** | Works on mobile, tablet, desktop |
+| ♿ **WCAG 2.1 AA** | Keyboard navigation, screen reader support |
+| 🔍 **SEO-Optimized** | Schema.org, meta tags, structured content |
+| 🎨 **Immersive UI** | Framer Motion, GSAP, Three.js, Lenis smooth scroll |
+
+---
+
+## 📊 Calculator Catalog
+
+### Core Set (Phase 1) — 15 calculators
+
+| Calculator | Path |
+|------------|------|
+| Liquid Salary | `/calculadoras/sueldo-liquido` |
+| Fee Invoice (Boleta de Honorarios) | `/calculadoras/boleta-honorarios` |
+| Vacation Days | `/calculadoras/vacaciones` |
+| Severance (Finiquito) | `/calculadoras/finiquito` |
+| Indemnization | `/calculadoras/indemnizacion` |
+| Overtime | `/calculadoras/horas-extra` |
+| Gratification | `/calculadoras/gratificacion` |
+| Family Allowance | `/calculadoras/asignacion-familiar` |
+| Christmas Bonus | `/calculadoras/aguinaldo` |
+| Child Support | `/calculadoras/pension-alimenticia` |
+| Mortgage Credit | `/calculadoras/credito-hipotecario` |
+| Auto Loan | `/calculadoras/credito-automotriz` |
+| Student Loan (CAE) | `/calculadoras/credito-cae` |
+| AFP Comparator | `/calculadoras/comparador-afp` |
+| UF to CLP | `/calculadoras/uf-clp` |
+
+### Niche Set (Phase 2) — 15 specialized calculators
+
+Tax calculations (IVA, Impuesto Segunda Categoría, PPM), government subsidies (PGU, Bono Bodas de Oro, Subsidio Habitacional, Subsidio Agua), business operations (Costo Empleado, Patente Comercial, Contribuciones), and transit (Permiso Circulación, Costo TAG).
+
+### Additional Set (Phase 3) — 10+ complementary tools
+
+Traffic fines, utility bills, common expenses, rent adjustments, currency conversion, tip legality, and more.
+
+---
+
+## 🛠️ Tech Stack
 
 <div align="center">
 
-### 💰 **Calcula todo en un solo lugar**
-
-Desde tu sueldo líquido hasta créditos hipotecarios, pasando por multas de tránsito y subsidios del estado.
-CalculaChile es la plataforma definitiva para chilenos que necesitan respuestas rápidas y precisas.
-
-![Hero](https://img.shields.io/badge/📈-40_Calculadoras-10b981?style=for-the-badge)
-![📝](https://img.shields.io/badge/-Blog_SEO-3b82f6?style=for-the-badge)
-![📊](https://img.shields.io/badge/-Gráficos_SVG-f59e0b?style=for-the-badge)
-![💾](https://img.shields.io/badge/-Export_PNG-ef4444?style=for-the-badge)
-
-</div>
-
----
-
-## ✨ Características Principales
-
-| Característica | Descripción |
-|----------------|-------------|
-| 🧮 **40 Calculadoras** | Desde boleta de honorarios hasta crédito hipotecario, todas actualizadas con valores 2026 |
-| 📈 **Gráficos SVG Interactivos** | Visualiza amortización, proyecciones y comparaciones en tiempo real |
-| 💾 **Exportación PNG** | Descarga tus resultados para compartir o guardar |
-| 🔄 **Comparador de Escenarios** | Compara hasta 3 escenarios lado a lado (ej: diferentes AFP) |
-| 📜 **Historial de Cálculos** | Tus cálculos se guardan localmente para acceso rápido |
-| ⚡ **Valores en Tiempo Real** | UF, UTM, Dólar, Euro y más desde el Banco Central de Chile |
-| 📱 **100% Responsive** | Funciona perfecto en móvil, tablet y desktop |
-| ♿ **Accesible** | Cumple WCAG 2.1 AA con navegación por teclado |
-| 🔍 **SEO Optimizado** | Schema.org, meta tags y contenido estructurado |
-| 🎨 **UI Inmersiva** | Framer Motion + GSAP + Three.js + Lenis smooth scroll |
-
----
-
-## 📊 Tabla de Calculadoras
-
-### FASE 1: Core (15 calculadoras principales)
-
-| # | Calculadora | Slug | Estado |
-|---|-------------|------|--------|
-| 1 | Sueldo Líquido | `/calculadoras/sueldo-liquido` | ✅ |
-| 2 | Boleta de Honorarios | `/calculadoras/boleta-honorarios` | ✅ |
-| 3 | Vacaciones | `/calculadoras/vacaciones` | ✅ |
-| 4 | Finiquito | `/calculadoras/finiquito` | ✅ |
-| 5 | Indemnización | `/calculadoras/indemnizacion` | ✅ |
-| 6 | Horas Extra | `/calculadoras/horas-extra` | ✅ |
-| 7 | Gratificación | `/calculadoras/gratificacion` | ✅ |
-| 8 | Asignación Familiar | `/calculadoras/asignacion-familiar` | ✅ |
-| 9 | Aguinaldo | `/calculadoras/aguinaldo` | ✅ |
-| 10 | Pensión de Alimentos | `/calculadoras/pension-alimenticia` | ✅ |
-| 11 | Crédito Hipotecario | `/calculadoras/credito-hipotecario` | ✅ |
-| 12 | Crédito Automotriz | `/calculadoras/credito-automotriz` | ✅ |
-| 13 | Crédito CAE | `/calculadoras/credito-cae` | ✅ |
-| 14 | Comparador AFP | `/calculadoras/comparador-afp` | ✅ |
-| 15 | UF a CLP | `/calculadoras/uf-clp` | ✅ |
-
-### FASE 2: Nicho (15 calculadoras especializadas)
-
-| # | Calculadora | Slug | Estado |
-|---|-------------|------|--------|
-| 16 | UTM a CLP | `/calculadoras/utm-clp` | ✅ |
-| 17 | IVA | `/calculadoras/iva` | ✅ |
-| 18 | Impuesto Segunda Categoría | `/calculadoras/impuesto-segunda-categoria` | ✅ |
-| 19 | Operación Renta | `/calculadoras/operacion-renta` | ✅ |
-| 20 | PPM | `/calculadoras/ppm` | ✅ |
-| 21 | Costo Empleado | `/calculadoras/costo-empleado` | ✅ |
-| 22 | Cotización Independientes | `/calculadoras/cotizacion-independientes` | ✅ |
-| 23 | Bono Bodas de Oro | `/calculadoras/bono-bodas-oro` | ✅ |
-| 24 | PGU | `/calculadoras/pgu` | ✅ |
-| 25 | Subsidio Habitacional | `/calculadoras/subsidio-habitacional` | ✅ |
-| 26 | Subsidio Agua | `/calculadoras/subsidio-agua` | ✅ |
-| 27 | Contribuciones | `/calculadoras/contribuciones` | ✅ |
-| 28 | Patente Comercial | `/calculadoras/patente-comercial` | ✅ |
-| 29 | Permiso Circulación | `/calculadoras/permiso-circulacion` | ✅ |
-| 30 | Costo TAG | `/calculadoras/costo-tag` | ✅ |
-
-### FASE 3: Adicionales (10/15 calculadoras complementarias)
-
-| # | Calculadora | Slug | Estado |
-|---|-------------|------|--------|
-| 31 | Multas de Tránsito | `/calculadoras/multas-transito` | ✅ |
-| 32 | Cuenta de Luz | `/calculadoras/cuenta-luz` | ✅ |
-| 33 | Gastos Comunes | `/calculadoras/gastos-comunes` | ✅ |
-| 34 | Reajuste Arriendo | `/calculadoras/reajuste-arriendo` | ✅ |
-| 35 | Intereses Mora | `/calculadoras/intereses-mora` | ✅ |
-| 36 | Propina Legal | `/calculadoras/propina-legal` | ✅ |
-| 37 | Costo Notaría | `/calculadoras/costo-notaria` | ✅ |
-| 38 | Conversor Divisas | `/calculadoras/conversor-divisas` | ✅ |
-| 39 | Plusvalía | `/calculadoras/plusvalia` | ✅ |
-| 40 | Simulador APV | `/calculadoras/simulador-apv` | ✅ |
-| 41 | Comparador Hipotecario | `/calculadoras/comparador-credito-hipotecario` | ✅ |
-| 42 | Bono Invierno | `/calculadoras/bono-invierno` | 🔄 |
-| 43 | IFE | `/calculadoras/ife` | 🔄 |
-| 44 | Descuento Jubilación | `/calculadoras/descuento-jubilacion` | 🔄 |
-| 45 | Retiro AFP | `/calculadoras/retiro-afp` | 🔄 |
-| 46 | Subsidio Arriendo | `/calculadoras/subsidio-arriendo` | 🔄 |
-
-**Leyenda:** ✅ Completado | 🔄 En desarrollo | ⏳ Pendiente
-
----
-
-## 🛠️ Stack Técnico
-
-<div align="center">
-
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| ![Next.js](https://img.shields.io/badge/-Next.js-000000?logo=next.js) | 15.2.4 | Framework React con App Router |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| ![Next.js](https://img.shields.io/badge/-Next.js-000000?logo=next.js) | 15.2.4 | React framework with App Router |
 | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?logo=typescript) | 5.x | Type safety |
-| ![Tailwind](https://img.shields.io/badge/-Tailwind-38bdf8?logo=tailwind-css) | 3.4 | Estilos utility-first |
-| ![Framer Motion](https://img.shields.io/badge/-Framer_Motion-0055ff?logo=framer) | 12.38 | Animaciones |
-| ![Three.js](https://img.shields.io/badge/-Three.js-000000?logo=three.js) | 0.183 | Gráficos 3D |
-| ![React Three Fiber](https://img.shields.io/badge/-R3F-000000?logo=react) | 9.5 | Three.js para React |
-| ![GSAP](https://img.shields.io/badge/-GSAP-88ce02?logo=gsap) | 3.14 | Animaciones avanzadas |
-| ![Lenis](https://img.shields.io/badge/-Lenis-1a1a1a?logo=scrollreveal) | 1.3 | Smooth scroll |
-| ![Lucide](https://img.shields.io/badge/-Lucide-000000?logo=lucide) | 1.7 | Iconos |
+| ![Tailwind](https://img.shields.io/badge/-Tailwind-38bdf8?logo=tailwind-css) | 3.4 | Utility-first styling |
+| ![Framer Motion](https://img.shields.io/badge/-Framer_Motion-0055ff?logo=framer) | 12.38 | Animations |
+| ![Three.js](https://img.shields.io/badge/-Three.js-000000?logo=three.js) | 0.183 | 3D graphics |
+| ![R3F](https://img.shields.io/badge/-R3F-000000?logo=react) | 9.5 | Three.js for React |
+| ![GSAP](https://img.shields.io/badge/-GSAP-88ce02?logo=gsap) | 3.14 | Advanced animations |
+| ![Lenis](https://img.shields.io/badge/-Lenis-1a1a1a) | 1.3 | Smooth scroll |
 | ![Vitest](https://img.shields.io/badge/-Vitest-6e9f18?logo=vitest) | 3.1 | Testing |
 
 </div>
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## 🏗️ Architecture
 
 ```
 CalculaChile/
 ├── src/
-│   ├── app/                      # Next.js App Router
-│   │   ├── layout.tsx            # Root layout con providers
-│   │   ├── page.tsx              # Home con grid de calculadoras
-│   │   ├── calculadoras/
-│   │   │   └── [slug]/           # Página dinámica de calculadoras
-│   │   ├── blog/
-│   │   │   └── [slug]/           # Artículos del blog
-│   │   ├── rediseño/             # Nuevo diseño en desarrollo
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │   ├── cookies/              # Política de cookies
-│   │   ├── privacidad/           # Política de privacidad
-│   │   ├── terminos/             # Términos y condiciones
-│   │   ├── faq/                  # FAQ general
-│   │   ├── guias/                # Guías y tutoriales
-│   │   └── api/
-│   │       └── values/           # API de valores del BC
+│   ├── app/                       # Next.js App Router
+│   │   ├── page.tsx               # Home with calculator grid
+│   │   ├── calculadoras/[slug]/   # Dynamic calculator pages
+│   │   ├── blog/[slug]/           # SEO-optimized articles
+│   │   └── api/values/            # Banco Central API integration
 │   ├── components/
-│   │   ├── calculator/           # 30+ componentes de calculadoras
-│   │   ├── redesign/             # Componentes del nuevo diseño
-│   │   ├── creative/             # Componentes 3D y animaciones
-│   │   ├── layout/               # Header, Footer
-│   │   ├── ads/                  # Google AdSense
-│   │   ├── analytics/            # Google Analytics
-│   │   ├── blog/                 # Componentes del blog
-│   │   └── ui/                   # Componentes reutilizables
+│   │   ├── calculator/            # 30+ calculator components
+│   │   ├── creative/              # 3D and animation components
+│   │   ├── ads/                   # Google AdSense integration
+│   │   └── analytics/             # Google Analytics
 │   ├── lib/
-│   │   ├── calculations/         # 40 archivos de lógica pura
-│   │   ├── api/                  # Integración BCentral
-│   │   ├── values/               # Constantes y valores
-│   │   ├── context/              # React Context (ValuesContext)
-│   │   └── hooks/                # useLiveValues
+│   │   ├── calculations/          # 40 files of pure business logic
+│   │   ├── api/                   # Banco Central API client
+│   │   └── hooks/                 # useLiveValues, etc.
 │   └── data/
-│       ├── calculators.ts        # Metadata de calculadoras (1,718 líneas)
-│       └── articles.ts           # 10 artículos blog SEO
-├── public/                       # Assets estáticos
-├── scripts/                      # Scripts de utilidad
-└── tests/                        # Tests E2E
+│       ├── calculators.ts         # Metadata (1,700+ lines)
+│       └── articles.ts            # SEO blog articles
+├── public/                        # Static assets
+└── tests/                         # E2E tests
 ```
 
 ---
 
-## 💰 Monetización
+## 💰 Monetization
 
-<div align="center">
+**100% Google AdSense** with strategic placement:
 
-### 100% AdSense
+- **Display Ads** — sidebar and between results
+- **Native Ads** — integrated into calculation flow
+- **Mobile Ads** — optimized for mobile viewport
 
-| Estrategia | Implementación |
-|------------|----------------|
-| 📰 **Display Ads** | Banners en sidebar y entre resultados |
-| 🎯 **Native Ads** | Integrados en el flujo de cálculo |
-| 📱 **Mobile Ads** | Optimizados para viewport móvil |
-| ⚡ **Lazy Loading** | Carga diferida para performance |
-
-**Proyección de Ingresos:**
-- 10,000 visitas/mes → $100-300 USD/mes
-- 50,000 visitas/mes → $500-1,500 USD/mes
-- 100,000 visitas/mes → $1,000-3,000 USD/mes
-
-</div>
+Revenue optimized through content strategy (SEO blog articles), high-intent calculators (mortgage, salary), and long dwell time from comparison tools.
 
 ---
 
-## 📈 Proyecciones de Tráfico
-
-| Mes | Visitas | Calculadoras | Artículos Blog | Ingresos Est. |
-|-----|---------|--------------|----------------|---------------|
-| 1-3 | 1,000 | 40 | 10 | $10-30 |
-| 4-6 | 5,000 | 40 | 15 | $50-150 |
-| 7-9 | 15,000 | 45 | 25 | $150-450 |
-| 10-12 | 50,000 | 50 | 40 | $500-1,500 |
-
-**Estrategia de Crecimiento:**
-1. SEO long-tail para cada calculadora
-2. Contenido evergreen en blog
-3. Backlinks desde sitios financieros
-4. Social media (Twitter, LinkedIn)
-5. Email marketing semanal
-
----
-
-## 🚀 Cómo Ejecutar Localmente
-
-### Prerrequisitos
-
-- Node.js 18+ 
-- npm o pnpm
-
-### Instalación
+## ⚙️ Installation
 
 ```bash
-# Clonar el repositorio
+# Clone
 git clone https://github.com/falopass/calculadorachile.git
 cd calculadorachile
 
-# Instalar dependencias
+# Install
 npm install
 
-# Copiar variables de entorno
-cp .env.example .env
-
-# Editar .env y completar BCENTRAL_USER y BCENTRAL_PASS
-
-# Ejecutar en desarrollo
+# Development
 npm run dev
-```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+# Type check
+npx tsc --noEmit
 
-### Build de Producción
-
-```bash
-# Build optimizado
-npm run build
-
-# Iniciar servidor de producción
-npm run start
-```
-
----
-
-## 🧪 Cómo Ejecutar Tests
-
-```bash
-# Ejecutar tests en modo watch
+# Tests
 npm run test
 
-# Ejecutar tests una vez (CI/CD)
-npm run test:run
+# Build
+npm run build
 ```
 
-**Cobertura de Tests (7 módulos):**
-- ✅ `sueldo-liquido.test.ts` — AFP + salud + cesantía + impuesto
-- ✅ `finiquito.test.ts` — Indemnización + vacaciones + gratificación
-- ✅ `iva.test.ts` — Cálculo IVA 19%
-- ✅ `uf-clp.test.ts` — Conversión UF a CLP
-- ✅ `utm-clp.test.ts` — Conversión UTM a CLP
-- ✅ `credito-hipotecario.test.ts` — Amortización francesa
-- ✅ `basic.test.ts` — Tests básicos
+---
+
+## 🚀 Deployment
+
+Deployed to **Vercel** with automatic deploys from `main`. Central Bank values are cached at the edge for performance. AdSense is loaded async to avoid blocking Core Web Vitals.
 
 ---
 
-## 📁 Estructura de Componentes
+## 📊 About This Project
 
-### Componentes de Calculadora (30+)
+CalculaChile is part of an indie SaaS portfolio focused on serving the Chilean market with high-quality, freely accessible tools. Solo-built and maintained.
 
-| Componente | Propósito |
-|------------|-----------|
-| `CalculatorShell.tsx` | Contenedor principal con form + results |
-| `PremiumCalculatorShell.tsx` | Versión premium con animaciones |
-| `ResultChart.tsx` | Gráficos donut/barra SVG |
-| `ExportMenu.tsx` | Copiar, PNG, compartir |
-| `ScenarioComparator.tsx` | Comparador multi-escenario |
-| `HistoryPanel.tsx` | Historial de cálculos |
-| `EnhancedFAQ.tsx` | FAQ mejorado con animaciones |
-| `RelatedCalculators.tsx` | Calculadoras relacionadas |
-| `LiveValuesSection.tsx` | Sección valores en tiempo real |
-| `SearchBar.tsx` | Barra de búsqueda |
-| `EmptyState.tsx` | Estado vacío con sugerencias |
-| `AnimatedNumber.tsx` | Números animados |
-| `ResultSkeleton.tsx` | Loading skeleton |
-| `AmortizationTable.tsx` | Tabla amortización hipotecaria |
-| `FAQ.tsx` | FAQPage Schema JSON-LD |
-| `LegalNote.tsx` | Disclaimer + artículos de ley |
-| `InputField.tsx` | Input con prefix/suffix/formato |
-| `SelectField.tsx` | Select estilizado |
-| `SeoStructuredData.tsx` | JSON-LD automático |
-
-### Componentes del Rediseño
-
-| Componente | Propósito |
-|------------|-----------|
-| `HeroSection.tsx` | Hero con montañas SVG |
-| `CategoryStickyStack.tsx` | Categorías sticky con stack |
-| `CinematicFooter.tsx` | Footer cinematográfico |
-| `FeaturesDashboard.tsx` | Dashboard de features |
-| `ManifestoSection.tsx` | Sección manifiesto |
-| `MountainsSVG.tsx` | SVG de montañas chilenas |
+**Live URL:** [calculadorachile.cl](https://calculadorachile.cl)
+**Built by:** Diego Bravo Opazo — [Portfolio](https://github.com/falopass)
 
 ---
 
-## 🗺️ Roadmap y Próximos Pasos
+<details>
+<summary><b>🇪🇸 Descripción en español</b></summary>
 
-### Q1 2025 ✅
-- [x] 15 calculadoras core
-- [x] Blog con 10 artículos
-- [x] Integración BCentral API
-- [x] Componentes avanzados (charts, export, historial)
+<br>
 
-### Q2 2025 ✅
-- [x] 40 calculadoras totales
-- [x] GSAP + Lenis + Three.js
-- [x] Páginas legales (cookies, privacidad, términos)
-- [x] Rediseño iniciado
+## Sobre CalculaChile
 
-### Q3 2025 🔄
-- [ ] Completar rediseño
-- [ ] Deploy en Vercel + dominio .cl
-- [ ] Aprobación AdSense
-- [ ] Google Search Console + Analytics
-- [ ] Expandir tests unitarios
+CalculaChile es una plataforma en producción que ofrece **40+ calculadoras financieras y legales específicas para Chile**. Desde sueldo líquido y finiquitos hasta simulaciones hipotecarias, subsidios estatales y multas de tránsito — todo lo que un chileno o empresa necesita para tomar decisiones informadas.
 
-### Q4 2025 📋
-- [ ] 50 calculadoras completas
-- [ ] 40+ artículos de blog
-- [ ] OG images personalizadas
-- [ ] Modo offline/PWA
-- [ ] Exportar a PDF
+Construida con performance, accesibilidad (WCAG 2.1 AA) y SEO como prioridades. Los valores en vivo (UF, UTM, USD, EUR) se obtienen desde la **API del Banco Central de Chile**.
 
----
+## Características principales
 
-## 🚀 Deploy en Vercel
+- 🧮 40+ calculadoras: sueldo, hipotecario, impuestos, AFP, subsidios y más
+- 📈 Gráficos SVG interactivos en tiempo real
+- 💾 Export a PNG
+- 🔄 Comparador de escenarios (hasta 3 lado a lado)
+- 📜 Historial local de cálculos
+- ⚡ Valores oficiales desde Banco Central
+- ♿ Accesible (WCAG 2.1 AA)
+- 🔍 SEO optimizado con Schema.org
+- 🎨 UI inmersiva con Framer Motion, GSAP, Three.js
 
-El deploy es automático al hacer push a `main`:
+## Producto en vivo
 
-1. Conecta tu repo de GitHub en [Vercel](https://vercel.com)
-2. Agrega las variables de entorno:
-   - `BCENTRAL_USER`
-   - `BCENTRAL_PASS`
-   - `NEXT_PUBLIC_SITE_URL=https://calculadorachile.cl`
-   - `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID`
-   - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-3. ¡Listo! Vercel se encarga del resto
+**[calculadorachile.cl](https://calculadorachile.cl)** · Construido por Diego Bravo Opazo
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/falopass/calculadorachile)
-
----
-
-## 📄 Licencia y Créditos
-
-**Licencia:** MIT © 2025 CalculaChile
-
-**Creado por:** [@falopass](https://github.com/falopass)
-
-**Agradecimientos:**
-- Banco Central de Chile por la API de valores
-- Comunidad Next.js
-- Tailwind Labs
-- Vercel Team
+</details>
 
 ---
 
 <div align="center">
 
-### 🇨🇱 Hecho con ❤️ para Chile
-
-**[calculadorachile.cl](https://calculadorachile.cl)**
-
-![CalculaChile](https://img.shields.io/badge/CalculaChile-v0.1.0-10b981?style=for-the-badge)
-![Última Actualización](https://img.shields.io/badge/Última_Actualización-Julio_2025-3b82f6?style=for-the-badge)
-![Progreso](https://img.shields.io/badge/Progreso-80%25-f59e0b?style=for-the-badge)
+**⭐ If you find this project useful, please star the repo!**
 
 </div>
