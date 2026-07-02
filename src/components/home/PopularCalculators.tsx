@@ -8,19 +8,28 @@ import CalculatorCard from './CalculatorCard';
  * Server Component: todo el cómputo se hace en build time.
  */
 export default function PopularCalculators() {
-  // Selección curada de las que más uso tienen
+  // Selección curada de las que más uso tienen.
   // Usamos los slugs reales (con prefijo `calculadora-`) tal como
   // los expone src/data/calculators.ts. Cualquier inconsistencia aquí
   // genera 404 en producción.
+  //
+  // Ordenado por tracción real observada en Search Console (28 días):
+  // patente-comercial y credito-cae son las páginas con más clicks
+  // del sitio, por eso abren la grilla. El resto son calculadoras
+  // core de sueldo/finiquito/UF que sostienen el tráfico de marca.
   const popularSlugs = [
+    'calculadora-patente-comercial',
+    'calculadora-credito-cae',
     'calculadora-sueldo-liquido',
     'calculadora-finiquito',
     'calculadora-uf-clp',
     'calculadora-iva',
     'calculadora-credito-hipotecario',
+    'calculadora-comparador-afp',
     'calculadora-horas-extra',
     'calculadora-vacaciones-proporcionales',
     'calculadora-boleta-honorarios',
+    'calculadora-gratificacion-legal',
   ];
 
   const popular = popularSlugs

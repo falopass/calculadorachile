@@ -67,4 +67,17 @@ export interface Calculator {
   featured: boolean;
   /** Para organizar por prioridad: 1 (core), 2 (nicho), 3 (complementarias) */
   phase: 1 | 2 | 3;
+  /**
+   * Título SEO opcional que reemplaza al generado por defecto
+   * (`<name> — Calculadora gratuita 2026`) en `<title>` y OG. Útil
+   * para subir CTR en calculadoras con tracción real sin alterar
+   * el H1 visible. Si se omite, se usa el título generado.
+   */
+  seoTitle?: string;
+  /**
+   * Descripción SEO opcional que reemplaza a `description` en meta
+   * y OG. Si se omite, se usa `description` (enriquecida si es
+   * corta, según la lógica existente en generateMetadata).
+   */
+  seoDescription?: string;
 }

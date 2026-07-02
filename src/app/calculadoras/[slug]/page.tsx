@@ -58,14 +58,22 @@ export async function generateMetadata({
   // El root layout ya añade " | CalculaChile" como template. Pasamos
   // un título limpio que indica beneficio (gratuito) sin
   // duplicar el branding ni el año si ya está en el nombre.
-  const nameAlreadyHasYear = /20\d{2}/.test(calculator.name);
-  const titleClean = nameAlreadyHasYear
-    ? `${calculator.name} — Calculadora gratuita`
-    : `${calculator.name} — Calculadora gratuita 2026`;
+  // Si la calculadora declara `seoTitle`, se usa ese (override) en
+  // vez del generado, para subir CTR en páginas con tracción real.
+  const generatedTitle = (() => {
+    const nameAlreadyHasYear = /20\d{2}/.test(calculator.name);
+    return nameAlreadyHasYear
+      ? `${calculator.name} — Calculadora gratuita`
+      : `${calculator.name} — Calculadora gratuita 2026`;
+  })();
+  const titleClean = calculator.seoTitle ?? generatedTitle;
 
   // Description enriquecida: si la del data es corta (<70 chars),
   // la complementamos con keywords y CTA. Si es larga, la usamos tal cual.
-  const baseDesc = calculator.description.trim();
+  // Si la calculadora declara `seoDescription`, se usa esa (override).
+  const baseDesc = (
+    calculator.seoDescription ?? calculator.description
+  ).trim();
   const enrichedDesc =
     baseDesc.length < 80
       ? `${baseDesc} Cálculo en línea, gratis, sin registro. Valores oficiales actualizados a 2026.`

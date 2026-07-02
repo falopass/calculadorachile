@@ -20,6 +20,7 @@ import ReadingProgress from '@/components/article/ReadingProgress';
 import {
   articleSchema,
   breadcrumbSchema,
+  faqPageSchema,
 } from '@/lib/seo/schema';
 import {
   buildPageMetadata,
@@ -57,12 +58,12 @@ export async function generateMetadata({
 
   return buildPageMetadata({
     path: `/blog/${article.slug}`,
-    title: article.title,
-    description: article.description,
+    title: article.seoTitle ?? article.title,
+    description: article.seoDescription ?? article.description,
     keywords: article.keywords,
     ogType: 'article',
     publishedTime: article.date,
-    modifiedTime: article.date,
+    modifiedTime: article.updatedAt ?? article.date,
     section: article.category,
     tags: article.keywords,
     ogImage: {
@@ -94,15 +95,16 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     .filter((a) => a.category === article.category && a.slug !== article.slug)
     .slice(0, 3);
 
-  // Schemas: Article + BreadcrumbList
+  // Schemas: Article + BreadcrumbList (+ FAQPage si el artículo
+  // declara FAQ embebido, para capturar rich results de preguntas).
   const ogImageUrl = absoluteUrl(`/blog/${article.slug}/opengraph-image`);
   const schemas = [
     articleSchema({
       url,
-      headline: article.title,
-      description: article.description,
+      headline: article.seoTitle ?? article.title,
+      description: article.seoDescription ?? article.description,
       datePublished: article.date,
-      dateModified: article.date,
+      dateModified: article.updatedAt ?? article.date,
       keywords: article.keywords,
       articleSection: article.category,
       wordCount,
@@ -114,6 +116,9 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
       { name: 'Blog', path: '/blog' },
       { name: article.title },
     ]),
+    ...(article.faq && article.faq.length > 0
+      ? [faqPageSchema(article.faq)]
+      : []),
   ];
 
   const formattedDate = new Date(article.date).toLocaleDateString('es-CL', {
@@ -192,6 +197,41 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
               prose-ul:my-5 prose-ol:my-5"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
+
+          {/*
+            FAQ embebido del artículo. Se renderiza solo si el
+            artículo declara `faq` (campo opcional). Las preguntas
+            también se inyectan como FAQPage en JSON-LD (ver schemas
+            arriba), capturando rich results en Google.
+          */}
+          {article.faq && article.faq.length > 0 && (
+            <section className="mt-12 pt-8 border-t border-[var(--border)]">
+              <h2 className="text-2xl font-bold text-[var(--foreground)] mb-5">
+                Preguntas frecuentes
+              </h2>
+              <div className="space-y-5">
+                {article.faq.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl bg-[var(--surface)] border border-[var(--border)] p-5"
+                  >
+                    <h3
+                      className="text-base font-semibold text-[var(--foreground)] mb-2"
+                      itemProp="name"
+                    >
+                      {item.question}
+                    </h3>
+                    <p
+                      className="text-sm text-[var(--foreground-secondary)] leading-relaxed"
+                      itemProp="text"
+                    >
+                      {item.answer}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/*
             Bloque "Lee la guía completa" — linking interno blog →

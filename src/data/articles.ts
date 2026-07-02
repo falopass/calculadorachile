@@ -25,6 +25,29 @@ export interface Article {
   relatedGuia?: string;
   /** Tiempo de lectura estimado (minutos). */
   readingTime?: number;
+  /**
+   * Título SEO opcional que reemplaza a `title` en `<title>` y OG.
+   * Útil para subir CTR sin alterar el H1 visible. Si se omite,
+   * se usa `title`.
+   */
+  seoTitle?: string;
+  /**
+   * Descripción SEO opcional que reemplaza a `description` en meta
+   * y OG. Si se omite, se usa `description`.
+   */
+  seoDescription?: string;
+  /**
+   * Fecha de última actualización (ISO YYYY-MM-DD). Se usa como
+   * `dateModified` en Article schema y `lastmod` en el sitemap de
+   * blog, lo que ayuda a Google a detectar frescura y reindexar.
+   */
+  updatedAt?: string;
+  /**
+   * FAQ embebido para la página del artículo. Se renderiza al final
+   * del contenido y se inyecta como `FAQPage` en JSON-LD, capturando
+   * rich results para preguntas reales detectadas en Search Console.
+   */
+  faq?: { question: string; answer: string }[];
 }
 
 export const articles: Article[] = [
@@ -369,9 +392,13 @@ export const articles: Article[] = [
   {
     slug: 'como-funciona-gratificacion-legal',
     title: 'Cómo funciona la gratificación legal en Chile 2026',
+    seoTitle: 'Tope de Gratificación Legal 2026 en Chile: cálculo y monto',
+    seoDescription:
+      'Conoce el tope de gratificación legal 2026 en Chile, cómo se calcula (25% con tope 4,75 IMM) y cuándo corresponde pagarla.',
     description:
       'Explicación clara de la gratificación legal: 25% de remuneración, tope 4,75 IMM, quién tiene derecho y cómo se calcula mensual o anualmente.',
     date: '2026-03-30',
+    updatedAt: '2026-07-02',
     category: 'laboral',
     readingTime: 6,
     relatedGuia: 'sueldo-liquido-chile',
@@ -381,11 +408,35 @@ export const articles: Article[] = [
       '4.75 IMM',
       'aguinaldo legal',
       'Art. 47 Código del Trabajo',
+      'tope gratificación legal 2026',
+      'nuevo tope gratificación 2026',
     ],
     relatedCalculators: [
       'calculadora-gratificacion-legal',
       'calculadora-sueldo-liquido',
       'calculadora-costo-empleado-pyme',
+    ],
+    faq: [
+      {
+        question: '¿Cuál es el tope de gratificación legal 2026 en Chile?',
+        answer:
+          'El tope de gratificación legal 2026 es de 4,75 ingresos mínimos mensuales (IMM) al año. Con sueldo mínimo de $575.000, el tope anual es $2.731.875, equivalente a $227.656 mensuales. Si el 25% de tu sueldo supera ese monto, se aplica el tope y recibes $227.656. Si no lo supera, recibes el 25% íntegro.',
+      },
+      {
+        question: '¿Cómo se calcula la gratificación legal?',
+        answer:
+          'En el sistema más usado (Art. 50 del Código del Trabajo), la gratificación equivale al 25% de la remuneración mensual con tope de 4,75 IMM anuales. Por ejemplo, con sueldo base de $600.000: 25% × $600.000 = $150.000, que está bajo el tope mensual de $227.656, así que se paga $150.000. Con sueldo de $1.500.000: 25% = $375.000, que excede el tope, así que se paga $227.656.',
+      },
+      {
+        question: '¿Quién tiene derecho a gratificación legal?',
+        answer:
+          'Tienen derecho los trabajadores que devenguen remuneraciones variables o que ganen menos de 4,75 IMM anuales. La gratificación es obligatoria cuando la empresa registra utilidad líquida, y la inmensa mayoría de empresas opta por el sistema de 25% con tope (Art. 50) en vez del 30% de utilidad líquida (Art. 47).',
+      },
+      {
+        question: '¿La gratificación se paga mensual o anual?',
+        answer:
+          'El empleador puede pagarla mensualmente (anticipo, lo más común) o en un pago anual liquidado en abril. El sistema mensual hace que la mayoría de los trabajadores reciba la gratificación incluida en el sueldo bruto. La gratificación es haber imponible: cotiza para AFP, salud y cesantía, y se considera en la base de la indemnización por años de servicio.',
+      },
     ],
     content: `<h2>¿Qué es la gratificación legal?</h2>
 <p>La gratificación legal es un beneficio obligatorio que el empleador debe pagar a los trabajadores cuando la empresa registra utilidad líquida. Está regulado por los artículos 47 a 50 del Código del Trabajo.</p>
@@ -479,9 +530,13 @@ export const articles: Article[] = [
   {
     slug: 'reajuste-arriendo-uf-2026',
     title: 'Reajuste de arriendo por UF e IPC en Chile 2026',
+    seoTitle: 'Reajuste de Arriendo por UF 2026: cómo calcularlo en Chile',
+    seoDescription:
+      'Aprende cómo calcular el reajuste de arriendo por UF o IPC en Chile, con ejemplo paso a paso, conversión a pesos y calculadora.',
     description:
       'Todo sobre el reajuste de arriendo: cuánto puede subir, UF vs IPC, qué dice tu contrato y cuándo puedes negociar.',
     date: '2026-03-30',
+    updatedAt: '2026-07-02',
     category: 'vivienda',
     readingTime: 6,
     relatedGuia: 'comprar-vivienda-chile',
@@ -492,11 +547,35 @@ export const articles: Article[] = [
       'aumento arriendo Chile',
       'tope arriendo',
       'Ley 18.101',
+      'reajuste arriendo UF 2026',
+      'cómo calcular reajuste arriendo',
     ],
     relatedCalculators: [
       'calculadora-reajuste-arriendo',
       'calculadora-uf-clp',
       'calculadora-credito-hipotecario',
+    ],
+    faq: [
+      {
+        question: '¿Cómo se calcula el reajuste de arriendo por UF?',
+        answer:
+          'Si tu contrato está pactado en UF, el reajuste es automático y diario: el valor en UF se mantiene fijo y el pago en pesos varía según el valor de la UF de cada mes. Por ejemplo, si pagas 10 UF de arriendo y la UF sube de $40.000 a $40.500, tu arriendo pasa de $400.000 a $405.000 sin que el arrendador tenga que hacer ningún cálculo.',
+      },
+      {
+        question: '¿Cómo se calcula el reajuste de arriendo por IPC?',
+        answer:
+          'Si tu arriendo está en pesos, el reajuste se calcula con el IPC acumulado del período definido en el contrato (usualmente 12 meses). Por ejemplo: arriendo $400.000 con IPC anual 4,5% → reajuste = $400.000 × 4,5% = $18.000 → nuevo arriendo $418.000. La frecuencia (anual, semestral) debe estar en el contrato.',
+      },
+      {
+        question: '¿Cuánto puede subir el arriendo en Chile?',
+        answer:
+          'No hay un tope legal de aumento. El reajuste depende exclusivamente de lo que establezca el contrato de arriendo. Si está en UF, sube con la UF. Si está en pesos, sube con el IPC acumulado del período pactado. Si el contrato no incluye cláusula de reajuste, el arrendador no puede aumentar unilateralmente el canon.',
+      },
+      {
+        question: '¿Puedo negarme al aumento de arriendo?',
+        answer:
+          'Si el contrato establece el reajuste y se calcula correctamente según ese contrato, no puedes negarte. Si el aumento es abusivo o no está en el contrato, puedes negociar o recurrir al Tribunal de Policía Local o SERNAC. Sin cláusula de reajuste, el arrendador debe esperar a renegociar el contrato (típicamente al año) y proponer un nuevo monto que tú puedes aceptar o no.',
+      },
     ],
     content: `<h2>¿Cuánto puede subir el arriendo?</h2>
 <p>No hay un tope legal de aumento. El reajuste depende de lo que establezca el contrato de arriendo. Si está pactado en UF, se reajusta automáticamente con la variación de la UF. Si está en pesos, se reajusta según el IPC acumulado del período pactado en el contrato.</p>
@@ -598,9 +677,13 @@ export const articles: Article[] = [
   {
     slug: 'subsidios-minvu-2026-guia',
     title: 'Subsidios MINVU 2026: DS49, DS01, DS19 y DFL2 explicados',
+    seoTitle: 'Subsidios MINVU 2026: DS49, DS1, DS19 y simulador',
+    seoDescription:
+      'Revisa los subsidios MINVU 2026 en Chile: DS49, DS1, DS19, requisitos, montos en UF y cómo simular tu subsidio habitacional.',
     description:
       'Cómo postular a los subsidios habitacionales del MINVU en 2026: DS49, DS01, DS19 y DFL2. Montos en UF, requisitos por tramo RSH y combinación de beneficios.',
     date: '2026-05-16',
+    updatedAt: '2026-07-02',
     category: 'vivienda',
     readingTime: 9,
     relatedGuia: 'comprar-vivienda-chile',
@@ -613,11 +696,35 @@ export const articles: Article[] = [
       'serviu chile',
       'RSH 40% 70% 90%',
       'subsidio habitacional UF',
+      'simulador subsidio vivienda',
+      'subsidio ds49 2026',
     ],
     relatedCalculators: [
       'calculadora-subsidio-habitacional',
       'calculadora-credito-hipotecario',
       'calculadora-contribuciones',
+    ],
+    faq: [
+      {
+        question: '¿Qué subsidios MINVU hay en 2026?',
+        answer:
+          'En 2026 los principales programas son: DS49 (Fondo Solidario, para el 40% más vulnerable, sin crédito hipotecario), DS01 (Sectores Medios, para RSH 40%-90%, con crédito complementario) y DS19 (Integración Social, adicional de hasta 200 UF que se suma al DS49 o DS01). El DFL2 no es un subsidio sino un régimen tributario favorable para viviendas económicas.',
+      },
+      {
+        question: '¿Cómo simular mi subsidio de vivienda en Chile?',
+        answer:
+          'Para simular tu subsidio necesitas saber tu tramo de RSH (Registro Social de Hogares), tu ingreso mensual en UF y el ahorro acumulado. El DS49 entrega hasta 450 UF (tramo más bajo), el DS01 hasta 650 UF (tramo 1) o 520 UF (tramo 2). Usa la calculadora de subsidio habitacional para estimar tu monto según ingreso y tramo.',
+      },
+      {
+        question: '¿El subsidio DS49 requiere crédito hipotecario?',
+        answer:
+          'No. El DS49 (Fondo Solidario de Elección de Vivienda) está diseñado para familias del 40% más vulnerable según RSH y NO requiere crédito hipotecario: el subsidio más el ahorro previo (mínimo 10 UF) cubren el precio total de la vivienda. El DS01, en cambio, sí requiere crédito hipotecario complementario.',
+      },
+      {
+        question: '¿Cuándo se abren las postulaciones a subsidios MINVU 2026?',
+        answer:
+          'Las llamadas a postulación se publican en serviu.cl con calendario semestral. Cada llamado tiene cupos limitados (entre 5.000 y 30.000 según programa). Postula en cuanto se abra el llamado: cuando se llena el cupo, debes esperar al siguiente. Requisitos: cédula vigente, libreta de ahorro (mínimo 6 meses para DS49, 12 para DS01) y certificado RSH actualizado.',
+      },
     ],
     content: `<h2>Panorama de los subsidios habitacionales 2026</h2>
 <p>El <strong>MINVU</strong> (Ministerio de Vivienda y Urbanismo) administra varios programas de subsidio según ingreso del postulante, tramo de RSH y tipo de vivienda. En 2026, con UF a $40.357, los subsidios entregan entre <strong>$10 y $34 millones</strong> según el programa y tramo.</p>
@@ -670,9 +777,13 @@ export const articles: Article[] = [
   {
     slug: 'comparativa-comisiones-afp-2026',
     title: 'Comparativa de comisiones AFP 2026: cuál te conviene',
+    seoTitle: 'Comisiones AFP 2026 Chile: la más barata y la más cara',
+    seoDescription:
+      'Compara las comisiones AFP 2026 en Chile. Revisa cuál AFP cobra menos, cuál cobra más y cuánto impacta en tu sueldo líquido.',
     description:
       'Análisis de las 7 AFP en 2026: comisión, rentabilidad histórica y SIS. Cuánto ahorras al año cambiándote de AFP cara a la más barata.',
     date: '2026-05-16',
+    updatedAt: '2026-07-02',
     category: 'previsional',
     readingTime: 7,
     relatedGuia: 'afp-pension-chile',
@@ -684,11 +795,36 @@ export const articles: Article[] = [
       'rentabilidad AFP',
       'tope imponible AFP',
       'tasa AFP 10%',
+      'AFP más barata Chile',
+      'AFP más cara Chile',
+      'comisiones AFP 2026 Chile',
     ],
     relatedCalculators: [
       'calculadora-comparador-afp',
       'calculadora-sueldo-liquido',
       'calculadora-cotizacion-independientes',
+    ],
+    faq: [
+      {
+        question: '¿Cuál es la AFP más barata en Chile 2026?',
+        answer:
+          'En 2026, AFP Uno tiene la comisión más baja del mercado chileno, seguida de AFP Modelo. La diferencia entre la más barata y la más cara (ProVida) ronda 1 punto porcentual, lo que para un sueldo de $1.000.000 significa cerca de $10.000 mensuales y más de $100.000 al año. Compara tu caso con la calculadora comparadora de AFPs.',
+      },
+      {
+        question: '¿Cuál es la AFP más cara en Chile?',
+        answer:
+          'En 2026, ProVida encabeza el ranking de comisiones más altas, seguida por Capital y Cuprum. La comisión se descuenta cada mes de tu sueldo bruto junto al 10% obligatorio que va a tu cuenta individual. Aunque la diferencia parece pequeña, capitalizada a 30 años de vida laboral puede significar varios millones de pesos menos en tu pensión final.',
+      },
+      {
+        question: '¿Conviene cambiarse de AFP por comisión?',
+        answer:
+          'Para la mayoría de los trabajadores sí, porque la comisión es certera (se descuenta cada mes) mientras que las diferencias de rentabilidad entre AFP en el mismo multifondo suelen ser menores a 0,5 puntos anual. Las excepciones son: si te falta poco para jubilar (prioriza estabilidad) o si estás en multifondos agresivos A o B donde la rentabilidad puede compensar. El cambio es gratuito, se hace en previred.com y no tienes que avisar a tu empleador.',
+      },
+      {
+        question: '¿Cómo me cambio de AFP en Chile?',
+        answer:
+          'El cambio es gratuito y se hace online: ingresa a previred.com con tu RUT y clave única, selecciona "Cambio de AFP", elige la AFP de destino y confirma. El cambio se hace efectivo el mes siguiente y tu saldo se transfiere automáticamente. No necesitas avisar a tu empleador: PreviRed coordina la cotización con la nueva AFP.',
+      },
     ],
     content: `<h2>Las 7 AFP en Chile 2026</h2>
 <p>El sistema chileno de pensiones tiene 7 administradoras de fondos de pensiones, cada una con su propia comisión y rentabilidad histórica. La <strong>comisión</strong> es lo que la AFP cobra por administrar tu cuenta y se descuenta de tu sueldo bruto cada mes (sumada al 10% obligatorio que va a tu cuenta individual).</p>
@@ -855,9 +991,13 @@ export const articles: Article[] = [
   {
     slug: 'tope-imponible-89-9-uf-explicado',
     title: 'Tope imponible 89,9 UF: qué es y por qué importa en 2026',
+    seoTitle: 'Tope Imponible 2026 en Chile: AFP, salud y cesantía',
+    seoDescription:
+      'Revisa el tope imponible 2026 para AFP, salud y seguro de cesantía, con valores en UF, equivalente en pesos y ejemplos.',
     description:
       'Qué es el tope imponible AFP/salud (89,9 UF en 2026), cómo se ajusta cada año y por qué reduce las cotizaciones efectivas para sueldos altos.',
     date: '2026-05-16',
+    updatedAt: '2026-07-02',
     category: 'previsional',
     readingTime: 5,
     relatedGuia: 'sueldo-liquido-chile',
@@ -869,12 +1009,36 @@ export const articles: Article[] = [
       'sueldo alto Chile',
       'cotización tope',
       'remuneración tope',
+      'tope imponible 2026',
+      'tope imponible mayo 2026',
     ],
     relatedCalculators: [
       'calculadora-sueldo-liquido',
       'calculadora-comparador-afp',
       'calculadora-cotizacion-independientes',
       'calculadora-costo-empleado-pyme',
+    ],
+    faq: [
+      {
+        question: '¿Cuál es el tope imponible 2026 en Chile?',
+        answer:
+          'El tope imponible 2026 para AFP y salud es de 89,9 UF mensuales (aproximadamente $3.626.566 con UF de mayo 2026). El tope de cesantía es distinto y más alto: 134,9 UF mensuales (aproximadamente $5.444.235). Si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese monto, no sobre el total.',
+      },
+      {
+        question: '¿Cómo afecta el tope imponible a mi sueldo líquido?',
+        answer:
+          'Para sueldos bajo el tope (la mayoría), no hay efecto: cotizas sobre el bruto completo. Para sueldos sobre el tope, el porcentaje efectivo de cotización cae a medida que sube el bruto. Por ejemplo, con AFP Habitat (1,27%): un sueldo de $3.000.000 paga 11,27% efectivo, pero un sueldo de $5.000.000 paga solo 8,17% efectivo porque las cotizaciones se calculan sobre $3.626.566 (el tope), no sobre los $5M.',
+      },
+      {
+        question: '¿Cuándo se actualiza el tope imponible?',
+        answer:
+          'El tope se reajusta cada febrero por la Superintendencia de Pensiones, aplicando la variación real de las remuneraciones del país (Índice de Remuneraciones Reales del INE, no IPC). Histórico: 2023 = 83,4 UF, 2024 = 84,3 UF, 2025 = 87,8 UF, 2026 = 89,9 UF. Si el ISR es negativo, el tope podría bajar.',
+      },
+      {
+        question: '¿El tope imponible aplica a trabajadores independientes?',
+        answer:
+          'Sí. Los trabajadores independientes (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 89,9 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope. Por eso los altos ingresos requieren APV o ahorro complementario para mantener el nivel de vida al jubilar.',
+      },
     ],
     content: `<h2>¿Qué es el tope imponible?</h2>
 <p>El <strong>tope imponible</strong> es el monto máximo de remuneración mensual sobre el cual se calculan las cotizaciones obligatorias de AFP y salud (FONASA o Isapre). Es decir: si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese tope, y la porción que excede no cotiza.</p>

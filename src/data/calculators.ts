@@ -1048,7 +1048,10 @@ export const calculators: Calculator[] = [
     category: 'empresas',
     featured: true,
     phase: 2,
-    keywords: ['patente comercial', 'patente municipal', 'costo patente Chile', 'capital invertido patente', 'tasa municipal'],
+    seoTitle: 'Calculadora Patente Comercial 2026 Chile — Valor Municipal',
+    seoDescription:
+      'Calcula el valor de una patente comercial municipal en Chile según capital invertido, actividad y comuna. Topes UTM y pago semestral.',
+    keywords: ['patente comercial', 'patente municipal', 'costo patente Chile', 'capital invertido patente', 'tasa municipal', 'valor patente comercial', 'cálculo patente comercial', 'cálculo patente municipal', 'valor patente municipal 2026'],
     inputs: [
       { id: 'capitalInvertido', label: 'Capital Invertido', type: 'number', placeholder: '$10.000.000', required: true, min: 0, tooltip: 'Valor total de activos fijos: equipos, mobiliario, instalaciones, mercadería. No incluye el local si es arrendado.' },
       { id: 'actividad', label: 'Actividad', type: 'select', required: true, options: [
@@ -1066,24 +1069,28 @@ export const calculators: Calculator[] = [
     ],
     faq: [
       {
-        question: '¿Cuánto cuesta una patente comercial?',
-        answer: 'La patente se calcula como un porcentaje del capital invertido (0.25% a 0.5% según comuna), con un mínimo de 1 UTM y máximo de 8 UTM semestral. Para un capital de $10.000.000 en Santiago (0.5%), la patente es $50.000 semestral.'
+        question: '¿Cuánto vale una patente comercial en Chile?',
+        answer: 'La patente comercial se calcula como un porcentaje del capital invertido (0,25% a 0,5% según comuna), con un mínimo de 1 UTM y máximo de 8 UTM semestral. Para un capital de $10.000.000 en Santiago (0,5%), la patente es $50.000 semestral. El valor exacto depende de la comuna donde opera el negocio y del tipo de actividad.'
       },
       {
-        question: '¿Cuándo se paga la patente?',
-        answer: 'La patente se paga semestralmente: enero (primer semestre) y julio (segundo semestre). El pago se hace en la municipalidad donde funciona el negocio. Si inicias actividades, pagas proporcional por los meses restantes.'
+        question: '¿Cómo se calcula la patente municipal?',
+        answer: 'La patente municipal se calcula aplicando la tasa fijada por la municipalidad (entre 0,25% y 0,5%) sobre el capital invertido declarado. El resultado se ajusta a los topes legales: mínimo 1 UTM semestral y máximo 8 UTM semestral. La actividad (comercio, industria, servicios, transporte) también afecta la tasa aplicable.'
       },
       {
-        question: '¿Qué es el capital invertido?',
-        answer: 'El capital invertido incluye activos fijos: maquinarias, equipos, mobiliario, instalaciones, mercaderías, y vehículos. No incluye el local si es arrendado. Debes declararlo anualmente en la municipalidad.'
+        question: '¿Cuándo se paga la patente comercial?',
+        answer: 'La patente se paga semestralmente: enero (primer semestre) y julio (segundo semestre). El pago se hace en la municipalidad donde funciona el negocio. Si inicias actividades a mitad de semestre, pagas proporcional por los meses restantes.'
+      },
+      {
+        question: '¿Qué es el capital invertido de la patente?',
+        answer: 'El capital invertido incluye activos fijos: maquinarias, equipos, mobiliario, instalaciones, mercaderías y vehículos. No incluye el local si es arrendado. Debes declararlo anualmente en la municipalidad al renovar la patente.'
       },
       {
         question: '¿Necesito patente para todo negocio?',
-        answer: 'Sí, todo negocio o actividad comercial necesita patente municipal. Las únicas excepciones son trabajadores independientes sin local, vendedores ambulantes autorizados, y algunas actividades agrícolas. El no pago tiene multas.'
+        answer: 'Sí, todo negocio o actividad comercial necesita patente municipal. Las únicas excepciones son trabajadores independientes sin local, vendedores ambulantes autorizados y algunas actividades agrícolas. El no pago tiene multas y puede derivar en el cierre del local.'
       },
       {
         question: '¿Puedo perder la patente?',
-        answer: 'Sí. La municipalidad puede cancelar la patente por: no pago, infracciones graves, cambio de actividad no autorizado, o cierre del negocio. Para reanudar, debes pagar patentes adeudadas más multas.'
+        answer: 'Sí. La municipalidad puede cancelar la patente por: no pago, infracciones graves, cambio de actividad no autorizado o cierre del negocio. Para reanudar, debes pagar las patentes adeudadas más las multas correspondientes.'
       },
     ],
   },
@@ -1250,7 +1257,10 @@ export const calculators: Calculator[] = [
     category: 'educacion',
     featured: true,
     phase: 2,
-    keywords: ['CAE', 'crédito aval estado', 'credito universidad Chile', 'dividendo CAE', 'crédito estudios'],
+    seoTitle: 'Calculadora CAE 2026 Chile — Simula tu crédito estudiantil',
+    seoDescription:
+      'Simula la cuota del Crédito con Aval del Estado en Chile: monto, plazo, tasa y total a pagar. Pago contingente al ingreso.',
+    keywords: ['CAE', 'crédito aval estado', 'credito universidad Chile', 'dividendo CAE', 'crédito estudios', 'calculadora CAE', 'calcular CAE crédito', 'cuota CAE'],
     inputs: [
       { id: 'montoCredito', label: 'Monto del Crédito', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Monto total solicitado. El CAE cubre hasta 90% con garantía estatal.' },
       { id: 'tasaAnual', label: 'Tasa Anual (%)', type: 'number', placeholder: '3.5', required: true, min: 0, max: 15, tooltip: 'Tasa de interés anual. CAE tiene tasas preferenciales vs créditos tradicionales.' },
@@ -1259,24 +1269,24 @@ export const calculators: Calculator[] = [
     ],
     faq: [
       {
-        question: '¿Qué es el CAE?',
-        answer: 'El Crédito con Aval del Estado (CAE) es un préstamo para financiar estudios superiores con garantía del Estado hasta el 90%. Tiene tasas de interés preferenciales (3-5% anual) y se comienza a pagar después de egresar.'
+        question: '¿Cómo se calcula la cuota del CAE?',
+        answer: 'Desde la Ley 21.605 (2023), el CAE se paga bajo régimen contingente al ingreso: la cuota mensual máxima es 10% del ingreso bruto del deudor, ajustada cada año. Si tu ingreso baja, la cuota baja; si te quedas sin trabajo, la cuota se suspende. La tasa anual es 2% real sobre UF y el plazo máximo 240 cuotas (20 años).'
+      },
+      {
+        question: '¿Cuándo se empieza a pagar el CAE?',
+        answer: 'Comienzas a pagar 18 meses después de egresar. Durante los estudios y el período de gracia, el Estado subsidia parte de los intereses. El plazo máximo de pago es 20 años (240 cuotas) y el saldo restante a los 20 años se condona.'
+      },
+      {
+        question: '¿Cuál es el plazo máximo del CAE?',
+        answer: 'El plazo máximo del CAE es de 20 años (240 cuotas mensuales). Si después de 20 años aún queda saldo, ese saldo se condona automáticamente. La cuota se ajusta anualmente según el ingreso bruto del deudor, con un tope del 10% del ingreso.'
+      },
+      {
+        question: '¿Qué pasa si no encuentro trabajo con el CAE?',
+        answer: 'Si estás desempleado, puedes solicitar la suspensión de pagos por hasta 12 meses. El nuevo régimen contingente al ingreso (Ley 21.605) elimina el riesgo de no poder pagar: si tu ingreso baja, la cuota baja proporcionalmente. Si te quedas sin trabajo, la cuota se suspende.'
       },
       {
         question: '¿Quiénes pueden postular al CAE?',
-        answer: 'Estudiantes chilenos o residentes permanentes que ingresen a educación superior (universidades, institutos profesionales, centros de formación técnica). Deben cumplir requisitos académicos y socioeconómicos.'
-      },
-      {
-        question: '¿Cuándo se paga el CAE?',
-        answer: 'Comienzas a pagar 18 meses después de egresar. Durante los estudios y el período de gracia, el Estado subsidia parte de los intereses. El plazo máximo es 20 años.'
-      },
-      {
-        question: '¿Qué pasa si no encuentro trabajo?',
-        answer: 'Si estás desempleado, puedes solicitar la suspensión de pagos por hasta 12 meses. También existen mecanismos de condonación parcial si trabajas en zonas extremas o áreas prioritarias.'
-      },
-      {
-        question: '¿El CAE cubre todos los gastos?',
-        answer: 'El CAE cubre arancel y matrícula. No cubre gastos adicionales como libros, materiales o transporte. El monto máximo depende de la carrera y la institución.'
+        answer: 'Estudiantes chilenos o residentes permanentes que ingresen a educación superior (universidades, institutos profesionales, centros de formación técnica). Deben cumplir requisitos académicos y socioeconómicos. El CAE cubre arancel y matrícula, no gastos adicionales como libros o transporte.'
       },
     ],
   },

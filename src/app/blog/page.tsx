@@ -53,16 +53,25 @@ export default function BlogPage() {
     {},
   );
 
+  // Orden preferido para las categorías conocidas. Cualquier categoría
+  // nueva que aparezca en `articles` se renderiza al final con su
+  // nombre capitalizado, evitando la fuga de artículos fuera del
+  // índice del blog (bug previo: `previsional` y `educacion` no se
+  // mostraban pese a tener artículos con tracción real en GSC).
   const categoryOrder = [
     'laboral',
     'impuestos',
     'vivienda',
+    'previsional',
+    'educacion',
     'educacion-financiera',
   ];
   const categoryLabels: Record<string, string> = {
     laboral: 'Laboral y sueldo',
     impuestos: 'Impuestos y tributos',
     vivienda: 'Vivienda y arriendo',
+    previsional: 'Previsional y AFP',
+    educacion: 'Educación y créditos estudiantiles',
     'educacion-financiera': 'Educación financiera',
   };
 
@@ -123,13 +132,22 @@ export default function BlogPage() {
 
           {articles.length > 0 ? (
             <div className="space-y-12">
-              {categoryOrder.map((cat) => {
+              {/* Categorías en orden preferido + cualquier otra que
+                  exista en `articles` pero no esté en `categoryOrder`.
+                  Esto evita que artículos con categorías nuevas
+                  queden invisibles en el índice del blog. */}
+              {[
+                ...categoryOrder,
+                ...Object.keys(byCategory).filter(
+                  (c) => !categoryOrder.includes(c),
+                ),
+              ].map((cat) => {
                 const list = byCategory[cat];
                 if (!list || list.length === 0) return null;
                 return (
                   <section key={cat}>
                     <h2 className="text-xl font-bold text-[var(--foreground)] mb-5 capitalize">
-                      {categoryLabels[cat] ?? cat}
+                      {categoryLabels[cat] ?? cat.replace(/-/g, ' ')}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {list.map((art, idx) => (
