@@ -42,7 +42,6 @@ import { calculateCostoTag, costoTagToResults } from "@/lib/calculations/costo-t
 import { calculateCuentaLuz, cuentaLuzToResults } from "@/lib/calculations/cuenta-luz";
 import { calculateImpuestoSegundaCategoria, impuestoSegundaCategoriaToResults } from "@/lib/calculations/impuesto-segunda-categoria";
 import { calculatePPM, ppmToResults } from "@/lib/calculations/ppm";
-import { calculateBonoBodasOro, bonoBodasOroToResults } from "@/lib/calculations/bono-bodas-oro";
 import { calculateSubsidioAgua, subsidioAguaToResults } from "@/lib/calculations/subsidio-agua";
 import { calculateCotizacionIndependientes, cotizacionIndependientesToResults } from "@/lib/calculations/cotizacion-independientes";
 import { calculatePropinaLegal, propinaLegalToResults } from "@/lib/calculations/propina-legal";
@@ -344,14 +343,6 @@ const calculationFunctions: Record<string, (inputs: Record<string, unknown>) => 
       actividad: inputs.actividad as "profesional" | "comercio" | "transporte" | "construccion",
     });
     return ppmToResults(result);
-  },
-  "bono-bodas-oro": (inputs) => {
-    const result = calculateBonoBodasOro({
-      anosTrabajados: inputs.anosTrabajados as number,
-      esPublico: inputs.esPublico as boolean,
-      sueldoBruto: inputs.sueldoBruto as number,
-    });
-    return bonoBodasOroToResults(result);
   },
   "subsidio-agua": (inputs) => {
     const result = calculateSubsidioAgua({

@@ -1,13 +1,13 @@
 // ============================================
 // Sub-sitemap: páginas estáticas + categorías
 // ----------------------------------------------
-// Incluye home, /calculadoras, /blog, /guias, /faq, /equipo,
-// legales y todas las páginas de categoría con calculadoras
+// Incluye home, /calculadoras, /blog, /guias, /faq, /acerca-de,
+// /equipo, /cookies y todas las páginas de categoría con calculadoras
 // asignadas.
 //
-// `/buscar` NO se incluye: la página tiene noindex y agregarla al
-// sitemap es contraproducente (Google la rechazaría como
-// "indexed but blocked", confundiendo el crawl budget).
+// `/buscar`, `/privacidad` y `/terminos` NO se incluyen: tienen noindex
+// y agregarlas al sitemap es contraproducente (Google las rechazaría
+// como "indexed but blocked", confundiendo el crawl budget).
 // ============================================
 
 import { calculators } from '@/data/calculators';
@@ -71,16 +71,10 @@ export async function GET() {
       priority: 0.6,
     },
     {
-      url: `${SITE_URL}/privacidad`,
-      lastModified: new Date('2026-03-31'),
+      url: `${SITE_URL}/acerca-de`,
+      lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/terminos`,
-      lastModified: new Date('2026-03-31'),
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.6,
     },
     {
       url: `${SITE_URL}/cookies`,

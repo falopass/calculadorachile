@@ -32,6 +32,7 @@ const footerLinks = {
       { href: '/categoria', label: 'Categorías' },
       { href: '/buscar', label: 'Buscar' },
       { href: '/faq', label: 'Preguntas frecuentes' },
+      { href: '/acerca-de', label: 'Acerca de' },
       { href: '/equipo', label: 'Equipo' },
     ],
   },

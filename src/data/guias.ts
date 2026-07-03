@@ -853,7 +853,6 @@ export const guias: Guia[] = [
       'calculadora-simulador-apv',
       'calculadora-pgu',
       'calculadora-cotizacion-independientes',
-      'calculadora-bono-bodas-oro',
     ],
     relatedArticles: ['diferencia-sueldo-bruto-liquido'],
     sources: [
@@ -1298,7 +1297,6 @@ export const guias: Guia[] = [
       'calculadora-pension-alimenticia',
       'calculadora-asignacion-familiar',
       'calculadora-subsidio-agua',
-      'calculadora-bono-bodas-oro',
       'calculadora-aguinaldo',
       'calculadora-pgu',
     ],
@@ -1407,8 +1405,7 @@ export const guias: Guia[] = [
 <li><strong>PGU mayorada (82+ años)</strong>: $260.286 mensuales.</li>
 <li><strong>Aporte previsional solidario</strong>: complementa pensiones bajas hasta el monto base.</li>
 <li><strong>Tarifa rebajada en transporte público</strong>: 50% en Metro y buses para 65+ años con tarjeta TNE Adulto Mayor.</li>
-</ul>
-<p>Para verificar elegibilidad y montos, usa la <a href="/calculadoras/calculadora-bono-bodas-oro">calculadora de bono bodas de oro</a>.</p>`,
+</ul>`,
       },
     ],
   },

@@ -1,3 +1,13 @@
+// ============================================
+// /privacidad — Política de privacidad
+// ----------------------------------------------
+// noindex, follow. Página legal utilitaria: debe existir y ser
+// accesible pero no suma a la evaluación de contenido de AdSense.
+//
+// Basada en el Entregable D del informe AdSense, adaptada a la
+// Ley 21.719 (vigente diciembre 2026) que reemplaza a la Ley 19.628.
+// ============================================
+
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/layout/LegalPageLayout';
 import JsonLd from '@/components/seo/JsonLd';
@@ -6,28 +16,28 @@ import {
   breadcrumbSchema,
 } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { absoluteUrl, SITE_URL, SITE_NAME, CONTACT_EMAIL } from '@/lib/site';
+import { absoluteUrl, SITE_NAME } from '@/lib/site';
 
 export const metadata: Metadata = buildPageMetadata({
   path: '/privacidad',
   title: 'Política de privacidad',
   description:
-    'Política de privacidad de CalculaChile. Tus datos están seguros: los cálculos ocurren en tu navegador y cumplimos con la Ley 19.628 de Chile.',
+    'Política de privacidad de CalculaChile conforme a la Ley 21.719 de protección de datos personales de Chile.',
+  noIndex: true,
 });
+
+const PRIVACIDAD_EMAIL = 'ddiegosebastianbb@gmail.com';
 
 export default function PrivacidadPage() {
   const url = absoluteUrl('/privacidad');
-  // Schema.org no tiene "PrivacyPolicy" como tipo top-level. Usamos
-  // WebPage genérico, que es la práctica recomendada de Google para
-  // páginas legales.
   const schemas = [
     webPageSchema({
       url,
       name: `Política de Privacidad de ${SITE_NAME}`,
       description:
-        'Cómo CalculaChile recopila, usa y protege tu información personal según la Ley 19.628.',
-      datePublished: '2026-01-01',
-      dateModified: '2026-03-31',
+        'Cómo CalculaChile recopila, usa y protege tu información personal según la Ley 21.719.',
+      datePublished: '2026-07-02',
+      dateModified: '2026-07-02',
     }),
     breadcrumbSchema([
       { name: 'Inicio', path: '/' },
@@ -40,123 +50,111 @@ export default function PrivacidadPage() {
       <JsonLd id="privacy-schemas" data={schemas} />
       <LegalPageLayout
         title="Política de Privacidad"
-        description="Tu privacidad es importante para nosotros. Esta política explica cómo recopilamos, usamos y protegemos tu información personal."
-        lastUpdated="31 de Marzo de 2026"
+        description="CalculaChile trata datos personales de forma limitada y proporcional al funcionamiento del sitio."
+        lastUpdated="2 de Julio de 2026"
       >
-        <h2>1. Introducción</h2>
         <p>
-          {SITE_NAME} ({SITE_URL.replace(/^https?:\/\//, '')}) es un sitio web
-          que proporciona herramientas de cálculo financiero y laboral para
-          trabajadores chilenos. Nos comprometemos a proteger tu privacidad de
-          acuerdo con la <strong>Ley 19.628 sobre Protección de la Vida Privada</strong>{' '}
-          de Chile.
+          CalculaChile trata datos personales de forma limitada y proporcional
+          al funcionamiento del sitio. Esta política explica qué datos pueden
+          recopilarse, para qué se usan, cómo se protegen y cómo ejercer
+          derechos conforme a la normativa chilena de protección de datos,
+          incluida la <strong>Ley 19.628</strong> y sus modificaciones por la{' '}
+          <strong>Ley 21.719</strong>.
         </p>
 
-        <h2>2. Datos que Recopilamos</h2>
+        <h2>Responsable</h2>
         <p>
-          CalculaChile opera principalmente <strong>sin recopilar datos personales</strong>.
-          Específicamente:
-        </p>
-        <ul>
-          <li>
-            <strong>Calculadoras:</strong> Todos los cálculos se realizan
-            localmente en tu navegador. No enviamos tus datos a ningún servidor.
-          </li>
-          <li>
-            <strong>Historial local:</strong> Si usas la función de historial,
-            los datos se guardan exclusivamente en tu dispositivo (localStorage).
-          </li>
-          <li>
-            <strong>Cookies:</strong> Usamos cookies esenciales para el
-            funcionamiento del sitio (preferencia de tema) y cookies de terceros
-            para análisis y publicidad (Google Analytics, Google AdSense).
-          </li>
-          <li>
-            <strong>Analytics:</strong> Recopilamos datos anónimos de uso
-            (páginas visitadas, tiempo en sitio) a través de Google Analytics.
-          </li>
-        </ul>
-
-        <h2>3. Uso de la Información</h2>
-        <p>La información que se recopila se utiliza exclusivamente para:</p>
-        <ul>
-          <li>Mejorar la experiencia de usuario del sitio.</li>
-          <li>Analizar tendencias de uso para optimizar nuestras herramientas.</li>
-          <li>Mostrar publicidad relevante a través de Google AdSense.</li>
-        </ul>
-
-        <h2>4. Cookies de Terceros</h2>
-        <p>Utilizamos servicios de terceros que pueden instalar cookies:</p>
-        <ul>
-          <li>
-            <strong>Google AdSense:</strong> Muestra anuncios personalizados.{' '}
-            <a
-              href="https://policies.google.com/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Política de privacidad de Google
-            </a>
-          </li>
-          <li>
-            <strong>Google Analytics:</strong> Analiza el tráfico del sitio.{' '}
-            <a
-              href="https://support.google.com/analytics/answer/6004245"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Cómo desactivar Google Analytics
-            </a>
-          </li>
-        </ul>
-
-        <h2>5. Tus Derechos (ARCO)</h2>
-        <p>De acuerdo con la Ley 19.628, tienes derecho a:</p>
-        <ul>
-          <li>
-            <strong>Acceso:</strong> Solicitar información sobre los datos
-            personales que poseemos.
-          </li>
-          <li>
-            <strong>Rectificación:</strong> Solicitar la corrección de datos
-            inexactos.
-          </li>
-          <li>
-            <strong>Cancelación:</strong> Solicitar la eliminación de tus datos.
-          </li>
-          <li>
-            <strong>Oposición:</strong> Oponerte al tratamiento de tus datos
-            para ciertos fines.
-          </li>
-        </ul>
-        <p>
-          Para ejercer estos derechos, contáctanos a <strong>{CONTACT_EMAIL}</strong>.
+          Responsable del sitio: Diego Bravo. Contacto:{' '}
+          <a href={`mailto:${PRIVACIDAD_EMAIL}`}>{PRIVACIDAD_EMAIL}</a>.
         </p>
 
-        <h2>6. Seguridad</h2>
+        <h2>Datos que se pueden tratar</h2>
         <p>
-          Implementamos medidas de seguridad técnicas para proteger la
-          información. El sitio utiliza HTTPS y no almacenamos datos personales
-          en nuestros servidores.
+          El sitio puede tratar datos técnicos de navegación, como dirección
+          IP abreviada o completa según el proveedor, navegador, dispositivo,
+          páginas visitadas, fecha, hora, eventos de uso y preferencias de
+          cookies. Si usas el formulario de contacto, se tratarán los datos
+          que entregues, como nombre, correo y mensaje.
         </p>
 
-        <h2>7. Cambios en esta Política</h2>
+        <h2>Calculadoras</h2>
         <p>
-          Nos reservamos el derecho de actualizar esta política. Cualquier
-          cambio será publicado en esta página con la fecha de actualización
-          correspondiente.
+          Los datos ingresados en las calculadoras se procesan para mostrar
+          resultados en pantalla. Salvo que una página indique lo contrario,
+          los datos de cálculo no se usan para crear perfiles individuales ni
+          para tomar decisiones automatizadas con efectos legales.
         </p>
 
-        <h2>8. Contacto</h2>
-        <p>Si tienes dudas sobre esta política de privacidad, contáctanos:</p>
-        <ul>
-          <li>
-            <strong>Email:</strong> {CONTACT_EMAIL}
-          </li>
-          <li>
-            <strong>Sitio web:</strong> {SITE_URL}
-          </li>
-        </ul>
+        <h2>Finalidades</h2>
+        <p>
+          Los datos se usan para operar el sitio, responder consultas, medir
+          rendimiento, mejorar contenidos, prevenir abuso, cumplir
+          obligaciones legales y, si corresponde, mostrar publicidad
+          personalizada o contextual mediante proveedores como Google AdSense.
+        </p>
+
+        <h2>Cookies y publicidad</h2>
+        <p>
+          El sitio puede usar cookies técnicas, analíticas y publicitarias.
+          Google y sus socios pueden usar cookies o identificadores para
+          personalizar anuncios, medir rendimiento y limitar frecuencia.
+          Puedes gestionar preferencias desde el banner de cookies y desde la
+          configuración de tu navegador.
+        </p>
+
+        <h2>Base de legitimidad</h2>
+        <p>
+          El tratamiento se basa en el consentimiento cuando corresponda, en
+          el interés legítimo de mantener seguridad y medición básica, y en
+          el cumplimiento de obligaciones legales aplicables.
+        </p>
+
+        <h2>Comunicación a terceros</h2>
+        <p>
+          Pueden participar proveedores de hosting, analítica, seguridad,
+          email y publicidad. Estos proveedores deben tratar datos conforme a
+          instrucciones, contratos o sus propias políticas cuando actúen como
+          responsables independientes.
+        </p>
+
+        <h2>Transferencias internacionales</h2>
+        <p>
+          Algunos proveedores pueden operar fuera de Chile. En esos casos se
+          procurará usar proveedores con medidas contractuales, técnicas y
+          organizativas razonables.
+        </p>
+
+        <h2>Conservación</h2>
+        <p>
+          Los datos de contacto se conservarán por el tiempo necesario para
+          responder la solicitud. Los registros técnicos y analíticos se
+          conservarán según la configuración del proveedor y necesidades de
+          seguridad o medición.
+        </p>
+
+        <h2>Derechos de las personas</h2>
+        <p>
+          Puedes solicitar acceso, rectificación, supresión, oposición,
+          bloqueo, portabilidad y demás derechos reconocidos por la normativa
+          aplicable escribiendo a{' '}
+          <a href={`mailto:${PRIVACIDAD_EMAIL}`}>{PRIVACIDAD_EMAIL}</a>. La
+          solicitud debe permitir verificar identidad y responder dentro de
+          los plazos legales.
+        </p>
+
+        <h2>Seguridad</h2>
+        <p>
+          El sitio usa HTTPS, control de acceso al repositorio y proveedores
+          de infraestructura reconocidos. Ningún sistema es infalible, por lo
+          que se recomienda no enviar información sensible por formularios
+          generales.
+        </p>
+
+        <h2>Cambios</h2>
+        <p>
+          Esta política puede actualizarse por cambios legales, técnicos o de
+          proveedores. La versión vigente se publicará en esta misma URL.
+        </p>
       </LegalPageLayout>
     </>
   );

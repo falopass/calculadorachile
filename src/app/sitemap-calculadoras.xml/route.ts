@@ -19,7 +19,13 @@ export const dynamic = 'force-static';
 export const revalidate = 3600;
 
 export async function GET() {
-  const entries: SitemapEntry[] = calculators.map((calc) => ({
+  // Excluir calculadoras marcadas `noIndex` del sitemap para no
+  // enviar señales contradictorias a Google (noindex + sitemap).
+  const indexableCalculators = calculators.filter(
+    (calc) => !calc.noIndex,
+  );
+
+  const entries: SitemapEntry[] = indexableCalculators.map((calc) => ({
     url: `${SITE_URL}/calculadoras/${calc.slug}`,
     lastModified: SITE_LAST_MODIFIED,
     changeFrequency: 'monthly',

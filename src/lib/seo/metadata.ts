@@ -108,7 +108,7 @@ export function buildPageMetadata(args: BuildMetadataArgs): Metadata {
       images: [ogImage.url],
     },
     robots: args.noIndex
-      ? { index: false, follow: false }
+      ? { index: false, follow: true }
       : { index: true, follow: true },
   };
 

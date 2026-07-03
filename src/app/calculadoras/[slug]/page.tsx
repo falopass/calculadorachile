@@ -103,6 +103,7 @@ export async function generateMetadata({
       width: 1200,
       height: 630,
     },
+    noIndex: calculator.noIndex === true,
   });
 
   // `category` es un campo top-level útil para algunos crawlers

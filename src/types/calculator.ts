@@ -80,4 +80,11 @@ export interface Calculator {
    * corta, según la lógica existente en generateMetadata).
    */
   seoDescription?: string;
+  /**
+   * Marca la calculadora como `noindex, follow` (no indexable pero
+   * el link equity fluye). Se usa para excluir calculadoras delgadas
+   * del índice de Google durante la revisión de AdSense sin romper
+   * la ruta. También se excluyen del sitemap.
+   */
+  noIndex?: boolean;
 }
