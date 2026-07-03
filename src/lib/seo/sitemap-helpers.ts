@@ -9,8 +9,9 @@
 //   - changeFrequency: always | hourly | daily | weekly | monthly |
 //                      yearly | never
 //   - priority: 0.0 a 1.0
-//   - images: <image:image> dentro de cada <url>, formato Google
-//     Image Sitemap.
+//   - images: <image:image> dentro de cada <url>, extensión Google
+//     Image Sitemap (namespace 1.1 — el 0.9 es inválido y dispara
+//     errores "etiqueta image:loc no reconocida" en Search Console).
 //
 // El sitemap dividido permite a los crawlers descubrir y priorizar
 // secciones independientemente. Ahora son ~97 URLs y cabrían sin
@@ -87,7 +88,7 @@ export function renderUrlsetXml(entries: SitemapEntry[]): string {
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls}
 </urlset>`;
 }
