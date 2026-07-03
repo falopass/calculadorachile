@@ -10,6 +10,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { calculators, getCalculatorBySlug } from '@/data/calculators';
+import { seoOverrides } from '@/data/seo-overrides';
 import { absoluteUrl } from '@/lib/site';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { getGuiaForCalculator } from '@/lib/seo/calculator-guia-map';
@@ -60,19 +61,21 @@ export async function generateMetadata({
   // duplicar el branding ni el año si ya está en el nombre.
   // Si la calculadora declara `seoTitle`, se usa ese (override) en
   // vez del generado, para subir CTR en páginas con tracción real.
+  // Prioridad: seoOverrides (global) > calculator.seoTitle > generado.
+  const override = seoOverrides[calculator.slug];
   const generatedTitle = (() => {
     const nameAlreadyHasYear = /20\d{2}/.test(calculator.name);
     return nameAlreadyHasYear
       ? `${calculator.name} — Calculadora gratuita`
       : `${calculator.name} — Calculadora gratuita 2026`;
   })();
-  const titleClean = calculator.seoTitle ?? generatedTitle;
+  const titleClean = override?.seoTitle ?? calculator.seoTitle ?? generatedTitle;
 
   // Description enriquecida: si la del data es corta (<70 chars),
   // la complementamos con keywords y CTA. Si es larga, la usamos tal cual.
-  // Si la calculadora declara `seoDescription`, se usa esa (override).
+  // Prioridad: seoOverrides (global) > calculator.seoDescription > description.
   const baseDesc = (
-    calculator.seoDescription ?? calculator.description
+    override?.seoDescription ?? calculator.seoDescription ?? calculator.description
   ).trim();
   const enrichedDesc =
     baseDesc.length < 80

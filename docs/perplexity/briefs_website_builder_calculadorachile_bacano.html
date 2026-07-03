@@ -1,0 +1,1548 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>25 Briefs de contenido para calculadorachile.cl</title>
+  <meta name="description" content="Versión HTML estilizada del documento de briefs para calculadorachile.cl.">
+  <meta name="generator" content="ChatGPT HTML transformer (mistune)">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111c34;
+      --paper: #f8fafc;
+      --paper-2: #ffffff;
+      --ink: #111827;
+      --muted: #667085;
+      --line: #e6eaf2;
+      --brand: #2563eb;
+      --brand-2: #0f766e;
+      --accent: #f59e0b;
+      --chip: #e0f2fe;
+      --code: #0b1220;
+      --shadow: 0 24px 70px rgba(15, 23, 42, .18);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, .24), transparent 30rem),
+        radial-gradient(circle at top right, rgba(15, 118, 110, .20), transparent 28rem),
+        linear-gradient(135deg, #eef4ff 0%, #f8fafc 42%, #f3f7fb 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: #1d4ed8;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(29, 78, 216, .22);
+      transition: color .15s ease, border-color .15s ease, background .15s ease;
+    }
+
+    a:hover {
+      color: #0f766e;
+      border-color: rgba(15, 118, 110, .45);
+    }
+
+    .shell {
+      width: min(1480px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, .96), rgba(30, 64, 175, .90) 55%, rgba(15, 118, 110, .88));
+      box-shadow: var(--shadow);
+      padding: clamp(28px, 5vw, 62px);
+      margin-bottom: 26px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -45% 45%;
+      height: 360px;
+      background: radial-gradient(circle, rgba(255,255,255,.22), transparent 60%);
+      transform: rotate(-8deg);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.90);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 920px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 70px);
+      line-height: .95;
+      letter-spacing: -0.055em;
+    }
+
+    .hero p {
+      max-width: 860px;
+      margin: 22px 0 0;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(16px, 2vw, 21px);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-card {
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 20px;
+      background: rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.66);
+      margin-bottom: 5px;
+    }
+
+    .meta-card span {
+      font-size: 14px;
+      color: #fff;
+      overflow-wrap: anywhere;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 18px;
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      padding: 18px;
+      border: 1px solid rgba(226,232,240,.9);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 55px rgba(15, 23, 42, .10);
+    }
+
+    .toc-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      color: #0f172a;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .toc a {
+      display: block;
+      border: 0;
+      color: #334155;
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 13px;
+      line-height: 1.28;
+    }
+
+    .toc a:hover {
+      background: #eef6ff;
+      color: #1d4ed8;
+    }
+
+    .toc-l1 { font-weight: 800; margin-top: 6px; }
+    .toc-l2 { padding-left: 18px !important; }
+    .toc-l3 { padding-left: 30px !important; color: #64748b !important; }
+
+    main.content {
+      min-width: 0;
+      padding: clamp(22px, 4vw, 52px);
+      border: 1px solid rgba(226,232,240,.95);
+      border-radius: 28px;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+    }
+
+    .content > *:first-child { margin-top: 0; }
+
+    .content h1, .content h2, .content h3, .content h4 {
+      color: #0f172a;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+    }
+
+    .content h1 {
+      font-size: clamp(32px, 4vw, 52px);
+      margin: 0 0 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .content h2 {
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      font-size: clamp(26px, 3vw, 38px);
+    }
+
+    .content h2[id^="brief"],
+    .content h2[id*="brief"] {
+      padding: 26px 26px 24px;
+      margin: 54px -10px 22px;
+      border: 1px solid rgba(37, 99, 235, .18);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.09), rgba(15,118,110,.07)),
+        #ffffff;
+      box-shadow: 0 12px 36px rgba(15, 23, 42, .07);
+    }
+
+    .content h3 {
+      margin-top: 30px;
+      font-size: clamp(20px, 2vw, 25px);
+    }
+
+    .content h4 {
+      margin-top: 24px;
+      font-size: 18px;
+    }
+
+    .content p, .content li {
+      color: #334155;
+      font-size: 16px;
+    }
+
+    .content strong {
+      color: #101828;
+      font-weight: 800;
+    }
+
+    .content em {
+      color: #475569;
+    }
+
+    .content hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 42px 0;
+    }
+
+    .content blockquote {
+      margin: 28px 0;
+      padding: 20px 22px;
+      border-left: 5px solid var(--brand);
+      border-radius: 18px;
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+
+    .content blockquote p {
+      margin: 0;
+      color: #1e3a8a;
+    }
+
+    .content ul, .content ol {
+      padding-left: 1.3rem;
+    }
+
+    .content li + li {
+      margin-top: 7px;
+    }
+
+    .content code {
+      padding: .18em .38em;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: .92em;
+    }
+
+    .content pre {
+      overflow-x: auto;
+      padding: 20px;
+      border-radius: 18px;
+      background: var(--code);
+      color: #e5edf7;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .content pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0 30px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(15, 23, 42, .06);
+    }
+
+    .content thead {
+      background: #0f172a;
+      color: #fff;
+    }
+
+    .content th, .content td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      min-width: 140px;
+      font-size: 14px;
+    }
+
+    .content th {
+      color: #fff;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .content td {
+      color: #334155;
+    }
+
+    .content tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
+    .content > p:has(strong) {
+      padding: 14px 16px;
+      border: 1px solid rgba(226,232,240,.95);
+      border-radius: 16px;
+      background: #fbfdff;
+    }
+
+    .content h2 + ul,
+    .content h2 + ol {
+      padding: 18px 22px 18px 42px;
+      border: 1px solid rgba(226,232,240,.95);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      padding: 18px 22px;
+      border: 1px solid rgba(226,232,240,.95);
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      color: #64748b;
+      font-size: 13px;
+      box-shadow: 0 12px 36px rgba(15,23,42,.06);
+    }
+
+    .footer-note code {
+      color: #0f172a;
+      background: #eef2ff;
+      border-radius: 8px;
+      padding: 2px 6px;
+    }
+
+    .mobile-toc {
+      display: none;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.86);
+    }
+
+    .mobile-toc summary {
+      cursor: pointer;
+      font-weight: 850;
+      color: #0f172a;
+    }
+
+    .mobile-toc .toc {
+      position: static;
+      box-shadow: none;
+      border: 0;
+      background: transparent;
+      max-height: 55vh;
+      padding: 12px 0 0;
+    }
+
+    ::selection {
+      background: rgba(37, 99, 235, .18);
+    }
+
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: 1fr; }
+      aside.toc { display: none; }
+      .mobile-toc { display: block; }
+      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 18px, 1480px); padding-top: 10px; }
+      .hero { border-radius: 24px; padding: 26px 20px; }
+      .meta-grid { grid-template-columns: 1fr; }
+      main.content { padding: 20px 16px; border-radius: 22px; }
+      .content h2[id^="brief"], .content h2[id*="brief"] { margin-left: 0; margin-right: 0; padding: 20px; }
+      .content th, .content td { min-width: 170px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .hero, .toc, .mobile-toc, .footer-note { box-shadow: none; }
+      .layout { display: block; }
+      aside.toc, .mobile-toc { display: none; }
+      main.content { border: 0; box-shadow: none; padding: 0; }
+      a { color: #000; border: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="kicker">HTML estilizado · calculadorachile.cl</div>
+      <h1>25 Briefs de contenido para calculadorachile.cl</h1>
+      <p>Versión visual del Markdown original, con estructura limpia, navegación lateral, tablas responsivas y respaldo exacto del archivo fuente embebido para verificación.</p>
+      <div class="meta-grid" aria-label="Metadatos del documento">
+        <div class="meta-card"><strong>Archivo fuente</strong><span>briefs_website_builder_calculadorachile.md</span></div>
+        <div class="meta-card"><strong>Caracteres</strong><span>62,728</span></div>
+        <div class="meta-card"><strong>SHA-256</strong><span>c68da352a5e705f5111104f1eac9b4374f9b641ff13a600a9b54256726f913d2</span></div>
+        <div class="meta-card"><strong>Renderer</strong><span>mistune</span></div>
+      </div>
+    </header>
+
+    <details class="mobile-toc">
+      <summary>Índice del documento</summary>
+      <nav class="toc" aria-label="Índice móvil">
+        <a class="toc-l1" href="#25-briefs-de-contenido-para-calculadorachilecl">25 Briefs de contenido para calculadorachile.cl</a>
+<a class="toc-l2" href="#brief-01-patente-comercial-metadata-mejora-ctr">BRIEF 01 — Patente comercial (metadata / mejora CTR)</a>
+<a class="toc-l2" href="#brief-02-comparativa-comisiones-afp-2026-artículo-upgrade">BRIEF 02 — Comparativa comisiones AFP 2026 (artículo upgrade)</a>
+<a class="toc-l2" href="#brief-03-calculadora-cae-2026-calculadora-upgrade">BRIEF 03 — Calculadora CAE 2026 (calculadora upgrade)</a>
+<a class="toc-l2" href="#brief-04-gratificación-legal-2026-artículo-upgrade">BRIEF 04 — Gratificación legal 2026 (artículo upgrade)</a>
+<a class="toc-l2" href="#brief-05-subsidios-minvu-2026-selector-ds49ds1ds19-artículo-upgrade">BRIEF 05 — Subsidios MINVU 2026: selector DS49/DS1/DS19 (artículo upgrade)</a>
+<a class="toc-l2" href="#brief-06-meta-title-comparativa-afp-uno-046-confirmado-metadata">BRIEF 06 — Meta title comparativa AFP &quot;Uno 0,46% confirmado&quot; (metadata)</a>
+<a class="toc-l2" href="#brief-07-meta-title-cae-vigente-fes-no-reemplaza-aún-metadata">BRIEF 07 — Meta title CAE &quot;vigente, FES no reemplaza aún&quot; (metadata)</a>
+<a class="toc-l2" href="#brief-08-meta-title-gratificación-tope-2026-con-sueldo-mínimo-539000-metadata">BRIEF 08 — Meta title gratificación &quot;tope 2026 con sueldo mínimo $539.000&quot; (metadata)</a>
+<a class="toc-l2" href="#brief-09-calculadora-aporte-empleador-reforma-previsional-2026-calculadora-nueva">BRIEF 09 — Calculadora aporte empleador reforma previsional 2026 (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-10-tope-imponible-2026-afp-90-uf-y-cesantía-1352-uf-artículo-nuevo">BRIEF 10 — Tope imponible 2026: AFP 90 UF y cesantía 135,2 UF (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-11-calculadora-pgu-2026-por-edad-y-pensión-base-calculadora-nueva">BRIEF 11 — Calculadora PGU 2026 por edad y pensión base (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-12-boleta-de-honorarios-2026-brutolíquido-con-retención-1525-calculadora-u">BRIEF 12 — Boleta de honorarios 2026: bruto/líquido con retención 15,25% (calculadora upgrade)</a>
+<a class="toc-l2" href="#brief-13-cae-vs-fes-2026-qué-está-vigente-y-qué-es-proyecto-artículo-nuevo">BRIEF 13 — CAE vs FES 2026: qué está vigente y qué es proyecto (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-14-calculadora-tasa-máxima-convencional-cmf-calculadora-nueva">BRIEF 14 — Calculadora Tasa Máxima Convencional CMF (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-15-utm-uta-y-uf-julio-2026-tabla-oficial-y-usos-artículo-nuevo">BRIEF 15 — UTM, UTA y UF julio 2026: tabla oficial y usos (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-16-reajuste-de-arriendo-ufipc-contrato-y-fórmula-calculadora-upgrade">BRIEF 16 — Reajuste de arriendo UF/IPC: contrato y fórmula (calculadora upgrade)</a>
+<a class="toc-l2" href="#brief-17-operación-renta-2026-para-independientes-artículo-nuevo">BRIEF 17 — Operación Renta 2026 para independientes (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-18-calculadora-impuesto-global-complementario-2026-calculadora-nueva">BRIEF 18 — Calculadora Impuesto Global Complementario 2026 (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-19-calculadora-de-sueldo-líquido-con-reforma-previsional-calculadora-nueva">BRIEF 19 — Calculadora de sueldo líquido con reforma previsional (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-20-calculadora-de-finiquito-e-indemnización-2026-calculadora-nueva">BRIEF 20 — Calculadora de finiquito e indemnización 2026 (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-21-ley-21719-privacidad-para-calculadoras-financieras-artículo-nuevo">BRIEF 21 — Ley 21.719: privacidad para calculadoras financieras (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-22-patente-comercial-máximo-legal-8000-utm-no-8-utm-artículo-nuevo">BRIEF 22 — Patente comercial: máximo legal 8.000 UTM, no 8 UTM (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-23-calculadora-subsidio-ds49-ahorro-precio-máximo-y-elegibilidad-calculado">BRIEF 23 — Calculadora Subsidio DS49: ahorro, precio máximo y elegibilidad (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-24-seguro-de-cesantía-afc-cuánto-puedo-retirar-artículo-nuevo">BRIEF 24 — Seguro de cesantía AFC: cuánto puedo retirar (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-25-plantilla-de-snippets-actualizado-julio-2026-para-calculadoras-delgadas">BRIEF 25 — Plantilla de snippets &quot;actualizado julio 2026&quot; para calculadoras delgadas (metadata)</a>
+<a class="toc-l2" href="#notas-transversales-para-el-website-builder">Notas transversales para el Website-Builder</a>
+      </nav>
+    </details>
+
+    <div class="layout">
+      <aside class="toc" aria-label="Índice del documento">
+        <div class="toc-title">Índice <span>27</span></div>
+        <a class="toc-l1" href="#25-briefs-de-contenido-para-calculadorachilecl">25 Briefs de contenido para calculadorachile.cl</a>
+<a class="toc-l2" href="#brief-01-patente-comercial-metadata-mejora-ctr">BRIEF 01 — Patente comercial (metadata / mejora CTR)</a>
+<a class="toc-l2" href="#brief-02-comparativa-comisiones-afp-2026-artículo-upgrade">BRIEF 02 — Comparativa comisiones AFP 2026 (artículo upgrade)</a>
+<a class="toc-l2" href="#brief-03-calculadora-cae-2026-calculadora-upgrade">BRIEF 03 — Calculadora CAE 2026 (calculadora upgrade)</a>
+<a class="toc-l2" href="#brief-04-gratificación-legal-2026-artículo-upgrade">BRIEF 04 — Gratificación legal 2026 (artículo upgrade)</a>
+<a class="toc-l2" href="#brief-05-subsidios-minvu-2026-selector-ds49ds1ds19-artículo-upgrade">BRIEF 05 — Subsidios MINVU 2026: selector DS49/DS1/DS19 (artículo upgrade)</a>
+<a class="toc-l2" href="#brief-06-meta-title-comparativa-afp-uno-046-confirmado-metadata">BRIEF 06 — Meta title comparativa AFP &quot;Uno 0,46% confirmado&quot; (metadata)</a>
+<a class="toc-l2" href="#brief-07-meta-title-cae-vigente-fes-no-reemplaza-aún-metadata">BRIEF 07 — Meta title CAE &quot;vigente, FES no reemplaza aún&quot; (metadata)</a>
+<a class="toc-l2" href="#brief-08-meta-title-gratificación-tope-2026-con-sueldo-mínimo-539000-metadata">BRIEF 08 — Meta title gratificación &quot;tope 2026 con sueldo mínimo $539.000&quot; (metadata)</a>
+<a class="toc-l2" href="#brief-09-calculadora-aporte-empleador-reforma-previsional-2026-calculadora-nueva">BRIEF 09 — Calculadora aporte empleador reforma previsional 2026 (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-10-tope-imponible-2026-afp-90-uf-y-cesantía-1352-uf-artículo-nuevo">BRIEF 10 — Tope imponible 2026: AFP 90 UF y cesantía 135,2 UF (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-11-calculadora-pgu-2026-por-edad-y-pensión-base-calculadora-nueva">BRIEF 11 — Calculadora PGU 2026 por edad y pensión base (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-12-boleta-de-honorarios-2026-brutolíquido-con-retención-1525-calculadora-u">BRIEF 12 — Boleta de honorarios 2026: bruto/líquido con retención 15,25% (calculadora upgrade)</a>
+<a class="toc-l2" href="#brief-13-cae-vs-fes-2026-qué-está-vigente-y-qué-es-proyecto-artículo-nuevo">BRIEF 13 — CAE vs FES 2026: qué está vigente y qué es proyecto (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-14-calculadora-tasa-máxima-convencional-cmf-calculadora-nueva">BRIEF 14 — Calculadora Tasa Máxima Convencional CMF (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-15-utm-uta-y-uf-julio-2026-tabla-oficial-y-usos-artículo-nuevo">BRIEF 15 — UTM, UTA y UF julio 2026: tabla oficial y usos (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-16-reajuste-de-arriendo-ufipc-contrato-y-fórmula-calculadora-upgrade">BRIEF 16 — Reajuste de arriendo UF/IPC: contrato y fórmula (calculadora upgrade)</a>
+<a class="toc-l2" href="#brief-17-operación-renta-2026-para-independientes-artículo-nuevo">BRIEF 17 — Operación Renta 2026 para independientes (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-18-calculadora-impuesto-global-complementario-2026-calculadora-nueva">BRIEF 18 — Calculadora Impuesto Global Complementario 2026 (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-19-calculadora-de-sueldo-líquido-con-reforma-previsional-calculadora-nueva">BRIEF 19 — Calculadora de sueldo líquido con reforma previsional (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-20-calculadora-de-finiquito-e-indemnización-2026-calculadora-nueva">BRIEF 20 — Calculadora de finiquito e indemnización 2026 (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-21-ley-21719-privacidad-para-calculadoras-financieras-artículo-nuevo">BRIEF 21 — Ley 21.719: privacidad para calculadoras financieras (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-22-patente-comercial-máximo-legal-8000-utm-no-8-utm-artículo-nuevo">BRIEF 22 — Patente comercial: máximo legal 8.000 UTM, no 8 UTM (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-23-calculadora-subsidio-ds49-ahorro-precio-máximo-y-elegibilidad-calculado">BRIEF 23 — Calculadora Subsidio DS49: ahorro, precio máximo y elegibilidad (calculadora nueva)</a>
+<a class="toc-l2" href="#brief-24-seguro-de-cesantía-afc-cuánto-puedo-retirar-artículo-nuevo">BRIEF 24 — Seguro de cesantía AFC: cuánto puedo retirar (artículo nuevo)</a>
+<a class="toc-l2" href="#brief-25-plantilla-de-snippets-actualizado-julio-2026-para-calculadoras-delgadas">BRIEF 25 — Plantilla de snippets &quot;actualizado julio 2026&quot; para calculadoras delgadas (metadata)</a>
+<a class="toc-l2" href="#notas-transversales-para-el-website-builder">Notas transversales para el Website-Builder</a>
+      </aside>
+
+      <main class="content">
+        <h1 id="25-briefs-de-contenido-para-calculadorachilecl">25 Briefs de contenido para calculadorachile.cl</h1>
+<p><strong>Destino:</strong> agente Website-Builder (OpenCode). <strong>Fecha de referencia:</strong> julio de 2026. <strong>Stack:</strong> Next.js 15 App Router.</p>
+<p><strong>Cómo usar este documento:</strong> cada brief es autónomo y está listo para implementar una página. Incluye H1 final, meta title (≤60 caracteres), meta description (≤155 caracteres), estructura completa de secciones H2/H3, párrafo de apertura de 40-60 palabras optimizado para featured snippet, FAQ de 6-8 preguntas con respuesta corta lista para <code>FAQPage</code> schema, y fuentes oficiales a linkear. Las cifras provienen del dossier verificado a julio 2026; toda calculadora debe mostrar fecha de actualización y disclaimer YMYL.</p>
+<p><strong>Convenciones de conteo:</strong> los meta title y meta description fueron contados carácter a carácter (espacios incluidos). Cada brief indica el conteo entre paréntesis.</p>
+<hr />
+<h2 id="brief-01-patente-comercial-metadata-mejora-ctr">BRIEF 01 — Patente comercial (metadata / mejora CTR)</h2>
+<ul>
+<li><strong>Tipo:</strong> metadata (mejora de title/meta sobre página existente)</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-patente-comercial</li>
+<li><strong>Cluster:</strong> calculadora patente comercial, capital propio tributario, cuánto pagar patente municipal</li>
+<li><strong>Prioridad:</strong> 1 (ya top 10, pos 5.98 — solo optimizar CTR)</li>
+<li><strong>Requiere calculadora:</strong> ya existe</li>
+</ul>
+<p><strong>H1:</strong> Calculadora de patente comercial 2026: cuánto pagar según capital propio</p>
+<p><strong>Meta title (57):</strong> Calculadora Patente Comercial 2026 | Cuánto Pagar</p>
+<p><strong>Meta description (151):</strong> Calcula tu patente comercial 2026 según capital propio tributario, tasa municipal y UTM. Mínimo 1 UTM, máximo 8.000 UTM. Datos oficiales del SII.</p>
+<p><strong>Párrafo de apertura (52 palabras):</strong> La patente comercial en Chile se calcula aplicando entre 2,5 y 5 por mil sobre el capital propio tributario declarado, con un mínimo de 1 UTM y un máximo de 8.000 UTM. Cada municipalidad fija su tasa dentro de ese rango. Usa la calculadora para estimar el monto anual de tu negocio.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es la patente comercial y quién debe pagarla</li>
+<li>H2: Cómo se calcula la patente comercial en 2026<ul>
+<li>H3: Base de cálculo: el capital propio tributario</li>
+<li>H3: La tasa municipal: entre 2,5 y 5 por mil</li>
+<li>H3: Topes legales: mínimo 1 UTM, máximo 8.000 UTM</li>
+</ul>
+</li>
+<li>H2: Ejemplo práctico paso a paso</li>
+<li>H2: Cómo declarar el capital propio ante tu municipalidad</li>
+<li>H2: Diferencia entre patente comercial, profesional e industrial</li>
+<li>H2: Valor de la UTM aplicable (julio 2026: $71.649)</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>Nota de metadata:</strong> el objetivo de este brief es reescribir title y description para subir CTR desde la posición 5-6. El cuerpo ya existe; corregir cualquier mención errónea de &quot;máximo 8 UTM&quot; por &quot;8.000 UTM&quot;.</p>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cómo se calcula la patente comercial en Chile? — Se aplica entre 2,5 y 5 por mil sobre el capital propio tributario, con mínimo 1 UTM y máximo 8.000 UTM. La tasa exacta la fija cada municipalidad.</li>
+<li>¿Cuál es el monto mínimo de una patente comercial? — El mínimo legal es 1 UTM, equivalente a $71.649 en julio de 2026.</li>
+<li>¿Cuál es el monto máximo de una patente comercial? — El máximo legal es 8.000 UTM, no 8 UTM como se cree erróneamente.</li>
+<li>¿Qué es el capital propio tributario? — Es el patrimonio del negocio determinado según normas del SII, base sobre la que se aplica la tasa de patente.</li>
+<li>¿La patente comercial se paga una vez al año? — Se paga anualmente, con opción de pagar en dos cuotas (enero y julio) en la mayoría de municipios.</li>
+<li>¿Todas las municipalidades cobran la misma tasa? — No. Cada municipalidad fija su tasa dentro del rango legal de 2,5 a 5 por mil.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, DL 3.063: https://www.sii.cl/pagina/jurisprudencia/dl3063.htm</li>
+<li>BCN, Patentes Comerciales: https://obtienearchivo.bcn.cl/obtienearchivo?id=repositorio%2F10221%2F27759%2F2%2FPatentes_comerciales__1_.pdf</li>
+<li>SII, valor UTM 2026: https://www.sii.cl/valores_y_fechas/utm/utm2026.htm</li>
+</ul>
+<hr />
+<h2 id="brief-02-comparativa-comisiones-afp-2026-artículo-upgrade">BRIEF 02 — Comparativa comisiones AFP 2026 (artículo upgrade)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo upgrade</li>
+<li><strong>URL:</strong> /blog/comparativa-comisiones-afp-2026</li>
+<li><strong>Cluster:</strong> comisiones AFP 2026, AFP más barata, comparativa AFP</li>
+<li><strong>Prioridad:</strong> 2 (pos 7.8, CTR muy bajo 0,62% — upgrade + corrección de dato)</li>
+<li><strong>Requiere calculadora:</strong> sí (ya existente / a incorporar tabla comparativa)</li>
+</ul>
+<p><strong>H1:</strong> Comparativa de comisiones AFP 2026: cuál es la más barata</p>
+<p><strong>Meta title (55):</strong> Comisiones AFP 2026 | Comparativa y Más Barata</p>
+<p><strong>Meta description (149):</strong> Compara las comisiones de las 7 AFP en 2026. AFP Uno lidera con 0,46% desde octubre 2025. Tabla oficial de la Superintendencia de Pensiones.</p>
+<p><strong>Párrafo de apertura (49 palabras):</strong> En julio de 2026, la AFP con la comisión más baja es AFP Uno con 0,46% sobre la remuneración imponible, vigente desde el 1 de octubre de 2025. Le siguen Modelo con 0,58% y PlanVital con 1,16%. La comisión no es el único criterio: también importan rentabilidad y servicio.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Tabla comparativa de comisiones AFP 2026</li>
+<li>H2: Cuál es la AFP más barata en 2026<ul>
+<li>H3: AFP Uno: 0,46% desde octubre de 2025</li>
+<li>H3: El histórico de la comisión de AFP Uno (corrección 0,46 vs 0,49)</li>
+</ul>
+</li>
+<li>H2: Qué es la comisión de la AFP y sobre qué se aplica</li>
+<li>H2: Comisión vs rentabilidad: cuál pesa más en el largo plazo</li>
+<li>H2: El Seguro de Invalidez y Sobrevivencia (SIS): 1,62% en 2026</li>
+<li>H2: Cómo cambiarse de AFP paso a paso</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuál es la AFP más barata en 2026? — AFP Uno, con una comisión de 0,46% sobre la remuneración imponible, vigente desde el 1 de octubre de 2025.</li>
+<li>¿AFP Uno cobra 0,46% o 0,49%? — Cobra 0,46% según la Superintendencia de Pensiones; el valor 0,49% está desactualizado.</li>
+<li>¿Cuánto cobran las demás AFP en 2026? — Capital 1,44%, Cuprum 1,44%, Habitat 1,27%, Modelo 0,58%, PlanVital 1,16%, ProVida 1,45%.</li>
+<li>¿Conviene elegir AFP solo por la comisión más baja? — No. La rentabilidad de los fondos y el servicio también afectan la pensión final; la comisión es un factor más.</li>
+<li>¿Qué es el SIS y cuánto cuesta en 2026? — El Seguro de Invalidez y Sobrevivencia es 1,62% desde abril de 2026, aplicable a empleadores, independientes y voluntarios.</li>
+<li>¿Cómo me cambio de AFP? — Se solicita directamente en la nueva AFP con tu cédula; el traspaso se materializa en el mes siguiente.</li>
+<li>¿La comisión se descuenta además del 10% de cotización? — Sí, la comisión se paga sobre la remuneración imponible, adicional al 10% obligatorio.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Superintendencia de Pensiones, comisiones AFP: https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html</li>
+</ul>
+<hr />
+<h2 id="brief-03-calculadora-cae-2026-calculadora-upgrade">BRIEF 03 — Calculadora CAE 2026 (calculadora upgrade)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora upgrade</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-credito-cae</li>
+<li><strong>Cluster:</strong> calculadora CAE, deuda CAE, cuota CAE</li>
+<li><strong>Prioridad:</strong> 3 (ya top 10, pos 5.04, mejor CTR del sitio 9,46% — reforzar contenido)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora CAE 2026: cuánto pagarás por tu Crédito con Garantía Estatal</p>
+<p><strong>Meta title (54):</strong> Calculadora CAE 2026 | Cuota, Deuda y Tasa 2%</p>
+<p><strong>Meta description (152):</strong> Calcula tu cuota del CAE en 2026: deuda en UF, tasa fija de 2% y plazos de 10, 15 o 20 años. Cobro desde 18 meses tras egresar. Datos oficiales Ingresa.</p>
+<p><strong>Párrafo de apertura (50 palabras):</strong> El Crédito con Garantía Estatal (CAE) se expresa en UF, tiene una tasa fija real de 2% anual y su cobro comienza 18 meses después de egresar. El plazo de pago es de 10, 15 o 20 años según el monto adeudado. Usa la calculadora para estimar tu cuota mensual.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Cómo funciona el CAE en 2026<ul>
+<li>H3: Tasa fija de 2% real en UF</li>
+<li>H3: Cuándo empieza el cobro: 18 meses tras egresar</li>
+<li>H3: Plazos: 10, 15 o 20 años</li>
+</ul>
+</li>
+<li>H2: Cómo se calcula tu cuota mensual del CAE</li>
+<li>H2: Rebaja de cuota al 10% de tus ingresos</li>
+<li>H2: Suspensión y prórroga del pago</li>
+<li>H2: CAE y FES: qué está vigente hoy (importante)</li>
+<li>H2: Cómo pagar o renegociar tu CAE en la Tesorería (TGR)</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuál es la tasa de interés del CAE en 2026? — Una tasa fija real de 2% anual, expresada en UF.</li>
+<li>¿Cuándo empiezo a pagar el CAE? — El cobro comienza 18 meses después de egresar o desertar de la carrera.</li>
+<li>¿En cuántos años se paga el CAE? — En 10, 15 o 20 años, según el monto total adeudado.</li>
+<li>¿Puedo pagar menos si gano poco? — Sí, existe una rebaja que fija la cuota en hasta el 10% de tus ingresos, previa solicitud.</li>
+<li>¿El FES ya reemplazó al CAE? — No. En julio de 2026 el FES seguía como proyecto de ley; el CAE continúa plenamente vigente.</li>
+<li>¿Dónde pago mi cuota del CAE? — A través de la entidad financiera o de la Tesorería General de la República según tu convenio.</li>
+<li>¿La deuda del CAE crece con la inflación? — Está en UF, por lo que se reajusta con la variación de la UF, no con un interés adicional variable.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>ChileAtiende, CAE: https://www.chileatiende.gob.cl/fichas/9583-credito-con-garantia-estatal-cae</li>
+<li>Simulador Ingresa: https://simulador.ingresa.cl</li>
+<li>Ministerio de Hacienda, FES: https://www.hacienda.cl/noticias-y-eventos/noticias/camara-de-diputados-y-diputadas-aprueba-proyecto-de-ley-que-pone-fin-al-cae-y</li>
+</ul>
+<hr />
+<h2 id="brief-04-gratificación-legal-2026-artículo-upgrade">BRIEF 04 — Gratificación legal 2026 (artículo upgrade)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo upgrade</li>
+<li><strong>URL:</strong> /blog/como-funciona-gratificacion-legal</li>
+<li><strong>Cluster:</strong> gratificación legal, artículo 50, tope 4,75 IMM</li>
+<li><strong>Prioridad:</strong> 4 (pos 11.33 — upgrade para saltar al top 10)</li>
+<li><strong>Requiere calculadora:</strong> sí (incorporar)</li>
+</ul>
+<p><strong>H1:</strong> Gratificación legal 2026: Artículo 47 vs Artículo 50 con calculadora</p>
+<p><strong>Meta title (56):</strong> Gratificación Legal 2026 | Art. 47 vs 50 y Cálculo</p>
+<p><strong>Meta description (150):</strong> Calcula tu gratificación legal 2026: Art. 47 (30% utilidades) o Art. 50 (tope 4,75 IMM). Con sueldo mínimo $539.000. Guía y datos oficiales de la DT.</p>
+<p><strong>Párrafo de apertura (53 palabras):</strong> La gratificación legal en Chile puede pagarse por dos vías: el Artículo 47 (30% de las utilidades líquidas repartidas entre los trabajadores) o el Artículo 50 (25% de lo devengado con tope de 4,75 ingresos mínimos mensuales al año). El empleador elige el método más conveniente. Usa la calculadora para estimarla.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es la gratificación legal y quién tiene derecho</li>
+<li>H2: Artículo 47: el 30% de las utilidades</li>
+<li>H2: Artículo 50: el 25% con tope de 4,75 IMM<ul>
+<li>H3: Cómo se calcula el tope anual en 2026 (con IMM $539.000)</li>
+<li>H3: Gratificación mensual vs anual</li>
+</ul>
+</li>
+<li>H2: Cuál método conviene: comparación práctica</li>
+<li>H2: Estado del proyecto que modifica la gratificación legal</li>
+<li>H2: Cómo revisar si tu liquidación incluye la gratificación correcta</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué es la gratificación legal? — Es un beneficio obligatorio que las empresas con utilidades deben pagar a sus trabajadores, según el Código del Trabajo.</li>
+<li>¿Cuál es la diferencia entre el Artículo 47 y el 50? — El Art. 47 reparte el 30% de las utilidades; el Art. 50 paga el 25% de lo devengado con tope de 4,75 ingresos mínimos al año.</li>
+<li>¿Cuál es el tope de gratificación en 2026? — Con el ingreso mínimo de $539.000, el tope anual referencial del Art. 50 es 4,75 IMM. Verifica la fórmula exacta con la Dirección del Trabajo.</li>
+<li>¿La gratificación se paga mensual o anual? — Puede pagarse mensualmente prorrateada o en un pago anual, según lo pacte la empresa.</li>
+<li>¿Quién elige el método de cálculo? — El empleador elige entre el Art. 47 y el Art. 50, aplicando el que resulte procedente.</li>
+<li>¿Los trabajadores a honorarios reciben gratificación? — No. La gratificación legal aplica a trabajadores con contrato de trabajo dependiente.</li>
+<li>¿Va a cambiar la gratificación legal? — Existe un proyecto de ley en discusión (Boletín 13.240-13); en julio de 2026 no es ley vigente.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Código del Trabajo, BCN: https://www.bcn.cl/leychile/navegar?idNorma=207436</li>
+<li>Dirección del Trabajo, gratificación: https://www.dt.gob.cl/portal/1626/w3-article-99034.html</li>
+</ul>
+<hr />
+<h2 id="brief-05-subsidios-minvu-2026-selector-ds49ds1ds19-artículo-upgrade">BRIEF 05 — Subsidios MINVU 2026: selector DS49/DS1/DS19 (artículo upgrade)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo upgrade</li>
+<li><strong>URL:</strong> /blog/subsidios-minvu-2026-guia</li>
+<li><strong>Cluster:</strong> DS49 2026, DS1 tramo, DS19 ahorro</li>
+<li><strong>Prioridad:</strong> 5 (pos 9.84 — upgrade a herramienta interactiva)</li>
+<li><strong>Requiere calculadora:</strong> sí (selector)</li>
+</ul>
+<p><strong>H1:</strong> Subsidios MINVU 2026: qué subsidio de vivienda me corresponde (DS49, DS1, DS19)</p>
+<p><strong>Meta title (56):</strong> Subsidios MINVU 2026 | DS49, DS1 y DS19 - Selector</p>
+<p><strong>Meta description (153):</strong> Descubre qué subsidio de vivienda MINVU te corresponde en 2026 según tu ahorro, RSH y precio de la casa. Compara DS49, DS1 y DS19 con montos oficiales.</p>
+<p><strong>Párrafo de apertura (51 palabras):</strong> En 2026, los tres subsidios de vivienda MINVU más buscados son el DS49 (compra de vivienda hasta 950 UF, ahorro mínimo 10 UF), el DS1 (hasta 1.100 UF, por tramos según ingreso) y el DS19 (integración social, hasta 3.000 UF). El selector te indica cuál se ajusta a tu caso.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Selector: qué subsidio MINVU me corresponde</li>
+<li>H2: DS49: compra de vivienda hasta 950 UF<ul>
+<li>H3: Requisitos, ahorro (10 UF) y subsidio base (314 UF)</li>
+<li>H3: Modalidad construcción en sitio propio 2026</li>
+</ul>
+</li>
+<li>H2: DS1: vivienda hasta 1.100 UF por tramos<ul>
+<li>H3: Tramo 1, 2 y 3 y sus diferencias</li>
+</ul>
+</li>
+<li>H2: DS19: integración social y territorial</li>
+<li>H2: Tabla comparativa DS49 vs DS1 vs DS19</li>
+<li>H2: Calendario de llamados 2026</li>
+<li>H2: Cómo postular paso a paso</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué subsidio de vivienda me corresponde? — Depende de tu Registro Social de Hogares, ahorro y precio de la vivienda: DS49 para hasta 950 UF, DS1 para hasta 1.100 UF y DS19 para proyectos de integración.</li>
+<li>¿Cuánto ahorro necesito para el DS49? — El ahorro mínimo es 10 UF para hogares dentro del 40% más vulnerable del RSH.</li>
+<li>¿Cuál es el subsidio base del DS49? — El subsidio base es de 314 UF para la compra de una vivienda construida.</li>
+<li>¿Qué precio de vivienda cubre el DS1? — El DS1 tramo 1 cubre viviendas de hasta 1.100 UF, y hasta 1.200 UF en zonas extremas.</li>
+<li>¿Qué es el DS19? — Es el subsidio de integración social y territorial para comprar en proyectos privados, con precios de hasta 3.000 UF según tramo.</li>
+<li>¿Cuándo son los llamados de 2026? — El DS49 para sitio propio tiene calificaciones el 4 de junio, 13 de agosto, 22 de octubre y 15 de diciembre de 2026.</li>
+<li>¿El subsidio garantiza que me den la vivienda? — No. La postulación depende de puntaje, cupos y validación del SERVIU; el subsidio no asegura adjudicación.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>MINVU DS49: https://www.minvu.gob.cl/beneficio/vivienda/subsidio-para-comprar-una-vivienda-construida-de-hasta-950-uf-ds49/</li>
+<li>MINVU DS1: https://www.minvu.gob.cl/beneficio/vivienda/subsidio-habitacional-comprar-una-vivienda-de-hasta-1100-uf-ds1/</li>
+<li>MINVU DS19 (folleto): https://www.minvu.gob.cl/wp-content/uploads/2026/03/DS19_folleto.pdf</li>
+</ul>
+<hr />
+<h2 id="brief-06-meta-title-comparativa-afp-quotuno-046-confirmadoquot-metadata">BRIEF 06 — Meta title comparativa AFP &quot;Uno 0,46% confirmado&quot; (metadata)</h2>
+<ul>
+<li><strong>Tipo:</strong> metadata</li>
+<li><strong>URL:</strong> /blog/comparativa-comisiones-afp-2026</li>
+<li><strong>Cluster:</strong> AFP Uno 0,46, comisiones AFP</li>
+<li><strong>Prioridad:</strong> 6 (refuerzo de CTR sobre la misma URL del brief 02)</li>
+<li><strong>Requiere calculadora:</strong> no</li>
+</ul>
+<p><strong>H1:</strong> (mantener el del brief 02) Comparativa de comisiones AFP 2026: cuál es la más barata</p>
+<p><strong>Meta title (54):</strong> AFP Uno 0,46% Confirmado 2026 | Comparativa AFP</p>
+<p><strong>Meta description (150):</strong> AFP Uno tiene la comisión más baja: 0,46% desde octubre 2025 según la Superintendencia de Pensiones. Compara todas las comisiones AFP de 2026 aquí.</p>
+<p><strong>Párrafo de apertura (44 palabras):</strong> La comisión de AFP Uno es 0,46% sobre la remuneración imponible, vigente desde el 1 de octubre de 2025 según la Superintendencia de Pensiones. Es la más baja del sistema en 2026, por delante de Modelo (0,58%) y PlanVital (1,16%).</p>
+<p><strong>Nota de metadata:</strong> este brief es una variante de metadata orientada a la query &quot;AFP Uno 0,46&quot;. Aplicar como test A/B de title/description sobre la misma URL del brief 02 o como sección destacada con ancla propia. No duplicar la URL.</p>
+<p><strong>FAQ (schema-ready):</strong> reutilizar el bloque FAQ del brief 02, priorizando las preguntas 1, 2 y 3.</p>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Superintendencia de Pensiones: https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html</li>
+</ul>
+<hr />
+<h2 id="brief-07-meta-title-cae-quotvigente-fes-no-reemplaza-aúnquot-metadata">BRIEF 07 — Meta title CAE &quot;vigente, FES no reemplaza aún&quot; (metadata)</h2>
+<ul>
+<li><strong>Tipo:</strong> metadata</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-credito-cae</li>
+<li><strong>Cluster:</strong> CAE FES 2026</li>
+<li><strong>Prioridad:</strong> 7 (refuerzo de CTR sobre la URL del brief 03)</li>
+<li><strong>Requiere calculadora:</strong> no (metadata)</li>
+</ul>
+<p><strong>H1:</strong> (mantener el del brief 03)</p>
+<p><strong>Meta title (58):</strong> CAE 2026 Vigente | El FES Aún No Reemplaza al CAE</p>
+<p><strong>Meta description (149):</strong> El CAE sigue vigente en 2026: tasa fija 2% en UF y cobro a 18 meses. El FES aún es proyecto de ley, no lo ha reemplazado. Calcula tu cuota aquí.</p>
+<p><strong>Párrafo de apertura (46 palabras):</strong> En julio de 2026 el CAE continúa plenamente vigente: mantiene su tasa fija real de 2% en UF y el inicio de cobro a los 18 meses del egreso. El FES es un proyecto de ley aprobado por la Cámara, pero todavía no reemplaza al CAE.</p>
+<p><strong>Nota de metadata:</strong> aplicar como test de title/description enfocado en la confusión CAE/FES. Enlazar internamente al artículo del brief 13 (CAE vs FES).</p>
+<p><strong>FAQ (schema-ready):</strong> priorizar las preguntas 1, 5 y 6 del brief 03.</p>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>ChileAtiende, CAE: https://www.chileatiende.gob.cl/fichas/9583-credito-con-garantia-estatal-cae</li>
+<li>Ministerio de Hacienda, FES: https://www.hacienda.cl/noticias-y-eventos/noticias/camara-de-diputados-y-diputadas-aprueba-proyecto-de-ley-que-pone-fin-al-cae-y</li>
+</ul>
+<hr />
+<h2 id="brief-08-meta-title-gratificación-quottope-2026-con-sueldo-mínimo-539000quot-met">BRIEF 08 — Meta title gratificación &quot;tope 2026 con sueldo mínimo $539.000&quot; (metadata)</h2>
+<ul>
+<li><strong>Tipo:</strong> metadata</li>
+<li><strong>URL:</strong> /blog/como-funciona-gratificacion-legal</li>
+<li><strong>Cluster:</strong> gratificación legal 2026</li>
+<li><strong>Prioridad:</strong> 8 (refuerzo de CTR sobre la URL del brief 04)</li>
+<li><strong>Requiere calculadora:</strong> no</li>
+</ul>
+<p><strong>H1:</strong> (mantener el del brief 04)</p>
+<p><strong>Meta title (58):</strong> Gratificación Legal 2026 | Tope con IMM $539.000</p>
+<p><strong>Meta description (152):</strong> La gratificación legal 2026 se calcula con el ingreso mínimo de $539.000 y un tope de 4,75 IMM (Art. 50). Aprende a calcularla con datos oficiales de la DT.</p>
+<p><strong>Párrafo de apertura (48 palabras):</strong> La gratificación legal por Artículo 50 tiene un tope de 4,75 ingresos mínimos mensuales al año. Con el ingreso mínimo de $539.000 vigente en 2026, ese tope funciona como límite máximo del beneficio anual. El empleador puede optar por el Artículo 47 si le resulta más conveniente.</p>
+<p><strong>Nota de metadata:</strong> variante de title/description que capitaliza la actualización del IMM 2026. Verificar la fórmula exacta del tope con la DT antes de publicar cifras en pesos.</p>
+<p><strong>FAQ (schema-ready):</strong> priorizar las preguntas 2, 3 y 4 del brief 04.</p>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Dirección del Trabajo, gratificación: https://www.dt.gob.cl/portal/1626/w3-article-99034.html</li>
+<li>Dirección del Trabajo, sueldo mínimo 2026: https://www.dt.gob.cl/legislacion/1624/articles-127969_recurso_doc.pdf</li>
+</ul>
+<hr />
+<h2 id="brief-09-calculadora-aporte-empleador-reforma-previsional-2026-calculadora-nueva">BRIEF 09 — Calculadora aporte empleador reforma previsional 2026 (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-aporte-empleador-reforma-previsional</li>
+<li><strong>Cluster:</strong> aporte empleador reforma previsional, 3,5%</li>
+<li><strong>Prioridad:</strong> 9 (gap sin competencia + tema emergente)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora aporte empleador reforma previsional 2026: cuánto sube el costo empresa</p>
+<p><strong>Meta title (57):</strong> Aporte Empleador 2026 | Calculadora Reforma AFP</p>
+<p><strong>Meta description (154):</strong> Calcula el nuevo aporte del empleador de la reforma previsional 2026. En agosto llega al 3,5% del sueldo imponible, con tope de 90 UF. Datos Ley 21.735.</p>
+<p><strong>Párrafo de apertura (54 palabras):</strong> La reforma previsional (Ley 21.735) crea un aporte adicional a cargo del empleador que en agosto de 2026 alcanza un 3,5% de la remuneración imponible, con tope de 90 UF. Ese aporte se distribuye entre cuenta individual, compensación y seguro social. Usa la calculadora para estimar el nuevo costo por trabajador.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué establece la reforma previsional Ley 21.735</li>
+<li>H2: Cómo se calcula el aporte del empleador en 2026<ul>
+<li>H3: El tope imponible de 90 UF</li>
+<li>H3: Distribución: cuenta individual, compensación y seguro social</li>
+<li>H3: El calendario de aumento gradual</li>
+</ul>
+</li>
+<li>H2: Ejemplo: cuánto sube el costo por un trabajador de $800.000</li>
+<li>H2: Impacto para pymes y empleadores</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuánto es el aporte del empleador en 2026? — En agosto de 2026 el aporte total del empleador alcanza el 3,5% de la remuneración imponible.</li>
+<li>¿Sobre qué monto se calcula el aporte? — Sobre la remuneración imponible, con un tope de 90 UF.</li>
+<li>¿A qué se destina el aporte del empleador? — Se reparte entre la cuenta individual del trabajador, compensación por expectativa de vida y el Seguro Social Previsional.</li>
+<li>¿El aporte lo paga el trabajador o el empleador? — Lo paga el empleador; es adicional a la cotización del 10% del trabajador.</li>
+<li>¿El aporte seguirá subiendo? — Sí, la Ley 21.735 contempla un aumento gradual del aporte en los años siguientes.</li>
+<li>¿Este cálculo reemplaza la liquidación oficial? — No, es una estimación referencial; la determinación oficial la realiza la previsión correspondiente.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>ChileAtiende, Reforma de Pensiones: https://www.chileatiende.gob.cl/reformadepensiones</li>
+<li>BCN, Ley 21.735: https://www.bcn.cl/leychile/navegar?idNorma=1212060</li>
+</ul>
+<hr />
+<h2 id="brief-10-tope-imponible-2026-afp-90-uf-y-cesantía-1352-uf-artículo-nuevo">BRIEF 10 — Tope imponible 2026: AFP 90 UF y cesantía 135,2 UF (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/tope-imponible-afp-seguro-cesantia-2026</li>
+<li><strong>Cluster:</strong> tope imponible AFP 2026, 90 UF</li>
+<li><strong>Prioridad:</strong> 10 (gap con contradicción enero/febrero)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Tope imponible 2026 en Chile: AFP 90 UF y seguro de cesantía 135,2 UF</p>
+<p><strong>Meta title (55):</strong> Tope Imponible 2026 | AFP 90 UF y Cesantía 135,2</p>
+<p><strong>Meta description (150):</strong> Topes imponibles 2026: AFP, salud y accidentes 90 UF; seguro de cesantía 135,2 UF, vigentes desde febrero. Historial y calculadora sobre el tope.</p>
+<p><strong>Párrafo de apertura (52 palabras):</strong> En 2026, el tope imponible para AFP, salud y accidentes del trabajo es 90 UF, y el del seguro de cesantía es 135,2 UF, ambos vigentes desde el 1 de febrero de 2026. En enero rigieron valores levemente menores (89,9 UF y 135,1 UF), lo que genera confusión frecuente.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es el tope imponible y para qué sirve</li>
+<li>H2: Topes imponibles vigentes en 2026<ul>
+<li>H3: AFP, salud y accidentes: 90 UF</li>
+<li>H3: Seguro de cesantía: 135,2 UF</li>
+<li>H3: La corrección de febrero (89,9 → 90,0 UF)</li>
+</ul>
+</li>
+<li>H2: Qué pasa con la parte del sueldo sobre el tope</li>
+<li>H2: Ejemplo: cotizaciones de un sueldo de $6.000.000</li>
+<li>H2: Cuándo se actualizan los topes</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuál es el tope imponible de la AFP en 2026? — 90 UF para AFP, salud y accidentes del trabajo, vigente desde el 1 de febrero de 2026.</li>
+<li>¿Cuál es el tope imponible del seguro de cesantía? — 135,2 UF en 2026, también vigente desde febrero.</li>
+<li>¿Por qué en enero era 89,9 UF? — En enero de 2026 el tope fue 89,9 UF; se ajustó a 90,0 UF desde febrero por resolución oficial.</li>
+<li>¿Qué pasa con el sueldo que supera el tope? — La parte que excede el tope no cotiza para AFP ni cesantía; el impuesto sí se aplica sobre el total.</li>
+<li>¿Los topes cambian cada año? — Sí, se ajustan anualmente según la variación real de las remuneraciones.</li>
+<li>¿El tope de salud es igual al de AFP? — Sí, el tope de 90 UF aplica también a la cotización de salud del 7%.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Dirección del Trabajo, tope AFP: https://dt.gob.cl/portal/1628/w3-article-118076.html</li>
+<li>Dirección del Trabajo, tope cesantía: https://dt.gob.cl/portal/1628/w3-article-118077.html</li>
+<li>BCN, Resolución 237: https://www.bcn.cl/leychile/navegar?idNorma=1221710</li>
+</ul>
+<hr />
+<h2 id="brief-11-calculadora-pgu-2026-por-edad-y-pensión-base-calculadora-nueva">BRIEF 11 — Calculadora PGU 2026 por edad y pensión base (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-pgu</li>
+<li><strong>Cluster:</strong> PGU monto 2026, aumento PGU</li>
+<li><strong>Prioridad:</strong> 11 (gap: usuario necesita monto propio)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora PGU 2026: cuánto te corresponde según tu edad y pensión</p>
+<p><strong>Meta title (52):</strong> Calculadora PGU 2026 | Monto Según Edad y Pensión</p>
+<p><strong>Meta description (151):</strong> Calcula tu Pensión Garantizada Universal 2026. Hasta $250.275 para 82+ y $231.732 general, según tu pensión base. Estimación con datos de ChileAtiende.</p>
+<p><strong>Párrafo de apertura (53 palabras):</strong> La Pensión Garantizada Universal (PGU) en 2026 es de hasta $250.275 para personas de 82 años o más, y $231.732 para el resto. El monto disminuye a mayor pensión base: quienes reciben una pensión inferior a $789.139 obtienen el máximo. Sobre $1.252.602 no hay derecho. Usa la calculadora para estimar tu monto.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es la PGU y quién puede recibirla</li>
+<li>H2: Montos de la PGU en 2026<ul>
+<li>H3: $250.275 para 82 años o más (desde febrero 2026)</li>
+<li>H3: $250.275 para 75+ desde septiembre 2026</li>
+<li>H3: $231.732 para el resto</li>
+</ul>
+</li>
+<li>H2: Cómo afecta tu pensión base al monto de la PGU<ul>
+<li>H3: Tope inferior ($789.139) y superior ($1.252.602)</li>
+</ul>
+</li>
+<li>H2: Requisitos para acceder a la PGU</li>
+<li>H2: Cómo postular a la PGU</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuánto es la PGU en 2026? — Hasta $250.275 para personas de 82 años o más y $231.732 para el resto de los beneficiarios.</li>
+<li>¿Quién recibe el monto máximo de PGU? — Quienes tienen una pensión base autofinanciada inferior a $789.139 reciben el monto completo.</li>
+<li>¿Desde cuándo suben los 75 años a $250.275? — El aumento para personas de 75 años o más rige desde septiembre de 2026.</li>
+<li>¿Hay un límite de pensión para recibir PGU? — Sí. Quienes tienen una pensión base sobre $1.252.602 no tienen derecho a la PGU.</li>
+<li>¿Qué requisitos hay para la PGU? — Tener 65 años o más, integrar el 90% de menores ingresos y cumplir requisitos de residencia.</li>
+<li>¿Este cálculo es oficial? — No, es una estimación referencial; el monto lo determina el Instituto de Previsión Social (IPS).</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>ChileAtiende, PGU: https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu</li>
+<li>ChileAtiende, aumento PGU: https://www.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu</li>
+</ul>
+<hr />
+<h2 id="brief-12-boleta-de-honorarios-2026-brutolíquido-con-retención-1525-calculadora-u">BRIEF 12 — Boleta de honorarios 2026: bruto/líquido con retención 15,25% (calculadora upgrade)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora upgrade</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-boleta-honorarios</li>
+<li><strong>Cluster:</strong> boleta honorarios 2026 retención</li>
+<li><strong>Prioridad:</strong> 12 (alto volumen, esfuerzo bajo)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora boleta de honorarios 2026: bruto, líquido y retención 15,25%</p>
+<p><strong>Meta title (56):</strong> Boleta de Honorarios 2026 | Bruto, Líquido y 15,25%</p>
+<p><strong>Meta description (151):</strong> Calcula tu boleta de honorarios 2026 con la retención del 15,25%. Convierte bruto a líquido y viceversa. Sube a 16% en 2027 y 17% en 2028. Datos SII.</p>
+<p><strong>Párrafo de apertura (49 palabras):</strong> En 2026, la boleta de honorarios tiene una retención del 15,25% que se descuenta del monto bruto. Si emites una boleta de $100.000 brutos, recibes $84.750 líquidos. Esta retención subirá gradualmente a 16% en 2027 y 17% en 2028. Usa la calculadora para convertir entre bruto y líquido.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Cómo funciona la retención de la boleta de honorarios</li>
+<li>H2: Calcular boleta: de bruto a líquido y viceversa</li>
+<li>H2: La gradualidad de la retención 2025-2028<ul>
+<li>H3: 15,25% en 2026, 16% en 2027, 17% en 2028</li>
+</ul>
+</li>
+<li>H2: Por qué se retiene: la Operación Renta y el PPM</li>
+<li>H2: Ejemplo práctico con distintos montos</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuál es la retención de la boleta de honorarios en 2026? — El 15,25% del monto bruto.</li>
+<li>¿Cuánto recibo líquido por una boleta de $100.000? — Recibes $84.750 líquidos, ya que se retiene el 15,25%.</li>
+<li>¿La retención va a subir? — Sí, sube a 16% en 2027 y a 17% en 2028.</li>
+<li>¿Quién paga la retención? — La retiene y entera al SII quien recibe el servicio (empresa) o el propio emisor si el cliente es persona natural.</li>
+<li>¿La retención se recupera? — Puede devolverse total o parcialmente en la Operación Renta de abril, según tu situación tributaria anual.</li>
+<li>¿Debo cotizar con mis honorarios? — Sí, los trabajadores independientes cotizan obligatoriamente con cargo a la retención en la declaración anual.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, boletas de honorarios: https://www.sii.cl/destacados/boletas_honorarios/</li>
+<li>SII, aumento gradual retención: https://www.sii.cl/destacados/boletas_honorarios/aumento_gradual.html</li>
+</ul>
+<hr />
+<h2 id="brief-13-cae-vs-fes-2026-qué-está-vigente-y-qué-es-proyecto-artículo-nuevo">BRIEF 13 — CAE vs FES 2026: qué está vigente y qué es proyecto (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/cae-vs-fes-2026</li>
+<li><strong>Cluster:</strong> FES CAE 2026, fin del CAE</li>
+<li><strong>Prioridad:</strong> 13 (gap alto: desinformación FES)</li>
+<li><strong>Requiere calculadora:</strong> no (tracker)</li>
+</ul>
+<p><strong>H1:</strong> CAE vs FES 2026: qué está vigente y qué es solo un proyecto de ley</p>
+<p><strong>Meta title (54):</strong> CAE vs FES 2026 | Qué Está Vigente y Qué No</p>
+<p><strong>Meta description (152):</strong> El CAE sigue vigente en 2026; el FES es aún un proyecto de ley aprobado por la Cámara, no lo ha reemplazado. Diferencias, estado legislativo y qué esperar.</p>
+<p><strong>Párrafo de apertura (50 palabras):</strong> En julio de 2026, el CAE (Crédito con Garantía Estatal) sigue plenamente vigente. El FES (Financiamiento a la Educación Superior) es un proyecto de ley aprobado por la Cámara de Diputados que busca reemplazar al CAE, pero aún no es ley y no está operativo. Aquí las diferencias clave.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es el CAE y por qué sigue vigente</li>
+<li>H2: Qué propone el FES<ul>
+<li>H3: Pago contingente al ingreso</li>
+<li>H3: Reemplazo de CAE, Fondo Solidario y créditos Corfo</li>
+</ul>
+</li>
+<li>H2: Estado legislativo del FES en 2026 (tracker)</li>
+<li>H2: Tabla comparativa CAE vs FES</li>
+<li>H2: Qué debe hacer un deudor CAE mientras tanto</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿El FES ya reemplazó al CAE en 2026? — No. El FES es un proyecto de ley; el CAE sigue vigente y operativo.</li>
+<li>¿Qué es el FES? — El Financiamiento a la Educación Superior es un sistema propuesto de pago contingente al ingreso que busca reemplazar el CAE.</li>
+<li>¿Debo dejar de pagar mi CAE por el FES? — No. Mientras el FES no sea ley, el CAE mantiene sus obligaciones y plazos.</li>
+<li>¿Qué reemplazaría el FES? — Busca reemplazar el CAE, el Fondo Solidario de Crédito Universitario y los créditos Corfo.</li>
+<li>¿Cuándo entraría en vigencia el FES? — No hay fecha vigente en julio de 2026; depende de la tramitación en el Congreso.</li>
+<li>¿El FES condona la deuda del CAE? — El proyecto contempla cambios de condiciones, pero no debe asumirse condonación hasta que sea ley promulgada.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>ChileAtiende, CAE: https://www.chileatiende.gob.cl/fichas/9583-credito-con-garantia-estatal-cae</li>
+<li>Ministerio de Hacienda, FES: https://www.hacienda.cl/noticias-y-eventos/noticias/camara-de-diputados-y-diputadas-aprueba-proyecto-de-ley-que-pone-fin-al-cae-y</li>
+</ul>
+<hr />
+<h2 id="brief-14-calculadora-tasa-máxima-convencional-cmf-calculadora-nueva">BRIEF 14 — Calculadora Tasa Máxima Convencional CMF (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-tasa-maxima-convencional</li>
+<li><strong>Cluster:</strong> TMC CMF julio 2026, tasa máxima</li>
+<li><strong>Prioridad:</strong> 14 (gap: portal CMF complejo)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Tasa Máxima Convencional 2026: consulta el interés máximo legal por tramo</p>
+<p><strong>Meta title (55):</strong> Tasa Máxima Convencional 2026 | TMC por Tramo CMF</p>
+<p><strong>Meta description (150):</strong> Consulta la Tasa Máxima Convencional (TMC) vigente por tramo en 2026 según la CMF. Verifica si tu crédito supera el interés máximo legal permitido.</p>
+<p><strong>Párrafo de apertura (52 palabras):</strong> La Tasa Máxima Convencional (TMC) es el interés máximo legal que una entidad puede cobrar en Chile; superarlo constituye usura. La CMF la publica mensualmente por tramos de monto y plazo. Por ejemplo, los créditos no reajustables menores a 90 días de hasta 5.000 UF tenían una TMC de 52,59% anual.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es la Tasa Máxima Convencional</li>
+<li>H2: Tabla de TMC vigente por tramo (certificado CMF)<ul>
+<li>H3: Créditos no reajustables en pesos</li>
+<li>H3: Créditos reajustables (UF)</li>
+<li>H3: Moneda extranjera y descuento por pensión</li>
+</ul>
+</li>
+<li>H2: Cómo saber si tu crédito excede la TMC</li>
+<li>H2: Qué hacer si te cobran sobre la TMC</li>
+<li>H2: Cuándo se actualiza la TMC</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué es la Tasa Máxima Convencional? — Es el interés máximo legal que se puede pactar en un crédito en Chile; cobrar por encima es usura.</li>
+<li>¿Quién fija la TMC? — La Comisión para el Mercado Financiero (CMF), que la publica mensualmente por tramos.</li>
+<li>¿La TMC es la misma para todos los créditos? — No. Varía según el monto, el plazo y si el crédito es reajustable o en moneda extranjera.</li>
+<li>¿Qué pasa si me cobran más que la TMC? — El exceso es ilegal; puedes reclamar ante el SERNAC y la CMF, y los intereses pueden reducirse al máximo legal.</li>
+<li>¿Cada cuánto cambia la TMC? — Se actualiza mensualmente mediante certificados publicados por la CMF en el Diario Oficial.</li>
+<li>¿La TMC garantiza que me aprueben un crédito? — No. La TMC solo limita el interés máximo; la aprobación depende de la evaluación de cada entidad.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>CMF, Tasas de interés: https://tasas.cmfchile.cl/sbifweb/servlet/InfoFinanciera?indice=4.1</li>
+<li>CMF, descarga anual 2026: https://tasas.cmfchile.cl/sbifweb/servlet/InfoFinanciera?indice=4.2.2&amp;year=2026</li>
+</ul>
+<hr />
+<h2 id="brief-15-utm-uta-y-uf-julio-2026-tabla-oficial-y-usos-artículo-nuevo">BRIEF 15 — UTM, UTA y UF julio 2026: tabla oficial y usos (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/uf-utm-uta-julio-2026</li>
+<li><strong>Cluster:</strong> valor UTM julio 2026, UF hoy</li>
+<li><strong>Prioridad:</strong> 15 (alto volumen; dificultad alta pero refuerza autoridad)</li>
+<li><strong>Requiere calculadora:</strong> sí (conversor)</li>
+</ul>
+<p><strong>H1:</strong> UF, UTM y UTA en julio 2026: valores oficiales y para qué sirve cada uno</p>
+<p><strong>Meta title (54):</strong> UF, UTM y UTA Julio 2026 | Valores Oficiales</p>
+<p><strong>Meta description (149):</strong> Valores oficiales julio 2026: UTM $71.649, UTA $859.788 y UF sobre $40.800. Descubre para qué sirve cada indicador y convierte a pesos al instante.</p>
+<p><strong>Párrafo de apertura (51 palabras):</strong> En julio de 2026, la UTM es de $71.649 y la UTA de $859.788, mientras la UF ronda los $40.800 diarios. La UF reajusta arriendos, dividendos y créditos; la UTM se usa para multas e impuestos; y la UTA para tramos anuales de renta. Convierte cualquiera de ellas a pesos aquí.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Valores oficiales de julio 2026<ul>
+<li>H3: UTM: $71.649</li>
+<li>H3: UTA: $859.788</li>
+<li>H3: UF: valor diario y promedio mensual</li>
+</ul>
+</li>
+<li>H2: Para qué sirve cada indicador<ul>
+<li>H3: UF: arriendos, dividendos, créditos hipotecarios</li>
+<li>H3: UTM: multas, patentes, impuestos mensuales</li>
+<li>H3: UTA: tramos de renta anual</li>
+</ul>
+</li>
+<li>H2: Conversor UF/UTM/UTA a pesos</li>
+<li>H2: Historial mensual 2026</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuánto vale la UTM en julio de 2026? — La UTM de julio de 2026 es $71.649.</li>
+<li>¿Cuánto vale la UTA en 2026? — La UTA de julio de 2026 es $859.788, equivalente a 12 UTM.</li>
+<li>¿Cuánto vale la UF hoy? — La UF ronda los $40.800 diarios en julio de 2026; su valor cambia cada día.</li>
+<li>¿Cuál es la diferencia entre UF y UTM? — La UF es una unidad diaria reajustable por inflación usada en créditos y arriendos; la UTM es mensual y se usa para impuestos y multas.</li>
+<li>¿Para qué se usa la UTA? — Para definir los tramos anuales del impuesto a la renta y del Global Complementario.</li>
+<li>¿Quién fija estos valores? — El SII publica la UTM y la UTA; el Banco Central determina la UF.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, UTM 2026: https://www.sii.cl/valores_y_fechas/utm/utm2026.htm</li>
+<li>SII, UF 2026: https://www.sii.cl/valores_y_fechas/uf/uf2026.htm</li>
+<li>Banco Central de Chile: https://www.bcentral.cl/inicio</li>
+</ul>
+<hr />
+<h2 id="brief-16-reajuste-de-arriendo-ufipc-contrato-y-fórmula-calculadora-upgrade">BRIEF 16 — Reajuste de arriendo UF/IPC: contrato y fórmula (calculadora upgrade)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora upgrade</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-reajuste-arriendo</li>
+<li><strong>Cluster:</strong> reajuste arriendo UF, IPC</li>
+<li><strong>Prioridad:</strong> 16 (estacional enero-febrero; gap explicación de contrato)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora de reajuste de arriendo 2026: por UF o por IPC según tu contrato</p>
+<p><strong>Meta title (55):</strong> Reajuste de Arriendo 2026 | Calculadora UF e IPC</p>
+<p><strong>Meta description (152):</strong> Calcula el reajuste de tu arriendo 2026 según UF o IPC. Depende de la cláusula de tu contrato y la periodicidad pactada. Datos oficiales del SII e INE.</p>
+<p><strong>Párrafo de apertura (50 palabras):</strong> El reajuste del arriendo en Chile depende de la cláusula del contrato: si está pactado en UF, sube automáticamente con la variación diaria de la UF; si es en pesos con reajuste por IPC, sube según la inflación acumulada del periodo pactado. Usa la calculadora para estimar tu nuevo canon.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Cómo se reajusta un arriendo en Chile<ul>
+<li>H3: Contrato en UF: reajuste automático</li>
+<li>H3: Contrato en pesos con cláusula IPC</li>
+</ul>
+</li>
+<li>H2: Calculadora de reajuste de arriendo</li>
+<li>H2: Periodicidad del reajuste: mensual, semestral o anual</li>
+<li>H2: Qué dice la ley sobre el reajuste</li>
+<li>H2: Checklist antes de aceptar un reajuste</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cómo se calcula el reajuste del arriendo? — Depende del contrato: si está en UF, con la variación de la UF; si es en pesos con cláusula IPC, con la inflación acumulada.</li>
+<li>¿Cada cuánto se reajusta el arriendo? — Según lo que diga el contrato: puede ser mensual, semestral o anual.</li>
+<li>¿El arrendador puede subir el arriendo cuando quiera? — No. Solo puede aplicar el reajuste pactado en el contrato en la periodicidad acordada.</li>
+<li>¿Qué pasa si mi contrato está en UF? — El monto en pesos sube automáticamente con el valor de la UF; el número de UF permanece igual.</li>
+<li>¿El reajuste por IPC usa la inflación de qué periodo? — La inflación acumulada entre la fecha del último reajuste y la fecha del nuevo, según el INE.</li>
+<li>¿Necesito firmar algo para el reajuste? — Si el reajuste ya está en el contrato, se aplica automáticamente sin firmar un nuevo documento.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, UF 2026: https://www.sii.cl/valores_y_fechas/uf/uf2026.htm</li>
+<li>INE, IPC: http://www.ine.gob.cl/estadisticas-por-tema/precios-e-inflacion/indice-de-precios-al-consumidor</li>
+</ul>
+<hr />
+<h2 id="brief-17-operación-renta-2026-para-independientes-artículo-nuevo">BRIEF 17 — Operación Renta 2026 para independientes (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/operacion-renta-2026-honorarios</li>
+<li><strong>Cluster:</strong> operación renta 2026 honorarios</li>
+<li><strong>Prioridad:</strong> 17 (estacional abril; alto volumen)</li>
+<li><strong>Requiere calculadora:</strong> sí (parcial / simulador)</li>
+</ul>
+<p><strong>H1:</strong> Operación Renta 2026 para trabajadores a honorarios: guía completa</p>
+<p><strong>Meta title (52):</strong> Operación Renta 2026 Honorarios | Guía Completa</p>
+<p><strong>Meta description (153):</strong> Todo sobre la Operación Renta 2026 para honorarios: retención 15,25%, cotización obligatoria, créditos y devolución. Simula tu resultado antes de abril.</p>
+<p><strong>Párrafo de apertura (48 palabras):</strong> En la Operación Renta de abril de 2026, los trabajadores a honorarios declaran sus ingresos anuales, aplican el Impuesto Global Complementario y descuentan la retención del 15,25% ya pagada. Según su situación, obtienen devolución o pagan la diferencia, incluida la cotización previsional obligatoria. Aquí la guía paso a paso.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es la Operación Renta y quién debe declarar</li>
+<li>H2: Cómo tributan los honorarios<ul>
+<li>H3: La retención del 15,25% durante el año</li>
+<li>H3: El Impuesto Global Complementario anual</li>
+</ul>
+</li>
+<li>H2: La cotización previsional obligatoria del independiente</li>
+<li>H2: Créditos y rebajas (APV, gastos, educacionales)</li>
+<li>H2: Cuándo hay devolución y cuándo se paga</li>
+<li>H2: Fechas clave de la Operación Renta 2026</li>
+<li>H2: Checklist de documentos para declarar</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Quién debe hacer la Operación Renta por honorarios? — Todo trabajador independiente que emitió boletas de honorarios durante el año tributario.</li>
+<li>¿La retención del 15,25% se devuelve? — Puede devolverse total o parcialmente, según tu impuesto anual y la cotización previsional obligatoria.</li>
+<li>¿Los honorarios obligan a cotizar? — Sí, el independiente cotiza obligatoriamente con cargo a las retenciones en la declaración anual.</li>
+<li>¿Cuándo es la Operación Renta 2026? — El proceso se realiza en abril de 2026, con fechas escalonadas según el resultado de la declaración.</li>
+<li>¿Qué créditos puedo usar? — APV, gastos educacionales y otros créditos según tu situación, que reducen el impuesto a pagar.</li>
+<li>¿El SII propone una declaración? — Sí, el SII entrega una propuesta que el contribuyente puede aceptar o corregir.</li>
+<li>¿Este simulador reemplaza la declaración oficial? — No. El resultado final lo determina el SII; el simulador es referencial.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, Renta personas naturales 2026: https://www.sii.cl/valores_y_fechas/renta/2026/personas_naturales.html</li>
+<li>SII, boletas de honorarios: https://www.sii.cl/destacados/boletas_honorarios/</li>
+</ul>
+<hr />
+<h2 id="brief-18-calculadora-impuesto-global-complementario-2026-calculadora-nueva">BRIEF 18 — Calculadora Impuesto Global Complementario 2026 (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-global-complementario</li>
+<li><strong>Cluster:</strong> impuesto global complementario 2026</li>
+<li><strong>Prioridad:</strong> 18 (complemento de renta)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora Impuesto Global Complementario 2026: cuánto pagas por tu renta anual</p>
+<p><strong>Meta title (55):</strong> Global Complementario 2026 | Calculadora por Tramo</p>
+<p><strong>Meta description (150):</strong> Calcula tu Impuesto Global Complementario 2026 por tramos oficiales del SII. Renta exenta hasta $11.265.804 al año. Estima tu impuesto anual aquí.</p>
+<p><strong>Párrafo de apertura (49 palabras):</strong> El Impuesto Global Complementario grava la renta anual total de las personas en Chile mediante tramos progresivos. En el año tributario 2026, las rentas hasta $11.265.804 al año están exentas, y desde ahí la tasa sube por tramos hasta 40%. Usa la calculadora para estimar tu impuesto anual.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es el Impuesto Global Complementario</li>
+<li>H2: Tabla de tramos del Global Complementario 2026</li>
+<li>H2: Cómo se calcula: factor menos rebaja</li>
+<li>H2: Ejemplo práctico con una renta anual</li>
+<li>H2: Diferencia con el Impuesto Único de Segunda Categoría</li>
+<li>H2: Créditos que reducen el impuesto</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué es el Impuesto Global Complementario? — Es el impuesto anual y progresivo que grava el total de rentas de una persona natural residente en Chile.</li>
+<li>¿Cuál es la renta exenta en 2026? — Las rentas anuales hasta $11.265.804 están exentas del Global Complementario.</li>
+<li>¿Cuál es la tasa máxima? — El tramo más alto aplica una tasa de 40% sobre rentas anuales superiores a $258.696.240.</li>
+<li>¿Cómo se calcula el impuesto? — Se multiplica la renta por el factor del tramo y se resta la cantidad a rebajar correspondiente.</li>
+<li>¿En qué se diferencia del Impuesto de Segunda Categoría? — El de Segunda Categoría es mensual sobre sueldos; el Global Complementario es anual sobre el total de rentas.</li>
+<li>¿Este cálculo es oficial? — No, es una estimación referencial; el resultado definitivo lo determina el SII en la Operación Renta.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, Renta personas naturales 2026: https://www.sii.cl/valores_y_fechas/renta/2026/personas_naturales.html</li>
+</ul>
+<hr />
+<h2 id="brief-19-calculadora-de-sueldo-líquido-con-reforma-previsional-calculadora-nueva">BRIEF 19 — Calculadora de sueldo líquido con reforma previsional (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-sueldo-liquido</li>
+<li><strong>Cluster:</strong> sueldo líquido Chile 2026</li>
+<li><strong>Prioridad:</strong> 19 (alto volumen, dificultad alta; página pilar)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora de sueldo líquido 2026 en Chile: con reforma previsional y topes actualizados</p>
+<p><strong>Meta title (54):</strong> Calculadora Sueldo Líquido 2026 | Chile Actualizada</p>
+<p><strong>Meta description (152):</strong> Calcula tu sueldo líquido 2026 en Chile: AFP, salud 7%, seguro cesantía, impuesto y topes de 90 UF. Incluye la nueva reforma previsional. Datos oficiales.</p>
+<p><strong>Párrafo de apertura (50 palabras):</strong> El sueldo líquido en Chile 2026 se obtiene restando al sueldo bruto imponible las cotizaciones de AFP (10% más comisión), salud (7%), seguro de cesantía y el Impuesto Único de Segunda Categoría, considerando el tope imponible de 90 UF. Usa la calculadora para convertir tu sueldo bruto en líquido.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué descuentos tiene tu sueldo en 2026<ul>
+<li>H3: AFP: 10% más comisión de la administradora</li>
+<li>H3: Salud: 7% (Fonasa o Isapre)</li>
+<li>H3: Seguro de cesantía</li>
+<li>H3: Impuesto Único de Segunda Categoría</li>
+</ul>
+</li>
+<li>H2: El tope imponible de 90 UF y cómo afecta el cálculo</li>
+<li>H2: El impacto de la reforma previsional en tu liquidación</li>
+<li>H2: Ejemplo: sueldo bruto de $1.000.000 a líquido</li>
+<li>H2: Sueldo mínimo 2026: $539.000</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cómo se calcula el sueldo líquido en Chile? — Se resta al sueldo bruto imponible la AFP (10% + comisión), el 7% de salud, el seguro de cesantía y el impuesto de segunda categoría.</li>
+<li>¿Cuánto se descuenta por AFP en 2026? — El 10% obligatorio más la comisión de la AFP, que va de 0,46% (Uno) a 1,45% (ProVida).</li>
+<li>¿Cuál es el tope imponible en 2026? — 90 UF para AFP y salud; la parte del sueldo sobre ese tope no cotiza.</li>
+<li>¿Cuál es el sueldo mínimo en 2026? — $539.000 para trabajadores de 18 a 65 años, desde el 1 de enero de 2026.</li>
+<li>¿La reforma previsional cambia mi sueldo líquido? — El aporte adicional lo paga el empleador, por lo que no reduce el líquido del trabajador directamente.</li>
+<li>¿Desde qué monto pago impuesto? — El Impuesto Único de Segunda Categoría se aplica sobre rentas mensuales que superan aproximadamente $967.261.</li>
+<li>¿Este resultado es exacto? — Es una estimación referencial; la liquidación oficial la emite tu empleador con tus datos específicos.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Dirección del Trabajo, sueldo mínimo 2026: https://www.dt.gob.cl/legislacion/1624/articles-127969_recurso_doc.pdf</li>
+<li>SII, Impuesto Segunda Categoría 2026: https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm</li>
+<li>Dirección del Trabajo, tope imponible AFP: https://dt.gob.cl/portal/1628/w3-article-118076.html</li>
+<li>Superintendencia de Pensiones, comisiones AFP: https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html</li>
+</ul>
+<hr />
+<h2 id="brief-20-calculadora-de-finiquito-e-indemnización-2026-calculadora-nueva">BRIEF 20 — Calculadora de finiquito e indemnización 2026 (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-finiquito</li>
+<li><strong>Cluster:</strong> finiquito Chile, indemnización años servicio</li>
+<li><strong>Prioridad:</strong> 20 (alto volumen; página pilar)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora de finiquito 2026 en Chile: indemnización por años de servicio y aviso previo</p>
+<p><strong>Meta title (54):</strong> Calculadora Finiquito 2026 | Indemnización Chile</p>
+<p><strong>Meta description (151):</strong> Calcula tu finiquito 2026: indemnización por años de servicio, mes de aviso previo, vacaciones proporcionales y feriado. Según causal y Código del Trabajo.</p>
+<p><strong>Párrafo de apertura (52 palabras):</strong> El finiquito en Chile incluye la indemnización por años de servicio (un mes de sueldo por año trabajado, con tope de 11 años y 90 UF), el mes de aviso previo si no se dio con antelación, y las vacaciones proporcionales pendientes. El monto depende de la causal de término del contrato.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué incluye un finiquito en Chile<ul>
+<li>H3: Indemnización por años de servicio</li>
+<li>H3: Indemnización sustitutiva del aviso previo</li>
+<li>H3: Vacaciones y feriado proporcional</li>
+</ul>
+</li>
+<li>H2: Cómo influye la causal de término<ul>
+<li>H3: Necesidades de la empresa (Art. 161)</li>
+<li>H3: Renuncia voluntaria</li>
+<li>H3: Despido sin causa justificada</li>
+</ul>
+</li>
+<li>H2: Topes: 11 años y 90 UF</li>
+<li>H2: Ejemplo práctico de cálculo</li>
+<li>H2: Cómo revisar y firmar tu finiquito</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cómo se calcula el finiquito en Chile? — Sumando la indemnización por años de servicio, el aviso previo si corresponde, y las vacaciones y feriado proporcionales.</li>
+<li>¿Cuánto es la indemnización por años de servicio? — Un mes de la última remuneración por cada año trabajado, con tope de 11 años.</li>
+<li>¿Hay un tope al monto de la indemnización? — Sí, la base de cálculo tiene tope de 90 UF por mes de remuneración.</li>
+<li>¿Qué es el mes de aviso previo? — Si el empleador no avisa con 30 días de anticipación, debe pagar un mes de remuneración adicional.</li>
+<li>¿La renuncia da derecho a indemnización por años? — No. La indemnización por años de servicio aplica principalmente al despido por necesidades de la empresa.</li>
+<li>¿Se pagan las vacaciones no tomadas? — Sí, el feriado proporcional y las vacaciones pendientes se pagan en el finiquito.</li>
+<li>¿Este cálculo es vinculante? — No, es referencial; el finiquito oficial debe ratificarse ante ministro de fe según la ley.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>Código del Trabajo, BCN: https://www.bcn.cl/leychile/navegar?idNorma=207436</li>
+<li>Dirección del Trabajo: https://www.dt.gob.cl/portal/1626/w3-channel.html</li>
+</ul>
+<hr />
+<h2 id="brief-21-ley-21719-privacidad-para-calculadoras-financieras-artículo-nuevo">BRIEF 21 — Ley 21.719: privacidad para calculadoras financieras (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/ley-21719-proteccion-datos-calculadoras</li>
+<li><strong>Cluster:</strong> Ley 21.719 datos personales Chile</li>
+<li><strong>Prioridad:</strong> 21 (gap; también compliance del propio sitio)</li>
+<li><strong>Requiere calculadora:</strong> no (checklist)</li>
+</ul>
+<p><strong>H1:</strong> Ley 21.719 de protección de datos: qué implica para las calculadoras financieras</p>
+<p><strong>Meta title (55):</strong> Ley 21.719 Datos Personales | Guía para Sitios Web</p>
+<p><strong>Meta description (152):</strong> La Ley 21.719 de protección de datos rige desde diciembre 2026 en Chile. Consentimiento, finalidad y minimización: qué deben cumplir las webs financieras.</p>
+<p><strong>Párrafo de apertura (49 palabras):</strong> La Ley 21.719 moderniza la protección de datos personales en Chile y rige plenamente desde el 1 de diciembre de 2026. Crea la Agencia de Protección de Datos y exige consentimiento, finalidad y minimización de datos. Los sitios con calculadoras financieras deben adecuar cómo recogen sueldos, RUT y deudas.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué establece la Ley 21.719</li>
+<li>H2: Cuándo entra en vigencia</li>
+<li>H2: Principios clave para sitios web<ul>
+<li>H3: Consentimiento del titular</li>
+<li>H3: Finalidad y minimización de datos</li>
+<li>H3: Derechos del titular (acceso, rectificación, supresión)</li>
+</ul>
+</li>
+<li>H2: Qué deben hacer las calculadoras financieras<ul>
+<li>H3: No almacenar RUT ni sueldos sin base legal</li>
+<li>H3: Política de privacidad clara</li>
+</ul>
+</li>
+<li>H2: Checklist de cumplimiento descargable</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué es la Ley 21.719? — Es la ley que moderniza la protección de datos personales en Chile y crea la Agencia de Protección de Datos.</li>
+<li>¿Desde cuándo rige la Ley 21.719? — Su versión con vigencia diferida rige desde el 1 de diciembre de 2026.</li>
+<li>¿Qué datos protege? — Todos los datos personales, con reglas más estrictas para datos sensibles como los financieros.</li>
+<li>¿Qué derechos da al ciudadano? — Acceso, rectificación, supresión, oposición y portabilidad de sus datos personales.</li>
+<li>¿Una calculadora online debe pedir consentimiento? — Sí, si recoge y almacena datos personales debe informar la finalidad y obtener consentimiento válido.</li>
+<li>¿Qué pasa si un sitio no cumple? — La Agencia de Protección de Datos podrá fiscalizar y sancionar el incumplimiento.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>BCN, Ley 21.719: https://www.bcn.cl/leychile/navegar?idNorma=1209272</li>
+</ul>
+<hr />
+<h2 id="brief-22-patente-comercial-máximo-legal-8000-utm-no-8-utm-artículo-nuevo">BRIEF 22 — Patente comercial: máximo legal 8.000 UTM, no 8 UTM (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/patente-comercial-maximo-minimo-utm</li>
+<li><strong>Cluster:</strong> patente comercial máximo UTM</li>
+<li><strong>Prioridad:</strong> 22 (gap: corrige mito 8 UTM; refuerza cluster patente)</li>
+<li><strong>Requiere calculadora:</strong> no</li>
+</ul>
+<p><strong>H1:</strong> Patente comercial en Chile: el máximo legal es 8.000 UTM, no 8 UTM</p>
+<p><strong>Meta title (56):</strong> Patente Comercial | Máximo 8.000 UTM y Mínimo 1 UTM</p>
+<p><strong>Meta description (150):</strong> El máximo legal de una patente comercial en Chile es 8.000 UTM, no 8 UTM. El mínimo es 1 UTM. Conoce el rango de 2,5 a 5 por mil según el DL 3.063.</p>
+<p><strong>Párrafo de apertura (48 palabras):</strong> El máximo legal de una patente comercial en Chile es 8.000 UTM, no 8 UTM como se cree con frecuencia. El mínimo es 1 UTM. La patente equivale a entre 2,5 y 5 por mil del capital propio tributario, según el DL 3.063 de rentas municipales.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: El error común: 8 UTM vs 8.000 UTM</li>
+<li>H2: Qué dice el DL 3.063 sobre los topes<ul>
+<li>H3: Mínimo: 1 UTM</li>
+<li>H3: Máximo: 8.000 UTM</li>
+</ul>
+</li>
+<li>H2: El rango de la tasa: 2,5 a 5 por mil</li>
+<li>H2: Cómo afecta esto a grandes empresas</li>
+<li>H2: Ejemplo: patente de una empresa con alto capital propio</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Cuál es el máximo legal de una patente comercial? — 8.000 UTM, según el DL 3.063 de rentas municipales.</li>
+<li>¿Es cierto que el máximo es 8 UTM? — No. Ese es un error frecuente; el tope real es 8.000 UTM.</li>
+<li>¿Cuál es el mínimo de patente comercial? — 1 UTM, equivalente a $71.649 en julio de 2026.</li>
+<li>¿Cuál es la tasa de la patente? — Entre 2,5 y 5 por mil (0,25% a 0,5%) del capital propio tributario, fijada por cada municipalidad.</li>
+<li>¿Quién llega al máximo de 8.000 UTM? — Empresas con un capital propio tributario muy elevado, cuya patente calculada superaría ese tope.</li>
+<li>¿Todas las comunas aplican la misma tasa? — No, cada municipalidad define su tasa dentro del rango legal permitido.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>SII, DL 3.063: https://www.sii.cl/pagina/jurisprudencia/dl3063.htm</li>
+<li>BCN, Patentes Comerciales: https://obtienearchivo.bcn.cl/obtienearchivo?id=repositorio%2F10221%2F27759%2F2%2FPatentes_comerciales__1_.pdf</li>
+</ul>
+<hr />
+<h2 id="brief-23-calculadora-subsidio-ds49-ahorro-precio-máximo-y-elegibilidad-calculado">BRIEF 23 — Calculadora Subsidio DS49: ahorro, precio máximo y elegibilidad (calculadora nueva)</h2>
+<ul>
+<li><strong>Tipo:</strong> calculadora nueva</li>
+<li><strong>URL:</strong> /calculadoras/calculadora-subsidio-ds49</li>
+<li><strong>Cluster:</strong> DS49 2026 ahorro 10 UF</li>
+<li><strong>Prioridad:</strong> 23 (gap: elegibilidad por caso)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Calculadora Subsidio DS49 2026: ahorro exigido, precio máximo y elegibilidad</p>
+<p><strong>Meta title (54):</strong> Subsidio DS49 2026 | Calculadora de Ahorro y Precio</p>
+<p><strong>Meta description (151):</strong> Calcula tu elegibilidad al subsidio DS49 2026: ahorro mínimo 10 UF, subsidio base 314 UF y vivienda hasta 950 UF. Verifica requisitos con datos MINVU.</p>
+<p><strong>Párrafo de apertura (50 palabras):</strong> El subsidio DS49 permite comprar una vivienda construida de hasta 950 UF con un ahorro mínimo de 10 UF y un subsidio base de 314 UF, dirigido a hogares dentro del 40% más vulnerable del Registro Social de Hogares. La calculadora verifica si cumples el ahorro y el precio máximo.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es el subsidio DS49</li>
+<li>H2: Requisitos de elegibilidad<ul>
+<li>H3: Registro Social de Hogares (40% más vulnerable)</li>
+<li>H3: Ahorro mínimo de 10 UF</li>
+</ul>
+</li>
+<li>H2: Montos: subsidio base 314 UF y vivienda hasta 950 UF</li>
+<li>H2: Calculadora de ahorro y precio máximo</li>
+<li>H2: Modalidad construcción en sitio propio 2026</li>
+<li>H2: Calendario de llamados 2026</li>
+<li>H2: Cómo postular al DS49</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué es el subsidio DS49? — Es un subsidio del MINVU para comprar una vivienda construida de hasta 950 UF, sin crédito hipotecario en algunas modalidades.</li>
+<li>¿Cuánto ahorro necesito para el DS49? — El ahorro mínimo es 10 UF para hogares del 40% más vulnerable del RSH.</li>
+<li>¿Cuál es el subsidio base del DS49? — 314 UF para la compra de una vivienda construida.</li>
+<li>¿Qué precio de vivienda puedo comprar? — Viviendas de hasta 950 UF con este subsidio.</li>
+<li>¿Quién puede postular al DS49? — Personas dentro del 40% más vulnerable del Registro Social de Hogares que cumplan el ahorro exigido.</li>
+<li>¿El subsidio garantiza que me lo adjudiquen? — No. La adjudicación depende de puntaje, cupos y validación del SERVIU.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>MINVU DS49: https://www.minvu.gob.cl/beneficio/vivienda/subsidio-para-comprar-una-vivienda-construida-de-hasta-950-uf-ds49/</li>
+<li>MINVU, llamado DS49 sitio propio 2026: https://www.minvu.gob.cl/postulacion/llamado-en-condiciones-especiales-del-ds49-para-construccion-en-sitio-propio-densificacion-predial-y-pequeno-condominio-incluyendo-el-procedimiento-de-autoconstruccion-asistida-2026/</li>
+</ul>
+<hr />
+<h2 id="brief-24-seguro-de-cesantía-afc-cuánto-puedo-retirar-artículo-nuevo">BRIEF 24 — Seguro de cesantía AFC: cuánto puedo retirar (artículo nuevo)</h2>
+<ul>
+<li><strong>Tipo:</strong> artículo nuevo</li>
+<li><strong>URL:</strong> /blog/seguro-cesantia-afc-calculo</li>
+<li><strong>Cluster:</strong> seguro cesantía cuánto pagan</li>
+<li><strong>Prioridad:</strong> 24 (gap; dato de fórmula pendiente de verificar)</li>
+<li><strong>Requiere calculadora:</strong> sí</li>
+</ul>
+<p><strong>H1:</strong> Seguro de cesantía AFC 2026: cuánto puedes retirar y cómo se calcula</p>
+<p><strong>Meta title (53):</strong> Seguro de Cesantía AFC 2026 | Cuánto Puedo Retirar</p>
+<p><strong>Meta description (152):</strong> Aprende cómo funciona el seguro de cesantía AFC en 2026: cuánto puedes retirar según tu contrato, saldo de cuenta y causal de término. Guía con fuentes AFC.</p>
+<p><strong>Párrafo de apertura (51 palabras):</strong> El seguro de cesantía administrado por la AFC permite retirar fondos al terminar tu contrato. El monto depende del saldo de tu Cuenta Individual de Cesantía, la causal de término y el tipo de contrato. En algunos casos también se accede al Fondo de Cesantía Solidario, con topes y porcentajes decrecientes.</p>
+<p><strong>Estructura H2/H3:</strong></p>
+<ul>
+<li>H2: Qué es el seguro de cesantía AFC</li>
+<li>H2: Cómo se financia: aportes del trabajador y empleador</li>
+<li>H2: Cuánto puedes retirar<ul>
+<li>H3: Cuenta Individual de Cesantía</li>
+<li>H3: Fondo de Cesantía Solidario</li>
+</ul>
+</li>
+<li>H2: Cómo influye la causal de término y el tipo de contrato</li>
+<li>H2: Requisitos y número de giros</li>
+<li>H2: Cómo solicitar el pago</li>
+<li>H2: Preguntas frecuentes</li>
+</ul>
+<p><strong>FAQ (schema-ready):</strong></p>
+<ol>
+<li>¿Qué es el seguro de cesantía? — Es un beneficio que permite recibir pagos temporales al quedar cesante, administrado por la AFC.</li>
+<li>¿Cuánto puedo retirar del seguro de cesantía? — Depende del saldo de tu Cuenta Individual de Cesantía, tu remuneración y la causal de término.</li>
+<li>¿Quién aporta al seguro de cesantía? — El trabajador y el empleador aportan mensualmente durante el contrato.</li>
+<li>¿Cuántos giros puedo hacer? — Depende de los meses cotizados y del tipo de fondo; los montos son decrecientes.</li>
+<li>¿La renuncia da derecho al seguro de cesantía? — Da acceso a la Cuenta Individual, pero no al Fondo Solidario, que exige causales específicas.</li>
+<li>¿Este cálculo garantiza el pago? — No. El monto y la procedencia los determina la AFC según tus antecedentes.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear:</strong></p>
+<ul>
+<li>AFC Chile (verificar URL oficial vigente de tablas y giros): https://www.afc.cl</li>
+<li>Dirección del Trabajo: https://www.dt.gob.cl/portal/1626/w3-channel.html</li>
+</ul>
+<p><strong>Nota YMYL:</strong> el dossier marca la fórmula exacta de giros y porcentajes del Fondo Solidario como PENDIENTE DE VERIFICAR. Confirmar tablas y topes en la fuente oficial AFC antes de publicar cifras concretas; hasta entonces mantener el contenido en términos cualitativos.</p>
+<hr />
+<h2 id="brief-25-plantilla-de-snippets-quotactualizado-julio-2026quot-para-calculadoras-">BRIEF 25 — Plantilla de snippets &quot;actualizado julio 2026&quot; para calculadoras delgadas (metadata)</h2>
+<ul>
+<li><strong>Tipo:</strong> metadata (plantilla transversal)</li>
+<li><strong>URL:</strong> todas las calculadoras prioritarias (patrón reutilizable)</li>
+<li><strong>Cluster:</strong> calculadora + 2026 + fuente oficial</li>
+<li><strong>Prioridad:</strong> 25 (impacto agregado en CTR y AdSense)</li>
+<li><strong>Requiere calculadora:</strong> no</li>
+</ul>
+<p><strong>H1:</strong> (plantilla) [Nombre de la calculadora] 2026: [beneficio] actualizado con datos oficiales</p>
+<p><strong>Meta title (plantilla, mantener ≤60):</strong> [Calculadora] 2026 | Actualizada con Datos Oficiales</p>
+<p><strong>Meta description (plantilla, ≤155):</strong> Calcula [tema] 2026 con valores oficiales verificados a julio de 2026. Incluye fuentes del SII, DT o CMF y explicación paso a paso. Estimación referencial.</p>
+<p><strong>Párrafo de apertura (plantilla, 40-60 palabras):</strong> Esta calculadora de [tema] está actualizada con los valores oficiales vigentes en Chile a julio de 2026, según [fuente oficial: SII / DT / CMF / Superintendencia de Pensiones]. Además del resultado, encontrarás la fórmula aplicada, un ejemplo práctico y los supuestos utilizados, para que entiendas cómo se calcula tu caso.</p>
+<p><strong>Objetivo de esta plantilla (resuelve el bloqueo de AdSense):</strong>
+Esta es una plantilla transversal para aplicar a todas las calculadoras &quot;delgadas&quot; que hoy bloquean la monetización por &quot;contenido de bajo valor&quot;. Cada calculadora debe incorporar el mismo patrón de valor verificable:</p>
+<ul>
+<li>H2: Cómo se calcula [tema] (fórmula explícita)</li>
+<li>H2: Ejemplo práctico paso a paso</li>
+<li>H2: Valores oficiales usados y su fuente (con fecha &quot;actualizado julio 2026&quot;)</li>
+<li>H2: Supuestos y limitaciones</li>
+<li>H2: Preguntas frecuentes (mínimo 4, schema FAQPage)</li>
+<li>Bloque visible de disclaimer YMYL: &quot;Estimación referencial; no reemplaza la determinación oficial de [organismo].&quot;</li>
+<li>Metadato &quot;dateModified&quot; en el schema para reflejar la actualización.</li>
+</ul>
+<p><strong>FAQ base reutilizable (schema-ready, adaptar por calculadora):</strong></p>
+<ol>
+<li>¿Con qué fecha están actualizados los datos? — Con los valores oficiales vigentes a julio de 2026.</li>
+<li>¿De dónde salen las cifras? — De fuentes oficiales chilenas como el SII, la Dirección del Trabajo, la CMF o la Superintendencia de Pensiones.</li>
+<li>¿El resultado es exacto? — Es una estimación referencial; la determinación oficial la realiza el organismo competente.</li>
+<li>¿Cada cuánto se actualiza la calculadora? — Se revisa mensualmente para reflejar cambios en UF, UTM, topes o tasas.</li>
+</ol>
+<p><strong>Fuentes oficiales a linkear (según calculadora):</strong></p>
+<ul>
+<li>SII, valores y fechas: https://www.sii.cl/valores_y_fechas/index_valores_y_fechas.html</li>
+<li>Dirección del Trabajo: https://www.dt.gob.cl/portal/1626/w3-channel.html</li>
+<li>CMF, tasas: https://tasas.cmfchile.cl/sbifweb/servlet/InfoFinanciera?indice=4.1</li>
+<li>Superintendencia de Pensiones: https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html</li>
+</ul>
+<hr />
+<h2 id="notas-transversales-para-el-website-builder">Notas transversales para el Website-Builder</h2>
+<ol>
+<li><strong>Disclaimers YMYL obligatorios:</strong> toda calculadora debe mostrar &quot;Estimación referencial; no reemplaza la determinación oficial de [organismo]&quot;. No prometer aprobación de crédito ni adjudicación de subsidio. No recomendar cambio de AFP solo por comisión o rentabilidad pasada.</li>
+<li><strong>Schema.org por tipo:</strong> calculadoras → <code>SoftwareApplication</code> (applicationCategory &quot;FinanceApplication&quot;) + <code>FAQPage</code>; artículos → <code>Article</code> + <code>FAQPage</code>; guías paso a paso → <code>HowTo</code> + <code>FAQPage</code>; tablas de valores → <code>Dataset</code>. Incluir siempre <code>dateModified</code>.</li>
+<li><strong>Datos verificados a julio 2026</strong> (usar como fuente única de verdad): UTM $71.649; UTA $859.788; sueldo mínimo $539.000; tope AFP 90 UF; tope cesantía 135,2 UF; retención honorarios 15,25%; comisión AFP Uno 0,46%; SIS 1,62%; patente máx. 8.000 UTM / mín. 1 UTM.</li>
+<li><strong>Datos PENDIENTE DE VERIFICAR</strong> antes de publicar cifras duras: fórmula exacta del tope de gratificación en pesos (brief 04/08), rentabilidad comparativa por AFP (no usar como tabla oficial), tablas de giros del seguro de cesantía AFC (brief 24), TMC de julio si la CMF publicó el certificado N°7/2026.</li>
+<li><strong>Enlazado interno recomendado:</strong> briefs 03/07/13 (cluster CAE/FES) entre sí; briefs 02/06 (AFP); briefs 01/22 (patente); briefs 10/19 (topes y sueldo líquido); briefs 05/23 (MINVU).</li>
+</ol>
+
+      </main>
+    </div>
+
+    <div class="footer-note">
+      Respaldo de integridad: el Markdown original está embebido como Base64 en <code>#original-markdown-base64</code> con SHA-256 <code>c68da352a5e705f5111104f1eac9b4374f9b641ff13a600a9b54256726f913d2</code>.
+    </div>
+  </div>
+
+  <script type="application/json" id="document-integrity">
+    {"source": "briefs_website_builder_calculadorachile.md", "sha256": "c68da352a5e705f5111104f1eac9b4374f9b641ff13a600a9b54256726f913d2", "bytes": 64172, "characters": 62728, "renderer": "mistune"}
+  </script>
+  <script type="text/plain" id="original-markdown-base64" data-encoding="base64" data-sha256="c68da352a5e705f5111104f1eac9b4374f9b641ff13a600a9b54256726f913d2">IyAyNSBCcmllZnMgZGUgY29udGVuaWRvIHBhcmEgY2FsY3VsYWRvcmFjaGlsZS5jbAoKKipEZXN0aW5vOioqIGFnZW50ZSBXZWJzaXRlLUJ1aWxkZXIgKE9wZW5Db2RlKS4gKipGZWNoYSBkZSByZWZlcmVuY2lhOioqIGp1bGlvIGRlIDIwMjYuICoqU3RhY2s6KiogTmV4dC5qcyAxNSBBcHAgUm91dGVyLgoKKipDw7NtbyB1c2FyIGVzdGUgZG9jdW1lbnRvOioqIGNhZGEgYnJpZWYgZXMgYXV0w7Nub21vIHkgZXN0w6EgbGlzdG8gcGFyYSBpbXBsZW1lbnRhciB1bmEgcMOhZ2luYS4gSW5jbHV5ZSBIMSBmaW5hbCwgbWV0YSB0aXRsZSAo4omkNjAgY2FyYWN0ZXJlcyksIG1ldGEgZGVzY3JpcHRpb24gKOKJpDE1NSBjYXJhY3RlcmVzKSwgZXN0cnVjdHVyYSBjb21wbGV0YSBkZSBzZWNjaW9uZXMgSDIvSDMsIHDDoXJyYWZvIGRlIGFwZXJ0dXJhIGRlIDQwLTYwIHBhbGFicmFzIG9wdGltaXphZG8gcGFyYSBmZWF0dXJlZCBzbmlwcGV0LCBGQVEgZGUgNi04IHByZWd1bnRhcyBjb24gcmVzcHVlc3RhIGNvcnRhIGxpc3RhIHBhcmEgYEZBUVBhZ2VgIHNjaGVtYSwgeSBmdWVudGVzIG9maWNpYWxlcyBhIGxpbmtlYXIuIExhcyBjaWZyYXMgcHJvdmllbmVuIGRlbCBkb3NzaWVyIHZlcmlmaWNhZG8gYSBqdWxpbyAyMDI2OyB0b2RhIGNhbGN1bGFkb3JhIGRlYmUgbW9zdHJhciBmZWNoYSBkZSBhY3R1YWxpemFjacOzbiB5IGRpc2NsYWltZXIgWU1ZTC4KCioqQ29udmVuY2lvbmVzIGRlIGNvbnRlbzoqKiBsb3MgbWV0YSB0aXRsZSB5IG1ldGEgZGVzY3JpcHRpb24gZnVlcm9uIGNvbnRhZG9zIGNhcsOhY3RlciBhIGNhcsOhY3RlciAoZXNwYWNpb3MgaW5jbHVpZG9zKS4gQ2FkYSBicmllZiBpbmRpY2EgZWwgY29udGVvIGVudHJlIHBhcsOpbnRlc2lzLgoKLS0tCgojIyBCUklFRiAwMSDigJQgUGF0ZW50ZSBjb21lcmNpYWwgKG1ldGFkYXRhIC8gbWVqb3JhIENUUikKCi0gKipUaXBvOioqIG1ldGFkYXRhIChtZWpvcmEgZGUgdGl0bGUvbWV0YSBzb2JyZSBww6FnaW5hIGV4aXN0ZW50ZSkKLSAqKlVSTDoqKiAvY2FsY3VsYWRvcmFzL2NhbGN1bGFkb3JhLXBhdGVudGUtY29tZXJjaWFsCi0gKipDbHVzdGVyOioqIGNhbGN1bGFkb3JhIHBhdGVudGUgY29tZXJjaWFsLCBjYXBpdGFsIHByb3BpbyB0cmlidXRhcmlvLCBjdcOhbnRvIHBhZ2FyIHBhdGVudGUgbXVuaWNpcGFsCi0gKipQcmlvcmlkYWQ6KiogMSAoeWEgdG9wIDEwLCBwb3MgNS45OCDigJQgc29sbyBvcHRpbWl6YXIgQ1RSKQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6KiogeWEgZXhpc3RlCgoqKkgxOioqIENhbGN1bGFkb3JhIGRlIHBhdGVudGUgY29tZXJjaWFsIDIwMjY6IGN1w6FudG8gcGFnYXIgc2Vnw7puIGNhcGl0YWwgcHJvcGlvCgoqKk1ldGEgdGl0bGUgKDU3KToqKiBDYWxjdWxhZG9yYSBQYXRlbnRlIENvbWVyY2lhbCAyMDI2IHwgQ3XDoW50byBQYWdhcgoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTEpOioqIENhbGN1bGEgdHUgcGF0ZW50ZSBjb21lcmNpYWwgMjAyNiBzZWfDum4gY2FwaXRhbCBwcm9waW8gdHJpYnV0YXJpbywgdGFzYSBtdW5pY2lwYWwgeSBVVE0uIE3DrW5pbW8gMSBVVE0sIG3DoXhpbW8gOC4wMDAgVVRNLiBEYXRvcyBvZmljaWFsZXMgZGVsIFNJSS4KCioqUMOhcnJhZm8gZGUgYXBlcnR1cmEgKDUyIHBhbGFicmFzKToqKiBMYSBwYXRlbnRlIGNvbWVyY2lhbCBlbiBDaGlsZSBzZSBjYWxjdWxhIGFwbGljYW5kbyBlbnRyZSAyLDUgeSA1IHBvciBtaWwgc29icmUgZWwgY2FwaXRhbCBwcm9waW8gdHJpYnV0YXJpbyBkZWNsYXJhZG8sIGNvbiB1biBtw61uaW1vIGRlIDEgVVRNIHkgdW4gbcOheGltbyBkZSA4LjAwMCBVVE0uIENhZGEgbXVuaWNpcGFsaWRhZCBmaWphIHN1IHRhc2EgZGVudHJvIGRlIGVzZSByYW5nby4gVXNhIGxhIGNhbGN1bGFkb3JhIHBhcmEgZXN0aW1hciBlbCBtb250byBhbnVhbCBkZSB0dSBuZWdvY2lvLgoKKipFc3RydWN0dXJhIEgyL0gzOioqCi0gSDI6IFF1w6kgZXMgbGEgcGF0ZW50ZSBjb21lcmNpYWwgeSBxdWnDqW4gZGViZSBwYWdhcmxhCi0gSDI6IEPDs21vIHNlIGNhbGN1bGEgbGEgcGF0ZW50ZSBjb21lcmNpYWwgZW4gMjAyNgogIC0gSDM6IEJhc2UgZGUgY8OhbGN1bG86IGVsIGNhcGl0YWwgcHJvcGlvIHRyaWJ1dGFyaW8KICAtIEgzOiBMYSB0YXNhIG11bmljaXBhbDogZW50cmUgMiw1IHkgNSBwb3IgbWlsCiAgLSBIMzogVG9wZXMgbGVnYWxlczogbcOtbmltbyAxIFVUTSwgbcOheGltbyA4LjAwMCBVVE0KLSBIMjogRWplbXBsbyBwcsOhY3RpY28gcGFzbyBhIHBhc28KLSBIMjogQ8OzbW8gZGVjbGFyYXIgZWwgY2FwaXRhbCBwcm9waW8gYW50ZSB0dSBtdW5pY2lwYWxpZGFkCi0gSDI6IERpZmVyZW5jaWEgZW50cmUgcGF0ZW50ZSBjb21lcmNpYWwsIHByb2Zlc2lvbmFsIGUgaW5kdXN0cmlhbAotIEgyOiBWYWxvciBkZSBsYSBVVE0gYXBsaWNhYmxlIChqdWxpbyAyMDI2OiAkNzEuNjQ5KQotIEgyOiBQcmVndW50YXMgZnJlY3VlbnRlcwoKKipOb3RhIGRlIG1ldGFkYXRhOioqIGVsIG9iamV0aXZvIGRlIGVzdGUgYnJpZWYgZXMgcmVlc2NyaWJpciB0aXRsZSB5IGRlc2NyaXB0aW9uIHBhcmEgc3ViaXIgQ1RSIGRlc2RlIGxhIHBvc2ljacOzbiA1LTYuIEVsIGN1ZXJwbyB5YSBleGlzdGU7IGNvcnJlZ2lyIGN1YWxxdWllciBtZW5jacOzbiBlcnLDs25lYSBkZSAibcOheGltbyA4IFVUTSIgcG9yICI4LjAwMCBVVE0iLgoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KioKMS4gwr9Dw7NtbyBzZSBjYWxjdWxhIGxhIHBhdGVudGUgY29tZXJjaWFsIGVuIENoaWxlPyDigJQgU2UgYXBsaWNhIGVudHJlIDIsNSB5IDUgcG9yIG1pbCBzb2JyZSBlbCBjYXBpdGFsIHByb3BpbyB0cmlidXRhcmlvLCBjb24gbcOtbmltbyAxIFVUTSB5IG3DoXhpbW8gOC4wMDAgVVRNLiBMYSB0YXNhIGV4YWN0YSBsYSBmaWphIGNhZGEgbXVuaWNpcGFsaWRhZC4KMi4gwr9DdcOhbCBlcyBlbCBtb250byBtw61uaW1vIGRlIHVuYSBwYXRlbnRlIGNvbWVyY2lhbD8g4oCUIEVsIG3DrW5pbW8gbGVnYWwgZXMgMSBVVE0sIGVxdWl2YWxlbnRlIGEgJDcxLjY0OSBlbiBqdWxpbyBkZSAyMDI2LgozLiDCv0N1w6FsIGVzIGVsIG1vbnRvIG3DoXhpbW8gZGUgdW5hIHBhdGVudGUgY29tZXJjaWFsPyDigJQgRWwgbcOheGltbyBsZWdhbCBlcyA4LjAwMCBVVE0sIG5vIDggVVRNIGNvbW8gc2UgY3JlZSBlcnLDs25lYW1lbnRlLgo0LiDCv1F1w6kgZXMgZWwgY2FwaXRhbCBwcm9waW8gdHJpYnV0YXJpbz8g4oCUIEVzIGVsIHBhdHJpbW9uaW8gZGVsIG5lZ29jaW8gZGV0ZXJtaW5hZG8gc2Vnw7puIG5vcm1hcyBkZWwgU0lJLCBiYXNlIHNvYnJlIGxhIHF1ZSBzZSBhcGxpY2EgbGEgdGFzYSBkZSBwYXRlbnRlLgo1LiDCv0xhIHBhdGVudGUgY29tZXJjaWFsIHNlIHBhZ2EgdW5hIHZleiBhbCBhw7FvPyDigJQgU2UgcGFnYSBhbnVhbG1lbnRlLCBjb24gb3BjacOzbiBkZSBwYWdhciBlbiBkb3MgY3VvdGFzIChlbmVybyB5IGp1bGlvKSBlbiBsYSBtYXlvcsOtYSBkZSBtdW5pY2lwaW9zLgo2LiDCv1RvZGFzIGxhcyBtdW5pY2lwYWxpZGFkZXMgY29icmFuIGxhIG1pc21hIHRhc2E/IOKAlCBOby4gQ2FkYSBtdW5pY2lwYWxpZGFkIGZpamEgc3UgdGFzYSBkZW50cm8gZGVsIHJhbmdvIGxlZ2FsIGRlIDIsNSBhIDUgcG9yIG1pbC4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gU0lJLCBETCAzLjA2MzogaHR0cHM6Ly93d3cuc2lpLmNsL3BhZ2luYS9qdXJpc3BydWRlbmNpYS9kbDMwNjMuaHRtCi0gQkNOLCBQYXRlbnRlcyBDb21lcmNpYWxlczogaHR0cHM6Ly9vYnRpZW5lYXJjaGl2by5iY24uY2wvb2J0aWVuZWFyY2hpdm8/aWQ9cmVwb3NpdG9yaW8lMkYxMDIyMSUyRjI3NzU5JTJGMiUyRlBhdGVudGVzX2NvbWVyY2lhbGVzX18xXy5wZGYKLSBTSUksIHZhbG9yIFVUTSAyMDI2OiBodHRwczovL3d3dy5zaWkuY2wvdmFsb3Jlc195X2ZlY2hhcy91dG0vdXRtMjAyNi5odG0KCi0tLQoKIyMgQlJJRUYgMDIg4oCUIENvbXBhcmF0aXZhIGNvbWlzaW9uZXMgQUZQIDIwMjYgKGFydMOtY3VsbyB1cGdyYWRlKQoKLSAqKlRpcG86KiogYXJ0w61jdWxvIHVwZ3JhZGUKLSAqKlVSTDoqKiAvYmxvZy9jb21wYXJhdGl2YS1jb21pc2lvbmVzLWFmcC0yMDI2Ci0gKipDbHVzdGVyOioqIGNvbWlzaW9uZXMgQUZQIDIwMjYsIEFGUCBtw6FzIGJhcmF0YSwgY29tcGFyYXRpdmEgQUZQCi0gKipQcmlvcmlkYWQ6KiogMiAocG9zIDcuOCwgQ1RSIG11eSBiYWpvIDAsNjIlIOKAlCB1cGdyYWRlICsgY29ycmVjY2nDs24gZGUgZGF0bykKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrSAoeWEgZXhpc3RlbnRlIC8gYSBpbmNvcnBvcmFyIHRhYmxhIGNvbXBhcmF0aXZhKQoKKipIMToqKiBDb21wYXJhdGl2YSBkZSBjb21pc2lvbmVzIEFGUCAyMDI2OiBjdcOhbCBlcyBsYSBtw6FzIGJhcmF0YQoKKipNZXRhIHRpdGxlICg1NSk6KiogQ29taXNpb25lcyBBRlAgMjAyNiB8IENvbXBhcmF0aXZhIHkgTcOhcyBCYXJhdGEKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTQ5KToqKiBDb21wYXJhIGxhcyBjb21pc2lvbmVzIGRlIGxhcyA3IEFGUCBlbiAyMDI2LiBBRlAgVW5vIGxpZGVyYSBjb24gMCw0NiUgZGVzZGUgb2N0dWJyZSAyMDI1LiBUYWJsYSBvZmljaWFsIGRlIGxhIFN1cGVyaW50ZW5kZW5jaWEgZGUgUGVuc2lvbmVzLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNDkgcGFsYWJyYXMpOioqIEVuIGp1bGlvIGRlIDIwMjYsIGxhIEFGUCBjb24gbGEgY29taXNpw7NuIG3DoXMgYmFqYSBlcyBBRlAgVW5vIGNvbiAwLDQ2JSBzb2JyZSBsYSByZW11bmVyYWNpw7NuIGltcG9uaWJsZSwgdmlnZW50ZSBkZXNkZSBlbCAxIGRlIG9jdHVicmUgZGUgMjAyNS4gTGUgc2lndWVuIE1vZGVsbyBjb24gMCw1OCUgeSBQbGFuVml0YWwgY29uIDEsMTYlLiBMYSBjb21pc2nDs24gbm8gZXMgZWwgw7puaWNvIGNyaXRlcmlvOiB0YW1iacOpbiBpbXBvcnRhbiByZW50YWJpbGlkYWQgeSBzZXJ2aWNpby4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBUYWJsYSBjb21wYXJhdGl2YSBkZSBjb21pc2lvbmVzIEFGUCAyMDI2Ci0gSDI6IEN1w6FsIGVzIGxhIEFGUCBtw6FzIGJhcmF0YSBlbiAyMDI2CiAgLSBIMzogQUZQIFVubzogMCw0NiUgZGVzZGUgb2N0dWJyZSBkZSAyMDI1CiAgLSBIMzogRWwgaGlzdMOzcmljbyBkZSBsYSBjb21pc2nDs24gZGUgQUZQIFVubyAoY29ycmVjY2nDs24gMCw0NiB2cyAwLDQ5KQotIEgyOiBRdcOpIGVzIGxhIGNvbWlzacOzbiBkZSBsYSBBRlAgeSBzb2JyZSBxdcOpIHNlIGFwbGljYQotIEgyOiBDb21pc2nDs24gdnMgcmVudGFiaWxpZGFkOiBjdcOhbCBwZXNhIG3DoXMgZW4gZWwgbGFyZ28gcGxhem8KLSBIMjogRWwgU2VndXJvIGRlIEludmFsaWRleiB5IFNvYnJldml2ZW5jaWEgKFNJUyk6IDEsNjIlIGVuIDIwMjYKLSBIMjogQ8OzbW8gY2FtYmlhcnNlIGRlIEFGUCBwYXNvIGEgcGFzbwotIEgyOiBQcmVndW50YXMgZnJlY3VlbnRlcwoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KioKMS4gwr9DdcOhbCBlcyBsYSBBRlAgbcOhcyBiYXJhdGEgZW4gMjAyNj8g4oCUIEFGUCBVbm8sIGNvbiB1bmEgY29taXNpw7NuIGRlIDAsNDYlIHNvYnJlIGxhIHJlbXVuZXJhY2nDs24gaW1wb25pYmxlLCB2aWdlbnRlIGRlc2RlIGVsIDEgZGUgb2N0dWJyZSBkZSAyMDI1LgoyLiDCv0FGUCBVbm8gY29icmEgMCw0NiUgbyAwLDQ5JT8g4oCUIENvYnJhIDAsNDYlIHNlZ8O6biBsYSBTdXBlcmludGVuZGVuY2lhIGRlIFBlbnNpb25lczsgZWwgdmFsb3IgMCw0OSUgZXN0w6EgZGVzYWN0dWFsaXphZG8uCjMuIMK/Q3XDoW50byBjb2JyYW4gbGFzIGRlbcOhcyBBRlAgZW4gMjAyNj8g4oCUIENhcGl0YWwgMSw0NCUsIEN1cHJ1bSAxLDQ0JSwgSGFiaXRhdCAxLDI3JSwgTW9kZWxvIDAsNTglLCBQbGFuVml0YWwgMSwxNiUsIFByb1ZpZGEgMSw0NSUuCjQuIMK/Q29udmllbmUgZWxlZ2lyIEFGUCBzb2xvIHBvciBsYSBjb21pc2nDs24gbcOhcyBiYWphPyDigJQgTm8uIExhIHJlbnRhYmlsaWRhZCBkZSBsb3MgZm9uZG9zIHkgZWwgc2VydmljaW8gdGFtYmnDqW4gYWZlY3RhbiBsYSBwZW5zacOzbiBmaW5hbDsgbGEgY29taXNpw7NuIGVzIHVuIGZhY3RvciBtw6FzLgo1LiDCv1F1w6kgZXMgZWwgU0lTIHkgY3XDoW50byBjdWVzdGEgZW4gMjAyNj8g4oCUIEVsIFNlZ3VybyBkZSBJbnZhbGlkZXogeSBTb2JyZXZpdmVuY2lhIGVzIDEsNjIlIGRlc2RlIGFicmlsIGRlIDIwMjYsIGFwbGljYWJsZSBhIGVtcGxlYWRvcmVzLCBpbmRlcGVuZGllbnRlcyB5IHZvbHVudGFyaW9zLgo2LiDCv0PDs21vIG1lIGNhbWJpbyBkZSBBRlA/IOKAlCBTZSBzb2xpY2l0YSBkaXJlY3RhbWVudGUgZW4gbGEgbnVldmEgQUZQIGNvbiB0dSBjw6lkdWxhOyBlbCB0cmFzcGFzbyBzZSBtYXRlcmlhbGl6YSBlbiBlbCBtZXMgc2lndWllbnRlLgo3LiDCv0xhIGNvbWlzacOzbiBzZSBkZXNjdWVudGEgYWRlbcOhcyBkZWwgMTAlIGRlIGNvdGl6YWNpw7NuPyDigJQgU8OtLCBsYSBjb21pc2nDs24gc2UgcGFnYSBzb2JyZSBsYSByZW11bmVyYWNpw7NuIGltcG9uaWJsZSwgYWRpY2lvbmFsIGFsIDEwJSBvYmxpZ2F0b3Jpby4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gU3VwZXJpbnRlbmRlbmNpYSBkZSBQZW5zaW9uZXMsIGNvbWlzaW9uZXMgQUZQOiBodHRwczovL3d3dy5zcGVuc2lvbmVzLmNsL3BvcnRhbC9pbnN0aXR1Y2lvbmFsLzU5NC93My1wcm9wZXJ0eXZhbHVlLTk4OTcuaHRtbAoKLS0tCgojIyBCUklFRiAwMyDigJQgQ2FsY3VsYWRvcmEgQ0FFIDIwMjYgKGNhbGN1bGFkb3JhIHVwZ3JhZGUpCgotICoqVGlwbzoqKiBjYWxjdWxhZG9yYSB1cGdyYWRlCi0gKipVUkw6KiogL2NhbGN1bGFkb3Jhcy9jYWxjdWxhZG9yYS1jcmVkaXRvLWNhZQotICoqQ2x1c3RlcjoqKiBjYWxjdWxhZG9yYSBDQUUsIGRldWRhIENBRSwgY3VvdGEgQ0FFCi0gKipQcmlvcmlkYWQ6KiogMyAoeWEgdG9wIDEwLCBwb3MgNS4wNCwgbWVqb3IgQ1RSIGRlbCBzaXRpbyA5LDQ2JSDigJQgcmVmb3J6YXIgY29udGVuaWRvKQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6Kiogc8OtCgoqKkgxOioqIENhbGN1bGFkb3JhIENBRSAyMDI2OiBjdcOhbnRvIHBhZ2Fyw6FzIHBvciB0dSBDcsOpZGl0byBjb24gR2FyYW50w61hIEVzdGF0YWwKCioqTWV0YSB0aXRsZSAoNTQpOioqIENhbGN1bGFkb3JhIENBRSAyMDI2IHwgQ3VvdGEsIERldWRhIHkgVGFzYSAyJQoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTIpOioqIENhbGN1bGEgdHUgY3VvdGEgZGVsIENBRSBlbiAyMDI2OiBkZXVkYSBlbiBVRiwgdGFzYSBmaWphIGRlIDIlIHkgcGxhem9zIGRlIDEwLCAxNSBvIDIwIGHDsW9zLiBDb2JybyBkZXNkZSAxOCBtZXNlcyB0cmFzIGVncmVzYXIuIERhdG9zIG9maWNpYWxlcyBJbmdyZXNhLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTAgcGFsYWJyYXMpOioqIEVsIENyw6lkaXRvIGNvbiBHYXJhbnTDrWEgRXN0YXRhbCAoQ0FFKSBzZSBleHByZXNhIGVuIFVGLCB0aWVuZSB1bmEgdGFzYSBmaWphIHJlYWwgZGUgMiUgYW51YWwgeSBzdSBjb2JybyBjb21pZW56YSAxOCBtZXNlcyBkZXNwdcOpcyBkZSBlZ3Jlc2FyLiBFbCBwbGF6byBkZSBwYWdvIGVzIGRlIDEwLCAxNSBvIDIwIGHDsW9zIHNlZ8O6biBlbCBtb250byBhZGV1ZGFkby4gVXNhIGxhIGNhbGN1bGFkb3JhIHBhcmEgZXN0aW1hciB0dSBjdW90YSBtZW5zdWFsLgoKKipFc3RydWN0dXJhIEgyL0gzOioqCi0gSDI6IEPDs21vIGZ1bmNpb25hIGVsIENBRSBlbiAyMDI2CiAgLSBIMzogVGFzYSBmaWphIGRlIDIlIHJlYWwgZW4gVUYKICAtIEgzOiBDdcOhbmRvIGVtcGllemEgZWwgY29icm86IDE4IG1lc2VzIHRyYXMgZWdyZXNhcgogIC0gSDM6IFBsYXpvczogMTAsIDE1IG8gMjAgYcOxb3MKLSBIMjogQ8OzbW8gc2UgY2FsY3VsYSB0dSBjdW90YSBtZW5zdWFsIGRlbCBDQUUKLSBIMjogUmViYWphIGRlIGN1b3RhIGFsIDEwJSBkZSB0dXMgaW5ncmVzb3MKLSBIMjogU3VzcGVuc2nDs24geSBwcsOzcnJvZ2EgZGVsIHBhZ28KLSBIMjogQ0FFIHkgRkVTOiBxdcOpIGVzdMOhIHZpZ2VudGUgaG95IChpbXBvcnRhbnRlKQotIEgyOiBDw7NtbyBwYWdhciBvIHJlbmVnb2NpYXIgdHUgQ0FFIGVuIGxhIFRlc29yZXLDrWEgKFRHUikKLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/Q3XDoWwgZXMgbGEgdGFzYSBkZSBpbnRlcsOpcyBkZWwgQ0FFIGVuIDIwMjY/IOKAlCBVbmEgdGFzYSBmaWphIHJlYWwgZGUgMiUgYW51YWwsIGV4cHJlc2FkYSBlbiBVRi4KMi4gwr9DdcOhbmRvIGVtcGllem8gYSBwYWdhciBlbCBDQUU/IOKAlCBFbCBjb2JybyBjb21pZW56YSAxOCBtZXNlcyBkZXNwdcOpcyBkZSBlZ3Jlc2FyIG8gZGVzZXJ0YXIgZGUgbGEgY2FycmVyYS4KMy4gwr9FbiBjdcOhbnRvcyBhw7FvcyBzZSBwYWdhIGVsIENBRT8g4oCUIEVuIDEwLCAxNSBvIDIwIGHDsW9zLCBzZWfDum4gZWwgbW9udG8gdG90YWwgYWRldWRhZG8uCjQuIMK/UHVlZG8gcGFnYXIgbWVub3Mgc2kgZ2FubyBwb2NvPyDigJQgU8OtLCBleGlzdGUgdW5hIHJlYmFqYSBxdWUgZmlqYSBsYSBjdW90YSBlbiBoYXN0YSBlbCAxMCUgZGUgdHVzIGluZ3Jlc29zLCBwcmV2aWEgc29saWNpdHVkLgo1LiDCv0VsIEZFUyB5YSByZWVtcGxhesOzIGFsIENBRT8g4oCUIE5vLiBFbiBqdWxpbyBkZSAyMDI2IGVsIEZFUyBzZWd1w61hIGNvbW8gcHJveWVjdG8gZGUgbGV5OyBlbCBDQUUgY29udGluw7phIHBsZW5hbWVudGUgdmlnZW50ZS4KNi4gwr9Ew7NuZGUgcGFnbyBtaSBjdW90YSBkZWwgQ0FFPyDigJQgQSB0cmF2w6lzIGRlIGxhIGVudGlkYWQgZmluYW5jaWVyYSBvIGRlIGxhIFRlc29yZXLDrWEgR2VuZXJhbCBkZSBsYSBSZXDDumJsaWNhIHNlZ8O6biB0dSBjb252ZW5pby4KNy4gwr9MYSBkZXVkYSBkZWwgQ0FFIGNyZWNlIGNvbiBsYSBpbmZsYWNpw7NuPyDigJQgRXN0w6EgZW4gVUYsIHBvciBsbyBxdWUgc2UgcmVhanVzdGEgY29uIGxhIHZhcmlhY2nDs24gZGUgbGEgVUYsIG5vIGNvbiB1biBpbnRlcsOpcyBhZGljaW9uYWwgdmFyaWFibGUuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIENoaWxlQXRpZW5kZSwgQ0FFOiBodHRwczovL3d3dy5jaGlsZWF0aWVuZGUuZ29iLmNsL2ZpY2hhcy85NTgzLWNyZWRpdG8tY29uLWdhcmFudGlhLWVzdGF0YWwtY2FlCi0gU2ltdWxhZG9yIEluZ3Jlc2E6IGh0dHBzOi8vc2ltdWxhZG9yLmluZ3Jlc2EuY2wKLSBNaW5pc3RlcmlvIGRlIEhhY2llbmRhLCBGRVM6IGh0dHBzOi8vd3d3LmhhY2llbmRhLmNsL25vdGljaWFzLXktZXZlbnRvcy9ub3RpY2lhcy9jYW1hcmEtZGUtZGlwdXRhZG9zLXktZGlwdXRhZGFzLWFwcnVlYmEtcHJveWVjdG8tZGUtbGV5LXF1ZS1wb25lLWZpbi1hbC1jYWUteQoKLS0tCgojIyBCUklFRiAwNCDigJQgR3JhdGlmaWNhY2nDs24gbGVnYWwgMjAyNiAoYXJ0w61jdWxvIHVwZ3JhZGUpCgotICoqVGlwbzoqKiBhcnTDrWN1bG8gdXBncmFkZQotICoqVVJMOioqIC9ibG9nL2NvbW8tZnVuY2lvbmEtZ3JhdGlmaWNhY2lvbi1sZWdhbAotICoqQ2x1c3RlcjoqKiBncmF0aWZpY2FjacOzbiBsZWdhbCwgYXJ0w61jdWxvIDUwLCB0b3BlIDQsNzUgSU1NCi0gKipQcmlvcmlkYWQ6KiogNCAocG9zIDExLjMzIOKAlCB1cGdyYWRlIHBhcmEgc2FsdGFyIGFsIHRvcCAxMCkKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrSAoaW5jb3Jwb3JhcikKCioqSDE6KiogR3JhdGlmaWNhY2nDs24gbGVnYWwgMjAyNjogQXJ0w61jdWxvIDQ3IHZzIEFydMOtY3VsbyA1MCBjb24gY2FsY3VsYWRvcmEKCioqTWV0YSB0aXRsZSAoNTYpOioqIEdyYXRpZmljYWNpw7NuIExlZ2FsIDIwMjYgfCBBcnQuIDQ3IHZzIDUwIHkgQ8OhbGN1bG8KCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUwKToqKiBDYWxjdWxhIHR1IGdyYXRpZmljYWNpw7NuIGxlZ2FsIDIwMjY6IEFydC4gNDcgKDMwJSB1dGlsaWRhZGVzKSBvIEFydC4gNTAgKHRvcGUgNCw3NSBJTU0pLiBDb24gc3VlbGRvIG3DrW5pbW8gJDUzOS4wMDAuIEd1w61hIHkgZGF0b3Mgb2ZpY2lhbGVzIGRlIGxhIERULgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTMgcGFsYWJyYXMpOioqIExhIGdyYXRpZmljYWNpw7NuIGxlZ2FsIGVuIENoaWxlIHB1ZWRlIHBhZ2Fyc2UgcG9yIGRvcyB2w61hczogZWwgQXJ0w61jdWxvIDQ3ICgzMCUgZGUgbGFzIHV0aWxpZGFkZXMgbMOtcXVpZGFzIHJlcGFydGlkYXMgZW50cmUgbG9zIHRyYWJhamFkb3JlcykgbyBlbCBBcnTDrWN1bG8gNTAgKDI1JSBkZSBsbyBkZXZlbmdhZG8gY29uIHRvcGUgZGUgNCw3NSBpbmdyZXNvcyBtw61uaW1vcyBtZW5zdWFsZXMgYWwgYcOxbykuIEVsIGVtcGxlYWRvciBlbGlnZSBlbCBtw6l0b2RvIG3DoXMgY29udmVuaWVudGUuIFVzYSBsYSBjYWxjdWxhZG9yYSBwYXJhIGVzdGltYXJsYS4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBRdcOpIGVzIGxhIGdyYXRpZmljYWNpw7NuIGxlZ2FsIHkgcXVpw6luIHRpZW5lIGRlcmVjaG8KLSBIMjogQXJ0w61jdWxvIDQ3OiBlbCAzMCUgZGUgbGFzIHV0aWxpZGFkZXMKLSBIMjogQXJ0w61jdWxvIDUwOiBlbCAyNSUgY29uIHRvcGUgZGUgNCw3NSBJTU0KICAtIEgzOiBDw7NtbyBzZSBjYWxjdWxhIGVsIHRvcGUgYW51YWwgZW4gMjAyNiAoY29uIElNTSAkNTM5LjAwMCkKICAtIEgzOiBHcmF0aWZpY2FjacOzbiBtZW5zdWFsIHZzIGFudWFsCi0gSDI6IEN1w6FsIG3DqXRvZG8gY29udmllbmU6IGNvbXBhcmFjacOzbiBwcsOhY3RpY2EKLSBIMjogRXN0YWRvIGRlbCBwcm95ZWN0byBxdWUgbW9kaWZpY2EgbGEgZ3JhdGlmaWNhY2nDs24gbGVnYWwKLSBIMjogQ8OzbW8gcmV2aXNhciBzaSB0dSBsaXF1aWRhY2nDs24gaW5jbHV5ZSBsYSBncmF0aWZpY2FjacOzbiBjb3JyZWN0YQotIEgyOiBQcmVndW50YXMgZnJlY3VlbnRlcwoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KioKMS4gwr9RdcOpIGVzIGxhIGdyYXRpZmljYWNpw7NuIGxlZ2FsPyDigJQgRXMgdW4gYmVuZWZpY2lvIG9ibGlnYXRvcmlvIHF1ZSBsYXMgZW1wcmVzYXMgY29uIHV0aWxpZGFkZXMgZGViZW4gcGFnYXIgYSBzdXMgdHJhYmFqYWRvcmVzLCBzZWfDum4gZWwgQ8OzZGlnbyBkZWwgVHJhYmFqby4KMi4gwr9DdcOhbCBlcyBsYSBkaWZlcmVuY2lhIGVudHJlIGVsIEFydMOtY3VsbyA0NyB5IGVsIDUwPyDigJQgRWwgQXJ0LiA0NyByZXBhcnRlIGVsIDMwJSBkZSBsYXMgdXRpbGlkYWRlczsgZWwgQXJ0LiA1MCBwYWdhIGVsIDI1JSBkZSBsbyBkZXZlbmdhZG8gY29uIHRvcGUgZGUgNCw3NSBpbmdyZXNvcyBtw61uaW1vcyBhbCBhw7FvLgozLiDCv0N1w6FsIGVzIGVsIHRvcGUgZGUgZ3JhdGlmaWNhY2nDs24gZW4gMjAyNj8g4oCUIENvbiBlbCBpbmdyZXNvIG3DrW5pbW8gZGUgJDUzOS4wMDAsIGVsIHRvcGUgYW51YWwgcmVmZXJlbmNpYWwgZGVsIEFydC4gNTAgZXMgNCw3NSBJTU0uIFZlcmlmaWNhIGxhIGbDs3JtdWxhIGV4YWN0YSBjb24gbGEgRGlyZWNjacOzbiBkZWwgVHJhYmFqby4KNC4gwr9MYSBncmF0aWZpY2FjacOzbiBzZSBwYWdhIG1lbnN1YWwgbyBhbnVhbD8g4oCUIFB1ZWRlIHBhZ2Fyc2UgbWVuc3VhbG1lbnRlIHByb3JyYXRlYWRhIG8gZW4gdW4gcGFnbyBhbnVhbCwgc2Vnw7puIGxvIHBhY3RlIGxhIGVtcHJlc2EuCjUuIMK/UXVpw6luIGVsaWdlIGVsIG3DqXRvZG8gZGUgY8OhbGN1bG8/IOKAlCBFbCBlbXBsZWFkb3IgZWxpZ2UgZW50cmUgZWwgQXJ0LiA0NyB5IGVsIEFydC4gNTAsIGFwbGljYW5kbyBlbCBxdWUgcmVzdWx0ZSBwcm9jZWRlbnRlLgo2LiDCv0xvcyB0cmFiYWphZG9yZXMgYSBob25vcmFyaW9zIHJlY2liZW4gZ3JhdGlmaWNhY2nDs24/IOKAlCBOby4gTGEgZ3JhdGlmaWNhY2nDs24gbGVnYWwgYXBsaWNhIGEgdHJhYmFqYWRvcmVzIGNvbiBjb250cmF0byBkZSB0cmFiYWpvIGRlcGVuZGllbnRlLgo3LiDCv1ZhIGEgY2FtYmlhciBsYSBncmF0aWZpY2FjacOzbiBsZWdhbD8g4oCUIEV4aXN0ZSB1biBwcm95ZWN0byBkZSBsZXkgZW4gZGlzY3VzacOzbiAoQm9sZXTDrW4gMTMuMjQwLTEzKTsgZW4ganVsaW8gZGUgMjAyNiBubyBlcyBsZXkgdmlnZW50ZS4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQ8OzZGlnbyBkZWwgVHJhYmFqbywgQkNOOiBodHRwczovL3d3dy5iY24uY2wvbGV5Y2hpbGUvbmF2ZWdhcj9pZE5vcm1hPTIwNzQzNgotIERpcmVjY2nDs24gZGVsIFRyYWJham8sIGdyYXRpZmljYWNpw7NuOiBodHRwczovL3d3dy5kdC5nb2IuY2wvcG9ydGFsLzE2MjYvdzMtYXJ0aWNsZS05OTAzNC5odG1sCgotLS0KCiMjIEJSSUVGIDA1IOKAlCBTdWJzaWRpb3MgTUlOVlUgMjAyNjogc2VsZWN0b3IgRFM0OS9EUzEvRFMxOSAoYXJ0w61jdWxvIHVwZ3JhZGUpCgotICoqVGlwbzoqKiBhcnTDrWN1bG8gdXBncmFkZQotICoqVVJMOioqIC9ibG9nL3N1YnNpZGlvcy1taW52dS0yMDI2LWd1aWEKLSAqKkNsdXN0ZXI6KiogRFM0OSAyMDI2LCBEUzEgdHJhbW8sIERTMTkgYWhvcnJvCi0gKipQcmlvcmlkYWQ6KiogNSAocG9zIDkuODQg4oCUIHVwZ3JhZGUgYSBoZXJyYW1pZW50YSBpbnRlcmFjdGl2YSkKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrSAoc2VsZWN0b3IpCgoqKkgxOioqIFN1YnNpZGlvcyBNSU5WVSAyMDI2OiBxdcOpIHN1YnNpZGlvIGRlIHZpdmllbmRhIG1lIGNvcnJlc3BvbmRlIChEUzQ5LCBEUzEsIERTMTkpCgoqKk1ldGEgdGl0bGUgKDU2KToqKiBTdWJzaWRpb3MgTUlOVlUgMjAyNiB8IERTNDksIERTMSB5IERTMTkgLSBTZWxlY3RvcgoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTMpOioqIERlc2N1YnJlIHF1w6kgc3Vic2lkaW8gZGUgdml2aWVuZGEgTUlOVlUgdGUgY29ycmVzcG9uZGUgZW4gMjAyNiBzZWfDum4gdHUgYWhvcnJvLCBSU0ggeSBwcmVjaW8gZGUgbGEgY2FzYS4gQ29tcGFyYSBEUzQ5LCBEUzEgeSBEUzE5IGNvbiBtb250b3Mgb2ZpY2lhbGVzLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTEgcGFsYWJyYXMpOioqIEVuIDIwMjYsIGxvcyB0cmVzIHN1YnNpZGlvcyBkZSB2aXZpZW5kYSBNSU5WVSBtw6FzIGJ1c2NhZG9zIHNvbiBlbCBEUzQ5IChjb21wcmEgZGUgdml2aWVuZGEgaGFzdGEgOTUwIFVGLCBhaG9ycm8gbcOtbmltbyAxMCBVRiksIGVsIERTMSAoaGFzdGEgMS4xMDAgVUYsIHBvciB0cmFtb3Mgc2Vnw7puIGluZ3Jlc28pIHkgZWwgRFMxOSAoaW50ZWdyYWNpw7NuIHNvY2lhbCwgaGFzdGEgMy4wMDAgVUYpLiBFbCBzZWxlY3RvciB0ZSBpbmRpY2EgY3XDoWwgc2UgYWp1c3RhIGEgdHUgY2Fzby4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBTZWxlY3RvcjogcXXDqSBzdWJzaWRpbyBNSU5WVSBtZSBjb3JyZXNwb25kZQotIEgyOiBEUzQ5OiBjb21wcmEgZGUgdml2aWVuZGEgaGFzdGEgOTUwIFVGCiAgLSBIMzogUmVxdWlzaXRvcywgYWhvcnJvICgxMCBVRikgeSBzdWJzaWRpbyBiYXNlICgzMTQgVUYpCiAgLSBIMzogTW9kYWxpZGFkIGNvbnN0cnVjY2nDs24gZW4gc2l0aW8gcHJvcGlvIDIwMjYKLSBIMjogRFMxOiB2aXZpZW5kYSBoYXN0YSAxLjEwMCBVRiBwb3IgdHJhbW9zCiAgLSBIMzogVHJhbW8gMSwgMiB5IDMgeSBzdXMgZGlmZXJlbmNpYXMKLSBIMjogRFMxOTogaW50ZWdyYWNpw7NuIHNvY2lhbCB5IHRlcnJpdG9yaWFsCi0gSDI6IFRhYmxhIGNvbXBhcmF0aXZhIERTNDkgdnMgRFMxIHZzIERTMTkKLSBIMjogQ2FsZW5kYXJpbyBkZSBsbGFtYWRvcyAyMDI2Ci0gSDI6IEPDs21vIHBvc3R1bGFyIHBhc28gYSBwYXNvCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv1F1w6kgc3Vic2lkaW8gZGUgdml2aWVuZGEgbWUgY29ycmVzcG9uZGU/IOKAlCBEZXBlbmRlIGRlIHR1IFJlZ2lzdHJvIFNvY2lhbCBkZSBIb2dhcmVzLCBhaG9ycm8geSBwcmVjaW8gZGUgbGEgdml2aWVuZGE6IERTNDkgcGFyYSBoYXN0YSA5NTAgVUYsIERTMSBwYXJhIGhhc3RhIDEuMTAwIFVGIHkgRFMxOSBwYXJhIHByb3llY3RvcyBkZSBpbnRlZ3JhY2nDs24uCjIuIMK/Q3XDoW50byBhaG9ycm8gbmVjZXNpdG8gcGFyYSBlbCBEUzQ5PyDigJQgRWwgYWhvcnJvIG3DrW5pbW8gZXMgMTAgVUYgcGFyYSBob2dhcmVzIGRlbnRybyBkZWwgNDAlIG3DoXMgdnVsbmVyYWJsZSBkZWwgUlNILgozLiDCv0N1w6FsIGVzIGVsIHN1YnNpZGlvIGJhc2UgZGVsIERTNDk/IOKAlCBFbCBzdWJzaWRpbyBiYXNlIGVzIGRlIDMxNCBVRiBwYXJhIGxhIGNvbXByYSBkZSB1bmEgdml2aWVuZGEgY29uc3RydWlkYS4KNC4gwr9RdcOpIHByZWNpbyBkZSB2aXZpZW5kYSBjdWJyZSBlbCBEUzE/IOKAlCBFbCBEUzEgdHJhbW8gMSBjdWJyZSB2aXZpZW5kYXMgZGUgaGFzdGEgMS4xMDAgVUYsIHkgaGFzdGEgMS4yMDAgVUYgZW4gem9uYXMgZXh0cmVtYXMuCjUuIMK/UXXDqSBlcyBlbCBEUzE5PyDigJQgRXMgZWwgc3Vic2lkaW8gZGUgaW50ZWdyYWNpw7NuIHNvY2lhbCB5IHRlcnJpdG9yaWFsIHBhcmEgY29tcHJhciBlbiBwcm95ZWN0b3MgcHJpdmFkb3MsIGNvbiBwcmVjaW9zIGRlIGhhc3RhIDMuMDAwIFVGIHNlZ8O6biB0cmFtby4KNi4gwr9DdcOhbmRvIHNvbiBsb3MgbGxhbWFkb3MgZGUgMjAyNj8g4oCUIEVsIERTNDkgcGFyYSBzaXRpbyBwcm9waW8gdGllbmUgY2FsaWZpY2FjaW9uZXMgZWwgNCBkZSBqdW5pbywgMTMgZGUgYWdvc3RvLCAyMiBkZSBvY3R1YnJlIHkgMTUgZGUgZGljaWVtYnJlIGRlIDIwMjYuCjcuIMK/RWwgc3Vic2lkaW8gZ2FyYW50aXphIHF1ZSBtZSBkZW4gbGEgdml2aWVuZGE/IOKAlCBOby4gTGEgcG9zdHVsYWNpw7NuIGRlcGVuZGUgZGUgcHVudGFqZSwgY3Vwb3MgeSB2YWxpZGFjacOzbiBkZWwgU0VSVklVOyBlbCBzdWJzaWRpbyBubyBhc2VndXJhIGFkanVkaWNhY2nDs24uCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIE1JTlZVIERTNDk6IGh0dHBzOi8vd3d3Lm1pbnZ1LmdvYi5jbC9iZW5lZmljaW8vdml2aWVuZGEvc3Vic2lkaW8tcGFyYS1jb21wcmFyLXVuYS12aXZpZW5kYS1jb25zdHJ1aWRhLWRlLWhhc3RhLTk1MC11Zi1kczQ5LwotIE1JTlZVIERTMTogaHR0cHM6Ly93d3cubWludnUuZ29iLmNsL2JlbmVmaWNpby92aXZpZW5kYS9zdWJzaWRpby1oYWJpdGFjaW9uYWwtY29tcHJhci11bmEtdml2aWVuZGEtZGUtaGFzdGEtMTEwMC11Zi1kczEvCi0gTUlOVlUgRFMxOSAoZm9sbGV0byk6IGh0dHBzOi8vd3d3Lm1pbnZ1LmdvYi5jbC93cC1jb250ZW50L3VwbG9hZHMvMjAyNi8wMy9EUzE5X2ZvbGxldG8ucGRmCgotLS0KCiMjIEJSSUVGIDA2IOKAlCBNZXRhIHRpdGxlIGNvbXBhcmF0aXZhIEFGUCAiVW5vIDAsNDYlIGNvbmZpcm1hZG8iIChtZXRhZGF0YSkKCi0gKipUaXBvOioqIG1ldGFkYXRhCi0gKipVUkw6KiogL2Jsb2cvY29tcGFyYXRpdmEtY29taXNpb25lcy1hZnAtMjAyNgotICoqQ2x1c3RlcjoqKiBBRlAgVW5vIDAsNDYsIGNvbWlzaW9uZXMgQUZQCi0gKipQcmlvcmlkYWQ6KiogNiAocmVmdWVyem8gZGUgQ1RSIHNvYnJlIGxhIG1pc21hIFVSTCBkZWwgYnJpZWYgMDIpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBubwoKKipIMToqKiAobWFudGVuZXIgZWwgZGVsIGJyaWVmIDAyKSBDb21wYXJhdGl2YSBkZSBjb21pc2lvbmVzIEFGUCAyMDI2OiBjdcOhbCBlcyBsYSBtw6FzIGJhcmF0YQoKKipNZXRhIHRpdGxlICg1NCk6KiogQUZQIFVubyAwLDQ2JSBDb25maXJtYWRvIDIwMjYgfCBDb21wYXJhdGl2YSBBRlAKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUwKToqKiBBRlAgVW5vIHRpZW5lIGxhIGNvbWlzacOzbiBtw6FzIGJhamE6IDAsNDYlIGRlc2RlIG9jdHVicmUgMjAyNSBzZWfDum4gbGEgU3VwZXJpbnRlbmRlbmNpYSBkZSBQZW5zaW9uZXMuIENvbXBhcmEgdG9kYXMgbGFzIGNvbWlzaW9uZXMgQUZQIGRlIDIwMjYgYXF1w60uCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg0NCBwYWxhYnJhcyk6KiogTGEgY29taXNpw7NuIGRlIEFGUCBVbm8gZXMgMCw0NiUgc29icmUgbGEgcmVtdW5lcmFjacOzbiBpbXBvbmlibGUsIHZpZ2VudGUgZGVzZGUgZWwgMSBkZSBvY3R1YnJlIGRlIDIwMjUgc2Vnw7puIGxhIFN1cGVyaW50ZW5kZW5jaWEgZGUgUGVuc2lvbmVzLiBFcyBsYSBtw6FzIGJhamEgZGVsIHNpc3RlbWEgZW4gMjAyNiwgcG9yIGRlbGFudGUgZGUgTW9kZWxvICgwLDU4JSkgeSBQbGFuVml0YWwgKDEsMTYlKS4KCioqTm90YSBkZSBtZXRhZGF0YToqKiBlc3RlIGJyaWVmIGVzIHVuYSB2YXJpYW50ZSBkZSBtZXRhZGF0YSBvcmllbnRhZGEgYSBsYSBxdWVyeSAiQUZQIFVubyAwLDQ2Ii4gQXBsaWNhciBjb21vIHRlc3QgQS9CIGRlIHRpdGxlL2Rlc2NyaXB0aW9uIHNvYnJlIGxhIG1pc21hIFVSTCBkZWwgYnJpZWYgMDIgbyBjb21vIHNlY2Npw7NuIGRlc3RhY2FkYSBjb24gYW5jbGEgcHJvcGlhLiBObyBkdXBsaWNhciBsYSBVUkwuCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKiByZXV0aWxpemFyIGVsIGJsb3F1ZSBGQVEgZGVsIGJyaWVmIDAyLCBwcmlvcml6YW5kbyBsYXMgcHJlZ3VudGFzIDEsIDIgeSAzLgoKKipGdWVudGVzIG9maWNpYWxlcyBhIGxpbmtlYXI6KioKLSBTdXBlcmludGVuZGVuY2lhIGRlIFBlbnNpb25lczogaHR0cHM6Ly93d3cuc3BlbnNpb25lcy5jbC9wb3J0YWwvaW5zdGl0dWNpb25hbC81OTQvdzMtcHJvcGVydHl2YWx1ZS05ODk3Lmh0bWwKCi0tLQoKIyMgQlJJRUYgMDcg4oCUIE1ldGEgdGl0bGUgQ0FFICJ2aWdlbnRlLCBGRVMgbm8gcmVlbXBsYXphIGHDum4iIChtZXRhZGF0YSkKCi0gKipUaXBvOioqIG1ldGFkYXRhCi0gKipVUkw6KiogL2NhbGN1bGFkb3Jhcy9jYWxjdWxhZG9yYS1jcmVkaXRvLWNhZQotICoqQ2x1c3RlcjoqKiBDQUUgRkVTIDIwMjYKLSAqKlByaW9yaWRhZDoqKiA3IChyZWZ1ZXJ6byBkZSBDVFIgc29icmUgbGEgVVJMIGRlbCBicmllZiAwMykKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIG5vIChtZXRhZGF0YSkKCioqSDE6KiogKG1hbnRlbmVyIGVsIGRlbCBicmllZiAwMykKCioqTWV0YSB0aXRsZSAoNTgpOioqIENBRSAyMDI2IFZpZ2VudGUgfCBFbCBGRVMgQcO6biBObyBSZWVtcGxhemEgYWwgQ0FFCgoqKk1ldGEgZGVzY3JpcHRpb24gKDE0OSk6KiogRWwgQ0FFIHNpZ3VlIHZpZ2VudGUgZW4gMjAyNjogdGFzYSBmaWphIDIlIGVuIFVGIHkgY29icm8gYSAxOCBtZXNlcy4gRWwgRkVTIGHDum4gZXMgcHJveWVjdG8gZGUgbGV5LCBubyBsbyBoYSByZWVtcGxhemFkby4gQ2FsY3VsYSB0dSBjdW90YSBhcXXDrS4KCioqUMOhcnJhZm8gZGUgYXBlcnR1cmEgKDQ2IHBhbGFicmFzKToqKiBFbiBqdWxpbyBkZSAyMDI2IGVsIENBRSBjb250aW7DumEgcGxlbmFtZW50ZSB2aWdlbnRlOiBtYW50aWVuZSBzdSB0YXNhIGZpamEgcmVhbCBkZSAyJSBlbiBVRiB5IGVsIGluaWNpbyBkZSBjb2JybyBhIGxvcyAxOCBtZXNlcyBkZWwgZWdyZXNvLiBFbCBGRVMgZXMgdW4gcHJveWVjdG8gZGUgbGV5IGFwcm9iYWRvIHBvciBsYSBDw6FtYXJhLCBwZXJvIHRvZGF2w61hIG5vIHJlZW1wbGF6YSBhbCBDQUUuCgoqKk5vdGEgZGUgbWV0YWRhdGE6KiogYXBsaWNhciBjb21vIHRlc3QgZGUgdGl0bGUvZGVzY3JpcHRpb24gZW5mb2NhZG8gZW4gbGEgY29uZnVzacOzbiBDQUUvRkVTLiBFbmxhemFyIGludGVybmFtZW50ZSBhbCBhcnTDrWN1bG8gZGVsIGJyaWVmIDEzIChDQUUgdnMgRkVTKS4KCioqRkFRIChzY2hlbWEtcmVhZHkpOioqIHByaW9yaXphciBsYXMgcHJlZ3VudGFzIDEsIDUgeSA2IGRlbCBicmllZiAwMy4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQ2hpbGVBdGllbmRlLCBDQUU6IGh0dHBzOi8vd3d3LmNoaWxlYXRpZW5kZS5nb2IuY2wvZmljaGFzLzk1ODMtY3JlZGl0by1jb24tZ2FyYW50aWEtZXN0YXRhbC1jYWUKLSBNaW5pc3RlcmlvIGRlIEhhY2llbmRhLCBGRVM6IGh0dHBzOi8vd3d3LmhhY2llbmRhLmNsL25vdGljaWFzLXktZXZlbnRvcy9ub3RpY2lhcy9jYW1hcmEtZGUtZGlwdXRhZG9zLXktZGlwdXRhZGFzLWFwcnVlYmEtcHJveWVjdG8tZGUtbGV5LXF1ZS1wb25lLWZpbi1hbC1jYWUteQoKLS0tCgojIyBCUklFRiAwOCDigJQgTWV0YSB0aXRsZSBncmF0aWZpY2FjacOzbiAidG9wZSAyMDI2IGNvbiBzdWVsZG8gbcOtbmltbyAkNTM5LjAwMCIgKG1ldGFkYXRhKQoKLSAqKlRpcG86KiogbWV0YWRhdGEKLSAqKlVSTDoqKiAvYmxvZy9jb21vLWZ1bmNpb25hLWdyYXRpZmljYWNpb24tbGVnYWwKLSAqKkNsdXN0ZXI6KiogZ3JhdGlmaWNhY2nDs24gbGVnYWwgMjAyNgotICoqUHJpb3JpZGFkOioqIDggKHJlZnVlcnpvIGRlIENUUiBzb2JyZSBsYSBVUkwgZGVsIGJyaWVmIDA0KQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6Kiogbm8KCioqSDE6KiogKG1hbnRlbmVyIGVsIGRlbCBicmllZiAwNCkKCioqTWV0YSB0aXRsZSAoNTgpOioqIEdyYXRpZmljYWNpw7NuIExlZ2FsIDIwMjYgfCBUb3BlIGNvbiBJTU0gJDUzOS4wMDAKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUyKToqKiBMYSBncmF0aWZpY2FjacOzbiBsZWdhbCAyMDI2IHNlIGNhbGN1bGEgY29uIGVsIGluZ3Jlc28gbcOtbmltbyBkZSAkNTM5LjAwMCB5IHVuIHRvcGUgZGUgNCw3NSBJTU0gKEFydC4gNTApLiBBcHJlbmRlIGEgY2FsY3VsYXJsYSBjb24gZGF0b3Mgb2ZpY2lhbGVzIGRlIGxhIERULgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNDggcGFsYWJyYXMpOioqIExhIGdyYXRpZmljYWNpw7NuIGxlZ2FsIHBvciBBcnTDrWN1bG8gNTAgdGllbmUgdW4gdG9wZSBkZSA0LDc1IGluZ3Jlc29zIG3DrW5pbW9zIG1lbnN1YWxlcyBhbCBhw7FvLiBDb24gZWwgaW5ncmVzbyBtw61uaW1vIGRlICQ1MzkuMDAwIHZpZ2VudGUgZW4gMjAyNiwgZXNlIHRvcGUgZnVuY2lvbmEgY29tbyBsw61taXRlIG3DoXhpbW8gZGVsIGJlbmVmaWNpbyBhbnVhbC4gRWwgZW1wbGVhZG9yIHB1ZWRlIG9wdGFyIHBvciBlbCBBcnTDrWN1bG8gNDcgc2kgbGUgcmVzdWx0YSBtw6FzIGNvbnZlbmllbnRlLgoKKipOb3RhIGRlIG1ldGFkYXRhOioqIHZhcmlhbnRlIGRlIHRpdGxlL2Rlc2NyaXB0aW9uIHF1ZSBjYXBpdGFsaXphIGxhIGFjdHVhbGl6YWNpw7NuIGRlbCBJTU0gMjAyNi4gVmVyaWZpY2FyIGxhIGbDs3JtdWxhIGV4YWN0YSBkZWwgdG9wZSBjb24gbGEgRFQgYW50ZXMgZGUgcHVibGljYXIgY2lmcmFzIGVuIHBlc29zLgoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KiogcHJpb3JpemFyIGxhcyBwcmVndW50YXMgMiwgMyB5IDQgZGVsIGJyaWVmIDA0LgoKKipGdWVudGVzIG9maWNpYWxlcyBhIGxpbmtlYXI6KioKLSBEaXJlY2Npw7NuIGRlbCBUcmFiYWpvLCBncmF0aWZpY2FjacOzbjogaHR0cHM6Ly93d3cuZHQuZ29iLmNsL3BvcnRhbC8xNjI2L3czLWFydGljbGUtOTkwMzQuaHRtbAotIERpcmVjY2nDs24gZGVsIFRyYWJham8sIHN1ZWxkbyBtw61uaW1vIDIwMjY6IGh0dHBzOi8vd3d3LmR0LmdvYi5jbC9sZWdpc2xhY2lvbi8xNjI0L2FydGljbGVzLTEyNzk2OV9yZWN1cnNvX2RvYy5wZGYKCi0tLQoKIyMgQlJJRUYgMDkg4oCUIENhbGN1bGFkb3JhIGFwb3J0ZSBlbXBsZWFkb3IgcmVmb3JtYSBwcmV2aXNpb25hbCAyMDI2IChjYWxjdWxhZG9yYSBudWV2YSkKCi0gKipUaXBvOioqIGNhbGN1bGFkb3JhIG51ZXZhCi0gKipVUkw6KiogL2NhbGN1bGFkb3Jhcy9jYWxjdWxhZG9yYS1hcG9ydGUtZW1wbGVhZG9yLXJlZm9ybWEtcHJldmlzaW9uYWwKLSAqKkNsdXN0ZXI6KiogYXBvcnRlIGVtcGxlYWRvciByZWZvcm1hIHByZXZpc2lvbmFsLCAzLDUlCi0gKipQcmlvcmlkYWQ6KiogOSAoZ2FwIHNpbiBjb21wZXRlbmNpYSArIHRlbWEgZW1lcmdlbnRlKQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6Kiogc8OtCgoqKkgxOioqIENhbGN1bGFkb3JhIGFwb3J0ZSBlbXBsZWFkb3IgcmVmb3JtYSBwcmV2aXNpb25hbCAyMDI2OiBjdcOhbnRvIHN1YmUgZWwgY29zdG8gZW1wcmVzYQoKKipNZXRhIHRpdGxlICg1Nyk6KiogQXBvcnRlIEVtcGxlYWRvciAyMDI2IHwgQ2FsY3VsYWRvcmEgUmVmb3JtYSBBRlAKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTU0KToqKiBDYWxjdWxhIGVsIG51ZXZvIGFwb3J0ZSBkZWwgZW1wbGVhZG9yIGRlIGxhIHJlZm9ybWEgcHJldmlzaW9uYWwgMjAyNi4gRW4gYWdvc3RvIGxsZWdhIGFsIDMsNSUgZGVsIHN1ZWxkbyBpbXBvbmlibGUsIGNvbiB0b3BlIGRlIDkwIFVGLiBEYXRvcyBMZXkgMjEuNzM1LgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTQgcGFsYWJyYXMpOioqIExhIHJlZm9ybWEgcHJldmlzaW9uYWwgKExleSAyMS43MzUpIGNyZWEgdW4gYXBvcnRlIGFkaWNpb25hbCBhIGNhcmdvIGRlbCBlbXBsZWFkb3IgcXVlIGVuIGFnb3N0byBkZSAyMDI2IGFsY2FuemEgdW4gMyw1JSBkZSBsYSByZW11bmVyYWNpw7NuIGltcG9uaWJsZSwgY29uIHRvcGUgZGUgOTAgVUYuIEVzZSBhcG9ydGUgc2UgZGlzdHJpYnV5ZSBlbnRyZSBjdWVudGEgaW5kaXZpZHVhbCwgY29tcGVuc2FjacOzbiB5IHNlZ3VybyBzb2NpYWwuIFVzYSBsYSBjYWxjdWxhZG9yYSBwYXJhIGVzdGltYXIgZWwgbnVldm8gY29zdG8gcG9yIHRyYWJhamFkb3IuCgoqKkVzdHJ1Y3R1cmEgSDIvSDM6KioKLSBIMjogUXXDqSBlc3RhYmxlY2UgbGEgcmVmb3JtYSBwcmV2aXNpb25hbCBMZXkgMjEuNzM1Ci0gSDI6IEPDs21vIHNlIGNhbGN1bGEgZWwgYXBvcnRlIGRlbCBlbXBsZWFkb3IgZW4gMjAyNgogIC0gSDM6IEVsIHRvcGUgaW1wb25pYmxlIGRlIDkwIFVGCiAgLSBIMzogRGlzdHJpYnVjacOzbjogY3VlbnRhIGluZGl2aWR1YWwsIGNvbXBlbnNhY2nDs24geSBzZWd1cm8gc29jaWFsCiAgLSBIMzogRWwgY2FsZW5kYXJpbyBkZSBhdW1lbnRvIGdyYWR1YWwKLSBIMjogRWplbXBsbzogY3XDoW50byBzdWJlIGVsIGNvc3RvIHBvciB1biB0cmFiYWphZG9yIGRlICQ4MDAuMDAwCi0gSDI6IEltcGFjdG8gcGFyYSBweW1lcyB5IGVtcGxlYWRvcmVzCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv0N1w6FudG8gZXMgZWwgYXBvcnRlIGRlbCBlbXBsZWFkb3IgZW4gMjAyNj8g4oCUIEVuIGFnb3N0byBkZSAyMDI2IGVsIGFwb3J0ZSB0b3RhbCBkZWwgZW1wbGVhZG9yIGFsY2FuemEgZWwgMyw1JSBkZSBsYSByZW11bmVyYWNpw7NuIGltcG9uaWJsZS4KMi4gwr9Tb2JyZSBxdcOpIG1vbnRvIHNlIGNhbGN1bGEgZWwgYXBvcnRlPyDigJQgU29icmUgbGEgcmVtdW5lcmFjacOzbiBpbXBvbmlibGUsIGNvbiB1biB0b3BlIGRlIDkwIFVGLgozLiDCv0EgcXXDqSBzZSBkZXN0aW5hIGVsIGFwb3J0ZSBkZWwgZW1wbGVhZG9yPyDigJQgU2UgcmVwYXJ0ZSBlbnRyZSBsYSBjdWVudGEgaW5kaXZpZHVhbCBkZWwgdHJhYmFqYWRvciwgY29tcGVuc2FjacOzbiBwb3IgZXhwZWN0YXRpdmEgZGUgdmlkYSB5IGVsIFNlZ3VybyBTb2NpYWwgUHJldmlzaW9uYWwuCjQuIMK/RWwgYXBvcnRlIGxvIHBhZ2EgZWwgdHJhYmFqYWRvciBvIGVsIGVtcGxlYWRvcj8g4oCUIExvIHBhZ2EgZWwgZW1wbGVhZG9yOyBlcyBhZGljaW9uYWwgYSBsYSBjb3RpemFjacOzbiBkZWwgMTAlIGRlbCB0cmFiYWphZG9yLgo1LiDCv0VsIGFwb3J0ZSBzZWd1aXLDoSBzdWJpZW5kbz8g4oCUIFPDrSwgbGEgTGV5IDIxLjczNSBjb250ZW1wbGEgdW4gYXVtZW50byBncmFkdWFsIGRlbCBhcG9ydGUgZW4gbG9zIGHDsW9zIHNpZ3VpZW50ZXMuCjYuIMK/RXN0ZSBjw6FsY3VsbyByZWVtcGxhemEgbGEgbGlxdWlkYWNpw7NuIG9maWNpYWw/IOKAlCBObywgZXMgdW5hIGVzdGltYWNpw7NuIHJlZmVyZW5jaWFsOyBsYSBkZXRlcm1pbmFjacOzbiBvZmljaWFsIGxhIHJlYWxpemEgbGEgcHJldmlzacOzbiBjb3JyZXNwb25kaWVudGUuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIENoaWxlQXRpZW5kZSwgUmVmb3JtYSBkZSBQZW5zaW9uZXM6IGh0dHBzOi8vd3d3LmNoaWxlYXRpZW5kZS5nb2IuY2wvcmVmb3JtYWRlcGVuc2lvbmVzCi0gQkNOLCBMZXkgMjEuNzM1OiBodHRwczovL3d3dy5iY24uY2wvbGV5Y2hpbGUvbmF2ZWdhcj9pZE5vcm1hPTEyMTIwNjAKCi0tLQoKIyMgQlJJRUYgMTAg4oCUIFRvcGUgaW1wb25pYmxlIDIwMjY6IEFGUCA5MCBVRiB5IGNlc2FudMOtYSAxMzUsMiBVRiAoYXJ0w61jdWxvIG51ZXZvKQoKLSAqKlRpcG86KiogYXJ0w61jdWxvIG51ZXZvCi0gKipVUkw6KiogL2Jsb2cvdG9wZS1pbXBvbmlibGUtYWZwLXNlZ3Vyby1jZXNhbnRpYS0yMDI2Ci0gKipDbHVzdGVyOioqIHRvcGUgaW1wb25pYmxlIEFGUCAyMDI2LCA5MCBVRgotICoqUHJpb3JpZGFkOioqIDEwIChnYXAgY29uIGNvbnRyYWRpY2Npw7NuIGVuZXJvL2ZlYnJlcm8pCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBzw60KCioqSDE6KiogVG9wZSBpbXBvbmlibGUgMjAyNiBlbiBDaGlsZTogQUZQIDkwIFVGIHkgc2VndXJvIGRlIGNlc2FudMOtYSAxMzUsMiBVRgoKKipNZXRhIHRpdGxlICg1NSk6KiogVG9wZSBJbXBvbmlibGUgMjAyNiB8IEFGUCA5MCBVRiB5IENlc2FudMOtYSAxMzUsMgoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTApOioqIFRvcGVzIGltcG9uaWJsZXMgMjAyNjogQUZQLCBzYWx1ZCB5IGFjY2lkZW50ZXMgOTAgVUY7IHNlZ3VybyBkZSBjZXNhbnTDrWEgMTM1LDIgVUYsIHZpZ2VudGVzIGRlc2RlIGZlYnJlcm8uIEhpc3RvcmlhbCB5IGNhbGN1bGFkb3JhIHNvYnJlIGVsIHRvcGUuCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg1MiBwYWxhYnJhcyk6KiogRW4gMjAyNiwgZWwgdG9wZSBpbXBvbmlibGUgcGFyYSBBRlAsIHNhbHVkIHkgYWNjaWRlbnRlcyBkZWwgdHJhYmFqbyBlcyA5MCBVRiwgeSBlbCBkZWwgc2VndXJvIGRlIGNlc2FudMOtYSBlcyAxMzUsMiBVRiwgYW1ib3MgdmlnZW50ZXMgZGVzZGUgZWwgMSBkZSBmZWJyZXJvIGRlIDIwMjYuIEVuIGVuZXJvIHJpZ2llcm9uIHZhbG9yZXMgbGV2ZW1lbnRlIG1lbm9yZXMgKDg5LDkgVUYgeSAxMzUsMSBVRiksIGxvIHF1ZSBnZW5lcmEgY29uZnVzacOzbiBmcmVjdWVudGUuCgoqKkVzdHJ1Y3R1cmEgSDIvSDM6KioKLSBIMjogUXXDqSBlcyBlbCB0b3BlIGltcG9uaWJsZSB5IHBhcmEgcXXDqSBzaXJ2ZQotIEgyOiBUb3BlcyBpbXBvbmlibGVzIHZpZ2VudGVzIGVuIDIwMjYKICAtIEgzOiBBRlAsIHNhbHVkIHkgYWNjaWRlbnRlczogOTAgVUYKICAtIEgzOiBTZWd1cm8gZGUgY2VzYW50w61hOiAxMzUsMiBVRgogIC0gSDM6IExhIGNvcnJlY2Npw7NuIGRlIGZlYnJlcm8gKDg5LDkg4oaSIDkwLDAgVUYpCi0gSDI6IFF1w6kgcGFzYSBjb24gbGEgcGFydGUgZGVsIHN1ZWxkbyBzb2JyZSBlbCB0b3BlCi0gSDI6IEVqZW1wbG86IGNvdGl6YWNpb25lcyBkZSB1biBzdWVsZG8gZGUgJDYuMDAwLjAwMAotIEgyOiBDdcOhbmRvIHNlIGFjdHVhbGl6YW4gbG9zIHRvcGVzCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv0N1w6FsIGVzIGVsIHRvcGUgaW1wb25pYmxlIGRlIGxhIEFGUCBlbiAyMDI2PyDigJQgOTAgVUYgcGFyYSBBRlAsIHNhbHVkIHkgYWNjaWRlbnRlcyBkZWwgdHJhYmFqbywgdmlnZW50ZSBkZXNkZSBlbCAxIGRlIGZlYnJlcm8gZGUgMjAyNi4KMi4gwr9DdcOhbCBlcyBlbCB0b3BlIGltcG9uaWJsZSBkZWwgc2VndXJvIGRlIGNlc2FudMOtYT8g4oCUIDEzNSwyIFVGIGVuIDIwMjYsIHRhbWJpw6luIHZpZ2VudGUgZGVzZGUgZmVicmVyby4KMy4gwr9Qb3IgcXXDqSBlbiBlbmVybyBlcmEgODksOSBVRj8g4oCUIEVuIGVuZXJvIGRlIDIwMjYgZWwgdG9wZSBmdWUgODksOSBVRjsgc2UgYWp1c3TDsyBhIDkwLDAgVUYgZGVzZGUgZmVicmVybyBwb3IgcmVzb2x1Y2nDs24gb2ZpY2lhbC4KNC4gwr9RdcOpIHBhc2EgY29uIGVsIHN1ZWxkbyBxdWUgc3VwZXJhIGVsIHRvcGU/IOKAlCBMYSBwYXJ0ZSBxdWUgZXhjZWRlIGVsIHRvcGUgbm8gY290aXphIHBhcmEgQUZQIG5pIGNlc2FudMOtYTsgZWwgaW1wdWVzdG8gc8OtIHNlIGFwbGljYSBzb2JyZSBlbCB0b3RhbC4KNS4gwr9Mb3MgdG9wZXMgY2FtYmlhbiBjYWRhIGHDsW8/IOKAlCBTw60sIHNlIGFqdXN0YW4gYW51YWxtZW50ZSBzZWfDum4gbGEgdmFyaWFjacOzbiByZWFsIGRlIGxhcyByZW11bmVyYWNpb25lcy4KNi4gwr9FbCB0b3BlIGRlIHNhbHVkIGVzIGlndWFsIGFsIGRlIEFGUD8g4oCUIFPDrSwgZWwgdG9wZSBkZSA5MCBVRiBhcGxpY2EgdGFtYmnDqW4gYSBsYSBjb3RpemFjacOzbiBkZSBzYWx1ZCBkZWwgNyUuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIERpcmVjY2nDs24gZGVsIFRyYWJham8sIHRvcGUgQUZQOiBodHRwczovL2R0LmdvYi5jbC9wb3J0YWwvMTYyOC93My1hcnRpY2xlLTExODA3Ni5odG1sCi0gRGlyZWNjacOzbiBkZWwgVHJhYmFqbywgdG9wZSBjZXNhbnTDrWE6IGh0dHBzOi8vZHQuZ29iLmNsL3BvcnRhbC8xNjI4L3czLWFydGljbGUtMTE4MDc3Lmh0bWwKLSBCQ04sIFJlc29sdWNpw7NuIDIzNzogaHR0cHM6Ly93d3cuYmNuLmNsL2xleWNoaWxlL25hdmVnYXI/aWROb3JtYT0xMjIxNzEwCgotLS0KCiMjIEJSSUVGIDExIOKAlCBDYWxjdWxhZG9yYSBQR1UgMjAyNiBwb3IgZWRhZCB5IHBlbnNpw7NuIGJhc2UgKGNhbGN1bGFkb3JhIG51ZXZhKQoKLSAqKlRpcG86KiogY2FsY3VsYWRvcmEgbnVldmEKLSAqKlVSTDoqKiAvY2FsY3VsYWRvcmFzL2NhbGN1bGFkb3JhLXBndQotICoqQ2x1c3RlcjoqKiBQR1UgbW9udG8gMjAyNiwgYXVtZW50byBQR1UKLSAqKlByaW9yaWRhZDoqKiAxMSAoZ2FwOiB1c3VhcmlvIG5lY2VzaXRhIG1vbnRvIHByb3BpbykKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrQoKKipIMToqKiBDYWxjdWxhZG9yYSBQR1UgMjAyNjogY3XDoW50byB0ZSBjb3JyZXNwb25kZSBzZWfDum4gdHUgZWRhZCB5IHBlbnNpw7NuCgoqKk1ldGEgdGl0bGUgKDUyKToqKiBDYWxjdWxhZG9yYSBQR1UgMjAyNiB8IE1vbnRvIFNlZ8O6biBFZGFkIHkgUGVuc2nDs24KCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUxKToqKiBDYWxjdWxhIHR1IFBlbnNpw7NuIEdhcmFudGl6YWRhIFVuaXZlcnNhbCAyMDI2LiBIYXN0YSAkMjUwLjI3NSBwYXJhIDgyKyB5ICQyMzEuNzMyIGdlbmVyYWwsIHNlZ8O6biB0dSBwZW5zacOzbiBiYXNlLiBFc3RpbWFjacOzbiBjb24gZGF0b3MgZGUgQ2hpbGVBdGllbmRlLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTMgcGFsYWJyYXMpOioqIExhIFBlbnNpw7NuIEdhcmFudGl6YWRhIFVuaXZlcnNhbCAoUEdVKSBlbiAyMDI2IGVzIGRlIGhhc3RhICQyNTAuMjc1IHBhcmEgcGVyc29uYXMgZGUgODIgYcOxb3MgbyBtw6FzLCB5ICQyMzEuNzMyIHBhcmEgZWwgcmVzdG8uIEVsIG1vbnRvIGRpc21pbnV5ZSBhIG1heW9yIHBlbnNpw7NuIGJhc2U6IHF1aWVuZXMgcmVjaWJlbiB1bmEgcGVuc2nDs24gaW5mZXJpb3IgYSAkNzg5LjEzOSBvYnRpZW5lbiBlbCBtw6F4aW1vLiBTb2JyZSAkMS4yNTIuNjAyIG5vIGhheSBkZXJlY2hvLiBVc2EgbGEgY2FsY3VsYWRvcmEgcGFyYSBlc3RpbWFyIHR1IG1vbnRvLgoKKipFc3RydWN0dXJhIEgyL0gzOioqCi0gSDI6IFF1w6kgZXMgbGEgUEdVIHkgcXVpw6luIHB1ZWRlIHJlY2liaXJsYQotIEgyOiBNb250b3MgZGUgbGEgUEdVIGVuIDIwMjYKICAtIEgzOiAkMjUwLjI3NSBwYXJhIDgyIGHDsW9zIG8gbcOhcyAoZGVzZGUgZmVicmVybyAyMDI2KQogIC0gSDM6ICQyNTAuMjc1IHBhcmEgNzUrIGRlc2RlIHNlcHRpZW1icmUgMjAyNgogIC0gSDM6ICQyMzEuNzMyIHBhcmEgZWwgcmVzdG8KLSBIMjogQ8OzbW8gYWZlY3RhIHR1IHBlbnNpw7NuIGJhc2UgYWwgbW9udG8gZGUgbGEgUEdVCiAgLSBIMzogVG9wZSBpbmZlcmlvciAoJDc4OS4xMzkpIHkgc3VwZXJpb3IgKCQxLjI1Mi42MDIpCi0gSDI6IFJlcXVpc2l0b3MgcGFyYSBhY2NlZGVyIGEgbGEgUEdVCi0gSDI6IEPDs21vIHBvc3R1bGFyIGEgbGEgUEdVCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv0N1w6FudG8gZXMgbGEgUEdVIGVuIDIwMjY/IOKAlCBIYXN0YSAkMjUwLjI3NSBwYXJhIHBlcnNvbmFzIGRlIDgyIGHDsW9zIG8gbcOhcyB5ICQyMzEuNzMyIHBhcmEgZWwgcmVzdG8gZGUgbG9zIGJlbmVmaWNpYXJpb3MuCjIuIMK/UXVpw6luIHJlY2liZSBlbCBtb250byBtw6F4aW1vIGRlIFBHVT8g4oCUIFF1aWVuZXMgdGllbmVuIHVuYSBwZW5zacOzbiBiYXNlIGF1dG9maW5hbmNpYWRhIGluZmVyaW9yIGEgJDc4OS4xMzkgcmVjaWJlbiBlbCBtb250byBjb21wbGV0by4KMy4gwr9EZXNkZSBjdcOhbmRvIHN1YmVuIGxvcyA3NSBhw7FvcyBhICQyNTAuMjc1PyDigJQgRWwgYXVtZW50byBwYXJhIHBlcnNvbmFzIGRlIDc1IGHDsW9zIG8gbcOhcyByaWdlIGRlc2RlIHNlcHRpZW1icmUgZGUgMjAyNi4KNC4gwr9IYXkgdW4gbMOtbWl0ZSBkZSBwZW5zacOzbiBwYXJhIHJlY2liaXIgUEdVPyDigJQgU8OtLiBRdWllbmVzIHRpZW5lbiB1bmEgcGVuc2nDs24gYmFzZSBzb2JyZSAkMS4yNTIuNjAyIG5vIHRpZW5lbiBkZXJlY2hvIGEgbGEgUEdVLgo1LiDCv1F1w6kgcmVxdWlzaXRvcyBoYXkgcGFyYSBsYSBQR1U/IOKAlCBUZW5lciA2NSBhw7FvcyBvIG3DoXMsIGludGVncmFyIGVsIDkwJSBkZSBtZW5vcmVzIGluZ3Jlc29zIHkgY3VtcGxpciByZXF1aXNpdG9zIGRlIHJlc2lkZW5jaWEuCjYuIMK/RXN0ZSBjw6FsY3VsbyBlcyBvZmljaWFsPyDigJQgTm8sIGVzIHVuYSBlc3RpbWFjacOzbiByZWZlcmVuY2lhbDsgZWwgbW9udG8gbG8gZGV0ZXJtaW5hIGVsIEluc3RpdHV0byBkZSBQcmV2aXNpw7NuIFNvY2lhbCAoSVBTKS4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQ2hpbGVBdGllbmRlLCBQR1U6IGh0dHBzOi8vd3d3LmNoaWxlYXRpZW5kZS5nb2IuY2wvZmljaGFzLzEwMjA3Ny1wZW5zaW9uLWdhcmFudGl6YWRhLXVuaXZlcnNhbC1wZ3UKLSBDaGlsZUF0aWVuZGUsIGF1bWVudG8gUEdVOiBodHRwczovL3d3dy5jaGlsZWF0aWVuZGUuZ29iLmNsL2ZpY2hhcy8xMzA0NTctYXVtZW50by1kZS1sYS1wZW5zaW9uLWdhcmFudGl6YWRhLXVuaXZlcnNhbC1wZ3UKCi0tLQoKIyMgQlJJRUYgMTIg4oCUIEJvbGV0YSBkZSBob25vcmFyaW9zIDIwMjY6IGJydXRvL2zDrXF1aWRvIGNvbiByZXRlbmNpw7NuIDE1LDI1JSAoY2FsY3VsYWRvcmEgdXBncmFkZSkKCi0gKipUaXBvOioqIGNhbGN1bGFkb3JhIHVwZ3JhZGUKLSAqKlVSTDoqKiAvY2FsY3VsYWRvcmFzL2NhbGN1bGFkb3JhLWJvbGV0YS1ob25vcmFyaW9zCi0gKipDbHVzdGVyOioqIGJvbGV0YSBob25vcmFyaW9zIDIwMjYgcmV0ZW5jacOzbgotICoqUHJpb3JpZGFkOioqIDEyIChhbHRvIHZvbHVtZW4sIGVzZnVlcnpvIGJham8pCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBzw60KCioqSDE6KiogQ2FsY3VsYWRvcmEgYm9sZXRhIGRlIGhvbm9yYXJpb3MgMjAyNjogYnJ1dG8sIGzDrXF1aWRvIHkgcmV0ZW5jacOzbiAxNSwyNSUKCioqTWV0YSB0aXRsZSAoNTYpOioqIEJvbGV0YSBkZSBIb25vcmFyaW9zIDIwMjYgfCBCcnV0bywgTMOtcXVpZG8geSAxNSwyNSUKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUxKToqKiBDYWxjdWxhIHR1IGJvbGV0YSBkZSBob25vcmFyaW9zIDIwMjYgY29uIGxhIHJldGVuY2nDs24gZGVsIDE1LDI1JS4gQ29udmllcnRlIGJydXRvIGEgbMOtcXVpZG8geSB2aWNldmVyc2EuIFN1YmUgYSAxNiUgZW4gMjAyNyB5IDE3JSBlbiAyMDI4LiBEYXRvcyBTSUkuCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg0OSBwYWxhYnJhcyk6KiogRW4gMjAyNiwgbGEgYm9sZXRhIGRlIGhvbm9yYXJpb3MgdGllbmUgdW5hIHJldGVuY2nDs24gZGVsIDE1LDI1JSBxdWUgc2UgZGVzY3VlbnRhIGRlbCBtb250byBicnV0by4gU2kgZW1pdGVzIHVuYSBib2xldGEgZGUgJDEwMC4wMDAgYnJ1dG9zLCByZWNpYmVzICQ4NC43NTAgbMOtcXVpZG9zLiBFc3RhIHJldGVuY2nDs24gc3ViaXLDoSBncmFkdWFsbWVudGUgYSAxNiUgZW4gMjAyNyB5IDE3JSBlbiAyMDI4LiBVc2EgbGEgY2FsY3VsYWRvcmEgcGFyYSBjb252ZXJ0aXIgZW50cmUgYnJ1dG8geSBsw61xdWlkby4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBDw7NtbyBmdW5jaW9uYSBsYSByZXRlbmNpw7NuIGRlIGxhIGJvbGV0YSBkZSBob25vcmFyaW9zCi0gSDI6IENhbGN1bGFyIGJvbGV0YTogZGUgYnJ1dG8gYSBsw61xdWlkbyB5IHZpY2V2ZXJzYQotIEgyOiBMYSBncmFkdWFsaWRhZCBkZSBsYSByZXRlbmNpw7NuIDIwMjUtMjAyOAogIC0gSDM6IDE1LDI1JSBlbiAyMDI2LCAxNiUgZW4gMjAyNywgMTclIGVuIDIwMjgKLSBIMjogUG9yIHF1w6kgc2UgcmV0aWVuZTogbGEgT3BlcmFjacOzbiBSZW50YSB5IGVsIFBQTQotIEgyOiBFamVtcGxvIHByw6FjdGljbyBjb24gZGlzdGludG9zIG1vbnRvcwotIEgyOiBQcmVndW50YXMgZnJlY3VlbnRlcwoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KioKMS4gwr9DdcOhbCBlcyBsYSByZXRlbmNpw7NuIGRlIGxhIGJvbGV0YSBkZSBob25vcmFyaW9zIGVuIDIwMjY/IOKAlCBFbCAxNSwyNSUgZGVsIG1vbnRvIGJydXRvLgoyLiDCv0N1w6FudG8gcmVjaWJvIGzDrXF1aWRvIHBvciB1bmEgYm9sZXRhIGRlICQxMDAuMDAwPyDigJQgUmVjaWJlcyAkODQuNzUwIGzDrXF1aWRvcywgeWEgcXVlIHNlIHJldGllbmUgZWwgMTUsMjUlLgozLiDCv0xhIHJldGVuY2nDs24gdmEgYSBzdWJpcj8g4oCUIFPDrSwgc3ViZSBhIDE2JSBlbiAyMDI3IHkgYSAxNyUgZW4gMjAyOC4KNC4gwr9RdWnDqW4gcGFnYSBsYSByZXRlbmNpw7NuPyDigJQgTGEgcmV0aWVuZSB5IGVudGVyYSBhbCBTSUkgcXVpZW4gcmVjaWJlIGVsIHNlcnZpY2lvIChlbXByZXNhKSBvIGVsIHByb3BpbyBlbWlzb3Igc2kgZWwgY2xpZW50ZSBlcyBwZXJzb25hIG5hdHVyYWwuCjUuIMK/TGEgcmV0ZW5jacOzbiBzZSByZWN1cGVyYT8g4oCUIFB1ZWRlIGRldm9sdmVyc2UgdG90YWwgbyBwYXJjaWFsbWVudGUgZW4gbGEgT3BlcmFjacOzbiBSZW50YSBkZSBhYnJpbCwgc2Vnw7puIHR1IHNpdHVhY2nDs24gdHJpYnV0YXJpYSBhbnVhbC4KNi4gwr9EZWJvIGNvdGl6YXIgY29uIG1pcyBob25vcmFyaW9zPyDigJQgU8OtLCBsb3MgdHJhYmFqYWRvcmVzIGluZGVwZW5kaWVudGVzIGNvdGl6YW4gb2JsaWdhdG9yaWFtZW50ZSBjb24gY2FyZ28gYSBsYSByZXRlbmNpw7NuIGVuIGxhIGRlY2xhcmFjacOzbiBhbnVhbC4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gU0lJLCBib2xldGFzIGRlIGhvbm9yYXJpb3M6IGh0dHBzOi8vd3d3LnNpaS5jbC9kZXN0YWNhZG9zL2JvbGV0YXNfaG9ub3Jhcmlvcy8KLSBTSUksIGF1bWVudG8gZ3JhZHVhbCByZXRlbmNpw7NuOiBodHRwczovL3d3dy5zaWkuY2wvZGVzdGFjYWRvcy9ib2xldGFzX2hvbm9yYXJpb3MvYXVtZW50b19ncmFkdWFsLmh0bWwKCi0tLQoKIyMgQlJJRUYgMTMg4oCUIENBRSB2cyBGRVMgMjAyNjogcXXDqSBlc3TDoSB2aWdlbnRlIHkgcXXDqSBlcyBwcm95ZWN0byAoYXJ0w61jdWxvIG51ZXZvKQoKLSAqKlRpcG86KiogYXJ0w61jdWxvIG51ZXZvCi0gKipVUkw6KiogL2Jsb2cvY2FlLXZzLWZlcy0yMDI2Ci0gKipDbHVzdGVyOioqIEZFUyBDQUUgMjAyNiwgZmluIGRlbCBDQUUKLSAqKlByaW9yaWRhZDoqKiAxMyAoZ2FwIGFsdG86IGRlc2luZm9ybWFjacOzbiBGRVMpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBubyAodHJhY2tlcikKCioqSDE6KiogQ0FFIHZzIEZFUyAyMDI2OiBxdcOpIGVzdMOhIHZpZ2VudGUgeSBxdcOpIGVzIHNvbG8gdW4gcHJveWVjdG8gZGUgbGV5CgoqKk1ldGEgdGl0bGUgKDU0KToqKiBDQUUgdnMgRkVTIDIwMjYgfCBRdcOpIEVzdMOhIFZpZ2VudGUgeSBRdcOpIE5vCgoqKk1ldGEgZGVzY3JpcHRpb24gKDE1Mik6KiogRWwgQ0FFIHNpZ3VlIHZpZ2VudGUgZW4gMjAyNjsgZWwgRkVTIGVzIGHDum4gdW4gcHJveWVjdG8gZGUgbGV5IGFwcm9iYWRvIHBvciBsYSBDw6FtYXJhLCBubyBsbyBoYSByZWVtcGxhemFkby4gRGlmZXJlbmNpYXMsIGVzdGFkbyBsZWdpc2xhdGl2byB5IHF1w6kgZXNwZXJhci4KCioqUMOhcnJhZm8gZGUgYXBlcnR1cmEgKDUwIHBhbGFicmFzKToqKiBFbiBqdWxpbyBkZSAyMDI2LCBlbCBDQUUgKENyw6lkaXRvIGNvbiBHYXJhbnTDrWEgRXN0YXRhbCkgc2lndWUgcGxlbmFtZW50ZSB2aWdlbnRlLiBFbCBGRVMgKEZpbmFuY2lhbWllbnRvIGEgbGEgRWR1Y2FjacOzbiBTdXBlcmlvcikgZXMgdW4gcHJveWVjdG8gZGUgbGV5IGFwcm9iYWRvIHBvciBsYSBDw6FtYXJhIGRlIERpcHV0YWRvcyBxdWUgYnVzY2EgcmVlbXBsYXphciBhbCBDQUUsIHBlcm8gYcO6biBubyBlcyBsZXkgeSBubyBlc3TDoSBvcGVyYXRpdm8uIEFxdcOtIGxhcyBkaWZlcmVuY2lhcyBjbGF2ZS4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBRdcOpIGVzIGVsIENBRSB5IHBvciBxdcOpIHNpZ3VlIHZpZ2VudGUKLSBIMjogUXXDqSBwcm9wb25lIGVsIEZFUwogIC0gSDM6IFBhZ28gY29udGluZ2VudGUgYWwgaW5ncmVzbwogIC0gSDM6IFJlZW1wbGF6byBkZSBDQUUsIEZvbmRvIFNvbGlkYXJpbyB5IGNyw6lkaXRvcyBDb3JmbwotIEgyOiBFc3RhZG8gbGVnaXNsYXRpdm8gZGVsIEZFUyBlbiAyMDI2ICh0cmFja2VyKQotIEgyOiBUYWJsYSBjb21wYXJhdGl2YSBDQUUgdnMgRkVTCi0gSDI6IFF1w6kgZGViZSBoYWNlciB1biBkZXVkb3IgQ0FFIG1pZW50cmFzIHRhbnRvCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv0VsIEZFUyB5YSByZWVtcGxhesOzIGFsIENBRSBlbiAyMDI2PyDigJQgTm8uIEVsIEZFUyBlcyB1biBwcm95ZWN0byBkZSBsZXk7IGVsIENBRSBzaWd1ZSB2aWdlbnRlIHkgb3BlcmF0aXZvLgoyLiDCv1F1w6kgZXMgZWwgRkVTPyDigJQgRWwgRmluYW5jaWFtaWVudG8gYSBsYSBFZHVjYWNpw7NuIFN1cGVyaW9yIGVzIHVuIHNpc3RlbWEgcHJvcHVlc3RvIGRlIHBhZ28gY29udGluZ2VudGUgYWwgaW5ncmVzbyBxdWUgYnVzY2EgcmVlbXBsYXphciBlbCBDQUUuCjMuIMK/RGVibyBkZWphciBkZSBwYWdhciBtaSBDQUUgcG9yIGVsIEZFUz8g4oCUIE5vLiBNaWVudHJhcyBlbCBGRVMgbm8gc2VhIGxleSwgZWwgQ0FFIG1hbnRpZW5lIHN1cyBvYmxpZ2FjaW9uZXMgeSBwbGF6b3MuCjQuIMK/UXXDqSByZWVtcGxhemFyw61hIGVsIEZFUz8g4oCUIEJ1c2NhIHJlZW1wbGF6YXIgZWwgQ0FFLCBlbCBGb25kbyBTb2xpZGFyaW8gZGUgQ3LDqWRpdG8gVW5pdmVyc2l0YXJpbyB5IGxvcyBjcsOpZGl0b3MgQ29yZm8uCjUuIMK/Q3XDoW5kbyBlbnRyYXLDrWEgZW4gdmlnZW5jaWEgZWwgRkVTPyDigJQgTm8gaGF5IGZlY2hhIHZpZ2VudGUgZW4ganVsaW8gZGUgMjAyNjsgZGVwZW5kZSBkZSBsYSB0cmFtaXRhY2nDs24gZW4gZWwgQ29uZ3Jlc28uCjYuIMK/RWwgRkVTIGNvbmRvbmEgbGEgZGV1ZGEgZGVsIENBRT8g4oCUIEVsIHByb3llY3RvIGNvbnRlbXBsYSBjYW1iaW9zIGRlIGNvbmRpY2lvbmVzLCBwZXJvIG5vIGRlYmUgYXN1bWlyc2UgY29uZG9uYWNpw7NuIGhhc3RhIHF1ZSBzZWEgbGV5IHByb211bGdhZGEuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIENoaWxlQXRpZW5kZSwgQ0FFOiBodHRwczovL3d3dy5jaGlsZWF0aWVuZGUuZ29iLmNsL2ZpY2hhcy85NTgzLWNyZWRpdG8tY29uLWdhcmFudGlhLWVzdGF0YWwtY2FlCi0gTWluaXN0ZXJpbyBkZSBIYWNpZW5kYSwgRkVTOiBodHRwczovL3d3dy5oYWNpZW5kYS5jbC9ub3RpY2lhcy15LWV2ZW50b3Mvbm90aWNpYXMvY2FtYXJhLWRlLWRpcHV0YWRvcy15LWRpcHV0YWRhcy1hcHJ1ZWJhLXByb3llY3RvLWRlLWxleS1xdWUtcG9uZS1maW4tYWwtY2FlLXkKCi0tLQoKIyMgQlJJRUYgMTQg4oCUIENhbGN1bGFkb3JhIFRhc2EgTcOheGltYSBDb252ZW5jaW9uYWwgQ01GIChjYWxjdWxhZG9yYSBudWV2YSkKCi0gKipUaXBvOioqIGNhbGN1bGFkb3JhIG51ZXZhCi0gKipVUkw6KiogL2NhbGN1bGFkb3Jhcy9jYWxjdWxhZG9yYS10YXNhLW1heGltYS1jb252ZW5jaW9uYWwKLSAqKkNsdXN0ZXI6KiogVE1DIENNRiBqdWxpbyAyMDI2LCB0YXNhIG3DoXhpbWEKLSAqKlByaW9yaWRhZDoqKiAxNCAoZ2FwOiBwb3J0YWwgQ01GIGNvbXBsZWpvKQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6Kiogc8OtCgoqKkgxOioqIFRhc2EgTcOheGltYSBDb252ZW5jaW9uYWwgMjAyNjogY29uc3VsdGEgZWwgaW50ZXLDqXMgbcOheGltbyBsZWdhbCBwb3IgdHJhbW8KCioqTWV0YSB0aXRsZSAoNTUpOioqIFRhc2EgTcOheGltYSBDb252ZW5jaW9uYWwgMjAyNiB8IFRNQyBwb3IgVHJhbW8gQ01GCgoqKk1ldGEgZGVzY3JpcHRpb24gKDE1MCk6KiogQ29uc3VsdGEgbGEgVGFzYSBNw6F4aW1hIENvbnZlbmNpb25hbCAoVE1DKSB2aWdlbnRlIHBvciB0cmFtbyBlbiAyMDI2IHNlZ8O6biBsYSBDTUYuIFZlcmlmaWNhIHNpIHR1IGNyw6lkaXRvIHN1cGVyYSBlbCBpbnRlcsOpcyBtw6F4aW1vIGxlZ2FsIHBlcm1pdGlkby4KCioqUMOhcnJhZm8gZGUgYXBlcnR1cmEgKDUyIHBhbGFicmFzKToqKiBMYSBUYXNhIE3DoXhpbWEgQ29udmVuY2lvbmFsIChUTUMpIGVzIGVsIGludGVyw6lzIG3DoXhpbW8gbGVnYWwgcXVlIHVuYSBlbnRpZGFkIHB1ZWRlIGNvYnJhciBlbiBDaGlsZTsgc3VwZXJhcmxvIGNvbnN0aXR1eWUgdXN1cmEuIExhIENNRiBsYSBwdWJsaWNhIG1lbnN1YWxtZW50ZSBwb3IgdHJhbW9zIGRlIG1vbnRvIHkgcGxhem8uIFBvciBlamVtcGxvLCBsb3MgY3LDqWRpdG9zIG5vIHJlYWp1c3RhYmxlcyBtZW5vcmVzIGEgOTAgZMOtYXMgZGUgaGFzdGEgNS4wMDAgVUYgdGVuw61hbiB1bmEgVE1DIGRlIDUyLDU5JSBhbnVhbC4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBRdcOpIGVzIGxhIFRhc2EgTcOheGltYSBDb252ZW5jaW9uYWwKLSBIMjogVGFibGEgZGUgVE1DIHZpZ2VudGUgcG9yIHRyYW1vIChjZXJ0aWZpY2FkbyBDTUYpCiAgLSBIMzogQ3LDqWRpdG9zIG5vIHJlYWp1c3RhYmxlcyBlbiBwZXNvcwogIC0gSDM6IENyw6lkaXRvcyByZWFqdXN0YWJsZXMgKFVGKQogIC0gSDM6IE1vbmVkYSBleHRyYW5qZXJhIHkgZGVzY3VlbnRvIHBvciBwZW5zacOzbgotIEgyOiBDw7NtbyBzYWJlciBzaSB0dSBjcsOpZGl0byBleGNlZGUgbGEgVE1DCi0gSDI6IFF1w6kgaGFjZXIgc2kgdGUgY29icmFuIHNvYnJlIGxhIFRNQwotIEgyOiBDdcOhbmRvIHNlIGFjdHVhbGl6YSBsYSBUTUMKLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/UXXDqSBlcyBsYSBUYXNhIE3DoXhpbWEgQ29udmVuY2lvbmFsPyDigJQgRXMgZWwgaW50ZXLDqXMgbcOheGltbyBsZWdhbCBxdWUgc2UgcHVlZGUgcGFjdGFyIGVuIHVuIGNyw6lkaXRvIGVuIENoaWxlOyBjb2JyYXIgcG9yIGVuY2ltYSBlcyB1c3VyYS4KMi4gwr9RdWnDqW4gZmlqYSBsYSBUTUM/IOKAlCBMYSBDb21pc2nDs24gcGFyYSBlbCBNZXJjYWRvIEZpbmFuY2llcm8gKENNRiksIHF1ZSBsYSBwdWJsaWNhIG1lbnN1YWxtZW50ZSBwb3IgdHJhbW9zLgozLiDCv0xhIFRNQyBlcyBsYSBtaXNtYSBwYXJhIHRvZG9zIGxvcyBjcsOpZGl0b3M/IOKAlCBOby4gVmFyw61hIHNlZ8O6biBlbCBtb250bywgZWwgcGxhem8geSBzaSBlbCBjcsOpZGl0byBlcyByZWFqdXN0YWJsZSBvIGVuIG1vbmVkYSBleHRyYW5qZXJhLgo0LiDCv1F1w6kgcGFzYSBzaSBtZSBjb2JyYW4gbcOhcyBxdWUgbGEgVE1DPyDigJQgRWwgZXhjZXNvIGVzIGlsZWdhbDsgcHVlZGVzIHJlY2xhbWFyIGFudGUgZWwgU0VSTkFDIHkgbGEgQ01GLCB5IGxvcyBpbnRlcmVzZXMgcHVlZGVuIHJlZHVjaXJzZSBhbCBtw6F4aW1vIGxlZ2FsLgo1LiDCv0NhZGEgY3XDoW50byBjYW1iaWEgbGEgVE1DPyDigJQgU2UgYWN0dWFsaXphIG1lbnN1YWxtZW50ZSBtZWRpYW50ZSBjZXJ0aWZpY2Fkb3MgcHVibGljYWRvcyBwb3IgbGEgQ01GIGVuIGVsIERpYXJpbyBPZmljaWFsLgo2LiDCv0xhIFRNQyBnYXJhbnRpemEgcXVlIG1lIGFwcnVlYmVuIHVuIGNyw6lkaXRvPyDigJQgTm8uIExhIFRNQyBzb2xvIGxpbWl0YSBlbCBpbnRlcsOpcyBtw6F4aW1vOyBsYSBhcHJvYmFjacOzbiBkZXBlbmRlIGRlIGxhIGV2YWx1YWNpw7NuIGRlIGNhZGEgZW50aWRhZC4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQ01GLCBUYXNhcyBkZSBpbnRlcsOpczogaHR0cHM6Ly90YXNhcy5jbWZjaGlsZS5jbC9zYmlmd2ViL3NlcnZsZXQvSW5mb0ZpbmFuY2llcmE/aW5kaWNlPTQuMQotIENNRiwgZGVzY2FyZ2EgYW51YWwgMjAyNjogaHR0cHM6Ly90YXNhcy5jbWZjaGlsZS5jbC9zYmlmd2ViL3NlcnZsZXQvSW5mb0ZpbmFuY2llcmE/aW5kaWNlPTQuMi4yJnllYXI9MjAyNgoKLS0tCgojIyBCUklFRiAxNSDigJQgVVRNLCBVVEEgeSBVRiBqdWxpbyAyMDI2OiB0YWJsYSBvZmljaWFsIHkgdXNvcyAoYXJ0w61jdWxvIG51ZXZvKQoKLSAqKlRpcG86KiogYXJ0w61jdWxvIG51ZXZvCi0gKipVUkw6KiogL2Jsb2cvdWYtdXRtLXV0YS1qdWxpby0yMDI2Ci0gKipDbHVzdGVyOioqIHZhbG9yIFVUTSBqdWxpbyAyMDI2LCBVRiBob3kKLSAqKlByaW9yaWRhZDoqKiAxNSAoYWx0byB2b2x1bWVuOyBkaWZpY3VsdGFkIGFsdGEgcGVybyByZWZ1ZXJ6YSBhdXRvcmlkYWQpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBzw60gKGNvbnZlcnNvcikKCioqSDE6KiogVUYsIFVUTSB5IFVUQSBlbiBqdWxpbyAyMDI2OiB2YWxvcmVzIG9maWNpYWxlcyB5IHBhcmEgcXXDqSBzaXJ2ZSBjYWRhIHVubwoKKipNZXRhIHRpdGxlICg1NCk6KiogVUYsIFVUTSB5IFVUQSBKdWxpbyAyMDI2IHwgVmFsb3JlcyBPZmljaWFsZXMKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTQ5KToqKiBWYWxvcmVzIG9maWNpYWxlcyBqdWxpbyAyMDI2OiBVVE0gJDcxLjY0OSwgVVRBICQ4NTkuNzg4IHkgVUYgc29icmUgJDQwLjgwMC4gRGVzY3VicmUgcGFyYSBxdcOpIHNpcnZlIGNhZGEgaW5kaWNhZG9yIHkgY29udmllcnRlIGEgcGVzb3MgYWwgaW5zdGFudGUuCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg1MSBwYWxhYnJhcyk6KiogRW4ganVsaW8gZGUgMjAyNiwgbGEgVVRNIGVzIGRlICQ3MS42NDkgeSBsYSBVVEEgZGUgJDg1OS43ODgsIG1pZW50cmFzIGxhIFVGIHJvbmRhIGxvcyAkNDAuODAwIGRpYXJpb3MuIExhIFVGIHJlYWp1c3RhIGFycmllbmRvcywgZGl2aWRlbmRvcyB5IGNyw6lkaXRvczsgbGEgVVRNIHNlIHVzYSBwYXJhIG11bHRhcyBlIGltcHVlc3RvczsgeSBsYSBVVEEgcGFyYSB0cmFtb3MgYW51YWxlcyBkZSByZW50YS4gQ29udmllcnRlIGN1YWxxdWllcmEgZGUgZWxsYXMgYSBwZXNvcyBhcXXDrS4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBWYWxvcmVzIG9maWNpYWxlcyBkZSBqdWxpbyAyMDI2CiAgLSBIMzogVVRNOiAkNzEuNjQ5CiAgLSBIMzogVVRBOiAkODU5Ljc4OAogIC0gSDM6IFVGOiB2YWxvciBkaWFyaW8geSBwcm9tZWRpbyBtZW5zdWFsCi0gSDI6IFBhcmEgcXXDqSBzaXJ2ZSBjYWRhIGluZGljYWRvcgogIC0gSDM6IFVGOiBhcnJpZW5kb3MsIGRpdmlkZW5kb3MsIGNyw6lkaXRvcyBoaXBvdGVjYXJpb3MKICAtIEgzOiBVVE06IG11bHRhcywgcGF0ZW50ZXMsIGltcHVlc3RvcyBtZW5zdWFsZXMKICAtIEgzOiBVVEE6IHRyYW1vcyBkZSByZW50YSBhbnVhbAotIEgyOiBDb252ZXJzb3IgVUYvVVRNL1VUQSBhIHBlc29zCi0gSDI6IEhpc3RvcmlhbCBtZW5zdWFsIDIwMjYKLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/Q3XDoW50byB2YWxlIGxhIFVUTSBlbiBqdWxpbyBkZSAyMDI2PyDigJQgTGEgVVRNIGRlIGp1bGlvIGRlIDIwMjYgZXMgJDcxLjY0OS4KMi4gwr9DdcOhbnRvIHZhbGUgbGEgVVRBIGVuIDIwMjY/IOKAlCBMYSBVVEEgZGUganVsaW8gZGUgMjAyNiBlcyAkODU5Ljc4OCwgZXF1aXZhbGVudGUgYSAxMiBVVE0uCjMuIMK/Q3XDoW50byB2YWxlIGxhIFVGIGhveT8g4oCUIExhIFVGIHJvbmRhIGxvcyAkNDAuODAwIGRpYXJpb3MgZW4ganVsaW8gZGUgMjAyNjsgc3UgdmFsb3IgY2FtYmlhIGNhZGEgZMOtYS4KNC4gwr9DdcOhbCBlcyBsYSBkaWZlcmVuY2lhIGVudHJlIFVGIHkgVVRNPyDigJQgTGEgVUYgZXMgdW5hIHVuaWRhZCBkaWFyaWEgcmVhanVzdGFibGUgcG9yIGluZmxhY2nDs24gdXNhZGEgZW4gY3LDqWRpdG9zIHkgYXJyaWVuZG9zOyBsYSBVVE0gZXMgbWVuc3VhbCB5IHNlIHVzYSBwYXJhIGltcHVlc3RvcyB5IG11bHRhcy4KNS4gwr9QYXJhIHF1w6kgc2UgdXNhIGxhIFVUQT8g4oCUIFBhcmEgZGVmaW5pciBsb3MgdHJhbW9zIGFudWFsZXMgZGVsIGltcHVlc3RvIGEgbGEgcmVudGEgeSBkZWwgR2xvYmFsIENvbXBsZW1lbnRhcmlvLgo2LiDCv1F1acOpbiBmaWphIGVzdG9zIHZhbG9yZXM/IOKAlCBFbCBTSUkgcHVibGljYSBsYSBVVE0geSBsYSBVVEE7IGVsIEJhbmNvIENlbnRyYWwgZGV0ZXJtaW5hIGxhIFVGLgoKKipGdWVudGVzIG9maWNpYWxlcyBhIGxpbmtlYXI6KioKLSBTSUksIFVUTSAyMDI2OiBodHRwczovL3d3dy5zaWkuY2wvdmFsb3Jlc195X2ZlY2hhcy91dG0vdXRtMjAyNi5odG0KLSBTSUksIFVGIDIwMjY6IGh0dHBzOi8vd3d3LnNpaS5jbC92YWxvcmVzX3lfZmVjaGFzL3VmL3VmMjAyNi5odG0KLSBCYW5jbyBDZW50cmFsIGRlIENoaWxlOiBodHRwczovL3d3dy5iY2VudHJhbC5jbC9pbmljaW8KCi0tLQoKIyMgQlJJRUYgMTYg4oCUIFJlYWp1c3RlIGRlIGFycmllbmRvIFVGL0lQQzogY29udHJhdG8geSBmw7NybXVsYSAoY2FsY3VsYWRvcmEgdXBncmFkZSkKCi0gKipUaXBvOioqIGNhbGN1bGFkb3JhIHVwZ3JhZGUKLSAqKlVSTDoqKiAvY2FsY3VsYWRvcmFzL2NhbGN1bGFkb3JhLXJlYWp1c3RlLWFycmllbmRvCi0gKipDbHVzdGVyOioqIHJlYWp1c3RlIGFycmllbmRvIFVGLCBJUEMKLSAqKlByaW9yaWRhZDoqKiAxNiAoZXN0YWNpb25hbCBlbmVyby1mZWJyZXJvOyBnYXAgZXhwbGljYWNpw7NuIGRlIGNvbnRyYXRvKQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6Kiogc8OtCgoqKkgxOioqIENhbGN1bGFkb3JhIGRlIHJlYWp1c3RlIGRlIGFycmllbmRvIDIwMjY6IHBvciBVRiBvIHBvciBJUEMgc2Vnw7puIHR1IGNvbnRyYXRvCgoqKk1ldGEgdGl0bGUgKDU1KToqKiBSZWFqdXN0ZSBkZSBBcnJpZW5kbyAyMDI2IHwgQ2FsY3VsYWRvcmEgVUYgZSBJUEMKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUyKToqKiBDYWxjdWxhIGVsIHJlYWp1c3RlIGRlIHR1IGFycmllbmRvIDIwMjYgc2Vnw7puIFVGIG8gSVBDLiBEZXBlbmRlIGRlIGxhIGNsw6F1c3VsYSBkZSB0dSBjb250cmF0byB5IGxhIHBlcmlvZGljaWRhZCBwYWN0YWRhLiBEYXRvcyBvZmljaWFsZXMgZGVsIFNJSSBlIElORS4KCioqUMOhcnJhZm8gZGUgYXBlcnR1cmEgKDUwIHBhbGFicmFzKToqKiBFbCByZWFqdXN0ZSBkZWwgYXJyaWVuZG8gZW4gQ2hpbGUgZGVwZW5kZSBkZSBsYSBjbMOhdXN1bGEgZGVsIGNvbnRyYXRvOiBzaSBlc3TDoSBwYWN0YWRvIGVuIFVGLCBzdWJlIGF1dG9tw6F0aWNhbWVudGUgY29uIGxhIHZhcmlhY2nDs24gZGlhcmlhIGRlIGxhIFVGOyBzaSBlcyBlbiBwZXNvcyBjb24gcmVhanVzdGUgcG9yIElQQywgc3ViZSBzZWfDum4gbGEgaW5mbGFjacOzbiBhY3VtdWxhZGEgZGVsIHBlcmlvZG8gcGFjdGFkby4gVXNhIGxhIGNhbGN1bGFkb3JhIHBhcmEgZXN0aW1hciB0dSBudWV2byBjYW5vbi4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBDw7NtbyBzZSByZWFqdXN0YSB1biBhcnJpZW5kbyBlbiBDaGlsZQogIC0gSDM6IENvbnRyYXRvIGVuIFVGOiByZWFqdXN0ZSBhdXRvbcOhdGljbwogIC0gSDM6IENvbnRyYXRvIGVuIHBlc29zIGNvbiBjbMOhdXN1bGEgSVBDCi0gSDI6IENhbGN1bGFkb3JhIGRlIHJlYWp1c3RlIGRlIGFycmllbmRvCi0gSDI6IFBlcmlvZGljaWRhZCBkZWwgcmVhanVzdGU6IG1lbnN1YWwsIHNlbWVzdHJhbCBvIGFudWFsCi0gSDI6IFF1w6kgZGljZSBsYSBsZXkgc29icmUgZWwgcmVhanVzdGUKLSBIMjogQ2hlY2tsaXN0IGFudGVzIGRlIGFjZXB0YXIgdW4gcmVhanVzdGUKLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/Q8OzbW8gc2UgY2FsY3VsYSBlbCByZWFqdXN0ZSBkZWwgYXJyaWVuZG8/IOKAlCBEZXBlbmRlIGRlbCBjb250cmF0bzogc2kgZXN0w6EgZW4gVUYsIGNvbiBsYSB2YXJpYWNpw7NuIGRlIGxhIFVGOyBzaSBlcyBlbiBwZXNvcyBjb24gY2zDoXVzdWxhIElQQywgY29uIGxhIGluZmxhY2nDs24gYWN1bXVsYWRhLgoyLiDCv0NhZGEgY3XDoW50byBzZSByZWFqdXN0YSBlbCBhcnJpZW5kbz8g4oCUIFNlZ8O6biBsbyBxdWUgZGlnYSBlbCBjb250cmF0bzogcHVlZGUgc2VyIG1lbnN1YWwsIHNlbWVzdHJhbCBvIGFudWFsLgozLiDCv0VsIGFycmVuZGFkb3IgcHVlZGUgc3ViaXIgZWwgYXJyaWVuZG8gY3VhbmRvIHF1aWVyYT8g4oCUIE5vLiBTb2xvIHB1ZWRlIGFwbGljYXIgZWwgcmVhanVzdGUgcGFjdGFkbyBlbiBlbCBjb250cmF0byBlbiBsYSBwZXJpb2RpY2lkYWQgYWNvcmRhZGEuCjQuIMK/UXXDqSBwYXNhIHNpIG1pIGNvbnRyYXRvIGVzdMOhIGVuIFVGPyDigJQgRWwgbW9udG8gZW4gcGVzb3Mgc3ViZSBhdXRvbcOhdGljYW1lbnRlIGNvbiBlbCB2YWxvciBkZSBsYSBVRjsgZWwgbsO6bWVybyBkZSBVRiBwZXJtYW5lY2UgaWd1YWwuCjUuIMK/RWwgcmVhanVzdGUgcG9yIElQQyB1c2EgbGEgaW5mbGFjacOzbiBkZSBxdcOpIHBlcmlvZG8/IOKAlCBMYSBpbmZsYWNpw7NuIGFjdW11bGFkYSBlbnRyZSBsYSBmZWNoYSBkZWwgw7psdGltbyByZWFqdXN0ZSB5IGxhIGZlY2hhIGRlbCBudWV2bywgc2Vnw7puIGVsIElORS4KNi4gwr9OZWNlc2l0byBmaXJtYXIgYWxnbyBwYXJhIGVsIHJlYWp1c3RlPyDigJQgU2kgZWwgcmVhanVzdGUgeWEgZXN0w6EgZW4gZWwgY29udHJhdG8sIHNlIGFwbGljYSBhdXRvbcOhdGljYW1lbnRlIHNpbiBmaXJtYXIgdW4gbnVldm8gZG9jdW1lbnRvLgoKKipGdWVudGVzIG9maWNpYWxlcyBhIGxpbmtlYXI6KioKLSBTSUksIFVGIDIwMjY6IGh0dHBzOi8vd3d3LnNpaS5jbC92YWxvcmVzX3lfZmVjaGFzL3VmL3VmMjAyNi5odG0KLSBJTkUsIElQQzogaHR0cDovL3d3dy5pbmUuZ29iLmNsL2VzdGFkaXN0aWNhcy1wb3ItdGVtYS9wcmVjaW9zLWUtaW5mbGFjaW9uL2luZGljZS1kZS1wcmVjaW9zLWFsLWNvbnN1bWlkb3IKCi0tLQoKIyMgQlJJRUYgMTcg4oCUIE9wZXJhY2nDs24gUmVudGEgMjAyNiBwYXJhIGluZGVwZW5kaWVudGVzIChhcnTDrWN1bG8gbnVldm8pCgotICoqVGlwbzoqKiBhcnTDrWN1bG8gbnVldm8KLSAqKlVSTDoqKiAvYmxvZy9vcGVyYWNpb24tcmVudGEtMjAyNi1ob25vcmFyaW9zCi0gKipDbHVzdGVyOioqIG9wZXJhY2nDs24gcmVudGEgMjAyNiBob25vcmFyaW9zCi0gKipQcmlvcmlkYWQ6KiogMTcgKGVzdGFjaW9uYWwgYWJyaWw7IGFsdG8gdm9sdW1lbikKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrSAocGFyY2lhbCAvIHNpbXVsYWRvcikKCioqSDE6KiogT3BlcmFjacOzbiBSZW50YSAyMDI2IHBhcmEgdHJhYmFqYWRvcmVzIGEgaG9ub3JhcmlvczogZ3XDrWEgY29tcGxldGEKCioqTWV0YSB0aXRsZSAoNTIpOioqIE9wZXJhY2nDs24gUmVudGEgMjAyNiBIb25vcmFyaW9zIHwgR3XDrWEgQ29tcGxldGEKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUzKToqKiBUb2RvIHNvYnJlIGxhIE9wZXJhY2nDs24gUmVudGEgMjAyNiBwYXJhIGhvbm9yYXJpb3M6IHJldGVuY2nDs24gMTUsMjUlLCBjb3RpemFjacOzbiBvYmxpZ2F0b3JpYSwgY3LDqWRpdG9zIHkgZGV2b2x1Y2nDs24uIFNpbXVsYSB0dSByZXN1bHRhZG8gYW50ZXMgZGUgYWJyaWwuCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg0OCBwYWxhYnJhcyk6KiogRW4gbGEgT3BlcmFjacOzbiBSZW50YSBkZSBhYnJpbCBkZSAyMDI2LCBsb3MgdHJhYmFqYWRvcmVzIGEgaG9ub3JhcmlvcyBkZWNsYXJhbiBzdXMgaW5ncmVzb3MgYW51YWxlcywgYXBsaWNhbiBlbCBJbXB1ZXN0byBHbG9iYWwgQ29tcGxlbWVudGFyaW8geSBkZXNjdWVudGFuIGxhIHJldGVuY2nDs24gZGVsIDE1LDI1JSB5YSBwYWdhZGEuIFNlZ8O6biBzdSBzaXR1YWNpw7NuLCBvYnRpZW5lbiBkZXZvbHVjacOzbiBvIHBhZ2FuIGxhIGRpZmVyZW5jaWEsIGluY2x1aWRhIGxhIGNvdGl6YWNpw7NuIHByZXZpc2lvbmFsIG9ibGlnYXRvcmlhLiBBcXXDrSBsYSBndcOtYSBwYXNvIGEgcGFzby4KCioqRXN0cnVjdHVyYSBIMi9IMzoqKgotIEgyOiBRdcOpIGVzIGxhIE9wZXJhY2nDs24gUmVudGEgeSBxdWnDqW4gZGViZSBkZWNsYXJhcgotIEgyOiBDw7NtbyB0cmlidXRhbiBsb3MgaG9ub3JhcmlvcwogIC0gSDM6IExhIHJldGVuY2nDs24gZGVsIDE1LDI1JSBkdXJhbnRlIGVsIGHDsW8KICAtIEgzOiBFbCBJbXB1ZXN0byBHbG9iYWwgQ29tcGxlbWVudGFyaW8gYW51YWwKLSBIMjogTGEgY290aXphY2nDs24gcHJldmlzaW9uYWwgb2JsaWdhdG9yaWEgZGVsIGluZGVwZW5kaWVudGUKLSBIMjogQ3LDqWRpdG9zIHkgcmViYWphcyAoQVBWLCBnYXN0b3MsIGVkdWNhY2lvbmFsZXMpCi0gSDI6IEN1w6FuZG8gaGF5IGRldm9sdWNpw7NuIHkgY3XDoW5kbyBzZSBwYWdhCi0gSDI6IEZlY2hhcyBjbGF2ZSBkZSBsYSBPcGVyYWNpw7NuIFJlbnRhIDIwMjYKLSBIMjogQ2hlY2tsaXN0IGRlIGRvY3VtZW50b3MgcGFyYSBkZWNsYXJhcgotIEgyOiBQcmVndW50YXMgZnJlY3VlbnRlcwoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KioKMS4gwr9RdWnDqW4gZGViZSBoYWNlciBsYSBPcGVyYWNpw7NuIFJlbnRhIHBvciBob25vcmFyaW9zPyDigJQgVG9kbyB0cmFiYWphZG9yIGluZGVwZW5kaWVudGUgcXVlIGVtaXRpw7MgYm9sZXRhcyBkZSBob25vcmFyaW9zIGR1cmFudGUgZWwgYcOxbyB0cmlidXRhcmlvLgoyLiDCv0xhIHJldGVuY2nDs24gZGVsIDE1LDI1JSBzZSBkZXZ1ZWx2ZT8g4oCUIFB1ZWRlIGRldm9sdmVyc2UgdG90YWwgbyBwYXJjaWFsbWVudGUsIHNlZ8O6biB0dSBpbXB1ZXN0byBhbnVhbCB5IGxhIGNvdGl6YWNpw7NuIHByZXZpc2lvbmFsIG9ibGlnYXRvcmlhLgozLiDCv0xvcyBob25vcmFyaW9zIG9ibGlnYW4gYSBjb3RpemFyPyDigJQgU8OtLCBlbCBpbmRlcGVuZGllbnRlIGNvdGl6YSBvYmxpZ2F0b3JpYW1lbnRlIGNvbiBjYXJnbyBhIGxhcyByZXRlbmNpb25lcyBlbiBsYSBkZWNsYXJhY2nDs24gYW51YWwuCjQuIMK/Q3XDoW5kbyBlcyBsYSBPcGVyYWNpw7NuIFJlbnRhIDIwMjY/IOKAlCBFbCBwcm9jZXNvIHNlIHJlYWxpemEgZW4gYWJyaWwgZGUgMjAyNiwgY29uIGZlY2hhcyBlc2NhbG9uYWRhcyBzZWfDum4gZWwgcmVzdWx0YWRvIGRlIGxhIGRlY2xhcmFjacOzbi4KNS4gwr9RdcOpIGNyw6lkaXRvcyBwdWVkbyB1c2FyPyDigJQgQVBWLCBnYXN0b3MgZWR1Y2FjaW9uYWxlcyB5IG90cm9zIGNyw6lkaXRvcyBzZWfDum4gdHUgc2l0dWFjacOzbiwgcXVlIHJlZHVjZW4gZWwgaW1wdWVzdG8gYSBwYWdhci4KNi4gwr9FbCBTSUkgcHJvcG9uZSB1bmEgZGVjbGFyYWNpw7NuPyDigJQgU8OtLCBlbCBTSUkgZW50cmVnYSB1bmEgcHJvcHVlc3RhIHF1ZSBlbCBjb250cmlidXllbnRlIHB1ZWRlIGFjZXB0YXIgbyBjb3JyZWdpci4KNy4gwr9Fc3RlIHNpbXVsYWRvciByZWVtcGxhemEgbGEgZGVjbGFyYWNpw7NuIG9maWNpYWw/IOKAlCBOby4gRWwgcmVzdWx0YWRvIGZpbmFsIGxvIGRldGVybWluYSBlbCBTSUk7IGVsIHNpbXVsYWRvciBlcyByZWZlcmVuY2lhbC4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gU0lJLCBSZW50YSBwZXJzb25hcyBuYXR1cmFsZXMgMjAyNjogaHR0cHM6Ly93d3cuc2lpLmNsL3ZhbG9yZXNfeV9mZWNoYXMvcmVudGEvMjAyNi9wZXJzb25hc19uYXR1cmFsZXMuaHRtbAotIFNJSSwgYm9sZXRhcyBkZSBob25vcmFyaW9zOiBodHRwczovL3d3dy5zaWkuY2wvZGVzdGFjYWRvcy9ib2xldGFzX2hvbm9yYXJpb3MvCgotLS0KCiMjIEJSSUVGIDE4IOKAlCBDYWxjdWxhZG9yYSBJbXB1ZXN0byBHbG9iYWwgQ29tcGxlbWVudGFyaW8gMjAyNiAoY2FsY3VsYWRvcmEgbnVldmEpCgotICoqVGlwbzoqKiBjYWxjdWxhZG9yYSBudWV2YQotICoqVVJMOioqIC9jYWxjdWxhZG9yYXMvY2FsY3VsYWRvcmEtZ2xvYmFsLWNvbXBsZW1lbnRhcmlvCi0gKipDbHVzdGVyOioqIGltcHVlc3RvIGdsb2JhbCBjb21wbGVtZW50YXJpbyAyMDI2Ci0gKipQcmlvcmlkYWQ6KiogMTggKGNvbXBsZW1lbnRvIGRlIHJlbnRhKQotICoqUmVxdWllcmUgY2FsY3VsYWRvcmE6Kiogc8OtCgoqKkgxOioqIENhbGN1bGFkb3JhIEltcHVlc3RvIEdsb2JhbCBDb21wbGVtZW50YXJpbyAyMDI2OiBjdcOhbnRvIHBhZ2FzIHBvciB0dSByZW50YSBhbnVhbAoKKipNZXRhIHRpdGxlICg1NSk6KiogR2xvYmFsIENvbXBsZW1lbnRhcmlvIDIwMjYgfCBDYWxjdWxhZG9yYSBwb3IgVHJhbW8KCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUwKToqKiBDYWxjdWxhIHR1IEltcHVlc3RvIEdsb2JhbCBDb21wbGVtZW50YXJpbyAyMDI2IHBvciB0cmFtb3Mgb2ZpY2lhbGVzIGRlbCBTSUkuIFJlbnRhIGV4ZW50YSBoYXN0YSAkMTEuMjY1LjgwNCBhbCBhw7FvLiBFc3RpbWEgdHUgaW1wdWVzdG8gYW51YWwgYXF1w60uCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg0OSBwYWxhYnJhcyk6KiogRWwgSW1wdWVzdG8gR2xvYmFsIENvbXBsZW1lbnRhcmlvIGdyYXZhIGxhIHJlbnRhIGFudWFsIHRvdGFsIGRlIGxhcyBwZXJzb25hcyBlbiBDaGlsZSBtZWRpYW50ZSB0cmFtb3MgcHJvZ3Jlc2l2b3MuIEVuIGVsIGHDsW8gdHJpYnV0YXJpbyAyMDI2LCBsYXMgcmVudGFzIGhhc3RhICQxMS4yNjUuODA0IGFsIGHDsW8gZXN0w6FuIGV4ZW50YXMsIHkgZGVzZGUgYWjDrSBsYSB0YXNhIHN1YmUgcG9yIHRyYW1vcyBoYXN0YSA0MCUuIFVzYSBsYSBjYWxjdWxhZG9yYSBwYXJhIGVzdGltYXIgdHUgaW1wdWVzdG8gYW51YWwuCgoqKkVzdHJ1Y3R1cmEgSDIvSDM6KioKLSBIMjogUXXDqSBlcyBlbCBJbXB1ZXN0byBHbG9iYWwgQ29tcGxlbWVudGFyaW8KLSBIMjogVGFibGEgZGUgdHJhbW9zIGRlbCBHbG9iYWwgQ29tcGxlbWVudGFyaW8gMjAyNgotIEgyOiBDw7NtbyBzZSBjYWxjdWxhOiBmYWN0b3IgbWVub3MgcmViYWphCi0gSDI6IEVqZW1wbG8gcHLDoWN0aWNvIGNvbiB1bmEgcmVudGEgYW51YWwKLSBIMjogRGlmZXJlbmNpYSBjb24gZWwgSW1wdWVzdG8gw5puaWNvIGRlIFNlZ3VuZGEgQ2F0ZWdvcsOtYQotIEgyOiBDcsOpZGl0b3MgcXVlIHJlZHVjZW4gZWwgaW1wdWVzdG8KLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/UXXDqSBlcyBlbCBJbXB1ZXN0byBHbG9iYWwgQ29tcGxlbWVudGFyaW8/IOKAlCBFcyBlbCBpbXB1ZXN0byBhbnVhbCB5IHByb2dyZXNpdm8gcXVlIGdyYXZhIGVsIHRvdGFsIGRlIHJlbnRhcyBkZSB1bmEgcGVyc29uYSBuYXR1cmFsIHJlc2lkZW50ZSBlbiBDaGlsZS4KMi4gwr9DdcOhbCBlcyBsYSByZW50YSBleGVudGEgZW4gMjAyNj8g4oCUIExhcyByZW50YXMgYW51YWxlcyBoYXN0YSAkMTEuMjY1LjgwNCBlc3TDoW4gZXhlbnRhcyBkZWwgR2xvYmFsIENvbXBsZW1lbnRhcmlvLgozLiDCv0N1w6FsIGVzIGxhIHRhc2EgbcOheGltYT8g4oCUIEVsIHRyYW1vIG3DoXMgYWx0byBhcGxpY2EgdW5hIHRhc2EgZGUgNDAlIHNvYnJlIHJlbnRhcyBhbnVhbGVzIHN1cGVyaW9yZXMgYSAkMjU4LjY5Ni4yNDAuCjQuIMK/Q8OzbW8gc2UgY2FsY3VsYSBlbCBpbXB1ZXN0bz8g4oCUIFNlIG11bHRpcGxpY2EgbGEgcmVudGEgcG9yIGVsIGZhY3RvciBkZWwgdHJhbW8geSBzZSByZXN0YSBsYSBjYW50aWRhZCBhIHJlYmFqYXIgY29ycmVzcG9uZGllbnRlLgo1LiDCv0VuIHF1w6kgc2UgZGlmZXJlbmNpYSBkZWwgSW1wdWVzdG8gZGUgU2VndW5kYSBDYXRlZ29yw61hPyDigJQgRWwgZGUgU2VndW5kYSBDYXRlZ29yw61hIGVzIG1lbnN1YWwgc29icmUgc3VlbGRvczsgZWwgR2xvYmFsIENvbXBsZW1lbnRhcmlvIGVzIGFudWFsIHNvYnJlIGVsIHRvdGFsIGRlIHJlbnRhcy4KNi4gwr9Fc3RlIGPDoWxjdWxvIGVzIG9maWNpYWw/IOKAlCBObywgZXMgdW5hIGVzdGltYWNpw7NuIHJlZmVyZW5jaWFsOyBlbCByZXN1bHRhZG8gZGVmaW5pdGl2byBsbyBkZXRlcm1pbmEgZWwgU0lJIGVuIGxhIE9wZXJhY2nDs24gUmVudGEuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIFNJSSwgUmVudGEgcGVyc29uYXMgbmF0dXJhbGVzIDIwMjY6IGh0dHBzOi8vd3d3LnNpaS5jbC92YWxvcmVzX3lfZmVjaGFzL3JlbnRhLzIwMjYvcGVyc29uYXNfbmF0dXJhbGVzLmh0bWwKCi0tLQoKIyMgQlJJRUYgMTkg4oCUIENhbGN1bGFkb3JhIGRlIHN1ZWxkbyBsw61xdWlkbyBjb24gcmVmb3JtYSBwcmV2aXNpb25hbCAoY2FsY3VsYWRvcmEgbnVldmEpCgotICoqVGlwbzoqKiBjYWxjdWxhZG9yYSBudWV2YQotICoqVVJMOioqIC9jYWxjdWxhZG9yYXMvY2FsY3VsYWRvcmEtc3VlbGRvLWxpcXVpZG8KLSAqKkNsdXN0ZXI6Kiogc3VlbGRvIGzDrXF1aWRvIENoaWxlIDIwMjYKLSAqKlByaW9yaWRhZDoqKiAxOSAoYWx0byB2b2x1bWVuLCBkaWZpY3VsdGFkIGFsdGE7IHDDoWdpbmEgcGlsYXIpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBzw60KCioqSDE6KiogQ2FsY3VsYWRvcmEgZGUgc3VlbGRvIGzDrXF1aWRvIDIwMjYgZW4gQ2hpbGU6IGNvbiByZWZvcm1hIHByZXZpc2lvbmFsIHkgdG9wZXMgYWN0dWFsaXphZG9zCgoqKk1ldGEgdGl0bGUgKDU0KToqKiBDYWxjdWxhZG9yYSBTdWVsZG8gTMOtcXVpZG8gMjAyNiB8IENoaWxlIEFjdHVhbGl6YWRhCgoqKk1ldGEgZGVzY3JpcHRpb24gKDE1Mik6KiogQ2FsY3VsYSB0dSBzdWVsZG8gbMOtcXVpZG8gMjAyNiBlbiBDaGlsZTogQUZQLCBzYWx1ZCA3JSwgc2VndXJvIGNlc2FudMOtYSwgaW1wdWVzdG8geSB0b3BlcyBkZSA5MCBVRi4gSW5jbHV5ZSBsYSBudWV2YSByZWZvcm1hIHByZXZpc2lvbmFsLiBEYXRvcyBvZmljaWFsZXMuCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg1MCBwYWxhYnJhcyk6KiogRWwgc3VlbGRvIGzDrXF1aWRvIGVuIENoaWxlIDIwMjYgc2Ugb2J0aWVuZSByZXN0YW5kbyBhbCBzdWVsZG8gYnJ1dG8gaW1wb25pYmxlIGxhcyBjb3RpemFjaW9uZXMgZGUgQUZQICgxMCUgbcOhcyBjb21pc2nDs24pLCBzYWx1ZCAoNyUpLCBzZWd1cm8gZGUgY2VzYW50w61hIHkgZWwgSW1wdWVzdG8gw5puaWNvIGRlIFNlZ3VuZGEgQ2F0ZWdvcsOtYSwgY29uc2lkZXJhbmRvIGVsIHRvcGUgaW1wb25pYmxlIGRlIDkwIFVGLiBVc2EgbGEgY2FsY3VsYWRvcmEgcGFyYSBjb252ZXJ0aXIgdHUgc3VlbGRvIGJydXRvIGVuIGzDrXF1aWRvLgoKKipFc3RydWN0dXJhIEgyL0gzOioqCi0gSDI6IFF1w6kgZGVzY3VlbnRvcyB0aWVuZSB0dSBzdWVsZG8gZW4gMjAyNgogIC0gSDM6IEFGUDogMTAlIG3DoXMgY29taXNpw7NuIGRlIGxhIGFkbWluaXN0cmFkb3JhCiAgLSBIMzogU2FsdWQ6IDclIChGb25hc2EgbyBJc2FwcmUpCiAgLSBIMzogU2VndXJvIGRlIGNlc2FudMOtYQogIC0gSDM6IEltcHVlc3RvIMOabmljbyBkZSBTZWd1bmRhIENhdGVnb3LDrWEKLSBIMjogRWwgdG9wZSBpbXBvbmlibGUgZGUgOTAgVUYgeSBjw7NtbyBhZmVjdGEgZWwgY8OhbGN1bG8KLSBIMjogRWwgaW1wYWN0byBkZSBsYSByZWZvcm1hIHByZXZpc2lvbmFsIGVuIHR1IGxpcXVpZGFjacOzbgotIEgyOiBFamVtcGxvOiBzdWVsZG8gYnJ1dG8gZGUgJDEuMDAwLjAwMCBhIGzDrXF1aWRvCi0gSDI6IFN1ZWxkbyBtw61uaW1vIDIwMjY6ICQ1MzkuMDAwCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv0PDs21vIHNlIGNhbGN1bGEgZWwgc3VlbGRvIGzDrXF1aWRvIGVuIENoaWxlPyDigJQgU2UgcmVzdGEgYWwgc3VlbGRvIGJydXRvIGltcG9uaWJsZSBsYSBBRlAgKDEwJSArIGNvbWlzacOzbiksIGVsIDclIGRlIHNhbHVkLCBlbCBzZWd1cm8gZGUgY2VzYW50w61hIHkgZWwgaW1wdWVzdG8gZGUgc2VndW5kYSBjYXRlZ29yw61hLgoyLiDCv0N1w6FudG8gc2UgZGVzY3VlbnRhIHBvciBBRlAgZW4gMjAyNj8g4oCUIEVsIDEwJSBvYmxpZ2F0b3JpbyBtw6FzIGxhIGNvbWlzacOzbiBkZSBsYSBBRlAsIHF1ZSB2YSBkZSAwLDQ2JSAoVW5vKSBhIDEsNDUlIChQcm9WaWRhKS4KMy4gwr9DdcOhbCBlcyBlbCB0b3BlIGltcG9uaWJsZSBlbiAyMDI2PyDigJQgOTAgVUYgcGFyYSBBRlAgeSBzYWx1ZDsgbGEgcGFydGUgZGVsIHN1ZWxkbyBzb2JyZSBlc2UgdG9wZSBubyBjb3RpemEuCjQuIMK/Q3XDoWwgZXMgZWwgc3VlbGRvIG3DrW5pbW8gZW4gMjAyNj8g4oCUICQ1MzkuMDAwIHBhcmEgdHJhYmFqYWRvcmVzIGRlIDE4IGEgNjUgYcOxb3MsIGRlc2RlIGVsIDEgZGUgZW5lcm8gZGUgMjAyNi4KNS4gwr9MYSByZWZvcm1hIHByZXZpc2lvbmFsIGNhbWJpYSBtaSBzdWVsZG8gbMOtcXVpZG8/IOKAlCBFbCBhcG9ydGUgYWRpY2lvbmFsIGxvIHBhZ2EgZWwgZW1wbGVhZG9yLCBwb3IgbG8gcXVlIG5vIHJlZHVjZSBlbCBsw61xdWlkbyBkZWwgdHJhYmFqYWRvciBkaXJlY3RhbWVudGUuCjYuIMK/RGVzZGUgcXXDqSBtb250byBwYWdvIGltcHVlc3RvPyDigJQgRWwgSW1wdWVzdG8gw5puaWNvIGRlIFNlZ3VuZGEgQ2F0ZWdvcsOtYSBzZSBhcGxpY2Egc29icmUgcmVudGFzIG1lbnN1YWxlcyBxdWUgc3VwZXJhbiBhcHJveGltYWRhbWVudGUgJDk2Ny4yNjEuCjcuIMK/RXN0ZSByZXN1bHRhZG8gZXMgZXhhY3RvPyDigJQgRXMgdW5hIGVzdGltYWNpw7NuIHJlZmVyZW5jaWFsOyBsYSBsaXF1aWRhY2nDs24gb2ZpY2lhbCBsYSBlbWl0ZSB0dSBlbXBsZWFkb3IgY29uIHR1cyBkYXRvcyBlc3BlY8OtZmljb3MuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIERpcmVjY2nDs24gZGVsIFRyYWJham8sIHN1ZWxkbyBtw61uaW1vIDIwMjY6IGh0dHBzOi8vd3d3LmR0LmdvYi5jbC9sZWdpc2xhY2lvbi8xNjI0L2FydGljbGVzLTEyNzk2OV9yZWN1cnNvX2RvYy5wZGYKLSBTSUksIEltcHVlc3RvIFNlZ3VuZGEgQ2F0ZWdvcsOtYSAyMDI2OiBodHRwczovL3d3dy5zaWkuY2wvdmFsb3Jlc195X2ZlY2hhcy9pbXB1ZXN0b18yZGFfY2F0ZWdvcmlhL2ltcHVlc3RvMjAyNi5odG0KLSBEaXJlY2Npw7NuIGRlbCBUcmFiYWpvLCB0b3BlIGltcG9uaWJsZSBBRlA6IGh0dHBzOi8vZHQuZ29iLmNsL3BvcnRhbC8xNjI4L3czLWFydGljbGUtMTE4MDc2Lmh0bWwKLSBTdXBlcmludGVuZGVuY2lhIGRlIFBlbnNpb25lcywgY29taXNpb25lcyBBRlA6IGh0dHBzOi8vd3d3LnNwZW5zaW9uZXMuY2wvcG9ydGFsL2luc3RpdHVjaW9uYWwvNTk0L3czLXByb3BlcnR5dmFsdWUtOTg5Ny5odG1sCgotLS0KCiMjIEJSSUVGIDIwIOKAlCBDYWxjdWxhZG9yYSBkZSBmaW5pcXVpdG8gZSBpbmRlbW5pemFjacOzbiAyMDI2IChjYWxjdWxhZG9yYSBudWV2YSkKCi0gKipUaXBvOioqIGNhbGN1bGFkb3JhIG51ZXZhCi0gKipVUkw6KiogL2NhbGN1bGFkb3Jhcy9jYWxjdWxhZG9yYS1maW5pcXVpdG8KLSAqKkNsdXN0ZXI6KiogZmluaXF1aXRvIENoaWxlLCBpbmRlbW5pemFjacOzbiBhw7FvcyBzZXJ2aWNpbwotICoqUHJpb3JpZGFkOioqIDIwIChhbHRvIHZvbHVtZW47IHDDoWdpbmEgcGlsYXIpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBzw60KCioqSDE6KiogQ2FsY3VsYWRvcmEgZGUgZmluaXF1aXRvIDIwMjYgZW4gQ2hpbGU6IGluZGVtbml6YWNpw7NuIHBvciBhw7FvcyBkZSBzZXJ2aWNpbyB5IGF2aXNvIHByZXZpbwoKKipNZXRhIHRpdGxlICg1NCk6KiogQ2FsY3VsYWRvcmEgRmluaXF1aXRvIDIwMjYgfCBJbmRlbW5pemFjacOzbiBDaGlsZQoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTEpOioqIENhbGN1bGEgdHUgZmluaXF1aXRvIDIwMjY6IGluZGVtbml6YWNpw7NuIHBvciBhw7FvcyBkZSBzZXJ2aWNpbywgbWVzIGRlIGF2aXNvIHByZXZpbywgdmFjYWNpb25lcyBwcm9wb3JjaW9uYWxlcyB5IGZlcmlhZG8uIFNlZ8O6biBjYXVzYWwgeSBDw7NkaWdvIGRlbCBUcmFiYWpvLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTIgcGFsYWJyYXMpOioqIEVsIGZpbmlxdWl0byBlbiBDaGlsZSBpbmNsdXllIGxhIGluZGVtbml6YWNpw7NuIHBvciBhw7FvcyBkZSBzZXJ2aWNpbyAodW4gbWVzIGRlIHN1ZWxkbyBwb3IgYcOxbyB0cmFiYWphZG8sIGNvbiB0b3BlIGRlIDExIGHDsW9zIHkgOTAgVUYpLCBlbCBtZXMgZGUgYXZpc28gcHJldmlvIHNpIG5vIHNlIGRpbyBjb24gYW50ZWxhY2nDs24sIHkgbGFzIHZhY2FjaW9uZXMgcHJvcG9yY2lvbmFsZXMgcGVuZGllbnRlcy4gRWwgbW9udG8gZGVwZW5kZSBkZSBsYSBjYXVzYWwgZGUgdMOpcm1pbm8gZGVsIGNvbnRyYXRvLgoKKipFc3RydWN0dXJhIEgyL0gzOioqCi0gSDI6IFF1w6kgaW5jbHV5ZSB1biBmaW5pcXVpdG8gZW4gQ2hpbGUKICAtIEgzOiBJbmRlbW5pemFjacOzbiBwb3IgYcOxb3MgZGUgc2VydmljaW8KICAtIEgzOiBJbmRlbW5pemFjacOzbiBzdXN0aXR1dGl2YSBkZWwgYXZpc28gcHJldmlvCiAgLSBIMzogVmFjYWNpb25lcyB5IGZlcmlhZG8gcHJvcG9yY2lvbmFsCi0gSDI6IEPDs21vIGluZmx1eWUgbGEgY2F1c2FsIGRlIHTDqXJtaW5vCiAgLSBIMzogTmVjZXNpZGFkZXMgZGUgbGEgZW1wcmVzYSAoQXJ0LiAxNjEpCiAgLSBIMzogUmVudW5jaWEgdm9sdW50YXJpYQogIC0gSDM6IERlc3BpZG8gc2luIGNhdXNhIGp1c3RpZmljYWRhCi0gSDI6IFRvcGVzOiAxMSBhw7FvcyB5IDkwIFVGCi0gSDI6IEVqZW1wbG8gcHLDoWN0aWNvIGRlIGPDoWxjdWxvCi0gSDI6IEPDs21vIHJldmlzYXIgeSBmaXJtYXIgdHUgZmluaXF1aXRvCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzCgoqKkZBUSAoc2NoZW1hLXJlYWR5KToqKgoxLiDCv0PDs21vIHNlIGNhbGN1bGEgZWwgZmluaXF1aXRvIGVuIENoaWxlPyDigJQgU3VtYW5kbyBsYSBpbmRlbW5pemFjacOzbiBwb3IgYcOxb3MgZGUgc2VydmljaW8sIGVsIGF2aXNvIHByZXZpbyBzaSBjb3JyZXNwb25kZSwgeSBsYXMgdmFjYWNpb25lcyB5IGZlcmlhZG8gcHJvcG9yY2lvbmFsZXMuCjIuIMK/Q3XDoW50byBlcyBsYSBpbmRlbW5pemFjacOzbiBwb3IgYcOxb3MgZGUgc2VydmljaW8/IOKAlCBVbiBtZXMgZGUgbGEgw7psdGltYSByZW11bmVyYWNpw7NuIHBvciBjYWRhIGHDsW8gdHJhYmFqYWRvLCBjb24gdG9wZSBkZSAxMSBhw7Fvcy4KMy4gwr9IYXkgdW4gdG9wZSBhbCBtb250byBkZSBsYSBpbmRlbW5pemFjacOzbj8g4oCUIFPDrSwgbGEgYmFzZSBkZSBjw6FsY3VsbyB0aWVuZSB0b3BlIGRlIDkwIFVGIHBvciBtZXMgZGUgcmVtdW5lcmFjacOzbi4KNC4gwr9RdcOpIGVzIGVsIG1lcyBkZSBhdmlzbyBwcmV2aW8/IOKAlCBTaSBlbCBlbXBsZWFkb3Igbm8gYXZpc2EgY29uIDMwIGTDrWFzIGRlIGFudGljaXBhY2nDs24sIGRlYmUgcGFnYXIgdW4gbWVzIGRlIHJlbXVuZXJhY2nDs24gYWRpY2lvbmFsLgo1LiDCv0xhIHJlbnVuY2lhIGRhIGRlcmVjaG8gYSBpbmRlbW5pemFjacOzbiBwb3IgYcOxb3M/IOKAlCBOby4gTGEgaW5kZW1uaXphY2nDs24gcG9yIGHDsW9zIGRlIHNlcnZpY2lvIGFwbGljYSBwcmluY2lwYWxtZW50ZSBhbCBkZXNwaWRvIHBvciBuZWNlc2lkYWRlcyBkZSBsYSBlbXByZXNhLgo2LiDCv1NlIHBhZ2FuIGxhcyB2YWNhY2lvbmVzIG5vIHRvbWFkYXM/IOKAlCBTw60sIGVsIGZlcmlhZG8gcHJvcG9yY2lvbmFsIHkgbGFzIHZhY2FjaW9uZXMgcGVuZGllbnRlcyBzZSBwYWdhbiBlbiBlbCBmaW5pcXVpdG8uCjcuIMK/RXN0ZSBjw6FsY3VsbyBlcyB2aW5jdWxhbnRlPyDigJQgTm8sIGVzIHJlZmVyZW5jaWFsOyBlbCBmaW5pcXVpdG8gb2ZpY2lhbCBkZWJlIHJhdGlmaWNhcnNlIGFudGUgbWluaXN0cm8gZGUgZmUgc2Vnw7puIGxhIGxleS4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQ8OzZGlnbyBkZWwgVHJhYmFqbywgQkNOOiBodHRwczovL3d3dy5iY24uY2wvbGV5Y2hpbGUvbmF2ZWdhcj9pZE5vcm1hPTIwNzQzNgotIERpcmVjY2nDs24gZGVsIFRyYWJham86IGh0dHBzOi8vd3d3LmR0LmdvYi5jbC9wb3J0YWwvMTYyNi93My1jaGFubmVsLmh0bWwKCi0tLQoKIyMgQlJJRUYgMjEg4oCUIExleSAyMS43MTk6IHByaXZhY2lkYWQgcGFyYSBjYWxjdWxhZG9yYXMgZmluYW5jaWVyYXMgKGFydMOtY3VsbyBudWV2bykKCi0gKipUaXBvOioqIGFydMOtY3VsbyBudWV2bwotICoqVVJMOioqIC9ibG9nL2xleS0yMTcxOS1wcm90ZWNjaW9uLWRhdG9zLWNhbGN1bGFkb3JhcwotICoqQ2x1c3RlcjoqKiBMZXkgMjEuNzE5IGRhdG9zIHBlcnNvbmFsZXMgQ2hpbGUKLSAqKlByaW9yaWRhZDoqKiAyMSAoZ2FwOyB0YW1iacOpbiBjb21wbGlhbmNlIGRlbCBwcm9waW8gc2l0aW8pCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBubyAoY2hlY2tsaXN0KQoKKipIMToqKiBMZXkgMjEuNzE5IGRlIHByb3RlY2Npw7NuIGRlIGRhdG9zOiBxdcOpIGltcGxpY2EgcGFyYSBsYXMgY2FsY3VsYWRvcmFzIGZpbmFuY2llcmFzCgoqKk1ldGEgdGl0bGUgKDU1KToqKiBMZXkgMjEuNzE5IERhdG9zIFBlcnNvbmFsZXMgfCBHdcOtYSBwYXJhIFNpdGlvcyBXZWIKCioqTWV0YSBkZXNjcmlwdGlvbiAoMTUyKToqKiBMYSBMZXkgMjEuNzE5IGRlIHByb3RlY2Npw7NuIGRlIGRhdG9zIHJpZ2UgZGVzZGUgZGljaWVtYnJlIDIwMjYgZW4gQ2hpbGUuIENvbnNlbnRpbWllbnRvLCBmaW5hbGlkYWQgeSBtaW5pbWl6YWNpw7NuOiBxdcOpIGRlYmVuIGN1bXBsaXIgbGFzIHdlYnMgZmluYW5jaWVyYXMuCgoqKlDDoXJyYWZvIGRlIGFwZXJ0dXJhICg0OSBwYWxhYnJhcyk6KiogTGEgTGV5IDIxLjcxOSBtb2Rlcm5pemEgbGEgcHJvdGVjY2nDs24gZGUgZGF0b3MgcGVyc29uYWxlcyBlbiBDaGlsZSB5IHJpZ2UgcGxlbmFtZW50ZSBkZXNkZSBlbCAxIGRlIGRpY2llbWJyZSBkZSAyMDI2LiBDcmVhIGxhIEFnZW5jaWEgZGUgUHJvdGVjY2nDs24gZGUgRGF0b3MgeSBleGlnZSBjb25zZW50aW1pZW50bywgZmluYWxpZGFkIHkgbWluaW1pemFjacOzbiBkZSBkYXRvcy4gTG9zIHNpdGlvcyBjb24gY2FsY3VsYWRvcmFzIGZpbmFuY2llcmFzIGRlYmVuIGFkZWN1YXIgY8OzbW8gcmVjb2dlbiBzdWVsZG9zLCBSVVQgeSBkZXVkYXMuCgoqKkVzdHJ1Y3R1cmEgSDIvSDM6KioKLSBIMjogUXXDqSBlc3RhYmxlY2UgbGEgTGV5IDIxLjcxOQotIEgyOiBDdcOhbmRvIGVudHJhIGVuIHZpZ2VuY2lhCi0gSDI6IFByaW5jaXBpb3MgY2xhdmUgcGFyYSBzaXRpb3Mgd2ViCiAgLSBIMzogQ29uc2VudGltaWVudG8gZGVsIHRpdHVsYXIKICAtIEgzOiBGaW5hbGlkYWQgeSBtaW5pbWl6YWNpw7NuIGRlIGRhdG9zCiAgLSBIMzogRGVyZWNob3MgZGVsIHRpdHVsYXIgKGFjY2VzbywgcmVjdGlmaWNhY2nDs24sIHN1cHJlc2nDs24pCi0gSDI6IFF1w6kgZGViZW4gaGFjZXIgbGFzIGNhbGN1bGFkb3JhcyBmaW5hbmNpZXJhcwogIC0gSDM6IE5vIGFsbWFjZW5hciBSVVQgbmkgc3VlbGRvcyBzaW4gYmFzZSBsZWdhbAogIC0gSDM6IFBvbMOtdGljYSBkZSBwcml2YWNpZGFkIGNsYXJhCi0gSDI6IENoZWNrbGlzdCBkZSBjdW1wbGltaWVudG8gZGVzY2FyZ2FibGUKLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/UXXDqSBlcyBsYSBMZXkgMjEuNzE5PyDigJQgRXMgbGEgbGV5IHF1ZSBtb2Rlcm5pemEgbGEgcHJvdGVjY2nDs24gZGUgZGF0b3MgcGVyc29uYWxlcyBlbiBDaGlsZSB5IGNyZWEgbGEgQWdlbmNpYSBkZSBQcm90ZWNjacOzbiBkZSBEYXRvcy4KMi4gwr9EZXNkZSBjdcOhbmRvIHJpZ2UgbGEgTGV5IDIxLjcxOT8g4oCUIFN1IHZlcnNpw7NuIGNvbiB2aWdlbmNpYSBkaWZlcmlkYSByaWdlIGRlc2RlIGVsIDEgZGUgZGljaWVtYnJlIGRlIDIwMjYuCjMuIMK/UXXDqSBkYXRvcyBwcm90ZWdlPyDigJQgVG9kb3MgbG9zIGRhdG9zIHBlcnNvbmFsZXMsIGNvbiByZWdsYXMgbcOhcyBlc3RyaWN0YXMgcGFyYSBkYXRvcyBzZW5zaWJsZXMgY29tbyBsb3MgZmluYW5jaWVyb3MuCjQuIMK/UXXDqSBkZXJlY2hvcyBkYSBhbCBjaXVkYWRhbm8/IOKAlCBBY2Nlc28sIHJlY3RpZmljYWNpw7NuLCBzdXByZXNpw7NuLCBvcG9zaWNpw7NuIHkgcG9ydGFiaWxpZGFkIGRlIHN1cyBkYXRvcyBwZXJzb25hbGVzLgo1LiDCv1VuYSBjYWxjdWxhZG9yYSBvbmxpbmUgZGViZSBwZWRpciBjb25zZW50aW1pZW50bz8g4oCUIFPDrSwgc2kgcmVjb2dlIHkgYWxtYWNlbmEgZGF0b3MgcGVyc29uYWxlcyBkZWJlIGluZm9ybWFyIGxhIGZpbmFsaWRhZCB5IG9idGVuZXIgY29uc2VudGltaWVudG8gdsOhbGlkby4KNi4gwr9RdcOpIHBhc2Egc2kgdW4gc2l0aW8gbm8gY3VtcGxlPyDigJQgTGEgQWdlbmNpYSBkZSBQcm90ZWNjacOzbiBkZSBEYXRvcyBwb2Ryw6EgZmlzY2FsaXphciB5IHNhbmNpb25hciBlbCBpbmN1bXBsaW1pZW50by4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQkNOLCBMZXkgMjEuNzE5OiBodHRwczovL3d3dy5iY24uY2wvbGV5Y2hpbGUvbmF2ZWdhcj9pZE5vcm1hPTEyMDkyNzIKCi0tLQoKIyMgQlJJRUYgMjIg4oCUIFBhdGVudGUgY29tZXJjaWFsOiBtw6F4aW1vIGxlZ2FsIDguMDAwIFVUTSwgbm8gOCBVVE0gKGFydMOtY3VsbyBudWV2bykKCi0gKipUaXBvOioqIGFydMOtY3VsbyBudWV2bwotICoqVVJMOioqIC9ibG9nL3BhdGVudGUtY29tZXJjaWFsLW1heGltby1taW5pbW8tdXRtCi0gKipDbHVzdGVyOioqIHBhdGVudGUgY29tZXJjaWFsIG3DoXhpbW8gVVRNCi0gKipQcmlvcmlkYWQ6KiogMjIgKGdhcDogY29ycmlnZSBtaXRvIDggVVRNOyByZWZ1ZXJ6YSBjbHVzdGVyIHBhdGVudGUpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBubwoKKipIMToqKiBQYXRlbnRlIGNvbWVyY2lhbCBlbiBDaGlsZTogZWwgbcOheGltbyBsZWdhbCBlcyA4LjAwMCBVVE0sIG5vIDggVVRNCgoqKk1ldGEgdGl0bGUgKDU2KToqKiBQYXRlbnRlIENvbWVyY2lhbCB8IE3DoXhpbW8gOC4wMDAgVVRNIHkgTcOtbmltbyAxIFVUTQoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTApOioqIEVsIG3DoXhpbW8gbGVnYWwgZGUgdW5hIHBhdGVudGUgY29tZXJjaWFsIGVuIENoaWxlIGVzIDguMDAwIFVUTSwgbm8gOCBVVE0uIEVsIG3DrW5pbW8gZXMgMSBVVE0uIENvbm9jZSBlbCByYW5nbyBkZSAyLDUgYSA1IHBvciBtaWwgc2Vnw7puIGVsIERMIDMuMDYzLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNDggcGFsYWJyYXMpOioqIEVsIG3DoXhpbW8gbGVnYWwgZGUgdW5hIHBhdGVudGUgY29tZXJjaWFsIGVuIENoaWxlIGVzIDguMDAwIFVUTSwgbm8gOCBVVE0gY29tbyBzZSBjcmVlIGNvbiBmcmVjdWVuY2lhLiBFbCBtw61uaW1vIGVzIDEgVVRNLiBMYSBwYXRlbnRlIGVxdWl2YWxlIGEgZW50cmUgMiw1IHkgNSBwb3IgbWlsIGRlbCBjYXBpdGFsIHByb3BpbyB0cmlidXRhcmlvLCBzZWfDum4gZWwgREwgMy4wNjMgZGUgcmVudGFzIG11bmljaXBhbGVzLgoKKipFc3RydWN0dXJhIEgyL0gzOioqCi0gSDI6IEVsIGVycm9yIGNvbcO6bjogOCBVVE0gdnMgOC4wMDAgVVRNCi0gSDI6IFF1w6kgZGljZSBlbCBETCAzLjA2MyBzb2JyZSBsb3MgdG9wZXMKICAtIEgzOiBNw61uaW1vOiAxIFVUTQogIC0gSDM6IE3DoXhpbW86IDguMDAwIFVUTQotIEgyOiBFbCByYW5nbyBkZSBsYSB0YXNhOiAyLDUgYSA1IHBvciBtaWwKLSBIMjogQ8OzbW8gYWZlY3RhIGVzdG8gYSBncmFuZGVzIGVtcHJlc2FzCi0gSDI6IEVqZW1wbG86IHBhdGVudGUgZGUgdW5hIGVtcHJlc2EgY29uIGFsdG8gY2FwaXRhbCBwcm9waW8KLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/Q3XDoWwgZXMgZWwgbcOheGltbyBsZWdhbCBkZSB1bmEgcGF0ZW50ZSBjb21lcmNpYWw/IOKAlCA4LjAwMCBVVE0sIHNlZ8O6biBlbCBETCAzLjA2MyBkZSByZW50YXMgbXVuaWNpcGFsZXMuCjIuIMK/RXMgY2llcnRvIHF1ZSBlbCBtw6F4aW1vIGVzIDggVVRNPyDigJQgTm8uIEVzZSBlcyB1biBlcnJvciBmcmVjdWVudGU7IGVsIHRvcGUgcmVhbCBlcyA4LjAwMCBVVE0uCjMuIMK/Q3XDoWwgZXMgZWwgbcOtbmltbyBkZSBwYXRlbnRlIGNvbWVyY2lhbD8g4oCUIDEgVVRNLCBlcXVpdmFsZW50ZSBhICQ3MS42NDkgZW4ganVsaW8gZGUgMjAyNi4KNC4gwr9DdcOhbCBlcyBsYSB0YXNhIGRlIGxhIHBhdGVudGU/IOKAlCBFbnRyZSAyLDUgeSA1IHBvciBtaWwgKDAsMjUlIGEgMCw1JSkgZGVsIGNhcGl0YWwgcHJvcGlvIHRyaWJ1dGFyaW8sIGZpamFkYSBwb3IgY2FkYSBtdW5pY2lwYWxpZGFkLgo1LiDCv1F1acOpbiBsbGVnYSBhbCBtw6F4aW1vIGRlIDguMDAwIFVUTT8g4oCUIEVtcHJlc2FzIGNvbiB1biBjYXBpdGFsIHByb3BpbyB0cmlidXRhcmlvIG11eSBlbGV2YWRvLCBjdXlhIHBhdGVudGUgY2FsY3VsYWRhIHN1cGVyYXLDrWEgZXNlIHRvcGUuCjYuIMK/VG9kYXMgbGFzIGNvbXVuYXMgYXBsaWNhbiBsYSBtaXNtYSB0YXNhPyDigJQgTm8sIGNhZGEgbXVuaWNpcGFsaWRhZCBkZWZpbmUgc3UgdGFzYSBkZW50cm8gZGVsIHJhbmdvIGxlZ2FsIHBlcm1pdGlkby4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gU0lJLCBETCAzLjA2MzogaHR0cHM6Ly93d3cuc2lpLmNsL3BhZ2luYS9qdXJpc3BydWRlbmNpYS9kbDMwNjMuaHRtCi0gQkNOLCBQYXRlbnRlcyBDb21lcmNpYWxlczogaHR0cHM6Ly9vYnRpZW5lYXJjaGl2by5iY24uY2wvb2J0aWVuZWFyY2hpdm8/aWQ9cmVwb3NpdG9yaW8lMkYxMDIyMSUyRjI3NzU5JTJGMiUyRlBhdGVudGVzX2NvbWVyY2lhbGVzX18xXy5wZGYKCi0tLQoKIyMgQlJJRUYgMjMg4oCUIENhbGN1bGFkb3JhIFN1YnNpZGlvIERTNDk6IGFob3JybywgcHJlY2lvIG3DoXhpbW8geSBlbGVnaWJpbGlkYWQgKGNhbGN1bGFkb3JhIG51ZXZhKQoKLSAqKlRpcG86KiogY2FsY3VsYWRvcmEgbnVldmEKLSAqKlVSTDoqKiAvY2FsY3VsYWRvcmFzL2NhbGN1bGFkb3JhLXN1YnNpZGlvLWRzNDkKLSAqKkNsdXN0ZXI6KiogRFM0OSAyMDI2IGFob3JybyAxMCBVRgotICoqUHJpb3JpZGFkOioqIDIzIChnYXA6IGVsZWdpYmlsaWRhZCBwb3IgY2FzbykKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrQoKKipIMToqKiBDYWxjdWxhZG9yYSBTdWJzaWRpbyBEUzQ5IDIwMjY6IGFob3JybyBleGlnaWRvLCBwcmVjaW8gbcOheGltbyB5IGVsZWdpYmlsaWRhZAoKKipNZXRhIHRpdGxlICg1NCk6KiogU3Vic2lkaW8gRFM0OSAyMDI2IHwgQ2FsY3VsYWRvcmEgZGUgQWhvcnJvIHkgUHJlY2lvCgoqKk1ldGEgZGVzY3JpcHRpb24gKDE1MSk6KiogQ2FsY3VsYSB0dSBlbGVnaWJpbGlkYWQgYWwgc3Vic2lkaW8gRFM0OSAyMDI2OiBhaG9ycm8gbcOtbmltbyAxMCBVRiwgc3Vic2lkaW8gYmFzZSAzMTQgVUYgeSB2aXZpZW5kYSBoYXN0YSA5NTAgVUYuIFZlcmlmaWNhIHJlcXVpc2l0b3MgY29uIGRhdG9zIE1JTlZVLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTAgcGFsYWJyYXMpOioqIEVsIHN1YnNpZGlvIERTNDkgcGVybWl0ZSBjb21wcmFyIHVuYSB2aXZpZW5kYSBjb25zdHJ1aWRhIGRlIGhhc3RhIDk1MCBVRiBjb24gdW4gYWhvcnJvIG3DrW5pbW8gZGUgMTAgVUYgeSB1biBzdWJzaWRpbyBiYXNlIGRlIDMxNCBVRiwgZGlyaWdpZG8gYSBob2dhcmVzIGRlbnRybyBkZWwgNDAlIG3DoXMgdnVsbmVyYWJsZSBkZWwgUmVnaXN0cm8gU29jaWFsIGRlIEhvZ2FyZXMuIExhIGNhbGN1bGFkb3JhIHZlcmlmaWNhIHNpIGN1bXBsZXMgZWwgYWhvcnJvIHkgZWwgcHJlY2lvIG3DoXhpbW8uCgoqKkVzdHJ1Y3R1cmEgSDIvSDM6KioKLSBIMjogUXXDqSBlcyBlbCBzdWJzaWRpbyBEUzQ5Ci0gSDI6IFJlcXVpc2l0b3MgZGUgZWxlZ2liaWxpZGFkCiAgLSBIMzogUmVnaXN0cm8gU29jaWFsIGRlIEhvZ2FyZXMgKDQwJSBtw6FzIHZ1bG5lcmFibGUpCiAgLSBIMzogQWhvcnJvIG3DrW5pbW8gZGUgMTAgVUYKLSBIMjogTW9udG9zOiBzdWJzaWRpbyBiYXNlIDMxNCBVRiB5IHZpdmllbmRhIGhhc3RhIDk1MCBVRgotIEgyOiBDYWxjdWxhZG9yYSBkZSBhaG9ycm8geSBwcmVjaW8gbcOheGltbwotIEgyOiBNb2RhbGlkYWQgY29uc3RydWNjacOzbiBlbiBzaXRpbyBwcm9waW8gMjAyNgotIEgyOiBDYWxlbmRhcmlvIGRlIGxsYW1hZG9zIDIwMjYKLSBIMjogQ8OzbW8gcG9zdHVsYXIgYWwgRFM0OQotIEgyOiBQcmVndW50YXMgZnJlY3VlbnRlcwoKKipGQVEgKHNjaGVtYS1yZWFkeSk6KioKMS4gwr9RdcOpIGVzIGVsIHN1YnNpZGlvIERTNDk/IOKAlCBFcyB1biBzdWJzaWRpbyBkZWwgTUlOVlUgcGFyYSBjb21wcmFyIHVuYSB2aXZpZW5kYSBjb25zdHJ1aWRhIGRlIGhhc3RhIDk1MCBVRiwgc2luIGNyw6lkaXRvIGhpcG90ZWNhcmlvIGVuIGFsZ3VuYXMgbW9kYWxpZGFkZXMuCjIuIMK/Q3XDoW50byBhaG9ycm8gbmVjZXNpdG8gcGFyYSBlbCBEUzQ5PyDigJQgRWwgYWhvcnJvIG3DrW5pbW8gZXMgMTAgVUYgcGFyYSBob2dhcmVzIGRlbCA0MCUgbcOhcyB2dWxuZXJhYmxlIGRlbCBSU0guCjMuIMK/Q3XDoWwgZXMgZWwgc3Vic2lkaW8gYmFzZSBkZWwgRFM0OT8g4oCUIDMxNCBVRiBwYXJhIGxhIGNvbXByYSBkZSB1bmEgdml2aWVuZGEgY29uc3RydWlkYS4KNC4gwr9RdcOpIHByZWNpbyBkZSB2aXZpZW5kYSBwdWVkbyBjb21wcmFyPyDigJQgVml2aWVuZGFzIGRlIGhhc3RhIDk1MCBVRiBjb24gZXN0ZSBzdWJzaWRpby4KNS4gwr9RdWnDqW4gcHVlZGUgcG9zdHVsYXIgYWwgRFM0OT8g4oCUIFBlcnNvbmFzIGRlbnRybyBkZWwgNDAlIG3DoXMgdnVsbmVyYWJsZSBkZWwgUmVnaXN0cm8gU29jaWFsIGRlIEhvZ2FyZXMgcXVlIGN1bXBsYW4gZWwgYWhvcnJvIGV4aWdpZG8uCjYuIMK/RWwgc3Vic2lkaW8gZ2FyYW50aXphIHF1ZSBtZSBsbyBhZGp1ZGlxdWVuPyDigJQgTm8uIExhIGFkanVkaWNhY2nDs24gZGVwZW5kZSBkZSBwdW50YWplLCBjdXBvcyB5IHZhbGlkYWNpw7NuIGRlbCBTRVJWSVUuCgoqKkZ1ZW50ZXMgb2ZpY2lhbGVzIGEgbGlua2VhcjoqKgotIE1JTlZVIERTNDk6IGh0dHBzOi8vd3d3Lm1pbnZ1LmdvYi5jbC9iZW5lZmljaW8vdml2aWVuZGEvc3Vic2lkaW8tcGFyYS1jb21wcmFyLXVuYS12aXZpZW5kYS1jb25zdHJ1aWRhLWRlLWhhc3RhLTk1MC11Zi1kczQ5LwotIE1JTlZVLCBsbGFtYWRvIERTNDkgc2l0aW8gcHJvcGlvIDIwMjY6IGh0dHBzOi8vd3d3Lm1pbnZ1LmdvYi5jbC9wb3N0dWxhY2lvbi9sbGFtYWRvLWVuLWNvbmRpY2lvbmVzLWVzcGVjaWFsZXMtZGVsLWRzNDktcGFyYS1jb25zdHJ1Y2Npb24tZW4tc2l0aW8tcHJvcGlvLWRlbnNpZmljYWNpb24tcHJlZGlhbC15LXBlcXVlbm8tY29uZG9taW5pby1pbmNsdXllbmRvLWVsLXByb2NlZGltaWVudG8tZGUtYXV0b2NvbnN0cnVjY2lvbi1hc2lzdGlkYS0yMDI2LwoKLS0tCgojIyBCUklFRiAyNCDigJQgU2VndXJvIGRlIGNlc2FudMOtYSBBRkM6IGN1w6FudG8gcHVlZG8gcmV0aXJhciAoYXJ0w61jdWxvIG51ZXZvKQoKLSAqKlRpcG86KiogYXJ0w61jdWxvIG51ZXZvCi0gKipVUkw6KiogL2Jsb2cvc2VndXJvLWNlc2FudGlhLWFmYy1jYWxjdWxvCi0gKipDbHVzdGVyOioqIHNlZ3VybyBjZXNhbnTDrWEgY3XDoW50byBwYWdhbgotICoqUHJpb3JpZGFkOioqIDI0IChnYXA7IGRhdG8gZGUgZsOzcm11bGEgcGVuZGllbnRlIGRlIHZlcmlmaWNhcikKLSAqKlJlcXVpZXJlIGNhbGN1bGFkb3JhOioqIHPDrQoKKipIMToqKiBTZWd1cm8gZGUgY2VzYW50w61hIEFGQyAyMDI2OiBjdcOhbnRvIHB1ZWRlcyByZXRpcmFyIHkgY8OzbW8gc2UgY2FsY3VsYQoKKipNZXRhIHRpdGxlICg1Myk6KiogU2VndXJvIGRlIENlc2FudMOtYSBBRkMgMjAyNiB8IEN1w6FudG8gUHVlZG8gUmV0aXJhcgoKKipNZXRhIGRlc2NyaXB0aW9uICgxNTIpOioqIEFwcmVuZGUgY8OzbW8gZnVuY2lvbmEgZWwgc2VndXJvIGRlIGNlc2FudMOtYSBBRkMgZW4gMjAyNjogY3XDoW50byBwdWVkZXMgcmV0aXJhciBzZWfDum4gdHUgY29udHJhdG8sIHNhbGRvIGRlIGN1ZW50YSB5IGNhdXNhbCBkZSB0w6lybWluby4gR3XDrWEgY29uIGZ1ZW50ZXMgQUZDLgoKKipQw6FycmFmbyBkZSBhcGVydHVyYSAoNTEgcGFsYWJyYXMpOioqIEVsIHNlZ3VybyBkZSBjZXNhbnTDrWEgYWRtaW5pc3RyYWRvIHBvciBsYSBBRkMgcGVybWl0ZSByZXRpcmFyIGZvbmRvcyBhbCB0ZXJtaW5hciB0dSBjb250cmF0by4gRWwgbW9udG8gZGVwZW5kZSBkZWwgc2FsZG8gZGUgdHUgQ3VlbnRhIEluZGl2aWR1YWwgZGUgQ2VzYW50w61hLCBsYSBjYXVzYWwgZGUgdMOpcm1pbm8geSBlbCB0aXBvIGRlIGNvbnRyYXRvLiBFbiBhbGd1bm9zIGNhc29zIHRhbWJpw6luIHNlIGFjY2VkZSBhbCBGb25kbyBkZSBDZXNhbnTDrWEgU29saWRhcmlvLCBjb24gdG9wZXMgeSBwb3JjZW50YWplcyBkZWNyZWNpZW50ZXMuCgoqKkVzdHJ1Y3R1cmEgSDIvSDM6KioKLSBIMjogUXXDqSBlcyBlbCBzZWd1cm8gZGUgY2VzYW50w61hIEFGQwotIEgyOiBDw7NtbyBzZSBmaW5hbmNpYTogYXBvcnRlcyBkZWwgdHJhYmFqYWRvciB5IGVtcGxlYWRvcgotIEgyOiBDdcOhbnRvIHB1ZWRlcyByZXRpcmFyCiAgLSBIMzogQ3VlbnRhIEluZGl2aWR1YWwgZGUgQ2VzYW50w61hCiAgLSBIMzogRm9uZG8gZGUgQ2VzYW50w61hIFNvbGlkYXJpbwotIEgyOiBDw7NtbyBpbmZsdXllIGxhIGNhdXNhbCBkZSB0w6lybWlubyB5IGVsIHRpcG8gZGUgY29udHJhdG8KLSBIMjogUmVxdWlzaXRvcyB5IG7Dum1lcm8gZGUgZ2lyb3MKLSBIMjogQ8OzbW8gc29saWNpdGFyIGVsIHBhZ28KLSBIMjogUHJlZ3VudGFzIGZyZWN1ZW50ZXMKCioqRkFRIChzY2hlbWEtcmVhZHkpOioqCjEuIMK/UXXDqSBlcyBlbCBzZWd1cm8gZGUgY2VzYW50w61hPyDigJQgRXMgdW4gYmVuZWZpY2lvIHF1ZSBwZXJtaXRlIHJlY2liaXIgcGFnb3MgdGVtcG9yYWxlcyBhbCBxdWVkYXIgY2VzYW50ZSwgYWRtaW5pc3RyYWRvIHBvciBsYSBBRkMuCjIuIMK/Q3XDoW50byBwdWVkbyByZXRpcmFyIGRlbCBzZWd1cm8gZGUgY2VzYW50w61hPyDigJQgRGVwZW5kZSBkZWwgc2FsZG8gZGUgdHUgQ3VlbnRhIEluZGl2aWR1YWwgZGUgQ2VzYW50w61hLCB0dSByZW11bmVyYWNpw7NuIHkgbGEgY2F1c2FsIGRlIHTDqXJtaW5vLgozLiDCv1F1acOpbiBhcG9ydGEgYWwgc2VndXJvIGRlIGNlc2FudMOtYT8g4oCUIEVsIHRyYWJhamFkb3IgeSBlbCBlbXBsZWFkb3IgYXBvcnRhbiBtZW5zdWFsbWVudGUgZHVyYW50ZSBlbCBjb250cmF0by4KNC4gwr9DdcOhbnRvcyBnaXJvcyBwdWVkbyBoYWNlcj8g4oCUIERlcGVuZGUgZGUgbG9zIG1lc2VzIGNvdGl6YWRvcyB5IGRlbCB0aXBvIGRlIGZvbmRvOyBsb3MgbW9udG9zIHNvbiBkZWNyZWNpZW50ZXMuCjUuIMK/TGEgcmVudW5jaWEgZGEgZGVyZWNobyBhbCBzZWd1cm8gZGUgY2VzYW50w61hPyDigJQgRGEgYWNjZXNvIGEgbGEgQ3VlbnRhIEluZGl2aWR1YWwsIHBlcm8gbm8gYWwgRm9uZG8gU29saWRhcmlvLCBxdWUgZXhpZ2UgY2F1c2FsZXMgZXNwZWPDrWZpY2FzLgo2LiDCv0VzdGUgY8OhbGN1bG8gZ2FyYW50aXphIGVsIHBhZ28/IOKAlCBOby4gRWwgbW9udG8geSBsYSBwcm9jZWRlbmNpYSBsb3MgZGV0ZXJtaW5hIGxhIEFGQyBzZWfDum4gdHVzIGFudGVjZWRlbnRlcy4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyOioqCi0gQUZDIENoaWxlICh2ZXJpZmljYXIgVVJMIG9maWNpYWwgdmlnZW50ZSBkZSB0YWJsYXMgeSBnaXJvcyk6IGh0dHBzOi8vd3d3LmFmYy5jbAotIERpcmVjY2nDs24gZGVsIFRyYWJham86IGh0dHBzOi8vd3d3LmR0LmdvYi5jbC9wb3J0YWwvMTYyNi93My1jaGFubmVsLmh0bWwKCioqTm90YSBZTVlMOioqIGVsIGRvc3NpZXIgbWFyY2EgbGEgZsOzcm11bGEgZXhhY3RhIGRlIGdpcm9zIHkgcG9yY2VudGFqZXMgZGVsIEZvbmRvIFNvbGlkYXJpbyBjb21vIFBFTkRJRU5URSBERSBWRVJJRklDQVIuIENvbmZpcm1hciB0YWJsYXMgeSB0b3BlcyBlbiBsYSBmdWVudGUgb2ZpY2lhbCBBRkMgYW50ZXMgZGUgcHVibGljYXIgY2lmcmFzIGNvbmNyZXRhczsgaGFzdGEgZW50b25jZXMgbWFudGVuZXIgZWwgY29udGVuaWRvIGVuIHTDqXJtaW5vcyBjdWFsaXRhdGl2b3MuCgotLS0KCiMjIEJSSUVGIDI1IOKAlCBQbGFudGlsbGEgZGUgc25pcHBldHMgImFjdHVhbGl6YWRvIGp1bGlvIDIwMjYiIHBhcmEgY2FsY3VsYWRvcmFzIGRlbGdhZGFzIChtZXRhZGF0YSkKCi0gKipUaXBvOioqIG1ldGFkYXRhIChwbGFudGlsbGEgdHJhbnN2ZXJzYWwpCi0gKipVUkw6KiogdG9kYXMgbGFzIGNhbGN1bGFkb3JhcyBwcmlvcml0YXJpYXMgKHBhdHLDs24gcmV1dGlsaXphYmxlKQotICoqQ2x1c3RlcjoqKiBjYWxjdWxhZG9yYSArIDIwMjYgKyBmdWVudGUgb2ZpY2lhbAotICoqUHJpb3JpZGFkOioqIDI1IChpbXBhY3RvIGFncmVnYWRvIGVuIENUUiB5IEFkU2Vuc2UpCi0gKipSZXF1aWVyZSBjYWxjdWxhZG9yYToqKiBubwoKKipIMToqKiAocGxhbnRpbGxhKSBbTm9tYnJlIGRlIGxhIGNhbGN1bGFkb3JhXSAyMDI2OiBbYmVuZWZpY2lvXSBhY3R1YWxpemFkbyBjb24gZGF0b3Mgb2ZpY2lhbGVzCgoqKk1ldGEgdGl0bGUgKHBsYW50aWxsYSwgbWFudGVuZXIg4omkNjApOioqIFtDYWxjdWxhZG9yYV0gMjAyNiB8IEFjdHVhbGl6YWRhIGNvbiBEYXRvcyBPZmljaWFsZXMKCioqTWV0YSBkZXNjcmlwdGlvbiAocGxhbnRpbGxhLCDiiaQxNTUpOioqIENhbGN1bGEgW3RlbWFdIDIwMjYgY29uIHZhbG9yZXMgb2ZpY2lhbGVzIHZlcmlmaWNhZG9zIGEganVsaW8gZGUgMjAyNi4gSW5jbHV5ZSBmdWVudGVzIGRlbCBTSUksIERUIG8gQ01GIHkgZXhwbGljYWNpw7NuIHBhc28gYSBwYXNvLiBFc3RpbWFjacOzbiByZWZlcmVuY2lhbC4KCioqUMOhcnJhZm8gZGUgYXBlcnR1cmEgKHBsYW50aWxsYSwgNDAtNjAgcGFsYWJyYXMpOioqIEVzdGEgY2FsY3VsYWRvcmEgZGUgW3RlbWFdIGVzdMOhIGFjdHVhbGl6YWRhIGNvbiBsb3MgdmFsb3JlcyBvZmljaWFsZXMgdmlnZW50ZXMgZW4gQ2hpbGUgYSBqdWxpbyBkZSAyMDI2LCBzZWfDum4gW2Z1ZW50ZSBvZmljaWFsOiBTSUkgLyBEVCAvIENNRiAvIFN1cGVyaW50ZW5kZW5jaWEgZGUgUGVuc2lvbmVzXS4gQWRlbcOhcyBkZWwgcmVzdWx0YWRvLCBlbmNvbnRyYXLDoXMgbGEgZsOzcm11bGEgYXBsaWNhZGEsIHVuIGVqZW1wbG8gcHLDoWN0aWNvIHkgbG9zIHN1cHVlc3RvcyB1dGlsaXphZG9zLCBwYXJhIHF1ZSBlbnRpZW5kYXMgY8OzbW8gc2UgY2FsY3VsYSB0dSBjYXNvLgoKKipPYmpldGl2byBkZSBlc3RhIHBsYW50aWxsYSAocmVzdWVsdmUgZWwgYmxvcXVlbyBkZSBBZFNlbnNlKToqKgpFc3RhIGVzIHVuYSBwbGFudGlsbGEgdHJhbnN2ZXJzYWwgcGFyYSBhcGxpY2FyIGEgdG9kYXMgbGFzIGNhbGN1bGFkb3JhcyAiZGVsZ2FkYXMiIHF1ZSBob3kgYmxvcXVlYW4gbGEgbW9uZXRpemFjacOzbiBwb3IgImNvbnRlbmlkbyBkZSBiYWpvIHZhbG9yIi4gQ2FkYSBjYWxjdWxhZG9yYSBkZWJlIGluY29ycG9yYXIgZWwgbWlzbW8gcGF0csOzbiBkZSB2YWxvciB2ZXJpZmljYWJsZToKLSBIMjogQ8OzbW8gc2UgY2FsY3VsYSBbdGVtYV0gKGbDs3JtdWxhIGV4cGzDrWNpdGEpCi0gSDI6IEVqZW1wbG8gcHLDoWN0aWNvIHBhc28gYSBwYXNvCi0gSDI6IFZhbG9yZXMgb2ZpY2lhbGVzIHVzYWRvcyB5IHN1IGZ1ZW50ZSAoY29uIGZlY2hhICJhY3R1YWxpemFkbyBqdWxpbyAyMDI2IikKLSBIMjogU3VwdWVzdG9zIHkgbGltaXRhY2lvbmVzCi0gSDI6IFByZWd1bnRhcyBmcmVjdWVudGVzIChtw61uaW1vIDQsIHNjaGVtYSBGQVFQYWdlKQotIEJsb3F1ZSB2aXNpYmxlIGRlIGRpc2NsYWltZXIgWU1ZTDogIkVzdGltYWNpw7NuIHJlZmVyZW5jaWFsOyBubyByZWVtcGxhemEgbGEgZGV0ZXJtaW5hY2nDs24gb2ZpY2lhbCBkZSBbb3JnYW5pc21vXS4iCi0gTWV0YWRhdG8gImRhdGVNb2RpZmllZCIgZW4gZWwgc2NoZW1hIHBhcmEgcmVmbGVqYXIgbGEgYWN0dWFsaXphY2nDs24uCgoqKkZBUSBiYXNlIHJldXRpbGl6YWJsZSAoc2NoZW1hLXJlYWR5LCBhZGFwdGFyIHBvciBjYWxjdWxhZG9yYSk6KioKMS4gwr9Db24gcXXDqSBmZWNoYSBlc3TDoW4gYWN0dWFsaXphZG9zIGxvcyBkYXRvcz8g4oCUIENvbiBsb3MgdmFsb3JlcyBvZmljaWFsZXMgdmlnZW50ZXMgYSBqdWxpbyBkZSAyMDI2LgoyLiDCv0RlIGTDs25kZSBzYWxlbiBsYXMgY2lmcmFzPyDigJQgRGUgZnVlbnRlcyBvZmljaWFsZXMgY2hpbGVuYXMgY29tbyBlbCBTSUksIGxhIERpcmVjY2nDs24gZGVsIFRyYWJham8sIGxhIENNRiBvIGxhIFN1cGVyaW50ZW5kZW5jaWEgZGUgUGVuc2lvbmVzLgozLiDCv0VsIHJlc3VsdGFkbyBlcyBleGFjdG8/IOKAlCBFcyB1bmEgZXN0aW1hY2nDs24gcmVmZXJlbmNpYWw7IGxhIGRldGVybWluYWNpw7NuIG9maWNpYWwgbGEgcmVhbGl6YSBlbCBvcmdhbmlzbW8gY29tcGV0ZW50ZS4KNC4gwr9DYWRhIGN1w6FudG8gc2UgYWN0dWFsaXphIGxhIGNhbGN1bGFkb3JhPyDigJQgU2UgcmV2aXNhIG1lbnN1YWxtZW50ZSBwYXJhIHJlZmxlamFyIGNhbWJpb3MgZW4gVUYsIFVUTSwgdG9wZXMgbyB0YXNhcy4KCioqRnVlbnRlcyBvZmljaWFsZXMgYSBsaW5rZWFyIChzZWfDum4gY2FsY3VsYWRvcmEpOioqCi0gU0lJLCB2YWxvcmVzIHkgZmVjaGFzOiBodHRwczovL3d3dy5zaWkuY2wvdmFsb3Jlc195X2ZlY2hhcy9pbmRleF92YWxvcmVzX3lfZmVjaGFzLmh0bWwKLSBEaXJlY2Npw7NuIGRlbCBUcmFiYWpvOiBodHRwczovL3d3dy5kdC5nb2IuY2wvcG9ydGFsLzE2MjYvdzMtY2hhbm5lbC5odG1sCi0gQ01GLCB0YXNhczogaHR0cHM6Ly90YXNhcy5jbWZjaGlsZS5jbC9zYmlmd2ViL3NlcnZsZXQvSW5mb0ZpbmFuY2llcmE/aW5kaWNlPTQuMQotIFN1cGVyaW50ZW5kZW5jaWEgZGUgUGVuc2lvbmVzOiBodHRwczovL3d3dy5zcGVuc2lvbmVzLmNsL3BvcnRhbC9pbnN0aXR1Y2lvbmFsLzU5NC93My1wcm9wZXJ0eXZhbHVlLTk4OTcuaHRtbAoKLS0tCgojIyBOb3RhcyB0cmFuc3ZlcnNhbGVzIHBhcmEgZWwgV2Vic2l0ZS1CdWlsZGVyCgoxLiAqKkRpc2NsYWltZXJzIFlNWUwgb2JsaWdhdG9yaW9zOioqIHRvZGEgY2FsY3VsYWRvcmEgZGViZSBtb3N0cmFyICJFc3RpbWFjacOzbiByZWZlcmVuY2lhbDsgbm8gcmVlbXBsYXphIGxhIGRldGVybWluYWNpw7NuIG9maWNpYWwgZGUgW29yZ2FuaXNtb10iLiBObyBwcm9tZXRlciBhcHJvYmFjacOzbiBkZSBjcsOpZGl0byBuaSBhZGp1ZGljYWNpw7NuIGRlIHN1YnNpZGlvLiBObyByZWNvbWVuZGFyIGNhbWJpbyBkZSBBRlAgc29sbyBwb3IgY29taXNpw7NuIG8gcmVudGFiaWxpZGFkIHBhc2FkYS4KMi4gKipTY2hlbWEub3JnIHBvciB0aXBvOioqIGNhbGN1bGFkb3JhcyDihpIgYFNvZnR3YXJlQXBwbGljYXRpb25gIChhcHBsaWNhdGlvbkNhdGVnb3J5ICJGaW5hbmNlQXBwbGljYXRpb24iKSArIGBGQVFQYWdlYDsgYXJ0w61jdWxvcyDihpIgYEFydGljbGVgICsgYEZBUVBhZ2VgOyBndcOtYXMgcGFzbyBhIHBhc28g4oaSIGBIb3dUb2AgKyBgRkFRUGFnZWA7IHRhYmxhcyBkZSB2YWxvcmVzIOKGkiBgRGF0YXNldGAuIEluY2x1aXIgc2llbXByZSBgZGF0ZU1vZGlmaWVkYC4KMy4gKipEYXRvcyB2ZXJpZmljYWRvcyBhIGp1bGlvIDIwMjYqKiAodXNhciBjb21vIGZ1ZW50ZSDDum5pY2EgZGUgdmVyZGFkKTogVVRNICQ3MS42NDk7IFVUQSAkODU5Ljc4ODsgc3VlbGRvIG3DrW5pbW8gJDUzOS4wMDA7IHRvcGUgQUZQIDkwIFVGOyB0b3BlIGNlc2FudMOtYSAxMzUsMiBVRjsgcmV0ZW5jacOzbiBob25vcmFyaW9zIDE1LDI1JTsgY29taXNpw7NuIEFGUCBVbm8gMCw0NiU7IFNJUyAxLDYyJTsgcGF0ZW50ZSBtw6F4LiA4LjAwMCBVVE0gLyBtw61uLiAxIFVUTS4KNC4gKipEYXRvcyBQRU5ESUVOVEUgREUgVkVSSUZJQ0FSKiogYW50ZXMgZGUgcHVibGljYXIgY2lmcmFzIGR1cmFzOiBmw7NybXVsYSBleGFjdGEgZGVsIHRvcGUgZGUgZ3JhdGlmaWNhY2nDs24gZW4gcGVzb3MgKGJyaWVmIDA0LzA4KSwgcmVudGFiaWxpZGFkIGNvbXBhcmF0aXZhIHBvciBBRlAgKG5vIHVzYXIgY29tbyB0YWJsYSBvZmljaWFsKSwgdGFibGFzIGRlIGdpcm9zIGRlbCBzZWd1cm8gZGUgY2VzYW50w61hIEFGQyAoYnJpZWYgMjQpLCBUTUMgZGUganVsaW8gc2kgbGEgQ01GIHB1YmxpY8OzIGVsIGNlcnRpZmljYWRvIE7CsDcvMjAyNi4KNS4gKipFbmxhemFkbyBpbnRlcm5vIHJlY29tZW5kYWRvOioqIGJyaWVmcyAwMy8wNy8xMyAoY2x1c3RlciBDQUUvRkVTKSBlbnRyZSBzw607IGJyaWVmcyAwMi8wNiAoQUZQKTsgYnJpZWZzIDAxLzIyIChwYXRlbnRlKTsgYnJpZWZzIDEwLzE5ICh0b3BlcyB5IHN1ZWxkbyBsw61xdWlkbyk7IGJyaWVmcyAwNS8yMyAoTUlOVlUpLgo=</script>
+</body>
+</html>

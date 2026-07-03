@@ -45,3 +45,6 @@ next-env.d.ts
 # Misc
 .vercel
 .turbo
+
+# Google Search Console exports
+https___calculadorachile.cl_-Performance-on-Search-*/

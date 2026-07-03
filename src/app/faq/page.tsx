@@ -95,7 +95,7 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Cuál es el tope imponible AFP/Salud en 2026?',
         answer:
-          'El tope imponible AFP y Salud en 2026 es de 89,9 UF mensuales (~$3.626.000 con UF a $40.340). Las cotizaciones se calculan solo sobre ese monto: si tu sueldo bruto es mayor, la porción que excede no cotiza. El tope del seguro de cesantía es distinto: 134,9 UF mensuales.',
+          'El tope imponible AFP y Salud en 2026 es de 90 UF mensuales (~$3.626.000 con UF a $40.340). Las cotizaciones se calculan solo sobre ese monto: si tu sueldo bruto es mayor, la porción que excede no cotiza. El tope del seguro de cesantía es distinto: 134,9 UF mensuales.',
       },
       {
         question: '¿Cuándo me corresponde indemnización por años de servicio?',

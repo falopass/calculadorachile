@@ -32,6 +32,7 @@ import { AUTHOR } from '@/lib/seo/author';
 import { articles, getArticleBySlug } from '@/data/articles';
 import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
+import { seoOverrides } from '@/data/seo-overrides';
 
 interface BlogArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -58,8 +59,8 @@ export async function generateMetadata({
 
   return buildPageMetadata({
     path: `/blog/${article.slug}`,
-    title: article.seoTitle ?? article.title,
-    description: article.seoDescription ?? article.description,
+    title: seoOverrides[article.slug]?.seoTitle ?? article.seoTitle ?? article.title,
+    description: seoOverrides[article.slug]?.seoDescription ?? article.seoDescription ?? article.description,
     keywords: article.keywords,
     ogType: 'article',
     publishedTime: article.date,

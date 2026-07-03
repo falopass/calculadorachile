@@ -32,7 +32,7 @@ export interface CotizacionIndependientesResult {
 
 /**
  * Tope imponible para trabajadores independientes (Ley 21.133).
- * Es el mismo tope general AFP/Salud (89,9 UF en 2026).
+ * Es el mismo tope general AFP/Salud (90 UF en 2026).
  *
  * Fuente: `TOPE_IMPOSITIVO.afp_salud` en constants.ts.
  * Se ajusta anualmente por la Superintendencia de Pensiones según

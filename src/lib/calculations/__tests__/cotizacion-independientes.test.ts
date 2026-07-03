@@ -2,7 +2,7 @@
 // Tests de cotización-independientes (Ley 21.133)
 // ----------------------------------------------
 // Verifica que la base imponible sea 80% de la renta bruta anual,
-// con tope 89,9 UF mensuales, y que NO se cobre SIS al independiente.
+// con tope 90 UF mensuales, y que NO se cobre SIS al independiente.
 // ============================================
 
 import { describe, it, expect } from 'vitest';
@@ -20,7 +20,7 @@ describe('calculateCotizacionIndependientes', () => {
     expect(r.aplicaTopeImponible).toBe(false);
   });
 
-  it('aplica tope de 89,9 UF mensuales para rentas altas', () => {
+  it('aplica tope de 90 UF mensuales para rentas altas', () => {
     const renta = 10_000_000; // muy sobre el tope
     const r = calculateCotizacionIndependientes({
       rentaBrutaMensual: renta,

@@ -7,7 +7,7 @@ import { calculatePatenteComercial } from '../patente-comercial';
 import { UTM } from '@/lib/values/constants';
 
 describe('calculatePatenteComercial', () => {
-  it('Santiago aplica 0,5% sobre el capital invertido', () => {
+  it('Santiago aplica 0,5% sobre el capital propio tributario', () => {
     const r = calculatePatenteComercial({
       capitalInvertido: 50_000_000,
       actividad: 'comercio',

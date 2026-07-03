@@ -44,6 +44,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/blog/tope-imponible-89-9-uf-explicado',
+        destination: '/blog/tope-imponible-2026',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

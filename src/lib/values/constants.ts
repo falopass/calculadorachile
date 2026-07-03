@@ -94,12 +94,13 @@ export const SALUD = {
     tasa_minima: 7,
   },
   /**
-   * Tope imponible AFP/Salud 2026: 89,9 UF mensuales.
-   * Fuente: Superintendencia de Pensiones, circular 9 enero 2026.
-   * (Antes de la reforma este tope era 87,8 UF; en 2025 era 84,3 UF.)
+   * Tope imponible AFP/Salud 2026: 90 UF mensuales.
+   * Fuente: Superintendencia de Pensiones, Res. Exenta 237 (feb 2026).
+   * (Antes de la reforma este tope era 87,8 UF; en 2025 era 84,3 UF.
+   * En enero 2026 fue 89,9 UF; desde el 1 de febrero 2026 es 90 UF.)
    * Se ajusta anualmente por la variación real de las remuneraciones.
    */
-  tope_imponible: 89.9,
+  tope_imponible: 90,
 };
 
 export const SEGURO_CESANTIA = {
@@ -279,7 +280,7 @@ export const BOLETA_HONORARIOS = {
 };
 
 export const TOPE_IMPOSITIVO = {
-  afp_salud: 89.9, // UF — 2026 (Superintendencia de Pensiones)
+  afp_salud: 90, // UF — 2026 (Superintendencia de Pensiones, Res. 237)
   seguro_cesantia: 134.9, // UF — 2026
   gratificacion: 90, // UF (Art. 172 CdT)
 };

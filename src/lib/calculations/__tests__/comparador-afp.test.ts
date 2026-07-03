@@ -32,7 +32,7 @@ describe('calculateComparadorAFP', () => {
     }
   });
 
-  it('aplica tope imponible 89,9 UF para sueldos altos', () => {
+  it('aplica tope imponible 90 UF para sueldos altos', () => {
     const sueldoTop = 10_000_000;
     const topeCLP = TOPE_IMPOSITIVO.afp_salud * UF.valor;
     const r = calculateComparadorAFP({

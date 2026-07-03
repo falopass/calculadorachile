@@ -127,7 +127,7 @@ export const articles: Article[] = [
       'descuentos legales Chile',
       'AFP salud cesantía',
       'sueldo líquido 2026',
-      'tope imponible 89.9 UF',
+      'tope imponible 90 UF',
     ],
     relatedCalculators: [
       'calculadora-sueldo-liquido',
@@ -154,7 +154,7 @@ export const articles: Article[] = [
 <div class="numeric-example"><div class="numeric-example__title">Sueldo bruto $800.000, AFP Habitat (1,27%), FONASA</div><ul><li>AFP (11,27%): $800.000 × 11,27% = $90.160</li><li>Salud FONASA (7%): $800.000 × 7% = $56.000</li><li>Seguro cesantía (0,6%): $800.000 × 0,6% = $4.800</li><li>Impuesto único: $0 (base tributable bajo 13,5 UTM)</li><li>Total descuentos: $150.960</li></ul><span class="total">Sueldo líquido: $649.040</span></div>
 
 <h2>El tope imponible 2026</h2>
-<p>Las cotizaciones se calculan sobre la remuneración imponible, con tope de <strong>89,9 UF</strong> mensuales (~$3.626.566 con UF mayo 2026). Si ganas más, las cotizaciones se calculan solo hasta ese tope. Esto reduce el porcentaje efectivo de descuento para sueldos altos.</p>
+<p>Las cotizaciones se calculan sobre la remuneración imponible, con tope de <strong>90 UF</strong> mensuales (~$3.626.566 con UF mayo 2026). Si ganas más, las cotizaciones se calculan solo hasta ese tope. Esto reduce el porcentaje efectivo de descuento para sueldos altos.</p>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Cesantía tiene tope distinto</strong><p>El seguro de cesantía tiene tope imponible 134,9 UF (más alto que AFP/Salud). Esto puede confundir al revisar liquidaciones de sueldos altos.</p></div></aside>
 
 <h2>La gratificación legal</h2>
@@ -257,7 +257,7 @@ export const articles: Article[] = [
 <li><strong>Seguros:</strong> pólizas suelen expresarse en UF.</li>
 <li><strong>Multas y sanciones:</strong> algunas multas SII y judiciales se calculan en UF.</li>
 <li><strong>Contratos de largo plazo:</strong> cualquier contrato que necesite mantener su valor real.</li>
-<li><strong>Topes legales:</strong> AFP/Salud (89,9 UF) y cesantía (134,9 UF) son topes mensuales.</li>
+<li><strong>Topes legales:</strong> AFP/Salud (90 UF) y cesantía (134,9 UF) son topes mensuales.</li>
 </ul>
 
 <h2>¿Cómo convertir UF a pesos?</h2>
@@ -859,7 +859,7 @@ export const articles: Article[] = [
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El SIS NO cambia con la comisión</strong><p>El Seguro de Invalidez y Sobrevivencia (SIS) es 1,15% adicional, lo paga el empleador (no el trabajador), y es el mismo para todas las AFP. Por lo tanto el SIS NO entra en la decisión de cuál AFP elegir.</p></div></aside>
 
 <h2>Tope imponible y comisiones para sueldos altos</h2>
-<p>La comisión solo se cobra hasta el tope imponible (89,9 UF en 2026, ≈$3.626.566). Sueldos sobre el tope pagan la misma comisión absoluta independiente del bruto. Eso significa que la diferencia entre AFPs <strong>se aplana en términos absolutos</strong> para sueldos altos.</p>
+<p>La comisión solo se cobra hasta el tope imponible (90 UF en 2026, ≈$3.626.566). Sueldos sobre el tope pagan la misma comisión absoluta independiente del bruto. Eso significa que la diferencia entre AFPs <strong>se aplana en términos absolutos</strong> para sueldos altos.</p>
 <p>Compara las 7 AFPs con tu sueldo específico y proyecta el ahorro a varios años con la <a href="/calculadoras/calculadora-comparador-afp">calculadora comparadora de AFPs</a>.</p>
 <p>Fuentes: <a href="https://www.spensiones.cl" target="_blank" rel="noopener">Superintendencia de Pensiones</a>, comisiones publicadas mensualmente.</p>`,
   },
@@ -989,20 +989,20 @@ export const articles: Article[] = [
 <p>Fuentes: <a href="https://www.ingresa.cl" target="_blank" rel="noopener">Comisión INGRESA</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a> (CAE original).</p>`,
   },
   {
-    slug: 'tope-imponible-89-9-uf-explicado',
-    title: 'Tope imponible 89,9 UF: qué es y por qué importa en 2026',
+    slug: 'tope-imponible-2026',
+    title: 'Tope imponible 90 UF: qué es y por qué importa en 2026',
     seoTitle: 'Tope Imponible 2026 en Chile: AFP, salud y cesantía',
     seoDescription:
       'Revisa el tope imponible 2026 para AFP, salud y seguro de cesantía, con valores en UF, equivalente en pesos y ejemplos.',
     description:
-      'Qué es el tope imponible AFP/salud (89,9 UF en 2026), cómo se ajusta cada año y por qué reduce las cotizaciones efectivas para sueldos altos.',
+      'Qué es el tope imponible AFP/salud (90 UF en 2026), cómo se ajusta cada año y por qué reduce las cotizaciones efectivas para sueldos altos.',
     date: '2026-05-16',
     updatedAt: '2026-07-02',
     category: 'previsional',
     readingTime: 5,
     relatedGuia: 'sueldo-liquido-chile',
     keywords: [
-      'tope imponible 89.9 UF',
+      'tope imponible 90 UF',
       'tope cesantía 134.9 UF',
       'imponible AFP salud',
       'D.L. 3500 art 16',
@@ -1022,7 +1022,7 @@ export const articles: Article[] = [
       {
         question: '¿Cuál es el tope imponible 2026 en Chile?',
         answer:
-          'El tope imponible 2026 para AFP y salud es de 89,9 UF mensuales (aproximadamente $3.626.566 con UF de mayo 2026). El tope de cesantía es distinto y más alto: 134,9 UF mensuales (aproximadamente $5.444.235). Si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese monto, no sobre el total.',
+          'El tope imponible 2026 para AFP y salud es de 90 UF mensuales (aproximadamente $3.626.566 con UF de mayo 2026). El tope de cesantía es distinto y más alto: 134,9 UF mensuales (aproximadamente $5.444.235). Si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese monto, no sobre el total.',
       },
       {
         question: '¿Cómo afecta el tope imponible a mi sueldo líquido?',
@@ -1032,18 +1032,18 @@ export const articles: Article[] = [
       {
         question: '¿Cuándo se actualiza el tope imponible?',
         answer:
-          'El tope se reajusta cada febrero por la Superintendencia de Pensiones, aplicando la variación real de las remuneraciones del país (Índice de Remuneraciones Reales del INE, no IPC). Histórico: 2023 = 83,4 UF, 2024 = 84,3 UF, 2025 = 87,8 UF, 2026 = 89,9 UF. Si el ISR es negativo, el tope podría bajar.',
+          'El tope se reajusta cada febrero por la Superintendencia de Pensiones, aplicando la variación real de las remuneraciones del país (Índice de Remuneraciones Reales del INE, no IPC). Histórico: 2023 = 83,4 UF, 2024 = 84,3 UF, 2025 = 87,8 UF, 2026 = 90 UF. Si el ISR es negativo, el tope podría bajar.',
       },
       {
         question: '¿El tope imponible aplica a trabajadores independientes?',
         answer:
-          'Sí. Los trabajadores independientes (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 89,9 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope. Por eso los altos ingresos requieren APV o ahorro complementario para mantener el nivel de vida al jubilar.',
+          'Sí. Los trabajadores independientes (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 90 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope. Por eso los altos ingresos requieren APV o ahorro complementario para mantener el nivel de vida al jubilar.',
       },
     ],
     content: `<h2>¿Qué es el tope imponible?</h2>
 <p>El <strong>tope imponible</strong> es el monto máximo de remuneración mensual sobre el cual se calculan las cotizaciones obligatorias de AFP y salud (FONASA o Isapre). Es decir: si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese tope, y la porción que excede no cotiza.</p>
 <aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>D.L. 3500, Art. 16</strong><p>"La remuneración y renta máximas mensuales sobre las que se efectúan las cotizaciones obligatorias se reajustarán anualmente, en el mes de febrero, considerando la variación anual del Índice de Remuneraciones Reales (ISR) determinado por el INE."</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tope AFP/Salud 2026</span><span class="data-grid__value">89,9 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP (UF mayo 2026)</span><span class="data-grid__value">~$3.626.566</span></li><li><span class="data-grid__label">Tope cesantía 2026</span><span class="data-grid__value">134,9 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP cesantía</span><span class="data-grid__value">~$5.444.235</span></li></ul>
+<ul class="data-grid"><li><span class="data-grid__label">Tope AFP/Salud 2026</span><span class="data-grid__value">90 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP (UF mayo 2026)</span><span class="data-grid__value">~$3.626.566</span></li><li><span class="data-grid__label">Tope cesantía 2026</span><span class="data-grid__value">134,9 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP cesantía</span><span class="data-grid__value">~$5.444.235</span></li></ul>
 
 <h2>Cómo se actualiza cada año</h2>
 <p>El tope se reajusta cada febrero por la <strong>Superintendencia de Pensiones</strong> aplicando la variación real de las remuneraciones del país (ISR del INE). Histórico reciente:</p>
@@ -1053,23 +1053,23 @@ export const articles: Article[] = [
 <tr><td>2023</td><td>83,4 UF</td><td>125,1 UF</td></tr>
 <tr><td>2024</td><td>84,3 UF</td><td>126,5 UF</td></tr>
 <tr><td>2025</td><td>87,8 UF</td><td>131,9 UF</td></tr>
-<tr><td><strong>2026</strong></td><td><strong>89,9 UF</strong></td><td><strong>134,9 UF</strong></td></tr>
+<tr><td><strong>2026</strong></td><td><strong>90 UF</strong></td><td><strong>134,9 UF</strong></td></tr>
 </tbody>
 </table>
 
 <h2>Cómo afecta tu sueldo líquido</h2>
 <p>Para sueldos <strong>bajo el tope</strong> (la mayoría de los trabajadores chilenos), el tope no tiene efecto: cotizan sobre el bruto completo. Para sueldos <strong>sobre el tope</strong>, el porcentaje efectivo de cotización cae a medida que sube el bruto.</p>
 <div class="numeric-example"><div class="numeric-example__title">Comparación: bruto $3.000.000 vs $5.000.000 (AFP Habitat 1,27%)</div><ul><li>Sueldo $3M (bajo tope): AFP descuenta 11,27% × $3M = $338.100 (11,27% efectivo)</li><li>Sueldo $5M (sobre tope $3,63M): AFP descuenta 11,27% × $3.626.566 = $408.711 (8,17% efectivo)</li></ul><span class="total">Sueldo más alto, descuento previsional efectivo más bajo</span></div>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por eso los altos ingresos requieren APV o ahorro complementario</strong><p>Si tu sueldo supera el tope, tu pensión futura quedará anclada al tope (no a tu sueldo real). Para mantener el nivel de vida en la jubilación necesitas APV (Régimen B) o ahorro voluntario en otro instrumento. La diferencia se nota a los 65: pensión sobre 89,9 UF sin APV vs sobre tu bruto real con APV.</p></div></aside>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por eso los altos ingresos requieren APV o ahorro complementario</strong><p>Si tu sueldo supera el tope, tu pensión futura quedará anclada al tope (no a tu sueldo real). Para mantener el nivel de vida en la jubilación necesitas APV (Régimen B) o ahorro voluntario en otro instrumento. La diferencia se nota a los 65: pensión sobre 90 UF sin APV vs sobre tu bruto real con APV.</p></div></aside>
 
 <h2>Tope imponible para independientes</h2>
-<p>Los <strong>trabajadores independientes</strong> (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 89,9 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope.</p>
+<p>Los <strong>trabajadores independientes</strong> (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 90 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope.</p>
 
 <h2>Tope cesantía: distinto y más alto</h2>
 <p>El <strong>seguro de cesantía</strong> tiene tope propio (134,9 UF en 2026), mucho más alto que el de AFP/salud. Esto fue cambio reciente: hasta 2017 el tope cesantía era el mismo que AFP. La idea fue dar mayor cobertura a sueldos medios-altos en caso de cesantía (subsidio del Fondo Solidario).</p>
 
 <h2>Por qué cambia cada año</h2>
-<p>El tope se ajusta por <strong>variación real de las remuneraciones</strong> (ISR), no por IPC. La diferencia es importante: en 2025 el ISR fue ~+2,4% real (las remuneraciones crecieron por encima de la inflación), por eso el tope subió de 87,8 a 89,9 UF (+2,4%). Si el ISR hubiera sido negativo, el tope habría bajado.</p>
+<p>El tope se ajusta por <strong>variación real de las remuneraciones</strong> (ISR), no por IPC. La diferencia es importante: en 2025 el ISR fue ~+2,4% real (las remuneraciones crecieron por encima de la inflación), por eso el tope subió de 87,8 a 90 UF (+2,4%). Si el ISR hubiera sido negativo, el tope habría bajado.</p>
 <p>Calcula tu cotización efectiva considerando el tope con la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> o la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización independiente</a>.</p>
 <p>Fuentes: <a href="https://www.spensiones.cl" target="_blank" rel="noopener">Superintendencia de Pensiones</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">D.L. 3500 Art. 16</a>, <a href="https://www.ine.cl" target="_blank" rel="noopener">INE — Índice de Remuneraciones Reales</a>.</p>`,
   },

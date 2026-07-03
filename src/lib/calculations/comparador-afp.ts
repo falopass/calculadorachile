@@ -53,7 +53,7 @@ export function calculateComparadorAFP(input: ComparadorAFPInput): ComparadorAFP
   const sueldo = Math.max(0, sueldoBruto);
   const anos = Math.max(1, Math.min(anosPension, 50));
 
-  // Aplicar tope imponible (89,9 UF en 2026): la comisión solo se
+  // Aplicar tope imponible (90 UF en 2026): la comisión solo se
   // cobra hasta el tope, no sobre el sueldo bruto total. Para sueldos
   // altos esto reduce significativamente la comisión real.
   const topeImponibleCLP = TOPE_IMPOSITIVO.afp_salud * UF.valor;

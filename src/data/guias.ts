@@ -118,7 +118,7 @@ export const guias: Guia[] = [
         html: `<p>El <strong>sueldo líquido</strong> es el monto que un trabajador dependiente recibe efectivamente en su cuenta bancaria cada mes después de aplicarse todos los descuentos legales obligatorios. En Chile, la diferencia entre el <strong>sueldo bruto</strong> (lo pactado en el contrato) y el líquido oscila entre un 17% y un 25%, dependiendo del sistema de salud, la AFP elegida y si el sueldo entra o no en tramos del impuesto único de segunda categoría.</p>
 <p>La estructura legal de estos descuentos está definida principalmente en el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">D.L. 3500 (sistema de pensiones)</a>, la Ley 18.469 (Régimen de Salud), la Ley 19.728 (Seguro de Cesantía) y los artículos 42 y 43 de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a>.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>En síntesis</strong><p>De cada $1.000.000 brutos, un trabajador típico recibe entre $770.000 y $830.000 líquidos. La diferencia se distribuye entre AFP (≈11%), salud (7%), cesantía (0,6%) e impuesto único (variable).</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tope imponible AFP/Salud</span><span class="data-grid__value">89,9 UF</span></li><li><span class="data-grid__label">Tope imponible cesantía</span><span class="data-grid__value">134,9 UF</span></li><li><span class="data-grid__label">Tasa AFP obligatoria</span><span class="data-grid__value">10% + comisión</span></li><li><span class="data-grid__label">Tasa salud mínima</span><span class="data-grid__value">7%</span></li></ul>`,
+<ul class="data-grid"><li><span class="data-grid__label">Tope imponible AFP/Salud</span><span class="data-grid__value">90 UF</span></li><li><span class="data-grid__label">Tope imponible cesantía</span><span class="data-grid__value">134,9 UF</span></li><li><span class="data-grid__label">Tasa AFP obligatoria</span><span class="data-grid__value">10% + comisión</span></li><li><span class="data-grid__label">Tasa salud mínima</span><span class="data-grid__value">7%</span></li></ul>`,
       },
       {
         id: 'descuentos-obligatorios',
@@ -165,12 +165,12 @@ export const guias: Guia[] = [
       },
       {
         id: 'topes-imponibles',
-        title: 'Topes imponibles 2026: 89,9 UF y 134,9 UF',
+        title: 'Topes imponibles 2026: 90 UF y 134,9 UF',
         level: 2,
-        html: `<p>Las cotizaciones de AFP y salud se calculan sobre la <strong>remuneración imponible</strong>, que tiene un tope mensual de <strong>89,9 UF</strong> en 2026 (Superintendencia de Pensiones, circular vigente). Con UF a $40.340 el tope mensual equivale aproximadamente a $3.626.566.</p>
+        html: `<p>Las cotizaciones de AFP y salud se calculan sobre la <strong>remuneración imponible</strong>, que tiene un tope mensual de <strong>90 UF</strong> en 2026 (Superintendencia de Pensiones, Res. Exenta 237). Con UF a $40.340 el tope mensual equivale aproximadamente a $3.626.566.</p>
 <p>El seguro de cesantía tiene un tope distinto: <strong>134,9 UF</strong> mensuales, lo que da espacio adicional para sueldos altos.</p>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por qué tu descuento efectivo baja con sueldos altos</strong><p>Si tu sueldo bruto supera $3.626.566, las cotizaciones de AFP y salud se calculan solo sobre el tope. La porción que excede no cotiza, lo que reduce el porcentaje efectivo de descuento. Para un bruto de $5.000.000, el descuento previsional efectivo cae a ~14% del bruto en lugar del 18% típico.</p></div></aside>
-<p>El tope se actualiza anualmente cada febrero por la Superintendencia de Pensiones aplicando la variación real de remuneraciones (ISR) calculada por el INE. La memoria 2025-2026 fijó el tope en 89,9 UF, levemente superior al 87,8 UF del año anterior.</p>`,
+<p>El tope se actualiza anualmente cada febrero por la Superintendencia de Pensiones aplicando la variación real de remuneraciones (ISR) calculada por el INE. La memoria 2025-2026 fijó el tope en 90 UF, levemente superior al 87,8 UF del año anterior.</p>`,
       },
       {
         id: 'ejemplo-completo',
@@ -178,7 +178,7 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>Tomemos un caso concreto y desglosémoslo línea por línea para que puedas replicarlo con tus propios números.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Supuestos del ejemplo</strong><p>AFP Habitat (1,27% comisión), FONASA, contrato indefinido, sin bonos ni horas extra, sin asignaciones no imponibles. UF mayo 2026: $40.340. UTM mayo 2026: $70.588.</p></div></aside>
-<div class="numeric-example"><div class="numeric-example__title">Cálculo paso a paso — sueldo bruto $1.500.000</div><ul><li><strong>Imponible</strong>: $1.500.000 (bajo el tope de 89,9 UF = $3.626.566)</li><li><strong>AFP</strong>: $1.500.000 × 11,27% = <code>$169.050</code></li><li><strong>Salud (7% FONASA)</strong>: $1.500.000 × 7% = <code>$105.000</code></li><li><strong>Cesantía (0,6%)</strong>: $1.500.000 × 0,6% = <code>$9.000</code></li><li><strong>Base tributable</strong>: $1.500.000 − ($169.050 + $105.000 + $9.000) = $1.216.950</li><li><strong>Base en UTM</strong>: $1.216.950 ÷ $70.588 ≈ 17,24 UTM</li><li>Tramo: 13,5 a 30 UTM → factor 4%, rebaja 0,54 UTM</li><li><strong>Impuesto</strong>: (17,24 × 0,04 − 0,54) × $70.588 = <code>$10.557</code></li><li><strong>Total descuentos</strong>: $169.050 + $105.000 + $9.000 + $10.557 = $293.607</li></ul><span class="total">Sueldo líquido: $1.206.393 (factor 80,4%)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Cálculo paso a paso — sueldo bruto $1.500.000</div><ul><li><strong>Imponible</strong>: $1.500.000 (bajo el tope de 90 UF = $3.626.566)</li><li><strong>AFP</strong>: $1.500.000 × 11,27% = <code>$169.050</code></li><li><strong>Salud (7% FONASA)</strong>: $1.500.000 × 7% = <code>$105.000</code></li><li><strong>Cesantía (0,6%)</strong>: $1.500.000 × 0,6% = <code>$9.000</code></li><li><strong>Base tributable</strong>: $1.500.000 − ($169.050 + $105.000 + $9.000) = $1.216.950</li><li><strong>Base en UTM</strong>: $1.216.950 ÷ $70.588 ≈ 17,24 UTM</li><li>Tramo: 13,5 a 30 UTM → factor 4%, rebaja 0,54 UTM</li><li><strong>Impuesto</strong>: (17,24 × 0,04 − 0,54) × $70.588 = <code>$10.557</code></li><li><strong>Total descuentos</strong>: $169.050 + $105.000 + $9.000 + $10.557 = $293.607</li></ul><span class="total">Sueldo líquido: $1.206.393 (factor 80,4%)</span></div>
 <p>Para validar tu propio cálculo con tu AFP y plan de salud específicos, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>, que también permite simular cambios de AFP, FONASA vs Isapre y presupuestar el efecto de bonos imponibles.</p>`,
       },
       {
@@ -188,7 +188,7 @@ export const guias: Guia[] = [
         html: `<p>Tres escenarios típicos para entender cómo cambia el factor bruto-líquido según el tramo del sueldo. Todos los ejemplos asumen AFP Habitat (1,27%), FONASA y contrato indefinido.</p>
 <div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $539.000 (ingreso mínimo)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$60.745</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$37.730</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.234</code></li><li><strong>Base tributable</strong>: $539.000 − $101.709 = $437.291</li><li><strong>Base UTM</strong>: $437.291 ÷ $70.588 ≈ 6,2 UTM (bajo 13,5 UTM exento)</li><li><strong>Impuesto</strong>: $0 (tramo exento)</li><li><strong>Total descuentos</strong>: $101.709</li></ul><span class="total">Líquido: $437.291 — factor 81,1% (sin impuesto único)</span></div>
 <div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000 (ya calculado arriba)</div><ul><li>Total descuentos: $293.607 (incluye $10.557 de impuesto único 4% marginal)</li></ul><span class="total">Líquido: $1.206.393 — factor 80,4%</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000 (sobre tope imponible)</div><ul><li><strong>Imponible AFP/Salud</strong>: tope 89,9 UF = <code>$3.626.566</code> (no $4M)</li><li><strong>AFP (11,27% sobre tope)</strong>: <code>$408.714</code></li><li><strong>Salud FONASA (7% sobre tope)</strong>: <code>$253.860</code></li><li><strong>Imponible cesantía</strong>: $4.000.000 (bajo tope cesantía 134,9 UF ≈ $5,4M)</li><li><strong>Cesantía (0,6%)</strong>: <code>$24.000</code></li><li><strong>Base tributable</strong>: $4.000.000 − $686.574 = $3.313.426</li><li><strong>Base UTM</strong>: $3.313.426 ÷ $70.588 ≈ 46,9 UTM (tramo 30-50 UTM, factor 8%, rebaja 1,2 UTM)</li><li><strong>Impuesto</strong>: (46,9 × 0,08 − 1,2) × $70.588 ≈ <code>$179.953</code></li><li><strong>Total descuentos</strong>: $866.527</li></ul><span class="total">Líquido: $3.133.473 — factor 78,3% (a pesar del impuesto, el tope ayuda)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000 (sobre tope imponible)</div><ul><li><strong>Imponible AFP/Salud</strong>: tope 90 UF = <code>$3.626.566</code> (no $4M)</li><li><strong>AFP (11,27% sobre tope)</strong>: <code>$408.714</code></li><li><strong>Salud FONASA (7% sobre tope)</strong>: <code>$253.860</code></li><li><strong>Imponible cesantía</strong>: $4.000.000 (bajo tope cesantía 134,9 UF ≈ $5,4M)</li><li><strong>Cesantía (0,6%)</strong>: <code>$24.000</code></li><li><strong>Base tributable</strong>: $4.000.000 − $686.574 = $3.313.426</li><li><strong>Base UTM</strong>: $3.313.426 ÷ $70.588 ≈ 46,9 UTM (tramo 30-50 UTM, factor 8%, rebaja 1,2 UTM)</li><li><strong>Impuesto</strong>: (46,9 × 0,08 − 1,2) × $70.588 ≈ <code>$179.953</code></li><li><strong>Total descuentos</strong>: $866.527</li></ul><span class="total">Líquido: $3.133.473 — factor 78,3% (a pesar del impuesto, el tope ayuda)</span></div>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Patrones que aparecen</strong><p>(1) En sueldo mínimo el factor es alto (~81%) porque no hay impuesto único. (2) En sueldo medio el factor cae al rondar 80% por el impuesto que empieza a morder. (3) En sueldo alto el factor vuelve a subir levemente porque el tope imponible "frena" las cotizaciones, aunque el impuesto crece.</p></div></aside>`,
       },
       {
@@ -251,7 +251,7 @@ export const guias: Guia[] = [
         level: 2,
         html: `<aside class="callout callout--error"><span class="callout__icon" aria-hidden="true">❌</span><div class="callout__body"><strong>5 errores que vemos siempre</strong><p>Estos son los errores más frecuentes al calcular sueldo líquido manualmente o validar una liquidación de remuneraciones.</p></div></aside>
 <ul>
-<li><strong>Aplicar el 10% AFP sobre todos los haberes</strong>: solo aplica sobre los <em>imponibles</em> y solo hasta el tope de 89,9 UF.</li>
+<li><strong>Aplicar el 10% AFP sobre todos los haberes</strong>: solo aplica sobre los <em>imponibles</em> y solo hasta el tope de 90 UF.</li>
 <li><strong>Olvidar la gratificación legal</strong>: el 25% de gratificación (tope 4,75 IMM/12) sí es imponible y forma parte del sueldo bruto declarado.</li>
 <li><strong>Confundir "sueldo base" con "sueldo bruto"</strong>: el bruto incluye base + gratificación + bonos imponibles.</li>
 <li><strong>Asumir que el plan de Isapre es siempre 7%</strong>: si el plan cuesta más, el trabajador paga el mayor entre 7% y el plan.</li>
@@ -277,7 +277,7 @@ export const guias: Guia[] = [
 <p>No se descuenta del trabajador. Es un costo del empleador que va al sistema solidario. En 2026 es 1,75% del imponible. No afecta tu sueldo líquido.</p>
 
 <h3>¿Por qué mi liquidación dice "imponible $X" y mi bruto es distinto?</h3>
-<p>Porque el imponible excluye haberes no imponibles (movilización, colación) y porque está topado en 89,9 UF. Si tu bruto incluye $50.000 de movilización, tu imponible será $50.000 menor que el bruto.</p>`,
+<p>Porque el imponible excluye haberes no imponibles (movilización, colación) y porque está topado en 90 UF. Si tu bruto incluye $50.000 de movilización, tu imponible será $50.000 menor que el bruto.</p>`,
       },
     ],
   },
@@ -497,7 +497,7 @@ export const guias: Guia[] = [
 <li><strong>Créditos hipotecarios</strong>: el saldo y los dividendos se denominan en UF. La cuota en pesos varía mes a mes con el IPC.</li>
 <li><strong>Arriendos de oficinas y propiedades altas</strong>: muchos contratos pactan el canon en UF para protegerse de la inflación.</li>
 <li><strong>Seguros de vida y salud</strong>: las primas y coberturas suelen expresarse en UF.</li>
-<li><strong>Tope imponible AFP/Salud (89,9 UF) y cesantía (134,9 UF)</strong>: los topes legales mensuales se ajustan automáticamente con la UF.</li>
+<li><strong>Tope imponible AFP/Salud (90 UF) y cesantía (134,9 UF)</strong>: los topes legales mensuales se ajustan automáticamente con la UF.</li>
 <li><strong>Subsidios habitacionales</strong>: los topes de propiedad y montos de subsidio (DS49, DS01, DS19) se expresan en UF.</li>
 <li><strong>Plusvalía inmobiliaria</strong>: la exención de 8.000 UF para vivienda habitual está en UF acumuladas.</li>
 <li><strong>Multas SII</strong>: muchas multas tributarias se expresan en UTM o UF.</li>
@@ -897,7 +897,7 @@ export const guias: Guia[] = [
         id: 'topes-y-tipos-cuenta',
         title: 'Tope imponible y tipos de cuenta',
         level: 2,
-        html: `<p>El <strong>tope imponible AFP/Salud 2026</strong> es <strong>89,9 UF</strong> mensuales (ajustado anualmente por la Superintendencia de Pensiones). Las cotizaciones se calculan solo sobre ese tope: si ganas $5.000.000 brutos, cotizas como si ganaras ~$3.626.566.</p>
+        html: `<p>El <strong>tope imponible AFP/Salud 2026</strong> es <strong>90 UF</strong> mensuales (ajustado anualmente por la Superintendencia de Pensiones). Las cotizaciones se calculan solo sobre ese tope: si ganas $5.000.000 brutos, cotizas como si ganaras ~$3.626.566.</p>
 <p>Cada afiliado tiene 4 tipos de cuenta en la AFP:</p>
 <ul>
 <li><strong>Cuenta de capitalización individual obligatoria</strong>: 10% mensual.</li>

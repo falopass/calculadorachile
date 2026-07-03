@@ -1043,17 +1043,17 @@ export const calculators: Calculator[] = [
   {
     id: 'patente-comercial',
     name: 'Patente Comercial Municipal',
-    description: 'Calcula el costo de la patente comercial según capital invertido, actividad y comuna. Semestral con topes UTM.',
+    description: 'Calcula el costo de la patente comercial según capital propio tributario, actividad y comuna. Pago anual en dos cuotas con topes UTM.',
     slug: 'calculadora-patente-comercial',
     category: 'empresas',
     featured: true,
     phase: 2,
     seoTitle: 'Calculadora Patente Comercial 2026 Chile — Valor Municipal',
     seoDescription:
-      'Calcula el valor de una patente comercial municipal en Chile según capital invertido, actividad y comuna. Topes UTM y pago semestral.',
-    keywords: ['patente comercial', 'patente municipal', 'costo patente Chile', 'capital invertido patente', 'tasa municipal', 'valor patente comercial', 'cálculo patente comercial', 'cálculo patente municipal', 'valor patente municipal 2026'],
+      'Calcula el valor de una patente comercial municipal en Chile según capital propio tributario, actividad y comuna. Topes UTM y pago anual en dos cuotas.',
+    keywords: ['patente comercial', 'patente municipal', 'costo patente Chile', 'capital propio tributario patente', 'tasa municipal', 'valor patente comercial', 'cálculo patente comercial', 'cálculo patente municipal', 'valor patente municipal 2026'],
     inputs: [
-      { id: 'capitalInvertido', label: 'Capital Invertido', type: 'number', placeholder: '$10.000.000', required: true, min: 0, tooltip: 'Valor total de activos fijos: equipos, mobiliario, instalaciones, mercadería. No incluye el local si es arrendado.' },
+      { id: 'capitalInvertido', label: 'Capital Propio Tributario', type: 'number', placeholder: '$10.000.000', required: true, min: 0, tooltip: 'Capital propio declarado al SII (patrimonio inicial ajustado por corrección monetica). No es lo mismo que capital social ni patrimonio neto.' },
       { id: 'actividad', label: 'Actividad', type: 'select', required: true, options: [
         { value: 'comercio', label: 'Comercio' },
         { value: 'industria', label: 'Industria' },
@@ -1070,19 +1070,19 @@ export const calculators: Calculator[] = [
     faq: [
       {
         question: '¿Cuánto vale una patente comercial en Chile?',
-        answer: 'La patente comercial se calcula como un porcentaje del capital invertido (0,25% a 0,5% según comuna), con un mínimo de 1 UTM y máximo de 8 UTM semestral. Para un capital de $10.000.000 en Santiago (0,5%), la patente es $50.000 semestral. El valor exacto depende de la comuna donde opera el negocio y del tipo de actividad.'
+        answer: 'La patente comercial se calcula como un porcentaje del capital propio tributario (0,25% a 0,5% según comuna), con un mínimo de 1 UTM y máximo de 8.000 UTM anuales. Para un capital de $10.000.000 en Santiago (0,5%), la patente anual es $50.000. El valor exacto depende de la comuna donde opera el negocio y del tipo de actividad.'
       },
       {
         question: '¿Cómo se calcula la patente municipal?',
-        answer: 'La patente municipal se calcula aplicando la tasa fijada por la municipalidad (entre 0,25% y 0,5%) sobre el capital invertido declarado. El resultado se ajusta a los topes legales: mínimo 1 UTM semestral y máximo 8 UTM semestral. La actividad (comercio, industria, servicios, transporte) también afecta la tasa aplicable.'
+        answer: 'La patente municipal se calcula aplicando la tasa fijada por la municipalidad (entre 0,25% y 0,5%) sobre el capital propio tributario declarado. El resultado se ajusta a los topes legales: mínimo 1 UTM anual y máximo 8.000 UTM anuales. La actividad (comercio, industria, servicios, transporte) también afecta la tasa aplicable.'
       },
       {
         question: '¿Cuándo se paga la patente comercial?',
-        answer: 'La patente se paga semestralmente: enero (primer semestre) y julio (segundo semestre). El pago se hace en la municipalidad donde funciona el negocio. Si inicias actividades a mitad de semestre, pagas proporcional por los meses restantes.'
+        answer: 'La patente se paga anualmente en dos cuotas: 31 de enero (primer semestre) y 31 de julio (segundo semestre). El pago se hace en la municipalidad donde funciona el negocio. Si inicias actividades a mitad de período, pagas proporcional por los meses restantes.'
       },
       {
-        question: '¿Qué es el capital invertido de la patente?',
-        answer: 'El capital invertido incluye activos fijos: maquinarias, equipos, mobiliario, instalaciones, mercaderías y vehículos. No incluye el local si es arrendado. Debes declararlo anualmente en la municipalidad al renovar la patente.'
+        question: '¿Qué es el capital propio tributario de la patente?',
+        answer: 'El capital propio tributario es el patrimonio inicial declarado al inicio de actividades, ajustado por la corrección monetaria del SII cada año. No es el capital social del contrato ni el patrimonio neto del balance. Se obtiene del Form. 22 del año anterior. Empresas nuevas pueden declarar capital cero el primer año (mínimo 1 UTM).'
       },
       {
         question: '¿Necesito patente para todo negocio?',
@@ -1259,7 +1259,7 @@ export const calculators: Calculator[] = [
     phase: 2,
     seoTitle: 'Calculadora CAE 2026 Chile — Simula tu crédito estudiantil',
     seoDescription:
-      'Simula la cuota del Crédito con Aval del Estado en Chile: monto, plazo, tasa y total a pagar. Pago contingente al ingreso.',
+      'Simula la cuota del Crédito con Aval del Estado en Chile: monto, plazo, tasa y total a pagar. Tasa fija 2% en UF, cobro a 18 meses del egreso.',
     keywords: ['CAE', 'crédito aval estado', 'credito universidad Chile', 'dividendo CAE', 'crédito estudios', 'calculadora CAE', 'calcular CAE crédito', 'cuota CAE'],
     inputs: [
       { id: 'montoCredito', label: 'Monto del Crédito', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Monto total solicitado. El CAE cubre hasta 90% con garantía estatal.' },
@@ -1270,7 +1270,7 @@ export const calculators: Calculator[] = [
     faq: [
       {
         question: '¿Cómo se calcula la cuota del CAE?',
-        answer: 'Desde la Ley 21.605 (2023), el CAE se paga bajo régimen contingente al ingreso: la cuota mensual máxima es 10% del ingreso bruto del deudor, ajustada cada año. Si tu ingreso baja, la cuota baja; si te quedas sin trabajo, la cuota se suspende. La tasa anual es 2% real sobre UF y el plazo máximo 240 cuotas (20 años).'
+        answer: 'El CAE tiene tasa fija de 2% real anual sobre UF, cobro a 18 meses del egreso y plazo máximo de 240 cuotas (20 años). La cuota se calcula con la fórmula de crédito tradicional (monto, tasa y plazo); el saldo restante a los 20 años se condona.'
       },
       {
         question: '¿Cuándo se empieza a pagar el CAE?',
@@ -1282,7 +1282,7 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Qué pasa si no encuentro trabajo con el CAE?',
-        answer: 'Si estás desempleado, puedes solicitar la suspensión de pagos por hasta 12 meses. El nuevo régimen contingente al ingreso (Ley 21.605) elimina el riesgo de no poder pagar: si tu ingreso baja, la cuota baja proporcionalmente. Si te quedas sin trabajo, la cuota se suspende.'
+        answer: 'Si estás desempleado, puedes solicitar la suspensión de pagos por hasta 12 meses. El CAE tiene tasa fija de 2% en UF y cobro a 18 meses del egreso; la cuota no se ajusta a tu ingreso. Si tienes problemas de pago, contacta a Comisión INGRESA para reprogramar.'
       },
       {
         question: '¿Quiénes pueden postular al CAE?',

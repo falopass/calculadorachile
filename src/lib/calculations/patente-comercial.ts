@@ -24,7 +24,7 @@ export interface PatenteComercialResult {
 }
 
 /**
- * Tasas comunales como porcentaje del capital invertido
+ * Tasas comunales como porcentaje del capital propio tributario
  * Varían según la comuna donde se obtiene la patente
  */
 const TASAS_COMUNALES: Record<string, number> = {
@@ -65,9 +65,9 @@ const LABELS_COMUNA: Record<string, string> = {
  *
  * La patente comercial es un tributo municipal que deben pagar las empresas
  * y personas naturales que desarrollan actividades comerciales, industriales
- * o de servicios. Se calcula como un porcentaje del capital invertido,
+ * o de servicios. Se calcula como un porcentaje del capital propio tributario,
  * con montos mínimos y máximos expresados en UTM.
- * Se paga semestralmente (enero y julio).
+ * Se paga anualmente en dos cuotas (31 enero y 31 julio).
  *
  * Base legal: DL 3063/1979 (Ley de Rentas Municipales), Art. 24-26
  *
@@ -107,7 +107,7 @@ export function calculatePatenteComercial(input: PatenteComercialInput): Patente
     aplicaTope = 'normal';
   }
 
-  // La patente se paga semestralmente (enero y julio)
+  // La patente se paga anualmente en dos cuotas (31 enero y 31 julio)
   const patenteSemestral = Math.round(patenteAnual / 2);
   const patenteMinimaSemestral = Math.round(patenteMinimaAnual / 2);
   const patenteMaximaSemestral = Math.round(patenteMaximaAnual / 2);
@@ -131,7 +131,7 @@ export function calculatePatenteComercial(input: PatenteComercialInput): Patente
 export function patenteComercialToResults(result: PatenteComercialResult): CalculatorResult[] {
   return [
     {
-      label: 'Patente Semestral',
+      label: 'Cuota (50% anual)',
       value: result.patenteSemestral,
       format: 'CLP',
       highlight: true,
@@ -147,17 +147,17 @@ export function patenteComercialToResults(result: PatenteComercialResult): Calcu
       format: 'percentage',
     },
     {
-      label: 'Capital Invertido',
+      label: 'Capital Propio Tributario',
       value: result.capitalInvertido,
       format: 'CLP',
     },
     {
-      label: 'Patente Mínima (semestral)',
+      label: 'Cuota Mínima (50% anual)',
       value: result.patenteMinimaSemestral,
       format: 'CLP',
     },
     {
-      label: 'Patente Máxima (semestral)',
+      label: 'Cuota Máxima (50% anual)',
       value: result.patenteMaximaSemestral,
       format: 'CLP',
     },
