@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Inter, Syne } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
@@ -187,10 +188,11 @@ export default function RootLayout({
           href="/blog/feed.xml"
         />
         {adsenseEnabled && (
-          <script
+          <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
             crossOrigin="anonymous"
+            strategy="afterInteractive"
           />
         )}
       </head>
