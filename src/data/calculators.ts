@@ -13,6 +13,13 @@ export const calculators: Calculator[] = [
     category: 'sueldo',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Sueldo mínimo y Código del Trabajo' },
+      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'Comisiones AFP y cotizaciones' },
+      { name: 'AFC Chile', url: 'https://www.afc.cl/seguro-de-cesantia/', note: 'Seguro de cesantía (SIL)' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuesto único a las rentas del trabajo' },
+    ],
     keywords: ['sueldo líquido', 'calculadora sueldo', 'descuentos AFP', 'sueldo bruto a líquido', 'descuentos legales Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -60,7 +67,7 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Cuánto me descuentan del sueldo bruto?',
-        answer: 'Los descuentos legales obligatorios suman aproximadamente un 20% del sueldo bruto: AFP 10% + comisión (varía por AFP, entre 0.14% y 1.15%), salud 7% (FONASA o Isapre), y seguro de cesantía 0.6% (contrato indefinido) o 0% (contrato a plazo fijo). Además, si tu sueldo supera ciertos topes, se aplica retención de impuesto de segunda categoría.',
+        answer: 'Los descuentos legales obligatorios suman aproximadamente un 20% del sueldo bruto: AFP 10% + comisión (varía por AFP, entre 0.46% y 1.45%), salud 7% (FONASA o Isapre), y seguro de cesantía 0.6% (contrato indefinido) o 0% (contrato a plazo fijo). Además, si tu sueldo supera ciertos topes, se aplica retención de impuesto de segunda categoría.',
       },
       {
         question: '¿La gratificación se incluye en el sueldo líquido?',
@@ -72,7 +79,7 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Qué pasa si gano más del tope imponible?',
-        answer: 'Si tu sueldo supera el tope imponible (UF 144.7 mensuales en 2026), las cotizaciones de AFP, salud y seguro de cesantía se calculan solo sobre ese tope, no sobre el total de tu sueldo. Esto significa que el porcentaje de descuento efectivo es menor para sueldos muy altos.',
+        answer: 'Si tu sueldo supera el tope imponible (90 UF mensuales en 2026 para AFP y salud, 135.2 UF para seguro de cesantía), las cotizaciones se calculan solo sobre ese tope, no sobre el total de tu sueldo. Esto significa que el porcentaje de descuento efectivo es menor para sueldos muy altos.',
       },
       {
         question: '¿Cómo se calcula el factor de conversión bruto a líquido?',
@@ -104,6 +111,11 @@ export const calculators: Calculator[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Código del Trabajo y finiquito' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuestos aplicables al finiquito' },
+    ],
     keywords: ['finiquito', 'calculadora finiquito', 'indemnización por años de servicio', 'vacaciones proporcionales', 'renuncia trabajo Chile'],
     inputs: [
       // Campos esenciales - siempre visibles
@@ -194,6 +206,10 @@ export const calculators: Calculator[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Banco Central de Chile', url: 'https://www.bcentral.cl/areas/estadisticas/estadisticas-de-precios/uf', note: 'Valor diario de la UF' },
+    ],
     keywords: ['UF a CLP', 'convertir UF', 'valor UF hoy', 'calculadora UF', 'UF pesos chilenos'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
@@ -259,6 +275,11 @@ export const calculators: Calculator[] = [
     category: 'impuestos',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl/destacados/iva/', note: 'Impuesto al Valor Agregado (19%)' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile/navegar?idNorma=825', note: 'DL 825 de 1974, Ley de IVA' },
+    ],
     keywords: ['IVA Chile', 'calculadora IVA', 'agregar IVA', 'quitar IVA', '19% IVA', 'precio neto bruto'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '$100.000', required: true, min: 0 },
@@ -298,6 +319,10 @@ export const calculators: Calculator[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Horas extraordinarias, Código del Trabajo Art. 30' },
+    ],
     keywords: ['horas extra', 'pago horas extraordinarias', 'recargo 50%', 'horas extra domingo', 'Código del Trabajo horas extra'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -367,6 +392,10 @@ export const calculators: Calculator[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Feriado proporcional, Código del Trabajo Art. 67' },
+    ],
     keywords: ['vacaciones proporcionales', 'feriado proporcional', 'días de vacaciones', 'finiquito vacaciones', 'Código del Trabajo Art. 67'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -404,6 +433,10 @@ export const calculators: Calculator[] = [
     category: 'impuestos',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl/servicios_online/', note: 'Boleta de honorarios electrónica y declaración anual' },
+    ],
     keywords: ['boleta de honorarios', 'retención honorarios', 'impuesto independientes', '15.25% retención', 'honorarios Chile'],
     inputs: [
       { id: 'montoBruto', label: 'Monto Bruto', type: 'number', placeholder: '$100.000', required: true, min: 0 },
@@ -450,7 +483,7 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Qué son las cotizaciones previsionales para independientes?',
-        answer: 'Las cotizaciones previsionales (Ley 21.133) se calculan sobre el 80% del monto bruto: 10% AFP, 7% salud y 1.15% seguro de cesantía. Estas pueden ser obligatorias o voluntarias según tu situación.',
+        answer: 'Las cotizaciones previsionales (Ley 21.133) se calculan sobre el 80% del monto bruto: 10% AFP, 7% salud y la distribución legal vigente para independientes. Estas pueden ser obligatorias o voluntarias según tu situación.',
       },
       {
         question: '¿Qué es el préstamo solidario del SII?',
@@ -477,6 +510,10 @@ export const calculators: Calculator[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Banco Central de Chile', url: 'https://www.bcentral.cl/areas/estadisticas/estadisticas-de-precios/utm', note: 'Valor mensual de la UTM' },
+    ],
     keywords: ['UTM a CLP', 'convertir UTM', 'valor UTM hoy', 'calculadora UTM', 'UTM pesos chilenos', 'unidad tributaria mensual'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '10', required: true, min: 0 },
@@ -511,12 +548,17 @@ export const calculators: Calculator[] = [
   {
     id: 'gratificacion-legal',
     name: 'Gratificación Legal 2026',
-    description: 'Calcula tu gratificación legal según el Art. 47 del Código del Trabajo. Conoce el tope anual de 4.75 UTA y cómo afecta tu sueldo.',
+    description: 'Calcula tu gratificación legal según el Art. 50 del Código del Trabajo. Conoce el tope anual de 4.75 IMM y cómo afecta tu sueldo.',
     slug: 'calculadora-gratificacion-legal',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    keywords: ['gratificación legal', 'calculadora gratificación', '25% remuneración', '4.75 UTA', 'Art. 47 Código del Trabajo', 'aguinaldo legal'],
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Gratificación legal, Código del Trabajo Art. 47 y 50' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Tope exento de gratificación (2,75 UTM anuales)' },
+    ],
+    keywords: ['gratificación legal', 'calculadora gratificación', '25% remuneración', '4.75 IMM', 'Art. 47 Código del Trabajo', 'Art. 50 Código del Trabajo', 'aguinaldo legal'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$500.000', required: true, min: 0 },
       { id: 'mesesTrabajados', label: 'Meses Trabajados', type: 'number', placeholder: '12', required: true, min: 1, max: 12 },
@@ -528,15 +570,15 @@ export const calculators: Calculator[] = [
     faq: [
       {
         question: '¿Qué es la gratificación legal?',
-        answer: 'La gratificación legal es un beneficio obligatorio que el empleador debe pagar a los trabajadores que devengan remuneraciones variables o que ganen menos de 4.75 UTA anuales. Está regulada por el Art. 47 del Código del Trabajo y corresponde al 25% de la remuneración mensual, con un tope de 4.75 UTA anuales.',
+        answer: 'La gratificación legal es un beneficio obligatorio que el empleador debe pagar a los trabajadores que devengan remuneraciones variables o que ganen menos de 4.75 UTA anuales (Art. 47 del Código del Trabajo). La modalidad más usada (Art. 50) corresponde al 25% de la remuneración mensual, con un tope de 4.75 ingresos mínimos mensuales (IMM) anuales.',
       },
       {
         question: '¿Cómo se calcula la gratificación?',
-        answer: 'La gratificación se calcula de dos formas y se paga la que resulte MAYOR: (1) 25% de la remuneración mensual con tope de 4.75 UTA, o (2) 4.75% del ingreso mínimo anual. En la práctica, casi siempre se aplica el 25% porque resulta más favorable para el trabajador.',
+        answer: 'La gratificación (Art. 50 del Código del Trabajo) se calcula de dos formas y se paga la que resulte MENOR: (1) 25% de la remuneración mensual, o (2) 4.75 ingresos mínimos mensuales (IMM) anuales divididos en 12. En la práctica, los sueldos bajos y medios pagan el 25% (porque es menor que el tope), y los sueldos altos quedan topeados en 4.75 IMM/12 mensual.',
       },
       {
         question: '¿Cuál es el tope de la gratificación?',
-        answer: 'El tope máximo de la gratificación es de 4.75 UTA (Unidades Tributarias Anuales) al año. La UTA equivale a 12 UTM. En 2026, con UTM a $67.900, el tope anual es aproximadamente $3.867.300. Esto equivale a unos $322.275 mensuales máximos de gratificación.',
+        answer: 'El tope máximo de la gratificación (Art. 50 del Código del Trabajo) es de 4.75 ingresos mínimos mensuales (IMM) anuales. En 2026, con IMM a $553.553, el tope anual es $2.629.377 (4.75 × $553.553), lo que equivale a unos $219.114 mensuales máximos de gratificación.',
       },
       {
         question: '¿Todos los trabajadores tienen derecho a gratificación?',
@@ -556,6 +598,11 @@ export const calculators: Calculator[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Indemnización por años de servicio, Código del Trabajo Art. 163' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Tope exento de impuesto (30 UTM por año)' },
+    ],
     keywords: ['indemnización años de servicio', 'calculadora indemnización', '30 días por año', 'Art. 163 Código del Trabajo', 'despido injustificado', 'tope 11 años'],
     inputs: [
       { id: 'ultimoSueldo', label: 'Último Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -594,6 +641,11 @@ export const calculators: Calculator[] = [
     category: 'familia',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Retención de pensión de alimentos del sueldo' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'Ley 14.908 sobre pago de pensiones de alimentos' },
+    ],
     keywords: ['pensión alimenticia', 'calculadora pensión', 'Ley 14.908', 'alimentos hijos', 'porcentaje pensión', 'alimentos Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -632,6 +684,11 @@ export const calculators: Calculator[] = [
     category: 'vivienda',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Banco Central de Chile', url: 'https://www.bcentral.cl/areas/estadisticas', note: 'Variación IPC para reajuste de arriendo' },
+      { name: 'MINVU', url: 'https://www.minvu.gob.cl', note: 'Ley 18.101 de arrendamiento de predios urbanos' },
+    ],
     keywords: ['reajuste arriendo', 'aumento arriendo', 'IPC arriendo', 'UF arriendo', 'reajuste contrato arriendo', 'tope aumento arriendo Chile'],
     inputs: [
       { id: 'arriendoActual', label: 'Arriendo Actual', type: 'number', placeholder: '$300.000', required: true, min: 0 },
@@ -670,6 +727,11 @@ export const calculators: Calculator[] = [
     category: 'vehiculos',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl/permiso-de-circulacion/', note: 'Permiso de circulación anual' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Tasación fiscal de vehículos' },
+    ],
     keywords: ['permiso de circulación', 'costo permiso circulación', 'permiso municipal', 'patente vehículo', 'descuento antigüedad vehículo', 'permiso 2026'],
     inputs: [
       { id: 'valorVehiculo', label: 'Valor del Vehículo', type: 'number', placeholder: '$15.000.000', required: true, min: 0 },
@@ -716,6 +778,13 @@ export const calculators: Calculator[] = [
     category: 'empresas',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Cotizaciones obligatorias y Código del Trabajo' },
+      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'Comisiones AFP (aporte empleador)' },
+      { name: 'AFC Chile', url: 'https://www.afc.cl/seguro-de-cesantia/', note: 'Seguro de cesantía (aporte empleador 2.4%)' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuesto único a las rentas del trabajo' },
+    ],
     keywords: ['costo empleado PYME', 'cuánto cuesta un empleado', 'gasto empleador', 'cotizaciones patronales', 'costo total trabajador Chile', 'sueldo real empresa'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$500.000', required: true, min: 0 },
@@ -739,11 +808,11 @@ export const calculators: Calculator[] = [
     faq: [
       {
         question: '¿Cuánto cuesta realmente un empleado en Chile?',
-        answer: 'El costo real de un empleado es aproximadamente 1.3 a 1.5 veces el sueldo bruto. Para un sueldo de $500.000, el costo total para la empresa es de unos $650.000-$750.000 mensuales. Esto incluye: sueldo bruto, gratificación, aportes del empleador (SIS 1.15%, seguro cesantía 2.4%), y beneficios adicionales.',
+        answer: 'El costo real de un empleado es aproximadamente 1.3 a 1.5 veces el sueldo bruto. Para un sueldo de $500.000, el costo total para la empresa es de unos $650.000-$750.000 mensuales. Esto incluye: sueldo bruto, gratificación, aportes del empleador (SIS 1.62%, seguro cesantía 2.4%), y beneficios adicionales.',
       },
       {
         question: '¿Qué aportes debe pagar el empleador?',
-        answer: 'El empleador debe pagar: SIS (Seguro de Invalidez y Sobrevivencia) 1.15% del sueldo imponible, Seguro de Cesantía 2.4% (contrato indefinido), y cotización de salud 7% si el empleado está en FONASA. Además debe pagar gratificación legal (25% con tope 4.75 UTA).',
+        answer: 'El empleador debe pagar: SIS (Seguro de Invalidez y Sobrevivencia) 1.62% del sueldo imponible, Seguro de Cesantía 2.4% (contrato indefinido), y cotización de salud 7% si el empleado está en FONASA. Además debe pagar gratificación legal (25% con tope de 4.75 IMM anuales según Art. 50).',
       },
       {
         question: '¿Qué es el factor precacional?',
@@ -770,6 +839,11 @@ export const calculators: Calculator[] = [
     category: 'vivienda',
     featured: true,
     phase: 1,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'CMF', url: 'https://www.cmfchile.cl', note: 'Regulación de créditos hipotecarios y TMC' },
+      { name: 'Banco Central de Chile', url: 'https://www.bcentral.cl/areas/estadisticas/estadisticas-de-precios/uf', note: 'UF para simulación en unidades de fomento' },
+    ],
     keywords: ['crédito hipotecario', 'simulador dividendo', 'crédito vivienda Chile', 'hipoteca UF', 'amortización francesa', 'dividendo mensual'],
     inputs: [
       { id: 'montoUF', label: 'Monto del Crédito (UF)', type: 'number', placeholder: '2000', required: true, min: 0, tooltip: 'Monto que solicitas al banco en UF. Ej: 2000 UF para una propiedad de 2500 UF con 500 UF de pie.' },
@@ -846,11 +920,16 @@ export const calculators: Calculator[] = [
     category: 'impuestos',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Operación renta y formulario 22' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'DL 824, Ley sobre Impuesto a la Renta' },
+    ],
     keywords: ['operación renta', 'impuesto independientes', 'renta trabajo independiente', 'formulario 22', 'impuesto anual Chile'],
     inputs: [
       { id: 'ingresosAnuales', label: 'Ingresos Brutos Anuales', type: 'number', placeholder: '$12.000.000', required: true, min: 0, tooltip: 'Suma de todos tus ingresos del año como independiente. Incluye boletas de honorarios y otros ingresos.' },
       { id: 'gastosAnuales', label: 'Gastos Anuales', type: 'number', placeholder: '$2.000.000', required: true, min: 0, tooltip: 'Gastos necesarios para tu actividad: oficina, insumos, servicios, etc. Deben estar respaldados con facturas.' },
-      { id: 'cotizacionesObligatorias', label: 'Cotizaciones Obligatorias', type: 'number', placeholder: '$1.500.000', required: true, min: 0, tooltip: 'AFP (10% + comisión), salud (7%) y SIS (1.15%) pagados durante el año.' },
+      { id: 'cotizacionesObligatorias', label: 'Cotizaciones Obligatorias', type: 'number', placeholder: '$1.500.000', required: true, min: 0, tooltip: 'AFP (10% + comisión), salud (7%) y SIS (1.62%) pagados durante el año.' },
       { id: 'ahorroPrevisional', label: 'Ahorro Previsional (APV)', type: 'number', placeholder: '$0', required: false, min: 0, tooltip: 'Aportes APV hasta 600 UF anuales dan beneficio tributario. Reduce tu renta imponible.' },
     ],
     faq: [
@@ -884,6 +963,11 @@ export const calculators: Calculator[] = [
     category: 'vivienda',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Contribuciones (impuesto territorial)' },
+      { name: 'MINVU', url: 'https://www.minvu.gob.cl', note: 'Avalúo fiscal de propiedades' },
+    ],
     keywords: ['contribuciones', 'impuesto territorial', 'avalúo fiscal', 'contribuciones semestrales', 'impuesto bienes raíces Chile'],
     inputs: [
       { id: 'avaluoFiscal', label: 'Avalúo Fiscal', type: 'number', placeholder: '$50.000.000', required: true, min: 0, tooltip: 'Valor asignado por el SII a tu propiedad. No es el valor comercial. Aparece en el certificado de dominio vigente.' },
@@ -926,6 +1010,11 @@ export const calculators: Calculator[] = [
     category: 'vivienda',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'Arancel de Notarios y Conservadores' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuesto a las ganancias de capital y timbres' },
+    ],
     keywords: ['costo notaría', 'compraventa inmueble', 'derechos registrales', 'impuesto timbres', 'notaría Chile'],
     inputs: [
       { id: 'valorPropiedad', label: 'Valor de la Propiedad', type: 'number', placeholder: '$100.000.000', required: true, min: 0, tooltip: 'Valor de venta de la propiedad. Se usa para calcular honorarios notariales e impuestos.' },
@@ -968,6 +1057,11 @@ export const calculators: Calculator[] = [
     category: 'impuestos',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuesto a la plusvalía y renta inmobiliaria' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'DL 824, Art. 17 (plusvalía exenta hasta 8 UTM)' },
+    ],
     keywords: ['plusvalía', 'impuesto venta propiedad', 'ganancia capital Chile', 'venta inmueble impuesto', 'plusvalía años tenencia'],
     inputs: [
       { id: 'precioCompra', label: 'Precio de Compra', type: 'number', placeholder: '$80.000.000', required: true, min: 0, tooltip: 'Valor que pagaste originalmente por la propiedad. Debe estar en la escritura de compraventa.' },
@@ -1006,6 +1100,10 @@ export const calculators: Calculator[] = [
     category: 'vivienda',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'MINVU', url: 'https://www.minvu.gob.cl', note: 'Subsidios habitacionales DS49, DS01, DS19' },
+    ],
     keywords: ['subsidio habitacional', 'DS49', 'DS01', 'subsidio vivienda Chile', 'tramo subsidio', 'ahorro requerido'],
     inputs: [
       { id: 'valorPropiedad', label: 'Valor de la Propiedad (UF)', type: 'number', placeholder: '2000', required: true, min: 0, tooltip: 'Valor total de la propiedad en UF. El subsidio cubre parte de este valor según tu tramo.' },
@@ -1048,6 +1146,11 @@ export const calculators: Calculator[] = [
     category: 'empresas',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Patente municipal e impuestos empresariales' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'DL 3063, Ley de Rentas Municipales' },
+    ],
     seoTitle: 'Calculadora Patente Comercial 2026 Chile — Valor Municipal',
     seoDescription:
       'Calcula el valor de una patente comercial municipal en Chile según capital propio tributario, actividad y comuna. Topes UTM y pago anual en dos cuotas.',
@@ -1102,6 +1205,10 @@ export const calculators: Calculator[] = [
     category: 'pension',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'Comisiones AFP comparadas' },
+    ],
     keywords: ['comparador AFP', 'comisiones AFP', 'mejor AFP', 'cambio AFP', 'ahorro pensiones Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$800.000', required: true, min: 0, tooltip: 'Tu sueldo bruto mensual. La comisión AFP se calcula como porcentaje de este monto.' },
@@ -1147,6 +1254,11 @@ export const calculators: Calculator[] = [
     category: 'pension',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'APV y ahorro previsional voluntario' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Beneficio tributario del APV (tope 600 UF)' },
+    ],
     keywords: ['APV', 'ahorro previsional voluntario', 'simulador APV', 'beneficio tributario APV', 'ahorro pensiones'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$1.000.000', required: true, min: 0, tooltip: 'Tu sueldo bruto determina el beneficio tributario. A mayor sueldo, mayor el ahorro de impuestos.' },
@@ -1185,6 +1297,11 @@ export const calculators: Calculator[] = [
     category: 'beneficios',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Mora en pago de remuneraciones, Código del Trabajo Art. 96' },
+      { name: 'CMF', url: 'https://www.cmfchile.cl', note: 'Tasa máxima convencional (TMC) para intereses' },
+    ],
     keywords: ['intereses mora', 'mora laboral Chile', 'TMC', 'deuda laboral', 'intereses por mora trabajo'],
     inputs: [
       { id: 'montoDeuda', label: 'Monto de la Deuda', type: 'number', placeholder: '$500.000', required: true, min: 0, tooltip: 'Monto adeudado en pesos. Puede ser sueldo, indemnización, horas extra, etc.' },
@@ -1221,6 +1338,11 @@ export const calculators: Calculator[] = [
     category: 'familia',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Asignación familiar, Código del Trabajo' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Tramos y montos de asignación familiar' },
+    ],
     keywords: ['asignación familiar', 'asignación por hijo', 'tramo asignación', 'subsidio familiar Chile'],
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0, tooltip: 'Tu sueldo bruto mensual determina el tramo. Incluye todas las remuneraciones imponibles.' },
@@ -1257,6 +1379,11 @@ export const calculators: Calculator[] = [
     category: 'educacion',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'MINEDUC', url: 'https://www.mineduc.cl', note: 'Crédito con Aval del Estado (CAE)' },
+      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl', note: 'Información oficial de beneficios estudiantiles y trámites' },
+    ],
     seoTitle: 'Calculadora CAE 2026 Chile — Simula tu crédito estudiantil',
     seoDescription:
       'Simula la cuota del Crédito con Aval del Estado en Chile: monto, plazo, tasa y total a pagar. Tasa fija 2% en UF, cobro a 18 meses del egreso.',
@@ -1298,6 +1425,11 @@ export const calculators: Calculator[] = [
     category: 'vehiculos',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'CMF', url: 'https://www.cmfchile.cl', note: 'Regulación de créditos de consumo' },
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en créditos automotrices' },
+    ],
     keywords: ['crédito automotriz', 'simulador auto', 'crédito vehículo Chile', 'pie auto', 'cuota mensual auto'],
     inputs: [
       { id: 'valorVehiculo', label: 'Valor del Vehículo', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Valor total del vehículo nuevo o usado.' },
@@ -1337,6 +1469,11 @@ export const calculators: Calculator[] = [
     category: 'vehiculos',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'Ley de Tránsito y multas en UTM' },
+      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl', note: 'Cobro de multas de tránsito' },
+    ],
     keywords: ['multas tránsito', 'multa UTM', 'infracción tránsito Chile', 'valor multa', 'multa leve grave gravísima'],
     inputs: [
       { id: 'tipoMulta', label: 'Tipo de Infracción', type: 'select', required: true, options: [
@@ -1379,6 +1516,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Ministerio de Transportes', url: 'https://www.mtt.gob.cl', note: 'Concesiones viales y telepeaje TAG' },
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en peajes' },
+    ],
     keywords: ['costo TAG', 'autopista Chile', 'peaje TAG', 'santiago rancagua TAG', 'descuento frecuente'],
     inputs: [
       { id: 'peajes', label: 'Ruta', type: 'select', required: true, options: [
@@ -1422,6 +1564,11 @@ export const calculators: Calculator[] = [
     category: 'hogar',
     featured: true,
     phase: 2,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Comisión Nacional de Energía', url: 'https://www.cne.cl', note: 'Tarifas eléctricas reguladas (BT1)' },
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en servicios básicos' },
+    ],
     keywords: ['cuenta de luz', 'tarifa BT1', 'costo electricidad Chile', 'consumo kWh', 'cuenta electrica'],
     inputs: [
       { id: 'consumoKWH', label: 'Consumo (kWh)', type: 'number', placeholder: '250', required: true, min: 0, tooltip: 'Consumo mensual en kWh. Aparece en tu boleta. Un hogar promedio consume 200-300 kWh.' },
@@ -1470,6 +1617,11 @@ export const calculators: Calculator[] = [
     category: 'impuestos',
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuesto de segunda categoría y tabla mensual' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'DL 824, Ley sobre Impuesto a la Renta' },
+    ],
     keywords: ['impuesto segunda categoría', 'retención impuesto', 'tramos impuesto Chile', 'impuesto sueldo 2026'],
     inputs: [
       { id: 'sueldoBrutoMensual', label: 'Sueldo Bruto Mensual', type: 'number', placeholder: '$800.000', required: true, min: 0, tooltip: 'Sueldo bruto antes de descuentos. El impuesto se calcula sobre la renta imponible anual.' },
@@ -1506,6 +1658,10 @@ export const calculators: Calculator[] = [
     category: 'impuestos',
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Pagos Provisionales Mensuales (PPM)' },
+    ],
     keywords: ['PPM', 'pagos provisionales mensuales', 'PPM independientes', 'retención mensual Chile'],
     inputs: [
       { id: 'ingresosBrutosAnuales', label: 'Ingresos Brutos Anuales', type: 'number', placeholder: '$12.000.000', required: true, min: 0, tooltip: 'Ingresos brutos del año anterior. El SII usa este monto para calcular el PPM del año siguiente.' },
@@ -1549,6 +1705,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SISS', url: 'https://www.siss.gob.cl', note: 'Subsidio de agua potable y servicios sanitarios' },
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en servicios básicos' },
+    ],
     keywords: ['subsidio agua potable', 'descuento agua', 'subsidio servicios básicos Chile'],
     inputs: [
       { id: 'consumoM3', label: 'Consumo Mensual (m³)', type: 'number', placeholder: '15', required: true, min: 0 },
@@ -1577,6 +1738,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'Cotización de independientes (Ley 21.133)' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Declaración de cotizaciones de independientes' },
+    ],
     keywords: ['cotización independientes', 'Ley 21.133', 'cotización AFP independiente', 'base imponible 80%'],
     inputs: [
       { id: 'rentaBrutaMensual', label: 'Renta Bruta Mensual', type: 'number', placeholder: '$800.000', required: true, min: 0 },
@@ -1595,7 +1761,7 @@ export const calculators: Calculator[] = [
       ]},
     ],
     faq: [
-      { question: '¿Cuánto cotiza un independiente?', answer: 'Los independientes cotizan sobre el 80% de su renta bruta. AFP (10% + comisión), salud (7%) y SIS (1.15%). El total es aproximadamente 18-19% de la base imponible.' },
+      { question: '¿Cuánto cotiza un independiente?', answer: 'Los independientes cotizan sobre el 80% de su renta bruta. AFP (10% + comisión), salud (7%) y la distribución legal vigente para SIS y seguro de accidentes. El total depende del año del calendario de cotizaciones.' },
     ],
   },
   {
@@ -1607,6 +1773,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Propina voluntaria del 10%' },
+      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'Normativa sobre propina en servicios' },
+    ],
     keywords: ['propina 10%', 'calculadora propina', 'propina restaurante Chile', 'dividir cuenta'],
     inputs: [
       { id: 'montoConsumo', label: 'Monto', type: 'number', placeholder: '$25.000', required: true, min: 0 },
@@ -1626,6 +1797,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Gastos comunes y derechos del consumidor' },
+      { name: 'MINVU', url: 'https://www.minvu.gob.cl', note: 'Copropiedad inmobiliaria y vivienda' },
+    ],
     keywords: ['gastos comunes', 'condominio Chile', 'gasto común m²', 'departamento gastos'],
     inputs: [
       { id: 'superficieM2', label: 'Superficie (m²)', type: 'number', placeholder: '65', required: true, min: 0 },
@@ -1648,6 +1824,10 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Banco Central de Chile', url: 'https://www.bcentral.cl/areas/estadisticas', note: 'Tipo de cambio dólar y euro' },
+    ],
     keywords: ['dólar a peso', 'euro a peso', 'conversor divisas Chile', 'USD CLP', 'EUR CLP'],
     inputs: [
       { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
@@ -1673,6 +1853,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Aguinaldos y beneficios laborales' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Tributación de aguinaldos' },
+    ],
     keywords: ['aguinaldo', 'aguinaldo fiestas patrias', 'aguinaldo navidad', 'aguinaldo escolar Chile'],
     inputs: [
       { id: 'tipo', label: 'Tipo de Aguinaldo', type: 'select', required: true, options: [
@@ -1696,6 +1881,11 @@ export const calculators: Calculator[] = [
     noIndex: true,
     featured: false,
     phase: 3,
+    lastReviewed: '2026-07-04',
+    sources: [
+      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'PGU, Pensión Garantizada Universal' },
+      { name: 'IPS', url: 'https://www.ips.gob.cl', note: 'Pago de PGU y pensiones solidarias' },
+    ],
     keywords: ['PGU', 'pensión garantizada universal', 'PGU Chile', 'bono pensión', 'Ley 21.400'],
     inputs: [
       { id: 'pensionActual', label: 'Pensión Actual', type: 'number', placeholder: '$250.000', required: true, min: 0 },

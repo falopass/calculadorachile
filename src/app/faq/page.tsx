@@ -59,7 +59,7 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Qué es CalculaChile?',
         answer:
-          'CalculaChile es un sitio web gratuito con más de 40 calculadoras para Chile: sueldo líquido, finiquito, UF, IVA, créditos hipotecarios, permiso de circulación, subsidios, AFP, boleta de honorarios y más. Todos los cálculos usan valores oficiales actualizados (UF y UTM diaria, tasas legales 2026) y citan las leyes que los respaldan.',
+          'CalculaChile es un sitio web gratuito con 39 calculadoras para Chile: sueldo líquido, finiquito, UF, IVA, créditos hipotecarios, permiso de circulación, subsidios, AFP, boleta de honorarios y más. Todos los cálculos usan valores oficiales actualizados (UF y UTM diaria, tasas legales 2026) y citan las leyes que los respaldan.',
       },
       {
         question: '¿Las calculadoras son gratuitas?',
@@ -95,7 +95,7 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Cuál es el tope imponible AFP/Salud en 2026?',
         answer:
-          'El tope imponible AFP y Salud en 2026 es de 90 UF mensuales (~$3.626.000 con UF a $40.340). Las cotizaciones se calculan solo sobre ese monto: si tu sueldo bruto es mayor, la porción que excede no cotiza. El tope del seguro de cesantía es distinto: 134,9 UF mensuales.',
+          'El tope imponible AFP y Salud en 2026 es de 90 UF mensuales. Las cotizaciones se calculan solo sobre ese monto: si tu sueldo bruto es mayor, la porción que excede no cotiza. El tope del seguro de cesantía es distinto: 135,2 UF mensuales.',
       },
       {
         question: '¿Cuándo me corresponde indemnización por años de servicio?',

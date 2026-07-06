@@ -1,214 +1,212 @@
-# AGENTS.md — CalculaChile (calculadorachile)
+# AGENTS.md — CalculaChile
 
-> AI agents and developers: Read this BEFORE making changes to this codebase.
+> Referencia obligatoria para agentes y desarrolladores antes de tocar este repo.
 
-## What is this?
+## Qué es este proyecto
 
-**CalculaChile** — 40 calculadoras financieras, laborales y tributarias de Chile. Next.js estático con AdSense, deploy Vercel. Prioridad: ship rápido, bajo costo.
-Domain: `calculadorachile.cl`
+**CalculaChile** (`calculadorachile.cl`) es un sitio chileno de calculadoras laborales, tributarias, previsionales y financieras. Es un producto **YMYL** (Your Money / Your Life): un error en una fórmula, monto o fuente puede afectar decisiones económicas reales y dañar confianza/SEO.
 
-## Stack
+Prioridad del proyecto: **ship rápido, bajo costo y alta confiabilidad en cálculos chilenos**. AdSense y tráfico orgánico son críticos.
 
-- **Framework**: Next.js 15.x (App Router)
-- **UI**: React 19 + TypeScript 5.x + Tailwind CSS 3.x
-- **Animations**: Framer Motion 12.x + GSAP 3.x + Three.js 183 (cinematic redesign)
-- **Smooth Scroll**: Lenis
-- **Testing**: Vitest 3.x + jsdom
-- **Fonts**: Inter, Syne, DM Sans, Playfair Display, JetBrains Mono
-- **Icons**: Lucide React
-- **Ads**: Google AdSense
-- **Analytics**: Google Analytics 4
-- **Data**: Banco Central de Chile API (BCentral)
-- **Canvas**: canvas (server-side image generation)
-- **Deploy**: Vercel
+Estado actual del catálogo:
 
-## Commands
+- **39 calculadoras activas** en `src/data/calculators.ts`.
+- **40 módulos de cálculo y 40 tests** en `src/lib/calculations/` porque `bono-bodas-oro` sigue en el repo como módulo/test histórico.
+- `bono-bodas-oro` fue retirado del catálogo público: `src/app/calculadoras/calculadora-bono-bodas-oro/route.ts` responde **410 Gone**. No lo reintroduzcas sin fórmula verificada y aprobación explícita.
+
+## Stack real instalado
+
+Verifica siempre `package.json` antes de asumir versiones. A la fecha:
+
+- **Framework**: Next.js 15.x con App Router.
+- **UI**: React 19, TypeScript 5, Tailwind CSS 3.
+- **Animaciones**: Framer Motion 12.x. No están instalados Three.js, GSAP ni Lenis.
+- **Íconos**: Lucide React.
+- **Testing**: Vitest 3 + jsdom.
+- **Fuentes activas**: Geist Sans + Geist Mono vía `next/font/google` en `src/app/layout.tsx`.
+- **Ads**: Google AdSense.
+- **Analytics**: Google Analytics 4.
+- **Datos económicos**: BCentral + Mindicador + fallback local.
+- **Imágenes dinámicas**: `canvas` para generación server-side donde aplica.
+- **Deploy**: Vercel.
+
+No instales dependencias nuevas salvo necesidad real demostrada. En particular, no introduzcas Three.js/GSAP/Lenis para “rediseño” sin decisión explícita: no forman parte del stack actual.
+
+## Comandos útiles
 
 ```bash
-npm run dev        # Dev server
-npm run build      # Production build
-npm start          # Production server
-npm run lint       # ESLint
-npm test           # Vitest watch mode
-npm run test:run   # Vitest single run
+npm run dev             # servidor local
+npm run build           # build de producción Next.js
+npm start               # servir build de producción
+npm run lint            # ESLint según script del repo
+npm run typecheck       # TypeScript sin emitir
+npm run format:check    # Prettier check
+npm test                # Vitest watch mode
+npm run test:run        # Vitest una pasada
+npm run test:coverage   # Vitest con coverage
 ```
 
-## Project Structure
+## Estructura relevante
 
-```
+```text
 src/
 ├── app/
-│   ├── api/                    # API routes
-│   ├── blog/                   # Blog posts
-│   ├── calculadoras/           # Calculator pages
-│   │   ├── [slug]/             # Dynamic calculator route
-│   │   ├── comparador-afp/     # AFP comparator
-│   │   ├── comparador-credito-hipotecario/  # Mortgage comparator
-│   │   └── page.tsx            # Calculator index page
-│   ├── cookies/                # Cookie policy
-│   ├── faq/                    # FAQ page
-│   ├── guias/                  # Guides/educational content
-│   ├── privacidad/             # Privacy policy
-│   ├── terminos/               # Terms of service
-│   ├── rediseño/               # Cinematic redesign experiments
-│   ├── globals.css             # Global styles + Tailwind
-│   ├── layout.tsx              # Root layout (providers, fonts)
-│   ├── not-found.tsx           # 404 page
-│   ├── page.tsx                # Landing page
-│   ├── robots.ts               # robots.txt
-│   └── sitemap.ts              # sitemap.xml
+│   ├── api/                         # API routes; /api/values vive aquí
+│   ├── blog/                        # artículos
+│   ├── buscar/                      # búsqueda del sitio
+│   ├── calculadoras/                # índice, rutas dinámicas y 410 retiradas
+│   ├── categoria/                   # páginas por categoría de calculadoras
+│   ├── guias/                       # guías pillar / contenido educativo
+│   ├── robots.ts                    # robots.txt
+│   ├── sitemap*.xml/route.ts        # sitemaps segmentados
+│   ├── layout.tsx                   # layout raíz, fuentes, AdSense, JSON-LD global
+│   └── page.tsx                     # home
 ├── components/
-│   ├── ads/                    # AdSense ad components
-│   ├── analytics/              # GA4 + tracking
-│   ├── blog/                   # Blog components
-│   ├── calculator/             # Calculator UI components (30+ files)
-│   │   ├── CalculatorLayout.tsx / CalculatorShell.tsx / CalculatorPageLayout.tsx
-│   │   ├── InputField.tsx / SelectField.tsx
-│   │   ├── ResultCard.tsx / ResultChart.tsx / ResultSkeleton.tsx
-│   │   ├── AmortizationTable.tsx / ScenarioComparator.tsx
-│   │   ├── FAQ.tsx / EnhancedFAQ.tsx
-│   │   ├── HistoryPanel.tsx / RelatedCalculators.tsx
-│   │   ├── ExportMenu.tsx / LegalNote.tsx / SeoStructuredData.tsx
-│   │   ├── SearchBar.tsx / EmptyState.tsx
-│   │   ├── Premium* (redesign variants)
-│   │   └── index.ts
-│   ├── creative/               # Creative/experimental components
-│   ├── home/                   # Landing page components
-│   ├── layout/                 # Header, Footer, etc.
-│   ├── navigation/             # Navigation components
-│   ├── redesign/               # Redesign-specific components
-│   └── ui/                     # Base UI (Toast, etc.)
+│   ├── ads/                         # componentes AdSense
+│   ├── analytics/                   # GA4
+│   ├── article/                     # componentes de artículos/guías
+│   ├── calculator/                  # shell, inputs, resultados, FAQ, related, etc.
+│   ├── home/                        # home
+│   ├── layout/                      # Header/Footer
+│   ├── search/                      # búsqueda
+│   ├── seo/                         # inyección JSON-LD
+│   ├── ui/                          # UI base
+│   └── DisclaimerYMYL.tsx           # disclaimer YMYL
 ├── data/
-│   ├── calculators.ts          # 40 calculators catalog
-│   └── articles.ts             # Blog articles
-├── hooks/
-│   ├── useCalculationHistory.ts
-│   ├── useFocusTrap.ts
-│   ├── useFormattedInput.ts
-│   └── useKeyboardShortcuts.ts
+│   ├── calculators.ts               # catálogo activo: 39 calculadoras
+│   ├── articles.ts                  # blog
+│   ├── guias.ts                     # guías SEO/educativas
+│   └── seo-overrides.ts             # overrides canónicos de title/description
 ├── lib/
-│   ├── analytics.ts            # GA4 helpers
-│   ├── api/                    # BCentral API integration
-│   ├── calculations/           # 40 calculation modules (one .ts per calculator)
-│   │   ├── __tests__/          # Vitest tests
-│   │   └── [calculator].ts     # Each module exports calculation logic
-│   ├── context/ValuesContext.tsx # Global values (UF, UTM, currency)
-│   ├── formatters.ts           # CLP currency formatters
-│   ├── gsap.ts                 # GSAP animations config
-│   ├── hooks/                  # Shared hooks
-│   └── values/constants.ts     # Chilean financial constants
+│   ├── api/                         # BCentral, Mindicador, tipos de API
+│   ├── calculations/                # módulos de cálculo + tests
+│   ├── calculatorCategories.ts      # 12 categorías canónicas
+│   ├── context/ValuesContext.tsx    # valores económicos globales
+│   ├── formatters.ts                # CLP/UF/UTM/porcentajes
+│   ├── hooks/                       # hooks compartidos, incl. useLiveValues
+│   ├── seo/                         # metadata, schema, sitemap helpers, author/editorial
+│   ├── site.ts                      # SITE_URL, SITE_NAME, absoluteUrl
+│   └── values/                      # constants, fallback, snapshots
 └── types/
-    ├── calculator.ts           # Calculator type definitions
-    └── css.d.ts                # CSS module types
+    └── calculator.ts                # contratos compartidos
 ```
 
-## 40 Calculation Modules (lib/calculations/)
+## Patrón de calculadoras
 
-**Laboral / Sueldo:**
-- sueldo-liquido, finiquito, horas-extra, vacaciones, boleta-honorarios
-- gratificacion, indemnizacion, costo-empleado, cotizacion-independientes
-- asignacion-familiar, pension-alimenticia, impuestos-segunda-categoria
-- ppm, propina-legal, aguinaldo, bono-bodas-oro
+Una calculadora activa se compone de piezas conectadas por `calculator.id`:
 
-**Créditos:**
-- credito-hipotecario, credito-automotriz, credito-cae, simulador-apv
-- intereses-mora
+1. **Metadata/catálogo** en `src/data/calculators.ts`.
+   - Define `id`, `slug`, `name`, `description`, `category`, `inputs`, `faq`, `keywords`, `featured`, `phase`, `seoTitle`, `seoDescription`, `noIndex`.
+   - El `slug` define la URL pública. No lo cambies sin plan SEO.
+2. **Lógica pura** en `src/lib/calculations/<modulo>.ts`.
+   - Exporta la función de cálculo y el adaptador `*ToResults` a `CalculatorResult[]`.
+   - Mantén la lógica testeable, sin depender de React ni del DOM.
+3. **Conexión UI** en `src/app/calculadoras/[slug]/CalculatorPageClient.tsx`.
+   - Importa la función y registra `calculationFunctions[calculator.id]`.
+   - Algunos archivos tienen nombre distinto al `id`; la clave real de ejecución es `calculator.id`.
+4. **Test** en `src/lib/calculations/__tests__/<modulo>.test.ts`.
+   - Toda fórmula nueva o cambio de fórmula requiere test relevante.
 
-**Conversores / Valores:**
-- uf-clp, utm-clp, conversor-divisas, reajuste-arriendo
+Las categorías canónicas viven en `src/lib/calculatorCategories.ts`. Actualmente son 12: `sueldo`, `impuestos`, `beneficios`, `conversiones`, `familia`, `vivienda`, `vehiculos`, `empresas`, `servicios`, `pension`, `educacion`, `hogar`.
 
-**Impuestos / Finanzas:**
-- iva, patente-comercial, operacion-renta, plusvalia, contribuciones
+## Valores económicos y datos externos
 
-**Subsidios / Gastos:**
-- subsidio-habitacional, subsidio-agua, permiso-circulacion
-- gastos-comunes, cuenta-luz, costo-notaria, costo-tag, multas-transito
+No hardcodees UF, UTM, IPC, dólar, euro, topes, tasas o valores legales en componentes.
 
-**Otros:**
-- comparador-afp, pgu
+Fuentes y flujo actual:
 
-## Code Conventions
+- `GET /api/values` en `src/app/api/values/route.ts` entrega UF, UTM, dólar observado/venta y euro.
+- Prioridad de datos: **BCentral → Mindicador → fallback local**.
+- Cache: `revalidate = 3600` y headers `s-maxage=3600, stale-while-revalidate=86400`.
+- Fallbacks y snapshots viven en `src/lib/values/`:
+  - `constants.ts` para constantes legales/financieras usadas por cálculos.
+  - `fallback.ts` para respaldo runtime.
+  - `snapshot.json` y `tmc-snapshot.json` para datos congelados.
+- Hooks/contexto: `ValuesContext` y `useLiveValues` cuando la UI necesita valores actuales.
 
-- **TypeScript strict** — no `any` unless unavoidable
-- **App Router** — server components by default
-- **Static generation preferred** — prioritize `next build` static output for AdSense/SEO
-- **Calculator pattern**: `src/data/calculators.ts` defines calculator metadata, `src/lib/calculations/` holds the math logic
-- **Formatting**: Chilean peso formatting (`$1.000.000`), use `src/lib/formatters.ts`
-- **Animations**: Keep them lightweight — Three.js/GSAP only in redesign, not in core calculators
-- **Ads**: AdSense components in `src/components/ads/` — do not break ad placement for UX "improvements"
-- **Analytics**: GA via `src/components/analytics/GAProvider` and `src/lib/analytics.ts`
-- **SEO**: robots.ts + sitemap.ts auto-generated, metadata in layout.tsx
-- **Testing**: Vitest, tests in `src/lib/calculations/__tests__/`
+Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) van solo en variables de entorno/Vercel Dashboard. El repo debe funcionar sin ellas usando Mindicador/fallback.
 
-## ⚠️ WHAT NOT TO TOUCH
+## SEO, YMYL y E-E-A-T
 
-- **NO romper** ad placement — AdSense es la monetización principal
-- **NO modificar** las fórmulas de cálculo sin verificar con fuentes oficiales (BCentral, SII, legislación vigente)
-- **NO commitear** credenciales de BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`)
-- **NO cambiar** el formato de moneda chilena — usa siempre `formatters.ts`
-- **NO eliminar** SEO metadata (robots.ts, sitemap.ts, alternates)
-- **NO hardcodear** valores financieros (UF, UTM, IPC) — vienen de `src/lib/values/` o BCentral API
-- **NO romper** el sitemap ni robots.ts — SEO es crítico para tráfico orgánico
-- **No sobrecargar** calculadoras con animaciones 3D — Three.js/GSAP solo en landing/rediseño
+Este sitio compite en búsquedas financieras/laborales chilenas. Trata SEO y confianza como parte del producto, no como decoración.
 
-## Calculator Data Structure
+- Metadata base: `src/lib/seo/metadata.ts` y `src/app/layout.tsx`.
+- Overrides específicos de title/description: **`src/data/seo-overrides.ts`**. Ese es el lugar canónico para ajustes CTR por página.
+- Mapeo calculadora ↔ guía pillar: `src/lib/seo/calculator-guia-map.ts`.
+- Sitemap helpers: `src/lib/seo/sitemap-helpers.ts` y rutas `src/app/sitemap*.xml/route.ts`.
+- Autoría/editorial: `src/lib/seo/author.ts` y `src/lib/seo/editorial.ts`.
+- JSON-LD implementado en `src/lib/seo/schema.ts`: `Organization`, `Person`, `WebSite` con `SearchAction`, `WebPage`/`AboutPage`/`ContactPage`, `BreadcrumbList`, `Article`/`BlogPosting`, `CollectionPage`/`ItemList`, `SoftwareApplication`, `HowTo`, `FAQPage`.
+- No propongas ni agregues `LocalBusiness`: CalculaChile es una plataforma web nacional, no un negocio local con atención física.
+- No elimines disclaimers YMYL, fuentes, autoría, breadcrumbs ni structured data sin reemplazo equivalente.
 
-Each calculator in `src/data/calculators.ts`:
+Regla de oro: **sin fuente oficial verificada, no se cambia una fórmula**. Fuentes típicas: Banco Central de Chile, SII, Dirección del Trabajo, Superintendencia de Pensiones, CMF, IPS/ChileAtiende, MINVU, BCN/Ley Chile o normativa vigente aplicable.
 
-```typescript
-{
-  id: string,           // e.g. 'sueldo-liquido'
-  name: string,         // Display name: 'Sueldo Líquido 2026'
-  description: string,  // Short SEO description
-  slug: string,         // URL slug: 'calculadora-sueldo-liquido'
-  category: string,     // e.g. 'sueldo', 'credito', 'impuestos'
-  featured: boolean,    // Show on homepage
-  phase: number,        // Development phase (1 = ready)
-  keywords: string[],   // SEO keywords
-  inputs: InputDef[],   // Input field definitions (number, select, boolean)
-  faq: FAQItem[],       // FAQ for SEO and user help
-}
-```
+## AdSense y analytics
 
-## Chilean Financial Values
+- AdSense es monetización principal. Componentes en `src/components/ads/` y script global en `src/app/layout.tsx`.
+- En desarrollo/staging, `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXX` desactiva la carga real del script. No “arregles” ese placeholder.
+- No muevas, elimines ni escondas placements de ads por mejoras visuales sin una decisión explícita.
+- GA4 vive en `src/components/analytics/GAProvider` y helpers en `src/lib/analytics.ts`.
 
-Managed in `src/lib/values/constants.ts`:
-- UF (Unidad de Fomento)
-- UTM (Unidad Tributaria Mensual)
-- IPC (Índice de Precios al Consumidor)
-- Tasa de interés BCentral
-- Sueldo mínimo
-- Tramos impositivos (segunda categoría)
+## Estilo, UI y accesibilidad
 
-## Environment Variables
+- El sitio está en **modo light-only**. `tailwind.config.ts` mantiene `darkMode: 'class'` para que clases `dark:` residuales no se activen por `prefers-color-scheme`. No reintroduzcas dark mode.
+- Usa las fuentes activas: Geist Sans y Geist Mono. No reintroduzcas Inter/Syne/DM Sans/Playfair/JetBrains como stack global.
+- Mantén UI mobile-first, accesible y rápida. Semántica HTML, labels, focus visible y contraste son mínimos.
+- Formato chileno siempre desde `src/lib/formatters.ts`: pesos como `$1.000.000`, UF/UTM con convención local.
+- Framer Motion está permitido para microinteracciones existentes. No agregues animaciones pesadas a calculadoras core.
+
+## Variables de entorno
+
+Nombres relevantes:
 
 ```bash
 # Banco Central de Chile API
 BCENTRAL_USER=
 BCENTRAL_PASS=
 
-# Next.js
+# Next.js / públicos
 NEXT_PUBLIC_SITE_URL=https://calculadorachile.cl
-NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-4950005977906560
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PHMWEP3S9T
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXX
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
 DEBUG=false
 ```
 
-## Deployment (Vercel)
+Secretos y valores reales de producción van en **Vercel Dashboard → Settings → Environment Variables**, no en el repo. Nunca commitees `.env`, credenciales, dumps ni tokens.
 
-```bash
-npx vercel              # Deploy from CLI
-git push origin main    # Auto-deploy (Vercel detects repo)
-```
+## Qué no tocar sin aprobación explícita
 
-All env vars in **Vercel Dashboard → Settings → Environment Variables**.
-Build output: `.next` (standard Next.js)
+- Fórmulas, topes, tasas o constantes financieras sin fuente oficial verificada.
+- Slugs, URLs públicas, canonicals, redirects, 410, robots o sitemaps. Romper rutas indexadas rompe tráfico orgánico.
+- AdSense: script global, placeholders, componentes o ubicación de placements.
+- Structured data SEO/YMYL: Organization/WebSite/Person/FAQ/HowTo/SoftwareApplication/Breadcrumbs.
+- `bono-bodas-oro`: no reactivarlo ni devolverlo al catálogo/sitemap sin revisión de fuente y aprobación.
+- Dark mode: el producto está light-only.
+- Nuevas dependencias de animación/3D/smooth scroll no instaladas.
+- Formato de moneda chilena.
+- Secretos o credenciales.
 
-## SEO / Growth
+## Validación mínima por tipo de cambio
 
-- Blog (`/blog`) for long-tail keywords
-- Guides (`/guias`) for educational content
-- FAQ sections on each calculator
-- Calculator-specific slugs for search optimization
-- Static generation for fast load times
-- Structured data for rich snippets
+El trabajo no está terminado hasta ejecutar una validación real y reportar el resultado.
+
+| Cambio | Validación mínima |
+|---|---|
+| Fórmula de cálculo | Test específico en `src/lib/calculations/__tests__/` + `npm run typecheck` |
+| Nueva calculadora | Test de cálculo + conexión en `CalculatorPageClient` + `npm run typecheck` + `npm run build` |
+| Catálogo/categorías/rutas | `npm run typecheck` + `npm run build` |
+| SEO metadata/schema/sitemap | `npm run typecheck` + `npm run build`; revisar salida/canonical si aplica |
+| `/api/values` o datos externos | `npm run typecheck` + prueba real del endpoint o test equivalente |
+| UI/componente | `npm run typecheck` + revisión responsive básica (mobile primero) |
+| Solo documentación | Leer el archivo completo modificado y buscar referencias obsoletas |
+
+Si la validación falla, corrige y vuelve a ejecutar. No entregues “debería pasar”.
+
+## Criterio operativo para agentes
+
+1. Lee este archivo antes de tocar código.
+2. Lee `package.json` antes de asumir stack o comandos.
+3. Ubica el patrón existente y cambia lo mínimo robusto.
+4. En este dominio, distingue entre dato verificado, inferencia y supuesto.
+5. Si un cambio toca dinero real, impuestos, leyes laborales, previsión, SEO indexado, AdSense o credenciales: extrema cautela y pide confirmación cuando haya dos caminos razonables.
+6. No inventes cifras, fuentes, reseñas, direcciones ni valores financieros.

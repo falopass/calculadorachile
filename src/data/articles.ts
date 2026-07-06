@@ -57,6 +57,7 @@ export const articles: Article[] = [
     description:
       'Guía paso a paso para calcular tu finiquito: indemnización, vacaciones proporcionales y gratificación. Con ejemplos en CLP y bases legales.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'laboral',
     readingTime: 8,
     relatedGuia: 'finiquito-laboral-chile',
@@ -119,6 +120,7 @@ export const articles: Article[] = [
     description:
       'Entiende la diferencia entre sueldo bruto y líquido. Descubre cuánto te descuentan por AFP, salud, cesantía e impuesto único en Chile.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'laboral',
     readingTime: 7,
     relatedGuia: 'sueldo-liquido-chile',
@@ -147,15 +149,15 @@ export const articles: Article[] = [
 <li><strong>Cotización AFP (10% + comisión):</strong> el 10% va a tu cuenta de capitalización individual. La comisión varía entre 0,46% (AFP Uno) y 1,45% (ProVida).</li>
 <li><strong>Cotización de salud (7%):</strong> a FONASA o tu Isapre. Si tu plan de Isapre cuesta más del 7%, pagas el costo total del plan.</li>
 <li><strong>Seguro de cesantía (0,6%):</strong> solo en contratos indefinidos. El empleador aporta 2,4% adicional (3% para contratos plazo fijo, todo del empleador).</li>
-<li><strong>Impuesto único de segunda categoría:</strong> solo si tu base tributable supera 13,5 UTM mensuales (~$952.880 con UTM mayo 2026).</li>
+<li><strong>Impuesto único de segunda categoría:</strong> solo si tu base tributable supera 13,5 UTM mensuales (~$952.880 con UTM julio 2026).</li>
 </ul>
 
 <h2>Ejemplo práctico 2026</h2>
 <div class="numeric-example"><div class="numeric-example__title">Sueldo bruto $800.000, AFP Habitat (1,27%), FONASA</div><ul><li>AFP (11,27%): $800.000 × 11,27% = $90.160</li><li>Salud FONASA (7%): $800.000 × 7% = $56.000</li><li>Seguro cesantía (0,6%): $800.000 × 0,6% = $4.800</li><li>Impuesto único: $0 (base tributable bajo 13,5 UTM)</li><li>Total descuentos: $150.960</li></ul><span class="total">Sueldo líquido: $649.040</span></div>
 
 <h2>El tope imponible 2026</h2>
-<p>Las cotizaciones se calculan sobre la remuneración imponible, con tope de <strong>90 UF</strong> mensuales (~$3.626.566 con UF mayo 2026). Si ganas más, las cotizaciones se calculan solo hasta ese tope. Esto reduce el porcentaje efectivo de descuento para sueldos altos.</p>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Cesantía tiene tope distinto</strong><p>El seguro de cesantía tiene tope imponible 134,9 UF (más alto que AFP/Salud). Esto puede confundir al revisar liquidaciones de sueldos altos.</p></div></aside>
+<p>Las cotizaciones se calculan sobre la remuneración imponible, con tope de <strong>90 UF</strong> mensuales (~$3.674.340 con UF julio 2026). Si ganas más, las cotizaciones se calculan solo hasta ese tope. Esto reduce el porcentaje efectivo de descuento para sueldos altos.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Cesantía tiene tope distinto</strong><p>El seguro de cesantía tiene tope imponible 135,2 UF (más alto que AFP/Salud). Esto puede confundir al revisar liquidaciones de sueldos altos.</p></div></aside>
 
 <h2>La gratificación legal</h2>
 <p>La gratificación legal equivale al 25% de tu remuneración mensual con tope anual de 4,75 ingresos mínimos mensuales. La mayoría de empleadores la pagan mensualmente incluida en el sueldo bruto, pero técnicamente es un haber distinto.</p>
@@ -168,6 +170,7 @@ export const articles: Article[] = [
     description:
       'Guía completa sobre el IVA en Chile: qué es, cómo se calcula, quién lo paga, exenciones y cuándo aplica el 19%. Con ejemplos prácticos en CLP.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'impuestos',
     readingTime: 7,
     relatedGuia: 'iva-boleta-honorarios-chile',
@@ -227,6 +230,7 @@ export const articles: Article[] = [
     description:
       'Guía completa sobre la Unidad de Fomento (UF) en Chile: qué es, cómo se actualiza, para qué se usa y cómo convertirla a pesos.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'educacion-financiera',
     readingTime: 6,
     relatedGuia: 'uf-utm-indicadores-chile',
@@ -245,10 +249,10 @@ export const articles: Article[] = [
     ],
     content: `<h2>¿Qué es la UF?</h2>
 <p>La Unidad de Fomento (UF) es una unidad de cuenta reajustable según la inflación, creada en Chile en 1967. Su valor se actualiza diariamente según la variación del Índice de Precios al Consumidor (IPC) del mes anterior. Se usa para mantener el valor real del dinero en contratos y transacciones de largo plazo.</p>
-<ul class="data-grid"><li><span class="data-grid__label">Valor UF mayo 2026</span><span class="data-grid__value">$40.340</span></li><li><span class="data-grid__label">Reajuste</span><span class="data-grid__value">Diario por IPC</span></li><li><span class="data-grid__label">Origen</span><span class="data-grid__value">Decreto 40 de 1967</span></li><li><span class="data-grid__label">Calcula</span><span class="data-grid__value">Banco Central</span></li></ul>
+<ul class="data-grid"><li><span class="data-grid__label">Valor UF julio 2026</span><span class="data-grid__value">$40.826</span></li><li><span class="data-grid__label">Reajuste</span><span class="data-grid__value">Diario por IPC</span></li><li><span class="data-grid__label">Origen</span><span class="data-grid__value">Decreto 40 de 1967</span></li><li><span class="data-grid__label">Calcula</span><span class="data-grid__value">Banco Central</span></li></ul>
 
 <h2>¿Cuánto vale la UF?</h2>
-<p>En mayo 2026 la UF vale aproximadamente $40.340 pesos chilenos. El Banco Central de Chile publica los valores con un día de anticipación. Los fines de semana y festivos mantiene el valor del último día hábil.</p>
+<p>En julio 2026 la UF vale aproximadamente $40.826 pesos chilenos. El Banco Central de Chile publica los valores con un día de anticipación. Los fines de semana y festivos mantiene el valor del último día hábil.</p>
 
 <h2>¿Para qué se usa?</h2>
 <ul>
@@ -257,11 +261,11 @@ export const articles: Article[] = [
 <li><strong>Seguros:</strong> pólizas suelen expresarse en UF.</li>
 <li><strong>Multas y sanciones:</strong> algunas multas SII y judiciales se calculan en UF.</li>
 <li><strong>Contratos de largo plazo:</strong> cualquier contrato que necesite mantener su valor real.</li>
-<li><strong>Topes legales:</strong> AFP/Salud (90 UF) y cesantía (134,9 UF) son topes mensuales.</li>
+<li><strong>Topes legales:</strong> AFP/Salud (90 UF) y cesantía (135,2 UF) son topes mensuales.</li>
 </ul>
 
 <h2>¿Cómo convertir UF a pesos?</h2>
-<div class="numeric-example"><div class="numeric-example__title">Conversiones rápidas con UF $40.340</div><ul><li>50 UF × $40.340 = <strong>$2.017.000</strong></li><li>$1.000.000 ÷ $40.340 = <strong>24,79 UF</strong></li><li>3.000 UF (vivienda típica) × $40.340 = <strong>$121.020.000</strong></li></ul><span class="total">Usa siempre el valor de la UF del día específico</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Conversiones rápidas con UF $40.826</div><ul><li>50 UF × $40.826 = <strong>$2.041.300</strong></li><li>$1.000.000 ÷ $40.826 = <strong>24,49 UF</strong></li><li>3.000 UF (vivienda típica) × $40.826 = <strong>$122.478.000</strong></li></ul><span class="total">Usa siempre el valor de la UF del día específico</span></div>
 
 <h2>¿Por qué es mejor que pesos para contratos largos?</h2>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Protección contra inflación</strong><p>La UF se reajusta con la inflación, por lo que 100 UF de hoy tendrán el mismo poder adquisitivo dentro de 10 años. Si firmas un contrato en pesos, la inflación erosiona el valor real con el tiempo. Por eso los créditos hipotecarios y arriendos altos están en UF.</p></div></aside>
@@ -277,6 +281,7 @@ export const articles: Article[] = [
     description:
       'Todo sobre la boleta de honorarios: retención 15,25%, cómo emitirla, monto líquido y obligaciones tributarias para independientes.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'impuestos',
     readingTime: 8,
     relatedGuia: 'iva-boleta-honorarios-chile',
@@ -339,6 +344,7 @@ export const articles: Article[] = [
     description:
       'Todo sobre horas extraordinarias en Chile: recargo 50%, tope máximo, cómo calcular el valor hora extra y qué dice el Código del Trabajo.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'laboral',
     readingTime: 6,
     relatedGuia: 'sueldo-liquido-chile',
@@ -398,7 +404,7 @@ export const articles: Article[] = [
     description:
       'Explicación clara de la gratificación legal: 25% de remuneración, tope 4,75 IMM, quién tiene derecho y cómo se calcula mensual o anualmente.',
     date: '2026-03-30',
-    updatedAt: '2026-07-02',
+    updatedAt: '2026-07-04',
     category: 'laboral',
     readingTime: 6,
     relatedGuia: 'sueldo-liquido-chile',
@@ -420,12 +426,12 @@ export const articles: Article[] = [
       {
         question: '¿Cuál es el tope de gratificación legal 2026 en Chile?',
         answer:
-          'El tope de gratificación legal 2026 es de 4,75 ingresos mínimos mensuales (IMM) al año. Con sueldo mínimo de $575.000, el tope anual es $2.731.875, equivalente a $227.656 mensuales. Si el 25% de tu sueldo supera ese monto, se aplica el tope y recibes $227.656. Si no lo supera, recibes el 25% íntegro.',
+          'El tope de gratificación legal 2026 es de 4,75 ingresos mínimos mensuales (IMM) al año. Con sueldo mínimo de $553.553, el tope anual es $2.629.377, equivalente a $219.115 mensuales. Si el 25% de tu sueldo supera ese monto, se aplica el tope y recibes $219.115. Si no lo supera, recibes el 25% íntegro.',
       },
       {
         question: '¿Cómo se calcula la gratificación legal?',
         answer:
-          'En el sistema más usado (Art. 50 del Código del Trabajo), la gratificación equivale al 25% de la remuneración mensual con tope de 4,75 IMM anuales. Por ejemplo, con sueldo base de $600.000: 25% × $600.000 = $150.000, que está bajo el tope mensual de $227.656, así que se paga $150.000. Con sueldo de $1.500.000: 25% = $375.000, que excede el tope, así que se paga $227.656.',
+          'En el sistema más usado (Art. 50 del Código del Trabajo), la gratificación equivale al 25% de la remuneración mensual con tope de 4,75 IMM anuales. Por ejemplo, con sueldo base de $600.000: 25% × $600.000 = $150.000, que está bajo el tope mensual de $219.115, así que se paga $150.000. Con sueldo de $1.500.000: 25% = $375.000, que excede el tope, así que se paga $219.115.',
       },
       {
         question: '¿Quién tiene derecho a gratificación legal?',
@@ -443,16 +449,16 @@ export const articles: Article[] = [
 <aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Dos sistemas (Art. 47 y Art. 50)</strong><p>El empleador puede elegir entre:<br><strong>A.</strong> 30% de utilidad líquida del ejercicio, repartida proporcionalmente.<br><strong>B.</strong> 25% de la remuneración mensual, tope 4,75 IMM al año.<br>La inmensa mayoría de empresas elige el sistema B (más predecible).</p></div></aside>
 
 <h2>¿Quién tiene derecho?</h2>
-<p>Tienen derecho los trabajadores que devenguen remuneraciones variables o que ganen menos de 4,75 IMM (ingresos mínimos mensuales) anuales. En 2026, con sueldo mínimo de $575.000, el tope anual es $2.731.875 (≈$227.656 mensuales).</p>
+<p>Tienen derecho los trabajadores que devenguen remuneraciones variables o que ganen menos de 4,75 IMM (ingresos mínimos mensuales) anuales. En 2026, con sueldo mínimo de $553.553, el tope anual es $2.629.377 (≈$219.115 mensuales).</p>
 
 <h2>¿Cómo se calcula?</h2>
 <p>En el sistema B (Art. 50, el más usado):</p>
 <ul>
 <li><strong>Cálculo mensual</strong>: 25% del sueldo del mes, hasta el tope mensual de 4,75 IMM ÷ 12.</li>
-<li><strong>Tope mensual 2026</strong>: $2.731.875 ÷ 12 = <strong>$227.656</strong>.</li>
+<li><strong>Tope mensual 2026</strong>: $2.629.377 ÷ 12 = <strong>$219.115</strong>.</li>
 </ul>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo 1: sueldo base $600.000</div><ul><li>25% × $600.000 = $150.000</li><li>Está bajo el tope de $227.656</li></ul><span class="total">Gratificación mensual: $150.000</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo 2: sueldo base $1.500.000</div><ul><li>25% × $1.500.000 = $375.000</li><li>Excede tope de $227.656 → se aplica tope</li></ul><span class="total">Gratificación mensual (topada): $227.656</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo 1: sueldo base $600.000</div><ul><li>25% × $600.000 = $150.000</li><li>Está bajo el tope de $219.115</li></ul><span class="total">Gratificación mensual: $150.000</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo 2: sueldo base $1.500.000</div><ul><li>25% × $1.500.000 = $375.000</li><li>Excede tope de $219.115 → se aplica tope</li></ul><span class="total">Gratificación mensual (topada): $219.115</span></div>
 
 <h2>¿Mensual o anual?</h2>
 <p>El empleador puede pagarla mensualmente (anticipo, lo más común) o en un pago anual liquidado en abril. El sistema mensual hace que la mayoría de los trabajadores reciba gratificación incluida en su sueldo bruto.</p>
@@ -471,6 +477,7 @@ export const articles: Article[] = [
     description:
       'Guía para calcular la indemnización: 30 días por año, tope 11 años, base 90 UF. Cuándo corresponde y cuándo no. Art. 163 Código del Trabajo.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'laboral',
     readingTime: 7,
     relatedGuia: 'finiquito-laboral-chile',
@@ -506,7 +513,7 @@ export const articles: Article[] = [
 <h2>Topes legales</h2>
 <ul>
 <li><strong>Máximo 11 años</strong>: 330 días de remuneración (incluso si trabajaste 20 años, solo se pagan 11). Excepción: contratos anteriores al 14/08/1981 no tienen tope.</li>
-<li><strong>Base máxima 90 UF mensuales</strong> (≈$3.626.566 con UF mayo 2026).</li>
+<li><strong>Base máxima 90 UF mensuales</strong> (≈$3.674.340 con UF julio 2026).</li>
 </ul>
 
 <h2>Recargo por despido injustificado (Art. 168)</h2>
@@ -536,7 +543,7 @@ export const articles: Article[] = [
     description:
       'Todo sobre el reajuste de arriendo: cuánto puede subir, UF vs IPC, qué dice tu contrato y cuándo puedes negociar.',
     date: '2026-03-30',
-    updatedAt: '2026-07-02',
+    updatedAt: '2026-07-04',
     category: 'vivienda',
     readingTime: 6,
     relatedGuia: 'comprar-vivienda-chile',
@@ -621,6 +628,7 @@ export const articles: Article[] = [
     description:
       'Cómo calcular tus vacaciones proporcionales al finiquito: días que te corresponden, valor por día y pago en el finiquito.',
     date: '2026-03-30',
+    updatedAt: '2026-07-04',
     category: 'laboral',
     readingTime: 5,
     relatedGuia: 'finiquito-laboral-chile',
@@ -683,7 +691,7 @@ export const articles: Article[] = [
     description:
       'Cómo postular a los subsidios habitacionales del MINVU en 2026: DS49, DS01, DS19 y DFL2. Montos en UF, requisitos por tramo RSH y combinación de beneficios.',
     date: '2026-05-16',
-    updatedAt: '2026-07-02',
+    updatedAt: '2026-07-04',
     category: 'vivienda',
     readingTime: 9,
     relatedGuia: 'comprar-vivienda-chile',
@@ -727,13 +735,13 @@ export const articles: Article[] = [
       },
     ],
     content: `<h2>Panorama de los subsidios habitacionales 2026</h2>
-<p>El <strong>MINVU</strong> (Ministerio de Vivienda y Urbanismo) administra varios programas de subsidio según ingreso del postulante, tramo de RSH y tipo de vivienda. En 2026, con UF a $40.357, los subsidios entregan entre <strong>$10 y $34 millones</strong> según el programa y tramo.</p>
+<p>El <strong>MINVU</strong> (Ministerio de Vivienda y Urbanismo) administra varios programas de subsidio según ingreso del postulante, tramo de RSH y tipo de vivienda. En 2026, con UF a $40.826, los subsidios entregan entre <strong>$10 y $34 millones</strong> según el programa y tramo.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Calendario de postulación 2026</strong><p>Las llamadas a postulación se publican en <a href="https://www.serviu.cl" target="_blank" rel="noopener">serviu.cl</a> con calendario semestral. Cada llamado tiene cupos limitados (entre 5.000 y 30.000 según programa). Postula en cuanto se abra el llamado: cuando se llena el cupo, debes esperar al siguiente.</p></div></aside>
 
 <h2>DS49 — Fondo Solidario de Elección de Vivienda</h2>
 <p>Para familias del 40% más vulnerable según RSH. <strong>NO requiere crédito hipotecario</strong>: el subsidio + ahorro previo cubre el precio total de la vivienda.</p>
 <table>
-<thead><tr><th>Tramo ingreso UF</th><th>Subsidio máximo UF</th><th>Subsidio en CLP (UF mayo 2026)</th></tr></thead>
+<thead><tr><th>Tramo ingreso UF</th><th>Subsidio máximo UF</th><th>Subsidio en CLP (UF julio 2026)</th></tr></thead>
 <tbody>
 <tr><td>0 – 12 UF</td><td>450 UF</td><td>~$18.160.000</td></tr>
 <tr><td>12 – 18 UF</td><td>380 UF</td><td>~$15.336.000</td></tr>
@@ -783,7 +791,7 @@ export const articles: Article[] = [
     description:
       'Análisis de las 7 AFP en 2026: comisión, rentabilidad histórica y SIS. Cuánto ahorras al año cambiándote de AFP cara a la más barata.',
     date: '2026-05-16',
-    updatedAt: '2026-07-02',
+    updatedAt: '2026-07-04',
     category: 'previsional',
     readingTime: 7,
     relatedGuia: 'afp-pension-chile',
@@ -856,10 +864,10 @@ export const articles: Article[] = [
 <li>Confirma con tu clave única. El cambio se hace efectivo el mes siguiente.</li>
 <li>NO tienes que avisar a tu empleador: PreviRed coordina automáticamente.</li>
 </ol>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El SIS NO cambia con la comisión</strong><p>El Seguro de Invalidez y Sobrevivencia (SIS) es 1,15% adicional, lo paga el empleador (no el trabajador), y es el mismo para todas las AFP. Por lo tanto el SIS NO entra en la decisión de cuál AFP elegir.</p></div></aside>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>El SIS NO cambia con la comisión</strong><p>El Seguro de Invalidez y Sobrevivencia (SIS) es 1,62% adicional, lo paga el empleador (no el trabajador), y es el mismo para todas las AFP. Por lo tanto el SIS NO entra en la decisión de cuál AFP elegir.</p></div></aside>
 
 <h2>Tope imponible y comisiones para sueldos altos</h2>
-<p>La comisión solo se cobra hasta el tope imponible (90 UF en 2026, ≈$3.626.566). Sueldos sobre el tope pagan la misma comisión absoluta independiente del bruto. Eso significa que la diferencia entre AFPs <strong>se aplana en términos absolutos</strong> para sueldos altos.</p>
+<p>La comisión solo se cobra hasta el tope imponible (90 UF en 2026, ≈$3.674.340). Sueldos sobre el tope pagan la misma comisión absoluta independiente del bruto. Eso significa que la diferencia entre AFPs <strong>se aplana en términos absolutos</strong> para sueldos altos.</p>
 <p>Compara las 7 AFPs con tu sueldo específico y proyecta el ahorro a varios años con la <a href="/calculadoras/calculadora-comparador-afp">calculadora comparadora de AFPs</a>.</p>
 <p>Fuentes: <a href="https://www.spensiones.cl" target="_blank" rel="noopener">Superintendencia de Pensiones</a>, comisiones publicadas mensualmente.</p>`,
   },
@@ -869,6 +877,7 @@ export const articles: Article[] = [
     description:
       'Diferencias tributarias al vender una vivienda DFL2 vs una común en Chile 2026. Exención 8.000 UF, impuesto único 10% y casos donde DFL2 conviene.',
     date: '2026-05-16',
+    updatedAt: '2026-07-04',
     category: 'vivienda',
     readingTime: 6,
     relatedGuia: 'comprar-vivienda-chile',
@@ -906,7 +915,7 @@ export const articles: Article[] = [
 
 <h2>Cómo se cuenta la exención 8.000 UF</h2>
 <p>La exención de 8.000 UF es <strong>acumulada en la vida del contribuyente</strong>, no por operación. Si vendes 3 viviendas con ganancias de 4.000 UF, 4.000 UF y 4.000 UF, las dos primeras quedan dentro de la exención (8.000 acumulados); la tercera tributa completa.</p>
-<div class="numeric-example"><div class="numeric-example__title">Vendiste tu departamento por $250M, comprado en $150M</div><ul><li>Ganancia bruta: $100.000.000</li><li>Equivalente UF (UF mayo 2026 $40.357): 100M / 40.357 ≈ 2.478 UF</li><li>Exención disponible: 8.000 UF</li><li>Ganancia gravada: 0 UF (toda absorbida por exención)</li></ul><span class="total">Impuesto a pagar: $0</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Vendiste tu departamento por $250M, comprado en $150M</div><ul><li>Ganancia bruta: $100.000.000</li><li>Equivalente UF (UF julio 2026 $40.826): 100M / 40.826 ≈ 2.450 UF</li><li>Exención disponible: 8.000 UF</li><li>Ganancia gravada: 0 UF (toda absorbida por exención)</li></ul><span class="total">Impuesto a pagar: $0</span></div>
 <div class="numeric-example"><div class="numeric-example__title">Mismo caso, pero ya habías usado 7.000 UF de exención</div><ul><li>Ganancia: 2.478 UF</li><li>Exención disponible: 1.000 UF</li><li>Ganancia gravada: 1.478 UF (~$59.648.000)</li><li>Impuesto único 10%: ~$5.964.800</li></ul><span class="total">Impuesto a pagar: $5.964.800</span></div>
 
 <h2>Cómo declarar la exención al SII</h2>
@@ -930,6 +939,7 @@ export const articles: Article[] = [
     description:
       'Cómo funciona el CAE en 2026 con pago contingente al ingreso (Ley 21.605), opciones de renegociación y el estado del proyecto de condonación.',
     date: '2026-05-16',
+    updatedAt: '2026-07-04',
     category: 'educacion',
     readingTime: 7,
     relatedGuia: 'credito-cae-educacion-chile',
@@ -997,20 +1007,20 @@ export const articles: Article[] = [
     description:
       'Qué es el tope imponible AFP/salud (90 UF en 2026), cómo se ajusta cada año y por qué reduce las cotizaciones efectivas para sueldos altos.',
     date: '2026-05-16',
-    updatedAt: '2026-07-02',
+    updatedAt: '2026-07-04',
     category: 'previsional',
     readingTime: 5,
     relatedGuia: 'sueldo-liquido-chile',
     keywords: [
       'tope imponible 90 UF',
-      'tope cesantía 134.9 UF',
+      'tope cesantía 135.2 UF',
       'imponible AFP salud',
       'D.L. 3500 art 16',
       'sueldo alto Chile',
       'cotización tope',
       'remuneración tope',
       'tope imponible 2026',
-      'tope imponible mayo 2026',
+      'tope imponible julio 2026',
     ],
     relatedCalculators: [
       'calculadora-sueldo-liquido',
@@ -1022,12 +1032,12 @@ export const articles: Article[] = [
       {
         question: '¿Cuál es el tope imponible 2026 en Chile?',
         answer:
-          'El tope imponible 2026 para AFP y salud es de 90 UF mensuales (aproximadamente $3.626.566 con UF de mayo 2026). El tope de cesantía es distinto y más alto: 134,9 UF mensuales (aproximadamente $5.444.235). Si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese monto, no sobre el total.',
+          'El tope imponible 2026 para AFP y salud es de 90 UF mensuales (aproximadamente $3.674.340 con UF de julio 2026). El tope de cesantía es distinto y más alto: 135,2 UF mensuales (aproximadamente $5.519.635). Si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese monto, no sobre el total.',
       },
       {
         question: '¿Cómo afecta el tope imponible a mi sueldo líquido?',
         answer:
-          'Para sueldos bajo el tope (la mayoría), no hay efecto: cotizas sobre el bruto completo. Para sueldos sobre el tope, el porcentaje efectivo de cotización cae a medida que sube el bruto. Por ejemplo, con AFP Habitat (1,27%): un sueldo de $3.000.000 paga 11,27% efectivo, pero un sueldo de $5.000.000 paga solo 8,17% efectivo porque las cotizaciones se calculan sobre $3.626.566 (el tope), no sobre los $5M.',
+          'Para sueldos bajo el tope (la mayoría), no hay efecto: cotizas sobre el bruto completo. Para sueldos sobre el tope, el porcentaje efectivo de cotización cae a medida que sube el bruto. Por ejemplo, con AFP Habitat (1,27%): un sueldo de $3.000.000 paga 11,27% efectivo, pero un sueldo de $5.000.000 paga solo 8,17% efectivo porque las cotizaciones se calculan sobre $3.674.340 (el tope), no sobre los $5M.',
       },
       {
         question: '¿Cuándo se actualiza el tope imponible?',
@@ -1043,7 +1053,7 @@ export const articles: Article[] = [
     content: `<h2>¿Qué es el tope imponible?</h2>
 <p>El <strong>tope imponible</strong> es el monto máximo de remuneración mensual sobre el cual se calculan las cotizaciones obligatorias de AFP y salud (FONASA o Isapre). Es decir: si tu sueldo bruto supera el tope, las cotizaciones se calculan solo hasta ese tope, y la porción que excede no cotiza.</p>
 <aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>D.L. 3500, Art. 16</strong><p>"La remuneración y renta máximas mensuales sobre las que se efectúan las cotizaciones obligatorias se reajustarán anualmente, en el mes de febrero, considerando la variación anual del Índice de Remuneraciones Reales (ISR) determinado por el INE."</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tope AFP/Salud 2026</span><span class="data-grid__value">90 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP (UF mayo 2026)</span><span class="data-grid__value">~$3.626.566</span></li><li><span class="data-grid__label">Tope cesantía 2026</span><span class="data-grid__value">134,9 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP cesantía</span><span class="data-grid__value">~$5.444.235</span></li></ul>
+<ul class="data-grid"><li><span class="data-grid__label">Tope AFP/Salud 2026</span><span class="data-grid__value">90 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP (UF julio 2026)</span><span class="data-grid__value">~$3.674.340</span></li><li><span class="data-grid__label">Tope cesantía 2026</span><span class="data-grid__value">135,2 UF mensuales</span></li><li><span class="data-grid__label">Equivalente CLP cesantía</span><span class="data-grid__value">~$5.519.635</span></li></ul>
 
 <h2>Cómo se actualiza cada año</h2>
 <p>El tope se reajusta cada febrero por la <strong>Superintendencia de Pensiones</strong> aplicando la variación real de las remuneraciones del país (ISR del INE). Histórico reciente:</p>
@@ -1053,20 +1063,20 @@ export const articles: Article[] = [
 <tr><td>2023</td><td>83,4 UF</td><td>125,1 UF</td></tr>
 <tr><td>2024</td><td>84,3 UF</td><td>126,5 UF</td></tr>
 <tr><td>2025</td><td>87,8 UF</td><td>131,9 UF</td></tr>
-<tr><td><strong>2026</strong></td><td><strong>90 UF</strong></td><td><strong>134,9 UF</strong></td></tr>
+<tr><td><strong>2026</strong></td><td><strong>90 UF</strong></td><td><strong>135,2 UF</strong></td></tr>
 </tbody>
 </table>
 
 <h2>Cómo afecta tu sueldo líquido</h2>
 <p>Para sueldos <strong>bajo el tope</strong> (la mayoría de los trabajadores chilenos), el tope no tiene efecto: cotizan sobre el bruto completo. Para sueldos <strong>sobre el tope</strong>, el porcentaje efectivo de cotización cae a medida que sube el bruto.</p>
-<div class="numeric-example"><div class="numeric-example__title">Comparación: bruto $3.000.000 vs $5.000.000 (AFP Habitat 1,27%)</div><ul><li>Sueldo $3M (bajo tope): AFP descuenta 11,27% × $3M = $338.100 (11,27% efectivo)</li><li>Sueldo $5M (sobre tope $3,63M): AFP descuenta 11,27% × $3.626.566 = $408.711 (8,17% efectivo)</li></ul><span class="total">Sueldo más alto, descuento previsional efectivo más bajo</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Comparación: bruto $3.000.000 vs $5.000.000 (AFP Habitat 1,27%)</div><ul><li>Sueldo $3M (bajo tope): AFP descuenta 11,27% × $3M = $338.100 (11,27% efectivo)</li><li>Sueldo $5M (sobre tope $3,63M): AFP descuenta 11,27% × $3.674.340 = $408.711 (8,17% efectivo)</li></ul><span class="total">Sueldo más alto, descuento previsional efectivo más bajo</span></div>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por eso los altos ingresos requieren APV o ahorro complementario</strong><p>Si tu sueldo supera el tope, tu pensión futura quedará anclada al tope (no a tu sueldo real). Para mantener el nivel de vida en la jubilación necesitas APV (Régimen B) o ahorro voluntario en otro instrumento. La diferencia se nota a los 65: pensión sobre 90 UF sin APV vs sobre tu bruto real con APV.</p></div></aside>
 
 <h2>Tope imponible para independientes</h2>
 <p>Los <strong>trabajadores independientes</strong> (boletas de honorarios bajo Ley 21.133) cotizan sobre el 80% de su renta bruta anual, también con tope mensual de 90 UF. La base imponible mensual = (renta anual × 0,8) ÷ 12, hasta el tope.</p>
 
 <h2>Tope cesantía: distinto y más alto</h2>
-<p>El <strong>seguro de cesantía</strong> tiene tope propio (134,9 UF en 2026), mucho más alto que el de AFP/salud. Esto fue cambio reciente: hasta 2017 el tope cesantía era el mismo que AFP. La idea fue dar mayor cobertura a sueldos medios-altos en caso de cesantía (subsidio del Fondo Solidario).</p>
+<p>El <strong>seguro de cesantía</strong> tiene tope propio (135,2 UF en 2026), mucho más alto que el de AFP/salud. Esto fue cambio reciente: hasta 2017 el tope cesantía era el mismo que AFP. La idea fue dar mayor cobertura a sueldos medios-altos en caso de cesantía (subsidio del Fondo Solidario).</p>
 
 <h2>Por qué cambia cada año</h2>
 <p>El tope se ajusta por <strong>variación real de las remuneraciones</strong> (ISR), no por IPC. La diferencia es importante: en 2025 el ISR fue ~+2,4% real (las remuneraciones crecieron por encima de la inflación), por eso el tope subió de 87,8 a 90 UF (+2,4%). Si el ISR hubiera sido negativo, el tope habría bajado.</p>

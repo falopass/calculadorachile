@@ -2,7 +2,7 @@
 // Sub-sitemap: páginas estáticas + categorías
 // ----------------------------------------------
 // Incluye home, /calculadoras, /blog, /guias, /faq, /acerca-de,
-// /equipo, /cookies y todas las páginas de categoría con calculadoras
+// /cookies y todas las páginas de categoría con calculadoras
 // asignadas.
 //
 // `/buscar`, `/privacidad` y `/terminos` NO se incluyen: tienen noindex
@@ -63,12 +63,6 @@ export async function GET() {
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'monthly',
       priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/equipo`,
-      lastModified: SITE_LAST_MODIFIED,
-      changeFrequency: 'yearly',
-      priority: 0.6,
     },
     {
       url: `${SITE_URL}/acerca-de`,

@@ -74,7 +74,7 @@ export const seoOverrides: Record<
   //   - Empieza con "Conoce el tope…" (verbo débil + tecnicismo).
   //
   // GANCHO NUEVO (cifra en pesos + pregunta implícita del trabajador):
-  //   Traducir el 4,75 IMM a un tope mensual concreto con IMM $539.000.
+  //   Traducir el 4,75 IMM a un tope mensual concreto con IMM $553.553.
   //   "¿Cuánto me toca?" es la query mental real. El tope anual referencial
   //   (~$2.560.250) es el número que detiene el scroll.
   //   NOTA: cifra marcada como referencial; verificar fórmula exacta con DT

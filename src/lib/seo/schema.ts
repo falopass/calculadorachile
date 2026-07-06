@@ -53,7 +53,7 @@ export function organizationSchema(): Record<string, unknown> {
     },
     image: { '@id': SCHEMA_IDS.logo },
     description:
-      'Plataforma chilena con más de 40 calculadoras laborales, tributarias y financieras. Sueldo líquido, finiquito, UF, UTM, IVA, créditos, subsidios y más.',
+      'Plataforma chilena con 39 calculadoras laborales, tributarias y financieras. Sueldo líquido, finiquito, UF, UTM, IVA, créditos, subsidios y más.',
     email: CONTACT_EMAIL,
     foundingDate: '2025',
     areaServed: { '@type': 'Country', name: 'Chile' },
@@ -231,7 +231,7 @@ export function webPageSchema(args: {
  * El `author` referencia al `Person` con `@id` estable (E-E-A-T).
  * Para mantener compatibilidad, si se pasa `authorOrganization: true`
  * o no hay Person disponible, cae al modo Organization. La página
- * `/equipo` debe inyectar el Person completo al menos una vez para
+  * `/acerca-de` debe inyectar el Person completo al menos una vez para
  * que Google pueda seguir la referencia.
  *
  * Incluye publisher, mainEntityOfPage para anclar al canonical, y
@@ -262,10 +262,10 @@ export function articleSchema(args: {
   mentions?: string[];
 }): Record<string, unknown> {
   // Por default el autor es el Person editorial (E-E-A-T).
-  // - `@id` referencia al Person definido en /equipo
+  // - `@id` referencia al Person definido en /acerca-de
   // - `name` y `url` se incluyen para que Google pueda renderizar el
   //   byline aunque no siga la referencia, y para no romper la card
-  //   de validación si /equipo aún no está crawled.
+  //   de validación si /acerca-de aún no está crawled.
   const author: Record<string, unknown> = args.authorOrganization
     ? {
         '@type': 'Organization',

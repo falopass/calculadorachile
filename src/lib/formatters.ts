@@ -53,3 +53,32 @@ export function formatPercentage(value: number, decimals: number = 1): string {
 export function parseCLP(value: string): number {
   return parseInt(value.replace(/[^0-9-]/g, ''), 10) || 0;
 }
+
+// ============================================
+// Formateadores de fecha (español chileno)
+// ============================================
+
+/**
+ * Formatea una fecha ISO (YYYY-MM-DD) al formato chileno largo.
+ * @param isoDate - Fecha en formato ISO (ej: "2026-07-04")
+ * @returns String formateado (ej: "4 de julio de 2026")
+ */
+export function formatDateLong(isoDate: string): string {
+  return new Date(isoDate).toLocaleDateString('es-CL', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+/**
+ * Formatea una fecha ISO (YYYY-MM-DD) mostrando solo mes y año.
+ * @param isoDate - Fecha en formato ISO (ej: "2026-07-04")
+ * @returns String formateado (ej: "julio de 2026")
+ */
+export function formatDateMonthYear(isoDate: string): string {
+  return new Date(isoDate).toLocaleDateString('es-CL', {
+    year: 'numeric',
+    month: 'long',
+  });
+}

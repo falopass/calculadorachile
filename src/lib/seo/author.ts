@@ -3,20 +3,20 @@
 // ----------------------------------------------
 // Información del autor / equipo editorial detrás de las guías y
 // los artículos del blog. Centralizada acá para que tanto el schema
-// JSON-LD (Article.author como Person) como la página `/equipo`
+// JSON-LD (Article.author como Person) como la página `/acerca-de`
 // (perfil público) consuman el mismo origen.
 //
 // Cambiar el autor o sus credenciales aquí lo actualiza:
 //   - Article author Person en blog y guías
-//   - Person schema de /equipo
-//   - Bio visible en /equipo
+//   - Person schema de /acerca-de
+//   - Bio visible en /acerca-de
 //   - sameAs de redes sociales
 // ============================================
 
 import { SITE_URL, absoluteUrl } from '@/lib/site';
 
 /** ID estable del Person para que otros schemas lo referencien. */
-export const AUTHOR_ID = `${SITE_URL}/equipo#diego`;
+export const AUTHOR_ID = `${SITE_URL}/acerca-de#diego`;
 
 /**
  * Autor principal del contenido editorial. Una persona real,
@@ -36,7 +36,7 @@ export interface AuthorProfile {
   jobTitle: string;
   /** Bio corta — 1 párrafo, ~250 caracteres. Para cards y cabeceras. */
   bioShort: string;
-  /** Bio extendida — varios párrafos en HTML, para /equipo. */
+  /** Bio extendida — varios párrafos en HTML, para /acerca-de. */
   bioLongHtml: string;
   /** Áreas de expertise (mapean a `knowsAbout`). */
   expertise: string[];
@@ -53,7 +53,7 @@ export interface AuthorProfile {
 }
 
 /**
- * Diego Sebastián — autor principal de CalculaChile. Bio escrita en
+ * Diego Bravo Opazo — autor principal de CalculaChile. Bio escrita en
  * primera persona enfocada en E-E-A-T: historia, experiencia,
  * principios editoriales y por qué citamos siempre la fuente legal.
  *
@@ -62,13 +62,13 @@ export interface AuthorProfile {
  */
 export const AUTHOR: AuthorProfile = {
   id: AUTHOR_ID,
-  name: 'Diego Sebastián',
+  name: 'Diego Bravo Opazo',
   alternateName: 'falopass',
   jobTitle: 'Editor jefe y desarrollador de CalculaChile',
   bioShort:
-    'Ingeniero y editor jefe de CalculaChile. Verifica cada cálculo contra el Código del Trabajo, el SII y el Banco Central de Chile antes de publicarlo.',
+    'Creador y editor jefe de CalculaChile. Estudiante de Ingeniería Civil en Computación. Verifica cada cálculo contra el Código del Trabajo, el SII y el Banco Central de Chile antes de publicarlo.',
   bioLongHtml: `
-    <p>Soy <strong>Diego Sebastián</strong>, ingeniero y creador de CalculaChile. Empecé el proyecto en 2025 porque cada vez que necesitaba calcular mi propio sueldo líquido, mi finiquito o el reajuste de mi arriendo, terminaba abriendo cinco pestañas distintas — y dos de las cinco daban resultados diferentes.</p>
+    <p>Soy <strong>Diego Bravo Opazo</strong>, creador de CalculaChile. Estudio Ingeniería Civil en Computación (tercer año) y empecé el proyecto en 2025 porque cada vez que necesitaba calcular mi propio sueldo líquido, mi finiquito o el reajuste de mi arriendo, terminaba abriendo cinco pestañas distintas — y dos de las cinco daban resultados diferentes.</p>
     <p>CalculaChile nació para resolver eso: un solo lugar, con cálculos verificables y citas a la ley o a la fuente oficial detrás de cada número. No inventamos fórmulas: las leemos del <a href="https://www.bcn.cl" target="_blank" rel="noopener">Código del Trabajo en BCN</a>, del <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a>, del <a href="https://www.spensiones.cl" target="_blank" rel="noopener">SP</a>, del <a href="https://www.dt.gob.cl" target="_blank" rel="noopener">DT</a> y del <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central</a>.</p>
     <p>Cada calculadora pasa por tres filtros antes de publicarse:</p>
     <ol>
@@ -88,10 +88,9 @@ export const AUTHOR: AuthorProfile = {
     'Sistema previsional y pensión garantizada universal (PGU)',
   ],
   credentials: [
-    'Ingeniero civil informático',
-    'Más de 8 años desarrollando software financiero',
+    'Estudiante Ingeniería Civil en Computación',
     'Lector activo de circulares de la Dirección del Trabajo y del SII',
-    'Autor del repositorio open source falopass/calculadorachile',
+    'Bueno para las sumas',
   ],
   sameAs: [
     'https://github.com/falopass',
@@ -100,10 +99,10 @@ export const AUTHOR: AuthorProfile = {
     'https://linkedin.com/company/calculachile',
   ],
   email: 'ddiegosebastianbb@gmail.com',
-  url: absoluteUrl('/equipo'),
+  url: absoluteUrl('/acerca-de'),
   // Reusamos el logo del sitio como Person.image. Google acepta el
   // logo de marca para sole-operators y evita depender de una foto
-  // personal real. La página /equipo muestra un avatar con iniciales
+  // personal real. La página /acerca-de muestra un avatar con iniciales
   // estilizado en el propio HTML para la presentación visual.
   imageUrl: absoluteUrl('/logo.png'),
 };

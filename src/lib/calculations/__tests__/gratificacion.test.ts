@@ -47,13 +47,13 @@ describe('calculateGratificacion', () => {
     expect(r.gratificacionProporcional).toBe(Math.round(r.gratificacionAnual / 2));
   });
 
-  it('tope anual coincide con 4,75 × IMM ($539.000)', () => {
+  it(`tope anual coincide con 4,75 × IMM ($${INGRESO_MINIMO.mensual.toLocaleString('es-CL')})`, () => {
     const r = calculateGratificacion({
       sueldoBruto: 1_000_000,
       mesesTrabajados: 12,
       tipoGratificacion: 'mensual',
     });
-    expect(r.topeAnual).toBe(539_000 * 4.75);
+    expect(r.topeAnual).toBe(Math.round(INGRESO_MINIMO.mensual * 4.75));
   });
 
   it('meses negativos se normalizan a 0', () => {

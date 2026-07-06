@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { Inter, Syne } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -11,20 +11,21 @@ import { SITE_URL, SITE_NAME } from '@/lib/site';
 import JsonLd from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
 
-// Solo dos familias: Inter (UI/body) + Syne (display/headings).
-// Pesos mínimos para reducir payload de fuentes ~70%.
-const inter = Inter({
+// Dos familias: Geist Sans (UI/body/headings) + Geist Mono (números
+// protagonistas: UF hoy, resultado destacado). Pesos mínimos para
+// reducir payload de fuentes.
+const geistSans = Geist({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-geist-sans',
   weight: ['400', '500', '600', '700'],
 });
 
-const syne = Syne({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-syne',
-  weight: ['600', '700'],
+  variable: '--font-geist-mono',
+  weight: ['400', '500'],
 });
 
 const SITE_DESCRIPTION =
@@ -99,10 +100,12 @@ export const metadata: Metadata = {
       : {}),
   },
   icons: {
+    // Set único generado para CalculaChile. No usamos más variantes
+    // light/dark: el favicon nuevo ya viene con su propio fondo.
     icon: [
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
@@ -123,30 +126,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
-    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
-  ],
+  themeColor: '#faf8f3',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
 };
-
-// Anti-FOUC: aplica el tema antes de la primera pintura.
-// Lee la preferencia explícita del usuario (localStorage) o, si está
-// en 'system'/no hay valor, sigue al sistema operativo (prefers-color-scheme).
-const themeInitScript = `
-(function() {
-  try {
-    var stored = localStorage.getItem('theme');
-    var pref = (stored === 'light' || stored === 'dark' || stored === 'system') ? stored : 'system';
-    var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var dark = pref === 'dark' || (pref === 'system' && sysDark);
-    document.documentElement.classList.toggle('dark', dark);
-    document.documentElement.dataset.theme = pref;
-  } catch (e) {}
-})();
-`;
 
 export default function RootLayout({
   children,
@@ -155,13 +139,8 @@ export default function RootLayout({
   const adsenseEnabled = adsenseId && adsenseId !== 'ca-pub-XXXXXXX';
 
   return (
-    <html
-      lang="es-CL"
-      className={`${inter.variable} ${syne.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="es-CL" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         {/*
           OpenSearch — permite que el usuario añada CalculaChile a la
           barra de búsqueda del navegador (Firefox, Chromium-based,
@@ -196,15 +175,11 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body
-        style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}
-        className="min-h-screen flex flex-col"
-      >
+      <body className="min-h-screen flex flex-col font-sans">
         {/*
           Schemas globales: Organization + WebSite con SearchAction.
-          Se inyectan en el body (no head) porque <script type="application/ld+json">
-          es válido en cualquier parte del documento, y así no compite
-          con el theme-init synchronous script en el head.
+          Se inyectan en el body (no head) para no competir con los
+          scripts de head (OpenSearch, RSS, AdSense).
         */}
         <JsonLd id="root-org" data={organizationSchema()} />
         <JsonLd id="root-site" data={websiteSchema()} />

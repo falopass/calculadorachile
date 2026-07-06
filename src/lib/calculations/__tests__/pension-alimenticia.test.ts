@@ -4,6 +4,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { calculatePensionAlimenticia } from '../pension-alimenticia';
+import { INGRESO_MINIMO } from '@/lib/values/constants';
 
 describe('calculatePensionAlimenticia', () => {
   it('1 hijo: 40% del ingreso', () => {
@@ -44,8 +45,8 @@ describe('calculatePensionAlimenticia', () => {
       numeroHijos: 2,
       tieneOtroIngreso: false,
     });
-    // 40% × 539.000 + 30% × 539.000 = 215.600 + 161.700 = 377.300
-    expect(r.minimoLegal).toBe(Math.round(539_000 * 0.4 + 539_000 * 0.3));
+    const imm = INGRESO_MINIMO.mensual;
+    expect(r.minimoLegal).toBe(Math.round(imm * 0.4 + imm * 0.3));
   });
 
   it('otro ingreso suma a la base', () => {

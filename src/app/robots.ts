@@ -14,8 +14,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        // Solo bloqueamos rutas técnicas reales del proyecto.
-        disallow: ['/api/', '/_next/'],
+        // Solo bloqueamos endpoints internos. /_next/ (assets estáticos)
+        // debe quedar permitido para que Googlebot renderice el JS del sitio.
+        disallow: ['/api/'],
       },
       // Nota: No agregamos reglas separadas para Googlebot/Bingbot
       // si las reglas son idénticas a `*`. Mantener menos directivas

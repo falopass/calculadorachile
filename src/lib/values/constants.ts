@@ -15,12 +15,12 @@ import snapshot from './snapshot.json';
 import tmcSnapshot from './tmc-snapshot.json';
 
 export const INGRESO_MINIMO = {
-  mensual: 539000, // Ingreso mínimo mensual (desde 01/01/2026, Ley 21.630)
-  menor_18_mayor_65: 402082,
-  no_remuneracional: 347434,
-  jornal: 26950, // 539000 / 20 días
-  hora: 3593, // 539000 / 150 horas
-  zona_extrema: 571340, // Magallanes, Aysén
+  mensual: 553553, // Ingreso mínimo mensual (desde 01/05/2026, Ley 21.830)
+  menor_18_mayor_65: 412938, // Menores de 18 y mayores de 65
+  no_remuneracional: 356815, // Fines no remuneracionales
+  jornal: 27678, // 553553 / 20 días
+  hora: 3690, // 553553 / 150 horas
+  zona_extrema: 586766, // Magallanes, Aysén (106% del nacional)
 };
 
 // ============================================
@@ -71,13 +71,15 @@ export const EURO = {
 // ============================================
 
 export const AFP = {
-  capital: { nombre: 'Capital', comision: 1.44, sis: 1.15 },
-  cuprum: { nombre: 'Cuprum', comision: 1.44, sis: 1.15 },
-  habitat: { nombre: 'Habitat', comision: 1.27, sis: 1.15 },
-  modelo: { nombre: 'Modelo', comision: 0.58, sis: 1.15 },
-  planvital: { nombre: 'PlanVital', comision: 1.16, sis: 1.15 },
-  provida: { nombre: 'ProVida', comision: 1.45, sis: 1.15 },
-  uno: { nombre: 'Uno', comision: 0.46, sis: 1.15 },
+  // SIS 1,62% desde remuneraciones de abril 2026 (Oficio Ord. N° 7429 SP
+  // del 14-abr-2026, Superintendencia de Pensiones). Antes 1,15%.
+  capital: { nombre: 'Capital', comision: 1.44, sis: 1.62 },
+  cuprum: { nombre: 'Cuprum', comision: 1.44, sis: 1.62 },
+  habitat: { nombre: 'Habitat', comision: 1.27, sis: 1.62 },
+  modelo: { nombre: 'Modelo', comision: 0.58, sis: 1.62 },
+  planvital: { nombre: 'PlanVital', comision: 1.16, sis: 1.62 },
+  provida: { nombre: 'ProVida', comision: 1.45, sis: 1.62 },
+  uno: { nombre: 'Uno', comision: 0.46, sis: 1.62 },
 };
 
 export const SALUD = {
@@ -122,8 +124,10 @@ export const SEGURO_CESANTIA = {
     trabajador: 0,
     empleador: 3.0,
   },
-  /** Tope imponible cesantía 2026: 134,9 UF (antes 119,9). */
-  tope_imponible: 134.9,
+  /** Tope imponible cesantía 2026: 135,2 UF desde feb 2026
+   * (Res. Exenta N° 236 del 10-02-2026, Superintendencia de Pensiones).
+   * Histórico: 135,1 UF (ene 2026) → 135,2 UF (desde feb 2026). */
+  tope_imponible: 135.2,
 };
 
 /**
@@ -281,7 +285,7 @@ export const BOLETA_HONORARIOS = {
 
 export const TOPE_IMPOSITIVO = {
   afp_salud: 90, // UF — 2026 (Superintendencia de Pensiones, Res. 237)
-  seguro_cesantia: 134.9, // UF — 2026
+  seguro_cesantia: 135.2, // UF — 2026 (Res. Exenta N° 236, 10-02-2026)
   gratificacion: 90, // UF (Art. 172 CdT)
 };
 

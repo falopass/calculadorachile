@@ -53,8 +53,19 @@ export function useCalculationHistory(calculatorId?: string): UseCalculationHist
         const filtered = calculatorId
           ? parsed.filter(e => e.calculatorId === calculatorId)
           : parsed;
-        // Ordenar por más reciente primero
-        setEntries(filtered.sort((a, b) => b.timestamp - a.timestamp).slice(0, MAX_ENTRIES));
+        // Deduplicar por id: si el storage tiene entradas con el mismo
+        // id (por colisión de Math.random en versiones anteriores o
+        // race conditions), nos quedamos con la más reciente.
+        const seen = new Set<string>();
+        const deduped = filtered
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .filter(e => {
+            if (seen.has(e.id)) return false;
+            seen.add(e.id);
+            return true;
+          })
+          .slice(0, MAX_ENTRIES);
+        setEntries(deduped);
       }
     } catch (e) {
       console.error('Error loading history:', e);
@@ -76,7 +87,7 @@ export function useCalculationHistory(calculatorId?: string): UseCalculationHist
   const addEntry = useCallback((entry: Omit<HistoryEntry, 'id' | 'timestamp'>) => {
     const newEntry: HistoryEntry = {
       ...entry,
-      id: Math.random().toString(36).substring(2, 9),
+      id: generateId(),
       timestamp: Date.now(),
     };
 
@@ -131,4 +142,18 @@ export function useCalculationHistory(calculatorId?: string): UseCalculationHist
     getEntry,
     isLoading,
   };
+}
+
+/**
+ * Genera un ID único para cada entrada del historial.
+ *
+ * Usa `crypto.randomUUID()` cuando está disponible (todos los
+ * navegadores modernos). Fallback a timestamp + random para
+ * entornos sin crypto.randomUUID (navegadores muy antiguos).
+ */
+function generateId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }

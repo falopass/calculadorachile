@@ -23,7 +23,7 @@ const baseInput = {
 describe('calculateCostoEmpleado', () => {
   it('aportes del empleador NO incluyen 10% AFP ni 7% salud', () => {
     const r = calculateCostoEmpleado(baseInput);
-    // Aportes empleador esperados sobre $1M: SIS 1,15% + cesantía 2,4% + mutual 0,95%
+    // Aportes empleador esperados sobre $1M: SIS 1,62% + cesantía 2,4% + mutual 0,95%
     const esperado =
       1_000_000 *
       ((AFP.habitat.sis +
@@ -52,6 +52,11 @@ describe('calculateCostoEmpleado', () => {
     const r = calculateCostoEmpleado({ ...baseInput, contratoIndefinido: false });
     expect(r.descuentosLegales.seguroCesantia).toBe(0);
     expect(r.aportesEmpleador.seguroCesantia).toBe(30_000);
+  });
+
+  it('usa constantes regulatorias 2026 vigentes para SIS y tope de cesantía', () => {
+    expect(AFP.habitat.sis).toBe(1.62);
+    expect(SEGURO_CESANTIA.tope_imponible).toBe(135.2);
   });
 
   it('gratificación incluida agrega 25% al total de haberes', () => {

@@ -9,7 +9,7 @@
 //
 // Comparte estilos con el HTML de las guías a través de las clases
 // `.callout` y `.callout--<kind>` definidas en globals.css. Esto
-// garantiza que un callout escrito como JSX en /equipo, /faq o
+// garantiza que un callout escrito como JSX en /acerca-de, /faq o
 // /privacidad se ve exactamente igual que uno escrito como HTML
 // dentro del contenido de una guía.
 //

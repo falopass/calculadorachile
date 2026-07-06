@@ -1,12 +1,9 @@
 // ============================================
 // Artículo del blog — /blog/[slug]
 // ----------------------------------------------
-// Server Component que renderiza un artículo. Incluye:
-//  - Metadata SEO completo (canonical, OG article, twitter)
-//  - JSON-LD Article + BreadcrumbList + WebPage
-//  - Calculadoras relacionadas con nombres reales (no slugs)
-//  - Artículos relacionados de la misma categoría
-//  - Breadcrumbs accesibles
+// Server Component que renderiza un artículo.
+// Layout editorial profesional: header prominente,
+// contenido en card, FAQ destacados, bloques relacionados.
 // ============================================
 
 import type { Metadata } from 'next';
@@ -52,7 +49,7 @@ export async function generateMetadata({
     return buildPageMetadata({
       path: `/blog/${slug}`,
       title: 'Artículo no encontrado',
-      description: 'El artículo que buscas no existe o ha sido movido.',
+      description: 'El artículo que buscas no existe o ha sido movida.',
       noIndex: true,
     });
   }
@@ -86,18 +83,14 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
   const wordCount = estimateWordCount(article.content);
   const readingTime = estimateReadingTime(wordCount);
 
-  // Resolver calculadoras relacionadas (de slug a objeto Calculator)
   const relatedCalcs = article.relatedCalculators
     .map((s) => calculators.find((c) => c.slug === s))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
-  // Artículos relacionados de la misma categoría (excluyendo el actual)
   const relatedArticles = articles
     .filter((a) => a.category === article.category && a.slug !== article.slug)
     .slice(0, 3);
 
-  // Schemas: Article + BreadcrumbList (+ FAQPage si el artículo
-  // declara FAQ embebido, para capturar rich results de preguntas).
   const ogImageUrl = absoluteUrl(`/blog/${article.slug}/opengraph-image`);
   const schemas = [
     articleSchema({
@@ -128,7 +121,16 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     day: 'numeric',
   });
 
-  // Guía pillar relacionada (si la hay declarada en el artículo).
+  const updatedDate = article.updatedAt ?? article.date;
+  const hasUpdate = updatedDate > article.date;
+  const formattedUpdated = hasUpdate
+    ? new Date(updatedDate).toLocaleDateString('es-CL', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
+
   const relatedGuiaSlug = article.relatedGuia;
   const relatedGuia = relatedGuiaSlug
     ? guias.find((g) => g.slug === relatedGuiaSlug)
@@ -139,91 +141,102 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
       <JsonLd id="blog-article" data={schemas} />
       <ReadingProgress />
 
-      <article className="container-base py-8 md:py-12">
-        <Breadcrumbs
-          items={[
-            { label: 'Inicio', href: '/' },
-            { label: 'Blog', href: '/blog' },
-            { label: article.title },
-          ]}
-        />
+      {/* Header prominente */}
+      <header className="border-b border-[var(--border)] bg-[var(--surface)]">
+        <div className="container-base py-10 md:py-14">
+          <Breadcrumbs
+            items={[
+              { label: 'Inicio', href: '/' },
+              { label: 'Blog', href: '/blog' },
+              { label: article.title },
+            ]}
+          />
 
-        <div className="mx-auto max-w-3xl">
-          {/* Header */}
-          <header className="mb-10">
-            <div className="flex flex-wrap items-center gap-3 mb-5">
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-indigo-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 capitalize">
+          <div className="mx-auto mt-6 max-w-3xl">
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary-100)] bg-[var(--accent-muted)] px-3 py-1.5 text-xs font-semibold capitalize text-[var(--accent)]">
                 Blog · {article.category.replace('-', ' ')}
               </span>
-              <span className="inline-flex items-center gap-1 text-xs text-[var(--foreground-muted)]">
-                <Clock className="w-3.5 h-3.5" />
+              <span className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
+                <Clock className="h-3.5 w-3.5" />
                 {readingTime} min de lectura
               </span>
             </div>
-            <h1 className="heading-display text-4xl md:text-5xl text-[var(--foreground)] mb-5 leading-[1.1]">
+
+            <h1 className="heading-display text-3xl text-[var(--foreground)] md:text-5xl">
               {article.title}
             </h1>
-            <p className="text-lg md:text-xl text-[var(--foreground-secondary)] leading-relaxed">
+            <p className="mt-5 text-lg leading-relaxed text-[var(--foreground-secondary)] md:text-xl">
               {article.description}
             </p>
-            <div className="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
+
+            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
               <Link
-                href="/equipo"
-                className="flex items-center gap-2 hover:text-[var(--color-primary-600)] transition-colors group"
-                aria-label={`Perfil de ${AUTHOR.name}`}
+                href="/acerca-de"
+                className="group flex items-center gap-2 transition-colors hover:text-[var(--accent)]"
               >
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-[10px] font-bold">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
                   DS
                 </div>
                 <span className="group-hover:underline">Por {AUTHOR.name}</span>
               </Link>
-              <span className="text-[var(--border)]">·</span>
-              <span>Publicado el {formattedDate}</span>
+              <span aria-hidden className="text-[var(--border)]">
+                ·
+              </span>
+              <span>
+                Publicado el <time dateTime={article.date}>{formattedDate}</time>
+                {formattedUpdated && (
+                  <>
+                    {' · '}
+                    Actualizado el{' '}
+                    <time dateTime={updatedDate}>{formattedUpdated}</time>
+                  </>
+                )}
+              </span>
             </div>
-          </header>
+          </div>
+        </div>
+      </header>
 
-          {/* Content */}
-          <div
-            className="prose prose-lg max-w-none
-              prose-headings:text-[var(--foreground)]
-              prose-headings:font-bold
-              prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-[var(--foreground-secondary)]
-              prose-p:leading-relaxed
-              prose-strong:text-[var(--foreground)]
-              prose-a:text-[var(--color-primary-600)]
-              prose-a:no-underline hover:prose-a:underline
-              prose-li:text-[var(--foreground-secondary)]
-              prose-ul:my-5 prose-ol:my-5"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
+      <article className="container-base py-8 md:py-12">
+        <div className="mx-auto max-w-3xl">
+          {/* Contenido en card */}
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm md:p-10">
+            <div
+              className="prose prose-lg max-w-none
+                prose-headings:text-[var(--foreground)]
+                prose-headings:font-bold
+                prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:scroll-mt-24
+                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-[var(--foreground-secondary)]
+                prose-p:leading-relaxed
+                prose-strong:text-[var(--foreground)]
+                prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
+                prose-li:text-[var(--foreground-secondary)]"
+              dangerouslySetInnerHTML={{ __html: article.content }}
+            />
+          </div>
 
-          {/*
-            FAQ embebido del artículo. Se renderiza solo si el
-            artículo declara `faq` (campo opcional). Las preguntas
-            también se inyectan como FAQPage en JSON-LD (ver schemas
-            arriba), capturando rich results en Google.
-          */}
+          {/* FAQ embebido */}
           {article.faq && article.faq.length > 0 && (
-            <section className="mt-12 pt-8 border-t border-[var(--border)]">
-              <h2 className="text-2xl font-bold text-[var(--foreground)] mb-5">
+            <section className="mt-12 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-8">
+              <h2 className="mb-6 text-2xl font-bold text-[var(--foreground)]">
                 Preguntas frecuentes
               </h2>
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {article.faq.map((item, idx) => (
                   <div
                     key={idx}
-                    className="rounded-xl bg-[var(--surface)] border border-[var(--border)] p-5"
+                    className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-5"
                   >
                     <h3
-                      className="text-base font-semibold text-[var(--foreground)] mb-2"
+                      className="mb-2 text-base font-semibold text-[var(--foreground)]"
                       itemProp="name"
                     >
                       {item.question}
                     </h3>
                     <p
-                      className="text-sm text-[var(--foreground-secondary)] leading-relaxed"
+                      className="text-sm leading-relaxed text-[var(--foreground-secondary)]"
                       itemProp="text"
                     >
                       {item.answer}
@@ -234,30 +247,27 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
             </section>
           )}
 
-          {/*
-            Bloque "Lee la guía completa" — linking interno blog →
-            guía pillar. Aparece si el artículo declara `relatedGuia`.
-          */}
+          {/* Guía pillar relacionada */}
           {relatedGuia && (
-            <aside className="mt-12 rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/[0.04] to-emerald-500/[0.02] p-6">
+            <aside className="mt-10 rounded-2xl border border-[var(--color-primary-100)] bg-[var(--accent-muted)] p-6">
               <Link
                 href={`/guias/${relatedGuia.slug}`}
                 className="group flex items-start gap-4"
               >
-                <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--accent)]">
+                  <BookOpen className="h-5 w-5 text-white" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium uppercase tracking-wide text-emerald-600 dark:text-emerald-400 mb-1">
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
                     Guía pillar relacionada
                   </p>
-                  <h3 className="text-base md:text-lg font-semibold text-[var(--foreground)] mb-1.5 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+                  <h3 className="mb-1.5 text-base font-semibold text-[var(--foreground)] transition-colors group-hover:text-[var(--accent-hover)] md:text-lg">
                     {relatedGuia.title}
                   </h3>
-                  <p className="text-sm text-[var(--foreground-secondary)] leading-relaxed">
+                  <p className="text-sm leading-relaxed text-[var(--foreground-secondary)]">
                     {relatedGuia.description}
                   </p>
-                  <p className="text-xs text-[var(--foreground-muted)] mt-2">
+                  <p className="mt-2 text-xs text-[var(--foreground-muted)]">
                     {relatedGuia.readingTime} min de lectura · cobertura completa con tablas, ejemplos numéricos y bases legales.
                   </p>
                 </div>
@@ -267,31 +277,29 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
           {/* Calculadoras relacionadas */}
           {relatedCalcs.length > 0 && (
-            <section className="mt-12 pt-8 border-t border-[var(--border)]">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-[var(--color-primary-500)]/10 flex items-center justify-center">
-                  <Calculator className="w-5 h-5 text-[var(--color-primary-500)]" />
+            <section className="mt-12">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-muted)] text-[var(--accent)]">
+                  <Calculator className="h-5 w-5" />
                 </div>
                 <h2 className="text-xl font-bold text-[var(--foreground)]">
                   Calculadoras relacionadas
                 </h2>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {relatedCalcs.map((calc) => (
                   <Link
                     key={calc.id}
                     href={`/calculadoras/${calc.slug}`}
-                    className="group flex items-start gap-3 p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--color-primary-500)]/40 hover:shadow-sm transition-all"
+                    className="group rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:border-[var(--accent)] hover:shadow-sm"
                   >
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-sm text-[var(--foreground)] mb-1 group-hover:text-[var(--color-primary-600)] transition-colors">
-                        {calc.name}
-                      </h3>
-                      <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
-                        {calc.description}
-                      </p>
-                    </div>
-                    <span className="text-xs font-medium text-[var(--color-primary-600)] whitespace-nowrap">
+                    <h3 className="mb-1 text-sm font-semibold text-[var(--foreground)] transition-colors group-hover:text-[var(--accent)]">
+                      {calc.name}
+                    </h3>
+                    <p className="line-clamp-2 text-xs text-[var(--foreground-muted)]">
+                      {calc.description}
+                    </p>
+                    <span className="mt-2 inline-block text-xs font-medium text-[var(--accent)]">
                       Calcular →
                     </span>
                   </Link>
@@ -302,19 +310,19 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
           {/* Artículos relacionados */}
           {relatedArticles.length > 0 && (
-            <section className="mt-10">
-              <h2 className="text-lg font-bold text-[var(--foreground)] mb-4">
+            <section className="mt-12 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+              <h2 className="mb-4 text-lg font-bold text-[var(--foreground)]">
                 Sigue leyendo
               </h2>
-              <ul className="space-y-2.5">
+              <ul className="space-y-3">
                 {relatedArticles.map((art) => (
                   <li key={art.slug}>
                     <Link
                       href={`/blog/${art.slug}`}
-                      className="group flex items-center gap-2 text-sm text-[var(--foreground-secondary)] hover:text-[var(--color-primary-600)] transition-colors"
+                      className="group flex items-start gap-3 text-sm text-[var(--foreground-secondary)] transition-colors hover:text-[var(--accent)]"
                     >
-                      <ArrowLeft className="w-3.5 h-3.5 rotate-180 opacity-60 group-hover:opacity-100" />
-                      <span className="line-clamp-1">{art.title}</span>
+                      <ArrowLeft className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 rotate-180 opacity-60 transition-opacity group-hover:opacity-100" />
+                      <span className="line-clamp-2">{art.title}</span>
                     </Link>
                   </li>
                 ))}
@@ -323,12 +331,12 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
           )}
 
           {/* Volver */}
-          <div className="mt-10 pt-6 border-t border-[var(--border)]">
+          <div className="mt-10">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary-600)] hover:underline"
+              className="inline-flex items-center gap-1.5 text-sm text-[var(--accent)] transition-colors hover:underline"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="h-4 w-4" />
               Volver al blog
             </Link>
           </div>

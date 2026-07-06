@@ -87,7 +87,7 @@ export const guias: Guia[] = [
       'sueldo bruto a líquido',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 16,
     relatedCalculators: [
       'calculadora-sueldo-liquido',
@@ -118,7 +118,7 @@ export const guias: Guia[] = [
         html: `<p>El <strong>sueldo líquido</strong> es el monto que un trabajador dependiente recibe efectivamente en su cuenta bancaria cada mes después de aplicarse todos los descuentos legales obligatorios. En Chile, la diferencia entre el <strong>sueldo bruto</strong> (lo pactado en el contrato) y el líquido oscila entre un 17% y un 25%, dependiendo del sistema de salud, la AFP elegida y si el sueldo entra o no en tramos del impuesto único de segunda categoría.</p>
 <p>La estructura legal de estos descuentos está definida principalmente en el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">D.L. 3500 (sistema de pensiones)</a>, la Ley 18.469 (Régimen de Salud), la Ley 19.728 (Seguro de Cesantía) y los artículos 42 y 43 de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a>.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>En síntesis</strong><p>De cada $1.000.000 brutos, un trabajador típico recibe entre $770.000 y $830.000 líquidos. La diferencia se distribuye entre AFP (≈11%), salud (7%), cesantía (0,6%) e impuesto único (variable).</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tope imponible AFP/Salud</span><span class="data-grid__value">90 UF</span></li><li><span class="data-grid__label">Tope imponible cesantía</span><span class="data-grid__value">134,9 UF</span></li><li><span class="data-grid__label">Tasa AFP obligatoria</span><span class="data-grid__value">10% + comisión</span></li><li><span class="data-grid__label">Tasa salud mínima</span><span class="data-grid__value">7%</span></li></ul>`,
+<ul class="data-grid"><li><span class="data-grid__label">Tope imponible AFP/Salud</span><span class="data-grid__value">90 UF</span></li><li><span class="data-grid__label">Tope imponible cesantía</span><span class="data-grid__value">135,2 UF</span></li><li><span class="data-grid__label">Tasa AFP obligatoria</span><span class="data-grid__value">10% + comisión</span></li><li><span class="data-grid__label">Tasa salud mínima</span><span class="data-grid__value">7%</span></li></ul>`,
       },
       {
         id: 'descuentos-obligatorios',
@@ -145,10 +145,10 @@ export const guias: Guia[] = [
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Plan de Isapre superior al 7%</strong><p>Si tu plan en UF cuesta más del 7% del imponible, pagas el costo total del plan. Esa diferencia adicional NO rebaja base tributable. Cambiar a un plan más barato o a FONASA puede aumentar tu sueldo líquido entre 1% y 6%.</p></div></aside>
 
 <h3>3. Seguro de cesantía (0,6%)</h3>
-<p>Solo aplica a trabajadores con contrato indefinido. El trabajador aporta <strong>0,6%</strong> y el empleador <strong>2,4%</strong> (Ley 19.728). Para contratos a plazo fijo, el trabajador no aporta nada y el empleador paga 3,0%. El tope imponible para cesantía es <strong>134,9 UF</strong> mensuales en 2026, distinto y más alto que el tope de AFP/Salud.</p>
+<p>Solo aplica a trabajadores con contrato indefinido. El trabajador aporta <strong>0,6%</strong> y el empleador <strong>2,4%</strong> (Ley 19.728). Para contratos a plazo fijo, el trabajador no aporta nada y el empleador paga 3,0%. El tope imponible para cesantía es <strong>135,2 UF</strong> mensuales en 2026, distinto y más alto que el tope de AFP/Salud.</p>
 
 <h3>4. Impuesto único de segunda categoría</h3>
-<p>Es un impuesto progresivo que aplica solo sobre el sueldo que excede 13,5 UTM mensuales (~$952.880 con UTM mayo 2026). Se calcula con la tabla del SII (artículo 43 N°1 LIR), que tiene 8 tramos con tasas marginales de 0%, 4%, 8%, 13,5%, 23%, 30,4%, 35% y 40%.</p>
+<p>Es un impuesto progresivo que aplica solo sobre el sueldo que excede 13,5 UTM mensuales (~$952.880 con UTM julio 2026). Se calcula con la tabla del SII (artículo 43 N°1 LIR), que tiene 8 tramos con tasas marginales de 0%, 4%, 8%, 13,5%, 23%, 30,4%, 35% y 40%.</p>
 <table>
 <thead><tr><th>Tramo en UTM</th><th>Tasa marginal</th><th>Cantidad a rebajar</th></tr></thead>
 <tbody>
@@ -165,11 +165,11 @@ export const guias: Guia[] = [
       },
       {
         id: 'topes-imponibles',
-        title: 'Topes imponibles 2026: 90 UF y 134,9 UF',
+        title: 'Topes imponibles 2026: 90 UF y 135,2 UF',
         level: 2,
-        html: `<p>Las cotizaciones de AFP y salud se calculan sobre la <strong>remuneración imponible</strong>, que tiene un tope mensual de <strong>90 UF</strong> en 2026 (Superintendencia de Pensiones, Res. Exenta 237). Con UF a $40.340 el tope mensual equivale aproximadamente a $3.626.566.</p>
-<p>El seguro de cesantía tiene un tope distinto: <strong>134,9 UF</strong> mensuales, lo que da espacio adicional para sueldos altos.</p>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por qué tu descuento efectivo baja con sueldos altos</strong><p>Si tu sueldo bruto supera $3.626.566, las cotizaciones de AFP y salud se calculan solo sobre el tope. La porción que excede no cotiza, lo que reduce el porcentaje efectivo de descuento. Para un bruto de $5.000.000, el descuento previsional efectivo cae a ~14% del bruto en lugar del 18% típico.</p></div></aside>
+        html: `<p>Las cotizaciones de AFP y salud se calculan sobre la <strong>remuneración imponible</strong>, que tiene un tope mensual de <strong>90 UF</strong> en 2026 (Superintendencia de Pensiones, Res. Exenta 237). Con UF a $40.826 el tope mensual equivale aproximadamente a $3.674.340.</p>
+<p>El seguro de cesantía tiene un tope distinto: <strong>135,2 UF</strong> mensuales, lo que da espacio adicional para sueldos altos.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Por qué tu descuento efectivo baja con sueldos altos</strong><p>Si tu sueldo bruto supera $3.674.340, las cotizaciones de AFP y salud se calculan solo sobre el tope. La porción que excede no cotiza, lo que reduce el porcentaje efectivo de descuento. Para un bruto de $5.000.000, el descuento previsional efectivo cae a ~14% del bruto en lugar del 18% típico.</p></div></aside>
 <p>El tope se actualiza anualmente cada febrero por la Superintendencia de Pensiones aplicando la variación real de remuneraciones (ISR) calculada por el INE. La memoria 2025-2026 fijó el tope en 90 UF, levemente superior al 87,8 UF del año anterior.</p>`,
       },
       {
@@ -177,8 +177,8 @@ export const guias: Guia[] = [
         title: 'Ejemplo completo paso a paso: bruto $1.500.000',
         level: 2,
         html: `<p>Tomemos un caso concreto y desglosémoslo línea por línea para que puedas replicarlo con tus propios números.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Supuestos del ejemplo</strong><p>AFP Habitat (1,27% comisión), FONASA, contrato indefinido, sin bonos ni horas extra, sin asignaciones no imponibles. UF mayo 2026: $40.340. UTM mayo 2026: $70.588.</p></div></aside>
-<div class="numeric-example"><div class="numeric-example__title">Cálculo paso a paso — sueldo bruto $1.500.000</div><ul><li><strong>Imponible</strong>: $1.500.000 (bajo el tope de 90 UF = $3.626.566)</li><li><strong>AFP</strong>: $1.500.000 × 11,27% = <code>$169.050</code></li><li><strong>Salud (7% FONASA)</strong>: $1.500.000 × 7% = <code>$105.000</code></li><li><strong>Cesantía (0,6%)</strong>: $1.500.000 × 0,6% = <code>$9.000</code></li><li><strong>Base tributable</strong>: $1.500.000 − ($169.050 + $105.000 + $9.000) = $1.216.950</li><li><strong>Base en UTM</strong>: $1.216.950 ÷ $70.588 ≈ 17,24 UTM</li><li>Tramo: 13,5 a 30 UTM → factor 4%, rebaja 0,54 UTM</li><li><strong>Impuesto</strong>: (17,24 × 0,04 − 0,54) × $70.588 = <code>$10.557</code></li><li><strong>Total descuentos</strong>: $169.050 + $105.000 + $9.000 + $10.557 = $293.607</li></ul><span class="total">Sueldo líquido: $1.206.393 (factor 80,4%)</span></div>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Supuestos del ejemplo</strong><p>AFP Habitat (1,27% comisión), FONASA, contrato indefinido, sin bonos ni horas extra, sin asignaciones no imponibles. UF julio 2026: $40.826. UTM julio 2026: $71.649.</p></div></aside>
+<div class="numeric-example"><div class="numeric-example__title">Cálculo paso a paso — sueldo bruto $1.500.000</div><ul><li><strong>Imponible</strong>: $1.500.000 (bajo el tope de 90 UF = $3.674.340)</li><li><strong>AFP</strong>: $1.500.000 × 11,27% = <code>$169.050</code></li><li><strong>Salud (7% FONASA)</strong>: $1.500.000 × 7% = <code>$105.000</code></li><li><strong>Cesantía (0,6%)</strong>: $1.500.000 × 0,6% = <code>$9.000</code></li><li><strong>Base tributable</strong>: $1.500.000 − ($169.050 + $105.000 + $9.000) = $1.216.950</li><li><strong>Base en UTM</strong>: $1.216.950 ÷ $71.649 ≈ 17,24 UTM</li><li>Tramo: 13,5 a 30 UTM → factor 4%, rebaja 0,54 UTM</li><li><strong>Impuesto</strong>: (17,24 × 0,04 − 0,54) × $71.649 = <code>$10.557</code></li><li><strong>Total descuentos</strong>: $169.050 + $105.000 + $9.000 + $10.557 = $293.607</li></ul><span class="total">Sueldo líquido: $1.206.393 (factor 80,4%)</span></div>
 <p>Para validar tu propio cálculo con tu AFP y plan de salud específicos, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>, que también permite simular cambios de AFP, FONASA vs Isapre y presupuestar el efecto de bonos imponibles.</p>`,
       },
       {
@@ -186,9 +186,9 @@ export const guias: Guia[] = [
         title: 'Casos numéricos: sueldo bajo, medio y alto',
         level: 2,
         html: `<p>Tres escenarios típicos para entender cómo cambia el factor bruto-líquido según el tramo del sueldo. Todos los ejemplos asumen AFP Habitat (1,27%), FONASA y contrato indefinido.</p>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $539.000 (ingreso mínimo)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$60.745</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$37.730</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.234</code></li><li><strong>Base tributable</strong>: $539.000 − $101.709 = $437.291</li><li><strong>Base UTM</strong>: $437.291 ÷ $70.588 ≈ 6,2 UTM (bajo 13,5 UTM exento)</li><li><strong>Impuesto</strong>: $0 (tramo exento)</li><li><strong>Total descuentos</strong>: $101.709</li></ul><span class="total">Líquido: $437.291 — factor 81,1% (sin impuesto único)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $553.553 (ingreso mínimo)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$62.385</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$38.749</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.321</code></li><li><strong>Base tributable</strong>: $553.553 − $104.455 = $449.098</li><li><strong>Base UTM</strong>: $449.098 ÷ $71.649 ≈ 6,4 UTM (bajo 13,5 UTM exento)</li><li><strong>Impuesto</strong>: $0 (tramo exento)</li><li><strong>Total descuentos</strong>: $104.455</li></ul><span class="total">Líquido: $449.098 — factor 81,1% (sin impuesto único)</span></div>
 <div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000 (ya calculado arriba)</div><ul><li>Total descuentos: $293.607 (incluye $10.557 de impuesto único 4% marginal)</li></ul><span class="total">Líquido: $1.206.393 — factor 80,4%</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000 (sobre tope imponible)</div><ul><li><strong>Imponible AFP/Salud</strong>: tope 90 UF = <code>$3.626.566</code> (no $4M)</li><li><strong>AFP (11,27% sobre tope)</strong>: <code>$408.714</code></li><li><strong>Salud FONASA (7% sobre tope)</strong>: <code>$253.860</code></li><li><strong>Imponible cesantía</strong>: $4.000.000 (bajo tope cesantía 134,9 UF ≈ $5,4M)</li><li><strong>Cesantía (0,6%)</strong>: <code>$24.000</code></li><li><strong>Base tributable</strong>: $4.000.000 − $686.574 = $3.313.426</li><li><strong>Base UTM</strong>: $3.313.426 ÷ $70.588 ≈ 46,9 UTM (tramo 30-50 UTM, factor 8%, rebaja 1,2 UTM)</li><li><strong>Impuesto</strong>: (46,9 × 0,08 − 1,2) × $70.588 ≈ <code>$179.953</code></li><li><strong>Total descuentos</strong>: $866.527</li></ul><span class="total">Líquido: $3.133.473 — factor 78,3% (a pesar del impuesto, el tope ayuda)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000 (sobre tope imponible)</div><ul><li><strong>Imponible AFP/Salud</strong>: tope 90 UF = <code>$3.674.340</code> (no $4M)</li><li><strong>AFP (11,27% sobre tope)</strong>: <code>$408.714</code></li><li><strong>Salud FONASA (7% sobre tope)</strong>: <code>$253.860</code></li><li><strong>Imponible cesantía</strong>: $4.000.000 (bajo tope cesantía 135,2 UF ≈ $5,5M)</li><li><strong>Cesantía (0,6%)</strong>: <code>$24.000</code></li><li><strong>Base tributable</strong>: $4.000.000 − $686.574 = $3.313.426</li><li><strong>Base UTM</strong>: $3.313.426 ÷ $71.649 ≈ 46,9 UTM (tramo 30-50 UTM, factor 8%, rebaja 1,2 UTM)</li><li><strong>Impuesto</strong>: (46,9 × 0,08 − 1,2) × $71.649 ≈ <code>$179.953</code></li><li><strong>Total descuentos</strong>: $866.527</li></ul><span class="total">Líquido: $3.133.473 — factor 78,3% (a pesar del impuesto, el tope ayuda)</span></div>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Patrones que aparecen</strong><p>(1) En sueldo mínimo el factor es alto (~81%) porque no hay impuesto único. (2) En sueldo medio el factor cae al rondar 80% por el impuesto que empieza a morder. (3) En sueldo alto el factor vuelve a subir levemente porque el tope imponible "frena" las cotizaciones, aunque el impuesto crece.</p></div></aside>`,
       },
       {
@@ -198,7 +198,7 @@ export const guias: Guia[] = [
         html: `<p>La <strong>gratificación legal</strong> es uno de los conceptos más confusos del derecho laboral chileno. Está regulada por los artículos 47 a 50 del Código del Trabajo: las empresas con fines de lucro y que registren utilidad líquida deben gratificar a sus trabajadores con uno de estos dos sistemas — el que les convenga al empleador:</p>
 <ol class="steps">
 <li><strong>Gratificación legal A (art. 47)</strong>: 30% de la utilidad líquida del ejercicio, repartida entre los trabajadores en proporción a sus remuneraciones.</li>
-<li><strong>Gratificación legal B (art. 50)</strong>: 25% de la remuneración mensual de cada trabajador, con tope anual de 4,75 ingresos mínimos mensuales (≈$2.560.250 en 2026 con sueldo mínimo $539.000).</li>
+<li><strong>Gratificación legal B (art. 50)</strong>: 25% de la remuneración mensual de cada trabajador, con tope anual de 4,75 ingresos mínimos mensuales (≈$2.629.377 en 2026 con sueldo mínimo $553.553).</li>
 </ol>
 <aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Art. 50 del Código del Trabajo</strong><p>"El empleador podrá eximirse de la obligación si abona a sus trabajadores el 25% de lo devengado mensualmente con tope de 4,75 ingresos mínimos mensuales al año."</p></div></aside>
 <p>En la práctica, la inmensa mayoría de empresas chilenas opta por el régimen B (más predecible y siempre acotado). Esto significa que tu sueldo bruto típicamente <em>ya incluye</em> la gratificación: cuando lees "sueldo bruto $1.000.000" en una oferta laboral, lo más probable es que $200.000 sean gratificación legal y $800.000 sueldo base.</p>
@@ -306,7 +306,7 @@ export const guias: Guia[] = [
       'tope 90 UF indemnización',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 18,
     relatedCalculators: [
       'calculadora-finiquito',
@@ -389,10 +389,10 @@ export const guias: Guia[] = [
         title: 'Casos numéricos: sueldo bajo, medio y alto',
         level: 2,
         html: `<p>Tres ejemplos de finiquito con la misma causal (necesidades de la empresa, art. 161) y misma antigüedad (5 años exactos), variando solo el sueldo. Asumimos que se avisó con 30 días de anticipación (no hay sustitutiva del aviso) y no hay vacaciones pendientes.</p>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $539.000 (ingreso mínimo), 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $539.000 = <code>$2.695.000</code></li><li><strong>Vacaciones proporcionales</strong> (asumiendo 6 meses del año en curso): 7,5 días × $17.967 = <code>$134.752</code></li><li>Base 13,4 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $2.829.752</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $553.553 (ingreso mínimo), 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $553.553 = <code>$2.767.765</code></li><li><strong>Vacaciones proporcionales</strong> (asumiendo 6 meses del año en curso): 7,5 días × $18.452 = <code>$138.390</code></li><li>Base 13,4 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $2.906.155</span></div>
 <div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000, 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $1.500.000 = <code>$7.500.000</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $50.000 = <code>$375.000</code></li><li>Base 37,2 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $7.875.000</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000, 5 años</div><ul><li><strong>Base topeada</strong>: 90 UF × $40.357 = <code>$3.632.139</code> (no $4M, art. 172)</li><li><strong>Indemnización años servicio</strong>: 5 × $3.632.139 = <code>$18.160.694</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $133.333 = <code>$1.000.000</code></li></ul><span class="total">Finiquito: $19.160.694 (limitado por tope 90 UF)</span></div>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El tope de 90 UF muerde a los sueldos altos</strong><p>Si tu sueldo supera 90 UF (~$3,63M en mayo 2026), tu indemnización por años de servicio se calcula sobre $3.632.139 mensuales, no sobre tu sueldo real. Por cada año de antigüedad pierdes la diferencia. Para sueldos sobre $5M esto puede significar varias decenas de millones menos en el finiquito final.</p></div></aside>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000, 5 años</div><ul><li><strong>Base topeada</strong>: 90 UF × $40.826 = <code>$3.674.340</code> (no $4M, art. 172)</li><li><strong>Indemnización años servicio</strong>: 5 × $3.674.340 = <code>$18.160.694</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $133.333 = <code>$1.000.000</code></li></ul><span class="total">Finiquito: $19.160.694 (limitado por tope 90 UF)</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El tope de 90 UF muerde a los sueldos altos</strong><p>Si tu sueldo supera 90 UF (~$3,67M en julio 2026), tu indemnización por años de servicio se calcula sobre $3.674.340 mensuales, no sobre tu sueldo real. Por cada año de antigüedad pierdes la diferencia. Para sueldos sobre $5M esto puede significar varias decenas de millones menos en el finiquito final.</p></div></aside>
 <p>Recuerda: las vacaciones proporcionales NO tienen tope de 90 UF, solo la indemnización por años de servicio (Art. 172 CdT). Calcula tu caso completo con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>`,
       },
       {
@@ -465,7 +465,7 @@ export const guias: Guia[] = [
       'dólar observado',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 13,
     relatedCalculators: [
       'calculadora-uf-clp',
@@ -487,7 +487,7 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>La <strong>Unidad de Fomento</strong> es una unidad de cuenta reajustable creada por el Decreto 40 del 20 de enero de 1967. Su valor se actualiza diariamente según la variación del Índice de Precios al Consumidor (IPC) del mes anterior. El <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central de Chile</a> es responsable de calcular y publicar el valor de la UF.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Fórmula del reajuste UF</strong><p><code>UF_día_t = UF_día_t-1 × (1 + IPC_mes_anterior)^(1/d)</code>, donde <em>d</em> es el número de días del período de reajuste (mes a mes calendario, desde el día 10 de cada mes hasta el día 9 del siguiente).</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Valor UF mayo 2026</span><span class="data-grid__value">$40.340</span></li><li><span class="data-grid__label">UF al cierre 2025</span><span class="data-grid__value">$38.890</span></li><li><span class="data-grid__label">Variación 12 meses</span><span class="data-grid__value">+3,73%</span></li><li><span class="data-grid__label">Frecuencia</span><span class="data-grid__value">Diaria</span></li></ul>`,
+<ul class="data-grid"><li><span class="data-grid__label">Valor UF julio 2026</span><span class="data-grid__value">$40.826</span></li><li><span class="data-grid__label">UF al cierre 2025</span><span class="data-grid__value">$38.890</span></li><li><span class="data-grid__label">Variación 12 meses</span><span class="data-grid__value">+3,73%</span></li><li><span class="data-grid__label">Frecuencia</span><span class="data-grid__value">Diaria</span></li></ul>`,
       },
       {
         id: 'donde-se-usa-uf',
@@ -497,7 +497,7 @@ export const guias: Guia[] = [
 <li><strong>Créditos hipotecarios</strong>: el saldo y los dividendos se denominan en UF. La cuota en pesos varía mes a mes con el IPC.</li>
 <li><strong>Arriendos de oficinas y propiedades altas</strong>: muchos contratos pactan el canon en UF para protegerse de la inflación.</li>
 <li><strong>Seguros de vida y salud</strong>: las primas y coberturas suelen expresarse en UF.</li>
-<li><strong>Tope imponible AFP/Salud (90 UF) y cesantía (134,9 UF)</strong>: los topes legales mensuales se ajustan automáticamente con la UF.</li>
+<li><strong>Tope imponible AFP/Salud (90 UF) y cesantía (135,2 UF)</strong>: los topes legales mensuales se ajustan automáticamente con la UF.</li>
 <li><strong>Subsidios habitacionales</strong>: los topes de propiedad y montos de subsidio (DS49, DS01, DS19) se expresan en UF.</li>
 <li><strong>Plusvalía inmobiliaria</strong>: la exención de 8.000 UF para vivienda habitual está en UF acumuladas.</li>
 <li><strong>Multas SII</strong>: muchas multas tributarias se expresan en UTM o UF.</li>
@@ -514,7 +514,7 @@ export const guias: Guia[] = [
 <div class="comparison__header"><div>UF</div><div>UTM</div></div>
 <div class="comparison__row"><div>Reajuste diario por IPC</div><div>Reajuste mensual por IPC</div></div>
 <div class="comparison__row"><div>Contratos privados, créditos, arriendos</div><div>Impuestos, multas, trámites públicos</div></div>
-<div class="comparison__row"><div>≈ $40.340 (mayo 2026)</div><div>≈ $70.588 (mayo 2026)</div></div>
+<div class="comparison__row"><div>≈ $40.826 (julio 2026)</div><div>≈ $71.649 (julio 2026)</div></div>
 <div class="comparison__row"><div>Publicada por Banco Central</div><div>Publicada por SII</div></div>
 <div class="comparison__row"><div>Origen: 1967</div><div>Origen: 1974 (reforma tributaria)</div></div>
 </div>
@@ -582,7 +582,7 @@ export const guias: Guia[] = [
       'cotización independientes',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 15,
     relatedCalculators: [
       'calculadora-iva',
@@ -717,7 +717,7 @@ export const guias: Guia[] = [
       'tabla amortización francesa',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 16,
     relatedCalculators: [
       'calculadora-credito-hipotecario',
@@ -763,7 +763,7 @@ export const guias: Guia[] = [
         title: 'Capacidad de endeudamiento: la regla del 25%',
         level: 2,
         html: `<p>Los bancos no aprueban créditos cuyo dividendo mensual supere el <strong>25% del ingreso líquido</strong> del deudor. Esto es una práctica de la industria, no una norma legal, pero está alineada con la <a href="https://www.cmfchile.cl/educa/621/w3-article-27160.html" target="_blank" rel="noopener">recomendación de la CMF</a> sobre endeudamiento responsable.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo: capacidad para sueldo líquido $1.500.000</div><ul><li>Sueldo líquido mensual: $1.500.000</li><li>Dividendo máximo (25%): $375.000</li><li>Dividendo en UF (≈$40.340): ≈ 9,3 UF/mes</li><li>A 25 años, tasa 5%: capacidad de financiamiento</li></ul><span class="total">Crédito máximo aprox.: 1.590 UF (≈ $64 millones)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo: capacidad para sueldo líquido $1.500.000</div><ul><li>Sueldo líquido mensual: $1.500.000</li><li>Dividendo máximo (25%): $375.000</li><li>Dividendo en UF (≈$40.826): ≈ 9,3 UF/mes</li><li>A 25 años, tasa 5%: capacidad de financiamiento</li></ul><span class="total">Crédito máximo aprox.: 1.590 UF (≈ $64 millones)</span></div>
 <p>Algunos bancos relajan el criterio al 30% o 35% para profesionales con ingresos altos y estables. Otros exigen 22% para deudores con créditos de consumo previos.</p>`,
       },
       {
@@ -846,7 +846,7 @@ export const guias: Guia[] = [
       'aporte adicional empleador',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 15,
     relatedCalculators: [
       'calculadora-comparador-afp',
@@ -890,13 +890,13 @@ export const guias: Guia[] = [
 <tr><td>ProVida</td><td>1,45%</td><td>11,45%</td><td>$114.500</td></tr>
 </tbody>
 </table>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El SIS lo paga el empleador</strong><p>El SIS (Seguro de Invalidez y Sobrevivencia) NO se descuenta al trabajador desde Ley 20.255 (2008): lo paga 100% el empleador (~1,15% adicional sobre el imponible).</p></div></aside>`,
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El SIS lo paga el empleador</strong><p>El SIS (Seguro de Invalidez y Sobrevivencia) NO se descuenta al trabajador desde Ley 20.255 (2008): lo paga 100% el empleador (1,62% adicional sobre el imponible desde las remuneraciones de abril de 2026).</p></div></aside>`,
       },
       {
         id: 'topes-y-tipos-cuenta',
         title: 'Tope imponible y tipos de cuenta',
         level: 2,
-        html: `<p>El <strong>tope imponible AFP/Salud 2026</strong> es <strong>90 UF</strong> mensuales (ajustado anualmente por la Superintendencia de Pensiones). Las cotizaciones se calculan solo sobre ese tope: si ganas $5.000.000 brutos, cotizas como si ganaras ~$3.626.566.</p>
+        html: `<p>El <strong>tope imponible AFP/Salud 2026</strong> es <strong>90 UF</strong> mensuales (ajustado anualmente por la Superintendencia de Pensiones). Las cotizaciones se calculan solo sobre ese tope: si ganas $5.000.000 brutos, cotizas como si ganaras ~$3.674.340.</p>
 <p>Cada afiliado tiene 4 tipos de cuenta en la AFP:</p>
 <ul>
 <li><strong>Cuenta de capitalización individual obligatoria</strong>: 10% mensual.</li>
@@ -994,7 +994,7 @@ export const guias: Guia[] = [
       'Ley 18.101 arrendamiento',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 17,
     relatedCalculators: [
       'calculadora-subsidio-habitacional',
@@ -1019,7 +1019,7 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>Comprar una propiedad en Chile combina varios elementos que conviene entender antes de firmar promesa: el <strong>precio neto en UF</strong>, los <strong>gastos de cierre</strong> (notaría, conservador, timbres), los <strong>subsidios habitacionales</strong> que pueden financiar parte del pie, las <strong>contribuciones</strong> que pagarás cada año por la propiedad y, eventualmente, el <strong>impuesto a la plusvalía</strong> si la vendes con ganancia.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Costo total de comprar (no solo el precio)</strong><p>Para una propiedad de UF 3.000 (≈$120 millones), el costo total incluyendo cierre y crédito ronda 1,5%-3% adicional ($1,8M-$3,6M). Sin contar los seguros mensuales y contribuciones anuales que arrastrarás durante toda la tenencia.</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">UF mayo 2026</span><span class="data-grid__value">$40.340</span></li><li><span class="data-grid__label">Tasa hipotecaria típica</span><span class="data-grid__value">4,5%-6,5% UF</span></li><li><span class="data-grid__label">Pie estándar</span><span class="data-grid__value">20%</span></li><li><span class="data-grid__label">Costo de cierre</span><span class="data-grid__value">1,5%-3% del valor</span></li></ul>`,
+<ul class="data-grid"><li><span class="data-grid__label">UF julio 2026</span><span class="data-grid__value">$40.826</span></li><li><span class="data-grid__label">Tasa hipotecaria típica</span><span class="data-grid__value">4,5%-6,5% UF</span></li><li><span class="data-grid__label">Pie estándar</span><span class="data-grid__value">20%</span></li><li><span class="data-grid__label">Costo de cierre</span><span class="data-grid__value">1,5%-3% del valor</span></li></ul>`,
       },
       {
         id: 'subsidios-habitacionales',
@@ -1150,7 +1150,7 @@ export const guias: Guia[] = [
       'patente comercial',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 14,
     relatedCalculators: [
       'calculadora-permiso-circulacion',
@@ -1214,10 +1214,10 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=29708" target="_blank" rel="noopener">Ley 18.290 (Ley de Tránsito)</a> clasifica las infracciones en 4 categorías con multas en UTM:</p>
 <table>
-<thead><tr><th>Tipo</th><th>Multa UTM</th><th>Multa $ (UTM $70.588)</th><th>Ejemplos</th></tr></thead>
+<thead><tr><th>Tipo</th><th>Multa UTM</th><th>Multa $ (UTM $71.649)</th><th>Ejemplos</th></tr></thead>
 <tbody>
-<tr><td>Leve</td><td>0,5 a 1 UTM</td><td>$35.294 a $70.588</td><td>Estacionamiento prohibido, no llevar documentos</td></tr>
-<tr><td>Menos grave</td><td>1 a 1,5 UTM</td><td>$70.588 a $105.882</td><td>Sin cinturón, exceso velocidad &lt; 20%</td></tr>
+<tr><td>Leve</td><td>0,5 a 1 UTM</td><td>$35.294 a $71.649</td><td>Estacionamiento prohibido, no llevar documentos</td></tr>
+<tr><td>Menos grave</td><td>1 a 1,5 UTM</td><td>$71.649 a $105.882</td><td>Sin cinturón, exceso velocidad &lt; 20%</td></tr>
 <tr><td>Grave</td><td>1,5 a 3 UTM</td><td>$105.882 a $211.764</td><td>Pasar luz roja, exceso velocidad 20%-30%</td></tr>
 <tr><td>Gravísima</td><td>1,5 a 5 UTM + suspensión licencia</td><td>$105.882 a $352.940</td><td>Adelantar zona prohibida, exceso &gt; 30%</td></tr>
 <tr><td>Gravísima por alcohol</td><td>2 a 10 UTM</td><td>$141.176 a $705.880</td><td>Conducir con alcohol &gt; 0,3 g/L</td></tr>
@@ -1291,7 +1291,7 @@ export const guias: Guia[] = [
       'tribunales familia',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 14,
     relatedCalculators: [
       'calculadora-pension-alimenticia',
@@ -1322,7 +1322,7 @@ export const guias: Guia[] = [
 <li>Las necesidades del alimentario (educación, salud, vivienda).</li>
 <li>La capacidad económica del alimentante (sueldo, otros ingresos, patrimonio).</li>
 </ul>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Topes legales (Art. 7 Ley 14.908)</strong><p>La pensión NO puede exceder el <strong>50% de la renta líquida</strong> del alimentante. El piso legal es del <strong>40% del ingreso mínimo mensual</strong> por hijo (≈$215.600 en 2026 con IMM de $539.000).</p></div></aside>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Topes legales (Art. 7 Ley 14.908)</strong><p>La pensión NO puede exceder el <strong>50% de la renta líquida</strong> del alimentante. El piso legal es del <strong>40% del ingreso mínimo mensual</strong> por hijo (≈$221.421 en 2026 con IMM de $553.553).</p></div></aside>
 <p>Reglas prácticas que aplican los tribunales:</p>
 <table>
 <thead><tr><th>Hijos</th><th>% típico del sueldo bruto</th><th>Ejemplo sueldo $1.000.000</th></tr></thead>
@@ -1434,7 +1434,7 @@ export const guias: Guia[] = [
       'INGRESA',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-05-15',
+    updatedAt: '2026-07-04',
     readingTime: 12,
     relatedCalculators: [
       'calculadora-credito-cae',
@@ -1518,7 +1518,7 @@ export const guias: Guia[] = [
         id: 'simulacion-cae',
         title: 'Simulación: cuánto pagarás por tu CAE',
         level: 2,
-        html: `<div class="numeric-example"><div class="numeric-example__title">Carrera 5 años, arancel anual UF 200, total UF 1.000</div><ul><li>Monto crédito: UF 1.000 (≈$40.340.000 al cambio mayo 2026)</li><li>Tasa anual: 2% real</li><li>Plazo: 20 años (240 cuotas)</li><li>Cuota fija UF: ≈ 5,1 UF/mes</li><li>Cuota inicial en pesos: ≈ $205.700/mes (mayo 2026)</li><li>Total a pagar: UF 1.213 (≈$48,9M, intereses UF 213)</li></ul><span class="total">Cuota mensual ≈ $206.000 — limitada a 10% ingreso bruto</span></div>
+        html: `<div class="numeric-example"><div class="numeric-example__title">Carrera 5 años, arancel anual UF 200, total UF 1.000</div><ul><li>Monto crédito: UF 1.000 (≈$40.826.000 al cambio julio 2026)</li><li>Tasa anual: 2% real</li><li>Plazo: 20 años (240 cuotas)</li><li>Cuota fija UF: ≈ 5,1 UF/mes</li><li>Cuota inicial en pesos: ≈ $208.200/mes (julio 2026)</li><li>Total a pagar: UF 1.213 (≈$48,9M, intereses UF 213)</li></ul><span class="total">Cuota mensual ≈ $206.000 — limitada a 10% ingreso bruto</span></div>
 <p>Si tu ingreso bruto al egresar es $1.500.000, la cuota máxima legal es $150.000. La diferencia se aplaza con extensión de plazo. Con la <a href="/calculadoras/calculadora-credito-cae">calculadora de CAE</a> puedes simular distintos escenarios de ingreso y plazo.</p>`,
       },
     ],
@@ -1552,7 +1552,7 @@ export const guias: Guia[] = [
       'costo total empleado chile',
     ],
     publishedAt: '2026-05-16',
-    updatedAt: '2026-05-16',
+    updatedAt: '2026-07-04',
     readingTime: 18,
     relatedCalculators: [
       'calculadora-costo-empleado-pyme',
@@ -1608,7 +1608,7 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>El Servicio de Impuestos Internos (SII) clasifica a las empresas según el monto anual de sus ventas en UF (Ley 20.416 y Resolución Ex. SII N°55/2018):</p>
 <table>
-<thead><tr><th>Tamaño</th><th>Ventas anuales (UF)</th><th>Equivalente CLP (UF mayo 2026)</th></tr></thead>
+<thead><tr><th>Tamaño</th><th>Ventas anuales (UF)</th><th>Equivalente CLP (UF julio 2026)</th></tr></thead>
 <tbody>
 <tr><td>Micro</td><td>0 – 2.400 UF</td><td>~$96,9 millones</td></tr>
 <tr><td>Pequeña</td><td>2.400 – 25.000 UF</td><td>~$96,9M – $1.009M</td></tr>
@@ -1628,13 +1628,13 @@ export const guias: Guia[] = [
 <table>
 <thead><tr><th>Aporte empleador</th><th>Tasa 2026</th><th>Sobre $1.000.000 bruto</th></tr></thead>
 <tbody>
-<tr><td>SIS (Seguro Invalidez/Sobrevivencia)</td><td>1,15%</td><td>$11.500</td></tr>
+<tr><td>SIS (Seguro Invalidez/Sobrevivencia)</td><td>1,62%</td><td>$16.200</td></tr>
 <tr><td>Seguro cesantía (indefinido)</td><td>2,40%</td><td>$24.000</td></tr>
 <tr><td>Mutual seguridad (Ley 16.744)</td><td>0,90% – 4,30%</td><td>$9.000 – $43.000</td></tr>
 <tr><td>Seguro Social Previsional (Ley 21.735)</td><td>1,0% (sube a 1,75% en agosto/2026)</td><td>$10.000</td></tr>
 </tbody>
 </table>
-<div class="numeric-example"><div class="numeric-example__title">PYME contrata empleado con sueldo bruto $1.000.000 (indefinido)</div><ul><li>Sueldo bruto: $1.000.000</li><li>SIS empleador (1,15%): $11.500</li><li>Seguro cesantía empleador (2,4%): $24.000</li><li>Mutual seguridad (0,95% promedio): $9.500</li><li>Seguro Social Previsional (1,0% en 2026): $10.000</li></ul><span class="total">Costo total mensual: $1.055.000 — factor previsional ≈ 1,055</span></div>
+<div class="numeric-example"><div class="numeric-example__title">PYME contrata empleado con sueldo bruto $1.000.000 (indefinido)</div><ul><li>Sueldo bruto: $1.000.000</li><li>SIS empleador (1,62%): $16.200</li><li>Seguro cesantía empleador (2,4%): $24.000</li><li>Mutual seguridad (0,95% promedio): $9.500</li><li>Seguro Social Previsional (1,0% en 2026): $10.000</li></ul><span class="total">Costo total mensual: $1.059.700 — factor previsional ≈ 1,060</span></div>
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Calendario Ley 21.735 (reforma de pensiones)</strong><p>El Seguro Social Previsional sube progresivamente el aporte del empleador desde 1% (2025) hasta 7% (2033), con incrementos anuales de 0,75 puntos cada agosto. En 2026 son 1,0% el primer semestre y 1,75% desde agosto. Planifica tu costo laboral con ese calendario en mano.</p></div></aside>
 <p>Calcula el costo total de tu empleado considerando AFP, mutual y reforma con la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleador</a>.</p>`,
       },
@@ -1700,7 +1700,7 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>La <strong>patente comercial</strong> (DL 3063 / Ley de Rentas Municipales) es un tributo anual que pagan todas las personas naturales y jurídicas que ejerzan una actividad comercial, industrial o de servicios. La cobra la municipalidad donde tienes el domicilio comercial o sucursal.</p>
 <aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Art. 24 DL 3063</strong><p>"La patente grava la actividad que se ejerce por un mismo contribuyente, en su local, oficina, establecimiento, kiosco o lugar determinado con prescindencia de la clase o número de giros o rubros distintos que comprenda."</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tasa legal</span><span class="data-grid__value">0,25% – 0,5% del capital propio</span></li><li><span class="data-grid__label">Mínimo anual</span><span class="data-grid__value">1 UTM (~$70.588)</span></li><li><span class="data-grid__label">Máximo anual</span><span class="data-grid__value">8.000 UTM (~$564M)</span></li><li><span class="data-grid__label">Cuotas</span><span class="data-grid__value">Enero y julio</span></li></ul>
+<ul class="data-grid"><li><span class="data-grid__label">Tasa legal</span><span class="data-grid__value">0,25% – 0,5% del capital propio</span></li><li><span class="data-grid__label">Mínimo anual</span><span class="data-grid__value">1 UTM (~$71.649)</span></li><li><span class="data-grid__label">Máximo anual</span><span class="data-grid__value">8.000 UTM (~$564M)</span></li><li><span class="data-grid__label">Cuotas</span><span class="data-grid__value">Enero y julio</span></li></ul>
 <table>
 <thead><tr><th>Comuna</th><th>Tasa típica</th><th>Capital $100M → patente anual</th></tr></thead>
 <tbody>
@@ -1811,7 +1811,7 @@ export const guias: Guia[] = [
       'kWh chile precio',
     ],
     publishedAt: '2026-05-16',
-    updatedAt: '2026-05-16',
+    updatedAt: '2026-07-04',
     readingTime: 14,
     relatedCalculators: [
       'calculadora-cuenta-luz',
@@ -1962,7 +1962,7 @@ export const guias: Guia[] = [
         id: 'contribuciones-hogar',
         title: 'Contribuciones de la vivienda',
         level: 2,
-        html: `<p>Si eres propietario de tu casa o departamento, pagas contribuciones (Impuesto Territorial, Ley 17.235). Aplica una <strong>exención automática</strong> para viviendas de avalúo fiscal bajo <strong>225,96 UTM</strong> (≈$15,9 millones con UTM mayo 2026).</p>
+        html: `<p>Si eres propietario de tu casa o departamento, pagas contribuciones (Impuesto Territorial, Ley 17.235). Aplica una <strong>exención automática</strong> para viviendas de avalúo fiscal bajo <strong>225,96 UTM</strong> (≈$15,9 millones con UTM julio 2026).</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Avalúo fiscal ≠ tasación comercial</strong><p>El avalúo fiscal es un valor administrativo que el SII fija para efectos de contribuciones. Suele ser 30%-60% del valor comercial real. Para departamentos en Santiago centro de 50 m², el avalúo fiscal típico es $25M-$45M (vs $80M-$150M comercial). Verifica tu avalúo en sii.cl con tu rol de propiedad.</p></div></aside>
 <table>
 <thead><tr><th>Avalúo fiscal</th><th>Estado</th><th>Contribución anual estimada (0,9%)</th></tr></thead>
@@ -1999,7 +1999,7 @@ export const guias: Guia[] = [
 <li><strong>DS19 (Integración Social y Territorial)</strong>: subsidio adicional al DS01/DS49 cuando el proyecto incluye mix social. Hasta 200 UF extra.</li>
 <li><strong>DFL2</strong>: viviendas de hasta 140 m² construidos con beneficios tributarios (50% rebaja en contribuciones por 15 años).</li>
 </ul>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Combinar subsidios para maximizar</strong><p>Si calificas para DS01 + DS19 puedes recibir hasta 850 UF (~$34M con UF mayo 2026), lo que cubre 50%-70% del precio de un departamento de 50 m² en comunas periféricas. Postula en serviu.cl con la documentación completa.</p></div></aside>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Combinar subsidios para maximizar</strong><p>Si calificas para DS01 + DS19 puedes recibir hasta 850 UF (~$34M con UF julio 2026), lo que cubre 50%-70% del precio de un departamento de 50 m² en comunas periféricas. Postula en serviu.cl con la documentación completa.</p></div></aside>
 <p>Estima tu subsidio según ingreso y tramo con la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio habitacional</a>. Para simular el dividendo de tu hipoteca complementaria, usa la <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a>.</p>`,
       },
     ],

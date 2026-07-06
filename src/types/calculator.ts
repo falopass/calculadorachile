@@ -87,4 +87,25 @@ export interface Calculator {
    * la ruta. También se excluyen del sitemap.
    */
   noIndex?: boolean;
+  /**
+   * Fecha de la última revisión de fórmulas/constantes en formato
+   * ISO (YYYY-MM-DD). Se muestra como texto visible al usuario
+   * ("Actualizado: julio de 2026") y refuerza la señal E-E-A-T de
+   * contenido actualizado. Debe reflejar un review real, no la fecha
+   * del deploy.
+   */
+  lastReviewed?: string;
+  /**
+   * Fuentes oficiales (SII, DT, BCentral, SPensiones, etc.) que
+   * respaldan las fórmulas y constantes usadas en el cálculo. Se
+   * muestran como enlaces salientes en la página de la calculadora
+   * para reforzar la señal E-E-A-T (YMYL). Máximo 4, priorizar por
+   * relevancia al cálculo específico. Las URLs deben apuntar a la
+   * sub-página específica cuando exista, no a la home institucional.
+   */
+  sources?: Array<{
+    name: string;
+    url: string;
+    note?: string;
+  }>;
 }

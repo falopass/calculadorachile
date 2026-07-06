@@ -1,7 +1,9 @@
 "use client";
 
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { use } from "react";
+import { AUTHOR } from "@/lib/seo/author";
 import type { CalculatorResult } from "@/types/calculator";
 import PremiumCalculatorShell from "@/components/calculator/PremiumCalculatorShell";
 import EnhancedFAQ from "@/components/calculator/EnhancedFAQ";
@@ -9,6 +11,7 @@ import SeoStructuredData from "@/components/calculator/SeoStructuredData";
 import CalculatorPageLayout from "@/components/calculator/CalculatorPageLayout";
 import LiveValuesSection from "@/components/calculator/LiveValuesSection";
 import RelatedCalculators from "@/components/calculator/RelatedCalculators";
+import OfficialSources from "@/components/calculator/OfficialSources";
 import { calculators } from "@/data/calculators";
 import { calculateSueldoLiquido, sueldoLiquidoToResults } from "@/lib/calculations/sueldo-liquido";
 import { calculateFiniquito, finiquitoToResults } from "@/lib/calculations/finiquito";
@@ -492,6 +495,7 @@ export default function CalculatorPageClient({
       title={calculator.name}
       description={calculator.description}
       calculatorId={calculator.id}
+      lastReviewed={calculator.lastReviewed}
     >
       {/* SEO Schema */}
       {canonicalUrl && (
@@ -596,6 +600,25 @@ export default function CalculatorPageClient({
           </section>
         )}
       </div>
+
+      {/* Fuentes oficiales — enlaces salientes a SII, DT, BCentral, etc. */}
+      {calculator.sources && calculator.sources.length > 0 && (
+        <OfficialSources
+          sources={calculator.sources}
+          className="mt-8 md:mt-10"
+        />
+      )}
+
+      {/* Revisado por — bloque de credibilidad al pie */}
+      <p className="mt-4 text-xs text-[var(--foreground-muted)]">
+        Revisado por{' '}
+        <Link
+          href="/acerca-de"
+          className="font-medium text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] hover:underline"
+        >
+          {AUTHOR.name}
+        </Link>
+      </p>
 
       {/*
         Bloque "Lee la guía completa" — linking interno calculadora →

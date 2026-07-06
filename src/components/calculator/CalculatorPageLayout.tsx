@@ -3,6 +3,7 @@
 import { ReactNode, memo } from 'react';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import LastReviewed from './LastReviewed';
 
 interface CalculatorPageLayoutProps {
   children: ReactNode;
@@ -10,6 +11,8 @@ interface CalculatorPageLayoutProps {
   description: string;
   /** Reservado para uso futuro (ej. analytics scoping). */
   calculatorId: string;
+  /** Fecha ISO (YYYY-MM-DD) de la última revisión de fórmulas/constantes. */
+  lastReviewed?: string;
 }
 
 /**
@@ -23,6 +26,7 @@ const CalculatorPageLayout = memo(function CalculatorPageLayout({
   children,
   title,
   description,
+  lastReviewed,
 }: CalculatorPageLayoutProps) {
   return (
     <div className="bg-[var(--background)]">
@@ -81,6 +85,9 @@ const CalculatorPageLayout = memo(function CalculatorPageLayout({
           >
             {description}
           </p>
+          {lastReviewed && (
+            <LastReviewed date={lastReviewed} className="mt-3 block" />
+          )}
         </div>
       </section>
 

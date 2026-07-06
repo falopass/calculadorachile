@@ -2,15 +2,33 @@
 // Guía individual — /guias/[slug]
 // ----------------------------------------------
 // Server Component que renderiza una guía pillar de larga forma.
-// Incluye: metadata SEO completo, JSON-LD Article + BreadcrumbList,
-// table of contents, secciones con H2/H3, calculadoras y artículos
-// relacionados, fuentes oficiales.
+// Layout editorial profesional: header prominente, hero card,
+// secciones con iconos, TOC sticky y bloques relacionados.
 // ============================================
 
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, BookOpen, Calculator, Clock, ExternalLink, List } from 'lucide-react';
+import {
+  ArrowLeft,
+  BookOpen,
+  Calculator,
+  Car,
+  Clock,
+  DollarSign,
+  ExternalLink,
+  FileText,
+  GraduationCap,
+  Home,
+  Receipt,
+  Scale,
+  TrendingUp,
+  Users,
+  Building2,
+  CircleHelp,
+  List,
+  Banknote,
+} from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
@@ -29,6 +47,7 @@ import { AUTHOR } from '@/lib/seo/author';
 import { guias, getGuiaBySlug, type Guia } from '@/data/guias';
 import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
+import snapshot from '@/lib/values/snapshot.json';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -38,11 +57,43 @@ export async function generateStaticParams() {
   return guias.map((g) => ({ slug: g.slug }));
 }
 
+const sectionIconMap: { keywords: string[]; icon: React.ComponentType<{ className?: string }> }[] = [
+  { keywords: ['uf', 'fomento', 'unidad fomento'], icon: Scale },
+  { keywords: ['utm', 'uta', 'tributaria', 'tributario'], icon: Receipt },
+  { keywords: ['ipc', 'inflación', 'precios', 'indicador'], icon: TrendingUp },
+  { keywords: ['dólar', 'dolar', 'euro', 'divisa', 'cambio'], icon: DollarSign },
+  { keywords: ['crédito', 'hipotecario', 'vivienda', 'arriendo', 'hogar'], icon: Home },
+  { keywords: ['sueldo', 'remuneración', 'líquido', 'bruto'], icon: Banknote },
+  { keywords: ['finiquito', 'indemnización', 'vacaciones', 'despido'], icon: FileText },
+  { keywords: ['afp', 'pensión', 'jubilación', 'previsional'], icon: TrendingUp },
+  { keywords: ['vehículo', 'vehiculo', 'auto', 'moto', 'tag', 'permiso'], icon: Car },
+  { keywords: ['familia', 'alimenticia', 'alimentos'], icon: Users },
+  { keywords: ['cae', 'educación', 'universidad', 'crédito aval'], icon: GraduationCap },
+  { keywords: ['empresa', 'pyme', 'patente', 'comercial'], icon: Building2 },
+  { keywords: ['fuente', 'oficial'], icon: BookOpen },
+];
+
+function getSectionIcon(title: string): React.ComponentType<{ className?: string }> {
+  const lower = title.toLowerCase();
+  const match = sectionIconMap.find((m) => m.keywords.some((k) => lower.includes(k)));
+  return match?.icon ?? CircleHelp;
+}
+
+function isIndicatorGuide(slug: string): boolean {
+  return slug === 'uf-utm-indicadores-chile';
+}
+
+function formatCLP(value: number): string {
+  return `$${Math.round(value).toLocaleString('es-CL')}`;
+}
+
+function formatUF(value: number): string {
+  return `$${value.toLocaleString('es-CL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
 /**
  * Extrae texto plano (sin HTML) de una sección y lo limita a `max`
- * caracteres cortando en el último espacio. Necesario porque
- * `HowToStep.text` debe ser conciso para que Google muestre los
- * pasos en SERPs.
+ * caracteres cortando en el último espacio.
  */
 function clampSectionText(html: string, max = 220): string {
   const flat = html
@@ -57,17 +108,6 @@ function clampSectionText(html: string, max = 220): string {
   return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated) + '…';
 }
 
-/**
- * Convierte las secciones H2 de una guía en pasos de HowTo. Usa el
- * título de la sección como nombre del paso, y un resumen del HTML
- * de su cuerpo como `text`. La URL del paso apunta al ancla de la
- * sección dentro de la guía (deep link a la sección específica).
- *
- * Sólo consideramos secciones de nivel 2 (las H3 son sub-temas, no
- * pasos del recorrido). Si la guía tiene más de 8 secciones H2 nos
- * quedamos con las primeras 8 para mantener el HowTo tractable
- * (Google no muestra más de ~6-8 pasos en SERPs).
- */
 function buildGuiaHowToSteps(
   guia: Guia,
   baseUrl: string,
@@ -120,22 +160,14 @@ export default async function GuiaPage({ params }: PageProps) {
 
   const url = absoluteUrl(`/guias/${guia.slug}`);
 
-  // Calculadoras relacionadas (resolver desde el slug de la URL)
   const relatedCalcs = guia.relatedCalculators
     .map((s) => calculators.find((c) => c.slug === s))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
-  // Artículos del blog relacionados
   const relatedArts = guia.relatedArticles
     .map((s) => articles.find((a) => a.slug === s))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
-  // Guías relacionadas (cross-link entre pillars). Estrategia:
-  //  1. Misma categoría → primeras 2 guías distintas a la actual.
-  //  2. Si no alcanza, completa con otras guías de cualquier categoría
-  //     hasta tener un máximo de 3.
-  // Esto refuerza el grafo de linking interno entre pillars sin que
-  // tengamos que mantener un mapping manual por guía.
   const sameCategoryGuias = guias.filter(
     (g) => g.category === guia.category && g.slug !== guia.slug,
   );
@@ -148,15 +180,6 @@ export default async function GuiaPage({ params }: PageProps) {
   ].slice(0, 3);
 
   const ogImageUrl = absoluteUrl(`/guias/${guia.slug}/opengraph-image`);
-
-  // Schema: Article + LearningResource + BreadcrumbList + WebPage + HowTo.
-  // - Article: para Google News / Discover y rich results clásicos.
-  // - LearningResource: para "About this result" educativo, mejora la
-  //   comprensión semántica de que es un recurso pedagógico.
-  // - WebPage: ancla la página y permite breadcrumb + dates.
-  // - HowTo: pasos derivados de las secciones H2 de la guía. Habilita
-  //   que Google pueda mostrar los pasos como rich result en SERPs
-  //   ("Cómo calcular el sueldo líquido en Chile: 8 pasos").
   const howToSteps = buildGuiaHowToSteps(guia, url);
 
   const schemas: Record<string, unknown>[] = [
@@ -203,182 +226,218 @@ export default async function GuiaPage({ params }: PageProps) {
     }),
   ];
 
-  // HowTo sólo si la guía tiene al menos 3 secciones H2 — con menos
-  // pasos no agrega valor sobre el Article y Google puede marcarlo
-  // como "thin content".
   if (howToSteps.length >= 3) {
     schemas.push(
       howToSchema({
         name: `${guia.title}: pasos clave`,
         description: guia.intent,
         url,
-        // Tiempo total estimado en formato ISO 8601. Reusamos el
-        // readingTime de la guía como proxy del tiempo necesario
-        // para "ejecutar" los pasos (leyéndolos).
         totalTime: `PT${guia.readingTime}M`,
         steps: howToSteps,
       }),
     );
   }
 
-  const formattedDate = new Date(guia.updatedAt).toLocaleDateString('es-CL', {
+  const formattedUpdated = new Date(guia.updatedAt).toLocaleDateString('es-CL', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  const hasPublishDate = guia.publishedAt !== guia.updatedAt;
+  const formattedPublished = hasPublishDate
+    ? new Date(guia.publishedAt).toLocaleDateString('es-CL', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
+
+  const h2Sections = guia.sections.filter((s) => s.level === 2);
 
   return (
     <>
       <JsonLd id="guia-schemas" data={schemas} />
       <ReadingProgress />
 
+      {/* Header prominente */}
+      <header className="border-b border-[var(--border)] bg-[var(--surface)]">
+        <div className="container-base py-10 md:py-14">
+          <Breadcrumbs
+            items={[
+              { label: 'Inicio', href: '/' },
+              { label: 'Guías', href: '/guias' },
+              { label: guia.title },
+            ]}
+          />
+
+          <div className="mx-auto mt-6 max-w-3xl">
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary-100)] bg-[var(--accent-muted)] px-3 py-1.5 text-xs font-semibold text-[var(--accent)]">
+                <BookOpen className="h-3.5 w-3.5" />
+                Guía pillar · {guia.categoryLabel}
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
+                <Clock className="h-3.5 w-3.5" />
+                {guia.readingTime} min de lectura
+              </span>
+            </div>
+
+            <h1 className="heading-display text-3xl text-[var(--foreground)] md:text-5xl">
+              {guia.title}
+            </h1>
+            <p className="mt-5 text-lg leading-relaxed text-[var(--foreground-secondary)] md:text-xl">
+              {guia.description}
+            </p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
+              <Link
+                href="/acerca-de"
+                className="group flex items-center gap-2 transition-colors hover:text-[var(--accent)]"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
+                  DS
+                </div>
+                <span className="group-hover:underline">Por {AUTHOR.name}</span>
+              </Link>
+              <span aria-hidden className="text-[var(--border)]">
+                ·
+              </span>
+              <span>
+                {formattedPublished && (
+                  <>
+                    Publicado el{' '}
+                    <time dateTime={guia.publishedAt}>{formattedPublished}</time>
+                    {' · '}
+                  </>
+                )}
+                Actualizado el <time dateTime={guia.updatedAt}>{formattedUpdated}</time>
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
       <article className="container-base py-8 md:py-12">
-        <Breadcrumbs
-          items={[
-            { label: 'Inicio', href: '/' },
-            { label: 'Guías', href: '/guias' },
-            { label: guia.title },
-          ]}
-        />
-
-        {/*
-          Header — versión "hero" más generosa: badge categoría con
-          icono, título grande tipo display, descripción larga,
-          metadatos editoriales (autor + fecha + lectura) y un
-          accent-bar superior para distinguir guías de blog y de
-          calculadoras (cada superficie tiene su acento de color).
-        */}
-        <header className="max-w-3xl mx-auto mb-10 md:mb-14">
-          <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
-              <BookOpen className="w-3.5 h-3.5" />
-              Guía pillar · {guia.categoryLabel}
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
-              <Clock className="w-3.5 h-3.5" />
-              {guia.readingTime} min de lectura
-            </span>
-          </div>
-          <h1 className="heading-display text-4xl md:text-5xl text-[var(--foreground)] mb-5 leading-[1.1]">
-            {guia.title}
-          </h1>
-          <p className="text-lg md:text-xl text-[var(--foreground-secondary)] leading-relaxed">
-            {guia.description}
-          </p>
-          <div className="mt-6 pt-5 border-t border-[var(--border)] flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
-            <Link
-              href="/equipo"
-              className="flex items-center gap-2 hover:text-[var(--color-primary-600)] transition-colors group"
-              aria-label={`Perfil de ${AUTHOR.name}`}
-            >
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] flex items-center justify-center text-white text-[10px] font-bold">
-                DS
-              </div>
-              <span className="group-hover:underline">Por {AUTHOR.name}</span>
-            </Link>
-            <span className="text-[var(--border)]">·</span>
-            <span>Actualizado el {formattedDate}</span>
-          </div>
-        </header>
-
-        {/*
-          Grid responsive: en >=lg, el TOC sticky queda a la izquierda
-          (3 cols) y el contenido a la derecha (8 cols, 1 col de
-          margen). En mobile/tablet, el TOC va arriba como bloque
-          colapsable y el contenido ocupa el ancho completo.
-        */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* TOC Sticky (desktop) / TOC arriba (mobile) */}
-          <aside className="lg:col-span-3 lg:order-1 order-1">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* TOC */}
+          <aside className="order-1 lg:order-1 lg:col-span-3">
             <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
-              {/* Mobile: bloque collapsible */}
-              <details className="lg:hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 mb-6" open>
-                <summary className="cursor-pointer flex items-center gap-2 text-sm font-semibold text-[var(--foreground)] uppercase tracking-wide select-none">
-                  <List className="w-4 h-4" />
+              <details className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 lg:hidden" open>
+                <summary className="flex cursor-pointer select-none items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--foreground)]">
+                  <List className="h-4 w-4" />
                   En esta guía
                 </summary>
-                <ol className="mt-3 space-y-1 list-none">
-                  {guia.sections
-                    .filter((s) => s.level === 2)
-                    .map((section, idx) => (
-                      <li key={section.id}>
-                        <a
-                          href={`#${section.id}`}
-                          className="toc-link block"
-                        >
-                          <span className="text-[var(--foreground-muted)] mr-2 tabular-nums">
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
-                          {section.title}
-                        </a>
-                      </li>
-                    ))}
+                <ol className="mt-3 list-none space-y-1">
+                  {h2Sections.map((section, idx) => (
+                    <li key={section.id}>
+                      <a href={`#${section.id}`} className="toc-link block">
+                        <span className="mr-2 tabular-nums text-[var(--foreground-muted)]">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        {section.title}
+                      </a>
+                    </li>
+                  ))}
                 </ol>
               </details>
-              {/* Desktop: TOC con scroll-spy */}
               <div className="hidden lg:block">
                 <TocSticky
-                  items={guia.sections
-                    .filter((s) => s.level === 2)
-                    .map((s) => ({ id: s.id, title: s.title }))}
+                  items={h2Sections.map((s) => ({ id: s.id, title: s.title }))}
                   title="En esta guía"
                 />
               </div>
             </div>
           </aside>
 
-          {/* Contenido principal */}
-          <div className="lg:col-span-8 lg:col-start-5 order-2 max-w-3xl">
-            {/* Secciones */}
-            <div
-              className="prose prose-lg max-w-none
-                prose-headings:text-[var(--foreground)]
-                prose-headings:font-bold
-                prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5 prose-h2:scroll-mt-24
-                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                prose-p:text-[var(--foreground-secondary)]
-                prose-p:leading-relaxed
-                prose-strong:text-[var(--foreground)]
-                prose-a:text-[var(--color-primary-600)] prose-a:no-underline hover:prose-a:underline
-                prose-li:text-[var(--foreground-secondary)]"
-            >
-              {guia.sections.map((section) =>
-                section.level === 2 ? (
-                  <section key={section.id} id={section.id}>
-                    <h2>{section.title}</h2>
-                    <div dangerouslySetInnerHTML={{ __html: section.html }} />
+          {/* Contenido */}
+          <div className="order-2 lg:col-span-8 lg:col-start-5">
+            {/* Hero card: intent */}
+            <div className="mb-10 rounded-2xl border border-[var(--color-primary-100)] bg-[var(--accent-muted)] p-6 md:p-8">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+                En resumen
+              </p>
+              <p className="text-lg font-medium leading-relaxed text-[var(--foreground)] md:text-xl">
+                {guia.intent}
+              </p>
+            </div>
+
+            {/* Dashboard de indicadores (solo guía de indicadores) */}
+            {isIndicatorGuide(guia.slug) && <IndicatorDashboard />}
+
+            {/* Secciones con iconos */}
+            <div className="space-y-10 md:space-y-12">
+              {guia.sections.map((section) => {
+                const Icon = getSectionIcon(section.title);
+                const isH2 = section.level === 2;
+
+                return isH2 ? (
+                  <section
+                    key={section.id}
+                    id={section.id}
+                    className="scroll-mt-28 rounded-2xl border-b border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm md:p-8"
+                  >
+                    <div className="mb-5 flex items-center gap-3">
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--accent-muted)] text-[var(--accent)]">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h2 className="text-xl font-bold tracking-[-0.02em] text-[var(--foreground)] md:text-2xl">
+                        {section.title}
+                      </h2>
+                    </div>
+                    <div
+                      className="prose prose-lg max-w-none
+                        prose-headings:text-[var(--foreground)]
+                        prose-headings:font-bold
+                        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                        prose-p:text-[var(--foreground-secondary)]
+                        prose-p:leading-relaxed
+                        prose-strong:text-[var(--foreground)]
+                        prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
+                        prose-li:text-[var(--foreground-secondary)]"
+                      dangerouslySetInnerHTML={{ __html: section.html }}
+                    />
                   </section>
                 ) : (
-                  <div key={section.id} id={section.id}>
-                    <h3>{section.title}</h3>
-                    <div dangerouslySetInnerHTML={{ __html: section.html }} />
+                  <div key={section.id} id={section.id} className="scroll-mt-28">
+                    <h3 className="mb-3 text-xl font-bold text-[var(--foreground)]">
+                      {section.title}
+                    </h3>
+                    <div
+                      className="prose prose-lg max-w-none
+                        prose-headings:text-[var(--foreground)]
+                        prose-p:text-[var(--foreground-secondary)]
+                        prose-strong:text-[var(--foreground)]
+                        prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline"
+                      dangerouslySetInnerHTML={{ __html: section.html }}
+                    />
                   </div>
-                ),
-              )}
+                );
+              })}
             </div>
 
             {/* Calculadoras relacionadas */}
             {relatedCalcs.length > 0 && (
-              <section className="mt-14 pt-10 border-t border-[var(--border)]">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-primary-500)]/10 flex items-center justify-center">
-                    <Calculator className="w-5 h-5 text-[var(--color-primary-500)]" />
+              <section className="mt-14">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-muted)] text-[var(--accent)]">
+                    <Calculator className="h-5 w-5" />
                   </div>
                   <h2 className="text-xl font-bold text-[var(--foreground)]">
                     Calculadoras relacionadas
                   </h2>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {relatedCalcs.map((calc) => (
                     <Link
                       key={calc.id}
                       href={`/calculadoras/${calc.slug}`}
-                      className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--color-primary-500)]/40 hover:shadow-sm transition-all"
+                      className="group rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:border-[var(--accent)] hover:shadow-sm"
                     >
-                      <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors">
+                      <h3 className="mb-1 text-sm font-semibold text-[var(--foreground)] transition-colors group-hover:text-[var(--accent)]">
                         {calc.name}
                       </h3>
-                      <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
+                      <p className="line-clamp-2 text-xs text-[var(--foreground-muted)]">
                         {calc.description}
                       </p>
                     </Link>
@@ -389,19 +448,19 @@ export default async function GuiaPage({ params }: PageProps) {
 
             {/* Artículos del blog */}
             {relatedArts.length > 0 && (
-              <section className="mt-10">
-                <h2 className="text-lg font-bold text-[var(--foreground)] mb-4">
+              <section className="mt-12 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+                <h2 className="mb-4 text-lg font-bold text-[var(--foreground)]">
                   Sigue leyendo en el blog
                 </h2>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {relatedArts.map((art) => (
                     <li key={art.slug}>
                       <Link
                         href={`/blog/${art.slug}`}
-                        className="flex items-center gap-2 text-sm text-[var(--color-primary-600)] hover:underline"
+                        className="group flex items-start gap-3 text-sm text-[var(--foreground-secondary)] transition-colors hover:text-[var(--accent)]"
                       >
-                        <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
-                        {art.title}
+                        <ArrowLeft className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 rotate-180 opacity-60 transition-opacity group-hover:opacity-100" />
+                        <span className="line-clamp-2">{art.title}</span>
                       </Link>
                     </li>
                   ))}
@@ -409,30 +468,25 @@ export default async function GuiaPage({ params }: PageProps) {
               </section>
             )}
 
-            {/*
-              Guías relacionadas — cross-link entre pillars. Refuerza el
-              grafo de linking interno entre las guías profundas, lo que
-              ayuda a Google a entender la estructura topical del sitio
-              y distribuye PageRank/autoridad entre pillars.
-            */}
+            {/* Guías relacionadas */}
             {relatedGuias.length > 0 && (
-              <section className="mt-12 pt-10 border-t border-[var(--border)]">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-success-500)]/10 flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-[var(--color-success-500)]" />
+              <section className="mt-12">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-muted)] text-[var(--accent)]">
+                    <BookOpen className="h-5 w-5" />
                   </div>
                   <h2 className="text-xl font-bold text-[var(--foreground)]">
                     Otras guías que te pueden interesar
                   </h2>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {relatedGuias.map((g) => (
                     <Link
                       key={g.slug}
                       href={`/guias/${g.slug}`}
-                      className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--color-success-500)]/40 hover:shadow-sm transition-all"
+                      className="group rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:border-[var(--accent)] hover:shadow-sm"
                     >
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="mb-2 flex items-center gap-2">
                         <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
                           {g.categoryLabel}
                         </span>
@@ -440,12 +494,12 @@ export default async function GuiaPage({ params }: PageProps) {
                           · {g.readingTime} min
                         </span>
                       </div>
-                      <h3 className="font-semibold text-[var(--foreground)] text-sm mb-1 group-hover:text-[var(--color-primary-600)] transition-colors leading-snug">
+                      <h3 className="mb-1 text-sm font-semibold leading-snug text-[var(--foreground)] transition-colors group-hover:text-[var(--accent)]">
                         {g.title}
                       </h3>
-                      <p className="text-xs text-[var(--foreground-muted)] line-clamp-2">
+                      <p className="line-clamp-2 text-xs text-[var(--foreground-muted)]">
                         {g.description}
-                      </p>
+                  </p>
                     </Link>
                   ))}
                 </div>
@@ -454,21 +508,21 @@ export default async function GuiaPage({ params }: PageProps) {
 
             {/* Fuentes */}
             {guia.sources.length > 0 && (
-              <section className="mt-10 pt-6 border-t border-[var(--border)]">
-                <h2 className="text-sm font-semibold text-[var(--foreground)] mb-3 uppercase tracking-wide">
+              <section className="mt-12 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--foreground)]">
                   Fuentes oficiales
                 </h2>
-                <ul className="space-y-1.5">
+                <ul className="space-y-2">
                   {guia.sources.map((source) => (
                     <li key={source.url} className="text-sm">
                       <a
                         href={source.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[var(--foreground-secondary)] hover:text-[var(--color-primary-600)] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-[var(--foreground-secondary)] transition-colors hover:text-[var(--accent)]"
                       >
                         {source.label}
-                        <ExternalLink className="w-3 h-3" />
+                        <ExternalLink className="h-3 w-3" />
                       </a>
                     </li>
                   ))}
@@ -480,9 +534,9 @@ export default async function GuiaPage({ params }: PageProps) {
             <div className="mt-10">
               <Link
                 href="/guias"
-                className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary-600)] hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm text-[var(--accent)] transition-colors hover:underline"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="h-4 w-4" />
                 Volver a Guías
               </Link>
             </div>
@@ -490,5 +544,46 @@ export default async function GuiaPage({ params }: PageProps) {
         </div>
       </article>
     </>
+  );
+}
+
+function IndicatorDashboard() {
+  const indicators = [
+    { label: 'UF', value: formatUF(snapshot.uf), sub: 'Banco Central' },
+    { label: 'UTM', value: formatCLP(snapshot.utm), sub: 'SII' },
+    { label: 'Dólar observado', value: formatUF(snapshot.dolarObservado), sub: 'BCCh' },
+    { label: 'Euro', value: formatUF(snapshot.euro ?? 0), sub: 'BCCh' },
+  ];
+
+  return (
+    <div className="mb-10 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
+      <div className="mb-4 flex items-center gap-2">
+        <TrendingUp className="h-4 w-4 text-[var(--accent)]" />
+        <h2 className="text-sm font-semibold text-[var(--foreground)]">Indicadores del día</h2>
+        <span className="ml-auto text-xs text-[var(--foreground-muted)]">
+          {new Date(snapshot.asOf).toLocaleDateString('es-CL', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          })}
+        </span>
+      </div>
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {indicators.map((item) => (
+          <div
+            key={item.label}
+            className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4"
+          >
+            <span className="block text-xs font-semibold uppercase tracking-wider text-[var(--foreground-muted)]">
+              {item.label}
+            </span>
+            <span className="mt-1 block text-lg font-bold tabular-nums tracking-tight text-[var(--foreground)]">
+              {item.value}
+            </span>
+            <span className="block text-[10px] text-[var(--foreground-muted)]">{item.sub}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
