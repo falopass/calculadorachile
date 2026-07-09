@@ -1383,17 +1383,18 @@ export const guias: Guia[] = [
         id: 'aguinaldo',
         title: 'Aguinaldo: Fiestas Patrias, Navidad y Escolar',
         level: 2,
-        html: `<p>El <strong>aguinaldo</strong> es un bono especial pagado al sector público por leyes específicas, y al sector privado en muchos casos por convenio colectivo o costumbre laboral. Hay tres aguinaldos típicos:</p>
+        html: `<p>El <strong>aguinaldo</strong> es un bono especial del <strong>sector público</strong> y de <strong>pensionados</strong> de regímenes cubiertos (leyes de reajuste / fichas IPS). En el sector privado solo es exigible si está en el contrato o convenio colectivo. No confundir con la <strong>gratificación legal</strong>.</p>
 <table>
-<thead><tr><th>Aguinaldo</th><th>Mes</th><th>Sector público (referencial 2026)</th></tr></thead>
+<thead><tr><th>Beneficio 2026</th><th>Mes típico</th><th>Monto (fuentes oficiales)</th></tr></thead>
 <tbody>
-<tr><td>Fiestas Patrias</td><td>Septiembre</td><td>$84.000-$110.000</td></tr>
-<tr><td>Navidad</td><td>Diciembre</td><td>$104.000-$132.000</td></tr>
-<tr><td>Escolar</td><td>Marzo</td><td>$30.000-$50.000 por hijo en edad escolar</td></tr>
+<tr><td>Fiestas Patrias — sector público (Ley 21.806)</td><td>Septiembre</td><td><strong>$91.682</strong> o <strong>$63.645</strong> según líquido de agosto (umbral $1.060.493)</td></tr>
+<tr><td>Fiestas Patrias — pensionados IPS</td><td>Septiembre</td><td><strong>$25.280</strong> base + <strong>$12.969</strong> por carga (corte 31 ago 2026)</td></tr>
+<tr><td>Navidad — sector público</td><td>Diciembre</td><td><strong>$71.206</strong> / <strong>$37.666</strong> (mismos tramos de renta)</td></tr>
+<tr><td>Bono de escolaridad — sector público</td><td>Marzo y junio</td><td><strong>$89.164</strong> total (2 cuotas de $44.582)</td></tr>
 </tbody>
 </table>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>No es obligatorio en sector privado</strong><p>El aguinaldo no es legalmente obligatorio para empresas privadas (a diferencia de la gratificación legal del 25%). Muchas pagan por costumbre o convenio colectivo. Si tu contrato lo menciona, sí es exigible.</p></div></aside>
-<p>Calcula tu aguinaldo según sector y meses trabajados con la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>`,
+<p>Guía completa 2026: <a href="/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico">aguinaldo de Fiestas Patrias 2026 (IPS y sector público)</a>. Estima el tramo 1 del sector público con la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>`,
       },
       {
         id: 'bono-bodas-oro',

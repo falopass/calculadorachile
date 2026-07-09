@@ -355,6 +355,277 @@ export const articles: Article[] = [
 <p>Para profundizar en descuentos del trabajador y topes imponibles, lee la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido en Chile 2026</a> o simula tu caso en las calculadoras enlazadas.</p>`,
   },
   {
+    slug: 'aguinaldo-fiestas-patrias-2026-pensionados-sector-publico',
+    title:
+      'Aguinaldo de Fiestas Patrias 2026: montos para pensionados IPS y sector público',
+    description:
+      'Montos oficiales del aguinaldo de Fiestas Patrias 2026: pensionados IPS ($25.280 + cargas) y funcionarios del sector público ($91.682 / $63.645). Fechas de corte, ejemplos y diferencias con la gratificación.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'beneficios',
+    readingTime: 14,
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    seoTitle: 'Aguinaldo Fiestas Patrias 2026: IPS $25.280 y sector público $91.682',
+    seoDescription:
+      'Aguinaldo septiembre 2026: pensionados IPS $25.280 + $12.969 por carga; sector público $91.682 o $63.645 según líquido de agosto. Fuentes ChileAtiende y Ley 21.806.',
+    keywords: [
+      'aguinaldo fiestas patrias 2026',
+      'aguinaldo pensionados 2026',
+      'aguinaldo sector público 2026',
+      'aguinaldo IPS septiembre',
+      'monto aguinaldo 18 septiembre 2026',
+      'Ley 21.806 aguinaldo',
+      'aguinaldo fiestas patrias cuánto pagan',
+      'aguinaldo PGU 2026',
+    ],
+    relatedCalculators: [
+      'calculadora-aguinaldo',
+      'calculadora-sueldo-liquido',
+      'calculadora-asignacion-familiar',
+      'calculadora-pgu',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto es el aguinaldo de Fiestas Patrias 2026 para pensionados?',
+        answer:
+          'Según ChileAtiende (ficha del IPS), el monto base es $25.280. Se incrementa en $12.969 por cada carga familiar acreditada al 31 de agosto de 2026. Se paga de forma automática con la pensión de septiembre y no es imponible ni tributable.',
+      },
+      {
+        question: '¿Cuánto pagan de aguinaldo en el sector público en 2026?',
+        answer:
+          'Con la Ley 21.806, el aguinaldo de Fiestas Patrias 2026 es de $91.682 si la remuneración líquida de agosto es igual o inferior a $1.060.493, y de $63.645 si es superior (según los tramos y topes de la ley). Se paga con la remuneración de septiembre.',
+      },
+      {
+        question: '¿Cuándo se paga el aguinaldo de Fiestas Patrias 2026?',
+        answer:
+          'En la práctica, con la liquidación de septiembre: en pensionados IPS, junto a la pensión de septiembre; en el sector público, con la remuneración de septiembre. El derecho de pensionados se evalúa al 31 de agosto de 2026. Las fechas exactas de depósito dependen de cada entidad pagadora (IPS, Capredena, Dipreca, servicio empleador, etc.).',
+      },
+      {
+        question: '¿Hay que postular al aguinaldo de Fiestas Patrias?',
+        answer:
+          'No. Si cumples los requisitos, el pago es automático. No es un bono al que se postule en un portal separado. Debes tener cargas familiares bien acreditadas si quieres el incremento por carga (pensionados) y estar pensionado o en servicio al corte legal que corresponda.',
+      },
+      {
+        question: '¿El aguinaldo es lo mismo que la gratificación legal?',
+        answer:
+          'No. El aguinaldo de Fiestas Patrias del Estado (funcionarios o pensionados de regímenes cubiertos) es un beneficio fijo por ley o ficha oficial. La gratificación legal del Código del Trabajo (Arts. 47 y 50) es otra figura, típica del sector privado, calculada sobre utilidades o el 25% con tope de 4,75 ingresos mínimos. Confundirlas genera montos y expectativas incorrectas.',
+      },
+      {
+        question: '¿En el sector privado es obligatorio el aguinaldo de Fiestas Patrias?',
+        answer:
+          'No por una ley general de aguinaldo privado. ChileAtiende y la Dirección del Trabajo señalan que en el privado el aguinaldo es exigible solo si está en el contrato individual o en un convenio/contrato colectivo. Si no hay cláusula ni costumbre consolidada en el contrato, el empleador no está obligado a pagarlo como aguinaldo de Fiestas Patrias.',
+      },
+      {
+        question: '¿El aguinaldo de pensionados tiene descuentos de AFP o impuestos?',
+        answer:
+          'ChileAtiende indica expresamente que este dinero no tiene descuentos, no se considera para impuestos (no es tributable) y no es imponible para cotizaciones previsionales ni de salud.',
+      },
+    ],
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Dos beneficios distintos en septiembre</strong><p>En Chile el “aguinaldo de Fiestas Patrias” no es un solo monto nacional. Hay al menos dos regímenes que la gente confunde: (1) <strong>pensionados y pensionadas</strong> cubiertos por la ficha del <strong>IPS / ChileAtiende</strong>, y (2) <strong>trabajadoras y trabajadores del sector público</strong> bajo la <strong>Ley 21.806</strong> de reajuste. Los montos, el corte de derecho y quién paga son diferentes. Este artículo separa ambos casos con cifras 2026 y fuentes oficiales.</p></div></aside>
+
+<p>Cada año, entre <strong>fines de agosto y mediados de septiembre</strong>, suben las búsquedas por <em>aguinaldo fiestas patrias 2026</em>, <em>cuánto pagan</em> y <em>cuándo cae</em>. El pico de interés suele concentrarse en la ventana del <strong>10 al 18 de septiembre</strong>, cuando ya se espera ver el abono en la liquidación de pensión o en el sueldo. Publicar y indexar con antelación ayuda a responder esas preguntas con fuentes, no con rumores de redes.</p>
+
+<h2>Resumen rápido 2026 (tabla comparativa)</h2>
+<table>
+<thead>
+<tr><th>Quién</th><th>Monto 2026</th><th>Corte / referencia</th><th>Cuándo se ve el pago</th><th>Fuente</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pensionados IPS y regímenes listados</strong></td>
+<td><strong>$25.280</strong> base + <strong>$12.969</strong> por cada carga familiar acreditada al 31 ago 2026</td>
+<td>Ser pensionado/a al <strong>31 de agosto de 2026</strong></td>
+<td>Con la <strong>pensión de septiembre</strong> (automático)</td>
+<td><a href="https://www.chileatiende.gob.cl/fichas/26553-aguinaldo-de-fiestas-patrias-para-pensionados-ips" target="_blank" rel="noopener">ChileAtiende 26553</a></td>
+</tr>
+<tr>
+<td><strong>Sector público (funcionarios)</strong></td>
+<td><strong>$91.682</strong> o <strong>$63.645</strong> según tramo de renta líquida de <strong>agosto</strong></td>
+<td>Umbral tramo: líquido ago ≤ o &gt; <strong>$1.060.493</strong> (Ley 21.806 / reajuste 2026)</td>
+<td>Con la <strong>remuneración de septiembre</strong></td>
+<td>Ley <strong>21.806</strong> (D.O. 5 feb 2026); protocolo Hacienda–CUT/MSP</td>
+</tr>
+<tr>
+<td><strong>Sector privado</strong></td>
+<td>Lo que diga el <strong>contrato</strong> o el <strong>convenio colectivo</strong> (no hay tarifa legal única de aguinaldo FP)</td>
+<td>Cláusula contractual / colectiva</td>
+<td>Según pacto con el empleador</td>
+<td>ChileAtiende (sección privado) · DT (gratificación ≠ aguinaldo)</td>
+</tr>
+</tbody>
+</table>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No mezcles montos</strong><p>El <strong>$91.682</strong> del funcionario público <strong>no</strong> es el aguinaldo del pensionado IPS. El <strong>$25.280</strong> del IPS <strong>no</strong> es el aguinaldo del sector público. Si usas la calculadora del sitio, interpreta el resultado como <strong>base referencial del tramo 1 del sector público</strong> (o prorrateo), no como liquidación oficial del IPS.</p></div></aside>
+
+<h2>1. Aguinaldo de Fiestas Patrias para pensionados (IPS / ChileAtiende) 2026</h2>
+<p>ChileAtiende describe el beneficio como un <strong>monto de dinero</strong> que se recibe <strong>automáticamente con la pensión de septiembre</strong> si se cumplen los requisitos. No es un “postula aquí”.</p>
+
+<h3>1.1 Montos oficiales 2026</h3>
+<ul>
+<li><strong>Base:</strong> <strong>$25.280</strong>.</li>
+<li><strong>Incremento por carga:</strong> <strong>$12.969</strong> por cada persona causante de asignación familiar <strong>acreditada al 31 de agosto de 2026</strong>.</li>
+<li><strong>Condición de derecho:</strong> estar pensionada o pensionado al <strong>31 de agosto de 2026</strong>.</li>
+</ul>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo A — sin cargas acreditadas</div><ul><li>Base FP 2026</li></ul><span class="total">$25.280</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo B — 1 carga familiar acreditada al 31 ago</div><ul><li>Base $25.280 + 1 × $12.969</li></ul><span class="total">$38.249</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo C — 2 cargas acreditadas</div><ul><li>Base $25.280 + 2 × $12.969</li></ul><span class="total">$51.218</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo D — 3 cargas acreditadas</div><ul><li>Base $25.280 + 3 × $12.969</li></ul><span class="total">$64.187</span></div>
+
+<h3>1.2 Quiénes pueden recibirlo (lista ChileAtiende)</h3>
+<p>La ficha oficial indica que corresponde el aguinaldo si, al 31 de agosto de 2026, eres pensionada o pensionado de, entre otros:</p>
+<ul>
+<li><strong>IPS:</strong> <a href="/calculadoras/calculadora-pgu">PGU</a>, Pensión Básica Solidaria de Invalidez (PBSI) o Subsidio de Discapacidad (menores de 18, según ficha).</li>
+<li>Ex cajas de previsión o ex Servicio de Seguro Social.</li>
+<li><strong>ISL</strong> (Instituto de Seguridad Laboral).</li>
+<li>Leyes de <strong>exonerados políticos</strong> (Ley 19.234).</li>
+<li><strong>Mutualidades</strong> de empleadores (Ley 16.744).</li>
+<li><strong>Dipreca</strong> y <strong>Capredena</strong>.</li>
+<li>Pensiones de reparación (<strong>Ley Valech</strong>, <strong>Ley Rettig</strong>).</li>
+<li>AFP o compañías de seguro <strong>si recibes PGU</strong>, o Aporte Previsional Solidario (vejez/invalidez), o pensiones mínimas con Garantía Estatal.</li>
+</ul>
+<p>Si tienes más de una pensión, subsidio o indemnización cubierta, ChileAtiende señala que <strong>igual puedes tener derecho a un aguinaldo</strong> (no “uno por cada pensión” de forma automática: la regla de pago la aplica el pagador; la ficha aclara el principio de derecho al beneficio aun con múltiples beneficios).</p>
+
+<h3>1.3 Cargas familiares: cuándo sube el monto y cuándo no</h3>
+<p>El incremento de <strong>$12.969</strong> exige carga <strong>acreditada</strong> al corte. Dos matices de la ficha oficial:</p>
+<ul>
+<li>Si el pago de la <strong>asignación familiar</strong> lo recibe <strong>otra persona</strong>, esa persona puede tener derecho al <strong>incremento</strong> del aguinaldo (la ficha lo indica expresamente).</li>
+<li>Si recibes asignación familiar por cargas que son <strong>beneficiarias de una pensión de sobrevivencia</strong>, en general <strong>solo</strong> te corresponde el aguinaldo como pensionado/a (la base), <strong>sin</strong> el incremento de $12.969; el aumento sí puede operar si las cargas tienen pensión de <strong>orfandad</strong> (se tratan como carentes de renta, según la ficha).</li>
+</ul>
+<p>Para entender tramos de asignación familiar (otro beneficio, no el aguinaldo), usa la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a> y valida tu acreditación en el sistema del empleador o del IPS.</p>
+
+<h3>1.4 Tributación e imponibilidad (pensionados)</h3>
+<p>ChileAtiende es explícito: este dinero <strong>no tiene descuentos</strong>, <strong>no es tributable</strong> y <strong>no es imponible</strong> para cotizaciones previsionales ni de salud. Eso diferencia el aguinaldo IPS de un “sueldo extra” sujeto a AFP o impuesto único.</p>
+
+<h3>1.5 Sanción si lo recibes sin derecho</h3>
+<p>La misma ficha advierte: si recibes el aguinaldo <strong>sin que te corresponda</strong>, deberás devolver <strong>5 veces</strong> el monto, con posibles sanciones administrativas y penales. Por eso conviene revisar la liquidación de septiembre y no asumir el abono si no estás en la lista de regímenes o no cumples el corte del 31 de agosto.</p>
+
+<h2>2. Aguinaldo de Fiestas Patrias del sector público 2026 (Ley 21.806)</h2>
+<p>Los funcionarios y funcionarias del sector público incluidos en la ley de reajuste reciben un aguinaldo de Fiestas Patrias con <strong>montos fijos por tramo</strong>, no un porcentaje del sueldo. La <strong>Ley 21.806</strong> (publicada en el Diario Oficial el <strong>5 de febrero de 2026</strong>) fija el reajuste general y actualiza bonos y aguinaldos. El protocolo de acuerdo Gobierno–CUT/Mesa del Sector Público y comunicados de servicios públicos reproducen los mismos tramos de Fiestas Patrias 2026.</p>
+
+<h3>2.1 Montos y tramos 2026</h3>
+<table>
+<thead>
+<tr><th>Tramo</th><th>Condición (remuneración líquida de agosto 2026)</th><th>Monto aguinaldo FP</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tramo 1</strong></td>
+<td>Igual o inferior a <strong>$1.060.493</strong></td>
+<td><strong>$91.682</strong></td>
+</tr>
+<tr>
+<td><strong>Tramo 2</strong></td>
+<td>Superior a <strong>$1.060.493</strong> (con los topes de elegibilidad de la ley; el acuerdo menciona alineación con rentas de hasta ~$3.511.800 en la escala de beneficios)</td>
+<td><strong>$63.645</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Observa la lógica: el tramo de <strong>menor renta líquida</strong> recibe el <strong>monto más alto</strong> de aguinaldo. No es un error de tabla.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo E — funcionario con líquido de agosto $900.000</div><ul><li>Líquido ago ≤ $1.060.493 → tramo 1</li></ul><span class="total">Aguinaldo FP 2026: $91.682</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo F — funcionaria con líquido de agosto $1.200.000</div><ul><li>Líquido ago &gt; $1.060.493 → tramo 2</li></ul><span class="total">Aguinaldo FP 2026: $63.645</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo G — justo en el umbral $1.060.493</div><ul><li>Igual al techo del tramo 1 → tramo 1</li></ul><span class="total">Aguinaldo FP 2026: $91.682</span></div>
+
+<h3>2.2 ¿Qué es “remuneración líquida de agosto”?</h3>
+<p>Es el <strong>líquido del mes de agosto</strong> que usa tu servicio de personal/remuneraciones para clasificar el tramo del aguinaldo, según la definición de la ley y las instrucciones internas del servicio (no el bruto, no el promedio anual). Si tu liquidación de agosto ronda el umbral, un bono o descuento puntual puede empujarte de un tramo a otro: la clasificación la hace el empleador público con la norma, no esta guía.</p>
+<p>Para estimar tu líquido de un mes “normal” (AFP, salud, cesantía trabajador, impuesto único) puedes usar la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>. El resultado es <strong>referencial</strong>: no reemplaza la liquidación oficial de tu servicio.</p>
+
+<h3>2.3 Cuándo se paga en el sector público</h3>
+<p>El pago del aguinaldo de Fiestas Patrias 2026 se asocia a la <strong>remuneración de septiembre</strong>. La fecha exacta del depósito (si el sueldo cae el 30, el 28 o un día hábil anterior) la define cada servicio o municipalidad. Planifica el flujo de caja de Fiestas Patrias con esa liquidación, no solo con el 18 de septiembre.</p>
+
+<h3>2.4 Relación con el reajuste 3,4%</h3>
+<p>La Ley 21.806 también fija el reajuste de remuneraciones del sector público en <strong>3,4%</strong> total, en dos tramos: <strong>2,0%</strong> desde el 1 de diciembre de 2025 y <strong>1,4%</strong> desde el 1 de junio de 2026. Los aguinaldos y varios bonos se actualizaron en el mismo cuerpo legal. Si comparas tu liquidación 2025 con 2026, verás el efecto del reajuste en el sueldo base <strong>y</strong> montos de aguinaldo distintos a los del año anterior.</p>
+
+<h2>3. Sector privado: ¿existe “el” aguinaldo de Fiestas Patrias?</h2>
+<p>ChileAtiende aclara que, para empleadores privados, <strong>otorgar aguinaldo no es una obligación legal general</strong>, a diferencia de figuras como la <strong>gratificación</strong> cuando corresponde según el Código del Trabajo. Puedes exigir aguinaldo de Fiestas Patrias en el privado si:</p>
+<ul>
+<li>Está en tu <strong>contrato de trabajo</strong>, o</li>
+<li>Existe un <strong>contrato o convenio colectivo</strong> que lo incorpore.</li>
+</ul>
+<p>En esos casos sí es un derecho exigible frente al empleador. Si no hay cláusula, no inventes el monto del sector público ni el del IPS en la liquidación privada: son regímenes distintos.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Aguinaldo ≠ gratificación legal</strong><p>La <strong>gratificación legal</strong> (Arts. 47 y 50 del Código del Trabajo) se calcula sobre utilidades o con el sistema del 25% con tope de <strong>4,75 ingresos mínimos mensuales</strong>. Es independiente del aguinaldo de Fiestas Patrias del Estado. Profundiza en la <a href="/blog/como-funciona-gratificacion-legal">guía de gratificación legal</a> o en la <a href="/calculadoras/calculadora-gratificacion">calculadora de gratificación</a>.</p></div></aside>
+
+<h2>4. Calendario práctico: agosto → septiembre 2026</h2>
+<ol class="steps">
+<li><strong>Hasta el 31 de agosto de 2026 (pensionados):</strong> corte de derecho. Revisa que tus cargas familiares estén acreditadas si esperas el +$12.969 por carga.</li>
+<li><strong>Agosto (funcionarios públicos):</strong> el <strong>líquido de este mes</strong> define el tramo $91.682 vs $63.645.</li>
+<li><strong>Septiembre:</strong> pago automático con pensión (IPS y regímenes) o con remuneración (sector público). Revisa la liquidación línea por línea.</li>
+<li><strong>Ventana 10–18 de septiembre:</strong> mayor volumen de consultas y de gasto de Fiestas Patrias; ten el monto esperado claro con antelación.</li>
+</ol>
+
+<h2>5. Cómo verificar el abono en la liquidación</h2>
+<ul>
+<li><strong>Pensionados IPS:</strong> liquidación de pago de pensión/beneficio de septiembre; canales ChileAtiende / IPS (call center 101). Código de trámite de la ficha de aguinaldo: <strong>26553</strong>.</li>
+<li><strong>Capredena / Dipreca / mutuales / otras:</strong> el pagador de tu pensión informa el abono; no asumas el mismo extracto que el IPS.</li>
+<li><strong>Sector público:</strong> liquidación de remuneraciones de septiembre en tu portal de personal o unidad de remuneraciones. Busca la glosa de aguinaldo de Fiestas Patrias y el tramo aplicado.</li>
+<li><strong>Privado con cláusula:</strong> liquidación de septiembre o el mes pactado; conserva contrato o convenio colectivo.</li>
+</ul>
+
+<h2>6. Errores frecuentes (y cómo evitarlos)</h2>
+<ol class="steps">
+<li><strong>Usar el monto del sector público para un pensionado IPS</strong> (o al revés). Son tablas distintas.</li>
+<li><strong>Creer que hay que postular</strong> al aguinaldo de Fiestas Patrias del IPS o del SP. El pago es automático si cumples requisitos.</li>
+<li><strong>Olvidar acreditar cargas</strong> antes del 31 de agosto y después reclamar el incremento de $12.969.</li>
+<li><strong>Confundir aguinaldo con gratificación</strong> o con el bono de escolaridad / bono de vacaciones (otros montos de la Ley 21.806).</li>
+<li><strong>Asumir que el privado “siempre” paga $91.682.</strong> Sin contrato o convenio, no hay tarifa legal de aguinaldo FP privado.</li>
+<li><strong>No revisar la liquidación</strong> y gastar de más en Fiestas Patrias antes de confirmar el abono real.</li>
+</ol>
+
+<h2>7. Otros beneficios de la misma temporada (no confundir)</h2>
+<table>
+<thead>
+<tr><th>Beneficio</th><th>Orden de magnitud 2026 (referencial)</th><th>Cuándo</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Aguinaldo Navidad pensionados IPS</td>
+<td>Base <strong>$29.055</strong> + <strong>$16.415</strong>/carga (corte 30 nov 2026) — ficha ChileAtiende 30171</td>
+<td>Diciembre</td>
+</tr>
+<tr>
+<td>Aguinaldo Navidad sector público</td>
+<td><strong>$71.206</strong> / <strong>$37.666</strong> según tramos (Ley 21.806)</td>
+<td>Remuneración de diciembre</td>
+</tr>
+<tr>
+<td>Bono de escolaridad (SP)</td>
+<td><strong>$89.164</strong> en 2 cuotas de $44.582 (+ adicional en tramo bajo, según ley)</td>
+<td>Marzo y junio</td>
+</tr>
+<tr>
+<td>Gratificación legal (privado)</td>
+<td>% de utilidades o 25% con tope 4,75 IMM — no es aguinaldo FP</td>
+<td>Según cierre y política de la empresa</td>
+</tr>
+</tbody>
+</table>
+<p>En este sitio trataremos el aguinaldo de Navidad en piezas editoriales propias (#30 pensionados, #35 sector público del plan editorial). Hasta entonces, las fichas oficiales de ChileAtiende y el texto de la Ley 21.806 son la fuente de verdad.</p>
+
+<h2>8. Estima y contrasta con la calculadora</h2>
+<p>Puedes usar la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a> para ver el <strong>monto base del tramo 1 del sector público</strong> ($91.682 en Fiestas Patrias 2026) y un <strong>prorrateo por meses trabajados</strong> si tu caso o convenio lo permite. Limitaciones honestas del motor:</p>
+<ul>
+<li>No clasifica automáticamente tu tramo 1 vs 2 (no lee tu líquido oficial de agosto).</li>
+<li>No calcula el paquete IPS de $25.280 + cargas (haz la suma de la sección 1 o revisa ChileAtiende).</li>
+<li>No sustituye la liquidación de tu servicio, municipalidad, IPS, Capredena o Dipreca.</li>
+</ul>
+<p>Complementos útiles:</p>
+<ul>
+<li><a href="/calculadoras/calculadora-sueldo-liquido">Sueldo líquido</a> — para aproximar el líquido de agosto (tramo SP).</li>
+<li><a href="/calculadoras/calculadora-asignacion-familiar">Asignación familiar</a> — contexto de cargas (no es el aguinaldo).</li>
+<li><a href="/calculadoras/calculadora-pgu">PGU</a> — si tu pensión base es PGU y quieres entender el contexto previsional.</li>
+<li><a href="/calculadoras/calculadora-gratificacion">Gratificación</a> — si lo que te pagan en la empresa privada es gratificación y no aguinaldo.</li>
+</ul>
+
+<h2>9. Fuentes oficiales (verificación YMYL)</h2>
+<ul>
+<li><a href="https://www.chileatiende.gob.cl/fichas/26553-aguinaldo-de-fiestas-patrias-para-pensionados-ips" target="_blank" rel="noopener">ChileAtiende — Aguinaldo de Fiestas Patrias para pensionados IPS</a> (base $25.280; +$12.969/carga al 31 ago 2026; pago con pensión de septiembre; no imponible ni tributable).</li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ChileAtiende — Aguinaldo de Navidad para pensionados IPS</a> (contexto; no es el de Fiestas Patrias).</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Biblioteca del Congreso Nacional — Ley 21.806</a> (reajuste sector público 2026; aguinaldos y bonos).</li>
+<li><a href="https://www.hacienda.cl/noticias-y-eventos/noticias/gobierno-y-cut-mesa-del-sector-publico-firman-protocolo-de-acuerdo-por-reajuste" target="_blank" rel="noopener">Ministerio de Hacienda — Protocolo de acuerdo reajuste 2025–2026</a> (tramos $91.682 / $63.645 y umbral $1.060.493).</li>
+<li>Dirección del Trabajo — gratificaciones y beneficios laborales (para no confundir con aguinaldo privado).</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo y educativo. Los montos y requisitos se tomaron de fichas y normas públicas vigentes al publicar (julio 2026). No es un dictamen del IPS, de la Contraloría, de tu servicio de personal ni de un abogado. Antes de gastar o reclamar, confirma tu liquidación y, si hay duda, la ficha ChileAtiende 26553, la Ley 21.806 o tu unidad de remuneraciones/previsión. Si la norma o la ficha se actualizan, prevalece el texto oficial.</p></div></aside>
+<p>Para profundizar en beneficios familiares y contexto de cargas, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de familia y pensión alimenticia</a> y las calculadoras enlazadas. Si buscas el sueldo del mes que define el tramo público, parte por la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>`,
+  },
+  {
     slug: 'como-calcular-finiquito-chile',
     title: 'Cómo calcular tu finiquito en Chile 2026 paso a paso',
     description:

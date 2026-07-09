@@ -430,12 +430,34 @@ export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
 };
 
 // ============================================
-// Aguinaldo
+// Aguinaldo / bonos 2026 (sector público — Ley 21.806)
 // ============================================
+/**
+ * Montos de **tramo 1** (remuneración líquida de referencia ≤ $1.060.493)
+ * usados por la calculadora de aguinaldo como base referencial.
+ *
+ * Fiestas Patrias 2026 (pago con remuneración de septiembre):
+ *  - Tramo 1: $91.682 (líquido ago ≤ $1.060.493)
+ *  - Tramo 2: $63.645 (líquido ago superior; tope de elegibilidad suele
+ *    alinear con remuneración bruta permanente ≤ $3.511.800 en el acuerdo/ley)
+ *
+ * Navidad 2026 (pago con remuneración de diciembre):
+ *  - Tramo 1: $71.206 · Tramo 2: $37.666 (mismos umbrales de tramo)
+ *
+ * Bono de escolaridad 2026: $89.164 total (2 cuotas de $44.582) — no es
+ * “aguinaldo” stricto sensu; la calculadora lo expone como tipo `escolar`.
+ *
+ * Pensionados IPS (ChileAtiende ficha 26553) es **otro régimen**:
+ *  - Base FP 2026: $25.280 + $12.969 por carga al 31 ago 2026.
+ * No uses estos montos SP para IPS ni viceversa.
+ *
+ * Fuentes: Ley 21.806 (D.O. 5 feb 2026); protocolo Hacienda/CUT-MSP;
+ * ChileAtiende IPS ficha 26553 (pensionados).
+ */
 export const AGUINALDO_2026 = {
-  fiestas_patrias: 35000,
-  navidad: 35000,
-  escolar: 20000,
+  fiestas_patrias: 91_682,
+  navidad: 71_206,
+  escolar: 89_164,
 };
 
 // ============================================

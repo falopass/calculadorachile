@@ -1839,29 +1839,79 @@ export const calculators: Calculator[] = [
   {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
-    description: 'Calcula tu aguinaldo de Fiestas Patrias, Navidad o escolar según sueldo y meses trabajados.',
+    description:
+      'Estima el aguinaldo de Fiestas Patrias o Navidad del sector público 2026 (tramo 1 Ley 21.806) o prorratea por meses. Pensionados IPS: ver montos oficiales en ChileAtiende.',
     slug: 'calculadora-aguinaldo',
     category: 'beneficios',
     noIndex: true,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-10',
     sources: [
-      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Aguinaldos y beneficios laborales' },
-      { name: 'SII', url: 'https://www.sii.cl', note: 'Tributación de aguinaldos' },
+      {
+        name: 'Ley 21.806 (BCN)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1221118',
+        note: 'Reajuste sector público 2026: aguinaldos FP y Navidad por tramos',
+      },
+      {
+        name: 'ChileAtiende / IPS',
+        url: 'https://www.chileatiende.gob.cl/fichas/26553-aguinaldo-de-fiestas-patrias-para-pensionados-ips',
+        note: 'Aguinaldo FP pensionados: $25.280 + $12.969 por carga (2026)',
+      },
+      {
+        name: 'Ministerio de Hacienda',
+        url: 'https://www.hacienda.cl/noticias-y-eventos/noticias/gobierno-y-cut-mesa-del-sector-publico-firman-protocolo-de-acuerdo-por-reajuste',
+        note: 'Protocolo reajuste: tramos y montos de aguinaldos 2026',
+      },
     ],
-    keywords: ['aguinaldo', 'aguinaldo fiestas patrias', 'aguinaldo navidad', 'aguinaldo escolar Chile'],
+    keywords: [
+      'aguinaldo',
+      'aguinaldo fiestas patrias 2026',
+      'aguinaldo navidad 2026',
+      'aguinaldo sector público',
+      'aguinaldo pensionados IPS',
+    ],
     inputs: [
-      { id: 'tipo', label: 'Tipo de Aguinaldo', type: 'select', required: true, options: [
-        { value: 'fiestas_patrias', label: 'Fiestas Patrias' },
-        { value: 'navidad', label: 'Navidad' },
-        { value: 'escolar', label: 'Escolar' },
-      ]},
-      { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
-      { id: 'mesesTrabajados', label: 'Meses Trabajados', type: 'number', placeholder: '12', required: true, min: 1, max: 12 },
+      {
+        id: 'tipo',
+        label: 'Tipo de Aguinaldo',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'fiestas_patrias', label: 'Fiestas Patrias (SP tramo 1)' },
+          { value: 'navidad', label: 'Navidad (SP tramo 1)' },
+          { value: 'escolar', label: 'Bono escolaridad (total)' },
+        ],
+      },
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo Bruto (referencial)',
+        type: 'number',
+        placeholder: '$800.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'mesesTrabajados',
+        label: 'Meses Trabajados',
+        type: 'number',
+        placeholder: '12',
+        required: true,
+        min: 0,
+        max: 12,
+      },
     ],
     faq: [
-      { question: '¿Cuánto es el aguinaldo de Fiestas Patrias?', answer: 'El aguinaldo de Fiestas Patrias para el sector público es de aproximadamente $35.000. En el sector privado depende del contrato o convenio colectivo. Si trabajaste menos de 12 meses, es proporcional.' },
+      {
+        question: '¿Cuánto es el aguinaldo de Fiestas Patrias 2026 en el sector público?',
+        answer:
+          'Según la Ley 21.806, en septiembre 2026 el tramo 1 es $91.682 si la remuneración líquida de agosto es igual o inferior a $1.060.493, y el tramo 2 es $63.645 si supera ese umbral (con los topes de elegibilidad de la ley). Esta calculadora usa el tramo 1 como base y puede prorratear por meses. En el sector privado el aguinaldo no es obligatorio por ley general: depende del contrato o convenio colectivo.',
+      },
+      {
+        question: '¿Y los pensionados del IPS?',
+        answer:
+          'Es otro beneficio. ChileAtiende informa $25.280 base más $12.969 por cada carga familiar acreditada al 31 de agosto de 2026, pagado con la pensión de septiembre. No uses el monto del sector público para pensionados ni al revés.',
+      },
     ],
   },
   {

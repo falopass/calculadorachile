@@ -257,6 +257,13 @@ export const seoOverrides: Record<
       'Desde agosto 2026 la cotización del empleador sube a 3,5% (Ley 21.735). Ejemplos en CLP y cómo estimar el costo PYME. No se descuenta al trabajador.', // 150
   },
 
+  // --- #7 sprint: pico búsquedas 10–18 sep; indexar con anticipación ---
+  'aguinaldo-fiestas-patrias-2026-pensionados-sector-publico': {
+    seoTitle: 'Aguinaldo Fiestas Patrias 2026: IPS y sector público', // 54
+    seoDescription:
+      'Montos 2026: pensionados IPS $25.280 + $12.969/carga; sector público $91.682 o $63.645. Fechas, tramos y fuentes ChileAtiende / Ley 21.806.', // 145
+  },
+
   // ══════════════════════════════════════════════════════════════════════════
   // GUÍAS PILLAR
   // ══════════════════════════════════════════════════════════════════════════

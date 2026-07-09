@@ -40,7 +40,7 @@ Cuando un post se agrega a `articles.ts` y queda listo para deploy:
 
 ## Progreso
 
-**Hechos: 3 / 46** · Pendientes: 43  
+**Hechos: 4 / 46** · Pendientes: 42  
 *(#46 = post pageview vehículos añadido fuera del backlog original: revisión técnica)*
 
 ### Sprint de arranque (orden real)
@@ -50,7 +50,7 @@ Cuando un post se agrega a `articles.ts` y queda listo para deploy:
 | 1 | 20 | ~~Segunda cuota permiso de circulación 2026~~ | 9–10 jul 2026 | ✅ en código · 2026-07-09 · [`permiso-circulacion-segunda-cuota-agosto-2026`](/blog/permiso-circulacion-segunda-cuota-agosto-2026) |
 | 1b | 46 | ~~Revisión técnica 2026 (calendario patente)~~ | 10 jul 2026 | ✅ en código · 2026-07-10 · [`revision-tecnica-chile-2026-calendario-patente`](/blog/revision-tecnica-chile-2026-calendario-patente) |
 | 2 | 1 | ~~Cotización empleador 3,5%~~ | 15–16 jul 2026 | ✅ en código · 2026-07-15 · [`cotizacion-empleador-3-5-agosto-2026-costo-pyme`](/blog/cotizacion-empleador-3-5-agosto-2026-costo-pyme) |
-| 3 | 7 | Aguinaldo Fiestas Patrias 2026 | 22–23 jul 2026 | ⏳ pendiente |
+| 3 | 7 | ~~Aguinaldo Fiestas Patrias 2026~~ | 10 jul 2026 | ✅ en código · 2026-07-10 · [`aguinaldo-fiestas-patrias-2026-pensionados-sector-publico`](/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico) *(adelantado para maduración SEO pre 10–18 sep)* |
 | 4 | 2 | Horas extra 42 h | 30 jul 2026 | ⏳ pendiente |
 | 5 | 3 | Sueldo mínimo $553.553 | 5 ago 2026 | ⏳ pendiente |
 
@@ -59,12 +59,12 @@ Cuando un post se agrega a `articles.ts` y queda listo para deploy:
 - [x] ~~**#20** `permiso-circulacion-segunda-cuota-agosto-2026`~~ — 2026-07-09
 - [x] ~~**#46** `revision-tecnica-chile-2026-calendario-patente`~~ — 2026-07-10 *(pageview + cluster vehículos)*
 - [x] ~~**#1** `cotizacion-empleador-3-5-agosto-2026-costo-pyme`~~ — 2026-07-15
+- [x] ~~**#7** `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico`~~ — 2026-07-10
 - [ ] **#2** `horas-extra-jornada-42-horas-chile-2026`
 - [ ] **#3** `sueldo-minimo-2026-calcular-liquido`
 - [ ] **#4** `subsidio-electrico-2026-resultados-descuento-cuenta`
 - [ ] **#5** `bono-trabajo-mujer-sej-pago-anual-2026-sue`
 - [ ] **#6** `finiquito-2026-ejemplo-sueldo-minimo`
-- [ ] **#7** `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico`
 - [ ] **#8** `pgu-aumento-septiembre-2026-75-anos`
 - [ ] **#9** `asignacion-familiar-2026-tramos-montos`
 - [ ] **#10** `feriados-irrenunciables-18-19-septiembre-2026-comercio`
@@ -139,7 +139,7 @@ Fechas del sprint de arranque **gobiernan** sobre la columna “Fecha plan” pa
 | ~~20~~ | ~~Segunda cuota permiso circulación 2026~~ | ~~`permiso-circulacion-segunda-cuota-agosto-2026`~~ | ~~9–10 jul~~ | 31 ago 2026 | permiso, multas | permiso 2ª cuota 2026 | alto | media | anual | ✅ 2026-07-09 |
 | ~~46~~ | ~~Revisión técnica 2026 calendario patente~~ | ~~`revision-tecnica-chile-2026-calendario-patente`~~ | ~~10 jul~~ | continuo + ago (dígito 5) | permiso, multas | revisión técnica 2026 | alto | media | anual | ✅ 2026-07-10 |
 | ~~1~~ | ~~Cotización empleador 3,5% ago 2026~~ | ~~`cotizacion-empleador-3-5-agosto-2026-costo-pyme`~~ | ~~15–16 jul~~ | ago–sep | costo-empleado, sueldo | cotización empleador 3,5% | alto | media | anual | ✅ 2026-07-15 |
-| 7 | Aguinaldo Fiestas Patrias 2026 | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 22–23 jul | ago–sep | aguinaldo | aguinaldo fiestas patrias 2026 | alto | alta | anual | ⏳ |
+| ~~7~~ | ~~Aguinaldo Fiestas Patrias 2026~~ | ~~`aguinaldo-fiestas-patrias-2026-pensionados-sector-publico`~~ | ~~10 jul~~ | 10–18 sep | aguinaldo | aguinaldo fiestas patrias 2026 | alto | alta | anual | ✅ 2026-07-10 |
 | 2 | Horas extra con jornada 42 h | `horas-extra-jornada-42-horas-chile-2026` | 30 jul | ago–oct | horas-extra | horas extra 42 horas | alto | media | anual | ⏳ |
 | 3 | Sueldo mínimo 2026 $553.553 | `sueldo-minimo-2026-calcular-liquido` | 5 ago | ago–dic | sueldo-liquido | sueldo mínimo 2026 | alto | alta | anual | ⏳ |
 | 4 | Subsidio eléctrico 2026 resultados | `subsidio-electrico-2026-resultados-descuento-cuenta` | 18 ago | ago–sep | cuenta-luz | subsidio eléctrico 2026 | alto | alta | anual | ⏳ |
@@ -210,14 +210,13 @@ Fechas del sprint de arranque **gobiernan** sobre la columna “Fecha plan” pa
 - **Desglose usado:** 0,1% + 0,9% CRP + 2,5% SIS/CEV (ChileAtiende).
 - **Notas:** 3,5% no descuenta al trabajador; ejemplos $28.000 / $52.500.
 
-### [#7] Aguinaldo de Fiestas Patrias 2026 — *siguiente en sprint*
+### ~~[#7] Aguinaldo de Fiestas Patrias 2026~~ ✅
 
-- **Por qué ahora:** Corte pensionados 31 ago; pago sep; SP por Ley 21.806.
-- **Outline:** IPS base+carga → ejemplos → SP tramos ($91.682 / $63.645, umbral ~$1.060.493) → no confundir con gratificación → calc aguinaldo.
-- **Fuentes:** [ChileAtiende IPS](https://www.chileatiende.gob.cl/fichas/26553-aguinaldo-de-fiestas-patrias-para-pensionados-ips) · BCN 21.806
-- **CTA:** `/calculadoras/calculadora-aguinaldo`
-- **Links internos (solo vivos):** sueldo líquido guía; **no** linkear #8/#9 hasta existir.
-- **Riesgo YMYL:** Separar IPS / SP / privado; revalidar umbral SP en BCN.
+- **URL:** `/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico`
+- **En código:** 2026-07-10 (adelantado vs 22–23 jul para ~8 semanas de maduración pre pico 10–18 sep)
+- **IPS:** $25.280 + $12.969/carga (ChileAtiende 26553, corte 31 ago 2026)
+- **SP:** $91.682 / $63.645 · umbral líquido ago $1.060.493 (Ley 21.806 + protocolo Hacienda)
+- **También:** constantes `AGUINALDO_2026` y FAQ calculadora actualizados (tramo 1)
 
 ### [#2] Horas extra con jornada de 42 horas
 
