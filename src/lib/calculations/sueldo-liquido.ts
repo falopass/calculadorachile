@@ -33,6 +33,10 @@ export interface SueldoLiquidoInput {
   descuentoCajaCompensacion?: number;
   /** Si es true, `sueldoBruto` se interpreta como líquido objetivo y se busca el bruto que lo produce. */
   calculoInverso?: boolean;
+  /** UF en vivo (UI). Default: snapshot `UF.valor`. */
+  valorUF?: number;
+  /** UTM en vivo (UI). Default: snapshot `UTM.valor`. */
+  valorUTM?: number;
 }
 
 export interface SueldoLiquidoResult {
@@ -149,8 +153,8 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
     descuentoCajaCompensacion = 0,
   } = input;
 
-  const valorUF = UF.valor;
-  const valorUTM = UTM.valor;
+  const valorUF = input.valorUF ?? UF.valor;
+  const valorUTM = input.valorUTM ?? UTM.valor;
 
   const totalIngresosImponibles = sueldoBruto + comisiones;
   const totalIngresosNoImponibles = bonoMovilizacion + bonoColacion + bonoPerdidaCaja;

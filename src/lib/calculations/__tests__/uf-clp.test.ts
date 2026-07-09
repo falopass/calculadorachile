@@ -88,6 +88,17 @@ describe('calculateUFCLP', () => {
 
       expect(result.valorUF).toBe(valorUFMock);
     });
+
+    it('usa valorUF inyectado cuando se pasa (UF en vivo)', () => {
+      const artificial = 40_000;
+      const result = calculateUFCLP({
+        monto: 2,
+        direccion: 'uf-a-clp',
+        valorUF: artificial,
+      });
+      expect(result.valorUF).toBe(artificial);
+      expect(result.montoConvertido).toBe(80_000);
+    });
   });
 
   describe('monto original', () => {

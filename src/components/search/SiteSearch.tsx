@@ -240,6 +240,8 @@ interface SiteSearchProps {
   syncWithUrl?: boolean;
   /** Autofocus al montar (útil cuando el overlay aparece). */
   autoFocus?: boolean;
+  /** Callback para cerrar el contenedor externo cuando una acción navega. */
+  onNavigate?: () => void;
 }
 
 export default function SiteSearch({
@@ -248,6 +250,7 @@ export default function SiteSearch({
   placeholder = 'Buscar calculadoras, guías o artículos…',
   syncWithUrl = false,
   autoFocus = false,
+  onNavigate,
 }: SiteSearchProps) {
   const index = useSearchIndex();
   const router = useRouter();
@@ -311,6 +314,7 @@ export default function SiteSearch({
     if (variant === 'overlay' && query.trim().length >= 2) {
       router.push(`/buscar?q=${encodeURIComponent(query.trim())}`);
       setOpen(false);
+      onNavigate?.();
     }
   };
 
@@ -373,7 +377,10 @@ export default function SiteSearch({
                     <li key={`${r.kind}:${r.href}`}>
                       <Link
                         href={r.href}
-                        onMouseDown={() => setQuery('')}
+                        onClick={() => {
+                          setQuery('');
+                          onNavigate?.();
+                        }}
                         className="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--background-secondary)] transition-colors"
                       >
                         <span
@@ -396,7 +403,10 @@ export default function SiteSearch({
               </ul>
               <Link
                 href={`/buscar?q=${encodeURIComponent(query.trim())}`}
-                onMouseDown={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  onNavigate?.();
+                }}
                 className="flex items-center justify-between px-4 py-2.5 text-xs font-medium text-[var(--color-primary-600)] hover:bg-[var(--background-secondary)] border-t border-[var(--border)] transition-colors"
               >
                 Ver todos los resultados ({results.length})

@@ -131,7 +131,7 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Cuánto retiene una boleta de honorarios en 2026?',
         answer:
-          'En 2026 la retención total es 15,25% (10% impuesto a la renta + 5,25% cotizaciones previsionales). Sube a 16% en 2027 y 17% en 2028 según la Ley 21.578. Boletas bajo 10 UTM mensuales no requieren cotización obligatoria. El líquido recibido es bruto × (1 − 0,1525).',
+          'En 2026 la retención total es 15,25% (10% impuesto a la renta + 5,25% cotizaciones previsionales). Sube a 16% en 2027 y 17% en 2028 según la Ley 21.133. Boletas bajo 10 UTM mensuales no requieren cotización obligatoria. El líquido recibido es bruto × (1 − 0,1525).',
       },
       {
         question: '¿Cuándo debo declarar Operación Renta?',

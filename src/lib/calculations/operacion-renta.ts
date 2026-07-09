@@ -28,7 +28,7 @@ export interface OperacionRentaResult {
   retencionSugerida: number;
   /** Tasa de retención aplicada (% según año vigente del calendario). */
   tasaRetencion: number;
-  /** Año del calendario Ley 21.578 efectivamente usado. */
+  /** Año del calendario Ley 21.133 efectivamente usado. */
   anioRetencion: number;
   tramoAplicado: string;
 }
@@ -90,7 +90,7 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
   const impuesto = Math.max(0, Math.round(impuestoUTA * valorUTA));
   const tasaEfectiva = rentaBruta > 0 ? (impuesto / rentaBruta) * 100 : 0;
 
-  // Retención sugerida según el calendario Ley 21.578.
+  // Retención sugerida según el calendario Ley 21.133.
   //
   // El calendario solo cubre 2025-2028. Si el año actual queda fuera
   // del rango, usamos el año más cercano dentro del calendario.

@@ -1,0 +1,12 @@
+# Project-scoped Grok config (CalculaChile)
+# MCP only — secrets live in the user environment / ~/.grok/config.toml
+# See: docs/GROK_BUILD.md
+
+[mcp_servers.brave-search]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-brave-search"]
+# Resolves from the process environment (set BRAVE_API_KEY in the shell or OS user env)
+env = { BRAVE_API_KEY = "${BRAVE_API_KEY}" }
+enabled = true
+startup_timeout_sec = 90
+tool_timeout_sec = 120

@@ -21,11 +21,30 @@ import {
   History,
 } from 'lucide-react';
 import LegalNote from './LegalNote';
+import DisclaimerYMYL from '@/components/DisclaimerYMYL';
 
 export interface PremiumCalculatorShellProps {
   calculator: Calculator;
   calculateFn: (inputs: Record<string, unknown>) => CalculatorResult[];
 }
+
+/** Organismo oficial por categoría (disclaimer YMYL bajo resultados). */
+const ORGANISMO_BY_CATEGORY: Partial<Record<Calculator['category'], string>> = {
+  sueldo: 'la Dirección del Trabajo y la Superintendencia de Pensiones',
+  impuestos: 'el Servicio de Impuestos Internos (SII)',
+  beneficios: 'la Dirección del Trabajo',
+  conversiones: 'el Banco Central de Chile',
+  familia: 'los tribunales de familia y el Registro Civil',
+  vivienda: 'el MINVU y el SII',
+  vehiculos: 'el municipio y el Ministerio de Transportes',
+  empresas: 'el SII y la municipalidad correspondiente',
+  servicios: 'el organismo regulador correspondiente',
+  pension: 'la Superintendencia de Pensiones y el IPS',
+  educacion: 'Ingresa / CAE y el Mineduc',
+  hogar: 'la Superintendencia de Servicios Sanitarios u organismo del servicio',
+};
+
+const CALC_DEBOUNCE_MS = 200;
 
 /* ============================================
    Helpers (puros)
@@ -164,7 +183,7 @@ function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
           type="button"
           onClick={() => onChange(true)}
           aria-pressed={value === true}
-          className={`inline-flex items-center gap-1.5 rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
+          className={`inline-flex min-h-11 items-center gap-1.5 rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${
             value
               ? 'bg-[var(--color-primary-600)] text-white shadow-sm'
               : 'text-[var(--foreground-secondary)] hover:text-[var(--foreground)]'
@@ -177,7 +196,7 @@ function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
           type="button"
           onClick={() => onChange(false)}
           aria-pressed={value === false}
-          className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
+          className={`min-h-11 rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${
             !value
               ? 'bg-[var(--background-secondary)] text-[var(--foreground)]'
               : 'text-[var(--foreground-secondary)] hover:text-[var(--foreground)]'
@@ -247,13 +266,21 @@ function renderInput(
           placeholder={`Selecciona ${input.label.toLowerCase()}`}
         />
       );
-    case 'number':
+    case 'number': {
+      // Decimales: tasas, UF/UTM y %; enteros: montos CLP típicos.
+      const needsDecimal =
+        input.unit === 'percent' ||
+        input.unit === 'UF' ||
+        input.unit === 'UTM' ||
+        /tasa|porcentaje|%/i.test(`${input.label} ${input.id}`);
       return (
         <PremiumInputField
           key={input.id}
           label={input.label}
           type="text"
-          inputMode="numeric"
+          inputMode={needsDecimal ? 'decimal' : 'numeric'}
+          enterKeyHint="done"
+          autoComplete="off"
           value={(value as number) > 0 ? formatNumber(value as number) : ''}
           onChange={handleNumberChange}
           onBlur={handleNumberBlur}
@@ -266,6 +293,7 @@ function renderInput(
           error={error}
         />
       );
+    }
     case 'text':
     default:
       return (
@@ -301,30 +329,75 @@ const RISKY_CALCULATOR_IDS = new Set([
  * gradientes pesados detrás del texto. Cualquier color decorativo
  * está sólo en el ícono del header o en estados (focus, error).
  */
+function buildInitialValues(
+  inputs: Calculator['inputs'],
+): Record<string, string | number | boolean> {
+  const initial: Record<string, string | number | boolean> = {};
+  inputs.forEach((input) => {
+    if (input.defaultValue !== undefined) {
+      initial[input.id] = input.defaultValue as string | number | boolean;
+    } else if (input.type === 'number') {
+      initial[input.id] = 0;
+    } else if (input.type === 'boolean') {
+      initial[input.id] = false;
+    } else {
+      initial[input.id] = '';
+    }
+  });
+  return initial;
+}
+
+function collectFieldErrors(
+  inputs: Calculator['inputs'],
+  values: Record<string, string | number | boolean>,
+): Record<string, string> {
+  const newErrors: Record<string, string> = {};
+  inputs.forEach((input) => {
+    const value = values[input.id];
+    if (input.required && input.type !== 'boolean') {
+      if (value === '' || value === undefined || value === null) {
+        newErrors[input.id] = 'Este campo es requerido';
+      } else if (input.type === 'number' && (value as number) <= 0) {
+        newErrors[input.id] = 'El valor debe ser mayor a 0';
+      } else if (input.type === 'select' && value === '') {
+        newErrors[input.id] = 'Debes seleccionar una opción';
+      }
+    }
+    if (input.min !== undefined && typeof value === 'number' && value < input.min) {
+      newErrors[input.id] = `El valor mínimo es ${formatNumber(input.min)}`;
+    }
+    if (input.max !== undefined && typeof value === 'number' && value > input.max) {
+      newErrors[input.id] = `El valor máximo es ${formatNumber(input.max)}`;
+    }
+  });
+  return newErrors;
+}
+
+function hasSignificantInputValues(
+  inputs: Calculator['inputs'],
+  values: Record<string, string | number | boolean>,
+): boolean {
+  return inputs.some((input) => {
+    const value = values[input.id];
+    if (input.type === 'number') return (value as number) > 0;
+    if (input.type === 'select') return value !== '' && value !== undefined;
+    if (input.type === 'boolean') return value === true;
+    if (input.type === 'text') return (value as string).trim().length > 0;
+    return false;
+  });
+}
+
 export default function PremiumCalculatorShell({
   calculator,
   calculateFn,
 }: PremiumCalculatorShellProps) {
   const resultsRef = useRef<HTMLDivElement>(null);
+  const hasScrolledToResults = useRef(false);
 
-  const [inputValues, setInputValues] = useState<
-    Record<string, string | number | boolean>
-  >(() => {
-    const initial: Record<string, string | number | boolean> = {};
-    calculator.inputs.forEach((input) => {
-      if (input.defaultValue !== undefined) {
-        initial[input.id] = input.defaultValue as string | number | boolean;
-      } else if (input.type === 'number') {
-        initial[input.id] = 0;
-      } else if (input.type === 'boolean') {
-        initial[input.id] = false;
-      } else {
-        initial[input.id] = '';
-      }
-    });
-    return initial;
-  });
-
+  const [inputValues, setInputValues] = useState(() =>
+    buildInitialValues(calculator.inputs),
+  );
+  const [debouncedValues, setDebouncedValues] = useState(inputValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [results, setResults] = useState<CalculatorResult[] | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
@@ -338,86 +411,58 @@ export default function PremiumCalculatorShell({
     clearHistory,
   } = useCalculationHistory(calculator.id);
 
+  // Debounce: no recalcular en cada tecla (mobile teclado + CPU).
   useEffect(() => {
-    if (results && resultsRef.current) {
-      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }, [results]);
+    const timer = window.setTimeout(() => {
+      setDebouncedValues(inputValues);
+    }, CALC_DEBOUNCE_MS);
+    return () => window.clearTimeout(timer);
+  }, [inputValues]);
 
-  const hasSignificantValues = useMemo(() => {
-    return calculator.inputs.some((input) => {
-      const value = inputValues[input.id];
-      if (input.type === 'number') return (value as number) > 0;
-      if (input.type === 'select') return value !== '' && value !== undefined;
-      if (input.type === 'boolean') return value === true;
-      if (input.type === 'text') return (value as string).trim().length > 0;
-      return false;
-    });
-  }, [inputValues, calculator.inputs]);
-
-  const handleInputChange = useCallback(
-    (id: string, value: string | number | boolean) => {
-      setInputValues((prev) => ({ ...prev, [id]: value }));
-      if (errors[id]) {
-        setErrors((prev) => {
-          const newErrors = { ...prev };
-          delete newErrors[id];
-          return newErrors;
-        });
-      }
-    },
-    [errors],
+  const hasSignificantValues = useMemo(
+    () => hasSignificantInputValues(calculator.inputs, debouncedValues),
+    [debouncedValues, calculator.inputs],
   );
 
-  const validateForm = useCallback((): boolean => {
-    const newErrors: Record<string, string> = {};
-    calculator.inputs.forEach((input) => {
-      const value = inputValues[input.id];
-      if (input.required && input.type !== 'boolean') {
-        if (value === '' || value === undefined || value === null) {
-          newErrors[input.id] = 'Este campo es requerido';
-        } else if (input.type === 'number' && (value as number) <= 0) {
-          newErrors[input.id] = 'El valor debe ser mayor a 0';
-        } else if (input.type === 'select' && value === '') {
-          newErrors[input.id] = 'Debes seleccionar una opción';
-        }
-      }
-      if (input.min !== undefined && typeof value === 'number' && value < input.min) {
-        newErrors[input.id] = `El valor mínimo es ${formatNumber(input.min)}`;
-      }
-      if (input.max !== undefined && typeof value === 'number' && value > input.max) {
-        newErrors[input.id] = `El valor máximo es ${formatNumber(input.max)}`;
-      }
+  const handleInputChange = useCallback((id: string, value: string | number | boolean) => {
+    setInputValues((prev) => ({ ...prev, [id]: value }));
+    setErrors((prev) => {
+      if (!prev[id] && !prev._form) return prev;
+      const next = { ...prev };
+      delete next[id];
+      delete next._form;
+      return next;
     });
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  }, [calculator.inputs, inputValues]);
+  }, []);
 
-  const computedResults = useMemo(() => {
-    if (!hasSignificantValues) return null;
-    if (!validateForm()) return null;
-    try {
-      setIsCalculating(true);
-      const calculated = calculateFn(inputValues);
-      setIsCalculating(false);
-      return calculated;
-    } catch (error) {
-      console.error('[Calculator] error:', error);
-      setIsCalculating(false);
-      return null;
-    }
-  }, [inputValues, calculateFn, hasSignificantValues, validateForm]);
-
+  // Cálculo puro en efecto (sin setState dentro de useMemo).
   useEffect(() => {
-    if (computedResults) {
-      setResults(computedResults);
+    if (!hasSignificantValues) {
+      setIsCalculating(false);
+      return;
+    }
+
+    const fieldErrors = collectFieldErrors(calculator.inputs, debouncedValues);
+    if (Object.keys(fieldErrors).length > 0) {
+      setErrors(fieldErrors);
+      setIsCalculating(false);
+      return;
+    }
+
+    setIsCalculating(true);
+    try {
+      const calculated = calculateFn(debouncedValues);
+      setErrors({});
+      setResults(calculated);
       setHasCalculated(true);
-      const mainResult = computedResults.find((r) => r.highlight);
+      setIsCalculating(false);
+
+      const mainResult = calculated.find((r) => r.highlight);
       addEntry({
         calculatorId: calculator.id,
         calculatorName: calculator.name,
-        inputs: inputValues as Record<string, unknown>,
-        results: computedResults.map((r) => ({
+        inputs: debouncedValues as Record<string, unknown>,
+        results: calculated.map((r) => ({
           label: r.label,
           value: String(r.value),
         })),
@@ -425,27 +470,44 @@ export default function PremiumCalculatorShell({
           ? { label: mainResult.label, value: String(mainResult.value) }
           : undefined,
       });
+
+      // Scroll solo la primera vez que hay resultado (evita saltos al tipear en mobile).
+      if (!hasScrolledToResults.current && resultsRef.current) {
+        resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        hasScrolledToResults.current = true;
+      }
+    } catch (error) {
+      console.error('[Calculator] error:', error);
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : 'No se pudo calcular. Revisa los datos e intenta de nuevo.';
+      setErrors({ _form: message });
+      setResults(null);
+      setIsCalculating(false);
     }
-  }, [computedResults, calculator.id, calculator.name, inputValues, addEntry]);
+  }, [
+    debouncedValues,
+    calculateFn,
+    hasSignificantValues,
+    calculator.inputs,
+    calculator.id,
+    calculator.name,
+    addEntry,
+  ]);
 
   const handleReset = useCallback(() => {
-    const initial: Record<string, string | number | boolean> = {};
-    calculator.inputs.forEach((input) => {
-      if (input.defaultValue !== undefined) {
-        initial[input.id] = input.defaultValue as string | number | boolean;
-      } else if (input.type === 'number') {
-        initial[input.id] = 0;
-      } else if (input.type === 'boolean') {
-        initial[input.id] = false;
-      } else {
-        initial[input.id] = '';
-      }
-    });
+    const initial = buildInitialValues(calculator.inputs);
     setInputValues(initial);
+    setDebouncedValues(initial);
     setErrors({});
     setResults(null);
     setHasCalculated(false);
+    hasScrolledToResults.current = false;
   }, [calculator.inputs]);
+
+  const organismo =
+    ORGANISMO_BY_CATEGORY[calculator.category] ?? 'el organismo oficial competente';
 
   const optionalInputs = calculator.inputs.filter(
     (i) => !i.required && i.defaultValue === undefined,
@@ -542,7 +604,7 @@ export default function PremiumCalculatorShell({
         {errors._form && (
           <div
             role="alert"
-            className="mt-5 flex items-start gap-2 rounded-lg border border-[var(--color-error-200)] bg-[var(--color-error-50)] p-3 text-sm text-[var(--color-error-700)] dark:text-[var(--color-error-500)]"
+            className="mt-5 flex items-start gap-2 rounded-lg border border-[var(--color-error-200)] bg-[var(--color-error-50)] p-3 text-sm text-[var(--color-error-700)]"
           >
             <AlertCircle className="h-4 w-4 flex-none mt-0.5" />
             <span>{errors._form}</span>
@@ -554,7 +616,7 @@ export default function PremiumCalculatorShell({
           <button
             type="button"
             onClick={handleReset}
-            className="btn-secondary"
+            className="btn-secondary min-h-11 px-4"
             aria-label="Limpiar todos los campos"
           >
             <RotateCcw className="h-4 w-4" />
@@ -597,6 +659,7 @@ export default function PremiumCalculatorShell({
             calculatorId={calculator.id}
             showChart={true}
           />
+          <DisclaimerYMYL organismo={organismo} className="mt-4" />
         </div>
       ) : null}
 

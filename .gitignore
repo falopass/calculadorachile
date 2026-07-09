@@ -46,5 +46,14 @@ next-env.d.ts
 .vercel
 .turbo
 
-# Google Search Console exports
+# Google Search Console exports (varios nombres de carpeta)
 https___calculadorachile.cl_-Performance-on-Search-*
+*Performance-on-Search*
+calculadorachile.cl-Performance-on-Search-*/
+
+# Artefactos de scripts locales
+scripts/*-out.json
+scripts/*-out.csv
+
+# Caché TypeScript
+*.tsbuildinfo

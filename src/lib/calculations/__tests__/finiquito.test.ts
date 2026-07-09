@@ -121,4 +121,50 @@ describe('calculateFiniquito', () => {
       expect(result.totalFiniquito).toBeGreaterThan(0);
     });
   });
+
+  describe('golden: aviso previo y Art. 168', () => {
+    it('sin aviso previo opt-in no suma mes extra', () => {
+      const sin = calculateFiniquito({
+        ...inputBase,
+        causaTermino: 'necesidades_empresa',
+        incluyeAvisoPrevio: false,
+      });
+      const con = calculateFiniquito({
+        ...inputBase,
+        causaTermino: 'necesidades_empresa',
+        incluyeAvisoPrevio: true,
+      });
+      expect(sin.indemnizacionAvisoPrevio).toBe(0);
+      expect(con.indemnizacionAvisoPrevio).toBe(1_000_000);
+      expect(con.totalFiniquito - sin.totalFiniquito).toBe(1_000_000);
+    });
+
+    it('recargo 50% Art. 168 es la mitad de la indemnización por años', () => {
+      const r = calculateFiniquito({
+        ...inputBase,
+        causaTermino: 'despido',
+        incluyeAvisoPrevio: false,
+        recargoArt168Pct: 50,
+        tieneGratificacion: false,
+        diasVacacionesPendientes: 0,
+        mesesTrabajados: 0,
+      });
+      // 5 años × 30 días × (1.000.000/30) = 5.000.000
+      expect(r.indemnizacion).toBe(5_000_000);
+      expect(r.multaArt168).toBe(2_500_000);
+      expect(r.recargoArt168Pct).toBe(50);
+    });
+
+    it('vacaciones años anteriores: N días × sueldo/30', () => {
+      const r = calculateFiniquito({
+        ultimoSueldo: 900_000,
+        añosTrabajados: 0,
+        mesesTrabajados: 0,
+        causaTermino: 'renuncia',
+        tieneGratificacion: false,
+        vacacionesAniosAnteriores: 10,
+      });
+      expect(r.vacacionesPendientesAniosAnteriores).toBe(Math.round((900_000 / 30) * 10));
+    });
+  });
 });

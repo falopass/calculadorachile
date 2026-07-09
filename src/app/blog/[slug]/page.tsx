@@ -163,27 +163,27 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
               </span>
             </div>
 
-            <h1 className="heading-display text-3xl text-[var(--foreground)] md:text-5xl">
+            <h1 className="heading-display break-words text-2xl text-[var(--foreground)] sm:text-3xl md:text-5xl">
               {article.title}
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-[var(--foreground-secondary)] md:text-xl">
+            <p className="mt-5 text-base leading-relaxed text-[var(--foreground-secondary)] sm:text-lg md:text-xl">
               {article.description}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
+            <div className="mt-6 flex flex-col gap-3 text-sm text-[var(--foreground-muted)] sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/acerca-de"
-                className="group flex items-center gap-2 transition-colors hover:text-[var(--accent)]"
+                className="group flex min-w-0 items-center gap-2 transition-colors hover:text-[var(--accent)]"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
                   DS
                 </div>
                 <span className="group-hover:underline">Por {AUTHOR.name}</span>
               </Link>
-              <span aria-hidden className="text-[var(--border)]">
+              <span aria-hidden className="hidden text-[var(--border)] sm:inline">
                 ·
               </span>
-              <span>
+              <span className="min-w-0 break-words leading-relaxed">
                 Publicado el <time dateTime={article.date}>{formattedDate}</time>
                 {formattedUpdated && (
                   <>
@@ -199,20 +199,12 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
       </header>
 
       <article className="container-base py-8 md:py-12">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto min-w-0 max-w-3xl">
           {/* Contenido en card */}
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm md:p-10">
+          <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm sm:p-6 md:p-10">
+            {/* Estilos tipográficos: globals.css `.prose` (no hay plugin typography). */}
             <div
-              className="prose prose-lg max-w-none
-                prose-headings:text-[var(--foreground)]
-                prose-headings:font-bold
-                prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:scroll-mt-24
-                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                prose-p:text-[var(--foreground-secondary)]
-                prose-p:leading-relaxed
-                prose-strong:text-[var(--foreground)]
-                prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
-                prose-li:text-[var(--foreground-secondary)]"
+              className="prose min-w-0 max-w-none"
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </div>

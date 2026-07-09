@@ -1,6 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { calculateSueldoLiquido, type SueldoLiquidoInput } from '../sueldo-liquido';
-import { TOPE_IMPOSITIVO, UF } from '@/lib/values/constants';
+import {
+  AFP,
+  AFP_OBLIGATORIA_PCT,
+  SALUD,
+  SEGURO_CESANTIA,
+  TOPE_IMPOSITIVO,
+  UF,
+} from '@/lib/values/constants';
 
 describe('calculateSueldoLiquido', () => {
   const inputBase: Omit<SueldoLiquidoInput, 'sueldoBruto'> = {
@@ -9,6 +16,77 @@ describe('calculateSueldoLiquido', () => {
     saludTramo: 'A',
     contratoIndefinido: true,
   };
+
+  describe('golden amounts (wiring / constantes 2026)', () => {
+    it('$1.000.000 Capital FONASA indefinido: descuentos exactos', () => {
+      const bruto = 1_000_000;
+      const r = calculateSueldoLiquido({
+        sueldoBruto: bruto,
+        afp: 'capital',
+        saludTipo: 'fonasa',
+        contratoIndefinido: true,
+      });
+      const base = Math.min(bruto, TOPE_IMPOSITIVO.afp_salud * UF.valor);
+      const afpEsperado = Math.round(
+        base * ((AFP_OBLIGATORIA_PCT + AFP.capital.comision) / 100),
+      );
+      const saludEsperado = Math.round(base * (SALUD.fonasa.tasa / 100));
+      const cesantiaEsperado = Math.round(
+        Math.min(bruto, TOPE_IMPOSITIVO.seguro_cesantia * UF.valor) *
+          (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100),
+      );
+      expect(r.descuentos.afp).toBe(afpEsperado);
+      expect(r.descuentos.salud).toBe(saludEsperado);
+      expect(r.descuentos.seguroCesantia).toBe(cesantiaEsperado);
+      expect(r.descuentos.afp).toBe(Math.round(base * 0.1144)); // 10% + 1,44%
+      expect(r.liquido).toBe(bruto - r.totalDescuentos);
+      // SIS no se descuenta al trabajador
+      expect(r.aportesEmpleador.sis).toBeGreaterThan(0);
+    });
+
+    it('plazo fijo: cesantía trabajador = 0', () => {
+      const r = calculateSueldoLiquido({
+        sueldoBruto: 1_000_000,
+        afp: 'modelo',
+        saludTipo: 'fonasa',
+        contratoIndefinido: false,
+      });
+      expect(r.descuentos.seguroCesantia).toBe(0);
+    });
+
+    it('Isapre: plan UF > 7% usa el plan', () => {
+      const bruto = 1_000_000;
+      const planUF = 5; // claramente > 7% de $1M
+      const r = calculateSueldoLiquido({
+        sueldoBruto: bruto,
+        afp: 'uno',
+        saludTipo: 'isapre',
+        isapreMonto: planUF,
+        contratoIndefinido: true,
+      });
+      const minimo7 = Math.min(bruto, TOPE_IMPOSITIVO.afp_salud * UF.valor) * 0.07;
+      const planCLP = planUF * UF.valor;
+      expect(r.descuentos.salud).toBe(Math.round(Math.max(minimo7, planCLP)));
+    });
+
+    it('colación no imponible no sube AFP', () => {
+      const base = calculateSueldoLiquido({
+        sueldoBruto: 800_000,
+        afp: 'habitat',
+        saludTipo: 'fonasa',
+        contratoIndefinido: true,
+      });
+      const conColacion = calculateSueldoLiquido({
+        sueldoBruto: 800_000,
+        afp: 'habitat',
+        saludTipo: 'fonasa',
+        contratoIndefinido: true,
+        bonoColacion: 100_000,
+      });
+      expect(conColacion.descuentos.afp).toBe(base.descuentos.afp);
+      expect(conColacion.liquido).toBe(base.liquido + 100_000);
+    });
+  });
 
   describe('casos básicos', () => {
     it('debería calcular un sueldo líquido positivo', () => {
@@ -107,6 +185,25 @@ describe('calculateSueldoLiquido', () => {
       const esperado = Math.max(minimo7Porciento, montoPlan);
 
       expect(result.descuentos.salud).toBeGreaterThanOrEqual(minimo7Porciento);
+    });
+  });
+
+  describe('valorUF en vivo', () => {
+    it('con valorUF artificial el plan Isapre en CLP cambia de forma predecible', () => {
+      const artificial = 40_000;
+      const planUF = 2;
+      const r = calculateSueldoLiquido({
+        sueldoBruto: 1_000_000,
+        afp: 'capital',
+        saludTipo: 'isapre',
+        isapreMonto: planUF,
+        contratoIndefinido: true,
+        valorUF: artificial,
+      });
+      const tope = TOPE_IMPOSITIVO.afp_salud * artificial;
+      const minimo7 = Math.min(1_000_000, tope) * 0.07;
+      const planCLP = planUF * artificial;
+      expect(r.descuentos.salud).toBe(Math.round(Math.max(minimo7, planCLP)));
     });
   });
 

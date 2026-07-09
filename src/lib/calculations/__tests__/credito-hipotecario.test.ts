@@ -91,6 +91,19 @@ describe('calculateCreditoHipotecario', () => {
       const result = calculateCreditoHipotecario(inputBase);
       expect(result.valorUF).toBeGreaterThan(0);
     });
+
+    it('usa valorUF inyectado cuando se pasa (UF en vivo)', () => {
+      const artificial = 50_000;
+      const result = calculateCreditoHipotecario({
+        ...inputBase,
+        valorUF: artificial,
+      });
+      expect(result.valorUF).toBe(artificial);
+      expect(result.dividendoMensualCLP).toBeCloseTo(
+        result.dividendoMensualUF * artificial,
+        0,
+      );
+    });
   });
 
   describe('validaciones', () => {

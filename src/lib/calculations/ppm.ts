@@ -41,7 +41,7 @@ export interface PPMResult {
  * Tasas de PPM por tipo de actividad.
  *
  * Para profesionales 2da categoría la tasa de PPM coincide con la
- * retención de honorarios (calendario Ley 21.578). Se usa el año
+ * retención de honorarios (calendario Ley 21.133). Se usa el año
  * vigente del calendario, calculado dinámicamente.
  *
  * Para 1ra categoría las tasas iniciales son las que el SII fija al
@@ -49,7 +49,7 @@ export interface PPMResult {
  * la diferencia con el impuesto del año anterior.
  *
  * Base legal: Art. 84 LIR (1ra categoría) y Art. 88 LIR + Ley
- * 21.578 (retención honorarios = PPM 2da categoría).
+ * 21.133 (retención honorarios = PPM 2da categoría).
  */
 const aniosCalendarioPPM = Object.keys(RETENCION_HONORARIOS_CALENDARIO)
   .map(Number)
@@ -90,7 +90,7 @@ const PRESUNCION_PCT = PPM_PRESUNCION.porcentaje;
  * Calcula los Pagos Provisionales Mensuales (PPM).
  *
  * Bug histórico:
- *  - Tasa profesionales era 10% (calendario antiguo). Ley 21.578
+ *  - Tasa profesionales era 10% (calendario antiguo). Ley 21.133
  *    actualiza a 14,5%/15,25%/16%/17% entre 2025-2028.
  *  - Se aplicaba "deducción estándar 10%" para comercio/transporte/
  *    construcción que no existe en la ley. Se elimina: si no se
@@ -98,7 +98,7 @@ const PRESUNCION_PCT = PPM_PRESUNCION.porcentaje;
  *  - Profesionales: presunción 30% solo se aplica si no se declaran
  *    gastos efectivos, y queda topeada en 15 UTA.
  *
- * Base legal: Art. 50, 84 y 88 LIR; Ley 21.578.
+ * Base legal: Art. 50, 84 y 88 LIR; Ley 21.133.
  */
 export function calculatePPM(input: PPMInput): PPMResult {
   const { ingresosBrutosAnuales, gastosPresuntos, actividad } = input;

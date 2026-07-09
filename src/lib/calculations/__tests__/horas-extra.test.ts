@@ -78,6 +78,20 @@ describe('calculateHorasExtra', () => {
     expect(r.impactoCotizaciones!.salud).toBeCloseTo(r.totalHorasExtra * 0.07, -1);
   });
 
+  it('golden 42h: factor hora extra 50% = sueldo × (1.5) / (42×4.33)', () => {
+    const r = calculateHorasExtra({
+      sueldoBruto: 1_000_000,
+      horasExtra: 1,
+      jornadaSemanal: 42,
+    });
+    const valorHora = 1_000_000 / (42 * SEMANAS_POR_MES);
+    expect(r.jornadaSemanal).toBe(42);
+    expect(r.valorHoraNormal).toBe(Math.round(valorHora));
+    expect(r.valorHoraExtra).toBe(Math.round(valorHora * 1.5));
+    // Factor DT ~0,0083333 del sueldo por hora extra al 50%
+    expect(r.valorHoraExtra / 1_000_000).toBeCloseTo(0.008333, 3);
+  });
+
   it('tope legal: 2 horas diarias (Art. 31 CdT)', () => {
     const r = calculateHorasExtra({
       sueldoBruto: 1_000_000,

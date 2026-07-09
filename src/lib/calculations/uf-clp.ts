@@ -8,6 +8,8 @@ import type { CalculatorResult } from '@/types/calculator';
 export interface UFCLPInput {
   monto: number;
   direccion: 'uf-a-clp' | 'clp-a-uf';
+  /** UF en vivo (UI). Default: snapshot `UF.valor`. */
+  valorUF?: number;
 }
 
 export interface UFCLPResult {
@@ -27,10 +29,10 @@ export interface UFCLPResult {
  */
 export function calculateUFCLP(input: UFCLPInput): UFCLPResult {
   const { monto, direccion } = input;
-  const valorUF = UF.valor;
+  const valorUF = input.valorUF ?? UF.valor;
 
   if (valorUF <= 0) {
-    throw new Error('Valor de UF inválido');
+    throw new Error('Valor de UF inválido. Actualiza la página e intenta de nuevo.');
   }
 
   const montoConvertido =

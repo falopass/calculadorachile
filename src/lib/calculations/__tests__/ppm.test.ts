@@ -1,7 +1,7 @@
 // ============================================
 // Tests de PPM (Pagos Provisionales Mensuales)
 // ----------------------------------------------
-// Verifica el calendario Ley 21.578 para profesionales y la presunción
+// Verifica el calendario Ley 21.133 para profesionales y la presunción
 // 30% Art. 50 LIR con tope 15 UTA.
 // ============================================
 
@@ -30,7 +30,7 @@ describe('calculatePPM', () => {
     expect(r.baseTributable).toBe(ingresos - topeUTA);
   });
 
-  it('profesional: tasa coincide con calendario Ley 21.578 año vigente', () => {
+  it('profesional: tasa coincide con calendario Ley 21.133 año vigente', () => {
     const r = calculatePPM({ ingresosBrutosAnuales: 1_000_000, actividad: 'profesional' });
     const aniosCal = Object.keys(RETENCION_HONORARIOS_CALENDARIO).map(Number);
     const min = Math.min(...aniosCal);

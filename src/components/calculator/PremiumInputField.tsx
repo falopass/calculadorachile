@@ -87,7 +87,7 @@ const PremiumInputField = forwardRef<HTMLInputElement, PremiumInputFieldProps>(
           <input
             ref={ref}
             id={inputId}
-            className={`block w-full rounded-lg border bg-[var(--surface)] py-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`block w-full min-h-11 rounded-lg border bg-[var(--surface)] py-2.5 text-base sm:text-sm text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed ${
               prefix ? 'pl-7' : 'pl-3'
             } ${suffix ? 'pr-12' : 'pr-3'} ${
               hasError

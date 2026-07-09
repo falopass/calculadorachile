@@ -20,7 +20,7 @@ interface CalculatorPageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Generar rutas estáticas para SSG (todas las 40 calculadoras).
+// Generar rutas estáticas para SSG (catálogo activo: 39 calculadoras).
 export async function generateStaticParams() {
   return calculators.map((calculator) => ({ slug: calculator.slug }));
 }

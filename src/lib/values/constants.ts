@@ -271,10 +271,10 @@ export const IVA = {
 export const BOLETA_HONORARIOS = {
   tasa_base: 10,
   tasa_adicional: 5.25,
-  /** Tasa total 2026 según Ley 21.578 (calendario 14,5% → 17%). */
+  /** Tasa total 2026 según Ley 21.133 (calendario 14,5% → 17%). */
   tasa_total: 15.25,
   exento_minimo: 10, // UTM mensuales
-  /** Calendario completo Ley 21.578 (cotizaciones independientes). */
+  /** Calendario completo Ley 21.133 (retención honorarios / cotizaciones independientes). */
   calendario: {
     2025: 14.5,
     2026: 15.25,
@@ -308,17 +308,26 @@ export const UTA_2026 = UTM.valor * 12;
 // ============================================
 // Subsidio Habitacional DS49 / DS01
 // ============================================
+/**
+ * Montos de subsidio y topes de referencia MINVU (UF).
+ * Topes de precio de vivienda por tramo se resuelven en el módulo
+ * (TOPE_PROPIEDAD_UF) según ChileAtiende / llamados 2026.
+ * subsidioMaximoUF = orden de magnitud del aporte (verificable por llamado).
+ */
 export const SUBSIDIO_HABITACIONAL = {
   ds49: {
-    montoMaximoUF: 450,
+    /** Tope referencial precio vivienda DS49 (general ~950 UF). */
+    montoMaximoUF: 950,
     tramo1: { ingresoMaximoUF: 12, subsidioMaximoUF: 450 },
     tramo2: { ingresoMaximoUF: 18, subsidioMaximoUF: 380 },
     tramo3: { ingresoMaximoUF: 24, subsidioMaximoUF: 310 },
   },
   ds01: {
-    montoMaximoUF: 650,
-    tramo1: { ingresoMaximoUF: 15, subsidioMaximoUF: 650 },
-    tramo2: { ingresoMaximoUF: 22, subsidioMaximoUF: 520 },
+    /** Tope T3 general 2.200 UF (ChileAtiende DS1 T3). */
+    montoMaximoUF: 2200,
+    tramo1: { ingresoMaximoUF: 15, subsidioMaximoUF: 600 },
+    tramo2: { ingresoMaximoUF: 22, subsidioMaximoUF: 450 },
+    tramo3: { ingresoMaximoUF: 90, subsidioMaximoUF: 270 },
   },
 };
 
@@ -498,7 +507,7 @@ export const TMC_2026_MAYO = {
 };
 
 /**
- * Calendario de tarifas de Boleta de Honorarios (Ley 21.578).
+ * Calendario de tarifas de Boleta de Honorarios (Ley 21.133).
  * Calendario de retención progresiva 2025-2028.
  */
 export const RETENCION_HONORARIOS_CALENDARIO = {
@@ -784,7 +793,7 @@ export const SEMANAS_POR_MES = 4.33;
 
 // ============================================
 // Distribución de la retención de honorarios
-// (Ley 21.578 — calendario por año)
+// (Ley 21.133 — calendario por año)
 // ----------------------------------------------
 // La retención total se descompone en:
 //   - Impuesto a la renta (PPM)
@@ -799,7 +808,7 @@ export const SEMANAS_POR_MES = 4.33;
 // Previsión Social cada año.
 //
 // Fuente: Subsecretaría de Previsión Social,
-//   "Calendario Ley 21.133/21.578 cotizaciones
+//   "Calendario Ley 21.133 cotizaciones
 //   independientes 2025-2028".
 // ============================================
 export const RETENCION_HONORARIOS_DISTRIBUCION = {
@@ -1002,15 +1011,12 @@ export const SUBSIDIO_HABITACIONAL_DS19 = {
  * por tipo de subsidio y tramo. Montos fijos
  * según decreto MINVU (no son % del ingreso).
  *
- *  - DS49 (Fondo Solidario, vivienda nueva): 10 UF
- *  - DS01 tramo 1 (Sectores Medios): 30 UF
- *  - DS01 tramo 2: 50 UF
- *  - DS01 tramo 3: 80 UF
- *  - DS19 tramo 1: 80 UF
- *  - DS19 tramos 2-3: 100 UF
+ *  - DS49: 10 UF (ChileAtiende / SERVIU)
+ *  - DS01 T1/T2/T3: 30 / 40 / 80 UF (ChileAtiende DS1)
+ *  - DS19: 80 / 100 / 100 UF (referencia motor; verificar llamado)
  */
 export const SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF = {
   ds49: { tramo1: 10, tramo2: 10, tramo3: 10 },
-  ds01: { tramo1: 30, tramo2: 50, tramo3: 80 },
+  ds01: { tramo1: 30, tramo2: 40, tramo3: 80 },
   ds19: { tramo1: 80, tramo2: 100, tramo3: 100 },
 } as const;

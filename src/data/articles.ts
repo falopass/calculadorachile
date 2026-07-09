@@ -8,6 +8,10 @@
 // Convenciones:
 //   - HTML serializado con clases ".callout", ".numeric-example",
 //     ".data-grid", ".steps" definidas en globals.css.
+//   - Tipografía base (h2/h3/p/a): globals.css `.prose` — NO hay
+//     @tailwindcss/typography; no uses prose-h2: de Tailwind.
+//   - Tablas: <table><thead>…</thead><tbody>…</tbody></table>
+//     (no inventar filas en .data-grid; ese es solo ul>li label/value).
 //   - Cada artículo cierra con un párrafo "Para profundizar…" que
 //     enlaza a la guía pillar correspondiente.
 // ============================================
@@ -51,6 +55,305 @@ export interface Article {
 }
 
 export const articles: Article[] = [
+  {
+    slug: 'permiso-circulacion-segunda-cuota-agosto-2026',
+    title:
+      'Segunda cuota del permiso de circulación 2026: plazo hasta el 31 de agosto',
+    description:
+      'Si pagaste el permiso de circulación en dos cuotas, la segunda vence el 31 de agosto de 2026. Fechas, qué necesitas y cómo estimar el monto antes de ir a la municipalidad.',
+    date: '2026-07-09',
+    updatedAt: '2026-07-09',
+    category: 'vehiculos',
+    readingTime: 6,
+    seoTitle: 'Permiso de circulación 2ª cuota 2026: hasta el 31 de agosto',
+    seoDescription:
+      'Segunda cuota del permiso de circulación 2026: del 1 al 31 de agosto. Requisitos, multas por atraso y cómo estimar el valor. Fuente ChileAtiende.',
+    keywords: [
+      'permiso de circulación segunda cuota 2026',
+      'permiso circulación agosto 2026',
+      'segunda cuota permiso circulación',
+      'permiso circulación plazo',
+      'pagar permiso de circulación',
+    ],
+    relatedCalculators: [
+      'calculadora-permiso-circulacion',
+      'calculadora-multas-transito',
+    ],
+    faq: [
+      {
+        question: '¿Hasta cuándo se paga la segunda cuota del permiso 2026?',
+        answer:
+          'Según ChileAtiende, si elegiste pago en dos cuotas, la segunda se paga desde el 1 hasta el 31 de agosto de 2026. La primera cuota fue entre el 1 de febrero y el 31 de marzo de 2026.',
+      },
+      {
+        question: '¿Puedo pagar la segunda cuota en cualquier municipalidad?',
+        answer:
+          'El permiso se paga en la municipalidad correspondiente a la inscripción del vehículo o en los canales que cada municipio habilite (presencial, web o convenios). Confirma en tu comuna antes de agendar.',
+      },
+      {
+        question: '¿Qué pasa si no pago a tiempo?',
+        answer:
+          'Circular sin permiso al día puede acarrear multas y fiscalización. El monto exacto y recargos los define la normativa de tránsito y la municipalidad. No dejes el pago para el último día del plazo.',
+      },
+    ],
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Aviso</strong><p>Los plazos y requisitos generales provienen de <strong>ChileAtiende</strong>. El valor exacto del permiso, la forma de pago y los documentos adicionales los fija cada <strong>municipalidad</strong> y pueden variar. Consulta con tu planta o sitio municipal antes de agendar.</p></div></aside>
+
+<h2>Quién debe pagar la segunda cuota</h2>
+<p>Si eres dueño de un vehículo motorizado y en 2026 optaste por pagar el <strong>permiso de circulación en dos cuotas</strong>, la segunda cuota corresponde al saldo pendiente del impuesto anual municipal. ChileAtiende indica expresamente esta modalidad para el proceso 2026.</p>
+<ul>
+<li><strong>Primera cuota:</strong> 1 de febrero al 31 de marzo de 2026.</li>
+<li><strong>Segunda cuota:</strong> 1 al 31 de agosto de 2026.</li>
+</ul>
+<p>Si pagaste el permiso <strong>completo en una sola cuota</strong> en el primer plazo, <strong>no</strong> debes una segunda cuota por ese mismo período.</p>
+
+<h2>Plazo crítico: 31 de agosto de 2026</h2>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No lo dejes para el último día</strong><p>El vencimiento de la segunda cuota es el <strong>31 de agosto de 2026</strong>. En fechas límite hay filas, caídas de sitios municipales y demoras en medios de pago. Idealmente paga en la primera quincena de agosto.</p></div></aside>
+
+<h2>Qué preparar antes de pagar</h2>
+<ol class="steps">
+<li><strong>Identificación del vehículo</strong> (padrón / inscripción) y cédula del propietario.</li>
+<li><strong>Comprobante o liquidación de la primera cuota</strong>, si el municipio la pide para conciliar el saldo.</li>
+<li><strong>Revisión técnica y SOAP al día</strong>, según lo exija tu comuna para emitir o validar el permiso. Guía: <a href="/blog/revision-tecnica-chile-2026-calendario-patente">revisión técnica 2026 por dígito de patente</a>.</li>
+<li><strong>Medio de pago</strong> habilitado (caja municipal, web, servipag u otros convenios locales).</li>
+</ol>
+<p>Los documentos exactos los publica cada municipalidad. No asumas que el listado de una comuna sirve en otra.</p>
+
+<h2>Cómo estimar el monto</h2>
+<p>El valor del permiso depende de la <strong>tasación fiscal del vehículo</strong>, el tipo (auto, moto, carga, etc.) y reglas municipales. No hay un “precio único nacional” para todos los autos.</p>
+<p>Puedes obtener una <strong>estimación orientativa</strong> con la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> de CalculaChile e ingresar el valor del vehículo y su antigüedad. El resultado es referencial: el monto oficial es el que cobra la municipalidad.</p>
+<div class="numeric-example"><div class="numeric-example__title">Idea de orden de magnitud</div><ul><li>La segunda cuota suele ser el <strong>50% restante</strong> del permiso anual si pagaste la mitad en marzo.</li><li>Si no recuerdas el total, revisa el comprobante de la primera cuota o la cartola municipal.</li></ul><span class="total">Confirma siempre el saldo en tu municipio</span></div>
+
+<h2>¿Qué pasa si se me pasó el plazo?</h2>
+<p>Circular sin permiso vigente expone a fiscalización y multas. Los montos y recargos no son fijos en este artículo: dependen de la infracción y la comuna. Si ya venció el plazo, regulariza en la municipalidad lo antes posible y, si te multaron, puedes estimar el orden de magnitud de infracciones de tránsito con la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas de tránsito</a> (también referencial).</p>
+
+<h2>Checklist rápido de agosto</h2>
+<ul>
+<li>¿Pagué en dos cuotas en 2026? → Segunda cuota entre el 1 y el 31 de agosto.</li>
+<li>¿Pagué todo en marzo? → No aplica segunda cuota por ese permiso.</li>
+<li>¿Tengo SOAP y revisión técnica vigentes según mi comuna?</li>
+<li>¿Confirmé el canal de pago del municipio (web o presencial)?</li>
+</ul>
+
+<h2>Fuentes</h2>
+<ul>
+<li><a href="https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion" target="_blank" rel="noopener">ChileAtiende — Permiso de circulación</a> (plazos 2026: 1.ª cuota feb–mar; 2.ª cuota 1–31 ago).</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer</strong><p>Contenido informativo. No reemplaza el cobro municipal ni la normativa de tránsito. Valores y filas de pago pueden cambiar sin aviso en cada comuna.</p></div></aside>
+<p>Estima tu caso en la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> y valida el monto final en tu municipalidad.</p>`,
+  },
+  {
+    slug: 'revision-tecnica-chile-2026-calendario-patente',
+    title:
+      'Revisión técnica Chile 2026: calendario por dígito de patente y requisitos',
+    description:
+      'Cuándo te toca la revisión técnica según el último dígito de la patente, qué se revisa, cómo consultar el estado y por qué la necesitas para el permiso de circulación.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'vehiculos',
+    readingTime: 7,
+    seoTitle: 'Revisión técnica 2026: calendario por patente y requisitos',
+    seoDescription:
+      'Calendario de revisión técnica 2026 por dígito de patente, consulta en PRT, multas y vínculo con el permiso de circulación. Fuentes ChileAtiende y MTT/PRT.',
+    keywords: [
+      'revisión técnica 2026',
+      'calendario revisión técnica patente',
+      'cuándo me toca la revisión técnica',
+      'revisión técnica por dígito',
+      'PRT Chile',
+      'revisión técnica y permiso de circulación',
+    ],
+    relatedCalculators: [
+      'calculadora-permiso-circulacion',
+      'calculadora-multas-transito',
+    ],
+    faq: [
+      {
+        question: '¿Cómo sé en qué mes me toca la revisión técnica?',
+        answer:
+          'En vehículos de revisión anual, el mes de preferencia o vencimiento se asigna según el último dígito de la placa patente única, según el calendario del Ministerio de Transportes / plantas PRT. La fecha exacta de vencimiento de tu certificado es la que aparece en el documento o al consultar por patente en el sitio de la PRT.',
+      },
+      {
+        question: '¿Puedo hacer la revisión técnica antes del mes que me toca?',
+        answer:
+          'En la práctica muchas plantas permiten adelantar la revisión dentro de una ventana previa al vencimiento (a menudo hasta 90 días, según planta y normativa vigente). Confirma en la PRT donde agendes: lo importante es no circular con el certificado vencido.',
+      },
+      {
+        question: '¿Sirve la revisión técnica para el permiso de circulación?',
+        answer:
+          'Sí. ChileAtiende indica que la revisión técnica vigente es necesaria para obtener el permiso de circulación. Sin ella (y sin SOAP al día, según comuna), el municipio puede rechazar o retrasar el pago del permiso.',
+      },
+    ],
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Aviso</strong><p>Los precios de las plantas, filas y ventanas de agendamiento los fija cada <strong>Planta de Revisión Técnica (PRT)</strong>. El calendario por dígito es el esquema general del sistema MTT/PRT; la <strong>fecha de vencimiento real</strong> es la de tu certificado. Antes de agendar, consulta <a href="https://www.prt.cl" target="_blank" rel="noopener">prt.cl</a> o la planta de tu zona y, si hay prórrogas regionales, el sitio del <strong>MTT</strong>.</p></div></aside>
+
+<h2>Qué es la revisión técnica</h2>
+<p>La revisión técnica certifica que tu vehículo motorizado está en condiciones de circular: sistemas de seguridad, frenos, luces, neumáticos, emisiones y otros ítems regulados. ChileAtiende la describe como validación del buen estado del vehículo para caminos públicos y control ambiental.</p>
+<p>Circular <strong>sin revisión técnica vigente</strong> constituye, en términos generales, una <strong>infracción grave</strong> de tránsito. Además, sin certificado al día no puedes completar el <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">permiso de circulación</a> en la municipalidad.</p>
+
+<h2>Calendario 2026 por último dígito de la patente</h2>
+<p>Para la mayoría de los vehículos particulares de revisión <strong>anual</strong>, el mes de referencia se define por el <strong>último dígito</strong> de la placa patente única. Tabla de uso habitual (preferencia / mes de revisión):</p>
+<table>
+<thead>
+<tr><th>Último dígito</th><th>Mes de referencia</th></tr>
+</thead>
+<tbody>
+<tr><td>9</td><td>Enero</td></tr>
+<tr><td>0</td><td>Febrero</td></tr>
+<tr><td>1</td><td>Abril</td></tr>
+<tr><td>2</td><td>Mayo</td></tr>
+<tr><td>3</td><td>Junio</td></tr>
+<tr><td>4</td><td>Julio</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Agosto</strong></td></tr>
+<tr><td>6</td><td>Septiembre</td></tr>
+<tr><td>7</td><td>Octubre</td></tr>
+<tr><td>8</td><td>Noviembre</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Marzo y diciembre</strong><p>Suelen reservarse para reinspecciones, rechazos o casos especiales, no para un dígito “ordinario”. <strong>No te guíes solo por el mes del dígito</strong> si tu certificado vence en otra fecha: manda el papel o la consulta online por patente.</p></div></aside>
+<p>Ejemplo: patente terminada en <strong>5</strong> → mes de referencia <strong>agosto</strong> (útil si estás alineando papeles con la <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso</a>).</p>
+
+<h2>Cómo consultar si estás al día</h2>
+<ol class="steps">
+<li>Entra al sitio de la <a href="https://www.prt.cl/Paginas/RevisionTecnica.aspx" target="_blank" rel="noopener">Planta de Revisión Técnica (consulta por patente)</a>.</li>
+<li>Ingresa la placa patente del vehículo.</li>
+<li>Revisa si el estado es vigente, vencida o rechazada y hasta cuándo corre la vigencia.</li>
+</ol>
+<p>ChileAtiende publica el trámite <em>Consultar el estado de la revisión técnica de un vehículo motorizado</em> (sin costo de consulta en el canal web de la PRT).</p>
+
+<h2>Qué se revisa (visión general)</h2>
+<p>Según la ficha de ChileAtiende, la inspección cubre entre otros: dirección, frenos, luces, llantas y neumáticos, chasis y suspensión, emisiones y escape, vidrios, carrocería, espejos, bocina, limpiaparabrisas y elementos de seguridad, velocímetro e instrumentos. Lleva el vehículo en condiciones razonables (luces, frenos, gases) para evitar un rechazo y una segunda visita.</p>
+
+<h2>Documentos y precio</h2>
+<ul>
+<li><strong>Documentos:</strong> suelen pedirse padrón o identificación del vehículo y cédula; confirma en la planta al agendar.</li>
+<li><strong>Precio:</strong> lo fija cada PRT (varía por tipo de vehículo y comuna). No hay un arancel único nacional fijo en este artículo; pregunta al agendar.</li>
+<li><strong>Vehículos nuevos:</strong> pueden tener plazos distintos de primera revisión (homologación / meses desde inscripción). Verifica la regla vigente en MTT/PRT si tu auto es 0 km reciente.</li>
+</ul>
+
+<h2>Revisión técnica, SOAP y permiso de circulación</h2>
+<p>Para pagar o renovar el <strong>permiso de circulación</strong> la municipalidad exige, en la práctica, revisión técnica y <strong>SOAP</strong> vigentes (y no tener multas impagas, según comuna). Si te falta la RT, resuélvela antes de la fila del permiso.</p>
+<ul>
+<li>Estima el orden de magnitud del permiso con la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> (referencial).</li>
+<li>Si te multaron por documentación o infracciones, la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas de tránsito</a> orienta montos típicos (no sustituye la boleta municipal o del juzgado).</li>
+</ul>
+
+<h2>Si te rechazan la revisión</h2>
+<p>La planta indica las fallas. Tienes un plazo para reparar y volver a reinspección (plazos y costo de reingreso dependen de la PRT). No circules con certificado vencido o rechazado sin regularizar: el riesgo es multa y fiscalización.</p>
+
+<h2>Checklist rápido</h2>
+<ul>
+<li>¿Consulté vigencia por patente en prt.cl?</li>
+<li>¿Sé el mes de mi dígito y la fecha impresa en el certificado?</li>
+<li>¿SOAP y permiso de circulación alineados con la RT?</li>
+<li>¿Agendé con anticipación si estoy en mes de alta demanda (ej. dígito 5 en agosto)?</li>
+</ul>
+
+<h2>Fuentes</h2>
+<ul>
+<li><a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende — Revisión técnica de vehículos motorizados</a></li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado" target="_blank" rel="noopener">ChileAtiende — Consultar estado de la RT</a></li>
+<li><a href="https://www.prt.cl" target="_blank" rel="noopener">PRT — Plantas de Revisión Técnica</a> (consulta y calendario de preferencias)</li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion" target="_blank" rel="noopener">ChileAtiende — Permiso de circulación</a></li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer</strong><p>Contenido informativo. No es dictamen del MTT ni de una PRT. Precios, prórrogas y tablas de dígitos pueden actualizarse: confirma siempre en canales oficiales antes de agendar. Cada año conviene <strong>revalidar el calendario</strong> (mantenimiento anual de este artículo).</p></div></aside>
+<p>Relacionado: <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso de circulación 2026</a>.</p>`,
+  },
+  {
+    slug: 'cotizacion-empleador-3-5-agosto-2026-costo-pyme',
+    title:
+      'Cotización del empleador 3,5% desde agosto 2026: cómo impacta el costo de un trabajador',
+    description:
+      'Desde las remuneraciones de agosto 2026 la cotización adicional del empleador sube a 3,5% (Ley 21.735). Ejemplos en CLP, qué no se descuenta del trabajador y cómo estimar el costo PYME.',
+    date: '2026-07-15',
+    updatedAt: '2026-07-15',
+    category: 'laboral',
+    readingTime: 7,
+    relatedGuia: 'sueldo-liquido-chile',
+    seoTitle: 'Cotización empleador 3,5% agosto 2026: costo empresa Chile',
+    seoDescription:
+      'Reforma de pensiones: cotización adicional del empleador 3,5% desde agosto 2026. Ejemplos con $800.000 y $1.500.000, desglose y calculadora de costo empleado.',
+    keywords: [
+      'cotización empleador 3,5% 2026',
+      'cotización adicional empleador',
+      'Ley 21.735 cotización',
+      'costo empleado Chile 2026',
+      'reforma previsional empleador',
+      'aportes del empleador pensiones',
+    ],
+    relatedCalculators: [
+      'calculadora-costo-empleado-pyme',
+      'calculadora-sueldo-liquido',
+      'calculadora-comparador-afp',
+    ],
+    faq: [
+      {
+        question: '¿La cotización del 3,5% se descuenta del sueldo del trabajador?',
+        answer:
+          'No. Según la Ley 21.735 y la información de ChileAtiende, el aporte adicional es de cargo del empleador: no reduce el sueldo líquido del trabajador. Sí aumenta el costo total de la empresa por cada trabajador dependiente afecto a cotización.',
+      },
+      {
+        question: '¿Desde cuándo rige el 3,5%?',
+        answer:
+          'El tramo de 3,5% aplica a las remuneraciones y cotizaciones de agosto de 2026 en adelante, dentro de la gradualidad de la reforma previsional. Entre agosto 2025 y julio 2026 el aporte adicional inicial fue de 1%. Verifica siempre la ficha oficial de ChileAtiende o la Superintendencia de Pensiones al declarar en Previred.',
+      },
+      {
+        question: '¿Se calcula sobre el sueldo bruto completo?',
+        answer:
+          'Se calcula sobre la remuneración imponible del trabajador, sujeta a los topes imponibles previsionales vigentes (por ejemplo el tope de AFP/salud en UF). Si el sueldo supera el tope, la base de cotización se topa; no se cotiza el 3,5% sobre el exceso no imponible.',
+      },
+    ],
+    content: `<h2>Qué cambia en agosto 2026</h2>
+<p>La <strong>Ley 21.735</strong> de reforma previsional estableció una cotización adicional de cargo del <strong>empleador</strong>, con subida gradual. Según ChileAtiende y el calendario de implementación de la reforma, desde las remuneraciones de <strong>agosto de 2026</strong> el aporte adicional total del empleador pasa a <strong>3,5%</strong> de la remuneración imponible (antes, en la etapa agosto 2025–julio 2026, el tramo adicional inicial fue de 1%).</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>No es un descuento al trabajador</strong><p>Este 3,5% <strong>no se rebaja del sueldo líquido</strong>. Es un costo de la empresa, similar en lógica al SIS o a la parte empleador del seguro de cesantía: lo paga quien contrata, no quien recibe la liquidación.</p></div></aside>
+
+<h2>Desglose del 3,5% (ChileAtiende, tramo ago 2026)</h2>
+<p>Según la ficha oficial de ChileAtiende <em>Aportes del empleador al Sistema de Pensiones</em>, en <strong>agosto de 2026 (3,5% total)</strong> el reparto informado es:</p>
+<ul>
+<li><strong>0,1%</strong> — cuenta individual de la trabajadora o trabajador.</li>
+<li><strong>0,9%</strong> — Cotización con Rentabilidad Protegida (CRP).</li>
+<li><strong>2,5%</strong> — Seguro de Invalidez y Sobrevivencia (SIS) y Compensación por Diferencias de Expectativa de Vida.</li>
+</ul>
+<p>Hacienda publica además la tabla de gradualidad del art. 4.º transitorio de la Ley 21.735 (1% en ago 2025–jul 2026; 3,5% en ago 2026–jul 2027). La Superintendencia de Pensiones regula recaudación y procedimientos: ante duda operativa (Previred, códigos de planilla), prioriza su norma y la ficha de ChileAtiende del mes de devengamiento.</p>
+<ul>
+<li><strong>Quién paga:</strong> empleador (dependientes afectos a cotización).</li>
+<li><strong>Efecto en el líquido del trabajador:</strong> ninguno por este ítem.</li>
+<li><strong>Efecto en la PYME:</strong> sube el costo laboral mensual y anual.</li>
+</ul>
+
+<h2>Ejemplos en pesos (base imponible sin tope)</h2>
+<p>Los siguientes ejemplos asumen que el sueldo imponible está <strong>bajo el tope</strong> de AFP/salud del mes. Si el sueldo es muy alto, la base se topa en UF y el 3,5% se aplica sobre ese tope, no sobre el bruto completo.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo A: sueldo imponible $800.000</div><ul><li>Cotización adicional empleador 3,5% = $800.000 × 0,035</li><li>Costo extra mensual solo por este ítem</li></ul><span class="total">+$28.000 al mes · +$336.000 al año</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo B: sueldo imponible $1.500.000</div><ul><li>Cotización adicional empleador 3,5% = $1.500.000 × 0,035</li><li>Costo extra mensual solo por este ítem</li></ul><span class="total">+$52.500 al mes · +$630.000 al año</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Estimación referencial</strong><p>Estos montos son aritmética del 3,5% sobre el imponible del ejemplo. No incluyen mutual, cesantía empleador, SIS ni gratificación. El costo total del puesto es la suma de todos los aportes patronales más el bruto y, si corresponde, gratificación.</p></div></aside>
+
+<h2>Cómo se suma al costo total del empleado</h2>
+<p>Para una PYME, el costo de un dependiente suele incluir al menos:</p>
+<ul>
+<li>Sueldo bruto (y gratificación legal si aplica).</li>
+<li>Aportes clásicos del empleador: SIS, seguro de cesantía (parte empleador), mutual de seguridad (Ley 16.744).</li>
+<li><strong>Desde ago 2026:</strong> cotización adicional de reforma (3,5% en esta etapa).</li>
+</ul>
+<p>Puedes estimar el bloque “clásico” (bruto + SIS + cesantía empleador + mutual) con la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleado PYME</a> y <strong>sumar a mano el 3,5%</strong> sobre la base imponible topada mientras el motor no incorpore la tabla gradual de la reforma. Para ver el líquido del trabajador (AFP, salud, cesantía trabajador, IUSC), usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>
+
+<h2>Errores frecuentes en liquidaciones y presupuestos</h2>
+<ol class="steps">
+<li><strong>Descontar el 3,5% al trabajador.</strong> Incorrecto: es cargo empleador.</li>
+<li><strong>Aplicarlo sobre el bruto sin topes.</strong> Si hay tope imponible, la base se limita.</li>
+<li><strong>Olvidarlo en el presupuesto de contratación.</strong> Un puesto de $1.500.000 imponibles implica del orden de $52.500 extra al mes solo por este ítem.</li>
+<li><strong>Confundirlo con la comisión AFP del trabajador.</strong> La comisión AFP sigue saliendo de la cotización del trabajador; no es este 3,5%.</li>
+</ol>
+
+<h2>Relación con el sueldo líquido</h2>
+<p>El <strong>líquido del trabajador no baja</strong> por el 3,5% patronal. Lo que cambia es la cuenta de la empresa. Si necesitas comparar AFP o proyectar descuentos del trabajador, usa el <a href="/calculadoras/calculadora-comparador-afp">comparador de comisiones AFP</a> y la calculadora de sueldo líquido; si contratas o presupuestas plantilla, parte del costo empleado y añade el 3,5%.</p>
+
+<h2>Bases y fuentes oficiales</h2>
+<ul>
+<li><a href="https://www.chileatiende.gob.cl/fichas/130987-aportes-del-empleador-al-sistema-de-pensiones" target="_blank" rel="noopener">ChileAtiende — Aportes del empleador al Sistema de Pensiones</a></li>
+<li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización de cargo del empleador</a></li>
+<li>Ley 21.735 (reforma previsional) — Biblioteca del Congreso Nacional</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Estimación referencial educativa. No reemplaza la determinación de la Superintendencia de Pensiones, Previred, tu contador o la liquidación oficial. Antes de cada período de cotización, confirma tasas y desglose en fuentes oficiales.</p></div></aside>
+<p>Para profundizar en descuentos del trabajador y topes imponibles, lee la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido en Chile 2026</a> o simula tu caso en las calculadoras enlazadas.</p>`,
+  },
   {
     slug: 'como-calcular-finiquito-chile',
     title: 'Cómo calcular tu finiquito en Chile 2026 paso a paso',
@@ -291,7 +594,7 @@ export const articles: Article[] = [
       'honorarios Chile',
       'independientes SII',
       'impuesto profesionales',
-      'Ley 21.578',
+      'ley 21.133',
     ],
     relatedCalculators: [
       'calculadora-boleta-honorarios',
@@ -302,7 +605,7 @@ export const articles: Article[] = [
 <p>La boleta de honorarios electrónica es un documento tributario que emiten las personas naturales por servicios profesionales o técnicos prestados de forma independiente, sin relación laboral con el cliente. Se emite electrónicamente a través del sitio del SII desde 2017.</p>
 
 <h2>Retención 2026: 15,25%</h2>
-<p>La <strong>Ley 21.578 de 2023</strong> estableció un calendario progresivo de retención. En 2026, la retención total es del 15,25% del monto bruto:</p>
+<p>La <strong>Ley 21.133</strong> estableció un calendario progresivo de retención. En 2026, la retención total es del 15,25% del monto bruto:</p>
 <table>
 <thead><tr><th>Año</th><th>Retención total</th><th>Impuesto renta</th><th>Cotización previsional</th></tr></thead>
 <tbody>
@@ -336,7 +639,7 @@ export const articles: Article[] = [
 <h2>Cotizaciones obligatorias para independientes</h2>
 <p>La Ley 21.133 estableció la cotización obligatoria para honorarios independientes, que se paga de forma anual en la Operación Renta. La porción "previsional" del 5,25% (en 2026) se descompone en AFP, salud (FONASA o Isapre), SIS y Mutual de Seguridad.</p>
 <p>Para ver el detalle completo de la operación renta de independientes y cómo optimizar, lee la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>. Calcula tu líquido con la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a>.</p>
-<p>Fuentes: <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a>, Ley 21.578, Ley sobre Impuesto a la Renta.</p>`,
+<p>Fuentes: <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a>, Ley 21.133, Ley sobre Impuesto a la Renta.</p>`,
   },
   {
     slug: 'guia-horas-extra-chile',
@@ -935,31 +1238,35 @@ export const articles: Article[] = [
   },
   {
     slug: 'cae-renegociacion-condonacion-2026',
-    title: 'CAE en 2026: pago contingente, renegociación y condonación',
+    title: 'CAE en 2026: cuota, renegociación y condonación',
     description:
-      'Cómo funciona el CAE en 2026 con pago contingente al ingreso (Ley 21.605), opciones de renegociación y el estado del proyecto de condonación.',
+      'Cómo funciona el CAE en 2026: tasa 2% en UF, cuota, renegociación y condonación. Simula tu cuota gratis con la calculadora.',
     date: '2026-05-16',
-    updatedAt: '2026-07-04',
+    updatedAt: '2026-07-08',
     category: 'educacion',
     readingTime: 7,
     relatedGuia: 'credito-cae-educacion-chile',
     keywords: [
       'CAE 2026',
-      'pago contingente al ingreso',
+      'simulador CAE 2026',
+      'calculadora CAE',
+      'cuota CAE',
       'ley 21.605',
       'renegociar CAE',
-      'condonación CAE 2025',
+      'condonación CAE',
       'INGRESA',
-      'morosidad CAE',
-      'cuota máxima 10%',
+      'tasa CAE 2%',
+      'pago contingente al ingreso CAE',
     ],
     relatedCalculators: [
       'calculadora-credito-cae',
+      'calculadora-uf-clp',
+      'calculadora-sueldo-liquido',
       'calculadora-credito-hipotecario',
-      'calculadora-intereses-mora',
     ],
-    content: `<h2>El CAE en 2026: cómo se paga ahora</h2>
-<p>Desde la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605 (2023)</a>, todos los créditos CAE pasaron al régimen de <strong>pago contingente al ingreso</strong>. La cuota mensual ya no es fija: se ajusta cada año según el ingreso bruto del deudor.</p>
+    content: `<p>Simula tu cuota ahora en la <a href="/calculadoras/calculadora-credito-cae"><strong>calculadora / simulador CAE 2026</strong></a> (tasa de referencia 2% en UF) y vuelve a esta guía para renegociación y reglas de pago.</p>
+<h2>El CAE en 2026: cómo se paga ahora</h2>
+<p>Desde la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605 (2023)</a>, los créditos CAE operan con reglas de <strong>pago acotado al ingreso</strong> (tope referencial 10% del ingreso bruto) y tasa real en UF. Confirma siempre tu caso en Ingresa: la calculadora estima cuota por monto/tasa/plazo; el tope por ingreso puede bajar la cuota contractual.</p>
 <ul class="data-grid"><li><span class="data-grid__label">Cuota máxima</span><span class="data-grid__value">10% del ingreso bruto</span></li><li><span class="data-grid__label">Tasa anual</span><span class="data-grid__value">2% real (sobre UF)</span></li><li><span class="data-grid__label">Plazo máximo</span><span class="data-grid__value">240 cuotas (20 años)</span></li><li><span class="data-grid__label">Saldo a los 20 años</span><span class="data-grid__value">Condonado</span></li></ul>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Si tu ingreso baja, tu cuota baja</strong><p>El nuevo régimen elimina el riesgo de "no poder pagar". Si te quedas sin trabajo, la cuota se suspende. Si tu sueldo baja a $700.000 bruto, la cuota máxima legal es $70.000 — independiente del monto original del crédito.</p></div></aside>
 

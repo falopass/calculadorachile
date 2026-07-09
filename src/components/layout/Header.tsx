@@ -38,6 +38,7 @@ export default function Header() {
 
   useEffect(() => {
     setMobileOpen(false);
+    setSearchOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -82,13 +83,13 @@ export default function Header() {
       role="banner"
     >
       <nav
-        className="container-base flex h-16 items-center justify-between"
+        className="container-base flex h-16 min-w-0 items-center justify-between gap-2"
         aria-label="Navegación principal"
       >
-        {/* Logo — no tocar */}
+        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 group"
+          className="group flex min-w-0 max-w-[min(100%,14rem)] items-center gap-2 sm:max-w-none"
           aria-label="CalculaChile - Inicio"
         >
           <img
@@ -98,11 +99,11 @@ export default function Header() {
             height={40}
             loading="eager"
             draggable={false}
-            className="h-10 w-10 rounded-lg transition-transform group-hover:scale-105"
+            className="h-9 w-9 shrink-0 rounded-lg transition-transform group-hover:scale-105 sm:h-10 sm:w-10"
           />
           <span
             aria-hidden="true"
-            className="inline-flex items-baseline whitespace-nowrap font-heading text-[22px] font-bold leading-none tracking-tight transition-transform group-hover:scale-105"
+            className="inline-flex min-w-0 items-baseline truncate font-heading text-[18px] font-bold leading-none tracking-tight transition-transform group-hover:scale-105 sm:text-[22px]"
           >
             <span className="text-[var(--foreground)]">Calculadora</span>
             <span className="text-[var(--color-primary-500)]">Chile</span>
@@ -190,6 +191,7 @@ export default function Header() {
               // eslint-disable-next-line jsx-a11y/no-autofocus -- intencional: foco automático al abrir el overlay es la UX esperada (Cmd+K, "/").
               autoFocus
               maxResults={20}
+              onNavigate={() => setSearchOpen(false)}
             />
             <p className="mt-3 text-center text-xs text-[var(--foreground-muted)]">
               Esc para cerrar · Enter para ver todos los resultados

@@ -42,6 +42,8 @@ export interface CreditoHipotecarioInput {
    * estimar los intereses ahorrados sobre el saldo prepagado.
    */
   mesPrepago?: number;
+  /** UF en vivo (UI). Default: snapshot `UF.valor`. */
+  valorUF?: number;
 }
 
 export interface CreditoHipotecarioResult {
@@ -217,23 +219,23 @@ export function calculateCreditoHipotecario(input: CreditoHipotecarioInput): Cre
   void tipoTasa;
   void periodoGraciaMeses;
 
-  const valorUF = UF.valor;
+  const valorUF = input.valorUF ?? UF.valor;
 
-  // Validaciones de rango
+  // Validaciones de rango (mensajes orientados a la UI)
   if (montoUF < 0) {
-    throw new Error('El monto en UF no puede ser negativo');
+    throw new Error('El monto en UF no puede ser negativo.');
   }
   if (plazoAnos < 1 || plazoAnos > 50) {
-    throw new Error('El plazo debe estar entre 1 y 50 años');
+    throw new Error('El plazo debe estar entre 1 y 50 años.');
   }
   if (tasaAnual < 0 || tasaAnual > 100) {
-    throw new Error('La tasa anual debe estar entre 0% y 100%');
+    throw new Error('La tasa anual debe estar entre 0% y 100%.');
   }
   if (pieUF < 0) {
-    throw new Error('El pie no puede ser negativo');
+    throw new Error('El pie no puede ser negativo.');
   }
   if (pieUF >= montoUF) {
-    throw new Error('El pie no puede ser igual o mayor al monto del crédito');
+    throw new Error('El pie no puede ser igual o mayor al monto del crédito. Reduce el pie o aumenta el monto.');
   }
 
   // Monto a financiar (crédito - pie)

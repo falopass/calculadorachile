@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import OfficialValuesBlock from '@/components/home/OfficialValuesBlock';
 import SearchHero from '@/components/home/SearchHero';
+import PopularCalculators from '@/components/home/PopularCalculators';
 import CategoryCatalog from '@/components/home/CategoryCatalog';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { SITE_URL } from '@/lib/site';
@@ -9,34 +10,32 @@ import { SITE_URL } from '@/lib/site';
 /**
  * Página principal — Server Component.
  *
- * Tres bloques densos reemplazan las 5 secciones del template SaaS
- * anterior (HomeHero, PopularCalculators, CategoriesGrid, HowItWorks,
- * HomeCTA):
- *   1. OfficialValuesBlock — valores oficiales grandes (client island)
- *   2. SearchHero — buscador + chips (client island)
- *   3. CategoryCatalog — catálogo por categoría (server)
+ *   1. OfficialValuesBlock — valores oficiales (client island)
+ *   2. SearchHero — buscador + chips top (client island)
+ *   3. PopularCalculators — grid de alto tráfico (server, GSC-driven)
+ *   4. CategoryCatalog — catálogo por categoría (server)
  *
- * AdSense queda automático vía el script global del root layout; no
- * hay banner manual en la home.
- *
- * SEO: H1 semántico vive dentro de OfficialValuesBlock. Metadata
- * específica de la home vía buildPageMetadata, manteniendo canonical
- * y hreflang es-CL + x-default.
+ * AdSense: script global en root layout (auto ads).
  */
 export const metadata: Metadata = {
   ...buildPageMetadata({
     path: '/',
-    title: 'Calculadoras chilenas 2026',
+    title: 'Calculadoras Chile 2026: IVA, CAE, sueldo y más',
     description:
-      'Calculadoras laborales, tributarias y financieras para Chile: sueldo líquido, finiquito, UF, UTM, IVA, créditos y más. Gratis, precisas y actualizadas a 2026.',
+      'Calculadoras gratis para Chile 2026: IVA 19%, simulador CAE, patente comercial, sueldo líquido, finiquito, permiso de circulación y UF. Actualizadas y sin registro.',
     keywords: [
       'calculadoras chilenas 2026',
+      'calculadora IVA',
+      'calculadora IVA chile',
+      'simulador CAE 2026',
+      'calculadora CAE',
+      'patente comercial',
       'calculadora sueldo líquido',
       'calculadora finiquito',
+      'permiso de circulación',
+      'vacaciones proporcionales',
       'UF a pesos',
-      'calculadora IVA',
       'calculadora boleta honorarios',
-      'calculadora horas extra',
       'calculadora crédito hipotecario',
     ],
   }),
@@ -54,6 +53,7 @@ export default function HomePage() {
     <>
       <OfficialValuesBlock />
       <SearchHero />
+      <PopularCalculators />
       <CategoryCatalog />
     </>
   );

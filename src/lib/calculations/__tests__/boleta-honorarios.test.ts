@@ -1,5 +1,5 @@
 // ============================================
-// Tests de boleta de honorarios (Ley 21.578)
+// Tests de boleta de honorarios (Ley 21.133 — calendario retención)
 // ----------------------------------------------
 // Verifica calendario de tasas 2025-2028, exención bajo 10 UTM,
 // y que líquido = bruto - retención (sin doble descuento).
@@ -17,7 +17,7 @@ describe('calculateBoletaHonorarios', () => {
     expect(r.montoLiquido).toBe(1_000_000 - 152_500);
   });
 
-  it('calendario completo Ley 21.578: 14,5/15,25/16/17 entre 2025-2028', () => {
+  it('calendario completo Ley 21.133: 14,5/15,25/16/17 entre 2025-2028', () => {
     const tasas = [2025, 2026, 2027, 2028].map(
       (a) => calculateBoletaHonorarios({ montoBruto: 1_000_000, ano: a as 2025 | 2026 | 2027 | 2028 }).tasaRetencion,
     );
@@ -81,5 +81,24 @@ describe('calculateBoletaHonorarios', () => {
       r.desgloseRetencion.accidentesTrabajo;
     // Debe coincidir con la retención (15,25% del bruto), tolerancia $200 por redondeos.
     expect(sumaDesglose).toBeCloseTo(r.retencion, -2);
+  });
+
+  it('desgloseCotizaciones solo controla UI, no el líquido', () => {
+    // Monto sobre 10 UTM para no estar exento
+    const monto = 1_000_000;
+    const a = calculateBoletaHonorarios({
+      montoBruto: monto,
+      ano: 2026,
+      desgloseCotizaciones: false,
+    });
+    const b = calculateBoletaHonorarios({
+      montoBruto: monto,
+      ano: 2026,
+      desgloseCotizaciones: true,
+    });
+    expect(a.exento).toBe(false);
+    expect(a.montoLiquido).toBe(b.montoLiquido);
+    expect(a.mostrarDesglose).toBe(false);
+    expect(b.mostrarDesglose).toBe(true);
   });
 });

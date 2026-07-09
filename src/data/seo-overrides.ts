@@ -1,30 +1,28 @@
 /**
  * ============================================================================
- * SEO OVERRIDES — 7 rutas que ya rankean (CalculaChile)
- * Optimización de seoTitle + seoDescription para CTR mobile chileno
- * Referencia: julio 2026 · Datos verificados en dossier interno
+ * SEO OVERRIDES — CTR + posición (CalculaChile)
+ * Optimización de seoTitle + seoDescription para mobile chileno
+ * Actualizado: 2026-07-08 · GSC últimas 24 h (imp altas / CTR bajo / pos media)
  * ============================================================================
  *
+ * PRIORIDAD DE KEYS: slug de URL sin path
+ *   - calculadoras: calculadora-iva, calculadora-credito-cae, …
+ *   - blog: slug del artículo
+ *   - guías: slug de la guía
+ *
  * CONTEXTO MOBILE CHILE:
- * - En móvil, Google trunca el title a ~55-58 caracteres (menos ancho que
- *   desktop). Todo dato clave debe ir en los primeros ~40 caracteres.
- * - El pipe "|" y el guion largo "—" consumen ancho visual; en mobile conviene
- *   usar "|" (más angosto) o dos puntos ":" antes que "—".
- * - La description en mobile muestra ~120-130 caracteres visibles: el gancho
- *   debe ir al inicio, no al final.
- * - El usuario chileno responde a: cifras en pesos concretas, el año "2026",
- *   "cuánto", "gratis", "oficial/SII/DT" (confianza YMYL) y verbos de acción.
+ * - Title truncado ~55-58 caracteres: dato clave en los primeros ~40.
+ * - Preferir ":" o "|" antes que "—".
+ * - Description ~120-130 visibles: gancho al inicio.
+ * - Responde a: cifras en $, año "2026", "cuánto", "gratis", SII/DT/SP.
  *
- * REGLA DE PRECISIÓN (YMYL): se corrigen imprecisiones del texto actual que
- * son además riesgo de confianza:
- *   - CAE ≠ "pago contingente al ingreso" (eso es el FES, aún proyecto).
- *   - Tope imponible vigente es 90 UF (desde feb-2026), no 89,9 UF.
- *   - Patente: base = capital propio tributario; pago anual (con opción 2
- *     cuotas), no "semestral"; tope 8.000 UTM.
+ * REGLAS YMYL:
+ * - CAE ≠ pago contingente al ingreso (eso es FES / proyecto).
+ * - Tope imponible 90 UF (no 89,9) desde feb-2026.
+ * - Patente: capital propio tributario; pago anual (opción 2 cuotas).
+ * - IVA = 19% (DL 825).
  *
- * Cada objeto incluye `analysis` (por qué el actual sub-performa + gancho nuevo)
- * como comentario, y los campos `seoTitle` / `seoDescription` listos para pegar.
- * Conteos verificados carácter a carácter (espacios incluidos).
+ * 1 UTM referencial snapshot jul-2026 ≈ $71.649 (no hardcodear en UI live).
  * ============================================================================
  */
 
@@ -32,218 +30,273 @@ export const seoOverrides: Record<
   string,
   { seoTitle: string; seoDescription: string }
 > = {
-  // ──────────────────────────────────────────────────────────────────────────
-  // 1) comparativa-comisiones-afp-2026  (artículo · pos ~7.8 · CTR 0,62% ⚠️)
-  //
-  // ACTUAL:
-  //   T: "Comisiones AFP 2026 Chile: la más barata y la más cara" (54)
-  //   D: "Compara las comisiones AFP 2026 en Chile. Revisa cuál AFP cobra
-  //       menos, cuál cobra más y cuánto impacta en tu sueldo líquido." (128)
-  //
-  // POR QUÉ SUB-PERFORMA (CTR 0,62% es crítico pese a pos 7.8):
-  //   - "la más barata y la más cara" es abstracto: no revela el nombre ni la
-  //     cifra, así que no gana el clic frente a snippets que ya dicen el dato.
-  //   - No hay número concreto en el title; en mobile el usuario decide por la
-  //     cifra visible. Sin "0,46%" ni "$", nada engancha.
-  //   - La description repite "compara/revisa" (relleno) y posterga el dato.
-  //
-  // GANCHO NUEVO (numérico + nombre propio + curiosidad resuelta):
-  //   Poner el dato ganador en el title: "Uno 0,46%". Nombre + cifra = el
-  //   snippet más informativo del SERP. La description añade el contraste
-  //   (1,45% ProVida) para reforzar el "cuánto ahorro".
-  // ──────────────────────────────────────────────────────────────────────────
-  "comparativa-comisiones-afp-2026": {
-    seoTitle: "AFP más barata 2026: Uno 0,46% | Compara las 7", // 46
+  // ══════════════════════════════════════════════════════════════════════════
+  // CALCULADORAS — GSC 24 h: alta impresión / bajo CTR o pos media
+  // ══════════════════════════════════════════════════════════════════════════
+
+  // --- CRÍTICO: ~585 imp, ~1 clic, CTR ~0,2 %, pos ~8 ---
+  'calculadora-iva': {
+    seoTitle: 'Calculadora IVA Chile 2026: neto y bruto al instante', // 52
     seoDescription:
-      "AFP Uno cobra 0,46% y ProVida 1,45% en 2026. Compara las 7 comisiones y calcula cuánto pierdes al año en la AFP equivocada. Dato oficial SP.", // 140
+      'Agrega o quita el IVA del 19% en segundos. Ejemplo: $100.000 neto = $119.000 con IVA. Gratis, sin registro. Datos SII / DL 825.', // 128
   },
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 2) como-funciona-gratificacion-legal  (artículo · pos ~11.3)
-  //
-  // ACTUAL:
-  //   T: "Tope de Gratificación Legal 2026 en Chile: cálculo y monto" (57)
-  //   D: "Conoce el tope de gratificación legal 2026 en Chile, cómo se calcula
-  //       (25% con tope 4,75 IMM) y cuándo corresponde pagarla." (121)
-  //
-  // POR QUÉ SUB-PERFORMA:
-  //   - En mobile, "en Chile: cálculo y monto" se trunca y deja el title sin
-  //     un beneficio claro; "cálculo y monto" es genérico.
-  //   - El usuario que busca gratificación quiere saber "cuánto me toca" en $,
-  //     no la palabra "tope". Falta cifra en pesos que ancle la intención.
-  //   - Empieza con "Conoce el tope…" (verbo débil + tecnicismo).
-  //
-  // GANCHO NUEVO (cifra en pesos + pregunta implícita del trabajador):
-  //   Traducir el 4,75 IMM a un tope mensual concreto con IMM $553.553.
-  //   "¿Cuánto me toca?" es la query mental real. El tope anual referencial
-  //   (~$2.560.250) es el número que detiene el scroll.
-  //   NOTA: cifra marcada como referencial; verificar fórmula exacta con DT
-  //   antes de publicar. Si se prefiere no exponer el pesos, usar variante B.
-  // ──────────────────────────────────────────────────────────────────────────
-  "como-funciona-gratificacion-legal": {
-    seoTitle: "Gratificación Legal 2026: ¿cuánto me corresponde?", // 49
+  // --- CAE: buscada, hay que capturar más queries (simulador, cuota, tasa) ---
+  'calculadora-credito-cae': {
+    seoTitle: 'Simulador CAE 2026: calcula tu cuota | Tasa 2%', // 48
     seoDescription:
-      "Descubre cuánto te toca de gratificación legal en 2026 con el sueldo mínimo de $553.553: 25% del sueldo, tope 4,75 IMM. Guía con datos DT.", // 138
+      'Simula el Crédito con Aval del Estado: cuota mensual, total a pagar y plazo 10–20 años. Tasa fija 2% en UF. CAE vigente 2026 (no es FES). Gratis.', // 148
   },
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 3) subsidios-minvu-2026-guia  (artículo · pos ~9.8)
-  //
-  // ACTUAL:
-  //   T: "Subsidios MINVU 2026: DS49, DS1, DS19 y simulador" (49)
-  //   D: "Revisa los subsidios MINVU 2026 en Chile: DS49, DS1, DS19,
-  //       requisitos, montos en UF y cómo simular tu subsidio habitacional." (128)
-  //
-  // POR QUÉ SUB-PERFORMA:
-  //   - El title es una lista de códigos (DS49, DS1, DS19): el usuario común no
-  //     sabe cuál es el suyo; los códigos no comunican beneficio.
-  //   - No responde la query real: "¿qué subsidio me corresponde / cuánto me
-  //     dan?". Falta el gancho de elegibilidad personalizada.
-  //   - "Revisa… en Chile" empieza con relleno; "simular" queda al final.
-  //
-  // GANCHO NUEVO (personalización + monto máximo en UF):
-  //   "Qué subsidio me corresponde" ataca la intención exacta. Añadir el techo
-  //   (hasta 3.000 UF con DS19) da magnitud aspiracional. El selector es el
-  //   diferenciador vs las fichas .gob fragmentadas.
-  // ──────────────────────────────────────────────────────────────────────────
-  "subsidios-minvu-2026-guia": {
-    seoTitle: "Subsidio MINVU 2026: ¿cuál me corresponde? | Simula", // 51
+  // --- #1 del día en clics: defender y afinar ---
+  'calculadora-patente-comercial': {
+    seoTitle: 'Patente Comercial 2026: ¿cuánto pagar? | Calcula', // 48
     seoDescription:
-      "Descubre qué subsidio de vivienda te corresponde en 2026 según tu ahorro y RSH. DS49, DS1 y DS19 desde 10 UF de ahorro hasta 3.000 UF de vivienda.", // 146
+      'Calcula tu patente comercial 2026 con capital propio tributario y tasa de tu comuna. Desde 1 UTM (~$71.649) hasta 8.000 UTM. Pago anual, opción 2 cuotas.', // 155
   },
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 4) reajuste-arriendo-uf-2026  (artículo · estacional ene-feb)
-  //
-  // ACTUAL:
-  //   T: "Reajuste de Arriendo por UF 2026: cómo calcularlo en Chile" (58)
-  //   D: "Aprende cómo calcular el reajuste de arriendo por UF o IPC en Chile,
-  //       con ejemplo paso a paso, conversión a pesos y calculadora." (130)
-  //
-  // POR QUÉ SUB-PERFORMA:
-  //   - "cómo calcularlo en Chile" se trunca en mobile y no aporta beneficio;
-  //     "cómo calcular" es genérico y compite mal contra calculadoras que ya
-  //     muestran el resultado.
-  //   - El title no distingue el dolor del usuario: la mayoría busca porque el
-  //     arrendador le SUBIÓ el arriendo y quiere saber si es legal / cuánto.
-  //   - No hay tensión emocional (¿te pueden subir tanto?).
-  //
-  // GANCHO NUEVO (dolor + defensa del arrendatario + acción):
-  //   "¿Cuánto puede subir?" y "cuánto te corresponde pagar" activan la
-  //   intención defensiva del arrendatario. Es el ángulo que las calculadoras
-  //   frías no cubren.
-  // ──────────────────────────────────────────────────────────────────────────
-  "reajuste-arriendo-uf-2026": {
-    seoTitle: "Reajuste de Arriendo 2026: ¿cuánto puede subir? | UF", // 52
+  'calculadora-vacaciones-proporcionales': {
+    seoTitle: 'Vacaciones Proporcionales 2026: calcula en pesos', // 48
     seoDescription:
-      "¿Te subieron el arriendo? Calcula el reajuste 2026 por UF o IPC según tu contrato y verifica cuánto te corresponde pagar realmente. Con ejemplo.", // 144
+      'Calcula tus días y el monto en pesos de vacaciones proporcionales en Chile. Ideal al renunciar o al finiquito. Gratis, Código del Trabajo.', // 138
   },
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 5) tope-imponible-2026  (artículo)  ⚠️ DATO OBSOLETO EN SLUG ANTERIOR
-  //
-  // ACTUAL:
-  //   T: "Tope Imponible 2026 en Chile: AFP, salud y cesantía" (52)
-  //   D: "Revisa el tope imponible 2026 para AFP, salud y seguro de cesantía,
-  //       con valores en UF, equivalente en pesos y ejemplos." (117)
-  //
-  // POR QUÉ SUB-PERFORMA:
-  //   - El SLUG dice "89-9-uf" pero el valor vigente desde feb-2026 es 90 UF.
-  //     Cualquier snippet que muestre "89,9" transmite desactualización → daña
-  //     CTR y confianza (y es un riesgo YMYL). El fallback title aún dice
-  //     "89,9 UF": hay que sacar ese número del metadato indexable.
-  //   - "Revisa el tope…" es pasivo y sin cifra ancla en el título.
-  //   - No capta la confusión real (89,9 en enero vs 90,0 desde febrero).
-  //
-  // GANCHO NUEVO (cifra correcta + resolución de confusión):
-  //   Poner "90 UF" corrige el dato y actualiza la señal de frescura. La
-  //   description explota la confusión ("no 89,9") como diferenciador.
-  //   RECOMENDACIÓN: migrar el slug a /tope-imponible-2026 con redirect 301;
-  //   el número en la URL envejece mal año a año.
-  // ──────────────────────────────────────────────────────────────────────────
-  "tope-imponible-2026": {
-    seoTitle: "Tope Imponible 2026: 90 UF en AFP y Salud | Calcula", // 51
+  'calculadora-multas-transito': {
+    seoTitle: 'Multas de Tránsito 2026 Chile: calcula en UTM', // 47
     seoDescription:
-      "El tope imponible 2026 es 90 UF (no 89,9) desde febrero, y 135,2 UF en cesantía. Mira cuánto cotizas si tu sueldo supera el tope, con ejemplo.", // 142
+      'Estima el valor de multas de tránsito en Chile según tipo de infracción y UTM 2026. Leves, graves y gravísimas. Referencial, gratis.', // 133
   },
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 6) calculadora-patente-comercial  (calculadora · pos ~6.0 · CTR 5,45%)
-  //
-  // ACTUAL:
-  //   T: "Calculadora Patente Comercial 2026 Chile — Valor Municipal" (58)
-  //   D: "Calcula el valor de una patente comercial municipal en Chile según
-  //       capital invertido, actividad y comuna. Topes UTM y pago semestral." (135)
-  //
-  // POR QUÉ SUB-PERFORMA (buena pos, CTR mejorable):
-  //   - El "—" y "Chile — Valor Municipal" alarga y se trunca en mobile,
-  //     escondiendo "Valor Municipal". El title termina en algo genérico.
-  //   - "capital invertido" es impreciso (la base legal es capital propio
-  //     tributario) y "pago semestral" es incorrecto (es anual, opción 2
-  //     cuotas). Impreciso = menor confianza y peor match de intención.
-  //   - No hay gancho de "cuánto pago" ni el rango que sorprende (mín 1 UTM).
-  //
-  // GANCHO NUEVO (pregunta directa + rango que ancla):
-  //   "¿Cuánto pagar?" + el mínimo concreto (1 UTM = $71.649) da una cifra
-  //   tangible. Corrige base a "capital propio" y elimina "semestral".
-  // ──────────────────────────────────────────────────────────────────────────
-  "calculadora-patente-comercial": {
-    seoTitle: "Patente Comercial 2026: ¿cuánto pagar? | Calcula", // 48
+  'calculadora-permiso-circulacion': {
+    seoTitle: 'Permiso de Circulación 2026: calcula el valor', // 46
     seoDescription:
-      "Calcula tu patente comercial 2026 según el capital propio de tu negocio y la tasa de tu comuna. Desde 1 UTM ($71.649) hasta 8.000 UTM. Gratis.", // 142
+      'Estima tu permiso de circulación 2026 según valor del vehículo y antigüedad. Incluye idea de 1ª y 2ª cuota (ago). Confirma en tu municipio.', // 142
   },
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 7) calculadora-credito-cae  (calculadora · pos ~5.0 · CTR 9,46% 👍)
-  //
-  // ACTUAL:
-  //   T: "Calculadora CAE 2026 Chile — Simula tu crédito estudiantil" (58)
-  //   D: "Simula la cuota del Crédito con Aval del Estado en Chile: monto,
-  //       plazo, tasa y total a pagar. Pago contingente al ingreso." (119)  ⚠️
-  //
-  // POR QUÉ SUB-PERFORMA (ya buen CTR, pero corregible + protegible):
-  //   - "Pago contingente al ingreso" es del FES (proyecto), NO del CAE. Es un
-  //     error factual YMYL que confunde y puede costar confianza si el usuario
-  //     detecta la mezcla CAE/FES; hay que quitarlo.
-  //   - El "—" y "Simula tu crédito estudiantil" se trunca en mobile; el dato
-  //     más buscado (tasa 2%, cuota) no está en el título.
-  //   - Falta el diferenciador de actualidad "vigente 2026" que capitaliza la
-  //     duda CAE vs FES.
-  //
-  // GANCHO NUEVO (cifra de tasa + tranquilidad de vigencia):
-  //   "tasa 2%" es el dato duro que buscan los deudores. "Vigente" resuelve la
-  //   ansiedad del "¿me sirve si viene el FES?". Se elimina la referencia
-  //   errónea a pago contingente.
-  // ──────────────────────────────────────────────────────────────────────────
-  "calculadora-credito-cae": {
-    seoTitle: "Calculadora CAE 2026: cuota y tasa 2% | Simula", // 46
+  'calculadora-credito-automotriz': {
+    seoTitle: 'Crédito Automotriz 2026: simula cuota y pie', // 46
     seoDescription:
-      "Simula tu cuota del CAE 2026: tasa fija de 2% en UF, cobro a 18 meses del egreso y plazo de 10, 15 o 20 años. El CAE sigue vigente, el FES aún no.", // 146
+      'Simula la cuota de tu crédito de auto en Chile: pie, tasa, plazo y costo total. Compara escenarios antes de firmar. Gratis.', // 124
+  },
+
+  'calculadora-contribuciones': {
+    seoTitle: 'Contribuciones 2026: calcula por avalúo fiscal', // 47
+    seoDescription:
+      'Estima tus contribuciones (impuesto territorial) 2026 según avalúo SII y destino de la propiedad. Útil para cuotas sep y nov. Gratis.', // 136
+  },
+
+  'calculadora-intereses-mora': {
+    seoTitle: 'Intereses por Mora 2026: calcula el recargo', // 45
+    seoDescription:
+      'Estima intereses por mora de sueldos, deudas o multas en Chile. Ingresa monto y días de atraso. Resultado referencial, gratis.', // 128
+  },
+
+  'calculadora-credito-hipotecario': {
+    seoTitle: 'Crédito Hipotecario 2026: simula dividendo en UF', // 50
+    seoDescription:
+      'Simula tu dividendo hipotecario en UF y pesos: monto, pie, tasa y plazo. Estima capacidad de pago y costo total. Gratis, no es oferta bancaria.', // 144
+  },
+
+  'calculadora-costo-tag': {
+    seoTitle: 'Costo TAG 2026: peajes al mes en Chile', // 40
+    seoDescription:
+      'Estima cuánto pagas de TAG al mes según ruta y viajes. Rancagua, Valparaíso, urbano y más. Referencial, gratis.', // 116
+  },
+
+  'calculadora-asignacion-familiar': {
+    seoTitle: 'Asignación Familiar 2026: tramos y monto', // 43
+    seoDescription:
+      'Calcula la asignación familiar 2026 por carga según tu sueldo: tramos $22.601, $13.870 y $4.382. Datos DT/SUSESO. Gratis.', // 128
+  },
+
+  'calculadora-gratificacion-legal': {
+    seoTitle: 'Gratificación Legal 2026: ¿cuánto te toca?', // 44
+    seoDescription:
+      'Calcula la gratificación legal 2026: 25% del sueldo con tope 4,75 IMM ($553.553). Mensual o anual. Basado en Código del Trabajo.', // 132
+  },
+
+  'calculadora-sueldo-liquido': {
+    seoTitle: 'Sueldo Líquido 2026: de bruto a líquido al instante', // 51
+    seoDescription:
+      'Calcula tu sueldo líquido 2026 con AFP, 7% salud, cesantía e impuesto. Ejemplo con cifras reales. Gratis, actualizado Chile.', // 128
+  },
+
+  'calculadora-finiquito': {
+    seoTitle: 'Finiquito 2026: calcula indemnización y vacaciones', // 51
+    seoDescription:
+      'Estima tu finiquito en Chile: años de servicio, vacaciones proporcionales y gratificación. Según causal de término. Gratis.', // 126
+  },
+
+  'calculadora-indemnizacion-anos-servicio': {
+    seoTitle: 'Indemnización por Años 2026: tope 90 UF', // 42
+    seoDescription:
+      'Calcula la indemnización por años de servicio en Chile. 30 días por año, tope 11 años y 90 UF. Ideal con finiquito. Gratis.', // 128
+  },
+
+  'calculadora-impuesto-segunda-categoria': {
+    seoTitle: 'Impuesto 2ª Categoría 2026: calcula tu IUSC', // 47
+    seoDescription:
+      'Calcula el impuesto único de segunda categoría 2026 sobre tu sueldo. Tramos SII en UTM. Ejemplo claro en pesos. Gratis.', // 122
+  },
+
+  'calculadora-subsidio-habitacional': {
+    seoTitle: 'Subsidio Habitacional 2026: DS49, DS1 y DS19', // 46
+    seoDescription:
+      'Estima subsidio de vivienda MINVU 2026 según tramo, ahorro en UF y valor de la propiedad. DS49, DS01 y DS19. Referencial, gratis.', // 134
+  },
+
+  'calculadora-comparador-afp': {
+    seoTitle: 'Comisiones AFP 2026: compara y elige la más barata', // 52
+    seoDescription:
+      'Compara las 7 AFP 2026: Uno desde 0,46%. Ve cuánto pagas al mes con tu sueldo y cuánto ahorras al cambiar. Dato Superintendencia.', // 134
+  },
+
+  'calculadora-boleta-honorarios': {
+    seoTitle: 'Boleta de Honorarios 2026: retención 15,25%', // 47
+    seoDescription:
+      'Calcula bruto y líquido de tu boleta 2026 con retención 15,25% (Ley 21.133). Ejemplo $100.000 → $15.250 retenidos. SII.', // 128
+  },
+
+  'calculadora-horas-extra': {
+    seoTitle: 'Horas Extra 2026: calcula con jornada 42 horas', // 48
+    seoDescription:
+      'Calcula el valor de tus horas extra en Chile 2026. Jornada de 42 h (Ley 21.561), recargo 50% y festivos. Gratis.', // 120
+  },
+
+  'calculadora-uf-clp': {
+    seoTitle: 'UF a Pesos Hoy 2026: convierte al instante', // 44
+    seoDescription:
+      'Convierte UF a pesos chilenos y de CLP a UF con el valor del día. Ideal hipoteca, arriendo y contratos. Gratis.', // 116
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // BLOG (ya rankean o tienen imp sin clic)
+  // ══════════════════════════════════════════════════════════════════════════
+
+  'comparativa-comisiones-afp-2026': {
+    seoTitle: 'AFP más barata 2026: Uno 0,46% | Compara las 7', // 46
+    seoDescription:
+      'AFP Uno cobra 0,46% y ProVida 1,45% en 2026. Compara las 7 comisiones y calcula cuánto pierdes al año en la AFP equivocada. Dato oficial SP.', // 140
+  },
+
+  'como-funciona-gratificacion-legal': {
+    seoTitle: 'Gratificación Legal 2026: ¿cuánto me corresponde?', // 49
+    seoDescription:
+      'Descubre cuánto te toca de gratificación legal en 2026 con el sueldo mínimo de $553.553: 25% del sueldo, tope 4,75 IMM. Guía con datos DT.', // 138
+  },
+
+  'subsidios-minvu-2026-guia': {
+    seoTitle: 'Subsidio MINVU 2026: ¿cuál me corresponde? | Simula', // 51
+    seoDescription:
+      'Descubre qué subsidio de vivienda te corresponde en 2026 según tu ahorro y RSH. DS49, DS1 y DS19 desde 10 UF de ahorro. Simula gratis.', // 140
+  },
+
+  'reajuste-arriendo-uf-2026': {
+    seoTitle: 'Reajuste de Arriendo 2026: ¿cuánto puede subir? | UF', // 52
+    seoDescription:
+      '¿Te subieron el arriendo? Calcula el reajuste 2026 por UF o IPC según tu contrato y verifica cuánto te corresponde pagar realmente. Con ejemplo.', // 144
+  },
+
+  'tope-imponible-2026': {
+    seoTitle: 'Tope Imponible 2026: 90 UF en AFP y Salud | Calcula', // 51
+    seoDescription:
+      'El tope imponible 2026 es 90 UF (no 89,9) desde febrero, y 135,2 UF en cesantía. Mira cuánto cotizas si tu sueldo supera el tope, con ejemplo.', // 142
+  },
+
+  'diferencia-sueldo-bruto-liquido': {
+    seoTitle: 'Sueldo Bruto vs Líquido 2026: diferencia real en $', // 50
+    seoDescription:
+      'Cuánto te descuentan de AFP, salud y cesantía en 2026. Ejemplo de bruto a líquido y calculadora gratis. Chile actualizado.', // 126
+  },
+
+  'guia-horas-extra-chile': {
+    seoTitle: 'Horas Extra Chile 2026: recargo 50% y 42 horas', // 48
+    seoDescription:
+      'Cómo se pagan las horas extra en Chile 2026 con jornada de 42 horas. Recargo legal, topes y calculadora. Dirección del Trabajo.', // 130
+  },
+
+  'guia-iva-chile-2026': {
+    seoTitle: 'IVA Chile 2026: 19% y cómo calcularlo (SII)', // 44
+    seoDescription:
+      'Guía del IVA 19% en Chile 2026: agregar, quitar y ejemplos en pesos. Enlace a calculadora gratis. Base legal DL 825 / SII.', // 126
+  },
+
+  'boleta-honorarios-completo': {
+    seoTitle: 'Boleta de Honorarios 2026: retención 15,25% explicada', // 54
+    seoDescription:
+      'Todo sobre boleta de honorarios 2026: tasa 15,25%, líquido vs bruto y Operación Renta. Calculadora gratis según SII.', // 122
+  },
+
+  'cae-renegociacion-condonacion-2026': {
+    seoTitle: 'CAE 2026: cuota, renegociación y condonación', // 46
+    seoDescription:
+      'Cómo funciona el CAE en 2026: tasa 2%, plazos, condonación a 20 años y opciones si no puedes pagar. Simula tu cuota gratis.', // 130
+  },
+
+  'calcular-indemnizacion-por-anos': {
+    seoTitle: 'Indemnización por Años de Servicio 2026: calcula', // 50
+    seoDescription:
+      'Cómo calcular la indemnización por años de servicio en Chile: 30 días por año, tope 90 UF. Ejemplo y calculadora gratis.', // 126
+  },
+
+  'permiso-circulacion-segunda-cuota-agosto-2026': {
+    seoTitle: 'Permiso de circulación 2ª cuota 2026: hasta el 31 de agosto', // 58
+    seoDescription:
+      'Segunda cuota del permiso de circulación 2026: del 1 al 31 de agosto. Requisitos, multas por atraso y cómo estimar el valor. ChileAtiende.', // 142
+  },
+
+  'revision-tecnica-chile-2026-calendario-patente': {
+    seoTitle: 'Revisión técnica 2026: calendario por patente y requisitos', // 58
+    seoDescription:
+      'Calendario de revisión técnica 2026 por dígito de patente, consulta en PRT, multas y vínculo con el permiso de circulación. ChileAtiende.', // 140
+  },
+
+  'cotizacion-empleador-3-5-agosto-2026-costo-pyme': {
+    seoTitle: 'Cotización empleador 3,5% agosto 2026: costo empresa Chile', // 58
+    seoDescription:
+      'Desde agosto 2026 la cotización del empleador sube a 3,5% (Ley 21.735). Ejemplos en CLP y cómo estimar el costo PYME. No se descuenta al trabajador.', // 150
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // GUÍAS PILLAR
+  // ══════════════════════════════════════════════════════════════════════════
+
+  'sueldo-liquido-chile': {
+    seoTitle: 'Sueldo Líquido Chile 2026: descuentos y ejemplos en $', // 54
+    seoDescription:
+      'Cómo se calcula el sueldo líquido 2026: AFP, 7% salud, cesantía, IUSC y topes. Ejemplos en pesos y calculadora gratis. Fuentes DT y SP.', // 140
+  },
+
+  'finiquito-laboral-chile': {
+    seoTitle: 'Finiquito Laboral Chile 2026: guía con ejemplos en $', // 52
+    seoDescription:
+      'Guía del finiquito 2026: indemnización, vacaciones y gratificación según causal. Ejemplos y calculadora. Código del Trabajo / DT.', // 132
+  },
+
+  'iva-boleta-honorarios-chile': {
+    seoTitle: 'IVA y Boleta de Honorarios Chile 2026: guía SII', // 48
+    seoDescription:
+      'IVA 19% y boleta de honorarios con retención 15,25% en 2026. Ejemplos y calculadoras gratis. Bases SII y Ley 21.133.', // 124
+  },
+
+  'uf-utm-indicadores-chile': {
+    seoTitle: 'UF y UTM Chile 2026: qué son y cómo convertir', // 46
+    seoDescription:
+      'Guía de UF, UTM e IPC en Chile 2026: para qué se usan y cómo pasar a pesos. Conversores gratis con valor del día.', // 122
   },
 };
 
 /**
  * ============================================================================
- * RESUMEN DE CONTEO (carácter a carácter, espacios incluidos)
+ * GSC 24 h (2026-07-08) → acciones de este archivo
  * ============================================================================
- *  slug                               | title | desc
- *  -----------------------------------|-------|------
- *  comparativa-comisiones-afp-2026    |  46   | 140
- *  como-funciona-gratificacion-legal  |  49   | 138
- *  subsidios-minvu-2026-guia          |  51   | 146
- *  reajuste-arriendo-uf-2026          |  52   | 144
- *  tope-imponible-2026                |  51   | 142
- *  calculadora-patente-comercial      |  48   | 142
- *  calculadora-credito-cae            |  46   | 146
- *  Todos los títulos ≤ 58 (seguro en mobile). Descripciones ≤ 155.
- *
- * ACCIONES ADICIONALES RECOMENDADAS (fuera de este override):
- *  - Slug migrado de 'tope-imponible-89-9-uf-explicado' a 'tope-imponible-2026'
- *    con redirect 301 en next.config.ts (el 89,9 en la URL envejecía y
- *    contradecía el contenido).
- *  - En gratificación, confirmar la fórmula exacta del tope en pesos con la DT
- *    antes de publicar; si no se confirma, usar la Variante B (sin pesos).
- *  - Verificar que ningún fallback (title/name/description) siga exponiendo
- *    "89,9 UF" ni "pago contingente" en el CAE.
+ *  URL / tema                         | Imp ~ | CTR ~  | Acción
+ *  -----------------------------------|-------|--------|------------------
+ *  calculadora-iva                    | 585   | 0,2%   | Override fuerte (neto/bruto 19%)
+ *  calculadora-patente-comercial      | 483   | 3,7%   | Afirmar gancho "¿cuánto pagar?"
+ *  blog AFP / tope / arriendo / MINVU | 40-144| <2%    | Overrides numéricos
+ *  guía sueldo líquido                | 120   | 1,7%   | Override + cifra
+ *  calculadora-cae                    | 80    | 7,5%   | "Simulador" + tasa 2% + no FES
+ *  vacaciones / multas / permiso      | 30-90 | medio  | Titles con 2026 + verbo
  * ============================================================================
  */

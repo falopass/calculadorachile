@@ -2,9 +2,9 @@
 
 # 🇨🇱 CalculaChile
 
-**Chile's most complete calculator platform**
+**Calculadoras laborales, tributarias y financieras para Chile**
 
-40+ financial, tax, and legal calculators — updated with 2026 values from the Central Bank of Chile.
+39 calculadoras activas · valores oficiales 2026 · SEO / AdSense / YMYL
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -13,202 +13,259 @@
 [![AdSense](https://img.shields.io/badge/Monetization-AdSense-4285f4?style=for-the-badge&logo=google-ads&logoColor=white)](https://adsense.google.com)
 [![Vitest](https://img.shields.io/badge/Tests-Vitest-6e9f18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev)
 
-**[🌐 Live at calculadorachile.cl](https://calculadorachile.cl)**  ·  [📚 Blog](https://calculadorachile.cl/blog)  ·  [📊 AFP Comparator](https://calculadorachile.cl/calculadoras/comparador-afp)
+**[🌐 calculadorachile.cl](https://calculadorachile.cl)**
+· [📚 Blog](https://calculadorachile.cl/blog)
+· [📖 Guías](https://calculadorachile.cl/guias)
+· [📊 Comparador AFP](https://calculadorachile.cl/calculadoras/calculadora-comparador-afp)
 
 </div>
 
 ---
 
-## 📖 Overview
+## Qué es
 
-CalculaChile is a production platform serving **40+ financial and legal calculators tailored specifically for Chile**. From liquid salary and severance calculations to mortgage simulations, government subsidies, and traffic fines — everything a Chilean citizen or business needs to make informed financial decisions.
+**CalculaChile** es una plataforma web chilena de calculadoras laborales, tributarias, previsionales y financieras. Es un producto **YMYL** (Your Money / Your Life): un error en una fórmula, monto o fuente puede afectar decisiones económicas reales.
 
-Built with performance, accessibility, and SEO as first-class concerns. Live values are fetched from the **Central Bank of Chile API** (UF, UTM, USD, EUR).
+Prioridad del producto:
+
+1. **Confiabilidad** de cálculos con base legal/oficial.
+2. **SEO orgánico** y señales E-E-A-T.
+3. **Monetización AdSense** sin romper UX ni confianza.
+4. **Ship rápido y bajo costo** (stack liviano, sin dependencias de relleno).
+
+Sitio en producción: [calculadorachile.cl](https://calculadorachile.cl).
 
 ---
 
-## ✨ Key Features
+## Estado del catálogo
 
-| Feature | Description |
+| Pieza | Cantidad |
+|-------|----------|
+| Calculadoras activas | **39** (`src/data/calculators.ts`) |
+| Módulos de cálculo + tests | **40** (incluye histórico `bono-bodas-oro`) |
+| Guías pillar | **12** |
+| Artículos de blog | **15** |
+| Categorías | **12** |
+| `noIndex` (fuera del índice) | **8** calculadoras delgadas |
+
+`bono-bodas-oro` está **retirado del catálogo público**: la ruta responde **410 Gone**. No reactivarlo sin fórmula verificada y aprobación explícita.
+
+### Phase 1 — Core (15)
+
+| Calculadora | URL |
+|-------------|-----|
+| Sueldo líquido | `/calculadoras/calculadora-sueldo-liquido` |
+| Finiquito | `/calculadoras/calculadora-finiquito` |
+| UF ↔ CLP | `/calculadoras/calculadora-uf-clp` |
+| IVA | `/calculadoras/calculadora-iva` |
+| Horas extra | `/calculadoras/calculadora-horas-extra` |
+| Vacaciones proporcionales | `/calculadoras/calculadora-vacaciones-proporcionales` |
+| Boleta de honorarios | `/calculadoras/calculadora-boleta-honorarios` |
+| UTM ↔ CLP | `/calculadoras/calculadora-utm-clp` |
+| Gratificación legal | `/calculadoras/calculadora-gratificacion-legal` |
+| Indemnización por años de servicio | `/calculadoras/calculadora-indemnizacion-anos-servicio` |
+| Pensión alimenticia | `/calculadoras/calculadora-pension-alimenticia` |
+| Reajuste de arriendo | `/calculadoras/calculadora-reajuste-arriendo` |
+| Permiso de circulación | `/calculadoras/calculadora-permiso-circulacion` |
+| Costo empleado PYME | `/calculadoras/calculadora-costo-empleado-pyme` |
+| Crédito hipotecario | `/calculadoras/calculadora-credito-hipotecario` |
+
+### Phase 2 — Nicho (15)
+
+Operación Renta, contribuciones, notaría, plusvalía, subsidio habitacional, patente comercial, comparador AFP, APV, intereses por mora, asignación familiar, CAE, crédito automotriz, multas de tránsito, costo TAG (`noIndex`), cuenta de luz.
+
+### Phase 3 — Complementarias (9)
+
+Impuesto 2ª categoría, PPM, y varias con `noIndex`: subsidio agua, cotización independientes, propina legal, gastos comunes, conversor divisas, aguinaldo, PGU.
+
+---
+
+## Características reales
+
+| Feature | Descripción |
 |---------|-------------|
-| 🧮 **40+ Calculators** | Salary, mortgage, tax, AFP comparison, subsidies, and more |
-| 📈 **Interactive SVG Charts** | Real-time amortization, projections, comparisons |
-| 💾 **PNG Export** | Download results to share or archive |
-| 🔄 **Scenario Comparator** | Compare up to 3 scenarios side by side (e.g., different AFPs) |
-| 📜 **Calculation History** | Local storage of past calculations for quick access |
-| ⚡ **Live Values** | UF, UTM, USD, EUR from Banco Central de Chile |
-| 📱 **Fully Responsive** | Works on mobile, tablet, desktop |
-| ♿ **WCAG 2.1 AA** | Keyboard navigation, screen reader support |
-| 🔍 **SEO-Optimized** | Schema.org, meta tags, structured content |
-| 🎨 **Immersive UI** | Framer Motion, GSAP, Three.js, Lenis smooth scroll |
+| 🧮 **39 calculadoras** | Laborales, impuestos, vivienda, vehículos, pensiones, hogar, etc. |
+| ⚡ **Valores en vivo** | UF, UTM, dólar y euro vía `/api/values` (BCentral → Mindicador → fallback) |
+| 📈 **Gráficos SVG** | Amortización, proyecciones y comparaciones donde aplica |
+| 💾 **Export / historial** | Export de resultados e historial local en calculadoras premium |
+| 🔍 **SEO YMYL** | Metadata, sitemaps segmentados, JSON-LD, FAQ, fuentes oficiales, disclaimers |
+| 📱 **Mobile-first** | Light-only, Geist Sans/Mono, accesibilidad básica |
+| 💰 **AdSense + GA4** | Monetización y analítica de producción |
+
+**No forman parte del stack:** Three.js, React Three Fiber, GSAP, Lenis, dark mode.
 
 ---
 
-## 📊 Calculator Catalog
+## Stack
 
-### Core Set (Phase 1) — 15 calculators
+| Tecnología | Uso |
+|------------|-----|
+| **Next.js 15** (App Router) | Framework y rutas |
+| **React 19** + **TypeScript 5** | UI tipada |
+| **Tailwind CSS 3** | Estilos (light-only) |
+| **Framer Motion 12** | Microinteracciones |
+| **Lucide React** | Íconos |
+| **Vitest 3** + jsdom | Tests de fórmulas |
+| **canvas** (dev) | OG images server-side donde aplica |
+| **Vercel** | Deploy |
 
-| Calculator | Path |
-|------------|------|
-| Liquid Salary | `/calculadoras/sueldo-liquido` |
-| Fee Invoice (Boleta de Honorarios) | `/calculadoras/boleta-honorarios` |
-| Vacation Days | `/calculadoras/vacaciones` |
-| Severance (Finiquito) | `/calculadoras/finiquito` |
-| Indemnization | `/calculadoras/indemnizacion` |
-| Overtime | `/calculadoras/horas-extra` |
-| Gratification | `/calculadoras/gratificacion` |
-| Family Allowance | `/calculadoras/asignacion-familiar` |
-| Christmas Bonus | `/calculadoras/aguinaldo` |
-| Child Support | `/calculadoras/pension-alimenticia` |
-| Mortgage Credit | `/calculadoras/credito-hipotecario` |
-| Auto Loan | `/calculadoras/credito-automotriz` |
-| Student Loan (CAE) | `/calculadoras/credito-cae` |
-| AFP Comparator | `/calculadoras/comparador-afp` |
-| UF to CLP | `/calculadoras/uf-clp` |
-
-### Niche Set (Phase 2) — 15 specialized calculators
-
-Tax calculations (IVA, Impuesto Segunda Categoría, PPM), government subsidies (PGU, Bono Bodas de Oro, Subsidio Habitacional, Subsidio Agua), business operations (Costo Empleado, Patente Comercial, Contribuciones), and transit (Permiso Circulación, Costo TAG).
-
-### Additional Set (Phase 3) — 10+ complementary tools
-
-Traffic fines, utility bills, common expenses, rent adjustments, currency conversion, tip legality, and more.
+Verifica siempre `package.json` antes de asumir versiones.
 
 ---
 
-## 🛠️ Tech Stack
+## Arquitectura
 
-<div align="center">
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| ![Next.js](https://img.shields.io/badge/-Next.js-000000?logo=next.js) | 15.2.4 | React framework with App Router |
-| ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?logo=typescript) | 5.x | Type safety |
-| ![Tailwind](https://img.shields.io/badge/-Tailwind-38bdf8?logo=tailwind-css) | 3.4 | Utility-first styling |
-| ![Framer Motion](https://img.shields.io/badge/-Framer_Motion-0055ff?logo=framer) | 12.38 | Animations |
-| ![Three.js](https://img.shields.io/badge/-Three.js-000000?logo=three.js) | 0.183 | 3D graphics |
-| ![R3F](https://img.shields.io/badge/-R3F-000000?logo=react) | 9.5 | Three.js for React |
-| ![GSAP](https://img.shields.io/badge/-GSAP-88ce02?logo=gsap) | 3.14 | Advanced animations |
-| ![Lenis](https://img.shields.io/badge/-Lenis-1a1a1a) | 1.3 | Smooth scroll |
-| ![Vitest](https://img.shields.io/badge/-Vitest-6e9f18?logo=vitest) | 3.1 | Testing |
-
-</div>
-
----
-
-## 🏗️ Architecture
-
-```
-CalculaChile/
-├── src/
-│   ├── app/                       # Next.js App Router
-│   │   ├── page.tsx               # Home with calculator grid
-│   │   ├── calculadoras/[slug]/   # Dynamic calculator pages
-│   │   ├── blog/[slug]/           # SEO-optimized articles
-│   │   └── api/values/            # Banco Central API integration
-│   ├── components/
-│   │   ├── calculator/            # 30+ calculator components
-│   │   ├── creative/              # 3D and animation components
-│   │   ├── ads/                   # Google AdSense integration
-│   │   └── analytics/             # Google Analytics
-│   ├── lib/
-│   │   ├── calculations/          # 40 files of pure business logic
-│   │   ├── api/                   # Banco Central API client
-│   │   └── hooks/                 # useLiveValues, etc.
-│   └── data/
-│       ├── calculators.ts         # Metadata (1,700+ lines)
-│       └── articles.ts            # SEO blog articles
-├── public/                        # Static assets
-└── tests/                         # E2E tests
+```text
+src/
+├── app/
+│   ├── api/values/              # UF, UTM, dólar, euro
+│   ├── calculadoras/[slug]/    # páginas de calculadoras
+│   ├── blog/ · guias/ · categoria/
+│   ├── sitemap*.xml/            # sitemaps segmentados
+│   └── layout.tsx               # fuentes, AdSense, JSON-LD global
+├── components/
+│   ├── calculator/              # shell premium, FAQ, results, sources
+│   ├── ads/ · analytics/ · seo/
+│   └── DisclaimerYMYL.tsx
+├── data/
+│   ├── calculators.ts           # catálogo activo (39)
+│   ├── articles.ts · guias.ts
+│   └── seo-overrides.ts         # titles/descriptions CTR
+├── lib/
+│   ├── calculations/            # lógica pura + __tests__/
+│   ├── api/                     # BCentral, Mindicador
+│   ├── values/                  # constants, fallback, snapshots
+│   ├── seo/                     # schema, metadata, sitemaps, author
+│   └── formatters.ts            # CLP / UF / UTM chilenos
+└── types/calculator.ts          # contratos compartidos
 ```
 
----
+### Patrón de una calculadora activa
 
-## 💰 Monetization
+1. **Catálogo** — `src/data/calculators.ts` (`id`, `slug`, inputs, FAQ, sources, `lastReviewed`, …).
+2. **Lógica pura** — `src/lib/calculations/<modulo>.ts` + `*ToResults`.
+3. **Wiring UI** — `calculationFunctions[calculator.id]` en `CalculatorPageClient.tsx`.
+4. **Test** — `src/lib/calculations/__tests__/<modulo>.test.ts`.
 
-**100% Google AdSense** with strategic placement:
-
-- **Display Ads** — sidebar and between results
-- **Native Ads** — integrated into calculation flow
-- **Mobile Ads** — optimized for mobile viewport
-
-Revenue optimized through content strategy (SEO blog articles), high-intent calculators (mortgage, salary), and long dwell time from comparison tools.
+La clave de ejecución es `calculator.id` (no el nombre del archivo). El `slug` define la URL pública: **no cambiar sin plan SEO**.
 
 ---
 
-## ⚙️ Installation
+## Valores económicos
+
+```text
+GET /api/values  →  BCentral → Mindicador → fallback local
+```
+
+- Cache: `revalidate = 3600`, `s-maxage=3600, stale-while-revalidate=86400`.
+- Snapshot diario vía GitHub Action (`.github/workflows/update-values.yml` + `scripts/update-values.mjs`).
+- Constantes legales (AFP, topes, tramos, ingreso mínimo) en `src/lib/values/constants.ts`.
+
+No hardcodear UF/UTM/dólar/tasas en componentes.
+
+---
+
+## Comandos
 
 ```bash
-# Clone
-git clone https://github.com/falopass/calculadorachile.git
-cd calculadorachile
-
-# Install
 npm install
-
-# Development
-npm run dev
-
-# Type check
-npx tsc --noEmit
-
-# Tests
-npm run test
-
-# Build
+npm run dev             # http://localhost:3000
 npm run build
+npm start
+npm run lint
+npm run typecheck
+npm run format:check
+npm test                # Vitest watch
+npm run test:run        # una pasada
+npm run test:coverage
 ```
 
 ---
 
-## 🚀 Deployment
+## Variables de entorno
 
-Deployed to **Vercel** with automatic deploys from `main`. Central Bank values are cached at the edge for performance. AdSense is loaded async to avoid blocking Core Web Vitals.
+```bash
+# Banco Central (opcional; sin ellas se usa Mindicador/fallback)
+BCENTRAL_USER=
+BCENTRAL_PASS=
+
+NEXT_PUBLIC_SITE_URL=https://calculadorachile.cl
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXX
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
+DEBUG=false
+```
+
+Secretos de producción solo en **Vercel Dashboard**. No commitear `.env` ni credenciales.
+
+En dev/staging, el publisher placeholder `ca-pub-XXXXXXX` desactiva la carga real de AdSense; no “arreglarlo”.
 
 ---
 
-## 📊 About This Project
+## SEO, YMYL y AdSense
 
-CalculaChile is part of an indie SaaS portfolio focused on serving the Chilean market with high-quality, freely accessible tools. Solo-built and maintained.
+- Overrides de title/description: `src/data/seo-overrides.ts`.
+- Schema.org: `src/lib/seo/schema.ts` (Organization, WebSite, FAQ, HowTo, SoftwareApplication, Article, Breadcrumbs, …).
+- **No** usar `LocalBusiness`: es plataforma web nacional, no local físico.
+- Disclaimers YMYL, fuentes oficiales y autoría forman parte del producto.
+- Regla de oro: **sin fuente oficial verificada, no se cambia una fórmula** (SII, DT, BCentral, Superintendencia de Pensiones, CMF, IPS, MINVU, BCN/Ley Chile, etc.).
 
-**Live URL:** [calculadorachile.cl](https://calculadorachile.cl)
-**Built by:** Diego Bravo Opazo — [Portfolio](https://github.com/falopass)
+---
+
+## Desarrollo con Grok Build (Grok 4.5)
+
+| Doc | Rol |
+|-----|-----|
+| [`AGENTS.md`](./AGENTS.md) | Constitución del producto |
+| [`docs/PRODUCT_CONTEXT.md`](./docs/PRODUCT_CONTEXT.md) | Snapshot vivo (P0, números, anti-objetivos) |
+| [`docs/GROK_BUILD.md`](./docs/GROK_BUILD.md) | Cómo trabajar en el TUI |
+| [`.grok/`](./.grok/) | Skills, slash, rules, hooks |
+
+```powershell
+cd C:\code\SaaS2\CalculaChile
+grok
+# primera vez: /hooks-trust
+# /p0-wiring  |  /ymyl-audit  |  /ship-check
+```
+
+Config usuario: `~/.grok/config.toml` con `models.default = "grok-build"`, memory on, skills pyme deshabilitadas.
+
+---
+
+## Qué no tocar sin aprobación
+
+- Fórmulas, topes o tasas sin fuente oficial.
+- Slugs, canonicals, redirects, 410, robots, sitemaps.
+- Placements de AdSense y structured data YMYL.
+- Reactivar `bono-bodas-oro`.
+- Dark mode o dependencias 3D/GSAP/Lenis.
+- Formato de moneda chilena fuera de `formatters.ts`.
+- Secretos o credenciales.
+
+---
+
+## Deploy
+
+**Vercel**, deploy automático desde `main`. Valores del Banco Central cacheados en edge/API. AdSense se carga de forma async para no bloquear Core Web Vitals.
+
+---
+
+## Autor
+
+Construido y mantenido por **Diego Bravo Opazo** — [GitHub](https://github.com/falopass).
+
+**Live:** [calculadorachile.cl](https://calculadorachile.cl)
 
 ---
 
 <details>
-<summary><b>🇪🇸 Descripción en español</b></summary>
+<summary><b>English overview</b></summary>
 
 <br>
 
-## Sobre CalculaChile
+CalculaChile is a production Chilean platform with **39 active calculators** for salaries, taxes, pensions, housing, vehicles and household costs. Live economic indicators (UF, UTM, USD, EUR) come from the Central Bank / Mindicador with local fallback.
 
-CalculaChile es una plataforma en producción que ofrece **40+ calculadoras financieras y legales específicas para Chile**. Desde sueldo líquido y finiquitos hasta simulaciones hipotecarias, subsidios estatales y multas de tránsito — todo lo que un chileno o empresa necesita para tomar decisiones informadas.
+Stack: **Next.js 15, React 19, TypeScript 5, Tailwind 3, Framer Motion, Vitest**. Monetization: **Google AdSense**. Deploy: **Vercel**.
 
-Construida con performance, accesibilidad (WCAG 2.1 AA) y SEO como prioridades. Los valores en vivo (UF, UTM, USD, EUR) se obtienen desde la **API del Banco Central de Chile**.
-
-## Características principales
-
-- 🧮 40+ calculadoras: sueldo, hipotecario, impuestos, AFP, subsidios y más
-- 📈 Gráficos SVG interactivos en tiempo real
-- 💾 Export a PNG
-- 🔄 Comparador de escenarios (hasta 3 lado a lado)
-- 📜 Historial local de cálculos
-- ⚡ Valores oficiales desde Banco Central
-- ♿ Accesible (WCAG 2.1 AA)
-- 🔍 SEO optimizado con Schema.org
-- 🎨 UI inmersiva con Framer Motion, GSAP, Three.js
-
-## Producto en vivo
-
-**[calculadorachile.cl](https://calculadorachile.cl)** · Construido por Diego Bravo Opazo
+This is a **YMYL** product: formulas require verified official sources. See `AGENTS.md` for contributor/agent rules.
 
 </details>
-
----
-
-<div align="center">
-
-**⭐ If you find this project useful, please star the repo!**
-
-</div>

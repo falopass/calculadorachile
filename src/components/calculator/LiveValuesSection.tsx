@@ -76,6 +76,10 @@ const LiveValuesSection = memo(function LiveValuesSection() {
           </div>
         ))}
       </div>
+      <p className="px-4 py-2 text-[11px] leading-snug text-[var(--foreground-muted)] border-t border-[var(--border)]">
+        Las calculadoras core (sueldo, UF, hipoteca, boleta) usan estos mismos
+        valores de UF/UTM al calcular.
+      </p>
     </div>
   );
 });

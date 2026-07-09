@@ -1,8 +1,6 @@
 // ============================================
 // Tests de subsidio habitacional MINVU
-// ----------------------------------------------
-// Verifica los 3 subsidios (DS49, DS01, DS19), el ahorro mínimo
-// requerido por tramo y el manejo de errores (DS01 sin tramo3).
+// Inputs en UF (sin doble conversión).
 // ============================================
 
 import { describe, it, expect } from 'vitest';
@@ -15,29 +13,52 @@ import {
 } from '@/lib/values/constants';
 
 describe('calculateSubsidioHabitacional', () => {
-  describe('DS49 (Fondo Solidario)', () => {
-    it('tramo1 entrega el subsidio máximo del decreto', () => {
+  describe('unidades UF', () => {
+    it('trata valorPropiedad y ahorro como UF (no divide por UF.valor)', () => {
       const r = calculateSubsidioHabitacional({
-        valorPropiedad: UF.valor * 600, // 600 UF
-        ahorro: UF.valor * 15,
+        valorPropiedadUF: 600,
+        ahorroUF: 15,
         tipoSubsidio: 'ds49',
         tramo: 'tramo1',
       });
-      expect(r.subsidioBaseUF).toBe(
-        SUBSIDIO_HABITACIONAL.ds49.tramo1.subsidioMaximoUF,
-      );
+      expect(r.valorPropiedadUF).toBe(600);
+      expect(r.ahorroUF).toBe(15);
+      expect(r.subsidioCLP).toBe(Math.round(r.subsidioBaseUF * UF.valor));
     });
 
-    it('tramo2 entrega menos subsidio que tramo1 (a mayor ingreso, menor apoyo)', () => {
+    it('sin tipoSubsidio no crashea y reporta error', () => {
+      const r = calculateSubsidioHabitacional({
+        valorPropiedadUF: 1000,
+        ahorroUF: 50,
+        tramo: 'tramo1',
+      });
+      expect(r.cumpleRequisitos).toBe(false);
+      expect(r.subsidioBaseUF).toBe(0);
+      expect(r.errores.some((e) => e.toLowerCase().includes('tipo'))).toBe(true);
+    });
+  });
+
+  describe('DS49 (Fondo Solidario)', () => {
+    it('tramo1 entrega el subsidio máximo del decreto', () => {
+      const r = calculateSubsidioHabitacional({
+        valorPropiedadUF: 600,
+        ahorroUF: 15,
+        tipoSubsidio: 'ds49',
+        tramo: 'tramo1',
+      });
+      expect(r.subsidioBaseUF).toBe(SUBSIDIO_HABITACIONAL.ds49.tramo1.subsidioMaximoUF);
+    });
+
+    it('tramo2 entrega menos subsidio que tramo1', () => {
       const t1 = calculateSubsidioHabitacional({
-        valorPropiedad: UF.valor * 500,
-        ahorro: UF.valor * 15,
+        valorPropiedadUF: 500,
+        ahorroUF: 15,
         tipoSubsidio: 'ds49',
         tramo: 'tramo1',
       });
       const t2 = calculateSubsidioHabitacional({
-        valorPropiedad: UF.valor * 500,
-        ahorro: UF.valor * 15,
+        valorPropiedadUF: 500,
+        ahorroUF: 15,
         tipoSubsidio: 'ds49',
         tramo: 'tramo2',
       });
@@ -46,24 +67,45 @@ describe('calculateSubsidioHabitacional', () => {
   });
 
   describe('DS01 (Sectores Medios)', () => {
-    it('tramo3 NO existe en DS01: reporta error y cae al tramo 2', () => {
+    it('tramo2 tope propiedad 1.600 UF (ChileAtiende)', () => {
       const r = calculateSubsidioHabitacional({
-        valorPropiedad: UF.valor * 1500,
-        ahorro: UF.valor * 50,
+        valorPropiedadUF: 1500,
+        ahorroUF: 40,
+        tipoSubsidio: 'ds01',
+        tramo: 'tramo2',
+      });
+      expect(r.montoMaximoPropiedadUF).toBe(1600);
+      expect(r.ahorroRequeridoUF).toBe(40);
+    });
+
+    it('tramo3 existe con tope 2.200 UF', () => {
+      const r = calculateSubsidioHabitacional({
+        valorPropiedadUF: 2000,
+        ahorroUF: 80,
         tipoSubsidio: 'ds01',
         tramo: 'tramo3',
       });
-      expect(r.errores.length).toBeGreaterThan(0);
-      expect(r.errores.some((e) => e.includes('tramo 3'))).toBe(true);
-      expect(r.cumpleRequisitos).toBe(false);
+      expect(r.montoMaximoPropiedadUF).toBe(2200);
+      expect(r.subsidioBaseUF).toBe(SUBSIDIO_HABITACIONAL.ds01.tramo3!.subsidioMaximoUF);
+    });
+
+    it('zona extrema sube tope T2 a 1.800 UF', () => {
+      const r = calculateSubsidioHabitacional({
+        valorPropiedadUF: 1700,
+        ahorroUF: 40,
+        tipoSubsidio: 'ds01',
+        tramo: 'tramo2',
+        esZonaExtrema: true,
+      });
+      expect(r.montoMaximoPropiedadUF).toBe(1800);
     });
   });
 
   describe('DS19 (Integración Social)', () => {
     it('usa la tabla DS19 con tope de propiedad propio', () => {
       const r = calculateSubsidioHabitacional({
-        valorPropiedad: UF.valor * 2000,
-        ahorro: UF.valor * 100,
+        valorPropiedadUF: 2000,
+        ahorroUF: 100,
         tipoSubsidio: 'ds19',
         tramo: 'tramo1',
       });
@@ -78,8 +120,8 @@ describe('calculateSubsidioHabitacional', () => {
 
   it('ahorro insuficiente reporta error y NO cumple requisitos', () => {
     const r = calculateSubsidioHabitacional({
-      valorPropiedad: UF.valor * 600,
-      ahorro: UF.valor * 1, // muy bajo
+      valorPropiedadUF: 600,
+      ahorroUF: 1,
       tipoSubsidio: 'ds49',
       tramo: 'tramo1',
     });
@@ -89,8 +131,8 @@ describe('calculateSubsidioHabitacional', () => {
 
   it('propiedad sobre el tope reporta error', () => {
     const r = calculateSubsidioHabitacional({
-      valorPropiedad: UF.valor * 5000, // demasiado cara para DS49
-      ahorro: UF.valor * 50,
+      valorPropiedadUF: 5000,
+      ahorroUF: 50,
       tipoSubsidio: 'ds49',
       tramo: 'tramo1',
     });
@@ -99,12 +141,9 @@ describe('calculateSubsidioHabitacional', () => {
   });
 
   it('cumple los 3 criterios: cumpleRequisitos = true', () => {
-    const ahorroMin =
-      SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF.ds49.tramo1 * UF.valor;
     const r = calculateSubsidioHabitacional({
-      // DS49 tope propiedad: 450 UF → usamos 400 UF (válido).
-      valorPropiedad: UF.valor * 400,
-      ahorro: ahorroMin,
+      valorPropiedadUF: 400,
+      ahorroUF: SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF.ds49.tramo1,
       tipoSubsidio: 'ds49',
       tramo: 'tramo1',
     });
@@ -114,18 +153,18 @@ describe('calculateSubsidioHabitacional', () => {
 
   it('subsidio en CLP = subsidioBaseUF × valor UF', () => {
     const r = calculateSubsidioHabitacional({
-      valorPropiedad: UF.valor * 600,
-      ahorro: UF.valor * 15,
+      valorPropiedadUF: 600,
+      ahorroUF: 15,
       tipoSubsidio: 'ds49',
       tramo: 'tramo1',
     });
     expect(r.subsidioCLP).toBe(Math.round(r.subsidioBaseUF * UF.valor));
   });
 
-  it('déficit = propiedad − subsidio − ahorro (nunca negativo)', () => {
+  it('déficit nunca negativo', () => {
     const r = calculateSubsidioHabitacional({
-      valorPropiedad: UF.valor * 100,
-      ahorro: UF.valor * 200, // mucho ahorro
+      valorPropiedadUF: 100,
+      ahorroUF: 200,
       tipoSubsidio: 'ds49',
       tramo: 'tramo1',
     });

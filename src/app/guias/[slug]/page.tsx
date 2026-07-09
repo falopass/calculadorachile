@@ -47,6 +47,7 @@ import { AUTHOR } from '@/lib/seo/author';
 import { guias, getGuiaBySlug, type Guia } from '@/data/guias';
 import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
+import { seoOverrides } from '@/data/seo-overrides';
 import snapshot from '@/lib/values/snapshot.json';
 
 interface PageProps {
@@ -134,10 +135,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
+  const override = seoOverrides[guia.slug];
   return buildPageMetadata({
     path: `/guias/${guia.slug}`,
-    title: guia.title,
-    description: guia.description,
+    title: override?.seoTitle ?? guia.title,
+    description: override?.seoDescription ?? guia.description,
     keywords: guia.keywords,
     ogType: 'article',
     publishedTime: guia.publishedAt,
@@ -283,27 +285,27 @@ export default async function GuiaPage({ params }: PageProps) {
               </span>
             </div>
 
-            <h1 className="heading-display text-3xl text-[var(--foreground)] md:text-5xl">
+            <h1 className="heading-display break-words text-2xl text-[var(--foreground)] sm:text-3xl md:text-5xl">
               {guia.title}
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-[var(--foreground-secondary)] md:text-xl">
+            <p className="mt-5 text-base leading-relaxed text-[var(--foreground-secondary)] sm:text-lg md:text-xl">
               {guia.description}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[var(--foreground-muted)]">
+            <div className="mt-6 flex flex-col gap-3 text-sm text-[var(--foreground-muted)] sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/acerca-de"
-                className="group flex items-center gap-2 transition-colors hover:text-[var(--accent)]"
+                className="group flex min-w-0 items-center gap-2 transition-colors hover:text-[var(--accent)]"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
                   DS
                 </div>
                 <span className="group-hover:underline">Por {AUTHOR.name}</span>
               </Link>
-              <span aria-hidden className="text-[var(--border)]">
+              <span aria-hidden className="hidden text-[var(--border)] sm:inline">
                 ·
               </span>
-              <span>
+              <span className="min-w-0 break-words leading-relaxed">
                 {formattedPublished && (
                   <>
                     Publicado el{' '}
@@ -319,19 +321,19 @@ export default async function GuiaPage({ params }: PageProps) {
       </header>
 
       <article className="container-base py-8 md:py-12">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-12 lg:gap-12">
           {/* TOC */}
-          <aside className="order-1 lg:order-1 lg:col-span-3">
-            <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
-              <details className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 lg:hidden" open>
+          <aside className="order-1 min-w-0 lg:order-1 lg:col-span-3">
+            <div className="min-w-0 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
+              <details className="mb-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-5 lg:hidden" open>
                 <summary className="flex cursor-pointer select-none items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--foreground)]">
-                  <List className="h-4 w-4" />
+                  <List className="h-4 w-4 shrink-0" />
                   En esta guía
                 </summary>
                 <ol className="mt-3 list-none space-y-1">
                   {h2Sections.map((section, idx) => (
-                    <li key={section.id}>
-                      <a href={`#${section.id}`} className="toc-link block">
+                    <li key={section.id} className="min-w-0">
+                      <a href={`#${section.id}`} className="toc-link block break-words">
                         <span className="mr-2 tabular-nums text-[var(--foreground-muted)]">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
@@ -341,7 +343,7 @@ export default async function GuiaPage({ params }: PageProps) {
                   ))}
                 </ol>
               </details>
-              <div className="hidden lg:block">
+              <div className="hidden min-w-0 lg:block">
                 <TocSticky
                   items={h2Sections.map((s) => ({ id: s.id, title: s.title }))}
                   title="En esta guía"
@@ -351,7 +353,7 @@ export default async function GuiaPage({ params }: PageProps) {
           </aside>
 
           {/* Contenido */}
-          <div className="order-2 lg:col-span-8 lg:col-start-5">
+          <div className="order-2 min-w-0 lg:col-span-8 lg:col-start-5">
             {/* Hero card: intent */}
             <div className="mb-10 rounded-2xl border border-[var(--color-primary-100)] bg-[var(--accent-muted)] p-6 md:p-8">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
@@ -375,26 +377,19 @@ export default async function GuiaPage({ params }: PageProps) {
                   <section
                     key={section.id}
                     id={section.id}
-                    className="scroll-mt-28 rounded-2xl border-b border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm md:p-8"
+                    className="scroll-mt-28 overflow-hidden rounded-2xl border-b border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm sm:p-6 md:p-8"
                   >
-                    <div className="mb-5 flex items-center gap-3">
+                    <div className="mb-5 flex min-w-0 items-start gap-3">
                       <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--accent-muted)] text-[var(--accent)]">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h2 className="text-xl font-bold tracking-[-0.02em] text-[var(--foreground)] md:text-2xl">
+                      <h2 className="min-w-0 break-words text-lg font-bold tracking-[-0.02em] text-[var(--foreground)] sm:text-xl md:text-2xl">
                         {section.title}
                       </h2>
                     </div>
+                    {/* Estilos tipográficos: globals.css `.prose` (sin plugin typography). */}
                     <div
-                      className="prose prose-lg max-w-none
-                        prose-headings:text-[var(--foreground)]
-                        prose-headings:font-bold
-                        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                        prose-p:text-[var(--foreground-secondary)]
-                        prose-p:leading-relaxed
-                        prose-strong:text-[var(--foreground)]
-                        prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
-                        prose-li:text-[var(--foreground-secondary)]"
+                      className="prose min-w-0 max-w-none"
                       dangerouslySetInnerHTML={{ __html: section.html }}
                     />
                   </section>
@@ -404,11 +399,7 @@ export default async function GuiaPage({ params }: PageProps) {
                       {section.title}
                     </h3>
                     <div
-                      className="prose prose-lg max-w-none
-                        prose-headings:text-[var(--foreground)]
-                        prose-p:text-[var(--foreground-secondary)]
-                        prose-strong:text-[var(--foreground)]
-                        prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline"
+                      className="prose min-w-0 max-w-none"
                       dangerouslySetInnerHTML={{ __html: section.html }}
                     />
                   </div>

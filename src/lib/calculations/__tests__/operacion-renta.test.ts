@@ -3,7 +3,7 @@
 // ----------------------------------------------
 // Verifica la deducción de gastos/cotizaciones/APV, la aplicación
 // de la tabla 2026 en UTA y la retención sugerida según el
-// calendario Ley 21.578.
+// calendario Ley 21.133.
 // ============================================
 
 import { describe, it, expect } from 'vitest';

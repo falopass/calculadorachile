@@ -16,13 +16,16 @@ import type { Calculator } from '@/types/calculator';
  * Client island: maneja query, foco y navegación.
  */
 
+/** Chips home: prioriza URLs con impresiones GSC / intención de cobro AdSense. */
 const quickSlugs = [
-  'calculadora-patente-comercial',
+  'calculadora-iva',
   'calculadora-credito-cae',
-  'calculadora-subsidio-habitacional',
-  'calculadora-costo-tag',
+  'calculadora-patente-comercial',
   'calculadora-sueldo-liquido',
+  'calculadora-vacaciones-proporcionales',
+  'calculadora-permiso-circulacion',
   'calculadora-finiquito',
+  'calculadora-multas-transito',
 ];
 
 export default function SearchHero() {

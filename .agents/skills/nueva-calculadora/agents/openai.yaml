@@ -1,0 +1,2 @@
+display_name: Nueva calculadora
+default_prompt: Implementa o conecta una calculadora end-to-end en CalculaChile siguiendo catálogo + módulo puro + test + calculationFunctions. Respeta AGENTS.md y no inventes fórmulas sin fuente oficial.

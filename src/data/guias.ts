@@ -71,7 +71,7 @@ export const guias: Guia[] = [
     title: 'Sueldo líquido en Chile 2026: cómo se calcula paso a paso',
     intent: '¿Cuánto recibo de sueldo líquido si gano X bruto?',
     description:
-      'Guía completa del sueldo líquido en Chile 2026: AFP, salud, seguro de cesantía, impuesto único, topes imponibles y ejemplos numéricos en pesos chilenos.',
+      'Cómo se calcula el sueldo líquido 2026: AFP, 7% salud, cesantía, IUSC y topes. Ejemplos en pesos y calculadora gratis. Fuentes DT y SP.',
     category: 'laboral',
     categoryLabel: 'Laboral y sueldo',
     keywords: [
@@ -85,9 +85,10 @@ export const guias: Guia[] = [
       'tasa AFP obligatoria 10%',
       'gratificación legal 25%',
       'sueldo bruto a líquido',
+      'calculadora sueldo líquido',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
+    updatedAt: '2026-07-08',
     readingTime: 16,
     relatedCalculators: [
       'calculadora-sueldo-liquido',
@@ -574,7 +575,7 @@ export const guias: Guia[] = [
       '19% IVA',
       'boleta honorarios',
       'retención 15.25%',
-      'ley 21.578',
+      'ley 21.133',
       'SII',
       'impuesto valor agregado',
       'operación renta independientes',
@@ -595,7 +596,7 @@ export const guias: Guia[] = [
     sources: [
       { label: 'Servicio de Impuestos Internos', url: 'https://www.sii.cl' },
       { label: 'Ley sobre Impuesto a las Ventas y Servicios (DL 825)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=6369' },
-      { label: 'Ley 21.578 (calendario retención honorarios)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1191980' },
+      { label: 'Ley 21.133 (calendario retención honorarios)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1128420' },
     ],
     sections: [
       {
@@ -647,10 +648,10 @@ export const guias: Guia[] = [
       },
       {
         id: 'retencion-honorarios',
-        title: 'Retención de la boleta de honorarios (Ley 21.578)',
+        title: 'Retención de la boleta de honorarios (Ley 21.133)',
         level: 2,
         html: `<p>Cuando el pagador es una empresa o institución, debe <strong>retener una porción del bruto</strong> y enterarla al SII al mes siguiente. Si el pagador es una persona natural, no hay retención y el receptor declara y paga directamente.</p>
-<p>La <strong>Ley 21.578 de 2023</strong> estableció un calendario progresivo de retención que sube del 14,5% en 2025 al 17% en 2028:</p>
+<p>La <strong>Ley 21.133</strong> estableció un calendario progresivo de retención que sube del 14,5% en 2025 al 17% en 2028:</p>
 <table>
 <thead><tr><th>Año</th><th>Retención total</th><th>Impuesto renta</th><th>Cotización previsional</th></tr></thead>
 <tbody>
@@ -1592,7 +1593,7 @@ export const guias: Guia[] = [
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=29842',
       },
       {
-        label: 'Ley 21.578 — Calendario cotización honorarios',
+        label: 'Ley 21.133 — Calendario cotización honorarios',
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=1191726',
       },
       {
@@ -1687,12 +1688,12 @@ export const guias: Guia[] = [
 <tr><td>Comercio (sin régimen específico)</td><td>1,0%</td></tr>
 <tr><td>Transporte terrestre carga/pasajeros</td><td>0,3%</td></tr>
 <tr><td>Construcción</td><td>0,2%</td></tr>
-<tr><td>Profesionales 2da categoría</td><td>15,25% (calendario 21.578)</td></tr>
+<tr><td>Profesionales 2da categoría</td><td>15,25% (calendario 21.133)</td></tr>
 </tbody>
 </table>
 <div class="numeric-example"><div class="numeric-example__title">PYME comercial 14D — ventas $30.000.000/mes</div><ul><li>Ventas brutas con IVA: $30.000.000</li><li>Ventas netas: $30.000.000 ÷ 1,19 = $25.210.084</li><li>PPM (0,25%): $25.210.084 × 0,25% = $63.025</li></ul><span class="total">PPM a pagar al mes: $63.025</span></div>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Recargo / rebaja anual del PPM</strong><p>En abril de cada año, en la Operación Renta, se ajusta la tasa de PPM para los siguientes 12 meses según el resultado del ejercicio anterior. Si pagaste poco IDPC, la tasa baja. Si pagaste mucho, sube. Las empresas con utilidades en alza típicamente ven subidas de 0,1 a 0,2 puntos cada año.</p></div></aside>
-<p>Para profesionales independientes la tasa coincide con la <a href="/guias/iva-boleta-honorarios-chile">retención de boletas de honorarios</a> según el calendario Ley 21.578: 14,5% (2025), 15,25% (2026), 16% (2027), 17% (2028). Calcula tu PPM con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
+<p>Para profesionales independientes la tasa coincide con la <a href="/guias/iva-boleta-honorarios-chile">retención de boletas de honorarios</a> según el calendario Ley 21.133: 14,5% (2025), 15,25% (2026), 16% (2027), 17% (2028). Calcula tu PPM con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
       },
       {
         id: 'patente-comercial',
@@ -1735,7 +1736,7 @@ export const guias: Guia[] = [
         id: 'retencion-honorarios',
         title: 'Retención de honorarios y cotizaciones de independientes',
         level: 2,
-        html: `<p>Cuando una empresa paga a un profesional independiente que emite <strong>boleta de honorarios</strong>, debe retener un porcentaje del bruto y enterarlo en el SII. La tasa sube progresivamente (Ley 21.578) hasta cubrir las cotizaciones previsionales del trabajador independiente:</p>
+        html: `<p>Cuando una empresa paga a un profesional independiente que emite <strong>boleta de honorarios</strong>, debe retener un porcentaje del bruto y enterarlo en el SII. La tasa sube progresivamente (Ley 21.133) hasta cubrir las cotizaciones previsionales del trabajador independiente:</p>
 <table>
 <thead><tr><th>Año</th><th>Retención</th><th>Sobre $1.000.000 bruto</th></tr></thead>
 <tbody>

@@ -34,16 +34,16 @@ export interface BreadcrumbsProps {
  */
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Migas de pan" className="mb-6">
-      <ol className="flex items-center gap-1.5 text-sm flex-wrap">
+    <nav aria-label="Migas de pan" className="mb-6 min-w-0 max-w-full">
+      <ol className="flex max-w-full flex-wrap items-center gap-x-1.5 gap-y-1 text-sm">
         {/* Home icon */}
-        <li className="flex items-center">
+        <li className="flex shrink-0 items-center">
           <Link
             href="/"
-            className="flex items-center gap-1 text-[var(--foreground-muted)] hover:text-[var(--color-primary-500)] transition-colors"
+            className="flex items-center gap-1 text-[var(--foreground-muted)] transition-colors hover:text-[var(--color-primary-500)]"
             aria-label="Ir al inicio"
           >
-            <Home className="w-4 h-4" />
+            <Home className="h-4 w-4" />
           </Link>
         </li>
 
@@ -51,14 +51,12 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
           const isLast = index === items.length - 1;
 
           return (
-            <li key={index} className="flex items-center gap-1.5">
-              {/* Separator */}
-              <ChevronRight className="w-3.5 h-3.5 text-[var(--foreground-muted)]" />
+            <li key={index} className="flex min-w-0 max-w-full items-center gap-1.5">
+              <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[var(--foreground-muted)]" />
 
-              {/* Item */}
               {isLast ? (
                 <span
-                  className="text-[var(--foreground)] font-medium"
+                  className="min-w-0 break-words font-medium leading-snug text-[var(--foreground)]"
                   aria-current="page"
                 >
                   {item.label}
@@ -66,7 +64,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
               ) : item.href ? (
                 <Link
                   href={item.href}
-                  className="text-[var(--foreground-muted)] hover:text-[var(--color-primary-500)] transition-colors"
+                  className="shrink-0 text-[var(--foreground-muted)] transition-colors hover:text-[var(--color-primary-500)]"
                 >
                   {item.label}
                 </Link>

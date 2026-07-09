@@ -8,6 +8,8 @@ import type { CalculatorResult } from '@/types/calculator';
 export interface UtmClpInput {
   monto: number;
   direccion: 'utm-a-clp' | 'clp-a-utm';
+  /** UTM en vivo (UI). Default: snapshot `UTM.valor`. */
+  valorUTM?: number;
 }
 
 export interface UtmClpResult {
@@ -28,7 +30,7 @@ export interface UtmClpResult {
  */
 export function calculateUTMCLP(input: UtmClpInput): UtmClpResult {
   const { monto, direccion } = input;
-  const valorUtm = UTM.valor;
+  const valorUtm = input.valorUTM ?? UTM.valor;
 
   let montoConvertido: number;
 

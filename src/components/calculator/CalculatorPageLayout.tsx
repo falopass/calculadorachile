@@ -29,7 +29,7 @@ const CalculatorPageLayout = memo(function CalculatorPageLayout({
   lastReviewed,
 }: CalculatorPageLayoutProps) {
   return (
-    <div className="bg-[var(--background)]">
+    <div className="min-w-0 overflow-x-clip bg-[var(--background)]">
       {/* Hero compacto y limpio del calculador */}
       <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--background-secondary)]/40">
         <div
@@ -38,49 +38,49 @@ const CalculatorPageLayout = memo(function CalculatorPageLayout({
         />
         <div
           aria-hidden
-          className="absolute -top-32 left-1/2 -z-10 h-72 w-[700px] -translate-x-1/2 rounded-full bg-[var(--color-primary-500)]/10 blur-[100px]"
+          className="absolute -top-32 left-1/2 -z-10 h-72 w-[min(700px,100%)] -translate-x-1/2 rounded-full bg-[var(--color-primary-500)]/10 blur-[100px]"
         />
 
-        <div className="container-base relative pt-10 pb-8 md:pt-14 md:pb-10">
+        <div className="container-base relative pb-8 pt-10 md:pb-10 md:pt-14">
           {/* Breadcrumbs */}
-          <nav aria-label="Migas de pan" className="mb-5">
-            <ol className="flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
-              <li>
+          <nav aria-label="Migas de pan" className="mb-5 min-w-0">
+            <ol className="flex max-w-full flex-wrap items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
+              <li className="shrink-0">
                 <Link
                   href="/"
-                  className="hover:text-[var(--foreground)] transition-colors"
+                  className="transition-colors hover:text-[var(--foreground)]"
                 >
                   Inicio
                 </Link>
               </li>
-              <li aria-hidden>
+              <li aria-hidden className="shrink-0">
                 <ChevronRight className="h-3 w-3" />
               </li>
-              <li>
+              <li className="shrink-0">
                 <Link
                   href="/calculadoras"
-                  className="hover:text-[var(--foreground)] transition-colors"
+                  className="transition-colors hover:text-[var(--foreground)]"
                 >
                   Calculadoras
                 </Link>
               </li>
-              <li aria-hidden>
+              <li aria-hidden className="shrink-0">
                 <ChevronRight className="h-3 w-3" />
               </li>
-              <li className="text-[var(--foreground)] font-medium truncate max-w-[40ch]">
+              <li className="min-w-0 max-w-full break-words font-medium text-[var(--foreground)]">
                 {title}
               </li>
             </ol>
           </nav>
 
           <h1
-            className="heading-display text-3xl md:text-4xl text-[var(--foreground)]"
+            className="heading-display break-words text-2xl text-[var(--foreground)] sm:text-3xl md:text-4xl"
             data-speakable="title"
           >
             {title}
           </h1>
           <p
-            className="mt-2 text-base text-[var(--foreground-secondary)] max-w-3xl leading-relaxed"
+            className="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base"
             data-speakable="description"
           >
             {description}
