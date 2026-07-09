@@ -86,6 +86,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 37→ | blog | CAE 2026: cuota, renegociación y condonación | `cae-renegociacion-condonacion-2026` | 2026-05-16 | educación | credito-cae |
 | 7 | blog | Aguinaldo Fiestas Patrias 2026 (IPS + SP) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios | aguinaldo |
 | 2 | blog | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | 2026-07-11 | laboral | horas-extra |
+| 3 | blog | Sueldo mínimo 2026 $553.553 → líquido | `sueldo-minimo-2026-calcular-liquido` | 2026-07-11 | laboral | sueldo-liquido |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.
 
@@ -98,7 +99,7 @@ Ordenado por **fecha de publicación sugerida**.
 | # | Formato | Título | Slug | DR / nota | Cluster | Fecha | Pico | Prioridad |
 |--:|--------|--------|------|-----------|---------|-------|------|-----------|
 | ~~2~~ | blog | ~~Horas extra jornada 42 h~~ | ~~`horas-extra-jornada-42-horas-chile-2026`~~ | — | laboral | ~~2026-07-11~~ | ago–oct | ✅ |
-| 3 | blog | Sueldo mínimo 2026 $553.553 → líquido | `sueldo-minimo-2026-calcular-liquido` | satélite `sueldo-liquido-chile` | laboral | 2026-08-05 | ago–dic | **P1** |
+| ~~3~~ | blog | ~~Sueldo mínimo 2026 $553.553 → líquido~~ | ~~`sueldo-minimo-2026-calcular-liquido`~~ | satélite `sueldo-liquido-chile` | laboral | ~~2026-07-11~~ | ago–dic | ✅ |
 | 4 | blog | Subsidio eléctrico 2026: resultados y descuento | `subsidio-electrico-2026-resultados-descuento-cuenta` | DR[25] | hogar | 2026-08-18 | ago–sep | **P2-ventana** |
 | 5 | blog | BTM/SEJ pago anual + puente SUE | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | DR[13] | empleo | 2026-08-21 | ago | **P2-ventana** |
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | DR[12] · satélite finiquito | laboral | 2026-08-23 | continuo | **P1** |
@@ -143,11 +144,11 @@ Ordenado por **fecha de publicación sugerida**.
 | 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
 | 45 | blog | Patente comercial 2027 | `patente-comercial-2027-calcular` | satélite pymes | empresas | 2027-01-29 | ene–mar | **P3** |
 
-**Conteo pendientes:** 44 filas activas (+ #2 ya en publicados).
+**Conteo pendientes:** 43 filas activas (#2 y #3 en publicados).
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 40 |
+| **blog** | 39 |
 | **blog\*** (candidata guía) | 3 (#47, #48, #31) |
 | **guía** | **1** (#39) |
 
@@ -251,7 +252,6 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 
 | # | slug | Por qué primero |
 |---|------|-----------------|
-| 3 | `sueldo-minimo-2026-calcular-liquido` | IMM ancla muchos cálculos; alto volumen |
 | 8 | `pgu-aumento-septiembre-2026-75-anos` | Pico septiembre; monto etario YMYL |
 | 9 | `asignacion-familiar-2026-tramos-montos` | Tramos SUSESO reajustados con IMM |
 | 10 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | Fecha fija; alto CTR estacional |
@@ -350,16 +350,17 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                    6  (todos blog)
-  Pendientes:                   44
-    blog:                       40
+  Publicados:                    7  (todos blog; +#3 IMM 2026-07-11)
+  Pendientes:                   43
+    blog:                       39
     blog* (candidata guía):      3   (#47, #48, #31)
     guía:                        1   (#39 Operación Renta)
-    P1:                          4   (#3, #6, #8, #9) todos blog
+    P1 restante:                 3   (#6, #8, #9)
     P2:                         34
     P3:                          6
   Total publicados + pendientes: 50
 ```
+
 
 
 
@@ -379,7 +380,7 @@ Plan integrado operativo:
 
 ## Uso operativo
 
-1. **Siguiente (P1, blog):** #3 `sueldo-minimo-2026-calcular-liquido` → `articles.ts`.  
+1. **Siguiente (P1, blog):** #6 `finiquito-2026-ejemplo-sueldo-minimo` o #8 PGU 75+ (pico sep).  
 2. **Cola P2-ventana** (blogs) antes que relleno continuo.  
 3. **#39 (guía):** en ene 2027 escribir en `guias.ts`, no en blog.  
 4. **#47 / #48 / #31 (blog\*):** blog primero; evaluar guía solo si rankean.  

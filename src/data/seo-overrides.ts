@@ -271,6 +271,13 @@ export const seoOverrides: Record<
       'Desde el 26-04-2026 la jornada es 42 h/semana (Ley 21.561). Calcula horas extra con recargo 50%, valor hora y ejemplos. Dirección del Trabajo.', // 142
   },
 
+  // --- #3 P1: IMM mayo 2026 ---
+  'sueldo-minimo-2026-calcular-liquido': {
+    seoTitle: 'Sueldo mínimo 2026 $553.553: líquido y descuentos', // 52
+    seoDescription:
+      'IMM desde mayo 2026: $553.553 (18–65), $412.938 y $356.815 no remuneracional. Estima tu líquido. DT y Ley 21.830.', // 128
+  },
+
   // ══════════════════════════════════════════════════════════════════════════
   // GUÍAS PILLAR
   // ══════════════════════════════════════════════════════════════════════════

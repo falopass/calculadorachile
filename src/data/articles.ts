@@ -775,6 +775,150 @@ export const articles: Article[] = [
 <p>Simula tu caso en la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> y cruza el resultado con tu liquidación del mes.</p>`,
   },
   {
+    slug: 'sueldo-minimo-2026-calcular-liquido',
+    title:
+      'Sueldo mínimo 2026 $553.553: cómo recalcular tu líquido y descuentos',
+    description:
+      'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
+    date: '2026-07-11',
+    updatedAt: '2026-07-11',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'sueldo-liquido-chile',
+    seoTitle: 'Sueldo mínimo 2026 $553.553: líquido y descuentos',
+    seoDescription:
+      'IMM desde mayo 2026: $553.553 (18–65), $412.938 (<18 o >65) y $356.815 no remuneracional. Cómo estimar el líquido. Fuente DT y Ley 21.830.',
+    keywords: [
+      'sueldo mínimo 2026',
+      'ingreso mínimo mensual 2026',
+      'sueldo mínimo $553.553',
+      'sueldo mínimo líquido Chile',
+      'IMM mayo 2026',
+      'Ley 21.830 sueldo mínimo',
+      'calcular sueldo líquido mínimo',
+    ],
+    relatedCalculators: [
+      'calculadora-sueldo-liquido',
+      'calculadora-costo-empleado-pyme',
+      'calculadora-finiquito',
+      'calculadora-gratificacion',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto es el sueldo mínimo en Chile en 2026?',
+        answer:
+          'Según la Dirección del Trabajo y la Ley 21.830, a contar del 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 para trabajadores entre 18 y 65 años; $412.938 para menores de 18 y mayores de 65; y $356.815 para fines no remuneracionales.',
+      },
+      {
+        question: '¿Cuánto líquido me queda con el sueldo mínimo 2026?',
+        answer:
+          'Depende de AFP (comisión), tipo de salud, seguro de cesantía y si aplica impuesto único de segunda categoría. En un escenario simple (AFP 10% + salud 7% + cesantía trabajador 0,6%, sin IUSC), el orden de magnitud ronda el 82% del bruto (~$456.000 sobre $553.553). Usa la calculadora de sueldo líquido con tu AFP real.',
+      },
+      {
+        question: '¿Desde cuándo rige el $553.553?',
+        answer:
+          'A contar del 1 de mayo de 2026. La Ley 21.830 se publicó en el Diario Oficial el 22 de junio de 2026; el reajuste del IMM para ese tramo etario aplica desde mayo 2026. Si tu liquidación de mayo quedó con el monto anterior, corresponde regularizar la diferencia según lo instruya tu empleador y la norma.',
+      },
+      {
+        question: '¿El sueldo mínimo es lo mismo que el sueldo líquido?',
+        answer:
+          'No. El ingreso mínimo es un piso de remuneración bruta (con las reglas del Código del Trabajo). El líquido es lo que recibes tras descuentos legales (AFP, salud, cesantía trabajador, IUSC si aplica) y otros pactados.',
+      },
+      {
+        question: '¿Afecta gratificación, finiquito o asignación familiar?',
+        answer:
+          'Sí, de forma indirecta: varios topes y bases se anclan al IMM (por ejemplo el tope de gratificación del 4,75 IMM y tramos de asignación familiar reajustados por la misma ley). Al cambiar el IMM, conviene revisar calculadoras de gratificación, finiquito y asignación familiar.',
+      },
+    ],
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>IMM oficial 2026</strong><p>A contar del <strong>1 de mayo de 2026</strong>, el <strong>ingreso mínimo mensual</strong> para trabajadores de <strong>18 a 65 años</strong> es <strong>$553.553</strong> (Ley <strong>21.830</strong>; ficha de la Dirección del Trabajo). No es un “líquido garantizado”: es el piso de remuneración sobre el que se calculan descuentos y, en muchos casos, topes de otros beneficios.</p></div></aside>
+
+<p>Si buscas <em>sueldo mínimo 2026</em> o <em>$553.553 líquido</em>, este artículo separa el <strong>bruto legal</strong> del <strong>líquido estimado</strong> y enlaza la calculadora para que no uses un factor genérico de redes sociales.</p>
+
+<h2>1. Montos del ingreso mínimo (desde 1 mayo 2026)</h2>
+<table>
+<thead>
+<tr><th>Tramo</th><th>Monto IMM</th><th>Fuente</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Trabajadores <strong>18 a 65 años</strong></td>
+<td><strong>$553.553</strong></td>
+<td>DT · Ley 21.830</td>
+</tr>
+<tr>
+<td><strong>Menores de 18</strong> y <strong>mayores de 65</strong></td>
+<td><strong>$412.938</strong></td>
+<td>DT · Ley 21.830</td>
+</tr>
+<tr>
+<td>Fines <strong>no remuneracionales</strong></td>
+<td><strong>$356.815</strong></td>
+<td>DT · Ley 21.830</td>
+</tr>
+</tbody>
+</table>
+<p>La misma ley reajusta, entre otros, montos de <strong>asignación familiar/maternal</strong> y <strong>subsidio familiar</strong>. Para tramos de asignación familiar usa la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a> y la ficha SUSESO/DT del año.</p>
+
+<h2>2. Bruto mínimo ≠ líquido en la cuenta</h2>
+<p>Sobre un sueldo bruto de $553.553 suelen aplicarse, al menos:</p>
+<ul>
+<li><strong>Cotización AFP</strong> ~10% de la imponible (más comisión de la AFP, según administradora).</li>
+<li><strong>Salud</strong> 7% (FONASA o plan Isapre; si el plan Isapre en UF supera el 7%, la diferencia la asume el trabajador en muchos casos).</li>
+<li><strong>Seguro de cesantía</strong> parte trabajador (en contrato indefinido típico, 0,6% de la imponible, con topes).</li>
+<li><strong>Impuesto único de segunda categoría</strong> (IUSC): en sueldos del orden del mínimo suele ser <strong>$0</strong> o muy bajo, según tabla del SII del período.</li>
+</ul>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No uses un “% fijo de líquido” de internet</strong><p>AFP, Isapre, gratificación, descuentos voluntarios y días no trabajados cambian el resultado. El único camino serio es simular con tus datos o leer la liquidación.</p></div></aside>
+
+<h2>3. Orden de magnitud: $553.553 brutos</h2>
+<p>Escenario <strong>educativo y simplificado</strong> (sin comisión AFP extra, sin Isapre sobre 7%, sin IUSC, contrato indefinido, imponible = bruto):</p>
+<div class="numeric-example"><div class="numeric-example__title">Descuentos referenciales sobre $553.553</div><ul>
+<li>AFP 10% ≈ $55.355</li>
+<li>Salud 7% ≈ $38.749</li>
+<li>Cesantía trabajador 0,6% ≈ $3.321</li>
+<li>Total descuentos legales simples ≈ $97.425 (~17,6%)</li>
+</ul><span class="total">Líquido referencial ≈ $456.128</span></div>
+<p>Si tu AFP cobra comisión sobre el sueldo imponible, el líquido baja un poco más. Si tienes plan Isapre caro en UF, puede bajar bastante más. Simula en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> eligiendo AFP y salud.</p>
+
+<div class="numeric-example"><div class="numeric-example__title">Comparación de tramos (mismo escenario simple ~17,6%)</div><ul>
+<li>IMM 18–65 $553.553 → líquido ref. ≈ $456.000</li>
+<li>IMM &lt;18 o &gt;65 $412.938 → líquido ref. ≈ $340.000</li>
+</ul><span class="total">Siempre verifica con tu liquidación</span></div>
+
+<h2>4. Qué más se mueve cuando sube el IMM</h2>
+<ul>
+<li><strong>Gratificación legal (Art. 50):</strong> el tope del 25% con tope de <strong>4,75 ingresos mínimos</strong> se recalcula con el nuevo IMM (orden de magnitud: 4,75 × $553.553 ≈ <strong>$2.629.377</strong> al año; confirma redondeo y mes de devengo en DT/tu contador).</li>
+<li><strong>Finiquito e indemnizaciones:</strong> bases y topes en UF no cambian por el IMM, pero si tu sueldo base era el mínimo, el promedio de remuneraciones sí sube.</li>
+<li><strong>Asignación familiar:</strong> tramos y montos reajustados por la Ley 21.830 — no uses tablas 2025.</li>
+<li><strong>Costo empresa:</strong> el empleador paga el bruto + aportes patronales (SIS, cesantía empleador, mutual, y desde ago 2026 la cotización adicional de reforma). Ver <a href="/blog/cotizacion-empleador-3-5-agosto-2026-costo-pyme">cotización empleador 3,5%</a> y la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleado</a>.</li>
+</ul>
+
+<h2>5. Checklist si ganas el mínimo (o cerca)</h2>
+<ol class="steps">
+<li>Confirma en tu contrato/anexo que el sueldo base no quede <strong>bajo</strong> el IMM de tu tramo etario.</li>
+<li>Revisa la liquidación de <strong>mayo 2026 en adelante</strong> (y eventuales diferencias si el pago se regularizó después de publicada la ley).</li>
+<li>Simula el <strong>líquido</strong> con tu AFP real, no con un promedio de redes.</li>
+<li>Si te pagan por día u hora, contrasta con los valores referenciales de jornada (la DT publica el IMM; la conversión a día/hora depende de la jornada pactada).</li>
+<li>Si eres empleador PYME, actualiza planillas y el costo total del puesto (no solo el líquido del trabajador).</li>
+</ol>
+
+<h2>6. Cómo usarlo en CalculaChile</h2>
+<ul>
+<li><a href="/calculadoras/calculadora-sueldo-liquido"><strong>Calculadora de sueldo líquido</strong></a> — ingresa $553.553 (u otro bruto), AFP y salud.</li>
+<li><a href="/guias/sueldo-liquido-chile">Guía pillar de sueldo líquido</a> — descuentos y topes con más detalle.</li>
+<li><a href="/calculadoras/calculadora-finiquito">Finiquito</a> · <a href="/calculadoras/calculadora-gratificacion">Gratificación</a> · <a href="/blog/horas-extra-jornada-42-horas-chile-2026">Horas extra con jornada 42 h</a>.</li>
+</ul>
+
+<h2>7. Fuentes oficiales</h2>
+<ul>
+<li><a href="https://www.dt.gob.cl/portal/1626/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo — valor del ingreso mínimo mensual</a> ($553.553 / $412.938 / $356.815 desde 1 may 2026).</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">BCN — Ley 21.830</a> (reajuste IMM, asignación familiar y subsidio familiar; D.O. 22 jun 2026).</li>
+<li>SII — impuesto único de segunda categoría (tramos del período).</li>
+<li>Superintendencia de Pensiones / Previred — comisiones AFP y cotizaciones.</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El líquido del ejemplo es una <strong>estimación simplificada</strong>, no una liquidación oficial. Confirma montos en la DT, tu contrato y tu AFP/salud. Si la norma o las tasas del mes cambian, prevalece la fuente oficial.</p></div></aside>
+<p>Para profundizar en descuentos legales, lee la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido en Chile 2026</a> o simula en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>`,
+  },
+  {
     slug: 'como-calcular-finiquito-chile',
     title: 'Cómo calcular tu finiquito en Chile 2026 paso a paso',
     description:
