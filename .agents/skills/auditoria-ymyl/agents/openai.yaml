@@ -1,2 +1,0 @@
-display_name: Auditoría YMYL
-default_prompt: Audita una calculadora de CalculaChile (inputs fantasma, fórmula, fuentes, tests golden) y entrega el informe de severidad. No cambies fórmulas sin fuente oficial.

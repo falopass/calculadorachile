@@ -46,6 +46,12 @@ next-env.d.ts
 .vercel
 .turbo
 
+# Agentes locales (no versionar en el remoto)
+.agents/
+.grok/
+.opencode/
+opencode.json
+
 # Google Search Console exports (varios nombres de carpeta)
 https___calculadorachile.cl_-Performance-on-Search-*
 *Performance-on-Search*
