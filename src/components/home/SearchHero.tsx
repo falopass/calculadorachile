@@ -66,10 +66,10 @@ export default function SearchHero() {
     <section className="border-b border-[var(--border)] bg-[var(--surface)]">
       <div className="container-base py-10 md:py-14">
         <div className="mx-auto max-w-3xl">
-          <form onSubmit={onSubmit} role="search" className="relative">
+          <form onSubmit={onSubmit} role="search" className="relative min-w-0">
             <Search
               aria-hidden
-              className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--foreground-muted)]"
+              className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--foreground-muted)] sm:left-5"
             />
             <input
               type="search"
@@ -79,9 +79,14 @@ export default function SearchHero() {
               onBlur={() => setTimeout(() => setFocused(false), 160)}
               placeholder="Busca tu calculadora…"
               aria-label="Buscar calculadora"
-              className="w-full rounded-2xl border border-[var(--border-strong)] bg-[var(--background)] py-5 pl-14 pr-36 text-lg text-[var(--foreground)] shadow-sm placeholder:text-[var(--foreground-muted)] transition-shadow focus:border-[var(--accent)] focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10"
+              className="w-full min-w-0 rounded-2xl border border-[var(--border-strong)] bg-[var(--background)] py-4 pl-11 pr-14 text-base text-[var(--foreground)] shadow-sm placeholder:text-[var(--foreground-muted)] transition-shadow focus:border-[var(--accent)] focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10 sm:py-5 sm:pl-14 sm:text-lg md:pr-36"
             />
-            <div className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2">
+            {/*
+              pr-14 en móvil: solo el botón (el kbd “/” está hidden hasta md).
+              pr-36 en md+: botón + atajo de teclado. Antes pr-36 en todo
+              viewport dejaba ~90px de texto en 320px y cortaba el placeholder.
+            */}
+            <div className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-2 sm:right-3">
               <kbd
                 aria-hidden
                 className="hidden rounded-lg border border-[var(--border-strong)] bg-[var(--surface)] px-2 py-1 text-xs font-mono font-medium text-[var(--foreground-muted)] md:inline-flex"
@@ -91,7 +96,7 @@ export default function SearchHero() {
               <button
                 type="submit"
                 aria-label="Buscar"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)] text-white shadow-sm transition-colors hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] text-white shadow-sm transition-colors hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)] sm:h-11 sm:w-11"
               >
                 <Search className="h-5 w-5" />
               </button>
