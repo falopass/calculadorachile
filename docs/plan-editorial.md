@@ -47,6 +47,7 @@ Research en **`docs/research/`**. El backlog de posts está **solo en este archi
 | 1 | Cotización empleador 3,5% desde agosto 2026 | `cotizacion-empleador-3-5-agosto-2026-costo-pyme` | 2026-07-15 | laboral / previsional | costo-empleado-pyme, sueldo-liquido |
 | 37→ | CAE 2026: cuota, renegociación y condonación | `cae-renegociacion-condonacion-2026` | 2026-05-16 | educación / deuda | credito-cae |
 | 7 | Aguinaldo Fiestas Patrias 2026 (IPS + sector público) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios / laboral | aguinaldo, sueldo-liquido |
+| 2 | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | 2026-07-11 | laboral | horas-extra, sueldo-liquido |
 
 **Notas**
 
@@ -63,7 +64,7 @@ Ordenado por **fecha de publicación sugerida** (del plan A; sprint de arranque 
 
 | # | Título | Slug | Origen | Dossier deep research | Fit calculadora | Cluster | Fecha sugerida | Ventana pico | Prioridad |
 |--:|--------|------|--------|----------------------|-----------------|---------|----------------|--------------|-----------|
-| 2 | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | plan+inventario | — *(DR[9] semana corrida solo parcial)* · evergreen: `guia-horas-extra-chile` | alto | laboral | 2026-07-30 | ago–oct 2026 | **P1** |
+| ~~2~~ | ~~Horas extra con jornada de 42 horas Chile 2026~~ | ~~`horas-extra-jornada-42-horas-chile-2026`~~ | plan+inventario | — · evergreen: `guia-horas-extra-chile` | alto | laboral | ~~2026-07-11~~ | ago–oct 2026 | ✅ **publicado** |
 | 3 | Sueldo mínimo 2026 $553.553: recalcular líquido | `sueldo-minimo-2026-calcular-liquido` | plan+inventario | — | alto | laboral | 2026-08-05 | ago–dic 2026 | **P1** |
 | 4 | Subsidio eléctrico 2026: resultados y descuento en la cuenta | `subsidio-electrico-2026-resultados-descuento-cuenta` | plan+DR+inventario | DR[25] subsidio eléctrico | medio | hogar / servicios | 2026-08-18 | ago–sep 2026 (resultados + descuento) | **P2-ventana** |
 | 5 | Pago anual BTM y SEJ 2026 y puente al Subsidio Unificado | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | plan+DR+inventario | DR[13] BTM/SEJ → SUE | medio | empleo / beneficios | 2026-08-21 | ago 2026 | **P2-ventana** |
@@ -209,9 +210,8 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 
 ### Prioridad 1 — investigar ya (sprint / ≤ ~8 semanas)
 
-| # | Slug | Por qué primero |
+| # | slug | Por qué primero |
 |---|------|-----------------|
-| 2 | `horas-extra-jornada-42-horas-chile-2026` | Siguiente del sprint; evergreen genérico no cubre 42 h |
 | 3 | `sueldo-minimo-2026-calcular-liquido` | IMM ancla muchos cálculos; alto volumen |
 | 8 | `pgu-aumento-septiembre-2026-75-anos` | Pico septiembre; monto etario YMYL |
 | 9 | `asignacion-familiar-2026-tramos-montos` | Tramos SUSESO reajustados con IMM |
@@ -311,13 +311,14 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                    5
-  Pendientes totales:           45
-    P1:                          5   (#2, #3, #6, #8, #9)
+  Publicados:                    6  (+ #2 horas extra 42 h · 2026-07-11)
+  Pendientes totales:           44
+    P1:                          4   (#3, #6, #8, #9)
     P2-ventana + P2-continuo:   34   (incluye #47–#50)
     P3:                          6   (#40–#45)
   Total publicados + pendientes: 50
 ```
+
 
 ### Checklist de cruce de los tres archivos
 
@@ -335,7 +336,7 @@ Plan integrado operativo:
 
 ## Uso operativo
 
-1. **Siguiente post (sprint P1):** #2 `horas-extra-jornada-42-horas-chile-2026` (fecha sugerida 2026-07-30). Verificar en DT: jornada 42 h (Ley 21.561) + recargo mínimo 50%.  
+1. **Siguiente post (sprint P1):** #3 `sueldo-minimo-2026-calcular-liquido`.  
 2. **Cola P2-ventana** en sep (feriados, contribuciones 3.ª, SUE, AFPER) antes que relleno continuo.  
 3. **#47–#50** entran en P2-continuo sep–oct (dossier en `research/deep-research.md`).  
 4. **Antes de publicar:** revalidar montos en fuente oficial (T−1).  

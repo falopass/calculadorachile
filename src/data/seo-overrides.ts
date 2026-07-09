@@ -264,6 +264,13 @@ export const seoOverrides: Record<
       'Montos 2026: pensionados IPS $25.280 + $12.969/carga; sector público $91.682 o $63.645. Fechas, tramos y fuentes ChileAtiende / Ley 21.806.', // 145
   },
 
+  // --- #2 P1: jornada 42 h desde 26-04-2026 ---
+  'horas-extra-jornada-42-horas-chile-2026': {
+    seoTitle: 'Horas extra Chile 2026: jornada 42 h y recargo 50%', // 52
+    seoDescription:
+      'Desde el 26-04-2026 la jornada es 42 h/semana (Ley 21.561). Calcula horas extra con recargo 50%, valor hora y ejemplos. Dirección del Trabajo.', // 142
+  },
+
   // ══════════════════════════════════════════════════════════════════════════
   // GUÍAS PILLAR
   // ══════════════════════════════════════════════════════════════════════════

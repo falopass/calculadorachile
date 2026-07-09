@@ -626,6 +626,155 @@ export const articles: Article[] = [
 <p>Para profundizar en beneficios familiares y contexto de cargas, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de familia y pensión alimenticia</a> y las calculadoras enlazadas. Si buscas el sueldo del mes que define el tramo público, parte por la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>`,
   },
   {
+    slug: 'horas-extra-jornada-42-horas-chile-2026',
+    title:
+      'Horas extra con jornada de 42 horas: cómo calcularlas en Chile 2026',
+    description:
+      'Desde el 26 de abril de 2026 la jornada ordinaria máxima es 42 horas semanales (Ley 21.561). Cómo se calcula la hora ordinaria, el recargo legal del 50% y ejemplos en CLP con la calculadora de horas extra.',
+    date: '2026-07-11',
+    updatedAt: '2026-07-11',
+    category: 'laboral',
+    readingTime: 11,
+    relatedGuia: 'horas-extra-chile',
+    seoTitle: 'Horas extra Chile 2026: jornada 42 h y recargo 50%',
+    seoDescription:
+      'Jornada de 42 horas desde el 26-04-2026 (Ley 21.561). Cómo calcular horas extra con recargo mínimo 50%, valor hora y ejemplos. Fuente Dirección del Trabajo.',
+    keywords: [
+      'horas extra 42 horas 2026',
+      'horas extraordinarias Chile',
+      'recargo 50% horas extra',
+      'jornada 42 horas Ley 21.561',
+      'calcular horas extra sueldo',
+      'Ley 40 horas etapa 2026',
+      'valor hora extraordinaria',
+    ],
+    relatedCalculators: [
+      'calculadora-horas-extra',
+      'calculadora-sueldo-liquido',
+      'calculadora-finiquito',
+      'calculadora-costo-empleado-pyme',
+    ],
+    faq: [
+      {
+        question: '¿Cuál es la jornada semanal máxima en 2026?',
+        answer:
+          'Desde el 26 de abril de 2026 la jornada ordinaria máxima es de 42 horas semanales, según la gradualidad de la Ley 21.561 (conocida como Ley de 40 Horas). En 2024 bajó a 44; en 2028 baja a 40. Confirma en la Dirección del Trabajo y en tu contrato.',
+      },
+      {
+        question: '¿Cuánto es el recargo de las horas extra?',
+        answer:
+          'El Código del Trabajo (Art. 32) fija un recargo legal mínimo del 50% sobre el valor de la hora ordinaria. Convenio o pacto puede ser más favorable, nunca menos. No existe un recargo nocturno automático distinto en la ley general.',
+      },
+      {
+        question: '¿Cómo se calcula el valor de la hora ordinaria con 42 horas?',
+        answer:
+          'Una práctica habitual de liquidación es: valor hora ordinaria = sueldo base del período ÷ (jornada semanal × 4,33). Con 42 h: divisor ≈ 181,86 horas mensuales de referencia. Luego la hora extra = hora ordinaria × 1,5 (si el recargo es 50%).',
+      },
+      {
+        question: '¿Pueden bajar mi sueldo porque bajó la jornada a 42 horas?',
+        answer:
+          'La reducción de jornada de la Ley 21.561 no autoriza por sí sola a rebajar la remuneración convenida para “compensar” menos horas. Ante dudas o cobros indebidos, consulta a la Dirección del Trabajo o a tu organización sindical.',
+      },
+      {
+        question: '¿Hay tope de horas extra al día?',
+        answer:
+          'Como regla general, las horas extraordinarias no pueden exceder de dos por día (Art. 31 del Código del Trabajo), con las excepciones y regímenes especiales que la ley contempla. El exceso sobre la jornada ordinaria semanal debe tratarse como extraordinario y documentarse.',
+      },
+    ],
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Qué cambió en 2026</strong><p>Desde el <strong>26 de abril de 2026</strong> la jornada ordinaria máxima pasó de <strong>44 a 42 horas semanales</strong> (2.ª etapa de la <strong>Ley 21.561</strong>). Toda hora que exceda la jornada ordinaria pactada/legal aplicable se paga, en principio, como <strong>hora extraordinaria</strong> con recargo mínimo del <strong>50%</strong> (Art. 32 del Código del Trabajo), salvo compensación en feriado adicional cuando la ley y el pacto lo permiten.</p></div></aside>
+
+<p>Si buscas <em>horas extra 42 horas 2026</em> o <em>calcular recargo 50%</em>, el error más frecuente es seguir dividiendo el sueldo por una jornada de <strong>45 o 44 horas</strong>. Eso <strong>infla</strong> las horas mensuales de referencia y <strong>baja</strong> el valor de la hora (y de la extra). Este artículo alinea el cálculo con la etapa vigente y con la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> del sitio.</p>
+
+<h2>1. Calendario de la Ley 21.561 (jornada ordinaria máxima)</h2>
+<table>
+<thead>
+<tr><th>Desde</th><th>Jornada máxima ordinaria</th><th>Estado en 2026</th></tr>
+</thead>
+<tbody>
+<tr><td>26 abr 2024</td><td><strong>44</strong> horas/semana</td><td>Etapa anterior</td></tr>
+<tr><td><strong>26 abr 2026</strong></td><td><strong>42</strong> horas/semana</td><td><strong>Vigente ahora</strong></td></tr>
+<tr><td>26 abr 2028</td><td><strong>40</strong> horas/semana</td><td>Etapa final</td></tr>
+</tbody>
+</table>
+<p>Fuente de la gradualidad: Dirección del Trabajo / Ley 21.561 (art. primero transitorio). La implementación de la rebaja se hace de mutuo acuerdo y por escrito; a falta de acuerdo aplican las reglas de distribución que ha interpretado la DT (p. ej. dictámenes sobre cómo repartir la reducción en jornadas de 5 o 6 días).</p>
+
+<h2>2. Qué es hora ordinaria y qué es hora extraordinaria</h2>
+<ul>
+<li><strong>Hora ordinaria:</strong> la que forma parte de la jornada pactada, dentro del máximo legal aplicable (hoy, en la generalidad, <strong>42 h/semana</strong> si no hay régimen especial).</li>
+<li><strong>Hora extraordinaria:</strong> la que excede la jornada ordinaria. Debe pactarse por escrito cuando la ley lo exige, respetar topes (regla general: máx. <strong>2 horas extra al día</strong>, Art. 31) y pagarse con el recargo legal o compensarse según las figuras permitidas.</li>
+</ul>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No es “recargo nocturno automático”</strong><p>En Chile <strong>no</strong> hay un recargo legal general distinto solo por trabajar de noche en horas extra. El mínimo del Art. 32 es el <strong>50%</strong> sobre la hora ordinaria, de día o de noche, salvo pacto o convenio más favorable. Evita calculadoras o rumores que inventen un “+25% nocturno” sin base en tu contrato.</p></div></aside>
+
+<h2>3. Fórmula práctica del valor hora (con 42 h)</h2>
+<p>Para liquidaciones mensuales se usa con frecuencia el factor <strong>4,33 semanas/mes</strong> (promedio comercial). Entonces:</p>
+<ol class="steps">
+<li><strong>Horas mensuales de referencia</strong> = jornada semanal × 4,33 → con 42 h: <strong>181,86</strong> h.</li>
+<li><strong>Valor hora ordinaria</strong> = sueldo base del período ÷ 181,86.</li>
+<li><strong>Valor hora extra (50%)</strong> = valor hora ordinaria × <strong>1,5</strong>.</li>
+<li><strong>Total horas extra</strong> = valor hora extra × cantidad de horas extra del período.</li>
+</ol>
+<p>Si el sueldo es muy variable, muchas liquidaciones usan un promedio de los últimos meses (la calculadora del sitio permite ese escenario). El detalle de tu liquidación lo define el empleador según contrato, pacto y fiscalización DT.</p>
+
+<h2>4. Ejemplos en pesos (jornada 42 h, recargo 50%)</h2>
+<p>Aritmética de referencia con el mismo motor que la calculadora del sitio (4,33 semanas/mes). Redondeos en liquidación real pueden variar en pesos.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo A — sueldo $800.000 · 10 horas extra</div><ul>
+<li>Horas mes ref. = 42 × 4,33 = 181,86</li>
+<li>Hora ordinaria ≈ $800.000 ÷ 181,86 ≈ <strong>$4.399</strong></li>
+<li>Hora extra (×1,5) ≈ <strong>$6.598</strong></li>
+<li>10 horas extra ≈ <strong>$65.985</strong></li>
+</ul><span class="total">≈ $65.985 por 10 h extra</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo B — sueldo $1.200.000 · 8 horas extra</div><ul>
+<li>Hora ordinaria ≈ $1.200.000 ÷ 181,86 ≈ <strong>$6.598</strong></li>
+<li>Hora extra ≈ <strong>$9.897</strong></li>
+<li>8 horas extra ≈ <strong>$79.180</strong></li>
+</ul><span class="total">≈ $79.180 por 8 h extra</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Error típico: usar todavía 45 h de jornada</div><ul>
+<li>Con $800.000 y 45 × 4,33 = 194,85 h → hora ordinaria ≈ $4.106</li>
+<li>Hora extra ×1,5 ≈ $6.159 · 10 h ≈ $61.590</li>
+<li>Diferencia vs 42 h: del orden de <strong>$4.400 menos</strong> en 10 h (subpago si la jornada real es 42)</li>
+</ul><span class="total">Usar la jornada vigente evita subestimar la extra</span></div>
+
+<h2>5. Compensación en feriado adicional (opcional)</h2>
+<p>La Ley 21.561 permite, en ciertos casos y <strong>por acuerdo escrito</strong>, compensar horas extraordinarias con días adicionales de feriado, con el mismo recargo (cada hora extra equivale a una hora y media de feriado, según el texto legal). Hay límites anuales y plazos para usar esos días. Si no se solicitan en tiempo, corresponde el pago en dinero. No asumas compensación automática: sin pacto, la regla general es el pago en la liquidación.</p>
+
+<h2>6. Errores frecuentes</h2>
+<ol class="steps">
+<li><strong>Dividir por 45 o 44 horas</strong> cuando tu jornada máxima ordinaria ya es 42.</li>
+<li><strong>Aplicar menos del 50%</strong> de recargo (ilegal como mínimo legal general).</li>
+<li><strong>Inventar recargo nocturno</strong> sin convenio que lo establezca.</li>
+<li><strong>No registrar</strong> asistencia / pacto de horas extra (debilita prueba y fiscalización).</li>
+<li><strong>Bajar el sueldo base</strong> “porque ahora son menos horas” sin base legal ni acuerdo válido.</li>
+<li><strong>Confundir festivo trabajado</strong> con “siempre 100%”: el Art. 32 fija el 50% mínimo; regímenes de descanso compensatorio (p. ej. Art. 38) y convenios pueden cambiar el escenario. Revisa tu contrato y la DT.</li>
+</ol>
+
+<h2>7. Cómo simularlo en CalculaChile</h2>
+<p>En la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a>:</p>
+<ul>
+<li>Ingresa tu <strong>sueldo bruto</strong> (o promedio si usas sueldo variable).</li>
+<li>Elige jornada <strong>42 h</strong> (default desde abr-2026) u otra si tu caso es histórico o ya 40 h pactadas.</li>
+<li>Indica las horas extra del período y, si aplica, horas en festivos o un recargo personalizado <em>solo si</em> tu convenio lo mejora.</li>
+<li>Opcional: estimar impacto de cotizaciones sobre el monto de extras (referencial).</li>
+</ul>
+<p>Complementos:</p>
+<ul>
+<li><a href="/calculadoras/calculadora-sueldo-liquido">Sueldo líquido</a> — descuentos del mes (AFP, salud, cesantía, IUSC).</li>
+<li><a href="/calculadoras/calculadora-costo-empleado-pyme">Costo empleado PYME</a> — si miras el costo empresa de las extras.</li>
+<li><a href="/calculadoras/calculadora-finiquito">Finiquito</a> — si las extras entran en promedios de indemnización (caso a caso).</li>
+<li>Guía general (pre-hito 42 h, útil como marco): <a href="/blog/guia-horas-extra-chile">guía de horas extra</a>.</li>
+</ul>
+
+<h2>8. Fuentes oficiales</h2>
+<ul>
+<li><a href="https://www.dt.gob.cl/portal/1628/w3-article-125909.html" target="_blank" rel="noopener">Dirección del Trabajo — implementación gradual 45→40 horas</a> (44 en 2024, <strong>42 en 2026</strong>, 40 en 2028).</li>
+<li><a href="https://www.mintrab.gob.cl/40horas/" target="_blank" rel="noopener">Ministerio del Trabajo — Ley 40 Horas</a> (exceso sobre 42 h como extraordinarias; recargo 50%).</li>
+<li><a href="https://www.dt.gob.cl/portal/1628/w3-article-60173.html" target="_blank" rel="noopener">DT — horas extraordinarias (Art. 32)</a>.</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1191554" target="_blank" rel="noopener">BCN — Ley 21.561</a>.</li>
+<li>DT — valor de la hora extraordinaria / jornada vigente (consulta y dictámenes actualizados en el portal DT).</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Contenido informativo. No es un dictamen de la Dirección del Trabajo ni reemplaza tu contrato, convenio colectivo o liquidación. Los ejemplos usan el factor 4,33 y recargo 50% como referencia educativa. Si hay conflicto, prevalecen la norma, la DT y tu documentación laboral.</p></div></aside>
+<p>Simula tu caso en la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> y cruza el resultado con tu liquidación del mes.</p>`,
+  },
+  {
     slug: 'como-calcular-finiquito-chile',
     title: 'Cómo calcular tu finiquito en Chile 2026 paso a paso',
     description:
