@@ -1,86 +1,75 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { Check, Copy, ExternalLink, Rss } from 'lucide-react';
+import { Check, Copy, Rss } from 'lucide-react';
 
 const FEED_PATH = '/blog/feed.xml';
 
 /**
- * CTA de suscripción RSS usable por humanos.
+ * CTA del feed RSS del blog.
  *
- * El enlace plano a `feed.xml` “funciona” técnicamente, pero en el
- * navegador solo muestra XML y parece roto. Aquí ofrecemos:
- * 1) Abrir el feed en Feedly (flujo de suscripción real)
- * 2) Copiar la URL del feed (otros lectores)
- * 3) Ver el XML (power users)
+ * Importante: CalculaChile no usa ni necesita cuenta Feedly.
+ * El sitio solo publica un archivo XML público (`/blog/feed.xml`).
+ * La persona se “suscribe” en su propio lector (o copiando la URL).
+ *
+ * UX:
+ * 1) Copiar URL del feed (acción principal, sin servicios de terceros)
+ * 2) Enlace al XML por si quieren verlo o pegarlo en un lector
  */
 export default function RssSubscribeButton() {
   const [copied, setCopied] = useState(false);
 
-  const feedAbsoluteUrl =
+  const absoluteFeedUrl = () =>
     typeof window !== 'undefined'
       ? `${window.location.origin}${FEED_PATH}`
-      : FEED_PATH;
-
-  const feedlyUrl = `https://feedly.com/i/subscription/feed/${encodeURIComponent(
-    typeof window !== 'undefined'
-      ? `${window.location.origin}${FEED_PATH}`
-      : `https://calculadorachile.cl${FEED_PATH}`,
-  )}`;
+      : `https://calculadorachile.cl${FEED_PATH}`;
 
   const copyFeedUrl = useCallback(async () => {
+    const url = absoluteFeedUrl();
     try {
-      const url =
-        typeof window !== 'undefined'
-          ? `${window.location.origin}${FEED_PATH}`
-          : FEED_PATH;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback: seleccionar no es trivial; al menos abrir el feed.
+      // Si el navegador bloquea clipboard, al menos abrir el feed.
       window.open(FEED_PATH, '_blank', 'noopener,noreferrer');
     }
   }, []);
 
   return (
-    <div className="mt-5 flex flex-col items-center gap-2">
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <a
-          href={feedlyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-[var(--color-primary-600)] hover:bg-[var(--color-primary-700)] transition-colors px-3.5 py-2 rounded-full shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)] focus-visible:ring-offset-2"
-        >
-          <Rss className="w-3.5 h-3.5" aria-hidden />
-          Suscribir en Feedly
-          <ExternalLink className="w-3 h-3 opacity-80" aria-hidden />
-        </a>
-        <button
-          type="button"
-          onClick={copyFeedUrl}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--foreground-secondary)] hover:text-[var(--color-accent-600)] transition-colors px-3 py-2 rounded-full border border-[var(--border)] hover:border-[var(--color-accent-500)]/40 bg-[var(--surface)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)]"
-        >
-          {copied ? (
-            <>
-              <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden />
-              URL copiada
-            </>
-          ) : (
-            <>
-              <Copy className="w-3.5 h-3.5" aria-hidden />
-              Copiar URL del feed
-            </>
-          )}
-        </button>
-      </div>
-      <a
-        href={FEED_PATH}
-        className="text-[11px] text-[var(--foreground-muted)] hover:text-[var(--color-accent-600)] underline-offset-2 hover:underline"
-        title={feedAbsoluteUrl}
+    <div className="mt-5 flex flex-col items-center gap-2 max-w-md mx-auto">
+      <button
+        type="button"
+        onClick={copyFeedUrl}
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-[var(--color-primary-600)] hover:bg-[var(--color-primary-700)] transition-colors px-3.5 py-2 rounded-full shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-500)] focus-visible:ring-offset-2"
       >
-        Ver feed XML
-      </a>
+        {copied ? (
+          <>
+            <Check className="w-3.5 h-3.5" aria-hidden />
+            URL del feed copiada
+          </>
+        ) : (
+          <>
+            <Copy className="w-3.5 h-3.5" aria-hidden />
+            Copiar enlace RSS del blog
+          </>
+        )}
+      </button>
+      <p className="text-[11px] leading-snug text-center text-[var(--foreground-muted)] px-2">
+        No hace falta cuenta en CalculaChile. Pega la URL en un lector RSS
+        (Feedly, Inoreader, NetNewsWire, etc.) o{' '}
+        <a
+          href={FEED_PATH}
+          className="underline underline-offset-2 hover:text-[var(--color-accent-600)]"
+        >
+          ábrela aquí
+        </a>
+        .
+      </p>
+      <span className="inline-flex items-center gap-1 text-[10px] text-[var(--foreground-muted)]">
+        <Rss className="w-3 h-3" aria-hidden />
+        Feed: <code className="font-mono text-[10px]">{FEED_PATH}</code>
+      </span>
     </div>
   );
 }
