@@ -11,10 +11,11 @@
 
 | Código | Archivo | Rol |
 |--------|---------|-----|
-| **B** | [`docs/research/deep-research-report.md`](./research/deep-research-report.md) | 30 dossiers (`DR[n]`): cifras, queries, fuentes |
-| **C** | [`docs/research/inventario_seo_chile_financiero_laboral_2026.md`](./research/inventario_seo_chile_financiero_laboral_2026.md) | Temas SEO con montos, fechas y fuentes oficiales |
+| **B** | [`research/deep-research.md`](./research/deep-research.md) | 30 dossiers (`DR[n]`): cifras, queries, fuentes |
+| **C** | [`research/inventario-seo.md`](./research/inventario-seo.md) | Temas SEO con montos, fechas y fuentes oficiales |
 
-Research vive en **`docs/research/`**. El backlog de posts está **solo en este archivo** (el plan editorial previo se eliminó en la limpieza de `docs/`).
+Contexto de producto/Grok/YMYL: [`contexto.md`](./contexto.md).  
+Research en **`docs/research/`**. El backlog de posts está **solo en este archivo**.
 
 **Publicados en producción** se verificaron en `src/data/articles.ts`.
 
@@ -336,7 +337,7 @@ Plan integrado operativo:
 
 1. **Siguiente post (sprint P1):** #2 `horas-extra-jornada-42-horas-chile-2026` (fecha sugerida 2026-07-30). Verificar en DT: jornada 42 h (Ley 21.561) + recargo mínimo 50%.  
 2. **Cola P2-ventana** en sep (feriados, contribuciones 3.ª, SUE, AFPER) antes que relleno continuo.  
-3. **#47–#50** entran en P2-continuo sep–oct (dossier ya en `docs/research/deep-research-report.md`).  
+3. **#47–#50** entran en P2-continuo sep–oct (dossier en `research/deep-research.md`).  
 4. **Antes de publicar:** revalidar montos en fuente oficial (T−1).  
 5. **Tras publicar:** tachar en **Publicados** / **Pendientes** de este doc y actualizar contadores.  
 6. Detalle de fuentes: `DR[n]` en deep-research o fila del inventario.

@@ -4,7 +4,7 @@
 // Inputs de valor/ahorro en UF (montos oficiales MINVU se publican en UF).
 // Conversión a CLP una sola vez al final con UF del día.
 // Fuentes: ChileAtiende DS01 T1–T3, SERVIU/MINVU DS49/DS19.
-// Ver docs/research/dossier-verificacion-ymyl-calculachile.md
+// Ver docs/research/dossier-ymyl.md
 // ============================================
 
 import {

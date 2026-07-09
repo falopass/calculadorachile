@@ -219,8 +219,10 @@ src/
 │   └── context/ValuesContext.tsx
 └── types/calculator.ts
 
-docs/                               # PRODUCT_CONTEXT, GROK_BUILD, plan editorial, auditoría YMYL
-docs/research/                      # dossier YMYL + inventario SEO + deep research
+docs/
+│   contexto.md                     # producto + YMYL + Grok
+│   plan-editorial.md               # backlog de posts
+│   research/                       # dossier-ymyl, inventario-seo, deep-research
 scripts/                            # audit-ymyl-matrix, update-values
 .github/workflows/                  # snapshot diario de valores
 ```
@@ -286,7 +288,7 @@ Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) solo en Vercel / secret
 | Schema.org | `src/lib/seo/schema.ts` — Organization, Person, WebSite, FAQ, HowTo, SoftwareApplication, Article, Breadcrumbs… |
 | Sitemaps | `src/app/sitemap*.xml/route.ts` + `src/lib/seo/sitemap-helpers.ts` |
 | Related calcs | `src/lib/seo/related-calculators.ts` |
-| Plan de contenidos | [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./docs/plan-editorial-integrado-2026-h2-2027-h1.md) |
+| Plan de contenidos | [`docs/plan-editorial.md`](./docs/plan-editorial.md) |
 
 **No** usar `LocalBusiness`: es plataforma web nacional.
 
@@ -300,7 +302,7 @@ Fuentes típicas: Banco Central, SII, Dirección del Trabajo, Superintendencia d
 node scripts/audit-ymyl-matrix.mjs   # catálogo ↔ adapter ↔ módulo
 ```
 
-Informe de referencia: [`docs/auditoria-ymyl-2026-07.md`](./docs/auditoria-ymyl-2026-07.md).
+Estado YMYL y arranque: [`docs/contexto.md`](./docs/contexto.md). Matriz: `node scripts/audit-ymyl-matrix.mjs`.
 
 ### AdSense
 
@@ -314,8 +316,8 @@ Informe de referencia: [`docs/auditoria-ymyl-2026-07.md`](./docs/auditoria-ymyl-
 
 | Doc | Rol |
 |-----|-----|
-| [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./docs/plan-editorial-integrado-2026-h2-2027-h1.md) | **Plan operativo** (publicados + pendientes P1/P2/P3) |
-| [`docs/research/`](./docs/research/) | Dossier YMYL, inventario SEO, deep research (30 dossiers) |
+| [`docs/plan-editorial.md`](./docs/plan-editorial.md) | **Único plan de posts** (publicados + pendientes) |
+| [`docs/research/`](./docs/research/) | dossier-ymyl · inventario-seo · deep-research |
 
 Código de blog: `src/data/articles.ts` → URL `/blog/{slug}`.
 
@@ -361,13 +363,10 @@ Commit típico del bot: `chore(values): actualizar snapshot diario [skip ci]`.
 
 | Documento | Contenido |
 |-----------|-----------|
-| [`AGENTS.md`](./AGENTS.md) | Constitución del producto para humanos y agentes |
-| [`docs/README.md`](./docs/README.md) | Índice de esta carpeta |
-| [`docs/PRODUCT_CONTEXT.md`](./docs/PRODUCT_CONTEXT.md) | Snapshot vivo (números, P0, anti-objetivos) |
-| [`docs/GROK_BUILD.md`](./docs/GROK_BUILD.md) | Cómo trabajar el repo en Grok Build |
-| [`docs/auditoria-ymyl-2026-07.md`](./docs/auditoria-ymyl-2026-07.md) | Auditoría YMYL |
-| [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./docs/plan-editorial-integrado-2026-h2-2027-h1.md) | Backlog de contenidos |
-| [`docs/research/`](./docs/research/) | Research y dossiers |
+| [`AGENTS.md`](./AGENTS.md) | Constitución del producto |
+| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + Grok Build (todo en uno) |
+| [`docs/plan-editorial.md`](./docs/plan-editorial.md) | Backlog de posts |
+| [`docs/research/`](./docs/research/) | dossier-ymyl · inventario-seo · deep-research |
 
 ### Carpetas locales de agentes (no van al remoto)
 
@@ -443,7 +442,7 @@ Stack: **Next.js 15 (App Router), React 19, TypeScript 5, Tailwind 3, Framer Mot
 
 This is a **YMYL** product: formula changes require verified official sources (SII, Labour Directorate, Central Bank, Pension Superintendence, etc.). Catalog inputs must match what the calculation adapter actually uses (no “phantom” fields).
 
-Contributor and agent rules: [`AGENTS.md`](./AGENTS.md). Editorial backlog: [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./docs/plan-editorial-integrado-2026-h2-2027-h1.md). Local agent tooling folders (`.agents/`, `.grok/`, `.opencode/`) are **gitignored**.
+Contributor and agent rules: [`AGENTS.md`](./AGENTS.md). Context: [`docs/contexto.md`](./docs/contexto.md). Editorial: [`docs/plan-editorial.md`](./docs/plan-editorial.md). Local agent folders (`.agents/`, `.grok/`, `.opencode/`) are **gitignored**.
 
 </details>
 

@@ -202,6 +202,15 @@ El trabajo no está terminado hasta ejecutar una validación real y reportar el 
 
 Si la validación falla, corrige y vuelve a ejecutar. No entregues “debería pasar”.
 
+## Documentación (mínima)
+
+| Archivo | Uso |
+|---------|-----|
+| **`AGENTS.md`** (este) | Constitución del producto |
+| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + Grok Build (un solo archivo) |
+| [`docs/plan-editorial.md`](./docs/plan-editorial.md) | Backlog de posts SEO/AdSense |
+| [`docs/research/`](./docs/research/) | `dossier-ymyl.md` · `inventario-seo.md` · `deep-research.md` |
+
 ## Grok Build (único harness)
 
 Este producto se desarrolla **solo en Grok Build** (terminal, Grok 4.5 / `grok-build`).  
@@ -209,14 +218,10 @@ No hay workflow de pymes. No uses `web-factory`, `pyme-template-intelligence` ni
 
 | Pieza | Path |
 |-------|------|
-| Manual de sesión | `docs/GROK_BUILD.md` |
-| Contexto vivo (P0, números) | `docs/PRODUCT_CONTEXT.md` |
-| Reglas cortas | `.grok/rules/` |
-| Skills | `.grok/skills/` |
-| Slash | `.grok/commands/` → `/ymyl-audit` `/p0-wiring` `/ship-check` `/nueva-calc` `/seo-fix` |
-| Hooks | `.grok/hooks/` (primera vez: `/hooks-trust`) |
-| Auditoría wiring | `docs/auditoria-ymyl-2026-07.md` + `node scripts/audit-ymyl-matrix.mjs` |
-| Research | `docs/research/` |
+| Contexto + arranque | `docs/contexto.md` |
+| Skills locales (gitignored) | `.grok/skills/` |
+| Slash | `/ymyl-audit` `/p0-wiring` `/ship-check` `/nueva-calc` `/seo-fix` |
+| Matriz fantasmas | `node scripts/audit-ymyl-matrix.mjs` |
 
 ### Skills
 
@@ -232,11 +237,11 @@ Config usuario recomendada (`~/.grok/config.toml`): `models.default = grok-build
 
 ## Criterio operativo para agentes
 
-1. Lee este archivo y `docs/PRODUCT_CONTEXT.md` antes de tocar código.
+1. Lee este archivo y `docs/contexto.md` antes de tocar código.
 2. Lee `package.json` antes de asumir stack o comandos.
 3. Ubica el patrón existente y cambia lo mínimo robusto.
 4. Distingue dato **verificado**, **inferido** y **supuesto**.
 5. Dinero, impuestos, laboral, previsión, SEO indexado, AdSense o secretos: cautela; confirma si hay dos caminos.
 6. No inventes cifras, fuentes, reseñas ni valores financieros.
-7. Workflows: skills/slash de `.grok/` según `docs/GROK_BUILD.md`.
+7. Posts: `docs/plan-editorial.md` + research. Fórmulas: `docs/research/dossier-ymyl.md` + matriz.
 8. Tras wiring de calculadora: `node scripts/audit-ymyl-matrix.mjs` debe mostrar 0 fantasmas en ese `id` (salvo cosméticos documentados).
