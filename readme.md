@@ -219,7 +219,7 @@ src/
 │   └── context/ValuesContext.tsx
 └── types/calculator.ts
 
-docs/                               # producto, auditorías, plan editorial
+docs/                               # PRODUCT_CONTEXT, GROK_BUILD, plan editorial, auditoría YMYL
 docs/research/                      # dossier YMYL + inventario SEO + deep research
 scripts/                            # audit-ymyl-matrix, update-values
 .github/workflows/                  # snapshot diario de valores
@@ -315,7 +315,6 @@ Informe de referencia: [`docs/auditoria-ymyl-2026-07.md`](./docs/auditoria-ymyl-
 | Doc | Rol |
 |-----|-----|
 | [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./docs/plan-editorial-integrado-2026-h2-2027-h1.md) | **Plan operativo** (publicados + pendientes P1/P2/P3) |
-| [`docs/plan-editorial-seo-2026-h2-2027-h1.md`](./docs/plan-editorial-seo-2026-h2-2027-h1.md) | Histórico / outlines (SUPERSEDED) |
 | [`docs/research/`](./docs/research/) | Dossier YMYL, inventario SEO, deep research (30 dossiers) |
 
 Código de blog: `src/data/articles.ts` → URL `/blog/{slug}`.
@@ -363,10 +362,10 @@ Commit típico del bot: `chore(values): actualizar snapshot diario [skip ci]`.
 | Documento | Contenido |
 |-----------|-----------|
 | [`AGENTS.md`](./AGENTS.md) | Constitución del producto para humanos y agentes |
+| [`docs/README.md`](./docs/README.md) | Índice de esta carpeta |
 | [`docs/PRODUCT_CONTEXT.md`](./docs/PRODUCT_CONTEXT.md) | Snapshot vivo (números, P0, anti-objetivos) |
 | [`docs/GROK_BUILD.md`](./docs/GROK_BUILD.md) | Cómo trabajar el repo en Grok Build |
 | [`docs/auditoria-ymyl-2026-07.md`](./docs/auditoria-ymyl-2026-07.md) | Auditoría YMYL |
-| [`docs/auditoria-codigo-estructura.md`](./docs/auditoria-codigo-estructura.md) | Estructura / bundle |
 | [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./docs/plan-editorial-integrado-2026-h2-2027-h1.md) | Backlog de contenidos |
 | [`docs/research/`](./docs/research/) | Research y dossiers |
 

@@ -41,7 +41,8 @@ Modelo de la sesión: **grok-build**.
 | Slash | `.grok/commands/*` |
 | Hook sesión | `.grok/hooks/session-start.json` |
 | Manual | este archivo |
-| Auditoría código | `docs/auditoria-ymyl-2026-07.md` |
+| Auditoría YMYL | `docs/auditoria-ymyl-2026-07.md` |
+| Plan editorial | `docs/plan-editorial-integrado-2026-h2-2027-h1.md` |
 | Research | `docs/research/` |
 
 Config de usuario (`~/.grok/config.toml`):

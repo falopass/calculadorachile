@@ -5,28 +5,25 @@
 | **Producto** | calculadorachile.cl — 39 calculadoras · SEO orgánico + AdSense |
 | **Objetivo** | Maximizar **pageviews → impresiones AdSense**. Fit a calculadora = preferible, no obligatorio. |
 | **Consolidación** | 2026-07-10 |
-| **Estado** | **Plan operativo canónico** (reemplaza el uso diario del plan editorial previo) |
+| **Estado** | **Único plan editorial operativo** del repo |
 
-## Fuentes consolidadas (tres artefactos)
+## Fuentes de research (en uso)
 
-| Código | Archivo en repo | Rol |
-|--------|-----------------|-----|
-| **A** | [`docs/plan-editorial-seo-2026-h2-2027-h1.md`](./plan-editorial-seo-2026-h2-2027-h1.md) | Esqueleto del backlog: #, slugs, fechas, CTA, sprint |
-| **B** | [`docs/research/deep-research-report.md`](./research/deep-research-report.md) | 30 dossiers (`DR[1]`…`DR[30]`): cifras, queries, fuentes |
-| **C** | [`docs/research/inventario_seo_chile_financiero_laboral_2026.md`](./research/inventario_seo_chile_financiero_laboral_2026.md) | 52 temas con montos, fechas y fuentes oficiales |
+| Código | Archivo | Rol |
+|--------|---------|-----|
+| **B** | [`docs/research/deep-research-report.md`](./research/deep-research-report.md) | 30 dossiers (`DR[n]`): cifras, queries, fuentes |
+| **C** | [`docs/research/inventario_seo_chile_financiero_laboral_2026.md`](./research/inventario_seo_chile_financiero_laboral_2026.md) | Temas SEO con montos, fechas y fuentes oficiales |
 
-> **Convención de rutas (canónica):** research e inventarios viven en **`docs/research/`**.  
-> (Un tiempo estuvieron sueltos en `docs/`; se reubicaron al integrar.)
+Research vive en **`docs/research/`**. El backlog de posts está **solo en este archivo** (el plan editorial previo se eliminó en la limpieza de `docs/`).
 
-**Publicados en producción** se verificaron en `src/data/articles.ts` (solo lectura; no se modificó).
+**Publicados en producción** se verificaron en `src/data/articles.ts`.
 
-**Reglas de esta consolidación**
+**Reglas**
 
-1. Base del backlog = catálogo del plan **A** (sin inventar slugs).
-2. B y C enriquecen (dossier, montos, ventana) o se listan en “sin lugar”.
-3. Dedupe cuando el mismo tema tiene nombres distintos en A/B/C.
-4. **Extensión #47–#50:** posts de pageview AdSense promovidos desde DR huérfanos de alto valor (decisión 2026-07-10; ver sección final). Siguen saliendo de **B** (dossier), no de la nada.
-5. Patrón de publicación: el de `articles.ts` (frontmatter + HTML prose); este doc no escribe posts.
+1. No inventar slugs fuera de este plan o de posts ya en `articles.ts`.
+2. Al redactar, abrir el `DR[n]` y/o la fila de inventario cuando existan.
+3. **Extensión #47–#50:** pageview AdSense desde DR huérfanos (decisión 2026-07-10).
+4. Patrón de publicación: el de `articles.ts` (frontmatter + HTML prose); este doc no escribe posts.
 
 **Prioridad**
 
@@ -329,9 +326,9 @@ Plan integrado operativo:
 | Cada DR[1–30] clasificado (con lugar / sin lugar / extensión) | Sí |
 | Temas de C sin fila en A listados con descarte | Sí |
 | Duplicados con nombre canónico | Sí |
-| Plan A original con banner **SUPERSEDED** al inicio | Sí |
 | Research en `docs/research/` | Sí |
 | Extensión #47–#50 documentada y en tabla de pendientes | Sí |
+| Docs limpios (sin plan SUPERSEDED ni dumps de sesión) | Sí |
 
 ---
 
@@ -341,9 +338,9 @@ Plan integrado operativo:
 2. **Cola P2-ventana** en sep (feriados, contribuciones 3.ª, SUE, AFPER) antes que relleno continuo.  
 3. **#47–#50** entran en P2-continuo sep–oct (dossier ya en `docs/research/deep-research-report.md`).  
 4. **Antes de publicar:** revalidar montos en fuente oficial (T−1).  
-5. **Tras publicar:** tachar aquí y en el plan A histórico; actualizar contadores.  
-6. Outlines largos: plan A (histórico) o sección DR correspondiente.
+5. **Tras publicar:** tachar en **Publicados** / **Pendientes** de este doc y actualizar contadores.  
+6. Detalle de fuentes: `DR[n]` en deep-research o fila del inventario.
 
 ---
 
-*Consolidación A + B + C + extensión #47–#50. No sustituye verificación YMYL el día de publicación.*
+*Plan editorial + research B/C + extensión #47–#50. No sustituye verificación YMYL el día de publicación.*

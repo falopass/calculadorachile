@@ -1,25 +1,22 @@
-# Research — fundamentos YMYL (CalculaChile)
+# docs/ — CalculaChile
 
-Investigaciones externas para Grok Build **antes** de tocar fórmulas o wiring sensible.
+Documentación de producto y research. **Solo lo operativo.**
 
-## Archivos
+## Índice
 
-| Archivo | Contenido |
-|---------|-----------|
-| **`dossier-verificacion-ymyl-calculachile.md`** | **Canónico** — dossier completo (2026-07-08) |
-| `constants-2026.csv` | (opcional) constantes exportadas |
-| `notas-*.md` | Apuntes por tema (SIS, boleta, MINVU…) |
+| Archivo | Uso |
+|---------|-----|
+| [`PRODUCT_CONTEXT.md`](./PRODUCT_CONTEXT.md) | Snapshot vivo del producto (números, P0, anti-objetivos) |
+| [`GROK_BUILD.md`](./GROK_BUILD.md) | Cómo trabajar el repo en Grok Build |
+| [`auditoria-ymyl-2026-07.md`](./auditoria-ymyl-2026-07.md) | Auditoría YMYL + referencia de fantasmas (cruzar con `scripts/audit-ymyl-matrix.mjs`) |
+| [`plan-editorial-integrado-2026-h2-2027-h1.md`](./plan-editorial-integrado-2026-h2-2027-h1.md) | **Plan de contenidos** (publicados + pendientes) |
+| [`research/`](./research/) | Dossier YMYL, inventario SEO, deep research |
 
-## En Grok Build
+Constitución del repo (raíz): [`../AGENTS.md`](../AGENTS.md) · [`../readme.md`](../readme.md).
 
-```text
-Lee docs/research/dossier-verificacion-ymyl-calculachile.md y docs/PRODUCT_CONTEXT.md.
-Cruza con docs/auditoria-ymyl-2026-07.md y node scripts/audit-ymyl-matrix.mjs.
-No inventes tasas fuera del dossier o de constants.ts con fuente.
-```
+## No guardar aquí
 
-## Reglas
-
-- URLs oficiales preferentes.
-- Etiquetar verificado / inferido / no verificado.
-- Sin secretos ni datos personales en el repo.
+- HTML de sesión / dumps one-shot  
+- Planes SUPERSEDED  
+- Exports GSC  
+- HTML de Perplexity  
