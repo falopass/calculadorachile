@@ -122,7 +122,7 @@ export async function GET() {
     <generator>Next.js / CalculaChile</generator>
     <atom:link href="${escapeXml(FEED_URL)}" rel="self" type="application/rss+xml"/>
     <image>
-      <url>${escapeXml(absoluteUrl('/logo.png'))}</url>
+      <url>${escapeXml(absoluteUrl('/logo-calculator-icon.png'))}</url>
       <title>${escapeXml(FEED_TITLE)}</title>
       <link>${escapeXml(`${SITE_URL}/blog`)}</link>
     </image>
