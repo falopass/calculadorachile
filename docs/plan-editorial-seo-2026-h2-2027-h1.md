@@ -1,5 +1,11 @@
 # Plan editorial SEO — CalculaChile (jul 2026 – ene 2027)
 
+> **SUPERSEDED** — Este documento queda como **histórico / backlog de detalle** (outlines, checklist de tachado, YMYL blockers).  
+> El plan operativo unificado es:  
+> [`docs/plan-editorial-integrado-2026-h2-2027-h1.md`](./plan-editorial-integrado-2026-h2-2027-h1.md)  
+> Consolidación de este archivo + [`research/deep-research-report.md`](./research/deep-research-report.md) + [`research/inventario_seo_chile_financiero_laboral_2026.md`](./research/inventario_seo_chile_financiero_laboral_2026.md).  
+> **No borrar** este archivo.
+
 | | |
 |---|---|
 | **Producto** | calculadorachile.cl — 39 calculadoras, AdSense + SEO orgánico |

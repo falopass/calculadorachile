@@ -1,25 +1,17 @@
-# Research — fundamentos YMYL (CalculaChile)
+# Research — CalculaChile
 
-Investigaciones externas para Grok Build **antes** de tocar fórmulas o wiring sensible.
-
-## Archivos
+Carpeta canónica de **investigación y dossiers** (no código de producto).
 
 | Archivo | Contenido |
 |---------|-----------|
-| **`dossier-verificacion-ymyl-calculachile.md`** | **Canónico** — dossier completo (2026-07-08) |
-| `constants-2026.csv` | (opcional) constantes exportadas |
-| `notas-*.md` | Apuntes por tema (SIS, boleta, MINVU…) |
+| `dossier-verificacion-ymyl-calculachile.md` | Verificación YMYL / fuentes oficiales |
+| `inventario_seo_chile_financiero_laboral_2026.md` | Inventario de temas SEO (montos, fechas, fuentes) |
+| `deep-research-report.md` | 30 dossiers profundos (`DR[1]`…`DR[30]`) |
 
-## En Grok Build
+**Plan operativo de contenidos:**  
+[`../plan-editorial-integrado-2026-h2-2027-h1.md`](../plan-editorial-integrado-2026-h2-2027-h1.md)
 
-```text
-Lee docs/research/dossier-verificacion-ymyl-calculachile.md y docs/PRODUCT_CONTEXT.md.
-Cruza con docs/auditoria-ymyl-2026-07.md y node scripts/audit-ymyl-matrix.mjs.
-No inventes tasas fuera del dossier o de constants.ts con fuente.
-```
+**Plan histórico (superseded):**  
+[`../plan-editorial-seo-2026-h2-2027-h1.md`](../plan-editorial-seo-2026-h2-2027-h1.md)
 
-## Reglas
-
-- URLs oficiales preferentes.
-- Etiquetar verificado / inferido / no verificado.
-- Sin secretos ni datos personales en el repo.
+No commitear dumps HTML one-shot de Perplexity ni exports GSC aquí.
