@@ -11,7 +11,7 @@ import { BookOpen } from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import ArticleCard from '@/components/blog/ArticleCard';
-import RssSubscribeButton from '@/components/blog/RssSubscribeButton';
+import ShareBlogButton from '@/components/blog/ShareBlogButton';
 import JsonLd from '@/components/seo/JsonLd';
 import {
   collectionPageSchema,
@@ -115,11 +115,7 @@ export default function BlogPage() {
             <p className="text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto leading-relaxed">
               {PAGE_DESC}
             </p>
-            {/*
-              Suscripción RSS usable: Feedly + copiar URL + XML.
-              El enlace plano a feed.xml solo muestra XML y parece roto.
-            */}
-            <RssSubscribeButton />
+            <ShareBlogButton />
           </div>
 
           {articles.length > 0 ? (
