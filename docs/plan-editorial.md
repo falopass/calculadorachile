@@ -4,7 +4,7 @@
 |---|---|
 | **Producto** | calculadorachile.cl — 39 calculadoras · SEO orgánico + AdSense |
 | **Objetivo** | Maximizar **pageviews → impresiones AdSense**. Fit a calculadora = preferible, no obligatorio. |
-| **Consolidación** | 2026-07-10 |
+| **Consolidación** | 2026-07-10 · formato blog/guía 2026-07-11 |
 | **Estado** | **Único plan editorial operativo** del repo |
 
 ## Fuentes de research (en uso)
@@ -14,110 +14,149 @@
 | **B** | [`research/deep-research.md`](./research/deep-research.md) | 30 dossiers (`DR[n]`): cifras, queries, fuentes |
 | **C** | [`research/inventario-seo.md`](./research/inventario-seo.md) | Temas SEO con montos, fechas y fuentes oficiales |
 
-Contexto de producto/Grok/YMYL: [`contexto.md`](./contexto.md).  
-Research en **`docs/research/`**. El backlog de posts está **solo en este archivo**.
+Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.ts` · guías → `src/data/guias.ts`.
 
-**Publicados en producción** se verificaron en `src/data/articles.ts`.
+---
 
-**Reglas**
+## Formato: blog vs guía
 
-1. No inventar slugs fuera de este plan o de posts ya en `articles.ts`.
-2. Al redactar, abrir el `DR[n]` y/o la fila de inventario cuando existan.
-3. **Extensión #47–#50:** pageview AdSense desde DR huérfanos (decisión 2026-07-10).
-4. Patrón de publicación: el de `articles.ts` (frontmatter + HTML prose); este doc no escribe posts.
+| | **blog** | **guía** |
+|---|----------|----------|
+| URL | `/blog/{slug}` | `/guias/{slug}` |
+| Pregunta | ¿Cuánto / cuándo / qué cambió **ahora**? | ¿Cómo funciona **todo** el tema? |
+| Tamaño | ~800–1.500+ palabras, un `content` | ~2.000–3.500, `sections` H2/H3 |
+| Cadencia | 1–2 / semana (este plan) | Pocas al año |
+| Uso SEO | Captura + pageview AdSense | Autoridad del cluster |
 
-**Prioridad**
+**Regla de 10 segundos**
+
+1. ¿Tiene **fecha, monto del año o hito legal**? → **blog**  
+2. ¿Es el **manual del tema** y **no** hay `/guias/...`? → **guía**  
+3. ¿Ya hay guía del cluster? → **blog** satélite (no otra guía)
+
+**En este plan:** ~95% **blog**.  
+**Única guía obligada del backlog:** **#39** Operación Renta 2027.  
+**Candidatas a guía después** (solo si el blog rankea o falta pillar): #47 licencia médica, #48 contratos, #31 cesantía (ampliada).
+
+### Guías pillar ya existentes (no duplicar)
+
+| Guía (`/guias/…`) | Blogs del plan que cuelgan de ella (satélites) |
+|-------------------|-----------------------------------------------|
+| `sueldo-liquido-chile` | #1, #2 ✅, #3, #19 |
+| `finiquito-laboral-chile` | #6, #28, #31 |
+| `uf-utm-indicadores-chile` | #17 |
+| `iva-boleta-honorarios-chile` | #12, #13, #24, #32 |
+| `credito-hipotecario-chile` | #14, #43 |
+| `afp-pension-chile` | #8, #22, #23, #49 |
+| `comprar-vivienda-chile` / MINVU | #26 |
+| `vehiculos-chile-permiso-multas` | #20 ✅, #40, #46 ✅ |
+| `familia-pension-alimenticia-chile` | #9, #38 |
+| `credito-cae-educacion-chile` | CAE ✅ |
+| `empresas-pymes-chile` | #1, #19, #45 |
+| `hogar-servicios-basicos-chile` | #4 |
+
+### Leyenda columna **Formato**
+
+| Valor | Significado |
+|-------|-------------|
+| **blog** | Escribir en `articles.ts` |
+| **guía** | Escribir en `guias.ts` (solo #39 en el plan) |
+| **blog\*** | Blog primero; **candidata** a guía pillar más adelante |
+
+---
+
+## Prioridad
 
 | Nivel | Criterio (ref. 2026-07-10) |
 |-------|----------------------------|
-| **P1** | Fit calculadora **alto** + ventana de publish/pico **≤ 8 semanas** (hasta ~2026-09-04) + dossier disponible (**DR** o **inventario** con montos/fechas + fuente) |
-| **P2** | Fit medio **o** dossier disponible pero ventana no urgente. *Dentro de P2 usar sub-orden abajo.* |
-| **P2-ventana** | P2 con **fecha o pico acotado** en las próximas ~12 semanas (útil sep–dic) |
-| **P2-continuo** | P2 evergreen / “todo el año” (sin urgencia de calendario) |
-| **P3** | Sin fit fuerte + sin dossier + ventana amplia / relleno ene 2027 |
+| **P1** | Fit calculadora **alto** + ventana ≤ ~8 semanas + dossier/inventario |
+| **P2-ventana** | Pico o fecha legal acotada |
+| **P2-continuo** | Evergreen / sin deadline |
+| **P3** | Ene 2027 / relleno |
 
 ---
 
 ## Publicados
 
-| # plan | Título | slug | Fecha (`date`) | Cluster | Calculadora enlazada |
-|-------:|--------|------|----------------|---------|----------------------|
-| 20 | Segunda cuota permiso de circulación 2026 | `permiso-circulacion-segunda-cuota-agosto-2026` | 2026-07-09 | vehículos | permiso-circulacion, multas-transito |
-| 46 | Revisión técnica 2026: calendario por patente | `revision-tecnica-chile-2026-calendario-patente` | 2026-07-10 | vehículos | permiso-circulacion |
-| 1 | Cotización empleador 3,5% desde agosto 2026 | `cotizacion-empleador-3-5-agosto-2026-costo-pyme` | 2026-07-15 | laboral / previsional | costo-empleado-pyme, sueldo-liquido |
-| 37→ | CAE 2026: cuota, renegociación y condonación | `cae-renegociacion-condonacion-2026` | 2026-05-16 | educación / deuda | credito-cae |
-| 7 | Aguinaldo Fiestas Patrias 2026 (IPS + sector público) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios / laboral | aguinaldo, sueldo-liquido |
-| 2 | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | 2026-07-11 | laboral | horas-extra, sueldo-liquido |
+| # | Formato | Título | slug | Fecha | Cluster | Calc |
+|--:|--------|--------|------|-------|---------|------|
+| 20 | blog | Segunda cuota permiso de circulación 2026 | `permiso-circulacion-segunda-cuota-agosto-2026` | 2026-07-09 | vehículos | permiso, multas |
+| 46 | blog | Revisión técnica 2026: calendario por patente | `revision-tecnica-chile-2026-calendario-patente` | 2026-07-10 | vehículos | permiso |
+| 1 | blog | Cotización empleador 3,5% desde agosto 2026 | `cotizacion-empleador-3-5-agosto-2026-costo-pyme` | 2026-07-15 | laboral | costo-empleado, sueldo |
+| 37→ | blog | CAE 2026: cuota, renegociación y condonación | `cae-renegociacion-condonacion-2026` | 2026-05-16 | educación | credito-cae |
+| 7 | blog | Aguinaldo Fiestas Patrias 2026 (IPS + SP) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios | aguinaldo |
+| 2 | blog | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | 2026-07-11 | laboral | horas-extra |
 
-**Notas**
-
-- **#37** del plan original (`cae-2026-simular-cuota-renegociacion`) se unifica al post CAE ya en producción (slug canónico de la tabla). No reaparece en pendientes.
-- **#7** unifica en un solo post los dos temas de inventario (aguinaldo IPS + aguinaldo sector público FP).
-- **#46** no estaba en el backlog 1–45 original; se mantiene como pieza publicada del sprint vehículos.
-- Existen evergreen previos en `articles.ts` (finiquito, UF, boleta, horas extra, etc.). No se listan aquí como “publicados del plan”; si un pendiente solapa evergreen, se anota en **Origen**.
+**Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.
 
 ---
 
 ## Plan integrado (pendientes)
 
-Ordenado por **fecha de publicación sugerida** (del plan A; sprint de arranque para #2/#3).
+Ordenado por **fecha de publicación sugerida**.
 
-| # | Título | Slug | Origen | Dossier deep research | Fit calculadora | Cluster | Fecha sugerida | Ventana pico | Prioridad |
-|--:|--------|------|--------|----------------------|-----------------|---------|----------------|--------------|-----------|
-| ~~2~~ | ~~Horas extra con jornada de 42 horas Chile 2026~~ | ~~`horas-extra-jornada-42-horas-chile-2026`~~ | plan+inventario | — · evergreen: `guia-horas-extra-chile` | alto | laboral | ~~2026-07-11~~ | ago–oct 2026 | ✅ **publicado** |
-| 3 | Sueldo mínimo 2026 $553.553: recalcular líquido | `sueldo-minimo-2026-calcular-liquido` | plan+inventario | — | alto | laboral | 2026-08-05 | ago–dic 2026 | **P1** |
-| 4 | Subsidio eléctrico 2026: resultados y descuento en la cuenta | `subsidio-electrico-2026-resultados-descuento-cuenta` | plan+DR+inventario | DR[25] subsidio eléctrico | medio | hogar / servicios | 2026-08-18 | ago–sep 2026 (resultados + descuento) | **P2-ventana** |
-| 5 | Pago anual BTM y SEJ 2026 y puente al Subsidio Unificado | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | plan+DR+inventario | DR[13] BTM/SEJ → SUE | medio | empleo / beneficios | 2026-08-21 | ago 2026 | **P2-ventana** |
-| 6 | Finiquito 2026 con sueldo mínimo: ejemplo paso a paso | `finiquito-2026-ejemplo-sueldo-minimo` | plan+DR+inventario | DR[12] renuncia vs despido | alto | laboral | 2026-08-23 | continuo | **P1** |
-| 8 | Aumento PGU septiembre 2026 (75 años o más) | `pgu-aumento-septiembre-2026-75-anos` | plan+inventario | DR[19] reforma 21.735 *(soporte)* | alto | pensión | 2026-08-28 | sep 2026 | **P1** |
-| 9 | Asignación familiar 2026: tramos y montos | `asignacion-familiar-2026-tramos-montos` | plan+inventario | — | alto | familia / beneficios | 2026-09-01 | sep–dic 2026 | **P1** |
-| 10 | Feriados irrenunciables 18 y 19 de septiembre 2026 (comercio) | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | plan+inventario | — | medio | laboral / comercio | 2026-09-03 | 1–3 sem. previas al 18–19 sep | **P2-ventana** |
-| 11 | Contribuciones 2026: 3.ª cuota 30 de septiembre | `contribuciones-tercera-cuota-septiembre-2026` | plan+DR+inventario | DR[27] contribuciones bienes raíces | alto | vivienda / impuestos | 2026-09-05 | 30 sep 2026 | **P2-ventana** |
-| 12 | Boleta de honorarios 2026: retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | plan+DR+inventario | DR[24] boleta honorarios | alto | impuestos / independientes | 2026-09-08 | continuo | **P2-continuo** |
-| 47 | Licencia médica 2026: quién paga, plazos y SIL | `licencia-medica-2026-quien-paga-sil` | extensión+DR | DR[7] licencia médica | bajo *(pageview AdSense)* | laboral / salud | 2026-09-10 | continuo (evergreen alto) | **P2-continuo** |
-| 13 | Formulario 29 e IVA mensual: plazos y cálculo | `formulario-29-iva-mensual-plazos-2026` | plan+inventario | — · evergreen IVA: `guia-iva-chile-2026` | alto | impuestos | 2026-09-11 | cada mes (~día 12) | **P2-ventana** |
-| 48 | Contrato indefinido vs plazo fijo vs honorarios 2026 | `contrato-indefinido-plazo-fijo-honorarios-2026` | extensión+DR | DR[8] tipos de contrato | medio | laboral | 2026-09-12 | continuo | **P2-continuo** |
-| 14 | Subsidio al crédito hipotecario MINVU: impacto en dividendo | `subsidio-credito-hipotecario-minvu-dividendo-2026` | plan+inventario | — *(distinto de DR[28] habitacional)* | alto | vivienda | 2026-09-15 | sep 2026–may 2027 | **P2-ventana** |
-| 15 | Gratificación legal 2026: tope 4,75 IMM | `gratificacion-legal-tope-2026-ingreso-minimo` | plan+inventario | — · evergreen: `como-funciona-gratificacion-legal` | alto | laboral | 2026-09-18 | sep–dic 2026 | **P2-ventana** |
-| 16 | Subsidio Unificado al Empleo (Ley 21.808) desde 1 oct 2026 | `subsidio-unificado-empleo-ley-21808-octubre-2026` | plan+DR+inventario | DR[13] transición SUE | medio | empleo / beneficios | 2026-09-22 | sep–nov 2026 | **P2-ventana** |
-| 17 | UF y UTM: convertir y usos en 2026 | `uf-utm-convertir-chile-2026-usos` | plan | — · evergreen: `todo-sobre-uf-chile` | alto | conversiones | 2026-09-25 | continuo | **P2-continuo** |
-| 18 | Aporte Familiar Permanente 2026: cobro y plazo 9 meses | `aporte-familiar-permanente-2026-cobro-plazo` | plan+inventario | — | bajo *(pageview)* | familia / beneficios | 2026-09-29 | oct–nov 2026 | **P2-ventana** |
-| 19 | Costo real de un empleado PYME 2026 (+ cotización empleador) | `costo-empleado-pyme-2026-cotizacion-empleador` | plan+inventario | DR[19] *(contexto reforma)* | alto | laboral / empresas | 2026-10-02 | oct 2026 | **P2-ventana** |
-| 21 | Impuesto de segunda categoría 2026: tramos y ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | plan | — | alto | impuestos / laboral | 2026-10-06 | continuo | **P2-continuo** |
-| 49 | Cambio de AFP 2026: cómo hacerlo, plazos y multifondos | `cambio-afp-2026-como-hacerlo` | extensión+DR | DR[14] *(ángulo transaccional; hermano de #22)* | alto | pensión | 2026-10-07 | continuo | **P2-continuo** |
-| 22 | Comisiones AFP 2026: comparar descuento mensual | `comisiones-afp-2026-comparar-descuento` | plan+DR | DR[14] *(ángulo comparativo)* · evergreen: `comparativa-comisiones-afp-2026` | alto | pensión | 2026-10-09 | continuo | **P2-continuo** |
-| 23 | APV 2026: simular ahorro y efecto tributario | `apv-2026-simulador-ahorro-tributario` | plan+DR | DR[17] APV y APVC | alto | pensión / impuestos | 2026-10-13 | oct–abr | **P2-ventana** |
-| 50 | Reforma tributaria Ley 21.713: cambios 2026 para personas y PYMES | `reforma-tributaria-ley-21713-2026-personas-pymes` | extensión+DR | DR[23] reforma tributaria 21.713 | bajo *(pageview)* | impuestos | 2026-10-14 | continuo 2026 | **P2-continuo** |
-| 24 | Cotización de independientes 2026 (boleta + reforma) | `cotizacion-independientes-2026-boleta` | plan+DR+inventario | DR[16] independientes cotización | alto | previsional / independientes | 2026-10-16 | oct–abr | **P2-ventana** |
-| 25 | Reajuste de arriendo por UF e IPC: ejemplo 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | plan | — · evergreen: `reajuste-arriendo-uf-2026` | alto | vivienda | 2026-10-20 | continuo | **P2-continuo** |
-| 26 | Subsidio habitacional DS01/DS49: ahorro UF y topes | `subsidio-habitacional-ds01-ds49-ahorro-uf-2026` | plan+DR+inventario | DR[28] subsidio habitacional MINVU · evergreen: `subsidios-minvu-2026-guia` | alto | vivienda | 2026-10-23 | continuo / llamados | **P2-continuo** |
-| 27 | Vacaciones proporcionales 2026: cómo se pagan | `vacaciones-proporcionales-2026-calcular` | plan+DR | DR[11] feriado legal / vacaciones · evergreen: `vacaciones-proporcionales-guia` | alto | laboral | 2026-10-27 | continuo | **P2-continuo** |
-| 28 | Indemnización por años de servicio: tope 90 UF 2026 | `indemnizacion-anos-servicio-tope-90-uf-2026` | plan | — · evergreen: `calcular-indemnizacion-por-anos` | alto | laboral | 2026-10-30 | continuo | **P2-continuo** |
-| 29 | Contribuciones 2026: 4.ª cuota 30 de noviembre | `contribuciones-cuarta-cuota-noviembre-2026` | plan+DR+inventario | DR[27] contribuciones *(compartido con #11)* | alto | vivienda / impuestos | 2026-11-03 | 30 nov 2026 | **P2-ventana** |
-| 30 | Aguinaldo de Navidad pensionados 2026 | `aguinaldo-navidad-pensionados-2026` | plan+inventario | — | alto | pensión / beneficios | 2026-11-10 | nov–dic 2026 | **P2-ventana** |
-| 31 | Seguro de cesantía y finiquito 2026 (AFC) | `seguro-cesantia-finiquito-2026-afc` | plan+inventario | DR[12] *(parcial término contrato)* | alto | laboral | 2026-11-13 | continuo | **P2-continuo** |
-| 32 | PPM 2026 para independientes y empresas | `ppm-2026-calcular-independientes` | plan | — | alto | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
-| 33 | Plusvalía al vender propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | plan | — · evergreen: `plusvalia-dfl2-vs-comun-chile` | alto | vivienda / impuestos | 2026-11-20 | continuo | **P2-continuo** |
-| 34 | Feriado irrenunciable 25 de diciembre 2026 (comercio) | `feriado-irrenunciable-25-diciembre-2026-comercio` | plan+inventario | — | medio | laboral / comercio | 2026-12-01 | dic 2026 | **P2-ventana** |
-| 35 | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | plan+inventario | — | alto | laboral / beneficios | 2026-12-04 | dic 2026 | **P2-ventana** |
-| 36 | Gratificación de fin de año 2026: anticipos y tope | `gratificacion-fin-de-ano-2026-anticipos` | plan+inventario | — | alto | laboral | 2026-12-08 | dic 2026–ene 2027 | **P2-ventana** |
-| 38 | Pensión alimenticia 2026: ejemplo de cálculo | `pension-alimenticia-2026-ejemplo-calculo` | plan | — | alto | familia | 2026-12-15 | continuo | **P2-continuo** |
-| 39 | Prep Operación Renta 2027: checklist (guía pillar) | `preparacion-operacion-renta-2027-checklist` | plan+DR+inventario | DR[20] devolución impuestos / F22 | alto | impuestos | 2027-01-06 | ene–abr 2027 | **P2-ventana** |
-| 40 | Permiso de circulación 2027: valor y plazos | `permiso-circulacion-2027-calcular-plazo` | plan | — | alto | vehículos | 2027-01-13 | ene–mar 2027 | **P3** |
-| 41 | Intereses por mora Chile: cómo estimar el recargo | `intereses-mora-chile-2026-calcular` | plan | — | medio | finanzas | 2027-01-16 | continuo | **P3** |
-| 42 | Sueldo mínimo 2027: reajuste y simular líquido | `sueldo-minimo-2027-reajuste-simular-liquido` | plan | — | alto | laboral | 2027-01-20 | ene 2027 | **P3** |
-| 43 | Crédito hipotecario 2027: dividendo en UF | `credito-hipotecario-2027-simular-dividendo` | plan | — | alto | vivienda | 2027-01-23 | continuo | **P3** |
-| 44 | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | plan+DR | DR[30] escrituración compraventa | medio | vivienda | 2027-01-27 | continuo | **P3** |
-| 45 | Patente comercial 2027 | `patente-comercial-2027-calcular` | plan | — | alto | empresas | 2027-01-29 | ene–mar | **P3** |
+| # | Formato | Título | Slug | DR / nota | Cluster | Fecha | Pico | Prioridad |
+|--:|--------|--------|------|-----------|---------|-------|------|-----------|
+| ~~2~~ | blog | ~~Horas extra jornada 42 h~~ | ~~`horas-extra-jornada-42-horas-chile-2026`~~ | — | laboral | ~~2026-07-11~~ | ago–oct | ✅ |
+| 3 | blog | Sueldo mínimo 2026 $553.553 → líquido | `sueldo-minimo-2026-calcular-liquido` | satélite `sueldo-liquido-chile` | laboral | 2026-08-05 | ago–dic | **P1** |
+| 4 | blog | Subsidio eléctrico 2026: resultados y descuento | `subsidio-electrico-2026-resultados-descuento-cuenta` | DR[25] | hogar | 2026-08-18 | ago–sep | **P2-ventana** |
+| 5 | blog | BTM/SEJ pago anual + puente SUE | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | DR[13] | empleo | 2026-08-21 | ago | **P2-ventana** |
+| 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | DR[12] · satélite finiquito | laboral | 2026-08-23 | continuo | **P1** |
+| 8 | blog | Aumento PGU sep 2026 (75+) | `pgu-aumento-septiembre-2026-75-anos` | DR[19] soporte · satélite AFP | pensión | 2026-08-28 | sep | **P1** |
+| 9 | blog | Asignación familiar 2026: tramos y montos | `asignacion-familiar-2026-tramos-montos` | satélite familia | familia | 2026-09-01 | sep–dic | **P1** |
+| 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
+| 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
+| 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | DR[24] · satélite iva-boleta | impuestos | 2026-09-08 | continuo | **P2-continuo** |
+| 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
+| 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | satélite iva-boleta | impuestos | 2026-09-11 | ~día 12 | **P2-ventana** |
+| 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
+| 14 | blog | Subsidio crédito hipotecario MINVU | `subsidio-credito-hipotecario-minvu-dividendo-2026` | satélite hipoteca | vivienda | 2026-09-15 | sep–may 2027 | **P2-ventana** |
+| 15 | blog | Gratificación legal tope 4,75 IMM | `gratificacion-legal-tope-2026-ingreso-minimo` | evergreen blog | laboral | 2026-09-18 | sep–dic | **P2-ventana** |
+| 16 | blog | Subsidio Unificado al Empleo (Ley 21.808) | `subsidio-unificado-empleo-ley-21808-octubre-2026` | DR[13] | empleo | 2026-09-22 | sep–nov | **P2-ventana** |
+| 17 | blog | UF y UTM: convertir y usos 2026 | `uf-utm-convertir-chile-2026-usos` | satélite `uf-utm-indicadores` | conversiones | 2026-09-25 | continuo | **P2-continuo** |
+| 18 | blog | Aporte Familiar Permanente 2026 (9 meses) | `aporte-familiar-permanente-2026-cobro-plazo` | pageview | familia | 2026-09-29 | oct–nov | **P2-ventana** |
+| 19 | blog | Costo empleado PYME + cotización empleador | `costo-empleado-pyme-2026-cotizacion-empleador` | DR[19] · satélite pymes | empresas | 2026-10-02 | oct | **P2-ventana** |
+| 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | satélite sueldo | impuestos | 2026-10-06 | continuo | **P2-continuo** |
+| 49 | blog | Cambio de AFP 2026: cómo hacerlo | `cambio-afp-2026-como-hacerlo` | DR[14] · hermano #22 | pensión | 2026-10-07 | continuo | **P2-continuo** |
+| 22 | blog | Comisiones AFP 2026: comparar descuento | `comisiones-afp-2026-comparar-descuento` | DR[14] · satélite AFP | pensión | 2026-10-09 | continuo | **P2-continuo** |
+| 23 | blog | APV 2026: ahorro y efecto tributario | `apv-2026-simulador-ahorro-tributario` | DR[17] | pensión | 2026-10-13 | oct–abr | **P2-ventana** |
+| 50 | blog | Reforma tributaria Ley 21.713 (2026) | `reforma-tributaria-ley-21713-2026-personas-pymes` | DR[23] · **no** mega-guía | impuestos | 2026-10-14 | 2026 | **P2-continuo** |
+| 24 | blog | Cotización independientes 2026 | `cotizacion-independientes-2026-boleta` | DR[16] · satélite boleta | previsional | 2026-10-16 | oct–abr | **P2-ventana** |
+| 25 | blog | Reajuste arriendo UF/IPC 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | evergreen blog | vivienda | 2026-10-20 | continuo | **P2-continuo** |
+| 26 | blog | Subsidio habitacional DS01/DS49 | `subsidio-habitacional-ds01-ds49-ahorro-uf-2026` | DR[28] · satélite vivienda | vivienda | 2026-10-23 | continuo | **P2-continuo** |
+| 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | DR[11] · evergreen | laboral | 2026-10-27 | continuo | **P2-continuo** |
+| 28 | blog | Indemnización años servicio tope 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | satélite finiquito | laboral | 2026-10-30 | continuo | **P2-continuo** |
+| 29 | blog | Contribuciones 4.ª cuota 30 nov | `contribuciones-cuarta-cuota-noviembre-2026` | DR[27] | vivienda | 2026-11-03 | 30 nov | **P2-ventana** |
+| 30 | blog | Aguinaldo Navidad pensionados 2026 | `aguinaldo-navidad-pensionados-2026` | — | pensión | 2026-11-10 | nov–dic | **P2-ventana** |
+| 31 | blog\* | Seguro de cesantía + finiquito (AFC) | `seguro-cesantia-finiquito-2026-afc` | DR[12] · *candidata guía* si crece | laboral | 2026-11-13 | continuo | **P2-continuo** |
+| 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
+| 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
+| 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026-comercio` | — | laboral | 2026-12-01 | dic | **P2-ventana** |
+| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | — | laboral | 2026-12-04 | dic | **P2-ventana** |
+| 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026-anticipos` | — | laboral | 2026-12-08 | dic–ene | **P2-ventana** |
+| 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
+| **39** | **guía** | **Prep Operación Renta 2027 (checklist)** | `preparacion-operacion-renta-2027-checklist` | DR[20] · **única guía del plan** | impuestos | 2027-01-06 | ene–abr | **P2-ventana** |
+| 40 | blog | Permiso circulación 2027 | `permiso-circulacion-2027-calcular-plazo` | satélite vehículos | vehículos | 2027-01-13 | ene–mar | **P3** |
+| 41 | blog | Intereses por mora | `intereses-mora-chile-2026-calcular` | — | finanzas | 2027-01-16 | continuo | **P3** |
+| 42 | blog | Sueldo mínimo 2027 | `sueldo-minimo-2027-reajuste-simular-liquido` | satélite sueldo | laboral | 2027-01-20 | ene | **P3** |
+| 43 | blog | Crédito hipotecario 2027 UF | `credito-hipotecario-2027-simular-dividendo` | satélite hipoteca | vivienda | 2027-01-23 | continuo | **P3** |
+| 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
+| 45 | blog | Patente comercial 2027 | `patente-comercial-2027-calcular` | satélite pymes | empresas | 2027-01-29 | ene–mar | **P3** |
 
-**Conteo pendientes:** 45 filas (41 del plan A + 4 extensión #47–#50).
+**Conteo pendientes:** 44 filas activas (+ #2 ya en publicados).
 
-### Sub-orden operativo dentro de P2
+| Formato en pendientes | Cantidad |
+|-----------------------|----------|
+| **blog** | 40 |
+| **blog\*** (candidata guía) | 3 (#47, #48, #31) |
+| **guía** | **1** (#39) |
 
-| Subnivel | Uso día a día | Ejemplos |
-|----------|---------------|----------|
-| **P2-ventana** | Publicar **antes** del pico/fecha legal | #4, #5, #10, #11, #13–#16, #18, #19, #23, #24, #29–#30, #32, #34–#36, #39 |
-| **P2-continuo** | Relleno de tráfico sin deadline duro; ideal AdSense | #12, #17, #21, #22, #25–#28, #31, #33, #38, **#47–#50** |
+### Sub-orden P2
+
+| Subnivel | Uso | IDs |
+|----------|-----|-----|
+| **P2-ventana** | Antes del pico | #4, #5, #10, #11, #13–#16, #18, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
+| **P2-continuo** | Sin deadline | #12, #17, #21, #22, #25–#28, #31, #33, #38, #47–#50 |
 
 ---
 
@@ -311,13 +350,17 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                    6  (+ #2 horas extra 42 h · 2026-07-11)
-  Pendientes totales:           44
-    P1:                          4   (#3, #6, #8, #9)
-    P2-ventana + P2-continuo:   34   (incluye #47–#50)
-    P3:                          6   (#40–#45)
+  Publicados:                    6  (todos blog)
+  Pendientes:                   44
+    blog:                       40
+    blog* (candidata guía):      3   (#47, #48, #31)
+    guía:                        1   (#39 Operación Renta)
+    P1:                          4   (#3, #6, #8, #9) todos blog
+    P2:                         34
+    P3:                          6
   Total publicados + pendientes: 50
 ```
+
 
 
 ### Checklist de cruce de los tres archivos
@@ -336,12 +379,12 @@ Plan integrado operativo:
 
 ## Uso operativo
 
-1. **Siguiente post (sprint P1):** #3 `sueldo-minimo-2026-calcular-liquido`.  
-2. **Cola P2-ventana** en sep (feriados, contribuciones 3.ª, SUE, AFPER) antes que relleno continuo.  
-3. **#47–#50** entran en P2-continuo sep–oct (dossier en `research/deep-research.md`).  
-4. **Antes de publicar:** revalidar montos en fuente oficial (T−1).  
-5. **Tras publicar:** tachar en **Publicados** / **Pendientes** de este doc y actualizar contadores.  
-6. Detalle de fuentes: `DR[n]` en deep-research o fila del inventario.
+1. **Siguiente (P1, blog):** #3 `sueldo-minimo-2026-calcular-liquido` → `articles.ts`.  
+2. **Cola P2-ventana** (blogs) antes que relleno continuo.  
+3. **#39 (guía):** en ene 2027 escribir en `guias.ts`, no en blog.  
+4. **#47 / #48 / #31 (blog\*):** blog primero; evaluar guía solo si rankean.  
+5. **Antes de publicar:** revalidar montos (T−1).  
+6. **Tras publicar:** tachar aquí; si es blog → `articles.ts`; si es guía → `guias.ts`.
 
 ---
 
