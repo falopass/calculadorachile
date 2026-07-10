@@ -228,12 +228,13 @@ export const calculators: Calculator[] = [
   {
     id: 'iva',
     name: 'Calculadora de IVA',
-    description: 'Agrega o quita el IVA del 19% a cualquier monto. Neto ↔ bruto al instante.',
+    description:
+      'Agrega o quita el IVA del 19% (neto ↔ bruto). Ejemplos: $100.000 neto = $119.000 bruto; $119.000 bruto = $100.000 neto.',
     slug: 'calculadora-iva',
     category: 'impuestos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-10',
     sources: [
       { name: 'SII', url: 'https://www.sii.cl/destacados/iva/', note: 'Impuesto al Valor Agregado (19%)' },
       { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile/navegar?idNorma=825', note: 'DL 825 de 1974, Ley de IVA' },
@@ -252,34 +253,56 @@ export const calculators: Calculator[] = [
       '19% IVA',
       'precio neto bruto',
       'sacar el IVA de un precio',
+      'cómo quitar el IVA',
     ],
     inputs: [
-      { id: 'monto', label: 'Monto', type: 'number', placeholder: '$100.000', required: true, min: 0 },
-      { id: 'tipo', label: 'Operación', type: 'select', required: true, options: [
-        { value: 'agregar-iva', label: 'Agregar IVA' },
-        { value: 'quitar-iva', label: 'Quitar IVA' },
-      ]},
+      {
+        id: 'monto',
+        label: 'Monto en pesos',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$100.000',
+        required: true,
+        min: 0,
+        tooltip: 'Si agregas IVA, ingresa el neto. Si quitas IVA, ingresa el bruto (precio de boleta/factura con IVA).',
+      },
+      {
+        id: 'tipo',
+        label: 'Operación',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'agregar-iva', label: 'Agregar IVA (neto → bruto)' },
+          { value: 'quitar-iva', label: 'Quitar IVA (bruto → neto)' },
+        ],
+        defaultValue: 'agregar-iva',
+      },
     ],
     faq: [
       {
-        question: '¿Cuánto es el IVA en Chile?',
-        answer: 'El IVA (Impuesto al Valor Agregado) en Chile es del 19% desde 2003. Este impuesto se aplica a la venta de bienes muebles, prestación de servicios e importaciones. Es un impuesto indirecto que el consumidor final paga incluido en el precio de los productos y servicios.',
+        question: '¿Cuánto es el IVA en Chile 2026?',
+        answer:
+          'El IVA general es 19% (DL 825). Hay exenciones y regímenes especiales (educación, salud, exportadores, etc.): esta calculadora usa la tasa general del 19%.',
       },
       {
-        question: '¿Cómo se calcula el IVA?',
-        answer: 'Para calcular el IVA, multiplica el precio neto por 0.19 (19%). Por ejemplo, si un producto cuesta $100.000 neto, el IVA es $19.000 y el precio bruto total es $119.000. Nuestra calculadora hace este cálculo automáticamente.',
+        question: 'Ejemplo: $100.000 neto ¿cuánto es con IVA?',
+        answer:
+          'IVA = $100.000 × 0,19 = $19.000. Bruto = $119.000. Fórmula: bruto = neto × 1,19.',
       },
       {
-        question: '¿Cómo sacar el IVA de un precio?',
-        answer: 'Para obtener el precio neto desde un precio con IVA incluido, divide el precio bruto entre 1.19. Por ejemplo, si el precio con IVA es $119.000, el precio neto es $100.000 ($119.000 ÷ 1.19). El IVA es la diferencia: $19.000.',
+        question: '¿Cómo sacar el IVA de un precio con impuesto incluido?',
+        answer:
+          'Divide el bruto por 1,19. Ejemplo: $119.000 ÷ 1,19 = $100.000 neto; el IVA es $19.000. Elige “Quitar IVA” en la calculadora.',
       },
       {
-        question: '¿Qué es el precio neto y bruto?',
-        answer: 'El precio neto es el valor del producto o servicio sin IVA. El precio bruto es el valor total que paga el consumidor, incluyendo el IVA del 19%. Por ejemplo: precio neto $100.000 + IVA $19.000 = precio bruto $119.000.',
+        question: '¿$50.000 o $1.000.000 con IVA cuánto dan?',
+        answer:
+          'Neto $50.000 → bruto $59.500 (IVA $9.500). Neto $1.000.000 → bruto $1.190.000 (IVA $190.000). Siempre con tasa 19%.',
       },
       {
-        question: '¿Quiénes pagan IVA?',
-        answer: 'El IVA lo paga el consumidor final al comprar bienes o servicios. Los vendedores y prestadores de servicios actúan como agentes recaudadores: cobran el IVA al cliente y luego lo declaran y pagan al SII. Algunos sectores tienen tratamientos especiales o están exentos, como la educación y servicios de salud.',
+        question: '¿Es lo mismo que retención de boleta de honorarios?',
+        answer:
+          'No. El IVA 19% grava ventas/servicios afectos. La retención de boleta de honorarios 2026 (15,25%) es otro régimen (Ley 21.133). Usa la calculadora de boleta de honorarios para ese caso.',
       },
     ],
   },
@@ -658,63 +681,119 @@ export const calculators: Calculator[] = [
   {
     id: 'permiso-circulacion',
     name: 'Permiso de Circulación 2026',
-    description: 'Calcula el costo de tu permiso de circulación según tipo de vehículo y antigüedad. Incluye descuentos por años.',
+    description:
+      'Estima el permiso con tasación fiscal SII (tabla UTM), tipo de vehículo, antigüedad ≥20 años, prorrateo 1.ª inscripción y 1.ª/2.ª cuota.',
     slug: 'calculadora-permiso-circulacion',
     category: 'vehiculos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-10',
     sources: [
-      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl/permiso-de-circulacion/', note: 'Permiso de circulación anual' },
-      { name: 'SII', url: 'https://www.sii.cl', note: 'Tasación fiscal de vehículos' },
-      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion', note: 'Plazos y cuotas 2026' },
+      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl/permiso-de-circulacion/', note: 'Permiso de circulación' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Tasación fiscal de vehículos / tabla anual' },
+      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion', note: 'Plazos y cuotas' },
     ],
     seoTitle: 'Permiso de Circulación 2026: calcula el valor',
     seoDescription:
-      'Estima tu permiso de circulación 2026 según valor del vehículo y antigüedad. Incluye idea de 1ª y 2ª cuota (ago). Confirma en tu municipio.',
+      'Estima tu permiso 2026 con tasación fiscal SII, antigüedad y 1ª/2ª cuota. Referencial: confirma en tu municipio. Gratis.',
     keywords: [
       'permiso de circulación',
       'calcular permiso de circulacion',
       'costo permiso circulación',
-      'permiso municipal',
-      'calculo permiso de circulacion',
+      'tasación fiscal vehículo',
+      'segunda cuota permiso agosto',
       'permiso 2026',
       'descuento antigüedad vehículo',
     ],
     inputs: [
-      { id: 'valorVehiculo', label: 'Valor del Vehículo', type: 'number', placeholder: '$15.000.000', required: true, min: 0 },
-      { id: 'tipoVehiculo', label: 'Tipo de Vehículo', type: 'select', required: true, options: [
-        { value: 'automovil', label: 'Automóvil' },
-        { value: 'motocicleta', label: 'Motocicleta' },
-        { value: 'carga', label: 'Vehículo de Carga' },
-        { value: 'bus', label: 'Bus' },
-        { value: 'taxi', label: 'Taxi' },
-        { value: 'camion', label: 'Camión' },
-      ]},
-      { id: 'antiguedadVehiculo', label: 'Antigüedad (años)', type: 'number', placeholder: '5', required: true, min: 0, max: 50 },
-      { id: 'esZonaCarga', label: '¿Zona de carga pesada?', type: 'boolean', required: false, defaultValue: false },
-      { id: 'esPrimeraVez', label: '¿Primera vez en la comuna?', type: 'boolean', required: false, defaultValue: false },
+      {
+        id: 'valorVehiculo',
+        label: 'Tasación fiscal SII (no precio de compra)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$8.000.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Usa la tasación fiscal del SII del año, no lo que pagaste en la compraventa. Es la base de la tabla en UTM.',
+      },
+      {
+        id: 'tipoVehiculo',
+        label: 'Tipo de vehículo',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'automovil', label: 'Automóvil' },
+          { value: 'motocicleta', label: 'Motocicleta (factor 50%)' },
+          { value: 'carga', label: 'Vehículo de carga' },
+          { value: 'bus', label: 'Bus' },
+          { value: 'taxi', label: 'Taxi (factor 50%)' },
+          { value: 'camion', label: 'Camión' },
+        ],
+      },
+      {
+        id: 'antiguedadVehiculo',
+        label: 'Antigüedad (años)',
+        type: 'number',
+        placeholder: '5',
+        required: true,
+        min: 0,
+        max: 50,
+        tooltip: 'En este modelo, vehículos con 20 años o más aplican 50% de descuento sobre el monto base (aprox. tabla SII).',
+      },
+      {
+        id: 'esZonaCarga',
+        label: '¿Zona de carga pesada? (informativo)',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip: 'Algunas comunas tienen recargos locales. El motor no inventa tasas comunales: confirma en tu municipio.',
+      },
+      {
+        id: 'esPrimeraVez',
+        label: '¿Primera inscripción / prorrateo del año?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip: 'Si activas prorrateo, usa “meses restantes” para estimar el permiso proporcional del año.',
+      },
+      {
+        id: 'mesesRestantes',
+        label: 'Meses restantes del año (si prorrateas)',
+        type: 'number',
+        placeholder: '12',
+        required: false,
+        min: 1,
+        max: 12,
+        defaultValue: 12,
+        tooltip: 'Solo aplica si marcaste primera inscripción. Ej.: te inscribes en julio → ~6 meses.',
+      },
     ],
     faq: [
       {
-        question: '¿Cómo se calcula el permiso de circulación?',
-        answer: 'El permiso de circulación se calcula como un porcentaje del valor del vehículo (1.5% a 3.5% según tipo), con descuentos por antigüedad. A mayor antigüedad, menor es el permiso. El monto base se expresa en UTM y varía según la comuna y tipo de vehículo.',
+        question: '¿Usa el precio de compra del auto?',
+        answer:
+          'No. Debes ingresar la tasación fiscal SII. El precio de la compraventa o de un portal no es la base legal del permiso.',
       },
       {
-        question: '¿Cuánto cuesta el permiso de circulación 2026?',
-        answer: 'El costo varía según el valor del vehículo y su antigüedad. Para un auto nuevo de $15.000.000, el permiso 2026 cuesta aproximadamente $300.000-$400.000. Un auto de 10 años paga mucho menos, alrededor de $50.000-$80.000 por los descuentos por antigüedad.',
+        question: '¿Cómo calcula esta herramienta?',
+        answer:
+          'Aplica una tabla progresiva en UTM sobre la tasación (tramos del SII cargados en el sitio), factores por tipo (moto/taxi 50%) y descuento del 50% si antigüedad ≥ 20 años. Es una estimación: el municipio puede liquidar distinto.',
       },
       {
-        question: '¿Qué descuentos hay por antigüedad del vehículo?',
-        answer: 'Los descuentos por antigüedad son: años 1-5 sin descuento, años 6-10 descuento 25%, años 11-15 descuento 50%, años 16-20 descuento 75%, más de 20 años descuento 90%. Estos descuentos se aplican sobre el monto base del permiso.',
+        question: '¿Qué son la 1.ª y 2.ª cuota?',
+        answer:
+          'Muchos municipios permiten pagar en dos cuotas (la segunda suele vencer en agosto). Aquí se muestra 50%/50% del total estimado. Fechas exactas: ChileAtiende / tu municipalidad.',
       },
       {
-        question: '¿Cuándo se paga el permiso de circulación?',
-        answer: 'El permiso de circulación se paga anualmente entre enero y marzo. El permiso vence el 31 de marzo de cada año. Si pagas después de marzo, se aplican recargos por mora. El pago se realiza en la municipalidad donde está registrado el vehículo.',
+        question: '¿Cuándo se paga el permiso 2026?',
+        answer:
+          'La renovación anual suele concentrarse a inicios de año (hasta marzo en muchas comunas) y la 2.ª cuota hacia agosto. Revisa el calendario de tu comuna: no es único para todo Chile.',
       },
       {
-        question: '¿Qué documentos necesito para pagar el permiso?',
-        answer: 'Necesitas: padrón del vehículo (o certificado de inscripción), revisión técnica vigente, SOAP vigente, y cédula de identidad. Si es primera vez en la comuna, también necesitas el certificado de mudanza o cambio de domicilio.',
+        question: '¿Qué documentos piden?',
+        answer:
+          'Típicamente padrón, revisión técnica, SOAP y cédula. Requisitos exactos: municipio donde está inscrito el vehículo.',
       },
     ],
   },
@@ -901,47 +980,83 @@ export const calculators: Calculator[] = [
   {
     id: 'contribuciones',
     name: 'Contribuciones (Impuesto Territorial)',
-    description: 'Calcula el monto de tus contribuciones semestrales según avalúo fiscal y tipo de propiedad. Actualizado 2026.',
+    description:
+      'Estima contribuciones 2026 por avalúo fiscal y destino: cuota (1 de 4), anual, exención habitacional en UTM y umbral en pesos.',
     slug: 'calculadora-contribuciones',
     category: 'vivienda',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-10',
     sources: [
-      { name: 'SII', url: 'https://www.sii.cl', note: 'Contribuciones (impuesto territorial)' },
-      { name: 'MINVU', url: 'https://www.minvu.gob.cl', note: 'Avalúo fiscal de propiedades' },
+      { name: 'SII', url: 'https://www.sii.cl', note: 'Contribuciones e impuesto territorial' },
+      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl', note: 'Pago de contribuciones / giros' },
+      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl', note: 'Información de cuotas y plazos' },
     ],
-    keywords: ['contribuciones', 'impuesto territorial', 'avalúo fiscal', 'contribuciones semestrales', 'impuesto bienes raíces Chile'],
+    seoTitle: 'Contribuciones 2026: calcula por avalúo fiscal',
+    seoDescription:
+      'Estima tus contribuciones (impuesto territorial) 2026 según avalúo SII y destino. Cuotas abr/jun/sep/nov y exención UTM. Gratis.',
+    keywords: [
+      'contribuciones',
+      'impuesto territorial',
+      'avalúo fiscal',
+      'contribuciones 2026',
+      'cuota contribuciones septiembre',
+      'exención contribuciones',
+      'impuesto bienes raíces Chile',
+    ],
     inputs: [
-      { id: 'avaluoFiscal', label: 'Avalúo Fiscal', type: 'number', placeholder: '$50.000.000', required: true, min: 0, tooltip: 'Valor asignado por el SII a tu propiedad. No es el valor comercial. Aparece en el certificado de dominio vigente.' },
-      { id: 'destino', label: 'Tipo de Propiedad', type: 'select', required: true, options: [
-        { value: 'habitacional', label: 'Habitacional' },
-        { value: 'comercial', label: 'Comercial' },
-        { value: 'industrial', label: 'Industrial' },
-        { value: 'sitio_eriado', label: 'Sitio Eriado' },
-        { value: 'agrario', label: 'Agrario' },
-      ], tooltip: 'El tipo afecta la tasa: habitacional 0.93%, comercial/industrial 1.2%, sitio eriado 2%, agrario 0.5%.' },
+      {
+        id: 'avaluoFiscal',
+        label: 'Avalúo fiscal (SII)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$50.000.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'No es el valor comercial. Está en el certificado de avalúo o en el sitio del SII. La exención habitacional usa este valor en UTM.',
+      },
+      {
+        id: 'destino',
+        label: 'Destino / tipo de propiedad',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'habitacional', label: 'Habitacional' },
+          { value: 'comercial', label: 'Comercial' },
+          { value: 'industrial', label: 'Industrial' },
+          { value: 'sitio_eriado', label: 'Sitio eriado' },
+          { value: 'agrario', label: 'Agrario' },
+        ],
+        tooltip:
+          'Tasas referenciales del motor: habitacional 0,93% (con descuento 0,025 pp), comercial/industrial 1,2%, eriado 2%, agrario 0,5%. Confirma en tu giro SII.',
+      },
     ],
     faq: [
       {
-        question: '¿Cuánto son las contribuciones?',
-        answer: 'Las contribuciones corresponden a un porcentaje del avalúo fiscal según el tipo de propiedad: 0.93% para habitacional, 1.2% para comercial/industrial, 2% para sitios eriazos y 0.5% para agrícola. Se pagan semestralmente en abril y septiembre. Por ejemplo, una casa con avalúo de $50.000.000 paga $465.000 anuales ($232.500 semestrales).'
+        question: '¿Cómo se estiman las contribuciones aquí?',
+        answer:
+          'Se aplica una tasa anual referencial según destino sobre el avalúo fiscal. Habitacional usa 0,93% menos 0,025 puntos (≈0,905%). Comercial/industrial 1,2%, sitio eriado 2%, agrario 0,5%. El resultado es educativo: tu giro oficial está en el SII/TGR.',
+      },
+      {
+        question: '¿Cuándo se pagan las 4 cuotas?',
+        answer:
+          'El calendario habitual de pago es en cuatro cuotas (abril, junio, septiembre y noviembre). La calculadora muestra el monto de una cuota (anual ÷ 4) y también el semestre (anual ÷ 2). Fechas exactas y recargos: TGR / SII del año.',
       },
       {
         question: '¿Hay exención de contribuciones?',
-        answer: 'Sí. Las propiedades habitacionales con avalúo fiscal inferior a 225.96 UTM están exentas de contribuciones. En marzo 2026, con UTM a $69.889, esto equivale a aproximadamente $15.79 millones de avalúo fiscal. Si tu propiedad es nueva, puede tener exención por 10-15 años.'
+        answer:
+          'Las propiedades habitacionales con avalúo fiscal ≤ 225,96 UTM suelen estar exentas en este modelo. El umbral en pesos se calcula con la UTM del sitio (resultado “Umbral exención”). Pueden existir otras exenciones (vivienda nueva, etc.) que esta herramienta no modela.',
       },
       {
-        question: '¿Cuándo se pagan las contribuciones?',
-        answer: 'Las contribuciones se pagan en cuatro cuotas: abril, junio, septiembre y noviembre. También puedes pagar el semestre completo en abril o septiembre. Si la propiedad se vende, el vendedor debe pagar hasta la fecha de venta y el comprador desde esa fecha.'
+        question: '¿Dónde veo mi avalúo fiscal?',
+        answer:
+          'En el SII (servicios en línea / certificado de avalúo) o en la documentación de la propiedad. No uses el valor comercial de portales inmobiliarios.',
       },
       {
-        question: '¿Cómo se calcula el avalúo fiscal?',
-        answer: 'El avalúo fiscal lo determina el SII considerando: valor del terreno (según ubicación y zona), valor de construcción (costo por m² según materiales), y depreciación por antigüedad. Se actualiza anualmente con el IPC. Puedes reclamar si lo consideras sobrevaluado.'
-      },
-      {
-        question: '¿Qué pasa si no pago las contribuciones?',
-        answer: 'El no pago genera intereses y multas. Después de cierto tiempo, el SII puede iniciar un proceso de cobro judicial que puede terminar en remate de la propiedad. Las contribuciones son un gravamen que sigue a la propiedad, no al dueño.'
+        question: '¿Qué pasa si no pago?',
+        answer:
+          'El atraso genera intereses y multas. El cobro puede judicializarse. Las contribuciones gravan el inmueble. Consulta TGR/SII; esto no es asesoría de cobranzas.',
       },
     ],
   },
@@ -1337,171 +1452,321 @@ export const calculators: Calculator[] = [
     id: 'credito-cae',
     name: 'Calculadora CAE (Crédito Aval Estado)',
     description:
-      'Simula la cuota del Crédito con Aval del Estado (CAE): monto, tasa, plazo y total a pagar. Tasa de referencia 2% en UF.',
+      'Simula dividendo CAE a tasa 2%: total, intereses, UF, garantía 90% y meses de gracia. No es FES ni estado de cuenta Ingresa.',
     slug: 'calculadora-credito-cae',
     category: 'educacion',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-10',
     sources: [
       { name: 'MINEDUC', url: 'https://www.mineduc.cl', note: 'Crédito con Aval del Estado (CAE)' },
       { name: 'Ingresa / Comisión Ingresa', url: 'https://www.ingresa.cl', note: 'Administración y pagos del CAE' },
-      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl', note: 'Información oficial de beneficios estudiantiles y trámites' },
+      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl', note: 'Beneficios estudiantiles' },
     ],
     seoTitle: 'Simulador CAE 2026: calcula tu cuota | Tasa 2%',
     seoDescription:
-      'Simula el Crédito con Aval del Estado: cuota mensual, total a pagar y plazo 10–20 años. Tasa fija 2% en UF. CAE vigente 2026 (no es FES). Gratis.',
+      'Simula el CAE: cuota mensual, total, UF y plazo 10–20 años. Tasa fija 2% (no es FES). Gratis y referencial.',
     keywords: [
       'calculadora CAE',
       'simulador CAE 2026',
-      'calculadora cae crédito',
-      'calcular CAE crédito',
       'cuota CAE',
-      'CAE',
       'crédito aval estado',
-      'credito universidad Chile',
       'dividendo CAE',
-      'crédito estudios',
-      'como se calcula el cae',
-      'cae porcentaje',
+      'cae tasa 2%',
+      'cae vs fes',
+      'condonación CAE',
     ],
     inputs: [
-      { id: 'montoCredito', label: 'Monto del Crédito', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Monto total del crédito (arancel/matrícula financiados). El CAE puede cubrir hasta el 90% del arancel con garantía estatal según reglas vigentes.' },
-      { id: 'tasaAnual', label: 'Tasa Anual (%)', type: 'number', placeholder: '2', required: true, min: 0, max: 15, tooltip: 'Tasa de referencia del CAE: 2% real anual en UF. Puedes simular otro valor si tu contrato indica una tasa distinta.' },
-      { id: 'plazoMeses', label: 'Plazo (meses)', type: 'number', placeholder: '180', required: true, min: 12, max: 240, tooltip: 'Plazo máximo habitual 20 años (240 meses). Prueba 120, 180 o 240 meses.' },
-      { id: 'tieneGarantiaEstatal', label: '¿Con garantía estatal?', type: 'boolean', required: false, defaultValue: true, tooltip: 'El Estado garantiza hasta el 90% del crédito en el esquema CAE. Actívalo para el escenario típico.' },
+      {
+        id: 'montoCredito',
+        label: 'Monto del crédito (CLP o equivalente)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$15.000.000',
+        required: true,
+        min: 0,
+        tooltip: 'Capital que simulas pagar en cuotas. El CAE real se administra en UF; aquí conviertes el dividendo a UF con el valor del sitio.',
+      },
+      {
+        id: 'tasaAnual',
+        label: 'Tasa anual real (%)',
+        type: 'number',
+        placeholder: '2',
+        required: true,
+        min: 0,
+        max: 15,
+        defaultValue: 2,
+        tooltip: 'Referencia legal del CAE: 2% real anual. Solo cámbiala si tu contrato indica otra.',
+      },
+      {
+        id: 'plazoMeses',
+        label: 'Plazo de pago (meses)',
+        type: 'number',
+        placeholder: '180',
+        required: true,
+        min: 12,
+        max: 240,
+        defaultValue: 180,
+        tooltip: 'Máximo habitual 240 meses (20 años). Prueba 120, 180 o 240.',
+      },
+      {
+        id: 'mesesGracia',
+        label: 'Meses de gracia antes de la 1.ª cuota',
+        type: 'number',
+        placeholder: '18',
+        required: false,
+        min: 0,
+        max: 120,
+        defaultValue: 18,
+        tooltip:
+          'Educativo: p. ej. 18 meses post-egreso. No modela subsidio de intereses real ni capitalización completa del período de estudios.',
+      },
+      {
+        id: 'tieneGarantiaEstatal',
+        label: '¿Mostrar garantía estatal 90%?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip: 'En el esquema CAE el Estado garantiza hasta el 90% del crédito. Es informativo, no un descuento de tu cuota.',
+      },
     ],
     faq: [
       {
-        question: '¿Cómo se calcula la cuota del CAE?',
+        question: '¿Qué calcula exactamente esta página?',
         answer:
-          'El CAE usa tasa fija de referencia del 2% real anual en UF, con cobro que comienza 18 meses después del egreso y plazo máximo de 240 cuotas (20 años). Esta calculadora estima la cuota con la fórmula de crédito (monto, tasa y plazo). El resultado es referencial: tu cuota contractual la define Ingresa / tu institución financiera.',
+          'Una amortización francesa con tasa fija (default 2%), plazo y capital. Entrega dividendo en pesos y UF, total de intereses y un calendario estimado de 1.ª cuota según meses de gracia. No reemplaza el portal Ingresa.',
+      },
+      {
+        question: '¿Es lo mismo que el FES / pago al % del sueldo?',
+        answer:
+          'No. El CAE es crédito con tasa fija en UF. El FES u otros esquemas contingentes al ingreso son distintos. Esta herramienta no simula FES.',
       },
       {
         question: '¿Cuándo se empieza a pagar el CAE?',
         answer:
-          'En el esquema general comienzas a pagar 18 meses después de egresar. Durante los estudios y el período de gracia aplican reglas de subsidio de intereses según normativa vigente. El plazo máximo de pago suele ser 20 años; revisa tu contrato y el portal Ingresa para tu caso.',
+          'En el esquema general suele ser tras egresar más un período de gracia (a menudo ~18 meses). Usa el campo “meses de gracia” solo como referencia; tu fecha exacta está en Ingresa.',
       },
       {
-        question: '¿Cuál es el plazo máximo del CAE?',
+        question: '¿Puede condonarse el saldo al final del plazo?',
         answer:
-          'El plazo máximo habitual es de 20 años (240 cuotas mensuales). Según las reglas del programa, el saldo que reste al final del plazo puede condonarse. Confirma siempre en Ingresa: no confundas el CAE con el FES u otros esquemas de pago contingente al ingreso.',
+          'Según reglas del programa puede haber condonación del saldo al cumplir el plazo máximo. Condiciones y excepciones: Ingresa / normativa vigente. No lo descuenta esta calculadora.',
       },
       {
-        question: '¿El CAE es lo mismo que el pago contingente al ingreso (FES)?',
+        question: '¿Qué pasa si no puedo pagar?',
         answer:
-          'No. El CAE es el Crédito con Aval del Estado con tasa fija en UF y cuotas definidas por monto/tasa/plazo. El pago contingente al ingreso (FES u otros proyectos) es un esquema distinto. Esta página simula CAE, no FES.',
-      },
-      {
-        question: '¿Qué pasa si no puedo pagar el CAE?',
-        answer:
-          'Puedes explorar reprogramación, suspensión por desempleo u otras vías en Comisión Ingresa / tu acreedor. La cuota del CAE no se recalcula sola como un % de tu sueldo (eso sería un esquema contingente al ingreso). Contacta Ingresa antes de acumular mora.',
-      },
-      {
-        question: '¿Quiénes pueden postular al CAE?',
-        answer:
-          'Estudiantes chilenos o con residencia que cumplan requisitos académicos y socioeconómicos de educación superior (universidades, IP, CFT). El CAE cubre arancel y matrícula según cupos y reglas del año. Consulta MINEDUC / Ingresa para la convocatoria vigente.',
+          'Contacta Ingresa / tu acreedor por reprogramación o beneficios. La cuota del CAE no se recalcula sola como % de tu sueldo.',
       },
     ],
   },
   {
     id: 'credito-automotriz',
     name: 'Simulador Crédito Automotriz',
-    description: 'Calcula la cuota mensual de tu crédito automotriz. Incluye pie, intereses, seguro y costo total del crédito.',
+    description:
+      'Simula cuota, pie %, intereses, seguro estimado y CAE educativa. No es oferta bancaria ni la CAE de la hoja de resumen.',
     slug: 'calculadora-credito-automotriz',
     category: 'vehiculos',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-10',
     sources: [
-      { name: 'CMF', url: 'https://www.cmfchile.cl', note: 'Regulación de créditos de consumo' },
-      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en créditos automotrices' },
+      { name: 'CMF', url: 'https://www.cmfchile.cl', note: 'Créditos de consumo y CAE' },
+      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor financiero' },
     ],
     seoTitle: 'Crédito Automotriz 2026: simula cuota y pie',
     seoDescription:
-      'Simula la cuota de tu crédito de auto en Chile: pie, tasa, plazo y costo total. Compara escenarios antes de firmar. Gratis.',
+      'Simula cuota de auto en Chile: pie %, tasa, plazo, intereses y CAE aproximada. Compara antes de firmar. Gratis.',
     keywords: [
       'crédito automotriz',
       'simulador credito automotriz',
-      'simulador auto',
-      'crédito vehículo Chile',
+      'cuota auto chile',
       'pie auto',
-      'cuota mensual auto',
-      'tasa crédito automotriz chile 2026',
+      'CAE crédito automotriz',
+      'tasa crédito auto 2026',
     ],
     inputs: [
-      { id: 'valorVehiculo', label: 'Valor del Vehículo', type: 'number', placeholder: '$15.000.000', required: true, min: 0, tooltip: 'Valor total del vehículo nuevo o usado.' },
-      { id: 'pie', label: 'Pie', type: 'number', placeholder: '$3.000.000', required: true, min: 0, tooltip: 'Ahorro inicial. Generalmente 20-30% del valor del vehículo.' },
-      { id: 'tasaAnual', label: 'Tasa Anual (%)', type: 'number', placeholder: '5.5', required: true, min: 0, max: 30, tooltip: 'Tasa de interés anual. Varía según banco, monto y tu perfil crediticio.' },
-      { id: 'plazoMeses', label: 'Plazo (meses)', type: 'number', placeholder: '48', required: true, min: 6, max: 84, tooltip: 'Plazo típico: 12-72 meses. A mayor plazo, menor cuota pero más intereses.' },
-      { id: 'incluyeSeguro', label: '¿Incluye seguro?', type: 'boolean', required: false, defaultValue: true, tooltip: 'Seguro vehicular (incendio, robo) es obligatorio con crédito.' },
+      {
+        id: 'valorVehiculo',
+        label: 'Valor del vehículo',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$15.000.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'pie',
+        label: 'Pie (ahorro inicial)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$3.000.000',
+        required: true,
+        min: 0,
+        tooltip: 'Suele pedirse 20–30% del valor. La calculadora muestra el % resultante.',
+      },
+      {
+        id: 'tasaAnual',
+        label: 'Tasa anual nominal (%)',
+        type: 'number',
+        placeholder: '12',
+        required: true,
+        min: 0,
+        max: 40,
+        defaultValue: 12,
+        tooltip: 'Usa la tasa de la cotización del banco/financiera. En 2026 los rangos de mercado suelen ser de un dígito a teen según perfil; no hay tasa única.',
+      },
+      {
+        id: 'plazoMeses',
+        label: 'Plazo (meses)',
+        type: 'number',
+        placeholder: '48',
+        required: true,
+        min: 6,
+        max: 84,
+        defaultValue: 48,
+      },
+      {
+        id: 'incluyeSeguro',
+        label: '¿Sumar seguro vehicular estimado?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip: 'Estimación simple del sitio (no es prima de aseguradora). El banco exige seguros; SOAP es aparte.',
+      },
+      {
+        id: 'gastosAsociadosPct',
+        label: 'Gastos/comisiones para CAE aprox. (%)',
+        type: 'number',
+        placeholder: '2',
+        required: false,
+        min: 0,
+        max: 30,
+        defaultValue: 2,
+        tooltip: 'Solo para la CAE educativa del resultado. La CAE legal de la hoja de resumen la calcula el acreedor.',
+      },
     ],
     faq: [
       {
-        question: '¿Cuánto pie necesito para un auto?',
-        answer: 'Generalmente se exige entre 20% y 30% del valor del vehículo como pie. Para un auto de $15.000.000, necesitas entre $3.000.000 y $4.500.000. Algunos bancos ofrecen créditos con 10% de pie pero con mayor tasa.'
+        question: '¿Es la CAE oficial del banco?',
+        answer:
+          'No. La “CAE aproximada” de esta página es educativa (tasa + gastos prorrateados). La Carga Anual Equivalente legal aparece en la hoja de resumen del crédito (CMF/SERNAC).',
       },
       {
-        question: '¿Qué tasa de interés tiene un crédito automotriz?',
-        answer: 'Las tasas varían entre 4% y 10% anual según el banco, monto, plazo y tu perfil crediticio. Compara el CAE (Carga Anual Equivalente) que incluye todos los costos, no solo la tasa.'
+        question: '¿Cuánto pie piden?',
+        answer:
+          'Habitualmente 20–30% del valor. Menos pie suele subir tasa o endurecer condiciones. Compara siempre el total a pagar, no solo la cuota.',
       },
       {
-        question: '¿Qué seguros son obligatorios?',
-        answer: 'Con crédito automotriz, el banco exige seguro de incendio y robo hasta que pagues el crédito. También es obligatorio el SOAP anual. El seguro todo riesgo es opcional pero recomendado.'
+        question: '¿Qué tasa debo poner?',
+        answer:
+          'La de tu cotización formal. Las tasas de mercado varían por perfil, nuevo/usado y plazo; no inventes un “promedio nacional” como oferta.',
       },
       {
-        question: '¿Puedo pagar el crédito anticipadamente?',
-        answer: 'Sí, puedes hacer abonos a capital sin penalidad. Esto reduce el plazo o la cuota. El prepago total también es posible, ahorrando los intereses futuros.'
+        question: '¿SOAP y seguro del crédito son lo mismo?',
+        answer:
+          'No. El SOAP es obligatorio para circular. El banco suele exigir seguro de desgravamen e incendio/robo sobre el vehículo financiado. Esta tool solo estima un seguro genérico opcional.',
       },
       {
-        question: '¿Nuevo o usado?',
-        answer: 'Los créditos para autos nuevos tienen mejores tasas (4-6%) y plazos más largos (hasta 72 meses). Para usados, las tasas son mayores (6-10%) y el plazo máximo es menor (48-60 meses).'
+        question: '¿Puedo prepago?',
+        answer:
+          'En Chile el prepago de créditos de consumo tiene reglas de SERNAC/CMF. Revisa tu contrato: suele permitirse con condiciones de cargo.',
       },
     ],
   },
   {
     id: 'multas-transito',
     name: 'Calculadora Multas de Tránsito',
-    description: 'Calcula el valor de multas de tránsito en UTM y pesos chilenos según gravedad de la infracción.',
+    description:
+      'Estima multas en UTM y pesos: tramos legales e infracciones frecuentes (celular, luz roja, SOAP, alcohol). Referencial JPL.',
     slug: 'calculadora-multas-transito',
     category: 'vehiculos',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-10',
     sources: [
-      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'Ley de Tránsito y multas en UTM' },
-      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl', note: 'Cobro de multas de tránsito' },
+      { name: 'BCN — Ley 18.290', url: 'https://www.bcn.cl/leychile', note: 'Ley de Tránsito y multas en UTM' },
+      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl', note: 'Cobro de multas' },
     ],
-    keywords: ['multas tránsito', 'multa UTM', 'infracción tránsito Chile', 'valor multa', 'multa leve grave gravísima'],
+    seoTitle: 'Multas de Tránsito 2026 Chile: calcula en UTM',
+    seoDescription:
+      'Estima multas de tránsito en Chile: leve a gravísima, celular, luz roja, SOAP y alcohol. UTM del día. Referencial, gratis.',
+    keywords: [
+      'multas tránsito',
+      'multa UTM',
+      'multa celular volante',
+      'multa luz roja',
+      'multa sin SOAP',
+      'Ley Emilia multa',
+      'infracción tránsito Chile',
+    ],
     inputs: [
-      { id: 'tipoMulta', label: 'Tipo de Infracción', type: 'select', required: true, options: [
-        { value: 'leve', label: 'Leve' },
-        { value: 'menos_grave', label: 'Menos Grave' },
-        { value: 'grave', label: 'Grave' },
-        { value: 'gravisima', label: 'Gravísima' },
-      ], tooltip: 'La gravedad la determina Carabineros según la Ley 18.290 de Tránsito.' },
-      { id: 'cantidadMultas', label: 'Cantidad de Multas', type: 'number', placeholder: '1', required: false, min: 1, defaultValue: 1, tooltip: 'Número de multas del mismo tipo. Se multiplican por la cantidad.' },
+      {
+        id: 'tipoMulta',
+        label: 'Infracción o tramo',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'leve', label: 'Tramo: Leve (0,5 UTM)' },
+          { value: 'menos_grave', label: 'Tramo: Menos grave (1 UTM)' },
+          { value: 'grave', label: 'Tramo: Grave (2 UTM)' },
+          { value: 'gravisima', label: 'Tramo: Gravísima (4 UTM)' },
+          { value: 'gravisima_alcohol', label: 'Tramo: Alcohol / sustancias (12 UTM ref.)' },
+          { value: 'estacionar_prohibido', label: 'Estacionar prohibido (leve)' },
+          { value: 'no_cinturon', label: 'Sin cinturón (menos grave)' },
+          { value: 'celular_manos_libres', label: 'Celular al volante (grave)' },
+          { value: 'luz_roja', label: 'Luz roja / Pare (grave)' },
+          { value: 'exceso_velocidad_leve', label: 'Exceso velocidad moderado (menos grave)' },
+          { value: 'exceso_velocidad_grave', label: 'Exceso velocidad grave (gravísima)' },
+          { value: 'sin_revision_tecnica', label: 'Sin revisión técnica (grave)' },
+          { value: 'sin_soap', label: 'Sin SOAP (grave)' },
+          { value: 'sin_licencia', label: 'Sin licencia / suspendida (gravísima)' },
+          { value: 'ebriedad_alcohol', label: 'Alcohol al conducir (12 UTM ref.)' },
+        ],
+        tooltip:
+          'Los montos en UTM son referencias del tramo legal del sitio. El Juzgado de Policía Local puede fijar otro valor dentro del rango y otras sanciones (suspensión, etc.).',
+      },
+      {
+        id: 'cantidadMultas',
+        label: 'Cantidad de multas iguales',
+        type: 'number',
+        placeholder: '1',
+        required: false,
+        min: 1,
+        defaultValue: 1,
+      },
+      {
+        id: 'esReincidente',
+        label: '¿Reincidencia (recargo 50%)?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip: 'Art. 197: recargo del 50% por reincidencia en 12 meses (referencia educativa).',
+      },
     ],
     faq: [
       {
-        question: '¿Cuánto cuesta una multa de tránsito?',
-        answer: 'Las multas se calculan en UTM según gravedad: leve 0.5 UTM (~$34.945), menos grave 1 UTM (~$69.889), grave 2 UTM (~$139.778), gravísima 4 UTM (~$279.556). Valores marzo 2026 con UTM a $69.889.'
+        question: '¿Los montos son exactos?',
+        answer:
+          'Son estimaciones: UTM del sitio × factor del tramo (0,5 / 1 / 2 / 4 / 12). El JPL y la citación oficial mandan. Hay otras sanciones no monetarias.',
       },
       {
-        question: '¿Qué es una infracción leve?',
-        answer: 'Infracciones leves: estacionar en lugar prohibido, no portar documentos, luces defectuosas, neumáticos en mal estado. Son las de menor gravedad pero se acumulan.'
+        question: '¿Por qué aparecen infracciones concretas?',
+        answer:
+          'Para que no tengas que adivinar solo “leve/grave”. Cada una se mapea al tramo de referencia del motor; no es un catálogo exhaustivo de la Ley 18.290.',
       },
       {
-        question: '¿Qué es una infracción gravísima?',
-        answer: 'Infracciones gravísimas: conducir en estado de ebriedad, exceso de velocidad sobre 50%, no respetar luz roja, manejar sin licencia. Pueden incluir suspensión de licencia y arresto.'
+        question: '¿Cómo se actualiza el valor en pesos?',
+        answer:
+          'Con la UTM del snapshot/API del sitio. Si la UTM del día cambia, el monto en CLP cambia.',
       },
       {
-        question: '¿Cómo pago una multa?',
-        answer: 'Las multas se pagan en la municipalidad donde se cometió la infracción o en línea. Tienes 30 días para pagar o reclamar. Después de 30 días, se aplica recargo.'
+        question: '¿Cómo pago o reclamo?',
+        answer:
+          'Pago en municipio / canales habilitados; reclamo ante Juzgado de Policía Local en los plazos legales. Revisa tu citación.',
       },
       {
-        question: '¿Puedo reclamar una multa?',
-        answer: 'Sí. Tienes 30 días hábiles para reclamar ante el Juzgado de Policía Local. Puedes hacerlo personalmente o mediante abogado. Si ganas, la multa se anula.'
+        question: '¿Alcohol es solo la multa en UTM?',
+        answer:
+          'No. Puede haber suspensión, inhabilitación y otras penas (Ley Emilia / tolerancia cero). El valor 12 UTM es solo referencia del tramo de este simulador.',
       },
     ],
   },

@@ -198,6 +198,8 @@ export async function loadCalculationFn(
           antiguedadVehiculo: coerceNumber(inputs.antiguedadVehiculo),
           esZonaCarga: coerceBool(inputs.esZonaCarga),
           esPrimeraVez: coerceBool(inputs.esPrimeraVez),
+          mesesRestantes: coerceNumber(inputs.mesesRestantes, 12) || 12,
+          valorUTM: live?.valorUTM,
         });
         return permisoCirculacionToResults(result);
       };
@@ -442,9 +444,11 @@ export async function loadCalculationFn(
       return (inputs) => {
         const result = calculateCreditoCAE({
           montoCredito: coerceNumber(inputs.montoCredito),
-          tasaAnual: coerceNumber(inputs.tasaAnual),
+          tasaAnual: coerceNumber(inputs.tasaAnual, 2),
           plazoMeses: coerceNumber(inputs.plazoMeses),
-          tieneGarantiaEstatal: coerceBool(inputs.tieneGarantiaEstatal),
+          tieneGarantiaEstatal: coerceBool(inputs.tieneGarantiaEstatal, true),
+          mesesGracia: coerceNumber(inputs.mesesGracia, 0),
+          valorUF: live?.valorUF,
         });
         return creditoCAEToResults(result);
       };
@@ -460,6 +464,10 @@ export async function loadCalculationFn(
           tasaAnual: coerceNumber(inputs.tasaAnual),
           plazoMeses: coerceNumber(inputs.plazoMeses),
           incluyeSeguro: coerceBool(inputs.incluyeSeguro) || undefined,
+          gastosAsociadosPct:
+            coerceNumber(inputs.gastosAsociadosPct, 0) > 0
+              ? coerceNumber(inputs.gastosAsociadosPct)
+              : undefined,
         });
         return creditoAutomotrizToResults(result);
       };
@@ -469,12 +477,7 @@ export async function loadCalculationFn(
       const { calculateMultasTransito, multasTransitoToResults } = await import('./multas-transito');
       return (inputs) => {
         const result = calculateMultasTransito({
-          tipoMulta: inputs.tipoMulta as
-            | 'leve'
-            | 'menos_grave'
-            | 'grave'
-            | 'gravisima'
-            | 'gravisima_alcohol',
+          tipoMulta: inputs.tipoMulta as import('./multas-transito').TipoMulta,
           cantidadMultas: coerceNumber(inputs.cantidadMultas, 0) || undefined,
           esReincidente: coerceBool(inputs.esReincidente) || undefined,
         });

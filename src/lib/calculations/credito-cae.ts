@@ -3,45 +3,46 @@
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
-import { CREDITO_CAE } from '@/lib/values/constants';
+import { CREDITO_CAE, UF } from '@/lib/values/constants';
 
 export interface CreditoCAEInput {
   montoCredito: number;
-  /**
-   * Tasa anual fija establecida por ley desde 2022. Default 2%.
-   * Reformas posteriores podrían cambiar esta tasa.
-   */
+  /** Tasa anual real de referencia (legal 2%). */
   tasaAnual?: number;
   plazoMeses: number;
   tieneGarantiaEstatal: boolean;
+  /**
+   * Meses de gracia antes de la 1.ª cuota (típico: estudios + ~18 m post-egreso).
+   * Solo afecta el calendario estimado; no modela subsidio de intereses real.
+   */
+  mesesGracia?: number;
+  /** UF opcional (live); default snapshot. */
+  valorUF?: number;
 }
 
 export interface CreditoCAEResult {
   montoCredito: number;
   tasaAnual: number;
   plazoMeses: number;
+  plazoAnios: number;
   dividendoMensual: number;
+  dividendoUF: number;
   totalIntereses: number;
   totalPago: number;
   costoCredito: number;
+  pctIntereses: number;
   montoGarantiaEstatal: number;
-  /** Aviso sobre la transición CAE → FES. */
+  mesesGracia: number;
+  mesPrimeraCuota: number;
+  valorUF: number;
   aviso: string;
 }
 
-/**
- * Tasa fija anual del CAE (Ley 21.477 / reforma 2022).
- * Definida en `CREDITO_CAE.tasa_anual_legal` en constants.ts.
- */
 const TASA_CAE_LEGAL = CREDITO_CAE.tasa_anual_legal;
-
-/**
- * Garantía estatal del CAE (Ley 20.027).
- */
 const GARANTIA_ESTATAL_PCT = CREDITO_CAE.garantia_estatal / 100;
 
 const AVISO_FES =
-  'El CAE está en transición al nuevo sistema FES (Financiamiento de Educación Superior). Esta calculadora sigue vigente para créditos CAE existentes. Las nuevas postulaciones desde 2025 se regirán por las normas FES cuando entren en vigor.';
+  'Simulación educativa de cuota CAE (tasa fija en UF). No es tu estado de cuenta Ingresa ni el FES. Confirma saldo, subsidios y condonaciones en ingresa.cl.';
 
 function calcularPMT(monto: number, tasaMensual: number, plazoMeses: number): number {
   if (tasaMensual === 0) return monto / plazoMeses;
@@ -50,89 +51,129 @@ function calcularPMT(monto: number, tasaMensual: number, plazoMeses: number): nu
 }
 
 /**
- * Calcula el crédito con Aval del Estado (CAE).
- *
- * Bug histórico:
- *  - Default tasa 2-5% como rango sin tope. La tasa CAE es FIJA al
- *    2% anual desde la reforma 2022. Ahora el default es 2% y el
- *    parámetro es opcional.
- *  - No mencionaba la transición a FES (Financiamiento de Educación
- *    Superior) que reemplaza al CAE para nuevos créditos desde 2025.
- *
- * Base legal: Ley 20.027 (CAE), reformas 2022 (tasa fija 2%).
+ * Estima dividendo CAE con amortización francesa a tasa fija.
+ * Base: Ley 20.027 / reforma tasa 2% real anual.
  */
 export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
-  const { montoCredito, tasaAnual = TASA_CAE_LEGAL, plazoMeses, tieneGarantiaEstatal } = input;
+  const {
+    montoCredito,
+    tasaAnual = TASA_CAE_LEGAL,
+    plazoMeses,
+    tieneGarantiaEstatal,
+    mesesGracia = 0,
+    valorUF = UF.valor,
+  } = input;
 
   const montoValido = Math.max(0, montoCredito);
   const tasaValida = Math.max(0, Math.min(100, tasaAnual));
   const plazoValido = Math.max(1, Math.round(plazoMeses));
+  const gracia = Math.max(0, Math.round(mesesGracia));
+  const uf = valorUF > 0 ? valorUF : UF.valor;
 
   const tasaMensual = tasaValida / 100 / 12;
   const dividendoMensual = calcularPMT(montoValido, tasaMensual, plazoValido);
   const totalPago = dividendoMensual * plazoValido;
   const totalIntereses = totalPago - montoValido;
-  const costoCredito = montoValido > 0 ? Math.round((totalPago / montoValido) * 100) / 100 : 0;
-  const montoGarantiaEstatal = tieneGarantiaEstatal ? montoValido * GARANTIA_ESTATAL_PCT : 0;
+  const costoCredito =
+    montoValido > 0 ? Math.round((totalPago / montoValido) * 100) / 100 : 0;
+  const pctIntereses =
+    montoValido > 0 ? Math.round((totalIntereses / montoValido) * 1000) / 10 : 0;
+  const montoGarantiaEstatal = tieneGarantiaEstatal
+    ? montoValido * GARANTIA_ESTATAL_PCT
+    : 0;
+  const dividendoUF = uf > 0 ? dividendoMensual / uf : 0;
 
   return {
     montoCredito: Math.round(montoValido),
     tasaAnual: tasaValida,
     plazoMeses: plazoValido,
+    plazoAnios: Math.round((plazoValido / 12) * 10) / 10,
     dividendoMensual: Math.round(dividendoMensual),
+    dividendoUF: Math.round(dividendoUF * 1000) / 1000,
     totalIntereses: Math.round(totalIntereses),
     totalPago: Math.round(totalPago),
     costoCredito,
+    pctIntereses,
     montoGarantiaEstatal: Math.round(montoGarantiaEstatal),
+    mesesGracia: gracia,
+    mesPrimeraCuota: gracia + 1,
+    valorUF: uf,
     aviso: AVISO_FES,
   };
 }
 
-/**
- * Convierte el resultado a formato de CalculatorResult[]
- */
 export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[] {
   return [
     {
-      label: 'Dividendo Mensual',
+      label: 'Dividendo mensual estimado',
       value: result.dividendoMensual,
       format: 'CLP',
       highlight: true,
     },
     {
-      label: 'Total a Pagar',
+      label: 'Dividendo en UF (ref.)',
+      value: result.dividendoUF,
+      format: 'UF',
+    },
+    {
+      label: 'Total a pagar (solo período de cuotas)',
       value: result.totalPago,
       format: 'CLP',
       highlight: true,
     },
     {
-      label: 'Total Intereses',
+      label: 'Total intereses',
       value: result.totalIntereses,
       format: 'CLP',
     },
     {
-      label: 'Monto del Crédito',
+      label: 'Intereses / capital (%)',
+      value: result.pctIntereses,
+      format: 'percentage',
+    },
+    {
+      label: 'Monto del crédito',
       value: result.montoCredito,
       format: 'CLP',
     },
     {
-      label: 'Costo del Crédito (x)',
-      value: result.costoCredito,
-      format: 'number',
-    },
-    {
-      label: `Garantía Estatal (${CREDITO_CAE.garantia_estatal}%)`,
+      label: `Garantía estatal (${CREDITO_CAE.garantia_estatal}%)`,
       value: result.montoGarantiaEstatal,
       format: 'CLP',
     },
     {
-      label: 'Tasa Anual (legal)',
+      label: 'Tasa anual (ref. legal 2%)',
       value: result.tasaAnual,
       format: 'percentage',
     },
     {
       label: 'Plazo (meses)',
       value: result.plazoMeses,
+      format: 'number',
+    },
+    {
+      label: 'Plazo (años)',
+      value: result.plazoAnios,
+      format: 'number',
+    },
+    {
+      label: 'Meses de gracia (antes 1.ª cuota)',
+      value: result.mesesGracia,
+      format: 'number',
+    },
+    {
+      label: 'N.º mes estimado 1.ª cuota',
+      value: result.mesPrimeraCuota,
+      format: 'number',
+    },
+    {
+      label: 'UF usada en la simulación',
+      value: result.valorUF,
+      format: 'CLP',
+    },
+    {
+      label: 'Costo del crédito (× capital)',
+      value: result.costoCredito,
       format: 'number',
     },
   ];

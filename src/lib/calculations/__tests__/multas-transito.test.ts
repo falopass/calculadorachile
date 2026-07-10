@@ -43,4 +43,16 @@ describe('calculateMultasTransito', () => {
       expect(valores[i]).toBeGreaterThanOrEqual(valores[i - 1]);
     }
   });
+
+  it('infracciones frecuentes mapean al tramo correcto', () => {
+    expect(calculateMultasTransito({ tipoMulta: 'estacionar_prohibido' }).montoUTM).toBe(
+      MULTA_TRANSITO_UTM.leve,
+    );
+    expect(calculateMultasTransito({ tipoMulta: 'celular_manos_libres' }).montoUTM).toBe(
+      MULTA_TRANSITO_UTM.grave,
+    );
+    expect(calculateMultasTransito({ tipoMulta: 'ebriedad_alcohol' }).montoUTM).toBe(
+      MULTA_TRANSITO_UTM.gravisima_alcohol,
+    );
+  });
 });

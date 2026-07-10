@@ -33,6 +33,18 @@ describe('calculateContribuciones', () => {
     expect(r.exento).toBe(true);
     expect(r.contribucionAnual).toBe(0);
     expect(r.contribucionSemestral).toBe(0);
+    expect(r.contribucionCuota).toBe(0);
+  });
+
+  it('cuota es anual / 4 y semestre anual / 2', () => {
+    const r = calculateContribuciones({
+      avaluoFiscal: 100_000_000,
+      destino: 'comercial',
+    });
+    expect(r.contribucionAnual).toBe(1_200_000);
+    expect(r.contribucionSemestral).toBe(600_000);
+    expect(r.contribucionCuota).toBe(300_000);
+    expect(r.umbralExencionCLP).toBeGreaterThan(0);
   });
 
   it('habitacional sobre 225,96 UTM paga contribuciones', () => {

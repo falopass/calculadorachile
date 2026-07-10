@@ -64,25 +64,25 @@ export const seoOverrides: Record<
   'calculadora-multas-transito': {
     seoTitle: 'Multas de Tránsito 2026 Chile: calcula en UTM', // 47
     seoDescription:
-      'Estima el valor de multas de tránsito en Chile según tipo de infracción y UTM 2026. Leves, graves y gravísimas. Referencial, gratis.', // 133
+      'Estima multas en UTM: leve a gravísima, celular, luz roja, SOAP y alcohol. UTM del día. Referencial JPL, gratis.', // 128
   },
 
   'calculadora-permiso-circulacion': {
     seoTitle: 'Permiso de Circulación 2026: calcula el valor', // 46
     seoDescription:
-      'Estima tu permiso de circulación 2026 según valor del vehículo y antigüedad. Incluye idea de 1ª y 2ª cuota (ago). Confirma en tu municipio.', // 142
+      'Estima permiso 2026 con tasación fiscal SII, antigüedad y 1ª/2ª cuota. Confirma en tu municipio. Gratis.', // 120
   },
 
   'calculadora-credito-automotriz': {
     seoTitle: 'Crédito Automotriz 2026: simula cuota y pie', // 46
     seoDescription:
-      'Simula la cuota de tu crédito de auto en Chile: pie, tasa, plazo y costo total. Compara escenarios antes de firmar. Gratis.', // 124
+      'Simula cuota de auto: pie %, tasa, intereses y CAE educativa. Compara antes de firmar. No es oferta bancaria.', // 124
   },
 
   'calculadora-contribuciones': {
     seoTitle: 'Contribuciones 2026: calcula por avalúo fiscal', // 47
     seoDescription:
-      'Estima tus contribuciones (impuesto territorial) 2026 según avalúo SII y destino de la propiedad. Útil para cuotas sep y nov. Gratis.', // 136
+      'Estima contribuciones 2026: cuota abr/jun/sep/nov, exención en UTM y avalúo SII. Referencial, gratis.', // 118
   },
 
   'calculadora-intereses-mora': {

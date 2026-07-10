@@ -16,15 +16,16 @@ export interface ContribucionesResult {
   tasaAnual: number;
   descuentoHabitacional: number;
   contribucionAnual: number;
+  /** Mitad del año (2 semestres). */
   contribucionSemestral: number;
+  /** Cuota trimestral típica (4 cuotas: abr / jun / sep / nov). */
+  contribucionCuota: number;
+  avaluoUTM: number;
+  umbralExencionCLP: number;
+  valorUTM: number;
   exento: boolean;
 }
 
-/**
- * Etiquetas legibles por destino. Las tasas y exenciones vienen de
- * `CONTRIBUCIONES_BIENES_RAICES` en constants.ts (Ley 17.235 +
- * Art. 2° bis DL 3063).
- */
 const LABELS_DESTINO: Record<string, string> = {
   habitacional: 'Habitacional',
   comercial: 'Comercial',
@@ -34,45 +35,36 @@ const LABELS_DESTINO: Record<string, string> = {
 };
 
 /**
- * Calcula las contribuciones (impuesto territorial) de un inmueble
+ * Impuesto territorial (contribuciones) según avalúo fiscal y destino.
  *
- * Las contribuciones son un impuesto anual que gravan los inmuebles según su
- * avalúo fiscal y destino. Se pagan semestralmente (abril y septiembre).
- * Las propiedades habitacionales con avalúo bajo cierto monto están exentas.
- *
- * Base legal: Ley de Impuesto Territorial (DL 3063/1979), Art. 2° bis
- *
- * @param input - Datos para el cálculo de contribuciones
- * @returns Desglose completo de las contribuciones
+ * Base: tasas referenciales Ley 17.235 / DL 3063 (uso educativo).
+ * Exención habitacional: avalúo ≤ 225,96 UTM.
+ * Calendario de pago habitual: 4 cuotas (abr, jun, sep, nov) vía TGR/SII.
  */
 export function calculateContribuciones(
-  input: ContribucionesInput
+  input: ContribucionesInput,
 ): ContribucionesResult {
   const { avaluoFiscal, destino } = input;
-
-  // Validar rango
   const avaluo = Math.max(0, avaluoFiscal);
+  const valorUTM = UTM.valor > 0 ? UTM.valor : 0;
 
-  // Tasa anual según destino (Ley 17.235).
   const tasaAnual = CONTRIBUCIONES_BIENES_RAICES.tasas_anuales[destino];
+  const avaluoUTM = valorUTM > 0 ? avaluo / valorUTM : 0;
+  const umbralExencionCLP = Math.round(
+    CONTRIBUCIONES_BIENES_RAICES.exencion_habitacional_utm * valorUTM,
+  );
 
-  // Verificar exención habitacional usando el valor UTM dinámico del snapshot
-  // (antes estaba hardcodeado en 67.900, lo que dejaba el cálculo desincronizado).
-  const avaluoUTM = UTM.valor > 0 ? avaluo / UTM.valor : 0;
   const exento =
     destino === 'habitacional' &&
     avaluoUTM <= CONTRIBUCIONES_BIENES_RAICES.exencion_habitacional_utm;
 
-  // Descuento habitacional (Art. 2° bis DL 3063): 0,025 puntos % sobre la tasa.
   const descuentoHabitacional =
     destino === 'habitacional' ? CONTRIBUCIONES_BIENES_RAICES.descuento_habitacional : 0;
 
-  // Calcular contribución anual
   const tasaEfectiva = tasaAnual - descuentoHabitacional;
   const contribucionAnual = exento ? 0 : Math.round(avaluo * (tasaEfectiva / 100));
-
-  // Contribución semestral (se paga en 2 cuotas: abril y septiembre).
   const contribucionSemestral = Math.round(contribucionAnual / 2);
+  const contribucionCuota = Math.round(contribucionAnual / 4);
 
   return {
     avaluoFiscal: Math.round(avaluo),
@@ -81,52 +73,79 @@ export function calculateContribuciones(
     descuentoHabitacional,
     contribucionAnual,
     contribucionSemestral,
+    contribucionCuota,
+    avaluoUTM: Math.round(avaluoUTM * 100) / 100,
+    umbralExencionCLP,
+    valorUTM,
     exento,
   };
 }
 
-/**
- * Convierte el resultado a formato de CalculatorResult[]
- */
 export function contribucionesToResults(result: ContribucionesResult): CalculatorResult[] {
   const results: CalculatorResult[] = [];
 
-  results.push({
-    label: 'Contribución Semestral',
-    value: result.contribucionSemestral,
-    format: 'CLP',
-    highlight: true,
-  });
+  if (result.exento) {
+    results.push({
+      label: 'Estado: EXENTO (habitacional ≤ 225,96 UTM)',
+      value: 0,
+      format: 'CLP',
+      highlight: true,
+    });
+  } else {
+    results.push({
+      label: 'Cuota (1 de 4) — abr / jun / sep / nov',
+      value: result.contribucionCuota,
+      format: 'CLP',
+      highlight: true,
+    });
+  }
 
   results.push({
-    label: 'Contribución Anual',
+    label: 'Contribución anual',
     value: result.contribucionAnual,
     format: 'CLP',
+    highlight: !result.exento,
   });
 
   results.push({
-    label: 'Tasa Anual',
+    label: 'Semestre (2 cuotas)',
+    value: result.contribucionSemestral,
+    format: 'CLP',
+  });
+
+  results.push({
+    label: 'Tasa anual efectiva',
     value: result.tasaAnual,
     format: 'percentage',
   });
 
   results.push({
-    label: 'Avalúo Fiscal',
+    label: 'Avalúo fiscal',
     value: result.avaluoFiscal,
     format: 'CLP',
   });
 
-  if (result.exento) {
-    results.push({
-      label: 'Exento de Contribuciones',
-      value: 1,
-      format: 'number',
-    });
-  }
+  results.push({
+    label: 'Avalúo en UTM',
+    value: result.avaluoUTM,
+    format: 'UTM',
+  });
+
+  results.push({
+    label: 'Umbral exención habitacional (≈ CLP)',
+    value: result.umbralExencionCLP,
+    format: 'CLP',
+  });
+
+  results.push({
+    label: 'UTM usada en el cálculo',
+    value: result.valorUTM,
+    format: 'CLP',
+  });
 
   if (result.descuentoHabitacional > 0) {
     results.push({
-      label: 'Descuento Habitacional',
+      label: 'Descuento habitacional (puntos %)',
       value: result.descuentoHabitacional,
       format: 'percentage',
     });

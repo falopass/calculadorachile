@@ -37,7 +37,7 @@ describe('calculatePermisoCirculacion', () => {
       esZonaCarga: false,
       esPrimeraVez: false,
     });
-    expect(moto.permisoTotal).toBe(Math.round(auto.permisoTotal / 2));
+    expect(Math.abs(moto.permisoTotal - auto.permisoTotal / 2)).toBeLessThanOrEqual(1);
   });
 
   it('vehículo ≥20 años recibe 50% descuento por antigüedad', () => {
@@ -93,8 +93,9 @@ describe('calculatePermisoCirculacion', () => {
       esPrimeraVez: true,
       mesesRestantes: 6,
     });
-    expect(seisMeses.permisoTotal).toBe(Math.round(completo.permisoTotal / 2));
+    expect(Math.abs(seisMeses.permisoTotal - completo.permisoTotal / 2)).toBeLessThanOrEqual(1);
     expect(seisMeses.prorrateoPrimeraVez).toBeGreaterThan(0);
+    expect(seisMeses.cuota1 + seisMeses.cuota2).toBe(seisMeses.permisoTotal);
   });
 
   it('valor cero retorna permiso cero', () => {

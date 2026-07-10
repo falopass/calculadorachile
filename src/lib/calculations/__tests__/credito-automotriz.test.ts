@@ -17,6 +17,7 @@ describe('calculateCreditoAutomotriz', () => {
       plazoMeses: 48,
     });
     expect(r.montoFinanciar).toBe(12_000_000);
+    expect(r.piePorcentaje).toBe(20);
   });
 
   it('tasa 0% reparte el monto en cuotas iguales', () => {

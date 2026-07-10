@@ -71,7 +71,19 @@ describe('calculateCreditoCAE', () => {
     expect(r.costoCredito).toBeGreaterThan(1);
   });
 
-  it('aviso menciona la transición CAE → FES', () => {
+  it('meses de gracia retrasan el n.º de mes de la 1.ª cuota', () => {
+    const r = calculateCreditoCAE({
+      montoCredito: 5_000_000,
+      plazoMeses: 120,
+      tieneGarantiaEstatal: true,
+      mesesGracia: 18,
+    });
+    expect(r.mesesGracia).toBe(18);
+    expect(r.mesPrimeraCuota).toBe(19);
+    expect(r.dividendoUF).toBeGreaterThan(0);
+  });
+
+  it('aviso menciona FES / Ingresa (no es estado de cuenta)', () => {
     const r = calculateCreditoCAE({
       montoCredito: 5_000_000,
       plazoMeses: 120,
