@@ -396,7 +396,8 @@ export default function PremiumCalculatorShell({
 }: PremiumCalculatorShellProps) {
   const resultsRef = useRef<HTMLDivElement>(null);
   const hasScrolledToResults = useRef(false);
-  const hasTrackedUse = useRef(false);
+  const hasTrackedStart = useRef(false);
+  const hasTrackedComplete = useRef(false);
 
   const [inputValues, setInputValues] = useState(() =>
     buildInitialValues(calculator.inputs),
@@ -427,6 +428,13 @@ export default function PremiumCalculatorShell({
     () => hasSignificantInputValues(calculator.inputs, debouncedValues),
     [debouncedValues, calculator.inputs],
   );
+
+  // Embudo: primera interacción con datos útiles.
+  useEffect(() => {
+    if (!hasSignificantValues || hasTrackedStart.current) return;
+    hasTrackedStart.current = true;
+    trackEvents.calculatorStarted(calculator.id);
+  }, [hasSignificantValues, calculator.id]);
 
   const handleInputChange = useCallback((id: string, value: string | number | boolean) => {
     setInputValues((prev) => ({ ...prev, [id]: value }));
@@ -462,9 +470,9 @@ export default function PremiumCalculatorShell({
       setIsCalculating(false);
 
       // Una sola vez por sesión de cálculo (evita spam en cada debounce).
-      if (!hasTrackedUse.current) {
-        hasTrackedUse.current = true;
-        trackEvents.calculatorUsed(calculator.id);
+      if (!hasTrackedComplete.current) {
+        hasTrackedComplete.current = true;
+        trackEvents.calculatorCompleted(calculator.id);
       }
 
       const mainResult = calculated.find((r) => r.highlight);
@@ -514,7 +522,8 @@ export default function PremiumCalculatorShell({
     setResults(null);
     setHasCalculated(false);
     hasScrolledToResults.current = false;
-    hasTrackedUse.current = false;
+    hasTrackedStart.current = false;
+    hasTrackedComplete.current = false;
   }, [calculator.inputs]);
 
   const organismo =

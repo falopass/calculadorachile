@@ -292,27 +292,114 @@ export default function CalculatorPageClient({
         </Link>
       </p>
 
-      {/* Hub cesantía: solo cluster laboral de salida de empleo */}
-      {(calculator.id === 'finiquito' ||
-        calculator.id === 'indemnizacion-anos-servicio' ||
-        calculator.id === 'vacaciones-proporcionales') && (
-        <section className="mt-8 md:mt-10">
-          <a
-            href="/cesantia"
-            className="group block rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--color-primary-500)]/30 transition-all p-5 md:p-6"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-600)] mb-1">
-              Hub · me despidieron
+      {/* Enlazado interno laboral (hub + clúster cesantía / contrato vs honorarios) */}
+      {(() => {
+        type LaborLink = { href: string; label: string; desc?: string };
+        const byId: Record<string, LaborLink[]> = {
+          finiquito: [
+            { href: '/cesantia', label: 'Hub cesantía', desc: 'Checklist post-despido' },
+            {
+              href: '/blog/seguro-cesantia-finiquito-2026-afc',
+              label: 'Seguro de Cesantía y finiquito',
+            },
+            {
+              href: '/blog/checklist-despues-despido-chile-2026',
+              label: 'Checklist después del despido',
+            },
+            { href: '/guias/finiquito-laboral-chile', label: 'Guía de finiquito' },
+            {
+              href: '/calculadoras/calculadora-indemnizacion-anos-servicio',
+              label: 'Indemnización por años',
+            },
+          ],
+          'indemnizacion-anos-servicio': [
+            { href: '/cesantia', label: 'Hub cesantía' },
+            { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito completo' },
+            {
+              href: '/blog/seguro-cesantia-finiquito-2026-afc',
+              label: 'Seguro de Cesantía',
+            },
+            { href: '/guias/finiquito-laboral-chile', label: 'Guía finiquito' },
+          ],
+          'vacaciones-proporcionales': [
+            { href: '/cesantia', label: 'Hub cesantía' },
+            { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
+            {
+              href: '/calculadoras/calculadora-indemnizacion-anos-servicio',
+              label: 'Indemnización',
+            },
+            { href: '/guias/finiquito-laboral-chile', label: 'Guía finiquito' },
+          ],
+          'sueldo-liquido': [
+            { href: '/guias/sueldo-liquido-chile', label: 'Guía sueldo líquido' },
+            {
+              href: '/calculadoras/calculadora-boleta-honorarios',
+              label: 'Boleta de honorarios',
+              desc: 'Comparar contrato vs honorarios',
+            },
+            {
+              href: '/calculadoras/calculadora-finiquito',
+              label: 'Finiquito',
+            },
+            {
+              href: '/calculadoras/calculadora-horas-extra',
+              label: 'Horas extra',
+            },
+          ],
+          'boleta-honorarios': [
+            {
+              href: '/guias/iva-boleta-honorarios-chile',
+              label: 'Guía boleta e IVA',
+            },
+            {
+              href: '/calculadoras/calculadora-sueldo-liquido',
+              label: 'Sueldo líquido (contrato)',
+              desc: 'Comparar con dependiente',
+            },
+            {
+              href: '/calculadoras/calculadora-cotizacion-independientes',
+              label: 'Cotización independientes',
+            },
+            {
+              href: '/calculadoras/calculadora-impuesto-segunda-categoria',
+              label: 'Impuesto 2.ª categoría',
+            },
+          ],
+          'horas-extra': [
+            { href: '/guias/sueldo-liquido-chile', label: 'Guía sueldo líquido' },
+            { href: '/calculadoras/calculadora-sueldo-liquido', label: 'Sueldo líquido' },
+            { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
+          ],
+        };
+        const links = byId[calculator.id];
+        if (!links?.length) return null;
+        return (
+          <section className="mt-8 md:mt-10" aria-label="Enlaces del clúster laboral">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-600)]">
+              Sigue en el clúster laboral
             </p>
-            <h2 className="text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--color-primary-600)]">
-              Checklist post-despido: finiquito, AFC y reinserción
-            </h2>
-            <p className="mt-1 text-sm text-[var(--foreground-secondary)]">
-              Ordena trámites y el siguiente paso (incl. preparar el CV).
-            </p>
-          </a>
-        </section>
-      )}
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {links.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="group block rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 transition-all hover:border-[var(--color-primary-500)]/30"
+                  >
+                    <span className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--color-primary-600)]">
+                      {item.label}
+                    </span>
+                    {item.desc ? (
+                      <span className="mt-0.5 block text-xs text-[var(--foreground-secondary)]">
+                        {item.desc}
+                      </span>
+                    ) : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })()}
 
       {guideUrl && guideTitle && (
         <section className="mt-8 md:mt-10">

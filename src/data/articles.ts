@@ -56,6 +56,187 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: 'finiquito-2026-ejemplo-sueldo-minimo',
+    title:
+      'Finiquito 2026 con sueldo mínimo $553.553: ejemplos de despido y renuncia',
+    description:
+      'Cuánto puede dar un finiquito si ganas el ingreso mínimo 2026 ($553.553). Despido por necesidades de la empresa vs renuncia, plazos de 10 días hábiles y topes legales. Ejemplos numéricos con la calculadora.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'laboral',
+    readingTime: 12,
+    relatedGuia: 'finiquito-laboral-chile',
+    seoTitle: 'Finiquito 2026 con sueldo mínimo $553.553: ejemplos',
+    seoDescription:
+      'Ejemplos de finiquito con IMM $553.553 (Ley 21.830): indemnización, aviso, vacaciones y renuncia. Plazo 10 días hábiles. Fuentes DT y Código del Trabajo.',
+    keywords: [
+      'finiquito 2026 sueldo mínimo',
+      'finiquito con ingreso mínimo',
+      'cuánto me toca de finiquito sueldo mínimo',
+      'finiquito $553.553',
+      'indemnización años de servicio sueldo mínimo',
+      'finiquito renuncia vs despido',
+      'plazo pago finiquito 10 días hábiles',
+      'calcular finiquito Chile 2026',
+    ],
+    relatedCalculators: [
+      'calculadora-finiquito',
+      'calculadora-indemnizacion-anos-servicio',
+      'calculadora-vacaciones-proporcionales',
+      'calculadora-sueldo-liquido',
+      'calculadora-gratificacion-legal',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto finiquito me corresponde con el sueldo mínimo 2026?',
+        answer:
+          'Depende de la causal, la antigüedad y lo que quede pendiente (vacaciones, días trabajados, gratificación). Con ingreso mínimo $553.553 (18–65 años, desde mayo 2026), un mes de indemnización por cada año de servicio (tope 11 años) solo aplica en ciertas causales de despido, no en renuncia. Usa la calculadora de finiquito con tus datos reales.',
+      },
+      {
+        question: '¿Si renuncio me pagan indemnización por años de servicio?',
+        answer:
+          'En la regla general del Código del Trabajo, la renuncia voluntaria no genera indemnización por años de servicio ni indemnización sustitutiva del aviso. Sí suelen liquidarse feriado/vacaciones pendientes o proporcionales y otros conceptos devengados. Confirma tu causal y contrato; no firmes un finiquito que no entiendas.',
+      },
+      {
+        question: '¿Cuántos días tiene la empresa para pagar el finiquito?',
+        answer:
+          'Según la Dirección del Trabajo y el artículo 177 del Código del Trabajo (modificado por la Ley 20.684), el finiquito debe otorgarse y su pago ponerse a disposición del trabajador dentro de 10 días hábiles contados desde la separación. Solo si las partes lo acuerdan, el pago podría fraccionarse.',
+      },
+      {
+        question: '¿El finiquito es lo mismo que el Seguro de Cesantía (AFC)?',
+        answer:
+          'No. El finiquito es el documento y pago del empleador al terminar el contrato. El Seguro de Cesantía lo administra la AFC con cargo a tu Cuenta Individual (y, si corresponde, al Fondo de Cesantía Solidario). Puedes tener derecho a ambos; no se sustituyen.',
+      },
+      {
+        question: '¿Hay tope si mi sueldo es el mínimo?',
+        answer:
+          'Con $553.553 brutos mensuales estás muy por debajo del tope de 90 UF que limita la base de la indemnización por años de servicio y del aviso previo (Art. 172 CdT). El tope de años (máximo 11 en la regla general) sí puede aplicar si llevas más de 11 años.',
+      },
+    ],
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>IMM 2026 + finiquito</strong><p>Desde el <strong>1 de mayo de 2026</strong> el ingreso mínimo mensual para trabajadores de <strong>18 a 65 años</strong> es <strong>$553.553</strong> (Ley <strong>21.830</strong>; ficha de la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>). Este artículo usa ese piso como base de ejemplos educativos y la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> del sitio.</p></div></aside>
+
+<p>Si te despidieron o renunciaste ganando el sueldo mínimo, la pregunta suele ser la misma: <em>¿cuánto me tienen que pagar en el finiquito?</em> La respuesta no es un solo número: depende de la <strong>causal</strong>, la <strong>antigüedad</strong>, las <strong>vacaciones</strong> y lo que quede pendiente del mes. Aquí separas piezas legales y ves <strong>ejemplos con $553.553</strong>.</p>
+
+<p>Mapa del clúster: hub <a href="/cesantia">/cesantia</a> · <a href="/blog/seguro-cesantia-finiquito-2026-afc">Seguro de Cesantía vs finiquito</a> · <a href="/blog/checklist-despues-despido-chile-2026">checklist post-despido</a> · <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo líquido</a>.</p>
+
+<h2>1. Qué va (y qué no va) en un finiquito</h2>
+<p>El finiquito es el documento con el que se pone término al contrato y se liquidan, entre otros, conceptos como:</p>
+<ul>
+<li><strong>Remuneraciones pendientes</strong> (días del mes trabajados y no pagados).</li>
+<li><strong>Feriado / vacaciones</strong> proporcionales o pendientes (Art. 67 y siguientes del Código del Trabajo; feriado legal general de 15 días hábiles al año).</li>
+<li><strong>Indemnización por años de servicio</strong> (Art. 163), cuando la causal y la antigüedad la hacen exigible (caso típico de enseñanza: despido por necesidades de la empresa, Art. 161, con al menos un año de servicio).</li>
+<li><strong>Indemnización sustitutiva del aviso previo</strong> (Art. 162): un mes de remuneración si, en las causales que lo exigen, el empleador no dio el aviso con al menos 30 días de anticipación.</li>
+<li><strong>Gratificación</strong> u otros devengos si corresponden por ley, contrato o política de la empresa (proporcional al año en curso en muchos escenarios).</li>
+</ul>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No es asesoría legal</strong><p>Los montos de este artículo son <strong>estimaciones educativas</strong> generadas con la misma lógica de la calculadora del sitio. Tu caso puede cambiar por convenio colectivo, pacto de indemnización convencional, feriado progresivo, cotizaciones, descuentos o la interpretación de la causal. Prevalecen el Código del Trabajo, la DT y tu documentación.</p></div></aside>
+
+<h2>2. Ingreso mínimo 2026 que usamos de base</h2>
+<table>
+<thead>
+<tr><th>Tramo</th><th>IMM (desde 1 may 2026)</th><th>Fuente</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Trabajadores <strong>18 a 65 años</strong></td>
+<td><strong>$553.553</strong></td>
+<td><a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">DT — ingreso mínimo</a> · Ley 21.830</td>
+</tr>
+<tr>
+<td><strong>Menores de 18</strong> y <strong>mayores de 65</strong></td>
+<td><strong>$412.938</strong></td>
+<td>Misma ficha DT</td>
+</tr>
+<tr>
+<td>Fines <strong>no remuneracionales</strong></td>
+<td><strong>$356.815</strong></td>
+<td>Misma ficha DT</td>
+</tr>
+</tbody>
+</table>
+<p>Para estimar el líquido del sueldo mínimo (AFP, salud, cesantía), ve el post <a href="/blog/sueldo-minimo-2026-calcular-liquido">Sueldo mínimo 2026: líquido y descuentos</a>. El finiquito se calcula sobre la <strong>remuneración base</strong> del contrato/liquidación, no sobre el “líquido en cuenta”.</p>
+
+<h2>3. Plazo de pago: 10 días hábiles</h2>
+<p>La <a href="https://www.dt.gob.cl/portal/1628/w3-article-109632.html" target="_blank" rel="noopener">Dirección del Trabajo</a> y el <strong>artículo 177</strong> del Código del Trabajo (modificado por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1053719" target="_blank" rel="noopener">Ley 20.684</a>) establecen que el finiquito debe <strong>otorgarse</strong> y su <strong>pago ponerse a disposición</strong> del trabajador dentro de <strong>10 días hábiles</strong> contados desde la separación. Solo si las partes lo acuerdan, podría pagarse en cuotas.</p>
+<p>Si hay diferencias (causal, montos, cotizaciones), puedes reclamar en la Inspección del Trabajo aunque aún no venza ese plazo. Detalle práctico en el <a href="/blog/checklist-despues-despido-chile-2026">checklist después de un despido</a> y en ChileAtiende (<a href="https://www.chileatiende.gob.cl/fichas/33522-finiquito-de-termino-de-contrato-de-trabajo" target="_blank" rel="noopener">ficha de finiquito</a>).</p>
+
+<h2>4. Topes que importan (y por qué el mínimo casi no choca con 90 UF)</h2>
+<ul>
+<li><strong>Base de cálculo de indemnización y aviso:</strong> la remuneración mensual para ese fin no puede superar <strong>90 UF</strong> del último día del mes anterior al pago (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">DT — tope 90 UF</a>, Art. 172 CdT). Con UF del orden de ~$40.800 (snapshot del sitio), 90 UF superan los $3,6 millones: un sueldo de <strong>$553.553 no se ve limitado</strong> por ese tope.</li>
+<li><strong>Años de servicio (regla general):</strong> máximo <strong>11 años</strong> (330 días de remuneración) para la indemnización legal por años de servicio.</li>
+<li><strong>Fracción de año:</strong> la práctica y la norma tratan fracciones superiores a seis meses como año completo en el cálculo de años de servicio; la calculadora pide años (y meses para feriado/gratificación del período).</li>
+</ul>
+
+<h2>5. Ejemplo A — Despido por necesidades de la empresa (Art. 161)</h2>
+<p><strong>Supuestos del ejemplo (educativo):</strong></p>
+<ul>
+<li>Última remuneración mensual base: <strong>$553.553</strong> (IMM 18–65).</li>
+<li>Antigüedad para indemnización: <strong>3 años</strong>.</li>
+<li>Meses del año en curso usados para feriado proporcional y gratificación: <strong>6</strong>.</li>
+<li>Sin días de vacaciones “extra” pendientes de años anteriores.</li>
+<li>Causal: <strong>necesidades de la empresa</strong>.</li>
+<li>El empleador <strong>no</strong> dio aviso de 30 días → se incluye <strong>indemnización sustitutiva del aviso</strong> (1 mes).</li>
+<li>Se incluye <strong>gratificación legal proporcional</strong> del año (Art. 50 / tope 4,75 IMM cuando aplica; con IMM la base 25% anual suele quedar bajo ese tope).</li>
+</ul>
+<div class="numeric-example"><div class="numeric-example__title">Resultado estimado (calculadora del sitio)</div><ul>
+<li>Indemnización por años (3 × $553.553) ≈ <strong>$1.660.659</strong></li>
+<li>Sustitutiva de aviso previo ≈ <strong>$553.553</strong></li>
+<li>Vacaciones proporcionales (6 meses → 7,5 días hábiles de feriado proporcional × $553.553/30) ≈ <strong>$138.388</strong></li>
+<li>Gratificación proporcional (6/12 del año) ≈ <strong>$830.330</strong></li>
+</ul><span class="total">Total estimado ≈ $3.182.930</span></div>
+<p>Si el empleador <strong>sí</strong> avisó con 30 días, quita el mes de aviso (~$553.553) y el total baja a ~$2,63 millones en este mismo escenario. Cambia los flags en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>
+
+<h2>6. Ejemplo B — Renuncia voluntaria (mismo sueldo y 3 años)</h2>
+<p>Misma base $553.553, 3 años de antigüedad, 6 meses del año para feriado/gratificación, <strong>sin</strong> indemnización por años ni aviso:</p>
+<div class="numeric-example"><div class="numeric-example__title">Renuncia — estimación</div><ul>
+<li>Indemnización por años ≈ <strong>$0</strong></li>
+<li>Aviso previo ≈ <strong>$0</strong></li>
+<li>Vacaciones proporcionales ≈ <strong>$138.388</strong></li>
+<li>Gratificación proporcional ≈ <strong>$830.330</strong></li>
+</ul><span class="total">Total estimado ≈ $968.718</span></div>
+<p>La diferencia con el ejemplo A (~$2,2 millones) ilustra por qué la causal importa más que el “sueldo mínimo” en abstracto. La renuncia tiene formalidades propias (plazo de aviso y ratificación ante ministro de fe en la regla general; ver DT). No uses este total como promesa de liquidación.</p>
+
+<h2>7. Ejemplo C — 1 año de servicio, sin gratificación del período, 5 días de feriado pendiente</h2>
+<p>Útil si te desvinculan cerca del primer aniversario y te deben días de vacaciones no tomados:</p>
+<ul>
+<li>Base $553.553 · 1 año · causal necesidades de la empresa · con sustitutiva de aviso · 5 días de feriado pendiente · sin gratificación del período.</li>
+</ul>
+<div class="numeric-example"><div class="numeric-example__title">Estimación</div><ul>
+<li>Indemnización 1 año ≈ <strong>$553.553</strong></li>
+<li>Aviso sustitutivo ≈ <strong>$553.553</strong></li>
+<li>5 días de feriado (5 × $553.553/30) ≈ <strong>$92.259</strong></li>
+</ul><span class="total">Total estimado ≈ $1.199.365</span></div>
+<p>Para aislar solo la indemnización por años usa la <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">calculadora de indemnización</a>; para feriado solo, la de <a href="/calculadoras/calculadora-vacaciones-proporcionales">vacaciones proporcionales</a>.</p>
+
+<h2>8. Finiquito ≠ Seguro de Cesantía</h2>
+<p>Tras un despido con derecho a seguro, además del finiquito puedes solicitar giros en la <strong>AFC</strong> (Cuenta Individual y, si cumples requisitos, Fondo de Cesantía Solidario). Eso <strong>no reemplaza</strong> el finiquito del empleador. Lee:</p>
+<ul>
+<li><a href="/blog/seguro-cesantia-finiquito-2026-afc">Seguro de Cesantía y finiquito 2026</a></li>
+<li><a href="/blog/como-cobrar-seguro-cesantia-afc-2026">Cómo cobrar el Seguro de Cesantía en la AFC</a></li>
+<li>Hub <a href="/cesantia">Me despidieron / cesantía</a></li>
+</ul>
+
+<h2>9. Cómo simular tu caso (sin inventar números de redes)</h2>
+<ol class="steps">
+<li><strong>Junta liquidaciones</strong> de los últimos meses y la carta de término con causal.</li>
+<li><strong>Anota antigüedad</strong> (años y meses) y días de feriado no tomados.</li>
+<li><strong>Marca si hubo aviso de 30 días</strong> (si aplica a tu causal).</li>
+<li><strong>Simula</strong> en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> con $553.553 o tu sueldo real si es mayor.</li>
+<li><strong>Compara</strong> con la propuesta de finiquito (papel o electrónico en Mi DT) antes de firmar.</li>
+</ol>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Siguiente paso laboral</strong><p>Si el término del contrato abre una búsqueda de empleo, el hub <a href="/cesantia">/cesantia</a> ordena finiquito, AFC y reinserción. En las calculadoras laborales también hay un enlace a CVListo para revisar el match ATS de tu CV con una oferta real (sin inventar experiencia).</p></div></aside>
+
+<ul>
+<li><a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">DT — valor del ingreso mínimo mensual</a> (Ley 21.830).</li>
+<li><a href="https://www.dt.gob.cl/portal/1628/w3-article-109632.html" target="_blank" rel="noopener">DT — plazo de finiquito y reclamo</a>.</li>
+<li><a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">DT — tope 90 UF en indemnizaciones</a>.</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1053719" target="_blank" rel="noopener">BCN — Ley 20.684</a> (plazo 10 días hábiles).</li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/33522-finiquito-de-termino-de-contrato-de-trabajo" target="_blank" rel="noopener">ChileAtiende — finiquito de término de contrato</a>.</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No es dictamen de la Dirección del Trabajo ni asesoría jurídica personalizada. Los ejemplos usan el IMM $553.553 y la lógica de la calculadora del sitio a la fecha de publicación. Prevalecen la normativa vigente, la DT y los documentos de tu término de contrato.</p></div></aside>
+<p>Para profundizar: <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral</a> · <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> · <a href="/cesantia">hub cesantía</a> · <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo 2026</a>.</p>`,
+  },
+  {
     slug: 'seguro-cesantia-finiquito-2026-afc',
     title:
       'Seguro de Cesantía y finiquito 2026: cómo funciona la AFC (CIC y Fondo Solidario)',

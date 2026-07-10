@@ -91,9 +91,11 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | — | blog | Checklist después de un despido | `checklist-despues-despido-chile-2026` | 2026-07-10 | laboral | finiquito |
 | 31 | blog | Seguro de Cesantía + finiquito (AFC) | `seguro-cesantia-finiquito-2026-afc` | 2026-07-10 | laboral | finiquito |
 | — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
+| 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
-**Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.
+**Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
+**#6 adelantado (2026-07-10):** ejemplos IMM $553.553 verificados con módulo finiquito + fuentes DT/Ley 20.684/21.830.
 
 ---
 
@@ -107,7 +109,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~3~~ | blog | ~~Sueldo mínimo 2026 $553.553 → líquido~~ | ~~`sueldo-minimo-2026-calcular-liquido`~~ | satélite `sueldo-liquido-chile` | laboral | ~~2026-07-11~~ | ago–dic | ✅ |
 | 4 | blog | Subsidio eléctrico 2026: resultados y descuento | `subsidio-electrico-2026-resultados-descuento-cuenta` | DR[25] | hogar | 2026-08-18 | ago–sep | **P2-ventana** |
 | 5 | blog | BTM/SEJ pago anual + puente SUE | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | DR[13] | empleo | 2026-08-21 | ago | **P2-ventana** |
-| 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | DR[12] · satélite finiquito | laboral | 2026-08-23 | continuo | **P1** |
+| ~~6~~ | blog | ~~Finiquito 2026 con sueldo mínimo~~ | ~~`finiquito-2026-ejemplo-sueldo-minimo`~~ | publicado 2026-07-10 | laboral | ~~2026-08-23~~ | continuo | ✅ |
 | 8 | blog | Aumento PGU sep 2026 (75+) | `pgu-aumento-septiembre-2026-75-anos` | DR[19] soporte · satélite AFP | pensión | 2026-08-28 | sep | **P1** |
 | 9 | blog | Asignación familiar 2026: tramos y montos | `asignacion-familiar-2026-tramos-montos` | satélite familia | familia | 2026-09-01 | sep–dic | **P1** |
 | 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
@@ -385,7 +387,7 @@ Plan integrado operativo:
 
 ## Uso operativo
 
-1. **Siguiente (P1, blog):** #6 `finiquito-2026-ejemplo-sueldo-minimo` o #8 PGU 75+ (pico sep).  
+1. **Siguiente (P1, blog):** #8 PGU 75+ (pico sep) o #9 asignación familiar; cola P2-ventana #4/#5 (ago).  
 2. **Cola P2-ventana** (blogs) antes que relleno continuo.  
 3. **#39 (guía):** en ene 2027 escribir en `guias.ts`, no en blog.  
 4. **#47 / #48 / #31 (blog\*):** blog primero; evaluar guía solo si rankean.  

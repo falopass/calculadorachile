@@ -125,6 +125,11 @@ const TOOLS = [
     desc: 'Finiquito, AFC, presupuesto y reinserción.',
   },
   {
+    href: '/blog/finiquito-2026-ejemplo-sueldo-minimo',
+    title: 'Finiquito con sueldo mínimo 2026',
+    desc: 'Ejemplos con IMM $553.553: despido vs renuncia.',
+  },
+  {
     href: '/guias/sueldo-liquido-chile',
     title: 'Guía pillar: sueldo líquido',
     desc: 'Descuentos, topes y liquidación referencial.',

@@ -278,6 +278,13 @@ export const seoOverrides: Record<
       'IMM desde mayo 2026: $553.553 (18–65), $412.938 y $356.815 no remuneracional. Estima tu líquido. DT y Ley 21.830.', // 128
   },
 
+  // --- #6 P1: finiquito × IMM ---
+  'finiquito-2026-ejemplo-sueldo-minimo': {
+    seoTitle: 'Finiquito 2026 con sueldo mínimo $553.553: ejemplos', // 54
+    seoDescription:
+      'Finiquito con IMM $553.553: despido vs renuncia, indemnización, aviso y vacaciones. Plazo 10 días hábiles. DT y Código del Trabajo.', // 140
+  },
+
   // --- Hub cesantía + Seguro de Cesantía AFC ---
   'seguro-cesantia-finiquito-2026-afc': {
     seoTitle: 'Seguro de Cesantía 2026: AFC, CIC y finiquito', // 50

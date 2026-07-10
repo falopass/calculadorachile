@@ -21,11 +21,11 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-patente-comercial',
   ],
   'calculadora-boleta-honorarios': [
+    'calculadora-sueldo-liquido',
     'calculadora-iva',
     'calculadora-cotizacion-independientes',
-    'calculadora-operacion-renta',
+    'calculadora-impuesto-segunda-categoria',
     'calculadora-ppm',
-    'calculadora-utm-clp',
   ],
   'calculadora-ppm': [
     'calculadora-iva',
@@ -62,11 +62,11 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-finiquito',
   ],
 
-  // Laboral
+  // Laboral (clúster embudo: 5 links fuertes + puente cesantía vía page)
   'calculadora-sueldo-liquido': [
     'calculadora-finiquito',
     'calculadora-horas-extra',
-    'calculadora-comparador-afp',
+    'calculadora-boleta-honorarios',
     'calculadora-impuesto-segunda-categoria',
     'calculadora-gratificacion-legal',
   ],
@@ -81,24 +81,33 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-finiquito',
     'calculadora-sueldo-liquido',
     'calculadora-indemnizacion-anos-servicio',
+    'calculadora-horas-extra',
+    'calculadora-gratificacion-legal',
   ],
   'calculadora-horas-extra': [
     'calculadora-sueldo-liquido',
     'calculadora-finiquito',
-    'calculadora-propina-legal',
+    'calculadora-gratificacion-legal',
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-costo-empleado-pyme',
   ],
   'calculadora-gratificacion-legal': [
     'calculadora-sueldo-liquido',
     'calculadora-finiquito',
     'calculadora-costo-empleado-pyme',
+    'calculadora-horas-extra',
+    'calculadora-vacaciones-proporcionales',
   ],
   'calculadora-indemnizacion-anos-servicio': [
     'calculadora-finiquito',
     'calculadora-vacaciones-proporcionales',
     'calculadora-sueldo-liquido',
+    'calculadora-horas-extra',
+    'calculadora-gratificacion-legal',
   ],
   'calculadora-impuesto-segunda-categoria': [
     'calculadora-sueldo-liquido',
+    'calculadora-boleta-honorarios',
     'calculadora-comparador-afp',
     'calculadora-operacion-renta',
   ],

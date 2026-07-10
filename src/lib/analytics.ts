@@ -61,8 +61,27 @@ export function event(action: string, params?: GtagEventParams): void {
 
 // Eventos predefinidos sugeridos
 export const trackEvents = {
+  /**
+   * Usuario empieza a usar la calculadora (inputs significativos).
+   * Embudo plan 90 días: calculator_started.
+   */
+  calculatorStarted: (calculatorId: string) =>
+    event('calculator_started', { calculator_id: calculatorId }),
+
+  /**
+   * Cálculo exitoso con resultados (una vez por sesión de inputs).
+   * Embudo plan 90 días: calculator_completed.
+   * `calculator_used` se mantiene como alias histórico en GA4.
+   */
+  calculatorCompleted: (calculatorId: string) => {
+    event('calculator_completed', { calculator_id: calculatorId });
+    event('calculator_used', { calculator_id: calculatorId });
+  },
+
+  /** @deprecated Preferir calculatorCompleted; se mantiene por compat. */
   calculatorUsed: (calculatorId: string) =>
     event('calculator_used', { calculator_id: calculatorId }),
+
   calculationExported: (calculatorId: string, format: string) =>
     event('calculation_exported', { calculator_id: calculatorId, format }),
   resultCopied: (calculatorId: string) =>

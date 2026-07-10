@@ -8,12 +8,13 @@
 export const CVLISTO_BASE_URL = 'https://cvlisto.cl';
 export const CVLISTO_LANDING_PATH = '/desde-calculachile';
 
-/** Calculadoras donde el CTA de reinserción laboral tiene sentido. */
+/** Calculadoras donde el CTA de reinserción / postulación tiene sentido. */
 export const CVLISTO_CTA_CALCULATOR_IDS = [
   'finiquito',
   'indemnizacion-anos-servicio',
   'vacaciones-proporcionales',
   'sueldo-liquido',
+  'boleta-honorarios',
 ] as const;
 
 export type CvlistoCalculatorId = (typeof CVLISTO_CTA_CALCULATOR_IDS)[number];
@@ -29,6 +30,7 @@ export type CvlistoOrigen =
   | 'indemnizacion'
   | 'vacaciones'
   | 'sueldo'
+  | 'honorarios'
   | 'default';
 
 export interface CvlistoCtaCopy {
@@ -44,6 +46,7 @@ const ORIGEN_BY_CALCULATOR: Record<CvlistoCalculatorId, CvlistoOrigen> = {
   'indemnizacion-anos-servicio': 'indemnizacion',
   'vacaciones-proporcionales': 'vacaciones',
   'sueldo-liquido': 'sueldo',
+  'boleta-honorarios': 'honorarios',
 };
 
 const COPY_BY_ORIGEN: Record<CvlistoOrigen, CvlistoCtaCopy> = {
@@ -74,6 +77,13 @@ const COPY_BY_ORIGEN: Record<CvlistoOrigen, CvlistoCtaCopy> = {
     body: 'Pega la oferta y revisa gratis el match ATS. Ideal si estás evaluando un cambio o una contraoferta.',
     ctaLabel: 'Comparar mi CV con la oferta',
     origen: 'sueldo',
+  },
+  honorarios: {
+    eyebrow: 'Contrato vs honorarios · postulación',
+    title: 'Ya calculaste la boleta. ¿Tu CV habla el idioma de la vacante?',
+    body: 'Si comparas condiciones o te postulas a un cargo, revisa gratis el match ATS sin inventar experiencia.',
+    ctaLabel: 'Analizar mi CV gratis',
+    origen: 'honorarios',
   },
   default: {
     eyebrow: 'Herramienta de empleo',
@@ -111,11 +121,13 @@ export function getCvlistoCtaCopyByOrigen(origen: string): CvlistoCtaCopy {
 export const CVLISTO_CTA_GUIA_SLUGS = [
   'finiquito-laboral-chile',
   'sueldo-liquido-chile',
+  'iva-boleta-honorarios-chile',
 ] as const;
 
 const ORIGEN_BY_GUIA: Record<string, CvlistoOrigen> = {
   'finiquito-laboral-chile': 'finiquito',
   'sueldo-liquido-chile': 'sueldo',
+  'iva-boleta-honorarios-chile': 'honorarios',
 };
 
 /**
@@ -138,6 +150,7 @@ export function resolveCvlistoContentOrigen(input: {
     if (slug.includes('indemnizacion')) return 'indemnizacion';
     if (slug.includes('vacaciones')) return 'vacaciones';
     if (slug.includes('sueldo')) return 'sueldo';
+    if (slug.includes('honorarios') || slug.includes('boleta')) return 'honorarios';
   }
 
   if (input.relatedGuia && ORIGEN_BY_GUIA[input.relatedGuia]) {

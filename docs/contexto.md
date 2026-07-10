@@ -64,6 +64,14 @@ node scripts/audit-ymyl-matrix.mjs
 | P1 | `finiquito`, `horas-extra` (jornada 42), `credito-hipotecario` |
 | P2 | `uf-clp` (podado), `subsidio-agua` (podado, noIndex) |
 
+### Embudo analytics + CTA CVListo (2026-07-10+)
+
+| Pieza | Estado |
+|-------|--------|
+| `calculator_started` / `calculator_completed` | Shell premium (GA4; `calculator_used` alias) |
+| CTA post-resultado | finiquito, indemnización, vacaciones, sueldo, **honorarios** |
+| Enlazado laboral | Clúster 3–5 links + related calcs en calcs laborales |
+
 **Hallazgo madre (sigue valiendo):** el módulo a menudo calcula bien; el riesgo es adapter/catálogo desalineados. Si el label promete y no cambia el resultado → bug YMYL.
 
 **Research de fórmulas:** [`research/dossier-ymyl.md`](./research/dossier-ymyl.md)  
