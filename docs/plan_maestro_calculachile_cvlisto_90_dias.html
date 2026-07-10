@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plan maestro de SEO, marketing, conversión y monetización para conectar CalculaChile con CVListo durante 90 días.">
+  <title>Plan maestro 90 días — CalculaChile × CVListo</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --paper:#ffffff;
+      --ink:#142033;
+      --muted:#607086;
+      --line:#dfe6ef;
+      --blue:#0033a0;
+      --blue-2:#0c56d0;
+      --red:#d52b1e;
+      --green:#177c55;
+      --amber:#a96500;
+      --soft-blue:#eef4ff;
+      --soft-red:#fff1ef;
+      --soft-green:#edf9f3;
+      --soft-amber:#fff8e8;
+      --nav:#0c1830;
+      --shadow:0 16px 45px rgba(20,32,51,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.6;
+    }
+    a{color:var(--blue-2);text-decoration:none}
+    a:hover{text-decoration:underline}
+    code,kbd,.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+    .skip{position:absolute;left:-9999px}
+    .skip:focus{left:16px;top:16px;background:white;padding:10px 14px;z-index:999;border-radius:8px}
+    .hero{
+      color:white;
+      background:
+        radial-gradient(circle at 88% 16%, rgba(213,43,30,.34), transparent 24%),
+        radial-gradient(circle at 60% 0%, rgba(31,101,230,.38), transparent 32%),
+        linear-gradient(135deg,#071227 0%,#102b61 58%,#0033a0 100%);
+      padding:72px 28px 68px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;inset:auto -120px -160px auto;
+      width:420px;height:420px;border:1px solid rgba(255,255,255,.14);
+      border-radius:50%;
+      box-shadow:0 0 0 38px rgba(255,255,255,.035),0 0 0 84px rgba(255,255,255,.025);
+    }
+    .hero-inner{max-width:1180px;margin:auto;position:relative;z-index:1}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.22);
+      padding:7px 12px;border-radius:999px;
+      font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase
+    }
+    h1{font-size:clamp(2.2rem,5vw,4.8rem);line-height:1.02;margin:20px 0 18px;max-width:900px;letter-spacing:-.045em}
+    .hero p{max-width:830px;font-size:1.14rem;color:#dfe9ff;margin:0}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:11px;padding:12px 17px;font-weight:800;
+      border:1px solid transparent;cursor:pointer;font-size:.95rem
+    }
+    .btn-primary{background:white;color:#0d2f75}
+    .btn-secondary{background:rgba(255,255,255,.08);color:white;border-color:rgba(255,255,255,.28)}
+    .layout{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:28px;padding:30px 24px 80px}
+    aside{position:relative}
+    .nav-card{
+      position:sticky;top:18px;background:var(--nav);color:#dbe5f8;
+      border-radius:16px;padding:18px;box-shadow:var(--shadow);max-height:calc(100vh - 36px);overflow:auto
+    }
+    .nav-card strong{display:block;color:white;margin-bottom:11px;font-size:.86rem;text-transform:uppercase;letter-spacing:.08em}
+    .nav-card a{display:block;color:#c6d3ea;padding:7px 9px;border-radius:8px;font-size:.88rem}
+    .nav-card a:hover{background:rgba(255,255,255,.08);color:white;text-decoration:none}
+    main{min-width:0}
+    section{
+      background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+      padding:clamp(22px,4vw,42px);margin-bottom:24px;box-shadow:0 7px 25px rgba(20,32,51,.04)
+    }
+    .section-kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);font-weight:900;margin-bottom:4px}
+    h2{font-size:clamp(1.65rem,3vw,2.45rem);line-height:1.15;margin:0 0 15px;letter-spacing:-.03em}
+    h3{font-size:1.25rem;line-height:1.25;margin:28px 0 10px}
+    h4{font-size:1rem;margin:20px 0 6px}
+    p{margin:8px 0 14px}
+    .lead{font-size:1.08rem;color:#44556d;max-width:900px}
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff}
+    .card h3,.card h4{margin-top:0}
+    .metric{padding:18px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#f9fbff)}
+    .metric .value{font-size:2rem;font-weight:900;letter-spacing:-.04em;color:#123c8f}
+    .metric .label{font-size:.88rem;color:var(--muted)}
+    .callout{border-left:5px solid var(--blue);background:var(--soft-blue);padding:18px 20px;border-radius:0 13px 13px 0;margin:20px 0}
+    .callout.red{border-color:var(--red);background:var(--soft-red)}
+    .callout.green{border-color:var(--green);background:var(--soft-green)}
+    .callout.amber{border-color:var(--amber);background:var(--soft-amber)}
+    .quote{font-size:1.25rem;font-weight:850;line-height:1.35;letter-spacing:-.02em}
+    .flow{
+      display:grid;grid-template-columns:repeat(7,minmax(105px,1fr));
+      gap:10px;align-items:stretch;margin:22px 0;overflow:auto;padding-bottom:5px
+    }
+    .flow .step{min-width:115px;border:1px solid #cfd9e8;background:#f7faff;border-radius:13px;padding:15px;text-align:center;font-weight:800;font-size:.86rem;position:relative}
+    .flow .step:not(:last-child)::after{content:"→";position:absolute;right:-10px;top:50%;transform:translate(50%,-50%);color:#7c8ba2;font-size:1.3rem}
+    ul,ol{padding-left:1.25rem}
+    li{margin:.35rem 0}
+    .tag{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.74rem;font-weight:850;background:#edf2f8;color:#40516b;margin:2px}
+    .tag.blue{background:#e8f0ff;color:#15499f}
+    .tag.red{background:#ffeceb;color:#a82a21}
+    .tag.green{background:#e7f6ee;color:#146e4d}
+    .tag.amber{background:#fff3d9;color:#8a5900}
+    .copy-box{
+      border:1px dashed #9db2d3;background:#f8fbff;border-radius:13px;padding:17px;margin:12px 0
+    }
+    .copy-label{font-size:.74rem;font-weight:900;color:#51637b;text-transform:uppercase;letter-spacing:.08em}
+    .copy-title{font-size:1.13rem;font-weight:900;margin:7px 0 3px}
+    .copy-text{color:#46566d;margin:0 0 10px}
+    .copy-button{display:inline-block;background:var(--blue);color:white;border-radius:8px;padding:8px 12px;font-weight:800;font-size:.86rem}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px;margin:15px 0}
+    table{width:100%;border-collapse:collapse;min-width:760px}
+    th,td{padding:12px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+    th{background:#f2f6fb;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:#465872}
+    tr:last-child td{border-bottom:none}
+    .priority{font-weight:900}
+    .p0{color:#a2231b}.p1{color:#a96500}.p2{color:#146e4d}
+    details{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:#fff}
+    summary{cursor:pointer;padding:14px 16px;font-weight:850}
+    details > div{padding:0 16px 16px;color:#46566d}
+    .checklist{display:grid;gap:10px}
+    .check{
+      display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);
+      border-radius:11px;padding:12px;background:#fbfcfe
+    }
+    .check input{margin-top:4px;width:18px;height:18px;accent-color:var(--blue)}
+    .check.done{opacity:.65;text-decoration:line-through;background:#f0f5f2}
+    .mini{font-size:.83rem;color:var(--muted)}
+    .calculator{
+      border:1px solid #cdd9ea;background:linear-gradient(180deg,#f8fbff,#f2f7ff);
+      border-radius:16px;padding:22px
+    }
+    .form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    label{font-size:.82rem;font-weight:800;color:#41526a}
+    input[type=number]{
+      width:100%;padding:11px 12px;border:1px solid #bdcadc;border-radius:9px;margin-top:5px;
+      font:inherit;background:white;color:var(--ink)
+    }
+    .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:17px}
+    .result{background:white;border:1px solid var(--line);border-radius:11px;padding:13px}
+    .result strong{display:block;font-size:1.28rem;color:#0d438f}
+    .codeblock{
+      background:#101a2e;color:#d9e6fb;border-radius:13px;padding:18px;overflow:auto;font-size:.84rem;line-height:1.55
+    }
+    .timeline{border-left:3px solid #bfd0e8;margin-left:8px;padding-left:24px}
+    .timeline-item{position:relative;margin:0 0 24px}
+    .timeline-item::before{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:var(--blue);left:-32px;top:6px;border:3px solid white;box-shadow:0 0 0 2px var(--blue)}
+    .timeline-item h3{margin:0 0 6px}
+    .week{font-size:.74rem;font-weight:900;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
+    .scorecard{display:grid;grid-template-columns:1.4fr repeat(4,.7fr);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .scorecard > div{padding:11px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .scorecard > div:nth-child(5n){border-right:none}
+    .scorecard .head{background:#f3f6fb;font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+    .footnote{font-size:.82rem;color:var(--muted)}
+    footer{max-width:1180px;margin:0 auto 60px;padding:0 24px;color:#66758a;font-size:.85rem}
+    .print-only{display:none}
+    @media(max-width:1050px){
+      .layout{grid-template-columns:1fr}
+      aside{display:none}
+      .grid-4{grid-template-columns:repeat(2,1fr)}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+      .form-grid{grid-template-columns:repeat(2,1fr)}
+      .result-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:700px){
+      .hero{padding:52px 20px}
+      .layout{padding:18px 12px 50px}
+      section{padding:22px 17px}
+      .grid-2,.grid-3,.grid-4,.form-grid,.result-grid{grid-template-columns:1fr}
+      .flow{grid-template-columns:1fr;overflow:visible}
+      .flow .step:not(:last-child)::after{content:"↓";right:50%;top:auto;bottom:-18px;transform:translate(50%,50%)}
+      h1{font-size:2.5rem}
+      .scorecard{grid-template-columns:1fr}
+      .scorecard > div{border-right:none}
+    }
+    @media print{
+      body{background:white;font-size:10.5pt}
+      .hero{padding:34px 24px;background:#123b82!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .layout{display:block;max-width:none;padding:16px}
+      aside,.hero-actions,.no-print{display:none!important}
+      section{box-shadow:none;break-inside:avoid;border-color:#cbd3df;padding:24px}
+      .print-only{display:block}
+      details{break-inside:avoid}
+      details > div{display:block}
+      a{color:inherit;text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Plan de crecimiento 2026 · Chile</span>
+    <h1>CalculaChile × CVListo<br>Plan maestro de adquisición, conversión y revenue</h1>
+    <p>Una hoja de ruta operativa de 90 días para transformar el tráfico orgánico de CalculaChile en usuarios y clientes de CVListo, sin depender de redes sociales, campañas pagadas ni un rediseño completo.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#plan-90">Ir al plan de 90 días</a>
+      <a class="btn btn-secondary" href="#checklist">Abrir checklist de ejecución</a>
+      <button class="btn btn-secondary no-print" onclick="window.print()">Imprimir / guardar PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <nav class="nav-card" aria-label="Índice">
+      <strong>Índice ejecutivo</strong>
+      <a href="#resumen">1. Resumen y tesis</a>
+      <a href="#diagnostico">2. Diagnóstico real</a>
+      <a href="#posicionamiento">3. Posicionamiento</a>
+      <a href="#embudo">4. Embudo completo</a>
+      <a href="#calculachile">5. Cambios en CalculaChile</a>
+      <a href="#cvlisto">6. Cambios en CVListo</a>
+      <a href="#seo">7. Arquitectura SEO</a>
+      <a href="#contenido">8. Contenido de 12 semanas</a>
+      <a href="#analitica">9. Analítica y eventos</a>
+      <a href="#cro">10. CRO y experimentos</a>
+      <a href="#automatizaciones">11. Automatizaciones</a>
+      <a href="#b2b">12. Canal institucional</a>
+      <a href="#revenue">13. Modelo de ingresos</a>
+      <a href="#plan-90">14. Plan 30/60/90</a>
+      <a href="#checklist">15. Checklist editable</a>
+      <a href="#riesgos">16. Riesgos y límites</a>
+      <a href="#veredicto">17. Decisión final</a>
+    </nav>
+  </aside>
+
+  <main id="contenido">
+
+    <section id="resumen">
+      <div class="section-kicker">01 · Resumen ejecutivo</div>
+      <h2>La oportunidad no es crear una tercera marca: es conectar dos activos que ya existen</h2>
+      <p class="lead">CalculaChile posee el canal de adquisición: búsquedas orgánicas de alta intención. CVListo posee el producto transaccional: análisis ATS, una mejora gratuita y créditos pagados. El crecimiento debe venir de diseñar el puente entre ambas experiencias.</p>
+
+      <div class="grid grid-4">
+        <div class="metric"><div class="value">39</div><div class="label">calculadoras públicas visibles en CalculaChile al revisar el sitio</div></div>
+        <div class="metric"><div class="value">$0</div><div class="label">barrera de entrada para el primer análisis y la primera optimización en CVListo</div></div>
+        <div class="metric"><div class="value">90 días</div><div class="label">horizonte recomendado para validar el embudo antes de abrir otro proyecto</div></div>
+        <div class="metric"><div class="value">1 norte</div><div class="label">ingreso por cada 1.000 sesiones orgánicas laborales</div></div>
+      </div>
+
+      <div class="callout green">
+        <div class="quote">CalculaChile resuelve la pérdida o evaluación del ingreso. CVListo ayuda a conseguir el siguiente ingreso.</div>
+      </div>
+
+      <h3>Objetivo comercial</h3>
+      <p>Transformar las páginas laborales de CalculaChile en el principal canal de adquisición de CVListo, manteniendo el valor gratuito, la confianza editorial y el posicionamiento SEO.</p>
+
+      <h3>Principios no negociables</h3>
+      <div class="grid grid-3">
+        <div class="card"><h4>Valor antes que venta</h4><p>El resultado de la calculadora siempre se entrega antes del CTA comercial.</p></div>
+        <div class="card"><h4>Contexto antes que banner</h4><p>Los CTA deben responder al siguiente problema lógico del usuario, no parecer publicidad genérica.</p></div>
+        <div class="card"><h4>Medición antes que expansión</h4><p>No se construye un nuevo canal o producto hasta conocer la conversión del embudo actual.</p></div>
+      </div>
+    </section>
+
+    <section id="diagnostico">
+      <div class="section-kicker">02 · Diagnóstico</div>
+      <h2>Lo que ya funciona y lo que está roto</h2>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Activos fuertes de CalculaChile</h3>
+          <ul>
+            <li>Demanda orgánica basada en problemas concretos: sueldo, finiquito, vacaciones, impuestos y trámites.</li>
+            <li>Resultados instantáneos, gratuitos y sin registro.</li>
+            <li>Arquitectura ya dividida en calculadoras, guías, blog y preguntas frecuentes.</li>
+            <li>Confianza local: lenguaje, pesos chilenos, instituciones y normativa de Chile.</li>
+            <li>Capacidad de aprovechar coyunturas mediante nuevas herramientas y actualizaciones.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Activos fuertes de CVListo</h3>
+          <ul>
+            <li>Propuesta concreta: subir CV, pegar oferta y obtener una versión adaptada.</li>
+            <li>Score ATS y primera optimización sin costo.</li>
+            <li>Modelo de créditos compatible con una búsqueda laboral temporal.</li>
+            <li>Precio de entrada bajo: planes públicos de $2.990 y $4.990 CLP.</li>
+            <li>Diferenciador ético: no inventar experiencia ni habilidades.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout red">
+        <strong>Problema principal:</strong> ambos sitios pueden funcionar correctamente por separado, pero el usuario de CalculaChile no recibe una transición suficientemente explícita hacia la búsqueda de empleo, y el usuario de CVListo debe llegar por sus propios medios.
+      </div>
+
+      <h3>Fugas actuales probables</h3>
+      <ol>
+        <li>El usuario calcula finiquito o sueldo y abandona después del resultado.</li>
+        <li>Las recomendaciones posteriores priorizan otras herramientas, no una ruta comercial completa.</li>
+        <li>Los clics entre dominios no necesariamente conservan contexto, campaña y calculadora de origen.</li>
+        <li>La portada genérica de CVListo no reconoce el problema que el usuario acaba de resolver.</li>
+        <li>No existe una métrica única que combine SEO, activación y revenue.</li>
+      </ol>
+
+      <h3>Contexto de mercado</h3>
+      <p>El escenario de desempleo elevado aumenta la demanda por finiquitos, Seguro de Cesantía, beneficios, actualización de CV y preparación de postulaciones. Al mismo tiempo, reduce la capacidad de pago de parte del público. La estrategia correcta combina herramientas gratuitas, anuncios en páginas informativas, un producto económico B2C y ventas institucionales de mayor ticket.</p>
+    </section>
+
+    <section id="posicionamiento">
+      <div class="section-kicker">03 · Posicionamiento</div>
+      <h2>Qué debe representar cada marca</h2>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="tag blue">Adquisición</span>
+          <h3>CalculaChile</h3>
+          <p class="quote">“Herramientas gratuitas para tomar mejores decisiones financieras y laborales en Chile.”</p>
+          <h4>Trabajo de la marca</h4>
+          <ul>
+            <li>Capturar búsquedas y resolver la necesidad inmediata.</li>
+            <li>Explicar el cálculo y entregar fuentes.</li>
+            <li>Detectar señales de cesantía, negociación o búsqueda laboral.</li>
+            <li>Guiar al siguiente paso, aunque ocurra en CVListo.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag red">Conversión</span>
+          <h3>CVListo</h3>
+          <p class="quote">“Adapta tu CV a cada oferta real y llega mejor preparado al filtro de selección.”</p>
+          <h4>Trabajo de la marca</h4>
+          <ul>
+            <li>Mostrar el problema antes de solicitar pago.</li>
+            <li>Generar un score y requisitos faltantes.</li>
+            <li>Entregar una primera victoria gratuita.</li>
+            <li>Vender créditos, paquetes de búsqueda y accesos institucionales.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Promesa conjunta</h3>
+      <div class="callout">
+        <div class="quote">“Desde calcular lo que te corresponde hasta preparar tu próxima postulación.”</div>
+        <p>Esta frase puede utilizarse en páginas puente, menciones editoriales y propuestas institucionales. No es necesario fusionar los dominios ni convertir ambas marcas en una sola.</p>
+      </div>
+
+      <h3>Segmentos prioritarios</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Segmento</th><th>Señal</th><th>Necesidad inmediata</th><th>Oferta</th><th>Monetización</th></tr></thead>
+          <tbody>
+            <tr><td>Persona recién despedida</td><td>Calcula finiquito, indemnización o vacaciones</td><td>Saber cuánto recibe y cuánto tiempo puede mantenerse</td><td>Cobertura de cesantía + CVListo</td><td>AdSense + créditos</td></tr>
+            <tr><td>Persona evaluando una oferta</td><td>Calcula sueldo líquido o bruto</td><td>Saber si le conviene cambiarse</td><td>Comparador de ofertas + adaptación de CV</td><td>Créditos + paquete premium</td></tr>
+            <tr><td>Independiente que evalúa contrato</td><td>Calcula boleta de honorarios</td><td>Comparar estabilidad y sueldo equivalente</td><td>Honorarios vs. contrato + CVListo</td><td>AdSense + créditos</td></tr>
+            <tr><td>Estudiante o recién egresado</td><td>Busca CV sin experiencia o prácticas</td><td>Convertir experiencia académica en un CV útil</td><td>Flujo especializado</td><td>Freemium + institución</td></tr>
+            <tr><td>Institución de empleabilidad</td><td>OMIL, universidad, OTEC, fundación</td><td>Atender a muchas personas con bajo costo</td><td>Paquetes de accesos</td><td>B2B</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="embudo">
+      <div class="section-kicker">04 · Embudo integral</div>
+      <h2>El recorrido que se debe construir</h2>
+
+      <div class="flow" aria-label="Embudo">
+        <div class="step">Búsqueda en Google</div>
+        <div class="step">Calculadora o guía</div>
+        <div class="step">Resultado gratuito</div>
+        <div class="step">Siguiente decisión</div>
+        <div class="step">Landing contextual</div>
+        <div class="step">Score y mejora gratis</div>
+        <div class="step">Compra o referido</div>
+      </div>
+
+      <h3>Embudo prioritario: cesantía</h3>
+      <div class="flow">
+        <div class="step">“Calcular finiquito”</div>
+        <div class="step">Monto estimado</div>
+        <div class="step">Meses de cobertura</div>
+        <div class="step">Fecha financiera crítica</div>
+        <div class="step">Preparar CV</div>
+        <div class="step">Adaptar a vacante</div>
+        <div class="step">Comprar créditos</div>
+      </div>
+
+      <h3>Embudo secundario: evaluación de oferta</h3>
+      <div class="flow">
+        <div class="step">“Sueldo bruto a líquido”</div>
+        <div class="step">Resultado</div>
+        <div class="step">¿Es una oferta?</div>
+        <div class="step">Comparar trabajo actual</div>
+        <div class="step">Sueldo mínimo conveniente</div>
+        <div class="step">Revisar CV</div>
+        <div class="step">Preparar postulación</div>
+      </div>
+
+      <div class="callout amber">
+        <strong>Regla:</strong> el CTA no debe interrumpir la herramienta. Debe aparecer después del resultado, explicar por qué es útil y conservar el contexto mediante parámetros de origen.
+      </div>
+    </section>
+
+    <section id="calculachile">
+      <div class="section-kicker">05 · Implementación en CalculaChile</div>
+      <h2>Cambios exactos, página por página</h2>
+
+      <h3>5.1 Calculadora de finiquito — prioridad P0</h3>
+      <p>Es el punto más cercano a una necesidad de reinserción laboral. Se deben insertar dos bloques, sin ocultar el resultado ni solicitar correo.</p>
+
+      <div class="copy-box">
+        <div class="copy-label">Bloque A · inmediatamente después del resultado</div>
+        <div class="copy-title">¿Cuánto tiempo podrás mantenerte mientras buscas trabajo?</div>
+        <p class="copy-text">Combina tu finiquito, ahorros, Seguro de Cesantía y gastos mensuales para estimar tu fecha financiera límite.</p>
+        <span class="copy-button">Calcular mis meses de cobertura</span>
+      </div>
+
+      <div class="copy-box">
+        <div class="copy-label">Bloque B · debajo del anterior</div>
+        <div class="copy-title">Tu siguiente ingreso comienza con una postulación mejor preparada</div>
+        <p class="copy-text">Revisa gratis si tu CV contiene los requisitos de la oferta a la que quieres postular.</p>
+        <span class="copy-button">Analizar mi CV gratis</span>
+      </div>
+
+      <p class="mini">Destino sugerido: <code>cvlisto.cl/desde-calculachile?origen=finiquito&amp;cta=resultado</code></p>
+
+      <h3>5.2 Sueldo líquido — prioridad P0</h3>
+      <p>Después del resultado, incorporar una pregunta binaria. Si la persona responde que se trata de una oferta, desplegar el comparador.</p>
+
+      <div class="copy-box">
+        <div class="copy-label">Pregunta contextual</div>
+        <div class="copy-title">¿Este sueldo corresponde a una oferta de trabajo?</div>
+        <p class="copy-text">Compáralo con tu empleo actual considerando traslado, horas, bonos, beneficios y modalidad.</p>
+        <span class="copy-button">Saber si me conviene cambiarme</span>
+      </div>
+
+      <h4>Resultado del comparador</h4>
+      <ul>
+        <li>Diferencia líquida mensual y anual.</li>
+        <li>Valor por hora efectiva.</li>
+        <li>Costo y tiempo de traslado.</li>
+        <li>Valor estimado de bonos y beneficios.</li>
+        <li>Sueldo mínimo que haría conveniente el cambio.</li>
+        <li>Conclusión: conveniente, conveniente con condiciones o no conveniente.</li>
+      </ul>
+
+      <div class="copy-box">
+        <div class="copy-label">CTA posterior al comparador</div>
+        <div class="copy-title">La oferta puede convenirte. ¿Tu CV está preparado para postular?</div>
+        <p class="copy-text">Pega la vacante y descubre gratis qué requisitos aparecen en el aviso y no están claros en tu currículum.</p>
+        <span class="copy-button">Comparar mi CV con la oferta</span>
+      </div>
+
+      <h3>5.3 Boleta de honorarios — prioridad P1</h3>
+      <div class="copy-box">
+        <div class="copy-title">¿Te ofrecieron pasar de honorarios a contrato?</div>
+        <p class="copy-text">Compara sueldo líquido, cotizaciones, vacaciones, seguro, gratificación y estabilidad.</p>
+        <span class="copy-button">Comparar contrato vs. honorarios</span>
+      </div>
+
+      <h3>5.4 Vacaciones proporcionales e indemnización — prioridad P1</h3>
+      <div class="copy-box">
+        <div class="copy-title">Incluye este monto en tu planificación de cesantía</div>
+        <p class="copy-text">Suma indemnización, vacaciones, ahorro y Seguro de Cesantía para estimar cuántos meses de cobertura tienes.</p>
+        <span class="copy-button">Calcular mi cobertura total</span>
+      </div>
+
+      <h3>5.5 Páginas donde no debe aparecer CVListo</h3>
+      <p>IVA, UF, UTM, TAG, propina, crédito hipotecario, contribuciones y otras herramientas sin relación laboral directa. Forzar enlaces irrelevantes reduce confianza y puede perjudicar la experiencia.</p>
+
+      <h3>5.6 Componentes reutilizables</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Componente</th><th>Función</th><th>Datos mínimos</th><th>Ubicación</th></tr></thead>
+          <tbody>
+            <tr><td><code>NextStepCard</code></td><td>Presentar el siguiente problema lógico</td><td>título, texto, CTA, origen</td><td>Después del resultado</td></tr>
+            <tr><td><code>OfferIntentQuestion</code></td><td>Detectar si el cálculo corresponde a una oferta</td><td>sí/no, calculadora</td><td>Sueldo líquido</td></tr>
+            <tr><td><code>CrossDomainLink</code></td><td>Conservar atribución</td><td>origen, CTA, posición, campaña</td><td>Todos los enlaces a CVListo</td></tr>
+            <tr><td><code>ShareResult</code></td><td>Compartir sin datos sensibles</td><td>tipo de resultado, URL</td><td>Resultados seleccionados</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cvlisto">
+      <div class="section-kicker">06 · Implementación en CVListo</div>
+      <h2>No enviar tráfico a una portada genérica: crear continuidad</h2>
+
+      <h3>6.1 Landing puente</h3>
+      <p>Ruta recomendada: <code>/desde-calculachile</code>. El contenido debe variar según el parámetro <code>origen</code>.</p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="tag red">Origen: finiquito</span>
+          <h4>Título</h4>
+          <p><strong>Ya calculaste lo que te corresponde. Ahora prepara tu próxima postulación.</strong></p>
+          <p class="mini">Apela a continuidad, no al miedo.</p>
+        </div>
+        <div class="card">
+          <span class="tag blue">Origen: sueldo</span>
+          <h4>Título</h4>
+          <p><strong>Ya conoces el sueldo de la oferta. Revisa si tu CV cumple lo que esa vacante pide.</strong></p>
+        </div>
+        <div class="card">
+          <span class="tag amber">Origen: honorarios</span>
+          <h4>Título</h4>
+          <p><strong>Ya comparaste las condiciones. Ahora adapta tu CV al cargo que quieres conseguir.</strong></p>
+        </div>
+      </div>
+
+      <h3>6.2 Estructura de la landing</h3>
+      <ol>
+        <li>Mensaje de continuidad asociado al origen.</li>
+        <li>Formulario visible sin desplazamiento excesivo.</li>
+        <li>“Sin tarjeta · score gratuito · una mejora gratis”.</li>
+        <li>Ejemplo realista de requisitos encontrados.</li>
+        <li>Prueba de honestidad: no inventa experiencia.</li>
+        <li>Proceso de tres pasos.</li>
+        <li>Precios solo después de explicar el valor.</li>
+      </ol>
+
+      <h3>6.3 Activación</h3>
+      <p>La activación no es visitar la landing ni crear una cuenta. La activación ocurre cuando la persona:</p>
+      <div class="grid grid-4">
+        <div class="metric"><div class="value">1</div><div class="label">carga su CV</div></div>
+        <div class="metric"><div class="value">2</div><div class="label">pega una vacante real</div></div>
+        <div class="metric"><div class="value">3</div><div class="label">genera el score</div></div>
+        <div class="metric"><div class="value">4</div><div class="label">descarga la primera mejora</div></div>
+      </div>
+
+      <h3>6.4 Fricción que debe eliminarse</h3>
+      <ul>
+        <li>No obligar a crear cuenta antes de comprender el resultado preliminar, si la arquitectura lo permite.</li>
+        <li>Explicar formatos y tamaño de archivo junto al cargador.</li>
+        <li>Mostrar progreso durante el análisis.</li>
+        <li>Guardar la oferta pegada si el usuario inicia sesión.</li>
+        <li>Mostrar exactamente qué recibe con un crédito.</li>
+        <li>No utilizar promesas como “trabajo garantizado” o “match perfecto”.</li>
+      </ul>
+
+      <h3>6.5 Nueva oferta premium para validar</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plan</th><th>Incluye</th><th>Precio de prueba</th><th>Objetivo</th></tr></thead>
+          <tbody>
+            <tr><td>Gratis</td><td>Score + requisitos + una adaptación</td><td>$0</td><td>Activación</td></tr>
+            <tr><td>Buscavida</td><td>5 adaptaciones</td><td>$2.990</td><td>Primera compra</td></tr>
+            <tr><td>Ejecutivo</td><td>15 adaptaciones + cartas</td><td>$4.990</td><td>Búsqueda activa</td></tr>
+            <tr><td>Sprint laboral</td><td>15 adaptaciones + cartas + entrevista + negociación</td><td>$8.990–$12.990</td><td>Aumentar ticket</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote">El plan “Sprint laboral” debe probarse primero como oferta manual o semiautomatizada. No construir un módulo completo sin señales de compra.</p>
+    </section>
+
+    <section id="seo">
+      <div class="section-kicker">07 · SEO</div>
+      <h2>Arquitectura temática orientada a decisiones, no a publicar por volumen</h2>
+
+      <h3>7.1 Clúster “Me despidieron”</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Hub principal</h4>
+          <p><code>/cesantia</code></p>
+          <ul>
+            <li>Qué hacer inmediatamente.</li>
+            <li>Finiquito e indemnizaciones.</li>
+            <li>Seguro y Fondo de Cesantía.</li>
+            <li>Presupuesto y cobertura.</li>
+            <li>Reinserción laboral.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Páginas satélite</h4>
+          <ul>
+            <li>Calculadora de finiquito.</li>
+            <li>Calculadora de cobertura sin empleo.</li>
+            <li>Seguro de Cesantía paso a paso.</li>
+            <li>Beneficios para personas cesantes.</li>
+            <li>Qué hacer si el finiquito está mal.</li>
+            <li>Cómo explicar un despido en entrevista.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>7.2 Clúster “Estoy evaluando una oferta”</h3>
+      <ul>
+        <li><code>/empleo/comparar-oferta-laboral</code></li>
+        <li>Bruto a líquido y líquido a bruto.</li>
+        <li>Cuánto sueldo pedir para cambiarse.</li>
+        <li>Presencial vs. remoto.</li>
+        <li>Costo mensual del traslado.</li>
+        <li>Valor real de bonos y beneficios.</li>
+        <li>Cómo negociar una contraoferta.</li>
+        <li>Cómo adaptar el CV a esa vacante.</li>
+      </ul>
+
+      <h3>7.3 Clúster “Estoy buscando trabajo” en CVListo</h3>
+      <ul>
+        <li>Cómo saber si un CV pasa ATS.</li>
+        <li>CV sin experiencia en Chile.</li>
+        <li>CV para práctica profesional.</li>
+        <li>CV para retail, administración, logística, salud y minería.</li>
+        <li>Cómo responder pretensión de renta.</li>
+        <li>Cómo preparar una entrevista con método STAR.</li>
+        <li>Páginas por empresa únicamente cuando aporten análisis real y diferenciado.</li>
+      </ul>
+
+      <h3>7.4 Plantilla de página SEO útil</h3>
+      <ol>
+        <li>Respuesta directa de 40–80 palabras.</li>
+        <li>Herramienta o diagnóstico interactivo.</li>
+        <li>Resultado personalizado.</li>
+        <li>Explicación de fórmula o criterio.</li>
+        <li>Ejemplo en pesos chilenos.</li>
+        <li>Fuente oficial y fecha de revisión.</li>
+        <li>Preguntas frecuentes que no repitan el contenido.</li>
+        <li>Enlaces internos al hub y a la siguiente acción.</li>
+        <li>CTA comercial solo cuando tenga relación directa.</li>
+      </ol>
+
+      <h3>7.5 Mejoras on-page inmediatas</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Página</th><th>H1 recomendado</th><th>Title sugerido</th><th>Siguiente acción</th></tr></thead>
+          <tbody>
+            <tr><td>Finiquito</td><td>Calculadora de Finiquito Chile 2026</td><td>Calculadora de Finiquito Chile 2026: estima cuánto te corresponde</td><td>Cobertura de cesantía</td></tr>
+            <tr><td>Sueldo líquido</td><td>Calculadora de Sueldo Líquido Chile 2026</td><td>Calculadora de Sueldo Líquido 2026: bruto a líquido en Chile</td><td>Comparar oferta</td></tr>
+            <tr><td>Vacaciones</td><td>Calculadora de Vacaciones Proporcionales Chile</td><td>Vacaciones proporcionales: calcula días y monto en Chile</td><td>Sumar al finiquito</td></tr>
+            <tr><td>Honorarios</td><td>Calculadora de Boleta de Honorarios 2026</td><td>Boleta de Honorarios 2026: retención y líquido a recibir</td><td>Comparar contrato</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7.6 Enlazado interno</h3>
+      <p>Cada página laboral debe enlazar a un máximo de 3–5 recursos altamente relacionados. El hub enlaza hacia todas las páginas del clúster; las páginas satélite regresan al hub y enlazan a la siguiente etapa del recorrido.</p>
+
+      <div class="callout amber">
+        <strong>No hacer:</strong> 500 artículos generados por IA, páginas casi idénticas por empresa o cargo, texto largo sin herramienta, fechas “2026” insertadas sin actualización real, y enlaces comerciales repetidos en páginas irrelevantes.
+      </div>
+    </section>
+
+    <section id="contenido">
+      <div class="section-kicker">08 · Calendario editorial</div>
+      <h2>12 semanas de contenido con propósito comercial</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Semana</th><th>Activo principal</th><th>Activo de soporte</th><th>Objetivo</th><th>CTA</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Hub <code>/cesantia</code></td><td>Actualizar finiquito</td><td>Crear recorrido</td><td>Calcular cobertura</td></tr>
+            <tr><td>2</td><td>Calculadora de cobertura</td><td>Qué hacer después de un despido</td><td>Capturar urgencia</td><td>Preparar CV</td></tr>
+            <tr><td>3</td><td>Guía Seguro de Cesantía</td><td>Checklist de trámites</td><td>SEO informativo</td><td>Ver plan personal</td></tr>
+            <tr><td>4</td><td>Beneficios para cesantes</td><td>Cómo revisar el finiquito</td><td>Confianza</td><td>Analizar CV</td></tr>
+            <tr><td>5</td><td>Comparador de ofertas</td><td>Cuánto sueldo pedir</td><td>Capturar decisión</td><td>Comparar CV</td></tr>
+            <tr><td>6</td><td>Costo de traslado</td><td>Remoto vs. presencial</td><td>Long-tail útil</td><td>Revisar oferta</td></tr>
+            <tr><td>7</td><td>Honorarios vs. contrato</td><td>Pretensión de renta</td><td>Conversión laboral</td><td>Adaptar CV</td></tr>
+            <tr><td>8</td><td>Negociador salarial</td><td>Cómo responder una oferta</td><td>Engagement</td><td>Preparar postulación</td></tr>
+            <tr><td>9</td><td>Revisor básico de CV</td><td>CV sin experiencia</td><td>Activación</td><td>Score ATS</td></tr>
+            <tr><td>10</td><td>CV para retail</td><td>CV administrativo</td><td>SEO por sector</td><td>Optimizar</td></tr>
+            <tr><td>11</td><td>Simulador de entrevista</td><td>Método STAR</td><td>Validar premium</td><td>Sprint laboral</td></tr>
+            <tr><td>12</td><td>Seguimiento de postulaciones</td><td>Correo después de postular</td><td>Retención</td><td>Comprar créditos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Regla editorial</h3>
+      <p>Publicar menos, pero garantizar que cada recurso tenga al menos uno de estos elementos: cálculo, diagnóstico, comparación, checklist personalizado, plantilla accionable o resultado basado en datos del usuario.</p>
+    </section>
+
+    <section id="analitica">
+      <div class="section-kicker">09 · Analítica</div>
+      <h2>Medir el recorrido completo entre los dos dominios</h2>
+
+      <h3>Métrica principal</h3>
+      <div class="callout green">
+        <div class="quote">Ingreso total por cada 1.000 sesiones orgánicas laborales de CalculaChile</div>
+        <p>Incluye AdSense atribuible a esas páginas más compras de CVListo originadas en CalculaChile.</p>
+      </div>
+
+      <h3>Eventos obligatorios</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Evento</th><th>Momento</th><th>Parámetros mínimos</th><th>Tipo</th></tr></thead>
+          <tbody>
+            <tr><td><code>calculator_started</code></td><td>Primera interacción</td><td>calculator_name, page_path</td><td>Interés</td></tr>
+            <tr><td><code>calculator_completed</code></td><td>Resultado generado</td><td>calculator_name, result_type</td><td>Uso</td></tr>
+            <tr><td><code>employment_cta_viewed</code></td><td>CTA visible</td><td>origin, position, message</td><td>Exposición</td></tr>
+            <tr><td><code>employment_cta_clicked</code></td><td>Clic en CTA</td><td>origin, destination, experiment</td><td>Interés comercial</td></tr>
+            <tr><td><code>cv_uploaded</code></td><td>Archivo cargado</td><td>source_site, source_page</td><td>Activación 1</td></tr>
+            <tr><td><code>job_offer_added</code></td><td>Vacante pegada</td><td>source_site, offer_length</td><td>Activación 2</td></tr>
+            <tr><td><code>ats_score_generated</code></td><td>Score listo</td><td>score_band, source_page</td><td>Activación 3</td></tr>
+            <tr><td><code>free_optimization_used</code></td><td>Primera mejora</td><td>source_page, job_category</td><td>Valor</td></tr>
+            <tr><td><code>checkout_started</code></td><td>Inicio pago</td><td>plan, price, source_page</td><td>Intención</td></tr>
+            <tr><td><code>purchase_completed</code></td><td>Pago confirmado</td><td>plan, revenue, source_page</td><td>Revenue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Parámetros de enlace</h3>
+      <pre class="codeblock">https://cvlisto.cl/desde-calculachile
+?origen=finiquito
+&amp;posicion=despues_resultado
+&amp;mensaje=cobertura
+&amp;utm_source=calculachile
+&amp;utm_medium=referral
+&amp;utm_campaign=ecosistema_laboral
+&amp;utm_content=finiquito_cobertura</pre>
+
+      <h3>Ejemplo de payload</h3>
+      <pre class="codeblock">{
+  "event": "employment_cta_clicked",
+  "source_site": "calculachile",
+  "source_page": "/calculadoras/calculadora-finiquito",
+  "calculator_name": "finiquito",
+  "cta_position": "after_result",
+  "cta_message": "financial_coverage",
+  "destination": "cvlisto",
+  "experiment": "FIN_CTA_01_B"
+}</pre>
+
+      <h3>Panel semanal</h3>
+      <div class="scorecard">
+        <div class="head">Métrica</div><div class="head">Actual</div><div class="head">Meta</div><div class="head">Cambio</div><div class="head">Acción</div>
+        <div>Sesiones orgánicas laborales</div><div>—</div><div>+10%</div><div>—</div><div>Actualizar páginas ganadoras</div>
+        <div>CTR al siguiente paso</div><div>—</div><div>8–15%</div><div>—</div><div>Probar copy y posición</div>
+        <div>CTR a CVListo</div><div>—</div><div>2–5%</div><div>—</div><div>Segmentar mejor</div>
+        <div>Landing → carga de CV</div><div>—</div><div>20–35%</div><div>—</div><div>Reducir fricción</div>
+        <div>Usuario gratis → compra</div><div>—</div><div>3–8%</div><div>—</div><div>Oferta y onboarding</div>
+      </div>
+      <p class="footnote">Las metas son rangos iniciales de trabajo, no promesas. Deben ajustarse después de 2–4 semanas de datos reales.</p>
+    </section>
+
+    <section id="cro">
+      <div class="section-kicker">10 · Conversión</div>
+      <h2>Programa de experimentos controlados</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Hipótesis</th><th>Variante A</th><th>Variante B</th><th>Métrica de decisión</th></tr></thead>
+          <tbody>
+            <tr><td>FIN_CTA_01</td><td>El lenguaje de urgencia financiera activa mejor que “mejorar CV”</td><td>Mejorar mi CV gratis</td><td>Preparar mi regreso al trabajo</td><td>Score generado</td></tr>
+            <tr><td>FIN_CTA_02</td><td>Un paso intermedio aumenta confianza</td><td>Ir directo a CVListo</td><td>Calcular cobertura primero</td><td>Compra por 1.000 sesiones</td></tr>
+            <tr><td>SUE_CTA_01</td><td>La intención de decisión supera al término técnico</td><td>Comparar esta oferta</td><td>Saber si me conviene cambiarme</td><td>Comparador completado</td></tr>
+            <tr><td>CV_HERO_01</td><td>El dolor de no recibir entrevistas convierte mejor</td><td>Optimiza tu CV para ATS</td><td>Descubre por qué no te llaman</td><td>Carga de CV</td></tr>
+            <tr><td>CV_PRICE_01</td><td>Presentar objetivo es más claro que créditos</td><td>5 créditos</td><td>Prepara 5 postulaciones</td><td>Compra completada</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Reglas de experimentación</h3>
+      <ul>
+        <li>Un cambio principal por experimento.</li>
+        <li>Definir métrica antes de lanzar.</li>
+        <li>No elegir ganador por CTR si no mejora activación o compra.</li>
+        <li>Evitar conclusiones con muestras pequeñas.</li>
+        <li>Documentar fecha, páginas afectadas y resultado.</li>
+        <li>Conservar un historial de variantes ganadoras y perdedoras.</li>
+      </ul>
+    </section>
+
+    <section id="automatizaciones">
+      <div class="section-kicker">11 · Automatización</div>
+      <h2>Marketing operado por sistema, no por inspiración diaria</h2>
+
+      <h3>11.1 Secuencia de correo basada en comportamiento</h3>
+      <div class="timeline">
+        <div class="timeline-item"><span class="week">Inmediato</span><h3>Tu análisis está listo</h3><p>Score, tres hallazgos principales y botón para utilizar la primera mejora.</p></div>
+        <div class="timeline-item"><span class="week">Día 1</span><h3>Por qué un CV puede no coincidir</h3><p>Explicar keywords, formato y claridad sin culpar al usuario.</p></div>
+        <div class="timeline-item"><span class="week">Día 3</span><h3>No uses el mismo CV para todas las vacantes</h3><p>Comparación de dos versiones adaptadas a cargos distintos.</p></div>
+        <div class="timeline-item"><span class="week">Día 5</span><h3>Completa tu primera adaptación</h3><p>Solo para quien aún no utilizó el beneficio gratuito.</p></div>
+        <div class="timeline-item"><span class="week">Día 8</span><h3>Prepara varias postulaciones</h3><p>Presentar el plan más adecuado según actividad.</p></div>
+        <div class="timeline-item"><span class="week">Día 14</span><h3>¿Conseguiste entrevista?</h3><p>Ramificar hacia preparación de entrevista o una nueva optimización.</p></div>
+      </div>
+
+      <h3>11.2 Orquestador de IA semanal</h3>
+      <ol>
+        <li>Importar consultas de Search Console.</li>
+        <li>Agrupar por intención: cálculo, trámite, decisión, empleo.</li>
+        <li>Detectar páginas con muchas impresiones y bajo CTR.</li>
+        <li>Detectar consultas donde falta una herramienta.</li>
+        <li>Comparar conversiones por calculadora y CTA.</li>
+        <li>Proponer un único experimento para la semana.</li>
+        <li>Preparar borradores, ejemplos y FAQ para revisión humana.</li>
+        <li>Revisar enlaces rotos, fuentes y fechas.</li>
+        <li>Generar resumen ejecutivo de una página.</li>
+      </ol>
+
+      <h3>11.3 Referidos por WhatsApp</h3>
+      <p>Agregar “Compartir herramienta” o “Compartir cálculo” sin incluir montos ni datos personales en el mensaje. Para CVListo, ambos usuarios reciben un crédito cuando la persona invitada completa su primer análisis, no solo por abrir el enlace.</p>
+    </section>
+
+    <section id="b2b">
+      <div class="section-kicker">12 · B2B</div>
+      <h2>Canal institucional para aumentar ticket sin construir una plataforma nueva</h2>
+
+      <h3>Clientes iniciales</h3>
+      <div class="grid grid-4">
+        <div class="card"><h4>OMIL</h4><p>Usuarios en búsqueda activa y necesidad territorial.</p></div>
+        <div class="card"><h4>Universidades e IP/CFT</h4><p>Estudiantes, prácticas y egresados.</p></div>
+        <div class="card"><h4>OTEC y fundaciones</h4><p>Programas de capacitación y empleabilidad.</p></div>
+        <div class="card"><h4>Empresas</h4><p>Outplacement económico en procesos de desvinculación.</p></div>
+      </div>
+
+      <h3>Oferta mínima institucional</h3>
+      <ul>
+        <li>Códigos de acceso o créditos por volumen.</li>
+        <li>Onboarding de una página o video corto.</li>
+        <li>Informe agregado de uso, sin exponer CV ni información privada.</li>
+        <li>Soporte por correo.</li>
+        <li>Sin panel complejo durante la validación.</li>
+      </ul>
+
+      <h3>Proceso comercial liviano</h3>
+      <ol>
+        <li>Construir una lista de 50 instituciones de alto encaje.</li>
+        <li>Contactar 10–15 por semana con correo personalizado.</li>
+        <li>Ofrecer un piloto de 25 accesos.</li>
+        <li>Medir activación, optimizaciones y satisfacción.</li>
+        <li>Convertir a paquete pagado.</li>
+      </ol>
+
+      <div class="copy-box">
+        <div class="copy-label">Correo institucional sugerido</div>
+        <div class="copy-title">Piloto gratuito de optimización de CV para sus usuarios</div>
+        <p class="copy-text">Hola, [nombre]. Soy el creador de CVListo, una herramienta chilena que permite comparar un currículum con una vacante real, detectar requisitos faltantes y generar una versión adaptada sin inventar experiencia. Estamos seleccionando instituciones para un piloto de 25 accesos orientado a [estudiantes/egresados/personas en búsqueda laboral]. El piloto no requiere integración y entrega un informe agregado de uso, sin acceso al contenido privado de los CV. ¿Tiene sentido evaluarlo con su equipo de empleabilidad?</p>
+      </div>
+    </section>
+
+    <section id="revenue">
+      <div class="section-kicker">13 · Revenue</div>
+      <h2>Simulador editable de ingresos mensuales</h2>
+      <p>Modifica los supuestos para visualizar el impacto del embudo. Esta calculadora es orientativa y no reemplaza datos reales.</p>
+
+      <div class="calculator">
+        <div class="form-grid">
+          <div><label>Sesiones laborales orgánicas / mes<input id="traffic" type="number" value="50000" min="0"></label></div>
+          <div><label>% clic hacia CVListo<input id="ctr" type="number" value="3" min="0" step="0.1"></label></div>
+          <div><label>% que genera score<input id="activation" type="number" value="28" min="0" step="0.1"></label></div>
+          <div><label>% activados que compra<input id="paid" type="number" value="5" min="0" step="0.1"></label></div>
+          <div><label>Ticket promedio CLP<input id="ticket" type="number" value="4300" min="0"></label></div>
+          <div><label>RPM AdSense páginas laborales CLP<input id="rpm" type="number" value="1800" min="0"></label></div>
+        </div>
+        <div class="result-grid">
+          <div class="result"><span>Clics a CVListo</span><strong id="rClicks">—</strong></div>
+          <div class="result"><span>Usuarios activados</span><strong id="rActive">—</strong></div>
+          <div class="result"><span>Compradores</span><strong id="rBuyers">—</strong></div>
+          <div class="result"><span>Revenue total estimado</span><strong id="rRevenue">—</strong></div>
+        </div>
+        <p class="mini" id="rDetail"></p>
+      </div>
+
+      <h3>Capas de monetización</h3>
+      <div class="grid grid-4">
+        <div class="card"><span class="tag blue">Capa 1</span><h4>AdSense</h4><p>Páginas informativas y herramientas gratuitas.</p></div>
+        <div class="card"><span class="tag red">Capa 2</span><h4>Créditos B2C</h4><p>Primera compra de bajo riesgo.</p></div>
+        <div class="card"><span class="tag amber">Capa 3</span><h4>Sprint laboral</h4><p>Mayor ticket por entrevista y negociación.</p></div>
+        <div class="card"><span class="tag green">Capa 4</span><h4>Instituciones</h4><p>Accesos por volumen y outplacement.</p></div>
+      </div>
+    </section>
+
+    <section id="plan-90">
+      <div class="section-kicker">14 · Roadmap</div>
+      <h2>Plan de ejecución 30 / 60 / 90 días</h2>
+
+      <h3>Días 1–30: conectar y medir</h3>
+      <div class="timeline">
+        <div class="timeline-item"><span class="week">Semana 1</span><h3>Instrumentación</h3><ul><li>Definir eventos.</li><li>Configurar atribución entre dominios.</li><li>Crear dashboard base.</li><li>Medir embudo actual sin cambios.</li></ul></div>
+        <div class="timeline-item"><span class="week">Semana 2</span><h3>CTA contextuales</h3><ul><li>Finiquito.</li><li>Sueldo líquido.</li><li>Honorarios.</li><li>Vacaciones proporcionales.</li></ul></div>
+        <div class="timeline-item"><span class="week">Semana 3</span><h3>Landing puente</h3><ul><li>Mensaje dinámico por origen.</li><li>Prueba gratuita destacada.</li><li>Conservar parámetros.</li><li>Reducir fricción de carga.</li></ul></div>
+        <div class="timeline-item"><span class="week">Semana 4</span><h3>Hub de cesantía</h3><ul><li>Publicar <code>/cesantia</code>.</li><li>Enlazar calculadoras existentes.</li><li>Crear versión mínima de cobertura financiera.</li></ul></div>
+      </div>
+
+      <h3>Días 31–60: aumentar activación</h3>
+      <ul>
+        <li>Lanzar comparador de ofertas.</li>
+        <li>Implementar primera secuencia de correo.</li>
+        <li>Ejecutar dos experimentos de CTA.</li>
+        <li>Actualizar títulos, metadatos y enlazado de las páginas laborales principales.</li>
+        <li>Publicar las primeras cuatro guías del clúster cesantía.</li>
+        <li>Agregar referido por WhatsApp.</li>
+      </ul>
+
+      <h3>Días 61–90: monetizar y expandir</h3>
+      <ul>
+        <li>Validar el paquete Sprint laboral.</li>
+        <li>Crear landing institucional.</li>
+        <li>Contactar las primeras 30–50 instituciones.</li>
+        <li>Probar piloto gratuito con 1–3 organizaciones.</li>
+        <li>Priorizar nuevos contenidos según Search Console y revenue, no intuición.</li>
+        <li>Decidir si vale la pena construir seguimiento de postulaciones o entrevista avanzada.</li>
+      </ul>
+
+      <h3>Criterios de éxito al día 90</h3>
+      <div class="grid grid-3">
+        <div class="card"><h4>Adquisición</h4><p>Existe tráfico medido desde páginas laborales hacia CVListo y se conocen las calculadoras que más activan.</p></div>
+        <div class="card"><h4>Conversión</h4><p>Al menos una variante de CTA y una landing superan claramente el baseline.</p></div>
+        <div class="card"><h4>Revenue</h4><p>Es posible calcular ingreso por 1.000 sesiones laborales y decidir dónde invertir desarrollo.</p></div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="section-kicker">15 · Checklist editable</div>
+      <h2>Lista de implementación</h2>
+      <p class="mini">Las selecciones se guardan localmente en este navegador.</p>
+
+      <h3>Analítica</h3>
+      <div class="checklist" data-group="analytics">
+        <label class="check"><input type="checkbox" data-key="a1"><span>Configurar medición cross-domain o atribución equivalente.</span></label>
+        <label class="check"><input type="checkbox" data-key="a2"><span>Implementar los diez eventos del embudo.</span></label>
+        <label class="check"><input type="checkbox" data-key="a3"><span>Crear dashboard semanal por calculadora y origen.</span></label>
+        <label class="check"><input type="checkbox" data-key="a4"><span>Registrar plan, ticket y revenue en compra completada.</span></label>
+      </div>
+
+      <h3>CalculaChile</h3>
+      <div class="checklist" data-group="cc">
+        <label class="check"><input type="checkbox" data-key="c1"><span>Agregar CTA posterior al resultado de finiquito.</span></label>
+        <label class="check"><input type="checkbox" data-key="c2"><span>Agregar pregunta “¿Es una oferta?” en sueldo líquido.</span></label>
+        <label class="check"><input type="checkbox" data-key="c3"><span>Agregar CTA contrato vs. honorarios.</span></label>
+        <label class="check"><input type="checkbox" data-key="c4"><span>Publicar hub <code>/cesantia</code>.</span></label>
+        <label class="check"><input type="checkbox" data-key="c5"><span>Publicar calculadora de cobertura financiera.</span></label>
+        <label class="check"><input type="checkbox" data-key="c6"><span>Actualizar enlazado interno laboral.</span></label>
+      </div>
+
+      <h3>CVListo</h3>
+      <div class="checklist" data-group="cv">
+        <label class="check"><input type="checkbox" data-key="v1"><span>Crear landing <code>/desde-calculachile</code>.</span></label>
+        <label class="check"><input type="checkbox" data-key="v2"><span>Cambiar contenido según parámetro <code>origen</code>.</span></label>
+        <label class="check"><input type="checkbox" data-key="v3"><span>Verificar flujo móvil completo: landing → carga → score → mejora → pago.</span></label>
+        <label class="check"><input type="checkbox" data-key="v4"><span>Activar secuencia de correo basada en comportamiento.</span></label>
+        <label class="check"><input type="checkbox" data-key="v5"><span>Probar presentación por “postulaciones” en vez de “créditos”.</span></label>
+      </div>
+
+      <h3>Crecimiento</h3>
+      <div class="checklist" data-group="growth">
+        <label class="check"><input type="checkbox" data-key="g1"><span>Ejecutar experimento FIN_CTA_01.</span></label>
+        <label class="check"><input type="checkbox" data-key="g2"><span>Ejecutar experimento CV_HERO_01.</span></label>
+        <label class="check"><input type="checkbox" data-key="g3"><span>Crear sistema de referidos.</span></label>
+        <label class="check"><input type="checkbox" data-key="g4"><span>Crear landing para instituciones.</span></label>
+        <label class="check"><input type="checkbox" data-key="g5"><span>Realizar primer piloto institucional.</span></label>
+      </div>
+      <button class="btn no-print" style="margin-top:18px;background:#eef2f7;color:#33445d;border-color:#d5deea" onclick="resetChecklist()">Reiniciar checklist</button>
+    </section>
+
+    <section id="riesgos">
+      <div class="section-kicker">16 · Riesgos</div>
+      <h2>Qué puede fallar y cómo evitarlo</h2>
+
+      <details open><summary>El tráfico laboral no hace clic</summary><div>Revisar relevancia, posición y copy. No asumir que “Mejora tu CV” es suficiente. Probar primero una acción intermedia como cobertura financiera o comparación de oferta.</div></details>
+      <details><summary>Los usuarios llegan a CVListo, pero no cargan el archivo</summary><div>La landing no conserva el contexto, el cargador genera desconfianza o hay fricción móvil. Mostrar privacidad, formatos, tiempo estimado y beneficio antes del registro.</div></details>
+      <details><summary>Se usa la mejora gratis, pero nadie compra</summary><div>Revisar si el valor pagado se diferencia de la prueba, si el precio se presenta demasiado pronto o si la búsqueda laboral del usuario no requiere múltiples versiones.</div></details>
+      <details><summary>El contenido nuevo no posiciona</summary><div>Priorizar páginas con herramientas y enlazado desde URLs que ya reciben tráfico. Evitar crear un blog aislado sin autoridad interna.</div></details>
+      <details><summary>AdSense reduce la conversión</summary><div>Limitar densidad en páginas de alta intención comercial y medir revenue total, no AdSense por separado.</div></details>
+      <details><summary>Riesgo legal o de confianza</summary><div>Presentar cálculos como estimativos, mantener fuentes y fechas, no ofrecer asesoría legal personalizada y no prometer empleabilidad garantizada.</div></details>
+
+      <h3>Acciones que no se recomiendan en esta etapa</h3>
+      <ul>
+        <li>Crear una tercera marca o un portal de empleos.</li>
+        <li>Rediseñar por completo ambos sitios.</li>
+        <li>Invertir en anuncios antes de conocer la conversión.</li>
+        <li>Publicar cientos de artículos automáticos.</li>
+        <li>Enviar CTA de CVListo desde páginas no laborales.</li>
+        <li>Construir un panel B2B complejo sin ventas piloto.</li>
+        <li>Subir precios antes de medir activación y recompra.</li>
+      </ul>
+    </section>
+
+    <section id="veredicto">
+      <div class="section-kicker">17 · Veredicto</div>
+      <h2>Orden exacto de prioridad</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Prioridad</th><th>Iniciativa</th><th>Impacto</th><th>Esfuerzo</th><th>Razón</th></tr></thead>
+          <tbody>
+            <tr><td class="priority p0">P0</td><td>Analítica entre dominios</td><td>Muy alto</td><td>Bajo–medio</td><td>Sin atribución no existe aprendizaje comercial.</td></tr>
+            <tr><td class="priority p0">P0</td><td>CTA de finiquito y sueldo</td><td>Muy alto</td><td>Bajo</td><td>Usa tráfico existente.</td></tr>
+            <tr><td class="priority p0">P0</td><td>Landing contextual de CVListo</td><td>Muy alto</td><td>Bajo–medio</td><td>Evita perder continuidad.</td></tr>
+            <tr><td class="priority p1">P1</td><td>Calculadora de cobertura</td><td>Alto</td><td>Medio</td><td>Conecta finanzas y empleo.</td></tr>
+            <tr><td class="priority p1">P1</td><td>Comparador de ofertas</td><td>Alto</td><td>Medio</td><td>Captura una decisión comercial fuerte.</td></tr>
+            <tr><td class="priority p1">P1</td><td>Secuencia de activación</td><td>Alto</td><td>Medio</td><td>Recupera usuarios que abandonan.</td></tr>
+            <tr><td class="priority p2">P2</td><td>Sprint laboral</td><td>Medio–alto</td><td>Medio</td><td>Aumenta ticket después de validar.</td></tr>
+            <tr><td class="priority p2">P2</td><td>Canal institucional</td><td>Alto</td><td>Medio</td><td>Mayor ticket y volumen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout green">
+        <div class="quote">La primera meta no es conseguir más visitas. Es obtener más valor de las visitas laborales que ya llegan.</div>
+      </div>
+
+      <p>Durante 90 días, la decisión estratégica debe ser única: convertir CalculaChile en el principal canal de adquisición de CVListo y medir todo el recorrido desde una búsqueda en Google hasta una compra.</p>
+    </section>
+
+    <section>
+      <div class="section-kicker">Fuentes y notas</div>
+      <h2>Referencias utilizadas para el diagnóstico</h2>
+      <ul>
+        <li><a href="https://calculadorachile.cl/" target="_blank" rel="noopener">CalculaChile — catálogo público y propuesta de valor</a>.</li>
+        <li><a href="https://www.cvlisto.cl/" target="_blank" rel="noopener">CVListo — propuesta ATS, flujo gratuito y precios públicos</a>.</li>
+        <li><a href="https://elpais.com/chile/2026-06-30/el-desempleo-en-chile-sube-a-94-la-cifra-mas-alta-en-cinco-anos.html" target="_blank" rel="noopener">Referencia periodística del dato INE de desempleo marzo–mayo de 2026</a>.</li>
+      </ul>
+      <p class="footnote">Los datos de mercado, normas, beneficios y precios deben revisarse antes de publicar cada actualización. Las proyecciones y metas de este documento son hipótesis de trabajo.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <strong>Plan maestro CalculaChile × CVListo</strong><br>
+  Documento de ejecución independiente y editable. Generado en julio de 2026.
+</footer>
+
+<script>
+  const money = new Intl.NumberFormat('es-CL', {style:'currency', currency:'CLP', maximumFractionDigits:0});
+  const integer = new Intl.NumberFormat('es-CL', {maximumFractionDigits:0});
+
+  function calcRevenue(){
+    const traffic = Number(document.getElementById('traffic').value || 0);
+    const ctr = Number(document.getElementById('ctr').value || 0) / 100;
+    const activation = Number(document.getElementById('activation').value || 0) / 100;
+    const paid = Number(document.getElementById('paid').value || 0) / 100;
+    const ticket = Number(document.getElementById('ticket').value || 0);
+    const rpm = Number(document.getElementById('rpm').value || 0);
+
+    const clicks = traffic * ctr;
+    const active = clicks * activation;
+    const buyers = active * paid;
+    const cvRevenue = buyers * ticket;
+    const adRevenue = (traffic / 1000) * rpm;
+    const total = cvRevenue + adRevenue;
+
+    document.getElementById('rClicks').textContent = integer.format(clicks);
+    document.getElementById('rActive').textContent = integer.format(active);
+    document.getElementById('rBuyers').textContent = integer.format(buyers);
+    document.getElementById('rRevenue').textContent = money.format(total);
+    document.getElementById('rDetail').textContent =
+      `CVListo: ${money.format(cvRevenue)} · AdSense: ${money.format(adRevenue)} · Revenue por 1.000 sesiones: ${money.format(traffic ? total/(traffic/1000) : 0)}`;
+  }
+  document.querySelectorAll('.calculator input').forEach(i => i.addEventListener('input', calcRevenue));
+  calcRevenue();
+
+  function loadChecklist(){
+    document.querySelectorAll('.check input[type="checkbox"]').forEach(box=>{
+      const key = 'cccv_' + box.dataset.key;
+      box.checked = localStorage.getItem(key) === '1';
+      box.closest('.check').classList.toggle('done', box.checked);
+      box.addEventListener('change', ()=>{
+        localStorage.setItem(key, box.checked ? '1' : '0');
+        box.closest('.check').classList.toggle('done', box.checked);
+      });
+    });
+  }
+  function resetChecklist(){
+    document.querySelectorAll('.check input[type="checkbox"]').forEach(box=>{
+      localStorage.removeItem('cccv_' + box.dataset.key);
+      box.checked = false;
+      box.closest('.check').classList.remove('done');
+    });
+  }
+  loadChecklist();
+</script>
+</body>
+</html>

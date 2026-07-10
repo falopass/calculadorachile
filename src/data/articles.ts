@@ -56,6 +56,397 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: 'seguro-cesantia-finiquito-2026-afc',
+    title:
+      'Seguro de Cesantía y finiquito 2026: cómo funciona la AFC (CIC y Fondo Solidario)',
+    description:
+      'Qué es el Seguro de Cesantía en Chile, cómo se financia, diferencia con el finiquito, giros de la Cuenta Individual y cuándo entra el Fondo de Cesantía Solidario.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'laboral',
+    readingTime: 11,
+    relatedGuia: 'finiquito-laboral-chile',
+    seoTitle: 'Seguro de Cesantía 2026: AFC, CIC y finiquito explicados',
+    seoDescription:
+      'Cómo funciona el Seguro de Cesantía (AFC) en Chile 2026: cotizaciones, giros, CIC vs Fondo Solidario y diferencia con el finiquito. Fuentes ChileAtiende y AFC.',
+    keywords: [
+      'seguro de cesantía chile',
+      'seguro de cesantía AFC 2026',
+      'cuenta individual de cesantía',
+      'fondo de cesantía solidario',
+      'seguro cesantía vs finiquito',
+      'cómo funciona AFC chile',
+      'giros seguro de cesantía',
+      'cotizaciones cesantía indefinido plazo fijo',
+    ],
+    relatedCalculators: [
+      'calculadora-finiquito',
+      'calculadora-indemnizacion-anos-servicio',
+      'calculadora-vacaciones-proporcionales',
+      'calculadora-sueldo-liquido',
+      'calculadora-costo-empleado-pyme',
+    ],
+    faq: [
+      {
+        question: '¿El Seguro de Cesantía es lo mismo que el finiquito?',
+        answer:
+          'No. El finiquito es el pago final del empleador (remuneraciones, vacaciones, indemnización según causal). El Seguro de Cesantía lo administra la AFC con cargo a tu Cuenta Individual y, si cumples requisitos, al Fondo de Cesantía Solidario. Puedes recibir ambos; no se reemplazan.',
+      },
+      {
+        question: '¿Cuánto cotizo al Seguro de Cesantía?',
+        answer:
+          'Sobre la remuneración imponible (con tope de cesantía). Contrato indefinido: trabajador 0,6% y empleador 2,4%. Plazo fijo u obra: el trabajador no aporta y el empleador paga 3%. Casa particular tiene tasas propias del empleador. Fuente: ChileAtiende / AFC.',
+      },
+      {
+        question: '¿Cuántas cotizaciones necesito para cobrar el seguro?',
+        answer:
+          'Según ChileAtiende: al menos 10 cotizaciones mensuales si el contrato era indefinido, y al menos 5 si era a plazo fijo o por obra/faena. Se cuentan desde la afiliación o el último cobro hasta el mes de término. Confirma tu caso en la sucursal virtual AFC.',
+      },
+      {
+        question: '¿Puedo cobrar el seguro si renuncié?',
+        answer:
+          'La Cuenta Individual de Cesantía se puede cobrar estando cesante por cualquier causal (incluida renuncia), si cumples el mínimo de cotizaciones y acreditas el término. El Fondo de Cesantía Solidario es más estricto: exige causales involuntarias y otros requisitos. Simula y solicita en afc.cl.',
+      },
+    ],
+    content: `<p>Si te despidieron o se te acabó el contrato, suelen mezclarse dos cosas distintas: el <strong>finiquito</strong> (plata del empleador) y el <strong>Seguro de Cesantía</strong> (beneficio previsional que administra la <strong>AFC</strong>). Entender la diferencia evita firmar a ciegas y planificar mal los meses sin sueldo.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Mapa del clúster</strong><p>Primero estima el <a href="/calculadoras/calculadora-finiquito">finiquito</a>. Luego usa esta guía del Seguro de Cesantía. El recorrido completo está en el <a href="/cesantia">hub de cesantía</a> y en el <a href="/blog/checklist-despues-despido-chile-2026">checklist post-despido</a>.</p></div></aside>
+
+<h2>Qué es el Seguro de Cesantía</h2>
+<p>Es un seguro a cargo de la <strong>Administradora de Fondos de Cesantía (AFC)</strong>. Te protege si quedas sin empleo y tu contrato se rige por el Código del Trabajo (también aplica a asistentes de la educación pública bajo su estatuto y a trabajadores de casa particular, con reglas propias).</p>
+<p>Cada afiliado tiene una <strong>Cuenta Individual de Cesantía (CIC)</strong> alimentada con cotizaciones sobre la remuneración imponible. Si el saldo no alcanza y cumples requisitos extras, puede entrar el <strong>Fondo de Cesantía Solidario (FCS)</strong>.</p>
+<ul class="data-grid">
+<li><span class="label">Administra</span><span class="value">AFC Chile</span></li>
+<li><span class="label">Ley base</span><span class="value">Ley 19.728</span></li>
+<li><span class="label">Tope imponible cesantía 2026</span><span class="value">135,2 UF (distinto al de AFP/salud)</span></li>
+<li><span class="label">Fuente oficial</span><span class="value">ChileAtiende + afc.cl</span></li>
+</ul>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Afiliación automática (regla general)</strong><p>Si tienes 18+ años y fuiste contratado desde el 2 de octubre de 2002 bajo Código del Trabajo (u otros regímenes cubiertos), la afiliación suele ser automática. El empleador debe avisar el inicio de servicios. Contratos previos a esa fecha pueden afiliarse de forma voluntaria.</p></div></aside>
+
+<h2>Seguro de Cesantía vs finiquito (no son lo mismo)</h2>
+<table>
+<thead><tr><th>Concepto</th><th>Finiquito</th><th>Seguro de Cesantía (AFC)</th></tr></thead>
+<tbody>
+<tr><td>Quién paga</td><td>Empleador</td><td>Tus cotizaciones (CIC) y, si aplica, FCS</td></tr>
+<tr><td>Qué cubre</td><td>Días, vacaciones, indemnización según causal</td><td>Giros mensuales mientras estés cesante y haya saldo/requisitos</td></tr>
+<tr><td>Dónde se tramita</td><td>Empleador / DT si hay conflicto</td><td>Sucursal virtual o presencial AFC</td></tr>
+<tr><td>Documento típico</td><td>Finiquito firmado</td><td>Finiquito u otro documento de término + solicitud AFC</td></tr>
+</tbody>
+</table>
+<p>Puedes recibir <strong>finiquito y después giros AFC</strong>. Uno no anula al otro. Calcula primero lo del empleador con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> y, si corresponde, <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">indemnización por años de servicio</a> y <a href="/calculadoras/calculadora-vacaciones-proporcionales">vacaciones proporcionales</a>.</p>
+
+<h2>Cómo se financia (cotizaciones)</h2>
+<p>Sobre la <strong>remuneración imponible</strong> (con tope de cesantía), según tipo de contrato (ChileAtiende / AFC):</p>
+<table>
+<thead><tr><th>Tipo de contrato</th><th>Trabajador</th><th>Empleador</th><th>Destino aproximado</th></tr></thead>
+<tbody>
+<tr><td>Indefinido</td><td>0,6%</td><td>2,4%</td><td>1,6% CIC + 0,8% FCS (parte empleador)</td></tr>
+<tr><td>Plazo fijo / obra o faena</td><td>0%</td><td>3%</td><td>2,8% CIC + 0,2% FCS</td></tr>
+<tr><td>Casa particular</td><td>0%</td><td>4,11%</td><td>Incluye CIC, FCS y componente de indemnización en AFP</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No confundas con el sueldo líquido</strong><p>En contrato indefinido el 0,6% del trabajador sí se descuenta de tu liquidación. En plazo fijo no cotizas cesantía como trabajador. Para ver el impacto en el líquido usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>. Para el costo empresa (parte empleador), la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleado</a>.</p></div></aside>
+
+<h2>Quién NO está cubierto (excepciones frecuentes)</h2>
+<ul>
+<li>Empleados públicos (Estatuto Administrativo y regímenes excluidos)</li>
+<li>FF.AA. y de Orden</li>
+<li>Trabajadores independientes / por cuenta propia (boleta de honorarios sin este seguro)</li>
+<li>Menores de 18 años</li>
+<li>Pensionados (salvo invalidez parcial en los términos que indica la normativa)</li>
+</ul>
+<p>Si no entras al Seguro AFC, ChileAtiende describe el <strong>Subsidio de Cesantía</strong> pagado por IPS o cajas de compensación como vía distinta (no es la CIC de AFC).</p>
+
+<h2>Requisitos base para cobrar (Cuenta Individual)</h2>
+<p>Según la ficha oficial de ChileAtiende sobre el Seguro de Cesantía:</p>
+<ol class="steps">
+<li><strong>Estar cesante</strong> y acreditarlo con finiquito, carta de despido o renuncia, acta de comparendo, certificado de la Inspección del Trabajo o sentencia judicial (u otros documentos que acepte la AFC).</li>
+<li><strong>Mínimo de cotizaciones pagadas:</strong> 10 si el contrato era <strong>indefinido</strong>; 5 si era <strong>plazo fijo u obra/faena</strong>.</li>
+<li>Las cotizaciones se cuentan desde la afiliación o el último cobro del seguro hasta el mes de término; pueden ser continuas o discontinuas y de uno o más empleadores.</li>
+</ol>
+<p>Detalle paso a paso de la solicitud: <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cómo cobrar el Seguro de Cesantía en la AFC</a>.</p>
+
+<h2>Montos de los giros (Cuenta Individual)</h2>
+<p>Si aprueban la solicitud, los giros mensuales se calculan como <strong>porcentaje de un promedio de remuneraciones</strong> (ChileAtiende indica el esquema sobre los últimos 10 meses), hasta donde alcance el saldo de tu CIC:</p>
+<table>
+<thead><tr><th>Giro</th><th>% del promedio de remuneraciones</th></tr></thead>
+<tbody>
+<tr><td>1.º mes</td><td>70%</td></tr>
+<tr><td>2.º mes</td><td>60%</td></tr>
+<tr><td>3.º mes</td><td>45%</td></tr>
+<tr><td>4.º mes</td><td>40%</td></tr>
+<tr><td>5.º mes</td><td>35%</td></tr>
+<tr><td>6.º mes o superior</td><td>30%</td></tr>
+</tbody>
+</table>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No inventes tu monto</strong><p>El giro real depende de tu cartola, cotizaciones pagadas, tipo de contrato y saldo. Usa el simulador de cobro en <a href="https://www.afc.cl/" target="_blank" rel="noopener">afc.cl</a>. CalculaChile no reemplaza la liquidación AFC.</p></div></aside>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo solo ilustrativo (no es tu caso)</div><ul><li>Supón promedio de remuneraciones de referencia: $1.000.000</li><li>1.er giro al 70% → $700.000 (si el saldo lo permite)</li><li>2.º giro al 60% → $600.000</li><li>3.er giro al 45% → $450.000</li></ul><span class="total">Si el saldo se agota antes, se acortan los giros o se evalúa el Fondo Solidario</span></div>
+
+<h2>Fondo de Cesantía Solidario (cuándo entra)</h2>
+<p>El FCS <strong>no es automático para todos</strong>. Es un complemento cuando no tienes recursos suficientes en la CIC y cumples requisitos adicionales: causales de término involuntarias, mínimo de cotizaciones al fondo solidario en una ventana de meses, y condiciones que publica AFC/ChileAtiende (incluida inscripción en la Bolsa Nacional de Empleo cuando corresponda).</p>
+<ul>
+<li><strong>CIC:</strong> tu plata cotizada; se gira mientras haya saldo y estés cesante.</li>
+<li><strong>FCS:</strong> red de apoyo solidaria; más filtros (causal, cotizaciones, saldo insuficiente).</li>
+</ul>
+<p>Revisa siempre la ficha actualizada del <a href="https://www.chileatiende.gob.cl/fichas/36646-fondo-de-cesantia-solidario-fcs" target="_blank" rel="noopener">Fondo de Cesantía Solidario en ChileAtiende</a>.</p>
+
+<h2>Beneficios asociados mientras cobras</h2>
+<ul>
+<li>Cobertura de salud vía Fonasa mientras duren los pagos (según reglas vigentes).</li>
+<li>Mecanismos de protección de lagunas previsionales ligados a la reforma y a las prestaciones de cesantía (detalle en ChileAtiende / Superintendencia de Pensiones).</li>
+</ul>
+<p>Los pagos se suspenden cuando la AFC detecta que volviste a trabajar (cotización nueva, inicio de labores notificado, etc.).</p>
+
+<h2>Orden práctico después del término</h2>
+<ol class="steps">
+<li>Estima finiquito e indemnización con las calculadoras de CalculaChile.</li>
+<li>No firmes un finiquito incompleto solo por presión; guarda copias.</li>
+<li>Entra a la sucursal virtual AFC, simula cobro y solicita con tu documento de término.</li>
+<li>Arma presupuesto: finiquito + giros esperados − gastos fijos = meses de cobertura.</li>
+<li>Recién ahí potencia la búsqueda de empleo (CV por vacante, no genérico).</li>
+</ol>
+<p>Checklist completo: <a href="/blog/checklist-despues-despido-chile-2026">después de un despido en Chile</a>. Hub: <a href="/cesantia">/cesantia</a>.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No es asesoría legal ni previsional personalizada. Tasas, topes, porcentajes de giro y requisitos pueden actualizarse: prevalece <a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende — Seguro de Cesantía</a>, <a href="https://www.afc.cl/" target="_blank" rel="noopener">AFC Chile</a> y la normativa vigente (Ley 19.728 y circulares aplicables).</p></div></aside>
+<p>Para profundizar: <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cómo cobrar el seguro paso a paso</a> · <a href="/guias/finiquito-laboral-chile">guía de finiquito</a> · <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> · <a href="/cesantia">hub cesantía</a>.</p>`,
+  },
+  {
+    slug: 'como-cobrar-seguro-cesantia-afc-2026',
+    title: 'Cómo cobrar el Seguro de Cesantía en la AFC 2026: requisitos y pasos',
+    description:
+      'Paso a paso para solicitar el Seguro de Cesantía en Chile: documentos, cotizaciones mínimas, sucursal virtual AFC, giros y qué pasa si te contratan de nuevo.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'finiquito-laboral-chile',
+    seoTitle: 'Cómo cobrar Seguro de Cesantía AFC 2026: pasos y requisitos',
+    seoDescription:
+      'Solicita el Seguro de Cesantía en AFC: documentos, 10 o 5 cotizaciones, sucursal virtual, giros mensuales y suspensión si vuelves a trabajar. Guía Chile 2026.',
+    keywords: [
+      'cómo cobrar seguro de cesantía',
+      'solicitar AFC chile',
+      'requisitos seguro cesantía 2026',
+      'sucursal virtual AFC',
+      'documentos cobro cesantía',
+      'giros AFC sin finiquito',
+      'cobrar cesantía plazo fijo',
+    ],
+    relatedCalculators: [
+      'calculadora-finiquito',
+      'calculadora-vacaciones-proporcionales',
+      'calculadora-indemnizacion-anos-servicio',
+      'calculadora-sueldo-liquido',
+    ],
+    faq: [
+      {
+        question: '¿Puedo cobrar el seguro sin finiquito firmado?',
+        answer:
+          'Sí es posible con otros documentos que acrediten el término: carta de despido, carta de renuncia, acta de comparendo, certificado de la Inspección del Trabajo o sentencia judicial. La AFC publica alternativas cuando aún no tienes finiquito. Revisa afc.cl antes de postergar la solicitud solo por ese papel.',
+      },
+      {
+        question: '¿Dónde se solicita el cobro?',
+        answer:
+          'En la Sucursal Virtual de Afiliados de la AFC (RUN + clave AFC o ClaveÚnica) o en sucursales presenciales con cédula y documento de cesantía. Subes finiquito u otro documento y foto de la cédula por ambos lados.',
+      },
+      {
+        question: '¿Qué pasa con los pagos si encuentro trabajo?',
+        answer:
+          'Los pagos se suspenden cuando la AFC recibe notificación de nueva contratación: por cotización posterior al finiquito, declaración de cotizaciones o aviso de inicio de labores del empleador. No sigues cobrando el seguro si ya no estás cesante.',
+      },
+    ],
+    content: `<p>Esta guía es el “cómo hacerlo” del Seguro de Cesantía: documentos, cotizaciones mínimas, solicitud en la AFC y qué esperar de los giros. Si aún no entiendes CIC vs finiquito, lee primero <a href="/blog/seguro-cesantia-finiquito-2026-afc">Seguro de Cesantía y finiquito 2026</a>.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Antes de solicitar</strong><p>Estima lo que te debe el empleador con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>. El seguro AFC es otro flujo de dinero; no reemplaza vacaciones ni indemnización.</p></div></aside>
+
+<h2>1. Confirma que estás afiliado y cesante</h2>
+<ul>
+<li>Entra a la <a href="https://webafiliados.afc.cl/" target="_blank" rel="noopener">Sucursal Virtual de Afiliados AFC</a> con ClaveÚnica o clave AFC.</li>
+<li>Revisa cartola, saldo de la Cuenta Individual y si el simulador de cobro te muestra estimación.</li>
+<li>Debes estar <strong>cesante</strong> al momento de solicitar y mantener esa condición mientras recibes giros.</li>
+</ul>
+
+<h2>2. Junta el documento que acredita el término</h2>
+<p>ChileAtiende acepta, entre otros:</p>
+<ul>
+<li>Finiquito</li>
+<li>Carta de despido</li>
+<li>Carta de renuncia</li>
+<li>Acta de comparendo ante la Inspección del Trabajo</li>
+<li>Certificado de la Inspección del Trabajo o sentencia judicial</li>
+</ul>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Sin finiquito aún</strong><p>No congeles todo el proceso solo porque el empleador demora la firma. La AFC documenta vías para acreditar cesantía sin finiquito. Ver también: <a href="https://www.afc.cl/" target="_blank" rel="noopener">afc.cl</a> (sección afiliados / cobro del seguro).</p></div></aside>
+<p>Si tu jornada era parcial, suele pedirse el contrato para verificar horas pactadas junto al documento de término.</p>
+
+<h2>3. Verifica el mínimo de cotizaciones</h2>
+<table>
+<thead><tr><th>Tipo de contrato del empleo terminado</th><th>Cotizaciones mínimas (ChileAtiende)</th></tr></thead>
+<tbody>
+<tr><td>Indefinido</td><td>Al menos <strong>10</strong> cotizaciones mensuales</td></tr>
+<tr><td>Plazo fijo, obra, faena o servicio determinado</td><td>Al menos <strong>5</strong> cotizaciones mensuales</td></tr>
+</tbody>
+</table>
+<p>Se cuentan desde la afiliación o desde el último cobro del seguro hasta el mes de término de la relación laboral. Pueden ser continuas o discontinuas y de uno o más empleadores.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Fondo Solidario ≠ mismos requisitos</strong><p>Si tu CIC no alcanza y miras el Fondo de Cesantía Solidario, hay filtros extras (causal involuntaria, cotizaciones al FCS, saldo insuficiente, BNE, etc.). No asumas el solidario solo por tener 10 cotizaciones en la CIC. Detalle: ficha del FCS en ChileAtiende.</p></div></aside>
+
+<h2>4. Solicita el pago (online o sucursal)</h2>
+<ol class="steps">
+<li>Ingresa a la Sucursal Virtual AFC con RUN y clave AFC o ClaveÚnica.</li>
+<li>Completa el formulario de solicitud de cobro.</li>
+<li>Sube el documento de cesantía y foto de cédula vigente por ambos lados.</li>
+<li>Revisa estado de la solicitud, fecha y forma de pago en el mismo canal.</li>
+</ol>
+<p>Alternativa: sucursal presencial AFC con cédula y documento de término.</p>
+
+<h2>5. Cómo se estructuran los giros (recordatorio)</h2>
+<p>Sobre el promedio de remuneraciones de referencia (esquema ChileAtiende, últimos 10 meses), mientras el saldo lo permita:</p>
+<ul class="data-grid">
+<li><span class="label">1.er mes</span><span class="value">70%</span></li>
+<li><span class="label">2.º mes</span><span class="value">60%</span></li>
+<li><span class="label">3.er mes</span><span class="value">45%</span></li>
+<li><span class="label">4.º mes</span><span class="value">40%</span></li>
+<li><span class="label">5.º mes</span><span class="value">35%</span></li>
+<li><span class="label">6.º o más</span><span class="value">30%</span></li>
+</ul>
+<p>Simula en AFC antes de armar tu presupuesto familiar. Combina con finiquito y ahorros para estimar “meses de runway” (ver <a href="/blog/checklist-despues-despido-chile-2026">checklist post-despido</a>).</p>
+
+<h2>6. Mientras cobras: salud y nueva contratación</h2>
+<ul>
+<li>Puedes mantener beneficios asociados (p. ej. cobertura Fonasa mientras duren los pagos, según reglas vigentes).</li>
+<li>Si te contratan de nuevo, la AFC corta los pagos al enterarse por cotización, deuda previsional reconocida o aviso de inicio de labores.</li>
+</ul>
+
+<h2>7. Checklist rápido de cobro</h2>
+<ul class="data-grid">
+<li><span class="label">Cartola / saldo CIC revisado</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Documento de término listo</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Cotizaciones mínimas (10 o 5)</span><span class="value">Cumple / no cumple</span></li>
+<li><span class="label">Solicitud enviada en AFC</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Datos bancarios / forma de pago</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Presupuesto con finiquito + giros</span><span class="value">Hecho / pendiente</span></li>
+</ul>
+
+<h2>Errores comunes</h2>
+<ul>
+<li><strong>Creer que el finiquito “incluye” la AFC.</strong> Son cajas distintas.</li>
+<li><strong>Esperar meses por un finiquito perfecto</strong> sin revisar otras formas de acreditar cesantía.</li>
+<li><strong>Inventar el monto del giro</strong> sin mirar cartola ni simulador.</li>
+<li><strong>No actualizar la búsqueda de empleo</strong> mientras cobras: el seguro es temporal; el CV y las postulaciones siguen siendo el plan A.</li>
+</ul>
+<p>Cuando el trámite AFC esté en marcha, vuelve al <a href="/cesantia">hub de cesantía</a> para ordenar finiquito y reinserción.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Información general basada en fichas públicas de ChileAtiende y AFC. No es asesoría personalizada. Para tu caso concreto usa la sucursal virtual, el simulador oficial y, si hay conflicto laboral, la Dirección del Trabajo.</p></div></aside>
+<p>Para profundizar: <a href="/blog/seguro-cesantia-finiquito-2026-afc">cómo funciona el Seguro de Cesantía</a> · <a href="/guias/finiquito-laboral-chile">guía de finiquito</a> · <a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende — Seguro de Cesantía</a>.</p>`,
+  },
+  {
+    slug: 'checklist-despues-despido-chile-2026',
+    title: 'Checklist después de un despido en Chile 2026: finiquito, AFC y reinserción',
+    description:
+      'Qué hacer paso a paso tras un despido: finiquito, plazos, Seguro de Cesantía, presupuesto y cómo preparar el CV para volver a postular.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'finiquito-laboral-chile',
+    seoTitle: 'Checklist despido Chile 2026: finiquito, cesantía y CV',
+    seoDescription:
+      'Después del despido: finiquito, 10 días hábiles, Seguro de Cesantía (AFC), cobertura y reinserción. Checklist práctico + calculadoras gratis.',
+    keywords: [
+      'checklist despido chile',
+      'qué hacer después de un despido',
+      'finiquito y seguro de cesantía',
+      'me despidieron qué hago',
+      'reinserción laboral chile 2026',
+      'AFC cesantía checklist',
+    ],
+    relatedCalculators: [
+      'calculadora-finiquito',
+      'calculadora-indemnizacion-anos-servicio',
+      'calculadora-vacaciones-proporcionales',
+      'calculadora-sueldo-liquido',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto plazo tiene el empleador para pagar el finiquito?',
+        answer:
+          'En la práctica laboral se suele exigir el pago del finiquito dentro de 10 días hábiles desde la separación. Si no pagan, puedes reclamar en la Inspección del Trabajo o por la vía judicial. Confirma el detalle de tu caso con la Dirección del Trabajo.',
+      },
+      {
+        question: '¿El Seguro de Cesantía reemplaza al finiquito?',
+        answer:
+          'No. El finiquito es el pago final del empleador (días, vacaciones, indemnización según causal). El Seguro de Cesantía (AFC) es un beneficio previsional con cargo a tu cuenta individual y, en algunos casos, al Fondo de Cesantía Solidario. Son complementarios.',
+      },
+      {
+        question: '¿Debo firmar el finiquito si no estoy de acuerdo con el monto?',
+        answer:
+          'No firmes un finiquito con el que no estás de acuerdo solo por presión. Si hay diferencias, consulta en la Inspección del Trabajo o con un abogado laboral. Una firma ante ministro de fe con fuerza liberatoria puede limitar reclamos posteriores sobre lo pagado.',
+      },
+    ],
+    content: `<p>Un despido no se resuelve con un solo trámite. Primero hay que <strong>asegurar el dinero y los papeles</strong>; después, ordenar la cobertura y recién ahí potenciar la búsqueda de empleo. Esta checklist une ambos mundos: las herramientas de CalculaChile y el siguiente paso de postulación.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Empieza aquí</strong><p>Si te acaban de comunicar el término, ve al <a href="/cesantia"><strong>hub de cesantía</strong></a> y calcula tu <a href="/calculadoras/calculadora-finiquito">finiquito estimado</a> antes de firmar cualquier documento.</p></div></aside>
+
+<h2>1. En las primeras 48 horas</h2>
+<ol class="steps">
+<li><strong>Pide por escrito la causal y la fecha de término.</strong> Sin claridad no puedes revisar indemnización ni plazos.</li>
+<li><strong>No firmes de inmediato un finiquito incompleto.</strong> Revisa montos de días trabajados, vacaciones e indemnización (si aplica).</li>
+<li><strong>Guarda liquidaciones, contrato y comunicaciones.</strong> WhatsApp y correos también son evidencia útil.</li>
+<li><strong>Estima el finiquito</strong> con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> y contrasta con la propuesta del empleador.</li>
+</ol>
+
+<h2>2. Dinero que suele entrar al finiquito</h2>
+<p>Según la causal, el finiquito puede incluir:</p>
+<ul>
+<li>Sueldo devengado del mes en curso</li>
+<li><a href="/calculadoras/calculadora-vacaciones-proporcionales">Vacaciones proporcionales</a> y feriado pendiente</li>
+<li><a href="/calculadoras/calculadora-indemnizacion-anos-servicio">Indemnización por años de servicio</a> (cuando corresponde)</li>
+<li>Indemnización sustitutiva del aviso previo (si no hubo aviso de 30 días)</li>
+<li>Otros pactados (bonos, gratificación proporcional, etc.)</li>
+</ul>
+<div class="numeric-example"><div class="numeric-example__title">Orden mental de cobertura</div><ul><li>Finiquito estimado (calculadora)</li><li>+ Ahorros líquidos disponibles</li><li>+ Giros esperados del Seguro de Cesantía (AFC)</li><li>− Gastos fijos mensuales (arriendo, comida, deudas)</li></ul><span class="total">≈ meses de “runway” mientras buscas trabajo</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Estimación, no liquidación oficial</strong><p>Los resultados de CalculaChile son referenciales. El monto final depende de tu contrato, causal, pactos y topes legales (por ejemplo 90 UF en indemnización). Fuentes: Código del Trabajo y Dirección del Trabajo.</p></div></aside>
+
+<h2>3. Seguro de Cesantía (AFC)</h2>
+<p>El Seguro de Cesantía no es lo mismo que el finiquito. Opera con cotizaciones en la AFC (cuenta individual y, si cumples requisitos, Fondo de Cesantía Solidario).</p>
+<ul>
+<li>Lee <a href="/blog/seguro-cesantia-finiquito-2026-afc">cómo funciona el Seguro de Cesantía (CIC, FCS y vs finiquito)</a>.</li>
+<li>Solicita el cobro con la guía <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cómo cobrar el Seguro de Cesantía en la AFC</a>.</li>
+<li>Revisa tu saldo y simulador en <a href="https://www.afc.cl/" target="_blank" rel="noopener">AFC Chile</a>; ten cédula y documento de término a mano.</li>
+<li>No asumas el monto del giro sin mirar tu cartola: depende de cotizaciones y saldo.</li>
+</ul>
+<p>Si necesitas el marco legal del finiquito en profundidad, lee la <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral Chile 2026</a>.</p>
+
+<h2>4. Trámites y derechos frecuentes</h2>
+<ul>
+<li><strong>Inspección del Trabajo:</strong> reclamos por no pago, diferencias o formalidades del finiquito.</li>
+<li><strong>Fonasa / Isapre e instituciones de salud:</strong> verifica cobertura al quedar cesante.</li>
+<li><strong>AFP:</strong> las cotizaciones no se “cierran” con el despido; mantén tus claves y cartolas.</li>
+<li><strong>Certificados:</strong> solicita certificado de antigüedad y cotizaciones si te sirven para postular o para AFC.</li>
+</ul>
+
+<h2>5. Reinserción: no postules con el CV de siempre</h2>
+<p>Cuando el dinero y los papeles están en marcha, el cuello de botella suele ser la postulación: muchos avisos pasan por filtros ATS. Un mismo CV genérico pierde keywords de cada vacante.</p>
+<ul>
+<li>Calcula el <a href="/calculadoras/calculadora-sueldo-liquido">sueldo líquido</a> de las ofertas nuevas antes de negociar.</li>
+<li>Adapta el CV a <strong>cada</strong> aviso (no copies-pega el mismo PDF).</li>
+<li>En CVListo puedes obtener un <strong>score ATS</strong> y una optimización gratis al registrarte — sin inventar experiencia.</li>
+</ul>
+<p>Empieza desde el <a href="/cesantia">hub de cesantía</a> o ve directo a analizar tu CV (enlace contextual en esta página y en las calculadoras de finiquito).</p>
+
+<h2>6. Checklist imprimible (resumen)</h2>
+<ul class="data-grid">
+<li><span class="label">Causal y fecha por escrito</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Finiquito estimado vs. propuesto</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Copia firmada y pago recibido</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Solicitud / revisión AFC</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">Presupuesto de cobertura (meses)</span><span class="value">Hecho / pendiente</span></li>
+<li><span class="label">CV adaptado a 1ª vacante objetivo</span><span class="value">Hecho / pendiente</span></li>
+</ul>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No es asesoría legal ni previsional personalizada. Normas, topes y requisitos de la AFC pueden cambiar: prevalece la fuente oficial (DT, AFC, BCN/Ley Chile).</p></div></aside>
+<p>Para profundizar: <a href="/guias/finiquito-laboral-chile">guía de finiquito</a> · <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> · <a href="/cesantia">hub cesantía</a>.</p>`,
+  },
+  {
     slug: 'permiso-circulacion-segunda-cuota-agosto-2026',
     title:
       'Segunda cuota del permiso de circulación 2026: plazo hasta el 31 de agosto',

@@ -278,6 +278,25 @@ export const seoOverrides: Record<
       'IMM desde mayo 2026: $553.553 (18–65), $412.938 y $356.815 no remuneracional. Estima tu líquido. DT y Ley 21.830.', // 128
   },
 
+  // --- Hub cesantía + Seguro de Cesantía AFC ---
+  'seguro-cesantia-finiquito-2026-afc': {
+    seoTitle: 'Seguro de Cesantía 2026: AFC, CIC y finiquito', // 50
+    seoDescription:
+      'Cómo funciona el Seguro de Cesantía en Chile: cotizaciones, giros, CIC vs Fondo Solidario y diferencia con el finiquito. Fuentes AFC y ChileAtiende.', // 148
+  },
+  'como-cobrar-seguro-cesantia-afc-2026': {
+    seoTitle: 'Cómo cobrar Seguro de Cesantía AFC 2026: pasos', // 50
+    seoDescription:
+      'Solicita el Seguro de Cesantía: documentos, 10 o 5 cotizaciones, sucursal virtual AFC y giros. Guía práctica Chile 2026.', // 120
+  },
+  'checklist-despues-despido-chile-2026': {
+    seoTitle: 'Checklist despido Chile 2026: finiquito, AFC y CV', // 52
+    seoDescription:
+      'Qué hacer tras un despido: finiquito, plazos, Seguro de Cesantía y reinserción. Checklist práctico con calculadoras gratis.', // 128
+  },
+  // Nota: hub /cesantia usa buildPageMetadata en page.tsx (title/desc allí).
+
+
   // ══════════════════════════════════════════════════════════════════════════
   // GUÍAS PILLAR
   // ══════════════════════════════════════════════════════════════════════════

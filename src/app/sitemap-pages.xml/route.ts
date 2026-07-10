@@ -65,6 +65,12 @@ export async function GET() {
       priority: 0.7,
     },
     {
+      url: `${SITE_URL}/cesantia`,
+      lastModified: new Date('2026-07-10'),
+      changeFrequency: 'weekly',
+      priority: 0.88,
+    },
+    {
       url: `${SITE_URL}/acerca-de`,
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'yearly',

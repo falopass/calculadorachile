@@ -30,6 +30,8 @@ import { articles, getArticleBySlug } from '@/data/articles';
 import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
 import { seoOverrides } from '@/data/seo-overrides';
+import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 
 interface BlogArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -238,6 +240,26 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
               </div>
             </section>
           )}
+
+          {/* CTA laboral → CVListo (solo contenido de empleo / finiquito / sueldo) */}
+          {(() => {
+            const origen = resolveCvlistoContentOrigen({
+              relatedCalculators: article.relatedCalculators,
+              relatedGuia: article.relatedGuia,
+              category: article.category,
+            });
+            if (!origen) return null;
+            return (
+              <div className="mt-10">
+                <CrossDomainCta
+                  origen={origen}
+                  contentId={`blog:${article.slug}`}
+                  placement="blog_footer"
+                  compact
+                />
+              </div>
+            );
+          })()}
 
           {/* Guía pillar relacionada */}
           {relatedGuia && (

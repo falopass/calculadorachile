@@ -22,6 +22,9 @@ import {
 } from 'lucide-react';
 import LegalNote from './LegalNote';
 import DisclaimerYMYL from '@/components/DisclaimerYMYL';
+import CrossDomainCta from './CrossDomainCta';
+import { isCvlistoCtaCalculator } from '@/lib/cvlisto';
+import { trackEvents } from '@/lib/analytics';
 
 export interface PremiumCalculatorShellProps {
   calculator: Calculator;
@@ -393,6 +396,7 @@ export default function PremiumCalculatorShell({
 }: PremiumCalculatorShellProps) {
   const resultsRef = useRef<HTMLDivElement>(null);
   const hasScrolledToResults = useRef(false);
+  const hasTrackedUse = useRef(false);
 
   const [inputValues, setInputValues] = useState(() =>
     buildInitialValues(calculator.inputs),
@@ -457,6 +461,12 @@ export default function PremiumCalculatorShell({
       setHasCalculated(true);
       setIsCalculating(false);
 
+      // Una sola vez por sesión de cálculo (evita spam en cada debounce).
+      if (!hasTrackedUse.current) {
+        hasTrackedUse.current = true;
+        trackEvents.calculatorUsed(calculator.id);
+      }
+
       const mainResult = calculated.find((r) => r.highlight);
       addEntry({
         calculatorId: calculator.id,
@@ -504,6 +514,7 @@ export default function PremiumCalculatorShell({
     setResults(null);
     setHasCalculated(false);
     hasScrolledToResults.current = false;
+    hasTrackedUse.current = false;
   }, [calculator.inputs]);
 
   const organismo =
@@ -660,6 +671,13 @@ export default function PremiumCalculatorShell({
             showChart={true}
           />
           <DisclaimerYMYL organismo={organismo} className="mt-4" />
+          {isCvlistoCtaCalculator(calculator.id) && (
+            <CrossDomainCta
+              calculatorId={calculator.id}
+              placement="after_result"
+              className="mt-5"
+            />
+          )}
         </div>
       ) : null}
 

@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plan de trabajo 90 días: conectar el tráfico orgánico de CalculaChile con activación y revenue de CVListo. Estado de ejecución, roadmap y checklist.">
+  <title>Plan de trabajo: CalculaChile → CVListo (90 días)</title>
+  <style>
+    :root {
+      --bg: #f4f0e8;
+      --paper: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #5c574f;
+      --line: #e6dfd4;
+      --copper: #b45309;
+      --copper-dark: #9a4508;
+      --navy: #0c1830;
+      --green: #177c55;
+      --red: #b91c1c;
+      --amber: #a96500;
+      --soft-green: #edf9f3;
+      --soft-amber: #fff8e8;
+      --soft-red: #fff1ef;
+      --soft-copper: #fff7ed;
+      --shadow: 0 12px 40px rgba(26, 26, 26, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--copper-dark); }
+    a:hover { text-decoration: underline; }
+    code, .mono {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.9em;
+    }
+    .skip {
+      position: absolute; left: -9999px;
+    }
+    .skip:focus {
+      left: 16px; top: 16px; z-index: 99;
+      background: white; padding: 10px 14px; border-radius: 8px;
+    }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(circle at 90% 10%, rgba(180, 83, 9, 0.35), transparent 28%),
+        linear-gradient(135deg, #1a1a1a 0%, #2c2118 45%, #3d2914 100%);
+      color: #fff;
+      padding: 56px 24px 52px;
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px; align-items: center;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.08);
+      padding: 6px 12px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(1.85rem, 4.5vw, 3.1rem);
+      line-height: 1.1; letter-spacing: -0.03em;
+      margin: 18px 0 14px; max-width: 18ch;
+    }
+    .hero p { max-width: 62ch; color: rgba(255,255,255,.78); margin: 0 0 12px; font-size: 1.05rem; }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+    }
+    .pill {
+      border-radius: 999px; padding: 6px 12px; font-size: 0.8rem; font-weight: 700;
+      border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06);
+    }
+    .pill.ok { background: rgba(23,124,85,.25); border-color: rgba(23,124,85,.45); }
+    .pill.warn { background: rgba(180,83,9,.25); border-color: rgba(180,83,9,.45); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 999px; padding: 12px 18px; font-weight: 800; font-size: 0.92rem;
+      border: 1px solid transparent; text-decoration: none; cursor: pointer;
+    }
+    .btn-primary { background: var(--copper); color: #fff; }
+    .btn-primary:hover { background: var(--copper-dark); text-decoration: none; }
+    .btn-ghost {
+      background: transparent; color: #fff;
+      border-color: rgba(255,255,255,.3);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+    /* Layout */
+    .layout {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 250px minmax(0, 1fr);
+      gap: 24px; padding: 28px 20px 72px;
+    }
+    .nav-card {
+      position: sticky; top: 16px;
+      background: var(--navy); color: #cfd8e8;
+      border-radius: 14px; padding: 16px;
+      max-height: calc(100vh - 32px); overflow: auto;
+      box-shadow: var(--shadow);
+    }
+    .nav-card strong {
+      display: block; color: #fff; font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+    }
+    .nav-card a {
+      display: block; color: #b8c5db; padding: 7px 8px;
+      border-radius: 8px; font-size: 0.86rem; text-decoration: none;
+    }
+    .nav-card a:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(20px, 3vw, 36px);
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px rgba(26,26,26,.04);
+    }
+    .kicker {
+      font-size: 0.72rem; font-weight: 900; color: var(--copper);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;
+    }
+    h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.2;
+    }
+    h3 { font-size: 1.12rem; margin: 24px 0 8px; }
+    h4 { font-size: 0.98rem; margin: 16px 0 6px; }
+    p { margin: 8px 0 12px; color: var(--ink); }
+    .muted { color: var(--muted); }
+    .lead { font-size: 1.05rem; color: var(--muted); max-width: 70ch; }
+
+    .grid { display: grid; gap: 14px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 16px; background: #fff;
+    }
+    .card h3, .card h4 { margin-top: 0; }
+
+    .status {
+      display: inline-block; font-size: 0.7rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 3px 8px; border-radius: 999px;
+    }
+    .status-done { background: var(--soft-green); color: var(--green); }
+    .status-partial { background: var(--soft-amber); color: var(--amber); }
+    .status-todo { background: #f3f4f6; color: #4b5563; }
+    .status-blocked { background: var(--soft-red); color: var(--red); }
+
+    .callout {
+      border-left: 4px solid var(--copper);
+      background: var(--soft-copper);
+      padding: 14px 16px; border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+    }
+    .callout.green { border-color: var(--green); background: var(--soft-green); }
+    .callout.amber { border-color: var(--amber); background: var(--soft-amber); }
+    .callout.red { border-color: var(--red); background: var(--soft-red); }
+    .quote { font-size: 1.15rem; font-weight: 800; line-height: 1.35; letter-spacing: -0.02em; }
+
+    .flow {
+      display: grid; grid-template-columns: repeat(7, minmax(100px, 1fr));
+      gap: 8px; overflow-x: auto; padding-bottom: 4px; margin: 16px 0;
+    }
+    .flow .step {
+      min-width: 100px; text-align: center; font-size: 0.8rem; font-weight: 800;
+      border: 1px solid var(--line); background: #faf8f5;
+      border-radius: 12px; padding: 12px 8px; position: relative;
+    }
+    .flow .step:not(:last-child)::after {
+      content: "→"; position: absolute; right: -10px; top: 50%;
+      transform: translate(50%, -50%); color: #a89f92; font-size: 1.1rem;
+    }
+    .flow .step.done { border-color: #86efac; background: var(--soft-green); }
+    .flow .step.partial { border-color: #fcd34d; background: var(--soft-amber); }
+
+    .table-wrap {
+      overflow: auto; border: 1px solid var(--line);
+      border-radius: 12px; margin: 12px 0;
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+    th, td {
+      padding: 11px 12px; text-align: left;
+      border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.92rem;
+    }
+    th {
+      background: #faf7f2; font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--muted);
+    }
+    tr:last-child td { border-bottom: none; }
+    .p0 { color: var(--red); font-weight: 800; }
+    .p1 { color: var(--amber); font-weight: 800; }
+    .p2 { color: var(--green); font-weight: 800; }
+
+    .timeline { border-left: 3px solid #e8d5c0; margin-left: 6px; padding-left: 22px; }
+    .timeline-item { position: relative; margin: 0 0 20px; }
+    .timeline-item::before {
+      content: ""; position: absolute; width: 12px; height: 12px;
+      border-radius: 50%; background: var(--copper);
+      left: -29px; top: 5px; border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--copper);
+    }
+    .timeline-item.done::before { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+    .timeline-item.partial::before { background: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+    .week {
+      font-size: 0.72rem; font-weight: 900; color: var(--copper);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .timeline-item h3 { margin: 2px 0 6px; }
+
+    .check-list { display: grid; gap: 8px; }
+    .check {
+      display: flex; gap: 10px; align-items: flex-start;
+      border: 1px solid var(--line); border-radius: 10px;
+      padding: 11px 12px; background: #fbfaf8;
+    }
+    .check input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--copper); }
+    .check.done { background: var(--soft-green); border-color: #bbf7d0; }
+    .check.done .label { text-decoration: line-through; opacity: 0.75; }
+    .check .meta { display: block; font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    .codeblock {
+      background: #1a1a1a; color: #f5e6d3; border-radius: 12px;
+      padding: 16px; overflow: auto; font-size: 0.82rem; line-height: 1.55;
+    }
+    .tag {
+      display: inline-block; padding: 3px 8px; border-radius: 999px;
+      font-size: 0.7rem; font-weight: 800; background: #f3f0ea; color: #5c574f;
+    }
+    .tag.copper { background: var(--soft-copper); color: var(--copper-dark); }
+    .tag.green { background: var(--soft-green); color: var(--green); }
+
+    .scorecard {
+      display: grid; grid-template-columns: 1.5fr repeat(4, 0.7fr);
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    }
+    .scorecard > div {
+      padding: 10px; border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line); font-size: 0.88rem;
+    }
+    .scorecard > div:nth-child(5n) { border-right: none; }
+    .scorecard .head {
+      background: #faf7f2; font-size: 0.7rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
+    }
+
+    footer.doc-foot {
+      max-width: 1100px; margin: 0 auto 48px; padding: 0 20px;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .no-print { }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .nav-card { display: none; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .scorecard { grid-template-columns: 1fr; }
+      .scorecard > div { border-right: none; }
+    }
+    @media print {
+      body { background: #fff; }
+      .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .layout { display: block; padding: 12px; }
+      .nav-card, .hero-actions, .no-print { display: none !important; }
+      section { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Documento operativo · Actualizado 2026-07-10</span>
+      <h1>Plan de trabajo: CalculaChile → CVListo (90 días)</h1>
+      <p>
+        Hoja de ruta para transformar el tráfico orgánico de
+        <strong>CalculaChile</strong> en activación y revenue de
+        <strong>CVListo</strong>, sin Ads prematuros ni rediseño total.
+        Basado en el plan maestro del ecosistema; este documento es la
+        <strong>versión de trabajo</strong> con estado de ejecución.
+      </p>
+      <p class="muted" style="color:rgba(255,255,255,.55);font-size:.9rem;margin:0">
+        Fuente estratégica: <code style="color:#f5d0a9">docs/plan_maestro_calculachile_cvlisto_90_dias.html</code>
+      </p>
+      <div class="hero-meta">
+        <span class="pill ok">P0 puente: en curso / casi cerrado</span>
+        <span class="pill warn">Analítica completa: pendiente</span>
+        <span class="pill">Ads: solo después de datos</span>
+        <span class="pill">Horizonte: 90 días</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#estado">Ver estado actual</a>
+        <a class="btn btn-ghost" href="#checklist">Checklist</a>
+        <a class="btn btn-ghost" href="#proximos">Próximos 14 días</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside>
+      <nav class="nav-card" aria-label="Índice">
+        <strong>Contenido</strong>
+        <a href="#resumen">1. Resumen ejecutivo</a>
+        <a href="#objetivo">2. Objetivo y métrica norte</a>
+        <a href="#principios">3. Principios</a>
+        <a href="#roles">4. Roles de marca</a>
+        <a href="#embudo">5. Embudo</a>
+        <a href="#estado">6. Estado de ejecución</a>
+        <a href="#roadmap">7. Roadmap 30/60/90</a>
+        <a href="#contenido">8. Contenido y SEO</a>
+        <a href="#analitica">9. Analítica (10 eventos)</a>
+        <a href="#experimentos">10. Experimentos</a>
+        <a href="#proximos">11. Próximos 14 días</a>
+        <a href="#checklist">12. Checklist</a>
+        <a href="#riesgos">13. Riesgos</a>
+        <a href="#no-hacer">14. No hacer</a>
+      </nav>
+    </aside>
+
+    <main id="contenido">
+      <!-- 1 -->
+      <section id="resumen">
+        <div class="kicker">01 · Resumen</div>
+        <h2>Qué estamos construyendo</h2>
+        <p class="lead">
+          Un <strong>puente medible</strong> entre dos productos ya vivos:
+          CalculaChile captura intención laboral/financiera; CVListo convierte
+          esa intención en score ATS, optimización de CV y compra de créditos.
+        </p>
+        <div class="grid grid-3" style="margin-top:18px">
+          <div class="card">
+            <span class="tag copper">Canal principal</span>
+            <h3>Orgánico CalculaChile</h3>
+            <p class="muted" style="margin:0">No Ads primero. El tráfico ya existe; el embudo no.</p>
+          </div>
+          <div class="card">
+            <span class="tag copper">Momento</span>
+            <h3>Post-resultado</h3>
+            <p class="muted" style="margin:0">Finiquito, sueldo, vacaciones, AFC → siguiente decisión laboral.</p>
+          </div>
+          <div class="card">
+            <span class="tag copper">Producto</span>
+            <h3>CVListo freemium</h3>
+            <p class="muted" style="margin:0">Score + 1 optimización gratis → créditos $2.990 / $4.990.</p>
+          </div>
+        </div>
+        <div class="callout green">
+          <strong>Promesa conjunta:</strong>
+          <div class="quote" style="margin-top:8px">“Desde calcular lo que te corresponde hasta preparar tu próxima postulación.”</div>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section id="objetivo">
+        <div class="kicker">02 · Objetivo</div>
+        <h2>Métrica norte y metas de trabajo</h2>
+        <div class="callout">
+          <div class="quote">Ingreso total por cada 1.000 sesiones orgánicas laborales de CalculaChile</div>
+          <p class="muted" style="margin-bottom:0">AdSense atribuible a páginas laborales + compras CVListo con origen <code>calculachile</code>.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Métrica</th><th>Meta inicial (rango)</th><th>Uso</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>CTR al siguiente paso (post-resultado)</td><td>8–15%</td><td>Calidad del CTA contextual</td></tr>
+              <tr><td>CTR a CVListo</td><td>2–5%</td><td>Relevancia del puente</td></tr>
+              <tr><td>Landing → carga de CV</td><td>20–35%</td><td>Fricción de activación</td></tr>
+              <tr><td>Usuario gratis → compra</td><td>3–8%</td><td>Oferta y onboarding</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">Las metas son rangos de trabajo, no promesas. Ajustar tras 2–4 semanas de datos reales en GA4.</p>
+      </section>
+
+      <!-- 3 -->
+      <section id="principios">
+        <div class="kicker">03 · Principios</div>
+        <h2>Reglas que no se negocian en este plan</h2>
+        <ol>
+          <li><strong>Ship rápido, bajo costo, alta confiabilidad</strong> en cálculos chilenos (YMYL en CalculaChile).</li>
+          <li><strong>No inventar experiencia</strong> en CVListo; el diferenciador ético es parte del producto.</li>
+          <li><strong>Contexto en el enlace:</strong> cada clic a CVListo lleva <code>origen</code>, UTM y posición.</li>
+          <li><strong>Ads solo como amplificador</strong> después de conocer qué calculadoras activan y convierten.</li>
+          <li><strong>No rediseñar ambos sitios</strong> ni crear una tercera marca o portal de empleos.</li>
+          <li><strong>Un experimento a la vez</strong>; decidir por activación/compra, no solo por CTR.</li>
+        </ol>
+      </section>
+
+      <!-- 4 -->
+      <section id="roles">
+        <div class="kicker">04 · Marcas</div>
+        <h2>Roles claros (no fusionar dominios)</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <span class="tag">Adquisición · YMYL · AdSense</span>
+            <h3>CalculaChile</h3>
+            <p class="quote" style="font-size:1rem">Herramientas gratuitas para decisiones financieras y laborales en Chile.</p>
+            <ul>
+              <li>Resolver el cálculo o trámite ahora.</li>
+              <li>Fuentes oficiales y disclaimers.</li>
+              <li>Detectar cesantía / oferta / búsqueda.</li>
+              <li>Empujar al siguiente paso (a veces en CVListo).</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="tag copper">Conversión · freemium</span>
+            <h3>CVListo</h3>
+            <p class="quote" style="font-size:1rem">Adapta tu CV a cada oferta real y llega mejor al filtro ATS.</p>
+            <ul>
+              <li>Score y gaps antes del pago.</li>
+              <li>Primera victoria gratis.</li>
+              <li>Créditos B2C y, más adelante, instituciones.</li>
+              <li>Landing <code>/desde-calculachile</code> con copy por origen.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section id="embudo">
+        <div class="kicker">05 · Embudo</div>
+        <h2>Recorrido integral</h2>
+        <div class="flow" aria-label="Embudo general">
+          <div class="step done">Google</div>
+          <div class="step done">Calc / guía</div>
+          <div class="step done">Resultado</div>
+          <div class="step done">CTA puente</div>
+          <div class="step done">Landing origen</div>
+          <div class="step partial">Score + mejora</div>
+          <div class="step partial">Compra</div>
+        </div>
+        <h3>Embudo prioritario: cesantía</h3>
+        <div class="flow">
+          <div class="step done">Finiquito</div>
+          <div class="step done">Monto</div>
+          <div class="step partial">Cobertura</div>
+          <div class="step done">Hub /cesantia</div>
+          <div class="step done">Preparar CV</div>
+          <div class="step done">Adaptar vacante</div>
+          <div class="step partial">Créditos</div>
+        </div>
+        <h3>Embudo secundario: oferta</h3>
+        <div class="flow">
+          <div class="step done">Sueldo líquido</div>
+          <div class="step done">¿Es oferta?</div>
+          <div class="step todo">Comparar oferta</div>
+          <div class="step done">Match CV</div>
+          <div class="step done">Optimizar</div>
+          <div class="step partial">Compra</div>
+          <div class="step todo">Negociar</div>
+        </div>
+        <p class="muted"><span class="status status-done">Verde</span> implementado · <span class="status status-partial">Ámbar</span> parcial · gris = pendiente del plan.</p>
+      </section>
+
+      <!-- 6 -->
+      <section id="estado">
+        <div class="kicker">06 · Estado · 2026-07-10</div>
+        <h2>Qué ya está hecho vs qué falta</h2>
+
+        <h3>Hecho (P0 puente)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Ítem plan</th><th>Implementación</th><th>Repo</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>CTA post-resultado finiquito / indemnización / vacaciones / sueldo</td>
+                <td><code>CrossDomainCta</code> + <code>cvlisto.ts</code> + shell calculadora</td>
+                <td>CalculaChile</td>
+              </tr>
+              <tr>
+                <td>Landing <code>/desde-calculachile</code> + copy por <code>origen</code></td>
+                <td>Página + <code>CaptureAcquisition</code> + cookie/localStorage</td>
+                <td>CVListo</td>
+              </tr>
+              <tr>
+                <td>UTM / atribución cross-domain</td>
+                <td><code>buildCvlistoUrl</code> + <code>acquisition.ts</code></td>
+                <td>Ambos</td>
+              </tr>
+              <tr>
+                <td>Eventos CTA view/click</td>
+                <td><code>employment_cta_viewed</code> / <code>employment_cta_clicked</code></td>
+                <td>CalculaChile</td>
+              </tr>
+              <tr>
+                <td>Hub <code>/cesantia</code></td>
+                <td>Recorrido 4 pasos + tools + CTA CVListo</td>
+                <td>CalculaChile</td>
+              </tr>
+              <tr>
+                <td>Contenido cesantía / despido / AFC</td>
+                <td>Blogs checklist, AFC, cobro; CVListo reinserción + AFC</td>
+                <td>Ambos</td>
+              </tr>
+              <tr>
+                <td>SEO CVListo (apex, overrides, sitemaps)</td>
+                <td>Capa SEO central + posts prioritarios</td>
+                <td>CVListo</td>
+              </tr>
+              <tr>
+                <td>Home / nav móvil CVListo</td>
+                <td>LandingNav, pricing, MobileNav solo dashboard</td>
+                <td>CVListo</td>
+              </tr>
+              <tr>
+                <td>IA DeepSeek + prompts endurecidos</td>
+                <td>Pipeline score/optimize</td>
+                <td>CVListo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Parcial</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Ítem</th><th>Falta</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>10 eventos del embudo</td>
+                <td>En CVListo: <code>cv_uploaded</code>, <code>job_offer_added</code>, <code>ats_score_generated</code>, <code>free_optimization_used</code>, <code>checkout_started</code>, <code>purchase_completed</code> con plan/revenue. En CC: alinear <code>calculator_started</code> / <code>calculator_completed</code>.</td>
+              </tr>
+              <tr>
+                <td>CTA honorarios / “¿es oferta?” sueldo</td>
+                <td>Sueldo ya tiene copy de oferta; falta CTA en boleta honorarios y UI/copy A/B formal.</td>
+              </tr>
+              <tr>
+                <td>Cobertura financiera mínima</td>
+                <td>Hub menciona cobertura; no hay herramienta interactiva “meses de runway”.</td>
+              </tr>
+              <tr>
+                <td>Enlazado interno laboral</td>
+                <td>Hub + blogs AFC ok; falta pase sistemático en calcs laborales (3–5 links plan §7.6).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>No iniciado (según plan 31–90)</h3>
+        <ul>
+          <li>Comparador de ofertas · secuencia de correo · referidos WhatsApp</li>
+          <li>Experimentos documentados FIN_CTA_01 / CV_HERO_01 / CV_PRICE_01</li>
+          <li>Sprint laboral · landing institucional · pilotos OMIL/universidades</li>
+          <li>Dashboard semanal GA4 por calculadora y origen</li>
+        </ul>
+      </section>
+
+      <!-- 7 -->
+      <section id="roadmap">
+        <div class="kicker">07 · Roadmap</div>
+        <h2>30 / 60 / 90 días</h2>
+
+        <h3>Días 1–30 — Conectar y medir</h3>
+        <div class="timeline">
+          <div class="timeline-item partial">
+            <span class="week">Semana 1 · Instrumentación</span>
+            <h3>Eventos + atribución</h3>
+            <ul>
+              <li>Definir 10 eventos del embudo — <em>definidos; wiring incompleto en CVListo</em></li>
+              <li>Atribución entre dominios — <strong>hecho</strong> (UTM + cookie acq)</li>
+              <li>Dashboard base GA4 — <em>pendiente (manual/explore)</em></li>
+            </ul>
+          </div>
+          <div class="timeline-item partial">
+            <span class="week">Semana 2 · CTA contextuales</span>
+            <h3>Finiquito · sueldo · vacaciones · honorarios</h3>
+            <ul>
+              <li>Finiquito / indemnización / vacaciones / sueldo — <strong>hecho</strong></li>
+              <li>Honorarios — <em>pendiente allowlist CTA</em></li>
+            </ul>
+          </div>
+          <div class="timeline-item done">
+            <span class="week">Semana 3 · Landing puente</span>
+            <h3><code>/desde-calculachile</code></h3>
+            <ul>
+              <li>Mensaje por origen · prueba gratis · conservar params — <strong>hecho</strong></li>
+            </ul>
+          </div>
+          <div class="timeline-item partial">
+            <span class="week">Semana 4 · Hub cesantía</span>
+            <h3><code>/cesantia</code> + cobertura</h3>
+            <ul>
+              <li>Hub + enlaces calcs + blogs AFC — <strong>hecho</strong></li>
+              <li>Calculadora cobertura financiera mínima — <em>pendiente</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Días 31–60 — Activación</h3>
+        <ul>
+          <li>Comparador de ofertas (página o tool liviana).</li>
+          <li>Primera secuencia de correo por comportamiento.</li>
+          <li>Dos experimentos de CTA (FIN_CTA_01 + uno de sueldo o hero).</li>
+          <li>Títulos/metadatos/enlazado laboral (plan §7.5–7.6).</li>
+          <li>Cuatro piezas más del clúster cesantía si el hub rankea.</li>
+          <li>Referido WhatsApp (crédito al completar primer análisis).</li>
+        </ul>
+
+        <h3>Días 61–90 — Monetizar y expandir</h3>
+        <ul>
+          <li>Validar “Sprint laboral” ($8.990–$12.990) como oferta semi-manual.</li>
+          <li>Landing institucional + 30–50 contactos + 1–3 pilotos gratis.</li>
+          <li>Priorizar contenido con GSC + revenue, no intuición.</li>
+          <li>Decidir: seguimiento de postulaciones vs entrevista avanzada.</li>
+        </ul>
+
+        <h3>Criterios de éxito día 90</h3>
+        <div class="grid grid-3">
+          <div class="card">
+            <h4>Adquisición</h4>
+            <p class="muted" style="margin:0">Tráfico medido CC → CVListo; top calculadoras que activan conocidas.</p>
+          </div>
+          <div class="card">
+            <h4>Conversión</h4>
+            <p class="muted" style="margin:0">Al menos una variante CTA y landing superan baseline.</p>
+          </div>
+          <div class="card">
+            <h4>Revenue</h4>
+            <p class="muted" style="margin:0">Se puede calcular ingreso / 1.000 sesiones laborales y priorizar desarrollo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section id="contenido">
+        <div class="kicker">08 · Contenido y SEO</div>
+        <h2>Clústeres (no volumen vacío)</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Clúster “Me despidieron”</h3>
+            <p><code>/cesantia</code> como hub.</p>
+            <ul>
+              <li>Finiquito · indemnización · vacaciones</li>
+              <li>Seguro de Cesantía AFC (CIC / FCS)</li>
+              <li>Checklist trámites · cobertura</li>
+              <li>CV post-despido (CVListo)</li>
+            </ul>
+            <p><span class="status status-partial">Parcial</span> hub + AFC + checklist + CV; falta tool cobertura y “finiquito mal calculado”.</p>
+          </div>
+          <div class="card">
+            <h3>Clúster “Evaluando oferta”</h3>
+            <ul>
+              <li>Sueldo líquido / bruto</li>
+              <li>Comparar oferta (pendiente)</li>
+              <li>Honorarios vs contrato</li>
+              <li>Adaptar CV a la vacante (CVListo)</li>
+            </ul>
+            <p><span class="status status-partial">Parcial</span> sueldo + CTA; falta comparador.</p>
+          </div>
+        </div>
+        <h3>Plantilla de página SEO útil</h3>
+        <ol>
+          <li>Respuesta directa 40–80 palabras</li>
+          <li>Herramienta o diagnóstico</li>
+          <li>Resultado personalizado</li>
+          <li>Fórmula / criterio</li>
+          <li>Ejemplo en pesos chilenos</li>
+          <li>Fuente oficial + fecha revisión</li>
+          <li>FAQ no redundante</li>
+          <li>Enlaces al hub y siguiente acción</li>
+          <li>CTA comercial solo si es pertinente</li>
+        </ol>
+        <div class="callout amber">
+          <strong>No hacer:</strong> 500 posts IA, páginas clon por empresa, “2026” decorativo, CTAs comerciales en páginas irrelevantes.
+        </div>
+      </section>
+
+      <!-- 9 -->
+      <section id="analitica">
+        <div class="kicker">09 · Analítica</div>
+        <h2>Diez eventos obligatorios del embudo</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Evento</th><th>Momento</th><th>Sitio</th><th>Estado</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>calculator_started</code></td><td>Primera interacción</td><td>CC</td><td><span class="status status-todo">Todo</span></td></tr>
+              <tr><td><code>calculator_completed</code></td><td>Resultado (hoy: <code>calculator_used</code>)</td><td>CC</td><td><span class="status status-partial">Parcial</span></td></tr>
+              <tr><td><code>employment_cta_viewed</code></td><td>CTA visible</td><td>CC</td><td><span class="status status-done">Hecho</span></td></tr>
+              <tr><td><code>employment_cta_clicked</code></td><td>Clic CTA</td><td>CC</td><td><span class="status status-done">Hecho</span></td></tr>
+              <tr><td><code>cv_uploaded</code></td><td>Archivo cargado</td><td>CV</td><td><span class="status status-todo">Todo</span></td></tr>
+              <tr><td><code>job_offer_added</code></td><td>Vacante pegada</td><td>CV</td><td><span class="status status-todo">Todo</span></td></tr>
+              <tr><td><code>ats_score_generated</code></td><td>Score listo</td><td>CV</td><td><span class="status status-todo">Todo</span></td></tr>
+              <tr><td><code>free_optimization_used</code></td><td>Primera mejora</td><td>CV</td><td><span class="status status-todo">Todo</span></td></tr>
+              <tr><td><code>checkout_started</code></td><td>Inicio pago</td><td>CV</td><td><span class="status status-partial">Meta Pixel sí / GA4 no</span></td></tr>
+              <tr><td><code>purchase_completed</code></td><td>Pago OK + plan/revenue</td><td>CV</td><td><span class="status status-todo">Todo</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Parámetros de enlace (canónicos)</h3>
+        <pre class="codeblock">https://cvlisto.cl/desde-calculachile
+?origen=finiquito
+&amp;utm_source=calculachile
+&amp;utm_medium=referral
+&amp;utm_campaign=ecosistema_laboral
+&amp;utm_content=finiquito_after_result
+&amp;posicion=after_result</pre>
+      </section>
+
+      <!-- 10 -->
+      <section id="experimentos">
+        <div class="kicker">10 · CRO</div>
+        <h2>Experimentos del plan (no lanzar todos a la vez)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Hipótesis</th><th>A</th><th>B</th><th>Métrica</th><th>Estado</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mono">FIN_CTA_01</td>
+                <td>Urgencia financiera &gt; “mejorar CV”</td>
+                <td>Mejorar mi CV gratis</td>
+                <td>Preparar mi regreso al trabajo</td>
+                <td>Score generado</td>
+                <td><span class="status status-todo">Todo</span></td>
+              </tr>
+              <tr>
+                <td class="mono">FIN_CTA_02</td>
+                <td>Paso intermedio aumenta confianza</td>
+                <td>Directo a CVListo</td>
+                <td>Cobertura primero</td>
+                <td>Compra / 1k sesiones</td>
+                <td><span class="status status-todo">Todo</span></td>
+              </tr>
+              <tr>
+                <td class="mono">SUE_CTA_01</td>
+                <td>Intención de decisión &gt; término técnico</td>
+                <td>Comparar esta oferta</td>
+                <td>¿Me conviene cambiarme?</td>
+                <td>Comparador / score</td>
+                <td><span class="status status-todo">Todo</span></td>
+              </tr>
+              <tr>
+                <td class="mono">CV_HERO_01</td>
+                <td>Dolor entrevistas &gt; jerga ATS</td>
+                <td>Optimiza tu CV para ATS</td>
+                <td>Descubre por qué no te llaman</td>
+                <td>Carga de CV</td>
+                <td><span class="status status-todo">Todo</span></td>
+              </tr>
+              <tr>
+                <td class="mono">CV_PRICE_01</td>
+                <td>“Postulaciones” &gt; “créditos”</td>
+                <td>5 créditos</td>
+                <td>Prepara 5 postulaciones</td>
+                <td>Compra</td>
+                <td><span class="status status-todo">Todo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">Reglas: un cambio principal · métrica antes de lanzar · no declarar ganador solo por CTR · documentar fecha y resultado.</p>
+      </section>
+
+      <!-- 11 -->
+      <section id="proximos">
+        <div class="kicker">11 · Sprint inmediato</div>
+        <h2>Próximos 14 días (orden de ejecución)</h2>
+        <ol>
+          <li class="p0">P0 — Completar los 10 eventos GA4 del embudo en CVListo + alinear nombres en CalculaChile.</li>
+          <li class="p0">P0 — CTA honorarios + (opcional) experimento formal FIN_CTA_01 con flag <code>exp</code>.</li>
+          <li class="p0">P0 — Herramienta mínima de cobertura financiera en <code>/cesantia</code> (finiquito + ahorro + gasto → meses).</li>
+          <li class="p1">P1 — Pase de enlazado interno en calcs laborales (máx. 3–5 links útiles al hub/blogs).</li>
+          <li class="p1">P1 — Framing “postulaciones” en pricing (CV_PRICE_01, variante controlada).</li>
+          <li class="p1">P1 — Panel semanal: Explore GA4 o hoja con clics CTA por calculadora.</li>
+          <li class="p2">P2 — No Ads Search hasta tener baseline 2 semanas del embudo.</li>
+        </ol>
+        <div class="callout">
+          <strong>Deploy:</strong> el puente en CalculaChile puede estar aún sin push a <code>origin/main</code>. Priorizar ship del código P0 ya en working tree antes de más features.
+        </div>
+      </section>
+
+      <!-- 12 -->
+      <section id="checklist">
+        <div class="kicker">12 · Checklist</div>
+        <h2>Lista de implementación (plan maestro §15)</h2>
+        <p class="muted no-print">Los checks se guardan en este navegador (<code>localStorage</code>).</p>
+
+        <h3>Analítica</h3>
+        <div class="check-list" data-group="analytics">
+          <label class="check done"><input type="checkbox" data-key="a1" checked disabled><span class="label">Atribución cross-domain / UTM+origen<span class="meta">CC buildCvlistoUrl · CV acquisition.ts</span></span></label>
+          <label class="check"><input type="checkbox" data-key="a2"><span class="label">Implementar los diez eventos del embudo<span class="meta">Parcial: solo CTA view/click + calculator_used</span></span></label>
+          <label class="check"><input type="checkbox" data-key="a3"><span class="label">Dashboard semanal por calculadora y origen</span></label>
+          <label class="check"><input type="checkbox" data-key="a4"><span class="label">Registrar plan, ticket y revenue en compra completada</span></label>
+        </div>
+
+        <h3>CalculaChile</h3>
+        <div class="check-list" data-group="cc">
+          <label class="check done"><input type="checkbox" data-key="c1" checked disabled><span class="label">CTA post-resultado finiquito (y calcs laborales allowlist)</span></label>
+          <label class="check done"><input type="checkbox" data-key="c2" checked disabled><span class="label">Copy “¿Es una oferta?” en sueldo líquido<span class="meta">Vía CrossDomainCta origen=sueldo</span></span></label>
+          <label class="check"><input type="checkbox" data-key="c3"><span class="label">CTA contrato vs honorarios (boleta)</span></label>
+          <label class="check done"><input type="checkbox" data-key="c4" checked disabled><span class="label">Publicar hub <code>/cesantia</code></span></label>
+          <label class="check"><input type="checkbox" data-key="c5"><span class="label">Calculadora de cobertura financiera</span></label>
+          <label class="check"><input type="checkbox" data-key="c6"><span class="label">Actualizar enlazado interno laboral</span></label>
+        </div>
+
+        <h3>CVListo</h3>
+        <div class="check-list" data-group="cv">
+          <label class="check done"><input type="checkbox" data-key="v1" checked disabled><span class="label">Landing <code>/desde-calculachile</code></span></label>
+          <label class="check done"><input type="checkbox" data-key="v2" checked disabled><span class="label">Contenido según parámetro <code>origen</code></span></label>
+          <label class="check"><input type="checkbox" data-key="v3"><span class="label">Verificar flujo móvil: landing → carga → score → mejora → pago</span></label>
+          <label class="check"><input type="checkbox" data-key="v4"><span class="label">Secuencia de correo por comportamiento</span></label>
+          <label class="check"><input type="checkbox" data-key="v5"><span class="label">Probar presentación por “postulaciones” vs “créditos”</span></label>
+        </div>
+
+        <h3>Crecimiento</h3>
+        <div class="check-list" data-group="growth">
+          <label class="check"><input type="checkbox" data-key="g1"><span class="label">Experimento FIN_CTA_01</span></label>
+          <label class="check"><input type="checkbox" data-key="g2"><span class="label">Experimento CV_HERO_01</span></label>
+          <label class="check"><input type="checkbox" data-key="g3"><span class="label">Sistema de referidos</span></label>
+          <label class="check"><input type="checkbox" data-key="g4"><span class="label">Landing instituciones</span></label>
+          <label class="check"><input type="checkbox" data-key="g5"><span class="label">Primer piloto institucional</span></label>
+        </div>
+        <button type="button" class="btn no-print" style="margin-top:16px;background:#f3f0ea;color:var(--ink);border:1px solid var(--line)" onclick="resetChecklist()">Reiniciar checks editables</button>
+      </section>
+
+      <!-- 13 -->
+      <section id="riesgos">
+        <div class="kicker">13 · Riesgos</div>
+        <h2>Qué puede fallar</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h4>No hay clic al puente</h4>
+            <p class="muted">Revisar copy, posición y relevancia. Probar paso intermedio (cobertura).</p>
+          </div>
+          <div class="card">
+            <h4>Llegan pero no suben CV</h4>
+            <p class="muted">Landing sin contexto, fricción móvil, desconfianza de privacidad.</p>
+          </div>
+          <div class="card">
+            <h4>Gratis sí, compra no</h4>
+            <p class="muted">Diferenciar valor de créditos; no empujar precio demasiado pronto.</p>
+          </div>
+          <div class="card">
+            <h4>Contenido no rankea</h4>
+            <p class="muted">Enlazar desde URLs con tráfico; tool &gt; texto largo aislado.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14 -->
+      <section id="no-hacer">
+        <div class="kicker">14 · Fuera de alcance ahora</div>
+        <h2>Acciones que este plan no recomienda</h2>
+        <ul>
+          <li>Crear una tercera marca o un portal de empleos.</li>
+          <li>Rediseñar por completo ambos sitios.</li>
+          <li>Campañas Display/YouTube genéricas o Ads a home sin landing.</li>
+          <li>Módulos premium (entrevista, seguimiento) sin señal de compra.</li>
+          <li>Prometer empleabilidad o asesoría legal personalizada.</li>
+          <li>Inventar skills o cargos en el CV “porque el ATS lo pide”.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <footer class="doc-foot">
+    <p>
+      <strong>Plan de trabajo: CalculaChile → CVListo (90 días)</strong> ·
+      Documento operativo generado 2026-07-10 ·
+      Estrategia completa: <code>docs/plan_maestro_calculachile_cvlisto_90_dias.html</code> ·
+      Editorial satélite: <code>docs/plan-editorial.md</code>
+    </p>
+    <p>Repos: CalculaChile (<code>C:\code\SaaS2\CalculaChile</code>) · CVListo (<code>C:\code\SAAS\cv-match-ai</code>).</p>
+  </footer>
+
+  <script>
+    (function () {
+      var KEY = "cc_cv_plan_trabajo_90d_checklist_v1";
+      function load() {
+        try { return JSON.parse(localStorage.getItem(KEY) || "{}"); }
+        catch (e) { return {}; }
+      }
+      function save(state) {
+        localStorage.setItem(KEY, JSON.stringify(state));
+      }
+      function apply() {
+        var state = load();
+        document.querySelectorAll(".check-list input[type=checkbox]:not([disabled])").forEach(function (input) {
+          var k = input.getAttribute("data-key");
+          if (!k) return;
+          input.checked = !!state[k];
+          input.closest(".check").classList.toggle("done", input.checked);
+          input.addEventListener("change", function () {
+            var s = load();
+            s[k] = input.checked;
+            save(s);
+            input.closest(".check").classList.toggle("done", input.checked);
+          });
+        });
+      }
+      window.resetChecklist = function () {
+        localStorage.removeItem(KEY);
+        document.querySelectorAll(".check-list input[type=checkbox]:not([disabled])").forEach(function (input) {
+          input.checked = false;
+          input.closest(".check").classList.remove("done");
+        });
+      };
+      apply();
+    })();
+  </script>
+</body>
+</html>

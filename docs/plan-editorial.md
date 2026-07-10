@@ -87,8 +87,13 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 7 | blog | Aguinaldo Fiestas Patrias 2026 (IPS + SP) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios | aguinaldo |
 | 2 | blog | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | 2026-07-11 | laboral | horas-extra |
 | 3 | blog | Sueldo mínimo 2026 $553.553 → líquido | `sueldo-minimo-2026-calcular-liquido` | 2026-07-11 | laboral | sueldo-liquido |
+| — | hub | Hub cesantía / me despidieron | `/cesantia` | 2026-07-10 | laboral | finiquito |
+| — | blog | Checklist después de un despido | `checklist-despues-despido-chile-2026` | 2026-07-10 | laboral | finiquito |
+| 31 | blog | Seguro de Cesantía + finiquito (AFC) | `seguro-cesantia-finiquito-2026-afc` | 2026-07-10 | laboral | finiquito |
+| — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
 
-**Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.
+**Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
+**Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.
 
 ---
 
@@ -129,7 +134,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 28 | blog | Indemnización años servicio tope 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | satélite finiquito | laboral | 2026-10-30 | continuo | **P2-continuo** |
 | 29 | blog | Contribuciones 4.ª cuota 30 nov | `contribuciones-cuarta-cuota-noviembre-2026` | DR[27] | vivienda | 2026-11-03 | 30 nov | **P2-ventana** |
 | 30 | blog | Aguinaldo Navidad pensionados 2026 | `aguinaldo-navidad-pensionados-2026` | — | pensión | 2026-11-10 | nov–dic | **P2-ventana** |
-| 31 | blog\* | Seguro de cesantía + finiquito (AFC) | `seguro-cesantia-finiquito-2026-afc` | DR[12] · *candidata guía* si crece | laboral | 2026-11-13 | continuo | **P2-continuo** |
+| ~~31~~ | blog\* | ~~Seguro de cesantía + finiquito (AFC)~~ | ~~`seguro-cesantia-finiquito-2026-afc`~~ | publicado 2026-07-10 + satélite cobro | laboral | ~~2026-11-13~~ | continuo | ✅ |
 | 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
 | 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026-comercio` | — | laboral | 2026-12-01 | dic | **P2-ventana** |

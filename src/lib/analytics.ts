@@ -72,4 +72,37 @@ export const trackEvents = {
   scenarioCompared: (calculatorId: string) =>
     event('scenario_compared', { calculator_id: calculatorId }),
   scenarioCount: (count: number) => event('scenario_count', { count }),
+
+  /** CTA puente CalculaChile → CVListo visible en viewport / render */
+  employmentCtaViewed: (params: {
+    calculatorId: string;
+    origin: string;
+    position: string;
+    message?: string;
+  }) =>
+    event('employment_cta_viewed', {
+      calculator_id: params.calculatorId,
+      origin: params.origin,
+      position: params.position,
+      message: params.message,
+      destination: 'cvlisto',
+    }),
+
+  /** Clic en CTA hacia CVListo */
+  employmentCtaClicked: (params: {
+    calculatorId: string;
+    origin: string;
+    position: string;
+    destination?: string;
+    experiment?: string;
+    message?: string;
+  }) =>
+    event('employment_cta_clicked', {
+      calculator_id: params.calculatorId,
+      origin: params.origin,
+      position: params.position,
+      destination: params.destination ?? 'cvlisto',
+      experiment: params.experiment,
+      message: params.message,
+    }),
 };

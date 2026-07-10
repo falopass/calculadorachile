@@ -34,6 +34,8 @@ import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
 import TocSticky from '@/components/article/TocSticky';
 import ReadingProgress from '@/components/article/ReadingProgress';
+import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 import {
   articleSchema,
   breadcrumbSchema,
@@ -406,6 +408,21 @@ export default async function GuiaPage({ params }: PageProps) {
                 );
               })}
             </div>
+
+            {/* CTA reinserción laboral (solo guías finiquito / sueldo) */}
+            {(() => {
+              const origen = resolveCvlistoContentOrigen({ guiaSlug: guia.slug });
+              if (!origen) return null;
+              return (
+                <div className="mt-12">
+                  <CrossDomainCta
+                    origen={origen}
+                    contentId={`guia:${guia.slug}`}
+                    placement="guia_footer"
+                  />
+                </div>
+              );
+            })()}
 
             {/* Calculadoras relacionadas */}
             {relatedCalcs.length > 0 && (

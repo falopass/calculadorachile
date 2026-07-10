@@ -292,6 +292,28 @@ export default function CalculatorPageClient({
         </Link>
       </p>
 
+      {/* Hub cesantía: solo cluster laboral de salida de empleo */}
+      {(calculator.id === 'finiquito' ||
+        calculator.id === 'indemnizacion-anos-servicio' ||
+        calculator.id === 'vacaciones-proporcionales') && (
+        <section className="mt-8 md:mt-10">
+          <a
+            href="/cesantia"
+            className="group block rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--color-primary-500)]/30 transition-all p-5 md:p-6"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-600)] mb-1">
+              Hub · me despidieron
+            </p>
+            <h2 className="text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--color-primary-600)]">
+              Checklist post-despido: finiquito, AFC y reinserción
+            </h2>
+            <p className="mt-1 text-sm text-[var(--foreground-secondary)]">
+              Ordena trámites y el siguiente paso (incl. preparar el CV).
+            </p>
+          </a>
+        </section>
+      )}
+
       {guideUrl && guideTitle && (
         <section className="mt-8 md:mt-10">
           <a

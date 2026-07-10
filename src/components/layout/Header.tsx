@@ -12,12 +12,14 @@ import {
   BookOpen,
   GraduationCap,
   HelpCircle,
+  Briefcase,
 } from 'lucide-react';
 
 import SiteSearch from '@/components/search/SiteSearch';
 
 const navLinks = [
   { href: '/calculadoras', label: 'Calculadoras', icon: LayoutGrid },
+  { href: '/cesantia', label: 'Cesantía', icon: Briefcase },
   { href: '/blog', label: 'Blog', icon: BookOpen },
   { href: '/guias', label: 'Guías', icon: GraduationCap },
   { href: '/faq', label: 'FAQ', icon: HelpCircle },

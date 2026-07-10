@@ -27,6 +27,7 @@ export { default as ExportMenu } from './ExportMenu';
 export { default as HistoryPanel } from './HistoryPanel';
 export { default as RelatedCalculators } from './RelatedCalculators';
 export { default as PremiumLoadingIndicator } from './PremiumLoadingIndicator';
+export { default as CrossDomainCta } from './CrossDomainCta';
 
 // Types
 export type { SelectFieldProps, SelectOption } from './SelectField';

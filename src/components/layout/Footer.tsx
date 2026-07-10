@@ -33,6 +33,7 @@ const footerLinks = {
     title: 'Recursos',
     icon: Layers,
     links: [
+      { href: '/cesantia', label: 'Me despidieron / cesantía' },
       { href: '/blog', label: 'Blog' },
       { href: '/categoria', label: 'Categorías' },
       { href: '/buscar', label: 'Buscar' },
