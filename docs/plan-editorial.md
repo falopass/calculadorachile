@@ -92,10 +92,12 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 31 | blog | Seguro de Cesantía + finiquito (AFC) | `seguro-cesantia-finiquito-2026-afc` | 2026-07-10 | laboral | finiquito |
 | — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
+| — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
-**#6 adelantado (2026-07-10):** ejemplos IMM $553.553 verificados con módulo finiquito + fuentes DT/Ley 20.684/21.830.
+**#6 adelantado (2026-07-10):** ejemplos IMM $553.553 verificados con módulo finiquito + fuentes DT/Ley 20.684/21.830.  
+**CAE embargos (2026-07-10):** post TGR + calculadora CAE con % ingreso y FAQ cobro fiscal.
 
 ---
 

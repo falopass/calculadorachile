@@ -12,11 +12,15 @@ export interface CreditoCAEInput {
   plazoMeses: number;
   tieneGarantiaEstatal: boolean;
   /**
-   * Meses de gracia antes de la 1.ª cuota (típico: estudios + ~18 m post-egreso).
-   * Solo afecta el calendario estimado; no modela subsidio de intereses real.
+   * Meses de gracia antes de la 1.ª cuota (típico: ~18 m post-egreso).
+   * Solo afecta el calendario estimado.
    */
   mesesGracia?: number;
-  /** UF opcional (live); default snapshot. */
+  /**
+   * Ingreso bruto mensual opcional: estima cuota como % del ingreso
+   * (referencia educativa al tope 10% Ley 21.605; no es tu cuota Ingresa).
+   */
+  ingresoMensualBruto?: number;
   valorUF?: number;
 }
 
@@ -27,6 +31,7 @@ export interface CreditoCAEResult {
   plazoAnios: number;
   dividendoMensual: number;
   dividendoUF: number;
+  dividendoAnual: number;
   totalIntereses: number;
   totalPago: number;
   costoCredito: number;
@@ -35,14 +40,26 @@ export interface CreditoCAEResult {
   mesesGracia: number;
   mesPrimeraCuota: number;
   valorUF: number;
+  ingresoMensualBruto: number;
+  /** Cuota estimada / ingreso × 100 (0 si no hay ingreso). */
+  cuotaSobreIngresoPct: number;
+  /** Tope referencial 10% del ingreso (si se ingresó ingreso). */
+  topeDiezPctIngreso: number;
+  /** Cuánto excedería la cuota PMT sobre el 10% (0 si no aplica). */
+  excesoSobreTopeIngreso: number;
   aviso: string;
+  avisoCobranza: string;
 }
 
 const TASA_CAE_LEGAL = CREDITO_CAE.tasa_anual_legal;
 const GARANTIA_ESTATAL_PCT = CREDITO_CAE.garantia_estatal / 100;
+const TOPE_INGRESO_PCT = 10;
 
-const AVISO_FES =
-  'Simulación educativa de cuota CAE (tasa fija en UF). No es tu estado de cuenta Ingresa ni el FES. Confirma saldo, subsidios y condonaciones en ingresa.cl.';
+const AVISO_SIMULACION =
+  'Simulación educativa de cuota (amortización francesa, tasa fija). No es estado de cuenta Ingresa ni FES. Confirma saldo y reglas de pago en ingresa.cl.';
+
+const AVISO_COBRANZA =
+  'Si hay mora y el Fisco ya pagó la garantía al banco, el cobro puede pasar a la Tesorería (TGR): convenios o embargos (cuentas, inmuebles). Revisa tgr.cl/cae. Esto no simula embargos.';
 
 function calcularPMT(monto: number, tasaMensual: number, plazoMeses: number): number {
   if (tasaMensual === 0) return monto / plazoMeses;
@@ -53,6 +70,7 @@ function calcularPMT(monto: number, tasaMensual: number, plazoMeses: number): nu
 /**
  * Estima dividendo CAE con amortización francesa a tasa fija.
  * Base: Ley 20.027 / reforma tasa 2% real anual.
+ * El tope 10% ingreso (Ley 21.605) se muestra solo como comparación educativa.
  */
 export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
   const {
@@ -61,6 +79,7 @@ export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
     plazoMeses,
     tieneGarantiaEstatal,
     mesesGracia = 0,
+    ingresoMensualBruto = 0,
     valorUF = UF.valor,
   } = input;
 
@@ -69,6 +88,7 @@ export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
   const plazoValido = Math.max(1, Math.round(plazoMeses));
   const gracia = Math.max(0, Math.round(mesesGracia));
   const uf = valorUF > 0 ? valorUF : UF.valor;
+  const ingreso = Math.max(0, ingresoMensualBruto);
 
   const tasaMensual = tasaValida / 100 / 12;
   const dividendoMensual = calcularPMT(montoValido, tasaMensual, plazoValido);
@@ -81,15 +101,26 @@ export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
   const montoGarantiaEstatal = tieneGarantiaEstatal
     ? montoValido * GARANTIA_ESTATAL_PCT
     : 0;
+  const dividendoMensualRound = Math.round(dividendoMensual);
   const dividendoUF = uf > 0 ? dividendoMensual / uf : 0;
+  const dividendoAnual = dividendoMensualRound * 12;
+
+  const topeDiezPctIngreso = ingreso > 0 ? ingreso * (TOPE_INGRESO_PCT / 100) : 0;
+  const cuotaSobreIngresoPct =
+    ingreso > 0 ? Math.round((dividendoMensual / ingreso) * 1000) / 10 : 0;
+  const excesoSobreTopeIngreso =
+    ingreso > 0 && dividendoMensual > topeDiezPctIngreso
+      ? Math.round(dividendoMensual - topeDiezPctIngreso)
+      : 0;
 
   return {
     montoCredito: Math.round(montoValido),
     tasaAnual: tasaValida,
     plazoMeses: plazoValido,
     plazoAnios: Math.round((plazoValido / 12) * 10) / 10,
-    dividendoMensual: Math.round(dividendoMensual),
+    dividendoMensual: dividendoMensualRound,
     dividendoUF: Math.round(dividendoUF * 1000) / 1000,
+    dividendoAnual,
     totalIntereses: Math.round(totalIntereses),
     totalPago: Math.round(totalPago),
     costoCredito,
@@ -98,14 +129,19 @@ export function calculateCreditoCAE(input: CreditoCAEInput): CreditoCAEResult {
     mesesGracia: gracia,
     mesPrimeraCuota: gracia + 1,
     valorUF: uf,
-    aviso: AVISO_FES,
+    ingresoMensualBruto: Math.round(ingreso),
+    cuotaSobreIngresoPct,
+    topeDiezPctIngreso: Math.round(topeDiezPctIngreso),
+    excesoSobreTopeIngreso,
+    aviso: AVISO_SIMULACION,
+    avisoCobranza: AVISO_COBRANZA,
   };
 }
 
 export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[] {
-  return [
+  const results: CalculatorResult[] = [
     {
-      label: 'Dividendo mensual estimado',
+      label: 'Dividendo mensual estimado (PMT)',
       value: result.dividendoMensual,
       format: 'CLP',
       highlight: true,
@@ -114,6 +150,11 @@ export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[
       label: 'Dividendo en UF (ref.)',
       value: result.dividendoUF,
       format: 'UF',
+    },
+    {
+      label: 'Carga anual de cuotas (×12)',
+      value: result.dividendoAnual,
+      format: 'CLP',
     },
     {
       label: 'Total a pagar (solo período de cuotas)',
@@ -137,7 +178,7 @@ export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[
       format: 'CLP',
     },
     {
-      label: `Garantía estatal (${CREDITO_CAE.garantia_estatal}%)`,
+      label: `Garantía estatal mostrada (${CREDITO_CAE.garantia_estatal}%)`,
       value: result.montoGarantiaEstatal,
       format: 'CLP',
     },
@@ -177,4 +218,34 @@ export function creditoCAEToResults(result: CreditoCAEResult): CalculatorResult[
       format: 'number',
     },
   ];
+
+  if (result.ingresoMensualBruto > 0) {
+    results.push(
+      {
+        label: 'Ingreso bruto mensual (tu dato)',
+        value: result.ingresoMensualBruto,
+        format: 'CLP',
+      },
+      {
+        label: 'Cuota PMT como % del ingreso',
+        value: result.cuotaSobreIngresoPct,
+        format: 'percentage',
+        highlight: result.cuotaSobreIngresoPct > 10,
+      },
+      {
+        label: 'Tope ref. 10% del ingreso (Ley 21.605)',
+        value: result.topeDiezPctIngreso,
+        format: 'CLP',
+      },
+    );
+    if (result.excesoSobreTopeIngreso > 0) {
+      results.push({
+        label: 'Exceso de la cuota PMT sobre el 10%',
+        value: result.excesoSobreTopeIngreso,
+        format: 'CLP',
+      });
+    }
+  }
+
+  return results;
 }

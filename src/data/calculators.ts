@@ -1452,20 +1452,21 @@ export const calculators: Calculator[] = [
     id: 'credito-cae',
     name: 'Calculadora CAE (Crédito Aval Estado)',
     description:
-      'Simula dividendo CAE a tasa 2%: total, intereses, UF, garantía 90% y meses de gracia. No es FES ni estado de cuenta Ingresa.',
+      'Simula dividendo CAE a tasa 2% (PMT): UF, gracia, % del ingreso y garantía 90%. Aviso TGR si hay mora fiscal. No es Ingresa ni embargos.',
     slug: 'calculadora-credito-cae',
     category: 'educacion',
     featured: true,
     phase: 2,
     lastReviewed: '2026-07-10',
     sources: [
-      { name: 'MINEDUC', url: 'https://www.mineduc.cl', note: 'Crédito con Aval del Estado (CAE)' },
       { name: 'Ingresa / Comisión Ingresa', url: 'https://www.ingresa.cl', note: 'Administración y pagos del CAE' },
-      { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl', note: 'Beneficios estudiantiles' },
+      { name: 'TGR — CAE', url: 'https://tgr.gob.cl', note: 'Cobro fiscal de deudas CAE morosas (tgr.cl/cae)' },
+      { name: 'MINEDUC', url: 'https://www.mineduc.cl', note: 'Crédito con Aval del Estado' },
+      { name: 'BCN — Ley 20.027', url: 'https://www.bcn.cl/leychile/navegar?idNorma=240080', note: 'Ley del CAE' },
     ],
-    seoTitle: 'Simulador CAE 2026: calcula tu cuota | Tasa 2%',
+    seoTitle: 'Simulador CAE 2026: cuota, UF y % del ingreso',
     seoDescription:
-      'Simula el CAE: cuota mensual, total, UF y plazo 10–20 años. Tasa fija 2% (no es FES). Gratis y referencial.',
+      'Simula cuota CAE a tasa 2%: total, UF, gracia y cuota vs ingreso. Aviso cobro TGR 2026. No es FES ni embargo. Gratis.',
     keywords: [
       'calculadora CAE',
       'simulador CAE 2026',
@@ -1473,8 +1474,10 @@ export const calculators: Calculator[] = [
       'crédito aval estado',
       'dividendo CAE',
       'cae tasa 2%',
+      'embargo CAE TGR',
       'cae vs fes',
       'condonación CAE',
+      'deuda CAE tesorería',
     ],
     inputs: [
       {
@@ -1485,7 +1488,8 @@ export const calculators: Calculator[] = [
         placeholder: '$15.000.000',
         required: true,
         min: 0,
-        tooltip: 'Capital que simulas pagar en cuotas. El CAE real se administra en UF; aquí conviertes el dividendo a UF con el valor del sitio.',
+        tooltip:
+          'Capital que simulas en cuotas. El CAE real se administra en UF; el dividendo se expresa también en UF con el valor del sitio.',
       },
       {
         id: 'tasaAnual',
@@ -1519,7 +1523,18 @@ export const calculators: Calculator[] = [
         max: 120,
         defaultValue: 18,
         tooltip:
-          'Educativo: p. ej. 18 meses post-egreso. No modela subsidio de intereses real ni capitalización completa del período de estudios.',
+          'Educativo (p. ej. ~18 meses post-egreso). No modela subsidio de intereses real del período de estudios.',
+      },
+      {
+        id: 'ingresoMensualBruto',
+        label: 'Ingreso bruto mensual (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.200.000',
+        required: false,
+        min: 0,
+        tooltip:
+          'Si lo completas, comparamos la cuota PMT con el 10% del ingreso (referencia Ley 21.605). Tu cuota contractual la define Ingresa, no este % automático.',
       },
       {
         id: 'tieneGarantiaEstatal',
@@ -1527,34 +1542,45 @@ export const calculators: Calculator[] = [
         type: 'boolean',
         required: false,
         defaultValue: true,
-        tooltip: 'En el esquema CAE el Estado garantiza hasta el 90% del crédito. Es informativo, no un descuento de tu cuota.',
+        tooltip:
+          'Informativo: el Estado puede garantizar hasta el 90%. No es un descuento de tu cuota. Si hay mora y se activa la garantía, el Fisco puede cobrar vía TGR.',
       },
     ],
     faq: [
       {
         question: '¿Qué calcula exactamente esta página?',
         answer:
-          'Una amortización francesa con tasa fija (default 2%), plazo y capital. Entrega dividendo en pesos y UF, total de intereses y un calendario estimado de 1.ª cuota según meses de gracia. No reemplaza el portal Ingresa.',
+          'Una amortización francesa (PMT) con tasa fija (default 2%), plazo y capital: dividendo en pesos y UF, intereses, gracia estimada y, si ingresas sueldo, la cuota como % del ingreso. No reemplaza Ingresa ni la cartola TGR.',
       },
       {
-        question: '¿Es lo mismo que el FES / pago al % del sueldo?',
+        question: '¿Por qué mi cuota en Ingresa puede ser distinta al PMT?',
+        answer:
+          'Porque pueden aplicar tope por ingreso (referencia 10% del bruto en regímenes de la Ley 21.605), diferidos, reprogramaciones o subsidios. El PMT es el “dividendo teórico” del capital; la cuota contractual la define Ingresa/acreedor.',
+      },
+      {
+        question: '¿Qué pasa si dejo de pagar el CAE? ¿Me embarga la TGR?',
+        answer:
+          'Si acumulas mora, el banco puede hacer efectiva la garantía estatal: el Fisco paga al banco y la TGR cobra la deuda fiscal. En 2026 la TGR anunció embargos y retenciones (cuentas, inversiones, vehículos, bienes raíces) tras notificaciones, con foco en morosos de mayores ingresos y convenios para otros tramos. Revisa tgr.cl/cae y el artículo del blog sobre embargos CAE 2026. Esta calculadora no simula embargos.',
+      },
+      {
+        question: '¿Ingresos sobre $5 millones: sin convenio?',
+        answer:
+          'Según comunicados TGR de abril 2026, el cobro a morosos con ingresos mensuales superiores a $5 millones se orientó a acciones más directas, sin acceso a los convenios pensados para ingresos menores. Las reglas exactas y actualizaciones: TGR.',
+      },
+      {
+        question: '¿Es lo mismo que el FES?',
         answer:
           'No. El CAE es crédito con tasa fija en UF. El FES u otros esquemas contingentes al ingreso son distintos. Esta herramienta no simula FES.',
       },
       {
-        question: '¿Cuándo se empieza a pagar el CAE?',
-        answer:
-          'En el esquema general suele ser tras egresar más un período de gracia (a menudo ~18 meses). Usa el campo “meses de gracia” solo como referencia; tu fecha exacta está en Ingresa.',
-      },
-      {
         question: '¿Puede condonarse el saldo al final del plazo?',
         answer:
-          'Según reglas del programa puede haber condonación del saldo al cumplir el plazo máximo. Condiciones y excepciones: Ingresa / normativa vigente. No lo descuenta esta calculadora.',
+          'Según reglas del programa puede haber condonación del saldo al cumplir el plazo máximo (p. ej. 20 años). Condiciones: Ingresa / normativa. No se descuenta aquí.',
       },
       {
-        question: '¿Qué pasa si no puedo pagar?',
+        question: '¿Dónde regularizo si me notificó la TGR?',
         answer:
-          'Contacta Ingresa / tu acreedor por reprogramación o beneficios. La cuota del CAE no se recalcula sola como % de tu sueldo.',
+          'En tgr.cl/cae (ClaveÚnica / clave tributaria), Formulario 34 y canales TGR. Si el cobro aún es bancario/Ingresa, usa ingresa.cl. No firmes ni pagues sin identificar al acreedor correcto.',
       },
     ],
   },

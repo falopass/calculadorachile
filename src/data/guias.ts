@@ -1436,7 +1436,7 @@ export const guias: Guia[] = [
       'INGRESA',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
+    updatedAt: '2026-07-10',
     readingTime: 12,
     relatedCalculators: [
       'calculadora-credito-cae',
@@ -1444,11 +1444,13 @@ export const guias: Guia[] = [
       'calculadora-intereses-mora',
     ],
     relatedArticles: [
+      'embargos-cae-tgr-2026-cuentas-bienes-raices',
       'cae-renegociacion-condonacion-2026',
       'todo-sobre-uf-chile',
     ],
     sources: [
       { label: 'Comisión INGRESA', url: 'https://www.ingresa.cl' },
+      { label: 'TGR — cobro CAE', url: 'https://tgr.cl/cae' },
       { label: 'Ministerio de Educación', url: 'https://www.mineduc.cl' },
       { label: 'Ley 20.027 (CAE original)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=240080' },
     ],

@@ -41,11 +41,17 @@ export const seoOverrides: Record<
       'Agrega o quita el IVA del 19% en segundos. Ejemplo: $100.000 neto = $119.000 con IVA. Gratis, sin registro. Datos SII / DL 825.', // 128
   },
 
-  // --- CAE: buscada, hay que capturar más queries (simulador, cuota, tasa) ---
+  // --- CAE: simulador + cobro TGR en blog hermano ---
   'calculadora-credito-cae': {
-    seoTitle: 'Simulador CAE 2026: calcula tu cuota | Tasa 2%', // 48
+    seoTitle: 'Simulador CAE 2026: cuota, UF y % del ingreso', // 50
     seoDescription:
-      'Simula el Crédito con Aval del Estado: cuota mensual, total a pagar y plazo 10–20 años. Tasa fija 2% en UF. CAE vigente 2026 (no es FES). Gratis.', // 148
+      'Simula cuota CAE a tasa 2%: total, UF, gracia y cuota vs ingreso. Aviso cobro TGR. No es FES ni embargo. Gratis.', // 118
+  },
+
+  'embargos-cae-tgr-2026-cuentas-bienes-raices': {
+    seoTitle: 'Embargos CAE 2026: TGR, cuentas y bienes raíces', // 52
+    seoDescription:
+      'Cómo la TGR cobró deudas CAE morosas en 2026: cuentas, inmuebles, convenios y tramo >$5 millones. Fuentes oficiales.', // 128
   },
 
   // --- #1 del día en clics: defender y afinar ---

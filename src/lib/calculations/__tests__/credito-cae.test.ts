@@ -81,6 +81,19 @@ describe('calculateCreditoCAE', () => {
     expect(r.mesesGracia).toBe(18);
     expect(r.mesPrimeraCuota).toBe(19);
     expect(r.dividendoUF).toBeGreaterThan(0);
+    expect(r.dividendoAnual).toBe(r.dividendoMensual * 12);
+  });
+
+  it('con ingreso bruto compara cuota PMT vs tope 10%', () => {
+    const r = calculateCreditoCAE({
+      montoCredito: 15_000_000,
+      plazoMeses: 180,
+      tieneGarantiaEstatal: true,
+      ingresoMensualBruto: 1_000_000,
+    });
+    expect(r.topeDiezPctIngreso).toBe(100_000);
+    expect(r.cuotaSobreIngresoPct).toBeGreaterThan(0);
+    expect(r.avisoCobranza).toContain('TGR');
   });
 
   it('aviso menciona FES / Ingresa (no es estado de cuenta)', () => {

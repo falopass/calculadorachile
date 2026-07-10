@@ -56,6 +56,176 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: 'embargos-cae-tgr-2026-cuentas-bienes-raices',
+    title:
+      'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
+    description:
+      'Cómo la Tesorería cobró deudas CAE morosas en 2026: notificaciones, convenios, embargos de cuentas y bienes raíces, tramos de ingreso y debate legal. Fuentes TGR y guía práctica.',
+    date: '2026-07-10',
+    updatedAt: '2026-07-10',
+    category: 'educacion',
+    readingTime: 14,
+    relatedGuia: 'credito-cae-educacion-chile',
+    seoTitle: 'Embargos CAE 2026: TGR, cuentas y bienes raíces',
+    seoDescription:
+      'Embargos y retenciones por CAE moroso en 2026: cuentas, inmuebles, convenios TGR y tramo >$5 millones. Fuentes oficiales y qué hacer si te notifican.',
+    keywords: [
+      'embargo CAE 2026',
+      'TGR embargos CAE',
+      'embargo cuentas bancarias CAE',
+      'embargo bienes raíces CAE',
+      'deuda CAE Tesorería',
+      'tgr.cl/cae',
+      'convenio pago CAE TGR',
+      'cobro fiscal CAE',
+      'garantía estatal CAE mora',
+      'remate judicial CAE',
+    ],
+    relatedCalculators: [
+      'calculadora-credito-cae',
+      'calculadora-uf-clp',
+      'calculadora-sueldo-liquido',
+      'calculadora-intereses-mora',
+    ],
+    faq: [
+      {
+        question: '¿Puede la TGR embargar mi cuenta por el CAE?',
+        answer:
+          'Según la Tesorería, cuando la deuda CAE está en mora y el Fisco ya asumió el cobro (garantía estatal pagada al banco), puede aplicar retenciones y embargos de activos financieros, incluidas cuentas bancarias, depósitos y fondos mutuos, conforme a la normativa que invoca. No aplica al CAE al día con el banco/Ingresa.',
+      },
+      {
+        question: '¿También embargan bienes raíces?',
+        answer:
+          'Sí. El 4 de junio de 2026 la TGR informó el inicio de embargos sobre bienes raíces a deudores CAE que no regularizaron tras notificaciones, partiendo por Antofagasta, La Araucanía y Los Lagos, con extensión al resto del país, e incluso advirtió posible remate judicial si no se regulariza.',
+      },
+      {
+        question: '¿Quiénes quedaron sin convenio de pago?',
+        answer:
+          'En el diseño anunciado en abril 2026, los morosos con ingresos mensuales superiores a $5 millones no accedían a los convenios pensados para ingresos menores; se orientó cobro más directo. Confirma reglas vigentes en tgr.cl/cae.',
+      },
+      {
+        question: '¿Es lo mismo que el cobro de Ingresa o del banco?',
+        answer:
+          'No. Ingresa/banco administran el crédito vigente. La TGR actúa cuando la deuda ya es de cobro fiscal tras la garantía estatal. Identifica en la notificación quién es el acreedor antes de pagar o firmar.',
+      },
+      {
+        question: '¿El cobro por la TGR es pacífico en tribunales?',
+        answer:
+          'Hay debate: la TGR y parte de la doctrina lo tratan como crédito fiscal; críticos sostienen que el CAE es crédito civil y cuestionan el uso de facultades tipo Código Tributario. Han existido recursos de protección y discusiones en cortes. No es asesoría: consulta un abogado si te embargaron.',
+      },
+    ],
+    content: `<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Qué es (y qué no es) este artículo</strong><p>Es una <strong>síntesis periodística y normativa de 2026</strong> a partir de comunicados de la <strong>Tesorería General de la República (TGR)</strong> y cobertura confiable. <strong>No es asesoría legal</strong> ni un listado de quién será embargado. Si recibiste notificación o retención, prioriza <a href="https://tgr.gob.cl" target="_blank" rel="noopener">TGR</a> / <a href="https://tgr.cl/cae" target="_blank" rel="noopener">tgr.cl/cae</a> y un abogado.</p></div></aside>
+
+<p>En 2026, miles de personas con <strong>Crédito con Aval del Estado (CAE)</strong> en mora vieron algo que antes parecía lejano: la <strong>Tesorería</strong> cobrando como si el Estado fuera el acreedor — y, en etapas sucesivas, <strong>reteniendo fondos en cuentas</strong> y <strong>embargando bienes raíces</strong>. Si buscas <em>embargo CAE</em>, <em>TGR cuentas bancarias</em> o <em>embargo inmueble CAE</em>, este texto ordena la cronología, el mecanismo y las fuentes oficiales.</p>
+
+<p>Para simular una <strong>cuota teórica</strong> (no un embargo), usa la <a href="/calculadoras/calculadora-credito-cae">calculadora / simulador CAE</a>. Para el régimen de pago y renegociación en Ingresa, ve también <a href="/blog/cae-renegociacion-condonacion-2026">CAE 2026: cuota, renegociación y condonación</a> y la <a href="/guias/credito-cae-educacion-chile">guía pillar del CAE</a>.</p>
+
+<h2>1. La pregunta correcta: ¿deuda al banco o deuda al Fisco?</h2>
+<p>El CAE nace como financiamiento estudiantil con <strong>garantía del Estado</strong> (marco de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a>). Mientras pagas al día, tu contraparte operativa suele ser el <strong>banco</strong> y/o <strong>Comisión Ingresa</strong>.</p>
+<p>La situación cambia si hay <strong>mora grave</strong> y el banco <strong>hace efectiva la garantía</strong>:</p>
+<ol class="steps">
+<li>Dejas de pagar cuotas al acreedor bancario.</li>
+<li>El <strong>Fisco paga al banco</strong> (o parte de la deuda) por la garantía.</li>
+<li>El <strong>Estado pasa a ser acreedor</strong> de esa obligación.</li>
+<li>La <strong>TGR</strong> cobra para recuperar recursos fiscales.</li>
+</ol>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>No es “todo el CAE del país”</strong><p>Tener CAE <strong>no implica</strong> embargo. El foco de los comunicados TGR es la <strong>mora ya fiscalizada</strong> y la no regularización tras notificaciones. Un egresado al día con Ingresa no es el mismo caso que un moroso en cobro TGR.</p></div></aside>
+
+<h2>2. Cronología 2026 (fuente TGR)</h2>
+<table>
+<thead>
+<tr><th>Fecha</th><th>Hito (resumen)</th><th>Fuente</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6 abr 2026</strong></td>
+<td>TGR anuncia proceso de cobro de deudas CAE; stock de deuda del orden de <strong>$4 billones</strong> (dato 2025 en el comunicado) y <strong>+550 mil</strong> personas en mora. Cobro <strong>segmentado por ingresos</strong>.</td>
+<td><a href="https://tgr.gob.cl/2026/04/06/tgr-inicia-proceso-de-cobro-a-deudores-cae-y-refuerza-alternativas-para-regularizar-su-situacion/noticias/" target="_blank" rel="noopener">TGR 6-abr</a></td>
+</tr>
+<tr>
+<td><strong>1–6 abr 2026</strong></td>
+<td><strong>Convenios</strong> para ingresos mensuales <strong>menores a $5 millones</strong> (deuda ≥ 1 UTM en el diseño anunciado). Canal <strong>tgr.cl/cae</strong>.</td>
+<td>Mismo comunicado</td>
+</tr>
+<tr>
+<td><strong>6 abr 2026</strong></td>
+<td>Morosos con ingresos <strong>sobre $5 millones</strong>: cobro con acciones más directas, <strong>sin acceso a esos convenios</strong> (según el anuncio).</td>
+<td>Mismo comunicado</td>
+</tr>
+<tr>
+<td><strong>23 abr 2026</strong></td>
+<td>Inicio de <strong>embargos y retenciones</strong> a tramo de mayores ingresos: cuentas, DAP, fondos mutuos; también inmuebles y vehículos. Universo inicial citado: <strong>1.340 casos</strong>.</td>
+<td><a href="https://tgr.gob.cl/2026/04/23/tgr-inicia-embargos-y-retenciones-a-deudores-cae-con-ingresos-sobre-5-millones/noticias/" target="_blank" rel="noopener">TGR 23-abr</a></td>
+</tr>
+<tr>
+<td><strong>4 jun 2026</strong></td>
+<td>Inicio de <strong>embargos de bienes raíces</strong> a quienes no regularizaron. Primeras regiones: <strong>Antofagasta, La Araucanía, Los Lagos</strong>; extensión al resto del país. Advertencia de posible <strong>remate judicial</strong>.</td>
+<td><a href="https://tgr.gob.cl/2026/06/04/tgr-inicia-embargos-de-bienes-raices-a-deudores-del-credito-con-aval-del-estado/noticias/" target="_blank" rel="noopener">TGR 4-jun</a></td>
+</tr>
+</tbody>
+</table>
+<p>En balances de recaudación de abril, la TGR reportó cifras del orden de <strong>más de $20 mil millones</strong> en estrategias de cobro 2026 hasta ese corte, <strong>más de 7.500 convenios</strong> y montos de regularización del mes de abril en miles de millones de pesos (detalle en el comunicado del 23 de abril).</p>
+
+<h2>3. Qué bienes ha mencionado la TGR</h2>
+<ul class="data-grid">
+<li><span class="data-grid__label">Cuentas y dinero</span><span class="data-grid__value">Cuentas bancarias, retenciones</span></li>
+<li><span class="data-grid__label">Inversiones</span><span class="data-grid__value">DAP, fondos mutuos y similares</span></li>
+<li><span class="data-grid__label">Muebles relevantes</span><span class="data-grid__value">Vehículos (citados en abr-2026)</span></li>
+<li><span class="data-grid__label">Inmuebles</span><span class="data-grid__value">Bienes raíces + posible remate</span></li>
+</ul>
+<p>La ley de cobro ejecutivo protege ciertos bienes y montos (el detalle es casuístico). En redes circulan relatos de <strong>cuentas en cero</strong>; eso no sustituye la notificación formal ni el listado de bienes inembargables. Tras pagar, la TGR describe trámites de <strong>alzamiento</strong> de embargo en su sitio de cobranza.</p>
+
+<h2>4. Tramos de ingreso: $5 millones y el relato de $3,5 millones</h2>
+<p>En <strong>abril</strong>, la línea dura del comunicado oficial fue <strong>ingresos mensuales superiores a $5 millones</strong> (sin convenio de ese paquete).</p>
+<p>En <strong>junio</strong>, la cobertura de prensa (p. ej. Emol / El Mercurio citando a TGR) indicó que la mayor parte de los embargos ejecutados recaía en deudores con ingresos <strong>iguales o superiores a $3,5 millones</strong>, y cifras del orden de <strong>más de 1.500 personas embargadas</strong> en un corte de ese mes. Usa esas cifras como <strong>contexto mediático</strong>; el diseño operativo exacto puede actualizarse en TGR.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Ingresos según Operación Renta</strong><p>Los tramos de convenio se anclaron a información de renta (p. ej. Operación Renta del año anterior). Cesantía o falta de F22: la TGR indicó vías para acreditar situación en Oficina Virtual. Ver siempre el instructivo vigente en <strong>tgr.cl/cae</strong>.</p></div></aside>
+
+<h2>5. Debate legal: ¿crédito fiscal o crédito civil?</h2>
+<p>Aquí no hay un “sí/no” simple en un solo tuit:</p>
+<ul>
+<li><strong>TGR y Gobierno</strong> sostienen que actúan con atribuciones legales para recuperar recursos fiscales ya desembolsados por la garantía (el Estado gasta cientos de millones de dólares al año cubriendo impagos a bancos, según declaraciones de Hacienda en prensa).</li>
+<li><strong>Críticos</strong> argumentan que el CAE es en origen un <strong>crédito comercial/civil</strong> y que usar un procedimiento tipo <strong>Código Tributario</strong> (más expedito, con menos defensas que un juicio civil clásico) es cuestionable. Han existido recursos de protección; algunas cortes han rechazado pretensiones de deudores (p. ej. Corte de Apelaciones de Arica, Rol 300-2026, citada en prensa como respaldo del actuar TGR).</li>
+<li>También hay menciones de presentaciones al <strong>Tribunal Constitucional</strong> por afectados.</li>
+</ul>
+<p><strong>Conclusión práctica para el lector:</strong> la TGR <strong>está cobrando y embargando</strong> en 2026; al mismo tiempo <strong>hay litigio y crítica jurídica</strong>. No asumas ilegalidad universal ni legitimidad absoluta sin un abogado de tu caso.</p>
+
+<h2>6. Qué hacer si te notificaron o te retuvieron fondos</h2>
+<ol class="steps">
+<li><strong>Identifica al acreedor</strong> en la cartola o citación: ¿TGR, banco o Ingresa?</li>
+<li><strong>Consulta tu deuda</strong> en <a href="https://tgr.cl/cae" target="_blank" rel="noopener">tgr.cl/cae</a> (ClaveÚnica / clave tributaria) y, si aplica, Formulario 34 / cartola TGR.</li>
+<li><strong>No ignores plazos</strong> de regularización o comparecencia que indique el documento.</li>
+<li><strong>Evalúa convenio</strong> solo si calificas (tramos de ingreso del diseño TGR).</li>
+<li><strong>Guarda capturas</strong> de saldos, notificaciones y comprobantes de pago.</li>
+<li><strong>Asesoría:</strong> si embargaron sueldo/cuenta/inmueble, un abogado (defensa de deudores / civil / administrativo) puede revisar excepciones y alzamientos.</li>
+</ol>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Estafas</strong><p>No pagues a terceros que te escriban por WhatsApp “por el CAE”. Usa solo dominios oficiales (<strong>tgr.gob.cl</strong> / <strong>tgr.cl</strong>, <strong>ingresa.cl</strong>) y ClaveÚnica.</p></div></aside>
+
+<h2>7. Cómo se relaciona con la calculadora de cuota</h2>
+<p>La <a href="/calculadoras/calculadora-credito-cae">calculadora CAE de CalculaChile</a> estima un <strong>dividendo teórico (PMT)</strong> a tasa 2%, plazo, gracia y opcionalmente tu cuota como <strong>% del ingreso</strong> (comparación educativa con el tope del 10% del bruto en regímenes de la Ley 21.605). Eso sirve para planificar y entender órdenes de magnitud.</p>
+<p><strong>No calcula:</strong> embargos, remates, montos de retención en cuenta, ni si estás en la nómina TGR. Esas son etapas de <strong>cobranza fiscal</strong>, no de simulación de arancel.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo educativo (no es tu caso TGR)</div><ul>
+<li>Capital simulado $15.000.000 · tasa 2% · 180 meses → dividendo PMT del orden de cientos de miles de pesos (usa la calculadora con la UF del día).</li>
+<li>Si tu bruto es $1.200.000, el 10% son $120.000: la calculadora te muestra si el PMT supera ese tope de referencia.</li>
+<li>Si ya estás en cobro TGR, el número relevante es el de la <strong>cartola fiscal</strong>, no el PMT del blog.</li>
+</ul><span class="total">Simula aquí · regulariza allá (Ingresa o TGR)</span></div>
+
+<h2>8. Preguntas frecuentes de búsqueda</h2>
+<p><strong>¿Me pueden quitar la casa por el CAE?</strong> La TGR ha anunciado embargos de bienes raíces y la posibilidad de remate si no hay regularización. Que embarguen no es automáticamente remate inmediato; el proceso tiene etapas. Fuente: comunicado 4 jun 2026.</p>
+<p><strong>¿Me pueden vaciar la cuenta del sueldo?</strong> La TGR ha incluido retenciones/embargos de activos financieros. Hay protecciones legales y debate sobre el procedimiento; el caso concreto requiere revisión profesional.</p>
+<p><strong>¿Esto lo inventó solo el gobierno 2026?</strong> El CAE y la garantía estatal son anteriores. Lo que se intensificó en 2026, según comunicados y coberturas, es la <strong>estrategia de cobro TGR</strong> (segmentación, convenios, embargos de cuentas e inmuebles) bajo la administración vigente ese año.</p>
+
+<h2>9. Fuentes oficiales y de contexto</h2>
+<ul>
+<li><a href="https://tgr.gob.cl/2026/04/06/tgr-inicia-proceso-de-cobro-a-deudores-cae-y-refuerza-alternativas-para-regularizar-su-situacion/noticias/" target="_blank" rel="noopener">TGR — inicio proceso de cobro CAE (6 abr 2026)</a></li>
+<li><a href="https://tgr.gob.cl/2026/04/23/tgr-inicia-embargos-y-retenciones-a-deudores-cae-con-ingresos-sobre-5-millones/noticias/" target="_blank" rel="noopener">TGR — embargos y retenciones &gt;$5 millones (23 abr 2026)</a></li>
+<li><a href="https://tgr.gob.cl/2026/06/04/tgr-inicia-embargos-de-bienes-raices-a-deudores-del-credito-con-aval-del-estado/noticias/" target="_blank" rel="noopener">TGR — embargos de bienes raíces (4 jun 2026)</a></li>
+<li><a href="https://tgr.cl/cae" target="_blank" rel="noopener">Portal tgr.cl/cae</a> · <a href="https://www.ingresa.cl" target="_blank" rel="noopener">Ingresa</a></li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027 (CAE)</a> · <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605</a> (reglas de pago / reprogramación según texto vigente)</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo actualizado a julio 2026. No es dictamen de la TGR, Ingresa, MINEDUC ni un tribunal. Montos, tramos y plazos pueden cambiar. Prevalecen la notificación oficial y la normativa vigente. CalculaChile no gestiona embargos ni pagos.</p></div></aside>
+<p>Para profundizar: <a href="/calculadoras/calculadora-credito-cae">simulador de cuota CAE</a> · <a href="/blog/cae-renegociacion-condonacion-2026">renegociación y condonación</a> · <a href="/guias/credito-cae-educacion-chile">guía CAE</a> · <a href="/calculadoras/calculadora-sueldo-liquido">sueldo líquido</a> (para contrastar carga de cuota vs ingreso).</p>`,
+  },
+  {
     slug: 'finiquito-2026-ejemplo-sueldo-minimo',
     title:
       'Finiquito 2026 con sueldo mínimo $553.553: ejemplos de despido y renuncia',
@@ -2439,6 +2609,7 @@ export const articles: Article[] = [
 <h2>Si te quedaste sin pagar: el Registro de Morosidad</h2>
 <p>Estar en el Registro de Morosidad CAE tiene consecuencias serias: aparecen en boletín comercial, retención automática del 50% de devolución de impuestos vía SII y no pueden renovar pasaporte ni licencia de conducir hasta acordar pago. Para salir del registro hay que pagar al menos 6 meses consecutivos sin atrasos.</p>
 <p>Calcula tu cuota actual y simula renegociaciones con la <a href="/calculadoras/calculadora-credito-cae">calculadora de crédito CAE</a>. Para estimar mora si estás atrasado, usa la <a href="/calculadoras/calculadora-intereses-mora">calculadora de intereses por mora</a>.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Cobro TGR 2026</strong><p>Si la mora ya pasó a cobro fiscal (garantía estatal), la Tesorería puede retener cuentas o embargar inmuebles. Detalle y fuentes oficiales: <a href="/blog/embargos-cae-tgr-2026-cuentas-bienes-raices">embargos CAE TGR 2026</a> y <a href="https://tgr.cl/cae" target="_blank" rel="noopener">tgr.cl/cae</a>.</p></div></aside>
 <p>Fuentes: <a href="https://www.ingresa.cl" target="_blank" rel="noopener">Comisión INGRESA</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=1196118" target="_blank" rel="noopener">Ley 21.605</a>, <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a> (CAE original).</p>`,
   },
   {

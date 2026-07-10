@@ -448,6 +448,7 @@ export async function loadCalculationFn(
           plazoMeses: coerceNumber(inputs.plazoMeses),
           tieneGarantiaEstatal: coerceBool(inputs.tieneGarantiaEstatal, true),
           mesesGracia: coerceNumber(inputs.mesesGracia, 0),
+          ingresoMensualBruto: coerceNumber(inputs.ingresoMensualBruto, 0),
           valorUF: live?.valorUF,
         });
         return creditoCAEToResults(result);
