@@ -1,11 +1,11 @@
 # Contexto operativo — CalculaChile
 
-**Un solo archivo** para producto + YMYL + Grok Build.  
+**Un solo archivo** para producto + YMYL + operación con Codex.
 Constitución del repo: [`AGENTS.md`](../AGENTS.md).  
 Plan de posts: [`plan-editorial.md`](./plan-editorial.md).  
 Research: [`research/`](./research/).
 
-**Última actualización:** 2026-07-10
+**Última actualización:** 2026-07-13
 
 ---
 
@@ -18,7 +18,7 @@ Research: [`research/`](./research/).
 | Vertical | **YMYL** (laboral / tributario / previsional / financiero) |
 | Monetización | AdSense + SEO orgánico |
 | Deploy | Vercel |
-| Harness | **Grok Build** (`grok-build`) — no pymes, no OpenCode como flujo principal |
+| Harness | **Codex** — configuración versionada, sin workflow de pymes |
 
 **No es:** local business, e-commerce, SaaS con login, web de pyme.
 
@@ -95,12 +95,11 @@ data/articles.ts                 → blog /blog/{slug}
 
 ---
 
-## 4. Grok Build (arranque)
+## 4. Codex (arranque)
 
 ```powershell
-cd C:\code\SaaS2\CalculaChile
-grok
-# primera vez: /hooks-trust
+cd C:\code\ecosistema-chile\CalculaChile
+codex
 ```
 
 | Pieza | Path |
@@ -109,10 +108,11 @@ grok
 | Este archivo | `docs/contexto.md` |
 | Plan posts | `docs/plan-editorial.md` |
 | Research | `docs/research/*` |
-| Skills locales | `.grok/skills/` (gitignored) |
-| Slash | `/ymyl-audit` `/ship-check` `/nueva-calc` `/seo-fix` `/p0-wiring` |
+| Configuración | `.codex/config.toml` |
+| Agentes | `.codex/agents/*.toml` |
+| Skills | `.agents/skills/` |
 
-Config usuario (`~/.grok/config.toml`): `models.default = "grok-build"`, memory on, skills pyme **disabled**.
+Marca el repo como confiable para habilitar `.codex/config.toml`. Invoca una skill con `$nombre-skill` cuando quieras forzar el workflow; Codex también puede activarla por la descripción. La configuración personal conserva autenticación, proveedores y secretos.
 
 ### Validación
 
@@ -130,7 +130,7 @@ npm run build   # si tocaste catálogo / rutas / SEO
 2. Si post → plan-editorial.md + research/deep-research.md o inventario-seo.md
 3. Si fórmula → dossier-ymyl.md + constants.ts + matriz
 4. Cambiar mínimo + tests
-5. /ship-check o comandos de arriba
+5. `$ship-calculachile` o los comandos de arriba
 ```
 
 ---

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Auditoría YMYL"
+  short_description: "Audita fórmulas, wiring y fuentes oficiales"
+  default_prompt: "Usa $auditoria-ymyl para auditar una calculadora de CalculaChile y priorizar sus riesgos."

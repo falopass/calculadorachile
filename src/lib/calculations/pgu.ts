@@ -23,6 +23,7 @@ export interface PGUResult {
   pguMensual: number;
   pensionTotal: number;
   edad: number;
+  cumpleEdadMinima: boolean;
   esContributiva: false;
 }
 
@@ -51,6 +52,8 @@ export function calculatePGU(input: PGUInput): PGUResult {
   const anos = Math.max(0, Math.round(anosCotizados));
   const edadVal = Math.max(0, Math.round(edad));
 
+  const cumpleEdadMinima = edadVal >= PGU_2026.edadMinima;
+
   // PGU base según edad (sin factor por años cotizados).
   const pguBase =
     edadVal >= 82
@@ -59,7 +62,9 @@ export function calculatePGU(input: PGUInput): PGUResult {
 
   // Reducción lineal entre los dos tramos de pensión base.
   let pguMensual: number;
-  if (pension <= PGU_2026.tramos[0].ingresoMaximoCLP) {
+  if (!cumpleEdadMinima) {
+    pguMensual = 0;
+  } else if (pension <= PGU_2026.tramos[0].ingresoMaximoCLP) {
     pguMensual = pguBase;
   } else if (pension <= PGU_2026.tramos[1].ingresoMaximoCLP) {
     const tramoInferior = PGU_2026.tramos[0].ingresoMaximoCLP;
@@ -80,6 +85,7 @@ export function calculatePGU(input: PGUInput): PGUResult {
     pguMensual,
     pensionTotal,
     edad: edadVal,
+    cumpleEdadMinima,
     esContributiva: false,
   };
 }
@@ -88,11 +94,17 @@ export function calculatePGU(input: PGUInput): PGUResult {
  * Convierte el resultado a formato de CalculatorResult[]
  */
 export function pguToResults(result: PGUResult): CalculatorResult[] {
-  return [
+  const results: CalculatorResult[] = [
     { label: 'PGU Mensual', value: result.pguMensual, format: 'CLP', highlight: true },
     { label: 'Pensión Total', value: result.pensionTotal, format: 'CLP', highlight: true },
     { label: 'Pensión Actual', value: result.pensionActual, format: 'CLP' },
     { label: 'PGU Base (según edad)', value: result.pguBase, format: 'CLP' },
     { label: 'Edad', value: result.edad, format: 'number' },
   ];
+
+  if (!result.cumpleEdadMinima) {
+    results.push({ label: 'No cumple la edad mínima de 65 años', value: 1, format: 'number' });
+  }
+
+  return results;
 }

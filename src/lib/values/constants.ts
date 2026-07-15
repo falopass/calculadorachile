@@ -214,7 +214,6 @@ export const GRATIFICACION = {
 
 export const HORAS_EXTRA = {
   recargo_normal: 50,
-  recargo_domingo: 100,
   /** Máximo 2 horas extra diarias (Art. 31 CdT). */
   tope_diario: 2,
 };
@@ -253,7 +252,6 @@ export const INDEMNIZACION = {
 export const VACACIONES = {
   dias_anuales: 15,
   dias_progresivos: 1,
-  tope_progresivos: 5,
 };
 
 export const PENSION_ALIMENTICIA = {
@@ -332,27 +330,6 @@ export const SUBSIDIO_HABITACIONAL = {
 };
 
 // ============================================
-// Subsidio al Agua Potable
-// ============================================
-export const SUBSIDIO_AGUA = {
-  montoMaximoCLP: 14000,
-  porcentajeSubsidio: 0.6,
-  tramos: [
-    { consumoMaximoM3: 15, subsidio: 0.6 },
-    { consumoMaximoM3: 25, subsidio: 0.4 },
-  ],
-};
-
-// ============================================
-// Costo TAG (Telepeaje) - aproximado
-// ============================================
-export const TAG_RUTAS = {
-  'santiago-rancagua': { categoria1: 3500, categoria2: 5200, categoria3: 7800 },
-  'santiago-valparaiso': { categoria1: 4200, categoria2: 6300, categoria3: 9500 },
-  'santiago-losandes': { categoria1: 3800, categoria2: 5700, categoria3: 8600 },
-};
-
-// ============================================
 // Tarifa Eléctrica BT1 (Residencial) - aproximado 2026
 // Tras Ley 21.667 (descongelamiento de tarifas), las tarifas BT1
 // están entre $165 y $220 /kWh promedio según consumo y zona.
@@ -373,10 +350,10 @@ export const TARIFA_BT1 = {
 // matrimonio. Pago fijo por cada cónyuge, reajustado por el IPS.
 // ============================================
 export const BONO_BODAS_ORO = {
-  /** Monto por cada cónyuge (reajuste IPS 2026, aprox.). */
-  montoPorConyugeCLP: 372135,
-  /** Monto total para el matrimonio (≈ 2 × monto por cónyuge). */
-  montoTotalCLP: 744270,
+  /** Monto vigente desde el 1 de octubre de 2025 hasta el reajuste de octubre de 2026. */
+  montoPorConyugeCLP: 231583,
+  /** Pago único total para el matrimonio. */
+  montoTotalCLP: 463166,
   requisitos: [
     'Cumplir 50 años de matrimonio',
     'Ambos cónyuges vivos al momento del pago',
@@ -391,16 +368,16 @@ export const BONO_BODAS_ORO = {
 // En febrero 2026 se reajustó por IPC 2025 (aprox. +4%).
 // ============================================
 export const PGU_2026 = {
-  /** PGU base 65-81 años (febrero 2026, post-reajuste IPC). */
-  montoMaximo65a81CLP: 240931,
-  /** PGU mayorada 82+ años. */
-  montoMaximo82MasCLP: 260286,
+  /** PGU máxima para personas de 65 a 81 años, vigente desde febrero de 2026. */
+  montoMaximo65a81CLP: 231732,
+  /** PGU máxima para personas de 82 años o más, vigente desde febrero de 2026. */
+  montoMaximo82MasCLP: 250275,
   edadMinima: 65,
   tramos: [
     /** Pensión base hasta este monto: PGU completa. */
-    { ingresoMaximoCLP: 820704, pguCompleta: true },
+    { ingresoMaximoCLP: 789139, pguCompleta: true },
     /** Pensión base hasta este monto: PGU se reduce linealmente a 0. */
-    { ingresoMaximoCLP: 1302705, pguCompleta: false },
+    { ingresoMaximoCLP: 1252602, pguCompleta: false },
   ],
 };
 
@@ -408,9 +385,10 @@ export const PGU_2026 = {
 // Asignación Familiar 2026 (Ley 21.751)
 // ============================================
 export const ASIGNACION_FAMILIAR_2026 = {
-  tramoA: { ingresoMaximoCLP: 631976, montoPorCargaCLP: 22007 },
-  tramoB: { ingresoMaximoCLP: 923067, montoPorCargaCLP: 13505 },
-  tramoC: { ingresoMaximoCLP: 1439668, montoPorCargaCLP: 4267 },
+  /** Valores vigentes desde el 1 de mayo de 2026 (Ley 21.830). */
+  tramoA: { ingresoMaximoCLP: 649039, montoPorCargaCLP: 22601 },
+  tramoB: { ingresoMaximoCLP: 947990, montoPorCargaCLP: 13870 },
+  tramoC: { ingresoMaximoCLP: 1478539, montoPorCargaCLP: 4382 },
 };
 
 // ============================================
@@ -605,21 +583,6 @@ export const TARIFA_BT1_CARGO_FIJO = {
 };
 
 /**
- * Subsidio de Agua Potable (Ley 18.778, DS 195/MOP).
- */
-export const SUBSIDIO_AGUA_POTABLE = {
-  /** Cobertura hasta 15 m³ de consumo. */
-  tope_m3: 15,
-  tramos: {
-    tramo1: 60,
-    tramo2: 40,
-    tramo3: 25,
-  },
-  /** Tarifa promedio nacional referencia 2026. */
-  tarifa_promedio_clp_m3: 1300,
-};
-
-/**
  * Recargos sobre las indemnizaciones del Art. 168 CdT cuando el
  * tribunal declara que el despido fue injustificado/indebido.
  */
@@ -678,11 +641,13 @@ export const PERMISO_CIRCULACION_TABLA_SII = {
       { hasta_utm: 400, tasa: 4.0 },
       { hasta_utm: Infinity, tasa: 4.5 },
     ],
-    descuento_antiguedad_anios: 20,
-    descuento_antiguedad_porcentaje: 50,
+    utmEneroCLP: 67294,
+    permisoMinimoCLP: 33715,
+    tasacionHastaPermisoMinimoCLP: 3371500,
+    exencionElectricoPct: 50,
   },
   2026: {
-    fuente: 'SII Resolución Exenta N°5/2026 (Tabla anual de tasación)',
+    fuente: 'SII Resolución Exenta N°6/2026 (Tabla anual de tasación)',
     tramos_utm: [
       { hasta_utm: 60, tasa: 1.0 },
       { hasta_utm: 120, tasa: 2.0 },
@@ -690,8 +655,10 @@ export const PERMISO_CIRCULACION_TABLA_SII = {
       { hasta_utm: 400, tasa: 4.0 },
       { hasta_utm: Infinity, tasa: 4.5 },
     ],
-    descuento_antiguedad_anios: 20,
-    descuento_antiguedad_porcentaje: 50,
+    utmEneroCLP: 69751,
+    permisoMinimoCLP: 34876,
+    tasacionHastaPermisoMinimoCLP: 3487600,
+    exencionElectricoPct: 75,
   },
 } as const;
 
@@ -712,8 +679,10 @@ export const PERMISO_CIRCULACION = (() => {
     {
       fuente: string;
       tramos_utm: ReadonlyArray<{ hasta_utm: number; tasa: number }>;
-      descuento_antiguedad_anios: number;
-      descuento_antiguedad_porcentaje: number;
+      utmEneroCLP: number;
+      permisoMinimoCLP: number;
+      tasacionHastaPermisoMinimoCLP: number;
+      exencionElectricoPct: number;
     }
   >;
   const anio = PERMISO_CIRCULACION_ANIO_VIGENTE;
@@ -722,8 +691,10 @@ export const PERMISO_CIRCULACION = (() => {
     tabla[Math.max(...Object.keys(tabla).map(Number).filter((n) => n <= anio))];
   return {
     tramos_utm: vigente.tramos_utm,
-    descuento_antiguedad_anios: vigente.descuento_antiguedad_anios,
-    descuento_antiguedad_porcentaje: vigente.descuento_antiguedad_porcentaje,
+    utmEneroCLP: vigente.utmEneroCLP,
+    permisoMinimoCLP: vigente.permisoMinimoCLP,
+    tasacionHastaPermisoMinimoCLP: vigente.tasacionHastaPermisoMinimoCLP,
+    exencionElectricoPct: vigente.exencionElectricoPct,
     anio_vigente: anio,
     fuente: vigente.fuente,
   };
@@ -743,14 +714,12 @@ export const PLUSVALIA_INMOBILIARIA = {
  * Pensión de alimentos (Ley 14.908 / Ley 21.389).
  */
 export const PENSION_ALIMENTOS = {
-  /** Mínimo legal por hijo como % del IMM. */
-  minimo_imm_primer_hijo: 40,
-  minimo_imm_hijo_adicional: 30,
-  /** Porcentajes referenciales PJUD sobre el ingreso del alimentante. */
-  porcentaje_primer_hijo: 40,
-  porcentaje_hijo_adicional: 30,
-  /** Tope: 50% del ingreso (Art. 7 Ley 14.908). */
-  tope_ingreso: 50,
+  /** Piso para un solo menor, como porcentaje del IMM (art. 3 Ley 14.908). */
+  minimo_imm_un_hijo: 40,
+  /** Piso por cada menor cuando son dos o más (art. 3 Ley 14.908). */
+  minimo_imm_dos_o_mas_por_hijo: 30,
+  /** Límite general; el tribunal puede superarlo por razones fundadas (art. 7). */
+  limite_general_ingreso: 50,
 };
 
 /**
@@ -765,13 +734,10 @@ export const BODAS_ORO = {
  * Emilia"; Ley 20.580 "Tolerancia Cero").
  */
 export const MULTA_TRANSITO_UTM = {
-  leve: 0.5,
-  menos_grave: 1,
-  grave: 2,
-  gravisima: 4,
-  gravisima_alcohol: 12,
-  /** Recargo por reincidencia dentro de 12 meses (Art. 197). */
-  recargo_reincidencia: 50,
+  leve: { minimo: 0.2, maximo: 0.5 },
+  menos_grave: { minimo: 0.5, maximo: 1 },
+  grave: { minimo: 1, maximo: 1.5 },
+  gravisima: { minimo: 1.5, maximo: 3 },
 };
 
 /**
@@ -786,9 +752,6 @@ export const APV_REGIMEN_B = {
  * Recargo "ocasional" (sin TAG) sobre tarifa con TAG en autopistas.
  * El recargo real depende de cada concesionaria.
  */
-export const TAG_RECARGO_SIN_TAG = 50;
-
-
 // ============================================
 // Tasa AFP obligatoria (10%)
 // ----------------------------------------------
@@ -803,15 +766,6 @@ export const TAG_RECARGO_SIN_TAG = 50;
 // ============================================
 export const AFP_OBLIGATORIA_PCT = 10;
 
-// ============================================
-// Conversión semanas → mes (4.33)
-// ----------------------------------------------
-// 52 semanas / 12 meses = 4,333... Se usa para
-// derivar horas mensuales a partir de jornada
-// semanal en horas-extra y otros cálculos
-// laborales.
-// ============================================
-export const SEMANAS_POR_MES = 4.33;
 
 // ============================================
 // Distribución de la retención de honorarios
@@ -945,38 +899,6 @@ export const CONTRIBUCIONES_BIENES_RAICES = {
   descuento_habitacional: 0.025,
   /** Exención habitacional (avalúo ≤ 225,96 UTM). */
   exencion_habitacional_utm: 225.96,
-} as const;
-
-// ============================================
-// Tarifas TAG urbano (Santiago)
-// ----------------------------------------------
-// Promedio horario punta + valle para autopistas
-// urbanas (Costanera Norte, Vespucio, Autopista
-// del Sol, Acceso Sur). Por categoría de vehículo
-// (1 auto/moto, 2 camioneta, 3 camión).
-// Fuente: tarifarios públicos de las concesionarias.
-// ============================================
-export const TAG_URBANO_SANTIAGO = {
-  categoria1: 1200,
-  categoria2: 1800,
-  categoria3: 2700,
-} as const;
-
-// ============================================
-// Permiso de circulación: descuentos por tipo
-// ----------------------------------------------
-// La tabla SII fija una sola progresión en UTM.
-// La práctica administrativa es aplicar 50% de
-// rebaja a motocicletas y taxis (vehículos con
-// uso especializado y/o tasación reducida).
-// ============================================
-export const PERMISO_CIRCULACION_DESCUENTOS_VEHICULO = {
-  motocicleta: 0.5,
-  taxi: 0.5,
-  automovil: 1.0,
-  camion: 1.0,
-  bus: 1.0,
-  carga: 1.0,
 } as const;
 
 // ============================================

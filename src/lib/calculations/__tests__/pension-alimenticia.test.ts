@@ -1,81 +1,75 @@
-// ============================================
-// Tests de pensión alimenticia (Ley 14.908)
-// ============================================
-
-import { describe, it, expect } from 'vitest';
-import { calculatePensionAlimenticia } from '../pension-alimenticia';
+import { describe, expect, it } from 'vitest';
 import { INGRESO_MINIMO } from '@/lib/values/constants';
+import { calculatePensionAlimenticia } from '../pension-alimenticia';
 
 describe('calculatePensionAlimenticia', () => {
-  it('1 hijo: 40% del ingreso', () => {
-    const r = calculatePensionAlimenticia({
+  it('un menor: el piso es 40% del IMM, no 40% del sueldo', () => {
+    const result = calculatePensionAlimenticia({
       sueldoBruto: 1_000_000,
       numeroHijos: 1,
       tieneOtroIngreso: false,
     });
-    expect(r.porcentajeAplicable).toBe(40);
-    expect(r.pensionSugerida).toBe(400_000);
+
+    expect(result.porcentajeMinimoPorHijo).toBe(40);
+    expect(result.pisoLegalPorHijo).toBe(Math.round(INGRESO_MINIMO.mensual * 0.4));
+    expect(result.pisoLegalTotal).toBe(result.pisoLegalPorHijo);
+    expect(result.pisoLegalTotal).not.toBe(400_000);
   });
 
-  it('2 hijos: 30% × 2 = 60% (sin tope)', () => {
-    const r = calculatePensionAlimenticia({
-      sueldoBruto: 800_000,
-      numeroHijos: 2,
-      tieneOtroIngreso: false,
-    });
-    // Sin tope, sería 60%, pero hay tope 50% → debe aplicarse
-    expect(r.topeAplicado).toBe(true);
-    expect(r.pensionSugerida).toBe(400_000); // 50% × 800.000
-  });
-
-  it('tope 50% del ingreso del alimentante', () => {
-    const r = calculatePensionAlimenticia({
-      sueldoBruto: 1_000_000,
+  it('dos o más menores: aplica 30% del IMM por cada uno', () => {
+    const result = calculatePensionAlimenticia({
+      sueldoBruto: 1_200_000,
       numeroHijos: 3,
       tieneOtroIngreso: false,
     });
-    expect(r.topeAplicado).toBe(true);
-    expect(r.pensionSugerida).toBeLessThanOrEqual(r.topeMaximo);
-    expect(r.topeMaximo).toBe(500_000);
+
+    expect(result.porcentajeMinimoPorHijo).toBe(30);
+    expect(result.pisoLegalPorHijo).toBe(Math.round(INGRESO_MINIMO.mensual * 0.3));
+    expect(result.pisoLegalTotal).toBe(Math.round(INGRESO_MINIMO.mensual * 0.3 * 3));
   });
 
-  it('mínimo legal: 40% IMM primer hijo + 30% IMM por adicional', () => {
-    const r = calculatePensionAlimenticia({
-      sueldoBruto: 600_000,
+  it('muestra por separado el límite general de 50% de las rentas', () => {
+    const result = calculatePensionAlimenticia({
+      sueldoBruto: 800_000,
+      numeroHijos: 2,
+      tieneOtroIngreso: true,
+      otroIngreso: 200_000,
+    });
+
+    expect(result.totalIngresos).toBe(1_000_000);
+    expect(result.limiteGeneralIngresos).toBe(500_000);
+  });
+
+  it('advierte cuando el piso presunto supera 50% de los ingresos declarados', () => {
+    const result = calculatePensionAlimenticia({
+      sueldoBruto: 300_000,
       numeroHijos: 2,
       tieneOtroIngreso: false,
     });
-    const imm = INGRESO_MINIMO.mensual;
-    expect(r.minimoLegal).toBe(Math.round(imm * 0.4 + imm * 0.3));
+
+    expect(result.pisoSuperaLimiteGeneral).toBe(true);
+    expect(result.advertencia).toContain('tribunal');
   });
 
-  it('otro ingreso suma a la base', () => {
-    const r = calculatePensionAlimenticia({
+  it('ignora otro ingreso cuando la persona indica que no lo tiene', () => {
+    const result = calculatePensionAlimenticia({
       sueldoBruto: 600_000,
       numeroHijos: 1,
-      tieneOtroIngreso: true,
-      otroIngreso: 400_000,
+      tieneOtroIngreso: false,
+      otroIngreso: 900_000,
     });
-    expect(r.totalIngresos).toBe(1_000_000);
-    expect(r.pensionSugerida).toBe(400_000);
+
+    expect(result.totalIngresos).toBe(600_000);
   });
 
-  it('cero hijos: pensión cero', () => {
-    const r = calculatePensionAlimenticia({
+  it('cero menores produce piso cero', () => {
+    const result = calculatePensionAlimenticia({
       sueldoBruto: 1_000_000,
       numeroHijos: 0,
       tieneOtroIngreso: false,
     });
-    expect(r.pensionSugerida).toBe(0);
-    expect(r.tramoAplicado).toBe('Sin hijos');
-  });
 
-  it('pensión por hijo distribuye proporcionalmente', () => {
-    const r = calculatePensionAlimenticia({
-      sueldoBruto: 1_000_000,
-      numeroHijos: 2,
-      tieneOtroIngreso: false,
-    });
-    expect(r.pensionPorHijo).toBe(Math.round(r.pensionSugerida / 2));
+    expect(result.pisoLegalTotal).toBe(0);
+    expect(result.porcentajeMinimoPorHijo).toBe(0);
   });
 });

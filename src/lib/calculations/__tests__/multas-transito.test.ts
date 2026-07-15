@@ -1,58 +1,55 @@
-// ============================================
-// Tests de multas de tránsito (Ley 18.290)
-// ============================================
-
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { UTM } from '@/lib/values/constants';
 import { calculateMultasTransito } from '../multas-transito';
-import { UTM, MULTA_TRANSITO_UTM } from '@/lib/values/constants';
 
 describe('calculateMultasTransito', () => {
-  it('multa leve = 0,5 UTM convertida a CLP', () => {
-    const r = calculateMultasTransito({ tipoMulta: 'leve' });
-    expect(r.montoUTM).toBe(MULTA_TRANSITO_UTM.leve);
-    expect(r.montoCLP).toBe(Math.round(0.5 * UTM.valor));
+  it('devuelve rangos legales y no puntos medios inventados', () => {
+    expect(calculateMultasTransito({ tipoMulta: 'leve' }).minimoUTM).toBe(0.2);
+    expect(calculateMultasTransito({ tipoMulta: 'leve' }).maximoUTM).toBe(0.5);
+    expect(calculateMultasTransito({ tipoMulta: 'grave' }).minimoUTM).toBe(1);
+    expect(calculateMultasTransito({ tipoMulta: 'grave' }).maximoUTM).toBe(1.5);
+    expect(calculateMultasTransito({ tipoMulta: 'gravisima' }).minimoUTM).toBe(1.5);
+    expect(calculateMultasTransito({ tipoMulta: 'gravisima' }).maximoUTM).toBe(3);
   });
 
-  it('multa gravísima por alcohol = 12 UTM (Ley Emilia)', () => {
-    const r = calculateMultasTransito({ tipoMulta: 'gravisima_alcohol' });
-    expect(r.montoUTM).toBe(12);
+  it('celular, luz roja y conducir sin haber obtenido licencia son gravísimas', () => {
+    expect(calculateMultasTransito({ tipoMulta: 'celular' }).categoriaLegal).toBe('gravisima');
+    expect(calculateMultasTransito({ tipoMulta: 'luz_roja' }).categoriaLegal).toBe('gravisima');
+    expect(calculateMultasTransito({ tipoMulta: 'sin_licencia' }).categoriaLegal).toBe('gravisima');
   });
 
-  it('reincidencia agrega 50% de recargo', () => {
-    const sin = calculateMultasTransito({ tipoMulta: 'grave', esReincidente: false });
-    const con = calculateMultasTransito({ tipoMulta: 'grave', esReincidente: true });
-    expect(con.recargoReincidencia).toBeCloseTo(sin.montoCLP * 0.5, 0);
-    expect(con.montoCLP).toBeCloseTo(sin.montoCLP * 1.5, -1);
+  it('clasifica el exceso según kilómetros sobre el límite', () => {
+    expect(calculateMultasTransito({ tipoMulta: 'exceso_hasta_10' }).categoriaLegal).toBe('menos_grave');
+    expect(calculateMultasTransito({ tipoMulta: 'exceso_11_a_20' }).categoriaLegal).toBe('grave');
+    expect(calculateMultasTransito({ tipoMulta: 'exceso_mas_20' }).categoriaLegal).toBe('gravisima');
   });
 
-  it('cantidad de multas multiplica el total', () => {
-    const r = calculateMultasTransito({ tipoMulta: 'menos_grave', cantidadMultas: 3 });
-    expect(r.totalCLP).toBeCloseTo(r.montoCLP * 3, -1);
-    expect(r.cantidadMultas).toBe(3);
+  it('primera reincidencia grave duplica y la siguiente triplica', () => {
+    const doble = calculateMultasTransito({ tipoMulta: 'grave', reincidenciasPrevias: 1 });
+    const triple = calculateMultasTransito({ tipoMulta: 'grave', reincidenciasPrevias: 2 });
+    expect(doble.multiplicadorReincidencia).toBe(2);
+    expect(doble.minimoUTM).toBe(2);
+    expect(triple.multiplicadorReincidencia).toBe(3);
+    expect(triple.maximoUTM).toBe(4.5);
   });
 
-  it('cantidad menor a 1 se normaliza a 1', () => {
-    const r = calculateMultasTransito({ tipoMulta: 'leve', cantidadMultas: 0 });
-    expect(r.cantidadMultas).toBe(1);
+  it('no aplica multiplicador automático a infracciones leves o menos graves', () => {
+    const result = calculateMultasTransito({
+      tipoMulta: 'menos_grave',
+      reincidenciasPrevias: 2,
+    });
+    expect(result.multiplicadorReincidencia).toBe(1);
   });
 
-  it('orden de gravedad: leve < menos_grave < grave < gravisima < gravisima_alcohol', () => {
-    const ord = ['leve', 'menos_grave', 'grave', 'gravisima', 'gravisima_alcohol'] as const;
-    const valores = ord.map((t) => calculateMultasTransito({ tipoMulta: t }).montoUTM);
-    for (let i = 1; i < valores.length; i++) {
-      expect(valores[i]).toBeGreaterThanOrEqual(valores[i - 1]);
-    }
+  it('convierte los extremos del rango a CLP con la UTM del sitio', () => {
+    const result = calculateMultasTransito({ tipoMulta: 'grave' });
+    expect(result.minimoCLP).toBe(Math.round(UTM.valor));
+    expect(result.maximoCLP).toBe(Math.round(UTM.valor * 1.5));
   });
 
-  it('infracciones frecuentes mapean al tramo correcto', () => {
-    expect(calculateMultasTransito({ tipoMulta: 'estacionar_prohibido' }).montoUTM).toBe(
-      MULTA_TRANSITO_UTM.leve,
-    );
-    expect(calculateMultasTransito({ tipoMulta: 'celular_manos_libres' }).montoUTM).toBe(
-      MULTA_TRANSITO_UTM.grave,
-    );
-    expect(calculateMultasTransito({ tipoMulta: 'ebriedad_alcohol' }).montoUTM).toBe(
-      MULTA_TRANSITO_UTM.gravisima_alcohol,
-    );
+  it('cantidad de infracciones multiplica ambos extremos', () => {
+    const result = calculateMultasTransito({ tipoMulta: 'leve', cantidadMultas: 3 });
+    expect(result.totalMinimoCLP).toBe(result.minimoCLP * 3);
+    expect(result.totalMaximoCLP).toBe(result.maximoCLP * 3);
   });
 });

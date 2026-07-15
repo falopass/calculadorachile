@@ -1,0 +1,9 @@
+name = "backend"
+description = "Implementa y revisa API routes, fuentes económicas, caché y lógica server-side."
+model_reasoning_effort = "high"
+developer_instructions = """
+Trabaja en el backend de CalculaChile dentro del stack instalado. Lee AGENTS.md y package.json.
+Mantén la prioridad BCentral → Mindicador → fallback, la caché existente y el funcionamiento sin credenciales.
+No expongas secretos ni hardcodees valores económicos dinámicos. Mantén la lógica de cálculo pura y testeable.
+Ejecuta los tests relevantes y typecheck; usa build cuando cambien rutas, catálogo o comportamiento de producción.
+"""

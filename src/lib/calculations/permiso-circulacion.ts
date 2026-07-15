@@ -1,131 +1,86 @@
 // ============================================
-// Cálculo de Permiso de Circulación Chile 2026
+// Permiso de circulación de vehículos livianos 2026
 // ============================================
 
-import {
-  UTM,
-  PERMISO_CIRCULACION,
-  PERMISO_CIRCULACION_DESCUENTOS_VEHICULO,
-} from '@/lib/values/constants';
+import { PERMISO_CIRCULACION } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PermisoCirculacionInput {
-  /** Tasación fiscal SII (no precio de compra). */
+  /** Tasación fiscal SII 2026, no precio comercial. */
   valorVehiculo: number;
-  tipoVehiculo: 'automovil' | 'motocicleta' | 'carga' | 'bus' | 'taxi' | 'camion';
-  antiguedadVehiculo: number;
-  esZonaCarga: boolean;
-  esPrimeraVez: boolean;
-  /** Meses restantes del año si es primera inscripción (1-12). */
-  mesesRestantes?: number;
-  /** UTM opcional (live). */
-  valorUTM?: number;
+  /** Solo si el modelo figura en la nómina SII con exención de 75%. */
+  electricoHibridoElegible: boolean;
 }
 
 export interface PermisoCirculacionResult {
-  valorVehiculo: number;
-  tipoVehiculo: string;
-  antiguedadVehiculo: number;
-  factorAntiguedad: number;
-  montoBase: number;
-  descuentoAntiguedad: number;
-  prorrateoPrimeraVez: number;
-  permisoTotal: number;
-  cuota1: number;
-  cuota2: number;
-  valorUTM: number;
+  tasacionFiscal: number;
   tasacionUTM: number;
-  tasaEfectiva: number;
+  montoEscala: number;
+  montoAntesExencion: number;
+  exencionElectrico: number;
+  permisoTotalEstimado: number;
+  cuotaBase1: number;
+  cuotaBase2: number;
+  utmEneroCLP: number;
+  usaPermisoMinimo: boolean;
 }
 
-const TRAMOS_PERMISO_UTM: Array<{ hasta: number; tasa: number }> =
-  PERMISO_CIRCULACION.tramos_utm.map((t) => ({
-    hasta: t.hasta_utm,
-    tasa: t.tasa / 100,
-  }));
-
-const LABELS_TIPO: Record<string, string> = {
-  automovil: 'Automóvil',
-  motocicleta: 'Motocicleta',
-  carga: 'Carga',
-  bus: 'Bus',
-  taxi: 'Taxi',
-  camion: 'Camión',
-};
+const TRAMOS = PERMISO_CIRCULACION.tramos_utm.map((tramo) => ({
+  hasta: tramo.hasta_utm,
+  tasa: tramo.tasa / 100,
+}));
 
 /**
- * Estimación con tabla SII en UTM (progresiva).
- * Confirmar siempre en municipio / TGR: no es liquidación oficial.
+ * Aplica la escala progresiva y acumulativa publicada por el SII para
+ * vehículos livianos. Usa la UTM de enero de 2026 ($69.751), no la UTM del
+ * día. El resultado no sustituye la consulta por código SII o la liquidación
+ * municipal, especialmente para motos, vehículos pesados o casos especiales.
  */
 export function calculatePermisoCirculacion(
   input: PermisoCirculacionInput,
 ): PermisoCirculacionResult {
-  const {
-    valorVehiculo,
-    tipoVehiculo,
-    antiguedadVehiculo,
-    esZonaCarga,
-    esPrimeraVez,
-    mesesRestantes = 12,
-    valorUTM: valorUTMInput,
-  } = input;
+  const tasacionFiscal = Math.max(0, Math.round(input.valorVehiculo));
+  const utmEneroCLP = PERMISO_CIRCULACION.utmEneroCLP;
+  const tasacionUTM = tasacionFiscal / utmEneroCLP;
 
-  void esZonaCarga;
-
-  const valorUTM = valorUTMInput && valorUTMInput > 0 ? valorUTMInput : UTM.valor;
-  const tasacion = Math.max(0, valorVehiculo);
-  const tasacionUTM = valorUTM > 0 ? tasacion / valorUTM : 0;
-
-  let permisoUTM = 0;
+  let montoEscalaUTM = 0;
   let restante = tasacionUTM;
   let limiteAnterior = 0;
-  for (const tramo of TRAMOS_PERMISO_UTM) {
-    const ancho = Math.min(restante, tramo.hasta - limiteAnterior);
-    if (ancho <= 0) break;
-    permisoUTM += ancho * tramo.tasa;
-    restante -= ancho;
+  for (const tramo of TRAMOS) {
+    const baseTramo = Math.min(restante, tramo.hasta - limiteAnterior);
+    if (baseTramo <= 0) break;
+    montoEscalaUTM += baseTramo * tramo.tasa;
+    restante -= baseTramo;
     limiteAnterior = tramo.hasta;
   }
 
-  let montoBase = permisoUTM * valorUTM;
-
-  const factorTipo = PERMISO_CIRCULACION_DESCUENTOS_VEHICULO[tipoVehiculo] ?? 1.0;
-  montoBase *= factorTipo;
-
-  let factorAntiguedad = 0;
-  if (antiguedadVehiculo >= PERMISO_CIRCULACION.descuento_antiguedad_anios) {
-    factorAntiguedad = PERMISO_CIRCULACION.descuento_antiguedad_porcentaje / 100;
-  }
-  const descuentoAntiguedad = montoBase * factorAntiguedad;
-
-  let prorrateoPrimeraVez = 0;
-  let permisoTotal = montoBase - descuentoAntiguedad;
-  const meses = Math.min(12, Math.max(1, Math.round(mesesRestantes)));
-  if (esPrimeraVez && meses < 12) {
-    const factorProrrateo = meses / 12;
-    const permisoProrrateado = permisoTotal * factorProrrateo;
-    prorrateoPrimeraVez = permisoTotal - permisoProrrateado;
-    permisoTotal = permisoProrrateado;
-  }
-
-  const tasaEfectiva = tasacion > 0 ? (permisoTotal / tasacion) * 100 : 0;
-  const cuota1 = Math.round(permisoTotal / 2);
-  const cuota2 = Math.round(permisoTotal) - cuota1;
+  const montoEscala = Math.round(montoEscalaUTM * utmEneroCLP);
+  const usaPermisoMinimo =
+    tasacionFiscal > 0 &&
+    tasacionFiscal <= PERMISO_CIRCULACION.tasacionHastaPermisoMinimoCLP;
+  const montoAntesExencion =
+    tasacionFiscal === 0
+      ? 0
+      : usaPermisoMinimo
+        ? PERMISO_CIRCULACION.permisoMinimoCLP
+        : montoEscala;
+  const exencionElectrico = input.electricoHibridoElegible
+    ? Math.round(montoAntesExencion * (PERMISO_CIRCULACION.exencionElectricoPct / 100))
+    : 0;
+  const permisoTotalEstimado = montoAntesExencion - exencionElectrico;
+  const cuotaBase1 = Math.round(permisoTotalEstimado / 2);
 
   return {
-    valorVehiculo: Math.round(tasacion),
-    tipoVehiculo: LABELS_TIPO[tipoVehiculo] || tipoVehiculo,
-    antiguedadVehiculo,
-    factorAntiguedad,
-    montoBase: Math.round(montoBase),
-    descuentoAntiguedad: Math.round(descuentoAntiguedad),
-    prorrateoPrimeraVez: Math.round(prorrateoPrimeraVez),
-    permisoTotal: Math.round(permisoTotal),
-    cuota1,
-    cuota2,
-    valorUTM,
+    tasacionFiscal,
     tasacionUTM: Math.round(tasacionUTM * 100) / 100,
-    tasaEfectiva: Math.round(tasaEfectiva * 100) / 100,
+    montoEscala,
+    montoAntesExencion,
+    exencionElectrico,
+    permisoTotalEstimado,
+    cuotaBase1,
+    cuotaBase2: permisoTotalEstimado - cuotaBase1,
+    utmEneroCLP,
+    usaPermisoMinimo,
   };
 }
 
@@ -134,56 +89,20 @@ export function permisoCirculacionToResults(
 ): CalculatorResult[] {
   return [
     {
-      label: 'Permiso total estimado',
-      value: result.permisoTotal,
+      label: 'Permiso anual estimado',
+      value: result.permisoTotalEstimado,
       format: 'CLP',
       highlight: true,
     },
+    { label: 'Primera cuota base (50%)', value: result.cuotaBase1, format: 'CLP' },
     {
-      label: '1.ª cuota (50%, tip. mar–abr)',
-      value: result.cuota1,
-      format: 'CLP',
-      highlight: true,
-    },
-    {
-      label: '2.ª cuota (50%, tip. ago)',
-      value: result.cuota2,
+      label: 'Segunda cuota base antes de reajuste',
+      value: result.cuotaBase2,
       format: 'CLP',
     },
-    {
-      label: 'Monto base (tabla SII UTM)',
-      value: result.montoBase,
-      format: 'CLP',
-    },
-    {
-      label: 'Descuento antigüedad (≥20 años)',
-      value: result.descuentoAntiguedad,
-      format: 'CLP',
-    },
-    {
-      label: 'Ajuste prorrateo 1.ª inscripción',
-      value: result.prorrateoPrimeraVez,
-      format: 'CLP',
-    },
-    {
-      label: 'Tasación fiscal (SII)',
-      value: result.valorVehiculo,
-      format: 'CLP',
-    },
-    {
-      label: 'Tasación en UTM',
-      value: result.tasacionUTM,
-      format: 'UTM',
-    },
-    {
-      label: 'Antigüedad (años)',
-      value: result.antiguedadVehiculo,
-      format: 'number',
-    },
-    {
-      label: 'Tasa efectiva sobre tasación',
-      value: result.tasaEfectiva,
-      format: 'percentage',
-    },
+    { label: 'Monto antes de exención', value: result.montoAntesExencion, format: 'CLP' },
+    { label: 'Exención vehículo elegible', value: result.exencionElectrico, format: 'CLP' },
+    { label: 'Tasación fiscal SII', value: result.tasacionFiscal, format: 'CLP' },
+    { label: 'UTM enero 2026', value: result.utmEneroCLP, format: 'CLP' },
   ];
 }

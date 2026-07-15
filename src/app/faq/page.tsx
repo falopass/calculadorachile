@@ -110,7 +110,7 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Cuántas horas extra puedo hacer en una jornada?',
         answer:
-          'Máximo 2 horas extra diarias (artículo 31 del Código del Trabajo). Se pagan con un recargo del 50% sobre el valor de la hora ordinaria. Para domingos y festivos trabajados, el recargo es 100%. La jornada legal vigente desde abril 2026 es 42 horas semanales (Ley 21.561).',
+          'Máximo 2 horas extra diarias (artículo 31 del Código del Trabajo). Se pagan con un recargo mínimo de 50% sobre el valor de la hora ordinaria. No existe un 100% general automático por domingo o festivo, sin perjuicio de pactos más favorables y descansos compensatorios. La jornada máxima vigente desde abril de 2026 es de 42 horas semanales.',
       },
       {
         question: '¿La gratificación legal es obligatoria?',

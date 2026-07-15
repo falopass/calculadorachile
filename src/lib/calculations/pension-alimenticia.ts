@@ -1,5 +1,5 @@
 // ============================================
-// Cálculo de Pensión Alimenticia Chile 2026
+// Referencia legal de pensión de alimentos en Chile
 // ============================================
 
 import { INGRESO_MINIMO, PENSION_ALIMENTOS } from '@/lib/values/constants';
@@ -16,174 +16,97 @@ export interface PensionAlimenticiaResult {
   sueldoBruto: number;
   totalIngresos: number;
   numeroHijos: number;
-  porcentajeAplicable: number;
-  porcentajePorHijo: number;
-  pensionSugerida: number;
-  pensionPorHijo: number;
-  /** Mínimo legal por hijo (40% IMM primer hijo, 30% IMM por adicional). */
-  minimoLegal: number;
-  /** Tope 50% del ingreso del demandado (Art. 7 Ley 14.908). */
-  topeAplicado: boolean;
-  topeMaximo: number;
-  tramoAplicado: string;
+  ingresoMinimoVigente: number;
+  porcentajeMinimoPorHijo: number;
+  pisoLegalPorHijo: number;
+  pisoLegalTotal: number;
+  limiteGeneralIngresos: number;
+  pisoSuperaLimiteGeneral: boolean;
+  advertencia: string;
 }
 
 /**
- * Porcentajes referenciales del PJUD para pensión sugerida:
- *  - 1 hijo: 40% del ingreso
- *  - 2+ hijos: 30% del ingreso por cada hijo (acumulativo)
+ * Entrega dos referencias distintas de la Ley 14.908; no fija ni recomienda
+ * una pensión concreta:
  *
- * Definidos en `PENSION_ALIMENTOS` en constants.ts.
- */
-const PORCENTAJE_PRIMER_HIJO = PENSION_ALIMENTOS.porcentaje_primer_hijo;
-const PORCENTAJE_HIJO_ADICIONAL = PENSION_ALIMENTOS.porcentaje_hijo_adicional;
-
-/**
- * Mínimos legales por hijo expresados como porcentaje del ingreso
- * mínimo mensual (IMM):
- *  - 40% IMM por el primer hijo
- *  - 30% IMM por cada hijo adicional
+ * - Art. 3: piso presunto para menores de edad. Si se pide alimentos para un
+ *   menor, el mínimo es 40% del IMM. Si son dos o más menores, es 30% del IMM
+ *   por cada uno. El juez puede rebajarlo si se acredita falta de medios.
+ * - Art. 7: como regla general, el total no puede exceder 50% de las rentas
+ *   del alimentante, pero el tribunal puede superar ese límite por razones
+ *   fundadas y atendiendo al interés superior del niño, niña o adolescente.
  *
- * Base legal: Ley 14.908 (modificada por Ley 21.389/2021).
- */
-const MINIMO_IMM_PRIMER_HIJO = PENSION_ALIMENTOS.minimo_imm_primer_hijo / 100;
-const MINIMO_IMM_HIJO_ADICIONAL = PENSION_ALIMENTOS.minimo_imm_hijo_adicional / 100;
-
-/**
- * Tope legal: las retenciones por pensión de alimentos no pueden
- * exceder el 50% de la remuneración del alimentante.
- * Base legal: Art. 7 Ley 14.908.
- */
-const TOPE_INGRESO = PENSION_ALIMENTOS.tope_ingreso / 100;
-
-/**
- * Calcula la pensión de alimentos sugerida según la Ley 14.908.
- *
- * Bug histórico: la versión anterior aplicaba un porcentaje plano
- * para 2+ hijos sin multiplicar por número de hijos y sin tope del
- * 50% del ingreso. La fórmula correcta es acumulativa por hijo, con
- * tope del 50% del ingreso del alimentante (Art. 7 Ley 14.908).
- *
- * NOTA: esta calculadora entrega una ESTIMACIÓN orientativa. El monto
- * final lo determina un juez considerando necesidades del alimentario
- * y capacidad económica del alimentante.
- *
- * @param input Datos para el cálculo.
- * @returns Pensión sugerida con desglose y mínimos legales.
+ * Las necesidades, los cuidados, el patrimonio y la capacidad económica no
+ * pueden inferirse solo desde el sueldo. Por eso esta función evita el antiguo
+ * “40% del sueldo” presentado erróneamente como pensión sugerida.
  */
 export function calculatePensionAlimenticia(
   input: PensionAlimenticiaInput,
 ): PensionAlimenticiaResult {
-  const { sueldoBruto, numeroHijos, tieneOtroIngreso, otroIngreso = 0 } = input;
-
-  const sueldo = Math.max(0, sueldoBruto);
-  const otro = Math.max(0, otroIngreso);
-  const hijos = Math.max(0, Math.round(numeroHijos));
-
-  const totalIngresos = tieneOtroIngreso ? sueldo + otro : sueldo;
-
-  // Porcentaje acumulado según hijos
-  let porcentajeAplicable = 0;
-  let porcentajePorHijo = 0;
-  let tramoAplicado = 'Sin hijos';
-
-  if (hijos === 1) {
-    porcentajeAplicable = PORCENTAJE_PRIMER_HIJO;
-    porcentajePorHijo = PORCENTAJE_PRIMER_HIJO;
-    tramoAplicado = '1 hijo (40%)';
-  } else if (hijos >= 2) {
-    porcentajePorHijo = PORCENTAJE_HIJO_ADICIONAL;
-    porcentajeAplicable = PORCENTAJE_HIJO_ADICIONAL * hijos;
-    tramoAplicado = `${hijos} hijos (${PORCENTAJE_HIJO_ADICIONAL}% c/u)`;
-  }
-
-  // Pensión sugerida sin tope
-  const pensionSinTope = totalIngresos * (porcentajeAplicable / 100);
-
-  // Tope 50% del ingreso (Art. 7 Ley 14.908)
-  const topeMaximo = totalIngresos * TOPE_INGRESO;
-  const aplicaTope = pensionSinTope > topeMaximo;
-  const pensionSugerida = aplicaTope ? topeMaximo : pensionSinTope;
-
-  // Pensión por hijo (referencial, distribuyendo el total)
-  const pensionPorHijo = hijos > 0 ? pensionSugerida / hijos : 0;
-
-  // Mínimo legal: 40% IMM primer hijo + 30% IMM por adicional
+  const sueldo = Math.max(0, input.sueldoBruto);
+  const otroIngreso = input.tieneOtroIngreso ? Math.max(0, input.otroIngreso ?? 0) : 0;
+  const hijos = Math.max(0, Math.round(input.numeroHijos));
+  const totalIngresos = sueldo + otroIngreso;
   const imm = INGRESO_MINIMO.mensual;
-  const minimoLegal =
-    hijos >= 1
-      ? imm * MINIMO_IMM_PRIMER_HIJO + imm * MINIMO_IMM_HIJO_ADICIONAL * Math.max(0, hijos - 1)
-      : 0;
+
+  const porcentajeMinimoPorHijo =
+    hijos === 1
+      ? PENSION_ALIMENTOS.minimo_imm_un_hijo
+      : hijos >= 2
+        ? PENSION_ALIMENTOS.minimo_imm_dos_o_mas_por_hijo
+        : 0;
+  const pisoLegalPorHijo = imm * (porcentajeMinimoPorHijo / 100);
+  const pisoLegalTotal = pisoLegalPorHijo * hijos;
+  const limiteGeneralIngresos =
+    totalIngresos * (PENSION_ALIMENTOS.limite_general_ingreso / 100);
 
   return {
     sueldoBruto: Math.round(sueldo),
     totalIngresos: Math.round(totalIngresos),
     numeroHijos: hijos,
-    porcentajeAplicable,
-    porcentajePorHijo,
-    pensionSugerida: Math.round(pensionSugerida),
-    pensionPorHijo: Math.round(pensionPorHijo),
-    minimoLegal: Math.round(minimoLegal),
-    topeAplicado: aplicaTope,
-    topeMaximo: Math.round(topeMaximo),
-    tramoAplicado,
+    ingresoMinimoVigente: imm,
+    porcentajeMinimoPorHijo,
+    pisoLegalPorHijo: Math.round(pisoLegalPorHijo),
+    pisoLegalTotal: Math.round(pisoLegalTotal),
+    limiteGeneralIngresos: Math.round(limiteGeneralIngresos),
+    pisoSuperaLimiteGeneral: hijos > 0 && pisoLegalTotal > limiteGeneralIngresos,
+    advertencia:
+      'Esta referencia no reemplaza una resolución judicial. El tribunal fija el monto según las necesidades del alimentario y la capacidad económica de las partes; puede rebajar el piso si se acredita falta de medios o superar el 50% por razones fundadas.',
   };
 }
 
-/**
- * Convierte el resultado a formato de CalculatorResult[]
- */
 export function pensionAlimenticiaToResults(
   result: PensionAlimenticiaResult,
 ): CalculatorResult[] {
-  const results: CalculatorResult[] = [];
-
-  results.push({
-    label: 'Pensión Mensual Sugerida',
-    value: result.pensionSugerida,
-    format: 'CLP',
-    highlight: true,
-  });
-
-  if (result.numeroHijos > 1) {
-    results.push({
-      label: `Pensión Referencial por Hijo (${result.numeroHijos} hijos)`,
-      value: result.pensionPorHijo,
+  const results: CalculatorResult[] = [
+    {
+      label: 'Piso legal total referencial',
+      value: result.pisoLegalTotal,
       format: 'CLP',
+      highlight: true,
+    },
+    {
+      label: `Piso por cada menor (${result.porcentajeMinimoPorHijo}% del IMM)`,
+      value: result.pisoLegalPorHijo,
+      format: 'CLP',
+    },
+    {
+      label: 'Límite general: 50% de ingresos',
+      value: result.limiteGeneralIngresos,
+      format: 'CLP',
+    },
+    { label: 'Ingreso mínimo usado', value: result.ingresoMinimoVigente, format: 'CLP' },
+    { label: 'Número de menores', value: result.numeroHijos, format: 'number' },
+    { label: 'Ingresos declarados', value: result.totalIngresos, format: 'CLP' },
+  ];
+
+  if (result.pisoSuperaLimiteGeneral) {
+    results.push({
+      label: 'Requiere evaluación judicial de capacidad de pago',
+      value: 1,
+      format: 'number',
     });
   }
-
-  results.push({
-    label: 'Porcentaje Total Aplicado',
-    value: result.porcentajeAplicable,
-    format: 'percentage',
-  });
-
-  results.push({
-    label: 'Mínimo Legal (Ley 14.908)',
-    value: result.minimoLegal,
-    format: 'CLP',
-  });
-
-  if (result.topeAplicado) {
-    results.push({
-      label: 'Tope 50% Ingreso (Art. 7 Ley 14.908)',
-      value: result.topeMaximo,
-      format: 'CLP',
-    });
-  }
-
-  results.push({
-    label: 'Número de Hijos',
-    value: result.numeroHijos,
-    format: 'number',
-  });
-
-  results.push({
-    label: 'Total Ingresos',
-    value: result.totalIngresos,
-    format: 'CLP',
-  });
 
   return results;
 }

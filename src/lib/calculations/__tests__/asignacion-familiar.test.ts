@@ -1,5 +1,5 @@
 // ============================================
-// Tests de asignación familiar (Ley 21.751 / DFL 150)
+// Tests de asignación familiar (Ley 21.830 / DFL 150)
 // ============================================
 
 import { describe, it, expect } from 'vitest';
@@ -7,7 +7,7 @@ import { calculateAsignacionFamiliar } from '../asignacion-familiar';
 import { ASIGNACION_FAMILIAR_2026 } from '@/lib/values/constants';
 
 describe('calculateAsignacionFamiliar', () => {
-  it('tramo A (sueldo bajo): monto $22.007 por carga', () => {
+  it('tramo A (ingreso promedio bajo): monto $22.601 por carga', () => {
     const r = calculateAsignacionFamiliar({
       sueldoBruto: 500_000,
       numeroHijos: 2,
@@ -17,7 +17,7 @@ describe('calculateAsignacionFamiliar', () => {
     expect(r.asignacionMensual).toBe(2 * ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP);
   });
 
-  it('tramo B (sueldo medio): monto $13.505 por carga', () => {
+  it('tramo B (ingreso promedio medio): monto $13.870 por carga', () => {
     const r = calculateAsignacionFamiliar({
       sueldoBruto: 800_000,
       numeroHijos: 1,
@@ -26,7 +26,7 @@ describe('calculateAsignacionFamiliar', () => {
     expect(r.montoPorHijo).toBe(ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP);
   });
 
-  it('tramo C: monto reducido $4.267', () => {
+  it('tramo C: monto reducido $4.382', () => {
     const r = calculateAsignacionFamiliar({
       sueldoBruto: 1_200_000,
       numeroHijos: 2,

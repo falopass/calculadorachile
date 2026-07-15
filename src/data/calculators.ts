@@ -314,7 +314,7 @@ export const calculators: Calculator[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-13',
     sources: [
       { name: 'DT — valor hora extraordinaria', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html', note: 'Fórmula y jornada vigente' },
       { name: 'DT — Art. 32 horas extra', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60173.html', note: 'Recargo 50%; sin recargo nocturno automático' },
@@ -328,10 +328,8 @@ export const calculators: Calculator[] = [
         { value: '44', label: '44 h — vigente abr-2024 a abr-2026' },
         { value: '45', label: '45 h — histórica (antes 2024)' },
         { value: '40', label: '40 h — desde abr-2028 / pactada' },
-      ], defaultValue: '42', tooltip: 'Define el valor de la hora ordinaria: sueldo ÷ (jornada × 4,33).' },
-      { id: 'esDomingo', label: '¿Tratar estas horas como domingo/festivo (recargo especial del motor)?', type: 'boolean', required: false, defaultValue: false, tooltip: 'El mínimo legal del Art. 32 es 50%. El motor puede aplicar un recargo mayor en este escenario (configuración actual). Convenios pueden mejorar el mínimo.' },
-      { id: 'horasExtraFestivos', label: 'Horas extra en festivos (adicionales)', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
-      { id: 'recargoPersonalizado', label: 'Recargo personalizado (%)', type: 'number', placeholder: '50', required: false, min: 0, max: 200, tooltip: 'Vacío = usa el recargo del motor (50% o el de domingo/festivo). Convenio colectivo puede pactar más.' },
+      ], defaultValue: '42', tooltip: 'La fórmula DT divide sueldo/30 × 28 por las horas de cuatro semanas.' },
+      { id: 'recargoPersonalizado', label: 'Recargo pactado (%)', type: 'number', placeholder: '50', required: false, min: 50, max: 200, tooltip: 'Vacío = mínimo legal de 50%. Un contrato o convenio puede pactar un porcentaje superior.' },
       { id: 'sueldoVariable', label: '¿Usar promedio de sueldo variable?', type: 'boolean', required: false, defaultValue: false },
       { id: 'sueldoPromedio3Meses', label: 'Promedio últimos 3 meses (si variable)', type: 'number', unit: 'CLP', placeholder: '0', required: false, min: 0 },
       { id: 'calcularImpactoCotizaciones', label: '¿Estimar impacto en cotizaciones (10%+7%+0,6%)?', type: 'boolean', required: false, defaultValue: false },
@@ -340,11 +338,11 @@ export const calculators: Calculator[] = [
     faq: [
       {
         question: '¿Cuánto me pagan por una hora extra?',
-        answer: 'El recargo legal mínimo es 50% sobre la hora ordinaria (Art. 32 CdT). Con jornada de 42 h/semana (vigente desde 26-04-2026), las horas mensuales de referencia son 42 × 4,33. Valor hora extra ≈ (sueldo / esas horas) × 1,5.',
+        answer: 'El recargo legal mínimo es 50% sobre la hora ordinaria. Para sueldo mensual, la DT indica: sueldo ÷ 30 × 28 ÷ (jornada semanal × 4), y luego multiplicar por 1,5. Con $1.000.000 y 42 horas, una hora extra equivale a $8.333.',
       },
       {
         question: '¿Existe recargo nocturno automático?',
-        answer: 'No. En Chile no hay un recargo legal automático por trabajar de noche en horas extraordinarias. El 50% mínimo aplica igual de día o de noche, salvo pacto o convenio más favorable.',
+        answer: 'No. Tampoco existe un 100% general automático por domingo o festivo. El mínimo de 50% rige para la hora que jurídicamente es extraordinaria, sin perjuicio de descansos compensatorios o pactos más favorables.',
       },
       {
         question: '¿Cuál es la jornada semanal vigente?',
@@ -363,14 +361,15 @@ export const calculators: Calculator[] = [
   {
     id: 'vacaciones-proporcionales',
     name: 'Vacaciones Proporcionales',
-    description: 'Calcula tus vacaciones proporcionales al finiquito o renuncia. Días de feriado legal según meses trabajados. Basado en Código del Trabajo Art. 67.',
+    description: 'Estima el feriado proporcional al término del contrato e incorpora fines de semana y feriados al pago.',
     slug: 'calculadora-vacaciones-proporcionales',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Feriado proporcional, Código del Trabajo Art. 67' },
+      { name: 'DT — Feriado proporcional', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60183.html', note: 'Procedimiento de días hábiles y proyección de sábados, domingos y festivos' },
+      { name: 'BCN — Código del Trabajo', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436', note: 'Artículos 67 a 73 sobre feriado' },
     ],
     seoTitle: 'Vacaciones Proporcionales 2026: calcula en pesos',
     seoDescription:
@@ -379,28 +378,30 @@ export const calculators: Calculator[] = [
     inputs: [
       { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0 },
       { id: 'mesesTrabajados', label: 'Meses Trabajados', type: 'number', placeholder: '6', required: true, min: 0, max: 11 },
+      { id: 'diasTrabajadosUltimoMes', label: 'Días adicionales del último mes', type: 'number', placeholder: '0', required: false, min: 0, max: 30, defaultValue: 0 },
       { id: 'diasNoTomados', label: 'Días de vacaciones no tomados', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
+      { id: 'fechaTermino', label: 'Fecha de término (AAAA-MM-DD)', type: 'text', placeholder: '2026-07-31', required: true, tooltip: 'Permite proyectar los días hábiles e incorporar sábados, domingos y feriados nacionales.' },
     ],
     faq: [
       {
         question: '¿Cómo se calculan las vacaciones proporcionales?',
-        answer: 'Las vacaciones proporcionales se calculan dividiendo los 15 días hábiles de feriado anual entre 12 meses, dando 1.25 días por cada mes trabajado. Por ejemplo, si trabajaste 6 meses, te corresponden 7.5 días de vacaciones proporcionales (6 × 1.25).',
+        answer: 'Se acumulan 1,25 días hábiles por mes completo y 1,25/30 por cada día adicional. Al terminar el contrato, esos días se proyectan desde el día siguiente y se agregan los sábados, domingos y festivos que caen dentro del período.',
       },
       {
         question: '¿Cuántos días de vacaciones me corresponden por año?',
-        answer: 'Según el Art. 67 del Código del Trabajo, todo trabajador con más de un año de servicio tiene derecho a 15 días hábiles de feriado anual. Estos días no incluyen domingos ni festivos, por lo que en la práctica pueden ser hasta 21 días corridos.',
+        answer: 'La regla general es 15 días hábiles por año. La cantidad de días corridos no es siempre 21: depende de la fecha concreta, fines de semana y feriados incluidos en la proyección.',
       },
       {
         question: '¿Se pagan las vacaciones proporcionales en el finiquito?',
-        answer: 'Sí, al término del contrato se deben pagar las vacaciones proporcionales correspondientes al tiempo trabajado en el año en curso, más cualquier día de vacaciones pendiente de años anteriores que no se hayan tomado. Este pago se calcula sobre el último sueldo bruto.',
+        answer: 'Sí, al terminar el contrato se compensa el feriado proporcional y el feriado pendiente que corresponda. La remuneración íntegra puede requerir promedios o componentes variables; esta versión usa el sueldo mensual declarado y debe contrastarse con el finiquito.',
       },
       {
         question: '¿Qué pasa si no tomé mis vacaciones?',
-        answer: 'Si al terminar tu contrato tienes días de vacaciones acumulados sin tomar, el empleador debe pagártelos en el finiquito. El valor de cada día se calcula dividiendo tu sueldo mensual por 30. No puedes renunciar a este derecho.',
+        answer: 'Los días hábiles pendientes se agregan antes de proyectar el calendario. El valor diario de un sueldo mensual se obtiene dividiendo por 30, pero la base puede cambiar si existen remuneraciones variables.',
       },
       {
         question: '¿Qué dice el Art. 67 del Código del Trabajo?',
-        answer: 'El Art. 67 establece que los trabajadores con más de un año de servicio tienen derecho a 15 días hábiles de feriado anual con derecho a remuneración íntegra. El Art. 68 permite acumular hasta dos períodos consecutivos de vacaciones. El Art. 70 regula el feriado proporcional para quienes no completan el año.',
+        answer: 'El artículo 67 regula el feriado anual; el 68, el feriado progresivo; el 70 impide compensarlo en dinero mientras sigue vigente el contrato; y el 73 ordena compensar el feriado al terminar la relación laboral. La acumulación de hasta dos períodos está en el artículo 70.',
       },
     ],
   },
@@ -595,15 +596,15 @@ export const calculators: Calculator[] = [
   {
     id: 'pension-alimenticia',
     name: 'Pensión Alimenticia',
-    description: 'Calcula la pensión de alimentos sugerida según número de hijos e ingresos. Basado en la Ley 14.908 de Chile.',
+    description: 'Consulta el piso legal para menores y compáralo con el límite general de ingresos. No reemplaza la decisión del tribunal.',
     slug: 'calculadora-pension-alimenticia',
     category: 'familia',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Retención de pensión de alimentos del sueldo' },
-      { name: 'BCN — Ley Chile', url: 'https://www.bcn.cl/leychile', note: 'Ley 14.908 sobre pago de pensiones de alimentos' },
+      { name: 'BCN — Ley 14.908, artículo 3', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986&idParte=8720734', note: 'Pisos de 40% o 30% del ingreso mínimo remuneracional' },
+      { name: 'BCN — Ley 14.908, artículo 7', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986&idParte=8720735', note: 'Límite general de 50% y excepción por razones fundadas' },
     ],
     keywords: ['pensión alimenticia', 'calculadora pensión', 'Ley 14.908', 'alimentos hijos', 'porcentaje pensión', 'alimentos Chile'],
     inputs: [
@@ -615,23 +616,23 @@ export const calculators: Calculator[] = [
     faq: [
       {
         question: '¿Cómo se calcula la pensión alimenticia?',
-        answer: 'La pensión alimenticia se calcula como un porcentaje de los ingresos del padre/madre obligado: 40% para 1-2 hijos, 50% para 3-4 hijos, y 60% para 5 o más hijos. Estos porcentajes son orientativos y el juez puede modificarlos según las circunstancias del caso.',
+        answer: 'No existe una tabla legal que convierta el sueldo en una pensión sugerida. El tribunal considera las necesidades del alimentario, la capacidad económica de las partes, los cuidados y otros antecedentes. Esta herramienta solo muestra el piso presunto y el límite general regulados por la Ley 14.908.',
       },
       {
         question: '¿Qué dice la Ley 14.908 sobre pensión alimenticia?',
-        answer: 'La Ley 14.908 establece la obligación de pagar alimentos a los hijos menores de edad. Fija montos mínimos y porcentajes orientativos según el número de hijos. La ley también establece retención judicial del sueldo, interés por mora, y sanciones penales por no pagar.',
+        answer: 'Para un menor, el artículo 3 establece un piso de 40% del ingreso mínimo remuneracional. Si se solicitan alimentos para dos o más menores, el piso es 30% del ingreso mínimo por cada uno. El juez puede rebajarlo si se acredita falta de medios.',
       },
       {
         question: '¿Cuál es el monto mínimo de pensión alimenticia?',
-        answer: 'El monto mínimo varía según el número de hijos y se actualiza anualmente. En 2026, el mínimo aproximado es de $80.000 por hijo. Este monto puede ser mayor si los ingresos del obligado son altos o si hay necesidades especiales del niño/a.',
+        answer: 'Con el ingreso mínimo de $553.553 vigente desde mayo de 2026, la referencia es $221.421 para un menor. Para dos o más menores, corresponde $166.066 por cada uno. Son pisos presuntos: una resolución puede fijar otro monto según los antecedentes del caso.',
       },
       {
         question: '¿La pensión se calcula sobre el bruto o líquido?',
-        answer: 'La pensión se calcula sobre el total de ingresos del obligado, incluyendo sueldo bruto, gratificaciones, bonos, comisiones y cualquier otro ingreso regular. Se descuentan los impuestos y cotizaciones previsionales para determinar la base de cálculo.',
+        answer: 'La ley habla de las rentas del alimentante para el límite general de 50%, pero el monto no se obtiene aplicando automáticamente un porcentaje al sueldo bruto o líquido. El tribunal determina qué antecedentes de ingresos y capacidad económica resultan pertinentes.',
       },
       {
         question: '¿Qué pasa si no pago la pensión alimenticia?',
-        answer: 'El no pago de pensión alimenticia tiene consecuencias graves: retención judicial del sueldo, intereses por mora (interés máximo convencional), reporte a Dicom, prohibición de salir del país, y en casos graves, prisión por incumplimiento de obligaciones alimentarias.',
+        answer: 'Puede dar lugar a liquidación de deuda, retenciones, apremios y, cuando se cumplen sus requisitos, inscripción en el Registro Nacional de Deudores. No corresponde afirmar que toda mora produce automáticamente un reporte comercial o una pena de prisión.',
       },
     ],
   },
@@ -682,20 +683,21 @@ export const calculators: Calculator[] = [
     id: 'permiso-circulacion',
     name: 'Permiso de Circulación 2026',
     description:
-      'Estima el permiso con tasación fiscal SII (tabla UTM), tipo de vehículo, antigüedad ≥20 años, prorrateo 1.ª inscripción y 1.ª/2.ª cuota.',
+      'Estima el permiso de un vehículo liviano con la escala SII, UTM de enero y beneficio eléctrico 2026.',
     slug: 'calculadora-permiso-circulacion',
     category: 'vehiculos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-10',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl/permiso-de-circulacion/', note: 'Permiso de circulación' },
-      { name: 'SII', url: 'https://www.sii.cl', note: 'Tasación fiscal de vehículos / tabla anual' },
+      { name: 'SII — Tasación vehicular 2026', url: 'https://www.sii.cl/destacados/tasacion_vehiculos/2026/index.html', note: 'Consulta oficial por código, marca y modelo' },
+      { name: 'SII — Cómo se determina el permiso', url: 'https://www.sii.cl/preguntas_frecuentes/tasac_fiscal_vehiculos/001_170_5079.htm', note: 'Escala progresiva y UTM de enero' },
+      { name: 'SII — Resolución Exenta 6/2026', url: 'https://www.sii.cl/normativa_legislacion/resoluciones/2026/reso6.pdf', note: 'Tasaciones, permiso mínimo y exención de vehículos elegibles' },
       { name: 'ChileAtiende', url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion', note: 'Plazos y cuotas' },
     ],
     seoTitle: 'Permiso de Circulación 2026: calcula el valor',
     seoDescription:
-      'Estima tu permiso 2026 con tasación fiscal SII, antigüedad y 1ª/2ª cuota. Referencial: confirma en tu municipio. Gratis.',
+      'Estima el permiso 2026 de un vehículo liviano con tasación fiscal, escala SII y beneficio eléctrico. Confirma por código en el SII.',
     keywords: [
       'permiso de circulación',
       'calcular permiso de circulacion',
@@ -703,7 +705,7 @@ export const calculators: Calculator[] = [
       'tasación fiscal vehículo',
       'segunda cuota permiso agosto',
       'permiso 2026',
-      'descuento antigüedad vehículo',
+      'vehículo eléctrico permiso circulación',
     ],
     inputs: [
       {
@@ -715,58 +717,15 @@ export const calculators: Calculator[] = [
         required: true,
         min: 0,
         tooltip:
-          'Usa la tasación fiscal del SII del año, no lo que pagaste en la compraventa. Es la base de la tabla en UTM.',
+          'Usa la tasación fiscal 2026 publicada para el código exacto de tu vehículo, no el precio comercial.',
       },
       {
-        id: 'tipoVehiculo',
-        label: 'Tipo de vehículo',
-        type: 'select',
-        required: true,
-        options: [
-          { value: 'automovil', label: 'Automóvil' },
-          { value: 'motocicleta', label: 'Motocicleta (factor 50%)' },
-          { value: 'carga', label: 'Vehículo de carga' },
-          { value: 'bus', label: 'Bus' },
-          { value: 'taxi', label: 'Taxi (factor 50%)' },
-          { value: 'camion', label: 'Camión' },
-        ],
-      },
-      {
-        id: 'antiguedadVehiculo',
-        label: 'Antigüedad (años)',
-        type: 'number',
-        placeholder: '5',
-        required: true,
-        min: 0,
-        max: 50,
-        tooltip: 'En este modelo, vehículos con 20 años o más aplican 50% de descuento sobre el monto base (aprox. tabla SII).',
-      },
-      {
-        id: 'esZonaCarga',
-        label: '¿Zona de carga pesada? (informativo)',
+        id: 'electricoHibridoElegible',
+        label: '¿Figura con exención de 75% en la nómina SII 2026?',
         type: 'boolean',
         required: false,
         defaultValue: false,
-        tooltip: 'Algunas comunas tienen recargos locales. El motor no inventa tasas comunales: confirma en tu municipio.',
-      },
-      {
-        id: 'esPrimeraVez',
-        label: '¿Primera inscripción / prorrateo del año?',
-        type: 'boolean',
-        required: false,
-        defaultValue: false,
-        tooltip: 'Si activas prorrateo, usa “meses restantes” para estimar el permiso proporcional del año.',
-      },
-      {
-        id: 'mesesRestantes',
-        label: 'Meses restantes del año (si prorrateas)',
-        type: 'number',
-        placeholder: '12',
-        required: false,
-        min: 1,
-        max: 12,
-        defaultValue: 12,
-        tooltip: 'Solo aplica si marcaste primera inscripción. Ej.: te inscribes en julio → ~6 meses.',
+        tooltip: 'No basta con ser híbrido o eléctrico: confirma que el código exacto aparezca en la lista SII beneficiada.',
       },
     ],
     faq: [
@@ -778,12 +737,12 @@ export const calculators: Calculator[] = [
       {
         question: '¿Cómo calcula esta herramienta?',
         answer:
-          'Aplica una tabla progresiva en UTM sobre la tasación (tramos del SII cargados en el sitio), factores por tipo (moto/taxi 50%) y descuento del 50% si antigüedad ≥ 20 años. Es una estimación: el municipio puede liquidar distinto.',
+          'Aplica la escala progresiva acumulativa SII sobre la tasación fiscal, con la UTM de enero de 2026 ($69.751). Para tasaciones de hasta $3.487.600 usa el permiso mínimo de $34.876. No aplica rebajas ficticias por antigüedad o tipo.',
       },
       {
         question: '¿Qué son la 1.ª y 2.ª cuota?',
         answer:
-          'Muchos municipios permiten pagar en dos cuotas (la segunda suele vencer en agosto). Aquí se muestra 50%/50% del total estimado. Fechas exactas: ChileAtiende / tu municipalidad.',
+          'La herramienta muestra la mitad del monto anual como base. La segunda cuota, pagada normalmente en agosto, puede incorporar el reajuste legal; confirma el monto exacto en la municipalidad.',
       },
       {
         question: '¿Cuándo se paga el permiso 2026?',
@@ -800,17 +759,16 @@ export const calculators: Calculator[] = [
   {
     id: 'costo-empleado-pyme',
     name: 'Costo Total Empleado PYME',
-    description: 'Calcula el costo real de un empleado para tu PYME: sueldo, cotizaciones, gratificación y aportes del empleador.',
+    description: 'Estima el costo mensual según contrato y período 2026, sin duplicar SIS ni descuentos del trabajador.',
     slug: 'calculadora-costo-empleado-pyme',
     category: 'empresas',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Cotizaciones obligatorias y Código del Trabajo' },
-      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'Comisiones AFP (aporte empleador)' },
+      { name: 'Superintendencia de Pensiones — aporte empleador', url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html', note: 'Gradualidad de 1% y distribución previsional' },
+      { name: 'Superintendencia de Pensiones — SIS', url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9893.html', note: 'Tasa SIS 1,62% desde abril de 2026' },
       { name: 'AFC Chile', url: 'https://www.afc.cl/seguro-de-cesantia/', note: 'Seguro de cesantía (aporte empleador 2.4%)' },
-      { name: 'SII', url: 'https://www.sii.cl', note: 'Impuesto único a las rentas del trabajo' },
     ],
     keywords: ['costo empleado PYME', 'cuánto cuesta un empleado', 'gasto empleador', 'cotizaciones patronales', 'costo total trabajador Chile', 'sueldo real empresa'],
     inputs: [
@@ -829,29 +787,32 @@ export const calculators: Calculator[] = [
         { value: 'isapre', label: 'Isapre' },
       ]},
       { id: 'contratoIndefinido', label: '¿Contrato Indefinido?', type: 'boolean', required: false, defaultValue: true },
-      { id: 'gratificacionIncluida', label: '¿Incluye gratificación?', type: 'boolean', required: false, defaultValue: true },
-      { id: 'horasExtra', label: 'Horas Extra Mensuales', type: 'number', placeholder: '0', required: false, min: 0, defaultValue: 0 },
+      { id: 'agregarGratificacion', label: '¿Agregar gratificación Art. 50?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Actívala solo si el sueldo ingresado no la incluye. Se aplica 25% con tope de 4,75 ingresos mínimos anuales.' },
+      { id: 'periodoCotizacion', label: 'Período de remuneración', type: 'select', required: true, options: [
+        { value: 'hasta_julio_2026', label: 'Hasta julio 2026: 1% + SIS separado' },
+        { value: 'desde_agosto_2026', label: 'Desde agosto 2026: 3,5% total con SIS incluido' },
+      ], defaultValue: 'hasta_julio_2026' },
     ],
     faq: [
       {
         question: '¿Cuánto cuesta realmente un empleado en Chile?',
-        answer: 'El costo real de un empleado es aproximadamente 1.3 a 1.5 veces el sueldo bruto. Para un sueldo de $500.000, el costo total para la empresa es de unos $650.000-$750.000 mensuales. Esto incluye: sueldo bruto, gratificación, aportes del empleador (SIS 1.62%, seguro cesantía 2.4%), y beneficios adicionales.',
+        answer: 'No existe un multiplicador universal de 1,3 o 1,5. Depende de si el sueldo ya incluye gratificación, el tipo de contrato, la tasa adicional de la mutual, beneficios pactados y el período previsional. La herramienta muestra solo componentes configurados y obligatorios de referencia.',
       },
       {
         question: '¿Qué aportes debe pagar el empleador?',
-        answer: 'El empleador debe pagar: SIS (Seguro de Invalidez y Sobrevivencia) 1.62% del sueldo imponible, Seguro de Cesantía 2.4% (contrato indefinido), y cotización de salud 7% si el empleado está en FONASA. Además debe pagar gratificación legal (25% con tope de 4.75 IMM anuales según Art. 50).',
+        answer: 'Hasta julio de 2026 paga 1% de la reforma previsional más SIS de 1,62%, además de cesantía y mutual. Desde agosto, la cotización previsional total sube a 3,5% e incluye el financiamiento SIS: no se debe sumar SIS otra vez. El 7% de salud se descuenta al trabajador, no es aporte patronal adicional.',
       },
       {
-        question: '¿Qué es el factor precacional?',
-        answer: 'El factor precacional es la relación entre el costo total del empleado y el sueldo bruto. Se usa para calcular el valor hora de un empleado. Un factor típico es 1.3-1.5, lo que significa que por cada $100 de sueldo bruto, la empresa paga $130-$150 en total.',
+        question: '¿Qué significa el factor costo?',
+        answer: 'Es la división entre el costo mensual estimado y el sueldo bruto ingresado. Sirve para comparar este escenario, pero no es una tasa legal ni incluye colación, movilización, licencias, reemplazos, indemnizaciones u otros beneficios.',
       },
       {
         question: '¿Cómo afectan las horas extra al costo?',
-        answer: 'Las horas extra aumentan el costo total del empleado. Se pagan con recargo 50% (o 100% en domingos/festivos) y también están afectas a cotizaciones previsionales. Si un empleado hace muchas horas extra, el costo para la empresa aumenta proporcionalmente.',
+        answer: 'Las horas extra forman parte de la remuneración imponible, pero no se incorporan aquí porque requieren su propia base y cantidad. Calcula primero su monto en la herramienta de horas extra y súmalo al escenario remuneracional correspondiente.',
       },
       {
         question: '¿Hay diferencias para PYME?',
-        answer: 'Las PYME con menos de 25 trabajadores tienen algunas exenciones parciales en el seguro de cesantía. Además, pueden acceder a subsidios del SENCE para contratar trabajadores jóvenes o mujeres. El costo base del empleado es el mismo, pero hay beneficios tributarios disponibles.',
+        answer: 'La calculadora no presume exenciones por tamaño de empresa. Si existe un subsidio de contratación vigente y cumples sus requisitos, debe tratarse por separado; no reduzcas las cotizaciones obligatorias solo por ser PYME.',
       },
     ],
   },
@@ -861,7 +822,7 @@ export const calculators: Calculator[] = [
   {
     id: 'credito-hipotecario',
     name: 'Simulador Crédito Hipotecario 2026',
-    description: 'Simula tu dividendo mensual de crédito hipotecario en UF y CLP. Calcula interés total, costo del crédito y cuota con amortización francesa.',
+    description: 'Simula capital, dividendo e intereses con amortización francesa. No estima seguros, CAE contractual ni aprobación bancaria.',
     slug: 'calculadora-credito-hipotecario',
     category: 'vivienda',
     featured: true,
@@ -878,15 +839,7 @@ export const calculators: Calculator[] = [
       { id: 'pieUF', label: 'Pie (UF)', type: 'number', unit: 'UF', placeholder: '200', required: false, min: 0 },
       { id: 'plazoAnos', label: 'Plazo (años)', type: 'number', placeholder: '25', required: true, min: 1, max: 40 },
       { id: 'tasaAnual', label: 'Tasa anual (%)', type: 'number', placeholder: '4.5', required: true, min: 0, max: 20 },
-      { id: 'ingresoMensual', label: 'Ingreso mensual (CLP) — capacidad 25%', type: 'number', unit: 'CLP', placeholder: '0', required: false, min: 0 },
-      { id: 'incluyeSeguroDesgravamen', label: '¿Estimar seguro desgravamen? (mercado)', type: 'boolean', required: false, defaultValue: false, tooltip: 'Estimación de mercado (~0,03% mensual del saldo), no tarifa de un banco concreto. No es oferta CMF.' },
-      { id: 'incluyeSeguroIncendio', label: '¿Estimar seguro incendio? (mercado)', type: 'boolean', required: false, defaultValue: false, tooltip: 'Estimación de mercado sobre el monto; no es cotización oficial.' },
-      { id: 'incluyeComisionAdministracion', label: '¿Estimar comisión de administración? (mercado)', type: 'boolean', required: false, defaultValue: false },
       { id: 'calcularTablaAmortizacion', label: '¿Calcular tabla de amortización?', type: 'boolean', required: false, defaultValue: false },
-      { id: 'calcularCAE', label: '¿Estimar CAE con cargos activados?', type: 'boolean', required: false, defaultValue: false, tooltip: 'CAE aproximada por TIR incluyendo seguros/comisión si los activaste. No es la CAE contractual del banco.' },
-      { id: 'calcularGastosNotariales', label: '¿Estimar gastos notariales (~1,5%)?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Estimación gruesa de mercado, no arancel notarial oficial.' },
-      { id: 'simularPrepago', label: '¿Simular ahorro por prepago?', type: 'boolean', required: false, defaultValue: false },
-      { id: 'montoPrepago', label: 'Monto de prepago (UF)', type: 'number', unit: 'UF', placeholder: '0', required: false, min: 0 },
     ],
     faq: [
       {
@@ -895,19 +848,19 @@ export const calculators: Calculator[] = [
       },
       {
         question: '¿Cuánto pie necesito para un crédito hipotecario?',
-        answer: 'Los bancos exigen entre 10% y 20% del valor de la propiedad como pie. En UF, si la propiedad vale 3000 UF, necesitas al menos 300-600 UF de pie. Un pie mayor reduce el dividendo mensual y el interés total. Algunos bancos ofrecen créditos con 5% de pie pero con seguro adicional.'
+        answer: 'No existe un pie único exigido por ley. Cada entidad evalúa el porcentaje financiado, el inmueble y el perfil de riesgo. Usa en la simulación el pie de una cotización formal, no un supuesto de aprobación.'
       },
       {
         question: '¿Es mejor un crédito en UF o en pesos?',
-        answer: 'Los créditos en UF protegen al banco de la inflación pero tu dividendo sube con la UF. Los créditos en pesos tienen dividendo fijo pero tasas más altas (2-3% más). Para plazos largos (20+ años), la UF es más común en Chile. Si tu ingreso se reajusta con UF, un crédito en UF es más seguro.'
+        answer: 'En UF, la obligación y el dividendo se expresan en una unidad que se reajusta con la inflación, por lo que el equivalente en pesos cambia. No se puede afirmar que sea más seguro sin comparar ingresos, tasa, plazo y oferta concreta.'
       },
       {
         question: '¿Qué gastos adicionales debo considerar?',
-        answer: 'Además del dividendo, considera: seguro de desgravamen (0.3-0.5% anual), seguro de incendio (0.02% del valor propiedad), gastos notariales (0.2-0.5% del valor), y contribuciones (0.93% del avalúo fiscal anual). Estos pueden sumar 1-2 UF mensuales adicionales.'
+        answer: 'Revisa en la cotización desgravamen, incendio, eventuales coberturas adicionales, tasación, estudio de títulos, notaría, impuesto de timbres cuando corresponda e inscripción en el Conservador. La herramienta no inventa porcentajes nacionales para estos costos.'
       },
       {
         question: '¿Cuál es el costo total del crédito?',
-        answer: 'El costo total incluye: monto solicitado + intereses totales + seguros. Por ejemplo, 2000 UF a 25 años con 4.5% genera aproximadamente 1218 UF de intereses totales. El costo total sería 3218 UF. Usar la calculadora te muestra el desglose exacto según tus parámetros.'
+        answer: 'El resultado suma capital e intereses del escenario matemático. Para comparar ofertas reales usa la CAE y el costo total del crédito incluidos en la hoja de resumen del proveedor, porque incorporan cargos que este simulador no conoce.'
       },
       {
         question: '¿Qué es la tabla de amortización?',
@@ -926,8 +879,8 @@ export const calculators: Calculator[] = [
         answer: 'El período de gracia es un tiempo inicial (generalmente 6-12 meses) donde solo pagas intereses, no capital. Esto reduce temporalmente el dividendo pero alarga el tiempo de pago y aumenta el costo total del crédito.'
       },
       {
-        question: '¿Cómo ahorro con prepago?',
-        answer: 'El prepago consiste en pagar parte del capital antes de lo previsto. Esto reduce el saldo deudor y por tanto los intereses futuros. Puedes reducir el plazo o el dividendo mensual. La calculadora te muestra el ahorro aproximado según el monto de prepago.'
+        question: '¿Cómo funciona el prepago?',
+        answer: 'Para operaciones reajustables de hasta 5.000 UF, la comisión legal máxima es un mes y medio de intereses sobre el capital prepagado; si el abono es inferior a 10% del saldo se requiere consentimiento del acreedor. Sobre 5.000 UF rige lo pactado. Solicita una liquidación formal: esta herramienta no simula ese cargo.'
       },
     ],
   },
@@ -1415,28 +1368,28 @@ export const calculators: Calculator[] = [
     category: 'familia',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl', note: 'Asignación familiar, Código del Trabajo' },
-      { name: 'SII', url: 'https://www.sii.cl', note: 'Tramos y montos de asignación familiar' },
+      { name: 'BCN — Ley 21.830', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354', note: 'Montos y tramos vigentes desde mayo de 2026' },
+      { name: 'SUSESO — Asignación Familiar', url: 'https://www.suseso.cl/606/w3-propertyvalue-571.html', note: 'Beneficiarios, causantes y reconocimiento' },
     ],
     keywords: ['asignación familiar', 'asignación por hijo', 'tramo asignación', 'subsidio familiar Chile'],
     inputs: [
-      { id: 'sueldoBruto', label: 'Sueldo Bruto', type: 'number', placeholder: '$500.000', required: true, min: 0, tooltip: 'Tu sueldo bruto mensual determina el tramo. Incluye todas las remuneraciones imponibles.' },
+      { id: 'sueldoBruto', label: 'Ingreso mensual promedio', type: 'number', placeholder: '$500.000', required: true, min: 0, tooltip: 'Referencia para estimar el tramo. La entidad administradora determina el ingreso promedio conforme al período legal aplicable.' },
       { id: 'numeroHijos', label: 'Número de Hijos', type: 'number', placeholder: '2', required: true, min: 0, tooltip: 'Hijos menores de 18 años (o 24 si estudian, sin límite si son discapacitados).' },
     ],
     faq: [
       {
         question: '¿Cuánto es la asignación familiar?',
-        answer: 'Depende de tu tramo de ingresos: Tramo A (sueldo hasta $430.560) recibe $18.624 por hijo, Tramo B (hasta $630.816) recibe $11.358 por hijo, y Tramo C (sobre $630.816) no recibe asignación. Valores 2026.'
+        answer: 'Desde mayo de 2026: $22.601 hasta $649.039; $13.870 sobre $649.039 y hasta $947.990; $4.382 sobre $947.990 y hasta $1.478.539. Sobre ese último límite el monto es $0. El pago es por carga reconocida, no necesariamente por cada hijo declarado en esta simulación.'
       },
       {
         question: '¿Quiénes tienen derecho a asignación familiar?',
-        answer: 'Trabajadores dependientes e independientes con hijos menores de 18 años. También hijos mayores de 18 si estudian (hasta 24 años) o hijos con discapacidad sin límite de edad. Debes estar en FONASA o Isapre.'
+        answer: 'Pueden acceder las personas beneficiarias del Sistema Único de Prestaciones Familiares que tengan causantes reconocidos y cumplan sus requisitos. No basta con tener hijos ni existe un requisito general de afiliación a FONASA o Isapre para originar el beneficio.'
       },
       {
         question: '¿Cómo se solicita la asignación familiar?',
-        answer: 'Trabajadores dependientes: el empleador la paga automáticamente. Independientes: la paga la AFP o IPS. Necesitas inscribir a los hijos en el Registro de Asignaciones Familiares del IPS.'
+        answer: 'Primero debes solicitar el reconocimiento de la carga ante la entidad administradora que corresponda, como caja de compensación, IPS u otra institución previsional. El canal y quién paga dependen de la situación laboral y previsional; no siempre es automático.'
       },
       {
         question: '¿La asignación familiar afecta otros beneficios?',
@@ -1702,26 +1655,25 @@ export const calculators: Calculator[] = [
     id: 'multas-transito',
     name: 'Calculadora Multas de Tránsito',
     description:
-      'Estima multas en UTM y pesos: tramos legales e infracciones frecuentes (celular, luz roja, SOAP, alcohol). Referencial JPL.',
+      'Convierte a pesos los rangos legales de multas y aplica la reincidencia de infracciones graves o gravísimas.',
     slug: 'calculadora-multas-transito',
     category: 'vehiculos',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-10',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'BCN — Ley 18.290', url: 'https://www.bcn.cl/leychile', note: 'Ley de Tránsito y multas en UTM' },
-      { name: 'Tesorería General de la República', url: 'https://www.tesoreria.cl', note: 'Cobro de multas' },
+      { name: 'BCN — Ley 18.290, artículos 197 a 201', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29708&idParte=8756096', note: 'Clasificación, rangos y reincidencia' },
+      { name: 'BCN — Ley 21.377 No Chat', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1166274', note: 'Uso de dispositivos como infracción gravísima' },
     ],
     seoTitle: 'Multas de Tránsito 2026 Chile: calcula en UTM',
     seoDescription:
-      'Estima multas de tránsito en Chile: leve a gravísima, celular, luz roja, SOAP y alcohol. UTM del día. Referencial, gratis.',
+      'Consulta rangos de 0,2 a 3 UTM para multas de tránsito, su conversión a pesos y reglas de reincidencia. El JPL fija el monto.',
     keywords: [
       'multas tránsito',
       'multa UTM',
       'multa celular volante',
       'multa luz roja',
       'multa sin SOAP',
-      'Ley Emilia multa',
       'infracción tránsito Chile',
     ],
     inputs: [
@@ -1731,24 +1683,23 @@ export const calculators: Calculator[] = [
         type: 'select',
         required: true,
         options: [
-          { value: 'leve', label: 'Tramo: Leve (0,5 UTM)' },
-          { value: 'menos_grave', label: 'Tramo: Menos grave (1 UTM)' },
-          { value: 'grave', label: 'Tramo: Grave (2 UTM)' },
-          { value: 'gravisima', label: 'Tramo: Gravísima (4 UTM)' },
-          { value: 'gravisima_alcohol', label: 'Tramo: Alcohol / sustancias (12 UTM ref.)' },
-          { value: 'estacionar_prohibido', label: 'Estacionar prohibido (leve)' },
-          { value: 'no_cinturon', label: 'Sin cinturón (menos grave)' },
-          { value: 'celular_manos_libres', label: 'Celular al volante (grave)' },
-          { value: 'luz_roja', label: 'Luz roja / Pare (grave)' },
-          { value: 'exceso_velocidad_leve', label: 'Exceso velocidad moderado (menos grave)' },
-          { value: 'exceso_velocidad_grave', label: 'Exceso velocidad grave (gravísima)' },
+          { value: 'leve', label: 'Tramo leve (0,2 a 0,5 UTM)' },
+          { value: 'menos_grave', label: 'Tramo menos grave (0,5 a 1 UTM)' },
+          { value: 'grave', label: 'Tramo grave (1 a 1,5 UTM)' },
+          { value: 'gravisima', label: 'Tramo gravísima (1,5 a 3 UTM)' },
+          { value: 'estacionar_prohibido', label: 'Estacionar o detenerse en lugar prohibido' },
+          { value: 'no_cinturon', label: 'Sin cinturón de seguridad' },
+          { value: 'celular', label: 'Manipular celular al conducir (gravísima)' },
+          { value: 'luz_roja', label: 'No detenerse en luz roja o PARE (gravísima)' },
+          { value: 'exceso_hasta_10', label: 'Exceso de hasta 10 km/h (menos grave)' },
+          { value: 'exceso_11_a_20', label: 'Exceso de 11 a 20 km/h (grave)' },
+          { value: 'exceso_mas_20', label: 'Exceso sobre 20 km/h (gravísima)' },
           { value: 'sin_revision_tecnica', label: 'Sin revisión técnica (grave)' },
           { value: 'sin_soap', label: 'Sin SOAP (grave)' },
-          { value: 'sin_licencia', label: 'Sin licencia / suspendida (gravísima)' },
-          { value: 'ebriedad_alcohol', label: 'Alcohol al conducir (12 UTM ref.)' },
+          { value: 'sin_licencia', label: 'Sin haber obtenido licencia (gravísima)' },
         ],
         tooltip:
-          'Los montos en UTM son referencias del tramo legal del sitio. El Juzgado de Policía Local puede fijar otro valor dentro del rango y otras sanciones (suspensión, etc.).',
+          'La herramienta muestra el mínimo y máximo del rango. El Juzgado de Policía Local fija el monto y puede aplicar suspensión u otras sanciones.',
       },
       {
         id: 'cantidadMultas',
@@ -1760,24 +1711,26 @@ export const calculators: Calculator[] = [
         defaultValue: 1,
       },
       {
-        id: 'esReincidente',
-        label: '¿Reincidencia (recargo 50%)?',
-        type: 'boolean',
+        id: 'reincidenciasPrevias',
+        label: 'Reincidencias previas de la misma gravedad',
+        type: 'number',
         required: false,
-        defaultValue: false,
-        tooltip: 'Art. 197: recargo del 50% por reincidencia en 12 meses (referencia educativa).',
+        min: 0,
+        max: 2,
+        defaultValue: 0,
+        tooltip: 'Solo para graves dentro de 2 años o gravísimas dentro de 3 años: una duplica la multa y una nueva reincidencia la triplica.',
       },
     ],
     faq: [
       {
         question: '¿Los montos son exactos?',
         answer:
-          'Son estimaciones: UTM del sitio × factor del tramo (0,5 / 1 / 2 / 4 / 12). El JPL y la citación oficial mandan. Hay otras sanciones no monetarias.',
+          'No. La Ley 18.290 establece rangos: 0,2–0,5 UTM para leves, 0,5–1 para menos graves, 1–1,5 para graves y 1,5–3 para gravísimas. El JPL fija el monto dentro del rango y puede imponer otras sanciones.',
       },
       {
         question: '¿Por qué aparecen infracciones concretas?',
         answer:
-          'Para que no tengas que adivinar solo “leve/grave”. Cada una se mapea al tramo de referencia del motor; no es un catálogo exhaustivo de la Ley 18.290.',
+          'Para evitar clasificaciones antiguas: manipular el celular, no detenerse ante luz roja o PARE y conducir sin haber obtenido licencia son gravísimas. La lista no reemplaza el texto vigente ni cubre todas las circunstancias.',
       },
       {
         question: '¿Cómo se actualiza el valor en pesos?',
@@ -1789,59 +1742,49 @@ export const calculators: Calculator[] = [
         answer:
           'Pago en municipio / canales habilitados; reclamo ante Juzgado de Policía Local en los plazos legales. Revisa tu citación.',
       },
-      {
-        question: '¿Alcohol es solo la multa en UTM?',
-        answer:
-          'No. Puede haber suspensión, inhabilitación y otras penas (Ley Emilia / tolerancia cero). El valor 12 UTM es solo referencia del tramo de este simulador.',
-      },
     ],
   },
   {
     id: 'costo-tag',
-    name: 'Costo TAG Autopista',
-    description: 'Calcula el costo mensual y anual del TAG en autopistas chilenas. Incluye descuento por convenio frecuente.',
+    name: 'Presupuesto TAG Autopista',
+    description: 'Proyecta tu gasto mensual usando la tarifa vigente del pórtico, horario y categoría que consultaste.',
     slug: 'calculadora-costo-tag',
     category: 'vehiculos',
     noIndex: true,
-    featured: true,
+    featured: false,
     phase: 2,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Ministerio de Transportes', url: 'https://www.mtt.gob.cl', note: 'Concesiones viales y telepeaje TAG' },
-      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en peajes' },
+      { name: 'MOP — Peajes y pórticos 2026', url: 'https://concesiones.mop.gob.cl/peajes-y-porticos/', note: 'Tarifarios oficiales por concesión, categoría y horario' },
+      { name: 'MOP — Preguntas sobre concesiones', url: 'https://concesiones.mop.gob.cl/preguntas-y-respuestas/', note: 'La tarifa depende del contrato y tramo recorrido' },
     ],
-    keywords: ['costo TAG', 'autopista Chile', 'peaje TAG', 'santiago rancagua TAG', 'descuento frecuente'],
+    keywords: ['costo TAG', 'autopista Chile', 'peaje TAG', 'presupuesto TAG', 'tarifa pórtico'],
     inputs: [
-      { id: 'peajes', label: 'Ruta', type: 'select', required: true, options: [
-        { value: 'santiago_rancagua', label: 'Santiago - Rancagua' },
-        { value: 'santiago_valparaiso', label: 'Santiago - Valparaíso' },
-        { value: 'santiago_los_andes', label: 'Santiago - Los Andes' },
-        { value: 'santiago_san_fernando', label: 'Santiago - San Fernando' },
-        { value: 'urbano_santiago', label: 'Urbano Santiago' },
-      ], tooltip: 'Selecciona la ruta que más usas. Cada autopista tiene tarifas diferentes.' },
-      { id: 'viajesMes', label: 'Viajes al Mes', type: 'number', placeholder: '20', required: true, min: 1, tooltip: 'Número de viajes mensuales. Considera viajes de ida y vuelta.' },
-      { id: 'tieneConvenio', label: '¿Tienes convenio frecuente?', type: 'boolean', required: false, defaultValue: false, tooltip: 'Convenio frecuente da 30% de descuento. Requiere mínimo 15-20 viajes mensuales.' },
+      { id: 'tarifaPorPaso', label: 'Tarifa vigente por pasada', type: 'number', placeholder: '$1.250', required: true, min: 0, tooltip: 'Cópiala del tarifario MOP o de la concesionaria para tu pórtico, horario y categoría.' },
+      { id: 'pasadasMes', label: 'Pasadas al mes', type: 'number', placeholder: '20', required: true, min: 0, tooltip: 'Cuenta cada paso facturable; una ida y vuelta puede incluir varios pórticos.' },
+      { id: 'cargoFijoMensual', label: 'Cargo fijo mensual', type: 'number', placeholder: '$0', required: false, min: 0 },
+      { id: 'otrosCargosMensuales', label: 'Otros cargos mensuales', type: 'number', placeholder: '$0', required: false, min: 0 },
     ],
     faq: [
       {
         question: '¿Cuánto cuesta el TAG?',
-        answer: 'El costo varía por ruta y hora: Santiago-Rancagua ~$3.800 por viaje, Santiago-Valparaíso ~$3.200, Santiago-Los Andes ~$4.500, urbano Santiago ~$1.200. Con convenio frecuente obtienes 30% de descuento.'
+        answer: 'No existe una tarifa nacional por viaje. El cobro cambia según concesión, pórtico o tramo, categoría de vehículo y horario. Consulta el tarifario 2026 de la Dirección General de Concesiones y usa aquí el valor que corresponde a tu recorrido.'
       },
       {
-        question: '¿Qué es el convenio frecuente?',
-        answer: 'El convenio frecuente es un descuento del 30% para usuarios que realizan al menos 15-20 viajes mensuales en la misma autopista. Se solicita directamente a la concesionaria.'
+        question: '¿La herramienta calcula viajes sin TAG?',
+        answer: 'No. Los pases diarios, tarifas para usuarios sin TAG y mecanismos de regularización dependen de cada autopista. Aplicar un recargo universal de 50% produciría resultados falsos.'
       },
       {
         question: '¿Cómo obtengo el TAG?',
-        answer: 'El TAG se obtiene en oficinas de las concesionarias, supermercados, o en línea. Es un dispositivo que se instala en el parabrisas. El pago se hace con tarjeta de crédito o débito.'
+        answer: 'Solicítalo a una concesionaria y revisa sus canales oficiales. El dispositivo es interoperable en las autopistas concesionadas, pero la contratación, habilitación y cobro se rigen por las condiciones informadas por la empresa.'
       },
       {
         question: '¿Qué pasa si no pago el TAG?',
-        answer: 'Si no pagas, la concesionaria puede bloquear tu TAG y cobrar multas. Además, no podrás usar las autopistas. El impago se reporta a Dicom afectando tu historial crediticio.'
+        answer: 'Puede generarse deuda contractual y, si circulas con el dispositivo inhabilitado sin regularizar por el mecanismo correspondiente, también consecuencias bajo la Ley de Tránsito. Revisa la cuenta y los canales de la concesionaria; no todo impago produce automáticamente un reporte comercial.'
       },
       {
         question: '¿Hay tarifas diferenciadas?',
-        answer: 'Sí. Las autopistas tienen tarifas por hora: punta (7-10h, 17-21h) más cara, valle (10-17h) más barata, y noche (21-7h) la más económica. Planificar viajes puede ahorrar dinero.'
+        answer: 'Sí, pero los horarios y categorías no son iguales en todas las concesiones. Algunos tarifarios distinguen base fuera de punta, punta o saturación; otros usan tramos o tarifas manuales. Verifica el documento específico de tu ruta.'
       },
     ],
   },
@@ -1988,28 +1931,28 @@ export const calculators: Calculator[] = [
   {
     id: 'subsidio-agua',
     name: 'Subsidio Agua Potable',
-    description: 'Estima el subsidio al pago de agua potable según consumo, personas y tramo (referencial; noIndex).',
+    description: 'Estima el subsidio según tu cuenta, porcentaje asignado y tope oficial. El resultado real aparece en la boleta.',
     slug: 'calculadora-subsidio-agua',
     category: 'hogar',
     noIndex: true,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'SISS', url: 'https://www.siss.gob.cl', note: 'Subsidio de agua potable y servicios sanitarios' },
-      { name: 'SERNAC', url: 'https://www.sernac.cl', note: 'Derechos del consumidor en servicios básicos' },
+      { name: 'ChileAtiende — Subsidio al agua', url: 'https://www.chileatiende.gob.cl/fichas/51314-subsidio-al-pago-de-consumo-de-agua-potable-y-servicio-de-alcantarillado', note: 'Cobertura de 25% a 85%, tope de 13 m³ y régimen especial' },
+      { name: 'BCN — Ley 18.778', url: 'https://www.bcn.cl/leychile/navegar?idNorma=30157', note: 'Subsidio al consumo de agua potable y alcantarillado' },
     ],
     keywords: ['subsidio agua potable', 'descuento agua', 'subsidio servicios básicos Chile'],
     inputs: [
       { id: 'consumoM3', label: 'Consumo Mensual (m³)', type: 'number', placeholder: '15', required: true, min: 0 },
       { id: 'numeroPersonas', label: 'Personas en el Hogar', type: 'number', placeholder: '4', required: true, min: 1 },
-      { id: 'tramo', label: 'Tramo', type: 'select', required: true, options: [
-        { value: 'tramo1', label: 'Tramo 1' },
-        { value: 'tramo2', label: 'Tramo 2' },
-      ]},
+      { id: 'montoCuenta', label: 'Total de la cuenta antes del subsidio', type: 'number', placeholder: '$25.000', required: true, min: 0 },
+      { id: 'porcentajeAsignado', label: 'Porcentaje asignado (%)', type: 'number', placeholder: '50', required: true, min: 25, max: 85, tooltip: 'Revisa la resolución municipal o tu boleta. En el régimen general varía entre 25% y 85%.' },
+      { id: 'seguridadesYOportunidades', label: '¿Participas en Seguridades y Oportunidades?', type: 'boolean', required: false, defaultValue: false },
     ],
     faq: [
-      { question: '¿Cómo obtengo subsidio de agua?', answer: 'El subsidio se obtiene a través del municipio, evaluando el Registro Social de Hogares. El tramo 1 cubre hasta 15m³ por persona, el tramo 2 el 70% y el tramo 3 el 50%.' },
+      { question: '¿Cómo funciona el subsidio al agua?', answer: 'Se postula en la municipalidad del domicilio. El régimen general cubre entre 25% y 85% del valor hasta un consumo máximo de 13 m³; el porcentaje depende de la evaluación socioeconómica. No existen tres porcentajes nacionales fijos.' },
+      { question: '¿Qué cambia para Seguridades y Oportunidades?', answer: 'Los hogares participantes obtienen una cobertura de 100% para los primeros 15 m³ registrados en la cuenta. La herramienta aplica ese régimen especial cuando marcas la opción correspondiente.' },
     ],
   },
   {
@@ -2208,25 +2151,25 @@ export const calculators: Calculator[] = [
   {
     id: 'pgu',
     name: 'PGU (Pensión Garantizada Universal)',
-    description: 'Calcula tu Pensión Garantizada Universal según pensión actual y años cotizados. Ley 21.400.',
+    description: 'Estima el monto PGU 2026 según edad y pensión base declarada. No verifica residencia ni focalización.',
     slug: 'calculadora-pgu',
     category: 'pension',
     noIndex: true,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-07-13',
     sources: [
-      { name: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl/portal/prevision', note: 'PGU, Pensión Garantizada Universal' },
-      { name: 'IPS', url: 'https://www.ips.gob.cl', note: 'Pago de PGU y pensiones solidarias' },
+      { name: 'ChileAtiende — PGU', url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu', note: 'Montos, límites, edad y requisitos vigentes en 2026' },
+      { name: 'BCN — Ley 21.419', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1171923', note: 'Crea la Pensión Garantizada Universal' },
     ],
-    keywords: ['PGU', 'pensión garantizada universal', 'PGU Chile', 'bono pensión', 'Ley 21.400'],
+    keywords: ['PGU', 'pensión garantizada universal', 'PGU Chile', 'bono pensión', 'Ley 21.419'],
     inputs: [
-      { id: 'pensionActual', label: 'Pensión Actual', type: 'number', placeholder: '$250.000', required: true, min: 0 },
-      { id: 'anosCotizados', label: 'Años Cotizados', type: 'number', placeholder: '20', required: true, min: 0, max: 50 },
-      { id: 'esHombre', label: '¿Hombre?', type: 'boolean', required: false, defaultValue: true },
+      { id: 'pensionActual', label: 'Pensión base estimada', type: 'number', placeholder: '$250.000', required: true, min: 0, tooltip: 'La pensión base legal puede diferir de lo que recibes actualmente. Usa el dato informado por IPS o ChileAtiende si lo tienes.' },
+      { id: 'edad', label: 'Edad', type: 'number', placeholder: '70', required: true, min: 0, max: 120 },
     ],
     faq: [
-      { question: '¿Qué es la PGU?', answer: 'La Pensión Garantizada Universal (Ley 21.400) es un beneficio del Estado que complementa las pensiones bajas. El monto base 2026 es de aproximadamente $214.296, ajustado según años cotizados y pensión actual.' },
+      { question: '¿Cuáles son los montos PGU vigentes?', answer: 'Desde febrero de 2026, el máximo es $231.732 para personas de 65 a 81 años y $250.275 para quienes tienen 82 años o más. Hasta una pensión base de $789.139 se entrega el máximo correspondiente; entre ese valor y $1.252.602 el monto disminuye.' },
+      { question: '¿Los años cotizados cambian la PGU?', answer: 'No. La PGU es un beneficio no contributivo y su monto no se multiplica por años cotizados. Sí existen requisitos de edad, residencia y focalización que esta estimación no puede verificar.' },
     ],
   },
 ];

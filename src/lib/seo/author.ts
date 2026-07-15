@@ -66,15 +66,15 @@ export const AUTHOR: AuthorProfile = {
   alternateName: 'falopass',
   jobTitle: 'Editor jefe y desarrollador de CalculaChile',
   bioShort:
-    'Creador y editor jefe de CalculaChile. Estudiante de Ingeniería Civil en Computación. Verifica cada cálculo contra el Código del Trabajo, el SII y el Banco Central de Chile antes de publicarlo.',
+    'Creador y editor jefe de CalculaChile. Estudiante de Ingeniería Civil en Computación. Documenta las fórmulas y contrasta los valores publicados con fuentes oficiales chilenas.',
   bioLongHtml: `
     <p>Soy <strong>Diego Bravo Opazo</strong>, creador de CalculaChile. Estudio Ingeniería Civil en Computación (tercer año) y empecé el proyecto en 2025 porque cada vez que necesitaba calcular mi propio sueldo líquido, mi finiquito o el reajuste de mi arriendo, terminaba abriendo cinco pestañas distintas — y dos de las cinco daban resultados diferentes.</p>
     <p>CalculaChile nació para resolver eso: un solo lugar, con cálculos verificables y citas a la ley o a la fuente oficial detrás de cada número. No inventamos fórmulas: las leemos del <a href="https://www.bcn.cl" target="_blank" rel="noopener">Código del Trabajo en BCN</a>, del <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a>, del <a href="https://www.spensiones.cl" target="_blank" rel="noopener">SP</a>, del <a href="https://www.dt.gob.cl" target="_blank" rel="noopener">DT</a> y del <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central</a>.</p>
-    <p>Cada calculadora pasa por tres filtros antes de publicarse:</p>
+    <p>Las calculadoras se revisan con tres criterios antes de publicarse:</p>
     <ol>
-      <li><strong>Fórmula</strong> — escrita en TypeScript puro, con tests unitarios que la comparan contra ejemplos publicados por la autoridad respectiva.</li>
-      <li><strong>Caso de borde</strong> — probada con sueldos al tope imponible, contratos a plazo fijo, jornadas parciales y otros escenarios donde la regla cambia.</li>
-      <li><strong>FAQ con base legal</strong> — cada pregunta se responde citando el artículo de la ley o la circular vigente.</li>
+      <li><strong>Fórmula</strong> — implementada en TypeScript y acompañada por pruebas cuando la herramienta contiene reglas legales o valores críticos.</li>
+      <li><strong>Casos de borde</strong> — se comprueban escenarios donde la regla puede cambiar, como topes imponibles, jornadas parciales o tipos de contrato.</li>
+      <li><strong>Fuente y alcance</strong> — cada ficha identifica referencias oficiales, supuestos y situaciones que requieren revisión profesional.</li>
     </ol>
     <p>El sitio es código abierto en <a href="https://github.com/falopass/calculadorachile" target="_blank" rel="noopener">GitHub</a>. Si encuentras un cálculo incorrecto, escríbeme: prefiero corregirlo el mismo día a defender un error.</p>
   `.trim(),
@@ -89,8 +89,8 @@ export const AUTHOR: AuthorProfile = {
   ],
   credentials: [
     'Estudiante Ingeniería Civil en Computación',
-    'Lector activo de circulares de la Dirección del Trabajo y del SII',
-    'Bueno para las sumas',
+    'Autor y mantenedor de CalculaChile desde 2025',
+    'Desarrollador del repositorio público de CalculaChile',
   ],
   sameAs: [
     'https://github.com/falopass',

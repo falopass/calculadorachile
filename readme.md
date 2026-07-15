@@ -220,7 +220,7 @@ src/
 └── types/calculator.ts
 
 docs/
-│   contexto.md                     # producto + YMYL + Grok
+│   contexto.md                     # producto + YMYL + Codex
 │   plan-editorial.md               # backlog de posts
 │   research/                       # dossier-ymyl, inventario-seo, deep-research
 scripts/                            # audit-ymyl-matrix, update-values
@@ -364,22 +364,23 @@ Commit típico del bot: `chore(values): actualizar snapshot diario [skip ci]`.
 | Documento | Contenido |
 |-----------|-----------|
 | [`AGENTS.md`](./AGENTS.md) | Constitución del producto |
-| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + Grok Build (todo en uno) |
+| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + operación con Codex |
 | [`docs/plan-editorial.md`](./docs/plan-editorial.md) | Backlog de posts |
 | [`docs/research/`](./docs/research/) | dossier-ymyl · inventario-seo · deep-research |
 
-### Carpetas locales de agentes (no van al remoto)
+### Configuración de agentes
 
-Estas rutas están en **`.gitignore`** (herramientas locales; no se suben a GitHub):
+La configuración de Codex del producto se versiona junto con el repo:
 
 ```text
-.agents/     # skills espejo (OpenCode / agentes)
-.grok/       # skills, slash, rules, hooks (Grok Build)
-.opencode/   # config de proyecto OpenCode
-opencode.json
+.codex/config.toml     # límites y registro de agentes
+.codex/agents/         # architect, backend, frontend, seo, security, explorer-fast
+.agents/skills/        # workflows YMYL, calculadoras, SEO, editorial y ship
 ```
 
-La constitución versionada del producto es **`AGENTS.md`**, no esas carpetas.
+`AGENTS.md` sigue siendo la constitución y prevalece sobre la configuración auxiliar. `.grok/` y `.opencode/` permanecen gitignored como compatibilidad local.
+
+Para que Codex descubra toda la configuración, abre o inicia la tarea desde `C:\code\ecosistema-chile\CalculaChile` y marca el repo como confiable. Si abres la carpeta padre `ecosistema-chile`, su `AGENTS.md` solo enruta hacia cada producto.
 
 ---
 
@@ -442,7 +443,7 @@ Stack: **Next.js 15 (App Router), React 19, TypeScript 5, Tailwind 3, Framer Mot
 
 This is a **YMYL** product: formula changes require verified official sources (SII, Labour Directorate, Central Bank, Pension Superintendence, etc.). Catalog inputs must match what the calculation adapter actually uses (no “phantom” fields).
 
-Contributor and agent rules: [`AGENTS.md`](./AGENTS.md). Context: [`docs/contexto.md`](./docs/contexto.md). Editorial: [`docs/plan-editorial.md`](./docs/plan-editorial.md). Local agent folders (`.agents/`, `.grok/`, `.opencode/`) are **gitignored**.
+Contributor and agent rules: [`AGENTS.md`](./AGENTS.md). Context: [`docs/contexto.md`](./docs/contexto.md). Editorial: [`docs/plan-editorial.md`](./docs/plan-editorial.md). Codex project agents live in `.codex/agents/` and reusable workflows in `.agents/skills/`.
 
 </details>
 

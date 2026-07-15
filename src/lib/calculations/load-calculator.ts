@@ -188,18 +188,7 @@ export async function loadCalculationFn(
       return (inputs) => {
         const result = calculatePermisoCirculacion({
           valorVehiculo: coerceNumber(inputs.valorVehiculo),
-          tipoVehiculo: inputs.tipoVehiculo as
-            | 'automovil'
-            | 'motocicleta'
-            | 'carga'
-            | 'bus'
-            | 'taxi'
-            | 'camion',
-          antiguedadVehiculo: coerceNumber(inputs.antiguedadVehiculo),
-          esZonaCarga: coerceBool(inputs.esZonaCarga),
-          esPrimeraVez: coerceBool(inputs.esPrimeraVez),
-          mesesRestantes: coerceNumber(inputs.mesesRestantes, 12) || 12,
-          valorUTM: live?.valorUTM,
+          electricoHibridoElegible: coerceBool(inputs.electricoHibridoElegible),
         });
         return permisoCirculacionToResults(result);
       };
@@ -213,9 +202,10 @@ export async function loadCalculationFn(
           afp: inputs.afp as keyof typeof import('@/lib/values/constants').AFP,
           saludTipo: inputs.saludTipo as 'fonasa' | 'isapre',
           contratoIndefinido: coerceBool(inputs.contratoIndefinido, true),
-          gratificacionIncluida: coerceBool(inputs.gratificacionIncluida),
-          horasExtra: coerceNumber(inputs.horasExtra, 0),
-          montoHorasExtra: 0,
+          agregarGratificacion: coerceBool(inputs.agregarGratificacion),
+          periodoCotizacion: inputs.periodoCotizacion as
+            | 'hasta_julio_2026'
+            | 'desde_agosto_2026',
         });
         return costoEmpleadoToResults(result);
       };
@@ -234,12 +224,10 @@ export async function loadCalculationFn(
         const result = calculateHorasExtra({
           sueldoBruto: coerceNumber(inputs.sueldoBruto),
           horasExtra: coerceNumber(inputs.horasExtra),
-          esDomingoFestivo: coerceBool(inputs.esDomingo),
           jornadaSemanal,
           recargoPersonalizado,
           sueldoVariable: coerceBool(inputs.sueldoVariable),
           sueldoPromedio3Meses: coerceNumber(inputs.sueldoPromedio3Meses, 0),
-          horasExtraFestivos: coerceNumber(inputs.horasExtraFestivos, 0),
           calcularImpactoCotizaciones: coerceBool(inputs.calcularImpactoCotizaciones),
           mostrarTopeLegal: coerceBool(inputs.mostrarTopeLegal),
         });
@@ -253,7 +241,9 @@ export async function loadCalculationFn(
         const result = calculateVacaciones({
           sueldoBruto: coerceNumber(inputs.sueldoBruto),
           mesesTrabajados: coerceNumber(inputs.mesesTrabajados),
+          diasTrabajadosUltimoMes: coerceNumber(inputs.diasTrabajadosUltimoMes, 0),
           diasVacacionesPendientes: coerceNumber(inputs.diasNoTomados),
+          fechaTermino: typeof inputs.fechaTermino === 'string' ? inputs.fechaTermino : undefined,
         });
         return vacacionesToResults(result);
       };
@@ -291,15 +281,7 @@ export async function loadCalculationFn(
           plazoAnos: coerceNumber(inputs.plazoAnos),
           tasaAnual: coerceNumber(inputs.tasaAnual),
           pieUF: coerceNumber(inputs.pieUF, 0),
-          ingresoMensual: coerceNumber(inputs.ingresoMensual, 0) || undefined,
-          incluyeSeguroDesgravamen: coerceBool(inputs.incluyeSeguroDesgravamen),
-          incluyeSeguroIncendio: coerceBool(inputs.incluyeSeguroIncendio),
-          incluyeComisionAdministracion: coerceBool(inputs.incluyeComisionAdministracion),
           calcularTablaAmortizacion: coerceBool(inputs.calcularTablaAmortizacion),
-          calcularCAE: coerceBool(inputs.calcularCAE),
-          calcularGastosNotariales: coerceBool(inputs.calcularGastosNotariales),
-          simularPrepago: coerceBool(inputs.simularPrepago),
-          montoPrepago: coerceNumber(inputs.montoPrepago, 0),
           valorUF: live?.valorUF,
         });
         return creditoHipotecarioToResults(result);
@@ -480,7 +462,7 @@ export async function loadCalculationFn(
         const result = calculateMultasTransito({
           tipoMulta: inputs.tipoMulta as import('./multas-transito').TipoMulta,
           cantidadMultas: coerceNumber(inputs.cantidadMultas, 0) || undefined,
-          esReincidente: coerceBool(inputs.esReincidente) || undefined,
+          reincidenciasPrevias: coerceNumber(inputs.reincidenciasPrevias, 0),
         });
         return multasTransitoToResults(result);
       };
@@ -489,17 +471,11 @@ export async function loadCalculationFn(
     case 'costo-tag': {
       const { calculateCostoTag, costoTagToResults } = await import('./costo-tag');
       return (inputs) => {
-        const cat = coerceNumber(inputs.categoria, 0);
         const result = calculateCostoTag({
-          peajes: inputs.peajes as
-            | 'santiago_rancagua'
-            | 'santiago_valparaiso'
-            | 'santiago_los_andes'
-            | 'santiago_san_fernando'
-            | 'urbano_santiago',
-          viajesMes: coerceNumber(inputs.viajesMes),
-          tieneConvenio: coerceBool(inputs.tieneConvenio) || undefined,
-          categoria: ([1, 2, 3].includes(cat) ? cat : undefined) as 1 | 2 | 3 | undefined,
+          tarifaPorPaso: coerceNumber(inputs.tarifaPorPaso),
+          pasadasMes: coerceNumber(inputs.pasadasMes),
+          cargoFijoMensual: coerceNumber(inputs.cargoFijoMensual, 0),
+          otrosCargosMensuales: coerceNumber(inputs.otrosCargosMensuales, 0),
         });
         return costoTagToResults(result);
       };
@@ -555,7 +531,9 @@ export async function loadCalculationFn(
         const result = calculateSubsidioAgua({
           consumoM3: coerceNumber(inputs.consumoM3),
           numeroPersonas: coerceNumber(inputs.numeroPersonas),
-          tramo: inputs.tramo as 'tramo1' | 'tramo2',
+          montoCuenta: coerceNumber(inputs.montoCuenta),
+          porcentajeAsignado: coerceNumber(inputs.porcentajeAsignado, 25),
+          seguridadesYOportunidades: coerceBool(inputs.seguridadesYOportunidades),
         });
         return subsidioAguaToResults(result);
       };

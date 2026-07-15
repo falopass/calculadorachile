@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend CalculaChile"
+  short_description: "Mejora UI YMYL sin romper producto ni SEO"
+  default_prompt: "Usa $frontend-calculachile para mejorar esta interfaz respetando el sistema visual y las restricciones YMYL."

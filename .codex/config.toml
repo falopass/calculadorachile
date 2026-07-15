@@ -1,0 +1,37 @@
+# Configuración Codex compartida por CalculaChile.
+# Se carga únicamente cuando el repositorio está marcado como confiable.
+
+[agents]
+max_threads = 4
+max_depth = 1
+interrupt_message = true
+
+[agents.architect]
+description = "Arquitectura, planes y revisión crítica de cambios con alto impacto."
+config_file = "./agents/architect.toml"
+nickname_candidates = ["Alerce", "Andes"]
+
+[agents.backend]
+description = "API routes, valores económicos, caché y lógica server-side de Next.js."
+config_file = "./agents/backend.toml"
+nickname_candidates = ["Maipo", "Baker"]
+
+[agents.frontend]
+description = "UI accesible, mobile-first y consistente con el sistema visual existente."
+config_file = "./agents/frontend.toml"
+nickname_candidates = ["Luma", "Puma"]
+
+[agents.seo]
+description = "SEO técnico, contenido YMYL, schema y AdSense sin romper indexación."
+config_file = "./agents/seo.toml"
+nickname_candidates = ["Cóndor", "Quillay"]
+
+[agents.security]
+description = "Revisión de secretos, privacidad, APIs externas y superficies de abuso."
+config_file = "./agents/security.toml"
+nickname_candidates = ["Pucará", "Centinela"]
+
+[agents.explorer-fast]
+description = "Exploración rápida y de solo lectura del repositorio."
+config_file = "./agents/explorer-fast.toml"
+nickname_candidates = ["Chucao", "Zorro"]

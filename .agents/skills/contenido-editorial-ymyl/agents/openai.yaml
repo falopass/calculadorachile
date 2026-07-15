@@ -1,0 +1,4 @@
+interface:
+  display_name: "Contenido editorial YMYL"
+  short_description: "Publica contenido chileno verificable"
+  default_prompt: "Usa $contenido-editorial-ymyl para investigar y preparar una pieza editorial de CalculaChile."

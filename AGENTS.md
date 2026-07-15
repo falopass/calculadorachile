@@ -207,20 +207,20 @@ Si la validación falla, corrige y vuelve a ejecutar. No entregues “debería p
 | Archivo | Uso |
 |---------|-----|
 | **`AGENTS.md`** (este) | Constitución del producto |
-| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + Grok Build (un solo archivo) |
+| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + operación con Codex |
 | [`docs/plan-editorial.md`](./docs/plan-editorial.md) | Backlog de posts SEO/AdSense |
 | [`docs/research/`](./docs/research/) | `dossier-ymyl.md` · `inventario-seo.md` · `deep-research.md` |
 
-## Grok Build (único harness)
+## Codex (harness principal)
 
-Este producto se desarrolla **solo en Grok Build** (terminal, Grok 4.5 / `grok-build`).  
-No hay workflow de pymes. No uses `web-factory`, `pyme-template-intelligence` ni schema `LocalBusiness`.
+Este repo está configurado para **Codex**. Inicia la tarea con `CalculaChile` como carpeta de trabajo para que Codex descubra este archivo, `.codex/config.toml`, los agentes y las skills del repo. No hay workflow de pymes: no uses `web-factory`, `pyme-template-intelligence` ni schema `LocalBusiness`.
 
 | Pieza | Path |
 |-------|------|
 | Contexto + arranque | `docs/contexto.md` |
-| Skills locales (gitignored) | `.grok/skills/` |
-| Slash | `/ymyl-audit` `/p0-wiring` `/ship-check` `/nueva-calc` `/seo-fix` |
+| Configuración de proyecto | `.codex/config.toml` |
+| Agentes especializados | `.codex/agents/*.toml` |
+| Skills versionadas | `.agents/skills/` |
 | Matriz fantasmas | `node scripts/audit-ymyl-matrix.mjs` |
 
 ### Skills
@@ -230,10 +230,14 @@ No hay workflow de pymes. No uses `web-factory`, `pyme-template-intelligence` ni
 | `nueva-calculadora` | Alta / wiring end-to-end |
 | `auditoria-ymyl` | Fantasmas, fórmulas, golden tests |
 | `seo-adsense` | Metadata, noIndex, schema, AdSense seguro |
+| `contenido-editorial-ymyl` | Posts/guías con research y fuentes oficiales |
+| `ship-calculachile` | Cierre y validación proporcional al cambio |
+| `frontend-calculachile` | UI/UX anti-slop adaptada a YMYL, AdSense y stack actual |
+| `periodismo-editorial-chile` | Investigación, noticias y guías de 1.500+ palabras sin prosa IA genérica |
 
 **AGENTS.md manda** sobre skills y docs auxiliares.
 
-Config usuario recomendada (`~/.grok/config.toml`): `models.default = grok-build`, `memory.enabled = true`, skills pyme en `disabled`.
+Los agentes críticos usan modelos OpenAI definidos en el proyecto; los demás heredan la sesión. Proveedores, credenciales y routers alternativos pertenecen a la configuración personal, nunca al repo. Grok/OpenCode pueden mantenerse como compatibilidad local, pero no son la fuente de instrucciones para Codex.
 
 ## Criterio operativo para agentes
 

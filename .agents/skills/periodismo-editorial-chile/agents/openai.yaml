@@ -1,0 +1,4 @@
+interface:
+  display_name: "Periodismo editorial Chile"
+  short_description: "Investiga y escribe piezas de 1.500+ palabras"
+  default_prompt: "Usa $periodismo-editorial-chile para investigar, verificar y redactar esta pieza larga sin prosa genérica."

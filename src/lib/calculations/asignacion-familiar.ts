@@ -27,7 +27,7 @@ export interface AsignacionFamiliarResult {
 /**
  * Tope superior del tramo C: sueldos sobre este monto NO reciben
  * asignación familiar (tramo D, monto $0).
- * Base legal: Ley 21.751 Art. 1° letra a).
+ * Base legal: Ley 21.830, vigente desde el 1 de mayo de 2026.
  */
 const INGRESO_MAXIMO_TRAMO_C = ASIGNACION_FAMILIAR_2026.tramoC.ingresoMaximoCLP;
 
@@ -46,10 +46,10 @@ function determinarTramo(sueldoBruto: number): 'a' | 'b' | 'c' | 'd' {
  * Calcula la asignación familiar por tramo.
  *
  * Bug histórico: la versión anterior siempre asignaba tramo C aunque
- * el sueldo superara el tope ($1.439.668). Ahora retorna correctamente
+ * el ingreso superara el tope del tramo C. Ahora retorna correctamente
  * tramo D con monto $0 cuando el sueldo excede ese tope.
  *
- * Base legal: Ley 21.751 (reajuste 2026), DFL 150.
+ * Base legal: Ley 21.830 (valores desde mayo de 2026), DFL 150.
  */
 export function calculateAsignacionFamiliar(
   input: AsignacionFamiliarInput,

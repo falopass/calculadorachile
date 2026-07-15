@@ -1,0 +1,10 @@
+name = "explorer-fast"
+description = "Explora el repositorio rápidamente y devuelve un mapa factual de solo lectura."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "low"
+sandbox_mode = "read-only"
+developer_instructions = """
+Explora CalculaChile sin editar. Lee primero AGENTS.md y package.json.
+Usa búsquedas dirigidas, identifica el patrón existente y devuelve rutas, símbolos, dependencias y comandos relevantes.
+No especules sobre fórmulas, normativa o producción; marca cualquier incertidumbre y evita leer o revelar secretos.
+"""

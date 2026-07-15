@@ -1,144 +1,116 @@
 // ============================================
-// Cálculo de Vacaciones Proporcionales Chile
+// Feriado proporcional al término del contrato
 // ============================================
 
-import { VACACIONES } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface VacacionesInput {
   sueldoBruto: number;
   mesesTrabajados: number;
-  añosTrabajados?: number;
+  diasTrabajadosUltimoMes?: number;
   diasVacacionesPendientes?: number;
+  /** Fecha de término en formato YYYY-MM-DD. */
+  fechaTermino?: string;
 }
 
 export interface VacacionesResult {
   sueldoBruto: number;
-  mesesTrabajados: number;
-  diasProporcionales: number;
-  diasPendientes: number;
-  diasTotales: number;
-  valorDia: number;
+  diasHabilesProporcionales: number;
+  diasHabilesPendientes: number;
+  diasHabilesTotales: number;
+  diasCorridosIndemnizables: number;
+  valorDiaCorrida: number;
   totalVacaciones: number;
-  diasProgresivos: number;
+  calendarioAplicado: boolean;
+}
+
+const FERIADOS_NACIONALES_2026 = new Set([
+  '2026-01-01',
+  '2026-04-03',
+  '2026-04-04',
+  '2026-05-01',
+  '2026-05-21',
+  '2026-06-21',
+  '2026-06-29',
+  '2026-07-16',
+  '2026-08-15',
+  '2026-09-18',
+  '2026-09-19',
+  '2026-10-12',
+  '2026-10-31',
+  '2026-11-01',
+  '2026-12-08',
+  '2026-12-25',
+  '2027-01-01',
+]);
+
+function parseFecha(fecha?: string): Date | null {
+  if (!fecha || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return null;
+  const date = new Date(`${fecha}T00:00:00Z`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function claveFecha(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+function esHabilParaFeriado(date: Date): boolean {
+  const dia = date.getUTCDay();
+  return dia !== 0 && dia !== 6 && !FERIADOS_NACIONALES_2026.has(claveFecha(date));
+}
+
+function proyectarDiasCorridos(fechaTermino: Date, diasHabiles: number): number {
+  const enteros = Math.floor(diasHabiles);
+  const fraccion = diasHabiles - enteros;
+  const cursor = new Date(fechaTermino);
+  let habilesContados = 0;
+  let corridos = 0;
+
+  while (habilesContados < enteros) {
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
+    corridos += 1;
+    if (esHabilParaFeriado(cursor)) habilesContados += 1;
+  }
+  return corridos + fraccion;
 }
 
 /**
- * Calcula los días de vacaciones progresivas (Art. 68 CdT).
- *
- * Regla legal: a partir del año 10 de servicio (ya sea con uno o más
- * empleadores), el trabajador tiene derecho a 1 día adicional de
- * feriado por cada 3 años nuevos trabajados, con tope de 5 días
- * adicionales.
- *
- * Bug histórico: la versión anterior aplicaba `floor(años / 3)` desde
- * el año 0, lo que daba 1 día adicional al cuarto año. Aquí se usa
- * la regla correcta: el primer día progresivo recién aparece a los
- * 13 años de servicio (10 + 3).
- */
-function calcularDiasProgresivos(añosTrabajados: number): number {
-  if (añosTrabajados < 10) return 0;
-
-  const aniosSobre10 = añosTrabajados - 10;
-  const diasProgresivos = Math.floor(aniosSobre10 / 3);
-
-  return Math.min(diasProgresivos, VACACIONES.tope_progresivos);
-}
-
-/**
- * Calcula las vacaciones proporcionales y por días pendientes.
- *
- * Las vacaciones legales son 15 días HÁBILES (Art. 67 CdT). Para
- * efectos de pago en finiquito o renuncia, la regla práctica usada
- * por la Dirección del Trabajo es 1,25 días por mes trabajado y un
- * valor día de sueldo bruto / 30.
- *
- * Bug histórico: la versión anterior usaba `Math.round(15/12 * meses)`
- * que sobreestima los días por meses incompletos. Aquí se mantiene la
- * proporcionalidad sin redondeo intermedio para no inflar el pago.
+ * Calcula 1,25 días hábiles por mes completo y 1,25/30 por día adicional.
+ * Para indemnizar al terminar el contrato, proyecta esos días desde el día
+ * siguiente al término e incorpora sábados, domingos y feriados nacionales.
+ * No incorpora feriados regionales ni extraordinarios.
  */
 export function calculateVacaciones(input: VacacionesInput): VacacionesResult {
-  const {
-    sueldoBruto,
-    mesesTrabajados,
-    añosTrabajados = 0,
-    diasVacacionesPendientes = 0,
-  } = input;
-
-  const sueldo = Math.max(0, sueldoBruto);
-  const meses = Math.max(0, mesesTrabajados);
-  const anios = Math.max(0, añosTrabajados);
-  const pendientes = Math.max(0, diasVacacionesPendientes);
-
-  // 1,25 días por mes (15 / 12) sin redondeo intermedio.
-  const diasProporcionalesExactos = (VACACIONES.dias_anuales / 12) * meses;
-
-  const diasProgresivos = calcularDiasProgresivos(anios);
-
-  // Total de días con un solo redondeo final.
-  const diasTotalesExactos = diasProporcionalesExactos + pendientes + diasProgresivos;
-
-  const valorDia = sueldo / 30;
-  const totalVacaciones = diasTotalesExactos * valorDia;
+  const sueldoBruto = Math.max(0, input.sueldoBruto);
+  const meses = Math.max(0, input.mesesTrabajados);
+  const diasUltimoMes = Math.min(30, Math.max(0, input.diasTrabajadosUltimoMes ?? 0));
+  const diasHabilesProporcionales = meses * 1.25 + diasUltimoMes * (1.25 / 30);
+  const diasHabilesPendientes = Math.max(0, input.diasVacacionesPendientes ?? 0);
+  const diasHabilesTotales = diasHabilesProporcionales + diasHabilesPendientes;
+  const fechaTermino = parseFecha(input.fechaTermino);
+  const diasCorridosIndemnizables = fechaTermino
+    ? proyectarDiasCorridos(fechaTermino, diasHabilesTotales)
+    : diasHabilesTotales;
+  const valorDiaCorrida = sueldoBruto / 30;
 
   return {
-    sueldoBruto: sueldo,
-    mesesTrabajados: meses,
-    diasProporcionales: Math.round(diasProporcionalesExactos * 10) / 10,
-    diasPendientes: pendientes,
-    diasTotales: Math.round(diasTotalesExactos * 10) / 10,
-    valorDia: Math.round(valorDia),
-    totalVacaciones: Math.round(totalVacaciones),
-    diasProgresivos,
+    sueldoBruto: Math.round(sueldoBruto),
+    diasHabilesProporcionales: Math.round(diasHabilesProporcionales * 100) / 100,
+    diasHabilesPendientes: Math.round(diasHabilesPendientes * 100) / 100,
+    diasHabilesTotales: Math.round(diasHabilesTotales * 100) / 100,
+    diasCorridosIndemnizables: Math.round(diasCorridosIndemnizables * 100) / 100,
+    valorDiaCorrida: Math.round(valorDiaCorrida),
+    totalVacaciones: Math.round(diasCorridosIndemnizables * valorDiaCorrida),
+    calendarioAplicado: fechaTermino !== null,
   };
 }
 
-/**
- * Convierte el resultado a formato de CalculatorResult[]
- */
 export function vacacionesToResults(result: VacacionesResult): CalculatorResult[] {
-  const results: CalculatorResult[] = [];
-
-  results.push({
-    label: 'Total Vacaciones',
-    value: result.totalVacaciones,
-    format: 'CLP',
-    highlight: true,
-  });
-
-  results.push({
-    label: `Días totales`,
-    value: result.diasTotales,
-    format: 'days',
-  });
-
-  results.push({
-    label: 'Días proporcionales',
-    value: result.diasProporcionales,
-    format: 'days',
-  });
-
-  if (result.diasPendientes > 0) {
-    results.push({
-      label: 'Días pendientes',
-      value: result.diasPendientes,
-      format: 'days',
-    });
-  }
-
-  if (result.diasProgresivos > 0) {
-    results.push({
-      label: 'Días progresivos (Art. 68 CdT)',
-      value: result.diasProgresivos,
-      format: 'days',
-    });
-  }
-
-  results.push({
-    label: 'Valor día',
-    value: result.valorDia,
-    format: 'CLP',
-  });
-
-  return results;
+  return [
+    { label: 'Indemnización estimada', value: result.totalVacaciones, format: 'CLP', highlight: true },
+    { label: 'Días corridos indemnizables', value: result.diasCorridosIndemnizables, format: 'days' },
+    { label: 'Días hábiles proporcionales', value: result.diasHabilesProporcionales, format: 'days' },
+    { label: 'Días hábiles pendientes', value: result.diasHabilesPendientes, format: 'days' },
+    { label: 'Valor por día corrido', value: result.valorDiaCorrida, format: 'CLP' },
+  ];
 }

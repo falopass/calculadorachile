@@ -1,83 +1,63 @@
-// ============================================
-// Tests de costo-empleado (PYME)
-// ----------------------------------------------
-// Verifica que NO se duplique el 10% AFP ni el 7% salud como aporte
-// del empleador (D.L. 3500 Art. 17, Ley 20.255). El empleador solo
-// aporta SIS, seguro de cesantía y mutual de seguridad.
-// ============================================
-
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { AFP, INGRESO_MINIMO } from '@/lib/values/constants';
 import { calculateCostoEmpleado } from '../costo-empleado';
-import { AFP, MUTUAL, SEGURO_CESANTIA } from '@/lib/values/constants';
 
 const baseInput = {
   sueldoBruto: 1_000_000,
   afp: 'habitat' as keyof typeof AFP,
   saludTipo: 'fonasa' as const,
   contratoIndefinido: true,
-  gratificacionIncluida: false,
-  horasExtra: 0,
-  montoHorasExtra: 0,
+  agregarGratificacion: false,
+  periodoCotizacion: 'hasta_julio_2026' as const,
 };
 
 describe('calculateCostoEmpleado', () => {
-  it('aportes del empleador NO incluyen 10% AFP ni 7% salud', () => {
-    const r = calculateCostoEmpleado(baseInput);
-    // Aportes empleador esperados sobre $1M: SIS 1,62% + cesantía 2,4% + mutual 0,95%
-    const esperado =
-      1_000_000 *
-      ((AFP.habitat.sis +
-        SEGURO_CESANTIA.contrato_indefinido.empleador +
-        MUTUAL.total_referencial) /
-        100);
-    const totalAportes =
-      r.aportesEmpleador.sis +
-      r.aportesEmpleador.seguroCesantia +
-      r.aportesEmpleador.mutual;
-    expect(totalAportes).toBeCloseTo(esperado, 0);
-    // El costo total NO debe incluir AFP/salud del trabajador.
-    expect(r.costoTotalMensual).toBe(1_000_000 + totalAportes);
+  it('hasta julio suma 1% de reforma y SIS 1,62% por separado', () => {
+    const result = calculateCostoEmpleado(baseInput);
+    expect(result.aportesEmpleador.pensionReforma).toBe(10_000);
+    expect(result.aportesEmpleador.sisSeparado).toBe(16_200);
   });
 
-  it('descuenta correctamente AFP (10% + comisión) y salud 7% al trabajador', () => {
-    const r = calculateCostoEmpleado(baseInput);
-    expect(r.descuentosLegales.afp).toBe(
-      Math.round(1_000_000 * ((10 + AFP.habitat.comision) / 100)),
-    );
-    expect(r.descuentosLegales.salud).toBe(70_000);
-    expect(r.descuentosLegales.seguroCesantia).toBe(6_000);
-  });
-
-  it('contrato a plazo fijo: trabajador no aporta cesantía, empleador aporta 3%', () => {
-    const r = calculateCostoEmpleado({ ...baseInput, contratoIndefinido: false });
-    expect(r.descuentosLegales.seguroCesantia).toBe(0);
-    expect(r.aportesEmpleador.seguroCesantia).toBe(30_000);
-  });
-
-  it('usa constantes regulatorias 2026 vigentes para SIS y tope de cesantía', () => {
-    expect(AFP.habitat.sis).toBe(1.62);
-    expect(SEGURO_CESANTIA.tope_imponible).toBe(135.2);
-  });
-
-  it('gratificación incluida agrega 25% al total de haberes', () => {
-    const r = calculateCostoEmpleado({ ...baseInput, gratificacionIncluida: true });
-    expect(r.gratificacion).toBe(250_000);
-    expect(r.totalHaberes).toBe(1_250_000);
-  });
-
-  it('horas extra suman al costo total mensual', () => {
-    const r = calculateCostoEmpleado({
+  it('desde agosto usa 3,5% total y no duplica SIS', () => {
+    const result = calculateCostoEmpleado({
       ...baseInput,
-      horasExtra: 10,
-      montoHorasExtra: 8_000,
+      periodoCotizacion: 'desde_agosto_2026',
     });
-    // El bloque mensual = haberes + aportes + horasExtra
-    expect(r.costoTotalMensual).toBeGreaterThan(1_000_000 + 80_000);
+    expect(result.aportesEmpleador.pensionReforma).toBe(35_000);
+    expect(result.aportesEmpleador.sisSeparado).toBe(0);
   });
 
-  it('factor previsional ronda 1.04-1.06 para sueldo bajo el tope', () => {
-    const r = calculateCostoEmpleado(baseInput);
-    expect(r.factorPrevisional).toBeGreaterThan(1.03);
-    expect(r.factorPrevisional).toBeLessThan(1.07);
+  it('no suma AFP ni salud del trabajador al costo del empleador', () => {
+    const result = calculateCostoEmpleado(baseInput);
+    const aportes = Object.values(result.aportesEmpleador).reduce((a, b) => a + b, 0);
+    expect(result.costoTotalMensual).toBe(result.totalHaberesImponibles + aportes);
+    expect(result.descuentosTrabajador.salud).toBe(70_000);
+  });
+
+  it('contrato a plazo no descuenta cesantía al trabajador y empleador aporta 3%', () => {
+    const result = calculateCostoEmpleado({ ...baseInput, contratoIndefinido: false });
+    expect(result.descuentosTrabajador.seguroCesantia).toBe(0);
+    expect(result.aportesEmpleador.seguroCesantia).toBe(30_000);
+  });
+
+  it('gratificación del artículo 50 respeta el tope mensual', () => {
+    const result = calculateCostoEmpleado({
+      ...baseInput,
+      sueldoBruto: 3_000_000,
+      agregarGratificacion: true,
+    });
+    expect(result.gratificacion).toBe(
+      Math.round((INGRESO_MINIMO.mensual * 4.75) / 12),
+    );
+  });
+
+  it('el período desde agosto aumenta el costo sin duplicar componentes', () => {
+    const antes = calculateCostoEmpleado(baseInput);
+    const despues = calculateCostoEmpleado({
+      ...baseInput,
+      periodoCotizacion: 'desde_agosto_2026',
+    });
+    expect(despues.costoTotalMensual).toBeGreaterThan(antes.costoTotalMensual);
+    expect(despues.costoTotalMensual - antes.costoTotalMensual).toBe(8_800);
   });
 });

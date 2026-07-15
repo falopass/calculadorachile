@@ -307,8 +307,8 @@ export const guias: Guia[] = [
       'tope 90 UF indemnización',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 18,
+    updatedAt: '2026-07-13',
+    readingTime: 22,
     relatedCalculators: [
       'calculadora-finiquito',
       'calculadora-indemnizacion-anos-servicio',
@@ -320,20 +320,26 @@ export const guias: Guia[] = [
       'como-calcular-finiquito-chile',
       'calcular-indemnizacion-por-anos',
       'vacaciones-proporcionales-guia',
+      'seguro-cesantia-finiquito-2026-afc',
+      'finiquito-2026-ejemplo-sueldo-minimo',
     ],
     sources: [
       { label: 'Código del Trabajo (BCN)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
-      { label: 'Dirección del Trabajo', url: 'https://www.dt.gob.cl' },
-      { label: 'Comisión para el Mercado Financiero (TMC)', url: 'https://www.cmfchile.cl' },
+      { label: 'DT — oportunidad del finiquito', url: 'https://dt.gob.cl/portal/1628/w3-article-60613.html' },
+      { label: 'DT — cálculo del feriado proporcional', url: 'https://dt.gob.cl/portal/1628/w3-article-60200.html' },
+      { label: 'DT — reclamo por despido', url: 'https://www.dt.gob.cl/portal/1626/w3-article-125086.html' },
+      { label: 'DT — indemnización por obra o faena', url: 'https://dt.gob.cl/portal/1628/w3-article-118059.html' },
+      { label: 'AFC — certificado aporte empleador', url: 'https://www.afc.cl/empleadores/sus-certificados/' },
     ],
     sections: [
       {
         id: 'que-es-finiquito',
         title: '¿Qué es el finiquito?',
         level: 2,
-        html: `<p>El <strong>finiquito</strong> es el documento que pone término formal a una relación laboral en Chile. Detalla los pagos finales que el empleador debe al trabajador (sueldos pendientes, vacaciones, gratificación proporcional, indemnización si corresponde) y otorga al empleador un finiquito de obligaciones laborales — siempre que cumpla los requisitos legales de validez.</p>
-<p>Está regulado en los artículos 9, 159, 161, 162, 163, 168 y 177 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>.</p>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Validez del finiquito (art. 177)</strong><p>Para que el finiquito tenga valor liberatorio debe firmarse ante un ministro de fe (notario, inspector del trabajo, presidente del sindicato) y pagarse en su totalidad en el acto. Sin estas formalidades, el trabajador puede impugnar diferencias hasta 2 años después.</p></div></aside>`,
+        html: `<p>El <strong>finiquito</strong> documenta la causal de término, los pagos pendientes y los acuerdos con que se cierra una relación laboral. No es, en la mayoría de los casos, lo que produce el despido: el contrato ya terminó por la causal y fecha comunicadas. Su importancia está en que puede pagar derechos y adquirir efecto liberatorio respecto de las materias que las partes aceptaron.</p>
+<p>Un buen finiquito permite reconstruir el cálculo. Debe separar remuneraciones, feriado, indemnización por años, aviso previo, descuentos y cualquier reserva. Una cifra global impide saber si la causal, la base o los días fueron correctos.</p>
+<p>El artículo 177 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> exige al empleador otorgarlo y poner su pago a disposición dentro de <strong>10 días hábiles</strong> desde la separación. La firma del trabajador puede ocurrir después; el plazo obliga al empleador, no fuerza al trabajador a aceptar en diez días.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Papel o Mi DT</strong><p>Puede ratificarse ante ministro de fe o tramitarse como finiquito laboral electrónico. En Mi DT el trabajador puede aceptar, rechazar o aceptar con reserva. Si se pactan cuotas, el acuerdo debe cumplir los artículos 63 bis y 169: escrito, con reajustes e intereses y ratificado ante la Inspección del Trabajo.</p></div></aside>`,
       },
       {
         id: 'componentes-finiquito',
@@ -343,100 +349,146 @@ export const guias: Guia[] = [
 <p>Días trabajados del último mes que aún no se han pagado. Se calcula como <code>sueldo_mensual × días_trabajados ÷ 30</code>.</p>
 
 <h3>2. Vacaciones proporcionales</h3>
-<p>Por cada mes trabajado en el año en curso te corresponden <strong>1,25 días hábiles</strong> (15 días anuales ÷ 12 meses). El valor del día hábil es <code>sueldo_mensual ÷ 30</code>.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo: 8 meses con sueldo $700.000</div><ul><li>Días proporcionales: 8 × 1,25 = <code>10 días</code></li><li>Valor del día: $700.000 ÷ 30 = <code>$23.333</code></li><li>Total vacaciones: 10 × $23.333</li></ul><span class="total">$233.330</span></div>
+<p>La regla general acumula <strong>1,25 días hábiles</strong> por mes completo, más la fracción diaria desde la contratación o última anualidad. Después hay que proyectar esos días desde el día siguiente al término e incluir sábados, domingos y festivos que atraviese el período. Por eso el monto no se obtiene multiplicando solo 1,25 por el valor diario.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo DT: 8 meses y 2 días</div><ul><li>Días hábiles: 1,25 × 8 + 0,04167 × 2 = <code>10,08</code></li><li>El calendario del caso oficial agrega 4 días inhábiles</li><li>Total indemnizable: <code>14,08 días corridos × valor diario</code></li></ul><span class="total">La fecha exacta cambia el resultado</span></div>
 
 <h3>3. Vacaciones pendientes</h3>
-<p>Días no tomados de períodos anteriores (artículo 67 CT). No prescriben mientras dura la relación laboral. Se pagan al mismo valor que las proporcionales.</p>
+<p>El feriado legal o progresivo ya devengado y no usado también debe compensarse al terminar. Revisa comprobantes y solicitudes: la ley permite acumular hasta dos períodos y obliga al empleador a otorgar al menos el primero antes de completar el tercero. No existe un tope general de cinco días progresivos.</p>
 
 <h3>4. Indemnización por años de servicio</h3>
-<p>Solo cuando el empleador pone término al contrato sin causa justificada (artículo 161, "necesidades de la empresa") o por mutuo acuerdo con indemnización pactada. Es <strong>30 días de la última remuneración por cada año de servicio o fracción superior a 6 meses</strong>, con tope de 11 años (330 días). La base no puede superar 90 UF (artículo 172).</p>
+<p>En la regla legal común corresponde cuando el empleador termina por artículo 161 y el contrato duró un año o más: <strong>30 días de la última remuneración por cada año y fracción superior a seis meses</strong>. El máximo general es 11 años para contratos posteriores al 14 de agosto de 1981 y la base mensual no puede superar 90 UF. Un pacto individual o colectivo puede mejorar esta cobertura.</p>
 
 <h3>5. Gratificación proporcional</h3>
-<p>Si el empleador paga gratificación legal mensual, ya está incluida en el sueldo. Si la paga anualmente, se calcula la fracción proporcional al período trabajado en el año.</p>
+<p>Si se pagó mes a mes como anticipo, no se agrega nuevamente todo el año: solo corresponde la cuota del mes de término que esté pendiente. Cuando el sistema depende de utilidades anuales, el derecho proporcional puede quedar sujeto al cierre y determinación posterior. Además, una gratificación mensual puede integrar la base del artículo 172, pero no la base del feriado proporcional.</p>
 
 <h3>6. Indemnización sustitutiva del aviso (art. 162)</h3>
-<p>Cuando se invoca el artículo 161, el empleador debe avisar con 30 días de anticipación. Si no avisa, paga una indemnización equivalente a una remuneración mensual.</p>`,
+<p>Cuando se invoca el artículo 161, el empleador debe avisar con al menos 30 días de anticipación o pagar una última remuneración mensual. Este concepto es independiente de los años de servicio y no se reduce con la imputación AFC.</p>
+
+<h3>7. Otros haberes y descuentos</h3>
+<p>Comisiones ya devengadas, bonos contractuales, horas extra impagas y asignaciones pendientes pueden aparecer según el caso. Todo descuento necesita fundamento. En especial, la rebaja AFC del artículo 13 solo puede afectar años de servicio por artículo 161 y debe coincidir con el certificado de aporte empleador.</p>`,
       },
       {
         id: 'causales-y-derechos',
         title: 'Causales de término y qué se paga en cada una',
         level: 2,
         html: `<table>
-<thead><tr><th>Causal</th><th>Indemnización años servicio</th><th>Aviso previo</th></tr></thead>
+<thead><tr><th>Causal</th><th>Indemnización legal</th><th>Dato decisivo</th></tr></thead>
 <tbody>
-<tr><td>Renuncia voluntaria (art. 159 N°2)</td><td>NO</td><td>30 días al empleador</td></tr>
-<tr><td>Mutuo acuerdo (art. 159 N°1)</td><td>Solo si se pacta</td><td>NO</td></tr>
-<tr><td>Vencimiento de plazo (art. 159 N°4)</td><td>NO</td><td>NO</td></tr>
-<tr><td>Conclusión obra/faena (art. 159 N°5)</td><td>NO</td><td>NO</td></tr>
-<tr><td>Caso fortuito o fuerza mayor (art. 159 N°6)</td><td>NO</td><td>NO</td></tr>
-<tr><td>Falta de probidad, vías de hecho (art. 160)</td><td>NO</td><td>NO</td></tr>
-<tr><td>Necesidades de la empresa (art. 161)</td><td><strong>SÍ</strong></td><td>30 días o pago</td></tr>
-<tr><td>Despido injustificado (declarado por tribunal)</td><td><strong>SÍ + recargo</strong></td><td>30 días o pago</td></tr>
+<tr><td>Mutuo acuerdo, art. 159 N.º 1</td><td>Solo la que se pacte</td><td>Leer alcance del acuerdo antes de firmar</td></tr>
+<tr><td>Renuncia, art. 159 N.º 2</td><td>No hay años de servicio legales</td><td>Debe constar y ratificarse; se liquidan derechos pendientes</td></tr>
+<tr><td>Vencimiento del plazo, art. 159 N.º 4</td><td>No hay IAS general</td><td>Verificar que el plazo no se transformó en indefinido</td></tr>
+<tr><td>Conclusión obra/faena, art. 159 N.º 5</td><td><strong>2,5 días por mes</strong> para contratos celebrados desde 2022 y fracción superior a 15 días</td><td>Debe terminar realmente la obra que originó el contrato</td></tr>
+<tr><td>Caso fortuito, art. 159 N.º 6</td><td>No hay IAS general</td><td>El empleador debe acreditar imprevisibilidad e irresistibilidad</td></tr>
+<tr><td>Causales disciplinarias, art. 160</td><td>No, salvo que tribunal rechace la causal</td><td>Carta y hechos deben ser específicos y probados</td></tr>
+<tr><td>Necesidades de la empresa o desahucio, art. 161</td><td><strong>30 días por año</strong>, si cumple antigüedad</td><td>Aviso de 30 días o sustitutiva; posible imputación AFC</td></tr>
+<tr><td>Autodespido, art. 171</td><td>Puede generar indemnizaciones y recargos si el tribunal acoge</td><td>Requiere comunicación y demanda dentro de plazo</td></tr>
 </tbody>
 </table>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Recargos del art. 168</strong><p>Si el tribunal declara que el despido fue injustificado, indebido o improcedente, la indemnización se incrementa con un recargo del 30%, 50%, 80% o 100% según la causal invocada y desestimada. Para falta de probidad invocada sin pruebas, el recargo es 80%.</p></div></aside>`,
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Recargos del artículo 168</strong><p>Un tribunal puede aumentar la indemnización por años en 30% si declara improcedente el artículo 161; 50% si rechaza una causal del artículo 159 o no se invocó causa; y 80% si rechaza el artículo 160. Para las causales 1, 5 o 6 del artículo 160 invocadas sin motivo plausible, el recargo puede llegar a 100%.</p></div></aside>
+<p>“Despido injustificado” no es una causal que el empleador elige en el finiquito. Es una declaración judicial posterior. Mientras no exista sentencia o acuerdo, la propuesta reflejará la causal que figura en la carta, aunque el trabajador la discuta.</p>`,
       },
       {
         id: 'ejemplo-finiquito',
         title: 'Ejemplo numérico: despido por necesidades de la empresa',
         level: 2,
-        html: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Caso del ejemplo</strong><p>Trabajador con sueldo bruto de $900.000, contratado el 1 de marzo 2018, despedido el 15 de julio 2026 (8 años y 4 meses). No le avisaron con 30 días de anticipación. Tiene 8 días pendientes de vacaciones del año anterior.</p></div></aside>
-<div class="numeric-example"><div class="numeric-example__title">Cálculo del finiquito</div><ul><li><strong>Días trabajados último mes</strong>: 15 × ($900.000 ÷ 30) = <code>$450.000</code></li><li><strong>Vacaciones proporcionales</strong>: 4 meses × 1,25 = 5 días × $30.000 = <code>$150.000</code></li><li><strong>Vacaciones pendientes</strong>: 8 días × $30.000 = <code>$240.000</code></li><li><strong>Indemnización años servicio</strong>: 8 años × $900.000 = <code>$7.200.000</code> (sin tope, base 25,7 UF está bajo 90 UF)</li><li><strong>Indemnización sustitutiva del aviso</strong>: <code>$900.000</code></li><li>Gratificación proporcional: incluida en el sueldo mensual</li></ul><span class="total">Total finiquito: $8.940.000</span></div>
-<p>Para validar tu caso con datos reales (incluyendo gratificación, bonos, recargos por despido injustificado, vacaciones progresivas), usa la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>`,
+        html: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Caso reproducible</strong><p>Última remuneración computable de $900.000, contrato desde el 1 de marzo de 2018 y término por artículo 161 el 15 de julio de 2026. No hubo aviso. El sueldo de julio está pendiente y no existen vacaciones de anualidades anteriores. El ejemplo omite una eventual imputación AFC para mostrar primero el bruto.</p></div></aside>
+<p>La antigüedad es de ocho años y cuatro meses: la fracción no supera seis meses, por lo que se pagan ocho años. Desde la última anualidad hasta el término transcurrieron cuatro meses y 14 días, equivalentes a 5,58 días hábiles de feriado proporcional.</p>
+<p>Al proyectarlos desde el 16 de julio aparecen el feriado legal del 16, el sábado 18 y el domingo 19. La compensación llega aproximadamente a 8,58 días corridos, no a 5,58.</p>
+<div class="numeric-example"><div class="numeric-example__title">Cálculo antes de descuentos</div><ul>
+<li>Sueldo 15 días de julio: 15 × $30.000 = <code>$450.000</code></li>
+<li>Feriado proporcional: 8,58 × $30.000 ≈ <code>$257.500</code></li>
+<li>Años de servicio: 8 × $900.000 = <code>$7.200.000</code></li>
+<li>Aviso previo: <code>$900.000</code></li>
+</ul><span class="total">Total ilustrativo: $8.807.500</span></div>
+<p>El certificado AFC podría reducir solo la línea de $7.200.000. Una gratificación ya pagada mensualmente no se añade de nuevo, aunque puede haber integrado la base de $900.000. Usa la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> para ordenar conceptos, pero reproduce el feriado con fecha y calendario.</p>`,
       },
       {
         id: 'finiquito-casos-bajo-medio-alto',
-        title: 'Casos numéricos: sueldo bajo, medio y alto',
+        title: 'La base no es siempre el sueldo bruto de la liquidación',
         level: 2,
-        html: `<p>Tres ejemplos de finiquito con la misma causal (necesidades de la empresa, art. 161) y misma antigüedad (5 años exactos), variando solo el sueldo. Asumimos que se avisó con 30 días de anticipación (no hay sustitutiva del aviso) y no hay vacaciones pendientes.</p>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $553.553 (ingreso mínimo), 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $553.553 = <code>$2.767.765</code></li><li><strong>Vacaciones proporcionales</strong> (asumiendo 6 meses del año en curso): 7,5 días × $18.452 = <code>$138.390</code></li><li>Base 13,4 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $2.906.155</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000, 5 años</div><ul><li><strong>Indemnización años servicio</strong>: 5 × $1.500.000 = <code>$7.500.000</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $50.000 = <code>$375.000</code></li><li>Base 37,2 UF (bajo tope 90 UF)</li></ul><span class="total">Finiquito: $7.875.000</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000, 5 años</div><ul><li><strong>Base topeada</strong>: 90 UF × $40.826 = <code>$3.674.340</code> (no $4M, art. 172)</li><li><strong>Indemnización años servicio</strong>: 5 × $3.674.340 = <code>$18.160.694</code></li><li><strong>Vacaciones proporcionales</strong> (6 meses): 7,5 días × $133.333 = <code>$1.000.000</code></li></ul><span class="total">Finiquito: $19.160.694 (limitado por tope 90 UF)</span></div>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El tope de 90 UF muerde a los sueldos altos</strong><p>Si tu sueldo supera 90 UF (~$3,67M en julio 2026), tu indemnización por años de servicio se calcula sobre $3.674.340 mensuales, no sobre tu sueldo real. Por cada año de antigüedad pierdes la diferencia. Para sueldos sobre $5M esto puede significar varias decenas de millones menos en el finiquito final.</p></div></aside>
-<p>Recuerda: las vacaciones proporcionales NO tienen tope de 90 UF, solo la indemnización por años de servicio (Art. 172 CdT). Calcula tu caso completo con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>`,
+        html: `<p>Antes de multiplicar por años, construye la última remuneración mensual del artículo 172. Incluye cantidades que se recibían mensualmente por prestar servicios y las cotizaciones de cargo del trabajador. Excluye asignación familiar, horas extra y beneficios esporádicos o de pago anual. Para remuneración variable utiliza el promedio de los últimos tres meses calendario.</p>
+<table><thead><tr><th>Concepto</th><th>Años de servicio / aviso</th><th>Feriado</th></tr></thead><tbody>
+<tr><td>Sueldo fijo</td><td>Se incluye</td><td>Se incluye</td></tr>
+<tr><td>Comisión variable</td><td>Promedio últimos 3 meses</td><td>Promedio últimos 3 meses</td></tr>
+<tr><td>Gratificación mensual</td><td>Puede integrar por periodicidad</td><td>No integra la base según DT</td></tr>
+<tr><td>Horas extra</td><td>Se excluyen</td><td>No forman la remuneración íntegra ordinaria</td></tr>
+<tr><td>Colación y movilización</td><td>Revisar naturaleza; normalmente no son remuneración</td><td>No se incorporan como sueldo</td></tr>
+<tr><td>Bono anual</td><td>Se excluye por esporádico</td><td>No se prorratea automáticamente</td></tr>
+</tbody></table>
+<h3>Tope de 90 UF</h3>
+<p>La base de años de servicio y aviso no puede superar 90 UF del último día del mes anterior al pago. Si en esa fecha la UF fuera $40.826, el máximo mensual sería $3.674.340. Cinco años darían $18.371.700, no cinco sueldos completos de $4 millones. La UF del ejemplo es una fotografía: consulta el valor aplicable al pago real.</p>
+<p>El tope no limita sueldo pendiente ni feriado. Tampoco limita el total del finiquito: limita la remuneración mensual usada en las indemnizaciones del título correspondiente.</p>`,
       },
       {
         id: 'plazos-legales',
         title: 'Plazos legales: cuánto tiempo tiene el empleador para pagar',
         level: 2,
-        html: `<p>El empleador tiene <strong>10 días hábiles</strong> desde la separación del trabajador para liquidar y pagar el finiquito (artículo 177 CT). Si no paga en ese plazo, el trabajador puede:</p>
+        html: `<p>El empleador tiene <strong>10 días hábiles</strong> desde la separación para otorgar el finiquito y poner el pago a disposición. Ese plazo no debe confundirse con los plazos para reclamar. Si no cumple, el trabajador puede:</p>
 <ol class="steps">
-<li>Presentar reclamo administrativo en la <a href="https://www.dt.gob.cl" target="_blank" rel="noopener">Inspección del Trabajo</a> (gratuito, online).</li>
-<li>Demandar laboralmente — el plazo de prescripción es de <strong>2 años</strong> desde el término del contrato (artículo 510 CT) — o <strong>6 meses</strong> si la demanda es por nulidad de despido (Ley Bustos).</li>
-<li>Solicitar intereses de mora desde el día 11. Para ello se usa la Tasa Máxima Convencional (TMC) que publica mensualmente la <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">CMF</a>.</li>
+<li>Ingresar un reclamo por despido o prestaciones adeudadas en la <a href="https://www.dt.gob.cl/portal/1626/w3-article-125086.html" target="_blank" rel="noopener">Inspección del Trabajo</a>.</li>
+<li>Exigir el pago y los reajustes e intereses laborales que correspondan. El artículo 173 establece intereses para indemnizaciones desde el término, incluso si se ofrecen dentro de los diez días.</li>
+<li>Demandar dentro del plazo específico de la acción, sin esperar indefinidamente la audiencia administrativa.</li>
 </ol>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ley Bustos (nulidad del despido)</strong><p>Si el empleador no había pagado las cotizaciones previsionales al momento del despido, el contrato se considera vigente hasta el pago de cotizaciones. El trabajador tiene derecho a las remuneraciones del período entre el despido y la convalidación (a veces 12+ meses), no solo al finiquito.</p></div></aside>
-<p>Para calcular intereses por finiquito impago, usa la <a href="/calculadoras/calculadora-intereses-mora">calculadora de intereses de mora</a>.</p>`,
+<table><thead><tr><th>Acción</th><th>Plazo orientador</th><th>Cómo se cuenta</th></tr></thead><tbody>
+<tr><td>Despido injustificado, indebido, improcedente o autodespido</td><td><strong>60 días hábiles</strong></td><td>Desde la separación; el reclamo DT suspende, con máximo absoluto de 90 días hábiles</td></tr>
+<tr><td>Acciones por derechos regidos por el Código</td><td>Regla de 2 años desde que se hicieron exigibles</td><td>Al terminar el vínculo, las acciones derivadas de actos o contratos prescriben en 6 meses, sin extender el plazo original</td></tr>
+<tr><td>Cobro de horas extra</td><td>6 meses</td><td>Desde que debieron pagarse</td></tr>
+</tbody></table>
+<p>Estos plazos no son intercambiables. Decir “tengo dos años para impugnar el finiquito” puede hacer perder la acción de despido de 60 días. La DT cuenta los días hábiles laborales de lunes a sábado, excluidos festivos.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Nulidad del despido por cotizaciones</strong><p>Si al término existen cotizaciones previsionales impagas y se cumplen los requisitos del artículo 162, un tribunal puede aplicar la sanción de nulidad: el empleador debe pagar remuneraciones y prestaciones desde el despido hasta su convalidación. No se activa solo por marcar una casilla en la calculadora; exige revisar certificados y normalmente ejercer la acción judicial.</p></div></aside>`,
       },
       {
         id: 'requisitos-validez',
         title: 'Requisitos de validez del finiquito',
         level: 2,
-        html: `<p>Un finiquito mal hecho puede impugnarse posteriormente. Para tener fuerza liberatoria debe:</p>
+        html: `<p>La fuerza liberatoria depende del texto aceptado y de las formalidades. Antes de ratificar:</p>
 <ul>
-<li>Constar por escrito en un documento firmado por ambas partes.</li>
-<li>Ratificarse ante <strong>ministro de fe</strong>: notario público, inspector del trabajo, oficial del registro civil o presidente del sindicato.</li>
-<li>Detallar conceptos y montos pagados (no solo un total agregado).</li>
-<li>Pagarse íntegramente en el acto. Si se paga en cuotas, debe quedar expreso y la firma libera solo lo pagado.</li>
-<li>Indicar la causal invocada con el artículo del Código del Trabajo.</li>
+<li>Comprueba que causal y fecha coincidan con la carta de término.</li>
+<li>Exige conceptos y montos separados, incluida cualquier imputación AFC.</li>
+<li>Revisa que el pago esté disponible o que las cuotas hayan sido aceptadas expresamente.</li>
+<li>Ratifica ante un ministro de fe habilitado o mediante el sistema electrónico de la DT.</li>
+<li>Descarga el PDF, comprobantes y certificado AFC; una vista temporal del portal no basta.</li>
 </ul>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Reserva de derechos</strong><p>El trabajador puede firmar el finiquito "con reserva de derechos", lo que le permite reclamar diferencias posteriores sin renunciar a las cantidades pagadas. Si tienes dudas, no firmes "renunciando a toda acción" — pide expresamente reserva.</p></div></aside>`,
+<h3>Reserva de derechos</h3>
+<p>El trabajador puede aceptar con una reserva específica y recibir las sumas no discutidas. No necesita el consentimiento del empleador para formular la reserva. Conviene identificar materias concretas: causal de despido, diferencia en base del artículo 172, feriado, nulidad por cotizaciones o descuento AFC.</p>
+<p>Una frase genérica puede generar una discusión posterior sobre su alcance. Tampoco es necesario reservar lo que ya se rechazó íntegramente, pero rechazar todo puede retrasar fondos no controvertidos. La decisión depende del documento y de la estrategia del caso.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Finiquito electrónico</strong><p>La propuesta en Mi DT no se entiende aceptada por silencio. Si la aceptas con o sin reserva, el empleador debe efectuar el pago dentro del flujo electrónico. Si rechazas, el empleador aún debe disponer el finiquito por otra vía y las acciones judiciales siguen sujetas a sus plazos.</p></div></aside>`,
       },
       {
         id: 'errores-frecuentes',
         title: 'Errores frecuentes en el cálculo del finiquito',
         level: 2,
-        html: `<aside class="callout callout--error"><span class="callout__icon" aria-hidden="true">❌</span><div class="callout__body"><strong>Estos errores cuestan dinero</strong><p>Los siguientes son errores frecuentes que vemos en finiquitos calculados manualmente o por software desactualizado.</p></div></aside>
+        html: `<aside class="callout callout--error"><span class="callout__icon" aria-hidden="true">❌</span><div class="callout__body"><strong>Un total plausible también puede estar mal</strong><p>La mayoría de los errores nace antes de la multiplicación: causal equivocada, base incompleta, fecha ausente o pago duplicado.</p></div></aside>
 <ul>
-<li><strong>No considerar gratificación al calcular indemnización</strong>: la base incluye sueldo + gratificación legal pagada (Dictamen DT 1.067/0021).</li>
+<li><strong>Usar el líquido bancario:</strong> las indemnizaciones se calculan con la última remuneración mensual del artículo 172, antes de descuentos del trabajador.</li>
+<li><strong>Tratar toda gratificación igual:</strong> la mensual puede integrar la base indemnizatoria; la anual o esporádica se excluye. Si ya se anticipó mes a mes, no se vuelve a sumar como deuda anual.</li>
 <li><strong>Aplicar tope de 11 años cuando el contrato es anterior al 14/08/1981</strong>: para esos casos no aplica el tope (artículo 7 transitorio Ley 19.010).</li>
-<li><strong>Calcular vacaciones con días corridos en vez de hábiles</strong>: los 15 días anuales son <em>hábiles</em> (lunes a viernes, sin feriados).</li>
+<li><strong>Pagar solo días hábiles de feriado:</strong> primero se determina el saldo hábil y después se agregan sábados, domingos y festivos incluidos al proyectarlo desde el día siguiente al término.</li>
 <li><strong>Olvidar la indemnización sustitutiva del aviso</strong>: si despiden sin avisar 30 días antes, hay que sumar una remuneración mensual.</li>
-<li><strong>No proporcionar más de 6 meses</strong>: una fracción mayor a 6 meses se cuenta como año completo.</li>
+<li><strong>Redondear seis meses:</strong> solo una fracción superior a seis meses suma un año; seis meses exactos no.</li>
 <li><strong>Aplicar el tope de 90 UF cuando no corresponde</strong>: el tope solo aplica a la BASE (remuneración mensual), no al monto total del finiquito.</li>
-<li><strong>Calcular vacaciones progresivas mal</strong>: tras 10 años el trabajador suma +1 día cada 3 nuevos años, con máximo 5 días extra.</li>
-</ul>`,
+<li><strong>Inventar un máximo de cinco días progresivos:</strong> el artículo 68 no fija ese tope. Exige diez años de trabajo y luego un día por cada tres nuevos años con el empleador actual, pudiendo hacerse valer hasta diez años anteriores.</li>
+<li><strong>Omitir la indemnización de obra/faena:</strong> para contratos celebrados desde 2022, la conclusión válida de la obra puede generar 2,5 días por mes y fracción superior a 15 días.</li>
+<li><strong>Descontar toda la AFC:</strong> en artículo 161 solo se imputa el aporte CIC del empleador certificado, nunca el 0,6% del trabajador.</li>
+</ul>
+
+<h3>Checklist documental antes de decidir</h3>
+<ol class="steps">
+<li>Carta de término con causal, hechos y fecha de separación.</li>
+<li>Contrato, anexos y fecha de ingreso.</li>
+<li>Últimas tres liquidaciones y comprobantes de pago.</li>
+<li>Certificados de AFP, salud y AFC para revisar cotizaciones.</li>
+<li>Registro de vacaciones usadas, progresivas y última anualidad.</li>
+<li>Propuesta de finiquito con cada concepto separado.</li>
+<li>Certificado de Saldo Aporte Empleador si existe descuento AFC.</li>
+<li>Copia de cualquier reserva, reclamo DT y comprobante de recepción.</li>
+</ol>
+
+<h3>Cómo usar las calculadoras sin delegar la decisión</h3>
+<p>La <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> ordena años de servicio, aviso y conceptos pendientes. La de <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">indemnización</a> aísla la base y los recargos. Hoy la herramienta de <a href="/calculadoras/calculadora-vacaciones-proporcionales">vacaciones proporcionales</a> no pide fecha de término y, por ello, no puede incluir con exactitud el calendario: usa el resultado hábil como punto de partida, no como liquidación final.</p>
+<p>Las preguntas de foros laborales se utilizaron para identificar errores reales —gratificación duplicada, seis meses redondeados, cuenta AFC completa y firma sin reserva—, pero las reglas de esta guía se comprobaron en Código del Trabajo, Dirección del Trabajo y AFC. Contenido revisado al 13 de julio de 2026.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Esta guía enseña a revisar un cálculo; no determina la causal ni reemplaza asesoría jurídica. Si hay despido discutido, cotizaciones impagas, tutela de derechos, fuero, embarazo, accidente laboral o montos relevantes, obtén orientación antes de que venza el plazo judicial.</p></div></aside>`,
       },
     ],
   },
@@ -446,10 +498,10 @@ export const guias: Guia[] = [
   // ============================================
   {
     slug: 'uf-utm-indicadores-chile',
-    title: 'UF, UTM e IPC en Chile: la guía definitiva 2026',
+    title: 'UF, UTM e IPC en Chile: cómo leerlos y usarlos en 2026',
     intent: '¿Qué son y cómo se usan la UF, UTM e IPC?',
     description:
-      'Guía completa de los indicadores económicos chilenos: UF, UTM, UTA, IPC, IPSA y dólar observado. Cómo se calculan, dónde se usan y conversión a pesos.',
+      'Qué significan UF, UTM, UTA e IPC, qué fecha usar en contratos y multas, cómo se conectan con la inflación y cómo interpretar dólar, TPM y TMC sin mezclar indicadores.',
     category: 'finanzas',
     categoryLabel: 'Educación financiera',
     keywords: [
@@ -466,95 +518,131 @@ export const guias: Guia[] = [
       'dólar observado',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 13,
+    updatedAt: '2026-07-13',
+    readingTime: 19,
     relatedCalculators: [
       'calculadora-uf-clp',
       'calculadora-utm-clp',
       'calculadora-conversor-divisas',
       'calculadora-reajuste-arriendo',
     ],
-    relatedArticles: ['todo-sobre-uf-chile', 'reajuste-arriendo-uf-2026'],
+    relatedArticles: ['todo-sobre-uf-chile', 'reajuste-arriendo-uf-2026', 'tope-imponible-2026'],
     sources: [
-      { label: 'Banco Central de Chile', url: 'https://www.bcentral.cl' },
-      { label: 'Servicio de Impuestos Internos', url: 'https://www.sii.cl' },
-      { label: 'Instituto Nacional de Estadísticas', url: 'https://www.ine.gob.cl' },
-      { label: 'Comisión para el Mercado Financiero', url: 'https://www.cmfchile.cl' },
+      { label: 'Banco Central — metodología UF', url: 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf' },
+      { label: 'Banco Central — preguntas estadísticas', url: 'https://www.bcentral.cl/es/areas/estadisticas/preguntas-frecuentes-estadisticas' },
+      { label: 'SII — UTM, UTA e IPC 2026', url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm' },
+      { label: 'INE — IPC de junio 2026', url: 'https://www.ine.gob.cl/sala-de-prensa/prensa/general/noticia/2026/07/08/%C3%ADndice-de-precios-al-consumidor-%28ipc%29-de-junio-present%C3%B3-una-variaci%C3%B3n-mensual-de-0-0' },
+      { label: 'CMF — Tasa Máxima Convencional', url: 'https://www.cmfchile.cl/educa/621/w3-article-27169.html' },
     ],
     sections: [
       {
         id: 'que-es-uf',
         title: '¿Qué es la UF (Unidad de Fomento)?',
         level: 2,
-        html: `<p>La <strong>Unidad de Fomento</strong> es una unidad de cuenta reajustable creada por el Decreto 40 del 20 de enero de 1967. Su valor se actualiza diariamente según la variación del Índice de Precios al Consumidor (IPC) del mes anterior. El <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central de Chile</a> es responsable de calcular y publicar el valor de la UF.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Fórmula del reajuste UF</strong><p><code>UF_día_t = UF_día_t-1 × (1 + IPC_mes_anterior)^(1/d)</code>, donde <em>d</em> es el número de días del período de reajuste (mes a mes calendario, desde el día 10 de cada mes hasta el día 9 del siguiente).</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Valor UF julio 2026</span><span class="data-grid__value">$40.826</span></li><li><span class="data-grid__label">UF al cierre 2025</span><span class="data-grid__value">$38.890</span></li><li><span class="data-grid__label">Variación 12 meses</span><span class="data-grid__value">+3,73%</span></li><li><span class="data-grid__label">Frecuencia</span><span class="data-grid__value">Diaria</span></li></ul>`,
+        html: `<p>La <strong>Unidad de Fomento</strong> es una unidad de cuenta reajustable expresada en pesos. No es una moneda que se compre en billetes ni una tasa de interés. Permite mantener en términos reales el valor de créditos, contratos, topes y coberturas mientras cambia el nivel de precios.</p>
+<p>El Banco Central calcula una trayectoria diaria usando la variación mensual del IPC publicada por el INE. El nuevo tramo se publica en el Diario Oficial a más tardar el día 9 y rige desde el <strong>10 de ese mes hasta el 9 del siguiente</strong>, ambos incluidos.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Reajuste geométrico, no un salto mensual</strong><p>Si el IPC del mes anterior fue <em>p</em> y el período tiene <em>d</em> días, el factor diario responde a <code>(1 + p)^(1/d)</code>. El alza o baja se distribuye gradualmente. Si el IPC es 0,0%, la UF permanece constante durante el tramo. Para pagos y escrituras siempre prevalece la tabla oficial, porque intervienen redondeos.</p></div></aside>
+<p>Ejemplo de calendario: el IPC de junio de 2026 fue 0,0%. Ese dato determina que la UF se mantenga sin variación acumulada durante el período del 10 de julio al 9 de agosto, aunque su valor de partida sea el alcanzado el 9 de julio. El IPC publicado el 8 de julio no reescribe los valores de los primeros nueve días del mes.</p>
+<h3>Qué fecha de UF usar</h3>
+<p>No existe un único “valor UF de julio” para todas las operaciones. Un dividendo puede convertir con la UF del día de pago; una indemnización laboral con la UF del último día del mes anterior; una compraventa con la fecha pactada en la escritura. Antes de convertir, busca en la norma o contrato la fecha de referencia.</p>
+<div class="numeric-example"><div class="numeric-example__title">Conversión fechada</div><ul><li>10 UF × $40.844,79 (valor oficial del 9 de julio de 2026)</li><li>Resultado: $408.447,90</li><li>Redondeo comercial ilustrativo: $408.448</li></ul><span class="total">La misma cantidad de UF puede dar otro CLP al día siguiente</span></div>`,
       },
       {
         id: 'donde-se-usa-uf',
         title: '¿Dónde se usa la UF?',
         level: 2,
-        html: `<ul>
-<li><strong>Créditos hipotecarios</strong>: el saldo y los dividendos se denominan en UF. La cuota en pesos varía mes a mes con el IPC.</li>
-<li><strong>Arriendos de oficinas y propiedades altas</strong>: muchos contratos pactan el canon en UF para protegerse de la inflación.</li>
-<li><strong>Seguros de vida y salud</strong>: las primas y coberturas suelen expresarse en UF.</li>
-<li><strong>Tope imponible AFP/Salud (90 UF) y cesantía (135,2 UF)</strong>: los topes legales mensuales se ajustan automáticamente con la UF.</li>
-<li><strong>Subsidios habitacionales</strong>: los topes de propiedad y montos de subsidio (DS49, DS01, DS19) se expresan en UF.</li>
-<li><strong>Plusvalía inmobiliaria</strong>: la exención de 8.000 UF para vivienda habitual está en UF acumuladas.</li>
-<li><strong>Multas SII</strong>: muchas multas tributarias se expresan en UTM o UF.</li>
-<li><strong>Pago de matrículas universitarias</strong>: instituciones privadas suelen expresarlas en UF.</li>
-</ul>`,
+        html: `<table><thead><tr><th>Uso</th><th>Qué queda fijo</th><th>Qué puede cambiar</th></tr></thead><tbody>
+<tr><td>Crédito hipotecario</td><td>Saldo y dividendo expresados en UF según contrato</td><td>Equivalente mensual en pesos, seguros y tasa pactada</td></tr>
+<tr><td>Arriendo pactado en UF</td><td>Cantidad de UF durante el período acordado</td><td>Pesos de cada vencimiento</td></tr>
+<tr><td>Seguros</td><td>Prima, deducible o cobertura en UF</td><td>Equivalente CLP en la fecha del siniestro o pago</td></tr>
+<tr><td>Topes previsionales 2026</td><td>90 UF para AFP/salud y 135,2 UF para cesantía</td><td>Pesos imponibles de cada mes</td></tr>
+<tr><td>Subsidios de vivienda</td><td>Topes y aportes definidos en el programa</td><td>Valor en pesos al momento que indique el beneficio</td></tr>
+<tr><td>Ganancia inmobiliaria</td><td>Límite acumulado de 8.000 UF bajo requisitos</td><td>Conversión de cada enajenación y costo tributario</td></tr>
+</tbody></table>
+<p>La UF reajusta el capital, pero <strong>no reemplaza el interés</strong>. En un hipotecario “UF + 4%”, la deuda se expresa en UF y además devenga la tasa contractual. Decir que el crédito solo sube con el IPC omite esa segunda capa.</p>
+<p>Tampoco todo contrato se reajusta automáticamente. Un arriendo en pesos queda en pesos hasta que opere la cláusula pactada o una renovación; no se puede imponer UF retroactivamente porque aumentó la inflación. La <a href="/calculadoras/calculadora-reajuste-arriendo">calculadora de reajuste de arriendo</a> debe usarse con el período y mecanismo escrito en el contrato.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>UF no significa precio justo</strong><p>Que una deuda, arriendo o multa esté expresada en UF explica su reajuste, no prueba que el cobro sea legal, que la tasa sea conveniente o que no existan comisiones. Revisa por separado capital, interés, seguros, gastos y fecha de conversión.</p></div></aside>`,
       },
       {
         id: 'que-es-utm',
         title: '¿Qué es la UTM y la UTA?',
         level: 2,
-        html: `<p>La <strong>Unidad Tributaria Mensual</strong> es un indicador <em>mensual</em> reajustado según el IPC. Se usa principalmente en el ámbito tributario y para multas. La <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a> publica el valor cada mes.</p>
-<p>La UTA (Unidad Tributaria Anual) es simplemente <strong>UTM × 12</strong>, y se usa para los tramos del Impuesto Global Complementario y la Operación Renta.</p>
+        html: `<p>La <strong>Unidad Tributaria Mensual</strong> es una cantidad de dinero en pesos que sirve como medida o referencia tributaria. Se actualiza por IPC y tiene un solo valor para cada mes. Por eso se usa en multas, límites, sanciones y parámetros legales que necesitan conservar poder adquisitivo sin cambiar la ley cada mes.</p>
+<p>En julio de 2026 la UTM oficial es <strong>$71.649</strong>. Una multa de 1,5 UTM cuyo valor se determina en julio equivale a $107.473,50 antes del redondeo aplicable. Si la resolución manda convertir al día de pago o al mes de la infracción, esa instrucción decide cuál UTM usar.</p>
 <div class="comparison">
 <div class="comparison__header"><div>UF</div><div>UTM</div></div>
-<div class="comparison__row"><div>Reajuste diario por IPC</div><div>Reajuste mensual por IPC</div></div>
-<div class="comparison__row"><div>Contratos privados, créditos, arriendos</div><div>Impuestos, multas, trámites públicos</div></div>
-<div class="comparison__row"><div>≈ $40.826 (julio 2026)</div><div>≈ $71.649 (julio 2026)</div></div>
-<div class="comparison__row"><div>Publicada por Banco Central</div><div>Publicada por SII</div></div>
-<div class="comparison__row"><div>Origen: 1967</div><div>Origen: 1974 (reforma tributaria)</div></div>
+<div class="comparison__row"><div>Cambia diariamente</div><div>Cambia por mes</div></div>
+<div class="comparison__row"><div>Créditos, contratos, seguros y topes</div><div>Impuestos, multas y umbrales legales</div></div>
+<div class="comparison__row"><div>Banco Central calcula y publica</div><div>SII publica la tabla tributaria</div></div>
+<div class="comparison__row"><div>La fecha exacta suele importar</div><div>Normalmente importa el mes indicado</div></div>
 </div>
-<p>Para convertir entre UF/UTM y pesos chilenos, usa el <a href="/calculadoras/calculadora-uf-clp">conversor UF→CLP</a> o <a href="/calculadoras/calculadora-utm-clp">conversor UTM→CLP</a>.</p>`,
+<h3>UTA: dos usos que suelen confundirse</h3>
+<p>La tabla mensual del SII muestra una equivalencia UTA igual a la UTM de cada fila multiplicada por 12; para julio de 2026 son $859.788. Sin embargo, el artículo 8 del Código Tributario define la <strong>unidad tributaria anual del año comercial</strong> como la UTM vigente en el último mes de ese año multiplicada por doce. El valor anual definitivo de 2026 depende, por tanto, de diciembre.</p>
+<p>No uses la equivalencia UTA de julio como si fuera necesariamente la UTA final para la Operación Renta 2027. Revisa qué año comercial y qué tabla pide el formulario, tramo o sanción.</p>
+<p>Convierte con el <a href="/calculadoras/calculadora-uf-clp">conversor UF→CLP</a> o el <a href="/calculadoras/calculadora-utm-clp">conversor UTM→CLP</a>, anotando junto al resultado la fecha o mes. Un número sin período no es auditable.</p>`,
       },
       {
         id: 'ipc-chile',
         title: '¿Qué es el IPC?',
         level: 2,
-        html: `<p>El <strong>Índice de Precios al Consumidor</strong> mide la variación de precios de una canasta básica de bienes y servicios. Lo calcula y publica mensualmente el <a href="https://www.ine.gob.cl" target="_blank" rel="noopener">Instituto Nacional de Estadísticas (INE)</a> con los datos del mes anterior, alrededor del día 8 de cada mes.</p>
-<p>El IPC es la variable maestra que determina el reajuste de UF, UTM, salarios mínimos, pensiones (PGU), arriendos en pesos y tarifas eléctricas. Un IPC anual de 4% significa que UF, UTM y otros indicadores aumentaron aproximadamente 4% en el año.</p>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>IPC vs IPC subyacente</strong><p>El IPC oficial incluye toda la canasta. El "IPC subyacente" excluye alimentos volátiles y energía, y es el que el Banco Central usa para decisiones de política monetaria porque refleja mejor las presiones inflacionarias estructurales.</p></div></aside>
-<p>El IPC se descompone en 12 divisiones (alimentos, vivienda, transporte, salud, educación, etc.). Los datos completos están en el portal del INE.</p>`,
+        html: `<p>El <strong>Índice de Precios al Consumidor</strong> mide la variación de precios de una canasta representativa del consumo de los hogares urbanos. No es la Canasta Básica de Alimentos ni significa que cada familia haya sufrido exactamente la misma inflación: cada producto tiene una ponderación promedio y el patrón de gasto personal puede ser distinto.</p>
+<p>El INE publica el índice general, variación mensual, acumulada en el año y a doce meses. En junio de 2026 el IPC fue <strong>0,0% mensual</strong>, <strong>2,8% acumulado</strong> y <strong>4,3% a doce meses</strong>. Esas tres cifras responden preguntas diferentes:</p>
+<ul>
+<li><strong>Mensual:</strong> cuánto cambió el nivel entre mayo y junio.</li>
+<li><strong>Acumulado:</strong> cambio desde diciembre de 2025 hasta junio.</li>
+<li><strong>Doce meses:</strong> cambio entre junio de 2025 y junio de 2026.</li>
+</ul>
+<p>En junio, transporte cayó 1,3% y aportó una incidencia negativa, mientras alimentos y bebidas no alcohólicas subieron 0,8%. El 0,0% general no significa que todos los precios quedaron inmóviles: alzas y bajas se compensaron en el índice agregado.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>IPC sin volátiles no es “el IPC verdadero”</strong><p>El INE y el Banco Central publican medidas que excluyen componentes con cambios frecuentes para analizar persistencia. En junio el IPC sin volátiles varió 0,2%. Es una herramienta de análisis monetario; contratos y reajustes que dicen simplemente “IPC” suelen referirse al índice general oficial, salvo definición distinta.</p></div></aside>
+<h3>Qué ajusta automáticamente el IPC y qué no</h3>
+<p>El IPC alimenta directamente el cálculo de UF y la actualización de UTM. Un contrato en pesos solo se reajusta si contiene una cláusula válida que lo ordena. Sueldo mínimo, PGU y tarifas tienen leyes o metodologías propias: la inflación puede influir en sus decisiones, pero un IPC de 4% no autoriza sumar 4% automáticamente a cada beneficio o precio regulado.</p>
+<p>Para reajustar un monto en pesos entre índices, la operación correcta es <code>monto inicial × IPC final ÷ IPC inicial</code>, usando una serie compatible. Sumar porcentajes mensuales produce errores por composición y redondeo.</p>`,
       },
       {
         id: 'dolar-y-otros',
         title: 'Dólar, euro y otros indicadores',
         level: 2,
-        html: `<h3>Dólar observado vs dólar acuerdo</h3>
-<p>El <strong>dólar observado</strong> es el promedio ponderado de las transacciones del día anterior en el mercado cambiario formal. El Banco Central lo publica diariamente y es el valor que usa el SII para impuestos. El <strong>dólar acuerdo</strong> (también llamado paridad) es un valor de referencia que algunos contratos invocan.</p>
+        html: `<h3>Dólar observado</h3>
+<p>El <strong>dólar observado</strong> es un tipo de cambio de referencia calculado por el Banco Central a partir de operaciones del mercado cambiario formal del día hábil bancario anterior. Se publica en el Diario Oficial y rige para el día hábil de publicación. No es necesariamente el precio al que un banco o casa de cambio vende dólares: esas instituciones agregan spread, costos y condiciones comerciales.</p>
+<p>Para una factura, declaración tributaria o contrato, no elijas el precio más conveniente entre “observado”, “comprador”, “vendedor” o tarjeta. Usa la regla del documento o del SII para la fecha. En fines de semana y festivos puede regir el último valor hábil según el procedimiento aplicable.</p>
 
-<h3>Euro</h3>
-<p>El euro observado se publica también diariamente. La paridad EUR/USD oscila entre 1,05 y 1,15 históricamente, así que el euro está aproximadamente un 8% sobre el dólar en pesos chilenos.</p>
+<h3>Paridad y euro</h3>
+<p>El Banco Central distingue tipo de cambio nominal —pesos por una unidad de moneda extranjera— y paridad —unidades de moneda respecto del dólar estadounidense—. El valor CLP/EUR puede derivarse de las series oficiales, pero no existe una prima histórica fija de 8% que permita estimarlo sin consultar el día.</p>
+<p>El llamado <strong>dólar acuerdo</strong> dejó de ser parte del instrumental cambiario y el Banco Central descontinuó su publicación en enero de 2018. No debe presentarse como un indicador corriente. Si un contrato antiguo todavía lo menciona, requiere interpretar su cláusula de sustitución.</p>
 
-<h3>TPM y TMC</h3>
-<p>La <strong>Tasa de Política Monetaria</strong> es la tasa de referencia que fija el Consejo del Banco Central. Sirve de piso para la mayoría de las tasas del mercado. La <strong>Tasa Máxima Convencional (TMC)</strong> la publica mensualmente la <a href="https://www.cmfchile.cl" target="_blank" rel="noopener">CMF</a> y es el techo legal para créditos según la Ley 18.010. Si un crédito te cobra más TMC, ese exceso es nulo de pleno derecho.</p>`,
+<h3>TPM y TMC no son lo mismo</h3>
+<p>La <strong>Tasa de Política Monetaria</strong> es la tasa operacional fijada por el Consejo del Banco Central para conducir la política monetaria. Influye en tasas de corto plazo y se transmite al crédito, ahorro, actividad y precios; no es un piso contractual que obligue a un banco a prestar a “TPM más margen”.</p>
+<p>La <strong>Tasa Máxima Convencional</strong> es el límite legal de interés para determinadas operaciones de crédito de dinero. La CMF publica varias TMC según moneda, reajustabilidad, plazo y monto: no existe una sola tasa para todos los créditos. La Ley 18.010 establece consecuencias cuando se pacta un interés superior; antes de comparar convierte tasas a la misma base anual, identifica el tramo y separa interés de cargos permitidos.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>CAE no se compara con TMC de consumo</strong><p>Un crédito estudiantil, hipotecario reajustable, tarjeta y avance tienen reglas y tramos distintos. Comparar solo porcentajes sin moneda, plazo y base puede llevar a una conclusión falsa sobre legalidad o costo.</p></div></aside>`,
       },
       {
         id: 'fuentes-oficiales',
         title: 'Fuentes oficiales de los indicadores',
         level: 2,
-        html: `<ul>
-<li><strong>UF, dólar, euro</strong>: <a href="https://www.bcentral.cl/inicio/indicadores" target="_blank" rel="noopener">bcentral.cl/indicadores</a> (oficial). Espejo público en mindicador.cl.</li>
-<li><strong>UTM, UTA</strong>: <a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">sii.cl</a>.</li>
-<li><strong>IPC</strong>: <a href="https://www.ine.gob.cl/estadisticas/economia/indices-de-precio-e-inflacion" target="_blank" rel="noopener">ine.gob.cl</a>.</li>
-<li><strong>TMC mensual</strong>: <a href="https://www.cmfchile.cl/portal/principal/613/w3-propertyvalue-19272.html" target="_blank" rel="noopener">cmfchile.cl</a>.</li>
-<li><strong>TPM</strong>: <a href="https://www.bcentral.cl/web/banco-central/areas/politica-monetaria/tasa-de-politica-monetaria" target="_blank" rel="noopener">bcentral.cl</a>.</li>
-</ul>
-<aside class="callout callout--success"><span class="callout__icon" aria-hidden="true">✅</span><div class="callout__body"><strong>Datos actualizados a diario</strong><p>En CalculaChile, los valores se actualizan automáticamente cada 24 horas vía GitHub Actions desde mindicador.cl con respaldo en las series oficiales del Banco Central. Tus cálculos siempre usan la cifra del día.</p></div></aside>`,
+        html: `<table><thead><tr><th>Dato</th><th>Fuente que manda</th><th>Frecuencia</th></tr></thead><tbody>
+<tr><td>UF</td><td><a href="https://si3.bcentral.cl/indicadoressiete/secure/indicadoresdiarios.aspx" target="_blank" rel="noopener">Banco Central / Diario Oficial</a></td><td>Valor para cada día</td></tr>
+<tr><td>UTM y tabla UTA</td><td><a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">SII</a></td><td>Mensual</td></tr>
+<tr><td>IPC general y medidas</td><td><a href="https://www.ine.gob.cl/estadisticas-por-tema/precios-e-inflacion/indice-de-precios-al-consumidor" target="_blank" rel="noopener">INE</a></td><td>Mensual</td></tr>
+<tr><td>Dólar observado y paridades</td><td>Banco Central / Diario Oficial</td><td>Días hábiles</td></tr>
+<tr><td>TPM</td><td><a href="https://www.bcentral.cl/web/banco-central/areas/politica-monetaria/tasa-de-politica-monetaria" target="_blank" rel="noopener">Banco Central</a></td><td>Según Reunión de Política Monetaria</td></tr>
+<tr><td>TMC</td><td><a href="https://www.cmfchile.cl/portal/principal/613/w3-propertyvalue-19272.html" target="_blank" rel="noopener">CMF</a></td><td>Publicaciones por período y tipo de operación</td></tr>
+</tbody></table>
+
+<h3>Cómo leer el dato mostrado por CalculaChile</h3>
+<p>El sitio intenta resolver valores con prioridad de fuente del Banco Central, luego Mindicador y finalmente un snapshot local de respaldo. La automatización del repositorio actualiza ese snapshot, pero una API puede fallar o el archivo puede tener una fecha anterior. Por eso cada resultado debe mostrar <strong>fecha de observación y origen</strong>; “en vivo” y “fallback” no tienen la misma fuerza para firmar una escritura o pagar una multa.</p>
+<p>Al auditar esta guía, el snapshot local estaba generado el 10 de julio de 2026 con UF $40.844,79 y UTM $71.649, pero su campo de IPC mensual mostraba -0,2%, mientras el INE ya había publicado 0,0% para junio. Esa diferencia demuestra por qué no conviene describir todo el bloque como “siempre actualizado”. Para IPC manda el boletín fechado del INE.</p>
+
+<h3>Checklist antes de convertir</h3>
+<ol class="steps">
+<li>Identifica la unidad: UF, UTM, UTA, IPC o moneda.</li>
+<li>Busca la fecha o mes exigido por la norma o contrato.</li>
+<li>Consulta la fuente oficial y guarda el valor.</li>
+<li>Multiplica unidades por pesos sin redondear prematuramente.</li>
+<li>Aplica el redondeo que corresponda al trámite.</li>
+<li>Registra fuente, fecha y fórmula junto al resultado.</li>
+</ol>
+<p>Las dudas observadas en foros —“por qué subió mi dividendo si el IPC dio cero”, “qué UTM usa una multa” o “el dólar observado es el precio de compra”— se utilizaron para ordenar esta guía, no como evidencia estadística. Contenido verificado al 13 de julio de 2026.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance</strong><p>Esta guía explica unidades y fuentes; no predice UF, dólar, inflación ni tasas. Para operaciones financieras o tributarias prevalecen la fecha contractual, la norma aplicable y el valor oficial.</p></div></aside>`,
       },
     ],
   },
@@ -583,8 +671,8 @@ export const guias: Guia[] = [
       'cotización independientes',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 15,
+    updatedAt: '2026-07-13',
+    readingTime: 20,
     relatedCalculators: [
       'calculadora-iva',
       'calculadora-boleta-honorarios',
@@ -594,18 +682,22 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['guia-iva-chile-2026', 'boleta-honorarios-completo'],
     sources: [
-      { label: 'Servicio de Impuestos Internos', url: 'https://www.sii.cl' },
+      { label: 'SII — boletas de honorarios 2026', url: 'https://www.sii.cl/destacados/boletas_honorarios/' },
+      { label: 'SII — nuevos contribuyentes a honorarios', url: 'https://www.sii.cl/ayudas/nuevos_contribuyentes/boleta-honorarios.html' },
       { label: 'Ley sobre Impuesto a las Ventas y Servicios (DL 825)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=6369' },
       { label: 'Ley 21.133 (calendario retención honorarios)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1128420' },
+      { label: 'Previsión Social — opciones para cotizar', url: 'https://previsionsocial.gob.cl/ley-honorarios/opciones-para-cotizar/' },
     ],
     sections: [
       {
         id: 'que-es-iva',
         title: '¿Qué es el IVA?',
         level: 2,
-        html: `<p>El <strong>Impuesto al Valor Agregado</strong> es un tributo indirecto chileno con tasa única del <strong>19%</strong>. Grava la venta de bienes muebles, prestación de servicios e importaciones (DL 825 de 1974). Lo paga finalmente el consumidor, pero se recauda en cada eslabón de la cadena productiva mediante el mecanismo de débito y crédito fiscal.</p>
-<p>Una empresa cobra IVA en sus ventas (<strong>débito fiscal</strong>) y paga IVA en sus compras (<strong>crédito fiscal</strong>). En el Formulario 29 mensual declara la diferencia: si el débito supera al crédito, paga; si el crédito supera al débito, lo arrastra al mes siguiente.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Tasa única desde 2003</strong><p>Chile mantiene la tasa de IVA en 19% desde octubre de 2003 (antes era 18%). Es una de las tasas más altas de Latinoamérica para tributos al consumo, comparada con 16% en México o 21% en Argentina.</p></div></aside>`,
+        html: `<p>El <strong>Impuesto al Valor Agregado</strong> grava, con tasa general de <strong>19%</strong>, ventas y servicios definidos por el DL 825, además de importaciones y otros hechos especiales. Desde 2023 la definición de servicio afecto se amplió: la pregunta ya no es solo si una actividad pertenece a primera o segunda categoría, sino si existe una exención expresa.</p>
+<p>El vendedor o prestador recarga IVA al cliente y genera <strong>débito fiscal</strong>. El IVA soportado en compras puede transformarse en <strong>crédito fiscal</strong> solo si cumple requisitos: documento tributario válido, vínculo con operaciones del giro, registro y ausencia de una prohibición legal. Una compra personal con factura no crea crédito por sí sola.</p>
+<div class="numeric-example"><div class="numeric-example__title">Período mensual simplificado</div><ul><li>Débito por ventas: $570.000</li><li>Crédito admisible por compras: $190.000</li><li>IVA determinado: $570.000 − $190.000</li></ul><span class="total">IVA a enterar antes de otros ajustes: $380.000</span></div>
+<p>Si el crédito supera el débito puede quedar remanente para períodos siguientes bajo las reglas del impuesto; no equivale automáticamente a una devolución en efectivo. Exportadores y situaciones especiales tienen mecanismos propios.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>IVA no es ingreso de la empresa</strong><p>Si una factura cobra $119.000 por un neto de $100.000, los $19.000 son débito fiscal. Para medir ventas, margen o utilidad no se deben tratar como precio neto ganado.</p></div></aside>`,
       },
       {
         id: 'calculo-iva',
@@ -620,76 +712,92 @@ export const guias: Guia[] = [
 <h3>Solo el IVA</h3>
 <p><code>iva = precio_neto × 0,19</code> o <code>iva = precio_bruto − precio_bruto/1,19</code></p>
 <div class="numeric-example"><div class="numeric-example__title">Ejemplo: producto con precio neto de $100.000</div><ul><li>Precio neto: $100.000</li><li>IVA (19%): $19.000</li><li>Precio bruto facturado: $119.000</li></ul><span class="total">Cliente paga: $119.000 — empresa entera $19.000 al SII</span></div>
-<p>Para evitar errores de redondeo, usa la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> que también permite calcular en sentido inverso (de bruto a neto).</p>`,
+<p>El 19% se aplica al neto, por eso el IVA contenido en un precio final no es 19% del bruto: representa <code>19/119</code>, aproximadamente 15,9664%. Sobre $119.000 son $19.000, no $22.610.</p>
+<p>La <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> resuelve neto, impuesto y total, pero no decide si la operación está afecta, exenta o fuera del hecho gravado. Esa clasificación debe hacerse primero.</p>`,
       },
       {
         id: 'exenciones-iva',
         title: 'Bienes y servicios exentos de IVA',
         level: 2,
-        html: `<p>El artículo 12 del DL 825 lista los bienes y servicios exentos:</p>
+        html: `<p>Las exenciones deben leerse de forma estricta en el artículo 12 y normas especiales. No basta que una actividad parezca “social” o “profesional”. Entre las más relevantes están:</p>
 <ul>
-<li>Servicios profesionales prestados por personas naturales (van con boleta de honorarios, no con factura).</li>
-<li>Servicios de educación.</li>
-<li>Salud prestada por hospitales, clínicas y profesionales.</li>
-<li>Transporte público de pasajeros.</li>
-<li>Seguros de vida y salud.</li>
-<li>Venta de libros, diarios y revistas.</li>
-<li>Servicios financieros (intereses bancarios, depósitos).</li>
-<li>Exportaciones de bienes.</li>
+<li><strong>Personas naturales independientes:</strong> los ingresos del artículo 42 N.º 2 de la Ley de Renta documentados con boleta de honorarios están exentos de IVA.</li>
+<li><strong>Sociedades de profesionales:</strong> pueden quedar exentas si cumplen todos los requisitos y tributan en segunda categoría. Una SpA comercial no se vuelve sociedad de profesionales por describir consultoría en su objeto.</li>
+<li><strong>Educación:</strong> establecimientos educacionales, por ingresos propios de su actividad docente. Venta de materiales, arriendo u otros servicios requieren análisis separado.</li>
+<li><strong>Salud:</strong> existen exenciones institucionales y para determinadas prestaciones ambulatorias; no toda facturación de una clínica o centro está exenta.</li>
+<li><strong>Transporte de pasajeros:</strong> cubierto en los términos de la norma, distinto del transporte de carga.</li>
+<li><strong>Exportaciones:</strong> tienen tratamiento especial y pueden dar derecho a recuperar crédito fiscal bajo procedimiento, por lo que “exento” no significa perder siempre todo crédito.</li>
 </ul>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Reforma Ley 21.420 (2022)</strong><p>Desde el 1 de enero de 2023, los servicios profesionales prestados por <em>sociedades</em> sí están afectos a IVA, salvo que se constituyan como sociedad de profesionales clasificada en 2da categoría. Esto cambió radicalmente el panorama tributario para empresas de consultoría.</p></div></aside>`,
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Los libros pagan IVA en Chile</strong><p>La venta de libros, diarios y revistas no tiene una exención general. Incluirlos en una lista automática de exentos produce precios y declaraciones erróneas. También son demasiado amplias las frases “toda salud” o “todo servicio financiero”.</p></div></aside>
+<p>Desde el 1 de enero de 2023 la regla general es que los servicios están afectos salvo exención. Antes de emitir, revisa forma jurídica, categoría tributaria, naturaleza exacta del servicio y cliente; no copies el documento de otro profesional.</p>`,
       },
       {
         id: 'boleta-honorarios',
         title: 'Boleta de honorarios: qué es y cuándo emitir',
         level: 2,
-        html: `<p>La <strong>boleta de honorarios electrónica</strong> es el documento tributario que emiten las personas naturales por servicios profesionales independientes. Se emite en el portal del SII, no requiere imprimirse y se envía por correo al pagador.</p>
-<p>Pueden emitirla profesionales (abogados, médicos, ingenieros), técnicos (contadores, diseñadores, programadores) y trabajadores que prestan servicios sin relación laboral. La emisión es <strong>electrónica obligatoria</strong> desde 2017.</p>`,
+        html: `<p>La <strong>boleta de honorarios electrónica</strong> documenta rentas de segunda categoría obtenidas por una persona que presta servicios de manera independiente. Identifica emisor, receptor, fecha, descripción, bruto, retención o PPM y líquido. No es una factura exenta ni una boleta de ventas.</p>
+<p>Según la guía del SII, debe emitirse al momento en que se paga el servicio y admite un máximo de 90 días posteriores a ese pago. La fecha determina tasa y año de renta; acumular boletas de diciembre para emitirlas en abril distorsiona registros y puede cambiar el período tributario.</p>
+<h3>Boleta no prueba independencia laboral</h3>
+<p>Si en los hechos hay subordinación y dependencia —horario, jefatura, control, continuidad y obligación personal— el documento tributario no elimina los derechos laborales. En foros se repite “me obligan a boletear con horario”; esa pregunta se resuelve con la realidad del vínculo, no con el porcentaje de retención.</p>
+<ol class="steps"><li>Inicia actividades de segunda categoría con un código coherente.</li><li>Emite en SII con RUT correcto y descripción verificable.</li><li>Define correctamente quién retiene.</li><li>Descarga la boleta y guarda contrato, pago y respaldo del servicio.</li><li>Corrige errores con la anulación del SII, no editando el PDF.</li></ol>`,
       },
       {
         id: 'retencion-honorarios',
         title: 'Retención de la boleta de honorarios (Ley 21.133)',
         level: 2,
-        html: `<p>Cuando el pagador es una empresa o institución, debe <strong>retener una porción del bruto</strong> y enterarla al SII al mes siguiente. Si el pagador es una persona natural, no hay retención y el receptor declara y paga directamente.</p>
+        html: `<p>Desde el 1 de enero hasta el 31 de diciembre de 2026 la tasa es <strong>15,25%</strong> del honorario bruto. La Ley 21.133 la eleva a 16% en 2027 y 17% en 2028.</p>
+<p>El sistema distingue dos flujos. Si el receptor está obligado a retener, descuenta el porcentaje, paga el líquido y entera la retención. Si no retiene, el emisor recibe el bruto y debe declarar y pagar su PPM en el Formulario 29. No basta decir que “una persona natural nunca retiene” o que “toda empresa retiene”: selecciona la opción que corresponda al receptor.</p>
 <p>La <strong>Ley 21.133</strong> estableció un calendario progresivo de retención que sube del 14,5% en 2025 al 17% en 2028:</p>
 <table>
-<thead><tr><th>Año</th><th>Retención total</th><th>Impuesto renta</th><th>Cotización previsional</th></tr></thead>
+<thead><tr><th>Año</th><th>Retención o PPM</th><th>Cambio</th></tr></thead>
 <tbody>
-<tr><td>2025</td><td>14,5%</td><td>10%</td><td>4,5%</td></tr>
-<tr><td><strong>2026</strong></td><td><strong>15,25%</strong></td><td>10%</td><td>5,25%</td></tr>
-<tr><td>2027</td><td>16%</td><td>10%</td><td>6%</td></tr>
-<tr><td>2028</td><td>17%</td><td>10%</td><td>7%</td></tr>
+<tr><td>2025</td><td>14,50%</td><td>+0,75 punto</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>15,25%</strong></td><td>+0,75 punto</td></tr>
+<tr><td>2027</td><td>16,00%</td><td>+0,75 punto</td></tr>
+<tr><td>2028</td><td>17,00%</td><td>+1 punto</td></tr>
 </tbody>
 </table>
-<p>La porción "cotización previsional" se descompone en AFP, salud (FONASA o Isapre), SIS y Mutual de Seguridad. La distribución exacta la fija la Subsecretaría de Previsión Social cada año.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo 2026: boleta bruta $1.000.000</div><ul><li>Bruto facturado: $1.000.000</li><li>Retención total (15,25%): $152.500</li><li>— Impuesto renta (10%): $100.000</li><li>— Cotización previsional (5,25%): $52.500</li></ul><span class="total">Líquido recibido: $847.500</span></div>`,
+<div class="numeric-example"><div class="numeric-example__title">Boleta bruta $1.000.000</div><ul><li>Retención: $1.000.000 × 15,25% = $152.500</li><li>Líquido cuando retiene el receptor: $847.500</li><li>Si no retiene: recibes $1.000.000 y reservas $152.500 para PPM</li></ul><span class="total">Disponible después de retención o reserva: $847.500</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No existe una división 10% + 5,25% por boleta</strong><p>El 15,25% es pago provisional. En la Operación Renta se consolida con impuesto anual y cotizaciones según ingresos, gastos, topes, afiliación y modalidad de cobertura. No puedes afirmar que $100.000 de este ejemplo ya son impuesto definitivo y $52.500 cotizaciones.</p></div></aside>
+<p>Si pactaste un líquido, el bruto es <code>líquido ÷ 0,8475</code>. Para recibir $500.000 líquidos debes emitir aproximadamente $589.971 brutos, sujeto al redondeo del SII.</p>`,
       },
       {
         id: 'exencion-honorarios',
-        title: 'Exenciones y casos especiales',
+        title: 'Cotizaciones y situaciones especiales',
         level: 2,
-        html: `<ul>
-<li><strong>Boletas bajo 5 UTM mensuales</strong>: el SII no exige cotización obligatoria si el total anual está bajo 7,5 UTA. La retención de impuesto sigue aplicando en su totalidad.</li>
-<li><strong>Profesionales con régimen de gastos efectivos</strong>: pueden rebajar gastos reales (oficina, vehículo, tecnología) en lugar de la presunción 30% del artículo 50.</li>
-<li><strong>Pensionados</strong>: pueden eximirse de la cotización previsional adicional con declaración jurada anual.</li>
-<li><strong>Mujeres mayores de 50 años con cotizaciones mínimas</strong>: pueden eximirse de la cotización previsional obligatoria.</li>
+        html: `<p>La obligación previsional de independientes se determina anualmente. La renta imponible se calcula, en términos generales, sobre 80% de los honorarios brutos del año anterior, sujeta a mínimos, topes y coordinación con cotizaciones como dependiente.</p>
+<p>En la Operación Renta 2026, basada en honorarios de 2025, existen dos modalidades transitorias:</p>
+<ul>
+<li><strong>Cobertura completa:</strong> cotiza sobre 100% de la renta imponible anual y entrega cobertura completa entre julio de 2026 y junio de 2027.</li>
+<li><strong>Cobertura parcial:</strong> en 2026 calcula salud y pensiones sobre 80% de la renta imponible; ATEP, SANNA y SIS mantienen cobertura sobre la base completa definida para esos seguros. Puede aumentar la devolución, pero reduce prestaciones de salud y pensión.</li>
 </ul>
-<p>Para calcular tu boleta líquida considerando el año vigente y tu situación específica, usa la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a>.</p>`,
+<p>No todas las personas están obligadas en idénticos términos. El umbral oficial se expresa en honorarios anuales equivalentes a cinco ingresos mínimos mensuales y existen reglas por edad, pensión, afiliación y cotización simultánea. La guía anterior usaba “5 UTM mensuales” y “7,5 UTA”, parámetros que no corresponden a esta prueba.</p>
+<p>La retención se aplica al emitir aunque después resulte una excepción previsional. La situación final se resuelve en el F22, no modificando manualmente el 15,25% de cada boleta.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Cobertura no es devolución</strong><p>Elegir solo por “cuánto me devuelven” puede reducir el monto de licencias médicas, protección maternal y ahorro previsional. Consulta el simulador de la Subsecretaría de Previsión Social antes de confirmar.</p></div></aside>`,
       },
       {
         id: 'operacion-renta-independientes',
         title: 'Operación Renta para independientes',
         level: 2,
-        html: `<p>En abril de cada año, los profesionales independientes deben presentar el Formulario 22 (Declaración de Impuesto a la Renta). El proceso es:</p>
+        html: `<p>Las boletas emitidas durante 2026 se consolidarán, por regla general, en la <strong>Operación Renta 2027</strong>. La declaración realizada en abril de 2026 usa rentas y retenciones de 2025. Confundir año calendario con año tributario lleva a usar una tasa o UTA equivocada.</p>
+<p>El proceso anual considera:</p>
 <ol class="steps">
 <li>El SII totaliza tus boletas emitidas en el año calendario anterior.</li>
-<li>Aplica la presunción de gastos del 30% (Art. 50 LIR), con tope de 15 UTA anuales — o tus gastos efectivos si optaste por ese régimen.</li>
-<li>Calcula el impuesto según los tramos progresivos en UTA (8% – 40%).</li>
-<li>Te descuenta lo retenido a lo largo del año (PPM = retenciones de boletas).</li>
-<li>Si el PPM excede el impuesto, recibes <strong>devolución</strong>; si fue insuficiente, debes <strong>pagar la diferencia</strong>.</li>
+<li>Rebaja gastos presuntos de 30% con tope de 15 UTA, o gastos efectivos acreditados; no ambos.</li>
+<li>Integra otras rentas, rebajas y créditos para calcular el Global Complementario.</li>
+<li>Determina cotizaciones obligatorias y modalidad previsional.</li>
+<li>Imputa retenciones y PPM según el orden legal.</li>
+<li>Obtiene devolución, saldo cero o monto por pagar.</li>
 </ol>
-<p>Los tramos UTA 2026 son: 0% hasta 8 UTA, 4% hasta 16, 8% hasta 24, 13,5% hasta 32, 23% hasta 48, 30% hasta 64, 35% hasta 96, 40% sobre 96. Una UTA en 2026 ≈ $847.060, así que el primer tramo gravado empieza sobre los ~$6,8 millones anuales.</p>
-<p>Para estimar tu Operación Renta, usa la <a href="/calculadoras/calculadora-operacion-renta">calculadora de operación renta</a>.</p>`,
+<p>Para el Año Tributario 2026, el tope de gastos presuntos de 15 UTA fue $12.517.560 y el tramo exento del Global Complementario llegó a $11.265.804. Esas cifras corresponden a rentas 2025; no deben copiarse como cierre definitivo de rentas 2026 porque dependen de la UTA de diciembre.</p>
+<div class="numeric-example"><div class="numeric-example__title">Honorarios 2025 usados por la guía SII</div><ul><li>Ingresos brutos: $22.000.000</li><li>Gasto presunto 30%: $6.600.000</li><li>Base de honorarios: $15.400.000</li></ul><span class="total">Después se integran otras rentas, créditos y retenciones</span></div>
+<p>Una devolución alta no prueba que el impuesto esté “bien calculado” si faltan boletas, gastos fueron rechazados o existen cotizaciones pendientes. Revisa la propuesta del SII contra tus documentos antes de enviarla.</p>
+
+<h3>Checklist mensual</h3>
+<ol class="steps"><li>Clasifica la operación: factura afecta, factura exenta o boleta de honorarios.</li><li>Emite con fecha, RUT y descripción correctos.</li><li>Confirma quién retiene o paga PPM.</li><li>Declara F29 dentro del calendario SII aplicable a tu modalidad.</li><li>Concilia registro de compras/ventas, boletas y pagos.</li><li>Guarda respaldo de gastos efectivos o proyecta el 30% presunto.</li><li>Reserva caja para impuesto y cotizaciones; el líquido no es utilidad libre.</li></ol>
+<p>Calcula bruto y líquido con la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta</a>, IVA con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> y el escenario anual con la <a href="/calculadoras/calculadora-operacion-renta">calculadora de Operación Renta</a>. Cada herramienta responde una etapa distinta.</p>
+<p>Contenido verificado al 13 de julio de 2026 con DL 825, SII, Ley 21.133 y Subsecretaría de Previsión Social. Preguntas de comunidades se usaron para detectar la falsa división de la retención, dudas bruto/líquido y boleteo subordinado; no como fuente tributaria.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Una sociedad, exportación de servicios, cliente extranjero, plataforma digital o combinación de sueldo y honorarios puede requerir análisis específico. Prevalecen tu régimen, documentos y las instrucciones vigentes del SII.</p></div></aside>`,
       },
     ],
   },
@@ -702,7 +810,7 @@ export const guias: Guia[] = [
     title: 'Crédito hipotecario en Chile 2026: guía completa',
     intent: '¿Cómo funciona un crédito hipotecario y cuánto pagaré?',
     description:
-      'Guía del crédito hipotecario en Chile 2026: dividendo en UF, CAE real, seguros, pie mínimo, capacidad de endeudamiento y simuladores.',
+      'Guía verificada del crédito hipotecario en Chile 2026: UF, tasa y CAE, evaluación bancaria, seguros, gastos operacionales, subsidio al dividendo y prepago.',
     category: 'vivienda',
     categoryLabel: 'Vivienda y hogar',
     keywords: [
@@ -712,14 +820,14 @@ export const guias: Guia[] = [
       'seguro desgravamen',
       'seguro incendio',
       'pie crédito hipotecario',
-      'capacidad endeudamiento 25%',
+      'capacidad endeudamiento hipotecario',
       'tasa hipotecaria 2026',
       'prepago hipotecario',
       'tabla amortización francesa',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 16,
+    updatedAt: '2026-07-13',
+    readingTime: 20,
     relatedCalculators: [
       'calculadora-credito-hipotecario',
       'calculadora-uf-clp',
@@ -729,96 +837,107 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['todo-sobre-uf-chile', 'reajuste-arriendo-uf-2026'],
     sources: [
-      { label: 'Comisión para el Mercado Financiero (CMF)', url: 'https://www.cmfchile.cl' },
-      { label: 'SERNAC Financiero', url: 'https://www.sernac.cl/portal/604/w3-propertyname-1056.html' },
-      { label: 'Banco Central de Chile', url: 'https://www.bcentral.cl' },
+      { label: 'CMF — información sobre créditos hipotecarios', url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45031.html' },
+      { label: 'CMF — simulador de créditos hipotecarios', url: 'https://servicios.cmfchile.cl/simuladorhipotecario/' },
+      { label: 'CMF — seguros hipotecarios obligatorios', url: 'https://www.cmfchile.cl/educa/621/w3-article-27508.html' },
+      { label: 'CMF — costo y condiciones del prepago', url: 'https://www.cmfchile.cl/educa/621/w3-article-27382.html' },
+      { label: 'Ley 18.010 sobre operaciones de crédito', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29438' },
+      { label: 'ChileAtiende — Subsidio al Dividendo', url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/subsidio-al-dividendo' },
     ],
     sections: [
       {
         id: 'estructura-credito',
-        title: 'Estructura de un crédito hipotecario',
+        title: 'Qué se contrata realmente',
         level: 2,
-        html: `<p>Un crédito hipotecario chileno típico se estructura así:</p>
-<ul class="data-grid"><li><span class="data-grid__label">Monto del crédito</span><span class="data-grid__value">80%-90% valor</span></li><li><span class="data-grid__label">Plazo típico</span><span class="data-grid__value">20-25 años</span></li><li><span class="data-grid__label">Tasa anual UF</span><span class="data-grid__value">4,5%-6,5%</span></li><li><span class="data-grid__label">Sistema</span><span class="data-grid__value">Francés (cuota fija UF)</span></li></ul>
-<p>El saldo crece y decrece con la UF, así que la cuota en pesos cambia mes a mes. La fórmula del dividendo (PMT) es:</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Fórmula de amortización francesa</strong><p><code>PMT = P × r(1+r)^n / ((1+r)^n − 1)</code> donde <em>P</em> es el monto financiado en UF, <em>r</em> es la tasa mensual (anual/12) y <em>n</em> es el número de cuotas.</p></div></aside>`,
+        html: `<p>Un crédito hipotecario financia la compra, construcción, ampliación o reparación de un inmueble y deja la propiedad en garantía. No todos los productos son iguales: existen mutuos hipotecarios endosables y no endosables, créditos con letras y el Crédito Hipotecario Universal, cada uno con reglas de financiamiento, cesión y prepago.</p>
+<p>La modalidad más usada para comparar ofertas es el mutuo no endosable en UF, tasa fija y dividendos periódicos. “Tasa fija” significa que la tasa no cambia; no congela el pago en pesos. Capital, dividendo y saldo se expresan en UF, cuyo equivalente en pesos varía diariamente con la inflación pasada.</p>
+<p>En una cuota de amortización, una parte paga intereses y otra reduce capital. Al inicio suele predominar el interés; con el tiempo aumenta la amortización. La fórmula financiera permite estimar la cuota sin seguros, pero la obligación cobrada incluye pólizas y puede incorporar otros conceptos pactados.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>UF + tasa son dos efectos distintos</strong><p>La tasa remunera el crédito sobre capital reajustado. La UF actualiza ese capital en pesos. Decir “la tasa es 4%” no significa que el costo en pesos aumentará solo 4% anual; la trayectoria de la UF también influye.</p></div></aside>`,
       },
       {
         id: 'pie-y-financiamiento',
-        title: 'Pie: el pago inicial',
+        title: 'Pie y relación entre precio y tasación',
         level: 2,
-        html: `<p>El <strong>pie</strong> es el porcentaje del valor de la propiedad que el comprador aporta de su bolsillo. Los bancos chilenos exigen pies que van del 10% al 20%, aunque algunos exigen 30% para extranjeros o para inmuebles de inversión.</p>
-<table>
-<thead><tr><th>Tipo</th><th>Pie típico</th><th>Quién aplica</th></tr></thead>
-<tbody>
-<tr><td>Subsidio (DS01, DS19)</td><td>10%</td><td>Vivienda principal con subsidio</td></tr>
-<tr><td>Estándar</td><td>20%</td><td>Vivienda principal sin subsidio</td></tr>
-<tr><td>Inversión / segundas viviendas</td><td>30%</td><td>Propiedades para arriendo</td></tr>
-<tr><td>Extranjeros sin RUT definitivo</td><td>30%-40%</td><td>Residentes recientes</td></tr>
-</tbody>
-</table>
-<p>El subsidio habitacional puede contar como pie. Por ejemplo, una vivienda de 2.500 UF con un subsidio DS01 de 600 UF y ahorro de 50 UF requiere financiar 1.850 UF (74%).</p>`,
+        html: `<p>El pie es la parte del precio que no cubre el crédito. No existe un porcentaje bancario universal: depende del producto, destino, perfil, garantía estatal y política de riesgo. Una publicidad de “hasta 90%” no obliga a aprobar ese financiamiento.</p>
+<p>La institución encarga una tasación independiente del precio acordado. Si compras en 3.000 UF, solicitas 2.700 UF y el banco tasa en 2.800 UF, puede calcular su máximo sobre 2.800 UF. La diferencia entre precio y crédito la cubre el comprador, además de gastos operacionales. Una preaprobación por renta no garantiza que la propiedad pase tasación y estudio de títulos.</p>
+<p>Antes de firmar una promesa, define qué ocurre si el crédito se rechaza, la tasación resulta menor o el estudio encuentra un defecto. Una cláusula de salida clara y un plazo realista reducen el riesgo de perder arras o pagar multas contractuales. La reserva comercial no reemplaza esa revisión.</p>
+<p>Subsidios habitacionales pueden complementar ahorro y crédito bajo reglas propias. El <a href="https://www.chileatiende.gob.cl/preguntas-frecuentes/subsidio-al-dividendo" target="_blank" rel="noopener">Subsidio al Dividendo de la Ley 21.748</a> es distinto: reduce 0,6 puntos porcentuales de tasa para viviendas nuevas de hasta 4.000 UF, incorpora garantía estatal y se tramita por la entidad financiera. Está disponible hasta el 27 de mayo de 2027 o hasta agotar 50.000 cupos; exige, entre otros requisitos, que la promesa sea desde el 1 de enero de 2025.</p>`,
       },
       {
         id: 'capacidad-endeudamiento',
-        title: 'Capacidad de endeudamiento: la regla del 25%',
+        title: 'Cómo evalúa el banco y cómo estresar el presupuesto',
         level: 2,
-        html: `<p>Los bancos no aprueban créditos cuyo dividendo mensual supere el <strong>25% del ingreso líquido</strong> del deudor. Esto es una práctica de la industria, no una norma legal, pero está alineada con la <a href="https://www.cmfchile.cl/educa/621/w3-article-27160.html" target="_blank" rel="noopener">recomendación de la CMF</a> sobre endeudamiento responsable.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo: capacidad para sueldo líquido $1.500.000</div><ul><li>Sueldo líquido mensual: $1.500.000</li><li>Dividendo máximo (25%): $375.000</li><li>Dividendo en UF (≈$40.826): ≈ 9,3 UF/mes</li><li>A 25 años, tasa 5%: capacidad de financiamiento</li></ul><span class="total">Crédito máximo aprox.: 1.590 UF (≈ $64 millones)</span></div>
-<p>Algunos bancos relajan el criterio al 30% o 35% para profesionales con ingresos altos y estables. Otros exigen 22% para deudores con créditos de consumo previos.</p>`,
+        html: `<p>La “regla del 25%” es una referencia doméstica, no una prohibición legal ni criterio idéntico en todos los bancos. La evaluación incorpora renta acreditable, estabilidad, edad, historial, deudas vigentes, cupos de tarjetas y líneas, número de dependientes, pie, plazo, codeudor y características de la propiedad.</p>
+<p>Una persona independiente puede necesitar declaraciones de renta, boletas, pagos provisionales y antigüedad de actividad. Un bono anual o ingreso informal no siempre se reconoce igual que un sueldo. Si postulan dos personas, la institución evalúa la obligación conjunta y las coberturas de seguro para cada una.</p>
+<p>La aprobación máxima tampoco es un presupuesto prudente. Antes de comprometerse, prueba tres escenarios:</p>
+<ol class="steps">
+<li><strong>UF más alta:</strong> aumenta el equivalente en pesos del dividendo durante doce meses.</li>
+<li><strong>Menor ingreso:</strong> elimina bonos, horas extra o parte del ingreso variable.</li>
+<li><strong>Propiedad real:</strong> suma seguros, contribuciones, gastos comunes, mantención y traslados.</li>
+</ol>
+<p>Si el hogar solo puede pagar usando cupo de tarjeta o sin fondo de emergencia, el problema no se resuelve alargando el crédito. Un plazo mayor baja el dividendo, pero aumenta el total de intereses y mantiene la exposición a UF por más años.</p>`,
       },
       {
         id: 'cae-real',
-        title: 'CAE: la tasa que importa',
+        title: 'Tasa, CAE y costo total: cómo comparar',
         level: 2,
-        html: `<p>La <strong>Carga Anual Equivalente</strong> (Ley 19.496 + Ley 20.555 SERNAC Financiero) es la tasa anual efectiva que iguala el valor presente de TODOS los pagos del crédito al monto entregado. Incluye:</p>
-<ul>
-<li>Tasa de interés nominal del crédito.</li>
-<li>Seguro de desgravamen (sobre saldo insoluto).</li>
-<li>Seguro de incendio (sobre monto original).</li>
-<li>Comisiones de administración.</li>
-<li>Cargos por estados de cuenta y mantención.</li>
-</ul>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Compara CAE, no tasa nominal</strong><p>Para un crédito de 2.500 UF a 4,5% nominal, la CAE típica está entre 5,1% y 5,8% según los seguros incluidos. Un banco con tasa nominal 4,7% pero seguros baratos puede ser más barato que otro con 4,5% nominal y seguros altos. Pide siempre la CAE oficial.</p></div></aside>
-<p>La <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a> calcula la CAE real por TIR (tasa interna de retorno), tomando en cuenta el flujo mensual completo en lugar de aproximaciones simplistas.</p>`,
+        html: `<p>La tasa anual del mutuo calcula intereses; la <strong>CAE</strong> busca expresar el costo anual de la operación bajo supuestos comparables. No compares una tasa de vitrina con la CAE de otra oferta, ni ofertas con distintos montos, plazos, fecha, moneda o tipo de crédito.</p>
+<p>La simulación pública de la CMF muestra tasa, dividendo con desgravamen e incendio y CAE para la modalidad seleccionada. Aun así advierte que las cifras son informativas y que su CAE considera esos seguros. Tasación, estudio de títulos, notaría, impuesto e inscripción son gastos de cierre que deben revisarse aparte en la cotización y escritura.</p>
+<table>
+<thead><tr><th>Dato</th><th>Pregunta que responde</th><th>Riesgo de leerlo solo</th></tr></thead>
+<tbody>
+<tr><td>Tasa</td><td>¿Qué interés se aplica?</td><td>Omite seguros y reajuste UF</td></tr>
+<tr><td>Dividendo en UF</td><td>¿Cuál es la cuota financiera?</td><td>No fija el pago futuro en pesos</td></tr>
+<tr><td>CAE</td><td>¿Cuál es el costo anual comparable?</td><td>Depende del flujo y conceptos incluidos</td></tr>
+<tr><td>Costo total</td><td>¿Cuánto se desembolsa en el plazo?</td><td>Un plazo más largo puede parecer cómodo</td></tr>
+</tbody>
+</table>
+<p>Solicita hoja resumen, tabla de desarrollo, cotización de seguros y gastos operacionales. La <a href="/calculadoras/calculadora-credito-hipotecario">calculadora hipotecaria</a> reproduce un escenario con los datos ingresados; una CAE “real” solo puede salir del flujo completo de la oferta, no de una tasa estimada.</p>`,
       },
       {
         id: 'seguros-obligatorios',
         title: 'Seguros obligatorios: desgravamen e incendio',
         level: 2,
-        html: `<h3>Seguro de desgravamen</h3>
-<p>Cubre el saldo del crédito si el deudor fallece o queda con incapacidad permanente. Es <strong>obligatorio para créditos hipotecarios</strong>. La prima mensual oscila entre 0,02% y 0,05% del saldo insoluto. Como el saldo decrece, el costo del desgravamen también decrece mes a mes.</p>
-
-<h3>Seguro de incendio</h3>
-<p>Cubre la propiedad ante siniestros (incendio, terremoto, daños estructurales). También obligatorio. La prima se calcula sobre el monto reconstrucción de la propiedad y suele costar 0,01% a 0,03% mensual sobre ese monto.</p>
-
-<aside class="callout callout--success"><span class="callout__icon" aria-hidden="true">✅</span><div class="callout__body"><strong>Derecho a contratar seguros con cualquier compañía (Ley 19.496)</strong><p>Puedes contratar el seguro con cualquier compañía autorizada, no solo con la del banco. El banco está obligado a aceptar la póliza si cumple las condiciones mínimas. Esto puede generar ahorros del 30%-50% en seguros frente a las pólizas atadas que ofrecen los bancos.</p></div></aside>`,
+        html: `<h3>Desgravamen</h3>
+<p>La cobertura básica paga al acreedor el saldo insoluto en caso de muerte del deudor asegurado. Invalidez de dos tercios puede contratarse como adicional; no está incluida por el solo nombre “desgravamen”. Si hay codeudores, revisa porcentaje asegurado por persona, declaración de salud, exclusiones y edad máxima.</p>
+<h3>Incendio y adicionales</h3>
+<p>El seguro obligatorio cubre incendio del inmueble dado en garantía. Sismo, salida de mar, rotura de cañerías y otros riesgos son adicionales que deben constar en la póliza. El monto asegurado suele considerar valor de tasación sin terreno bajo las reglas aplicables; no equivale al precio comercial completo ni asegura muebles.</p>
+<p>Las pólizas colectivas son licitadas por la entidad por cuenta y cargo de los clientes. Dentro de los primeros 30 días de vigencia se debe entregar información estandarizada de cobertura. En daños parciales, revisa cuánto de la indemnización se aplica a deuda y cuánto se destina a reparación.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">✓</span><div class="callout__body"><strong>Se puede presentar una póliza individual</strong><p>La persona puede contratar con otra aseguradora, pero la póliza debe cumplir coberturas, beneficiario, vigencia y condiciones exigidas por la entidad. No hay un ahorro garantizado: compara prima, deducible, exclusiones y continuidad antes de cambiar.</p></div></aside>`,
       },
       {
         id: 'gastos-asociados',
         title: 'Gastos asociados al crédito',
         level: 2,
-        html: `<p>Más allá del dividendo, comprar una propiedad con crédito implica gastos de una sola vez:</p>
+        html: `<p>Además del pie, el proceso puede cobrar los siguientes gastos, que deben acreditarse con documentos:</p>
 <table>
-<thead><tr><th>Concepto</th><th>Monto típico</th><th>Quién paga</th></tr></thead>
+<thead><tr><th>Concepto</th><th>Qué financia</th><th>Qué revisar</th></tr></thead>
 <tbody>
-<tr><td>Tasación</td><td>3-5 UF</td><td>Comprador</td></tr>
-<tr><td>Estudio de títulos</td><td>5-10 UF</td><td>Comprador</td></tr>
-<tr><td>Notaría (escritura)</td><td>0,2%-0,5% del valor</td><td>Comprador</td></tr>
-<tr><td>Conservador de Bienes Raíces</td><td>0,2% del valor (mín. $30.000)</td><td>Comprador</td></tr>
-<tr><td>Impuesto timbres y estampillas</td><td>0,8% del mutuo</td><td>Comprador</td></tr>
+<tr><td>Tasación</td><td>Valor de la garantía</td><td>Informe y devolución si no se usa</td></tr>
+<tr><td>Estudio de títulos y escritura</td><td>Revisión jurídica y contrato</td><td>Alcance, observaciones y correcciones</td></tr>
+<tr><td>Notaría</td><td>Firma y copias autorizadas</td><td>Arancel desglosado</td></tr>
+<tr><td>Conservador</td><td>Dominio, hipoteca y prohibiciones</td><td>Carátula, inscripciones y derechos</td></tr>
+<tr><td>Timbres y estampillas</td><td>Impuesto sobre el mutuo</td><td>Base, tasa y exención o rebaja aplicable</td></tr>
 </tbody>
 </table>
-<p>En total, los gastos de cierre suelen sumar 1,5%-3% del valor de la propiedad. Para una propiedad de UF 3.000 (≈$120 millones), eso son $1,8 a $3,6 millones adicionales al pie. Calcula los costos de notaría con la <a href="/calculadoras/calculadora-costo-notaria">calculadora de costo notaría</a>.</p>`,
+<p>No existe un porcentaje único de “gastos operacionales”: varían por institución, inmueble, número de inscripciones y arancel. El impuesto de timbres tiene reglas propias y ciertos refinanciamientos pueden acceder a exención proporcional. Exige liquidación final y devolución de provisiones no utilizadas.</p>
+<p>La <a href="/calculadoras/calculadora-costo-notaria">calculadora de notaría</a> entrega escenarios, no una cotización. El banco debe conservar disponibles los antecedentes que justifican cobros del mutuo.</p>`,
       },
       {
         id: 'prepago',
         title: 'Prepago: cuándo conviene',
         level: 2,
-        html: `<p>La Ley 19.496 (artículo 17 D) garantiza al deudor el derecho a <strong>prepagar parcial o totalmente</strong> el crédito en cualquier momento, con una comisión de prepago máxima de 1,5 mensualidades del crédito.</p>
-<p>El prepago en años tempranos del crédito tiene mayor impacto porque al inicio la mayor parte del dividendo va a intereses. Prepagar 200 UF en el año 2 de un crédito a 25 años puede ahorrar el doble de intereses que prepagar la misma cantidad en el año 15.</p>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Estrategia: prepago vs invertir</strong><p>Si la rentabilidad esperada de tus inversiones (después de impuestos) es superior a la CAE real del crédito, financieramente conviene invertir en lugar de prepagar. Si no, prepagar reduce años de intereses garantizados. Las matemáticas son claras pero el factor psicológico de quedar libre de hipoteca también pesa.</p></div></aside>
-<p>La <a href="/calculadoras/calculadora-credito-hipotecario">calculadora hipotecaria</a> permite simular el impacto exacto de prepagos en distintos meses.</p>`,
+        html: `<p>En mutuos otorgados después del 26 de junio de 2004 cuyo capital no supera 5.000 UF, el prepago es un derecho irrenunciable bajo el artículo 10 de la Ley 18.010. En operaciones reajustables —como un mutuo en UF— se paga capital anticipado, intereses hasta la fecha efectiva y una comisión máxima de <strong>un mes y medio de intereses sobre el capital prepagado</strong>. No son 1,5 dividendos.</p>
+<p>Un prepago inferior al 10% del saldo requiere consentimiento del acreedor; sobre 5.000 UF, las condiciones se acuerdan. Los créditos con letras tienen reglas distintas. Pide liquidación escrita porque el saldo del portal no incorpora necesariamente intereses del día y comisión.</p>
+<p>En un prepago parcial se puede reducir dividendo manteniendo plazo o acortar plazo manteniendo una cuota similar, conforme a escritura y acuerdo. Reducir plazo suele ahorrar más interés, pero la comparación debe incluir comisión, liquidez que pierde el hogar y fondo de emergencia.</p>
+<h3>Refinanciar o portar</h3>
+<p>Una tasa menor no garantiza ahorro si hay nueva tasación, estudio, notaría, inscripción, seguros y costo de prepago. Compara saldo actual, costo de salida, costo de entrada y flujo completo al mismo plazo restante. En refinanciamientos que cumplen requisitos puede operar una exención de timbres proporcional.</p>
+<p>Si aparecen dificultades de pago, contactar antes del atraso permite evaluar alternativas. Una renegociación puede bajar la cuota alargando plazo y aumentar el costo total; exige nueva tabla. No entregues anticipos a gestores que prometen “tasa aprobada” fuera de canales de la entidad.</p>
+<h3>Checklist antes de firmar</h3>
+<ol class="steps"><li>Compara ofertas con igual monto, plazo, moneda y fecha.</li><li>Lee tasa, CAE, costo total, seguros y gastos por separado.</li><li>Confirma tasación y aprobación jurídica de la propiedad.</li><li>Simula UF alta y pérdida parcial de ingreso.</li><li>Revisa cláusula de prepago, mora, seguros y alzamiento.</li><li>No firmes promesa sin salida por rechazo o tasación insuficiente.</li></ol>
+<p>Verifica que banco, cooperativa, compañía de seguros o administrador de mutuos figure en los registros de la CMF cuando corresponda. Un ejecutivo legítimo puede pedir antecedentes financieros para evaluar, pero no necesita tu ClaveÚnica, clave bancaria ni códigos de autorización. Tampoco transfieras “gastos de aprobación” a una cuenta personal: exige canal institucional y comprobante con el concepto.</p>
+<p>La aprobación tiene etapas. Una simulación pública no revisa tus ingresos; una preevaluación no aprueba la garantía; y la aprobación comercial puede quedar condicionada al estudio de títulos, tasación, seguros y firma. Pregunta qué condiciones siguen pendientes y hasta qué fecha se mantiene la tasa ofrecida. Si la escritura difiere de la cotización, detén la firma y pide explicación por escrito.</p>
+<p>Contenido revisado al 13 de julio de 2026. Una simulación no constituye aprobación ni oferta; prevalecen cotización, pólizas y escritura.</p>`,
       },
     ],
   },
@@ -847,8 +966,8 @@ export const guias: Guia[] = [
       'aporte adicional empleador',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 15,
+    updatedAt: '2026-07-13',
+    readingTime: 20,
     relatedCalculators: [
       'calculadora-comparador-afp',
       'calculadora-simulador-apv',
@@ -857,28 +976,32 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['diferencia-sueldo-bruto-liquido'],
     sources: [
-      { label: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl' },
+      { label: 'Superintendencia de Pensiones — nueva cotización del empleador', url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html' },
+      { label: 'ChileAtiende — Pensión Garantizada Universal', url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu' },
+      { label: 'ChileAtiende — Beneficio por Años Cotizados', url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/beneficio-anos-cotizados' },
       { label: 'Ley 21.735 (Reforma Previsional)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1208948' },
-      { label: 'D.L. 3500', url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147' },
+      { label: 'D.L. 3.500', url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147' },
     ],
     sections: [
       {
         id: 'sistema-previsional',
         title: 'El sistema previsional chileno',
         level: 2,
-        html: `<p>Chile tiene un sistema previsional <strong>mixto</strong> tras la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1208948" target="_blank" rel="noopener">Ley 21.735 de 2025 (Reforma Previsional)</a>:</p>
+        html: `<p>La pregunta “¿cuánto recibiré de pensión?” no se responde multiplicando el último sueldo por un porcentaje. La pensión contributiva depende del saldo acumulado, los meses efectivamente cotizados, la rentabilidad neta, la edad al pensionarse, las personas beneficiarias y la modalidad elegida. La edad legal es 60 años para las mujeres y 65 para los hombres, pero cumplirla no obliga a pensionarse de inmediato.</p>
+<p>Desde la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1208948" target="_blank" rel="noopener">Ley 21.735</a>, conviven cuatro capas que conviene separar:</p>
 <ol class="steps">
-<li><strong>Pilar contributivo individual</strong> — AFP: cotización del 10% sobre el imponible, va a la cuenta personal. La rentabilidad de los fondos determina el monto futuro.</li>
-<li><strong>Pilar solidario</strong> — PGU: pensión universal pagada por el Estado a personas mayores de 65 años, financiada con impuestos generales y aportes específicos.</li>
-<li><strong>Pilar de seguridad social previsional</strong> (nuevo desde 2025): aporte adicional del empleador (1% en 2025, sube progresivamente hasta 7% en 2033) que financia un fondo colectivo administrado por el Estado.</li>
-<li><strong>Pilar voluntario</strong> — APV: ahorro adicional con beneficios tributarios.</li>
-</ol>`,
+<li><strong>Ahorro individual obligatorio:</strong> el 10% imponible del trabajador entra a su cuenta AFP. Ese dinero y su rentabilidad financian la parte contributiva individual.</li>
+<li><strong>Seguro Social Previsional:</strong> recibe parte de la nueva cotización del empleador y financia prestaciones definidas por ley. No es una segunda cuenta AFP ni todo el aporte patronal queda disponible para retiro individual.</li>
+<li><strong>PGU:</strong> es un beneficio estatal sujeto a edad, residencia, focalización y pensión base. No exige estar pensionado para solicitarla y no es correcto describirla como una pensión universal sin requisitos.</li>
+<li><strong>Ahorro voluntario:</strong> APV, depósitos convenidos y otras alternativas permiten complementar el ahorro obligatorio, con costos y efectos tributarios distintos.</li>
+</ol>
+<p>Esta separación evita dos errores frecuentes: sumar la PGU como si estuviera garantizada para cualquier persona y atribuir todo el aporte del empleador al saldo individual. Una proyección responsable debe mostrar cada componente por separado y declarar sus supuestos.</p>`,
       },
       {
         id: 'cotizacion-obligatoria',
         title: 'Cotización obligatoria del 10%',
         level: 2,
-        html: `<p>El artículo 17 del D.L. 3500 establece que todo trabajador dependiente debe cotizar el <strong>10%</strong> de su remuneración imponible a su cuenta de capitalización individual en una AFP. Sobre ese 10% se suma la <strong>comisión variable</strong> de la AFP.</p>
+        html: `<p>El artículo 17 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">D.L. 3.500</a> establece que el trabajador dependiente cotiza un <strong>10% de su remuneración imponible</strong> en la cuenta de capitalización individual. Además paga la comisión de su AFP. Salud, seguro de cesantía e impuestos son descuentos distintos y no aparecen en el ejemplo siguiente.</p>
 <table>
 <thead><tr><th>AFP</th><th>Comisión 2026</th><th>Total descuento</th><th>Sobre $1M</th></tr></thead>
 <tbody>
@@ -891,82 +1014,113 @@ export const guias: Guia[] = [
 <tr><td>ProVida</td><td>1,45%</td><td>11,45%</td><td>$114.500</td></tr>
 </tbody>
 </table>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El SIS lo paga el empleador</strong><p>El SIS (Seguro de Invalidez y Sobrevivencia) NO se descuenta al trabajador desde Ley 20.255 (2008): lo paga 100% el empleador (1,62% adicional sobre el imponible desde las remuneraciones de abril de 2026).</p></div></aside>`,
+<p>Las tasas publicadas por la <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-2815.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a> muestran cuánto cobra cada administradora sobre la remuneración imponible. En un imponible de $1.000.000, la diferencia mensual entre 0,46% y 1,45% es $9.900. Es un costo verificable, pero no basta para anticipar la pensión: servicio, trámites y rentabilidad deben compararse en el mismo fondo y período, nunca mezclando un Fondo A con un Fondo E.</p>
+<p>Quienes ingresan por primera vez al sistema son asignados a la AFP adjudicataria de la licitación vigente durante el período legal correspondiente. Por eso, “elegir la más barata” no siempre es una acción inmediata para una persona recién afiliada. La cartola y el certificado de afiliación permiten comprobar dónde están llegando las cotizaciones.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El aporte patronal no se descuenta del líquido</strong><p>El SIS y la nueva cotización previsional son de cargo del empleador. Hasta julio de 2026, el SIS vigente es 1,62% y la nueva cotización suma 1%. Desde las remuneraciones de agosto cambia la estructura: el total legal llega a 3,5%, SIS incluido. Sumarlos nuevamente produciría un costo duplicado.</p></div></aside>`,
       },
       {
         id: 'topes-y-tipos-cuenta',
         title: 'Tope imponible y tipos de cuenta',
         level: 2,
-        html: `<p>El <strong>tope imponible AFP/Salud 2026</strong> es <strong>90 UF</strong> mensuales (ajustado anualmente por la Superintendencia de Pensiones). Las cotizaciones se calculan solo sobre ese tope: si ganas $5.000.000 brutos, cotizas como si ganaras ~$3.674.340.</p>
-<p>Cada afiliado tiene 4 tipos de cuenta en la AFP:</p>
+        html: `<p>El <strong>tope imponible mensual para pensiones en 2026 es 90 UF</strong>. El equivalente en pesos cambia con la UF del día; por eso una cifra fija en pesos envejece rápido. Si la remuneración imponible supera el tope, la cotización obligatoria se calcula sobre 90 UF y no sobre todo el sueldo. El tope del seguro de cesantía es otro y no debe reutilizarse sin verificarlo.</p>
+<p>Una persona puede tener distintas cuentas o productos previsionales:</p>
 <ul>
-<li><strong>Cuenta de capitalización individual obligatoria</strong>: 10% mensual.</li>
-<li><strong>Cuenta de ahorro voluntario (CAV)</strong>: aportes voluntarios sin beneficio tributario.</li>
-<li><strong>Cuenta de APV</strong>: ahorro previsional voluntario con régimen tributario A o B.</li>
-<li><strong>Cuenta indemnización (solo para empleadas de casa particular)</strong>.</li>
-</ul>`,
+<li><strong>Cuenta obligatoria:</strong> recibe el 10%, la fracción individual que corresponda de la nueva cotización y su rentabilidad.</li>
+<li><strong>Cuenta 2 o ahorro voluntario:</strong> permite ahorrar y retirar bajo sus reglas, sin convertir cada depósito en APV.</li>
+<li><strong>APV:</strong> puede contratarse en una AFP u otra institución autorizada y acogerse al régimen tributario A o B.</li>
+<li><strong>Depósitos convenidos:</strong> se originan en acuerdos con el empleador y tienen tratamiento propio.</li>
+<li><strong>Cuenta de indemnización:</strong> aplica a relaciones laborales específicas, como trabajadores de casa particular, y no reemplaza la cuenta obligatoria.</li>
+</ul>
+<p>Antes de simular una pensión, descarga la cartola y revisa las “lagunas”: meses trabajados sin pago registrado, remuneraciones imponibles menores a las reales o pagos declarados y no enterados. Un promedio de sueldo no revela esos vacíos. Si hay diferencias, contrasta liquidaciones, Previred y cartola; el reclamo debe dirigirse con documentos, no con una proyección hipotética.</p>`,
       },
       {
         id: 'multifondos',
         title: 'Multifondos: del A al E',
         level: 2,
-        html: `<p>Las AFP ofrecen 5 tipos de fondo con distinta exposición a renta variable:</p>
+        html: `<p>Hasta marzo de 2027, las AFP ofrecen cinco multifondos con límites distintos de renta variable. Los rangos legales ayudan a entender el riesgo, pero no describen la cartera exacta de un día:</p>
 <table>
-<thead><tr><th>Fondo</th><th>% renta variable</th><th>Perfil de riesgo</th></tr></thead>
+<thead><tr><th>Fondo</th><th>Renta variable permitida</th><th>Lectura práctica</th></tr></thead>
 <tbody>
-<tr><td>A (Más riesgoso)</td><td>80% máx</td><td>Joven, plazo largo</td></tr>
-<tr><td>B (Riesgoso)</td><td>60% máx</td><td>30-50 años</td></tr>
-<tr><td>C (Intermedio)</td><td>40% máx</td><td>50-55 años</td></tr>
-<tr><td>D (Conservador)</td><td>20% máx</td><td>55-65 años</td></tr>
-<tr><td>E (Más conservador)</td><td>5% máx</td><td>Cerca de jubilación</td></tr>
+<tr><td>A</td><td>40% a 80%</td><td>Mayor variación esperable</td></tr>
+<tr><td>B</td><td>25% a 60%</td><td>Riesgo alto, menor que A</td></tr>
+<tr><td>C</td><td>15% a 40%</td><td>Posición intermedia</td></tr>
+<tr><td>D</td><td>5% a 20%</td><td>Menor exposición accionaria</td></tr>
+<tr><td>E</td><td>0% a 5%</td><td>Menor variación, no riesgo cero</td></tr>
 </tbody>
 </table>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Cambiar de fondo: cuidado con el timing</strong><p>El cambio de fondo es gratuito y se hace en línea. Mover de A a E justo antes de un evento bursátil bajista (como 2020) puede preservar capital, pero salir y volver al fondo A en mal momento suele dejar al afiliado peor parado. La regla de mercado: a 10+ años de jubilación, mantente en A o B y no respondas a movimientos pánico.</p></div></aside>`,
+<p>No existe un fondo “mejor” para toda persona ni una regla seria que ordene permanecer en A o B solo por tener más de diez años hasta la jubilación. Importan el horizonte, la tolerancia a caídas, la capacidad de mantener una decisión y las restricciones de edad. Rentabilidad pasada no asegura rentabilidad futura, y usar el resultado del último mes para perseguir al fondo ganador expone a vender después de una caída y recomprar después de una recuperación.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Los multifondos tienen fecha de término</strong><p>La reforma reemplazará los fondos A–E por fondos generacionales desde el <strong>1 de abril de 2027</strong>. La implementación y las carteras deben seguirse en la Superintendencia; una propuesta técnica difundida durante 2026 no equivale a la composición final. Antes de cambiarte por una noticia, confirma la norma vigente y calcula el plazo real que falta para usar los recursos.</p></div></aside>`,
       },
       {
         id: 'pgu-2026',
         title: 'PGU: Pensión Garantizada Universal',
         level: 2,
-        html: `<p>La <strong>PGU</strong> es un beneficio mensual del Estado para personas de 65+ años pertenecientes al 90% más vulnerable según el Registro Social de Hogares. Tras la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1208948" target="_blank" rel="noopener">Ley 21.735</a>, el monto base 2026 es:</p>
-<ul class="data-grid"><li><span class="data-grid__label">PGU 65 a 81 años</span><span class="data-grid__value">$240.931</span></li><li><span class="data-grid__label">PGU mayorada (82+)</span><span class="data-grid__value">$260.286</span></li><li><span class="data-grid__label">Tope pensión completa</span><span class="data-grid__value">$820.704</span></li><li><span class="data-grid__label">Tope cero PGU</span><span class="data-grid__value">$1.302.705</span></li></ul>
-<p>La PGU se reduce gradualmente conforme la pensión base supera ciertos topes. Hasta una pensión base de $820.704, recibes la PGU completa. Entre $820.704 y $1.302.705, la PGU se reduce linealmente hasta cero.</p>
-<p>Para estimar tu PGU según pensión y edad, usa la <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a>.</p>`,
+        html: `<p>La <strong>PGU</strong> es un beneficio estatal para personas desde los 65 años que cumplen requisitos de focalización, residencia y pensión base. A julio de 2026, los valores oficiales informados por <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ChileAtiende</a> son:</p>
+<ul class="data-grid"><li><span class="data-grid__label">Máximo entre 65 y 81 años</span><span class="data-grid__value">$231.732</span></li><li><span class="data-grid__label">Máximo desde 82 años</span><span class="data-grid__value">$250.275</span></li><li><span class="data-grid__label">Pensión base para máximo completo</span><span class="data-grid__value">Hasta $789.139</span></li><li><span class="data-grid__label">Límite superior de pensión base</span><span class="data-grid__value">$1.252.602</span></li></ul>
+<p>Si la pensión base es igual o inferior a $789.139, corresponde el máximo del tramo de edad, siempre que se cumplan los demás requisitos. Entre $789.139 y $1.252.602 el monto disminuye; desde el límite superior no corresponde PGU. “Pensión base” es un concepto legal calculado por el IPS y no necesariamente coincide con el depósito mensual que la persona ve en su cuenta.</p>
+<p>La focalización tampoco se resuelve mirando solo el tramo del Registro Social de Hogares: el requisito es no integrar el 10% más rico de la población y el IPS evalúa antecedentes del grupo familiar conforme a la ley. También se exige residencia en Chile por al menos 20 años desde los 20 años de edad —continuos o discontinuos— y cuatro de los últimos cinco años anteriores a la solicitud, salvo reglas especiales aplicables.</p>
+<p>El aumento a $250.275 se implementa por edades: ya alcanza a quienes tienen 82 años o más; desde septiembre de 2026 se extiende a las personas de 75 años o más y desde septiembre de 2027, a quienes tengan 65 años o más. Se puede solicitar aunque la persona continúe trabajando. La <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a> sirve para aproximar el componente por pensión base, pero no reemplaza la evaluación del IPS.</p>`,
       },
       {
         id: 'reforma-2025',
-        title: 'Reforma previsional 2025 (Ley 21.735)',
+        title: 'Reforma previsional: qué cambia en 2026',
         level: 2,
-        html: `<p>La reforma agrega una cotización adicional del empleador, llamada <strong>Aporte Adicional con Solidaridad y Seguro Social</strong>, que entra en vigencia gradualmente:</p>
+        html: `<p>La nueva cotización del empleador comenzó en agosto de 2025 y aumenta gradualmente durante nueve años. El destino cambia por etapa; por eso una tabla con una sola tasa no explica cuánto llega a la cuenta individual y cuánto financia el Seguro Social Previsional.</p>
 <table>
-<thead><tr><th>Vigente desde</th><th>Tasa empleador</th></tr></thead>
+<thead><tr><th>Remuneración</th><th>Costo previsional de cargo del empleador</th><th>Distribución relevante</th></tr></thead>
 <tbody>
-<tr><td>1 de agosto 2025</td><td>1,0%</td></tr>
-<tr><td>1 de agosto 2026</td><td>1,75%</td></tr>
-<tr><td>1 de agosto 2027</td><td>2,5%</td></tr>
-<tr><td>1 de agosto 2028</td><td>3,25%</td></tr>
-<tr><td>1 de agosto 2029</td><td>4,0%</td></tr>
-<tr><td>1 de agosto 2030</td><td>4,75%</td></tr>
-<tr><td>1 de agosto 2031</td><td>5,5%</td></tr>
-<tr><td>1 de agosto 2032</td><td>6,25%</td></tr>
-<tr><td>1 de agosto 2033</td><td>7,0%</td></tr>
+<tr><td>Hasta julio de 2026</td><td>1% nuevo + SIS vigente de 1,62%</td><td>0,1% a cuenta individual y 0,9% al FAPP; SIS separado</td></tr>
+<tr><td>Desde agosto de 2026</td><td>3,5% total, SIS incluido</td><td>0,1% individual; 1% compensación a mujeres; 0,9% cotización con rentabilidad protegida; 1,5% SIS</td></tr>
+<tr><td>Etapa final en 2033</td><td>8,5% total, SIS incluido</td><td>6% a cuentas individuales y 2,5% al Seguro Social Previsional</td></tr>
 </tbody>
 </table>
-<p>Este aporte se reparte entre la cuenta individual del trabajador y un fondo colectivo administrado por el Estado, que financia complementos a las pensiones bajas y un seguro social previsional.</p>`,
+<p>Para una remuneración imponible de $1.000.000, el costo de julio es $26.200: $10.000 de nueva cotización y $16.200 de SIS. En agosto, el total es $35.000. El aumento efectivo entre ambos meses es $8.800, no $18.800. Esta distinción importa en liquidaciones, presupuestos de contratación y calculadoras de costo empresa.</p>
+<p>La cotización con rentabilidad protegida genera un registro a nombre del trabajador y se devuelve en la pensión bajo las reglas legales; no debe describirse como dinero líquido disponible. La <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a> publica la distribución y su calendario oficial.</p>
+<h3>Beneficio por Años Cotizados</h3>
+<p>Desde enero de 2026, el BAC agrega <strong>0,1 UF mensuales por cada 12 meses cotizados</strong>, con tope de 25 años, equivalente a un máximo de 2,5 UF mensuales. En la etapa inicial exige al menos 10 años cotizados para mujeres y 20 para hombres. El mínimo femenino aumenta gradualmente desde 2028 hasta llegar a 15 años en 2036. Se paga automáticamente a personas de 65 años o más pensionadas bajo las modalidades cubiertas por la ley; no se solicita como un bono aislado.</p>
+<h3>Compensación por diferencias de expectativa de vida</h3>
+<p>También desde enero de 2026, determinadas mujeres pensionadas reciben una compensación calculada para reducir la diferencia que produce una expectativa de vida mayor. Tiene un mínimo de 0,25 UF y el porcentaje depende de la edad de pensión: 100% a los 65 años, 75% a los 64, 50% a los 63, 25% a los 62, 15% a los 61 y 5% a los 60. Está afecta a cotización de salud e impuestos cuando corresponda.</p>
+<p>Ambos beneficios cuentan como ingreso de pensión y pueden influir en el cálculo de la PGU. Sumarlos íntegros a una PGU estimada, sin recalcular la pensión base, puede sobrestimar el total. El IPS y las entidades previsionales determinan el monto final con el historial real.</p>`,
+      },
+      {
+        id: 'modalidades-pension',
+        title: 'Retiro programado, renta vitalicia y decisión de pensionarse',
+        level: 2,
+        html: `<p>Al pensionarse, el saldo no se transforma automáticamente en un pago fijo de por vida. Las principales modalidades son el <strong>retiro programado</strong>, pagado desde la AFP y recalculado periódicamente, y la <strong>renta vitalicia</strong>, contratada con una compañía de seguros que asume el compromiso de pago en las condiciones pactadas. Existen combinaciones y modalidades con características adicionales.</p>
+<p>En retiro programado, los fondos permanecen en la cuenta individual, siguen expuestos a rentabilidad y el monto puede variar. En una renta vitalicia, la decisión es generalmente irrevocable y el saldo destinado a la prima deja de estar en la AFP. La elección depende de ofertas reales, beneficiarios, necesidad de estabilidad, herencia, salud financiera de largo plazo y requisitos de acceso; no se decide solo comparando el primer pago mensual.</p>
+<p>El Sistema de Consultas y Ofertas de Montos de Pensión entrega ofertas comparables durante el proceso. Antes de aceptar, revisa si el monto está expresado en UF, las condiciones para beneficiarios de sobrevivencia, períodos garantizados y cláusulas adicionales. Una simulación realizada años antes es orientación, no una oferta vinculante.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">✓</span><div class="callout__body"><strong>Una estimación útil parte por los datos</strong><p>Usa saldo real, fecha de nacimiento, remuneración imponible, meses cotizados y beneficiarios. Prueba escenarios de rentabilidad prudentes y separa la pensión autofinanciada de PGU, BAC y compensaciones. Si el resultado cambia drásticamente con una décima de rentabilidad, la conclusión necesita un rango, no una cifra única.</p></div></aside>`,
       },
       {
         id: 'apv-beneficios',
         title: 'APV: ahorro previsional voluntario',
         level: 2,
-        html: `<p>El <strong>APV</strong> permite ahorrar más para la jubilación con beneficios tributarios. Hay dos regímenes:</p>
+        html: `<p>El <strong>APV</strong> permite complementar la pensión y puede contratarse en AFP, bancos, compañías de seguros, administradoras generales de fondos y otras instituciones autorizadas. La rentabilidad no está garantizada: antes de aportar, compara comisión, riesgo, liquidez, calidad de información y costo de trasladar o retirar.</p>
 <div class="comparison">
-<div class="comparison__header"><div>Régimen A (sin descuento renta)</div><div>Régimen B (rebaja base imponible)</div></div>
-<div class="comparison__row"><div>Aportas con dinero ya tributado</div><div>El aporte rebaja base imponible (hasta 600 UF anuales)</div></div>
-<div class="comparison__row"><div>Al retirar en pensión: SIN impuesto a la renta</div><div>Al retirar: paga Global Complementario</div></div>
-<div class="comparison__row"><div>Bonificación fiscal 15%, tope 6 UTM/año</div><div>Sin bonificación, beneficio en flujo</div></div>
-<div class="comparison__row"><div>Ideal para tramos bajos del impuesto</div><div>Ideal para tramos altos (35%-40% marginales)</div></div>
+<div class="comparison__header"><div>Régimen A</div><div>Régimen B</div></div>
+<div class="comparison__row"><div>El aporte no rebaja la base imponible al depositar</div><div>El aporte puede rebajar la base imponible dentro de los límites legales</div></div>
+<div class="comparison__row"><div>Puede acceder a bonificación estatal de 15%, con tope de 6 UTM al año</div><div>El beneficio depende de la tasa de impuesto de la persona</div></div>
+<div class="comparison__row"><div>El retiro anticipado obliga a revisar restitución de bonificación y reglas aplicables</div><div>El retiro anticipado queda sujeto a retención y sobretasa según la ley</div></div>
+<div class="comparison__row"><div>Suele ser evaluado por personas con menor carga tributaria</div><div>Puede ser más valioso en tramos marginales altos, pero no siempre</div></div>
 </div>
-<p>El régimen B conviene a contribuyentes en tramos altos del impuesto único: ahorras hoy a tasa marginal alta y retiras en jubilación a tasa marginal típicamente menor.</p>
-<p>Para simular cuánto acumularías con APV, usa el <a href="/calculadoras/calculadora-simulador-apv">simulador APV</a>.</p>`,
+<p>En régimen B, el límite general llega a 600 UF anuales, con reglas mensuales según la vía de aporte. Esa cifra es un máximo tributario, no una recomendación de ahorro. En régimen A, la bonificación se calcula bajo condiciones legales y no convierte cualquier retiro en libre de impuestos o devoluciones.</p>
+<p>Elegir entre A y B requiere estimar la tasa marginal actual, la situación esperada al pensionarse y la posibilidad real de necesitar el dinero antes. Para explorar saldo y plazo, usa el <a href="/calculadoras/calculadora-simulador-apv">simulador APV</a>, pero valida el tratamiento tributario con la institución y el SII antes de un aporte grande o un retiro.</p>`,
+      },
+      {
+        id: 'checklist-previsional',
+        title: 'Qué revisar en 2026 sin caer en atajos',
+        level: 2,
+        html: `<p>Las preguntas que se repiten en foros —“¿el aporte de mi empleador llega completo a mi AFP?”, “¿perderé la PGU si sigo trabajando?” o “¿qué fondo gana más?”— sirven para detectar confusiones, no para establecer la respuesta. La fuente debe ser la norma, la cartola y el organismo responsable.</p>
+<ol class="steps">
+<li><strong>Descarga cartola y certificado:</strong> confirma AFP, saldo, fondo, remuneración imponible y meses pagados.</li>
+<li><strong>Busca lagunas:</strong> cruza períodos trabajados con liquidaciones y pagos previsionales. Una deuda del empleador no se arregla cambiando el supuesto de la calculadora.</li>
+<li><strong>Distingue julio de agosto:</strong> desde agosto de 2026 el 3,5% patronal ya incluye SIS. Revisa que la liquidación o el cálculo de costo empresa no lo sume dos veces.</li>
+<li><strong>Actualiza los beneficios:</strong> consulta PGU, BAC y compensación en ChileAtiende o IPS con edad e historial real. Sus montos pueden interactuar.</li>
+<li><strong>No persigas rentabilidad mensual:</strong> compara fondos en horizontes equivalentes y considera la transición a fondos generacionales de abril de 2027.</li>
+<li><strong>Revisa beneficiarios:</strong> matrimonio, convivencia civil, hijos y otras situaciones pueden cambiar pensiones de sobrevivencia y el cálculo al pensionarse.</li>
+<li><strong>Simula un rango:</strong> compara retirarte a la edad legal con postergar, mantener o aumentar aportes. No presentes como promesa el escenario más favorable.</li>
+</ol>
+<p>Esta guía usa información oficial disponible al 13 de julio de 2026. Tasas, topes y montos previsionales cambian por fecha. Para una decisión irreversible —pensionarse, contratar renta vitalicia o retirar APV— solicita una oferta o certificado vigente y conserva el documento usado.</p>`,
       },
     ],
   },
@@ -976,10 +1130,10 @@ export const guias: Guia[] = [
   // ============================================
   {
     slug: 'comprar-vivienda-chile',
-    title: 'Comprar vivienda en Chile 2026: subsidios, contribuciones y notaría',
-    intent: '¿Qué subsidios existen y cuánto cuesta comprar una propiedad?',
+    title: 'Comprar vivienda en Chile 2026: revisión, subsidios y escritura',
+    intent: '¿Qué debo revisar y pagar antes de comprar e inscribir una vivienda en Chile?',
     description:
-      'Guía integral para comprar vivienda en Chile 2026: subsidios DS49/DS01/DS19, contribuciones de bienes raíces, costos de notaría, plusvalía y reajuste de arriendo.',
+      'Guía verificada para comprar vivienda en Chile: promesa, estudio de títulos, subsidios 2026, contribuciones, gastos comunes, escritura e inscripción.',
     category: 'vivienda',
     categoryLabel: 'Vivienda y hogar',
     keywords: [
@@ -991,12 +1145,12 @@ export const guias: Guia[] = [
       'contribuciones bienes raíces',
       'costo notaría compraventa',
       'plusvalía vivienda exención 8000 UF',
-      'reajuste arriendo IPC UF',
-      'Ley 18.101 arrendamiento',
+      'estudio de títulos propiedad',
+      'promesa compraventa vivienda',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 17,
+    updatedAt: '2026-07-13',
+    readingTime: 22,
     relatedCalculators: [
       'calculadora-subsidio-habitacional',
       'calculadora-contribuciones',
@@ -1008,121 +1162,119 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['reajuste-arriendo-uf-2026', 'todo-sobre-uf-chile'],
     sources: [
-      { label: 'Ministerio de Vivienda y Urbanismo (MINVU)', url: 'https://www.minvu.cl' },
-      { label: 'Servicio de Impuestos Internos (SII)', url: 'https://www.sii.cl' },
-      { label: 'Servicio de Vivienda y Urbanización (SERVIU)', url: 'https://www.minvu.gob.cl/servius/' },
-      { label: 'Ley 18.101 (Arrendamiento)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29279' },
+      { label: 'MINVU — llamado DS1 2026', url: 'https://www.minvu.gob.cl/noticia/minvu-anuncia-la-apertura-del-primer-llamado-de-2026-al-subsidio-para-sectores-medios/' },
+      { label: 'MINVU — proyectos DS19 2026', url: 'https://www.minvu.gob.cl/postulacion/llamado-especial-a-concurso-ano-2026-para-proyectos-habitacionales-ds-19/' },
+      { label: 'ChileAtiende — certificado de gravámenes y prohibiciones', url: 'https://www.chileatiende.gob.cl/fichas/457-certificado-de-los-registros-de-hipotecas-gravamenes-y-prohibiciones-de-una-propiedad-gp' },
+      { label: 'SII — Impuesto Territorial', url: 'https://www.sii.cl/destacados/impuesto_territorial/' },
+      { label: 'SII — mayor valor en venta de bienes raíces', url: 'https://www.sii.cl/destacados/renta/2026/personas_naturales.html' },
+      { label: 'Ley 21.442 de Copropiedad Inmobiliaria', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1174663' },
+      { label: 'CMF — créditos hipotecarios', url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45031.html' },
     ],
     sections: [
       {
         id: 'panorama-comprar',
-        title: 'Panorama: comprar vivienda en Chile 2026',
+        title: 'La compra son tres decisiones, no una reserva',
         level: 2,
-        html: `<p>Comprar una propiedad en Chile combina varios elementos que conviene entender antes de firmar promesa: el <strong>precio neto en UF</strong>, los <strong>gastos de cierre</strong> (notaría, conservador, timbres), los <strong>subsidios habitacionales</strong> que pueden financiar parte del pie, las <strong>contribuciones</strong> que pagarás cada año por la propiedad y, eventualmente, el <strong>impuesto a la plusvalía</strong> si la vendes con ganancia.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Costo total de comprar (no solo el precio)</strong><p>Para una propiedad de UF 3.000 (≈$120 millones), el costo total incluyendo cierre y crédito ronda 1,5%-3% adicional ($1,8M-$3,6M). Sin contar los seguros mensuales y contribuciones anuales que arrastrarás durante toda la tenencia.</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">UF julio 2026</span><span class="data-grid__value">$40.826</span></li><li><span class="data-grid__label">Tasa hipotecaria típica</span><span class="data-grid__value">4,5%-6,5% UF</span></li><li><span class="data-grid__label">Pie estándar</span><span class="data-grid__value">20%</span></li><li><span class="data-grid__label">Costo de cierre</span><span class="data-grid__value">1,5%-3% del valor</span></li></ul>`,
+        html: `<p>Comprar exige decidir si el inmueble sirve, si el título es transferible y si el hogar puede sostenerlo. Una reserva o preaprobación responde, como mucho, una parte. El precio publicado tampoco incluye necesariamente estacionamiento, bodega, corretaje, gastos del crédito, reparaciones ni deudas asociadas.</p>
+<p>El proceso responsable avanza en este orden:</p>
+<ol class="steps">
+<li><strong>Presupuesto:</strong> pie, gastos de cierre, dividendo bajo escenarios de UF, contribuciones, gastos comunes y mantención.</li>
+<li><strong>Revisión material:</strong> superficie, estado, recepción municipal, ampliaciones, instalaciones, entorno y riesgos.</li>
+<li><strong>Revisión jurídica:</strong> propietario, cadena de títulos, hipotecas, prohibiciones, litigios, deudas y facultades para vender.</li>
+<li><strong>Contrato:</strong> promesa con condiciones claras, escritura coherente, pago trazable e inscripción.</li>
+<li><strong>Entrega:</strong> llaves, lectura de medidores, inventario, administración y documentos.</li>
+</ol>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Firmar no te convierte por sí solo en dueño</strong><p>La compraventa de un inmueble se otorga por escritura pública, pero la tradición del dominio se realiza mediante inscripción en el Registro de Propiedad del Conservador de Bienes Raíces competente. Coordina pago y entrega con ese hito.</p></div></aside>`,
+      },
+      {
+        id: 'revision-propiedad',
+        title: 'Qué revisar del inmueble y del vendedor',
+        level: 2,
+        html: `<p>El nombre del vendedor en una publicación no acredita dominio. Solicita copia de la inscripción vigente y el <a href="https://www.chileatiende.gob.cl/fichas/457-certificado-de-los-registros-de-hipotecas-gravamenes-y-prohibiciones-de-una-propiedad-gp" target="_blank" rel="noopener">certificado de hipotecas, gravámenes y prohibiciones</a>. Este muestra hipotecas, servidumbres, reglamento de copropiedad, embargos o prohibiciones SERVIU, pero debe ser interpretado junto con la historia de títulos.</p>
+<p>El estudio suele revisar inscripciones anteriores, escrituras, estado civil, herencias, sociedades, poderes y alzamientos. Si vende una sociedad, una sucesión o un apoderado, hay que comprobar facultades y vigencia. Una hipoteca no impide toda venta, pero exige una estructura de alzamiento y pago coordinada.</p>
+<p>Del inmueble, contrasta:</p>
+<ul>
+<li>dirección, rol, deslindes, superficie de terreno y construida;</li>
+<li>certificado de avalúo y deuda de contribuciones o aseo;</li>
+<li>permiso y recepción final municipal, incluidas ampliaciones;</li>
+<li>certificados de no expropiación municipal y SERVIU cuando correspondan;</li>
+<li>afectaciones, utilidad pública, servidumbres y ocupantes;</li>
+<li>en condominio, reglamento, planos, deuda, actas y gastos extraordinarios aprobados.</li>
+</ul>
+<p>Una tasación bancaria estima la garantía; no certifica que una ampliación esté regularizada, que no haya filtraciones ni que el barrio sirva al comprador. Para usado, una inspección técnica independiente puede revisar humedad, techumbre, electricidad, gas, alcantarillado, estructura visible y terminaciones.</p>`,
+      },
+      {
+        id: 'promesa',
+        title: 'Promesa y reserva: dónde se concentra el riesgo',
+        level: 2,
+        html: `<p>La reserva suele apartar temporalmente la propiedad; la promesa obliga a celebrar la compraventa si se cumplen sus condiciones. Ninguna debería firmarse como formulario inocuo. Lee monto, imputación o devolución, plazo, multa, documentos pendientes y quién custodia el dinero.</p>
+<p>Una promesa útil identifica propiedad y precio, forma de pago, fecha o condición para firmar, entrega y consecuencias de incumplimiento. Si hay crédito, debe regular qué ocurre ante rechazo, menor tasación, cambio material de tasa o títulos no aprobados. Si hay subsidio, debe respetar su vigencia, precio y mecanismo de pago.</p>
+<p>No aceptes una cláusula que declare títulos “a satisfacción” sin plazo ni forma de corregir observaciones. Tampoco entregues todo el pie directamente antes de escritura e inscripción sin una estructura jurídica revisada. Vales vista, instrucciones notariales y desembolso bancario cumplen funciones diferentes; un abogado debe coordinarlos con el caso.</p>
+<p>La corredora intermedia, pero no reemplaza estudio jurídico ni responde automáticamente por cada defecto. Su comisión es negociada: no existe una tasa legal obligatoria de 2% por parte. Define por escrito cuándo se devenga, si incluye IVA y qué ocurre si la operación falla por títulos o financiamiento.</p>`,
       },
       {
         id: 'subsidios-habitacionales',
-        title: 'Subsidios habitacionales: DS49, DS01 y DS19',
+        title: 'Subsidios 2026: programa, llamado y proyecto no son lo mismo',
         level: 2,
-        html: `<p>El <a href="https://www.minvu.cl" target="_blank" rel="noopener">MINVU</a>, a través del SERVIU, administra tres programas principales de subsidio para compra de vivienda nueva o usada. Cada uno tiene tramos según puntaje del Registro Social de Hogares (RSH) y precio máximo de la vivienda.</p>
-
-<h3>DS49 — Fondo Solidario de Elección de Vivienda</h3>
-<p>Para familias del 40% más vulnerable (RSH bajo 40%). El subsidio cubre <strong>la mayor parte del valor de la vivienda</strong>, sin necesidad de crédito hipotecario. Requiere ahorro previo de 10 UF (~$403.400) y vivienda valor máximo entre 950 UF y 1.400 UF según zona.</p>
-
-<h3>DS01 — Subsidio para Sectores Medios</h3>
-<p>Para familias del 40%-60% (RSH bajo 60%). Tres tramos:</p>
+        html: `<p>Los programas permanentes se activan mediante llamados con fechas, ahorro y condiciones específicas. A julio de 2026, el primer llamado nacional DS1 cerró el 30 de junio; publicar “postula ahora” sin convocatoria abierta sería engañoso.</p>
 <table>
-<thead><tr><th>Tramo</th><th>Precio máximo vivienda</th><th>Subsidio máximo</th><th>Ahorro mínimo</th></tr></thead>
+<thead><tr><th>DS1 adquisición 2026</th><th>Zona regular</th><th>Ahorro del llamado</th><th>RSH general</th></tr></thead>
 <tbody>
-<tr><td>Tramo 1</td><td>1.100 UF</td><td>500 UF</td><td>30 UF</td></tr>
-<tr><td>Tramo 2</td><td>1.600 UF</td><td>400 UF</td><td>50 UF</td></tr>
-<tr><td>Tramo 3</td><td>2.200 UF</td><td>250 UF</td><td>80 UF</td></tr>
+<tr><td>Tramo 1</td><td>Vivienda hasta 1.100 UF</td><td>30 UF</td><td>Hasta 60%</td></tr>
+<tr><td>Tramo 2</td><td>Vivienda hasta 1.600 UF</td><td>40 UF</td><td>Hasta 80%</td></tr>
+<tr><td>Tramo 3</td><td>Vivienda hasta 2.200 UF</td><td>80 UF</td><td>RSH; tope de ingreso si supera 90%</td></tr>
 </tbody>
 </table>
-
-<h3>DS19 — Integración Social y Territorial</h3>
-<p>Para familias del 60%-90% (clase media). Aplica a proyectos seleccionados por el SERVIU, con subsidios entre 100 UF y 500 UF. Vivienda hasta 2.600 UF.</p>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Postulación y plazos</strong><p>Las postulaciones a DS49 y DS01 son por <strong>llamados específicos</strong> que el MINVU abre 2-3 veces al año. La postulación se hace en línea en minvu.gob.cl con clave única. El subsidio entregado tiene 21 meses de vigencia para usarse.</p></div></aside>
-<p>Para estimar a qué tramo accedes según precio y ahorro, usa la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio habitacional</a>.</p>`,
+<p>En zonas norte, extremo sur, Chiloé, Palena, Juan Fernández y Rapa Nui los máximos pueden subir hasta 2.600 UF según tramo. La cuenta de ahorro debía tener 12 meses y el saldo estar disponible al 29 de mayo. Que el primer llamado no exigiera preaprobación no significa que el crédito posterior esté garantizado.</p>
+<p>DS49 se orienta a familias vulnerables y puede permitir compra sin crédito en las modalidades convocadas; sus topes y ahorro dependen del llamado y zona. DS19 no es una postulación individual abierta al “90%”: son proyectos de integración seleccionados, con cupos y precios para grupos distintos. En 2026 las entidades desarrolladoras postulan proyectos hasta agosto; una familia debe verificar que el proyecto y la unidad estén efectivamente incorporados.</p>
+<p>El Subsidio al Dividendo de Ley 21.748 tampoco es DS1: se asigna mediante entidad financiera para vivienda nueva de hasta 4.000 UF, sujeto a cupos y fecha. Consulta el estado real en MINVU y usa la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio</a> solo como orientación; los montos exactos dependen de resolución, precio y zona.</p>`,
+      },
+      {
+        id: 'gastos-escritura',
+        title: 'Gastos de cierre: pide provisión y liquidación',
+        level: 2,
+        html: `<p>No hay un porcentaje universal de cierre. Con crédito pueden aparecer tasación, estudio de títulos, redacción, notaría, Conservador, impuesto de timbres y estampillas, seguros y alzamientos. Sin crédito siguen existiendo escritura, certificados e inscripción. Corretaje depende del acuerdo.</p>
+<p>Antes de pagar, solicita una provisión desglosada que diga quién cobra, base de cálculo y si incluye IVA. Después exige liquidación y devolución del saldo no usado. Los derechos del Conservador dependen de actos e inscripciones; una escritura con dominio, hipoteca y prohibiciones no cuesta lo mismo que una compraventa al contado.</p>
+<p>El impuesto de timbres grava el documento de crédito, no el precio completo por el solo hecho de comprar. Una vivienda nueva puede incorporar IVA en el precio según la operación, mientras la compraventa usada no se trata igual. No sumes ambos impuestos como cargos automáticos sin revisar factura, vendedor y mutuo.</p>
+<p>La <a href="/calculadoras/calculadora-costo-notaria">calculadora de costos notariales</a> y la <a href="/guias/credito-hipotecario-chile">guía hipotecaria</a> permiten presupuestar escenarios, pero la cifra exigible surge de cotizaciones y documentos.</p>`,
       },
       {
         id: 'contribuciones',
-        title: 'Contribuciones de bienes raíces',
+        title: 'Contribuciones, aseo y costo tributario futuro',
         level: 2,
-        html: `<p>Las <strong>contribuciones</strong> son el impuesto territorial anual que paga todo dueño de propiedad raíz en Chile. Lo cobra el SII en 4 cuotas (abril, junio, septiembre, noviembre) y se calcula sobre el <strong>avalúo fiscal</strong>, no sobre el precio de mercado.</p>
-<p>Las tasas anuales según destino son:</p>
-<table>
-<thead><tr><th>Destino</th><th>Tasa anual</th><th>Exención</th></tr></thead>
-<tbody>
-<tr><td>Habitacional</td><td>0,98% (con sobretasa 0,025% si avalúo &gt; 76 UF)</td><td>Hasta avalúo 41,4M (~860 UF)</td></tr>
-<tr><td>Comercial</td><td>1,2%</td><td>Sin exención</td></tr>
-<tr><td>Industrial</td><td>1,2%</td><td>Sin exención</td></tr>
-<tr><td>Sitio eriazo</td><td>1,2% + 100% recargo</td><td>Sin exención</td></tr>
-<tr><td>Agrario</td><td>1,0%</td><td>Variable</td></tr>
-</tbody>
-</table>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Avalúo fiscal vs comercial</strong><p>El avalúo fiscal suele ser entre 30%-60% del valor de mercado. Para una casa que vale $200 millones, el avalúo puede estar en $80-100 millones. Las contribuciones se calculan sobre ese avalúo, no sobre el precio de venta.</p></div></aside>
-<p>Las propiedades habitacionales con avalúo bajo $41.353.348 (≈860 UF) están <strong>exentas</strong> de pagar contribuciones. Para calcular tus contribuciones específicas, usa la <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a>.</p>`,
-      },
-      {
-        id: 'costo-notaria',
-        title: 'Costos de notaría y conservador',
-        level: 2,
-        html: `<p>La compraventa de una propiedad implica costos notariales fijos y variables según el valor del inmueble:</p>
-<div class="numeric-example"><div class="numeric-example__title">Compraventa de propiedad UF 3.000 (≈$120M)</div><ul><li><strong>Escritura pública</strong>: ~0,3% del valor = $360.000</li><li><strong>Conservador de Bienes Raíces</strong>: 0,2% del valor = $240.000</li><li><strong>Estudio de títulos</strong>: ~$300.000 (5-10 UF)</li><li><strong>Tasación bancaria</strong>: $150.000 (3-5 UF)</li><li><strong>Impuesto timbres y estampillas</strong>: 0,8% sobre mutuo = $768.000 (sobre crédito UF 2.400)</li><li><strong>Comisión corretaje</strong>: 2% + IVA del valor = $2.856.000</li></ul><span class="total">Total cierre: ≈ $4.674.000 (3,9% del valor)</span></div>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Comisión de corretaje: 2% por parte</strong><p>Si trabajas con corredor, lo habitual es 2% + IVA del lado del comprador y 2% + IVA del lado del vendedor. Total 4,76% del valor de la propiedad. Algunos corredores aceptan 1,5% en operaciones grandes.</p></div></aside>
-<p>Para calcular costos por tipo de operación (compraventa, hipoteca, donación), usa la <a href="/calculadoras/calculadora-costo-notaria">calculadora de costo de notaría</a>.</p>`,
-      },
-      {
-        id: 'plusvalia',
-        title: 'Plusvalía: impuesto a la ganancia de capital',
-        level: 2,
-        html: `<p>Si vendes una propiedad con ganancia, el SII grava la <strong>diferencia entre precio de venta y precio de compra ajustado por inflación</strong>. La Ley sobre Impuesto a la Renta (artículo 17 N°8) permite eximir esa ganancia hasta cierto monto si la propiedad fue tu vivienda habitual.</p>
-
-<h3>Exención de 8.000 UF acumuladas</h3>
-<p>Para propiedades de uso habitacional, hay una exención de hasta <strong>8.000 UF acumuladas</strong> en toda la vida del contribuyente. Sobre el exceso aplica el régimen tributario que el contribuyente elija al momento de presentar Renta:</p>
-<ul>
-<li><strong>Régimen único 10%</strong>: tasa fija sobre el mayor valor que excede las 8.000 UF.</li>
-<li><strong>Régimen Global Complementario</strong>: la ganancia se suma a las rentas del año y tributa en los tramos progresivos del Global. Conviene si el contribuyente está en tramos bajos.</li>
-</ul>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Reajuste del precio de compra</strong><p>El precio de compra se actualiza por la variación del IPC desde la fecha de compra hasta la venta. Una casa comprada en $80M en 2010 que se vende en $200M en 2026 tiene precio de compra reajustado a ~$125M, así la ganancia gravable es $75M, no $120M.</p></div></aside>
-<p>Para calcular la ganancia neta y el impuesto aproximado, usa la <a href="/calculadoras/calculadora-plusvalia">calculadora de plusvalía</a>.</p>`,
-      },
-      {
-        id: 'reajuste-arriendo',
-        title: 'Reajuste de arriendo: UF vs IPC',
-        level: 2,
-        html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=29279" target="_blank" rel="noopener">Ley 18.101 (Arrendamiento de Inmuebles Urbanos)</a> no fija un tope de aumento. El reajuste depende del contrato:</p>
-<div class="comparison">
-<div class="comparison__header"><div>Arriendo en UF</div><div>Arriendo en pesos</div></div>
-<div class="comparison__row"><div>Reajuste automático diario</div><div>Reajuste por IPC acumulado</div></div>
-<div class="comparison__row"><div>Pago en pesos varía mes a mes</div><div>Pago en pesos fijo entre reajustes</div></div>
-<div class="comparison__row"><div>Valor real estable</div><div>Valor real cae si no se reajusta</div></div>
-<div class="comparison__row"><div>Predecible para arrendador</div><div>Predecible para arrendatario</div></div>
-<div class="comparison__row"><div>Común en oficinas y propiedades altas</div><div>Común en arriendos económicos</div></div>
-</div>
-<p>Para arriendo en pesos con cláusula de reajuste anual por IPC: si tu arriendo es $400.000 y el IPC anual fue 4,5%, el nuevo arriendo es $400.000 × 1,045 = <strong>$418.000</strong>.</p>
-<p>Calcula tu reajuste específico con la <a href="/calculadoras/calculadora-reajuste-arriendo">calculadora de reajuste de arriendo</a>.</p>`,
+        html: `<p>El Impuesto Territorial se calcula sobre avalúo fiscal afecto, no precio comercial. En el primer semestre de 2026, la exención habitacional fue $60.030.710; hasta un avalúo de $214.395.361 se aplicó tasa anual de 0,893% sobre la parte afecta y al exceso, 1,042%. Avalúos y exenciones se reajustan semestralmente, así que al comprar en julio debe consultarse el certificado vigente.</p>
+<p>Se paga en abril, junio, septiembre y noviembre. La cuota puede incluir sobretasa fiscal, recargo de sitio no edificado o aseo municipal. Una propiedad exenta de contribuciones no necesariamente está exenta de aseo. Estacionamiento y bodega pueden tener roles y tratamiento separados.</p>
+<p>Pide certificado de deuda y acuerda prorrateo de la cuota según fecha de entrega. La <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a> aproxima la tasa, pero el giro SII/TGR incorpora avalúo, exención, destino y sobretasas reales.</p>
+<p>Si en el futuro vendes con ganancia, el mayor valor tiene reglas de costo reajustado, partes relacionadas, fecha de adquisición y cupo acumulado de 8.000 UF para determinadas personas naturales. No es una exención automática por “vivienda habitual”. Revisa la <a href="/blog/plusvalia-dfl2-vs-comun-chile">guía tributaria de plusvalía</a> antes de proyectar el neto de venta.</p>`,
       },
       {
         id: 'gastos-comunes',
-        title: 'Gastos comunes en edificios y condominios',
+        title: 'Condominio: deuda, reglamento y gastos futuros',
         level: 2,
-        html: `<p>Si compras un departamento o casa en condominio, paga gastos comunes mensuales que cubren mantención de áreas comunes, conserje, luz/agua del edificio, ascensores, piscina, etc. Los gastos comunes se rigen por la <strong>Ley 21.442 (Copropiedad Inmobiliaria, 2022)</strong> y el reglamento interno del edificio.</p>
-<p>Componentes típicos:</p>
-<ul>
-<li>Sueldo conserjes y administración: ~30% del total.</li>
-<li>Mantención y reparaciones: ~20%.</li>
-<li>Luz, agua y gas comunes: ~15%.</li>
-<li>Aseo, jardinería: ~10%.</li>
-<li>Seguros: ~5%.</li>
-<li>Fondo de reserva (legal mínimo 5%): ~5%-10%.</li>
-<li>Servicios extra (piscina, gimnasio, sala de eventos): ~10%-15%.</li>
-</ul>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Pregunta antes de firmar</strong><p>Pide los gastos comunes promedio del último año antes de cerrar la compra. Edificios con piscina, gym y conserjería 24h pueden duplicar lo que pagarías en un edificio sin amenities (típico: $80.000 vs $180.000 por departamento de 50 m²).</p></div></aside>
-<p>Estima el costo de gastos comunes según superficie y servicios con la <a href="/calculadoras/calculadora-gastos-comunes">calculadora de gastos comunes</a>.</p>`,
+        html: `<p>En copropiedad, la obligación de gastos comunes sigue al dominio incluso respecto de deuda anterior. Pide al administrador certificado actualizado y exige que la escritura e instrucciones resuelvan cualquier saldo. No basta una captura de la última transferencia.</p>
+<p>Revisa doce meses de avisos, presupuesto, fondo de reserva, morosidad global, seguros, mantenciones y actas. Una cuota extraordinaria aprobada para ascensores, fachada o red de agua puede no aparecer en el promedio histórico. El reglamento define porcentajes de prorrateo, uso de bienes comunes, arriendos y otras reglas.</p>
+<p>En proyectos nuevos, la inmobiliaria debe entregar el primer reglamento de copropiedad antes de la promesa o compraventa y dejar constancia. Confirma que estacionamiento y bodega estén incluidos como unidades o derechos en los planos y escritura; una frase comercial “uso y goce” no siempre equivale a dominio independiente.</p>
+<p>La <a href="/calculadoras/calculadora-gastos-comunes">calculadora de gastos comunes</a> es un presupuesto exploratorio. La evidencia útil son cobros, contratos y acuerdos del condominio concreto.</p>`,
+      },
+      {
+        id: 'vivienda-nueva-usada',
+        title: 'Vivienda nueva y usada: riesgos distintos',
+        level: 2,
+        html: `<p>En vivienda nueva, verifica que la inmobiliaria y proyecto coincidan con la promesa, que las especificaciones técnicas sean anexas y que exista recepción definitiva antes de la entrega cuando corresponda. Registra observaciones en un acta con fotos, plazo y responsable. Equipamiento piloto, vista futura y fecha estimada no deben confundirse con obligación si no están en contrato.</p>
+<p>En usada, el foco es historia de títulos, regularidad municipal, estado físico y ocupación. Pide cuentas de servicios y confirma quién entrega desocupado. Si existe arrendatario, revisa contrato y efectos de la venta; no asumas que la escritura termina de inmediato la ocupación.</p>
+<p>Para ambas, visita a distintas horas, revisa ruido, transporte, seguridad vial, riesgo de inundación o incendio y planificación urbana. La plusvalía futura no se puede prometer. Noticias de una estación, carretera o cambio regulatorio sirven para investigar, no para pagar hoy un precio como si la obra estuviera terminada.</p>`,
+      },
+      {
+        id: 'firma-inscripcion-entrega',
+        title: 'Escritura, inscripción y entrega',
+        level: 2,
+        html: `<p>Antes de firmar la escritura, compara nombres, estado civil, precio, roles, deslindes, unidades anexas, forma de pago, alzamientos y fecha de entrega con la promesa. Si hay crédito, revisa también mutuo, tasa, seguros, prohibiciones y mandato. No firmes espacios en blanco ni confíes en que “se corrige después”.</p>
+<p>La escritura se presenta al Conservador para inscribir dominio y, cuando corresponda, hipoteca y prohibición. Pide número de carátula y sigue observaciones. Si el Conservador rechaza, hay que subsanar; la transferencia no está concluida solo porque el banco desembolsó o la notaría cerró copias.</p>
+<p>En la entrega documenta llaves, controles, medidores, cuentas, inventario y estado. Notifica a administración con copia de inscripción y actualiza contribuciones, aseo, servicios y seguros. Conserva promesa, escritura, inscripción, planos, recepción, liquidaciones y comprobantes: serán necesarios al vender o reclamar.</p>
+<h3>Checklist de cierre</h3>
+<ol class="steps"><li>Presupuesto con UF estresada y gastos permanentes.</li><li>Inspección física y documentos municipales.</li><li>Estudio de títulos y certificados recientes.</li><li>Promesa condicionada a financiamiento y títulos.</li><li>Subsidio verificado en resolución o proyecto, no en publicidad.</li><li>Deudas de contribuciones, aseo y gastos comunes resueltas.</li><li>Escritura cotejada antes de firmar.</li><li>Inscripción y entrega trazables.</li></ol>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Fraude de instrucciones de pago</strong><p>Confirma cualquier cambio de cuenta por un canal independiente con banco, notaría o parte contractual. No uses enlaces enviados por terceros para ingresar ClaveÚnica o banca. Una dirección de correo parecida no acredita al destinatario de cientos de UF.</p></div></aside>
+<p>Información revisada al 13 de julio de 2026. Cada propiedad y llamado de subsidio requiere documentos vigentes; esta guía no reemplaza el estudio jurídico de la operación.</p>`,
       },
     ],
   },
@@ -1133,9 +1285,9 @@ export const guias: Guia[] = [
   {
     slug: 'vehiculos-chile-permiso-multas',
     title: 'Vehículos en Chile 2026: permiso de circulación, multas y TAG',
-    intent: '¿Cuánto cuesta tener un auto al año en Chile?',
+    intent: '¿Qué debo pagar y revisar para mantener un vehículo legalmente al día en Chile?',
     description:
-      'Costos anuales de tener un vehículo en Chile 2026: permiso de circulación, SOAP, revisión técnica, multas, TAG, peajes y seguros. Con tablas y ejemplos.',
+      'Guía verificada 2026 de permiso de circulación, SOAP, revisión técnica, multas, TAG, peajes y compra de un vehículo usado en Chile.',
     category: 'vehiculos',
     categoryLabel: 'Vehículos y transporte',
     keywords: [
@@ -1147,12 +1299,12 @@ export const guias: Guia[] = [
       'tabla valor vehículos SII',
       'ley tránsito 18.290',
       'multas gravísimas alcohol',
-      'descuento marzo permiso',
-      'patente comercial',
+      'segunda cuota permiso agosto',
+      'comprar auto usado multas',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 14,
+    updatedAt: '2026-07-13',
+    readingTime: 20,
     relatedCalculators: [
       'calculadora-permiso-circulacion',
       'calculadora-multas-transito',
@@ -1162,108 +1314,120 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['todo-sobre-uf-chile'],
     sources: [
-      { label: 'Servicio de Impuestos Internos — Tabla de tasación', url: 'https://www.sii.cl/destacados/aranceles/' },
-      { label: 'Ley 18.290 (Tránsito)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29708' },
-      { label: 'Ministerio de Transportes', url: 'https://www.mtt.gob.cl' },
-      { label: 'Subsecretaría de Prevención del Delito', url: 'https://www.preveciondeldelito.cl' },
+      { label: 'ChileAtiende — permiso de circulación 2026', url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion' },
+      { label: 'SII — tasación fiscal de vehículos 2026', url: 'https://www.sii.cl/destacados/tasacion_vehiculos/2026/index.html' },
+      { label: 'CMF — coberturas SOAP y Ley Jacinta', url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-565.html' },
+      { label: 'ChileAtiende — revisión técnica de vehículos', url: 'https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados' },
+      { label: 'Ley 18.290 de Tránsito', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29708' },
+      { label: 'Dirección General de Concesiones — peajes y pórticos 2026', url: 'https://concesiones.mop.gob.cl/peajes-y-porticos/' },
+      { label: 'ChileAtiende — certificado de multas impagas', url: 'https://www.chileatiende.gob.cl/fichas/3439-certificado-de-multas-de-transito-no-pagadas' },
     ],
     sections: [
       {
         id: 'costos-anuales-auto',
-        title: 'Costos anuales de tener un auto en Chile',
+        title: 'El costo anual no sale de una tabla única',
         level: 2,
-        html: `<p>Tener un vehículo en Chile implica costos fijos anuales y costos variables según uso. Para un auto de tasación SII $8.000.000 (vehículo familiar 2020-2022), los costos típicos son:</p>
-<ul class="data-grid"><li><span class="data-grid__label">Permiso circulación</span><span class="data-grid__value">$320.000/año</span></li><li><span class="data-grid__label">SOAP obligatorio</span><span class="data-grid__value">$8.000-$15.000/año</span></li><li><span class="data-grid__label">Revisión técnica</span><span class="data-grid__value">$15.000-$25.000/año</span></li><li><span class="data-grid__label">Seguro voluntario</span><span class="data-grid__value">$300.000-$700.000/año</span></li></ul>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Suma total anual</strong><p>Para un vehículo familiar promedio: $640.000 a $1.060.000 anuales en costos fijos, sin contar combustible, mantenciones, peajes ni multas. El permiso de circulación es el costo fijo más alto.</p></div></aside>`,
+        html: `<p>Dos autos del mismo precio de compra pueden tener costos anuales muy distintos. El permiso depende de la tasación fiscal y el código SII; el seguro voluntario, del vehículo, conductor, deducible y cobertura; combustible y TAG, del uso; mantención, de kilometraje, garantía y estado mecánico. Publicar un rango “típico” sin esos datos produce una falsa precisión.</p>
+<p>Para construir un presupuesto útil, separa:</p>
+<ul>
+<li><strong>Obligaciones para circular:</strong> permiso, SOAP y revisión técnica u homologación vigente.</li>
+<li><strong>Protección voluntaria:</strong> seguro de daños, responsabilidad civil, robo y asistencias, según póliza.</li>
+<li><strong>Uso:</strong> combustible o carga, peajes, estacionamiento, lavado y neumáticos.</li>
+<li><strong>Propiedad:</strong> mantenciones, reparaciones, depreciación y costo financiero del crédito.</li>
+</ul>
+<p>Una hoja de cálculo seria usa documentos del auto: valor del permiso 2026 publicado por el SII, cotización SOAP, tarifa de la planta revisora, recorridos mensuales y plan de mantención. Las multas no son “costo de tener auto”; son contingencias evitables y pueden bloquear la renovación.</p>`,
       },
       {
         id: 'permiso-circulacion',
         title: 'Permiso de circulación',
         level: 2,
-        html: `<p>El <strong>permiso de circulación</strong> es un impuesto municipal anual que se paga en marzo (50%) y septiembre (50%) o íntegramente en marzo con descuento. Lo recauda la municipalidad donde está empadronado el vehículo.</p>
-<p>El cálculo se basa en la <strong>tabla de tasación del SII</strong> (publicada anualmente) y aplica la siguiente progresión sobre el valor:</p>
-<table>
-<thead><tr><th>Tramo de tasación SII</th><th>Tasa</th></tr></thead>
-<tbody>
-<tr><td>0 a $3.000.000</td><td>1,0%</td></tr>
-<tr><td>$3.000.000 a $5.500.000</td><td>2,0%</td></tr>
-<tr><td>$5.500.000 a $9.000.000</td><td>3,0%</td></tr>
-<tr><td>$9.000.000 a $12.000.000</td><td>4,0%</td></tr>
-<tr><td>Sobre $12.000.000</td><td>4,5%</td></tr>
-</tbody>
-</table>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Descuento por pago en marzo</strong><p>Si pagas el permiso completo en marzo (en lugar de las dos cuotas marzo/septiembre), algunas municipalidades ofrecen descuento del 5%-10%. Verifica con tu municipalidad: las grandes (Santiago, Providencia, Las Condes) suelen mantener el descuento histórico del 5%.</p></div></aside>
-<p>Vehículos eléctricos pagan tarifa reducida (50% del permiso normal) hasta 2030 según la Ley 21.305. Calcula tu permiso específico con la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a>.</p>`,
+        html: `<p>Para autos particulares, motos, station wagons, furgones y camionetas, el período general de pago 2026 fue del <strong>1 de febrero al 31 de marzo</strong>. El permiso es un impuesto anual a beneficio municipal. No existe un descuento legal general por pagarlo completo en marzo: las frases que prometen 5% o 10% confunden facilidad de pago con rebaja del impuesto.</p>
+<p>El <a href="https://www.sii.cl/destacados/tasacion_vehiculos/2026/index.html" target="_blank" rel="noopener">SII publica la tasación y el valor exacto del permiso</a> por marca, modelo, versión y año. Se consulta con esos datos o con el código SII del permiso anterior. En 2026, el mínimo nacional es $34.876 para vehículos bajo $3.487.600 de tasación. Una tabla porcentual simplificada no reemplaza la nómina oficial.</p>
+<p>Los eléctricos e híbridos con recarga eléctrica exterior fabricados desde 2021 que cumplen la clasificación SII pagan en 2026 <strong>25% del impuesto anual</strong>. No basta con que el vendedor llame “híbrido” al modelo: debe aparecer dentro del beneficio oficial.</p>
+<p>Para renovar un vehículo usado se exige permiso anterior, padrón, SOAP con vigencia hasta el 31 de marzo de 2027 y revisión técnica o certificado de homologación vigente. Un vehículo nuevo agrega factura, inscripción y certificados de homologación, y paga proporcionalmente por los meses restantes del año.</p>
+<p>La <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso</a> puede ayudar a proyectar, pero el monto exigible es el publicado por SII y cobrado por la municipalidad.</p>`,
+      },
+      {
+        id: 'segunda-cuota-y-atraso',
+        title: 'Segunda cuota, atraso y vehículo fuera de circulación',
+        level: 2,
+        html: `<p>Quien eligió dos cuotas pagó 50% hasta marzo y debe enterar la segunda durante agosto, normalmente en la misma municipalidad. La segunda cuota se reajusta por la variación del IPC entre febrero y junio, por lo que no siempre coincide peso a peso con la primera. Septiembre no es el mes de vencimiento de autos particulares.</p>
+<p>Si el permiso está atrasado, se agregan intereses, reajustes y una multa de 1,5% del valor del permiso al renovar. Circular sin permiso vigente puede generar una infracción y el retiro del vehículo. Pagar después regulariza el documento, pero no borra automáticamente una denuncia ya cursada.</p>
+<p>Si el vehículo no circulará durante todo el año, se puede presentar una declaración jurada simple y pagar el derecho municipal correspondiente hasta el 30 de noviembre. No es una exención retroactiva para un auto que sí circuló. Si se cambia de municipalidad, la nueva entidad pedirá el permiso anterior y documentos vigentes; no se necesita pagar dos veces el mismo período.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Una multa empadronada sigue al vehículo</strong><p>Antes de comprar, consulta el certificado del Registro Civil. Una infracción detectada por patente puede aparecer después de la transferencia por tiempos de tramitación; conserva contrato, fecha de entrega y certificado para pedir al juzgado la corrección que corresponda.</p></div></aside>`,
       },
       {
         id: 'soap',
         title: 'SOAP: Seguro Obligatorio Automotriz',
         level: 2,
-        html: `<p>El <strong>SOAP</strong> (Seguro Obligatorio de Accidentes Personales, Ley 18.490) cubre lesiones y muerte de personas (conductor, pasajeros, terceros) en accidentes de tránsito. Es <strong>obligatorio</strong> y debe pagarse antes del permiso de circulación.</p>
-<p>Coberturas básicas SOAP 2026:</p>
-<ul>
-<li>Muerte: 300 UF (~$12 millones).</li>
-<li>Incapacidad permanente total: 300 UF.</li>
-<li>Incapacidad parcial: hasta 200 UF según tabla.</li>
-<li>Gastos médicos: hasta 300 UF.</li>
-</ul>
-<p>El costo típico es entre $8.000 y $15.000 al año según el aseguradora y tipo de vehículo. Lo cobran las compañías de seguros y muchas municipalidades lo incluyen en el pago del permiso.</p>`,
+        html: `<p>El <strong>SOAP</strong> cubre muerte y lesiones corporales de conductor, pasajeros y terceros involucrados en un accidente en que participe el vehículo asegurado. No cubre daños del auto, robo, responsabilidad por daños materiales ni reemplaza un seguro voluntario.</p>
+<p>La Ley 21.797, conocida como Ley Jacinta, cambió las coberturas. Durante 2026–2027 coexisten dos grupos según la fecha de contratación:</p>
+<table>
+<thead><tr><th>Cobertura por persona</th><th>Antes del 9 feb 2026</th><th>Desde el 9 feb 2026</th></tr></thead>
+<tbody>
+<tr><td>Muerte</td><td>300 UF</td><td>600 UF</td></tr>
+<tr><td>Incapacidad permanente total</td><td>300 UF</td><td>600 UF</td></tr>
+<tr><td>Incapacidad permanente parcial</td><td>Hasta 200 UF</td><td>Hasta 400 UF</td></tr>
+<tr><td>Gastos médicos y hospitalarios</td><td>Hasta 300 UF</td><td>Hasta 600 UF</td></tr>
+</tbody>
+</table>
+<p>La fecha relevante es la contratación, no el día del accidente. Revisa el certificado y la compañía antes de afirmar qué límite aplica. El precio depende del tipo de vehículo y aseguradora; lo que debe compararse es que la póliza sea válida, sus datos coincidan con la patente y cubra hasta el siguiente 31 de marzo.</p>
+<p>Después de un accidente, hay que denunciar, identificar vehículos y solicitar certificado del parte o atención. Los reembolsos exigen documentos médicos y comprobantes. La <a href="https://www.cmfchile.cl/educa/621/w3-propertyvalue-565.html" target="_blank" rel="noopener">CMF</a> publica beneficiarios, exclusiones y antecedentes para cobrar.</p>`,
+      },
+      {
+        id: 'revision-tecnica',
+        title: 'Revisión técnica: la patente da preferencia, no vigencia',
+        level: 2,
+        html: `<p>La revisión técnica certifica sistemas de frenos, dirección, luces, neumáticos, suspensión, emisiones, vidrios, espejos y elementos de seguridad. Es necesaria para renovar el permiso y conducir sin ella constituye una infracción grave.</p>
+<p>El calendario por último dígito de patente entrega <strong>preferencia en algunas plantas</strong>: enero 9; febrero 0; abril 1; mayo 2; junio 3; julio 4; agosto 5; septiembre 6; octubre 7; noviembre 8. Marzo y diciembre no tienen dígito preferente. No extiende el certificado hasta ese mes: manda la fecha impresa en el documento o la consulta de estado de la PRT.</p>
+<p>Vehículos nuevos pueden usar certificado de homologación durante su vigencia. Desde 2026, algunos modelos nuevos tienen primera revisión entre 36 y 48 meses según el calendario oficial aplicable; no debe suponerse el mismo plazo para toda inscripción. Taxis, buses, transporte escolar y carga pueden tener periodicidades diferentes.</p>
+<p>Antes de ir, revisa luces, neumáticos, limpiaparabrisas, cinturones, placas, vidrios y emisiones visibles. Si hay rechazo, conserva el informe: indica defectos y plazo para reinspección. Cotiza en la planta de tu región porque tarifas y reserva dependen de la concesión.</p>`,
       },
       {
         id: 'multas-transito',
         title: 'Multas de tránsito',
         level: 2,
-        html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=29708" target="_blank" rel="noopener">Ley 18.290 (Ley de Tránsito)</a> clasifica las infracciones en 4 categorías con multas en UTM:</p>
+        html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=29708" target="_blank" rel="noopener">Ley de Tránsito</a> clasifica las infracciones generales en UTM. Como la UTM cambia mensualmente, convertir hoy a pesos y publicar el resultado como “multa 2026” queda desactualizado.</p>
 <table>
-<thead><tr><th>Tipo</th><th>Multa UTM</th><th>Multa $ (UTM $71.649)</th><th>Ejemplos</th></tr></thead>
+<thead><tr><th>Tipo</th><th>Rango general</th><th>Ejemplos orientativos</th></tr></thead>
 <tbody>
-<tr><td>Leve</td><td>0,5 a 1 UTM</td><td>$35.294 a $71.649</td><td>Estacionamiento prohibido, no llevar documentos</td></tr>
-<tr><td>Menos grave</td><td>1 a 1,5 UTM</td><td>$71.649 a $105.882</td><td>Sin cinturón, exceso velocidad &lt; 20%</td></tr>
-<tr><td>Grave</td><td>1,5 a 3 UTM</td><td>$105.882 a $211.764</td><td>Pasar luz roja, exceso velocidad 20%-30%</td></tr>
-<tr><td>Gravísima</td><td>1,5 a 5 UTM + suspensión licencia</td><td>$105.882 a $352.940</td><td>Adelantar zona prohibida, exceso &gt; 30%</td></tr>
-<tr><td>Gravísima por alcohol</td><td>2 a 10 UTM</td><td>$141.176 a $705.880</td><td>Conducir con alcohol &gt; 0,3 g/L</td></tr>
+<tr><td>Leve</td><td>0,2 a 0,5 UTM</td><td>Infracción no clasificada en una categoría superior</td></tr>
+<tr><td>Menos grave</td><td>0,5 a 1 UTM</td><td>Estacionar en lugar prohibido; exceso de hasta 10 km/h</td></tr>
+<tr><td>Grave</td><td>1 a 1,5 UTM</td><td>Conducir sin revisión técnica; exceso de 11 a 20 km/h</td></tr>
+<tr><td>Gravísima</td><td>1,5 a 3 UTM</td><td>Luz roja o PARE; manipular celular; exceso mayor a 20 km/h</td></tr>
 </tbody>
 </table>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Reincidencia: dobla la multa</strong><p>Si cometes la misma infracción dentro de 12 meses, la multa se incrementa al doble. Conducir con alcohol en estado de ebriedad (&gt; 0,8 g/L) implica suspensión de licencia por 2 años en primera oportunidad y revocación definitiva en segunda.</p></div></aside>
-<p>Calcula multas según tipo y reincidencia con la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas</a>.</p>`,
+<p>El exceso se mide en kilómetros por hora sobre el límite, no en porcentajes. Alcohol y drogas tienen delitos, multas, suspensión o inhabilidad que dependen del nivel, reincidencia, lesiones o muerte; no corresponde agregarlos como una quinta fila de esta escala general.</p>
+<p>Para reincidencia, la ley mira infracciones gravísimas en los últimos tres años y graves en los últimos dos: la multa se duplica y puede triplicarse ante una nueva conducta, además de suspensiones o cancelación. No existe una regla universal de “misma falta dentro de 12 meses”.</p>
+<p>Distingue parte personal de multa empadronada. El <a href="https://www.chileatiende.gob.cl/fichas/3439-certificado-de-multas-de-transito-no-pagadas" target="_blank" rel="noopener">certificado del Registro Civil</a> incluye multas vinculadas a la patente y es clave al comprar o renovar. La <a href="/calculadoras/calculadora-multas-transito">calculadora de multas</a> convierte UTM a pesos, pero el juez fija la sanción dentro del rango y puede aplicar consecuencias adicionales.</p>`,
       },
       {
         id: 'tag-peajes',
         title: 'TAG y peajes en autopistas',
         level: 2,
-        html: `<p>Las autopistas urbanas e interurbanas concesionadas usan el sistema <strong>TAG</strong> (free-flow) o cobro electrónico. Las tarifas dependen del tramo, hora (peak/off-peak) y tipo de vehículo (categorías 1, 2 o 3).</p>
-<p>Tarifas referenciales 2026 (categoría 1 — auto particular):</p>
-<table>
-<thead><tr><th>Ruta</th><th>Tarifa hora normal</th><th>Tarifa hora peak</th></tr></thead>
-<tbody>
-<tr><td>Santiago - Rancagua (Autopista del Sol)</td><td>~$3.500</td><td>~$5.200</td></tr>
-<tr><td>Santiago - Valparaíso (Ruta 68)</td><td>~$5.800</td><td>~$8.500</td></tr>
-<tr><td>Santiago - Los Andes (Ruta 57)</td><td>~$3.200</td><td>~$4.700</td></tr>
-<tr><td>Urbano Santiago (Costanera Norte, Vespucio)</td><td>$300-$1.200/tramo</td><td>$500-$2.000/tramo</td></tr>
-</tbody>
-</table>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Convenios y descuentos</strong><p>Suscribir convenio con la concesionaria (típicamente 5%-10% de descuento) y mantener saldo positivo te ahorra el 5% adicional que se cobra a usuarios sin convenio (multa por ausencia de TAG válido).</p></div></aside>
-<p>Calcula tu costo mensual de TAG según viajes y rutas con la <a href="/calculadoras/calculadora-costo-tag">calculadora de costo TAG</a>.</p>`,
+        html: `<p>Las tarifas cambian por concesión, pórtico, categoría, horario y fecha. El MOP publica las <a href="https://concesiones.mop.gob.cl/peajes-y-porticos/" target="_blank" rel="noopener">tablas oficiales 2026</a>; una cifra para “Santiago–Valparaíso” no sirve si omite plazas, sentido, horario y reajustes.</p>
+<p>Un TAG habilitado es interoperable, pero las cuentas siguen asociadas a las concesionarias y a la patente. Al vender un vehículo, no basta retirar el dispositivo: hay que cerrar o modificar el contrato, revisar tránsitos pendientes y conservar comprobante.</p>
+<p>Si se circula sin TAG habilitado, las autopistas urbanas adheridas permiten comprar Pase Diario Único o Tardío. Otras rutas free flow usan cobro por pasada o su propio portal. “Pasaste sin TAG” centraliza accesos para identificar la concesionaria. Los plazos importan: vencidos, puede aplicarse tarifa infractora.</p>
+<p>Hay dos obligaciones distintas. La concesionaria puede cobrar civilmente peaje o tarifa; además, transitar sin sistema habilitado puede generar una multa fiscal del artículo 114. Pagar una no extingue automáticamente la otra. La Ley 21.547 permite terminar ciertos procesos pagando la multa rebajada en 80% antes de sentencia, si no existe mora con concesionarias al solicitarlo.</p>
+<p>La <a href="/calculadoras/calculadora-costo-tag">calculadora de TAG</a> debe tratar sus valores como escenarios y no como tarifa oficial. Para presupuesto, exporta tránsitos reales de las cuentas y cruza los pórticos frecuentes con la tabla vigente.</p>`,
       },
       {
-        id: 'patente-comercial',
-        title: 'Patente comercial: si tu vehículo es de trabajo',
+        id: 'compra-usado',
+        title: 'Comprar un usado sin heredar sorpresas',
         level: 2,
-        html: `<p>Si usas tu vehículo para actividades comerciales (transporte, distribución, taxi, Uber/Cabify formal), debes pagar <strong>patente comercial</strong> en la municipalidad donde tributa la actividad. La patente se calcula sobre el <strong>capital propio declarado</strong>:</p>
-<ul>
-<li><strong>Tasa</strong>: 0,25% a 0,5% del capital propio (varía por comuna).</li>
-<li><strong>Mínimo</strong>: 1 UTM anual.</li>
-<li><strong>Máximo</strong>: 8.000 UTM anuales por contribuyente y comuna.</li>
-</ul>
-<p>Las patentes comerciales se pagan en julio (50%) y enero (50%). Calcula tu patente con la <a href="/calculadoras/calculadora-patente-comercial">calculadora de patente comercial</a>.</p>`,
+        html: `<p>El precio publicado no informa la situación jurídica ni mecánica. Antes de transferir, pide certificado de anotaciones vigentes, certificado de multas impagas, padrón, permiso, revisión, SOAP y comprobantes de mantención. Verifica número de chasis y motor físicamente.</p>
+<p>Las limitaciones al dominio, prendas, prohibiciones o encargos no se resuelven con una promesa del vendedor. Tampoco confundas multas empadronadas con deuda TAG: consulta concesionarias o portales de tránsito sin TAG. Una inspección mecánica independiente debe revisar estructura, señales de choque, fugas, frenos, neumáticos, diagnóstico electrónico y kilometraje coherente.</p>
+<p>Define por escrito fecha y hora de entrega, kilometraje, accesorios, deudas declaradas y quién asume tránsitos o multas anteriores. Haz la transferencia por un canal formal y no entregues ClaveÚnica. Después, contrata SOAP o seguro voluntario a tu nombre según corresponda y actualiza el TAG.</p>`,
       },
       {
         id: 'credito-auto',
-        title: 'Crédito automotriz: ¿conviene?',
+        title: 'Crédito automotriz: compara costo total, no la cuota',
         level: 2,
-        html: `<p>Los créditos automotrices en Chile tienen plazos típicos de 12 a 60 meses con tasas anuales entre 9% y 18% (CAE), considerablemente más altas que las hipotecarias. Algunas concesionarias ofrecen "tasa cero" pero compensan con precio inflado.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Auto con crédito pierde valor más rápido</strong><p>Un auto pierde 15%-25% de valor el primer año y 10%-15% cada año siguiente. Si financias 100% del valor, durante los primeros 12-18 meses debes más de lo que vale el auto. Considera al menos 30% de pie para evitar quedar "patas para arriba".</p></div></aside>
-<p>Calcula dividendo y CAE real con la <a href="/calculadoras/calculadora-credito-automotriz">calculadora de crédito automotriz</a>.</p>`,
+        html: `<p>Plazo y tasa varían por perfil, pie, vehículo y garantía. No hay una banda anual que represente el mercado completo. Solicita una cotización escrita con precio al contado, pie, monto financiado, tasa, CAE, número de cuotas, costo total, seguros, gastos, pago final y condiciones de prepago.</p>
+<p>Una “cuota desde” puede esconder un cuotón final, seguro financiado o precio al contado distinto. Compara el mismo vehículo y pie en todas las ofertas. Si hay compra inteligente, registra cuánto deberás pagar, refinanciar o cubrir con la devolución del auto al final, incluidos kilometraje y estado exigidos.</p>
+<p>La <a href="/calculadoras/calculadora-credito-automotriz">calculadora de crédito automotriz</a> permite reproducir cuotas cuando ingresas la tasa y cargos reales. La depreciación no sigue un porcentaje universal: estima valor de reventa con publicaciones comparables, pero presupone un margen por negociación, kilometraje y condición.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">✓</span><div class="callout__body"><strong>Checklist anual</strong><p>Guarda permiso, SOAP, revisión y padrón; agenda segunda cuota si corresponde; revisa multas y TAG antes de vender; compara pólizas por cobertura y deducible; y reserva mensualmente para mantención y neumáticos. Las fechas del documento prevalecen sobre un calendario genérico.</p></div></aside>
+<p>Información revisada al 13 de julio de 2026. Tarifas, UTM, peajes y condiciones de seguros cambian; usa el certificado o tabla vigente el día del trámite.</p>`,
       },
     ],
   },
@@ -1273,10 +1437,10 @@ export const guias: Guia[] = [
   // ============================================
   {
     slug: 'familia-pension-alimenticia-chile',
-    title: 'Familia en Chile 2026: pensión alimenticia, asignación familiar y bonos',
-    intent: '¿Cuánto debo pagar de pensión alimenticia y qué beneficios familiares existen?',
+    title: 'Pensión de alimentos y beneficios familiares en Chile 2026',
+    intent: '¿Cómo se fija y cobra una pensión de alimentos y qué beneficios familiares están vigentes?',
     description:
-      'Guía sobre pensión alimenticia, asignación familiar, subsidios habitacionales y bonos para familias en Chile 2026. Bases legales y cálculos paso a paso.',
+      'Guía verificada sobre pensión de alimentos, mediación, cobranza, Registro de Deudores, asignación familiar y beneficios vigentes en Chile durante 2026.',
     category: 'familia',
     categoryLabel: 'Familia y dependientes',
     keywords: [
@@ -1292,8 +1456,8 @@ export const guias: Guia[] = [
       'tribunales familia',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-04',
-    readingTime: 14,
+    updatedAt: '2026-07-13',
+    readingTime: 20,
     relatedCalculators: [
       'calculadora-pension-alimenticia',
       'calculadora-asignacion-familiar',
@@ -1306,82 +1470,117 @@ export const guias: Guia[] = [
       'comparativa-comisiones-afp-2026',
     ],
     sources: [
-      { label: 'Ley 14.908 (Abandono familia y pensiones alimenticias)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986' },
-      { label: 'Tribunales de Familia', url: 'https://www.pjud.cl' },
-      { label: 'IPS — Instituto de Previsión Social', url: 'https://www.ips.gob.cl' },
-      { label: 'Ministerio de Desarrollo Social', url: 'https://www.desarrollosocialyfamilia.gob.cl' },
+      { label: 'Ley 14.908 sobre pago de pensiones de alimentos', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986' },
+      { label: 'BCN Ley Fácil — pensión alimenticia', url: 'https://www.bcn.cl/portal/leyfacil/recurso/pension-alimenticia-para-menores' },
+      { label: 'ChileAtiende — mediación familiar obligatoria', url: 'https://www.chileatiende.gob.cl/fichas/2344-mediacion-familiar-previa-y-obligatoria' },
+      { label: 'ChileAtiende — Registro Nacional de Deudores', url: 'https://www.chileatiende.gob.cl/fichas/111396-inscripcion-en-el-registro-nacional-de-deudores-de-pensiones-de-alimentos' },
+      { label: 'SUSESO — tramos de asignación familiar desde mayo de 2026', url: 'https://www.suseso.gob.cl/612/w3-article-686804.html' },
+      { label: 'ChileAtiende — subsidio al consumo de agua potable', url: 'https://www.chileatiende.gob.cl/fichas/51314-subsidio-al-pago-de-consumo-de-agua-potable-y-servicio-de-alcantarillado' },
+      { label: 'ChileAtiende — Bono Bodas de Oro', url: 'https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro' },
     ],
     sections: [
       {
         id: 'pension-alimenticia',
-        title: 'Pensión alimenticia: cuánto y a quién',
+        title: 'Qué cubre la pensión y hasta cuándo corresponde',
         level: 2,
-        html: `<p>La <strong>pensión alimenticia</strong> es la obligación legal de un padre o madre de aportar al sustento de sus hijos cuando no vive con ellos. Está regulada por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=172986" target="_blank" rel="noopener">Ley 14.908 (Abandono de familia y pago de pensiones alimenticias)</a> y el Código Civil.</p>
-<p>Los Tribunales de Familia fijan el monto considerando:</p>
+        html: `<p>En derecho de familia, “alimentos” no significa solo comida. La obligación comprende vivienda, salud, vestuario, educación, transporte, recreación y lo necesario para que el hijo o hija se desarrolle conforme a sus circunstancias. Ambos padres deben contribuir según sus capacidades, incluso cuando uno asume diariamente el cuidado personal.</p>
+<p>El derecho de hijos e hijas se mantiene, por regla general, hasta los <strong>21 años</strong>. Puede extenderse hasta los <strong>28 años</strong> si estudian una profesión u oficio. También puede continuar cuando una incapacidad física o mental impide subsistir por sí mismo o cuando el tribunal lo estima indispensable. Cumplir 18 años no extingue la pensión por sí solo, y cumplir la edad límite tampoco autoriza a suspender unilateralmente el pago: el cese debe tramitarse o aprobarse judicialmente.</p>
+<p>La resolución puede incluir dinero y ciertos pagos en especie, como colegiatura, si el tribunal los regula expresamente. Transferir compras, regalos o gastos fuera del acuerdo no permite descontarlos por decisión propia. La obligación debe pagarse en la cuenta y fecha fijadas, de modo mensual y anticipado.</p>
+<p>Los gastos extraordinarios son necesidades que surgen después y no podían preverse, por ejemplo una hospitalización o atención médica urgente. La resolución debe indicar en qué proporción los padres contribuyen a ellos. Guardar boletas, órdenes médicas y comunicaciones evita discutir después si el gasto existió y cómo se repartía.</p>`,
+      },
+      {
+        id: 'monto-pension',
+        title: 'Cómo se fija el monto: necesidades, capacidad y mínimos',
+        level: 2,
+        html: `<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=172986" target="_blank" rel="noopener">Ley 14.908</a> no contiene una tabla que asigne 20%, 30% o 40% del sueldo según cantidad de hijos. El tribunal pondera tres grupos de antecedentes:</p>
 <ul>
-<li>El número de hijos.</li>
-<li>Las necesidades del alimentario (educación, salud, vivienda).</li>
-<li>La capacidad económica del alimentante (sueldo, otros ingresos, patrimonio).</li>
+<li><strong>Necesidades acreditadas:</strong> gastos mensuales del hijo, parte razonable de vivienda y servicios, salud, educación, transporte, vestuario y cuidado.</li>
+<li><strong>Capacidad económica y patrimonio:</strong> remuneraciones, honorarios, declaraciones de renta, cuentas, vehículos, propiedades y otros antecedentes de ambos padres.</li>
+<li><strong>Trabajo de cuidados:</strong> la ley obliga a considerar su distribución y valor económico, no solo los depósitos en dinero.</li>
 </ul>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Topes legales (Art. 7 Ley 14.908)</strong><p>La pensión NO puede exceder el <strong>50% de la renta líquida</strong> del alimentante. El piso legal es del <strong>40% del ingreso mínimo mensual</strong> por hijo (≈$221.421 en 2026 con IMM de $553.553).</p></div></aside>
-<p>Reglas prácticas que aplican los tribunales:</p>
+<p>Para un solo alimentario menor de edad, el mínimo legal es <strong>40% del ingreso mínimo remuneracional que corresponda según la edad del alimentante</strong>. Si hay dos o más menores, el mínimo es 30% de ese ingreso mínimo por cada uno. Desde mayo de 2026, el IMM para una persona de 18 a 65 años es $553.553: el ejemplo matemático da $221.421 para un menor, o $166.066 por menor cuando son dos o más. Si el alimentante tiene más de 65 años, la base remuneracional aplicable es distinta; no debe copiarse el ejemplo anterior.</p>
 <table>
-<thead><tr><th>Hijos</th><th>% típico del sueldo bruto</th><th>Ejemplo sueldo $1.000.000</th></tr></thead>
+<thead><tr><th>Situación</th><th>Regla legal</th><th>Ejemplo con IMM $553.553</th></tr></thead>
 <tbody>
-<tr><td>1 hijo</td><td>20%-25%</td><td>$200.000-$250.000</td></tr>
-<tr><td>2 hijos</td><td>30%-35%</td><td>$300.000-$350.000</td></tr>
-<tr><td>3+ hijos</td><td>40%-50%</td><td>$400.000-$500.000</td></tr>
+<tr><td>Un menor</td><td>Mínimo 40% del IMM aplicable</td><td>$221.421</td></tr>
+<tr><td>Dos menores</td><td>Mínimo 30% por cada uno</td><td>$166.066 cada uno; $332.132 total</td></tr>
+<tr><td>Tres menores</td><td>Mínimo 30% por cada uno</td><td>$166.066 cada uno; $498.198 total</td></tr>
 </tbody>
 </table>
-<p>Para estimar la pensión según tu sueldo y número de hijos, usa la <a href="/calculadoras/calculadora-pension-alimenticia">calculadora de pensión alimenticia</a>.</p>`,
+<p>El máximo general es 50% de los ingresos totales de quien paga, pero el juez puede superarlo por razones fundadas, atendiendo especialmente al interés superior del niño. El mínimo también puede rebajarse si el alimentante acredita que carece de medios. Por eso el piso y el máximo son límites judiciales, no una fórmula que reemplace el presupuesto de necesidades.</p>
+<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>No uses “40% del sueldo” como pensión sugerida</strong><p>El 40% se aplica al ingreso mínimo para determinar un piso de un menor, no automáticamente al sueldo real del padre o madre. La <a href="/calculadoras/calculadora-pension-alimenticia">calculadora</a> solo puede servir para explorar el mínimo y el límite general; la cifra final requiere antecedentes y resolución.</p></div></aside>`,
+      },
+      {
+        id: 'mediacion-demanda',
+        title: 'De la mediación a la resolución judicial',
+        level: 2,
+        html: `<p>Antes de demandar alimentos se debe intentar una <a href="https://www.chileatiende.gob.cl/fichas/2344-mediacion-familiar-previa-y-obligatoria" target="_blank" rel="noopener">mediación familiar previa</a>. Participar y alcanzar un acuerdo son decisiones voluntarias, pero pasar por la instancia es requisito para judicializar. Los centros licitados prestan el servicio generalmente gratis; también existen mediadores privados con arancel.</p>
+<p>Si hay acuerdo, el mediador lo envía al tribunal. Una vez aprobado judicialmente, tiene fuerza obligatoria: un arreglo verbal o una transferencia informal no ofrece la misma vía de cumplimiento. Si no hay acuerdo o una parte no asiste, el certificado de mediación frustrada habilita para demandar con patrocinio de abogado. La Corporación de Asistencia Judicial orienta gratis y puede representar sin costo tras su evaluación socioeconómica.</p>
+<p>Para preparar el caso conviene ordenar:</p>
+<ul>
+<li>certificado de nacimiento que acredita el vínculo;</li>
+<li>presupuesto mensual con comprobantes y explicación de gastos compartidos del hogar;</li>
+<li>antecedentes de ingresos y patrimonio conocidos de ambos padres;</li>
+<li>certificado de mediación frustrada y datos de una causa previa, si existe;</li>
+<li>domicilio y datos de contacto del demandado, cuando se conocen.</li>
+</ul>
+<p>En la primera actuación judicial, el juez debe fijar alimentos provisorios para hijos menores mientras se tramita el juicio. La resolución final expresa el pago en UTM, define el período del mes y ordena una cuenta exclusiva. Pagar por otra vía dificulta acreditar cumplimiento; quien necesita modificar monto, forma o fecha debe pedirlo en la causa.</p>`,
       },
       {
         id: 'incumplimiento-pension',
-        title: 'Incumplimiento: nuevo Registro Nacional de Deudores',
+        title: 'Deuda, liquidación y Registro Nacional de Deudores',
         level: 2,
-        html: `<p>La <strong>Ley 21.389 (2021)</strong> creó el <strong>Registro Nacional de Deudores de Pensiones Alimenticias</strong>, administrado por el Servicio de Registro Civil. Las personas en este registro:</p>
+        html: `<p>El primer paso para cobrar no es publicar el caso ni acudir a DICOM, sino usar la causa de cumplimiento ante el Tribunal de Familia. La deuda debe liquidarse: el tribunal calcula cuotas, reajustes, pagos reconocidos y saldo. La liquidación y la eventual inscripción se notifican electrónicamente y pueden objetarse dentro de tres días en la causa correspondiente.</p>
+<p>El <a href="https://www.chileatiende.gob.cl/fichas/111396-inscripcion-en-el-registro-nacional-de-deudores-de-pensiones-de-alimentos" target="_blank" rel="noopener">Registro Nacional de Deudores de Pensiones de Alimentos</a>, administrado por el Registro Civil, exige una obligación fijada o aprobada judicialmente y deuda total o parcial de <strong>tres mensualidades consecutivas o cinco discontinuas</strong>. Para pensiones fijadas desde el 18 de noviembre de 2021, el tribunal debe liquidar e inscribir cuando se cumplen los requisitos. En causas anteriores puede ser necesario pedir conversión a UTM y/o liquidación.</p>
+<p>Entre sus efectos oficiales están:</p>
 <ul>
-<li>No pueden renovar licencia de conducir, pasaporte ni cédula de identidad.</li>
-<li>Tienen retención automática del sueldo (orden judicial al empleador).</li>
-<li>Aparecen en <strong>boletín comercial</strong> y son considerados deudores en DICOM.</li>
-<li>El 50% de cualquier devolución de impuestos del SII se desvía a pagar la deuda.</li>
-<li>Si solicitan crédito hipotecario o consumo, la institución debe verificar el registro.</li>
+<li>retención de fondos de ciertos créditos, devoluciones de impuestos, juicios ejecutivos y liquidaciones concursales;</li>
+<li>restricciones para tramitar pasaporte o licencia de conducir;</li>
+<li>impedimentos para inscribir vehículos e inmuebles mientras exista la inscripción;</li>
+<li>deber de consulta por instituciones y organismos en operaciones señaladas por la ley;</li>
+<li>inadmisibilidad de una demanda de rebaja o cese presentada por el deudor inscrito, salvo antecedentes calificados sobre falta de medios.</li>
 </ul>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Salida del registro</strong><p>Para salir del registro hay que pagar todas las deudas, incluyendo intereses (UF + reajustes). Mantener al día la pensión durante 6 meses consecutivos también permite la suspensión, pero no la eliminación, del registro.</p></div></aside>`,
+<p>La cédula de identidad y una anotación automática en DICOM no aparecen entre los efectos que enumera la ficha oficial; no deben prometerse como herramienta de presión. Tampoco existe una salida general por “pagar bien seis meses”. La inscripción se mantiene hasta que el tribunal ordena cancelarla conforme al pago o acuerdo suficiente establecido por la ley.</p>
+<p>Además del registro, el juez puede ordenar retención por empleador o pagador de pensión, arraigo, suspensión de licencia, arresto nocturno o completo, garantías sobre bienes, embargo y remate. Cada medida requiere resolución: la persona beneficiaria no puede retirar dinero o embargar por cuenta propia.</p>`,
+      },
+      {
+        id: 'pago-efectivo',
+        title: 'Cobro desde cuentas bancarias y fondos previsionales',
+        level: 2,
+        html: `<p>La Ley de Responsabilidad Parental incorporó un procedimiento especial para buscar patrimonio y pagar deudas. Con deuda liquidada, el tribunal puede investigar cuentas bancarias, instrumentos financieros y de inversión; luego ordena retener y transferir hasta cubrir lo adeudado. La solicitud se presenta en la causa de cumplimiento mediante la Oficina Judicial Virtual o con apoyo jurídico.</p>
+<p>Si el procedimiento ordinario no obtiene fondos suficientes, puede activarse de forma extraordinaria el pago con fondos previsionales obligatorios, bajo requisitos y límites legales. No es un retiro AFP solicitado directamente a la administradora: el tribunal consulta, determina procedencia, protege los límites aplicables y ordena el pago. La edad del deudor y la cercanía a su jubilación influyen en cuánto puede utilizarse.</p>
+<p>En foros aparecen preguntas como “¿puedo cobrar si trabaja informal?”, “¿sirve depositar en la cuenta personal?” o “¿el tribunal ve las cuentas?”. Son señales de problemas reales, pero no prueba del procedimiento. La respuesta verificable es mantener la cuenta exclusiva, pedir liquidación y entregar al tribunal los antecedentes de patrimonio conocidos. Ocultar ingresos o presentar información falsa puede generar sanciones.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Convivencia y visitas son materias separadas</strong><p>No pagar alimentos no autoriza a impedir unilateralmente la relación directa y regular; tampoco incumplir visitas permite suspender la pensión. Cada incumplimiento debe reclamarse en su procedimiento correspondiente, con prioridad en el interés del niño o niña.</p></div></aside>`,
       },
       {
         id: 'asignacion-familiar',
-        title: 'Asignación familiar: el bono mensual por carga',
+        title: 'Asignación Familiar: nuevos tramos desde mayo de 2026',
         level: 2,
-        html: `<p>La <strong>asignación familiar</strong> es un beneficio mensual del Estado para trabajadores con cargas familiares (cónyuges, hijos menores de 18, hijos estudiantes hasta 24, padres mayores de 65). Se paga junto con el sueldo y depende del ingreso del trabajador.</p>
-<p>Tramos vigentes 2026 (DL 150 reajustado):</p>
+        html: `<p>La <strong>Asignación Familiar</strong> se paga por causantes reconocidos a trabajadores, pensionados y otras personas beneficiarias del sistema. “Carga” no equivale automáticamente a hijo declarado en el empleo: debe existir reconocimiento ante la entidad administradora correspondiente y cumplir requisitos de edad, estudios, dependencia económica u otros según el vínculo.</p>
+<p>La Ley 21.830 actualizó retroactivamente los valores desde el 1 de mayo de 2026. La <a href="https://www.suseso.gob.cl/612/w3-article-686804.html" target="_blank" rel="noopener">SUSESO</a> instruyó los siguientes tramos:</p>
 <table>
-<thead><tr><th>Tramo</th><th>Ingreso mensual del trabajador</th><th>Monto por carga</th></tr></thead>
+<thead><tr><th>Tramo</th><th>Ingreso mensual</th><th>Monto mensual por carga</th></tr></thead>
 <tbody>
-<tr><td>A</td><td>Hasta $631.976</td><td>$22.007</td></tr>
-<tr><td>B</td><td>$631.977 a $923.067</td><td>$13.505</td></tr>
-<tr><td>C</td><td>$923.068 a $1.439.668</td><td>$4.267</td></tr>
-<tr><td>D</td><td>Sobre $1.439.668</td><td>$0 (sin asignación)</td></tr>
+<tr><td>A</td><td>Hasta $649.039</td><td>$22.601</td></tr>
+<tr><td>B</td><td>Más de $649.039 y hasta $947.990</td><td>$13.870</td></tr>
+<tr><td>C</td><td>Más de $947.990 y hasta $1.478.539</td><td>$4.382</td></tr>
+<tr><td>D</td><td>Más de $1.478.539</td><td>$0</td></tr>
 </tbody>
 </table>
-<p>Las cargas se reconocen oficialmente postulando ante el IPS o la Caja de Compensación correspondiente. Para hijos estudiantes 18-24 años, se requiere certificado anual de estudios.</p>
-<p>Calcula tu asignación con la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>`,
+<p>Para julio de 2026 en adelante se mantiene el monto, pero el tramo se determina con el promedio de ingresos de enero a junio de 2026. La asignación por invalidez corresponde al doble. Dependientes la reciben normalmente con el sueldo; pensionados, con la pensión; e independientes pueden recibirla anualmente según sus cotizaciones y reconocimiento.</p>
+<p>Si mayo o junio se pagaron con la tabla antigua, la entidad debe reliquidar. La <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a> requiere estos tramos nuevos; contrasta siempre el resultado con la liquidación y la entidad que reconoce la carga.</p>`,
       },
       {
         id: 'subsidio-agua',
         title: 'Subsidio del agua potable',
         level: 2,
-        html: `<p>El <strong>SAP</strong> (Subsidio al pago del consumo de agua potable y servicio de alcantarillado, Ley 18.778) es un beneficio para familias del 70% más vulnerable. Subsidia entre el 25% y el 100% de la cuenta del agua, según tramo de vulnerabilidad y disponibilidad presupuestaria comunal.</p>
-<p>Tramos de subsidio 2026:</p>
-<ul>
-<li><strong>Tramo 1</strong> (40% más vulnerable): 100% subsidio sobre los primeros 15 m³.</li>
-<li><strong>Tramo 2</strong> (40%-70% vulnerable): 50% subsidio sobre los primeros 15 m³.</li>
-</ul>
-<p>El subsidio se postula en la municipalidad correspondiente con cédula de identidad y boletas de agua de los últimos 3 meses. Es renovable cada 3 años. Calcula tu beneficio con la <a href="/calculadoras/calculadora-subsidio-agua">calculadora de subsidio agua</a>.</p>`,
+        html: `<p>El <a href="https://www.chileatiende.gob.cl/fichas/51314-subsidio-al-pago-de-consumo-de-agua-potable-y-servicio-de-alcantarillado" target="_blank" rel="noopener">subsidio al consumo de agua potable y alcantarillado</a> ayuda a hogares que destinan 5% o más de sus ingresos a la cuenta. En 2026 cubre entre 25% y 85% del valor sobre un consumo máximo de <strong>13 m³</strong>, según evaluación socioeconómica y cupos comunales. Para familias de Chile Seguridades y Oportunidades, cubre 100% de los primeros 15 m³.</p>
+<p>Se postula todo el año en la municipalidad del domicilio. Se requiere RSH, residencia permanente, conexión a la red, estar al día con la sanitaria o sistema rural y acreditar incapacidad de pago. Puede postular propietario, arrendatario que no viva con el dueño, usufructuario o allegado externo en ciertos sistemas colectivos.</p>
+<p>Dura tres años y la renovación no es automática. Cambiar de domicilio, acumular tres meses sin pagar la parte no subsidiada o dejar de cumplir requisitos puede terminarlo. La <a href="/calculadoras/calculadora-subsidio-agua">calculadora</a> solo estima porcentajes: la municipalidad determina tramo y disponibilidad.</p>`,
       },
       {
         id: 'aguinaldo',
-        title: 'Aguinaldo: Fiestas Patrias, Navidad y Escolar',
+        title: 'Aguinaldos y Aporte Familiar Permanente',
         level: 2,
         html: `<p>El <strong>aguinaldo</strong> es un bono especial del <strong>sector público</strong> y de <strong>pensionados</strong> de regímenes cubiertos (leyes de reajuste / fichas IPS). En el sector privado solo es exigible si está en el contrato o convenio colectivo. No confundir con la <strong>gratificación legal</strong>.</p>
 <table>
@@ -1394,20 +1593,36 @@ export const guias: Guia[] = [
 </tbody>
 </table>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>No es obligatorio en sector privado</strong><p>El aguinaldo no es legalmente obligatorio para empresas privadas (a diferencia de la gratificación legal del 25%). Muchas pagan por costumbre o convenio colectivo. Si tu contrato lo menciona, sí es exigible.</p></div></aside>
-<p>Guía completa 2026: <a href="/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico">aguinaldo de Fiestas Patrias 2026 (IPS y sector público)</a>. Estima el tramo 1 del sector público con la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>`,
+<p>El <strong>Aporte Familiar Permanente 2026</strong> es $66.834 por carga o familia, según la vía de acceso y la situación existente al 31 de diciembre de 2025. No se postula. Si la persona causante vive con alguien distinto de quien recibe la asignación, la ley contempla la entrega del aporte dentro de 30 días.</p>
+<p>Guía completa: <a href="/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico">aguinaldo de Fiestas Patrias 2026</a>. La <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a> es referencial para el sector público y no transforma el beneficio en obligatorio para empleadores privados.</p>`,
       },
       {
         id: 'bono-bodas-oro',
         title: 'Bono Bodas de Oro y otros beneficios para adultos mayores',
         level: 2,
-        html: `<p>El <strong>Bono Bodas de Oro</strong> es un beneficio único entregado por el IPS a parejas casadas con 50+ años de matrimonio que pertenecen al 60% más vulnerable. El monto 2026 es de <strong>$363.776</strong> dividido en partes iguales para cada cónyuge (≈$181.888 cada uno).</p>
-<p>Otros beneficios para adultos mayores:</p>
+        html: `<p>El <a href="https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro" target="_blank" rel="noopener"><strong>Bono Bodas de Oro</strong></a> vigente desde octubre de 2025 es <strong>$463.166</strong>, dividido en $231.583 para cada cónyuge vivo. Se solicita una sola vez y hay un año desde el aniversario número 50 para hacerlo.</p>
+<p>La pareja debe estar casada, no separada ni divorciada, convivir en el mismo hogar —con regla para hogares de larga estadía—, pertenecer al 80% más vulnerable según RSH y acreditar cuatro de los últimos cinco años de residencia en Chile. No basta con cumplir 50 años de matrimonio.</p>
+<p>Para beneficios de personas mayores, evita mezclar programas:</p>
 <ul>
-<li><strong>PGU básica</strong>: $240.931 mensuales para 65+ años. Lee la <a href="/guias/afp-pension-chile">guía de AFP y pensión</a>.</li>
-<li><strong>PGU mayorada (82+ años)</strong>: $260.286 mensuales.</li>
-<li><strong>Aporte previsional solidario</strong>: complementa pensiones bajas hasta el monto base.</li>
-<li><strong>Tarifa rebajada en transporte público</strong>: 50% en Metro y buses para 65+ años con tarjeta TNE Adulto Mayor.</li>
-</ul>`,
+<li><strong>PGU:</strong> a julio de 2026 el máximo es $231.732 para 65–81 años y $250.275 desde 82 años; en septiembre el monto mayor se extiende a 75+. Tiene requisitos de residencia, focalización y pensión base.</li>
+<li><strong>Bono por Hijo:</strong> incrementa la pensión de mujeres que cumplen requisitos; no es un pago en efectivo al nacer.</li>
+<li><strong>Asignación Familiar:</strong> una persona beneficiaria de PGU puede tener causantes descendientes que vivan a su cargo bajo las reglas del sistema, pero quien recibe PGU no puede ser causante de otra Asignación Familiar.</li>
+</ul>
+<p>La <a href="/guias/afp-pension-chile">guía previsional 2026</a> separa PGU, pensión autofinanciada y nuevos beneficios. Verificar la ficha individual en ChileAtiende evita sumar prestaciones incompatibles.</p>`,
+      },
+      {
+        id: 'checklist-familia',
+        title: 'Checklist para actuar con documentos',
+        level: 2,
+        html: `<ol class="steps">
+<li><strong>Si vas a pedir alimentos:</strong> arma el presupuesto del hijo con respaldo, solicita mediación y conserva el certificado.</li>
+<li><strong>Si ya existe pensión:</strong> usa la cuenta exclusiva, registra pagos y pide en la causa cualquier modificación.</li>
+<li><strong>Si hay deuda:</strong> solicita liquidación; revisa la notificación y objeta dentro del plazo si hay abonos omitidos o errores.</li>
+<li><strong>Si buscas beneficios:</strong> actualiza RSH y cargas, pero consulta cada requisito; estar en un tramo no garantiza cupo ni pago.</li>
+<li><strong>Si cambió el ingreso:</strong> revisa el promedio usado por Asignación Familiar y exige reliquidación desde mayo de 2026 cuando corresponda.</li>
+<li><strong>Si un trámite es sensible:</strong> usa Oficina Judicial Virtual, ChileAtiende, SUSESO o municipalidad. No entregues ClaveÚnica a supuestos gestores.</li>
+</ol>
+<p>Información revisada al 13 de julio de 2026. Esta guía explica reglas generales y no reemplaza una resolución judicial ni asesoría sobre una causa concreta.</p>`,
       },
     ],
   },
@@ -1417,10 +1632,10 @@ export const guias: Guia[] = [
   // ============================================
   {
     slug: 'credito-cae-educacion-chile',
-    title: 'Crédito CAE en Chile 2026: tasa, condonación y alternativas',
-    intent: '¿Cómo funciona el CAE y cuánto pagaré por mi carrera?',
+    title: 'Crédito CAE en Chile 2026: cómo se financia, paga y rebaja',
+    intent: '¿Cómo funciona el CAE vigente y qué trámites debo hacer en 2026?',
     description:
-      'Guía del Crédito con Aval del Estado (CAE) en Chile 2026: tasa, plazos, garantía estatal, contingencia al ingreso y reforma de condonación 2025.',
+      'Guía verificada del CAE 2026: arancel de referencia, renovación, firma, tasa UF+2%, rebaja al 10% de la renta, suspensión por cesantía y estado real del FES.',
     category: 'educacion',
     categoryLabel: 'Educación y créditos',
     keywords: [
@@ -1430,14 +1645,14 @@ export const guias: Guia[] = [
       'gratuidad educación superior',
       'beca bicentenario',
       'beca juan gómez millas',
-      'reforma educación 2025',
+      'proyecto FES estado 2026',
       'tasa CAE 2%',
       'contingencia ingreso 10%',
       'INGRESA',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-10',
-    readingTime: 12,
+    updatedAt: '2026-07-13',
+    readingTime: 21,
     relatedCalculators: [
       'calculadora-credito-cae',
       'calculadora-credito-hipotecario',
@@ -1449,81 +1664,110 @@ export const guias: Guia[] = [
       'todo-sobre-uf-chile',
     ],
     sources: [
-      { label: 'Comisión INGRESA', url: 'https://www.ingresa.cl' },
-      { label: 'TGR — cobro CAE', url: 'https://tgr.cl/cae' },
-      { label: 'Ministerio de Educación', url: 'https://www.mineduc.cl' },
+      { label: 'Comisión Ingresa — qué es el CAE', url: 'https://portal.ingresa.cl/el-credito/que-es-el-credito-cae/' },
+      { label: 'Ingresa — postulación CAE 2026', url: 'https://portal.ingresa.cl/como-postular/como-postulo-al-credito/' },
+      { label: 'Ingresa — renovación CAE 2026', url: 'https://portal.ingresa.cl/como-renovar/como-renuevo-mi-credito/' },
+      { label: 'Ingresa — rebaja al 10% de la renta', url: 'https://portal.ingresa.cl/preguntas-frecuentes/pago-del-credito-rebaja-cuotas-al-10-de-la-renta/' },
+      { label: 'Ingresa — suspensión por cesantía', url: 'https://cesantia.ingresa.cl/docs/pfrecuentes.html' },
+      { label: 'Beneficios Estudiantiles — Gratuidad', url: 'https://portal.beneficiosestudiantiles.cl/gratuidad' },
+      { label: 'FUAS — proceso 2026', url: 'https://fuas.cl/preguntas-frecuentes.html' },
       { label: 'Ley 20.027 (CAE original)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=240080' },
     ],
     sections: [
       {
-        id: 'que-es-cae',
-        title: '¿Qué es el CAE?',
+        id: 'estado-2026',
+        title: 'CAE 2026: qué está vigente hoy',
         level: 2,
-        html: `<p>El <strong>Crédito con Aval del Estado</strong> es un crédito otorgado por bancos privados a estudiantes de educación superior, con garantía estatal subsidiaria. Fue creado por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027 de 2005</a> y administrado por la <a href="https://www.ingresa.cl" target="_blank" rel="noopener">Comisión INGRESA</a>.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El CAE en cifras</strong><p>Más de 1,2 millones de estudiantes han usado CAE desde su creación. La deuda total acumulada supera los US$10 mil millones. La tasa fue reducida de 5,8% inicial a 2% por la reforma de 2012, y la reforma de 2025 establece un calendario de condonación parcial para deudores en ciertas condiciones.</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tasa de interés 2026</span><span class="data-grid__value">2% real anual</span></li><li><span class="data-grid__label">Plazo máximo</span><span class="data-grid__value">20 años</span></li><li><span class="data-grid__label">Cuota máxima (ley)</span><span class="data-grid__value">10% del ingreso bruto</span></li><li><span class="data-grid__label">Inicio del pago</span><span class="data-grid__value">18 meses post-egreso</span></li></ul>`,
+        html: `<p>El Crédito con Garantía Estatal sigue vigente en julio de 2026. Es una línea de crédito entregada por una institución financiera para financiar parte del arancel de educación superior, regulada por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a> y administrada por Comisión Ingresa. El aval del Estado y de la institución educacional protege al acreedor frente al incumplimiento; <strong>no convierte el crédito en beca ni elimina la obligación del estudiante</strong>.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Alerta para nuevos beneficiarios 2026</strong><p>Comisión Ingresa extendió el plazo final para agendar y firmar el contrato CAE 2026 hasta el <strong>14 de julio de 2026</strong> en creditocae.cl. Si no se firma, se entiende que el estudiante no requiere el crédito y deberá financiar el arancel de otra forma. El plazo es temporal: verifica el mensaje personal antes de actuar.</p></div></aside>
+<p>El proyecto que propone reemplazar el CAE por el FES no está vigente como ley. Mientras no exista una ley publicada y reglas de implementación, los contratos, pagos, beneficios y cobranzas del CAE siguen funcionando bajo el régimen actual.</p>`,
       },
       {
-        id: 'condicion-ingreso',
-        title: 'Pago contingente al ingreso (Ley 21.605)',
+        id: 'que-financia',
+        title: 'Qué financia y qué queda fuera',
         level: 2,
-        html: `<p>Desde 2023, el CAE pasó a régimen de <strong>pago contingente al ingreso</strong>. Esto significa que la cuota mensual se ajusta a la situación económica del deudor:</p>
-<ul>
-<li><strong>Cuota máxima</strong>: 10% del ingreso bruto mensual.</li>
-<li><strong>Si el ingreso baja</strong>: la cuota baja proporcionalmente.</li>
-<li><strong>Si el ingreso es bajo el sueldo mínimo</strong>: cuota suspendida temporalmente.</li>
-<li><strong>Tras 240 cuotas pagadas (20 años)</strong>: el saldo restante se condona.</li>
-</ul>
-<p>Esta reforma elimina el riesgo de "no poder pagar nunca" del CAE original (donde la cuota era fija y podía superar el ingreso del egresado). Ahora la deuda nunca puede consumir más del 10% bruto, lo que protege al deudor en períodos de cesantía o sueldos bajos.</p>`,
+        html: `<p>El CAE financia el arancel anual de una carrera elegible. El máximo anual es el <strong>100% del arancel de referencia</strong> que Mineduc fija para esa carrera e institución. No cubre la matrícula. Si el arancel real que cobra la institución supera al de referencia, la diferencia es copago y debe financiarse con becas, recursos propios u otro acuerdo.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo de brecha de arancel</div><ul><li>Arancel real anual: $5.800.000.</li><li>Arancel de referencia: $4.900.000.</li><li>Beca de arancel: $800.000.</li><li>Máximo CAE útil para completar el cobro: $4.900.000, sujeto a asignación.</li><li>Saldo después de beca y CAE máximo: $100.000, además de matrícula.</li></ul><span class="total">El orden exacto de aplicación lo informa la institución</span></div>
+<p>El estudiante puede solicitar desde $200.000 anuales hasta el máximo de referencia, o pedir “monto cero” si desea conservar el derecho sin usar financiamiento ese año. Pedir el máximo por defecto aumenta deuda e intereses. Antes de decidir, compara arancel real, referencia, becas, duración formal y probabilidad de necesitar años adicionales.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>No financia libremente cualquier carrera</strong><p>La institución debe participar del sistema, la carrera e institución deben cumplir acreditación y el estudiante debe satisfacer las condiciones académicas y legales. Una preselección no reemplaza matrícula, solicitud de monto ni firma del contrato.</p></div></aside>`,
       },
       {
-        id: 'condonacion-2025',
-        title: 'Reforma de condonación 2025',
+        id: 'postulacion-renovacion',
+        title: 'Postulación, asignación y renovación 2026',
         level: 2,
-        html: `<p>El proyecto de ley de <strong>condonación parcial del CAE</strong> en discusión en 2025-2026 propone:</p>
-<ul>
-<li><strong>Condonación total para deudores con CAE pagado correctamente por 10+ años</strong>.</li>
-<li><strong>Condonación parcial 50%</strong> para deudores que han pagado 5-10 años sin atrasos.</li>
-<li><strong>Condonación de mora</strong> para deudores en el Registro de Morosidad CAE que se acojan al beneficio.</li>
-<li>Reemplazo del CAE por un nuevo Sistema de Financiamiento Público (FES) administrado directamente por el Estado.</li>
-</ul>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Estado del proyecto</strong><p>Al cierre de mayo 2026, la reforma de condonación está en segundo trámite constitucional. Las fechas exactas y mecanismos de aplicación pueden cambiar. Sigue las novedades en <a href="https://www.ingresa.cl" target="_blank" rel="noopener">ingresa.cl</a> y <a href="https://www.mineduc.cl" target="_blank" rel="noopener">mineduc.cl</a>.</p></div></aside>`,
+        html: `<p>La postulación a gratuidad, becas y créditos se realiza mediante FUAS. Para beneficios 2026 hubo un primer período entre octubre y noviembre de 2025 y un segundo entre febrero y marzo de 2026; ambos cerraron. Después vienen nivel socioeconómico, preselección, matrícula, acreditación de antecedentes y asignación. Completar FUAS no asegura CAE ni obliga a usarlo.</p>
+<p>Para un nuevo beneficiario CAE, el flujo 2026 fue:</p>
+<ol class="steps"><li>Completar FUAS en plazo.</li><li>Revisar preselección y condiciones de la institución.</li><li>Matricularse con derecho al crédito.</li><li>Solicitar a la casa de estudios el monto anual requerido.</li><li>Revisar la asignación definitiva.</li><li>Firmar personalmente el contrato; si es menor de edad, firma su representante legal.</li></ol>
+<p>La renovación no es automática aunque el crédito pueda cubrir la duración de la malla. Cada año hay que matricularse con derecho al CAE y solicitar monto. Para 2026, el formulario de renovantes estuvo disponible desde el 16 de diciembre de 2025 al 25 de abril de 2026, con una extensión extraordinaria del 7 al 13 de mayo. Quien no lo envió debe pactar otra forma de pago con la institución, aunque cumpla requisitos académicos.</p>
+<p>La renovación 2026 permite solicitar 100% del arancel de referencia, un monto específico de al menos $200.000 o monto cero. La última solicitud enviada dentro del plazo es la válida. Guarda comprobante, resultado y contrato; no confíes solo en el estado mostrado por la intranet de la universidad.</p>`,
       },
       {
-        id: 'gratuidad',
-        title: 'Gratuidad: la alternativa al CAE',
+        id: 'deuda-cuotas',
+        title: 'Cómo se forma la deuda y cuándo empieza el cobro',
         level: 2,
-        html: `<p>La <strong>Gratuidad</strong> es un beneficio del Estado que cubre el 100% del arancel y matrícula en instituciones de educación superior adheridas, para estudiantes del 60% más vulnerable según RSH. Aplica a:</p>
-<ul>
-<li>Universidades del CRUCH (estatales y privadas tradicionales).</li>
-<li>Universidades privadas adheridas (con acreditación 4+ años).</li>
-<li>Institutos profesionales y centros de formación técnica acreditados.</li>
-</ul>
-<aside class="callout callout--success"><span class="callout__icon" aria-hidden="true">✅</span><div class="callout__body"><strong>Postula primero a Gratuidad y becas</strong><p>Antes de tomar CAE, postula a Gratuidad y a becas Bicentenario, Juan Gómez Millas, Excelencia Académica, etc. La Gratuidad es la mejor opción si calificas, porque NO genera deuda. El CAE debe ser tu última opción de financiamiento.</p></div></aside>`,
+        html: `<p>Desde 2012, los nuevos créditos tienen una tasa de <strong>UF + 2% anual</strong>. “UF + 2%” no significa inflación o 2%: el saldo se expresa en UF —por lo que su equivalente en pesos cambia con el IPC— y además devenga interés real de 2%. Los créditos otorgados entre 2006 y 2011 tenían tasas contractuales mayores, pero pueden acceder a una cuota rebajada a UF + 2% si están al día y pagan dentro del plazo mensual del beneficio.</p>
+<p>No hay obligación de pagar cuotas mientras se estudia. El cobro comienza:</p>
+<ul><li><strong>Egreso:</strong> 18 meses después de la fecha en que la institución informa que terminaste la malla. No depende de la ceremonia ni de obtener el título.</li><li><strong>Deserción:</strong> si completas dos años consecutivos sin matrícula, el cobro comienza en noviembre del segundo año sin estudiar y el plazo original se reduce a la mitad.</li></ul>
+<p>El plazo puede ser de 5 a 20 años según deuda y situación académica. Para egresados, Ingresa informa plazos de 10, 15 o 20 años; para quienes abandonan, 5, 7 años y medio o 10. Los contratos desde 2012 usan cuotas escalonadas en tramos, por lo que una amortización bancaria con cuota nivelada es solo una aproximación.</p>
+<div class="numeric-example"><div class="numeric-example__title">Simulación financiera, no calendario contractual</div><ul><li>Capital supuesto: 1.000 UF.</li><li>Tasa real: 2% anual.</li><li>Plazo supuesto: 240 meses.</li><li>Cuota nivelada matemática: cerca de 5,06 UF mensuales.</li><li>Total nivelado aproximado: 1.214 UF.</li></ul><span class="total">El contrato puede usar cuotas escalonadas y otro plazo</span></div>
+<p>La <a href="/calculadoras/calculadora-credito-cae">calculadora de CAE</a> sirve para comparar capital, tasa y plazo. No predice el calendario oficial ni incorpora por sí sola beneficios, comisiones, mora, pagos ya realizados o diferencias entre desembolsos anuales.</p>`,
       },
       {
-        id: 'becas',
-        title: 'Becas: el complemento perfecto',
+        id: 'rebaja-diez-por-ciento',
+        title: 'Rebaja al 10% de la renta: se solicita y se renueva',
         level: 2,
-        html: `<p>El sistema de <strong>becas estatales</strong> chileno cubre matrícula y arancel para estudiantes con buen rendimiento o vulnerabilidad económica:</p>
-<table>
-<thead><tr><th>Beca</th><th>Cobertura</th><th>Requisito principal</th></tr></thead>
-<tbody>
-<tr><td>Beca Bicentenario</td><td>Arancel completo</td><td>RSH ≤ 70%, NEM/PSU mínimos</td></tr>
-<tr><td>Beca Juan Gómez Millas</td><td>Arancel completo</td><td>RSH ≤ 70%, NEM/PSU mínimos, distintos a Bicentenario</td></tr>
-<tr><td>Beca Excelencia Académica</td><td>Arancel hasta tope</td><td>10% mejor rendimiento del colegio</td></tr>
-<tr><td>Beca Vocación de Profesor</td><td>Arancel + bono mensual</td><td>Pedagogías</td></tr>
-<tr><td>Beca de Articulación</td><td>Arancel TP a Pregrado</td><td>Continuidad de estudios técnicos</td></tr>
-</tbody>
-</table>
-<p>Las becas se postulan en el FUAS (Formulario Único de Acreditación Socioeconómica) en octubre/noviembre del año previo a comenzar la carrera.</p>`,
+        html: `<p>El CAE no cambió a una cuota automáticamente contingente al ingreso. Quien está pagando puede <strong>solicitar</strong> que sus cuotas no superen 10% del promedio de la renta bruta mensual acreditada. El formulario está disponible permanentemente en contingencia.ingresa.cl; si se presenta en los primeros quince días del mes, la rebaja puede aplicar desde la cuota siguiente, y desde el día 16, desde la subsiguiente.</p>
+<p>Comisión Ingresa analiza las rentas del período solicitado. Si 10% del promedio es menor que la cuota normal, determina la cuota rebajada. La diferencia la subsidia el Estado y <strong>no se agrega al final ni debe devolverse</strong>. El beneficio dura seis meses y requiere una nueva solicitud para renovarlo.</p>
+<div class="numeric-example"><div class="numeric-example__title">Cuota normal de $180.000 y renta promedio de $1.100.000</div><ul><li>10% de renta bruta promedio: $110.000.</li><li>Cuota que paga el deudor durante el beneficio: $110.000.</li><li>Diferencia subsidiada por el Estado: $70.000.</li><li>Vigencia: seis meses, si la solicitud es aprobada.</li></ul><span class="total">No se posterga una deuda de $70.000 mensuales</span></div>
+<p>Si la cuota normal ya es menor que 10% de la renta, se mantiene porque favorece al deudor. Si no hubo ingresos en los últimos seis meses, o el promedio resulta igual o inferior a la cuota, Ingresa orienta a solicitar suspensión por cesantía o desempleo en vez de la rebaja.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Pagar al día sigue siendo necesario</strong><p>La aprobación no reemplaza el pago. Revisa la cuota rebajada en el banco y paga hasta el día 10 a las 14:00, o día hábil siguiente cuando corresponda, para mantener los beneficios. Guarda comprobante y resolución de Ingresa.</p></div></aside>`,
       },
       {
-        id: 'simulacion-cae',
-        title: 'Simulación: cuánto pagarás por tu CAE',
+        id: 'suspension-cesantia',
+        title: 'Suspensión por cesantía o desempleo',
         level: 2,
-        html: `<div class="numeric-example"><div class="numeric-example__title">Carrera 5 años, arancel anual UF 200, total UF 1.000</div><ul><li>Monto crédito: UF 1.000 (≈$40.826.000 al cambio julio 2026)</li><li>Tasa anual: 2% real</li><li>Plazo: 20 años (240 cuotas)</li><li>Cuota fija UF: ≈ 5,1 UF/mes</li><li>Cuota inicial en pesos: ≈ $208.200/mes (julio 2026)</li><li>Total a pagar: UF 1.213 (≈$48,9M, intereses UF 213)</li></ul><span class="total">Cuota mensual ≈ $206.000 — limitada a 10% ingreso bruto</span></div>
-<p>Si tu ingreso bruto al egresar es $1.500.000, la cuota máxima legal es $150.000. La diferencia se aplaza con extensión de plazo. Con la <a href="/calculadoras/calculadora-credito-cae">calculadora de CAE</a> puedes simular distintos escenarios de ingreso y plazo.</p>`,
+        html: `<p>La cesantía no detiene el cobro por sí sola. El deudor debe completar el formulario de suspensión y acreditar que está cesante o desempleado y que los ingresos de su grupo familiar son insuficientes. Ingresa también puede pedir antecedentes del cónyuge, conviviente o conviviente civil.</p>
+<ul><li>La mora no puede superar 45 días corridos desde el vencimiento de la última cuota pagada al solicitar.</li><li>La suspensión se concede por seis meses y puede renovarse por períodos iguales mediante nuevas solicitudes.</li><li>Las cuotas suspendidas pasan al final del calendario con el mismo valor en UF y sin intereses generados por la suspensión.</li><li>Una cuota ya suspendida no vuelve a postergarse, aunque después puede solicitarse rebaja al 10% de la renta si corresponde.</li></ul>
+<p>Si consigues trabajo durante los seis meses aprobados, Ingresa indica que no pierdes ese período de suspensión. Al terminar, revisa la fecha exacta en que vuelve el cobro y solicita a tiempo la rebaja al 10% si la cuota supera tu capacidad.</p>
+<p>No confundas “suspender” con condonar. El capital permanece y el calendario se extiende. Tampoco esperes acumular varias cuotas impagas para presentar antecedentes: sobre 45 días de mora puedes quedar fuera de este mecanismo.</p>`,
+      },
+      {
+        id: 'pago-prepago-mora',
+        title: 'Pago, prepago y mora',
+        level: 2,
+        html: `<p>Las cuotas se pagan al banco que administra el crédito, no a Comisión Ingresa. Revisa en “Mi Crédito CAE” cuál es la institución y actualiza datos tanto en el banco como en Ingresa. Desde febrero de 2020, el pago hasta el día 10 a las 14:00 —o hábil siguiente si corresponde— conserva beneficios por pago al día.</p>
+<p>Un prepago parcial debe ser al menos 10% del saldo adeudado, incluyendo intereses y comisiones. El banco descuenta intereses devengados y una comisión de prepago equivalente a 1,5 meses de interés sobre el capital prepagado. Después puede reducirse la cuota manteniendo plazo o acortarse el plazo manteniendo cuota. Por eso es falso afirmar que todo prepago CAE carece de comisión.</p>
+<p>Antes de prepagar, compara tres datos: tasa real del crédito, comisión y necesidad de liquidez. Pagar una deuda UF + 2% reduce exposición a UF e intereses, pero no siempre conviene usar todo el fondo de emergencia. Solicita al banco una liquidación de prepago y no calcules el abono como si el 100% fuera a capital.</p>
+<p>En mora prolongada, el banco puede cobrar y solicitar el pago de las garantías. Si el Estado paga su garantía, Tesorería se subroga hasta el monto cubierto y puede continuar la cobranza. TGR ofrece convenios CAE bajo requisitos, pie, cuotas y comportamiento de pago; no existe una regla general que borre la deuda por haber pasado a Tesorería.</p>
+<p>Si ya existe deuda en TGR, consulta la Cuenta Única Tributaria y el convenio específico antes de pagar a terceros. La guía de <a href="/blog/embargos-cae-tgr-2026-cuentas-bienes-raices">cobranza CAE y TGR</a> explica el flujo, y la <a href="/calculadoras/calculadora-intereses-mora">calculadora de mora</a> solo entrega una estimación cuando conoces la tasa aplicable.</p>`,
+      },
+      {
+        id: 'fes-condonacion',
+        title: 'Proyecto FES y condonación: propuesta no es beneficio vigente',
+        level: 2,
+        html: `<p>El Boletín N° 17.169-04 propone un nuevo instrumento público de Financiamiento para la Educación Superior y un plan de reorganización y condonación para deudas CAE, Fondo Solidario y Corfo. El proyecto avanzó al Senado en segundo trámite constitucional, pero <strong>al 13 de julio de 2026 no constituye una ley publicada</strong>.</p>
+<p>Los sitios informativos del proyecto describen condonaciones iniciales, mensuales y por pago anticipado según situación académica, de pago y cuotas cumplidas. Esas fórmulas son parte del diseño legislativo y pueden modificarse, rechazarse o reemplazarse. No existe hoy una regla vigente de “50% después de cinco años”, “condonación total después de diez” ni eliminación automática del saldo al completar 240 cuotas.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No dejes de pagar esperando el FES</strong><p>La mora puede hacer perder beneficios actuales y activar cobranza. Una eventual ley tendrá condiciones, fechas de corte y procedimiento propios. Hasta entonces, usa suspensión, rebaja al 10%, regularización o convenio según tu situación real.</p></div></aside>
+<p>Para verificar cambios, busca el boletín en los portales del Congreso y una eventual publicación en el Diario Oficial. Una declaración política, una aprobación en comisión o una calculadora de campaña no reemplazan el texto legal final.</p>`,
+      },
+      {
+        id: 'alternativas',
+        title: 'Gratuidad, becas y decisiones antes de endeudarse',
+        level: 2,
+        html: `<p>Gratuidad cubre matrícula y arancel durante la duración nominal para estudiantes que pertenecen al 60% de menores ingresos, cumplen los requisitos y se matriculan en una institución adscrita. Si se asigna gratuidad, reemplaza becas y créditos de arancel estatales que cubrían esos conceptos y elimina ese copago dentro de su cobertura.</p>
+<p>Las becas no son intercambiables. Bicentenario, Juan Gómez Millas, Nuevo Milenio, Excelencia Académica, Vocación de Profesor y otras tienen instituciones, montos, requisitos socioeconómicos y académicos distintos. Algunas cubren un monto o el arancel de referencia, no necesariamente el arancel real. Usa la ficha 2026 de Beneficios Estudiantiles; no una tabla sin año.</p>
+<p>Orden práctico antes de firmar:</p>
+<ol class="steps"><li>Confirma gratuidad y becas asignadas, no solo preselección.</li><li>Compara arancel real, referencia, matrícula y duración formal.</li><li>Pregunta cómo se financian años extra, titulación y prácticas.</li><li>Solicita solo el CAE necesario después de otras ayudas.</li><li>Proyecta la deuda en UF, no congelada en pesos actuales.</li><li>Guarda contrato y cada desembolso anual.</li></ol>
+<p>El CAE puede evitar abandonar una carrera por falta de financiamiento, pero su conveniencia depende de cuánto cubre, la brecha de arancel, duración efectiva, alternativas y capacidad futura. “Siempre malo” y “siempre conveniente” son atajos que no sustituyen ese cálculo.</p>`,
+      },
+      {
+        id: 'checklist-cae',
+        title: 'Checklist 2026 para estudiantes y deudores',
+        level: 2,
+        html: `<h3>Si estudias en 2026</h3><ul><li>Revisa asignación definitiva y arancel de referencia.</li><li>Confirma matrícula con derecho a CAE.</li><li>Verifica monto anual solicitado y copago.</li><li>Si eres nuevo beneficiario, comprueba de inmediato el plazo de firma extendido al 14 de julio.</li><li>Descarga contrato, comprobante y resultado.</li></ul>
+<h3>Si ya estás pagando</h3><ul><li>Identifica banco, cuota, vencimiento y estado de mora.</li><li>Si la cuota supera 10% de tu renta bruta promedio, solicita rebaja y renueva cada seis meses.</li><li>Si estás sin ingresos, solicita suspensión antes de superar 45 días de mora.</li><li>Guarda resolución de Ingresa y verifica la cuota aplicada por el banco.</li><li>Pide liquidación antes de prepagar.</li></ul>
+<h3>Si estás en mora</h3><ul><li>Determina si la deuda sigue en el banco o existe garantía pagada y deuda en TGR.</li><li>No entregues dinero a gestores que prometan condonación legislativa.</li><li>Pregunta por regularización o convenio en el acreedor correcto.</li><li>Conserva notificaciones judiciales y busca asesoría si hay cobranza.</li></ul>
+<p>Contenido verificado al 13 de julio de 2026 con Comisión Ingresa, FUAS, Beneficios Estudiantiles, TGR, la Ley 20.027 y el estado público del Boletín 17.169-04. Las experiencias de foros se usaron para detectar confusiones sobre copago, fecha de cobro, subsidio al 10% y mora; las reglas provienen de fuentes oficiales.</p>`,
       },
     ],
   },

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Validar CalculaChile"
+  short_description: "Ejecuta el cierre y validación del cambio"
+  default_prompt: "Usa $ship-calculachile para validar este cambio antes de entregarlo."

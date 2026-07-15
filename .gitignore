@@ -46,8 +46,8 @@ next-env.d.ts
 .vercel
 .turbo
 
-# Agentes locales (no versionar en el remoto)
-.agents/
+# Codex: `.agents/skills/` y `.codex/` son configuración compartida y versionada.
+# Harnesses locales alternativos (no versionar en el remoto)
 .grok/
 .opencode/
 opencode.json

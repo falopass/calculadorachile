@@ -10,6 +10,17 @@ import { calculatePGU } from '../pgu';
 import { PGU_2026 } from '@/lib/values/constants';
 
 describe('calculatePGU', () => {
+  it('menor de 65 años: estimación PGU cero', () => {
+    const r = calculatePGU({
+      pensionActual: 0,
+      anosCotizados: 20,
+      esHombre: true,
+      edad: 64,
+    });
+    expect(r.cumpleEdadMinima).toBe(false);
+    expect(r.pguMensual).toBe(0);
+  });
+
   it('70 años, sin pensión base: PGU completa', () => {
     const r = calculatePGU({
       pensionActual: 0,

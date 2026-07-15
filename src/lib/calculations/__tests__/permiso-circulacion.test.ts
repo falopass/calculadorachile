@@ -1,111 +1,60 @@
-// ============================================
-// Tests de permiso de circulación
-// ----------------------------------------------
-// Verifica la tabla SII progresiva por tramos UTM, descuento por
-// antigüedad ≥20 años, descuento moto/taxi 50% y prorrateo de
-// primera inscripción.
-// ============================================
-
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { calculatePermisoCirculacion } from '../permiso-circulacion';
 
 describe('calculatePermisoCirculacion', () => {
-  it('automóvil tasación baja paga ~1% del valor', () => {
-    const r = calculatePermisoCirculacion({
+  it('usa la UTM de enero de 2026', () => {
+    const result = calculatePermisoCirculacion({
+      valorVehiculo: 8_000_000,
+      electricoHibridoElegible: false,
+    });
+    expect(result.utmEneroCLP).toBe(69_751);
+  });
+
+  it('aplica el permiso mínimo oficial bajo $3.487.600', () => {
+    const result = calculatePermisoCirculacion({
       valorVehiculo: 3_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 3,
-      esZonaCarga: false,
-      esPrimeraVez: false,
+      electricoHibridoElegible: false,
     });
-    expect(r.tasaEfectiva).toBeGreaterThan(0.9);
-    expect(r.tasaEfectiva).toBeLessThan(1.2);
+    expect(result.usaPermisoMinimo).toBe(true);
+    expect(result.permisoTotalEstimado).toBe(34_876);
   });
 
-  it('motocicleta paga 50% de la tarifa de auto', () => {
-    const auto = calculatePermisoCirculacion({
-      valorVehiculo: 5_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: false,
+  it('aplica la escala progresiva acumulativa sobre la tasación', () => {
+    const result = calculatePermisoCirculacion({
+      valorVehiculo: 10_000_000,
+      electricoHibridoElegible: false,
     });
-    const moto = calculatePermisoCirculacion({
-      valorVehiculo: 5_000_000,
-      tipoVehiculo: 'motocicleta',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: false,
-    });
-    expect(Math.abs(moto.permisoTotal - auto.permisoTotal / 2)).toBeLessThanOrEqual(1);
+    expect(result.montoEscala).toBeGreaterThan(100_000);
+    expect(result.permisoTotalEstimado).toBe(result.montoEscala);
   });
 
-  it('vehículo ≥20 años recibe 50% descuento por antigüedad', () => {
-    const nuevo = calculatePermisoCirculacion({
-      valorVehiculo: 8_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 5,
-      esZonaCarga: false,
-      esPrimeraVez: false,
+  it('vehículo elegible paga 25% por la exención de 75%', () => {
+    const normal = calculatePermisoCirculacion({
+      valorVehiculo: 10_000_000,
+      electricoHibridoElegible: false,
     });
-    const antiguo = calculatePermisoCirculacion({
-      valorVehiculo: 8_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 25,
-      esZonaCarga: false,
-      esPrimeraVez: false,
+    const elegible = calculatePermisoCirculacion({
+      valorVehiculo: 10_000_000,
+      electricoHibridoElegible: true,
     });
-    expect(antiguo.factorAntiguedad).toBe(0.5);
-    expect(antiguo.permisoTotal).toBeCloseTo(Math.round(nuevo.permisoTotal / 2), -2);
+    expect(elegible.permisoTotalEstimado).toBe(
+      normal.permisoTotalEstimado - Math.round(normal.permisoTotalEstimado * 0.75),
+    );
   });
 
-  it('progresividad: tasación alta paga tasa marginal mayor', () => {
-    const bajo = calculatePermisoCirculacion({
-      valorVehiculo: 2_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: false,
+  it('las cuotas base suman el total anual', () => {
+    const result = calculatePermisoCirculacion({
+      valorVehiculo: 7_000_000,
+      electricoHibridoElegible: false,
     });
-    const alto = calculatePermisoCirculacion({
-      valorVehiculo: 30_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: false,
-    });
-    expect(alto.tasaEfectiva).toBeGreaterThan(bajo.tasaEfectiva);
+    expect(result.cuotaBase1 + result.cuotaBase2).toBe(result.permisoTotalEstimado);
   });
 
-  it('primera vez prorratea el permiso por meses restantes', () => {
-    const completo = calculatePermisoCirculacion({
-      valorVehiculo: 5_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: false,
-    });
-    const seisMeses = calculatePermisoCirculacion({
-      valorVehiculo: 5_000_000,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: true,
-      mesesRestantes: 6,
-    });
-    expect(Math.abs(seisMeses.permisoTotal - completo.permisoTotal / 2)).toBeLessThanOrEqual(1);
-    expect(seisMeses.prorrateoPrimeraVez).toBeGreaterThan(0);
-    expect(seisMeses.cuota1 + seisMeses.cuota2).toBe(seisMeses.permisoTotal);
-  });
-
-  it('valor cero retorna permiso cero', () => {
-    const r = calculatePermisoCirculacion({
+  it('tasación cero devuelve cero', () => {
+    const result = calculatePermisoCirculacion({
       valorVehiculo: 0,
-      tipoVehiculo: 'automovil',
-      antiguedadVehiculo: 0,
-      esZonaCarga: false,
-      esPrimeraVez: false,
+      electricoHibridoElegible: false,
     });
-    expect(r.permisoTotal).toBe(0);
+    expect(result.permisoTotalEstimado).toBe(0);
   });
 });

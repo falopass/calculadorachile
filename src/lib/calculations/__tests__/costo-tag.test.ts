@@ -1,112 +1,34 @@
-// ============================================
-// Tests de costo TAG (autopistas concesionadas)
-// ----------------------------------------------
-// Verifica las tarifas por categoría de vehículo, el recargo +50%
-// por usuario sin TAG y el costo mensual/anual.
-// ============================================
-
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { calculateCostoTag } from '../costo-tag';
-import { TAG_RUTAS, TAG_RECARGO_SIN_TAG } from '@/lib/values/constants';
 
 describe('calculateCostoTag', () => {
-  it('Santiago–Rancagua categoría 1 usa la tarifa de TAG_RUTAS', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_rancagua',
-      viajesMes: 10,
-      tieneConvenio: true,
-      categoria: 1,
-    });
-    expect(r.costoPorViaje).toBe(TAG_RUTAS['santiago-rancagua'].categoria1);
+  it('multiplica la tarifa declarada por las pasadas del mes', () => {
+    const result = calculateCostoTag({ tarifaPorPaso: 1_250, pasadasMes: 20 });
+    expect(result.costoVariableMensual).toBe(25_000);
+    expect(result.costoMensual).toBe(25_000);
   });
 
-  it('categoría 2 (camioneta) cuesta más que categoría 1 (auto)', () => {
-    const auto = calculateCostoTag({
-      peajes: 'santiago_valparaiso',
-      viajesMes: 5,
-      categoria: 1,
+  it('suma cargos fijos y otros cargos separados', () => {
+    const result = calculateCostoTag({
+      tarifaPorPaso: 1_000,
+      pasadasMes: 10,
+      cargoFijoMensual: 700,
+      otrosCargosMensuales: 2_300,
     });
-    const camioneta = calculateCostoTag({
-      peajes: 'santiago_valparaiso',
-      viajesMes: 5,
-      categoria: 2,
-    });
-    expect(camioneta.costoPorViaje).toBeGreaterThan(auto.costoPorViaje);
+    expect(result.costoMensual).toBe(13_000);
   });
 
-  it('sin TAG aplica recargo +50% sobre la tarifa con TAG', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_rancagua',
-      viajesMes: 10,
-      tieneConvenio: false,
-      categoria: 1,
-    });
-    const conTag = TAG_RUTAS['santiago-rancagua'].categoria1;
-    expect(r.costoPorViajeSinTag).toBe(
-      Math.round(conTag * (1 + TAG_RECARGO_SIN_TAG / 100)),
-    );
-    expect(r.costoPorViaje).toBe(r.costoPorViajeSinTag);
+  it('proyecta doce meses sin inventar descuentos o recargos', () => {
+    const result = calculateCostoTag({ tarifaPorPaso: 2_000, pasadasMes: 8 });
+    expect(result.costoAnual).toBe(result.costoMensual * 12);
   });
 
-  it('costoMensual = costoPorViaje × viajesMes', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_rancagua',
-      viajesMes: 8,
-      tieneConvenio: true,
-      categoria: 1,
+  it('normaliza entradas negativas a cero', () => {
+    const result = calculateCostoTag({
+      tarifaPorPaso: -1,
+      pasadasMes: -4,
+      cargoFijoMensual: -2,
     });
-    expect(r.costoMensual).toBe(r.costoPorViaje * 8);
-  });
-
-  it('costoAnual = costoMensual × 12', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_rancagua',
-      viajesMes: 4,
-      tieneConvenio: true,
-      categoria: 1,
-    });
-    expect(r.costoAnual).toBe(r.costoMensual * 12);
-  });
-
-  it('viajes negativos se acotan a 0', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_rancagua',
-      viajesMes: -5,
-    });
-    expect(r.viajesMes).toBe(0);
-    expect(r.costoMensual).toBe(0);
-  });
-
-  it('ahorro anual por usar TAG > 0 cuando hay convenio', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_valparaiso',
-      viajesMes: 6,
-      tieneConvenio: true,
-      categoria: 1,
-    });
-    expect(r.ahorroPorTagAnual).toBeGreaterThan(0);
-  });
-
-  it('ahorro anual = 0 cuando NO hay convenio (paga la tarifa más alta)', () => {
-    const r = calculateCostoTag({
-      peajes: 'santiago_valparaiso',
-      viajesMes: 6,
-      tieneConvenio: false,
-    });
-    expect(r.ahorroPorTagAnual).toBe(0);
-  });
-
-  it('urbano_santiago usa la tarifa urbana por categoría', () => {
-    const auto = calculateCostoTag({
-      peajes: 'urbano_santiago',
-      viajesMes: 20,
-      categoria: 1,
-    });
-    const camion = calculateCostoTag({
-      peajes: 'urbano_santiago',
-      viajesMes: 20,
-      categoria: 3,
-    });
-    expect(camion.costoPorViaje).toBeGreaterThan(auto.costoPorViaje);
+    expect(result.costoMensual).toBe(0);
   });
 });

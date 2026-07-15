@@ -1,212 +1,113 @@
 // ============================================
-// Cálculo de Costo Total Empleado para PYME Chile 2026
+// Costo mensual de contratación para empleadores 2026
 // ============================================
 
 import {
   AFP,
   AFP_OBLIGATORIA_PCT,
+  GRATIFICACION,
+  INGRESO_MINIMO,
+  MUTUAL,
   SALUD,
   SEGURO_CESANTIA,
-  GRATIFICACION,
-  MUTUAL,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
+
+export type PeriodoCotizacionEmpleador = 'hasta_julio_2026' | 'desde_agosto_2026';
 
 export interface CostoEmpleadoInput {
   sueldoBruto: number;
   afp: keyof typeof AFP;
   saludTipo: 'fonasa' | 'isapre';
   contratoIndefinido: boolean;
-  gratificacionIncluida: boolean;
-  horasExtra: number;
-  montoHorasExtra: number;
+  agregarGratificacion: boolean;
+  periodoCotizacion: PeriodoCotizacionEmpleador;
 }
 
 export interface CostoEmpleadoResult {
   sueldoBruto: number;
   gratificacion: number;
-  totalHaberes: number;
-  descuentosLegales: {
-    afp: number;
-    salud: number;
-    seguroCesantia: number;
-  };
+  totalHaberesImponibles: number;
+  periodoCotizacion: PeriodoCotizacionEmpleador;
+  descuentosTrabajador: { afp: number; salud: number; seguroCesantia: number };
   aportesEmpleador: {
+    pensionReforma: number;
+    sisSeparado: number;
     seguroCesantia: number;
-    sis: number;
     mutual: number;
   };
   costoTotalMensual: number;
   costoTotalAnual: number;
-  factorPrevisional: number;
+  factorCosto: number;
 }
 
 /**
- * Tasa de mutual de seguridad (Ley 16.744). Cotización básica fija
- * del 0,90% + cotización adicional variable según giro (0% a 3,4%).
- * Se usa el promedio referencial definido en constants.ts.
- */
-const MUTUAL_TASA = MUTUAL.total_referencial;
-
-/**
- * Calcula el costo total de un empleado para la empresa.
- *
- * Bug histórico: la versión anterior duplicaba el 10% de AFP (lo
- * descontaba al trabajador y lo sumaba como aporte del empleador),
- * y duplicaba el 7% de salud al sumarlo como aporte empleador.
- * Ambos descuentos los paga íntegramente el trabajador. El empleador
- * sólo aporta SIS, seguro de cesantía y mutual de seguridad.
- *
- * Bases legales:
- *  - 10% AFP del trabajador: D.L. 3500 Art. 17.
- *  - SIS lo paga el empleador: Ley 20.255.
- *  - Mutual de seguridad: Ley 16.744.
- *  - Seguro de cesantía: Ley 19.728.
- *
- * @param input Datos para el cálculo.
- * @returns Desglose completo del costo empleador.
+ * Entre agosto de 2025 y julio de 2026, el empleador paga 1% por la reforma
+ * previsional y el SIS vigente por separado (1,62% desde abril de 2026).
+ * Desde remuneraciones de agosto de 2026, la carga previsional total es 3,5%:
+ * 1% ya vigente más 2,5% destinado al FAPP, que incluye el financiamiento SIS.
  */
 export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleadoResult {
-  const {
-    sueldoBruto,
-    afp,
-    saludTipo,
-    contratoIndefinido,
-    gratificacionIncluida,
-    horasExtra,
-    montoHorasExtra,
-  } = input;
-
-  // Gratificación legal mensualizada (tope 4,75 IMM/12 ya considerado en
-  // la calculadora de gratificación). Aquí se usa el 25% directo si el
-  // empleador la incluye en el sueldo. El detalle exacto vive en
-  // calculations/gratificacion.ts.
-  const gratificacion = gratificacionIncluida
-    ? sueldoBruto * (GRATIFICACION.porcentaje / 100)
+  const sueldoBruto = Math.max(0, input.sueldoBruto);
+  const topeGratificacionMensual = (INGRESO_MINIMO.mensual * 4.75) / 12;
+  const gratificacion = input.agregarGratificacion
+    ? Math.min(sueldoBruto * (GRATIFICACION.porcentaje / 100), topeGratificacionMensual)
     : 0;
+  const totalHaberesImponibles = sueldoBruto + gratificacion;
+  const afp = AFP[input.afp] ?? AFP.uno;
 
-  const totalHaberes = sueldoBruto + gratificacion;
-
-  // ---------- Descuentos del trabajador ----------
-  const afpData = AFP[afp];
-  // 10% obligatorio (D.L. 3500 Art. 17) + comisión variable (esta
-  // última también la paga el trabajador).
   const descuentoAFP =
-    totalHaberes * ((AFP_OBLIGATORIA_PCT + afpData.comision) / 100);
-
-  let descuentoSalud: number;
-  if (saludTipo === 'fonasa') {
-    descuentoSalud = totalHaberes * (SALUD.fonasa.tasa / 100);
-  } else {
-    // Isapre: 7% mínimo legal del imponible (Art. 84 D.L. 3500).
-    descuentoSalud = totalHaberes * (SALUD.isapre.tasa_minima / 100);
-  }
-
-  const descuentoSeguroCesantia = contratoIndefinido
-    ? totalHaberes * (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100)
+    totalHaberesImponibles * ((AFP_OBLIGATORIA_PCT + afp.comision) / 100);
+  const tasaSalud =
+    input.saludTipo === 'fonasa' ? SALUD.fonasa.tasa : SALUD.isapre.tasa_minima;
+  const descuentoSalud = totalHaberesImponibles * (tasaSalud / 100);
+  const descuentoCesantia = input.contratoIndefinido
+    ? totalHaberesImponibles * (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100)
     : 0;
 
-  // ---------- Aportes del empleador ----------
-  // El empleador paga SIS, seguro de cesantía empleador y mutual.
-  // NO paga el 10% AFP ni el 7% salud (esos son del trabajador).
-  const aporteSIS = totalHaberes * (afpData.sis / 100);
-  const aporteSeguroCesantia = contratoIndefinido
-    ? totalHaberes * (SEGURO_CESANTIA.contrato_indefinido.empleador / 100)
-    : totalHaberes * (SEGURO_CESANTIA.contrato_plazo_fijo.empleador / 100);
-  const aporteMutual = totalHaberes * (MUTUAL_TASA / 100);
-
-  const totalAportesEmpleador = aporteSIS + aporteSeguroCesantia + aporteMutual;
-
-  // Horas extra (pagadas además del sueldo bruto)
-  const pagoHorasExtra = horasExtra * montoHorasExtra;
-
-  // Costo mensual: sueldo bruto + gratificación + aportes empleador + horas extra
-  const costoTotalMensual = totalHaberes + totalAportesEmpleador + pagoHorasExtra;
-  const costoTotalAnual = costoTotalMensual * 12;
-
-  const factorPrevisional = sueldoBruto > 0 ? costoTotalMensual / sueldoBruto : 0;
+  const desdeAgosto = input.periodoCotizacion === 'desde_agosto_2026';
+  const pensionReforma = totalHaberesImponibles * ((desdeAgosto ? 3.5 : 1) / 100);
+  const sisSeparado = desdeAgosto ? 0 : totalHaberesImponibles * (afp.sis / 100);
+  const seguroCesantia = input.contratoIndefinido
+    ? totalHaberesImponibles * (SEGURO_CESANTIA.contrato_indefinido.empleador / 100)
+    : totalHaberesImponibles * (SEGURO_CESANTIA.contrato_plazo_fijo.empleador / 100);
+  const mutual = totalHaberesImponibles * (MUTUAL.total_referencial / 100);
+  const costoTotalMensual =
+    totalHaberesImponibles + pensionReforma + sisSeparado + seguroCesantia + mutual;
 
   return {
-    sueldoBruto,
+    sueldoBruto: Math.round(sueldoBruto),
     gratificacion: Math.round(gratificacion),
-    totalHaberes: Math.round(totalHaberes),
-    descuentosLegales: {
+    totalHaberesImponibles: Math.round(totalHaberesImponibles),
+    periodoCotizacion: input.periodoCotizacion,
+    descuentosTrabajador: {
       afp: Math.round(descuentoAFP),
       salud: Math.round(descuentoSalud),
-      seguroCesantia: Math.round(descuentoSeguroCesantia),
+      seguroCesantia: Math.round(descuentoCesantia),
     },
     aportesEmpleador: {
-      seguroCesantia: Math.round(aporteSeguroCesantia),
-      sis: Math.round(aporteSIS),
-      mutual: Math.round(aporteMutual),
+      pensionReforma: Math.round(pensionReforma),
+      sisSeparado: Math.round(sisSeparado),
+      seguroCesantia: Math.round(seguroCesantia),
+      mutual: Math.round(mutual),
     },
     costoTotalMensual: Math.round(costoTotalMensual),
-    costoTotalAnual: Math.round(costoTotalAnual),
-    factorPrevisional: Math.round(factorPrevisional * 100) / 100,
+    costoTotalAnual: Math.round(costoTotalMensual * 12),
+    factorCosto: sueldoBruto > 0 ? Math.round((costoTotalMensual / sueldoBruto) * 100) / 100 : 0,
   };
 }
 
-/**
- * Convierte el resultado a formato de CalculatorResult[]
- */
 export function costoEmpleadoToResults(result: CostoEmpleadoResult): CalculatorResult[] {
-  const totalAportes =
-    result.aportesEmpleador.sis +
-    result.aportesEmpleador.seguroCesantia +
-    result.aportesEmpleador.mutual;
-
+  const aportes = result.aportesEmpleador;
   return [
-    {
-      label: 'Costo Total Mensual',
-      value: result.costoTotalMensual,
-      format: 'CLP',
-      highlight: true,
-    },
-    {
-      label: 'Costo Total Anual',
-      value: result.costoTotalAnual,
-      format: 'CLP',
-      highlight: true,
-    },
-    {
-      label: 'Factor Previsional (costo / sueldo)',
-      value: result.factorPrevisional,
-      format: 'number',
-    },
-    {
-      label: 'Sueldo Bruto',
-      value: result.sueldoBruto,
-      format: 'CLP',
-    },
-    {
-      label: 'Gratificación',
-      value: result.gratificacion,
-      format: 'CLP',
-    },
-    {
-      label: 'Total Haberes',
-      value: result.totalHaberes,
-      format: 'CLP',
-    },
-    {
-      label: 'Aportes Empleador (SIS + Cesantía + Mutual)',
-      value: totalAportes,
-      format: 'CLP',
-    },
-    {
-      label: 'SIS Empleador',
-      value: result.aportesEmpleador.sis,
-      format: 'CLP',
-    },
-    {
-      label: 'Seguro Cesantía Empleador',
-      value: result.aportesEmpleador.seguroCesantia,
-      format: 'CLP',
-    },
-    {
-      label: 'Mutual de Seguridad',
-      value: result.aportesEmpleador.mutual,
-      format: 'CLP',
-    },
+    { label: 'Costo mensual estimado', value: result.costoTotalMensual, format: 'CLP', highlight: true },
+    { label: 'Costo anual estimado', value: result.costoTotalAnual, format: 'CLP' },
+    { label: 'Haberes imponibles', value: result.totalHaberesImponibles, format: 'CLP' },
+    { label: 'Gratificación agregada', value: result.gratificacion, format: 'CLP' },
+    { label: 'Cotización previsional del empleador', value: aportes.pensionReforma, format: 'CLP' },
+    { label: 'SIS separado', value: aportes.sisSeparado, format: 'CLP' },
+    { label: 'Seguro de cesantía del empleador', value: aportes.seguroCesantia, format: 'CLP' },
+    { label: 'Mutual de seguridad estimada', value: aportes.mutual, format: 'CLP' },
+    { label: 'Factor costo / sueldo', value: result.factorCosto, format: 'number' },
   ];
 }

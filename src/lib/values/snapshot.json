@@ -3,14 +3,14 @@
   "utm": 71649,
   "dolarObservado": 924.78,
   "euro": 1056.29,
-  "ipcMensual": -0.2,
+  "ipcMensual": 0,
   "asOf": "2026-07-15T04:00:00.000Z",
   "sources": {
     "uf": "mindicador",
     "utm": "mindicador",
     "dolarObservado": "mindicador",
     "euro": "mindicador",
-    "ipcMensual": "mindicador"
+    "ipcMensual": "INE (IPC junio 2026)"
   },
   "generatedAt": "2026-07-15T14:18:21.924Z"
 }

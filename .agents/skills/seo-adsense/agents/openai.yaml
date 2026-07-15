@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO y AdSense"
+  short_description: "Protege SEO técnico, schema y monetización"
+  default_prompt: "Usa $seo-adsense para revisar o implementar este cambio SEO en CalculaChile."

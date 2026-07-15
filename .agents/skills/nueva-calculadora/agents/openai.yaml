@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nueva calculadora"
+  short_description: "Conecta una calculadora YMYL de extremo a extremo"
+  default_prompt: "Usa $nueva-calculadora para implementar una calculadora completa en CalculaChile."
