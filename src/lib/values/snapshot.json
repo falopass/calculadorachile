@@ -4,7 +4,7 @@
   "dolarObservado": 924.5,
   "euro": 1060.81,
   "ipcMensual": -0.2,
-  "asOf": "2026-07-18T04:00:00.000Z",
+  "asOf": "2026-07-19T04:00:00.000Z",
   "sources": {
     "uf": "mindicador",
     "utm": "mindicador",
@@ -12,5 +12,5 @@
     "euro": "mindicador",
     "ipcMensual": "mindicador"
   },
-  "generatedAt": "2026-07-18T13:55:41.264Z"
+  "generatedAt": "2026-07-19T13:59:31.215Z"
 }
