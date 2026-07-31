@@ -26,10 +26,7 @@
  * ============================================================================
  */
 
-export const seoOverrides: Record<
-  string,
-  { seoTitle: string; seoDescription: string }
-> = {
+export const seoOverrides: Record<string, { seoTitle: string; seoDescription: string }> = {
   // ══════════════════════════════════════════════════════════════════════════
   // CALCULADORAS — GSC 24 h: alta impresión / bajo CTR o pos media
   // ══════════════════════════════════════════════════════════════════════════
@@ -215,24 +212,6 @@ export const seoOverrides: Record<
       'Cuánto te descuentan de AFP, salud y cesantía en 2026. Ejemplo de bruto a líquido y calculadora gratis. Chile actualizado.', // 126
   },
 
-  'guia-horas-extra-chile': {
-    seoTitle: 'Horas Extra Chile 2026: recargo 50% y 42 horas', // 48
-    seoDescription:
-      'Cómo se pagan las horas extra en Chile 2026 con jornada de 42 horas. Recargo legal, topes y calculadora. Dirección del Trabajo.', // 130
-  },
-
-  'guia-iva-chile-2026': {
-    seoTitle: 'IVA Chile 2026: 19% y cómo calcularlo (SII)', // 44
-    seoDescription:
-      'Guía del IVA 19% en Chile 2026: agregar, quitar y ejemplos en pesos. Enlace a calculadora gratis. Base legal DL 825 / SII.', // 126
-  },
-
-  'boleta-honorarios-completo': {
-    seoTitle: 'Boleta de Honorarios 2026: retención 15,25% explicada', // 54
-    seoDescription:
-      'Todo sobre boleta de honorarios 2026: tasa 15,25%, líquido vs bruto y Operación Renta. Calculadora gratis según SII.', // 122
-  },
-
   'cae-renegociacion-condonacion-2026': {
     seoTitle: 'CAE 2026: cuota, renegociación y condonación', // 46
     seoDescription:
@@ -308,7 +287,6 @@ export const seoOverrides: Record<
       'Qué hacer tras un despido: finiquito, plazos, Seguro de Cesantía y reinserción. Checklist práctico con calculadoras gratis.', // 128
   },
   // Nota: hub /cesantia usa buildPageMetadata en page.tsx (title/desc allí).
-
 
   // ══════════════════════════════════════════════════════════════════════════
   // GUÍAS PILLAR

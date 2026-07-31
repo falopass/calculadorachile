@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, Calculator as CalculatorIcon, ArrowRight, TrendingUp } from 'lucide-react';
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
 
 /**
@@ -36,7 +36,7 @@ export default function SearchHero() {
   const quickLinks = useMemo(
     () =>
       quickSlugs
-        .map((slug) => calculators.find((c) => c.slug === slug))
+        .map((slug) => discoverableCalculators.find((c) => c.slug === slug))
         .filter((c): c is Calculator => Boolean(c)),
     [],
   );
@@ -45,7 +45,7 @@ export default function SearchHero() {
     const q = query.trim().toLowerCase();
     if (!q) return [];
 
-    return calculators
+    return discoverableCalculators
       .filter((c) => {
         const haystack = `${c.name} ${c.description} ${c.keywords?.join(' ') ?? ''}`.toLowerCase();
         return haystack.includes(q);
@@ -132,8 +132,8 @@ export default function SearchHero() {
                 </ul>
               ) : query.trim().length >= 2 ? (
                 <div className="px-5 py-4 text-sm text-[var(--foreground-muted)]">
-                  No encontramos calculadoras para “{query.trim()}”. Presiona{' '}
-                  <strong>Enter</strong> para buscar en todo el sitio.
+                  No encontramos calculadoras para “{query.trim()}”. Presiona <strong>Enter</strong>{' '}
+                  para buscar en todo el sitio.
                 </div>
               ) : null}
             </div>

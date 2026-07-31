@@ -63,7 +63,7 @@ const CATEGORY_LABELS: Record<Calculator['category'], string> = {
 function deriveFeatures(calculator: Calculator): string[] {
   const baseFeatures = [
     'Cálculo en tiempo real',
-    'Valores oficiales actualizados a 2026',
+    'Fuentes y fecha de revisión visibles',
     'Sin registro ni descargas',
     'Resultados con desglose detallado',
   ];
@@ -113,12 +113,17 @@ function buildHowToSteps(calculator: Calculator): {
   name: string;
   text: string;
 }[] {
+  if (calculator.methodology) {
+    return calculator.methodology.calculationSteps.map((step, index) => ({
+      name: `Paso ${index + 1} del cálculo`,
+      text: clamp(step),
+    }));
+  }
+
   const steps: { name: string; text: string }[] = [];
 
   // Paso 1: inputs requeridos
-  const requiredInputs = calculator.inputs
-    .filter((i) => i.required)
-    .slice(0, 3);
+  const requiredInputs = calculator.inputs.filter((i) => i.required).slice(0, 3);
   if (requiredInputs.length > 0) {
     const labels = requiredInputs.map((i) => `“${i.label}”`).join(', ');
     steps.push({
@@ -155,10 +160,7 @@ function buildHowToSteps(calculator: Calculator): {
     const firstFaq = calculator.faq[0];
     steps.push({
       name: 'Revisa el resultado en tiempo real',
-      text: clamp(
-        `El cálculo se ejecuta automáticamente. ${firstFaq.answer}`,
-        220,
-      ),
+      text: clamp(`El cálculo se ejecuta automáticamente. ${firstFaq.answer}`, 220),
     });
   } else {
     steps.push({
@@ -171,9 +173,9 @@ function buildHowToSteps(calculator: Calculator): {
 
   // Paso 4: bases legales / docs
   steps.push({
-    name: 'Consulta las bases legales del cálculo',
+    name: 'Consulta las fuentes y limitaciones',
     text: clamp(
-      `Bajo la calculadora encontrarás un FAQ con las normativas que respaldan el cálculo (Código del Trabajo, SII, Banco Central). Cada resultado de ${calculator.name.toLowerCase()} cita su fuente oficial para que puedas verificarlo.`,
+      `Bajo la calculadora encontrarás las fuentes declaradas, supuestos y limitaciones de ${calculator.name.toLowerCase()}. Contrasta la estimación con el documento o trámite aplicable.`,
     ),
   });
 
@@ -193,8 +195,7 @@ export default function SeoStructuredData({
   imageUrl,
   guideUrl,
 }: SeoStructuredDataProps) {
-  const categoryLabel =
-    CATEGORY_LABELS[calculator.category] ?? calculator.category;
+  const categoryLabel = CATEGORY_LABELS[calculator.category] ?? calculator.category;
 
   const softwareSchema = softwareApplicationSchema({
     name: calculator.name,
@@ -240,7 +241,7 @@ export default function SeoStructuredData({
     ]),
     howToSchema({
       name: `Cómo calcular ${calculator.name.toLowerCase()} en Chile`,
-      description: `Pasos para usar la calculadora de ${calculator.name.toLowerCase()} con valores oficiales 2026.`,
+      description: `Pasos visibles para comprender cómo se obtiene la estimación de ${calculator.name.toLowerCase()}.`,
       url,
       totalTime: 'PT2M',
       steps: buildHowToSteps(calculator),

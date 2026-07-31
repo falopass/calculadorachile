@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { TrendingUp, ArrowRight } from 'lucide-react';
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 
 /**
  * Bloque home “Más buscadas” — pageviews de entrada + profundidad de sesión.
@@ -29,9 +29,9 @@ const SHORT: Record<string, string> = {
 };
 
 export default function PopularCalculators() {
-  const items = POPULAR_SLUGS.map((slug) => calculators.find((c) => c.slug === slug)).filter(
-    Boolean,
-  ) as typeof calculators;
+  const items = POPULAR_SLUGS.map((slug) =>
+    discoverableCalculators.find((c) => c.slug === slug),
+  ).filter(Boolean) as typeof discoverableCalculators;
 
   if (items.length === 0) return null;
 

@@ -51,12 +51,37 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface CalculatorMethodology {
+  summary: string;
+  calculationSteps: string[];
+  assumptions: string[];
+  limitations: string[];
+  workedExample?: {
+    title: string;
+    inputs: string[];
+    development: string[];
+    result: string;
+  };
+}
+
 export interface Calculator {
   id: string;
   name: string;
   description: string;
   slug: string;
-  category: 'sueldo' | 'impuestos' | 'beneficios' | 'conversiones' | 'familia' | 'vivienda' | 'vehiculos' | 'empresas' | 'servicios' | 'pension' | 'educacion' | 'hogar';
+  category:
+    | 'sueldo'
+    | 'impuestos'
+    | 'beneficios'
+    | 'conversiones'
+    | 'familia'
+    | 'vivienda'
+    | 'vehiculos'
+    | 'empresas'
+    | 'servicios'
+    | 'pension'
+    | 'educacion'
+    | 'hogar';
   inputs: CalculatorInput[];
   icon?: string;
   /** Preguntas frecuentes para SEO y usuarios */
@@ -108,4 +133,10 @@ export interface Calculator {
     url: string;
     note?: string;
   }>;
+  /**
+   * Explicación visible de cómo se obtiene el resultado. Es obligatoria
+   * para las calculadoras indexables y debe describir su lógica concreta,
+   * supuestos y límites sin presentar la estimación como asesoría.
+   */
+  methodology?: CalculatorMethodology;
 }

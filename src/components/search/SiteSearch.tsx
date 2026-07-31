@@ -29,13 +29,10 @@ import {
   ArrowRight,
 } from 'lucide-react';
 
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
 import { articles } from '@/data/articles';
-import {
-  CALCULATOR_CATEGORY_LIST,
-  CATEGORY_LABELS,
-} from '@/lib/calculatorCategories';
+import { CALCULATOR_CATEGORY_LIST, CATEGORY_LABELS } from '@/lib/calculatorCategories';
 
 type ResultKind = 'calculator' | 'guia' | 'article' | 'category';
 
@@ -65,20 +62,14 @@ function useSearchIndex() {
       boost: number;
     }[] = [];
 
-    for (const c of calculators) {
+    for (const c of discoverableCalculators) {
       const cat = CATEGORY_LABELS[c.category] ?? c.category;
       entries.push({
         kind: 'calculator',
         title: c.name,
         subtitle: cat,
         href: `/calculadoras/${c.slug}`,
-        haystack: [
-          c.name,
-          c.description,
-          c.slug,
-          cat,
-          ...(c.keywords ?? []),
-        ]
+        haystack: [c.name, c.description, c.slug, cat, ...(c.keywords ?? [])]
           .join(' ')
           .toLowerCase(),
         boost: 1.5,
@@ -91,13 +82,7 @@ function useSearchIndex() {
         title: g.title,
         subtitle: `Guía · ${g.categoryLabel} · ${g.readingTime} min`,
         href: `/guias/${g.slug}`,
-        haystack: [
-          g.title,
-          g.description,
-          g.intent,
-          g.categoryLabel,
-          ...g.keywords,
-        ]
+        haystack: [g.title, g.description, g.intent, g.categoryLabel, ...g.keywords]
           .join(' ')
           .toLowerCase(),
         boost: 1.2,
@@ -110,14 +95,7 @@ function useSearchIndex() {
         title: a.title,
         subtitle: `Blog · ${a.category}`,
         href: `/blog/${a.slug}`,
-        haystack: [
-          a.title,
-          a.description,
-          a.category,
-          ...a.keywords,
-        ]
-          .join(' ')
-          .toLowerCase(),
+        haystack: [a.title, a.description, a.category, ...a.keywords].join(' ').toLowerCase(),
         boost: 1.0,
       });
     }
@@ -128,12 +106,7 @@ function useSearchIndex() {
         title: cat.pluralLabel,
         subtitle: 'Categoría',
         href: `/categoria/${cat.id}`,
-        haystack: [
-          cat.label,
-          cat.pluralLabel,
-          cat.description,
-          ...cat.keywords,
-        ]
+        haystack: [cat.label, cat.pluralLabel, cat.description, ...cat.keywords]
           .join(' ')
           .toLowerCase(),
         boost: 0.8,
@@ -196,10 +169,7 @@ function scoreEntry(
 }
 
 /** Configuración visual por tipo de resultado. */
-const KIND_META: Record<
-  ResultKind,
-  { label: string; icon: typeof Search; color: string }
-> = {
+const KIND_META: Record<ResultKind, { label: string; icon: typeof Search; color: string }> = {
   calculator: {
     label: 'Calculadora',
     icon: CalculatorIcon,
@@ -256,7 +226,7 @@ export default function SiteSearch({
   const router = useRouter();
   const params = useSearchParams();
 
-  const initialQuery = syncWithUrl ? params.get('q') ?? '' : '';
+  const initialQuery = syncWithUrl ? (params.get('q') ?? '') : '';
   const [query, setQuery] = useState(initialQuery);
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -430,8 +400,7 @@ export default function SiteSearch({
                 No encontramos resultados para «{query}».
               </p>
               <p className="text-sm text-[var(--foreground-muted)]">
-                Prueba con palabras más cortas o revisa el catálogo completo de
-                calculadoras.
+                Prueba con palabras más cortas o revisa el catálogo completo de calculadoras.
               </p>
             </div>
           ) : (
@@ -439,49 +408,47 @@ export default function SiteSearch({
               <p className="text-sm text-[var(--foreground-muted)]">
                 {results.length} {results.length === 1 ? 'resultado' : 'resultados'} para «{query}»
               </p>
-              {(['calculator', 'guia', 'article', 'category'] as ResultKind[]).map(
-                (kind) => {
-                  const list = grouped?.[kind];
-                  if (!list || list.length === 0) return null;
-                  const meta = KIND_META[kind];
-                  const Icon = meta.icon;
-                  return (
-                    <section key={kind}>
-                      <h2 className="flex items-center gap-2 text-base font-semibold text-[var(--foreground)] mb-3">
-                        <span
-                          className={`inline-grid h-7 w-7 place-items-center rounded-md ${meta.color}`}
-                        >
-                          <Icon className="h-3.5 w-3.5" />
-                        </span>
-                        {meta.label}s
-                        <span className="text-xs font-normal text-[var(--foreground-muted)]">
-                          ({list.length})
-                        </span>
-                      </h2>
-                      <ul className="space-y-1.5">
-                        {list.map((r) => (
-                          <li key={r.href}>
-                            <Link
-                              href={r.href}
-                              className="group flex items-center justify-between gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-3 hover:border-[var(--color-primary-500)]/40 hover:shadow-sm transition-all"
-                            >
-                              <span className="flex-1 min-w-0">
-                                <span className="block text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--color-primary-600)] transition-colors line-clamp-1">
-                                  {r.title}
-                                </span>
-                                <span className="block text-xs text-[var(--foreground-muted)] line-clamp-1">
-                                  {r.subtitle}
-                                </span>
+              {(['calculator', 'guia', 'article', 'category'] as ResultKind[]).map((kind) => {
+                const list = grouped?.[kind];
+                if (!list || list.length === 0) return null;
+                const meta = KIND_META[kind];
+                const Icon = meta.icon;
+                return (
+                  <section key={kind}>
+                    <h2 className="flex items-center gap-2 text-base font-semibold text-[var(--foreground)] mb-3">
+                      <span
+                        className={`inline-grid h-7 w-7 place-items-center rounded-md ${meta.color}`}
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                      </span>
+                      {meta.label}s
+                      <span className="text-xs font-normal text-[var(--foreground-muted)]">
+                        ({list.length})
+                      </span>
+                    </h2>
+                    <ul className="space-y-1.5">
+                      {list.map((r) => (
+                        <li key={r.href}>
+                          <Link
+                            href={r.href}
+                            className="group flex items-center justify-between gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-3 hover:border-[var(--color-primary-500)]/40 hover:shadow-sm transition-all"
+                          >
+                            <span className="flex-1 min-w-0">
+                              <span className="block text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--color-primary-600)] transition-colors line-clamp-1">
+                                {r.title}
                               </span>
-                              <ArrowRight className="h-3.5 w-3.5 text-[var(--foreground-muted)] flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                  );
-                },
-              )}
+                              <span className="block text-xs text-[var(--foreground-muted)] line-clamp-1">
+                                {r.subtitle}
+                              </span>
+                            </span>
+                            <ArrowRight className="h-3.5 w-3.5 text-[var(--foreground-muted)] flex-shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                );
+              })}
             </div>
           )}
         </div>

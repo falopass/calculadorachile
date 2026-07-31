@@ -53,7 +53,7 @@ export function organizationSchema(): Record<string, unknown> {
     },
     image: { '@id': SCHEMA_IDS.logo },
     description:
-      'Plataforma chilena con 39 calculadoras laborales, tributarias y financieras. Sueldo líquido, finiquito, UF, UTM, IVA, créditos, subsidios y más.',
+      'Plataforma chilena de calculadoras laborales, tributarias y financieras. Sueldo líquido, finiquito, UF, UTM, IVA, créditos, subsidios y más.',
     email: CONTACT_EMAIL,
     foundingDate: '2025',
     areaServed: { '@type': 'Country', name: 'Chile' },
@@ -67,11 +67,7 @@ export function organizationSchema(): Record<string, unknown> {
       'Cotizaciones previsionales AFP',
       'Permiso de circulación',
     ],
-    sameAs: [
-      'https://twitter.com/calculachile',
-      'https://github.com/falopass/calculadorachile',
-      'https://linkedin.com/company/calculachile',
-    ],
+    sameAs: ['https://github.com/falopass/calculadorachile'],
   };
 }
 
@@ -105,6 +101,11 @@ export function personSchema(): Record<string, unknown> {
     },
     email: AUTHOR.email,
     knowsAbout: AUTHOR.expertise,
+    affiliation: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Universidad de Talca',
+      url: 'https://www.utalca.cl/',
+    },
     worksFor: { '@id': SCHEMA_IDS.organization },
     sameAs: AUTHOR.sameAs,
   };
@@ -231,7 +232,7 @@ export function webPageSchema(args: {
  * El `author` referencia al `Person` con `@id` estable (E-E-A-T).
  * Para mantener compatibilidad, si se pasa `authorOrganization: true`
  * o no hay Person disponible, cae al modo Organization. La página
-  * `/acerca-de` debe inyectar el Person completo al menos una vez para
+ * La ruta `/acerca-de` debe inyectar el Person completo al menos una vez para
  * que Google pueda seguir la referencia.
  *
  * Incluye publisher, mainEntityOfPage para anclar al canonical, y
@@ -441,10 +442,7 @@ export function softwareApplicationSchema(args: {
   // `[data-speakable="description"]`.
   schema.speakable = {
     '@type': 'SpeakableSpecification',
-    cssSelector: [
-      '[data-speakable="title"]',
-      '[data-speakable="description"]',
-    ],
+    cssSelector: ['[data-speakable="title"]', '[data-speakable="description"]'],
   };
 
   return schema;
@@ -587,12 +585,7 @@ export function faqPageSchema(
       // selectores son tolerantes a las dos variantes (FAQ.tsx
       // usa botones con la pregunta + div de respuesta;
       // EnhancedFAQ.tsx usa <span> dentro del button + <p>).
-      cssSelector: [
-        '[itemprop="name"]',
-        '[itemprop="text"]',
-        '.faq-question',
-        '.faq-answer',
-      ],
+      cssSelector: ['[itemprop="name"]', '[itemprop="text"]', '.faq-question', '.faq-answer'],
     },
     mainEntity: items.map((item) => ({
       '@type': 'Question',

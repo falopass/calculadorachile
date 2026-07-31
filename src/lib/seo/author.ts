@@ -38,11 +38,11 @@ export interface AuthorProfile {
   bioShort: string;
   /** Bio extendida — varios párrafos en HTML, para /acerca-de. */
   bioLongHtml: string;
-  /** Áreas de expertise (mapean a `knowsAbout`). */
+  /** Temas que cubre el proyecto (mapean a `knowsAbout`). */
   expertise: string[];
   /** Credenciales / formación verificable. */
   credentials: string[];
-  /** URLs de perfiles públicos (Twitter, LinkedIn, GitHub). */
+  /** URLs de perfiles públicos verificables. */
   sameAs: string[];
   /** Email público. */
   email: string;
@@ -66,14 +66,14 @@ export const AUTHOR: AuthorProfile = {
   alternateName: 'falopass',
   jobTitle: 'Editor jefe y desarrollador de CalculaChile',
   bioShort:
-    'Creador y editor jefe de CalculaChile. Estudiante de Ingeniería Civil en Computación. Documenta las fórmulas y contrasta los valores publicados con fuentes oficiales chilenas.',
+    'Estudiante de tercer año de Ingeniería Civil en Computación en la Universidad de Talca; creador, desarrollador y editor de CalculaChile desde Curicó.',
   bioLongHtml: `
-    <p>Soy <strong>Diego Bravo Opazo</strong>, creador de CalculaChile. Estudio Ingeniería Civil en Computación (tercer año) y empecé el proyecto en 2025 porque cada vez que necesitaba calcular mi propio sueldo líquido, mi finiquito o el reajuste de mi arriendo, terminaba abriendo cinco pestañas distintas — y dos de las cinco daban resultados diferentes.</p>
-    <p>CalculaChile nació para resolver eso: un solo lugar, con cálculos verificables y citas a la ley o a la fuente oficial detrás de cada número. No inventamos fórmulas: las leemos del <a href="https://www.bcn.cl" target="_blank" rel="noopener">Código del Trabajo en BCN</a>, del <a href="https://www.sii.cl" target="_blank" rel="noopener">SII</a>, del <a href="https://www.spensiones.cl" target="_blank" rel="noopener">SP</a>, del <a href="https://www.dt.gob.cl" target="_blank" rel="noopener">DT</a> y del <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central</a>.</p>
+    <p>Soy <strong>Diego Bravo Opazo</strong>, creador, desarrollador y editor de CalculaChile. Curso tercer año de Ingeniería Civil en Computación en la Universidad de Talca y desarrollo el proyecto desde Curicó. Lo inicié en 2025 después de encontrar resultados distintos para cálculos cotidianos como sueldo líquido, finiquito y reajuste de arriendo.</p>
+    <p>CalculaChile reúne herramientas referenciales y explica las fuentes, supuestos y límites detrás de cada estimación. Para cada tema se priorizan documentos, fichas y normas específicas de organismos como BCN, SII, Superintendencia de Pensiones, Dirección del Trabajo y Banco Central.</p>
     <p>Las calculadoras se revisan con tres criterios antes de publicarse:</p>
     <ol>
-      <li><strong>Fórmula</strong> — implementada en TypeScript y acompañada por pruebas cuando la herramienta contiene reglas legales o valores críticos.</li>
-      <li><strong>Casos de borde</strong> — se comprueban escenarios donde la regla puede cambiar, como topes imponibles, jornadas parciales o tipos de contrato.</li>
+      <li><strong>Fórmula</strong> — implementada en TypeScript y acompañada por controles de regresión cuando la herramienta contiene reglas legales o valores críticos.</li>
+      <li><strong>Casos de borde</strong> — se prueban escenarios conocidos donde la regla puede cambiar, sin sustituir una revisión profesional del caso real.</li>
       <li><strong>Fuente y alcance</strong> — cada ficha identifica referencias oficiales, supuestos y situaciones que requieren revisión profesional.</li>
     </ol>
     <p>El sitio es código abierto en <a href="https://github.com/falopass/calculadorachile" target="_blank" rel="noopener">GitHub</a>. Si encuentras un cálculo incorrecto, escríbeme: prefiero corregirlo el mismo día a defender un error.</p>
@@ -88,15 +88,13 @@ export const AUTHOR: AuthorProfile = {
     'Sistema previsional y pensión garantizada universal (PGU)',
   ],
   credentials: [
-    'Estudiante Ingeniería Civil en Computación',
+    'Estudiante de tercer año de Ingeniería Civil en Computación en la Universidad de Talca',
     'Autor y mantenedor de CalculaChile desde 2025',
     'Desarrollador del repositorio público de CalculaChile',
   ],
   sameAs: [
     'https://github.com/falopass',
     'https://github.com/falopass/calculadorachile',
-    'https://twitter.com/calculachile',
-    'https://linkedin.com/company/calculachile',
   ],
   email: 'ddiegosebastianbb@gmail.com',
   url: absoluteUrl('/acerca-de'),
@@ -106,4 +104,3 @@ export const AUTHOR: AuthorProfile = {
   // estilizado en el propio HTML para la presentación visual.
   imageUrl: absoluteUrl('/logo.png'),
 };
-

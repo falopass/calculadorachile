@@ -52,7 +52,7 @@ const LiveValuesSection = memo(function LiveValuesSection() {
       <div className="flex items-center justify-between gap-3 px-4 py-2.5 border-b border-[var(--border)] bg-[var(--background-secondary)]/50">
         <div className="inline-flex items-center gap-2 text-sm font-medium text-[var(--foreground)]">
           <TrendingUp className="h-3.5 w-3.5 text-[var(--color-primary-500)]" />
-          Valores oficiales 2026
+          Valores de referencia
         </div>
         <div className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
           <Wifi
@@ -77,8 +77,8 @@ const LiveValuesSection = memo(function LiveValuesSection() {
         ))}
       </div>
       <p className="px-4 py-2 text-[11px] leading-snug text-[var(--foreground-muted)] border-t border-[var(--border)]">
-        Las calculadoras core (sueldo, UF, hipoteca, boleta) usan estos mismos
-        valores de UF/UTM al calcular.
+        Las calculadoras core (sueldo, UF, hipoteca, boleta) usan estos mismos valores de UF/UTM al
+        calcular.
       </p>
     </div>
   );

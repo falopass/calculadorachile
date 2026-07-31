@@ -52,6 +52,31 @@ const nextConfig: NextConfig = {
         destination: '/blog/tope-imponible-2026',
         permanent: true,
       },
+      {
+        source: '/blog/guia-horas-extra-chile',
+        destination: '/blog/horas-extra-jornada-42-horas-chile-2026',
+        permanent: true,
+      },
+      {
+        source: '/blog/vacaciones-proporcionales-guia',
+        destination: '/calculadoras/calculadora-vacaciones-proporcionales',
+        permanent: true,
+      },
+      {
+        source: '/blog/como-calcular-finiquito-chile',
+        destination: '/guias/finiquito-laboral-chile',
+        permanent: true,
+      },
+      {
+        source: '/blog/boleta-honorarios-completo',
+        destination: '/guias/iva-boleta-honorarios-chile',
+        permanent: true,
+      },
+      {
+        source: '/blog/guia-iva-chile-2026',
+        destination: '/calculadoras/calculadora-iva',
+        permanent: true,
+      },
     ];
   },
 };

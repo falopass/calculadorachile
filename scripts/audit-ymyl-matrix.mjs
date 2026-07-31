@@ -7,6 +7,10 @@ import path from 'path';
 
 const root = process.cwd();
 const cat = fs.readFileSync(path.join(root, 'src/data/calculators.ts'), 'utf8');
+const methodologySource = fs.readFileSync(
+  path.join(root, 'src/data/calculator-methodologies.ts'),
+  'utf8',
+);
 // Adapters viven en load-calculator.ts (code-split). Fallback al client legacy.
 const adapterPathCandidates = [
   path.join(root, 'src/lib/calculations/load-calculator.ts'),
@@ -51,11 +55,9 @@ while ((m = re.exec(catN))) {
 const adapters = {};
 
 /** Parse object map style: `"id": (inputs) => { ... },` (legacy client). */
-const adapterMapRe =
-  /(?:\"([^\"]+)\"|([a-zA-Z0-9_-]+)):\s*\(inputs\)\s*=>\s*\{([\s\S]*?)\n  \},/g;
+const adapterMapRe = /(?:\"([^\"]+)\"|([a-zA-Z0-9_-]+)):\s*\(inputs\)\s*=>\s*\{([\s\S]*?)\n  \},/g;
 /** Parse switch style: `case 'id': { ... return (inputs) => { ... }; }` (load-calculator). */
-const adapterCaseRe =
-  /case\s+['\"]([^'\"]+)['\"]:\s*\{([\s\S]*?)(?=\n    case |\n    default:)/g;
+const adapterCaseRe = /case\s+['\"]([^'\"]+)['\"]:\s*\{([\s\S]*?)(?=\n    case |\n    default:)/g;
 
 function registerAdapter(key, body) {
   const objMatch = body.match(/calculate\w+\(\{\s*([\s\S]*?)\}\s*\)/);
@@ -65,16 +67,20 @@ function registerAdapter(key, body) {
   }
   // Prefer fields read from inputs.* in the whole adapter body (not only the
   // object literal), so `const x = num(inputs.ano)` still counts as wired.
-  const fromInputs = [
-    ...body.matchAll(/inputs\.([A-Za-z_\u00f1\u00d1][\w\u00f1\u00d1]*)/g),
-  ].map((x) => x[1]);
-  // Also accept object keys that are plain aliases of catalog fields
-  const objectKeys = [...objMatch[1].matchAll(/^\s*([A-Za-z_\u00f1\u00d1][\w\u00f1\u00d1]*)\s*:/gm)].map(
+  const fromInputs = [...body.matchAll(/inputs\.([A-Za-z_\u00f1\u00d1][\w\u00f1\u00d1]*)/g)].map(
     (x) => x[1],
   );
+  // Also accept object keys that are plain aliases of catalog fields
+  const objectKeys = [
+    ...objMatch[1].matchAll(/^\s*([A-Za-z_\u00f1\u00d1][\w\u00f1\u00d1]*)\s*:/gm),
+  ].map((x) => x[1]);
   const fields = [...new Set([...fromInputs, ...objectKeys])];
-  const hardcodes = [...objMatch[1].matchAll(/([A-Za-z_\u00f1\u00d1][\w\u00f1\u00d1]*)\s*:\s*([^,\n]+)/g)]
-    .filter((x) => !x[2].includes('inputs.') && !x[2].includes('live?.') && !x[2].includes('coerce'))
+  const hardcodes = [
+    ...objMatch[1].matchAll(/([A-Za-z_\u00f1\u00d1][\w\u00f1\u00d1]*)\s*:\s*([^,\n]+)/g),
+  ]
+    .filter(
+      (x) => !x[2].includes('inputs.') && !x[2].includes('live?.') && !x[2].includes('coerce'),
+    )
     .map((x) => `${x[1]}=${x[2].trim()}`);
   adapters[key] = { fields, hardcodes };
 }
@@ -142,8 +148,7 @@ for (const c of calcBlocks) {
 
   const dead = (adapterFields || []).filter((f) => {
     if (f === 'esDomingoFestivo' && c.inputs.includes('esDomingo')) return false;
-    if (f === 'diasVacacionesPendientes' && c.inputs.includes('diasNoTomados'))
-      return false;
+    if (f === 'diasVacacionesPendientes' && c.inputs.includes('diasNoTomados')) return false;
     // reverse: adapter field not in catalog
     const reverse = Object.entries(catalogToAdapter).find(([, v]) => v === f);
     if (reverse && c.inputs.includes(reverse[0])) return false;
@@ -184,7 +189,10 @@ console.log('=== RESUMEN ===');
 console.log('Calculadoras catálogo:', calcBlocks.length);
 console.log('Adapters:', Object.keys(adapters).length);
 console.log('Con fantasma(s):', withPh.length);
-console.log('Campos fantasma totales:', withPh.reduce((s, r) => s + r.phantoms.length, 0));
+console.log(
+  'Campos fantasma totales:',
+  withPh.reduce((s, r) => s + r.phantoms.length, 0),
+);
 console.log('Sin adapter:', missingAdapter.map((r) => r.id).join(', ') || 'ninguno');
 console.log('Sin sources en catálogo:', noSources.length);
 
@@ -195,10 +203,14 @@ for (const r of withPh.sort((a, b) => b.phantoms.length - a.phantoms.length)) {
   console.log('  FANTASMA:', r.phantoms.join(', '));
   if (r.dead.length) console.log('  DEAD/adapter-only:', r.dead.join(', '));
   if (r.hardcodes.length) console.log('  HARDCODE:', r.hardcodes.join(', '));
-  const usableModule = r.moduleOrphans.filter((f) => r.phantoms.includes(f) || r.catalogInputs.includes(f));
+  const usableModule = r.moduleOrphans.filter(
+    (f) => r.phantoms.includes(f) || r.catalogInputs.includes(f),
+  );
   if (r.moduleFields.length) {
     const wired = r.moduleFields.filter((f) => r.adapterFields.includes(f));
-    console.log(`  Módulo ${r.moduleFile}: ${wired.length}/${r.moduleFields.length} campos cableados`);
+    console.log(
+      `  Módulo ${r.moduleFile}: ${wired.length}/${r.moduleFields.length} campos cableados`,
+    );
   }
 }
 
@@ -224,19 +236,111 @@ for (const id of top) {
   console.log('  adp:', r.adapterFields.join(', '));
   console.log('  mod:', r.moduleFields.join(', '));
   console.log('  ph:', r.phantoms.join(', ') || '—');
-  console.log(
-    '  sources:',
-    r.hasSources,
-    'reviewed:',
-    r.lastReviewed,
-    'noIndex:',
-    !!r.noIndex,
-  );
+  console.log('  sources:', r.hasSources, 'reviewed:', r.lastReviewed, 'noIndex:', !!r.noIndex);
 }
 
-// JSON for report
+// Gates de rescate AdSense. Se segmenta cada objeto por el siguiente `id`
+// para evitar atribuir `noIndex` o fuentes a la calculadora vecina.
+const rescueStarts = [...catN.matchAll(/\n  \{\n    id: '([^']+)'/g)];
+const methodologyIds = new Set(
+  [...methodologySource.matchAll(/^  (?:'([^']+)'|([a-z][\w-]*)):\s*\{/gm)].map(
+    (match) => match[1] || match[2],
+  ),
+);
+
+const rescueRows = rescueStarts.map((match, index) => {
+  const next = rescueStarts[index + 1];
+  const end = next?.index ?? catN.indexOf('\n];', match.index);
+  const block = catN.slice(match.index, end);
+  const urls = [...block.matchAll(/url:\s*'([^']+)'/g)].map((sourceMatch) => sourceMatch[1]);
+  const hasSpecificSources =
+    urls.length > 0 &&
+    urls.every((url) => {
+      const parsed = new URL(url);
+      return !(
+        parsed.pathname === '/' ||
+        parsed.pathname === '/leychile' ||
+        parsed.pathname === '/portal/prevision'
+      );
+    });
+
+  return {
+    id: match[1],
+    noIndex: /noIndex:\s*true/.test(block),
+    lastReviewed: (block.match(/lastReviewed:\s*'([^']+)'/) || [])[1] || '',
+    hasMethodology: methodologyIds.has(match[1]),
+    hasSpecificSources,
+  };
+});
+
+for (const row of rows) {
+  const accurateRow = rescueRows.find((item) => item.id === row.id);
+  if (accurateRow) row.noIndex = accurateRow.noIndex;
+}
+
 fs.writeFileSync(
   path.join(root, 'scripts/audit-ymyl-matrix-out.json'),
   JSON.stringify({ generatedAt: new Date().toISOString(), rows }, null, 2),
 );
 console.log('\nWrote scripts/audit-ymyl-matrix-out.json');
+
+const rescueFailures = [];
+for (const row of rescueRows.filter((item) => !item.noIndex)) {
+  if (!row.hasMethodology) {
+    rescueFailures.push(`${row.id}: sin metodología`);
+  }
+  if (!row.hasSpecificSources) {
+    rescueFailures.push(`${row.id}: fuente ausente o genérica`);
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(row.lastReviewed)) {
+    rescueFailures.push(`${row.id}: lastReviewed inválido`);
+  }
+}
+
+const discoveryFiles = [
+  'src/app/calculadoras/page.tsx',
+  'src/app/categoria/page.tsx',
+  'src/app/categoria/[slug]/page.tsx',
+  'src/components/home/CategoryCatalog.tsx',
+  'src/components/home/PopularCalculators.tsx',
+  'src/components/home/SearchHero.tsx',
+  'src/components/search/SiteSearch.tsx',
+];
+for (const file of discoveryFiles) {
+  const source = fs.readFileSync(path.join(root, file), 'utf8');
+  if (/import\s*\{\s*calculators\s*\}\s*from\s*['"]@\/data\/calculators['"]/.test(source)) {
+    rescueFailures.push(`${file}: expone calculators sin filtrar noIndex`);
+  }
+}
+
+const trustSource = [
+  'src/lib/seo/author.ts',
+  'src/lib/seo/schema.ts',
+  'src/app/acerca-de/page.tsx',
+  'src/app/calculadoras/[slug]/page.tsx',
+  'src/app/calculadoras/[slug]/CalculatorPageClient.tsx',
+]
+  .map((file) => fs.readFileSync(path.join(root, file), 'utf8'))
+  .join('\n');
+const prohibitedClaims = [
+  /ingeniero de software/i,
+  /Áreas de expertise/i,
+  /twitter\.com\/calculachile/i,
+  /todos con valores oficiales/i,
+  /modifiedTime:\s*new Date/i,
+];
+for (const pattern of prohibitedClaims) {
+  if (pattern.test(trustSource)) {
+    rescueFailures.push(`claim prohibido: ${pattern}`);
+  }
+}
+
+console.log('\n=== GATES ADSENSE ===');
+console.log('Indexables reales:', rescueRows.filter((row) => !row.noIndex).length);
+console.log('noIndex reales:', rescueRows.filter((row) => row.noIndex).length);
+console.log('Fallos:', rescueFailures.length);
+for (const failure of rescueFailures) console.error(`- ${failure}`);
+
+if (withPh.length || missingAdapter.length || noSources.length || rescueFailures.length) {
+  process.exitCode = 1;
+}

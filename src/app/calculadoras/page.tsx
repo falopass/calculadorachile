@@ -10,20 +10,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
 import { absoluteUrl } from '@/lib/site';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import CalculatorsCatalog from '@/components/home/CalculatorsCatalog';
 import JsonLd from '@/components/seo/JsonLd';
-import {
-  collectionPageSchema,
-  breadcrumbSchema,
-} from '@/lib/seo/schema';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/seo/schema';
 import { CATEGORY_LABELS } from '@/lib/calculatorCategories';
 
 const PAGE_TITLE = 'Catálogo de calculadoras de Chile 2026';
-const PAGE_DESC = `Catálogo completo de ${calculators.length} calculadoras laborales, tributarias y financieras de Chile: sueldo líquido, finiquito, UF, IVA, crédito hipotecario, AFP, permiso de circulación y más. Gratis, sin registro, actualizadas a 2026.`;
+const PAGE_DESC = `Catálogo de ${discoverableCalculators.length} calculadoras laborales, tributarias y financieras de Chile: sueldo líquido, finiquito, UF, IVA, crédito hipotecario, AFP, permiso de circulación y más. Gratis y sin registro.`;
 
 export const metadata: Metadata = buildPageMetadata({
   path: '/calculadoras',
@@ -49,9 +46,7 @@ export default function CalculadorasPage() {
   const url = absoluteUrl('/calculadoras');
 
   // Build-time: agrupo por categoría
-  const grouped = calculators.reduce<
-    Record<Calculator['category'], Calculator[]>
-  >(
+  const grouped = discoverableCalculators.reduce<Record<Calculator['category'], Calculator[]>>(
     (acc, calc) => {
       (acc[calc.category] ??= []).push(calc);
       return acc;
@@ -75,16 +70,13 @@ export default function CalculadorasPage() {
       url,
       name: PAGE_TITLE,
       description: PAGE_DESC,
-      items: calculators.map((c) => ({
+      items: discoverableCalculators.map((c) => ({
         name: c.name,
         url: absoluteUrl(`/calculadoras/${c.slug}`),
         description: c.description,
       })),
     }),
-    breadcrumbSchema([
-      { name: 'Inicio', path: '/' },
-      { name: 'Calculadoras' },
-    ]),
+    breadcrumbSchema([{ name: 'Inicio', path: '/' }, { name: 'Calculadoras' }]),
   ];
 
   return (
@@ -102,10 +94,7 @@ export default function CalculadorasPage() {
           <nav aria-label="Migas de pan" className="mb-6 text-xs">
             <ol className="flex items-center gap-1.5 text-[var(--foreground-muted)]">
               <li>
-                <Link
-                  href="/"
-                  className="hover:text-[var(--foreground)] transition-colors"
-                >
+                <Link href="/" className="hover:text-[var(--foreground)] transition-colors">
                   Inicio
                 </Link>
               </li>
@@ -118,9 +107,9 @@ export default function CalculadorasPage() {
             Todas las <span className="text-gradient">calculadoras</span>
           </h1>
           <p className="mt-3 text-base md:text-lg text-[var(--foreground-secondary)] max-w-2xl">
-            {calculators.length} herramientas gratuitas para sueldo, impuestos,
-            vivienda, pensiones y más. Datos oficiales actualizados a 2026, con
-            bases legales citadas y fórmulas explicadas.
+            {discoverableCalculators.length} herramientas gratuitas para sueldo, impuestos,
+            vivienda, pensiones y más. Datos oficiales actualizados a 2026, con bases legales
+            citadas y fórmulas explicadas.
           </p>
         </div>
       </section>

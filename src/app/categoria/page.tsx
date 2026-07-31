@@ -17,13 +17,10 @@ import { ArrowRight } from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
-import {
-  collectionPageSchema,
-  breadcrumbSchema,
-} from '@/lib/seo/schema';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 import { CALCULATOR_CATEGORY_LIST } from '@/lib/calculatorCategories';
 
 const PAGE_TITLE = 'Categorías de calculadoras de Chile';
@@ -49,7 +46,7 @@ export default function CategoriaIndexPage() {
   // Conteo de calculadoras por categoría — se usa en cada tarjeta.
   // Lo calculamos aquí (en build) para no recorrer 40 calculadoras
   // por cada tarjeta en el render.
-  const counts = calculators.reduce<Record<string, number>>((acc, c) => {
+  const counts = discoverableCalculators.reduce<Record<string, number>>((acc, c) => {
     acc[c.category] = (acc[c.category] ?? 0) + 1;
     return acc;
   }, {});
@@ -57,9 +54,7 @@ export default function CategoriaIndexPage() {
   // Filtramos categorías sin calculadoras: aparecen en el tipo
   // (porque el sitio puede agregar nuevas) pero hoy no tienen
   // contenido y no queremos páginas /categoria/<vacía>.
-  const visibleCategories = CALCULATOR_CATEGORY_LIST.filter(
-    (cat) => (counts[cat.id] ?? 0) > 0,
-  );
+  const visibleCategories = CALCULATOR_CATEGORY_LIST.filter((cat) => (counts[cat.id] ?? 0) > 0);
 
   const schemas = [
     collectionPageSchema({
@@ -71,15 +66,9 @@ export default function CategoriaIndexPage() {
         url: absoluteUrl(`/categoria/${cat.id}`),
         description: cat.description,
       })),
-      breadcrumb: [
-        { name: 'Inicio', path: '/' },
-        { name: 'Categorías' },
-      ],
+      breadcrumb: [{ name: 'Inicio', path: '/' }, { name: 'Categorías' }],
     }),
-    breadcrumbSchema([
-      { name: 'Inicio', path: '/' },
-      { name: 'Categorías' },
-    ]),
+    breadcrumbSchema([{ name: 'Inicio', path: '/' }, { name: 'Categorías' }]),
   ];
 
   return (
@@ -87,12 +76,7 @@ export default function CategoriaIndexPage() {
       <JsonLd id="categoria-index" data={schemas} />
 
       <div className="container-base py-8 md:py-12">
-        <Breadcrumbs
-          items={[
-            { label: 'Inicio', href: '/' },
-            { label: 'Categorías' },
-          ]}
-        />
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Categorías' }]} />
 
         <div className="max-w-5xl mx-auto">
           <header className="text-center mb-10 md:mb-12">
@@ -145,7 +129,8 @@ export default function CategoriaIndexPage() {
               ¿Buscas una calculadora específica?
             </h2>
             <p className="text-sm text-[var(--foreground-secondary)] mb-4">
-              Usa el buscador en el catálogo para filtrar entre las {calculators.length} calculadoras.
+              Usa el buscador en el catálogo para filtrar entre las {discoverableCalculators.length}{' '}
+              calculadoras.
             </p>
             <Link
               href="/calculadoras"

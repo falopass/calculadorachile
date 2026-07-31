@@ -41,9 +41,7 @@ const CATEGORY_NAMES: Record<string, string> = {
   servicios: 'Servicios',
 };
 
-export async function generateMetadata({
-  params,
-}: CalculatorPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CalculatorPageProps): Promise<Metadata> {
   const { slug } = await params;
   const calculator = getCalculatorBySlug(slug);
 
@@ -75,20 +73,20 @@ export async function generateMetadata({
   // la complementamos con keywords y CTA. Si es larga, la usamos tal cual.
   // Prioridad: seoOverrides (global) > calculator.seoDescription > description.
   const baseDesc = (
-    override?.seoDescription ?? calculator.seoDescription ?? calculator.description
+    override?.seoDescription ??
+    calculator.seoDescription ??
+    calculator.description
   ).trim();
   const enrichedDesc =
     baseDesc.length < 80
-      ? `${baseDesc} Cálculo en línea, gratis, sin registro. Valores oficiales actualizados a 2026.`
+      ? `${baseDesc} Cálculo referencial en línea, gratis y sin registro. Revisa fuentes, supuestos y limitaciones.`
       : baseDesc;
 
   const categoryLabel = CATEGORY_NAMES[calculator.category] ?? calculator.category;
 
   // OG image dinámica generada por opengraph-image.tsx en esta misma
   // ruta. Next la sirve en `<canonical>/opengraph-image`.
-  const ogImageUrl = absoluteUrl(
-    `/calculadoras/${calculator.slug}/opengraph-image`,
-  );
+  const ogImageUrl = absoluteUrl(`/calculadoras/${calculator.slug}/opengraph-image`);
 
   const metadata = buildPageMetadata({
     path: `/calculadoras/${calculator.slug}`,
@@ -96,7 +94,7 @@ export async function generateMetadata({
     description: enrichedDesc,
     keywords: calculator.keywords ?? [calculator.name],
     publishedTime: '2026-01-01',
-    modifiedTime: new Date().toISOString().slice(0, 10),
+    modifiedTime: calculator.lastReviewed,
     ogImage: {
       url: ogImageUrl,
       alt: `${calculator.name} — Calculadora gratuita CalculaChile`,
@@ -119,13 +117,9 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
   if (!calculator) notFound();
 
   const canonicalUrl = absoluteUrl(`/calculadoras/${calculator.slug}`);
-  const ogImageUrl = absoluteUrl(
-    `/calculadoras/${calculator.slug}/opengraph-image`,
-  );
+  const ogImageUrl = absoluteUrl(`/calculadoras/${calculator.slug}/opengraph-image`);
   const relatedGuia = getGuiaForCalculator(calculator);
-  const guideUrl = relatedGuia
-    ? absoluteUrl(`/guias/${relatedGuia.slug}`)
-    : undefined;
+  const guideUrl = relatedGuia ? absoluteUrl(`/guias/${relatedGuia.slug}`) : undefined;
 
   return (
     <CalculatorPageClient

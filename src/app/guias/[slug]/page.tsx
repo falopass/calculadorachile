@@ -60,21 +60,22 @@ export async function generateStaticParams() {
   return guias.map((g) => ({ slug: g.slug }));
 }
 
-const sectionIconMap: { keywords: string[]; icon: React.ComponentType<{ className?: string }> }[] = [
-  { keywords: ['uf', 'fomento', 'unidad fomento'], icon: Scale },
-  { keywords: ['utm', 'uta', 'tributaria', 'tributario'], icon: Receipt },
-  { keywords: ['ipc', 'inflación', 'precios', 'indicador'], icon: TrendingUp },
-  { keywords: ['dólar', 'dolar', 'euro', 'divisa', 'cambio'], icon: DollarSign },
-  { keywords: ['crédito', 'hipotecario', 'vivienda', 'arriendo', 'hogar'], icon: Home },
-  { keywords: ['sueldo', 'remuneración', 'líquido', 'bruto'], icon: Banknote },
-  { keywords: ['finiquito', 'indemnización', 'vacaciones', 'despido'], icon: FileText },
-  { keywords: ['afp', 'pensión', 'jubilación', 'previsional'], icon: TrendingUp },
-  { keywords: ['vehículo', 'vehiculo', 'auto', 'moto', 'tag', 'permiso'], icon: Car },
-  { keywords: ['familia', 'alimenticia', 'alimentos'], icon: Users },
-  { keywords: ['cae', 'educación', 'universidad', 'crédito aval'], icon: GraduationCap },
-  { keywords: ['empresa', 'pyme', 'patente', 'comercial'], icon: Building2 },
-  { keywords: ['fuente', 'oficial'], icon: BookOpen },
-];
+const sectionIconMap: { keywords: string[]; icon: React.ComponentType<{ className?: string }> }[] =
+  [
+    { keywords: ['uf', 'fomento', 'unidad fomento'], icon: Scale },
+    { keywords: ['utm', 'uta', 'tributaria', 'tributario'], icon: Receipt },
+    { keywords: ['ipc', 'inflación', 'precios', 'indicador'], icon: TrendingUp },
+    { keywords: ['dólar', 'dolar', 'euro', 'divisa', 'cambio'], icon: DollarSign },
+    { keywords: ['crédito', 'hipotecario', 'vivienda', 'arriendo', 'hogar'], icon: Home },
+    { keywords: ['sueldo', 'remuneración', 'líquido', 'bruto'], icon: Banknote },
+    { keywords: ['finiquito', 'indemnización', 'vacaciones', 'despido'], icon: FileText },
+    { keywords: ['afp', 'pensión', 'jubilación', 'previsional'], icon: TrendingUp },
+    { keywords: ['vehículo', 'vehiculo', 'auto', 'moto', 'tag', 'permiso'], icon: Car },
+    { keywords: ['familia', 'alimenticia', 'alimentos'], icon: Users },
+    { keywords: ['cae', 'educación', 'universidad', 'crédito aval'], icon: GraduationCap },
+    { keywords: ['empresa', 'pyme', 'patente', 'comercial'], icon: Building2 },
+    { keywords: ['fuente', 'oficial'], icon: BookOpen },
+  ];
 
 function getSectionIcon(title: string): React.ComponentType<{ className?: string }> {
   const lower = title.toLowerCase();
@@ -166,7 +167,7 @@ export default async function GuiaPage({ params }: PageProps) {
 
   const relatedCalcs = guia.relatedCalculators
     .map((s) => calculators.find((c) => c.slug === s))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+    .filter((c): c is NonNullable<typeof c> => c !== undefined && !c.noIndex);
 
   const relatedArts = guia.relatedArticles
     .map((s) => articles.find((a) => a.slug === s))
@@ -178,10 +179,7 @@ export default async function GuiaPage({ params }: PageProps) {
   const otherCategoryGuias = guias.filter(
     (g) => g.category !== guia.category && g.slug !== guia.slug,
   );
-  const relatedGuias: Guia[] = [
-    ...sameCategoryGuias,
-    ...otherCategoryGuias,
-  ].slice(0, 3);
+  const relatedGuias: Guia[] = [...sameCategoryGuias, ...otherCategoryGuias].slice(0, 3);
 
   const ogImageUrl = absoluteUrl(`/guias/${guia.slug}/opengraph-image`);
   const howToSteps = buildGuiaHowToSteps(guia, url);
@@ -310,8 +308,7 @@ export default async function GuiaPage({ params }: PageProps) {
               <span className="min-w-0 break-words leading-relaxed">
                 {formattedPublished && (
                   <>
-                    Publicado el{' '}
-                    <time dateTime={guia.publishedAt}>{formattedPublished}</time>
+                    Publicado el <time dateTime={guia.publishedAt}>{formattedPublished}</time>
                     {' · '}
                   </>
                 )}
@@ -327,7 +324,10 @@ export default async function GuiaPage({ params }: PageProps) {
           {/* TOC */}
           <aside className="order-1 min-w-0 lg:order-1 lg:col-span-3">
             <div className="min-w-0 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
-              <details className="mb-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-5 lg:hidden" open>
+              <details
+                className="mb-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-5 lg:hidden"
+                open
+              >
                 <summary className="flex cursor-pointer select-none items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--foreground)]">
                   <List className="h-4 w-4 shrink-0" />
                   En esta guía
@@ -507,7 +507,7 @@ export default async function GuiaPage({ params }: PageProps) {
                       </h3>
                       <p className="line-clamp-2 text-xs text-[var(--foreground-muted)]">
                         {g.description}
-                  </p>
+                      </p>
                     </Link>
                   ))}
                 </div>

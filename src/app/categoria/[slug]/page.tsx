@@ -21,13 +21,10 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import CalculatorCard from '@/components/home/CalculatorCard';
 import JsonLd from '@/components/seo/JsonLd';
-import {
-  collectionPageSchema,
-  breadcrumbSchema,
-} from '@/lib/seo/schema';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
 import { articles } from '@/data/articles';
 import {
@@ -49,9 +46,7 @@ export async function generateStaticParams() {
   return CALCULATOR_CATEGORY_LIST.map((cat) => ({ slug: cat.id }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const cat = getCalculatorCategory(slug);
   if (!cat) {
@@ -63,7 +58,7 @@ export async function generateMetadata({
     });
   }
 
-  const items = calculators.filter((c) => c.category === cat.id);
+  const items = discoverableCalculators.filter((c) => c.category === cat.id);
   const title = `${cat.pluralLabel} en Chile 2026`;
   const description = `${items.length} ${items.length === 1 ? 'herramienta' : 'herramientas'}: ${cat.description}`;
 
@@ -83,7 +78,7 @@ export default async function CategoriaPage({ params }: PageProps) {
   const url = absoluteUrl(`/categoria/${cat.id}`);
 
   // Calculadoras de esta categoría
-  const items = calculators.filter((c) => c.category === cat.id);
+  const items = discoverableCalculators.filter((c) => c.category === cat.id);
   if (items.length === 0) {
     // Categoría declarada en el tipo pero sin calculadoras todavía:
     // 404 explícito para que no quede una página vacía indexable.
@@ -113,18 +108,21 @@ export default async function CategoriaPage({ params }: PageProps) {
   // string libre. Nos quedamos con los que matchen alguna palabra
   // clave evidente del slug de la categoría.
   const articleSlugs = new Set<string>();
-  const relatedArticles = articles.filter((a) => {
-    const cat = a.category.toLowerCase();
-    if (slug === 'sueldo' || slug === 'beneficios') return cat === 'laboral';
-    if (slug === 'impuestos') return cat === 'impuestos';
-    if (slug === 'vivienda') return cat === 'vivienda';
-    if (slug === 'conversiones') return cat === 'educacion-financiera';
-    return false;
-  }).filter((a) => {
-    if (articleSlugs.has(a.slug)) return false;
-    articleSlugs.add(a.slug);
-    return true;
-  }).slice(0, 4);
+  const relatedArticles = articles
+    .filter((a) => {
+      const cat = a.category.toLowerCase();
+      if (slug === 'sueldo' || slug === 'beneficios') return cat === 'laboral';
+      if (slug === 'impuestos') return cat === 'impuestos';
+      if (slug === 'vivienda') return cat === 'vivienda';
+      if (slug === 'conversiones') return cat === 'educacion-financiera';
+      return false;
+    })
+    .filter((a) => {
+      if (articleSlugs.has(a.slug)) return false;
+      articleSlugs.add(a.slug);
+      return true;
+    })
+    .slice(0, 4);
 
   // Schemas: CollectionPage con ItemList completo + BreadcrumbList.
   // El ItemList ranquea las calculadoras dentro del listado, lo que

@@ -1,25 +1,23 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { AUTHOR } from "@/lib/seo/author";
-import PremiumCalculatorShell from "@/components/calculator/PremiumCalculatorShell";
-import SeoStructuredData from "@/components/calculator/SeoStructuredData";
-import CalculatorPageLayout from "@/components/calculator/CalculatorPageLayout";
-import LiveValuesSection from "@/components/calculator/LiveValuesSection";
-import RelatedCalculators from "@/components/calculator/RelatedCalculators";
-import OfficialSources from "@/components/calculator/OfficialSources";
-import PremiumLoadingIndicator from "@/components/calculator/PremiumLoadingIndicator";
-import { calculators } from "@/data/calculators";
-import {
-  loadCalculationFn,
-  type CalculateFn,
-} from "@/lib/calculations/load-calculator";
-import { getRelatedCalculators } from "@/lib/seo/related-calculators";
-import { useValues } from "@/lib/context/ValuesContext";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { AUTHOR } from '@/lib/seo/author';
+import PremiumCalculatorShell from '@/components/calculator/PremiumCalculatorShell';
+import SeoStructuredData from '@/components/calculator/SeoStructuredData';
+import CalculatorPageLayout from '@/components/calculator/CalculatorPageLayout';
+import LiveValuesSection from '@/components/calculator/LiveValuesSection';
+import RelatedCalculators from '@/components/calculator/RelatedCalculators';
+import OfficialSources from '@/components/calculator/OfficialSources';
+import CalculatorMethodology from '@/components/calculator/CalculatorMethodology';
+import PremiumLoadingIndicator from '@/components/calculator/PremiumLoadingIndicator';
+import { calculators } from '@/data/calculators';
+import { loadCalculationFn, type CalculateFn } from '@/lib/calculations/load-calculator';
+import { getRelatedCalculators } from '@/lib/seo/related-calculators';
+import { useValues } from '@/lib/context/ValuesContext';
 
 interface CalculatorPageClientProps {
-  calculator: import("@/types/calculator").Calculator;
+  calculator: import('@/types/calculator').Calculator;
   canonicalUrl?: string;
   /** URL absoluta de la imagen OG dinámica para esta calculadora. */
   ogImageUrl?: string;
@@ -31,43 +29,41 @@ interface CalculatorPageClientProps {
   guideReadingTime?: number;
 }
 
-function buildSeoIntro(
-  calculator: import("@/types/calculator").Calculator,
-): string {
+function buildSeoIntro(calculator: import('@/types/calculator').Calculator): string {
   const baseDesc = calculator.description.trim();
   const categoryText = (() => {
     switch (calculator.category) {
-      case "sueldo":
-        return "cálculos de sueldo y remuneraciones";
-      case "impuestos":
-        return "cálculos tributarios e impuestos chilenos";
-      case "beneficios":
-        return "cálculos de beneficios laborales y derechos del Código del Trabajo";
-      case "conversiones":
-        return "conversores entre unidades chilenas";
-      case "familia":
-        return "cálculos familiares y dependientes";
-      case "vivienda":
-        return "cálculos de vivienda y bienes raíces";
-      case "vehiculos":
-        return "cálculos vehiculares y permisos de circulación";
-      case "empresas":
-        return "cálculos para empresas y PYMEs";
-      case "pension":
-        return "cálculos previsionales y pensiones";
-      case "educacion":
-        return "cálculos educacionales y créditos";
-      case "hogar":
-        return "cálculos del hogar y servicios básicos";
+      case 'sueldo':
+        return 'cálculos de sueldo y remuneraciones';
+      case 'impuestos':
+        return 'cálculos tributarios e impuestos chilenos';
+      case 'beneficios':
+        return 'cálculos de beneficios laborales y derechos del Código del Trabajo';
+      case 'conversiones':
+        return 'conversores entre unidades chilenas';
+      case 'familia':
+        return 'cálculos familiares y dependientes';
+      case 'vivienda':
+        return 'cálculos de vivienda y bienes raíces';
+      case 'vehiculos':
+        return 'cálculos vehiculares y permisos de circulación';
+      case 'empresas':
+        return 'cálculos para empresas y PYMEs';
+      case 'pension':
+        return 'cálculos previsionales y pensiones';
+      case 'educacion':
+        return 'cálculos educacionales y créditos';
+      case 'hogar':
+        return 'cálculos del hogar y servicios básicos';
       default:
-        return "cálculos chilenos";
+        return 'cálculos chilenos';
     }
   })();
   const legalContext = calculator.faq?.[0]?.answer
-    ? calculator.faq[0].answer.split(". ").slice(0, 2).join(". ").trim()
-    : "";
+    ? calculator.faq[0].answer.split('. ').slice(0, 2).join('. ').trim()
+    : '';
 
-  return `${baseDesc} Forma parte del catálogo de ${categoryText} de CalculaChile, todos con valores oficiales 2026 y bases legales citadas.${legalContext ? ` ${legalContext}.` : ""}`;
+  return `${baseDesc} Forma parte del catálogo de ${categoryText} de CalculaChile. Revisa la metodología, los supuestos, las limitaciones y las fuentes declaradas antes de usar la estimación.${legalContext ? ` ${legalContext}.` : ''}`;
 }
 
 export default function CalculatorPageClient({
@@ -180,11 +176,10 @@ export default function CalculatorPageClient({
           />
         </div>
       ) : (
-        <PremiumCalculatorShell
-          calculator={calculator}
-          calculateFn={calculateFn}
-        />
+        <PremiumCalculatorShell calculator={calculator} calculateFn={calculateFn} />
       )}
+
+      {calculator.methodology && <CalculatorMethodology methodology={calculator.methodology} />}
 
       <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-7">
@@ -209,8 +204,8 @@ export default function CalculatorPageClient({
             {seoIntroText}
           </p>
           <p className="mt-3 text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
-            Ingresa los datos solicitados arriba y los resultados se mostrarán
-            automáticamente, sin necesidad de hacer clic en ningún botón.
+            Ingresa los datos solicitados arriba y los resultados se mostrarán automáticamente, sin
+            necesidad de hacer clic en ningún botón.
           </p>
           <LiveValuesSection />
         </section>
@@ -276,14 +271,11 @@ export default function CalculatorPageClient({
       </div>
 
       {calculator.sources && calculator.sources.length > 0 && (
-        <OfficialSources
-          sources={calculator.sources}
-          className="mt-8 md:mt-10"
-        />
+        <OfficialSources sources={calculator.sources} className="mt-8 md:mt-10" />
       )}
 
       <p className="mt-4 text-xs text-[var(--foreground-muted)]">
-        Revisado por{" "}
+        Revisado por{' '}
         <Link
           href="/acerca-de"
           className="font-medium text-[var(--color-primary-600)] hover:underline"
@@ -432,11 +424,9 @@ export default function CalculatorPageClient({
                   {guideTitle}
                 </h2>
                 <p className="text-sm text-[var(--foreground-secondary)] leading-relaxed">
-                  Lee la guía completa con fórmulas, ejemplos numéricos en
-                  pesos chilenos y bases legales citadas.
-                  {guideReadingTime
-                    ? ` Tiempo estimado: ${guideReadingTime} minutos.`
-                    : ""}
+                  Lee la guía completa con fórmulas, ejemplos numéricos en pesos chilenos y bases
+                  legales citadas.
+                  {guideReadingTime ? ` Tiempo estimado: ${guideReadingTime} minutos.` : ''}
                 </p>
               </div>
               <div className="flex-shrink-0 self-center">
@@ -448,11 +438,7 @@ export default function CalculatorPageClient({
                   strokeWidth={2}
                   aria-hidden
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </div>
             </div>
@@ -463,12 +449,7 @@ export default function CalculatorPageClient({
       {(() => {
         const related = getRelatedCalculators(calculator, calculators, 6);
         if (related.length === 0) return null;
-        return (
-          <RelatedCalculators
-            calculators={related}
-            title="También te puede interesar"
-          />
-        );
+        return <RelatedCalculators calculators={related} title="También te puede interesar" />;
       })()}
     </CalculatorPageLayout>
   );

@@ -14,14 +14,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  ShieldCheck,
-  BookOpen,
-  Sparkles,
-  Code2,
-  Scale,
-  FileCheck,
-} from 'lucide-react';
+import { ShieldCheck, BookOpen, Sparkles, Code2, Scale, FileCheck } from 'lucide-react';
 
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
@@ -36,7 +29,7 @@ import { absoluteUrl, SITE_NAME } from '@/lib/site';
 import { AUTHOR } from '@/lib/seo/author';
 
 const PAGE_TITLE = `Acerca de ${SITE_NAME}`;
-const PAGE_DESC = `${SITE_NAME} es un sitio independiente creado y mantenido por ${AUTHOR.name}, ingeniero de software en Curicó, Chile. Calculadoras transparentes y gratuitas basadas en fuentes oficiales del SII, Banco Central y Dirección del Trabajo.`;
+const PAGE_DESC = `${SITE_NAME} es un sitio independiente creado y mantenido por ${AUTHOR.name}, estudiante de tercer año de Ingeniería Civil en Computación en la Universidad de Talca. Desarrolla el proyecto desde Curicó.`;
 
 export const metadata: Metadata = buildPageMetadata({
   path: '/acerca-de',
@@ -59,13 +52,13 @@ const principles = [
     icon: Scale,
     title: 'Cita siempre la fuente legal',
     kind: 'legal' as const,
-    body: 'Cada cálculo de impacto legal o tributario cita el artículo específico de la ley, la circular del SII o la resolución de la Superintendencia que lo respalda. No confiamos en lo que diga otro sitio: vamos a la fuente primaria (BCN, SII, DT, Banco Central).',
+    body: 'Cada cálculo de impacto legal o tributario debe identificar una norma, ficha o documento oficial específico que respalde sus reglas. Cuando el alcance de una fuente no basta, la herramienta mantiene una advertencia o queda fuera del índice.',
   },
   {
     icon: FileCheck,
-    title: 'Tests para cada calculadora',
+    title: 'Controles de regresión',
     kind: 'success' as const,
-    body: 'Las calculadoras críticas tienen tests unitarios en Vitest que validan la fórmula contra ejemplos publicados por la autoridad. Si una calculadora no tiene tests, no entra a producción para los conceptos donde la regla cambia (topes imponibles, jornadas parciales, recargos especiales).',
+    body: 'Los tests unitarios ayudan a detectar cambios involuntarios en fórmulas y casos conocidos. Son controles técnicos de regresión: no certifican que una estimación sea válida para todos los contratos, trámites o situaciones personales.',
   },
   {
     icon: Code2,
@@ -93,18 +86,12 @@ export default function AcercaDePage() {
       description: PAGE_DESC,
       subType: 'AboutPage',
       datePublished: '2026-07-02',
-      dateModified: '2026-07-03',
-      breadcrumb: [
-        { name: 'Inicio', path: '/' },
-        { name: 'Acerca de' },
-      ],
+      dateModified: '2026-07-30',
+      breadcrumb: [{ name: 'Inicio', path: '/' }, { name: 'Acerca de' }],
       mainEntity: { '@id': AUTHOR.id },
       speakableSelectors: ['[data-speakable="name"]', '[data-speakable="bio"]'],
     }),
-    breadcrumbSchema([
-      { name: 'Inicio', path: '/' },
-      { name: 'Acerca de' },
-    ]),
+    breadcrumbSchema([{ name: 'Inicio', path: '/' }, { name: 'Acerca de' }]),
   ];
 
   return (
@@ -112,12 +99,7 @@ export default function AcercaDePage() {
       <JsonLd id="about-schemas" data={schemas} />
 
       <div className="container-base py-8 md:py-12">
-        <Breadcrumbs
-          items={[
-            { label: 'Inicio', href: '/' },
-            { label: 'Acerca de' },
-          ]}
-        />
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Acerca de' }]} />
 
         <div className="max-w-3xl mx-auto">
           {/* ============================================
@@ -179,10 +161,10 @@ export default function AcercaDePage() {
                 Independencia editorial
               </h2>
               <p className="text-base text-[var(--foreground-secondary)] leading-relaxed">
-                {SITE_NAME} no pertenece al Gobierno de Chile ni a instituciones como
-                SII, Dirección del Trabajo, IPS, CMF, Banco Central, MINVU o SERNAC.
-                Cada calculadora indica las fuentes oficiales consultadas y la fecha
-                de actualización para que cualquier persona pueda verificar los datos.
+                {SITE_NAME} no pertenece al Gobierno de Chile ni a instituciones como SII, Dirección
+                del Trabajo, IPS, CMF, Banco Central, MINVU o SERNAC. Cada calculadora indica las
+                fuentes oficiales consultadas y la fecha de actualización para que cualquier persona
+                pueda verificar los datos.
               </p>
             </div>
             <div>
@@ -190,11 +172,10 @@ export default function AcercaDePage() {
                 Metodología
               </h2>
               <p className="text-base text-[var(--foreground-secondary)] leading-relaxed">
-                La metodología de cada herramienta es: identificar la norma o fuente
-                oficial vigente, convertirla en fórmula, probar casos numéricos,
-                documentar supuestos y publicar limitaciones. Cuando una materia
-                requiere interpretación legal, tributaria o financiera personalizada,
-                la página lo indica expresamente.
+                La metodología de cada herramienta es: identificar la norma o fuente oficial
+                vigente, convertirla en fórmula, probar casos numéricos, documentar supuestos y
+                publicar limitaciones. Cuando una materia requiere interpretación legal, tributaria
+                o financiera personalizada, la página lo indica expresamente.
               </p>
             </div>
           </section>
@@ -223,7 +204,7 @@ export default function AcercaDePage() {
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
               <h2 className="flex items-center gap-2 text-base font-semibold text-[var(--foreground)] mb-3">
                 <BookOpen className="w-4 h-4 text-[var(--accent)]" />
-                Áreas de expertise
+                Temas que cubre el proyecto
               </h2>
               <ul className="space-y-2 text-sm text-[var(--foreground-secondary)]">
                 {AUTHOR.expertise.map((area) => (
@@ -279,8 +260,8 @@ export default function AcercaDePage() {
               Lee mi trabajo en {SITE_NAME}
             </h2>
             <p className="text-sm md:text-base text-[var(--foreground-secondary)] mb-5 max-w-xl mx-auto">
-              Cada guía, calculadora y artículo del blog pasa por los filtros
-              que describí arriba. Si encuentras algo que no cuadra, avísame.
+              Las guías, calculadoras y artículos documentan sus fuentes y límites. Si encuentras
+              algo que no cuadra, avísame.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link

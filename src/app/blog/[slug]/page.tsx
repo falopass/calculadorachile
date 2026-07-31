@@ -14,16 +14,8 @@ import { ArrowLeft, BookOpen, Calculator, Clock } from 'lucide-react';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
 import ReadingProgress from '@/components/article/ReadingProgress';
-import {
-  articleSchema,
-  breadcrumbSchema,
-  faqPageSchema,
-} from '@/lib/seo/schema';
-import {
-  buildPageMetadata,
-  estimateWordCount,
-  estimateReadingTime,
-} from '@/lib/seo/metadata';
+import { articleSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo/schema';
+import { buildPageMetadata, estimateWordCount, estimateReadingTime } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
 import { AUTHOR } from '@/lib/seo/author';
 import { articles, getArticleBySlug } from '@/data/articles';
@@ -41,9 +33,7 @@ export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: BlogArticlePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
 
@@ -59,7 +49,8 @@ export async function generateMetadata({
   return buildPageMetadata({
     path: `/blog/${article.slug}`,
     title: seoOverrides[article.slug]?.seoTitle ?? article.seoTitle ?? article.title,
-    description: seoOverrides[article.slug]?.seoDescription ?? article.seoDescription ?? article.description,
+    description:
+      seoOverrides[article.slug]?.seoDescription ?? article.seoDescription ?? article.description,
     keywords: article.keywords,
     ogType: 'article',
     publishedTime: article.date,
@@ -87,7 +78,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
   const relatedCalcs = article.relatedCalculators
     .map((s) => calculators.find((c) => c.slug === s))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+    .filter((c): c is NonNullable<typeof c> => c !== undefined && !c.noIndex);
 
   const relatedArticles = articles
     .filter((a) => a.category === article.category && a.slug !== article.slug)
@@ -112,9 +103,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
       { name: 'Blog', path: '/blog' },
       { name: article.title },
     ]),
-    ...(article.faq && article.faq.length > 0
-      ? [faqPageSchema(article.faq)]
-      : []),
+    ...(article.faq && article.faq.length > 0 ? [faqPageSchema(article.faq)] : []),
   ];
 
   const formattedDate = new Date(article.date).toLocaleDateString('es-CL', {
@@ -134,9 +123,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     : null;
 
   const relatedGuiaSlug = article.relatedGuia;
-  const relatedGuia = relatedGuiaSlug
-    ? guias.find((g) => g.slug === relatedGuiaSlug)
-    : undefined;
+  const relatedGuia = relatedGuiaSlug ? guias.find((g) => g.slug === relatedGuiaSlug) : undefined;
 
   return (
     <>
@@ -190,8 +177,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                 {formattedUpdated && (
                   <>
                     {' · '}
-                    Actualizado el{' '}
-                    <time dateTime={updatedDate}>{formattedUpdated}</time>
+                    Actualizado el <time dateTime={updatedDate}>{formattedUpdated}</time>
                   </>
                 )}
               </span>
@@ -210,6 +196,30 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </div>
+
+          <section className="mt-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6">
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-[var(--foreground)]">
+              <BookOpen className="h-5 w-5 text-[var(--accent)]" />
+              Referencias
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--foreground-secondary)]">
+              Fuentes primarias e institucionales consultadas para esta pieza.
+            </p>
+            <ul className="mt-4 space-y-2">
+              {article.sources.map((source) => (
+                <li key={source.url}>
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="break-words text-sm font-medium text-[var(--accent)] hover:underline"
+                  >
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
 
           {/* FAQ embebido */}
           {article.faq && article.faq.length > 0 && (
@@ -264,10 +274,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
           {/* Guía pillar relacionada */}
           {relatedGuia && (
             <aside className="mt-10 rounded-2xl border border-[var(--color-primary-100)] bg-[var(--accent-muted)] p-6">
-              <Link
-                href={`/guias/${relatedGuia.slug}`}
-                className="group flex items-start gap-4"
-              >
+              <Link href={`/guias/${relatedGuia.slug}`} className="group flex items-start gap-4">
                 <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--accent)]">
                   <BookOpen className="h-5 w-5 text-white" />
                 </div>
@@ -282,7 +289,8 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                     {relatedGuia.description}
                   </p>
                   <p className="mt-2 text-xs text-[var(--foreground-muted)]">
-                    {relatedGuia.readingTime} min de lectura · cobertura completa con tablas, ejemplos numéricos y bases legales.
+                    {relatedGuia.readingTime} min de lectura · cobertura completa con tablas,
+                    ejemplos numéricos y bases legales.
                   </p>
                 </div>
               </Link>
@@ -325,9 +333,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
           {/* Artículos relacionados */}
           {relatedArticles.length > 0 && (
             <section className="mt-12 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
-              <h2 className="mb-4 text-lg font-bold text-[var(--foreground)]">
-                Sigue leyendo
-              </h2>
+              <h2 className="mb-4 text-lg font-bold text-[var(--foreground)]">Sigue leyendo</h2>
               <ul className="space-y-3">
                 {relatedArticles.map((art) => (
                   <li key={art.slug}>

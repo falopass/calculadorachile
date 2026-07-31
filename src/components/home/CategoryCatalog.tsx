@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import { ChevronRight, ArrowRight } from 'lucide-react';
-import { calculators } from '@/data/calculators';
-import {
-  CALCULATOR_CATEGORY_LIST,
-  type CalculatorCategory,
-} from '@/lib/calculatorCategories';
+import { discoverableCalculators } from '@/data/calculators';
+import { CALCULATOR_CATEGORY_LIST, type CalculatorCategory } from '@/lib/calculatorCategories';
 import type { Calculator } from '@/types/calculator';
 
 /**
@@ -20,7 +17,7 @@ import type { Calculator } from '@/types/calculator';
  * Las categorías vacías o con <2 items se muestran igual.
  */
 export default function CategoryCatalog() {
-  const grouped = calculators.reduce<Record<CalculatorCategory, Calculator[]>>(
+  const grouped = discoverableCalculators.reduce<Record<CalculatorCategory, Calculator[]>>(
     (acc, calc) => {
       (acc[calc.category] ??= []).push(calc);
       return acc;
@@ -40,7 +37,7 @@ export default function CategoryCatalog() {
           </p>
         </div>
         <span className="hidden text-sm text-[var(--foreground-muted)] md:inline">
-          {calculators.length} calculadoras
+          {discoverableCalculators.length} calculadoras
         </span>
       </div>
 

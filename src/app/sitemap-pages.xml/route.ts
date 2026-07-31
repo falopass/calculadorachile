@@ -10,7 +10,7 @@
 // como "indexed but blocked", confundiendo el crawl budget).
 // ============================================
 
-import { calculators } from '@/data/calculators';
+import { discoverableCalculators } from '@/data/calculators';
 import { CALCULATOR_CATEGORY_LIST } from '@/lib/calculatorCategories';
 import {
   SITE_URL,
@@ -87,21 +87,18 @@ export async function GET() {
   // Páginas de categoría: una por cada categoría con calculadoras
   // asignadas. No incluimos categorías vacías para no diluir el
   // crawl budget.
-  const categoryCounts = calculators.reduce<Record<string, number>>(
-    (acc, c) => {
-      acc[c.category] = (acc[c.category] ?? 0) + 1;
-      return acc;
-    },
-    {},
-  );
-  const categoryPages: SitemapEntry[] = CALCULATOR_CATEGORY_LIST
-    .filter((cat) => (categoryCounts[cat.id] ?? 0) > 0)
-    .map((cat) => ({
-      url: `${SITE_URL}/categoria/${cat.id}`,
-      lastModified: SITE_LAST_MODIFIED,
-      changeFrequency: 'monthly' as const,
-      priority: 0.75,
-    }));
+  const categoryCounts = discoverableCalculators.reduce<Record<string, number>>((acc, c) => {
+    acc[c.category] = (acc[c.category] ?? 0) + 1;
+    return acc;
+  }, {});
+  const categoryPages: SitemapEntry[] = CALCULATOR_CATEGORY_LIST.filter(
+    (cat) => (categoryCounts[cat.id] ?? 0) > 0,
+  ).map((cat) => ({
+    url: `${SITE_URL}/categoria/${cat.id}`,
+    lastModified: SITE_LAST_MODIFIED,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }));
 
   const xml = renderUrlsetXml([...staticPages, ...categoryPages]);
 

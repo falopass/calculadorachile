@@ -100,7 +100,7 @@ export const guias: Guia[] = [
     ],
     relatedArticles: [
       'diferencia-sueldo-bruto-liquido',
-      'guia-horas-extra-chile',
+      'horas-extra-jornada-42-horas-chile-2026',
       'como-funciona-gratificacion-legal',
     ],
     sources: [
@@ -109,7 +109,10 @@ export const guias: Guia[] = [
       { label: 'Servicio de Impuestos Internos (SII)', url: 'https://www.sii.cl' },
       { label: 'Biblioteca del Congreso Nacional (BCN)', url: 'https://www.bcn.cl' },
       { label: 'Código del Trabajo', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
-      { label: 'D.L. 3500 (Sistema de pensiones)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147' },
+      {
+        label: 'D.L. 3500 (Sistema de pensiones)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147',
+      },
     ],
     sections: [
       {
@@ -317,19 +320,35 @@ export const guias: Guia[] = [
       'calculadora-intereses-mora',
     ],
     relatedArticles: [
-      'como-calcular-finiquito-chile',
       'calcular-indemnizacion-por-anos',
-      'vacaciones-proporcionales-guia',
       'seguro-cesantia-finiquito-2026-afc',
       'finiquito-2026-ejemplo-sueldo-minimo',
     ],
     sources: [
-      { label: 'Código del Trabajo (BCN)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
-      { label: 'DT — oportunidad del finiquito', url: 'https://dt.gob.cl/portal/1628/w3-article-60613.html' },
-      { label: 'DT — cálculo del feriado proporcional', url: 'https://dt.gob.cl/portal/1628/w3-article-60200.html' },
-      { label: 'DT — reclamo por despido', url: 'https://www.dt.gob.cl/portal/1626/w3-article-125086.html' },
-      { label: 'DT — indemnización por obra o faena', url: 'https://dt.gob.cl/portal/1628/w3-article-118059.html' },
-      { label: 'AFC — certificado aporte empleador', url: 'https://www.afc.cl/empleadores/sus-certificados/' },
+      {
+        label: 'Código del Trabajo (BCN)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'DT — oportunidad del finiquito',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-60613.html',
+      },
+      {
+        label: 'DT — cálculo del feriado proporcional',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-60200.html',
+      },
+      {
+        label: 'DT — reclamo por despido',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-125086.html',
+      },
+      {
+        label: 'DT — indemnización por obra o faena',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-118059.html',
+      },
+      {
+        label: 'AFC — certificado aporte empleador',
+        url: 'https://www.afc.cl/empleadores/sus-certificados/',
+      },
     ],
     sections: [
       {
@@ -528,11 +547,26 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['todo-sobre-uf-chile', 'reajuste-arriendo-uf-2026', 'tope-imponible-2026'],
     sources: [
-      { label: 'Banco Central — metodología UF', url: 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf' },
-      { label: 'Banco Central — preguntas estadísticas', url: 'https://www.bcentral.cl/es/areas/estadisticas/preguntas-frecuentes-estadisticas' },
-      { label: 'SII — UTM, UTA e IPC 2026', url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm' },
-      { label: 'INE — IPC de junio 2026', url: 'https://www.ine.gob.cl/sala-de-prensa/prensa/general/noticia/2026/07/08/%C3%ADndice-de-precios-al-consumidor-%28ipc%29-de-junio-present%C3%B3-una-variaci%C3%B3n-mensual-de-0-0' },
-      { label: 'CMF — Tasa Máxima Convencional', url: 'https://www.cmfchile.cl/educa/621/w3-article-27169.html' },
+      {
+        label: 'Banco Central — metodología UF',
+        url: 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf',
+      },
+      {
+        label: 'Banco Central — preguntas estadísticas',
+        url: 'https://www.bcentral.cl/es/areas/estadisticas/preguntas-frecuentes-estadisticas',
+      },
+      {
+        label: 'SII — UTM, UTA e IPC 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
+      },
+      {
+        label: 'INE — IPC de junio 2026',
+        url: 'https://www.ine.gob.cl/sala-de-prensa/prensa/general/noticia/2026/07/08/%C3%ADndice-de-precios-al-consumidor-%28ipc%29-de-junio-present%C3%B3-una-variaci%C3%B3n-mensual-de-0-0',
+      },
+      {
+        label: 'CMF — Tasa Máxima Convencional',
+        url: 'https://www.cmfchile.cl/educa/621/w3-article-27169.html',
+      },
     ],
     sections: [
       {
@@ -680,13 +714,28 @@ export const guias: Guia[] = [
       'calculadora-cotizacion-independientes',
       'calculadora-ppm',
     ],
-    relatedArticles: ['guia-iva-chile-2026', 'boleta-honorarios-completo'],
+    relatedArticles: [],
     sources: [
-      { label: 'SII — boletas de honorarios 2026', url: 'https://www.sii.cl/destacados/boletas_honorarios/' },
-      { label: 'SII — nuevos contribuyentes a honorarios', url: 'https://www.sii.cl/ayudas/nuevos_contribuyentes/boleta-honorarios.html' },
-      { label: 'Ley sobre Impuesto a las Ventas y Servicios (DL 825)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=6369' },
-      { label: 'Ley 21.133 (calendario retención honorarios)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1128420' },
-      { label: 'Previsión Social — opciones para cotizar', url: 'https://previsionsocial.gob.cl/ley-honorarios/opciones-para-cotizar/' },
+      {
+        label: 'SII — boletas de honorarios 2026',
+        url: 'https://www.sii.cl/destacados/boletas_honorarios/',
+      },
+      {
+        label: 'SII — nuevos contribuyentes a honorarios',
+        url: 'https://www.sii.cl/ayudas/nuevos_contribuyentes/boleta-honorarios.html',
+      },
+      {
+        label: 'Ley sobre Impuesto a las Ventas y Servicios (DL 825)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6369',
+      },
+      {
+        label: 'Ley 21.133 (calendario retención honorarios)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1128420',
+      },
+      {
+        label: 'Previsión Social — opciones para cotizar',
+        url: 'https://previsionsocial.gob.cl/ley-honorarios/opciones-para-cotizar/',
+      },
     ],
     sections: [
       {
@@ -837,12 +886,30 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['todo-sobre-uf-chile', 'reajuste-arriendo-uf-2026'],
     sources: [
-      { label: 'CMF — información sobre créditos hipotecarios', url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45031.html' },
-      { label: 'CMF — simulador de créditos hipotecarios', url: 'https://servicios.cmfchile.cl/simuladorhipotecario/' },
-      { label: 'CMF — seguros hipotecarios obligatorios', url: 'https://www.cmfchile.cl/educa/621/w3-article-27508.html' },
-      { label: 'CMF — costo y condiciones del prepago', url: 'https://www.cmfchile.cl/educa/621/w3-article-27382.html' },
-      { label: 'Ley 18.010 sobre operaciones de crédito', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29438' },
-      { label: 'ChileAtiende — Subsidio al Dividendo', url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/subsidio-al-dividendo' },
+      {
+        label: 'CMF — información sobre créditos hipotecarios',
+        url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45031.html',
+      },
+      {
+        label: 'CMF — simulador de créditos hipotecarios',
+        url: 'https://servicios.cmfchile.cl/simuladorhipotecario/',
+      },
+      {
+        label: 'CMF — seguros hipotecarios obligatorios',
+        url: 'https://www.cmfchile.cl/educa/621/w3-article-27508.html',
+      },
+      {
+        label: 'CMF — costo y condiciones del prepago',
+        url: 'https://www.cmfchile.cl/educa/621/w3-article-27382.html',
+      },
+      {
+        label: 'Ley 18.010 sobre operaciones de crédito',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=29438',
+      },
+      {
+        label: 'ChileAtiende — Subsidio al Dividendo',
+        url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/subsidio-al-dividendo',
+      },
     ],
     sections: [
       {
@@ -976,10 +1043,22 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['diferencia-sueldo-bruto-liquido'],
     sources: [
-      { label: 'Superintendencia de Pensiones — nueva cotización del empleador', url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html' },
-      { label: 'ChileAtiende — Pensión Garantizada Universal', url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu' },
-      { label: 'ChileAtiende — Beneficio por Años Cotizados', url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/beneficio-anos-cotizados' },
-      { label: 'Ley 21.735 (Reforma Previsional)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1208948' },
+      {
+        label: 'Superintendencia de Pensiones — nueva cotización del empleador',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html',
+      },
+      {
+        label: 'ChileAtiende — Pensión Garantizada Universal',
+        url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu',
+      },
+      {
+        label: 'ChileAtiende — Beneficio por Años Cotizados',
+        url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/beneficio-anos-cotizados',
+      },
+      {
+        label: 'Ley 21.735 (Reforma Previsional)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1208948',
+      },
       { label: 'D.L. 3.500', url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147' },
     ],
     sections: [
@@ -1162,13 +1241,34 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['reajuste-arriendo-uf-2026', 'todo-sobre-uf-chile'],
     sources: [
-      { label: 'MINVU — llamado DS1 2026', url: 'https://www.minvu.gob.cl/noticia/minvu-anuncia-la-apertura-del-primer-llamado-de-2026-al-subsidio-para-sectores-medios/' },
-      { label: 'MINVU — proyectos DS19 2026', url: 'https://www.minvu.gob.cl/postulacion/llamado-especial-a-concurso-ano-2026-para-proyectos-habitacionales-ds-19/' },
-      { label: 'ChileAtiende — certificado de gravámenes y prohibiciones', url: 'https://www.chileatiende.gob.cl/fichas/457-certificado-de-los-registros-de-hipotecas-gravamenes-y-prohibiciones-de-una-propiedad-gp' },
-      { label: 'SII — Impuesto Territorial', url: 'https://www.sii.cl/destacados/impuesto_territorial/' },
-      { label: 'SII — mayor valor en venta de bienes raíces', url: 'https://www.sii.cl/destacados/renta/2026/personas_naturales.html' },
-      { label: 'Ley 21.442 de Copropiedad Inmobiliaria', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1174663' },
-      { label: 'CMF — créditos hipotecarios', url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45031.html' },
+      {
+        label: 'MINVU — llamado DS1 2026',
+        url: 'https://www.minvu.gob.cl/noticia/minvu-anuncia-la-apertura-del-primer-llamado-de-2026-al-subsidio-para-sectores-medios/',
+      },
+      {
+        label: 'MINVU — proyectos DS19 2026',
+        url: 'https://www.minvu.gob.cl/postulacion/llamado-especial-a-concurso-ano-2026-para-proyectos-habitacionales-ds-19/',
+      },
+      {
+        label: 'ChileAtiende — certificado de gravámenes y prohibiciones',
+        url: 'https://www.chileatiende.gob.cl/fichas/457-certificado-de-los-registros-de-hipotecas-gravamenes-y-prohibiciones-de-una-propiedad-gp',
+      },
+      {
+        label: 'SII — Impuesto Territorial',
+        url: 'https://www.sii.cl/destacados/impuesto_territorial/',
+      },
+      {
+        label: 'SII — mayor valor en venta de bienes raíces',
+        url: 'https://www.sii.cl/destacados/renta/2026/personas_naturales.html',
+      },
+      {
+        label: 'Ley 21.442 de Copropiedad Inmobiliaria',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1174663',
+      },
+      {
+        label: 'CMF — créditos hipotecarios',
+        url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45031.html',
+      },
     ],
     sections: [
       {
@@ -1314,13 +1414,31 @@ export const guias: Guia[] = [
     ],
     relatedArticles: ['todo-sobre-uf-chile'],
     sources: [
-      { label: 'ChileAtiende — permiso de circulación 2026', url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion' },
-      { label: 'SII — tasación fiscal de vehículos 2026', url: 'https://www.sii.cl/destacados/tasacion_vehiculos/2026/index.html' },
-      { label: 'CMF — coberturas SOAP y Ley Jacinta', url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-565.html' },
-      { label: 'ChileAtiende — revisión técnica de vehículos', url: 'https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados' },
+      {
+        label: 'ChileAtiende — permiso de circulación 2026',
+        url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion',
+      },
+      {
+        label: 'SII — tasación fiscal de vehículos 2026',
+        url: 'https://www.sii.cl/destacados/tasacion_vehiculos/2026/index.html',
+      },
+      {
+        label: 'CMF — coberturas SOAP y Ley Jacinta',
+        url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-565.html',
+      },
+      {
+        label: 'ChileAtiende — revisión técnica de vehículos',
+        url: 'https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados',
+      },
       { label: 'Ley 18.290 de Tránsito', url: 'https://www.bcn.cl/leychile/navegar?idNorma=29708' },
-      { label: 'Dirección General de Concesiones — peajes y pórticos 2026', url: 'https://concesiones.mop.gob.cl/peajes-y-porticos/' },
-      { label: 'ChileAtiende — certificado de multas impagas', url: 'https://www.chileatiende.gob.cl/fichas/3439-certificado-de-multas-de-transito-no-pagadas' },
+      {
+        label: 'Dirección General de Concesiones — peajes y pórticos 2026',
+        url: 'https://concesiones.mop.gob.cl/peajes-y-porticos/',
+      },
+      {
+        label: 'ChileAtiende — certificado de multas impagas',
+        url: 'https://www.chileatiende.gob.cl/fichas/3439-certificado-de-multas-de-transito-no-pagadas',
+      },
     ],
     sections: [
       {
@@ -1438,7 +1556,8 @@ export const guias: Guia[] = [
   {
     slug: 'familia-pension-alimenticia-chile',
     title: 'Pensión de alimentos y beneficios familiares en Chile 2026',
-    intent: '¿Cómo se fija y cobra una pensión de alimentos y qué beneficios familiares están vigentes?',
+    intent:
+      '¿Cómo se fija y cobra una pensión de alimentos y qué beneficios familiares están vigentes?',
     description:
       'Guía verificada sobre pensión de alimentos, mediación, cobranza, Registro de Deudores, asignación familiar y beneficios vigentes en Chile durante 2026.',
     category: 'familia',
@@ -1465,18 +1584,36 @@ export const guias: Guia[] = [
       'calculadora-aguinaldo',
       'calculadora-pgu',
     ],
-    relatedArticles: [
-      'diferencia-sueldo-bruto-liquido',
-      'comparativa-comisiones-afp-2026',
-    ],
+    relatedArticles: ['diferencia-sueldo-bruto-liquido', 'comparativa-comisiones-afp-2026'],
     sources: [
-      { label: 'Ley 14.908 sobre pago de pensiones de alimentos', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986' },
-      { label: 'BCN Ley Fácil — pensión alimenticia', url: 'https://www.bcn.cl/portal/leyfacil/recurso/pension-alimenticia-para-menores' },
-      { label: 'ChileAtiende — mediación familiar obligatoria', url: 'https://www.chileatiende.gob.cl/fichas/2344-mediacion-familiar-previa-y-obligatoria' },
-      { label: 'ChileAtiende — Registro Nacional de Deudores', url: 'https://www.chileatiende.gob.cl/fichas/111396-inscripcion-en-el-registro-nacional-de-deudores-de-pensiones-de-alimentos' },
-      { label: 'SUSESO — tramos de asignación familiar desde mayo de 2026', url: 'https://www.suseso.gob.cl/612/w3-article-686804.html' },
-      { label: 'ChileAtiende — subsidio al consumo de agua potable', url: 'https://www.chileatiende.gob.cl/fichas/51314-subsidio-al-pago-de-consumo-de-agua-potable-y-servicio-de-alcantarillado' },
-      { label: 'ChileAtiende — Bono Bodas de Oro', url: 'https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro' },
+      {
+        label: 'Ley 14.908 sobre pago de pensiones de alimentos',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986',
+      },
+      {
+        label: 'BCN Ley Fácil — pensión alimenticia',
+        url: 'https://www.bcn.cl/portal/leyfacil/recurso/pension-alimenticia-para-menores',
+      },
+      {
+        label: 'ChileAtiende — mediación familiar obligatoria',
+        url: 'https://www.chileatiende.gob.cl/fichas/2344-mediacion-familiar-previa-y-obligatoria',
+      },
+      {
+        label: 'ChileAtiende — Registro Nacional de Deudores',
+        url: 'https://www.chileatiende.gob.cl/fichas/111396-inscripcion-en-el-registro-nacional-de-deudores-de-pensiones-de-alimentos',
+      },
+      {
+        label: 'SUSESO — tramos de asignación familiar desde mayo de 2026',
+        url: 'https://www.suseso.gob.cl/612/w3-article-686804.html',
+      },
+      {
+        label: 'ChileAtiende — subsidio al consumo de agua potable',
+        url: 'https://www.chileatiende.gob.cl/fichas/51314-subsidio-al-pago-de-consumo-de-agua-potable-y-servicio-de-alcantarillado',
+      },
+      {
+        label: 'ChileAtiende — Bono Bodas de Oro',
+        url: 'https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro',
+      },
     ],
     sections: [
       {
@@ -1664,14 +1801,35 @@ export const guias: Guia[] = [
       'todo-sobre-uf-chile',
     ],
     sources: [
-      { label: 'Comisión Ingresa — qué es el CAE', url: 'https://portal.ingresa.cl/el-credito/que-es-el-credito-cae/' },
-      { label: 'Ingresa — postulación CAE 2026', url: 'https://portal.ingresa.cl/como-postular/como-postulo-al-credito/' },
-      { label: 'Ingresa — renovación CAE 2026', url: 'https://portal.ingresa.cl/como-renovar/como-renuevo-mi-credito/' },
-      { label: 'Ingresa — rebaja al 10% de la renta', url: 'https://portal.ingresa.cl/preguntas-frecuentes/pago-del-credito-rebaja-cuotas-al-10-de-la-renta/' },
-      { label: 'Ingresa — suspensión por cesantía', url: 'https://cesantia.ingresa.cl/docs/pfrecuentes.html' },
-      { label: 'Beneficios Estudiantiles — Gratuidad', url: 'https://portal.beneficiosestudiantiles.cl/gratuidad' },
+      {
+        label: 'Comisión Ingresa — qué es el CAE',
+        url: 'https://portal.ingresa.cl/el-credito/que-es-el-credito-cae/',
+      },
+      {
+        label: 'Ingresa — postulación CAE 2026',
+        url: 'https://portal.ingresa.cl/como-postular/como-postulo-al-credito/',
+      },
+      {
+        label: 'Ingresa — renovación CAE 2026',
+        url: 'https://portal.ingresa.cl/como-renovar/como-renuevo-mi-credito/',
+      },
+      {
+        label: 'Ingresa — rebaja al 10% de la renta',
+        url: 'https://portal.ingresa.cl/preguntas-frecuentes/pago-del-credito-rebaja-cuotas-al-10-de-la-renta/',
+      },
+      {
+        label: 'Ingresa — suspensión por cesantía',
+        url: 'https://cesantia.ingresa.cl/docs/pfrecuentes.html',
+      },
+      {
+        label: 'Beneficios Estudiantiles — Gratuidad',
+        url: 'https://portal.beneficiosestudiantiles.cl/gratuidad',
+      },
       { label: 'FUAS — proceso 2026', url: 'https://fuas.cl/preguntas-frecuentes.html' },
-      { label: 'Ley 20.027 (CAE original)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=240080' },
+      {
+        label: 'Ley 20.027 (CAE original)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=240080',
+      },
     ],
     sections: [
       {
@@ -1816,11 +1974,7 @@ export const guias: Guia[] = [
       'calculadora-plusvalia',
       'calculadora-operacion-renta',
     ],
-    relatedArticles: [
-      'boleta-honorarios-completo',
-      'guia-iva-chile-2026',
-      'como-calcular-finiquito-chile',
-    ],
+    relatedArticles: ['diferencia-sueldo-bruto-liquido'],
     sources: [
       { label: 'Servicio de Impuestos Internos (SII)', url: 'https://www.sii.cl' },
       {
@@ -2252,7 +2406,6 @@ export const guias: Guia[] = [
       },
     ],
   },
-
 ];
 
 // ============================================

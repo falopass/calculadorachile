@@ -16,6 +16,11 @@
 //     enlaza a la guía pillar correspondiente.
 // ============================================
 
+export interface ArticleSource {
+  label: string;
+  url: string;
+}
+
 export interface Article {
   slug: string;
   title: string;
@@ -52,13 +57,18 @@ export interface Article {
    * rich results para preguntas reales detectadas en Search Console.
    */
   faq?: { question: string; answer: string }[];
+  /** Referencias primarias o institucionales mostradas al lector. */
+  sources: ArticleSource[];
 }
 
-export const articles: Article[] = [
+type ArticleDraft = Omit<Article, 'sources'> & {
+  sources?: ArticleSource[];
+};
+
+const articleCatalog: ArticleDraft[] = [
   {
     slug: 'embargos-cae-tgr-2026-cuentas-bienes-raices',
-    title:
-      'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
+    title: 'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
     description:
       'Cómo la Tesorería cobró deudas CAE morosas en 2026: notificaciones, convenios, embargos de cuentas y bienes raíces, tramos de ingreso y debate legal. Fuentes TGR y guía práctica.',
     date: '2026-07-10',
@@ -260,8 +270,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'finiquito-2026-ejemplo-sueldo-minimo',
-    title:
-      'Finiquito 2026 con sueldo mínimo $553.553: ejemplos de despido y renuncia',
+    title: 'Finiquito 2026 con sueldo mínimo $553.553: ejemplos de despido y renuncia',
     description:
       'Cuánto puede dar un finiquito con sueldo base mínimo 2026 de $553.553: despido vs renuncia, gratificación mensual, vacaciones con calendario, descuento AFC y ejemplos auditables.',
     date: '2026-07-10',
@@ -442,8 +451,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'seguro-cesantia-finiquito-2026-afc',
-    title:
-      'Seguro de Cesantía y finiquito 2026: cuándo pueden descontar AFC de la indemnización',
+    title: 'Seguro de Cesantía y finiquito 2026: cuándo pueden descontar AFC de la indemnización',
     description:
       'Qué parte del Seguro de Cesantía puede imputar el empleador al finiquito, cuándo procede el descuento AFC, cómo revisar el certificado y qué ocurre si el despido se declara injustificado.',
     date: '2026-07-10',
@@ -988,8 +996,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'permiso-circulacion-segunda-cuota-agosto-2026',
-    title:
-      'Segunda cuota del permiso de circulación 2026: plazo hasta el 31 de agosto',
+    title: 'Segunda cuota del permiso de circulación 2026: plazo hasta el 31 de agosto',
     description:
       'Si pagaste el permiso de circulación en dos cuotas, la segunda vence el 31 de agosto de 2026. Fechas, qué necesitas y cómo estimar el monto antes de ir a la municipalidad.',
     date: '2026-07-09',
@@ -1006,10 +1013,7 @@ export const articles: Article[] = [
       'permiso circulación plazo',
       'pagar permiso de circulación',
     ],
-    relatedCalculators: [
-      'calculadora-permiso-circulacion',
-      'calculadora-multas-transito',
-    ],
+    relatedCalculators: ['calculadora-permiso-circulacion', 'calculadora-multas-transito'],
     faq: [
       {
         question: '¿Hasta cuándo se paga la segunda cuota del permiso 2026?',
@@ -1091,8 +1095,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'revision-tecnica-chile-2026-calendario-patente',
-    title:
-      'Revisión técnica Chile 2026: calendario por dígito de patente y requisitos',
+    title: 'Revisión técnica Chile 2026: calendario por dígito de patente y requisitos',
     description:
       'Cuándo te toca la revisión técnica según el último dígito de la patente, qué se revisa, cómo consultar el estado y por qué la necesitas para el permiso de circulación.',
     date: '2026-07-10',
@@ -1110,10 +1113,7 @@ export const articles: Article[] = [
       'PRT Chile',
       'revisión técnica y permiso de circulación',
     ],
-    relatedCalculators: [
-      'calculadora-permiso-circulacion',
-      'calculadora-multas-transito',
-    ],
+    relatedCalculators: ['calculadora-permiso-circulacion', 'calculadora-multas-transito'],
     faq: [
       {
         question: '¿Cómo sé en qué mes me toca la revisión técnica?',
@@ -1290,8 +1290,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'cotizacion-empleador-3-5-agosto-2026-costo-pyme',
-    title:
-      'Cotización del empleador 3,5% desde agosto 2026: costo PYME sin duplicar el SIS',
+    title: 'Cotización del empleador 3,5% desde agosto 2026: costo PYME sin duplicar el SIS',
     description:
       'Desde las remuneraciones de agosto de 2026 el aporte previsional total del empleador es 3,5% e incluye el SIS. Compara julio y agosto, calcula el costo real y evita contabilizar dos veces el seguro.',
     date: '2026-07-13',
@@ -1478,8 +1477,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'aguinaldo-fiestas-patrias-2026-pensionados-sector-publico',
-    title:
-      'Aguinaldo de Fiestas Patrias 2026: montos para pensionados IPS y sector público',
+    title: 'Aguinaldo de Fiestas Patrias 2026: montos para pensionados IPS y sector público',
     description:
       'Montos oficiales del aguinaldo de Fiestas Patrias 2026: pensionados IPS ($25.280 + cargas) y funcionarios del sector público ($91.682 / $63.645). Fechas de corte, ejemplos y diferencias con la gratificación.',
     date: '2026-07-10',
@@ -1749,8 +1747,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'horas-extra-jornada-42-horas-chile-2026',
-    title:
-      'Horas extra con jornada de 42 horas: cómo calcularlas en Chile 2026',
+    title: 'Horas extra con jornada de 42 horas: cómo calcularlas en Chile 2026',
     description:
       'Desde el 26 de abril de 2026 la jornada ordinaria máxima es 42 horas semanales (Ley 21.561). Cómo se calcula la hora ordinaria, el recargo legal del 50% y ejemplos en CLP con la calculadora de horas extra.',
     date: '2026-07-11',
@@ -1951,8 +1948,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'sueldo-minimo-2026-calcular-liquido',
-    title:
-      'Sueldo mínimo 2026 $553.553: cómo recalcular tu líquido y descuentos',
+    title: 'Sueldo mínimo 2026 $553.553: cómo recalcular tu líquido y descuentos',
     description:
       'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
     date: '2026-07-11',
@@ -2198,7 +2194,7 @@ export const articles: Article[] = [
 <h2>Paso 3: vacaciones pendientes y proporcionales</h2>
 <p>El feriado no usado se compensa en dinero al terminar el contrato. Para la parte proporcional, la DT obtiene 1,25 días hábiles por mes y una fracción diaria. Después proyecta esos días desde el día siguiente al término y agrega sábados, domingos y festivos que incidan en el período. Por eso no es correcto multiplicar únicamente “meses × 1,25 × sueldo/30”.</p>
 <div class="numeric-example"><div class="numeric-example__title">Ejemplo conceptual con 10 días hábiles proporcionales</div><ul><li>Se proyectan 10 días hábiles desde el día siguiente al término.</li><li>Si en el recorrido caen dos fines de semana, se incorporan cuatro días inhábiles.</li><li>Si además hay un festivo hábil, también se incorpora.</li><li>El período indemnizable podría sumar 15 días corridos.</li></ul><span class="total">La fecha de término cambia el resultado</span></div>
-<p>La remuneración íntegra del feriado depende de si la remuneración es fija, variable o mixta. En remuneración variable se usa el promedio legal de los últimos tres meses trabajados. La <a href="/blog/vacaciones-proporcionales-guia">guía de vacaciones proporcionales</a> desarrolla el método y los casos de feriado progresivo.</p>
+<p>La remuneración íntegra del feriado depende de si la remuneración es fija, variable o mixta. En remuneración variable se usa el promedio legal de los últimos tres meses trabajados. La <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> desarrolla el método y los casos de feriado progresivo.</p>
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>La calculadora necesita fecha</strong><p>Una estimación que no pregunta el día de término no puede incorporar fines de semana y festivos reales. Úsala solo como referencia hasta que esa variable esté implementada.</p></div></aside>
 
 <h2>Paso 4: indemnización por años de servicio</h2>
@@ -2402,7 +2398,7 @@ export const articles: Article[] = [
 
 <h2>Cómo cotizar sin perder el margen</h2>
 <p>Antes de enviar una cotización, indica expresamente “valor neto más IVA”, “IVA incluido” o “operación exenta”, según corresponda. Si tu precio objetivo disponible es $1.000.000 y la operación está afecta, cobrar $1.000.000 IVA incluido deja un neto aproximado de $840.336. La diferencia no es utilidad: corresponde al impuesto incorporado.</p>
-<p>Calcula neto, IVA y total con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a>. Para distinguir IVA de la retención de independientes revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a> y la <a href="/blog/boleta-honorarios-completo">guía práctica de boletas 2026</a>.</p>
+<p>Calcula neto, IVA y total con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a>. Para distinguir IVA de la retención de independientes revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www.bcn.cl/leychile/Navegar?idNorma=1210921" target="_blank" rel="noopener">texto vigente del DL 825 en Ley Chile</a>, la <a href="https://www.sii.cl/normativa_legislacion/circulares/2022/circu50.pdf" target="_blank" rel="noopener">Circular N.º 50 de 2022 del SII</a>, el especial oficial sobre <a href="https://www.sii.cl/destacados/iva_prestacion_servicios/" target="_blank" rel="noopener">IVA en la prestación de servicios</a> y las instrucciones del SII para <a href="https://www.sii.cl/siieduca/aprende-con-nosotros/docs/Declarar_Iva.pdf" target="_blank" rel="noopener">declarar IVA mediante F29</a>. Las dudas observadas en comunidades se usaron para priorizar ejemplos sobre precios con IVA y facturas rechazadas; no se utilizaron como fundamento tributario.</p>`,
@@ -3679,7 +3675,7 @@ export const articles: Article[] = [
 <h2>Trabajadores independientes</h2>
 <p>En honorarios, la renta imponible anual suele partir del 80% de los honorarios brutos del año calendario anterior. La Operación Renta calcula cotizaciones, cobertura y topes anuales conforme a instrucciones del año tributario. Además, la persona puede optar por cobertura total o parcial durante el período transitorio cuando cumple los requisitos.</p>
 <p>Dividir siempre “renta anual × 80% ÷ 12” y toparel resultado mensual es una simplificación insuficiente. La declaración anual considera límites, meses de cobertura, retenciones, gastos y exclusiones. Por ejemplo, las boletas emitidas durante 2026 se relacionan en general con la Operación Renta 2027, no con la liquidación mensual de un dependiente en julio de 2026.</p>
-<p>Revisa la <a href="/blog/boleta-honorarios-completo">guía de boleta de honorarios</a> antes de trasladar estos topes a un independiente.</p>
+<p>Revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a> antes de trasladar estos topes a un independiente.</p>
 
 <h2>Haberes no imponibles y falsa planificación</h2>
 <p>Superar el tope no autoriza reclasificar sueldo como colación, movilización o viático. Esos conceptos quedan fuera de la base solo si responden realmente a su naturaleza y monto razonable. Dividir artificialmente la remuneración puede generar deuda previsional, intereses, multas y diferencias laborales.</p>
@@ -3697,6 +3693,66 @@ export const articles: Article[] = [
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www71.spensiones.cl/portal/institucional/594/w3-article-16921.html" target="_blank" rel="noopener">comunicado oficial de topes 2026 de la Superintendencia de Pensiones</a>, la consulta de la DT sobre el <a href="https://www.dt.gob.cl/portal/1628/w3-article-118076.html" target="_blank" rel="noopener">cambio de 89,9 a 90 UF</a>, el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">DL N.º 3.500, artículo 16</a> y las instrucciones de Previsión Social para honorarios. Las preguntas de foros se usaron para detectar confusiones sobre cesantía, impuesto y valor UF; no como fuente de tasas.</p>`,
   },
 ];
+
+export const RETIRED_ARTICLE_REDIRECTS = {
+  'guia-horas-extra-chile': '/blog/horas-extra-jornada-42-horas-chile-2026',
+  'vacaciones-proporcionales-guia': '/calculadoras/calculadora-vacaciones-proporcionales',
+  'como-calcular-finiquito-chile': '/guias/finiquito-laboral-chile',
+  'boleta-honorarios-completo': '/guias/iva-boleta-honorarios-chile',
+  'guia-iva-chile-2026': '/calculadoras/calculadora-iva',
+} as const;
+
+const OFFICIAL_SOURCE_HOSTS = [
+  'afc.cl',
+  'bcentral.cl',
+  'bcn.cl',
+  'chileatiende.gob.cl',
+  'cmfchile.cl',
+  'dt.gob.cl',
+  'ine.gob.cl',
+  'ingresa.cl',
+  'minvu.gob.cl',
+  'previsionsocial.gob.cl',
+  'sii.cl',
+  'spensiones.cl',
+  'tgr.cl',
+];
+
+function extractOfficialSources(content: string): ArticleSource[] {
+  const sources = new Map<string, ArticleSource>();
+  const anchorPattern = /<a\s+[^>]*href="(https?:\/\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
+
+  for (const match of content.matchAll(anchorPattern)) {
+    const url = match[1];
+    const hostname = new URL(url).hostname.replace(/^www\d*\./, '');
+    const isOfficial = OFFICIAL_SOURCE_HOSTS.some(
+      (host) => hostname === host || hostname.endsWith(`.${host}`),
+    );
+    if (!isOfficial || sources.has(url)) continue;
+
+    const label = match[2]
+      .replace(/<[^>]+>/g, '')
+      .replace(/&[^;]+;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    sources.set(url, {
+      label: label || hostname,
+      url,
+    });
+  }
+
+  return [...sources.values()].slice(0, 8);
+}
+
+export const articles: Article[] = articleCatalog
+  .filter((article) => !(article.slug in RETIRED_ARTICLE_REDIRECTS))
+  .map((article) => ({
+    ...article,
+    sources:
+      article.sources && article.sources.length > 0
+        ? article.sources
+        : extractOfficialSources(article.content),
+  }));
 
 // ============================================
 // Helpers
