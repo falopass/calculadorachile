@@ -20,6 +20,7 @@ import {
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import FinancialCoverageTool from '@/components/cesantia/FinancialCoverageTool';
 import {
   breadcrumbSchema,
   collectionPageSchema,
@@ -274,6 +275,8 @@ export default function CesantiaHubPage() {
               })}
             </ol>
           </section>
+
+          <FinancialCoverageTool />
 
           <section className="mt-12" aria-labelledby="tools-heading">
             <h2

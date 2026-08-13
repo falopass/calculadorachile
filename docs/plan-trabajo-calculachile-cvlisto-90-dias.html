@@ -283,7 +283,7 @@
 
   <header class="hero">
     <div class="hero-inner">
-      <span class="eyebrow">Documento operativo · Actualizado 2026-07-10</span>
+      <span class="eyebrow">Documento operativo · Actualizado 2026-08-12</span>
       <h1>Plan de trabajo: CalculaChile → CVListo (90 días)</h1>
       <p>
         Hoja de ruta para transformar el tráfico orgánico de
@@ -469,7 +469,7 @@
 
       <!-- 6 -->
       <section id="estado">
-        <div class="kicker">06 · Estado · 2026-07-10</div>
+        <div class="kicker">06 · Estado · 2026-08-12</div>
         <h2>Qué ya está hecho vs qué falta</h2>
 
         <h3>Hecho (P0 puente)</h3>
@@ -537,15 +537,15 @@
               </tr>
               <tr>
                 <td>CTA honorarios / “¿es oferta?” sueldo</td>
-                <td>Sueldo ya tiene copy de oferta; falta CTA en boleta honorarios y UI/copy A/B formal.</td>
+                <td>Allowlist y copy de honorarios ya están en CalculaChile; falta el experimento formal y verificar el flujo completo en CVListo.</td>
               </tr>
               <tr>
                 <td>Cobertura financiera mínima</td>
-                <td>Hub menciona cobertura; no hay herramienta interactiva “meses de runway”.</td>
+                <td>Implementada en <code>/cesantia</code> como cálculo referencial de finiquito + ahorro + gasto mensual → meses.</td>
               </tr>
               <tr>
                 <td>Enlazado interno laboral</td>
-                <td>Hub + blogs AFC ok; falta pase sistemático en calcs laborales (3–5 links plan §7.6).</td>
+                <td>Implementado en las calculadoras laborales con 3–5 enlaces contextuales al hub, guías y herramientas relacionadas.</td>
               </tr>
             </tbody>
           </table>
@@ -581,7 +581,7 @@
             <h3>Finiquito · sueldo · vacaciones · honorarios</h3>
             <ul>
               <li>Finiquito / indemnización / vacaciones / sueldo — <strong>hecho</strong></li>
-              <li>Honorarios — <em>pendiente allowlist CTA</em></li>
+              <li>Honorarios — <strong>hecho en CalculaChile</strong>; pendiente verificar el flujo en CVListo</li>
             </ul>
           </div>
           <div class="timeline-item done">
@@ -596,7 +596,7 @@
             <h3><code>/cesantia</code> + cobertura</h3>
             <ul>
               <li>Hub + enlaces calcs + blogs AFC — <strong>hecho</strong></li>
-              <li>Calculadora cobertura financiera mínima — <em>pendiente</em></li>
+              <li>Calculadora cobertura financiera mínima — <strong>hecho</strong> en el hub</li>
             </ul>
           </div>
         </div>
@@ -775,9 +775,9 @@
         <h2>Próximos 14 días (orden de ejecución)</h2>
         <ol>
           <li class="p0">P0 — Completar los 10 eventos GA4 del embudo en CVListo + alinear nombres en CalculaChile.</li>
-          <li class="p0">P0 — CTA honorarios + (opcional) experimento formal FIN_CTA_01 con flag <code>exp</code>.</li>
-          <li class="p0">P0 — Herramienta mínima de cobertura financiera en <code>/cesantia</code> (finiquito + ahorro + gasto → meses).</li>
-          <li class="p1">P1 — Pase de enlazado interno en calcs laborales (máx. 3–5 links útiles al hub/blogs).</li>
+          <li class="p0">P0 — Verificar el flujo honorarios completo en CVListo + (opcional) experimento FIN_CTA_01 con flag <code>exp</code>.</li>
+          <li class="p1">P1 — Medir uso y utilidad de la herramienta de cobertura financiera de <code>/cesantia</code>.</li>
+          <li class="p1">P1 — Mantener el pase de enlazado interno en calcs laborales (máx. 3–5 links útiles al hub/blogs).</li>
           <li class="p1">P1 — Framing “postulaciones” en pricing (CV_PRICE_01, variante controlada).</li>
           <li class="p1">P1 — Panel semanal: Explore GA4 o hoja con clics CTA por calculadora.</li>
           <li class="p2">P2 — No Ads Search hasta tener baseline 2 semanas del embudo.</li>
@@ -805,10 +805,10 @@
         <div class="check-list" data-group="cc">
           <label class="check done"><input type="checkbox" data-key="c1" checked disabled><span class="label">CTA post-resultado finiquito (y calcs laborales allowlist)</span></label>
           <label class="check done"><input type="checkbox" data-key="c2" checked disabled><span class="label">Copy “¿Es una oferta?” en sueldo líquido<span class="meta">Vía CrossDomainCta origen=sueldo</span></span></label>
-          <label class="check"><input type="checkbox" data-key="c3"><span class="label">CTA contrato vs honorarios (boleta)</span></label>
+          <label class="check done"><input type="checkbox" data-key="c3" checked disabled><span class="label">CTA contrato vs honorarios (boleta)<span class="meta">Allowlist y copy contextual en CalculaChile</span></span></label>
           <label class="check done"><input type="checkbox" data-key="c4" checked disabled><span class="label">Publicar hub <code>/cesantia</code></span></label>
-          <label class="check"><input type="checkbox" data-key="c5"><span class="label">Calculadora de cobertura financiera</span></label>
-          <label class="check"><input type="checkbox" data-key="c6"><span class="label">Actualizar enlazado interno laboral</span></label>
+          <label class="check done"><input type="checkbox" data-key="c5" checked disabled><span class="label">Calculadora de cobertura financiera<span class="meta">/cesantia · finiquito + ahorro + gasto → meses</span></span></label>
+          <label class="check done"><input type="checkbox" data-key="c6" checked disabled><span class="label">Actualizar enlazado interno laboral<span class="meta">3–5 enlaces contextuales por calculadora</span></span></label>
         </div>
 
         <h3>CVListo</h3>

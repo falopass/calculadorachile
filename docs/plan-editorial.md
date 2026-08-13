@@ -87,6 +87,10 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 7 | blog | Aguinaldo Fiestas Patrias 2026 (IPS + SP) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios | aguinaldo |
 | 2 | blog | Horas extra con jornada de 42 horas Chile 2026 | `horas-extra-jornada-42-horas-chile-2026` | 2026-07-11 | laboral | horas-extra |
 | 3 | blog | Sueldo mínimo 2026 $553.553 → líquido | `sueldo-minimo-2026-calcular-liquido` | 2026-07-11 | laboral | sueldo-liquido |
+| 4 | blog | Subsidio eléctrico 2026: resultados y descuento | `subsidio-electrico-2026-resultados-descuento-cuenta` | 2026-08-12 | hogar | cuenta-luz |
+| 5 | blog | BTM/SEJ pago anual + puente SUE | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | 2026-08-12 | empleo | sueldo, costo-empleado |
+| 8 | blog | PGU septiembre 2026: aumento para 75+ | `pgu-aumento-septiembre-2026-75-anos` | 2026-08-12 | pensión | pgu, AFP |
+| 9 | blog | Asignación Familiar 2026: tramos y montos | `asignacion-familiar-2026-tramos-montos` | 2026-08-12 | familia | asignación-familiar, sueldo |
 | — | hub | Hub cesantía / me despidieron | `/cesantia` | 2026-07-10 | laboral | finiquito |
 | — | blog | Checklist después de un despido | `checklist-despues-despido-chile-2026` | 2026-07-10 | laboral | finiquito |
 | 31 | blog | Seguro de Cesantía + finiquito (AFC) | `seguro-cesantia-finiquito-2026-afc` | 2026-07-10 | laboral | finiquito |
@@ -98,6 +102,8 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
 **#6 adelantado (2026-07-10):** ejemplos IMM $553.553 verificados con módulo finiquito + fuentes DT/Ley 20.684/21.830.  
 **CAE embargos (2026-07-10):** post TGR + calculadora CAE con % ingreso y FAQ cobro fiscal.
+**#4 y #5 adelantados (2026-08-12):** se publicaron como blogs de ventana después de revalidar resultados, montos y calendario con fuentes oficiales. #4 usa $31.224 para hogares de 4 o más integrantes según ChileAtiende; el monto SUE no se presenta como cifra garantizada.
+**#8 y #9 adelantados (2026-08-12):** se publicaron antes del pico de septiembre con fuentes ChileAtiende, SUSESO y Superintendencia de Pensiones. #8 distingue el monto máximo PGU del derecho individual; #9 separa tramo, causante acreditado y modalidad de pago.
 
 ---
 
@@ -109,11 +115,11 @@ Ordenado por **fecha de publicación sugerida**.
 |--:|--------|--------|------|-----------|---------|-------|------|-----------|
 | ~~2~~ | blog | ~~Horas extra jornada 42 h~~ | ~~`horas-extra-jornada-42-horas-chile-2026`~~ | — | laboral | ~~2026-07-11~~ | ago–oct | ✅ |
 | ~~3~~ | blog | ~~Sueldo mínimo 2026 $553.553 → líquido~~ | ~~`sueldo-minimo-2026-calcular-liquido`~~ | satélite `sueldo-liquido-chile` | laboral | ~~2026-07-11~~ | ago–dic | ✅ |
-| 4 | blog | Subsidio eléctrico 2026: resultados y descuento | `subsidio-electrico-2026-resultados-descuento-cuenta` | DR[25] | hogar | 2026-08-18 | ago–sep | **P2-ventana** |
-| 5 | blog | BTM/SEJ pago anual + puente SUE | `bono-trabajo-mujer-sej-pago-anual-2026-sue` | DR[13] | empleo | 2026-08-21 | ago | **P2-ventana** |
+| ~~4~~ | blog | ~~Subsidio eléctrico 2026: resultados y descuento~~ | ~~`subsidio-electrico-2026-resultados-descuento-cuenta`~~ | DR[25] | hogar | ~~2026-08-12~~ | ago–sep | ✅ |
+| ~~5~~ | blog | ~~BTM/SEJ pago anual + puente SUE~~ | ~~`bono-trabajo-mujer-sej-pago-anual-2026-sue`~~ | DR[13] | empleo | ~~2026-08-12~~ | ago | ✅ |
 | ~~6~~ | blog | ~~Finiquito 2026 con sueldo mínimo~~ | ~~`finiquito-2026-ejemplo-sueldo-minimo`~~ | publicado 2026-07-10 | laboral | ~~2026-08-23~~ | continuo | ✅ |
-| 8 | blog | Aumento PGU sep 2026 (75+) | `pgu-aumento-septiembre-2026-75-anos` | DR[19] soporte · satélite AFP | pensión | 2026-08-28 | sep | **P1** |
-| 9 | blog | Asignación familiar 2026: tramos y montos | `asignacion-familiar-2026-tramos-montos` | satélite familia | familia | 2026-09-01 | sep–dic | **P1** |
+| ~~8~~ | blog | ~~Aumento PGU sep 2026 (75+)~~ | ~~`pgu-aumento-septiembre-2026-75-anos`~~ | DR[19] soporte · satélite AFP | pensión | ~~2026-08-12~~ | sep | ✅ |
+| ~~9~~ | blog | ~~Asignación familiar 2026: tramos y montos~~ | ~~`asignacion-familiar-2026-tramos-montos`~~ | satélite familia | familia | ~~2026-08-12~~ | sep–dic | ✅ |
 | 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
 | 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
 | 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | DR[24] · satélite iva-boleta | impuestos | 2026-09-08 | continuo | **P2-continuo** |
@@ -153,20 +159,20 @@ Ordenado por **fecha de publicación sugerida**.
 | 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
 | 45 | blog | Patente comercial 2027 | `patente-comercial-2027-calcular` | satélite pymes | empresas | 2027-01-29 | ene–mar | **P3** |
 
-**Conteo pendientes:** 43 filas activas (#2 y #3 en publicados).
+**Conteo pendientes:** 37 filas activas (#2–#6, #8, #9 y #31 en publicados).
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 39 |
-| **blog\*** (candidata guía) | 3 (#47, #48, #31) |
+| **blog** | 35 |
+| **blog\*** (candidata guía) | 2 (#47, #48) |
 | **guía** | **1** (#39) |
 
 ### Sub-orden P2
 
 | Subnivel | Uso | IDs |
 |----------|-----|-----|
-| **P2-ventana** | Antes del pico | #4, #5, #10, #11, #13–#16, #18, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
-| **P2-continuo** | Sin deadline | #12, #17, #21, #22, #25–#28, #31, #33, #38, #47–#50 |
+| **P2-ventana** | Antes del pico | #10, #11, #13–#16, #18, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
+| **P2-continuo** | Sin deadline | #12, #17, #21, #22, #25–#28, #33, #38, #47–#50 |
 
 ---
 
@@ -261,8 +267,6 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 
 | # | slug | Por qué primero |
 |---|------|-----------------|
-| 8 | `pgu-aumento-septiembre-2026-75-anos` | Pico septiembre; monto etario YMYL |
-| 9 | `asignacion-familiar-2026-tramos-montos` | Tramos SUSESO reajustados con IMM |
 | 10 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | Fecha fija; alto CTR estacional |
 
 ### Prioridad 2 — con inventario o evergreen, pero sin DR
@@ -303,8 +307,7 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 
 | # | DR |
 |---|-----|
-| 4 | DR[25] |
-| 5, 16 | DR[13] |
+| 16 | DR[13] |
 | 6 | DR[12] |
 | 11, 29 | DR[27] |
 | 12 | DR[24] |
@@ -318,7 +321,6 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 | 47 | DR[7] |
 | 48 | DR[8] |
 | 50 | DR[23] |
-| 8 *(soporte)* | DR[19] |
 
 ---
 
@@ -337,7 +339,7 @@ Objetivo del producto = **pageviews AdSense**, no solo fit calculadora. La restr
 
 **Qué queda fuera a propósito (no #51+ por ahora):** DR[2] licencia conducir, DR[4] multas como post, DR[10] fuero, DR[15] retiros, DR[29] RSH — ver sección “sin lugar”.
 
-**Ritmo:** 45 pendientes / ~24 semanas ≈ **1,9 posts/semana** (antes 1,7). Sigue sostenible si se prioriza P1 → P2-ventana → P2-continuo (#47–#50 entran en el bulk continuo de sep–oct).
+**Ritmo:** 37 pendientes / ~24 semanas ≈ **1,5 posts/semana**. Sigue sostenible si se prioriza P2-ventana → P2-continuo (#47–#50 entran en el bulk continuo de sep–oct).
 
 ---
 
@@ -359,15 +361,15 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                    7  (todos blog; +#3 IMM 2026-07-11)
-  Pendientes:                   43
-    blog:                       39
-    blog* (candidata guía):      3   (#47, #48, #31)
+  Publicados:                   11  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
+  Pendientes:                   37
+    blog:                       35
+    blog* (candidata guía):      2   (#47, #48)
     guía:                        1   (#39 Operación Renta)
-    P1 restante:                 3   (#6, #8, #9)
-    P2:                         34
+    P1 restante:                 0
+    P2:                         31
     P3:                          6
-  Total publicados + pendientes: 50
+  Total publicados + pendientes: 48
 ```
 
 
@@ -389,10 +391,10 @@ Plan integrado operativo:
 
 ## Uso operativo
 
-1. **Siguiente (P1, blog):** #8 PGU 75+ (pico sep) o #9 asignación familiar; cola P2-ventana #4/#5 (ago).  
+1. **Siguiente (P2-ventana, blog):** #10 feriados irrenunciables 18–19 de septiembre; #4, #5, #8 y #9 ya publicados el 2026-08-12.
 2. **Cola P2-ventana** (blogs) antes que relleno continuo.  
 3. **#39 (guía):** en ene 2027 escribir en `guias.ts`, no en blog.  
-4. **#47 / #48 / #31 (blog\*):** blog primero; evaluar guía solo si rankean.  
+4. **#47 / #48 (blog\*):** blog primero; evaluar guía solo si rankean.
 5. **Antes de publicar:** revalidar montos (T−1).  
 6. **Tras publicar:** tachar aquí; si es blog → `articles.ts`; si es guía → `guias.ts`.
 

@@ -4,6 +4,7 @@ import OfficialValuesBlock from '@/components/home/OfficialValuesBlock';
 import SearchHero from '@/components/home/SearchHero';
 import PopularCalculators from '@/components/home/PopularCalculators';
 import CategoryCatalog from '@/components/home/CategoryCatalog';
+import TrustMethodSection from '@/components/home/TrustMethodSection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { SITE_URL } from '@/lib/site';
 
@@ -54,6 +55,7 @@ export default function HomePage() {
       <OfficialValuesBlock />
       <SearchHero />
       <PopularCalculators />
+      <TrustMethodSection />
       <CategoryCatalog />
     </>
   );

@@ -13,10 +13,7 @@ import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import ArticleCard from '@/components/blog/ArticleCard';
 import ShareBlogButton from '@/components/blog/ShareBlogButton';
 import JsonLd from '@/components/seo/JsonLd';
-import {
-  collectionPageSchema,
-  breadcrumbSchema,
-} from '@/lib/seo/schema';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
 import { articles } from '@/data/articles';
@@ -44,15 +41,12 @@ export default function BlogPage() {
   const url = absoluteUrl('/blog');
 
   // Agrupar artículos por categoría para mostrarlos organizados
-  const byCategory = articles.reduce<Record<string, typeof articles>>(
-    (acc, art) => {
-      const cat = art.category;
-      if (!acc[cat]) acc[cat] = [];
-      acc[cat].push(art);
-      return acc;
-    },
-    {},
-  );
+  const byCategory = articles.reduce<Record<string, typeof articles>>((acc, art) => {
+    const cat = art.category;
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(art);
+    return acc;
+  }, {});
 
   // Orden preferido para las categorías conocidas. Cualquier categoría
   // nueva que aparezca en `articles` se renderiza al final con su
@@ -61,16 +55,24 @@ export default function BlogPage() {
   // mostraban pese a tener artículos con tracción real en GSC).
   const categoryOrder = [
     'laboral',
+    'beneficios',
+    'familia',
+    'hogar',
     'impuestos',
     'vivienda',
+    'vehiculos',
     'previsional',
     'educacion',
     'educacion-financiera',
   ];
   const categoryLabels: Record<string, string> = {
     laboral: 'Laboral y sueldo',
+    beneficios: 'Beneficios y apoyos',
+    familia: 'Familia y cargas',
+    hogar: 'Hogar y servicios básicos',
     impuestos: 'Impuestos y tributos',
     vivienda: 'Vivienda y arriendo',
+    vehiculos: 'Vehículos y transporte',
     previsional: 'Previsional y AFP',
     educacion: 'Educación y créditos estudiantiles',
     'educacion-financiera': 'Educación financiera',
@@ -88,10 +90,7 @@ export default function BlogPage() {
         description: art.description,
       })),
     }),
-    breadcrumbSchema([
-      { name: 'Inicio', path: '/' },
-      { name: 'Blog' },
-    ]),
+    breadcrumbSchema([{ name: 'Inicio', path: '/' }, { name: 'Blog' }]),
   ];
 
   return (
@@ -99,9 +98,7 @@ export default function BlogPage() {
       <JsonLd id="blog-index" data={schemas} />
 
       <div className="container-base py-8 md:py-12">
-        <Breadcrumbs
-          items={[{ label: 'Inicio', href: '/' }, { label: 'Blog' }]}
-        />
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog' }]} />
 
         <div className="max-w-5xl mx-auto">
           {/* Hero */}
@@ -126,9 +123,7 @@ export default function BlogPage() {
                   queden invisibles en el índice del blog. */}
               {[
                 ...categoryOrder,
-                ...Object.keys(byCategory).filter(
-                  (c) => !categoryOrder.includes(c),
-                ),
+                ...Object.keys(byCategory).filter((c) => !categoryOrder.includes(c)),
               ].map((cat) => {
                 const list = byCategory[cat];
                 if (!list || list.length === 0) return null;
@@ -139,11 +134,7 @@ export default function BlogPage() {
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {list.map((art, idx) => (
-                        <ArticleCard
-                          key={art.slug}
-                          article={art}
-                          index={idx}
-                        />
+                        <ArticleCard key={art.slug} article={art} index={idx} />
                       ))}
                     </div>
                   </section>
@@ -162,7 +153,8 @@ export default function BlogPage() {
               ¿Buscas algo más profundo?
             </h2>
             <p className="text-sm text-[var(--foreground-secondary)] mb-4">
-              Lee nuestras guías pillar (15+ minutos) con todas las fórmulas, ejemplos numéricos y bases legales.
+              Lee nuestras guías pillar (15+ minutos) con todas las fórmulas, ejemplos numéricos y
+              bases legales.
             </p>
             <Link
               href="/guias"

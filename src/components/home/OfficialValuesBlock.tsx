@@ -23,7 +23,11 @@ export default function OfficialValuesBlock() {
   const { uf, utm, dolar, lastUpdated, source } = useLiveValues();
 
   const updatedLabel = useMemo(() => {
-    if (!lastUpdated) return 'actualizado hoy';
+    if (!lastUpdated) {
+      return source === 'fallback'
+        ? 'fecha de respaldo: verifica la fuente oficial'
+        : 'fecha no disponible';
+    }
     try {
       return new Date(lastUpdated).toLocaleDateString('es-CL', {
         day: '2-digit',
@@ -31,28 +35,28 @@ export default function OfficialValuesBlock() {
         year: 'numeric',
       });
     } catch {
-      return 'actualizado hoy';
+      return 'fecha no disponible';
     }
-  }, [lastUpdated]);
+  }, [lastUpdated, source]);
 
   const sourceLabel = useMemo(() => {
     if (source === 'bcentral') return 'Banco Central de Chile';
-    if (source === 'mindicador') return 'Mindicador / fuentes oficiales';
-    return 'Valores oficiales de respaldo';
+    if (source === 'mindicador') return 'Mindicador como referencia';
+    return 'Respaldo local: confirma en la fuente oficial';
   }, [source]);
 
   const items = [
     { label: 'UF', value: formatCLP(uf, 2) },
     { label: 'UTM', value: formatCLP(utm) },
     { label: 'Dólar observado', value: formatCLP(dolar.observado, 2) },
-    { label: 'Ingreso mínimo 2026', value: formatCLP(INGRESO_MINIMO.mensual) },
+    { label: 'Ingreso mínimo de referencia', value: formatCLP(INGRESO_MINIMO.mensual) },
   ];
 
   return (
     <section className="border-b border-[var(--border)]">
       <div className="container-base py-8 md:py-10">
         <p className="text-xs font-medium uppercase tracking-[0.14em] text-[var(--foreground-muted)]">
-          Valores oficiales
+          Indicadores de referencia
         </p>
 
         <h1 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-[var(--foreground)] md:text-5xl">
@@ -68,9 +72,7 @@ export default function OfficialValuesBlock() {
               <p className="mt-3 font-mono text-3xl font-medium tracking-[-0.03em] text-[var(--foreground)] md:text-4xl">
                 {item.value}
               </p>
-              <p className="mt-2 text-xs text-[var(--foreground-muted)]">
-                {updatedLabel}
-              </p>
+              <p className="mt-2 text-xs text-[var(--foreground-muted)]">{updatedLabel}</p>
             </div>
           ))}
         </div>

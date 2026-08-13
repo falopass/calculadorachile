@@ -64,13 +64,13 @@ const principles = [
     icon: Code2,
     title: 'Open source y revisión pública',
     kind: 'tip' as const,
-    body: 'Todo el código está en GitHub. Si encuentras un error en una fórmula o un dato desactualizado, abre un issue o un pull request — y te responderé el mismo día. Prefiero corregir un error a defenderlo.',
+    body: 'El código del proyecto está disponible en GitHub. Si encuentras un error en una fórmula o un dato desactualizado, puedes reportarlo con la URL y una fuente oficial. Las correcciones se priorizan por su impacto y se documentan en la página afectada.',
   },
   {
     icon: ShieldCheck,
     title: 'No es asesoría profesional',
     kind: 'warning' as const,
-    body: 'CalculaChile entrega resultados referenciales basados en fórmulas oficiales. Para trámites formales (despido, declaración de impuestos, compra de propiedad) consulta con un abogado, contador o asesor previsional. La ley puede cambiar entre actualizaciones del sitio.',
+    body: 'CalculaChile entrega resultados referenciales basados en reglas, fuentes y supuestos declarados en cada herramienta. Para trámites formales (despido, declaración de impuestos, compra de propiedad) consulta con un abogado, contador o asesor previsional. La ley puede cambiar entre actualizaciones del sitio.',
   },
 ];
 

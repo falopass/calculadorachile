@@ -155,8 +155,7 @@ function getInputSuffix(input: CalculatorInputType): string | undefined {
   return undefined;
 }
 
-const formatNumber = (value: number) =>
-  value === 0 ? '' : value.toLocaleString('es-CL');
+const formatNumber = (value: number) => (value === 0 ? '' : value.toLocaleString('es-CL'));
 
 const parseNumber = (value: string) => {
   const cleaned = value.replace(/\./g, '').replace(/,/g, '.');
@@ -178,9 +177,7 @@ interface BooleanToggleProps {
 function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-semibold text-[var(--foreground)]">
-        {label}
-      </label>
+      <label className="block text-sm font-semibold text-[var(--foreground)]">{label}</label>
       <div className="inline-flex rounded-lg border border-[var(--border)] bg-[var(--surface)] p-1">
         <button
           type="button"
@@ -228,11 +225,8 @@ function renderInput(
   onChange: (id: string, value: string | number | boolean) => void,
   error?: string,
 ) {
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const newValue =
-      input.type === 'number' ? parseFloat(e.target.value) || 0 : e.target.value;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const newValue = input.type === 'number' ? parseFloat(e.target.value) || 0 : e.target.value;
     onChange(input.id, newValue);
   };
 
@@ -399,9 +393,7 @@ export default function PremiumCalculatorShell({
   const hasTrackedStart = useRef(false);
   const hasTrackedComplete = useRef(false);
 
-  const [inputValues, setInputValues] = useState(() =>
-    buildInitialValues(calculator.inputs),
-  );
+  const [inputValues, setInputValues] = useState(() => buildInitialValues(calculator.inputs));
   const [debouncedValues, setDebouncedValues] = useState(inputValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [results, setResults] = useState<CalculatorResult[] | null>(null);
@@ -526,8 +518,7 @@ export default function PremiumCalculatorShell({
     hasTrackedComplete.current = false;
   }, [calculator.inputs]);
 
-  const organismo =
-    ORGANISMO_BY_CATEGORY[calculator.category] ?? 'el organismo oficial competente';
+  const organismo = ORGANISMO_BY_CATEGORY[calculator.category] ?? 'el organismo oficial competente';
 
   const optionalInputs = calculator.inputs.filter(
     (i) => !i.required && i.defaultValue === undefined,
@@ -555,7 +546,7 @@ export default function PremiumCalculatorShell({
               {calculator.name}
             </h2>
             <p className="text-xs md:text-sm text-[var(--foreground-secondary)] truncate">
-              Cálculo instantáneo, valores 2026
+              Estimación según los datos ingresados
             </p>
           </div>
         </div>
@@ -577,12 +568,7 @@ export default function PremiumCalculatorShell({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {essentialInputs.map((input) => (
             <div key={input.id}>
-              {renderInput(
-                input,
-                inputValues[input.id],
-                handleInputChange,
-                errors[input.id],
-              )}
+              {renderInput(input, inputValues[input.id], handleInputChange, errors[input.id])}
             </div>
           ))}
         </div>
@@ -608,12 +594,7 @@ export default function PremiumCalculatorShell({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 border-t border-[var(--border)] p-4 md:p-5 bg-[var(--surface)]">
               {optionalInputs.map((input) => (
                 <div key={input.id}>
-                  {renderInput(
-                    input,
-                    inputValues[input.id],
-                    handleInputChange,
-                    errors[input.id],
-                  )}
+                  {renderInput(input, inputValues[input.id], handleInputChange, errors[input.id])}
                 </div>
               ))}
             </div>
@@ -666,10 +647,9 @@ export default function PremiumCalculatorShell({
           {isRiskyCalc && (
             <div className="mb-5">
               <LegalNote type="legal">
-                <strong>Aviso legal:</strong> Esta calculadora entrega una estimación
-                referencial. Los valores reales pueden variar según convenios, causales
-                de término del contrato o circunstancias particulares. Consulta con un
-                profesional para tu caso concreto.
+                <strong>Aviso legal:</strong> Esta calculadora entrega una estimación referencial.
+                Los valores reales pueden variar según convenios, causales de término del contrato o
+                circunstancias particulares. Consulta con un profesional para tu caso concreto.
               </LegalNote>
             </div>
           )}

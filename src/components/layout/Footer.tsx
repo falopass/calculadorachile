@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Calculator, BookOpen, Layers, ArrowUpRight } from 'lucide-react';
-import { SITE_NAME } from '@/lib/site';
+import { CONTACT_EMAIL, SITE_NAME } from '@/lib/site';
 
 const footerLinks = {
   calculadoras: {
@@ -11,7 +11,10 @@ const footerLinks = {
       { href: '/calculadoras/calculadora-credito-cae', label: 'Simulador CAE' },
       { href: '/calculadoras/calculadora-patente-comercial', label: 'Patente comercial' },
       { href: '/calculadoras/calculadora-sueldo-liquido', label: 'Sueldo líquido' },
-      { href: '/calculadoras/calculadora-vacaciones-proporcionales', label: 'Vacaciones proporcionales' },
+      {
+        href: '/calculadoras/calculadora-vacaciones-proporcionales',
+        label: 'Vacaciones proporcionales',
+      },
       { href: '/calculadoras/calculadora-permiso-circulacion', label: 'Permiso de circulación' },
       { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
     ],
@@ -39,6 +42,7 @@ const footerLinks = {
       { href: '/buscar', label: 'Buscar' },
       { href: '/faq', label: 'Preguntas frecuentes' },
       { href: '/acerca-de', label: 'Acerca de CalculaChile' },
+      { href: '/metodologia', label: 'Método y correcciones' },
     ],
   },
 };
@@ -74,7 +78,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[var(--foreground-secondary)]">
-              Calculadoras laborales, tributarias y financieras para Chile. Actualizadas a 2026.
+              Calculadoras laborales, tributarias y financieras para Chile, con fuentes, supuestos y
+              fecha de revisión por herramienta.
             </p>
             <p className="mt-5 text-xs text-[var(--foreground-muted)]">
               © {year} {SITE_NAME} · Hecho en Chile
@@ -139,6 +144,13 @@ export default function Footer() {
             >
               Cookies
             </Link>
+            <span aria-hidden>·</span>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="transition-colors duration-150 hover:text-[var(--foreground-secondary)]"
+            >
+              Contacto
+            </a>
           </div>
         </div>
       </div>

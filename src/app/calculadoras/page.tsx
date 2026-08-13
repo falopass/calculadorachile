@@ -108,8 +108,8 @@ export default function CalculadorasPage() {
           </h1>
           <p className="mt-3 text-base md:text-lg text-[var(--foreground-secondary)] max-w-2xl">
             {discoverableCalculators.length} herramientas gratuitas para sueldo, impuestos,
-            vivienda, pensiones y más. Datos oficiales actualizados a 2026, con bases legales
-            citadas y fórmulas explicadas.
+            vivienda, pensiones y más. Cada herramienta indica sus fuentes, fecha de revisión,
+            supuestos y limitaciones.
           </p>
         </div>
       </section>

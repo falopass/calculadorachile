@@ -18,11 +18,7 @@ import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import FAQ from '@/components/calculator/FAQ';
 import TocSticky from '@/components/article/TocSticky';
 import JsonLd from '@/components/seo/JsonLd';
-import {
-  faqPageSchema,
-  breadcrumbSchema,
-  webPageSchema,
-} from '@/lib/seo/schema';
+import { faqPageSchema, breadcrumbSchema, webPageSchema } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl, CONTACT_EMAIL } from '@/lib/site';
 
@@ -34,6 +30,7 @@ export const metadata: Metadata = buildPageMetadata({
   path: '/faq',
   title: PAGE_TITLE,
   description: PAGE_DESC,
+  noIndex: true,
   keywords: [
     'preguntas frecuentes calculadora chile',
     'FAQ sueldo líquido',
@@ -59,17 +56,17 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Qué es CalculaChile?',
         answer:
-          'CalculaChile es un sitio web gratuito con 39 calculadoras para Chile: sueldo líquido, finiquito, UF, IVA, créditos hipotecarios, permiso de circulación, subsidios, AFP, boleta de honorarios y más. Todos los cálculos usan valores oficiales actualizados (UF y UTM diaria, tasas legales 2026) y citan las leyes que los respaldan.',
+          'CalculaChile es un sitio web gratuito con 39 calculadoras para Chile: sueldo líquido, finiquito, UF, IVA, créditos hipotecarios, permiso de circulación, subsidios, AFP, boleta de honorarios y más. Cada herramienta publica sus fuentes, fecha de revisión, supuestos y límites; el resultado es una estimación y no reemplaza el trámite o documento aplicable.',
       },
       {
         question: '¿Las calculadoras son gratuitas?',
         answer:
-          'Sí, todas son gratuitas y no requieren registro. El sitio se financia con publicidad mínima (Google AdSense) que no rastrea datos personales sensibles. Los cálculos se ejecutan localmente en tu navegador, no se envían a ningún servidor.',
+          'Sí, todas son gratuitas y no requieren registro. Puedes revisar la política de privacidad y cookies para conocer el tratamiento de datos y las tecnologías que eventualmente se usen para medir audiencia o mostrar publicidad. Los resultados no sustituyen la respuesta de la institución competente.',
       },
       {
         question: '¿Los resultados son exactos?',
         answer:
-          'Los resultados son exactos según las fórmulas oficiales y los valores publicados. Pueden existir pequeñas diferencias con tu liquidación de sueldo o finiquito si tu empleador aplica reglas internas (por ejemplo, redondeos distintos en el tope imponible o pago de bonos no estándar). Para trámites legales formales recomendamos validar con la Dirección del Trabajo, el SII o un profesional.',
+          'Son estimaciones referenciales construidas con las reglas, valores y supuestos que cada página declara. Un contrato, cotización, resolución, redondeo, bono o antecedente personal puede cambiar el resultado. Para trámites formales debes confirmar con la institución competente o un profesional.',
       },
       {
         question: '¿Mis datos están seguros?',
@@ -79,7 +76,7 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Con qué frecuencia se actualizan los valores?',
         answer:
-          'La UF se actualiza diariamente vía GitHub Action desde mindicador.cl con respaldo del Banco Central. La UTM se actualiza mensualmente. El dólar y el euro son diarios. Las tasas legales (AFP, salud, cesantía, tramos de impuesto) se actualizan cada vez que cambia la normativa. La fecha del último snapshot está visible en la página de cada calculadora.',
+          'UF, UTM y tipos de cambio se consultan mediante fuentes públicas con respaldo cuando una fuente no responde. Las tasas, topes, tramos y calendarios se revisan cuando cambia la normativa o antes de publicar contenido estacional. La página de cada herramienta indica sus fuentes, fecha de revisión y limitaciones.',
       },
     ],
   },
@@ -90,32 +87,32 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Cómo calculo mi sueldo líquido?',
         answer:
-          'Tu sueldo líquido es el bruto menos AFP (10% + comisión variable, entre 0,46% y 1,45%), salud (7% mínimo), seguro de cesantía (0,6% si tienes contrato indefinido) e impuesto único de segunda categoría si tu base supera 13,5 UTM mensuales. Para el cálculo exacto con tu AFP y plan de salud, usa la calculadora de sueldo líquido.',
+          'El sueldo líquido se obtiene al descontar cotizaciones, salud, seguro de cesantía, impuestos y otros descuentos que correspondan a tu caso. El resultado depende de la AFP, el plan de salud, el tipo de contrato y la liquidación. Usa la calculadora como orientación y contrasta los datos con tu liquidación.',
       },
       {
         question: '¿Cuál es el tope imponible AFP/Salud en 2026?',
         answer:
-          'El tope imponible AFP y Salud en 2026 es de 90 UF mensuales. Las cotizaciones se calculan solo sobre ese monto: si tu sueldo bruto es mayor, la porción que excede no cotiza. El tope del seguro de cesantía es distinto: 135,2 UF mensuales.',
+          'Los topes imponibles previsionales cambian y pueden diferir según el tipo de cotización. Revisa la fecha de revisión y las fuentes de la calculadora de sueldo líquido antes de usar una cifra en una liquidación o finiquito.',
       },
       {
         question: '¿Cuándo me corresponde indemnización por años de servicio?',
         answer:
-          'La indemnización (30 días por año, tope 11 años, base 90 UF) corresponde solo cuando el empleador pone término al contrato sin causa justificada o por necesidades de la empresa (artículo 161 del Código del Trabajo). Si renuncias voluntariamente NO te corresponde. Si te despiden por falta de probidad sin pruebas, el tribunal puede ordenar pagar la indemnización con un recargo de 30% a 100% (artículo 168).',
+          'La procedencia y el monto de una indemnización dependen de la causal de término, contrato, remuneración, antigüedad y antecedentes del caso. La calculadora entrega una orientación inicial; no determina si una causal es jurídicamente válida ni reemplaza la revisión de la carta de despido.',
       },
       {
         question: '¿Cómo se calculan las vacaciones proporcionales?',
         answer:
-          'Por cada mes trabajado en el año en curso te corresponden 1,25 días hábiles (15 días anuales ÷ 12 meses). El valor del día se calcula como sueldo mensual ÷ 30. Si trabajaste 8 meses con sueldo $700.000: 8 × 1,25 = 10 días × $23.333 = $233.330 a pagar en el finiquito.',
+          'El feriado proporcional depende del período trabajado, los días pendientes, la remuneración y las reglas aplicables al contrato. Usa la calculadora para ordenar los antecedentes y confirma el pago final con la documentación de término.',
       },
       {
         question: '¿Cuántas horas extra puedo hacer en una jornada?',
         answer:
-          'Máximo 2 horas extra diarias (artículo 31 del Código del Trabajo). Se pagan con un recargo mínimo de 50% sobre el valor de la hora ordinaria. No existe un 100% general automático por domingo o festivo, sin perjuicio de pactos más favorables y descansos compensatorios. La jornada máxima vigente desde abril de 2026 es de 42 horas semanales.',
+          'Las horas extraordinarias tienen límites y recargos definidos por la normativa laboral, pero pueden existir pactos, jornadas especiales y descansos compensatorios. La calculadora estima el valor según los datos ingresados; revisa el contrato, el registro de asistencia y la fuente oficial antes de reclamar un pago.',
       },
       {
         question: '¿La gratificación legal es obligatoria?',
         answer:
-          'Sí, para empresas con utilidades, la gratificación legal es obligatoria (artículo 47 del Código del Trabajo). Equivale al 25% de la remuneración mensual con tope de 4,75 IMM mensuales. La mayoría de los empleadores la paga mensualizada incluida en el sueldo. Si la pagan anual, debe liquidarse en abril.',
+          'La gratificación legal depende, entre otros factores, de la situación de la empresa, la modalidad de pago y la remuneración. La herramienta permite una estimación, pero la liquidación y los antecedentes del empleador son los que determinan el monto exigible.',
       },
     ],
   },
@@ -126,17 +123,17 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Cómo se calcula el IVA?',
         answer:
-          'El IVA en Chile es 19% único. Para agregar IVA: precio_neto × 1,19. Para quitar IVA: precio_bruto ÷ 1,19. Por ejemplo, una factura de $100.000 neto tiene IVA de $19.000 y total $119.000. Algunos servicios están exentos: educación, salud (en hospitales), libros, transporte público, seguros de vida y servicios financieros.',
+          'La calculadora separa neto, IVA y total usando la tasa general vigente. No determina si una operación, venta o servicio está afecto, exento o no gravado: esa calificación debe confirmarse con la normativa y el SII.',
       },
       {
         question: '¿Cuánto retiene una boleta de honorarios en 2026?',
         answer:
-          'En 2026 la retención total es 15,25% (10% impuesto a la renta + 5,25% cotizaciones previsionales). Sube a 16% en 2027 y 17% en 2028 según la Ley 21.133. Boletas bajo 10 UTM mensuales no requieren cotización obligatoria. El líquido recibido es bruto × (1 − 0,1525).',
+          'En 2026 la retención de la boleta de honorarios es 15,25% del monto bruto. Es un pago provisional y no debe dividirse automáticamente entre impuesto y cotizaciones: la situación se determina en la Operación Renta según ingresos, gastos y reglas previsionales aplicables. Revisa la calculadora y la guía de honorarios antes de usarla para proyectar una devolución o pago.',
       },
       {
         question: '¿Cuándo debo declarar Operación Renta?',
         answer:
-          'Si emitiste boletas de honorarios en el año calendario, recibiste sueldos sobre 13,5 UTM mensuales o tienes ingresos como inversionista, debes presentar el Formulario 22 entre marzo y mayo del año siguiente. Si lo retenido excede el impuesto que te corresponde, recibes devolución; si fue insuficiente, pagas la diferencia.',
+          'La obligación de presentar el Formulario 22 depende del tipo de ingreso, retenciones, rebajas y antecedentes del año tributario. No asumas que emitir una boleta o superar un monto aislado define por sí solo la obligación: revisa la información de Operación Renta del SII.',
       },
     ],
   },
@@ -147,22 +144,22 @@ const faqGroups: FAQGroup[] = [
       {
         question: '¿Qué es la UF y cómo se calcula?',
         answer:
-          'La UF (Unidad de Fomento) es una unidad reajustable diaria según la inflación del mes anterior. La calcula y publica el Banco Central. En mayo 2026 la UF vale aproximadamente $40.340. Se usa en créditos hipotecarios, arriendos largos, seguros, topes imponibles y subsidios habitacionales.',
+          'La UF es una unidad reajustable que publica el Banco Central y se usa en contratos, créditos, seguros, topes y otros cálculos. Como su valor cambia, consulta la fecha mostrada por la herramienta y confirma el valor aplicable a tu contrato o trámite.',
       },
       {
         question: '¿Cuál es la diferencia entre UF y UTM?',
         answer:
-          'La UF se reajusta diariamente y se usa en contratos privados (créditos, arriendos). La UTM (Unidad Tributaria Mensual) se reajusta mensualmente y se usa en el ámbito tributario (impuestos, multas, trámites SII). En mayo 2026, UF ≈ $40.340 y UTM ≈ $70.588.',
+          'La UF se utiliza habitualmente en contratos, créditos y otros valores reajustables; la UTM se usa en materias tributarias, multas y trámites. Ambas cambian con el tiempo, por lo que la cifra válida depende de la fecha que corresponda.',
       },
       {
         question: '¿Cuánto reajusta el arriendo cada año?',
         answer:
-          'Si tu arriendo está en pesos, el reajuste depende del IPC acumulado del período según lo pactado en el contrato. Si está en UF, el reajuste es automático con la variación diaria de la UF. No hay un tope legal de aumento, pero el arrendador no puede subir el precio sin lo establecido en el contrato.',
+          'El reajuste depende de la moneda, la cláusula pactada y el período que establezca el contrato. La calculadora sirve para estimar una variación; revisa el texto contractual y busca orientación si existe una controversia.',
       },
       {
         question: '¿Dónde puedo ver el valor de la UF actualizado?',
         answer:
-          'En el sitio del Banco Central de Chile (bcentral.cl/inicio/indicadores), en el SII (sii.cl), o directamente en nuestra calculadora UF→CLP que se actualiza diariamente desde fuentes oficiales.',
+          'Puedes consultarlo directamente en el Banco Central de Chile. Nuestra calculadora UF→CLP indica la fuente disponible y la fecha de actualización, pero para un trámite o contrato prevalece el valor oficial aplicable a la fecha correspondiente.',
       },
     ],
   },
@@ -186,10 +183,7 @@ export default function FAQPage() {
       // qué selectores leer en alto.
       speakableSelectors: ['.faq-question', '.faq-answer'],
     }),
-    breadcrumbSchema([
-      { name: 'Inicio', path: '/' },
-      { name: 'Preguntas Frecuentes' },
-    ]),
+    breadcrumbSchema([{ name: 'Inicio', path: '/' }, { name: 'Preguntas Frecuentes' }]),
   ];
 
   return (
@@ -197,12 +191,7 @@ export default function FAQPage() {
       <JsonLd id="faq-schemas" data={schemas} />
 
       <div className="container-base py-8 md:py-12">
-        <Breadcrumbs
-          items={[
-            { label: 'Inicio', href: '/' },
-            { label: 'Preguntas Frecuentes' },
-          ]}
-        />
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Preguntas Frecuentes' }]} />
 
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -214,8 +203,8 @@ export default function FAQPage() {
               Preguntas frecuentes
             </h1>
             <p className="text-lg text-[var(--foreground-secondary)] leading-relaxed max-w-2xl mx-auto">
-              Respuestas concretas con bases legales, fórmulas y ejemplos en pesos
-              chilenos. Si no encuentras tu pregunta, escríbenos.
+              Respuestas concretas con bases legales, fórmulas y ejemplos en pesos chilenos. Si no
+              encuentras tu pregunta, escríbenos.
             </p>
           </div>
 
@@ -240,10 +229,7 @@ export default function FAQPage() {
                   <ol className="mt-3 space-y-1 list-none">
                     {faqGroups.map((group, idx) => (
                       <li key={group.id}>
-                        <a
-                          href={`#faq-${group.id}`}
-                          className="toc-link block"
-                        >
+                        <a href={`#faq-${group.id}`} className="toc-link block">
                           <span className="text-[var(--foreground-muted)] mr-2 tabular-nums">
                             {String(idx + 1).padStart(2, '0')}
                           </span>
@@ -299,7 +285,8 @@ export default function FAQPage() {
                   ¿No encontraste tu pregunta?
                 </h2>
                 <p className="text-sm text-[var(--foreground-secondary)] mb-4">
-                  Escríbenos y respondemos en 24-48 horas hábiles.
+                  Escríbenos con la URL y la fuente oficial si detectaste un dato que requiere
+                  revisión.
                 </p>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
@@ -318,31 +305,21 @@ export default function FAQPage() {
                   <h3 className="font-semibold text-[var(--foreground)] mb-1">
                     Todas las calculadoras
                   </h3>
-                  <p className="text-xs text-[var(--foreground-muted)]">
-                    40+ herramientas
-                  </p>
+                  <p className="text-xs text-[var(--foreground-muted)]">39 herramientas</p>
                 </Link>
                 <Link
                   href="/guias"
                   className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
                 >
-                  <h3 className="font-semibold text-[var(--foreground)] mb-1">
-                    Guías profundas
-                  </h3>
-                  <p className="text-xs text-[var(--foreground-muted)]">
-                    Pillar content 15min+
-                  </p>
+                  <h3 className="font-semibold text-[var(--foreground)] mb-1">Guías profundas</h3>
+                  <p className="text-xs text-[var(--foreground-muted)]">Pillar content 15min+</p>
                 </Link>
                 <Link
                   href="/blog"
                   className="p-4 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all"
                 >
-                  <h3 className="font-semibold text-[var(--foreground)] mb-1">
-                    Blog
-                  </h3>
-                  <p className="text-xs text-[var(--foreground-muted)]">
-                    Artículos cortos
-                  </p>
+                  <h3 className="font-semibold text-[var(--foreground)] mb-1">Blog</h3>
+                  <p className="text-xs text-[var(--foreground-muted)]">Artículos cortos</p>
                 </Link>
               </nav>
             </div>

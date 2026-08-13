@@ -1,7 +1,7 @@
 // ============================================
 // Sub-sitemap: páginas estáticas + categorías
 // ----------------------------------------------
-// Incluye home, /calculadoras, /blog, /guias, /faq, /acerca-de,
+// Incluye home, /calculadoras, /blog, /guias, /acerca-de, /metodologia,
 // /cookies y todas las páginas de categoría con calculadoras
 // asignadas.
 //
@@ -59,12 +59,6 @@ export async function GET() {
       priority: 0.85,
     },
     {
-      url: `${SITE_URL}/faq`,
-      lastModified: SITE_LAST_MODIFIED,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
       url: `${SITE_URL}/cesantia`,
       lastModified: new Date('2026-07-10'),
       changeFrequency: 'weekly',
@@ -75,6 +69,12 @@ export async function GET() {
       lastModified: SITE_LAST_MODIFIED,
       changeFrequency: 'yearly',
       priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/metodologia`,
+      lastModified: new Date('2026-08-12'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${SITE_URL}/cookies`,

@@ -66,6 +66,95 @@ function buildSeoIntro(calculator: import('@/types/calculator').Calculator): str
   return `${baseDesc} Forma parte del catálogo de ${categoryText} de CalculaChile. Revisa la metodología, los supuestos, las limitaciones y las fuentes declaradas antes de usar la estimación.${legalContext ? ` ${legalContext}.` : ''}`;
 }
 
+function CalculatorLoadingState({
+  calculator,
+}: {
+  calculator: import('@/types/calculator').Calculator;
+}) {
+  const essentialInputs = calculator.inputs
+    .filter((input) => input.required || input.defaultValue !== undefined)
+    .slice(0, 4);
+
+  return (
+    <section
+      className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-8 md:px-6 md:py-10"
+      aria-label={`Preparando ${calculator.name}`}
+      aria-live="polite"
+    >
+      <PremiumLoadingIndicator
+        isLoading={true}
+        message="Preparando calculadora..."
+        variant="spinner"
+      />
+
+      <div className="mx-auto mt-2 max-w-2xl border-t border-[var(--border)] pt-6 text-center">
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-600)]">
+          Antes de calcular
+        </p>
+        <h2 className="mt-2 text-lg font-semibold text-[var(--foreground)]">
+          Datos que esta herramienta te pedirá
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--foreground-secondary)]">
+          La calculadora se habilita en esta misma página. Puedes preparar los antecedentes y
+          revisar abajo las fuentes, supuestos y limitaciones de la estimación.
+        </p>
+        {essentialInputs.length > 0 && (
+          <ul className="mt-4 flex flex-wrap justify-center gap-2" aria-label="Datos principales">
+            {essentialInputs.map((input) => (
+              <li
+                key={input.id}
+                className="rounded-full border border-[var(--border)] bg-[var(--background-secondary)] px-3 py-1.5 text-xs text-[var(--foreground-secondary)]"
+              >
+                {input.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <noscript>
+        <p>
+          Esta herramienta necesita JavaScript para realizar el cálculo. Aun así, puedes revisar la
+          metodología y las fuentes oficiales publicadas en esta página.
+        </p>
+      </noscript>
+    </section>
+  );
+}
+
+function CalculatorReferenceContent({
+  calculator,
+}: {
+  calculator: import('@/types/calculator').Calculator;
+}) {
+  return (
+    <>
+      {calculator.methodology && <CalculatorMethodology methodology={calculator.methodology} />}
+
+      {calculator.sources && calculator.sources.length > 0 && (
+        <OfficialSources sources={calculator.sources} className="mt-8 md:mt-10" />
+      )}
+
+      <p className="mt-4 text-xs text-[var(--foreground-muted)]">
+        Revisado por{' '}
+        <Link
+          href="/acerca-de"
+          className="font-medium text-[var(--color-primary-600)] hover:underline"
+        >
+          {AUTHOR.name}
+        </Link>{' '}
+        ·{' '}
+        <Link
+          href="/metodologia#reportar-correccion"
+          className="font-medium text-[var(--color-primary-600)] hover:underline"
+        >
+          Reportar un dato o fuente que requiera revisión
+        </Link>
+      </p>
+    </>
+  );
+}
+
 export default function CalculatorPageClient({
   calculator,
   canonicalUrl,
@@ -92,16 +181,22 @@ export default function CalculatorPageClient({
     loadCalculationFn(calculator.id, {
       valorUF: uf > 0 ? uf : undefined,
       valorUTM: utm > 0 ? utm : undefined,
-    }).then((fn) => {
-      if (cancelled) return;
-      if (fn) {
-        setCalculateFn(() => fn);
-        setMissing(false);
-      } else {
+    })
+      .then((fn) => {
+        if (cancelled) return;
+        if (fn) {
+          setCalculateFn(() => fn);
+          setMissing(false);
+        } else {
+          setCalculateFn(null);
+          setMissing(true);
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
         setCalculateFn(null);
         setMissing(true);
-      }
-    });
+      });
 
     return () => {
       cancelled = true;
@@ -112,7 +207,12 @@ export default function CalculatorPageClient({
 
   if (missing) {
     return (
-      <div className="min-h-screen bg-[var(--background)] py-12">
+      <CalculatorPageLayout
+        title={calculator.name}
+        description={calculator.description}
+        calculatorId={calculator.id}
+        lastReviewed={calculator.lastReviewed}
+      >
         {canonicalUrl && (
           <SeoStructuredData
             calculator={calculator}
@@ -122,32 +222,39 @@ export default function CalculatorPageClient({
           />
         )}
 
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="bg-[var(--color-warning-50)] border border-[var(--color-warning-200)] rounded-2xl p-8 text-center shadow-sm">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--color-warning-100)] flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-[var(--color-warning-600)]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <h2 className="text-xl font-semibold text-[var(--foreground)] mb-2">
-              Calculadora en desarrollo
-            </h2>
-            <p className="text-[var(--foreground-secondary)]">
-              Esta calculadora estará disponible próximamente.
-            </p>
+        <section className="rounded-2xl border border-[var(--color-warning-200)] bg-[var(--color-warning-50)] p-6 text-center shadow-sm md:p-8">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-warning-100)]">
+            <svg
+              className="w-8 h-8 text-[var(--color-warning-600)]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
           </div>
-        </div>
-      </div>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">
+            No pudimos cargar la herramienta en este momento
+          </h2>
+          <p className="mx-auto mt-2 max-w-2xl text-[var(--foreground-secondary)]">
+            Intenta recargar la página. Mientras lo resolvemos, puedes revisar cómo funciona esta
+            estimación, sus fuentes oficiales y sus limitaciones antes de tomar una decisión.
+          </p>
+          <Link
+            href="/metodologia#reportar-correccion"
+            className="mt-5 inline-flex text-sm font-semibold text-[var(--color-primary-700)] hover:underline"
+          >
+            Informar un problema con esta calculadora
+          </Link>
+        </section>
+
+        <CalculatorReferenceContent calculator={calculator} />
+      </CalculatorPageLayout>
     );
   }
 
@@ -168,18 +275,12 @@ export default function CalculatorPageClient({
       )}
 
       {!calculateFn ? (
-        <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-12 md:px-6 md:py-14">
-          <PremiumLoadingIndicator
-            isLoading={true}
-            message="Cargando calculadora..."
-            variant="spinner"
-          />
-        </div>
+        <CalculatorLoadingState calculator={calculator} />
       ) : (
         <PremiumCalculatorShell calculator={calculator} calculateFn={calculateFn} />
       )}
 
-      {calculator.methodology && <CalculatorMethodology methodology={calculator.methodology} />}
+      <CalculatorReferenceContent calculator={calculator} />
 
       <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-7">
@@ -269,20 +370,6 @@ export default function CalculatorPageClient({
           </section>
         )}
       </div>
-
-      {calculator.sources && calculator.sources.length > 0 && (
-        <OfficialSources sources={calculator.sources} className="mt-8 md:mt-10" />
-      )}
-
-      <p className="mt-4 text-xs text-[var(--foreground-muted)]">
-        Revisado por{' '}
-        <Link
-          href="/acerca-de"
-          className="font-medium text-[var(--color-primary-600)] hover:underline"
-        >
-          {AUTHOR.name}
-        </Link>
-      </p>
 
       {/* Enlazado interno laboral (hub + clúster cesantía / contrato vs honorarios) */}
       {(() => {

@@ -3692,6 +3692,551 @@ const articleCatalog: ArticleDraft[] = [
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www71.spensiones.cl/portal/institucional/594/w3-article-16921.html" target="_blank" rel="noopener">comunicado oficial de topes 2026 de la Superintendencia de Pensiones</a>, la consulta de la DT sobre el <a href="https://www.dt.gob.cl/portal/1628/w3-article-118076.html" target="_blank" rel="noopener">cambio de 89,9 a 90 UF</a>, el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">DL N.º 3.500, artículo 16</a> y las instrucciones de Previsión Social para honorarios. Las preguntas de foros se usaron para detectar confusiones sobre cesantía, impuesto y valor UF; no como fuente de tasas.</p>`,
   },
+  {
+    slug: 'subsidio-electrico-2026-resultados-descuento-cuenta',
+    title: 'Subsidio Eléctrico 2026: cómo revisar resultados y descuento en la cuenta de luz',
+    description:
+      'Revisa los resultados del Subsidio Eléctrico 2026, los montos según integrantes del hogar, las seis cuotas del descuento y qué hacer si no apareces como beneficiario.',
+    date: '2026-08-12',
+    updatedAt: '2026-08-12',
+    category: 'hogar',
+    readingTime: 15,
+    seoTitle: 'Subsidio Eléctrico 2026: resultados, montos y descuento en la cuenta',
+    seoDescription:
+      'Resultados del Subsidio Eléctrico 2026: consulta, montos por integrantes, descuento de julio a diciembre, reposición y cambio de número de cliente.',
+    keywords: [
+      'subsidio eléctrico 2026 resultados',
+      'bono de luz 2026',
+      'descuento cuenta de luz 2026',
+      'subsidio eléctrico cuánto paga',
+      'resultado subsidio eléctrico agosto 2026',
+      'subsidio eléctrico 40% RSH',
+      'subsidio eléctrico número de cliente',
+    ],
+    relatedCalculators: ['calculadora-cuenta-luz', 'calculadora-subsidio-agua'],
+    faq: [
+      {
+        question: '¿Cuándo se pueden revisar los resultados del Subsidio Eléctrico 2026?',
+        answer:
+          'La ficha oficial de ChileAtiende informa que los resultados de la quinta convocatoria se pueden revisar desde la segunda semana de agosto de 2026. La consulta debe hacerse en los canales oficiales del Ministerio de Energía, con el RUN y el mecanismo de identificación que solicite el portal.',
+      },
+      {
+        question: '¿Cuánto descuenta el Subsidio Eléctrico 2026?',
+        answer:
+          'La ficha oficial indica un descuento total de $17.346 para hogares de una persona, $22.548 para hogares de dos a tres personas y $31.224 para hogares de cuatro o más integrantes. El beneficio corresponde al segundo semestre y se distribuye en seis cuotas; no es un monto mensual que se deba multiplicar nuevamente por seis.',
+      },
+      {
+        question: '¿Qué hago si no aparezco como beneficiario?',
+        answer:
+          'Si crees que cumples los requisitos y no fuiste seleccionado, ChileAtiende informa que puedes presentar un recurso de reposición dentro de cinco días hábiles desde la publicación de resultados. Revisa el plazo exacto en el portal oficial y conserva el comprobante de envío.',
+      },
+      {
+        question: '¿La cuenta de luz debe estar a mi nombre?',
+        answer:
+          'No necesariamente. La información oficial señala que la boleta puede estar a nombre de otra persona; la postulación se relaciona con el hogar beneficiario y el número de cliente informado. Si cambiaste de domicilio, existe un trámite específico para rectificar el número de cliente.',
+      },
+      {
+        question: '¿El Subsidio Eléctrico se descuenta todos los meses?',
+        answer:
+          'El beneficio cubre el período de julio a diciembre de 2026 y se entrega en seis cuotas a partir de septiembre, según la ficha oficial. El momento exacto en que aparezca en la boleta depende del calendario de facturación de la empresa distribuidora.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Subsidio Eléctrico',
+        url: 'https://www.chileatiende.gob.cl/fichas/124375-subsidio-electrico',
+      },
+      {
+        label: 'Ministerio de Energía — Portal Subsidio Eléctrico',
+        url: 'https://subsidioelectrico.energia.gob.cl/resumen',
+      },
+      {
+        label: 'Ministerio de Energía — Consulta de resultados',
+        url: 'https://resultados.energia.gob.cl/',
+      },
+    ],
+    content: `<p class="article-lead">La quinta convocatoria del Subsidio Eléctrico 2026 ya cerró su etapa de postulación y entra en la fase que más dudas genera: cómo revisar el resultado, cuánto se descontará en la cuenta y qué hacer si el hogar no aparece seleccionado. El beneficio cubre el consumo de electricidad del segundo semestre, pero el monto informado por hogar no es una transferencia que se deba cobrar aparte ni una rebaja indefinida.</p>
+
+<p>Esta actualización toma como fecha de corte el <strong>12 de agosto de 2026</strong>. La ficha de ChileAtiende indica que los resultados se pueden revisar desde la segunda semana de agosto y que el descuento correspondiente a julio, agosto, septiembre, octubre, noviembre y diciembre se distribuye en seis cuotas a partir de septiembre. El resultado individual debe consultarse en el portal oficial: una tabla general no confirma que un hogar específico haya sido beneficiado.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No pagues por consultar el resultado</strong><p>El resultado se revisa en los canales oficiales del Ministerio de Energía y ChileAtiende. No entregues claves bancarias, códigos de autorización ni dinero a alguien que prometa “activar” el bono de luz. El subsidio se refleja en la cuenta eléctrica mediante la empresa distribuidora, no como un depósito informal.</p></div></aside>
+
+<h2>Qué es el Subsidio Eléctrico 2026</h2>
+<p>Es un beneficio del Ministerio de Energía que entrega un descuento semestral en la cuenta de electricidad de determinados hogares. Para esta convocatoria, el período cubierto es el segundo semestre de 2026. La lógica es reducir temporalmente el monto facturado en hogares que cumplen los criterios de focalización y las condiciones eléctricas exigidas por la convocatoria.</p>
+
+<p>El subsidio no cambia el precio general de la energía, no elimina el consumo registrado y no convierte la cuenta en gratuita. La boleta seguirá mostrando consumo, cargos, impuestos y otros componentes que correspondan. El beneficio se aplica como un descuento asociado al hogar y al número de cliente informado, por lo que conviene revisar cada liquidación en vez de estimar el resultado solo con el monto de una factura anterior.</p>
+
+<h2>Cuándo se postuló y qué ocurre ahora</h2>
+<p>La quinta convocatoria se desarrolló entre el 26 de mayo y el 5 de junio de 2026. Esa ventana ya terminó. En agosto corresponde consultar la selección y, si existe un problema, actuar dentro de los plazos de reclamación o rectificación que informa la autoridad.</p>
+
+<p>ChileAtiende señala que la quinta convocatoria permite recibir el descuento por los seis meses del segundo semestre, distribuido en seis cuotas desde septiembre. La fecha de aparición no tiene por qué coincidir con el día en que revisas el resultado: las empresas distribuidoras emiten boletas en fechas distintas y pueden aplicar el beneficio según su ciclo de facturación.</p>
+
+<table><thead><tr><th>Etapa</th><th>Fecha o período</th><th>Qué debe hacer el hogar</th></tr></thead><tbody><tr><td>Postulación</td><td>26 de mayo al 5 de junio de 2026</td><td>Etapa cerrada para la quinta convocatoria</td></tr><tr><td>Resultados</td><td>Desde la segunda semana de agosto de 2026</td><td>Consultar en el portal oficial con los datos solicitados</td></tr><tr><td>Período cubierto</td><td>Julio a diciembre de 2026</td><td>Revisar las boletas del segundo semestre</td></tr><tr><td>Aplicación</td><td>Seis cuotas desde septiembre, según la ficha oficial</td><td>Comparar el descuento informado con la boleta</td></tr></tbody></table>
+
+<h2>Cuánto descuenta según el número de integrantes</h2>
+<p>El monto depende del número de personas que integran el hogar beneficiario. La ficha oficial de ChileAtiende consultada para esta actualización informa los siguientes valores:</p>
+
+<table><thead><tr><th>Integrantes del hogar</th><th>Descuento total informado</th><th>Cómo leerlo</th></tr></thead><tbody><tr><td>1 persona</td><td>$17.346</td><td>Beneficio total del período, aplicado en cuotas</td></tr><tr><td>2 a 3 personas</td><td>$22.548</td><td>Beneficio total del período, aplicado en cuotas</td></tr><tr><td>4 o más personas</td><td>$31.224</td><td>Beneficio total del período, aplicado en cuotas</td></tr></tbody></table>
+
+<p>La palabra “total” es importante. Si un hogar de dos personas recibe el beneficio, no corresponde tomar $22.548 y multiplicarlo otra vez por seis para inventar un total. La autoridad define un monto semestral y la empresa lo distribuye en seis cuotas. El redondeo o la forma visual de la boleta puede variar, pero la referencia debe ser la ficha oficial de la convocatoria, no un mensaje reenviado.</p>
+
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo de lectura del descuento</div><ul><li>Hogar beneficiario: 3 integrantes.</li><li>Monto total informado para el grupo: $22.548.</li><li>Aplicación: seis cuotas durante el período definido por la autoridad y la distribuidora.</li><li>La boleta puede mostrar el descuento junto con otros cargos o ajustes.</li></ul><span class="total">No reemplaza la liquidación oficial de la empresa eléctrica</span></div>
+
+<h2>Quiénes podían acceder</h2>
+<p>El requisito socioeconómico base fue pertenecer al 40% más vulnerable del Registro Social de Hogares, considerando la calificación vigente durante la segunda quincena de mayo de 2026. Además, la persona postulante debía ser mayor de 18 años, ser cliente de una empresa o cooperativa concesionaria de distribución eléctrica y estar al día en el pago de las cuentas al corte fijado para la convocatoria.</p>
+
+<p>La ficha oficial también contempla un tratamiento especial para hogares con una persona inscrita en el Registro de Pacientes Electrodependientes, bajo las condiciones indicadas por la convocatoria. Eso no significa que cualquier persona que consuma más electricidad reciba automáticamente el subsidio: la electrodependencia debe estar acreditada en el registro correspondiente y el hogar debe cumplir las demás reglas aplicables.</p>
+
+<p>En esta convocatoria se priorizaron, además, hogares del tramo 0% a 40% en los que viven personas que requieren cuidados, niños, niñas o adolescentes, personas cuidadoras o personas adultas mayores. La prioridad no permite deducir el resultado por la sola presencia de uno de esos integrantes; la selección depende de la información registrada y de los criterios del proceso.</p>
+
+<h2>Cómo revisar el resultado</h2>
+<ol class="steps"><li>Escribe manualmente la dirección del portal oficial del Subsidio Eléctrico o entra desde ChileAtiende.</li><li>Selecciona la opción de consulta de resultados de la quinta convocatoria.</li><li>Ingresa el RUN y la identificación solicitada por el sistema.</li><li>Revisa si el hogar aparece como beneficiario, el número de cliente asociado y el período cubierto.</li><li>Guarda una captura o comprobante, sin exponer públicamente tu RUN ni el número completo de cliente.</li><li>Compara el resultado con la primera boleta en que deba aparecer el descuento.</li></ol>
+
+<p>El portal de resultados es el lugar para confirmar la asignación individual. La <a href="/calculadoras/calculadora-cuenta-luz">calculadora de cuenta de luz</a> puede ayudarte a ordenar consumo, cargos y escenarios de una boleta, pero no puede saber si el Ministerio te adjudicó el subsidio ni reemplaza el saldo emitido por la distribuidora.</p>
+
+<h2>Qué hacer si no fuiste seleccionado</h2>
+<p>Si consideras que cumplías las condiciones y el resultado no coincide con tus antecedentes, revisa primero el RSH, el número de cliente, el estado de pago de la cuenta y la información del hogar que quedó asociada a la postulación. Un error en un dato puede explicar la diferencia, pero no debes corregirlo enviando documentos a cuentas de redes sociales o intermediarios no oficiales.</p>
+
+<p>ChileAtiende informa que quienes no resulten beneficiarios y crean cumplir los requisitos pueden presentar un <strong>recurso de reposición dentro de cinco días hábiles desde la publicación de resultados</strong>. El conteo exacto depende de la fecha oficial de publicación; por eso conviene revisar el portal y no asumir que el plazo comienza el día en que un tercero comparte la noticia.</p>
+
+<p>El recurso debe explicar el motivo de la discrepancia y acompañar los antecedentes que el canal oficial permita. Guarda el número de solicitud y la fecha de envío. Presentar una reposición no garantiza que el resultado cambie: la autoridad revisará los datos contra las reglas de la convocatoria.</p>
+
+<h2>Si cambiaste de domicilio o de número de cliente</h2>
+<p>El subsidio puede quedar vinculado al número de cliente informado en la postulación. Si el hogar se mudó, cambió de medidor o detectó un error, la ficha oficial contempla un procedimiento para actualizar o rectificar ese dato. La solicitud debe realizarla la persona postulante y puede tramitarse mediante el formulario de atención ciudadana del Ministerio de Energía o en la Secretaría Regional Ministerial que corresponda.</p>
+
+<p>ChileAtiende informa un plazo de <strong>15 días hábiles desde la publicación de resultados</strong> para solicitar esa modificación. No confundas este trámite con la reposición por no selección: cambiar el número de cliente sirve para trasladar o corregir la aplicación del beneficio cuando la asignación es individual y el hogar cumple las condiciones.</p>
+
+<h2>Qué revisar en la cuenta de luz</h2>
+<p>Cuando llegue una boleta del período cubierto, busca una línea que identifique el subsidio o un descuento asociado. El nombre exacto puede depender del formato de la empresa. Comprueba que el número de cliente y la dirección correspondan al hogar correcto, que el descuento no se haya aplicado a otra cuenta y que la lectura de consumo sea razonable.</p>
+
+<p>Si el monto no aparece cuando esperabas, compara la fecha de emisión de la boleta con el calendario de facturación y consulta a la empresa distribuidora. Para un problema de adjudicación, el canal competente es el Ministerio de Energía; para un error de facturación o aplicación en una cuenta beneficiaria, puede ser necesario reclamar primero ante la distribuidora y luego utilizar los canales regulatorios que correspondan.</p>
+
+<h2>Subsidio Eléctrico no es lo mismo que subsidio de agua</h2>
+<p>Ambos apoyos reducen gastos básicos, pero tienen reglas distintas. El Subsidio Eléctrico corresponde a una convocatoria nacional del Ministerio de Energía y se aplica a la cuenta eléctrica según la asignación del hogar. El <a href="/calculadoras/calculadora-subsidio-agua">subsidio de agua potable</a> se tramita normalmente a través de la municipalidad, depende de la disponibilidad y utiliza una evaluación diferente. No es válido trasladar el porcentaje de un beneficio al otro ni asumir que recibir uno concede automáticamente el segundo.</p>
+
+<h2>Checklist para agosto y septiembre</h2>
+<ol class="steps"><li>Consulta el resultado solo en el portal oficial.</li><li>Confirma el grupo familiar y el número de cliente.</li><li>Anota la fecha de publicación para contar plazos.</li><li>Presenta reposición dentro de cinco días hábiles si corresponde.</li><li>Solicita corrección del número de cliente dentro de 15 días hábiles si cambiaste de domicilio.</li><li>Revisa las seis cuotas en las boletas del segundo semestre.</li><li>Guarda comprobantes y oculta RUN, dirección y número de cliente al compartir una consulta.</li></ol>
+
+<p>El subsidio reduce temporalmente una cuenta, pero no reemplaza la revisión de consumo, el reclamo por cobros erróneos ni la regularización de una deuda eléctrica. Para estimar una boleta completa puedes usar la <a href="/calculadoras/calculadora-cuenta-luz">calculadora de cuenta de luz</a>; para saber si fuiste seleccionado, manda la respuesta del Ministerio de Energía.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/124375-subsidio-electrico" target="_blank" rel="noopener">ficha oficial de ChileAtiende</a>, el <a href="https://subsidioelectrico.energia.gob.cl/resumen" target="_blank" rel="noopener">portal del Subsidio Eléctrico del Ministerio de Energía</a> y el <a href="https://resultados.energia.gob.cl/" target="_blank" rel="noopener">portal oficial de resultados</a>. La ficha de ChileAtiende es la referencia para requisitos, montos y plazos; la consulta individual debe hacerse en el portal de resultados.</p>`,
+  },
+  {
+    slug: 'bono-trabajo-mujer-sej-pago-anual-2026-sue',
+    title: 'BTM y SEJ 2026: pago anual de agosto y transición al SUE',
+    description:
+      'Qué revisan las beneficiarias del Bono al Trabajo de la Mujer y del Subsidio al Empleo Joven en el pago anual 2026, y cómo se relaciona con el nuevo SUE.',
+    date: '2026-08-12',
+    updatedAt: '2026-08-12',
+    category: 'beneficios',
+    readingTime: 16,
+    seoTitle: 'BTM y SEJ 2026: pago anual de agosto y transición al SUE',
+    seoDescription:
+      'Guía actualizada sobre el pago anual 2026 del BTM y SEJ, las rentas que se reliquidan, cómo revisar el resultado y qué cambia con el SUE desde octubre.',
+    keywords: [
+      'pago anual BTM 2026',
+      'pago anual SEJ 2026',
+      'bono trabajo mujer agosto 2026',
+      'subsidio empleo joven agosto 2026',
+      'SUE Ley 21.808',
+      'subsidio unificado empleo octubre 2026',
+      'BTM SEJ transición SUE',
+    ],
+    relatedCalculators: ['calculadora-sueldo-liquido', 'calculadora-costo-empleado-pyme'],
+    faq: [
+      {
+        question: '¿Qué paga el pago anual del BTM y del SEJ de agosto de 2026?',
+        answer:
+          'Corresponde a la liquidación anual asociada a las rentas del año 2025. El resultado puede ser un depósito, un pago por otra modalidad habilitada o una reliquidación distinta de cero.',
+      },
+      {
+        question: '¿Se puede postular nuevamente al BTM o al SEJ?',
+        answer:
+          'ChileAtiende informa que no se reciben nuevas postulaciones a estos beneficios por la transición al Subsidio Unificado al Empleo. Las personas ya beneficiarias deben revisar su liquidación y sus datos de pago.',
+      },
+      {
+        question: '¿Cuál es el monto fijo del pago anual BTM o SEJ?',
+        answer:
+          'No hay un monto único para todas las personas. El cálculo depende de las rentas, cotizaciones, modalidad de pago y reliquidación que corresponda a cada beneficiario.',
+      },
+      {
+        question: '¿El pago anual de agosto es el nuevo SUE?',
+        answer:
+          'No. El pago anual de agosto de 2026 liquida beneficios BTM o SEJ por el período anterior. El SUE es un beneficio distinto creado por la Ley 21.808, cuya entrada en vigencia está prevista para el 1 de octubre de 2026.',
+      },
+      {
+        question: '¿Quiénes son grupos prioritarios del SUE?',
+        answer:
+          'La ley contempla grupos como jóvenes de 18 a 24 años, mujeres de 25 a 54 años, personas de 55 años o más y personas con discapacidad desde los 18 años, sujeto a los demás requisitos legales y a la implementación del beneficio.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Pago anual Bono al Trabajo de la Mujer',
+        url: 'https://www.chileatiende.gob.cl/fichas/12725-pago-anual-bono-al-trabajo-de-la-mujer-btm',
+      },
+      {
+        label: 'ChileAtiende — Subsidio al Empleo Joven',
+        url: 'https://www.chileatiende.gob.cl/fichas/5100-subsidio-al-empleo-joven-sej',
+      },
+      {
+        label: 'SENCE — Fechas de pagos 2026 BTM y SEJ',
+        url: 'https://sence.gob.cl/personas/noticias/estas-son-las-fechas-de-pagos-2026-del-bono-al-trabajo-de-la-mujer-y-subsidio-al-empleo-joven',
+      },
+      {
+        label: 'Biblioteca del Congreso Nacional — Ley 21.808',
+        url: 'https://www.bcn.cl/leychile/Navegar?idNorma=1222281',
+      },
+      {
+        label: 'SENCE — Subsidio Unificado al Empleo',
+        url: 'https://sence.gob.cl/personas/noticias/aprueban-ley-que-crea-subsidio-unificado-al-empleo-con-foco-en-formalidad-y-proteccion-laboral',
+      },
+    ],
+    content: `<p class="article-lead">El pago anual de agosto de 2026 del Bono al Trabajo de la Mujer (BTM) y del Subsidio al Empleo Joven (SEJ) corresponde a la liquidación de las rentas del año 2025. No es un bono nuevo de monto idéntico para todas las personas y tampoco debe confundirse con el Subsidio Unificado al Empleo (SUE), que fue creado por la Ley 21.808 y tiene una implementación posterior.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">!</span><div class="callout__body"><strong>La fecha y el beneficio importan</strong><p>El pago anual de agosto revisa el período anterior de BTM o SEJ. La transición al SUE no transforma automáticamente ese pago en SUE ni permite asumir un monto fijo. Revisa primero el beneficio que tienes aprobado, el período liquidado y el estado que aparece en la plataforma oficial.</p></div></aside>
+
+<h2>Qué se paga en agosto de 2026</h2>
+
+<p>SENCE informó el calendario de pagos 2026 del BTM y del SEJ. En agosto se realiza el pago anual correspondiente a las rentas de 2025 para quienes cumplieron las condiciones del beneficio en ese período. Por eso, el depósito o resultado que aparezca ahora no se calcula solamente con el sueldo del último mes ni equivale a una asignación universal por estar trabajando.</p>
+
+<p>La liquidación anual puede considerar la información de remuneraciones y cotizaciones que recibió el sistema, la modalidad escogida por la persona beneficiaria y los pagos mensuales que ya fueron entregados como anticipos. Cuando el pago mensual fue un anticipo, la operación anual puede completar una diferencia, dejar un resultado sin pago adicional o generar una reliquidación que deba revisarse con atención.</p>
+
+<div class="data-grid"><div><strong>Beneficio</strong><span>Período que se revisa</span></div><div><strong>Momento informado</strong><span>Agosto de 2026</span></div><div><strong>Resultado</strong><span>Liquidación individual</span></div><div><strong>Nuevo SUE</strong><span>Beneficio distinto, desde octubre</span></div></div>
+
+<p>La ficha de ChileAtiende del BTM identifica este pago como el pago anual correspondiente a las rentas de 2025. La ficha del SEJ también informa el pago anual de 2025 en agosto de 2026. Estas referencias son más útiles que una cifra compartida en redes sociales, porque el monto depende de los antecedentes de cada persona y no de una tarifa plana.</p>
+
+<h2>BTM, SEJ y SUE no son el mismo beneficio</h2>
+
+<p>Durante 2026 pueden aparecer los tres nombres en una misma conversación, pero cumplen funciones distintas:</p>
+
+<table class="article-table"><thead><tr><th>Nombre</th><th>A quién se asocia</th><th>Qué revisar en agosto</th></tr></thead><tbody><tr><td>BTM</td><td>Trabajadoras dependientes o independientes que obtuvieron el beneficio bajo sus reglas vigentes</td><td>Liquidación anual de rentas 2025, pagos anticipados y eventual reliquidación</td></tr><tr><td>SEJ</td><td>Trabajadores jóvenes que obtuvieron el beneficio bajo sus reglas vigentes</td><td>Liquidación anual de rentas 2025, pagos anticipados y eventual reliquidación</td></tr><tr><td>SUE</td><td>Nuevo esquema legal de subsidio al empleo</td><td>Entrada en vigencia e implementación posterior; no reemplaza el pago anual de agosto</td></tr></tbody></table>
+
+<p>ChileAtiende informa que no se reciben nuevas postulaciones al BTM y al SEJ debido a la transición hacia el SUE. Eso no significa que desaparezca la obligación de revisar pagos de períodos anteriores ni que una persona que tuvo BTM o SEJ pase automáticamente a recibir SUE. Son preguntas separadas: primero se liquida el beneficio anterior; después se evalúa el acceso al nuevo régimen cuando estén disponibles sus reglas y canales de operación.</p>
+
+<h2>Cómo interpretar el pago anual del BTM</h2>
+
+<p>El BTM está dirigido a trabajadoras que cumplieron los requisitos del programa. La ficha oficial informa que el pago anual de agosto de 2026 corresponde a las rentas 2025. La edad, el tramo del Registro Social de Hogares, las rentas, las cotizaciones y la forma de trabajo son antecedentes relevantes, pero la pregunta práctica para una beneficiaria que espera el depósito es otra: ¿el sistema recibió correctamente la información que sirve para liquidar ese año?</p>
+
+<p>Si durante 2025 recibiste pagos mensuales, no sumes esos depósitos y los compares con un supuesto monto anual estándar. El pago mensual puede operar como anticipo y la liquidación anual puede ajustar la diferencia. También puede ocurrir que el resultado sea cero, que exista un monto adicional o que aparezca una obligación de restitución, según los antecedentes que SENCE tenga registrados. Un resultado distinto del esperado no se corrige repitiendo la postulación: se revisa la liquidación y se usa el canal de atención correspondiente.</p>
+
+<p>La liquidación también puede verse afectada si hubo cambios de empleador, períodos sin cotización, diferencias entre remuneraciones informadas y pagadas, trabajo independiente o modificaciones en la situación que dio origen al beneficio. No conviene explicar el caso solo con el sueldo líquido: el BTM no es una calculadora de salario y su liquidación usa reglas propias.</p>
+
+<h2>Cómo interpretar el pago anual del SEJ</h2>
+
+<p>El SEJ se orienta a trabajadores jóvenes. La información de ChileAtiende señala, entre otros requisitos, tener entre 18 y menos de 25 años, pertenecer al 40% más vulnerable según el Registro Social de Hogares y cumplir las condiciones de renta y cotizaciones del beneficio. La ficha también diferencia el caso de jóvenes que son estudiantes y las situaciones en que corresponde revisar excepciones o antecedentes adicionales.</p>
+
+<p>Para el pago anual de agosto de 2026, la referencia es nuevamente el año 2025. Una persona puede haber cambiado de jornada, empleador o nivel de renta durante ese año. Por eso el monto anual no debe estimarse multiplicando un pago mensual por doce sin comprobar si existieron anticipos, meses sin pago, topes o ajustes. La liquidación individual es la que permite saber si existe una diferencia a favor o un resultado que requiere aclaración.</p>
+
+<p>Si ya no tienes la edad que se exigía para postular al SEJ, eso no elimina por sí solo el derecho a que se revise un pago asociado a un período anterior en el que eras beneficiario. La edad relevante para la postulación y la liquidación de un período no debe confundirse con la edad que tienes el día en que consultas el resultado.</p>
+
+<h2>Por qué no existe un monto único para todos</h2>
+
+<p>En redes es frecuente encontrar cifras redondeadas como si fueran el pago anual garantizado. Esa forma de comunicarlo es riesgosa. El BTM y el SEJ consideran una fórmula y límites asociados a las rentas, además de la diferencia entre anticipos y liquidación anual. Dos personas con el mismo sueldo en un mes pueden tener resultados diferentes si una recibió anticipos, tuvo meses sin cotizaciones, cambió su modalidad laboral o aparece con información distinta en los registros.</p>
+
+<div class="numeric-example"><strong>Ejemplo de lectura, no de monto:</strong><p>Una beneficiaria recibió pagos mensuales durante parte de 2025 y después cambió de empleador. En agosto de 2026 no debe asumir que el pago anual será el mismo monto mensual multiplicado por doce. Primero debe verificar qué rentas y cotizaciones fueron consideradas, cuánto recibió como anticipo y qué diferencia determinó la liquidación. El ejemplo explica el proceso; no predice el resultado real.</p></div>
+
+<p>Si quieres revisar cómo cambia tu remuneración después de descuentos legales, puedes usar la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>. Esa herramienta sirve para separar sueldo bruto, cotizaciones y descuentos habituales; no reemplaza la liquidación oficial del BTM o del SEJ, que depende de antecedentes administrados por SENCE.</p>
+
+<h2>Qué hacer para revisar el resultado y el pago</h2>
+
+<ol class="steps"><li><strong>Identifica el beneficio.</strong> Confirma si tu antecedente corresponde al BTM o al SEJ. No busques el resultado del SUE para explicar un pago anual anterior.</li><li><strong>Ingresa a un canal oficial.</strong> Revisa la información de pago y liquidación en los canales de SENCE o ChileAtiende. Evita enlaces enviados por mensajes que soliciten claves o datos bancarios fuera de los portales oficiales.</li><li><strong>Compara el período.</strong> El pago anual 2026 informado para BTM y SEJ corresponde a las rentas de 2025. Comprueba que estés leyendo el año correcto.</li><li><strong>Revisa la modalidad.</strong> Confirma si el pago se realiza por depósito u otra modalidad habilitada y si tus datos están actualizados.</li><li><strong>Guarda el comprobante.</strong> Descarga o conserva la liquidación, el estado de pago y la respuesta de atención si necesitas reclamar o aclarar una diferencia.</li></ol>
+
+<p>SENCE informó que los pagos mensuales de estos beneficios pueden operar como anticipos de hasta el 75%, quedando el saldo sujeto a la liquidación anual. Esa referencia ayuda a entender por qué el pago anual no equivale necesariamente a otro pago mensual. También explica por qué una persona puede recibir una diferencia menor a la esperada o quedar sin saldo adicional.</p>
+
+<h2>Qué cambia con el Subsidio Unificado al Empleo</h2>
+
+<p>La Ley 21.808 creó el Subsidio Unificado al Empleo. La norma contempla una entrada en vigencia para el 1 de octubre de 2026. SENCE ha explicado que el nuevo subsidio busca apoyar el empleo formal y reemplazar gradualmente los programas anteriores, pero la fecha de entrada en vigencia no convierte el pago anual de agosto en un pago SUE.</p>
+
+<p>La ley contempla grupos prioritarios que incluyen a jóvenes de 18 a 24 años, mujeres de 25 a 54 años, personas de 55 años o más y personas con discapacidad desde los 18 años. También establece requisitos que deben analizarse en conjunto, como límites de ingresos, situación en el Registro Social de Hogares y períodos de desempleo, además de condiciones para el empleador y el trabajador. No es correcto tomar una sola condición —por ejemplo, la edad— como garantía de aprobación.</p>
+
+<p>La ley contempla referencias de subsidio para trabajador y empleador, pero el monto efectivamente aplicable, las fórmulas, topes, procedimientos y documentación deben revisarse conforme a la normativa y a las instrucciones de implementación vigentes. Por esa razón, no presentamos aquí una cifra fija como si fuera el pago asegurado para todas las personas. El SUE se debe consultar cuando el canal oficial esté habilitado y con los datos del contrato y del trabajador a la vista.</p>
+
+<p>Para una empresa que está comparando el costo de contratar, la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleado PYME</a> puede ordenar sueldo, cotizaciones y costo laboral. Es una estimación operativa y no incorpora automáticamente una eventual aprobación del SUE: el subsidio debe confirmarse por el canal oficial y no debe descontarse del costo como ingreso garantizado antes de la resolución.</p>
+
+<h2>Errores frecuentes al revisar el pago</h2>
+
+<ul><li><strong>Confundir pago anual con pago mensual:</strong> agosto puede mostrar una liquidación anual, no un nuevo anticipo mensual.</li><li><strong>Usar rentas de 2026:</strong> el pago anual informado para agosto de 2026 se refiere a rentas de 2025.</li><li><strong>Buscar un monto universal:</strong> BTM y SEJ no tienen un depósito idéntico para todas las personas.</li><li><strong>Confundir BTM o SEJ con SUE:</strong> el SUE es un beneficio nuevo y la ley fija una entrada en vigencia posterior.</li><li><strong>Contar anticipos como saldo final:</strong> la liquidación anual puede ajustar los pagos ya recibidos.</li><li><strong>Usar una calculadora de sueldo como liquidación:</strong> el sueldo líquido ayuda a entender descuentos laborales, pero no determina el beneficio SENCE.</li><li><strong>Compartir claves o datos bancarios:</strong> consulta solo en sitios oficiales y desconfía de enlaces que pidan información sensible fuera de ellos.</li></ul>
+
+<h2>Checklist para agosto de 2026</h2>
+
+<ol><li>Confirmar si el beneficio anterior era BTM o SEJ.</li><li>Verificar que la consulta corresponde al pago anual de rentas 2025.</li><li>Revisar liquidación, anticipos y modalidad de pago.</li><li>Comparar el resultado con tus antecedentes de trabajo y cotizaciones, sin inventar una cifra esperada.</li><li>Guardar el comprobante y solicitar aclaración por canal oficial si hay una diferencia.</li><li>No asumir que el resultado de agosto es una aprobación automática del SUE.</li><li>Volver a revisar la información oficial cuando se acerque la entrada en vigencia del SUE y estén disponibles sus instrucciones operativas.</li></ol>
+
+<p>En resumen: el pago anual BTM o SEJ de agosto de 2026 mira las rentas de 2025; el monto depende de la liquidación individual y de los anticipos; y el SUE es un beneficio distinto con entrada en vigencia prevista para octubre. Esta separación evita dos errores habituales: esperar un monto fijo y tratar el pago anual como si fuera la primera cuota del nuevo subsidio.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 12 de agosto de 2026 con las fichas oficiales de <a href="https://www.chileatiende.gob.cl/fichas/12725-pago-anual-bono-al-trabajo-de-la-mujer-btm" target="_blank" rel="noopener">ChileAtiende para el pago anual del BTM</a> y del <a href="https://www.chileatiende.gob.cl/fichas/5100-subsidio-al-empleo-joven-sej" target="_blank" rel="noopener">SEJ</a>, el <a href="https://sence.gob.cl/personas/noticias/estas-son-las-fechas-de-pagos-2026-del-bono-al-trabajo-de-la-mujer-y-subsidio-al-empleo-joven" target="_blank" rel="noopener">calendario de pagos 2026 de SENCE</a>, la <a href="https://www.bcn.cl/leychile/Navegar?idNorma=1222281" target="_blank" rel="noopener">Ley 21.808 en LeyChile</a> y la información de SENCE sobre el <a href="https://sence.gob.cl/personas/noticias/aprueban-ley-que-crea-subsidio-unificado-al-empleo-con-foco-en-formalidad-y-proteccion-laboral" target="_blank" rel="noopener">Subsidio Unificado al Empleo</a>. Los montos y requisitos del SUE deben revalidarse cuando se publiquen sus instrucciones de implementación.</p>`,
+  },
+  {
+    slug: 'pgu-aumento-septiembre-2026-75-anos',
+    title: 'PGU septiembre 2026: aumento para personas de 75 años o más',
+    description:
+      'Qué cambia en septiembre de 2026 para la PGU: quiénes de 75 años o más acceden al monto máximo, cuánto es, cuándo se aplica y qué casos deben consultarse.',
+    date: '2026-08-12',
+    updatedAt: '2026-08-12',
+    category: 'previsional',
+    readingTime: 15,
+    seoTitle: 'PGU septiembre 2026: aumento para personas de 75 años o más',
+    seoDescription:
+      'Desde septiembre de 2026, personas beneficiarias de 75 años o más acceden al monto máximo de PGU: $250.275. Revisa fechas, casos automáticos y requisitos.',
+    keywords: [
+      'aumento PGU septiembre 2026',
+      'PGU 75 años septiembre 2026',
+      'monto PGU 2026 250275',
+      'quién recibe aumento PGU 75 años',
+      'PGU cumple 75 años octubre 2026',
+      'reforma pensiones PGU 2026',
+    ],
+    relatedCalculators: ['calculadora-pgu', 'calculadora-comparador-afp'],
+    relatedGuia: 'afp-pension-chile',
+    faq: [
+      {
+        question: '¿Cuál es el monto máximo de la PGU desde septiembre de 2026?',
+        answer:
+          'El monto máximo informado para septiembre de 2026 es $250.275 mensuales. Es un máximo: el monto individual depende de que la persona tenga derecho a PGU y de las reglas que corresponden a su caso.',
+      },
+      {
+        question: '¿A quiénes se les aplica el aumento de PGU en septiembre de 2026?',
+        answer:
+          'A las personas que tienen derecho a PGU y que al 30 de septiembre de 2026 cumplen o ya cumplieron 75 años. ChileAtiende informa que el incremento para quienes ya son beneficiarios se realiza automáticamente.',
+      },
+      {
+        question: '¿Qué pasa si cumplo 75 años después de septiembre de 2026?',
+        answer:
+          'Si cumples 75 años entre octubre de 2026 y agosto de 2027, el aumento corresponde desde el mes de tu cumpleaños, siempre que tengas derecho a PGU.',
+      },
+      {
+        question: '¿Toda persona de 75 años recibe PGU automáticamente?',
+        answer:
+          'No. La edad no reemplaza los requisitos de la PGU. Quienes ya reciben el beneficio pueden tener el incremento automático según su edad, pero una nueva solicitud exige cumplir las condiciones vigentes y ser evaluada por la institución competente.',
+      },
+      {
+        question: '¿Las pensiones de gracia y leyes de reparación tienen un trámite especial?',
+        answer:
+          'Sí. ChileAtiende informa que ciertos nuevos grupos de 75 años o más pudieron solicitar el beneficio desde junio de 2026 para cobrarlo desde septiembre si cumplen los requisitos. La consulta individual debe hacerse por el canal oficial.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Aumento de la PGU',
+        url: 'https://portal.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu',
+      },
+      {
+        label: 'ChileAtiende — Fechas clave de la Reforma de Pensiones',
+        url: 'https://www.chileatiende.gob.cl/reformadepensiones/fechas-clave',
+      },
+      {
+        label: 'Superintendencia de Pensiones — Disposiciones transitorias Ley 21.735',
+        url: 'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10731.html',
+      },
+      {
+        label: 'ChileAtiende — Pensión Garantizada Universal',
+        url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu',
+      },
+    ],
+    content: `<p class="article-lead">En septiembre de 2026 cambia el tramo de edad que accede al monto máximo de la Pensión Garantizada Universal (PGU). Las personas que tienen derecho al beneficio y que al 30 de septiembre cumplen o ya cumplieron 75 años pasan al máximo vigente de <strong>$250.275 mensuales</strong>. La edad importa, pero no convierte por sí sola a una persona en beneficiaria: primero debe existir derecho a PGU.</p>
+
+<p>Esta guía tiene fecha de corte <strong>12 de agosto de 2026</strong> y separa tres situaciones que suelen mezclarse: la persona que ya recibe PGU, la que cumple 75 años después de septiembre y la que pertenece a un nuevo grupo que debe solicitar el beneficio. El dato relevante no es solo “tener 75”, sino saber si la persona ya tiene PGU, qué fecha de nacimiento registra el IPS y si cumple los requisitos generales del beneficio.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El máximo no es un depósito garantizado para cualquier persona de 75 años</strong><p>$250.275 es el monto máximo informado para el nuevo tramo etario. Las personas que ya reciben PGU y cumplen la edad son verificadas por el sistema; una persona que nunca ha tenido PGU debe cumplir las condiciones vigentes y realizar el trámite cuando corresponda.</p></div></aside>
+
+<h2>Qué cambia el 1 de septiembre de 2026</h2>
+
+<p>La Ley 21.735 fijó una implementación gradual del aumento de la PGU por edad. El primer grupo, de 82 años o más, llegó al monto máximo en septiembre de 2025. Luego de un reajuste por IPC, ese máximo quedó en $250.275 desde febrero de 2026. El siguiente paso es septiembre de 2026: el mismo máximo alcanza a quienes tienen derecho a PGU y cumplen o ya cumplieron 75 años.</p>
+
+<table><thead><tr><th>Etapa</th><th>Grupo etario con derecho al máximo</th><th>Monto máximo informado</th></tr></thead><tbody><tr><td>Desde septiembre de 2025</td><td>82 años o más</td><td>$250.000 antes del reajuste posterior</td></tr><tr><td>Desde febrero de 2026</td><td>82 años o más</td><td>$250.275</td></tr><tr><td>Desde septiembre de 2026</td><td>75 años o más, con derecho a PGU</td><td>$250.275</td></tr><tr><td>Desde septiembre de 2027</td><td>65 años o más, con derecho a PGU</td><td>Máximo vigente en esa fecha</td></tr></tbody></table>
+
+<p>La tabla muestra la gradualidad del monto máximo. No sirve para calcular una pensión completa ni para reemplazar una evaluación de elegibilidad. La PGU puede ser inferior al máximo según el caso, y además existen requisitos de edad, residencia, focalización y pensión base que se revisan conforme a las reglas vigentes. Por eso una persona debe distinguir entre “me sube la PGU que ya recibo” y “quiero solicitar PGU por primera vez”.</p>
+
+<h2>Quiénes reciben el aumento de forma automática</h2>
+
+<p>ChileAtiende informa que si una persona ya es beneficiaria de PGU y tiene 75 años o más hasta el 30 de septiembre de 2026, el aumento opera automáticamente desde ese mes. No corresponde presentar una segunda postulación solo para que se aplique el nuevo tramo de edad. El IPS valida mensualmente la edad con los registros y sistemas de información disponibles durante la transición.</p>
+
+<p>Automático no significa que se deba ignorar la liquidación. Cuando llegue el pago de septiembre, conviene comparar el monto de la pensión, la cartola o comprobante y la fecha de nacimiento registrada. Si el monto no refleja el cambio esperado, la persona beneficiaria o su apoderado debe consultar por el canal oficial con su RUN y fecha de nacimiento, no basarse en una tabla compartida por redes sociales.</p>
+
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo de calendario</div><ul><li>Persona que ya recibe PGU y tiene 76 años el 30 de septiembre de 2026.</li><li>Está dentro del grupo etario que accede al monto máximo vigente desde septiembre.</li><li>El IPS debe aplicar el cambio de forma automática si mantiene el derecho a PGU.</li><li>El pago real debe revisarse en el comprobante individual.</li></ul><span class="total">La edad permite el tramo; no reemplaza los requisitos del beneficio</span></div>
+
+<h2>Qué ocurre si cumples 75 años después de septiembre</h2>
+
+<p>La fecha de cumpleaños cambia el mes del incremento. Según ChileAtiende, quienes cumplen 75 años entre octubre de 2026 y agosto de 2027 tienen derecho al aumento desde el mes en que cumplen años, siempre que sean beneficiarios de PGU. No deben esperar hasta septiembre de 2027 para acceder al valor máximo de su tramo etario.</p>
+
+<p>Por ejemplo, una persona que cumple 75 años el 18 de enero de 2027 no entra en la primera validación de septiembre de 2026, pero puede acceder al aumento desde enero de 2027 si ya recibe PGU y cumple las demás condiciones. En cambio, una persona que cumple 75 después de agosto de 2027 queda bajo la etapa siguiente de la gradualidad y debe revisar la regla vigente para ese período.</p>
+
+<p>La fecha relevante es la fecha de nacimiento que consta en los registros institucionales. Si detectas un error en tus datos personales, el primer paso es resolverlo por la vía correspondiente; no es un problema que pueda corregir una calculadora de pensiones ni una solicitud enviada a un correo no oficial.</p>
+
+<h2>Personas que no reciben PGU todavía</h2>
+
+<p>La reforma también abrió de manera gradual el acceso para personas que reciben pensiones de gracia, beneficios de leyes de reparación o tienen calidad de exoneradas políticas, bajo las condiciones que establece la normativa. Para el grupo de 75 años o más, ChileAtiende informó una solicitud anticipada desde junio de 2026 para que, si cumplían los requisitos, pudieran recibir el beneficio desde septiembre.</p>
+
+<p>Ese trámite no debe confundirse con el aumento automático de una persona ya beneficiaria. Si alguien no recibe PGU, tiene que consultar su caso: puede existir una condición especial que permita solicitarla, pero también pueden faltar requisitos generales. La autoridad evalúa residencia, focalización y antecedentes previsionales; la edad solo define la etapa de implementación del monto máximo.</p>
+
+<p>Las personas pensionadas de montepío de CAPREDENA o DIPRECA tienen otra calendarización. La información pública indica que su acceso a un monto complementario para alcanzar la PGU se contempla desde septiembre de 2027, sujeto a sus requisitos. No corresponde prometerles el aumento de septiembre de 2026 como si pertenecieran al mismo grupo.</p>
+
+<h2>Los requisitos generales de la PGU siguen importando</h2>
+
+<p>La PGU no se otorga únicamente por cumplir una edad. ChileAtiende mantiene requisitos sobre tener 65 años o más, no pertenecer al 10% más rico de la población según el Puntaje de Focalización Previsional, acreditar residencia en Chile y cumplir las condiciones relacionadas con la pensión base. Las reglas pueden contemplar situaciones particulares y excepciones; por eso la consulta individual es indispensable para una solicitud nueva.</p>
+
+<p>La persona que ya recibe PGU no debería usar este artículo para volver a calcular toda su elegibilidad desde cero. Debe revisar el pago y, si hay una discrepancia, preguntar por su caso. La persona que nunca ha recibido PGU tampoco debe concluir que será aprobada solo por su edad: antes de iniciar un trámite conviene reunir sus antecedentes y usar el canal de consulta del IPS o ChileAtiende.</p>
+
+<h2>Cómo revisar si te corresponde el cambio</h2>
+
+<ol class="steps"><li><strong>Confirma si ya recibes PGU.</strong> Revisa la liquidación de pensión, cartola o consulta oficial.</li><li><strong>Verifica la fecha de nacimiento.</strong> Distingue si al 30 de septiembre de 2026 tienes 75 años o si los cumples después.</li><li><strong>Consulta con tu RUN y fecha de nacimiento.</strong> ChileAtiende habilita una consulta oficial para conocer cuándo corresponde aumento o acceso.</li><li><strong>Revisa el pago de septiembre.</strong> Si ya eras beneficiario y estabas en el tramo, contrasta el monto y conserva el comprobante.</li><li><strong>Separa aumento de solicitud nueva.</strong> Si nunca recibiste PGU, revisa requisitos y canal de postulación; no asumas automatismo.</li><li><strong>Evita intermediarios.</strong> El trámite y las consultas se realizan por canales institucionales; no pagues a terceros por “activar” el aumento.</li></ol>
+
+<p>La <a href="/calculadoras/calculadora-pgu">calculadora PGU</a> puede servir para explorar un escenario referencial, pero no verifica residencia, focalización ni los registros del IPS. Para entender comisiones, pensión autofinanciada y decisiones previsionales de largo plazo, revisa también la <a href="/guias/afp-pension-chile">guía de AFP y pensión en Chile</a>. Ninguna de esas herramientas reemplaza la consulta individual de la autoridad.</p>
+
+<h2>Preguntas que aparecen en septiembre</h2>
+
+<h3>¿El aumento se suma por completo a mi pensión?</h3>
+<p>La PGU es un beneficio que se paga junto con la pensión según corresponda, pero el máximo publicado no permite inferir el total final de una persona. El monto individual puede depender de las reglas de pensión base y de la situación previsional. Revisa la liquidación y no calcules el nuevo total sumando una cifra estándar sin verificar el caso.</p>
+
+<h3>¿Tengo que ir a una oficina si ya recibo PGU?</h3>
+<p>Para el cambio etario de quienes ya son beneficiarios, ChileAtiende señala que el aumento es automático. Una visita o solicitud puede ser necesaria si hay una duda, un dato inconsistente o una situación distinta, pero no debe hacerse una postulación duplicada solo porque se acerca septiembre.</p>
+
+<h3>¿Qué pasa con quienes reciben APSV?</h3>
+<p>La normativa transitoria contempla que el IPS revise situaciones en que puede ser más favorable reemplazar un Aporte Previsional Solidario de Vejez por PGU más bono compensatorio. Para el grupo de 75 años, las notificaciones se contemplan durante octubre de 2026. No renuncies a un beneficio por una interpretación general: espera la comunicación oficial o solicita orientación institucional.</p>
+
+<h2>Checklist antes de mirar el pago</h2>
+
+<ul><li>¿Ya recibes PGU o sería una solicitud nueva?</li><li>¿Tienes 75 años al 30 de septiembre de 2026?</li><li>Si cumples años después, ¿identificaste el mes exacto de tu cumpleaños?</li><li>¿Consultaste el estado con RUN y fecha de nacimiento en un canal oficial?</li><li>¿Guardaste el comprobante de septiembre si esperas el incremento?</li><li>¿Evitaste compartir RUN, claves o datos bancarios en redes sociales?</li><li>¿Separaste el monto máximo de una estimación de tu pago individual?</li></ul>
+
+<p>El cambio de septiembre es relevante porque adelanta el monto máximo de PGU a un grupo grande de pensionados. La acción concreta es sencilla: si ya recibes PGU y tienes 75 años o más, revisa el pago; si cumples 75 después, identifica tu mes de cumpleaños; y si nunca has tenido PGU, consulta los requisitos y el trámite. La diferencia entre esas tres situaciones evita promesas que el sistema no puede cumplir.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://portal.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha de aumento de PGU de ChileAtiende</a>, las <a href="https://www.chileatiende.gob.cl/reformadepensiones/fechas-clave" target="_blank" rel="noopener">fechas clave de la Reforma de Pensiones</a>, el <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10731.html" target="_blank" rel="noopener">compendio transitorio de la Superintendencia de Pensiones</a> y la <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha general de PGU</a>. Los requisitos y pagos individuales deben confirmarse mediante la consulta oficial.</p>`,
+  },
+  {
+    slug: 'asignacion-familiar-2026-tramos-montos',
+    title: 'Asignación Familiar 2026: tramos, montos y pago por cada carga',
+    description:
+      'Montos vigentes de la Asignación Familiar 2026, cómo leer los tramos de ingreso, quién paga el beneficio y qué revisar antes de reclamar por una carga.',
+    date: '2026-08-12',
+    updatedAt: '2026-08-12',
+    category: 'familia',
+    readingTime: 15,
+    seoTitle: 'Asignación Familiar 2026: tramos, montos y pago por carga',
+    seoDescription:
+      'Revisa los montos vigentes de la Asignación Familiar 2026: $22.007, $13.505 o $4.267 por carga, según tramo de ingreso y situación laboral.',
+    keywords: [
+      'asignación familiar 2026 montos',
+      'tramos asignación familiar 2026',
+      'cuánto pagan por carga familiar 2026',
+      'asignación familiar $22007',
+      'asignación familiar por invalidez doble',
+      'cómo se paga asignación familiar trabajador dependiente',
+    ],
+    relatedCalculators: ['calculadora-asignacion-familiar', 'calculadora-sueldo-liquido'],
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    faq: [
+      {
+        question: '¿Cuánto paga la Asignación Familiar en 2026?',
+        answer:
+          'ChileAtiende informa $22.007, $13.505 o $4.267 por causante reconocido, según el tramo de ingreso. Desde $1.439.669 no hay pago monetario, aunque pueden mantenerse otros derechos asociados.',
+      },
+      {
+        question: '¿La Asignación Familiar se paga por cada hijo o carga?',
+        answer:
+          'Se paga por cada causante de asignación familiar que esté reconocido. Antes de multiplicar un monto debes confirmar que la carga esté acreditada y que el tramo de ingreso usado sea el correcto.',
+      },
+      {
+        question: '¿Quién paga la Asignación Familiar a un trabajador dependiente?',
+        answer:
+          'En el caso de trabajadores dependientes, el empleador debe pagarla mensualmente junto con el sueldo. Pensionados, independientes y personas con subsidios tienen modalidades distintas que informa ChileAtiende.',
+      },
+      {
+        question: '¿Qué pasa si el ingreso supera $1.439.669?',
+        answer:
+          'No corresponde pago monetario de Asignación Familiar en ese tramo, según la ficha oficial. Eso no significa necesariamente perder todos los beneficios que puedan depender de tener una carga acreditada.',
+      },
+      {
+        question: '¿La carga por invalidez recibe un monto distinto?',
+        answer:
+          'Sí. ChileAtiende señala que si la Asignación Familiar corresponde por invalidez, el monto es el doble del valor que corresponda al tramo de ingreso.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Asignación Familiar',
+        url: 'https://www.chileatiende.gob.cl/tramites/25878',
+      },
+      {
+        label: 'ChileAtiende — Asignación Familiar (ficha PDF)',
+        url: 'https://www.chileatiende.gob.cl/fichas/25878/1/pdf',
+      },
+      {
+        label: 'SUSESO — Compendio de normas de Asignación Familiar',
+        url: 'https://www.suseso.cl/620/alt-propertyvalue-596461.pdf',
+      },
+      {
+        label: 'SUSESO — Circular 3911, plataforma integrada de prestaciones familiares',
+        url: 'https://www.suseso.cl/609/articles-773957_archivo_01.pdf',
+      },
+    ],
+    content: `<p class="article-lead">La Asignación Familiar 2026 no es un monto único para todos los hogares. Se paga por cada causante reconocido y cambia según el tramo de ingreso de la persona beneficiaria. Los valores publicados por ChileAtiende son <strong>$22.007, $13.505 o $4.267</strong> por carga; sobre el último umbral no corresponde pago monetario, aunque la acreditación de la carga puede seguir siendo relevante para otros beneficios.</p>
+
+<p>Esta guía fue revisada el <strong>12 de agosto de 2026</strong> con la ficha vigente de ChileAtiende y la normativa de la Superintendencia de Seguridad Social (SUSESO). Antes de calcular un total, hay que resolver cuatro preguntas: quién es la persona beneficiaria, cuántas cargas están acreditadas, qué tramo de ingreso se aplica y por qué vía se paga. Si falta una de esas piezas, multiplicar “monto por hijos” puede producir una expectativa equivocada.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No confundas carga familiar con pago automático</strong><p>Que una persona esté a cargo de un hijo, hija u otro causante no significa que el pago aparecerá sin reconocimiento previo. El tramo, el ingreso considerado y la entidad pagadora deben quedar correctamente registrados. Una liquidación de sueldo sin el beneficio no siempre es un error de cálculo: puede faltar acreditar o actualizar antecedentes.</p></div></aside>
+
+<h2>Montos vigentes de la Asignación Familiar en 2026</h2>
+
+<p>ChileAtiende informa los siguientes valores por cada causante de Asignación Familiar. Los montos son mensuales para quienes reciben el beneficio por esa modalidad y dependen del nivel de ingreso que se determine para la persona beneficiaria:</p>
+
+<table><thead><tr><th>Ingreso informado en la ficha oficial</th><th>Monto por causante</th><th>Cómo leer el tramo</th></tr></thead><tbody><tr><td>Hasta $631.976</td><td>$22.007</td><td>Tramo de mayor monto</td></tr><tr><td>Entre $631.976 y $923.067</td><td>$13.505</td><td>Tramo intermedio</td></tr><tr><td>Desde $923.067 hasta $1.439.668</td><td>$4.267</td><td>Tramo de menor monto con pago</td></tr><tr><td>Desde $1.439.669</td><td>Sin pago monetario</td><td>La carga puede conservar relevancia para otros beneficios</td></tr></tbody></table>
+
+<p>Los bordes entre tramos deben consultarse con la entidad administradora si el ingreso queda muy cerca del corte. La ficha de ChileAtiende muestra los rangos para orientar la consulta, pero una liquidación puede considerar antecedentes que no se ven en un solo mes. No conviertas un ingreso extraordinario o un bono aislado en una conclusión definitiva sin confirmar cómo se determina el tramo en tu situación.</p>
+
+<p>La regla “por causante” también es importante. El monto no se paga una vez por familia sin importar el número de cargas reconocidas; se aplica por cada causante acreditado. Aun así, no corresponde sumar personas solo porque viven en el hogar. Deben estar reconocidas dentro del régimen y no existir una incompatibilidad o duplicidad de pago que corresponda resolver.</p>
+
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo de lectura, no de reconocimiento</div><ul><li>Persona beneficiaria en el tramo de $13.505.</li><li>Dos causantes ya reconocidos por la entidad competente.</li><li>$13.505 × 2 = $27.010 como referencia mensual.</li><li>El resultado cambia si el tramo, número de cargas o modalidad de pago no coincide.</li></ul><span class="total">Verifica reconocimiento y tramo antes de proyectar un presupuesto</span></div>
+
+<h2>Qué significa “por cada causante reconocido”</h2>
+
+<p>El régimen usa el término <strong>causante</strong> para la persona que da origen al beneficio. En la práctica cotidiana se habla de “carga familiar”, pero el pago exige que exista reconocimiento conforme al procedimiento de la entidad administradora. La relación familiar, edad, estudio, dependencia o condición de invalidez pueden ser antecedentes relevantes según el tipo de causante; no se deben reemplazar por una declaración informal en la empresa.</p>
+
+<p>Para revisar un pago, no basta contar hijos o integrantes de una familia. Pregunta primero qué causantes aparecen acreditados, desde qué fecha y bajo qué persona beneficiaria. En familias donde ambos padres trabajan o existe otro responsable, también hay que evitar que dos personas intenten recibir simultáneamente el mismo beneficio por un mismo causante. La entidad competente debe resolver la asignación y las actualizaciones.</p>
+
+<p>Si la Asignación Familiar se concede por invalidez, ChileAtiende informa que corresponde el doble del monto del tramo. Esa regla requiere que la situación esté reconocida por el sistema aplicable; no se obtiene solo marcando una casilla en una calculadora o adjuntando un certificado a un correo no institucional.</p>
+
+<h2>Quién paga según tu situación laboral</h2>
+
+<p>El valor por causante puede ser el mismo tramo, pero el canal de pago cambia. ChileAtiende diferencia varias situaciones y conviene mirarlas por separado:</p>
+
+<table><thead><tr><th>Situación</th><th>Forma de pago que informa ChileAtiende</th><th>Qué revisar</th></tr></thead><tbody><tr><td>Trabajadora o trabajador dependiente</td><td>El empleador la paga mensualmente junto con la remuneración</td><td>Liquidación de sueldo, causantes y tramo</td></tr><tr><td>Trabajador independiente que emite boletas</td><td>El IPS puede pagar anualmente, según obligación y períodos cotizados</td><td>Cotizaciones, reconocimiento y cierre del año</td></tr><tr><td>Trabajador que cotiza por cuenta propia</td><td>Se relaciona con el pago de cotizaciones o aportes</td><td>Entidad administradora y cotizaciones realizadas</td></tr><tr><td>Pensionada o pensionado</td><td>IPS o AFP la paga junto con la pensión, según corresponda</td><td>Liquidación de pensión y cargas vigentes</td></tr><tr><td>Personas con ciertos subsidios</td><td>Se paga mensualmente con el subsidio</td><td>Tipo de subsidio y entidad pagadora</td></tr></tbody></table>
+
+<p>Esta diferencia evita errores frecuentes. Una persona independiente puede esperar que el beneficio aparezca cada mes en su banco, cuando su modalidad se paga de forma anual. Un trabajador dependiente puede mirar solo el sueldo líquido y no advertir que la carga dejó de aparecer porque venció un reconocimiento o cambió el ingreso utilizado. Un pensionado puede buscar la asignación en la liquidación equivocada. Antes de reclamar, identifica el régimen y quien administra el pago.</p>
+
+<h2>Cómo se relaciona con el sueldo líquido</h2>
+
+<p>La Asignación Familiar se paga junto con la remuneración cuando corresponde a un trabajador dependiente, pero no se debe confundir con el sueldo imponible ni con una cotización. La <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> sirve para ordenar descuentos previsionales e impuesto sobre la remuneración; la Asignación Familiar requiere, además, la información de causantes acreditados y tramo de ingreso.</p>
+
+<p>Por eso una diferencia entre una calculadora de sueldo y la liquidación real no prueba por sí misma que haya un error. Puede haber asignaciones familiares, movilización, colación, bonos, descuentos voluntarios u otros conceptos. La forma correcta de revisar es separar haberes imponibles, no imponibles, descuentos y beneficios familiares, y después comparar cada línea con el documento de la empresa o entidad pagadora.</p>
+
+<h2>Cómo verificar que una carga está bien registrada</h2>
+
+<ol class="steps"><li><strong>Identifica a la persona beneficiaria.</strong> Confirma quién recibe actualmente la asignación por el causante.</li><li><strong>Revisa los causantes reconocidos.</strong> No supongas que una carga nueva aparece de inmediato en la liquidación.</li><li><strong>Comprueba el tramo.</strong> Contrasta el ingreso utilizado con la información que maneja la entidad administradora.</li><li><strong>Ubica la modalidad de pago.</strong> Dependiente, independiente, pensionado o persona con subsidio no revisan el mismo documento.</li><li><strong>Guarda antecedentes.</strong> Conserva liquidaciones, certificados y comprobantes de la solicitud o actualización.</li><li><strong>Usa el canal competente.</strong> Si existe una diferencia, consulta a empleador, caja, IPS, AFP u organismo administrador según tu caso.</li></ol>
+
+<p>La <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de Asignación Familiar</a> permite estimar un monto a partir de tramo y número de causantes. Úsala como una comprobación inicial, no como constancia de reconocimiento. Si el sistema oficial tiene una carga distinta, prevalece esa información hasta que se actualice por la vía correspondiente.</p>
+
+<h2>Qué significa no recibir pago desde el último umbral</h2>
+
+<p>Desde $1.439.669, la ficha vigente informa que no hay derecho a pago monetario de Asignación Familiar. Esa frase suele interpretarse como si la carga desapareciera para todos los efectos. ChileAtiende aclara que, aunque no exista pago, pueden mantenerse otras prestaciones y beneficios asociados. La conclusión correcta es más acotada: no proyectes un depósito mensual en ese tramo, pero tampoco elimines una carga acreditada sin revisar qué otros trámites podrían requerirla.</p>
+
+<p>También es importante no usar un mes de ingreso alto para decidir de inmediato que el beneficio se pierde de manera permanente. Si hubo un término de contrato, cambio de jornada, comisión extraordinaria u otra variación, pregunta cómo se aplica la regla a tu período. La respuesta depende del régimen y los antecedentes registrados, no de una captura aislada de una liquidación.</p>
+
+<h2>Errores comunes al calcular</h2>
+
+<ul><li><strong>Multiplicar por hijos sin reconocimiento:</strong> el cálculo usa causantes acreditados, no una lista informal del hogar.</li><li><strong>Usar el tramo más alto para todos:</strong> los $22.007 solo corresponden al primer tramo informado.</li><li><strong>Confundir pago por carga con bono familiar:</strong> la Asignación Familiar no es un aporte único anual ni un beneficio idéntico para todas las familias.</li><li><strong>Esperar pago mensual siendo independiente:</strong> la modalidad puede ser anual y depender de cotizaciones.</li><li><strong>Olvidar el doble por invalidez:</strong> aplica cuando esa condición está reconocida, no como un incremento automático.</li><li><strong>Interpretar “sin pago” como pérdida de toda carga:</strong> pueden existir otros beneficios asociados que deben consultarse.</li><li><strong>Revisar solo el líquido:</strong> mira las líneas de la liquidación y el documento que administra el beneficio.</li></ul>
+
+<h2>Checklist para una diferencia en la liquidación</h2>
+
+<ol><li>Confirma el número de causantes reconocidos.</li><li>Ubica el tramo de ingreso informado por ChileAtiende.</li><li>Identifica si el pago debería ser mensual o anual según tu situación.</li><li>Compara el monto por causante con la liquidación o pensión.</li><li>Revisa si existe una condición de invalidez acreditada.</li><li>Guarda el comprobante antes de pedir una rectificación.</li><li>Contacta a la entidad que administra tu caso, no a un tercero que prometa “activar” la carga.</li></ol>
+
+<p>La Asignación Familiar puede parecer una operación corta, pero depende de registros que una calculadora no ve. Los montos vigentes permiten estimar el orden de magnitud; el reconocimiento de la carga, el tramo y la modalidad de pago deciden si la estimación aparece realmente en una liquidación. Revisar esos tres puntos es más útil que buscar una cifra única para todo 2026.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://www.chileatiende.gob.cl/tramites/25878" target="_blank" rel="noopener">ficha de Asignación Familiar de ChileAtiende</a>, su <a href="https://www.chileatiende.gob.cl/fichas/25878/1/pdf" target="_blank" rel="noopener">versión PDF</a>, el <a href="https://www.suseso.cl/620/alt-propertyvalue-596461.pdf" target="_blank" rel="noopener">compendio de normas de SUSESO</a> y la <a href="https://www.suseso.cl/609/articles-773957_archivo_01.pdf" target="_blank" rel="noopener">Circular 3911</a>. Los tramos y antecedentes individuales deben confirmarse con la entidad administradora correspondiente.</p>`,
+  },
 ];
 
 export const RETIRED_ARTICLE_REDIRECTS = {
