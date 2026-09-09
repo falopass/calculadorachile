@@ -19,7 +19,7 @@ Lee `AGENTS.md`, `docs/contexto.md` y `docs/plan-editorial.md`. Para investigar 
 5. Implementa con el patrón existente en `src/data/articles.ts` o `src/data/guias.ts`. Reutiliza los componentes y helpers editoriales existentes.
 6. Enlaza la calculadora relevante y, si aplica, actualiza `src/lib/seo/calculator-guia-map.ts`.
 7. Mantén title, description, canonical, autoría, fecha de revisión, fuentes, disclaimer y schema alineados con el contenido visible.
-8. Ejecuta `npm run typecheck` y `npm run build`. Si cambias helpers SEO, ejecuta también sus tests.
+8. Solicita `npm run typecheck` y `npm run build` al `verifier`. Si cambias helpers SEO, incluye también sus tests en `VERIFICATION_REQUESTED`.
 9. Tras publicar una pieza del backlog, actualiza su estado en `docs/plan-editorial.md` sin alterar los conteos silenciosamente.
 
 ## Reglas
@@ -32,4 +32,4 @@ Lee `AGENTS.md`, `docs/contexto.md` y `docs/plan-editorial.md`. Para investigar 
 
 ## Entrega
 
-Reporta slug, tipo de pieza, intención, fuentes oficiales verificadas, enlaces internos, archivos modificados y resultados reales de validación.
+El writer reporta slug, tipo de pieza, intención, fuentes oficiales verificadas, enlaces internos, archivos modificados, `VERIFICATION_REQUESTED` y `VERIFICATION_PERFORMED: NONE`. Los resultados reales pertenecen al reporte separado de `verifier`.

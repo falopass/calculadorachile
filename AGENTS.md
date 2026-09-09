@@ -186,9 +186,9 @@ Secretos y valores reales de producción van en **Vercel Dashboard → Settings 
 - Formato de moneda chilena.
 - Secretos o credenciales.
 
-## Validación mínima por tipo de cambio
+## Verificación mínima por tipo de cambio
 
-El trabajo no está terminado hasta ejecutar una validación real y reportar el resultado.
+Los comandos de esta sección documentan checks para `verifier`; no conceden ejecución a Sol ni a writers. El writer termina liberando `FOREGROUND_WRITE_LOCK` con `VERIFICATION_REQUESTED` y `VERIFICATION_PERFORMED: NONE`. Sol, como `verification_authority`, decide qué gate proporcional autoriza y `verifier`, como único `verification_executor`, lo ejecuta bajo `LOCAL_HEAVY_LOCK: GRANTED`.
 
 | Cambio | Validación mínima |
 |---|---|
@@ -200,7 +200,7 @@ El trabajo no está terminado hasta ejecutar una validación real y reportar el 
 | UI/componente | `npm run typecheck` + revisión responsive básica (mobile primero) |
 | Solo documentación | Leer el archivo completo modificado y buscar referencias obsoletas |
 
-Si la validación falla, corrige y vuelve a ejecutar. No entregues “debería pasar”.
+Si un gate falla, `verifier` reporta evidencia sin editar. Sol puede abrir una nueva asignación de corrección al writer y autorizar después solo el gate mínimo invalidado. Un PASS cacheado no se repite mientras no cambien fuente, tests, dependencias, configuración, comando o entorno relevantes.
 
 ## Documentación (mínima)
 
@@ -211,15 +211,14 @@ Si la validación falla, corrige y vuelve a ejecutar. No entregues “debería p
 | [`docs/plan-editorial.md`](./docs/plan-editorial.md) | Backlog de posts SEO/AdSense |
 | [`docs/research/`](./docs/research/) | `dossier-ymyl.md` · `inventario-seo.md` · `deep-research.md` |
 
-## Codex (harness principal)
+## Devin y Codex
 
-Este repo está configurado para **Codex**. Inicia la tarea con `CalculaChile` como carpeta de trabajo para que Codex descubra este archivo, `.codex/config.toml`, los agentes y las skills del repo. No hay workflow de pymes: no uses `web-factory`, `pyme-template-intelligence` ni schema `LocalBusiness`.
+Inicia la tarea con `CalculaChile` como carpeta de trabajo para descubrir este archivo y las skills del repo. La arquitectura de agentes es la global final; el proyecto no registra clones locales. No hay workflow de pymes: no uses `web-factory`, `pyme-template-intelligence` ni schema `LocalBusiness`.
 
 | Pieza | Path |
 |-------|------|
 | Contexto + arranque | `docs/contexto.md` |
-| Configuración de proyecto | `.codex/config.toml` |
-| Agentes especializados | `.codex/agents/*.toml` |
+| Compatibilidad sin agentes locales | `.codex/config.toml` |
 | Skills versionadas | `.agents/skills/` |
 | Matriz fantasmas | `node scripts/audit-ymyl-matrix.mjs` |
 
@@ -237,7 +236,18 @@ Este repo está configurado para **Codex**. Inicia la tarea con `CalculaChile` c
 
 **AGENTS.md manda** sobre skills y docs auxiliares.
 
-Los agentes críticos usan modelos OpenAI definidos en el proyecto; los demás heredan la sesión. Proveedores, credenciales y routers alternativos pertenecen a la configuración personal, nunca al repo. Grok/OpenCode pueden mantenerse como compatibilidad local, pero no son la fuente de instrucciones para Codex.
+### Contrato de orquestación
+
+- Sol root conserva arquitectura, ambigüedad, integración y decisión final. Solo root crea hijos, con profundidad exactamente uno; no hay bindings `agent:`, auto-spawn, nesting ni fan-out implícito.
+- `scout` hace reconocimiento read-only; `analyst` procesa diffs/logs grandes; `red-team` hace revisión adversarial read-only; `backend-builder`, `swe-worker`, `mechanical-worker` o `frontend-builder` escriben según el alcance; solo `verifier` ejecuta proyecto.
+- Cualquier writer es foreground, único y sin `exec`; requiere `FOREGROUND_WRITE_LOCK: GRANTED`, ownership y do-not-touch exactos. Writer y verifier nunca se solapan.
+- Se hereda el gobernador global: máximo tres agentes activos, dos hijos además de root, un background read-only, un writer, un ejecutor/heavy/build/full-suite/browser/dev-server/Docker, profundidad uno, un reintento por modelo y dos workers internos de tests.
+- Un writer devuelve archivos, alcance, supuestos, riesgos, `VERIFICATION_REQUESTED`, `VERIFICATION_PERFORMED: NONE` y libera el lock. `verifier` recibe los checks aprobados en orden bajo `LOCAL_HEAVY_LOCK: GRANTED`, reporta y nunca corrige.
+- Proveedores, credenciales, routers y aliases son configuración personal, nunca del repo. Grok/OpenCode pueden quedar como compatibilidad histórica, pero no gobiernan Devin.
+
+### Autoridad frontend
+
+Sol solo decide arquitectura frontend técnica. Toda dirección visual no resuelta corresponde a `frontend-director`; `frontend-builder` implementa el contrato aprobado. Si Opus no está disponible, Kimi puede abrir un `ART_DIRECTION_FALLBACK`, cerrar primero el contrato visual y recién después implementar. La UI actual es evidencia del estado presente, no aprobación permanente: un rediseño explícito puede evolucionarla sin perder las invariantes YMYL, SEO, AdSense y accesibilidad.
 
 ## Criterio operativo para agentes
 
@@ -248,4 +258,4 @@ Los agentes críticos usan modelos OpenAI definidos en el proyecto; los demás h
 5. Dinero, impuestos, laboral, previsión, SEO indexado, AdSense o secretos: cautela; confirma si hay dos caminos.
 6. No inventes cifras, fuentes, reseñas ni valores financieros.
 7. Posts: `docs/plan-editorial.md` + research. Fórmulas: `docs/research/dossier-ymyl.md` + matriz.
-8. Tras wiring de calculadora: `node scripts/audit-ymyl-matrix.mjs` debe mostrar 0 fantasmas en ese `id` (salvo cosméticos documentados).
+8. Tras wiring de calculadora, solicita a `verifier` `node scripts/audit-ymyl-matrix.mjs`; el resultado esperado es 0 fantasmas en ese `id` (salvo cosméticos documentados).

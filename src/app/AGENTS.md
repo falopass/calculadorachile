@@ -4,4 +4,4 @@
 - Mantén disclaimers, fuentes, autoría, breadcrumbs, JSON-LD y placements AdSense.
 - No uses `LocalBusiness`; CalculaChile es una plataforma nacional sin local físico.
 - Mantén light-only, mobile-first y accesibilidad básica. No introduzcas nuevas librerías visuales sin necesidad aprobada.
-- Para cambios de rutas, metadata o schema ejecuta `npm run typecheck` y `npm run build`; añade tests específicos cuando existan helpers testeables.
+- Para cambios de rutas, metadata o schema incluye `npm run typecheck` y `npm run build` en `VERIFICATION_REQUESTED`; añade tests específicos cuando existan helpers testeables. Solo el `verifier` global ejecuta esos checks.

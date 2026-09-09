@@ -36,7 +36,7 @@ Usa estos valores como criterio interno. No los muestres en la UI. Para blog o c
    - **Rediseño amplio:** detener y pedir aprobación si afecta navegación, ads, URLs, formularios core o marca.
 4. Reutiliza componentes en `src/components/ui`, `calculator`, `home`, `layout` y `article` antes de crear otro.
 5. Implementa el cambio mínimo y revisa mobile primero (~375 px), luego tablet y desktop.
-6. Ejecuta la validación correspondiente de `AGENTS.md` y reporta resultados reales.
+6. Incluye la verificación correspondiente de `AGENTS.md` en `VERIFICATION_REQUESTED`; solo `verifier` reporta resultados reales.
 
 ## Criterios visuales
 
@@ -65,6 +65,8 @@ Usa estos valores como criterio interno. No los muestres en la UI. Para blog o c
 - Respeta `prefers-reduced-motion`; la información nunca debe depender de una animación.
 
 ## Gate de entrega
+
+El writer solicita estos gates; solo `verifier` los ejecuta y reporta.
 
 - `npm run typecheck`.
 - Revisión visual mobile y desktop para cambios UI.

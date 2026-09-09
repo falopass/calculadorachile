@@ -84,7 +84,9 @@ npm run test:run -- src/lib/calculations/__tests__/<modulo>.test.ts
 - No agregar `LocalBusiness`.
 - No tocar sitemaps/robots salvo que la calculadora deba excluirse (`noIndex` ya la saca del sitemap vía helpers).
 
-### 6. Validación obligatoria (reportar salida real)
+### 6. Verificación solicitada
+
+El writer incluye estos checks en `VERIFICATION_REQUESTED` y reporta `VERIFICATION_PERFORMED: NONE`. Solo `verifier` ejecuta y reporta salida real.
 
 ```bash
 npm run typecheck
@@ -92,7 +94,7 @@ npm run test:run -- src/lib/calculations/__tests__/<modulo>.test.ts
 npm run build
 ```
 
-Nueva calculadora **no está lista** sin typecheck + test del módulo + build.
+Nueva calculadora **no está lista** sin evidencia del `verifier` para typecheck + test del módulo + build.
 
 ## Anti-patrones
 
@@ -110,5 +112,5 @@ Al terminar, reportar:
 1. `id` + `slug` + URL pública.
 2. Fuente oficial usada.
 3. Inputs conectados (lista) y confirmación de que no hay fantasma.
-4. Comandos de validación y resultado.
+4. Checks solicitados; el resultado lo agrega `verifier` en su reporte separado.
 5. Si quedó `noIndex` o falta guía/override SEO.

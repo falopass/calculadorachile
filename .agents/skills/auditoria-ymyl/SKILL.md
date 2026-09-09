@@ -129,7 +129,7 @@ Solo corrige si el usuario lo pide o si el hallazgo es un bug claro de wiring (i
 - No “mejores” la fórmula sin fuente oficial.
 - No cambies slugs ni quites disclaimers.
 - Toda corrección de fórmula → actualizar test golden + `lastReviewed` si hubo review real.
-- Validar: `npm run typecheck` + test del módulo.
+- Solicitar al `verifier`: `npm run typecheck` + test del módulo.
 
 ## Anti-patrones
 

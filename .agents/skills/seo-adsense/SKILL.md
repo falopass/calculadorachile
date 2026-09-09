@@ -99,14 +99,16 @@ No devolver 200 vacío ni 404 blando si la URL estuvo indexada y se retira a pro
 - [ ] Ads no eliminados
 - [ ] `npm run typecheck` + `npm run build`
 
-## Validación
+## Verificación solicitada
+
+Incluir estos comandos en `VERIFICATION_REQUESTED`; solo `verifier` los ejecuta:
 
 ```bash
 npm run typecheck
 npm run build
 ```
 
-Si tocas sitemaps/helpers, correr tests de `src/lib/seo/__tests__/` si existen.
+Si tocas sitemaps/helpers, solicitar tests de `src/lib/seo/__tests__/` si existen.
 
 ## Anti-patrones
 
