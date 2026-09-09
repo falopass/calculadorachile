@@ -63,7 +63,9 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-multas-transito': 'vehiculos-chile-permiso-multas',
   'calculadora-costo-tag': 'vehiculos-chile-permiso-multas',
   'calculadora-credito-automotriz': 'vehiculos-chile-permiso-multas',
-  'calculadora-patente-comercial': 'vehiculos-chile-permiso-multas',
+
+  // Empresas
+  'calculadora-patente-comercial': 'empresas-pymes-chile',
 
   // Familia (nueva guía pillar)
   'calculadora-pension-alimenticia': 'familia-pension-alimenticia-chile',

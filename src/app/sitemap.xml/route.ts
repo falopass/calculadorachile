@@ -22,6 +22,7 @@
 // ============================================
 
 import { articles } from '@/data/articles';
+import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
 import {
   SITE_URL,
@@ -48,10 +49,20 @@ function maxDate(dates: string[]): Date {
 export async function GET() {
   const blogLastMod = maxDate(articles.map((a) => a.date));
   const guiasLastMod = maxDate(guias.map((g) => g.updatedAt));
+  // Misma fecha real más reciente que emite el sub-sitemap: el
+  // `lastReviewed` máximo de las calculadoras indexables (las
+  // `noIndex` no aparecen en /sitemap-calculadoras.xml). Si ninguna
+  // lo declara, `maxDate` cae a `SITE_LAST_MODIFIED`.
+  const calculadorasLastMod = maxDate(
+    calculators
+      .filter((c) => !c.noIndex)
+      .map((c) => c.lastReviewed)
+      .filter((d): d is string => typeof d === 'string'),
+  );
 
   const xml = renderSitemapIndexXml([
     { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: SITE_LAST_MODIFIED },
-    { loc: `${SITE_URL}/sitemap-calculadoras.xml`, lastmod: SITE_LAST_MODIFIED },
+    { loc: `${SITE_URL}/sitemap-calculadoras.xml`, lastmod: calculadorasLastMod },
     { loc: `${SITE_URL}/sitemap-guias.xml`, lastmod: guiasLastMod },
     { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: blogLastMod },
   ]);

@@ -11,13 +11,14 @@
 //     el `path`.
 //  3. Toda página tiene `openGraph` y `twitter` derivados del título
 //     y descripción base.
-//  4. La descripción se valida y trunca a 160 caracteres si excede.
+//  4. La descripción se publica completa, sin truncado automático:
+//     el texto llega íntegro a meta description, openGraph y twitter
+//     para no cortar frases a mitad en SERP.
 // ============================================
 
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL, absoluteUrl } from '@/lib/site';
 
-const META_DESCRIPTION_LIMIT = 160;
 const DEFAULT_OG_IMAGE = absoluteUrl('/og-image.png');
 
 export interface BuildMetadataArgs {
@@ -45,17 +46,6 @@ export interface BuildMetadataArgs {
 }
 
 /**
- * Trunca una descripción al límite recomendado, cortando en el
- * último espacio para evitar palabras partidas.
- */
-function clampDescription(desc: string, limit = META_DESCRIPTION_LIMIT): string {
-  if (desc.length <= limit) return desc;
-  const truncated = desc.slice(0, limit);
-  const lastSpace = truncated.lastIndexOf(' ');
-  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated).trimEnd() + '…';
-}
-
-/**
  * Construye un `Metadata` completo para una página.
  *
  * Salida típica:
@@ -65,7 +55,7 @@ function clampDescription(desc: string, limit = META_DESCRIPTION_LIMIT): string 
  *   - twitter: summary_large_image, title, description, image
  */
 export function buildPageMetadata(args: BuildMetadataArgs): Metadata {
-  const description = clampDescription(args.description);
+  const description = args.description;
   const url = absoluteUrl(args.path);
   const ogImage = args.ogImage ?? {
     url: DEFAULT_OG_IMAGE,

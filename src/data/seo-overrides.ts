@@ -53,9 +53,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #1 del día en clics: defender y afinar ---
   'calculadora-patente-comercial': {
-    seoTitle: 'Patente Comercial 2026: ¿cuánto pagar? | Calcula', // 48
+    seoTitle: 'Patente Comercial 2026: ¿cuánto pagar?', // 38
     seoDescription:
-      'Calcula tu patente comercial 2026 con capital propio tributario y tasa de tu comuna. Desde 1 UTM (~$71.649) hasta 8.000 UTM. Pago anual, opción 2 cuotas.', // 155
+      'Calcula tu patente comercial 2026 con capital propio tributario y tasa de tu comuna. Tramos desde 1 UTM hasta 8.000 UTM. Pago anual, opción 2 cuotas.', // 149
   },
 
   'calculadora-vacaciones-proporcionales': {
