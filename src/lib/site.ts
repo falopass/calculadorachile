@@ -23,6 +23,14 @@ export const SITE_NAME = 'CalculaChile';
 export const CONTACT_EMAIL = 'contacto@calculadorachile.cl';
 
 /**
+ * URL externa de cotización de calculadoras a medida (p. ej. Ko-fi).
+ * Opcional: si `NEXT_PUBLIC_COMMISSIONS_URL` no está definida, la UI no
+ * renderiza ningún CTA de cotización (comportamiento actual intacto).
+ */
+export const COMMISSIONS_URL =
+  process.env.NEXT_PUBLIC_COMMISSIONS_URL?.replace(/\/$/, '') || '';
+
+/**
  * Construye una URL absoluta a partir de un path interno.
  *
  * @example

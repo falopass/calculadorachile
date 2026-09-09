@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Calculator, BookOpen, Layers, ArrowUpRight } from 'lucide-react';
-import { CONTACT_EMAIL, SITE_NAME } from '@/lib/site';
+import { COMMISSIONS_URL, CONTACT_EMAIL, SITE_NAME } from '@/lib/site';
 
 const footerLinks = {
   calculadoras: {
@@ -81,6 +81,17 @@ export default function Footer() {
               Calculadoras laborales, tributarias y financieras para Chile, con fuentes, supuestos y
               fecha de revisión por herramienta.
             </p>
+            {COMMISSIONS_URL && (
+              <a
+                href={COMMISSIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] transition-colors duration-150 hover:text-[var(--accent-hover)]"
+              >
+                <span>¿Necesitas una calculadora a medida para tu pyme? Cotiza aquí</span>
+                <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+              </a>
+            )}
             <p className="mt-5 text-xs text-[var(--foreground-muted)]">
               © {year} {SITE_NAME} · Hecho en Chile
             </p>
