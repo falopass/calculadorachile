@@ -394,6 +394,8 @@ export function softwareApplicationSchema(args: {
   dateModified?: string;
   /** URL absoluta de imagen OG (1200x630). Mejora el thumbnail en SERPs. */
   imageUrl?: string;
+  /** URLs de leyes y fuentes oficiales en las que se basa el cálculo (E-E-A-T YMYL). */
+  isBasedOn?: string[];
 }): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -431,6 +433,10 @@ export function softwareApplicationSchema(args: {
       width: 1200,
       height: 630,
     };
+    schema.screenshot = args.imageUrl;
+  }
+  if (args.isBasedOn && args.isBasedOn.length > 0) {
+    schema.isBasedOn = args.isBasedOn;
   }
   if (args.datePublished) schema.datePublished = args.datePublished;
   if (args.dateModified) schema.dateModified = args.dateModified;

@@ -10,10 +10,12 @@ import LiveValuesSection from '@/components/calculator/LiveValuesSection';
 import RelatedCalculators from '@/components/calculator/RelatedCalculators';
 import OfficialSources from '@/components/calculator/OfficialSources';
 import CalculatorMethodology from '@/components/calculator/CalculatorMethodology';
+import CalculatorNormativeTable from '@/components/calculator/CalculatorNormativeTable';
 import PremiumLoadingIndicator from '@/components/calculator/PremiumLoadingIndicator';
 import { calculators } from '@/data/calculators';
 import { loadCalculationFn, type CalculateFn } from '@/lib/calculations/load-calculator';
 import { getRelatedCalculators } from '@/lib/seo/related-calculators';
+import { getCategoryClusterLinks } from '@/lib/seo/category-clusters';
 import { useValues } from '@/lib/context/ValuesContext';
 
 interface CalculatorPageClientProps {
@@ -282,6 +284,8 @@ export default function CalculatorPageClient({
 
       <CalculatorReferenceContent calculator={calculator} />
 
+      <CalculatorNormativeTable calculatorId={calculator.id} />
+
       <div className="mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 md:p-7">
           <h2 className="flex items-center gap-2 text-lg md:text-xl font-semibold text-[var(--foreground)] mb-4">
@@ -371,108 +375,38 @@ export default function CalculatorPageClient({
         )}
       </div>
 
-      {/* Enlazado interno laboral (hub + clúster cesantía / contrato vs honorarios) */}
+      {/* Enlazado interno semántico por clúster temático (100% de calculadoras cubiertas) */}
       {(() => {
-        type LaborLink = { href: string; label: string; desc?: string };
-        const byId: Record<string, LaborLink[]> = {
-          finiquito: [
-            { href: '/cesantia', label: 'Hub cesantía', desc: 'Checklist post-despido' },
-            {
-              href: '/blog/seguro-cesantia-finiquito-2026-afc',
-              label: 'Seguro de Cesantía y finiquito',
-            },
-            {
-              href: '/blog/checklist-despues-despido-chile-2026',
-              label: 'Checklist después del despido',
-            },
-            { href: '/guias/finiquito-laboral-chile', label: 'Guía de finiquito' },
-            {
-              href: '/calculadoras/calculadora-indemnizacion-anos-servicio',
-              label: 'Indemnización por años',
-            },
-          ],
-          'indemnizacion-anos-servicio': [
-            { href: '/cesantia', label: 'Hub cesantía' },
-            { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito completo' },
-            {
-              href: '/blog/seguro-cesantia-finiquito-2026-afc',
-              label: 'Seguro de Cesantía',
-            },
-            { href: '/guias/finiquito-laboral-chile', label: 'Guía finiquito' },
-          ],
-          'vacaciones-proporcionales': [
-            { href: '/cesantia', label: 'Hub cesantía' },
-            { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
-            {
-              href: '/calculadoras/calculadora-indemnizacion-anos-servicio',
-              label: 'Indemnización',
-            },
-            { href: '/guias/finiquito-laboral-chile', label: 'Guía finiquito' },
-          ],
-          'sueldo-liquido': [
-            { href: '/guias/sueldo-liquido-chile', label: 'Guía sueldo líquido' },
-            {
-              href: '/calculadoras/calculadora-boleta-honorarios',
-              label: 'Boleta de honorarios',
-              desc: 'Comparar contrato vs honorarios',
-            },
-            {
-              href: '/calculadoras/calculadora-finiquito',
-              label: 'Finiquito',
-            },
-            {
-              href: '/calculadoras/calculadora-horas-extra',
-              label: 'Horas extra',
-            },
-          ],
-          'boleta-honorarios': [
-            {
-              href: '/guias/iva-boleta-honorarios-chile',
-              label: 'Guía boleta e IVA',
-            },
-            {
-              href: '/calculadoras/calculadora-sueldo-liquido',
-              label: 'Sueldo líquido (contrato)',
-              desc: 'Comparar con dependiente',
-            },
-            {
-              href: '/calculadoras/calculadora-cotizacion-independientes',
-              label: 'Cotización independientes',
-            },
-            {
-              href: '/calculadoras/calculadora-impuesto-segunda-categoria',
-              label: 'Impuesto 2.ª categoría',
-            },
-          ],
-          'horas-extra': [
-            { href: '/guias/sueldo-liquido-chile', label: 'Guía sueldo líquido' },
-            { href: '/calculadoras/calculadora-sueldo-liquido', label: 'Sueldo líquido' },
-            { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
-          ],
-        };
-        const links = byId[calculator.id];
-        if (!links?.length) return null;
+        const links = getCategoryClusterLinks(calculator);
+        if (!links || links.length === 0) return null;
         return (
-          <section className="mt-8 md:mt-10" aria-label="Enlaces del clúster laboral">
+          <section className="mt-8 md:mt-10" aria-label="Calculadoras y recursos relacionados">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-600)]">
-              Sigue en el clúster laboral
+              Herramientas y recursos relacionados
             </p>
-            <ul className="grid gap-2 sm:grid-cols-2">
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
-                    className="group block rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 transition-all hover:border-[var(--color-primary-500)]/30"
+                    className="group block h-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3.5 transition-all hover:border-[var(--color-primary-500)]/30 hover:shadow-sm"
                   >
-                    <span className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--color-primary-600)]">
-                      {item.label}
-                    </span>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <span className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--color-primary-600)] transition-colors">
+                        {item.label}
+                      </span>
+                      {item.badge && (
+                        <span className="shrink-0 rounded-full bg-[var(--color-primary-500)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-primary-600)]">
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
                     {item.desc ? (
-                      <span className="mt-0.5 block text-xs text-[var(--foreground-secondary)]">
+                      <span className="mt-1 block text-xs text-[var(--foreground-secondary)] line-clamp-2 leading-relaxed">
                         {item.desc}
                       </span>
                     ) : null}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -197,6 +197,10 @@ export default function SeoStructuredData({
 }: SeoStructuredDataProps) {
   const categoryLabel = CATEGORY_LABELS[calculator.category] ?? calculator.category;
 
+  const officialSources = calculator.sources
+    ?.map((s) => s.url)
+    .filter((u): u is string => typeof u === 'string' && u.startsWith('http'));
+
   const softwareSchema = softwareApplicationSchema({
     name: calculator.name,
     description: calculator.description,
@@ -204,6 +208,8 @@ export default function SeoStructuredData({
     features: deriveFeatures(calculator),
     keywords: calculator.keywords,
     imageUrl,
+    dateModified: calculator.lastReviewed,
+    isBasedOn: officialSources && officialSources.length > 0 ? officialSources : undefined,
   });
 
   const webPage = webPageSchema({

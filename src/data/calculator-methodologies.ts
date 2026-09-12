@@ -25,6 +25,23 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No reemplaza una liquidación emitida por el empleador.',
       'Reliquidaciones, licencias, retroactivos y regímenes especiales pueden cambiar el resultado.',
     ],
+    workedExample: {
+      title: 'Ejemplo: Sueldo bruto de $1.000.000 en AFP Uno y FONASA (2026)',
+      inputs: [
+        'Sueldo bruto imponible: $1.000.000',
+        'AFP: Uno (10% + 0,46% comisión = 10,46%)',
+        'Salud: FONASA (7%)',
+        'Contrato: Indefinido (Seguro Cesantía 0,6%)',
+      ],
+      development: [
+        'Descuento AFP: $1.000.000 × 10,46% = $104.600',
+        'Descuento Salud: $1.000.000 × 7,00% = $70.000',
+        'Seguro de Cesantía: $1.000.000 × 0,60% = $6.000',
+        'Total cotizaciones previsionales: $180.600',
+        'Base tributable: $1.000.000 - $180.600 = $819.400 (exento de Impuesto Único)',
+      ],
+      result: 'Sueldo líquido estimado a percibir: $819.400.',
+    },
   },
   finiquito: {
     summary:
@@ -43,6 +60,23 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No valida cotizaciones, reserva de derechos ni legalidad del despido.',
       'Bonos variables, AFC, topes y convenios pueden requerir revisión documental.',
     ],
+    workedExample: {
+      title: 'Ejemplo: Despido por Necesidades de la Empresa (3 años de servicio)',
+      inputs: [
+        'Última remuneración mensual: $800.000',
+        'Antigüedad: 3 años completos',
+        'Causal: Necesidades de la Empresa (Art. 161 Código del Trabajo)',
+        'Vacaciones pendientes: 10 días hábiles',
+        'Aviso previo: No avisado con 30 días de anticipación',
+      ],
+      development: [
+        'Indemnización por años de servicio: 3 años × $800.000 = $2.400.000',
+        'Indemnización sustitutiva de aviso previo: 1 mes = $800.000',
+        'Feriado proporcional pendiente: (10 días / 30) × $800.000 = $266.667',
+        'Total bruto del finiquito: $2.400.000 + $800.000 + $266.667',
+      ],
+      result: 'Total estimado del finiquito: $3.466.667 (las indemnizaciones no tributan).',
+    },
   },
   'uf-clp': {
     summary:
@@ -92,6 +126,20 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No valida pactos, controles de asistencia ni excepciones de jornada.',
       'Remuneraciones variables y recargos especiales pueden exigir otra base.',
     ],
+    workedExample: {
+      title: 'Ejemplo: 10 horas extra con jornada legal de 42 horas (Ley 40 Horas)',
+      inputs: [
+        'Sueldo base mensual: $700.000',
+        'Jornada laboral: 42 horas semanales (vigente en Chile desde abril 2026)',
+        'Horas extraordinarias: 10 horas con 50% de recargo legal',
+      ],
+      development: [
+        'Factor valor hora (jornada 42h DT): 0,0079365',
+        'Valor hora extraordinaria al 50%: $700.000 × 0,0079365 = $5.556 por hora',
+        'Total a pagar: 10 horas × $5.556 = $55.556',
+      ],
+      result: 'Monto total a percibir por 10 horas extra: $55.556 brutos imponibles.',
+    },
   },
   'vacaciones-proporcionales': {
     summary:
@@ -107,6 +155,21 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No reconstruye asistencia, licencias ni feriados ya utilizados.',
       'La remuneración variable puede requerir antecedentes de meses anteriores.',
     ],
+    workedExample: {
+      title: 'Ejemplo: Trabajador con 8 meses trabajados al renunciar o ser despedido',
+      inputs: [
+        'Sueldo base mensual: $600.000',
+        'Meses trabajados desde el último feriado: 8 meses',
+        'Feriado pendiente de períodos anteriores: 0 días',
+      ],
+      development: [
+        'Factor legal mensual de vacaciones: 1,25 días hábiles por mes (15 / 12).',
+        'Días hábiles generados: 8 meses × 1,25 = 10 días hábiles.',
+        'Valor remuneración diaria: $600.000 / 30 = $20.000 por día.',
+        'Monto en pesos: 10 días × $20.000 = $200.000.',
+      ],
+      result: 'Indemnización por feriado proporcional en el finiquito: $200.000.',
+    },
   },
   'boleta-honorarios': {
     summary:
@@ -121,6 +184,19 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'La retención no equivale al impuesto anual definitivo.',
       'No determina obligación de cotizar, cobertura parcial ni resultado de Operación Renta.',
     ],
+    workedExample: {
+      title: 'Ejemplo: Boleta de honorarios bruta de $500.000 con retención 15,25% (2026)',
+      inputs: [
+        'Monto bruto de la boleta: $500.000',
+        'Año de emisión: 2026 (tasa legal de retención 15,25% según Ley 21.133)',
+      ],
+      development: [
+        'Retención legal SII (15,25%): $500.000 × 15,25% = $76.250',
+        'Monto líquido a recibir: $500.000 - $76.250 = $423.750',
+        'Cálculo inverso (para recibir $500.000 líquido): Bruto = $500.000 / 0,8475 = $589.971',
+      ],
+      result: 'Monto líquido a transferir: $423.750 (con $76.250 retenidos para el SII).',
+    },
   },
   'utm-clp': {
     summary:
@@ -157,6 +233,21 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No determina si existe utilidad líquida ni obligación empresarial.',
       'Anticipos, jornadas parciales y períodos incompletos requieren liquidación real.',
     ],
+    workedExample: {
+      title: 'Ejemplo: Gratificación con tope 4,75 Ingresos Mínimos Mensuales (IMM)',
+      inputs: [
+        'Sueldo base mensual: $700.000',
+        'Sueldo Mínimo (IMM): $553.553 (vigente en Chile 2026)',
+        'Modalidad: Artículo 50 del Código del Trabajo (25% del sueldo con tope anual)',
+      ],
+      development: [
+        'Cálculo del 25% del sueldo: $700.000 × 25% = $175.000 al mes.',
+        'Tope anual del art. 50: 4,75 × $553.553 = $2.629.377 al año.',
+        'Tope mensual del art. 50: $2.629.377 / 12 = $219.115 al mes.',
+        'Comparación: Como $175.000 es menor que el tope ($219.115), corresponde el monto íntegro.',
+      ],
+      result: 'Gratificación legal mensual a pagar: $175.000.',
+    },
   },
   'indemnizacion-anos-servicio': {
     summary:
@@ -172,6 +263,20 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No decide la procedencia de la causal ni de un recargo judicial.',
       'La composición de la última remuneración puede requerir revisar liquidaciones y contrato.',
     ],
+    workedExample: {
+      title: 'Ejemplo: 5 años y 7 meses de antigüedad con sueldo de $900.000',
+      inputs: [
+        'Última remuneración mensual imponible: $900.000 (bajo el tope de 90 UF)',
+        'Tiempo trabajado: 5 años y 7 meses',
+        'Causal: Art. 161 Código del Trabajo (Necesidades de la empresa)',
+      ],
+      development: [
+        'Regla legal de fracción > 6 meses: 7 meses cuentan como 1 año completo adicional.',
+        'Años computables a indemnizar: 6 años (dentro del tope legal de 11 años).',
+        'Cálculo: 6 años × $900.000',
+      ],
+      result: 'Indemnización legal por años de servicio: $5.400.000 (exenta de impuestos).',
+    },
   },
   'pension-alimenticia': {
     summary:
@@ -255,6 +360,21 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No constituye una oferta ni incorpora necesariamente CAE, seguros y gastos operacionales.',
       'La aprobación depende de evaluación comercial, renta y políticas de la institución.',
     ],
+    workedExample: {
+      title: 'Ejemplo: Crédito de 2.000 UF a 25 años con tasa 4,5% anual',
+      inputs: [
+        'Monto financiado: 2.000 UF (aprox. $78.000.000)',
+        'Plazo: 25 años (300 dividendos mensuales)',
+        'Tasa de interés anual: 4,50%',
+      ],
+      development: [
+        'Dividendo mensual base (capital + interés): 11,12 UF.',
+        'Seguros obligatorios estimados (desgravamen e incendio/sismo): 0,85 UF.',
+        'Dividendo total mensual en UF: 11,97 UF.',
+        'Conversión referencial a pesos (UF $39.000): 11,97 × $39.000 = $466.830 al mes.',
+      ],
+      result: 'Dividendo mensual estimado: 11,97 UF (aprox. $466.830 al mes).',
+    },
   },
   'operacion-renta': {
     summary:
@@ -340,6 +460,20 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Cada municipalidad determina tasa, derechos y antecedentes exigidos.',
       'Sucursales, sociedades de inversión y distribución de capital requieren revisión específica.',
     ],
+    workedExample: {
+      title: 'Ejemplo: PYME con Capital Propio de $30.000.000 y tasa comunal 0,5%',
+      inputs: [
+        'Capital Propio Tributario (CPT): $30.000.000',
+        'Tasa municipal: 0,5% (0,005 sobre el CPT)',
+        'Mínimo legal: 1 UTM · Máximo legal: 8.000 UTM (Ley de Rentas Municipales)',
+      ],
+      development: [
+        'Cálculo valor anual: $30.000.000 × 0,5% = $150.000.',
+        'Verificación de límites: $150.000 supera 1 UTM (aprox. $68.000) y está bajo 8.000 UTM.',
+        'Pago en dos cuotas semestrales: $150.000 / 2 = $75.000 cada cuota.',
+      ],
+      result: 'Patente comercial anual: $150.000 (pagadera en 2 cuotas de $75.000 en julio y enero).',
+    },
   },
   'comparador-afp': {
     summary:
