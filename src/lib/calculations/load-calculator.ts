@@ -310,8 +310,7 @@ export async function loadCalculationFn(
             | 'habitacional'
             | 'comercial'
             | 'industrial'
-            | 'sitio_eriado'
-            | 'agrario',
+            | 'sitio_eriado',
         });
         return contribucionesToResults(result);
       };

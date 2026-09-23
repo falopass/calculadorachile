@@ -121,7 +121,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~8~~ | blog | ~~Aumento PGU sep 2026 (75+)~~ | ~~`pgu-aumento-septiembre-2026-75-anos`~~ | DR[19] soporte · satélite AFP | pensión | ~~2026-08-12~~ | sep | ✅ |
 | ~~9~~ | blog | ~~Asignación familiar 2026: tramos y montos~~ | ~~`asignacion-familiar-2026-tramos-montos`~~ | satélite familia | familia | ~~2026-08-12~~ | sep–dic | ✅ |
 | 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
-| 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
+| 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] · Ventana perdida (vence 30 sep); cubierto dentro de #29 | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
 | 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | DR[24] · satélite iva-boleta | impuestos | 2026-09-08 | continuo | **P2-continuo** |
 | 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | satélite iva-boleta | impuestos | 2026-09-11 | ~día 12 | **P2-ventana** |
@@ -142,13 +142,13 @@ Ordenado por **fecha de publicación sugerida**.
 | 26 | blog | Subsidio habitacional DS01/DS49 | `subsidio-habitacional-ds01-ds49-ahorro-uf-2026` | DR[28] · satélite vivienda | vivienda | 2026-10-23 | continuo | **P2-continuo** |
 | 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | DR[11] · evergreen | laboral | 2026-10-27 | continuo | **P2-continuo** |
 | 28 | blog | Indemnización años servicio tope 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | satélite finiquito | laboral | 2026-10-30 | continuo | **P2-continuo** |
-| 29 | blog | Contribuciones 4.ª cuota 30 nov | `contribuciones-cuarta-cuota-noviembre-2026` | DR[27] | vivienda | 2026-11-03 | 30 nov | **P2-ventana** |
-| 30 | blog | Aguinaldo Navidad pensionados 2026 | `aguinaldo-navidad-pensionados-2026` | — | pensión | 2026-11-10 | nov–dic | **P2-ventana** |
+| ~~29~~ | blog | ~~Contribuciones 4.ª cuota 30 nov~~ | ~~`contribuciones-cuarta-cuota-noviembre-2026`~~ | ~~DR[27]~~ | vivienda | ~~2026-09-23~~ | 30 nov | ✅ |
+| ~~30~~ | blog | ~~Aguinaldo Navidad pensionados 2026~~ | ~~`aguinaldo-navidad-pensionados-2026`~~ | — | pensión | ~~2026-09-23~~ | nov–dic | ✅ |
 | ~~31~~ | blog\* | ~~Seguro de cesantía + finiquito (AFC)~~ | ~~`seguro-cesantia-finiquito-2026-afc`~~ | publicado 2026-07-10 + satélite cobro | laboral | ~~2026-11-13~~ | continuo | ✅ |
 | 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
 | 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026-comercio` | — | laboral | 2026-12-01 | dic | **P2-ventana** |
-| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | — | laboral | 2026-12-04 | dic | **P2-ventana** |
+| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | Bloqueado: monto Navidad 2026 SP requiere nueva ley de reajuste (dic 2026) | laboral | 2026-12-04 | dic | **P2-ventana** |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026-anticipos` | — | laboral | 2026-12-08 | dic–ene | **P2-ventana** |
 | 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
 | **39** | **guía** | **Prep Operación Renta 2027 (checklist)** | `preparacion-operacion-renta-2027-checklist` | DR[20] · **única guía del plan** | impuestos | 2027-01-06 | ene–abr | **P2-ventana** |
@@ -157,9 +157,9 @@ Ordenado por **fecha de publicación sugerida**.
 | 42 | blog | Sueldo mínimo 2027 | `sueldo-minimo-2027-reajuste-simular-liquido` | satélite sueldo | laboral | 2027-01-20 | ene | **P3** |
 | 43 | blog | Crédito hipotecario 2027 UF | `credito-hipotecario-2027-simular-dividendo` | satélite hipoteca | vivienda | 2027-01-23 | continuo | **P3** |
 | 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
-| 45 | blog | Patente comercial 2027 | `patente-comercial-2027-calcular` | satélite pymes | empresas | 2027-01-29 | ene–mar | **P3** |
+| ~~45~~ | blog | ~~Patente comercial 2027~~ | ~~`patente-comercial-2027-calcular`~~ | ~~satélite pymes~~ | empresas | ~~2026-09-23~~ | ene–mar | ✅ |
 
-**Conteo pendientes:** 37 filas activas (#2–#6, #8, #9 y #31 en publicados).
+**Conteo pendientes:** 34 filas activas (#2–#6, #8, #9, #29, #30, #31 y #45 en publicados).
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|

@@ -2132,13 +2132,12 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>Si tu PYME es propietaria del local, oficina o galpón donde opera, paga <strong>contribuciones</strong> (Impuesto Territorial, Ley 17.235) anualmente, en cuatro cuotas (abril, junio, septiembre, noviembre). La tasa depende del destino del inmueble:</p>
 <table>
-<thead><tr><th>Destino</th><th>Tasa anual 2026</th><th>Sobre avalúo $200M (anual)</th></tr></thead>
+<thead><tr><th>Destino</th><th>Regla 2º semestre 2026</th><th>Sobre avalúo $200M (anual)</th></tr></thead>
 <tbody>
-<tr><td>Habitacional</td><td>0,93% (con descuento 0,025)</td><td>$1.810.000</td></tr>
-<tr><td>Comercial</td><td>1,2%</td><td>$2.400.000</td></tr>
-<tr><td>Industrial</td><td>1,2%</td><td>$2.400.000</td></tr>
-<tr><td>Sitio eriado</td><td>2,0%</td><td>$4.000.000</td></tr>
-<tr><td>Agrario</td><td>0,5%</td><td>$1.000.000</td></tr>
+<tr><td>Habitacional</td><td>0,893% sobre el avalúo que excede la exención de $61.711.570; sobre avalúo total mayor a $220.398.431 el exceso paga 1,042% + sobretasa fiscal 0,025%</td><td>$1.234.916</td></tr>
+<tr><td>Comercial</td><td>1,042% + sobretasa fiscal 0,025% (sin exención)</td><td>$2.134.000</td></tr>
+<tr><td>Industrial</td><td>1,042% + sobretasa fiscal 0,025% (sin exención)</td><td>$2.134.000</td></tr>
+<tr><td>Sitio no edificado urbano</td><td>1,042% + 0,025% + sobretasa del 100% de la tasa</td><td>$4.218.000</td></tr>
 </tbody>
 </table>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Las contribuciones son crédito contra IDPC</strong><p>Para empresas en régimen 14A, las contribuciones del inmueble destinado al giro son <strong>crédito contra el Impuesto de Primera Categoría</strong> (Art. 20 N°1 letra a) LIR). Para 14D no aplica este crédito, pero las contribuciones sí son gasto deducible.</p></div></aside>
@@ -2375,15 +2374,15 @@ export const guias: Guia[] = [
         id: 'contribuciones-hogar',
         title: 'Contribuciones de la vivienda',
         level: 2,
-        html: `<p>Si eres propietario de tu casa o departamento, pagas contribuciones (Impuesto Territorial, Ley 17.235). Aplica una <strong>exención automática</strong> para viviendas de avalúo fiscal bajo <strong>225,96 UTM</strong> (≈$15,9 millones con UTM julio 2026).</p>
+        html: `<p>Si eres propietario de tu casa o departamento, pagas contribuciones (Impuesto Territorial, Ley 17.235). Aplica una <strong>exención automática</strong> para viviendas de avalúo fiscal hasta <strong>$61.711.570</strong> (2º semestre 2026; se reajusta por IPC cada 1 de enero y 1 de julio).</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Avalúo fiscal ≠ tasación comercial</strong><p>El avalúo fiscal es un valor administrativo que el SII fija para efectos de contribuciones. Suele ser 30%-60% del valor comercial real. Para departamentos en Santiago centro de 50 m², el avalúo fiscal típico es $25M-$45M (vs $80M-$150M comercial). Verifica tu avalúo en sii.cl con tu rol de propiedad.</p></div></aside>
 <table>
-<thead><tr><th>Avalúo fiscal</th><th>Estado</th><th>Contribución anual estimada (0,9%)</th></tr></thead>
+<thead><tr><th>Avalúo fiscal</th><th>Estado</th><th>Contribución anual estimada (2º semestre 2026)</th></tr></thead>
 <tbody>
-<tr><td>≤ 225,96 UTM (~$15,9M)</td><td>Exenta</td><td>$0</td></tr>
-<tr><td>$30.000.000</td><td>Tributa</td><td>~$270.000 anual</td></tr>
-<tr><td>$60.000.000</td><td>Tributa</td><td>~$540.000 anual</td></tr>
-<tr><td>$120.000.000</td><td>Tributa</td><td>~$1.080.000 anual</td></tr>
+<tr><td>≤ $61.711.570</td><td>Exenta</td><td>$0</td></tr>
+<tr><td>$80.000.000</td><td>Tributa</td><td>$163.316 anual</td></tr>
+<tr><td>$120.000.000</td><td>Tributa</td><td>$520.516 anual</td></tr>
+<tr><td>$250.000.000</td><td>Tributa (parte a 1,042% + sobretasa)</td><td>$1.732.922 anual</td></tr>
 </tbody>
 </table>
 <p>Las contribuciones se pagan en 4 cuotas anuales (abril, junio, septiembre, noviembre). El SII envía aviso por correo, pero la responsabilidad del pago es del propietario aunque no llegue notificación. Calcula tu contribución por avalúo y destino con la <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a>.</p>`,

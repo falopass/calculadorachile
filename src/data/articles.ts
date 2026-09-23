@@ -1703,12 +1703,12 @@ const articleCatalog: ArticleDraft[] = [
 <tbody>
 <tr>
 <td>Aguinaldo Navidad pensionados IPS</td>
-<td>Base <strong>$29.055</strong> + <strong>$16.415</strong>/carga (corte 30 nov 2026) — ficha ChileAtiende 30171</td>
+<td>Base <strong>$29.055</strong> + <strong>$16.415</strong>/carga (corte 30 nov 2026) — Ley 21.806 art. 5 · ficha ChileAtiende 30171</td>
 <td>Diciembre</td>
 </tr>
 <tr>
 <td>Aguinaldo Navidad sector público</td>
-<td><strong>$71.206</strong> / <strong>$37.666</strong> según tramos (Ley 21.806)</td>
+<td>Navidad 2025: <strong>$71.206</strong> / <strong>$37.666</strong> (Ley 21.724 mod. por Ley 21.806); monto 2026 pendiente de la próxima ley de reajuste</td>
 <td>Remuneración de diciembre</td>
 </tr>
 <tr>
@@ -3952,6 +3952,394 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://www.chileatiende.gob.cl/tramites/25878" target="_blank" rel="noopener">ficha de Asignación Familiar de ChileAtiende</a>, su <a href="https://www.chileatiende.gob.cl/fichas/25878/1/pdf" target="_blank" rel="noopener">versión PDF</a>, el <a href="https://www.suseso.cl/620/alt-propertyvalue-596461.pdf" target="_blank" rel="noopener">compendio de normas de SUSESO</a> y la <a href="https://www.suseso.cl/609/articles-773957_archivo_01.pdf" target="_blank" rel="noopener">Circular 3911</a>. Los tramos y antecedentes individuales deben confirmarse con la entidad administradora correspondiente.</p>`,
+  },
+  {
+    slug: 'contribuciones-cuarta-cuota-noviembre-2026',
+    embedCalculatorId: 'contribuciones',
+    title: 'Cuarta cuota de contribuciones 2026: vence el lunes 30 de noviembre',
+    description:
+      'El 30 de noviembre de 2026 vence la cuarta cuota del impuesto territorial. Cuánto pagas según avalúo fiscal con las reglas del 2º semestre 2026, cómo verificar tu aviso en el SII y dónde pagar.',
+    date: '2026-09-23',
+    updatedAt: '2026-09-23',
+    category: 'vivienda',
+    readingTime: 13,
+    relatedGuia: 'hogar-servicios-basicos-chile',
+    seoTitle: 'Contribuciones: cuarta cuota vence 30 de noviembre 2026',
+    seoDescription:
+      'La cuarta cuota de contribuciones 2026 vence el lunes 30 de noviembre. Exención $61.711.570, tasas 0,893% y 1,042%, ejemplos y canales de pago TGR.',
+    keywords: [
+      'contribuciones noviembre 2026',
+      'cuarta cuota contribuciones',
+      'pago contribuciones 30 noviembre',
+      'impuesto territorial 2026',
+      'exención contribuciones 2026',
+      'contribuciones segunda semestre 2026',
+      'avalúo fiscal sii',
+      'convenio de pago contribuciones',
+    ],
+    relatedCalculators: ['calculadora-contribuciones', 'calculadora-utm-clp'],
+    faq: [
+      {
+        question: '¿Cuándo vence la cuarta cuota de contribuciones 2026?',
+        answer:
+          'El lunes 30 de noviembre de 2026. Las cuotas del impuesto territorial vencen el 30 de abril, 30 de junio, 30 de septiembre y 30 de noviembre. Si el vencimiento cae sábado, domingo o feriado, puedes pagar el día hábil siguiente sin recargo.',
+      },
+      {
+        question: '¿Cuál es la exención de contribuciones para viviendas en el segundo semestre de 2026?',
+        answer:
+          'Para propiedades de destino habitacional, la exención es de $61.711.570 de avalúo fiscal, vigente desde el 1 de julio de 2026. Si tu avalúo no supera ese monto, no pagas contribuciones. En el primer semestre de 2026 la exención fue de $60.030.710.',
+      },
+      {
+        question: '¿Dónde se paga la cuarta cuota de contribuciones?',
+        answer:
+          'En el sitio de Tesorería General de la República (TGR), en sus oficinas, en bancos autorizados, en CajaVecina (con cupón de pago y monto menor a $200.000) y en Sencillito. También puedes inscribir pago automático PAC para las cuatro cuotas.',
+      },
+      {
+        question: '¿Qué pasa si no pago la cuarta cuota a tiempo?',
+        answer:
+          'El atraso genera reajustes e intereses según el Código Tributario. El monto actualizado se consulta en TGR. Las deudas de contribuciones pueden regularizarse con un convenio de pago de hasta 24 cuotas mensuales.',
+      },
+    ],
+    content: `<p>El <strong>lunes 30 de noviembre de 2026</strong> vence la cuarta y última cuota del impuesto territorial del año. La tercera cuota venció el 30 de septiembre. Si el aviso de pago no llegó por correo —algo frecuente—, la obligación existe igual: el propietario debe consultar su giro en el sitio de Tesorería General de la República (TGR) o del SII y pagar en la fecha.</p>
+<p>Este artículo explica cuánto corresponde pagar con las reglas vigentes del segundo semestre de 2026, cómo verificar tu avalúo y tu aviso, y qué opciones hay si el pago ya está atrasado. Fecha de corte: 23 de septiembre de 2026.</p>
+
+<h2>Calendario de contribuciones 2026</h2>
+<table>
+<thead><tr><th>Cuota</th><th>Vencimiento</th><th>Estado</th></tr></thead>
+<tbody>
+<tr><td>Primera</td><td>30 de abril de 2026</td><td>Vencida</td></tr>
+<tr><td>Segunda</td><td>30 de junio de 2026</td><td>Vencida</td></tr>
+<tr><td>Tercera</td><td>30 de septiembre de 2026</td><td>Vencida</td></tr>
+<tr><td><strong>Cuarta</strong></td><td><strong>30 de noviembre de 2026 (lunes)</strong></td><td>Pendiente</td></tr>
+</tbody>
+</table>
+<p>Cuando el día de vencimiento cae sábado, domingo o feriado, TGR permite pagar el día hábil inmediatamente siguiente sin recargo. El 30 de noviembre de 2026 es lunes, así que no hay extensión: el plazo corre hasta ese día.</p>
+
+<h2>Cómo se calcula la contribución en el segundo semestre de 2026</h2>
+<p>Las contribuciones se calculan sobre el <strong>avalúo fiscal</strong> de la propiedad, un valor administrativo que determina el SII y que no es el precio comercial. Los montos exentos y el punto donde cambia la tasa se reajustan por IPC cada semestre; para el segundo semestre de 2026 el SII aplicó un factor de 1,028 sobre los valores del primer semestre.</p>
+<p>Para propiedades de <strong>destino habitacional</strong>, los parámetros vigentes desde el 1 de julio de 2026 son:</p>
+<ul>
+<li><strong>Exención habitacional:</strong> $61.711.570 de avalúo fiscal (en el primer semestre fue $60.030.710). Si el avalúo no supera ese monto, no hay contribución.</li>
+<li><strong>Tasa 0,893% anual</strong> sobre la parte del avalúo que excede la exención, mientras el avalúo total no supere el umbral de cambio de tasa.</li>
+<li><strong>Umbral de cambio de tasa:</strong> $220.398.431 de avalúo total. Sobre el exceso se aplica la <strong>tasa general de 1,042%</strong> más la <strong>sobretasa de beneficio fiscal de 0,025%</strong>.</li>
+</ul>
+<p>Para destinos <strong>no habitacionales</strong> (comercial, industrial, sitios no edificados) no hay exención: pagan 1,042% anual más la sobretasa fiscal de 0,025% sobre el avalúo completo. Los <strong>sitios no edificados, propiedades abandonadas y pozos lastreros urbanos</strong> suman además una sobretasa equivalente al 100% de la tasa vigente —con excepciones en áreas de extensión urbana o terrenos urbanizables y fuera del área de servicios de agua potable y alcantarillado—.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El umbral se compara contra el avalúo total</strong><p>Un detalle que cambia el resultado: el punto donde la tasa sube de 0,893% a 1,042% se compara contra el <strong>avalúo fiscal total</strong> de la propiedad, no contra la parte que excede la exención. La guía de cálculo del SII lo ejemplifica así y así lo aplica la calculadora de este sitio.</p></div></aside>
+
+<h2>Ejemplos con las reglas del segundo semestre de 2026</h2>
+<p>Los siguientes valores fueron calculados con la <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a> de este sitio, que aplica los parámetros oficiales del semestre:</p>
+<table>
+<thead><tr><th>Caso</th><th>Avalúo fiscal</th><th>Contribución anual</th><th>Cuota (1 de 4)</th></tr></thead>
+<tbody>
+<tr><td>Vivienda bajo la exención</td><td>$60.000.000</td><td>$0 (exenta)</td><td>$0</td></tr>
+<tr><td>Vivienda</td><td>$100.000.000</td><td>$341.916</td><td>$85.479</td></tr>
+<tr><td>Vivienda sobre el umbral</td><td>$250.000.000</td><td>$1.732.922</td><td>$433.231</td></tr>
+<tr><td>Local comercial</td><td>$100.000.000</td><td>$1.067.000</td><td>$266.750</td></tr>
+</tbody>
+</table>
+<p>En la vivienda de $250 millones se ve el efecto del cambio de tasa: la porción entre la exención y el umbral tributa a 0,893%, y los $29.601.569 que superan el umbral tributan a 1,042% más 0,025% de sobretasa fiscal. En el local comercial no hay exención: los $100 millones completos tributan a 1,042% más 0,025%.</p>
+<div class="numeric-example"><div class="numeric-example__title">Vivienda de avalúo $250.000.000 — desglose anual (2º semestre 2026)</div><ul><li>Tramo bajo: ($220.398.431 − $61.711.570) × 0,893% = $1.417.074</li><li>Tramo alto: ($250.000.000 − $220.398.431) × 1,042% = $308.448</li><li>Sobretasa fiscal: $29.601.569 × 0,025% = $7.400</li></ul><span class="total">Total anual $1.732.922 · cuota $433.231</span></div>
+<p>El mismo desglose explica por qué una vivienda apenas por encima de la exención paga poco y una de avalúo alto concentra la diferencia en el tramo caro: a $100 millones la contribución anual es $341.916 porque todo el excedente tributa a la tasa baja de 0,893%; a $400 millones el anual sube a $3.333.422, porque los $179.601.569 que superan el umbral tributan a la tasa general más la sobretasa.</p>
+
+<h2>Por qué los montos cambian cada semestre</h2>
+<p>La ley reajusta semestralmente —cada 1 de enero y 1 de julio— los montos exentos y el umbral de cambio de tasa según la variación del IPC. Por eso la exención habitacional del primer semestre de 2026 fue $60.030.710 y para el segundo semestre el SII aplicó el factor 1,028, dejándola en $61.711.570. El umbral de cambio de tasa siguió la misma lógica hasta $220.398.431.</p>
+<p>La consecuencia práctica: la tabla de "reajustes y exenciones" del SII cambia dos veces al año. Un cálculo hecho con los parámetros de enero puede quedar desactualizado en julio, y cualquier simulación para 2027 deberá esperar la nueva tabla de enero de 2027. La calculadora de este sitio usa siempre los parámetros del semestre vigente informado por el SII.</p>
+
+<h2>Qué viene en el aviso de pago además del impuesto</h2>
+<p>El aviso que emite el SII y cobra la TGR puede incluir más que la contribución territorial. Es habitual que en el mismo documento se cobren los <strong>derechos de aseo</strong> municipales, un cargo distinto que fija cada comuna para el retiro de basura y que también puede aparecer en propiedades exentas de contribuciones. Que tu vivienda no pague impuesto territorial no significa que el aviso llegue en cero.</p>
+<p>También puede aparecer la sobretasa de sitio no edificado si el rol corresponde a un terreno sin construcción dentro del área urbana servida por agua potable y alcantarillado, o efectos de un <strong>reavalúo</strong>: cuando el SII actualiza el avalúo de una zona, la ley prevé un mecanismo de <strong>alza gradual</strong> que distribuye el incremento de la contribución en varios períodos en vez de cobrarlo completo de inmediato. Ese mecanismo está explicado en la guía de cálculo del SII y no se puede deducir solo del avalúo: hay que mirar el giro.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Tu giro puede ser distinto</strong><p>La estimación no incorpora el mecanismo de <strong>alza gradual</strong> que existe tras un reavalúo (el incremento se aplica en parte durante varios períodos), ni otras exenciones como la <strong>rebaja para adultos mayores</strong>, ni los <strong>derechos de aseo</strong> municipales que suelen venir en el mismo aviso de pago. El monto oficial es el que aparece en tu giro del SII o de TGR.</p></div></aside>
+
+<h2>Cómo revisar tu avalúo y tu aviso de pago</h2>
+<ol class="steps">
+<li><strong>Obtén el rol de avalúo</strong> de la propiedad (figura en la escritura, en giros anteriores o consultando en el SII con la dirección).</li>
+<li><strong>Consulta el certificado de avalúo</strong> en sii.cl: ahí está el avalúo fiscal total y los componentes del inmueble.</li>
+<li><strong>Descarga o revisa el aviso de pago</strong> en el portal de contribuciones del SII o directamente en tgr.cl. El aviso detalla la cuota y, si corresponde, los derechos de aseo municipales que la Tesorería cobra junto con el impuesto.</li>
+<li><strong>Compara con la estimación</strong> de la calculadora. Si hay diferencias relevantes, revisa si tu propiedad tiene alza gradual por reavalúo, otra exención o un destino distinto al registrado.</li>
+</ol>
+
+<h2>Dónde y cómo pagar la cuarta cuota</h2>
+<ul>
+<li><strong>En línea:</strong> el portal de pago de contribuciones de la TGR acepta tarjetas y cuentas bancarias.</li>
+<li><strong>Presencial:</strong> oficinas de la Tesorería General de la República y bancos autorizados.</li>
+<li><strong>CajaVecina y Sencillito:</strong> con el cupón de pago; en CajaVecina solo para montos menores a $200.000.</li>
+<li><strong>PAC:</strong> puedes inscribir el pago automático con cargo a tu cuenta o tarjeta para las cuotas 1 a 4, de modo que la cuarta se descuente sola en noviembre.</li>
+</ul>
+<p>Si pagas fuera del sitio de la TGR, conserva el comprobante: en bancos, CajaVecina y Sencillito el documento de pago es la única prueba inmediata de que la cuota quedó cubierta mientras el sistema actualiza el estado del rol.</p>
+
+<h2>Si ya tienes cuotas atrasadas</h2>
+<p>El atraso en las contribuciones genera <strong>reajustes e intereses</strong> conforme al Código Tributario; el monto actualizado hay que consultarlo directamente en la TGR, porque cambia con el tiempo. Para regularizar, la Tesorería ofrece un <strong>convenio de pago de impuestos territoriales</strong> que permite repactar la deuda en hasta <strong>24 cuotas mensuales</strong>. El convenio se solicita en el sitio de TGR y requiere aceptar las condiciones que el sistema propone para el rol de la propiedad.</p>
+<p>Si además de contribuciones el aviso incluye derechos de aseo municipales, esos también pueden quedar dentro de la repactación según lo que indique la municipalidad y la Tesorería.</p>
+
+<h2>Casos especiales a revisar antes de pagar</h2>
+<ul>
+<li><strong>Adultos mayores vulnerables:</strong> pueden acceder a una rebaja de las dos últimas cuotas del segundo semestre y de las dos primeras del año siguiente, según la ficha de ChileAtiende de pago de contribuciones. Los requisitos y la postulación se detallan en esa ficha.</li>
+<li><strong>Propiedad recién comprada:</strong> la obligación es del propietario al momento del giro, pero es común acordar un prorrateo en la compraventa. Si compraste este año, verifica qué cuotas corresponden a cada período y si quedaron deudas anteriores.</li>
+<li><strong>Cambio de destino:</strong> si la propiedad cambió de uso (por ejemplo, de habitacional a comercial), el giro puede variar. El destino registrado en el SII manda.</li>
+<li><strong>Sitio sin construir:</strong> si el terreno está en área urbana y dentro de la zona de servicios sanitarios, aplica la sobretasa del 100% sobre la tasa; el aviso lo refleja.</li>
+</ul>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 23 de septiembre de 2026 con la <a href="https://www.tgr.cl/pago-de-contribuciones-en-linea/" target="_blank" rel="noopener">página de pago de contribuciones de la TGR</a>, la <a href="https://www.chileatiende.gob.cl/fichas/12176" target="_blank" rel="noopener">ficha ChileAtiende 12176</a>, la <a href="https://www.chileatiende.gob.cl/fichas/3229-pago-de-contribuciones-de-bienes-raices-en-sii" target="_blank" rel="noopener">ficha ChileAtiende 3229 (pago de contribuciones en SII)</a>, la tabla de <a href="https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html" target="_blank" rel="noopener">reajustes y exenciones del SII</a>, la <a href="https://www.sii.cl/preguntas_frecuentes/aval_contrib_bbrr/001_165_8150.htm" target="_blank" rel="noopener">FAQ de tasas del SII</a>, la <a href="https://www.sii.cl/destacados/reavaluo/2022/guia_para_calcular_contribucion.pdf" target="_blank" rel="noopener">guía oficial de cálculo del SII</a>, la página de <a href="https://www.sii.cl/destacados/reavaluo/2025/4449-4452.html" target="_blank" rel="noopener">reavalúo y avisos del SII</a> y la <a href="https://ayuda.tgr.gob.cl/ayuda/pagar/pagar-en-tesoreria-y-formas-de-pago" target="_blank" rel="noopener">ayuda de formas de pago y convenios de TGR</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los montos exentos y tasas corresponden al segundo semestre de 2026 según la tabla del SII; el giro oficial que emite el SII y cobra la TGR prevalece sobre cualquier estimación. No es asesoría tributaria.</p></div></aside>
+<p>Para profundizar en los costos de ser propietario, revisa la <a href="/guias/hogar-servicios-basicos-chile">guía de gastos del hogar</a> y, si estás evaluando una compra, la <a href="/guias/comprar-vivienda-chile">guía para comprar vivienda</a>, que incluye el certificado de deuda de contribuciones dentro de los documentos a exigir.</p>`,
+  },
+  {
+    slug: 'aguinaldo-navidad-pensionados-2026',
+    title: 'Aguinaldo de Navidad 2026 para pensionados: $29.055 más $16.415 por carga',
+    description:
+      'El aguinaldo de Navidad 2026 para pensionados es de $29.055, más $16.415 por cada carga familiar acreditada al 30 de noviembre (Ley 21.806). Quiénes lo reciben, cuándo se paga y ejemplos.',
+    date: '2026-09-23',
+    updatedAt: '2026-09-23',
+    category: 'beneficios',
+    readingTime: 13,
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    seoTitle: 'Aguinaldo Navidad 2026 pensionados: $29.055 + cargas',
+    seoDescription:
+      'Aguinaldo de Navidad 2026 para pensionados IPS: $29.055 base + $16.415 por carga al 30 de noviembre (Ley 21.806). Se paga con la pensión de diciembre.',
+    keywords: [
+      'aguinaldo navidad pensionados 2026',
+      'aguinaldo navidad 2026 monto',
+      'aguinaldo diciembre pensionados ips',
+      'Ley 21.806 aguinaldo navidad',
+      'aguinaldo pgu navidad',
+      'aguinaldo navidad sector público 2026',
+      'aguinaldo navidad cargas familiares',
+    ],
+    relatedCalculators: [
+      'calculadora-pgu',
+      'calculadora-asignacion-familiar',
+      'calculadora-aguinaldo',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto es el aguinaldo de Navidad 2026 para pensionados?',
+        answer:
+          'Según el artículo 5 de la Ley 21.806, el aguinaldo de Navidad 2026 es de $29.055, más $16.415 por cada persona acreditada como causante de asignación familiar o maternal al 30 de noviembre de 2026. Se paga automáticamente con la pensión de diciembre.',
+      },
+      {
+        question: '¿Quiénes reciben el aguinaldo de Navidad para pensionados?',
+        answer:
+          'Los pensionados al 30 de noviembre de 2026 del IPS (PGU, PBSI, Subsidio de Discapacidad), ex cajas de previsión y ex Servicio de Seguro Social, pensionados por accidentes del trabajo (Ley 16.744), pensiones de reparación Valech y Rettig, pensionados de AFP o compañías de seguros en los casos que indica la ley, y de Dipreca y Capredena.',
+      },
+      {
+        question: '¿Cuánto es el aguinaldo de Navidad del sector público en 2026?',
+        answer:
+          'Aún no está fijado: depende de la próxima ley de reajuste del sector público. Como referencia, en Navidad 2025 fue de $71.206 (líquido hasta $1.060.493) o $37.666 (sobre ese monto), según la Ley 21.724 modificada por la Ley 21.806.',
+      },
+      {
+        question: '¿El aguinaldo de Navidad tiene descuentos o paga impuestos?',
+        answer:
+          'No. La Ley 21.806 establece que el aguinaldo no es imponible ni tributable y no tiene descuentos. Quien lo reciba maliciosamente sin derecho debe devolver el quíntuplo del monto.',
+      },
+    ],
+    content: `<p>Con diciembre llega el segundo aguinaldo del año para los pensionados de los regímenes previsionales cubiertos por ley. Para <strong>Navidad 2026</strong>, el artículo 5 de la <strong>Ley 21.806</strong> —la ley de reajuste del sector público publicada en el Diario Oficial el 5 de febrero de 2026— fija un monto base de <strong>$29.055</strong>, que se incrementa en <strong>$16.415</strong> por cada persona acreditada como causante de asignación familiar o maternal al <strong>30 de noviembre de 2026</strong>.</p>
+<p>Este artículo ordena quiénes lo reciben, cómo se calcula con cargas, qué diferencias hay con el aguinaldo del sector público y qué pasa en el sector privado. Fecha de corte: 23 de septiembre de 2026.</p>
+
+<h2>Monto 2026 y corte de derecho</h2>
+<p>La regla es simple y está en la ley:</p>
+<ul>
+<li><strong>Monto base:</strong> $29.055 por beneficiario.</li>
+<li><strong>Incremento por carga:</strong> $16.415 por cada persona acreditada como causante de asignación familiar o maternal <strong>al 30 de noviembre de 2026</strong>, aun cuando el beneficiario no perciba actualmente esas asignaciones por la causal del artículo 1 de la Ley 18.987.</li>
+<li><strong>Un solo aguinaldo por beneficiario:</strong> aunque la persona reciba más de una pensión, subsidio o indemnización cubierta, el beneficio se paga una sola vez.</li>
+</ul>
+<table>
+<thead><tr><th>Cargas acreditadas al 30-11-2026</th><th>Cálculo</th><th>Aguinaldo total</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>$29.055</td><td><strong>$29.055</strong></td></tr>
+<tr><td>1</td><td>$29.055 + $16.415</td><td><strong>$45.470</strong></td></tr>
+<tr><td>2</td><td>$29.055 + 2 × $16.415</td><td><strong>$61.885</strong></td></tr>
+<tr><td>3</td><td>$29.055 + 3 × $16.415</td><td><strong>$78.300</strong></td></tr>
+</tbody>
+</table>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ojo con las cargas por sobrevivencia</strong><p>ChileAtiende precisa una excepción: las cargas que a su vez <strong>perciben una pensión de sobrevivencia no generan el incremento de $16.415</strong>, salvo que se trate de pensiones de orfandad. Si tu carga recibe pensión de sobrevivencia, revisa la ficha antes de proyectar el monto.</p></div></aside>
+
+<h2>Quiénes lo reciben: la lista oficial</h2>
+<p>Tiene derecho quien, al <strong>30 de noviembre de 2026</strong>, sea pensionado de alguno de estos regímenes, según la ficha de ChileAtiende:</p>
+<ul>
+<li><strong>IPS:</strong> Pensión Garantizada Universal (PGU), Pensión Básica Solidaria de Invalidez (PBSI) y Subsidio de Discapacidad.</li>
+<li><strong>Ex cajas de previsión</strong> y ex Servicio de Seguro Social.</li>
+<li><strong>Accidentes del trabajo y enfermedades profesionales (Ley 16.744):</strong> pensionados de mutualidades y del Instituto de Seguridad Laboral (ISL).</li>
+<li><strong>Pensiones de reparación</strong> Valech y Rettig.</li>
+<li><strong>AFP o compañía de seguros:</strong> pensionados con garantía estatal cuando perciben la PGU, o beneficiarios del Aporte Previsional Solidario (APS) de vejez o invalidez.</li>
+<li><strong>Dipreca y Capredena</strong> (regímenes de las Fuerzas Armadas y de orden).</li>
+</ul>
+<p>El pago es <strong>automático</strong>: no hay que postular. ChileAtiende indica que se abona <strong>junto con la pensión de diciembre</strong>, en la fecha en que cada entidad paga normalmente la pensión de ese mes. El día exacto del depósito depende del calendario de cada institución pagadora (IPS, Capredena, Dipreca, AFP, mutualidad).</p>
+<p>La lista mezcla regímenes que el público suele tratar como mundos separados, pero la ley los pone en la misma bolsa para este beneficio. Un pensionado de una mutualidad por un accidente del trabajo tiene el mismo derecho que uno del IPS o de Dipreca, y una persona que recibe la pensión de reparación Valech figura junto a la que cotizó toda la vida en una AFP. La pregunta correcta no es "¿en qué institución estoy?" sino "¿estoy pensionado al 30 de noviembre en alguno de los regímenes listados?".</p>
+<p>Un detalle importante del corte: el derecho se evalúa al <strong>30 de noviembre de 2026</strong>. Quien obtenga su primera pensión recién en diciembre queda fuera de esta edición del aguinaldo, porque a la fecha de corte aún no era pensionado. El corte también define las cargas: un hijo reconocido como causante de asignación familiar el 29 de noviembre suma los $16.415; el mismo reconocimiento hecho el 2 de diciembre llega tarde para este aguinaldo.</p>
+
+<h2>Cómo se calcula el incremento por cargas</h2>
+<p>El incremento no depende de que la asignación familiar se esté pagando efectivamente. La ley basta con que la persona esté <strong>acreditada como causante</strong> de asignación familiar o maternal al 30 de noviembre, "aun cuando no se encuentren percibiendo dichas asignaciones" por la causal del artículo 1 de la Ley 18.987 —la norma que regula las causas de suspensión del beneficio familiar.</p>
+<p>En la práctica esto cubre un caso común: un pensionado que tiene a su cónyuge o hijo menor reconocido como carga en el sistema, pero cuya asignación está suspendida por alguna de las causales legales. Esa carga sigue generando el incremento de $16.415 para el aguinaldo. Lo que no cubre, según aclara la ficha de ChileAtiende, son las cargas que perciben <strong>pensión de sobrevivencia</strong> —con la única excepción de las pensiones de orfandad—: esas no suman.</p>
+<div class="numeric-example"><div class="numeric-example__title">Pensionada IPS con 2 cargas acreditadas</div><ul><li>Base Navidad 2026: $29.055</li><li>Carga 1 (hijo menor reconocido): +$16.415</li><li>Carga 2 (cónyuge causante, sin pensión de sobrevivencia): +$16.415</li></ul><span class="total">Total con la pensión de diciembre: $61.885</span></div>
+
+<h2>Caso particular: funcionarios públicos que también son pensionados</h2>
+<p>Una persona puede ser funcionaria del sector público y, a la vez, pensionada de alguno de los regímenes anteriores. En esa situación, la ficha de ChileAtiende indica que el beneficiario solo recibe la parte del aguinaldo de sector público que <strong>exceda</strong> lo que le corresponde como pensionado —no se acumulan ambos completos.</p>
+
+<h2>¿Y el aguinaldo de Navidad del sector público 2026?</h2>
+<p>Los trabajadores y trabajadoras del sector público tienen un aguinaldo distinto, fijado por la ley de reajuste de cada año. <strong>Para Navidad 2026 el monto todavía no está determinado</strong>: dependerá de la próxima ley de reajuste del sector público, que históricamente se tramita hacia fines de año.</p>
+<p>Como referencia —y marcada expresamente como referencia—, el aguinaldo de <strong>Navidad 2025</strong> fue de <strong>$71.206</strong> para quienes tenían una remuneración líquida de hasta $1.060.493 y de <strong>$37.666</strong> para quienes estaban sobre ese umbral (artículo 2 de la Ley 21.724, según la modificación introducida por el artículo 2 de la Ley 21.806). Cualquier cifra de Navidad 2026 para el sector público que circule antes de la nueva ley es una estimación, no un monto oficial.</p>
+
+<h2>Sector privado: no existe aguinaldo de ley</h2>
+<p>En el sector privado no hay una obligación legal general de pagar aguinaldo de Navidad. ChileAtiende lo resume así: solo es exigible cuando está pactado en el <strong>contrato individual</strong> o en un <strong>convenio o contrato colectivo</strong>. Si tu empresa lo paga por costumbre o por política interna, el monto y las condiciones son los del acuerdo, no una tarifa del Estado.</p>
+
+<h2>Diferencias con el aguinaldo de Fiestas Patrias</h2>
+<p>Los pensionados cubiertos recibieron en septiembre un aguinaldo distinto: el de Fiestas Patrias 2026, de <strong>$25.280</strong> base más <strong>$12.969</strong> por carga acreditada al 31 de agosto. Los montos, el corte de fecha y la base legal son otros, aunque el mecanismo de pago es el mismo: automático y junto a la pensión del mes. La comparación lado a lado la desarrolla el artículo <a href="/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico">aguinaldo de Fiestas Patrias 2026 para pensionados y sector público</a>.</p>
+<table>
+<thead><tr><th></th><th>Fiestas Patrias 2026</th><th>Navidad 2026</th></tr></thead>
+<tbody>
+<tr><td>Monto base</td><td>$25.280</td><td>$29.055</td></tr>
+<tr><td>Incremento por carga</td><td>$12.969</td><td>$16.415</td></tr>
+<tr><td>Fecha de corte</td><td>31 de agosto de 2026</td><td>30 de noviembre de 2026</td></tr>
+<tr><td>Se paga con</td><td>Pensión de septiembre</td><td>Pensión de diciembre</td></tr>
+</tbody>
+</table>
+
+<h2>Naturaleza del beneficio y sanciones</h2>
+<p>La Ley 21.806 establece que el aguinaldo <strong>no es imponible ni tributable y no tiene descuentos</strong>: no se descuentan cotizaciones previsionales ni de salud, y no se considera renta para impuestos. En la liquidación de pensión de diciembre debería verse como un concepto aparte, adicional al monto mensual habitual.</p>
+<p>La misma norma advierte que quien lo perciba <strong>maliciosamente</strong> —sabiendo que no tiene derecho— deberá restituir el <strong>quíntuplo</strong> de la cantidad cobrada, sin perjuicio de las sanciones administrativas y penales que correspondan. La sanción apunta al cobro doloso; si recibes un aguinaldo que no esperabas, lo razonable es verificar tu condición en la ficha o ante la entidad pagadora antes de gastarlo, no asumir que el Estado "regaló" un depósito.</p>
+
+<h2>Si tienes más de una pensión</h2>
+<p>La ley es explícita: aunque una persona perciba <strong>más de una pensión, subsidio o indemnización</strong> dentro de los regímenes cubiertos, solo tiene derecho a <strong>un aguinaldo</strong>. Un pensionado de una ex caja de previsión que además recibe una pensión de reparación no suma $29.055 dos veces. Lo que sí puede variar es la entidad que materializa el pago: el beneficio se abona con la pensión de diciembre, y en la práctica la entidad que paga la pensión del régimen que da derecho gestiona el abono según su propio calendario.</p>
+
+<h2>Qué conviene revisar antes de diciembre</h2>
+<ol class="steps">
+<li><strong>Verifica tus cargas acreditadas.</strong> El incremento de $16.415 usa la acreditación al 30 de noviembre. Si una carga nueva no está reconocida en el sistema de asignaciones, no genera el incremento.</li>
+<li><strong>Revisa la excepción de sobrevivencia.</strong> Si tu carga recibe pensión de sobrevivencia (salvo orfandad), no suma el incremento.</li>
+<li><strong>Confirma qué entidad te paga.</strong> IPS, Capredena, Dipreca, AFP o mutualidad tienen calendarios propios; el aguinaldo viene dentro del pago de la pensión de diciembre.</li>
+<li><strong>Contrasta la liquidación de diciembre.</strong> Deberías ver el monto base más el incremento por carga en una línea separada del aguinaldo.</li>
+<li><strong>Desconfía de montos del sector público.</strong> El aguinaldo de Navidad 2026 del sector público aún no existe como cifra: cualquier número anterior a la ley de reajuste es una proyección.</li>
+</ol>
+<p>El patrón es el mismo que en septiembre: el beneficio existe, el monto es de ley y el corte de fecha decide derecho y cargas. Quien revisa esos tres puntos antes de diciembre llega a la liquidación sabiendo exactamente qué cifra debería aparecer —y puede reclamar con antecedentes si no coincide.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 23 de septiembre de 2026 con la <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/02/05/44368-B/01/2766382.pdf" target="_blank" rel="noopener">Ley 21.806 en el Diario Oficial</a>, su texto en <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Biblioteca del Congreso Nacional</a> y la <a href="https://chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ficha ChileAtiende 30171 — Aguinaldo de Navidad para pensionados IPS</a>. Los montos de Navidad 2025 del sector público corresponden a la Ley 21.724 según la modificación de la Ley 21.806.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto, las cargas y la fecha de pago efectiva prevalecen en la liquidación de la entidad pagadora y en el texto de la ley. No es un dictamen del IPS ni asesoría previsional.</p></div></aside>
+<p>Para profundizar en beneficios familiares y cargas, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de familia</a>, la <a href="/calculadoras/calculadora-pgu">calculadora de la PGU</a> y la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>`,
+  },
+  {
+    slug: 'patente-comercial-2027-calcular',
+    embedCalculatorId: 'patente-comercial',
+    title: 'Patente comercial 2027: cuánto pagar en enero y cómo se calcula',
+    description:
+      'En enero 2027 vence la segunda cuota de la patente comercial, reajustada por el IPC junio–noviembre 2026. Base legal (DL 3.063), tasa 2,5–5 por mil del capital propio, topes en UTM y ejemplos.',
+    date: '2026-09-23',
+    updatedAt: '2026-09-23',
+    category: 'empresas',
+    readingTime: 13,
+    relatedGuia: 'empresas-pymes-chile',
+    seoTitle: 'Patente comercial 2027: cálculo, cuota de enero y topes',
+    seoDescription:
+      'Cómo se calcula la patente comercial: 2,5 a 5 por mil del capital propio (mínimo 1 UTM, máximo 8.000 UTM). La cuota de enero 2027 se reajusta por IPC.',
+    keywords: [
+      'patente comercial 2027',
+      'patente comercial enero 2027',
+      'cómo calcular patente comercial',
+      'patente municipal capital propio',
+      'patente comercial cuota enero',
+      'DL 3063 patente',
+      'ley de rentas municipales patente',
+      'patente comercial UTM',
+    ],
+    relatedCalculators: [
+      'calculadora-patente-comercial',
+      'calculadora-costo-empleado-pyme',
+      'calculadora-ppm',
+    ],
+    faq: [
+      {
+        question: '¿Cómo se calcula la patente comercial en Chile?',
+        answer:
+          'La patente anual es una tasa de entre 2,5 y 5 por mil del capital propio tributario de la empresa, fijada por cada municipalidad (puede haber tasas diferenciadas por zonas). El mínimo legal es 1 UTM anual y el máximo 8.000 UTM anuales (artículo 24 del DL 3.063).',
+      },
+      {
+        question: '¿Cuándo se paga la segunda cuota de la patente?',
+        answer:
+          'El período de la patente corre del 1 de julio al 30 de junio. Si se paga en dos cuotas, la segunda vence dentro de enero y se reajusta por la variación del IPC entre el 1 de junio y el 30 de noviembre inmediatamente anterior (artículo 29 del DL 3.063). En enero de 2027 se paga la segunda cuota del período julio 2026–junio 2027.',
+      },
+      {
+        question: '¿Qué es el capital propio para efectos de la patente?',
+        answer:
+          'Para una actividad nueva es el capital declarado inicialmente; para una actividad vigente, el capital propio del balance al 31 de diciembre inmediatamente anterior a la declaración, con los ajustes del artículo 41 de la Ley de Impuesto a la Renta. Quienes no están obligados a llevar balance pagan 1 UTM por cada 12 meses.',
+      },
+      {
+        question: '¿Qué pasa si la empresa se instaló después del 31 de diciembre?',
+        answer:
+          'Según el artículo 29 del DL 3.063, el contribuyente establecido después del 31 de diciembre paga el 50% de la patente del período.',
+      },
+    ],
+    content: `<p>Quienes pagan la patente comercial en dos cuotas tienen el próximo vencimiento en <strong>enero de 2027</strong>: la segunda cuota del período julio 2026–junio 2027, que la ley reajusta por la variación del IPC entre junio y noviembre de 2026. Y en julio de 2027 se abre un período nuevo, calculado sobre el capital propio del balance al 31 de diciembre de 2026 —la cifra que la empresa declara en la Operación Renta 2027.</p>
+<p>Este artículo explica la base legal (Ley de Rentas Municipales, DL 3.063), cómo se calcula el monto, qué topes aplican y qué significan las dos fechas clave de 2027. Fecha de corte: 23 de septiembre de 2026.</p>
+
+<h2>La base legal: artículo 24 del DL 3.063</h2>
+<p>La patente comercial la cobra la municipalidad donde la empresa tiene su domicilio, local, oficina o sucursal. El artículo 24 del decreto ley 3.063 fija las reglas centrales:</p>
+<ul>
+<li><strong>Tasa:</strong> la patente por 12 meses equivale a entre <strong>2,5 y 5 por mil del capital propio</strong> del contribuyente (es decir, 0,25% a 0,5% anual).</li>
+<li><strong>Quién fija la tasa:</strong> el alcalde, con aprobación del concejo municipal, mediante decreto alcaldicio. Puede establecer una tasa única comunal o tasas diferenciadas por zonas de la comuna.</li>
+<li><strong>Mínimo:</strong> 1 UTM por 12 meses, cualquiera sea el capital.</li>
+<li><strong>Máximo:</strong> 8.000 UTM por 12 meses.</li>
+<li><strong>Sin balance obligado:</strong> los contribuyentes que no están obligados a llevar balance pagan 1 UTM por cada 12 meses.</li>
+</ul>
+<p>El <strong>capital propio</strong> tiene una definición específica en la misma norma: para una actividad nueva es el capital que el contribuyente declara inicialmente; para una actividad vigente es el capital propio del balance al <strong>31 de diciembre inmediatamente anterior</strong> a la declaración, con los ajustes del artículo 41 de la Ley sobre Impuesto a la Renta. El contribuyente lo declara ante la municipalidad acompañando copia del balance, en las fechas que fija el SII. Si no declara, la municipalidad lo estima.</p>
+<p>La distinción entre capital propio y otros conceptos contables importa: la ley no toma las ventas, ni los activos, ni el capital inicial escriturado como tal, sino el <strong>capital propio tributario</strong> del balance cerrado al 31 de diciembre —patrimonio, en términos prácticos— con los reajustes del artículo 41 LIR que ordenan actualizar los componentes según la inflación. Una empresa que creció durante 2026 puede ver subir su patente de julio 2027 aunque sus ventas hayan sido planas, porque la base cambia con el balance.</p>
+<div class="numeric-example"><div class="numeric-example__title">Qué capital usa cada período</div><ul><li>Período julio 2026–junio 2027 → capital propio del balance al 31-12-2025</li><li>Período julio 2027–junio 2028 → capital propio del balance al 31-12-2026 (Operación Renta 2027)</li><li>Actividad iniciada en el año → capital declarado al iniciarla</li></ul></div>
+
+<h2>El período y las dos cuotas: artículo 29</h2>
+<p>El artículo 29 ordena el calendario:</p>
+<ul>
+<li>El período de 12 meses corre del <strong>1 de julio al 30 de junio</strong> del año siguiente —no sigue el año calendario.</li>
+<li>Se puede pagar <strong>al contado o en dos cuotas iguales</strong>: la primera dentro de julio y la segunda dentro de enero.</li>
+<li>Si se paga en dos cuotas, la <strong>segunda se reajusta</strong> por la variación del IPC entre el 1 de junio y el 30 de noviembre inmediatamente anterior.</li>
+<li>El contribuyente <strong>establecido después del 31 de diciembre</strong> paga el 50% de la patente del período.</li>
+<li>Si se traslada la casa matriz o una sucursal a otra comuna, se paga en la nueva comuna desde el semestre siguiente, avisando dentro de <strong>30 días corridos</strong> con la patente pagada y un certificado de no adeudar tributos a la municipalidad anterior.</li>
+</ul>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Las dos fechas de 2027</strong><p><strong>Enero 2027:</strong> segunda cuota del período julio 2026–junio 2027, reajustada por el IPC de junio a noviembre de 2026. <strong>Julio 2027:</strong> período nuevo (julio 2027–junio 2028), calculado sobre el capital propio al 31 de diciembre de 2026, que la empresa declara en la Operación Renta 2027.</p></div></aside>
+
+<h2>Ejemplos calculados con la calculadora del sitio</h2>
+<p>La <a href="/calculadoras/calculadora-patente-comercial">calculadora de patente comercial</a> aplica la tasa comunal sobre el capital propio con los topes legales (mínimo 1 UTM, máximo 8.000 UTM anuales). Los ejemplos usan la UTM de <strong>septiembre de 2026: $71.721</strong>, y las tasas extremas del rango legal: 2,5 por mil (0,25%) y 5 por mil (0,5%).</p>
+<table>
+<thead><tr><th>Capital propio</th><th>Tasa 2,5‰ — anual</th><th>Tasa 5‰ — anual</th></tr></thead>
+<tbody>
+<tr><td>$20.000.000</td><td><strong>$71.721</strong> (aplica mínimo 1 UTM: 2,5‰ serían $50.000)</td><td><strong>$100.000</strong></td></tr>
+<tr><td>$150.000.000</td><td><strong>$375.000</strong></td><td><strong>$750.000</strong></td></tr>
+<tr><td>$1.500.000.000</td><td><strong>$3.750.000</strong></td><td><strong>$7.500.000</strong></td></tr>
+</tbody>
+</table>
+<p>El primer caso muestra el piso legal: aunque 2,5 por mil de $20 millones da $50.000, la ley no permite cobrar menos de 1 UTM, así que el mínimo es $71.721 anuales. El tope máximo de 8.000 UTM equivale a $573.768.000 anuales con la UTM de septiembre de 2026: solo lo alcanzan capitales propios por sobre los $114.753 millones a la tasa de 5 por mil.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>La segunda cuota de enero no es la mitad exacta</strong><p>La calculadora muestra una cuota referencial de 50% del total anual. En la práctica, si elegiste pago en dos cuotas, la municipalidad reajusta la segunda por el IPC entre junio y noviembre de 2026, así que la cuota de enero 2027 será levemente superior a la mitad simple. El monto exacto lo informa tu municipalidad o el portal municipal de pago.</p></div></aside>
+
+<h2>Qué revisar en enero de 2027</h2>
+<ol class="steps">
+<li><strong>Confirma que tu cuota vence en enero.</strong> Si pagaste al contado en julio, no hay segunda cuota.</li>
+<li><strong>Espera el IPC junio–noviembre 2026.</strong> La segunda cuota se reajusta con esa variación; el monto exacto aparecerá en el aviso o portal de tu municipalidad.</li>
+<li><strong>Revisa tu tasa comunal.</strong> Está entre 2,5 y 5 por mil según el decreto alcaldicio de tu comuna; puede haber zonas con tasas distintas.</li>
+<li><strong>Verifica el capital propio declarado.</strong> Para el período julio 2026–junio 2027 corresponde al balance al 31 de diciembre de 2025; el período que parte en julio de 2027 usará el balance al 31 de diciembre de 2026.</li>
+<li><strong>Si te instalaste después del 31 de diciembre de 2025,</strong> corresponde pagar el 50% de la patente del período.</li>
+<li><strong>Si te cambiaste de comuna,</strong> paga en la nueva desde el semestre siguiente y notifica dentro de 30 días corridos con la patente pagada y el certificado de no deuda.</li>
+</ol>
+
+<h2>Por qué la tasa no es la misma en todas las comunas</h2>
+<p>El rango 2,5–5 por mil es legal; el número concreto es comunal. La norma permite al alcalde, con aprobación del concejo, fijar por decreto alcaldicio una tasa única para toda la comuna o tasas <strong>diferenciadas por zonas</strong>. Por eso dos empresas con el mismo capital propio pueden pagar montos distintos si están en comunas —o en zonas de la misma comuna— con decretos distintos. La tasa aplicable se consulta en la municipalidad o en su portal de pagos; no se puede deducir de una tabla nacional.</p>
+<p>La patente, además, se cobra por actividad en cada local o establecimiento: una empresa con casa matriz y una sucursal en otra comuna puede pagar patente en ambas, con las reglas del traslado ya descritas si cambia de ubicación.</p>
+
+<h2>Quiénes pagan solo 1 UTM</h2>
+<p>Dos situaciones frecuentes terminan en el mínimo de 1 UTM por 12 meses ($71.721 con la UTM de septiembre de 2026): los capitales propios pequeños cuya tasa calculada queda bajo el piso —por ejemplo, un capital de $20 millones a 2,5 por mil— y los contribuyentes que <strong>no están obligados a llevar balance</strong>, a quienes la ley fija directamente 1 UTM por cada 12 meses. En ambos casos la cuota referencial semestral es la mitad, y la segunda cuota de enero se reajusta por IPC como cualquier otra.</p>
+
+<h2>Cuánto sube la segunda cuota por el IPC</h2>
+<p>El reajuste de enero aplica la variación del IPC acumulada entre el 1 de junio y el 30 de noviembre de 2026 sobre la mitad de la patente anual. Con una inflación semestral hipotética del 2%, una cuota base de $187.500 quedaría en torno a $191.250; con una cuota de $35.861 (media UTM), el reajuste sería de unos $717. Son montos pequeños en la mayoría de los casos, pero la diferencia existe y el cobro municipal la incluye: por eso el valor exacto de enero solo se confirma cuando el INE publica el IPC de noviembre y la municipalidad emite el aviso.</p>
+<p>La referencia temporal queda fija en la ley: el reajuste usa siempre el IPC entre junio y noviembre <em>anteriores</em> al enero de pago, sin importar cuándo se emitió la primera cuota en julio.</p>
+
+<h2>La patente dentro del costo total de operar</h2>
+<p>Para una PYME, la patente es uno más de los tributos fijos del año: se suma al permiso de circulación si hay vehículos, a las contribuciones si la empresa es dueña de su local, y a las obligaciones tributarias habituales como el PPM mensual. Ordenar el calendario completo —patente en julio y enero, contribuciones en abril, junio, septiembre y noviembre, F29 mensual, Operación Renta en abril— evita sorpresas de flujo de caja, especialmente porque la cuota de enero llega justo en un mes de gastos altos.</p>
+<p>Si evalúas contratar personal el próximo año, la patente es solo una fracción del costo de operar: la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo de un empleado para PYME</a> permite estimar el gasto mensual completo por trabajador, y la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> ayuda a proyectar el pago mensual a cuenta del impuesto anual.</p>
+
+<h2>Límites de esta estimación</h2>
+<p>La calculadora estima la patente anual con la tasa y los topes legales. No incorpora el reajuste IPC de la segunda cuota —que la municipalidad aplica al cobrarla—, ni la regla del 50% para empresas establecidas después del 31 de diciembre, ni el traslado de comuna. La tasa exacta de tu comuna depende del decreto alcaldicio vigente, y el capital propio que manda es el declarado a la municipalidad con respaldo del balance, o el que la municipalidad estime si no se declaró.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 23 de septiembre de 2026 con el texto refundido de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=18967" target="_blank" rel="noopener">Ley de Rentas Municipales (DL 3.063, texto fijado por decreto 2.385 de 1996) en Biblioteca del Congreso Nacional</a>, en particular sus artículos 24 y 29, y el informe de Asesoría Técnica Parlamentaria de la BCN sobre <a href="https://obtienearchivo.bcn.cl/obtienearchivo?id=repositorio%2F10221%2F37032%2F2%2F2025_Rentas_Municipales_2025_JPC__edit_PA.pdf" target="_blank" rel="noopener">rentas municipales</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto oficial de la patente lo determina tu municipalidad conforme al DL 3.063, el decreto alcaldicio de la comuna y el capital propio declarado o estimado. No es asesoría tributaria.</p></div></aside>
+<p>Para profundizar en los tributos que paga una empresa, revisa la <a href="/guias/empresas-pymes-chile">guía de empresas y PYMEs</a>, la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo de un empleado</a> y la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
   },
 ];
 

@@ -176,7 +176,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   'calculadora-contribuciones': {
     seoTitle: 'Contribuciones 2026: calcula por avalúo fiscal SII', // 51
     seoDescription:
-      'Estima contribuciones 2026: cuotas abr/jun/sep/nov, exención habitacional en UTM y avalúo fiscal del SII. Referencial, gratis.', // 130
+      'Estima tus contribuciones 2026 con la exención de $61.711.570 y las tasas SII 0,893% y 1,042%. Cuotas abril, junio, septiembre y noviembre.', // 134
   },
 
   'calculadora-reajuste-arriendo': {
@@ -351,6 +351,23 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoTitle: 'Horas extra Chile 2026: jornada 42 h y recargo 50%', // 52
     seoDescription:
       'Desde el 26-04-2026 la jornada es 42 h/semana (Ley 21.561). Calcula horas extra con recargo 50%, valor hora y ejemplos. Dirección del Trabajo.', // 142
+  },
+
+  // --- Nuevos artículos 2026-09-23 ---
+  'contribuciones-cuarta-cuota-noviembre-2026': {
+    seoTitle: 'Contribuciones: cuarta cuota vence 30 de noviembre 2026', // 57
+    seoDescription:
+      'La cuarta cuota de contribuciones 2026 vence el lunes 30 de noviembre. Exención $61.711.570, tasas 0,893% y 1,042%, ejemplos y canales TGR.', // 140
+  },
+  'aguinaldo-navidad-pensionados-2026': {
+    seoTitle: 'Aguinaldo Navidad 2026 pensionados: $29.055 + cargas', // 55
+    seoDescription:
+      'Aguinaldo de Navidad 2026 para pensionados IPS: $29.055 base + $16.415 por carga al 30 de noviembre (Ley 21.806). Se paga con la pensión de diciembre.', // 145
+  },
+  'patente-comercial-2027-calcular': {
+    seoTitle: 'Patente comercial 2027: cálculo, cuota de enero y topes', // 55
+    seoDescription:
+      'Cómo se calcula la patente comercial: 2,5 a 5 por mil del capital propio (mínimo 1 UTM, máximo 8.000 UTM). La cuota de enero 2027 se reajusta por IPC.', // 143
   },
 
   // --- #3 P1: IMM mayo 2026 ---

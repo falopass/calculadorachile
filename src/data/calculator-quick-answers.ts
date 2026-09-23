@@ -15,7 +15,8 @@
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
 import { formatCLP2 } from '@/lib/seo/live-value-title';
-import { INGRESO_MINIMO, ASIGNACION_FAMILIAR_2026 } from '@/lib/values/constants';
+import { INGRESO_MINIMO, ASIGNACION_FAMILIAR_2026, CONTRIBUCIONES_BIENES_RAICES } from '@/lib/values/constants';
+import { calculateContribuciones } from '@/lib/calculations/contribuciones';
 import { calculateIVA } from '@/lib/calculations/iva';
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
@@ -335,6 +336,34 @@ export function getQuickAnswer(
         example: {
           caption: `Equivalencias con UF de ${formatCLP2(ctx.uf)}. El valor se reajusta diariamente según el IPC.`,
           headers: ['Monto en UF', 'Equivalente en pesos'],
+          rows,
+        },
+      };
+    }
+
+    case 'contribuciones': {
+      const P = CONTRIBUCIONES_BIENES_RAICES;
+      const montos = [60_000_000, 100_000_000, 150_000_000, 250_000_000, 400_000_000];
+      const rows = montos.map((avaluo) => {
+        const r = calculateContribuciones({ avaluoFiscal: avaluo, destino: 'habitacional' });
+        return [
+          `Habitacional ${formatCLP(avaluo)}`,
+          formatCLP(r.contribucionAnual),
+          formatCLP(r.contribucionCuota),
+        ];
+      });
+      const comercial = calculateContribuciones({ avaluoFiscal: 100_000_000, destino: 'comercial' });
+      rows.push([
+        'Comercial $100.000.000',
+        formatCLP(comercial.contribucionAnual),
+        formatCLP(comercial.contribucionCuota),
+      ]);
+      return {
+        h1: 'Calculadora de contribuciones: estima tu cuota con el avalúo fiscal',
+        lead: `Las viviendas no pagan contribuciones por los primeros ${formatCLP(P.exencionHabitacional)} de avalúo fiscal (${P.periodoLabel}). Sobre ese monto se aplica ${formatPercentage(P.tasaHabitacionalBaja, 3)} anual hasta un avalúo total de ${formatCLP(P.umbralCambioTasa)} y ${formatPercentage(P.tasaGeneral, 3)} más una sobretasa de ${formatPercentage(P.sobretasaFiscal, 3)} sobre el exceso. El total anual se paga en cuatro cuotas.`,
+        example: {
+          caption: `Estimación con las reglas SII del ${P.periodoLabel}.`,
+          headers: ['Avalúo fiscal', 'Contribución anual', 'Cuota (1 de 4)'],
           rows,
         },
       };

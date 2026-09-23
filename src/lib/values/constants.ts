@@ -879,26 +879,42 @@ export const ARANCEL_NOTARIOS = {
 // Contribuciones de bienes raíces
 // (Ley 17.235 — Impuesto Territorial)
 // ----------------------------------------------
-// El SII fija las tasas anuales según destino.
-// Las propiedades habitacionales tienen un
-// descuento de 0,025 puntos sobre la tasa, y
-// quedan exentas si el avalúo no supera 225,96
-// UTM (Art. 2° bis DL 3063).
+// El SII reajusta semestralmente por IPC la
+// exención habitacional y el umbral de cambio de
+// tasa; las tasas son fijas por ley: 0,893%
+// habitacional hasta el umbral y 1,042% sobre el
+// exceso y para no habitacionales, más una
+// sobretasa de beneficio fiscal de 0,025%.
 //
-// Los semestres de pago son abril y septiembre.
+// Las cuotas vencen en abril, junio, septiembre
+// y noviembre (TGR).
 // ============================================
+// Parámetros oficiales 2º semestre 2026 (desde 01-07-2026,
+// reajuste IPC factor 1,028). Fuentes:
+// - Tabla "Reajustes y exenciones" SII:
+//   https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html
+// - FAQ SII tasas y sobretasa 0,025% (DS 437/2022):
+//   https://www.sii.cl/preguntas_frecuentes/aval_contrib_bbrr/001_165_8150.htm
+// Actualizar cada 1-ene y 1-jul con la tabla SII.
 export const CONTRIBUCIONES_BIENES_RAICES = {
-  tasas_anuales: {
-    habitacional: 0.93,
-    comercial: 1.2,
-    industrial: 1.2,
-    sitio_eriado: 2.0,
-    agrario: 0.5,
-  },
-  /** Descuento (en puntos porcentuales) para uso habitacional. */
-  descuento_habitacional: 0.025,
-  /** Exención habitacional (avalúo ≤ 225,96 UTM). */
-  exencion_habitacional_utm: 225.96,
+  vigencia: '2026-07-01',
+  periodoLabel: '2º semestre 2026',
+  /** Exención habitacional: avalúo fiscal hasta este monto no paga. */
+  exencionHabitacional: 61_711_570,
+  /**
+   * Umbral de cambio de tasa habitacional: se compara contra el
+   * avalúo TOTAL (no el avalúo afecto), según la guía SII.
+   */
+  umbralCambioTasa: 220_398_431,
+  /** Tasa anual % habitacional hasta el umbral de cambio de tasa. */
+  tasaHabitacionalBaja: 0.893,
+  /** Tasa anual % general (no habitacional y exceso habitacional). */
+  tasaGeneral: 1.042,
+  /**
+   * Sobretasa de beneficio fiscal %: no habitacionales (incl. sitios
+   * no edificados) y habitacionales en la parte afecta a tasa 1,042%.
+   */
+  sobretasaFiscal: 0.025,
 } as const;
 
 // ============================================

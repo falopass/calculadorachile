@@ -45,6 +45,26 @@ export interface CurrentValues {
 }
 
 /**
+ * Normaliza una fecha de indicador para compararla en America/Santiago.
+ *
+ * BCentral entrega solo el día (`YYYY-MM-DD`); `new Date('2026-09-23')`
+ * cae a medianoche UTC, que en Santiago es el día anterior (21:00 del
+ * 22-09). Para no correr la fecha, un valor "solo fecha" se convierte al
+ * instante `YYYY-MM-DDT12:00:00.000Z`, que sigue siendo el mismo día
+ * calendario en America/Santiago. Los instantes ISO completos (ej. los de
+ * Mindicador `2026-09-23T03:00:00.000Z`) se devuelven sin cambios.
+ */
+export function normalizeIndicatorDate(
+  date: string | null | undefined,
+): string | undefined {
+  if (!date) return undefined;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return `${date}T12:00:00.000Z`;
+  }
+  return date;
+}
+
+/**
  * Obtiene UF, UTM, dólar y euro con la misma estrategia del route
  * handler: BCentral (si hay credenciales) → Mindicador → fallback.
  *
@@ -131,9 +151,15 @@ export async function getCurrentValues(): Promise<CurrentValues> {
       },
     },
     dates: {
-      uf: pickDate(uf.source, bcentral.fechas.uf, mindicador.fechas.uf),
-      utm: pickDate(utm.source, bcentral.fechas.utm, mindicador.fechas.utm),
-      dolar: pickDate(dolarObs.source, bcentral.fechas.dolar, mindicador.fechas.dolar),
+      uf: normalizeIndicatorDate(
+        pickDate(uf.source, bcentral.fechas.uf, mindicador.fechas.uf),
+      ),
+      utm: normalizeIndicatorDate(
+        pickDate(utm.source, bcentral.fechas.utm, mindicador.fechas.utm),
+      ),
+      dolar: normalizeIndicatorDate(
+        pickDate(dolarObs.source, bcentral.fechas.dolar, mindicador.fechas.dolar),
+      ),
     },
     indicatorSources: {
       uf: uf.source,

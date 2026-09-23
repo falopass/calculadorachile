@@ -1909,12 +1909,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'contribuciones',
     name: 'Contribuciones (Impuesto Territorial)',
     description:
-      'Estima contribuciones 2026 por avalúo fiscal y destino: cuota (1 de 4), anual, exención habitacional en UTM y umbral en pesos.',
+      'Estima tus contribuciones (impuesto territorial) según el avalúo fiscal: exención habitacional, tasas SII y la cuota de cada trimestre.',
     slug: 'calculadora-contribuciones',
     category: 'vivienda',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-10',
+    lastReviewed: '2026-09-23',
     sources: [
       {
         name: 'SII — Impuesto Territorial',
@@ -1949,7 +1949,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         min: 0,
         tooltip:
-          'No es el valor comercial. Está en el certificado de avalúo o en el sitio del SII. La exención habitacional usa este valor en UTM.',
+          'No es el valor comercial: es el avalúo del certificado o del sitio del SII. Contra él se compara la exención habitacional y el umbral de cambio de tasa.',
       },
       {
         id: 'destino',
@@ -1960,18 +1960,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
           { value: 'habitacional', label: 'Habitacional' },
           { value: 'comercial', label: 'Comercial' },
           { value: 'industrial', label: 'Industrial' },
-          { value: 'sitio_eriado', label: 'Sitio eriado' },
-          { value: 'agrario', label: 'Agrario' },
+          { value: 'sitio_eriado', label: 'Sitio no edificado (eriado)' },
         ],
         tooltip:
-          'Tasas referenciales del motor: habitacional 0,93% (con descuento 0,025 pp), comercial/industrial 1,2%, eriado 2%, agrario 0,5%. Confirma en tu giro SII.',
+          'Habitacional tiene exención sobre la primera franja del avalúo; comercial e industrial pagan la tasa general más la sobretasa fiscal; el sitio no edificado urbano suma una sobretasa del 100% de la tasa.',
       },
     ],
     faq: [
       {
         question: '¿Cómo se estiman las contribuciones aquí?',
         answer:
-          'Se aplica una tasa anual referencial según destino sobre el avalúo fiscal. Habitacional usa 0,93% menos 0,025 puntos (≈0,905%). Comercial/industrial 1,2%, sitio eriado 2%, agrario 0,5%. El resultado es educativo: tu giro oficial está en el SII/TGR.',
+          'Con las reglas del SII del semestre vigente: la vivienda queda exenta si su avalúo fiscal no supera la exención habitacional; sobre ella paga 0,893% anual hasta un umbral de avalúo total y 1,042% más sobretasa fiscal de 0,025% por el exceso. Los destinos no habitacionales pagan 1,042% más 0,025% sin exención, y el sitio no edificado urbano suma una sobretasa del 100% de la tasa. El resultado es una estimación: tu giro oficial lo emite el SII/TGR.',
       },
       {
         question: '¿Cuándo se pagan las 4 cuotas?',
@@ -1981,7 +1980,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Hay exención de contribuciones?',
         answer:
-          'Las propiedades habitacionales con avalúo fiscal ≤ 225,96 UTM suelen estar exentas en este modelo. El umbral en pesos se calcula con la UTM del sitio (resultado “Umbral exención”). Pueden existir otras exenciones (vivienda nueva, etc.) que esta herramienta no modela.',
+          'Sí, para uso habitacional: si el avalúo fiscal no supera la exención vigente del semestre (se reajusta por IPC cada 1 de enero y 1 de julio), no se pagan contribuciones. La herramienta muestra la exención vigente aplicada. No modela la alza gradual post-reavalúo ni otras exenciones como la rebaja para adultos mayores.',
       },
       {
         question: '¿Dónde veo mi avalúo fiscal?',
