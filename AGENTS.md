@@ -186,21 +186,21 @@ Secretos y valores reales de producción van en **Vercel Dashboard → Settings 
 - Formato de moneda chilena.
 - Secretos o credenciales.
 
-## Verificación mínima por tipo de cambio
+## Comprobaciones por riesgo o petición
 
-Los comandos de esta sección documentan checks para `verifier`; no conceden ejecución a Sol ni a writers. El writer termina liberando `FOREGROUND_WRITE_LOCK` con `VERIFICATION_REQUESTED` y `VERIFICATION_PERFORMED: NONE`. Sol, como `verification_authority`, decide qué gate proporcional autoriza y `verifier`, como único `verification_executor`, lo ejecuta bajo `LOCAL_HEAVY_LOCK: GRANTED`.
+Ningún comando es obligatorio por defecto. Estas opciones se usan solo ante petición o riesgo concreto no resoluble por lectura; las fórmulas nuevas o alteradas conservan su prueba específica por el riesgo de cálculo. `verifier` independiente se reserva para riesgo alto; build y suite completa solo por petición o riesgo que un check menor no cubra.
 
-| Cambio | Validación mínima |
+| Cambio | Comprobación si corresponde |
 |---|---|
-| Fórmula de cálculo | Test específico en `src/lib/calculations/__tests__/` + `npm run typecheck` |
-| Nueva calculadora | Test de cálculo + conexión en `CalculatorPageClient` + `npm run typecheck` + `npm run build` |
-| Catálogo/categorías/rutas | `npm run typecheck` + `npm run build` |
-| SEO metadata/schema/sitemap | `npm run typecheck` + `npm run build`; revisar salida/canonical si aplica |
-| `/api/values` o datos externos | `npm run typecheck` + prueba real del endpoint o test equivalente |
-| UI/componente | `npm run typecheck` + revisión responsive básica (mobile primero) |
-| Solo documentación | Leer el archivo completo modificado y buscar referencias obsoletas |
+| Fórmula de cálculo | Test específico; typecheck solo si cambió el contrato TypeScript |
+| Nueva calculadora | Test de cálculo y auditoría del wiring; build solo por despliegue o fallo que no cubran esos checks |
+| Catálogo/categorías/rutas | Check de rutas afectadas; typecheck si cambió su contrato, build solo si hace falta observar generación |
+| SEO metadata/schema/sitemap | Inspección de salida/canonical afectados; build solo si se necesita comprobar generación estática |
+| `/api/values` o datos externos | Test o smoke focalizado del endpoint; typecheck si cambió su contrato |
+| UI/componente | Inspección de la superficie afectada; responsive cuando cambió layout, typecheck cuando cambió lógica TS |
+| Solo documentación | Releer el diff y las referencias afectadas |
 
-Si un gate falla, `verifier` reporta evidencia sin editar. Sol puede abrir una nueva asignación de corrección al writer y autorizar después solo el gate mínimo invalidado. Un PASS cacheado no se repite mientras no cambien fuente, tests, dependencias, configuración, comando o entorno relevantes.
+Si un check falla, quien implementa corrige la causa y repite solo ese check; un `verifier` independiente, si fue solicitado, reporta sin editar. Un PASS vigente no se repite mientras no cambien sus inputs.
 
 ## Documentación (mínima)
 
@@ -238,16 +238,14 @@ Inicia la tarea con `CalculaChile` como carpeta de trabajo para descubrir este a
 
 ### Contrato de orquestación
 
-- Sol root conserva arquitectura, ambigüedad, integración y decisión final. Solo root crea hijos, con profundidad exactamente uno; no hay bindings `agent:`, auto-spawn, nesting ni fan-out implícito.
-- `scout` hace reconocimiento read-only; `analyst` procesa diffs/logs grandes; `red-team` hace revisión adversarial read-only; `backend-builder`, `swe-worker`, `mechanical-worker` o `frontend-builder` escriben según el alcance; solo `verifier` ejecuta proyecto.
-- Cualquier writer es foreground, único y sin `exec`; requiere `FOREGROUND_WRITE_LOCK: GRANTED`, ownership y do-not-touch exactos. Writer y verifier nunca se solapan.
-- Se hereda el gobernador global: máximo tres agentes activos, dos hijos además de root, un background read-only, un writer, un ejecutor/heavy/build/full-suite/browser/dev-server/Docker, profundidad uno, un reintento por modelo y dos workers internos de tests.
-- Un writer devuelve archivos, alcance, supuestos, riesgos, `VERIFICATION_REQUESTED`, `VERIFICATION_PERFORMED: NONE` y libera el lock. `verifier` recibe los checks aprobados en orden bajo `LOCAL_HEAVY_LOCK: GRANTED`, reporta y nunca corrige.
+- Root conserva arquitectura, integración y decisión final. Hereda los nueve perfiles globales y el governor: hasta cuatro agentes activos y tres hijos; no hay delegación anidada.
+- `swe-worker` cubre trabajo acotado, `backend-builder` backend complejo y `frontend-builder` implementación visual; `scout`, `analyst` y `red-team` aportan evidencia. Los writers corren en background con `WRITE_SCOPE` y `VALIDATION_COMMANDS`; scopes compartidos van en secuencia y más de un writer requiere pregrant de escritura.
+- Root o el writer implementan y releen el cambio sin checks por defecto; `mechanical-worker` no ejecuta. `verifier` independiente bajo `LOCAL_HEAVY_LOCK` se reserva para riesgo alto o petición. Los guards de bloqueo local están desactivados por la decisión YOLO vigente.
 - Proveedores, credenciales, routers y aliases son configuración personal, nunca del repo. Grok/OpenCode pueden quedar como compatibilidad histórica, pero no gobiernan Devin.
 
 ### Autoridad frontend
 
-Sol solo decide arquitectura frontend técnica. Toda dirección visual no resuelta corresponde a `frontend-director`; `frontend-builder` implementa el contrato aprobado. Si Opus no está disponible, Kimi puede abrir un `ART_DIRECTION_FALLBACK`, cerrar primero el contrato visual y recién después implementar. La UI actual es evidencia del estado presente, no aprobación permanente: un rediseño explícito puede evolucionarla sin perder las invariantes YMYL, SEO, AdSense y accesibilidad.
+Root decide arquitectura técnica. `design-taste-frontend` dirige páginas públicas/editoriales; `interface-design` dirige calculadoras y herramientas de producto. Ambas respetan YMYL, SEO, AdSense, accesibilidad y el DNA; se elige una por superficie. `frontend-builder` implementa y `frontend-director` se reserva para identidad o crítica visual difícil. La UI actual no congela un rediseño autorizado.
 
 ## Criterio operativo para agentes
 
@@ -258,4 +256,4 @@ Sol solo decide arquitectura frontend técnica. Toda dirección visual no resuel
 5. Dinero, impuestos, laboral, previsión, SEO indexado, AdSense o secretos: cautela; confirma si hay dos caminos.
 6. No inventes cifras, fuentes, reseñas ni valores financieros.
 7. Posts: `docs/plan-editorial.md` + research. Fórmulas: `docs/research/dossier-ymyl.md` + matriz.
-8. Tras wiring de calculadora, solicita a `verifier` `node scripts/audit-ymyl-matrix.mjs`; el resultado esperado es 0 fantasmas en ese `id` (salvo cosméticos documentados).
+8. Tras wiring de calculadora, ejecuta `node scripts/audit-ymyl-matrix.mjs` para ese `id`; el resultado esperado es 0 fantasmas (salvo cosméticos documentados).

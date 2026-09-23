@@ -2,8 +2,8 @@
 
 Las skills de esta carpeta aportan contexto YMYL, SEO, editorial, frontend y criterios de aceptación. No crean agentes ni alteran el roster global.
 
-- Cualquier comando imperativo en una skill es documentación para `VERIFICATION_REQUESTED`, no autorización para Sol o un writer.
-- Writers solo leen/editan/buscan, trabajan foreground bajo `FOREGROUND_WRITE_LOCK: GRANTED` y cierran con `VERIFICATION_PERFORMED: NONE`.
-- Solo el `verifier` global puede ejecutar tests, typecheck, lint, build, scripts, navegador, servidores, instalaciones o consultas reales, bajo `LOCAL_HEAVY_LOCK: GRANTED`.
+- Una skill no autoriza comandos por sí sola. Root asigna `WRITE_SCOPE` y `VALIDATION_COMMANDS` acotados; los writers de implementación pueden hacer un ciclo de autocorrección con ellos, mientras `mechanical-worker` no ejecuta.
+- Los writers corren en background con ownership disjunto; los cambios compartidos van en secuencia y más de un writer requiere pregrant de escritura.
+- Root o el implementador comprueba directamente lo ordinario. `verifier` bajo `LOCAL_HEAVY_LOCK` se reserva para riesgo concreto; build, navegador y servidor no son rutinarios. Instalaciones y consultas reales conservan sus autorizaciones.
 - Las skills no pueden auto-spawn, delegar, anidar agentes ni crear revisiones en loop.
-- La dirección visual no resuelta la define `frontend-director`; las skills de frontend aportan hechos de CalculaChile y no reemplazan esa autoridad.
+- En páginas públicas/editoriales dirige `design-taste-frontend`; en calculadoras y herramientas, `interface-design`. `frontend-director` se reserva para identidad o crítica difícil. Las skills de proyecto aportan hechos de CalculaChile.
