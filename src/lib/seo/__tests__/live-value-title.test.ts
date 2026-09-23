@@ -94,6 +94,47 @@ describe('isLiveValueFresh', () => {
       ),
     ).toBe(true);
   });
+
+  it('UF normalizada a las 12:00 UTC del mismo día es fresca a las 05:40Z', () => {
+    // Fecha solo-día BCentral normalizada: ~6 h "en el futuro" respecto a now.
+    expect(
+      isLiveValueFresh(
+        'uf',
+        { value: 40999.93, source: 'bcentral', date: '2026-09-23T12:00:00.000Z' },
+        new Date('2026-09-23T05:40:00.000Z'),
+      ),
+    ).toBe(true);
+  });
+
+  it('UF con fecha 2 días en el futuro no es fresca', () => {
+    expect(
+      isLiveValueFresh(
+        'uf',
+        { value: 40999.93, source: 'bcentral', date: '2026-09-25T12:00:00.000Z' },
+        NOW,
+      ),
+    ).toBe(false);
+  });
+
+  it('dólar normalizado a las 12:00 UTC del mismo día es fresco a las 05:40Z', () => {
+    expect(
+      isLiveValueFresh(
+        'dolar',
+        { value: 945.87, source: 'bcentral', date: '2026-09-23T12:00:00.000Z' },
+        new Date('2026-09-23T05:40:00.000Z'),
+      ),
+    ).toBe(true);
+  });
+
+  it('dólar con fecha 2 días en el futuro no es fresco', () => {
+    expect(
+      isLiveValueFresh(
+        'dolar',
+        { value: 945.87, source: 'bcentral', date: '2026-09-25T12:00:00.000Z' },
+        NOW,
+      ),
+    ).toBe(false);
+  });
 });
 
 describe('buildLiveValueTitle', () => {

@@ -17,6 +17,13 @@ export type LiveKind = 'utm' | 'uf' | 'dolar';
 const TIME_ZONE = 'America/Santiago';
 const MS_HOUR = 60 * 60 * 1000;
 
+/**
+ * Tolerancia a fechas "en el futuro". Las fechas solo-día de
+ * BCentral se normalizan a las 12:00 UTC del día indicador, que
+ * puede quedar hasta ~15 h por delante de `now` en Santiago.
+ */
+const FUTURE_TOLERANCE_MS = 24 * MS_HOUR;
+
 /** Máxima antigüedad aceptable por indicador. */
 const FRESHNESS_MS: Record<LiveKind, number> = {
   // La UF del día se publica con anticipación; 48 h cubre feriados.
@@ -86,7 +93,7 @@ export function isLiveValueFresh(
   }
 
   const ageMs = now.getTime() - date.getTime();
-  if (ageMs < -MS_HOUR) return false; // fecha futura sospechosa (>1 h adelante)
+  if (ageMs < -FUTURE_TOLERANCE_MS) return false; // fecha futura sospechosa (>24 h adelante)
   return ageMs <= FRESHNESS_MS[kind];
 }
 

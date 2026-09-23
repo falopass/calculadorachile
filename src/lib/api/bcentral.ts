@@ -97,13 +97,34 @@ export async function fetchBCentral(
 }
 
 /**
+ * Elige la última observación con fecha ≤ `today` (YYYY-MM-DD).
+ * La UF se publica con anticipación (hasta el día 9 del mes
+ * siguiente), así que la serie puede traer observaciones con
+ * fecha futura respecto a hoy en America/Santiago; esas no son
+ * el "valor actual".
+ */
+export function pickLatestNotFuture(
+  values: ValorBCentral[],
+  today: string,
+): ValorBCentral | null {
+  const past = values.filter(
+    (v) => v.fecha <= today && Number.isFinite(v.valor),
+  );
+  return past.length > 0 ? past[past.length - 1] : null;
+}
+
+/** Fecha de hoy en America/Santiago como YYYY-MM-DD. */
+function todaySantiago(now: Date): string {
+  return now.toLocaleDateString('en-CA', { timeZone: 'America/Santiago' });
+}
+
+/**
  * Devuelve el último valor disponible de una serie (o `null`).
  */
 export async function fetchLatestValue(codigo: string): Promise<number | null> {
   const values = await fetchBCentral(codigo);
-  if (values.length === 0) return null;
-  const last = values[values.length - 1].valor;
-  return Number.isFinite(last) ? last : null;
+  const last = pickLatestNotFuture(values, todaySantiago(new Date()));
+  return last ? last.valor : null;
 }
 
 /**
@@ -114,9 +135,8 @@ export async function fetchLatestEntry(
   codigo: string,
 ): Promise<{ valor: number; fecha: string } | null> {
   const values = await fetchBCentral(codigo);
-  if (values.length === 0) return null;
-  const last = values[values.length - 1];
-  return Number.isFinite(last.valor) ? { valor: last.valor, fecha: last.fecha } : null;
+  const last = pickLatestNotFuture(values, todaySantiago(new Date()));
+  return last ? { valor: last.valor, fecha: last.fecha } : null;
 }
 
 /**
