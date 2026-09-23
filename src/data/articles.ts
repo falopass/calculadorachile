@@ -59,6 +59,11 @@ export interface Article {
   faq?: { question: string; answer: string }[];
   /** Referencias primarias o institucionales mostradas al lector. */
   sources: ArticleSource[];
+  /**
+   * `calculator.id` del catálogo para embeber la calculadora completa
+   * antes del cuerpo del artículo. Si se omite, no se embebe nada.
+   */
+  embedCalculatorId?: string;
 }
 
 type ArticleDraft = Omit<Article, 'sources'> & {
@@ -1290,6 +1295,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'cotizacion-empleador-3-5-agosto-2026-costo-pyme',
+    embedCalculatorId: 'costo-empleado-pyme',
     title: 'Cotización del empleador 3,5% desde agosto 2026: costo PYME sin duplicar el SIS',
     description:
       'Desde las remuneraciones de agosto de 2026 el aporte previsional total del empleador es 3,5% e incluye el SIS. Compara julio y agosto, calcula el costo real y evita contabilizar dos veces el seguro.',
@@ -1661,7 +1667,7 @@ const articleCatalog: ArticleDraft[] = [
 <li>Existe un <strong>contrato o convenio colectivo</strong> que lo incorpore.</li>
 </ul>
 <p>En esos casos sí es un derecho exigible frente al empleador. Si no hay cláusula, no inventes el monto del sector público ni el del IPS en la liquidación privada: son regímenes distintos.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Aguinaldo ≠ gratificación legal</strong><p>La <strong>gratificación legal</strong> (Arts. 47 y 50 del Código del Trabajo) se calcula sobre utilidades o con el sistema del 25% con tope de <strong>4,75 ingresos mínimos mensuales</strong>. Es independiente del aguinaldo de Fiestas Patrias del Estado. Profundiza en la <a href="/blog/como-funciona-gratificacion-legal">guía de gratificación legal</a> o en la <a href="/calculadoras/calculadora-gratificacion">calculadora de gratificación</a>.</p></div></aside>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Aguinaldo ≠ gratificación legal</strong><p>La <strong>gratificación legal</strong> (Arts. 47 y 50 del Código del Trabajo) se calcula sobre utilidades o con el sistema del 25% con tope de <strong>4,75 ingresos mínimos mensuales</strong>. Es independiente del aguinaldo de Fiestas Patrias del Estado. Profundiza en la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a>.</p></div></aside>
 
 <h2>4. Calendario práctico: agosto → septiembre 2026</h2>
 <ol class="steps">
@@ -1747,11 +1753,12 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'horas-extra-jornada-42-horas-chile-2026',
+    embedCalculatorId: 'horas-extra',
     title: 'Horas extra con jornada de 42 horas: cómo calcularlas en Chile 2026',
     description:
       'Desde el 26 de abril de 2026 la jornada ordinaria máxima es 42 horas semanales (Ley 21.561). Cómo se calcula la hora ordinaria, el recargo legal del 50% y ejemplos en CLP con la calculadora de horas extra.',
     date: '2026-07-11',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-09-23',
     category: 'laboral',
     readingTime: 11,
     relatedGuia: 'horas-extra-chile',
@@ -1848,7 +1855,8 @@ const articleCatalog: ArticleDraft[] = [
 
 <p>La falta de pacto no permite quedarse con trabajo gratis. El artículo 32 reconoce como extraordinarias las horas trabajadas en exceso con conocimiento del empleador. Correos, mensajes, conexión a sistemas, turnos, accesos y geolocalización pueden complementar el registro de asistencia; deben demostrar trabajo y conocimiento, no solo disponibilidad.</p>
 
-<h2>Fórmula oficial para sueldo mensual y 42 horas</h2>
+<h2>¿Cuál es el factor de horas extra con jornada de 42 horas?</h2>
+<p>Para sueldo mensual y jornada de 42 horas, el factor de la hora extra con el recargo mínimo de 50% es <strong>0,0083333</strong>: sueldo mensual × 0,0083333 = valor de cada hora extra. Sale de dividir el sueldo por 30, multiplicar por 28, dividir por 168 (42 × 4) y multiplicar por 1,5, según la Dirección del Trabajo.</p>
 <p>La consulta de la DT actualizada el 28 de abril de 2026 entrega este procedimiento:</p>
 
 <ol class="steps">
@@ -1930,8 +1938,6 @@ const articleCatalog: ArticleDraft[] = [
 <li>Solicita por escrito la corrección y conserva la respuesta.</li>
 </ol>
 
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Calculadora en corrección</strong><p>La <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> todavía usa 4,33 semanas y asigna un recargo general a festivos que no corresponde a todos los contratos. No la uses para reclamar o pagar hasta que el motor adopte la fórmula de la DT. Puedes reproducir manualmente los pasos de esta guía.</p></div></aside>
-
 <h2>Fuentes y fecha de comprobación</h2>
 <p>Contenido verificado al <strong>13 de julio de 2026</strong>. Las consultas en foros se utilizaron para identificar problemas de marcación, mensajes fuera de horario y recargos festivos; la regla legal proviene de las siguientes fuentes:</p>
 <ul>
@@ -1948,6 +1954,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'sueldo-minimo-2026-calcular-liquido',
+    embedCalculatorId: 'sueldo-liquido',
     title: 'Sueldo mínimo 2026 $553.553: cómo recalcular tu líquido y descuentos',
     description:
       'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
@@ -2101,7 +2108,7 @@ const articleCatalog: ArticleDraft[] = [
 
 <div class="numeric-example"><div class="numeric-example__title">Sueldo base mínimo + anticipo mensual de gratificación 25%</div><ul><li>Sueldo base: $553.553</li><li>Gratificación referencial: $138.388</li><li>Total imponible: $691.941</li><li>FONASA, contrato indefinido, sin IUSC</li></ul><span class="total">Líquido aproximado según AFP: $560.126 a $566.977</span></div>
 
-<p>Ese 25% no es automático para toda empresa ni convierte cada anticipo en cálculo anual definitivo. La obligación, el sistema elegido y el tope de 4,75 IMM deben verificarse en la <a href="/blog/como-funciona-gratificacion-legal">guía de gratificación legal</a>.</p>
+<p>Ese 25% no es automático para toda empresa ni convierte cada anticipo en cálculo anual definitivo. La obligación, el sistema elegido y el tope de 4,75 IMM pueden revisarse en la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a>.</p>
 
 <h2>Por qué otras personas reciben menos</h2>
 <ul>
@@ -2201,7 +2208,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>En necesidades de la empresa o desahucio legal, un contrato de un año o más da derecho a treinta días de la última remuneración mensual por cada año y fracción superior a seis meses. El máximo general es once años para contratos iniciados desde el 14 de agosto de 1981. La base mensual tiene tope de 90 UF del último día del mes anterior al pago.</p>
 <p>La base del artículo 172 no es solo sueldo más gratificación. Incluye pagos mensuales por la prestación, como colación y movilización permanentes conforme a la doctrina vigente de la DT, y excluye horas extra, asignación familiar y pagos esporádicos o una vez al año. Para remuneraciones variables se promedian los últimos tres meses calendario pertinentes.</p>
 <div class="numeric-example"><div class="numeric-example__title">Base computable $900.000 y 5 años 8 meses</div><ul><li>5 años completos</li><li>Fracción superior a 6 meses: suma 1</li><li>Años pagables: 6</li><li>$900.000 × 6 = $5.400.000</li></ul><span class="total">Años de servicio: $5.400.000</span></div>
-<p>Consulta la <a href="/blog/calcular-indemnizacion-por-anos">guía de indemnización por años</a> para topes, causales y recargos judiciales.</p>
+<p>Consulta la <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">calculadora de indemnización por años</a> para topes, causales y recargos judiciales.</p>
 
 <h2>Paso 5: aviso previo</h2>
 <p>Si el empleador aplica el artículo 161 y no entrega aviso escrito con al menos treinta días de anticipación, debe pagar la indemnización sustitutiva del aviso previo, equivalente a una última remuneración mensual bajo el artículo 172 y su tope de 90 UF.</p>
@@ -2243,89 +2250,6 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo vigente</a>, las consultas de la DT sobre <a href="https://dt.gob.cl/portal/1628/w3-article-60613.html" target="_blank" rel="noopener">plazo para otorgar el finiquito</a> y <a href="https://dt.gob.cl/portal/1628/w3-article-60543.html" target="_blank" rel="noopener">formalidades de la carta</a>, el trámite oficial para <a href="https://dt.gob.cl/portal/1626/w3-article-117245.html" target="_blank" rel="noopener">ratificar con o sin reserva</a> y el método de la DT para vacaciones e indemnizaciones. Las experiencias compartidas en foros se usaron para identificar dudas sobre reserva, AFC y feriado; no como fuente legal.</p>`,
-  },
-  {
-    slug: 'diferencia-sueldo-bruto-liquido',
-    title: 'Diferencia entre sueldo bruto y líquido en Chile 2026',
-    description:
-      'Entiende la diferencia entre sueldo bruto y líquido. Descubre cuánto te descuentan por AFP, salud, cesantía e impuesto único en Chile.',
-    date: '2026-03-30',
-    updatedAt: '2026-07-13',
-    category: 'laboral',
-    readingTime: 15,
-    relatedGuia: 'sueldo-liquido-chile',
-    keywords: [
-      'sueldo bruto líquido',
-      'descuentos legales Chile',
-      'AFP salud cesantía',
-      'sueldo líquido 2026',
-      'tope imponible 90 UF',
-    ],
-    relatedCalculators: [
-      'calculadora-sueldo-liquido',
-      'calculadora-costo-empleado-pyme',
-      'calculadora-comparador-afp',
-    ],
-    content: `<p class="article-lead">“Bruto” y “líquido” no son dos porcentajes fijos. Entre ambos hay remuneraciones imponibles, asignaciones no imponibles, cotizaciones, impuesto y descuentos personales. Por eso dos trabajadores con el mismo total de haberes pueden recibir depósitos distintos. Esta guía permite reconstruir una liquidación 2026 sin usar el atajo engañoso de “restar 20%”.</p>
-
-<h2>Sueldo base, total haberes, imponible y líquido</h2>
-<p>En una conversación laboral se suele llamar sueldo bruto a todo lo ganado antes de descuentos. En una liquidación aparecen conceptos más precisos:</p>
-<ul><li><strong>Sueldo base:</strong> estipendio fijo en dinero pagado por períodos iguales según el contrato. No necesariamente coincide con el total mensual.</li><li><strong>Haberes imponibles:</strong> remuneraciones sobre las que se calculan cotizaciones, como sueldo, gratificación mensual, comisiones, bonos remuneracionales y horas extra.</li><li><strong>Haberes no imponibles:</strong> asignaciones o reembolsos que realmente cumplen las condiciones legales, como una colación o movilización razonable. El nombre no basta para excluirlos.</li><li><strong>Total haberes:</strong> suma de imponibles y no imponibles antes de descuentos.</li><li><strong>Base tributable:</strong> monto sobre el cual se calcula el impuesto único después de las rebajas previsionales que permite la ley.</li><li><strong>Sueldo líquido:</strong> total haberes menos descuentos legales, contractuales o autorizados.</li></ul>
-<p>Una oferta de “$900.000 líquidos” obliga a preguntar qué supuestos usó el empleador: AFP, Fonasa o Isapre, tipo de contrato, cargas, impuesto y bonos. Una oferta de “$900.000 brutos” también es ambigua si no aclara si incluye gratificación.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No existe un factor universal bruto → líquido</strong><p>El rango de 77% a 83% puede servir como intuición para algunos sueldos, pero falla con asignaciones no imponibles, Isapre, impuesto, topes previsionales, préstamos o pensión alimenticia. Para comprometer gastos usa una liquidación simulada concepto por concepto.</p></div></aside>
-
-<h2>Las cotizaciones que reducen el líquido</h2>
-<p>Para una persona dependiente no pensionada y con contrato indefinido, los descuentos previsionales habituales de cargo del trabajador son:</p>
-<ul><li><strong>Pensión:</strong> 10% de la remuneración imponible destinado a la cuenta individual, más la comisión de la AFP.</li><li><strong>Salud:</strong> 7% para Fonasa o el precio que corresponda al contrato de Isapre. Si el plan cuesta más que la cotización legal, la diferencia también reduce el líquido.</li><li><strong>Seguro de Cesantía:</strong> 0,6% en contrato indefinido. En contratos a plazo fijo, por obra o servicio, la cotización ordinaria es de cargo del empleador.</li><li><strong>Impuesto único de segunda categoría:</strong> se aplica por tramos a la renta tributable mensual cuando supera el tramo exento.</li></ul>
-<p>La comisión AFP vigente en julio de 2026 va desde 0,46% en AFP Uno hasta 1,45% en AFP Provida. Las demás son Capital 1,44%, Cuprum 1,44%, Habitat 1,27%, Modelo 0,58% y Planvital 1,16%. La comisión se cobra sobre la remuneración imponible hasta el tope, no sobre el saldo acumulado de la cuenta obligatoria.</p>
-<p>Desde abril de 2026 la tasa vigente del Seguro de Invalidez y Sobrevivencia es 1,62%, pero para trabajadores dependientes es de cargo del empleador. No debe restarse otra vez del sueldo líquido. En internet se mezclan a menudo el costo previsional total del empleador con los descuentos del trabajador.</p>
-
-<h2>Aportes del empleador que no se descuentan al trabajador</h2>
-<p>El empleador paga cotizaciones adicionales por seguro de accidentes, SIS, seguro de cesantía y reforma previsional, según contrato y actividad. Desde agosto de 2025 hasta julio de 2026, el nuevo aporte previsional del empleador es 1% de la remuneración: 0,1% va a la cuenta individual y 0,9% al Fondo Autónomo de Protección Previsional. La tasa aumenta desde agosto de 2026 conforme al calendario legal.</p>
-<p>Estos aportes elevan el costo de contratación, pero no autorizan rebajar el sueldo pactado ni aparecen como descuentos de cargo del trabajador. Si una liquidación resta “aporte empleador reforma” del líquido, solicita corrección y el fundamento.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Líquido y costo empresa son métricas distintas</strong><p>Un sueldo bruto de $1.000.000 no significa que la empresa gaste solo $1.000.000, ni que el trabajador reciba ese monto menos todas las cotizaciones del sistema. Parte de las cotizaciones se carga al empleador fuera del bruto pactado.</p></div></aside>
-
-<h2>Topes imponibles 2026</h2>
-<p>La Superintendencia de Pensiones fijó para 2026 un tope mensual de <strong>90 UF</strong> para cotizaciones obligatorias de pensiones, salud y accidentes del trabajo. Para Seguro de Cesantía el tope es <strong>135,2 UF</strong>. Rigen para remuneraciones desde febrero de 2026 conforme a la comunicación oficial; el período anterior usa el tope que le corresponda.</p>
-<p>Los topes están expresados en UF, por lo que su valor en pesos cambia mensualmente. No debe publicarse un único monto en pesos como si fuera válido todo el año. Si la remuneración imponible supera 90 UF, pensión y salud se calculan hasta ese límite; cesantía puede seguir calculándose hasta 135,2 UF.</p>
-<p>El excedente sobre el tope no se transforma en haber no imponible: sigue siendo remuneración, pero no genera esas cotizaciones por encima del máximo. El impuesto único utiliza sus propias reglas y no queda limitado a 90 UF.</p>
-
-<h2>Cómo se calcula el impuesto único</h2>
-<p>El impuesto único es progresivo. No se aplica la tasa máxima del tramo a toda la renta sin rebaja. La tabla mensual del SII expresa los límites en UTM y contempla una cantidad a rebajar. El primer tramo llega hasta 13,5 UTM y está exento; luego las tasas marginales son 4%, 8%, 13,5%, 23%, 30,4%, 35% y 40% según la base.</p>
-<p>Como la UTM cambia cada mes, también cambia el límite en pesos. Para revisar una liquidación usa la circular o tabla del mes de pago, no una cifra aproximada copiada de otra fecha. Bonos, comisiones o una gratificación pueden hacer que un mes tenga impuesto aunque el sueldo base por sí solo esté bajo el límite.</p>
-<p>La base tributable no es simplemente el total bruto. Primero se consideran las cotizaciones previsionales obligatorias aceptadas, respetando sus topes, y luego se aplica la tabla. APV y otros beneficios pueden cambiar el resultado bajo condiciones específicas.</p>
-
-<h2>Ejemplo 1: $800.000 imponibles, Habitat y Fonasa</h2>
-<p>Supuestos: contrato indefinido, remuneración imponible de $800.000, sin asignaciones no imponibles, AFP Habitat 1,27%, Fonasa, no pensionado y base bajo el tramo afecto a impuesto.</p>
-<div class="numeric-example"><div class="numeric-example__title">Liquidación simplificada</div><ul><li>Pensión obligatoria 10%: $80.000</li><li>Comisión AFP 1,27%: $10.160</li><li>Salud 7%: $56.000</li><li>Seguro de Cesantía 0,6%: $4.800</li><li>Impuesto único: $0 bajo estos supuestos</li><li>Total descuentos: $150.960</li></ul><span class="total">Líquido estimado: $649.040</span></div>
-<p>La conversión es 81,13%, pero no demuestra que todas las remuneraciones de $800.000 entreguen ese porcentaje. Con AFP Uno el líquido subiría $6.480 frente a Habitat; con un plan de Isapre de 3 UF o descuentos autorizados bajaría.</p>
-
-<h2>Ejemplo 2: imponibles y no imponibles</h2>
-<p>Supuestos: sueldo y bonos imponibles por $900.000, más $50.000 de movilización y $50.000 de colación que cumplen realmente carácter no imponible; AFP Uno, Fonasa, contrato indefinido y sin impuesto.</p>
-<div class="numeric-example"><div class="numeric-example__title">Total haberes de $1.000.000</div><ul><li>Base imponible: $900.000</li><li>No imponibles: $100.000</li><li>Pensión 10%: $90.000</li><li>Comisión Uno 0,46%: $4.140</li><li>Salud 7%: $63.000</li><li>Cesantía 0,6%: $5.400</li><li>Total descuentos previsionales: $162.540</li></ul><span class="total">Líquido antes de otros descuentos: $837.460</span></div>
-<p>Si alguien aplicara 18,06% a todo el millón obtendría otro resultado. La diferencia nace porque colación y movilización no entraron a la base. Si esos montos encubren remuneración y no compensan gastos reales, su clasificación puede ser fiscalizada.</p>
-
-<h2>Gratificación: incluida no significa gratis</h2>
-<p>En el sistema del artículo 50, la gratificación equivale al 25% de las remuneraciones del ejercicio con tope anual de 4,75 ingresos mínimos mensuales. Su determinación legal es anual, aunque muchas empresas pagan anticipos mensuales.</p>
-<p>“$1.000.000 bruto incluida gratificación” significa que el total ofrecido ya incorpora esa línea; no es $1.000.000 más gratificación. El sueldo base debe respetar por sí mismo el ingreso mínimo aplicable y la estructura debe aparecer en contrato y liquidación. Revisa la <a href="/blog/como-funciona-gratificacion-legal">guía de gratificación 2026</a> para auditar el tope y los anticipos.</p>
-
-<h2>Horas extra, bonos y comisiones</h2>
-<p>Las horas extraordinarias, comisiones y bonos remuneracionales aumentan los haberes imponibles y pueden elevar cotizaciones e impuesto. El valor de hora extra se calcula sobre el sueldo, pero una vez devengado el sobresueldo se incorpora a la remuneración imponible del mes.</p>
-<p>Una comisión variable no puede omitirse del imponible porque se pagó fuera de la fecha habitual. Si el empleador “líquida” un bono mediante transferencia separada sin registrarlo, conserva comprobantes y solicita la liquidación corregida.</p>
-
-<h2>Otros descuentos que explican un líquido menor</h2>
-<ul><li>Cuota o diferencia del plan de Isapre.</li><li>Crédito de caja de compensación.</li><li>Anticipos de sueldo.</li><li>Cuota sindical.</li><li>Ahorro previsional voluntario.</li><li>Pensión alimenticia ordenada judicialmente.</li><li>Descuentos autorizados por escrito dentro de los límites legales.</li><li>Ausencias o atrasos correctamente determinados.</li></ul>
-<p>No todos tienen la misma prioridad ni límite. El artículo 58 regula descuentos obligatorios, autorizados y prohibidos. Un empleador no puede descontar unilateralmente pérdidas, herramientas o errores de caja sin fundamento y procedimiento.</p>
-
-<h2>Cómo auditar tu liquidación</h2>
-<ol class="steps"><li>Compara sueldo base, jornada y gratificación con el contrato.</li><li>Separa imponibles y no imponibles; cuestiona etiquetas inusuales.</li><li>Verifica la comisión de tu AFP en la fuente oficial del mes.</li><li>Aplica 10%, comisión, salud y cesantía a la base y tope correctos.</li><li>Confirma que aportes del empleador no reduzcan tu líquido.</li><li>Recalcula la base tributable y usa la tabla SII del mes.</li><li>Revisa horas extra, comisiones, bonos y ausencias.</li><li>Identifica cada descuento personal y su autorización.</li><li>Compara el líquido calculado con el depósito.</li><li>Guarda contrato, liquidación y comprobante; reclama por escrito la diferencia.</li></ol>
-
-<h2>Qué conviene comparar al evaluar una oferta</h2>
-<p>Pide una simulación con sueldo base, gratificación, bonos garantizados, asignaciones, jornada, AFP supuesta, sistema de salud y tipo de contrato. Distingue beneficios reales de reembolsos sujetos a rendición. Para comparar dos empleos, usa líquido anual esperado y no solo el mejor mes: bonos variables e impuesto pueden distorsionar una captura aislada.</p>
-<p>Calcula tu caso con la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> y revisa las comisiones con la <a href="/calculadoras/calculadora-comparador-afp">comparadora AFP</a>. Si la diferencia está en el costo de contratación, usa la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleador</a> sin mezclar aportes patronales con descuentos personales.</p>
-
-<h2>Fuentes consultadas</h2>
-<p>Contenido verificado al 13 de julio de 2026 con la información vigente de la <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9893.html" target="_blank" rel="noopener">Superintendencia de Pensiones sobre comisiones y SIS</a>, su comunicación oficial de <a href="https://www71.spensiones.cl/portal/institucional/594/articles-16921_recurso_1.pdf" target="_blank" rel="noopener">topes imponibles 2026</a>, el calendario de <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html" target="_blank" rel="noopener">cotización de cargo del empleador</a>, las <a href="https://www.sii.cl/normativa_legislacion/circulares/2026/indcir2026.htm" target="_blank" rel="noopener">tablas mensuales de impuesto único del SII</a> y los artículos 41, 42, 54 y 58 del Código del Trabajo. Las preguntas de comunidades se usaron para detectar confusiones entre “incluida gratificación”, costo empresa y líquido ofrecido; no como respaldo de tasas.</p>`,
   },
   {
     slug: 'guia-iva-chile-2026',
@@ -2678,214 +2602,6 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo vigente en Ley Chile</a>, las fórmulas de la Dirección del Trabajo para <a href="https://www.dt.gob.cl/portal/1628/w3-article-95182.html" target="_blank" rel="noopener">sueldo mensual</a> y <a href="https://www.dt.gob.cl/portal/1628/w3-article-60191.html" target="_blank" rel="noopener">sueldo semanal</a>, su criterio sobre <a href="https://www.dt.gob.cl/portal/1628/w3-article-60176.html" target="_blank" rel="noopener">determinación semanal cuando cambia el mes</a> y los dictámenes sobre <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-125738.html" target="_blank" rel="noopener">compensación por días adicionales de feriado</a>. Las consultas de trabajadores en foros se usaron para detectar dudas sobre marcación, festivos y mensajes fuera de horario; no como prueba normativa.</p>`,
-  },
-  {
-    slug: 'como-funciona-gratificacion-legal',
-    title: 'Cómo funciona la gratificación legal en Chile 2026',
-    seoTitle: 'Tope de Gratificación Legal 2026 en Chile: cálculo y monto',
-    seoDescription:
-      'Conoce el tope de gratificación legal 2026 en Chile, cómo se calcula (25% con tope 4,75 IMM) y cuándo corresponde pagarla.',
-    description:
-      'Explicación clara de la gratificación legal: 25% de remuneración, tope 4,75 IMM, quién tiene derecho y cómo se calcula mensual o anualmente.',
-    date: '2026-03-30',
-    updatedAt: '2026-07-13',
-    category: 'laboral',
-    readingTime: 14,
-    relatedGuia: 'sueldo-liquido-chile',
-    keywords: [
-      'gratificación legal',
-      '25% remuneración',
-      '4.75 IMM',
-      'aguinaldo legal',
-      'Art. 47 Código del Trabajo',
-      'tope gratificación legal 2026',
-      'nuevo tope gratificación 2026',
-    ],
-    relatedCalculators: [
-      'calculadora-gratificacion-legal',
-      'calculadora-sueldo-liquido',
-      'calculadora-costo-empleado-pyme',
-    ],
-    faq: [
-      {
-        question: '¿Cuál es el tope de gratificación legal 2026 en Chile?',
-        answer:
-          'En el sistema del artículo 50, el tope anual es 4,75 ingresos mínimos mensuales vigentes al 31 de diciembre del ejercicio. Con el IMM de $553.553 vigente desde mayo de 2026, la referencia anual es $2.629.377 y su doceava parte es $219.115. El cálculo definitivo es anual: los anticipos mensuales deben reliquidarse y no garantizan por sí solos que cada mes corresponda exactamente a esa doceava parte.',
-      },
-      {
-        question: '¿Cómo se calcula la gratificación legal?',
-        answer:
-          'En el sistema más usado (Art. 50 del Código del Trabajo), la gratificación equivale al 25% de la remuneración mensual con tope de 4,75 IMM anuales. Por ejemplo, con sueldo base de $600.000: 25% × $600.000 = $150.000, que está bajo el tope mensual de $219.115, así que se paga $150.000. Con sueldo de $1.500.000: 25% = $375.000, que excede el tope, así que se paga $219.115.',
-      },
-      {
-        question: '¿Quién tiene derecho a gratificación legal?',
-        answer:
-          'No depende de ganar menos de 4,75 IMM ni de tener remuneración variable. La obligación nace cuando el empleador cumple los requisitos del artículo 47: establecimiento o empresa —o cooperativa— obligado a llevar contabilidad y con utilidad o excedente líquido en el ejercicio; además debe perseguir fines de lucro, salvo las cooperativas. El contrato o convenio puede establecer una gratificación convencional más favorable.',
-      },
-      {
-        question: '¿La gratificación se paga mensual o anual?',
-        answer:
-          'La gratificación legal es anual. Las partes pueden pactar anticipos mensuales y el empleador debe hacer la liquidación definitiva, reajustar los anticipos y pagar una eventual diferencia a más tardar en abril del año siguiente. Es remuneración imponible y tributable. Su tratamiento en una indemnización depende de la forma y periodicidad del pago, por lo que no debe asumirse automáticamente.',
-      },
-    ],
-    content: `<p class="article-lead">La gratificación legal no es un aguinaldo ni un bono reservado a quienes ganan menos. Es una remuneración anual vinculada a las utilidades del empleador y puede cumplirse mediante dos sistemas distintos. Para revisar una liquidación hay que saber qué modalidad aplica, qué remuneraciones entran en la base y cómo se reliquidaron los anticipos.</p>
-
-<h2>Qué es la gratificación legal</h2>
-<p>Los artículos 46 a 52 del Código del Trabajo regulan la gratificación. El artículo 47 obliga a determinados empleadores que obtienen utilidades o excedentes líquidos a gratificar anualmente a sus trabajadores. El artículo 50 ofrece una forma alternativa de cumplir esa obligación: pagar el 25% de las remuneraciones devengadas durante el ejercicio, con un límite individual de 4,75 ingresos mínimos mensuales.</p>
-<p>La expresión “legal” distingue este beneficio de una gratificación convencional. Una empresa puede pactar en el contrato individual, un instrumento colectivo o una política incorporada al vínculo una condición más favorable. Ese pacto debe leerse antes de aplicar la regla mínima del Código.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No es lo mismo que aguinaldo</strong><p>El aguinaldo de Fiestas Patrias o Navidad tiene otro origen. En el sector privado solo es obligatorio si fue pactado o se transformó en una cláusula tácita conforme a las circunstancias. Pagar un aguinaldo no sustituye automáticamente la gratificación legal.</p></div></aside>
-
-<h2>Cuándo nace la obligación del empleador</h2>
-<p>La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60156.html" target="_blank" rel="noopener">Dirección del Trabajo</a> resume cuatro requisitos del artículo 47:</p>
-<ul><li>Debe tratarse de un establecimiento minero, industrial, comercial, agrícola, otra empresa o una cooperativa.</li><li>Debe perseguir fines de lucro, requisito que no se exige a las cooperativas.</li><li>Debe estar obligado a llevar libros de contabilidad.</li><li>Debe obtener utilidad o excedente líquido en el ejercicio anual correspondiente.</li></ul>
-<p>No basta con que una empresa tenga ventas o dinero en caja. La “utilidad líquida” tiene una determinación tributaria específica y se conoce al cerrar el ejercicio. Tampoco todos los empleadores sin fines de lucro quedan sujetos al mismo régimen. Ante una fundación, corporación, persona natural o régimen contable especial, se debe revisar la situación concreta.</p>
-<p>El derecho no depende de que el trabajador tenga sueldo variable o gane menos que el tope. Esa afirmación, repetida en resúmenes de internet, confunde el límite de pago del artículo 50 con los requisitos para ser beneficiario. Un trabajador con remuneración alta puede tener derecho; simplemente su pago bajo el artículo 50 puede quedar topado.</p>
-
-<h2>Los dos sistemas legales</h2>
-<table><thead><tr><th>Modalidad</th><th>Base</th><th>Límite individual</th><th>Resultado</th></tr></thead><tbody><tr><td>Artículo 47</td><td>Al menos 30% de utilidad o excedente líquido</td><td>No usa el tope 4,75 IMM</td><td>Se distribuye proporcionalmente a lo devengado</td></tr><tr><td>Artículo 50</td><td>25% de remuneraciones del ejercicio</td><td>4,75 IMM por trabajador</td><td>El menor entre 25% y tope aplicable</td></tr></tbody></table>
-<p>En el sistema del artículo 47, el 30% de la utilidad líquida se reparte en proporción a las remuneraciones devengadas por cada trabajador. La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60160.html" target="_blank" rel="noopener">DT describe el procedimiento</a>: se obtiene un factor al relacionar la bolsa a repartir con el total de remuneraciones anuales consideradas y luego se aplica ese factor a la remuneración anual individual.</p>
-<p>En el artículo 50, el empleador queda eximido de repartir el 30% si paga el 25% de lo devengado por cada persona durante el ejercicio, sujeto al tope. El cálculo es individual: dos trabajadores pueden recibir cifras distintas por remuneraciones, meses trabajados o jornada parcial.</p>
-
-<h2>Tope de gratificación 2026</h2>
-<p>La Ley N.º 21.830 fijó desde el 1 de mayo de 2026 un ingreso mínimo mensual de <strong>$553.553</strong> para trabajadores mayores de 18 y hasta 65 años. En el sistema del artículo 50, la DT utiliza el IMM vigente al 31 de diciembre del ejercicio para determinar el límite definitivo.</p>
-<div class="numeric-example"><div class="numeric-example__title">Referencia anual 2026, modalidad artículo 50</div><ul><li>IMM: $553.553</li><li>Tope: 4,75 × $553.553 = $2.629.376,75</li><li>Redondeado al peso: $2.629.377</li><li>Doceava parte referencial: $219.114,73</li></ul><span class="total">Referencia mensual redondeada: $219.115</span></div>
-<p>La doceava parte es útil para anticipos regulares, pero el derecho es anual. Una liquidación no se valida solo comprobando que cada mes diga $219.115. Deben considerarse el ejercicio completo, las remuneraciones efectivamente devengadas, los reajustes de anticipos y las reglas de proporcionalidad.</p>
-
-<h2>Cómo calcular el artículo 50 sin simplificaciones engañosas</h2>
-<ol class="steps"><li>Suma las remuneraciones computables devengadas entre el 1 de enero y el 31 de diciembre, o durante el tiempo efectivamente trabajado.</li><li>Reajusta las remuneraciones cuando corresponda conforme al artículo 50 y la doctrina administrativa.</li><li>Calcula el 25% de la base anual.</li><li>Calcula el tope de 4,75 IMM vigente al 31 de diciembre, ajustándolo por tiempo trabajado o jornada parcial cuando proceda.</li><li>Compara ambos resultados: corresponde el menor bajo esta modalidad.</li><li>Resta los anticipos mensuales debidamente reajustados y paga la diferencia, si existe.</li></ol>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo anual sin alcanzar el tope</div><ul><li>Remuneraciones computables del año: $7.200.000</li><li>25%: $1.800.000</li><li>Tope de referencia: $2.629.377</li></ul><span class="total">Gratificación anual: $1.800.000</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo anual que supera el tope</div><ul><li>Remuneraciones computables del año: $18.000.000</li><li>25%: $4.500.000</li><li>Tope de referencia: $2.629.377</li></ul><span class="total">Gratificación anual topada: $2.629.377</span></div>
-
-<h2>Qué remuneraciones entran en la base</h2>
-<p>La guía de <a href="https://www.dt.gob.cl/portal/1626/w3-article-99034.html" target="_blank" rel="noopener">gratificación legal de la DT</a> indica que, para el artículo 50, se consideran las contraprestaciones en dinero y las adicionales en especie avaluables en dinero recibidas como retribución por los servicios: sueldo, sobresueldo por horas extraordinarias, comisiones, participaciones y bonos remuneracionales, entre otros.</p>
-<p>No todo pago de la liquidación es remuneración. Asignaciones razonables de movilización o colación, viáticos y devoluciones de gastos pueden quedar fuera conforme al artículo 41, siempre que tengan realmente ese carácter. Poner una etiqueta no basta: si un “bono de movilización” encubre pago por el trabajo, su tratamiento puede discutirse.</p>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Revisa la base, no solo el sueldo base</strong><p>Aplicar 25% únicamente al sueldo base puede omitir comisiones, horas extra o bonos que sí son remuneración. Compara las liquidaciones del año y clasifica cada concepto antes de calcular.</p></div></aside>
-
-<h2>Pago mensual: técnicamente es un anticipo</h2>
-<p>La gratificación legal se determina anualmente. Las partes pueden convenir anticipos mensuales en el contrato individual o colectivo. La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60164.html" target="_blank" rel="noopener">DT señala</a> que luego debe efectuarse una liquidación para comprobar si los anticipos reajustados cubren el monto legal y pagar las diferencias a más tardar en abril del año siguiente.</p>
-<p>Por eso la línea “gratificación mensual” en una liquidación no elimina la revisión anual. Si el ingreso mínimo aumentó durante el año, hubo remuneraciones variables o los anticipos no fueron reajustados correctamente, puede existir diferencia.</p>
-<p>Para la reliquidación, la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60162.html" target="_blank" rel="noopener">consulta oficial sobre anticipos</a> instruye reajustar por IPC los pagos mes a mes, sumarlos y compararlos con la obligación definitiva calculada con 4,75 IMM al 31 de diciembre.</p>
-
-<h2>Meses incompletos, ingreso durante el año y licencias</h2>
-<p>Si la relación laboral no cubre todo el ejercicio, el tope anual se aplica proporcionalmente al tiempo trabajado. También se calcula sobre las remuneraciones efectivamente devengadas. Esto es distinto de faltar algunos días dentro de un mes: la DT ha señalado que una ausencia reduce naturalmente la base remuneratoria, pero no convierte el tope anual en un límite diario.</p>
-<p>En licencias médicas existe una regla especial. Si la gratificación se paga anualmente, debe considerarse el subsidio percibido durante la licencia y el empleador paga el beneficio correspondiente. Si hay anticipos mensuales, la entidad pagadora del subsidio puede asumir el componente durante ese período según el caso. No conviene resolverlo restando meses completos sin revisar liquidaciones y certificados.</p>
-
-<h2>Jornada parcial en 2026</h2>
-<p>El artículo 40 bis B permite reducir el tope de 4,75 IMM según la relación entre las horas pactadas en una jornada parcial y la jornada ordinaria. Desde el 26 de abril de 2026, la jornada ordinaria máxima es de 42 horas semanales por la Ley de 40 Horas.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo referencial: contrato de 21 horas semanales</div><ul><li>Proporción: 21 ÷ 42 = 50%</li><li>Tope anual general: $2.629.377</li><li>Tope parcial: $2.629.377 × 50% = $1.314.688,50</li></ul><span class="total">Tope proporcional redondeado: $1.314.689</span></div>
-<p>La reducción se refiere al límite máximo, no a negar el beneficio. Además, “jornada parcial” tiene una definición legal: no todo horario menor a 42 horas autoriza automáticamente prorratear el ingreso mínimo o el tope de la misma manera.</p>
-
-<h2>Gratificación garantizada, convencional y cláusulas del contrato</h2>
-<p>Una gratificación convencional puede ser garantizada —se paga aunque no haya utilidad, si así fue pactado— o depender de condiciones. Si el contrato promete una suma o fórmula más favorable, el empleador no puede sustituirla unilateralmente por el mínimo legal. También puede haber instrumentos colectivos con reglas propias.</p>
-<p>Lee expresiones como “anticipo”, “garantizada”, “artículo 50”, “4,75 IMM” y “incluida en la remuneración ofrecida”. Una oferta de “$1.000.000 bruto incluida gratificación” no es igual a “sueldo base $1.000.000 más gratificación”. La liquidación debe ser coherente con la estructura escrita y con el ingreso mínimo aplicable al sueldo base.</p>
-
-<h2>¿Qué ocurre si la empresa tuvo pérdidas?</h2>
-<p>La existencia de utilidad se determina al cierre del ejercicio. La DT sostiene que, si no hubo utilidad líquida y los pagos eran solo anticipos de gratificación legal, puede discutirse su recuperación bajo reglas y límites específicos. No procede un descuento unilateral e ilimitado del sueldo o finiquito.</p>
-<p>Si el beneficio fue pactado como garantizado, el resultado puede ser distinto porque la obligación contractual no depende de la utilidad. Ante un descuento, revisa el texto del contrato, la autorización escrita y los límites del artículo 58 antes de firmar el finiquito.</p>
-
-<h2>Cómo auditar tu liquidación</h2>
-<ol class="steps"><li>Confirma si tu empleador está sujeto a gratificación y qué modalidad declaró.</li><li>Reúne contrato, anexos, instrumento colectivo y doce liquidaciones.</li><li>Separa remuneraciones de asignaciones no remuneracionales.</li><li>Suma la base anual y calcula 25% si corresponde el artículo 50.</li><li>Comprueba el IMM vigente al 31 de diciembre y la proporcionalidad aplicable.</li><li>Lista cada anticipo, su reajuste y la eventual diferencia.</li><li>Verifica cotizaciones e impuesto en las liquidaciones.</li><li>Solicita por escrito el detalle si la empresa solo entrega una cifra final.</li></ol>
-<p>La gratificación es remuneración imponible y tributable. Afecta el sueldo líquido porque aumenta la base de cotizaciones e impuesto cuando corresponda. Su inclusión en una indemnización por término no debe afirmarse en bloque: depende de si el pago es mensual, anual, esporádico o garantizado y de las reglas del artículo 172.</p>
-
-<h2>Errores frecuentes</h2>
-<ul><li>Decir que solo tienen derecho quienes ganan menos de 4,75 IMM.</li><li>Aplicar 25% únicamente al sueldo base.</li><li>Confundir la doceava parte del tope con el cálculo legal definitivo.</li><li>Usar el ingreso mínimo de enero cuando la ley exige el vigente al 31 de diciembre.</li><li>No reajustar anticipos al hacer la liquidación anual.</li><li>Prorratear el tope por algunos días de ausencia como si fuera diario.</li><li>Confundir gratificación con aguinaldo o bono voluntario.</li><li>Suponer que toda empresa está obligada, incluso sin utilidad o sin los requisitos del artículo 47.</li></ul>
-
-<p>Para estimar una situación concreta usa la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a> y contrasta el resultado con la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a>. Si existe controversia sobre utilidades, descuentos o cláusulas, presenta una consulta ante la Dirección del Trabajo o busca asesoría laboral.</p>
-
-<h2>Fuentes consultadas</h2>
-<p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo en BCN</a>, la guía temática y consultas de la Dirección del Trabajo sobre artículos 47 y 50, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley N.º 21.830</a> sobre ingreso mínimo y dictámenes sobre anticipos, jornada parcial y períodos incompletos. Las preguntas observadas en foros se utilizaron para detectar confusiones comunes, no como evidencia legal.</p>`,
-  },
-  {
-    slug: 'calcular-indemnizacion-por-anos',
-    title: 'Cómo calcular la indemnización por años de servicio',
-    description:
-      'Guía para calcular la indemnización: 30 días por año, tope 11 años, base 90 UF. Cuándo corresponde y cuándo no. Art. 163 Código del Trabajo.',
-    date: '2026-03-30',
-    updatedAt: '2026-07-13',
-    category: 'laboral',
-    readingTime: 16,
-    relatedGuia: 'finiquito-laboral-chile',
-    keywords: [
-      'indemnización años servicio',
-      'Art. 163',
-      'despido injustificado',
-      '30 días por año',
-      'tope 11 años',
-      'recargo art 168',
-    ],
-    relatedCalculators: [
-      'calculadora-indemnizacion-anos-servicio',
-      'calculadora-finiquito',
-      'calculadora-intereses-mora',
-    ],
-    content: `<p class="article-lead">La indemnización por años de servicio no se paga por cualquier término de contrato ni se calcula solo con el sueldo base. La causal, la antigüedad, la última remuneración mensual y dos topes legales cambian el resultado. También hay que separar esta indemnización del aviso previo, vacaciones, recargos judiciales y nulidad del despido.</p>
-
-<h2>Qué es la indemnización por años de servicio</h2>
-<p>El artículo 163 del Código del Trabajo establece una indemnización equivalente a treinta días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses prestados continuamente al mismo empleador. Para los contratos iniciados desde el 14 de agosto de 1981, el límite general es 330 días de remuneración, equivalente a once años.</p>
-<p>No es un ahorro que se acumule y pueda retirarse al finalizar cualquier relación laboral. La obligación legal ordinaria nace cuando el empleador termina un contrato de al menos un año invocando las causales del artículo 161: necesidades de la empresa, establecimiento o servicio, o desahucio en los casos en que la ley permite usarlo. También puede surgir por sentencia si otra causal fue declarada injustificada, indebida o improcedente.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Legal y pactada no son lo mismo</strong><p>Un contrato individual, colectivo o acuerdo de salida puede reconocer una indemnización convencional más favorable o pagadera en otras causales. En ese caso hay que aplicar el pacto válido, no asumir que todos los términos tienen la cobertura mínima del artículo 163.</p></div></aside>
-
-<h2>Cuándo corresponde y cuándo no</h2>
-<table><thead><tr><th>Forma de término</th><th>Regla general sobre años de servicio</th></tr></thead><tbody><tr><td>Necesidades de la empresa, art. 161</td><td>Corresponde si el contrato duró un año o más</td></tr><tr><td>Desahucio del empleador, cuando procede</td><td>Corresponde bajo el art. 163</td></tr><tr><td>Renuncia, art. 159 N.º 2</td><td>No corresponde legalmente, salvo pacto</td></tr><tr><td>Mutuo acuerdo, art. 159 N.º 1</td><td>Solo la suma que las partes acuerden</td></tr><tr><td>Vencimiento del plazo, art. 159 N.º 4</td><td>No corresponde por la sola causal</td></tr><tr><td>Conclusión del trabajo, art. 159 N.º 5</td><td>No corresponde por la sola causal</td></tr><tr><td>Caso fortuito o fuerza mayor, art. 159 N.º 6</td><td>No corresponde por la sola causal</td></tr><tr><td>Causal disciplinaria del art. 160</td><td>No corresponde si está bien aplicada; puede ordenarse si un tribunal la declara indebida</td></tr></tbody></table>
-<p>La fuerza mayor exige un hecho inimputable, imprevisible e irresistible. Aunque una situación cumpla esos requisitos, el artículo 159 N.º 6 no concede automáticamente indemnización legal por años. Si la causal fue aplicada sin cumplirlos, el trabajador puede impugnarla judicialmente y el resultado cambia solo con el acuerdo o sentencia correspondiente.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>“Me despidieron” no basta para calcular</strong><p>Obtén la carta de término y verifica el artículo y numeral exactos. Dos personas con igual sueldo y antigüedad pueden recibir resultados distintos si una fue despedida por el artículo 161 y la otra por vencimiento de plazo.</p></div></aside>
-
-<h2>Paso 1: contar años y la fracción</h2>
-<p>Se cuenta el servicio continuo al mismo empleador desde el inicio del vínculo hasta la separación. Cada año completo vale treinta días. Solo una <strong>fracción superior a seis meses</strong> se redondea a un año adicional. Seis meses exactos no superan el umbral; seis meses y un día sí.</p>
-<ul><li>3 años y 5 meses: se pagan 3 años.</li><li>3 años y 6 meses exactos: se pagan 3 años.</li><li>3 años, 6 meses y 1 día: se pagan 4 años.</li><li>10 años y 8 meses: se pagan 11 años.</li><li>14 años en un contrato iniciado en 2012: opera el tope general de 11 años.</li></ul>
-<p>Licencias, feriado y otros períodos en que el contrato continúa vigente no borran la antigüedad. Si hubo finiquitos, cambio real de empleador, continuidad laboral discutida o transferencia de empresa, se necesita revisar documentos y la aplicación del artículo 4.</p>
-
-<h2>Paso 2: determinar la última remuneración mensual</h2>
-<p>El artículo 172 define una base más amplia que el sueldo base: comprende toda cantidad que la persona esté percibiendo por la prestación de sus servicios al terminar el contrato, incluidas cotizaciones de cargo del trabajador y regalías o especies avaluadas en dinero.</p>
-<p>La Dirección del Trabajo incluye, cuando se pagan mensualmente y tienen permanencia, conceptos como sueldo, comisiones, bonos mensuales, semana corrida, gratificación mensual, colación, movilización, cheques restaurante, desgaste de herramientas y ciertos viáticos. La doctrina vigente de 1998 reconsideró el criterio antiguo que excluía colación y movilización: si son mensuales, deben examinarse para la base del artículo 172.</p>
-<p>La ley excluye expresamente las horas extraordinarias, la asignación familiar legal y beneficios esporádicos o pagados una vez al año, como aguinaldos o gratificación anual. Una etiqueta en la liquidación no decide por sí sola. Un bono “extraordinario” pagado todos los meses puede ser permanente; un reembolso real y ocasional puede no representar contraprestación por servicios.</p>
-<aside class="callout callout--legal"><span class="callout__icon" aria-hidden="true">⚖️</span><div class="callout__body"><strong>Colación y movilización mensuales</strong><p>No las elimines automáticamente del cálculo. La consulta vigente de la DT y el Dictamen N.º 4466/308 indican que procede incluir las asignaciones percibidas mensualmente para la indemnización legal y el aviso previo.</p></div></aside>
-
-<h2>Remuneración variable y licencias</h2>
-<p>Cuando la remuneración es variable, el inciso segundo del artículo 172 usa el promedio de lo percibido en los últimos tres meses calendario. Si hubo licencia médica durante parte de ese período, la DT indica considerar tres meses anteriores completos cubiertos con remuneración, para evitar que un mes incompleto distorsione la base.</p>
-<p>En remuneración mixta se conserva el componente fijo y se calcula correctamente el variable conforme a su periodicidad. No se debe promediar todo el bruto si incluye pagos excluidos, ni escoger los tres mejores meses. Reúne al menos las últimas seis liquidaciones para identificar bonos permanentes, variables y meses afectados por licencia.</p>
-
-<h2>Paso 3: aplicar el tope de 90 UF</h2>
-<p>La remuneración mensual base no puede superar <strong>90 UF del último día del mes anterior al pago</strong>. Por eso no existe un único tope en pesos para todo 2026. Si el pago se realiza en agosto, se usa la UF del 31 de julio; si cambia el mes del pago, cambia la conversión.</p>
-<p>El tope de 90 UF se aplica también a trabajadores contratados antes del 14 de agosto de 1981. La excepción histórica elimina el máximo de once años, no el límite mensual de la base. Para calcular, consulta el valor oficial de la UF de la fecha exigida y multiplica por 90; después compara ese resultado con la última remuneración determinada.</p>
-
-<h2>Paso 4: multiplicar por los años pagables</h2>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo con 7 años y 8 meses</div><ul><li>Última remuneración mensual computable: $850.000</li><li>Antigüedad: 7 años y 8 meses</li><li>Fracción superior a 6 meses: suma un año</li><li>Años pagables: 8</li><li>$850.000 × 8 = $6.800.000</li></ul><span class="total">Indemnización por años: $6.800.000</span></div>
-<p>Este ejemplo supone causal del artículo 161, contrato posterior a 1981, base inferior a 90 UF y ausencia de un pacto más favorable. No incluye aviso previo, vacaciones, remuneraciones pendientes, descuento del seguro de cesantía ni recargo judicial.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo afecto al tope de años</div><ul><li>Contrato iniciado en 2008 y terminado en 2026</li><li>Antigüedad real: 18 años</li><li>Máximo legal: 11 años</li><li>Base computable: $1.200.000</li><li>$1.200.000 × 11 = $13.200.000</li></ul><span class="total">Indemnización legal: $13.200.000</span></div>
-
-<h2>Indemnización sustitutiva del aviso previo</h2>
-<p>Cuando el empleador aplica el artículo 161 sin avisar por escrito con al menos treinta días de anticipación, debe pagar además una indemnización equivalente a la última remuneración mensual. Utiliza la base del artículo 172 y el mismo tope de 90 UF. No se multiplica por antigüedad.</p>
-<p>Con los datos del primer ejemplo, un término inmediato por necesidades de la empresa podría sumar $850.000 por aviso previo a los $6.800.000 por años. Si el aviso se entregó correctamente con treinta días, no se agrega esa sustitución. Los otros componentes del finiquito se calculan aparte.</p>
-
-<h2>Recargos cuando un tribunal declara injustificado el despido</h2>
-<p>El recargo del artículo 168 no se activa solo porque el trabajador discrepe ni lo puede declarar la calculadora. Requiere una sentencia o un acuerdo que lo reconozca. El porcentaje se aplica a la indemnización por años de servicio, no indiscriminadamente a todo el finiquito.</p>
-<table><thead><tr><th>Causal aplicada y desestimada</th><th>Aumento legal</th></tr></thead><tbody><tr><td>Artículo 161 aplicado improcedentemente</td><td>30%</td></tr><tr><td>Causales del artículo 159 injustificadas o despido sin causal legal</td><td>50%</td></tr><tr><td>Causales del artículo 160 aplicadas indebidamente</td><td>80%</td></tr><tr><td>Artículo 160 N.º 1, 5 o 6, además declarado carente de motivo plausible</td><td>100%</td></tr></tbody></table>
-<p>La tabla corrige una confusión habitual: despedir sin invocar causal no lleva automáticamente un recargo de 100%; la letra b) del artículo 168 establece 50%. El 100% es una hipótesis agravada y específica para determinados numerales del artículo 160.</p>
-<div class="numeric-example"><div class="numeric-example__title">Recargo de 30% sobre el primer ejemplo</div><ul><li>Indemnización por años: $6.800.000</li><li>30%: $2.040.000</li><li>Total años más recargo: $8.840.000</li></ul><span class="total">No incluye las demás prestaciones</span></div>
-
-<h2>Cotizaciones impagas y nulidad del despido</h2>
-<p>El empleador debe acreditar el pago íntegro de cotizaciones previsionales hasta el mes anterior al despido. Si están impagas, puede operar la sanción conocida como nulidad del despido: el término no produce el efecto de poner fin al contrato para esta consecuencia hasta que se convalida, y pueden adeudarse remuneraciones y prestaciones entre la separación y la comunicación que acredita el pago.</p>
-<p>La nulidad no es una fórmula que se sume automáticamente a “un mes por año”. Requiere verificar cotizaciones, comunicación y situación procesal. Descarga certificados de AFP, salud y AFC; no te limites a la liquidación, porque esta puede mostrar un descuento que nunca fue enterado.</p>
-
-<h2>Finiquito, pago y reserva de derechos</h2>
-<p>El empleador debe poner el finiquito y su pago a disposición dentro de diez días hábiles desde la separación. Antes de firmar, compara carta de término, fechas, base, años, aviso, feriado, remuneraciones y descuentos. Un pago en cuotas de indemnizaciones requiere acuerdo y formalidades; no es una decisión unilateral del empleador.</p>
-<p>Si existe una diferencia, una reserva de derechos específica puede permitir recibir lo no discutido sin renunciar a reclamar lo reservado. Redáctala identificando conceptos y períodos, no como una frase vaga. La eficacia concreta puede depender del documento y del conflicto, por lo que conviene asesorarse antes de firmar.</p>
-
-<h2>Plazo para reclamar un despido</h2>
-<p>La acción por despido injustificado, indebido, improcedente o indirecto debe presentarse dentro de <strong>60 días hábiles</strong> desde la separación. Un reclamo administrativo ante la Inspección del Trabajo suspende el plazo mientras se tramita, pero en ningún caso se puede acudir al tribunal después de 90 días hábiles desde el despido.</p>
-<p>Presentar un reclamo ante la DT puede abrir una conciliación, pero no reemplaza la demanda si no hay acuerdo. El plazo es corto y su cómputo es legal; si se acerca el límite, busca orientación de la Defensoría Laboral o de un abogado.</p>
-
-<h2>Checklist para auditar el cálculo</h2>
-<ol class="steps"><li>Identifica causal y fecha de separación en la carta.</li><li>Calcula años completos y comprueba si la fracción supera seis meses.</li><li>Reúne contrato, anexos y últimas seis liquidaciones.</li><li>Clasifica pagos mensuales, variables, esporádicos y exclusiones legales.</li><li>Incluye colación, movilización y beneficios mensuales cuando corresponda.</li><li>Promedia remuneraciones variables con meses completos.</li><li>Consulta 90 UF del último día del mes anterior al pago.</li><li>Aplica el máximo de once años, salvo la excepción histórica.</li><li>Separa aviso previo y demás conceptos del finiquito.</li><li>No agregues recargo judicial sin sentencia o acuerdo.</li><li>Verifica certificados de cotizaciones.</li><li>Controla el plazo de 60 días hábiles si impugnarás.</li></ol>
-
-<h2>Errores frecuentes</h2>
-<ul><li>Creer que toda renuncia o mutuo acuerdo paga un mes por año.</li><li>Incluir fuerza mayor como causal indemnizable automática.</li><li>Excluir colación y movilización pese a su pago mensual.</li><li>Sumar horas extra o aguinaldos anuales a la base.</li><li>Usar la UF del día del despido en vez de la fecha legal del tope.</li><li>Redondear seis meses exactos como un año adicional.</li><li>Aplicar 100% a cualquier despido sin causal.</li><li>Confundir indemnización por años con aviso previo o vacaciones.</li><li>Firmar sin revisar cotizaciones ni reservar una diferencia concreta.</li></ul>
-
-<p>Estima el componente principal con la <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">calculadora de indemnización</a> y arma el término completo con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>. Para causales discutidas, continuidad laboral o remuneraciones complejas, el resultado es orientativo y debe revisarse profesionalmente.</p>
-
-<h2>Fuentes consultadas</h2>
-<p>Contenido verificado al 13 de julio de 2026 con los artículos 159 a 172 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo vigente en Ley Chile</a>, las consultas de la DT sobre <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">conceptos incluidos en la última remuneración</a>, <a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">tope de 90 UF</a> y <a href="https://www.dt.gob.cl/portal/1626/w3-article-60603.html" target="_blank" rel="noopener">promedio variable con licencia</a>, además del trámite oficial de <a href="https://www.dt.gob.cl/portal/1626/w3-article-125086.html" target="_blank" rel="noopener">reclamo por despido y sus plazos</a>. Los relatos de foros se usaron para identificar errores recurrentes sobre colación, fuerza mayor y recargos; no para establecer derechos.</p>`,
   },
   {
     slug: 'reajuste-arriendo-uf-2026',

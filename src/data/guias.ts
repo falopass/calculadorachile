@@ -60,6 +60,11 @@ export interface Guia {
   relatedArticles: string[];
   /** Fuentes oficiales citadas en la guía. */
   sources: { label: string; url: string }[];
+  /**
+   * `calculator.id` del catálogo para embeber la calculadora completa
+   * antes de la primera sección. Si se omite, no se embebe nada.
+   */
+  embedCalculatorId?: string;
 }
 
 export const guias: Guia[] = [
@@ -68,6 +73,7 @@ export const guias: Guia[] = [
   // ============================================
   {
     slug: 'sueldo-liquido-chile',
+    embedCalculatorId: 'sueldo-liquido',
     title: 'Sueldo líquido en Chile 2026: cómo se calcula paso a paso',
     intent: '¿Cuánto recibo de sueldo líquido si gano X bruto?',
     description:
@@ -98,11 +104,7 @@ export const guias: Guia[] = [
       'calculadora-gratificacion-legal',
       'calculadora-horas-extra',
     ],
-    relatedArticles: [
-      'diferencia-sueldo-bruto-liquido',
-      'horas-extra-jornada-42-horas-chile-2026',
-      'como-funciona-gratificacion-legal',
-    ],
+    relatedArticles: ['horas-extra-jornada-42-horas-chile-2026'],
     sources: [
       { label: 'Dirección del Trabajo (DT)', url: 'https://www.dt.gob.cl' },
       { label: 'Superintendencia de Pensiones', url: 'https://www.spensiones.cl' },
@@ -265,6 +267,16 @@ export const guias: Guia[] = [
 </ul>`,
       },
       {
+        id: 'otros-descuentos-auditar-liquidacion',
+        title: 'Otros descuentos y cómo auditar tu liquidación',
+        level: 2,
+        html: `<p>Además de las cotizaciones, un líquido menor puede explicarse por descuentos personales: cuota o diferencia del plan de Isapre, crédito de caja de compensación, anticipos de sueldo, cuota sindical, ahorro previsional voluntario, pensión alimenticia ordenada judicialmente, descuentos autorizados por escrito dentro de los límites legales, y ausencias o atrasos correctamente determinados.</p>
+<p>No todos tienen la misma prioridad ni límite. El artículo 58 del Código del Trabajo regula descuentos obligatorios, autorizados y prohibidos: un empleador no puede descontar unilateralmente pérdidas, herramientas o errores de caja sin fundamento y procedimiento.</p>
+<p>Los aportes del empleador (seguro de accidentes, SIS, seguro de cesantía a su cargo y el aporte de la reforma previsional) elevan el costo de contratación, pero <strong>no se descuentan del sueldo del trabajador</strong>. Si una liquidación resta "aporte empleador" del líquido, solicita la corrección y el fundamento. Lo mismo aplica al SIS (1,62% desde abril de 2026): en trabajadores dependientes es de cargo del empleador.</p>
+<p>Ojo también con las ofertas: "$1.000.000 bruto incluida gratificación" significa que el total ofrecido ya incorpora esa línea; no es $1.000.000 más gratificación. El sueldo base debe respetar por sí mismo el ingreso mínimo aplicable y la estructura debe aparecer en contrato y liquidación.</p>
+<p>Para auditar tu liquidación: compara sueldo base, jornada y gratificación con el contrato; separa haberes imponibles y no imponibles; verifica la comisión de tu AFP en la fuente oficial del mes; aplica 10%, comisión, salud y cesantía sobre la base y el tope correctos; confirma que ningún aporte del empleador reduzca tu líquido; y reclama por escrito cualquier diferencia, guardando contrato, liquidación y comprobante.</p>`,
+      },
+      {
         id: 'preguntas-frecuentes',
         title: 'Preguntas frecuentes',
         level: 2,
@@ -320,7 +332,6 @@ export const guias: Guia[] = [
       'calculadora-intereses-mora',
     ],
     relatedArticles: [
-      'calcular-indemnizacion-por-anos',
       'seguro-cesantia-finiquito-2026-afc',
       'finiquito-2026-ejemplo-sueldo-minimo',
     ],
@@ -1041,7 +1052,7 @@ export const guias: Guia[] = [
       'calculadora-pgu',
       'calculadora-cotizacion-independientes',
     ],
-    relatedArticles: ['diferencia-sueldo-bruto-liquido'],
+    relatedArticles: [],
     sources: [
       {
         label: 'Superintendencia de Pensiones — nueva cotización del empleador',
@@ -1584,7 +1595,7 @@ export const guias: Guia[] = [
       'calculadora-aguinaldo',
       'calculadora-pgu',
     ],
-    relatedArticles: ['diferencia-sueldo-bruto-liquido', 'comparativa-comisiones-afp-2026'],
+    relatedArticles: ['comparativa-comisiones-afp-2026'],
     sources: [
       {
         label: 'Ley 14.908 sobre pago de pensiones de alimentos',
@@ -1974,7 +1985,7 @@ export const guias: Guia[] = [
       'calculadora-plusvalia',
       'calculadora-operacion-renta',
     ],
-    relatedArticles: ['diferencia-sueldo-bruto-liquido'],
+    relatedArticles: [],
     sources: [
       { label: 'Servicio de Impuestos Internos (SII)', url: 'https://www.sii.cl' },
       {

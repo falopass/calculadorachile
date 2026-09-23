@@ -35,6 +35,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import TocSticky from '@/components/article/TocSticky';
 import ReadingProgress from '@/components/article/ReadingProgress';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import EmbeddedCalculator from '@/components/calculator/EmbeddedCalculator';
 import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 import {
   articleSchema,
@@ -165,6 +166,9 @@ export default async function GuiaPage({ params }: PageProps) {
 
   const url = absoluteUrl(`/guias/${guia.slug}`);
 
+  const embeddedCalculator = guia.embedCalculatorId
+    ? calculators.find((c) => c.id === guia.embedCalculatorId)
+    : undefined;
   const relatedCalcs = guia.relatedCalculators
     .map((s) => calculators.find((c) => c.slug === s))
     .filter((c): c is NonNullable<typeof c> => c !== undefined && !c.noIndex);
@@ -368,6 +372,8 @@ export default async function GuiaPage({ params }: PageProps) {
 
             {/* Dashboard de indicadores (solo guía de indicadores) */}
             {isIndicatorGuide(guia.slug) && <IndicatorDashboard />}
+
+            {embeddedCalculator && <EmbeddedCalculator calculator={embeddedCalculator} />}
 
             {/* Secciones con iconos */}
             <div className="space-y-10 md:space-y-12">

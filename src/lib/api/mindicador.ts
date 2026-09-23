@@ -43,6 +43,12 @@ export interface MindicadorValores {
   euro: number | null;
   /** ISO date del último valor de UF (la fuente fresca por defecto). */
   asOf: string | null;
+  /** Fecha reportada por cada indicador (ISO completo tal como lo entrega la API). */
+  fechas: {
+    uf: string | null;
+    utm: string | null;
+    dolar: string | null;
+  };
 }
 
 /**
@@ -56,6 +62,7 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
     dolar: null,
     euro: null,
     asOf: null,
+    fechas: { uf: null, utm: null, dolar: null },
   };
 
   let response: Response;
@@ -96,5 +103,10 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
     dolar: safeNumber(data.dolar?.valor),
     euro: safeNumber(data.euro?.valor),
     asOf: data.uf?.fecha ?? data.dolar?.fecha ?? data.fecha ?? null,
+    fechas: {
+      uf: data.uf?.fecha ?? null,
+      utm: data.utm?.fecha ?? null,
+      dolar: data.dolar?.fecha ?? null,
+    },
   };
 }

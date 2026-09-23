@@ -297,12 +297,6 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'AFP Uno cobra 0,46% y ProVida 1,45% en 2026. Compara las 7 comisiones y calcula cuánto pierdes al año en la AFP equivocada. Dato oficial SP.', // 140
   },
 
-  'como-funciona-gratificacion-legal': {
-    seoTitle: 'Gratificación Legal 2026: ¿cuánto me corresponde?', // 49
-    seoDescription:
-      'Descubre cuánto te toca de gratificación legal en 2026 con el sueldo mínimo de $553.553: 25% del sueldo, tope 4,75 IMM. Guía con datos DT.', // 138
-  },
-
   'subsidios-minvu-2026-guia': {
     seoTitle: 'Subsidio MINVU 2026: ¿cuál me corresponde? | Simula', // 51
     seoDescription:
@@ -321,22 +315,10 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'El tope imponible 2026 es 90 UF (no 89,9) desde febrero, y 135,2 UF en cesantía. Mira cuánto cotizas si tu sueldo supera el tope, con ejemplo.', // 142
   },
 
-  'diferencia-sueldo-bruto-liquido': {
-    seoTitle: 'Sueldo Bruto vs Líquido 2026: diferencia real en $', // 50
-    seoDescription:
-      'Cuánto te descuentan de AFP, salud y cesantía en 2026. Ejemplo de bruto a líquido y calculadora gratis. Chile actualizado.', // 126
-  },
-
   'cae-renegociacion-condonacion-2026': {
     seoTitle: 'CAE 2026: cuota, renegociación y condonación', // 46
     seoDescription:
       'Cómo funciona el CAE en 2026: tasa 2%, plazos, condonación a 20 años y opciones si no puedes pagar. Simula tu cuota gratis.', // 130
-  },
-
-  'calcular-indemnizacion-por-anos': {
-    seoTitle: 'Indemnización por Años de Servicio 2026: calcula', // 50
-    seoDescription:
-      'Cómo calcular la indemnización por años de servicio en Chile: 30 días por año, tope 90 UF. Ejemplo y calculadora gratis.', // 126
   },
 
   'permiso-circulacion-segunda-cuota-agosto-2026': {

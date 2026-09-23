@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AUTHOR } from '@/lib/seo/author';
 import PremiumCalculatorShell from '@/components/calculator/PremiumCalculatorShell';
@@ -13,10 +12,23 @@ import CalculatorMethodology from '@/components/calculator/CalculatorMethodology
 import CalculatorNormativeTable from '@/components/calculator/CalculatorNormativeTable';
 import PremiumLoadingIndicator from '@/components/calculator/PremiumLoadingIndicator';
 import { calculators } from '@/data/calculators';
-import { loadCalculationFn, type CalculateFn } from '@/lib/calculations/load-calculator';
+import { useCalculationFn } from '@/lib/hooks/useCalculationFn';
 import { getRelatedCalculators } from '@/lib/seo/related-calculators';
 import { getCategoryClusterLinks } from '@/lib/seo/category-clusters';
-import { useValues } from '@/lib/context/ValuesContext';
+import type { LiveKind } from '@/lib/seo/live-value-title';
+import type { QuickAnswer } from '@/data/calculator-quick-answers';
+
+/** Valor en vivo resuelto server-side (UTM/UF/dólar) para el bloque SSR. */
+export interface LiveValueBlock {
+  kind: LiveKind;
+  value: number;
+  /** H2 ya formateado, ej. "Valor UTM septiembre 2026: $71.721". */
+  heading: string;
+  /** Fecha formateada dd-mm-aaaa (America/Santiago). */
+  date: string;
+  sourceLabel: string;
+  rows: { label: string; value: string }[];
+}
 
 interface CalculatorPageClientProps {
   calculator: import('@/types/calculator').Calculator;
@@ -29,6 +41,10 @@ interface CalculatorPageClientProps {
   guideTitle?: string;
   /** Tiempo de lectura estimado en minutos (para mostrar en el bloque). */
   guideReadingTime?: number;
+  /** Valor en vivo fresco (solo conversores UTM/UF/dólar). */
+  liveValue?: LiveValueBlock;
+  /** Contenido answer-first para calculadoras hero. */
+  quickAnswer?: QuickAnswer | null;
 }
 
 function buildSeoIntro(calculator: import('@/types/calculator').Calculator): string {
@@ -164,53 +180,18 @@ export default function CalculatorPageClient({
   guideUrl,
   guideTitle,
   guideReadingTime,
+  liveValue,
+  quickAnswer,
 }: CalculatorPageClientProps) {
-  const { uf, utm } = useValues();
-  const [calculateFn, setCalculateFn] = useState<CalculateFn | null>(null);
-  const [missing, setMissing] = useState(false);
-
-  // Al cambiar de calculadora, limpia el fn para mostrar skeleton (no al
-  // refrescar UF: ahí se intercambia el adapter en caliente).
-  useEffect(() => {
-    setCalculateFn(null);
-    setMissing(false);
-  }, [calculator.id]);
-
-  // Carga perezosa del módulo + inyección de UF/UTM en vivo.
-  useEffect(() => {
-    let cancelled = false;
-
-    loadCalculationFn(calculator.id, {
-      valorUF: uf > 0 ? uf : undefined,
-      valorUTM: utm > 0 ? utm : undefined,
-    })
-      .then((fn) => {
-        if (cancelled) return;
-        if (fn) {
-          setCalculateFn(() => fn);
-          setMissing(false);
-        } else {
-          setCalculateFn(null);
-          setMissing(true);
-        }
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setCalculateFn(null);
-        setMissing(true);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [calculator.id, uf, utm]);
+  const { calculateFn, missing } = useCalculationFn(calculator.id);
 
   const seoIntroText = buildSeoIntro(calculator);
+  const title = quickAnswer?.h1 ?? calculator.name;
 
   if (missing) {
     return (
       <CalculatorPageLayout
-        title={calculator.name}
+        title={title}
         description={calculator.description}
         calculatorId={calculator.id}
         lastReviewed={calculator.lastReviewed}
@@ -262,7 +243,7 @@ export default function CalculatorPageClient({
 
   return (
     <CalculatorPageLayout
-      title={calculator.name}
+      title={title}
       description={calculator.description}
       calculatorId={calculator.id}
       lastReviewed={calculator.lastReviewed}
@@ -276,6 +257,49 @@ export default function CalculatorPageClient({
         />
       )}
 
+      {quickAnswer && (
+        <p className="mb-6 max-w-3xl text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base">
+          {quickAnswer.lead}
+        </p>
+      )}
+
+      {liveValue && (
+        <section
+          className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6"
+          aria-label={liveValue.heading}
+        >
+          <h2 className="text-lg font-semibold text-[var(--foreground)] md:text-xl">
+            {liveValue.heading}
+          </h2>
+          <p className="mt-1 text-xs text-[var(--foreground-muted)]">
+            Fuente: {liveValue.sourceLabel} · actualizado {liveValue.date}
+          </p>
+          <table className="mt-4 w-full text-sm">
+            <caption className="sr-only">
+              Equivalencias calculadas con el valor vigente del indicador.
+            </caption>
+            <tbody>
+              {liveValue.rows.map((row) => (
+                <tr
+                  key={row.label}
+                  className="border-b border-[var(--border)] last:border-0"
+                >
+                  <th
+                    scope="row"
+                    className="py-2 pr-4 text-left font-medium text-[var(--foreground-secondary)]"
+                  >
+                    {row.label}
+                  </th>
+                  <td className="py-2 text-right tabular-nums font-semibold text-[var(--foreground)]">
+                    {row.value}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      )}
+
       {!calculateFn ? (
         <CalculatorLoadingState calculator={calculator} />
       ) : (
@@ -283,6 +307,61 @@ export default function CalculatorPageClient({
       )}
 
       <CalculatorReferenceContent calculator={calculator} />
+
+      {quickAnswer?.example && (
+        <section className="mt-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 md:mt-10 md:p-6">
+          <h2 className="text-lg font-semibold text-[var(--foreground)] md:text-xl">
+            Ejemplos calculados
+          </h2>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[28rem] text-sm">
+              <caption className="caption-bottom pt-3 text-left text-xs text-[var(--foreground-muted)]">
+                {quickAnswer.example.caption}
+              </caption>
+              <thead>
+                <tr className="border-b border-[var(--border)]">
+                  {quickAnswer.example.headers.map((h) => (
+                    <th
+                      key={h}
+                      scope="col"
+                      className="py-2 pr-4 text-left font-semibold text-[var(--foreground)] last:pr-0"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {quickAnswer.example.rows.map((row, i) => (
+                  <tr
+                    key={i}
+                    className="border-b border-[var(--border)] last:border-0"
+                  >
+                    {row.map((cell, j) =>
+                      j === 0 ? (
+                        <th
+                          key={j}
+                          scope="row"
+                          className="py-2 pr-4 text-left font-medium text-[var(--foreground-secondary)]"
+                        >
+                          {cell}
+                        </th>
+                      ) : (
+                        <td
+                          key={j}
+                          className="py-2 pr-4 tabular-nums text-[var(--foreground)] last:pr-0"
+                        >
+                          {cell}
+                        </td>
+                      ),
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       <CalculatorNormativeTable calculatorId={calculator.id} />
 
@@ -305,9 +384,11 @@ export default function CalculatorPageClient({
             </svg>
             Sobre {calculator.name.toLowerCase()}
           </h2>
-          <p className="text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
-            {seoIntroText}
-          </p>
+          {!quickAnswer && (
+            <p className="text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
+              {seoIntroText}
+            </p>
+          )}
           <p className="mt-3 text-sm md:text-base text-[var(--foreground-secondary)] leading-relaxed">
             Ingresa los datos solicitados arriba y los resultados se mostrarán automáticamente, sin
             necesidad de hacer clic en ningún botón.

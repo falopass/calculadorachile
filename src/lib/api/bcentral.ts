@@ -107,25 +107,43 @@ export async function fetchLatestValue(codigo: string): Promise<number | null> {
 }
 
 /**
+ * Igual que `fetchLatestValue` pero conserva la fecha del último dato
+ * (YYYY-MM-DD). Útil para decidir si un valor sigue vigente.
+ */
+export async function fetchLatestEntry(
+  codigo: string,
+): Promise<{ valor: number; fecha: string } | null> {
+  const values = await fetchBCentral(codigo);
+  if (values.length === 0) return null;
+  const last = values[values.length - 1];
+  return Number.isFinite(last.valor) ? { valor: last.valor, fecha: last.fecha } : null;
+}
+
+/**
  * Obtiene UF, UTM, Dólar observado/venta y Euro en paralelo.
  * Cada serie devuelve `null` si su request individual falló.
  */
 export async function fetchAllCurrentValues() {
   const [uf, utm, dolarObs, dolarVta, euro] = await Promise.all([
-    fetchLatestValue(BCENTRAL_CODES.UF_DIARIO),
-    fetchLatestValue(BCENTRAL_CODES.UTM_MENSUAL),
-    fetchLatestValue(BCENTRAL_CODES.DOLAR_OBSERVADO),
-    fetchLatestValue(BCENTRAL_CODES.DOLAR_VENTA),
-    fetchLatestValue(BCENTRAL_CODES.EURO_OBSERVADO),
+    fetchLatestEntry(BCENTRAL_CODES.UF_DIARIO),
+    fetchLatestEntry(BCENTRAL_CODES.UTM_MENSUAL),
+    fetchLatestEntry(BCENTRAL_CODES.DOLAR_OBSERVADO),
+    fetchLatestEntry(BCENTRAL_CODES.DOLAR_VENTA),
+    fetchLatestEntry(BCENTRAL_CODES.EURO_OBSERVADO),
   ]);
 
   return {
-    uf,
-    utm,
+    uf: uf?.valor ?? null,
+    utm: utm?.valor ?? null,
     dolar: {
-      observado: dolarObs,
-      venta: dolarVta,
+      observado: dolarObs?.valor ?? null,
+      venta: dolarVta?.valor ?? null,
     },
-    euro,
+    euro: euro?.valor ?? null,
+    fechas: {
+      uf: uf?.fecha ?? null,
+      utm: utm?.fecha ?? null,
+      dolar: dolarObs?.fecha ?? null,
+    },
   };
 }

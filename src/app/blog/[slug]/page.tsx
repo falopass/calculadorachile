@@ -23,6 +23,7 @@ import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
 import { seoOverrides } from '@/data/seo-overrides';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import EmbeddedCalculator from '@/components/calculator/EmbeddedCalculator';
 import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 
 interface BlogArticlePageProps {
@@ -76,6 +77,9 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
   const wordCount = estimateWordCount(article.content);
   const readingTime = estimateReadingTime(wordCount);
 
+  const embeddedCalculator = article.embedCalculatorId
+    ? calculators.find((c) => c.id === article.embedCalculatorId)
+    : undefined;
   const relatedCalcs = article.relatedCalculators
     .map((s) => calculators.find((c) => c.slug === s))
     .filter((c): c is NonNullable<typeof c> => c !== undefined && !c.noIndex);
@@ -188,8 +192,10 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
       <article className="container-base py-8 md:py-12">
         <div className="mx-auto min-w-0 max-w-3xl">
+          {embeddedCalculator && <EmbeddedCalculator calculator={embeddedCalculator} />}
+
           {/* Contenido en card */}
-          <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm sm:p-6 md:p-10">
+          <div className="mt-8 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm sm:p-6 md:p-10">
             {/* Estilos tipográficos: globals.css `.prose` (no hay plugin typography). */}
             <div
               className="prose min-w-0 max-w-none"

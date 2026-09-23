@@ -996,7 +996,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'utm-clp',
     name: 'Conversor UTM ↔ CLP',
     description:
-      'Convierte entre UTM y pesos chilenos con el valor actualizado de marzo 2026. Calcula multas, permisos y trámites tributarios.',
+      'Convierte entre UTM y pesos chilenos con el valor oficial del mes. Calcula multas, permisos y trámites tributarios.',
     slug: 'calculadora-utm-clp',
     category: 'conversiones',
     featured: true,
@@ -1034,12 +1034,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué es la UTM?',
         answer:
-          'La UTM (Unidad Tributaria Mensual) es una unidad de cuenta usada en Chile para fines tributarios y multas. A diferencia de la UF, la UTM se actualiza mensualmente según la variación del IPC del mes anterior. Se usa para calcular multas de tránsito, permisos municipales, patentes comerciales y otros trámites tributarios.',
+          'La UTM (Unidad Tributaria Mensual) es una unidad de cuenta usada en Chile para fines tributarios y multas. A diferencia de la UF, la UTM se actualiza mensualmente según la variación del IPC del penúltimo mes. Se usa para calcular multas de tránsito, permisos municipales, patentes comerciales y otros trámites tributarios.',
       },
       {
-        question: '¿Cuánto vale la UTM en marzo 2026?',
+        question: '¿Cuánto vale la UTM hoy?',
         answer:
-          'En marzo 2026, la UTM vale $67.900 pesos chilenos. Este valor se actualiza mensualmente según el IPC. Puedes usar nuestra calculadora para convertir entre UTM y pesos chilenos con el valor actualizado.',
+          'La UTM se reajusta cada mes según la variación del IPC del penúltimo mes. El valor vigente aparece al inicio de esta página con su fecha y fuente; la calculadora usa ese mismo valor para la conversión.',
       },
       {
         question: '¿Cuál es la diferencia entre UTM y UF?',
@@ -1054,7 +1054,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cómo se calcula una multa en UTM?',
         answer:
-          'Para calcular una multa expresada en UTM, multiplica la cantidad de UTM por el valor actual. Por ejemplo, una multa de 1.5 UTM con UTM a $67.900 equivale a $101.850 pesos chilenos. Nuestra calculadora hace esta conversión automáticamente.',
+          'Para calcular una multa expresada en UTM, multiplica la cantidad de UTM por el valor vigente del mes. Por ejemplo, una multa de 1,5 UTM equivale a 1,5 veces el valor UTM mostrado en esta página. Nuestra calculadora hace esta conversión automáticamente.',
       },
     ],
   },
@@ -1143,6 +1143,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿La gratificación se paga mensual o anualmente?',
         answer:
           'El empleador puede pagar la gratificación mensualmente (anticipo) o en un solo pago anual. Lo más común es pagarla mensualmente junto con el sueldo. Si se paga anualmente, debe liquidarse en abril de cada año por el período abril-marzo anterior.',
+      },
+      {
+        question: '¿Qué diferencia hay entre el artículo 47 y el artículo 50?',
+        answer:
+          'Son las dos formas legales de cumplir la obligación de gratificar. En el artículo 47 el empleador reparte al menos el 30% de la utilidad líquida del ejercicio entre los trabajadores, en proporción a lo devengado por cada uno, sin tope de 4,75 IMM. En el artículo 50 queda eximido de ese reparto si paga a cada trabajador el 25% de sus remuneraciones del ejercicio, con el tope individual de 4,75 IMM. Si el contrato o un instrumento colectivo pacta una condición más favorable, manda el pacto.',
+      },
+      {
+        question: '¿Cómo se reliquidan los anticipos mensuales de gratificación?',
+        answer:
+          'La gratificación legal se determina anualmente, así que los pagos mensuales son anticipos. Al cerrar el ejercicio el empleador debe reajustar cada anticipo por IPC, sumarlos y compararlos con el derecho definitivo (calculado con el IMM vigente al 31 de diciembre, con el tope prorrateado por tiempo trabajado o jornada parcial cuando corresponda). La diferencia a favor del trabajador se paga a más tardar en abril del año siguiente.',
+      },
+      {
+        question: '¿Qué remuneraciones entran en la base de la gratificación?',
+        answer:
+          'Para el artículo 50 se consideran las contraprestaciones en dinero y las especies avaluables en dinero recibidas por los servicios: sueldo, sobresueldo por horas extraordinarias, comisiones, participaciones y bonos remuneracionales. Las asignaciones razonables de colación o movilización, viáticos y devoluciones de gastos quedan fuera solo si realmente tienen ese carácter (art. 41); la etiqueta en la liquidación no basta.',
       },
     ],
   },
@@ -1235,6 +1250,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Qué dice el Art. 163 del Código del Trabajo?',
         answer:
           'El Art. 163 establece que el empleador debe pagar indemnización equivalente a 30 días de la última remuneración mensual por cada año de servicio, con tope de 330 días. La base de cálculo incluye sueldo, gratificación y otras remuneraciones, pero no colación ni movilización.',
+      },
+      {
+        question: '¿Qué remuneraciones cuentan para la base del artículo 172?',
+        answer:
+          'La última remuneración mensual es más amplia que el sueldo base: incluye lo que el trabajador percibe mensualmente por sus servicios, como comisiones, bonos mensuales, semana corrida, gratificación mensual y las asignaciones de colación y movilización pagadas mensualmente (según la doctrina vigente de la DT). Quedan excluidas las horas extraordinarias, la asignación familiar legal y los beneficios esporádicos o anuales como aguinaldos y gratificación anual. Si la remuneración es variable, se promedia lo percibido en los últimos tres meses calendario.',
+      },
+      {
+        question: '¿Cuánto aumenta la indemnización si el despido se declara injustificado?',
+        answer:
+          'El recargo del artículo 168 solo procede por sentencia o acuerdo y se aplica sobre la indemnización por años de servicio: 30% si el artículo 161 se aplicó improcedentemente, 50% si se invocaron causales del artículo 159 sin justificación o se despidió sin causal legal, 80% si las causales del artículo 160 se aplicaron indebidamente, y 100% en los numerales 1, 5 y 6 del artículo 160 cuando además se declara carente de motivo plausible. Despedir sin invocar causal no lleva automáticamente el 100%.',
+      },
+      {
+        question: '¿Cuál es el plazo para reclamar un despido?',
+        answer:
+          'La acción por despido injustificado, indebido, improcedente o indirecto debe presentarse dentro de 60 días hábiles desde la separación. Un reclamo administrativo ante la Inspección del Trabajo suspende el plazo mientras se tramita, pero en ningún caso se puede demandar después de 90 días hábiles desde el despido. Antes de firmar el finiquito, una reserva de derechos específica puede permitir cobrar lo no discutido sin renunciar a reclamar la diferencia.',
       },
     ],
   },
@@ -3369,7 +3399,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué es la UTA?',
         answer:
-          'La UTA (Unidad Tributaria Anual) equivale a 12 UTM. Se usa para definir los tramos del impuesto. En marzo 2026, con UTM a $69.889, una UTA es $838.668.',
+          'La UTA (Unidad Tributaria Anual) equivale a 12 veces la UTM y se usa para expresar los tramos anuales del impuesto. Los tramos mensuales del impuesto único se expresan en UTM del mes.',
       },
     ],
   },
@@ -3791,7 +3821,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto vale el dólar hoy?',
         answer:
-          'El valor del dólar cambia diariamente. A marzo 2026, el dólar se aproxima a $960 CLP y el euro a $1.040 CLP. Para el valor exacto consulta el Banco Central de Chile.',
+          'El valor del dólar cambia cada día hábil. El observado vigente aparece al inicio de esta página con su fecha y fuente; para el valor oficial consulta el Banco Central de Chile.',
       },
     ],
   },
