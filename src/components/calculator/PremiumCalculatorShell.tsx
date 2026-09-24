@@ -23,7 +23,9 @@ import {
 import LegalNote from './LegalNote';
 import DisclaimerYMYL from '@/components/DisclaimerYMYL';
 import CrossDomainCta from './CrossDomainCta';
+import SitiazoLink from './SitiazoLink';
 import { isCvlistoCtaCalculator } from '@/lib/cvlisto';
+import { isSitiazoCtaCalculator } from '@/lib/sitiazo';
 import { trackEvents } from '@/lib/analytics';
 
 export interface PremiumCalculatorShellProps {
@@ -666,6 +668,9 @@ export default function PremiumCalculatorShell({
               placement="after_result"
               className="mt-5"
             />
+          )}
+          {isSitiazoCtaCalculator(calculator.id) && (
+            <SitiazoLink calculatorId={calculator.id} className="mt-5" />
           )}
         </div>
       ) : null}

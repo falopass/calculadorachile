@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { ArrowUpRight, FileText } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import {
+  buildCvlistoCartaUrl,
   buildCvlistoUrl,
   getCvlistoCtaCopy,
   getCvlistoCtaCopyByOrigen,
@@ -71,74 +72,72 @@ export default function CrossDomainCta({
     return null;
   }
 
-  const href = buildCvlistoUrl({
+  const urlOptions = {
     origen: copy.origen,
     placement,
     calculatorId: fromCalc ? calculatorId : undefined,
     experiment,
-  });
+  };
+  const href = buildCvlistoUrl(urlOptions);
+  const cartaHref = buildCvlistoCartaUrl(urlOptions);
 
-  const handleClick = () => {
+  const handleClick = (link: 'cv' | 'carta') => {
     trackEvents.employmentCtaClicked({
       calculatorId: trackingId,
       origin: copy.origen,
       position: placement,
       experiment,
       message: copy.title,
+      link,
     });
   };
 
   return (
     <aside
-      className={`rounded-2xl border border-[var(--color-primary-500)]/20 bg-gradient-to-br from-[var(--color-primary-500)]/[0.07] to-[var(--color-primary-500)]/[0.02] ${
-        compact ? 'p-4 md:p-5' : 'p-5 md:p-6'
+      className={`rounded-xl border border-[var(--border)] ${
+        compact ? 'p-4' : 'p-4 md:p-5'
       } ${className}`}
       aria-label="Siguiente paso: preparar CV en CVListo"
     >
-      <div className="flex items-start gap-3.5">
-        <div
-          className={`flex flex-none items-center justify-center rounded-xl bg-[var(--color-primary-500)]/10 ${
-            compact ? 'h-9 w-9' : 'h-10 w-10'
-          }`}
+      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--foreground-muted)]">
+        {copy.eyebrow}
+      </p>
+      <h3 className="mt-1 text-sm font-semibold leading-snug text-[var(--foreground)] md:text-base">
+        {copy.title}
+      </h3>
+      <p
+        className={`mt-1.5 leading-relaxed text-[var(--foreground-secondary)] ${
+          compact ? 'text-xs' : 'text-sm'
+        }`}
+      >
+        {copy.body}
+      </p>
+      <div className="mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-5">
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => handleClick('cv')}
+          className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-[var(--color-primary-600)] underline underline-offset-2"
         >
-          <FileText
-            className={`text-[var(--color-primary-600)] ${compact ? 'h-4 w-4' : 'h-5 w-5'}`}
-            aria-hidden
-          />
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-600)]">
-            {copy.eyebrow}
-          </p>
-          <h3
-            className={`mt-1 font-semibold leading-snug text-[var(--foreground)] ${
-              compact ? 'text-sm md:text-base' : 'text-base md:text-lg'
-            }`}
-          >
-            {copy.title}
-          </h3>
-          <p
-            className={`mt-1.5 leading-relaxed text-[var(--foreground-secondary)] ${
-              compact ? 'text-xs md:text-sm' : 'text-sm'
-            }`}
-          >
-            {copy.body}
-          </p>
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleClick}
-            className="btn-primary mt-3.5 inline-flex min-h-11 items-center gap-2 px-4 text-sm font-semibold"
-          >
-            {copy.ctaLabel}
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </a>
-          <p className="mt-2 text-xs text-[var(--foreground-muted)]">
-            CVListo (cvlisto.cl) · Google · Sin tarjeta · No inventa experiencia
-          </p>
-        </div>
+          {copy.ctaLabel}
+          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+        </a>
+        <a
+          href={cartaHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => handleClick('carta')}
+          className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-[var(--color-primary-600)] underline underline-offset-2"
+        >
+          Armar la carta de presentación (gratis, sin registro)
+          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+        </a>
       </div>
+      <p className="mt-1 text-xs text-[var(--foreground-muted)]">
+        CVListo es otro producto del creador de CalculaChile. Score ATS y 1
+        optimización gratis al registrarte con Google; no inventa experiencia.
+      </p>
     </aside>
   );
 }

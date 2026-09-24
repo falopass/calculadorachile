@@ -28,6 +28,7 @@ export { default as HistoryPanel } from './HistoryPanel';
 export { default as RelatedCalculators } from './RelatedCalculators';
 export { default as PremiumLoadingIndicator } from './PremiumLoadingIndicator';
 export { default as CrossDomainCta } from './CrossDomainCta';
+export { default as SitiazoLink } from './SitiazoLink';
 
 // Types
 export type { SelectFieldProps, SelectOption } from './SelectField';

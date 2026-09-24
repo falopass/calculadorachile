@@ -7,6 +7,8 @@
 
 export const CVLISTO_BASE_URL = 'https://cvlisto.cl';
 export const CVLISTO_LANDING_PATH = '/desde-calculachile';
+/** Herramienta gratuita de carta de presentación (sin registro). */
+export const CVLISTO_CARTA_PATH = '/herramientas/carta-presentacion';
 
 /** Calculadoras donde el CTA de reinserción / postulación tiene sentido. */
 export const CVLISTO_CTA_CALCULATOR_IDS = [
@@ -23,7 +25,8 @@ export type CvlistoPlacement =
   | 'after_result'
   | 'below_guide'
   | 'blog_footer'
-  | 'guia_footer';
+  | 'guia_footer'
+  | 'hub_step';
 
 export type CvlistoOrigen =
   | 'finiquito'
@@ -51,17 +54,17 @@ const ORIGEN_BY_CALCULATOR: Record<CvlistoCalculatorId, CvlistoOrigen> = {
 
 const COPY_BY_ORIGEN: Record<CvlistoOrigen, CvlistoCtaCopy> = {
   finiquito: {
-    eyebrow: 'Siguiente paso · reinserción',
-    title: 'Tu siguiente ingreso comienza con una postulación mejor preparada',
-    body: 'Revisa gratis si tu CV cubre los requisitos de la oferta a la que quieres postular. Score ATS y una mejora incluida al registrarte con Google.',
-    ctaLabel: 'Analizar mi CV gratis',
+    eyebrow: 'Si vas a volver a postular',
+    title: 'Revisa tu CV y tu carta antes de enviarlos',
+    body: 'Compara tu CV con la oferta a la que quieres postular y detecta requisitos que faltan, sin inventar experiencia.',
+    ctaLabel: 'Revisar mi CV contra una oferta',
     origen: 'finiquito',
   },
   indemnizacion: {
-    eyebrow: 'Siguiente paso · reinserción',
-    title: 'Ya estimaste tu indemnización. Prepara tu próxima postulación',
+    eyebrow: 'Si vas a volver a postular',
+    title: 'Revisa tu CV y tu carta antes de enviarlos',
     body: 'Compara tu CV con una vacante real y detecta requisitos que faltan, sin inventar experiencia.',
-    ctaLabel: 'Analizar mi CV gratis',
+    ctaLabel: 'Revisar mi CV contra una oferta',
     origen: 'indemnizacion',
   },
   vacaciones: {
@@ -197,5 +200,13 @@ export function buildCvlistoUrl(options: BuildCvlistoUrlOptions): string {
     url.searchParams.set('exp', experiment);
   }
 
+  return url.toString();
+}
+
+/** URL de la herramienta de carta de CVListo con la misma atribución UTM. */
+export function buildCvlistoCartaUrl(options: BuildCvlistoUrlOptions): string {
+  const url = new URL(buildCvlistoUrl(options));
+  url.pathname = CVLISTO_CARTA_PATH;
+  url.searchParams.set('utm_content', `${url.searchParams.get('utm_content')}_carta`);
   return url.toString();
 }

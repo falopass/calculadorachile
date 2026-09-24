@@ -20,6 +20,7 @@ import {
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import { buildCvlistoUrl } from '@/lib/cvlisto';
 import FinancialCoverageTool from '@/components/cesantia/FinancialCoverageTool';
 import {
   breadcrumbSchema,
@@ -76,9 +77,9 @@ const STEPS = [
   {
     n: '4',
     title: 'Prepara la reinserción',
-    body: 'Adapta el CV a cada vacante real. Un score ATS y una optimización gratis ayudan a no postular con el mismo currículum genérico.',
-    href: 'https://cvlisto.cl/desde-calculachile?origen=finiquito&utm_source=calculachile&utm_medium=referral&utm_campaign=ecosistema_laboral&utm_content=hub_cesantia',
-    cta: 'Analizar CV gratis',
+    body: 'Antes de postular, revisa tu CV contra cada oferta real y arma una carta breve. CVListo (otro producto del creador de CalculaChile) da un score ATS gratis.',
+    href: buildCvlistoUrl({ origen: 'finiquito', placement: 'hub_step' }),
+    cta: 'Revisar CV y carta',
     icon: ClipboardList,
     external: true,
   },

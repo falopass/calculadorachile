@@ -115,6 +115,8 @@ export const trackEvents = {
     destination?: string;
     experiment?: string;
     message?: string;
+    /** Qué enlace se clickeó dentro del CTA ('cv' | 'carta'). */
+    link?: string;
   }) =>
     event('employment_cta_clicked', {
       calculator_id: params.calculatorId,
@@ -123,5 +125,22 @@ export const trackEvents = {
       destination: params.destination ?? 'cvlisto',
       experiment: params.experiment,
       message: params.message,
+      link: params.link,
+    }),
+
+  /** CTA puente CalculaChile → Sitiazo visible en render */
+  pymeCtaViewed: (params: { calculatorId: string; position: string }) =>
+    event('pyme_cta_viewed', {
+      calculator_id: params.calculatorId,
+      position: params.position,
+      destination: 'sitiazo',
+    }),
+
+  /** Clic en CTA hacia Sitiazo */
+  pymeCtaClicked: (params: { calculatorId: string; position: string }) =>
+    event('pyme_cta_clicked', {
+      calculator_id: params.calculatorId,
+      position: params.position,
+      destination: 'sitiazo',
     }),
 };
