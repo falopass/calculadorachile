@@ -124,9 +124,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- EMPRESAS Y PYMES ---
   'calculadora-patente-comercial': {
-    seoTitle: 'Patente Comercial 2026: simula con tu CPT y comuna', // 50
+    seoTitle: 'Patente comercial 2026: cómo se calcula y cuánto pagar', // 54
     seoDescription:
-      'Calcula tu patente comercial 2026 con Capital Propio Tributario y tasa comunal (0,25% a 0,5%). Tramos en UTM, cuota anual o semestral.', // 136
+      'Calcula tu patente comercial o municipal: 2,5 a 5 por mil del capital propio, mínimo 1 UTM y máximo 8.000 UTM al año. Cuotas de enero y julio.', // 142
   },
 
   'calculadora-costo-empleado-pyme': {
@@ -174,9 +174,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-contribuciones': {
-    seoTitle: 'Contribuciones 2026: calcula por avalúo fiscal SII', // 51
+    seoTitle: 'Calculadora de contribuciones 2026: cuota por avalúo SII', // 56
     seoDescription:
-      'Estima tus contribuciones 2026 con la exención de $61.711.570 y las tasas SII 0,893% y 1,042%. Cuotas abril, junio, septiembre y noviembre.', // 134
+      'Estima tus contribuciones con las reglas SII del 2º semestre 2026: exención de $61.711.570. Ejemplo: vivienda de avalúo $100 millones paga $341.916 al año.', // 155
   },
 
   'calculadora-reajuste-arriendo': {
@@ -262,9 +262,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- EDUCACIÓN ---
   'calculadora-credito-cae': {
-    seoTitle: 'Simulador CAE 2026: cuota, UF y % del ingreso', // 50
+    seoTitle: 'Simulador CAE 2026: calcula tu cuota mensual', // 44
     seoDescription:
-      'Simula cuota CAE a tasa 2%: total, UF, gracia y cuota vs ingreso. Aviso cobro TGR. No es FES ni embargo. Gratis y referencial.', // 130
+      'Simula tu cuota CAE con tasa 2% anual: monto, plazo y meses de gracia. Compara la cuota con el 10% de tu ingreso. Gratis y sin registro.', // 136
   },
 
   // --- HOGAR Y SERVICIOS ---
@@ -328,9 +328,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'revision-tecnica-chile-2026-calendario-patente': {
-    seoTitle: 'Revisión técnica 2026: calendario por patente y requisitos', // 58
+    seoTitle: 'Revisión técnica 2026 por patente: mes según último dígito', // 58
     seoDescription:
-      'Calendario de revisión técnica 2026 por dígito de patente, consulta en PRT, multas y vínculo con el permiso de circulación. ChileAtiende.', // 140
+      'Revisa en qué mes te toca la revisión técnica según el último dígito de tu patente, qué llevar a la planta y qué pasa si circulas con ella vencida.', // 147
   },
 
   'cotizacion-empleador-3-5-agosto-2026-costo-pyme': {
@@ -386,14 +386,14 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- Hub cesantía + Seguro de Cesantía AFC ---
   'seguro-cesantia-finiquito-2026-afc': {
-    seoTitle: 'Seguro de Cesantía 2026: AFC, CIC y finiquito', // 50
+    seoTitle: 'Finiquito y AFC 2026: cuánto pueden descontar', // 45
     seoDescription:
-      'Cómo funciona el Seguro de Cesantía en Chile: cotizaciones, giros, CIC vs Fondo Solidario y diferencia con el finiquito. Fuentes AFC y ChileAtiende.', // 148
+      'Despido por necesidades de la empresa: pueden descontar de la indemnización el aporte del empleador a tu cuenta AFC, no lo que tú cotizaste. Cómo revisarlo.', // 156
   },
   'como-cobrar-seguro-cesantia-afc-2026': {
-    seoTitle: 'Cómo cobrar Seguro de Cesantía AFC 2026: pasos', // 50
+    seoTitle: 'Cómo cobrar el Seguro de Cesantía AFC 2026: paso a paso', // 55
     seoDescription:
-      'Solicita el Seguro de Cesantía: documentos, 10 o 5 cotizaciones, sucursal virtual AFC y giros. Guía práctica Chile 2026.', // 120
+      'Qué necesitas para cobrar el seguro AFC: cotizaciones mínimas, documentos y solicitud en la sucursal virtual. Cuándo pagan y qué pasa si vuelves a trabajar.', // 156
   },
   'checklist-despues-despido-chile-2026': {
     seoTitle: 'Checklist despido Chile 2026: finiquito, AFC y CV', // 52
@@ -413,9 +413,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'finiquito-laboral-chile': {
-    seoTitle: 'Finiquito Laboral Chile 2026: guía con ejemplos en $', // 52
+    seoTitle: 'Cómo calcular el finiquito en Chile 2026: ejemplos en $', // 55
     seoDescription:
-      'Guía del finiquito 2026: indemnización, vacaciones y gratificación según causal. Ejemplos y calculadora. Código del Trabajo / DT.', // 132
+      'Paso a paso: indemnización de 30 días por año (tope 11 años y 90 UF), vacaciones proporcionales y aviso previo. Ejemplos por causal y calculadora gratis.', // 153
   },
 
   'iva-boleta-honorarios-chile': {

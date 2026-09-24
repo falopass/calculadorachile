@@ -35,6 +35,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import TocSticky from '@/components/article/TocSticky';
 import ReadingProgress from '@/components/article/ReadingProgress';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import SitiazoLink from '@/components/calculator/SitiazoLink';
 import EmbeddedCalculator from '@/components/calculator/EmbeddedCalculator';
 import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 import {
@@ -429,6 +430,17 @@ export default async function GuiaPage({ params }: PageProps) {
                 </div>
               );
             })()}
+
+            {/* CTA pyme → Sitiazo (solo guía empresas/pymes) */}
+            {guia.slug === 'empresas-pymes-chile' && (
+              <div className="mt-12">
+                <SitiazoLink
+                  calculatorId="patente-comercial"
+                  placement="guia_footer"
+                  contentId="guia_empresas-pymes-chile"
+                />
+              </div>
+            )}
 
             {/* Calculadoras relacionadas */}
             {relatedCalcs.length > 0 && (

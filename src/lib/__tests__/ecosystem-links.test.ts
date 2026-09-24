@@ -42,6 +42,15 @@ describe('buildSitiazoUrl', () => {
     const url = new URL(buildSitiazoUrl('iva', 'after_result'));
     expect(url.searchParams.get('utm_content')).toBe('iva_after_result');
   });
+
+  it('acepta contentId de blog/guía como clave', () => {
+    const url = new URL(
+      buildSitiazoUrl('blog_patente-comercial-2027-calcular', 'blog_footer'),
+    );
+    expect(url.searchParams.get('utm_content')).toBe(
+      'blog_patente-comercial-2027-calcular_blog_footer',
+    );
+  });
 });
 
 describe('isSitiazoCtaCalculator', () => {

@@ -15,8 +15,10 @@
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
 import { formatCLP2 } from '@/lib/seo/live-value-title';
-import { INGRESO_MINIMO, ASIGNACION_FAMILIAR_2026, CONTRIBUCIONES_BIENES_RAICES } from '@/lib/values/constants';
+import { INGRESO_MINIMO, ASIGNACION_FAMILIAR_2026, CONTRIBUCIONES_BIENES_RAICES, UTM } from '@/lib/values/constants';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
+import { calculateCreditoCAE } from '@/lib/calculations/credito-cae';
+import { calculatePatenteComercial } from '@/lib/calculations/patente-comercial';
 import { calculateIVA } from '@/lib/calculations/iva';
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
@@ -364,6 +366,64 @@ export function getQuickAnswer(
         example: {
           caption: `Estimación con las reglas SII del ${P.periodoLabel}.`,
           headers: ['Avalúo fiscal', 'Contribución anual', 'Cuota (1 de 4)'],
+          rows,
+        },
+      };
+    }
+
+    case 'credito-cae': {
+      const plazos = [120, 180, 240];
+      const rows = plazos.map((p) => {
+        const r = calculateCreditoCAE({
+          montoCredito: 10_000_000,
+          plazoMeses: p,
+          tieneGarantiaEstatal: true,
+          valorUF: ctx.uf,
+        });
+        return [
+          formatCLP(10_000_000),
+          `${p / 12} años`,
+          formatCLP(r.dividendoMensual),
+          formatCLP(r.totalPago),
+        ];
+      });
+      return {
+        h1: 'Simulador CAE: calcula la cuota mensual de tu crédito',
+        lead: 'El Crédito con Aval del Estado (CAE) cobra una tasa de interés de 2% anual. Este simulador estima la cuota con amortización francesa a tasa fija; tu cuota real y los beneficios de rebaja (como el tope de 10% de la renta, sujeto a requisitos) se revisan en ingresa.cl.',
+        example: {
+          caption:
+            'Tasa 2% anual fija, sin período de gracia ni reajuste de la UF. Referencial: no es tu estado de cuenta.',
+          headers: ['Crédito', 'Plazo', 'Cuota mensual', 'Total pagado'],
+          rows,
+        },
+      };
+    }
+
+    case 'patente-comercial': {
+      const capitales = [10_000_000, 50_000_000, 150_000_000, 500_000_000];
+      const rows = capitales.map((c) => {
+        const baja = calculatePatenteComercial({
+          capitalInvertido: c,
+          actividad: 'comercio',
+          comuna: 'otra',
+        });
+        const alta = calculatePatenteComercial({
+          capitalInvertido: c,
+          actividad: 'comercio',
+          comuna: 'santiago',
+        });
+        return [
+          formatCLP(c),
+          formatCLP(baja.patenteAnual),
+          formatCLP(alta.patenteAnual),
+        ];
+      });
+      return {
+        h1: 'Patente comercial municipal: cómo se calcula y cuánto pagar',
+        lead: 'La patente comercial se calcula aplicando la tasa de tu municipalidad, entre 2,5 y 5 por mil, sobre el capital propio tributario. El monto anual no puede ser menor a 1 UTM ni mayor a 8.000 UTM y se paga en dos cuotas, en enero y julio.',
+        example: {
+          caption: `Montos anuales con UTM de ${formatCLP(UTM.valor)}; aplican los topes de 1 y 8.000 UTM. La tasa exacta la fija cada municipalidad.`,
+          headers: ['Capital propio', 'Anual con 2,5 por mil', 'Anual con 5 por mil'],
           rows,
         },
       };

@@ -23,6 +23,7 @@ import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
 import { seoOverrides } from '@/data/seo-overrides';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
+import SitiazoLink from '@/components/calculator/SitiazoLink';
 import EmbeddedCalculator from '@/components/calculator/EmbeddedCalculator';
 import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 
@@ -276,6 +277,17 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
               </div>
             );
           })()}
+
+          {/* CTA pyme → Sitiazo (solo contenido de patente comercial) */}
+          {article.relatedCalculators?.includes('calculadora-patente-comercial') && (
+            <div className="mt-10">
+              <SitiazoLink
+                calculatorId="patente-comercial"
+                placement="blog_footer"
+                contentId={`blog_${article.slug}`}
+              />
+            </div>
+          )}
 
           {/* Guía pillar relacionada */}
           {relatedGuia && (

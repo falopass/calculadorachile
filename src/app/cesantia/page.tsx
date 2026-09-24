@@ -30,9 +30,9 @@ import {
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl, SITE_NAME } from '@/lib/site';
 
-const PAGE_TITLE = 'Me despidieron Chile 2026: finiquito y qué hacer';
+const PAGE_TITLE = 'Me despidieron en Chile 2026: qué hacer paso a paso';
 const PAGE_DESC =
-  'Checklist post-despido: finiquito, indemnización, AFC y reinserción. Calculadoras gratis + preparar el CV. Fuentes DT y Código del Trabajo.';
+  'Finiquito, plazo de 10 días hábiles, Seguro de Cesantía AFC y cómo volver a postular. Calculadoras gratis y fuentes DT y Código del Trabajo.';
 
 export const metadata: Metadata = buildPageMetadata({
   path: '/cesantia',

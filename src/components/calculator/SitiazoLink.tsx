@@ -6,21 +6,27 @@ import {
   buildSitiazoUrl,
   getSitiazoCtaCopy,
   isSitiazoCtaCalculator,
+  type SitiazoPlacement,
 } from '@/lib/sitiazo';
 import { trackEvents } from '@/lib/analytics';
 
 export interface SitiazoLinkProps {
-  /** ID de calculadora (allowlist pyme). */
+  /** ID de calculadora (allowlist pyme) que define el copy. */
   calculatorId: string;
+  placement?: SitiazoPlacement;
+  /** ID de contenido para analytics/utm (ej. `blog_<slug>`, `guia_<slug>`). */
+  contentId?: string;
   className?: string;
 }
 
 /**
- * CTA contextual hacia Sitiazo (calculadoras de pymes).
+ * CTA contextual hacia Sitiazo (calculadoras de pymes y contenido asociado).
  * Mismo estilo "nota silenciosa" que CrossDomainCta.
  */
 export default function SitiazoLink({
   calculatorId,
+  placement = 'after_result',
+  contentId,
   className = '',
 }: SitiazoLinkProps) {
   const viewedRef = useRef(false);
@@ -29,25 +35,27 @@ export default function SitiazoLink({
     ? getSitiazoCtaCopy(calculatorId)
     : null;
 
+  const trackingId = contentId ?? calculatorId;
+
   useEffect(() => {
     if (!copy || viewedRef.current) return;
     viewedRef.current = true;
     trackEvents.pymeCtaViewed({
-      calculatorId,
-      position: 'after_result',
+      calculatorId: trackingId,
+      position: placement,
     });
-  }, [copy, calculatorId]);
+  }, [copy, trackingId, placement]);
 
   if (!copy) {
     return null;
   }
 
-  const href = buildSitiazoUrl(calculatorId, 'after_result');
+  const href = buildSitiazoUrl(trackingId, placement);
 
   const handleClick = () => {
     trackEvents.pymeCtaClicked({
-      calculatorId,
-      position: 'after_result',
+      calculatorId: trackingId,
+      position: placement,
     });
   };
 
