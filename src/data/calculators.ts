@@ -4456,6 +4456,400 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+  {
+    id: 'subsidio-unificado-empleo',
+    name: 'Calculadora Subsidio Unificado de Empleo',
+    description:
+      'Estima el aporte mensual del Subsidio Unificado de Empleo (Ley 21.808) para trabajador y empresa. Los parámetros dependen del decreto del art. 8, pendiente de publicación.',
+    slug: 'calculadora-subsidio-unificado-empleo',
+    category: 'beneficios',
+    featured: false,
+    phase: 2,
+    noIndex: true,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'Ley 21.808 — Diario Oficial (13-03-2026)',
+        url: 'https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf',
+        note: 'Texto de la ley: IMM del subsidio, PV del primer año y tramos de renta',
+      },
+      {
+        name: 'BCN / Ley Chile — Ley 21.808',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1222281',
+        note: 'Norma vigente desde el 01-10-2026',
+      },
+    ],
+    keywords: [
+      'subsidio unificado de empleo',
+      'ley 21808 subsidio',
+      'subsidio al empleo chile',
+      'calculadora subsidio empleo',
+      'aporte estatal contratación',
+      'subsidio trabajador empresa',
+    ],
+    inputs: [
+      {
+        id: 'rentaBruta',
+        label: 'Renta bruta mensual pactada',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$600.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Sobre 2,25 IMM del subsidio ($1.190.250) no hay aporte ese mes. Entre 1,25 y 2,25 IMM el aporte baja gradualmente.',
+      },
+      {
+        id: 'grupoPrioritario',
+        label: 'Grupo prioritario',
+        type: 'select',
+        required: true,
+        defaultValue: 'ninguno',
+        options: [
+          { value: 'joven-18-24', label: 'Joven de 18 a 24 años' },
+          { value: 'mujer-25-54', label: 'Mujer de 25 a 54 años' },
+          { value: 'mayor-55', label: 'Persona de 55 años o más' },
+          {
+            value: 'discapacidad',
+            label: 'Persona con discapacidad (18+, inscrita en el RND)',
+          },
+          { value: 'ninguno', label: 'Ninguno de los anteriores' },
+        ],
+      },
+      {
+        id: 'desempleoPrevio',
+        label: '¿Tuviste 6 meses de desempleo continuos u 8 discontinuos en los últimos 18 meses?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'rsh40',
+        label: '¿Tu hogar está dentro del 40% más vulnerable según RSH?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Se exige el primer año, pero no aplica a personas con discapacidad.',
+      },
+    ],
+    seoTitle: 'Subsidio Unificado de Empleo 2026: calcula el aporte mensual',
+    seoDescription:
+      'Estima el aporte del Subsidio Unificado de Empleo (Ley 21.808) para trabajador y empresa según renta bruta y grupo prioritario.',
+    faq: [
+      {
+        question: '¿Los valores de esta estimación son definitivos?',
+        answer:
+          'No. La Ley 21.808 fija el IMM del subsidio en $529.000 y los porcentajes de valorización del primer año (10% trabajador, 20% empresa), pero los parámetros finales se materializan en el decreto del art. 8, que al 26-09-2026 aún no se publica. La ley rige desde el 01-10-2026.',
+      },
+      {
+        question: '¿Quiénes son los grupos prioritarios del subsidio?',
+        answer:
+          'Jóvenes de 18 a 24 años, mujeres de 25 a 54 años, personas de 55 años o más y personas con discapacidad desde los 18 años inscritas en el Registro Nacional de la Discapacidad.',
+      },
+      {
+        question: '¿Qué requisitos debe cumplir la persona trabajadora?',
+        answer:
+          'Haber estado 6 meses de desempleo continuos u 8 discontinuos dentro de los 18 meses anteriores a la contratación, y pertenecer al 40% más vulnerable según RSH durante el primer año (este requisito no aplica a personas con discapacidad).',
+      },
+      {
+        question: '¿Cuánto dura el subsidio y cómo se paga?',
+        answer:
+          '12 meses para la persona trabajadora (15 si es persona con discapacidad); la empresa recibe el aporte por 15 meses si es micro o pequeña. Los pagos mensuales al trabajador son provisionales por el 90% y se reliquidan anualmente.',
+      },
+      {
+        question: '¿Hasta qué sueldo existe el aporte?',
+        answer:
+          'Hasta 2,25 IMM del subsidio ($1.190.250 con el valor actual). Entre 1,25 y 2,25 IMM el aporte baja de forma gradual y el del trabajador nunca es inferior al 2,5% del IMM ($13.225). Sobre 2,25 IMM no hay aporte ese mes.',
+      },
+    ],
+  },
+  {
+    id: 'factor-hora-extra',
+    name: 'Calculadora Factor de Hora Extra',
+    description:
+      'Calcula el factor legal de la hora extraordinaria (sueldo × factor) y el valor de la hora extra con el recargo del 50%.',
+    slug: 'calculadora-factor-hora-extra',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'Dirección del Trabajo — Valor de la hora extraordinaria',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        note: 'Fórmula legal: sueldo/30 × 28 / jornada, más recargo del 50%',
+      },
+      {
+        name: 'Dirección del Trabajo — Límite de horas extraordinarias',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60157.html',
+        note: 'Máximo 2 horas por día y 12 horas semanales',
+      },
+    ],
+    keywords: [
+      'factor hora extra',
+      'valor hora extraordinaria',
+      '0.0083333 sueldo',
+      'calculadora hora extra factor',
+      'recargo 50% horas extra',
+      'cómo calcular hora extra',
+    ],
+    inputs: [
+      {
+        id: 'sueldoBase',
+        label: 'Sueldo mensual base',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.000.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'jornadaSemanal',
+        label: 'Jornada semanal pactada',
+        type: 'number',
+        unit: 'count',
+        placeholder: '42',
+        required: false,
+        defaultValue: 42,
+        min: 1,
+        max: 45,
+        tooltip:
+          'Jornada legal vigente: 42 horas desde el 26-04-2026 (bajará a 40 desde el 26-04-2028). Puedes usar 44 si tu contrato mantiene la jornada anterior.',
+      },
+      {
+        id: 'horasExtra',
+        label: 'Horas extra del mes',
+        type: 'number',
+        unit: 'count',
+        placeholder: '10',
+        required: false,
+        defaultValue: 0,
+        min: 0,
+        tooltip:
+          'Máximo legal: 2 horas extraordinarias por día y 12 por semana.',
+      },
+    ],
+    seoTitle: 'Factor Hora Extra 2026: valor legal de la hora extraordinaria',
+    seoDescription:
+      'Calcula el factor de la hora extra en Chile (0,0083333 con jornada de 42 h) y el valor de tus horas extraordinarias con recargo del 50%.',
+    faq: [
+      {
+        question: '¿Cuál es la fórmula legal del factor?',
+        answer:
+          'Según la Dirección del Trabajo, el sueldo se divide por 30, se multiplica por 28 y el resultado se divide por la jornada semanal por 4; ese es el valor de la hora ordinaria. La hora extra aumenta un 50% (×1,5). Con jornada de 42 horas equivale a multiplicar el sueldo mensual por 0,0083333.',
+      },
+      {
+        question: '¿Qué jornada semanal debo usar?',
+        answer:
+          'La jornada máxima legal es de 42 horas desde el 26-04-2026 y bajará a 40 horas desde el 26-04-2028. Si tu contrato sigue en 44 horas o pactaste otra jornada, ingrésala y el factor se ajusta.',
+      },
+      {
+        question: '¿Cuántas horas extra se pueden trabajar?',
+        answer:
+          'El máximo legal es de 2 horas extraordinarias por día y 12 horas por semana. Esta calculadora solo estima el valor, no valida el límite.',
+      },
+      {
+        question: '¿En qué se diferencia de la calculadora de horas extra?',
+        answer:
+          'Esta herramienta entrega el factor multiplicador y el valor por hora. La calculadora de horas extra del sitio calcula el pago mensual completo de horas extraordinarias con más desglose.',
+      },
+      {
+        question: '¿El recargo siempre es del 50%?',
+        answer:
+          'La fórmula de la Dirección del Trabajo aumenta el valor de la hora ordinaria en un 50%. Esta calculadora usa ese recargo; convenios individuales o colectivos pueden pactar recargos mayores.',
+      },
+    ],
+  },
+  {
+    id: 'subsidio-familiar-suf',
+    name: 'Calculadora Subsidio Familiar (SUF)',
+    description:
+      'Estima el Subsidio Familiar SUF según tus cargas acreditadas: $22.601 por carga y $45.202 por cada persona con discapacidad.',
+    slug: 'calculadora-subsidio-familiar-suf',
+    category: 'familia',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Subsidio Familiar (SUF)',
+        url: 'https://www.chileatiende.gob.cl/fichas/33112-subsidio-familiar-suf',
+        note: 'Montos vigentes desde el 01-05-2026 (Ley 21.830) y requisitos del beneficio',
+      },
+    ],
+    keywords: [
+      'subsidio familiar suf',
+      'calculadora suf',
+      'cuánto paga el subsidio familiar',
+      'suf carga familiar',
+      'subsidio por carga chile',
+      'suf 22601',
+    ],
+    inputs: [
+      {
+        id: 'causantes',
+        label: 'Cargas familiares acreditadas (sin discapacidad)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '2',
+        required: true,
+        min: 0,
+        tooltip:
+          'Menores de 18 años con las condiciones del beneficio: los menores de 8 deben participar en programas de salud y los mayores de 6 deben ser alumnos regulares.',
+      },
+      {
+        id: 'causantesDiscapacidad',
+        label: 'Cargas con discapacidad',
+        type: 'number',
+        unit: 'count',
+        placeholder: '0',
+        required: false,
+        defaultValue: 0,
+        min: 0,
+        tooltip:
+          'Las personas con discapacidad pueden ser causantes a cualquier edad y el monto sube a $45.202 por cada una.',
+      },
+      {
+        id: 'rsh60',
+        label: '¿Tu hogar está dentro del 60% más vulnerable según RSH?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Además se exige no tener previsión social. Con 40% RSH y un causante menor de 18 el SUF puede asignarse automáticamente.',
+      },
+    ],
+    seoTitle: 'Subsidio Familiar SUF 2026: calcula el monto por tus cargas',
+    seoDescription:
+      'Calcula el Subsidio Familiar (SUF): $22.601 por carga y $45.202 por persona con discapacidad, valores vigentes desde mayo de 2026.',
+    faq: [
+      {
+        question: '¿Cuánto se recibe por cada carga?',
+        answer:
+          'El beneficio mensual es de $22.601 por cada carga familiar acreditada y de $45.202 si se trata de una persona con discapacidad. Son los montos vigentes desde el 01-05-2026 según la Ley 21.830.',
+      },
+      {
+        question: '¿Quiénes pueden ser causantes del SUF?',
+        answer:
+          'Menores de 18 años (los menores de 8 deben estar en programas de salud y los mayores de 6 ser alumnos regulares, salvo discapacidad) y personas con discapacidad de cualquier edad. No deben tener un ingreso igual o superior al valor del SUF.',
+      },
+      {
+        question: '¿Qué requisitos debe cumplir el beneficiario?',
+        answer:
+          'Pertenecer al 60% más vulnerable según el Registro Social de Hogares y no tener previsión social. Si el hogar está dentro del 40% más vulnerable y hay un causante menor de 18 años, el SUF puede asignarse de forma automática.',
+      },
+      {
+        question: '¿Cuánto tiempo dura el beneficio?',
+        answer:
+          'Tres años mientras se sigan cumpliendo los requisitos. Para causantes menores de edad rige hasta el 31 de diciembre del año en que cumplen 18 años, salvo que sean personas con discapacidad.',
+      },
+      {
+        question: '¿Se puede recibir junto con la asignación familiar?',
+        answer:
+          'No. El SUF es incompatible con la asignación familiar: debes optar por uno de los dos beneficios.',
+      },
+    ],
+  },
+  {
+    id: 'subsidio-electrico',
+    name: 'Calculadora Subsidio Eléctrico',
+    description:
+      'Estima el descuento del Subsidio Eléctrico de la 5ª convocatoria según los integrantes de tu hogar: hasta $31.224 en 6 cuotas.',
+    slug: 'calculadora-subsidio-electrico',
+    category: 'hogar',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Subsidio Eléctrico',
+        url: 'https://www.chileatiende.gob.cl/fichas/124375-subsidio-electrico',
+        note: 'Tramos y requisitos de la 5ª convocatoria (2º semestre 2026)',
+      },
+      {
+        name: 'Ventanilla Única Social — Subsidio Eléctrico',
+        url: 'https://www.ventanillaunicasocial.gob.cl/ficha/381/subsidio-electrico',
+        note: 'Ficha oficial del beneficio transitorio',
+      },
+    ],
+    keywords: [
+      'subsidio eléctrico',
+      'calculadora subsidio eléctrico',
+      'descuento cuenta de luz',
+      'subsidio luz 2026',
+      '5 convocatoria subsidio eléctrico',
+      'descuento electricidad hogares',
+    ],
+    inputs: [
+      {
+        id: 'integrantes',
+        label: 'Integrantes del hogar',
+        type: 'number',
+        unit: 'count',
+        placeholder: '3',
+        required: true,
+        min: 1,
+        tooltip:
+          'Tramos de la 5ª convocatoria: 1 integrante $17.346; 2 a 3 integrantes $22.548; 4 o más $31.224.',
+      },
+      {
+        id: 'rsh40',
+        label: '¿Tu hogar está dentro del 40% más vulnerable según RSH?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Se exige la Cartola del Hogar (CSE) vigente durante la segunda quincena de mayo de 2026.',
+      },
+      {
+        id: 'electrodependiente',
+        label: '¿En tu hogar vive una persona inscrita en el Registro de Pacientes Electrodependientes?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Los hogares con una persona electrodependiente registrada en el RSH acceden por cualquier tramo de vulnerabilidad.',
+      },
+      {
+        id: 'alDiaPago',
+        label: '¿Estabas al día en el pago de la cuenta eléctrica al 22-06-2026?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    seoTitle: 'Subsidio Eléctrico 2026: calcula tu descuento en la cuenta de luz',
+    seoDescription:
+      'Calcula el descuento del Subsidio Eléctrico 5ª convocatoria: hasta $31.224 repartidos en 6 cuotas según los integrantes del hogar.',
+    faq: [
+      {
+        question: '¿El Subsidio Eléctrico es un beneficio permanente?',
+        answer:
+          'No. Es un beneficio transitorio que aplica durante 2024, 2025 y 2026. Los resultados de la 5ª convocatoria (2º semestre 2026) ya están publicados; aún no hay fechas oficiales de nuevas convocatorias.',
+      },
+      {
+        question: '¿Cuánto descuenta la 5ª convocatoria?',
+        answer:
+          'Según los integrantes del hogar: $17.346 para 1 integrante, $22.548 para 2 a 3 integrantes y $31.224 para 4 o más. Es el descuento total del semestre julio–diciembre de 2026.',
+      },
+      {
+        question: '¿Cómo se paga el beneficio?',
+        answer:
+          'El descuento del semestre julio–diciembre 2026 se reparte en 6 cuotas mensuales desde septiembre de 2026, aplicadas directamente en la cuenta de electricidad: $2.891, $3.758 o $5.204 según el tramo.',
+      },
+      {
+        question: '¿Qué requisitos se exigen?',
+        answer:
+          'Ser mayor de 18 años, ser cliente (arrendatario o propietario) de la distribuidora o cooperativa y estar al día en el pago al 22-06-2026. Además, el hogar debe estar dentro del 40% más vulnerable según RSH, o tener una persona inscrita en el Registro de Pacientes Electrodependientes (cualquier tramo, registrada en el RSH).',
+      },
+      {
+        question: '¿Qué puedo hacer si no quedé seleccionado?',
+        answer:
+          'El plazo para presentar reposiciones de la 5ª convocatoria finalizó el 19-08-2026. Revisa tu estado en los canales oficiales de ChileAtiende o la Ventanilla Única Social.',
+      },
+    ],
+  },
 ];
 
 export const calculators: Calculator[] = calculatorCatalog.map((calculator) => ({

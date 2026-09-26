@@ -551,6 +551,82 @@ export const APORTE_FAMILIAR_PERMANENTE = {
 };
 
 // ============================================
+// Subsidio Familiar (SUF) — valores 2026
+// ============================================
+/**
+ * Subsidio Familiar SUF — ChileAtiende ficha 33112
+ * https://www.chileatiende.gob.cl/fichas/33112-subsidio-familiar-suf
+ * "Recibirás $22.601 por cada carga familiar que acredites. Si se
+ * trata de una persona con discapacidad, el monto será de $45.202."
+ * Montos vigentes desde el 01-05-2026 (Ley 21.830). Beneficio
+ * mensual, incompatible con la asignación familiar.
+ */
+export const SUBSIDIO_FAMILIAR = {
+  vigenteDesde: '2026-05-01',
+  montoPorCausanteCLP: 22601,
+  montoDiscapacidadCLP: 45202,
+};
+
+// ============================================
+// Subsidio Eléctrico — 5ª convocatoria (2º semestre 2026)
+// ============================================
+/**
+ * Subsidio Eléctrico: descuento semestral en la cuenta de
+ * electricidad durante 2024, 2025 y 2026 (beneficio transitorio).
+ * ChileAtiende ficha 124375
+ * https://www.chileatiende.gob.cl/fichas/124375-subsidio-electrico
+ * y Ventanilla Única Social ficha 381.
+ * 5ª convocatoria (jul–dic 2026, distribuido en 6 cuotas desde
+ * septiembre de 2026): 1 integrante $17.346 ($2.891 por cuota);
+ * 2 a 3 integrantes $22.548 ($3.758); 4 o más $31.224 ($5.204).
+ * Requisitos: al día en el pago al 22-06-2026 y 40% más vulnerable
+ * RSH, u hogar con persona electrodependiente registrada.
+ */
+export const SUBSIDIO_ELECTRICO = {
+  convocatoria: 5,
+  periodo: '2º semestre 2026',
+  cuotas: 6,
+  tramos: [
+    { maxIntegrantes: 1, montoCLP: 17346, cuotaCLP: 2891 },
+    { maxIntegrantes: 3, montoCLP: 22548, cuotaCLP: 3758 },
+    { maxIntegrantes: Infinity, montoCLP: 31224, cuotaCLP: 5204 },
+  ],
+};
+
+// ============================================
+// Subsidio Unificado de Empleo (SUE) — Ley 21.808
+// ============================================
+/**
+ * Ley 21.808, publicada en el Diario Oficial el 13-03-2026,
+ * vigente desde el 01-10-2026:
+ * https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf
+ * https://www.bcn.cl/leychile/navegar?idNorma=1222281
+ * Art. 4 N°3: el ingreso mínimo mensual del subsidio es $529.000
+ * (reajustable). PV primer año (art. 2° transitorio): 10% persona
+ * trabajadora, 20% empresa. Topes de renta bruta: 1,25 IMM y
+ * 2,25 IMM. El aporte del trabajador "nunca podrá ser inferior al
+ * 2,5% del ingreso mínimo mensual a que refiere esta ley".
+ */
+// TODO(decreto art. 8 Ley 21.808): confirmar parámetros (IMM del
+// subsidio, PV y umbral 2,25 IMM) cuando se publique el decreto.
+export const SUBSIDIO_UNIFICADO_EMPLEO = {
+  vigenteDesde: '2026-10-01',
+  /** Ingreso mínimo mensual propio del subsidio (art. 4 N°3). */
+  immSubsidioCLP: 529000,
+  /** Renta bruta hasta este factor IMM paga PV × min(RB, IMM). */
+  tramoA_IMM: 1.25,
+  /** Renta bruta sobre este factor IMM no genera subsidio ese mes. */
+  tope_IMM: 2.25,
+  /** Porcentaje de valorización primer año: trabajador / empresa. */
+  pvTrabajador: 10,
+  pvEmpresa: 20,
+  /** Piso del aporte trabajador: % del IMM del subsidio. */
+  pisoTrabajadorPctIMM: 2.5,
+  duracionMeses: 12,
+  duracionMesesPcD: 15,
+};
+
+// ============================================
 // PGU 2026 (Ley 21.735, reajuste IPC febrero 2026)
 // La PGU sube progresivamente hasta $250.000 según Ley 21.735.
 // En febrero 2026 se reajustó por IPC 2025 (aprox. +4%).

@@ -799,4 +799,129 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Ingreso mínimo proporcional: $395.395; valor hora referencial $3.075.',
     },
   },
+  'subsidio-unificado-empleo': {
+    summary:
+      'Estima el aporte mensual del Subsidio Unificado de Empleo (Ley 21.808) para la persona trabajadora y la empresa según la renta bruta, con tramos de 1,25 y 2,25 IMM del subsidio, piso legal de 2,5% del IMM y pago provisional del 90%.',
+    calculationSteps: [
+      'Verifica el grupo prioritario, el desempleo previo exigido y el 40% RSH (no exigido a personas con discapacidad).',
+      'Trabajador con RB ≤ 1,25 IMM: PV 10% × min(RB, IMM). Con RB entre 1,25 y 2,25 IMM: 10% × 1 IMM − 10% × (RB − 1,25 IMM), con piso de $13.225.',
+      'Empresa con RB ≤ 1,25 IMM: PV 20% × RB. Con RB entre 1,25 y 2,25 IMM: 20% × 1,25 IMM − 25% × (RB − 1,25 IMM).',
+      'Sobre 2,25 IMM ($1.190.250) no hay aporte ese mes. Duración: 12 meses (15 para personas con discapacidad); el pago mensual al trabajador es provisional al 90% y se reliquida anualmente.',
+    ],
+    assumptions: [
+      'Se usa el IMM propio del subsidio ($529.000, reajustable) y los PV del primer año del art. 2° transitorio.',
+      'Los parámetros finales se materializan en el decreto del art. 8 de la Ley 21.808, pendiente de publicación al 26-09-2026; la estimación puede cambiar cuando se publique.',
+    ],
+    limitations: [
+      'No verifica la inscripción real en el RND, la causal de desempleo ni la calidad de micro o pequeña empresa (que extiende el aporte de la empresa a 15 meses).',
+      'El total estimado usa el aporte mensual del primer año sin reliquidación ni reajustes del IMM del subsidio.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: renta bruta $900.000, grupo prioritario y requisitos cumplidos',
+      inputs: [
+        'Renta bruta: $900.000',
+        'Grupo prioritario, desempleo previo y RSH 40%: sí',
+      ],
+      development: [
+        'Tramo 1,25–2,25 IMM: trabajador = 10% × $529.000 − 10% × ($900.000 − $661.250) = $52.900 − $23.875',
+        'Empresa = 20% × $661.250 − 25% × ($900.000 − $661.250) = $132.250 − $59.688',
+      ],
+      result:
+        'Aporte trabajador $29.025/mes (pago provisional $26.123) y empresa $72.563/mes, por 12 meses.',
+    },
+  },
+  'factor-hora-extra': {
+    summary:
+      'Calcula el valor de la hora ordinaria con la fórmula de la Dirección del Trabajo ((sueldo / 30) × 28 / (jornada × 4)), la hora extra con recargo del 50% y el factor multiplicador del sueldo mensual.',
+    calculationSteps: [
+      'Divide el sueldo mensual por 30 y multiplícalo por 28.',
+      'Divide el resultado por la jornada semanal multiplicada por 4: ese es el valor de la hora ordinaria.',
+      'Multiplica por 1,5 para obtener el valor de la hora extraordinaria (recargo del 50%).',
+      'El factor es el valor hora extra dividido por el sueldo; con 42 horas equivale a 0,0083333. El total se redondea al final.',
+    ],
+    assumptions: [
+      'Se aplica el recargo mínimo del 50% indicado por la Dirección del Trabajo.',
+      'La jornada por defecto es la legal vigente de 42 horas semanales (desde el 26-04-2026; bajará a 40 desde el 26-04-2028).',
+    ],
+    limitations: [
+      'No valida el máximo legal de 2 horas extra por día ni 12 por semana.',
+      'No considera recargos superiores pactados individual o colectivamente ni otras modalidades de pago.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: sueldo $1.000.000, jornada 42 h y 10 horas extra',
+      inputs: [
+        'Sueldo base: $1.000.000',
+        'Jornada semanal: 42 horas',
+        'Horas extra: 10',
+      ],
+      development: [
+        'Hora ordinaria = ($1.000.000 / 30) × 28 / 168 = $5.556',
+        'Hora extra = $5.556 × 1,5 ≈ $8.333 (factor 0,0083333)',
+        'Total = $8.333 × 10',
+      ],
+      result: '10 horas extra ≈ $83.333 adicionales al sueldo.',
+    },
+  },
+  'subsidio-familiar-suf': {
+    summary:
+      'Suma el Subsidio Familiar según las cargas acreditadas: $22.601 por cada una y $45.202 por cada persona con discapacidad, montos vigentes desde el 01-05-2026.',
+    calculationSteps: [
+      'Verifica que el hogar esté dentro del 60% más vulnerable según RSH y que haya al menos un causante.',
+      'Multiplica las cargas sin discapacidad por $22.601.',
+      'Multiplica las cargas con discapacidad por $45.202.',
+      'Suma ambos montos para el total mensual y multiplícalo por 12 para el referencial anual.',
+    ],
+    assumptions: [
+      'Cada causante declarado cumple las condiciones (edad, programas de salud o escolaridad según corresponda, y sin ingreso igual o superior al SUF).',
+      'El beneficiario no tiene previsión social ni recibe asignación familiar (beneficios incompatibles).',
+    ],
+    limitations: [
+      'No valida la edad, escolaridad ni el ingreso individual de cada causante.',
+      'No considera la asignación automática con 40% RSH ni la duración máxima de 3 años del beneficio.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 2 cargas comunes y 1 con discapacidad',
+      inputs: [
+        'Cargas sin discapacidad: 2',
+        'Cargas con discapacidad: 1',
+        'RSH 60%: sí',
+      ],
+      development: [
+        '2 × $22.601 = $45.202',
+        '1 × $45.202 = $45.202',
+        'Total mensual = $45.202 + $45.202',
+      ],
+      result: 'SUF mensual $90.404 (referencial anual $1.084.848).',
+    },
+  },
+  'subsidio-electrico': {
+    summary:
+      'Estima el descuento del Subsidio Eléctrico de la 5ª convocatoria (2º semestre 2026) según los integrantes del hogar, repartido en 6 cuotas mensuales desde septiembre de 2026.',
+    calculationSteps: [
+      'Verifica estar al día en el pago al 22-06-2026 y el requisito socioeconómico (40% RSH o persona electrodependiente registrada).',
+      'Asigna el tramo por integrantes: 1 → $17.346; 2 a 3 → $22.548; 4 o más → $31.224.',
+      'Divide el beneficio del semestre jul–dic 2026 en las 6 cuotas oficiales ($2.891 / $3.758 / $5.204).',
+    ],
+    assumptions: [
+      'El postulante es mayor de 18 y cliente (arrendatario o propietario) de la distribuidora o cooperativa.',
+      'Los hogares con persona electrodependiente acceden por cualquier tramo de vulnerabilidad, estando inscritos en el RSH.',
+    ],
+    limitations: [
+      'Beneficio transitorio 2024–2026: no hay fechas oficiales de nuevas convocatorias y la reposición de la 5ª cerró el 19-08-2026.',
+      'No consulta el estado real de la postulación ni de la cuenta eléctrica.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: hogar de 3 integrantes con 40% RSH',
+      inputs: [
+        'Integrantes: 3',
+        'RSH 40%: sí',
+        'Al día en el pago: sí',
+      ],
+      development: [
+        'Tramo 2 a 3 integrantes: $22.548 semestrales',
+        'Repartido en 6 cuotas de $3.758 desde septiembre de 2026',
+      ],
+      result: 'Descuento total $22.548 ($3.758 por mes en la cuenta de luz).',
+    },
+  },
 };

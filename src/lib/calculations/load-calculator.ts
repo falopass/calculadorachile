@@ -3,7 +3,7 @@
 // --------------------------------------------
 // Cada id del catálogo importa SOLO su módulo de cálculo.
 // Los adapters (catálogo UI → motor) viven aquí para no inflar
-// el client con 44 imports estáticos.
+// el client con 48 imports estáticos.
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
@@ -688,6 +688,70 @@ export async function loadCalculationFn(
           sueldoPactado: coerceNumber(inputs.sueldoPactado),
         });
         return sueldoPartTimeToResults(result);
+      };
+    }
+
+    case 'subsidio-unificado-empleo': {
+      const {
+        calculateSubsidioUnificadoEmpleo,
+        subsidioUnificadoEmpleoToResults,
+      } = await import('./subsidio-unificado-empleo');
+      return (inputs) => {
+        const grupo = inputs.grupoPrioritario;
+        const result = calculateSubsidioUnificadoEmpleo({
+          rentaBruta: coerceNumber(inputs.rentaBruta),
+          grupoPrioritario:
+            grupo === 'joven-18-24' ||
+            grupo === 'mujer-25-54' ||
+            grupo === 'mayor-55' ||
+            grupo === 'discapacidad'
+              ? grupo
+              : 'ninguno',
+          desempleoPrevio: coerceBool(inputs.desempleoPrevio),
+          rsh40: coerceBool(inputs.rsh40),
+        });
+        return subsidioUnificadoEmpleoToResults(result);
+      };
+    }
+
+    case 'factor-hora-extra': {
+      const { calculateFactorHoraExtra, factorHoraExtraToResults } =
+        await import('./factor-hora-extra');
+      return (inputs) => {
+        const result = calculateFactorHoraExtra({
+          sueldoBase: coerceNumber(inputs.sueldoBase),
+          jornadaSemanal:
+            coerceNumber(inputs.jornadaSemanal) || undefined,
+          horasExtra: coerceNumber(inputs.horasExtra),
+        });
+        return factorHoraExtraToResults(result);
+      };
+    }
+
+    case 'subsidio-familiar-suf': {
+      const { calculateSubsidioFamiliarSuf, subsidioFamiliarSufToResults } =
+        await import('./subsidio-familiar-suf');
+      return (inputs) => {
+        const result = calculateSubsidioFamiliarSuf({
+          causantes: coerceNumber(inputs.causantes),
+          causantesDiscapacidad: coerceNumber(inputs.causantesDiscapacidad),
+          rsh60: coerceBool(inputs.rsh60),
+        });
+        return subsidioFamiliarSufToResults(result);
+      };
+    }
+
+    case 'subsidio-electrico': {
+      const { calculateSubsidioElectrico, subsidioElectricoToResults } =
+        await import('./subsidio-electrico');
+      return (inputs) => {
+        const result = calculateSubsidioElectrico({
+          integrantes: coerceNumber(inputs.integrantes, 1),
+          rsh40: coerceBool(inputs.rsh40),
+          electrodependiente: coerceBool(inputs.electrodependiente),
+          alDiaPago: coerceBool(inputs.alDiaPago),
+        });
+        return subsidioElectricoToResults(result);
       };
     }
 
