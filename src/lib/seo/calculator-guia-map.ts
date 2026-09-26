@@ -72,6 +72,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-asignacion-familiar': 'familia-pension-alimenticia-chile',
   'calculadora-subsidio-agua': 'familia-pension-alimenticia-chile',
   'calculadora-aguinaldo': 'familia-pension-alimenticia-chile',
+  'calculadora-bono-bodas-oro': 'familia-pension-alimenticia-chile',
 
   // Pensiones / previsional
   'calculadora-simulador-apv': 'afp-pension-chile',

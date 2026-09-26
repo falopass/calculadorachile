@@ -7,7 +7,6 @@ import { describe, it, expect } from 'vitest';
 import { calculateSubsidioHabitacional } from '../subsidio-habitacional';
 import {
   SUBSIDIO_HABITACIONAL,
-  SUBSIDIO_HABITACIONAL_DS19,
   SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF,
   UF,
 } from '@/lib/values/constants';
@@ -39,30 +38,56 @@ describe('calculateSubsidioHabitacional', () => {
   });
 
   describe('DS49 (Fondo Solidario)', () => {
-    it('tramo1 entrega el subsidio máximo del decreto', () => {
+    // ChileAtiende ficha 37960: base desde 314 UF + premio al ahorro
+    // de 1,5 UF por UF adicional sobre 10 UF, tope 30 UF. Igual en
+    // cualquier tramo.
+    it('ahorro 10 UF: subsidio base 314 UF sin premio', () => {
       const r = calculateSubsidioHabitacional({
         valorPropiedadUF: 600,
-        ahorroUF: 15,
+        ahorroUF: 10,
         tipoSubsidio: 'ds49',
         tramo: 'tramo1',
       });
-      expect(r.subsidioBaseUF).toBe(SUBSIDIO_HABITACIONAL.ds49.tramo1.subsidioMaximoUF);
+      expect(r.premioAhorroUF).toBe(0);
+      expect(r.subsidioBaseUF).toBe(314);
     });
 
-    it('tramo2 entrega menos subsidio que tramo1', () => {
+    it('ahorro 20 UF: 314 + 15 = 329 UF', () => {
+      const r = calculateSubsidioHabitacional({
+        valorPropiedadUF: 600,
+        ahorroUF: 20,
+        tipoSubsidio: 'ds49',
+        tramo: 'tramo1',
+      });
+      expect(r.premioAhorroUF).toBe(15);
+      expect(r.subsidioBaseUF).toBe(329);
+    });
+
+    it('ahorro 40 UF: premio topeado en 30 → 344 UF', () => {
+      const r = calculateSubsidioHabitacional({
+        valorPropiedadUF: 600,
+        ahorroUF: 40,
+        tipoSubsidio: 'ds49',
+        tramo: 'tramo1',
+      });
+      expect(r.premioAhorroUF).toBe(30);
+      expect(r.subsidioBaseUF).toBe(344);
+    });
+
+    it('la fórmula DS49 no depende del tramo', () => {
       const t1 = calculateSubsidioHabitacional({
         valorPropiedadUF: 500,
-        ahorroUF: 15,
+        ahorroUF: 20,
         tipoSubsidio: 'ds49',
         tramo: 'tramo1',
       });
       const t2 = calculateSubsidioHabitacional({
         valorPropiedadUF: 500,
-        ahorroUF: 15,
+        ahorroUF: 20,
         tipoSubsidio: 'ds49',
         tramo: 'tramo2',
       });
-      expect(t2.subsidioBaseUF).toBeLessThan(t1.subsidioBaseUF);
+      expect(t2.subsidioBaseUF).toBe(t1.subsidioBaseUF);
     });
   });
 
@@ -102,19 +127,49 @@ describe('calculateSubsidioHabitacional', () => {
   });
 
   describe('DS19 (Integración Social)', () => {
-    it('usa la tabla DS19 con tope de propiedad propio', () => {
-      const r = calculateSubsidioHabitacional({
-        valorPropiedadUF: 2000,
+    // Res. Ex. MINVU N°700 (06-05-2026): subsidio base y precio máximo
+    // por segmento; zonas extremas con valores propios.
+    const ds19 = (
+      tramo: 'tramo1' | 'tramo2' | 'tramo3',
+      esZonaExtrema = false,
+      valorPropiedadUF = 500,
+    ) =>
+      calculateSubsidioHabitacional({
+        valorPropiedadUF,
         ahorroUF: 100,
         tipoSubsidio: 'ds19',
-        tramo: 'tramo1',
+        tramo,
+        esZonaExtrema,
       });
-      expect(r.montoMaximoPropiedadUF).toBe(
-        SUBSIDIO_HABITACIONAL_DS19.monto_max_propiedad_uf,
-      );
-      expect(r.subsidioBaseUF).toBe(
-        SUBSIDIO_HABITACIONAL_DS19.tramos.tramo1.subsidioMaximoUF,
-      );
+
+    it('tramo1: 1.200 UF general / 1.700 UF extrema, tope 1.500 / 2.000', () => {
+      expect(ds19('tramo1').subsidioBaseUF).toBe(1200);
+      expect(ds19('tramo1').montoMaximoPropiedadUF).toBe(1500);
+      expect(ds19('tramo1', true).subsidioBaseUF).toBe(1700);
+      expect(ds19('tramo1', true).montoMaximoPropiedadUF).toBe(2000);
+    });
+
+    it('tramo2: 425 UF general / 537,5 UF extrema, tope 1.800 / 2.400', () => {
+      expect(ds19('tramo2').subsidioBaseUF).toBe(425);
+      expect(ds19('tramo2').montoMaximoPropiedadUF).toBe(1800);
+      expect(ds19('tramo2', true).subsidioBaseUF).toBe(537.5);
+      expect(ds19('tramo2', true).montoMaximoPropiedadUF).toBe(2400);
+    });
+
+    it('tramo3: 350 UF general / 500 UF extrema, tope 2.800 / 4.000', () => {
+      expect(ds19('tramo3').subsidioBaseUF).toBe(350);
+      expect(ds19('tramo3').montoMaximoPropiedadUF).toBe(2800);
+      expect(ds19('tramo3', true).subsidioBaseUF).toBe(500);
+      expect(ds19('tramo3', true).montoMaximoPropiedadUF).toBe(4000);
+    });
+
+    it('propiedad sobre el tope DS19 reporta error', () => {
+      const r = ds19('tramo1', false, 1600);
+      expect(r.cumpleRequisitos).toBe(false);
+      expect(r.errores.some((e) => e.toLowerCase().includes('tope'))).toBe(true);
+      // En zona extrema el tope T1 sube a 2.000: la misma vivienda calza.
+      const extrema = ds19('tramo1', true, 1600);
+      expect(extrema.errores.some((e) => e.toLowerCase().includes('tope'))).toBe(false);
     });
   });
 

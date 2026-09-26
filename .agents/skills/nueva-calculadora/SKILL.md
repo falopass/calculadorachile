@@ -101,7 +101,7 @@ Nueva calculadora **no está lista** sin evidencia del `verifier` para typecheck
 - Inventar tasas, topes o “promedios de mercado” sin fuente.
 - Meter lógica de negocio en componentes React del shell.
 - Crear ruta App Router custom si el patrón dinámico `[slug]` alcanza.
-- Reactivar `bono-bodas-oro` o copiar su 410 sin aprobación.
+- Devolver 410 a una calculadora sin retiro decidido: `bono-bodas-oro` se reactivó el 26-09-2026 y la ruta 410 dedicada fue eliminada.
 - Instalar Three.js / GSAP / Lenis / dark mode para “completar” la feature.
 - Hardcodear formato `$1,000,000` (US): usar `src/lib/formatters.ts` (CLP chileno).
 

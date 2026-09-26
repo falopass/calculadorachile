@@ -24,11 +24,11 @@ Research: [`research/`](./research/).
 
 | Pieza | Estado |
 |-------|--------|
-| Calculadoras activas | **39** |
-| Módulos + tests | **40** (histórico `bono-bodas-oro`) |
+| Calculadoras activas | **40** |
+| Módulos + tests | **40 + 42** |
 | noIndex | **8** |
 | Guías / blog | 12 / ~19 |
-| `bono-bodas-oro` | **410 Gone** — no reactivar sin OK |
+| `bono-bodas-oro` | **Reactivado 26-09-2026** (ficha 5369 verificada) |
 
 ### Prioridades
 
@@ -42,7 +42,6 @@ Research: [`research/`](./research/).
 
 - Pyme / WhatsApp CTA / `LocalBusiness`  
 - Three.js / GSAP / Lenis / dark mode  
-- Reactivar bono-bodas-oro  
 - Cambiar slugs “porque quedan más bonitos”  
 - Actualizar fórmulas sin fuente oficial  
 

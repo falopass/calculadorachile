@@ -25,6 +25,8 @@ describe('calculateSueldoLiquido', () => {
         afp: 'capital',
         saludTipo: 'fonasa',
         contratoIndefinido: true,
+        // Antes de ago-2026 el SIS se cobra por separado al empleador.
+        fecha: new Date('2026-07-15'),
       });
       const base = Math.min(bruto, TOPE_IMPOSITIVO.afp_salud * UF.valor);
       const afpEsperado = Math.round(
@@ -264,14 +266,16 @@ describe('calculateSueldoLiquido', () => {
       expect(result.descuentos.afp).toBeGreaterThan(0);
     });
 
-    it('debería incluir aporte SIS del empleador', () => {
+    it('debería incluir aporte SIS del empleador (período pre ago-2026)', () => {
       const result = calculateSueldoLiquido({
         ...inputBase,
         sueldoBruto: 1000000,
+        // Hasta jul-2026 el SIS se paga por separado (Ley 20.255 /
+        // calendario Ley 21.735). Desde ago-2026 va dentro del 2,5% del
+        // Seguro Social y aquí debe ser 0.
+        fecha: new Date('2026-07-15'),
       });
 
-      // Desde Ley 20.255 (2009) el SIS lo paga 100% el empleador y NO
-      // se descuenta al trabajador. Se reporta en aportesEmpleador.
       expect(result.aportesEmpleador.sis).toBeGreaterThan(0);
     });
 
@@ -282,6 +286,49 @@ describe('calculateSueldoLiquido', () => {
       });
 
       expect(result.descuentos.salud).toBeGreaterThan(0);
+    });
+  });
+
+  describe('aporte empleador Ley 21.735', () => {
+    const valorUFPin = 40_000; // tope 90 UF = $3.600.000, base $1.000.000 queda bajo el tope
+
+    it('remuneración sep-2026: reforma 3,5% y SIS incluido (sis = 0)', () => {
+      const r = calculateSueldoLiquido({
+        ...inputBase,
+        sueldoBruto: 1_000_000,
+        valorUF: valorUFPin,
+        fecha: new Date('2026-09-15'),
+      });
+      const base = 1_000_000;
+      expect(r.aportesEmpleador.tasaReforma).toBe(3.5);
+      expect(r.aportesEmpleador.incluyeSIS).toBe(true);
+      expect(r.aportesEmpleador.reformaPrevisional).toBe(Math.round(base * 0.035));
+      expect(r.aportesEmpleador.sis).toBe(0);
+      expect(r.aportesEmpleador.total).toBe(
+        r.aportesEmpleador.reformaPrevisional +
+          r.aportesEmpleador.seguroCesantia +
+          r.aportesEmpleador.mutual,
+      );
+    });
+
+    it('remuneración jul-2026: reforma 1,0% y SIS separado 1,62%', () => {
+      const r = calculateSueldoLiquido({
+        ...inputBase,
+        sueldoBruto: 1_000_000,
+        valorUF: valorUFPin,
+        fecha: new Date('2026-07-15'),
+      });
+      const base = 1_000_000;
+      expect(r.aportesEmpleador.tasaReforma).toBe(1.0);
+      expect(r.aportesEmpleador.incluyeSIS).toBe(false);
+      expect(r.aportesEmpleador.reformaPrevisional).toBe(Math.round(base * 0.01));
+      expect(r.aportesEmpleador.sis).toBe(Math.round(base * 0.0162));
+      expect(r.aportesEmpleador.total).toBe(
+        r.aportesEmpleador.reformaPrevisional +
+          r.aportesEmpleador.sis +
+          r.aportesEmpleador.seguroCesantia +
+          r.aportesEmpleador.mutual,
+      );
     });
   });
 

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Producto** | calculadorachile.cl — 39 calculadoras · SEO orgánico + AdSense |
+| **Producto** | calculadorachile.cl — 40 calculadoras · SEO orgánico + AdSense |
 | **Objetivo** | Maximizar **pageviews → impresiones AdSense**. Fit a calculadora = preferible, no obligatorio. |
 | **Consolidación** | 2026-07-10 · formato blog/guía 2026-07-11 |
 | **Estado** | **Único plan editorial operativo** del repo |
@@ -240,7 +240,7 @@ Temas del inventario **no** cubiertos por pendientes/publicados del plan (no se 
 | SUF / Subsidio Familiar | Nicho beneficios; plan A no lo programó |
 | Subsidio discapacidad menores | Nicho; sin calc |
 | Bonos Seguridades y Oportunidades (Protección, Base, Niño Sano, Asistencia, Logro, Formalización) | Nicho MDSF; reabrir solo si falta volume AdSense |
-| Bono Bodas de Oro | Calc en **410**; no reactivar sin fórmula verificada |
+| Bono Bodas de Oro | Calc **reactivada 26-09-2026** (ficha 5369); monto $482.295 desde oct-2026 |
 | Asignación por muerte | Bajo volumen editorial planificado |
 | Subsidio de arriendo 2026 | Ventana postulación jul–ago ya límite en plan original |
 | Subsidio cotización trabajadores jóvenes | Cierre / transición a SUE (#16) |

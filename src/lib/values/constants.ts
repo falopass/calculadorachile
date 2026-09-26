@@ -73,6 +73,10 @@ export const EURO = {
 export const AFP = {
   // SIS 1,62% desde remuneraciones de abril 2026 (Oficio Ord. N° 7429 SP
   // del 14-abr-2026, Superintendencia de Pensiones). Antes 1,15%.
+  // Desde remuneraciones de agosto 2026 el SIS se financia dentro del
+  // 2,5% del Seguro Social (Ley 21.735, ChileAtiende 130987); este valor
+  // solo aplica a períodos anteriores. Previred informa 1,78% para
+  // ago–oct 2026 como parte de ese 2,5%, no como cargo adicional.
   capital: { nombre: 'Capital', comision: 1.44, sis: 1.62 },
   cuprum: { nombre: 'Cuprum', comision: 1.44, sis: 1.62 },
   habitat: { nombre: 'Habitat', comision: 1.27, sis: 1.62 },
@@ -85,11 +89,16 @@ export const AFP = {
 export const SALUD = {
   fonasa: {
     tasa: 7,
+    /**
+     * Umbrales vigentes desde 01-05-2026 (fonasa.gob.cl/tramos).
+     * La cotización legal es 7% única para todos los tramos; no existe
+     * cotización diferenciada por tramo.
+     */
     tramos: {
-      a: { nombre: 'A', cotizacion: 0 },
-      b: { nombre: 'B', cotizacion: 0 },
-      c: { nombre: 'C', cotizacion: 0.0067 },
-      d: { nombre: 'D', cotizacion: 0.0204 },
+      a: { nombre: 'A', descripcion: 'Sin ingresos / causantes de SUF' },
+      b: { nombre: 'B', ingresoMaximoCLP: 553553 },
+      c: { nombre: 'C', ingresoMinimoCLP: 553554, ingresoMaximoCLP: 808187 },
+      d: { nombre: 'D', ingresoMinimoCLP: 808188 },
     },
   },
   isapre: {
@@ -131,32 +140,43 @@ export const SEGURO_CESANTIA = {
 };
 
 /**
- * Tasa de cotización al nuevo Seguro Social Previsional creado por la
- * Ley 21.735 (reforma de pensiones). El empleador aporta un porcentaje
- * adicional sobre la base imponible que se incrementa gradualmente
- * cada 1° de agosto desde 2025 hasta 2033.
+ * Tasa de cotización total del empleador creada por la Ley 21.735
+ * (reforma de pensiones). El empleador aporta un porcentaje adicional
+ * sobre la base imponible que se incrementa cada 1° de agosto desde
+ * 2025 hasta 2033.
  *
- * Fuente: WTW / Superintendencia de Pensiones.
+ * Fuente: ChileAtiende — Aportes del empleador al sistema de pensiones
+ * https://www.chileatiende.gob.cl/fichas/130987-aportes-del-empleador-al-sistema-de-pensiones
+ * "Desde las remuneraciones de agosto de 2026, el empleador deberá
+ * cotizar un total del 3,5 %: 2,5 % corresponde al Seguro Social
+ * Previsional (que incluye el Seguro de Invalidez y Sobrevivencia,
+ * ahora recaudado por el IPS), 0,9 % a la CRP y 0,1 % a la cuenta de
+ * capitalización individual."
+ *
+ * `incluyeSIS` indica que el SIS se financia dentro del escalón (2,5%
+ * del Seguro Social) y no debe cobrarse por separado. Hasta julio de
+ * 2026 el aporte es 1,0% y el SIS vigente se paga aparte.
  *
  * Para evitar tener que actualizar manualmente la tasa cada agosto,
- * el código debe llamar siempre a `getSeguroSocialPrevisionalVigente()`
- * (definido más abajo en este archivo). El alias `tasaVigente2026` se
- * mantiene **solo** por compatibilidad con código que aún consulta
- * directamente el valor — apunta dinámicamente a la tasa vigente
- * según la fecha del sistema, así también se actualiza solo.
+ * el código debe llamar siempre a `getEscalonSeguroSocialPrevisional()`
+ * o `getSeguroSocialPrevisionalVigente()` (definidos más abajo en este
+ * archivo). El alias `tasaVigente2026` se mantiene **solo** por
+ * compatibilidad con código que aún consulta directamente el valor —
+ * apunta dinámicamente a la tasa vigente según la fecha del sistema,
+ * así también se actualiza solo.
  */
 export const SEGURO_SOCIAL_PREVISIONAL = {
   /** Calendario de tasas de aporte empleador (% sobre imponible). */
   calendario: [
-    { vigenteDesde: '2025-08-01', tasa: 1.0 },
-    { vigenteDesde: '2026-08-01', tasa: 1.75 },
-    { vigenteDesde: '2027-08-01', tasa: 2.5 },
-    { vigenteDesde: '2028-08-01', tasa: 3.25 },
-    { vigenteDesde: '2029-08-01', tasa: 4.0 },
-    { vigenteDesde: '2030-08-01', tasa: 4.75 },
-    { vigenteDesde: '2031-08-01', tasa: 5.5 },
-    { vigenteDesde: '2032-08-01', tasa: 6.25 },
-    { vigenteDesde: '2033-08-01', tasa: 7.0 },
+    { vigenteDesde: '2025-08-01', tasa: 1.0, incluyeSIS: false },
+    { vigenteDesde: '2026-08-01', tasa: 3.5, incluyeSIS: true },
+    { vigenteDesde: '2027-08-01', tasa: 4.25, incluyeSIS: true },
+    { vigenteDesde: '2028-08-01', tasa: 5.0, incluyeSIS: true },
+    { vigenteDesde: '2029-08-01', tasa: 5.7, incluyeSIS: true },
+    { vigenteDesde: '2030-08-01', tasa: 6.4, incluyeSIS: true },
+    { vigenteDesde: '2031-08-01', tasa: 7.1, incluyeSIS: true },
+    { vigenteDesde: '2032-08-01', tasa: 7.8, incluyeSIS: true },
+    { vigenteDesde: '2033-08-01', tasa: 8.5, incluyeSIS: true },
   ],
   /**
    * Tasa vigente — alias dinámico que apunta al primer escalón del
@@ -173,38 +193,57 @@ export const SEGURO_SOCIAL_PREVISIONAL = {
 };
 
 /**
- * Devuelve la tasa de aporte del Seguro Social Previsional (Ley 21.735)
- * vigente en la fecha indicada.
+ * Devuelve el escalón del aporte empleador de la Ley 21.735 vigente
+ * en la fecha indicada: la tasa total y si el SIS ya está incluido
+ * en ella.
  *
  * El calendario sube cada 1° de agosto desde 2025 hasta 2033. Si la
- * fecha es anterior a 2025-08-01, retorna 0 (la tasa entra en vigor
- * con el primer escalón). Si la fecha es posterior a 2033-08-01,
- * retorna la tasa máxima (7,0%).
+ * fecha es anterior a 2025-08-01, retorna `{ tasa: 0, incluyeSIS: false }`
+ * (la tasa entra en vigor con el primer escalón). Si la fecha es
+ * posterior a 2033-08-01, retorna la tasa máxima (8,5%).
  *
- * @param fecha Fecha para la cual obtener la tasa. Default: ahora.
- * @returns Tasa porcentual (1.0 = 1%, 1.75 = 1,75%).
+ * @param fecha Fecha para la cual obtener el escalón. Default: ahora.
  *
  * @example
- *   getSeguroSocialPrevisionalVigente(new Date('2026-07-31'))  // 1.0
- *   getSeguroSocialPrevisionalVigente(new Date('2026-08-01'))  // 1.75
- *   getSeguroSocialPrevisionalVigente(new Date('2034-01-01'))  // 7.0
+ *   getEscalonSeguroSocialPrevisional(new Date('2026-07-31'))  // { tasa: 1.0, incluyeSIS: false }
+ *   getEscalonSeguroSocialPrevisional(new Date('2026-08-01'))  // { tasa: 3.5, incluyeSIS: true }
+ *   getEscalonSeguroSocialPrevisional(new Date('2034-01-01'))  // { tasa: 8.5, incluyeSIS: true }
  */
-export function getSeguroSocialPrevisionalVigente(
+export function getEscalonSeguroSocialPrevisional(
   fecha: Date = new Date(),
-): number {
+): { tasa: number; incluyeSIS: boolean } {
   const t = fecha.getTime();
 
   // El calendario está ordenado cronológicamente. Buscamos el último
   // escalón cuyo `vigenteDesde` sea <= a la fecha solicitada.
-  let tasa = 0;
+  let vigente = { tasa: 0, incluyeSIS: false };
   for (const escalon of SEGURO_SOCIAL_PREVISIONAL.calendario) {
     if (new Date(escalon.vigenteDesde).getTime() <= t) {
-      tasa = escalon.tasa;
+      vigente = { tasa: escalon.tasa, incluyeSIS: escalon.incluyeSIS };
     } else {
       break;
     }
   }
-  return tasa;
+  return vigente;
+}
+
+/**
+ * Devuelve la tasa de aporte del empleador (Ley 21.735) vigente en la
+ * fecha indicada. Atajo sobre `getEscalonSeguroSocialPrevisional` para
+ * quien solo necesita el porcentaje.
+ *
+ * @param fecha Fecha para la cual obtener la tasa. Default: ahora.
+ * @returns Tasa porcentual (1.0 = 1%, 3.5 = 3,5%).
+ *
+ * @example
+ *   getSeguroSocialPrevisionalVigente(new Date('2026-07-31'))  // 1.0
+ *   getSeguroSocialPrevisionalVigente(new Date('2026-08-01'))  // 3.5
+ *   getSeguroSocialPrevisionalVigente(new Date('2034-01-01'))  // 8.5
+ */
+export function getSeguroSocialPrevisionalVigente(
+  fecha: Date = new Date(),
+): number {
+  return getEscalonSeguroSocialPrevisional(fecha).tasa;
 }
 
 export const GRATIFICACION = {
@@ -323,18 +362,39 @@ export const UTA_2026 = UTM.valor * 12;
  * subsidioMaximoUF = orden de magnitud del aporte (verificable por llamado).
  */
 export const SUBSIDIO_HABITACIONAL = {
+  /**
+   * DS49 — aporte del Estado: subsidio base 314 UF que puede aumentar
+   * según la ubicación de la vivienda, más complementarios (ChileAtiende
+   * ficha 37960): localización en zonas urbanas 200 UF; factibilización
+   * rural 120 UF; densificación en altura (desde tres pisos) 110 UF;
+   * discapacidad 20 u 80 UF; superficie adicional (sobre 37,5 m²) hasta
+   * 50 UF; premio al ahorro adicional (más de 10 UF al postular) hasta
+   * 30 UF — 1,5 UF por cada UF adicional de ahorro (guía MINVU DS49
+   * compra).
+   */
   ds49: {
     /** Tope referencial precio vivienda DS49 (general ~950 UF). */
     montoMaximoUF: 950,
-    tramo1: { ingresoMaximoUF: 12, subsidioMaximoUF: 450 },
-    tramo2: { ingresoMaximoUF: 18, subsidioMaximoUF: 380 },
-    tramo3: { ingresoMaximoUF: 24, subsidioMaximoUF: 310 },
+    subsidioBaseUF: 314,
+    ahorroMinimoUF: 10,
+    premioAhorro: { ufPorUfAdicional: 1.5, topeUF: 30 },
+    complementarios: {
+      localizacionUF: 200,
+      factibilizacionRuralUF: 120,
+      densificacionAlturaUF: 110,
+      discapacidadUF: [20, 80],
+      superficieAdicionalMaxUF: 50,
+    },
   },
   ds01: {
     /** Tope T3 general 2.200 UF (ChileAtiende DS1 T3). */
     montoMaximoUF: 2200,
     tramo1: { ingresoMaximoUF: 15, subsidioMaximoUF: 600 },
     tramo2: { ingresoMaximoUF: 22, subsidioMaximoUF: 450 },
+    /**
+     * ChileAtiende ficha 5436 informa "monto promedio de subsidio de
+     * 270 UF, para todas las regiones" (consulta 26-09-2026).
+     */
     tramo3: { ingresoMaximoUF: 90, subsidioMaximoUF: 270 },
   },
 };
@@ -360,17 +420,48 @@ export const TARIFA_BT1 = {
 // matrimonio. Pago fijo por cada cónyuge, reajustado por el IPS.
 // ============================================
 export const BONO_BODAS_ORO = {
-  /** Monto vigente desde el 1 de octubre de 2025 hasta el reajuste de octubre de 2026. */
-  montoPorConyugeCLP: 231583,
-  /** Pago único total para el matrimonio. */
-  montoTotalCLP: 463166,
+  /**
+   * Montos vigentes por fecha de solicitud (reajuste 100% IPC cada
+   * octubre). Fuente: ChileAtiende — Bono Bodas de Oro (IPS)
+   * https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro
+   * "A partir del 1 de octubre de 2026, el valor del bono es de
+   * $482.295... Se entrega una sola vez en partes iguales ($241.147
+   * para cada cónyuge vivo)... Una vez que cumplan su 50º aniversario,
+   * tienen plazo de un año para realizar el trámite."
+   */
+  calendario: [
+    { desde: '2025-10-01', montoTotalCLP: 463166, montoPorConyugeCLP: 231583 },
+    { desde: '2026-10-01', montoTotalCLP: 482295, montoPorConyugeCLP: 241147 },
+  ],
   requisitos: [
-    'Cumplir 50 años de matrimonio',
-    'Ambos cónyuges vivos al momento del pago',
+    'Cumplir 50 años de matrimonio y solicitar dentro del año siguiente',
+    'No encontrarse separados o divorciados',
     'Pertenecer al 80% más vulnerable según RSH',
-    'Residir en Chile',
+    'Convivir en el mismo hogar o acreditar residencia en hogares de larga estadía',
+    'Residencia en Chile 4 años dentro de los últimos 5 anteriores a la solicitud',
   ],
 };
+
+/**
+ * Devuelve el monto vigente del Bono Bodas de Oro en la fecha indicada.
+ * El calendario está ordenado cronológicamente; antes del primer
+ * escalón se retorna el primero (monto de referencia más antiguo
+ * conocido).
+ */
+export function getMontoBodasOro(
+  fecha: Date = new Date(),
+): { desde: string; montoTotalCLP: number; montoPorConyugeCLP: number } {
+  const t = fecha.getTime();
+  let vigente = BONO_BODAS_ORO.calendario[0];
+  for (const entrada of BONO_BODAS_ORO.calendario) {
+    if (new Date(entrada.desde).getTime() <= t) {
+      vigente = entrada;
+    } else {
+      break;
+    }
+  }
+  return vigente;
+}
 
 // ============================================
 // PGU 2026 (Ley 21.735, reajuste IPC febrero 2026)
@@ -378,10 +469,24 @@ export const BONO_BODAS_ORO = {
 // En febrero 2026 se reajustó por IPC 2025 (aprox. +4%).
 // ============================================
 export const PGU_2026 = {
-  /** PGU máxima para personas de 65 a 81 años, vigente desde febrero de 2026. */
+  /** PGU base (reajuste IPC febrero 2026): aplica mientras la edad no llegue al umbral del monto máximo. */
   montoMaximo65a81CLP: 231732,
-  /** PGU máxima para personas de 82 años o más, vigente desde febrero de 2026. */
+  /** PGU máxima (reajuste IPC febrero 2026): aplica desde la edad umbral vigente a la fecha. */
   montoMaximo82MasCLP: 250275,
+  /**
+   * Edad desde la que corresponde el monto máximo, según fecha.
+   * Fuente: ChileAtiende ficha 130457 — "A partir de septiembre de
+   * 2026, las personas de 75 años o más podrán acceder al monto máximo
+   * de la PGU ($250.275)... Si cumples 75 años entre octubre de 2026 y
+   * agosto de 2027, tendrás derecho al aumento desde el mes de tu
+   * cumpleaños. A partir de septiembre de 2027: si tienes 65 años o
+   * más, tu PGU aumentará al monto máximo."
+   */
+  edadMontoMaximo: [
+    { desde: '2025-09-01', edad: 82 },
+    { desde: '2026-09-01', edad: 75 },
+    { desde: '2027-09-01', edad: 65 },
+  ],
   edadMinima: 65,
   tramos: [
     /** Pensión base hasta este monto: PGU completa. */
@@ -975,12 +1080,33 @@ export const CREDITO_AUTOMOTRIZ = {
 // Los ahorros son fijos por decreto (NO derivados
 // del ingreso, como asumía la versión anterior).
 // ============================================
+/**
+ * DS19 Integración Social y Territorial — Res. Ex. N°700 del
+ * 06-05-2026 (llamado especial a concurso 2026, minvu.gob.cl).
+ * Tres segmentos familiares; valores "mayoría de comunas" con zonas
+ * extremas entre paréntesis. Gran Santiago y otras zonas definidas
+ * tienen valores propios no modelados (p. ej. 1.600/1.300 UF;
+ * 1.700–1.900/487,5; 1.900–3.000). Existen además el Bono de
+ * Integración Social (200–300 UF) y el Bono por Captación (hasta
+ * 250 UF), referenciales y no incluidos aquí.
+ */
 export const SUBSIDIO_HABITACIONAL_DS19 = {
-  monto_max_propiedad_uf: 2200,
   tramos: {
-    tramo1: { ingresoMaximoUF: 25, subsidioMaximoUF: 800 },
-    tramo2: { ingresoMaximoUF: 40, subsidioMaximoUF: 500 },
-    tramo3: { ingresoMaximoUF: 60, subsidioMaximoUF: 200 },
+    /** Menores ingresos: precio hasta 1.500 UF (2.000 extrema). */
+    tramo1: {
+      subsidioUF: { general: 1200, extrema: 1700 },
+      precioMaxUF: { general: 1500, extrema: 2000 },
+    },
+    /** Tramo intermedio: precio 1.600–1.800 UF (2.100–2.400 extrema). */
+    tramo2: {
+      subsidioUF: { general: 425, extrema: 537.5 },
+      precioMaxUF: { general: 1800, extrema: 2400 },
+    },
+    /** Sectores medios: precio más de 1.800 y hasta 2.800 UF (hasta 4.000 extrema). */
+    tramo3: {
+      subsidioUF: { general: 350, extrema: 500 },
+      precioMaxUF: { general: 2800, extrema: 4000 },
+    },
   },
 } as const;
 
@@ -991,7 +1117,8 @@ export const SUBSIDIO_HABITACIONAL_DS19 = {
  *
  *  - DS49: 10 UF (ChileAtiende / SERVIU)
  *  - DS01 T1/T2/T3: 30 / 40 / 80 UF (ChileAtiende DS1)
- *  - DS19: 80 / 100 / 100 UF (referencia motor; verificar llamado)
+ *  - DS19: 80 / 100 / 100 UF (depende del subsidio con que postula
+ *    la familia; referencial)
  */
 export const SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF = {
   ds49: { tramo1: 10, tramo2: 10, tramo3: 10 },

@@ -10,9 +10,9 @@ Prioridad del proyecto: **ship rápido, bajo costo y alta confiabilidad en cálc
 
 Estado actual del catálogo:
 
-- **39 calculadoras activas** en `src/data/calculators.ts`.
-- **40 módulos de cálculo y 40 tests** en `src/lib/calculations/` porque `bono-bodas-oro` sigue en el repo como módulo/test histórico.
-- `bono-bodas-oro` fue retirado del catálogo público: `src/app/calculadoras/calculadora-bono-bodas-oro/route.ts` responde **410 Gone**. No lo reintroduzcas sin fórmula verificada y aprobación explícita.
+- **40 calculadoras activas** en `src/data/calculators.ts`.
+- **40 módulos de cálculo y 42 tests** en `src/lib/calculations/` (los 40 módulos + tests auxiliares `input-coerce` y `seguro-social`).
+- `bono-bodas-oro` fue **reactivado el 26-09-2026** con fórmula verificada (ChileAtiende ficha 5369): la ruta 410 anterior fue eliminada y el slug lo sirve la ruta dinámica normal.
 
 ## Stack real instalado
 
@@ -73,7 +73,7 @@ src/
 │   ├── ui/                          # UI base
 │   └── DisclaimerYMYL.tsx           # disclaimer YMYL
 ├── data/
-│   ├── calculators.ts               # catálogo activo: 39 calculadoras
+│   ├── calculators.ts               # catálogo activo: 40 calculadoras
 │   ├── articles.ts                  # blog
 │   ├── guias.ts                     # guías SEO/educativas
 │   └── seo-overrides.ts             # overrides canónicos de title/description
@@ -180,7 +180,6 @@ Secretos y valores reales de producción van en **Vercel Dashboard → Settings 
 - Slugs, URLs públicas, canonicals, redirects, 410, robots o sitemaps. Romper rutas indexadas rompe tráfico orgánico.
 - AdSense: script global, placeholders, componentes o ubicación de placements.
 - Structured data SEO/YMYL: Organization/WebSite/Person/FAQ/HowTo/SoftwareApplication/Breadcrumbs.
-- `bono-bodas-oro`: no reactivarlo ni devolverlo al catálogo/sitemap sin revisión de fuente y aprobación.
 - Dark mode: el producto está light-only.
 - Nuevas dependencias de animación/3D/smooth scroll no instaladas.
 - Formato de moneda chilena.

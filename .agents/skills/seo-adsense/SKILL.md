@@ -85,8 +85,8 @@ Implementado: Organization, Person, WebSite+SearchAction, WebPage/About/Contact,
 
 ### G. Retiro de URL
 
-Patrón existente: ruta dedicada con **410 Gone** (ej. bono bodas de oro).
-No devolver 200 vacío ni 404 blando si la URL estuvo indexada y se retira a propósito.
+Patrón existente: ruta dedicada con **410 Gone** bajo `src/app/calculadoras/<slug>/route.ts`.
+No devolver 200 vacío ni 404 blando si la URL estuvo indexada y se retira a propósito. `bono-bodas-oro` volvió al catálogo el 26-09-2026, así que su 410 ya no existe.
 
 ## Checklist pre-merge SEO
 

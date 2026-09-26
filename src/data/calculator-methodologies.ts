@@ -653,4 +653,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'PPM estimado: $2.500.',
     },
   },
+  'bono-bodas-oro': {
+    summary:
+      'Verifica los requisitos del Bono Bodas de Oro (Ley 20.506) y muestra el monto vigente según la fecha de referencia.',
+    calculationSteps: [
+      'Comprueba que los años de matrimonio sean exactamente 50: el plazo para solicitar es de un año desde el 50º aniversario.',
+      'Verifica los demás requisitos declarados: 80% más vulnerable según RSH, convivencia sin separación ni divorcio, y residencia en Chile 4 de los últimos 5 años.',
+      'Aplica el monto vigente a la fecha del calendario publicado (reajuste de 100% del IPC cada octubre).',
+      'En viudez dentro del plazo, muestra la parte propia y la parte del cónyuge fallecido a la que se puede optar.',
+    ],
+    assumptions: [
+      'Las respuestas sobre RSH, convivencia y residencia reflejan la situación real acreditable.',
+      'La solicitud se realiza dentro del año siguiente al 50º aniversario.',
+    ],
+    limitations: [
+      'No consulta el Registro Social de Hogares ni acredita antecedentes ante el IPS.',
+      'El monto mostrado corresponde al publicado por ChileAtiende/IPS; el pago efectivo lo determina el IPS al momento de la solicitud.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: matrimonio que cumple 50 años (desde oct-2026)',
+      inputs: [
+        'Años de matrimonio: 50',
+        'Ambos cónyuges vivos y sin separación',
+        '80% más vulnerable RSH y residencia 4/5 años: sí',
+      ],
+      development: [
+        'Monto vigente desde 1-oct-2026: $241.147 por cónyuge',
+        'Total matrimonio = $241.147 × 2',
+      ],
+      result: 'Bono único estimado: $482.295 para el matrimonio.',
+    },
+  },
 };

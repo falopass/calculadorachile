@@ -3,101 +3,120 @@
 // Beneficio único por 50 años de matrimonio (Ley 20.506)
 // ============================================
 
-import { BONO_BODAS_ORO, BODAS_ORO } from '@/lib/values/constants';
+import {
+  BODAS_ORO,
+  getMontoBodasOro,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
+export type SituacionConyuges =
+  | 'ambos-vivos'
+  | 'viudez-en-plazo'
+  | 'viudez-fuera-plazo';
+
 export interface BonoBodasOroInput {
-  /**
-   * Años de matrimonio cumplidos a la fecha de postulación.
-   * El requisito legal es 50 años cumplidos.
-   *
-   * Para mantener compatibilidad con la UI existente (que usa
-   * `anosTrabajados`), se acepta también ese alias y se interpreta
-   * como años de matrimonio.
-   */
-  anosMatrimonio?: number;
-  /** Alias legacy: la UI antigua entrega "años trabajados". */
-  anosTrabajados?: number;
+  /** Años de matrimonio cumplidos a la fecha de postulación. */
+  anosMatrimonio: number;
   /** Indica si pertenece al 80% más vulnerable según RSH. */
-  perteneceAl80Vulnerable?: boolean;
-  /** Indica si ambos cónyuges están vivos. */
-  ambosConyugesVivos?: boolean;
-  /** Compatibilidad legacy. */
-  esPublico?: boolean;
-  sueldoBruto?: number;
+  perteneceAl80Vulnerable: boolean;
+  /**
+   * Los cónyuges no están separados ni divorciados y conviven en el
+   * mismo hogar (o acreditan residencia en hogares de larga estadía).
+   */
+  convivenSinSeparacion: boolean;
+  /** Residencia en Chile 4 años dentro de los últimos 5 anteriores a la solicitud. */
+  residencia4de5: boolean;
+  /**
+   * ambos-vivos: solicitud conjunta.
+   * viudez-en-plazo: el cónyuge falleció dentro del año de plazo para
+   *   solicitar (el sobreviviente puede optar a su parte del bono).
+   * viudez-fuera-plazo: fallecimiento fuera de ese plazo.
+   */
+  situacionConyuges: SituacionConyuges;
+  /** Fecha de referencia para el monto vigente (reajuste cada octubre). Default: hoy. */
+  fecha?: Date;
 }
 
 export interface BonoBodasOroResult {
   anosMatrimonio: number;
   aplica: boolean;
-  /** Bono por cada cónyuge. */
+  /** Bono por cada cónyuge vivo. */
   montoPorConyuge: number;
-  /** Bono total para el matrimonio (≈ 2 × por cónyuge). */
+  /** Bono total del matrimonio (2 × monto por cónyuge). */
   montoTotal: number;
+  /**
+   * Parte del cónyuge fallecido a la que puede optar el sobreviviente
+   * (solo cuando situacionConyuges = 'viudez-en-plazo'). 0 en los demás casos.
+   */
+  parteConyugeFallecido: number;
   baseCalculo: string;
-  cumpleAnos: boolean;
-  cumpleVulnerabilidad: boolean;
-  cumpleConyugesVivos: boolean;
   motivosNoAplica: string[];
+  /** Fecha ISO desde la que rige el monto aplicado. */
+  montoVigenteDesde: string;
 }
 
 const ANOS_REQUERIDOS = BODAS_ORO.anios_requeridos;
 
 /**
- * Calcula el Bono Bodas de Oro (Ley 20.506).
+ * Calcula el Bono Bodas de Oro (Ley 20.506), administrado por el IPS.
  *
- * Bug histórico: la versión anterior interpretaba este bono como un
- * beneficio por años trabajados ("1 remuneración por año sobre 20")
- * con monto fijo de $150.000 — todo incorrecto.
- *
- * El bono real es un pago único entregado a parejas que cumplen
- * 50 años de matrimonio. Pertenece al sistema previsional (lo paga
- * el IPS) y consiste en un monto fijo por cada cónyuge, reajustado
- * anualmente por IPC.
- *
- * Requisitos:
- *  - 50 años de matrimonio cumplidos.
- *  - Ambos cónyuges vivos al momento del pago.
- *  - Pertenecer al 80% más vulnerable según RSH.
- *  - Residencia en Chile.
- *
- * Base legal: Ley 20.506 (Bono Bodas de Oro), administrado por el IPS.
+ * Reglas (ChileAtiende ficha 5369):
+ *  - 50 años de matrimonio y solicitud dentro del año siguiente al
+ *    50º aniversario (cumplir 51 o más años implica plazo vencido).
+ *  - No separados ni divorciados; convivencia en el mismo hogar o
+ *    residencia acreditada en hogares de larga estadía.
+ *  - 80% más vulnerable según RSH; residencia en Chile 4 de los
+ *    últimos 5 años.
+ *  - Viudez dentro del plazo: el sobreviviente cobra su parte y puede
+ *    optar a la parte del cónyuge fallecido.
  */
 export function calculateBonoBodasOro(input: BonoBodasOroInput): BonoBodasOroResult {
-  const {
-    anosMatrimonio,
-    anosTrabajados,
-    perteneceAl80Vulnerable = true,
-    ambosConyugesVivos = true,
-  } = input;
-
-  // Compat: usar anosMatrimonio si viene; si no, leer anosTrabajados
-  // como alias (la UI antigua todavía expone ese campo).
-  const anosRaw = anosMatrimonio ?? anosTrabajados ?? 0;
-  const anos = Math.max(0, Math.round(anosRaw));
-
-  const cumpleAnos = anos >= ANOS_REQUERIDOS;
-  const cumpleVulnerabilidad = perteneceAl80Vulnerable === true;
-  const cumpleConyugesVivos = ambosConyugesVivos === true;
-
-  const aplica = cumpleAnos && cumpleVulnerabilidad && cumpleConyugesVivos;
+  const anos = Math.max(0, Math.round(input.anosMatrimonio ?? 0));
+  const situacion = input.situacionConyuges;
+  const monto = getMontoBodasOro(input.fecha ?? new Date());
 
   const motivosNoAplica: string[] = [];
-  if (!cumpleAnos) {
-    motivosNoAplica.push(`Requiere ${ANOS_REQUERIDOS} años de matrimonio (tienen ${anos}).`);
+
+  if (anos < ANOS_REQUERIDOS) {
+    motivosNoAplica.push(
+      `Aún no cumplen ${ANOS_REQUERIDOS} años de matrimonio (tienen ${anos}).`,
+    );
+  } else if (anos > ANOS_REQUERIDOS) {
+    motivosNoAplica.push(
+      'El plazo de un año desde el 50º aniversario venció: ya no pueden realizar el trámite.',
+    );
   }
-  if (!cumpleVulnerabilidad) {
+  if (situacion === 'viudez-fuera-plazo') {
+    motivosNoAplica.push(
+      'El fallecimiento del cónyuge ocurrió fuera del plazo de un año para solicitar el beneficio.',
+    );
+  }
+  if (input.perteneceAl80Vulnerable !== true) {
     motivosNoAplica.push('Debe pertenecer al 80% más vulnerable según RSH.');
   }
-  if (!cumpleConyugesVivos) {
-    motivosNoAplica.push('Ambos cónyuges deben estar vivos al momento del pago.');
+  if (input.convivenSinSeparacion !== true) {
+    motivosNoAplica.push(
+      'Los cónyuges no deben estar separados ni divorciados y deben convivir en el mismo hogar (o acreditar residencia en hogares de larga estadía).',
+    );
+  }
+  if (input.residencia4de5 !== true) {
+    motivosNoAplica.push(
+      'Se exige residencia en Chile por 4 años dentro de los últimos 5 anteriores a la solicitud.',
+    );
   }
 
-  const montoPorConyuge = aplica ? BONO_BODAS_ORO.montoPorConyugeCLP : 0;
-  const montoTotal = aplica ? BONO_BODAS_ORO.montoTotalCLP : 0;
+  const aplica = motivosNoAplica.length === 0;
 
+  const esViudez = situacion === 'viudez-en-plazo';
+  const montoPorConyuge = aplica ? monto.montoPorConyugeCLP : 0;
+  const montoTotal = aplica ? monto.montoTotalCLP : 0;
+  const parteConyugeFallecido = aplica && esViudez ? monto.montoPorConyugeCLP : 0;
+
+  const porConyugeFmt = monto.montoPorConyugeCLP.toLocaleString('es-CL');
   const baseCalculo = aplica
-    ? `Pago único de $${BONO_BODAS_ORO.montoPorConyugeCLP.toLocaleString('es-CL')} por cada cónyuge (Ley 20.506).`
+    ? esViudez
+      ? `Su parte es $${porConyugeFmt}; puede optar además a la parte del cónyuge fallecido ($${porConyugeFmt}) porque el fallecimiento ocurrió dentro del plazo legal (Ley 20.506).`
+      : `Pago único de $${porConyugeFmt} por cada cónyuge vivo (Ley 20.506).`
     : motivosNoAplica.join(' ');
 
   return {
@@ -105,11 +124,10 @@ export function calculateBonoBodasOro(input: BonoBodasOroInput): BonoBodasOroRes
     aplica,
     montoPorConyuge,
     montoTotal,
+    parteConyugeFallecido,
     baseCalculo,
-    cumpleAnos,
-    cumpleVulnerabilidad,
-    cumpleConyugesVivos,
     motivosNoAplica,
+    montoVigenteDesde: monto.desde,
   };
 }
 
@@ -120,20 +138,36 @@ export function bonoBodasOroToResults(result: BonoBodasOroResult): CalculatorRes
   const results: CalculatorResult[] = [];
 
   if (result.aplica) {
+    const esViudez = result.parteConyugeFallecido > 0;
     results.push({
-      label: 'Bono Total Matrimonio',
+      label: esViudez
+        ? 'Monto que puede recibir (su parte + parte del cónyuge)'
+        : 'Bono total matrimonio',
       value: result.montoTotal,
       format: 'CLP',
       highlight: true,
     });
     results.push({
-      label: 'Bono por Cada Cónyuge',
+      label: 'Su parte del bono',
       value: result.montoPorConyuge,
       format: 'CLP',
     });
+    if (esViudez) {
+      results.push({
+        label: 'Parte del cónyuge fallecido (opcional, en plazo)',
+        value: result.parteConyugeFallecido,
+        format: 'CLP',
+      });
+    } else {
+      results.push({
+        label: 'Bono por cada cónyuge vivo',
+        value: result.montoPorConyuge,
+        format: 'CLP',
+      });
+    }
   } else {
     results.push({
-      label: 'No Aplica',
+      label: 'No aplica',
       value: 0,
       format: 'CLP',
       highlight: true,
@@ -141,13 +175,13 @@ export function bonoBodasOroToResults(result: BonoBodasOroResult): CalculatorRes
   }
 
   results.push({
-    label: 'Años de Matrimonio',
+    label: 'Años de matrimonio',
     value: result.anosMatrimonio,
     format: 'number',
   });
 
   results.push({
-    label: 'Requisito Legal (años)',
+    label: 'Requisito legal (años de matrimonio)',
     value: ANOS_REQUERIDOS,
     format: 'number',
   });

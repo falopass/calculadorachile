@@ -4,7 +4,7 @@
 
 ### Calculadoras laborales, tributarias y financieras para Chile
 
-**39 calculadoras activas** · valores oficiales en vivo · SEO orgánico · AdSense · vertical **YMYL**
+**40 calculadoras activas** · valores oficiales en vivo · SEO orgánico · AdSense · vertical **YMYL**
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
@@ -70,14 +70,14 @@ Es un producto **YMYL** (*Your Money / Your Life*): un error en una fórmula, un
 
 | Pieza | Cantidad | Ubicación |
 |-------|----------|-----------|
-| Calculadoras **activas** | **39** | `src/data/calculators.ts` |
-| Módulos de cálculo + tests | **40** | `src/lib/calculations/` (+ histórico `bono-bodas-oro`) |
+| Calculadoras **activas** | **40** | `src/data/calculators.ts` |
+| Módulos de cálculo + tests | **40 + 42** | `src/lib/calculations/` |
 | Guías pillar | **12** | `src/data/guias.ts` |
 | Artículos de blog | **19** | `src/data/articles.ts` |
 | Categorías canónicas | **12** | `src/lib/calculatorCategories.ts` |
 | Calculadoras `noIndex` | **8** | thin content en cuarentena SEO |
 
-`bono-bodas-oro` está **fuera del catálogo público**: la ruta responde **410 Gone**. No reactivarlo sin fórmula verificada y aprobación explícita.
+`bono-bodas-oro` fue **reactivado el 26-09-2026** con fórmula verificada en ChileAtiende (ficha 5369); el antiguo route.ts con 410 Gone fue eliminado.
 
 ### Phase 1 — Core (15)
 
@@ -117,7 +117,7 @@ Impuesto 2.ª categoría, PPM, y con `noIndex`: subsidio agua, cotización indep
 
 | | Feature | Detalle |
 |---|---------|---------|
-| 🧮 | **39 calculadoras** | Laborales, impuestos, vivienda, vehículos, pensiones, hogar |
+| 🧮 | **40 calculadoras** | Laborales, impuestos, vivienda, vehículos, pensiones, hogar |
 | ⚡ | **Valores en vivo** | UF, UTM, dólar, euro vía `GET /api/values` |
 | 🧩 | **Code-split de cálculo** | Carga dinámica por `calculator.id` (`load-calculator.ts`) |
 | 🛡️ | **Inputs honestos** | Coerción central (`input-coerce.ts`); meta: 0 inputs fantasma |
@@ -406,7 +406,6 @@ Si la validación falla, se corrige y se vuelve a ejecutar. No entregar “deber
 - Slugs, URLs públicas, canonicals, redirects, **410**, robots o sitemaps.
 - Script / placements de **AdSense**.
 - Structured data YMYL (Organization, FAQ, HowTo, SoftwareApplication, etc.).
-- Reactivar **`bono-bodas-oro`**.
 - **Dark mode** o dependencias 3D / GSAP / Lenis no instaladas.
 - Formato de moneda chilena fuera de `formatters.ts`.
 - Secretos o credenciales.

@@ -2193,7 +2193,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'vivienda',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-09-26',
     sources: [
       {
         name: 'ChileAtiende — DS1 Tramo 1',
@@ -2208,12 +2208,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         name: 'ChileAtiende — DS1 Tramo 3',
         url: 'https://www.chileatiende.gob.cl/fichas/5436-ds-1-tramo-3-subsidio-habitacional-para-comprar-una-vivienda-de-hasta-2-200-uf',
-        note: 'Tope 2.200 UF',
+        note: 'Promedio 270 UF y tope 2.200 UF',
       },
       {
-        name: 'MINVU — DS19',
-        url: 'https://www.minvu.gob.cl/beneficio/vivienda/subsidio-de-integracion-social-y-territorial-ds19/',
-        note: 'Integración social',
+        name: 'ChileAtiende — DS49 Fondo Solidario',
+        url: 'https://www.chileatiende.gob.cl/fichas/37960-subsidio-para-comprar-una-vivienda-de-hasta-950-uf-llamado-individual-ds-n-49',
+        note: 'Subsidio base desde 314 UF + complementarios',
+      },
+      {
+        name: 'MINVU — DS19 llamado especial 2026',
+        url: 'https://www.minvu.gob.cl/postulacion/llamado-especial-a-concurso-ano-2026-para-proyectos-habitacionales-ds-19/',
+        note: 'Res. Ex. N°700: montos por segmento y zona',
       },
     ],
     keywords: [
@@ -2293,7 +2298,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto subsidio puedo recibir?',
         answer:
-          'Depende del tramo: Tramo 1 (vulnerabilidad media-alta) recibe hasta 500 UF, Tramo 2 (vulnerabilidad media) hasta 400 UF, y Tramo 3 (vulnerabilidad baja) hasta 300 UF. Zona extrema agrega hasta 150 UF adicionales.',
+          'Depende del programa: DS49 parte desde un subsidio base de 314 UF y puede aumentar con complementarios según ubicación (localización 200 UF, factibilización rural 120 UF, densificación en altura 110 UF, discapacidad 20 u 80 UF, superficie adicional hasta 50 UF) más un premio al ahorro de 1,5 UF por cada UF sobre 10 UF (tope 30 UF). DS19 2026 entrega subsidio base según segmento: 1.200 UF menores ingresos, 425 UF intermedio y 350 UF sectores medios en la mayoría de las comunas (1.700 / 537,5 / 500 UF en zonas extremas). DS1 Tramo 3 informa un promedio de 270 UF.',
+      },
+      {
+        question: '¿Qué valores de DS19 no cubre esta calculadora?',
+        answer:
+          'El llamado DS19 2026 (Res. Ex. N°700) fija valores propios para Gran Santiago y otras zonas definidas —por ejemplo 1.300 UF de subsidio con precio hasta 1.600 UF para menores ingresos— que esta herramienta no modela. Además pueden sumar el Bono de Integración Social (200–300 UF) y el Bono por Captación (hasta 250 UF), que tampoco se incluyen en la estimación.',
       },
       {
         question: '¿Qué requisitos necesito?',
@@ -2762,6 +2772,116 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Puedo perder la asignación familiar?',
         answer:
           'Sí. Pierdes el derecho si: el hijo cumple la edad límite, deja de estudiar, se casa, o comienza a trabajar. Debes informar estos cambios al IPS dentro de 30 días.',
+      },
+    ],
+  },
+  {
+    id: 'bono-bodas-oro',
+    name: 'Calculadora Bono Bodas de Oro',
+    description:
+      'Verifica si cumples los requisitos del Bono Bodas de Oro (Ley 20.506) y estima el monto vigente por cónyuge y para el matrimonio.',
+    slug: 'calculadora-bono-bodas-oro',
+    category: 'familia',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Bono Bodas de Oro (IPS)',
+        url: 'https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro',
+        note: 'Monto vigente, requisitos, plazo de un año y regla de viudez',
+      },
+    ],
+    keywords: [
+      'bono bodas de oro',
+      '50 años de matrimonio',
+      'bono bodas de oro monto',
+      'bono bodas de oro requisitos',
+      'beneficio adultos mayores matrimonio',
+      'ips bodas de oro',
+    ],
+    inputs: [
+      {
+        id: 'anosMatrimonio',
+        label: 'Años de matrimonio cumplidos',
+        type: 'number',
+        placeholder: '50',
+        required: true,
+        min: 0,
+        unit: 'years',
+        tooltip:
+          'El beneficio se solicita dentro del año siguiente al 50º aniversario. Con 51 o más años cumplidos el plazo legal ya venció.',
+      },
+      {
+        id: 'situacionConyuges',
+        label: 'Situación de los cónyuges',
+        type: 'select',
+        required: true,
+        defaultValue: 'ambos-vivos',
+        options: [
+          { value: 'ambos-vivos', label: 'Ambos cónyuges vivos' },
+          {
+            value: 'viudez-en-plazo',
+            label: 'Mi cónyuge falleció dentro del año de plazo',
+          },
+          {
+            value: 'viudez-fuera-plazo',
+            label: 'Mi cónyuge falleció fuera del año de plazo',
+          },
+        ],
+      },
+      {
+        id: 'perteneceAl80Vulnerable',
+        label: '¿Perteneces al 80% más vulnerable según RSH?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'convivenSinSeparacion',
+        label: '¿Conviven en el mismo hogar (o en hogar de larga estadía) sin separación ni divorcio?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Si uno o ambos residen en establecimientos de larga estadía, se puede acreditar esa residencia.',
+      },
+      {
+        id: 'residencia4de5',
+        label: '¿Has residido en Chile 4 de los últimos 5 años?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    seoTitle: 'Calculadora Bono Bodas de Oro 2026: monto y requisitos',
+    seoDescription:
+      'Bono Bodas de Oro 2026: $482.295 por matrimonio desde octubre ($241.147 por cónyuge). Verifica requisitos, plazo de un año y regla de viudez.',
+    faq: [
+      {
+        question: '¿Cuánto es el Bono Bodas de Oro?',
+        answer:
+          'Desde el 1 de octubre de 2026 el bono es $482.295, que se entrega una sola vez en partes iguales: $241.147 para cada cónyuge vivo. El monto se reajusta en octubre de cada año en el 100% de la variación del IPC. Entre el 1 de octubre de 2025 y el 30 de septiembre de 2026 el valor fue $463.166 ($231.583 por cónyuge).',
+      },
+      {
+        question: '¿Qué requisitos pide el Bono Bodas de Oro?',
+        answer:
+          'Cumplir 50 años de matrimonio, no encontrarse separados ni divorciados, pertenecer al 80% más vulnerable según el Registro Social de Hogares, convivir en el mismo hogar o acreditar residencia en hogares de larga estadía, y haber residido en Chile 4 años dentro de los últimos 5 anteriores a la solicitud.',
+      },
+      {
+        question: '¿Cuál es el plazo para solicitar el bono?',
+        answer:
+          'Una vez cumplido el 50º aniversario, tienen plazo de un año para realizar el trámite y debes solicitarlo junto a tu cónyuge. Si ya cumplieron 51 o más años de matrimonio, el plazo legal venció.',
+      },
+      {
+        question: '¿Qué pasa si mi cónyuge fallece?',
+        answer:
+          'Si habiendo cumplido 50 años de matrimonio tu cónyuge fallece después de esa fecha, puedes optar a su parte del bono siempre que el fallecimiento se produzca dentro del año de plazo que indica la ley para solicitar el beneficio. Si el cónyuge fallece durante la tramitación y el bono ya fue otorgado, su parte constituye herencia.',
+      },
+      {
+        question: '¿El monto de la calculadora es el definitivo?',
+        answer:
+          'No. El resultado usa el monto publicado por ChileAtiende/IPS según la fecha de referencia; el pago real lo determina el IPS según la fecha y antecedentes de tu solicitud. El bono se reajusta cada octubre, por lo que el valor puede cambiar.',
       },
     ],
   },
@@ -3951,7 +4071,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuáles son los montos PGU vigentes?',
         answer:
-          'Desde febrero de 2026, el máximo es $231.732 para personas de 65 a 81 años y $250.275 para quienes tienen 82 años o más. Hasta una pensión base de $789.139 se entrega el máximo correspondiente; entre ese valor y $1.252.602 el monto disminuye.',
+          'Desde febrero de 2026 el monto base es $231.732 y el máximo $250.275. El máximo se aplica según un calendario por edad: desde los 82 años hasta agosto de 2026, desde los 75 años entre septiembre de 2026 y agosto de 2027, y para todas las personas de 65 años o más desde septiembre de 2027. Hasta una pensión base de $789.139 se entrega el monto del tramo completo; entre ese valor y $1.252.602 el monto disminuye.',
       },
       {
         question: '¿Los años cotizados cambian la PGU?',

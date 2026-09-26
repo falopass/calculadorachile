@@ -10,6 +10,7 @@ import {
   MUTUAL,
   SALUD,
   SEGURO_CESANTIA,
+  getEscalonSeguroSocialPrevisional,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
@@ -44,8 +45,10 @@ export interface CostoEmpleadoResult {
 /**
  * Entre agosto de 2025 y julio de 2026, el empleador paga 1% por la reforma
  * previsional y el SIS vigente por separado (1,62% desde abril de 2026).
- * Desde remuneraciones de agosto de 2026, la carga previsional total es 3,5%:
- * 1% ya vigente más 2,5% destinado al FAPP, que incluye el financiamiento SIS.
+ * Desde remuneraciones de agosto de 2026, la cotización total del empleador
+ * es 3,5% (ChileAtiende 130987): 2,5% al Seguro Social Previsional —que
+ * incluye el SIS, ahora recaudado por el IPS—, 0,9% a la CRP y 0,1% a la
+ * cuenta de capitalización individual. El SIS no se cobra por separado.
  */
 export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleadoResult {
   const sueldoBruto = Math.max(0, input.sueldoBruto);
@@ -65,9 +68,17 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
     ? totalHaberesImponibles * (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100)
     : 0;
 
-  const desdeAgosto = input.periodoCotizacion === 'desde_agosto_2026';
-  const pensionReforma = totalHaberesImponibles * ((desdeAgosto ? 3.5 : 1) / 100);
-  const sisSeparado = desdeAgosto ? 0 : totalHaberesImponibles * (afp.sis / 100);
+  // El período seleccionado se traduce a una fecha representativa para
+  // consultar el calendario oficial Ley 21.735 (sube cada 1° de agosto).
+  const escalon = getEscalonSeguroSocialPrevisional(
+    input.periodoCotizacion === 'desde_agosto_2026'
+      ? new Date('2026-08-01T12:00:00')
+      : new Date('2026-07-31T12:00:00'),
+  );
+  const pensionReforma = totalHaberesImponibles * (escalon.tasa / 100);
+  const sisSeparado = escalon.incluyeSIS
+    ? 0
+    : totalHaberesImponibles * (afp.sis / 100);
   const seguroCesantia = input.contratoIndefinido
     ? totalHaberesImponibles * (SEGURO_CESANTIA.contrato_indefinido.empleador / 100)
     : totalHaberesImponibles * (SEGURO_CESANTIA.contrato_plazo_fijo.empleador / 100);

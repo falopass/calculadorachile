@@ -263,7 +263,7 @@ export const guias: Guia[] = [
 <li><strong>Asumir que el plan de Isapre es siempre 7%</strong>: si el plan cuesta más, el trabajador paga el mayor entre 7% y el plan.</li>
 <li><strong>Ignorar el tope imponible</strong>: para sueldos sobre $3,6 M, el descuento efectivo es menor al 22% típico.</li>
 <li><strong>Calcular el impuesto sin restar la cantidad a rebajar</strong>: cada tramo del impuesto único tiene una rebaja fija que muchas calculadoras simplistas omiten.</li>
-<li><strong>No considerar el aporte solidario adicional</strong>: la Ley 21.735 agrega cotizaciones del empleador (1% en 2025, sube hasta 7% en 2033). Esto NO descuenta al trabajador, pero es relevante para calcular el costo total empleador.</li>
+<li><strong>No considerar el aporte solidario adicional</strong>: la Ley 21.735 agrega cotizaciones del empleador (1% desde ago-2025, 3,5% desde ago-2026 con SIS incluido, hasta 8,5% en 2033). Esto NO descuenta al trabajador, pero es relevante para calcular el costo total empleador.</li>
 </ul>`,
       },
       {
@@ -290,7 +290,7 @@ export const guias: Guia[] = [
 <p>Con sueldo bruto, considerando promedio de los últimos 3 meses si la remuneración es variable. La indemnización por años de servicio se calcula sobre la remuneración mensual incluyendo gratificación pero excluyendo colación y movilización (artículo 172 del Código del Trabajo). Lee la <a href="/guias/finiquito-laboral-chile">guía completa del finiquito</a>.</p>
 
 <h3>¿Qué pasa con el aporte adicional del empleador (Ley 21.735)?</h3>
-<p>No se descuenta del trabajador. Es un costo del empleador que va al sistema solidario. En 2026 es 1,75% del imponible. No afecta tu sueldo líquido.</p>
+<p>No se descuenta del trabajador. Es un costo del empleador que va al sistema solidario. Desde agosto de 2026 es 3,5% del imponible e incluye el SIS (antes era 1,0% con el SIS pagado por separado). No afecta tu sueldo líquido.</p>
 
 <h3>¿Por qué mi liquidación dice "imponible $X" y mi bruto es distinto?</h3>
 <p>Porque el imponible excluye haberes no imponibles (movilización, colación) y porque está topado en 90 UF. Si tu bruto incluye $50.000 de movilización, tu imponible será $50.000 menor que el bruto.</p>`,
@@ -918,8 +918,8 @@ export const guias: Guia[] = [
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=29438',
       },
       {
-        label: 'ChileAtiende — Subsidio al Dividendo',
-        url: 'https://www.chileatiende.gob.cl/preguntas-frecuentes/subsidio-al-dividendo',
+        label: 'Ventanilla Única Social — Subsidio al Dividendo',
+        url: 'https://www.ventanillaunicasocial.gob.cl/ficha/463/subsidio-al-dividendo-para-adquirir-viviendas-nuevas',
       },
     ],
     sections: [
@@ -939,7 +939,7 @@ export const guias: Guia[] = [
         html: `<p>El pie es la parte del precio que no cubre el crédito. No existe un porcentaje bancario universal: depende del producto, destino, perfil, garantía estatal y política de riesgo. Una publicidad de “hasta 90%” no obliga a aprobar ese financiamiento.</p>
 <p>La institución encarga una tasación independiente del precio acordado. Si compras en 3.000 UF, solicitas 2.700 UF y el banco tasa en 2.800 UF, puede calcular su máximo sobre 2.800 UF. La diferencia entre precio y crédito la cubre el comprador, además de gastos operacionales. Una preaprobación por renta no garantiza que la propiedad pase tasación y estudio de títulos.</p>
 <p>Antes de firmar una promesa, define qué ocurre si el crédito se rechaza, la tasación resulta menor o el estudio encuentra un defecto. Una cláusula de salida clara y un plazo realista reducen el riesgo de perder arras o pagar multas contractuales. La reserva comercial no reemplaza esa revisión.</p>
-<p>Subsidios habitacionales pueden complementar ahorro y crédito bajo reglas propias. El <a href="https://www.chileatiende.gob.cl/preguntas-frecuentes/subsidio-al-dividendo" target="_blank" rel="noopener">Subsidio al Dividendo de la Ley 21.748</a> es distinto: reduce 0,6 puntos porcentuales de tasa para viviendas nuevas de hasta 4.000 UF, incorpora garantía estatal y se tramita por la entidad financiera. Está disponible hasta el 27 de mayo de 2027 o hasta agotar 50.000 cupos; exige, entre otros requisitos, que la promesa sea desde el 1 de enero de 2025.</p>`,
+<p>Subsidios habitacionales pueden complementar ahorro y crédito bajo reglas propias. El <a href="https://www.ventanillaunicasocial.gob.cl/ficha/463/subsidio-al-dividendo-para-adquirir-viviendas-nuevas" target="_blank" rel="noopener">Subsidio al Dividendo de la Ley 21.748, ampliada por la Ley 21.836 en 2026</a>, es distinto: reduce 60 puntos base de la tasa para viviendas nuevas de hasta 6.000 UF, incorpora garantía estatal y se tramita por la entidad financiera. Está vigente hasta mayo de 2028 o hasta agotar 80.000 subsidios.</p>`,
       },
       {
         id: 'capacidad-endeudamiento',
@@ -1146,7 +1146,7 @@ export const guias: Guia[] = [
         title: 'PGU: Pensión Garantizada Universal',
         level: 2,
         html: `<p>La <strong>PGU</strong> es un beneficio estatal para personas desde los 65 años que cumplen requisitos de focalización, residencia y pensión base. A julio de 2026, los valores oficiales informados por <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ChileAtiende</a> son:</p>
-<ul class="data-grid"><li><span class="data-grid__label">Máximo entre 65 y 81 años</span><span class="data-grid__value">$231.732</span></li><li><span class="data-grid__label">Máximo desde 82 años</span><span class="data-grid__value">$250.275</span></li><li><span class="data-grid__label">Pensión base para máximo completo</span><span class="data-grid__value">Hasta $789.139</span></li><li><span class="data-grid__label">Límite superior de pensión base</span><span class="data-grid__value">$1.252.602</span></li></ul>
+<ul class="data-grid"><li><span class="data-grid__label">Máximo entre 65 y 74 años</span><span class="data-grid__value">$231.732</span></li><li><span class="data-grid__label">Máximo desde 75 años (sep-2026)</span><span class="data-grid__value">$250.275</span></li><li><span class="data-grid__label">Pensión base para máximo completo</span><span class="data-grid__value">Hasta $789.139</span></li><li><span class="data-grid__label">Límite superior de pensión base</span><span class="data-grid__value">$1.252.602</span></li></ul>
 <p>Si la pensión base es igual o inferior a $789.139, corresponde el máximo del tramo de edad, siempre que se cumplan los demás requisitos. Entre $789.139 y $1.252.602 el monto disminuye; desde el límite superior no corresponde PGU. “Pensión base” es un concepto legal calculado por el IPS y no necesariamente coincide con el depósito mensual que la persona ve en su cuenta.</p>
 <p>La focalización tampoco se resuelve mirando solo el tramo del Registro Social de Hogares: el requisito es no integrar el 10% más rico de la población y el IPS evalúa antecedentes del grupo familiar conforme a la ley. También se exige residencia en Chile por al menos 20 años desde los 20 años de edad —continuos o discontinuos— y cuatro de los últimos cinco años anteriores a la solicitud, salvo reglas especiales aplicables.</p>
 <p>El aumento a $250.275 se implementa por edades: ya alcanza a quienes tienen 82 años o más; desde septiembre de 2026 se extiende a las personas de 75 años o más y desde septiembre de 2027, a quienes tengan 65 años o más. Se puede solicitar aunque la persona continúe trabajando. La <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a> sirve para aproximar el componente por pensión base, pero no reemplaza la evaluación del IPS.</p>`,
@@ -1338,7 +1338,7 @@ export const guias: Guia[] = [
 </table>
 <p>En zonas norte, extremo sur, Chiloé, Palena, Juan Fernández y Rapa Nui los máximos pueden subir hasta 2.600 UF según tramo. La cuenta de ahorro debía tener 12 meses y el saldo estar disponible al 29 de mayo. Que el primer llamado no exigiera preaprobación no significa que el crédito posterior esté garantizado.</p>
 <p>DS49 se orienta a familias vulnerables y puede permitir compra sin crédito en las modalidades convocadas; sus topes y ahorro dependen del llamado y zona. DS19 no es una postulación individual abierta al “90%”: son proyectos de integración seleccionados, con cupos y precios para grupos distintos. En 2026 las entidades desarrolladoras postulan proyectos hasta agosto; una familia debe verificar que el proyecto y la unidad estén efectivamente incorporados.</p>
-<p>El Subsidio al Dividendo de Ley 21.748 tampoco es DS1: se asigna mediante entidad financiera para vivienda nueva de hasta 4.000 UF, sujeto a cupos y fecha. Consulta el estado real en MINVU y usa la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio</a> solo como orientación; los montos exactos dependen de resolución, precio y zona.</p>`,
+<p>El Subsidio al Dividendo (Ley 21.748, ampliada por la Ley 21.836 en 2026) tampoco es DS1: se asigna mediante entidad financiera para vivienda nueva de hasta 6.000 UF, con rebaja de 60 puntos base en la tasa, vigente hasta mayo de 2028 o hasta 80.000 subsidios. Consulta el estado real en la Ventanilla Única Social y usa la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio</a> solo como orientación; los montos exactos dependen de resolución, precio y zona.</p>`,
       },
       {
         id: 'gastos-escritura',
@@ -1594,6 +1594,7 @@ export const guias: Guia[] = [
       'calculadora-subsidio-agua',
       'calculadora-aguinaldo',
       'calculadora-pgu',
+      'calculadora-bono-bodas-oro',
     ],
     relatedArticles: ['comparativa-comisiones-afp-2026'],
     sources: [
@@ -1748,11 +1749,11 @@ export const guias: Guia[] = [
         id: 'bono-bodas-oro',
         title: 'Bono Bodas de Oro y otros beneficios para adultos mayores',
         level: 2,
-        html: `<p>El <a href="https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro" target="_blank" rel="noopener"><strong>Bono Bodas de Oro</strong></a> vigente desde octubre de 2025 es <strong>$463.166</strong>, dividido en $231.583 para cada cónyuge vivo. Se solicita una sola vez y hay un año desde el aniversario número 50 para hacerlo.</p>
+        html: `<p>El <a href="https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro" target="_blank" rel="noopener"><strong>Bono Bodas de Oro</strong></a> vigente desde el 1 de octubre de 2026 es <strong>$482.295</strong>, dividido en $241.147 para cada cónyuge vivo. Se solicita una sola vez y hay un año desde el aniversario número 50 para hacerlo. Puedes verificar elegibilidad y monto en la <a href="/calculadoras/calculadora-bono-bodas-oro">calculadora de Bono Bodas de Oro</a>.</p>
 <p>La pareja debe estar casada, no separada ni divorciada, convivir en el mismo hogar —con regla para hogares de larga estadía—, pertenecer al 80% más vulnerable según RSH y acreditar cuatro de los últimos cinco años de residencia en Chile. No basta con cumplir 50 años de matrimonio.</p>
 <p>Para beneficios de personas mayores, evita mezclar programas:</p>
 <ul>
-<li><strong>PGU:</strong> a julio de 2026 el máximo es $231.732 para 65–81 años y $250.275 desde 82 años; en septiembre el monto mayor se extiende a 75+. Tiene requisitos de residencia, focalización y pensión base.</li>
+<li><strong>PGU:</strong> a julio de 2026 el máximo es $231.732 para 65–81 años y $250.275 desde 82 años; desde septiembre de 2026 el monto mayor se extiende a 75+ y desde septiembre de 2027 a todos los 65+. Tiene requisitos de residencia, focalización y pensión base.</li>
 <li><strong>Bono por Hijo:</strong> incrementa la pensión de mujeres que cumplen requisitos; no es un pago en efectivo al nacer.</li>
 <li><strong>Asignación Familiar:</strong> una persona beneficiaria de PGU puede tener causantes descendientes que vivan a su cargo bajo las reglas del sistema, pero quien recibe PGU no puede ser causante de otra Asignación Familiar.</li>
 </ul>
@@ -2041,14 +2042,14 @@ export const guias: Guia[] = [
 <table>
 <thead><tr><th>Aporte empleador</th><th>Tasa 2026</th><th>Sobre $1.000.000 bruto</th></tr></thead>
 <tbody>
-<tr><td>SIS (Seguro Invalidez/Sobrevivencia)</td><td>1,62%</td><td>$16.200</td></tr>
+<tr><td>SIS (Seguro Invalidez/Sobrevivencia)</td><td>1,62% hasta jul-2026; desde ago-2026 incluido en el 3,5%</td><td>$16.200 (hasta jul-2026)</td></tr>
 <tr><td>Seguro cesantía (indefinido)</td><td>2,40%</td><td>$24.000</td></tr>
 <tr><td>Mutual seguridad (Ley 16.744)</td><td>0,90% – 4,30%</td><td>$9.000 – $43.000</td></tr>
-<tr><td>Seguro Social Previsional (Ley 21.735)</td><td>1,0% (sube a 1,75% en agosto/2026)</td><td>$10.000</td></tr>
+<tr><td>Seguro Social Previsional (Ley 21.735)</td><td>1,0% hasta jul-2026 · 3,5% desde ago-2026 (incluye SIS)</td><td>$10.000 / $35.000</td></tr>
 </tbody>
 </table>
-<div class="numeric-example"><div class="numeric-example__title">PYME contrata empleado con sueldo bruto $1.000.000 (indefinido)</div><ul><li>Sueldo bruto: $1.000.000</li><li>SIS empleador (1,62%): $16.200</li><li>Seguro cesantía empleador (2,4%): $24.000</li><li>Mutual seguridad (0,95% promedio): $9.500</li><li>Seguro Social Previsional (1,0% en 2026): $10.000</li></ul><span class="total">Costo total mensual: $1.059.700 — factor previsional ≈ 1,060</span></div>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Calendario Ley 21.735 (reforma de pensiones)</strong><p>El Seguro Social Previsional sube progresivamente el aporte del empleador desde 1% (2025) hasta 7% (2033), con incrementos anuales de 0,75 puntos cada agosto. En 2026 son 1,0% el primer semestre y 1,75% desde agosto. Planifica tu costo laboral con ese calendario en mano.</p></div></aside>
+<div class="numeric-example"><div class="numeric-example__title">PYME contrata empleado con sueldo bruto $1.000.000 (indefinido, remuneración desde ago-2026)</div><ul><li>Sueldo bruto: $1.000.000</li><li>SIS empleador: incluido en el Seguro Social (no se cobra aparte)</li><li>Seguro cesantía empleador (2,4%): $24.000</li><li>Mutual seguridad (0,95% promedio): $9.500</li><li>Seguro Social Previsional (3,5%): $35.000</li></ul><span class="total">Costo total mensual: $1.068.500 — factor previsional ≈ 1,069</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Calendario Ley 21.735 (reforma de pensiones)</strong><p>El aporte del empleador sube cada 1° de agosto: 1,0% hasta julio de 2026 (con SIS pagado aparte) y 3,5% desde agosto de 2026 —2,5% Seguro Social que incluye el SIS, 0,9% CRP y 0,1% a la cuenta individual—. Sigue 4,25% (ago-2027), 5,0% (2028), 5,7% (2029), 6,4% (2030), 7,1% (2031), 7,8% (2032) y 8,5% desde agosto de 2033. Planifica tu costo laboral con ese calendario en mano.</p></div></aside>
 <p>Calcula el costo total de tu empleado considerando AFP, mutual y reforma con la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo empleador</a>.</p>`,
       },
       {
@@ -2406,12 +2407,12 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>El MINVU tiene varios programas de subsidio según ingreso, tramo de RSH y tipo de vivienda:</p>
 <ul>
-<li><strong>DS49 (Fondo Solidario)</strong>: para sectores vulnerables (RSH ≤ 40%). Subsidio hasta 450 UF para vivienda nueva o usada. Sin necesidad de crédito hipotecario.</li>
+<li><strong>DS49 (Fondo Solidario)</strong>: para sectores vulnerables (RSH ≤ 40%). Subsidio base desde 314 UF más complementarios según ubicación y proyecto (localización, rural, altura, discapacidad, superficie) y premio al ahorro. Sin necesidad de crédito hipotecario.</li>
 <li><strong>DS01 (Sectores Medios)</strong>: para clase media (RSH 40%-90%). Subsidio entre 250 y 650 UF según tramo. Requiere crédito hipotecario complementario.</li>
-<li><strong>DS19 (Integración Social y Territorial)</strong>: subsidio adicional al DS01/DS49 cuando el proyecto incluye mix social. Hasta 200 UF extra.</li>
+<li><strong>DS19 (Integración Social y Territorial)</strong>: subsidio base por segmento familiar —1.200 UF menores ingresos, 425 UF tramo intermedio y 350 UF sectores medios en la mayoría de las comunas (mayor en zonas extremas; Gran Santiago y otras zonas tienen valores propios). Puede sumar Bonos de Integración Social (200–300 UF) y por Captación (hasta 250 UF).</li>
 <li><strong>DFL2</strong>: viviendas de hasta 140 m² construidos con beneficios tributarios (50% rebaja en contribuciones por 15 años).</li>
 </ul>
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Combinar subsidios para maximizar</strong><p>Si calificas para DS01 + DS19 puedes recibir hasta 850 UF (~$34M con UF julio 2026), lo que cubre 50%-70% del precio de un departamento de 50 m² en comunas periféricas. Postula en serviu.cl con la documentación completa.</p></div></aside>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Combinar subsidios para maximizar</strong><p>Los programas MINVU pueden sumar bonos complementarios según proyecto, comuna y ahorro (por ejemplo, el DS49 premia el ahorro sobre 10 UF). Postula en serviu.cl con la documentación completa y verifica el llamado vigente.</p></div></aside>
 <p>Estima tu subsidio según ingreso y tramo con la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio habitacional</a>. Para simular el dividendo de tu hipoteca complementaria, usa la <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a>.</p>`,
       },
     ],

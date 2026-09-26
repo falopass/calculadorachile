@@ -27,17 +27,20 @@ describe('calculatePGU', () => {
       anosCotizados: 0,
       esHombre: true,
       edad: 70,
+      // Umbral 82 vigente hasta ago-2026: 70 < 82 → monto base.
+      fecha: new Date('2026-08-15'),
     });
     expect(r.pguMensual).toBe(PGU_2026.montoMaximo65a81CLP);
     expect(r.pensionTotal).toBe(PGU_2026.montoMaximo65a81CLP);
   });
 
-  it('82+ años: PGU mayorada', () => {
+  it('82+ años antes de sep-2026: PGU mayorada', () => {
     const r = calculatePGU({
       pensionActual: 200_000,
       anosCotizados: 0,
       esHombre: false,
       edad: 85,
+      fecha: new Date('2026-08-15'),
     });
     expect(r.pguBase).toBe(PGU_2026.montoMaximo82MasCLP);
   });
@@ -60,6 +63,7 @@ describe('calculatePGU', () => {
       anosCotizados: 20,
       esHombre: true,
       edad: 70,
+      fecha: new Date('2026-08-15'),
     });
     // En el punto medio del tramo intermedio, PGU debe ser ~50% del base.
     expect(r.pguMensual).toBeCloseTo(PGU_2026.montoMaximo65a81CLP / 2, -3);
@@ -98,5 +102,44 @@ describe('calculatePGU', () => {
       edad: 68,
     });
     expect(r.pensionTotal).toBe(r.pensionActual + r.pguMensual);
+  });
+
+  // Calendario del monto máximo (Ley 21.735, ChileAtiende ficha 130457):
+  // 82 desde sep-2025 → 75 desde sep-2026 → 65 desde sep-2027.
+  describe('edad umbral del monto máximo según fecha', () => {
+    const base = { pensionActual: 0, anosCotizados: 0, esHombre: true };
+
+    it('oct-2026 (umbral 75): 75 y 78 reciben el máximo; 74 y 70 no', () => {
+      const fecha = new Date('2026-10-15');
+      expect(calculatePGU({ ...base, edad: 78, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo82MasCLP,
+      );
+      expect(calculatePGU({ ...base, edad: 75, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo82MasCLP,
+      );
+      expect(calculatePGU({ ...base, edad: 74, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo65a81CLP,
+      );
+      expect(calculatePGU({ ...base, edad: 70, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo65a81CLP,
+      );
+    });
+
+    it('ago-2026 (umbral 82): 78 recibe base; 82 el máximo', () => {
+      const fecha = new Date('2026-08-15');
+      expect(calculatePGU({ ...base, edad: 78, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo65a81CLP,
+      );
+      expect(calculatePGU({ ...base, edad: 82, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo82MasCLP,
+      );
+    });
+
+    it('sep-2027 (umbral 65): 70 recibe el máximo', () => {
+      const fecha = new Date('2027-09-15');
+      expect(calculatePGU({ ...base, edad: 70, fecha }).pguBase).toBe(
+        PGU_2026.montoMaximo82MasCLP,
+      );
+    });
   });
 });

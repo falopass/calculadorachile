@@ -56,6 +56,8 @@ export interface SubsidioHabitacionalResult {
   ahorroRequeridoCLP: number;
   montoMaximoPropiedadUF: number;
   montoMaximoPropiedadCLP: number;
+  /** DS49: premio al ahorro incluido en subsidioBaseUF (0 en otros programas). */
+  premioAhorroUF: number;
   deficitUF: number;
   deficitCLP: number;
   cumpleRequisitos: boolean;
@@ -71,7 +73,8 @@ const NOMBRES_TIPO: Record<TipoSubsidio, string> = {
   ds19: 'DS19 (Integración Social)',
 };
 
-/** Topes de precio vivienda en UF (general / zona extrema). ChileAtiende 2026. */
+/** Topes de precio vivienda en UF (general / zona extrema). ChileAtiende 2026;
+ *  DS19 viene de la Res. Ex. N°700 (llamado 2026) en constants. */
 const TOPE_PROPIEDAD_UF: Record<
   TipoSubsidio,
   Record<TramoSubsidio, { general: number; extrema: number }>
@@ -87,18 +90,9 @@ const TOPE_PROPIEDAD_UF: Record<
     tramo3: { general: 2200, extrema: 2600 },
   },
   ds19: {
-    tramo1: {
-      general: SUBSIDIO_HABITACIONAL_DS19.monto_max_propiedad_uf,
-      extrema: 2000,
-    },
-    tramo2: {
-      general: SUBSIDIO_HABITACIONAL_DS19.monto_max_propiedad_uf,
-      extrema: 2000,
-    },
-    tramo3: {
-      general: SUBSIDIO_HABITACIONAL_DS19.monto_max_propiedad_uf,
-      extrema: 2000,
-    },
+    tramo1: DS19_TRAMOS.tramo1.precioMaxUF,
+    tramo2: DS19_TRAMOS.tramo2.precioMaxUF,
+    tramo3: DS19_TRAMOS.tramo3.precioMaxUF,
   },
 };
 
@@ -135,10 +129,29 @@ export function calculateSubsidioHabitacional(
   const tipoSubsidio = tipoRaw as TipoSubsidio;
 
   let subsidioBaseUF = 0;
+  let premioAhorroUF = 0;
 
   if (tipoSubsidio === 'ds19') {
+    // Res. Ex. MINVU N°700 (06-05-2026): subsidio base por segmento,
+    // con valores mayores en zonas extremas.
     const datos = DS19_TRAMOS[tramo];
-    subsidioBaseUF = datos?.subsidioMaximoUF ?? 0;
+    subsidioBaseUF = esZonaExtrema
+      ? datos.subsidioUF.extrema
+      : datos.subsidioUF.general;
+  } else if (tipoSubsidio === 'ds49') {
+    // ChileAtiende ficha 37960: subsidio base desde 314 UF (varía por
+    // comuna) + premio al ahorro de 1,5 UF por cada UF sobre el ahorro
+    // mínimo de 10 UF, tope 30 UF (guía MINVU DS49 compra). Aplica igual
+    // para cualquier tramo. Los complementarios (localización, rural,
+    // altura, discapacidad, superficie) dependen del proyecto y no son
+    // inputs de esta calculadora.
+    const confDs49 = SUBSIDIO_HABITACIONAL.ds49;
+    premioAhorroUF = Math.min(
+      confDs49.premioAhorro.topeUF,
+      Math.max(0, ahorroUF - confDs49.ahorroMinimoUF) *
+        confDs49.premioAhorro.ufPorUfAdicional,
+    );
+    subsidioBaseUF = confDs49.subsidioBaseUF + premioAhorroUF;
   } else {
     const datosSubsidio = SUBSIDIO_HABITACIONAL[tipoSubsidio];
     if (tramo === 'tramo1') {
@@ -198,6 +211,7 @@ export function calculateSubsidioHabitacional(
     ahorroRequeridoCLP,
     montoMaximoPropiedadUF,
     montoMaximoPropiedadCLP,
+    premioAhorroUF,
     deficitUF,
     deficitCLP,
     cumpleRequisitos,
@@ -222,6 +236,7 @@ function emptyResult(
     ahorroRequeridoCLP: 0,
     montoMaximoPropiedadUF: 0,
     montoMaximoPropiedadCLP: 0,
+    premioAhorroUF: 0,
     deficitUF: 0,
     deficitCLP: 0,
     cumpleRequisitos: false,
@@ -245,6 +260,20 @@ export function subsidioHabitacionalToResults(
       format: 'CLP',
       highlight: true,
     },
+    ...(result.tipoSubsidio.startsWith('DS49')
+      ? ([
+          {
+            label: 'Subsidio base DS49 (desde)',
+            value: SUBSIDIO_HABITACIONAL.ds49.subsidioBaseUF,
+            format: 'UF',
+          },
+          {
+            label: 'Premio al ahorro (UF)',
+            value: result.premioAhorroUF,
+            format: 'UF',
+          },
+        ] as CalculatorResult[])
+      : []),
     {
       label: 'Ahorro requerido (UF)',
       value: result.ahorroRequeridoUF,

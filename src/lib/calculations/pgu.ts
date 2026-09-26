@@ -14,6 +14,12 @@ export interface PGUInput {
   esHombre: boolean;
   /** Edad del beneficiario para elegir tramo de PGU (default 70). */
   edad?: number;
+  /**
+   * Fecha de referencia para la edad umbral del monto máximo
+   * (Ley 21.735: 82 → sep-2025, 75 → sep-2026, 65 → sep-2027).
+   * Default: hoy.
+   */
+  fecha?: Date;
 }
 
 export interface PGUResult {
@@ -36,17 +42,19 @@ export interface PGUResult {
  * de cotización ni los reajusta. Adicionalmente el parámetro
  * `esHombre` no se usa porque la PGU no distingue por sexo.
  *
- * Reglas correctas (Ley 21.419):
- *   - 65 a 81 años: monto base $231.732 (PGU 2026).
- *   - 82+: monto base $250.275 (PGU 2026).
+ * Reglas correctas (Ley 21.419 + calendario Ley 21.735):
+ *   - Monto base $231.732 hasta la edad umbral vigente a la fecha.
+ *   - Monto máximo $250.275 desde la edad umbral vigente: 82 años
+ *     desde sep-2025, 75 años desde sep-2026 y 65 años desde sep-2027
+ *     (ChileAtiende ficha 130457).
  *   - Pensión base ≤ $789.139: PGU completa.
  *   - Entre $789.139 y $1.252.602: PGU se reduce linealmente hasta 0.
  *   - Sobre $1.252.602: no recibe PGU.
  *
- * Base legal: Ley 21.419.
+ * Base legal: Ley 21.419 y Ley 21.735.
  */
 export function calculatePGU(input: PGUInput): PGUResult {
-  const { pensionActual, anosCotizados, edad = 70 } = input;
+  const { pensionActual, anosCotizados, edad = 70, fecha = new Date() } = input;
 
   const pension = Math.max(0, pensionActual);
   const anos = Math.max(0, Math.round(anosCotizados));
@@ -54,9 +62,17 @@ export function calculatePGU(input: PGUInput): PGUResult {
 
   const cumpleEdadMinima = edadVal >= PGU_2026.edadMinima;
 
+  // Edad umbral del monto máximo vigente a la fecha (calendario ordenado).
+  const t = fecha.getTime();
+  let edadUmbral = PGU_2026.edadMontoMaximo[0].edad;
+  for (const escalon of PGU_2026.edadMontoMaximo) {
+    if (new Date(escalon.desde).getTime() <= t) edadUmbral = escalon.edad;
+    else break;
+  }
+
   // PGU base según edad (sin factor por años cotizados).
   const pguBase =
-    edadVal >= 82
+    edadVal >= edadUmbral
       ? PGU_2026.montoMaximo82MasCLP
       : PGU_2026.montoMaximo65a81CLP;
 

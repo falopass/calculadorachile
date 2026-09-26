@@ -618,6 +618,25 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'bono-bodas-oro': {
+      const { calculateBonoBodasOro, bonoBodasOroToResults } =
+        await import('./bono-bodas-oro');
+      return (inputs) => {
+        const situacion = inputs.situacionConyuges;
+        const result = calculateBonoBodasOro({
+          anosMatrimonio: coerceNumber(inputs.anosMatrimonio),
+          situacionConyuges:
+            situacion === 'viudez-en-plazo' || situacion === 'viudez-fuera-plazo'
+              ? situacion
+              : 'ambos-vivos',
+          perteneceAl80Vulnerable: coerceBool(inputs.perteneceAl80Vulnerable),
+          convivenSinSeparacion: coerceBool(inputs.convivenSinSeparacion),
+          residencia4de5: coerceBool(inputs.residencia4de5),
+        });
+        return bonoBodasOroToResults(result);
+      };
+    }
+
     default:
       return null;
   }

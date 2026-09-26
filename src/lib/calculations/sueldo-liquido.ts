@@ -12,6 +12,7 @@ import {
   UTM,
   UF,
   MUTUAL,
+  getEscalonSeguroSocialPrevisional,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
@@ -37,6 +38,11 @@ export interface SueldoLiquidoInput {
   valorUF?: number;
   /** UTM en vivo (UI). Default: snapshot `UTM.valor`. */
   valorUTM?: number;
+  /**
+   * Fecha de la remuneración para el calendario del aporte empleador
+   * Ley 21.735 (Seguro Social Previsional). Default: hoy.
+   */
+  fecha?: Date;
 }
 
 export interface SueldoLiquidoResult {
@@ -65,6 +71,12 @@ export interface SueldoLiquidoResult {
     sis: number;
     seguroCesantia: number;
     mutual: number;
+    /** Cotización adicional del empleador Ley 21.735 (Seguro Social Previsional). */
+    reformaPrevisional: number;
+    /** Tasa del escalón vigente a `fecha` (3.5 = 3,5%). */
+    tasaReforma: number;
+    /** Si el escalón vigente ya incluye el SIS (desde ago-2026). */
+    incluyeSIS: boolean;
     total: number;
   };
   totalIngresos: number;
@@ -193,7 +205,13 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
   // Aportes del empleador (se reportan para mostrar costo total, NO descuentos al trabajador).
   const tope = topeCLP(TOPE_IMPOSITIVO.afp_salud, valorUF);
   const baseEmpleador = Math.min(totalIngresosImponibles, tope);
-  const sisEmpleador = baseEmpleador * (AFP[afp].sis / 100);
+  // Ley 21.735: desde remuneraciones de ago-2026 el escalón (3,5%)
+  // ya incluye el financiamiento del SIS; antes el SIS se paga aparte.
+  const escalonReforma = getEscalonSeguroSocialPrevisional(input.fecha ?? new Date());
+  const reformaPrevisional = baseEmpleador * (escalonReforma.tasa / 100);
+  const sisEmpleador = escalonReforma.incluyeSIS
+    ? 0
+    : baseEmpleador * (AFP[afp].sis / 100);
   const cesantiaEmpleador =
     Math.min(totalIngresosImponibles, topeCLP(TOPE_IMPOSITIVO.seguro_cesantia, valorUF)) *
     ((contratoIndefinido
@@ -226,7 +244,12 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
       sis: Math.round(sisEmpleador),
       seguroCesantia: Math.round(cesantiaEmpleador),
       mutual: Math.round(mutualEmpleador),
-      total: Math.round(sisEmpleador + cesantiaEmpleador + mutualEmpleador),
+      reformaPrevisional: Math.round(reformaPrevisional),
+      tasaReforma: escalonReforma.tasa,
+      incluyeSIS: escalonReforma.incluyeSIS,
+      total: Math.round(
+        sisEmpleador + cesantiaEmpleador + mutualEmpleador + reformaPrevisional,
+      ),
     },
     totalIngresos,
     totalDescuentos: Math.round(totalDescuentos),
@@ -278,7 +301,14 @@ export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorR
     value: result.bruto + result.aportesEmpleador.total,
     format: 'CLP',
   });
-  r.push({ label: 'SIS (paga empleador, no descuenta al trabajador)', value: result.aportesEmpleador.sis, format: 'CLP' });
+  r.push({
+    label: `Aporte empleador Ley 21.735 (${result.aportesEmpleador.tasaReforma.toLocaleString('es-CL')}%${result.aportesEmpleador.incluyeSIS ? ', incluye SIS' : ''})`,
+    value: result.aportesEmpleador.reformaPrevisional,
+    format: 'CLP',
+  });
+  if (result.aportesEmpleador.sis > 0) {
+    r.push({ label: 'SIS (paga empleador, no descuenta al trabajador)', value: result.aportesEmpleador.sis, format: 'CLP' });
+  }
   r.push({ label: 'Seguro cesantía empleador', value: result.aportesEmpleador.seguroCesantia, format: 'CLP' });
   r.push({ label: 'Mutual de seguridad (empleador)', value: result.aportesEmpleador.mutual, format: 'CLP' });
 
