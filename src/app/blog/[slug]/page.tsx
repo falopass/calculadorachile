@@ -17,7 +17,7 @@ import ReadingProgress from '@/components/article/ReadingProgress';
 import { articleSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo/schema';
 import { buildPageMetadata, estimateWordCount, estimateReadingTime } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
-import { AUTHOR } from '@/lib/seo/author';
+import { AUTHOR, AUTHOR_INITIALS } from '@/lib/seo/author';
 import { articles, getArticleBySlug } from '@/data/articles';
 import { calculators } from '@/data/calculators';
 import { guias } from '@/data/guias';
@@ -30,6 +30,13 @@ import { resolveCvlistoContentOrigen } from '@/lib/cvlisto';
 interface BlogArticlePageProps {
   params: Promise<{ slug: string }>;
 }
+
+/** Etiqueta legible de categoría cuando el slug pierde tildes al renderizarse. */
+const ARTICLE_CATEGORY_LABELS: Record<string, string> = {
+  educacion: 'educación',
+  'educacion-financiera': 'educación financiera',
+  vehiculos: 'vehículos',
+};
 
 export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
@@ -149,7 +156,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
           <div className="mx-auto mt-6 max-w-3xl">
             <div className="mb-5 flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary-100)] bg-[var(--accent-muted)] px-3 py-1.5 text-xs font-semibold capitalize text-[var(--accent)]">
-                Blog · {article.category.replace('-', ' ')}
+                Blog · {ARTICLE_CATEGORY_LABELS[article.category] ?? article.category.replace('-', ' ')}
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
                 <Clock className="h-3.5 w-3.5" />
@@ -170,7 +177,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                 className="group flex min-w-0 items-center gap-2 transition-colors hover:text-[var(--accent)]"
               >
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
-                  DS
+                  {AUTHOR_INITIALS}
                 </div>
                 <span className="group-hover:underline">Por {AUTHOR.name}</span>
               </Link>

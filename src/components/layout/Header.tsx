@@ -91,7 +91,7 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="group flex min-w-0 max-w-[min(100%,14rem)] items-center gap-2 sm:max-w-none"
+          className="group flex min-h-11 min-w-0 max-w-[min(100%,14rem)] items-center gap-1.5 sm:max-w-none"
           aria-label="CalculaChile - Inicio"
         >
           <img
@@ -105,7 +105,7 @@ export default function Header() {
           />
           <span
             aria-hidden="true"
-            className="inline-flex min-w-0 items-baseline truncate font-heading text-[18px] font-bold leading-none tracking-tight transition-transform group-hover:scale-105 sm:text-[22px]"
+            className="inline-flex min-w-0 items-baseline truncate font-heading text-base font-bold leading-none tracking-tight transition-transform group-hover:scale-105 min-[360px]:text-[18px] sm:text-[22px]"
           >
             <span className="text-[var(--foreground)]">Calculadora</span>
             <span className="text-[var(--color-primary-500)]">Chile</span>
@@ -140,13 +140,13 @@ export default function Header() {
         </ul>
 
         {/* Right actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {/* Buscador como mini barra */}
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
             aria-label="Buscar en el sitio"
-            className="group inline-flex items-center gap-2 h-10 pl-3 pr-2 rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground-muted)] hover:border-[var(--accent)] hover:text-[var(--foreground)] hover:shadow-sm transition-all duration-200"
+            className="group inline-flex items-center gap-2 h-11 min-w-11 pl-3 pr-2 rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground-muted)] hover:border-[var(--accent)] hover:text-[var(--foreground)] hover:shadow-sm transition-all duration-200"
           >
             <Search className="h-4 w-4 transition-colors group-hover:text-[var(--accent)]" />
             <span className="hidden sm:inline text-sm font-medium text-[var(--foreground-secondary)] group-hover:text-[var(--foreground)] transition-colors">
@@ -164,7 +164,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--accent)] transition-all duration-200"
+            className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--accent)] transition-all duration-200"
             aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={mobileOpen}
           >

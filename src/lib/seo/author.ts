@@ -104,3 +104,11 @@ export const AUTHOR: AuthorProfile = {
   // estilizado en el propio HTML para la presentación visual.
   imageUrl: absoluteUrl('/logo.png'),
 };
+
+/** Iniciales del avatar: primera letra de las dos primeras palabras del nombre. */
+export const AUTHOR_INITIALS = AUTHOR.name
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((w) => w[0].toUpperCase())
+  .join('');

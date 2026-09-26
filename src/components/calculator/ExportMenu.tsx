@@ -168,7 +168,7 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
       {/* Botón principal */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--background-secondary)] border border-[var(--border)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-elevated)] hover:border-[var(--border-hover)] transition-all"
+        className="flex min-h-11 items-center gap-2 px-3 py-2 rounded-lg bg-[var(--background-secondary)] border border-[var(--border)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--surface-elevated)] hover:border-[var(--border-hover)] transition-all"
         aria-label="Exportar resultados"
         aria-expanded={isOpen}
       >

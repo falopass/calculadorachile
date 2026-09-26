@@ -210,7 +210,7 @@ export default async function CategoriaPage({ params }: PageProps) {
                     href={`/guias/${g.slug}`}
                     className="group p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--color-primary-500)]/40 hover:shadow-sm transition-all"
                   >
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
+                    <span className="text-xs font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
                       {g.categoryLabel} · {g.readingTime} min
                     </span>
                     <h3 className="font-semibold text-[var(--foreground)] text-sm mt-1 mb-1 group-hover:text-[var(--color-primary-600)] transition-colors leading-snug">

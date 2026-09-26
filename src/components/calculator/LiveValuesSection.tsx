@@ -67,7 +67,7 @@ const LiveValuesSection = memo(function LiveValuesSection() {
       <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-[var(--border)]">
         {items.map((it) => (
           <div key={it.label} className="px-4 py-3">
-            <div className="text-[10px] font-medium uppercase tracking-wide text-[var(--foreground-muted)]">
+            <div className="text-xs font-medium uppercase tracking-wide text-[var(--foreground-muted)]">
               {it.label}
             </div>
             <div className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--foreground)]">
@@ -76,7 +76,7 @@ const LiveValuesSection = memo(function LiveValuesSection() {
           </div>
         ))}
       </div>
-      <p className="px-4 py-2 text-[11px] leading-snug text-[var(--foreground-muted)] border-t border-[var(--border)]">
+      <p className="px-4 py-2 text-xs leading-snug text-[var(--foreground-muted)] border-t border-[var(--border)]">
         Las calculadoras core (sueldo, UF, hipoteca, boleta) usan estos mismos valores de UF/UTM al
         calcular.
       </p>

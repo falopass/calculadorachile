@@ -102,7 +102,7 @@ function ToastContainer() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-[400] flex flex-col gap-2 max-w-[400px] w-full pointer-events-none"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto z-[400] flex flex-col gap-2 max-w-[400px] sm:w-full pointer-events-none"
       aria-live="polite"
       aria-atomic="true"
     >

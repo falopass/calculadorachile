@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Calculator, BookOpen, Layers, ArrowUpRight } from 'lucide-react';
 import { COMMISSIONS_URL, CONTACT_EMAIL, SITE_NAME } from '@/lib/site';
+import { discoverableCalculators } from '@/data/calculators';
 
 const footerLinks = {
   calculadoras: {
@@ -18,7 +19,7 @@ const footerLinks = {
       { href: '/calculadoras/calculadora-permiso-circulacion', label: 'Permiso de circulación' },
       { href: '/calculadoras/calculadora-finiquito', label: 'Finiquito' },
     ],
-    viewAll: { href: '/calculadoras', label: 'Ver las 39 calculadoras' },
+    viewAll: { href: '/calculadoras', label: `Ver las ${discoverableCalculators.length} calculadoras` },
   },
   guias: {
     title: 'Guías',

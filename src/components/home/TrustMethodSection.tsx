@@ -53,7 +53,7 @@ export default function TrustMethodSection() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-3 text-sm font-medium">
+        <div className="mt-8 flex flex-wrap justify-start gap-x-5 gap-y-3 text-sm font-medium sm:justify-center">
           <Link href="/metodologia" className="text-[var(--accent)] hover:underline">
             Cómo verificamos y corregimos el contenido
           </Link>

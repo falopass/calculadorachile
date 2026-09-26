@@ -88,10 +88,11 @@ function resultFormatToChartFormat(format: CalculatorResult['format']): ChartSeg
  * Excluye resultados highlight y agrupa los demás
  */
 function generateChartSegments(results: CalculatorResult[]): ChartSegment[] {
-  // Filtrar resultados que no sean highlight para el gráfico
-  const nonHighlightResults = results.filter(r => !r.highlight);
-  const sourceResults = nonHighlightResults.length > 0 ? nonHighlightResults : results;
-  
+  // Solo filas del mismo formato que el resultado principal:
+  // mezclar conteos, % y CLP en un donut es engañoso (YMYL).
+  const mainFormat = results.find((r) => r.highlight)?.format ?? 'CLP';
+  const sourceResults = results.filter((r) => !r.highlight && r.format === mainFormat);
+
   return sourceResults.slice(0, 6).map((result, index) => ({
     label: result.label,
     value: result.value,
@@ -120,16 +121,16 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
       className={`
-        flex justify-between items-center px-5 py-4 group
+        flex justify-between items-center px-4 sm:px-5 py-4 group
         ${result.highlight
           ? 'bg-gradient-to-r from-[var(--color-primary-500)]/10 to-[var(--color-primary-600)]/10 border-y border-[var(--color-primary-300)]/30'
           : 'hover:bg-[var(--background-secondary)]/40 border-b border-[var(--border)]/30'
         }
       `}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className={`
-          p-2 rounded-lg
+          p-2 rounded-lg shrink-0
           ${result.highlight
             ? 'bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] text-white shadow-md'
             : 'bg-[var(--background-secondary)]/60 text-[var(--foreground-secondary)]'
@@ -137,33 +138,33 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
         `}>
           <IconComponent className="w-4 h-4" />
         </div>
-        <span className={`text-sm ${result.highlight ? 'font-semibold text-[var(--foreground)]' : 'text-[var(--foreground-secondary)]'}`}>
+        <span className={`min-w-0 break-words text-sm ${result.highlight ? 'font-semibold text-[var(--foreground)]' : 'text-[var(--foreground-secondary)]'}`}>
           {result.label}
         </span>
         {result.highlight && (
-          <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-600)] text-white text-[10px] font-bold uppercase tracking-wide shadow-sm">
+          <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-600)] text-white text-[10px] font-bold uppercase tracking-wide shadow-sm">
             Principal
           </span>
         )}
       </div>
-      
-      <div className="flex items-center gap-2">
+
+      <div className="flex shrink-0 items-center gap-2">
         <span
           className={`
-            font-mono font-medium
+            font-mono font-medium whitespace-nowrap
             ${result.highlight
-              ? 'text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] text-xl'
+              ? 'text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] text-lg sm:text-xl'
               : 'text-[var(--foreground)] dark:text-[var(--foreground-dark)] text-base'
             }
           `}
         >
           {formatValue(result.value, result.format)}
         </span>
-        
+
         {/* Botón copiar */}
         <button
           onClick={handleCopy}
-          className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
+          className="hidden sm:inline-flex opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
           title="Copiar valor"
         >
           {copied ? (
@@ -229,7 +230,7 @@ export default function PremiumResultCard({
     >
       {/* Header */}
       {title && (
-        <div className="bg-gradient-to-r from-[var(--color-primary-600)]/20 via-[var(--color-primary-700)]/15 to-[var(--color-primary-600)]/20 px-6 py-5 border-b border-[var(--border)]/50 flex justify-between items-center">
+        <div className="bg-gradient-to-r from-[var(--color-primary-600)]/20 via-[var(--color-primary-700)]/15 to-[var(--color-primary-600)]/20 px-4 py-4 sm:px-6 sm:py-5 border-b border-[var(--border)]/50 flex flex-wrap justify-between items-center gap-3">
           <h3 className="text-lg font-semibold text-[var(--foreground)] flex items-center gap-2.5">
             <div className="p-2 bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] rounded-lg shadow-sm">
               <TrendingUp className="w-4 h-4 text-white" />
@@ -241,7 +242,8 @@ export default function PremiumResultCard({
             {showChart && segments.length > 1 && (
               <button
                 onClick={() => setShowChartState(!showChartState)}
-                className="text-xs text-[var(--foreground-secondary)] hover:text-[var(--foreground)] flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
+                aria-label={showChartState ? 'Ocultar gráfico' : 'Mostrar gráfico'}
+                className="text-xs text-[var(--foreground-secondary)] hover:text-[var(--foreground)] flex items-center justify-center gap-1 h-11 w-11 sm:h-auto sm:w-auto px-3 py-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
                 title={showChartState ? 'Ocultar gráfico' : 'Mostrar gráfico'}
               >
                 {showChartState ? (
@@ -249,16 +251,17 @@ export default function PremiumResultCard({
                 ) : (
                   <PieChart className="w-4 h-4" />
                 )}
-                {showChartState ? 'Gráfico' : 'Datos'}
+                <span className="hidden sm:inline">{showChartState ? 'Gráfico' : 'Datos'}</span>
               </button>
             )}
             {/* Copiar todo */}
             <button
               onClick={handleCopyAll}
-              className="text-xs text-[var(--foreground-secondary)] hover:text-[var(--foreground)] flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
+              aria-label="Copiar todos los resultados"
+              className="text-xs text-[var(--foreground-secondary)] hover:text-[var(--foreground)] flex items-center justify-center gap-1 h-11 w-11 sm:h-auto sm:w-auto px-3 py-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
             >
               <Copy className="w-4 h-4" />
-              Copiar
+              <span className="hidden sm:inline">Copiar</span>
             </button>
             {/* Exportar */}
             {calculatorId && (
@@ -275,7 +278,7 @@ export default function PremiumResultCard({
 
       {/* Gráfico de distribución */}
       {showChartState && showChart && segments.length > 1 && (
-        <div className="px-6 pt-5 pb-2 bg-gradient-to-b from-transparent to-white/20 dark:to-slate-900/20">
+        <div className="px-4 sm:px-6 pt-5 pb-2 bg-gradient-to-b from-transparent to-white/20 dark:to-slate-900/20">
           <PremiumResultChart
             segments={segments}
             type={chartConfig?.type || 'donut'}

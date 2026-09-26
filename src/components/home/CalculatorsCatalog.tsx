@@ -71,7 +71,7 @@ export default function CalculatorsCatalog({ groups }: CalculatorsCatalogProps) 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Buscar entre ${total} calculadoras…`}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] py-2.5 pl-10 pr-10 text-sm text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] focus:border-[var(--border-focus)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/20 transition-colors"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] py-2.5 pl-10 pr-10 text-base text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] focus:border-[var(--border-focus)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/20 transition-colors"
             aria-label="Buscar calculadoras"
           />
           {query && (

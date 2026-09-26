@@ -26,7 +26,7 @@ import {
 } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl, SITE_NAME } from '@/lib/site';
-import { AUTHOR } from '@/lib/seo/author';
+import { AUTHOR, AUTHOR_INITIALS } from '@/lib/seo/author';
 
 const PAGE_TITLE = `Acerca de ${SITE_NAME}`;
 const PAGE_DESC = `${SITE_NAME} es un sitio independiente creado y mantenido por ${AUTHOR.name}, estudiante de tercer año de Ingeniería Civil en Computación en la Universidad de Talca. Desarrolla el proyecto desde Curicó.`;
@@ -108,7 +108,7 @@ export default function AcercaDePage() {
           <header className="mb-12 md:mb-16">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6">
               <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-[var(--accent)] flex items-center justify-center text-white text-3xl md:text-4xl font-bold font-mono shadow-lg">
-                DS
+                {AUTHOR_INITIALS}
               </div>
               <div className="flex-1 min-w-0">
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-[var(--accent-muted)] text-[var(--accent)] border border-[var(--accent)]/20 mb-3">

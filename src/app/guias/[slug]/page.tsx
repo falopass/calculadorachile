@@ -47,7 +47,7 @@ import {
 } from '@/lib/seo/schema';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
-import { AUTHOR } from '@/lib/seo/author';
+import { AUTHOR, AUTHOR_INITIALS } from '@/lib/seo/author';
 import { guias, getGuiaBySlug, type Guia } from '@/data/guias';
 import { calculators } from '@/data/calculators';
 import { articles } from '@/data/articles';
@@ -303,7 +303,7 @@ export default async function GuiaPage({ params }: PageProps) {
                 className="group flex min-w-0 items-center gap-2 transition-colors hover:text-[var(--accent)]"
               >
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-bold text-white">
-                  DS
+                  {AUTHOR_INITIALS}
                 </div>
                 <span className="group-hover:underline">Por {AUTHOR.name}</span>
               </Link>
@@ -513,10 +513,10 @@ export default async function GuiaPage({ params }: PageProps) {
                       className="group rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:border-[var(--accent)] hover:shadow-sm"
                     >
                       <div className="mb-2 flex items-center gap-2">
-                        <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
+                        <span className="text-xs font-medium uppercase tracking-wider text-[var(--foreground-muted)]">
                           {g.categoryLabel}
                         </span>
-                        <span className="text-[10px] text-[var(--foreground-muted)]">
+                        <span className="text-xs text-[var(--foreground-muted)]">
                           · {g.readingTime} min
                         </span>
                       </div>
@@ -606,7 +606,7 @@ function IndicatorDashboard() {
             <span className="mt-1 block text-lg font-bold tabular-nums tracking-tight text-[var(--foreground)]">
               {item.value}
             </span>
-            <span className="block text-[10px] text-[var(--foreground-muted)]">{item.sub}</span>
+            <span className="block text-xs text-[var(--foreground-muted)]">{item.sub}</span>
           </div>
         ))}
       </div>

@@ -105,7 +105,7 @@ export default function SearchHero() {
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setTimeout(() => setFocused(false), 160)}
-                placeholder="Por ejemplo, sueldo líquido"
+                placeholder="Ej.: sueldo líquido"
                 aria-labelledby="home-search-heading"
                 className="h-12 w-full min-w-0 rounded-xl border border-[var(--border-strong)] bg-[var(--background)] pl-11 pr-4 text-base text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10 sm:h-14"
               />
@@ -149,9 +149,11 @@ export default function SearchHero() {
 
             <button
               type="submit"
-              className="h-12 shrink-0 rounded-xl bg-[var(--accent)] px-5 font-medium text-white transition-colors hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)] sm:h-14 sm:px-6"
+              aria-label="Buscar"
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] px-0 font-medium text-white transition-colors hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)] sm:h-14 sm:w-auto sm:px-6"
             >
-              Buscar
+              <Search className="h-5 w-5 sm:hidden" aria-hidden />
+              <span className="hidden sm:inline">Buscar</span>
             </button>
           </form>
 

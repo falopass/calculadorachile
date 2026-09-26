@@ -262,7 +262,7 @@ function renderInput(
           onChange={handleChange}
           required={input.required}
           error={error}
-          placeholder={`Selecciona ${input.label.toLowerCase()}`}
+          placeholder={input.placeholder || 'Selecciona una opción'}
         />
       );
     case 'number': {
@@ -394,6 +394,9 @@ export default function PremiumCalculatorShell({
   const hasScrolledToResults = useRef(false);
   const hasTrackedStart = useRef(false);
   const hasTrackedComplete = useRef(false);
+  // Campos editados por el usuario: los errores solo se muestran
+  // en campos tocados, para no pintar validaciones en rojo al cargar.
+  const touchedFields = useRef<Set<string>>(new Set());
 
   const [inputValues, setInputValues] = useState(() => buildInitialValues(calculator.inputs));
   const [debouncedValues, setDebouncedValues] = useState(inputValues);
@@ -431,6 +434,7 @@ export default function PremiumCalculatorShell({
   }, [hasSignificantValues, calculator.id]);
 
   const handleInputChange = useCallback((id: string, value: string | number | boolean) => {
+    touchedFields.current.add(id);
     setInputValues((prev) => ({ ...prev, [id]: value }));
     setErrors((prev) => {
       if (!prev[id] && !prev._form) return prev;
@@ -450,7 +454,12 @@ export default function PremiumCalculatorShell({
 
     const fieldErrors = collectFieldErrors(calculator.inputs, debouncedValues);
     if (Object.keys(fieldErrors).length > 0) {
-      setErrors(fieldErrors);
+      // Se omite el cálculo igual que antes, pero solo se muestran
+      // los errores de campos que el usuario ya editó.
+      const visibleErrors = Object.fromEntries(
+        Object.entries(fieldErrors).filter(([id]) => touchedFields.current.has(id)),
+      );
+      setErrors(visibleErrors);
       setIsCalculating(false);
       return;
     }
@@ -518,6 +527,7 @@ export default function PremiumCalculatorShell({
     hasScrolledToResults.current = false;
     hasTrackedStart.current = false;
     hasTrackedComplete.current = false;
+    touchedFields.current.clear();
   }, [calculator.inputs]);
 
   const organismo = ORGANISMO_BY_CATEGORY[calculator.category] ?? 'el organismo oficial competente';
@@ -544,10 +554,10 @@ export default function PremiumCalculatorShell({
             <CalculatorIcon className="h-5 w-5" strokeWidth={2.25} />
           </span>
           <div className="min-w-0">
-            <h2 className="text-base md:text-lg font-semibold text-[var(--foreground)] truncate">
+            <h2 className="text-base md:text-lg font-semibold text-[var(--foreground)] leading-snug">
               {calculator.name}
             </h2>
-            <p className="text-xs md:text-sm text-[var(--foreground-secondary)] truncate">
+            <p className="hidden sm:block text-xs md:text-sm text-[var(--foreground-secondary)] truncate">
               Estimación según los datos ingresados
             </p>
           </div>
@@ -591,7 +601,7 @@ export default function PremiumCalculatorShell({
                 </svg>
                 Opciones avanzadas ({optionalInputs.length})
               </span>
-              <span className="text-xs text-[var(--foreground-muted)]">Mostrar/ocultar</span>
+              <span className="hidden sm:inline text-xs text-[var(--foreground-muted)]">Mostrar/ocultar</span>
             </summary>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 border-t border-[var(--border)] p-4 md:p-5 bg-[var(--surface)]">
               {optionalInputs.map((input) => (
@@ -644,7 +654,7 @@ export default function PremiumCalculatorShell({
       ) : results ? (
         <div
           ref={resultsRef}
-          className="border-t border-[var(--border)] bg-[var(--background-secondary)]/30 p-5 md:p-6"
+          className="border-t border-[var(--border)] bg-[var(--background-secondary)]/30 p-3 sm:p-5 md:p-6"
         >
           {isRiskyCalc && (
             <div className="mb-5">
@@ -680,6 +690,7 @@ export default function PremiumCalculatorShell({
         onClose={() => setIsHistoryOpen(false)}
         entries={historyEntries}
         onSelectEntry={(entry) => {
+          calculator.inputs.forEach((i) => touchedFields.current.add(i.id));
           setInputValues(entry.inputs as Record<string, string | number | boolean>);
           setIsHistoryOpen(false);
         }}

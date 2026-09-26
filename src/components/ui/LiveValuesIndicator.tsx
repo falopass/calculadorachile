@@ -65,25 +65,25 @@ export default function LiveValuesIndicator() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {/* UF */}
         <div className="text-center p-2 rounded-lg bg-[var(--background-secondary)]">
-          <p className="text-[10px] text-[var(--foreground-muted)] uppercase font-medium">UF</p>
+          <p className="text-xs text-[var(--foreground-muted)] uppercase font-medium">UF</p>
           <p className="text-sm font-bold text-[var(--foreground)]">{formatUF(uf)}</p>
         </div>
 
         {/* UTM */}
         <div className="text-center p-2 rounded-lg bg-[var(--background-secondary)]">
-          <p className="text-[10px] text-[var(--foreground-muted)] uppercase font-medium">UTM</p>
+          <p className="text-xs text-[var(--foreground-muted)] uppercase font-medium">UTM</p>
           <p className="text-sm font-bold text-[var(--foreground)]">{formatUTM(utm)}</p>
         </div>
 
         {/* Dólar Observado */}
         <div className="text-center p-2 rounded-lg bg-[var(--background-secondary)]">
-          <p className="text-[10px] text-[var(--foreground-muted)] uppercase font-medium">Dólar Obs.</p>
+          <p className="text-xs text-[var(--foreground-muted)] uppercase font-medium">Dólar Obs.</p>
           <p className="text-sm font-bold text-[var(--foreground)]">${dolar.observado}</p>
         </div>
 
         {/* Dólar Venta */}
         <div className="text-center p-2 rounded-lg bg-[var(--background-secondary)]">
-          <p className="text-[10px] text-[var(--foreground-muted)] uppercase font-medium">Dólar Venta</p>
+          <p className="text-xs text-[var(--foreground-muted)] uppercase font-medium">Dólar Venta</p>
           <p className="text-sm font-bold text-[var(--foreground)]">${dolar.venta}</p>
         </div>
       </div>

@@ -137,16 +137,16 @@ function PremiumDonutChart({
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="flex items-center justify-between text-sm"
+            className="flex items-center justify-between gap-3 text-sm"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex min-w-0 flex-1 items-center gap-2">
               <div 
-                className="w-3 h-3 rounded-full" 
+                className="w-3 h-3 rounded-full shrink-0" 
                 style={{ backgroundColor: segment.color }}
               />
-              <span className="text-[var(--foreground-secondary)]">{segment.label}</span>
+              <span className="min-w-0 leading-snug text-[var(--foreground-secondary)]">{segment.label}</span>
             </div>
-            <span className="font-medium text-[var(--foreground)]">
+            <span className="shrink-0 whitespace-nowrap pl-2 font-medium text-[var(--foreground)]">
               {segment.format === 'CLP' 
                 ? formatCLP(segment.value) 
                 : segment.format === 'percentage' 
@@ -179,9 +179,9 @@ function PremiumBarChart({ segments, title }: { segments: ChartSegment[]; title:
           
           return (
             <div key={index} className="space-y-1">
-              <div className="flex justify-between text-sm">
-                <span className="text-[var(--foreground-secondary)]">{segment.label}</span>
-                <span className="font-medium text-[var(--foreground)]">
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span className="min-w-0 flex-1 leading-snug text-[var(--foreground-secondary)]">{segment.label}</span>
+                <span className="shrink-0 whitespace-nowrap pl-2 font-medium text-[var(--foreground)]">
                   {segment.format === 'CLP' 
                     ? formatCLP(segment.value) 
                     : segment.format === 'percentage' 

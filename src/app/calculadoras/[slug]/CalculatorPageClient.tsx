@@ -477,7 +477,7 @@ export default function CalculatorPageClient({
                         {item.label}
                       </span>
                       {item.badge && (
-                        <span className="shrink-0 rounded-full bg-[var(--color-primary-500)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-primary-600)]">
+                        <span className="shrink-0 rounded-full bg-[var(--color-primary-500)]/10 px-2 py-0.5 text-xs font-semibold text-[var(--color-primary-600)]">
                           {item.badge}
                         </span>
                       )}

@@ -793,7 +793,7 @@ body {
 
 .prose .data-grid .data-grid__label {
   display: block;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
