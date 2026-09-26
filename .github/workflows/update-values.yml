@@ -51,3 +51,21 @@ jobs:
           git add src/lib/values/snapshot.json
           git commit -m "chore(values): actualizar snapshot diario [skip ci]"
           git push
+
+      - name: Verificar frescura en producción
+        run: |
+          curl -fsS --max-time 20 https://calculadorachile.cl/api/values -o values-prod.json
+          node -e '
+            const fs = require("fs");
+            const data = JSON.parse(fs.readFileSync("values-prod.json", "utf8"));
+            const h = data.health;
+            if (!h) {
+              console.log("::warning::/api/values no expone health (deploy anterior al telemetry)");
+              process.exit(0);
+            }
+            if (h.stale || h.alert) {
+              console.log(`::error::/api/values degradado: stale=${h.stale} alert=${h.alert} snapshotAsOf=${h.snapshotAsOf} snapshotAgeHours=${h.snapshotAgeHours}`);
+              process.exit(1);
+            }
+            console.log(`health OK: stale=${h.stale} alert=${h.alert} snapshotAgeHours=${h.snapshotAgeHours}`);
+          '

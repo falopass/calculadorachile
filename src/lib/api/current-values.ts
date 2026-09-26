@@ -33,6 +33,61 @@ export interface ValuesResponse {
     dolarVenta: ValuesSource;
     euro: ValuesSource;
   };
+  /** Salud del pipeline de valores. Los consumidores UI la ignoran. */
+  health?: ValuesHealth;
+}
+
+export interface ValuesHealth {
+  /** ISO del snapshot de fallback que está en uso (o null si no hay). */
+  snapshotAsOf: string | null;
+  /** Horas desde `snapshotAsOf`, 1 decimal. null si falta o es inválido. */
+  snapshotAgeHours: number | null;
+  /** Snapshot más viejo que SNAPSHOT_STALE_HOURS (o sin fecha). */
+  stale: boolean;
+  /** Todos los campos salieron del fallback estático. */
+  allFallback: boolean;
+  /** `stale` o (todo en fallback y snapshot con más de ALL_FALLBACK_ALERT_HOURS). */
+  alert: boolean;
+}
+
+/** Horas de antigüedad del snapshot que lo declaran obsoleto. */
+export const SNAPSHOT_STALE_HOURS = 48;
+/** Horas de antigüedad que alertan cuando todas las fuentes cayeron al fallback. */
+export const ALL_FALLBACK_ALERT_HOURS = 24;
+
+/**
+ * Evalúa la frescura del pipeline de valores a partir del detalle por
+ * campo (`freshness`) y la fecha del snapshot estático.
+ *
+ * Pensado para telemetría server-side: el resultado se adjunta como
+ * `values.health` y, cuando `alert` es true, se loguea una vez por
+ * request. Pura y determinista (inyectar `now` en tests).
+ */
+export function getValuesHealth(
+  freshness: ValuesResponse['freshness'],
+  snapshotAsOf: string | undefined,
+  now = new Date(),
+): ValuesHealth {
+  const asOfMs = snapshotAsOf ? Date.parse(snapshotAsOf) : NaN;
+  const snapshotAgeHours = Number.isFinite(asOfMs)
+    ? Math.round(((now.getTime() - asOfMs) / 3_600_000) * 10) / 10
+    : null;
+
+  const stale = snapshotAgeHours === null || snapshotAgeHours > SNAPSHOT_STALE_HOURS;
+  const allFallback = Object.values(freshness).every((s) => s === 'fallback');
+  const alert =
+    stale ||
+    (allFallback &&
+      snapshotAgeHours !== null &&
+      snapshotAgeHours > ALL_FALLBACK_ALERT_HOURS);
+
+  return {
+    snapshotAsOf: snapshotAsOf ?? null,
+    snapshotAgeHours,
+    stale,
+    allFallback,
+    alert,
+  };
 }
 
 export interface CurrentValues {
@@ -130,6 +185,20 @@ export async function getCurrentValues(): Promise<CurrentValues> {
     return FALLBACK_VALUES.asOf;
   };
 
+  const freshness = {
+    uf: uf.source,
+    utm: utm.source,
+    dolarObservado: dolarObs.source,
+    dolarVenta: venta.source,
+    euro: euro.source,
+  };
+  const health = getValuesHealth(freshness, FALLBACK_VALUES.asOf);
+  if (health.alert) {
+    // Telemetría: un log por request cuando el pipeline está degradado.
+    // Sin credenciales ni URLs: solo orígenes por campo y edad del snapshot.
+    console.error('[values-alert]', JSON.stringify({ ...health, sources: freshness }));
+  }
+
   return {
     values: {
       uf: uf.value,
@@ -142,13 +211,8 @@ export async function getCurrentValues(): Promise<CurrentValues> {
       updatedAt: new Date().toISOString(),
       // La "fuente predominante" sigue la del UF, que es la más visible.
       source: uf.source,
-      freshness: {
-        uf: uf.source,
-        utm: utm.source,
-        dolarObservado: dolarObs.source,
-        dolarVenta: venta.source,
-        euro: euro.source,
-      },
+      freshness,
+      health,
     },
     dates: {
       uf: normalizeIndicatorDate(

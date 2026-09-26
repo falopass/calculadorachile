@@ -14,6 +14,13 @@ const FETCH_TIMEOUT_MS = 5_000;
 const BCENTRAL_USER = process.env.BCENTRAL_USER || '';
 const BCENTRAL_PASS = process.env.BCENTRAL_PASS || '';
 
+/** Resumen compacto de un error de red: name + cause.code cuando existen. */
+function describeError(error: unknown): string {
+  if (!(error instanceof Error)) return String(error);
+  const cause = (error as { cause?: { code?: string } }).cause;
+  return cause?.code ? `${error.name} (${cause.code})` : error.name;
+}
+
 /**
  * Obtiene datos de la API del BCentral usando el endpoint GetSeries.
  *
@@ -57,8 +64,9 @@ export async function fetchBCentral(
       },
     });
   } catch (error) {
-    // Timeout o network error → no rompemos al caller
-    console.error(`[BCentral] Network error para ${codigo}:`, error);
+    // Timeout o network error → no rompemos al caller.
+    // Log compacto sin la URL: las credenciales viajan en el query string.
+    console.error(`[BCentral] Network error para ${codigo}: ${describeError(error)}`);
     return [];
   }
 

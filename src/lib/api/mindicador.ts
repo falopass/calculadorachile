@@ -13,6 +13,13 @@
 const MINDICADOR_API = 'https://mindicador.cl/api';
 const FETCH_TIMEOUT_MS = 5_000;
 
+/** Resumen compacto de un error de red: name + cause.code cuando existen. */
+function describeError(error: unknown): string {
+  if (!(error instanceof Error)) return String(error);
+  const cause = (error as { cause?: { code?: string } }).cause;
+  return cause?.code ? `${error.name} (${cause.code})` : error.name;
+}
+
 /**
  * Respuesta del endpoint raíz /api: trae el último valor de cada
  * indicador. La UF y el dólar son diarios; la UTM es mensual.
@@ -77,7 +84,7 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
       },
     });
   } catch (error) {
-    console.error('[Mindicador] Network error:', error);
+    console.error(`[Mindicador] Network error: ${describeError(error)}`);
     return empty;
   }
 
