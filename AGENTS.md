@@ -10,8 +10,8 @@ Prioridad del proyecto: **ship rápido, bajo costo y alta confiabilidad en cálc
 
 Estado actual del catálogo:
 
-- **40 calculadoras activas** en `src/data/calculators.ts`.
-- **40 módulos de cálculo y 42 tests** en `src/lib/calculations/` (los 40 módulos + tests auxiliares `input-coerce` y `seguro-social`).
+- **53 calculadoras activas** en `src/data/calculators.ts` (44 indexables, 9 `noIndex`; `subsidio-unificado-empleo` queda `noIndex` hasta el decreto del art. 8 de la Ley 21.808).
+- **53 módulos de cálculo** con su test en `src/lib/calculations/` (más tests auxiliares `input-coerce` y `seguro-social`).
 - `bono-bodas-oro` fue **reactivado el 26-09-2026** con fórmula verificada (ChileAtiende ficha 5369): la ruta 410 anterior fue eliminada y el slug lo sirve la ruta dinámica normal.
 
 ## Stack real instalado
@@ -73,7 +73,7 @@ src/
 │   ├── ui/                          # UI base
 │   └── DisclaimerYMYL.tsx           # disclaimer YMYL
 ├── data/
-│   ├── calculators.ts               # catálogo activo: 40 calculadoras
+│   ├── calculators.ts               # catálogo activo: 53 calculadoras
 │   ├── articles.ts                  # blog
 │   ├── guias.ts                     # guías SEO/educativas
 │   └── seo-overrides.ts             # overrides canónicos de title/description
