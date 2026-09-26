@@ -4454,6 +4454,684 @@ const articleCatalog: ArticleDraft[] = [
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 26 de septiembre de 2026 con el <a href="https://www.cupondegas.gob.cl/" target="_blank" rel="noopener">portal oficial del Cupón de Gas Licuado del Gobierno de Chile</a>. El estado individual del cupón debe confirmarse en los canales oficiales indicados por el programa.</p>`,
   },
+  {
+    slug: 'fuas-2027-postulacion-gratuidad-becas-octubre-2026',
+    title: 'FUAS 2027: postulación a gratuidad y becas del 1 al 22 de octubre de 2026',
+    description:
+      'El FUAS para la admisión 2027 se completa del 1 al 22 de octubre de 2026 con RUT y contraseña o ClaveÚnica. Qué beneficios se postulan, requisitos de gratuidad y becas, y fechas clave.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'educacion',
+    readingTime: 6,
+    relatedGuia: 'credito-cae-educacion-chile',
+    embedCalculatorId: 'becas-gratuidad',
+    seoTitle: 'FUAS 2027: del 1 al 22 de octubre para gratuidad y becas',
+    seoDescription:
+      'Postula a gratuidad, becas y créditos para la admisión 2027 con el FUAS entre el 1 y el 22 de octubre de 2026. Requisitos, fechas y qué cubre cada beneficio.',
+    keywords: [
+      'fuas 2027',
+      'postulación gratuidad 2027',
+      'fuas octubre 2026',
+      'becas educación superior 2027',
+      'beneficios estudiantiles mineduc',
+      'cuándo se llena el fuas',
+    ],
+    relatedCalculators: ['calculadora-becas-gratuidad'],
+    faq: [
+      {
+        question: '¿Cuándo se llena el FUAS para la admisión 2027?',
+        answer:
+          'Del 1 al 22 de octubre de 2026, en el sitio oficial del FUAS (postulacion.beneficiosestudiantiles.cl/fuas o fuas.cl), con tu RUT y contraseña o con ClaveÚnica.',
+      },
+      {
+        question: '¿Qué se postula con el FUAS?',
+        answer:
+          'La gratuidad, las becas y los créditos para estudiar en educación superior. El beneficio se otorga con los datos que declaras en el FUAS más la información que ya tiene el Estado; el Mineduc publica el nivel socioeconómico resultante en diciembre.',
+      },
+      {
+        question: '¿Qué cubre la gratuidad 2027?',
+        answer:
+          'El arancel y la matrícula durante la duración nominal de una carrera de pregrado presencial en una institución adscrita. Requiere estar dentro del 60% de menores ingresos del país y no tener título profesional previo ni licenciatura terminal, con excepciones para pedagogía y para técnicos que continúan hacia una carrera profesional.',
+      },
+      {
+        question: '¿Hay que volver a llenar el FUAS para renovar la gratuidad?',
+        answer:
+          'No. La gratuidad se renueva al matricularte, sin volver a llenar el formulario. Se pierde si te cambias a una institución no adscrita, si excedes la duración nominal de la carrera o si obtienes un título profesional.',
+      },
+      {
+        question: '¿Qué becas existen además de la gratuidad?',
+        answer:
+          'Bicentenario (70% de menores ingresos, PAES ≥510 puntos o PACE, arancel de referencia universitario), Juan Gómez Millas (70%, PAES ≥510 o PACE, hasta $1.150.000), Excelencia Académica (80%, NEM en el 10% superior del establecimiento, hasta $1.150.000), Nuevo Milenio (70%, técnica, NEM ≥5,0, hasta $600.000) y Nuevo Milenio II (50%, primer año, hasta $860.000).',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Gratuidad en la educación superior',
+        url: 'https://www.chileatiende.gob.cl/fichas/43203-gratuidad-en-la-educacion-superior',
+      },
+      {
+        label: 'Portal Beneficios Estudiantiles — Gratuidad',
+        url: 'https://portal.beneficiosestudiantiles.cl/gratuidad',
+      },
+      {
+        label: 'Portal Beneficios Estudiantiles — Beca Juan Gómez Millas',
+        url: 'https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-juan-gomez-millas-bjgm',
+      },
+      {
+        label: 'Portal Beneficios Estudiantiles — Beca Nuevo Milenio',
+        url: 'https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-nuevo-milenio-bnm',
+      },
+    ],
+    content: `<p class="article-lead">Del <strong>1 al 22 de octubre de 2026</strong> está abierta la postulación a la <strong>gratuidad, las becas y los créditos</strong> para la admisión 2027 de la educación superior. El único trámite que habilita todo es el <strong>FUAS</strong> (Formulario Único de Acreditación Socioeconómica): no se postula beneficio por beneficio — se completa un solo formulario y con esos datos, más la información que ya tiene el Estado, se determina a qué puedes optar.</p>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Fechas clave</strong><p>FUAS admisión 2027: del 1 al 22 de octubre de 2026. Nivel socioeconómico del hogar: el Mineduc lo publica en diciembre. Resultados de asignación, apelación y renovación de la admisión 2026: desde el 15 de octubre de 2026 en el sitio de Beneficios Estudiantiles.</p></div></aside>
+
+<h2>Qué es el FUAS y por qué todo parte ahí</h2>
+<p>El FUAS es el formulario que acredita la situación socioeconómica de tu hogar para los beneficios estudiantiles del Estado. No es una postulación a una beca concreta: lo que declaras en él alimenta la evaluación que determina si cumples los requisitos de ingresos de la gratuidad y de cada beca. Por eso el consejo práctico es siempre el mismo: <strong>llénalo aunque no estés seguro de calificar</strong>. Sin FUAS no hay evaluación y sin evaluación no hay beneficio, cualquiera sea tu puntaje o tus notas.</p>
+<p>Un detalle que suele pasar desapercibido: el beneficio se otorga con los datos del FUAS <strong>más la información que ya tiene el Estado</strong>. El formulario no opera como una declaración aislada —el sistema cruza lo que declaras con los registros públicos—, así que conviene completarlo con datos reales y consistentes, no con estimaciones optimistas sobre los ingresos del hogar.</p>
+<p>El resultado de esa evaluación no es inmediato. El Mineduc publica el <strong>nivel socioeconómico en diciembre</strong>, dentro del proceso de admisión. Ese nivel —el tramo de ingresos en que queda clasificado tu hogar— es la variable que abre o cierra cada beneficio: la gratuidad pide estar dentro del 60% de menores ingresos, y las becas usan tramos del 50%, 70% u 80% según el programa.</p>
+
+<h2>Cómo y dónde completarlo</h2>
+<p>El FUAS se llena en línea en el sitio oficial del formulario: <strong>postulacion.beneficiosestudiantiles.cl/fuas</strong> (también accesible como fuas.cl). Para entrar necesitas tu <strong>RUT y contraseña</strong>, o tu <strong>ClaveÚnica</strong> si la tienes activada. El plazo es acotado —tres semanas, del 1 al 22 de octubre de 2026— y corresponde a la postulación para la <strong>admisión 2027</strong>.</p>
+<ol class="steps">
+<li><strong>Reúne los datos del hogar.</strong> El formulario pregunta por los integrantes y su situación; tenlos a mano antes de empezar.</li>
+<li><strong>Entra con tu RUT o ClaveÚnica.</strong> Ambas credenciales sirven; usa la que tengas operativa.</li>
+<li><strong>Completa con datos reales.</strong> La información se cruza con los registros del Estado.</li>
+<li><strong>Envía dentro del plazo.</strong> La ventana cierra el 22 de octubre de 2026.</li>
+<li><strong>Revisa el resultado en diciembre.</strong> El nivel socioeconómico se publica en esa fecha y define a qué beneficios optas.</li>
+</ol>
+<p>Como el proceso es por ventana, el riesgo real no es la complejidad del formulario sino el calendario: quien no lo completa entre el 1 y el 22 de octubre queda fuera de la evaluación de este período. Conviene llenarlo en los primeros días, cuando aún hay margen para corregir un dato si el sistema lo exige.</p>
+<p>Mientras corre la ventana de la admisión 2027, quienes ya están dentro del sistema tienen su propia fecha: los <strong>resultados de asignación, apelación y renovación de la admisión 2026</strong> se publican desde el <strong>15 de octubre de 2026</strong> en el sitio de Beneficios Estudiantiles. Son dos procesos paralelos sobre la misma plataforma —una renovación en curso y una postulación nueva— que conviven durante octubre.</p>
+
+<h2>La gratuidad: qué exige y qué cubre</h2>
+<p>La gratuidad es el beneficio más amplio: cubre el <strong>arancel y la matrícula</strong> durante la <strong>duración nominal</strong> de la carrera. Pero su lista de requisitos es precisa y conviene revisarla completa:</p>
+<ul>
+<li><strong>Ingresos:</strong> el hogar debe estar dentro del 60% de menores ingresos del país, según la evaluación del FUAS.</li>
+<li><strong>Institución:</strong> debes matricularte en una institución adscrita a la gratuidad.</li>
+<li><strong>Carrera:</strong> debe ser de pregrado y presencial.</li>
+<li><strong>Título previo:</strong> no puedes tener un título profesional previo ni una licenciatura terminal. Hay dos excepciones: los licenciados pueden estudiar pedagogía, y los técnicos pueden continuar hacia una carrera profesional.</li>
+<li><strong>Duración:</strong> la cobertura corre por la duración nominal de la carrera.</li>
+<li><strong>Nacionalidad:</strong> chilena, o extranjera con residencia definitiva o temporal —en este último caso se exige haber completado la enseñanza media en Chile.</li>
+</ul>
+<p>La renovación es automática en la práctica: la gratuidad se renueva <strong>matriculándote</strong>, sin volver a llenar el FUAS cada año. En compensación, hay tres formas de perderla que conviene conocer antes de tomar decisiones académicas: cambiarte a una institución <strong>no adscrita</strong>, exceder la <strong>duración nominal</strong> de la carrera, u obtener un <strong>título profesional</strong>. Las dos primeras dependen de decisiones o del ritmo de avance; la tercera es la culminación natural del beneficio.</p>
+<p>La lista de requisitos tiene dos lecturas. Del lado de quién entra, el requisito económico —60% de menores ingresos según el FUAS— se combina con condiciones académicas y de trayectoria: pregrado presencial, sin título profesional ni licenciatura terminal previa. Del lado de las excepciones, hay dos rutas que rompen la regla del título previo: los <strong>licenciados pueden estudiar pedagogía</strong> y quienes tienen un título <strong>técnico</strong> pueden continuar hacia una carrera <strong>profesional</strong>. Son las únicas dos avenidas por las que una trayectoria previa no descalifica.</p>
+
+<h2>Las becas: tramos de ingreso y exigencias académicas</h2>
+<p>Si tu hogar supera el 60% —o si la carrera no está en una institución adscrita— las becas de arancel son el segundo nivel de apoyo. Cada una combina un tramo de ingresos con un requisito académico y un tope en pesos:</p>
+<table>
+<thead><tr><th>Beca</th><th>Ingresos del hogar</th><th>Exigencia académica</th><th>Cobertura</th></tr></thead>
+<tbody>
+<tr><td>Bicentenario (BB)</td><td>70% de menores ingresos</td><td>PAES ≥510 puntos (promedio obligatorias) o ingreso PACE</td><td>Arancel de referencia (universitaria)</td></tr>
+<tr><td>Juan Gómez Millas (BJGM)</td><td>70%</td><td>PAES ≥510 o PACE</td><td>Hasta $1.150.000 del arancel anual</td></tr>
+<tr><td>Excelencia Académica (BEA)</td><td>80%</td><td>NEM en el 10% más alto del establecimiento</td><td>Hasta $1.150.000</td></tr>
+<tr><td>Nuevo Milenio (BNM)</td><td>70%</td><td>Carrera técnica y NEM ≥5,0</td><td>Hasta $600.000</td></tr>
+<tr><td>Nuevo Milenio II</td><td>50%</td><td>Primer año, NEM ≥5,0</td><td>Hasta $860.000</td></tr>
+</tbody>
+</table>
+<p>Algunos detalles que distinguen cada una: la BJGM aplica en <strong>cualquier institución acreditada al 31 de diciembre de 2025</strong>, no solo en universidades adscritas a la gratuidad, y el puntaje PAES se exime si ingresas por el programa <strong>PACE</strong>. La BNM II exige además que la institución esté acreditada por <strong>al menos 3 años</strong>. Y las becas tienen requisitos comunes: <strong>nacionalidad chilena</strong>, no tener título profesional o técnico ni licenciatura terminal, y <strong>no haber recibido becas de arancel Mineduc en dos oportunidades</strong>. Si ya tuviste gratuidad, una beca solo procede en una carrera distinta.</p>
+<p>La lectura práctica de la tabla es por combinaciones, no por filas sueltas: un mismo estudiante puede calificar a más de un beneficio a la vez. Quien está en el 60% y estudia una carrera universitaria en una institución adscrita con buen puntaje PAES puede tener gratuidad, Bicentenario y BJGM simultáneamente como opciones —aunque en la práctica los beneficios de arancel no se suman en la misma carrera. Lo relevante es que una sola postulación FUAS habilita la evaluación de todos.</p>
+<p>Nuestra <a href="/calculadoras/calculadora-becas-gratuidad">calculadora de becas y gratuidad</a> cruza exactamente estas reglas: con tu tramo socioeconómico, tipo de carrera, puntaje PAES y NEM te muestra a qué beneficios podrías optar y el tope anual de cada uno.</p>
+
+<h2>Qué revisar antes de que cierre la ventana</h2>
+<ol class="steps">
+<li><strong>Verifica tu ClaveÚnica o contraseña.</strong> Es la llave de acceso; si no funciona, resuélvelo antes del 22 de octubre.</li>
+<li><strong>Completa el FUAS entre el 1 y el 22 de octubre.</strong> No hay postulación tardía dentro de este período.</li>
+<li><strong>Comprueba si tu institución está adscrita a la gratuidad.</strong> Es requisito para ese beneficio, no para las becas.</li>
+<li><strong>Estima tus opciones.</strong> La calculadora de este sitio te muestra el escenario según tu tramo y tus métricas.</li>
+<li><strong>Agenda diciembre.</strong> Ese mes el Mineduc publica tu nivel socioeconómico, que confirma o descarta cada beneficio.</li>
+</ol>
+<p>El FUAS es un trámite corto frente a lo que habilita: cubre la puerta de entrada a la gratuidad, a cinco becas con topes entre $600.000 y $1.150.000, y a los créditos. Perder la ventana significa esperar al siguiente proceso. Si ya estás dentro del sistema —renovando o apelando— los resultados de la admisión 2026 se consultan desde el 15 de octubre de 2026 en el sitio de Beneficios Estudiantiles.</p>
+<p>La estructura completa del sistema apunta a una sola conclusión práctica: el FUAS no es un requisito opcional de quien cree que va a calificar, sino la puerta de evaluación de todos los beneficios estudiantiles. Llenarlo es la única forma de que el Estado determine tu nivel socioeconómico y lo cruce con los requisitos de cada programa — y quien no lo hace no aparece en esa evaluación, cualquiera sea su situación real.</p>
+<p>Para profundizar en las alternativas de financiamiento cuando no alcanzas estos beneficios, revisa la <a href="/guias/credito-cae-educacion-chile">guía del crédito CAE y la educación en Chile</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/43203-gratuidad-en-la-educacion-superior" target="_blank" rel="noopener">ficha de gratuidad de ChileAtiende</a> y el portal de <a href="https://portal.beneficiosestudiantiles.cl/gratuidad" target="_blank" rel="noopener">Beneficios Estudiantiles del Mineduc</a>, incluidas las fichas de <a href="https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-juan-gomez-millas-bjgm" target="_blank" rel="noopener">Beca Juan Gómez Millas</a> y <a href="https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-nuevo-milenio-bnm" target="_blank" rel="noopener">Beca Nuevo Milenio</a>.</p>`,
+  },
+  {
+    slug: 'bono-30-mil-por-hijo-2026-quien-recibe-pago',
+    title: 'Bono de $30.000 por hijo: quién lo recibe, cómo se paga y plazos (Ley 21.840)',
+    description:
+      'El bono de $30.000 por niño es automático, único y no se postula: quiénes lo reciben, en qué orden paga el IPS, el plazo de 9 meses para cobrarlo y cómo consultar o reclamar.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'familia',
+    readingTime: 5,
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    embedCalculatorId: 'bono-30-mil-por-hijo',
+    seoTitle: 'Bono $30.000 por hijo 2026: quién lo recibe y cómo se paga',
+    seoDescription:
+      'Bono único y automático de $30.000 por niño (Ley 21.840): beneficiarios, orden de pago del IPS, plazo de cobro de 9 meses y consulta con RUN y ClaveÚnica.',
+    keywords: [
+      'bono 30 mil por hijo',
+      'bono $30.000 niños 2026',
+      'ley 21840 bono niñez',
+      'quién recibe el bono por hijo',
+      'bono niñez ips consulta',
+      'bono hijo automático',
+    ],
+    relatedCalculators: ['calculadora-bono-30-mil-por-hijo'],
+    faq: [
+      {
+        question: '¿Hay que postular al bono de $30.000 por hijo?',
+        answer:
+          'No. Es automático y por una sola vez: el IPS lo otorga a quienes cumplen los requisitos al 1 de junio de 2026. Solo debes consultar tu estado y cobrarlo dentro del plazo de 9 meses desde que se genera el documento de pago.',
+      },
+      {
+        question: '¿Quiénes reciben el bono?',
+        answer:
+          'Tres grupos: niños hasta 13 años al 01-06-2026 cuyo hogar estaba en el 80% más vulnerable del RSH; la madre de niños nacidos entre el 02-06-2026 y el 15-03-2027 con ese mismo requisito (se paga después del 15-03-2027); y quien tenga el cuidado legal de niños hasta 13 años en cuidado alternativo familiar, sin exigencia de vulnerabilidad.',
+      },
+      {
+        question: '¿Cómo consulto si soy beneficiario?',
+        answer:
+          'En la plataforma consulta.bononinez.cl con tu RUN y ClaveÚnica. El mismo sitio permite presentar reclamos dentro de los 15 meses desde la publicación de la ley (04-09-2026).',
+      },
+      {
+        question: '¿El bono afecta otros beneficios o paga impuestos?',
+        answer:
+          'No constituye remuneración ni renta: no paga impuestos, cotizaciones ni descuentos. Si lo recibiste sin cumplir los requisitos, existe un canal de devolución en devolucionbono.ips.gob.cl.',
+      },
+      {
+        question: '¿Cuándo se paga el bono?',
+        answer:
+          'El IPS prioriza a quienes reciben SUF, asignación familiar o maternal, subsidio de discapacidad o están en el Subsistema de Seguridades y Oportunidades; al resto lo paga a la jefa o jefe de hogar por CuentaRUT o presencialmente en BancoEstado. No hay fechas de pago concretas publicadas; para los nacidos en el período especial el pago es después del 15 de marzo de 2027.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Bono $30.000 por hijo',
+        url: 'https://www.chileatiende.gob.cl/fichas/144481-bono-30-mil-por-hijo',
+      },
+      {
+        label: 'BCN / Ley Chile — Ley 21.840',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1227843',
+      },
+    ],
+    content: `<p class="article-lead">La <strong>Ley 21.840</strong>, publicada el 4 de septiembre de 2026, creó un bono de <strong>$30.000 por cada niño o niña</strong> beneficiario. Es un apoyo <strong>automático y por una sola vez</strong>: no se postula —el IPS lo otorga a quienes cumplen los requisitos a la fecha de corte— y lo único que hay que hacer es consultar si te corresponde y cobrarlo dentro del plazo.</p>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Cómo consultar</strong><p>En consulta.bononinez.cl con tu RUN y ClaveÚnica. Ahí mismo se presentan los reclamos, dentro de los 15 meses desde la publicación de la ley. El plazo para cobrarlo es de 9 meses desde que se genera el documento de pago.</p></div></aside>
+
+<h2>Un bono que no se postula</h2>
+<p>A diferencia de los subsidios que exigen formulario, este bono funciona al revés: el Estado identifica a los beneficiarios con la información que ya tiene —principalmente el Registro Social de Hogares al <strong>1 de junio de 2026</strong>— y genera el documento de pago sin que nadie presente nada. La única acción de la persona es consultar y cobrar. No es un trámite ni un proceso competitivo: si cumples las condiciones al corte, el derecho ya existe.</p>
+<p>Dos características lo hacen especialmente limpio frente a otros apoyos. Primero, es <strong>por una sola vez</strong>: no es mensual ni se renueva. Segundo, <strong>no constituye remuneración ni renta</strong>: no paga impuestos, no descuenta cotizaciones y no arrastra otras consecuencias sobre beneficios o declaraciones.</p>
+<p>También hay una contraparte del diseño automático: como nadie declaró nada, el sistema pudo asignar el bono a quien no debía recibirlo. Por eso existe un canal de <strong>devolución</strong> en devolucionbono.ips.gob.cl para quienes lo reciban sin cumplir los requisitos, y un canal de <strong>reclamo</strong> en la plataforma de consulta para quienes crean que sí les correspondía.</p>
+<p>La otra variable que define el monto final es la más simple: el bono es <strong>por cada niño o niña</strong>, no por hogar. Un hogar con tres niños dentro de los criterios recibe tres veces los $30.000 —$90.000—, y eso aplica tanto al grupo general como al de cuidado alternativo. Lo que no escala es el requisito: la evaluación del 80% RSH es una sola por hogar y habilita a todos los niños en edad que lo conforman.</p>
+
+<h2>Los tres grupos de beneficiarios</h2>
+<p>La ley define tres vías distintas para recibir los $30.000, cada una con su propio corte y su propio beneficiario:</p>
+<ul>
+<li><strong>Niños hasta 13 años al 1 de junio de 2026</strong>, siempre que el hogar estuviera dentro del 80% más vulnerable del Registro Social de Hogares. Es el grupo más numeroso y el que usa el corte socioeconómico estándar.</li>
+<li><strong>La madre de niños nacidos entre el 2 de junio de 2026 y el 15 de marzo de 2027</strong>, si el hogar cumplía el requisito del 80% RSH al 1 de junio de 2026. En este caso el bono <strong>se paga después del 15 de marzo de 2027</strong>: el período de nacimientos recién termina esa fecha, así que este grupo cobra más tarde que los demás.</li>
+<li><strong>Niños hasta 13 años en cuidado alternativo familiar</strong> —familias de acogida, familia extensa o adultos de confianza—. Aquí el beneficiario es <strong>quien tenga el cuidado legal del niño al 1 de junio de 2026</strong>, y lo más relevante: <strong>sin exigencia de vulnerabilidad</strong>. No hace falta estar en el 80% RSH.</li>
+</ul>
+<p>El tercer grupo es el que más se presta a confusión: el cuidado alternativo no depende del nivel socioeconómico del hogar que acoge, sino de la condición legal del cuidado a la fecha de corte. Si un niño vive contigo en esa modalidad, el bono te corresponde a ti como cuidador, seas o no parte del 80%.</p>
+<p>El segundo grupo también merece una lectura atenta: cubre a los niños nacidos <strong>después</strong> del corte del 1 de junio, pero mantiene el requisito socioeconómico evaluado a esa misma fecha. Es decir, la vulnerabilidad se mide una sola vez —al 1 de junio de 2026— y los nacimientos posteriores se agregan a esa evaluación ya hecha, con el pago diferido hasta después del 15 de marzo de 2027 cuando cierra el período.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos según la composición del hogar</div><ul><li>2 niños en edad, hogar en el 80% RSH → $60.000.</li><li>2 niños en edad + 1 nacido en el período especial, hogar en el 80% RSH → $90.000, de los cuales $30.000 se pagan después del 15-03-2027.</li><li>1 niño en cuidado alternativo, hogar fuera del 80% RSH → $30.000 igualmente.</li><li>2 niños en edad, hogar fuera del 80% RSH y sin cuidado alternativo → $0.</li></ul><span class="total">El 80% RSH habilita los dos primeros grupos; el cuidado alternativo no lo necesita</span></div>
+
+<h2>En qué orden paga el IPS</h2>
+<p>El IPS no paga a todos por el mismo canal. La priorización parte por quienes ya están dentro del sistema de transferencias: las personas que reciben el <strong>Subsidio Familiar (SUF)</strong>, la <strong>asignación familiar o maternal</strong>, el <strong>subsidio de discapacidad del artículo 35 de la Ley 20.255</strong> o que pertenecen al <strong>Subsistema de Seguridades y Oportunidades</strong> reciben el bono por la vía en que ya cobran esos beneficios.</p>
+<p>El diseño es eficiente en un punto concreto: para esos grupos el bono llega por un canal que ya está validado y activo, sin trámite adicional. Para quienes no están en ninguno de esos programas, el pago se hace a la <strong>jefa o jefe de hogar por CuentaRUT</strong>, o de forma presencial en <strong>BancoEstado</strong>. No hay fechas de pago concretas publicadas: el diseño del beneficio prioriza los canales existentes y el documento de pago va activando el derecho de cobro.</p>
+<p>Lo que sí está definido es el plazo: <strong>9 meses desde que se genera el documento de pago</strong>. Pasado ese plazo, el derecho a cobrar prescribe — no se pierde por no postular, pero sí por no cobrar. Es la única acción temporal que le queda al beneficiario: el otorgamiento es automático, pero el cobro tiene ventana.</p>
+
+<h2>Consulta, reclamo y devolución</h2>
+<p>Toda la operación del bono se concentra en tres canales oficiales, cada uno con una función distinta:</p>
+<ol class="steps">
+<li><strong>Consultar el beneficio:</strong> en consulta.bononinez.cl, con tu RUN y ClaveÚnica. Es la puerta de entrada para saber si el documento de pago ya se generó.</li>
+<li><strong>Reclamar si corresponde:</strong> en la misma plataforma, dentro de los <strong>15 meses</strong> desde la publicación de la ley (04-09-2026). Sirve si crees que cumplías los requisitos y no fuiste incluido.</li>
+<li><strong>Devolver si no correspondía:</strong> en devolucionbono.ips.gob.cl, para quienes recibieron el bono sin cumplir los requisitos.</li>
+</ol>
+<p>La combinación de los tres canales refleja la lógica del beneficio: el otorgamiento es automático, así que el sistema se diseñó para corregirse en ambos sentidos — incluir al que quedó fuera y recuperar lo pagado de más. Revisar la consulta una sola vez basta para saber en qué estado está tu caso.</p>
+<p>El plazo del reclamo corre desde la <strong>publicación de la ley, el 4 de septiembre de 2026</strong>: 15 meses desde esa fecha, un margen amplio pero fijo. Es distinto del plazo de cobro —que corre desde el documento de pago— porque cubre una situación distinta: no el cobro de un beneficio ya otorgado, sino la solicitud de revisión cuando el bono no fue otorgado a quien creía tener derecho.</p>
+
+<h2>Qué revisar ahora</h2>
+<ol class="steps">
+<li><strong>Entra a consulta.bononinez.cl</strong> con tu RUN y ClaveÚnica y confirma si se generó documento de pago.</li>
+<li><strong>Cuenta los niños beneficiarios</strong> según los tres grupos: en edad al 01-06-2026, nacidos en el período especial, o bajo tu cuidado alternativo.</li>
+<li><strong>Identifica tu canal de pago:</strong> si cobras SUF, asignación familiar u otro beneficio, llega por esa vía; si no, por CuentaRUT o BancoEstado.</li>
+<li><strong>Cobra dentro del plazo:</strong> 9 meses desde que se genera el documento de pago; no lo dejes para el final.</li>
+</ol>
+<p>Si el resultado de la consulta no coincide con lo que esperabas —por ejemplo, figuras sin beneficio pese a estar en el 80% RSH al corte—, la vía es el reclamo en la misma plataforma, con el plazo de 15 meses corriendo desde septiembre de 2026. La calculadora de este sitio te permite estimar el monto total según los niños que declares.</p>
+<p>En resumen, el bono se resume en tres acciones: consultar si fuiste incluido, cobrar dentro de los 9 meses del documento de pago y reclamar dentro de los 15 meses de la publicación si crees que te correspondía. El resto —la determinación del beneficio— ya está hecho: no hay postulación ni cupos, solo la fecha de corte del 1 de junio de 2026 y los datos que el Estado ya tenía de tu hogar. Quien quedó dentro, tiene el derecho activo; quien quedó fuera y está convencido de su derecho, tiene el reclamo; y quien lo recibió sin corresponderle, tiene el canal de devolución.</p>
+<p>Para profundizar en los apoyos que sostienen a las familias, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de pensión alimenticia y derechos familiares</a> y la <a href="/calculadoras/calculadora-bono-30-mil-por-hijo">calculadora del bono de $30.000 por hijo</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/144481-bono-30-mil-por-hijo" target="_blank" rel="noopener">ficha del Bono $30.000 por hijo de ChileAtiende</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=1227843" target="_blank" rel="noopener">texto de la Ley 21.840 en Ley Chile (BCN)</a>.</p>`,
+  },
+  {
+    slug: 'subsidio-unificado-empleo-ley-21808-octubre-2026',
+    title: 'Subsidio Unificado de Empleo (Ley 21.808): qué cambia desde el 1 de octubre de 2026',
+    description:
+      'La Ley 21.808 crea el Subsidio Unificado de Empleo que rige desde el 01-10-2026: tramos por renta bruta, aportes del 10% al trabajador y 20% a la empresa el primer año, y qué pasa con BTM y SEJ.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'laboral',
+    readingTime: 6,
+    seoTitle: 'Ley 21.808: el Subsidio Unificado de Empleo rige desde octubre',
+    seoDescription:
+      'El SUE reemplaza los subsidios al empleo desde el 01-10-2026: IMM del subsidio $529.000, tramos de 1,25 y 2,25 IMM, piso de $13.225 y reglas para trabajador y empresa.',
+    keywords: [
+      'subsidio unificado de empleo',
+      'ley 21808',
+      'sue subsidio empleo 2026',
+      'bono trabajo mujer sue',
+      'subsidio empleo joven transición',
+      'aporte estatal contratación 2026',
+    ],
+    relatedCalculators: ['calculadora-subsidio-unificado-empleo'],
+    faq: [
+      {
+        question: '¿Los montos del SUE son definitivos?',
+        answer:
+          'La ley fija el IMM del subsidio en $529.000 y los porcentajes del primer año (10% trabajador, 20% empresa), pero los parámetros se materializan en el decreto del artículo 8, que al 26-09-2026 aún no se publica. Los montos pueden ajustarse cuando salga el decreto.',
+      },
+      {
+        question: '¿Quiénes pueden acceder al subsidio?',
+        answer:
+          'Cuatro grupos prioritarios: jóvenes de 18 a 24 años, mujeres de 25 a 54, personas de 55 años o más y personas con discapacidad desde los 18 inscritas en el RND. Además se exige 6 meses de desempleo continuos u 8 discontinuos en los 18 meses previos y, el primer año, pertenecer al 40% más vulnerable RSH (no aplica a personas con discapacidad).',
+      },
+      {
+        question: '¿Qué pasa con el Bono al Trabajo de la Mujer y el Subsidio al Empleo Joven?',
+        answer:
+          'El BTM ya no recibe nuevas postulaciones por la entrada en vigencia del SUE, según informa el SENCE. Para el SEJ, el pago anual 2025 se rige por el artículo cuarto transitorio de la Ley 21.808.',
+      },
+      {
+        question: '¿Cuánto dura el aporte?',
+        answer:
+          '12 meses para la persona trabajadora (15 si es persona con discapacidad). Para la empresa son 15 meses si es micro o pequeña. Los pagos mensuales al trabajador son provisionales por el 90% y se reliquidan anualmente.',
+      },
+      {
+        question: '¿Qué debe hacer la empresa para recibir su aporte?',
+        answer:
+          'Solicitarlo dentro de los 3 meses desde el inicio de la relación laboral, sin haber tenido relación laboral con esa persona en los 12 meses previos. Hay un máximo de 200 beneficiarios por empresa y un pago escalonado en empresas de 1 a 199 trabajadores.',
+      },
+    ],
+    sources: [
+      {
+        label: 'Diario Oficial — Ley 21.808 (13-03-2026)',
+        url: 'https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf',
+      },
+      {
+        label: 'BCN / Ley Chile — Ley 21.808',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1222281',
+      },
+      {
+        label: 'SENCE — Bono al Trabajo de la Mujer',
+        url: 'https://sence.gob.cl/personas/bono-al-trabajo-de-la-mujer',
+      },
+      {
+        label: 'SENCE — Subsidio al Empleo Joven',
+        url: 'https://sence.gob.cl/personas/subsidio-al-empleo-joven',
+      },
+    ],
+    content: `<p class="article-lead">El <strong>1 de octubre de 2026</strong> entra en vigencia la <strong>Ley 21.808</strong>, publicada en el Diario Oficial el 13 de marzo de 2026, que crea el <strong>Subsidio Unificado de Empleo (SUE)</strong>: un aporte mensual del Estado que se reparte entre la persona trabajadora y la empresa que la contrata, dirigido a cuatro grupos prioritarios. Con su entrada, el Bono al Trabajo de la Mujer dejó de recibir nuevas postulaciones y el Subsidio al Empleo Joven opera su transición.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Los parámetros aún no son definitivos</strong><p>La ley fija el IMM del subsidio en $529.000 y los porcentajes del primer año (10% trabajador, 20% empresa), pero los parámetros se materializan en el <strong>decreto del artículo 8</strong>, que al 26-09-2026 aún no se publica. Los montos de esta nota son los de la ley y pueden ajustarse cuando salga el decreto. El SENCE es el organismo que administra el subsidio.</p></div></aside>
+
+<h2>Qué es el SUE y a quién está dirigido</h2>
+<p>El SUE es un subsidio al empleo que el Estado paga en dos puntas: un <strong>aporte a la persona trabajadora</strong> y un <strong>aporte a la empresa</strong> que la contrata. La ley usa su propio referente de ingreso —un <strong>ingreso mínimo mensual del subsidio de $529.000</strong>, reajustable— y sobre él define los tramos en que el aporte crece, se mantiene y decrece hasta desaparecer.</p>
+<p>La cobertura no es universal: está dirigido a <strong>cuatro grupos prioritarios</strong> —jóvenes de 18 a 24 años, mujeres de 25 a 54 años, personas de 55 años o más y personas con discapacidad desde los 18 años inscritas en el Registro Nacional de la Discapacidad— y exige condiciones de desempleo y vulnerabilidad que lo orientan a la reinserción laboral.</p>
+<p>Los requisitos de la persona trabajadora son dos: haber estado <strong>6 meses de desempleo continuos u 8 discontinuos en los 18 meses anteriores</strong> a la contratación, y pertenecer al <strong>40% más vulnerable según el Registro Social de Hogares durante el primer año</strong> —este último requisito no aplica a personas con discapacidad. Sobre la renta bruta, el tope general es <strong>2,25 IMM del subsidio</strong>: por encima de $1.190.250 no hay aporte ese mes.</p>
+<p>El requisito de desempleo es el eje del diseño: el subsidio no premia cualquier contratación, sino la de quien viene de un período significativo sin trabajo —seis meses seguidos u ocho acumulados dentro de un año y medio—. La exigencia del 40% RSH durante el primer año suma un segundo filtro: el beneficio está orientado a la reinserción de quienes combinan desempleo prolongado con vulnerabilidad, salvo en el caso de las personas con discapacidad, para quienes el requisito de registro no corre.</p>
+
+<h2>Cuánto aporta el Estado a cada parte</h2>
+<p>El primer año, los porcentajes de valorización (PV) son <strong>10% para la persona trabajadora y 20% para la empresa</strong>, calculados sobre tramos de la renta bruta medidos en IMM del subsidio:</p>
+<table>
+<thead><tr><th>Renta bruta</th><th>Aporte trabajador (PV 10%)</th><th>Aporte empresa (PV 20%)</th></tr></thead>
+<tbody>
+<tr><td>Hasta $661.250 (1,25 IMM)</td><td>10% × renta, con tope de 1 IMM</td><td>20% × renta</td></tr>
+<tr><td>$661.251 a $1.190.250 (hasta 2,25 IMM)</td><td>10% × 1 IMM − 10% × (renta − 1,25 IMM), con piso de $13.225</td><td>20% × 1,25 IMM − 25% × (renta − 1,25 IMM)</td></tr>
+<tr><td>Sobre $1.190.250</td><td>Sin aporte ese mes</td><td>Sin aporte ese mes</td></tr>
+</tbody>
+</table>
+<p>Dos reglas finas importan en la práctica. Primero, el aporte del trabajador tiene un <strong>piso: nunca puede ser inferior al 2,5% del IMM del subsidio</strong> —$13.225— mientras la persona sea elegible, así que incluso en el borde superior del rango sigue existiendo un aporte mínimo. Segundo, el aporte de la empresa cae más rápido en el tramo decreciente: el descuento es el 20% multiplicado por 1,25, es decir el 25% de lo que la renta supere a 1,25 IMM.</p>
+<p>La arquitectura de los tramos se entiende mejor como tres zonas: por debajo de $661.250 el aporte crece con la renta; entre ese punto y $1.190.250 decrece gradualmente a medida que el sueldo sube; y sobre $1.190.250 desaparece por completo ese mes. El corte es mensual —una renta que supere el tope en un mes puntual deja sin aporte ese mes— y el máximo del beneficio para el trabajador se alcanza justo en el techo del primer tramo: 10% de $529.000, es decir $52.900.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos con el IMM del subsidio ($529.000)</div><ul><li>Renta bruta $500.000 → trabajador $50.000 / empresa $100.000 al mes.</li><li>Renta bruta $600.000 → trabajador $52.900 / empresa $120.000.</li><li>Renta bruta $900.000 → trabajador $29.025 / empresa $72.563.</li><li>Renta bruta $1.150.000 → trabajador $13.225 (la fórmula da $4.025, pero opera el piso) / empresa $10.063.</li><li>Renta bruta $1.200.000 → sin aporte, porque supera 2,25 IMM.</li></ul><span class="total">Entre 1,25 y 2,25 IMM el aporte baja de forma gradual; el trabajador siempre recibe al menos el piso mientras sea elegible</span></div>
+
+<h2>Duración, pago provisional y reglas de la empresa</h2>
+<p>El subsidio dura <strong>12 meses para la persona trabajadora</strong> —15 si es persona con discapacidad— y <strong>15 meses para la empresa cuando es micro o pequeña</strong>. Los pagos mensuales al trabajador son <strong>provisionales por el 90%</strong>: se paga esa parte cada mes y la diferencia se reliquida anualmente, una mecánica pensada para ajustar el beneficio a los ingresos efectivos del año.</p>
+<p>Esa provisionalidad tiene una consecuencia práctica: el monto que llega cada mes no es el aporte completo, sino el 90% de él, con una reliquidación anual que cierra la cuenta según las rentas efectivas. Un trabajador con aporte de $52.900 recibe $47.610 mensuales en forma provisional, y el remanente queda para la reliquidación anual.</p>
+<p>Del lado empleador, la ley agrega reglas de acceso: la empresa debe <strong>solicitar el subsidio dentro de los 3 meses desde el inicio de la relación laboral</strong> y no puede haber tenido relación laboral con esa persona en los <strong>12 meses previos</strong> —una barrera contra la recontratación para capturar el beneficio. Además hay un <strong>máximo de 200 beneficiarios por empresa</strong> y un <strong>pago escalonado</strong> en empresas de 1 a 199 trabajadores: 50% del aporte el primer mes, 75% el segundo, 100% el tercero y 100% más el remanente el cuarto mes.</p>
+<p>Ese escalonamiento ordena el flujo: la empresa recibe el beneficio completo, pero su desembolso se concentra recién en el tercer y cuarto mes, lo que vuelve menos atractivo un uso meramente transitorio del subsidio.</p>
+
+<h2>La transición: qué pasa con BTM y SEJ</h2>
+<p>El SUE reemplaza los subsidios al empleo anteriores. Según informa el SENCE en su sitio, <strong>el Bono al Trabajo de la Mujer ya no recibe nuevas postulaciones</strong> debido a la entrada en vigencia de la nueva ley. Para el <strong>Subsidio al Empleo Joven</strong>, la referencia es la norma transitoria: el <strong>pago anual 2025 se rige por el artículo cuarto transitorio de la Ley 21.808</strong>.</p>
+<p>Para quienes venían siguiendo esos programas, la lectura práctica es directa: el sistema de subsidios al empleo se unifica bajo una sola ley con reglas propias de tramos, duración y elegibilidad, administrada por el SENCE. Las prestaciones ya generadas bajo los programas anteriores mantienen sus reglas de cierre según las normas transitorias —el BTM no abre postulaciones nuevas y el SEJ termina de pagar su ciclo 2025 bajo la norma transitoria.</p>
+
+<h2>Qué revisar mientras se publica el decreto</h2>
+<ol class="steps">
+<li><strong>Identifica tu grupo prioritario:</strong> joven 18–24, mujer 25–54, persona de 55+ o persona con discapacidad inscrita en el RND.</li>
+<li><strong>Revisa tu desempleo previo:</strong> 6 meses continuos u 8 discontinuos en los últimos 18 meses.</li>
+<li><strong>Confirma tu tramo RSH:</strong> el primer año exige 40% más vulnerable, salvo personas con discapacidad.</li>
+<li><strong>Estima el aporte con tu renta bruta:</strong> la <a href="/calculadoras/calculadora-subsidio-unificado-empleo">calculadora del SUE</a> aplica los tramos, el piso y el pago provisional del 90%.</li>
+<li><strong>Sigue la publicación del decreto del art. 8:</strong> los parámetros finales se confirman ahí.</li>
+</ol>
+<p>La entrada en vigencia ya está fijada en la ley —1 de octubre de 2026—, pero la letra chica que fija los parámetros operativos quedó delegada al decreto del artículo 8, pendiente al cierre de esta nota. Este artículo es informativo y debe releerse cuando ese decreto se publique.</p>
+<p>El SUE marca un cambio de arquitectura: en lugar de subsidios separados por grupo objetivo —el BTM para mujeres, el SEJ para jóvenes—, una sola ley unifica el aporte a la contratación con tramos definidos sobre el IMM del subsidio y duraciones según el perfil del trabajador y el tamaño de la empresa. La administración queda en el SENCE, que ya anuncia el cierre de postulaciones del BTM a partir de esta entrada en vigencia. Para los cuatro grupos prioritarios —jóvenes, mujeres, personas de 55 o más y personas con discapacidad—, el nuevo esquema ordena en una sola norma lo que antes se repartía entre programas distintos.</p>
+<p>Para profundizar en cómo estimar el aporte según tu renta bruta, revisa la <a href="/calculadoras/calculadora-subsidio-unificado-empleo">calculadora del Subsidio Unificado de Empleo</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con el <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">texto de la Ley 21.808 en el Diario Oficial</a>, su versión en <a href="https://www.bcn.cl/leychile/navegar?idNorma=1222281" target="_blank" rel="noopener">Ley Chile (BCN)</a>, y las páginas del SENCE del <a href="https://sence.gob.cl/personas/bono-al-trabajo-de-la-mujer" target="_blank" rel="noopener">Bono al Trabajo de la Mujer</a> y del <a href="https://sence.gob.cl/personas/subsidio-al-empleo-joven" target="_blank" rel="noopener">Subsidio al Empleo Joven</a>.</p>`,
+  },
+  {
+    slug: 'bono-bodas-de-oro-octubre-2026-monto-requisitos',
+    title: 'Bono Bodas de Oro octubre 2026: nuevo monto de $482.295 y requisitos',
+    description:
+      'Desde el 1 de octubre de 2026 el Bono Bodas de Oro sube a $482.295 ($241.147 por cónyuge vivo) por el reajuste del IPC. Requisitos, plazo de un año desde el 50º aniversario y cómo solicitarlo.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'familia',
+    readingTime: 5,
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    embedCalculatorId: 'bono-bodas-oro',
+    seoTitle: 'Bono Bodas de Oro 2026: $482.295 desde el 1 de octubre',
+    seoDescription:
+      'El Bono Bodas de Oro se reajusta cada octubre con el IPC: desde el 01-10-2026 paga $482.295 por matrimonio ($241.147 por cónyuge). Requisitos y cómo pedirlo.',
+    keywords: [
+      'bono bodas de oro 2026',
+      'bodas de oro monto octubre 2026',
+      'bono 50 años de matrimonio',
+      'requisitos bono bodas de oro',
+      'bono bodas de oro chileatiende',
+      'cuánto paga el bono bodas de oro',
+    ],
+    relatedCalculators: ['calculadora-bono-bodas-oro'],
+    faq: [
+      {
+        question: '¿Cuánto paga el Bono Bodas de Oro desde octubre de 2026?',
+        answer:
+          '$482.295 por matrimonio, repartidos en partes iguales: $241.147 por cada cónyuge vivo. Se paga una sola vez y se reajusta cada octubre por el 100% del IPC; hasta septiembre de 2026 el monto era de $463.166 ($231.583 por cónyuge).',
+      },
+      {
+        question: '¿Cuáles son los requisitos?',
+        answer:
+          'Cumplir 50 años de matrimonio y solicitarlo dentro del año siguiente (con el cónyuge). No estar separados ni divorciados, estar en el 80% más vulnerable del RSH, convivir (o residir en un hogar de larga estadía) y acreditar residencia en Chile por 4 de los últimos 5 años.',
+      },
+      {
+        question: '¿Qué pasa si uno de los cónyuges falleció?',
+        answer:
+          'Si el matrimonio llegó a los 50 años y la solicitud se presenta dentro del plazo, el viudo o viuda puede recibir su parte. La ficha contempla el caso de viudez dentro del año desde el aniversario.',
+      },
+      {
+        question: '¿Cómo se solicita?',
+        answer:
+          'Por videoatención de ChileAtiende o presencialmente en una sucursal. En videoatención se muestra la cédula por ambos lados y se dan los datos bancarios; en sucursal basta la cédula, y si va un apoderado debe llevar un poder notarial. ChileAtiende recomienda llamar al 101 antes de ir.',
+      },
+      {
+        question: '¿Y si el matrimonio fue en el extranjero?',
+        answer:
+          'Debe estar inscrito en el Registro de la Primera Sección de Santiago, con los antecedentes legalizados ante el Ministerio de Relaciones Exteriores.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Bono Bodas de Oro',
+        url: 'https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro',
+      },
+    ],
+    content: `<p class="article-lead">Desde el <strong>1 de octubre de 2026</strong> el <strong>Bono Bodas de Oro</strong> sube a <strong>$482.295 por matrimonio</strong> —$241.147 por cada cónyuge vivo— por el reajuste anual que aplica el beneficio. El bono premia los 50 años de matrimonio con un pago único, pero tiene una regla estricta: hay un <strong>plazo de un año desde el 50º aniversario</strong> para pedirlo.</p>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Reajuste de octubre</strong><p>El monto se actualiza cada octubre por el 100% del IPC. Hasta el 30 de septiembre de 2026 el bono era de $463.166 ($231.583 por cónyuge); desde el 1 de octubre es de $482.295 ($241.147 por cónyuge vivo).</p></div></aside>
+
+<h2>Un pago único, en partes iguales</h2>
+<p>El Bono Bodas de Oro es un aporte de ChileAtiende que se paga <strong>una sola vez</strong> y <strong>en partes iguales</strong> entre los cónyuges vivos: no es un monto compartido que se divide a decisión, sino dos mitades fijas de $241.147 cada una. Y se solicita <strong>junto al cónyuge</strong>: el trámite es del matrimonio, no de una sola persona.</p>
+<p>El reajuste es automático y anual: cada <strong>octubre</strong> el monto se actualiza por el <strong>100% del IPC</strong>. En la práctica eso produjo el salto registrado este año: de $463.166 por matrimonio —$231.583 por cónyuge— vigente entre octubre de 2025 y septiembre de 2026, a $482.295 —$241.147 por cónyuge— desde el 1 de octubre de 2026. Como el pago usa el monto vigente al momento de otorgarse, el valor que recibe un matrimonio depende de cuándo se concrete el beneficio dentro de su año de ventana.</p>
+<p>La regla que sí es innegociable es el plazo: hay <strong>un año desde el 50º aniversario</strong> para presentar la solicitud. Quien se pasa de ese plazo pierde el derecho, aunque cumpla todos los demás requisitos. Es la única variable del beneficio que no admite corrección posterior —el RSH se puede actualizar, los documentos se pueden reordenar, pero el año de ventana no se reabre.</p>
+
+<h2>El monto: cómo quedó con el reajuste</h2>
+<table>
+<thead><tr><th>Período de vigencia</th><th>Por matrimonio</th><th>Por cónyuge vivo</th></tr></thead>
+<tbody>
+<tr><td>Octubre 2025 – septiembre 2026</td><td>$463.166</td><td>$231.583</td></tr>
+<tr><td>Desde el 1 de octubre de 2026</td><td>$482.295</td><td>$241.147</td></tr>
+</tbody>
+</table>
+<p>El reajuste de cada octubre por el 100% del IPC hace que el bono tenga dos valores conviviendo en el mismo año calendario: entre el 1 de octubre de 2025 y el 30 de septiembre de 2026 el valor fue $463.166, y a partir del 1 de octubre de 2026 es $482.295. La diferencia es de $19.129 por matrimonio —$9.564 por cónyuge—. ChileAtiende informa el valor vigente desde cada fecha; si tu solicitud quedó entre ambos periodos, confirma con el IPS (101) qué monto te corresponde.</p>
+<p>Como el reajuste es anual y sigue al IPC, el monto de cada octubre siguiente vuelve a moverse: quien esté dentro de su ventana al cierre de este año puede esperar que el valor de octubre de 2027 se reajuste de nuevo por el mismo mecanismo, aunque el monto concreto dependerá del IPC acumulado.</p>
+<p>La división en partes iguales tiene una consecuencia en los casos de viudez: como el bono son dos mitades individuales —$241.147 por cada cónyuge vivo—, el pago se calcula por cónyuge y la solicitud es conjunta. Si tu cónyuge fallece después de cumplir los 50 años de matrimonio y dentro del año de plazo, ChileAtiende indica que puedes optar a su parte del bono, además de la tuya.</p>
+
+<h2>Los requisitos, uno por uno</h2>
+<ul>
+<li><strong>50 años de matrimonio</strong> y solicitud dentro del año siguiente al aniversario.</li>
+<li><strong>No estar separados ni divorciados.</strong></li>
+<li><strong>Pertencer al 80% más vulnerable</strong> del Registro Social de Hogares.</li>
+<li><strong>Convivir</strong> —o residir en un hogar de larga estadía—.</li>
+<li><strong>Residencia en Chile</strong> durante 4 de los últimos 5 años.</li>
+</ul>
+<p>Cada requisito tiene su propia lógica. La condición civil es la obvia: el bono premia el matrimonio vigente, así que la separación o el divorcio lo excluyen. La condición socioeconómica se mide con el Registro Social de Hogares: el hogar debe estar dentro del <strong>80% más vulnerable</strong>, un umbral amplio pero que exige tener el registro actualizado — si el hogar nunca ingresó al RSH o sus datos están desactualizados, la evaluación puede salir distinta de la realidad.</p>
+<p>El requisito de convivencia tiene una excepción explícita: residir en un <strong>hogar de larga estadía</strong> también habilita, de modo que un cónyuge institucionalizado no excluye el beneficio del matrimonio. Y la residencia en Chile se mide sobre una ventana móvil: <strong>4 de los últimos 5 años</strong>, no cinco años corridos ni presencia permanente.</p>
+<p>En cuanto a la <strong>viudez</strong>, la ficha de ChileAtiende contempla dos casos para que el beneficio no se pierda por el fallecimiento de un cónyuge dentro del período habilitante; en ambos, el sobreviviente conserva la posibilidad de acceder según las condiciones de la solicitud dentro del plazo de un año desde el aniversario. Es el escenario donde más conviene confirmar los detalles por el 101 antes de iniciar el trámite.</p>
+
+<h2>Si te casaste en el extranjero</h2>
+<p>Los matrimonios celebrados fuera de Chile no son automáticamente legibles por el registro local: el bono exige que el matrimonio esté <strong>inscrito en el Registro de la Primera Sección de Santiago</strong>, y los antecedentes deben llegar <strong>legalizados ante el Ministerio de Relaciones Exteriores</strong>. Si tu matrimonio fue en el extranjero y aún no lo inscribes, ese trámite previo es lo primero que hay que resolver —la inscripción es condición, no formalidad posterior— y conviene hacerlo con tiempo, porque consume parte del año de ventana.</p>
+
+<h2>Cómo solicitarlo: los dos canales</h2>
+<p>Hay dos vías, ambas por ChileAtiende:</p>
+<ol class="steps">
+<li><strong>Videoatención de ChileAtiende:</strong> la solicitud se hace a distancia; debes mostrar la cédula de identidad por ambos lados y entregar los datos bancarios para el pago.</li>
+<li><strong>Sucursal ChileAtiende:</strong> presencial, con la cédula de identidad. Si asiste un apoderado, debe llevar un <strong>poder notarial</strong>.</li>
+</ol>
+<p>La diferencia práctica entre los dos canales está en los documentos: la videoatención exige la cédula por ambos lados más los datos bancarios (porque el pago se coordina en la misma atención), mientras que en la sucursal basta la cédula y solo se pide el poder notarial cuando no asiste el titular. En ambos casos la solicitud es del matrimonio, así que conviene coordinar la presencia o la representación antes de iniciarla.</p>
+<p>La recomendación oficial antes de moverte es <strong>llamar al 101</strong> —el teléfono de ChileAtiende— para confirmar los requisitos vigentes y la disponibilidad del canal que vas a usar. Como el plazo corre desde el aniversario y no desde la solicitud, cada semana cuenta: un matrimonio que cumplió 50 años en noviembre de 2025, por ejemplo, ya está dentro de su año de ventana y el reloj lleva meses corriendo.</p>
+<p>El orden recomendable es el inverso al intuitivo: antes de agendar la atención, verificar primero la fecha del aniversario y el estado del RSH —los dos requisitos que no se resuelven en el mostrador— y dejar la elección de canal para el final. La videoatención es la vía más cómoda si se tienen los datos bancarios a mano; la sucursal es la opción cuando interviene un apoderado o falta acceso digital. En ambos casos, la solicitud la hace el matrimonio y el pago se divide en las dos mitades iguales.</p>
+
+<h2>Qué revisar si estás en la ventana</h2>
+<ol class="steps">
+<li><strong>Confirma la fecha del 50º aniversario</strong> y calcula si estás dentro del año de plazo.</li>
+<li><strong>Revisa tu RSH:</strong> el hogar debe figurar dentro del 80% más vulnerable; si está desactualizado, actualízalo antes de pedir.</li>
+<li><strong>Verifica la residencia:</strong> 4 de los últimos 5 años en Chile.</li>
+<li><strong>Ordena los documentos:</strong> cédula para ambos canales; poder notarial si va un apoderado; datos bancarios en videoatención.</li>
+<li><strong>Si el matrimonio fue fuera de Chile,</strong> inscríbelo primero en el Registro de la Primera Sección de Santiago.</li>
+<li><strong>Llama al 101</strong> para confirmar los requisitos antes de la atención, especialmente en casos de viudez.</li>
+<li><strong>Estima el monto</strong> con la <a href="/calculadoras/calculadora-bono-bodas-oro">calculadora de Bodas de Oro</a> según tu situación (ambos vivos o viudez).</li>
+</ol>
+<p>Con el reajuste de octubre, el bono queda en su valor más alto hasta la fecha: $482.295 por matrimonio. Como el pago es único y el plazo es de un año desde el aniversario, la operación real es simple pero no admite demora: cumplidos los 50 años, la solicitud debe entrar dentro de los doce meses siguientes.</p>
+<p>El beneficio es de los menos conocidos del catálogo de ChileAtiende y al mismo tiempo de los más perecibles: no hay una segunda oportunidad si se pasa el año, y el monto completo —casi medio millón de pesos repartido entre los cónyuges— se pierde por una fecha, no por falta de requisitos. Vale la pena revisar la fecha exacta del 50º aniversario y tomar el trámite con margen, sobre todo si hay que resolver antes la inscripción de un matrimonio celebrado fuera de Chile o la documentación de un caso de viudez.</p>
+<p>Para profundizar en los derechos y beneficios de las familias, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de pensión alimenticia y derechos familiares</a> y la <a href="/calculadoras/calculadora-bono-bodas-oro">calculadora del Bono Bodas de Oro</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/5369-bono-bodas-de-oro" target="_blank" rel="noopener">ficha del Bono Bodas de Oro de ChileAtiende</a>.</p>`,
+  },
+  {
+    slug: 'sueldo-part-time-30-horas-2026-minimo-proporcional',
+    title: 'Sueldo part-time de 30 horas en 2026: el mínimo proporcional y sus reglas',
+    description:
+      'Con 30 horas semanales o menos se puede pagar el ingreso mínimo proporcional: IMM × horas pactadas / 42. Entre 30 y 42 horas corresponde el IMM íntegro. Ejemplos con el IMM de $553.553.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'laboral',
+    readingTime: 5,
+    relatedGuia: 'sueldo-liquido-chile',
+    embedCalculatorId: 'sueldo-part-time',
+    seoTitle: 'Sueldo part-time 30 horas 2026: mínimo proporcional $395.395',
+    seoDescription:
+      'El sueldo mínimo de un contrato part-time de 30 horas es $395.395 en 2026 (IMM × 30/42). Qué pasa entre 30 y 42 horas, fórmula del valor hora y ejemplos.',
+    keywords: [
+      'sueldo part time 30 horas',
+      'sueldo mínimo proporcional',
+      'cuánto gano trabajando 30 horas',
+      'jornada parcial sueldo mínimo',
+      'imm proporcional 2026',
+      'sueldo part time chile',
+    ],
+    relatedCalculators: ['calculadora-sueldo-part-time', 'calculadora-horas-extra', 'calculadora-sueldo-liquido'],
+    faq: [
+      {
+        question: '¿Cuánto es el sueldo mínimo por 30 horas semanales?',
+        answer:
+          '$395.395 mensuales en 2026: el ingreso mínimo de $553.553 multiplicado por 30 horas y dividido por 42, la jornada legal completa vigente. La fórmula es IMM × horas pactadas / 42.',
+      },
+      {
+        question: '¿Qué pasa si trabajo entre 30 y 42 horas?',
+        answer:
+          'Corresponde el ingreso mínimo íntegro, sin proporcionalidad: la jornada parcial —la que permite pagar en proporción— es de 30 horas semanales o menos. Con 36 horas, por ejemplo, el mínimo es $553.553.',
+      },
+      {
+        question: '¿Cuánto vale la hora en un trabajo de 30 horas?',
+        answer:
+          'Al mínimo proporcional de $395.395 le corresponde un valor hora de $3.075, con la fórmula sueldo ÷ 30 × 28 ÷ (4 × horas semanales). Sirve de referencia para revisar lo pactado en el contrato.',
+      },
+      {
+        question: '¿Puedo hacer horas extra en un contrato part-time?',
+        answer:
+          'La norma de la Dirección del Trabajo permite un máximo de 2 horas extraordinarias por día. Las horas extra se calculan con la fórmula de la hora ordinaria más el recargo correspondiente.',
+      },
+    ],
+    sources: [
+      {
+        label: 'Dirección del Trabajo — Jornada parcial y remuneración',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-60136.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Horas extraordinarias',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60157.html',
+      },
+    ],
+    content: `<p class="article-lead">Un contrato de <strong>30 horas semanales</strong> tiene en 2026 un suelo mínimo de <strong>$395.395</strong>. La regla de la Dirección del Trabajo es precisa: la jornada parcial es de <strong>30 horas o menos</strong>, y solo ella permite pagar el ingreso mínimo <strong>de forma proporcional</strong> —el sueldo no puede bajar de <strong>IMM × horas pactadas / 42</strong>. Por encima de 30 horas y hasta las 42 de la jornada completa, corresponde el mínimo íntegro.</p>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>La regla en una línea</strong><p>30 horas o menos → IMM proporcional: $553.553 × horas ÷ 42. Más de 30 y menos de 42 horas → IMM íntegro ($553.553), sin proporcionalidad.</p></div></aside>
+
+<h2>La jornada parcial y su piso de proporcionalidad</h2>
+<p>La jornada parcial es la de <strong>30 horas semanales o menos</strong>. Para ella, la ley permite que el ingreso mínimo se pague en proporción a las horas pactadas, usando como divisor la jornada ordinaria completa vigente: <strong>42 horas desde el 26 de abril de 2026</strong>. La fórmula del piso mensual es directa:</p>
+<div class="numeric-example"><div class="numeric-example__title">Mínimo proporcional</div><ul><li>Sueldo mínimo part-time = IMM × horas pactadas ÷ 42</li><li>Con IMM $553.553 y 30 horas: $553.553 × 30 ÷ 42 = $395.395</li></ul><span class="total">$395.395 es el mínimo legal para 30 horas semanales en 2026</span></div>
+<p>El punto clave es el denominador: se divide por <strong>42</strong>, que es la jornada ordinaria máxima vigente, no por las horas del propio contrato. Eso significa que el mínimo proporcional se calcula siempre contra la jornada completa, y lo que queda es un piso —el empleador puede pactar más, nunca menos.</p>
+<p>El ingreso mínimo usado es el de la <strong>Ley 21.830: $553.553 desde el 1 de mayo de 2026</strong>. Como ese valor se reajusta, la fórmula sigue siendo la misma cuando cambie el IMM: solo se actualiza el multiplicando.</p>
+
+<h2>La zona intermedia: entre 30 y 42 horas no hay proporcionalidad</h2>
+<p>La regla que más se confunde es la del tramo intermedio. Una jornada de <strong>más de 30 y menos de 42 horas</strong> no es "parcial" a los efectos del piso proporcional: corresponde el <strong>ingreso mínimo íntegro</strong>, sin rebaja. Trabajar 36 o 38 horas no habilita a pagar 36/42 o 38/42 del mínimo —el piso legal es el IMM completo de $553.553.</p>
+<p>La lógica es de protección: la proporcionalidad existe para jornadas claramente reducidas (hasta 30 horas). Entre ese punto y la jornada completa, el beneficio de la rebaja proporcional desaparece y el piso vuelve a ser el sueldo mínimo entero. Para el cálculo práctico es la diferencia entre dos mundos: a 30 horas el piso es $395.395, a 36 horas el piso ya es $553.553 —casi $158.000 más por seis horas de contrato, en términos de mínimo legal.</p>
+<p>Ese salto tiene una consecuencia poco intuitiva que vale la pena notar: cerca del borde, <strong>una sola hora de contrato cambia mucho el piso mensual</strong>. A 31 horas el piso sigue siendo el IMM completo ($553.553), mientras que a 30 horas baja a $395.395 —una hora menos de contrato puede mover el piso mensual en cerca de $158.000. Por eso la línea de las 30 horas es la que define todo el ejercicio: no es un punto cualquiera del rango, sino el corte donde la proporcionalidad entra y sale.</p>
+
+<h2>El valor hora de referencia</h2>
+<p>Para comparar lo pactado con lo mínimo sirve el <strong>valor hora</strong>. La fórmula de la hora ordinaria es <strong>sueldo ÷ 30 × 28 ÷ (4 × horas semanales)</strong>. Sobre el mínimo de 30 horas ($395.395), el resultado es <strong>$3.075 por hora</strong>: es la referencia para revisar si lo que ofrece un contrato part-time está por encima del piso legal.</p>
+<p>La fórmula convierte el sueldo mensual a un valor diario (÷30), lo lleva a semanas de referencia (×28, es decir los días trabajados de cuatro semanas) y lo reparte entre las horas de ese período (÷ por 4 veces las horas semanales). Es la misma mecánica que se usa para la hora ordinaria en general; en el part-time sirve para expresar el piso en una unidad comparable con ofertas que se pactan por hora.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos con el IMM $553.553</div><ul><li>30 horas al mínimo → $395.395 mensuales; valor hora $3.075.</li><li>20 horas al mínimo proporcional → $263.597 ($553.553 × 20 ÷ 42).</li><li>36 horas → $553.553: corresponde el IMM íntegro, no hay proporcionalidad.</li><li>20 horas pactadas en $250.000 → faltan $13.597 para llegar al mínimo de $263.597.</li></ul><span class="total">El mínimo proporcional es piso: un sueldo pactado por debajo es insuficiente</span></div>
+<p>El último ejemplo muestra para qué sirve la cuenta: un contrato de 20 horas que ofrece $250.000 parece razonable en términos absolutos, pero queda <strong>$13.597 bajo el mínimo proporcional</strong> de $263.597. Sin la fórmula es difícil notar la diferencia; con ella, el incumplimiento es un número concreto.</p>
+<p>El ejercicio en reversa también es útil: con un valor hora pactado y las horas semanales, se puede estimar el sueldo mensual equivalente y compararlo con el piso proporcional. Un valor hora por encima de $3.075 aplicado a 30 horas semanales produce un sueldo por sobre el mínimo; por debajo, aunque el total mensual suene razonable, el contrato está bajo el piso.</p>
+<p>La <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part-time</a> hace exactamente este cálculo: con las horas pactadas y el sueldo acordado muestra el mínimo proporcional, el valor hora y cuánto falta —o sobra— frente al piso legal.</p>
+
+<h2>Qué sigue en el calendario de la jornada</h2>
+<p>La jornada ordinaria máxima está en proceso de reducción por la <strong>Ley 21.561</strong>: son <strong>42 horas desde el 26 de abril de 2026</strong> y bajará a <strong>40 horas desde el 26 de abril de 2028</strong>. Ese cambio importa para el part-time porque el denominador de la fórmula es la jornada completa: cuando la jornada legal sea de 40 horas, el divisor del cálculo proporcional cambia con ella.</p>
+<p>El efecto concreto se anticipa con la misma fórmula: con un divisor menor, el mismo número de horas pactadas produce un proporcional más alto. Las reglas vistas en esta nota —el corte en 30 horas, el mínimo íntegro entre 30 y la jornada completa— no dependen del denominador sino de la línea de las 30 horas; lo que sí cambia con la reducción de la jornada es el valor exacto del piso proporcional que resulta de dividir por 42 hoy y por 40 a partir de 2028.</p>
+<p>Sobre las horas extraordinarias, la regla aplicable es un máximo de <strong>2 horas extra por día</strong>. Para estimar su valor se usa la misma fórmula de la hora ordinaria con el recargo correspondiente —la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> lo resuelve con la jornada que declares.</p>
+
+<h2>Qué revisar en tu contrato part-time</h2>
+<ol class="steps">
+<li><strong>Cuenta tus horas semanales pactadas</strong> y verifica si son 30 o menos (jornada parcial) o más (mínimo íntegro).</li>
+<li><strong>Aplica la fórmula del piso:</strong> IMM × horas ÷ 42 si es parcial; IMM completo si es intermedia.</li>
+<li><strong>Compara con tu sueldo pactado:</strong> el mínimo proporcional es piso, no tope.</li>
+<li><strong>Calcula el valor hora</strong> con sueldo ÷ 30 × 28 ÷ (4 × horas) para referencia.</li>
+<li><strong>Ojo con el divisor de 42:</strong> usa la jornada legal vigente, no las horas de tu contrato.</li>
+</ol>
+<p>Con el IMM de $553.553 vigente desde mayo de 2026, los pisos prácticos quedan en $395.395 a 30 horas, $263.597 a 20 horas y $553.553 para cualquier jornada entre 30 y 42 horas. El part-time es más bajo solo si las horas son más bajas; entre 30 y 42, el mínimo legal no baja.</p>
+<p>La regla completa se reduce a una prueba de dos preguntas: primero, ¿la jornada es de 30 horas o menos? Si sí, el piso es la fórmula proporcional. Segundo, ¿está entre 30 y 42? Si sí, el piso es el IMM completo. Todo lo demás —el valor hora, la comparación con lo pactado, la estimación de horas extra— son cuentas derivadas de ese par de reglas con los valores vigentes de 2026.</p>
+<p>Para quien evalúa una oferta, el punto de partida es siempre la misma cuenta: tomar el IMM vigente, multiplicarlo por las horas pactadas y dividir por 42. Ese número es el piso indiscutible de cualquier jornada parcial este año —todo acuerdo por debajo de él es insuficiente, y todo acuerdo por encima es legítimo aunque siga siendo "part-time". La calculadora del sitio hace la cuenta en segundos y muestra también el valor hora resultante para comparar ofertas pactadas por hora.</p>
+<p>Y el punto de vigilancia es el borde: una oferta de 31 horas tiene el mismo piso que una de 41, porque entre 30 y 42 el mínimo no se mueve. La proporcionalidad solo aparece cuando la jornada baja de las 30 horas —y ahí baja en proporción exacta, hora por hora, hasta el piso que resulte de la fórmula.</p>
+<p>Para profundizar en cómo se compone el sueldo y los descuentos que lo transforman en líquido, revisa la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido en Chile</a> y la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60136.html" target="_blank" rel="noopener">ficha de jornada parcial y remuneración de la Dirección del Trabajo</a> y la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60157.html" target="_blank" rel="noopener">norma de horas extraordinarias del DT</a>.</p>`,
+  },
+  {
+    slug: 'aporte-familiar-permanente-2026-cobro-plazo',
+    title: 'Aporte Familiar Permanente 2026: plazo de cobro y aportes pendientes',
+    description:
+      'El Aporte Familiar Permanente es de $66.834 por carga y tiene un plazo de 9 meses desde que se genera el documento de pago. Cómo consultar, cobrar y recuperar aportes de años anteriores.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'familia',
+    readingTime: 5,
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    embedCalculatorId: 'aporte-familiar-permanente',
+    seoTitle: 'Aporte Familiar Permanente 2026: $66.834, plazo y cobro pendiente',
+    seoDescription:
+      'Aporte Familiar Permanente de $66.834 por carga: plazo de 9 meses para cobrar, consulta con RUN y fecha de nacimiento, formas de pago y trámite de aportes de años anteriores.',
+    keywords: [
+      'aporte familiar permanente 2026',
+      'aporte familiar plazo cobro',
+      'aporte familiar pendiente años anteriores',
+      'cobrar aporte familiar 2026',
+      'consulta aporte familiar permanente',
+      'aporte familiar $66.834',
+    ],
+    relatedCalculators: ['calculadora-aporte-familiar-permanente'],
+    faq: [
+      {
+        question: '¿Cuánto paga el Aporte Familiar Permanente?',
+        answer:
+          '$66.834 por cada carga que al 31-12-2025 daba derecho a SUF/maternal o asignación familiar/maternal, o por el grupo familiar en Chile Solidario/SSyOO a esa fecha. Si una carga califica por ambas vías, se paga una sola vez por ella.',
+      },
+      {
+        question: '¿Cuál es el plazo para cobrarlo?',
+        answer:
+          '9 meses desde que se genera el documento de pago. Como el plazo corre por cada documento, no hay una sola fecha límite universal: hay que revisar cuándo se generó el pago de cada aporte.',
+      },
+      {
+        question: '¿Cómo consulto si tengo aporte pendiente?',
+        answer:
+          'Con tu RUN y fecha de nacimiento en consulta.aportefamiliar.cl. Los aportes de años anteriores que quedaron sin cobrar se recuperan con un trámite en mi.chileatiende.gob.cl/tramites/114831.',
+      },
+      {
+        question: '¿Por dónde se paga el aporte?',
+        answer:
+          'Por depósito bancario, por CuentaRUT o presencialmente en Caja Los Héroes o BancoEstado.',
+      },
+      {
+        question: '¿Qué pasa si el pago lo recibe alguien que no vive con la carga?',
+        answer:
+          'Tiene 30 días para entregar el dinero a quien corresponde; si no lo hace, la vía de reclamo es el Tribunal de Familia.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende — Aporte Familiar Permanente',
+        url: 'https://www.chileatiende.gob.cl/fichas/38913-aporte-familiar-permanente',
+      },
+    ],
+    content: `<p class="article-lead">El <strong>Aporte Familiar Permanente</strong> es un pago de <strong>$66.834 por cada carga</strong> que califica, más un aporte por el grupo familiar en ciertos programas. Lo que suele complicarlo no es el monto sino el <strong>plazo</strong>: hay <strong>9 meses para cobrar cada documento de pago</strong>, y pasado ese plazo el aporte queda pendiente y requiere un trámite específico para recuperarlo.</p>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Cómo consultar</strong><p>Con tu RUN y fecha de nacimiento en consulta.aportefamiliar.cl. El plazo para cobrar es de 9 meses desde que se genera cada documento de pago; los aportes de años anteriores que quedaron sin cobrar se recuperan con un trámite aparte.</p></div></aside>
+
+<h2>Quién recibe el aporte y por cuánto</h2>
+<p>El aporte es de <strong>$66.834 por cada carga familiar</strong> que al <strong>31 de diciembre de 2025</strong> daba derecho a uno de los beneficios habilitantes: el Subsidio Familiar (SUF), el subsidio maternal, la asignación familiar o la asignación maternal. A eso se suma una segunda modalidad: <strong>$66.834 por el grupo familiar</strong> que al 31-12-2025 pertenecía a Chile Solidario o al Subsistema de Seguridades y Oportunidades (SSyOO).</p>
+<p>El aporte por carga y el aporte por grupo familiar son dos piezas distintas que pueden coexistir: un hogar en SSyOO con dos cargas que daban derecho a SUF recibe tres pagos de $66.834 —uno por cada carga y uno por el grupo—. La segunda modalidad no depende de que haya cargas: un grupo familiar en esos programas sin cargas calificadas recibe igualmente su $66.834.</p>
+<p>Dos reglas evitan el pago doble. Si una misma carga califica por ambas vías —por ejemplo, es carga de SUF y el hogar está en SSyOO—, el aporte se paga <strong>una sola vez por ella</strong>: la regla de no-duplicidad opera por persona, no por beneficio. Y hay una excepción específica que sí suma: la <strong>madre que recibe el SUF por hijos menores de 18 años que viven con ella tiene derecho a un aporte adicional de $66.834 por sí misma</strong>, sobre lo que ya le corresponde por cada hijo.</p>
+<p>Un requisito transversal es que las cargas <strong>estén al día</strong>: el derecho existe sobre cargas vigentes y calificadas, no sobre las que perdieron esa condición. El corte del 31 de diciembre de 2025 define quién califica; la vigencia de la carga define que el pago efectivamente proceda.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos según composición del hogar</div><ul><li>2 cargas + grupo familiar SSyOO → $133.668 (dos por carga, uno por el grupo).</li><li>0 cargas + grupo familiar SSyOO → $66.834 (solo el aporte por el grupo).</li><li>3 cargas por SUF o asignación familiar → $200.502.</li><li>2 cargas + madre que recibe SUF por ellas → $200.502 (incluye el aporte de la madre).</li></ul><span class="total">El aporte por el grupo familiar y el de la madre SUF se suman a los de cada carga</span></div>
+<p>El último ejemplo es el que más conviene leer con atención: dos hijos que dan derecho a SUF ya generan dos aportes de $66.834, y la madre que los recibe suma un tercero por la excepción. Así, un hogar con dos cargas y madre beneficiaria del SUF llega a $200.502 —el mismo total que un hogar con tres cargas, pero por una composición distinta.</p>
+
+<h2>El plazo: 9 meses por cada documento de pago</h2>
+<p>La regla que más conviene retener es esta: el plazo para cobrar es de <strong>9 meses desde que se genera el documento de pago</strong>. Como cada aporte tiene su propio documento, <strong>no hay una sola fecha límite universal</strong> —el plazo corre por pago, no por proceso. Un aporte cuyo documento se generó en marzo vence en un mes distinto al que se generó en junio.</p>
+<p>Eso explica dos cosas que suelen confundir. Primero, por qué no existe una fecha de cierre única para el aporte: el vencimiento es individual por documento. Segundo, por qué hay personas con "aporte pendiente" de años anteriores: un documento no cobrado dentro de sus 9 meses queda fuera del circuito normal de pago, pero <strong>no se pierde definitivamente</strong>. ChileAtiende habilita un trámite específico para recuperar los aportes de años anteriores en <strong>mi.chileatiende.gob.cl/tramites/114831</strong>, que es la vía para rescatar lo que quedó sin cobrar.</p>
+<p>En la práctica, entonces, hay dos situaciones de cobro posibles: el aporte vigente dentro de su ventana de 9 meses, que se cobra por los canales normales, y el aporte vencido de años anteriores, que requiere el trámite de recuperación. Confundirlas es lo que lleva a muchas personas a creer que un aporte viejo "ya no existe".</p>
+
+<h2>Fechas de consulta 2026 y formas de pago</h2>
+<p>El proceso 2026 escalonó la consulta según el grupo beneficiario. Las fechas en que se habilitó la consulta fueron: <strong>16 de febrero</strong> para el primer grupo —cargas de SUF, Chile Solidario y SSyOO de la segunda quincena—, <strong>2 de marzo</strong> para el segundo grupo —la primera quincena— y <strong>16 de marzo</strong> para las cargas de asignación familiar. Consultar en esas fechas permitía saber si se generó el documento de pago; quien consulta después sigue pudiendo revisar su estado en la misma plataforma.</p>
+<p>Las <strong>formas de pago</strong> son tres: depósito bancario, CuentaRUT o pago presencial en <strong>Caja Los Héroes o BancoEstado</strong>. La consulta se hace en <strong>consulta.aportefamiliar.cl</strong> con el RUN y la fecha de nacimiento, sin ClaveÚnica ni registro previo —una barrera menor que en otros trámites del Estado.</p>
+<p>El calendario escalonado tiene una lectura práctica para quien consulta hoy: todas las fechas de habilitación ya pasaron en 2026, así que la consulta muestra directamente si quedó un documento de pago generado a tu nombre y en qué ventana de 9 meses está. Lo que las fechas de febrero y marzo determinan es desde cuándo corre el plazo de cada grupo — el primer grupo tiene el plazo más avanzado y el de asignación familiar el más reciente.</p>
+
+<h2>Aportes pendientes de años anteriores</h2>
+<p>La ventana de 9 meses explica el fenómeno de los aportes "viejos": cada proceso deja documentos de pago que no fueron cobrados a tiempo, y esos aportes no desaparecen — quedan pendientes y requieren un trámite específico para recuperarlos. ChileAtiende canaliza esa recuperación en <strong>mi.chileatiende.gob.cl/tramites/114831</strong>, la vía destinada a los aportes de procesos anteriores que quedaron sin cobrar.</p>
+<p>El escenario típico es el del beneficiario que no revisó la consulta a tiempo: el derecho existió, el documento se generó, pero nadie cobró dentro de los 9 meses. El trámite de aportes pendientes existe justamente para ese caso — no es un reproceso del beneficio ni una nueva evaluación, sino la vía para cobrar lo que ya se había otorgado. Si al consultar aparece un aporte de un año anterior, esa es la ruta a seguir.</p>
+
+<h2>La regla de los 30 días</h2>
+<p>Hay una obligación que apunta a la protección del dinero: si el pago lo recibe una persona que <strong>no vive con la carga</strong> que dio derecho al aporte, tiene <strong>30 días para entregar ese dinero</strong> a quien corresponde. Si no lo hace, la vía de reclamo es el <strong>Tribunal de Familia</strong>. Es una regla pensada para el caso en que el beneficiario nominal del pago no es quien efectivamente cuida a la carga.</p>
+<p>Esta norma convierte al aporte en algo más que un pago automático: la persona que lo recibe tiene una obligación activa sobre ese dinero cuando no convive con la carga. El plazo de 30 días y la vía judicial dan el mecanismo de reclamo cuando la entrega no ocurre —y es la pieza del diseño que protege que el aporte llegue efectivamente a quien está a cargo del causante.</p>
+
+<h2>Qué revisar si crees que te corresponde</h2>
+<ol class="steps">
+<li><strong>Consulta en consulta.aportefamiliar.cl</strong> con tu RUN y fecha de nacimiento para ver si se generó un documento de pago.</li>
+<li><strong>Cuenta tus cargas al 31-12-2025</strong> según los beneficios habilitantes y suma el aporte del grupo si estuviste en Chile Solidario o SSyOO.</li>
+<li><strong>Revisa el plazo:</strong> 9 meses desde que se generó cada documento; estima si aún estás dentro.</li>
+<li><strong>Si quedó sin cobrar,</strong> usa el trámite de aportes pendientes en mi.chileatiende.gob.cl/tramites/114831.</li>
+<li><strong>Estima el monto</strong> con la <a href="/calculadoras/calculadora-aporte-familiar-permanente">calculadora del Aporte Familiar Permanente</a> según tus cargas y tu situación.</li>
+</ol>
+<p>El Aporte Familiar Permanente es de los beneficios que más se pierden por desconocimiento del plazo, no por falta de derecho: $66.834 por carga es una suma relevante que queda pendiente cuando nadie revisa la consulta. La ventana de 9 meses es generosa pero corre sola — revisar una vez basta para saber si hay algo que cobrar.</p>
+<p>Y si ya venció, no es el final: el trámite de aportes pendientes existe porque el escenario es suficientemente común como para tener canal propio. La consulta con RUN y fecha de nacimiento es el punto de partida de las dos situaciones —cobrar el vigente dentro de sus 9 meses o recuperar el vencido por el trámite de años anteriores—.</p>
+<p>Para profundizar en los apoyos a las familias, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de pensión alimenticia y derechos familiares</a> y la <a href="/calculadoras/calculadora-aporte-familiar-permanente">calculadora del Aporte Familiar Permanente</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/38913-aporte-familiar-permanente" target="_blank" rel="noopener">ficha del Aporte Familiar Permanente de ChileAtiende</a>.</p>`,
+  },
 ];
 
 export const RETIRED_ARTICLE_REDIRECTS = {

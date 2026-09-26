@@ -128,9 +128,9 @@ Ordenado por **fecha de publicación sugerida**.
 | 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
 | 14 | blog | Subsidio crédito hipotecario MINVU | `subsidio-credito-hipotecario-minvu-dividendo-2026` | satélite hipoteca | vivienda | 2026-09-15 | sep–may 2027 | **P2-ventana** |
 | 15 | blog | Gratificación legal tope 4,75 IMM | `gratificacion-legal-tope-2026-ingreso-minimo` | evergreen blog | laboral | 2026-09-18 | sep–dic | **P2-ventana** |
-| 16 | blog | Subsidio Unificado al Empleo (Ley 21.808) | `subsidio-unificado-empleo-ley-21808-octubre-2026` | DR[13] | empleo | 2026-09-22 | sep–nov | **P2-ventana** |
+| ~~16~~ | blog | ~~Subsidio Unificado al Empleo (Ley 21.808)~~ | ~~`subsidio-unificado-empleo-ley-21808-octubre-2026`~~ | DR[13] | empleo | ~~2026-09-22~~ | sep–nov | ✅ |
 | 17 | blog | UF y UTM: convertir y usos 2026 | `uf-utm-convertir-chile-2026-usos` | satélite `uf-utm-indicadores` | conversiones | 2026-09-25 | continuo | **P2-continuo** |
-| 18 | blog | Aporte Familiar Permanente 2026 (9 meses) | `aporte-familiar-permanente-2026-cobro-plazo` | pageview | familia | 2026-09-29 | oct–nov | **P2-ventana** |
+| ~~18~~ | blog | ~~Aporte Familiar Permanente 2026 (9 meses)~~ | ~~`aporte-familiar-permanente-2026-cobro-plazo`~~ | pageview | familia | ~~2026-09-29~~ | oct–nov | ✅ |
 | 19 | blog | Costo empleado PYME + cotización empleador | `costo-empleado-pyme-2026-cotizacion-empleador` | DR[19] · satélite pymes | empresas | 2026-10-02 | oct | **P2-ventana** |
 | 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | satélite sueldo | impuestos | 2026-10-06 | continuo | **P2-continuo** |
 | 49 | blog | Cambio de AFP 2026: cómo hacerlo | `cambio-afp-2026-como-hacerlo` | DR[14] · hermano #22 | pensión | 2026-10-07 | continuo | **P2-continuo** |
@@ -158,8 +158,12 @@ Ordenado por **fecha de publicación sugerida**.
 | 43 | blog | Crédito hipotecario 2027 UF | `credito-hipotecario-2027-simular-dividendo` | satélite hipoteca | vivienda | 2027-01-23 | continuo | **P3** |
 | 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
 | ~~45~~ | blog | ~~Patente comercial 2027~~ | ~~`patente-comercial-2027-calcular`~~ | ~~satélite pymes~~ | empresas | ~~2026-09-23~~ | ene–mar | ✅ |
+| — | blog | FUAS 2027: postulación gratuidad y becas | ~~`fuas-2027-postulacion-gratuidad-becas-octubre-2026`~~ | publicado 2026-09-26 | educación | 2026-09-26 | oct | ✅ |
+| — | blog | Bono $30.000 por hijo (Ley 21.840) | ~~`bono-30-mil-por-hijo-2026-quien-recibe-pago`~~ | publicado 2026-09-26 | familia | 2026-09-26 | sep–oct | ✅ |
+| — | blog | Bono Bodas de Oro octubre 2026 | ~~`bono-bodas-de-oro-octubre-2026-monto-requisitos`~~ | publicado 2026-09-26 | familia | 2026-09-26 | oct | ✅ |
+| — | blog | Sueldo part-time 30 horas 2026 | ~~`sueldo-part-time-30-horas-2026-minimo-proporcional`~~ | publicado 2026-09-26 | laboral | 2026-09-26 | continuo | ✅ |
 
-**Conteo pendientes:** 34 filas activas (#2–#6, #8, #9, #29, #30, #31 y #45 en publicados).
+**Conteo pendientes:** 32 filas activas (#2–#6, #8, #9, #16, #18, #29, #30, #31 y #45 en publicados).
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
@@ -171,7 +175,7 @@ Ordenado por **fecha de publicación sugerida**.
 
 | Subnivel | Uso | IDs |
 |----------|-----|-----|
-| **P2-ventana** | Antes del pico | #10, #11, #13–#16, #18, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
+| **P2-ventana** | Antes del pico | #10, #11, #13–#15, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
 | **P2-continuo** | Sin deadline | #12, #17, #21, #22, #25–#28, #33, #38, #47–#50 |
 
 ---
