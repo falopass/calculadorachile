@@ -3,20 +3,22 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, Calculator as CalculatorIcon, ArrowRight, TrendingUp } from 'lucide-react';
+import { Search, Calculator as CalculatorIcon, ArrowRight } from 'lucide-react';
 import { discoverableCalculators } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
 
 /**
- * SearchHero — Bloque 2 de la home.
+ * SearchHero - Bloque 2 de la home.
  *
- * Buscador prominente centrado + chips de calculadoras top en una sola fila
- * scrollable. Al hacer focus en el input, muestra sugerencias filtradas.
+ * Buscador alineado a la izquierda con título propio ("¿Qué necesitas
+ * calcular?"), input + botón "Buscar" en una sola fila, dropdown de
+ * sugerencias posicionado absoluto bajo el input y una frase de enlaces
+ * directos a las calculadoras más buscadas.
  *
  * Client island: maneja query, foco y navegación.
  */
 
-/** Chips home: prioriza URLs con impresiones GSC / intención de cobro AdSense. */
+/** Destacados home: prioriza URLs con impresiones GSC / intención de cobro AdSense. */
 const quickSlugs = [
   'calculadora-iva',
   'calculadora-credito-cae',
@@ -27,6 +29,18 @@ const quickSlugs = [
   'calculadora-finiquito',
   'calculadora-multas-transito',
 ];
+
+/** Frase en lenguaje natural para la línea de enlaces, por slug. */
+const quickPhrases: Record<string, string> = {
+  'calculadora-iva': 'el IVA de un monto',
+  'calculadora-credito-cae': 'la cuota del CAE',
+  'calculadora-patente-comercial': 'la patente comercial',
+  'calculadora-sueldo-liquido': 'cuánto te queda líquido',
+  'calculadora-vacaciones-proporcionales': 'tus vacaciones proporcionales',
+  'calculadora-permiso-circulacion': 'el permiso de circulación',
+  'calculadora-finiquito': 'tu finiquito',
+  'calculadora-multas-transito': 'una multa de tránsito',
+};
 
 export default function SearchHero() {
   const router = useRouter();
@@ -63,117 +77,102 @@ export default function SearchHero() {
   };
 
   return (
-    <section className="border-b border-[var(--border)] bg-[var(--surface)]">
-      <div className="container-base py-10 md:py-14">
-        <div className="mx-auto max-w-3xl">
-          <form onSubmit={onSubmit} role="search" className="relative min-w-0">
-            <Search
-              aria-hidden
-              className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--foreground-muted)] sm:left-5"
-            />
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setTimeout(() => setFocused(false), 160)}
-              placeholder="Busca tu calculadora…"
-              aria-label="Buscar calculadora"
-              className="w-full min-w-0 rounded-2xl border border-[var(--border-strong)] bg-[var(--background)] py-4 pl-11 pr-14 text-base text-[var(--foreground)] shadow-sm placeholder:text-[var(--foreground-muted)] transition-shadow focus:border-[var(--accent)] focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10 sm:py-5 sm:pl-14 sm:text-lg md:pr-36"
-            />
-            {/*
-              pr-14 en móvil: solo el botón (el kbd “/” está hidden hasta md).
-              pr-36 en md+: botón + atajo de teclado. Antes pr-36 en todo
-              viewport dejaba ~90px de texto en 320px y cortaba el placeholder.
-            */}
-            <div className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-2 sm:right-3">
-              <kbd
+    <section
+      aria-labelledby="home-search-heading"
+      className="border-b border-[var(--border)] bg-[var(--surface)]"
+    >
+      <div className="container-base py-8 md:py-10">
+        <div className="max-w-3xl">
+          <h2
+            id="home-search-heading"
+            className="text-xl font-semibold tracking-[-0.02em] text-[var(--foreground)] md:text-2xl"
+          >
+            ¿Qué necesitas calcular?
+          </h2>
+          <p className="mt-1 text-sm text-[var(--foreground-secondary)]">
+            Escribe el nombre de la calculadora o lo que quieres saber.
+          </p>
+
+          <form onSubmit={onSubmit} role="search" className="mt-4 flex gap-2">
+            <div className="relative min-w-0 flex-1">
+              <Search
                 aria-hidden
-                className="hidden rounded-lg border border-[var(--border-strong)] bg-[var(--surface)] px-2 py-1 text-xs font-mono font-medium text-[var(--foreground-muted)] md:inline-flex"
-              >
-                /
-              </kbd>
-              <button
-                type="submit"
-                aria-label="Buscar"
-                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] text-white shadow-sm transition-colors hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)] sm:h-11 sm:w-11"
-              >
-                <Search className="h-5 w-5" />
-              </button>
+                className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--foreground-muted)]"
+              />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setTimeout(() => setFocused(false), 160)}
+                placeholder="Por ejemplo, sueldo líquido"
+                aria-labelledby="home-search-heading"
+                className="h-12 w-full min-w-0 rounded-xl border border-[var(--border-strong)] bg-[var(--background)] pl-11 pr-4 text-base text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10 sm:h-14"
+              />
+
+              {/* Dropdown de sugerencias: absoluto bajo el input */}
+              {focused && (suggestions.length > 0 || query.trim().length >= 2) && (
+                <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-lg">
+                  {suggestions.length > 0 ? (
+                    <ul className="max-h-80 overflow-y-auto py-2">
+                      {suggestions.map((calc) => (
+                        <li key={calc.id}>
+                          <Link
+                            href={`/calculadoras/${calc.slug}`}
+                            className="group flex items-start gap-3 px-5 py-3 transition-colors hover:bg-[var(--surface-muted)]"
+                          >
+                            <div className="mt-0.5 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--accent-muted)] text-[var(--accent)]">
+                              <CalculatorIcon className="h-4 w-4" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <span className="block text-sm font-medium text-[var(--foreground)] transition-colors group-hover:text-[var(--accent)]">
+                                {calc.name}
+                              </span>
+                              <span className="mt-0.5 block text-xs text-[var(--foreground-muted)] line-clamp-1">
+                                {calc.description}
+                              </span>
+                            </div>
+                            <ArrowRight className="mt-1.5 h-4 w-4 flex-shrink-0 text-[var(--foreground-muted)] opacity-0 transition-all group-hover:translate-x-0.5 group-hover:text-[var(--accent)] group-hover:opacity-100" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : query.trim().length >= 2 ? (
+                    <div className="px-5 py-4 text-sm text-[var(--foreground-muted)]">
+                      No encontramos calculadoras para “{query.trim()}”. Presiona{' '}
+                      <strong>Enter</strong> para buscar en todo el sitio.
+                    </div>
+                  ) : null}
+                </div>
+              )}
             </div>
+
+            <button
+              type="submit"
+              className="h-12 shrink-0 rounded-xl bg-[var(--accent)] px-5 font-medium text-white transition-colors hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)] sm:h-14 sm:px-6"
+            >
+              Buscar
+            </button>
           </form>
 
-          {/* Dropdown de sugerencias */}
-          {focused && (
-            <div className="relative z-20 mt-2 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-lg">
-              {suggestions.length > 0 ? (
-                <ul className="max-h-80 overflow-y-auto py-2">
-                  {suggestions.map((calc) => (
-                    <li key={calc.id}>
-                      <Link
-                        href={`/calculadoras/${calc.slug}`}
-                        className="group flex items-start gap-3 px-5 py-3 transition-colors hover:bg-[var(--surface-muted)]"
-                      >
-                        <div className="mt-0.5 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--accent-muted)] text-[var(--accent)]">
-                          <CalculatorIcon className="h-4 w-4" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <span className="block text-sm font-medium text-[var(--foreground)] transition-colors group-hover:text-[var(--accent)]">
-                            {calc.name}
-                          </span>
-                          <span className="mt-0.5 block text-xs text-[var(--foreground-muted)] line-clamp-1">
-                            {calc.description}
-                          </span>
-                        </div>
-                        <ArrowRight className="mt-1.5 h-4 w-4 flex-shrink-0 text-[var(--foreground-muted)] opacity-0 transition-all group-hover:translate-x-0.5 group-hover:text-[var(--accent)] group-hover:opacity-100" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ) : query.trim().length >= 2 ? (
-                <div className="px-5 py-4 text-sm text-[var(--foreground-muted)]">
-                  No encontramos calculadoras para “{query.trim()}”. Presiona <strong>Enter</strong>{' '}
-                  para buscar en todo el sitio.
-                </div>
-              ) : null}
-            </div>
-          )}
-
-          {/* Chips en una sola fila */}
-          <div className="mt-6">
-            <div className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--foreground-muted)]">
-              <TrendingUp className="h-3.5 w-3.5" />
-              Más buscados
-            </div>
-            <div className="relative -mx-4 md:-mx-6 lg:-mx-8">
-              {/* Fades laterales */}
-              <div className="pointer-events-none absolute left-0 top-0 bottom-2 w-6 z-10 bg-gradient-to-r from-[var(--surface)] to-transparent md:hidden" />
-              <div className="pointer-events-none absolute right-0 top-0 bottom-2 w-6 z-10 bg-gradient-to-l from-[var(--surface)] to-transparent md:hidden" />
-              <div className="flex items-center justify-start gap-2 overflow-x-auto px-4 pb-2 md:justify-center md:overflow-visible md:px-6 lg:px-8 no-scrollbar">
-                {quickLinks.map((calc) => (
-                  <Link
-                    key={calc.id}
-                    href={`/calculadoras/${calc.slug}`}
-                    className="inline-flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-[13px] font-medium text-[var(--foreground-secondary)] shadow-sm transition-all hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] hover:text-[var(--accent)]"
-                  >
-                    {calc.name.replace(' 2026', '')}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+          {/* Enlaces directos en lenguaje natural */}
+          <p className="mt-4 text-sm leading-7 text-[var(--foreground-secondary)]">
+            También puedes calcular{' '}
+            {quickLinks.map((calc, i) => (
+              <span key={calc.id}>
+                {i > 0 && (i === quickLinks.length - 1 ? ' o ' : ', ')}
+                <Link
+                  href={`/calculadoras/${calc.slug}`}
+                  className="rounded-sm font-medium text-[var(--foreground)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--accent)] hover:decoration-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                >
+                  {quickPhrases[calc.slug]}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
         </div>
       </div>
-
-      <style>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 }
