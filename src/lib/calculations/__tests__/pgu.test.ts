@@ -28,7 +28,7 @@ describe('calculatePGU', () => {
       esHombre: true,
       edad: 70,
       // Umbral 82 vigente hasta ago-2026: 70 < 82 → monto base.
-      fecha: new Date('2026-08-15'),
+      fecha: new Date('2026-08-15T12:00:00'),
     });
     expect(r.pguMensual).toBe(PGU_2026.montoMaximo65a81CLP);
     expect(r.pensionTotal).toBe(PGU_2026.montoMaximo65a81CLP);
@@ -40,7 +40,7 @@ describe('calculatePGU', () => {
       anosCotizados: 0,
       esHombre: false,
       edad: 85,
-      fecha: new Date('2026-08-15'),
+      fecha: new Date('2026-08-15T12:00:00'),
     });
     expect(r.pguBase).toBe(PGU_2026.montoMaximo82MasCLP);
   });
@@ -63,7 +63,7 @@ describe('calculatePGU', () => {
       anosCotizados: 20,
       esHombre: true,
       edad: 70,
-      fecha: new Date('2026-08-15'),
+      fecha: new Date('2026-08-15T12:00:00'),
     });
     // En el punto medio del tramo intermedio, PGU debe ser ~50% del base.
     expect(r.pguMensual).toBeCloseTo(PGU_2026.montoMaximo65a81CLP / 2, -3);
@@ -110,7 +110,7 @@ describe('calculatePGU', () => {
     const base = { pensionActual: 0, anosCotizados: 0, esHombre: true };
 
     it('oct-2026 (umbral 75): 75 y 78 reciben el máximo; 74 y 70 no', () => {
-      const fecha = new Date('2026-10-15');
+      const fecha = new Date('2026-10-15T12:00:00');
       expect(calculatePGU({ ...base, edad: 78, fecha }).pguBase).toBe(
         PGU_2026.montoMaximo82MasCLP,
       );
@@ -126,7 +126,7 @@ describe('calculatePGU', () => {
     });
 
     it('ago-2026 (umbral 82): 78 recibe base; 82 el máximo', () => {
-      const fecha = new Date('2026-08-15');
+      const fecha = new Date('2026-08-15T12:00:00');
       expect(calculatePGU({ ...base, edad: 78, fecha }).pguBase).toBe(
         PGU_2026.montoMaximo65a81CLP,
       );
@@ -136,7 +136,7 @@ describe('calculatePGU', () => {
     });
 
     it('sep-2027 (umbral 65): 70 recibe el máximo', () => {
-      const fecha = new Date('2027-09-15');
+      const fecha = new Date('2027-09-15T12:00:00');
       expect(calculatePGU({ ...base, edad: 70, fecha }).pguBase).toBe(
         PGU_2026.montoMaximo82MasCLP,
       );

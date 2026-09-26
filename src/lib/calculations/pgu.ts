@@ -3,7 +3,7 @@
 // Beneficio no contributivo del Estado para pensionados (Ley 21.419)
 // ============================================
 
-import { PGU_2026 } from '@/lib/values/constants';
+import { PGU_2026, fechaLocal } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface PGUInput {
@@ -66,7 +66,7 @@ export function calculatePGU(input: PGUInput): PGUResult {
   const t = fecha.getTime();
   let edadUmbral = PGU_2026.edadMontoMaximo[0].edad;
   for (const escalon of PGU_2026.edadMontoMaximo) {
-    if (new Date(escalon.desde).getTime() <= t) edadUmbral = escalon.edad;
+    if (fechaLocal(escalon.desde).getTime() <= t) edadUmbral = escalon.edad;
     else break;
   }
 

@@ -140,6 +140,65 @@ export const SEGURO_CESANTIA = {
 };
 
 /**
+ * Beneficios del Seguro de Cesantía (Ley 19.728).
+ *
+ * Cuenta Individual de Cesantía (CIC) — ChileAtiende ficha 62932
+ * https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia
+ * "entre 1 y 13 pagos, según el saldo en su cuenta y el promedio de
+ * sus últimas remuneraciones. El primer pago equivale al 70% del
+ * promedio de sus últimas 5 remuneraciones si tuvo plazo fijo y 10 si
+ * su contrato fue indefinido. Desde el segundo pago en adelante, los
+ * montos disminuirán progresivamente (60%, 45%, 40%, 35%, 30%) hasta
+ * agotar el saldo." Desde el 6° pago el 30% se repite.
+ * Cotizaciones mínimas para cobrar CIC: 10 (indefinido / casa
+ * particular) o 5 (plazo fijo, obra o servicio), cualquier causal.
+ *
+ * Fondo de Cesantía Solidario (FCS) — ChileAtiende ficha 36646 y
+ * afc.cl. Solo si el saldo CIC no alcanza para cubrir al menos 5
+ * pagos; exige causal con derecho (necesidades de la empresa, quiebra,
+ * vencimiento del plazo, conclusión de la obra, caso fortuito/fuerza
+ * mayor), 10 cotizaciones en los últimos 24 meses (las 3 últimas
+ * continuas con el mismo empleador) e inscripción en la Bolsa
+ * Nacional de Empleo. Cinco pagos mensuales que se financian primero
+ * con el saldo CIC y se complementan con el Fondo.
+ *
+ * Porcentajes/mínimos/máximos FCS vigentes hasta el 28-02-2027
+ * (Res. Ex. N°383 SP del 06-03-2026).
+ */
+export const SEGURO_CESANTIA_BENEFICIOS = {
+  cic: {
+    /** % del promedio de remuneraciones por pago (último se repite). */
+    porcentajes: [70, 60, 45, 40, 35, 30],
+    maxPagos: 13,
+    minCotizaciones: { indefinido: 10, plazoFijo: 5 },
+  },
+  fcs: {
+    vigenteHasta: '2027-02-28',
+    minCotizaciones24m: 10,
+    ultimasContinuasMismoEmpleador: 3,
+    pagos: 5,
+    indefinido: {
+      porcentajes: [70, 60, 45, 40, 35],
+      minimos: [301201, 258171, 193629, 172115, 150602],
+      maximos: [1004003, 860574, 645429, 573718, 502002],
+    },
+    plazoFijo: {
+      porcentajes: [60, 40, 35, 30, 30],
+      minimos: [258161, 172115, 150602, 129085, 129085],
+      maximos: [860574, 573718, 502002, 430288, 430288],
+    },
+  },
+} as const;
+
+/**
+ * Parsea una fecha 'YYYY-MM-DD' como medianoche **local** (no UTC).
+ * `new Date('2026-08-01')` se interpreta como UTC y en Chile (UTC-3/4)
+ * corresponde a la noche del día anterior, lo que adelantaba ~3 h el
+ * cambio de vigencia. Se usa en todos los calendarios por fecha.
+ */
+export const fechaLocal = (iso: string): Date => new Date(`${iso}T00:00:00`);
+
+/**
  * Tasa de cotización total del empleador creada por la Ley 21.735
  * (reforma de pensiones). El empleador aporta un porcentaje adicional
  * sobre la base imponible que se incrementa cada 1° de agosto desde
@@ -218,7 +277,7 @@ export function getEscalonSeguroSocialPrevisional(
   // escalón cuyo `vigenteDesde` sea <= a la fecha solicitada.
   let vigente = { tasa: 0, incluyeSIS: false };
   for (const escalon of SEGURO_SOCIAL_PREVISIONAL.calendario) {
-    if (new Date(escalon.vigenteDesde).getTime() <= t) {
+    if (fechaLocal(escalon.vigenteDesde).getTime() <= t) {
       vigente = { tasa: escalon.tasa, incluyeSIS: escalon.incluyeSIS };
     } else {
       break;
@@ -454,7 +513,7 @@ export function getMontoBodasOro(
   const t = fecha.getTime();
   let vigente = BONO_BODAS_ORO.calendario[0];
   for (const entrada of BONO_BODAS_ORO.calendario) {
-    if (new Date(entrada.desde).getTime() <= t) {
+    if (fechaLocal(entrada.desde).getTime() <= t) {
       vigente = entrada;
     } else {
       break;
@@ -462,6 +521,34 @@ export function getMontoBodasOro(
   }
   return vigente;
 }
+
+// ============================================
+// Aporte Familiar Permanente 2026
+// ============================================
+/**
+ * Aporte Familiar Permanente (ex "Bono Marzo") — ChileAtiende/IPS
+ * ficha 38913
+ * https://www.chileatiende.gob.cl/fichas/38913-aporte-familiar-permanente
+ * "recibirás $66.834 por: cada carga familiar o persona que al 31 de
+ * diciembre de 2025 te dio derecho a cobrar el Subsidio Familiar o
+ * Maternal, o la Asignación Familiar o Maternal; tu grupo familiar,
+ * si al 31 de diciembre de 2025 pertenecía a Chile Solidario o al
+ * Subsistema de Seguridades y Oportunidades (Ingreso Ético Familiar).
+ * Importante: si te encuentras en ambos casos, recibirás $66.834 por
+ * cada una de tus cargas."
+ * "Tienes 9 meses para cobrarlo desde que se genera el documento de
+ * pago."
+ * Excepción: la madre que recibe SUF por hijos menores de 18 que
+ * viven con ella obtiene además el aporte propio como causante.
+ */
+export const APORTE_FAMILIAR_PERMANENTE = {
+  anio: 2026,
+  montoCLP: 66834,
+  /** Fecha de corte de las cargas / grupo familiar causante. */
+  fechaCorte: '2025-12-31',
+  /** Meses para cobrar desde que se genera el documento de pago. */
+  plazoCobroMeses: 9,
+};
 
 // ============================================
 // PGU 2026 (Ley 21.735, reajuste IPC febrero 2026)

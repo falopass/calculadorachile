@@ -23,7 +23,7 @@ describe('calculateBonoBodasOro', () => {
   it('antes del 1-oct-2026 paga $463.166 total / $231.583 por cónyuge', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
-      fecha: new Date('2026-09-30'),
+      fecha: new Date('2026-09-30T12:00:00'),
     });
     expect(r.aplica).toBe(true);
     expect(r.montoPorConyuge).toBe(231583);
@@ -35,7 +35,7 @@ describe('calculateBonoBodasOro', () => {
   it('desde el 1-oct-2026 paga $482.295 total / $241.147 por cónyuge', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(true);
     expect(r.montoPorConyuge).toBe(241147);
@@ -47,7 +47,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       anosMatrimonio: 49,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.montoTotal).toBe(0);
@@ -58,7 +58,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       anosMatrimonio: 51,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.montoTotal).toBe(0);
@@ -69,7 +69,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       perteneceAl80Vulnerable: false,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.montoTotal).toBe(0);
@@ -80,7 +80,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       convivenSinSeparacion: false,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.montoTotal).toBe(0);
@@ -91,7 +91,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       residencia4de5: false,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.montoTotal).toBe(0);
@@ -102,7 +102,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       situacionConyuges: 'viudez-en-plazo',
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(true);
     expect(r.montoTotal).toBe(482295);
@@ -114,7 +114,7 @@ describe('calculateBonoBodasOro', () => {
     const r = calculateBonoBodasOro({
       ...baseInput,
       situacionConyuges: 'viudez-fuera-plazo',
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.montoTotal).toBe(0);
@@ -127,7 +127,7 @@ describe('calculateBonoBodasOro', () => {
       anosMatrimonio: 20,
       perteneceAl80Vulnerable: false,
       convivenSinSeparacion: false,
-      fecha: new Date('2026-10-01'),
+      fecha: new Date('2026-10-01T12:00:00'),
     });
     expect(r.aplica).toBe(false);
     expect(r.motivosNoAplica.length).toBeGreaterThanOrEqual(3);

@@ -4080,6 +4080,382 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+  {
+    id: 'aporte-familiar-permanente',
+    name: 'Calculadora Aporte Familiar Permanente',
+    description:
+      'Estima el Aporte Familiar Permanente 2026 ($66.834 por carga o grupo familiar al 31-12-2025) según tus cargas y situación.',
+    slug: 'calculadora-aporte-familiar-permanente',
+    category: 'beneficios',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Aporte Familiar Permanente (IPS)',
+        url: 'https://www.chileatiende.gob.cl/fichas/38913-aporte-familiar-permanente',
+        note: 'Monto, corte de cargas al 31-12-2025 y plazo de cobro de 9 meses',
+      },
+    ],
+    keywords: [
+      'aporte familiar permanente 2026',
+      'bono marzo 2026',
+      'aporte familiar monto',
+      'aporte por carga familiar',
+      'chile solidario aporte',
+      'suf aporte familiar',
+    ],
+    inputs: [
+      {
+        id: 'cargas',
+        label: 'Cargas con derecho a SUF / Asignación Familiar o Maternal al 31-12-2025',
+        type: 'number',
+        placeholder: '2',
+        required: true,
+        min: 0,
+        unit: 'count',
+        tooltip:
+          'Personas que al 31 de diciembre de 2025 te daban derecho a cobrar el Subsidio Familiar o Maternal, o la Asignación Familiar o Maternal.',
+      },
+      {
+        id: 'grupoSSyOO',
+        label: '¿Tu grupo familiar pertenecía a Chile Solidario o Seguridades y Oportunidades al 31-12-2025?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Si no tienes cargas pero tu grupo familiar estaba en Chile Solidario o en el Subsistema de Seguridades y Oportunidades (Ingreso Ético Familiar), corresponde un aporte por el grupo.',
+      },
+      {
+        id: 'madreSUF',
+        label: '¿Eres madre que recibe el SUF por hijos menores de 18 que viven contigo?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'En ese caso obtienes el aporte por cada hijo o hija y además un aporte propio como persona que genera el beneficio.',
+      },
+    ],
+    seoTitle: 'Aporte Familiar Permanente 2026: calcula cuánto te corresponde',
+    seoDescription:
+      'Calcula el Aporte Familiar Permanente 2026: $66.834 por carga familiar o grupo en Chile Solidario/SSyOO al 31-12-2025. Gratis.',
+    faq: [
+      {
+        question: '¿Cuánto es el Aporte Familiar Permanente 2026?',
+        answer:
+          '$66.834 por cada carga familiar o persona que al 31 de diciembre de 2025 te daba derecho a cobrar el Subsidio Familiar o Maternal, o la Asignación Familiar o Maternal; o por tu grupo familiar si a esa fecha pertenecía a Chile Solidario o al Subsistema de Seguridades y Oportunidades.',
+      },
+      {
+        question: 'Si tengo cargas y además estoy en Seguridades y Oportunidades, ¿recibo el doble?',
+        answer:
+          'No. Según la ficha oficial, si te encuentras en ambos casos recibirás $66.834 por cada una de tus cargas. La condición de grupo familiar solo genera un aporte cuando no hay cargas con derecho.',
+      },
+      {
+        question: '¿Qué pasa si soy madre que recibe el SUF?',
+        answer:
+          'Como madre que recibe el SUF por uno o más hijos o hijas menores de 18 años que viven contigo, obtienes el aporte por cada uno de ellos y además los $66.834 que te corresponden como persona que genera el beneficio.',
+      },
+      {
+        question: '¿Cuánto tiempo tengo para cobrarlo?',
+        answer:
+          'Tienes 9 meses para cobrarlo desde que se genera el documento de pago. El IPS emite el pago y el estado se puede revisar en los canales oficiales.',
+      },
+      {
+        question: '¿Necesito estar al día con las cargas familiares?',
+        answer:
+          'Sí. Para recibir el aporte debes tener el pago de tus cargas familiares al día según la institución que corresponda.',
+      },
+    ],
+  },
+  {
+    id: 'seguro-cesantia',
+    name: 'Calculadora Seguro de Cesantía',
+    description:
+      'Estima los pagos del Seguro de Cesantía (CIC y Fondo de Cesantía Solidario) según contrato, cotizaciones, causal y saldo.',
+    slug: 'calculadora-seguro-cesantia',
+    category: 'beneficios',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Seguro de Cesantía',
+        url: 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia',
+        note: 'CIC: 1 a 13 pagos, 70% del promedio el primero',
+      },
+      {
+        name: 'ChileAtiende — Fondo de Cesantía Solidario',
+        url: 'https://www.chileatiende.gob.cl/fichas/36646-fondo-de-cesantia-solidario-fcs',
+        note: 'Requisitos FCS: causal, 10 cotizaciones en 24 meses',
+      },
+      {
+        name: 'AFC — Beneficios del seguro',
+        url: 'https://www.afc.cl/mi-seguro-de-cesantia/beneficios/',
+        note: 'Porcentajes, mínimos y máximos vigentes al 28-02-2027',
+      },
+    ],
+    keywords: [
+      'seguro de cesantía',
+      'calculadora seguro cesantía',
+      'fondo de cesantía solidario',
+      'afc pagos',
+      'cuenta individual cesantía',
+      'cuánto paga el seguro de cesantía',
+    ],
+    inputs: [
+      {
+        id: 'tipoContrato',
+        label: 'Tipo de contrato',
+        type: 'select',
+        required: true,
+        defaultValue: 'indefinido',
+        options: [
+          { value: 'indefinido', label: 'Indefinido' },
+          { value: 'plazo-fijo', label: 'Plazo fijo / obra o servicio' },
+        ],
+      },
+      {
+        id: 'remuneracionPromedio',
+        label: 'Remuneración mensual promedio',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$900.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Promedio de tus últimas remuneraciones: últimas 10 si tu contrato era indefinido, últimas 5 si era a plazo fijo u obra.',
+      },
+      {
+        id: 'cotizaciones',
+        label: 'Cotizaciones pagadas',
+        type: 'number',
+        placeholder: '24',
+        required: true,
+        min: 0,
+        unit: 'count',
+        tooltip:
+          'Para el Fondo de Cesantía Solidario cuentan las cotizaciones de los últimos 24 meses.',
+      },
+      {
+        id: 'ultimas3Continuas',
+        label: '¿Las últimas 3 cotizaciones fueron continuas con el mismo empleador?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'causalFCS',
+        label: '¿La causal es necesidades de la empresa, quiebra, vencimiento de plazo, fin de obra o caso fortuito?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Solo esas causales dan derecho al Fondo de Cesantía Solidario. Renuncia voluntaria o mutuo acuerdo no lo activan.',
+      },
+      {
+        id: 'saldoCIC',
+        label: 'Saldo de tu Cuenta Individual de Cesantía (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        tooltip:
+          'Déjalo en 0 si no lo sabes: la calculadora estimará el primer pago o el esquema del Fondo Solidario.',
+      },
+    ],
+    seoTitle: 'Seguro de Cesantía 2026: calcula tus pagos CIC y FCS',
+    seoDescription:
+      'Estima los pagos del Seguro de Cesantía: CIC hasta 13 cuotas (70% inicial) y Fondo Solidario con mínimos y máximos vigentes.',
+    faq: [
+      {
+        question: '¿Cuántos pagos entrega la Cuenta Individual de Cesantía?',
+        answer:
+          'Entre 1 y 13 pagos según el saldo y el promedio de las últimas remuneraciones. El primer pago es el 70% del promedio (de las últimas 10 remuneraciones si el contrato era indefinido, de las últimas 5 si era a plazo fijo) y luego los montos bajan: 60%, 45%, 40%, 35% y 30% hasta agotar el saldo.',
+      },
+      {
+        question: '¿Cuántas cotizaciones necesito para cobrar?',
+        answer:
+          'Para la Cuenta Individual: 10 cotizaciones si tu contrato era indefinido o de casa particular, y 5 si era a plazo fijo, obra o servicio. Para el Fondo Solidario se exigen además 10 cotizaciones dentro de los últimos 24 meses, con las últimas 3 continuas con el mismo empleador.',
+      },
+      {
+        question: '¿Qué es el Fondo de Cesantía Solidario?',
+        answer:
+          'Un complemento estatal que aplica solo cuando el saldo de tu cuenta individual no alcanza para cubrir al menos 5 pagos. Requiere una causal con derecho (necesidades de la empresa, quiebra, vencimiento del plazo, conclusión de la obra o caso fortuito) e inscripción en la Bolsa Nacional de Empleo. Son 5 pagos mensuales que se financian primero con tu saldo y se complementan con el Fondo.',
+      },
+      {
+        question: '¿Cuáles son los montos del Fondo Solidario?',
+        answer:
+          'Contrato indefinido: 70/60/45/40/35% del promedio, con mínimos de $301.201 a $150.602 y máximos de $1.004.003 a $502.002. Plazo fijo u obra: 60/40/35/30/30%, con mínimos de $258.161 a $129.085 y máximos de $860.574 a $430.288. Valores vigentes hasta el 28-02-2027.',
+      },
+      {
+        question: '¿Puede haber más de 5 pagos del Fondo Solidario?',
+        answer:
+          'La norma contempla hasta 2 pagos adicionales solo cuando el desempleo nacional supera en un punto el promedio de los últimos 4 años. Esta calculadora muestra los 5 pagos regulares.',
+      },
+    ],
+  },
+  {
+    id: 'licencia-medica',
+    name: 'Calculadora Licencia Médica',
+    description:
+      'Estima el subsidio por licencia médica: monto diario desde la remuneración neta, mínimo legal y días pagados según la duración.',
+    slug: 'calculadora-licencia-medica',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'SUSESO — Subsidio por incapacidad laboral',
+        url: 'https://www.suseso.gob.cl/606/w3-propertyvalue-568.html',
+        note: 'Base de cálculo: remuneración neta y mínimo legal diario',
+      },
+      {
+        name: 'Dirección del Trabajo — Licencias médicas',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95288.html',
+        note: 'Pago desde el primer día si supera 10 días; desde el 4° si es menor o igual',
+      },
+    ],
+    keywords: [
+      'licencia médica',
+      'calculadora licencia médica',
+      'subsidio incapacidad laboral',
+      'cuánto pagan por licencia',
+      'licencia médica sueldo',
+      'subsidio licencia chile',
+    ],
+    inputs: [
+      {
+        id: 'remuneracionNetaPromedio',
+        label: 'Remuneración neta mensual promedio',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$900.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Promedio de la remuneración mensual neta (imponible menos cotizaciones previsionales e impuestos) de los 3 meses calendario anteriores al inicio de la licencia.',
+      },
+      {
+        id: 'diasLicencia',
+        label: 'Días de licencia',
+        type: 'number',
+        unit: 'days',
+        placeholder: '15',
+        required: true,
+        min: 1,
+        tooltip:
+          'Si la licencia supera los 10 días el subsidio se paga desde el primer día; si es de 10 días o menos, desde el cuarto día.',
+      },
+    ],
+    seoTitle: 'Licencia Médica 2026: calcula el subsidio por tus días',
+    seoDescription:
+      'Calcula el subsidio de licencia médica: monto diario desde la remuneración neta con mínimo legal y pago desde el 1° o 4° día.',
+    faq: [
+      {
+        question: '¿Cómo se calcula el monto diario de la licencia?',
+        answer:
+          'La base es el promedio de la remuneración mensual neta —imponible menos cotizaciones previsionales e impuestos— de los 3 meses calendario anteriores al mes de inicio de la licencia. Ese promedio se divide por 30 para obtener el monto diario.',
+      },
+      {
+        question: '¿Existe un mínimo diario para el subsidio?',
+        answer:
+          'Sí. El monto diario no puede ser inferior a 1/30 del 50% del ingreso mínimo para fines no remuneracionales. La calculadora aplica ese piso automáticamente.',
+      },
+      {
+        question: '¿Desde qué día se paga la licencia?',
+        answer:
+          'Cuando la licencia es superior a 10 días, el subsidio se paga desde el primer día; si es igual o inferior a 10 días, se paga desde el cuarto día.',
+      },
+      {
+        question: '¿Qué requisitos debo cumplir para tener derecho al subsidio?',
+        answer:
+          'En general se exige 6 meses de afiliación y al menos 3 meses de cotización dentro de los 6 meses anteriores al inicio de la licencia. Para trabajadores contratados por día o por turnos el requisito baja a 1 mes de cotización.',
+      },
+      {
+        question: '¿Hay un tope en la base de cálculo?',
+        answer:
+          'La remuneración imponible considerada está limitada por el tope imponible vigente (90 UF mensuales), lo que acota la base sobre la que se calcula la remuneración neta promedio.',
+      },
+    ],
+  },
+  {
+    id: 'sueldo-part-time',
+    name: 'Calculadora Sueldo Part-Time',
+    description:
+      'Calcula el ingreso mínimo legal para jornadas parciales (30 h o menos) y verifica si el sueldo pactado lo cumple.',
+    slug: 'calculadora-sueldo-part-time',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'Dirección del Trabajo — Jornada parcial e ingreso mínimo',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-60136.html',
+        note: 'IMM proporcional solo hasta 30 h semanales; jornada intermedia exige IMM íntegro',
+      },
+    ],
+    keywords: [
+      'sueldo part time',
+      'jornada parcial sueldo mínimo',
+      'media jornada sueldo',
+      'sueldo mínimo proporcional',
+      'jornada 20 horas sueldo',
+      'jornada intermedia',
+    ],
+    inputs: [
+      {
+        id: 'horasSemanales',
+        label: 'Horas semanales pactadas',
+        type: 'number',
+        unit: 'count',
+        placeholder: '20',
+        required: true,
+        min: 1,
+        max: 42,
+        tooltip:
+          'Hasta 30 horas es jornada parcial (IMM proporcional). Entre 30 y 42 horas es jornada intermedia y corresponde el IMM íntegro.',
+      },
+      {
+        id: 'sueldoPactado',
+        label: 'Sueldo mensual pactado (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        tooltip:
+          'Ingrésalo para verificar si cumple el mínimo legal. Déjalo en 0 para ver solo el mínimo proporcional.',
+      },
+    ],
+    seoTitle: 'Sueldo Part-Time 2026: mínimo legal según horas semanales',
+    seoDescription:
+      'Calcula el sueldo mínimo para jornada parcial en Chile: proporcional hasta 30 h semanales e íntegro en jornada intermedia.',
+    faq: [
+      {
+        question: '¿Se puede pagar el sueldo mínimo en forma proporcional?',
+        answer:
+          'Sí, pero solo cuando se pacta una jornada parcial de 30 horas semanales o menos. En ese caso el ingreso mínimo mensual se puede pagar en proporción a las horas acordadas.',
+      },
+      {
+        question: '¿Qué pasa si trabajo más de 30 y menos de 42 horas?',
+        answer:
+          'Esa es la jornada intermedia: según la Dirección del Trabajo, el trabajador debe percibir el ingreso mínimo mensual íntegro, sin cálculos proporcionales.',
+      },
+      {
+        question: '¿Cómo se calcula el proporcional?',
+        answer:
+          'Se multiplica el ingreso mínimo mensual por las horas pactadas y se divide por la jornada máxima legal vigente de 42 horas. Por ejemplo, 20 horas semanales dan un mínimo proporcional de aproximadamente 47,6% del IMM.',
+      },
+      {
+        question: '¿La calculadora incluye horas extra?',
+        answer:
+          'No. Muestra el mínimo legal y un valor hora de referencia calculado con la fórmula legal de la hora ordinaria (sueldo / 30 × 28 dividido por la jornada semanal × 4). Para horas extraordinarias usa la calculadora de horas extra.',
+      },
+    ],
+  },
 ];
 
 export const calculators: Calculator[] = calculatorCatalog.map((calculator) => ({

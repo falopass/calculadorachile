@@ -684,4 +684,119 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Bono único estimado: $482.295 para el matrimonio.',
     },
   },
+  'aporte-familiar-permanente': {
+    summary:
+      'Multiplica $66.834 por cada carga con derecho a SUF/Asignación Familiar o Maternal al 31-12-2025; si no hay cargas y el grupo estaba en Chile Solidario/SSyOO, un solo aporte.',
+    calculationSteps: [
+      'Cuenta las cargas que al 31-12-2025 daban derecho a SUF, Subsidio Maternal o Asignación Familiar/Maternal.',
+      'Si hay cargas y la madre recibe SUF por hijos menores de 18 que viven con ella, suma un aporte adicional para ella.',
+      'Si no hay cargas pero el grupo familiar pertenecía a Chile Solidario o SSyOO al 31-12-2025, corresponde un aporte por el grupo.',
+      'Multiplica el número de aportes por $66.834.',
+    ],
+    assumptions: [
+      'Las cargas declaradas efectivamente daban derecho al beneficio al 31-12-2025 y el pago de cargas está al día.',
+    ],
+    limitations: [
+      'No verifica la situación en el Registro Social de Hogares ni la emisión real del documento de pago.',
+      'Tener cargas y además grupo SSyOO no duplica el aporte: corresponde solo por cada carga.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 2 cargas con grupo en Seguridades y Oportunidades',
+      inputs: [
+        'Cargas al 31-12-2025: 2',
+        'Grupo en Chile Solidario/SSyOO: sí',
+      ],
+      development: [
+        'En ambos casos el aporte se paga solo por cada carga: 2 × $66.834',
+      ],
+      result: 'Aporte total estimado: $133.668.',
+    },
+  },
+  'seguro-cesantia': {
+    summary:
+      'Estima los pagos de la Cuenta Individual de Cesantía (hasta 13, decrecientes) y del Fondo de Cesantía Solidario (5 pagos con piso y tope, financiando primero el saldo).',
+    calculationSteps: [
+      'Verifica cotizaciones mínimas de la CIC (10 si indefinido, 5 si plazo fijo).',
+      'Si hay saldo informado, aplica 70/60/45/40/35/30…% del promedio hasta agotarlo o llegar a 13 pagos.',
+      'Si el saldo no cubre 5 pagos y se cumplen los requisitos del FCS (causal con derecho, 10 cotizaciones en 24 meses, últimas 3 continuas), aplica los 5 pagos con mínimos y máximos vigentes al 28-02-2027.',
+      'Reparte cada pago FCS entre saldo CIC (primero) y complemento del Fondo.',
+    ],
+    assumptions: [
+      'El promedio declarado corresponde a las últimas 10 remuneraciones (indefinido) o 5 (plazo fijo/obra).',
+      'Las cotizaciones declaradas están efectivamente pagadas y continuas según lo indicado.',
+    ],
+    limitations: [
+      'No consulta el saldo real de la cuenta individual en la AFC ni la inscripción en la Bolsa Nacional de Empleo.',
+      'No calcula los hasta 2 pagos extraordinarios del FCS que solo operan cuando el desempleo nacional supera en un punto el promedio de 4 años.',
+      'Sin saldo informado solo muestra el primer pago CIC como estimación.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: indefinido con promedio $1.000.000 y derecho a FCS',
+      inputs: [
+        'Promedio: $1.000.000',
+        'Causal con derecho a FCS y requisitos de cotización: sí',
+        'Saldo CIC: $1.000.000',
+      ],
+      development: [
+        'Pagos FCS: 700.000 / 600.000 / 450.000 / 400.000 / 350.000',
+        'Pago 1 sale completo del saldo CIC; pago 2 toma $300.000 del CIC y $300.000 del Fondo; el resto es Fondo.',
+      ],
+      result: 'Total estimado: $2.500.000 (de los cuales $1.500.000 los aporta el Fondo Solidario).',
+    },
+  },
+  'licencia-medica': {
+    summary:
+      'Calcula el subsidio diario como la remuneración neta promedio de los 3 meses anteriores dividida por 30, con piso en el mínimo legal, y días pagados según la duración.',
+    calculationSteps: [
+      'Toma la remuneración neta mensual promedio declarada y la divide por 30.',
+      'Aplica el piso del mínimo diario legal (50% del ingreso mínimo no remuneracional ÷ 30).',
+      'Si la licencia supera 10 días, subsidia todos los días; si es de 10 o menos, subsidia desde el 4° día.',
+      'Multiplica el monto diario por los días subsidiados.',
+    ],
+    assumptions: [
+      'La remuneración neta declarada ya descuenta cotizaciones e impuestos y respeta el tope imponible vigente.',
+      'Se cumplen los requisitos de afiliación y cotización (6 meses de afiliación, 3 de cotización en los últimos 6; 1 mes si es contrato por día o turnos).',
+    ],
+    limitations: [
+      'No considera variaciones de la licencia (prórrogas, continuaciones) ni límites del pre/postnatal.',
+      'El pago efectivo lo determina la entidad (FONASA, Isapre o empleador) con la liquidación real.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: neta $900.000 con licencia de 15 días',
+      inputs: ['Remuneración neta promedio: $900.000', 'Días de licencia: 15'],
+      development: [
+        'Monto diario = $900.000 / 30 = $30.000',
+        'Licencia > 10 días → los 15 días se pagan',
+        'Total = $30.000 × 15',
+      ],
+      result: 'Subsidio estimado: $450.000.',
+    },
+  },
+  'sueldo-part-time': {
+    summary:
+      'Calcula el ingreso mínimo mensual proporcional para jornadas de 30 horas o menos (IMM × horas / 42) y compara con el sueldo pactado; en jornada intermedia exige el IMM íntegro.',
+    calculationSteps: [
+      'Determina si la jornada es parcial (≤ 30 h), intermedia (>30 y <42 h) o completa (42 h).',
+      'Si es parcial: mínimo legal = IMM × horas / 42. Si es intermedia o completa: IMM íntegro.',
+      'Compara el sueldo pactado con el mínimo legal y muestra la diferencia si es menor.',
+      'Calcula el valor hora ordinario con la fórmula legal (sueldo / 30 × 28) / (horas × 4).',
+    ],
+    assumptions: [
+      'El sueldo pactado corresponde a remuneración mensual comparable con el ingreso mínimo.',
+      'La jornada máxima legal vigente es de 42 horas semanales.',
+    ],
+    limitations: [
+      'No calcula horas extraordinarias ni proporciones de otros mínimos (menores de 18, mayores de 65, zona extrema).',
+      'Pactos por debajo del mínimo legal son ilegales; la calculadora solo muestra la diferencia.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: jornada parcial de 30 horas',
+      inputs: ['Horas semanales: 30', 'Sueldo pactado: no informado'],
+      development: [
+        'Jornada parcial (≤ 30 h): mínimo = $553.553 × 30 / 42',
+        'Mínimo legal proporcional = $395.395',
+      ],
+      result: 'Ingreso mínimo proporcional: $395.395; valor hora referencial $3.075.',
+    },
+  },
 };

@@ -14,43 +14,43 @@ import {
 
 describe('getEscalonSeguroSocialPrevisional', () => {
   it('antes del primer escalón (2024): tasa 0 sin SIS incluido', () => {
-    expect(getEscalonSeguroSocialPrevisional(new Date('2024-01-01'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2024-01-01T12:00:00'))).toEqual({
       tasa: 0,
       incluyeSIS: false,
     });
   });
 
   it('julio 2026: 1,0% y SIS se paga por separado', () => {
-    expect(getEscalonSeguroSocialPrevisional(new Date('2026-07-31'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2026-07-31T12:00:00'))).toEqual({
       tasa: 1.0,
       incluyeSIS: false,
     });
   });
 
   it('agosto 2026: 3,5% con SIS incluido', () => {
-    expect(getEscalonSeguroSocialPrevisional(new Date('2026-08-01'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2026-08-01T12:00:00'))).toEqual({
       tasa: 3.5,
       incluyeSIS: true,
     });
   });
 
   it('agosto 2033 en adelante: tasa máxima 8,5%', () => {
-    expect(getEscalonSeguroSocialPrevisional(new Date('2033-08-01'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2033-08-01T12:00:00'))).toEqual({
       tasa: 8.5,
       incluyeSIS: true,
     });
-    expect(getEscalonSeguroSocialPrevisional(new Date('2034-06-15'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2034-06-15T12:00:00'))).toEqual({
       tasa: 8.5,
       incluyeSIS: true,
     });
   });
 
   it('escalón intermedio: julio 2028 sigue en 4,25% (sube cada agosto)', () => {
-    expect(getEscalonSeguroSocialPrevisional(new Date('2028-07-15'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2028-07-15T12:00:00'))).toEqual({
       tasa: 4.25,
       incluyeSIS: true,
     });
-    expect(getEscalonSeguroSocialPrevisional(new Date('2028-08-01'))).toEqual({
+    expect(getEscalonSeguroSocialPrevisional(new Date('2028-08-01T12:00:00'))).toEqual({
       tasa: 5.0,
       incluyeSIS: true,
     });
@@ -59,7 +59,7 @@ describe('getEscalonSeguroSocialPrevisional', () => {
 
 describe('getSeguroSocialPrevisionalVigente', () => {
   it('devuelve solo la tasa del escalón vigente', () => {
-    expect(getSeguroSocialPrevisionalVigente(new Date('2026-07-31'))).toBe(1.0);
-    expect(getSeguroSocialPrevisionalVigente(new Date('2026-08-01'))).toBe(3.5);
+    expect(getSeguroSocialPrevisionalVigente(new Date('2026-07-31T12:00:00'))).toBe(1.0);
+    expect(getSeguroSocialPrevisionalVigente(new Date('2026-08-01T12:00:00'))).toBe(3.5);
   });
 });

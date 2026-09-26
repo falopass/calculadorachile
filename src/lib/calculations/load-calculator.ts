@@ -3,7 +3,7 @@
 // --------------------------------------------
 // Cada id del catálogo importa SOLO su módulo de cálculo.
 // Los adapters (catálogo UI → motor) viven aquí para no inflar
-// el client con 39 imports estáticos.
+// el client con 44 imports estáticos.
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
@@ -634,6 +634,60 @@ export async function loadCalculationFn(
           residencia4de5: coerceBool(inputs.residencia4de5),
         });
         return bonoBodasOroToResults(result);
+      };
+    }
+
+    case 'aporte-familiar-permanente': {
+      const { calculateAporteFamiliarPermanente, aporteFamiliarPermanenteToResults } =
+        await import('./aporte-familiar-permanente');
+      return (inputs) => {
+        const result = calculateAporteFamiliarPermanente({
+          cargas: coerceNumber(inputs.cargas),
+          grupoSSyOO: coerceBool(inputs.grupoSSyOO),
+          madreSUF: coerceBool(inputs.madreSUF),
+        });
+        return aporteFamiliarPermanenteToResults(result);
+      };
+    }
+
+    case 'seguro-cesantia': {
+      const { calculateSeguroCesantia, seguroCesantiaToResults } =
+        await import('./seguro-cesantia');
+      return (inputs) => {
+        const result = calculateSeguroCesantia({
+          tipoContrato:
+            inputs.tipoContrato === 'plazo-fijo' ? 'plazo-fijo' : 'indefinido',
+          remuneracionPromedio: coerceNumber(inputs.remuneracionPromedio),
+          cotizaciones: coerceNumber(inputs.cotizaciones),
+          ultimas3Continuas: coerceBool(inputs.ultimas3Continuas),
+          causalFCS: coerceBool(inputs.causalFCS),
+          saldoCIC: coerceNumber(inputs.saldoCIC),
+        });
+        return seguroCesantiaToResults(result);
+      };
+    }
+
+    case 'licencia-medica': {
+      const { calculateLicenciaMedica, licenciaMedicaToResults } =
+        await import('./licencia-medica');
+      return (inputs) => {
+        const result = calculateLicenciaMedica({
+          remuneracionNetaPromedio: coerceNumber(inputs.remuneracionNetaPromedio),
+          diasLicencia: coerceNumber(inputs.diasLicencia),
+        });
+        return licenciaMedicaToResults(result);
+      };
+    }
+
+    case 'sueldo-part-time': {
+      const { calculateSueldoPartTime, sueldoPartTimeToResults } =
+        await import('./sueldo-part-time');
+      return (inputs) => {
+        const result = calculateSueldoPartTime({
+          horasSemanales: coerceNumber(inputs.horasSemanales),
+          sueldoPactado: coerceNumber(inputs.sueldoPactado),
+        });
+        return sueldoPartTimeToResults(result);
       };
     }
 
