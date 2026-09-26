@@ -235,6 +235,8 @@ describe('calculateSueldoLiquido', () => {
         ...inputBase,
         // Sueldo muy alto que paga impuesto
         sueldoBruto: 5000000,
+        // UTM fija para no depender del snapshot diario (base > 13,5 UTM)
+        valorUTM: 71_721,
       });
 
       expect(result.descuentos.impuesto).toBeGreaterThan(0);

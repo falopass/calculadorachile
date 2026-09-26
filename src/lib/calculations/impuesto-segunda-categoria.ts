@@ -9,6 +9,8 @@ import type { CalculatorResult } from '@/types/calculator';
 export interface ImpuestoSegundaCategoriaInput {
   sueldoBrutoMensual: number;
   mesesTrabajados?: number;
+  /** UTM en vivo (UI/tests). Default: snapshot `UTM.valor`. */
+  valorUTM?: number;
 }
 
 export interface ImpuestoSegundaCategoriaResult {
@@ -44,7 +46,7 @@ export function calculateImpuestoSegundaCategoria(
   const sueldo = Math.max(0, sueldoBrutoMensual);
   const meses = Math.max(1, Math.min(12, mesesTrabajados));
 
-  const valorUTM = UTM.valor;
+  const valorUTM = input.valorUTM ?? UTM.valor;
   const rentaEnUTM = valorUTM > 0 ? sueldo / valorUTM : 0;
 
   // Buscar tramo aplicable (tabla mensual en UTM)

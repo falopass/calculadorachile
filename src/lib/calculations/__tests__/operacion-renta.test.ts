@@ -8,7 +8,13 @@
 
 import { describe, it, expect } from 'vitest';
 import { calculateOperacionRenta } from '../operacion-renta';
-import { RETENCION_HONORARIOS_CALENDARIO, UTM } from '@/lib/values/constants';
+import {
+  IMPUESTO_SEGUNDA_CATEGORIA_2026,
+  RETENCION_HONORARIOS_CALENDARIO,
+  UTM,
+} from '@/lib/values/constants';
+
+const UTA = UTM.valor * 12;
 
 describe('calculateOperacionRenta', () => {
   it('renta tributable = bruta − gastos − cotizaciones − APV', () => {
@@ -30,42 +36,63 @@ describe('calculateOperacionRenta', () => {
     expect(r.rentaTributable).toBeGreaterThanOrEqual(0);
   });
 
-  it('renta bajo 8 UTA cae en el primer tramo (impuesto 0)', () => {
-    const valorUTA = UTM.valor * 12;
+  it('renta bajo 13,5 UTA cae en el primer tramo (impuesto 0)', () => {
     const r = calculateOperacionRenta({
-      ingresosAnuales: Math.round(valorUTA * 5), // 5 UTA, exento
+      ingresosAnuales: Math.round(UTA * 13), // 13 UTA, exento
       gastosAnuales: 0,
       cotizacionesObligatorias: 0,
     });
     expect(r.impuesto).toBe(0);
-    // El primer tramo (0–8 UTA) tiene tasa 0 → tramo aplicado válido.
+    // El primer tramo (0–13,5 UTA) tiene tasa 0 → tramo aplicado válido.
     expect(r.tramoAplicado).toContain('UTA');
   });
 
-  it('renta sobre 8 UTA paga impuesto > 0', () => {
-    const valorUTA = UTM.valor * 12;
+  it('renta de 20 UTA paga 0,26 UTA (tramo 4%, rebaja 0,54)', () => {
     const r = calculateOperacionRenta({
-      ingresosAnuales: Math.round(valorUTA * 12), // 12 UTA, tramo 8-16
+      ingresosAnuales: Math.round(UTA * 20),
       gastosAnuales: 0,
       cotizacionesObligatorias: 0,
     });
-    expect(r.impuesto).toBeGreaterThan(0);
+    // 20 × 0,04 − 0,54 = 0,26 UTA
+    expect(r.impuesto).toBe(Math.round(0.26 * UTA));
     expect(r.tramoAplicado).toContain('UTA');
   });
 
+  it('renta de 100 UTA paga 12,6 UTA (tramo 30,4%, rebaja 17,8)', () => {
+    const r = calculateOperacionRenta({
+      ingresosAnuales: Math.round(UTA * 100),
+      gastosAnuales: 0,
+      cotizacionesObligatorias: 0,
+    });
+    // 100 × 0,304 − 17,8 = 12,6 UTA
+    expect(r.impuesto).toBe(Math.round((100 * 0.304 - 17.8) * UTA));
+  });
+
   it('mayor renta paga impuesto progresivamente mayor', () => {
-    const valorUTA = UTM.valor * 12;
     const bajo = calculateOperacionRenta({
-      ingresosAnuales: Math.round(valorUTA * 12),
+      ingresosAnuales: Math.round(UTA * 20),
       gastosAnuales: 0,
       cotizacionesObligatorias: 0,
     });
     const alto = calculateOperacionRenta({
-      ingresosAnuales: Math.round(valorUTA * 30),
+      ingresosAnuales: Math.round(UTA * 100),
       gastosAnuales: 0,
       cotizacionesObligatorias: 0,
     });
     expect(alto.tasaEfectiva).toBeGreaterThan(bajo.tasaEfectiva);
+  });
+
+  it('tabla UTA oficial AT2026 (art. 52 LIR, SII personas naturales)', () => {
+    expect(IMPUESTO_SEGUNDA_CATEGORIA_2026.tramos).toEqual([
+      { limiteInferiorUTA: 0, limiteSuperiorUTA: 13.5, tasa: 0, factor: 0 },
+      { limiteInferiorUTA: 13.5, limiteSuperiorUTA: 30, tasa: 0.04, factor: 0.54 },
+      { limiteInferiorUTA: 30, limiteSuperiorUTA: 50, tasa: 0.08, factor: 1.74 },
+      { limiteInferiorUTA: 50, limiteSuperiorUTA: 70, tasa: 0.135, factor: 4.49 },
+      { limiteInferiorUTA: 70, limiteSuperiorUTA: 90, tasa: 0.23, factor: 11.14 },
+      { limiteInferiorUTA: 90, limiteSuperiorUTA: 120, tasa: 0.304, factor: 17.8 },
+      { limiteInferiorUTA: 120, limiteSuperiorUTA: 310, tasa: 0.35, factor: 23.32 },
+      { limiteInferiorUTA: 310, limiteSuperiorUTA: Infinity, tasa: 0.4, factor: 38.82 },
+    ]);
   });
 
   it('retención sugerida usa la tasa del año vigente del calendario', () => {

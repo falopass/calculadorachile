@@ -287,16 +287,26 @@ export const TOPE_IMPOSITIVO = {
   gratificacion: 90, // UF (Art. 172 CdT)
 };
 
+/**
+ * Tabla mensual del Impuesto Único de Segunda Categoría (Art. 43 N°1 LIR).
+ * Tramos en UTM; `rebaja` es la cantidad a rebajar en UTM (invariante mes
+ * a mes: lo que el SII publica en pesos es rebaja_UTM × UTM del mes).
+ *
+ * Fuente: https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm
+ * Octubre 2026: factor 0,04, cantidad a rebajar $38.961,54
+ * (= 0,54 UTM de $72.150,9); tramo 310+ factor 0,4, rebaja $2.800.901,82
+ * (= 38,82 UTM).
+ */
 export const IMPUESTO_SEGUNDA_CATEGORIA = {
   tramos: [
     { desde: 0, hasta: 13.5, exento: 0, factor: 0, rebaja: 0 },
-    { desde: 13.5, hasta: 30, exento: 13.5, factor: 0.04, rebaja: 0 },
-    { desde: 30, hasta: 50, exento: 30, factor: 0.08, rebaja: 1.2 },
-    { desde: 50, hasta: 70, exento: 50, factor: 0.135, rebaja: 3.95 },
-    { desde: 70, hasta: 90, exento: 70, factor: 0.23, rebaja: 10.25 },
-    { desde: 90, hasta: 120, exento: 90, factor: 0.304, rebaja: 16.9 },
-    { desde: 120, hasta: 310, exento: 120, factor: 0.35, rebaja: 22.42 },
-    { desde: 310, hasta: Infinity, exento: 310, factor: 0.40, rebaja: 37.92 },
+    { desde: 13.5, hasta: 30, exento: 13.5, factor: 0.04, rebaja: 0.54 },
+    { desde: 30, hasta: 50, exento: 30, factor: 0.08, rebaja: 1.74 },
+    { desde: 50, hasta: 70, exento: 50, factor: 0.135, rebaja: 4.49 },
+    { desde: 70, hasta: 90, exento: 70, factor: 0.23, rebaja: 11.14 },
+    { desde: 90, hasta: 120, exento: 90, factor: 0.304, rebaja: 17.8 },
+    { desde: 120, hasta: 310, exento: 120, factor: 0.35, rebaja: 23.32 },
+    { desde: 310, hasta: Infinity, exento: 310, factor: 0.40, rebaja: 38.82 },
   ],
 };
 
@@ -394,16 +404,24 @@ export const ASIGNACION_FAMILIAR_2026 = {
 // ============================================
 // Impuesto 2ª Categoría 2026 (alternativa por UTA)
 // ============================================
+/**
+ * Tabla anual del Impuesto Único de Segunda Categoría, expresada en UTA
+ * (tabla art. 52 LIR, AT2026). `factor` = cantidad a rebajar en UTA.
+ *
+ * Fuente: https://www.sii.cl/valores_y_fechas/renta/2026/personas_naturales.html
+ * Exento hasta $11.265.804 (13,5 UTA de $834.504); tramo superior desde
+ * $258.696.240 (310 UTA); rebajas desde $450.632,16 hasta $32.395.445,28.
+ */
 export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
   tramos: [
-    { limiteInferiorUTA: 0, limiteSuperiorUTA: 8, tasa: 0, factor: 0 },
-    { limiteInferiorUTA: 8, limiteSuperiorUTA: 16, tasa: 0.04, factor: 0 },
-    { limiteInferiorUTA: 16, limiteSuperiorUTA: 24, tasa: 0.08, factor: 0.64 },
-    { limiteInferiorUTA: 24, limiteSuperiorUTA: 32, tasa: 0.135, factor: 1.96 },
-    { limiteInferiorUTA: 32, limiteSuperiorUTA: 48, tasa: 0.23, factor: 4.92 },
-    { limiteInferiorUTA: 48, limiteSuperiorUTA: 64, tasa: 0.30, factor: 8.44 },
-    { limiteInferiorUTA: 64, limiteSuperiorUTA: 96, tasa: 0.35, factor: 11.64 },
-    { limiteInferiorUTA: 96, limiteSuperiorUTA: Infinity, tasa: 0.40, factor: 16.44 },
+    { limiteInferiorUTA: 0, limiteSuperiorUTA: 13.5, tasa: 0, factor: 0 },
+    { limiteInferiorUTA: 13.5, limiteSuperiorUTA: 30, tasa: 0.04, factor: 0.54 },
+    { limiteInferiorUTA: 30, limiteSuperiorUTA: 50, tasa: 0.08, factor: 1.74 },
+    { limiteInferiorUTA: 50, limiteSuperiorUTA: 70, tasa: 0.135, factor: 4.49 },
+    { limiteInferiorUTA: 70, limiteSuperiorUTA: 90, tasa: 0.23, factor: 11.14 },
+    { limiteInferiorUTA: 90, limiteSuperiorUTA: 120, tasa: 0.304, factor: 17.8 },
+    { limiteInferiorUTA: 120, limiteSuperiorUTA: 310, tasa: 0.35, factor: 23.32 },
+    { limiteInferiorUTA: 310, limiteSuperiorUTA: Infinity, tasa: 0.40, factor: 38.82 },
   ],
 };
 

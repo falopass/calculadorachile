@@ -42,8 +42,9 @@ export interface OperacionRentaResult {
  * a rentas anuales en UTA subestimaba el impuesto en ~12×.
  *
  * Fix: usar la tabla `IMPUESTO_SEGUNDA_CATEGORIA_2026` que sí está en
- * UTA (8/16/24/32/48/64/96 UTA) y calcular: impuesto = renta × tasa −
- * factor (todo en UTA), luego convertir a CLP.
+ * UTA (tramos 13,5/30/50/70/90/120/310 UTA, tabla oficial art. 52 LIR
+ * AT2026) y calcular: impuesto = renta × tasa − factor (todo en UTA),
+ * luego convertir a CLP.
  *
  * Base legal: Art. 42 N°2, 43 N°1 LIR.
  */

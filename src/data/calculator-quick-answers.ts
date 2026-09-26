@@ -192,7 +192,10 @@ export function getQuickAnswer(
     case 'impuesto-segunda-categoria': {
       const sueldos = [800_000, 1_500_000, 2_500_000];
       const rows = sueldos.map((sueldoBrutoMensual) => {
-        const r = calculateImpuestoSegundaCategoria({ sueldoBrutoMensual });
+        const r = calculateImpuestoSegundaCategoria({
+          sueldoBrutoMensual,
+          valorUTM: ctx.utm,
+        });
         return [
           formatCLP(sueldoBrutoMensual),
           formatNum(r.rentaEnUTM),

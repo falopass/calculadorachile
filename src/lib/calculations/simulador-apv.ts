@@ -41,8 +41,9 @@ const TOPE_ANUAL_APV_UF = APV_REGIMEN_B.tope_uf_anual;
  * anual en UTA. Eso daba tasas marginales subestimadas para sueldos
  * medios-altos.
  *
- * Fix: usar `IMPUESTO_SEGUNDA_CATEGORIA_2026` (en UTA) para obtener la
- * tasa marginal a partir de la renta anual del trabajador.
+ * Fix: usar `IMPUESTO_SEGUNDA_CATEGORIA_2026` (en UTA, tabla oficial
+ * art. 52 LIR AT2026: tramos 13,5/30/50/70/90/120/310 UTA) para obtener
+ * la tasa marginal a partir de la renta anual del trabajador.
  *
  * Base legal: Art. 42 bis LIR, DFL 3500/1980.
  */

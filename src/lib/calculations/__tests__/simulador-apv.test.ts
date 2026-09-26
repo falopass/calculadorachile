@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { calculateSimuladorAPV } from '../simulador-apv';
-import { UF } from '@/lib/values/constants';
+import { UF, UTM } from '@/lib/values/constants';
 
 describe('calculateSimuladorAPV', () => {
   it('rentabilidad cero: ahorro = total aportado', () => {
@@ -52,6 +52,36 @@ describe('calculateSimuladorAPV', () => {
       anosAhorro: 5,
     });
     expect(r.aportaTopeUF).toBe(false);
+  });
+
+  it('tasa marginal 0% para renta anual de 13 UTA (exento)', () => {
+    const r = calculateSimuladorAPV({
+      sueldoBruto: 13 * UTM.valor, // renta anual = 13 UTA < 13,5 UTA
+      montoMensualAPV: 50_000,
+      rentabilidadAnual: 4,
+      anosAhorro: 10,
+    });
+    expect(r.tasaMarginal).toBe(0);
+  });
+
+  it('tasa marginal 4% para renta anual de 20 UTA', () => {
+    const r = calculateSimuladorAPV({
+      sueldoBruto: 20 * UTM.valor, // renta anual = 20 UTA → tramo 13,5–30
+      montoMensualAPV: 50_000,
+      rentabilidadAnual: 4,
+      anosAhorro: 10,
+    });
+    expect(r.tasaMarginal).toBe(4);
+  });
+
+  it('tasa marginal 30,4% para renta anual de 100 UTA', () => {
+    const r = calculateSimuladorAPV({
+      sueldoBruto: 100 * UTM.valor, // renta anual = 100 UTA → tramo 90–120
+      montoMensualAPV: 50_000,
+      rentabilidadAnual: 4,
+      anosAhorro: 10,
+    });
+    expect(r.tasaMarginal).toBe(30.4);
   });
 
   it('beneficio tributario crece con la tasa marginal', () => {
