@@ -4341,6 +4341,119 @@ const articleCatalog: ArticleDraft[] = [
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto oficial de la patente lo determina tu municipalidad conforme al DL 3.063, el decreto alcaldicio de la comuna y el capital propio declarado o estimado. No es asesoría tributaria.</p></div></aside>
 <p>Para profundizar en los tributos que paga una empresa, revisa la <a href="/guias/empresas-pymes-chile">guía de empresas y PYMEs</a>, la <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo de un empleado</a> y la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
   },
+  {
+    slug: 'cupon-gas-licuado-vence-30-septiembre-2026',
+    title: 'Cupón de Gas Licuado: el saldo vence el 30 de septiembre de 2026',
+    description:
+      'El Cupón de Gas Licuado de $27.000 vence el 30 de septiembre de 2026 y el saldo no usado se pierde. Cómo pagarlo con CuentaRUT, RutPay o BancoEstado en distribuidores adheridos.',
+    date: '2026-09-26',
+    updatedAt: '2026-09-26',
+    category: 'hogar',
+    readingTime: 4,
+    relatedGuia: 'hogar-servicios-basicos-chile',
+    seoTitle: 'Cupón de Gas Licuado vence el 30 de septiembre de 2026',
+    seoDescription:
+      'Quedan días para usar el Cupón de Gas Licuado de $27.000: vence el 30 de septiembre de 2026 y el saldo no utilizado se pierde. Cómo cobrarlo con CuentaRUT.',
+    keywords: [
+      'cupón de gas licuado',
+      'cupón gas vence 30 septiembre 2026',
+      'cupón gas licuado $27.000',
+      'cómo usar cupón de gas licuado',
+      'cupón gas CuentaRUT RutPay',
+      'Plan Chile Sale Adelante gas',
+    ],
+    relatedCalculators: ['calculadora-cuenta-luz'],
+    faq: [
+      {
+        question: '¿Hasta cuándo puedo usar el Cupón de Gas Licuado?',
+        answer:
+          'Hasta el 30 de septiembre de 2026. El saldo que no se utilice hasta esa fecha vence y no podrá usarse después, según el portal oficial cupondegas.gob.cl.',
+      },
+      {
+        question: '¿Qué pasa con el saldo que no alcance a gastar?',
+        answer:
+          'Se pierde. El cupón no es canjeable por dinero, no es transferible y el saldo sin usar al 30 de septiembre de 2026 caduca sin posibilidad de recuperarlo.',
+      },
+      {
+        question: '¿Puedo activar el cupón ahora?',
+        answer:
+          'No. La activación estuvo disponible entre el 18 de mayo y el 30 de junio de 2026 con ClaveÚnica. Quien no lo activó dentro de ese plazo perdió el derecho al beneficio.',
+      },
+      {
+        question: '¿Dónde y cómo se usa el cupón?',
+        answer:
+          'En distribuidores de gas licuado adheridos, de forma presencial o con despacho a domicilio. Se paga con CuentaRUT activa a través del cupón digital en la App RutPay o la App BancoEstado, o con el cupón impreso en CajaVecina. No es válido para compras en línea ni en el extranjero.',
+      },
+    ],
+    sources: [
+      {
+        label: 'Cupón de Gas Licuado — Gobierno de Chile',
+        url: 'https://www.cupondegas.gob.cl/',
+      },
+    ],
+    content: `<p class="article-lead">El <strong>Cupón de Gas Licuado</strong> —el apoyo único de <strong>$27.000</strong> del Plan Chile Sale Adelante— tiene fecha de vencimiento: el <strong>30 de septiembre de 2026</strong> el saldo que no se haya utilizado caduca y no podrá usarse después. Si lo activaste entre mayo y junio y aún te queda saldo, quedan pocos días para usarlo en un distribuidor adherido.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El saldo no utilizado se pierde</strong><p>El cupón sirve exclusivamente para comprar gas licuado, es intransferible y no se puede canjear por dinero. Lo que no uses hasta el 30 de septiembre de 2026 vence sin reposición.</p></div></aside>
+
+<h2>Qué es el cupón y a quién estaba dirigido</h2>
+<p>Es un apoyo <strong>único y extraordinario</strong> del Plan Chile Sale Adelante, equivalente a $27.000, que solo puede gastarse en gas licuado. Estaba dirigido a hogares hasta el <strong>80% más vulnerable del Registro Social de Hogares (RSH)</strong> según la información registrada al <strong>16 de abril de 2026</strong>, y la persona beneficiaria debía ser jefa o jefe de hogar de 18 años o más según ese mismo registro — la edad también se evalúa según el registro de esa fecha, no la fecha de la compra.</p>
+<p>Una precisión importante del portal oficial: las actualizaciones del RSH posteriores al 16 de abril de 2026 no se consideran para este beneficio. Si tu hogar cambió de tramo, se regularizó o se recalificó después de esa fecha, la evaluación se hizo con la información que existía al corte. En la práctica, el derecho no depende del porcentaje de vulnerabilidad que tu hogar tenga hoy, sino del que tenía a mediados de abril — una regla de corte común en los apoyos focalizados, que evita que los cambios recientes del registro alteren la nómina de beneficiarios.</p>
+<p>Que el beneficio sea único también tiene consecuencias: no es un subsidio mensual ni un descuento permanente en la cuenta del gas. Es un saldo de $27.000 que se descuenta de las compras de gas licuado hasta agotarse —o hasta que llegue el 30 de septiembre, lo que ocurra primero. En un hogar que usa balones o cilindros con regularidad, ese monto alcanza para cubrir parte significativa de una compra, pero solo si se gasta dentro del plazo: pasada la fecha límite, el beneficio simplemente desaparece del sistema.</p>
+
+<h2>La activación ya cerró</h2>
+<p>La activación del cupón estuvo disponible entre el <strong>18 de mayo y el 30 de junio de 2026</strong>, con ClaveÚnica. Quien no completó ese paso dentro del plazo perdió el derecho al beneficio: hoy no existe una segunda ventana de activación, así que no hay trámite pendiente que habilite un cupón nuevo.</p>
+<p>Para quienes sí activaron, la fecha desde la que el cupón quedó habilitado para comprar dependió de cuándo se hizo la activación:</p>
+<table>
+<thead><tr><th>Tramo de activación</th><th>Habilitado para usar desde</th></tr></thead>
+<tbody>
+<tr><td>18 al 29 de mayo</td><td>17 de junio de 2026</td></tr>
+<tr><td>30 de mayo al 12 de junio</td><td>2 de julio de 2026</td></tr>
+<tr><td>13 al 30 de junio</td><td>21 de julio de 2026</td></tr>
+</tbody>
+</table>
+<p>El escalonamiento fue solo operativo: el monto del cupón y sus condiciones son idénticos para los tres grupos; lo único que cambió fue la fecha desde la que cada uno pudo empezar a comprar. A esta altura del año todos los tramos ya están habilitados: si activaste tu cupón, está disponible para usar desde hace semanas y lo que queda por resolver es cuánto saldo te resta y dónde gastarlo antes del vencimiento.</p>
+<p>Si no recuerdas si activaste el cupón, la forma de saberlo es revisar la App RutPay o la App BancoEstado: el cupón activo aparece allí asociado a tu CuentaRUT. Si no aparece, el derecho ya no se puede recuperar por esta vía.</p>
+<p>Esas mismas aplicaciones son donde hoy ocurre todo el ciclo del beneficio: consultar el saldo, generar el canje en el momento de la compra y confirmar que el pago se completó. Por eso el primer paso práctico, antes de llamar al distribuidor o pedir el despacho, es entrar a la app y verificar cuánto te queda disponible.</p>
+
+<h2>Cómo usarlo antes del 30 de septiembre</h2>
+<p>El cupón se usa con <strong>CuentaRUT activa</strong>. Tienes dos formas de presentarlo en el distribuidor:</p>
+<ul>
+<li><strong>Cupón digital:</strong> desde la App RutPay o la App BancoEstado. Son alternativas para el mismo beneficio, no cupones distintos.</li>
+<li><strong>Cupón impreso:</strong> puedes obtenerlo en CajaVecina, una opción útil si no usas las aplicaciones o prefieres llevar el respaldo en papel al momento de la compra.</li>
+</ul>
+<p>El pago se realiza en <strong>distribuidores de gas licuado adheridos</strong>, ya sea comprando presencialmente o pidiendo despacho a domicilio. No es válido en comercio en línea ni en el extranjero: si tu distribuidor habitual vende por una tienda web, el cupón no se puede aplicar en ese canal; el canje es directo con el repartidor o en el punto de venta adherido. Puedes usarlo en una o varias compras hasta agotar el saldo —no estás obligado a gastarlo de una vez— y si el precio de la compra supera lo que te queda en el cupón, puedes complementar con el saldo de tu propia CuentaRUT.</p>
+<p>Dos restricciones del diseño que conviene tener claras: el cupón es <strong>intransferible</strong>, de modo que solo la persona beneficiaria puede usarlo desde su CuentaRUT, y <strong>no es canjeable por dinero</strong>: no se puede retirar en efectivo, transferir como saldo común ni usar para pagar algo distinto de gas licuado.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo de uso parcial y complemento</div><ul><li>Saldo disponible en el cupón: $27.000.</li><li>Compra en distribuidor adherido: $25.000 → quedan $2.000 de cupón para una segunda compra.</li><li>Compra de $30.000 con cupón completo → se descuentan $27.000 y pagas $3.000 con tu CuentaRUT.</li></ul><span class="total">El cupón se puede dividir en varias compras y complementar con saldo propio</span></div>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Consejo oficial para el canje</strong><p>Genera el cupón en la app solo cuando el distribuidor ya esté en tu domicilio o listo para entregar, y pídele los datos que la aplicación solicita. Así evitas activar un canje que luego no puedas concretar.</p></div></aside>
+
+<h2>Errores que pueden costarte el beneficio</h2>
+<ul>
+<li><strong>No haber activado a tiempo:</strong> la ventana cerró el 30 de junio y quien no activó perdió el derecho, aunque cumpliera los requisitos del RSH.</li>
+<li><strong>Generar el canje demasiado pronto:</strong> la recomendación oficial es hacerlo cuando la entrega está por concretarse, no días antes.</li>
+<li><strong>Intentar usarlo fuera de los canales válidos:</strong> no funciona en compras en línea ni fuera de Chile, solo en distribuidores adheridos de forma presencial o con despacho a domicilio.</li>
+<li><strong>Tratar de traspasarlo:</strong> el cupón es intransferible y está amarrado a la CuentaRUT de la persona beneficiaria.</li>
+<li><strong>Dejar saldo para después:</strong> cualquier remanente al 30 de septiembre caduca, así que conviene gastar el total aunque sea en más de una compra.</li>
+</ul>
+<p>Todos estos errores tienen algo en común: se evitan revisando el saldo y usando el cupón con anticipación. Ninguno requiere un trámite nuevo — solo completar la compra dentro del plazo y por los canales válidos.</p>
+
+<h2>Qué revisar esta semana</h2>
+<ol class="steps">
+<li><strong>Confirma si tienes saldo disponible.</strong> Revisa el estado del cupón en la App RutPay o la App BancoEstado.</li>
+<li><strong>Ubica un distribuidor adherido.</strong> El portal oficial informa la cobertura; verifica que el que usas acepta el cupón antes de pedir.</li>
+<li><strong>Coordina la entrega primero.</strong> Si pides despacho, confirma fecha y datos del distribuidor antes de generar el cupón en la app.</li>
+<li><strong>Paga antes del 30 de septiembre.</strong> Si la compra supera el saldo, complementa con tu CuentaRUT para no dejar remanente.</li>
+<li><strong>Guarda el comprobante.</strong> Conserva la confirmación de la transacción por cualquier diferencia con el saldo.</li>
+</ol>
+<p>Vale la pena no dejar el canje para los últimos días: el saldo se pierde igual si el distribuidor de tu zona no alcanza a despachar a tiempo o si te queda un remanente menor que no logras usar. Mientras antes lo gastes —en una compra o en varias—, más seguro está el beneficio.</p>
+
+<h2>Qué pasa después del vencimiento</h2>
+<p>El 30 de septiembre de 2026 es la fecha límite informada por el portal oficial. El saldo no utilizado vence ese día y no podrá usarse después: no hay devolución en dinero, transferencia a otra persona ni extensión anunciada. Si tu hogar depende del gas licuado, usarlo a tiempo es la única forma de aprovechar el apoyo completo —y conviene hacerlo con margen, no el último día, por si el distribuidor de tu zona tiene agenda de despacho completa.</p>
+<p>Si después de revisar te queda alguna duda sobre tu caso particular —por ejemplo, si tu cupón figura activo pero con saldo distinto al esperado—, los canales oficiales del programa son la referencia correcta: el portal cupondegas.gob.cl y las propias apps donde se opera el cupón. Este artículo es informativo y no reemplaza esa consulta.</p>
+<p>Para profundizar en cómo ordenar los gastos del hogar —luz, gas, agua y otros servicios— revisa la <a href="/guias/hogar-servicios-basicos-chile">guía de servicios básicos del hogar</a> y la <a href="/calculadoras/calculadora-cuenta-luz">calculadora de cuenta de luz</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de septiembre de 2026 con el <a href="https://www.cupondegas.gob.cl/" target="_blank" rel="noopener">portal oficial del Cupón de Gas Licuado del Gobierno de Chile</a>. El estado individual del cupón debe confirmarse en los canales oficiales indicados por el programa.</p>`,
+  },
 ];
 
 export const RETIRED_ARTICLE_REDIRECTS = {
