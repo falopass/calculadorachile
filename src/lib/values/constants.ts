@@ -627,6 +627,118 @@ export const SUBSIDIO_UNIFICADO_EMPLEO = {
 };
 
 // ============================================
+// Bono $30.000 por hijo — Ley 21.840
+// ============================================
+/**
+ * Bono de $30.000 por niño o niña — ChileAtiende ficha 144481
+ * https://www.chileatiende.gob.cl/fichas/144481-bono-30-mil-por-hijo
+ * Ley 21.840 (04-09-2026): https://www.bcn.cl/leychile/navegar?idNorma=1227843
+ * Automático, una sola vez, no se postula; pagado por el IPS; no
+ * constituye remuneración ni renta. Beneficiarios: niños hasta 13
+ * años al 01-06-2026 en el 80% más vulnerable RSH; madre de niños
+ * nacidos entre el 02-06-2026 y el 15-03-2027 (80% RSH al 01-06-2026,
+ * pago posterior al 15-03-2027); y niños hasta 13 años en cuidado
+ * alternativo familiar (sin exigencia de vulnerabilidad). Plazo de
+ * cobro: 9 meses desde la concesión.
+ */
+export const BONO_APOYO_NINEZ = {
+  montoPorNinoCLP: 30000,
+  fechaCorte: '2026-06-01',
+  edadMaxima: 13,
+  nacidosDesde: '2026-06-02',
+  nacidosHasta: '2027-03-15',
+  plazoCobroMeses: 9,
+  ley: '21.840',
+};
+
+// ============================================
+// Becas y Gratuidad educación superior — admisión 2027
+// ============================================
+/**
+ * Portal Beneficios Estudiantiles Mineduc (verificado 26-09-2026):
+ * https://portal.beneficiosestudiantiles.cl/gratuidad
+ * FUAS admisión 2027: del 1 al 22 de octubre de 2026.
+ * Gratuidad: 60% de menores ingresos. Becas: Bicentenario y Juan
+ * Gómez Millas 70% (≥510 pts PAES, PACE exime), Excelencia
+ * Académica 80% (top 10% NEM del establecimiento), Nuevo Milenio
+ * 70% con NEM ≥5,0; Nuevo Milenio II primer año 50%.
+ */
+export const BECAS_EDUCACION_SUPERIOR_2027 = {
+  fuas: { desde: '2026-10-01', hasta: '2026-10-22' },
+  puntajePaesBecas: 510,
+  nemMinimoTecnico: 5.0,
+  gratuidad: { percentil: 60 },
+  becas: {
+    bicentenario: { percentil: 70 },
+    juanGomezMillas: { percentil: 70, topeCLP: 1150000 },
+    excelenciaAcademica: { percentil: 80, topeCLP: 1150000 },
+    nuevoMilenio: { percentil: 70, topeCLP: 600000 },
+    nuevoMilenioII: { percentil: 50, topeCLP: 860000 },
+  },
+};
+
+// ============================================
+// Subsidio de Arriendo — llamados 2026
+// ============================================
+/**
+ * Regular (ChileAtiende ficha 29888, Res. Ex. N°809 de 2026):
+ * https://www.chileatiende.gob.cl/fichas/29888-subsidio-de-arriendo-de-vivienda
+ * subsidio total 170 UF entregado mensualmente con tope 4,2 UF
+ * (4,9 UF en Arica y Parinacota, Antofagasta, Atacama, RM, Aysén y
+ * Magallanes, donde el arriendo máximo es 13 UF; en el resto 11 UF),
+ * usable en máximo 8 años; ahorro mínimo 4 UF; RSH ≤ 70%; ingreso
+ * familiar 7–25 UF (+8 UF de ingreso máximo por integrante sobre el
+ * tercero). Postulación regular 2026 finalizó el 07-08-2026.
+ * Especial personas mayores/PcD (MINVU, Res. Ex. N°808 de 2026):
+ * subsidio único de 213 UF distribuido mensualmente, cobertura máxima
+ * 90% del arriendo; postulación 08-09 al 08-10-2026; RSH ≤ 70%;
+ * ingreso 5–25 UF (+8 UF por integrante sobre tres); sin ahorro
+ * mínimo; >60 años (o cumplirlos en el año) o PcD ≥18 en el RND.
+ */
+export const SUBSIDIO_ARRIENDO_DS52 = {
+  regular: {
+    totalUF: 170,
+    topeMensualUF: 4.2,
+    topeMensualZonaUF: 4.9,
+    arriendoMaxUF: 11,
+    arriendoMaxZonaUF: 13,
+    ahorroMinUF: 4,
+    ingresoMinUF: 7,
+    ingresoMaxUF: 25,
+    plazoMaxMeses: 96,
+  },
+  especial: {
+    totalUF: 213,
+    coberturaMax: 0.9,
+    ingresoMinUF: 5,
+    ingresoMaxUF: 25,
+    postulacion: { desde: '2026-09-08', hasta: '2026-10-08' },
+  },
+  ingresoAdicionalPorIntegranteUF: 8,
+};
+
+// ============================================
+// Beneficio mortuorio — Asignación por Muerte / cuota mortuoria
+// ============================================
+/**
+ * ChileAtiende ficha 5300 (IPS):
+ * https://www.chileatiende.gob.cl/fichas/5300-asignacion-por-muerte
+ * La Asignación por Muerte reembolsa gastos funerarios con tope de
+ * 3 IMM para fines no remuneracionales vigentes a la fecha de la
+ * defunción. Quienes reciben PGU (desde 01-02-2022) tienen cuota
+ * mortuoria de 15 UF pagada por el IPS. Afiliados a AFP: cuota
+ * mortuoria de hasta 15 UF financiada con el saldo de la cuenta (el
+ * Estado cubre la diferencia hasta 15 UF si había aporte solidario
+ * o PGU). Renta vitalicia: siempre cuota mortuoria.
+ */
+export const BENEFICIO_MORTUORIO = {
+  /** Tope Asignación por Muerte: 3 × IMM no remuneracional. */
+  asignacionMuerteIMMNoRemuneracional: 3,
+  /** Cuota mortuoria AFP / PGU / renta vitalicia, en UF. */
+  cuotaMortuoriaUF: 15,
+};
+
+// ============================================
 // PGU 2026 (Ley 21.735, reajuste IPC febrero 2026)
 // La PGU sube progresivamente hasta $250.000 según Ley 21.735.
 // En febrero 2026 se reajustó por IPC 2025 (aprox. +4%).

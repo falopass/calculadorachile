@@ -3,7 +3,7 @@
 // --------------------------------------------
 // Cada id del catálogo importa SOLO su módulo de cálculo.
 // Los adapters (catálogo UI → motor) viven aquí para no inflar
-// el client con 48 imports estáticos.
+// el client con 53 imports estáticos.
 // ============================================
 
 import type { CalculatorResult } from '@/types/calculator';
@@ -752,6 +752,93 @@ export async function loadCalculationFn(
           alDiaPago: coerceBool(inputs.alDiaPago),
         });
         return subsidioElectricoToResults(result);
+      };
+    }
+
+    case 'bono-30-mil-por-hijo': {
+      const { calculateBono30MilPorHijo, bono30MilPorHijoToResults } =
+        await import('./bono-30-mil-por-hijo');
+      return (inputs) => {
+        const result = calculateBono30MilPorHijo({
+          ninos: coerceNumber(inputs.ninos),
+          rsh80: coerceBool(inputs.rsh80),
+          nacidosEnPeriodo: coerceNumber(inputs.nacidosEnPeriodo),
+          cuidadoAlternativo: coerceNumber(inputs.cuidadoAlternativo),
+        });
+        return bono30MilPorHijoToResults(result);
+      };
+    }
+
+    case 'becas-gratuidad': {
+      const { calculateBecasGratuidad, becasGratuidadToResults } =
+        await import('./becas-gratuidad');
+      return (inputs) => {
+        const nivel = inputs.nivelSocioeconomico;
+        const result = calculateBecasGratuidad({
+          nivelSocioeconomico:
+            nivel === '50' ||
+            nivel === '60' ||
+            nivel === '70' ||
+            nivel === '80'
+              ? nivel
+              : '90',
+          tipoCarrera:
+            inputs.tipoCarrera === 'tecnica' ? 'tecnica' : 'universitaria',
+          institucionGratuidad: coerceBool(inputs.institucionGratuidad),
+          puntajePaes: coerceNumber(inputs.puntajePaes),
+          nem: coerceNumber(inputs.nem),
+          top10: coerceBool(inputs.top10),
+          pace: coerceBool(inputs.pace),
+          primerAno: coerceBool(inputs.primerAno),
+        });
+        return becasGratuidadToResults(result);
+      };
+    }
+
+    case 'subsidio-arriendo': {
+      const { calculateSubsidioArriendo, subsidioArriendoToResults } =
+        await import('./subsidio-arriendo');
+      return (inputs) => {
+        const result = calculateSubsidioArriendo({
+          modalidad:
+            inputs.modalidad === 'especial-pm-pcd'
+              ? 'especial-pm-pcd'
+              : 'regular',
+          arriendoMensual: coerceNumber(inputs.arriendoMensual),
+          zonaNorteSurRM: coerceBool(inputs.zonaNorteSurRM),
+          ingresoFamiliar: coerceNumber(inputs.ingresoFamiliar),
+          integrantes: coerceNumber(inputs.integrantes, 1),
+          rsh70: coerceBool(inputs.rsh70),
+          valorUF: live?.valorUF,
+        });
+        return subsidioArriendoToResults(result);
+      };
+    }
+
+    case 'asignacion-por-muerte': {
+      const { calculateAsignacionPorMuerte, asignacionPorMuerteToResults } =
+        await import('./asignacion-por-muerte');
+      return (inputs) => {
+        const regimen = inputs.regimen;
+        const result = calculateAsignacionPorMuerte({
+          regimen:
+            regimen === 'afp' || regimen === 'pgu' ? regimen : 'ips-antiguo',
+          gastosFunerarios: coerceNumber(inputs.gastosFunerarios),
+          valorUF: live?.valorUF,
+        });
+        return asignacionPorMuerteToResults(result);
+      };
+    }
+
+    case 'tope-imponible-90-uf': {
+      const { calculateTopeImponible, topeImponibleToResults } =
+        await import('./tope-imponible-90-uf');
+      return (inputs) => {
+        const result = calculateTopeImponible({
+          sueldoImponible: coerceNumber(inputs.sueldoImponible),
+          valorUF: live?.valorUF,
+        });
+        return topeImponibleToResults(result);
       };
     }
 

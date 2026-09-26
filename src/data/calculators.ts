@@ -4850,6 +4850,538 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+  {
+    id: 'bono-30-mil-por-hijo',
+    name: 'Calculadora Bono $30.000 por Hijo',
+    description:
+      'Estima cuánto recibes por el bono único de $30.000 por cada niño o niña (Ley 21.840): automático, sin postulación y sin impuestos.',
+    slug: 'calculadora-bono-30-mil-por-hijo',
+    category: 'familia',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Bono $30.000 por hijo',
+        url: 'https://www.chileatiende.gob.cl/fichas/144481-bono-30-mil-por-hijo',
+        note: 'Beneficiarios, fechas de corte y plazos del bono automático',
+      },
+      {
+        name: 'BCN / Ley Chile — Ley 21.840',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1227843',
+        note: 'Ley publicada el 04-09-2026',
+      },
+    ],
+    keywords: [
+      'bono 30 mil por hijo',
+      'calculadora bono niños',
+      'bono por hijo 2026',
+      'ley 21840 bono',
+      'bono niñez ips',
+      'bono automático por hijo',
+    ],
+    inputs: [
+      {
+        id: 'ninos',
+        label: 'Niños hasta 13 años al 1 de junio de 2026',
+        type: 'number',
+        unit: 'count',
+        placeholder: '2',
+        required: true,
+        min: 0,
+        tooltip:
+          'Cuentan si tu hogar estaba dentro del 80% más vulnerable del Registro Social de Hogares al 01-06-2026.',
+      },
+      {
+        id: 'rsh80',
+        label: '¿Tu hogar estaba en el 80% más vulnerable del RSH al 01-06-2026?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'nacidosEnPeriodo',
+        label: 'Niños nacidos entre el 02-06-2026 y el 15-03-2027',
+        type: 'number',
+        unit: 'count',
+        placeholder: '0',
+        required: false,
+        defaultValue: 0,
+        min: 0,
+        tooltip:
+          'El bono lo recibe la madre si el hogar estaba en el 80% RSH al 01-06-2026; se paga después del 15-03-2027.',
+      },
+      {
+        id: 'cuidadoAlternativo',
+        label: 'Niños bajo cuidado alternativo familiar',
+        type: 'number',
+        unit: 'count',
+        placeholder: '0',
+        required: false,
+        defaultValue: 0,
+        min: 0,
+        tooltip:
+          'Familias de acogida, familia extensa o adultos de confianza: recibe el bono quien tenga el cuidado legal al 01-06-2026, sin exigencia de vulnerabilidad.',
+      },
+    ],
+    seoTitle: 'Bono $30.000 por Hijo 2026: calcula cuánto te corresponde',
+    seoDescription:
+      'Calcula el bono único de $30.000 por niño (Ley 21.840): automático, sin postulación, por RSH 80% o cuidado alternativo familiar.',
+    faq: [
+      {
+        question: '¿Cuánto se recibe y quién lo paga?',
+        answer:
+          'Son $30.000 por cada niño o niña beneficiario, en un solo pago. Lo paga el IPS de forma automática: no se postula y no constituye remuneración ni renta, por lo que no paga impuestos, cotizaciones ni descuentos.',
+      },
+      {
+        question: '¿Quiénes son beneficiarios?',
+        answer:
+          'Niños y niñas que al 1 de junio de 2026 tenían hasta 13 años y su hogar estaba en el 80% más vulnerable del RSH; la madre de niños nacidos entre el 02-06-2026 y el 15-03-2027 si el hogar cumplía ese requisito (pago después del 15-03-2027); y niños hasta 13 años en cuidado alternativo familiar, donde lo recibe quien tiene el cuidado legal sin exigencia de vulnerabilidad.',
+      },
+      {
+        question: '¿Cómo se paga el bono?',
+        answer:
+          'Se prioriza a quienes reciben SUF, asignación familiar o maternal, subsidio de discapacidad o están en el Subsistema de Seguridades y Oportunidades; si no, se paga al jefe o jefa de hogar por CuentaRUT o presencialmente en BancoEstado.',
+      },
+      {
+        question: '¿Cuánto tiempo tengo para cobrarlo?',
+        answer:
+          'Tienes 9 meses para cobrarlo desde que se genera el documento de pago. Si hubo un error o no recibiste el bono correspondiendo, el plazo de reclamo es de 15 meses desde la publicación de la ley (04-09-2026).',
+      },
+    ],
+  },
+  {
+    id: 'becas-gratuidad',
+    name: 'Calculadora Becas y Gratuidad',
+    description:
+      'Estima a qué beneficios de arancel podrías optar para la admisión 2027: gratuidad, Bicentenario, Juan Gómez Millas, Excelencia Académica y Nuevo Milenio.',
+    slug: 'calculadora-becas-gratuidad',
+    category: 'educacion',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'Portal Beneficios Estudiantiles — Gratuidad',
+        url: 'https://portal.beneficiosestudiantiles.cl/gratuidad',
+        note: 'Requisitos y cobertura de la gratuidad (60% de menores ingresos)',
+      },
+      {
+        name: 'Portal Beneficios Estudiantiles — Beca Juan Gómez Millas',
+        url: 'https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-juan-gomez-millas-bjgm',
+        note: '70% de menores ingresos, PAES ≥510 puntos, tope $1.150.000',
+      },
+      {
+        name: 'Portal Beneficios Estudiantiles — Beca Nuevo Milenio',
+        url: 'https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-nuevo-milenio-bnm',
+        note: 'Carreras técnicas o profesionales en IP, NEM ≥5,0, topes $600.000 y $860.000',
+      },
+      {
+        name: 'ChileAtiende — Gratuidad en la educación superior (FUAS)',
+        url: 'https://www.chileatiende.gob.cl/fichas/43203-gratuidad-en-la-educacion-superior',
+        note: 'FUAS admisión 2027: del 1 al 22 de octubre de 2026',
+      },
+    ],
+    keywords: [
+      'gratuidad 2027',
+      'becas educación superior',
+      'calculadora gratuidad',
+      'beca bicentenario',
+      'beca juan gómez millas',
+      'beca nuevo milenio',
+      'fuas 2027',
+    ],
+    inputs: [
+      {
+        id: 'nivelSocioeconomico',
+        label: 'Nivel socioeconómico del hogar',
+        type: 'select',
+        required: true,
+        defaultValue: '90',
+        options: [
+          { value: '50', label: 'Hasta el 50% de menores ingresos' },
+          { value: '60', label: '51% a 60% de menores ingresos' },
+          { value: '70', label: '61% a 70% de menores ingresos' },
+          { value: '80', label: '71% a 80% de menores ingresos' },
+          { value: '90', label: 'Más del 80%' },
+        ],
+        tooltip:
+          'Lo define la evaluación del FUAS validada por el Estado; el Mineduc publica el resultado en diciembre.',
+      },
+      {
+        id: 'tipoCarrera',
+        label: 'Tipo de carrera',
+        type: 'select',
+        required: true,
+        defaultValue: 'universitaria',
+        options: [
+          { value: 'universitaria', label: 'Universitaria (pregrado)' },
+          {
+            value: 'tecnica',
+            label: 'Técnica de nivel superior o profesional en IP',
+          },
+        ],
+      },
+      {
+        id: 'institucionGratuidad',
+        label: '¿La institución está adscrita a la gratuidad?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'puntajePaes',
+        label: 'Puntaje promedio PAES (pruebas obligatorias)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '600',
+        required: false,
+        defaultValue: 0,
+        min: 0,
+        max: 1000,
+        tooltip: 'Déjalo en 0 si no rendiste la PAES.',
+      },
+      {
+        id: 'nem',
+        label: 'Promedio de notas de enseñanza media (NEM)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '5,5',
+        required: false,
+        min: 1,
+        max: 7,
+      },
+      {
+        id: 'top10',
+        label: '¿Tu NEM está dentro del 10% más alto de tu establecimiento?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Aplica para municipal, SLE, particular subvencionado o administración delegada, ingresando el año siguiente al egreso.',
+      },
+      {
+        id: 'pace',
+        label: '¿Ingresaste por el programa PACE?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip: 'PACE exime del puntaje PAES en Bicentenario y Juan Gómez Millas.',
+      },
+      {
+        id: 'primerAno',
+        label: '¿Ingresas a primer año de estudios superiores?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    seoTitle: 'Becas y Gratuidad 2027: calcula a qué beneficios puedes optar',
+    seoDescription:
+      'Estima gratuidad, Beca Bicentenario, Juan Gómez Millas, Excelencia Académica y Nuevo Milenio según tu nivel socioeconómico, PAES y NEM.',
+    faq: [
+      {
+        question: '¿Cuándo se llena el FUAS para la admisión 2027?',
+        answer:
+          'El Formulario Único de Acreditación Socioeconómica (FUAS) para la admisión 2027 se llena del 1 al 22 de octubre de 2026. Es obligatorio para optar a gratuidad y becas; los resultados de asignación, apelación y renovación se entregan desde el 15-10-2026.',
+      },
+      {
+        question: '¿Qué cubre la gratuidad y quién puede optar?',
+        answer:
+          'Cubre el arancel y la matrícula durante la duración nominal de una carrera de pregrado presencial en una institución adscrita. Requiere hogar dentro del 60% de menores ingresos, no tener título profesional previo ni licenciatura terminal (hay excepciones para pedagogía y para técnicos que pasan a carrera profesional) y nacionalidad chilena o residencia definitiva/temporal (la temporal exige enseñanza media completa en Chile).',
+      },
+      {
+        question: '¿Qué piden Bicentenario y Juan Gómez Millas?',
+        answer:
+          'Ambas exigen hogar en el 70% de menores ingresos y, para nuevos, un promedio de al menos 510 puntos en las pruebas obligatorias PAES (el ingreso PACE exime ese puntaje). Bicentenario cubre el arancel de referencia anual en carreras universitarias; Juan Gómez Millas cubre hasta $1.150.000 del arancel en cualquier institución acreditada al 31-12-2025.',
+      },
+      {
+        question: '¿Qué piden Excelencia Académica y Nuevo Milenio?',
+        answer:
+          'Excelencia Académica (BEA): hogar en el 80% y NEM dentro del 10% más alto del establecimiento, hasta $1.150.000. Nuevo Milenio: 70% para carreras técnicas o profesionales en IP con NEM ≥5,0 y hasta $600.000; su modalidad II es para primer año en hogares hasta el 50% con institución acreditada por al menos 3 años, hasta $860.000.',
+      },
+      {
+        question: '¿Se pueden sumar becas y gratuidad en la misma carrera?',
+        answer:
+          'No: los beneficios de arancel no se acumulan en la misma carrera. Además, no se puede haber recibido becas de arancel Mineduc en dos oportunidades, y con gratuidad previa la beca solo aplica en una carrera distinta. Esta calculadora es orientativa: la asignación real depende del FUAS.',
+      },
+    ],
+  },
+  {
+    id: 'subsidio-arriendo',
+    name: 'Calculadora Subsidio de Arriendo',
+    description:
+      'Estima el aporte mensual del subsidio de arriendo: 170 UF del llamado regular (hasta 4,2 UF/mes) o 213 UF del especial para personas mayores y con discapacidad.',
+    slug: 'calculadora-subsidio-arriendo',
+    category: 'vivienda',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Subsidio de arriendo de vivienda',
+        url: 'https://www.chileatiende.gob.cl/fichas/29888-subsidio-de-arriendo-de-vivienda',
+        note: 'Llamado regular 2026 (Res. Ex. N°809): 170 UF, topes y requisitos',
+      },
+      {
+        name: 'MINVU — Subsidio arriendo personas mayores y con discapacidad 2026',
+        url: 'https://www.minvu.gob.cl/postulacion/subsidio-de-arriendo-para-personas-mayores-y-personas-con-discapacidad-llamado-de-2026/',
+        note: 'Llamado especial (Res. Ex. N°808): 213 UF, postulación 08-09 al 08-10-2026',
+      },
+    ],
+    keywords: [
+      'subsidio de arriendo',
+      'calculadora subsidio arriendo',
+      'subsidio arriendo minvu',
+      '170 uf arriendo',
+      'subsidio arriendo adultos mayores',
+      'aporte arriendo 2026',
+    ],
+    inputs: [
+      {
+        id: 'modalidad',
+        label: 'Modalidad del llamado',
+        type: 'select',
+        required: true,
+        defaultValue: 'regular',
+        options: [
+          { value: 'regular', label: 'Regular (postulación cerrada el 07-08-2026)' },
+          {
+            value: 'especial-pm-pcd',
+            label: 'Especial personas mayores o con discapacidad (08-09 al 08-10-2026)',
+          },
+        ],
+      },
+      {
+        id: 'arriendoMensual',
+        label: 'Arriendo mensual pactado',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$360.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Llamado regular: máximo 11 UF, o 13 UF en Arica y Parinacota, Antofagasta, Atacama, RM, Aysén y Magallanes.',
+      },
+      {
+        id: 'zonaNorteSurRM',
+        label: '¿La vivienda está en Arica y Parinacota, Antofagasta, Atacama, RM, Aysén o Magallanes?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'En esas regiones el llamado regular sube el arriendo máximo a 13 UF y el aporte mensual a 4,9 UF.',
+      },
+      {
+        id: 'ingresoFamiliar',
+        label: 'Ingreso familiar mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$800.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Regular: entre 7 y 25 UF. Especial PM/PcD: entre 5 y 25 UF. En ambos, el máximo sube 8 UF por cada integrante sobre el tercero.',
+      },
+      {
+        id: 'integrantes',
+        label: 'Integrantes de la familia',
+        type: 'number',
+        unit: 'count',
+        placeholder: '3',
+        required: true,
+        min: 1,
+      },
+      {
+        id: 'rsh70',
+        label: '¿Tu hogar está dentro del 70% más vulnerable del RSH?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    seoTitle: 'Subsidio de Arriendo 2026: calcula el aporte mensual en UF',
+    seoDescription:
+      'Estima el subsidio de arriendo: 170 UF del llamado regular (tope 4,2 UF/mes) o 213 UF del especial PM/PcD con cobertura hasta 90%.',
+    faq: [
+      {
+        question: '¿Cuánto entrega el subsidio de arriendo regular?',
+        answer:
+          'El llamado regular 2026 entrega 170 UF repartidas mensualmente con un tope de 4,2 UF por mes, usable de forma consecutiva o fragmentada en un máximo de 8 años. El arriendo no puede superar 11 UF y se exige un ahorro mínimo de 4 UF; la familia paga la parte restante del arriendo.',
+      },
+      {
+        question: '¿Qué cambia en algunas regiones?',
+        answer:
+          'En todas las comunas de Arica y Parinacota, Antofagasta, Atacama, Metropolitana, Aysén y Magallanes el arriendo máximo sube a 13 UF y el aporte mensual del llamado regular a 4,9 UF.',
+      },
+      {
+        question: '¿Qué requisitos de ingreso y RSH se piden?',
+        answer:
+          'En ambos llamados se exige RSH dentro del 70% más vulnerable. El regular pide ingreso familiar entre 7 y 25 UF; el especial entre 5 y 25 UF. En ambos, el ingreso máximo sube 8 UF por cada integrante sobre el tercero.',
+      },
+      {
+        question: '¿Qué es el llamado especial para personas mayores y con discapacidad?',
+        answer:
+          'Entrega un subsidio único de 213 UF distribuido mensualmente, con cobertura de hasta el 90% del arriendo y sin exigir ahorro mínimo. Aplica a personas sobre 60 años (o que los cumplan en el año) o personas con discapacidad de 18 o más inscritas en el RND. La postulación va del 08-09 al 08-10-2026.',
+      },
+      {
+        question: '¿Aún se puede postular?',
+        answer:
+          'La postulación del llamado regular 2026 finalizó el 07-08-2026. El llamado especial para personas mayores y con discapacidad postula del 08-09 al 08-10-2026. Esta calculadora estima el beneficio, no reemplaza la postulación oficial.',
+      },
+    ],
+  },
+  {
+    id: 'asignacion-por-muerte',
+    name: 'Calculadora Asignación por Muerte',
+    description:
+      'Estima el reembolso de gastos funerarios: Asignación por Muerte (tope 3 IMM no remuneracionales) o cuota mortuoria de 15 UF según el régimen previsional.',
+    slug: 'calculadora-asignacion-por-muerte',
+    category: 'beneficios',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'ChileAtiende — Asignación por Muerte',
+        url: 'https://www.chileatiende.gob.cl/fichas/5300-asignacion-por-muerte',
+        note: 'Topes, beneficiarios y documentos del beneficio mortuorio del IPS',
+      },
+    ],
+    keywords: [
+      'asignación por muerte',
+      'cuota mortuoria',
+      'calculadora cuota mortuoria',
+      'gastos funerarios chile',
+      'beneficio mortuorio ips',
+      '15 uf funeral',
+    ],
+    inputs: [
+      {
+        id: 'regimen',
+        label: 'Régimen previsional de la persona fallecida',
+        type: 'select',
+        required: true,
+        defaultValue: 'ips-antiguo',
+        options: [
+          {
+            value: 'ips-antiguo',
+            label: 'Antiguo sistema previsional (Asignación por Muerte)',
+          },
+          {
+            value: 'afp',
+            label: 'Afiliado a AFP o pensionado por renta vitalicia',
+          },
+          { value: 'pgu', label: 'Pensionado con PGU' },
+        ],
+      },
+      {
+        id: 'gastosFunerarios',
+        label: 'Gastos funerarios (según factura)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.200.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Se requiere la factura original de la funeraria, entre otros documentos.',
+      },
+    ],
+    seoTitle: 'Asignación por Muerte 2026: calcula el reembolso funerario',
+    seoDescription:
+      'Calcula el beneficio mortuorio: Asignación por Muerte hasta $1.070.445 (3 IMM) o cuota mortuoria de 15 UF para AFP, PGU y renta vitalicia.',
+    faq: [
+      {
+        question: '¿Cuál es el tope de la Asignación por Muerte?',
+        answer:
+          'El tope es 3 ingresos mínimos para fines no remuneracionales vigentes a la fecha de la defunción, equivalente a $1.070.445 con el valor actual. El reembolso cubre los gastos funerarios hasta ese monto.',
+      },
+      {
+        question: '¿Qué es la cuota mortuoria de 15 UF?',
+        answer:
+          'Para afiliados a AFP (trabajadores o pensionados) la cuota mortuoria llega hasta 15 UF financiada con el saldo de la cuenta; si la persona recibía aporte solidario o PGU, el Estado cubre la diferencia hasta 15 UF. Quienes perciben PGU (desde el 01-02-2022) la cobran al IPS, y con renta vitalicia siempre existe cuota mortuoria.',
+      },
+      {
+        question: '¿Quiénes tienen derecho al monto máximo?',
+        answer:
+          'El cónyuge, los hijos o el padre o la madre que se hagan cargo del funeral tienen derecho al monto máximo de la Asignación por Muerte.',
+      },
+      {
+        question: '¿Qué documentos se necesitan?',
+        answer:
+          'Principalmente la factura original de la funeraria, junto con los documentos de respaldo que exige la ficha del trámite en ChileAtiende.',
+      },
+    ],
+  },
+  {
+    id: 'tope-imponible-90-uf',
+    name: 'Calculadora Tope Imponible 90 UF',
+    description:
+      'Calcula los topes imponibles vigentes en pesos (90 UF para AFP y salud; 135,2 UF para el seguro de cesantía) y las cotizaciones sobre el sueldo topado.',
+    slug: 'calculadora-tope-imponible-90-uf',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-09-26',
+    sources: [
+      {
+        name: 'Dirección del Trabajo — Tope imponible AFP y salud',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-118076.html',
+        note: 'Tope de 90 UF mensuales para cotizaciones de AFP y salud (Res. Ex. 237 SP)',
+      },
+      {
+        name: 'Dirección del Trabajo — Tope imponible seguro de cesantía',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-118077.html',
+        note: 'Tope de 135,2 UF para el seguro de cesantía (Res. Ex. 236 SP)',
+      },
+    ],
+    keywords: [
+      'tope imponible',
+      'tope imponible 90 uf',
+      'calculadora tope imponible',
+      'tope afp salud',
+      'tope seguro cesantía 135 uf',
+      'sueldo sobre tope imponible',
+    ],
+    inputs: [
+      {
+        id: 'sueldoImponible',
+        label: 'Sueldo imponible mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$4.000.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Base sobre la que se calculan las cotizaciones de AFP (10%), salud (7%) y seguro de cesantía (0,6% en contrato indefinido).',
+      },
+    ],
+    seoTitle: 'Tope Imponible 90 UF 2026: calcula tus cotizaciones topadas',
+    seoDescription:
+      'Calcula el tope imponible en pesos: 90 UF para AFP y salud, 135,2 UF para el seguro de cesantía, y las cotizaciones sobre el sueldo topado.',
+    faq: [
+      {
+        question: '¿Cuál es el tope imponible vigente?',
+        answer:
+          'Las cotizaciones de AFP y salud se calculan hasta un tope de 90 UF mensuales. El seguro de cesantía tiene un tope separado de 135,2 UF. La parte del sueldo sobre cada tope no paga esa cotización.',
+      },
+      {
+        question: '¿Qué cotizaciones se calculan sobre el sueldo topado?',
+        answer:
+          'La cotización obligatoria de AFP es el 10% y la de salud el 7%, ambas sobre el sueldo con tope de 90 UF. El seguro de cesantía del trabajador con contrato indefinido es el 0,6% sobre el sueldo con tope de 135,2 UF.',
+      },
+      {
+        question: '¿Qué pasa con el sueldo sobre el tope?',
+        answer:
+          'El exceso sobre el tope imponible no paga cotizaciones previsionales ni de salud. La calculadora muestra ese exceso como “sin cotizaciones”.',
+      },
+      {
+        question: '¿El tope cambia?',
+        answer:
+          'Sí: el tope en UF se actualiza anualmente por la Superintendencia de Pensiones (en 2026 quedó en 90 UF para AFP/salud y 135,2 UF para cesantía) y su valor en pesos varía con la UF del mes.',
+      },
+    ],
+  },
 ];
 
 export const calculators: Calculator[] = calculatorCatalog.map((calculator) => ({

@@ -924,4 +924,153 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Descuento total $22.548 ($3.758 por mes en la cuenta de luz).',
     },
   },
+  'bono-30-mil-por-hijo': {
+    summary:
+      'Multiplica $30.000 por cada niño beneficiario del bono único de la Ley 21.840: niños hasta 13 años al 01-06-2026 con hogar en el 80% RSH, nacidos entre el 02-06-2026 y el 15-03-2027 (pago posterior), y niños en cuidado alternativo familiar sin exigencia de vulnerabilidad.',
+    calculationSteps: [
+      'Suma los niños con derecho: con 80% RSH cuentan los menores de 13 años al 01-06-2026 y los nacidos entre el 02-06-2026 y el 15-03-2027.',
+      'Agrega los niños bajo cuidado alternativo familiar (no exigen RSH).',
+      'Multiplica por $30.000; la parte de los nacidos en el período se paga después del 15-03-2027.',
+    ],
+    assumptions: [
+      'La edad y residencia de cada niño cumplen los cortes legales (hasta 13 años al 01-06-2026).',
+      'El hogar estaba efectivamente inscrito en el 80% más vulnerable del RSH a la fecha de corte.',
+    ],
+    limitations: [
+      'El bono es automático: la calculadora estima el monto, no confirma la generación del documento de pago.',
+      'No verifica la condición de cuidado legal ni la fecha de nacimiento de cada niño.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 2 niños en edad + 1 nacido en el período, hogar 80% RSH',
+      inputs: [
+        'Niños ≤13 al 01-06-2026: 2',
+        'Nacidos 02-06-2026 a 15-03-2027: 1',
+        'RSH 80%: sí',
+      ],
+      development: [
+        '3 niños beneficiarios × $30.000',
+        'Del total, $30.000 corresponde al nacido en el período',
+      ],
+      result: 'Bono total $90.000 ($30.000 se pagan después del 15-03-2027).',
+    },
+  },
+  'becas-gratuidad': {
+    summary:
+      'Cruza el nivel socioeconómico del FUAS con los requisitos de cada beneficio de arancel para la admisión 2027: gratuidad (60%), Bicentenario y Juan Gómez Millas (70%, PAES ≥510 o PACE), Excelencia Académica (80%, top 10% NEM) y Nuevo Milenio I/II (70%/50%, NEM ≥5,0).',
+    calculationSteps: [
+      'Lee el nivel socioeconómico declarado según los tramos del FUAS.',
+      'Gratuidad: nivel hasta el 60% e institución adscrita. BB: hasta 70%, carrera universitaria y PAES ≥510 o PACE. BJGM: hasta 70% con PAES ≥510 o PACE.',
+      'BEA: hasta 80% con NEM en el 10% superior del establecimiento. BNM I: hasta 70%, carrera técnica o profesional en IP y NEM ≥5,0; BNM II: hasta 50% en primer año con NEM ≥5,0.',
+      'Muestra cada beneficio que cumple y el mayor tope anual en pesos.',
+    ],
+    assumptions: [
+      'El nivel socioeconómico ingresado corresponde al que entregará el FUAS; el Mineduc lo publica en diciembre.',
+      'Se cumplen los requisitos comunes: nacionalidad chilena, sin título previo ni licenciatura terminal, sin dos becas de arancel Mineduc anteriores y carrera de pregrado presencial.',
+    ],
+    limitations: [
+      'Es orientativo: la asignación real la define el FUAS y la clasificación validada por el Estado.',
+      'Las becas y la gratuidad no se acumulan en la misma carrera; los topes son anuales y no garantizan la cobertura total del arancel real.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: hogar hasta el 60%, carrera universitaria adscrita, PAES 600',
+      inputs: [
+        'Nivel socioeconómico: hasta 60%',
+        'Institución adscrita: sí',
+        'PAES: 600',
+      ],
+      development: [
+        'Gratuidad: cumple (≤60% + adscrita)',
+        'BB y BJGM: cumplen (≤70% + PAES ≥510)',
+      ],
+      result:
+        'Optaría a gratuidad (100% arancel y matrícula), Bicentenario y Juan Gómez Millas (tope $1.150.000).',
+    },
+  },
+  'subsidio-arriendo': {
+    summary:
+      'Convierte el arriendo a UF y calcula el aporte mensual: regular tope 4,2 UF (4,9 en zonas norte/sur/RM) sobre 170 UF hasta 8 años, o especial PM/PcD con 90% del arriendo sobre 213 UF; valida arriendo máximo, RSH 70% y tramo de ingreso familiar.',
+    calculationSteps: [
+      'Convierte arriendo e ingreso familiar a UF con la UF vigente.',
+      'Regular: verifica arriendo ≤11 UF (13 en zonas), ingreso entre 7 y 25 UF (+8 UF por integrante sobre el tercero) y RSH ≤70%; aporte = min(tope, arriendo) hasta agotar 170 UF o 96 meses.',
+      'Especial PM/PcD: aporte = 90% del arriendo mensual hasta agotar 213 UF; ingreso entre 5 y 25 UF (+8 UF por integrante sobre tres), sin ahorro mínimo.',
+      'El copago familiar es el arriendo menos el subsidio mensual.',
+    ],
+    assumptions: [
+      'Se cumplen los requisitos no medibles aquí: ahorro mínimo de 4 UF (regular) y condición de persona mayor o PcD inscrita en el RND (especial).',
+      'La UF usada es la vigente al momento del cálculo; los montos reales varían con la UF.',
+    ],
+    limitations: [
+      'La postulación regular 2026 cerró el 07-08-2026 y la especial va del 08-09 al 08-10-2026: la estimación no equivale a postular.',
+      'El subsidio puede usarse de forma fragmentada en hasta 8 años; la duración mostrada asume meses consecutivos.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: arriendo $360.000 (9 UF), llamado regular, fuera de zona',
+      inputs: [
+        'Arriendo: $360.000 (9 UF con UF $40.000)',
+        'Ingreso familiar: $800.000 (20 UF), 3 integrantes, RSH ≤70%',
+      ],
+      development: [
+        'Aporte = min(4,2 UF; 9 UF) = 4,2 UF = $168.000',
+        'Meses = ⌊170 / 4,2⌋ = 40 (remanente 2 UF)',
+      ],
+      result: 'Subsidio $168.000/mes por 40 meses; copago familiar $192.000.',
+    },
+  },
+  'asignacion-por-muerte': {
+    summary:
+      'Reembolsa los gastos funerarios hasta el tope del régimen: Asignación por Muerte del antiguo sistema previsional (3 IMM no remuneracionales = $1.070.445) o cuota mortuoria de 15 UF para AFP, PGU y renta vitalicia.',
+    calculationSteps: [
+      'Identifica el régimen: antiguo sistema previsional, AFP/renta vitalicia o pensionado PGU.',
+      'Fija el tope: 3 × IMM no remuneracional para el IPS antiguo; 15 UF para AFP, PGU y renta vitalicia.',
+      'El reembolso es el menor entre los gastos funerarios declarados y el tope; el resto es diferencia no cubierta.',
+    ],
+    assumptions: [
+      'La persona fallecida era beneficiario activo o pasivo del régimen declarado.',
+      'Quien cobra (cónyuge, hijos, padre o madre a cargo del funeral) tiene derecho al monto máximo.',
+    ],
+    limitations: [
+      'No descuenta financiamiento del saldo de la cuenta AFP: en AFP la cuota sale del saldo y el Estado solo cubre la diferencia hasta 15 UF si había aporte solidario o PGU.',
+      'Requiere documentos (factura original de la funeraria, entre otros) que esta estimación no valida.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: gastos $1.500.000, régimen IPS antiguo',
+      inputs: [
+        'Régimen: antiguo sistema previsional',
+        'Gastos funerarios: $1.500.000',
+      ],
+      development: [
+        'Tope = 3 × $356.815 (IMM no remuneracional) = $1.070.445',
+        'Reembolso = min($1.500.000; $1.070.445)',
+      ],
+      result: 'Reembolso $1.070.445; diferencia no cubierta $429.555.',
+    },
+  },
+  'tope-imponible-90-uf': {
+    summary:
+      'Convierte los topes imponibles a pesos con la UF vigente (90 UF para AFP y salud; 135,2 UF para seguro de cesantía) y calcula las cotizaciones sobre el sueldo efectivamente topado.',
+    calculationSteps: [
+      'Calcula los topes en pesos: 90 × UF (AFP/salud) y 135,2 × UF (cesantía).',
+      'El imponible considerado es el menor entre el sueldo y cada tope; el exceso no paga cotizaciones.',
+      'Aplica las tasas sobre el sueldo topado: AFP 10%, salud 7% y seguro de cesantía del trabajador 0,6% (contrato indefinido, tope 135,2 UF).',
+    ],
+    assumptions: [
+      'Se usa la UF vigente al momento del cálculo (o el valor de respaldo local).',
+      'Las tasas corresponden a la cotización obligatoria AFP, el 7% legal de salud y el seguro de cesantía del trabajador con contrato indefinido.',
+    ],
+    limitations: [
+      'No incluye la comisión de la AFP, el SIS ni las cotizaciones del empleador.',
+      'Para plazo fijo el seguro de cesantía lo paga solo el empleador; aquí se muestra siempre la tasa del trabajador de contrato indefinido.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: sueldo imponible $4.000.000 con UF $41.057,20',
+      inputs: ['Sueldo imponible: $4.000.000', 'UF: $41.057,20'],
+      development: [
+        'Tope AFP/salud = 90 UF = $3.695.148',
+        'Exceso = $4.000.000 − $3.695.148 = $304.852',
+        'AFP = 10% × $3.695.148 ≈ $369.515; salud 7% ≈ $258.660',
+        'Cesantía 0,6% × $4.000.000 = $24.000 (bajo el tope de 135,2 UF)',
+      ],
+      result: 'Cotizaciones topadas: AFP $369.515, salud $258.660 y cesantía $24.000; $304.852 del sueldo no cotiza.',
+    },
+  },
 };
