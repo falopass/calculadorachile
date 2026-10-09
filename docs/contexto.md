@@ -5,7 +5,7 @@ Constitución del repo: [`AGENTS.md`](../AGENTS.md).
 Plan de posts: [`plan-editorial.md`](./plan-editorial.md).  
 Research: [`research/`](./research/).
 
-**Última actualización:** 2026-07-13
+**Última actualización:** 2026-10-08
 
 ---
 
@@ -24,9 +24,9 @@ Research: [`research/`](./research/).
 
 | Pieza | Estado |
 |-------|--------|
-| Calculadoras activas | **40** |
-| Módulos + tests | **40 + 42** |
-| noIndex | **8** |
+| Calculadoras activas | **54** |
+| Módulos + tests | **54 + 56** |
+| noIndex | **9** |
 | Guías / blog | 12 / ~19 |
 | `bono-bodas-oro` | **Reactivado 26-09-2026** (ficha 5369 verificada) |
 
