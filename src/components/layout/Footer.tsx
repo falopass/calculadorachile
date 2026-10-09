@@ -44,6 +44,7 @@ const footerLinks = {
       { href: '/faq', label: 'Preguntas frecuentes' },
       { href: '/acerca-de', label: 'Acerca de CalculaChile' },
       { href: '/metodologia', label: 'Método y correcciones' },
+      { href: '/prensa', label: 'Prensa' },
     ],
   },
 };
