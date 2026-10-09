@@ -16,6 +16,9 @@ const IDS = [
   'finiquito',
   'utm-clp',
   'uf-clp',
+  'sueldo-part-time',
+  'factor-hora-extra',
+  'tope-imponible-90-uf',
 ];
 
 describe('getQuickAnswer', () => {

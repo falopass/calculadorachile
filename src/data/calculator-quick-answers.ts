@@ -15,7 +15,14 @@
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
 import { formatCLP2 } from '@/lib/seo/live-value-title';
-import { INGRESO_MINIMO, ASIGNACION_FAMILIAR_2026, CONTRIBUCIONES_BIENES_RAICES, UTM } from '@/lib/values/constants';
+import {
+  INGRESO_MINIMO,
+  JORNADA_LEGAL,
+  ASIGNACION_FAMILIAR_2026,
+  CONTRIBUCIONES_BIENES_RAICES,
+  TOPE_IMPOSITIVO,
+  UTM,
+} from '@/lib/values/constants';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
 import { calculateCreditoCAE } from '@/lib/calculations/credito-cae';
 import { calculatePatenteComercial } from '@/lib/calculations/patente-comercial';
@@ -29,6 +36,9 @@ import { calculateHorasExtra } from '@/lib/calculations/horas-extra';
 import { calculateFiniquito } from '@/lib/calculations/finiquito';
 import { calculateUTMCLP } from '@/lib/calculations/utm-clp';
 import { calculateUFCLP } from '@/lib/calculations/uf-clp';
+import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
+import { calculateFactorHoraExtra } from '@/lib/calculations/factor-hora-extra';
+import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf';
 
 export interface QuickAnswer {
   /** H1 de la página; si se omite se usa `calculator.name`. */
@@ -61,10 +71,7 @@ function formatNum(value: number, decimals = 2): string {
  * Devuelve el quick answer de una calculadora, o `null` si la
  * calculadora no tiene entrada (las demás páginas no cambian).
  */
-export function getQuickAnswer(
-  calculatorId: string,
-  ctx: QuickAnswerContext,
-): QuickAnswer | null {
+export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): QuickAnswer | null {
   switch (calculatorId) {
     case 'iva': {
       const netos = [10_000, 50_000, 100_000, 1_000_000];
@@ -146,17 +153,28 @@ export function getQuickAnswer(
     case 'asignacion-familiar': {
       const t = ASIGNACION_FAMILIAR_2026;
       const rows = [
-        ['Tramo A', `hasta ${formatCLP(t.tramoA.ingresoMaximoCLP)}`, formatCLP(t.tramoA.montoPorCargaCLP)],
-        ['Tramo B', `hasta ${formatCLP(t.tramoB.ingresoMaximoCLP)}`, formatCLP(t.tramoB.montoPorCargaCLP)],
-        ['Tramo C', `hasta ${formatCLP(t.tramoC.ingresoMaximoCLP)}`, formatCLP(t.tramoC.montoPorCargaCLP)],
+        [
+          'Tramo A',
+          `hasta ${formatCLP(t.tramoA.ingresoMaximoCLP)}`,
+          formatCLP(t.tramoA.montoPorCargaCLP),
+        ],
+        [
+          'Tramo B',
+          `hasta ${formatCLP(t.tramoB.ingresoMaximoCLP)}`,
+          formatCLP(t.tramoB.montoPorCargaCLP),
+        ],
+        [
+          'Tramo C',
+          `hasta ${formatCLP(t.tramoC.ingresoMaximoCLP)}`,
+          formatCLP(t.tramoC.montoPorCargaCLP),
+        ],
         ['Tramo D', `sobre ${formatCLP(t.tramoC.ingresoMaximoCLP)}`, formatCLP(0)],
       ];
       return {
         h1: 'Asignación familiar 2026: tramos y monto por carga',
         lead: `La asignación familiar paga un monto fijo por cada carga reconocida según el tramo de ingreso: ${formatCLP(t.tramoA.montoPorCargaCLP)} en el tramo A, ${formatCLP(t.tramoB.montoPorCargaCLP)} en el B y ${formatCLP(t.tramoC.montoPorCargaCLP)} en el C. Sobre el tope del tramo C no hay derecho.`,
         example: {
-          caption:
-            'Tramos y montos por carga vigentes desde el 1 de mayo de 2026 (Ley 21.830).',
+          caption: 'Tramos y montos por carga vigentes desde el 1 de mayo de 2026 (Ley 21.830).',
           headers: ['Tramo', 'Ingreso mensual', 'Monto por carga'],
           rows,
         },
@@ -180,7 +198,7 @@ export function getQuickAnswer(
       });
       return {
         h1: 'Calculadora de gratificación legal: 25% con tope 4,75 IMM',
-        lead: `En el sistema del artículo 50 del Código del Trabajo la gratificación es el menor entre el 25% de la remuneración mensual y el tope de 4,75 ingresos mínimos dividido en 12 (${formatCLP(Math.round(INGRESO_MINIMO.mensual * 4.75 / 12))} mensuales con el IMM vigente).`,
+        lead: `En el sistema del artículo 50 del Código del Trabajo la gratificación es el menor entre el 25% de la remuneración mensual y el tope de 4,75 ingresos mínimos dividido en 12 (${formatCLP(Math.round((INGRESO_MINIMO.mensual * 4.75) / 12))} mensuales con el IMM vigente).`,
         example: {
           caption: `12 meses trabajados, IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026.`,
           headers: ['Sueldo bruto', 'Gratificación mensual', 'Gratificación anual', 'Método'],
@@ -253,11 +271,7 @@ export function getQuickAnswer(
           horasExtra: 10,
           jornadaSemanal: 42,
         });
-        return [
-          formatCLP(sueldoBruto),
-          formatCLP(r.valorHoraExtra),
-          formatCLP(r.totalHorasExtra),
-        ];
+        return [formatCLP(sueldoBruto), formatCLP(r.valorHoraExtra), formatCLP(r.totalHorasExtra)];
       });
       return {
         h1: 'Calculadora de horas extra con jornada de 42 horas',
@@ -305,14 +319,17 @@ export function getQuickAnswer(
     }
 
     case 'utm-clp': {
-      const montos = [1, 5, 10, 12, 50];
+      const montos = [1, 2, 5, 10, 12, 20, 50, 100];
       const rows = montos.map((monto) => {
         const r = calculateUTMCLP({
           monto,
           direccion: 'utm-a-clp',
           valorUTM: ctx.utm,
         });
-        return [monto === 12 ? '12 UTM (1 UTA)' : `${formatNum(monto, 0)} UTM`, formatCLP(Math.round(r.montoConvertido))];
+        return [
+          monto === 12 ? '12 UTM (1 UTA)' : `${formatNum(monto, 0)} UTM`,
+          formatCLP(Math.round(r.montoConvertido)),
+        ];
       });
       return {
         h1: 'Conversor UTM a pesos',
@@ -326,7 +343,7 @@ export function getQuickAnswer(
     }
 
     case 'uf-clp': {
-      const montos = [1, 10, 90, 1_000];
+      const montos = [1, 5, 10, 50, 90, 500, 1_000, 3_000];
       const rows = montos.map((monto) => {
         const r = calculateUFCLP({
           monto,
@@ -357,7 +374,10 @@ export function getQuickAnswer(
           formatCLP(r.contribucionCuota),
         ];
       });
-      const comercial = calculateContribuciones({ avaluoFiscal: 100_000_000, destino: 'comercial' });
+      const comercial = calculateContribuciones({
+        avaluoFiscal: 100_000_000,
+        destino: 'comercial',
+      });
       rows.push([
         'Comercial $100.000.000',
         formatCLP(comercial.contribucionAnual),
@@ -415,11 +435,7 @@ export function getQuickAnswer(
           actividad: 'comercio',
           comuna: 'santiago',
         });
-        return [
-          formatCLP(c),
-          formatCLP(baja.patenteAnual),
-          formatCLP(alta.patenteAnual),
-        ];
+        return [formatCLP(c), formatCLP(baja.patenteAnual), formatCLP(alta.patenteAnual)];
       });
       return {
         h1: 'Patente comercial municipal: cómo se calcula y cuánto pagar',
@@ -427,6 +443,73 @@ export function getQuickAnswer(
         example: {
           caption: `Montos anuales con UTM de ${formatCLP(UTM.valor)}; aplican los topes de 1 y 8.000 UTM. La tasa exacta la fija cada municipalidad.`,
           headers: ['Capital propio', 'Anual con 2,5 por mil', 'Anual con 5 por mil'],
+          rows,
+        },
+      };
+    }
+
+    case 'sueldo-part-time': {
+      const jornadas = [10, 20, 30, 35, 42];
+      const rows = jornadas.map((horas) => {
+        const r = calculateSueldoPartTime({ horasSemanales: horas });
+        return [`${horas} horas`, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
+      });
+      return {
+        h1: 'Sueldo part time 30 horas: mínimo legal y valor hora',
+        lead: `Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
+        example: {
+          caption: `Mínimo legal y valor hora con el IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026, sin sueldo pactado informado.`,
+          headers: ['Jornada semanal', 'Mínimo legal mensual', 'Valor hora'],
+          rows,
+        },
+      };
+    }
+
+    case 'factor-hora-extra': {
+      const sueldos = [553_553, 800_000, 1_200_000, 2_000_000];
+      const rows = sueldos.map((sueldoBase) => {
+        const r = calculateFactorHoraExtra({ sueldoBase });
+        return [
+          formatCLP(sueldoBase),
+          formatCLP(r.valorHoraOrdinaria),
+          formatCLP(r.valorHoraExtra),
+        ];
+      });
+      const factorTxt = calculateFactorHoraExtra({ sueldoBase: 1_000_000 }).factor.toLocaleString(
+        'es-CL',
+        {
+          minimumFractionDigits: 7,
+          maximumFractionDigits: 7,
+        },
+      );
+      return {
+        h1: `Factor hora extra ${JORNADA_LEGAL.actual} horas: sueldo × ${factorTxt}`,
+        lead: `Con la jornada de ${JORNADA_LEGAL.actual} horas, cada hora extra con recargo mínimo de 50% equivale a sueldo × ${factorTxt} (fórmula de la Dirección del Trabajo). Si tu jornada pactada es distinta, el factor cambia.`,
+        example: {
+          caption: `Valor hora ordinaria y hora extra con jornada de ${JORNADA_LEGAL.actual} horas, vigente desde el 26 de abril de 2026 (Ley 21.561).`,
+          headers: ['Sueldo mensual', 'Valor hora ordinaria', 'Valor hora extra'],
+          rows,
+        },
+      };
+    }
+
+    case 'tope-imponible-90-uf': {
+      const sueldos = [2_000_000, 3_500_000, 4_000_000, 6_000_000];
+      const rows = sueldos.map((sueldoImponible) => {
+        const r = calculateTopeImponible({ sueldoImponible, valorUF: ctx.uf });
+        return [
+          formatCLP(sueldoImponible),
+          formatCLP(r.imponibleConsideradoCLP),
+          formatCLP(r.excesoSobreTopeCLP),
+        ];
+      });
+      const tope = calculateTopeImponible({ sueldoImponible: 0, valorUF: ctx.uf });
+      return {
+        h1: 'Tope imponible 2026: 90 UF en AFP, salud y cesantía',
+        lead: `AFP y salud cotizan solo hasta el tope de ${TOPE_IMPOSITIVO.afp_salud.toLocaleString('es-CL')} UF (${formatCLP(tope.topeAfpSaludCLP)} con la UF de referencia); el exceso no paga cotizaciones. El seguro de cesantía topa más arriba: ${TOPE_IMPOSITIVO.seguro_cesantia.toLocaleString('es-CL')} UF (${formatCLP(tope.topeCesantiaCLP)}).`,
+        example: {
+          caption: `Topes y bases calculados con UF de ${formatCLP2(ctx.uf)}. Sobre el exceso del tope no se descuentan AFP ni salud.`,
+          headers: ['Sueldo imponible', 'Base de cotización', 'Exceso sin cotizar'],
           rows,
         },
       };

@@ -3,6 +3,7 @@
  * SEO OVERRIDES — CTR + posición (CalculaChile)
  * Optimización de seoTitle + seoDescription para mobile chileno
  * Actualizado: 2026-07-08 · GSC últimas 24 h (imp altas / CTR bajo / pos media)
+ * Actualizado: 2026-10-08 · GSC 3 meses (baseline): cobertura de las 13 nuevas + demandas cero-clics
  * ============================================================================
  *
  * PRIORIDAD DE KEYS: slug de URL sin path
@@ -401,6 +402,92 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Qué hacer tras un despido: finiquito, plazos, Seguro de Cesantía y reinserción. Checklist práctico con calculadoras gratis.', // 128
   },
   // Nota: hub /cesantia usa buildPageMetadata en page.tsx (title/desc allí).
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // CALCULADORAS NUEVAS Q4 2026 — COBERTURA CTR COMPLETA
+  // GSC 2026-10-08: demandas "sueldo part time 30 horas", "factor hora extra
+  // 42 horas", "tope imponible" → cifra o factor exacto primero (mobile Chile).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  // --- SUELDO Y JORNADA ---
+  'calculadora-sueldo-part-time': {
+    seoTitle: 'Sueldo Part Time 30 Horas 2026: mínimo y valor hora',
+    seoDescription:
+      'Con 30 horas o menos el mínimo se paga proporcional ($553.553 × horas ÷ 42); con más de 30 corresponde íntegro. Calcula el mínimo y el valor hora. DT.',
+  },
+
+  'calculadora-factor-hora-extra': {
+    seoTitle: 'Factor Hora Extra 42 Horas 2026: sueldo × 0,0083333',
+    seoDescription:
+      'Con la jornada de 42 horas, cada hora extra vale sueldo × 0,0083333 (recargo 50%, fórmula Dirección del Trabajo). Calcula el factor y el valor hora.',
+  },
+
+  // --- BENEFICIOS Y SEGURIDAD SOCIAL ---
+  'calculadora-seguro-cesantia': {
+    seoTitle: 'Seguro de Cesantía AFC 2026: simula cuánto cobrar',
+    seoDescription:
+      'Simula el Seguro de Cesantía AFC: monto del primer giro (70% de tu remuneración), giros según tu cuenta individual, topes 2026 y requisitos. Gratis.',
+  },
+
+  'calculadora-licencia-medica': {
+    seoTitle: 'Licencia Médica 2026: cuánto pagan por tus días',
+    seoDescription:
+      'Calcula cuánto paga tu licencia médica: 1/30 de tu remuneración promedio con piso legal; desde el día 1 si superas 10 días (si no, desde el 4º). SUSESO.',
+  },
+
+  'calculadora-aporte-familiar-permanente': {
+    seoTitle: 'Aporte Familiar Permanente 2026: $66.834 por carga',
+    seoDescription:
+      'El Aporte Familiar Permanente (ex Bono Marzo) paga $66.834 por cada carga familiar acreditada al 31 de diciembre. Revisa requisitos y estima tu monto. IPS.',
+  },
+
+  'calculadora-subsidio-familiar-suf': {
+    seoTitle: 'Subsidio Familiar (SUF) 2026: $22.601 por causante',
+    seoDescription:
+      'El SUF paga $22.601 por cada causante acreditado y $45.202 si tiene discapacidad, según el tramo de ingresos del hogar. Requisitos y simulación. IPS.',
+  },
+
+  'calculadora-subsidio-electrico': {
+    seoTitle: 'Subsidio Eléctrico 2026: $17.346 a $31.224 por hogar',
+    seoDescription:
+      'El subsidio eléctrico 2026 paga por tramos según el hogar: $17.346 (1 integrante), $22.548 (2 a 3) y $31.224 (4 o más), en cuotas. Simula tu descuento.',
+  },
+
+  'calculadora-bono-30-mil-por-hijo': {
+    seoTitle: 'Bono $30.000 por Hijo 2026: requisitos y pago',
+    seoDescription:
+      'Revisa si te corresponde el Bono de $30.000 por hijo (Ley 21.840): pago automático vía IPS para hogares en el Registro Social de Hogares. Simula tu caso.',
+  },
+
+  'calculadora-bono-bodas-oro': {
+    seoTitle: 'Bono Bodas de Oro 2026: $482.295 por 50 años',
+    seoDescription:
+      'El bono por 50 años de matrimonio paga $482.295 en total ($241.147 por cónyuge), con 80% en el Registro Social de Hogares. Requisitos y simulación.',
+  },
+
+  'calculadora-asignacion-por-muerte': {
+    seoTitle: 'Asignación por Muerte 2026: cuota mortuoria 15 UF',
+    seoDescription:
+      'La asignación por muerte reembolsa gastos funerarios hasta $1.070.445 (3 IMM) y la cuota mortuoria cubre 15 UF del funeral. Requisitos y solicitud IPS.',
+  },
+
+  'calculadora-subsidio-arriendo': {
+    seoTitle: 'Subsidio de Arriendo 2026: hasta 4,2 UF al mes',
+    seoDescription:
+      'El subsidio de arriendo DS52 cubre hasta 4,2 UF mensuales del arriendo (4,9 UF en zonas norte/sur/RM) y 170 UF en total; 213 UF para personas mayores o con discapacidad. MINVU.',
+  },
+
+  'calculadora-tope-imponible-90-uf': {
+    seoTitle: 'Tope Imponible 2026: 90 UF en AFP, salud y cesantía',
+    seoDescription:
+      'Si tu sueldo supera las 90 UF, el exceso no paga AFP ni salud: calcula tu base topada y tus descuentos reales. El seguro de cesantía topa en 135,2 UF.',
+  },
+
+  'calculadora-becas-gratuidad': {
+    seoTitle: 'Becas y Gratuidad 2027: ¿a qué beneficios optas?',
+    seoDescription:
+      'Estima qué beneficios estudiantiles te corresponden (gratuidad y becas de arancel) según tu nivel socioeconómico, carrera, institución, puntaje PAES y NEM. FUAS.',
+  },
 
   // ══════════════════════════════════════════════════════════════════════════
   // GUÍAS PILLAR

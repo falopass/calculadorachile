@@ -1,0 +1,42 @@
+# CalculaChile
+
+> CalculaChile es un sitio chileno de calculadoras laborales, tributarias, previsionales y financieras. Cada cálculo muestra sus supuestos y cita fuentes oficiales: Banco Central de Chile, SII, Dirección del Trabajo, SUSESO, IPS / ChileAtiende, MINVU y Superintendencia de Pensiones. Los indicadores (UF, UTM, dólar observado) se muestran en su valor vigente.
+
+## Calculadoras principales
+
+- [Sueldo líquido](https://calculadorachile.cl/calculadoras/calculadora-sueldo-liquido): de bruto a líquido con AFP, salud, seguro de cesantía e impuesto único.
+- [Finiquito](https://calculadorachile.cl/calculadoras/calculadora-finiquito): indemnización por años de servicio, aviso previo y vacaciones proporcionales.
+- [Horas extra](https://calculadorachile.cl/calculadoras/calculadora-horas-extra): valor de la hora extraordinaria con jornada de 42 horas y recargo 50%.
+- [Factor hora extra](https://calculadorachile.cl/calculadoras/calculadora-factor-hora-extra): factor legal sueldo × 0,0083333 con jornada de 42 horas.
+- [Sueldo part time](https://calculadorachile.cl/calculadoras/calculadora-sueldo-part-time): mínimo legal para jornadas de 30 horas o menos y valor hora.
+- [Tope imponible 90 UF](https://calculadorachile.cl/calculadoras/calculadora-tope-imponible-90-uf): base de cotización topada de AFP, salud y seguro de cesantía.
+- [Seguro de cesantía](https://calculadorachile.cl/calculadoras/calculadora-seguro-cesantia): giros AFC, montos y requisitos.
+- [Asignación familiar](https://calculadorachile.cl/calculadoras/calculadora-asignacion-familiar): tramos y monto por carga acreditada.
+- [Patente comercial](https://calculadorachile.cl/calculadoras/calculadora-patente-comercial): cálculo municipal sobre capital propio, topes 1 y 8.000 UTM.
+- [IVA](https://calculadorachile.cl/calculadoras/calculadora-iva): agregar o quitar el 19% entre neto y bruto.
+- [Boleta de honorarios](https://calculadorachile.cl/calculadoras/calculadora-boleta-honorarios): retención del 15,25% (Ley 21.133).
+- [Operación Renta](https://calculadorachile.cl/calculadoras/calculadora-operacion-renta): simulación de impuesto global complementario y devolución.
+- [Contribuciones de bienes raíces](https://calculadorachile.cl/calculadoras/calculadora-contribuciones): cuota según avalúo fiscal y reglas SII.
+- [Crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-credito-hipotecario): dividendo en UF y pesos.
+- [Crédito CAE](https://calculadorachile.cl/calculadoras/calculadora-credito-cae): cuota mensual con tasa 2% anual.
+- [Permiso de circulación](https://calculadorachile.cl/calculadoras/calculadora-permiso-circulacion): estimación según tasación fiscal.
+- [Pensión alimenticia](https://calculadorachile.cl/calculadoras/calculadora-pension-alimenticia): montos mínimos y tabla en UTM.
+- [UTM a pesos](https://calculadorachile.cl/calculadoras/calculadora-utm-clp): conversión con el valor oficial del mes.
+- [UF a pesos](https://calculadorachile.cl/calculadoras/calculadora-uf-clp): conversión con el valor oficial del día.
+
+## Guías
+
+- [Sueldo líquido en Chile](https://calculadorachile.cl/guias/sueldo-liquido-chile): cómo se calculan los descuentos legales.
+- [Finiquito laboral](https://calculadorachile.cl/guias/finiquito-laboral-chile): indemnizaciones, plazos y ejemplos.
+- [IVA y boleta de honorarios](https://calculadorachile.cl/guias/iva-boleta-honorarios-chile): guía SII.
+- [UF, UTM e indicadores](https://calculadorachile.cl/guias/uf-utm-indicadores-chile): qué son y cómo convertir.
+
+## Metodología y datos
+
+- [Metodología y fuentes](https://calculadorachile.cl/metodologia): supuestos, fórmulas y limitaciones de cada cálculo.
+- [Valores vigentes (API pública)](https://calculadorachile.cl/api/values): UF, UTM y dólar observado en JSON.
+- [Acerca de](https://calculadorachile.cl/acerca-de): quién mantiene el sitio y cómo se revisa.
+
+## Uso y citación
+
+Los resultados son referenciales y de orientación; no reemplazan la liquidación de tu empleador ni la resolución de un organismo público. Se permite citar los contenidos indicando la fuente (calculadorachile.cl) con enlace a la página correspondiente.

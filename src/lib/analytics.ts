@@ -84,10 +84,10 @@ export const trackEvents = {
 
   calculationExported: (calculatorId: string, format: string) =>
     event('calculation_exported', { calculator_id: calculatorId, format }),
-  resultCopied: (calculatorId: string) =>
-    event('result_copied', { calculator_id: calculatorId }),
-  faqExpanded: (questionId: string) =>
-    event('faq_expanded', { question_id: questionId }),
+  resultCopied: (calculatorId: string) => event('result_copied', { calculator_id: calculatorId }),
+  resultShared: (calculatorId: string, channel: 'native' | 'whatsapp' | 'copy-link') =>
+    event('result_shared', { calculator_id: calculatorId, channel }),
+  faqExpanded: (questionId: string) => event('faq_expanded', { question_id: questionId }),
   scenarioCompared: (calculatorId: string) =>
     event('scenario_compared', { calculator_id: calculatorId }),
   scenarioCount: (count: number) => event('scenario_count', { count }),

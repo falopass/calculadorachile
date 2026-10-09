@@ -2,9 +2,10 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Copy, Download, Image, Share2, Check, ChevronDown } from 'lucide-react';
+import { Copy, Download, Image, Share2, MessageCircle, Check, ChevronDown } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
 import { SITE_URL } from '@/lib/site';
+import { trackEvents } from '@/lib/analytics';
 
 export interface ExportMenuProps {
   /** Título del resultado */
@@ -19,7 +20,7 @@ export interface ExportMenuProps {
 
 /**
  * ExportMenu - Menú de exportación para resultados
- * 
+ *
  * Soporta copiar al portapapeles, descargar PNG y compartir.
  */
 export default function ExportMenu({ title, results, mainResult, calculatorId }: ExportMenuProps) {
@@ -43,8 +44,10 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
       `Fecha: ${new Date().toLocaleDateString('es-CL')}`,
       '',
       mainResult ? `${mainResult.label}: ${mainResult.value}` : '',
-      ...results.map(r => `${r.label}: ${r.value}`),
-    ].filter(Boolean).join('\n');
+      ...results.map((r) => `${r.label}: ${r.value}`),
+    ]
+      .filter(Boolean)
+      .join('\n');
 
     try {
       await navigator.clipboard.writeText(text);
@@ -134,7 +137,7 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
     setIsOpen(false);
   };
 
-  // Compartir (Web Share API)
+  // Compartir (Web Share API nativa; en desktop copia el link)
   const handleShare = async () => {
     const shareData = {
       title: `CalculaChile - ${title}`,
@@ -146,6 +149,7 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
       try {
         await navigator.share(shareData);
         toast.success('Compartido', 'Resultado compartido exitosamente');
+        trackEvents.resultShared(calculatorId, 'native');
       } catch (e) {
         if ((e as Error).name !== 'AbortError') {
           toast.error('Error', 'No se pudo compartir');
@@ -156,10 +160,25 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
       try {
         await navigator.clipboard.writeText(window.location.href);
         toast.success('Link copiado', 'URL copiada al portapapeles');
+        trackEvents.resultShared(calculatorId, 'copy-link');
       } catch {
         toast.error('Error', 'No se pudo copiar el enlace');
       }
     }
+    setIsOpen(false);
+  };
+
+  // Compartir por WhatsApp (siempre disponible; en Chile WhatsApp es el canal)
+  const handleShareWhatsApp = () => {
+    const text = [
+      `CalculaChile - ${title}`,
+      mainResult ? `${mainResult.label}: ${mainResult.value}` : '',
+      window.location.href,
+    ]
+      .filter(Boolean)
+      .join('\n');
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    trackEvents.resultShared(calculatorId, 'whatsapp');
     setIsOpen(false);
   };
 
@@ -214,6 +233,14 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
               >
                 <Share2 className="w-4 h-4 text-[var(--foreground-muted)]" />
                 <span>Compartir</span>
+              </button>
+
+              <button
+                onClick={handleShareWhatsApp}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--foreground)] hover:bg-[var(--background-secondary)] transition-colors border-t border-[var(--border)]"
+              >
+                <MessageCircle className="w-4 h-4 text-[var(--color-success-500)]" />
+                <span>Compartir por WhatsApp</span>
               </button>
             </div>
           </motion.div>
