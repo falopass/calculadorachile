@@ -340,6 +340,30 @@ export const JORNADA_LEGAL = {
   ],
 };
 
+/**
+ * Trabajadoras/es de casa particular (Código del Trabajo, Libro I, Cap. V).
+ * El ingreso mínimo es el general (art. 44 inc. 3, por Ley 20.279) y no
+ * existe asignación legal propia del régimen.
+ *
+ * - Indemnización a todo evento: aporte del empleador de 1,11% de la
+ *   remuneración mensual imponible, durante 11 años por trabajador
+ *   (art. 163 inc. final letras a y b CdT).
+ * - Seguro de cesantía: 3% íntegro de cargo del empleador, sin distinguir
+ *   duración del contrato (2,2% cuenta individual + 0,8% Fondo Solidario).
+ *   La trabajadora no aporta. Fuente: DT, minisitio Trabajo en casa particular.
+ * - Desahucio: 30 días de aviso o indemnización equivalente a la última
+ *   remuneración mensual devengada (art. 161 inc. 2 CdT).
+ */
+export const CASA_PARTICULAR = {
+  indemnizacion_todo_evento: 1.11,
+  indemnizacion_todo_evento_anios: 11,
+  seguro_cesantia_empleador: {
+    cuenta_individual: 2.2,
+    fondo_solidario: 0.8,
+  },
+  desahucio_dias_aviso: 30,
+};
+
 export const INDEMNIZACION = {
   dias_por_año: 30,
   tope_años: 11,

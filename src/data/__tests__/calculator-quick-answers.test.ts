@@ -19,6 +19,7 @@ const IDS = [
   'sueldo-part-time',
   'factor-hora-extra',
   'tope-imponible-90-uf',
+  'sueldo-casa-particular',
 ];
 
 describe('getQuickAnswer', () => {

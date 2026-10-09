@@ -422,6 +422,14 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Con la jornada de 42 horas, cada hora extra vale sueldo × 0,0083333 (recargo 50%, fórmula Dirección del Trabajo). Calcula el factor y el valor hora.',
   },
 
+  // GSC/autocomplete 2026-10-08: "calculadora sueldo nana", "cuánto gana una nana";
+  // competidores muestran montos 2025 → cifra 2026 primero.
+  'calculadora-sueldo-casa-particular': {
+    seoTitle: 'Sueldo Nana 2026: mínimo $553.553, líquido y cotizaciones',
+    seoDescription:
+      '¿Cuánto gana una nana? Mínimo $553.553 puertas adentro o afuera con jornada completa; proporcional con 30 h o menos. Calcula líquido y costo empleador.',
+  },
+
   // --- BENEFICIOS Y SEGURIDAD SOCIAL ---
   'calculadora-seguro-cesantia': {
     seoTitle: 'Seguro de Cesantía AFC 2026: simula cuánto cobrar',

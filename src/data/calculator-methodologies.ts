@@ -1073,4 +1073,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Cotizaciones topadas: AFP $369.515, salud $258.660 y cesantía $24.000; $304.852 del sueldo no cotiza.',
     },
   },
+  'sueldo-casa-particular': {
+    summary:
+      'Determina el sueldo mínimo de una trabajadora de casa particular según modalidad y jornada, descuenta AFP, salud e impuesto para estimar el líquido y suma los aportes propios del empleador.',
+    calculationSteps: [
+      'Puertas adentro: mínimo legal = ingreso mínimo mensual íntegro. Puertas afuera: si la jornada es de 30 horas o menos, IMM × horas / 42; si es mayor, IMM íntegro.',
+      'Si no se informa sueldo pactado, calcula con el mínimo legal; si se informa y es menor, muestra la diferencia.',
+      'Descuenta a la trabajadora 10% de AFP más la comisión, 7% de salud e impuesto único si corresponde; no aporta al seguro de cesantía.',
+      'Suma los aportes del empleador: 1,11% indemnización a todo evento, 3% seguro de cesantía, cotización de la reforma de pensiones vigente (con SIS incluido desde agosto de 2026) y 0,95% de accidentes del trabajo.',
+      'Muestra el pago sustitutivo del desahucio sin aviso: la última remuneración mensual.',
+    ],
+    assumptions: [
+      'La alimentación y la habitación son de cargo del empleador y no se descuentan del sueldo (art. 151 del Código del Trabajo).',
+      'Salud se calcula con el 7% legal; los topes imponibles son 90 UF (AFP, salud y 1,11%) y 135,2 UF (cesantía).',
+      'La relación laboral tiene menos de 11 años, plazo durante el cual corresponde el aporte de 1,11%.',
+    ],
+    limitations: [
+      'No incluye planes de isapre sobre el 7%, horas extraordinarias, mínimos especiales (menores de 18 o mayores de 65) ni zona extrema.',
+      'No calcula vacaciones pendientes ni el saldo acumulado de la indemnización a todo evento, que depende de la rentabilidad en la AFP.',
+      'El seguro de accidentes se estima con la tasa de 0,95% informada por la Dirección del Trabajo.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: puertas adentro con el sueldo mínimo, AFP Uno, octubre de 2026',
+      inputs: ['Modalidad: puertas adentro', 'Sueldo bruto: $553.553', 'AFP: Uno (10,46%)'],
+      development: [
+        'Descuentos: AFP $57.902 + salud $38.749 = $96.651; sin impuesto.',
+        'Líquido: $553.553 − $96.651 = $456.902.',
+        'Empleador: 1,11% $6.144 + cesantía 3% $16.607 + reforma 3,5% $19.374 + accidentes 0,95% $5.259 = $47.384.',
+      ],
+      result: 'Líquido $456.902; costo mensual para el empleador $600.937.',
+    },
+  },
 };

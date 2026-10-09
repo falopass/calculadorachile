@@ -39,6 +39,7 @@ import { calculateUFCLP } from '@/lib/calculations/uf-clp';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
 import { calculateFactorHoraExtra } from '@/lib/calculations/factor-hora-extra';
 import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf';
+import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
 
 export interface QuickAnswer {
   /** H1 de la página; si se omite se usa `calculator.name`. */
@@ -510,6 +511,39 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         example: {
           caption: `Topes y bases calculados con UF de ${formatCLP2(ctx.uf)}. Sobre el exceso del tope no se descuentan AFP ni salud.`,
           headers: ['Sueldo imponible', 'Base de cotización', 'Exceso sin cotizar'],
+          rows,
+        },
+      };
+    }
+
+    case 'sueldo-casa-particular': {
+      const casos: [string, 'puertas-adentro' | 'puertas-afuera', number][] = [
+        ['Puertas adentro', 'puertas-adentro', 0],
+        [`Puertas afuera ${JORNADA_LEGAL.actual} h`, 'puertas-afuera', JORNADA_LEGAL.actual],
+        ['Puertas afuera 30 h', 'puertas-afuera', 30],
+        ['Puertas afuera 20 h', 'puertas-afuera', 20],
+      ];
+      const rows = casos.map(([label, modalidad, horasSemanales]) => {
+        const r = calculateSueldoCasaParticular({
+          modalidad,
+          horasSemanales,
+          afp: 'habitat',
+          valorUF: ctx.uf,
+          valorUTM: ctx.utm,
+        });
+        return [
+          label,
+          formatCLP(r.minimoLegal),
+          formatCLP(r.liquido),
+          formatCLP(r.costoTotalMensual),
+        ];
+      });
+      return {
+        h1: 'Sueldo de trabajadora de casa particular (nana) 2026: mínimo, líquido y costo',
+        lead: `Una trabajadora de casa particular gana como mínimo el ingreso mínimo general: ${formatCLP(INGRESO_MINIMO.mensual)} al mes, puertas adentro o puertas afuera con jornada completa. Puertas afuera con 30 horas semanales o menos, el mínimo es proporcional. La comida y la habitación no se descuentan, y el empleador paga además 1,11% de indemnización a todo evento y 3% de seguro de cesantía.`,
+        example: {
+          caption: `Con el sueldo mínimo de cada jornada, AFP Habitat (1,27%) y Fonasa 7%. El costo del empleador suma 1,11% de indemnización a todo evento, 3% de cesantía, la cotización vigente de la reforma de pensiones y 0,95% de accidentes del trabajo.`,
+          headers: ['Modalidad', 'Sueldo mínimo', 'Sueldo líquido', 'Costo empleador'],
           rows,
         },
       };

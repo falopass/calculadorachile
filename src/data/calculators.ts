@@ -4457,6 +4457,139 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'sueldo-casa-particular',
+    name: 'Calculadora Sueldo Trabajadora de Casa Particular (Nana)',
+    description:
+      'Calcula el sueldo mínimo, el líquido y el costo mensual para el empleador de una trabajadora de casa particular, puertas adentro o puertas afuera.',
+    slug: 'calculadora-sueldo-casa-particular',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-10-08',
+    sources: [
+      {
+        name: 'BCN / Ley Chile — Código del Trabajo',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Arts. 44, 146 a 152 (casa particular), 161 (desahucio) y 163 (indemnización a todo evento 1,11%)',
+      },
+      {
+        name: 'Dirección del Trabajo — Minisitio Trabajo en casa particular',
+        url: 'https://dt.gob.cl/portal/1626/w3-propertyvalue-191563.html',
+        note: 'Jornada, descansos, seguro de cesantía 3% y accidentes 0,95% de cargo del empleador',
+      },
+      {
+        name: 'Dirección del Trabajo — Ingreso mínimo de casa particular',
+        url: 'https://dt.gob.cl/portal/1626/w3-article-98984.html',
+        note: 'Desde marzo de 2011 equivale al 100% del ingreso mínimo general (Ley 20.279)',
+      },
+      {
+        name: 'ChileAtiende — Nueva cotización para empleadores de casa particular',
+        url: 'https://www.chileatiende.gob.cl/fichas/133768-nueva-cotizacion-para-empleadores-de-personas-trabajadoras-de-casa-particular',
+        note: 'Aporte del empleador de la reforma de pensiones (Ley 21.735), con SIS incluido',
+      },
+    ],
+    keywords: [
+      'sueldo nana',
+      'calculadora sueldo nana',
+      'cuánto gana una nana',
+      'sueldo trabajadora de casa particular',
+      'sueldo mínimo nana 2026',
+      'nana puertas adentro sueldo',
+      'nana puertas afuera',
+      'cotizaciones nana',
+      'indemnización a todo evento',
+    ],
+    inputs: [
+      {
+        id: 'modalidad',
+        label: 'Modalidad',
+        type: 'select',
+        required: true,
+        defaultValue: 'puertas-afuera',
+        options: [
+          { value: 'puertas-afuera', label: 'Puertas afuera (no vive en la casa)' },
+          { value: 'puertas-adentro', label: 'Puertas adentro (vive en la casa)' },
+        ],
+        tooltip:
+          'Puertas adentro no tiene horario fijo y le corresponde el sueldo mínimo íntegro. Puertas afuera tiene jornada semanal y, si es de 30 horas o menos, el mínimo es proporcional.',
+      },
+      {
+        id: 'horasSemanales',
+        label: 'Horas semanales (solo puertas afuera)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '42',
+        required: false,
+        defaultValue: 42,
+        min: 1,
+        max: 42,
+        tooltip:
+          'Jornada máxima de 42 horas desde el 26 de abril de 2026. Con 30 horas o menos el mínimo se paga proporcional. Este dato no se usa en puertas adentro.',
+      },
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo bruto mensual pactado (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$553.553',
+        required: false,
+        min: 0,
+        tooltip:
+          'Déjalo en 0 para calcular con el sueldo mínimo legal. La comida y la habitación no forman parte del sueldo ni se pueden descontar.',
+      },
+      {
+        id: 'afp',
+        label: 'AFP de la trabajadora',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'uno', label: 'Uno (0,46%)' },
+          { value: 'modelo', label: 'Modelo (0,58%)' },
+          { value: 'planvital', label: 'PlanVital (1,16%)' },
+          { value: 'habitat', label: 'Habitat (1,27%)' },
+          { value: 'capital', label: 'Capital (1,44%)' },
+          { value: 'cuprum', label: 'Cuprum (1,44%)' },
+          { value: 'provida', label: 'ProVida (1,45%)' },
+        ],
+      },
+    ],
+    seoTitle: 'Sueldo Trabajadora de Casa Particular 2026: mínimo y líquido',
+    seoDescription:
+      'Calcula el sueldo mínimo, el líquido y el costo para el empleador de una trabajadora de casa particular (nana), puertas adentro o afuera. Fuentes DT.',
+    faq: [
+      {
+        question: '¿Cuánto es el sueldo mínimo de una nana en 2026?',
+        answer:
+          'Es el mismo ingreso mínimo mensual general: $553.553 desde el 1 de mayo de 2026. Desde marzo de 2011 el mínimo de las trabajadoras de casa particular equivale al 100% del ingreso mínimo (Ley 20.279). Si trabaja puertas afuera con una jornada de 30 horas semanales o menos, el mínimo se puede pagar en proporción a las horas pactadas.',
+      },
+      {
+        question: '¿Se puede descontar la comida o la pieza del sueldo?',
+        answer:
+          'No. El artículo 151 del Código del Trabajo establece que la remuneración no puede comprender los alimentos ni la habitación, que siempre son de cargo del empleador. Por eso esta calculadora no descuenta nada por esos conceptos.',
+      },
+      {
+        question: '¿Qué cotizaciones paga el empleador de una trabajadora de casa particular?',
+        answer:
+          'Además de pagar el sueldo, el empleador aporta un 1,11% para la indemnización a todo evento (durante 11 años por trabajadora), un 3% para el seguro de cesantía (la trabajadora no aporta), la cotización de la reforma de pensiones (3,5% desde las remuneraciones de agosto de 2026, que ya incluye el SIS) y un 0,95% para el seguro de accidentes del trabajo. A la trabajadora se le descuenta el 10% de AFP más la comisión y el 7% de salud.',
+      },
+      {
+        question: '¿Qué jornada tiene una nana puertas afuera y puertas adentro?',
+        answer:
+          'Puertas afuera, la jornada sigue la reducción de la Ley 21.561 (42 horas semanales desde el 26 de abril de 2026), distribuida en hasta seis días y sin superar 12 horas entre el inicio y el término de las labores. Puertas adentro no hay horario, pero debe tener un descanso mínimo de 12 horas diarias (9 ininterrumpidas), descanso los domingos, sábados y festivos, y dos días libres remunerados al mes.',
+      },
+      {
+        question: '¿Qué le corresponde a una nana si la despiden?',
+        answer:
+          'No tiene indemnización por años de servicio: en su lugar recibe la indemnización a todo evento, que se forma con el 1,11% mensual que aporta el empleador a su AFP y se paga cualquiera sea la causa del término. Si el empleador pone término por desahucio, debe avisar con 30 días de anticipación o pagar una indemnización equivalente a la última remuneración mensual. Además corresponde pagar las vacaciones pendientes o proporcionales.',
+      },
+      {
+        question: '¿Es obligatorio el contrato escrito?',
+        answer:
+          'Sí, incluso si trabaja pocas horas a la semana. El empleador debe entregar una copia firmada y registrar el contrato en la Dirección del Trabajo dentro de los 15 días siguientes a su celebración. Las dos primeras semanas son de prueba: cualquiera de las partes puede terminar el contrato avisando con tres días de anticipación y pagando el tiempo trabajado.',
+      },
+    ],
+  },
+  {
     id: 'subsidio-unificado-empleo',
     name: 'Calculadora Subsidio Unificado de Empleo',
     description:

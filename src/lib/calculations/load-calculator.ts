@@ -691,6 +691,22 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'sueldo-casa-particular': {
+      const { calculateSueldoCasaParticular, sueldoCasaParticularToResults } =
+        await import('./sueldo-casa-particular');
+      return (inputs) => {
+        const result = calculateSueldoCasaParticular({
+          modalidad: inputs.modalidad === 'puertas-adentro' ? 'puertas-adentro' : 'puertas-afuera',
+          horasSemanales: coerceNumber(inputs.horasSemanales, 0),
+          sueldoBruto: coerceNumber(inputs.sueldoBruto, 0),
+          afp: inputs.afp as 'capital' | 'cuprum' | 'habitat' | 'modelo' | 'planvital' | 'provida' | 'uno',
+          valorUF: live?.valorUF,
+          valorUTM: live?.valorUTM,
+        });
+        return sueldoCasaParticularToResults(result);
+      };
+    }
+
     case 'subsidio-unificado-empleo': {
       const {
         calculateSubsidioUnificadoEmpleo,
