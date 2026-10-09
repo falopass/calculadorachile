@@ -223,7 +223,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-credito-automotriz': {
-    seoTitle: 'Crédito Automotriz 2026: simula cuota, pie y CAE', // 49
+    seoTitle: 'Simulador de crédito automotriz 2026: cuota, pie y CAE', // 54
     seoDescription:
       'Simula cuota de auto en Chile: pie %, plazo, tasa y CAE del crédito automotriz. Compara costo total antes de comprar. No es banco.', // 132
   },
@@ -328,7 +328,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'revision-tecnica-chile-2026-calendario-patente': {
-    seoTitle: 'Revisión técnica 2026 por patente: mes según último dígito', // 58
+    seoTitle: 'Calendario revisión técnica 2026 por dígito de patente', // 53
     seoDescription:
       'Revisa en qué mes te toca la revisión técnica según el último dígito de tu patente, qué llevar a la planta y qué pasa si circulas con ella vencida.', // 147
   },
@@ -348,7 +348,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #2 P1: jornada 42 h desde 26-04-2026 ---
   'horas-extra-jornada-42-horas-chile-2026': {
-    seoTitle: 'Horas extra Chile 2026: jornada 42 h y recargo 50%', // 52
+    seoTitle: 'Factor horas extras 42 horas 2026: cómo se calcula', // 50
     seoDescription:
       'Desde el 26-04-2026 la jornada es 42 h/semana (Ley 21.561). Calcula horas extra con recargo 50%, valor hora y ejemplos. Dirección del Trabajo.', // 142
   },
