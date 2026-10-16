@@ -57,9 +57,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- BENEFICIOS LABORALES Y TÉRMINO DE CONTRATO ---
   'calculadora-finiquito': {
-    seoTitle: 'Calcular finiquito 2026: calculadora por causal en Chile', // 56
+    seoTitle: 'Calcular finiquito 2026: cálculo por causal en Chile', // 52
     seoDescription:
-      'Calcula tu finiquito gratis: indemnización por años de servicio, vacaciones proporcionales y aviso previo según la causal. Ejemplos en pesos y fuentes DT.', // 154
+      'Calcular finiquito 2026: cálculo de finiquito por causal con indemnización, vacaciones proporcionales y aviso previo. Ejemplos en pesos y fuentes DT.', // 149
   },
 
   'calculadora-indemnizacion-anos-servicio': {
