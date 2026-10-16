@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { VERIFICACION_VALORES } from '@/lib/values/constants';
+import { buildCvlistoUrl } from '@/lib/cvlisto';
 
 /**
  * Contenido editorial visible por calculadora (texto, tablas y preguntas
@@ -67,6 +68,11 @@ const DT_FERIADO = 'https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-1503
 
 const SII_CUOTAS = 'https://www.sii.cl/preguntas_frecuentes/aval_contrib_bbrr/001_165_0310.htm';
 const SII_TASAS = 'https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html';
+const CVLISTO_FINIQUITO = buildCvlistoUrl({
+  origen: 'finiquito',
+  placement: 'guia_footer',
+  calculatorId: 'finiquito',
+});
 const TGR = 'https://www.tgr.cl/tramites/contribuciones/';
 const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm';
 
@@ -247,6 +253,13 @@ const EDITORIAL: Record<string, EditorialContent> = {
             ]}
           />
         </Section>
+        <section className={sectionClass}>
+          <p className={pClass}>
+            <strong>¿Terminó tu contrato? Arma tu CV.</strong> Mientras revisas tu finiquito,
+            prepara tu currículum en minutos en{' '}
+            <Ext href={CVLISTO_FINIQUITO}>cvlisto.cl</Ext>.
+          </p>
+        </section>
       </>
     ),
   },
