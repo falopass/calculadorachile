@@ -11,6 +11,7 @@ interface TableData {
   headers: string[];
   rows: (string | number)[][];
   note?: string;
+  noteUrl?: string;
 }
 
 const NORMATIVE_DATA: Record<string, TableData> = {
@@ -91,7 +92,7 @@ const NORMATIVE_DATA: Record<string, TableData> = {
   'comparador-afp': {
     title: 'Comisiones de AFP en Chile 2026 (Superintendencia de Pensiones)',
     source: 'Superintendencia de Pensiones (SP) · Previred',
-    sourceUrl: 'https://www.spensiones.cl',
+    sourceUrl: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html',
     headers: ['AFP', 'Comisión Dependiente', 'Cotización Total al Trabajador', 'Ranking Costo'],
     rows: [
       ['Uno', '0,46%', '10,46%', '#1 Más económica'],
@@ -103,6 +104,7 @@ const NORMATIVE_DATA: Record<string, TableData> = {
       ['ProVida', '1,45%', '11,45%', '#7 Más costosa'],
     ],
     note: 'Desde agosto de 2026 el Seguro de Invalidez y Sobrevivencia (SIS) es 1,78% de la remuneración imponible (Superintendencia de Pensiones). Es de cargo del empleador, se financia dentro de la cotización del Seguro Social (Ley 21.735) y no se descuenta al trabajador dependiente.',
+    noteUrl: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html',
   },
 };
 
@@ -178,6 +180,14 @@ export default function CalculatorNormativeTable({ calculatorId }: NormativeTabl
       {data.note && (
         <p className="mt-3 text-xs leading-relaxed text-[var(--foreground-muted)] border-t border-[var(--border)] pt-3">
           💡 <strong>Nota técnica:</strong> {data.note}
+          {data.noteUrl && (
+            <>
+              {' '}
+              <a href={data.noteUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-[var(--color-primary-600)] hover:underline">
+                Ver fuente ↗
+              </a>
+            </>
+          )}
         </p>
       )}
     </section>
