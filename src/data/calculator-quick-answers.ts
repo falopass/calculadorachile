@@ -317,7 +317,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Calculadora de finiquito 2026: indemnización, vacaciones y aviso',
+        h1: 'Calcular finiquito 2026: cálculo de indemnización, vacaciones y aviso',
         lead: 'Calcula cuánto te corresponde de finiquito según la causal de término. El finiquito puede incluir la indemnización por años de servicio (30 días de remuneración por año, con tope de 11 años y una base de cálculo de hasta 90 UF), las vacaciones proporcionales y el mes de aviso previo, según el caso (Dirección del Trabajo).',
         example: {
           caption:

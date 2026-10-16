@@ -204,31 +204,45 @@ const EDITORIAL: Record<string, EditorialContent> = {
           </p>
         </Section>
 
+        <Section title="Cómo hacer el cálculo de finiquito paso a paso">
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
+            <li>
+              Identifica la causal de término (renuncia, necesidades de la empresa, mutuo acuerdo,
+              etc.). De ella depende qué conceptos entran.
+            </li>
+            <li>Ingresa tu última remuneración mensual y tus años trabajados.</li>
+            <li>Indica los días de vacaciones pendientes.</li>
+            <li>
+              La calculadora suma la indemnización por años de servicio y el aviso previo cuando
+              corresponden, y las vacaciones proporcionales en todos los casos. Ver &quot;Cómo se
+              calcula el finiquito&quot; más arriba.
+            </li>
+          </ol>
+          <p className={pClass}>
+            El resultado es una estimación. El monto final lo fija el finiquito firmado ante un
+            ministro de fe, y ante dudas puedes consultar en la{' '}
+            <Ext href={DT_INDEMNIZACION}>Dirección del Trabajo</Ext>.
+          </p>
+        </Section>
+
         <Section title="Más preguntas sobre el finiquito">
           <Faq
             items={[
               {
                 q: '¿Cómo se calcula un finiquito?',
-                a: 'Se suman la indemnización por años de servicio (30 días por año, con tope de 11 años y una base de hasta 90 UF), las vacaciones proporcionales, el aviso previo si corresponde y las remuneraciones pendientes.',
+                a: 'Se suman los conceptos que correspondan según la causal: indemnización por años de servicio (si es despido por necesidades de la empresa o desahucio), indemnización sustitutiva del aviso previo (si no se avisó con 30 días) y vacaciones proporcionales o pendientes (siempre). En "Cómo se calcula el finiquito" está el detalle de cada uno.',
               },
               {
-                q: '¿Cuánto me corresponde de finiquito si renuncio?',
-                a: (
-                  <>
-                    Si renuncias, no recibes indemnización por años de servicio ni aviso previo, pero
-                    sí las vacaciones proporcionales y las remuneraciones pendientes (
-                    <Ext href={DT_FERIADO}>DT</Ext>).
-                  </>
-                ),
+                q: '¿Cómo es el cálculo de finiquito por renuncia?',
+                a: 'Si renuncias no recibes indemnización por años de servicio ni aviso previo, salvo que tu contrato o un convenio colectivo diga otra cosa. Sí te corresponden las vacaciones proporcionales y pendientes, y las remuneraciones adeudadas. Ver "Finiquito por renuncia vs. por despido".',
               },
               {
-                q: '¿Cuánto se demora en pagar un finiquito? ¿Cuál es el plazo?',
-                a: (
-                  <>
-                    El empleador tiene 10 días hábiles desde la separación para pagarlo (
-                    <Ext href={DT_PLAZO}>DT, art. 177</Ext>).
-                  </>
-                ),
+                q: '¿Cuánto se demora en pagar un finiquito?',
+                a: 'Ver "Plazo para pagar el finiquito", más arriba en esta página, con su fuente de la Dirección del Trabajo.',
+              },
+              {
+                q: '¿Sirve el simulador de finiquito de la DT o ChileAtiende?',
+                a: 'Sí, es una referencia oficial. Esta calculadora usa las mismas reglas del Código del Trabajo y muestra el cálculo paso a paso. Ninguna de las dos reemplaza el finiquito firmado.',
               },
             ]}
           />

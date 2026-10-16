@@ -22,6 +22,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import CrossDomainCta from '@/components/calculator/CrossDomainCta';
 import { buildCvlistoUrl } from '@/lib/cvlisto';
 import FinancialCoverageTool from '@/components/cesantia/FinancialCoverageTool';
+import SeguroCesantiaInfo from '@/components/cesantia/SeguroCesantiaInfo';
 import {
   breadcrumbSchema,
   collectionPageSchema,
@@ -30,9 +31,9 @@ import {
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl, SITE_NAME } from '@/lib/site';
 
-const PAGE_TITLE = 'Me despidieron en Chile 2026: qué hacer paso a paso';
+const PAGE_TITLE = 'Seguro de cesantía 2026: requisitos, giros y cómo cobrarlo';
 const PAGE_DESC =
-  'Finiquito, plazo de 10 días hábiles, Seguro de Cesantía AFC y cómo volver a postular. Calculadoras gratis y fuentes DT y Código del Trabajo.';
+  '¿Tienes derecho al seguro de cesantía? Requisitos, cuánto paga el Fondo Solidario en 2026 y cómo cobrarlo en la AFC. Fuentes ChileAtiende y SP.';
 
 export const metadata: Metadata = buildPageMetadata({
   path: '/cesantia',
@@ -191,7 +192,7 @@ export default function CesantiaHubPage() {
               Hub · reinserción laboral
             </p>
             <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-[var(--foreground)] md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
-              Me despidieron: qué hacer ahora en Chile
+              Seguro de cesantía 2026: requisitos, cuánto paga y cómo cobrarlo
             </h1>
             <p className="mt-4 text-base leading-relaxed text-[var(--foreground-secondary)] md:text-lg">
               Ordena finiquito, plazos y cobertura. Luego prepara tu CV para postular mejor.
@@ -278,6 +279,8 @@ export default function CesantiaHubPage() {
           </section>
 
           <FinancialCoverageTool />
+
+          <SeguroCesantiaInfo />
 
           <section className="mt-12" aria-labelledby="tools-heading">
             <h2
