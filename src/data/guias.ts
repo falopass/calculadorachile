@@ -2418,6 +2418,138 @@ export const guias: Guia[] = [
       },
     ],
   },
+  // ============================================
+  // Vacaciones en Chile 2026: feriado legal y progresivo
+  // ============================================
+  {
+    slug: 'vacaciones-feriado-legal-chile',
+    title: 'Vacaciones en Chile 2026: feriado legal, días progresivos y acumulación',
+    intent: '¿Cuántos días de vacaciones me corresponden en Chile?',
+    description:
+      'Cuántos días de vacaciones te tocan: 15 días hábiles al año, más 1 día progresivo cada 3 años después de 10 trabajados. Acumulación y ejemplos.',
+    category: 'laboral',
+    categoryLabel: 'Laboral y sueldo',
+    keywords: [
+      'vacaciones progresivas',
+      'feriado legal chile',
+      'cuántos días de vacaciones',
+      'feriado progresivo',
+      'acumular vacaciones',
+    ],
+    publishedAt: '2026-10-16',
+    updatedAt: '2026-10-16',
+    readingTime: 6,
+    sections: [
+      {
+        id: 'resumen',
+        title: 'Resumen',
+        level: 2,
+        html: `<p><em>Actualizado el 16 de octubre de 2026</em></p>
+<p>En Chile, si llevas más de un año de servicio te corresponden <strong>15 días hábiles de vacaciones al año</strong>, con remuneración íntegra. En las regiones de Magallanes y Aysén, y en la provincia de Palena, son 20 días hábiles (art. 67 del Código del Trabajo). Si tienes 10 años trabajados, sumas <strong>1 día más por cada 3 años nuevos</strong> con tu empleador actual (art. 68). Así lo explica la <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">Dirección del Trabajo</a>.</p>`,
+      },
+      {
+        id: 'dias-de-vacaciones-al-ano',
+        title: '¿Cuántos días de vacaciones tengo al año?',
+        level: 2,
+        html: `<ul>
+<li><strong>15 días hábiles</strong> si tienes más de un año de servicio.</li>
+<li><strong>20 días hábiles</strong> si trabajas en la Región de Magallanes, la Región de Aysén o la provincia de Palena.</li>
+<li>Para contar los días, <strong>el sábado siempre es inhábil</strong> (art. 69), aunque trabajes ese día.</li>
+<li>Las vacaciones se dan de preferencia en primavera o verano, según las necesidades de la empresa.</li>
+</ul>
+<p>En la práctica, 15 días hábiles equivalen a unas tres semanas de lunes a viernes.</p>`,
+      },
+      {
+        id: 'vacaciones-progresivas',
+        title: 'Vacaciones progresivas: cómo se calculan',
+        level: 2,
+        html: `<p>Para el feriado progresivo se deben cumplir dos requisitos (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>):</p>
+<ol>
+<li>Tener una <strong>base de 10 años trabajados</strong> (120 cotizaciones previsionales) con el empleador actual o con empleadores anteriores.</li>
+<li>Cumplir <strong>3 años nuevos con el empleador actual</strong>.</li>
+</ol>
+<p>Desde ahí se suma <strong>1 día cada 3 años nuevos</strong>, de forma permanente, mientras no cambies de empleador.</p>`,
+      },
+      {
+        id: 'ejemplos-progresivos',
+        title: 'Ejemplos (todos los años con el mismo empleador)',
+        level: 3,
+        html: `<table>
+<thead><tr><th>Años trabajados</th><th>Años sobre la base de 10</th><th>Días progresivos</th><th>Total de días hábiles</th></tr></thead>
+<tbody>
+<tr><td>13</td><td>3</td><td>1</td><td>15 + 1 = <strong>16</strong></td></tr>
+<tr><td>16</td><td>6</td><td>2</td><td>15 + 2 = <strong>17</strong></td></tr>
+<tr><td>19</td><td>9</td><td>3</td><td>15 + 3 = <strong>18</strong></td></tr>
+</tbody>
+</table>
+<p>Cálculo: (años trabajados − 10) ÷ 3, sin decimales.</p>
+<p><strong>Importante:</strong> debes acreditar los años (por ejemplo, con tu certificado de cotizaciones) <strong>antes</strong> de tomar tus vacaciones. Si no lo haces, pierdes el día progresivo de ese año y no puedes cobrarlo después (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">DT, Ord. 2694/34</a>).</p>`,
+      },
+      {
+        id: 'empleadores-anteriores',
+        title: 'Años con empleadores anteriores (máximo 10)',
+        level: 2,
+        html: `<p>Solo puedes hacer valer <strong>hasta 10 años</strong> trabajados para empleadores anteriores (art. 68). Esos años sirven para completar la base, pero los 3 años nuevos tienen que ser con tu empleador actual.</p>
+<p><strong>Si cambias de empleador, pierdes los días progresivos.</strong> El tiempo trabajado solo te sirve para completar la base de 10 años, y vuelves a ganar el primer día progresivo después de 3 años con el nuevo empleador (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>).</p>
+<p><em>Ejemplo:</em> trabajaste 12 años en otra empresa y llevas 4 en la actual. Cuentan 10 años como base y llevas 4 años nuevos, así que tienes 1 día progresivo: 15 + 1 = 16 días hábiles.</p>`,
+      },
+      {
+        id: 'acumular-vacaciones',
+        title: '¿Puedo acumular vacaciones?',
+        level: 2,
+        html: `<p>Sí, pero <strong>solo de común acuerdo con tu empleador y hasta por dos períodos consecutivos</strong> (art. 70). Si ya tienes dos períodos acumulados, el empleador debe darte al menos el primero antes de que completes el año que te da derecho a uno nuevo. El empleador no puede imponer la acumulación por su cuenta (<a href="https://dt.gob.cl/legislacion/1624/w3-article-88844.html" target="_blank" rel="noopener">DT, Ord. 2802/145</a>).</p>`,
+      },
+      {
+        id: 'fraccionar-vacaciones',
+        title: '¿Puedo fraccionar mis vacaciones?',
+        level: 3,
+        html: `<p>Las vacaciones deben ser continuas, pero lo que pase de 10 días hábiles puede fraccionarse de común acuerdo (art. 70). Los días progresivos se suman al feriado básico y se dan a continuación de él.</p>`,
+      },
+      {
+        id: 'feriados-diciembre-2026',
+        title: 'Feriados de diciembre de 2026',
+        level: 3,
+        html: `<p>En diciembre de 2026 hay dos feriados legales: el martes 8 (Inmaculada Concepción) y el viernes 25 (Navidad), que además es irrenunciable. El 31 de diciembre no es feriado legal: ese día solo no hay atención presencial en los bancos (Ley 21.791) (<a href="https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/" target="_blank" rel="noopener">gob.cl</a>).</p>`,
+      },
+      {
+        id: 'vacaciones-proporcionales',
+        title: 'Vacaciones proporcionales al terminar el contrato',
+        level: 2,
+        html: `<p>Si tu contrato termina antes de que uses tus vacaciones, te corresponde una compensación en dinero por los días proporcionales. Calcúlala en la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> e inclúyela en tu <a href="/calculadoras/calculadora-finiquito">cálculo de finiquito</a>.</p>`,
+      },
+      {
+        id: 'preguntas-frecuentes',
+        title: 'Preguntas frecuentes',
+        level: 2,
+        html: `<h3>¿Cuántos días de vacaciones son por año en Chile?</h3>
+<p>Son 15 días hábiles al año si tienes más de un año de servicio, o 20 en Magallanes, Aysén y Palena. A eso se suman los días progresivos que te correspondan.</p>
+<h3>¿Cómo se calculan las vacaciones progresivas?</h3>
+<p>Con 10 años trabajados como base, sumas 1 día por cada 3 años nuevos con tu empleador actual. De los empleadores anteriores solo cuentan hasta 10 años.</p>
+<h3>¿Puedo acumular vacaciones?</h3>
+<p>Sí, de común acuerdo con tu empleador y hasta por dos períodos consecutivos.</p>
+<h3>¿El sábado cuenta como día de vacaciones?</h3>
+<p>No. Para el feriado legal, el sábado siempre es inhábil (art. 69 del Código del Trabajo).</p>`,
+      },
+      {
+        id: 'relacionadas',
+        title: 'Calculadoras y guías relacionadas',
+        level: 2,
+        html: `<ul>
+<li><a href="/calculadoras/calculadora-vacaciones-proporcionales">Calculadora de vacaciones proporcionales</a></li>
+<li><a href="/calculadoras/calculadora-finiquito">Calculadora de finiquito</a></li>
+<li><a href="/blog/aguinaldo-navidad-pensionados-2026">Aguinaldo de Navidad 2026</a></li>
+</ul>`,
+      },
+    ],
+    relatedCalculators: ['calculadora-vacaciones-proporcionales', 'calculadora-finiquito'],
+    relatedArticles: ['aguinaldo-navidad-pensionados-2026'],
+    sources: [
+      { label: 'DT, Ord. 2694/34 (arts. 67 a 70 del Código del Trabajo)', url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html' },
+      { label: 'DT, ¿En qué consiste el derecho al feriado progresivo?', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html' },
+      { label: 'DT, Ord. 2802/145 (acumulación, fraccionamiento, sábado inhábil)', url: 'https://dt.gob.cl/legislacion/1624/w3-article-88844.html' },
+      { label: 'gob.cl, Feriados 2026', url: 'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/' },
+    ],
+  },
 ];
 
 // ============================================
