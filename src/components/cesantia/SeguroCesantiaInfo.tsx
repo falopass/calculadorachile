@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { buildCvlistoUrl } from '@/lib/cvlisto';
 
 /** Contenido informativo del seguro de cesantía para /cesantia (sin structured data). */
 
@@ -10,8 +11,7 @@ const SP_383 =
   'https://www.spensiones.gob.cl/portal/institucional/594/articles-16977_recurso_1.pdf';
 const SP_GIROS = 'https://www.spensiones.cl/portal/institucional/594/w3-article-17135.html';
 const BCN_19728 = 'https://www.bcn.cl/leychile/navegar?idNorma=184979';
-const CVLISTO =
-  'https://cvlisto.cl/?utm_source=calculadorachile&utm_medium=referral&utm_campaign=cesantia';
+const CVLISTO = buildCvlistoUrl({ origen: 'cesantia', placement: 'guia_footer' });
 
 const h2 = 'text-xl font-bold text-[var(--foreground)] md:text-2xl';
 const h3 = 'mt-5 text-base font-semibold text-[var(--foreground)]';
@@ -154,7 +154,7 @@ export default function SeguroCesantiaInfo() {
           head={['Giro', '% de la remuneración promedio', 'Mínimo', 'Máximo']}
           rows={[
             ['1°', '70%', '$301.201', '$1.004.003'],
-            ['2°', '60%', '$258.171', '$860.574'],
+            ['2°', '60%', 'Ver tabla oficial', '$860.574'],
             ['3°', '45%', '$193.629', '$645.429'],
             ['4°', '40%', '$172.115', '$573.718'],
             ['5°', '35%', '$150.602', '$502.002'],
@@ -197,10 +197,10 @@ export default function SeguroCesantiaInfo() {
           <strong>Solo se pagan cuando la tasa de desempleo activa el beneficio</strong>, es decir,
           cuando supera en más de 1 punto el promedio de los cuatro años anteriores (
           <Ext href={BCN_19728}>Ley 19.728, art. 25</Ext>; <Ext href={SP_383}>Res. Ex. N° 383</Ext>
-          ). Hoy los giros adicionales están activos para quienes cobraron el 5° giro en agosto de
-          2026, y se pagan en septiembre y octubre de 2026, según la{' '}
-          <Ext href={SP_GIROS}>Superintendencia de Pensiones</Ext>. No es un beneficio permanente:
-          revisa en la AFC si está activo cuando llegues a tu 5° giro.
+          ). Si el desempleo activa el beneficio, la{' '}
+          <Ext href={SP_GIROS}>Superintendencia de Pensiones</Ext> informa qué personas y meses de
+          pago cubre cada activación. No es un beneficio permanente: revisa en la AFC si está activo
+          cuando llegues a tu 5° giro.
         </p>
       </section>
 
@@ -250,7 +250,7 @@ export default function SeguroCesantiaInfo() {
             ],
             [
               '¿Qué son los giros adicionales por desempleo?',
-              'Son 2 giros extra del 30% para quienes cobran el 5° giro del Fondo Solidario. Solo se pagan cuando el desempleo activa el beneficio. La activación actual cubre a quienes cobraron el 5° giro en agosto de 2026, con pago en septiembre y octubre de 2026.',
+              'Son 2 giros extra del 30% para quienes cobran el 5° giro del Fondo Solidario. Solo se pagan si el desempleo activa el beneficio; en ese caso, la Superintendencia de Pensiones informa a quiénes cubre y en qué meses se pagan.',
             ],
           ].map(([q, a]) => (
             <div key={q}>
