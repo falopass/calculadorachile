@@ -379,9 +379,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #3 P1: IMM mayo 2026 ---
   'sueldo-minimo-2026-calcular-liquido': {
-    seoTitle: 'Sueldo mínimo 2026 $553.553: líquido y descuentos', // 52
+    seoTitle: 'Sueldo mínimo en Chile 2026: $553.553 desde mayo', // 48
     seoDescription:
-      'IMM desde mayo 2026: $553.553 (18–65), $412.938 y $356.815 no remuneracional. Estima tu líquido. DT y Ley 21.830.', // 128
+      '¿Cuánto es el sueldo mínimo en Chile? $553.553 brutos desde el 1 de mayo de 2026 (Ley 21.830). Montos para menores y mayores de 65, y cuánto queda líquido.', // 154
   },
 
   // --- #6 P1: finiquito × IMM ---
