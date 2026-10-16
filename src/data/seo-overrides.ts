@@ -175,9 +175,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-contribuciones': {
-    seoTitle: 'Calculadora de contribuciones 2026: cuota por avalúo SII', // 56
+    seoTitle: 'Calculadora de contribuciones 2026: cuota de noviembre', // 54
     seoDescription:
-      'Estima tus contribuciones con las reglas SII del 2º semestre 2026: exención de $61.711.570. Ejemplo: vivienda de avalúo $100 millones paga $341.916 al año.', // 155
+      'Calcula tu cuota de contribuciones con el avalúo fiscal del SII. Fecha de la cuota de noviembre 2026, exención vigente y cómo pagar por rol o RUT en la TGR.', // 151
   },
 
   'calculadora-reajuste-arriendo': {
