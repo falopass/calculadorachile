@@ -1271,7 +1271,7 @@ export const guias: Guia[] = [
       },
       {
         label: 'SII — mayor valor en venta de bienes raíces',
-        url: 'https://www.sii.cl/destacados/renta/2026/personas_naturales.html',
+        url: 'https://www.sii.cl/valores_y_fechas/renta/2026/personas_naturales.html',
       },
       {
         label: 'Ley 21.442 de Copropiedad Inmobiliaria',

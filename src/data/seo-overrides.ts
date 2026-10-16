@@ -530,6 +530,26 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'Guía de UF, UTM e IPC en Chile 2026: para qué se usan y cómo pasar a pesos. Conversores gratis con valor del día.', // 122
   },
+  'vehiculos-chile-permiso-multas': {
+    seoTitle: 'Vehículos en Chile 2026: permiso, multas y TAG', // 46
+    seoDescription:
+      'Guía verificada 2026 de permiso de circulación, SOAP, revisión técnica, multas, TAG, peajes y compra de un vehículo usado en Chile.',
+  },
+  'hogar-servicios-basicos-chile': {
+    seoTitle: 'Servicios básicos en Chile 2026: luz, agua y gas', // 48
+    seoDescription:
+      'Guía de costos del hogar en Chile 2026: cuenta de la luz BT1, agua potable, subsidios, gas, internet, gastos comunes Ley 21.442, contribuciones y reajuste de arriendo (Ley 21.461).',
+  },
+  'empresas-pymes-chile': {
+    seoTitle: 'Empresas y pymes en Chile 2026: costos e impuestos', // 50
+    seoDescription:
+      'Guía completa para empresas y PYMEs en Chile 2026: costo empleador, régimen 14D / 14A, IVA, PPM, patente comercial, contribuciones, retención de honorarios y boletas. Con fórmulas y ejemplos.',
+  },
+  'comprar-vivienda-chile': {
+    seoTitle: 'Comprar vivienda en Chile 2026: subsidios y escritura', // 53
+    seoDescription:
+      'Guía verificada para comprar vivienda en Chile: promesa, estudio de títulos, subsidios 2026, contribuciones, gastos comunes, escritura e inscripción.',
+  },
 };
 
 /**
