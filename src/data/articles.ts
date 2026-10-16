@@ -1957,17 +1957,17 @@ const articleCatalog: ArticleDraft[] = [
   {
     slug: 'sueldo-minimo-2026-calcular-liquido',
     embedCalculatorId: 'sueldo-liquido',
-    title: 'Sueldo mínimo 2026 $553.553: cómo recalcular tu líquido y descuentos',
+    title: 'Sueldo mínimo en Chile 2026: cuánto es y cuánto queda líquido',
     description:
       'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
     date: '2026-07-11',
-    updatedAt: '2026-07-11',
+    updatedAt: '2026-10-16',
     category: 'laboral',
     readingTime: 14,
     relatedGuia: 'sueldo-liquido-chile',
-    seoTitle: 'Sueldo mínimo 2026 $553.553: líquido y descuentos',
+    seoTitle: 'Sueldo mínimo en Chile 2026: $553.553 desde mayo',
     seoDescription:
-      'IMM desde mayo 2026: $553.553 (18–65), $412.938 (<18 o >65) y $356.815 no remuneracional. Cómo estimar el líquido. Fuente DT y Ley 21.830.',
+      '¿Cuánto es el sueldo mínimo en Chile? $553.553 brutos desde el 1 de mayo de 2026 (Ley 21.830). Montos para menores y mayores de 65, y cuánto queda líquido.',
     keywords: [
       'sueldo mínimo 2026',
       'ingreso mínimo mensual 2026',
@@ -2022,11 +2022,13 @@ const articleCatalog: ArticleDraft[] = [
     ],
     content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>$553.553</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
 
+<p>El sueldo mínimo en Chile es de <strong>$553.553 brutos mensuales</strong> desde el 1 de mayo de 2026, según la Ley 21.830 (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>). Para trabajadores menores de 18 o mayores de 65 años es de $412.938, y para fines no remuneracionales, de $356.815. Con AFP y Fonasa, $553.553 brutos quedan en unos <strong>$453.581 líquidos con AFP Uno</strong> o <strong>$448.101 con AFP ProVida</strong>.</p>
+
 <p>El sueldo mínimo no es el monto que necesariamente llega a la cuenta bancaria. Es un piso legal para el sueldo o la remuneración aplicable, antes de cotizaciones y descuentos. También puede ser solo una parte del total si la persona recibe gratificación, bonos, horas extra o asignaciones. Por eso dos trabajadores con el mismo sueldo base de $553.553 pueden tener líquidos distintos sin que uno de los cálculos sea automáticamente ilegal.</p>
 
 <p>La revisión de preguntas en comunidades laborales muestra tres confusiones recurrentes: llamar “sueldo líquido mínimo” a los $553.553, usar la gratificación para rellenar un sueldo base inferior y prorratear el mínimo en cualquier jornada menor a 42 horas. Las tres requieren mirar la norma, no una regla de tres genérica.</p>
 
-<h2>Montos oficiales desde el 1 de mayo de 2026</h2>
+<h2>¿Cuánto es el sueldo mínimo en Chile hoy?</h2>
 <table>
 <thead><tr><th>Situación</th><th>Ingreso mínimo mensual</th><th>Qué significa</th></tr></thead>
 <tbody>
@@ -2070,6 +2072,8 @@ const articleCatalog: ArticleDraft[] = [
 <li><strong>Más de 30 y menos de 42 horas:</strong> es una jornada intermedia. No se permite prorratear el IMM; corresponde el mínimo mensual completo.</li>
 </ul>
 
+<p>Con jornadas de 30 horas semanales o menos el mínimo puede pagarse en proporción a la jornada (<a href="https://dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">DT</a>). Por ejemplo, 30 horas sobre la jornada de 42 dan $395.395 <strong>brutos</strong> (no líquidos). Con 31 a 41 horas corresponde el mínimo completo.</p>
+
 <p>Para una jornada parcial válida, la fórmula publicada por la DT es:</p>
 <p><code>mínimo proporcional = $553.553 × horas semanales pactadas ÷ 42</code></p>
 
@@ -2095,6 +2099,8 @@ const articleCatalog: ArticleDraft[] = [
 <div class="numeric-example"><div class="numeric-example__title">Comisión AFP 1,45%</div><ul><li>AFP obligatoria 10%: $55.355</li><li>Comisión 1,45%: $8.027</li><li>Salud 7%: $38.749</li><li>Cesantía 0,6%: $3.321</li><li>IUSC: $0</li></ul><span class="total">Líquido referencial: $448.101</span></div>
 
 <p>Así, un rango más realista para este caso simple es <strong>$448.101 a $453.581</strong>, no $553.553 y tampoco un “82% universal”. Si el contrato es a plazo fijo, elimina el 0,6% personal de cesantía: el rango sube aproximadamente a $451.422–$456.903.</p>
+
+<p>Para otro sueldo, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora para calcular sueldo líquido</a>.</p>
 
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El aporte patronal no baja el líquido</strong><p>El SIS vigente hasta julio y la cotización total de 3,5% que rige desde remuneraciones de agosto de 2026 son de cargo del empleador. No deben aparecer como descuento personal. Revisa el detalle en la guía de <a href="/blog/cotizacion-empleador-3-5-agosto-2026-costo-pyme">cotización patronal 3,5%</a>.</p></div></aside>
 
