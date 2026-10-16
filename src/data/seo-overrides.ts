@@ -57,9 +57,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- BENEFICIOS LABORALES Y TÉRMINO DE CONTRATO ---
   'calculadora-finiquito': {
-    seoTitle: 'Calcular finiquito 2026: calculadora por causal en Chile', // 56
+    seoTitle: 'Calcular finiquito 2026: cálculo por causal en Chile', // 52
     seoDescription:
-      'Calcula tu finiquito gratis: indemnización por años de servicio, vacaciones proporcionales y aviso previo según la causal. Ejemplos en pesos y fuentes DT.', // 154
+      'Calcular finiquito 2026: cálculo de finiquito por causal con indemnización, vacaciones proporcionales y aviso previo. Ejemplos en pesos y fuentes DT.', // 149
   },
 
   'calculadora-indemnizacion-anos-servicio': {
@@ -99,6 +99,12 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // --- TRIBUTARIO Y HONORARIOS ---
+  'vacaciones-feriado-legal-chile': {
+    seoTitle: 'Vacaciones progresivas y feriado legal en Chile 2026', // 52
+    seoDescription:
+      'Cuántos días de vacaciones te tocan: 15 días hábiles al año, más 1 día progresivo cada 3 años después de 10 trabajados. Acumulación y ejemplos.', // 148
+  },
+
   'calculadora-iva': {
     seoTitle: 'Calculadora IVA Chile: agrega o quita el 19%', // 44
     seoDescription:
@@ -106,9 +112,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-boleta-honorarios': {
-    seoTitle: 'Boleta de Honorarios 2026: retención 15,25% SII', // 47
+    seoTitle: 'Calcular boleta de honorarios 2026: retención 15,25%', // 52
     seoDescription:
-      'Calcula el valor bruto y líquido de tu boleta 2026 con retención 15,25% (Ley 21.133). Factor 0,8475 al instante. Gratis, datos SII.', // 132
+      'Calcula tu boleta de honorarios 2026: de bruto a líquido y de líquido a bruto con la retención de 15,25% del SII (Ley 21.133). Ejemplos en pesos.', // 148
   },
 
   'calculadora-operacion-renta': {
@@ -373,9 +379,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #3 P1: IMM mayo 2026 ---
   'sueldo-minimo-2026-calcular-liquido': {
-    seoTitle: 'Sueldo mínimo 2026 $553.553: líquido y descuentos', // 52
+    seoTitle: 'Sueldo mínimo en Chile 2026: $553.553 desde mayo', // 48
     seoDescription:
-      'IMM desde mayo 2026: $553.553 (18–65), $412.938 y $356.815 no remuneracional. Estima tu líquido. DT y Ley 21.830.', // 128
+      '¿Cuánto es el sueldo mínimo en Chile? $553.553 brutos desde el 1 de mayo de 2026 (Ley 21.830). Montos para menores y mayores de 65, y cuánto queda líquido.', // 154
   },
 
   // --- #6 P1: finiquito × IMM ---

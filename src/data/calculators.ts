@@ -243,12 +243,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'finiquito',
     name: 'Finiquito',
     description:
-      'Calcula el monto de tu finiquito considerando indemnización, vacaciones y gratificación proporcional.',
+      'Calcula tu finiquito en segundos: el cálculo de finiquito suma la indemnización por años de servicio, las vacaciones proporcionales y el aviso previo según la causal de término, con las reglas de la Dirección del Trabajo.',
     slug: 'calculadora-finiquito',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-10-16',
     sources: [
       {
         name: 'DT — plazo y pago del finiquito',
@@ -876,7 +876,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'impuestos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-10-16',
     sources: [
       {
         name: 'SII — Boletas de honorarios',

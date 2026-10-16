@@ -27,6 +27,7 @@ import { calculateContribuciones } from '@/lib/calculations/contribuciones';
 import { calculateCreditoCAE } from '@/lib/calculations/credito-cae';
 import { calculatePatenteComercial } from '@/lib/calculations/patente-comercial';
 import { calculateIVA } from '@/lib/calculations/iva';
+import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateGratificacion } from '@/lib/calculations/gratificacion';
@@ -74,6 +75,14 @@ function formatNum(value: number, decimals = 2): string {
  */
 export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): QuickAnswer | null {
   switch (calculatorId) {
+    case 'boleta-honorarios': {
+      const b100 = calculateBoletaHonorarios({ montoBruto: 100_000, ano: 2026 });
+      return {
+        h1: 'Calcular boleta de honorarios 2026 (retención 15,25%)',
+        lead: `En 2026 la retención de la boleta de honorarios es de 15,25% del monto bruto: por una boleta de ${formatCLP(b100.montoBruto)} brutos se retienen ${formatCLP(b100.retencion)} y recibes ${formatCLP(b100.montoLiquido)} líquidos. La tasa subió desde 14,5% en 2025 y sube a 16% en 2027 y 17% en 2028, según la Ley 21.133 (SII).`,
+      };
+    }
+
     case 'iva': {
       const netos = [10_000, 50_000, 100_000, 1_000_000];
       const rows = netos.map((neto) => {
@@ -308,7 +317,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Calculadora de finiquito 2026: indemnización, vacaciones y aviso',
+        h1: 'Calcular finiquito 2026: cálculo de indemnización, vacaciones y aviso',
         lead: 'Calcula cuánto te corresponde de finiquito según la causal de término. El finiquito puede incluir la indemnización por años de servicio (30 días de remuneración por año, con tope de 11 años y una base de cálculo de hasta 90 UF), las vacaciones proporcionales y el mes de aviso previo, según el caso (Dirección del Trabajo).',
         example: {
           caption:

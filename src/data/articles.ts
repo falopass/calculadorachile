@@ -1957,17 +1957,17 @@ const articleCatalog: ArticleDraft[] = [
   {
     slug: 'sueldo-minimo-2026-calcular-liquido',
     embedCalculatorId: 'sueldo-liquido',
-    title: 'Sueldo mínimo 2026 $553.553: cómo recalcular tu líquido y descuentos',
+    title: 'Sueldo mínimo en Chile 2026: cuánto es y cuánto queda líquido',
     description:
       'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
     date: '2026-07-11',
-    updatedAt: '2026-07-11',
+    updatedAt: '2026-10-16',
     category: 'laboral',
     readingTime: 14,
     relatedGuia: 'sueldo-liquido-chile',
-    seoTitle: 'Sueldo mínimo 2026 $553.553: líquido y descuentos',
+    seoTitle: 'Sueldo mínimo en Chile 2026: $553.553 desde mayo',
     seoDescription:
-      'IMM desde mayo 2026: $553.553 (18–65), $412.938 (<18 o >65) y $356.815 no remuneracional. Cómo estimar el líquido. Fuente DT y Ley 21.830.',
+      '¿Cuánto es el sueldo mínimo en Chile? $553.553 brutos desde el 1 de mayo de 2026 (Ley 21.830). Montos para menores y mayores de 65, y cuánto queda líquido.',
     keywords: [
       'sueldo mínimo 2026',
       'ingreso mínimo mensual 2026',
@@ -2022,11 +2022,13 @@ const articleCatalog: ArticleDraft[] = [
     ],
     content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>$553.553</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
 
+<p>El sueldo mínimo en Chile es de <strong>$553.553 brutos mensuales</strong> desde el 1 de mayo de 2026, según la Ley 21.830 (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>). Para trabajadores menores de 18 o mayores de 65 años es de $412.938, y para fines no remuneracionales, de $356.815. Con AFP y Fonasa, $553.553 brutos quedan en unos <strong>$453.581 líquidos con AFP Uno</strong> o <strong>$448.101 con AFP ProVida</strong>.</p>
+
 <p>El sueldo mínimo no es el monto que necesariamente llega a la cuenta bancaria. Es un piso legal para el sueldo o la remuneración aplicable, antes de cotizaciones y descuentos. También puede ser solo una parte del total si la persona recibe gratificación, bonos, horas extra o asignaciones. Por eso dos trabajadores con el mismo sueldo base de $553.553 pueden tener líquidos distintos sin que uno de los cálculos sea automáticamente ilegal.</p>
 
 <p>La revisión de preguntas en comunidades laborales muestra tres confusiones recurrentes: llamar “sueldo líquido mínimo” a los $553.553, usar la gratificación para rellenar un sueldo base inferior y prorratear el mínimo en cualquier jornada menor a 42 horas. Las tres requieren mirar la norma, no una regla de tres genérica.</p>
 
-<h2>Montos oficiales desde el 1 de mayo de 2026</h2>
+<h2>¿Cuánto es el sueldo mínimo en Chile hoy?</h2>
 <table>
 <thead><tr><th>Situación</th><th>Ingreso mínimo mensual</th><th>Qué significa</th></tr></thead>
 <tbody>
@@ -2070,6 +2072,8 @@ const articleCatalog: ArticleDraft[] = [
 <li><strong>Más de 30 y menos de 42 horas:</strong> es una jornada intermedia. No se permite prorratear el IMM; corresponde el mínimo mensual completo.</li>
 </ul>
 
+<p>Con jornadas de 30 horas semanales o menos el mínimo puede pagarse en proporción a la jornada (<a href="https://dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">DT</a>). Por ejemplo, 30 horas sobre la jornada de 42 dan $395.395 <strong>brutos</strong> (no líquidos). Con 31 a 41 horas corresponde el mínimo completo.</p>
+
 <p>Para una jornada parcial válida, la fórmula publicada por la DT es:</p>
 <p><code>mínimo proporcional = $553.553 × horas semanales pactadas ÷ 42</code></p>
 
@@ -2095,6 +2099,8 @@ const articleCatalog: ArticleDraft[] = [
 <div class="numeric-example"><div class="numeric-example__title">Comisión AFP 1,45%</div><ul><li>AFP obligatoria 10%: $55.355</li><li>Comisión 1,45%: $8.027</li><li>Salud 7%: $38.749</li><li>Cesantía 0,6%: $3.321</li><li>IUSC: $0</li></ul><span class="total">Líquido referencial: $448.101</span></div>
 
 <p>Así, un rango más realista para este caso simple es <strong>$448.101 a $453.581</strong>, no $553.553 y tampoco un “82% universal”. Si el contrato es a plazo fijo, elimina el 0,6% personal de cesantía: el rango sube aproximadamente a $451.422–$456.903.</p>
+
+<p>Para otro sueldo, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora para calcular sueldo líquido</a>.</p>
 
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El aporte patronal no baja el líquido</strong><p>El SIS vigente hasta julio y la cotización total de 3,5% que rige desde remuneraciones de agosto de 2026 son de cargo del empleador. No deben aparecer como descuento personal. Revisa el detalle en la guía de <a href="/blog/cotizacion-empleador-3-5-agosto-2026-costo-pyme">cotización patronal 3,5%</a>.</p></div></aside>
 
@@ -4089,17 +4095,17 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'aguinaldo-navidad-pensionados-2026',
-    title: 'Aguinaldo de Navidad 2026 para pensionados: $29.055 más $16.415 por carga',
+    title: 'Aguinaldo de Navidad 2026: montos para pensionados, sector público y privado',
     description:
       'El aguinaldo de Navidad 2026 para pensionados es de $29.055, más $16.415 por cada carga familiar acreditada al 30 de noviembre (Ley 21.806). Quiénes lo reciben, cuándo se paga y ejemplos.',
     date: '2026-09-23',
-    updatedAt: '2026-09-23',
+    updatedAt: '2026-10-16',
     category: 'beneficios',
     readingTime: 13,
     relatedGuia: 'familia-pension-alimenticia-chile',
-    seoTitle: 'Aguinaldo Navidad 2026 pensionados: $29.055 + cargas',
+    seoTitle: 'Aguinaldo de Navidad 2026: pensionados, públicos y privados',
     seoDescription:
-      'Aguinaldo de Navidad 2026 para pensionados IPS: $29.055 base + $16.415 por carga al 30 de noviembre (Ley 21.806). Se paga con la pensión de diciembre.',
+      'Aguinaldo de Navidad 2026: pensionados reciben $29.055 más $16.415 por carga. Qué pasa en el sector público y cuándo es obligatorio en el privado.',
     keywords: [
       'aguinaldo navidad pensionados 2026',
       'aguinaldo navidad 2026 monto',
@@ -4185,6 +4191,13 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>Sector privado: no existe aguinaldo de ley</h2>
 <p>En el sector privado no hay una obligación legal general de pagar aguinaldo de Navidad. ChileAtiende lo resume así: solo es exigible cuando está pactado en el <strong>contrato individual</strong> o en un <strong>convenio o contrato colectivo</strong>. Si tu empresa lo paga por costumbre o por política interna, el monto y las condiciones son los del acuerdo, no una tarifa del Estado.</p>
+<p>Según la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, el empleador sí está obligado a pagarlo en estos casos:</p>
+<ol>
+<li>Está pactado por escrito en el <strong>contrato individual</strong> o en un <strong>anexo</strong>.</li>
+<li>Está pactado en un <strong>convenio o contrato colectivo</strong>.</li>
+<li>No está por escrito, pero <strong>se ha pagado reiteradamente</strong> en años anteriores. Esto genera una cláusula tácita y el empleador debe seguir pagándolo.</li>
+</ol>
+<p>Si te corresponde, el empleador debe respetar el monto, la forma y la fecha acordados, y no puede bajarlo. Puede pagarse en dinero, en una canasta familiar o en una combinación de ambos. Si no te lo pagan teniendo derecho, puedes presentar una denuncia en la Inspección del Trabajo.</p>
 
 <h2>Diferencias con el aguinaldo de Fiestas Patrias</h2>
 <p>Los pensionados cubiertos recibieron en septiembre un aguinaldo distinto: el de Fiestas Patrias 2026, de <strong>$25.280</strong> base más <strong>$12.969</strong> por carga acreditada al 31 de agosto. Los montos, el corte de fecha y la base legal son otros, aunque el mecanismo de pago es el mismo: automático y junto a la pensión del mes. La comparación lado a lado la desarrolla el artículo <a href="/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico">aguinaldo de Fiestas Patrias 2026 para pensionados y sector público</a>.</p>
@@ -4215,7 +4228,19 @@ const articleCatalog: ArticleDraft[] = [
 </ol>
 <p>El patrón es el mismo que en septiembre: el beneficio existe, el monto es de ley y el corte de fecha decide derecho y cargas. Quien revisa esos tres puntos antes de diciembre llega a la liquidación sabiendo exactamente qué cifra debería aparecer —y puede reclamar con antecedentes si no coincide.</p>
 
+<h2>Calcula tus otros pagos de fin de año</h2>
+<ul>
+<li><a href="/calculadoras/calculadora-gratificacion-legal">Calculadora de gratificación legal</a></li>
+<li><a href="/calculadoras/calculadora-sueldo-liquido">Calculadora de sueldo líquido</a></li>
+<li><a href="/calculadoras/calculadora-vacaciones-proporcionales">Calculadora de vacaciones proporcionales</a></li>
+</ul>
+
+<h2>Más preguntas sobre el aguinaldo de Navidad</h2>
+<p><strong>¿Cuándo se paga el aguinaldo de Navidad?</strong><br>A los pensionados se les paga junto con la pensión de diciembre, según <a href="https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ChileAtiende</a>.</p>
+<p><strong>¿Es obligatorio el aguinaldo de Navidad en una empresa privada?</strong><br>Solo si está en el contrato, en un anexo o en un convenio colectivo, o si se ha pagado reiteradamente. Así lo indica la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>.</p>
+
 <h2>Fuentes consultadas</h2>
+<p>Actualizado el 16 de octubre de 2026: sector privado según la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, "Conoce más sobre el aguinaldo".</p>
 <p>Contenido verificado el 23 de septiembre de 2026 con la <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/02/05/44368-B/01/2766382.pdf" target="_blank" rel="noopener">Ley 21.806 en el Diario Oficial</a>, su texto en <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Biblioteca del Congreso Nacional</a> y la <a href="https://chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ficha ChileAtiende 30171 — Aguinaldo de Navidad para pensionados IPS</a>. Los montos de Navidad 2025 del sector público corresponden a la Ley 21.724 según la modificación de la Ley 21.806.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto, las cargas y la fecha de pago efectiva prevalecen en la liquidación de la entidad pagadora y en el texto de la ley. No es un dictamen del IPS ni asesoría previsional.</p></div></aside>
 <p>Para profundizar en beneficios familiares y cargas, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de familia</a>, la <a href="/calculadoras/calculadora-pgu">calculadora de la PGU</a> y la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>`,
