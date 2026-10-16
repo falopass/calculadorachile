@@ -10,6 +10,7 @@ import RelatedCalculators from '@/components/calculator/RelatedCalculators';
 import OfficialSources from '@/components/calculator/OfficialSources';
 import CalculatorMethodology from '@/components/calculator/CalculatorMethodology';
 import CalculatorNormativeTable from '@/components/calculator/CalculatorNormativeTable';
+import CalculatorEditorial from '@/components/calculator/CalculatorEditorial';
 import PremiumLoadingIndicator from '@/components/calculator/PremiumLoadingIndicator';
 import { calculators } from '@/data/calculators';
 import { useCalculationFn } from '@/lib/hooks/useCalculationFn';
@@ -300,6 +301,8 @@ export default function CalculatorPageClient({
         </section>
       )}
 
+      <CalculatorEditorial calculatorId={calculator.id} position="top" />
+
       {!calculateFn ? (
         <CalculatorLoadingState calculator={calculator} />
       ) : (
@@ -362,6 +365,8 @@ export default function CalculatorPageClient({
           </div>
         </section>
       )}
+
+      <CalculatorEditorial calculatorId={calculator.id} position="bottom" />
 
       <CalculatorNormativeTable calculatorId={calculator.id} />
 

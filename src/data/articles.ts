@@ -4000,7 +4000,8 @@ const articleCatalog: ArticleDraft[] = [
           'El atraso genera reajustes e intereses según el Código Tributario. El monto actualizado se consulta en TGR. Las deudas de contribuciones pueden regularizarse con un convenio de pago de hasta 24 cuotas mensuales.',
       },
     ],
-    content: `<p>El <strong>lunes 30 de noviembre de 2026</strong> vence la cuarta y última cuota del impuesto territorial del año. La tercera cuota venció el 30 de septiembre. Si el aviso de pago no llegó por correo —algo frecuente—, la obligación existe igual: el propietario debe consultar su giro en el sitio de Tesorería General de la República (TGR) o del SII y pagar en la fecha.</p>
+    content: `<p>Calcula tu cuota con la <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a>.</p>
+<p>El <strong>lunes 30 de noviembre de 2026</strong> vence la cuarta y última cuota del impuesto territorial del año. La tercera cuota venció el 30 de septiembre. Si el aviso de pago no llegó por correo —algo frecuente—, la obligación existe igual: el propietario debe consultar su giro en el sitio de Tesorería General de la República (TGR) o del SII y pagar en la fecha.</p>
 <p>Este artículo explica cuánto corresponde pagar con las reglas vigentes del segundo semestre de 2026, cómo verificar tu avalúo y tu aviso, y qué opciones hay si el pago ya está atrasado. Fecha de corte: 23 de septiembre de 2026.</p>
 
 <h2>Calendario de contribuciones 2026</h2>
