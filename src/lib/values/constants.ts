@@ -406,6 +406,8 @@ export const BOLETA_HONORARIOS = {
 export const TOPE_IMPOSITIVO = {
   afp_salud: 90, // UF — 2026 (Superintendencia de Pensiones, Res. 237)
   seguro_cesantia: 135.2, // UF — 2026 (Res. Exenta N° 236, 10-02-2026)
+  // Tope de la indemnización (Art. 172 CdT), no de gratificación; la clave
+  // se conserva por compatibilidad.
   gratificacion: 90, // UF (Art. 172 CdT)
 };
 
