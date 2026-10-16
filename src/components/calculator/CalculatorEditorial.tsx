@@ -327,6 +327,29 @@ const EDITORIAL: Record<string, EditorialContent> = {
       </>
     ),
   },
+  'seguro-cesantia': {
+    bottom: (
+      <Section title="Giros adicionales del Fondo de Cesantía Solidario">
+        <p className={pClass}>
+          Si la tasa de desempleo del INE supera en más de 1 punto su promedio de los 4 años
+          anteriores, quienes cobran el 5° giro del Fondo de Cesantía Solidario reciben 2 giros
+          adicionales de 30% de la remuneración promedio (mínimo $129.085, máximo $430.288).
+        </p>
+        <p className={pClass}>
+          Fuentes:{' '}
+          <Ext href="https://www.bcn.cl/leychile/navegar?idNorma=184979">Ley 19.728, art. 25</Ext>{' '}
+          ·{' '}
+          <Ext href="https://www.spensiones.cl/portal/institucional/594/w3-article-17135.html">
+            Superintendencia de Pensiones
+          </Ext>{' '}
+          ·{' '}
+          <Ext href="https://www.spensiones.gob.cl/portal/institucional/594/w3-propertyvalue-9925.html">
+            Superintendencia de Pensiones: montos
+          </Ext>
+        </p>
+      </Section>
+    ),
+  },
 };
 
 function formatFechaISO(iso: string): string {
