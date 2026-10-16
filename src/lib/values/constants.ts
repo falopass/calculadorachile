@@ -1426,3 +1426,154 @@ export const SUBSIDIO_HABITACIONAL_AHORRO_MINIMO_UF = {
   ds01: { tramo1: 30, tramo2: 40, tramo3: 80 },
   ds19: { tramo1: 80, tramo2: 100, tramo3: 100 },
 } as const;
+
+// ============================================
+// Verificación de valores oficiales (Vigía YMYL)
+// ============================================
+
+export interface VerificacionValor {
+  /** Nombre visible del valor. */
+  valor: string;
+  /** Constante(s) de este archivo o fuente de datos que contienen el valor. */
+  constante: string;
+  /** Fecha ISO (AAAA-MM-DD) de la última verificación documentada. */
+  verificadoAl: string;
+  /** Fuente oficial usada en la verificación. */
+  fuente: string;
+  /** IDs de calculadoras que usan el valor. */
+  calculadoras: string[];
+}
+
+/**
+ * Fechas de verificación tomadas del registro de Vigía YMYL
+ * (valores-sitio.md). Solo valores con fuente oficial y fecha documentada;
+ * no se agregan fechas supuestas. Metadata informativa: no afecta cálculos.
+ */
+export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
+  uf: {
+    valor: 'UF',
+    constante: 'UF (en vivo vía /api/values; respaldo snapshot.json)',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
+    calculadoras: ['uf-clp', 'sueldo-liquido', 'finiquito', 'indemnizacion-anos-servicio', 'credito-hipotecario', 'credito-cae', 'tope-imponible-90-uf', 'reajuste-arriendo', 'simulador-apv'],
+  },
+  utm: {
+    valor: 'UTM',
+    constante: 'UTM (en vivo vía /api/values; respaldo snapshot.json)',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
+    calculadoras: ['utm-clp', 'impuesto-segunda-categoria', 'sueldo-liquido', 'boleta-honorarios', 'multas-transito', 'permiso-circulacion', 'ppm', 'patente-comercial', 'operacion-renta'],
+  },
+  dolar: {
+    valor: 'Dólar observado',
+    constante: 'DOLAR (en vivo vía /api/values)',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx',
+    calculadoras: ['conversor-divisas'],
+  },
+  ingresoMinimo: {
+    valor: 'Ingreso mínimo mensual',
+    constante: 'INGRESO_MINIMO',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html',
+    calculadoras: ['sueldo-part-time', 'gratificacion-legal', 'finiquito', 'costo-empleado-pyme', 'licencia-medica', 'pension-alimenticia', 'sueldo-casa-particular', 'asignacion-por-muerte'],
+  },
+  comisionesAfp: {
+    valor: 'Comisiones AFP',
+    constante: 'AFP.*.comision',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html',
+    calculadoras: ['sueldo-liquido', 'comparador-afp', 'costo-empleado-pyme', 'cotizacion-independientes', 'horas-extra', 'sueldo-casa-particular'],
+  },
+  topeAfpSalud: {
+    valor: 'Tope imponible AFP y salud (90 UF)',
+    constante: 'TOPE_IMPOSITIVO.afp_salud',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://spensiones.cl/portal/institucional/594/w3-article-16921.html',
+    calculadoras: ['sueldo-liquido', 'tope-imponible-90-uf', 'comparador-afp', 'cotizacion-independientes', 'sueldo-casa-particular'],
+  },
+  topeCesantia: {
+    valor: 'Tope imponible seguro de cesantía (135,2 UF)',
+    constante: 'TOPE_IMPOSITIVO.seguro_cesantia',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.spensiones.cl/portal/institucional/594/articles-16922_recurso_1.pdf',
+    calculadoras: ['sueldo-liquido', 'tope-imponible-90-uf', 'costo-empleado-pyme'],
+  },
+  topeIndemnizacion: {
+    valor: 'Tope de indemnización (90 UF y 11 años)',
+    constante: 'INDEMNIZACION.tope_uf_mensual, INDEMNIZACION.tope_años',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
+    calculadoras: ['finiquito', 'indemnizacion-anos-servicio'],
+  },
+  impuestoUnico: {
+    valor: 'Tramos del Impuesto Único de Segunda Categoría',
+    constante: 'IMPUESTO_SEGUNDA_CATEGORIA',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm',
+    calculadoras: ['impuesto-segunda-categoria', 'sueldo-liquido', 'operacion-renta', 'simulador-apv'],
+  },
+  seguroCesantiaTasas: {
+    valor: 'Tasas del seguro de cesantía',
+    constante: 'SEGURO_CESANTIA',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.chileatiende.gob.cl/fichas/36646-fondo-de-cesantia-solidario',
+    calculadoras: ['sueldo-liquido', 'costo-empleado-pyme', 'horas-extra', 'seguro-cesantia'],
+  },
+  fondoCesantiaSolidario: {
+    valor: 'Fondo de Cesantía Solidario: porcentajes, mínimos y máximos',
+    constante: 'SEGURO_CESANTIA_BENEFICIOS',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.spensiones.cl/portal/institucional/594/alt-propertyvalue-9925.html',
+    calculadoras: ['seguro-cesantia'],
+  },
+  requisitosCic: {
+    valor: 'Requisitos de la Cuenta Individual de Cesantía',
+    constante: 'SEGURO_CESANTIA_BENEFICIOS',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia',
+    calculadoras: ['seguro-cesantia'],
+  },
+  pgu: {
+    valor: 'Pensión Garantizada Universal',
+    constante: 'PGU_2026',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://spensiones.cl/portal/institucional/594/w3-article-16886.html',
+    calculadoras: ['pgu'],
+  },
+  asignacionFamiliar: {
+    valor: 'Tramos de asignación familiar',
+    constante: 'ASIGNACION_FAMILIAR_2026',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.dt.gob.cl/portal/1628/w3-article-85651.html',
+    calculadoras: ['asignacion-familiar'],
+  },
+  topeGratificacion: {
+    valor: 'Tope de gratificación (4,75 IMM)',
+    constante: 'GRATIFICACION',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html',
+    calculadoras: ['gratificacion-legal', 'finiquito', 'costo-empleado-pyme'],
+  },
+  contribuciones: {
+    valor: 'Exención y tasas del impuesto territorial habitacional',
+    constante: 'CONTRIBUCIONES_BIENES_RAICES (exención, umbral y tasas; sobretasa no revisada)',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html',
+    calculadoras: ['contribuciones'],
+  },
+  feriadoLegal: {
+    valor: 'Feriado legal (15 días hábiles)',
+    constante: 'VACACIONES',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html',
+    calculadoras: ['vacaciones-proporcionales', 'finiquito'],
+  },
+  feriados2026: {
+    valor: 'Feriados nacionales 2026',
+    constante: 'vacaciones.ts (lista de feriados 2026)',
+    verificadoAl: '2026-10-16',
+    fuente: 'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/',
+    calculadoras: ['vacaciones-proporcionales'],
+  },
+};

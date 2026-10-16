@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { VERIFICACION_VALORES } from '@/lib/values/constants';
 
 /**
  * Contenido editorial visible por calculadora (texto, tablas y preguntas
@@ -328,6 +329,33 @@ const EDITORIAL: Record<string, EditorialContent> = {
   },
 };
 
+function formatFechaISO(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${d}-${m}-${y}`;
+}
+
+/** "Valores verificados al [fecha]" con enlace a la fuente oficial de cada valor. */
+function VerifiedValues({ calculatorId }: { calculatorId: string }) {
+  const items = Object.values(VERIFICACION_VALORES).filter((v) =>
+    v.calculadoras.includes(calculatorId),
+  );
+  if (items.length === 0) return null;
+  const fecha = items.map((v) => v.verificadoAl).sort().at(-1) as string;
+  return (
+    <section className={sectionClass}>
+      <h2 className={h2Class}>Valores verificados al {formatFechaISO(fecha)}</h2>
+      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
+        {items.map((v) => (
+          <li key={v.valor}>
+            {v.valor}: <Ext href={v.fuente}>fuente oficial</Ext>
+            {v.verificadoAl !== fecha && <> (verificado al {formatFechaISO(v.verificadoAl)})</>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function CalculatorEditorial({
   calculatorId,
   position,
@@ -336,5 +364,13 @@ export default function CalculatorEditorial({
   position: 'top' | 'bottom';
 }) {
   const content = EDITORIAL[calculatorId]?.[position];
+  if (position === 'bottom') {
+    return (
+      <>
+        {content}
+        <VerifiedValues calculatorId={calculatorId} />
+      </>
+    );
+  }
   return content ? <>{content}</> : null;
 }
