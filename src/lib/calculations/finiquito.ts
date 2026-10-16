@@ -126,14 +126,16 @@ function calcularIndemnizacionAniosServicio(
  * Indemnización sustitutiva de aviso previo (Art. 162 CdT): 1 mes de
  * sueldo cuando el empleador no avisa con 30 días de anticipación.
  * Solo aplica para despido por necesidades de la empresa o causal
- * genérica de "despido".
+ * genérica de "despido". Tope de 90 UF (Art. 172 inciso final CdT).
  */
 function calcularIndemnizacionAvisoPrevio(
   ultimoSueldo: number,
   causaTermino: FiniquitoInput['causaTermino'],
 ): number {
   if (causaTermino === 'necesidades_empresa' || causaTermino === 'despido') {
-    return ultimoSueldo;
+    // Tope 90 UF (Art. 172 inciso final CdT)
+    const topeMensual = INDEMNIZACION.tope_uf_mensual * UF.valor;
+    return Math.min(ultimoSueldo, topeMensual);
   }
   return 0;
 }
