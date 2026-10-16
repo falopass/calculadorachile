@@ -350,6 +350,62 @@ const EDITORIAL: Record<string, EditorialContent> = {
       </Section>
     ),
   },
+  iva: {
+    bottom: (
+      <Section title="Calculadoras y guías relacionadas">
+        <p className={pClass}>
+          Si emites boletas, revisa la{' '}
+          <Int href="/calculadoras/calculadora-boleta-honorarios">
+            retención de boleta de honorarios
+          </Int>
+          ; si eres contribuyente con IVA, estima tu{' '}
+          <Int href="/calculadoras/calculadora-ppm">PPM mensual</Int> o lee la{' '}
+          <Int href="/guias/iva-boleta-honorarios-chile">guía del IVA y boletas</Int>.
+        </p>
+      </Section>
+    ),
+  },
+  ppm: {
+    bottom: (
+      <Section title="Calculadoras relacionadas">
+        <p className={pClass}>
+          Para separar neto, IVA y total de tus ventas, usa la{' '}
+          <Int href="/calculadoras/calculadora-iva">calculadora de IVA</Int>.
+        </p>
+      </Section>
+    ),
+  },
+  'sueldo-liquido': {
+    bottom: (
+      <Section title="Calculadoras y guías relacionadas">
+        <p className={pClass}>
+          Revisa el detalle del{' '}
+          <Int href="/calculadoras/calculadora-impuesto-segunda-categoria">
+            impuesto único de segunda categoría
+          </Int>
+          , compara la <Int href="/calculadoras/calculadora-comparador-afp">comisión de tu AFP</Int>
+          , calcula la{' '}
+          <Int href="/calculadoras/calculadora-gratificacion-legal">gratificación legal</Int> y las{' '}
+          <Int href="/calculadoras/calculadora-horas-extra">horas extra</Int>, o lee la{' '}
+          <Int href="/guias/sueldo-liquido-chile">guía de sueldo líquido</Int>.
+        </p>
+      </Section>
+    ),
+  },
+  'vacaciones-proporcionales': {
+    bottom: (
+      <Section title="Calculadoras relacionadas">
+        <p className={pClass}>
+          Si terminó tu contrato,{' '}
+          <Int href="/calculadoras/calculadora-finiquito">calcula tu finiquito completo</Int> o la{' '}
+          <Int href="/calculadoras/calculadora-indemnizacion-anos-servicio">
+            indemnización por años de servicio
+          </Int>
+          .
+        </p>
+      </Section>
+    ),
+  },
 };
 
 function formatFechaISO(iso: string): string {
