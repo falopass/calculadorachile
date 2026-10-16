@@ -38,9 +38,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y REMUNERACIONES ---
   'calculadora-sueldo-liquido': {
-    seoTitle: 'Sueldo Líquido 2026: de bruto a líquido al instante', // 51
+    seoTitle: 'Calculadora Sueldo Líquido 2026: de bruto a líquido', // 50
     seoDescription:
-      'Calcula tu sueldo líquido 2026 con AFP, 7% salud, cesantía e impuesto único. Desglose en pesos reales. Gratis y actualizado Chile DT.', // 135
+      '¿Cuánto te descuentan? Calcula tu sueldo líquido con AFP, 7% de salud, seguro de cesantía e impuesto único, con valores oficiales 2026.', // 135
   },
 
   'calculadora-impuesto-segunda-categoria': {
@@ -69,9 +69,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-vacaciones-proporcionales': {
-    seoTitle: 'Vacaciones Proporcionales 2026: calcula en pesos', // 48
+    seoTitle: 'Vacaciones proporcionales: calcula días y pesos', // 47
     seoDescription:
-      'Calcula tus días hábiles y el monto en pesos de vacaciones proporcionales en Chile. Para renuncia voluntaria o despido. Código del Trabajo.', // 139
+      'Calcula tus vacaciones proporcionales (feriado proporcional) en días y pesos: 1,25 días hábiles por mes trabajado, según el Código del Trabajo. Para finiquito.', // 158
   },
 
   'calculadora-gratificacion-legal': {
@@ -100,9 +100,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- TRIBUTARIO Y HONORARIOS ---
   'calculadora-iva': {
-    seoTitle: 'Calculadora IVA Chile 2026: neto a bruto y 19%', // 48
+    seoTitle: 'Calculadora IVA Chile: agrega o quita el 19%', // 44
     seoDescription:
-      'Calcula el IVA del 19%: pasa de neto a bruto o quita el IVA a un total al instante. Con desglose en pesos, gratis y sin registro. SII.', // 135
+      'Calcula el IVA en Chile (19%, tasa del SII): pasa de neto a bruto o saca el IVA de un total. Ej.: $100.000 neto = $119.000 con IVA. Gratis.', // 141
   },
 
   'calculadora-boleta-honorarios': {
