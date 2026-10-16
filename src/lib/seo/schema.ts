@@ -407,7 +407,6 @@ export function softwareApplicationSchema(args: {
     applicationCategory: 'FinanceApplication',
     applicationSubCategory: 'Calculator',
     operatingSystem: 'Any (Web Browser)',
-    browserRequirements: 'Requires JavaScript. Modern browsers supported.',
     inLanguage: 'es-CL',
     isAccessibleForFree: true,
     offers: {
@@ -440,16 +439,6 @@ export function softwareApplicationSchema(args: {
   }
   if (args.datePublished) schema.datePublished = args.datePublished;
   if (args.dateModified) schema.dateModified = args.dateModified;
-
-  // Speakable — selectores que apuntan al título de la calculadora
-  // y a su descripción introductoria, para asistentes de voz.
-  // El layout `CalculatorPageLayout` renderiza el título dentro de
-  // `[data-speakable="title"]` y la descripción en
-  // `[data-speakable="description"]`.
-  schema.speakable = {
-    '@type': 'SpeakableSpecification',
-    cssSelector: ['[data-speakable="title"]', '[data-speakable="description"]'],
-  };
 
   return schema;
 }
