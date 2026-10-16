@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { buildCvlistoUrl } from '@/lib/cvlisto';
+import { formatCLP } from '@/lib/formatters';
+import { SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
 
 /** Contenido informativo del seguro de cesantía para /cesantia (sin structured data). */
 
@@ -154,7 +156,7 @@ export default function SeguroCesantiaInfo() {
           head={['Giro', '% de la remuneración promedio', 'Mínimo', 'Máximo']}
           rows={[
             ['1°', '70%', '$301.201', '$1.004.003'],
-            ['2°', '60%', 'Ver tabla oficial', '$860.574'],
+            ['2°', '60%', formatCLP(SEGURO_CESANTIA_BENEFICIOS.fcs.indefinido.minimos[1]), '$860.574'],
             ['3°', '45%', '$193.629', '$645.429'],
             ['4°', '40%', '$172.115', '$573.718'],
             ['5°', '35%', '$150.602', '$502.002'],
