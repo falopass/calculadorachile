@@ -3419,7 +3419,7 @@ const articleCatalog: ArticleDraft[] = [
     updatedAt: '2026-08-12',
     category: 'hogar',
     readingTime: 15,
-    seoTitle: 'Subsidio Eléctrico 2026: resultados, montos y descuento en la cuenta',
+    seoTitle: 'Subsidio Eléctrico 2026: resultados y descuento',
     seoDescription:
       'Resultados del Subsidio Eléctrico 2026: consulta, montos por integrantes, descuento de julio a diciembre, reposición y cambio de número de cliente.',
     keywords: [
@@ -3738,7 +3738,7 @@ const articleCatalog: ArticleDraft[] = [
     sources: [
       {
         label: 'ChileAtiende — Aumento de la PGU',
-        url: 'https://portal.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu',
+        url: 'https://www.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu',
       },
       {
         label: 'ChileAtiende — Fechas clave de la Reforma de Pensiones',
@@ -3821,7 +3821,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>El cambio de septiembre es relevante porque adelanta el monto máximo de PGU a un grupo grande de pensionados. La acción concreta es sencilla: si ya recibes PGU y tienes 75 años o más, revisa el pago; si cumples 75 después, identifica tu mes de cumpleaños; y si nunca has tenido PGU, consulta los requisitos y el trámite. La diferencia entre esas tres situaciones evita promesas que el sistema no puede cumplir.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://portal.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha de aumento de PGU de ChileAtiende</a>, las <a href="https://www.chileatiende.gob.cl/reformadepensiones/fechas-clave" target="_blank" rel="noopener">fechas clave de la Reforma de Pensiones</a>, el <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10731.html" target="_blank" rel="noopener">compendio transitorio de la Superintendencia de Pensiones</a> y la <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha general de PGU</a>. Los requisitos y pagos individuales deben confirmarse mediante la consulta oficial.</p>`,
+<p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha de aumento de PGU de ChileAtiende</a>, las <a href="https://www.chileatiende.gob.cl/reformadepensiones/fechas-clave" target="_blank" rel="noopener">fechas clave de la Reforma de Pensiones</a>, el <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10731.html" target="_blank" rel="noopener">compendio transitorio de la Superintendencia de Pensiones</a> y la <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha general de PGU</a>. Los requisitos y pagos individuales deben confirmarse mediante la consulta oficial.</p>`,
   },
   {
     slug: 'asignacion-familiar-2026-tramos-montos',
@@ -4083,7 +4083,7 @@ const articleCatalog: ArticleDraft[] = [
 </ul>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 23 de septiembre de 2026 con la <a href="https://www.tgr.cl/pago-de-contribuciones-en-linea/" target="_blank" rel="noopener">página de pago de contribuciones de la TGR</a>, la <a href="https://www.chileatiende.gob.cl/fichas/12176" target="_blank" rel="noopener">ficha ChileAtiende 12176</a>, la <a href="https://www.chileatiende.gob.cl/fichas/3229-pago-de-contribuciones-de-bienes-raices-en-sii" target="_blank" rel="noopener">ficha ChileAtiende 3229 (pago de contribuciones en SII)</a>, la tabla de <a href="https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html" target="_blank" rel="noopener">reajustes y exenciones del SII</a>, la <a href="https://www.sii.cl/preguntas_frecuentes/aval_contrib_bbrr/001_165_8150.htm" target="_blank" rel="noopener">FAQ de tasas del SII</a>, la <a href="https://www.sii.cl/destacados/reavaluo/2022/guia_para_calcular_contribucion.pdf" target="_blank" rel="noopener">guía oficial de cálculo del SII</a>, la página de <a href="https://www.sii.cl/destacados/reavaluo/2025/4449-4452.html" target="_blank" rel="noopener">reavalúo y avisos del SII</a> y la <a href="https://ayuda.tgr.gob.cl/ayuda/pagar/pagar-en-tesoreria-y-formas-de-pago" target="_blank" rel="noopener">ayuda de formas de pago y convenios de TGR</a>.</p>
+<p>Contenido verificado el 23 de septiembre de 2026 con la <a href="https://www.tgr.cl/pago-de-contribuciones-en-linea/" target="_blank" rel="noopener">página de pago de contribuciones de la TGR</a>, la <a href="https://www.chileatiende.gob.cl/fichas/12176" target="_blank" rel="noopener">ficha ChileAtiende 12176</a>, la <a href="https://www.chileatiende.gob.cl/fichas/3229-pago-de-contribuciones-de-bienes-raices-en-sii" target="_blank" rel="noopener">ficha ChileAtiende 3229 (pago de contribuciones en SII)</a>, la tabla de <a href="https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html" target="_blank" rel="noopener">reajustes y exenciones del SII</a>, la FAQ de tasas del SII, la <a href="https://www.sii.cl/destacados/reavaluo/2022/guia_para_calcular_contribucion.pdf" target="_blank" rel="noopener">guía oficial de cálculo del SII</a>, la página de <a href="https://www.sii.cl/destacados/reavaluo/2025/4449-4452.html" target="_blank" rel="noopener">reavalúo y avisos del SII</a> y la <a href="https://ayuda.tgr.gob.cl/ayuda/pagar/pagar-en-tesoreria-y-formas-de-pago" target="_blank" rel="noopener">ayuda de formas de pago y convenios de TGR</a>.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los montos exentos y tasas corresponden al segundo semestre de 2026 según la tabla del SII; el giro oficial que emite el SII y cobra la TGR prevalece sobre cualquier estimación. No es asesoría tributaria.</p></div></aside>
 <p>Para profundizar en los costos de ser propietario, revisa la <a href="/guias/hogar-servicios-basicos-chile">guía de gastos del hogar</a> y, si estás evaluando una compra, la <a href="/guias/comprar-vivienda-chile">guía para comprar vivienda</a>, que incluye el certificado de deuda de contribuciones dentro de los documentos a exigir.</p>`,
   },
@@ -4709,7 +4709,7 @@ const articleCatalog: ArticleDraft[] = [
     updatedAt: '2026-09-26',
     category: 'laboral',
     readingTime: 6,
-    seoTitle: 'Ley 21.808: el Subsidio Unificado de Empleo rige desde octubre',
+    seoTitle: 'Ley 21.808: Subsidio Unificado de Empleo desde octubre',
     seoDescription:
       'El SUE reemplaza los subsidios al empleo desde el 01-10-2026: IMM del subsidio $529.000, tramos de 1,25 y 2,25 IMM, piso de $13.225 y reglas para trabajador y empresa.',
     keywords: [
@@ -5045,7 +5045,7 @@ const articleCatalog: ArticleDraft[] = [
     readingTime: 5,
     relatedGuia: 'familia-pension-alimenticia-chile',
     embedCalculatorId: 'aporte-familiar-permanente',
-    seoTitle: 'Aporte Familiar Permanente 2026: $66.834, plazo y cobro pendiente',
+    seoTitle: 'Aporte Familiar Permanente 2026: plazo y cobro',
     seoDescription:
       'Aporte Familiar Permanente de $66.834 por carga: plazo de 9 meses para cobrar, consulta con RUN y fecha de nacimiento, formas de pago y trámite de aportes de años anteriores.',
     keywords: [
