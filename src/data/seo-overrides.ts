@@ -99,6 +99,12 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // --- TRIBUTARIO Y HONORARIOS ---
+  'vacaciones-feriado-legal-chile': {
+    seoTitle: 'Vacaciones progresivas y feriado legal en Chile 2026', // 52
+    seoDescription:
+      'Cuántos días de vacaciones te tocan: 15 días hábiles al año, más 1 día progresivo cada 3 años después de 10 trabajados. Acumulación y ejemplos.', // 148
+  },
+
   'calculadora-iva': {
     seoTitle: 'Calculadora IVA Chile: agrega o quita el 19%', // 44
     seoDescription:
