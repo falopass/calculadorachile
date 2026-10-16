@@ -308,8 +308,8 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Calculadora de finiquito: indemnización, vacaciones y aviso',
-        lead: 'El finiquito suma las prestaciones que correspondan según la causal: indemnización de 30 días por año de servicio (tope 11 años y base máxima 90 UF), sustitutiva del aviso previo si no hubo aviso de 30 días, feriado proporcional y remuneraciones pendientes.',
+        h1: 'Calculadora de finiquito 2026: indemnización, vacaciones y aviso',
+        lead: 'Calcula cuánto te corresponde de finiquito según la causal de término. El finiquito puede incluir la indemnización por años de servicio (30 días de remuneración por año, con tope de 11 años y una base de cálculo de hasta 90 UF), las vacaciones proporcionales y el mes de aviso previo, según el caso (Dirección del Trabajo).',
         example: {
           caption:
             'Despido por necesidades de la empresa (Art. 161), 6 meses del último año, sin aviso previo de 30 días y con gratificación. No incluye recargos judiciales.',
