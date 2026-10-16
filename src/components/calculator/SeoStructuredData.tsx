@@ -227,6 +227,8 @@ export default function SeoStructuredData({
     // calculadora ES la entidad central de la página.
     mainEntity: { '@id': `${url}#software` },
     primaryImageOfPage: imageUrl,
+    // speakable es válido en WebPage, no en SoftwareApplication (schema.org).
+    speakableSelectors: ['[data-speakable="title"]', '[data-speakable="description"]'],
   });
 
   // Si hay una guía pillar relacionada, la referenciamos como
