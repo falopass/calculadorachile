@@ -106,9 +106,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-boleta-honorarios': {
-    seoTitle: 'Boleta de Honorarios 2026: retención 15,25% SII', // 47
+    seoTitle: 'Calcular boleta de honorarios 2026: retención 15,25%', // 52
     seoDescription:
-      'Calcula el valor bruto y líquido de tu boleta 2026 con retención 15,25% (Ley 21.133). Factor 0,8475 al instante. Gratis, datos SII.', // 132
+      'Calcula tu boleta de honorarios 2026: de bruto a líquido y de líquido a bruto con la retención de 15,25% del SII (Ley 21.133). Ejemplos en pesos.', // 148
   },
 
   'calculadora-operacion-renta': {

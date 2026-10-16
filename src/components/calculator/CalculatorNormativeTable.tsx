@@ -49,7 +49,7 @@ const NORMATIVE_DATA: Record<string, TableData> = {
     note: 'Tabla vigente mensual. Para obtener el monto en pesos (CLP), multiplica el valor en UTM por la UTM del mes en curso.',
   },
   'boleta-honorarios': {
-    title: 'Calendario Oficial de Retención de Boletas de Honorarios (Ley 21.133)',
+    title: 'Retención de la boleta de honorarios por año',
     source: 'Servicio de Impuestos Internos (SII) · Ley 21.133',
     sourceUrl: 'https://www.sii.cl/destacados/boletas_honorarios/',
     headers: ['Año Calendario', 'Tasa de Retención', 'Factor Líquido a Bruto', 'Estado'],
@@ -60,7 +60,7 @@ const NORMATIVE_DATA: Record<string, TableData> = {
       ['2027', '16,00%', '0,8400', 'Próximo tramo'],
       ['2028 en adelante', '17,00%', '0,8300', 'Tasa final definitiva'],
     ],
-    note: 'Para calcular el bruto a partir del líquido en 2026: divide el monto líquido por 0,8475. Para calcular la retención: multiplica el bruto por 15,25%.',
+    note: 'La retención sube cada año para financiar las cotizaciones de los trabajadores independientes. En 2025 fue de 14,5%, en 2026 es de 15,25%, en 2027 será de 16% y en 2028 llegará a 17% (SII, Ley 21.133).',
   },
   'horas-extra': {
     title: 'Factores Oficiales de Horas Extraordinarias según Jornada Semanal',
