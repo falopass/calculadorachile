@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { calculateFiniquito, type FiniquitoInput } from '../finiquito';
+import { INDEMNIZACION, UF } from '@/lib/values/constants';
 
 describe('calculateFiniquito', () => {
   const inputBase: FiniquitoInput = {
@@ -165,6 +166,31 @@ describe('calculateFiniquito', () => {
         vacacionesAniosAnteriores: 10,
       });
       expect(r.vacacionesPendientesAniosAnteriores).toBe(Math.round((900_000 / 30) * 10));
+    });
+  });
+
+  describe('aviso previo: tope 90 UF (Art. 172 inciso final)', () => {
+    const topeMensual = INDEMNIZACION.tope_uf_mensual * UF.valor;
+
+    it('sueldo bajo el tope: paga el sueldo completo', () => {
+      const sueldo = Math.floor(topeMensual / 2);
+      const r = calculateFiniquito({
+        ...inputBase,
+        ultimoSueldo: sueldo,
+        causaTermino: 'necesidades_empresa',
+        incluyeAvisoPrevio: true,
+      });
+      expect(r.indemnizacionAvisoPrevio).toBe(sueldo);
+    });
+
+    it('sueldo sobre el tope: paga máximo 90 UF', () => {
+      const r = calculateFiniquito({
+        ...inputBase,
+        ultimoSueldo: Math.ceil(topeMensual * 2),
+        causaTermino: 'necesidades_empresa',
+        incluyeAvisoPrevio: true,
+      });
+      expect(r.indemnizacionAvisoPrevio).toBeCloseTo(topeMensual, 0);
     });
   });
 });
