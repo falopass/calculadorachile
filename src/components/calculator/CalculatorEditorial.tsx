@@ -68,6 +68,7 @@ const DT_FERIADO = 'https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-1503
 const SII_CUOTAS = 'https://www.sii.cl/preguntas_frecuentes/aval_contrib_bbrr/001_165_0310.htm';
 const SII_TASAS = 'https://www.sii.cl/ayudas/ayudas_por_servicios/2242-reajustes_exenciones-2468.html';
 const TGR = 'https://www.tgr.cl/tramites/contribuciones/';
+const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm';
 
 const EDITORIAL: Record<string, EditorialContent> = {
   finiquito: {
@@ -337,6 +338,95 @@ const EDITORIAL: Record<string, EditorialContent> = {
               Cuarta cuota de contribuciones 2026
             </Int>
           </p>
+        </Section>
+      </>
+    ),
+  },
+  'boleta-honorarios': {
+    top: (
+      <Section title="Cómo calcular la boleta de honorarios">
+        <p className={pClass}>
+          <strong>De bruto a líquido:</strong> multiplica el bruto por 0,8475 (100% − 15,25%) (
+          <Ext href={SII_RETENCION_2026}>SII</Ext>).
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
+          <li>
+            $100.000 × 0,8475 = <strong>$84.750</strong> líquidos (retención $15.250)
+          </li>
+          <li>
+            $1.000.000 × 0,8475 = <strong>$847.500</strong> líquidos (retención $152.500)
+          </li>
+        </ul>
+        <p className={pClass}>
+          <strong>De líquido a bruto:</strong> si acordaste un monto líquido, divídelo por 0,8475.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
+          <li>
+            $1.000.000 ÷ 0,8475 = <strong>$1.179.941</strong> brutos (retención $179.941)
+          </li>
+        </ul>
+      </Section>
+    ),
+    bottom: (
+      <>
+        <Section title="Qué cubre la retención">
+          <p className={pClass}>
+            Lo retenido no es solo impuesto. En la Operación Renta se usa primero para pagar las
+            cotizaciones de seguridad social de los trabajadores independientes (Ley 21.133) y lo
+            que sobra se imputa al impuesto o se devuelve (<Ext href={SII_RETENCION_2026}>SII</Ext>
+            ). Es un pago provisional que se reliquida en el Formulario 22. Más detalle en la{' '}
+            <Int href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</Int>.
+            Si tienes un sueldo de contrato, compáralo con la{' '}
+            <Int href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</Int>
+            .
+          </p>
+        </Section>
+
+        <Section title="Emitir la boleta">
+          <p className={pClass}>
+            Esta página calcula montos. Para emitir la boleta, entra con tu RUT y clave en{' '}
+            <Ext href="https://www.sii.cl">sii.cl</Ext>. El paso a paso está en la{' '}
+            <Int href="/guias/iva-boleta-honorarios-chile">guía</Int>.
+          </p>
+        </Section>
+
+        <Section title="Más preguntas sobre la boleta de honorarios">
+          <Faq
+            items={[
+              {
+                q: '¿Cómo se hace el cálculo de boleta de honorarios?',
+                a: (
+                  <>
+                    Multiplica el monto bruto por 0,8475 para obtener el líquido de 2026, o divide
+                    el líquido por 0,8475 para obtener el bruto. Ejemplo: $100.000 brutos dejan
+                    $84.750 líquidos (<Ext href={SII_RETENCION_2026}>SII</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cuánto se retiene en una boleta de honorarios en 2026?',
+                a: (
+                  <>
+                    15,25% del monto bruto, entre el 1 de enero y el 31 de diciembre de 2026 (
+                    <Ext href={SII_RETENCION_2026}>SII</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cómo emitir una boleta de honorarios?',
+                a: (
+                  <>
+                    En <Ext href="https://www.sii.cl">sii.cl</Ext>, con tu RUT y clave tributaria.
+                    La{' '}
+                    <Int href="/guias/iva-boleta-honorarios-chile">
+                      guía de IVA y boleta de honorarios
+                    </Int>{' '}
+                    explica el paso a paso.
+                  </>
+                ),
+              },
+            ]}
+          />
         </Section>
       </>
     ),

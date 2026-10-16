@@ -876,7 +876,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'impuestos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-10-16',
     sources: [
       {
         name: 'SII — Boletas de honorarios',
