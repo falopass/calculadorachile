@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { VERIFICACION_VALORES } from '@/lib/values/constants';
 
 /**
  * Contenido editorial visible por calculadora (texto, tablas y preguntas
@@ -326,6 +327,29 @@ const EDITORIAL: Record<string, EditorialContent> = {
       </>
     ),
   },
+  'seguro-cesantia': {
+    bottom: (
+      <Section title="Giros adicionales del Fondo de Cesantía Solidario">
+        <p className={pClass}>
+          Si la tasa de desempleo del INE supera en más de 1 punto su promedio de los 4 años
+          anteriores, quienes cobran el 5° giro del Fondo de Cesantía Solidario reciben 2 giros
+          adicionales de 30% de la remuneración promedio (mínimo $129.085, máximo $430.288).
+        </p>
+        <p className={pClass}>
+          Fuentes:{' '}
+          <Ext href="https://www.bcn.cl/leychile/navegar?idNorma=184979">Ley 19.728, art. 25</Ext>{' '}
+          ·{' '}
+          <Ext href="https://www.spensiones.cl/portal/institucional/594/w3-article-17135.html">
+            Superintendencia de Pensiones
+          </Ext>{' '}
+          ·{' '}
+          <Ext href="https://www.spensiones.gob.cl/portal/institucional/594/w3-propertyvalue-9925.html">
+            Superintendencia de Pensiones: montos
+          </Ext>
+        </p>
+      </Section>
+    ),
+  },
   iva: {
     bottom: (
       <Section title="Calculadoras y guías relacionadas">
@@ -384,6 +408,33 @@ const EDITORIAL: Record<string, EditorialContent> = {
   },
 };
 
+function formatFechaISO(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${d}-${m}-${y}`;
+}
+
+/** "Valores verificados al [fecha]" con enlace a la fuente oficial de cada valor. */
+function VerifiedValues({ calculatorId }: { calculatorId: string }) {
+  const items = Object.values(VERIFICACION_VALORES).filter((v) =>
+    v.calculadoras.includes(calculatorId),
+  );
+  if (items.length === 0) return null;
+  const fecha = items.map((v) => v.verificadoAl).sort().at(-1) as string;
+  return (
+    <section className={sectionClass}>
+      <h2 className={h2Class}>Valores verificados al {formatFechaISO(fecha)}</h2>
+      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
+        {items.map((v) => (
+          <li key={v.valor}>
+            {v.valor}: <Ext href={v.fuente}>fuente oficial</Ext>
+            {v.verificadoAl !== fecha && <> (verificado al {formatFechaISO(v.verificadoAl)})</>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function CalculatorEditorial({
   calculatorId,
   position,
@@ -392,5 +443,13 @@ export default function CalculatorEditorial({
   position: 'top' | 'bottom';
 }) {
   const content = EDITORIAL[calculatorId]?.[position];
+  if (position === 'bottom') {
+    return (
+      <>
+        {content}
+        <VerifiedValues calculatorId={calculatorId} />
+      </>
+    );
+  }
   return content ? <>{content}</> : null;
 }
