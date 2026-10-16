@@ -102,7 +102,7 @@ const NORMATIVE_DATA: Record<string, TableData> = {
       ['Cuprum', '1,44%', '11,44%', '#6'],
       ['ProVida', '1,45%', '11,45%', '#7 Más costosa'],
     ],
-    note: 'El Seguro de Invalidez y Sobrevivencia (SIS, 1,49%) es pagado íntegramente por el empleador y no se descuenta al trabajador dependiente.',
+    note: 'Desde agosto de 2026 el Seguro de Invalidez y Sobrevivencia (SIS) es 1,78% de la remuneración imponible (Superintendencia de Pensiones). Es de cargo del empleador, se financia dentro de la cotización del Seguro Social (Ley 21.735) y no se descuenta al trabajador dependiente.',
   },
 };
 
