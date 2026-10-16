@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
@@ -7,6 +6,7 @@ import Footer from '@/components/layout/Footer';
 import SkipLinks from '@/components/ui/SkipLinks';
 import { ToastProvider } from '@/components/ui/Toast';
 import { GAProvider } from '@/components/analytics/GAProvider';
+import AdSenseLoader from '@/components/ads/AdSenseLoader';
 import { SITE_URL, SITE_NAME } from '@/lib/site';
 import JsonLd from '@/components/seo/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/seo/schema';
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     'geo.region': 'CL',
     'geo.placename': 'Chile',
     'geo.position': '-33.45;-70.66',
-    'ICBM': '-33.45, -70.66',
+    ICBM: '-33.45, -70.66',
     ...(process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID &&
     process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID !== 'ca-pub-XXXXXXX'
       ? { 'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID }
@@ -131,11 +131,13 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
-  const adsenseEnabled = adsenseId && adsenseId !== 'ca-pub-XXXXXXX';
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // Client de AdSense (ca-pub-…). null lo desactiva por completo.
+  const adsenseClient =
+    process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID &&
+    process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID !== 'ca-pub-XXXXXXX'
+      ? process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID
+      : null;
 
   return (
     <html lang="es-CL" className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -165,14 +167,6 @@ export default function RootLayout({
           title={`${SITE_NAME} - Blog`}
           href="/blog/feed.xml"
         />
-        {adsenseEnabled && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        )}
       </head>
       <body className="min-h-screen flex flex-col font-sans">
         {/*
@@ -193,6 +187,14 @@ export default function RootLayout({
             <Footer />
           </GAProvider>
         </ToastProvider>
+        {/*
+          AdSense (anuncios automáticos) se inyecta desde el cliente vía
+          AdSenseLoader, que respeta el modo sin anuncios (?noads=1, cookie
+          cc_noads, navegadores automatizados). Antes iba como <Script> fijo
+          en el head; se movió para que los bots que auditan el sitio no
+          generen tráfico no válido en AdSense.
+        */}
+        {adsenseClient && <AdSenseLoader client={adsenseClient} />}
       </body>
     </html>
   );
