@@ -508,9 +508,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   // ══════════════════════════════════════════════════════════════════════════
 
   'sueldo-liquido-chile': {
-    seoTitle: 'Sueldo Líquido Chile 2026: descuentos y ejemplos en $', // 54
+    seoTitle: 'Sueldo bruto vs líquido y total haberes', // 42 (+ | CalculaChile = 56)
     seoDescription:
-      'Cómo se calcula el sueldo líquido 2026: AFP, 7% salud, cesantía, IUSC y topes. Ejemplos en pesos y calculadora gratis. Fuentes DT y SP.', // 140
+      '¿Total haberes es lo mismo que sueldo bruto? Diferencia entre bruto, imponible y líquido en tu liquidación, con ejemplo en pesos y base en la DT.', // 145
   },
 
   'finiquito-laboral-chile': {

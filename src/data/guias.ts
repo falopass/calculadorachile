@@ -94,7 +94,7 @@ export const guias: Guia[] = [
       'calculadora sueldo líquido',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-08',
+    updatedAt: '2026-10-19',
     readingTime: 16,
     relatedCalculators: [
       'calculadora-sueldo-liquido',
@@ -115,6 +115,18 @@ export const guias: Guia[] = [
         label: 'D.L. 3500 (Sistema de pensiones)',
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147',
       },
+      {
+        label: 'Dictamen DT 2648/203 (colación y movilización)',
+        url: 'https://dt.gob.cl/legislacion/1624/w3-article-61802.html',
+      },
+      {
+        label: 'Suplemento LRE DT (código 5201 Total haberes)',
+        url: 'https://www.dt.gob.cl/portal/1628/articles-119843_recurso_3.pdf',
+      },
+      {
+        label: 'Estructura del LRE (Consultas DT)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-119862.html',
+      },
     ],
     sections: [
       {
@@ -125,6 +137,16 @@ export const guias: Guia[] = [
 <p>La estructura legal de estos descuentos está definida principalmente en el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">D.L. 3500 (sistema de pensiones)</a>, la Ley 18.469 (Régimen de Salud), la Ley 19.728 (Seguro de Cesantía) y los artículos 42 y 43 de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a>.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>En síntesis</strong><p>De cada $1.000.000 brutos, un trabajador típico recibe entre $770.000 y $830.000 líquidos. La diferencia se distribuye entre AFP (≈11%), salud (7%), cesantía (0,6%) e impuesto único (variable).</p></div></aside>
 <ul class="data-grid"><li><span class="data-grid__label">Tope imponible AFP/Salud</span><span class="data-grid__value">90 UF</span></li><li><span class="data-grid__label">Tope imponible cesantía</span><span class="data-grid__value">135,2 UF</span></li><li><span class="data-grid__label">Tasa AFP obligatoria</span><span class="data-grid__value">10% + comisión</span></li><li><span class="data-grid__label">Tasa salud mínima</span><span class="data-grid__value">7%</span></li></ul>`,
+      },
+      {
+        id: 'total-haberes-sueldo-bruto',
+        title: '¿Total haberes es lo mismo que sueldo bruto?',
+        level: 2,
+        html: `<p>En la práctica, sí: el "total haberes" de tu liquidación es lo que se suele llamar sueldo bruto, es decir, la suma de todos tus haberes imponibles más los no imponibles, antes de cualquier descuento. Lo que no es lo mismo es el <strong>total imponible</strong>, que solo considera los haberes que son remuneración y sobre el cual se calculan la AFP, la salud y el seguro de cesantía.</p>
+<p>El Código del Trabajo no usa la expresión "sueldo bruto". Lo que define es la remuneración (<a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 41</a>): «No constituyen remuneración las asignaciones de movilización, de pérdida de caja, de desgaste de herramientas y de colación, los viáticos, las prestaciones familiares otorgadas en conformidad a la ley, las indemnizaciones establecidas en el artículo 163 y las demás que proceda pagar al extinguirse la relación contractual ni, en general, las devoluciones de gastos en que se incurra por causa del trabajo.» La Dirección del Trabajo agrega que colación y movilización solo dejan de ser imponibles si los montos son razonables frente al gasto real (<a href="https://dt.gob.cl/legislacion/1624/w3-article-61802.html" target="_blank" rel="noopener">Dictamen 2648/203</a>).</p>
+<p>En el <a href="https://www.dt.gob.cl/portal/1628/articles-119843_recurso_3.pdf" target="_blank" rel="noopener">Libro de Remuneraciones Electrónico</a> de la DT, el "Total haberes" (código 5201) es la suma de los totales 5210 (imponibles y tributables), 5220 (imponibles no tributables), 5230 (no imponibles y no tributables) y 5240 (no imponibles y tributables): es decir, imponibles más no imponibles. Ver también la <a href="https://www.dt.gob.cl/portal/1628/w3-article-119862.html" target="_blank" rel="noopener">estructura del LRE</a> en Consultas DT.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Ejemplo (montos de colación y movilización ilustrativos)</strong><ul class="data-grid"><li><span class="data-grid__label">Sueldo base</span><span class="data-grid__value">$553.553</span></li><li><span class="data-grid__label">Colación (no imponible)</span><span class="data-grid__value">$40.000</span></li><li><span class="data-grid__label">Movilización (no imponible)</span><span class="data-grid__value">$30.000</span></li><li><span class="data-grid__label">Total imponible</span><span class="data-grid__value">$553.553</span></li><li><span class="data-grid__label">Total haberes (bruto)</span><span class="data-grid__value">$623.553</span></li></ul><p>El sueldo base es el ingreso mínimo (Ley 21.830). Los $40.000 y $30.000 son ilustrativos, no oficiales.</p></div></aside>
+<p>Ojo: si una oferta de trabajo te habla de "bruto", pregunta si incluye colación y movilización, porque cambia tu imponible y tus cotizaciones. Para ver cuánto te queda en el bolsillo, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>`,
       },
       {
         id: 'descuentos-obligatorios',
@@ -280,7 +302,10 @@ export const guias: Guia[] = [
         id: 'preguntas-frecuentes',
         title: 'Preguntas frecuentes',
         level: 2,
-        html: `<h3>¿Las horas extra entran en la base de AFP?</h3>
+        html: `<h3>¿Total haberes es lo mismo que sueldo bruto?</h3>
+<p>Sí, en la práctica. El total haberes suma los haberes imponibles y los no imponibles antes de descuentos, y es lo que suele llamarse sueldo bruto. No es igual al total imponible, que excluye colación, movilización y otras asignaciones no remuneracionales (<a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">art. 41 del Código del Trabajo</a>; LRE código 5201 de la DT).</p>
+
+<h3>¿Las horas extra entran en la base de AFP?</h3>
 <p>Sí. El recargo del 50% sobre el valor hora ordinaria se considera remuneración imponible. La <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> muestra el impacto exacto en cotizaciones.</p>
 
 <h3>¿Cómo afecta cambiarme de AFP?</h3>
