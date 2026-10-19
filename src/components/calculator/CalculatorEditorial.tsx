@@ -77,6 +77,17 @@ const TGR = 'https://www.tgr.cl/tramites/contribuciones/';
 const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm';
 
 const EDITORIAL: Record<string, EditorialContent> = {
+  'horas-extra': {
+    bottom: (
+      <Section title="Factor hora extra con jornada de 42 horas">
+        <p className={pClass}>
+          Si solo necesitas el multiplicador para tu sueldo mensual, usa la calculadora del{' '}
+          <Int href="/calculadoras/calculadora-factor-hora-extra">factor hora extra 42 horas</Int>
+          , que ya incluye el recargo mínimo de 50%.
+        </p>
+      </Section>
+    ),
+  },
   finiquito: {
     bottom: (
       <>

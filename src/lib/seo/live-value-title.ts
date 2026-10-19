@@ -143,13 +143,30 @@ export function buildLiveValueTitle(
 
   if (kind === 'utm') {
     const mes = MESES_ES_CL[parts.month - 1];
-    return `UTM ${mes} ${parts.year}: ${formatCLP(value)} | UTM a pesos`;
+    const Mes = mes.charAt(0).toUpperCase() + mes.slice(1);
+    return `¿Cuánto es una UTM? ${Mes} ${parts.year}: ${formatCLP(value)}`;
   }
   const fecha = `${String(parts.day).padStart(2, '0')}-${String(parts.month).padStart(2, '0')}-${parts.year}`;
   if (kind === 'uf') {
     return `UF hoy ${fecha}: ${formatCLP2(value)} | UF a pesos`;
   }
   return `Dólar hoy ${fecha}: ${formatCLP2(value)} | Dólar a pesos`;
+}
+
+/**
+ * Meta description con el valor en vivo (solo UTM por ahora).
+ * Devuelve `null` para otros indicadores o si la fecha no se interpreta.
+ */
+export function buildLiveValueDescription(
+  kind: LiveKind,
+  value: number,
+  date: Date,
+): string | null {
+  if (kind !== 'utm') return null;
+  const parts = toSantiagoParts(date);
+  if (!parts) return null;
+  const mes = MESES_ES_CL[parts.month - 1];
+  return `Una UTM vale ${formatCLP(value)} en ${mes} de ${parts.year} (SII). Convierte UTM a pesos y pesos a UTM para multas, patentes y contratos. Gratis y sin registro.`;
 }
 
 export { formatDDMMYYYY, toSantiagoParts };
