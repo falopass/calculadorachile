@@ -1871,7 +1871,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>La operación completa se simplifica así:</p>
 <p><code>hora extra 42 h = sueldo mensual × 0,0083333</code></p>
 
-<p>El factor incluye el recargo. No vuelvas a multiplicarlo por 1,5. Tampoco lo uses para 40, 44 o una jornada parcial sin recalcular el divisor.</p>
+<p>El factor incluye el recargo. No vuelvas a multiplicarlo por 1,5. Tampoco lo uses para 40, 44 o una jornada parcial sin recalcular el divisor. Para obtenerlo directo desde tu sueldo, usa la calculadora del <a href="/calculadoras/calculadora-factor-hora-extra">factor hora extra 42 horas</a>.</p>
 
 <div class="numeric-example"><div class="numeric-example__title">Sueldo mensual $800.000 · 10 horas extra</div><ul><li>$800.000 ÷ 30 × 28 ÷ 168 = $4.444,44 por hora ordinaria</li><li>$4.444,44 × 1,5 = $6.666,67 por hora extra</li><li>$6.666,67 × 10 = $66.666,70</li></ul><span class="total">Sobresueldo bruto aproximado: $66.667</span></div>
 

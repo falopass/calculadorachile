@@ -19,6 +19,7 @@ import { FALLBACK_VALUES } from '@/lib/values/fallback';
 import { formatCLP } from '@/lib/formatters';
 import {
   buildLiveValueTitle,
+  buildLiveValueDescription,
   isLiveValueFresh,
   toSantiagoParts,
   MESES_ES_CL,
@@ -190,6 +191,7 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
   // Título con valor en vivo para los conversores (solo si el dato
   // está fresco; si no, queda el override estático).
   const kind = LIVE_SLUG_KIND[calculator.slug];
+  let liveDesc: string | null = null;
   if (kind) {
     const live = await getLiveContext(calculator.slug);
     const indicator = extractLiveIndicator(kind, live);
@@ -205,6 +207,7 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
         new Date(),
       );
       if (liveTitle) titleClean = liveTitle;
+      liveDesc = buildLiveValueDescription(kind, indicator.value, new Date(indicator.date));
     }
   }
 
@@ -216,8 +219,9 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
     calculator.seoDescription ??
     calculator.description
   ).trim();
-  const enrichedDesc =
-    baseDesc.length < 80
+  const enrichedDesc = liveDesc
+    ? liveDesc
+    : baseDesc.length < 80
       ? `${baseDesc} Cálculo referencial en línea, gratis y sin registro. Revisa fuentes, supuestos y limitaciones.`
       : baseDesc;
 

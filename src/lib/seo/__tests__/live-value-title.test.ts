@@ -145,7 +145,7 @@ describe('buildLiveValueTitle', () => {
       new Date('2026-09-01T12:00:00.000Z'),
       NOW,
     );
-    expect(title).toBe('UTM septiembre 2026: $71.721 | UTM a pesos');
+    expect(title).toBe('¿Cuánto es una UTM? Septiembre 2026: $71.721');
   });
 
   it('UF: fecha dd-mm-aaaa y dos decimales es-CL', () => {

@@ -21,9 +21,9 @@ import { SITE_URL } from '@/lib/site';
 export const metadata: Metadata = {
   ...buildPageMetadata({
     path: '/',
-    title: 'Calculadoras Chile 2026: IVA, CAE, sueldo y más',
+    title: 'Calculadora online Chile: sueldo, finiquito, UF y más',
     description:
-      'Calculadoras gratis para Chile 2026: IVA 19%, simulador CAE, patente comercial, sueldo líquido, finiquito, permiso de circulación y UF. Actualizadas y sin registro.',
+      'Calculadoras online gratis para Chile: sueldo líquido, finiquito, UF, UTM, CAE, contribuciones y más, con valores oficiales. Sin registro.',
     keywords: [
       'calculadoras chilenas 2026',
       'calculadora IVA',

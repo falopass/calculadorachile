@@ -87,7 +87,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-asignacion-familiar': {
-    seoTitle: 'Asignación Familiar 2026: tramos y monto por carga', // 53
+    seoTitle: 'Tramos asignación familiar 2026: monto por carga', // 49
     seoDescription:
       'Calcula la asignación familiar 2026 por carga acreditada: tramos $22.601, $13.870 y $4.382 según ingreso imponible. SUSESO / DT.', // 130
   },
