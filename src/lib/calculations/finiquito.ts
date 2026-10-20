@@ -176,6 +176,13 @@ function calcularIndemnizacionAvisoPrevio(
  * (DT: https://www.dt.gob.cl/portal/1628/w3-article-60200.html). Sin fecha
  * válida, se pagan los días hábiles sin proyectar.
  */
+/** Acepta solo fechas AAAA-MM-DD que existen en el calendario (rechaza 2026-02-30). */
+function fechaTerminoValida(fecha?: string): string | undefined {
+  if (!fecha || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return undefined;
+  const d = new Date(`${fecha}T00:00:00Z`);
+  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === fecha ? fecha : undefined;
+}
+
 function calcularVacacionesProporcionales(
   ultimoSueldo: number,
   mesesTrabajados: number,
@@ -186,7 +193,7 @@ function calcularVacacionesProporcionales(
     sueldoBruto: ultimoSueldo,
     mesesTrabajados,
     diasVacacionesPendientes: diasPendientes,
-    fechaTermino,
+    fechaTermino: fechaTerminoValida(fechaTermino),
   });
 }
 

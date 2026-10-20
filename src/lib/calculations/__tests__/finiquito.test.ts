@@ -275,6 +275,9 @@ describe('feriado proporcional en días corridos con fecha de término (DT w3-ar
   it('una fecha inválida se trata como sin fecha', () => {
     const r = calculateFiniquito({ ...casoVigia, fechaTermino: '20-10-2026' });
     expect(r.vacacionesProporcionales).toBe(133_333);
+    const imposible = calculateFiniquito({ ...casoVigia, fechaTermino: '2026-02-30' });
+    expect(imposible.desglose.feriadoEnDiasCorridos).toBe(false);
+    expect(imposible.vacacionesProporcionales).toBe(133_333);
   });
 
   it('suma también un feriado nacional: término el 30-10-2026, 4 meses', () => {
