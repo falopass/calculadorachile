@@ -1221,6 +1221,7 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>Lo que queda de 2026</h2>
 <ul>
+<li><strong>Octubre:</strong> les corresponde a las patentes terminadas en <strong>7</strong> (hasta el 31 de octubre).</li>
 <li><strong>Noviembre:</strong> les corresponde a las patentes terminadas en <strong>8</strong>.</li>
 <li><strong>Diciembre:</strong> no tiene dígito asignado. Como la revisión se puede hacer en el mes anterior al que corresponde, las patentes terminadas en <strong>9</strong>, que tienen enero, pueden hacerla en diciembre de 2026 sin que cambie su vigencia.</li>
 <li><strong>Si tu mes ya pasó:</strong> lo que manda es la fecha de vigencia de tu certificado, no la tabla. Si está vencido, no circules con el vehículo hasta revisarlo: conducir sin revisión técnica vigente es una <strong>infracción grave</strong> (<a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>). Puedes ver la sanción en pesos en la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas de tránsito</a>.</li>
