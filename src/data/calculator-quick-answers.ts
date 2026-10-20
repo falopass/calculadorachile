@@ -377,6 +377,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           causaTermino: 'necesidades_empresa',
           incluyeAvisoPrevio: true,
           tieneGratificacion: false,
+          fechaTermino: '2026-10-16',
         });
         return [
           formatCLP(ultimoSueldo),
@@ -429,7 +430,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ],
         example: {
           caption:
-            'Despido por necesidades de la empresa (Art. 161), 6 meses del último año, sin aviso previo de 30 días y sin gratificación proporcional. No incluye recargos judiciales.',
+            'Despido por necesidades de la empresa (Art. 161) con término el viernes 16-10-2026, 6 meses del último año, sin aviso previo de 30 días y sin gratificación proporcional. El feriado proporcional (7,5 días hábiles) se paga en días corridos: 11,5 desde el 17-10-2026. No incluye recargos judiciales.',
           headers: ['Último sueldo', 'Años', 'Indemnización por años', 'Total finiquito estimado'],
           rows,
         },
