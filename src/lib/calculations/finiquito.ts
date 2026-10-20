@@ -112,8 +112,12 @@ export interface FiniquitoResult {
  * Fuente: https://www.bcn.cl/leychile/navegar?idNorma=207436
  */
 function calcularAñosIndemnizacion(añosTrabajados: number, mesesTrabajados: number): number {
+  // Solo con años enteros: si el usuario ya ingresó años con decimales, la
+  // fracción viene incluida y no se suma de nuevo.
   const añosConFraccion =
-    añosTrabajados >= 1 && mesesTrabajados > 6 ? añosTrabajados + 1 : añosTrabajados;
+    Number.isInteger(añosTrabajados) && añosTrabajados >= 1 && mesesTrabajados > 6
+      ? añosTrabajados + 1
+      : añosTrabajados;
   return Math.min(añosConFraccion, INDEMNIZACION.tope_años);
 }
 

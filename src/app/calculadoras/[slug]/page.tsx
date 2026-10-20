@@ -104,7 +104,7 @@ function buildLiveValueBlock(
         ? 'Banco Central de Chile'
         : 'mindicador.cl';
   const sourceUrl =
-    kind === 'utm' ? 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm' : undefined;
+    kind === 'utm' ? `https://www.sii.cl/valores_y_fechas/utm/utm${parts.year}.htm` : undefined;
   const fecha = formatDDMMYYYY(dateObj);
 
   let heading: string;
