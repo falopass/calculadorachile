@@ -125,7 +125,7 @@ export function calculateSubsidioUnificadoEmpleo(
     : 0;
 
   const baseCalculo = cumpleRequisitos
-    ? `Primer año (PV ${SUE.pvTrabajador}% trabajador / ${SUE.pvEmpresa}% empresa) sobre renta bruta $${rb.toLocaleString('es-CL')}, con IMM del subsidio $${imm.toLocaleString('es-CL')} y piso de $${pisoTrabajador.toLocaleString('es-CL')}. Parámetros sujetos al decreto del art. 8 (pendiente de publicación).`
+    ? `Primer año (PV ${SUE.pvTrabajador}% trabajador / ${SUE.pvEmpresa}% empresa) sobre renta bruta $${rb.toLocaleString('es-CL')}, con IMM del subsidio $${imm.toLocaleString('es-CL')} y piso de $${pisoTrabajador.toLocaleString('es-CL')}. Parámetros fijados por el Decreto 273 exento de Hacienda (DO 01-10-2026).`
     : motivosNoAplica.join(' ');
 
   return {
