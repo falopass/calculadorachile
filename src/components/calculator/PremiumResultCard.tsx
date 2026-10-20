@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { CalculatorResult } from '@/types/calculator';
 import { formatCLP, formatUF, formatUTM, formatPercentage } from '@/lib/formatters';
@@ -116,6 +117,7 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
   };
 
   return (
+    <>
     <motion.div
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
@@ -175,6 +177,32 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
         </button>
       </div>
     </motion.div>
+    {result.note && (
+      <p className="px-4 sm:px-5 pb-4 pt-1 text-xs leading-relaxed text-[var(--foreground-secondary)] border-b border-[var(--border)]/30">
+        {result.note.text}
+        {result.note.linkText && result.note.href && (
+          <Link href={result.note.href} className="font-medium text-[var(--color-primary-600)] hover:underline">
+            {result.note.linkText}
+          </Link>
+        )}
+        {result.note.textAfter}
+        {result.note.source && (
+          <>
+            {' '}Fuente:{' '}
+            <a
+              href={result.note.source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[var(--color-primary-600)] hover:underline"
+            >
+              {result.note.source.name}
+            </a>
+            .
+          </>
+        )}
+      </p>
+    )}
+    </>
   );
 }
 
