@@ -335,9 +335,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'revision-tecnica-chile-2026-calendario-patente': {
-    seoTitle: 'Calendario revisión técnica 2026 por dígito de patente', // 53
+    seoTitle: 'Calendario revisión técnica 2026 por dígito', // 43
     seoDescription:
-      'Revisa en qué mes te toca la revisión técnica según el último dígito de tu patente, qué llevar a la planta y qué pasa si circulas con ella vencida.', // 147
+      '¿En qué mes te toca la revisión técnica? Tabla 2026 por último dígito de patente, meses que quedan del año, prórrogas vigentes y qué hacer si se te pasó.', // 153
   },
 
   'cotizacion-empleador-3-5-agosto-2026-costo-pyme': {
