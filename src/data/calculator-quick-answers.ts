@@ -85,6 +85,16 @@ interface QuickAnswerContext {
    * snapshot ni `FALLBACK_VALUES`: si falta, el lead de UTM va sin monto.
    */
   utmFresca?: { value: number; date: string } | null;
+  /** Fecha del valor de `utm` (dato en vivo o snapshot), para indicar su mes. */
+  utmFecha?: string;
+}
+
+/** " (octubre de 2026)" según la fecha del valor usado en la tabla de UTM. */
+function mesUTMEjemplo(ctx: QuickAnswerContext): string {
+  const fecha = ctx.utmFresca?.date ?? ctx.utmFecha;
+  const parts = fecha ? toSantiagoParts(new Date(fecha)) : null;
+  if (!parts) return '';
+  return ` (${MESES_ES_CL[parts.month - 1]} de ${parts.year})`;
 }
 
 function withLinks(parts: QuickAnswerPart[]): Pick<QuickAnswer, 'lead' | 'leadParts'> {
@@ -366,6 +376,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           mesesTrabajados: 6,
           causaTermino: 'necesidades_empresa',
           incluyeAvisoPrevio: true,
+          tieneGratificacion: false,
         });
         return [
           formatCLP(ultimoSueldo),
@@ -418,7 +429,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ],
         example: {
           caption:
-            'Despido por necesidades de la empresa (Art. 161), 6 meses del último año, sin aviso previo de 30 días y con gratificación. No incluye recargos judiciales.',
+            'Despido por necesidades de la empresa (Art. 161), 6 meses del último año, sin aviso previo de 30 días y sin gratificación proporcional. No incluye recargos judiciales.',
           headers: ['Último sueldo', 'Años', 'Indemnización por años', 'Total finiquito estimado'],
           rows,
         },
@@ -447,7 +458,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         h1: 'Conversor UTM a pesos',
         ...withLinks(buildUTMLeadParts(ctx.utmFresca)),
         example: {
-          caption: `Equivalencias con UTM de ${formatCLP(valorUTM)}. El valor se reajusta cada mes según el IPC.`,
+          caption: `Equivalencias con UTM de ${formatCLP(valorUTM)}${mesUTMEjemplo(ctx)}. El valor se reajusta cada mes según el IPC.`,
           headers: ['Monto en UTM', 'Equivalente en pesos'],
           rows,
         },
