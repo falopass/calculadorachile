@@ -193,4 +193,39 @@ describe('calculateFiniquito', () => {
       expect(r.indemnizacionAvisoPrevio).toBeCloseTo(topeMensual, 0);
     });
   });
+
+  describe('fracción superior a 6 meses (Art. 163 inc. 2 CdT)', () => {
+    const base: FiniquitoInput = {
+      ultimoSueldo: 1000000,
+      añosTrabajados: 3,
+      mesesTrabajados: 0,
+      causaTermino: 'necesidades_empresa',
+      tieneGratificacion: false,
+    };
+
+    it('3 años y 7 meses cuentan como 4 años', () => {
+      const r = calculateFiniquito({ ...base, mesesTrabajados: 7 });
+      expect(r.desglose.añosIndemnizacion).toBe(4);
+      expect(r.indemnizacion).toBe(4000000);
+    });
+
+    it('3 años y 6 meses cuentan como 3 años', () => {
+      const r = calculateFiniquito({ ...base, mesesTrabajados: 6 });
+      expect(r.desglose.añosIndemnizacion).toBe(3);
+      expect(r.indemnizacion).toBe(3000000);
+    });
+
+    it('con menos de 1 año no hay indemnización por la fracción', () => {
+      const r = calculateFiniquito({ ...base, añosTrabajados: 0, mesesTrabajados: 8 });
+      expect(r.desglose.añosIndemnizacion).toBe(0);
+      expect(r.indemnizacion).toBe(0);
+    });
+
+    it('la fracción se suma antes del tope de 11 años', () => {
+      const r = calculateFiniquito({ ...base, añosTrabajados: 10, mesesTrabajados: 7 });
+      expect(r.desglose.añosIndemnizacion).toBe(INDEMNIZACION.tope_años);
+      const r2 = calculateFiniquito({ ...base, añosTrabajados: 11, mesesTrabajados: 7 });
+      expect(r2.desglose.añosIndemnizacion).toBe(INDEMNIZACION.tope_años);
+    });
+  });
 });

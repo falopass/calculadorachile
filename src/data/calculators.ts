@@ -248,12 +248,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-16',
+    lastReviewed: '2026-10-20',
     sources: [
       {
         name: 'DT — plazo y pago del finiquito',
         url: 'https://www.dt.gob.cl/portal/1628/w3-article-109632.html',
         note: 'Reglas generales del finiquito y plazo de 10 días hábiles',
+      },
+      {
+        name: 'BCN — Código del Trabajo, art. 163',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Indemnización por años de servicio: la fracción superior a 6 meses cuenta como 1 año',
       },
       {
         name: 'SUSESO — Art. 168',
@@ -337,7 +342,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         label: '¿Incluir gratificación proporcional?',
         type: 'boolean',
         required: false,
-        defaultValue: true,
+        defaultValue: false,
       },
       {
         id: 'horasExtraPromedio',
@@ -1001,8 +1006,13 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-10-20',
     sources: [
+      {
+        name: 'SII — Valores UTM y UTA 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
+        note: 'El SII fija el valor mensual de la UTM',
+      },
       {
         name: 'Banco Central de Chile',
         url: 'https://www.bcentral.cl/areas/estadisticas/estadisticas-de-precios/utm',
