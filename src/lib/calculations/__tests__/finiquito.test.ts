@@ -221,9 +221,18 @@ describe('calculateFiniquito', () => {
       expect(r.indemnizacion).toBe(0);
     });
 
-    it('con años con decimales no suma la fracción otra vez', () => {
+    it('con años con decimales aplica el art. 163 y no suma los meses otra vez', () => {
       const r = calculateFiniquito({ ...base, añosTrabajados: 1.5, mesesTrabajados: 7 });
-      expect(r.desglose.añosIndemnizacion).toBe(1.5);
+      expect(r.desglose.añosIndemnizacion).toBe(1);
+      expect(r.indemnizacion).toBe(1000000);
+    });
+
+    it('años con decimales: 1,8 → 2; 0,9 → 0; 2,5 → 2; 11,9 → 11 (tope después)', () => {
+      expect(calculateFiniquito({ ...base, añosTrabajados: 1.8 }).desglose.añosIndemnizacion).toBe(2);
+      expect(calculateFiniquito({ ...base, añosTrabajados: 0.9 }).desglose.añosIndemnizacion).toBe(0);
+      expect(calculateFiniquito({ ...base, añosTrabajados: 0.9 }).indemnizacion).toBe(0);
+      expect(calculateFiniquito({ ...base, añosTrabajados: 2.5 }).desglose.añosIndemnizacion).toBe(2);
+      expect(calculateFiniquito({ ...base, añosTrabajados: 11.9 }).desglose.añosIndemnizacion).toBe(11);
     });
 
     it('la fracción se suma antes del tope de 11 años', () => {

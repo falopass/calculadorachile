@@ -4,10 +4,13 @@
 
 import { INDEMNIZACION, UF } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
+import { añosArt163SinTope, calcularAñosIndemnizacion } from './finiquito';
 
 export interface IndemnizacionInput {
   ultimoSueldo: number;
   añosTrabajados: number;
+  /** Meses adicionales al último año completo (0 a 11). */
+  mesesTrabajados?: number;
   incluyeGratificacion: boolean;
   gratificacionMensual?: number;
 }
@@ -30,7 +33,9 @@ export interface IndemnizacionResult {
  * Calcula la indemnización por años de servicio según Art. 163 Código del Trabajo
  * 
  * La indemnización equivale a 30 días de la última remuneración mensual por cada año trabajado.
- * - Tope máximo: 11 años (330 días)
+ * - Menos de 1 año: no hay indemnización; la fracción superior a 6 meses
+ *   cuenta como 1 año (Art. 163 inc. 2)
+ * - Tope máximo: 11 años (330 días), aplicado después de la fracción
  * - Base de cálculo: último sueldo bruto (con gratificación si aplica)
  * - Tope imponible: 90 UF mensuales
  * 
@@ -38,7 +43,13 @@ export interface IndemnizacionResult {
  * @returns Desglose completo de la indemnización
  */
 export function calculateIndemnizacion(input: IndemnizacionInput): IndemnizacionResult {
-  const { ultimoSueldo, añosTrabajados, incluyeGratificacion, gratificacionMensual = 0 } = input;
+  const {
+    ultimoSueldo,
+    añosTrabajados,
+    mesesTrabajados = 0,
+    incluyeGratificacion,
+    gratificacionMensual = 0,
+  } = input;
   
   // Base de cálculo: sueldo + gratificación si aplica
   const baseCalculo = incluyeGratificacion ? ultimoSueldo + gratificacionMensual : ultimoSueldo;
@@ -48,8 +59,8 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
   const topeMonto = topeUF * UF.valor;
   const baseTopeada = Math.min(baseCalculo, topeMonto);
   
-  // Años indemnizables (tope 11 años)
-  const añosIndemnizables = Math.min(añosTrabajados, INDEMNIZACION.tope_años);
+  // Años indemnizables (Art. 163: mínimo 1 año, fracción > 6 meses, tope 11 años)
+  const añosIndemnizables = calcularAñosIndemnizacion(añosTrabajados, mesesTrabajados);
   
   // Días de indemnización (30 días por año)
   const diasIndemnizacion = añosIndemnizables * INDEMNIZACION.dias_por_año;
@@ -62,7 +73,9 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
   const indemnizacionTotal = valorDia * diasIndemnizacion;
   
   // Verificar si aplica tope
-  const aplicaTope = añosTrabajados > INDEMNIZACION.tope_años || baseCalculo > topeMonto;
+  const aplicaTope =
+    añosArt163SinTope(añosTrabajados, mesesTrabajados) > INDEMNIZACION.tope_años ||
+    baseCalculo > topeMonto;
   
   return {
     ultimoSueldo,

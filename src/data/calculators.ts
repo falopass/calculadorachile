@@ -1204,7 +1204,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         name: 'BCN — Código del Trabajo',
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
-        note: 'Artículos 163 y 172 sobre indemnización',
+        note: 'Artículos 163 y 172 sobre indemnización; fracción superior a 6 meses = 1 año (art. 163 inc. 2)',
       },
     ],
     keywords: [
@@ -1232,6 +1232,18 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         min: 0,
         max: 50,
+      },
+      {
+        id: 'mesesTrabajados',
+        label: 'Meses adicionales (fracción de año)',
+        type: 'number',
+        placeholder: '0',
+        required: false,
+        min: 0,
+        max: 11,
+        defaultValue: 0,
+        tooltip:
+          'Desde 1 año de servicio, más de 6 meses cuentan como 1 año adicional (Art. 163). Con menos de 1 año no hay indemnización.',
       },
       {
         id: 'incluyeGratificacion',

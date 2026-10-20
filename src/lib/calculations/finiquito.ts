@@ -109,19 +109,27 @@ export interface FiniquitoResult {
  * cálculo antes de multiplicar por años.
  */
 /**
- * Años que cuentan para la indemnización (Art. 163 inc. 2 CdT): con
- * contrato de 1 año o más, la fracción superior a 6 meses cuenta como
- * 1 año adicional. El tope de 11 años se aplica después.
+ * Años que cuentan para la indemnización (Art. 163 inc. 2 CdT), antes del
+ * tope: con menos de 1 año no hay indemnización; desde 1 año, la fracción
+ * superior a 6 meses cuenta como 1 año adicional.
+ *  - Años enteros + meses: se suma 1 si los meses son más de 6.
+ *  - Años con decimales (la fracción ya viene incluida y no se suman los
+ *    meses otra vez): parte entera + 1 si la fracción es mayor a 0,5.
+ *    Ej.: 1,5 → 1; 1,8 → 2; 0,9 → 0.
  * Fuente: https://www.bcn.cl/leychile/navegar?idNorma=207436
  */
-function calcularAñosIndemnizacion(añosTrabajados: number, mesesTrabajados: number): number {
-  // Solo con años enteros: si el usuario ya ingresó años con decimales, la
-  // fracción viene incluida y no se suma de nuevo.
-  const añosConFraccion =
-    Number.isInteger(añosTrabajados) && añosTrabajados >= 1 && mesesTrabajados > 6
-      ? añosTrabajados + 1
-      : añosTrabajados;
-  return Math.min(añosConFraccion, INDEMNIZACION.tope_años);
+export function añosArt163SinTope(añosTrabajados: number, mesesTrabajados = 0): number {
+  if (!(añosTrabajados >= 1)) return 0;
+  if (Number.isInteger(añosTrabajados)) {
+    return mesesTrabajados > 6 ? añosTrabajados + 1 : añosTrabajados;
+  }
+  const enteros = Math.floor(añosTrabajados);
+  return añosTrabajados - enteros > 0.5 ? enteros + 1 : enteros;
+}
+
+/** Años indemnizables (Art. 163) con el tope de 11 años aplicado después. */
+export function calcularAñosIndemnizacion(añosTrabajados: number, mesesTrabajados: number): number {
+  return Math.min(añosArt163SinTope(añosTrabajados, mesesTrabajados), INDEMNIZACION.tope_años);
 }
 
 function calcularIndemnizacionAniosServicio(

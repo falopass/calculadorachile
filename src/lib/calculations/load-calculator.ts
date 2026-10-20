@@ -148,6 +148,7 @@ export async function loadCalculationFn(
         const result = calculateIndemnizacion({
           ultimoSueldo: coerceNumber(inputs.ultimoSueldo),
           añosTrabajados: coerceNumber(inputs.añosTrabajados),
+          mesesTrabajados: coerceNumber(inputs.mesesTrabajados, 0),
           incluyeGratificacion: coerceBool(inputs.incluyeGratificacion),
           gratificacionMensual: coerceNumber(inputs.gratificacionMensual, 0) || undefined,
         });

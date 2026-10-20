@@ -74,3 +74,40 @@ describe('calculateIndemnizacion', () => {
     expect(r.topeMonto).toBe(Math.round(90 * UF.valor));
   });
 });
+
+describe('indemnización: art. 163 inc. 2 (fracción > 6 meses, mínimo 1 año, tope después)', () => {
+  const base = { ultimoSueldo: 1_000_000, incluyeGratificacion: false };
+
+  it('3 años y 7 meses = 4 años (120 días)', () => {
+    const r = calculateIndemnizacion({ ...base, añosTrabajados: 3, mesesTrabajados: 7 });
+    expect(r.añosIndemnizables).toBe(4);
+    expect(r.diasIndemnizacion).toBe(120);
+    expect(r.indemnizacionTotal).toBe(4_000_000);
+  });
+
+  it('3 años y 6 meses = 3 años', () => {
+    const r = calculateIndemnizacion({ ...base, añosTrabajados: 3, mesesTrabajados: 6 });
+    expect(r.añosIndemnizables).toBe(3);
+    expect(r.indemnizacionTotal).toBe(3_000_000);
+  });
+
+  it('menos de 1 año = 0, aunque haya más de 6 meses', () => {
+    const r = calculateIndemnizacion({ ...base, añosTrabajados: 0, mesesTrabajados: 11 });
+    expect(r.añosIndemnizables).toBe(0);
+    expect(r.indemnizacionTotal).toBe(0);
+    expect(calculateIndemnizacion({ ...base, añosTrabajados: 0.9 }).indemnizacionTotal).toBe(0);
+  });
+
+  it('años con decimales: 1,5 → 1 y 1,8 → 2', () => {
+    expect(calculateIndemnizacion({ ...base, añosTrabajados: 1.5 }).añosIndemnizables).toBe(1);
+    expect(calculateIndemnizacion({ ...base, añosTrabajados: 1.8 }).añosIndemnizables).toBe(2);
+  });
+
+  it('10 años y 7 meses = 11 años; 11 años y 7 meses se topea en 11 y marca tope', () => {
+    expect(calculateIndemnizacion({ ...base, añosTrabajados: 10, mesesTrabajados: 7 }).añosIndemnizables).toBe(11);
+    const r = calculateIndemnizacion({ ...base, añosTrabajados: 11, mesesTrabajados: 7 });
+    expect(r.añosIndemnizables).toBe(11);
+    expect(r.aplicaTope).toBe(true);
+    expect(calculateIndemnizacion({ ...base, añosTrabajados: 10, mesesTrabajados: 7 }).aplicaTope).toBe(false);
+  });
+});
