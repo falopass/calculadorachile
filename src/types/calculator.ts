@@ -39,11 +39,25 @@ export interface CalculatorInput {
   tooltip?: string;
 }
 
+/** Nota aclaratoria que se muestra bajo una fila de resultado. */
+export interface CalculatorResultNote {
+  /** Texto antes del enlace interno. */
+  text: string;
+  /** Texto enlazado (opcional) y su ruta interna. */
+  linkText?: string;
+  href?: string;
+  /** Texto después del enlace. */
+  textAfter?: string;
+  /** Fuente oficial citada en la nota. */
+  source?: { name: string; url: string };
+}
+
 export interface CalculatorResult {
   label: string;
   value: number;
   format: 'CLP' | 'UF' | 'UTM' | 'percentage' | 'days' | 'number';
   highlight?: boolean;
+  note?: CalculatorResultNote;
 }
 
 export interface FAQItem {

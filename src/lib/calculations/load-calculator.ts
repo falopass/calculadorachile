@@ -89,6 +89,7 @@ export async function loadCalculationFn(
           vacacionesAniosAnteriores: coerceNumber(inputs.vacacionesAniosAnteriores, 0),
           sueldoPromedio: coerceNumber(inputs.sueldoPromedio, 0),
           diasAdicionalesConvenio: coerceNumber(inputs.diasAdicionalesConvenio, 0),
+          fechaTermino: typeof inputs.fechaTermino === 'string' ? inputs.fechaTermino.trim() : undefined,
         });
         return finiquitoToResults(result);
       };

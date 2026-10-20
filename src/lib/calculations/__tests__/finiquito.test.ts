@@ -234,3 +234,47 @@ describe('calculateFiniquito', () => {
     });
   });
 });
+
+describe('feriado proporcional en días corridos con fecha de término (DT w3-article-60200)', () => {
+  const casoVigia: FiniquitoInput = {
+    ultimoSueldo: 800_000,
+    añosTrabajados: 3,
+    mesesTrabajados: 4,
+    causaTermino: 'necesidades_empresa',
+    incluyeAvisoPrevio: true,
+    tieneGratificacion: false,
+  };
+
+  it('término el 20-10-2026 con 4 meses: 5 días hábiles = 7 días corridos = $186.667', () => {
+    const r = calculateFiniquito({ ...casoVigia, fechaTermino: '2026-10-20' });
+    // 4 × 1,25 = 5 días hábiles desde el miércoles 21-10: 21, 22, 23, (sáb 24, dom 25), 26, 27.
+    expect(r.desglose.diasVacaciones).toBe(7);
+    expect(r.desglose.feriadoEnDiasCorridos).toBe(true);
+    expect(r.vacacionesProporcionales).toBe(186_667);
+    expect(r.indemnizacion).toBe(2_400_000);
+    expect(r.indemnizacionAvisoPrevio).toBe(800_000);
+    expect(r.totalFiniquito).toBe(3_386_667);
+  });
+
+  it('sin fecha de término la función pura paga días hábiles sin proyectar ($133.333)', () => {
+    const r = calculateFiniquito(casoVigia);
+    expect(r.desglose.feriadoEnDiasCorridos).toBe(false);
+    expect(r.desglose.diasVacaciones).toBe(5);
+    expect(r.vacacionesProporcionales).toBe(133_333);
+  });
+
+  it('una fecha inválida se trata como sin fecha', () => {
+    const r = calculateFiniquito({ ...casoVigia, fechaTermino: '20-10-2026' });
+    expect(r.vacacionesProporcionales).toBe(133_333);
+    const imposible = calculateFiniquito({ ...casoVigia, fechaTermino: '2026-02-30' });
+    expect(imposible.desglose.feriadoEnDiasCorridos).toBe(false);
+    expect(imposible.vacacionesProporcionales).toBe(133_333);
+  });
+
+  it('suma también un feriado nacional: término el 30-10-2026, 4 meses', () => {
+    // 5 hábiles desde el sáb 31-10 (feriado): 31, 1 (dom, feriado), 2, 3, 4, 5, 6 = 7 corridos.
+    const r = calculateFiniquito({ ...casoVigia, fechaTermino: '2026-10-30' });
+    expect(r.desglose.diasVacaciones).toBe(7);
+    expect(r.vacacionesProporcionales).toBe(186_667);
+  });
+});

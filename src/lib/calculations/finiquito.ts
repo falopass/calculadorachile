@@ -10,7 +10,8 @@ import {
   UF,
   RECARGO_ART_168,
 } from '@/lib/values/constants';
-import type { CalculatorResult } from '@/types/calculator';
+import type { CalculatorResult, CalculatorResultNote } from '@/types/calculator';
+import { calculateVacaciones } from './vacaciones';
 
 /**
  * Recargos por despido injustificado (Art. 168 CdT) sobre la
@@ -85,6 +86,8 @@ export interface FiniquitoResult {
   desglose: {
     añosIndemnizacion: number;
     diasVacaciones: number;
+    /** true si el feriado se proyectó a días corridos con la fecha de término. */
+    feriadoEnDiasCorridos: boolean;
     diasVacacionesAniosAnteriores: number;
     mesesGratificacion: number;
     diasSueldoPendiente: number;
@@ -157,15 +160,33 @@ function calcularIndemnizacionAvisoPrevio(
   return 0;
 }
 
+/**
+ * Feriado proporcional (Art. 73 CdT). Reutiliza el cálculo de la
+ * calculadora de vacaciones proporcionales: con fecha de término, los días
+ * hábiles se proyectan desde el día siguiente al término y se suman los
+ * sábados, domingos y feriados nacionales que caen en el período
+ * (DT: https://www.dt.gob.cl/portal/1628/w3-article-60200.html). Sin fecha
+ * válida, se pagan los días hábiles sin proyectar.
+ */
+/** Acepta solo fechas AAAA-MM-DD que existen en el calendario (rechaza 2026-02-30). */
+function fechaTerminoValida(fecha?: string): string | undefined {
+  if (!fecha || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return undefined;
+  const d = new Date(`${fecha}T00:00:00Z`);
+  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === fecha ? fecha : undefined;
+}
+
 function calcularVacacionesProporcionales(
   ultimoSueldo: number,
   mesesTrabajados: number,
   diasPendientes: number,
-): number {
-  const diasProporcionales = (VACACIONES.dias_anuales / 12) * mesesTrabajados;
-  const totalDias = diasProporcionales + diasPendientes;
-  const sueldoDiario = ultimoSueldo / 30;
-  return totalDias * sueldoDiario;
+  fechaTermino?: string,
+) {
+  return calculateVacaciones({
+    sueldoBruto: ultimoSueldo,
+    mesesTrabajados,
+    diasVacacionesPendientes: diasPendientes,
+    fechaTermino: fechaTerminoValida(fechaTermino),
+  });
 }
 
 /**
@@ -252,11 +273,13 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     : 0;
 
   // Vacaciones (Art. 67) + posibles días adicionales por convenio.
-  const vacacionesProporcionales = calcularVacacionesProporcionales(
+  const feriado = calcularVacacionesProporcionales(
     sueldoBaseCalculo,
     mesesTrabajados,
     diasVacacionesPendientes + diasAdicionalesConvenio,
+    fechaTermino,
   );
+  const vacacionesProporcionales = feriado.totalVacaciones;
 
   const gratificacionProporcional = calcularGratificacionProporcional(
     sueldoBaseCalculo,
@@ -314,11 +337,14 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     totalFiniquito: Math.round(totalFiniquito),
     desglose: {
       añosIndemnizacion: calcularAñosIndemnizacion(añosTrabajados, mesesTrabajados),
-      diasVacaciones: Math.round(
-        (VACACIONES.dias_anuales / 12) * mesesTrabajados +
-          diasVacacionesPendientes +
-          diasAdicionalesConvenio,
-      ),
+      diasVacaciones: feriado.calendarioAplicado
+        ? feriado.diasCorridosIndemnizables
+        : Math.round(
+            (VACACIONES.dias_anuales / 12) * mesesTrabajados +
+              diasVacacionesPendientes +
+              diasAdicionalesConvenio,
+          ),
+      feriadoEnDiasCorridos: feriado.calendarioAplicado,
       diasVacacionesAniosAnteriores: vacacionesAniosAnteriores || 0,
       mesesGratificacion: mesesTrabajados,
       diasSueldoPendiente: diasTrabajadosUltimoMes,
@@ -331,6 +357,22 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     },
   };
 }
+
+/**
+ * Nota que acompaña al feriado proporcional cuando no se ingresó fecha de
+ * término y el monto queda en días hábiles (aprobada por Diego, 20-10-2026).
+ */
+export const NOTA_FERIADO_DIAS_HABILES: CalculatorResultNote = {
+  text:
+    'Este monto está en días hábiles. La Dirección del Trabajo ordena contarlos desde el día siguiente al término y sumar sábados, domingos y festivos, así que el monto real es mayor. Calcula el exacto en la ',
+  linkText: 'calculadora de vacaciones proporcionales',
+  href: '/calculadoras/calculadora-vacaciones-proporcionales',
+  textAfter: '.',
+  source: {
+    name: 'Dirección del Trabajo',
+    url: 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html',
+  },
+};
 
 /**
  * Convierte el resultado a formato de CalculatorResult[]
@@ -362,9 +404,12 @@ export function finiquitoToResults(result: FiniquitoResult): CalculatorResult[] 
   }
 
   results.push({
-    label: `Vacaciones proporcionales (${result.desglose.diasVacaciones} días)`,
+    label: `Vacaciones proporcionales (${String(result.desglose.diasVacaciones).replace('.', ',')} días${
+      result.desglose.feriadoEnDiasCorridos ? ' corridos' : ''
+    })`,
     value: result.vacacionesProporcionales,
     format: 'CLP',
+    ...(result.desglose.feriadoEnDiasCorridos ? {} : { note: NOTA_FERIADO_DIAS_HABILES }),
   });
 
   if (result.vacacionesPendientesAniosAnteriores > 0) {

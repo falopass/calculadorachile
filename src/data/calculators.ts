@@ -261,6 +261,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         note: 'Indemnización por años de servicio: la fracción superior a 6 meses cuenta como 1 año',
       },
       {
+        name: 'DT — Feriado proporcional en días corridos',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html',
+        note: 'Los días hábiles del feriado proporcional se proyectan desde el día siguiente al término, sumando sábados, domingos y festivos',
+      },
+      {
         name: 'SUSESO — Art. 168',
         url: 'https://www.suseso.gob.cl/612/w3-propertyvalue-69859.html',
         note: 'Recargos judiciales por despido injustificado',
@@ -318,6 +323,15 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         min: 0,
         max: 11,
         defaultValue: 0,
+      },
+      {
+        id: 'fechaTermino',
+        label: 'Fecha de término (AAAA-MM-DD)',
+        type: 'text',
+        placeholder: '2026-10-20',
+        required: false,
+        tooltip:
+          'Se usa para pasar el feriado proporcional a días corridos, sumando sábados, domingos y feriados nacionales. Si la dejas vacía, el feriado se muestra en días hábiles.',
       },
       {
         id: 'diasVacacionesPendientes',
