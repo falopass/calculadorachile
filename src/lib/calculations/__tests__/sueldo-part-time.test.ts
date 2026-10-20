@@ -63,6 +63,6 @@ describe('INGRESO_MINIMO.hora (DT w3-article-95182, jornada 42 h)', () => {
     const esperado = Math.round(((INGRESO_MINIMO.mensual / 30) * 28 * 100) / (4 * 42)) / 100;
     expect(esperado).toBe(3075.29);
     expect(INGRESO_MINIMO.hora).toBe(esperado);
-    expect(INGRESO_MINIMO.hora_vigente_desde).toBe('2026-04-26');
+    expect(INGRESO_MINIMO.hora_vigente_desde).toBe(INGRESO_MINIMO.vigente_desde);
   });
 });

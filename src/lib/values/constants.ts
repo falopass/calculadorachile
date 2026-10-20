@@ -25,7 +25,7 @@ export const INGRESO_MINIMO = {
   // Ley 21.561): 553.553 ÷ 30 × 28 ÷ 168 = 3.075,29.
   // Fuente: DT, https://www.dt.gob.cl/portal/1628/w3-article-95182.html (act. 28-04-2026).
   hora: 3075.29,
-  hora_vigente_desde: '2026-04-26', // ISO; 42 h semanales (Ley 21.561) con IMM de Ley 21.830
+  hora_vigente_desde: '2026-05-01', // ISO; IMM $553.553 (Ley 21.830, desde 01-05-2026) con jornada de 42 h (Ley 21.561, desde 26-04-2026)
   zona_extrema: 586766, // Magallanes, Aysén (106% del nacional)
 };
 
