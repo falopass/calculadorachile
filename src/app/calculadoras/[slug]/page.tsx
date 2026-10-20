@@ -276,11 +276,15 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
   let liveValue: LiveValueBlock | undefined;
   const kind = LIVE_SLUG_KIND[calculator.slug];
   let live: CurrentValues | null = null;
+  let utmFresca: { value: number; date: string } | null = null;
   if (kind) {
     live = await getLiveContext(calculator.slug);
     const indicator = extractLiveIndicator(kind, live);
     if (indicator && isLiveValueFresh(kind, indicator, new Date())) {
       liveValue = buildLiveValueBlock(kind, indicator) ?? undefined;
+      if (kind === 'utm' && indicator.date) {
+        utmFresca = { value: indicator.value, date: indicator.date };
+      }
     }
   }
 
@@ -289,6 +293,7 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
   const quickAnswer = getQuickAnswer(calculator.id, {
     uf: live?.values.uf ?? FALLBACK_VALUES.uf,
     utm: live?.values.utm ?? FALLBACK_VALUES.utm,
+    utmFresca,
   });
 
   return (

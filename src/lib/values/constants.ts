@@ -16,6 +16,8 @@ import tmcSnapshot from './tmc-snapshot.json';
 
 export const INGRESO_MINIMO = {
   mensual: 553553, // Ingreso mínimo mensual (desde 01/05/2026, Ley 21.830)
+  vigente_desde: '2026-05-01', // ISO; Ley 21.830 (DO 22-06-2026), DT w3-article-60141
+  ley: '21.830',
   menor_18_mayor_65: 412938, // Menores de 18 y mayores de 65
   no_remuneracional: 356815, // Fines no remuneracionales
   jornal: 27678, // 553553 / 20 días

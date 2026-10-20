@@ -16,6 +16,11 @@
 //     enlaza a la guía pillar correspondiente.
 // ============================================
 
+import { formatCLP } from '@/lib/formatters';
+import { MESES_ES_CL } from '@/lib/seo/live-value-title';
+import { INGRESO_MINIMO } from '@/lib/values/constants';
+import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
+
 export interface ArticleSource {
   label: string;
   url: string;
@@ -69,6 +74,27 @@ export interface Article {
 type ArticleDraft = Omit<Article, 'sources'> & {
   sources?: ArticleSource[];
 };
+
+// Respuesta directa del post de sueldo mínimo (E-016): montos y fecha
+// desde las constantes y la misma función de la calculadora de sueldo
+// líquido (Fonasa, contrato indefinido), nunca escritos a mano.
+function formatFechaLarga(iso: string): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  return `${day} de ${MESES_ES_CL[month - 1]} de ${year}`;
+}
+
+function liquidoSueldoMinimo(afp: 'uno' | 'provida'): string {
+  return formatCLP(
+    calculateSueldoLiquido({
+      sueldoBruto: INGRESO_MINIMO.mensual,
+      afp,
+      saludTipo: 'fonasa',
+      contratoIndefinido: true,
+    }).liquido,
+  );
+}
+
+export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es de <strong>${formatCLP(INGRESO_MINIMO.mensual)} brutos al mes</strong> desde el ${formatFechaLarga(INGRESO_MINIMO.vigente_desde)} (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Ley ${INGRESO_MINIMO.ley}, Dirección del Trabajo</a>) y es el mismo monto para cada mes hasta el próximo reajuste. Con Fonasa y contrato indefinido quedan entre <strong>${liquidoSueldoMinimo('provida')}</strong> y <strong>${liquidoSueldoMinimo('uno')}</strong> líquidos, según tu AFP.</p>`;
 
 const articleCatalog: ArticleDraft[] = [
   {
@@ -2000,7 +2026,7 @@ const articleCatalog: ArticleDraft[] = [
     ],
     content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>$553.553</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
 
-<p>El sueldo mínimo en Chile es de <strong>$553.553 brutos mensuales</strong> desde el 1 de mayo de 2026, según la Ley 21.830 (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>). Para trabajadores menores de 18 o mayores de 65 años es de $412.938, y para fines no remuneracionales, de $356.815. Con AFP y Fonasa, $553.553 brutos quedan en unos <strong>$453.581 líquidos con AFP Uno</strong> o <strong>$448.101 con AFP ProVida</strong>.</p>
+${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>El sueldo mínimo no es el monto que necesariamente llega a la cuenta bancaria. Es un piso legal para el sueldo o la remuneración aplicable, antes de cotizaciones y descuentos. También puede ser solo una parte del total si la persona recibe gratificación, bonos, horas extra o asignaciones. Por eso dos trabajadores con el mismo sueldo base de $553.553 pueden tener líquidos distintos sin que uno de los cálculos sea automáticamente ilegal.</p>
 
