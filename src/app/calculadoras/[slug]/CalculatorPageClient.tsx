@@ -28,6 +28,8 @@ export interface LiveValueBlock {
   /** Fecha formateada dd-mm-aaaa (America/Santiago). */
   date: string;
   sourceLabel: string;
+  /** URL oficial de la fuente, si existe. */
+  sourceUrl?: string;
   rows: { label: string; value: string }[];
 }
 
@@ -318,7 +320,20 @@ export default function CalculatorPageClient({
             {liveValue.heading}
           </h2>
           <p className="mt-1 text-xs text-[var(--foreground-muted)]">
-            Fuente: {liveValue.sourceLabel} · actualizado {liveValue.date}
+            Fuente:{' '}
+            {liveValue.sourceUrl ? (
+              <a
+                href={liveValue.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[var(--color-primary-600)] hover:underline"
+              >
+                {liveValue.sourceLabel}
+              </a>
+            ) : (
+              liveValue.sourceLabel
+            )}{' '}
+            · actualizado {liveValue.date}
           </p>
           <table className="mt-4 w-full text-sm">
             <caption className="sr-only">

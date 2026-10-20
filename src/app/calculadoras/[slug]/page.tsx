@@ -96,8 +96,15 @@ function buildLiveValueBlock(
   const parts = toSantiagoParts(dateObj);
   if (!parts) return null;
 
+  // La UTM la fija el SII; UF y dólar mantienen la fuente del dato en vivo.
   const sourceLabel =
-    indicator.source === 'bcentral' ? 'Banco Central de Chile' : 'mindicador.cl';
+    kind === 'utm'
+      ? 'Servicio de Impuestos Internos (SII)'
+      : indicator.source === 'bcentral'
+        ? 'Banco Central de Chile'
+        : 'mindicador.cl';
+  const sourceUrl =
+    kind === 'utm' ? `https://www.sii.cl/valores_y_fechas/utm/utm${parts.year}.htm` : undefined;
   const fecha = formatDDMMYYYY(dateObj);
 
   let heading: string;
@@ -140,6 +147,7 @@ function buildLiveValueBlock(
     heading,
     date: fecha,
     sourceLabel,
+    sourceUrl,
     rows,
   };
 }

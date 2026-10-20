@@ -105,9 +105,26 @@ export interface FiniquitoResult {
  * Aplica el tope de 90 UF mensuales (Art. 172 CdT) sobre la base de
  * cálculo antes de multiplicar por años.
  */
+/**
+ * Años que cuentan para la indemnización (Art. 163 inc. 2 CdT): con
+ * contrato de 1 año o más, la fracción superior a 6 meses cuenta como
+ * 1 año adicional. El tope de 11 años se aplica después.
+ * Fuente: https://www.bcn.cl/leychile/navegar?idNorma=207436
+ */
+function calcularAñosIndemnizacion(añosTrabajados: number, mesesTrabajados: number): number {
+  // Solo con años enteros: si el usuario ya ingresó años con decimales, la
+  // fracción viene incluida y no se suma de nuevo.
+  const añosConFraccion =
+    Number.isInteger(añosTrabajados) && añosTrabajados >= 1 && mesesTrabajados > 6
+      ? añosTrabajados + 1
+      : añosTrabajados;
+  return Math.min(añosConFraccion, INDEMNIZACION.tope_años);
+}
+
 function calcularIndemnizacionAniosServicio(
   ultimoSueldo: number,
   añosTrabajados: number,
+  mesesTrabajados: number,
   causaTermino: FiniquitoInput['causaTermino'],
 ): number {
   if (causaTermino !== 'necesidades_empresa' && causaTermino !== 'despido') {
@@ -116,7 +133,7 @@ function calcularIndemnizacionAniosServicio(
   // Tope 90 UF mensual (Art. 172 CdT)
   const topeMensual = INDEMNIZACION.tope_uf_mensual * UF.valor;
   const baseTopeada = Math.min(ultimoSueldo, topeMensual);
-  const añosTopeados = Math.min(añosTrabajados, INDEMNIZACION.tope_años);
+  const añosTopeados = calcularAñosIndemnizacion(añosTrabajados, mesesTrabajados);
   const diasIndemnizacion = añosTopeados * INDEMNIZACION.dias_por_año;
   const sueldoDiario = baseTopeada / 30;
   return diasIndemnizacion * sueldoDiario;
@@ -225,6 +242,7 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
   const indemnizacion = calcularIndemnizacionAniosServicio(
     sueldoBaseCalculo,
     añosTrabajados,
+    mesesTrabajados,
     causaTermino,
   );
 
@@ -295,7 +313,7 @@ export function calculateFiniquito(input: FiniquitoInput): FiniquitoResult {
     diasTrabajados: diasTrabajadosUltimoMes,
     totalFiniquito: Math.round(totalFiniquito),
     desglose: {
-      añosIndemnizacion: Math.min(añosTrabajados, INDEMNIZACION.tope_años),
+      añosIndemnizacion: calcularAñosIndemnizacion(añosTrabajados, mesesTrabajados),
       diasVacaciones: Math.round(
         (VACACIONES.dias_anuales / 12) * mesesTrabajados +
           diasVacacionesPendientes +
