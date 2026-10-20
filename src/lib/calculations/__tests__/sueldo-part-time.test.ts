@@ -57,3 +57,12 @@ describe('calculateSueldoPartTime', () => {
     expect(r.diferencia).toBe(0);
   });
 });
+
+describe('INGRESO_MINIMO.hora (DT w3-article-95182, jornada 42 h)', () => {
+  it('es el IMM ÷ 30 × 28 ÷ 168 = $3.075,29', () => {
+    const esperado = Math.round(((INGRESO_MINIMO.mensual / 30) * 28 * 100) / (4 * 42)) / 100;
+    expect(esperado).toBe(3075.29);
+    expect(INGRESO_MINIMO.hora).toBe(esperado);
+    expect(INGRESO_MINIMO.hora_vigente_desde).toBe('2026-04-26');
+  });
+});
