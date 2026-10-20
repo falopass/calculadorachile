@@ -24,6 +24,8 @@ export interface VacacionesResult {
   calendarioAplicado: boolean;
 }
 
+// Feriados nacionales de 2026 y, desde el 20-10-2026, también de 2027
+// (el nombre se mantiene por compatibilidad).
 const FERIADOS_NACIONALES_2026 = new Set([
   '2026-01-01',
   '2026-04-03',
@@ -42,6 +44,23 @@ const FERIADOS_NACIONALES_2026 = new Set([
   '2026-12-08',
   '2026-12-25',
   '2027-01-01',
+  // ===== 2027 (Vigía YMYL, BCN, 20-10-2026) =====
+  '2027-03-26', // vie · Viernes Santo (Pascua 28-03-2027) · Ley 2.977 · confirmar con calendario oficial gob.cl 2027
+  '2027-03-27', // sáb · Sábado Santo · Ley 2.977 · confirmar con calendario oficial gob.cl 2027
+  '2027-05-01', // sáb · Día del Trabajo · CT art. 34 · irrenunciable
+  '2027-05-21', // vie · Glorias Navales · Ley 2.977
+  '2027-06-21', // lun · Pueblos Indígenas (solsticio) · Ley 21.357 · https://www.bcn.cl/leychile/navegar?idNorma=1161743 · confirmar con calendario oficial gob.cl 2027
+  '2027-06-28', // lun · San Pedro y San Pablo (29-06 martes → lunes) · Ley 19.668
+  '2027-07-16', // vie · Virgen del Carmen · Ley 20.148
+  '2027-08-15', // dom · Asunción de la Virgen · Ley 2.977
+  '2027-09-17', // vie · Feriado adicional Fiestas Patrias · Ley 20.983 · https://www.bcn.cl/leychile/navegar?idNorma=1098384
+  '2027-09-18', // sáb · Independencia Nacional · irrenunciable
+  '2027-09-19', // dom · Glorias del Ejército · irrenunciable
+  '2027-10-11', // lun · Encuentro de Dos Mundos (12-10 martes → lunes) · Ley 19.668
+  '2027-10-31', // dom · Iglesias Evangélicas · Ley 20.299
+  '2027-11-01', // lun · Todos los Santos · Ley 2.977
+  '2027-12-08', // mié · Inmaculada Concepción · Ley 2.977
+  '2027-12-25', // sáb · Navidad · irrenunciable
 ]);
 
 function parseFecha(fecha?: string): Date | null {
