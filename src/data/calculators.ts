@@ -4598,7 +4598,6 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: false,
     phase: 2,
-    noIndex: true,
     lastReviewed: '2026-09-26',
     sources: [
       {
