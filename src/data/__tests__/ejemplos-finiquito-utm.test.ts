@@ -33,6 +33,7 @@ describe('metodología del finiquito: feriado en días corridos', () => {
     const ex = calculatorMethodologies.finiquito.workedExample!;
     const texto = ex.development.join(' ');
     expect(texto).toContain('al menos 14 días corridos');
+    expect(texto).toContain('al menos 14 días corridos si el término es en día hábil');
     expect(texto).toContain('$373.333');
     expect(texto).toContain('https://www.dt.gob.cl/portal/1628/w3-article-60200.html');
     expect(texto).not.toContain('$266.667');
