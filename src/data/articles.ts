@@ -1106,7 +1106,7 @@ const articleCatalog: ArticleDraft[] = [
     description:
       'En qué mes te toca la revisión técnica según el último dígito de la patente, qué dígitos faltan en 2026, si hay prórrogas y cómo sigue el calendario en 2027.',
     date: '2026-07-10',
-    updatedAt: '2026-11-05',
+    updatedAt: '2026-10-20',
     category: 'vehiculos',
     readingTime: 14,
     seoTitle: 'Revisión técnica 2026: calendario por patente y requisitos',
@@ -1130,12 +1130,12 @@ const articleCatalog: ArticleDraft[] = [
       {
         question: '¿Hay prórroga de la revisión técnica en 2026?',
         answer:
-          'Al 5 de noviembre de 2026, no. La única prórroga de 2026, del Decreto 129 del MTT, cubrió los dígitos 4 y 5 en la Región de Coquimbo y la provincia del Huasco, y venció el 30 de septiembre de 2026.',
+          'Al 20 de octubre de 2026, no. La única prórroga de 2026, del Decreto 129 del MTT, cubrió los dígitos 4 y 5 en la Región de Coquimbo y la provincia del Huasco, y venció el 30 de septiembre de 2026.',
       },
       {
         question: '¿Qué dígitos faltan en 2026?',
         answer:
-          'Solo el 8, que corresponde a noviembre. Diciembre no tiene dígito asignado, pero las patentes terminadas en 9 pueden adelantar a diciembre la revisión que les corresponde en enero de 2027.',
+          'El 7, hasta el 31 de octubre, y el 8, en noviembre. Diciembre no tiene dígito asignado, pero las patentes terminadas en 9 pueden adelantar a diciembre la revisión que les corresponde en enero de 2027.',
       },
       {
         question: '¿Puedo hacer la revisión técnica antes del mes que me toca?',
@@ -1163,7 +1163,7 @@ const articleCatalog: ArticleDraft[] = [
           '15 días corridos para volver a la planta con las fallas corregidas y pagar una tarifa rebajada, según ChileAtiende. Ese plazo no te permite circular con la revisión vencida.',
       },
     ],
-    content: `<p>La revisión técnica anual se hace en el mes que corresponde al <strong>último dígito de la patente</strong>: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado. <strong>En lo que queda de 2026 les toca a las patentes terminadas en 8 (noviembre)</strong>, y la revisión se puede hacer también en el mes anterior al que corresponde sin que cambie su vigencia (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156, art. 7</a>). <strong>Al 5 de noviembre de 2026 no hay prórrogas vigentes</strong>: la última, del Decreto 129 del MTT para Coquimbo y la provincia del Huasco, venció el 30 de septiembre de 2026.</p>
+    content: `<p>La revisión técnica anual se hace en el mes que corresponde al <strong>último dígito de la patente</strong>: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado. <strong>En lo que queda de 2026 les toca a las patentes terminadas en 7 (hasta el 31 de octubre) y en 8 (noviembre)</strong>, y la revisión se puede hacer también en el mes anterior al que corresponde sin que cambie su vigencia (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156, art. 7</a>). <strong>Al 20 de octubre de 2026 no hay prórrogas vigentes</strong>: la última, del Decreto 129 del MTT para Coquimbo y la provincia del Huasco, venció el 30 de septiembre de 2026.</p>
 
 <h2>Calendario de revisión técnica por dígito de patente</h2>
 <table>
@@ -1185,8 +1185,8 @@ const articleCatalog: ArticleDraft[] = [
 <tr><td>4</td><td>Julio</td><td>Junio</td><td>Ya pasó · próxima: julio 2027</td></tr>
 <tr><td>5</td><td>Agosto</td><td>Julio</td><td>Ya pasó · próxima: agosto 2027</td></tr>
 <tr><td>6</td><td>Septiembre</td><td>Agosto</td><td>Ya pasó · próxima: septiembre 2027</td></tr>
-<tr><td>7</td><td>Octubre</td><td>Septiembre</td><td>Ya pasó · próxima: octubre 2027</td></tr>
-<tr><td>8</td><td>Noviembre</td><td>Octubre</td><td><strong>Te toca ahora</strong></td></tr>
+<tr><td>7</td><td>Octubre</td><td>Septiembre</td><td><strong>Te toca ahora (hasta el 31 de octubre)</strong></td></tr>
+<tr><td>8</td><td>Noviembre</td><td>Octubre</td><td>Noviembre (puedes adelantarla a octubre)</td></tr>
 <tr><td>—</td><td>Diciembre</td><td>—</td><td>Sin dígito asignado</td></tr>
 </tbody>
 </table>
@@ -1206,7 +1206,7 @@ const articleCatalog: ArticleDraft[] = [
 <ul>
 <li><strong>Decreto 129 del MTT, publicado en el Diario Oficial el 28 de julio de 2026</strong> (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1226460" target="_blank" rel="noopener">Ley Chile</a>). Extendió <strong>hasta el 30 de septiembre de 2026</strong> la vigencia de los certificados de revisión técnica y de emisiones de los vehículos con patente terminada en <strong>4 y 5</strong> (julio y agosto), otorgados por plantas de la <strong>Región de Coquimbo y de la provincia del Huasco (Región de Atacama)</strong>, zonas declaradas de catástrofe por las lluvias (<a href="https://www.subtrans.gob.cl/mtt-aplaza-vigencia-de-certificado-de-revisiones-tecnicas-en-zonas-de-catastrofe/" target="_blank" rel="noopener">Subtrans</a>). <strong>Esta prórroga ya venció.</strong></li>
 </ul>
-<p>Al 5 de noviembre de 2026 no hay otra prórroga vigente. Si el MTT publica una nueva, la agregaremos aquí con su decreto. Desconfía de prórrogas que circulan en redes sociales sin un decreto o resolución que las respalde.</p>
+<p>Al 20 de octubre de 2026 no hay otra prórroga vigente. Si el MTT publica una nueva, la agregaremos aquí con su decreto. Desconfía de prórrogas que circulan en redes sociales sin un decreto o resolución que las respalde.</p>
 
 <h2>Puedes hacerla antes: el mes anterior</h2>
 <p>El artículo 7 del Decreto Supremo 156 permite hacer la revisión que corresponde según el último dígito <strong>también en el mes precedente, sin que eso afecte su vigencia</strong>. Por ejemplo, si tu patente termina en 5 (agosto), puedes hacerla en julio. La norma no contempla una ventana más amplia: si quieres adelantarla más, consulta a la planta antes de ir.</p>
@@ -1254,7 +1254,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>Sigue leyendo: <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso de circulación 2026</a>.</p>
 
 <h2>Fuentes y fecha de verificación</h2>
-<p>Contenido verificado al 5 de noviembre de 2026:</p>
+<p>Contenido verificado al 20 de octubre de 2026:</p>
 <ul>
 <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156 del MTT (revisiones técnicas), art. 7, versión vigente en Ley Chile</a>: calendario por dígito, mes precedente, periodicidades y facultad del MTT para modificar el calendario (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183&idParte=7139535" target="_blank" rel="noopener">artículo 7</a>).</li>
 <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1226460" target="_blank" rel="noopener">Decreto 129 del MTT, Diario Oficial del 28-07-2026</a> y <a href="https://www.subtrans.gob.cl/mtt-aplaza-vigencia-de-certificado-de-revisiones-tecnicas-en-zonas-de-catastrofe/" target="_blank" rel="noopener">noticia de Subtrans (27-07-2026)</a>: prórroga en Coquimbo y Huasco hasta el 30-09-2026.</li>
