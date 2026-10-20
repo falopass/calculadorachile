@@ -377,7 +377,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       return {
         h1: 'Calcular finiquito 2026: cálculo de indemnización, vacaciones y aviso',
         ...withLinks([
-          `Si te despiden por necesidades de la empresa o desahucio, la ley te da ${INDEMNIZACION.dias_por_año} días de tu última remuneración mensual por cada año trabajado (máximo ${INDEMNIZACION.tope_años} años y con una base de hasta ${INDEMNIZACION.tope_uf_mensual} UF del último día del mes anterior al pago), un mes más si no te avisaron con 30 días de anticipación, y siempre el feriado proporcional y los días trabajados del mes (`,
+          `Si te despiden por necesidades de la empresa o desahucio y llevabas al menos un año, el finiquito incluye ${INDEMNIZACION.dias_por_año} días de tu última remuneración mensual por cada año trabajado (máximo ${INDEMNIZACION.tope_años} años y con una base de hasta ${INDEMNIZACION.tope_uf_mensual} UF del último día del mes anterior al pago), un mes más si no te avisaron con 30 días de anticipación, y siempre el feriado proporcional y los días trabajados del mes (`,
           { text: 'Código del Trabajo, arts. 163 y 172', href: BCN_CODIGO_TRABAJO_URL },
           '). El empleador debe pagarlo dentro de 10 días hábiles desde tu salida (',
           { text: 'art. 177, Dirección del Trabajo', href: DT_ORD_596_URL },

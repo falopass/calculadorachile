@@ -1992,15 +1992,15 @@ const articleCatalog: ArticleDraft[] = [
       {
         question: '¿Cuánto es el sueldo mínimo en Chile en 2026?',
         answer:
-          'Desde el 1 de mayo de 2026 es $553.553 para trabajadores mayores de 18 y hasta 65 años. Es $412.938 para menores de 18 y mayores de 65. Los $356.815 corresponden a fines no remuneracionales: no son un tercer sueldo mínimo para otro grupo de trabajadores.',
+          `Desde el 1 de mayo de 2026 es ${formatCLP(INGRESO_MINIMO.mensual)} para trabajadores mayores de 18 y hasta 65 años. Es $412.938 para menores de 18 y mayores de 65. Los $356.815 corresponden a fines no remuneracionales: no son un tercer sueldo mínimo para otro grupo de trabajadores.`,
       },
       {
         question: '¿Cuánto líquido me queda con el sueldo mínimo 2026?',
         answer:
-          'Con $553.553 imponibles, FONASA 7%, contrato indefinido y sin otros haberes o descuentos, el líquido de referencia va aproximadamente de $448.101 a $453.581 según la comisión AFP vigente. En un contrato a plazo fijo no se descuenta el 0,6% de cesantía al trabajador, por lo que el resultado sube. Gratificación, Isapre, cargas y descuentos personales cambian el depósito.',
+          `Con ${formatCLP(INGRESO_MINIMO.mensual)} imponibles, FONASA 7%, contrato indefinido y sin otros haberes o descuentos, el líquido de referencia va aproximadamente de $448.101 a $453.581 según la comisión AFP vigente. En un contrato a plazo fijo no se descuenta el 0,6% de cesantía al trabajador, por lo que el resultado sube. Gratificación, Isapre, cargas y descuentos personales cambian el depósito.`,
       },
       {
-        question: '¿Desde cuándo rige el $553.553?',
+        question: `¿Desde cuándo rige el ${formatCLP(INGRESO_MINIMO.mensual)}?`,
         answer:
           'Rige desde el 1 de mayo de 2026 aunque la Ley 21.830 se publicó el 22 de junio. La Dirección del Trabajo ordenó reliquidar las remuneraciones ya pagadas desde mayo cuando el sueldo base quedó bajo el nuevo mínimo, y regularizar también cotizaciones y gratificación que se vean afectadas.',
       },
@@ -2017,7 +2017,7 @@ const articleCatalog: ArticleDraft[] = [
       {
         question: '¿Se puede pagar un mínimo proporcional si trabajo menos de 42 horas?',
         answer:
-          'Solo si la jornada pactada es parcial, es decir, de 30 horas semanales o menos. La DT indica multiplicar $553.553 por las horas semanales y dividir por 42. Si la jornada supera 30 horas, aunque sea menor que 42, corresponde el ingreso mínimo mensual completo.',
+          `Solo si la jornada pactada es parcial, es decir, de 30 horas semanales o menos. La DT indica multiplicar ${formatCLP(INGRESO_MINIMO.mensual)} por las horas semanales y dividir por 42. Si la jornada supera 30 horas, aunque sea menor que 42, corresponde el ingreso mínimo mensual completo.`,
       },
       {
         question: '¿La gratificación mensual puede completar el sueldo mínimo?',
@@ -2025,7 +2025,7 @@ const articleCatalog: ArticleDraft[] = [
           'Como regla general, no. La Dirección del Trabajo señala que la gratificación legal o convencional pagada mensualmente no puede usarse para enterar el sueldo base mínimo. Hay una excepción acotada para contratos de 30 días o menos y ciertas prórrogas que no exceden 60 días.',
       },
     ],
-    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>$553.553</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
+    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>${formatCLP(INGRESO_MINIMO.mensual)}</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
 
 ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
