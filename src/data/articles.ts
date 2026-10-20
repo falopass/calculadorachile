@@ -4727,16 +4727,16 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'subsidio-unificado-empleo-ley-21808-octubre-2026',
-    title: 'Subsidio Unificado de Empleo (Ley 21.808): qué cambia desde el 1 de octubre de 2026',
+    title: 'Ley 21.808: de qué se trata el Subsidio Unificado de Empleo y cómo postular',
     description:
-      'La Ley 21.808 crea el Subsidio Unificado de Empleo que rige desde el 01-10-2026: tramos por renta bruta, aportes del 10% al trabajador y 20% a la empresa el primer año, y qué pasa con BTM y SEJ.',
+      'La Ley 21.808 crea el Subsidio Unificado de Empleo, vigente desde el 1 de octubre de 2026: quién puede recibirlo, cuánto paga, cómo postular en la Ventanilla Única Social y qué pasa con el BTM y el Subsidio al Empleo Joven.',
     date: '2026-09-26',
-    updatedAt: '2026-09-26',
+    updatedAt: '2026-10-20',
     category: 'laboral',
     readingTime: 6,
-    seoTitle: 'Ley 21.808: Subsidio Unificado de Empleo desde octubre',
+    seoTitle: 'Ley 21.808: de qué se trata y cómo postular',
     seoDescription:
-      'El SUE reemplaza los subsidios al empleo desde el 01-10-2026: IMM del subsidio $529.000, tramos de 1,25 y 2,25 IMM, piso de $13.225 y reglas para trabajador y empresa.',
+      'Ley 21.808: Subsidio Unificado de Empleo vigente desde el 01-10-2026. Quién accede, cuánto paga, cómo postular y por qué no se acogen postulaciones al BTM.',
     keywords: [
       'subsidio unificado de empleo',
       'ley 21808',
@@ -4748,29 +4748,44 @@ const articleCatalog: ArticleDraft[] = [
     relatedCalculators: ['calculadora-subsidio-unificado-empleo'],
     faq: [
       {
-        question: '¿Los montos del SUE son definitivos?',
+        question: '¿De qué se trata la Ley 21.808?',
         answer:
-          'La ley fija el IMM del subsidio en $529.000 y los porcentajes del primer año (10% trabajador, 20% empresa), pero los parámetros se materializan en el decreto del artículo 8, que al 26-09-2026 aún no se publica. Los montos pueden ajustarse cuando salga el decreto.',
+          'Crea el Subsidio Unificado de Empleo, un aporte mensual del Estado administrado por el SENCE para personas trabajadoras de cuatro grupos prioritarios (jóvenes de 18 a 24 años, mujeres de 25 a 54, personas desde 55 años y personas con discapacidad inscritas en el RND) y para las empresas que las contratan. Rige desde el 1 de octubre de 2026 y reemplaza al Subsidio al Empleo Joven, al Bono al Trabajo de la Mujer y al Subsidio Previsional a los Trabajadores Jóvenes.',
       },
       {
-        question: '¿Quiénes pueden acceder al subsidio?',
+        question: '¿Por qué no se acoge mi postulación al BTM o al SEJ por la entrada en vigencia de la Ley 21.808?',
         answer:
-          'Cuatro grupos prioritarios: jóvenes de 18 a 24 años, mujeres de 25 a 54, personas de 55 años o más y personas con discapacidad desde los 18 inscritas en el RND. Además se exige 6 meses de desempleo continuos u 8 discontinuos en los 18 meses previos y, el primer año, pertenecer al 40% más vulnerable RSH (no aplica a personas con discapacidad).',
+          'Porque la ley dispuso que, desde su publicación el 13 de marzo de 2026, no se conceden nuevos Bonos al Trabajo de la Mujer, Subsidios al Empleo Joven ni Subsidios Previsionales a Trabajadores Jóvenes. No es una evaluación de tu caso. Si cumples los requisitos, debes postular al Subsidio Unificado de Empleo en la Ventanilla Única Social.',
       },
       {
-        question: '¿Qué pasa con el Bono al Trabajo de la Mujer y el Subsidio al Empleo Joven?',
+        question: '¿Cómo postulo al Subsidio Unificado de Empleo?',
         answer:
-          'El BTM ya no recibe nuevas postulaciones por la entrada en vigencia del SUE, según informa el SENCE. Para el SEJ, el pago anual 2025 se rige por el artículo cuarto transitorio de la Ley 21.808.',
+          'En línea y gratis, en la Ventanilla Única Social: la persona trabajadora entra con ClaveÚnica y la empresa con Clave Tributaria, con el consentimiento del trabajador y dentro de los 3 meses desde el inicio de la relación laboral. El SENCE fija los períodos de postulación, y el primer pago se hace a más tardar antes del término del mes subsiguiente al de postulación.',
+      },
+      {
+        question: '¿Cuál es el tope de sueldo para recibir el subsidio?',
+        answer:
+          'La renta bruta mensual del trabajo debe ser de hasta $1.190.250 (2,25 veces el ingreso mínimo del subsidio, de $529.000). Si un mes la supera, ese mes no hay pago, pero cuenta en la duración del beneficio.',
+      },
+      {
+        question: '¿Ya se publicó el decreto de la Ley 21.808?',
+        answer:
+          'Sí. El reglamento (Decreto 75 del Ministerio del Trabajo) se publicó el 30 de septiembre de 2026 y el decreto de parámetros del primer año (Decreto 273 exento de Hacienda) el 1 de octubre de 2026. Fija el 40% del Registro Social de Hogares, un aporte del 20% para la empresa y del 10% para la persona trabajadora, y un ingreso mínimo del subsidio de $529.000.',
+      },
+      {
+        question: '¿Cuánto recibe la persona trabajadora?',
+        answer:
+          'El primer año, el 10% de su renta bruta, con un máximo de $52.900 al mes. Sobre $661.250 el aporte baja gradualmente, pero nunca podrá ser inferior al 2,5% del ingreso mínimo del subsidio ($13.225). Cada pago mensual es provisional por el 90% y el resto se paga en la reliquidación de agosto del año siguiente.',
+      },
+      {
+        question: '¿Qué pasa si ya recibía el BTM o el SEJ?',
+        answer:
+          'Los pagos se mantuvieron por el tiempo que correspondía o hasta seis meses desde la publicación de la ley, lo que ocurriera primero. Quienes cumplían las condiciones postulan en forma automática al Subsidio Unificado de Empleo al terminar ese período.',
       },
       {
         question: '¿Cuánto dura el aporte?',
         answer:
-          '12 meses para la persona trabajadora (15 si es persona con discapacidad). Para la empresa son 15 meses si es micro o pequeña. Los pagos mensuales al trabajador son provisionales por el 90% y se reliquidan anualmente.',
-      },
-      {
-        question: '¿Qué debe hacer la empresa para recibir su aporte?',
-        answer:
-          'Solicitarlo dentro de los 3 meses desde el inicio de la relación laboral, sin haber tenido relación laboral con esa persona en los 12 meses previos. Hay un máximo de 200 beneficiarios por empresa y un pago escalonado en empresas de 1 a 199 trabajadores.',
+          'Hasta 12 meses para la persona trabajadora (15 si es persona con discapacidad). Para la empresa, 12 meses mientras siga la relación laboral, o 15 si es micro o pequeña empresa.',
       },
     ],
     sources: [
@@ -4791,54 +4806,122 @@ const articleCatalog: ArticleDraft[] = [
         url: 'https://sence.gob.cl/personas/subsidio-al-empleo-joven',
       },
     ],
-    content: `<p class="article-lead">El <strong>1 de octubre de 2026</strong> entra en vigencia la <strong>Ley 21.808</strong>, publicada en el Diario Oficial el 13 de marzo de 2026, que crea el <strong>Subsidio Unificado de Empleo (SUE)</strong>: un aporte mensual del Estado que se reparte entre la persona trabajadora y la empresa que la contrata, dirigido a cuatro grupos prioritarios. Con su entrada, el Bono al Trabajo de la Mujer dejó de recibir nuevas postulaciones y el Subsidio al Empleo Joven opera su transición.</p>
+    content: `<p class="article-lead">La <strong>Ley 21.808</strong> crea el <strong>Subsidio Unificado de Empleo (SUE)</strong>: un aporte mensual del Estado, administrado por el SENCE, para personas trabajadoras de cuatro grupos (jóvenes de 18 a 24 años, mujeres de 25 a 54 años, personas desde los 55 años y personas con discapacidad inscritas en el Registro Nacional de la Discapacidad) y para las empresas que las contratan. Rige desde el <strong>1 de octubre de 2026</strong>, reemplaza al Subsidio al Empleo Joven, al Bono al Trabajo de la Mujer y al Subsidio Previsional a los Trabajadores Jóvenes, y se postula en la <strong>Ventanilla Única Social</strong>. El primer año paga el <strong>10% de la remuneración bruta a la persona trabajadora (hasta $52.900 al mes)</strong> y el <strong>20% a la empresa</strong> (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808</a>; <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf" target="_blank" rel="noopener">Decreto 273 exento</a>).</p>
 
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Los parámetros aún no son definitivos</strong><p>La ley fija el IMM del subsidio en $529.000 y los porcentajes del primer año (10% trabajador, 20% empresa), pero los parámetros se materializan en el <strong>decreto del artículo 8</strong>, que al 26-09-2026 aún no se publica. Los montos de esta nota son los de la ley y pueden ajustarse cuando salga el decreto. El SENCE es el organismo que administra el subsidio.</p></div></aside>
+<aside class="callout callout--warning">
+<span class="callout__icon" aria-hidden="true">⚠️</span>
+<div class="callout__body">
+<strong>¿Postulaste al Bono al Trabajo de la Mujer o al Subsidio al Empleo Joven y te dijeron que no se acoge por la entrada en vigencia de la Ley 21.808?</strong>
+<p>Esa respuesta no evalúa tu situación. La ley dispuso que, desde su publicación el 13 de marzo de 2026, ya no se conceden nuevos subsidios de ese tipo, y el SENCE dejó de recibir postulaciones a ellos. Si cumples los requisitos, lo que corresponde ahora es postular al Subsidio Unificado de Empleo. Te explicamos cómo más abajo.</p>
+</div>
+</aside>
 
-<h2>Qué es el SUE y a quién está dirigido</h2>
-<p>El SUE es un subsidio al empleo que el Estado paga en dos puntas: un <strong>aporte a la persona trabajadora</strong> y un <strong>aporte a la empresa</strong> que la contrata. La ley usa su propio referente de ingreso —un <strong>ingreso mínimo mensual del subsidio de $529.000</strong>, reajustable— y sobre él define los tramos en que el aporte crece, se mantiene y decrece hasta desaparecer.</p>
-<p>La cobertura no es universal: está dirigido a <strong>cuatro grupos prioritarios</strong> —jóvenes de 18 a 24 años, mujeres de 25 a 54 años, personas de 55 años o más y personas con discapacidad desde los 18 años inscritas en el Registro Nacional de la Discapacidad— y exige condiciones de desempleo y vulnerabilidad que lo orientan a la reinserción laboral.</p>
-<p>Los requisitos de la persona trabajadora son dos: haber estado <strong>6 meses de desempleo continuos u 8 discontinuos en los 18 meses anteriores</strong> a la contratación, y pertenecer al <strong>40% más vulnerable según el Registro Social de Hogares durante el primer año</strong> —este último requisito no aplica a personas con discapacidad. Sobre la renta bruta, el tope general es <strong>2,25 IMM del subsidio</strong>: por encima de $1.190.250 no hay aporte ese mes.</p>
-<p>El requisito de desempleo es el eje del diseño: el subsidio no premia cualquier contratación, sino la de quien viene de un período significativo sin trabajo —seis meses seguidos u ocho acumulados dentro de un año y medio—. La exigencia del 40% RSH durante el primer año suma un segundo filtro: el beneficio está orientado a la reinserción de quienes combinan desempleo prolongado con vulnerabilidad, salvo en el caso de las personas con discapacidad, para quienes el requisito de registro no corre.</p>
+<aside class="callout callout--info">
+<span class="callout__icon" aria-hidden="true">ℹ️</span>
+<div class="callout__body">
+<strong>Actualizado: el decreto y el reglamento ya están publicados</strong>
+<p>El reglamento de la ley (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Decreto 75 del Ministerio del Trabajo</a>) se publicó en el Diario Oficial el 30 de septiembre de 2026, y el decreto que fija los parámetros del primer año (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf" target="_blank" rel="noopener">Decreto 273 exento de Hacienda</a>) el 1 de octubre de 2026. Los montos de esta guía son los vigentes.</p>
+</div>
+</aside>
 
-<h2>Cuánto aporta el Estado a cada parte</h2>
-<p>El primer año, los porcentajes de valorización (PV) son <strong>10% para la persona trabajadora y 20% para la empresa</strong>, calculados sobre tramos de la renta bruta medidos en IMM del subsidio:</p>
+<h2>¿De qué se trata la Ley 21.808?</h2>
+<ul>
+<li><strong>Qué es:</strong> un subsidio en dinero, de cargo fiscal, que se paga por separado a la persona trabajadora y a la empresa que la contrata. Lo administra y paga el SENCE.</li>
+<li><strong>A quién va dirigido:</strong> a personas de cuatro grupos prioritarios que vienen de un período sin trabajo formal y, el primer año, pertenecen al 40% más vulnerable del Registro Social de Hogares (salvo personas con discapacidad).</li>
+<li><strong>Cuánto paga:</strong> el primer año, el 10% de la remuneración bruta a la persona trabajadora y el 20% a la empresa, con tramos que se explican más abajo.</li>
+<li><strong>Desde cuándo:</strong> desde el 1 de octubre de 2026, primer día del séptimo mes desde su publicación en el Diario Oficial (13 de marzo de 2026).</li>
+<li><strong>Qué reemplaza:</strong> el Subsidio al Empleo Joven (SEJ), el Bono al Trabajo de la Mujer (BTM) y el Subsidio Previsional a los Trabajadores Jóvenes (SPTJ) (<a href="https://www.ventanillaunicasocial.gob.cl/ficha/640/subsidio-unificado-al-empleo-sue" target="_blank" rel="noopener">Ventanilla Única Social</a>).</li>
+</ul>
+
+<h2>¿Por qué no se acoge una postulación al BTM o al SEJ “por entrada en vigencia de la Ley 21.808”?</h2>
+<p><strong>Qué significa.</strong> El artículo cuarto transitorio de la Ley 21.808 dice que, desde la publicación de la ley en el Diario Oficial, no proceden nuevas concesiones del Subsidio al Empleo (Ley 20.338, el que usaba el SEJ), del Subsidio al Empleo de la Mujer (Ley 20.595, el BTM) ni del Subsidio Previsional a los Trabajadores Jóvenes. Por eso el SENCE informa en sus páginas que ya no recibe nuevas postulaciones al <a href="https://sence.gob.cl/subsidio/bono-al-trabajo-de-la-mujer/" target="_blank" rel="noopener">Bono al Trabajo de la Mujer</a> ni al <a href="https://sence.gob.cl/subsidio/subsidio-al-empleo-joven/" target="_blank" rel="noopener">Subsidio al Empleo Joven</a>. Si postulaste a uno de esos beneficios, la respuesta negativa se debe al cambio de ley, no a tus ingresos ni a tu Registro Social de Hogares.</p>
+<p><strong>Qué hacer ahora.</strong> Revisa si cumples los requisitos del Subsidio Unificado de Empleo (sección siguiente) y, si los cumples, postula en la <a href="https://www.ventanillaunicasocial.gob.cl/ficha/640/subsidio-unificado-al-empleo-sue" target="_blank" rel="noopener">Ventanilla Única Social</a>. Que te hayan rechazado el BTM o el SEJ no significa que te corresponda el SUE: los requisitos son otros.</p>
+<p><strong>Si ya recibías el BTM o el SEJ.</strong> Las personas que ya eran beneficiarias mantuvieron sus pagos por el tiempo que correspondía según su normativa o hasta seis meses desde la publicación de la ley, lo que ocurriera primero. El pago anual del BTM correspondiente a 2025 se realizó en agosto de 2026 (<a href="https://www.chileatiende.gob.cl/fichas/12725-bono-al-trabajo-de-la-mujer" target="_blank" rel="noopener">ChileAtiende</a>). Además, quienes cumplían las condiciones al entrar en vigencia la ley postulan <strong>en forma automática</strong> al SUE al terminar ese período (artículo tercero transitorio). Si reclamaste una resolución del SEJ o del BTM, el SENCE tiene plazo hasta el 30 de noviembre de 2027 para resolverla (<a href="https://www.suseso.gob.cl/612/w3-article-776830.html" target="_blank" rel="noopener">SUSESO</a>).</p>
+
+<h2>Quién puede recibir el Subsidio Unificado de Empleo</h2>
+<p>La persona trabajadora debe cumplir <strong>todo</strong> lo siguiente (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, arts. 3, 6 y 7</a>):</p>
+<ol>
+<li><strong>Pertenecer a un grupo prioritario:</strong>
+<ul>
+<li>jóvenes de entre 18 y 24 años, 11 meses y 30 días;</li>
+<li>mujeres de entre 25 y 54 años, 11 meses y 30 días;</li>
+<li>personas desde los 55 años;</li>
+<li>personas con discapacidad inscritas en el Registro Nacional de la Discapacidad, desde los 18 años.</li>
+</ul></li>
+<li><strong>Renta bruta del trabajo de hasta 2,25 ingresos mínimos del subsidio</strong>, es decir, <strong>$1.190.250</strong> al mes.</li>
+<li><strong>Desempleo previo:</strong> al menos 6 meses de desempleo continuos u 8 discontinuos <strong>en los 18 meses anteriores a la postulación</strong>. El SENCE lo revisa con los datos del Seguro de Cesantía (AFC) y, si no bastan, con cotizaciones o registros laborales.</li>
+<li><strong>Registro Social de Hogares:</strong> durante el primer año, pertenecer al <strong>40% más vulnerable</strong> al momento de postular. Este requisito no se exige a personas con discapacidad (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf" target="_blank" rel="noopener">Decreto 273 exento</a>).</li>
+</ol>
+<p>El subsidio es solo para personas que trabajan en el <strong>sector privado</strong>: no pueden recibirlo quienes trabajan en el sector público ni las personas mayores de 65 años pensionadas por vejez (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808</a>).</p>
+<p>La empresa debe tributar en primera categoría, estar al día en cotizaciones y obligaciones laborales y no tener ciertas condenas en los últimos dos años. No puede postular por una persona con la que tuvo relación laboral en los 12 meses anteriores al nuevo contrato.</p>
+
+<h2>Cuánto paga el primer año</h2>
+<p>El cálculo usa el <strong>ingreso mínimo mensual del subsidio, de $529.000</strong>, que es distinto del sueldo mínimo legal. En el primer año el porcentaje es 10% para la persona trabajadora y 20% para la empresa (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf" target="_blank" rel="noopener">Decreto 273 exento</a>).</p>
 <table>
-<thead><tr><th>Renta bruta</th><th>Aporte trabajador (PV 10%)</th><th>Aporte empresa (PV 20%)</th></tr></thead>
+<thead>
+<tr><th>Renta bruta mensual</th><th>Aporte a la persona trabajadora</th><th>Aporte a la empresa</th></tr>
+</thead>
 <tbody>
-<tr><td>Hasta $661.250 (1,25 IMM)</td><td>10% × renta, con tope de 1 IMM</td><td>20% × renta</td></tr>
-<tr><td>$661.251 a $1.190.250 (hasta 2,25 IMM)</td><td>10% × 1 IMM − 10% × (renta − 1,25 IMM), con piso de $13.225</td><td>20% × 1,25 IMM − 25% × (renta − 1,25 IMM)</td></tr>
+<tr><td>Hasta $661.250 (1,25 ingresos mínimos del subsidio)</td><td>10% de la renta, con un máximo de $52.900</td><td>20% de la renta</td></tr>
+<tr><td>Sobre $661.250 y hasta $1.190.250 (2,25 ingresos mínimos)</td><td>$52.900 menos el 10% de lo que la renta supere $661.250</td><td>$132.250 menos el 25% de lo que la renta supere $661.250</td></tr>
 <tr><td>Sobre $1.190.250</td><td>Sin aporte ese mes</td><td>Sin aporte ese mes</td></tr>
 </tbody>
 </table>
-<p>Dos reglas finas importan en la práctica. Primero, el aporte del trabajador tiene un <strong>piso: nunca puede ser inferior al 2,5% del IMM del subsidio</strong> —$13.225— mientras la persona sea elegible, así que incluso en el borde superior del rango sigue existiendo un aporte mínimo. Segundo, el aporte de la empresa cae más rápido en el tramo decreciente: el descuento es el 20% multiplicado por 1,25, es decir el 25% de lo que la renta supere a 1,25 IMM.</p>
-<p>La arquitectura de los tramos se entiende mejor como tres zonas: por debajo de $661.250 el aporte crece con la renta; entre ese punto y $1.190.250 decrece gradualmente a medida que el sueldo sube; y sobre $1.190.250 desaparece por completo ese mes. El corte es mensual —una renta que supere el tope en un mes puntual deja sin aporte ese mes— y el máximo del beneficio para el trabajador se alcanza justo en el techo del primer tramo: 10% de $529.000, es decir $52.900.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplos con el IMM del subsidio ($529.000)</div><ul><li>Renta bruta $500.000 → trabajador $50.000 / empresa $100.000 al mes.</li><li>Renta bruta $600.000 → trabajador $52.900 / empresa $120.000.</li><li>Renta bruta $900.000 → trabajador $29.025 / empresa $72.563.</li><li>Renta bruta $1.150.000 → trabajador $13.225 (la fórmula da $4.025, pero opera el piso) / empresa $10.063.</li><li>Renta bruta $1.200.000 → sin aporte, porque supera 2,25 IMM.</li></ul><span class="total">Entre 1,25 y 2,25 IMM el aporte baja de forma gradual; el trabajador siempre recibe al menos el piso mientras sea elegible</span></div>
+<p>El aporte a la persona trabajadora <strong>nunca podrá ser inferior al 2,5% del ingreso mínimo del subsidio, es decir, $13.225</strong>, cualquiera sea su renta, también si es baja. Entre $529.000 y $661.250 el aporte se mantiene en el máximo de $52.900.</p>
+<p><strong>Ejemplos</strong>, calculados con los tramos de la <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808</a> y los parámetros del <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf" target="_blank" rel="noopener">Decreto 273 exento</a>:</p>
+<ul>
+<li>Renta bruta $500.000 → trabajador $50.000 / empresa $100.000 al mes.</li>
+<li>Renta bruta $600.000 → trabajador $52.900 / empresa $120.000.</li>
+<li>Renta bruta $900.000 → trabajador $29.025 / empresa $72.563.</li>
+<li>Renta bruta $1.150.000 → trabajador $13.225 (rige el mínimo) / empresa $10.063. El aporte a la empresa no tiene un mínimo: baja hasta llegar a $0 en $1.190.250.</li>
+<li>Renta bruta $1.200.000 → sin aporte ese mes, porque supera $1.190.250.</li>
+</ul>
+<p><strong>Cómo se paga a la persona trabajadora.</strong> Si es dependiente, recibe pagos mensuales por transferencia que son <strong>provisionales y equivalen al 90%</strong> del monto. El 10% restante se paga en la <strong>reliquidación de agosto del año siguiente</strong>, que también puede generar reintegros si se pagó de más (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Reglamento, Decreto 75</a>). Por ejemplo, con un aporte de $52.900, el pago mensual provisional es de $47.610 ($52.900 × 90%). Las personas <strong>independientes reciben un pago anual único en agosto, después de terminar el subsidio</strong> (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 20</a>). Si una persona dependiente empieza a tener rentas de honorarios, se suspende su pago mensual y el resto del subsidio se le paga en forma anual.</p>
+<p>El subsidio <strong>no es renta para efectos tributarios ni remuneración</strong>, es inembargable y no puede estar sujeto a descuento alguno (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 22</a>). Por eso no se suma al sueldo bruto ni al líquido.</p>
+<p>Si en un mes la renta supera $1.190.250, ese mes no hay pago, pero cuenta para la duración total del beneficio.</p>
+<p>Puedes estimar tu caso en la <a href="/calculadoras/calculadora-subsidio-unificado-empleo">calculadora del Subsidio Unificado de Empleo</a>.</p>
 
-<h2>Duración, pago provisional y reglas de la empresa</h2>
-<p>El subsidio dura <strong>12 meses para la persona trabajadora</strong> —15 si es persona con discapacidad— y <strong>15 meses para la empresa cuando es micro o pequeña</strong>. Los pagos mensuales al trabajador son <strong>provisionales por el 90%</strong>: se paga esa parte cada mes y la diferencia se reliquida anualmente, una mecánica pensada para ajustar el beneficio a los ingresos efectivos del año.</p>
-<p>Esa provisionalidad tiene una consecuencia práctica: el monto que llega cada mes no es el aporte completo, sino el 90% de él, con una reliquidación anual que cierra la cuenta según las rentas efectivas. Un trabajador con aporte de $52.900 recibe $47.610 mensuales en forma provisional, y el remanente queda para la reliquidación anual.</p>
-<p>Del lado empleador, la ley agrega reglas de acceso: la empresa debe <strong>solicitar el subsidio dentro de los 3 meses desde el inicio de la relación laboral</strong> y no puede haber tenido relación laboral con esa persona en los <strong>12 meses previos</strong> —una barrera contra la recontratación para capturar el beneficio. Además hay un <strong>máximo de 200 beneficiarios por empresa</strong> y un <strong>pago escalonado</strong> en empresas de 1 a 199 trabajadores: 50% del aporte el primer mes, 75% el segundo, 100% el tercero y 100% más el remanente el cuarto mes.</p>
-<p>Ese escalonamiento ordena el flujo: la empresa recibe el beneficio completo, pero su desembolso se concentra recién en el tercer y cuarto mes, lo que vuelve menos atractivo un uso meramente transitorio del subsidio.</p>
-
-<h2>La transición: qué pasa con BTM y SEJ</h2>
-<p>El SUE reemplaza los subsidios al empleo anteriores. Según informa el SENCE en su sitio, <strong>el Bono al Trabajo de la Mujer ya no recibe nuevas postulaciones</strong> debido a la entrada en vigencia de la nueva ley. Para el <strong>Subsidio al Empleo Joven</strong>, la referencia es la norma transitoria: el <strong>pago anual 2025 se rige por el artículo cuarto transitorio de la Ley 21.808</strong>.</p>
-<p>Para quienes venían siguiendo esos programas, la lectura práctica es directa: el sistema de subsidios al empleo se unifica bajo una sola ley con reglas propias de tramos, duración y elegibilidad, administrada por el SENCE. Las prestaciones ya generadas bajo los programas anteriores mantienen sus reglas de cierre según las normas transitorias —el BTM no abre postulaciones nuevas y el SEJ termina de pagar su ciclo 2025 bajo la norma transitoria.</p>
-
-<h2>Qué revisar mientras se publica el decreto</h2>
-<ol class="steps">
-<li><strong>Identifica tu grupo prioritario:</strong> joven 18–24, mujer 25–54, persona de 55+ o persona con discapacidad inscrita en el RND.</li>
-<li><strong>Revisa tu desempleo previo:</strong> 6 meses continuos u 8 discontinuos en los últimos 18 meses.</li>
-<li><strong>Confirma tu tramo RSH:</strong> el primer año exige 40% más vulnerable, salvo personas con discapacidad.</li>
-<li><strong>Estima el aporte con tu renta bruta:</strong> la <a href="/calculadoras/calculadora-subsidio-unificado-empleo">calculadora del SUE</a> aplica los tramos, el piso y el pago provisional del 90%.</li>
-<li><strong>Sigue la publicación del decreto del art. 8:</strong> los parámetros finales se confirman ahí.</li>
+<h2>Cómo postular, paso a paso</h2>
+<ol>
+<li>Entra a la <a href="https://www.ventanillaunicasocial.gob.cl/ficha/640/subsidio-unificado-al-empleo-sue" target="_blank" rel="noopener">ficha del SUE en la Ventanilla Única Social</a> y presiona <strong>Postular</strong>. Es gratis y en línea.</li>
+<li><strong>Si eres persona trabajadora</strong>, inicia sesión con tu ClaveÚnica e informa tus datos personales, tu cuenta bancaria y si eres trabajador dependiente o independiente.</li>
+<li><strong>Si eres empresa</strong>, entra con la Clave Tributaria del representante legal o mandatario y completa la nómina de trabajadores. Necesitas el consentimiento expreso de cada trabajador para usar sus datos, y debes postular <strong>dentro de los 3 meses desde el inicio de la relación laboral</strong> (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Reglamento, art. 21</a>). Si la empresa postula y se aprueba, se entiende que también postuló la persona trabajadora: no necesita hacerlo de nuevo.</li>
+<li><strong>Plazos:</strong> el SENCE fija los períodos de postulación, más de uno al año, y los publica en su <a href="https://www.subsidioalempleo.cl/SUE/index.html" target="_blank" rel="noopener">portal del SUE</a> con al menos 30 días de anticipación. El subsidio se cuenta desde el mes de la solicitud, y el primer pago se hace <strong>a más tardar, antes del término del mes subsiguiente al de postulación</strong> (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Reglamento, art. 30</a>). Por ejemplo, si postulas en noviembre, el primer pago llega antes de que termine enero.</li>
+<li><strong>Seguimiento:</strong> revisa el estado en la Ventanilla Única Social, en “Seguimiento de trámites” → “Postulaciones/Solicitudes”. El SENCE avisa por correo qué requisitos cumpliste y cuáles no.</li>
 </ol>
-<p>La entrada en vigencia ya está fijada en la ley —1 de octubre de 2026—, pero la letra chica que fija los parámetros operativos quedó delegada al decreto del artículo 8, pendiente al cierre de esta nota. Este artículo es informativo y debe releerse cuando ese decreto se publique.</p>
-<p>El SUE marca un cambio de arquitectura: en lugar de subsidios separados por grupo objetivo —el BTM para mujeres, el SEJ para jóvenes—, una sola ley unifica el aporte a la contratación con tramos definidos sobre el IMM del subsidio y duraciones según el perfil del trabajador y el tamaño de la empresa. La administración queda en el SENCE, que ya anuncia el cierre de postulaciones del BTM a partir de esta entrada en vigencia. Para los cuatro grupos prioritarios —jóvenes, mujeres, personas de 55 o más y personas con discapacidad—, el nuevo esquema ordena en una sola norma lo que antes se repartía entre programas distintos.</p>
-<p>Para profundizar en cómo estimar el aporte según tu renta bruta, revisa la <a href="/calculadoras/calculadora-subsidio-unificado-empleo">calculadora del Subsidio Unificado de Empleo</a>.</p>
+
+<h2>Cuánto dura y reglas para las empresas</h2>
+<ul>
+<li><strong>Persona trabajadora:</strong> hasta 12 meses continuos; 15 meses si es persona con discapacidad.</li>
+<li><strong>Empresa:</strong> 12 meses mientras siga la relación laboral; 15 meses si es micro o pequeña empresa.</li>
+<li><strong>Tope:</strong> 200 personas beneficiarias por empresa. Si postula por más, la prioridad es primero para las personas con discapacidad y luego para las de mayor remuneración. El tope no aplica a quien postula por su cuenta (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 12</a>).</li>
+<li><strong>Pago por tramos a la empresa:</strong> en empresas de 1 a 199 trabajadores se paga el 50% el primer mes, el 75% el segundo y el 100% el tercero. En el cuarto mes se paga el 100% más el saldo de los meses 1 y 2, si la relación laboral sigue. Desde el quinto mes se paga el 100%. En empresas de 200 o más trabajadores, los meses 1 a 4 se pagan juntos en el cuarto mes (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 13</a>; <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Reglamento, arts. 40 y 41</a>).</li>
+<li><strong>Cotizaciones al día:</strong> si la empresa se atrasa en cualquier cotización, el subsidio de la empresa se suspende hasta que se ponga al día. Si acumula 2 meses de cotizaciones impagas, continuos o no, termina su subsidio por esos trabajadores. La persona trabajadora no pierde el suyo: lo cobra cuando se regularizan las cotizaciones (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 15</a>; <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Reglamento, art. 53</a>).</li>
+<li><strong>Un solo subsidio a la contratación:</strong> para la empresa, el SUE es incompatible con otros subsidios a la contratación financiados por la Ley de Presupuestos, y debe elegir uno (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 16</a>; <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Reglamento, art. 47</a>).</li>
+</ul>
+
+<h2>Qué cambia en enero de 2027</h2>
+<p>El ingreso mínimo del subsidio ($529.000) se reajusta por primera vez en <strong>enero de 2027</strong> según el IPC, y un decreto fijará el nuevo valor (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 8 y art. segundo transitorio</a>). Con eso cambiarán los tramos y los montos del subsidio. Los actualizaremos cuando se publique el decreto. Este valor es distinto del <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo legal de $553.553</a>, que tiene su propio reajuste en enero.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 26 de septiembre de 2026 con el <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">texto de la Ley 21.808 en el Diario Oficial</a>, su versión en <a href="https://www.bcn.cl/leychile/navegar?idNorma=1222281" target="_blank" rel="noopener">Ley Chile (BCN)</a>, y las páginas del SENCE del <a href="https://sence.gob.cl/personas/bono-al-trabajo-de-la-mujer" target="_blank" rel="noopener">Bono al Trabajo de la Mujer</a> y del <a href="https://sence.gob.cl/personas/subsidio-al-empleo-joven" target="_blank" rel="noopener">Subsidio al Empleo Joven</a>.</p>`,
+<p>Contenido verificado el 20 de octubre de 2026 con:</p>
+<ul>
+<li><a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, Diario Oficial del 13-03-2026</a> y <a href="https://www.bcn.cl/leychile/navegar?idNorma=1222281" target="_blank" rel="noopener">Ley Chile (BCN)</a>.</li>
+<li><a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf" target="_blank" rel="noopener">Decreto 75 del Ministerio del Trabajo, reglamento de la ley, Diario Oficial del 30-09-2026</a>.</li>
+<li><a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf" target="_blank" rel="noopener">Decreto 273 exento del Ministerio de Hacienda, parámetros del primer año, Diario Oficial del 01-10-2026</a>.</li>
+<li>Ventanilla Única Social: <a href="https://www.ventanillaunicasocial.gob.cl/ficha/640/subsidio-unificado-al-empleo-sue" target="_blank" rel="noopener">ficha del SUE</a> (cómo postular).</li>
+<li>SENCE: <a href="https://www.subsidioalempleo.cl/SUE/index.html" target="_blank" rel="noopener">portal del SUE</a>, <a href="https://sence.gob.cl/subsidio/bono-al-trabajo-de-la-mujer/" target="_blank" rel="noopener">Bono al Trabajo de la Mujer</a> y <a href="https://sence.gob.cl/subsidio/subsidio-al-empleo-joven/" target="_blank" rel="noopener">Subsidio al Empleo Joven</a>.</li>
+<li><a href="https://www.suseso.gob.cl/612/w3-article-776830.html" target="_blank" rel="noopener">SUSESO, dictamen O-01-S-01364-2026</a>.</li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/12725-bono-al-trabajo-de-la-mujer" target="_blank" rel="noopener">ChileAtiende, pago anual del BTM</a>.</li>
+</ul>
+
+<aside class="callout callout--info">
+<span class="callout__icon" aria-hidden="true">ℹ️</span>
+<div class="callout__body">
+<strong>Alcance</strong>
+<p>Información general. La concesión, los montos y los pagos los resuelve el SENCE según tu caso. Ante cualquier diferencia, prevalecen la Ley 21.808, su reglamento, el decreto vigente y la resolución del SENCE.</p>
+</div>
+</aside>`,
   },
   {
     slug: 'bono-bodas-de-oro-octubre-2026-monto-requisitos',
