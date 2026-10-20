@@ -14,7 +14,7 @@
 // ============================================
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
-import { formatCLP2 } from '@/lib/seo/live-value-title';
+import { formatCLP2, MESES_ES_CL, toSantiagoParts } from '@/lib/seo/live-value-title';
 import {
   INGRESO_MINIMO,
   JORNADA_LEGAL,
@@ -22,6 +22,7 @@ import {
   CONTRIBUCIONES_BIENES_RAICES,
   TOPE_IMPOSITIVO,
   UTM,
+  INDEMNIZACION,
 } from '@/lib/values/constants';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
 import { calculateCreditoCAE } from '@/lib/calculations/credito-cae';
@@ -42,11 +43,30 @@ import { calculateFactorHoraExtra } from '@/lib/calculations/factor-hora-extra';
 import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf';
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
 
+export interface QuickAnswerLink {
+  text: string;
+  href: string;
+}
+
+/** Fragmento del lead: texto plano o enlace a una fuente oficial. */
+export type QuickAnswerPart = string | QuickAnswerLink;
+
 export interface QuickAnswer {
   /** H1 de la página; si se omite se usa `calculator.name`. */
   h1?: string;
-  /** Párrafo con la respuesta directa, bajo el header. */
+  /** Párrafo con la respuesta directa, bajo el header (texto plano). */
   lead: string;
+  /**
+   * Mismo lead en fragmentos, para renderizar las fuentes oficiales como
+   * enlaces. Si existe, `lead` es su texto concatenado.
+   */
+  leadParts?: QuickAnswerPart[];
+  /** Respuestas cortas visibles bajo el lead (sin schema). */
+  shortAnswers?: {
+    question: string;
+    answer: string;
+    sources: QuickAnswerLink[];
+  }[];
   /** Ejemplo representativo renderizado como tabla con caption. */
   example?: {
     caption: string;
@@ -60,6 +80,44 @@ interface QuickAnswerContext {
   uf: number;
   /** UTM vigente (o snapshot). */
   utm: number;
+  /**
+   * UTM en vivo solo si pasó `isLiveValueFresh` (mes en curso). Nunca el
+   * snapshot ni `FALLBACK_VALUES`: si falta, el lead de UTM va sin monto.
+   */
+  utmFresca?: { value: number; date: string } | null;
+}
+
+function withLinks(parts: QuickAnswerPart[]): Pick<QuickAnswer, 'lead' | 'leadParts'> {
+  return {
+    lead: parts.map((p) => (typeof p === 'string' ? p : p.text)).join(''),
+    leadParts: parts,
+  };
+}
+
+const SII_UTM_URL = 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm';
+const BCN_CODIGO_TRABAJO_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
+const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.html';
+
+/** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
+export function buildUTMLeadParts(
+  utmFresca: { value: number; date: string } | null | undefined,
+): QuickAnswerPart[] {
+  const parts = utmFresca ? toSantiagoParts(new Date(utmFresca.date)) : null;
+  if (!utmFresca || !parts) {
+    return [
+      'Una UTM vale el monto que fija el ',
+      { text: 'SII', href: SII_UTM_URL },
+      ' para cada mes y rige del primer al último día de ese mes. Se reajusta cada mes según el IPC, y 12 UTM forman 1 UTA.',
+    ];
+  }
+  const mes = MESES_ES_CL[parts.month - 1];
+  const ultimoDia = new Date(Date.UTC(parts.year, parts.month, 0)).getUTCDate();
+  const uta = calculateUTMCLP({ monto: 12, direccion: 'utm-a-clp', valorUTM: utmFresca.value });
+  return [
+    `Una UTM vale ${formatCLP(utmFresca.value)} en ${mes} de ${parts.year}: es el valor que fija el `,
+    { text: 'SII', href: SII_UTM_URL },
+    ` y rige del 1 al ${ultimoDia} de ${mes}. Se reajusta cada mes según el IPC, y 12 UTM forman 1 UTA (${formatCLP(Math.round(uta.montoConvertido))}).`,
+  ];
 }
 
 function formatNum(value: number, decimals = 2): string {
@@ -318,7 +376,46 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       });
       return {
         h1: 'Calcular finiquito 2026: cálculo de indemnización, vacaciones y aviso',
-        lead: 'Calcula cuánto te corresponde de finiquito según la causal de término. El finiquito puede incluir la indemnización por años de servicio (30 días de remuneración por año, con tope de 11 años y una base de cálculo de hasta 90 UF), las vacaciones proporcionales y el mes de aviso previo, según el caso (Dirección del Trabajo).',
+        ...withLinks([
+          `Si te despiden por necesidades de la empresa o desahucio, la ley te da ${INDEMNIZACION.dias_por_año} días de tu última remuneración mensual por cada año trabajado (máximo ${INDEMNIZACION.tope_años} años y con una base de hasta ${INDEMNIZACION.tope_uf_mensual} UF del último día del mes anterior al pago), un mes más si no te avisaron con 30 días de anticipación, y siempre el feriado proporcional y los días trabajados del mes (`,
+          { text: 'Código del Trabajo, arts. 163 y 172', href: BCN_CODIGO_TRABAJO_URL },
+          '). El empleador debe pagarlo dentro de 10 días hábiles desde tu salida (',
+          { text: 'art. 177, Dirección del Trabajo', href: DT_ORD_596_URL },
+          ').',
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Qué significa "me reservo el derecho" en el finiquito?',
+            answer:
+              'Puedes firmar el finiquito y dejar escrita una reserva de derechos sobre los conceptos o montos con los que no estás de acuerdo, de forma específica, para reclamarlos después. No necesitas que el empleador lo acepte, y igual te deben pagar lo no disputado.',
+            sources: [
+              {
+                text: 'Dirección del Trabajo, Dictamen ORD. N° 1315/26 del 04-08-2022 (Ley 21.361)',
+                href: 'https://dt.gob.cl/legislacion/1624/w3-article-122511.html',
+              },
+            ],
+          },
+          {
+            question: '¿Cuánto tiempo tiene el empleador para pagar el finiquito?',
+            answer:
+              'Diez días hábiles desde que terminas de trabajar para firmarlo y poner el pago a tu disposición. Solo puede pagarse en cuotas si ambas partes lo acuerdan.',
+            sources: [
+              { text: 'Código del Trabajo, art. 177', href: BCN_CODIGO_TRABAJO_URL },
+              { text: 'Dirección del Trabajo, ORD. 596 de 21-04-2023', href: DT_ORD_596_URL },
+            ],
+          },
+          {
+            question: '¿Con qué sueldo se calcula el finiquito?',
+            answer: `Con la última remuneración mensual: todo lo que recibías cada mes al terminar el contrato (sueldo, comisiones, bonos mensuales, colación, movilización, gratificación si se paga mes a mes y cotizaciones de cargo del trabajador). No cuentan las horas extra, la asignación familiar ni los pagos esporádicos o anuales. Tiene tope de ${INDEMNIZACION.tope_uf_mensual} UF del último día del mes anterior al pago. Si tu remuneración es variable, se usa el promedio de los últimos 3 meses calendario completos (art. 172).`,
+            sources: [
+              { text: 'Código del Trabajo, art. 172', href: BCN_CODIGO_TRABAJO_URL },
+              {
+                text: 'Dirección del Trabajo',
+                href: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
+              },
+            ],
+          },
+        ],
         example: {
           caption:
             'Despido por necesidades de la empresa (Art. 161), 6 meses del último año, sin aviso previo de 30 días y con gratificación. No incluye recargos judiciales.',
@@ -329,23 +426,28 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'utm-clp': {
-      const montos = [1, 2, 5, 10, 12, 20, 50, 100];
+      // Ejemplo con el valor fresco si existe; si no, el valor de contexto
+      // (comportamiento previo). El lead nunca usa el snapshot.
+      const valorUTM = ctx.utmFresca?.value ?? ctx.utm;
+      const montos = [0.5, 1, 2, 3, 5, 10, 12, 20, 50, 100];
       const rows = montos.map((monto) => {
         const r = calculateUTMCLP({
           monto,
           direccion: 'utm-a-clp',
-          valorUTM: ctx.utm,
+          valorUTM,
         });
         return [
-          monto === 12 ? '12 UTM (1 UTA)' : `${formatNum(monto, 0)} UTM`,
+          monto === 12
+            ? '12 UTM (1 UTA)'
+            : `${formatNum(monto, Number.isInteger(monto) ? 0 : 1)} UTM`,
           formatCLP(Math.round(r.montoConvertido)),
         ];
       });
       return {
         h1: 'Conversor UTM a pesos',
-        lead: 'La UTM (Unidad Tributaria Mensual) se reajusta cada mes según la variación del IPC del penúltimo mes y se usa en multas de tránsito, patentes, permisos municipales y trámites tributarios. 1 UTA equivale a 12 UTM.',
+        ...withLinks(buildUTMLeadParts(ctx.utmFresca)),
         example: {
-          caption: `Equivalencias con UTM de ${formatCLP(ctx.utm)}. El valor se reajusta cada mes según el IPC.`,
+          caption: `Equivalencias con UTM de ${formatCLP(valorUTM)}. El valor se reajusta cada mes según el IPC.`,
           headers: ['Monto en UTM', 'Equivalente en pesos'],
           rows,
         },

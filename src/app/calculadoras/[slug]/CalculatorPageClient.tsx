@@ -260,8 +260,53 @@ export default function CalculatorPageClient({
 
       {quickAnswer && (
         <p className="mb-6 max-w-3xl text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base">
-          {quickAnswer.lead}
+          {quickAnswer.leadParts
+            ? quickAnswer.leadParts.map((part, i) =>
+                typeof part === 'string' ? (
+                  part
+                ) : (
+                  <a
+                    key={i}
+                    href={part.href}
+                    target="_blank"
+                    rel="noopener"
+                    className="font-medium text-[var(--color-primary-600)] hover:underline"
+                  >
+                    {part.text}
+                  </a>
+                ),
+              )
+            : quickAnswer.lead}
         </p>
+      )}
+
+      {quickAnswer?.shortAnswers && quickAnswer.shortAnswers.length > 0 && (
+        <div className="mb-6 max-w-3xl space-y-4">
+          {quickAnswer.shortAnswers.map((qa) => (
+            <div key={qa.question}>
+              <h2 className="text-base font-semibold text-[var(--foreground)]">{qa.question}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base">
+                {qa.answer}
+              </p>
+              <p className="mt-1 text-xs text-[var(--foreground-muted)]">
+                Fuente:{' '}
+                {qa.sources.map((src, i) => (
+                  <span key={src.href + i}>
+                    {i > 0 && ' · '}
+                    <a
+                      href={src.href}
+                      target="_blank"
+                      rel="noopener"
+                      className="font-medium text-[var(--color-primary-600)] hover:underline"
+                    >
+                      {src.text}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            </div>
+          ))}
+        </div>
       )}
 
       {liveValue && (
