@@ -54,3 +54,39 @@ describe('calculateVacaciones', () => {
     expect(result.diasCorridosIndemnizables).toBe(7.5);
   });
 });
+
+describe('feriados nacionales 2027 (Vigía YMYL, BCN, 20-10-2026)', () => {
+  it('Semana Santa: término jue 25-03-2027, 5 días hábiles → 8 corridos (vie 26 y sáb 27 feriados)', () => {
+    const r = calculateVacaciones({ sueldoBruto: 600_000, mesesTrabajados: 4, fechaTermino: '2027-03-25' });
+    // 26 (feriado), 27 (feriado), 28 (dom), 29, 30, 31-03, 01-04, 02-04
+    expect(r.diasCorridosIndemnizables).toBe(8);
+    expect(r.totalVacaciones).toBe(160_000);
+  });
+
+  it('Fiestas Patrias: término jue 16-09-2027, 5 días hábiles → 8 corridos (vie 17 feriado adicional)', () => {
+    const r = calculateVacaciones({ sueldoBruto: 600_000, mesesTrabajados: 4, fechaTermino: '2027-09-16' });
+    // 17 (feriado), 18, 19, 20, 21, 22, 23, 24
+    expect(r.diasCorridosIndemnizables).toBe(8);
+    expect(r.totalVacaciones).toBe(160_000);
+  });
+
+  it('Fiestas Patrias con 10 días hábiles: término vie 10-09-2027 → 17 corridos', () => {
+    const r = calculateVacaciones({
+      sueldoBruto: 600_000,
+      mesesTrabajados: 4,
+      diasVacacionesPendientes: 5,
+      fechaTermino: '2027-09-10',
+    });
+    // 11-12 fin de semana, 13-16 (4), 17 feriado, 18-19, 20-24 (9), 25-26, 27 (10)
+    expect(r.diasHabilesTotales).toBe(10);
+    expect(r.diasCorridosIndemnizables).toBe(17);
+    expect(r.totalVacaciones).toBe(340_000);
+  });
+
+  it('Encuentro de Dos Mundos trasladado al lun 11-10-2027: término vie 08-10-2027, 5 hábiles → 10 corridos', () => {
+    const r = calculateVacaciones({ sueldoBruto: 600_000, mesesTrabajados: 4, fechaTermino: '2027-10-08' });
+    expect(r.diasCorridosIndemnizables).toBe(10);
+    expect(r.totalVacaciones).toBe(200_000);
+  });
+});
+

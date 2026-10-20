@@ -42,3 +42,14 @@ describe('finiquito: feriado proporcional según fecha de término', () => {
     expect(n.source?.url).toBe('https://www.dt.gob.cl/portal/1628/w3-article-60200.html');
   });
 });
+
+describe('finiquito con término en 2027 (feriados 2027)', () => {
+  it('término jue 25-03-2027, 3 años y 4 meses, $800.000: 8 días corridos = $213.333', async () => {
+    const fn = await loadCalculationFn('finiquito');
+    const results = fn!({ ...base, fechaTermino: '2027-03-25' });
+    const feriado = results.find((r) => r.label.startsWith('Vacaciones proporcionales'));
+    expect(feriado?.label).toBe('Vacaciones proporcionales (8 días corridos)');
+    expect(feriado?.value).toBe(213333);
+  });
+});
+
