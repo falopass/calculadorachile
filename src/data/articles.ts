@@ -1102,11 +1102,11 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'revision-tecnica-chile-2026-calendario-patente',
-    title: 'Revisión técnica Chile 2026: calendario por dígito de patente y requisitos',
+    title: 'Calendario de revisión técnica 2026 por dígito de patente',
     description:
-      'Cuándo te toca la revisión técnica según el último dígito de la patente, qué se revisa, cómo consultar el estado y por qué la necesitas para el permiso de circulación.',
+      'En qué mes te toca la revisión técnica según el último dígito de la patente, qué dígitos faltan en 2026, si hay prórrogas y cómo sigue el calendario en 2027.',
     date: '2026-07-10',
-    updatedAt: '2026-07-10',
+    updatedAt: '2026-10-20',
     category: 'vehiculos',
     readingTime: 14,
     seoTitle: 'Revisión técnica 2026: calendario por patente y requisitos',
@@ -1123,177 +1123,155 @@ const articleCatalog: ArticleDraft[] = [
     relatedCalculators: ['calculadora-permiso-circulacion', 'calculadora-multas-transito'],
     faq: [
       {
-        question: '¿Cómo sé en qué mes me toca la revisión técnica?',
+        question: '¿En qué mes me toca la revisión técnica según mi patente?',
         answer:
-          'Para un vehículo de revisión anual, el Decreto Supremo 156 relaciona el último dígito de la patente con un mes. ChileAtiende aclara que ese dígito da preferencia en algunas plantas. Para decidir si hoy puedes circular, revisa además la vigencia exacta de tu certificado o la consulta oficial por patente en PRT: no reemplaces ese dato por una tabla genérica.',
+          'Depende del último dígito: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito. Es la regla del artículo 7 del Decreto Supremo 156 para vehículos de revisión anual. Para saber si hoy puedes circular, revisa también la vigencia de tu certificado.',
+      },
+      {
+        question: '¿Hay prórroga de la revisión técnica en 2026?',
+        answer:
+          'Al 20 de octubre de 2026, no. La única prórroga de 2026, del Decreto 129 del MTT, cubrió los dígitos 4 y 5 en la Región de Coquimbo y la provincia del Huasco, y venció el 30 de septiembre de 2026.',
+      },
+      {
+        question: '¿Qué dígitos faltan en 2026?',
+        answer:
+          'El 7, hasta el 31 de octubre, y el 8, en noviembre. Diciembre no tiene dígito asignado, pero las patentes terminadas en 9 pueden adelantar a diciembre la revisión que les corresponde en enero de 2027.',
       },
       {
         question: '¿Puedo hacer la revisión técnica antes del mes que me toca?',
         answer:
-          'Sí. El artículo 7 del Decreto Supremo 156 permite efectuar la revisión anual en el mes inmediatamente anterior al que corresponde por patente, sin afectar su vigencia. Si quieres anticiparla todavía más, confirma primero con la planta porque esa posibilidad no está garantizada por esa regla.',
+          'Sí, en el mes inmediatamente anterior, sin que cambie su vigencia (artículo 7 del Decreto Supremo 156). Si quieres adelantarla más, consulta antes con la planta.',
       },
       {
-        question: '¿Sirve la revisión técnica para el permiso de circulación?',
+        question: '¿Qué pasa si se me pasó el mes?',
         answer:
-          'Sí. El artículo 89 de la Ley de Tránsito impide a la municipalidad otorgar el permiso de circulación sin revisión técnica vigente o, cuando corresponde, sin certificado de homologación vigente. El SOAP y los demás requisitos del permiso son documentos distintos.',
+          'La revisión vence según la fecha de tu certificado. Si está vencida, debes hacerla antes de volver a circular: conducir sin revisión técnica vigente es una infracción grave y sin ella no puedes renovar el permiso de circulación.',
       },
       {
-        question: '¿Cuánto tiempo tengo para volver si mi vehículo fue rechazado?',
+        question: '¿Cuál es el calendario de revisión técnica 2027?',
         answer:
-          'ChileAtiende informa que tienes 15 días corridos para volver a la planta revisora, acreditar que corregiste los desperfectos y acceder a una tarifa rebajada. Conserva el certificado de rechazo: allí aparecen las fallas que deben reinspeccionarse.',
+          'El mismo. El calendario por dígito es una regla permanente del Decreto Supremo 156, así que en 2027 se repite: 9 en enero, 0 en febrero, 1 en abril y así hasta el 8 en noviembre, salvo que el MTT lo modifique.',
       },
       {
-        question: '¿Cuándo hace su primera revisión técnica un auto nuevo en 2026?',
+        question: '¿Cuándo hace su primera revisión técnica un auto nuevo?',
         answer:
-          'El Decreto 104, publicado el 18 de junio de 2026, amplió de 24–36 a 36–48 meses el plazo para la primera revisión de los vehículos nuevos livianos y medianos cubiertos por un CHI-e, según el mes asociado al último dígito. No apliques el plazo de cuatro años a ciegas: revisa la vigencia del certificado de homologación emitido para tu vehículo, especialmente si fue comprado antes del cambio.',
+          'Los vehículos nuevos livianos y medianos con CHI-e la hacen entre 36 y 48 meses desde la emisión del certificado, según el último dígito de la patente. Así lo fijó el Decreto 104 del MTT (Diario Oficial del 18-06-2026), que modificó el Decreto Supremo 160. Revisa la vigencia que figura en tu certificado.',
+      },
+      {
+        question: '¿Cuánto tiempo tengo para volver si me rechazaron?',
+        answer:
+          '15 días corridos para volver a la planta con las fallas corregidas y pagar una tarifa rebajada, según ChileAtiende. Ese plazo no te permite circular con la revisión vencida.',
       },
     ],
-    content: `<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El dígito no reemplaza tu certificado</strong><p>El calendario ordena la revisión anual y ChileAtiende lo presenta como una <strong>preferencia en algunas plantas</strong>. Para saber si hoy puedes circular, manda la fecha de vigencia del certificado o el resultado de la consulta oficial por patente. Si ambos datos no coinciden, no adivines: consulta a la planta o al MTT antes de usar el vehículo.</p></div></aside>
+    content: `<p>La revisión técnica anual se hace en el mes que corresponde al <strong>último dígito de la patente</strong>: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado. <strong>En lo que queda de 2026 les toca a las patentes terminadas en 7 (hasta el 31 de octubre) y en 8 (noviembre)</strong>, y la revisión se puede hacer también en el mes anterior al que corresponde sin que cambie su vigencia (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156, art. 7</a>). <strong>Al 20 de octubre de 2026 no hay prórrogas vigentes</strong>: la última, del Decreto 129 del MTT para Coquimbo y la provincia del Huasco, venció el 30 de septiembre de 2026.</p>
 
-<p>La revisión técnica no es una formalidad que se “renueva junto con el permiso” por costumbre. Es la inspección que acredita, en una fecha determinada, que el vehículo cumplió las exigencias mecánicas, de seguridad y de emisiones aplicables. En 2026 conviven tres datos que se confunden con facilidad: el mes asociado al último dígito, la vigencia impresa en el certificado y, para vehículos nuevos, la vigencia del Certificado de Homologación Individual electrónico (CHI-e).</p>
-
-<p>Esta guía separa esas reglas. También incorpora el cambio publicado el <strong>18 de junio de 2026</strong>, que amplió el plazo de primera revisión para vehículos nuevos livianos y medianos comprendidos en el régimen de homologación. El objetivo no es prometer que un auto “pasa”, sino ayudarte a llegar a la planta con los antecedentes correctos y a tomar una decisión verificable.</p>
-
-<h2>Qué acredita la revisión técnica y por qué importa</h2>
-<p>La ficha oficial de ChileAtiende señala que la inspección valida el estado del vehículo para circular por caminos públicos y contribuye a la protección ambiental. La planta revisa especialmente dirección, frenos, luces, llantas, neumáticos, estructura de chasis, suspensión, transmisión, combustión interna, escape y emisiones. También observa parabrisas y vidrios, carrocería, puertas, asientos, ventilación, espejos, bocina, limpiaparabrisas, elementos de seguridad, velocímetro e instrumentos.</p>
-
-<p>Aprobar significa que el vehículo superó el procedimiento regulado ese día. <strong>No equivale a una garantía mecánica integral</strong>, no reemplaza la mantención preventiva y tampoco certifica que el auto no haya sufrido choques, reparaciones estructurales o adulteraciones. Esa distinción importa al comprar un usado: una revisión vigente es necesaria, pero no basta para evaluar la compra.</p>
-
-<p>ChileAtiende califica como <strong>infracción grave</strong> conducir sin revisión técnica vigente. Además, el artículo 89 de la Ley de Tránsito establece que una municipalidad no puede otorgar el permiso de circulación a un vehículo sin revisión técnica vigente o sin certificado de homologación cuando este último sea la alternativa aplicable. Son documentos conectados, pero no idénticos.</p>
-
-<h2>Calendario 2026 para vehículos de revisión anual</h2>
-<p>El artículo 7 del Decreto Supremo 156 distribuye la revisión anual según el último dígito de la placa patente única. ChileAtiende, en su ficha actualizada el 25 de marzo de 2026, explica que ese dígito entrega <strong>preferencia en algunas plantas</strong>. Marzo y diciembre aparecen como meses <strong>sin preferencia</strong>; la fuente oficial no dice que estén reservados exclusivamente para rechazos o reinspecciones.</p>
-
+<h2>Calendario de revisión técnica por dígito de patente</h2>
 <table>
-<thead><tr><th>Último dígito</th><th>Mes asociado</th><th>Referencia operativa 2026</th></tr></thead>
+<thead>
+<tr>
+<th>Último dígito de la patente</th>
+<th>Mes que corresponde</th>
+<th>También puedes ir en</th>
+<th>Situación en 2026</th>
+</tr>
+</thead>
 <tbody>
-<tr><td>9</td><td>Enero</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>0</td><td>Febrero</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>—</td><td>Marzo</td><td>Sin preferencia por dígito</td></tr>
-<tr><td>1</td><td>Abril</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>2</td><td>Mayo</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>3</td><td>Junio</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>4</td><td>Julio</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>5</td><td>Agosto</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>6</td><td>Septiembre</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>7</td><td>Octubre</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>8</td><td>Noviembre</td><td>Preferencia en algunas plantas</td></tr>
-<tr><td>—</td><td>Diciembre</td><td>Sin preferencia por dígito</td></tr>
+<tr><td>9</td><td>Enero</td><td>Diciembre del año anterior</td><td>Ya pasó · próxima: enero 2027 (o diciembre 2026)</td></tr>
+<tr><td>0</td><td>Febrero</td><td>Enero</td><td>Ya pasó · próxima: febrero 2027</td></tr>
+<tr><td>—</td><td>Marzo</td><td>—</td><td>Sin dígito asignado</td></tr>
+<tr><td>1</td><td>Abril</td><td>Marzo</td><td>Ya pasó · próxima: abril 2027</td></tr>
+<tr><td>2</td><td>Mayo</td><td>Abril</td><td>Ya pasó · próxima: mayo 2027</td></tr>
+<tr><td>3</td><td>Junio</td><td>Mayo</td><td>Ya pasó · próxima: junio 2027</td></tr>
+<tr><td>4</td><td>Julio</td><td>Junio</td><td>Ya pasó · próxima: julio 2027</td></tr>
+<tr><td>5</td><td>Agosto</td><td>Julio</td><td>Ya pasó · próxima: agosto 2027</td></tr>
+<tr><td>6</td><td>Septiembre</td><td>Agosto</td><td>Ya pasó · próxima: septiembre 2027</td></tr>
+<tr><td>7</td><td>Octubre</td><td>Septiembre</td><td><strong>Te toca ahora (hasta el 31 de octubre)</strong></td></tr>
+<tr><td>8</td><td>Noviembre</td><td>Octubre</td><td>Noviembre (puedes adelantarla a octubre)</td></tr>
+<tr><td>—</td><td>Diciembre</td><td>—</td><td>Sin dígito asignado</td></tr>
 </tbody>
 </table>
 
-<p>Hay una regla útil para anticiparse: el mismo artículo permite hacer la revisión <strong>en el mes inmediatamente anterior</strong> al que corresponde por patente, sin que eso afecte su vigencia. Si tu patente termina en 5, por ejemplo, el mes asociado es agosto y la norma permite efectuarla también en julio. De ahí no se desprende una ventana general de 60 o 90 días; si quieres adelantarla más, pregunta a la planta antes de pagar o desplazarte.</p>
+<p>Fuente: <a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156 del Ministerio de Transportes, art. 7</a>, y <a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>, que presenta marzo y diciembre como meses “sin preferencia”. Este calendario rige para los vehículos de <strong>revisión anual</strong>, como el auto particular. Taxis, buses, camiones de carga, transporte escolar y vehículos a gas tienen otra periodicidad (<a href="#no-todos-anual">ver más abajo</a>).</p>
 
-<h3>Qué dato usar cuando la tabla y el documento parecen contradecirse</h3>
-<ol class="steps">
-<li><strong>Mira el certificado:</strong> identifica su estado y fecha de vigencia, no solo el mes en que lo obtuviste.</li>
-<li><strong>Consulta por patente:</strong> usa el servicio oficial enlazado por ChileAtiende en <a href="https://www.prt.cl/Paginas/RevisionTecnica.aspx" target="_blank" rel="noopener">prt.cl</a>. La consulta es gratuita.</li>
-<li><strong>Revisa la categoría:</strong> taxis, vehículos de transporte, vehículos escuela y otros casos no necesariamente siguen la periodicidad anual de un automóvil particular.</li>
-<li><strong>Confirma excepciones:</strong> una prórroga regional o una corrección administrativa debe estar respaldada por una resolución o por el sistema oficial, no por una captura difundida en redes sociales.</li>
-</ol>
-
-<p>En foros de conductores aparecen casos en que una municipalidad tarda en reflejar una revisión recién aprobada o en que una base muestra información incompleta. Esas experiencias sirven para detectar el problema, pero no prueban la vigencia legal. Conserva el certificado, guarda el comprobante y pide la corrección a la entidad correspondiente si el dato oficial no se actualiza.</p>
-
-<h2>No todos los vehículos revisan una vez al año</h2>
-<p>La regla anual cubre a los vehículos que no están en una categoría especial. ChileAtiende resume las periodicidades vigentes de la siguiente forma:</p>
-
+<h2>Lo que queda de 2026</h2>
 <ul>
-<li><strong>Cada seis meses:</strong> vehículos de transporte de personas con más de nueve asientos contando a quien conduce; vehículos de carga con capacidad superior a 1.750 kg, incluidos remolques y semirremolques; taxis; vehículos escuela; transporte escolar; y vehículos que usan GLP o GNC. También existen dos supuestos específicos para ciertos vehículos que circulan en la Región Metropolitana, definidos por fecha de inscripción y titularidad.</li>
-<li><strong>Cada cuatro meses:</strong> transporte escolar de peso bruto total inferior a 3.860 kg con antigüedad superior a 15 años, y buses de transporte público urbano con antigüedad igual o superior a 20 años.</li>
-<li><strong>Cada cuatro años:</strong> maquinarias automotrices como tractores, cosechadoras, bulldozers, palas mecánicas, cargadores frontales, motoniveladoras y retroexcavadoras.</li>
-<li><strong>Cada año:</strong> los vehículos no incluidos en los grupos anteriores, que es donde normalmente cae el automóvil particular después de su primera revisión.</li>
+<li><strong>Noviembre:</strong> les corresponde a las patentes terminadas en <strong>8</strong>.</li>
+<li><strong>Diciembre:</strong> no tiene dígito asignado. Como la revisión se puede hacer en el mes anterior al que corresponde, las patentes terminadas en <strong>9</strong>, que tienen enero, pueden hacerla en diciembre de 2026 sin que cambie su vigencia.</li>
+<li><strong>Si tu mes ya pasó:</strong> lo que manda es la fecha de vigencia de tu certificado, no la tabla. Si está vencido, no circules con el vehículo hasta revisarlo: conducir sin revisión técnica vigente es una <strong>infracción grave</strong> (<a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>). Puedes ver la sanción en pesos en la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas de tránsito</a>.</li>
+<li><strong>Revisa tu estado gratis:</strong> consulta por patente en el <a href="https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado" target="_blank" rel="noopener">servicio oficial de ChileAtiende</a> o en <a href="https://www.prt.cl/Paginas/RevisionTecnica.aspx" target="_blank" rel="noopener">prt.cl</a>.</li>
 </ul>
 
-<p>Si el vehículo cambió de uso —por ejemplo, pasó a taxi, transporte escolar o quedó inscrito a nombre de una persona jurídica en un supuesto especial— no calcules la próxima inspección mirando solamente la antigua revisión. La clasificación puede cambiar la frecuencia y el tipo de planta.</p>
+<h2>Prórrogas de la revisión técnica en 2026</h2>
+<p>El Ministerio de Transportes (MTT) puede extender la vigencia de los certificados en zonas afectadas por una emergencia. En 2026 hubo una sola:</p>
+<ul>
+<li><strong>Decreto 129 del MTT, publicado en el Diario Oficial el 28 de julio de 2026</strong> (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1226460" target="_blank" rel="noopener">Ley Chile</a>). Extendió <strong>hasta el 30 de septiembre de 2026</strong> la vigencia de los certificados de revisión técnica y de emisiones de los vehículos con patente terminada en <strong>4 y 5</strong> (julio y agosto), otorgados por plantas de la <strong>Región de Coquimbo y de la provincia del Huasco (Región de Atacama)</strong>, zonas declaradas de catástrofe por las lluvias (<a href="https://www.subtrans.gob.cl/mtt-aplaza-vigencia-de-certificado-de-revisiones-tecnicas-en-zonas-de-catastrofe/" target="_blank" rel="noopener">Subtrans</a>). <strong>Esta prórroga ya venció.</strong></li>
+</ul>
+<p>Al 20 de octubre de 2026 no hay otra prórroga vigente. Si el MTT publica una nueva, la agregaremos aquí con su decreto. Desconfía de prórrogas que circulan en redes sociales sin un decreto o resolución que las respalde.</p>
 
-<h2>Autos nuevos: qué cambió en junio de 2026</h2>
-<p>Un vehículo nuevo homologado puede usar el <strong>CHI-e vigente</strong> en lugar de la revisión técnica y de gases durante el período indicado por ese certificado. El Decreto 104 del Ministerio de Transportes, publicado en el Diario Oficial el 18 de junio de 2026, modificó el Decreto 160 y amplió el rango para efectuar la primera revisión de los vehículos nuevos livianos y medianos comprendidos: pasó de <strong>24–36 meses a 36–48 meses</strong> desde el mes de emisión del CHI-e, según el último dígito de la patente.</p>
+<h2>Puedes hacerla antes: el mes anterior</h2>
+<p>El artículo 7 del Decreto Supremo 156 permite hacer la revisión que corresponde según el último dígito <strong>también en el mes precedente, sin que eso afecte su vigencia</strong>. Por ejemplo, si tu patente termina en 5 (agosto), puedes hacerla en julio. La norma no contempla una ventana más amplia: si quieres adelantarla más, consulta a la planta antes de ir.</p>
 
-<p>En lenguaje simple, el cambio agrega un año antes de la primera inspección para los certificados emitidos bajo la nueva regla. Sin embargo, “auto 2026” no basta para concluir que tiene cuatro años exactos. El rango depende del mes de emisión y del calendario de patente; además, taxis nuevos y transporte escolar mantienen reglas especiales y deben efectuar su primera revisión a los doce meses según el DS 156.</p>
+<h2>Calendario 2027: la regla es la misma</h2>
+<p>El calendario por dígito no se fija cada año: es una regla permanente del artículo 7 del Decreto Supremo 156. Mientras el MTT no la modifique (puede hacerlo “cuando las circunstancias así lo hagan aconsejable”, dice el mismo artículo), en 2027 se repite el mismo orden: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre, con marzo y diciembre sin dígito.</p>
 
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Si compraste antes del 18 de junio</strong><p>No borres mentalmente la fecha de tu CHI-e por haber leído la noticia. Revisa el certificado electrónico concreto y consulta al emisor o al MTT si su vigencia no refleja el cambio. La guía no presume retroactividad para documentos ya emitidos.</p></div></aside>
+<h2>Qué dato usar si la tabla y tu certificado no coinciden</h2>
+<ul>
+<li><strong>Mira el certificado:</strong> identifica su estado y su fecha de vigencia, no solo el mes en que lo obtuviste.</li>
+<li><strong>Consulta por patente</strong> en el servicio oficial (gratuito).</li>
+<li><strong>Revisa la categoría del vehículo:</strong> taxis, transporte y vehículos escuela no siguen la periodicidad anual.</li>
+<li><strong>Confirma las excepciones:</strong> una prórroga debe estar respaldada por un decreto o una resolución.</li>
+</ul>
 
-<p>Otro detalle poco explicado es que la <strong>primera revisión técnica</strong> de un vehículo amparado por homologación tiene una vigencia de dos años conforme al DS 156. Después entra a la periodicidad que corresponda a su categoría. Por eso, homologación vigente, primera revisión y revisiones posteriores son etapas distintas.</p>
+<h2 id="no-todos-anual">No todos los vehículos revisan una vez al año</h2>
+<p>Según el artículo 7 del Decreto Supremo 156 y <a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>:</p>
+<ul>
+<li><strong>Cada seis meses:</strong> vehículos de transporte de personas con más de nueve asientos contando el del conductor; vehículos de carga con capacidad para más de 1.750 kg, sus remolques y semirremolques; taxis; vehículos escuela; transporte escolar; vehículos que usan GLP o GNC; y dos casos de la Región Metropolitana definidos por fecha de inscripción y titularidad.</li>
+<li><strong>Cada cuatro meses:</strong> transporte escolar de peso bruto total inferior a 3.860 kg con más de 15 años de antigüedad, y buses de transporte público urbano de 20 años o más.</li>
+<li><strong>Cada cuatro años:</strong> maquinaria automotriz como tractores, cosechadoras, bulldozers y retroexcavadoras.</li>
+<li><strong>Cada año:</strong> el resto, donde normalmente cae el auto particular, según la tabla de arriba.</li>
+</ul>
+<p>Los taxis nuevos y el transporte escolar nuevo deben hacer su primera revisión a los doce meses de la emisión de su Certificado de Homologación Individual electrónico (CHI-e).</p>
+
+<h2>Autos nuevos: primera revisión a los 36–48 meses</h2>
+<p>Un vehículo nuevo homologado puede circular con su <strong>CHI-e vigente</strong> en lugar de la revisión técnica durante el período que indica ese certificado. El <strong>Decreto 104 del MTT, publicado en el Diario Oficial el 18 de junio de 2026, modificó el Decreto Supremo 160</strong> y amplió el plazo de la primera revisión de los vehículos nuevos livianos y medianos de 24–36 meses a <strong>36–48 meses</strong> desde el mes de emisión del CHI-e, según el último dígito de la patente (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1225262" target="_blank" rel="noopener">Ley Chile</a>; <a href="https://mtt.gob.cl/vehiculos-livianos-medianos-y-motocicletas-mtt-extiende-el-periodo-para-realizar-la-primera-revision-tecnica-de-36-a-48-meses/" target="_blank" rel="noopener">MTT</a>). Si compraste antes de ese cambio, revisa la vigencia que figura en tu certificado: esta guía no presume que el cambio sea retroactivo.</p>
 
 <h2>Documentos que pide la planta</h2>
-<p>La lista oficial de ChileAtiende es más precisa que el consejo genérico de “llevar el padrón”. Considera los siguientes antecedentes:</p>
-
+<p>Según <a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>:</p>
 <ul>
-<li><strong>Permiso de circulación:</strong> salvo vehículos nuevos, y solo cuando sea necesario obtener información que no figure en los demás documentos.</li>
-<li><strong>Certificado de revisión técnica anterior:</strong> si se perdió, ChileAtiende permite presentar una declaración jurada simple.</li>
-<li><strong>Certificado de anotaciones vigentes:</strong> se solicita si no presentas el certificado de emisiones contaminantes.</li>
+<li><strong>Permiso de circulación:</strong> salvo vehículos nuevos, y solo si hace falta un dato que no está en los otros documentos.</li>
+<li><strong>Certificado de revisión técnica anterior:</strong> si lo perdiste, sirve una declaración jurada simple.</li>
+<li><strong>Certificado de anotaciones vigentes:</strong> si no presentas el certificado de emisiones contaminantes.</li>
 <li><strong>Certificado de cumplimiento de normas de emisión.</strong></li>
-<li><strong>Certificado anterior de emisiones contaminantes:</strong> no se exige a vehículos nuevos ni a los que realizan su primera revisión.</li>
+<li><strong>Certificado anterior de emisiones contaminantes:</strong> no se exige a vehículos nuevos ni en la primera revisión.</li>
 </ul>
+<p>El precio lo fija cada planta según el tipo de vehículo; ChileAtiende enlaza el listado oficial de plantas y tarifas.</p>
 
-<p>Antes de salir, confirma en la planta si tu clase de vehículo requiere un antecedente adicional. Los precios varían por tipo de vehículo y por planta; ChileAtiende enlaza un listado oficial de lugares y tarifas. No existe un precio nacional único que esta guía pueda prometer para todo Chile. También el agendamiento cambia: algunas plantas reciben reserva y otras operan con modalidades diferentes.</p>
+<h2>Si te rechazan</h2>
+<p>La planta entrega un certificado de rechazo con las fallas detectadas. Tienes <strong>15 días corridos</strong> para volver a la planta, acreditar que corregiste los desperfectos y acceder a una <strong>tarifa rebajada</strong> (<a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>). Ese plazo no te autoriza a circular con la revisión vencida.</p>
 
-<h2>Checklist mecánico antes de ir: qué sí puedes comprobar</h2>
-<p>Una revisión casera no sustituye la inspección ni permite diagnosticar frenos o emisiones con certeza. Sí evita rechazos básicos y ayuda a detectar que necesitas un taller antes de la PRT.</p>
-
-<ul>
-<li><strong>Luces:</strong> prueba bajas, altas, posición, freno, retroceso, intermitentes y luz de patente. Hazlo con otra persona o frente a una superficie donde puedas ver el reflejo.</li>
-<li><strong>Neumáticos y llantas:</strong> busca cortes, deformaciones, desgaste irregular y elementos sueltos. La presión correcta mejora seguridad, pero no corrige un neumático agotado.</li>
-<li><strong>Parabrisas, vidrios y espejos:</strong> revisa daños que afecten visibilidad, fijaciones, funcionamiento de alzavidrios cuando corresponda y estado de los espejos.</li>
-<li><strong>Limpiaparabrisas y lavaparabrisas:</strong> verifica que barran sin dejar la zona crítica inutilizable y que exista líquido.</li>
-<li><strong>Bocina, cinturones, puertas y asientos:</strong> comprueba funcionamiento, anclajes y cierres. No retires elementos de seguridad instalados para el vehículo.</li>
-<li><strong>Escape y humo visible:</strong> un ruido anormal, fuga, testigo encendido o humo persistente justifica diagnóstico previo. Calentar el motor no repara una falla de emisiones.</li>
-<li><strong>Frenos, dirección y suspensión:</strong> ruidos, tirones, vibración, recorrido anormal del pedal o pérdida de fluidos requieren taller. No esperes que la PRT sea el lugar donde descubrir una falla de seguridad grave.</li>
-</ul>
-
-<p>Evita trucos difundidos como inflar neumáticos fuera de especificación, desconectar testigos o agregar aditivos de última hora. Pueden ocultar síntomas por minutos, dañar componentes y no resuelven la causa del rechazo. La referencia correcta para mantenciones es el manual del fabricante y, cuando hay una falla, un diagnóstico profesional.</p>
-
-<h2>Qué ocurre si el resultado es rechazado</h2>
-<p>La planta entrega un certificado de rechazo con los desperfectos detectados. ChileAtiende informa que la siguiente revisión se concentra en comprobar que esas fallas fueron solucionadas y que tienes <strong>15 días corridos</strong> para regresar a la planta revisora y acceder a una tarifa rebajada. No es un plazo indefinido ni una autorización para circular con la inspección vencida.</p>
-
-<ol class="steps">
-<li>Lee el informe completo y separa fallas de seguridad, emisiones y observaciones visuales.</li>
-<li>Pide al taller que trabaje sobre las causas exactas; entrega una copia del informe y conserva el original.</li>
-<li>Vuelve dentro de los 15 días corridos si quieres usar la tarifa reducida informada por ChileAtiende.</li>
-<li>Si no entiendes una causal, solicita que la planta la identifique en el manual de procedimientos. Una discusión en internet no sustituye ese registro.</li>
-</ol>
-
-<p>Las experiencias publicadas por conductores muestran que una falla aparentemente pequeña puede tener interpretaciones distintas si el vehículo fue modificado o si la pieza no corresponde a su configuración homologada. La respuesta práctica no es “probar suerte” sucesivamente, sino contrastar el informe con el manual oficial y reparar lo observado.</p>
-
-<h2>Comprar un usado: cómo usar la revisión sin sobrevalorarla</h2>
-<p>Antes de transferir un vehículo, consulta por patente el estado actual de su revisión y pide ver el certificado. Compara patente, identificación del vehículo, fecha y resultado. Si el vendedor solo muestra una foto recortada, consulta tú mismo en el canal oficial.</p>
-
-<p>Una revisión aprobada no revela por sí sola todo el historial. En comunidades de autos se repiten dudas por kilometrajes mal ingresados, años faltantes en bases privadas y reparaciones de choque que no eran visibles a simple vista. Esos relatos no demuestran una falla del vehículo que estás mirando; sí justifican tres controles separados: informe registral y de multas, inspección mecánica independiente e inspección visual de estructura y pintura. Si una base privada contradice al certificado oficial, pide aclaración y no completes la compra mientras la identidad o la vigencia sigan dudosas.</p>
-
-<h2>Relación con permiso de circulación, SOAP y multas</h2>
-<p>Para un usado, ChileAtiende exige al renovar el permiso la revisión técnica y el análisis de gases vigentes, el permiso anterior, el padrón y el SOAP con vigencia al 31 de marzo del año siguiente. También deben resolverse las multas de tránsito impagas en la forma prevista para el trámite. La homologación sustituye a la revisión únicamente mientras está vigente y cuando corresponde al vehículo.</p>
-
-<p>No confundas las fechas:</p>
-<ul>
-<li>La revisión vence según su certificado y categoría.</li>
-<li>El SOAP tiene su propia vigencia.</li>
-<li>El permiso de circulación de automóviles se paga normalmente en marzo, o en dos cuotas cuando se eligió esa modalidad.</li>
-<li>La <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso 2026</a> no renueva la revisión ni el SOAP.</li>
-</ul>
-
-<p>Puedes estimar el permiso en la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> y revisar referencias de sanciones en la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas de tránsito</a>. Ambos resultados son orientativos: el certificado PRT, la municipalidad y el juzgado competente son quienes determinan el estado oficial.</p>
-
-<h2>Cómo evitar sitios falsos y datos desactualizados</h2>
-<ul>
-<li>Parte desde <a href="https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado" target="_blank" rel="noopener">ChileAtiende</a> o <a href="https://www.prt.cl" target="_blank" rel="noopener">prt.cl</a>, no desde un enlace recibido por SMS.</li>
-<li>Verifica el dominio antes de ingresar patente, RUT o datos de pago. La consulta oficial de estado informada por ChileAtiende es gratuita.</li>
-<li>No transfieras dinero para “reservar un cupo especial” fuera del sistema publicado por la planta.</li>
-<li>Busca la planta y tarifa en el listado oficial; una publicidad en buscador puede aparecer antes que el resultado institucional.</li>
-<li>Guarda certificado, comprobante de pago y certificado de rechazo si corresponde.</li>
-</ul>
+<h2>Revisión técnica y permiso de circulación</h2>
+<p>La municipalidad no puede otorgar el permiso de circulación a un vehículo sin revisión técnica vigente o, cuando corresponde, sin certificado de homologación vigente (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1007469" target="_blank" rel="noopener">Ley de Tránsito, art. 89</a>). La revisión, el SOAP y el permiso tienen fechas propias: renovar uno no renueva los otros. Estima el permiso en la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a>.</p>
+<p>Sigue leyendo: <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso de circulación 2026</a>.</p>
 
 <h2>Fuentes y fecha de verificación</h2>
-<p>Contenido revisado al <strong>13 de julio de 2026</strong>. Se priorizaron normas y fichas públicas; las conversaciones de usuarios se usaron solo para identificar preguntas y riesgos operativos, no para fijar requisitos.</p>
+<p>Contenido verificado al 20 de octubre de 2026:</p>
 <ul>
-<li><a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende — Revisión técnica de vehículos motorizados</a>, actualización del 25 de marzo de 2026: documentos, periodicidad, sistemas inspeccionados, calendario, rechazo y reinspección.</li>
-<li><a href="https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado" target="_blank" rel="noopener">ChileAtiende — Consulta oficial del estado de la revisión</a>, actualización del 19 de febrero de 2026.</li>
-<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=10183&idParte=7139535" target="_blank" rel="noopener">BCN LeyChile — Decreto Supremo 156, artículo 7</a>: periodicidades, calendario y revisión en el mes anterior.</li>
-<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1225262" target="_blank" rel="noopener">BCN LeyChile — Decreto 104 de 2026</a>: ampliación de 36 a 48 meses para la primera revisión bajo CHI-e.</li>
-<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1007469" target="_blank" rel="noopener">BCN LeyChile — Ley de Tránsito, artículo 89</a>: relación entre revisión u homologación y permiso de circulación.</li>
-<li><a href="https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion" target="_blank" rel="noopener">ChileAtiende — Permiso de circulación</a>: documentos exigidos para vehículos nuevos y usados.</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156 del MTT (revisiones técnicas), art. 7, versión vigente en Ley Chile</a>: calendario por dígito, mes precedente, periodicidades y facultad del MTT para modificar el calendario (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183&idParte=7139535" target="_blank" rel="noopener">artículo 7</a>).</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1226460" target="_blank" rel="noopener">Decreto 129 del MTT, Diario Oficial del 28-07-2026</a> y <a href="https://www.subtrans.gob.cl/mtt-aplaza-vigencia-de-certificado-de-revisiones-tecnicas-en-zonas-de-catastrofe/" target="_blank" rel="noopener">noticia de Subtrans (27-07-2026)</a>: prórroga en Coquimbo y Huasco hasta el 30-09-2026.</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1225262" target="_blank" rel="noopener">Decreto 104 del MTT, que modifica el DS 160, Diario Oficial del 18-06-2026</a> y <a href="https://mtt.gob.cl/vehiculos-livianos-medianos-y-motocicletas-mtt-extiende-el-periodo-para-realizar-la-primera-revision-tecnica-de-36-a-48-meses/" target="_blank" rel="noopener">noticia del MTT</a>: primera revisión a los 36–48 meses.</li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende: Revisión técnica de vehículos motorizados</a> y <a href="https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado" target="_blank" rel="noopener">Consulta del estado de la revisión</a>.</li>
+<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1007469" target="_blank" rel="noopener">Ley de Tránsito, art. 89</a>.</li>
+<li><a href="https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion" target="_blank" rel="noopener">ChileAtiende: Permiso de circulación</a>: documentos exigidos para vehículos nuevos y usados.</li>
+<li><a href="https://www.prt.cl/Paginas/RevisionTecnica.aspx" target="_blank" rel="noopener">PRT: consulta oficial de revisión técnica</a>.</li>
 </ul>
 
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance</strong><p>Información general, no dictamen del MTT ni diagnóstico mecánico. Tarifas, cupos, concesionarios y prórrogas pueden variar por región. Si una resolución excepcional o tu certificado particular contradice esta guía, prevalece el antecedente oficial aplicable al vehículo.</p></div></aside>`,
+<aside class="callout callout--info">
+<span class="callout__icon" aria-hidden="true">ℹ️</span>
+<div class="callout__body">
+<strong>Alcance</strong>
+<p>Información general, no un dictamen del MTT ni un diagnóstico mecánico. Si tu certificado o una resolución excepcional dice algo distinto, prevalece el documento oficial de tu vehículo.</p>
+</div>
+</aside>`,
   },
   {
     slug: 'cotizacion-empleador-3-5-agosto-2026-costo-pyme',
