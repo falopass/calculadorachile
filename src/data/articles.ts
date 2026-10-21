@@ -1966,7 +1966,7 @@ const articleCatalog: ArticleDraft[] = [
     description:
       'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
     date: '2026-07-11',
-    updatedAt: '2026-10-16',
+    updatedAt: '2026-11-13',
     category: 'laboral',
     readingTime: 14,
     relatedGuia: 'sueldo-liquido-chile',
@@ -2003,6 +2003,21 @@ const articleCatalog: ArticleDraft[] = [
         question: `¿Desde cuándo rige el ${formatCLP(INGRESO_MINIMO.mensual)}?`,
         answer:
           'Rige desde el 1 de mayo de 2026 aunque la Ley 21.830 se publicó el 22 de junio. La Dirección del Trabajo ordenó reliquidar las remuneraciones ya pagadas desde mayo cuando el sueldo base quedó bajo el nuevo mínimo, y regularizar también cotizaciones y gratificación que se vean afectadas.',
+      },
+      {
+        question: '¿Cuándo sube el sueldo mínimo?',
+        answer:
+          'El 1 de enero de 2027. La Ley 21.830 ordena reajustar los $553.553 según la variación acumulada del IPC entre el 1 de mayo y el 31 de diciembre de 2026, informada por el INE. Después, a más tardar en junio de 2027, el Gobierno debe enviar un proyecto de ley con un nuevo reajuste para que rija desde el 1 de julio de 2027.',
+      },
+      {
+        question: '¿Cuánto será el sueldo mínimo en 2027?',
+        answer:
+          'Todavía no se sabe. Será $553.553 multiplicado por (1 + la variación acumulada del IPC de mayo a diciembre de 2026). El monto oficial lo fijará un decreto de Hacienda y del Ministerio del Trabajo a más tardar el 15 de enero de 2027, cuando ya se conozca el IPC de diciembre.',
+      },
+      {
+        question: '¿El reajuste de enero cambia también el mínimo para menores de 18 y mayores de 65?',
+        answer:
+          'Sí. Según el artículo 6 de la Ley 21.830, el mínimo de $412.938 para menores de 18 y mayores de 65 años y el de $356.815 para fines no remuneracionales suben en la misma proporción. También suben los límites de los tramos de la asignación familiar, pero no los montos por carga.',
       },
       {
         question: '¿El sueldo mínimo es lo mismo que el sueldo líquido?',
@@ -2045,7 +2060,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>La redacción exacta importa. La ley dice <strong>mayores de 18 años</strong>, no “desde los 18” sin matiz, y <strong>hasta 65 años</strong>. Si el caso está justo en el cumpleaños 18 o 65 y afecta una liquidación, conviene confirmar la aplicación con la Dirección del Trabajo en lugar de inferirla desde una tabla abreviada.</p>
 
-<p>El monto de $553.553 no permanecerá fijo necesariamente durante 2027. La Ley 21.830 ordena reajustarlo desde el 1 de enero de 2027 por el IPC acumulado entre mayo y diciembre de 2026. También obliga al Ejecutivo a presentar un nuevo proyecto durante 2027 para un reajuste posterior. Este artículo no anticipa una cifra que todavía depende de inflación futura.</p>
+<p>Los $553.553 rigen hasta el 31 de diciembre de 2026. Desde el 1 de enero de 2027 se reajustan según el IPC; el monto exacto todavía no se conoce. Te explicamos cómo se calcula en <a href="#sueldo-minimo-2027">Sueldo mínimo 2027: cómo se reajusta el 1 de enero</a>.</p>
 
 <h2>Por qué la ley de junio se aplica desde mayo</h2>
 <p>La Ley 21.830 fue publicada en el Diario Oficial el 22 de junio de 2026, pero fijó expresamente el inicio de los nuevos montos en el 1 de mayo. El Dictamen 307/28 de la Dirección del Trabajo reconoce ese efecto retroactivo y explica qué debe ocurrir cuando mayo ya estaba pagado.</p>
@@ -2059,6 +2074,57 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 </ol>
 
 <p>El ajuste no se resuelve pagando solo la diferencia líquida. El mayor sueldo base es remuneración imponible y modifica AFP, salud, cesantía y aportes patronales. Si el empleador depositó una diferencia sin corregir las cotizaciones, la regularización quedó incompleta.</p>
+
+<h2 id="sueldo-minimo-2027">Sueldo mínimo 2027: cómo se reajusta el 1 de enero</h2>
+<p>El sueldo mínimo de <strong>$553.553</strong> para trabajadores mayores de 18 y hasta 65 años <strong>se reajusta el 1 de enero de 2027</strong> según la <strong>variación acumulada del Índice de Precios al Consumidor (IPC) entre el 1 de mayo y el 31 de diciembre de 2026</strong>, que determina e informa el INE (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/06/22/44481-B/01/2829298.pdf" target="_blank" rel="noopener">Ley 21.830, art. 1</a>). El monto exacto todavía no se conoce: depende de la inflación de los meses que faltan, y lo fijará un decreto que debe dictarse <strong>a más tardar el 15 de enero de 2027</strong>.</p>
+
+<h3>Qué dice la Ley 21.830</h3>
+<p>La ley que subió el mínimo a $553.553 desde mayo de 2026 dejó fijado también el siguiente reajuste. Su artículo 1 dice: “A contar del 1 de enero de 2027, reajústese el ingreso mínimo mensual para los trabajadores mayores de 18 y de hasta 65 años conforme a la variación acumulada por el Índice de Precios al Consumidor, determinada e informada por el Instituto Nacional de Estadísticas entre el 1 de mayo de 2026 y el 31 de diciembre de 2026” (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/06/22/44481-B/01/2829298.pdf" target="_blank" rel="noopener">Diario Oficial, 22-06-2026</a>; <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley Chile</a>).</p>
+
+<h3>Cómo se calcula</h3>
+<p>La regla es simple: el mínimo vigente se multiplica por la inflación acumulada del período.</p>
+<p><strong>Sueldo mínimo desde el 01-01-2027 = $553.553 × (1 + variación acumulada del IPC entre mayo y diciembre de 2026, según el INE)</strong></p>
+<ul>
+<li><strong>Qué es la variación acumulada del IPC:</strong> cuánto subieron en total los precios en ese período, según el IPC que publica el INE cada mes.</li>
+<li><strong>Qué período cuenta:</strong> del 1 de mayo al 31 de diciembre de 2026. No cuenta la inflación de enero a abril de 2026.</li>
+<li><strong>Quién informa el dato:</strong> el Instituto Nacional de Estadísticas (INE). El último dato que se necesita es el IPC de diciembre de 2026, que el INE publica en enero de 2027.</li>
+</ul>
+<p>No damos un monto estimado: con una parte del año todavía por medir, cualquier cifra sería una suposición. Cuando el INE publique el IPC de diciembre y se dicte el decreto, actualizaremos esta página con el valor oficial.</p>
+
+<h3>Cuándo se conocerá el monto</h3>
+<ol>
+<li><strong>Enero de 2027:</strong> el INE publica el IPC de diciembre de 2026, el último dato del período.</li>
+<li><strong>A más tardar el 15 de enero de 2027:</strong> un decreto supremo del Ministerio de Hacienda, firmado también por el Ministro del Trabajo y Previsión Social, establece los valores resultantes (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/06/22/44481-B/01/2829298.pdf" target="_blank" rel="noopener">Ley 21.830, art. 6</a>).</li>
+<li><strong>Desde el 1 de enero de 2027:</strong> el nuevo monto rige desde esa fecha, según la ley.</li>
+</ol>
+
+<h3>Qué otros valores suben en la misma proporción</h3>
+<p>Según el artículo 6 de la Ley 21.830, desde el 1 de enero de 2027 suben en la misma proporción que el mínimo general:</p>
+<ul>
+<li>el <strong>ingreso mínimo para menores de 18 y mayores de 65 años</strong>, hoy <strong>$412.938</strong>;</li>
+<li>el <strong>ingreso mínimo para fines no remuneracionales</strong>, hoy <strong>$356.815</strong>;</li>
+<li>los <strong>tramos de ingreso de la asignación familiar y maternal</strong>, hoy con límites de <strong>$649.039</strong>, <strong>$947.990</strong> y <strong>$1.478.539</strong>.</li>
+</ul>
+<p>Los <strong>montos</strong> de la asignación familiar por carga ($22.601, $13.870 y $4.382) y el del Subsidio Familiar (SUF) <strong>no cambian en enero</strong> con esta regla: lo que se mueve son los límites de ingreso que definen en qué tramo queda cada persona. Revisa tu tramo en la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>
+
+<h3>¿Y después? El reajuste de julio de 2027</h3>
+<p>La misma ley obliga al Presidente de la República a enviar al Congreso, <strong>a más tardar en junio de 2027</strong>, un proyecto de ley con un nuevo reajuste del ingreso mínimo, de la asignación familiar y maternal y del subsidio familiar, para que rija <strong>desde el 1 de julio de 2027</strong> (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/06/22/44481-B/01/2829298.pdf" target="_blank" rel="noopener">Ley 21.830, art. 7</a>). Ese reajuste todavía no está decidido: depende de lo que se apruebe en el Congreso.</p>
+
+<h3>Qué revisar en tu liquidación de enero de 2027</h3>
+<ul>
+<li><strong>Sueldo base:</strong> si ganas el mínimo con una jornada de más de 30 horas, tu sueldo base no puede quedar bajo el nuevo monto. Calcula cuánto te queda en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>: en el campo “Sueldo Bruto” va el total imponible, y la colación y la movilización van en sus campos.</li>
+<li><strong>Jornada parcial:</strong> con 30 horas semanales o menos, el mínimo proporcional se recalcula con el nuevo monto. Usa la <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part time</a>.</li>
+<li><strong>Gratificación:</strong> el tope de 4,75 ingresos mínimos cambia con el nuevo monto. Revísalo en la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a>.</li>
+<li><strong>Finiquito:</strong> si terminas el contrato en enero, los cálculos que usan tu remuneración pueden cambiar. Usa la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</li>
+</ul>
+
+<aside class="callout callout--info">
+<span class="callout__icon" aria-hidden="true">ℹ️</span>
+<div class="callout__body">
+<strong>No lo confundas con el subsidio al empleo</strong>
+<p>El Subsidio Unificado de Empleo usa su propio “ingreso mínimo del subsidio” de $529.000, que también se reajusta en enero de 2027, pero con otra regla. Te lo explicamos en la <a href="/blog/subsidio-unificado-empleo-ley-21808-octubre-2026">guía de la Ley 21.808</a>.</p>
+</div>
+</aside>
 
 <h2>El mínimo exige revisar el sueldo base, no solo el total</h2>
 <p>Para personas afectas a jornada ordinaria, el artículo 42 letra a) del Código del Trabajo define el sueldo base como el estipendio fijo en dinero pagado por períodos iguales. La DT concluye que desde mayo de 2026 no puede ser inferior a $553.553 en la jornada que da derecho al mínimo completo.</p>
@@ -2155,9 +2221,9 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>Para simular, ingresa el bruto y tu AFP real en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>. Si tu liquidación contiene gratificación, Isapre o descuentos especiales, replica cada dato; no ajustes el resultado hasta que “se parezca” al depósito.</p>
 
 <h2>Fuentes y fecha de comprobación</h2>
-<p>Contenido verificado al <strong>13 de julio de 2026</strong>. Las preguntas de foros y redes se usaron para detectar dudas sobre líquido, retroactividad y jornada parcial; no para fijar cifras.</p>
+<p>Contenido verificado al <strong>13 de noviembre de 2026</strong>. Las preguntas de foros y redes se usaron para detectar dudas sobre líquido, retroactividad y jornada parcial; no para fijar cifras.</p>
 <ul>
-<li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">BCN LeyChile — Ley 21.830</a>, montos desde mayo y reajuste por IPC en enero de 2027.</li>
+<li><a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/06/22/44481-B/01/2829298.pdf" target="_blank" rel="noopener">Ley 21.830 en el Diario Oficial (22-06-2026)</a> y en <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley Chile (BCN)</a>: montos desde mayo, reajuste por IPC desde el 1 de enero de 2027 (arts. 1 y 6) y proyecto de reajuste para julio de 2027 (art. 7).</li>
 <li><a href="https://www.dt.gob.cl/legislacion/1624/w3-article-129410.html" target="_blank" rel="noopener">Dirección del Trabajo — Dictamen 307/28</a>, efecto retroactivo, reliquidación, cotizaciones y gratificación.</li>
 <li><a href="https://www.dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">Dirección del Trabajo — IMM y jornada parcial</a>, límite de 30 horas y fórmula sobre 42.</li>
 <li><a href="https://www.dt.gob.cl/portal/1628/w3-article-95844.html" target="_blank" rel="noopener">Dirección del Trabajo — sueldo base y gratificación mensual</a>.</li>
