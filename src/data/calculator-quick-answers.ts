@@ -18,6 +18,8 @@ import { formatCLP2, MESES_ES_CL, toSantiagoParts } from '@/lib/seo/live-value-t
 import {
   INGRESO_MINIMO,
   JORNADA_LEGAL,
+  getTramoJornadaLegal,
+  getProximoCambioJornada,
   ASIGNACION_FAMILIAR_2026,
   CONTRIBUCIONES_BIENES_RAICES,
   TOPE_IMPOSITIVO,
@@ -135,6 +137,12 @@ function formatNum(value: number, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
+}
+
+/** '2026-04-26' → '26 de abril de 2026'. */
+function fechaLargaISO(iso: string): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  return `${day} de ${MESES_ES_CL[month - 1]} de ${year}`;
 }
 
 /**
@@ -573,17 +581,29 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'sueldo-part-time': {
-      const jornadas = [10, 20, 30, 35, 42];
+      // Tabla de jornadas (brief 2026-10-29): montos desde
+      // calculateSueldoPartTime; la última fila sigue la jornada vigente.
+      const jornadaVigente = getTramoJornadaLegal();
+      const proximo = getProximoCambioJornada();
+      const jornadas = [18, 20, 25, 30, 36, jornadaVigente.horas];
       const rows = jornadas.map((horas) => {
         const r = calculateSueldoPartTime({ horasSemanales: horas });
-        return [`${horas} horas`, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
+        const tipo = r.esJornadaParcial
+          ? 'Parcial: mínimo proporcional'
+          : r.esJornadaIntermedia
+            ? 'Intermedia: mínimo íntegro'
+            : 'Completa (vigente)';
+        return [`${horas} horas`, tipo, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
       });
+      const cambio = proximo
+        ? ` y baja a ${proximo.horas} horas el ${fechaLargaISO(proximo.vigenteDesde)} (Ley 21.561)`
+        : ' (Ley 21.561)';
       return {
         h1: 'Sueldo part time 30 horas: mínimo legal y valor hora',
         lead: `Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
         example: {
-          caption: `Mínimo legal y valor hora con el IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026, sin sueldo pactado informado.`,
-          headers: ['Jornada semanal', 'Mínimo legal mensual', 'Valor hora'],
+          caption: `Mínimo legal y valor hora con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)}, vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)} (Ley ${INGRESO_MINIMO.ley}). La jornada completa vigente es de ${jornadaVigente.horas} horas desde el ${fechaLargaISO(jornadaVigente.vigenteDesde)}${cambio}. Hasta 30 horas el mínimo es proporcional; desde 31 y hasta ${jornadaVigente.horas - 1} horas corresponde el mínimo íntegro.`,
+          headers: ['Jornada semanal', 'Tipo de jornada', 'Mínimo legal mensual', 'Valor hora'],
           rows,
         },
       };

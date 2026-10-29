@@ -51,7 +51,7 @@ export interface HorasExtraResult {
  * contrato o convenio puede pactar un porcentaje superior al mínimo de 50%.
  */
 export function calculateHorasExtra(input: HorasExtraInput): HorasExtraResult {
-  const jornadaSemanal = input.jornadaSemanal ?? (JORNADA_LEGAL.actual as 42);
+  const jornadaSemanal = input.jornadaSemanal ?? (JORNADA_LEGAL.actual as 40 | 42 | 44 | 45);
   const sueldoBaseCalculo = Math.max(
     0,
     input.sueldoVariable && (input.sueldoPromedio3Meses ?? 0) > 0
