@@ -62,6 +62,19 @@ describe('getQuickAnswer', () => {
     }
   });
 
+  it('vacaciones (E-017): tabla de 1 a 11 meses; 6 meses = 10,5 corridos y $280.000', () => {
+    const qa = getQuickAnswer('vacaciones-proporcionales', CTX)!;
+    const rows = qa.example!.rows;
+    expect(rows.length).toBe(11);
+    expect(rows.map((r) => Number(r[0]))).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    const seis = rows.find((r) => r[0] === '6')!;
+    expect(seis).toContain('10,5');
+    expect(seis).toContain('$280.000');
+    expect(rows.find((r) => r[0] === '11')).toContain('20,75');
+    expect(qa.shortAnswers?.length).toBe(3);
+    expect(qa.lead).toContain('$280.000');
+  });
+
   it('devuelve null para calculadoras sin entrada', () => {
     expect(getQuickAnswer('calculadora-inexistente', CTX)).toBeNull();
   });
