@@ -408,11 +408,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'Pide el seguro en AFC desde el día siguiente al término. Si lo pides antes del día 30, el 1.er pago llega el jueves siguiente a ese día. Pasos y saldo.', // 151
   },
+  // Brief "qué hacer si te despiden" (2026-10-29): title y meta hacia esa intención.
   'checklist-despues-despido-chile-2026': {
-    seoTitle: 'Checklist despido Chile 2026: finiquito, AFC y CV', // 52
-    // E-024 (brief 2026-10-29): solo cambia la meta; title sin cambios.
+    seoTitle: 'Qué hacer si te despiden en Chile 2026: checklist y plazos', // 58
     seoDescription:
-      'Qué hacer tras un despido: finiquito, seguro de cesantía, activar tu cuenta BNE en 96 horas si pides el Fondo Solidario y dónde buscar trabajo (OMIL).', // 150
+      'Qué hacer si te despiden: el finiquito se paga en 10 días hábiles, pide el seguro de cesantía en la AFC, activa la BNE y busca trabajo. Checklist 2026.', // 151
   },
   // Nota: hub /cesantia usa buildPageMetadata en page.tsx (title/desc allí).
 

@@ -197,6 +197,28 @@ export const SEGURO_CESANTIA_BENEFICIOS = {
 } as const;
 
 /**
+ * Desocupación nacional del INE (Encuesta Nacional de Empleo, ENE).
+ * Contexto editorial del checklist de despido (brief 2026-10-29).
+ * Se actualiza con cada boletín mensual o se quita el callout: el próximo
+ * sale el 27-11-2026 a las 09:00 (trimestre agosto-octubre 2026).
+ * Fuente: INE, boletín ENE n.º 336 (29-10-2026).
+ */
+export const DESEMPLEO_INE = {
+  /** Tasa de desocupación nacional (%). */
+  tasa: 9.8,
+  trimestre: 'julio-septiembre de 2026',
+  /** Personas desocupadas. */
+  desocupados: 1007976,
+  boletin: 336,
+  /** Fecha de publicación del boletín (ISO). */
+  publicado: '2026-10-29',
+  /** Próxima publicación de la ENE (ISO): actualizar o quitar ese día. */
+  proximaPublicacion: '2026-11-27',
+  fuente:
+    'https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-336.pdf',
+} as const;
+
+/**
  * Parsea una fecha 'YYYY-MM-DD' como medianoche **local** (no UTC).
  * `new Date('2026-08-01')` se interpreta como UTC y en Chile (UTC-3/4)
  * corresponde a la noche del día anterior, lo que adelantaba ~3 h el

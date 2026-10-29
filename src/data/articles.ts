@@ -20,6 +20,7 @@ import { formatCLP, formatPercentage } from '@/lib/formatters';
 import { MESES_ES_CL } from '@/lib/seo/live-value-title';
 import {
   AFP,
+  DESEMPLEO_INE,
   GRATIFICACION,
   INGRESO_MINIMO,
   JORNADA_LEGAL,
@@ -51,6 +52,23 @@ const CVLISTO_BUSCAR_TRABAJO_CHECKLIST = buildCvlistoBuscarTrabajoUrl({
   origen: 'cesantia',
   placement: 'blog_inline',
 });
+
+// Enlace del resumen de 6 pasos del checklist: mismo helper, utm_content propio
+// para medirlo aparte de la sección BNE/OMIL.
+const CVLISTO_BUSCAR_TRABAJO_RESUMEN = (() => {
+  const url = new URL(buildCvlistoBuscarTrabajoUrl({ origen: 'cesantia', placement: 'blog_inline' }));
+  url.searchParams.set('utm_content', 'cesantia_blog_resumen_buscar_trabajo');
+  return url.toString();
+})();
+
+/** Fecha AAAA-MM-DD → "29-10-2026". */
+function fechaCorta(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${d}-${m}-${y}`;
+}
+
+// Callout INE del checklist de despido: cifras desde DESEMPLEO_INE, nunca a mano.
+const DESEMPLEO_INE_HTML = `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">📊</span><div class="callout__body"><strong>Contexto: desempleo en Chile</strong><p>Según el INE, la tasa de desocupación fue ${formatPercentage(DESEMPLEO_INE.tasa)} en el trimestre ${DESEMPLEO_INE.trimestre}, con ${new Intl.NumberFormat('es-CL').format(DESEMPLEO_INE.desocupados)} personas desocupadas (<a href="${DESEMPLEO_INE.fuente}" target="_blank" rel="noopener">INE, boletín ENE n.º ${DESEMPLEO_INE.boletin}</a>). Dato publicado el ${fechaCorta(DESEMPLEO_INE.publicado)}.</p></div></aside>`;
 
 export interface ArticleSource {
   label: string;
@@ -952,7 +970,7 @@ ${tablaFcsHtml()}
   },
   {
     slug: 'checklist-despues-despido-chile-2026',
-    title: 'Checklist después de un despido en Chile 2026: finiquito, AFC y reinserción',
+    title: 'Qué hacer si te despiden en Chile: checklist paso a paso 2026',
     description:
       'Qué hacer paso a paso tras un despido: finiquito, plazos, Seguro de Cesantía, presupuesto y cómo preparar el CV para volver a postular.',
     date: '2026-07-10',
@@ -960,7 +978,7 @@ ${tablaFcsHtml()}
     category: 'laboral',
     readingTime: 9,
     relatedGuia: 'finiquito-laboral-chile',
-    seoTitle: 'Checklist despido Chile 2026: finiquito, cesantía y CV',
+    seoTitle: 'Qué hacer si te despiden en Chile 2026: checklist y plazos',
     seoDescription:
       'Después del despido: finiquito, 10 días hábiles, Seguro de Cesantía (AFC), cobertura y reinserción. Checklist práctico + calculadoras gratis.',
     keywords: [
@@ -1000,6 +1018,19 @@ ${tablaFcsHtml()}
       },
     ],
     content: `<p class="article-lead">Después de un despido corren tres relojes distintos: el empleador tiene diez días hábiles para poner el finiquito y su pago a disposición; la primera prestación AFC no se paga antes de cumplirse treinta días corridos desde el término, en el caso general; y una acción por despido injustificado caduca a los sesenta días hábiles, con un máximo de noventa si hubo reclamo administrativo. Ordenar documentos y fechas el primer día evita que un trámite tape otro.</p>
+
+<h2 id="que-hacer-si-te-despiden">Qué hacer si te despiden: resumen en 6 pasos</h2>
+<p>Si te despiden, en este orden:</p>
+<ol class="steps">
+<li><strong>Pide y guarda la carta de despido.</strong> Revisa la causal y que tus cotizaciones estén al día.</li>
+<li><strong>Calcula tu finiquito</strong> con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> y la de <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">indemnización por años de servicio</a>. El empleador tiene 10 días hábiles desde la separación para pagarlo (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60613.html" target="_blank" rel="noopener">DT</a>).</li>
+<li><strong>No firmes si no estás de acuerdo.</strong> Tienes derecho a no firmar el finiquito o a aceptarlo con reserva de derechos, dejando constancia de lo que no compartes (<a href="https://www.chileatiende.gob.cl/fichas/33522-finiquito-de-termino-de-contrato-de-trabajo" target="_blank" rel="noopener">ChileAtiende</a>, <a href="https://dt.gob.cl/portal/1626/w3-article-117245.html" target="_blank" rel="noopener">DT</a>).</li>
+<li><strong>Pide el seguro de cesantía en la AFC sin esperar el finiquito.</strong> Revisa <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cómo cobrar el seguro de cesantía</a> y <a href="/calculadoras/calculadora-seguro-cesantia">simula cuánto te paga</a>. Si pides el Fondo Solidario, activa tu cuenta de la BNE dentro de 96 horas desde que te registras (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>).</li>
+<li><strong>Si crees que el despido fue injustificado,</strong> tienes 60 días hábiles desde la separación para demandar, o hasta un máximo de 90 si antes reclamas en la Inspección del Trabajo (<a href="https://dt.gob.cl/portal/1628/w3-article-60507.html" target="_blank" rel="noopener">DT</a>).</li>
+<li><strong>Empieza a buscar trabajo</strong> en la BNE, en la OMIL de tu comuna y con la guía <a href="${CVLISTO_BUSCAR_TRABAJO_RESUMEN}" target="_blank" rel="noopener noreferrer">Buscar trabajo en Chile</a> de CVListo.</li>
+</ol>
+
+${DESEMPLEO_INE_HTML}
 
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Si discutirás la causal, no esperes el finiquito</strong><p>El plazo judicial se cuenta desde la separación, no desde que pagan, ratificas o termina la conciliación. Un reclamo en la Inspección suspende el plazo mientras se tramita, pero nunca permite demandar después de 90 días hábiles desde la separación.</p></div></aside>
 
@@ -1127,6 +1158,14 @@ ${tablaFcsHtml()}
 <li><span class="label">Presupuesto con ingresos confirmados</span><span class="value">Hecho / pendiente</span></li>
 <li><span class="label">Primer CV adaptado y postulación registrada</span><span class="value">Hecho / pendiente</span></li>
 </ul>
+
+<h2>Preguntas frecuentes sobre el despido</h2>
+<h3>¿Qué hago primero si me despiden?</h3>
+<p>Pide la carta de despido y revisa la causal. Después calcula tu finiquito, pide el seguro de cesantía en la AFC sin esperar el finiquito, anota el plazo para reclamar y empieza a buscar trabajo. El orden completo está en el <a href="#que-hacer-si-te-despiden">resumen de 6 pasos</a>.</p>
+<h3>¿Puedo cobrar el seguro de cesantía si me autodespido?</h3>
+<p>Sí, con cargo a tu Cuenta Individual de Cesantía, si cumples las cotizaciones exigidas. En autodespido o despido indirecto (artículo 171 del Código del Trabajo), el primer pago llega al menos 60 días corridos después del término (<a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">AFC</a>). Para saber si además puedes usar el Fondo de Cesantía Solidario, revisa los requisitos en la guía <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cómo cobrar el seguro de cesantía</a>.</p>
+<h3>¿Qué pasa con mi Isapre si me despiden?</h3>
+<p>Mientras recibes pagos del seguro de cesantía tienes cobertura de salud a través de Fonasa (<a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende</a>). Si estás en una Isapre, consulta con ella por la continuidad de tu plan antes de asumir que sigue igual.</p>
 
 <p>Para profundizar, consulta la <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral</a>, la explicación de <a href="/blog/seguro-cesantia-finiquito-2026-afc">CIC y Fondo Solidario</a>, el paso a paso para <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cobrar en AFC</a>, el <a href="/calculadoras/calculadora-seguro-cesantia">simulador del seguro de cesantía</a> y el <a href="/cesantia">hub de cesantía</a>.</p>
 
