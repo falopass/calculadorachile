@@ -27,6 +27,11 @@
  * ============================================================================
  */
 
+import { formatCLP } from '@/lib/formatters';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+
+const TOPE_GRAT = topeGratificacion();
+
 export const seoOverrides: Record<string, { seoTitle: string; seoDescription: string }> = {
   // ══════════════════════════════════════════════════════════════════════════
   // CALCULADORAS — GSC 24 h: alta impresión / bajo CTR o pos media
@@ -74,10 +79,10 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Calcula tus vacaciones proporcionales (feriado proporcional) en días y pesos: 1,25 días hábiles por mes trabajado, según el Código del Trabajo. Para finiquito.', // 158
   },
 
+  // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO
   'calculadora-gratificacion-legal': {
-    seoTitle: 'Gratificación Legal 2026: ¿cuánto te toca en pesos?', // 53
-    seoDescription:
-      'Calcula la gratificación legal 2026: 25% del sueldo con tope 4,75 IMM ($553.553). Modalidad mensual o anual. Datos Código del Trabajo.', // 136
+    seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.mensual)} al mes`, // 43
+    seoDescription: `Tope de gratificación legal ${TOPE_GRAT.anio}: 4,75 ingresos mínimos al año, ${formatCLP(TOPE_GRAT.anual)} o ${formatCLP(TOPE_GRAT.mensual)} al mes. Calcula el 25% de tu sueldo y revisa el cambio de ${TOPE_GRAT.anio + 1}.`, // 149
   },
 
   'calculadora-horas-extra': {
