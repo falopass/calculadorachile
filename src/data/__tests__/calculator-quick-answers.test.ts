@@ -82,6 +82,8 @@ describe('getQuickAnswer', () => {
     const vieja = getQuickAnswer('uf-clp', { ...CTX, ufFecha: '2026-10-25T03:00:00.000Z', ufFresca: false })!;
     expect(vieja.lead).not.toContain('Hoy');
     expect(vieja.lead.startsWith('Valor de referencia: la UF del 25-10-2026')).toBe(true);
+    expect(vieja.example!.caption).not.toContain('Banco Central');
+    expect(fresca.example!.caption).toContain('(Banco Central de Chile)');
 
     const sinFecha = getQuickAnswer('uf-clp', CTX)!;
     expect(sinFecha.example!.caption).not.toMatch(/hoy|UF del/i);

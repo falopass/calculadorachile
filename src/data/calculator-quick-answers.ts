@@ -97,7 +97,10 @@ interface QuickAnswerContext {
   utmFecha?: string;
   /** Fecha del valor de `uf` (dato en vivo o snapshot). */
   ufFecha?: string;
-  /** true solo si la UF en vivo pasó `isLiveValueFresh` (valor del día). */
+  /**
+   * true solo si la UF viene del Banco Central y su fecha es hoy en Santiago.
+   * Solo entonces el lead dice "Hoy" y atribuye el valor al Banco Central.
+   */
   ufFresca?: boolean;
 }
 
@@ -626,9 +629,10 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
               ...reajuste,
             ]
           : [
-              `Valor de referencia: la UF${fecha ? ` del ${fecha}` : ''} es ${formatCLP2(uf)} (`,
+              // Puede ser Mindicador o el snapshot: no se atribuye al Banco Central.
+              `Valor de referencia: la UF${fecha ? ` del ${fecha}` : ''} es ${formatCLP2(uf)}. Para una operación, revisa el valor oficial del día en el `,
               { text: 'Banco Central de Chile', href: BCCH_INDICADORES_URL },
-              '). Para una operación, revisa el valor oficial del día.',
+              '.',
               ...reajuste,
             ];
       const conLaUF = fecha ? `con la UF del ${fecha}` : `con una UF de ${formatCLP2(uf)}`;
@@ -660,9 +664,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           },
         ],
         example: {
-          caption: fecha
-            ? `Tabla de UF a pesos con la UF del ${fecha}: ${formatCLP2(uf)} (Banco Central de Chile). Montos redondeados al peso. La UF cambia todos los días.`
-            : `Tabla de UF a pesos con una UF de ${formatCLP2(uf)} (Banco Central de Chile). Montos redondeados al peso. La UF cambia todos los días.`,
+          caption: `Tabla de UF a pesos ${fecha ? `con la UF del ${fecha}: ${formatCLP2(uf)}` : `con una UF de ${formatCLP2(uf)}`}${ctx.ufFresca ? ' (Banco Central de Chile)' : ''}. Montos redondeados al peso. La UF cambia todos los días.`,
           headers: ['Monto en UF', 'Equivalente en pesos'],
           rows,
         },

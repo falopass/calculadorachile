@@ -293,7 +293,13 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
       if (kind === 'utm' && indicator.date) {
         utmFresca = { value: indicator.value, date: indicator.date };
       }
-      if (kind === 'uf') ufFresca = true;
+      // E-018: el lead dice "Hoy" solo con la UF del Banco Central fechada
+      // hoy en Santiago (la frescura de 48 h no basta, ni Mindicador/snapshot).
+      if (kind === 'uf' && indicator.date) {
+        ufFresca =
+          indicator.source === 'bcentral' &&
+          formatDDMMYYYY(new Date(indicator.date)) === formatDDMMYYYY(new Date());
+      }
     }
   }
 
