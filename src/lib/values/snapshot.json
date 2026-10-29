@@ -4,7 +4,7 @@
   "dolarObservado": 981.08,
   "euro": 1093.25,
   "ipcMensual": -0.2,
-  "asOf": "2026-10-29T13:00:23.094Z",
+  "asOf": "2026-10-29T18:34:29.643Z",
   "sources": {
     "uf": "bcentral",
     "utm": "bcentral",
@@ -12,5 +12,5 @@
     "euro": "bcentral",
     "ipcMensual": "unknown"
   },
-  "generatedAt": "2026-10-29T13:00:37.969Z"
+  "generatedAt": "2026-10-29T18:34:44.611Z"
 }
