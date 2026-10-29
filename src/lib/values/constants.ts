@@ -423,9 +423,11 @@ export const TOPE_IMPOSITIVO = {
  * a mes: lo que el SII publica en pesos es rebaja_UTM × UTM del mes).
  *
  * Fuente: https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm
- * Octubre 2026: factor 0,04, cantidad a rebajar $38.961,54
- * (= 0,54 UTM de $72.150,9); tramo 310+ factor 0,4, rebaja $2.800.901,82
- * (= 38,82 UTM).
+ * (vigente desde 01-11-2026; UTM noviembre 2026 $72.440 según
+ * https://www.sii.cl/valores_y_fechas/utm/utm2026.htm)
+ * Noviembre 2026: exento hasta $977.940 (13,5 UTM de $72.440); factor 0,04,
+ * cantidad a rebajar $39.117,60 (= 0,54 UTM); tramo 310+ factor 0,4, rebaja
+ * $2.812.120,80 (= 38,82 UTM).
  */
 export const IMPUESTO_SEGUNDA_CATEGORIA = {
   tramos: [
