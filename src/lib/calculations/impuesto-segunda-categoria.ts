@@ -3,7 +3,13 @@
 // Impuesto progresivo aplicado a rentas del trabajo dependiente
 // ============================================
 
-import { AFP, IMPUESTO_SEGUNDA_CATEGORIA, UTM } from '@/lib/values/constants';
+import {
+  AFP,
+  AFP_OBLIGATORIA_PCT,
+  IMPUESTO_SEGUNDA_CATEGORIA,
+  SEGURO_CESANTIA,
+  UTM,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 import { calculateSueldoLiquido } from './sueldo-liquido';
 
@@ -38,6 +44,8 @@ export interface ImpuestoSegundaCategoriaResult {
   cotizaciones: number;
   /** Renta líquida imponible mensual sobre la que se aplica la tabla. */
   baseTributable: number;
+  /** Descripción de las opciones previsionales usadas (vacío si no se descuentan). */
+  cotizacionesDetalle: string;
   /** Base tributable expresada en UTM del mes. */
   rentaEnUTM: number;
   impuestoMensual: number;
@@ -75,13 +83,18 @@ export function calculateImpuestoSegundaCategoria(
   // (SII: la tabla se aplica sobre la "renta líquida imponible"). Se reutiliza
   // calculateSueldoLiquido para que ambas calculadoras den el mismo impuesto.
   let cotizaciones = 0;
+  let cotizacionesDetalle = '';
   let impuestoSueldoLiquido: number | null = null;
   if (input.descontarCotizaciones) {
+    const afp = input.afp ?? 'habitat';
+    const saludTipo = input.saludTipo ?? 'fonasa';
+    const contratoIndefinido = input.contratoIndefinido ?? true;
+    cotizacionesDetalle = describirCotizaciones(afp, saludTipo, contratoIndefinido);
     const sl = calculateSueldoLiquido({
       sueldoBruto: sueldo,
-      afp: input.afp ?? 'habitat',
-      saludTipo: input.saludTipo ?? 'fonasa',
-      contratoIndefinido: input.contratoIndefinido ?? true,
+      afp,
+      saludTipo,
+      contratoIndefinido,
       valorUF: input.valorUF,
       valorUTM,
     });
@@ -122,12 +135,30 @@ export function calculateImpuestoSegundaCategoria(
     sueldoAnual,
     cotizaciones: Math.round(cotizaciones),
     baseTributable: Math.round(baseTributable),
+    cotizacionesDetalle,
     rentaEnUTM: Number(rentaEnUTM.toFixed(2)),
     impuestoMensual,
     impuestoAnual,
     tasaEfectiva,
     tramoAplicado,
   };
+}
+
+const pct = (n: number) => n.toLocaleString('es-CL', { maximumFractionDigits: 2 });
+
+/** Etiqueta legible de las opciones previsionales efectivamente usadas. */
+function describirCotizaciones(
+  afp: keyof typeof AFP,
+  saludTipo: 'fonasa' | 'isapre',
+  contratoIndefinido: boolean,
+): string {
+  const a = AFP[afp];
+  const afpTxt = `AFP ${a.nombre} ${pct(AFP_OBLIGATORIA_PCT + a.comision)}%`;
+  const saludTxt = saludTipo === 'fonasa' ? 'Fonasa 7%' : 'Isapre (mín. 7%)';
+  const cesantiaTxt = contratoIndefinido
+    ? `cesantía ${pct(SEGURO_CESANTIA.contrato_indefinido.trabajador)}%`
+    : 'sin cesantía del trabajador (plazo fijo)';
+  return `${afpTxt}, ${saludTxt}, ${cesantiaTxt}`;
 }
 
 /**
@@ -144,7 +175,7 @@ export function impuestoSegundaCategoriaToResults(
   if (result.cotizaciones > 0) {
     r.push(
       {
-        label: 'Cotizaciones descontadas (AFP Habitat, Fonasa 7%, cesantía 0,6%)',
+        label: `Cotizaciones descontadas (${result.cotizacionesDetalle})`,
         value: result.cotizaciones,
         format: 'CLP',
       },

@@ -10,7 +10,10 @@
 // ============================================
 
 import { describe, it, expect } from 'vitest';
-import { calculateImpuestoSegundaCategoria } from '../impuesto-segunda-categoria';
+import {
+  calculateImpuestoSegundaCategoria,
+  impuestoSegundaCategoriaToResults,
+} from '../impuesto-segunda-categoria';
 import { calculateSueldoLiquido } from '../sueldo-liquido';
 
 const valorUTM = 72_440;
@@ -83,5 +86,36 @@ describe('impuesto único con cotizaciones (igual que sueldo líquido)', () => {
     });
     expect(r.cotizaciones).toBe(0);
     expect(r.impuestoMensual).toBe(9_560);
+  });
+
+  it('la etiqueta de cotizaciones refleja AFP, salud y contrato usados', () => {
+    const base = { sueldoBrutoMensual: 2_000_000, valorUTM, valorUF, descontarCotizaciones: true };
+    const def = calculateImpuestoSegundaCategoria(base);
+    expect(def.cotizacionesDetalle).toBe('AFP Habitat 11,27%, Fonasa 7%, cesantía 0,6%');
+
+    const alt = calculateImpuestoSegundaCategoria({
+      ...base,
+      afp: 'modelo',
+      contratoIndefinido: false,
+    });
+    expect(alt.cotizacionesDetalle).toBe(
+      'AFP Modelo 10,58%, Fonasa 7%, sin cesantía del trabajador (plazo fijo)',
+    );
+    const sl = calculateSueldoLiquido({
+      sueldoBruto: 2_000_000,
+      afp: 'modelo',
+      saludTipo: 'fonasa',
+      contratoIndefinido: false,
+      valorUF,
+      valorUTM,
+    });
+    expect(alt.impuestoMensual).toBe(sl.descuentos.impuesto);
+    expect(sl.descuentos.seguroCesantia).toBe(0);
+    const fila = impuestoSegundaCategoriaToResults(alt).find((x) =>
+      x.label.startsWith('Cotizaciones descontadas'),
+    );
+    expect(fila?.label).toBe(
+      'Cotizaciones descontadas (AFP Modelo 10,58%, Fonasa 7%, sin cesantía del trabajador (plazo fijo))',
+    );
   });
 });
