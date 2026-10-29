@@ -713,7 +713,7 @@ export const guias: Guia[] = [
 <li>Aplica el redondeo que corresponda al trámite.</li>
 <li>Registra fuente, fecha y fórmula junto al resultado.</li>
 </ol>
-<p>Las dudas observadas en foros —“por qué subió mi dividendo si el IPC dio cero”, “qué UTM usa una multa” o “el dólar observado es el precio de compra”— se utilizaron para ordenar esta guía, no como evidencia estadística. Contenido verificado al 13 de julio de 2026.</p>
+<p>Las dudas observadas en foros —“por qué subió mi dividendo si el IPC dio cero”, “qué UTM usa una multa” o “el dólar observado es el precio de compra”— se utilizaron para ordenar esta guía, no como evidencia estadística. Contenido verificado al 13 de julio de 2026; valores de UTM e impuesto de noviembre 2026 actualizados el 29 de octubre de 2026.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance</strong><p>Esta guía explica unidades y fuentes; no predice UF, dólar, inflación ni tasas. Para operaciones financieras o tributarias prevalecen la fecha contractual, la norma aplicable y el valor oficial.</p></div></aside>`,
       },
     ],
