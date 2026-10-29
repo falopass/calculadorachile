@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { getArticleBySlug } from '../articles';
 import { seoOverrides } from '../seo-overrides';
-import { formatCLP } from '@/lib/formatters';
-import { SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
+import { formatCLP, formatPercentage } from '@/lib/formatters';
+import { DESEMPLEO_INE, SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
 
 const FCS = SEGURO_CESANTIA_BENEFICIOS.fcs;
 
@@ -62,9 +62,61 @@ describe('E-024: checklist después del despido', () => {
     expect(article.content).not.toContain('ofertas?mostrar=empleo');
   });
 
-  it('title sin cambios; meta nueva ≤ 155', () => {
+  it('title "qué hacer si te despiden" ≤ 60 (override y headline) y meta ≤ 155', () => {
     const o = seoOverrides['checklist-despues-despido-chile-2026'];
-    expect(o.seoTitle).toBe('Checklist despido Chile 2026: finiquito, AFC y CV');
+    expect(o.seoTitle).toBe('Qué hacer si te despiden en Chile 2026: checklist y plazos');
+    expect(o.seoTitle.length).toBeLessThanOrEqual(60);
+    expect(article.seoTitle).toBe(o.seoTitle);
     expect(o.seoDescription.length).toBeLessThanOrEqual(155);
+    expect(article.title).toBe('Qué hacer si te despiden en Chile: checklist paso a paso 2026');
+  });
+});
+
+describe('Checklist despido: respuesta directa, contexto INE y FAQ visible (brief 2026-10-29)', () => {
+  const article = getArticleBySlug('checklist-despues-despido-chile-2026')!;
+
+  it('respuesta directa de 6 pasos justo después del lead', () => {
+    const lead = article.content.indexOf('class="article-lead"');
+    const bloque = article.content.indexOf('<h2 id="que-hacer-si-te-despiden">');
+    expect(lead).toBe(3);
+    expect(bloque).toBeGreaterThan(lead);
+    expect(article.content.slice(lead, bloque).match(/<\/p>/g)).toHaveLength(1);
+    const pasos = article.content.slice(bloque, article.content.indexOf('</ol>', bloque));
+    expect(pasos.match(/<li>/g)).toHaveLength(6);
+    for (const href of [
+      '/calculadoras/calculadora-finiquito',
+      '/calculadoras/calculadora-indemnizacion-anos-servicio',
+      '/blog/como-cobrar-seguro-cesantia-afc-2026',
+      '/calculadoras/calculadora-seguro-cesantia',
+    ]) {
+      expect(pasos).toContain(`href="${href}"`);
+    }
+    expect(pasos).toContain('utm_content=cesantia_blog_resumen_buscar_trabajo');
+    expect(pasos).toContain('target="_blank" rel="noopener noreferrer"');
+  });
+
+  it('callout INE desde DESEMPLEO_INE, con fecha visible y sin frases de prensa', () => {
+    expect(article.content).toContain(
+      `la tasa de desocupación fue ${formatPercentage(DESEMPLEO_INE.tasa)} en el trimestre ${DESEMPLEO_INE.trimestre}`,
+    );
+    expect(article.content).toContain('9,8%');
+    expect(article.content).toContain('1.007.976 personas desocupadas');
+    expect(article.content).toContain(`href="${DESEMPLEO_INE.fuente}"`);
+    expect(article.content).toContain('Dato publicado el 29-10-2026');
+    expect(article.content).not.toMatch(/5 años|cinco años/);
+  });
+
+  it('FAQ nuevas visibles, pero fuera del array faq (sin schema)', () => {
+    expect(article.content).toContain('<h2>Preguntas frecuentes sobre el despido</h2>');
+    const nuevas = [
+      '¿Qué hago primero si me despiden?',
+      '¿Puedo cobrar el seguro de cesantía si me autodespido?',
+      '¿Qué pasa con mi Isapre si me despiden?',
+    ];
+    for (const q of nuevas) {
+      expect(article.content).toContain(`<h3>${q}</h3>`);
+      expect(article.faq?.some((f) => f.question === q)).toBe(false);
+    }
+    expect(article.faq).toHaveLength(4);
   });
 });
