@@ -564,8 +564,8 @@ const EDITORIAL: Record<string, EditorialContent> = {
           />
           <p className={pClass}>
             Fuente: <Ext href={SUSESO_QUIEN_PAGA}>SUSESO, Compendio de licencias médicas</Ext>. Para
-            la remuneración neta, usa tus 3 últimas liquidaciones: el imponible menos las
-            cotizaciones y el impuesto. No uses el líquido a pago tal cual, porque suma haberes no
+            la remuneración neta, usa las liquidaciones de los 3 meses calendario anteriores al
+            mes en que empieza la licencia: el imponible menos las cotizaciones y el impuesto. No uses el líquido a pago tal cual, porque suma haberes no
             imponibles (colación, movilización) y resta descuentos personales. Para entender cada
             descuento, revisa la{' '}
             <Int href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</Int>{' '}
