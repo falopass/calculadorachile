@@ -951,7 +951,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       const [cic1] = SEGURO_CESANTIA_BENEFICIOS.cic.porcentajes;
       return {
         ...withLinks([
-          `Con tu cuenta individual, el primer pago del seguro de cesantía es el ${cic1}% de tu remuneración promedio y baja mes a mes. Si tu cuenta no alcanza y cumples los requisitos, el Fondo Solidario completa los pagos, con porcentajes, mínimos y máximos por giro (`,
+          `Con tu cuenta individual, el primer pago del seguro de cesantía es el ${cic1}% de tu remuneración promedio y baja mes a mes, hasta donde alcance tu saldo. Si tu cuenta no alcanza y cumples los requisitos, el Fondo Solidario completa los pagos, con porcentajes, mínimos y máximos por giro (`,
           { text: 'ChileAtiende', href: CA_SEGURO_CESANTIA_URL },
           ' · ',
           { text: 'Superintendencia de Pensiones', href: SP_FCS_URL },
@@ -963,7 +963,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           {
             question: '¿Cuándo llega el primer pago?',
             answer:
-              'Los pagos se hacen los jueves. Si pides el seguro antes de cumplir 30 días corridos sin trabajo, el primer pago llega el jueves siguiente a ese día 30; si lo pides después, el jueves siguiente a la aprobación.',
+              'Los pagos se hacen los jueves. Si pides el seguro antes de cumplir 30 días corridos sin trabajo, el primer pago llega el jueves siguiente a ese día 30; si lo pides después, el jueves siguiente a la aprobación. En autodespido o despido indirecto (artículo 171 del Código del Trabajo), el primer pago llega al menos 60 días corridos después del término.',
             sources: [{ text: 'AFC, fechas y medios de pago', href: AFC_FECHAS_PAGO_URL }],
           },
         ],

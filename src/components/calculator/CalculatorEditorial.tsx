@@ -741,7 +741,7 @@ const EDITORIAL: Record<string, EditorialContent> = {
                 a: (
                   <>
                     Cada pago es un porcentaje de tu remuneración promedio: el primero es el{' '}
-                    {CIC.porcentajes[0]}% y luego baja. Se paga con tu cuenta individual y, si no
+                    {CIC.porcentajes[0]}% y luego baja, hasta donde alcance tu saldo. Se paga con tu cuenta individual y, si no
                     alcanza y cumples los requisitos, con el Fondo Solidario (
                     <Ext href={CA_SEGURO_CESANTIA}>ChileAtiende</Ext>).
                   </>

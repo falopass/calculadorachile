@@ -224,7 +224,9 @@ export default function SeguroCesantiaInfo() {
         <p className={p}>
           Los pagos se procesan los jueves. Si pides el seguro antes de cumplir 30 días corridos
           desde el término, el primero llega el jueves siguiente a ese día 30; si lo pides después,
-          el jueves siguiente a la aprobación (<Ext href={AFC_FECHAS}>AFC</Ext>).
+          el jueves siguiente a la aprobación. En autodespido o despido indirecto (artículo 171 del
+          Código del Trabajo), llega al menos 60 días corridos después del término (
+          <Ext href={AFC_FECHAS}>AFC</Ext>).
         </p>
         <p className={p}>
           Tienes el paso a paso completo en nuestra guía{' '}

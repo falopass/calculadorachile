@@ -904,7 +904,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>Con la Cuenta Individual, el primer pago es el 70% de tu remuneración promedio y los siguientes bajan a 60%, 45%, 40%, 35% y 30% desde el sexto mes, mientras tengas saldo y sigas cesante (<a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende</a>). Si el saldo no alcanza, el pago efectivo puede ser menor que el porcentaje.</p>
 <p>El Fondo Solidario usa un porcentaje del promedio de tus remuneraciones de los últimos 12 meses, con un mínimo y un máximo por pago. Valores vigentes hasta el ${fechaLargaArticulo(SEGURO_CESANTIA_BENEFICIOS.fcs.vigenteHasta)} (<a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>):</p>
 ${tablaFcsHtml()}
-<p>Los mínimos y máximos se reajustan cada año. Para una estimación con tu sueldo, <a href="/calculadoras/calculadora-seguro-cesantia">simula cuánto te paga el seguro</a>; el monto real lo calcula AFC al aprobar tu solicitud.</p>
+<p>Los mínimos y máximos se reajustan cada año. Para una estimación con tu sueldo, <a href="/calculadoras/calculadora-seguro-cesantia">simula cuánto te paga el seguro</a>. El simulador usa un solo promedio para ambos fondos: si tu sueldo varió en el último año, el resultado es aproximado. El monto real lo calcula AFC al aprobar tu solicitud.</p>
 
 <h2>7. Medio de pago y errores bancarios</h2>
 <p>Puedes recibir depósito en CuentaRUT, cuenta vista, corriente o de ahorro, o efectivo en Servipag o BancoEstado. AFC no admite cuentas bipersonales. Si eliges efectivo tienes 60 días para cobrar; para autorizar a otra persona se requiere poder notarial aprobado por AFC.</p>
