@@ -1,6 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
 import { getQuickAnswer } from '../calculator-quick-answers';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
+import { INGRESO_MINIMO, JORNADA_LEGAL } from '@/lib/values/constants';
+import { formatCLP } from '@/lib/formatters';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
@@ -64,5 +66,60 @@ describe('getQuickAnswer', () => {
 
   it('devuelve null para calculadoras sin entrada', () => {
     expect(getQuickAnswer('calculadora-inexistente', CTX)).toBeNull();
+  });
+
+  describe('sueldo-part-time: tabla de jornadas', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('filas 18, 20, 25, 30, 36 y la jornada vigente; 4 columnas', () => {
+      const qa = getQuickAnswer('sueldo-part-time', CTX)!;
+      expect(qa.example!.headers).toHaveLength(4);
+      expect(qa.example!.rows.map((r) => r[0])).toEqual([
+        '18 horas',
+        '20 horas',
+        '25 horas',
+        '30 horas',
+        '36 horas',
+        `${JORNADA_LEGAL.actual} horas`,
+      ]);
+    });
+
+    it('20 h → mínimo proporcional (IMM × 20 ÷ jornada vigente)', () => {
+      const qa = getQuickAnswer('sueldo-part-time', CTX)!;
+      const row = qa.example!.rows.find((r) => r[0] === '20 horas')!;
+      expect(row[1]).toBe('Parcial: mínimo proporcional');
+      expect(row[2]).toBe(formatCLP(Math.round((INGRESO_MINIMO.mensual * 20) / JORNADA_LEGAL.actual)));
+    });
+
+    it('36 h → jornada intermedia con IMM íntegro (no proporcional)', () => {
+      const qa = getQuickAnswer('sueldo-part-time', CTX)!;
+      const row = qa.example!.rows.find((r) => r[0] === '36 horas')!;
+      expect(row[1]).toBe('Intermedia: mínimo íntegro');
+      expect(row[2]).toBe(formatCLP(INGRESO_MINIMO.mensual));
+    });
+
+    it('con IMM $553.553 al 29-10-2026: 20 h = $263.597 y caption con 42 h vigentes', () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2026-10-29T12:00:00-03:00'));
+      if (INGRESO_MINIMO.mensual !== 553_553) return; // cambia con el IMM 2027
+      const qa = getQuickAnswer('sueldo-part-time', CTX)!;
+      const row20 = qa.example!.rows.find((r) => r[0] === '20 horas')!;
+      expect(row20[2]).toBe('$263.597');
+      expect(qa.example!.rows.at(-1)).toEqual(['42 horas', 'Completa (vigente)', '$553.553', '$3.075']);
+      expect(qa.example!.caption).toContain('42 horas desde el 26 de abril de 2026');
+      expect(qa.example!.caption).toContain('baja a 40 horas el 26 de abril de 2028');
+      expect(qa.example!.caption).toContain('hasta 41 horas');
+    });
+
+    it('desde el 26-04-2028 la última fila es 40 h y no hay "próximo cambio"', () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2028-04-26T12:00:00-04:00'));
+      const qa = getQuickAnswer('sueldo-part-time', CTX)!;
+      expect(qa.example!.rows.at(-1)![0]).toBe('40 horas');
+      expect(qa.example!.caption).not.toContain('baja a');
+      expect(qa.example!.caption).toContain('hasta 39 horas');
+    });
   });
 });
