@@ -41,7 +41,7 @@ describe('fecha normalizada + vigencia/título', () => {
       ),
     ).toBe(true);
     expect(buildLiveValueTitle('uf', 40999.93, new Date(fecha), NOW)).toBe(
-      'UF hoy 23-09-2026: $40.999,93 | UF a pesos',
+      'UF hoy 23-09-2026: $40.999,93 | Tabla UF a pesos',
     );
   });
 

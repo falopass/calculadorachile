@@ -34,7 +34,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   // Beneficios laborales / finiquito
   'calculadora-finiquito': 'finiquito-laboral-chile',
   'calculadora-indemnizacion-anos-servicio': 'finiquito-laboral-chile',
-  'calculadora-vacaciones-proporcionales': 'finiquito-laboral-chile',
+  'calculadora-vacaciones-proporcionales': 'vacaciones-feriado-legal-chile',
   'calculadora-gratificacion-legal': 'finiquito-laboral-chile',
   'calculadora-horas-extra': 'finiquito-laboral-chile',
 
