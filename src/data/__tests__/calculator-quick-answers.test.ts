@@ -64,6 +64,31 @@ describe('getQuickAnswer', () => {
     }
   });
 
+  it('uf-clp (E-018): 20 montos, fila 1.000 UF generada y lead según frescura', () => {
+    const fresca = getQuickAnswer('uf-clp', {
+      ...CTX,
+      ufFecha: '2026-10-29T03:00:00.000Z',
+      ufFresca: true,
+    })!;
+    expect(fresca.h1).toBe('Conversor UF a pesos: valor de hoy y tabla de montos');
+    const rows = fresca.example!.rows;
+    expect(rows).toHaveLength(20);
+    const fila1000 = rows.find((r) => r[0] === '1.000 UF')!;
+    expect(fila1000[1]).toBe(formatCLP(Math.round(1000 * CTX.uf)));
+    expect(fresca.lead.startsWith('Hoy 29-10-2026 la UF vale')).toBe(true);
+    expect(fresca.example!.caption).toContain('UF del 29-10-2026');
+    expect(fresca.shortAnswers).toHaveLength(3);
+
+    const vieja = getQuickAnswer('uf-clp', { ...CTX, ufFecha: '2026-10-25T03:00:00.000Z', ufFresca: false })!;
+    expect(vieja.lead).not.toContain('Hoy');
+    expect(vieja.lead.startsWith('Valor de referencia: la UF del 25-10-2026')).toBe(true);
+    expect(vieja.example!.caption).not.toContain('Banco Central');
+    expect(fresca.example!.caption).toContain('(Banco Central de Chile)');
+
+    const sinFecha = getQuickAnswer('uf-clp', CTX)!;
+    expect(sinFecha.example!.caption).not.toMatch(/hoy|UF del/i);
+  });
+
   it('gratificación (E-014): tope generado, fila del umbral y sin montos escritos a mano', () => {
     const qa = getQuickAnswer('gratificacion-legal', CTX)!;
     expect(qa.h1).toBe('Calculadora de gratificación legal y tope 2026 (4,75 IMM)');

@@ -495,7 +495,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'Banco Central — indicadores diarios',
@@ -506,6 +506,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'Banco Central — serie UF',
         url: 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF',
         note: 'Serie histórica oficial',
+      },
+      {
+        name: 'SII — Valores de la UF 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
+        note: 'Tabla oficial de valores diarios',
+      },
+      {
+        name: 'Banco Central — Metodología de la UF',
+        url: 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf',
+        note: 'Reajuste diario del día 10 al 9 según el IPC del mes anterior',
       },
     ],
     keywords: ['UF a CLP', 'convertir UF', 'valor UF hoy', 'calculadora UF', 'UF pesos chilenos'],
@@ -552,9 +562,14 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
           'Para proteger el valor real del dinero frente a la inflación en contratos de largo plazo. Al expresar montos en UF, el valor se reajusta con el IPC.',
       },
       {
-        question: '¿Puedo ver histórico o proyección de la UF aquí?',
+        question: '¿Dónde veo la UF de una fecha pasada?',
         answer:
-          'No en esta calculadora: solo convierte con el valor de UF cargado en el sitio. El histórico oficial está en la serie del Banco Central. No ofrecemos proyecciones inventadas.',
+          'Esta calculadora convierte con el valor de la UF cargado en el sitio, sin histórico ni proyecciones. Los valores diarios oficiales están en la tabla de la UF del SII (sii.cl, Valores y fechas) y en la serie de la UF del Banco Central de Chile.',
+      },
+      {
+        question: '¿Cada cuánto cambia la UF?',
+        answer:
+          'Todos los días. El Banco Central calcula la UF desde el día 10 de cada mes hasta el día 9 del mes siguiente, distribuyendo en forma diaria la variación del IPC del mes anterior. Por eso los valores de un período se conocen por adelantado.',
       },
       {
         question: '¿Dónde verifico el valor oficial?',

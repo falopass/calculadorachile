@@ -14,7 +14,12 @@
 // ============================================
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
-import { formatCLP2, MESES_ES_CL, toSantiagoParts } from '@/lib/seo/live-value-title';
+import {
+  formatCLP2,
+  formatDDMMYYYY,
+  MESES_ES_CL,
+  toSantiagoParts,
+} from '@/lib/seo/live-value-title';
 import {
   INGRESO_MINIMO,
   JORNADA_LEGAL,
@@ -90,6 +95,13 @@ interface QuickAnswerContext {
   utmFresca?: { value: number; date: string } | null;
   /** Fecha del valor de `utm` (dato en vivo o snapshot), para indicar su mes. */
   utmFecha?: string;
+  /** Fecha del valor de `uf` (dato en vivo o snapshot). */
+  ufFecha?: string;
+  /**
+   * true solo si la UF viene del Banco Central y su fecha es hoy en Santiago.
+   * Solo entonces el lead dice "Hoy" y atribuye el valor al Banco Central.
+   */
+  ufFresca?: boolean;
 }
 
 /** " (octubre de 2026)" según la fecha del valor usado en la tabla de UTM. */
@@ -110,6 +122,15 @@ function withLinks(parts: QuickAnswerPart[]): Pick<QuickAnswer, 'lead' | 'leadPa
 const SII_UTM_URL = 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm';
 const BCN_CODIGO_TRABAJO_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
 const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.html';
+const BCCH_INDICADORES_URL = 'https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx';
+const BCCH_UF_METODOLOGIA_URL = 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf';
+const BCCH_UF_SERIE_URL = 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF';
+const SII_UF_URL = 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm';
+/** Montos de la tabla UF a pesos (E-018: búsquedas "N uf a pesos" en GSC). */
+const UF_MONTOS_TABLA = [
+  1, 10, 24, 30, 50, 80, 90, 100, 200, 400, 500, 1_000, 1_100, 1_200, 2_000, 2_500, 3_000, 5_000,
+  6_000, 6_500,
+];
 const DT_GRATIFICACION_URL = 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html';
 const DT_IMM_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
 const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
@@ -576,20 +597,74 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'uf-clp': {
-      const montos = [1, 5, 10, 50, 90, 500, 1_000, 3_000];
-      const rows = montos.map((monto) => {
-        const r = calculateUFCLP({
-          monto,
-          direccion: 'uf-a-clp',
-          valorUF: ctx.uf,
-        });
-        return [`${formatNum(monto, 0)} UF`, formatCLP(Math.round(r.montoConvertido))];
-      });
+      // E-018: todas las cifras salen de la UF del contexto; nunca a mano.
+      const uf = ctx.uf;
+      const fechaObj = ctx.ufFecha ? new Date(ctx.ufFecha) : null;
+      const fecha =
+        fechaObj && !Number.isNaN(fechaObj.getTime()) ? formatDDMMYYYY(fechaObj) : '';
+      const aPesos = (monto: number) =>
+        Math.round(
+          calculateUFCLP({ monto, direccion: 'uf-a-clp', valorUF: uf }).montoConvertido,
+        );
+      const rows = UF_MONTOS_TABLA.map((monto) => [
+        `${formatNum(monto, 0)} UF`,
+        formatCLP(aPesos(monto)),
+      ]);
+      const diezMillonesEnUF = calculateUFCLP({
+        monto: 10_000_000,
+        direccion: 'clp-a-uf',
+        valorUF: uf,
+      }).montoConvertido;
+      const reajuste: QuickAnswerPart[] = [
+        ' La UF se reajusta cada día, desde el día 10 de un mes hasta el 9 del mes siguiente, según la variación del IPC del mes anterior (',
+        { text: 'metodología del Banco Central', href: BCCH_UF_METODOLOGIA_URL },
+        ').',
+      ];
+      const leadParts: QuickAnswerPart[] =
+        ctx.ufFresca && fecha
+          ? [
+              `Hoy ${fecha} la UF vale ${formatCLP2(uf)}, según el `,
+              { text: 'Banco Central de Chile', href: BCCH_INDICADORES_URL },
+              `: 1.000 UF son ${formatCLP(aPesos(1_000))}.`,
+              ...reajuste,
+            ]
+          : [
+              // Puede ser Mindicador o el snapshot: no se atribuye al Banco Central.
+              `Valor de referencia: la UF${fecha ? ` del ${fecha}` : ''} es ${formatCLP2(uf)}. Para una operación, revisa el valor oficial del día en el `,
+              { text: 'Banco Central de Chile', href: BCCH_INDICADORES_URL },
+              '.',
+              ...reajuste,
+            ];
+      const conLaUF = fecha ? `con la UF del ${fecha}` : `con una UF de ${formatCLP2(uf)}`;
       return {
-        h1: 'Conversor UF a pesos',
-        lead: 'La UF (Unidad de Fomento) se reajusta diariamente según el IPC y se usa en créditos hipotecarios, arriendos y contratos de largo plazo.',
+        h1: 'Conversor UF a pesos: valor de hoy y tabla de montos',
+        ...withLinks(leadParts),
+        shortAnswers: [
+          {
+            question: '¿Dónde veo la UF de una fecha pasada?',
+            answer:
+              'En la tabla oficial de valores diarios de la UF del Servicio de Impuestos Internos, organizada por año y mes, y en la serie histórica del Banco Central de Chile. Para una escritura, un crédito o un contrato, usa siempre el valor del día exacto de la operación.',
+            sources: [
+              { text: 'SII, valores de la UF 2026', href: SII_UF_URL },
+              { text: 'Banco Central, serie de la UF', href: BCCH_UF_SERIE_URL },
+            ],
+          },
+          {
+            question: '¿Cuánto son 90 UF en pesos?',
+            answer: `${formatCLP(aPesos(90))} ${conLaUF}. Si buscas el tope imponible en pesos, usa la calculadora de tope imponible.`,
+            sources: [
+              { text: 'Calculadora de tope imponible', href: '/calculadoras/calculadora-tope-imponible-90-uf' },
+              { text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL },
+            ],
+          },
+          {
+            question: '¿Cómo convierto pesos a UF?',
+            answer: `Divide el monto en pesos por el valor de la UF del día. Por ejemplo, $10.000.000 ÷ ${formatCLP2(uf)} = ${formatNum(diezMillonesEnUF, 2)} UF (con 2 decimales).`,
+            sources: [{ text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL }],
+          },
+        ],
         example: {
-          caption: `Equivalencias con UF de ${formatCLP2(ctx.uf)}. El valor se reajusta diariamente según el IPC.`,
+          caption: `Tabla de UF a pesos ${fecha ? `con la UF del ${fecha}: ${formatCLP2(uf)}` : `con una UF de ${formatCLP2(uf)}`}${ctx.ufFresca ? ' (Banco Central de Chile)' : ''}. Montos redondeados al peso. La UF cambia todos los días.`,
           headers: ['Monto en UF', 'Equivalente en pesos'],
           rows,
         },

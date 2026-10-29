@@ -155,9 +155,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- CONVERSIONES E INDICADORES ECONÓMICOS ---
   'calculadora-uf-clp': {
-    seoTitle: 'UF a Pesos Hoy 2026: convierte al instante oficial', // 51
+    seoTitle: 'UF a pesos hoy: conversor y tabla de montos', // 43, sin sufijo (title.absolute)
     seoDescription:
-      'Convierte UF a pesos chilenos y de CLP a UF con el valor oficial de hoy del Banco Central. Ideal hipotecario, arriendo y contratos.', // 133
+      'UF de hoy y tabla de UF a pesos: 1, 24, 100, 200, 1.000, 2.500, 3.000 y 6.000 UF con el valor oficial del día y dónde ver la UF de una fecha.', // 141
   },
 
   'calculadora-utm-clp': {
