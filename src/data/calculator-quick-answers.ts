@@ -109,6 +109,8 @@ function withLinks(parts: QuickAnswerPart[]): Pick<QuickAnswer, 'lead' | 'leadPa
 const SII_UTM_URL = 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm';
 const BCN_CODIGO_TRABAJO_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
 const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.html';
+const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
+const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
 
 /** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
 export function buildUTMLeadParts(
@@ -137,6 +139,11 @@ function formatNum(value: number, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
+}
+
+/** Días con hasta 2 decimales y sin ceros sobrantes (10,5; 7; 13,75). */
+function formatDias(value: number): string {
+  return value.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
 
 /** '2026-04-26' → '26 de abril de 2026'. */
@@ -210,27 +217,71 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'vacaciones-proporcionales': {
-      const casos: [number, number][] = [
-        [553_553, 4],
-        [800_000, 6],
-        [1_200_000, 8],
-      ];
-      const rows = casos.map(([sueldoBruto, mesesTrabajados]) => {
-        const r = calculateVacaciones({ sueldoBruto, mesesTrabajados });
+      // E-017: cifras generadas con calculateVacaciones (incluye ORD. 826/13).
+      // Mantención: antes del 01-01-2027 mover FECHA_EJEMPLO a 2027 y revisar los textos.
+      const FECHA_EJEMPLO = '2026-11-30'; // lunes
+      const vac = (sueldoBruto: number, mesesTrabajados: number, fechaTermino?: string) =>
+        calculateVacaciones({ sueldoBruto, mesesTrabajados, fechaTermino });
+      const rows = Array.from({ length: 11 }, (_, i) => {
+        const m = i + 1;
+        const rIMM = vac(INGRESO_MINIMO.mensual, m, FECHA_EJEMPLO);
+        const r800 = vac(800_000, m, FECHA_EJEMPLO);
         return [
-          formatCLP(sueldoBruto),
-          `${mesesTrabajados}`,
-          formatNum(r.diasHabilesTotales),
-          formatCLP(r.totalVacaciones),
+          `${m}`,
+          formatDias(rIMM.diasHabilesTotales),
+          formatDias(rIMM.diasCorridosIndemnizables),
+          formatCLP(rIMM.totalVacaciones),
+          formatCLP(r800.totalVacaciones),
         ];
       });
+      const e6 = vac(800_000, 6, FECHA_EJEMPLO);
+      const e6SinFecha = vac(800_000, 6);
+      const e6Dic = vac(800_000, 6, '2026-12-31');
+      const e8 = vac(800_000, 8, FECHA_EJEMPLO);
       return {
-        h1: 'Calculadora de vacaciones proporcionales en días y pesos',
-        lead: 'Al terminar el contrato corresponden 1,25 días hábiles de feriado por cada mes completo trabajado (15 días hábiles al año). Para pagarlas se proyectan además los sábados, domingos y feriados que caen dentro del feriado.',
+        h1: 'Calculadora de vacaciones proporcionales: días y pesos según meses trabajados',
+        ...withLinks([
+          'Por cada mes trabajado se acumulan 1,25 días hábiles de vacaciones (15 ÷ 12). Al terminar el contrato, esos días se cuentan en el calendario desde el día siguiente al término y se suman los sábados, domingos y festivos que caen en ese período: se paga ese total de días corridos × sueldo ÷ 30 (',
+          { text: 'Dirección del Trabajo', href: DT_FERIADO_PROPORCIONAL_URL },
+          '; ',
+          { text: 'Código del Trabajo, art. 73', href: BCN_CODIGO_TRABAJO_URL },
+          `). Ejemplo: 6 meses son ${formatDias(e6.diasHabilesTotales)} días hábiles; si el contrato termina el lunes 30-11-2026, son ${formatDias(e6.diasCorridosIndemnizables)} días corridos, es decir ${formatCLP(e6.totalVacaciones)} con un sueldo de $800.000.`,
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Si trabajo 6 meses, cuántos días de vacaciones me corresponden?',
+            answer: `${formatDias(e6.diasHabilesTotales)} días hábiles (6 × 1,25). Al pagarlos en el finiquito se convierten en días corridos: con término el lunes 30-11-2026 son ${formatDias(e6.diasCorridosIndemnizables)} días, porque se agregan el fin de semana del 5 y 6 de diciembre y el feriado del martes 8. Con $800.000 de sueldo: $800.000 ÷ 30 = ${formatCLP(e6.valorDiaCorrida)} por día × ${formatDias(e6.diasCorridosIndemnizables)} = ${formatCLP(e6.totalVacaciones)}. Si solo se pagaran los días hábiles saldrían ${formatCLP(e6SinFecha.totalVacaciones)}: la DT exige sumar los sábados, domingos y festivos.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+              { text: 'Dirección del Trabajo, ORD. 826/13', href: DT_ORD_826_URL },
+            ],
+          },
+          {
+            question: '¿Cuántos días de vacaciones me tocan con 8 meses de trabajo?',
+            answer: `${formatDias(e8.diasHabilesTotales)} días hábiles (8 × 1,25). Con término el 30-11-2026 equivalen a ${formatDias(e8.diasCorridosIndemnizables)} días corridos. La DT da un ejemplo oficial: 8 meses y 2 días son 10,08 días hábiles, más 4 inhábiles, o sea 14,08 días corridos.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+            ],
+          },
+          {
+            question: '¿Por qué importa la fecha de término?',
+            answer: `Porque los días se cuentan desde el día siguiente al término. Si 6 meses terminan el 31-12-2026, el conteo parte el 1 de enero (feriado) y son ${formatDias(e6Dic.diasCorridosIndemnizables)} días corridos (${formatCLP(e6Dic.totalVacaciones)} con $800.000), en vez de ${formatDias(e6.diasCorridosIndemnizables)}. Además, si una fracción de día no alcanza a caber antes de un fin de semana o festivo, pasa al día hábil siguiente y esos días intermedios también se pagan.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+              { text: 'Dirección del Trabajo, ORD. 826/13', href: DT_ORD_826_URL },
+            ],
+          },
+        ],
         example: {
           caption:
-            'Días hábiles acumulados y estimación en pesos (sueldo ÷ 30 por día corrido), sin fecha de término informada.',
-          headers: ['Sueldo bruto', 'Meses trabajados', 'Días hábiles', 'Indemnización estimada'],
+            'Vacaciones proporcionales de 1 a 11 meses, con término el lunes 30-11-2026: días hábiles (1,25 por mes), días corridos con los sábados, domingos y feriados nacionales que caen en el período (incluye el 8-12 y el 25-12), y monto con sueldo ÷ 30 por día corrido. Con otra fecha de término cambian los días corridos. Con 12 meses corresponde el feriado anual completo.',
+          headers: [
+            'Meses trabajados',
+            'Días hábiles',
+            'Días corridos',
+            `Con ingreso mínimo (${formatCLP(INGRESO_MINIMO.mensual)})`,
+            'Con $800.000',
+          ],
           rows,
         },
       };
