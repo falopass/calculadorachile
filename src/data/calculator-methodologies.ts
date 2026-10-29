@@ -621,14 +621,17 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
   },
   'impuesto-segunda-categoria': {
     summary:
-      'Aplica la tabla mensual configurada del Impuesto Único a la base tributable declarada.',
+      'Descuenta las cotizaciones obligatorias del sueldo imponible y aplica la tabla mensual del Impuesto Único a esa renta líquida imponible.',
     calculationSteps: [
-      'Obtiene la renta tributable después de descuentos previsionales informados.',
-      'Ubica la renta en el tramo correspondiente.',
+      'Resta al sueldo imponible AFP (10% + comisión), salud (7%) y seguro de cesantía (0,6%), con topes de 90 UF y 135,2 UF, igual que la calculadora de sueldo líquido.',
+      'Expresa la base tributable en UTM del mes y la ubica en el tramo correspondiente.',
       'Aplica factor y rebaja del tramo.',
-      'Muestra impuesto y renta después del tributo.',
+      'Muestra impuesto mensual, anual y tasa efectiva sobre el sueldo bruto.',
     ],
-    assumptions: ['La base corresponde a una remuneración mensual afecta al Impuesto Único.'],
+    assumptions: [
+      'La base corresponde a una remuneración mensual afecta al Impuesto Único.',
+      'Cotizaciones de referencia: AFP Habitat (11,27%), Fonasa 7% y contrato indefinido (cesantía 0,6%). Otra AFP o un plan de Isapre cambian levemente la base; para tu caso exacto usa la calculadora de sueldo líquido.',
+    ],
     limitations: [
       'No realiza reliquidación anual ni combina varios empleadores.',
       'Bonos retroactivos, rentas accesorias y créditos pueden cambiar el impuesto.',

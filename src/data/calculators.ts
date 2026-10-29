@@ -3515,7 +3515,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         min: 0,
         tooltip:
-          'Sueldo bruto antes de descuentos. El impuesto se calcula sobre la renta imponible anual.',
+          'Sueldo imponible mensual antes de descuentos. La calculadora descuenta AFP (Habitat 11,27%), salud (Fonasa 7%) y cesantía (0,6%) y aplica la tabla mensual del SII sobre ese resultado.',
       },
       {
         id: 'mesesTrabajados',
@@ -3534,17 +3534,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué es el impuesto de segunda categoría?',
         answer:
-          'Es el impuesto que pagan los trabajadores dependientes e independientes sobre sus remuneraciones. Se calcula con tramos progresivos desde 0% hasta 40% según el nivel de ingresos anuales expresados en UTA (1 UTA = 12 UTM).',
+          'Es el impuesto que pagan mensualmente los trabajadores dependientes sobre sus remuneraciones. Se calcula con tramos progresivos desde 0% hasta 40% sobre la renta líquida imponible mensual (sueldo imponible menos AFP, salud y seguro de cesantía) expresada en UTM del mes.',
       },
       {
         question: '¿Cuáles son los tramos del impuesto?',
         answer:
-          'Tramos 2026: 0% hasta 13.5 UTA, 4% de 13.5-30 UTA, 8% de 30-50 UTA, 13.5% de 50-70 UTA, 23% de 70-90 UTA, 30.4% de 90-120 UTA, 35% de 120-310 UTA, y 40% sobre 310 UTA.',
+          'Tramos mensuales 2026: 0% hasta 13,5 UTM, 4% de 13,5 a 30 UTM, 8% de 30 a 50 UTM, 13,5% de 50 a 70 UTM, 23% de 70 a 90 UTM, 30,4% de 90 a 120 UTM, 35% de 120 a 310 UTM y 40% sobre 310 UTM. Con la UTM de noviembre de 2026 ($72.440), el tramo exento llega a $977.940 (SII).',
       },
       {
         question: '¿Cómo se calcula el impuesto mensual?',
         answer:
-          'El empleador retiene mensualmente proyectando tu ingreso anual. Si ganas $800.000 mensuales, tu anual son $9.600.000 (aprox. 11.4 UTA), bajo el tramo de 0%. Si ganas $2.000.000, anual $24.000.000 (28.5 UTA), paga 4%.',
+          'El empleador lo retiene cada mes: al sueldo imponible le resta AFP, salud y cesantía, expresa el resultado en UTM del mes y aplica factor y rebaja del tramo. Con AFP Habitat, Fonasa y contrato indefinido, $800.000 brutos dejan una base de $649.040 (unas 9 UTM con la UTM de noviembre de 2026), exenta. Con $2.000.000 brutos la base es $1.622.600 (unas 22,4 UTM), en el tramo de 4%.',
       },
       {
         question: '¿El impuesto se devuelve?',

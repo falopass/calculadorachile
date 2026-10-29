@@ -176,7 +176,7 @@ export const guias: Guia[] = [
 <p>Solo aplica a trabajadores con contrato indefinido. El trabajador aporta <strong>0,6%</strong> y el empleador <strong>2,4%</strong> (Ley 19.728). Para contratos a plazo fijo, el trabajador no aporta nada y el empleador paga 3,0%. El tope imponible para cesantía es <strong>135,2 UF</strong> mensuales en 2026, distinto y más alto que el tope de AFP/Salud.</p>
 
 <h3>4. Impuesto único de segunda categoría</h3>
-<p>Es un impuesto progresivo que aplica solo sobre el sueldo que excede 13,5 UTM mensuales (~$967.262 con UTM julio 2026). Se calcula con la tabla del SII (artículo 43 N°1 LIR), que tiene 8 tramos con tasas marginales de 0%, 4%, 8%, 13,5%, 23%, 30,4%, 35% y 40%.</p>
+<p>Es un impuesto progresivo que aplica solo sobre el sueldo que excede 13,5 UTM mensuales ($977.940 con la UTM de noviembre 2026). Se calcula con la tabla del SII (artículo 43 N°1 LIR), que tiene 8 tramos con tasas marginales de 0%, 4%, 8%, 13,5%, 23%, 30,4%, 35% y 40%.</p>
 <table>
 <thead><tr><th>Tramo en UTM</th><th>Tasa marginal</th><th>Cantidad a rebajar</th></tr></thead>
 <tbody>
@@ -205,8 +205,8 @@ export const guias: Guia[] = [
         title: 'Ejemplo completo paso a paso: bruto $1.500.000',
         level: 2,
         html: `<p>Tomemos un caso concreto y desglosémoslo línea por línea para que puedas replicarlo con tus propios números.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Supuestos del ejemplo</strong><p>AFP Habitat (1,27% comisión), FONASA, contrato indefinido, sin bonos ni horas extra, sin asignaciones no imponibles. UF julio 2026: $40.826. UTM julio 2026: $71.649.</p></div></aside>
-<div class="numeric-example"><div class="numeric-example__title">Cálculo paso a paso — sueldo bruto $1.500.000</div><ul><li><strong>Imponible</strong>: $1.500.000 (bajo el tope de 90 UF = $3.674.340)</li><li><strong>AFP</strong>: $1.500.000 × 11,27% = <code>$169.050</code></li><li><strong>Salud (7% FONASA)</strong>: $1.500.000 × 7% = <code>$105.000</code></li><li><strong>Cesantía (0,6%)</strong>: $1.500.000 × 0,6% = <code>$9.000</code></li><li><strong>Base tributable</strong>: $1.500.000 − ($169.050 + $105.000 + $9.000) = $1.216.950</li><li><strong>Base en UTM</strong>: $1.216.950 ÷ $71.649 ≈ 16,98 UTM</li><li>Tramo: 13,5 a 30 UTM → factor 4%, rebaja 0,54 UTM</li><li><strong>Impuesto</strong>: $1.216.950 × 4% − 0,54 × $71.649 = <code>$9.988</code></li><li><strong>Total descuentos</strong>: $169.050 + $105.000 + $9.000 + $9.988 = $293.038</li></ul><span class="total">Sueldo líquido: $1.206.962 (factor 80,5%)</span></div>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Supuestos del ejemplo</strong><p>AFP Habitat (1,27% comisión), FONASA, contrato indefinido, sin bonos ni horas extra, sin asignaciones no imponibles. UF julio 2026: $40.826 (solo para el tope imponible). UTM noviembre 2026: $72.440 (<a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">SII</a>).</p></div></aside>
+<div class="numeric-example"><div class="numeric-example__title">Cálculo paso a paso — sueldo bruto $1.500.000</div><ul><li><strong>Imponible</strong>: $1.500.000 (bajo el tope de 90 UF = $3.674.340)</li><li><strong>AFP</strong>: $1.500.000 × 11,27% = <code>$169.050</code></li><li><strong>Salud (7% FONASA)</strong>: $1.500.000 × 7% = <code>$105.000</code></li><li><strong>Cesantía (0,6%)</strong>: $1.500.000 × 0,6% = <code>$9.000</code></li><li><strong>Base tributable</strong>: $1.500.000 − ($169.050 + $105.000 + $9.000) = $1.216.950</li><li><strong>Base en UTM</strong>: $1.216.950 ÷ $72.440 ≈ 16,80 UTM</li><li>Tramo: 13,5 a 30 UTM → factor 4%, rebaja 0,54 UTM</li><li><strong>Impuesto</strong>: $1.216.950 × 4% − 0,54 × $72.440 = <code>$9.560</code></li><li><strong>Total descuentos</strong>: $169.050 + $105.000 + $9.000 + $9.560 = $292.610</li></ul><span class="total">Sueldo líquido: $1.207.390 (factor 80,5%)</span></div>
 <p>Para validar tu propio cálculo con tu AFP y plan de salud específicos, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>, que también permite simular cambios de AFP, FONASA vs Isapre y presupuestar el efecto de bonos imponibles.</p>`,
       },
       {
@@ -214,8 +214,8 @@ export const guias: Guia[] = [
         title: 'Casos numéricos: sueldo bajo, medio y alto',
         level: 2,
         html: `<p>Tres escenarios típicos para entender cómo cambia el factor bruto-líquido según el tramo del sueldo. Todos los ejemplos asumen AFP Habitat (1,27%), FONASA y contrato indefinido.</p>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $553.553 (ingreso mínimo)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$62.385</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$38.749</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.321</code></li><li><strong>Base tributable</strong>: $553.553 − $104.455 = $449.098</li><li><strong>Base UTM</strong>: $449.098 ÷ $71.649 ≈ 6,3 UTM (bajo 13,5 UTM exento)</li><li><strong>Impuesto</strong>: $0 (tramo exento)</li><li><strong>Total descuentos</strong>: $104.455</li></ul><span class="total">Líquido: $449.098 — factor 81,1% (sin impuesto único)</span></div>
-<div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000 (ya calculado arriba)</div><ul><li>Total descuentos: $293.038 (incluye $9.988 de impuesto único 4% marginal)</li></ul><span class="total">Líquido: $1.206.962 — factor 80,5%</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo bajo — bruto $553.553 (ingreso mínimo)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$62.385</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$38.749</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.321</code></li><li><strong>Base tributable</strong>: $553.553 − $104.455 = $449.098</li><li><strong>Base UTM</strong>: $449.098 ÷ $72.440 ≈ 6,2 UTM (bajo 13,5 UTM exento)</li><li><strong>Impuesto</strong>: $0 (tramo exento)</li><li><strong>Total descuentos</strong>: $104.455</li></ul><span class="total">Líquido: $449.098 — factor 81,1% (sin impuesto único)</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Sueldo medio — bruto $1.500.000 (ya calculado arriba)</div><ul><li>Total descuentos: $292.610 (incluye $9.560 de impuesto único 4% marginal, UTM noviembre 2026)</li></ul><span class="total">Líquido: $1.207.390 — factor 80,5%</span></div>
 <div class="numeric-example"><div class="numeric-example__title">Sueldo alto — bruto $4.000.000 (sobre tope imponible)</div><ul><li><strong>Imponible AFP/Salud</strong>: tope 90 UF = <code>$3.674.340</code> (no $4M)</li><li><strong>AFP (11,27% sobre tope)</strong>: <code>$414.098</code></li><li><strong>Salud FONASA (7% sobre tope)</strong>: <code>$257.204</code></li><li><strong>Imponible cesantía</strong>: $4.000.000 (bajo tope cesantía 135,2 UF ≈ $5,5M)</li><li><strong>Cesantía (0,6%)</strong>: <code>$24.000</code></li><li><strong>Base tributable</strong>: $4.000.000 − $695.302 = $3.304.698</li><li><strong>Base UTM</strong>: $3.304.698 ÷ $71.649 ≈ 46,12 UTM (tramo 30-50 UTM, factor 8%, rebaja 1,74 UTM)</li><li><strong>Impuesto</strong>: (46,12 × 0,08 − 1,74) × $71.649 ≈ <code>$139.687</code></li><li><strong>Total descuentos</strong>: $834.989</li></ul><span class="total">Líquido: $3.165.011 — factor 79,1% (a pesar del impuesto, el tope ayuda)</span></div>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Patrones que aparecen</strong><p>(1) En sueldo mínimo el factor es alto (~81%) porque no hay impuesto único. (2) En sueldo medio el factor cae al rondar 80% por el impuesto que empieza a morder. (3) En sueldo alto el factor vuelve a subir levemente porque el tope imponible "frena" las cotizaciones, aunque el impuesto crece.</p></div></aside>`,
       },
@@ -264,13 +264,14 @@ export const guias: Guia[] = [
 <table>
 <thead><tr><th>Líquido objetivo</th><th>Factor aproximado</th><th>Bruto estimado</th></tr></thead>
 <tbody>
-<tr><td>$500.000</td><td>÷ 0,82</td><td>$610.000</td></tr>
+<tr><td>$500.000</td><td>÷ 0,8113</td><td>≈ $616.300</td></tr>
 <tr><td>$1.000.000</td><td>÷ 0,80</td><td>$1.250.000</td></tr>
 <tr><td>$1.500.000</td><td>÷ 0,77</td><td>$1.950.000</td></tr>
 <tr><td>$2.500.000</td><td>÷ 0,72</td><td>$3.470.000</td></tr>
 <tr><td>$4.000.000</td><td>÷ 0,68</td><td>$5.880.000</td></tr>
 </tbody>
 </table>
+<div class="numeric-example"><div class="numeric-example__title">Comprobación — bruto $610.000 (AFP Habitat 11,27%, FONASA 7%, cesantía 0,6%)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$68.747</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$42.700</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.660</code></li><li><strong>Total descuentos</strong>: $115.107</li><li><strong>Impuesto único</strong>: $0 (base bajo 13,5 UTM, exento)</li></ul><span class="total">Líquido: $494.893 — por eso $610.000 brutos no alcanzan para $500.000 líquidos; se necesitan ≈ $616.300</span></div>
 <p>Nuestra calculadora hace este cálculo iterativo automáticamente cuando activas la opción "cálculo inverso". Para una negociación salarial, lleva ambas cifras (bruto y líquido) calculadas con tu AFP específica para evitar sorpresas.</p>`,
       },
       {
@@ -639,7 +640,7 @@ export const guias: Guia[] = [
         title: '¿Qué es la UTM y la UTA?',
         level: 2,
         html: `<p>La <strong>Unidad Tributaria Mensual</strong> es una cantidad de dinero en pesos que sirve como medida o referencia tributaria. Se actualiza por IPC y tiene un solo valor para cada mes. Por eso se usa en multas, límites, sanciones y parámetros legales que necesitan conservar poder adquisitivo sin cambiar la ley cada mes.</p>
-<p>En julio de 2026 la UTM oficial es <strong>$71.649</strong>. Una multa de 1,5 UTM cuyo valor se determina en julio equivale a $107.473,50 antes del redondeo aplicable. Si la resolución manda convertir al día de pago o al mes de la infracción, esa instrucción decide cuál UTM usar.</p>
+<p>En noviembre de 2026 la UTM oficial es <strong>$72.440</strong> (<a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">SII</a>). Una multa de 1,5 UTM cuyo valor se determina en noviembre equivale a $108.660 antes del redondeo aplicable. Si la resolución manda convertir al día de pago o al mes de la infracción, esa instrucción decide cuál UTM usar.</p>
 <div class="comparison">
 <div class="comparison__header"><div>UF</div><div>UTM</div></div>
 <div class="comparison__row"><div>Cambia diariamente</div><div>Cambia por mes</div></div>
@@ -648,8 +649,8 @@ export const guias: Guia[] = [
 <div class="comparison__row"><div>La fecha exacta suele importar</div><div>Normalmente importa el mes indicado</div></div>
 </div>
 <h3>UTA: dos usos que suelen confundirse</h3>
-<p>La tabla mensual del SII muestra una equivalencia UTA igual a la UTM de cada fila multiplicada por 12; para julio de 2026 son $859.788. Sin embargo, el artículo 8 del Código Tributario define la <strong>unidad tributaria anual del año comercial</strong> como la UTM vigente en el último mes de ese año multiplicada por doce. El valor anual definitivo de 2026 depende, por tanto, de diciembre.</p>
-<p>No uses la equivalencia UTA de julio como si fuera necesariamente la UTA final para la Operación Renta 2027. Revisa qué año comercial y qué tabla pide el formulario, tramo o sanción.</p>
+<p>La tabla mensual del SII muestra una equivalencia UTA igual a la UTM de cada fila multiplicada por 12; para noviembre de 2026 son $869.280. Sin embargo, el artículo 8 del Código Tributario define la <strong>unidad tributaria anual del año comercial</strong> como la UTM vigente en el último mes de ese año multiplicada por doce. El valor anual definitivo de 2026 depende, por tanto, de diciembre.</p>
+<p>No uses la equivalencia UTA de noviembre como si fuera necesariamente la UTA final para la Operación Renta 2027. Revisa qué año comercial y qué tabla pide el formulario, tramo o sanción.</p>
 <p>Convierte con el <a href="/calculadoras/calculadora-uf-clp">conversor UF→CLP</a> o el <a href="/calculadoras/calculadora-utm-clp">conversor UTM→CLP</a>, anotando junto al resultado la fecha o mes. Un número sin período no es auditable.</p>`,
       },
       {
