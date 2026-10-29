@@ -323,27 +323,83 @@ export const HORAS_EXTRA = {
 };
 
 /**
- * Jornada laboral ordinaria vigente.
+ * Jornada laboral ordinaria máxima (art. 22 CdT).
  *
- * Calendario Ley 21.561 ("Ley 40 horas"):
- *  - Hasta abril 2024: 45 h/semana (jornada histórica).
- *  - Abril 2024 – abril 2026: 44 h.
- *  - Abril 2026 – abril 2028: 42 h. ← VIGENTE.
- *  - Desde abril 2028: 40 h.
+ * Calendario Ley 21.561 ("Ley 40 horas"), art. 1.º transitorio:
+ *  - Desde 26-04-2024: 44 h/semana.
+ *  - Desde 26-04-2026: 42 h. ← VIGENTE al 29-10-2026.
+ *  - Desde 26-04-2028: 40 h.
+ * Fuentes: DT https://dt.gob.cl/portal/1626/w3-article-129225.html ;
+ * BCN https://www.bcn.cl/leychile/navegar?idNorma=1190878
  *
- * Las calculadoras deben usar `JORNADA_LEGAL.actual` por defecto y
- * permitir al usuario seleccionar otra si tiene jornada especial.
+ * `JORNADA_LEGAL.actual` ya no es un número fijo: es un getter que lee
+ * `calendario` con la fecha de hoy en Chile, así que el 26-04-2028 pasa
+ * a 40 sin editar este archivo. Para cálculos con fecha propia, usar
+ * `getJornadaLegalVigente(fecha)`.
  */
+export interface TramoJornadaLegal {
+  /** ISO AAAA-MM-DD, fecha de Chile continental. */
+  vigenteDesde: string;
+  horas: number;
+}
+
+const CALENDARIO_JORNADA_LEGAL: readonly TramoJornadaLegal[] = [
+  { vigenteDesde: '1900-01-01', horas: 48 },
+  { vigenteDesde: '2005-01-01', horas: 45 },
+  { vigenteDesde: '2024-04-26', horas: 44 },
+  { vigenteDesde: '2026-04-26', horas: 42 },
+  { vigenteDesde: '2028-04-26', horas: 40 },
+];
+
+/**
+ * Fecha calendario (AAAA-MM-DD) en America/Santiago. Evita que en el
+ * servidor (UTC) el cambio se adelante a las 20:00/21:00 del día anterior.
+ */
+export function fechaISOChile(fecha: Date = new Date()): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Santiago',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(fecha);
+}
+
+/** Tramo del calendario vigente en la fecha indicada (default: hoy en Chile). */
+export function getTramoJornadaLegal(fecha: Date = new Date()): TramoJornadaLegal {
+  const hoy = fechaISOChile(fecha);
+  let vigente = CALENDARIO_JORNADA_LEGAL[0];
+  for (const tramo of CALENDARIO_JORNADA_LEGAL) {
+    if (tramo.vigenteDesde <= hoy) vigente = tramo;
+    else break;
+  }
+  return vigente;
+}
+
+/**
+ * Horas semanales de la jornada ordinaria máxima vigente en la fecha.
+ *
+ * @example
+ *   getJornadaLegalVigente(new Date('2026-10-29T12:00:00-03:00')) // 42
+ *   getJornadaLegalVigente(new Date('2028-04-26T12:00:00-04:00')) // 40
+ */
+export function getJornadaLegalVigente(fecha: Date = new Date()): number {
+  return getTramoJornadaLegal(fecha).horas;
+}
+
+/** Próximo cambio anunciado después de la fecha, o null si no hay. */
+export function getProximoCambioJornada(
+  fecha: Date = new Date(),
+): TramoJornadaLegal | null {
+  const hoy = fechaISOChile(fecha);
+  return CALENDARIO_JORNADA_LEGAL.find((t) => t.vigenteDesde > hoy) ?? null;
+}
+
 export const JORNADA_LEGAL = {
-  /** Jornada vigente al consultar (mayo 2026 → 42h). */
-  actual: 42,
-  calendario: [
-    { vigenteDesde: '1900-01-01', horas: 48 },
-    { vigenteDesde: '2005-01-01', horas: 45 },
-    { vigenteDesde: '2024-04-26', horas: 44 },
-    { vigenteDesde: '2026-04-26', horas: 42 },
-    { vigenteDesde: '2028-04-26', horas: 40 },
-  ],
+  /** Jornada vigente hoy (42 h desde el 26-04-2026; 40 h desde el 26-04-2028). */
+  get actual(): number {
+    return getJornadaLegalVigente();
+  },
+  calendario: CALENDARIO_JORNADA_LEGAL,
 };
 
 /**

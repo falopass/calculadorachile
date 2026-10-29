@@ -129,8 +129,9 @@ function formatDDMMYYYY(date: Date): string {
 
 /**
  * Título SEO con el valor en vivo. La plantilla del root layout
- * agrega " | CalculaChile". Devuelve `null` si la fecha no se
- * puede interpretar en America/Santiago.
+ * agrega " | CalculaChile", salvo en la UF: su página usa
+ * `title.absolute` (TITLE_SIN_SUFIJO en calculadoras/[slug]/page.tsx).
+ * Devuelve `null` si la fecha no se puede interpretar en America/Santiago.
  */
 export function buildLiveValueTitle(
   kind: LiveKind,
@@ -148,7 +149,7 @@ export function buildLiveValueTitle(
   }
   const fecha = `${String(parts.day).padStart(2, '0')}-${String(parts.month).padStart(2, '0')}-${parts.year}`;
   if (kind === 'uf') {
-    return `UF hoy ${fecha}: ${formatCLP2(value)} | UF a pesos`;
+    return `UF hoy ${fecha}: ${formatCLP2(value)} | Tabla UF a pesos`;
   }
   return `Dólar hoy ${fecha}: ${formatCLP2(value)} | Dólar a pesos`;
 }

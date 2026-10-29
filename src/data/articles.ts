@@ -16,10 +16,11 @@
 //     enlaza a la guía pillar correspondiente.
 // ============================================
 
-import { formatCLP } from '@/lib/formatters';
+import { formatCLP, formatPercentage } from '@/lib/formatters';
 import { MESES_ES_CL } from '@/lib/seo/live-value-title';
-import { INGRESO_MINIMO } from '@/lib/values/constants';
+import { AFP, GRATIFICACION, INGRESO_MINIMO, JORNADA_LEGAL } from '@/lib/values/constants';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
+import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
 
 export interface ArticleSource {
   label: string;
@@ -93,6 +94,61 @@ function liquidoSueldoMinimo(afp: 'uno' | 'provida'): string {
     }).liquido,
   );
 }
+
+// E-019 (part time de 20 horas): todos los montos salen de las constantes
+// y de las mismas funciones de las calculadoras de sueldo part time y
+// sueldo líquido (Fonasa), nunca escritos a mano.
+type AfpId = keyof typeof AFP;
+
+function partTime20() {
+  const horas = 20;
+  const pt = calculateSueldoPartTime({ horasSemanales: horas });
+  const grat = Math.round((pt.minimoLegal * GRATIFICACION.porcentaje) / 100);
+  const jornada = JORNADA_LEGAL.actual;
+  const topeMes = (INGRESO_MINIMO.mensual * GRATIFICACION.tope_475_inm * horas) / jornada / 12;
+  const liq = (bruto: number, afp: AfpId, indefinido = true) =>
+    calculateSueldoLiquido({
+      sueldoBruto: bruto,
+      afp,
+      saludTipo: 'fonasa',
+      contratoIndefinido: indefinido,
+    });
+  const afps = (Object.keys(AFP) as AfpId[]).sort((a, b) => AFP[a].comision - AFP[b].comision);
+  const filas = afps.map((id) => ({
+    id,
+    nombre: AFP[id].nombre,
+    comision: AFP[id].comision,
+    sin: liq(pt.minimoLegal, id).liquido,
+    con: liq(pt.minimoLegal + grat, id).liquido,
+  }));
+  // Tramo vigente y próximo cambio de la jornada completa (Ley 21.561),
+  // leídos de JORNADA_LEGAL.calendario.
+  const idx = JORNADA_LEGAL.calendario.findIndex((t) => t.horas === jornada);
+  const tramo = JORNADA_LEGAL.calendario[idx];
+  const proximo = JORNADA_LEGAL.calendario[idx + 1] ?? null;
+  return {
+    pt,
+    grat,
+    imponible: pt.minimoLegal + grat,
+    jornada,
+    tramo,
+    proximo,
+    topeAnual: Math.round(topeMes * 12),
+    topeMes: Math.round(topeMes),
+    umbral: Math.round(topeMes / (GRATIFICACION.porcentaje / 100)),
+    filas,
+    liqMin: Math.min(...filas.map((f) => f.sin)),
+    liqMax: Math.max(...filas.map((f) => f.sin)),
+    liqgMin: Math.min(...filas.map((f) => f.con)),
+    liqgMax: Math.max(...filas.map((f) => f.con)),
+    ejemplo: liq(pt.minimoLegal + grat, 'uno'),
+    pfCon: liq(pt.minimoLegal + grat, 'uno', false).liquido,
+    pfSin: liq(pt.minimoLegal, 'uno', false).liquido,
+    min21: calculateSueldoPartTime({ horasSemanales: Math.floor(jornada / 2) }).minimoLegal,
+  };
+}
+
+const PT20 = partTime20();
 
 export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es de <strong>${formatCLP(INGRESO_MINIMO.mensual)} brutos al mes</strong> desde el ${formatFechaLarga(INGRESO_MINIMO.vigente_desde)} (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Ley ${INGRESO_MINIMO.ley}, Dirección del Trabajo</a>) y es el mismo monto para cada mes hasta el próximo reajuste. Con Fonasa y contrato indefinido quedan entre <strong>${liquidoSueldoMinimo('provida')}</strong> y <strong>${liquidoSueldoMinimo('uno')}</strong> líquidos, según tu AFP.</p>`;
 
@@ -5120,7 +5176,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <h2>El valor hora de referencia</h2>
 <p>Para comparar lo pactado con lo mínimo sirve el <strong>valor hora</strong>. La fórmula de la hora ordinaria es <strong>sueldo ÷ 30 × 28 ÷ (4 × horas semanales)</strong>. Sobre el mínimo de 30 horas ($395.395), el resultado es <strong>$3.075 por hora</strong>: es la referencia para revisar si lo que ofrece un contrato part-time está por encima del piso legal.</p>
 <p>La fórmula convierte el sueldo mensual a un valor diario (÷30), lo lleva a semanas de referencia (×28, es decir los días trabajados de cuatro semanas) y lo reparte entre las horas de ese período (÷ por 4 veces las horas semanales). Es la misma mecánica que se usa para la hora ordinaria en general; en el part-time sirve para expresar el piso en una unidad comparable con ofertas que se pactan por hora.</p>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplos con el IMM $553.553</div><ul><li>30 horas al mínimo → $395.395 mensuales; valor hora $3.075.</li><li>20 horas al mínimo proporcional → $263.597 ($553.553 × 20 ÷ 42).</li><li>36 horas → $553.553: corresponde el IMM íntegro, no hay proporcionalidad.</li><li>20 horas pactadas en $250.000 → faltan $13.597 para llegar al mínimo de $263.597.</li></ul><span class="total">El mínimo proporcional es piso: un sueldo pactado por debajo es insuficiente</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos con el IMM $553.553</div><ul><li>30 horas al mínimo → $395.395 mensuales; valor hora $3.075.</li><li><a href="/blog/part-time-20-horas-sueldo-liquido">20 horas al mínimo proporcional</a> → $263.597 ($553.553 × 20 ÷ 42).</li><li>36 horas → $553.553: corresponde el IMM íntegro, no hay proporcionalidad.</li><li>20 horas pactadas en $250.000 → faltan $13.597 para llegar al mínimo de $263.597.</li></ul><span class="total">El mínimo proporcional es piso: un sueldo pactado por debajo es insuficiente</span></div>
 <p>El último ejemplo muestra para qué sirve la cuenta: un contrato de 20 horas que ofrece $250.000 parece razonable en términos absolutos, pero queda <strong>$13.597 bajo el mínimo proporcional</strong> de $263.597. Sin la fórmula es difícil notar la diferencia; con ella, el incumplimiento es un número concreto.</p>
 <p>El ejercicio en reversa también es útil: con un valor hora pactado y las horas semanales, se puede estimar el sueldo mensual equivalente y compararlo con el piso proporcional. Un valor hora por encima de $3.075 aplicado a 30 horas semanales produce un sueldo por sobre el mínimo; por debajo, aunque el total mensual suene razonable, el contrato está bajo el piso.</p>
 <p>La <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part-time</a> hace exactamente este cálculo: con las horas pactadas y el sueldo acordado muestra el mínimo proporcional, el valor hora y cuánto falta —o sobra— frente al piso legal.</p>
@@ -5146,6 +5202,118 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60136.html" target="_blank" rel="noopener">ficha de jornada parcial y remuneración de la Dirección del Trabajo</a> y la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60157.html" target="_blank" rel="noopener">norma de horas extraordinarias del DT</a>.</p>`,
+  },
+  {
+    slug: 'part-time-20-horas-sueldo-liquido',
+    title: 'Part time de 20 horas en Chile: sueldo líquido, gratificación y reglas',
+    description: `Con 20 horas semanales el mínimo legal es ${formatCLP(PT20.pt.minimoLegal)}. Cuánto queda líquido según tu AFP, con y sin gratificación, y qué reglas tiene el contrato part time.`,
+    date: '2026-10-29',
+    updatedAt: '2026-10-29',
+    category: 'laboral',
+    readingTime: 6,
+    relatedGuia: 'sueldo-liquido-chile',
+    embedCalculatorId: 'sueldo-part-time',
+    seoTitle: `Cuánto gana un part time de 20 horas (${INGRESO_MINIMO.vigente_desde.slice(0, 4)})`,
+    seoDescription: `Con 20 horas semanales el sueldo base mínimo es ${formatCLP(PT20.pt.minimoLegal)}. Cuánto queda líquido con y sin gratificación, cotizaciones y reglas del contrato part time.`,
+    keywords: [
+      'cuánto gana un part time de 20 horas',
+      'sueldo líquido part time 20 horas',
+      'contrato part time 20 horas',
+      'si trabajo 20 horas semanales cuánto debo ganar',
+      'sueldo media jornada chile',
+    ],
+    relatedCalculators: [
+      'calculadora-sueldo-part-time',
+      'calculadora-sueldo-liquido',
+      'calculadora-gratificacion-legal',
+      'calculadora-horas-extra',
+      'calculadora-finiquito',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto gana un part time de 20 horas en Chile?',
+        answer: `El sueldo base no puede ser menor a ${formatCLP(PT20.pt.minimoLegal)} brutos al mes (${formatCLP(INGRESO_MINIMO.mensual)} × 20 ÷ ${PT20.jornada}). Con Fonasa y contrato indefinido quedan entre ${formatCLP(PT20.liqMin)} y ${formatCLP(PT20.liqMax)} líquidos según la AFP, o entre ${formatCLP(PT20.liqgMin)} y ${formatCLP(PT20.liqgMax)} si te pagan la gratificación mensual del 25%.`,
+      },
+      {
+        question: 'Si trabajo 20 horas semanales, ¿cuánto debo ganar como mínimo?',
+        answer: `${formatCLP(PT20.pt.minimoLegal)} brutos al mes, el ingreso mínimo proporcional a 20 de las ${PT20.jornada} horas de la jornada completa. Es un piso: el empleador puede pagar más, nunca menos. El valor hora de ese mínimo es ${formatCLP(PT20.pt.valorHora)}.`,
+      },
+      {
+        question: '¿Cuánto es el sueldo líquido de un part time de 20 horas?',
+        answer: `Con el sueldo base mínimo, Fonasa y contrato indefinido, entre ${formatCLP(PT20.liqMin)} y ${formatCLP(PT20.liqMax)} sin gratificación y entre ${formatCLP(PT20.liqgMin)} y ${formatCLP(PT20.liqgMax)} con ella. Con contrato a plazo fijo queda un poco más, porque no pagas el 0,6% del seguro de cesantía.`,
+      },
+      {
+        question: '¿Cuánto es el sueldo de media jornada en Chile?',
+        answer: `La ley no define la "media jornada": habla de jornada parcial, de hasta 30 horas semanales. Si la entiendes como la mitad de la jornada completa de ${PT20.jornada} horas, es decir ${Math.floor(PT20.jornada / 2)} horas, el mínimo proporcional es ${formatCLP(PT20.min21)} al mes.`,
+      },
+      {
+        question: '¿Qué reglas tiene un contrato part time de 20 horas?',
+        answer:
+          'Jornada diaria continua de hasta 10 horas, colación de entre 30 minutos y 1 hora, horas extra pactadas por escrito de hasta 2 por día, los mismos 15 días hábiles de vacaciones que en jornada completa y todos los demás derechos del Código del Trabajo.',
+      },
+    ],
+    sources: [
+      { label: 'Dirección del Trabajo — Ingreso mínimo en jornada parcial', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60136.html' },
+      { label: 'Dirección del Trabajo — Valor del ingreso mínimo mensual', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html' },
+      { label: 'Dirección del Trabajo — Jornada parcial (art. 40 bis)', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60756.html' },
+      { label: 'Dirección del Trabajo — Derechos en jornada parcial', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60089.html' },
+      { label: 'Dirección del Trabajo — Jornada diaria y colación en jornada parcial', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60085.html' },
+      { label: 'Dirección del Trabajo — Ord. 339/27 sobre jornada parcial', url: 'https://dt.gob.cl/legislacion/1624/w3-article-63196.html' },
+      { label: 'Dirección del Trabajo — Feriado anual en cualquier jornada', url: 'https://dt.gob.cl/portal/1628/w3-article-60177.html' },
+      { label: 'Dirección del Trabajo — Jornada de 42 horas', url: 'https://dt.gob.cl/portal/1626/w3-article-129225.html' },
+      { label: 'Superintendencia de Pensiones — Comisiones de las AFP', url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html' },
+      { label: 'Superintendencia de Pensiones — Seguro de cesantía', url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-3590.html' },
+      { label: 'SII — Impuesto único de segunda categoría', url: 'https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm' },
+      { label: 'BCN — Ley 21.561', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1190878' },
+      { label: 'BCN — Ley 21.830', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354' },
+    ],
+    content: `<p class="article-lead">Con un contrato de <strong>20 horas semanales</strong>, el sueldo base no puede ser menor a <strong>${formatCLP(PT20.pt.minimoLegal)}</strong> al mes: es el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)} multiplicado por 20 y dividido por ${PT20.jornada}, la jornada completa vigente (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">Dirección del Trabajo</a>). Con ese sueldo, Fonasa y contrato indefinido, te quedan entre <strong>${formatCLP(PT20.liqMin)} y ${formatCLP(PT20.liqMax)} líquidos</strong> según tu AFP. Si además te pagan la gratificación mensual del 25%, quedan entre <strong>${formatCLP(PT20.liqgMin)} y ${formatCLP(PT20.liqgMax)}</strong>. Si tu jornada es otra, <a href="/calculadoras/calculadora-sueldo-part-time">calcula el mínimo de tu jornada</a>.</p>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>La cuenta en una línea</strong><p>${formatCLP(INGRESO_MINIMO.mensual)} × 20 ÷ ${PT20.jornada} = ${formatCLP(PT20.pt.minimoLegal)} brutos. Menos AFP, salud y seguro de cesantía, entre ${formatCLP(PT20.liqMin)} y ${formatCLP(PT20.liqMax)} líquidos sin gratificación.</p></div></aside>
+
+<h2>De bruto a líquido con 20 horas: el cálculo paso a paso</h2>
+<p>Este ejemplo usa el sueldo base mínimo de 20 horas, AFP Uno, Fonasa, contrato indefinido y la gratificación mensual del 25% (artículo 50 del Código del Trabajo, <a href="https://www.dt.gob.cl/portal/1626/w3-article-99034.html" target="_blank" rel="noopener">DT</a>).</p>
+<div class="numeric-example"><div class="numeric-example__title">Part time de 20 horas, AFP Uno y Fonasa</div><ul><li>Sueldo base: ${formatCLP(PT20.pt.minimoLegal)}</li><li>Gratificación (25%): ${formatCLP(PT20.grat)}. Queda bajo el tope proporcional de ${formatCLP(PT20.topeMes)} al mes.</li><li>Total imponible: ${formatCLP(PT20.imponible)}</li><li>AFP Uno (10% + comisión de ${formatPercentage(AFP.uno.comision, 2)}): −${formatCLP(PT20.ejemplo.descuentos.afp)} (<a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>)</li><li>Salud Fonasa (7%): −${formatCLP(PT20.ejemplo.descuentos.salud)} (<a href="https://www.spensiones.cl/portal/institucional/594/w3-article-12683.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>)</li><li>Seguro de cesantía (0,6%, contrato indefinido): −${formatCLP(PT20.ejemplo.descuentos.seguroCesantia)} (<a href="https://www.spensiones.cl/portal/institucional/594/w3-article-3590.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>)</li><li>Impuesto único: $0. La renta queda en el tramo exento, que llega hasta 13,5 UTM al mes (<a href="https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm" target="_blank" rel="noopener">SII</a>).</li></ul><span class="total">Total: ${formatCLP(PT20.ejemplo.liquido)} líquidos</span></div>
+<p>La tabla muestra el líquido con cada AFP. Las diferencias vienen solo de la comisión de cada una; el 10% para tu cuenta es igual en todas.</p>
+<table>
+<thead>
+<tr><th>AFP (comisión)</th><th>Líquido sin gratificación</th><th>Líquido con gratificación del 25%</th></tr>
+</thead>
+<tbody>
+${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)})</td><td>${formatCLP(f.sin)}</td><td>${formatCLP(f.con)}</td></tr>`).join('\n')}
+</tbody>
+</table>
+
+<h3>¿Y si mi contrato es a plazo fijo?</h3>
+<p>Con contrato a plazo fijo, el trabajador no paga el 0,6% del seguro de cesantía: lo financia el empleador (<a href="https://www.spensiones.cl/portal/institucional/594/w3-article-3590.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>). Con AFP Uno te quedan ${formatCLP(PT20.pfCon)} con gratificación y ${formatCLP(PT20.pfSin)} sin ella.</p>
+<p>Para otro sueldo, otra AFP o una isapre, usa la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>
+
+<h2>La gratificación en un part time</h2>
+<p>La gratificación legal también corre en un part time, con las mismas dos modalidades que en jornada completa. La más común es el artículo 50: el 25% de lo que ganas en el año, con un tope de 4,75 ingresos mínimos. En jornada parcial, ese tope <strong>puede reducirse</strong> en proporción a las horas que pactaste frente a la jornada ordinaria (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60089.html" target="_blank" rel="noopener">DT</a>; <a href="https://dt.gob.cl/legislacion/1624/w3-article-63196.html" target="_blank" rel="noopener">Ord. 339/27</a>).</p>
+<p>Con 20 horas, si el empleador aplica esa rebaja, el tope queda en <strong>${formatCLP(PT20.topeAnual)} al año</strong>, o <strong>${formatCLP(PT20.topeMes)} al mes</strong>. Con el sueldo base mínimo, el 25% (${formatCLP(PT20.grat)}) queda bajo ese tope, así que la rebaja no cambia nada. Solo empieza a importar si tu sueldo base supera los ${formatCLP(PT20.umbral)} al mes.</p>
+<p>Calcula tu caso en la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a>.</p>
+
+<h2>Reglas del contrato part time</h2>
+<p>La ley no habla de "part time" ni de "media jornada" sino de <strong>jornada parcial</strong>: la que se pacta por 30 horas semanales o menos (artículo 40 bis del Código del Trabajo, <a href="https://www.dt.gob.cl/portal/1628/w3-article-60756.html" target="_blank" rel="noopener">DT</a>). Un contrato de 20 horas cumple esa condición, y estas son sus reglas:</p>
+<ol class="steps">
+<li><strong>Jornada diaria continua.</strong> Puede durar hasta 10 horas al día y solo se interrumpe para colación, entre media hora y una hora (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60085.html" target="_blank" rel="noopener">DT</a>). Si tu jornada diaria es corta, no corresponde cortarla para colación (<a href="https://dt.gob.cl/legislacion/1624/w3-article-63196.html" target="_blank" rel="noopener">Ord. 339/27</a>).</li>
+<li><strong>Horas extra.</strong> Se pueden pactar, con las reglas generales: por escrito y hasta dos por día. Su base de cálculo no puede ser menor al ingreso mínimo proporcional (artículo 40 bis A, <a href="https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-156999.html" target="_blank" rel="noopener">DT</a>; <a href="https://dt.gob.cl/legislacion/1624/w3-article-63196.html" target="_blank" rel="noopener">Ord. 339/27</a>). Calcula su valor en la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a>.</li>
+<li><strong>Distribución de la jornada.</strong> El contrato puede dejar pactadas varias alternativas de horario. El empleador elige una y te la avisa con al menos una semana de anticipación (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60089.html" target="_blank" rel="noopener">DT</a>).</li>
+<li><strong>Vacaciones.</strong> Con más de un año en la empresa tienes los mismos 15 días hábiles de feriado anual que en jornada completa, pagados con tu remuneración habitual. No se reducen por trabajar menos horas ni menos días a la semana (<a href="https://dt.gob.cl/portal/1628/w3-article-60177.html" target="_blank" rel="noopener">DT</a>; <a href="https://dt.gob.cl/legislacion/1624/w3-article-63196.html" target="_blank" rel="noopener">Ord. 339/27</a>).</li>
+<li><strong>Los demás derechos.</strong> Tienes todos los demás derechos de un trabajador de jornada completa (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60089.html" target="_blank" rel="noopener">DT</a>).</li>
+<li><strong>Indemnización por años de servicio.</strong> Se calcula con el promedio de lo que ganaste durante el contrato, o en sus últimos 11 años, reajustado por IPC. Si la regla general del artículo 163 te da más, se paga esa (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60089.html" target="_blank" rel="noopener">DT</a>). Estima tu caso en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</li>
+</ol>
+
+<h2>¿Y si son más de 20 horas?</h2>
+<p>Hasta 30 horas semanales el mínimo sigue siendo proporcional: ingreso mínimo × horas ÷ ${PT20.jornada}. Desde 31 horas y hasta ${PT20.jornada - 1} horas es una jornada intermedia, y corresponde el ingreso mínimo completo de ${formatCLP(INGRESO_MINIMO.mensual)}, no una parte (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">DT</a>; <a href="https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-147716.html" target="_blank" rel="noopener">Ord. 355 de 2026</a>). La <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part time</a> tiene la tabla con el mínimo de cada jornada, y el caso de 30 horas está explicado en <a href="/blog/sueldo-part-time-30-horas-2026-minimo-proporcional">sueldo part time de 30 horas</a>.</p>
+
+<h2>La jornada completa que se usa para el cálculo</h2>
+<p>La jornada completa vigente es de <strong>${PT20.jornada} horas semanales desde el ${formatFechaLarga(PT20.tramo.vigenteDesde)}</strong>${PT20.proximo ? `, y baja a ${PT20.proximo.horas} horas el ${formatFechaLarga(PT20.proximo.vigenteDesde)}` : ''} (<a href="https://dt.gob.cl/portal/1626/w3-article-129225.html" target="_blank" rel="noopener">DT</a>; <a href="https://www.bcn.cl/leychile/navegar?idNorma=1190878" target="_blank" rel="noopener">Ley 21.561</a>).${PT20.proximo ? ' Como el mínimo de un part time se divide por la jornada completa, ese cambio subirá el mínimo de 20 horas.' : ''} Además, el ingreso mínimo se reajusta desde el 1 de enero de 2027 (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a>). Actualizaremos esta página con cada valor oficial.</p>
+
+<p>Para entender cada descuento de tu liquidación, revisa la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido en Chile</a> y el post del <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo 2026 y su líquido</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 29 de octubre de 2026 con fichas y dictámenes de la Dirección del Trabajo, la Superintendencia de Pensiones, el SII y la BCN (lista de fuentes al pie).</p>`,
   },
   {
     slug: 'aporte-familiar-permanente-2026-cobro-plazo',

@@ -27,6 +27,11 @@
  * ============================================================================
  */
 
+import { formatCLP } from '@/lib/formatters';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+
+const TOPE_GRAT = topeGratificacion();
+
 export const seoOverrides: Record<string, { seoTitle: string; seoDescription: string }> = {
   // ══════════════════════════════════════════════════════════════════════════
   // CALCULADORAS — GSC 24 h: alta impresión / bajo CTR o pos media
@@ -69,15 +74,15 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-vacaciones-proporcionales': {
-    seoTitle: 'Vacaciones proporcionales: calcula días y pesos', // 47
+    seoTitle: 'Vacaciones proporcionales: tabla por meses y pesos', // 50
     seoDescription:
-      'Calcula tus vacaciones proporcionales (feriado proporcional) en días y pesos: 1,25 días hábiles por mes trabajado, según el Código del Trabajo. Para finiquito.', // 158
+      'Calcula tus vacaciones proporcionales: 1,25 días hábiles por mes, pagados en días corridos. Tabla de 1 a 11 meses y ejemplo de 6 meses según la DT.', // 147
   },
 
+  // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO
   'calculadora-gratificacion-legal': {
-    seoTitle: 'Gratificación Legal 2026: ¿cuánto te toca en pesos?', // 53
-    seoDescription:
-      'Calcula la gratificación legal 2026: 25% del sueldo con tope 4,75 IMM ($553.553). Modalidad mensual o anual. Datos Código del Trabajo.', // 136
+    seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.mensual)} al mes`, // 43
+    seoDescription: `Tope de gratificación legal ${TOPE_GRAT.anio}: 4,75 ingresos mínimos al año, ${formatCLP(TOPE_GRAT.anual)} o ${formatCLP(TOPE_GRAT.mensual)} al mes. Calcula el 25% de tu sueldo${TOPE_GRAT.vigenteDesde === '2026-05-01' ? ' y revisa el cambio de 2027' : ''}.`, // 149 (con la frase del cambio)
   },
 
   'calculadora-horas-extra': {
@@ -150,9 +155,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- CONVERSIONES E INDICADORES ECONÓMICOS ---
   'calculadora-uf-clp': {
-    seoTitle: 'UF a Pesos Hoy 2026: convierte al instante oficial', // 51
+    seoTitle: 'UF a pesos hoy: conversor y tabla de montos', // 43, sin sufijo (title.absolute)
     seoDescription:
-      'Convierte UF a pesos chilenos y de CLP a UF con el valor oficial de hoy del Banco Central. Ideal hipotecario, arriendo y contratos.', // 133
+      'UF de hoy y tabla de UF a pesos: 1, 24, 100, 200, 1.000, 2.500, 3.000 y 6.000 UF con el valor oficial del día y dónde ver la UF de una fecha.', // 141
   },
 
   'calculadora-utm-clp': {
@@ -443,10 +448,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Simula el Seguro de Cesantía AFC: monto del primer giro (70% de tu remuneración), giros según tu cuenta individual, topes 2026 y requisitos. Gratis.',
   },
 
+  // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
   'calculadora-licencia-medica': {
-    seoTitle: 'Licencia Médica 2026: cuánto pagan por tus días',
+    seoTitle: 'Licencia médica: ¿cuántos días pagan? Tabla y cálculo 2026', // 58
     seoDescription:
-      'Calcula cuánto paga tu licencia médica: 1/30 de tu remuneración promedio con piso legal; desde el día 1 si superas 10 días (si no, desde el 4º). SUSESO.',
+      'Si la licencia dura 10 días o menos, no se pagan los 3 primeros; desde 11 días se paga desde el día 1. Tabla de 1 a 15 días y quién paga. SUSESO.', // 145
   },
 
   'calculadora-aporte-familiar-permanente': {

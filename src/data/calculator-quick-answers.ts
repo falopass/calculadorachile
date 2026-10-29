@@ -14,10 +14,17 @@
 // ============================================
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
-import { formatCLP2, MESES_ES_CL, toSantiagoParts } from '@/lib/seo/live-value-title';
+import {
+  formatCLP2,
+  formatDDMMYYYY,
+  MESES_ES_CL,
+  toSantiagoParts,
+} from '@/lib/seo/live-value-title';
 import {
   INGRESO_MINIMO,
   JORNADA_LEGAL,
+  getTramoJornadaLegal,
+  getProximoCambioJornada,
   ASIGNACION_FAMILIAR_2026,
   CONTRIBUCIONES_BIENES_RAICES,
   TOPE_IMPOSITIVO,
@@ -32,6 +39,7 @@ import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios'
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateGratificacion } from '@/lib/calculations/gratificacion';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateImpuestoSegundaCategoria } from '@/lib/calculations/impuesto-segunda-categoria';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateHorasExtra } from '@/lib/calculations/horas-extra';
@@ -42,6 +50,7 @@ import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
 import { calculateFactorHoraExtra } from '@/lib/calculations/factor-hora-extra';
 import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf';
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
+import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 
 export interface QuickAnswerLink {
   text: string;
@@ -87,6 +96,13 @@ interface QuickAnswerContext {
   utmFresca?: { value: number; date: string } | null;
   /** Fecha del valor de `utm` (dato en vivo o snapshot), para indicar su mes. */
   utmFecha?: string;
+  /** Fecha del valor de `uf` (dato en vivo o snapshot). */
+  ufFecha?: string;
+  /**
+   * true solo si la UF viene del Banco Central y su fecha es hoy en Santiago.
+   * Solo entonces el lead dice "Hoy" y atribuye el valor al Banco Central.
+   */
+  ufFresca?: boolean;
 }
 
 /** " (octubre de 2026)" según la fecha del valor usado en la tabla de UTM. */
@@ -107,6 +123,28 @@ function withLinks(parts: QuickAnswerPart[]): Pick<QuickAnswer, 'lead' | 'leadPa
 const SII_UTM_URL = 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm';
 const BCN_CODIGO_TRABAJO_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
 const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.html';
+const BCCH_INDICADORES_URL = 'https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx';
+const BCCH_UF_METODOLOGIA_URL = 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf';
+const BCCH_UF_SERIE_URL = 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF';
+const SII_UF_URL = 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm';
+/** Montos de la tabla UF a pesos (E-018: búsquedas "N uf a pesos" en GSC). */
+const UF_MONTOS_TABLA = [
+  1, 10, 24, 30, 50, 80, 90, 100, 200, 400, 500, 1_000, 1_100, 1_200, 2_000, 2_500, 3_000, 5_000,
+  6_000, 6_500,
+];
+const DT_GRATIFICACION_URL = 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html';
+const DT_IMM_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
+const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
+/** Vigencia del IMM fijado por la Ley 21.830 (E-014). */
+const IMM_LEY_21830_DESDE = '2026-05-01';
+const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
+const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
+const DT_LICENCIA_CARENCIA_URL = 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html';
+const SUSESO_SIL_URL = 'https://www.suseso.gob.cl/606/w3-article-19931.html';
+const SUSESO_QUIEN_PAGA_URL = 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html';
+
+/** Remuneración neta del ejemplo de licencia médica (igual que la metodología). */
+export const LICENCIA_EJEMPLO_NETA = 900_000;
 
 /** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
 export function buildUTMLeadParts(
@@ -135,6 +173,17 @@ function formatNum(value: number, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
+}
+
+/** Días con hasta 2 decimales y sin ceros sobrantes (10,5; 7; 13,75). */
+function formatDias(value: number): string {
+  return value.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+}
+
+/** '2026-04-26' → '26 de abril de 2026'. */
+function fechaLargaISO(iso: string): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  return `${day} de ${MESES_ES_CL[month - 1]} de ${year}`;
 }
 
 /**
@@ -202,27 +251,71 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'vacaciones-proporcionales': {
-      const casos: [number, number][] = [
-        [553_553, 4],
-        [800_000, 6],
-        [1_200_000, 8],
-      ];
-      const rows = casos.map(([sueldoBruto, mesesTrabajados]) => {
-        const r = calculateVacaciones({ sueldoBruto, mesesTrabajados });
+      // E-017: cifras generadas con calculateVacaciones (incluye ORD. 826/13).
+      // Mantención: antes del 01-01-2027 mover FECHA_EJEMPLO a 2027 y revisar los textos.
+      const FECHA_EJEMPLO = '2026-11-30'; // lunes
+      const vac = (sueldoBruto: number, mesesTrabajados: number, fechaTermino?: string) =>
+        calculateVacaciones({ sueldoBruto, mesesTrabajados, fechaTermino });
+      const rows = Array.from({ length: 11 }, (_, i) => {
+        const m = i + 1;
+        const rIMM = vac(INGRESO_MINIMO.mensual, m, FECHA_EJEMPLO);
+        const r800 = vac(800_000, m, FECHA_EJEMPLO);
         return [
-          formatCLP(sueldoBruto),
-          `${mesesTrabajados}`,
-          formatNum(r.diasHabilesTotales),
-          formatCLP(r.totalVacaciones),
+          `${m}`,
+          formatDias(rIMM.diasHabilesTotales),
+          formatDias(rIMM.diasCorridosIndemnizables),
+          formatCLP(rIMM.totalVacaciones),
+          formatCLP(r800.totalVacaciones),
         ];
       });
+      const e6 = vac(800_000, 6, FECHA_EJEMPLO);
+      const e6SinFecha = vac(800_000, 6);
+      const e6Dic = vac(800_000, 6, '2026-12-31');
+      const e8 = vac(800_000, 8, FECHA_EJEMPLO);
       return {
-        h1: 'Calculadora de vacaciones proporcionales en días y pesos',
-        lead: 'Al terminar el contrato corresponden 1,25 días hábiles de feriado por cada mes completo trabajado (15 días hábiles al año). Para pagarlas se proyectan además los sábados, domingos y feriados que caen dentro del feriado.',
+        h1: 'Calculadora de vacaciones proporcionales: días y pesos según meses trabajados',
+        ...withLinks([
+          'Por cada mes trabajado se acumulan 1,25 días hábiles de vacaciones (15 ÷ 12). Al terminar el contrato, esos días se cuentan en el calendario desde el día siguiente al término y se suman los sábados, domingos y festivos que caen en ese período: se paga ese total de días corridos × sueldo ÷ 30 (',
+          { text: 'Dirección del Trabajo', href: DT_FERIADO_PROPORCIONAL_URL },
+          '; ',
+          { text: 'Código del Trabajo, art. 73', href: BCN_CODIGO_TRABAJO_URL },
+          `). Ejemplo: 6 meses son ${formatDias(e6.diasHabilesTotales)} días hábiles; si el contrato termina el lunes 30-11-2026, son ${formatDias(e6.diasCorridosIndemnizables)} días corridos, es decir ${formatCLP(e6.totalVacaciones)} con un sueldo de $800.000.`,
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Si trabajo 6 meses, cuántos días de vacaciones me corresponden?',
+            answer: `${formatDias(e6.diasHabilesTotales)} días hábiles (6 × 1,25). Al pagarlos en el finiquito se convierten en días corridos: con término el lunes 30-11-2026 son ${formatDias(e6.diasCorridosIndemnizables)} días, porque se agregan el fin de semana del 5 y 6 de diciembre y el feriado del martes 8. Con $800.000 de sueldo: $800.000 ÷ 30 = ${formatCLP(e6.valorDiaCorrida)} por día × ${formatDias(e6.diasCorridosIndemnizables)} = ${formatCLP(e6.totalVacaciones)}. Si solo se pagaran los días hábiles saldrían ${formatCLP(e6SinFecha.totalVacaciones)}: la DT exige sumar los sábados, domingos y festivos.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+              { text: 'Dirección del Trabajo, ORD. 826/13', href: DT_ORD_826_URL },
+            ],
+          },
+          {
+            question: '¿Cuántos días de vacaciones me tocan con 8 meses de trabajo?',
+            answer: `${formatDias(e8.diasHabilesTotales)} días hábiles (8 × 1,25). Con término el 30-11-2026 equivalen a ${formatDias(e8.diasCorridosIndemnizables)} días corridos. La DT da un ejemplo oficial: 8 meses y 2 días son 10,08 días hábiles, más 4 inhábiles, o sea 14,08 días corridos.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+            ],
+          },
+          {
+            question: '¿Por qué importa la fecha de término?',
+            answer: `Porque los días se cuentan desde el día siguiente al término. Si 6 meses terminan el 31-12-2026, el conteo parte el 1 de enero (feriado) y son ${formatDias(e6Dic.diasCorridosIndemnizables)} días corridos (${formatCLP(e6Dic.totalVacaciones)} con $800.000), en vez de ${formatDias(e6.diasCorridosIndemnizables)}. Además, si una fracción de día no alcanza a caber antes de un fin de semana o festivo, pasa al día hábil siguiente y esos días intermedios también se pagan.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+              { text: 'Dirección del Trabajo, ORD. 826/13', href: DT_ORD_826_URL },
+            ],
+          },
+        ],
         example: {
           caption:
-            'Días hábiles acumulados y estimación en pesos (sueldo ÷ 30 por día corrido), sin fecha de término informada.',
-          headers: ['Sueldo bruto', 'Meses trabajados', 'Días hábiles', 'Indemnización estimada'],
+            'Vacaciones proporcionales de 1 a 11 meses, con término el lunes 30-11-2026: días hábiles (1,25 por mes), días corridos con los sábados, domingos y feriados nacionales que caen en el período (incluye el 8-12 y el 25-12), y monto con sueldo ÷ 30 por día corrido. Con otra fecha de término cambian los días corridos. Con 12 meses corresponde el feriado anual completo.',
+          headers: [
+            'Meses trabajados',
+            'Días hábiles',
+            'Días corridos',
+            `Con ingreso mínimo (${formatCLP(INGRESO_MINIMO.mensual)})`,
+            'Con $800.000',
+          ],
           rows,
         },
       };
@@ -260,7 +353,9 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'gratificacion-legal': {
-      const sueldos = [553_553, 800_000, 1_500_000];
+      // E-014: todas las cifras salen de topeGratificacion() (constantes).
+      const t = topeGratificacion();
+      const sueldos = [INGRESO_MINIMO.mensual, 800_000, t.umbral, 1_500_000];
       const rows = sueldos.map((sueldoBruto) => {
         const r = calculateGratificacion({
           sueldoBruto,
@@ -275,10 +370,52 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Calculadora de gratificación legal: 25% con tope 4,75 IMM',
-        lead: `En el sistema del artículo 50 del Código del Trabajo la gratificación es el menor entre el 25% de la remuneración mensual y el tope de 4,75 ingresos mínimos dividido en 12 (${formatCLP(Math.round((INGRESO_MINIMO.mensual * 4.75) / 12))} mensuales con el IMM vigente).`,
+        h1: `Calculadora de gratificación legal y tope ${t.anio} (4,75 IMM)`,
+        ...withLinks([
+          'En el sistema del artículo 50 del Código del Trabajo, la gratificación es el 25% de lo devengado por remuneraciones mensuales, con un tope de 4,75 ingresos mínimos mensuales al año (',
+          { text: 'Dirección del Trabajo', href: DT_GRATIFICACION_URL },
+          `). Con el ingreso mínimo de ${formatCLP(t.imm)}, vigente desde el ${t.vigenteDesdeTexto} (`,
+          // La ficha BCN enlazada es la de la Ley 21.830; con otra ley, la ficha DT del IMM.
+          { text: `Ley ${t.ley}`, href: t.ley === '21.830' ? BCN_LEY_21830_URL : DT_IMM_URL },
+          `), el tope es ${formatCLP(t.anual)} al año, o ${formatCLP(t.mensual)} al mes. Desde un sueldo bruto de unos ${formatCLP(t.umbral)} al mes, la gratificación queda en el tope.`,
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Cuánto es 4,75 ingresos mínimos mensuales?',
+            answer: `4,75 × ${formatCLP(t.imm)} = ${formatCLP(t.anual)} al año. Dividido en 12 son ${formatCLP(t.mensual)} al mes. Es el máximo de gratificación por trabajador en el sistema del artículo 50.`,
+            sources: [
+              { text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL },
+              { text: 'Dirección del Trabajo, ingreso mínimo mensual', href: DT_IMM_URL },
+            ],
+          },
+          // Solo mientras rija el IMM de la Ley 21.830 (01-05-2026); al cargar
+          // el IMM de 2027 esta respuesta desaparece y hay que redactar otra.
+          ...(t.vigenteDesde === IMM_LEY_21830_DESDE
+            ? [
+                {
+                  question: 'El tope cambia el 1 de enero de 2027',
+                  answer: `La Ley 21.830 reajusta el ingreso mínimo desde el 1 de enero de 2027 según la variación del IPC entre el 1 de mayo y el 31 de diciembre de 2026 (art. 1). Para la gratificación del año 2026, que se paga a más tardar en abril de 2027, el tope sigue siendo ${formatCLP(t.anual)}, porque se usa el ingreso mínimo vigente al 31 de diciembre de cada año. El tope de 2027 se calculará con el ingreso mínimo vigente al 31 de diciembre de 2027. Ese monto todavía no se conoce, y además la ley obliga a enviar un proyecto para un nuevo reajuste desde el 1 de julio de 2027 (art. 7). Actualizaremos esta página cuando se publique el valor oficial.`,
+                  sources: [
+                    { text: 'BCN, Ley 21.830', href: BCN_LEY_21830_URL },
+                    {
+                      text: 'Dirección del Trabajo, gratificación legal',
+                      href: DT_GRATIFICACION_URL,
+                    },
+                  ],
+                },
+              ]
+            : []),
+          {
+            question: '¿Si no trabajé el año completo?',
+            answer:
+              'El tope se aplica en proporción al tiempo trabajado. Pero si estuviste con licencia médica algunos meses, el tope no se reduce.',
+            sources: [
+              { text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL },
+            ],
+          },
+        ],
         example: {
-          caption: `12 meses trabajados, IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026.`,
+          caption: `12 meses trabajados, ingreso mínimo de ${formatCLP(t.imm)} vigente desde el ${t.vigenteDesdeTexto} (tope mensual ${formatCLP(t.mensual)}). La fila de ${formatCLP(t.umbral)} muestra el sueldo desde el que se llega al tope.`,
           headers: ['Sueldo bruto', 'Gratificación mensual', 'Gratificación anual', 'Método'],
           rows,
         },
@@ -467,20 +604,74 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'uf-clp': {
-      const montos = [1, 5, 10, 50, 90, 500, 1_000, 3_000];
-      const rows = montos.map((monto) => {
-        const r = calculateUFCLP({
-          monto,
-          direccion: 'uf-a-clp',
-          valorUF: ctx.uf,
-        });
-        return [`${formatNum(monto, 0)} UF`, formatCLP(Math.round(r.montoConvertido))];
-      });
+      // E-018: todas las cifras salen de la UF del contexto; nunca a mano.
+      const uf = ctx.uf;
+      const fechaObj = ctx.ufFecha ? new Date(ctx.ufFecha) : null;
+      const fecha =
+        fechaObj && !Number.isNaN(fechaObj.getTime()) ? formatDDMMYYYY(fechaObj) : '';
+      const aPesos = (monto: number) =>
+        Math.round(
+          calculateUFCLP({ monto, direccion: 'uf-a-clp', valorUF: uf }).montoConvertido,
+        );
+      const rows = UF_MONTOS_TABLA.map((monto) => [
+        `${formatNum(monto, 0)} UF`,
+        formatCLP(aPesos(monto)),
+      ]);
+      const diezMillonesEnUF = calculateUFCLP({
+        monto: 10_000_000,
+        direccion: 'clp-a-uf',
+        valorUF: uf,
+      }).montoConvertido;
+      const reajuste: QuickAnswerPart[] = [
+        ' La UF se reajusta cada día, desde el día 10 de un mes hasta el 9 del mes siguiente, según la variación del IPC del mes anterior (',
+        { text: 'metodología del Banco Central', href: BCCH_UF_METODOLOGIA_URL },
+        ').',
+      ];
+      const leadParts: QuickAnswerPart[] =
+        ctx.ufFresca && fecha
+          ? [
+              `Hoy ${fecha} la UF vale ${formatCLP2(uf)}, según el `,
+              { text: 'Banco Central de Chile', href: BCCH_INDICADORES_URL },
+              `: 1.000 UF son ${formatCLP(aPesos(1_000))}.`,
+              ...reajuste,
+            ]
+          : [
+              // Puede ser Mindicador o el snapshot: no se atribuye al Banco Central.
+              `Valor de referencia: la UF${fecha ? ` del ${fecha}` : ''} es ${formatCLP2(uf)}. Para una operación, revisa el valor oficial del día en el `,
+              { text: 'Banco Central de Chile', href: BCCH_INDICADORES_URL },
+              '.',
+              ...reajuste,
+            ];
+      const conLaUF = fecha ? `con la UF del ${fecha}` : `con una UF de ${formatCLP2(uf)}`;
       return {
-        h1: 'Conversor UF a pesos',
-        lead: 'La UF (Unidad de Fomento) se reajusta diariamente según el IPC y se usa en créditos hipotecarios, arriendos y contratos de largo plazo.',
+        h1: 'Conversor UF a pesos: valor de hoy y tabla de montos',
+        ...withLinks(leadParts),
+        shortAnswers: [
+          {
+            question: '¿Dónde veo la UF de una fecha pasada?',
+            answer:
+              'En la tabla oficial de valores diarios de la UF del Servicio de Impuestos Internos, organizada por año y mes, y en la serie histórica del Banco Central de Chile. Para una escritura, un crédito o un contrato, usa siempre el valor del día exacto de la operación.',
+            sources: [
+              { text: 'SII, valores de la UF 2026', href: SII_UF_URL },
+              { text: 'Banco Central, serie de la UF', href: BCCH_UF_SERIE_URL },
+            ],
+          },
+          {
+            question: '¿Cuánto son 90 UF en pesos?',
+            answer: `${formatCLP(aPesos(90))} ${conLaUF}. Si buscas el tope imponible en pesos, usa la calculadora de tope imponible.`,
+            sources: [
+              { text: 'Calculadora de tope imponible', href: '/calculadoras/calculadora-tope-imponible-90-uf' },
+              { text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL },
+            ],
+          },
+          {
+            question: '¿Cómo convierto pesos a UF?',
+            answer: `Divide el monto en pesos por el valor de la UF del día. Por ejemplo, $10.000.000 ÷ ${formatCLP2(uf)} = ${formatNum(diezMillonesEnUF, 2)} UF (con 2 decimales).`,
+            sources: [{ text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL }],
+          },
+        ],
         example: {
-          caption: `Equivalencias con UF de ${formatCLP2(ctx.uf)}. El valor se reajusta diariamente según el IPC.`,
+          caption: `Tabla de UF a pesos ${fecha ? `con la UF del ${fecha}: ${formatCLP2(uf)}` : `con una UF de ${formatCLP2(uf)}`}${ctx.ufFresca ? ' (Banco Central de Chile)' : ''}. Montos redondeados al peso. La UF cambia todos los días.`,
           headers: ['Monto en UF', 'Equivalente en pesos'],
           rows,
         },
@@ -573,17 +764,29 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'sueldo-part-time': {
-      const jornadas = [10, 20, 30, 35, 42];
+      // Tabla de jornadas (brief 2026-10-29): montos desde
+      // calculateSueldoPartTime; la última fila sigue la jornada vigente.
+      const jornadaVigente = getTramoJornadaLegal();
+      const proximo = getProximoCambioJornada();
+      const jornadas = [18, 20, 25, 30, 36, jornadaVigente.horas];
       const rows = jornadas.map((horas) => {
         const r = calculateSueldoPartTime({ horasSemanales: horas });
-        return [`${horas} horas`, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
+        const tipo = r.esJornadaParcial
+          ? 'Parcial: mínimo proporcional'
+          : r.esJornadaIntermedia
+            ? 'Intermedia: mínimo íntegro'
+            : 'Completa (vigente)';
+        return [`${horas} horas`, tipo, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
       });
+      const cambio = proximo
+        ? ` y baja a ${proximo.horas} horas el ${fechaLargaISO(proximo.vigenteDesde)} (Ley 21.561)`
+        : ' (Ley 21.561)';
       return {
         h1: 'Sueldo part time 30 horas: mínimo legal y valor hora',
         lead: `Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
         example: {
-          caption: `Mínimo legal y valor hora con el IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026, sin sueldo pactado informado.`,
-          headers: ['Jornada semanal', 'Mínimo legal mensual', 'Valor hora'],
+          caption: `Mínimo legal y valor hora con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)}, vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)} (Ley ${INGRESO_MINIMO.ley}). La jornada completa vigente es de ${jornadaVigente.horas} horas desde el ${fechaLargaISO(jornadaVigente.vigenteDesde)}${cambio}. Hasta 30 horas el mínimo es proporcional; desde 31 y hasta ${jornadaVigente.horas - 1} horas corresponde el mínimo íntegro.`,
+          headers: ['Jornada semanal', 'Tipo de jornada', 'Mínimo legal mensual', 'Valor hora'],
           rows,
         },
       };
@@ -667,6 +870,48 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         example: {
           caption: `Con el sueldo mínimo de cada jornada, AFP Habitat (1,27%) y Fonasa 7%. El costo del empleador suma 1,11% de indemnización a todo evento, 3% de cesantía, la cotización vigente de la reforma de pensiones y 0,95% de accidentes del trabajo.`,
           headers: ['Modalidad', 'Sueldo mínimo', 'Sueldo líquido', 'Costo empleador'],
+          rows,
+        },
+      };
+    }
+
+    case 'licencia-medica': {
+      // E-020 (brief 2026-10-29): tabla de 1 a 15 días generada con
+      // calculateLicenciaMedica; nunca montos escritos a mano.
+      const rows = Array.from({ length: 15 }, (_, i) => {
+        const r = calculateLicenciaMedica({
+          remuneracionNetaPromedio: LICENCIA_EJEMPLO_NETA,
+          diasLicencia: i + 1,
+        });
+        return [
+          `${r.diasLicencia} ${r.diasLicencia === 1 ? 'día' : 'días'}`,
+          `${r.diasPagados}`,
+          formatCLP(r.totalSubsidio),
+        ];
+      });
+      const base = calculateLicenciaMedica({
+        remuneracionNetaPromedio: LICENCIA_EJEMPLO_NETA,
+        diasLicencia: 1,
+      });
+      const pagados = (dias: number) =>
+        calculateLicenciaMedica({
+          remuneracionNetaPromedio: LICENCIA_EJEMPLO_NETA,
+          diasLicencia: dias,
+        }).diasPagados;
+      return {
+        h1: 'Calculadora de licencia médica: cuánto y cuántos días te pagan',
+        ...withLinks([
+          'Si tu licencia dura 10 días o menos, los 3 primeros días no se pagan: recibes subsidio desde el 4.º día. Si dura 11 días o más, se paga desde el día 1 (',
+          { text: 'Dirección del Trabajo', href: DT_LICENCIA_CARENCIA_URL },
+          '). Cada día pagado vale 1/30 de tu remuneración neta promedio de los 3 meses anteriores (',
+          { text: 'SUSESO', href: SUSESO_SIL_URL },
+          '). Lo paga la COMPIN o tu Caja de Compensación si estás en Fonasa, o tu Isapre (',
+          { text: 'SUSESO, Compendio', href: SUSESO_QUIEN_PAGA_URL },
+          ').',
+        ]),
+        example: {
+          caption: `Días pagados y subsidio estimado con una remuneración neta de ${formatCLP(LICENCIA_EJEMPLO_NETA)} (${formatCLP(Math.round(base.montoDiario))} por día). Con 10 días te pagan ${pagados(10)}; con 11, te pagan ${pagados(11)}.`,
+          headers: ['Días de licencia', 'Días pagados', 'Subsidio estimado'],
           rows,
         },
       };

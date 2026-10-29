@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { VERIFICACION_VALORES } from '@/lib/values/constants';
+import {
+  INGRESO_MINIMO,
+  VERIFICACION_VALORES,
+} from '@/lib/values/constants';
 import { buildCvlistoUrl } from '@/lib/cvlisto';
+import { formatCLP } from '@/lib/formatters';
+import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 
 /**
  * Contenido editorial visible por calculadora (texto, tablas y preguntas
@@ -62,6 +67,49 @@ function Faq({ items }: { items: { q: string; a: ReactNode }[] }) {
   );
 }
 
+function SimpleTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
+  return (
+    <div className="mt-4 overflow-x-auto">
+      <table className="w-full min-w-[28rem] text-sm">
+        <thead>
+          <tr className="border-b border-[var(--border)]">
+            {headers.map((h) => (
+              <th
+                key={h}
+                scope="col"
+                className="py-2 pr-4 text-left font-semibold text-[var(--foreground)] last:pr-0"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row[0]} className="border-b border-[var(--border)] last:border-0">
+              {row.map((cell, j) =>
+                j === 0 ? (
+                  <th
+                    key={j}
+                    scope="row"
+                    className="py-2 pr-4 text-left font-medium text-[var(--foreground-secondary)]"
+                  >
+                    {cell}
+                  </th>
+                ) : (
+                  <td key={j} className="py-2 pr-4 tabular-nums text-[var(--foreground)] last:pr-0">
+                    {cell}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 const DT_INDEMNIZACION = 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html';
 const DT_PLAZO = 'https://www.dt.gob.cl/portal/1628/w3-article-60613.html';
 const DT_FERIADO = 'https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-150384.html';
@@ -74,6 +122,17 @@ const CVLISTO_FINIQUITO = buildCvlistoUrl({
   calculatorId: 'finiquito',
 });
 const TGR = 'https://www.tgr.cl/tramites/contribuciones/';
+
+// Licencia médica (E-020, verificado 29-10-2026)
+const DT_CARENCIA = 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html';
+const SUSESO_SIL = 'https://www.suseso.gob.cl/606/w3-propertyvalue-568.html';
+const SUSESO_CARENCIA_EMPLEADOR = 'https://www.suseso.gob.cl/606/w3-article-19933.html';
+const SUSESO_QUIEN_PAGA = 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html';
+const DT_INGRESO_MINIMO = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
+const LICENCIA_10 = calculateLicenciaMedica({ remuneracionNetaPromedio: 0, diasLicencia: 10 });
+const LICENCIA_3 = calculateLicenciaMedica({ remuneracionNetaPromedio: 0, diasLicencia: 3 });
+const LICENCIA_MINIMO_DIARIO = formatCLP(Math.round(LICENCIA_10.minimoDiario));
+
 const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm';
 
 const EDITORIAL: Record<string, EditorialContent> = {
@@ -451,6 +510,135 @@ const EDITORIAL: Record<string, EditorialContent> = {
               },
             ]}
           />
+        </Section>
+      </>
+    ),
+  },
+  'licencia-medica': {
+    bottom: (
+      <>
+        <Section title="¿Por qué no me pagan los 3 primeros días?">
+          <p className={pClass}>
+            Es el período de carencia: en una licencia de 10 días o menos, el subsidio se paga desde
+            el 4.º día. Si la licencia dura más de 10 días, se paga desde el día 1 (
+            <Ext href={SUSESO_SIL}>SUSESO</Ext> ·{' '}
+            <Ext href={DT_CARENCIA}>Dirección del Trabajo</Ext>
+            ).
+          </p>
+          <p className={pClass}>
+            Tu empleador no está obligado a pagarte esos 3 días, salvo que lo diga tu contrato
+            individual o colectivo, un convenio o un fallo arbitral (
+            <Ext href={SUSESO_CARENCIA_EMPLEADOR}>SUSESO</Ext>). En una licencia de 4 a 10 días, las
+            cotizaciones de los días de carencia las paga la entidad que paga el subsidio (
+            <Ext href={DT_CARENCIA}>Dirección del Trabajo</Ext>).
+          </p>
+        </Section>
+
+        <Section title="¿Cuánto me pagan por día?">
+          <p className={pClass}>
+            Cada día pagado vale 1/30 de tu remuneración mensual neta promedio (imponible menos
+            cotizaciones e impuestos) de los 3 meses calendario anteriores al mes en que empieza la
+            licencia (<Ext href={SUSESO_SIL}>SUSESO</Ext>).
+          </p>
+          <p className={pClass}>
+            El subsidio diario no puede ser menor a <strong>{LICENCIA_MINIMO_DIARIO}</strong>: la
+            mitad del ingreso mínimo para fines no remuneracionales (
+            {formatCLP(INGRESO_MINIMO.no_remuneracional)}, Ley {INGRESO_MINIMO.ley}) dividida por 30
+            (<Ext href={DT_INGRESO_MINIMO}>Dirección del Trabajo</Ext>).
+          </p>
+          <p className={pClass}>
+            Para recibirlo necesitas 6 meses de afiliación previsional y 3 meses de cotizaciones
+            dentro de los 6 meses anteriores a la licencia. Si te contratan por día, por turnos o
+            jornadas, basta 1 mes de cotizaciones (<Ext href={SUSESO_SIL}>SUSESO</Ext>).
+          </p>
+        </Section>
+
+        <Section title="¿Quién paga la licencia?">
+          <SimpleTable
+            headers={['Tu sistema de salud', 'Quién paga el subsidio']}
+            rows={[
+              ['Fonasa, empleador sin Caja de Compensación', 'La COMPIN'],
+              ['Fonasa, empleador afiliado a una Caja', 'La Caja de Compensación'],
+              ['Isapre', 'La Isapre'],
+            ]}
+          />
+          <p className={pClass}>
+            Fuente: <Ext href={SUSESO_QUIEN_PAGA}>SUSESO, Compendio de licencias médicas</Ext>. Para
+            la remuneración neta, usa las liquidaciones de los 3 meses calendario anteriores al
+            mes en que empieza la licencia: el imponible menos las cotizaciones y el impuesto. No uses el líquido a pago tal cual, porque suma haberes no
+            imponibles (colación, movilización) y resta descuentos personales. Para entender cada
+            descuento, revisa la{' '}
+            <Int href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</Int>{' '}
+            o la <Int href="/guias/sueldo-liquido-chile">guía de sueldo líquido</Int>.
+          </p>
+        </Section>
+
+        <Section title="¿Y si tengo otra licencia por lo mismo?">
+          <p className={pClass}>
+            Si una licencia se da inmediatamente a continuación de otra y por el mismo diagnóstico,
+            se consideran una sola licencia para contar los días pagados y calcular el monto (
+            <Ext href={SUSESO_SIL}>SUSESO</Ext>). Por ejemplo, 7 días seguidos de otros 7 por lo
+            mismo suman 14 días: se pagan desde el día 1. La calculadora no suma licencias por su
+            cuenta: en ese caso ingresa el total de días (14).
+          </p>
+        </Section>
+
+        <Section title="Preguntas frecuentes sobre la licencia médica">
+          <Faq
+            items={[
+              {
+                q: 'Si me dan 10 días de licencia, ¿cuántos me pagan?',
+                a: (
+                  <>
+                    {LICENCIA_10.diasPagados} días: del 4.º al 10.º. Los 3 primeros no se pagan
+                    porque la licencia no supera 10 días (<Ext href={SUSESO_SIL}>SUSESO</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: 'Por 3 días de licencia médica, ¿cuánto me pagan?',
+                a: (
+                  <>
+                    El subsidio es {formatCLP(LICENCIA_3.totalSubsidio)}: en una licencia de 3 días
+                    todos caen en el período de carencia. Tu empleador solo te los paga si lo dice
+                    tu contrato, un convenio o un fallo arbitral (
+                    <Ext href={SUSESO_CARENCIA_EMPLEADOR}>SUSESO</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Desde cuántos días pagan la licencia?',
+                a: (
+                  <>
+                    Con 11 días o más se paga desde el día 1. Con 10 días o menos, desde el 4.º día
+                    (<Ext href={DT_CARENCIA}>Dirección del Trabajo</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cómo se calcula el pago de una licencia médica?',
+                a: (
+                  <>
+                    Remuneración neta promedio de los 3 meses anteriores ÷ 30 × días pagados, con un
+                    mínimo de {LICENCIA_MINIMO_DIARIO} por día (<Ext href={SUSESO_SIL}>SUSESO</Ext>
+                    ).
+                  </>
+                ),
+              },
+              {
+                q: '¿Quién paga la licencia médica?',
+                a: (
+                  <>
+                    Con Fonasa, la COMPIN o la Caja de Compensación si tu empleador está afiliado a
+                    una. Con Isapre, la Isapre (<Ext href={SUSESO_QUIEN_PAGA}>SUSESO</Ext>).
+                  </>
+                ),
+              },
+            ]}
+          />
+          <p className={pClass}>
+            <em>Contenido verificado al 29-10-2026.</em>
+          </p>
         </Section>
       </>
     ),

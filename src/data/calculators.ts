@@ -4,6 +4,11 @@
 
 import type { Calculator } from '@/types/calculator';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
+import { formatCLP } from '@/lib/formatters';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+
+// E-014: FAQ del tope generada desde las constantes.
+const TOPE_GRATIFICACION = topeGratificacion();
 
 const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   {
@@ -490,7 +495,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'Banco Central — indicadores diarios',
@@ -501,6 +506,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'Banco Central — serie UF',
         url: 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF',
         note: 'Serie histórica oficial',
+      },
+      {
+        name: 'SII — Valores de la UF 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
+        note: 'Tabla oficial de valores diarios',
+      },
+      {
+        name: 'Banco Central — Metodología de la UF',
+        url: 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf',
+        note: 'Reajuste diario del día 10 al 9 según el IPC del mes anterior',
       },
     ],
     keywords: ['UF a CLP', 'convertir UF', 'valor UF hoy', 'calculadora UF', 'UF pesos chilenos'],
@@ -547,9 +562,14 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
           'Para proteger el valor real del dinero frente a la inflación en contratos de largo plazo. Al expresar montos en UF, el valor se reajusta con el IPC.',
       },
       {
-        question: '¿Puedo ver histórico o proyección de la UF aquí?',
+        question: '¿Dónde veo la UF de una fecha pasada?',
         answer:
-          'No en esta calculadora: solo convierte con el valor de UF cargado en el sitio. El histórico oficial está en la serie del Banco Central. No ofrecemos proyecciones inventadas.',
+          'Esta calculadora convierte con el valor de la UF cargado en el sitio, sin histórico ni proyecciones. Los valores diarios oficiales están en la tabla de la UF del SII (sii.cl, Valores y fechas) y en la serie de la UF del Banco Central de Chile.',
+      },
+      {
+        question: '¿Cada cuánto cambia la UF?',
+        answer:
+          'Todos los días. El Banco Central calcula la UF desde el día 10 de cada mes hasta el día 9 del mes siguiente, distribuyendo en forma diaria la variación del IPC del mes anterior. Por eso los valores de un período se conocen por adelantado.',
       },
       {
         question: '¿Dónde verifico el valor oficial?',
@@ -787,12 +807,22 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-13',
+    lastReviewed: '2026-10-29',
     sources: [
       {
-        name: 'DT — Feriado proporcional',
-        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60183.html',
-        note: 'Procedimiento de días hábiles y proyección de sábados, domingos y festivos',
+        name: 'DT — ¿Cómo se calcula el feriado proporcional?',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html',
+        note: 'Factor 1,25 por mes y conteo en días corridos desde el día siguiente al término',
+      },
+      {
+        name: 'DT — ORD. 826/13 (fracción de día)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html',
+        note: 'La fracción que no cabe antes de un fin de semana o festivo pasa al día hábil siguiente',
+      },
+      {
+        name: 'DT — ORD. 3343/49 (remuneración variable)',
+        url: 'https://dt.gob.cl/legislacion/1624/w3-article-103857.html',
+        note: 'Base de cálculo con remuneraciones variables',
       },
       {
         name: 'BCN — Código del Trabajo',
@@ -862,7 +892,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cómo se calculan las vacaciones proporcionales?',
         answer:
-          'Se acumulan 1,25 días hábiles por mes completo y 1,25/30 por cada día adicional. Al terminar el contrato, esos días se proyectan desde el día siguiente y se agregan los sábados, domingos y festivos que caen dentro del período.',
+          'Se acumulan 1,25 días hábiles por mes completo y 1,25/30 por cada día adicional. Ese total se cuenta en el calendario desde el día siguiente al término del contrato, sumando los sábados, domingos y festivos del período. Se paga el total de días corridos × el valor diario (sueldo ÷ 30). Si una fracción de día no cabe antes de un fin de semana o festivo, pasa al día hábil siguiente (DT, Dictamen 8413/143 y ORD. 826/13).',
+      },
+      {
+        question: '¿Cuánto valen mis vacaciones?',
+        answer:
+          'El valor diario es la remuneración íntegra ÷ 30. Con sueldo fijo se usa el sueldo. Con remuneración variable se usa el promedio de lo ganado en los últimos 3 meses trabajados. Con remuneración mixta, el sueldo más el promedio de lo variable (art. 71 del Código del Trabajo; DT). Ese valor se multiplica por los días corridos.',
+      },
+      {
+        question: '¿Qué pasa si trabajé más de un año?',
+        answer:
+          "Si completaste un año, ese feriado ya no es proporcional: corresponden los 15 días hábiles completos (art. 73 inc. 2). Lo proporcional se cuenta desde la última anualidad cumplida hasta el término (art. 73 inc. 3). En la calculadora, ingresa los días no tomados en 'Días de vacaciones no tomados' y los meses desde la última anualidad en 'Meses trabajados'. Si tienes feriado progresivo, el factor mensual es (15 + días progresivos) ÷ 12 (DT 60200). Más detalle en la guía de vacaciones y feriado legal.",
       },
       {
         question: '¿Cuántos días de vacaciones me corresponden por año?',
@@ -1091,7 +1131,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'DT — gratificación del artículo 47',
@@ -1102,6 +1142,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'BCN — Código del Trabajo',
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
         note: 'Artículos 47 a 50 sobre gratificación legal',
+      },
+      {
+        name: 'DT — La gratificación legal',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html',
+        note: 'Requisitos, tope con el IMM al 31 de diciembre, proporcionalidad y plazo de pago',
+      },
+      {
+        name: 'BCN — Ley 21.830',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354',
+        note: 'IMM desde el 01-05-2026 y reajuste desde el 01-01-2027',
+      },
+      {
+        name: 'DT — Ingreso mínimo mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html',
+        note: 'Valor vigente del IMM',
       },
     ],
     keywords: [
@@ -1146,27 +1201,27 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué es la gratificación legal?',
         answer:
-          'La gratificación legal es un beneficio obligatorio que el empleador debe pagar a los trabajadores que devengan remuneraciones variables o que ganen menos de 4.75 UTA anuales (Art. 47 del Código del Trabajo). La modalidad más usada (Art. 50) corresponde al 25% de la remuneración mensual, con un tope de 4.75 ingresos mínimos mensuales (IMM) anuales.',
+          'Es la parte de las utilidades con que el empleador beneficia el sueldo del trabajador. Deben pagarla los empleadores que obtienen utilidades líquidas en su giro, de dos formas a elección del empleador: repartir al menos el 30% de esas utilidades (art. 47) o pagar a cada trabajador el 25% de lo devengado en el año por remuneraciones mensuales, con un tope de 4,75 ingresos mínimos mensuales (art. 50).',
       },
       {
         question: '¿Cómo se calcula la gratificación?',
         answer:
-          'La gratificación (Art. 50 del Código del Trabajo) se calcula de dos formas y se paga la que resulte MENOR: (1) 25% de la remuneración mensual, o (2) 4.75 ingresos mínimos mensuales (IMM) anuales divididos en 12. En la práctica, los sueldos bajos y medios pagan el 25% (porque es menor que el tope), y los sueldos altos quedan topeados en 4.75 IMM/12 mensual.',
+          'La gratificación (Art. 50 del Código del Trabajo) se calcula de dos formas y se paga la que resulte MENOR: (1) 25% de la remuneración mensual, o (2) 4,75 ingresos mínimos mensuales (IMM) anuales divididos en 12. En la práctica, los sueldos bajos y medios pagan el 25% (porque es menor que el tope), y los sueldos altos quedan topeados en 4,75 IMM/12 mensual.',
       },
       {
         question: '¿Cuál es el tope de la gratificación?',
         answer:
-          'El tope máximo de la gratificación (Art. 50 del Código del Trabajo) es de 4.75 ingresos mínimos mensuales (IMM) anuales. En 2026, con IMM a $553.553, el tope anual es $2.629.377 (4.75 × $553.553), lo que equivale a unos $219.114 mensuales máximos de gratificación.',
+          `El tope (art. 50) es de 4,75 ingresos mínimos mensuales al año. Con el ingreso mínimo de ${formatCLP(TOPE_GRATIFICACION.imm)}, son ${formatCLP(TOPE_GRATIFICACION.anual)} al año, o ${formatCLP(TOPE_GRATIFICACION.mensual)} al mes. Se usa el ingreso mínimo vigente al 31 de diciembre del año respectivo.`,
       },
       {
         question: '¿Todos los trabajadores tienen derecho a gratificación?',
         answer:
-          'Tienen derecho a gratificación los trabajadores que ganen menos de 4.75 UTA anuales. Los trabajadores que excedan este monto no tienen derecho legal a gratificación, aunque el empleador puede otorgarla voluntariamente. También están excluidos los trabajadores de casa particular y algunos regímenes especiales.',
+          'No depende del sueldo del trabajador, sino de su empleador. Es obligatoria cuando se cumplen a la vez cuatro requisitos: que sea un establecimiento minero, industrial, comercial o agrícola, una empresa o cualquier otro, o una cooperativa; que persiga fines de lucro (salvo las cooperativas); que esté obligado a llevar libros de contabilidad; y que obtenga utilidades líquidas en el año. Si el empleador no cumple esos requisitos, la gratificación legal no es exigible, salvo que el contrato pacte una gratificación garantizada. Con contratos de 30 días o menos, o con prórrogas que no superen 60 días en total, no hay una gratificación aparte: según la DT, se entiende incluida en la remuneración convenida, en proporción al tiempo servido.',
       },
       {
         question: '¿La gratificación se paga mensual o anualmente?',
         answer:
-          'El empleador puede pagar la gratificación mensualmente (anticipo) o en un solo pago anual. Lo más común es pagarla mensualmente junto con el sueldo. Si se paga anualmente, debe liquidarse en abril de cada año por el período abril-marzo anterior.',
+          'Es un beneficio anual: corresponde al ejercicio comercial del 1 de enero al 31 de diciembre, y el empleador debe pagarla a más tardar en abril del año siguiente. Puede adelantarla en anticipos mensuales, bimensuales o trimestrales, que es lo más común. Al hacer la liquidación definitiva, los anticipos se reajustan por IPC.',
       },
       {
         question: '¿Qué diferencia hay entre el artículo 47 y el artículo 50?',
@@ -4340,7 +4395,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'sueldo',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-09-26',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'SUSESO — Subsidio por incapacidad laboral',
@@ -4351,6 +4406,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'Dirección del Trabajo — Licencias médicas',
         url: 'https://www.dt.gob.cl/portal/1628/w3-article-95288.html',
         note: 'Pago desde el primer día si supera 10 días; desde el 4° si es menor o igual',
+      },
+      {
+        name: 'Dirección del Trabajo — Días de carencia',
+        url: 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html',
+        note: 'Licencias de 10 días o menos: subsidio desde el 4° día',
+      },
+      {
+        name: 'SUSESO — Pago de los días de carencia',
+        url: 'https://www.suseso.gob.cl/606/w3-article-19933.html',
+        note: 'El empleador no está obligado a pagarlos, salvo pacto',
+      },
+      {
+        name: 'SUSESO — Compendio: entidades pagadoras',
+        url: 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html',
+        note: 'COMPIN, Caja de Compensación o Isapre',
       },
     ],
     keywords: [
@@ -4425,12 +4495,22 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'sueldo',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-09-26',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'Dirección del Trabajo — Jornada parcial e ingreso mínimo',
         url: 'https://www.dt.gob.cl/portal/1626/w3-article-60136.html',
         note: 'IMM proporcional solo hasta 30 h semanales; jornada intermedia exige IMM íntegro',
+      },
+      {
+        name: 'Dirección del Trabajo — Jornada parcial (art. 40 bis)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60756.html',
+        note: 'Jornada parcial: 30 horas semanales o menos',
+      },
+      {
+        name: 'Dirección del Trabajo — Jornada de 42 horas',
+        url: 'https://dt.gob.cl/portal/1626/w3-article-129225.html',
+        note: '42 h desde el 26-04-2026; 40 h desde el 26-04-2028 (Ley 21.561)',
       },
     ],
     keywords: [

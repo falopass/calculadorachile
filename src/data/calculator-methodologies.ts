@@ -1,4 +1,19 @@
 import type { CalculatorMethodology } from '@/types/calculator';
+import { formatCLP } from '@/lib/formatters';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+import { calculateVacaciones } from '@/lib/calculations/vacaciones';
+
+// E-014: cifras del tope de gratificación generadas desde las constantes.
+const TOPE_GRAT = topeGratificacion();
+
+// E-017: ejemplo de vacaciones generado con el cálculo real (ORD. 826/13).
+const EJ_VACACIONES = calculateVacaciones({
+  sueldoBruto: 600_000,
+  mesesTrabajados: 8,
+  fechaTermino: '2026-11-30',
+});
+const fmtDias = (n: number) =>
+  n.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 
 /**
  * Metodologías editoriales por calculadora indexable.
@@ -150,26 +165,30 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Suma feriado pendiente o progresivo informado.',
       'Transforma días hábiles a la secuencia calendario cuando corresponde.',
       'Valoriza los días con la remuneración diaria aplicable.',
+      'Si una fracción de día no cabe antes de un sábado, domingo o festivo, pasa al día hábil siguiente y los días intermedios se pagan (DT, ORD. 826/13).',
     ],
     assumptions: ['Las fechas y días pendientes ingresados son completos y no duplicados.'],
     limitations: [
       'No reconstruye asistencia, licencias ni feriados ya utilizados.',
       'La remuneración variable puede requerir antecedentes de meses anteriores.',
+      'Solo considera feriados nacionales; no incluye feriados regionales ni extraordinarios.',
     ],
     workedExample: {
-      title: 'Ejemplo: Trabajador con 8 meses trabajados al renunciar o ser despedido',
+      title: 'Ejemplo: 8 meses trabajados con término el lunes 30-11-2026',
       inputs: [
         'Sueldo base mensual: $600.000',
-        'Meses trabajados desde el último feriado: 8 meses',
+        'Meses trabajados desde el último feriado: 8',
+        'Fecha de término: 30-11-2026',
         'Feriado pendiente de períodos anteriores: 0 días',
       ],
       development: [
-        'Factor legal mensual de vacaciones: 1,25 días hábiles por mes (15 / 12).',
-        'Días hábiles generados: 8 meses × 1,25 = 10 días hábiles.',
-        'Valor remuneración diaria: $600.000 / 30 = $20.000 por día.',
-        'Monto en pesos: 10 días × $20.000 = $200.000.',
+        'Factor legal: 1,25 días hábiles por mes (15 ÷ 12).',
+        `Días hábiles: 8 × 1,25 = ${fmtDias(EJ_VACACIONES.diasHabilesTotales)}.`,
+        `Conteo desde el 01-12-2026: se agregan 2 fines de semana y el feriado del 08-12, lo que da ${fmtDias(EJ_VACACIONES.diasCorridosIndemnizables)} días corridos.`,
+        `Valor diario: $600.000 ÷ 30 = ${formatCLP(EJ_VACACIONES.valorDiaCorrida)}.`,
+        `Monto: ${fmtDias(EJ_VACACIONES.diasCorridosIndemnizables)} × ${formatCLP(EJ_VACACIONES.valorDiaCorrida)} = ${formatCLP(EJ_VACACIONES.totalVacaciones)}.`,
       ],
-      result: 'Indemnización por feriado proporcional en el finiquito: $200.000.',
+      result: `Indemnización por feriado proporcional: ${formatCLP(EJ_VACACIONES.totalVacaciones)}.`,
     },
   },
   'boleta-honorarios': {
@@ -226,6 +245,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Calcula la proporción sobre utilidades o el porcentaje de remuneraciones según corresponda.',
       'Aplica el tope legal cuando el sistema lo requiere.',
       'Presenta monto anual y equivalencia periódica disponible.',
+      'El tope usa el ingreso mínimo vigente al 31 de diciembre del año (DT).',
     ],
     assumptions: [
       'La empresa está obligada a gratificar y los datos contables ingresados son correctos.',
@@ -238,14 +258,14 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       title: 'Ejemplo: Gratificación con tope 4,75 Ingresos Mínimos Mensuales (IMM)',
       inputs: [
         'Sueldo base mensual: $700.000',
-        'Sueldo Mínimo (IMM): $553.553 (vigente en Chile 2026)',
+        `Ingreso mínimo (IMM): ${formatCLP(TOPE_GRAT.imm)} (vigente desde el ${TOPE_GRAT.vigenteDesdeTexto}, Ley ${TOPE_GRAT.ley})`,
         'Modalidad: Artículo 50 del Código del Trabajo (25% del sueldo con tope anual)',
       ],
       development: [
         'Cálculo del 25% del sueldo: $700.000 × 25% = $175.000 al mes.',
-        'Tope anual del art. 50: 4,75 × $553.553 = $2.629.377 al año.',
-        'Tope mensual del art. 50: $2.629.377 / 12 = $219.115 al mes.',
-        'Comparación: Como $175.000 es menor que el tope ($219.115), corresponde el monto íntegro.',
+        `Tope anual del art. 50: 4,75 × ${formatCLP(TOPE_GRAT.imm)} = ${formatCLP(TOPE_GRAT.anual)} al año.`,
+        `Tope mensual del art. 50: ${formatCLP(TOPE_GRAT.anual)} ÷ 12 = ${formatCLP(TOPE_GRAT.mensual)} al mes.`,
+        `Comparación: como $175.000 es menor que el tope (${formatCLP(TOPE_GRAT.mensual)}), corresponde el monto íntegro.`,
       ],
       result: 'Gratificación legal mensual a pagar: $175.000.',
     },
@@ -760,7 +780,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
     ],
     limitations: [
       'No considera variaciones de la licencia (prórrogas, continuaciones) ni límites del pre/postnatal.',
-      'El pago efectivo lo determina la entidad (FONASA, Isapre o empleador) con la liquidación real.',
+      'El pago efectivo lo determina la entidad pagadora (COMPIN, Caja de Compensación o Isapre) con la liquidación real.',
     ],
     workedExample: {
       title: 'Ejemplo: neta $900.000 con licencia de 15 días',

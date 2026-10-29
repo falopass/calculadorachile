@@ -68,6 +68,9 @@ interface LiveIndicator {
   date?: string;
 }
 
+/** Slugs cuyo title no lleva el sufijo " | CalculaChile" (E-018). */
+const TITLE_SIN_SUFIJO = new Set(['calculadora-uf-clp']);
+
 function extractLiveIndicator(
   kind: LiveKind,
   live: CurrentValues | null,
@@ -258,6 +261,10 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
   // `category` es un campo top-level útil para algunos crawlers
   // (Apple News, Pinterest). Lo añadimos sin pisar otros campos.
   metadata.category = categoryLabel;
+  // E-018: algunos titles van sin " | CalculaChile" (plantilla del layout).
+  if (TITLE_SIN_SUFIJO.has(calculator.slug)) {
+    metadata.title = { absolute: titleClean };
+  }
   return metadata;
 }
 
@@ -277,6 +284,7 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
   const kind = LIVE_SLUG_KIND[calculator.slug];
   let live: CurrentValues | null = null;
   let utmFresca: { value: number; date: string } | null = null;
+  let ufFresca = false;
   if (kind) {
     live = await getLiveContext(calculator.slug);
     const indicator = extractLiveIndicator(kind, live);
@@ -284,6 +292,13 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
       liveValue = buildLiveValueBlock(kind, indicator) ?? undefined;
       if (kind === 'utm' && indicator.date) {
         utmFresca = { value: indicator.value, date: indicator.date };
+      }
+      // E-018: el lead dice "Hoy" solo con la UF del Banco Central fechada
+      // hoy en Santiago (la frescura de 48 h no basta, ni Mindicador/snapshot).
+      if (kind === 'uf' && indicator.date) {
+        ufFresca =
+          indicator.source === 'bcentral' &&
+          formatDDMMYYYY(new Date(indicator.date)) === formatDDMMYYYY(new Date());
       }
     }
   }
@@ -295,6 +310,8 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
     utm: live?.values.utm ?? FALLBACK_VALUES.utm,
     utmFecha: live?.dates.utm ?? FALLBACK_VALUES.asOf,
     utmFresca,
+    ufFecha: live?.dates.uf ?? FALLBACK_VALUES.asOf,
+    ufFresca,
   });
 
   return (

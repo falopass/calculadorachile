@@ -155,7 +155,7 @@ describe('buildLiveValueTitle', () => {
       new Date('2026-09-23T03:00:00.000Z'),
       NOW,
     );
-    expect(title).toBe('UF hoy 23-09-2026: $40.901,94 | UF a pesos');
+    expect(title).toBe('UF hoy 23-09-2026: $40.901,94 | Tabla UF a pesos');
   });
 
   it('dólar: fecha dd-mm-aaaa y dos decimales es-CL', () => {
