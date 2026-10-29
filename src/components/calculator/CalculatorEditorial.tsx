@@ -149,6 +149,11 @@ const FCS = SEGURO_CESANTIA_BENEFICIOS.fcs;
 const CIC = SEGURO_CESANTIA_BENEFICIOS.cic;
 const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm';
 
+// Enlaces internos del clúster cesantía (desempleo INE jul-sep 2026: 9,8%)
+const AFC_COBRAR = 'https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/';
+const SIMULADOR_CESANTIA = '/calculadoras/calculadora-seguro-cesantia';
+const GUIA_COBRAR_CESANTIA = '/blog/como-cobrar-seguro-cesantia-afc-2026';
+
 const EDITORIAL: Record<string, EditorialContent> = {
   'horas-extra': {
     bottom: (
@@ -281,6 +286,18 @@ const EDITORIAL: Record<string, EditorialContent> = {
           </p>
         </Section>
 
+        <Section title="Después del finiquito: cobra el seguro de cesantía">
+          <p className={pClass}>
+            El finiquito lo paga tu empleador. El seguro de cesantía es aparte: se financia con
+            aportes tuyos y de tu empleador, y se cobra en la <Ext href={AFC_COBRAR}>AFC</Ext>.
+            Revisa{' '}
+            <Int href={GUIA_COBRAR_CESANTIA}>cómo cobrar el seguro de cesantía en la AFC</Int>{' '}
+            (documentos, pasos y fecha de pago) y{' '}
+            <Int href={SIMULADOR_CESANTIA}>simula cuánto te paga el seguro de cesantía</Int> según
+            tu sueldo y tu tipo de contrato.
+          </p>
+        </Section>
+
         <Section title="Ejemplo con sueldo mínimo">
           <p className={pClass}>
             Con el ingreso mínimo de $553.553, una persona despedida por necesidades de la empresa
@@ -345,6 +362,21 @@ const EDITORIAL: Record<string, EditorialContent> = {
           </p>
         </section>
       </>
+    ),
+  },
+  'indemnizacion-anos-servicio': {
+    bottom: (
+      <Section title="Si te despidieron: seguro de cesantía">
+        <p className={pClass}>
+          La indemnización por años de servicio la paga tu empleador. Además, puedes cobrar el
+          seguro de cesantía en la <Ext href={AFC_COBRAR}>AFC</Ext>:{' '}
+          <Int href={SIMULADOR_CESANTIA}>simula cuánto te paga el seguro de cesantía</Int> y sigue
+          la guía de{' '}
+          <Int href={GUIA_COBRAR_CESANTIA}>cómo cobrar el seguro de cesantía en la AFC</Int>. Para
+          el monto total del término de contrato, usa la{' '}
+          <Int href="/calculadoras/calculadora-finiquito">calculadora de finiquito</Int>.
+        </p>
+      </Section>
     ),
   },
   contribuciones: {
