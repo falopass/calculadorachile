@@ -1,6 +1,10 @@
 import type { CalculatorMethodology } from '@/types/calculator';
 import { formatCLP } from '@/lib/formatters';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
+
+// E-014: cifras del tope de gratificación generadas desde las constantes.
+const TOPE_GRAT = topeGratificacion();
 
 // E-017: ejemplo de vacaciones generado con el cálculo real (ORD. 826/13).
 const EJ_VACACIONES = calculateVacaciones({
@@ -241,6 +245,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Calcula la proporción sobre utilidades o el porcentaje de remuneraciones según corresponda.',
       'Aplica el tope legal cuando el sistema lo requiere.',
       'Presenta monto anual y equivalencia periódica disponible.',
+      'El tope usa el ingreso mínimo vigente al 31 de diciembre del año (DT).',
     ],
     assumptions: [
       'La empresa está obligada a gratificar y los datos contables ingresados son correctos.',
@@ -253,14 +258,14 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       title: 'Ejemplo: Gratificación con tope 4,75 Ingresos Mínimos Mensuales (IMM)',
       inputs: [
         'Sueldo base mensual: $700.000',
-        'Sueldo Mínimo (IMM): $553.553 (vigente en Chile 2026)',
+        `Ingreso mínimo (IMM): ${formatCLP(TOPE_GRAT.imm)} (vigente desde el ${TOPE_GRAT.vigenteDesdeTexto}, Ley ${TOPE_GRAT.ley})`,
         'Modalidad: Artículo 50 del Código del Trabajo (25% del sueldo con tope anual)',
       ],
       development: [
         'Cálculo del 25% del sueldo: $700.000 × 25% = $175.000 al mes.',
-        'Tope anual del art. 50: 4,75 × $553.553 = $2.629.377 al año.',
-        'Tope mensual del art. 50: $2.629.377 / 12 = $219.115 al mes.',
-        'Comparación: Como $175.000 es menor que el tope ($219.115), corresponde el monto íntegro.',
+        `Tope anual del art. 50: 4,75 × ${formatCLP(TOPE_GRAT.imm)} = ${formatCLP(TOPE_GRAT.anual)} al año.`,
+        `Tope mensual del art. 50: ${formatCLP(TOPE_GRAT.anual)} ÷ 12 = ${formatCLP(TOPE_GRAT.mensual)} al mes.`,
+        `Comparación: como $175.000 es menor que el tope (${formatCLP(TOPE_GRAT.mensual)}), corresponde el monto íntegro.`,
       ],
       result: 'Gratificación legal mensual a pagar: $175.000.',
     },
