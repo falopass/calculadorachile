@@ -780,7 +780,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
     ],
     limitations: [
       'No considera variaciones de la licencia (prórrogas, continuaciones) ni límites del pre/postnatal.',
-      'El pago efectivo lo determina la entidad (FONASA, Isapre o empleador) con la liquidación real.',
+      'El pago efectivo lo determina la entidad pagadora (COMPIN, Caja de Compensación o Isapre) con la liquidación real.',
     ],
     workedExample: {
       title: 'Ejemplo: neta $900.000 con licencia de 15 días',

@@ -448,10 +448,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Simula el Seguro de Cesantía AFC: monto del primer giro (70% de tu remuneración), giros según tu cuenta individual, topes 2026 y requisitos. Gratis.',
   },
 
+  // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
   'calculadora-licencia-medica': {
-    seoTitle: 'Licencia Médica 2026: cuánto pagan por tus días',
+    seoTitle: 'Licencia médica: ¿cuántos días pagan? Tabla y cálculo 2026', // 58
     seoDescription:
-      'Calcula cuánto paga tu licencia médica: 1/30 de tu remuneración promedio con piso legal; desde el día 1 si superas 10 días (si no, desde el 4º). SUSESO.',
+      'Si la licencia dura 10 días o menos, no se pagan los 3 primeros; desde 11 días se paga desde el día 1. Tabla de 1 a 15 días y quién paga. SUSESO.', // 145
   },
 
   'calculadora-aporte-familiar-permanente': {
