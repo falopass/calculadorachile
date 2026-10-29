@@ -10,6 +10,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateImpuestoSegundaCategoria } from '../impuesto-segunda-categoria';
 import { IMPUESTO_SEGUNDA_CATEGORIA, UTM } from '@/lib/values/constants';
+import { calculateUTMCLP } from '../utm-clp';
 
 const UTM_TEST = 71_721;
 
@@ -111,5 +112,34 @@ describe('calculateImpuestoSegundaCategoria', () => {
     // Tramo más alto: tasa efectiva > 25% y < 40% marginal
     expect(r.tasaEfectiva).toBeGreaterThan(25);
     expect(r.tasaEfectiva).toBeLessThan(40);
+  });
+});
+
+// Tabla SII noviembre 2026 (vigente desde 01-11-2026), UTM $72.440:
+// https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm
+// https://www.sii.cl/valores_y_fechas/utm/utm2026.htm
+describe('noviembre 2026, UTM $72.440', () => {
+  const valorUTM = 72_440;
+  const casos: Array<[number, number]> = [
+    [977_940, 0], // exento hasta $977.940
+    [1_000_000, 882], // 0,04 × 1.000.000 − 39.117,60
+    [2_173_200, 47_810], // 0,04 × 2.173.200 − 39.117,60
+    [3_000_000, 113_954], // 0,08 × 3.000.000 − 126.045,60
+    [5_000_000, 349_744], // 0,135 × 5.000.000 − 325.255,60
+    [25_000_000, 7_187_879], // 0,40 × 25.000.000 − 2.812.120,80
+  ];
+
+  it.each(casos)('sueldo $%i paga $%i', (sueldo, esperado) => {
+    const r = calculateImpuestoSegundaCategoria({
+      sueldoBrutoMensual: sueldo,
+      mesesTrabajados: 1,
+      valorUTM,
+    });
+    expect(r.impuestoMensual).toBe(esperado);
+  });
+
+  it('UTA noviembre 2026 = 12 UTM = $869.280', () => {
+    const r = calculateUTMCLP({ monto: 12, direccion: 'utm-a-clp', valorUTM });
+    expect(r.montoConvertido).toBe(869_280);
   });
 });
