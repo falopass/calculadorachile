@@ -347,7 +347,8 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           'En el sistema del artículo 50 del Código del Trabajo, la gratificación es el 25% de lo devengado por remuneraciones mensuales, con un tope de 4,75 ingresos mínimos mensuales al año (',
           { text: 'Dirección del Trabajo', href: DT_GRATIFICACION_URL },
           `). Con el ingreso mínimo de ${formatCLP(t.imm)}, vigente desde el ${t.vigenteDesdeTexto} (`,
-          { text: 'Ley 21.830', href: BCN_LEY_21830_URL },
+          // La ficha BCN enlazada es la de la Ley 21.830; con otra ley, la ficha DT del IMM.
+          { text: `Ley ${t.ley}`, href: t.ley === '21.830' ? BCN_LEY_21830_URL : DT_IMM_URL },
           `), el tope es ${formatCLP(t.anual)} al año, o ${formatCLP(t.mensual)} al mes. Desde un sueldo bruto de unos ${formatCLP(t.umbral)} al mes, la gratificación queda en el tope.`,
         ]),
         shortAnswers: [

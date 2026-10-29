@@ -258,7 +258,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       title: 'Ejemplo: Gratificación con tope 4,75 Ingresos Mínimos Mensuales (IMM)',
       inputs: [
         'Sueldo base mensual: $700.000',
-        `Ingreso mínimo (IMM): ${formatCLP(TOPE_GRAT.imm)} (vigente desde el 1 de mayo de ${TOPE_GRAT.anio}, Ley 21.830)`,
+        `Ingreso mínimo (IMM): ${formatCLP(TOPE_GRAT.imm)} (vigente desde el ${TOPE_GRAT.vigenteDesdeTexto}, Ley ${TOPE_GRAT.ley})`,
         'Modalidad: Artículo 50 del Código del Trabajo (25% del sueldo con tope anual)',
       ],
       development: [

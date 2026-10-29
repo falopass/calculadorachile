@@ -18,6 +18,8 @@ export interface TopeGratificacion {
   vigenteDesdeTexto: string;
   /** `INGRESO_MINIMO.vigente_desde` (AAAA-MM-DD). */
   vigenteDesde: string;
+  /** Ley que fija el IMM (`INGRESO_MINIMO.ley`, p. ej. "21.830"). */
+  ley: string;
   /** Tope anual redondeado al peso: 4,75 × IMM. */
   anual: number;
   /** Tope mensual redondeado al peso: 4,75 × IMM ÷ 12. */
@@ -54,6 +56,7 @@ export function topeGratificacion(imm: number = INGRESO_MINIMO.mensual): TopeGra
     imm,
     anio: Number(INGRESO_MINIMO.vigente_desde.slice(0, 4)),
     vigenteDesde: INGRESO_MINIMO.vigente_desde,
+    ley: INGRESO_MINIMO.ley,
     vigenteDesdeTexto: fechaLarga(INGRESO_MINIMO.vigente_desde),
     anual: Math.round(anualExacto),
     mensual: Math.round(mensualExacto),
