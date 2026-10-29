@@ -50,6 +50,7 @@ import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
 import { calculateFactorHoraExtra } from '@/lib/calculations/factor-hora-extra';
 import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf';
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
+import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 
 export interface QuickAnswerLink {
   text: string;
@@ -138,6 +139,12 @@ const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
 const IMM_LEY_21830_DESDE = '2026-05-01';
 const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
 const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
+const DT_LICENCIA_CARENCIA_URL = 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html';
+const SUSESO_SIL_URL = 'https://www.suseso.gob.cl/606/w3-article-19931.html';
+const SUSESO_QUIEN_PAGA_URL = 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html';
+
+/** Remuneración neta del ejemplo de licencia médica (igual que la metodología). */
+export const LICENCIA_EJEMPLO_NETA = 900_000;
 
 /** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
 export function buildUTMLeadParts(
@@ -863,6 +870,48 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         example: {
           caption: `Con el sueldo mínimo de cada jornada, AFP Habitat (1,27%) y Fonasa 7%. El costo del empleador suma 1,11% de indemnización a todo evento, 3% de cesantía, la cotización vigente de la reforma de pensiones y 0,95% de accidentes del trabajo.`,
           headers: ['Modalidad', 'Sueldo mínimo', 'Sueldo líquido', 'Costo empleador'],
+          rows,
+        },
+      };
+    }
+
+    case 'licencia-medica': {
+      // E-020 (brief 2026-10-29): tabla de 1 a 15 días generada con
+      // calculateLicenciaMedica; nunca montos escritos a mano.
+      const rows = Array.from({ length: 15 }, (_, i) => {
+        const r = calculateLicenciaMedica({
+          remuneracionNetaPromedio: LICENCIA_EJEMPLO_NETA,
+          diasLicencia: i + 1,
+        });
+        return [
+          `${r.diasLicencia} ${r.diasLicencia === 1 ? 'día' : 'días'}`,
+          `${r.diasPagados}`,
+          formatCLP(r.totalSubsidio),
+        ];
+      });
+      const base = calculateLicenciaMedica({
+        remuneracionNetaPromedio: LICENCIA_EJEMPLO_NETA,
+        diasLicencia: 1,
+      });
+      const pagados = (dias: number) =>
+        calculateLicenciaMedica({
+          remuneracionNetaPromedio: LICENCIA_EJEMPLO_NETA,
+          diasLicencia: dias,
+        }).diasPagados;
+      return {
+        h1: 'Calculadora de licencia médica: cuánto y cuántos días te pagan',
+        ...withLinks([
+          'Si tu licencia dura 10 días o menos, los 3 primeros días no se pagan: recibes subsidio desde el 4.º día. Si dura 11 días o más, se paga desde el día 1 (',
+          { text: 'Dirección del Trabajo', href: DT_LICENCIA_CARENCIA_URL },
+          '). Cada día pagado vale 1/30 de tu remuneración neta promedio de los 3 meses anteriores (',
+          { text: 'SUSESO', href: SUSESO_SIL_URL },
+          '). Lo paga la COMPIN o tu Caja de Compensación si estás en Fonasa, o tu Isapre (',
+          { text: 'SUSESO, Compendio', href: SUSESO_QUIEN_PAGA_URL },
+          ').',
+        ]),
+        example: {
+          caption: `Días pagados y subsidio estimado con una remuneración neta de ${formatCLP(LICENCIA_EJEMPLO_NETA)} (${formatCLP(Math.round(base.montoDiario))} por día). Con 10 días te pagan ${pagados(10)}; con 11, te pagan ${pagados(11)}.`,
+          headers: ['Días de licencia', 'Días pagados', 'Subsidio estimado'],
           rows,
         },
       };

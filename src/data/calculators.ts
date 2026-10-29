@@ -4395,7 +4395,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'sueldo',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-09-26',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'SUSESO — Subsidio por incapacidad laboral',
@@ -4406,6 +4406,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'Dirección del Trabajo — Licencias médicas',
         url: 'https://www.dt.gob.cl/portal/1628/w3-article-95288.html',
         note: 'Pago desde el primer día si supera 10 días; desde el 4° si es menor o igual',
+      },
+      {
+        name: 'Dirección del Trabajo — Días de carencia',
+        url: 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html',
+        note: 'Licencias de 10 días o menos: subsidio desde el 4° día',
+      },
+      {
+        name: 'SUSESO — Pago de los días de carencia',
+        url: 'https://www.suseso.gob.cl/606/w3-article-19933.html',
+        note: 'El empleador no está obligado a pagarlos, salvo pacto',
+      },
+      {
+        name: 'SUSESO — Compendio: entidades pagadoras',
+        url: 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html',
+        note: 'COMPIN, Caja de Compensación o Isapre',
       },
     ],
     keywords: [

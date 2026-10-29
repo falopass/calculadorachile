@@ -22,6 +22,7 @@ const IDS = [
   'factor-hora-extra',
   'tope-imponible-90-uf',
   'sueldo-casa-particular',
+  'licencia-medica',
 ];
 
 describe('getQuickAnswer', () => {
@@ -54,7 +55,8 @@ describe('getQuickAnswer', () => {
       const qa = getQuickAnswer(id, CTX);
       const cells = [
         qa?.lead,
-        qa?.h1,
+        ...(qa?.h1 !== undefined ? [qa.h1] : []),
+        ...(qa?.shortAnswers?.flatMap((a) => [a.question, a.answer]) ?? []),
         ...(qa?.example?.headers ?? []),
         ...(qa?.example?.rows.flat() ?? []),
       ];
@@ -170,6 +172,30 @@ describe('getQuickAnswer', () => {
       expect(qa.example!.rows.at(-1)![0]).toBe('40 horas');
       expect(qa.example!.caption).not.toContain('baja a');
       expect(qa.example!.caption).toContain('hasta 39 horas');
+    });
+  });
+
+  describe('licencia-medica: tabla de 1 a 15 días (E-020)', () => {
+    it('15 filas; 1 a 3 días sin pago; 10 días → 7 pagados; 11 → 11', () => {
+      const qa = getQuickAnswer('licencia-medica', CTX)!;
+      const rows = qa.example!.rows;
+      expect(rows).toHaveLength(15);
+      expect(rows.slice(0, 3).map((r) => r[1])).toEqual(['0', '0', '0']);
+      expect(rows[0]).toEqual(['1 día', '0', '$0']);
+      expect(rows[3]).toEqual(['4 días', '1', '$30.000']);
+      expect(rows[9]).toEqual(['10 días', '7', '$210.000']);
+      expect(rows[10]).toEqual(['11 días', '11', '$330.000']);
+      expect(rows[14]).toEqual(['15 días', '15', '$450.000']);
+      expect(qa.example!.caption).toContain('Con 10 días te pagan 7; con 11, te pagan 11.');
+    });
+
+    it('h1 propio y lead con fuentes DT y SUSESO', () => {
+      const qa = getQuickAnswer('licencia-medica', CTX)!;
+      expect(qa.h1).toBe('Calculadora de licencia médica: cuánto y cuántos días te pagan');
+      const hrefs = (qa.leadParts ?? []).flatMap((p) => (typeof p === 'string' ? [] : [p.href]));
+      expect(hrefs.some((h) => h.includes('dt.gob.cl'))).toBe(true);
+      expect(hrefs.some((h) => h.includes('suseso.gob.cl'))).toBe(true);
+      expect(hrefs.join(' ')).not.toContain('95312');
     });
   });
 });
