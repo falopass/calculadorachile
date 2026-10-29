@@ -34,6 +34,7 @@ import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios'
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateGratificacion } from '@/lib/calculations/gratificacion';
+import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateImpuestoSegundaCategoria } from '@/lib/calculations/impuesto-segunda-categoria';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateHorasExtra } from '@/lib/calculations/horas-extra';
@@ -109,6 +110,11 @@ function withLinks(parts: QuickAnswerPart[]): Pick<QuickAnswer, 'lead' | 'leadPa
 const SII_UTM_URL = 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm';
 const BCN_CODIGO_TRABAJO_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
 const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.html';
+const DT_GRATIFICACION_URL = 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html';
+const DT_IMM_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
+const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
+/** Vigencia del IMM fijado por la Ley 21.830 (E-014). */
+const IMM_LEY_21830_DESDE = '2026-05-01';
 const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
 const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
 
@@ -319,7 +325,9 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'gratificacion-legal': {
-      const sueldos = [553_553, 800_000, 1_500_000];
+      // E-014: todas las cifras salen de topeGratificacion() (constantes).
+      const t = topeGratificacion();
+      const sueldos = [INGRESO_MINIMO.mensual, 800_000, t.umbral, 1_500_000];
       const rows = sueldos.map((sueldoBruto) => {
         const r = calculateGratificacion({
           sueldoBruto,
@@ -334,10 +342,52 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Calculadora de gratificación legal: 25% con tope 4,75 IMM',
-        lead: `En el sistema del artículo 50 del Código del Trabajo la gratificación es el menor entre el 25% de la remuneración mensual y el tope de 4,75 ingresos mínimos dividido en 12 (${formatCLP(Math.round((INGRESO_MINIMO.mensual * 4.75) / 12))} mensuales con el IMM vigente).`,
+        h1: `Calculadora de gratificación legal y tope ${t.anio} (4,75 IMM)`,
+        ...withLinks([
+          'En el sistema del artículo 50 del Código del Trabajo, la gratificación es el 25% de lo devengado por remuneraciones mensuales, con un tope de 4,75 ingresos mínimos mensuales al año (',
+          { text: 'Dirección del Trabajo', href: DT_GRATIFICACION_URL },
+          `). Con el ingreso mínimo de ${formatCLP(t.imm)}, vigente desde el ${t.vigenteDesdeTexto} (`,
+          // La ficha BCN enlazada es la de la Ley 21.830; con otra ley, la ficha DT del IMM.
+          { text: `Ley ${t.ley}`, href: t.ley === '21.830' ? BCN_LEY_21830_URL : DT_IMM_URL },
+          `), el tope es ${formatCLP(t.anual)} al año, o ${formatCLP(t.mensual)} al mes. Desde un sueldo bruto de unos ${formatCLP(t.umbral)} al mes, la gratificación queda en el tope.`,
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Cuánto es 4,75 ingresos mínimos mensuales?',
+            answer: `4,75 × ${formatCLP(t.imm)} = ${formatCLP(t.anual)} al año. Dividido en 12 son ${formatCLP(t.mensual)} al mes. Es el máximo de gratificación por trabajador en el sistema del artículo 50.`,
+            sources: [
+              { text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL },
+              { text: 'Dirección del Trabajo, ingreso mínimo mensual', href: DT_IMM_URL },
+            ],
+          },
+          // Solo mientras rija el IMM de la Ley 21.830 (01-05-2026); al cargar
+          // el IMM de 2027 esta respuesta desaparece y hay que redactar otra.
+          ...(t.vigenteDesde === IMM_LEY_21830_DESDE
+            ? [
+                {
+                  question: 'El tope cambia el 1 de enero de 2027',
+                  answer: `La Ley 21.830 reajusta el ingreso mínimo desde el 1 de enero de 2027 según la variación del IPC entre el 1 de mayo y el 31 de diciembre de 2026 (art. 1). Para la gratificación del año 2026, que se paga a más tardar en abril de 2027, el tope sigue siendo ${formatCLP(t.anual)}, porque se usa el ingreso mínimo vigente al 31 de diciembre de cada año. El tope de 2027 se calculará con el ingreso mínimo vigente al 31 de diciembre de 2027. Ese monto todavía no se conoce, y además la ley obliga a enviar un proyecto para un nuevo reajuste desde el 1 de julio de 2027 (art. 7). Actualizaremos esta página cuando se publique el valor oficial.`,
+                  sources: [
+                    { text: 'BCN, Ley 21.830', href: BCN_LEY_21830_URL },
+                    {
+                      text: 'Dirección del Trabajo, gratificación legal',
+                      href: DT_GRATIFICACION_URL,
+                    },
+                  ],
+                },
+              ]
+            : []),
+          {
+            question: '¿Si no trabajé el año completo?',
+            answer:
+              'El tope se aplica en proporción al tiempo trabajado. Pero si estuviste con licencia médica algunos meses, el tope no se reduce.',
+            sources: [
+              { text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL },
+            ],
+          },
+        ],
         example: {
-          caption: `12 meses trabajados, IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026.`,
+          caption: `12 meses trabajados, ingreso mínimo de ${formatCLP(t.imm)} vigente desde el ${t.vigenteDesdeTexto} (tope mensual ${formatCLP(t.mensual)}). La fila de ${formatCLP(t.umbral)} muestra el sueldo desde el que se llega al tope.`,
           headers: ['Sueldo bruto', 'Gratificación mensual', 'Gratificación anual', 'Método'],
           rows,
         },

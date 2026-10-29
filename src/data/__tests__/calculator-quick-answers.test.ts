@@ -64,6 +64,18 @@ describe('getQuickAnswer', () => {
     }
   });
 
+  it('gratificación (E-014): tope generado, fila del umbral y sin montos escritos a mano', () => {
+    const qa = getQuickAnswer('gratificacion-legal', CTX)!;
+    expect(qa.h1).toBe('Calculadora de gratificación legal y tope 2026 (4,75 IMM)');
+    expect(qa.lead).toContain('$2.629.377');
+    expect(qa.lead).toContain('$219.115');
+    expect(qa.lead).toContain('$876.459');
+    const rows = qa.example!.rows;
+    expect(rows.map((r) => r[0])).toEqual(['$553.553', '$800.000', '$876.459', '$1.500.000']);
+    expect(rows[2]).toEqual(['$876.459', '$219.115', '$2.629.377', '4.75 IMM']);
+    expect(qa.shortAnswers?.length).toBe(3);
+  });
+
   it('vacaciones (E-017): tabla de 1 a 11 meses; 6 meses = 10,5 corridos y $280.000', () => {
     const qa = getQuickAnswer('vacaciones-proporcionales', CTX)!;
     const rows = qa.example!.rows;
