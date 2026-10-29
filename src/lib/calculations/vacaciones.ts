@@ -90,6 +90,17 @@ function proyectarDiasCorridos(fechaTermino: Date, diasHabiles: number): number 
     corridos += 1;
     if (esHabilParaFeriado(cursor)) habilesContados += 1;
   }
+  if (fraccion > 0) {
+    // DT ORD. 826/13 (05-03-2007): https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html
+    // La fracción de día que no cabe antes de un sábado, domingo o festivo
+    // pasa al día hábil siguiente; los días inhábiles intermedios se pagan.
+    const siguiente = new Date(cursor);
+    siguiente.setUTCDate(siguiente.getUTCDate() + 1);
+    while (!esHabilParaFeriado(siguiente)) {
+      corridos += 1;
+      siguiente.setUTCDate(siguiente.getUTCDate() + 1);
+    }
+  }
   return corridos + fraccion;
 }
 
@@ -97,6 +108,8 @@ function proyectarDiasCorridos(fechaTermino: Date, diasHabiles: number): number 
  * Calcula 1,25 días hábiles por mes completo y 1,25/30 por día adicional.
  * Para indemnizar al terminar el contrato, proyecta esos días desde el día
  * siguiente al término e incorpora sábados, domingos y feriados nacionales.
+ * Si la fracción de día no cabe antes de un día inhábil, pasa al día hábil
+ * siguiente y los inhábiles intermedios se pagan (DT, ORD. 826/13).
  * No incorpora feriados regionales ni extraordinarios.
  */
 export function calculateVacaciones(input: VacacionesInput): VacacionesResult {

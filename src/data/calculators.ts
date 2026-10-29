@@ -802,12 +802,22 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-13',
+    lastReviewed: '2026-10-29',
     sources: [
       {
-        name: 'DT — Feriado proporcional',
-        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60183.html',
-        note: 'Procedimiento de días hábiles y proyección de sábados, domingos y festivos',
+        name: 'DT — ¿Cómo se calcula el feriado proporcional?',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html',
+        note: 'Factor 1,25 por mes y conteo en días corridos desde el día siguiente al término',
+      },
+      {
+        name: 'DT — ORD. 826/13 (fracción de día)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html',
+        note: 'La fracción que no cabe antes de un fin de semana o festivo pasa al día hábil siguiente',
+      },
+      {
+        name: 'DT — ORD. 3343/49 (remuneración variable)',
+        url: 'https://dt.gob.cl/legislacion/1624/w3-article-103857.html',
+        note: 'Base de cálculo con remuneraciones variables',
       },
       {
         name: 'BCN — Código del Trabajo',
@@ -877,7 +887,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cómo se calculan las vacaciones proporcionales?',
         answer:
-          'Se acumulan 1,25 días hábiles por mes completo y 1,25/30 por cada día adicional. Al terminar el contrato, esos días se proyectan desde el día siguiente y se agregan los sábados, domingos y festivos que caen dentro del período.',
+          'Se acumulan 1,25 días hábiles por mes completo y 1,25/30 por cada día adicional. Ese total se cuenta en el calendario desde el día siguiente al término del contrato, sumando los sábados, domingos y festivos del período. Se paga el total de días corridos × el valor diario (sueldo ÷ 30). Si una fracción de día no cabe antes de un fin de semana o festivo, pasa al día hábil siguiente (DT, Dictamen 8413/143 y ORD. 826/13).',
+      },
+      {
+        question: '¿Cuánto valen mis vacaciones?',
+        answer:
+          'El valor diario es la remuneración íntegra ÷ 30. Con sueldo fijo se usa el sueldo. Con remuneración variable se usa el promedio de lo ganado en los últimos 3 meses trabajados. Con remuneración mixta, el sueldo más el promedio de lo variable (art. 71 del Código del Trabajo; DT). Ese valor se multiplica por los días corridos.',
+      },
+      {
+        question: '¿Qué pasa si trabajé más de un año?',
+        answer:
+          "Si completaste un año, ese feriado ya no es proporcional: corresponden los 15 días hábiles completos (art. 73 inc. 2). Lo proporcional se cuenta desde la última anualidad cumplida hasta el término (art. 73 inc. 3). En la calculadora, ingresa los días no tomados en 'Días de vacaciones no tomados' y los meses desde la última anualidad en 'Meses trabajados'. Si tienes feriado progresivo, el factor mensual es (15 + días progresivos) ÷ 12 (DT 60200). Más detalle en la guía de vacaciones y feriado legal.",
       },
       {
         question: '¿Cuántos días de vacaciones me corresponden por año?',
@@ -4440,12 +4460,22 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'sueldo',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-09-26',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'Dirección del Trabajo — Jornada parcial e ingreso mínimo',
         url: 'https://www.dt.gob.cl/portal/1626/w3-article-60136.html',
         note: 'IMM proporcional solo hasta 30 h semanales; jornada intermedia exige IMM íntegro',
+      },
+      {
+        name: 'Dirección del Trabajo — Jornada parcial (art. 40 bis)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60756.html',
+        note: 'Jornada parcial: 30 horas semanales o menos',
+      },
+      {
+        name: 'Dirección del Trabajo — Jornada de 42 horas',
+        url: 'https://dt.gob.cl/portal/1626/w3-article-129225.html',
+        note: '42 h desde el 26-04-2026; 40 h desde el 26-04-2028 (Ley 21.561)',
       },
     ],
     keywords: [
