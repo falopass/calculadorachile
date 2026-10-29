@@ -563,10 +563,13 @@ const EDITORIAL: Record<string, EditorialContent> = {
             ]}
           />
           <p className={pClass}>
-            Fuente: <Ext href={SUSESO_QUIEN_PAGA}>SUSESO, Compendio de licencias médicas</Ext>. Si
-            no conoces tu remuneración neta, calcúlala con la{' '}
+            Fuente: <Ext href={SUSESO_QUIEN_PAGA}>SUSESO, Compendio de licencias médicas</Ext>. Para
+            la remuneración neta, usa tus 3 últimas liquidaciones: el imponible menos las
+            cotizaciones y el impuesto. No uses el líquido a pago tal cual, porque suma haberes no
+            imponibles (colación, movilización) y resta descuentos personales. Para entender cada
+            descuento, revisa la{' '}
             <Int href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</Int>{' '}
-            o revisa la <Int href="/guias/sueldo-liquido-chile">guía de sueldo líquido</Int>.
+            o la <Int href="/guias/sueldo-liquido-chile">guía de sueldo líquido</Int>.
           </p>
         </Section>
 
@@ -575,7 +578,8 @@ const EDITORIAL: Record<string, EditorialContent> = {
             Si una licencia se da inmediatamente a continuación de otra y por el mismo diagnóstico,
             se consideran una sola licencia para contar los días pagados y calcular el monto (
             <Ext href={SUSESO_SIL}>SUSESO</Ext>). Por ejemplo, 7 días seguidos de otros 7 por lo
-            mismo suman 14 días: se pagan desde el día 1.
+            mismo suman 14 días: se pagan desde el día 1. La calculadora no suma licencias por su
+            cuenta: en ese caso ingresa el total de días (14).
           </p>
         </Section>
 
