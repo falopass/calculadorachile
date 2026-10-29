@@ -1181,7 +1181,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Todos los trabajadores tienen derecho a gratificación?',
         answer:
-          'No depende del sueldo del trabajador, sino de su empleador. Es obligatoria cuando se cumplen a la vez cuatro requisitos: que sea un establecimiento minero, industrial, comercial o agrícola, una empresa o cualquier otro, o una cooperativa; que persiga fines de lucro (salvo las cooperativas); que esté obligado a llevar libros de contabilidad; y que obtenga utilidades líquidas en el año. Si el empleador no cumple esos requisitos, la gratificación legal no es exigible, salvo que el contrato pacte una gratificación garantizada. Tampoco tienen derecho los trabajadores con contratos de 30 días o menos, o con prórrogas que no superen 60 días en total.',
+          'No depende del sueldo del trabajador, sino de su empleador. Es obligatoria cuando se cumplen a la vez cuatro requisitos: que sea un establecimiento minero, industrial, comercial o agrícola, una empresa o cualquier otro, o una cooperativa; que persiga fines de lucro (salvo las cooperativas); que esté obligado a llevar libros de contabilidad; y que obtenga utilidades líquidas en el año. Si el empleador no cumple esos requisitos, la gratificación legal no es exigible, salvo que el contrato pacte una gratificación garantizada. Con contratos de 30 días o menos, o con prórrogas que no superen 60 días en total, no hay una gratificación aparte: según la DT, se entiende incluida en la remuneración convenida, en proporción al tiempo servido.',
       },
       {
         question: '¿La gratificación se paga mensual o anualmente?',

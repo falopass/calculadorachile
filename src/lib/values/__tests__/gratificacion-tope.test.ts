@@ -27,7 +27,21 @@ describe('topeGratificacion (E-014)', () => {
 
   it('en el umbral el 25% ya llega al tope', () => {
     const t = topeGratificacion();
-    const r = calculateGratificacion({ sueldoBruto: t.umbral, mesesTrabajados: 12, tipoGratificacion: 'mensual' });
+    const r = calculateGratificacion({
+      sueldoBruto: t.umbral,
+      mesesTrabajados: 12,
+      tipoGratificacion: 'mensual',
+    });
     expect(r.gratificacionMensual).toBe(t.mensual);
+  });
+  it('el umbral redondea hacia arriba: su 25% siempre llega al tope (IMM 500.001)', () => {
+    const t = topeGratificacion(500_001);
+    const exacto = (500_001 * 4.75) / 12;
+    expect(t.umbral * 0.25).toBeGreaterThanOrEqual(exacto);
+    expect((t.umbral - 1) * 0.25).toBeLessThan(exacto);
+  });
+
+  it('fecha de vigencia en texto', () => {
+    expect(topeGratificacion().vigenteDesdeTexto).toBe('1 de mayo de 2026');
   });
 });

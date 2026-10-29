@@ -111,6 +111,8 @@ const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.htm
 const DT_GRATIFICACION_URL = 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html';
 const DT_IMM_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
 const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
+/** Vigencia del IMM fijado por la Ley 21.830 (E-014). */
+const IMM_LEY_21830_DESDE = '2026-05-01';
 
 /** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
 export function buildUTMLeadParts(
@@ -285,7 +287,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ...withLinks([
           'En el sistema del artículo 50 del Código del Trabajo, la gratificación es el 25% de lo devengado por remuneraciones mensuales, con un tope de 4,75 ingresos mínimos mensuales al año (',
           { text: 'Dirección del Trabajo', href: DT_GRATIFICACION_URL },
-          `). Con el ingreso mínimo de ${formatCLP(t.imm)}, vigente desde el 1 de mayo de ${t.anio} (`,
+          `). Con el ingreso mínimo de ${formatCLP(t.imm)}, vigente desde el ${t.vigenteDesdeTexto} (`,
           { text: 'Ley 21.830', href: BCN_LEY_21830_URL },
           `), el tope es ${formatCLP(t.anual)} al año, o ${formatCLP(t.mensual)} al mes. Desde un sueldo bruto de unos ${formatCLP(t.umbral)} al mes, la gratificación queda en el tope.`,
         ]),
@@ -298,23 +300,34 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
               { text: 'Dirección del Trabajo, ingreso mínimo mensual', href: DT_IMM_URL },
             ],
           },
-          {
-            question: `El tope cambia el 1 de enero de ${t.anio + 1}`,
-            answer: `La Ley 21.830 reajusta el ingreso mínimo desde el 1 de enero de 2027 según la variación del IPC entre el 1 de mayo y el 31 de diciembre de 2026 (art. 1). La ley ordena dictar, a más tardar el 15 de enero de 2027, un decreto con los valores resultantes (art. 6). Para la gratificación del año 2026, que se paga a más tardar en abril de 2027, el tope sigue siendo ${formatCLP(t.anual)}, porque se usa el ingreso mínimo vigente al 31 de diciembre de cada año. El tope de 2027 se calculará con el ingreso mínimo vigente al 31 de diciembre de 2027. Ese monto todavía no se conoce, y además la ley obliga a enviar un proyecto para un nuevo reajuste desde el 1 de julio de 2027 (art. 7). Actualizaremos esta página cuando se publique el valor oficial.`,
-            sources: [
-              { text: 'BCN, Ley 21.830', href: BCN_LEY_21830_URL },
-              { text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL },
-            ],
-          },
+          // Solo mientras rija el IMM de la Ley 21.830 (01-05-2026); al cargar
+          // el IMM de 2027 esta respuesta desaparece y hay que redactar otra.
+          ...(t.vigenteDesde === IMM_LEY_21830_DESDE
+            ? [
+                {
+                  question: 'El tope cambia el 1 de enero de 2027',
+                  answer: `La Ley 21.830 reajusta el ingreso mínimo desde el 1 de enero de 2027 según la variación del IPC entre el 1 de mayo y el 31 de diciembre de 2026 (art. 1). Para la gratificación del año 2026, que se paga a más tardar en abril de 2027, el tope sigue siendo ${formatCLP(t.anual)}, porque se usa el ingreso mínimo vigente al 31 de diciembre de cada año. El tope de 2027 se calculará con el ingreso mínimo vigente al 31 de diciembre de 2027. Ese monto todavía no se conoce, y además la ley obliga a enviar un proyecto para un nuevo reajuste desde el 1 de julio de 2027 (art. 7). Actualizaremos esta página cuando se publique el valor oficial.`,
+                  sources: [
+                    { text: 'BCN, Ley 21.830', href: BCN_LEY_21830_URL },
+                    {
+                      text: 'Dirección del Trabajo, gratificación legal',
+                      href: DT_GRATIFICACION_URL,
+                    },
+                  ],
+                },
+              ]
+            : []),
           {
             question: '¿Si no trabajé el año completo?',
             answer:
               'El tope se aplica en proporción al tiempo trabajado. Pero si estuviste con licencia médica algunos meses, el tope no se reduce.',
-            sources: [{ text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL }],
+            sources: [
+              { text: 'Dirección del Trabajo, gratificación legal', href: DT_GRATIFICACION_URL },
+            ],
           },
         ],
         example: {
-          caption: `12 meses trabajados, ingreso mínimo de ${formatCLP(t.imm)} vigente desde el 1 de mayo de ${t.anio} (tope mensual ${formatCLP(t.mensual)}). La fila de ${formatCLP(t.umbral)} muestra el sueldo desde el que se llega al tope.`,
+          caption: `12 meses trabajados, ingreso mínimo de ${formatCLP(t.imm)} vigente desde el ${t.vigenteDesdeTexto} (tope mensual ${formatCLP(t.mensual)}). La fila de ${formatCLP(t.umbral)} muestra el sueldo desde el que se llega al tope.`,
           headers: ['Sueldo bruto', 'Gratificación mensual', 'Gratificación anual', 'Método'],
           rows,
         },

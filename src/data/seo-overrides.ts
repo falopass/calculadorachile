@@ -82,7 +82,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO
   'calculadora-gratificacion-legal': {
     seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.mensual)} al mes`, // 43
-    seoDescription: `Tope de gratificación legal ${TOPE_GRAT.anio}: 4,75 ingresos mínimos al año, ${formatCLP(TOPE_GRAT.anual)} o ${formatCLP(TOPE_GRAT.mensual)} al mes. Calcula el 25% de tu sueldo y revisa el cambio de ${TOPE_GRAT.anio + 1}.`, // 149
+    seoDescription: `Tope de gratificación legal ${TOPE_GRAT.anio}: 4,75 ingresos mínimos al año, ${formatCLP(TOPE_GRAT.anual)} o ${formatCLP(TOPE_GRAT.mensual)} al mes. Calcula el 25% de tu sueldo${TOPE_GRAT.vigenteDesde === '2026-05-01' ? ' y revisa el cambio de 2027' : ''}.`, // 149 (con la frase del cambio)
   },
 
   'calculadora-horas-extra': {
