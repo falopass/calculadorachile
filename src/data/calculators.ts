@@ -3542,7 +3542,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'impuestos',
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'SII — Impuesto Único 2026',

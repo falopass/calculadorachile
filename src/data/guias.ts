@@ -94,7 +94,7 @@ export const guias: Guia[] = [
       'calculadora sueldo líquido',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-10-19',
+    updatedAt: '2026-10-29',
     readingTime: 16,
     relatedCalculators: [
       'calculadora-sueldo-liquido',
@@ -575,7 +575,7 @@ export const guias: Guia[] = [
       'dólar observado',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-10-29',
     readingTime: 19,
     relatedCalculators: [
       'calculadora-uf-clp',
