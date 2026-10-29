@@ -74,9 +74,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-vacaciones-proporcionales': {
-    seoTitle: 'Vacaciones proporcionales: calcula días y pesos', // 47
+    seoTitle: 'Vacaciones proporcionales: tabla por meses y pesos', // 50
     seoDescription:
-      'Calcula tus vacaciones proporcionales (feriado proporcional) en días y pesos: 1,25 días hábiles por mes trabajado, según el Código del Trabajo. Para finiquito.', // 158
+      'Calcula tus vacaciones proporcionales: 1,25 días hábiles por mes, pagados en días corridos. Tabla de 1 a 11 meses y ejemplo de 6 meses según la DT.', // 147
   },
 
   // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO

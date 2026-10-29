@@ -90,3 +90,43 @@ describe('feriados nacionales 2027 (Vigía YMYL, BCN, 20-10-2026)', () => {
   });
 });
 
+
+describe('fracción de día según DT ORD. 826/13 (E-017)', () => {
+  it('ejemplo del ORD. 826/13: 3 meses con término el martes 03-11-2026 → 5,75 corridos', () => {
+    const r = calculateVacaciones({ sueldoBruto: 800_000, mesesTrabajados: 3, fechaTermino: '2026-11-03' });
+    // mié 4, jue 5, vie 6 (3 hábiles); la fracción 0,75 pasa al lunes 9: se pagan sáb 7 y dom 8
+    expect(r.diasHabilesTotales).toBe(3.75);
+    expect(r.diasCorridosIndemnizables).toBe(5.75);
+  });
+
+  it('6 meses con término el lunes 30-11-2026 → 7,5 hábiles, 10,5 corridos, $280.000', () => {
+    const r = calculateVacaciones({ sueldoBruto: 800_000, mesesTrabajados: 6, fechaTermino: '2026-11-30' });
+    expect(r.diasHabilesTotales).toBe(7.5);
+    expect(r.diasCorridosIndemnizables).toBe(10.5);
+    expect(r.totalVacaciones).toBe(280_000);
+  });
+
+  it('11 meses con término el 30-11-2026 → 20,75 corridos, $553.333', () => {
+    const r = calculateVacaciones({ sueldoBruto: 800_000, mesesTrabajados: 11, fechaTermino: '2026-11-30' });
+    // 13 hábiles llegan al vie 18-12; la fracción 0,75 pasa al lun 21: se pagan sáb 19 y dom 20
+    expect(r.diasCorridosIndemnizables).toBe(20.75);
+    expect(r.totalVacaciones).toBe(553_333);
+  });
+
+  it('7 meses con término el 30-11-2026 → 13,75 corridos (fracción antes del fin de semana)', () => {
+    const r = calculateVacaciones({ sueldoBruto: 800_000, mesesTrabajados: 7, fechaTermino: '2026-11-30' });
+    expect(r.diasCorridosIndemnizables).toBe(13.75);
+  });
+
+  it('6 meses con término el 31-12-2026 → 12,5 corridos', () => {
+    const r = calculateVacaciones({ sueldoBruto: 800_000, mesesTrabajados: 6, fechaTermino: '2026-12-31' });
+    expect(r.diasCorridosIndemnizables).toBe(12.5);
+    expect(r.totalVacaciones).toBe(333_333);
+  });
+
+  it('sin fracción no agrega días inhábiles al final', () => {
+    const r = calculateVacaciones({ sueldoBruto: 600_000, mesesTrabajados: 8, fechaTermino: '2026-11-30' });
+    expect(r.diasCorridosIndemnizables).toBe(15);
+    expect(r.totalVacaciones).toBe(300_000);
+  });
+});

@@ -18,6 +18,8 @@ import { formatCLP2, MESES_ES_CL, toSantiagoParts } from '@/lib/seo/live-value-t
 import {
   INGRESO_MINIMO,
   JORNADA_LEGAL,
+  getTramoJornadaLegal,
+  getProximoCambioJornada,
   ASIGNACION_FAMILIAR_2026,
   CONTRIBUCIONES_BIENES_RAICES,
   TOPE_IMPOSITIVO,
@@ -113,6 +115,8 @@ const DT_IMM_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
 const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
 /** Vigencia del IMM fijado por la Ley 21.830 (E-014). */
 const IMM_LEY_21830_DESDE = '2026-05-01';
+const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
+const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
 
 /** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
 export function buildUTMLeadParts(
@@ -141,6 +145,17 @@ function formatNum(value: number, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
+}
+
+/** Días con hasta 2 decimales y sin ceros sobrantes (10,5; 7; 13,75). */
+function formatDias(value: number): string {
+  return value.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+}
+
+/** '2026-04-26' → '26 de abril de 2026'. */
+function fechaLargaISO(iso: string): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  return `${day} de ${MESES_ES_CL[month - 1]} de ${year}`;
 }
 
 /**
@@ -208,27 +223,71 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'vacaciones-proporcionales': {
-      const casos: [number, number][] = [
-        [553_553, 4],
-        [800_000, 6],
-        [1_200_000, 8],
-      ];
-      const rows = casos.map(([sueldoBruto, mesesTrabajados]) => {
-        const r = calculateVacaciones({ sueldoBruto, mesesTrabajados });
+      // E-017: cifras generadas con calculateVacaciones (incluye ORD. 826/13).
+      // Mantención: antes del 01-01-2027 mover FECHA_EJEMPLO a 2027 y revisar los textos.
+      const FECHA_EJEMPLO = '2026-11-30'; // lunes
+      const vac = (sueldoBruto: number, mesesTrabajados: number, fechaTermino?: string) =>
+        calculateVacaciones({ sueldoBruto, mesesTrabajados, fechaTermino });
+      const rows = Array.from({ length: 11 }, (_, i) => {
+        const m = i + 1;
+        const rIMM = vac(INGRESO_MINIMO.mensual, m, FECHA_EJEMPLO);
+        const r800 = vac(800_000, m, FECHA_EJEMPLO);
         return [
-          formatCLP(sueldoBruto),
-          `${mesesTrabajados}`,
-          formatNum(r.diasHabilesTotales),
-          formatCLP(r.totalVacaciones),
+          `${m}`,
+          formatDias(rIMM.diasHabilesTotales),
+          formatDias(rIMM.diasCorridosIndemnizables),
+          formatCLP(rIMM.totalVacaciones),
+          formatCLP(r800.totalVacaciones),
         ];
       });
+      const e6 = vac(800_000, 6, FECHA_EJEMPLO);
+      const e6SinFecha = vac(800_000, 6);
+      const e6Dic = vac(800_000, 6, '2026-12-31');
+      const e8 = vac(800_000, 8, FECHA_EJEMPLO);
       return {
-        h1: 'Calculadora de vacaciones proporcionales en días y pesos',
-        lead: 'Al terminar el contrato corresponden 1,25 días hábiles de feriado por cada mes completo trabajado (15 días hábiles al año). Para pagarlas se proyectan además los sábados, domingos y feriados que caen dentro del feriado.',
+        h1: 'Calculadora de vacaciones proporcionales: días y pesos según meses trabajados',
+        ...withLinks([
+          'Por cada mes trabajado se acumulan 1,25 días hábiles de vacaciones (15 ÷ 12). Al terminar el contrato, esos días se cuentan en el calendario desde el día siguiente al término y se suman los sábados, domingos y festivos que caen en ese período: se paga ese total de días corridos × sueldo ÷ 30 (',
+          { text: 'Dirección del Trabajo', href: DT_FERIADO_PROPORCIONAL_URL },
+          '; ',
+          { text: 'Código del Trabajo, art. 73', href: BCN_CODIGO_TRABAJO_URL },
+          `). Ejemplo: 6 meses son ${formatDias(e6.diasHabilesTotales)} días hábiles; si el contrato termina el lunes 30-11-2026, son ${formatDias(e6.diasCorridosIndemnizables)} días corridos, es decir ${formatCLP(e6.totalVacaciones)} con un sueldo de $800.000.`,
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Si trabajo 6 meses, cuántos días de vacaciones me corresponden?',
+            answer: `${formatDias(e6.diasHabilesTotales)} días hábiles (6 × 1,25). Al pagarlos en el finiquito se convierten en días corridos: con término el lunes 30-11-2026 son ${formatDias(e6.diasCorridosIndemnizables)} días, porque se agregan el fin de semana del 5 y 6 de diciembre y el feriado del martes 8. Con $800.000 de sueldo: $800.000 ÷ 30 = ${formatCLP(e6.valorDiaCorrida)} por día × ${formatDias(e6.diasCorridosIndemnizables)} = ${formatCLP(e6.totalVacaciones)}. Si solo se pagaran los días hábiles saldrían ${formatCLP(e6SinFecha.totalVacaciones)}: la DT exige sumar los sábados, domingos y festivos.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+              { text: 'Dirección del Trabajo, ORD. 826/13', href: DT_ORD_826_URL },
+            ],
+          },
+          {
+            question: '¿Cuántos días de vacaciones me tocan con 8 meses de trabajo?',
+            answer: `${formatDias(e8.diasHabilesTotales)} días hábiles (8 × 1,25). Con término el 30-11-2026 equivalen a ${formatDias(e8.diasCorridosIndemnizables)} días corridos. La DT da un ejemplo oficial: 8 meses y 2 días son 10,08 días hábiles, más 4 inhábiles, o sea 14,08 días corridos.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+            ],
+          },
+          {
+            question: '¿Por qué importa la fecha de término?',
+            answer: `Porque los días se cuentan desde el día siguiente al término. Si 6 meses terminan el 31-12-2026, el conteo parte el 1 de enero (feriado) y son ${formatDias(e6Dic.diasCorridosIndemnizables)} días corridos (${formatCLP(e6Dic.totalVacaciones)} con $800.000), en vez de ${formatDias(e6.diasCorridosIndemnizables)}. Además, si una fracción de día no alcanza a caber antes de un fin de semana o festivo, pasa al día hábil siguiente y esos días intermedios también se pagan.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado proporcional', href: DT_FERIADO_PROPORCIONAL_URL },
+              { text: 'Dirección del Trabajo, ORD. 826/13', href: DT_ORD_826_URL },
+            ],
+          },
+        ],
         example: {
           caption:
-            'Días hábiles acumulados y estimación en pesos (sueldo ÷ 30 por día corrido), sin fecha de término informada.',
-          headers: ['Sueldo bruto', 'Meses trabajados', 'Días hábiles', 'Indemnización estimada'],
+            'Vacaciones proporcionales de 1 a 11 meses, con término el lunes 30-11-2026: días hábiles (1,25 por mes), días corridos con los sábados, domingos y feriados nacionales que caen en el período (incluye el 8-12 y el 25-12), y monto con sueldo ÷ 30 por día corrido. Con otra fecha de término cambian los días corridos. Con 12 meses corresponde el feriado anual completo.',
+          headers: [
+            'Meses trabajados',
+            'Días hábiles',
+            'Días corridos',
+            `Con ingreso mínimo (${formatCLP(INGRESO_MINIMO.mensual)})`,
+            'Con $800.000',
+          ],
           rows,
         },
       };
@@ -622,17 +681,29 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'sueldo-part-time': {
-      const jornadas = [10, 20, 30, 35, 42];
+      // Tabla de jornadas (brief 2026-10-29): montos desde
+      // calculateSueldoPartTime; la última fila sigue la jornada vigente.
+      const jornadaVigente = getTramoJornadaLegal();
+      const proximo = getProximoCambioJornada();
+      const jornadas = [18, 20, 25, 30, 36, jornadaVigente.horas];
       const rows = jornadas.map((horas) => {
         const r = calculateSueldoPartTime({ horasSemanales: horas });
-        return [`${horas} horas`, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
+        const tipo = r.esJornadaParcial
+          ? 'Parcial: mínimo proporcional'
+          : r.esJornadaIntermedia
+            ? 'Intermedia: mínimo íntegro'
+            : 'Completa (vigente)';
+        return [`${horas} horas`, tipo, formatCLP(r.minimoLegal), formatCLP(r.valorHora)];
       });
+      const cambio = proximo
+        ? ` y baja a ${proximo.horas} horas el ${fechaLargaISO(proximo.vigenteDesde)} (Ley 21.561)`
+        : ' (Ley 21.561)';
       return {
         h1: 'Sueldo part time 30 horas: mínimo legal y valor hora',
         lead: `Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
         example: {
-          caption: `Mínimo legal y valor hora con el IMM de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde mayo de 2026, sin sueldo pactado informado.`,
-          headers: ['Jornada semanal', 'Mínimo legal mensual', 'Valor hora'],
+          caption: `Mínimo legal y valor hora con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)}, vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)} (Ley ${INGRESO_MINIMO.ley}). La jornada completa vigente es de ${jornadaVigente.horas} horas desde el ${fechaLargaISO(jornadaVigente.vigenteDesde)}${cambio}. Hasta 30 horas el mínimo es proporcional; desde 31 y hasta ${jornadaVigente.horas - 1} horas corresponde el mínimo íntegro.`,
+          headers: ['Jornada semanal', 'Tipo de jornada', 'Mínimo legal mensual', 'Valor hora'],
           rows,
         },
       };
