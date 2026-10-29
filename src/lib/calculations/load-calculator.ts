@@ -505,6 +505,9 @@ export async function loadCalculationFn(
         const result = calculateImpuestoSegundaCategoria({
           sueldoBrutoMensual: coerceNumber(inputs.sueldoBrutoMensual),
           mesesTrabajados: coerceNumber(inputs.mesesTrabajados, 0) || undefined,
+          // Igual que sueldo-liquido: descuenta AFP, salud y cesantía antes de la tabla.
+          descontarCotizaciones: true,
+          valorUF: live?.valorUF,
         });
         return impuestoSegundaCategoriaToResults(result);
       };

@@ -435,6 +435,8 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       const rows = sueldos.map((sueldoBrutoMensual) => {
         const r = calculateImpuestoSegundaCategoria({
           sueldoBrutoMensual,
+          descontarCotizaciones: true,
+          valorUF: ctx.uf,
           valorUTM: ctx.utm,
         });
         return [
@@ -446,11 +448,11 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       });
       return {
         h1: 'Calculadora de impuesto de segunda categoría (impuesto único)',
-        lead: 'El impuesto único de segunda categoría se calcula con tramos progresivos sobre la renta mensual expresada en UTM: el primer tramo, hasta 13,5 UTM, está exento; las tasas marginales van de 4% a 40%.',
+        lead: 'El impuesto único de segunda categoría se calcula con tramos progresivos sobre la renta líquida imponible mensual (sueldo imponible menos AFP, salud y cesantía) expresada en UTM: el primer tramo, hasta 13,5 UTM, está exento; las tasas marginales van de 4% a 40%.',
         example: {
           caption:
-            'Tabla mensual en UTM y 12 meses trabajados. La UTM cambia cada mes, así que los límites en pesos también varían.',
-          headers: ['Sueldo mensual', 'Renta en UTM', 'Impuesto mensual', 'Tasa efectiva'],
+            'Tabla mensual en UTM y 12 meses trabajados. Antes de aplicar la tabla se descuentan AFP Habitat (11,27%), Fonasa 7% y cesantía 0,6% (contrato indefinido), igual que en la calculadora de sueldo líquido. La UTM cambia cada mes, así que los límites en pesos también varían.',
+          headers: ['Sueldo bruto mensual', 'Base tributable en UTM', 'Impuesto mensual', 'Tasa efectiva'],
           rows,
         },
       };
