@@ -18,9 +18,39 @@
 
 import { formatCLP, formatPercentage } from '@/lib/formatters';
 import { MESES_ES_CL } from '@/lib/seo/live-value-title';
-import { AFP, GRATIFICACION, INGRESO_MINIMO, JORNADA_LEGAL } from '@/lib/values/constants';
+import {
+  AFP,
+  GRATIFICACION,
+  INGRESO_MINIMO,
+  JORNADA_LEGAL,
+  SEGURO_CESANTIA_BENEFICIOS,
+} from '@/lib/values/constants';
+import { buildCvlistoBuscarTrabajoUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
+
+/** Tabla HTML del Fondo de Cesantía Solidario generada desde la constante (E-021). */
+function tablaFcsHtml(): string {
+  const { indefinido, plazoFijo } = SEGURO_CESANTIA_BENEFICIOS.fcs;
+  const filas = indefinido.porcentajes
+    .map(
+      (pct, i) =>
+        `<tr><td>${i + 1}</td><td>${pct}% (${formatCLP(indefinido.minimos[i])} a ${formatCLP(indefinido.maximos[i])})</td><td>${plazoFijo.porcentajes[i]}% (${formatCLP(plazoFijo.minimos[i])} a ${formatCLP(plazoFijo.maximos[i])})</td></tr>`,
+    )
+    .join('');
+  return `<table><thead><tr><th>Pago</th><th>Indefinido / casa particular: % (mínimo a máximo)</th><th>Plazo fijo / obra / servicio: % (mínimo a máximo)</th></tr></thead><tbody>${filas}</tbody></table>`;
+}
+
+/** Fecha AAAA-MM-DD → "28 de febrero de 2027". */
+function fechaLargaArticulo(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d} de ${MESES_ES_CL[m - 1]} de ${y}`;
+}
+
+const CVLISTO_BUSCAR_TRABAJO_CHECKLIST = buildCvlistoBuscarTrabajoUrl({
+  origen: 'cesantia',
+  placement: 'blog_inline',
+});
 
 export interface ArticleSource {
   label: string;
@@ -747,17 +777,14 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'como-cobrar-seguro-cesantia-afc-2026',
-    title: 'Cómo cobrar el Seguro de Cesantía en la AFC 2026: requisitos y pasos',
+    title: 'Cómo cobrar el seguro de cesantía en la AFC 2026: pasos, saldo y fecha de pago',
     description:
-      'Paso a paso para solicitar el Seguro de Cesantía en Chile: documentos, cotizaciones mínimas, sucursal virtual AFC, giros y qué pasa si te contratan de nuevo.',
+      'Pide el seguro en AFC desde el día siguiente al término. Si lo pides antes del día 30, el 1.er pago llega el jueves siguiente a ese día. Pasos y saldo.',
     date: '2026-07-10',
-    updatedAt: '2026-07-10',
+    updatedAt: '2026-10-29',
     category: 'laboral',
     readingTime: 17,
     relatedGuia: 'finiquito-laboral-chile',
-    seoTitle: 'Cómo cobrar Seguro de Cesantía AFC 2026: pasos y requisitos',
-    seoDescription:
-      'Solicita el Seguro de Cesantía en AFC: documentos, 10 o 5 cotizaciones, sucursal virtual, giros mensuales y suspensión si vuelves a trabajar. Guía Chile 2026.',
     keywords: [
       'cómo cobrar seguro de cesantía',
       'solicitar AFC chile',
@@ -766,8 +793,11 @@ const articleCatalog: ArticleDraft[] = [
       'documentos cobro cesantía',
       'giros AFC sin finiquito',
       'cobrar cesantía plazo fijo',
+      'saldo seguro de cesantía',
+      'cuándo pagan el seguro de cesantía',
     ],
     relatedCalculators: [
+      'calculadora-seguro-cesantia',
       'calculadora-finiquito',
       'calculadora-vacaciones-proporcionales',
       'calculadora-indemnizacion-anos-servicio',
@@ -795,9 +825,22 @@ const articleCatalog: ArticleDraft[] = [
           'Si solicitaste antes de cumplir 30 días desde el término, se procesa el jueves siguiente a que se cumplan 30 días corridos. Si solicitaste después, se procesa el jueves siguiente a la aprobación. Para autodespido del artículo 171, el primer pago se realiza al menos 60 días después del término.',
       },
     ],
-    content: `<p class="article-lead">Cobrar el Seguro de Cesantía no exige esperar siempre el finiquito, pero sí demostrar el término con un documento válido, tener las cotizaciones requeridas y escoger correctamente entre Cuenta Individual y Fondo Solidario. Una solicitud bien presentada recibe respuesta en hasta cinco días hábiles; el primer pago, sin embargo, se programa según los días transcurridos desde el término.</p>
+    content: `<p class="article-lead">Pide el seguro en la <a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">Sucursal Virtual de AFC</a> con tu RUT y ClaveÚnica (o Clave AFC), desde el día siguiente al término del contrato (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>). Si lo pides antes de cumplir 30 días corridos desde el término, el primer pago llega el jueves siguiente a ese día 30; si lo pides después, llega el jueves siguiente a la aprobación (<a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">AFC, fechas y medios de pago</a>).</p>
 
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Finiquito y AFC son pagos distintos</strong><p>El empleador paga remuneraciones, feriado e indemnizaciones que correspondan. AFC paga prestaciones con cargo a la Cuenta Individual de Cesantía y, si se cumplen filtros adicionales, al Fondo de Cesantía Solidario. Solicitar AFC no significa aceptar la causal ni renunciar a reclamar el finiquito.</p></div></aside>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Finiquito y AFC son pagos distintos</strong><p>El empleador paga remuneraciones, feriado e indemnizaciones que correspondan; puedes estimarlo con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>. AFC paga prestaciones con cargo a la Cuenta Individual de Cesantía y, si se cumplen filtros adicionales, al Fondo de Cesantía Solidario. Solicitar AFC no significa aceptar la causal ni renunciar a reclamar el finiquito.</p></div></aside>
+
+<h2>¿Cuándo pagan el seguro de cesantía?</h2>
+<p>Todos los pagos se procesan los jueves (<a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">AFC</a>):</p>
+<ul>
+<li>Si solicitaste <strong>antes</strong> de cumplir 30 días corridos desde el término, el primer pago se procesa el jueves siguiente a que se cumplan esos 30 días. Se cuentan de lunes a domingo, incluidos los feriados.</li>
+<li>Si solicitaste <strong>después</strong> de los 30 días, se procesa el jueves siguiente a la aprobación.</li>
+<li>En autodespido o despido indirecto (artículo 171 del Código del Trabajo), el primer pago se realiza al menos 60 días corridos después del término.</li>
+</ul>
+<div class="numeric-example"><div class="numeric-example__title">Término el lunes 2 de noviembre de 2026 y solicitud el viernes 6</div><ul><li>La solicitud se hizo antes de cumplir 30 días corridos desde el término.</li><li>El día 30 corrido es el miércoles 2 de diciembre de 2026.</li><li>El primer pago se procesa el jueves siguiente: el 3 de diciembre de 2026.</li><li>Una vez aprobada la solicitud, AFC informa las fechas y montos exactos de cada pago.</li></ul><span class="total">Aprobación y fecha de pago no son lo mismo</span></div>
+<p>No existe un plazo máximo para solicitar mientras conserves la condición de cesante; el derecho no desaparece al día 31. Aun así, esperar retrasa el pago y puede complicar documentos cuya vigencia es menor, como la carta de despido sin finiquito.</p>
+
+<h2>Cómo ver tu saldo del seguro de cesantía</h2>
+<p>En el <a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">Seguro en línea de AFC</a> entras con tu RUT y tu ClaveÚnica (también sirve la Clave AFC). Ahí puedes revisar tu saldo, solicitar el cobro y simular montos y fechas de pago (<a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">AFC</a>). Si aún no pides el seguro y quieres una cifra rápida sin iniciar sesión, <a href="/calculadoras/calculadora-seguro-cesantia">simula cuánto te paga el seguro</a>.</p>
 
 <h2>1. Confirma la relación laboral y tu cartola</h2>
 <p>Entra a la <a href="https://webafiliados.afc.cl/" target="_blank" rel="noopener">Sucursal Virtual de AFC</a> con RUT y ClaveÚnica o clave AFC. Revisa el empleador, tipo de contrato informado, fecha de afiliación, cotizaciones y saldo de la CIC. Si el sistema muestra una relación activa que ya terminó o faltan pagos, no inventes otra fecha para avanzar: guarda la cartola y solicita corrección.</p>
@@ -831,18 +874,18 @@ const articleCatalog: ArticleDraft[] = [
 <p>La Cuenta Individual puede utilizarse sin importar si el término fue por despido, vencimiento, renuncia o mutuo acuerdo, siempre que se cumplan los demás requisitos. La causal sí importa para acceder al Fondo Solidario.</p>
 
 <h2>4. Comprueba si puedes pedir Fondo de Cesantía Solidario</h2>
-<p>El FCS complementa cuando el saldo de la CIC no alcanza para financiar al menos cinco pagos. No se activa automáticamente por tener poco dinero. AFC exige conjuntamente:</p>
+<p>El FCS complementa cuando el saldo de la CIC no alcanza para financiar al menos cinco pagos. No se activa automáticamente por tener poco dinero. <a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a> exige conjuntamente:</p>
 <ul>
 <li>10 cotizaciones pagadas en los 24 meses anteriores al despido;</li>
 <li>las tres últimas continuas y con el mismo empleador;</li>
 <li>para plazo fijo, obra o servicio, que las cotizaciones estén registradas antes del término;</li>
-<li>causal involuntaria admitida por la Ley 19.728;</li>
+<li>una causal que dé acceso al Fondo: vencimiento del plazo, conclusión de la obra o servicio, caso fortuito o fuerza mayor (art. 159 n.º 4, 5 y 6), necesidades de la empresa (art. 161) o quiebra del empleador (art. 163 bis), entre otras;</li>
 <li>saldo CIC insuficiente para cinco pagos;</li>
-<li>inscripción y certificación en la Bolsa Nacional de Empleo.</li>
+<li>inscripción en la Bolsa Nacional de Empleo, con la cuenta activada dentro de 96 horas desde que te registras.</li>
 </ul>
 <p>Renuncia y mutuo acuerdo permiten usar CIC, pero no el FCS. En una solicitud que ofrece ambas opciones, revisa la simulación antes de escoger: Fondo Solidario tiene mínimos, máximos y obligaciones BNE; CIC usa tu saldo y puede continuar mientras alcance.</p>
 
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>BNE no es un registro decorativo</strong><p>Si accedes al Fondo Solidario debes activar la cuenta, completar el currículum y participar en las acciones exigidas. La BNE reporta mensualmente el cumplimiento a AFC. No asistir a una capacitación o no certificarse puede suspender el pago.</p></div></aside>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>BNE no es un registro decorativo</strong><p>Si pides el Fondo Solidario debes inscribirte en la <a href="https://www.bne.cl/" target="_blank" rel="noopener">Bolsa Nacional de Empleo</a>. Una vez registrado, tienes 96 horas para activar tu cuenta; además debes completar tu perfil, subir tu currículum y revisar las ofertas. Si no cumples, tus pagos pueden suspenderse (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>). La BNE pide entrar a tu perfil al menos 3 veces por semana para revisar y aceptar las invitaciones a postular (<a href="https://bne.gob.cl/faq" target="_blank" rel="noopener">BNE, preguntas frecuentes</a>).</p></div></aside>
 
 <h2>5. Envía la solicitud en la Sucursal Virtual</h2>
 <ol class="steps">
@@ -855,41 +898,40 @@ const articleCatalog: ArticleDraft[] = [
 <li>Valida identidad con cédula vigente y reconocimiento facial.</li>
 <li>Descarga o guarda el comprobante y revisa “Mis solicitudes de cobro”.</li>
 </ol>
-<p>AFC informa aprobación o rechazo por correo dentro de un máximo de cinco días hábiles. Ese plazo no significa que el dinero llegue al quinto día: la prestación respeta el calendario de treinta días desde el término. Si el reconocimiento facial, el documento o la plataforma impiden completar el proceso, puedes ir a sucursal con cédula y documento original.</p>
+<p>AFC te informa por correo si aprueba o rechaza la solicitud. La aprobación no es el pago: el primer pago sigue el calendario de los jueves explicado arriba. Si el reconocimiento facial, el documento o la plataforma impiden completar el proceso, puedes ir a sucursal con cédula y documento original.</p>
 
-<h2>6. Fecha del primer pago</h2>
-<p>Todos los pagos se procesan los jueves:</p>
-<ul>
-<li>Si solicitaste <strong>antes</strong> de cumplir 30 días corridos desde el término, el primer pago se procesa el jueves siguiente a que se cumplan esos 30 días.</li>
-<li>Si solicitaste <strong>después</strong> de los 30 días, se procesa el jueves siguiente a la aprobación.</li>
-<li>En autodespido o despido indirecto del artículo 171, el primero se realiza al menos 60 días corridos después del término.</li>
-</ul>
-<p>No existe un plazo máximo para solicitar mientras conserves la condición de cesante; el derecho no desaparece al día 31. Aun así, esperar retrasa el pago y puede complicar documentos cuya vigencia operativa es menor, como la carta de despido sin finiquito.</p>
+<h2>6. ¿Cuánto me pagan?</h2>
+<p>Con la Cuenta Individual, el primer pago es el 70% de tu remuneración promedio y los siguientes bajan a 60%, 45%, 40%, 35% y 30% desde el sexto mes, mientras tengas saldo y sigas cesante (<a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende</a>). Si el saldo no alcanza, el pago efectivo puede ser menor que el porcentaje.</p>
+<p>El Fondo Solidario usa un porcentaje del promedio de tus remuneraciones de los últimos 12 meses, con un mínimo y un máximo por pago. Valores vigentes hasta el ${fechaLargaArticulo(SEGURO_CESANTIA_BENEFICIOS.fcs.vigenteHasta)} (<a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>):</p>
+${tablaFcsHtml()}
+<p>Los mínimos y máximos se reajustan cada año. Para una estimación con tu sueldo, <a href="/calculadoras/calculadora-seguro-cesantia">simula cuánto te paga el seguro</a>; el monto real lo calcula AFC al aprobar tu solicitud.</p>
 
-<div class="numeric-example"><div class="numeric-example__title">Término un lunes 6 y solicitud el viernes 10</div><ul><li>La solicitud puede aprobarse dentro de cinco días hábiles.</li><li>Los 30 días corridos se cumplen el miércoles 5 del mes siguiente.</li><li>El primer pago se procesa el jueves posterior, según calendario informado por AFC.</li><li>Si existen feriados, se cuentan igualmente para completar los 30 días.</li></ul><span class="total">Aprobación y fecha de pago no son lo mismo</span></div>
-
-<h2>7. Cómo se calculan los pagos</h2>
-<p>En la CIC, el primer pago equivale a 70% del promedio de las últimas cinco remuneraciones para plazo fijo y de las últimas diez para indefinido. Los porcentajes siguientes bajan a 60%, 45%, 40%, 35% y 30%, mientras exista saldo y continúe la cesantía. El resultado efectivo puede ser menor al porcentaje teórico cuando el saldo no alcanza.</p>
-<p>El Fondo Solidario usa porcentajes y topes legales. Para valores vigentes hasta el 28 de febrero de 2027, AFC publica:</p>
-<table><thead><tr><th>Pago</th><th>Indefinido / casa particular</th><th>Plazo fijo / obra / servicio</th></tr></thead><tbody><tr><td>1</td><td>70%</td><td>60%</td></tr><tr><td>2</td><td>60%</td><td>40%</td></tr><tr><td>3</td><td>45%</td><td>35%</td></tr><tr><td>4</td><td>40%</td><td>30%</td></tr><tr><td>5</td><td>35%</td><td>30%</td></tr></tbody></table>
-<p>Los montos mínimos y máximos se reajustan, por lo que no deben copiarse de una noticia antigua. Usa la simulación oficial del día. El FCS permite hasta diez pagos dentro de cinco años considerando las prestaciones utilizadas, no diez pagos garantizados por cada despido.</p>
-
-<h2>8. Medio de pago y errores bancarios</h2>
+<h2>7. Medio de pago y errores bancarios</h2>
 <p>Puedes recibir depósito en CuentaRUT, cuenta vista, corriente o de ahorro, o efectivo en Servipag o BancoEstado. AFC no admite cuentas bipersonales. Si eliges efectivo tienes 60 días para cobrar; para autorizar a otra persona se requiere poder notarial aprobado por AFC.</p>
 <p>Antes de confirmar depósito, revisa banco, tipo y número de cuenta. Una cuenta cerrada, bloqueada o de un tercero puede devolver el pago y mover la fecha. Si la plataforma permite modificar el medio antes del pago, el cambio queda sujeto a revisión; no asumas que editarlo el miércoles se reflejará el jueves.</p>
 
-<h2>9. Qué hacer si rechazan la solicitud</h2>
+<h2>8. Qué hacer si rechazan la solicitud</h2>
 <p>Ingresa a “Mis solicitudes de cobro” y lee la causal exacta. Los problemas operativos más frecuentes son documento incompleto, firma o ratificación ausente, fecha que no coincide, cédula vencida, cotizaciones insuficientes o relación laboral aún activa. Corrige el antecedente indicado; no envíes repetidamente el mismo archivo.</p>
 <p>Si el rechazo parece incorrecto, ingresa un requerimiento en AFC con cartola, documento completo y explicación breve. Para cotizaciones impagas del empleador, también puede corresponder reclamo previsional. Una solicitud AFC rechazada no determina si el despido fue legal ni elimina un reclamo laboral.</p>
 
-<h2>10. Nueva cotización y pagos suspendidos</h2>
+<h2>9. Nueva cotización y pagos suspendidos</h2>
 <p>Si un nuevo empleador informa el inicio laboral o paga la primera cotización, AFC suspende automáticamente el beneficio porque ya no existe cesantía respecto del nuevo empleo. El saldo CIC no utilizado vuelve a la cuenta.</p>
 <p>A veces la cotización posterior no es un nuevo trabajo: el exempleador puede pagar una comisión, bono u hora extra atrasada. AFC la interpreta preventivamente como relación activa. Si sigues cesante, solicita al exempleador el <strong>certificado aclaratorio</strong> y súbelo en “Seguro de Cesantía → Mis solicitudes de cobro”. AFC evaluará la reactivación.</p>
 <p>El pago también puede suspenderse por incumplimiento BNE cuando se usa Fondo Solidario. Distingue la causal antes de reclamar: un certificado del exempleador no corrige una certificación laboral incumplida.</p>
 
-<h2>11. Cobertura y presupuesto mientras recibes el seguro</h2>
+<h2>10. Cobertura y presupuesto mientras recibes el seguro</h2>
 <p>Mientras duran los pagos, el beneficio contempla cobertura de salud a través de Fonasa bajo sus reglas. Si estabas en Isapre, tienes cargas o tratamiento, consulta la continuidad específica. El Fondo Solidario también financia un aporte previsional conforme a la normativa aplicable.</p>
 <p>Arma el presupuesto con las fechas y montos aprobados, no con el máximo del sitio. Separa finiquito, ahorro y AFC. Si una diferencia de finiquito está en reclamo, no la uses para prometer pagos mensuales. El <a href="/blog/checklist-despues-despido-chile-2026">checklist después del despido</a> ordena carta, plazos legales, salud y reinserción.</p>
+
+<h2>Dudas frecuentes</h2>
+<h3>¿Cuánto se demoran en pagar el seguro de cesantía?</h3>
+<p>Depende de cuándo lo pidas. Si lo pides antes de cumplir 30 días corridos desde el término, el primer pago llega el jueves siguiente a ese día 30; si lo pides después, el jueves siguiente a la aprobación. En autodespido (artículo 171), al menos 60 días corridos después del término (<a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">AFC</a>).</p>
+<h3>¿Cómo veo mi saldo del seguro de cesantía?</h3>
+<p>En el Seguro en línea de afc.cl, con tu RUT y ClaveÚnica o Clave AFC. Ahí también puedes simular montos y fechas de pago (<a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">AFC</a>).</p>
+<h3>¿Puedo cobrar el seguro de cesantía online?</h3>
+<p>Sí. Se solicita en la Sucursal Virtual de AFC desde el día siguiente al término del contrato, cargando el documento que acredita el término (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>).</p>
+<h3>¿Puedo cobrar el seguro si renuncié?</h3>
+<p>Sí, pero solo con los fondos de tu Cuenta Individual. Si renunciaste o terminaste por mutuo acuerdo no accedes al Fondo Solidario (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>).</p>
 
 <h2>Checklist final</h2>
 <ul class="data-grid">
@@ -903,10 +945,10 @@ const articleCatalog: ArticleDraft[] = [
 <li><span class="label">Fecha del primer jueves anotada</span><span class="value">Hecho / pendiente</span></li>
 </ul>
 
-<p>Para entender qué paga cada fondo, revisa <a href="/blog/seguro-cesantia-finiquito-2026-afc">Seguro de Cesantía versus finiquito</a>. Si el empleador aún no paga o discutirás la causal, consulta la <a href="/guias/finiquito-laboral-chile">guía de finiquito</a> y no dejes correr el plazo judicial.</p>
+<p>Para ver todo el seguro en una página, entra al <a href="/cesantia">hub de cesantía</a>. Para entender qué paga cada fondo, revisa <a href="/blog/seguro-cesantia-finiquito-2026-afc">Seguro de Cesantía versus finiquito</a>. Si el empleador aún no paga o discutirás la causal, consulta la <a href="/guias/finiquito-laboral-chile">guía de finiquito</a> y no dejes correr el plazo judicial.</p>
 
 <h2>Fuentes oficiales consultadas</h2>
-<p>Contenido verificado al 13 de julio de 2026 con los <a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">requisitos y documentos de AFC</a>, el trámite <a href="https://www.afc.cl/afiliados/quedo-cesante-o-esta-cobrando-su-seguro/como-y-donde-cobrar-el-seguro-de-cesantia/" target="_blank" rel="noopener">cómo y dónde cobrar</a>, las <a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">fechas y medios de pago</a>, las tablas de <a href="https://www.afc.cl/mi-seguro-de-cesantia/beneficios/" target="_blank" rel="noopener">beneficios vigentes</a>, la solución para <a href="https://www.afc.cl/mi-seguro-de-cesantia/pagos-suspendidos/" target="_blank" rel="noopener">pagos suspendidos</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=184979" target="_blank" rel="noopener">Ley 19.728</a>. Las consultas de foros se usaron para detectar fallas frecuentes de documentos y cotizaciones posteriores; no para definir requisitos.</p>`,
+<p>Fechas de pago, saldo, requisitos, montos y BNE verificados al 29 de octubre de 2026; el resto del contenido, al 13 de julio de 2026. Fuentes: los <a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">requisitos y documentos de AFC</a>, la página <a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">cobrar Seguro de Cesantía</a>, las <a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">fechas y medios de pago</a>, la <a href="https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/" target="_blank" rel="noopener">simulación de cobro</a>, la solución para <a href="https://www.afc.cl/mi-seguro-de-cesantia/pagos-suspendidos/" target="_blank" rel="noopener">pagos suspendidos</a>, la ficha de <a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende sobre el Seguro de Cesantía</a>, los <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html" target="_blank" rel="noopener">montos del Fondo de Cesantía Solidario de la Superintendencia de Pensiones</a>, las <a href="https://bne.gob.cl/faq" target="_blank" rel="noopener">preguntas frecuentes de la BNE</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=184979" target="_blank" rel="noopener">Ley 19.728</a>. Las consultas de foros se usaron para detectar fallas frecuentes de documentos y cotizaciones posteriores; no para definir requisitos.</p>`,
   },
   {
     slug: 'checklist-despues-despido-chile-2026',
@@ -914,7 +956,7 @@ const articleCatalog: ArticleDraft[] = [
     description:
       'Qué hacer paso a paso tras un despido: finiquito, plazos, Seguro de Cesantía, presupuesto y cómo preparar el CV para volver a postular.',
     date: '2026-07-10',
-    updatedAt: '2026-07-10',
+    updatedAt: '2026-10-29',
     category: 'laboral',
     readingTime: 9,
     relatedGuia: 'finiquito-laboral-chile',
@@ -1025,7 +1067,7 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>Solicita el Seguro de Cesantía sin esperar el finiquito</h2>
 <p>La AFC acepta distintos documentos válidos de término, incluida carta de despido, finiquito, carta de renuncia, acta de conciliación o documentos especiales según el caso. Si no tienes ninguno y desconoces el domicilio actual del empleador, existe una declaración jurada de término ante la DT que puede habilitar la solicitud.</p>
-<p>El trámite en la Sucursal Virtual usa RUT, ClaveÚnica o clave AFC, cédula vigente para validación y el documento de término. La AFC informa aprobación o rechazo dentro de un máximo de cinco días hábiles. No existe un plazo para solicitar mientras mantengas la condición de cesante, pero postergarlo puede retrasar el flujo de caja. El primer pago se efectúa una vez cumplidos treinta días corridos desde el término, sujeto a aprobación y calendario; en autodespido hay una regla especial de sesenta días.</p>
+<p>El trámite en la Sucursal Virtual usa RUT, ClaveÚnica o clave AFC, cédula vigente para validación y el documento de término. No existe un plazo para solicitar mientras mantengas la condición de cesante, pero postergarlo puede retrasar el flujo de caja. Los pagos se procesan los jueves: si lo pides antes de cumplir 30 días corridos desde el término, el primero llega el jueves siguiente a ese día 30; si lo pides después, el jueves siguiente a la aprobación. En autodespido (artículo 171), el primer pago es al menos 60 días corridos después del término (<a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">AFC</a>).</p>
 
 <h3>Cuenta Individual de Cesantía</h3>
 <ul>
@@ -1036,7 +1078,7 @@ const articleCatalog: ArticleDraft[] = [
 
 <h3>Fondo de Cesantía Solidario</h3>
 <p>El FCS no se entrega solo porque la CIC tenga saldo bajo. AFC exige 10 cotizaciones pagadas en los 24 meses previos, las tres últimas continuas con el mismo empleador, una causal involuntaria admitida, y que la CIC no alcance para financiar al menos cinco pagos. En contratos a plazo fijo, las cotizaciones requeridas deben estar registradas antes del término.</p>
-<p>Además, debes activar y mantener la inscripción en la Bolsa Nacional de Empleo. La BNE indica completar el currículum dentro de las 96 horas y participar efectivamente en las oportunidades, entrevistas o capacitaciones comunicadas. Ignorar correos o mantener datos desactualizados puede afectar el beneficio.</p>
+<p>Además, debes inscribirte en la Bolsa Nacional de Empleo y activar tu cuenta dentro de 96 horas desde que te registras. También debes completar tu perfil, subir tu currículum y revisar las ofertas; si no cumples, tus pagos pueden suspenderse (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>).</p>
 <p>Revisa saldo y simulación directamente en <a href="https://www.afc.cl/" target="_blank" rel="noopener">AFC Chile</a>. No sumes finiquito y cinco giros máximos como si ambos estuvieran garantizados: el número y monto dependen del fondo, saldo, remuneraciones, causal y continuidad de la cesantía.</p>
 
 <h2>Salud, deudas y presupuesto de emergencia</h2>
@@ -1062,6 +1104,16 @@ const articleCatalog: ArticleDraft[] = [
 </ul>
 <p>El puente con CVListo debe servir para revisar estructura y compatibilidad con filtros ATS, no para fabricar experiencia. Una optimización válida hace visible lo que ya hiciste y adapta prioridad y vocabulario al aviso.</p>
 
+<h2>Dónde buscar trabajo: BNE, OMIL y SENCE</h2>
+<h3>Bolsa Nacional de Empleo (BNE)</h3>
+<p>Si cobras el Fondo Solidario, inscribirte en la <a href="https://www.bne.cl/" target="_blank" rel="noopener">BNE</a> es obligatorio y tienes 96 horas para activar tu cuenta después de registrarte (<a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">AFC</a>). Mientras recibes el beneficio, entra a tu perfil al menos 3 veces por semana para revisar y aceptar las invitaciones a postular. Si te suspenden el pago por la validación de tu búsqueda de empleo, puedes apelar escribiendo a apelaciones@bne.cl; la respuesta tarda de 1 a 30 días (<a href="https://bne.gob.cl/faq" target="_blank" rel="noopener">BNE, preguntas frecuentes</a>).</p>
+<h3>OMIL de tu municipio</h3>
+<p>La Oficina Municipal de Información Laboral (OMIL) de tu comuna te muestra ofertas de la BNE, gestiona colocación laboral, te orienta y hace talleres para armar tu CV y preparar entrevistas. También te conecta con la capacitación sin costo de SENCE. El directorio de OMIL 2026 está en <a href="https://sence.gob.cl/personas/omil" target="_blank" rel="noopener">SENCE</a>.</p>
+<h3>Capacitación SENCE</h3>
+<p>Si quieres reforzar tu perfil mientras buscas, pregunta en tu OMIL por la capacitación gratuita de SENCE (<a href="https://sence.gob.cl/personas/omil" target="_blank" rel="noopener">SENCE</a>).</p>
+<h3>Portales privados y tu CV</h3>
+<p>Para comparar portales de empleo y preparar tu CV antes de postular, revisa la guía <a href="${CVLISTO_BUSCAR_TRABAJO_CHECKLIST}" target="_blank" rel="noopener noreferrer">Buscar trabajo en Chile</a> de CVListo.</p>
+
 <h2>Checklist imprimible</h2>
 <ul class="data-grid">
 <li><span class="label">Carta, causal, hechos y fecha de separación</span><span class="value">Hecho / pendiente</span></li>
@@ -1076,10 +1128,10 @@ const articleCatalog: ArticleDraft[] = [
 <li><span class="label">Primer CV adaptado y postulación registrada</span><span class="value">Hecho / pendiente</span></li>
 </ul>
 
-<p>Para profundizar, consulta la <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral</a>, la explicación de <a href="/blog/seguro-cesantia-finiquito-2026-afc">CIC y Fondo Solidario</a>, el paso a paso para <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cobrar en AFC</a> y el <a href="/cesantia">hub de cesantía</a>.</p>
+<p>Para profundizar, consulta la <a href="/guias/finiquito-laboral-chile">guía de finiquito laboral</a>, la explicación de <a href="/blog/seguro-cesantia-finiquito-2026-afc">CIC y Fondo Solidario</a>, el paso a paso para <a href="/blog/como-cobrar-seguro-cesantia-afc-2026">cobrar en AFC</a>, el <a href="/calculadoras/calculadora-seguro-cesantia">simulador del seguro de cesantía</a> y el <a href="/cesantia">hub de cesantía</a>.</p>
 
 <h2>Fuentes oficiales consultadas</h2>
-<p>Contenido verificado al 13 de julio de 2026 con el texto vigente del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>, el trámite de la DT para <a href="https://www.dt.gob.cl/portal/1626/w3-article-125086.html" target="_blank" rel="noopener">ingresar un reclamo por despido</a>, sus instrucciones para la <a href="https://dt.gob.cl/portal/1626/w3-article-117245.html" target="_blank" rel="noopener">ratificación y reserva del finiquito</a>, la guía AFC sobre <a href="https://www.afc.cl/afiliados/quedo-cesante-o-esta-cobrando-su-seguro/como-y-donde-cobrar-el-seguro-de-cesantia/" target="_blank" rel="noopener">cómo y cuándo cobrar</a>, y los <a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">requisitos de CIC y Fondo de Cesantía Solidario</a>. Consultas repetidas en foros laborales se usaron para priorizar dudas sobre reserva, carta, cotizaciones y plazos; no reemplazaron fuentes legales.</p>
+<p>Contenido verificado al 13 de julio de 2026 y actualizado el 29 de octubre de 2026 (seguro de cesantía, BNE, OMIL y SENCE) con el texto vigente del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>, el trámite de la DT para <a href="https://www.dt.gob.cl/portal/1626/w3-article-125086.html" target="_blank" rel="noopener">ingresar un reclamo por despido</a>, sus instrucciones para la <a href="https://dt.gob.cl/portal/1626/w3-article-117245.html" target="_blank" rel="noopener">ratificación y reserva del finiquito</a>, la guía AFC sobre <a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">cómo y cuándo cobrar</a>, las <a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">fechas y medios de pago</a>, los <a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">requisitos de CIC y Fondo de Cesantía Solidario</a>, las <a href="https://bne.gob.cl/faq" target="_blank" rel="noopener">preguntas frecuentes de la BNE</a> y la página de <a href="https://sence.gob.cl/personas/omil" target="_blank" rel="noopener">OMIL de SENCE</a>. Consultas repetidas en foros laborales se usaron para priorizar dudas sobre reserva, carta, cotizaciones y plazos; no reemplazaron fuentes legales.</p>
 
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance</strong><p>Esta es información general para relaciones regidas por el Código del Trabajo. Estatutos públicos, fueros, tutela, accidentes, licencias, autodespido, subcontratación y cotizaciones impagas pueden requerir análisis jurídico inmediato.</p></div></aside>`,
   },

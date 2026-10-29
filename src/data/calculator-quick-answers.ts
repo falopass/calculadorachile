@@ -30,6 +30,7 @@ import {
   TOPE_IMPOSITIVO,
   UTM,
   INDEMNIZACION,
+  SEGURO_CESANTIA_BENEFICIOS,
 } from '@/lib/values/constants';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
 import { calculateCreditoCAE } from '@/lib/calculations/credito-cae';
@@ -51,6 +52,7 @@ import { calculateFactorHoraExtra } from '@/lib/calculations/factor-hora-extra';
 import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf';
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
 import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
+import { calculateSeguroCesantia } from '@/lib/calculations/seguro-cesantia';
 
 export interface QuickAnswerLink {
   text: string;
@@ -142,9 +144,15 @@ const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.
 const DT_LICENCIA_CARENCIA_URL = 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html';
 const SUSESO_SIL_URL = 'https://www.suseso.gob.cl/606/w3-article-19931.html';
 const SUSESO_QUIEN_PAGA_URL = 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html';
+const AFC_FECHAS_PAGO_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/';
+const AFC_SIMULE_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/';
+const CA_SEGURO_CESANTIA_URL = 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia';
+const SP_FCS_URL = 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html';
 
 /** Remuneración neta del ejemplo de licencia médica (igual que la metodología). */
 export const LICENCIA_EJEMPLO_NETA = 900_000;
+/** Remuneración promedio del ejemplo del seguro de cesantía (brief 16-10). */
+export const CESANTIA_EJEMPLO_PROMEDIO = 800_000;
 
 /** Respuesta directa de la calculadora UTM (E-016). Exportada para tests. */
 export function buildUTMLeadParts(
@@ -912,6 +920,56 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         example: {
           caption: `Días pagados y subsidio estimado con una remuneración neta de ${formatCLP(LICENCIA_EJEMPLO_NETA)} (${formatCLP(Math.round(base.montoDiario))} por día). Con 10 días te pagan ${pagados(10)}; con 11, te pagan ${pagados(11)}.`,
           headers: ['Días de licencia', 'Días pagados', 'Subsidio estimado'],
+          rows,
+        },
+      };
+    }
+
+    case 'seguro-cesantia': {
+      // E-022 (brief 2026-10-29): sin h1 (se mantiene calculator.name).
+      // Montos generados con calculateSeguroCesantia y SEGURO_CESANTIA_BENEFICIOS.
+      const fcs = SEGURO_CESANTIA_BENEFICIOS.fcs;
+      const ind = calculateSeguroCesantia({
+        tipoContrato: 'indefinido',
+        remuneracionPromedio: CESANTIA_EJEMPLO_PROMEDIO,
+        cotizaciones: fcs.minCotizaciones24m,
+        ultimas3Continuas: true,
+        causalFCS: true,
+      });
+      const pf = calculateSeguroCesantia({
+        tipoContrato: 'plazo-fijo',
+        remuneracionPromedio: CESANTIA_EJEMPLO_PROMEDIO,
+        cotizaciones: fcs.minCotizaciones24m,
+        ultimas3Continuas: true,
+        causalFCS: true,
+      });
+      const rows = ind.pagos.map((p, i) => [
+        `${p.numero}.º`,
+        `${fcs.indefinido.porcentajes[i]}% · ${formatCLP(p.total)}`,
+        `${fcs.plazoFijo.porcentajes[i]}% · ${formatCLP(pf.pagos[i].total)}`,
+      ]);
+      const [cic1] = SEGURO_CESANTIA_BENEFICIOS.cic.porcentajes;
+      return {
+        ...withLinks([
+          `Con tu cuenta individual, el primer pago del seguro de cesantía es el ${cic1}% de tu remuneración promedio y baja mes a mes. Si tu cuenta no alcanza y cumples los requisitos, el Fondo Solidario completa los pagos, con porcentajes, mínimos y máximos por giro (`,
+          { text: 'ChileAtiende', href: CA_SEGURO_CESANTIA_URL },
+          ' · ',
+          { text: 'Superintendencia de Pensiones', href: SP_FCS_URL },
+          '). Es una estimación: el monto real lo calcula la AFC al aprobar tu solicitud (',
+          { text: 'AFC', href: AFC_SIMULE_URL },
+          ').',
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Cuándo llega el primer pago?',
+            answer:
+              'Los pagos se hacen los jueves. Si pides el seguro antes de cumplir 30 días corridos sin trabajo, el primer pago llega el jueves siguiente a ese día 30; si lo pides después, el jueves siguiente a la aprobación.',
+            sources: [{ text: 'AFC, fechas y medios de pago', href: AFC_FECHAS_PAGO_URL }],
+          },
+        ],
+        example: {
+          caption: `Ejemplo: remuneración promedio de ${formatCLP(CESANTIA_EJEMPLO_PROMEDIO)}, despido con derecho al Fondo Solidario y cuenta individual que no alcanza para 5 pagos. Todos los montos quedan dentro de los mínimos y máximos vigentes hasta el ${fechaLargaISO(fcs.vigenteHasta)}.`,
+          headers: ['Pago', 'Contrato indefinido', 'Plazo fijo, obra o servicio'],
           rows,
         },
       };

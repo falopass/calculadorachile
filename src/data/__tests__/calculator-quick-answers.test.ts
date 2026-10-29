@@ -1,7 +1,7 @@
 import { afterEach, describe, it, expect, vi } from 'vitest';
 import { getQuickAnswer } from '../calculator-quick-answers';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
-import { INGRESO_MINIMO, JORNADA_LEGAL } from '@/lib/values/constants';
+import { INGRESO_MINIMO, JORNADA_LEGAL, SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
 import { formatCLP } from '@/lib/formatters';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
@@ -23,6 +23,7 @@ const IDS = [
   'tope-imponible-90-uf',
   'sueldo-casa-particular',
   'licencia-medica',
+  'seguro-cesantia',
 ];
 
 describe('getQuickAnswer', () => {
@@ -55,6 +56,7 @@ describe('getQuickAnswer', () => {
       const qa = getQuickAnswer(id, CTX);
       const cells = [
         qa?.lead,
+        // h1 es opcional (seguro-cesantia mantiene calculator.name).
         ...(qa?.h1 !== undefined ? [qa.h1] : []),
         ...(qa?.shortAnswers?.flatMap((a) => [a.question, a.answer]) ?? []),
         ...(qa?.example?.headers ?? []),
@@ -196,6 +198,41 @@ describe('getQuickAnswer', () => {
       expect(hrefs.some((h) => h.includes('dt.gob.cl'))).toBe(true);
       expect(hrefs.some((h) => h.includes('suseso.gob.cl'))).toBe(true);
       expect(hrefs.join(' ')).not.toContain('95312');
+    });
+  });
+
+  describe('seguro-cesantia: ejemplo $800.000 (E-022)', () => {
+    it('no define h1 (se mantiene calculator.name)', () => {
+      expect(getQuickAnswer('seguro-cesantia', CTX)!.h1).toBeUndefined();
+    });
+
+    it('5 giros generados con la constante, dentro de mínimos y máximos', () => {
+      const qa = getQuickAnswer('seguro-cesantia', CTX)!;
+      const rows = qa.example!.rows;
+      expect(rows).toHaveLength(SEGURO_CESANTIA_BENEFICIOS.fcs.pagos);
+      expect(rows[0]).toEqual(['1.º', '70% · $560.000', '60% · $480.000']);
+      expect(rows.map((r) => r[1])).toEqual([
+        '70% · $560.000',
+        '60% · $480.000',
+        '45% · $360.000',
+        '40% · $320.000',
+        '35% · $280.000',
+      ]);
+      expect(rows.map((r) => r[2])).toEqual([
+        '60% · $480.000',
+        '40% · $320.000',
+        '35% · $280.000',
+        '30% · $240.000',
+        '30% · $240.000',
+      ]);
+      expect(qa.example!.caption).toContain('28 de febrero de 2027');
+    });
+
+    it('respuesta corta del primer pago con fuente AFC', () => {
+      const qa = getQuickAnswer('seguro-cesantia', CTX)!;
+      expect(qa.shortAnswers![0].answer).toContain('jueves');
+      expect(qa.shortAnswers![0].sources[0].href).toContain('afc.cl');
+      expect(qa.lead).not.toMatch(/cinco días hábiles|5 días hábiles/);
     });
   });
 });

@@ -9,6 +9,8 @@ export const CVLISTO_BASE_URL = 'https://cvlisto.cl';
 export const CVLISTO_LANDING_PATH = '/desde-calculachile';
 /** Herramienta gratuita de carta de presentación (sin registro). */
 export const CVLISTO_CARTA_PATH = '/herramientas/carta-presentacion';
+/** Guía "Buscar trabajo en Chile" de CVListo (E-024, checklist de despido). */
+export const CVLISTO_BUSCAR_TRABAJO_PATH = '/buscar-trabajo-chile';
 
 /** Calculadoras donde el CTA de reinserción / postulación tiene sentido. */
 export const CVLISTO_CTA_CALCULATOR_IDS = [
@@ -25,6 +27,7 @@ export type CvlistoPlacement =
   | 'after_result'
   | 'below_guide'
   | 'blog_footer'
+  | 'blog_inline'
   | 'guia_footer'
   | 'hub_step';
 
@@ -208,5 +211,13 @@ export function buildCvlistoCartaUrl(options: BuildCvlistoUrlOptions): string {
   const url = new URL(buildCvlistoUrl(options));
   url.pathname = CVLISTO_CARTA_PATH;
   url.searchParams.set('utm_content', `${url.searchParams.get('utm_content')}_carta`);
+  return url.toString();
+}
+
+/** URL de la guía "Buscar trabajo en Chile" de CVListo con la misma atribución UTM. */
+export function buildCvlistoBuscarTrabajoUrl(options: BuildCvlistoUrlOptions): string {
+  const url = new URL(buildCvlistoUrl(options));
+  url.pathname = CVLISTO_BUSCAR_TRABAJO_PATH;
+  url.searchParams.set('utm_content', `${url.searchParams.get('utm_content')}_buscar_trabajo`);
   return url.toString();
 }

@@ -4267,7 +4267,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-09-26',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'ChileAtiende — Seguro de Cesantía',
@@ -4283,6 +4283,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'AFC — Beneficios del seguro',
         url: 'https://www.afc.cl/mi-seguro-de-cesantia/beneficios/',
         note: 'Porcentajes, mínimos y máximos vigentes al 28-02-2027',
+      },
+      {
+        name: 'Superintendencia de Pensiones — Montos del Fondo de Cesantía Solidario',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html',
+        note: 'Mínimos y máximos por giro, vigentes hasta el 28-02-2027',
+      },
+      {
+        name: 'AFC — Fechas y medios de pago',
+        url: 'https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/',
+        note: 'Pagos los jueves; primer pago tras 30 días corridos',
+      },
+      {
+        name: 'AFC — Simule su cobro',
+        url: 'https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/',
+        note: 'La simulación es orientativa; el monto real lo calcula AFC al aprobar',
       },
     ],
     keywords: [

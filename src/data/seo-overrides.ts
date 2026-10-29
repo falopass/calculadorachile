@@ -402,15 +402,17 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'Despido por necesidades de la empresa: pueden descontar de la indemnización el aporte del empleador a tu cuenta AFC, no lo que tú cotizaste. Cómo revisarlo.', // 156
   },
+  // E-021 (brief 2026-10-29). Única fuente del title/meta: se borran seoTitle/seoDescription de articles.ts.
   'como-cobrar-seguro-cesantia-afc-2026': {
-    seoTitle: 'Cómo cobrar el Seguro de Cesantía AFC 2026: paso a paso', // 55
+    seoTitle: 'Cómo cobrar el seguro de cesantía 2026: pasos y cuándo pagan', // 60
     seoDescription:
-      'Qué necesitas para cobrar el seguro AFC: cotizaciones mínimas, documentos y solicitud en la sucursal virtual. Cuándo pagan y qué pasa si vuelves a trabajar.', // 156
+      'Pide el seguro en AFC desde el día siguiente al término. Si lo pides antes del día 30, el 1.er pago llega el jueves siguiente a ese día. Pasos y saldo.', // 151
   },
   'checklist-despues-despido-chile-2026': {
     seoTitle: 'Checklist despido Chile 2026: finiquito, AFC y CV', // 52
+    // E-024 (brief 2026-10-29): solo cambia la meta; title sin cambios.
     seoDescription:
-      'Qué hacer tras un despido: finiquito, plazos, Seguro de Cesantía y reinserción. Checklist práctico con calculadoras gratis.', // 128
+      'Qué hacer tras un despido: finiquito, seguro de cesantía, activar tu cuenta BNE en 96 horas si pides el Fondo Solidario y dónde buscar trabajo (OMIL).', // 150
   },
   // Nota: hub /cesantia usa buildPageMetadata en page.tsx (title/desc allí).
 
@@ -442,10 +444,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // --- BENEFICIOS Y SEGURIDAD SOCIAL ---
+  // E-022 (brief 2026-10-29): "simulador seguro de cesantía". No cambia name ni H1.
   'calculadora-seguro-cesantia': {
-    seoTitle: 'Seguro de Cesantía AFC 2026: simula cuánto cobrar',
+    seoTitle: 'Simulador seguro de cesantía 2026: cuenta AFC y Solidario', // 57
     seoDescription:
-      'Simula el Seguro de Cesantía AFC: monto del primer giro (70% de tu remuneración), giros según tu cuenta individual, topes 2026 y requisitos. Gratis.',
+      'Simula tus pagos del seguro de cesantía: el 1.er pago de tu cuenta individual es el 70% de tu remuneración. Fondo Solidario, mínimos y máximos 2026.', // 148
   },
 
   // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
