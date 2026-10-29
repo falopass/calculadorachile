@@ -83,6 +83,24 @@ export default function PopularCalculators() {
             </li>
           ))}
         </ul>
+
+        <p className="mt-5 text-sm text-[var(--foreground-secondary)]">
+          <strong className="text-[var(--foreground)]">¿Te despidieron?</strong> Revisa{' '}
+          <Link
+            href="/blog/como-cobrar-seguro-cesantia-afc-2026"
+            className="font-medium text-[var(--color-primary-600)] hover:underline"
+          >
+            cómo cobrar el seguro de cesantía
+          </Link>{' '}
+          y{' '}
+          <Link
+            href="/calculadoras/calculadora-seguro-cesantia"
+            className="font-medium text-[var(--color-primary-600)] hover:underline"
+          >
+            simula cuánto te paga
+          </Link>
+          .
+        </p>
       </div>
     </section>
   );

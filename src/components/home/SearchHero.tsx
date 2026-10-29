@@ -27,6 +27,7 @@ const quickSlugs = [
   'calculadora-vacaciones-proporcionales',
   'calculadora-permiso-circulacion',
   'calculadora-finiquito',
+  'calculadora-seguro-cesantia',
   'calculadora-multas-transito',
 ];
 
@@ -39,6 +40,7 @@ const quickPhrases: Record<string, string> = {
   'calculadora-vacaciones-proporcionales': 'tus vacaciones proporcionales',
   'calculadora-permiso-circulacion': 'el permiso de circulación',
   'calculadora-finiquito': 'tu finiquito',
+  'calculadora-seguro-cesantia': 'tu seguro de cesantía',
   'calculadora-multas-transito': 'una multa de tránsito',
 };
 
