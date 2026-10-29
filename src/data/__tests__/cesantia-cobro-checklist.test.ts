@@ -17,10 +17,17 @@ describe('E-021: cómo cobrar el seguro de cesantía', () => {
     expect(o.seoDescription.length).toBeLessThanOrEqual(155);
   });
 
-  it('sin datos SIN VERIFICAR (5 días hábiles, diez pagos) ni la frase BNE antigua', () => {
+  it('sin datos SIN VERIFICAR (5 días hábiles) ni la frase BNE antigua', () => {
     expect(article.content).not.toMatch(/cinco días hábiles|5 días hábiles/);
-    expect(article.content).not.toContain('diez pagos');
     expect(article.content).not.toContain('reporta mensualmente');
+  });
+
+  it('FCS: 10 meses anteriores al término (art. 25) y diez pagos en cinco años (art. 24), con fuente BCN', () => {
+    expect(article.content).not.toContain('últimos 12 meses');
+    expect(article.content).toContain('10 meses anteriores al término');
+    expect(article.content).toContain('Ley 21.628');
+    expect(article.content).toMatch(/diez pagos del Fondo Solidario en cinco años[^<]*\(Ley 19\.728, art\. 24/);
+    expect(article.content).toContain('https://www.bcn.cl/leychile/navegar?idNorma=184979');
   });
 
   it('respuesta directa con la regla del jueves y tabla FCS desde la constante', () => {
