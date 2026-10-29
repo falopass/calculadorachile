@@ -204,8 +204,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         question: '¿La gratificación se incluye en el sueldo líquido?',
-        answer:
-          'Sí, la gratificación legal (25% de remuneración mensual o 4.75% del sueldo mínimo anual) se suma al sueldo base antes de aplicar los descuentos. Por lo tanto, el sueldo líquido que recibes ya incluye la gratificación, siempre que tu empleador la pague mensualmente.',
+        // Art. 50 CdT: 25% con tope de 4,75 IMM al año; imponible. Fuente: DT,
+        // https://www.dt.gob.cl/portal/1626/w3-article-99034.html (verificado 29-10-2026).
+        answer: `Sí, si tu empleador la paga mes a mes. La gratificación legal del art. 50 es el 25% de tus remuneraciones mensuales, con un tope de 4,75 ingresos mínimos mensuales al año: ${formatCLP(TOPE_GRATIFICACION.anual)} al año o ${formatCLP(TOPE_GRATIFICACION.mensual)} al mes con el ingreso mínimo de ${formatCLP(TOPE_GRATIFICACION.imm)}. Es imponible, así que se suma al sueldo base antes de descontar AFP, salud, seguro de cesantía e impuesto, y el líquido que recibes ya la incluye.`,
       },
       {
         question: '¿Puedo elegir mi AFP?',
