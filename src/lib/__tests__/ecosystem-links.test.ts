@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildCvlistoCartaUrl } from '../cvlisto';
+import { buildCvlistoBuscarTrabajoUrl, buildCvlistoCartaUrl } from '../cvlisto';
 import {
   buildSitiazoUrl,
   isSitiazoCtaCalculator,
@@ -23,6 +23,19 @@ describe('buildCvlistoCartaUrl', () => {
       'finiquito_after_result_carta',
     );
     expect(url.searchParams.get('origen')).toBe('finiquito');
+  });
+});
+
+describe('buildCvlistoBuscarTrabajoUrl', () => {
+  it('apunta a /buscar-trabajo-chile con UTMs y sufijo _buscar_trabajo', () => {
+    const url = new URL(
+      buildCvlistoBuscarTrabajoUrl({ origen: 'cesantia', placement: 'blog_inline' }),
+    );
+    expect(url.origin).toBe('https://cvlisto.cl');
+    expect(url.pathname).toBe('/buscar-trabajo-chile');
+    expect(url.searchParams.get('utm_source')).toBe('calculachile');
+    expect(url.searchParams.get('utm_campaign')).toBe('ecosistema_laboral');
+    expect(url.searchParams.get('utm_content')).toBe('cesantia_blog_inline_buscar_trabajo');
   });
 });
 

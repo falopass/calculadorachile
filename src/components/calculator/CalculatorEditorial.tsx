@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import {
   INGRESO_MINIMO,
+  SEGURO_CESANTIA_BENEFICIOS,
   VERIFICACION_VALORES,
 } from '@/lib/values/constants';
 import { buildCvlistoUrl } from '@/lib/cvlisto';
@@ -110,6 +111,11 @@ function SimpleTable({ headers, rows }: { headers: string[]; rows: string[][] })
   );
 }
 
+function fechaDMY(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${d}-${m}-${y}`;
+}
+
 const DT_INDEMNIZACION = 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html';
 const DT_PLAZO = 'https://www.dt.gob.cl/portal/1628/w3-article-60613.html';
 const DT_FERIADO = 'https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-150384.html';
@@ -133,6 +139,14 @@ const LICENCIA_10 = calculateLicenciaMedica({ remuneracionNetaPromedio: 0, diasL
 const LICENCIA_3 = calculateLicenciaMedica({ remuneracionNetaPromedio: 0, diasLicencia: 3 });
 const LICENCIA_MINIMO_DIARIO = formatCLP(Math.round(LICENCIA_10.minimoDiario));
 
+// Seguro de cesantía (E-022, verificado 29-10-2026)
+const AFC_REQUISITOS = 'https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/';
+const AFC_SIMULE = 'https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/';
+const CA_SEGURO_CESANTIA = 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia';
+const SP_FCS_MONTOS =
+  'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html';
+const FCS = SEGURO_CESANTIA_BENEFICIOS.fcs;
+const CIC = SEGURO_CESANTIA_BENEFICIOS.cic;
 const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm';
 
 const EDITORIAL: Record<string, EditorialContent> = {
@@ -645,7 +659,133 @@ const EDITORIAL: Record<string, EditorialContent> = {
   },
   'seguro-cesantia': {
     bottom: (
-      <Section title="Giros adicionales del Fondo de Cesantía Solidario">
+      <>
+        <Section title="Cuenta individual vs. Fondo Solidario: cuál se usa primero">
+          <p className={pClass}>
+            Primero se paga con el saldo de tu Cuenta Individual de Cesantía (CIC):{' '}
+            {CIC.porcentajes.join('%, ')}% de tu remuneración promedio en los pagos sucesivos, hasta
+            que se acabe el saldo (<Ext href={CA_SEGURO_CESANTIA}>ChileAtiende</Ext>). Si tu cuenta
+            no alcanza para {FCS.pagos} pagos y cumples los requisitos, el Fondo de Cesantía
+            Solidario completa los pagos, con un mínimo y un máximo por giro (
+            <Ext href={AFC_REQUISITOS}>AFC</Ext>).
+          </p>
+        </Section>
+
+        <Section title="Mínimos y máximos del Fondo Solidario 2026">
+          <h3 className="mt-4 text-base font-semibold text-[var(--foreground)]">
+            Contrato indefinido
+          </h3>
+          <SimpleTable
+            headers={['Giro', '% de la remuneración', 'Mínimo', 'Máximo']}
+            rows={FCS.indefinido.porcentajes.map((pct, i) => [
+              `${i + 1}.º`,
+              `${pct}%`,
+              formatCLP(FCS.indefinido.minimos[i]),
+              formatCLP(FCS.indefinido.maximos[i]),
+            ])}
+          />
+          <h3 className="mt-6 text-base font-semibold text-[var(--foreground)]">
+            Contrato a plazo fijo, por obra o servicio
+          </h3>
+          <SimpleTable
+            headers={['Giro', '% de la remuneración', 'Mínimo', 'Máximo']}
+            rows={FCS.plazoFijo.porcentajes.map((pct, i) => [
+              `${i + 1}.º`,
+              `${pct}%`,
+              formatCLP(FCS.plazoFijo.minimos[i]),
+              formatCLP(FCS.plazoFijo.maximos[i]),
+            ])}
+          />
+          <p className={pClass}>
+            Montos vigentes hasta el {fechaDMY(FCS.vigenteHasta)} (
+            <Ext href={SP_FCS_MONTOS}>Superintendencia de Pensiones</Ext>).
+          </p>
+        </Section>
+
+        <Section title="¿Es igual al simulador de AFC?">
+          <p className={pClass}>
+            No. El simulador de AFC usa tu saldo real y requiere iniciar sesión; esta calculadora es
+            una estimación sin login. Incluso el resultado de AFC es orientativo: el monto real lo
+            calcula AFC al aprobar tu solicitud (<Ext href={AFC_SIMULE}>AFC, simule su cobro</Ext>).
+          </p>
+        </Section>
+
+        <Section title="Requisitos para que el simulador aplique">
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
+            <li>
+              Cuenta individual: {CIC.minCotizaciones.indefinido} cotizaciones con contrato
+              indefinido o {CIC.minCotizaciones.plazoFijo} con contrato a plazo fijo, por obra o
+              servicio (<Ext href={CA_SEGURO_CESANTIA}>ChileAtiende</Ext>).
+            </li>
+            <li>
+              Fondo Solidario: {FCS.minCotizaciones24m} cotizaciones en los últimos 24 meses, las
+              últimas {FCS.ultimasContinuasMismoEmpleador} continuas con el mismo empleador, y un
+              despido por una causal que dé derecho al Fondo. Si renunciaste, solo usas tu cuenta
+              individual (<Ext href={AFC_REQUISITOS}>AFC</Ext>).
+            </li>
+          </ul>
+          <p className={pClass}>
+            Para el trámite y las fechas de pago, revisa{' '}
+            <Int href="/blog/como-cobrar-seguro-cesantia-afc-2026">
+              cómo cobrar el seguro de cesantía
+            </Int>
+            .
+          </p>
+        </Section>
+
+        <Section title="Preguntas frecuentes sobre el simulador">
+          <Faq
+            items={[
+              {
+                q: '¿Cómo se calcula el seguro de cesantía en Chile?',
+                a: (
+                  <>
+                    Cada pago es un porcentaje de tu remuneración promedio: el primero es el{' '}
+                    {CIC.porcentajes[0]}% y luego baja, hasta donde alcance tu saldo. Se paga con tu cuenta individual y, si no
+                    alcanza y cumples los requisitos, con el Fondo Solidario (
+                    <Ext href={CA_SEGURO_CESANTIA}>ChileAtiende</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cuánto paga el seguro de cesantía?',
+                a: (
+                  <>
+                    Depende de tu remuneración y de tu saldo. Con el Fondo Solidario y contrato
+                    indefinido, el primer giro va de {formatCLP(FCS.indefinido.minimos[0])} a{' '}
+                    {formatCLP(FCS.indefinido.maximos[0])} (
+                    <Ext href={SP_FCS_MONTOS}>Superintendencia de Pensiones</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cómo se calcula el seguro de cesantía solidario?',
+                a: (
+                  <>
+                    Con un porcentaje de tu remuneración promedio por giro, sin bajar del mínimo ni
+                    pasar del máximo de cada giro. Tu cuenta individual paga primero y el Fondo pone
+                    la diferencia (<Ext href={SP_FCS_MONTOS}>Superintendencia de Pensiones</Ext>
+                    ).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cuánto dinero es el seguro de cesantía?',
+                a: (
+                  <>
+                    No es un monto fijo. Usa esta calculadora para estimarlo y confirma el monto
+                    real en tu solicitud en AFC (<Ext href={AFC_SIMULE}>AFC</Ext>).
+                  </>
+                ),
+              },
+            ]}
+          />
+          <p className={pClass}>
+            <em>Contenido verificado al 29-10-2026.</em>
+          </p>
+        </Section>
+
+        <Section title="Giros adicionales del Fondo de Cesantía Solidario">
         <p className={pClass}>
           Si la tasa de desempleo del INE supera en más de 1 punto su promedio de los 4 años
           anteriores, quienes cobran el 5° giro del Fondo de Cesantía Solidario reciben 2 giros
@@ -664,6 +804,7 @@ const EDITORIAL: Record<string, EditorialContent> = {
           </Ext>
         </p>
       </Section>
+      </>
     ),
   },
   iva: {

@@ -13,6 +13,18 @@ const SP_383 =
   'https://www.spensiones.gob.cl/portal/institucional/594/articles-16977_recurso_1.pdf';
 const SP_GIROS = 'https://www.spensiones.cl/portal/institucional/594/w3-article-17135.html';
 const BCN_19728 = 'https://www.bcn.cl/leychile/navegar?idNorma=184979';
+const AFC_FECHAS = 'https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/';
+const FCS = SEGURO_CESANTIA_BENEFICIOS.fcs;
+
+/** Filas de la tabla FCS generadas desde la constante (no escribir montos a mano). */
+function filasFcs(t: (typeof FCS)['indefinido'] | (typeof FCS)['plazoFijo']): string[][] {
+  return t.porcentajes.map((pct, i) => [
+    `${i + 1}°`,
+    `${pct}%`,
+    formatCLP(t.minimos[i]),
+    formatCLP(t.maximos[i]),
+  ]);
+}
 const CVLISTO = buildCvlistoUrl({ origen: 'cesantia', placement: 'guia_footer' });
 
 const h2 = 'text-xl font-bold text-[var(--foreground)] md:text-2xl';
@@ -83,8 +95,8 @@ export default function SeguroCesantiaInfo() {
           mensuales si pierdes tu trabajo. Para cobrarlo necesitas al menos{' '}
           <strong>10 cotizaciones</strong> si tenías contrato indefinido o{' '}
           <strong>5 cotizaciones</strong> si tenías contrato a plazo fijo, por obra, faena o
-          servicio (<Ext href={CA_SEGURO}>ChileAtiende</Ext>). Si quieres estimar tus montos, usa la{' '}
-          <Int href={CALC}>calculadora del seguro de cesantía</Int>.
+          servicio (<Ext href={CA_SEGURO}>ChileAtiende</Ext>). Si quieres estimar tus montos, usa el{' '}
+          <Int href={CALC}>simulador del seguro de cesantía</Int>.
         </p>
       </section>
 
@@ -154,24 +166,12 @@ export default function SeguroCesantiaInfo() {
         <h3 className={h3}>Contrato indefinido</h3>
         <Table
           head={['Giro', '% de la remuneración promedio', 'Mínimo', 'Máximo']}
-          rows={[
-            ['1°', '70%', '$301.201', '$1.004.003'],
-            ['2°', '60%', formatCLP(SEGURO_CESANTIA_BENEFICIOS.fcs.indefinido.minimos[1]), '$860.574'],
-            ['3°', '45%', '$193.629', '$645.429'],
-            ['4°', '40%', '$172.115', '$573.718'],
-            ['5°', '35%', '$150.602', '$502.002'],
-          ]}
+          rows={filasFcs(FCS.indefinido)}
         />
         <h3 className={h3}>Contrato a plazo fijo, por obra, faena o servicio</h3>
         <Table
           head={['Giro', '% de la remuneración promedio', 'Mínimo', 'Máximo']}
-          rows={[
-            ['1°', '60%', '$258.161', '$860.574'],
-            ['2°', '40%', '$172.115', '$573.718'],
-            ['3°', '35%', '$150.602', '$502.002'],
-            ['4°', '30%', '$129.085', '$430.288'],
-            ['5°', '30%', '$129.085', '$430.288'],
-          ]}
+          rows={filasFcs(FCS.plazoFijo)}
         />
         <h3 className={h3}>Ejemplo con un sueldo de $800.000</h3>
         <p className={p}>
@@ -182,8 +182,9 @@ export default function SeguroCesantiaInfo() {
             Primer giro: 70% × $800.000 = <strong>$560.000</strong>.
           </li>
           <li>
-            Revisa los límites: $560.000 está entre el mínimo ($301.201) y el máximo ($1.004.003),
-            así que el giro estimado es $560.000.
+            Revisa los límites: $560.000 está entre el mínimo ({formatCLP(FCS.indefinido.minimos[0])})
+            y el máximo ({formatCLP(FCS.indefinido.maximos[0])}), así que el giro estimado es
+            $560.000.
           </li>
           <li>Segundo giro: 60% × $800.000 = $480.000, también dentro de sus límites.</li>
         </ol>
@@ -219,6 +220,14 @@ export default function SeguroCesantiaInfo() {
             <Ext href="https://www.bne.cl/">Bolsa Nacional de Empleo</Ext>.
           </li>
         </ol>
+        <h3 className={h3}>¿Cuándo llega el primer pago?</h3>
+        <p className={p}>
+          Los pagos se procesan los jueves. Si pides el seguro antes de cumplir 30 días corridos
+          desde el término, el primero llega el jueves siguiente a ese día 30; si lo pides después,
+          el jueves siguiente a la aprobación. En autodespido o despido indirecto (artículo 171 del
+          Código del Trabajo), llega al menos 60 días corridos después del término (
+          <Ext href={AFC_FECHAS}>AFC</Ext>).
+        </p>
         <p className={p}>
           Tienes el paso a paso completo en nuestra guía{' '}
           <Int href="/blog/como-cobrar-seguro-cesantia-afc-2026">
