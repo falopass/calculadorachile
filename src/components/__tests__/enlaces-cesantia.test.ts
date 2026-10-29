@@ -32,6 +32,18 @@ describe('Enlaces internos hacia el clúster cesantía', () => {
     expect(html).toContain('cómo cobrar el seguro de cesantía en la AFC');
   });
 
+  it('finiquito explica quién financia el seguro de cesantía con su fuente (Ley 19.728, art. 5)', () => {
+    const html = editorial('finiquito');
+    const texto = html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ');
+    expect(texto).toContain(
+      'El finiquito lo paga tu empleador. El seguro de cesantía es aparte: lo financia tu empleador y, si tienes contrato indefinido, también tú con un 0,6% de tu sueldo imponible (salvo en trabajo de casa particular, donde aporta solo el empleador). Se cobra en la AFC.',
+    );
+    expect(texto).not.toContain('se financia con aportes tuyos y de tu empleador');
+    expect(html).toContain('href="https://www.bcn.cl/leychile/navegar?idNorma=184979"');
+    expect(html).toContain('Ley 19.728, art. 5');
+    expect(html).toContain('href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/"');
+  });
+
   it('indemnización por años de servicio enlaza al simulador, la guía y el finiquito', () => {
     const html = editorial('indemnizacion-anos-servicio');
     expect(html).toContain('Si te despidieron: seguro de cesantía');

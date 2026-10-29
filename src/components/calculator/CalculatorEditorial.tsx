@@ -151,6 +151,7 @@ const SII_RETENCION_2026 = 'https://www.sii.cl/noticias/2025/261225noti01smn.htm
 
 // Enlaces internos del clúster cesantía (desempleo INE jul-sep 2026: 9,8%)
 const AFC_COBRAR = 'https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/';
+const LEY_19728 = 'https://www.bcn.cl/leychile/navegar?idNorma=184979';
 const SIMULADOR_CESANTIA = '/calculadoras/calculadora-seguro-cesantia';
 const GUIA_COBRAR_CESANTIA = '/blog/como-cobrar-seguro-cesantia-afc-2026';
 
@@ -288,13 +289,15 @@ const EDITORIAL: Record<string, EditorialContent> = {
 
         <Section title="Después del finiquito: cobra el seguro de cesantía">
           <p className={pClass}>
-            El finiquito lo paga tu empleador. El seguro de cesantía es aparte: se financia con
-            aportes tuyos y de tu empleador, y se cobra en la <Ext href={AFC_COBRAR}>AFC</Ext>.
-            Revisa{' '}
+            El finiquito lo paga tu empleador. El seguro de cesantía es aparte: lo financia tu
+            empleador y, si tienes contrato indefinido, también tú con un 0,6% de tu sueldo
+            imponible (salvo en trabajo de casa particular, donde aporta solo el empleador). Se
+            cobra en la <Ext href={AFC_COBRAR}>AFC</Ext>. Revisa{' '}
             <Int href={GUIA_COBRAR_CESANTIA}>cómo cobrar el seguro de cesantía en la AFC</Int>{' '}
             (documentos, pasos y fecha de pago) y{' '}
             <Int href={SIMULADOR_CESANTIA}>simula cuánto te paga el seguro de cesantía</Int> según
-            tu sueldo y tu tipo de contrato.
+            tu sueldo y tu tipo de contrato. Fuente del financiamiento:{' '}
+            <Ext href={LEY_19728}>Ley 19.728, art. 5</Ext>.
           </p>
         </Section>
 
