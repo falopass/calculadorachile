@@ -4445,12 +4445,22 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'sueldo',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-09-26',
+    lastReviewed: '2026-10-29',
     sources: [
       {
         name: 'Dirección del Trabajo — Jornada parcial e ingreso mínimo',
         url: 'https://www.dt.gob.cl/portal/1626/w3-article-60136.html',
         note: 'IMM proporcional solo hasta 30 h semanales; jornada intermedia exige IMM íntegro',
+      },
+      {
+        name: 'Dirección del Trabajo — Jornada parcial (art. 40 bis)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60756.html',
+        note: 'Jornada parcial: 30 horas semanales o menos',
+      },
+      {
+        name: 'Dirección del Trabajo — Jornada de 42 horas',
+        url: 'https://dt.gob.cl/portal/1626/w3-article-129225.html',
+        note: '42 h desde el 26-04-2026; 40 h desde el 26-04-2028 (Ley 21.561)',
       },
     ],
     keywords: [
