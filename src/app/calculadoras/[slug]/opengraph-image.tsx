@@ -20,8 +20,6 @@ import { ImageResponse } from 'next/og';
 import { getCalculatorBySlug } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
 
-// Edge runtime para servir la imagen rápido en cualquier región.
-export const runtime = 'edge';
 
 export const alt = 'Calculadora chilena gratuita - CalculaChile';
 export const size = { width: 1200, height: 630 };
