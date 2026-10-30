@@ -8,7 +8,6 @@
 import { ImageResponse } from 'next/og';
 import { getArticleBySlug } from '@/data/articles';
 
-export const runtime = 'edge';
 
 export const alt = 'Artículo del blog - CalculaChile';
 export const size = { width: 1200, height: 630 };

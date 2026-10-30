@@ -63,3 +63,7 @@ scripts/*-out.csv
 
 # Caché TypeScript
 *.tsbuildinfo
+
+# OpenNext Cloudflare
+.open-next/
+.dev.vars

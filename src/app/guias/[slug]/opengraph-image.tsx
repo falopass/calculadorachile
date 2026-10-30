@@ -9,7 +9,6 @@
 import { ImageResponse } from 'next/og';
 import { getGuiaBySlug } from '@/data/guias';
 
-export const runtime = 'edge';
 
 export const alt = 'Guía pillar de CalculaChile';
 export const size = { width: 1200, height: 630 };
