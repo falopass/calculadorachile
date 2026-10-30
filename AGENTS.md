@@ -28,7 +28,7 @@ Verifica siempre `package.json` antes de asumir versiones. A la fecha:
 - **Analytics**: Google Analytics 4.
 - **Datos económicos**: BCentral + Mindicador + fallback local.
 - **Imágenes dinámicas**: `canvas` para generación server-side donde aplica.
-- **Deploy**: Vercel.
+- **Deploy**: Cloudflare Workers vía OpenNext (Workers Builds desde `main`).
 
 No instales dependencias nuevas salvo necesidad real demostrada. En particular, no introduzcas Three.js/GSAP/Lenis para “rediseño” sin decisión explícita: no forman parte del stack actual.
 
@@ -172,7 +172,9 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=
 DEBUG=false
 ```
 
-Secretos y valores reales de producción van en **Vercel Dashboard → Settings → Environment Variables**, no en el repo. Nunca commitees `.env`, credenciales, dumps ni tokens.
+Secretos y valores reales de producción van en **Cloudflare → Workers & Pages → calculadorachile → Settings → Variables and Secrets (runtime) y Build variables (NEXT_PUBLIC_*)**, no en el repo. Nunca commitees `.env`, credenciales, dumps ni tokens.
+
+Nota: `BCENTRAL_*` solo existen en runtime (no en build); tras cada deploy, las 2 páginas con UF/UTM en el title muestran el title genérico hasta la primera revalidación (≤1 h).
 
 ## Qué no tocar sin aprobación explícita
 
