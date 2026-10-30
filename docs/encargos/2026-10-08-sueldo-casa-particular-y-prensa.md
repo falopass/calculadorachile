@@ -66,7 +66,7 @@ Si una regla no logra fuente oficial: **NO la incluyas**; documéntala como pend
 
 ## Cierre
 
-- Commit(s) atómicos con mensaje estilo del repo (p. ej. `feat(calc): ...` / `feat(seo): ...`) y `git push origin main` (Vercel despliega solo; Hermes verificará producción después).
+- Commit(s) atómicos con mensaje estilo del repo (p. ej. `feat(calc): ...` / `feat(seo): ...`) y `git push origin main` (Workers Builds despliega solo; Hermes verificará producción después).
 - Informe final (en tu respuesta): (1) reglas y fuentes de la calculadora nueva (URLs citadas), (2) archivos creados/modificados, (3) comandos de verificación ejecutados y su resultado, (4) pendientes o cosas dejadas fuera y por qué, (5) supuestos.
 
 ## Fuera de alcance (no hacer en esta pasada)

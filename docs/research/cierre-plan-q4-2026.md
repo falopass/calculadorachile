@@ -5,7 +5,7 @@
 | **Fecha** | 26 de septiembre de 2026 |
 | **Spec** | `docs/plan-calculadoras-q4-2026.md` (bloques A–E) |
 | **Encargo** | `docs/encargos/2026-09-26-ejecutar-plan-q4.md` |
-| **Rama** | `main` (push por bloque; deploy automático en Vercel) |
+| **Rama** | `main` (push por bloque; deploy automático en Cloudflare Workers) |
 
 ## 1. Bloques completados y commits
 
