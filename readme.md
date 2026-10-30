@@ -11,7 +11,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Vitest](https://img.shields.io/badge/Vitest-3-6e9f18?style=flat-square&logo=vitest&logoColor=white)](https://vitest.dev)
-[![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com)
+[![Cloudflare Workers](https://img.shields.io/badge/Deploy-Cloudflare%20Workers-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com)
 
 **Sitio en producción:** [calculadorachile.cl](https://calculadorachile.cl)
 
@@ -144,7 +144,7 @@ Verifica siempre `package.json` antes de asumir versiones.
 | Íconos | **Lucide React** |
 | Tests | **Vitest 3** + jsdom |
 | OG / canvas | `canvas` (devDependency, server-side donde aplica) |
-| Deploy | **Vercel** |
+| Deploy | **Cloudflare Workers** (OpenNext, `@opennextjs/cloudflare`) |
 
 ---
 
@@ -273,7 +273,7 @@ Una calculadora activa se arma en **cuatro piezas** unidas por `calculator.id`:
 
 **No hardcodear** UF, UTM, dólar, topes o tasas en componentes de UI.
 
-Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) solo en Vercel / secrets de GitHub Actions. El repo debe funcionar sin ellas.
+Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) solo en las Variables and Secrets del Worker en Cloudflare / secrets de GitHub Actions. El repo debe funcionar sin ellas.
 
 ---
 
@@ -345,7 +345,7 @@ DEBUG=false
 | `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID` | Placeholder `ca-pub-XXXXXXX` = sin ads reales |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | GA4 |
 
-Secretos de producción: **Vercel Dashboard** y **GitHub Secrets** (workflow de valores). Nunca commitear `.env`.
+Secretos de producción: **Variables and Secrets del Worker en Cloudflare** (runtime para `BCENTRAL_*`; build variables para `NEXT_PUBLIC_*`, en el dashboard o en Workers Builds) y **GitHub Secrets** (workflow de valores). Nunca commitear `.env`.
 
 ---
 
@@ -414,7 +414,7 @@ Si la validación falla, se corrige y se vuelve a ejecutar. No entregar “deber
 
 ## Deploy
 
-- **Vercel**, deploy automático desde `main`.
+- **Cloudflare Workers** vía OpenNext (`@opennextjs/cloudflare`): Workers Builds compila y despliega `main` automáticamente, con caché incremental en R2.
 - Valores económicos: API + snapshot diario por Actions.
 - AdSense async para no bloquear Core Web Vitals.
 - Dominio canónico: **apex** `calculadorachile.cl` (www redirige).
@@ -438,7 +438,7 @@ Mantenido por **Diego Bravo Opazo** — [GitHub @falopass](https://github.com/fa
 
 **CalculaChile** (`calculadorachile.cl`) is a production Chilean platform with **39 active calculators** for salaries, taxes, pensions, housing, vehicles and household costs, plus guides and a blog. Live indicators (UF, UTM, USD, EUR) come from the Central Bank / Mindicador with a local snapshot fallback.
 
-Stack: **Next.js 15 (App Router), React 19, TypeScript 5, Tailwind 3, Framer Motion, Vitest**. Monetization: **Google AdSense**. Deploy: **Vercel**.
+Stack: **Next.js 15 (App Router), React 19, TypeScript 5, Tailwind 3, Framer Motion, Vitest**. Monetization: **Google AdSense**. Deploy: **Cloudflare Workers** (OpenNext).
 
 This is a **YMYL** product: formula changes require verified official sources (SII, Labour Directorate, Central Bank, Pension Superintendence, etc.). Catalog inputs must match what the calculation adapter actually uses (no “phantom” fields).
 

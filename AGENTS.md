@@ -124,7 +124,7 @@ Fuentes y flujo actual:
   - `snapshot.json` y `tmc-snapshot.json` para datos congelados.
 - Hooks/contexto: `ValuesContext` y `useLiveValues` cuando la UI necesita valores actuales.
 
-Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) van solo en variables de entorno/Vercel Dashboard. El repo debe funcionar sin ellas usando Mindicador/fallback.
+Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) van solo en las Variables and Secrets del Worker en Cloudflare. El repo debe funcionar sin ellas usando Mindicador/fallback.
 
 ## SEO, YMYL y E-E-A-T
 

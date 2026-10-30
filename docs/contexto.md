@@ -17,7 +17,7 @@ Research: [`research/`](./research/).
 | Tipo | Plataforma nacional de calculadoras + contenido |
 | Vertical | **YMYL** (laboral / tributario / previsional / financiero) |
 | Monetización | AdSense + SEO orgánico |
-| Deploy | Vercel |
+| Deploy | Cloudflare Workers (OpenNext) |
 | Harness | **Codex** — configuración versionada, sin workflow de pymes |
 
 **No es:** local business, e-commerce, SaaS con login, web de pyme.

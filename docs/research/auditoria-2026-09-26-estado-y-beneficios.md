@@ -95,7 +95,7 @@ Efecto: operación renta y APV calculan el impuesto con exención y tramos disti
 ### 1.7 Frescura de valores en runtime
 
 - `GET https://calculadorachile.cl/api/values` (26-sep-2026): `"source":"fallback"` y `freshness` fallback en UF/UTM/dólar/euro. Los valores llegan bien desde el snapshot (UF 41.016,28 del 25-sep), pero **nunca** en vivo desde BCentral/Mindicador.
-- Riesgo: si el GitHub Action `update-values.yml` falla un día, el sitio sirve datos viejos sin señal. Recomendado: alerta si `generatedAt` > 48 h, y log de por qué las fuentes externas fallan en Vercel (¿timeout? ¿bloqueo?).
+- Riesgo: si el GitHub Action `update-values.yml` falla un día, el sitio sirve datos viejos sin señal. Recomendado: alerta si `generatedAt` > 48 h, y log de por qué las fuentes externas fallan en el Worker de Cloudflare (¿timeout? ¿bloqueo?).
 
 ### 1.8 Menores
 
