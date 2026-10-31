@@ -1,16 +1,16 @@
 {
-  "uf": 41242.32,
+  "uf": 41247.63,
   "utm": 72151,
   "dolarObservado": 993.22,
   "euro": 1109.37,
   "ipcMensual": -0.2,
-  "asOf": "2026-10-30T18:06:43.657Z",
+  "asOf": "2026-10-31T17:18:13.765Z",
   "sources": {
     "uf": "bcentral",
     "utm": "bcentral",
     "dolarObservado": "bcentral",
     "euro": "bcentral",
-    "ipcMensual": "unknown"
+    "ipcMensual": "mindicador"
   },
-  "generatedAt": "2026-10-30T18:06:43.953Z"
+  "generatedAt": "2026-10-31T17:18:14.355Z"
 }
