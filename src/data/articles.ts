@@ -3997,7 +3997,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       'asignación familiar 2026 montos',
       'tramos asignación familiar 2026',
       'cuánto pagan por carga familiar 2026',
-      'asignación familiar $22007',
+      'asignación familiar $22601',
       'asignación familiar por invalidez doble',
       'cómo se paga asignación familiar trabajador dependiente',
     ],
