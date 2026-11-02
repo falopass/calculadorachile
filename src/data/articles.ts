@@ -3987,17 +3987,17 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
     description:
       'Montos vigentes de la Asignación Familiar 2026, cómo leer los tramos de ingreso, quién paga el beneficio y qué revisar antes de reclamar por una carga.',
     date: '2026-08-12',
-    updatedAt: '2026-08-12',
+    updatedAt: '2026-11-02',
     category: 'familia',
     readingTime: 15,
     seoTitle: 'Asignación Familiar 2026: tramos, montos y pago por carga',
     seoDescription:
-      'Revisa los montos vigentes de la Asignación Familiar 2026: $22.007, $13.505 o $4.267 por carga, según tramo de ingreso y situación laboral.',
+      'Revisa los montos vigentes de la Asignación Familiar 2026: $22.601, $13.870 o $4.382 por carga, según tramo de ingreso y situación laboral.',
     keywords: [
       'asignación familiar 2026 montos',
       'tramos asignación familiar 2026',
       'cuánto pagan por carga familiar 2026',
-      'asignación familiar $22007',
+      'asignación familiar $22601',
       'asignación familiar por invalidez doble',
       'cómo se paga asignación familiar trabajador dependiente',
     ],
@@ -4007,7 +4007,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       {
         question: '¿Cuánto paga la Asignación Familiar en 2026?',
         answer:
-          'ChileAtiende informa $22.007, $13.505 o $4.267 por causante reconocido, según el tramo de ingreso. Desde $1.439.669 no hay pago monetario, aunque pueden mantenerse otros derechos asociados.',
+          'ChileAtiende informa $22.601, $13.870 o $4.382 por causante reconocido, según el tramo de ingreso. Sobre $1.478.539 no hay pago monetario, aunque pueden mantenerse otros derechos asociados.',
       },
       {
         question: '¿La Asignación Familiar se paga por cada hijo o carga?',
@@ -4020,7 +4020,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
           'En el caso de trabajadores dependientes, el empleador debe pagarla mensualmente junto con el sueldo. Pensionados, independientes y personas con subsidios tienen modalidades distintas que informa ChileAtiende.',
       },
       {
-        question: '¿Qué pasa si el ingreso supera $1.439.669?',
+        question: '¿Qué pasa si el ingreso supera $1.478.539?',
         answer:
           'No corresponde pago monetario de Asignación Familiar en ese tramo, según la ficha oficial. Eso no significa necesariamente perder todos los beneficios que puedan depender de tener una carga acreditada.',
       },
@@ -4047,10 +4047,18 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
         label: 'SUSESO — Circular 3911, plataforma integrada de prestaciones familiares',
         url: 'https://www.suseso.cl/609/articles-773957_archivo_01.pdf',
       },
+      {
+        label: 'BCN LeyChile — Ley 21.830 (art. 4, montos y tramos desde el 01-05-2026)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354',
+      },
+      {
+        label: 'BCN LeyChile — Ley 18.987, art. 1 (tramos de Asignación Familiar)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=30355',
+      },
     ],
-    content: `<p class="article-lead">La Asignación Familiar 2026 no es un monto único para todos los hogares. Se paga por cada causante reconocido y cambia según el tramo de ingreso de la persona beneficiaria. Los valores publicados por ChileAtiende son <strong>$22.007, $13.505 o $4.267</strong> por carga; sobre el último umbral no corresponde pago monetario, aunque la acreditación de la carga puede seguir siendo relevante para otros beneficios.</p>
+    content: `<p class="article-lead">La Asignación Familiar 2026 no es un monto único para todos los hogares. Se paga por cada causante reconocido y cambia según el tramo de ingreso de la persona beneficiaria. Los valores publicados por ChileAtiende son <strong>$22.601, $13.870 o $4.382</strong> por carga; sobre el último umbral no corresponde pago monetario, aunque la acreditación de la carga puede seguir siendo relevante para otros beneficios.</p>
 
-<p>Esta guía fue revisada el <strong>12 de agosto de 2026</strong> con la ficha vigente de ChileAtiende y la normativa de la Superintendencia de Seguridad Social (SUSESO). Antes de calcular un total, hay que resolver cuatro preguntas: quién es la persona beneficiaria, cuántas cargas están acreditadas, qué tramo de ingreso se aplica y por qué vía se paga. Si falta una de esas piezas, multiplicar “monto por hijos” puede producir una expectativa equivocada.</p>
+<p>Esta guía fue revisada el <strong>2 de noviembre de 2026</strong> con la ficha vigente de ChileAtiende y la normativa de la Superintendencia de Seguridad Social (SUSESO). Antes de calcular un total, hay que resolver cuatro preguntas: quién es la persona beneficiaria, cuántas cargas están acreditadas, qué tramo de ingreso se aplica y por qué vía se paga. Si falta una de esas piezas, multiplicar “monto por hijos” puede producir una expectativa equivocada.</p>
 
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No confundas carga familiar con pago automático</strong><p>Que una persona esté a cargo de un hijo, hija u otro causante no significa que el pago aparecerá sin reconocimiento previo. El tramo, el ingreso considerado y la entidad pagadora deben quedar correctamente registrados. Una liquidación de sueldo sin el beneficio no siempre es un error de cálculo: puede faltar acreditar o actualizar antecedentes.</p></div></aside>
 
@@ -4058,13 +4066,13 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>ChileAtiende informa los siguientes valores por cada causante de Asignación Familiar. Los montos son mensuales para quienes reciben el beneficio por esa modalidad y dependen del nivel de ingreso que se determine para la persona beneficiaria:</p>
 
-<table><thead><tr><th>Ingreso informado en la ficha oficial</th><th>Monto por causante</th><th>Cómo leer el tramo</th></tr></thead><tbody><tr><td>Hasta $631.976</td><td>$22.007</td><td>Tramo de mayor monto</td></tr><tr><td>Entre $631.976 y $923.067</td><td>$13.505</td><td>Tramo intermedio</td></tr><tr><td>Desde $923.067 hasta $1.439.668</td><td>$4.267</td><td>Tramo de menor monto con pago</td></tr><tr><td>Desde $1.439.669</td><td>Sin pago monetario</td><td>La carga puede conservar relevancia para otros beneficios</td></tr></tbody></table>
+<table><thead><tr><th>Ingreso informado en la ficha oficial</th><th>Monto por causante</th><th>Cómo leer el tramo</th></tr></thead><tbody><tr><td>Hasta $649.039</td><td>$22.601</td><td>Tramo de mayor monto</td></tr><tr><td>Sobre $649.039 y hasta $947.990</td><td>$13.870</td><td>Tramo intermedio</td></tr><tr><td>Sobre $947.990 y hasta $1.478.539</td><td>$4.382</td><td>Tramo de menor monto con pago</td></tr><tr><td>Sobre $1.478.539</td><td>Sin pago monetario</td><td>La carga puede conservar relevancia para otros beneficios</td></tr></tbody></table>
 
 <p>Los bordes entre tramos deben consultarse con la entidad administradora si el ingreso queda muy cerca del corte. La ficha de ChileAtiende muestra los rangos para orientar la consulta, pero una liquidación puede considerar antecedentes que no se ven en un solo mes. No conviertas un ingreso extraordinario o un bono aislado en una conclusión definitiva sin confirmar cómo se determina el tramo en tu situación.</p>
 
 <p>La regla “por causante” también es importante. El monto no se paga una vez por familia sin importar el número de cargas reconocidas; se aplica por cada causante acreditado. Aun así, no corresponde sumar personas solo porque viven en el hogar. Deben estar reconocidas dentro del régimen y no existir una incompatibilidad o duplicidad de pago que corresponda resolver.</p>
 
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo de lectura, no de reconocimiento</div><ul><li>Persona beneficiaria en el tramo de $13.505.</li><li>Dos causantes ya reconocidos por la entidad competente.</li><li>$13.505 × 2 = $27.010 como referencia mensual.</li><li>El resultado cambia si el tramo, número de cargas o modalidad de pago no coincide.</li></ul><span class="total">Verifica reconocimiento y tramo antes de proyectar un presupuesto</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo de lectura, no de reconocimiento</div><ul><li>Persona beneficiaria en el tramo de $13.870.</li><li>Dos causantes ya reconocidos por la entidad competente.</li><li>$13.870 × 2 = $27.740 como referencia mensual.</li><li>El resultado cambia si el tramo, número de cargas o modalidad de pago no coincide.</li></ul><span class="total">Verifica reconocimiento y tramo antes de proyectar un presupuesto</span></div>
 
 <h2>Qué significa “por cada causante reconocido”</h2>
 
@@ -4096,13 +4104,13 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <h2>Qué significa no recibir pago desde el último umbral</h2>
 
-<p>Desde $1.439.669, la ficha vigente informa que no hay derecho a pago monetario de Asignación Familiar. Esa frase suele interpretarse como si la carga desapareciera para todos los efectos. ChileAtiende aclara que, aunque no exista pago, pueden mantenerse otras prestaciones y beneficios asociados. La conclusión correcta es más acotada: no proyectes un depósito mensual en ese tramo, pero tampoco elimines una carga acreditada sin revisar qué otros trámites podrían requerirla.</p>
+<p>Sobre $1.478.539, la ficha vigente informa que no hay derecho a pago monetario de Asignación Familiar. Esa frase suele interpretarse como si la carga desapareciera para todos los efectos. ChileAtiende aclara que, aunque no exista pago, pueden mantenerse otras prestaciones y beneficios asociados. La conclusión correcta es más acotada: no proyectes un depósito mensual en ese tramo, pero tampoco elimines una carga acreditada sin revisar qué otros trámites podrían requerirla.</p>
 
 <p>También es importante no usar un mes de ingreso alto para decidir de inmediato que el beneficio se pierde de manera permanente. Si hubo un término de contrato, cambio de jornada, comisión extraordinaria u otra variación, pregunta cómo se aplica la regla a tu período. La respuesta depende del régimen y los antecedentes registrados, no de una captura aislada de una liquidación.</p>
 
 <h2>Errores comunes al calcular</h2>
 
-<ul><li><strong>Multiplicar por hijos sin reconocimiento:</strong> el cálculo usa causantes acreditados, no una lista informal del hogar.</li><li><strong>Usar el tramo más alto para todos:</strong> los $22.007 solo corresponden al primer tramo informado.</li><li><strong>Confundir pago por carga con bono familiar:</strong> la Asignación Familiar no es un aporte único anual ni un beneficio idéntico para todas las familias.</li><li><strong>Esperar pago mensual siendo independiente:</strong> la modalidad puede ser anual y depender de cotizaciones.</li><li><strong>Olvidar el doble por invalidez:</strong> aplica cuando esa condición está reconocida, no como un incremento automático.</li><li><strong>Interpretar “sin pago” como pérdida de toda carga:</strong> pueden existir otros beneficios asociados que deben consultarse.</li><li><strong>Revisar solo el líquido:</strong> mira las líneas de la liquidación y el documento que administra el beneficio.</li></ul>
+<ul><li><strong>Multiplicar por hijos sin reconocimiento:</strong> el cálculo usa causantes acreditados, no una lista informal del hogar.</li><li><strong>Usar el tramo más alto para todos:</strong> los $22.601 solo corresponden al primer tramo informado.</li><li><strong>Confundir pago por carga con bono familiar:</strong> la Asignación Familiar no es un aporte único anual ni un beneficio idéntico para todas las familias.</li><li><strong>Esperar pago mensual siendo independiente:</strong> la modalidad puede ser anual y depender de cotizaciones.</li><li><strong>Olvidar el doble por invalidez:</strong> aplica cuando esa condición está reconocida, no como un incremento automático.</li><li><strong>Interpretar “sin pago” como pérdida de toda carga:</strong> pueden existir otros beneficios asociados que deben consultarse.</li><li><strong>Revisar solo el líquido:</strong> mira las líneas de la liquidación y el documento que administra el beneficio.</li></ul>
 
 <h2>Checklist para una diferencia en la liquidación</h2>
 
@@ -4111,7 +4119,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>La Asignación Familiar puede parecer una operación corta, pero depende de registros que una calculadora no ve. Los montos vigentes permiten estimar el orden de magnitud; el reconocimiento de la carga, el tramo y la modalidad de pago deciden si la estimación aparece realmente en una liquidación. Revisar esos tres puntos es más útil que buscar una cifra única para todo 2026.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 12 de agosto de 2026 con la <a href="https://www.chileatiende.gob.cl/tramites/25878" target="_blank" rel="noopener">ficha de Asignación Familiar de ChileAtiende</a>, su <a href="https://www.chileatiende.gob.cl/fichas/25878/1/pdf" target="_blank" rel="noopener">versión PDF</a>, el <a href="https://www.suseso.cl/620/alt-propertyvalue-596461.pdf" target="_blank" rel="noopener">compendio de normas de SUSESO</a> y la <a href="https://www.suseso.cl/609/articles-773957_archivo_01.pdf" target="_blank" rel="noopener">Circular 3911</a>. Los tramos y antecedentes individuales deben confirmarse con la entidad administradora correspondiente.</p>`,
+<p>Contenido verificado el 2 de noviembre de 2026 con la <a href="https://www.chileatiende.gob.cl/tramites/25878" target="_blank" rel="noopener">ficha de Asignación Familiar de ChileAtiende</a>, su <a href="https://www.chileatiende.gob.cl/fichas/25878/1/pdf" target="_blank" rel="noopener">versión PDF</a>, el <a href="https://www.suseso.cl/620/alt-propertyvalue-596461.pdf" target="_blank" rel="noopener">compendio de normas de SUSESO</a>, la <a href="https://www.suseso.cl/609/articles-773957_archivo_01.pdf" target="_blank" rel="noopener">Circular 3911</a>, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830 en LeyChile</a> (art. 4, que fija los montos y tramos vigentes desde el 1 de mayo de 2026) y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=30355" target="_blank" rel="noopener">Ley 18.987 en LeyChile</a>. Los tramos y antecedentes individuales deben confirmarse con la entidad administradora correspondiente.</p>`,
   },
   {
     slug: 'contribuciones-cuarta-cuota-noviembre-2026',
