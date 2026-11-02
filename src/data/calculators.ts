@@ -1331,7 +1331,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuál es el tope de la indemnización?',
         answer:
-          'La indemnización tiene dos topes: (1) máximo 11 años de servicio (330 días), y (2) la base de cálculo no puede exceder 90 UF mensuales. En 2026, con UF a $37.600, el sueldo tope para cálculo es aproximadamente $3.384.000 mensuales.',
+          'La indemnización tiene dos topes: (1) máximo 11 años de servicio (330 días), y (2) la base de cálculo no puede exceder 90 UF mensuales (con la UF de hoy, unos $3,7 millones).',
       },
       {
         question: '¿Tengo derecho a indemnización si renuncio?',
