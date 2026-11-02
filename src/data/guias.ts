@@ -422,7 +422,7 @@ export const guias: Guia[] = [
 <p>Cuando se invoca el artículo 161, el empleador debe avisar con al menos 30 días de anticipación o pagar una última remuneración mensual. Este concepto es independiente de los años de servicio y no se reduce con la imputación AFC.</p>
 
 <h3>7. Otros haberes y descuentos</h3>
-<p>Comisiones ya devengadas, bonos contractuales, horas extra impagas y asignaciones pendientes pueden aparecer según el caso. Todo descuento necesita fundamento. En especial, la rebaja AFC del artículo 13 solo puede afectar años de servicio por artículo 161 y debe coincidir con el certificado de aporte empleador.</p>`,
+<p>Comisiones ya devengadas, bonos contractuales, horas extra impagas (su valor se estima con el <a href="/calculadoras/calculadora-factor-hora-extra">factor hora extra con jornada de 42 horas</a>) y asignaciones pendientes pueden aparecer según el caso. Todo descuento necesita fundamento. En especial, la rebaja AFC del artículo 13 solo puede afectar años de servicio por artículo 161 y debe coincidir con el certificado de aporte empleador.</p>`,
       },
       {
         id: 'causales-y-derechos',
