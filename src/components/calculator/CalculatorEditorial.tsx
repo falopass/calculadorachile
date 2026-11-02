@@ -878,8 +878,26 @@ const EDITORIAL: Record<string, EditorialContent> = {
           , compara la <Int href="/calculadoras/calculadora-comparador-afp">comisión de tu AFP</Int>
           , calcula la{' '}
           <Int href="/calculadoras/calculadora-gratificacion-legal">gratificación legal</Int> y las{' '}
-          <Int href="/calculadoras/calculadora-horas-extra">horas extra</Int>, o lee la{' '}
+          <Int href="/calculadoras/calculadora-horas-extra">horas extra</Int> (o solo el{' '}
+          <Int href="/calculadoras/calculadora-factor-hora-extra">
+            factor hora extra con jornada de 42 horas
+          </Int>
+          ), o lee la{' '}
           <Int href="/guias/sueldo-liquido-chile">guía de sueldo líquido</Int>.
+        </p>
+      </Section>
+    ),
+  },
+  'asignacion-familiar': {
+    bottom: (
+      <Section title="Tramos y montos 2026">
+        <p className={pClass}>
+          Para entender cómo se leen los tramos de ingreso, quién paga el beneficio y qué revisar
+          antes de reclamar por una carga, lee{' '}
+          <Int href="/blog/asignacion-familiar-2026-tramos-montos">
+            Asignación Familiar 2026: tramos, montos y pago por carga
+          </Int>
+          .
         </p>
       </Section>
     ),
