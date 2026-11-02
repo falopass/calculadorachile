@@ -37,7 +37,12 @@ export default function EmbeddedCalculator({ calculator }: EmbeddedCalculatorPro
       {calculateFn ? (
         <PremiumCalculatorShell calculator={calculator} calculateFn={calculateFn} />
       ) : (
-        <p className="text-sm text-[var(--foreground-secondary)]" aria-live="polite">
+        // min-h reserva en móvil casi todo el alto del formulario (659-1013 px a
+        // 390 px) para que el contenido de abajo no salte al cargar (CLS).
+        <p
+          className="min-h-[40rem] text-sm text-[var(--foreground-secondary)] md:min-h-0"
+          aria-live="polite"
+        >
           Cargando calculadora…
         </p>
       )}

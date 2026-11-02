@@ -77,7 +77,9 @@ export default function OfficialValuesBlock() {
           ))}
         </div>
 
-        <p className="mt-3 text-xs text-[var(--foreground-muted)]">
+        {/* min-h: el texto de respaldo ocupa 2 líneas en móvil y el de la
+            fuente en vivo 1; reservar 2 evita que la página salte (CLS). */}
+        <p className="mt-3 min-h-8 text-xs text-[var(--foreground-muted)] md:min-h-0">
           {sourceLabel} — {updatedLabel}
         </p>
       </div>
