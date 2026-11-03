@@ -53,6 +53,8 @@ import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf'
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
 import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 import { calculateSeguroCesantia } from '@/lib/calculations/seguro-cesantia';
+import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 
 export interface QuickAnswerLink {
   text: string;
@@ -147,6 +149,8 @@ const SUSESO_QUIEN_PAGA_URL = 'https://www.suseso.gob.cl/622/w3-propertyvalue-76
 const AFC_FECHAS_PAGO_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/';
 const AFC_SIMULE_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/';
 const CA_SEGURO_CESANTIA_URL = 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia';
+const SII_AUMENTO_GRADUAL_URL = 'https://www.sii.cl/destacados/boletas_honorarios/aumento_gradual.html';
+const SII_FAQ_TASA_ANIO_URL = 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_3611.htm';
 const SP_FCS_URL = 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html';
 
 /** Remuneración neta del ejemplo de licencia médica (igual que la metodología). */
@@ -201,10 +205,46 @@ function fechaLargaISO(iso: string): string {
 export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): QuickAnswer | null {
   switch (calculatorId) {
     case 'boleta-honorarios': {
-      const b100 = calculateBoletaHonorarios({ montoBruto: 100_000, ano: 2026 });
+      // E-028: año, tasas y montos generados desde el calendario y la fecha (Chile).
+      const hon = contextoHonorarios();
+      const anios = [hon.anio, ...(hon.siguiente ? [hon.siguiente] : [])];
+      const montos = [100_000, 500_000, 1_000_000];
+      const rows = montos.map((bruto) => [
+        formatCLP(bruto),
+        ...anios.flatMap((ano) => {
+          const r = calculateBoletaHonorarios({ montoBruto: bruto, ano });
+          return [formatCLP(r.retencion), formatCLP(r.montoLiquido)];
+        }),
+      ]);
+      const b100 = calculateBoletaHonorarios({ montoBruto: 100_000, ano: hon.anioSelector });
+      const tasaSel = formatTasa(RETENCION_HONORARIOS_CALENDARIO[hon.anioSelector]);
+      const h1 = hon.modoCambioDeAnio
+        ? `Calcular boleta de honorarios ${hon.anio} y ${hon.siguiente}`
+        : `Calcular boleta de honorarios ${hon.anio} (retención ${formatTasa(hon.tasa)})`;
+      const intro = hon.modoCambioDeAnio
+        ? `En ${hon.anio} la retención de la boleta de honorarios es ${formatTasa(hon.tasa)} del monto bruto y desde el 1 de enero de ${hon.siguiente} es ${tasaSel}. Se aplica la tasa del año en que emites la boleta, aunque el trabajo sea del año anterior (`
+        : `En ${hon.anio} la retención de la boleta de honorarios es ${formatTasa(hon.tasa)} del monto bruto${
+            hon.siguiente ? ` y en ${hon.siguiente} será ${formatTasa(hon.tasaSiguiente!)}` : ''
+          }, según el calendario de la Ley 21.133 (`;
       return {
-        h1: 'Calcular boleta de honorarios 2026 (retención 15,25%)',
-        lead: `En 2026 la retención de la boleta de honorarios es de 15,25% del monto bruto: por una boleta de ${formatCLP(b100.montoBruto)} brutos se retienen ${formatCLP(b100.retencion)} y recibes ${formatCLP(b100.montoLiquido)} líquidos. La tasa subió desde 14,5% en 2025 y sube a 16% en 2027 y 17% en 2028, según la Ley 21.133 (SII).`,
+        h1,
+        ...withLinks([
+          intro,
+          hon.modoCambioDeAnio
+            ? { text: 'SII', href: SII_FAQ_TASA_ANIO_URL }
+            : { text: 'SII', href: SII_AUMENTO_GRADUAL_URL },
+          `). Con ${tasaSel}, por una boleta de ${formatCLP(b100.montoBruto)} brutos se retienen ${formatCLP(b100.retencion)} y recibes ${formatCLP(b100.montoLiquido)} líquidos.`,
+        ]),
+        example: {
+          caption: `Retención y líquido por año de emisión de la boleta (${anios
+            .map((a) => `${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])} en ${a}`)
+            .join(' y ')}).`,
+          headers: [
+            'Bruto',
+            ...anios.flatMap((a) => [`Retención ${a}`, `Líquido ${a}`]),
+          ],
+          rows,
+        },
       };
     }
 
