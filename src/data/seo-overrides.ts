@@ -28,9 +28,36 @@
  */
 
 import { formatCLP } from '@/lib/formatters';
+import { INDEMNIZACION } from '@/lib/values/constants';
+import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 
 const TOPE_GRAT = topeGratificacion();
+
+/**
+ * E-028: title y meta de honorarios según la fecha en Chile. Normal:
+ * "Calcular boleta de honorarios 2027: retención 16%". Diciembre (si el año
+ * siguiente está en el calendario): "Boleta de honorarios 2026 y 2027:
+ * retención 15,25% y 16%". Se usan como getters para evaluarse en cada
+ * render (revalidate 3600) y no al cargar el módulo.
+ */
+export function seoBoletaHonorarios(date: Date = new Date()): {
+  seoTitle: string;
+  seoDescription: string;
+} {
+  const h = contextoHonorarios(date);
+  if (h.modoCambioDeAnio && h.siguiente && h.tasaSiguiente !== null) {
+    return {
+      seoTitle: `Boleta de honorarios ${h.anio} y ${h.siguiente}: retención ${formatTasa(h.tasa)} y ${formatTasa(h.tasaSiguiente)}`,
+      seoDescription: `Calcula tu boleta de honorarios ${h.anio} y ${h.siguiente}: retención de ${formatTasa(h.tasa)} y ${formatTasa(h.tasaSiguiente)} del SII según la fecha de emisión. De bruto a líquido y al revés.`,
+    };
+  }
+  return {
+    seoTitle: `Calcular boleta de honorarios ${h.anio}: retención ${formatTasa(h.tasa)}`,
+    seoDescription: `Calcula tu boleta de honorarios ${h.anio}: de bruto a líquido y de líquido a bruto con la retención del ${formatTasa(h.tasa)} del SII. Ejemplos en pesos.`,
+  };
+}
 
 export const seoOverrides: Record<string, { seoTitle: string; seoDescription: string }> = {
   // ══════════════════════════════════════════════════════════════════════════
@@ -68,9 +95,13 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-indemnizacion-anos-servicio': {
-    seoTitle: 'Indemnización por Años 2026: tope legal 90 UF', // 48
-    seoDescription:
-      'Calcula tu indemnización por años de servicio en Chile: 30 días por año, tope 11 años y 90 UF imponible. Ideal finiquito. Gratis DT.', // 135
+    // E-026: 55 caracteres / meta 148 (con los valores vigentes).
+    get seoTitle() {
+      return seoIndemnizacion().seoTitle;
+    },
+    get seoDescription() {
+      return seoIndemnizacion().seoDescription;
+    },
   },
 
   'calculadora-vacaciones-proporcionales': {
@@ -117,9 +148,13 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-boleta-honorarios': {
-    seoTitle: 'Calcular boleta de honorarios 2026: retención 15,25%', // 52
-    seoDescription:
-      'Calcula tu boleta de honorarios 2026: de bruto a líquido y de líquido a bruto con la retención de 15,25% del SII (Ley 21.133). Ejemplos en pesos.', // 148
+    // E-028: generado desde RETENCION_HONORARIOS_CALENDARIO y la fecha.
+    get seoTitle() {
+      return seoBoletaHonorarios().seoTitle;
+    },
+    get seoDescription() {
+      return seoBoletaHonorarios().seoDescription;
+    },
   },
 
   'calculadora-operacion-renta': {
@@ -566,6 +601,17 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Guía verificada para comprar vivienda en Chile: promesa, estudio de títulos, subsidios 2026, contribuciones, gastos comunes, escritura e inscripción.',
   },
 };
+
+/** E-026: title con el año en curso (Chile) y meta desde las constantes. */
+export function seoIndemnizacion(date: Date = new Date()): {
+  seoTitle: string;
+  seoDescription: string;
+} {
+  return {
+    seoTitle: `Indemnización por años de servicio ${anioSantiago(date)}: cálculo y tope`,
+    seoDescription: `Calcula tu indemnización por años de servicio: ${INDEMNIZACION.dias_por_año} días por año, tope de ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF, aviso previo y recargos del art. 168. Con fuentes de la DT.`,
+  };
+}
 
 /**
  * ============================================================================

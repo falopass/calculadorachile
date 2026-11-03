@@ -2,6 +2,8 @@ import type { CalculatorMethodology } from '@/types/calculator';
 import { formatCLP } from '@/lib/formatters';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
+import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
+import { INDEMNIZACION } from '@/lib/values/constants';
 
 // E-014: cifras del tope de gratificación generadas desde las constantes.
 const TOPE_GRAT = topeGratificacion();
@@ -11,6 +13,13 @@ const EJ_VACACIONES = calculateVacaciones({
   sueldoBruto: 600_000,
   mesesTrabajados: 8,
   fechaTermino: '2026-11-30',
+});
+// E-026: ejemplo de indemnización generado con el cálculo real.
+const EJ_IND = calculateIndemnizacion({
+  ultimoSueldo: 900_000,
+  añosTrabajados: 5,
+  mesesTrabajados: 7,
+  incluyeGratificacion: false,
 });
 const fmtDias = (n: number) =>
   n.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
@@ -272,31 +281,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
   },
   'indemnizacion-anos-servicio': {
     summary:
-      'Estima indemnización por años y aviso previo desde la remuneración base, antigüedad y causal declaradas.',
+      'Estima la indemnización por años de servicio, la sustitutiva del aviso previo y el recargo que declararía un juez, desde la remuneración mensual, la antigüedad y la causal.',
     calculationSteps: [
-      'Determina los años computables según antigüedad informada.',
-      'Aplica el tope de años y de remuneración cuando corresponde.',
-      'Multiplica la base admitida por los años computables.',
-      'Agrega aviso previo o recargo seleccionado.',
+      'Suma los pagos mensuales que entran en la base (sueldo, gratificación mensual, comisiones, bonos mensuales, colación y movilización) y aplica el tope en UF del art. 172.',
+      'Cuenta los años indemnizables: desde el primer año, la fracción superior a seis meses suma un año, con el tope de años del art. 163.',
+      'Multiplica la base diaria (base ÷ 30) por los días que corresponden a esos años.',
+      'Agrega la sustitutiva del aviso previo si no hubo aviso de 30 días, y el recargo solo si se simula una sentencia.',
     ],
-    assumptions: ['La causal declarada genera el derecho que se está simulando.'],
+    assumptions: [
+      'La causal declarada es la que figura en la carta de despido.',
+      'El tope en UF se estima con la UF de hoy; la ley usa la del último día del mes anterior al pago.',
+    ],
     limitations: [
-      'No decide la procedencia de la causal ni de un recargo judicial.',
+      'No decide la procedencia de la causal ni de un recargo: eso lo resuelve un juez.',
+      'No incluye indemnizaciones pactadas en el contrato o en un contrato colectivo, ni el régimen sin tope de años de quienes fueron contratados antes del 14-08-1981.',
       'La composición de la última remuneración puede requerir revisar liquidaciones y contrato.',
     ],
     workedExample: {
-      title: 'Ejemplo: 5 años y 7 meses de antigüedad con sueldo de $900.000',
+      title: 'Ejemplo: 5 años y 7 meses de antigüedad con remuneración de $900.000',
       inputs: [
-        'Última remuneración mensual imponible: $900.000 (bajo el tope de 90 UF)',
+        'Última remuneración mensual: $900.000 (bajo el tope en UF)',
         'Tiempo trabajado: 5 años y 7 meses',
-        'Causal: Art. 161 Código del Trabajo (Necesidades de la empresa)',
+        'Causal: art. 161 (necesidades de la empresa), con aviso de 30 días',
       ],
       development: [
-        'Regla legal de fracción > 6 meses: 7 meses cuentan como 1 año completo adicional.',
-        'Años computables a indemnizar: 6 años (dentro del tope legal de 11 años).',
-        'Cálculo: 6 años × $900.000',
+        'Regla legal de fracción superior a seis meses: 7 meses cuentan como 1 año adicional.',
+        `Años computables: ${EJ_IND.añosIndemnizables} (dentro del tope legal de ${INDEMNIZACION.tope_años} años).`,
+        `Cálculo: $900.000 ÷ 30 × ${EJ_IND.diasIndemnizacion} días.`,
       ],
-      result: 'Indemnización legal por años de servicio: $5.400.000 (exenta de impuestos).',
+      result: `Indemnización legal por años de servicio: ${formatCLP(EJ_IND.indemnizacionTotal)}. Por ser legal, no constituye renta para el SII.`,
     },
   },
   'pension-alimenticia': {

@@ -45,6 +45,7 @@ import { calculateImpuestoSegundaCategoria } from '@/lib/calculations/impuesto-s
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateHorasExtra } from '@/lib/calculations/horas-extra';
 import { calculateFiniquito } from '@/lib/calculations/finiquito';
+import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { calculateUTMCLP } from '@/lib/calculations/utm-clp';
 import { calculateUFCLP } from '@/lib/calculations/uf-clp';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
@@ -53,6 +54,8 @@ import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf'
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
 import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 import { calculateSeguroCesantia } from '@/lib/calculations/seguro-cesantia';
+import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 
 export interface QuickAnswerLink {
   text: string;
@@ -141,12 +144,19 @@ const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
 const IMM_LEY_21830_DESDE = '2026-05-01';
 const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
 const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
+const DT_INDEMNIZACION_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html';
+const DT_BASE_INDEMNIZACION_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html';
+const DT_TOPE_UF_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html';
+const DT_AVISO_PREVIO_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60531.html';
+const DT_ORD_296_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html';
 const DT_LICENCIA_CARENCIA_URL = 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html';
 const SUSESO_SIL_URL = 'https://www.suseso.gob.cl/606/w3-article-19931.html';
 const SUSESO_QUIEN_PAGA_URL = 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html';
 const AFC_FECHAS_PAGO_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/';
 const AFC_SIMULE_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/';
 const CA_SEGURO_CESANTIA_URL = 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia';
+const SII_AUMENTO_GRADUAL_URL = 'https://www.sii.cl/destacados/boletas_honorarios/aumento_gradual.html';
+const SII_FAQ_TASA_ANIO_URL = 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_3611.htm';
 const SP_FCS_URL = 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html';
 
 /** Remuneración neta del ejemplo de licencia médica (igual que la metodología). */
@@ -201,10 +211,46 @@ function fechaLargaISO(iso: string): string {
 export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): QuickAnswer | null {
   switch (calculatorId) {
     case 'boleta-honorarios': {
-      const b100 = calculateBoletaHonorarios({ montoBruto: 100_000, ano: 2026 });
+      // E-028: año, tasas y montos generados desde el calendario y la fecha (Chile).
+      const hon = contextoHonorarios();
+      const anios = [hon.anio, ...(hon.siguiente ? [hon.siguiente] : [])];
+      const montos = [100_000, 500_000, 1_000_000];
+      const rows = montos.map((bruto) => [
+        formatCLP(bruto),
+        ...anios.flatMap((ano) => {
+          const r = calculateBoletaHonorarios({ montoBruto: bruto, ano });
+          return [formatCLP(r.retencion), formatCLP(r.montoLiquido)];
+        }),
+      ]);
+      const b100 = calculateBoletaHonorarios({ montoBruto: 100_000, ano: hon.anioSelector });
+      const tasaSel = formatTasa(RETENCION_HONORARIOS_CALENDARIO[hon.anioSelector]);
+      const h1 = hon.modoCambioDeAnio
+        ? `Calcular boleta de honorarios ${hon.anio} y ${hon.siguiente}`
+        : `Calcular boleta de honorarios ${hon.anio} (retención ${formatTasa(hon.tasa)})`;
+      const intro = hon.modoCambioDeAnio
+        ? `En ${hon.anio} la retención de la boleta de honorarios es ${formatTasa(hon.tasa)} del monto bruto y desde el 1 de enero de ${hon.siguiente} es ${tasaSel}. Se aplica la tasa del año en que emites la boleta, aunque el trabajo sea del año anterior (`
+        : `En ${hon.anio} la retención de la boleta de honorarios es ${formatTasa(hon.tasa)} del monto bruto${
+            hon.siguiente ? ` y en ${hon.siguiente} será ${formatTasa(hon.tasaSiguiente!)}` : ''
+          }, según el calendario de la Ley 21.133 (`;
       return {
-        h1: 'Calcular boleta de honorarios 2026 (retención 15,25%)',
-        lead: `En 2026 la retención de la boleta de honorarios es de 15,25% del monto bruto: por una boleta de ${formatCLP(b100.montoBruto)} brutos se retienen ${formatCLP(b100.retencion)} y recibes ${formatCLP(b100.montoLiquido)} líquidos. La tasa subió desde 14,5% en 2025 y sube a 16% en 2027 y 17% en 2028, según la Ley 21.133 (SII).`,
+        h1,
+        ...withLinks([
+          intro,
+          hon.modoCambioDeAnio
+            ? { text: 'SII', href: SII_FAQ_TASA_ANIO_URL }
+            : { text: 'SII', href: SII_AUMENTO_GRADUAL_URL },
+          `). Con ${tasaSel}, por una boleta de ${formatCLP(b100.montoBruto)} brutos se retienen ${formatCLP(b100.retencion)} y recibes ${formatCLP(b100.montoLiquido)} líquidos.`,
+        ]),
+        example: {
+          caption: `Retención y líquido por año de emisión de la boleta (${anios
+            .map((a) => `${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])} en ${a}`)
+            .join(' y ')}).`,
+          headers: [
+            'Bruto',
+            ...anios.flatMap((a) => [`Retención ${a}`, `Líquido ${a}`]),
+          ],
+          rows,
+        },
       };
     }
 
@@ -505,6 +551,70 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           caption:
             'Jornada de 42 horas semanales vigente desde el 26 de abril de 2026, recargo mínimo legal de 50%, 10 horas extra.',
           headers: ['Sueldo bruto', 'Valor hora extra', 'Total 10 horas extra'],
+          rows,
+        },
+      };
+    }
+
+    case 'indemnizacion-anos-servicio': {
+      // E-026: cifras generadas con el cálculo real y las constantes.
+      const casos: [number, number, number][] = [
+        [800_000, 5, 0],
+        [900_000, 5, 7],
+        [1_500_000, 12, 0],
+      ];
+      const rows = casos.map(([ultimoSueldo, añosTrabajados, mesesTrabajados]) => {
+        const r = calculateIndemnizacion({
+          ultimoSueldo,
+          añosTrabajados,
+          mesesTrabajados,
+          incluyeGratificacion: false,
+          valorUF: ctx.uf,
+        });
+        return [
+          formatCLP(ultimoSueldo),
+          mesesTrabajados ? `${añosTrabajados} años y ${mesesTrabajados} meses` : `${añosTrabajados} años`,
+          `${r.añosIndemnizables}`,
+          formatCLP(r.indemnizacionTotal),
+        ];
+      });
+      const topeCLP = formatCLP(Math.round(INDEMNIZACION.tope_uf_mensual * ctx.uf));
+      // 'AAAA-MM-DD' se formatea tal cual (new Date() lo leería como UTC y en Chile daría el día anterior).
+      const isoDia = ctx.ufFecha?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      const ufFechaObj = ctx.ufFecha && !isoDia ? new Date(ctx.ufFecha) : null;
+      const ufFechaTxt = isoDia
+        ? `del ${isoDia[3]}-${isoDia[2]}-${isoDia[1]}`
+        : ufFechaObj && !Number.isNaN(ufFechaObj.getTime())
+          ? `del ${formatDDMMYYYY(ufFechaObj)}`
+          : 'de hoy';
+      return {
+        h1: 'Indemnización por años de servicio: cuánto te corresponde y con qué tope',
+        ...withLinks([
+          `Si te despiden por necesidades de la empresa o desahucio (art. 161) y llevabas un año o más, te corresponden ${INDEMNIZACION.dias_por_año} días de tu última remuneración mensual por cada año de servicio y fracción superior a seis meses, con un máximo de ${INDEMNIZACION.tope_años} años (`,
+          { text: 'Dirección del Trabajo', href: DT_INDEMNIZACION_URL },
+          `). La remuneración que se usa tiene un tope de ${INDEMNIZACION.tope_uf_mensual} UF (${topeCLP} con la UF ${ufFechaTxt}; `,
+          { text: 'DT', href: DT_TOPE_UF_URL },
+          '). Si no te avisaron con 30 días, se suma un mes de remuneración como indemnización sustitutiva del aviso previo (',
+          { text: 'DT', href: DT_AVISO_PREVIO_URL },
+          ').',
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Qué entra en la remuneración que se usa para calcularla?',
+            answer:
+              'Todo lo que recibías cada mes: sueldo, gratificación mensual, comisiones, bonos mensuales, colación y movilización. No entran las horas extra, la asignación familiar ni los pagos esporádicos o anuales.',
+            sources: [{ text: 'Dirección del Trabajo', href: DT_BASE_INDEMNIZACION_URL }],
+          },
+          {
+            question: '¿Qué pasa si el despido es injustificado?',
+            answer:
+              'Puedes demandar dentro de 60 días hábiles desde la separación. Si el juez te da la razón, ordena pagar la indemnización por años de servicio con un recargo de 30%, 50%, 80% o 100% según la causal invocada.',
+            sources: [{ text: 'Dirección del Trabajo, ORD. 296 (art. 168)', href: DT_ORD_296_URL }],
+          },
+        ],
+        example: {
+          caption: `Despido por art. 161 con aviso de 30 días, sin gratificación. Tope de ${INDEMNIZACION.tope_años} años y de ${INDEMNIZACION.tope_uf_mensual} UF con la UF usada en esta página.`,
+          headers: ['Última remuneración', 'Antigüedad', 'Años indemnizables', 'Indemnización'],
           rows,
         },
       };

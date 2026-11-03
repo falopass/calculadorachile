@@ -6,6 +6,7 @@
 // el client con 53 imports estáticos.
 // ============================================
 
+import { anioEnCalendario, contextoHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 import { coerceBool, coerceNumber } from './input-coerce';
 
@@ -151,6 +152,17 @@ export async function loadCalculationFn(
           mesesTrabajados: coerceNumber(inputs.mesesTrabajados, 0),
           incluyeGratificacion: coerceBool(inputs.incluyeGratificacion),
           gratificacionMensual: coerceNumber(inputs.gratificacionMensual, 0) || undefined,
+          otrasRemuneracionesMensuales: coerceNumber(inputs.otrasRemuneracionesMensuales, 0),
+          causal: (['art161', 'art159', 'art160', 'art171'] as const).includes(
+            inputs.causal as 'art161',
+          )
+            ? (inputs.causal as 'art161' | 'art159' | 'art160' | 'art171')
+            : 'art161',
+          avisoPrevio30Dias:
+            inputs.avisoPrevio30Dias === undefined ? true : coerceBool(inputs.avisoPrevio30Dias),
+          simularSentencia: coerceBool(inputs.simularSentencia),
+          recargoPct: coerceNumber(inputs.recargoPct, 0) as 0 | 30 | 50 | 80 | 100,
+          valorUF: live?.valorUF,
         });
         return indemnizacionToResults(result);
       };
@@ -255,17 +267,14 @@ export async function loadCalculationFn(
       const { calculateBoletaHonorarios, boletaHonorariosToResults } =
         await import('./boleta-honorarios');
       return (inputs) => {
-        const anoNum = coerceNumber(inputs.ano, 2026);
+        const anoNum = coerceNumber(inputs.ano, contextoHonorarios().anioSelector);
         const result = calculateBoletaHonorarios({
           montoBruto: coerceNumber(inputs.montoBruto),
-          ano: (
-            anoNum === 2025 || anoNum === 2026 || anoNum === 2027 || anoNum === 2028
-              ? anoNum
-              : 2026
-          ) as 2025 | 2026 | 2027 | 2028,
-          desgloseCotizaciones: coerceBool(inputs.incluyeCotizaciones),
+          ano: anioEnCalendario(anoNum),
+          // E-028: desglose y PPM ocultos en la UI (reparto SIN VERIFICAR); se fuerzan a false.
+          desgloseCotizaciones: false,
           moneda: inputs.moneda === 'UF' ? 'UF' : 'CLP',
-          calcularPPM: coerceBool(inputs.calcularPPM),
+          calcularPPM: false,
           calcularCostoEmpleador: coerceBool(inputs.calcularCostoEmpleador),
           valorUF: live?.valorUF,
           valorUTM: live?.valorUTM,

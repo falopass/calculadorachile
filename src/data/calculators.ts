@@ -6,10 +6,41 @@ import type { Calculator } from '@/types/calculator';
 import { UTA_2026, UTM } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
+import { INDEMNIZACION, RECARGO_ART_168, RECARGO_ART_171, UF } from '@/lib/values/constants';
+import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
+import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import { contextoHonorarios, formatTasa, type AnioHonorarios } from '@/lib/values/honorarios-anio';
+
+// E-026: cifras de indemnización generadas desde las constantes (nunca a mano).
+const IND = {
+  dias: INDEMNIZACION.dias_por_año,
+  anios: INDEMNIZACION.tope_años,
+  topeDias: INDEMNIZACION.tope_años * INDEMNIZACION.dias_por_año,
+  topeUF: INDEMNIZACION.tope_uf_mensual,
+  topeCLP: formatCLP(Math.round(INDEMNIZACION.tope_uf_mensual * UF.valor)),
+  ufFecha: UF.fecha_actualizacion.split('-').reverse().join('-'),
+  ejemplo800x5: formatCLP(
+    calculateIndemnizacion({ ultimoSueldo: 800_000, añosTrabajados: 5, incluyeGratificacion: false })
+      .indemnizacionTotal,
+  ),
+};
 
 // E-014: FAQ del tope generada desde las constantes.
 const TOPE_GRATIFICACION = topeGratificacion();
+
+// E-028: año, tasas y ejemplos de honorarios generados desde el calendario y la fecha (Chile).
+// Se calculan al cargar el módulo: ver la nota de redespliegue del 01-12 y el 01-01 en el PR.
+const HON = contextoHonorarios();
+const HON_ANIOS = Object.keys(RETENCION_HONORARIOS_CALENDARIO).map(Number) as AnioHonorarios[];
+const HON_CALENDARIO_TXT = HON_ANIOS.map(
+  (a) => `${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])} (${a})`,
+).join(', ');
+const honEjemplo = (bruto: number, ano: AnioHonorarios) => {
+  const r = calculateBoletaHonorarios({ montoBruto: bruto, ano });
+  return `$${bruto.toLocaleString('es-CL')} bruto → ${formatCLP(r.retencion)} de retención → ${formatCLP(r.montoLiquido)} líquidos`;
+};
 
 const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   {
@@ -459,7 +490,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cómo se calcula la indemnización por años de servicio?',
         answer:
-          'La indemnización por años de servicio equivale a 30 días de la última remuneración mensual por cada año trabajado (Art. 163 Código del Trabajo). Se calcula sobre el sueldo bruto y se paga solo en caso de despido injustificado o mutuo acuerdo con indemnización. El tope máximo es de 330 días (11 años).',
+          `Equivale a ${IND.dias} días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses (art. 163 del Código del Trabajo), con un tope de ${IND.topeDias} días (${IND.anios} años) y una base máxima de ${IND.topeUF} UF. Por ley se paga cuando el despido es por necesidades de la empresa o desahucio (art. 161) y el contrato duró un año o más. Con otras causales corresponde solo si el contrato la pacta o si un juez declara el despido injustificado.`,
       },
       {
         question: '¿Qué son las vacaciones proporcionales?',
@@ -940,14 +971,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
   {
     id: 'boleta-honorarios',
-    name: 'Boleta de Honorarios 2026',
-    description:
-      'Calcula la retención de boleta de honorarios (calendario Ley 21.133: 15,25% en 2026), monto líquido y desglose informativo. Sin doble descuento de cotizaciones.',
+    name: HON.modoCambioDeAnio
+      ? `Boleta de Honorarios ${HON.anio} y ${HON.siguiente}`
+      : `Boleta de Honorarios ${HON.anio}`,
+    description: `Calcula la retención de la boleta de honorarios (Ley 21.133: ${formatTasa(HON.tasa)} en ${HON.anio}${
+      HON.siguiente ? ` y ${formatTasa(HON.tasaSiguiente!)} en ${HON.siguiente}` : ''
+    }) y el monto líquido, de bruto a líquido y de líquido a bruto.`,
     slug: 'calculadora-boleta-honorarios',
     category: 'impuestos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-16',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'SII — Boletas de honorarios',
@@ -960,6 +994,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         note: 'Calendario % por año (Ley 21.133)',
       },
       {
+        name: 'SII — Tasa de retención según el año de emisión (FAQ 001.140.3611)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_3611.htm',
+        note: '15,25% en el año comercial 2026 (FAQ actualizada el 08-04-2026)',
+      },
+      {
+        name: 'SII — Monto mínimo de una boleta de honorarios (FAQ 001.140.2667)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_2667.htm',
+        note: 'El mínimo es $1: no hay exención de 10 UTM (FAQ actualizada el 07-09-2026)',
+      },
+      {
         name: 'SII — Cotizaciones independientes',
         url: 'https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html',
         note: 'La retención financia cotizaciones en Operación Renta',
@@ -969,7 +1013,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'boleta de honorarios',
       'retención honorarios',
       'impuesto independientes',
-      '15.25% retención',
+      `retención honorarios ${HON.anio}`,
       'honorarios Chile',
     ],
     inputs: [
@@ -987,25 +1031,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         label: 'Año de la boleta',
         type: 'select',
         required: true,
-        options: [
-          { value: '2025', label: '2025 (14,5%)' },
-          { value: '2026', label: '2026 (15,25%)' },
-          { value: '2027', label: '2027 (16%)' },
-          { value: '2028', label: '2028 (17%)' },
-        ],
-        defaultValue: '2026',
+        options: HON_ANIOS.map((a) => ({
+          value: String(a),
+          label: `${a} (${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])})`,
+        })),
+        defaultValue: String(HON.anioSelector),
         tooltip:
-          'Calendario de retención gradual (Ley 21.133). El % se aplica sobre el bruto de la boleta.',
+          'La tasa es la del año en que se emite la boleta, no la del año en que hiciste el trabajo (SII). El % se aplica sobre el bruto.',
       },
-      {
-        id: 'incluyeCotizaciones',
-        label: '¿Mostrar desglose de la retención? (informativo)',
-        type: 'boolean',
-        required: false,
-        defaultValue: false,
-        tooltip:
-          'No descuenta nada extra. Solo estima cómo se reparte la retención (impuesto/AFP/salud/SIS). El líquido sigue siendo bruto − retención.',
-      },
+      // E-028: toggles «desglose» y «componente PPM» ocultos (reparto SIN VERIFICAR). El código
+      // de cálculo se conserva; load-calculator los fuerza a false.
       {
         id: 'moneda',
         label: 'Mostrar también en UF',
@@ -1018,13 +1053,6 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         defaultValue: 'CLP',
       },
       {
-        id: 'calcularPPM',
-        label: '¿Estimar componente PPM (impuesto renta)?',
-        type: 'boolean',
-        required: false,
-        defaultValue: false,
-      },
-      {
         id: 'calcularCostoEmpleador',
         label: '¿Mostrar costo del pagador (bruto)?',
         type: 'boolean',
@@ -1035,8 +1063,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     faq: [
       {
         question: '¿Cuánto es la retención de boleta de honorarios?',
-        answer:
-          'En 2026 la retención es 15,25% del monto bruto (calendario de la Ley 21.133, no de la 21.578 de ingreso mínimo). Sube gradualmente hasta 17% en 2028. El emisor recibe el bruto menos esa retención.',
+        answer: `En ${HON.anio} la retención es ${formatTasa(HON.tasa)} del monto bruto${
+          HON.siguiente ? ` y en ${HON.siguiente} será ${formatTasa(HON.tasaSiguiente!)}` : ''
+        } (calendario de la Ley 21.133). La tasa es la del año en que se emite la boleta. Quien la emite recibe el bruto menos esa retención.`,
       },
       {
         question: '¿La retención ya incluye cotizaciones previsionales?',
@@ -1045,13 +1074,14 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         question: '¿Cuál es la diferencia entre monto bruto y líquido?',
-        answer:
-          'Bruto = valor del servicio. Líquido = bruto − retención del año. Ejemplo 2026: $1.000.000 bruto → $152.500 de retención → $847.500 líquidos.',
+        answer: `Bruto = valor del servicio. Líquido = bruto − retención del año. Ejemplo ${HON.anioSelector}: ${honEjemplo(
+          1_000_000,
+          HON.anioSelector,
+        )}. Para ir de líquido a bruto, divide el líquido por (1 − tasa).`,
       },
       {
         question: '¿Cómo cambia la retención por año?',
-        answer:
-          'Según el SII: 14,5% (2025), 15,25% (2026), 16% (2027), 17% (2028). Elige el año de emisión de la boleta.',
+        answer: `Según el SII: ${HON_CALENDARIO_TXT}. Elige el año de emisión de la boleta.`,
       },
       {
         question: '¿Qué es el PPM en este contexto?',
@@ -1262,13 +1292,38 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'indemnizacion-anos-servicio',
     name: 'Indemnización por Años de Servicio',
     description:
-      'Calcula tu indemnización por años de servicio según el Art. 163 del Código del Trabajo. 30 días por año, tope 11 años.',
+      `Calcula tu indemnización por años de servicio (art. 163 del Código del Trabajo): ${INDEMNIZACION.dias_por_año} días por año, tope de ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF, aviso previo y recargos del art. 168.`,
     slug: 'calculadora-indemnizacion-anos-servicio',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-11-03',
     sources: [
+      {
+        name: 'DT — derecho a la indemnización por años de servicio',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html',
+        note: 'Art. 161 con un año o más; 30 días por año; tope de 330 días',
+      },
+      {
+        name: 'DT — qué hacer en caso de despido',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html',
+        note: 'Sin tope de años para contratados antes del 14-08-1981; cuotas impagas y alza de hasta 150%',
+      },
+      {
+        name: 'DT — remuneraciones que entran en la base',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
+        note: 'Incluye colación y movilización; excluye horas extra, asignación familiar y pagos anuales',
+      },
+      {
+        name: 'DT — ORD. 296 (art. 168)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html',
+        note: 'Recargos de 30%, 50%, 80% y 100%; 60 días hábiles para demandar',
+      },
+      {
+        name: 'DT — autodespido (art. 171)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60579.html',
+        note: 'Sustitutiva + años con recargo de 50% u 80% si hay sentencia favorable',
+      },
       {
         name: 'DT — tope de indemnización',
         url: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
@@ -1333,32 +1388,91 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: false,
         min: 0,
       },
+      {
+        id: 'otrasRemuneracionesMensuales',
+        label: 'Otros pagos mensuales (colación, movilización, comisiones, bonos)',
+        type: 'number',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        defaultValue: 0,
+        tooltip:
+          'Entran en la base todos los pagos mensuales, como colación, movilización, comisiones, bonos mensuales y semana corrida. No entran las horas extra, la asignación familiar ni los pagos esporádicos o anuales (DT).',
+      },
+      {
+        id: 'causal',
+        label: 'Causal de término',
+        type: 'select',
+        required: true,
+        defaultValue: 'art161',
+        options: [
+          { value: 'art161', label: 'Necesidades de la empresa o desahucio (art. 161)' },
+          { value: 'art159', label: 'Fin de plazo, obra, mutuo acuerdo u otra del art. 159' },
+          { value: 'art160', label: 'Causal disciplinaria del art. 160' },
+          { value: 'art171', label: 'Autodespido o despido indirecto (art. 171)' },
+        ],
+        tooltip:
+          'Por ley, solo el art. 161 da indemnización por años de servicio. Con las demás causales corresponde solo si un juez declara el despido injustificado o acoge el autodespido.',
+      },
+      {
+        id: 'avisoPrevio30Dias',
+        label: '¿Te avisaron por escrito con 30 días o más de anticipación?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Solo para el art. 161. Si no hubo aviso, o fue con menos de 30 días, el empleador debe pagar la indemnización sustitutiva del aviso previo: un mes de la última remuneración, con el mismo tope en UF.',
+      },
+      {
+        id: 'simularSentencia',
+        label: 'Simular que un juez me da la razón (art. 168 o 171)',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Los recargos no los paga el empleador por su cuenta: solo los ordena un juez. El plazo para demandar es de 60 días hábiles desde la separación.',
+      },
+      {
+        id: 'recargoPct',
+        label: 'Recargo que declara el juez',
+        type: 'select',
+        required: false,
+        defaultValue: String(RECARGO_ART_168.necesidades_empresa),
+        options: [
+          { value: String(RECARGO_ART_168.necesidades_empresa), label: `${RECARGO_ART_168.necesidades_empresa}%: art. 161 aplicado improcedentemente` },
+          { value: String(RECARGO_ART_168.causal_no_demostrada), label: `${RECARGO_ART_168.causal_no_demostrada}%: art. 159 injustificado o sin causal (o autodespido por art. 160 N° 7)` },
+          { value: String(RECARGO_ART_168.falta_probidad), label: `${RECARGO_ART_168.falta_probidad}%: art. 160 indebido (o autodespido por art. 160 N° 1 o 5)` },
+          { value: String(RECARGO_ART_168.aplicacion_indebida), label: `${RECARGO_ART_168.aplicacion_indebida}%: art. 160 N° 1, 5 o 6 sin motivo plausible` },
+        ],
+        tooltip:
+          'Si eliges un recargo que no corresponde a la causal, la calculadora usa el que sí corresponde.',
+      },
     ],
     faq: [
       {
         question: '¿Qué es la indemnización por años de servicio?',
         answer:
-          'La indemnización por años de servicio es una compensación que el empleador debe pagar al trabajador cuando el contrato termina por despido injustificado o mutuo acuerdo con indemnización. Corresponde a 30 días de remuneración por cada año trabajado, con un tope de 11 años (330 días).',
+          `Es el pago que debe hacer el empleador cuando pone término al contrato por necesidades de la empresa o desahucio (art. 161) y el contrato duró un año o más. Equivale a ${IND.dias} días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses, con un tope de ${IND.topeDias} días (${IND.anios} años). Con otras causales no corresponde por ley, salvo que el contrato la pacte o que un juez declare el despido injustificado.`,
       },
       {
         question: '¿Cómo se calcula la indemnización?',
         answer:
-          'La indemnización se calcula multiplicando 30 días de remuneración por cada año de servicio. La base de cálculo es el último sueldo bruto (incluye gratificación). Por ejemplo, con $500.000 de sueldo y 5 años: $500.000 × 5 = $2.500.000 de indemnización.',
+          `Se suman los pagos mensuales (sueldo, gratificación mensual, comisiones, bonos mensuales, colación y movilización), se aplica el tope de ${IND.topeUF} UF, se divide por 30 y se multiplica por ${IND.dias} días por cada año indemnizable. Por ejemplo, con una remuneración mensual de $800.000 y 5 años de servicio, la indemnización es ${IND.ejemplo800x5}.`,
       },
       {
         question: '¿Cuál es el tope de la indemnización?',
         answer:
-          'La indemnización tiene dos topes: (1) máximo 11 años de servicio (330 días), y (2) la base de cálculo no puede exceder 90 UF mensuales (con la UF de hoy, unos $3,7 millones).',
+          `Tiene dos topes: ${IND.topeDias} días de remuneración (${IND.anios} años) para quienes fueron contratados desde el 14 de agosto de 1981, y una base mensual máxima de ${IND.topeUF} UF del último día del mes anterior al pago. Con la UF del ${IND.ufFecha}, ${IND.topeUF} UF son ${IND.topeCLP}. El tope en UF también se aplica a la indemnización sustitutiva del aviso previo.`,
       },
       {
         question: '¿Tengo derecho a indemnización si renuncio?',
         answer:
-          'No. Si renuncias voluntariamente, no tienes derecho a indemnización por años de servicio. Solo la recibes si eres despedido sin causa justificada, o si terminas por mutuo acuerdo y el empleador acepta pagarla. Sí tienes derecho a vacaciones proporcionales independientemente de la causal.',
+          'Por ley, no. La renuncia no da derecho a indemnización por años de servicio, salvo que tu contrato o un contrato colectivo la pacten. El mutuo acuerdo tampoco la da por ley, aunque las partes pueden pactar un pago. Con cualquier causal sí tienes derecho al feriado proporcional y a lo que se te adeude.',
       },
       {
         question: '¿Qué dice el Art. 163 del Código del Trabajo?',
         answer:
-          'El Art. 163 establece que el empleador debe pagar indemnización equivalente a 30 días de la última remuneración mensual por cada año de servicio, con tope de 330 días. La base de cálculo incluye sueldo, gratificación y otras remuneraciones, pero no colación ni movilización.',
+          `El art. 163 establece que, si el contrato duró un año o más y termina por el art. 161, el empleador debe pagar ${IND.dias} días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses, con tope de ${IND.topeDias} días. La base incluye todos los pagos mensuales, también la colación y la movilización; no incluye horas extra, asignación familiar ni pagos esporádicos o anuales.`,
       },
       {
         question: '¿Qué remuneraciones cuentan para la base del artículo 172?',
@@ -1368,7 +1482,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto aumenta la indemnización si el despido se declara injustificado?',
         answer:
-          'El recargo del artículo 168 solo procede por sentencia o acuerdo y se aplica sobre la indemnización por años de servicio: 30% si el artículo 161 se aplicó improcedentemente, 50% si se invocaron causales del artículo 159 sin justificación o se despidió sin causal legal, 80% si las causales del artículo 160 se aplicaron indebidamente, y 100% en los numerales 1, 5 y 6 del artículo 160 cuando además se declara carente de motivo plausible. Despedir sin invocar causal no lleva automáticamente el 100%.',
+          `El recargo del artículo 168 lo declara un juez y se aplica sobre la indemnización por años de servicio: ${RECARGO_ART_168.necesidades_empresa}% si el artículo 161 se aplicó improcedentemente, ${RECARGO_ART_168.causal_no_demostrada}% si se invocaron causales del artículo 159 sin justificación o se despidió sin causal legal, ${RECARGO_ART_168.falta_probidad}% si las causales del artículo 160 se aplicaron indebidamente, y ${RECARGO_ART_168.aplicacion_indebida}% en los numerales 1, 5 y 6 del artículo 160 cuando además se declara carente de motivo plausible. En el autodespido (art. 171) el recargo es ${RECARGO_ART_171.conducta_grave_o_seguridad}% por el art. 160 N° 1 o 5 y ${RECARGO_ART_171.incumplimiento_grave}% por el N° 7. Despedir sin invocar causal no lleva automáticamente el ${RECARGO_ART_168.aplicacion_indebida}%.`,
       },
       {
         question: '¿Cuál es el plazo para reclamar un despido?',

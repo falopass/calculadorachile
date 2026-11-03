@@ -475,9 +475,12 @@ export const IVA = {
 export const BOLETA_HONORARIOS = {
   tasa_base: 10,
   tasa_adicional: 5.25,
-  /** Tasa total 2026 según Ley 21.133 (calendario 14,5% → 17%). */
+  /**
+   * Tasa de respaldo si el año no está en el calendario. El cálculo usa
+   * RETENCION_HONORARIOS_CALENDARIO[año]. (E-028: se quitó `exento_minimo`,
+   * una exención de 10 UTM que no existe en el SII.)
+   */
   tasa_total: 15.25,
-  exento_minimo: 10, // UTM mensuales
   /** Calendario completo Ley 21.133 (retención honorarios / cotizaciones independientes). */
   calendario: {
     2025: 14.5,
@@ -1097,14 +1100,31 @@ export const TARIFA_BT1_CARGO_FIJO = {
  * tribunal declara que el despido fue injustificado/indebido.
  */
 export const RECARGO_ART_168 = {
-  /** Necesidades de la empresa (Art. 161). */
+  /** a) Aplicación improcedente del art. 161 (necesidades de la empresa o desahucio). */
   necesidades_empresa: 30,
-  /** Causales no demostradas (Art. 159 N°4 - vencimiento de plazo). */
+  /** b) Aplicación injustificada de las causales del art. 159, o sin causal legal. */
   causal_no_demostrada: 50,
-  /** Falta de probidad / vías de hecho (Art. 160). */
+  /** c) Aplicación indebida de las causales del art. 160. */
   falta_probidad: 80,
-  /** Aplicación indebida del Art. 161. */
+  /**
+   * Art. 160 N° 1, 5 o 6 invocado y despido declarado además carente de
+   * motivo plausible. (Antes decía "aplicación indebida del art. 161": error.)
+   * Fuente: DT ORD. 296, cita el art. 168,
+   * https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html
+   */
   aplicacion_indebida: 100,
+};
+
+/**
+ * Recargos del despido indirecto o autodespido (art. 171), según la causal
+ * del art. 160 que invoca el trabajador. Fuente: DT,
+ * https://www.dt.gob.cl/portal/1628/w3-article-60579.html
+ */
+export const RECARGO_ART_171 = {
+  /** Art. 160 N° 1 o N° 5. */
+  conducta_grave_o_seguridad: 80,
+  /** Art. 160 N° 7: incumplimiento grave de las obligaciones del contrato. */
+  incumplimiento_grave: 50,
 };
 
 /**
