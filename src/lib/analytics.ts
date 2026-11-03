@@ -9,10 +9,14 @@ type GtagEventParams = Record<string, string | number | boolean | undefined>;
 
 /**
  * ID de medición GA4 de calculadorachile.cl (propiedad "CalculadoraChile").
- * NEXT_PUBLIC_GA_MEASUREMENT_ID tiene prioridad si está definida en el build;
- * si no, se usa este ID fijo (la variable hoy no existe en Workers Builds).
+ * NEXT_PUBLIC_GA_MEASUREMENT_ID tiene prioridad si está definida en el build.
+ * Si falta, los builds de producción usan este ID fijo, para no depender de
+ * las variables de Workers Builds; `next dev` queda sin GA para no ensuciar
+ * la propiedad real.
  */
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PHMWEP3S9T';
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ||
+  (process.env.NODE_ENV === 'production' ? 'G-PHMWEP3S9T' : '');
 
 /**
  * Misma regla que AdSenseLoader: no medir visitas propias o de prueba

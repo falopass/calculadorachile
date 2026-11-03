@@ -34,10 +34,25 @@ describe('analytics GA4', () => {
     vi.unstubAllEnvs();
   });
 
-  it('usa G-PHMWEP3S9T si NEXT_PUBLIC_GA_MEASUREMENT_ID no está definida', async () => {
+  it('usa G-PHMWEP3S9T en builds de producción si NEXT_PUBLIC_GA_MEASUREMENT_ID no está definida', async () => {
     vi.stubEnv('NEXT_PUBLIC_GA_MEASUREMENT_ID', '');
+    vi.stubEnv('NODE_ENV', 'production');
     const { GA_MEASUREMENT_ID } = await import('@/lib/analytics');
     expect(GA_MEASUREMENT_ID).toBe('G-PHMWEP3S9T');
+  });
+
+  it('no usa el ID fijo fuera de producción (next dev)', async () => {
+    vi.stubEnv('NEXT_PUBLIC_GA_MEASUREMENT_ID', '');
+    vi.stubEnv('NODE_ENV', 'development');
+    const { GA_MEASUREMENT_ID } = await import('@/lib/analytics');
+    expect(GA_MEASUREMENT_ID).toBe('');
+  });
+
+  it('la variable de entorno tiene prioridad sobre el ID fijo', async () => {
+    vi.stubEnv('NEXT_PUBLIC_GA_MEASUREMENT_ID', 'G-OTRO');
+    vi.stubEnv('NODE_ENV', 'production');
+    const { GA_MEASUREMENT_ID } = await import('@/lib/analytics');
+    expect(GA_MEASUREMENT_ID).toBe('G-OTRO');
   });
 
   it('initGA carga gtag.js y empuja objetos arguments (no arrays) sin page_view automático', async () => {

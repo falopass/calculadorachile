@@ -16,12 +16,12 @@ function AnalyticsTracker() {
   const searchParams = useSearchParams();
   const gaId = GA_MEASUREMENT_ID;
 
-  useEffect(() => {
-    if (gaId && !analyticsBlocked()) initGA(gaId);
-  }, [gaId]);
-
+  // El bloqueo (?noads, cookie cc_noads, bots) se evalúa en cada ruta: si la
+  // visita empezó en modo sin anuncios y luego deja de estarlo, GA se
+  // inicializa recién ahí. initGA es idempotente.
   useEffect(() => {
     if (!gaId || !pathname || analyticsBlocked()) return;
+    initGA(gaId);
     const search = searchParams?.toString();
     const url = search ? `${pathname}?${search}` : pathname;
     pageview(url);
