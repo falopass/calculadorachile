@@ -6,7 +6,23 @@ import type { Calculator } from '@/types/calculator';
 import { UTA_2026, UTM } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
+import { INDEMNIZACION, RECARGO_ART_168, RECARGO_ART_171, UF } from '@/lib/values/constants';
+import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+
+// E-026: cifras de indemnización generadas desde las constantes (nunca a mano).
+const IND = {
+  dias: INDEMNIZACION.dias_por_año,
+  anios: INDEMNIZACION.tope_años,
+  topeDias: INDEMNIZACION.tope_años * INDEMNIZACION.dias_por_año,
+  topeUF: INDEMNIZACION.tope_uf_mensual,
+  topeCLP: formatCLP(Math.round(INDEMNIZACION.tope_uf_mensual * UF.valor)),
+  ufFecha: UF.fecha_actualizacion.split('-').reverse().join('-'),
+  ejemplo800x5: formatCLP(
+    calculateIndemnizacion({ ultimoSueldo: 800_000, añosTrabajados: 5, incluyeGratificacion: false })
+      .indemnizacionTotal,
+  ),
+};
 
 // E-014: FAQ del tope generada desde las constantes.
 const TOPE_GRATIFICACION = topeGratificacion();
@@ -459,7 +475,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cómo se calcula la indemnización por años de servicio?',
         answer:
-          'La indemnización por años de servicio equivale a 30 días de la última remuneración mensual por cada año trabajado (Art. 163 Código del Trabajo). Se calcula sobre el sueldo bruto y se paga solo en caso de despido injustificado o mutuo acuerdo con indemnización. El tope máximo es de 330 días (11 años).',
+          `Equivale a ${IND.dias} días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses (art. 163 del Código del Trabajo), con un tope de ${IND.topeDias} días (${IND.anios} años) y una base máxima de ${IND.topeUF} UF. Por ley se paga cuando el despido es por necesidades de la empresa o desahucio (art. 161) y el contrato duró un año o más. Con otras causales corresponde solo si el contrato la pacta o si un juez declara el despido injustificado.`,
       },
       {
         question: '¿Qué son las vacaciones proporcionales?',
@@ -1262,13 +1278,38 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'indemnizacion-anos-servicio',
     name: 'Indemnización por Años de Servicio',
     description:
-      'Calcula tu indemnización por años de servicio según el Art. 163 del Código del Trabajo. 30 días por año, tope 11 años.',
+      `Calcula tu indemnización por años de servicio (art. 163 del Código del Trabajo): ${INDEMNIZACION.dias_por_año} días por año, tope de ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF, aviso previo y recargos del art. 168.`,
     slug: 'calculadora-indemnizacion-anos-servicio',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-11-03',
     sources: [
+      {
+        name: 'DT — derecho a la indemnización por años de servicio',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html',
+        note: 'Art. 161 con un año o más; 30 días por año; tope de 330 días',
+      },
+      {
+        name: 'DT — qué hacer en caso de despido',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html',
+        note: 'Sin tope de años para contratados antes del 14-08-1981; cuotas impagas y alza de hasta 150%',
+      },
+      {
+        name: 'DT — remuneraciones que entran en la base',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
+        note: 'Incluye colación y movilización; excluye horas extra, asignación familiar y pagos anuales',
+      },
+      {
+        name: 'DT — ORD. 296 (art. 168)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html',
+        note: 'Recargos de 30%, 50%, 80% y 100%; 60 días hábiles para demandar',
+      },
+      {
+        name: 'DT — autodespido (art. 171)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60579.html',
+        note: 'Sustitutiva + años con recargo de 50% u 80% si hay sentencia favorable',
+      },
       {
         name: 'DT — tope de indemnización',
         url: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
@@ -1333,32 +1374,91 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: false,
         min: 0,
       },
+      {
+        id: 'otrasRemuneracionesMensuales',
+        label: 'Otros pagos mensuales (colación, movilización, comisiones, bonos)',
+        type: 'number',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        defaultValue: 0,
+        tooltip:
+          'Entran en la base todos los pagos mensuales, como colación, movilización, comisiones, bonos mensuales y semana corrida. No entran las horas extra, la asignación familiar ni los pagos esporádicos o anuales (DT).',
+      },
+      {
+        id: 'causal',
+        label: 'Causal de término',
+        type: 'select',
+        required: true,
+        defaultValue: 'art161',
+        options: [
+          { value: 'art161', label: 'Necesidades de la empresa o desahucio (art. 161)' },
+          { value: 'art159', label: 'Fin de plazo, obra, mutuo acuerdo u otra del art. 159' },
+          { value: 'art160', label: 'Causal disciplinaria del art. 160' },
+          { value: 'art171', label: 'Autodespido o despido indirecto (art. 171)' },
+        ],
+        tooltip:
+          'Por ley, solo el art. 161 da indemnización por años de servicio. Con las demás causales corresponde solo si un juez declara el despido injustificado o acoge el autodespido.',
+      },
+      {
+        id: 'avisoPrevio30Dias',
+        label: '¿Te avisaron por escrito con 30 días o más de anticipación?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Solo para el art. 161. Si no hubo aviso, o fue con menos de 30 días, el empleador debe pagar la indemnización sustitutiva del aviso previo: un mes de la última remuneración, con el mismo tope en UF.',
+      },
+      {
+        id: 'simularSentencia',
+        label: 'Simular que un juez me da la razón (art. 168 o 171)',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Los recargos no los paga el empleador por su cuenta: solo los ordena un juez. El plazo para demandar es de 60 días hábiles desde la separación.',
+      },
+      {
+        id: 'recargoPct',
+        label: 'Recargo que declara el juez',
+        type: 'select',
+        required: false,
+        defaultValue: String(RECARGO_ART_168.necesidades_empresa),
+        options: [
+          { value: String(RECARGO_ART_168.necesidades_empresa), label: `${RECARGO_ART_168.necesidades_empresa}%: art. 161 aplicado improcedentemente` },
+          { value: String(RECARGO_ART_168.causal_no_demostrada), label: `${RECARGO_ART_168.causal_no_demostrada}%: art. 159 injustificado o sin causal (o autodespido por art. 160 N° 7)` },
+          { value: String(RECARGO_ART_168.falta_probidad), label: `${RECARGO_ART_168.falta_probidad}%: art. 160 indebido (o autodespido por art. 160 N° 1 o 5)` },
+          { value: String(RECARGO_ART_168.aplicacion_indebida), label: `${RECARGO_ART_168.aplicacion_indebida}%: art. 160 N° 1, 5 o 6 sin motivo plausible` },
+        ],
+        tooltip:
+          'Si eliges un recargo que no corresponde a la causal, la calculadora usa el que sí corresponde.',
+      },
     ],
     faq: [
       {
         question: '¿Qué es la indemnización por años de servicio?',
         answer:
-          'La indemnización por años de servicio es una compensación que el empleador debe pagar al trabajador cuando el contrato termina por despido injustificado o mutuo acuerdo con indemnización. Corresponde a 30 días de remuneración por cada año trabajado, con un tope de 11 años (330 días).',
+          `Es el pago que debe hacer el empleador cuando pone término al contrato por necesidades de la empresa o desahucio (art. 161) y el contrato duró un año o más. Equivale a ${IND.dias} días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses, con un tope de ${IND.topeDias} días (${IND.anios} años). Con otras causales no corresponde por ley, salvo que el contrato la pacte o que un juez declare el despido injustificado.`,
       },
       {
         question: '¿Cómo se calcula la indemnización?',
         answer:
-          'La indemnización se calcula multiplicando 30 días de remuneración por cada año de servicio. La base de cálculo es el último sueldo bruto (incluye gratificación). Por ejemplo, con $500.000 de sueldo y 5 años: $500.000 × 5 = $2.500.000 de indemnización.',
+          `Se suman los pagos mensuales (sueldo, gratificación mensual, comisiones, bonos mensuales, colación y movilización), se aplica el tope de ${IND.topeUF} UF, se divide por 30 y se multiplica por ${IND.dias} días por cada año indemnizable. Por ejemplo, con una remuneración mensual de $800.000 y 5 años de servicio, la indemnización es ${IND.ejemplo800x5}.`,
       },
       {
         question: '¿Cuál es el tope de la indemnización?',
         answer:
-          'La indemnización tiene dos topes: (1) máximo 11 años de servicio (330 días), y (2) la base de cálculo no puede exceder 90 UF mensuales (con la UF de hoy, unos $3,7 millones).',
+          `Tiene dos topes: ${IND.topeDias} días de remuneración (${IND.anios} años) para quienes fueron contratados desde el 14 de agosto de 1981, y una base mensual máxima de ${IND.topeUF} UF del último día del mes anterior al pago. Con la UF del ${IND.ufFecha}, ${IND.topeUF} UF son ${IND.topeCLP}. El tope en UF también se aplica a la indemnización sustitutiva del aviso previo.`,
       },
       {
         question: '¿Tengo derecho a indemnización si renuncio?',
         answer:
-          'No. Si renuncias voluntariamente, no tienes derecho a indemnización por años de servicio. Solo la recibes si eres despedido sin causa justificada, o si terminas por mutuo acuerdo y el empleador acepta pagarla. Sí tienes derecho a vacaciones proporcionales independientemente de la causal.',
+          'Por ley, no. La renuncia no da derecho a indemnización por años de servicio, salvo que tu contrato o un contrato colectivo la pacten. El mutuo acuerdo tampoco la da por ley, aunque las partes pueden pactar un pago. Con cualquier causal sí tienes derecho al feriado proporcional y a lo que se te adeude.',
       },
       {
         question: '¿Qué dice el Art. 163 del Código del Trabajo?',
         answer:
-          'El Art. 163 establece que el empleador debe pagar indemnización equivalente a 30 días de la última remuneración mensual por cada año de servicio, con tope de 330 días. La base de cálculo incluye sueldo, gratificación y otras remuneraciones, pero no colación ni movilización.',
+          `El art. 163 establece que, si el contrato duró un año o más y termina por el art. 161, el empleador debe pagar ${IND.dias} días de la última remuneración mensual por cada año de servicio y fracción superior a seis meses, con tope de ${IND.topeDias} días. La base incluye todos los pagos mensuales, también la colación y la movilización; no incluye horas extra, asignación familiar ni pagos esporádicos o anuales.`,
       },
       {
         question: '¿Qué remuneraciones cuentan para la base del artículo 172?',
@@ -1368,7 +1468,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto aumenta la indemnización si el despido se declara injustificado?',
         answer:
-          'El recargo del artículo 168 solo procede por sentencia o acuerdo y se aplica sobre la indemnización por años de servicio: 30% si el artículo 161 se aplicó improcedentemente, 50% si se invocaron causales del artículo 159 sin justificación o se despidió sin causal legal, 80% si las causales del artículo 160 se aplicaron indebidamente, y 100% en los numerales 1, 5 y 6 del artículo 160 cuando además se declara carente de motivo plausible. Despedir sin invocar causal no lleva automáticamente el 100%.',
+          `El recargo del artículo 168 lo declara un juez y se aplica sobre la indemnización por años de servicio: ${RECARGO_ART_168.necesidades_empresa}% si el artículo 161 se aplicó improcedentemente, ${RECARGO_ART_168.causal_no_demostrada}% si se invocaron causales del artículo 159 sin justificación o se despidió sin causal legal, ${RECARGO_ART_168.falta_probidad}% si las causales del artículo 160 se aplicaron indebidamente, y ${RECARGO_ART_168.aplicacion_indebida}% en los numerales 1, 5 y 6 del artículo 160 cuando además se declara carente de motivo plausible. En el autodespido (art. 171) el recargo es ${RECARGO_ART_171.conducta_grave_o_seguridad}% por el art. 160 N° 1 o 5 y ${RECARGO_ART_171.incumplimiento_grave}% por el N° 7. Despedir sin invocar causal no lleva automáticamente el ${RECARGO_ART_168.aplicacion_indebida}%.`,
       },
       {
         question: '¿Cuál es el plazo para reclamar un despido?',

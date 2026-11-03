@@ -45,6 +45,7 @@ import { calculateImpuestoSegundaCategoria } from '@/lib/calculations/impuesto-s
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateHorasExtra } from '@/lib/calculations/horas-extra';
 import { calculateFiniquito } from '@/lib/calculations/finiquito';
+import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { calculateUTMCLP } from '@/lib/calculations/utm-clp';
 import { calculateUFCLP } from '@/lib/calculations/uf-clp';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
@@ -141,6 +142,11 @@ const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
 const IMM_LEY_21830_DESDE = '2026-05-01';
 const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
 const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
+const DT_INDEMNIZACION_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html';
+const DT_BASE_INDEMNIZACION_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html';
+const DT_TOPE_UF_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html';
+const DT_AVISO_PREVIO_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60531.html';
+const DT_ORD_296_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html';
 const DT_LICENCIA_CARENCIA_URL = 'https://www.dt.gob.cl/consultas/1613/w3-article-95277.html';
 const SUSESO_SIL_URL = 'https://www.suseso.gob.cl/606/w3-article-19931.html';
 const SUSESO_QUIEN_PAGA_URL = 'https://www.suseso.gob.cl/622/w3-propertyvalue-768472.html';
@@ -505,6 +511,70 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           caption:
             'Jornada de 42 horas semanales vigente desde el 26 de abril de 2026, recargo mínimo legal de 50%, 10 horas extra.',
           headers: ['Sueldo bruto', 'Valor hora extra', 'Total 10 horas extra'],
+          rows,
+        },
+      };
+    }
+
+    case 'indemnizacion-anos-servicio': {
+      // E-026: cifras generadas con el cálculo real y las constantes.
+      const casos: [number, number, number][] = [
+        [800_000, 5, 0],
+        [900_000, 5, 7],
+        [1_500_000, 12, 0],
+      ];
+      const rows = casos.map(([ultimoSueldo, añosTrabajados, mesesTrabajados]) => {
+        const r = calculateIndemnizacion({
+          ultimoSueldo,
+          añosTrabajados,
+          mesesTrabajados,
+          incluyeGratificacion: false,
+          valorUF: ctx.uf,
+        });
+        return [
+          formatCLP(ultimoSueldo),
+          mesesTrabajados ? `${añosTrabajados} años y ${mesesTrabajados} meses` : `${añosTrabajados} años`,
+          `${r.añosIndemnizables}`,
+          formatCLP(r.indemnizacionTotal),
+        ];
+      });
+      const topeCLP = formatCLP(Math.round(INDEMNIZACION.tope_uf_mensual * ctx.uf));
+      // 'AAAA-MM-DD' se formatea tal cual (new Date() lo leería como UTC y en Chile daría el día anterior).
+      const isoDia = ctx.ufFecha?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      const ufFechaObj = ctx.ufFecha && !isoDia ? new Date(ctx.ufFecha) : null;
+      const ufFechaTxt = isoDia
+        ? `del ${isoDia[3]}-${isoDia[2]}-${isoDia[1]}`
+        : ufFechaObj && !Number.isNaN(ufFechaObj.getTime())
+          ? `del ${formatDDMMYYYY(ufFechaObj)}`
+          : 'de hoy';
+      return {
+        h1: 'Indemnización por años de servicio: cuánto te corresponde y con qué tope',
+        ...withLinks([
+          `Si te despiden por necesidades de la empresa o desahucio (art. 161) y llevabas un año o más, te corresponden ${INDEMNIZACION.dias_por_año} días de tu última remuneración mensual por cada año de servicio y fracción superior a seis meses, con un máximo de ${INDEMNIZACION.tope_años} años (`,
+          { text: 'Dirección del Trabajo', href: DT_INDEMNIZACION_URL },
+          `). La remuneración que se usa tiene un tope de ${INDEMNIZACION.tope_uf_mensual} UF (${topeCLP} con la UF ${ufFechaTxt}; `,
+          { text: 'DT', href: DT_TOPE_UF_URL },
+          '). Si no te avisaron con 30 días, se suma un mes de remuneración como indemnización sustitutiva del aviso previo (',
+          { text: 'DT', href: DT_AVISO_PREVIO_URL },
+          ').',
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Qué entra en la remuneración que se usa para calcularla?',
+            answer:
+              'Todo lo que recibías cada mes: sueldo, gratificación mensual, comisiones, bonos mensuales, colación y movilización. No entran las horas extra, la asignación familiar ni los pagos esporádicos o anuales.',
+            sources: [{ text: 'Dirección del Trabajo', href: DT_BASE_INDEMNIZACION_URL }],
+          },
+          {
+            question: '¿Qué pasa si el despido es injustificado?',
+            answer:
+              'Puedes demandar dentro de 60 días hábiles desde la separación. Si el juez te da la razón, ordena pagar la indemnización por años de servicio con un recargo de 30%, 50%, 80% o 100% según la causal invocada.',
+            sources: [{ text: 'Dirección del Trabajo, ORD. 296 (art. 168)', href: DT_ORD_296_URL }],
+          },
+        ],
+        example: {
+          caption: `Despido por art. 161 con aviso de 30 días, sin gratificación. Tope de ${INDEMNIZACION.tope_años} años y de ${INDEMNIZACION.tope_uf_mensual} UF con la UF usada en esta página.`,
+          headers: ['Última remuneración', 'Antigüedad', 'Años indemnizables', 'Indemnización'],
           rows,
         },
       };
