@@ -1,13 +1,18 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import {
+  INDEMNIZACION,
   INGRESO_MINIMO,
+  RECARGO_ART_168,
+  RECARGO_ART_171,
   SEGURO_CESANTIA_BENEFICIOS,
+  UF,
   VERIFICACION_VALORES,
 } from '@/lib/values/constants';
 import { buildCvlistoUrl } from '@/lib/cvlisto';
 import { formatCLP } from '@/lib/formatters';
 import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
+import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 
 /**
  * Contenido editorial visible por calculadora (texto, tablas y preguntas
@@ -155,14 +160,64 @@ const LEY_19728 = 'https://www.bcn.cl/leychile/navegar?idNorma=184979';
 const SIMULADOR_CESANTIA = '/calculadoras/calculadora-seguro-cesantia';
 const GUIA_COBRAR_CESANTIA = '/blog/como-cobrar-seguro-cesantia-afc-2026';
 
+// Indemnización por años de servicio (E-026, fuentes abiertas el 03-11-2026).
+// Cifras generadas desde INDEMNIZACION, RECARGO_ART_168/171 y la UF del snapshot.
+const DT_IAS_DERECHO = 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html';
+const DT_IAS_DESPIDO = 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html';
+const DT_IAS_SIN_TOPE = 'https://www.dt.gob.cl/portal/1628/w3-article-60600.html';
+const DT_IAS_BASE = 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html';
+const DT_IAS_AVISO = 'https://www.dt.gob.cl/portal/1628/w3-article-60531.html';
+const DT_IAS_SUSTITUTIVA = 'https://www.dt.gob.cl/portal/1628/w3-article-60541.html';
+const DT_IAS_CARTA = 'https://www.dt.gob.cl/portal/1628/w3-article-60543.html';
+const DT_IAS_CARTA_ELECTRONICA = 'https://www.dt.gob.cl/portal/1626/w3-article-100380.html';
+const DT_ORD_296 = 'https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html';
+const DT_AUTODESPIDO = 'https://www.dt.gob.cl/portal/1628/w3-article-60579.html';
+const DT_OBRA_FAENA = 'https://www.dt.gob.cl/portal/1628/w3-article-118059.html';
+const DT_IAS_CUOTAS = 'https://www.dt.gob.cl/portal/1628/w3-article-60584.html';
+const SII_INDEMNIZACION =
+  'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_0838.htm';
+const SII_OFICIO_988 =
+  'https://www.sii.cl/normativa_legislacion/jurisprudencia_administrativa/ley_impuesto_renta/2014/ja988.htm';
+const IAS = {
+  dias: INDEMNIZACION.dias_por_año,
+  anios: INDEMNIZACION.tope_años,
+  topeDias: INDEMNIZACION.tope_años * INDEMNIZACION.dias_por_año,
+  topeUF: INDEMNIZACION.tope_uf_mensual,
+  topeCLP: formatCLP(Math.round(INDEMNIZACION.tope_uf_mensual * UF.valor)),
+  ufFecha: fechaDMY(UF.fecha_actualizacion),
+};
+const IAS_EJ1_INPUT = { sueldo: 800_000, grat: 200_000, otros: 60_000 };
+const IAS_EJ1 = calculateIndemnizacion({
+  ultimoSueldo: IAS_EJ1_INPUT.sueldo,
+  añosTrabajados: 7,
+  mesesTrabajados: 8,
+  incluyeGratificacion: true,
+  gratificacionMensual: IAS_EJ1_INPUT.grat,
+  otrasRemuneracionesMensuales: IAS_EJ1_INPUT.otros,
+  causal: 'art161',
+  avisoPrevio30Dias: false,
+});
+const IAS_EJ2 = calculateIndemnizacion({
+  ultimoSueldo: 5_000_000,
+  añosTrabajados: 14,
+  incluyeGratificacion: false,
+  causal: 'art161',
+  avisoPrevio30Dias: false,
+});
+const ulClass =
+  'mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base';
+const olClass =
+  'mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base';
+const h3Class = 'mt-6 text-base font-semibold text-[var(--foreground)]';
+
 const EDITORIAL: Record<string, EditorialContent> = {
   'horas-extra': {
     bottom: (
       <Section title="Factor hora extra con jornada de 42 horas">
         <p className={pClass}>
           Si solo necesitas el multiplicador para tu sueldo mensual, usa la calculadora del{' '}
-          <Int href="/calculadoras/calculadora-factor-hora-extra">factor hora extra 42 horas</Int>
-          , que ya incluye el recargo mínimo de 50%.
+          <Int href="/calculadoras/calculadora-factor-hora-extra">factor hora extra 42 horas</Int>,
+          que ya incluye el recargo mínimo de 50%.
         </p>
       </Section>
     ),
@@ -369,17 +424,290 @@ const EDITORIAL: Record<string, EditorialContent> = {
   },
   'indemnizacion-anos-servicio': {
     bottom: (
-      <Section title="Si te despidieron: seguro de cesantía">
-        <p className={pClass}>
-          La indemnización por años de servicio la paga tu empleador. Además, puedes cobrar el
-          seguro de cesantía en la <Ext href={AFC_COBRAR}>AFC</Ext>:{' '}
-          <Int href={SIMULADOR_CESANTIA}>simula cuánto te paga el seguro de cesantía</Int> y sigue
-          la guía de{' '}
-          <Int href={GUIA_COBRAR_CESANTIA}>cómo cobrar el seguro de cesantía en la AFC</Int>. Para
-          el monto total del término de contrato, usa la{' '}
-          <Int href="/calculadoras/calculadora-finiquito">calculadora de finiquito</Int>.
-        </p>
-      </Section>
+      <>
+        <Section title="¿Quién tiene derecho a indemnización por años de servicio?">
+          <p className={pClass}>
+            Por ley, la indemnización por años de servicio corresponde cuando el empleador pone
+            término al contrato por{' '}
+            <strong>necesidades de la empresa o desahucio (art. 161)</strong> y el contrato duró{' '}
+            <strong>un año o más</strong> (<Ext href={DT_IAS_DERECHO}>DT</Ext>).
+          </p>
+          <ul className={ulClass}>
+            <li>
+              <strong>Art. 159</strong> (renuncia, mutuo acuerdo, vencimiento del plazo, término de
+              la obra o faena, muerte del trabajador, caso fortuito): no da indemnización por años
+              de servicio por ley. El contrato por obra o faena tiene su propia indemnización (ver
+              más abajo).
+            </li>
+            <li>
+              <strong>Art. 160</strong> (causales disciplinarias, como falta de probidad o abandono
+              del trabajo): no da indemnización.
+            </li>
+            <li>
+              En ambos casos sí corresponde si el contrato o un contrato colectivo la pactan, o si
+              un juez declara que el despido fue injustificado o indebido (
+              <Ext href={DT_IAS_DESPIDO}>DT</Ext>).
+            </li>
+          </ul>
+          <h3 className={h3Class}>¿Se paga indemnización por renuncia voluntaria?</h3>
+          <p className={pClass}>
+            No por ley. Solo si tu contrato o un contrato colectivo la pactan. Con cualquier causal
+            sí recibes el feriado proporcional y lo que se te adeude (ver la{' '}
+            <Int href="/calculadoras/calculadora-vacaciones-proporcionales">
+              calculadora de vacaciones proporcionales
+            </Int>
+            ).
+          </p>
+        </Section>
+
+        <Section title="Cómo se calcula la indemnización por años de servicio">
+          <ol className={olClass}>
+            <li>
+              <strong>Suma tu última remuneración mensual</strong>: sueldo, gratificación mensual y
+              los demás pagos mensuales.
+            </li>
+            <li>
+              <strong>Aplica el tope de {IAS.topeUF} UF</strong> a esa suma.
+            </li>
+            <li>
+              <strong>Cuenta los años</strong>: cada año completo y la fracción superior a seis
+              meses suman un año, hasta {IAS.anios} años.
+            </li>
+            <li>
+              <strong>Multiplica</strong>: (remuneración ÷ 30) × {IAS.dias} días × años. En la
+              práctica, es una remuneración mensual por cada año.
+            </li>
+            <li>
+              <strong>Suma la sustitutiva</strong> si no te avisaron con 30 días (art. 161).
+            </li>
+          </ol>
+          <p className={pClass}>
+            Ejemplo: sueldo base de {formatCLP(IAS_EJ1_INPUT.sueldo)}, gratificación mensual de{' '}
+            {formatCLP(IAS_EJ1_INPUT.grat)} y colación y movilización por{' '}
+            {formatCLP(IAS_EJ1_INPUT.otros)}; trabajaste 7 años y 8 meses; te despiden por
+            necesidades de la empresa sin aviso.
+          </p>
+          <ul className={ulClass}>
+            <li>
+              Base: {formatCLP(IAS_EJ1_INPUT.sueldo)} + {formatCLP(IAS_EJ1_INPUT.grat)} +{' '}
+              {formatCLP(IAS_EJ1_INPUT.otros)} = <strong>{formatCLP(IAS_EJ1.baseCalculo)}</strong>{' '}
+              (bajo el tope de {IAS.topeCLP}).
+            </li>
+            <li>
+              Años: 7 años y 8 meses → <strong>{IAS_EJ1.añosIndemnizables} años</strong>.
+            </li>
+            <li>
+              Indemnización por años: {formatCLP(IAS_EJ1.baseCalculo)} × {IAS_EJ1.añosIndemnizables}{' '}
+              = <strong>{formatCLP(IAS_EJ1.indemnizacionTotal)}</strong>.
+            </li>
+            <li>
+              Sustitutiva del aviso previo:{' '}
+              <strong>{formatCLP(IAS_EJ1.indemnizacionAvisoPrevio)}</strong>.
+            </li>
+            <li>
+              Total: <strong>{formatCLP(IAS_EJ1.totalAPagar)}</strong>.
+            </li>
+          </ul>
+          <p className={pClass}>
+            Con remuneración sobre el tope (ejemplo: {formatCLP(5_000_000)} y 14 años): la base
+            queda en {IAS.topeCLP}, los años en {IAS.anios}, y la indemnización por años es{' '}
+            <strong>{formatCLP(IAS_EJ2.indemnizacionTotal)}</strong>; la sustitutiva también queda
+            en {formatCLP(IAS_EJ2.indemnizacionAvisoPrevio)}. Cifras con la UF del {IAS.ufFecha}.
+          </p>
+          <h3 className={h3Class}>Qué entra en la base de cálculo</h3>
+          <p className={pClass}>
+            Entra todo lo que recibías cada mes por tu trabajo: sueldo, comisiones, bonos mensuales,
+            semana corrida, gratificación pagada mes a mes y las asignaciones de colación y
+            movilización. No entran las horas extra, la asignación familiar legal ni los pagos
+            esporádicos o anuales, como aguinaldos o la gratificación anual (
+            <Ext href={DT_IAS_BASE}>DT</Ext>).
+          </p>
+          <h3 className={h3Class}>Tope de {IAS.topeUF} UF</h3>
+          <p className={pClass}>
+            La remuneración que se usa no puede pasar de {IAS.topeUF} UF, con el valor de la UF del
+            último día del mes anterior al pago. Con la UF del {IAS.ufFecha}, {IAS.topeUF} UF son{' '}
+            {IAS.topeCLP}. El mismo tope se aplica a la indemnización sustitutiva del aviso previo (
+            <Ext href={DT_INDEMNIZACION}>DT</Ext>).
+          </p>
+          <h3 className={h3Class}>Tope de {IAS.anios} años y contratos anteriores a 1981</h3>
+          <p className={pClass}>
+            El máximo es {IAS.topeDias} días de remuneración ({IAS.anios} años) para quienes fueron
+            contratados desde el 14 de agosto de 1981 (<Ext href={DT_IAS_DESPIDO}>DT</Ext>). Quienes
+            fueron contratados antes de esa fecha, y cuyo contrato estaba vigente al 1 de diciembre
+            de 1990, no tienen tope de años (<Ext href={DT_IAS_SIN_TOPE}>DT</Ext>). La calculadora
+            no cubre ese caso.
+          </p>
+        </Section>
+
+        <Section title="Aviso previo y carta de despido">
+          <p className={pClass}>
+            Si te despiden por el art. 161, el empleador debe avisarte por escrito con{' '}
+            <strong>30 días de anticipación</strong> o pagarte la{' '}
+            <strong>indemnización sustitutiva del aviso previo</strong>, equivalente a un mes de tu
+            última remuneración (<Ext href={DT_IAS_AVISO}>DT</Ext>). La sustitutiva se paga
+            completa, no en proporción a los días que faltaron (
+            <Ext href={DT_IAS_SUSTITUTIVA}>DT</Ext>).
+          </p>
+          <p className={pClass}>
+            La carta de despido debe (<Ext href={DT_IAS_CARTA}>DT</Ext>):
+          </p>
+          <ul className={ulClass}>
+            <li>
+              entregarse en persona o enviarse por carta certificada (también existe la carta
+              electrónica, <Ext href={DT_IAS_CARTA_ELECTRONICA}>DT</Ext>);
+            </li>
+            <li>
+              indicar la causal, los hechos en que se funda y, en el art. 161, el monto de las
+              indemnizaciones;
+            </li>
+            <li>
+              informar el estado de pago de tus cotizaciones previsionales, con los comprobantes;
+            </li>
+            <li>enviarse con copia a la Inspección del Trabajo.</li>
+          </ul>
+          <p className={pClass}>
+            Plazos de entrega: 30 días antes en el art. 161 (o sin aviso, pagando la sustitutiva); 3
+            días hábiles desde la separación en las causales de los arts. 159 y 160; 6 días hábiles
+            en caso fortuito o fuerza mayor (<Ext href={DT_IAS_CARTA}>DT</Ext>). Al firmar el
+            finiquito puedes dejar una reserva de derechos sobre lo que no compartes (
+            <Int href="/guias/finiquito-laboral-chile">guía de finiquito</Int>).
+          </p>
+        </Section>
+
+        <Section title="Recargos si el despido es injustificado (art. 168)">
+          <p className={pClass}>
+            Si demandas dentro de 60 días hábiles y el juez declara el despido injustificado,
+            indebido o improcedente, ordena pagar la indemnización por años de servicio con un
+            recargo (<Ext href={DT_ORD_296}>DT, ORD. 296</Ext>):
+          </p>
+          <ul className={ulClass}>
+            <li>
+              <strong>{RECARGO_ART_168.necesidades_empresa}%</strong> si se aplicó mal el art. 161;
+            </li>
+            <li>
+              <strong>{RECARGO_ART_168.causal_no_demostrada}%</strong> si se invocaron causales del
+              art. 159 sin justificación o no se invocó ninguna causal;
+            </li>
+            <li>
+              <strong>{RECARGO_ART_168.falta_probidad}%</strong> si se aplicaron indebidamente
+              causales del art. 160;
+            </li>
+            <li>
+              <strong>{RECARGO_ART_168.aplicacion_indebida}%</strong> si se invocaron los N° 1, 5 o
+              6 del art. 160 y el juez declara además que no había motivo plausible.
+            </li>
+          </ul>
+          <p className={pClass}>
+            En esos casos también corresponde la sustitutiva del aviso previo. Los recargos los
+            declara un juez; la calculadora los muestra solo si marcas la opción de sentencia.
+          </p>
+        </Section>
+
+        <Section title="Autodespido (art. 171)">
+          <p className={pClass}>
+            Si es el empleador quien incurre en ciertas causales del art. 160, puedes poner término
+            al contrato tú mismo con una carta escrita, con copia a la Inspección del Trabajo, y
+            demandar dentro de 60 días hábiles. Si el juez acoge la demanda, ordena pagar la
+            sustitutiva y la indemnización por años de servicio, aumentada en{' '}
+            {RECARGO_ART_171.conducta_grave_o_seguridad}% por los N° 1 y 5 del art. 160 y en{' '}
+            {RECARGO_ART_171.incumplimiento_grave}% por el N° 7 (<Ext href={DT_AUTODESPIDO}>DT</Ext>
+            ).
+          </p>
+        </Section>
+
+        <Section title="Contrato por obra o faena">
+          <p className={pClass}>
+            En los contratos por obra o faena celebrados desde el 1 de enero de 2022, al terminar la
+            obra corresponde una indemnización de 2,5 días de remuneración por cada mes trabajado y
+            fracción superior a 15 días (<Ext href={DT_OBRA_FAENA}>DT</Ext>).
+          </p>
+        </Section>
+
+        <Section title="¿La indemnización paga impuestos?">
+          <p className={pClass}>
+            Las indemnizaciones legales, y las pactadas en contratos o convenios colectivos, no
+            constituyen renta. Si recibes otras indemnizaciones por término de contrato, se suman
+            para ver qué parte tributa (<Ext href={SII_INDEMNIZACION}>SII</Ext>). Los recargos que
+            ordena un juez tampoco constituyen renta (
+            <Ext href={SII_OFICIO_988}>SII, Oficio 988</Ext>).
+          </p>
+        </Section>
+
+        <Section title="Plazo de pago y qué hacer si no te pagan">
+          <ul className={ulClass}>
+            <li>
+              El empleador tiene <strong>10 días hábiles</strong> desde la separación para pagarte
+              el finiquito (<Ext href={DT_PLAZO}>DT</Ext>).
+            </li>
+            <li>
+              Solo puede pagarse en cuotas si lo acuerdan y lo ratifican ante la Inspección del
+              Trabajo. Si no paga una cuota, se hace exigible el total, y el juez puede incrementar
+              la deuda hasta en 150% (<Ext href={DT_IAS_CUOTAS}>DT</Ext>;{' '}
+              <Ext href={DT_IAS_DESPIDO}>DT</Ext>).
+            </li>
+            <li>
+              Puedes reclamar en la Inspección del Trabajo o demandar dentro de 60 días hábiles.
+              Para casos concretos, consulta en la Inspección o con un abogado.
+            </li>
+            <li>
+              Revisa también tu <Int href="/cesantia">seguro de cesantía</Int> (
+              <Int href="/calculadoras/calculadora-seguro-cesantia">calculadora</Int>;{' '}
+              <Int href="/blog/seguro-cesantia-finiquito-2026-afc">guía AFC</Int>), el{' '}
+              <Int href="/calculadoras/calculadora-finiquito">finiquito completo</Int>, el{' '}
+              <Int href="/blog/finiquito-2026-ejemplo-sueldo-minimo">ejemplo con sueldo mínimo</Int>{' '}
+              y el{' '}
+              <Int href="/blog/checklist-despues-despido-chile-2026">
+                checklist después de un despido
+              </Int>
+              .
+            </li>
+          </ul>
+        </Section>
+
+        <Section title="Más preguntas sobre la indemnización">
+          <Faq
+            items={[
+              {
+                q: '¿Qué indemnización me corresponde por despido injustificado?',
+                a: (
+                  <>
+                    Si el juez declara injustificado el despido, ordena pagar la indemnización por
+                    años de servicio con el recargo que corresponda a la causal (
+                    {RECARGO_ART_168.necesidades_empresa}%, {RECARGO_ART_168.causal_no_demostrada}
+                    %, {RECARGO_ART_168.falta_probidad}% o {RECARGO_ART_168.aplicacion_indebida}%) y
+                    la sustitutiva del aviso previo si no se dio. Hay que demandar dentro de 60 días
+                    hábiles (<Ext href={DT_ORD_296}>DT, ORD. 296</Ext>).
+                  </>
+                ),
+              },
+              {
+                q: '¿Cuáles son los 3 tipos de despido?',
+                a: (
+                  <>
+                    El Código del Trabajo agrupa las causales en tres artículos: el 159 (causas
+                    objetivas, como renuncia, mutuo acuerdo o fin del plazo), el 160 (causas
+                    disciplinarias, sin indemnización) y el 161 (necesidades de la empresa o
+                    desahucio, con indemnización por años de servicio si llevabas un año o más) (
+                    <Ext href={DT_IAS_DERECHO}>DT</Ext>; <Ext href={DT_IAS_DESPIDO}>DT</Ext>).
+                  </>
+                ),
+              },
+            ]}
+          />
+        </Section>
+
+        <Section title="Si te despidieron: seguro de cesantía">
+          <p className={pClass}>
+            La indemnización por años de servicio la paga tu empleador. Además, puedes cobrar el
+            seguro de cesantía en la <Ext href={AFC_COBRAR}>AFC</Ext>:{' '}
+            <Int href={SIMULADOR_CESANTIA}>simula cuánto te paga el seguro de cesantía</Int> y sigue
+            la guía de{' '}
+            <Int href={GUIA_COBRAR_CESANTIA}>cómo cobrar el seguro de cesantía en la AFC</Int>. Para
+            el monto total del término de contrato, usa la{' '}
+            <Int href="/calculadoras/calculadora-finiquito">calculadora de finiquito</Int>.
+          </p>
+        </Section>
+      </>
     ),
   },
   contribuciones: {

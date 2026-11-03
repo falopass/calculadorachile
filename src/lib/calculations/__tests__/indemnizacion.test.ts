@@ -111,3 +111,72 @@ describe('indemnización: art. 163 inc. 2 (fracción > 6 meses, mínimo 1 año, 
     expect(calculateIndemnizacion({ ...base, añosTrabajados: 10, mesesTrabajados: 7 }).aplicaTope).toBe(false);
   });
 });
+
+describe('E-026: causal, aviso previo y recargos', () => {
+  const base = { ultimoSueldo: 900_000, añosTrabajados: 5, mesesTrabajados: 7, incluyeGratificacion: false };
+
+  it('art. 161 con aviso: solo años de servicio', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art161', avisoPrevio30Dias: true });
+    expect(r.indemnizacionTotal).toBe(5_400_000);
+    expect(r.indemnizacionAvisoPrevio).toBe(0);
+    expect(r.recargoMonto).toBe(0);
+    expect(r.totalAPagar).toBe(5_400_000);
+    expect(r.correspondePorLey).toBe(true);
+  });
+
+  it('art. 161 sin aviso: suma un mes de sustitutiva', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art161', avisoPrevio30Dias: false });
+    expect(r.indemnizacionAvisoPrevio).toBe(900_000);
+    expect(r.totalAPagar).toBe(6_300_000);
+  });
+
+  it('sustitutiva con tope de 90 UF', () => {
+    const r = calculateIndemnizacion({
+      ultimoSueldo: 6_000_000,
+      añosTrabajados: 3,
+      incluyeGratificacion: false,
+      avisoPrevio30Dias: false,
+      valorUF: 40_000,
+    });
+    expect(r.indemnizacionAvisoPrevio).toBe(INDEMNIZACION.tope_uf_mensual * 40_000);
+  });
+
+  it('art. 159 o 160 sin sentencia: no corresponde por ley', () => {
+    for (const causal of ['art159', 'art160'] as const) {
+      const r = calculateIndemnizacion({ ...base, causal });
+      expect(r.correspondePorLey).toBe(false);
+      expect(r.totalAPagar).toBe(0);
+    }
+  });
+
+  it('art. 161 con sentencia: recargo 30% sobre años', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art161', simularSentencia: true, recargoPct: 30 });
+    expect(r.recargoMonto).toBe(1_620_000);
+    expect(r.totalAPagar).toBe(5_400_000 + 1_620_000);
+  });
+
+  it('art. 160 injustificado: recargo 80%, sustitutiva incluida', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art160', simularSentencia: true, recargoPct: 80 });
+    expect(r.recargoPct).toBe(80);
+    expect(r.indemnizacionAvisoPrevio).toBe(900_000);
+    expect(r.totalAPagar).toBe(5_400_000 + 900_000 + 5_400_000 * 0.8);
+  });
+
+  it('recargo no permitido para la causal se corrige', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art161', simularSentencia: true, recargoPct: 100 });
+    expect(r.recargoPct).toBe(30);
+  });
+
+  it('autodespido (art. 171) siempre requiere sentencia y usa 50% u 80%', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art171', recargoPct: 50 });
+    expect(r.requiereSentencia).toBe(true);
+    expect(r.recargoPct).toBe(50);
+    expect(r.indemnizacionAvisoPrevio).toBe(900_000);
+  });
+
+  it('otras remuneraciones mensuales entran en la base (colación, movilización)', () => {
+    const r = calculateIndemnizacion({ ...base, otrasRemuneracionesMensuales: 100_000 });
+    expect(r.indemnizacionTotal).toBe(1_000_000 * 6);
+  });
+});
+

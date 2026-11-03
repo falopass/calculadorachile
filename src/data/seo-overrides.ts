@@ -28,6 +28,8 @@
  */
 
 import { formatCLP } from '@/lib/formatters';
+import { INDEMNIZACION } from '@/lib/values/constants';
+import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 
@@ -93,9 +95,13 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-indemnizacion-anos-servicio': {
-    seoTitle: 'Indemnización por Años 2026: tope legal 90 UF', // 48
-    seoDescription:
-      'Calcula tu indemnización por años de servicio en Chile: 30 días por año, tope 11 años y 90 UF imponible. Ideal finiquito. Gratis DT.', // 135
+    // E-026: 55 caracteres / meta 148 (con los valores vigentes).
+    get seoTitle() {
+      return seoIndemnizacion().seoTitle;
+    },
+    get seoDescription() {
+      return seoIndemnizacion().seoDescription;
+    },
   },
 
   'calculadora-vacaciones-proporcionales': {
@@ -589,6 +595,17 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Guía verificada para comprar vivienda en Chile: promesa, estudio de títulos, subsidios 2026, contribuciones, gastos comunes, escritura e inscripción.',
   },
 };
+
+/** E-026: title con el año en curso (Chile) y meta desde las constantes. */
+export function seoIndemnizacion(date: Date = new Date()): {
+  seoTitle: string;
+  seoDescription: string;
+} {
+  return {
+    seoTitle: `Indemnización por años de servicio ${anioSantiago(date)}: cálculo y tope`,
+    seoDescription: `Calcula tu indemnización por años de servicio: ${INDEMNIZACION.dias_por_año} días por año, tope de ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF, aviso previo y recargos del art. 168. Con fuentes de la DT.`,
+  };
+}
 
 /**
  * ============================================================================
