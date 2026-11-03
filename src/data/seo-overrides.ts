@@ -549,6 +549,12 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'Guía de costos del hogar en Chile 2026: cuenta de la luz BT1, agua potable, subsidios, gas, internet, gastos comunes Ley 21.442, contribuciones y reajuste de arriendo (Ley 21.461).',
   },
+  // E-027: guía nueva /guias/feriados-chile-2027 (H1 = guia.title).
+  'feriados-chile-2027': {
+    seoTitle: 'Feriados 2027 en Chile: calendario e irrenunciables', // 51
+    seoDescription:
+      'Revisa los feriados de 2027 en Chile: fechas, día de la semana, cuáles son irrenunciables, los fines de semana largos y los feriados regionales.', // 144
+  },
   'empresas-pymes-chile': {
     seoTitle: 'Empresas y pymes en Chile 2026: costos e impuestos', // 50
     seoDescription:

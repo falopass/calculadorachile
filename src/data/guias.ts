@@ -23,6 +23,8 @@
 // de calculadoras relacionadas y artículos de blog complementarios.
 // ============================================
 
+import { guiaFeriados2027 } from './guia-feriados-2027';
+
 export interface GuiaSection {
   id: string;
   title: string;
@@ -2576,6 +2578,8 @@ export const guias: Guia[] = [
       { label: 'gob.cl, Feriados 2026', url: 'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/' },
     ],
   },
+  // E-027: generada desde src/lib/feriados.ts
+  guiaFeriados2027,
 ];
 
 // ============================================
