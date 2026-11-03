@@ -43,9 +43,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y REMUNERACIONES ---
   'calculadora-sueldo-liquido': {
-    seoTitle: 'Calculadora Sueldo Líquido 2026: de bruto a líquido', // 50
+    seoTitle: 'Calcular sueldo líquido 2026: bruto a líquido', // 45
     seoDescription:
-      '¿Cuánto te descuentan? Calcula tu sueldo líquido con AFP, 7% de salud, seguro de cesantía e impuesto único, con valores oficiales 2026.', // 135
+      'Calcular sueldo líquido 2026: ingresa tu bruto y ve cuánto te descuentan de AFP, salud, seguro de cesantía e impuesto único.', // 124
   },
 
   'calculadora-impuesto-segunda-categoria': {
