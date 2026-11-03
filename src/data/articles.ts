@@ -2510,7 +2510,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       'calculadora-reajuste-arriendo',
       'calculadora-credito-hipotecario',
     ],
-    content: `<p class="article-lead">La Unidad de Fomento no es una moneda, una tasa de interés ni un cobro adicional: es una unidad de cuenta expresada en pesos que cambia con la inflación. Entender esa diferencia permite revisar correctamente un dividendo, un arriendo o una póliza y evita comparar montos de fechas distintas como si valieran lo mismo.</p>
+    content: `<p class="article-lead">La Unidad de Fomento no es una moneda, una tasa de interés ni un cobro adicional: es una unidad de cuenta expresada en pesos que cambia con la inflación. Entender esa diferencia permite revisar correctamente un dividendo, un arriendo o una póliza y evita comparar montos de fechas distintas como si valieran lo mismo. Para ver el <a href="/calculadoras/calculadora-uf-clp">valor UF hoy</a> en pesos y convertir un monto, usa la calculadora de UF.</p>
 
 <h2>Qué es la UF y por qué existe</h2>
 <p>La <strong>Unidad de Fomento (UF)</strong> permite expresar una obligación en un valor que se reajusta con el Índice de Precios al Consumidor (IPC). El contrato conserva una cantidad fija de UF, mientras el equivalente en pesos cambia. Si una deuda es de 100 UF, seguirá siendo de 100 UF; lo que varía es cuántos pesos se necesitan para pagarla en una fecha determinada.</p>

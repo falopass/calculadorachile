@@ -111,7 +111,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-iva': {
-    seoTitle: 'Calculadora IVA Chile: agrega o quita el 19%', // 44
+    seoTitle: 'Calcular IVA Chile 2026: agrega o quita el 19%', // 46
     seoDescription:
       'Calcula el IVA en Chile (19%, tasa del SII): pasa de neto a bruto o saca el IVA de un total. Ej.: $100.000 neto = $119.000 con IVA. Gratis.', // 141
   },
