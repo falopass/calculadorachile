@@ -13,7 +13,7 @@
 //   - sameAs de redes sociales
 // ============================================
 
-import { SITE_URL, absoluteUrl } from '@/lib/site';
+import { CONTACT_EMAIL, SITE_URL, absoluteUrl } from '@/lib/site';
 
 /** ID estable del Person para que otros schemas lo referencien. */
 export const AUTHOR_ID = `${SITE_URL}/acerca-de#diego`;
@@ -96,7 +96,7 @@ export const AUTHOR: AuthorProfile = {
     'https://github.com/falopass',
     'https://github.com/falopass/calculadorachile',
   ],
-  email: 'ddiegosebastianbb@gmail.com',
+  email: CONTACT_EMAIL,
   url: absoluteUrl('/acerca-de'),
   // Reusamos el logo del sitio como Person.image. Google acepta el
   // logo de marca para sole-operators y evita depender de una foto
