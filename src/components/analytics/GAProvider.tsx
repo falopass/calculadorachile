@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
-import { initGA, pageview } from '@/lib/analytics';
+import { GA_MEASUREMENT_ID, analyticsBlocked, initGA, pageview } from '@/lib/analytics';
 
 /**
  * Componente interno: trackea pageviews en cada cambio de ruta.
@@ -14,14 +14,14 @@ import { initGA, pageview } from '@/lib/analytics';
 function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const gaId = GA_MEASUREMENT_ID;
 
   useEffect(() => {
-    if (gaId) initGA(gaId);
+    if (gaId && !analyticsBlocked()) initGA(gaId);
   }, [gaId]);
 
   useEffect(() => {
-    if (!gaId || !pathname) return;
+    if (!gaId || !pathname || analyticsBlocked()) return;
     const search = searchParams?.toString();
     const url = search ? `${pathname}?${search}` : pathname;
     pageview(url);

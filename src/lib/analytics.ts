@@ -8,6 +8,34 @@
 type GtagEventParams = Record<string, string | number | boolean | undefined>;
 
 /**
+ * ID de medición GA4 de calculadorachile.cl (propiedad "CalculadoraChile").
+ * NEXT_PUBLIC_GA_MEASUREMENT_ID tiene prioridad si está definida en el build;
+ * si no, se usa este ID fijo (la variable hoy no existe en Workers Builds).
+ */
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PHMWEP3S9T';
+
+/**
+ * Misma regla que AdSenseLoader: no medir visitas propias o de prueba
+ * (?noads=1, cookie cc_noads=1, navegador automatizado o Chrome headless),
+ * para que los bots que auditan el sitio no ensucien GA4. ?noads=0 vuelve
+ * a medir. Solo lee; la cookie la escribe y borra AdSenseLoader.
+ */
+export function analyticsBlocked(): boolean {
+  if (typeof window === 'undefined') return true;
+  try {
+    const param = new URLSearchParams(window.location.search).get('noads');
+    if (param === '1') return true;
+    if (param === '0') return false;
+    if (document.cookie.split('; ').includes('cc_noads=1')) return true;
+    if (navigator.webdriver) return true;
+    if (/HeadlessChrome/i.test(navigator.userAgent)) return true;
+  } catch {
+    // ante cualquier error, se comporta como una visita normal
+  }
+  return false;
+}
+
+/**
  * Inicializa Google Analytics 4 cargando gtag.js y configurando el ID.
  * Es idempotente: llamadas adicionales no recargan el script.
  */
@@ -22,14 +50,19 @@ export function initGA(measurementId: string): void {
   script.async = true;
   document.head.appendChild(script);
 
-  // Cola de eventos previa al script (gtag standard pattern)
+  // Cola de eventos previa al script (gtag standard pattern).
+  // gtag.js solo procesa objetos `arguments`: si se empuja un array, lo
+  // ignora y nunca envía /g/collect. Por eso no se usa `...args`.
   window.dataLayer = window.dataLayer || [];
-  const gtag: typeof window.gtag = function gtag(...args) {
-    window.dataLayer!.push(args);
-  };
+  const gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  } as NonNullable<typeof window.gtag>;
 
   gtag('js', new Date());
-  gtag('config', measurementId);
+  // El page_view lo envía GAProvider en cada cambio de ruta; sin
+  // send_page_view: false la primera visita se contaría dos veces.
+  gtag('config', measurementId, { send_page_view: false });
 
   // Expone gtag globalmente
   window.gtag = gtag;
@@ -54,7 +87,7 @@ export function pageview(url: string): void {
  */
 export function event(action: string, params?: GtagEventParams): void {
   if (typeof window === 'undefined') return;
-  if (!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) return;
+  if (!GA_MEASUREMENT_ID) return;
   if (!window.gtag) return;
   window.gtag('event', action, params ?? {});
 }
