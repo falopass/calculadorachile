@@ -3,6 +3,7 @@
 // ============================================
 
 import type { Calculator } from '@/types/calculator';
+import { UTA_2026, UTM } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
@@ -1071,7 +1072,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-20',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'SII — Valores UTM y UTA 2026',
@@ -1130,6 +1131,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Cómo se calcula una multa en UTM?',
         answer:
           'Para calcular una multa expresada en UTM, multiplica la cantidad de UTM por el valor vigente del mes. Por ejemplo, una multa de 1,5 UTM equivale a 1,5 veces el valor UTM mostrado en esta página. Nuestra calculadora hace esta conversión automáticamente.',
+      },
+      {
+        question: '¿Cuál es el valor de la UTA?',
+        // Generada desde el snapshot de la UTM; el SII define UTA = UTM × 12 (utm2026.htm).
+        // Sin mes: el snapshot puede conservar una UTM anterior con fecha nueva si falla la fuente.
+        answer: `La UTA (Unidad Tributaria Anual) equivale a 12 UTM, según el SII. Por ejemplo, con una UTM de ${formatCLP(UTM.valor)}, la UTA es ${formatCLP(UTA_2026)}. El valor vigente de la UTM aparece al inicio de esta página.`,
       },
     ],
   },
