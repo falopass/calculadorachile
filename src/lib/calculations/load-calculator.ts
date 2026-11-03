@@ -9,6 +9,7 @@
 import { anioEnCalendario, contextoHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 import { coerceBool, coerceNumber } from './input-coerce';
+import type { CausalIndemnizacion } from './indemnizacion';
 
 export type CalculateFn = (inputs: Record<string, unknown>) => CalculatorResult[];
 
@@ -16,6 +17,8 @@ export type CalculateFn = (inputs: Record<string, unknown>) => CalculatorResult[
 export type LiveCalculationValues = {
   valorUF?: number;
   valorUTM?: number;
+  /** Fecha (AAAA-MM-DD) de `valorUF`, para mostrarla donde se usa la UF. */
+  ufFecha?: string;
 };
 
 /**
@@ -144,7 +147,8 @@ export async function loadCalculationFn(
     }
 
     case 'indemnizacion-anos-servicio': {
-      const { calculateIndemnizacion, indemnizacionToResults } = await import('./indemnizacion');
+      const { calculateIndemnizacion, indemnizacionToResults, CAUSALES_INDEMNIZACION } =
+        await import('./indemnizacion');
       return (inputs) => {
         const result = calculateIndemnizacion({
           ultimoSueldo: coerceNumber(inputs.ultimoSueldo),
@@ -153,16 +157,15 @@ export async function loadCalculationFn(
           incluyeGratificacion: coerceBool(inputs.incluyeGratificacion),
           gratificacionMensual: coerceNumber(inputs.gratificacionMensual, 0) || undefined,
           otrasRemuneracionesMensuales: coerceNumber(inputs.otrasRemuneracionesMensuales, 0),
-          causal: (['art161', 'art159', 'art160', 'art171'] as const).includes(
-            inputs.causal as 'art161',
-          )
-            ? (inputs.causal as 'art161' | 'art159' | 'art160' | 'art171')
+          causal: CAUSALES_INDEMNIZACION.includes(inputs.causal as CausalIndemnizacion)
+            ? (inputs.causal as CausalIndemnizacion)
             : 'art161',
           avisoPrevio30Dias:
             inputs.avisoPrevio30Dias === undefined ? true : coerceBool(inputs.avisoPrevio30Dias),
           simularSentencia: coerceBool(inputs.simularSentencia),
           recargoPct: coerceNumber(inputs.recargoPct, 0) as 0 | 30 | 50 | 80 | 100,
           valorUF: live?.valorUF,
+          ufFecha: live?.ufFecha,
         });
         return indemnizacionToResults(result);
       };
