@@ -15,12 +15,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'sueldo-liquido',
     name: 'Sueldo Líquido 2026',
     description:
-      'Calcula tu sueldo líquido a partir del bruto, considerando AFP, salud y seguro de cesantía.',
+      'Para calcular tu sueldo líquido, ingresa tu sueldo bruto: la calculadora descuenta la AFP (10% más la comisión), el 7% de salud, el seguro de cesantía y el impuesto único de segunda categoría con los valores oficiales vigentes.',
     slug: 'calculadora-sueldo-liquido',
     category: 'sueldo',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'SII — Impuesto 2ª categoría',
@@ -34,12 +34,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         name: 'AFC Chile',
-        url: 'https://www.afc.cl/seguro-de-cesantia/',
+        url: 'https://www.afc.cl/que-es-el-seguro-de-cesantia/preguntas-frecuentes/seguro-de-cesantia/',
         note: 'Seguro de cesantía',
       },
       {
         name: 'Previred — indicadores',
-        url: 'https://www.previred.com/wp-content/uploads/2026/06/Indicadores-Previsionales-Previred-Junio-2026v2.pdf',
+        url: 'https://www.previred.com/wp-content/uploads/2026/10/Indicadores-Previsionales-Previred-Octubre-2026.pdf',
         note: 'Comisiones AFP, SIS, topes',
       },
     ],
