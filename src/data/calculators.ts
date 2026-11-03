@@ -1125,10 +1125,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuál es el valor de la UTA?',
         // Generada desde el snapshot de la UTM; el SII define UTA = UTM × 12 (utm2026.htm).
-        answer: `La UTA (Unidad Tributaria Anual) equivale a 12 UTM. Con la UTM de ${new Intl.DateTimeFormat(
-          'es-CL',
-          { month: 'long', year: 'numeric', timeZone: 'UTC' },
-        ).format(new Date(`${UTM.fecha_actualizacion}T12:00:00Z`))} (${formatCLP(UTM.valor)}), la UTA es ${formatCLP(UTA_2026)}.`,
+        // Sin mes: el snapshot puede conservar una UTM anterior con fecha nueva si falla la fuente.
+        answer: `La UTA (Unidad Tributaria Anual) equivale a 12 UTM, según el SII. Por ejemplo, con una UTM de ${formatCLP(UTM.valor)}, la UTA es ${formatCLP(UTA_2026)}. El valor vigente de la UTM aparece al inicio de esta página.`,
       },
     ],
   },
