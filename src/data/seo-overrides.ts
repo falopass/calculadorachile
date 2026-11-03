@@ -68,9 +68,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y REMUNERACIONES ---
   'calculadora-sueldo-liquido': {
-    seoTitle: 'Calculadora Sueldo Líquido 2026: de bruto a líquido', // 50
+    seoTitle: 'Calcular sueldo líquido 2026: bruto a líquido', // 45
     seoDescription:
-      '¿Cuánto te descuentan? Calcula tu sueldo líquido con AFP, 7% de salud, seguro de cesantía e impuesto único, con valores oficiales 2026.', // 135
+      'Calcular sueldo líquido 2026: ingresa tu bruto y ve cuánto te descuentan de AFP, salud, seguro de cesantía e impuesto único.', // 124
   },
 
   'calculadora-impuesto-segunda-categoria': {
@@ -136,7 +136,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-iva': {
-    seoTitle: 'Calculadora IVA Chile: agrega o quita el 19%', // 44
+    seoTitle: 'Calcular IVA Chile 2026: agrega o quita el 19%', // 46
     seoDescription:
       'Calcula el IVA en Chile (19%, tasa del SII): pasa de neto a bruto o saca el IVA de un total. Ej.: $100.000 neto = $119.000 con IVA. Gratis.', // 141
   },

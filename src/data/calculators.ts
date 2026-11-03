@@ -3,6 +3,7 @@
 // ============================================
 
 import type { Calculator } from '@/types/calculator';
+import { UTA_2026, UTM } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
@@ -30,12 +31,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'sueldo-liquido',
     name: 'Sueldo Líquido 2026',
     description:
-      'Calcula tu sueldo líquido a partir del bruto, considerando AFP, salud y seguro de cesantía.',
+      'Para calcular tu sueldo líquido, ingresa tu sueldo bruto: la calculadora descuenta la AFP (10% más la comisión), el 7% de salud, el seguro de cesantía y el impuesto único de segunda categoría con los valores oficiales vigentes.',
     slug: 'calculadora-sueldo-liquido',
     category: 'sueldo',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-08',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'SII — Impuesto 2ª categoría',
@@ -49,12 +50,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         name: 'AFC Chile',
-        url: 'https://www.afc.cl/seguro-de-cesantia/',
+        url: 'https://www.afc.cl/que-es-el-seguro-de-cesantia/preguntas-frecuentes/seguro-de-cesantia/',
         note: 'Seguro de cesantía',
       },
       {
         name: 'Previred — indicadores',
-        url: 'https://www.previred.com/wp-content/uploads/2026/06/Indicadores-Previsionales-Previred-Junio-2026v2.pdf',
+        url: 'https://www.previred.com/wp-content/uploads/2026/10/Indicadores-Previsionales-Previred-Octubre-2026.pdf',
         note: 'Comisiones AFP, SIS, topes',
       },
     ],
@@ -264,12 +265,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'finiquito',
     name: 'Finiquito',
     description:
-      'Calcula tu finiquito en segundos: el cálculo de finiquito suma la indemnización por años de servicio, las vacaciones proporcionales y el aviso previo según la causal de término, con las reglas de la Dirección del Trabajo.',
+      'Usa esta calculadora de finiquito para estimar en segundos lo que te deben pagar: la indemnización por años de servicio, las vacaciones proporcionales y el aviso previo según la causal de término, con las reglas de la Dirección del Trabajo.',
     slug: 'calculadora-finiquito',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-20',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'DT — plazo y pago del finiquito',
@@ -290,6 +291,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'SUSESO — Art. 168',
         url: 'https://www.suseso.gob.cl/612/w3-propertyvalue-69859.html',
         note: 'Recargos judiciales por despido injustificado',
+      },
+      {
+        name: 'DT — indemnización por años de servicio y sus topes',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html',
+        note: 'Art. 163: 30 días por año, tope 11 años',
+      },
+      {
+        name: 'DT — tope de 90 UF (art. 172)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
+        note: 'UF del último día del mes anterior al pago',
       },
     ],
     keywords: [
@@ -468,7 +479,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué son las vacaciones proporcionales?',
         answer:
-          'Las vacaciones proporcionales son los días de feriado legal que te corresponden por el tiempo trabajado en el año en que terminas tu contrato. Se calculan dividiendo los 15 días hábiles de vacaciones anuales entre 12 meses, dando 1.25 días por mes trabajado. Se pagan junto con el finiquito.',
+          'Las vacaciones proporcionales son los días de feriado legal que te corresponden por el tiempo trabajado en el año en que terminas tu contrato. Se calculan dividiendo los 15 días hábiles de vacaciones anuales entre 12 meses, dando 1,25 días por mes trabajado. Se pagan junto con el finiquito.',
       },
       {
         question: '¿Tengo derecho a indemnización si renuncio?',
@@ -1075,7 +1086,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-20',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'SII — Valores UTM y UTA 2026',
@@ -1134,6 +1145,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Cómo se calcula una multa en UTM?',
         answer:
           'Para calcular una multa expresada en UTM, multiplica la cantidad de UTM por el valor vigente del mes. Por ejemplo, una multa de 1,5 UTM equivale a 1,5 veces el valor UTM mostrado en esta página. Nuestra calculadora hace esta conversión automáticamente.',
+      },
+      {
+        question: '¿Cuál es el valor de la UTA?',
+        // Generada desde el snapshot de la UTM; el SII define UTA = UTM × 12 (utm2026.htm).
+        // Sin mes: el snapshot puede conservar una UTM anterior con fecha nueva si falla la fuente.
+        answer: `La UTA (Unidad Tributaria Anual) equivale a 12 UTM, según el SII. Por ejemplo, con una UTM de ${formatCLP(UTM.valor)}, la UTA es ${formatCLP(UTA_2026)}. El valor vigente de la UTM aparece al inicio de esta página.`,
       },
     ],
   },

@@ -499,7 +499,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'sueldo-liquido': {
-      const brutos = [553_553, 800_000, 1_200_000];
+      const brutos = [500_000, 553_553, 610_000, 750_000, 800_000, 1_200_000];
       const rows = brutos.map((sueldoBruto) => {
         const r = calculateSueldoLiquido({
           sueldoBruto,
@@ -517,7 +517,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Calculadora de sueldo líquido: de bruto a líquido',
+        h1: 'Calcular sueldo líquido: calculadora de bruto a líquido',
         lead: 'El sueldo líquido es el bruto menos las cotizaciones del trabajador: 10% de AFP más la comisión de tu AFP, 7% de salud, 0,6% de seguro de cesantía en contrato indefinido y el impuesto único si la renta supera el tramo exento.',
         example: {
           caption:
