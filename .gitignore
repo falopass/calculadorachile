@@ -51,6 +51,10 @@ next-env.d.ts
 .grok/
 .opencode/
 opencode.json
+.devin/
+
+# Archivos de trabajo locales (auditorías, scratch)
+tmp/
 
 # Google Search Console exports (varios nombres de carpeta)
 https___calculadorachile.cl_-Performance-on-Search-*
