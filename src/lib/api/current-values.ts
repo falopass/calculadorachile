@@ -23,6 +23,12 @@ export interface ValuesResponse {
   /** Paridad EUR/CLP (Euro observado). */
   euro: number;
   updatedAt: string;
+  /**
+   * Día (AAAA-MM-DD, America/Santiago) al que corresponde `uf` según la
+   * fuente que lo entregó (el del snapshot si cayó al respaldo). Opcional
+   * y aditivo: los consumidores anteriores lo ignoran.
+   */
+  ufFecha?: string;
   /** Fuente "predominante" (la que entregó UF). Compatible con la API anterior. */
   source: ValuesSource;
   /** Detalle por campo: útil para diagnóstico. */
@@ -120,6 +126,17 @@ export function normalizeIndicatorDate(
 }
 
 /**
+ * Día calendario en America/Santiago ('AAAA-MM-DD') de una fecha de
+ * indicador ya normalizada con `normalizeIndicatorDate`.
+ */
+export function fechaIndicadorSantiago(date: string | undefined): string | undefined {
+  if (!date) return undefined;
+  const d = new Date(date);
+  if (Number.isNaN(d.getTime())) return undefined;
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Santiago' }).format(d);
+}
+
+/**
  * Obtiene UF, UTM, dólar y euro con la misma estrategia del route
  * handler: BCentral (si hay credenciales) → Mindicador → fallback.
  *
@@ -199,6 +216,10 @@ export async function getCurrentValues(): Promise<CurrentValues> {
     console.error('[values-alert]', JSON.stringify({ ...health, sources: freshness }));
   }
 
+  const ufDate = normalizeIndicatorDate(
+    pickDate(uf.source, bcentral.fechas.uf, mindicador.fechas.uf),
+  );
+
   return {
     values: {
       uf: uf.value,
@@ -209,15 +230,14 @@ export async function getCurrentValues(): Promise<CurrentValues> {
       },
       euro: euro.value,
       updatedAt: new Date().toISOString(),
+      ufFecha: fechaIndicadorSantiago(ufDate),
       // La "fuente predominante" sigue la del UF, que es la más visible.
       source: uf.source,
       freshness,
       health,
     },
     dates: {
-      uf: normalizeIndicatorDate(
-        pickDate(uf.source, bcentral.fechas.uf, mindicador.fechas.uf),
-      ),
+      uf: ufDate,
       utm: normalizeIndicatorDate(
         pickDate(utm.source, bcentral.fechas.utm, mindicador.fechas.utm),
       ),

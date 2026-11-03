@@ -306,7 +306,7 @@ export function indemnizacionToResults(result: IndemnizacionResult): CalculatorR
             source: { name: 'Dirección del Trabajo, ORD. 296 (art. 168)', url: DT_ORD_296_URL },
           }
         : {
-            text: `Estimación con la UF ${fechaUF(result.ufFecha) ? `del ${fechaUF(result.ufFecha)}` : 'de hoy'}. La ley usa la UF del último día del mes anterior al pago para el tope de ${result.topeUF} UF.`,
+            text: `Estimación con la UF ${fechaUF(result.ufFecha) ? `del ${fechaUF(result.ufFecha)}` : 'vigente'}. La ley usa la UF del último día del mes anterior al pago para el tope de ${result.topeUF} UF.`,
             source: { name: 'Dirección del Trabajo', url: DT_TOPE_URL },
           },
     },

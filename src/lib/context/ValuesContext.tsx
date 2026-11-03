@@ -11,6 +11,8 @@ export interface ValuesContextType {
   loading: boolean;
   source: ValuesSource;
   lastUpdated: string | null;
+  /** Día (AAAA-MM-DD) al que corresponde `uf`, si se conoce. */
+  ufFecha?: string;
 }
 
 const ValuesContext = createContext<ValuesContextType | null>(null);
@@ -23,9 +25,9 @@ const ValuesContext = createContext<ValuesContextType | null>(null);
  * innecesarios en blog, legales y FAQ.
  */
 export function ValuesProvider({ children }: { children: ReactNode }) {
-  const { uf, utm, dolar, loading, lastUpdated, source } = useLiveValues();
+  const { uf, utm, dolar, loading, lastUpdated, source, ufFecha } = useLiveValues();
   return (
-    <ValuesContext.Provider value={{ uf, utm, dolar, loading, source, lastUpdated }}>
+    <ValuesContext.Provider value={{ uf, utm, dolar, loading, source, lastUpdated, ufFecha }}>
       {children}
     </ValuesContext.Provider>
   );

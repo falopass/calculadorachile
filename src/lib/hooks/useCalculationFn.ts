@@ -5,11 +5,6 @@ import { loadCalculationFn, type CalculateFn } from '@/lib/calculations/load-cal
 import { useValues } from '@/lib/context/ValuesContext';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
 
-/** Hoy en America/Santiago como 'AAAA-MM-DD'. */
-function hoySantiago(): string {
-  return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Santiago' }).format(new Date());
-}
-
 /**
  * Carga perezosa del adaptador de cálculo de una calculadora del
  * catálogo, con UF/UTM en vivo inyectados desde `useValues()`.
@@ -21,11 +16,12 @@ export function useCalculationFn(calculatorId: string): {
   calculateFn: CalculateFn | null;
   missing: boolean;
 } {
-  const { uf, utm, source, loading } = useValues();
+  const { uf, utm, source, loading, ufFecha: ufFechaApi } = useValues();
   // Fecha de la UF inyectada: la del snapshot si /api/values cayó al respaldo
-  // (o aún no responde); si no, la UF del día (BCentral o Mindicador).
+  // (o aún no responde); si no, la que informa la API para esa UF. Nunca se
+  // supone "hoy": sin fecha informada, no se muestra fecha.
   const ufFecha =
-    loading || source === 'fallback' ? FALLBACK_VALUES.asOf.split('T')[0] : hoySantiago();
+    loading || source === 'fallback' ? FALLBACK_VALUES.asOf.split('T')[0] : ufFechaApi;
   const [calculateFn, setCalculateFn] = useState<CalculateFn | null>(null);
   const [missing, setMissing] = useState(false);
 

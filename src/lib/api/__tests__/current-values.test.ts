@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeIndicatorDate } from '../current-values';
+import { fechaIndicadorSantiago, normalizeIndicatorDate } from '../current-values';
 import {
   isLiveValueFresh,
   buildLiveValueTitle,
@@ -68,5 +68,24 @@ describe('fecha normalizada + vigencia/título', () => {
         NOW,
       ),
     ).toBe(false);
+  });
+});
+
+// Fix 03-11-2026 (#70): /api/values informa el día de la UF para que el
+// formulario de indemnización no la atribuya a "hoy".
+
+describe('fechaIndicadorSantiago', () => {
+  it('BCentral "solo día" normalizado conserva el día', () => {
+    expect(fechaIndicadorSantiago(normalizeIndicatorDate('2026-11-03'))).toBe('2026-11-03');
+  });
+  it('instante de Mindicador (03:00Z) es el mismo día en Santiago', () => {
+    expect(fechaIndicadorSantiago('2026-11-03T03:00:00.000Z')).toBe('2026-11-03');
+  });
+  it('UF atrasada de Mindicador conserva su propio día, no el de hoy', () => {
+    expect(fechaIndicadorSantiago('2026-11-07T03:00:00.000Z')).toBe('2026-11-07');
+  });
+  it('sin fecha o inválida → undefined', () => {
+    expect(fechaIndicadorSantiago(undefined)).toBeUndefined();
+    expect(fechaIndicadorSantiago('x')).toBeUndefined();
   });
 });
