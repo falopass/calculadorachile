@@ -12,6 +12,8 @@ export interface LiveValues {
   loading: boolean;
   error: string | null;
   lastUpdated: string | null;
+  /** Día (AAAA-MM-DD) al que corresponde `uf`, si la API lo informa. */
+  ufFecha?: string;
   source: ValuesSource;
   /** Detalle por campo: útil para diagnóstico. */
   freshness?: {
@@ -55,6 +57,7 @@ export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
         utm: number;
         dolar: { observado: number; venta: number };
         updatedAt: string;
+        ufFecha?: string;
         source: ValuesSource;
         freshness?: LiveValues['freshness'];
       };
@@ -65,6 +68,7 @@ export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
         loading: false,
         error: null,
         lastUpdated: json.updatedAt,
+        ufFecha: json.ufFecha,
         source: json.source,
         freshness: json.freshness,
       });

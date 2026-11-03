@@ -1407,12 +1407,13 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         defaultValue: 'art161',
         options: [
           { value: 'art161', label: 'Necesidades de la empresa o desahucio (art. 161)' },
-          { value: 'art159', label: 'Fin de plazo, obra, mutuo acuerdo u otra del art. 159' },
+          { value: 'art159', label: 'Mutuo acuerdo, fin de plazo, fin de obra u otra del art. 159 (no renuncia)' },
+          { value: 'renuncia', label: 'Renuncia voluntaria (art. 159 N° 2)' },
           { value: 'art160', label: 'Causal disciplinaria del art. 160' },
           { value: 'art171', label: 'Autodespido o despido indirecto (art. 171)' },
         ],
         tooltip:
-          'Por ley, solo el art. 161 da indemnización por años de servicio. Con las demás causales corresponde solo si un juez declara el despido injustificado o acoge el autodespido.',
+          'Por ley, solo el art. 161 da indemnización por años de servicio. Con las demás causales corresponde solo si un juez declara el despido injustificado o acoge el autodespido. La renuncia no da indemnización, ni sustitutiva, ni recargo.',
       },
       {
         id: 'avisoPrevio30Dias',

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { loadCalculationFn, type CalculateFn } from '@/lib/calculations/load-calculator';
 import { useValues } from '@/lib/context/ValuesContext';
+import { FALLBACK_VALUES } from '@/lib/values/fallback';
 
 /**
  * Carga perezosa del adaptador de cálculo de una calculadora del
@@ -15,7 +16,12 @@ export function useCalculationFn(calculatorId: string): {
   calculateFn: CalculateFn | null;
   missing: boolean;
 } {
-  const { uf, utm } = useValues();
+  const { uf, utm, source, loading, ufFecha: ufFechaApi } = useValues();
+  // Fecha de la UF inyectada: la del snapshot si /api/values cayó al respaldo
+  // (o aún no responde); si no, la que informa la API para esa UF. Nunca se
+  // supone "hoy": sin fecha informada, no se muestra fecha.
+  const ufFecha =
+    loading || source === 'fallback' ? FALLBACK_VALUES.asOf.split('T')[0] : ufFechaApi;
   const [calculateFn, setCalculateFn] = useState<CalculateFn | null>(null);
   const [missing, setMissing] = useState(false);
 
@@ -33,6 +39,7 @@ export function useCalculationFn(calculatorId: string): {
     loadCalculationFn(calculatorId, {
       valorUF: uf > 0 ? uf : undefined,
       valorUTM: utm > 0 ? utm : undefined,
+      ufFecha,
     })
       .then((fn) => {
         if (cancelled) return;
@@ -53,7 +60,7 @@ export function useCalculationFn(calculatorId: string): {
     return () => {
       cancelled = true;
     };
-  }, [calculatorId, uf, utm]);
+  }, [calculatorId, uf, utm, ufFecha]);
 
   return { calculateFn, missing };
 }

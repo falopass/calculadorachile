@@ -10,11 +10,23 @@ import { añosArt163SinTope, calcularAñosIndemnizacion } from './finiquito';
 /**
  * Causal de término que declara la persona.
  * - art161: necesidades de la empresa o desahucio (da derecho a indemnización por ley).
- * - art159: vencimiento del plazo, conclusión de la obra, mutuo acuerdo, renuncia, etc.
+ * - art159: mutuo acuerdo, vencimiento del plazo, conclusión de la obra u otra
+ *   del art. 159, salvo la renuncia (N° 1, 3, 4, 5 y 6).
+ * - renuncia: art. 159 N° 2. Es un acto del trabajador: no da indemnización por
+ *   años de servicio, ni sustitutiva del aviso, ni recargo (DT, art. 163).
  * - art160: causales disciplinarias (falta de probidad, abandono, incumplimiento grave, etc.).
  * - art171: autodespido o despido indirecto (requiere demanda y sentencia favorable).
  */
-export type CausalIndemnizacion = 'art161' | 'art159' | 'art160' | 'art171';
+export type CausalIndemnizacion = 'art161' | 'art159' | 'renuncia' | 'art160' | 'art171';
+
+/** Causales válidas, en el orden del selector. */
+export const CAUSALES_INDEMNIZACION: readonly CausalIndemnizacion[] = [
+  'art161',
+  'art159',
+  'renuncia',
+  'art160',
+  'art171',
+];
 
 export type RecargoIndemnizacion = 0 | 30 | 50 | 80 | 100;
 
@@ -46,6 +58,8 @@ export interface IndemnizacionInput {
   recargoPct?: RecargoIndemnizacion;
   /** UF en vivo (UI). Default: snapshot `UF.valor`. */
   valorUF?: number;
+  /** Fecha (AAAA-MM-DD o ISO) de la UF usada, para mostrarla junto al tope. */
+  ufFecha?: string;
 }
 
 export interface IndemnizacionResult {
@@ -69,6 +83,13 @@ export interface IndemnizacionResult {
   correspondePorLey: boolean;
   /** true si el monto depende de una sentencia (recargo, 159/160 o 171). */
   requiereSentencia: boolean;
+  /**
+   * true en el autodespido (art. 171) sin simular la sentencia: no se asume
+   * que el juez acoge la demanda; se muestra solo la base de cálculo.
+   */
+  pendienteSentencia: boolean;
+  /** Fecha de la UF usada (AAAA-MM-DD), si se conoce. */
+  ufFecha?: string;
   topeDias: number;
   topeUF: number;
   topeMonto: number;
@@ -79,6 +100,8 @@ export interface IndemnizacionResult {
 export const RECARGOS_PERMITIDOS: Record<CausalIndemnizacion, RecargoIndemnizacion[]> = {
   art161: [RECARGO_ART_168.necesidades_empresa as RecargoIndemnizacion],
   art159: [RECARGO_ART_168.causal_no_demostrada as RecargoIndemnizacion],
+  // Art. 159 N° 2: la renuncia no da recargo (ni indemnización).
+  renuncia: [0],
   art160: [
     RECARGO_ART_168.falta_probidad as RecargoIndemnizacion,
     RECARGO_ART_168.aplicacion_indebida as RecargoIndemnizacion,
@@ -124,7 +147,10 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
     simularSentencia = false,
   } = input;
 
-  const valorUF = input.valorUF ?? UF.valor;
+  // Sin UF en vivo se usa el snapshot, con su fecha.
+  const usaSnapshot = !(input.valorUF && input.valorUF > 0);
+  const valorUF = usaSnapshot ? UF.valor : (input.valorUF as number);
+  const ufFecha = usaSnapshot ? UF.fecha_actualizacion : input.ufFecha;
 
   // Base de cálculo: sueldo + gratificación mensual + otros pagos mensuales (art. 172).
   const baseCalculo =
@@ -138,9 +164,11 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
   const baseTopeada = Math.min(baseCalculo, topeMonto);
 
   // ¿Corresponde por ley sin juicio? Solo art. 161.
-  // Art. 171 siempre requiere sentencia; art. 159/160 solo con sentencia.
-  const conSentencia = causal === 'art171' ? true : simularSentencia;
+  // Art. 159/160/171: solo si se simula que un juez da la razón al trabajador.
+  // Renuncia (art. 159 N° 2): nunca, ni con sentencia simulada.
+  const conSentencia = causal !== 'renuncia' && simularSentencia;
   const correspondePorLey = causal === 'art161' || conSentencia;
+  const pendienteSentencia = causal === 'art171' && !simularSentencia;
 
   const añosIndemnizables = correspondePorLey
     ? calcularAñosIndemnizacion(añosTrabajados, mesesTrabajados)
@@ -184,7 +212,9 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
     totalAPagar,
     causal,
     correspondePorLey,
-    requiereSentencia: conSentencia,
+    requiereSentencia: conSentencia || pendienteSentencia,
+    pendienteSentencia,
+    ufFecha,
     topeDias,
     topeUF,
     topeMonto: Math.round(topeMonto),
@@ -195,11 +225,60 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
 const DT_DERECHO_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html';
 const DT_ORD_296_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-114437.html';
 const DT_TOPE_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html';
+const DT_AUTODESPIDO_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60579.html';
+
+/** 'AAAA-MM-DD' o ISO → 'DD-MM-AAAA' sin correr el día por zona horaria. */
+function fechaUF(fecha: string | undefined): string | null {
+  const m = fecha?.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${m[3]}-${m[2]}-${m[1]}` : null;
+}
+
+function topeRow(result: IndemnizacionResult): CalculatorResult {
+  const fecha = fechaUF(result.ufFecha);
+  return {
+    label: fecha ? `Tope (${result.topeUF} UF, UF del ${fecha})` : `Tope (${result.topeUF} UF)`,
+    value: result.topeMonto,
+    format: 'CLP',
+  };
+}
 
 /**
  * Convierte el resultado a formato de CalculatorResult[]
  */
 export function indemnizacionToResults(result: IndemnizacionResult): CalculatorResult[] {
+  if (result.causal === 'renuncia') {
+    return [
+      {
+        label: 'Indemnización por renuncia',
+        value: 0,
+        format: 'CLP',
+        highlight: true,
+        note: {
+          text: 'La renuncia (art. 159 N° 2) no da derecho a indemnización por años de servicio, ni a indemnización sustitutiva del aviso previo, ni a recargo, salvo que tu contrato o un contrato colectivo la pacten. Sí te corresponden el feriado proporcional y lo que se te adeude en el finiquito.',
+          source: { name: 'Dirección del Trabajo', url: DT_DERECHO_URL },
+        },
+      },
+    ];
+  }
+
+  if (result.pendienteSentencia) {
+    const baseTopeada = Math.min(result.baseCalculo, result.topeMonto);
+    return [
+      {
+        label: 'Base de cálculo (remuneración mensual con tope)',
+        value: baseTopeada,
+        format: 'CLP',
+        highlight: true,
+        note: {
+          text: 'En el autodespido (art. 171) el monto depende de lo que resuelva el juez: si acoge la demanda, ordena pagar la sustitutiva del aviso previo y la indemnización por años de servicio con un recargo de 50% u 80%; si la rechaza, no hay indemnización. Marca la opción de simular la sentencia para ver cuánto sería si el juez te da la razón.',
+          source: { name: 'Dirección del Trabajo, autodespido (art. 171)', url: DT_AUTODESPIDO_URL },
+        },
+      },
+      { label: 'Último sueldo', value: result.ultimoSueldo, format: 'CLP' },
+      topeRow(result),
+    ];
+  }
+
   if (!result.correspondePorLey) {
     return [
       {
@@ -227,7 +306,7 @@ export function indemnizacionToResults(result: IndemnizacionResult): CalculatorR
             source: { name: 'Dirección del Trabajo, ORD. 296 (art. 168)', url: DT_ORD_296_URL },
           }
         : {
-            text: `Estimación con la UF de hoy. La ley usa la UF del último día del mes anterior al pago para el tope de ${result.topeUF} UF.`,
+            text: `Estimación con la UF ${fechaUF(result.ufFecha) ? `del ${fechaUF(result.ufFecha)}` : 'vigente'}. La ley usa la UF del último día del mes anterior al pago para el tope de ${result.topeUF} UF.`,
             source: { name: 'Dirección del Trabajo', url: DT_TOPE_URL },
           },
     },
@@ -260,7 +339,7 @@ export function indemnizacionToResults(result: IndemnizacionResult): CalculatorR
     { label: 'Años indemnizables', value: result.añosIndemnizables, format: 'number' },
     { label: 'Base de cálculo', value: result.baseCalculo, format: 'CLP' },
     { label: 'Último sueldo', value: result.ultimoSueldo, format: 'CLP' },
-    { label: `Tope (${result.topeUF} UF)`, value: result.topeMonto, format: 'CLP' },
+    topeRow(result),
   );
 
   return rows;

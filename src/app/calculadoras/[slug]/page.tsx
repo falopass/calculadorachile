@@ -16,6 +16,7 @@ import { buildPageMetadata } from '@/lib/seo/metadata';
 import { getGuiaForCalculator } from '@/lib/seo/calculator-guia-map';
 import { getCurrentValues, type CurrentValues } from '@/lib/api/current-values';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
+import { LIVE_UF_QUICK_ANSWER_SLUGS, ufParaRespuestaRapida } from '@/lib/values/quick-answer-uf';
 import { formatCLP } from '@/lib/formatters';
 import {
   buildLiveValueTitle,
@@ -52,9 +53,9 @@ const LIVE_SLUG_KIND: Record<string, LiveKind> = {
   'calculadora-conversor-divisas': 'dolar',
 };
 
-/** Valores en vivo solo para los slugs de LIVE_SLUG_KIND; nunca lanza. */
+/** Valores en vivo solo para LIVE_SLUG_KIND y LIVE_UF_QUICK_ANSWER_SLUGS; nunca lanza. */
 async function getLiveContext(slug: string): Promise<CurrentValues | null> {
-  if (!(slug in LIVE_SLUG_KIND)) return null;
+  if (!(slug in LIVE_SLUG_KIND) && !LIVE_UF_QUICK_ANSWER_SLUGS.has(slug)) return null;
   try {
     return await getCurrentValues();
   } catch {
@@ -301,16 +302,21 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
           formatDDMMYYYY(new Date(indicator.date)) === formatDDMMYYYY(new Date());
       }
     }
+  } else if (LIVE_UF_QUICK_ANSWER_SLUGS.has(calculator.slug)) {
+    // Solo la UF (y su fecha) para la respuesta rápida; sin bloque de valor en vivo.
+    live = await getLiveContext(calculator.slug);
   }
 
   // Quick answer (answer-first) para las calculadoras hero. Las páginas
-  // sin valor en vivo usan el snapshot local: cero fetches extra.
+  // sin valor en vivo usan el snapshot local (cero fetches extra), salvo
+  // LIVE_UF_QUICK_ANSWER_SLUGS, que usan la UF del día con el snapshot de respaldo.
+  const ufQA = ufParaRespuestaRapida(live);
   const quickAnswer = getQuickAnswer(calculator.id, {
-    uf: live?.values.uf ?? FALLBACK_VALUES.uf,
+    uf: ufQA.uf,
     utm: live?.values.utm ?? FALLBACK_VALUES.utm,
     utmFecha: live?.dates.utm ?? FALLBACK_VALUES.asOf,
     utmFresca,
-    ufFecha: live?.dates.uf ?? FALLBACK_VALUES.asOf,
+    ufFecha: ufQA.ufFecha,
     ufFresca,
   });
 

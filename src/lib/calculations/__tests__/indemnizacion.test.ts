@@ -5,7 +5,7 @@
 // ============================================
 
 import { describe, it, expect } from 'vitest';
-import { calculateIndemnizacion } from '../indemnizacion';
+import { calculateIndemnizacion, indemnizacionToResults } from '../indemnizacion';
 import { UF, INDEMNIZACION } from '@/lib/values/constants';
 
 describe('calculateIndemnizacion', () => {
@@ -167,8 +167,8 @@ describe('E-026: causal, aviso previo y recargos', () => {
     expect(r.recargoPct).toBe(30);
   });
 
-  it('autodespido (art. 171) siempre requiere sentencia y usa 50% u 80%', () => {
-    const r = calculateIndemnizacion({ ...base, causal: 'art171', recargoPct: 50 });
+  it('autodespido (art. 171) con la sentencia simulada usa 50% u 80%', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art171', simularSentencia: true, recargoPct: 50 });
     expect(r.requiereSentencia).toBe(true);
     expect(r.recargoPct).toBe(50);
     expect(r.indemnizacionAvisoPrevio).toBe(900_000);
@@ -180,3 +180,71 @@ describe('E-026: causal, aviso previo y recargos', () => {
   });
 });
 
+
+describe('fix 03-11-2026 (Devin Review de #68)', () => {
+  const base = { ultimoSueldo: 900_000, añosTrabajados: 5, mesesTrabajados: 7, incluyeGratificacion: false };
+
+  it('art. 171 sin simular la sentencia: no asume que el juez da la razón; muestra la base y el aviso', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art171', simularSentencia: false, recargoPct: 80 });
+    expect(r.pendienteSentencia).toBe(true);
+    expect(r.correspondePorLey).toBe(false);
+    expect(r.recargoPct).toBe(0);
+    expect(r.recargoMonto).toBe(0);
+    expect(r.indemnizacionAvisoPrevio).toBe(0);
+    expect(r.indemnizacionTotal).toBe(0);
+    expect(r.totalAPagar).toBe(0);
+    const rows = indemnizacionToResults(r);
+    expect(rows[0].highlight).toBe(true);
+    expect(rows[0].value).toBe(900_000);
+    expect(rows[0].note?.text).toMatch(/depende de lo que resuelva el juez/);
+    expect(rows.some((x) => /Recargo|Total si el juez/.test(x.label))).toBe(false);
+
+    // Con la simulación encendida sí calcula sustitutiva + años + recargo.
+    const s = calculateIndemnizacion({ ...base, causal: 'art171', simularSentencia: true, recargoPct: 80 });
+    expect(s.pendienteSentencia).toBe(false);
+    expect(s.totalAPagar).toBe(5_400_000 + 900_000 + 5_400_000 * 0.8);
+  });
+
+  it('renuncia (art. 159 N° 2): $0 aun simulando sentencia, sin sustitutiva ni recargo, con explicación', () => {
+    for (const simularSentencia of [false, true]) {
+      const r = calculateIndemnizacion({
+        ...base,
+        causal: 'renuncia',
+        simularSentencia,
+        avisoPrevio30Dias: false,
+        recargoPct: 50,
+      });
+      expect(r.totalAPagar).toBe(0);
+      expect(r.indemnizacionTotal).toBe(0);
+      expect(r.indemnizacionAvisoPrevio).toBe(0);
+      expect(r.recargoMonto).toBe(0);
+      expect(r.recargoPct).toBe(0);
+      const rows = indemnizacionToResults(r);
+      expect(rows).toHaveLength(1);
+      expect(rows[0].value).toBe(0);
+      expect(rows[0].note?.text).toMatch(/renuncia \(art\. 159 N° 2\) no da derecho/i);
+    }
+  });
+
+  it('mutuo acuerdo, fin de plazo y fin de obra (art. 159 N° 1, 4 y 5): sin sentencia no hay recargo del art. 168', () => {
+    const r = calculateIndemnizacion({ ...base, causal: 'art159', simularSentencia: false, recargoPct: 50 });
+    expect(r.recargoPct).toBe(0);
+    expect(r.recargoMonto).toBe(0);
+    expect(r.totalAPagar).toBe(0);
+    // Solo si un juez declara injustificada la causal del art. 159 corre el 50% (art. 168 letra b).
+    const s = calculateIndemnizacion({ ...base, causal: 'art159', simularSentencia: true, recargoPct: 80 });
+    expect(s.recargoPct).toBe(50);
+  });
+
+  it('tope de 90 UF con la UF inyectada y su fecha; sin UF en vivo usa el snapshot con su fecha', () => {
+    const r = calculateIndemnizacion({ ...base, valorUF: 40_000, ufFecha: '2026-11-03' });
+    expect(r.topeMonto).toBe(90 * 40_000);
+    const tope = indemnizacionToResults(r).find((x) => x.label.startsWith('Tope'));
+    expect(tope?.label).toBe('Tope (90 UF, UF del 03-11-2026)');
+    expect(tope?.value).toBe(3_600_000);
+
+    const snap = calculateIndemnizacion({ ...base });
+    expect(snap.topeMonto).toBe(Math.round(90 * UF.valor));
+    expect(snap.ufFecha).toBe(UF.fecha_actualizacion);
+  });
+});
