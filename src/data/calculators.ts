@@ -249,12 +249,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'finiquito',
     name: 'Finiquito',
     description:
-      'Calcula tu finiquito en segundos: el cálculo de finiquito suma la indemnización por años de servicio, las vacaciones proporcionales y el aviso previo según la causal de término, con las reglas de la Dirección del Trabajo.',
+      'Usa esta calculadora de finiquito para estimar en segundos lo que te deben pagar: la indemnización por años de servicio, las vacaciones proporcionales y el aviso previo según la causal de término, con las reglas de la Dirección del Trabajo.',
     slug: 'calculadora-finiquito',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-20',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'DT — plazo y pago del finiquito',
@@ -275,6 +275,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'SUSESO — Art. 168',
         url: 'https://www.suseso.gob.cl/612/w3-propertyvalue-69859.html',
         note: 'Recargos judiciales por despido injustificado',
+      },
+      {
+        name: 'DT — indemnización por años de servicio y sus topes',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html',
+        note: 'Art. 163: 30 días por año, tope 11 años',
+      },
+      {
+        name: 'DT — tope de 90 UF (art. 172)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
+        note: 'UF del último día del mes anterior al pago',
       },
     ],
     keywords: [
@@ -453,7 +463,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué son las vacaciones proporcionales?',
         answer:
-          'Las vacaciones proporcionales son los días de feriado legal que te corresponden por el tiempo trabajado en el año en que terminas tu contrato. Se calculan dividiendo los 15 días hábiles de vacaciones anuales entre 12 meses, dando 1.25 días por mes trabajado. Se pagan junto con el finiquito.',
+          'Las vacaciones proporcionales son los días de feriado legal que te corresponden por el tiempo trabajado en el año en que terminas tu contrato. Se calculan dividiendo los 15 días hábiles de vacaciones anuales entre 12 meses, dando 1,25 días por mes trabajado. Se pagan junto con el finiquito.',
       },
       {
         question: '¿Tengo derecho a indemnización si renuncio?',
