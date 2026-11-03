@@ -13,6 +13,7 @@ import {
   BCN_LEY_19973,
   BCN_LEY_20299,
   BCN_LEY_20663,
+  BCN_LEY_20768,
   BCN_LEY_20983,
   BCN_LEY_21357,
   BCN_LEY_2977,
@@ -141,7 +142,7 @@ ${hayPendientes ? '<p>Esta tabla se actualizará cuando se confirmen las fechas 
       html: `<p>Estos feriados rigen solo en su territorio y no cuentan como feriados nacionales:</p>
 <ul>
 ${FERIADOS_REGIONALES_2027.map(
-  (r) => `<li><strong>${conDia(r.fecha)}</strong>: ${r.territorio} (${a(r.url, r.norma === 'Ley 20.663' ? 'Ley 20.663' : 'gob.cl')}).</li>`,
+  (r) => `<li><strong>${conDia(r.fecha)}</strong>: ${r.territorio} (${a(r.url, r.norma)}).</li>`,
 ).join('\n')}
 </ul>`,
     },
@@ -149,7 +150,7 @@ ${FERIADOS_REGIONALES_2027.map(
       id: 'feriados-y-vacaciones',
       title: '¿Cómo afectan los feriados a tus vacaciones?',
       level: 2,
-      html: `<p>Las vacaciones se cuentan en días hábiles: los domingos y feriados no se descuentan, y el sábado siempre se considera inhábil para el feriado legal (${a(DT_VACACIONES_ART_67_70, 'DT, arts. 67 a 70 del Código del Trabajo')}). Por eso, si tus vacaciones incluyen un feriado, se alargan en un día corrido. La <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> usa esta misma lista de feriados.</p>`,
+      html: `<p>Las vacaciones se cuentan en días hábiles: los domingos y feriados no se descuentan, y el sábado siempre se considera inhábil para el feriado legal (${a(DT_VACACIONES_ART_67_70, 'DT, arts. 67 a 70 del Código del Trabajo')}). Por eso, si tus vacaciones incluyen un feriado que cae de lunes a viernes, se alargan en un día corrido. Un feriado que cae sábado o domingo no agrega días, porque esos días ya no se descuentan. La <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> usa esta misma lista de feriados.</p>`,
     },
     {
       id: 'preguntas-frecuentes',
@@ -179,6 +180,7 @@ ${
     { label: 'BCN, Ley 20.299 (Iglesias Evangélicas)', url: BCN_LEY_20299 },
     { label: 'BCN, Ley 21.357 (Pueblos Indígenas)', url: BCN_LEY_21357 },
     { label: 'BCN, Ley 20.663 (Arica y Parinacota)', url: BCN_LEY_20663 },
+    { label: 'BCN, Ley 20.768 (Chillán y Chillán Viejo)', url: BCN_LEY_20768 },
     { label: 'gob.cl, Feriados 2026 (feriados regionales)', url: GOB_FERIADOS_2026 },
   ],
 };

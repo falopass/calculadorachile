@@ -17,6 +17,7 @@ export const BCN_LEY_20983 = 'https://www.bcn.cl/leychile/navegar?idNorma=109838
 export const BCN_LEY_20299 = 'https://www.bcn.cl/leychile/navegar?idNorma=279294';
 export const BCN_LEY_21357 = 'https://www.bcn.cl/leychile/navegar?idNorma=1161743';
 export const BCN_LEY_20663 = 'https://www.bcn.cl/leychile/navegar?idNorma=1050508';
+export const BCN_LEY_20768 = 'https://www.bcn.cl/leychile/navegar?idNorma=1065534';
 export const DT_TRASLADO_LUNES = 'https://www.dt.gob.cl/portal/1628/w3-article-60252.html';
 export const DT_IRRENUNCIABLES = 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html';
 export const GOB_FERIADOS_2026 =
@@ -88,7 +89,7 @@ export const FERIADOS_2027: Feriado[] = [
 
 export const FERIADOS_REGIONALES_2027: FeriadoRegional[] = [
   { fecha: '2027-06-07', territorio: 'Región de Arica y Parinacota', norma: 'Ley 20.663', url: BCN_LEY_20663 },
-  { fecha: '2027-08-20', territorio: 'comunas de Chillán y Chillán Viejo', norma: 'Ley 20.768', url: GOB_FERIADOS_2026 },
+  { fecha: '2027-08-20', territorio: 'comunas de Chillán y Chillán Viejo', norma: 'Ley 20.768', url: BCN_LEY_20768 },
 ];
 
 /**
