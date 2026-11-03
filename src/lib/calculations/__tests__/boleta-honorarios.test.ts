@@ -1,13 +1,14 @@
 // ============================================
 // Tests de boleta de honorarios (Ley 21.133 — calendario retención)
 // ----------------------------------------------
-// Verifica calendario de tasas 2025-2028, exención bajo 10 UTM,
+// Verifica calendario de tasas 2025-2028, que no hay exención (E-028),
 // y que líquido = bruto - retención (sin doble descuento).
 // ============================================
 
 import { describe, it, expect } from 'vitest';
 import { calculateBoletaHonorarios } from '../boleta-honorarios';
 import { UTM, RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import { anioEnCalendario, contextoHonorarios } from '@/lib/values/honorarios-anio';
 
 describe('calculateBoletaHonorarios', () => {
   it('2026: aplica retención 15,25%', () => {
@@ -24,15 +25,46 @@ describe('calculateBoletaHonorarios', () => {
     expect(tasas).toEqual([14.5, 15.25, 16, 17]);
   });
 
-  it('exento: monto bajo 10 UTM no retiene', () => {
-    const limiteCLP = Math.floor(10 * UTM.valor) - 1;
-    const r = calculateBoletaHonorarios({
-      montoBruto: limiteCLP,
-      ano: 2026,
-    });
-    expect(r.exento).toBe(true);
-    expect(r.retencion).toBe(0);
-    expect(r.montoLiquido).toBe(limiteCLP);
+  it('E-028: sin exención de 10 UTM — montos bajos también retienen', () => {
+    const bajo10UTM = Math.floor(10 * UTM.valor) - 1;
+    const r = calculateBoletaHonorarios({ montoBruto: bajo10UTM, ano: 2026 });
+    expect(r.retencion).toBe(Math.round(bajo10UTM * 0.1525));
+    const r100 = calculateBoletaHonorarios({ montoBruto: 100_000, ano: 2026 });
+    expect(r100.retencion).toBe(15_250);
+    expect(r100.montoLiquido).toBe(84_750);
+    const r500 = calculateBoletaHonorarios({ montoBruto: 500_000, ano: 2027 });
+    expect(r500.retencion).toBe(80_000);
+    expect(r500.montoLiquido).toBe(420_000);
+  });
+
+  it('E-028: líquido a bruto = líquido ÷ (1 − tasa)', () => {
+    const tasa = RETENCION_HONORARIOS_CALENDARIO[2027] / 100;
+    expect(Math.round(84_000 / (1 - tasa))).toBe(100_000);
+  });
+
+  it('E-028: año por fecha en Chile (diciembre → selector del año siguiente)', () => {
+    // 15-11-2026 12:00 Chile
+    const nov = contextoHonorarios(new Date('2026-11-15T15:00:00Z'));
+    expect(nov.anio).toBe(2026);
+    expect(nov.anioSelector).toBe(2026);
+    expect(nov.modoCambioDeAnio).toBe(false);
+    // 01-12-2026 00:30 Chile (todavía 01-12 03:30 UTC)
+    const dic = contextoHonorarios(new Date('2026-12-01T03:30:00Z'));
+    expect(dic.modoCambioDeAnio).toBe(true);
+    expect(dic.anioSelector).toBe(2027);
+    // 31-12-2026 22:00 Chile = 01-01-2027 01:00 UTC: sigue siendo 2026 en Chile
+    const fin = contextoHonorarios(new Date('2027-01-01T01:00:00Z'));
+    expect(fin.anio).toBe(2026);
+    // 2027: tasa 16%
+    const ene = contextoHonorarios(new Date('2027-01-10T15:00:00Z'));
+    expect(ene.anio).toBe(2027);
+    expect(ene.tasa).toBe(16);
+    expect(ene.modoCambioDeAnio).toBe(false);
+    // dic-2028: no hay 2029 en el calendario → sin modo cambio de año
+    const dic28 = contextoHonorarios(new Date('2028-12-10T15:00:00Z'));
+    expect(dic28.modoCambioDeAnio).toBe(false);
+    expect(dic28.anioSelector).toBe(2028);
+    expect(anioEnCalendario(2031)).toBe(2028);
   });
 
   it('NO descuenta cotizaciones adicionales fuera de la retención', () => {
@@ -84,7 +116,6 @@ describe('calculateBoletaHonorarios', () => {
   });
 
   it('desgloseCotizaciones solo controla UI, no el líquido', () => {
-    // Monto sobre 10 UTM para no estar exento
     const monto = 1_000_000;
     const a = calculateBoletaHonorarios({
       montoBruto: monto,
@@ -96,7 +127,6 @@ describe('calculateBoletaHonorarios', () => {
       ano: 2026,
       desgloseCotizaciones: true,
     });
-    expect(a.exento).toBe(false);
     expect(a.montoLiquido).toBe(b.montoLiquido);
     expect(a.mostrarDesglose).toBe(false);
     expect(b.mostrarDesglose).toBe(true);

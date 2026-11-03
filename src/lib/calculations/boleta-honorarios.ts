@@ -4,12 +4,12 @@
 
 import {
   BOLETA_HONORARIOS,
-  UTM,
   UF,
   RETENCION_HONORARIOS_CALENDARIO,
   RETENCION_HONORARIOS_DISTRIBUCION,
   type AnioRetencionHonorarios,
 } from '@/lib/values/constants';
+import { contextoHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BoletaHonorariosInput {
@@ -27,7 +27,7 @@ export interface BoletaHonorariosInput {
   calcularCostoEmpleador?: boolean;
   /** UF en vivo (UI). Default: snapshot `UF.valor`. */
   valorUF?: number;
-  /** UTM en vivo (UI). Default: snapshot `UTM.valor`. */
+  /** UTM en vivo (UI). Ya no se usa en el cálculo (no existe exención de 10 UTM). */
   valorUTM?: number;
 }
 
@@ -37,7 +37,6 @@ export interface BoletaHonorariosResult {
   retencion: number;
   /** Monto efectivo que recibe el trabajador (bruto - retención). */
   montoLiquido: number;
-  exento: boolean;
   tasaRetencion: number;
   ano: number;
   mostrarDesglose: boolean;
@@ -66,14 +65,18 @@ export interface BoletaHonorariosResult {
  * financia cotizaciones que se liquidan en la Operación Renta.
  * El trabajador recibe `bruto − retención`.
  *
- * Tasas anuales (SII, aumento gradual Ley 21.133):
- *   2025: 14,5%   2026: 15,25%   2027: 16%   2028: 17%
+ * Tasas anuales: RETENCION_HONORARIOS_CALENDARIO (SII, aumento gradual Ley 21.133).
+ *
+ * E-028: se eliminó la "exención bajo 10 UTM". No existe en el SII: el
+ * monto mínimo de una boleta es $1 (FAQ 001.140.2667.010) y no hay monto
+ * mínimo de PPM (FAQ 001.140.2668.012). Toda boleta lleva la tasa del año,
+ * como retención del receptor o como PPM del emisor.
  */
 export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaHonorariosResult {
   const {
     montoBruto,
     retencionAutomatica = true,
-    ano = 2026,
+    ano = contextoHonorarios().anio,
     desgloseCotizaciones = false,
     moneda = 'CLP',
     calcularPPM = false,
@@ -86,14 +89,9 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   const tasaRetencion = RETENCION_HONORARIOS_CALENDARIO[ano] ?? BOLETA_HONORARIOS.tasa_total;
 
   const valorUF = input.valorUF ?? UF.valor;
-  const valorUTM = input.valorUTM ?? UTM.valor;
 
-  // Exento bajo 10 UTM mensuales
-  const limiteExento = BOLETA_HONORARIOS.exento_minimo * valorUTM;
-  const exento = monto <= limiteExento;
-
-  // Retención efectiva
-  const retencion = retencionAutomatica && !exento ? monto * (tasaRetencion / 100) : 0;
+  // Retención efectiva (sin exención: no existe un monto exento en el SII).
+  const retencion = retencionAutomatica ? monto * (tasaRetencion / 100) : 0;
 
   // Monto líquido = bruto − retención. Las cotizaciones se financian con
   // la retención dentro del proceso de Operación Renta; no se descuentan
@@ -103,21 +101,13 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   const distribucion =
     RETENCION_HONORARIOS_DISTRIBUCION[ano as AnioRetencionHonorarios] ??
     RETENCION_HONORARIOS_DISTRIBUCION[2026];
-  const desgloseRetencion = exento
-    ? {
-        impuestoRenta: 0,
-        afp: 0,
-        salud: 0,
-        seguroInvalidezSobrevivencia: 0,
-        accidentesTrabajo: 0,
-      }
-    : {
-        impuestoRenta: Math.round(monto * (distribucion.impuesto_renta / 100)),
-        afp: Math.round(monto * (distribucion.afp / 100)),
-        salud: Math.round(monto * (distribucion.salud / 100)),
-        seguroInvalidezSobrevivencia: Math.round(monto * (distribucion.sis / 100)),
-        accidentesTrabajo: Math.round(monto * (distribucion.accidentes_trabajo / 100)),
-      };
+  const desgloseRetencion = {
+    impuestoRenta: Math.round(monto * (distribucion.impuesto_renta / 100)),
+    afp: Math.round(monto * (distribucion.afp / 100)),
+    salud: Math.round(monto * (distribucion.salud / 100)),
+    seguroInvalidezSobrevivencia: Math.round(monto * (distribucion.sis / 100)),
+    accidentesTrabajo: Math.round(monto * (distribucion.accidentes_trabajo / 100)),
+  };
 
   const ppmAsociado = calcularPPM
     ? Math.round(monto * (distribucion.impuesto_renta / 100))
@@ -130,10 +120,9 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
     montoBruto: Math.round(monto),
     retencion: Math.round(retencion),
     montoLiquido: Math.round(montoLiquido),
-    exento,
     tasaRetencion,
     ano,
-    mostrarDesglose: Boolean(desgloseCotizaciones) && !exento,
+    mostrarDesglose: Boolean(desgloseCotizaciones),
     desgloseRetencion,
     ppmAsociado,
     costoEmpleador,
@@ -160,13 +149,7 @@ export function boletaHonorariosToResults(result: BoletaHonorariosResult): Calcu
     format: 'CLP',
   });
 
-  if (result.exento) {
-    results.push({
-      label: 'Retención',
-      value: 0,
-      format: 'CLP',
-    });
-  } else {
+  {
     results.push({
       label: `Retención ${result.ano} (${result.tasaRetencion}%)`,
       value: result.retencion,

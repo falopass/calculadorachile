@@ -475,9 +475,12 @@ export const IVA = {
 export const BOLETA_HONORARIOS = {
   tasa_base: 10,
   tasa_adicional: 5.25,
-  /** Tasa total 2026 según Ley 21.133 (calendario 14,5% → 17%). */
+  /**
+   * Tasa de respaldo si el año no está en el calendario. El cálculo usa
+   * RETENCION_HONORARIOS_CALENDARIO[año]. (E-028: se quitó `exento_minimo`,
+   * una exención de 10 UTM que no existe en el SII.)
+   */
   tasa_total: 15.25,
-  exento_minimo: 10, // UTM mensuales
   /** Calendario completo Ley 21.133 (retención honorarios / cotizaciones independientes). */
   calendario: {
     2025: 14.5,

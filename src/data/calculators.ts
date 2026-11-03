@@ -9,6 +9,9 @@ import { formatCLP } from '@/lib/formatters';
 import { INDEMNIZACION, RECARGO_ART_168, RECARGO_ART_171, UF } from '@/lib/values/constants';
 import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
+import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import { contextoHonorarios, formatTasa, type AnioHonorarios } from '@/lib/values/honorarios-anio';
 
 // E-026: cifras de indemnización generadas desde las constantes (nunca a mano).
 const IND = {
@@ -26,6 +29,18 @@ const IND = {
 
 // E-014: FAQ del tope generada desde las constantes.
 const TOPE_GRATIFICACION = topeGratificacion();
+
+// E-028: año, tasas y ejemplos de honorarios generados desde el calendario y la fecha (Chile).
+// Se calculan al cargar el módulo: ver la nota de redespliegue del 01-12 y el 01-01 en el PR.
+const HON = contextoHonorarios();
+const HON_ANIOS = Object.keys(RETENCION_HONORARIOS_CALENDARIO).map(Number) as AnioHonorarios[];
+const HON_CALENDARIO_TXT = HON_ANIOS.map(
+  (a) => `${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])} (${a})`,
+).join(', ');
+const honEjemplo = (bruto: number, ano: AnioHonorarios) => {
+  const r = calculateBoletaHonorarios({ montoBruto: bruto, ano });
+  return `$${bruto.toLocaleString('es-CL')} bruto → ${formatCLP(r.retencion)} de retención → ${formatCLP(r.montoLiquido)} líquidos`;
+};
 
 const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   {
@@ -956,14 +971,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
   {
     id: 'boleta-honorarios',
-    name: 'Boleta de Honorarios 2026',
-    description:
-      'Calcula la retención de boleta de honorarios (calendario Ley 21.133: 15,25% en 2026), monto líquido y desglose informativo. Sin doble descuento de cotizaciones.',
+    name: HON.modoCambioDeAnio
+      ? `Boleta de Honorarios ${HON.anio} y ${HON.siguiente}`
+      : `Boleta de Honorarios ${HON.anio}`,
+    description: `Calcula la retención de la boleta de honorarios (Ley 21.133: ${formatTasa(HON.tasa)} en ${HON.anio}${
+      HON.siguiente ? ` y ${formatTasa(HON.tasaSiguiente!)} en ${HON.siguiente}` : ''
+    }) y el monto líquido, de bruto a líquido y de líquido a bruto.`,
     slug: 'calculadora-boleta-honorarios',
     category: 'impuestos',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-16',
+    lastReviewed: '2026-11-03',
     sources: [
       {
         name: 'SII — Boletas de honorarios',
@@ -976,6 +994,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         note: 'Calendario % por año (Ley 21.133)',
       },
       {
+        name: 'SII — Tasa de retención según el año de emisión (FAQ 001.140.3611)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_3611.htm',
+        note: '15,25% en el año comercial 2026 (FAQ actualizada el 08-04-2026)',
+      },
+      {
+        name: 'SII — Monto mínimo de una boleta de honorarios (FAQ 001.140.2667)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_2667.htm',
+        note: 'El mínimo es $1: no hay exención de 10 UTM (FAQ actualizada el 07-09-2026)',
+      },
+      {
         name: 'SII — Cotizaciones independientes',
         url: 'https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html',
         note: 'La retención financia cotizaciones en Operación Renta',
@@ -985,7 +1013,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'boleta de honorarios',
       'retención honorarios',
       'impuesto independientes',
-      '15.25% retención',
+      `retención honorarios ${HON.anio}`,
       'honorarios Chile',
     ],
     inputs: [
@@ -1003,25 +1031,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         label: 'Año de la boleta',
         type: 'select',
         required: true,
-        options: [
-          { value: '2025', label: '2025 (14,5%)' },
-          { value: '2026', label: '2026 (15,25%)' },
-          { value: '2027', label: '2027 (16%)' },
-          { value: '2028', label: '2028 (17%)' },
-        ],
-        defaultValue: '2026',
+        options: HON_ANIOS.map((a) => ({
+          value: String(a),
+          label: `${a} (${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])})`,
+        })),
+        defaultValue: String(HON.anioSelector),
         tooltip:
-          'Calendario de retención gradual (Ley 21.133). El % se aplica sobre el bruto de la boleta.',
+          'La tasa es la del año en que se emite la boleta, no la del año en que hiciste el trabajo (SII). El % se aplica sobre el bruto.',
       },
-      {
-        id: 'incluyeCotizaciones',
-        label: '¿Mostrar desglose de la retención? (informativo)',
-        type: 'boolean',
-        required: false,
-        defaultValue: false,
-        tooltip:
-          'No descuenta nada extra. Solo estima cómo se reparte la retención (impuesto/AFP/salud/SIS). El líquido sigue siendo bruto − retención.',
-      },
+      // E-028: toggles «desglose» y «componente PPM» ocultos (reparto SIN VERIFICAR). El código
+      // de cálculo se conserva; load-calculator los fuerza a false.
       {
         id: 'moneda',
         label: 'Mostrar también en UF',
@@ -1034,13 +1053,6 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         defaultValue: 'CLP',
       },
       {
-        id: 'calcularPPM',
-        label: '¿Estimar componente PPM (impuesto renta)?',
-        type: 'boolean',
-        required: false,
-        defaultValue: false,
-      },
-      {
         id: 'calcularCostoEmpleador',
         label: '¿Mostrar costo del pagador (bruto)?',
         type: 'boolean',
@@ -1051,8 +1063,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     faq: [
       {
         question: '¿Cuánto es la retención de boleta de honorarios?',
-        answer:
-          'En 2026 la retención es 15,25% del monto bruto (calendario de la Ley 21.133, no de la 21.578 de ingreso mínimo). Sube gradualmente hasta 17% en 2028. El emisor recibe el bruto menos esa retención.',
+        answer: `En ${HON.anio} la retención es ${formatTasa(HON.tasa)} del monto bruto${
+          HON.siguiente ? ` y en ${HON.siguiente} será ${formatTasa(HON.tasaSiguiente!)}` : ''
+        } (calendario de la Ley 21.133). La tasa es la del año en que se emite la boleta. Quien la emite recibe el bruto menos esa retención.`,
       },
       {
         question: '¿La retención ya incluye cotizaciones previsionales?',
@@ -1061,13 +1074,14 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         question: '¿Cuál es la diferencia entre monto bruto y líquido?',
-        answer:
-          'Bruto = valor del servicio. Líquido = bruto − retención del año. Ejemplo 2026: $1.000.000 bruto → $152.500 de retención → $847.500 líquidos.',
+        answer: `Bruto = valor del servicio. Líquido = bruto − retención del año. Ejemplo ${HON.anioSelector}: ${honEjemplo(
+          1_000_000,
+          HON.anioSelector,
+        )}. Para ir de líquido a bruto, divide el líquido por (1 − tasa).`,
       },
       {
         question: '¿Cómo cambia la retención por año?',
-        answer:
-          'Según el SII: 14,5% (2025), 15,25% (2026), 16% (2027), 17% (2028). Elige el año de emisión de la boleta.',
+        answer: `Según el SII: ${HON_CALENDARIO_TXT}. Elige el año de emisión de la boleta.`,
       },
       {
         question: '¿Qué es el PPM en este contexto?',
