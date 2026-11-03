@@ -162,7 +162,9 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
     : 0;
   const recargoMonto = indemnizacionAnios * (recargoPct / 100);
 
-  const totalAPagar = indemnizacionAnios + indemnizacionAvisoPrevio + recargoMonto;
+  // El total es la suma de los componentes ya redondeados, para que cuadre con el desglose.
+  const totalAPagar =
+    Math.round(indemnizacionAnios) + Math.round(indemnizacionAvisoPrevio) + Math.round(recargoMonto);
 
   const aplicaTope =
     añosArt163SinTope(añosTrabajados, mesesTrabajados) > INDEMNIZACION.tope_años ||
@@ -179,7 +181,7 @@ export function calculateIndemnizacion(input: IndemnizacionInput): Indemnizacion
     indemnizacionAvisoPrevio: Math.round(indemnizacionAvisoPrevio),
     recargoMonto: Math.round(recargoMonto),
     recargoPct,
-    totalAPagar: Math.round(totalAPagar),
+    totalAPagar,
     causal,
     correspondePorLey,
     requiereSentencia: conSentencia,
