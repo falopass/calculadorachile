@@ -189,11 +189,21 @@ export async function loadCalculationFn(
       const { calculateReajusteArriendo, reajusteArriendoToResults } =
         await import('./reajuste-arriendo');
       return (inputs) => {
+        const mesInicial =
+          typeof inputs.mesInicial === 'string' && inputs.mesInicial.trim()
+            ? inputs.mesInicial.trim()
+            : undefined;
+        const mesFinal =
+          typeof inputs.mesFinal === 'string' && inputs.mesFinal.trim()
+            ? inputs.mesFinal.trim()
+            : undefined;
         const result = calculateReajusteArriendo({
           arriendoActual: coerceNumber(inputs.arriendoActual),
           arriendoEnUF: coerceBool(inputs.arriendoEnUF),
-          variacionIPC: coerceNumber(inputs.variacionIPC),
-          mesesDesdeUltimoReajuste: coerceNumber(inputs.mesesDesdeUltimoReajuste),
+          variacionIPC: coerceNumber(inputs.variacionIPC, 0),
+          mesesDesdeUltimoReajuste: coerceNumber(inputs.mesesDesdeUltimoReajuste, 12),
+          mesInicial,
+          mesFinal,
         });
         return reajusteArriendoToResults(result);
       };
@@ -271,7 +281,9 @@ export async function loadCalculationFn(
         await import('./boleta-honorarios');
       return (inputs) => {
         const anoNum = coerceNumber(inputs.ano, contextoHonorarios().anioSelector);
+        const modo = inputs.modo === 'liquido-a-bruto' ? 'liquido-a-bruto' : 'bruto-a-liquido';
         const result = calculateBoletaHonorarios({
+          modo,
           montoBruto: coerceNumber(inputs.montoBruto),
           ano: anioEnCalendario(anoNum),
           // E-028: desglose y PPM ocultos en la UI (reparto SIN VERIFICAR); se fuerzan a false.
@@ -900,6 +912,132 @@ export async function loadCalculationFn(
           notaAprobacion: coerceNumber(inputs.notaAprobacion),
         });
         return notaEscalaToResults(result);
+      };
+    }
+
+    case 'puntaje-nem-ranking': {
+      const { calculatePuntajeNemRanking, puntajeNemRankingToResults } =
+        await import('./puntaje-nem-ranking');
+      return (inputs) => {
+        const p1 = coerceNumber(inputs.prom1);
+        const p2 = coerceNumber(inputs.prom2);
+        const p3 = coerceNumber(inputs.prom3);
+        const p4 = coerceNumber(inputs.prom4);
+        if (p1 === 0 && p2 === 0 && p3 === 0 && p4 === 0) return [];
+        const grupo = inputs.grupoNem === 'b' || inputs.grupoNem === 'c' ? inputs.grupoNem : 'a';
+        const result = calculatePuntajeNemRanking({
+          grupoNem: grupo,
+          prom1: p1,
+          prom2: p2,
+          prom3: p3,
+          prom4: p4,
+          promColegio: coerceNumber(inputs.promColegio) || undefined,
+          maxColegio: coerceNumber(inputs.maxColegio) || undefined,
+        });
+        return puntajeNemRankingToResults(result);
+      };
+    }
+
+    case 'semana-corrida': {
+      const { calculateSemanaCorrida, semanaCorridaToResults } = await import('./semana-corrida');
+      return (inputs) => {
+        const result = calculateSemanaCorrida({
+          remuneracionVariableSemanal: coerceNumber(inputs.remuneracionVariableSemanal),
+          diasDebioTrabajar: coerceNumber(inputs.diasDebioTrabajar, 5),
+          domingosYFestivos: coerceNumber(inputs.domingosYFestivos, 1),
+          semanasMes: coerceNumber(inputs.semanasMes, 1),
+          sueldoBaseSemanalOpcional: coerceNumber(inputs.sueldoBaseSemanalOpcional, 0),
+        });
+        return semanaCorridaToResults(result);
+      };
+    }
+
+    case 'ipc': {
+      const { calculateIPC, ipcToResults } = await import('./ipc');
+      return (inputs) => {
+        const mesInicial =
+          typeof inputs.mesInicial === 'string' && inputs.mesInicial
+            ? inputs.mesInicial
+            : '2025-09';
+        const mesFinal =
+          typeof inputs.mesFinal === 'string' && inputs.mesFinal ? inputs.mesFinal : '2026-09';
+        const result = calculateIPC({
+          monto: coerceNumber(inputs.monto, 0),
+          mesInicial,
+          mesFinal,
+        });
+        return ipcToResults(result);
+      };
+    }
+
+    case 'dias-habiles': {
+      const { calculateDiasHabiles, diasHabilesToResults } = await import('./dias-habiles');
+      return (inputs) => {
+        const modo = inputs.modo === 'sumar-dias' ? 'sumar-dias' : 'entre-fechas';
+        const fechaInicio = typeof inputs.fechaInicio === 'string' ? inputs.fechaInicio.trim() : '';
+        const fechaFin = typeof inputs.fechaFin === 'string' ? inputs.fechaFin.trim() : '';
+        const diasASumar = coerceNumber(inputs.diasASumar, 0);
+        if (!fechaInicio) return [];
+        if (modo === 'entre-fechas' && !fechaFin) return [];
+        if (modo === 'sumar-dias' && diasASumar < 1) return [];
+        const result = calculateDiasHabiles({
+          modo,
+          fechaInicio,
+          fechaFin: fechaFin || undefined,
+          diasASumar: diasASumar || undefined,
+          incluirSabados: coerceBool(inputs.incluirSabados),
+        });
+        return diasHabilesToResults(result);
+      };
+    }
+
+    case 'credito-consumo': {
+      const { calculateCreditoConsumo, creditoConsumoToResults } =
+        await import('./credito-consumo');
+      return (inputs) => {
+        const result = calculateCreditoConsumo({
+          montoCredito: coerceNumber(inputs.montoCredito),
+          tasaMensual: coerceNumber(inputs.tasaMensual),
+          plazoMeses: coerceNumber(inputs.plazoMeses),
+          gastosOperacionales: coerceNumber(inputs.gastosOperacionales, 0),
+          valorUF: live?.valorUF,
+        });
+        return creditoConsumoToResults(result);
+      };
+    }
+
+    case 'interes-compuesto': {
+      const { calculateInteresCompuesto, interesCompuestoToResults } =
+        await import('./interes-compuesto');
+      return (inputs) => {
+        const frec = inputs.frecuencia;
+        const frecuencia =
+          frec === 'trimestral' || frec === 'semestral' || frec === 'anual' ? frec : 'mensual';
+        const result = calculateInteresCompuesto({
+          capitalInicial: coerceNumber(inputs.capitalInicial),
+          tasaAnual: coerceNumber(inputs.tasaAnual),
+          anos: coerceNumber(inputs.anos),
+          frecuencia,
+          aporteMensual: coerceNumber(inputs.aporteMensual, 0),
+        });
+        return interesCompuestoToResults(result);
+      };
+    }
+
+    case 'deposito-a-plazo': {
+      const { calculateDepositoAPlazo, depositoAPlazoToResults } =
+        await import('./deposito-a-plazo');
+      return (inputs) => {
+        const result = calculateDepositoAPlazo({
+          monto: coerceNumber(inputs.monto),
+          moneda: inputs.moneda === 'UF' ? 'UF' : 'CLP',
+          tasaPeriodo: coerceNumber(inputs.tasaPeriodo),
+          tipoTasa: inputs.tipoTasa === 'anual' ? 'anual' : 'mensual',
+          plazoDias: coerceNumber(inputs.plazoDias, 30),
+          renovaciones: coerceNumber(inputs.renovaciones, 0),
+          valorUF: live?.valorUF,
+        });
+        return depositoAPlazoToResults(result);
       };
     }
 

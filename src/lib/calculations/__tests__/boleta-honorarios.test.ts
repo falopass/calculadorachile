@@ -6,7 +6,7 @@
 // ============================================
 
 import { describe, it, expect } from 'vitest';
-import { calculateBoletaHonorarios } from '../boleta-honorarios';
+import { calculateBoletaHonorarios, boletaHonorariosToResults } from '../boleta-honorarios';
 import { UTM, RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import { anioEnCalendario, contextoHonorarios } from '@/lib/values/honorarios-anio';
 
@@ -130,5 +130,73 @@ describe('calculateBoletaHonorarios', () => {
     expect(a.montoLiquido).toBe(b.montoLiquido);
     expect(a.mostrarDesglose).toBe(false);
     expect(b.mostrarDesglose).toBe(true);
+  });
+});
+
+describe('calculateBoletaHonorarios — modo liquido-a-bruto (E-039)', () => {
+  it('2026 (15,25%): líquido $84.750 → bruto $100.000', () => {
+    const r = calculateBoletaHonorarios({
+      montoBruto: 84_750,
+      ano: 2026,
+      modo: 'liquido-a-bruto',
+    });
+    expect(r.modo).toBe('liquido-a-bruto');
+    expect(r.tasaRetencion).toBe(15.25);
+    expect(r.montoBruto).toBe(100_000);
+    expect(r.retencion).toBe(15_250);
+    expect(r.montoLiquido).toBe(84_750);
+  });
+
+  it('2027 (16%): líquido $84.000 → bruto $100.000', () => {
+    const r = calculateBoletaHonorarios({
+      montoBruto: 84_000,
+      ano: 2027,
+      modo: 'liquido-a-bruto',
+    });
+    expect(r.tasaRetencion).toBe(16);
+    expect(r.montoBruto).toBe(100_000);
+    expect(r.retencion).toBe(16_000);
+    expect(r.montoLiquido).toBe(84_000);
+  });
+
+  it('ida y vuelta: bruto calculado devuelve el líquido original ±$1', () => {
+    for (const ano of [2026, 2027] as const) {
+      for (const liquido of [50_000, 84_000, 84_750, 123_456, 500_000, 999_999, 1_234_567]) {
+        const ida = calculateBoletaHonorarios({
+          montoBruto: liquido,
+          ano,
+          modo: 'liquido-a-bruto',
+        });
+        const vuelta = calculateBoletaHonorarios({ montoBruto: ida.montoBruto, ano });
+        expect(Math.abs(vuelta.montoLiquido - liquido)).toBeLessThanOrEqual(1);
+      }
+    }
+  });
+
+  it('sin retención automática el bruto a emitir es el monto ingresado', () => {
+    const r = calculateBoletaHonorarios({
+      montoBruto: 100_000,
+      ano: 2027,
+      modo: 'liquido-a-bruto',
+      retencionAutomatica: false,
+    });
+    expect(r.montoBruto).toBe(100_000);
+    expect(r.retencion).toBe(0);
+    expect(r.montoLiquido).toBe(100_000);
+  });
+
+  it('toResults destaca el bruto a emitir y conserva la etiqueta de retención', () => {
+    const r = calculateBoletaHonorarios({
+      montoBruto: 84_000,
+      ano: 2027,
+      modo: 'liquido-a-bruto',
+    });
+    const results = boletaHonorariosToResults(r);
+    expect(results[0].label).toBe('Monto Bruto (a emitir en la boleta)');
+    expect(results[0].highlight).toBe(true);
+    expect(results[0].value).toBe(100_000);
+    expect(results[1].label).toBe('Monto Líquido (a recibir)');
+    expect(results[1].value).toBe(84_000);
+    expect(results[2].label).toBe('Retención 2027 (16%)');
   });
 });

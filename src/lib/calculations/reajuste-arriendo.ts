@@ -3,19 +3,37 @@
 // ============================================
 
 import { UF } from '@/lib/values/constants';
+import {
+  IPC_FUENTE_URL,
+  ipcIndiceMes,
+  variacionIpcEntreMeses,
+} from '@/lib/values/ipc-serie';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface ReajusteArriendoInput {
   arriendoActual: number;
   arriendoEnUF: boolean;
-  /** Variación IPC anual en porcentaje. */
-  variacionIPC: number;
+  /**
+   * Variación IPC anual en porcentaje (modo manual). Si se entregan
+   * `mesInicial` + `mesFinal` válidos se usa la serie oficial INE y
+   * este valor se ignora.
+   */
+  variacionIPC?: number;
   /**
    * Meses desde el último reajuste. La Ley 18.101 / 21.461 permite
    * reajustar máximo cada 6 meses (en arriendos en CLP) y prorrateado
    * según el período transcurrido.
    */
   mesesDesdeUltimoReajuste: number;
+  /**
+   * Mes inicial 'YYYY-MM' de la serie INE base 2023=100 (opcional).
+   * Si junto a `mesFinal` ambos existen en `IPC_SERIE_2023`, el
+   * reajuste usa el factor real de la serie en vez del prorrateo
+   * lineal del IPC anual.
+   */
+  mesInicial?: string;
+  /** Mes final 'YYYY-MM' de la serie INE base 2023=100 (opcional). */
+  mesFinal?: string;
 }
 
 export interface ReajusteArriendoResult {
@@ -31,6 +49,14 @@ export interface ReajusteArriendoResult {
   valorUF: number;
   /** Indicador para la UI: si está en UF, no se aplica IPC adicional. */
   motivoSinReajuste?: string;
+  /** Mes inicial usado cuando el factor vino de la serie INE. */
+  mesInicial?: string;
+  /** Mes final usado cuando el factor vino de la serie INE. */
+  mesFinal?: string;
+  /** Índice INE del mes inicial (base 2023=100), si se usó la serie. */
+  indiceIpcInicial?: number;
+  /** Índice INE del mes final (base 2023=100), si se usó la serie. */
+  indiceIpcFinal?: number;
 }
 
 /**
@@ -51,7 +77,14 @@ export interface ReajusteArriendoResult {
 export function calculateReajusteArriendo(
   input: ReajusteArriendoInput,
 ): ReajusteArriendoResult {
-  const { arriendoActual, arriendoEnUF, variacionIPC, mesesDesdeUltimoReajuste } = input;
+  const {
+    arriendoActual,
+    arriendoEnUF,
+    mesesDesdeUltimoReajuste,
+    mesInicial,
+    mesFinal,
+  } = input;
+  let variacionIPC = input.variacionIPC ?? 0;
 
   const valorUF = UF.valor;
   const meses = Math.max(0, Math.min(mesesDesdeUltimoReajuste, 24));
@@ -61,6 +94,7 @@ export function calculateReajusteArriendo(
 
   let factorReajuste = 1;
   let motivoSinReajuste: string | undefined;
+  let variacionSerieIne: ReturnType<typeof variacionIpcEntreMeses> | undefined;
 
   if (arriendoEnUF) {
     // En UF: la UF ya se ajusta por IPC del mes anterior. NO se suma
@@ -69,6 +103,18 @@ export function calculateReajusteArriendo(
     factorReajuste = 1;
     motivoSinReajuste =
       'El arriendo en UF se reajusta automáticamente con la variación diaria de la UF.';
+  } else if (
+    mesInicial !== undefined &&
+    mesFinal !== undefined &&
+    ipcIndiceMes(mesInicial) !== undefined &&
+    ipcIndiceMes(mesFinal) !== undefined
+  ) {
+    // Serie oficial INE (base 2023=100): factor real entre los índices
+    // de ambos meses, sin prorrateo lineal. Reemplaza al IPC anual
+    // manual siempre que ambos meses existan en la serie.
+    variacionSerieIne = variacionIpcEntreMeses(mesInicial, mesFinal);
+    factorReajuste = variacionSerieIne.factor;
+    variacionIPC = Math.round(variacionSerieIne.variacionExactaPct * 100) / 100;
   } else {
     // En CLP: proporcional al tiempo transcurrido. La ley permite
     // reajustar como máximo cada 6 meses; si han pasado menos meses,
@@ -99,6 +145,14 @@ export function calculateReajusteArriendo(
     incrementoPorcentual: Math.round(incrementoPorcentual * 100) / 100,
     valorUF,
     motivoSinReajuste,
+    ...(variacionSerieIne && mesInicial && mesFinal
+      ? {
+          mesInicial,
+          mesFinal,
+          indiceIpcInicial: variacionSerieIne.indiceInicial,
+          indiceIpcFinal: variacionSerieIne.indiceFinal,
+        }
+      : {}),
   };
 }
 
@@ -140,6 +194,14 @@ export function reajusteArriendoToResults(
       label: 'Variación IPC',
       value: result.variacionIPC,
       format: 'percentage',
+      ...(result.mesInicial && result.mesFinal
+        ? {
+            note: {
+              text: `Serie oficial del INE (base 2023=100), ${result.mesInicial} → ${result.mesFinal}.`,
+              source: { name: 'INE — Calculadora del IPC', url: IPC_FUENTE_URL },
+            },
+          }
+        : {}),
     },
     {
       label: 'Meses desde último reajuste',

@@ -119,6 +119,7 @@ const CATEGORY_FALLBACK: Partial<Record<Calculator['category'], string>> = {
  */
 const SIN_GUIA_PILLAR = new Set([
   'calculadora-puntaje-ponderado-paes',
+  'calculadora-puntaje-nem-ranking',
   'calculadora-promedio-notas',
   'calculadora-escala-notas',
 ]);
