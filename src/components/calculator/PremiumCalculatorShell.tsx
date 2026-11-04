@@ -56,6 +56,12 @@ const ORGANISMO_BY_ID: Record<string, string> = {
   'escala-notas': 'tu establecimiento según su reglamento de evaluación',
   'puntaje-ponderado-paes': 'la Universidad de Chile (DEMRE) y la universidad a la que postulas',
   'puntaje-nem-ranking': 'la Universidad de Chile (DEMRE) y la universidad a la que postulas',
+  'semana-corrida': 'la Dirección del Trabajo',
+  'ipc': 'el Instituto Nacional de Estadísticas (INE)',
+  'dias-habiles': 'el órgano administrativo o tribunal competente',
+  'credito-consumo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
+  'interes-compuesto': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
+  'deposito-a-plazo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
 };
 
 /** Calculadoras cuyos resultados no son partes de un total (gráfico sin sentido). */
@@ -65,6 +71,7 @@ const SIN_GRAFICO = new Set([
   'puntaje-ponderado-paes',
   'puntaje-nem-ranking',
   'dias-habiles',
+  'ipc',
 ]);
 
 const CALC_DEBOUNCE_MS = 200;

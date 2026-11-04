@@ -1229,4 +1229,184 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Líquido $456.902; costo mensual para el empleador $600.937.',
     },
   },
+  'puntaje-nem-ranking': {
+    summary:
+      'Promedia tus notas de 1° a 4° medio a dos decimales, convierte ese promedio a puntaje de 100 a 1.000 con la tabla oficial del DEMRE 2027 según tu grupo (A, B o C) y estima el puntaje ranking por nivel con los datos históricos de tu colegio (o usa el NEM como estimación conservadora).',
+    calculationSteps: [
+      'Calcula el promedio aritmético de los promedios anuales de 1° a 4° medio ingresados y lo aproxima a dos decimales.',
+      'Busca ese promedio en la tabla oficial de transformación NEM del Proceso de Admisión 2027 para el grupo A, B o C.',
+      'Si ingresas el promedio (PROM) y el máximo (MAX) de las tres generaciones anteriores de tu colegio, calcula el ranking de cada nivel con Ri = PROM + (NEM − PROM)(1000 − PROM)/(MAX − PROM) y promedia los niveles.',
+      'Si no ingresas los datos del colegio, asigna ranking = NEM como estimación conservadora.',
+    ],
+    assumptions: [
+      'El estudiante cursó enseñanza media en la modalidad seleccionada (Grupo A, B o C).',
+      'En cada nivel el puntaje ranking es igual o mayor que el puntaje NEM de ese nivel según las reglas del DEMRE.',
+    ],
+    limitations: [
+      'El promedio y el máximo histórico de cada establecimiento no son públicos en una tabla general: el puntaje ranking oficial lo informa el DEMRE.',
+      'El Nuevo Ranking rige desde el Proceso de Admisión 2028; esta calculadora usa las reglas de la Admisión 2027.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: promedios 6,2 / 6,3 / 6,3 / 6,3 en Grupo A',
+      inputs: ['Modalidad: Grupo A (Científico-Humanista diurno)', 'Promedios 1° a 4° medio: 6,2; 6,3; 6,3; 6,3'],
+      development: [
+        'Promedio exacto = (6,2 + 6,3 + 6,3 + 6,3) ÷ 4 = 6,275 → 6,28',
+        'Tabla NEM 2027 Grupo A para 6,28 = 793 puntos',
+      ],
+      result: 'Promedio NEM 6,28; puntaje NEM 793 puntos; ranking conservador 793 puntos.',
+    },
+  },
+  'semana-corrida': {
+    summary:
+      'Calcula la remuneración por los días domingo y festivos (art. 45 del Código del Trabajo) dividiendo la remuneración variable devengada en la semana por los días que el trabajador legalmente debió laborar y multiplicando ese promedio diario por los domingos y festivos de la semana.',
+    calculationSteps: [
+      'Toma únicamente la remuneración variable devengada día a día en la semana (comisiones, trato), sin el sueldo base ni pagos extraordinarios.',
+      'Divide ese monto por el número de días que legalmente debió trabajar en la semana (1 a 6).',
+      'Multiplica el promedio diario por la cantidad de domingos y festivos de esa semana y redondea al peso.',
+    ],
+    assumptions: [
+      'Las remuneraciones ingresadas corresponden a remuneraciones variables principales y ordinarias que se devengan diariamente.',
+      'No se incluyen gratificaciones, aguinaldos ni bonificaciones extraordinarias.',
+    ],
+    limitations: [
+      'Es una estimación por semana devengada; si en el mes las comisiones varían semana a semana, debe calcularse cada semana por separado.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: $100.000 en comisiones en 5 días con 1 domingo',
+      inputs: ['Variable semanal: $100.000', 'Días que debió trabajar: 5', 'Domingos y festivos: 1'],
+      development: [
+        'Promedio diario = $100.000 ÷ 5 = $20.000',
+        'Semana corrida = $20.000 × 1 = $20.000',
+      ],
+      result: 'Semana corrida: $20.000 (total variable + semana corrida: $120.000).',
+    },
+  },
+  'ipc': {
+    summary:
+      'Calcula la variación porcentual del IPC entre dos meses y reajusta un monto en pesos utilizando el cuociente entre los índices generales de la serie mensual oficial del INE (base anual 2023 = 100).',
+    calculationSteps: [
+      'Obtiene el índice general del IPC del mes inicial y del mes final desde la serie oficial del INE (base 2023 = 100).',
+      'Calcula el factor de reajuste como IPC final ÷ IPC inicial.',
+      'Obtiene la variación porcentual como (IPC final ÷ IPC inicial − 1) × 100 (mostrada a 1 decimal según convención INE y con 2 decimales).',
+      'Multiplica el monto original por el factor de reajuste y redondea al peso.',
+    ],
+    assumptions: [
+      'Para incluir la variación del primer mes del período, el mes inicial seleccionado corresponde al mes inmediatamente anterior (criterio de la Calculadora IPC del INE).',
+    ],
+    limitations: [
+      'Cubre los meses publicados en la serie oficial base anual 2023 = 100 del INE.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: reajustar $100.000 en 12 meses (septiembre 2025 a septiembre 2026)',
+      inputs: ['Monto: $100.000', 'Mes inicial: septiembre 2025 (109,14)', 'Mes final: septiembre 2026 (113,59)'],
+      development: [
+        'Factor = 113,59 ÷ 109,14 = 1,040773',
+        'Variación = (1,040773 − 1) × 100 = 4,1% (4,08% exacta)',
+        'Monto reajustado = $100.000 × 1,040773 = $104.077',
+      ],
+      result: 'Variación IPC: 4,1%; monto reajustado: $104.077.',
+    },
+  },
+  'dias-habiles': {
+    summary:
+      'Cuenta los días hábiles entre dos fechas o proyecta el día de vencimiento al sumar un plazo en días hábiles, aplicando el cómputo administrativo (Ley 19.880 art. 25: inhábiles sábados, domingos y festivos) o judicial (CPC arts. 59 y 66: inhábiles solo domingos y festivos).',
+    calculationSteps: [
+      'Comienza el cómputo el día siguiente a la fecha de inicio (art. 25 de la Ley 19.880).',
+      'Recorre cada día calendario descontando domingos, feriados nacionales de src/lib/feriados.ts y, si el cómputo es administrativo, también los sábados.',
+      'En modo contar entre fechas, suma los días hábiles hasta la fecha de término inclusive.',
+      'En modo sumar días, avanza hasta completar los N días hábiles e informa la fecha exacta de vencimiento.',
+    ],
+    assumptions: [
+      'Se consideran los feriados nacionales de Chile para 2026 y 2027.',
+    ],
+    limitations: [
+      'No incluye feriados regionales ni suspensiones especiales decretadas por un tribunal.',
+      'Los feriados móviles de 2027 marcados como pendientes en el calendario se advierten expresamente en el resultado.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: contar días hábiles administrativos en la semana de Fiestas Patrias 2026',
+      inputs: ['Inicio: 2026-09-14', 'Término: 2026-09-21', 'Sábados hábiles: No'],
+      development: [
+        'Días evaluados (15 al 21 de septiembre): martes 15, miércoles 16 y jueves 17 son hábiles (3)',
+        'Viernes 18 y sábado 19 son feriados; domingo 20 es inhábil; lunes 21 es hábil (+1)',
+      ],
+      result: '4 días hábiles (de 7 días corridos).',
+    },
+  },
+  'credito-consumo': {
+    summary:
+      'Calcula la cuota mensual fija con el sistema de amortización francés, el costo total del crédito y compara la tasa anual nominal (mensual × 12) con la Tasa Máxima Convencional (TMC) vigente publicada por la CMF para el tramo en UF.',
+    calculationSteps: [
+      'Calcula la cuota mensual constante con C = P × i ÷ (1 − (1 + i)^−n), donde i es la tasa mensual en tanto por uno y n el plazo en meses.',
+      'Obtiene el total pagado en cuotas (C × n), los intereses totales (C × n − P) y el costo total sumando los gastos operacionales.',
+      'Convierte el monto del crédito a UF y ubica el tramo de la TMC vigente del certificado CMF (≤50 UF, 50–200 UF, 200–5.000 UF o >5.000 UF).',
+      'Compara la tasa anual nominal lineal (tasa mensual × 12) con la TMC anual del tramo.',
+    ],
+    assumptions: [
+      'Crédito en pesos no reajustable con cuotas mensuales iguales y vencidas.',
+      'Se utiliza el último certificado de la CMF registrado en el repositorio y la UF vigente.',
+    ],
+    limitations: [
+      'La tasa anual nominal mostrada sigue la convención lineal de la Ley 18.010 y no corresponde a la Carga Anual Equivalente de la Ley 20.555.',
+      'No incluye seguros optativos ni impuesto de timbres y estampillas si no los sumas en gastos operacionales.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: $1.000.000 a 12 meses con tasa mensual de 1,5%',
+      inputs: ['Monto: $1.000.000', 'Tasa mensual: 1,5% (18% anual nominal)', 'Plazo: 12 meses'],
+      development: [
+        'Cuota francesa = 1.000.000 × 0,015 ÷ (1 − 1,015^−12) = $91.680',
+        'Total en cuotas = $91.680 × 12 = $1.100.160 (intereses: $100.160)',
+        'Monto ≈ 24,2 UF (tramo ≤50 UF, TMC 41,02% anual): 18% está bajo el máximo legal',
+      ],
+      result: 'Cuota mensual: $91.680; costo total: $1.100.160; dentro del límite TMC.',
+    },
+  },
+  'interes-compuesto': {
+    summary:
+      'Calcula el valor futuro de un capital inicial más aportes periódicos bajo capitalización compuesta mensual, trimestral, semestral o anual.',
+    calculationSteps: [
+      'Convierte la tasa anual nominal a tasa por período de capitalización: i = (tasa anual ÷ 100) ÷ m, con N = m × años períodos.',
+      'Agrupa el aporte mensual según la frecuencia de capitalización: A = aporte mensual × (12 ÷ m).',
+      'Aplica VF = C₀ × (1 + i)^N + A × ((1 + i)^N − 1) ÷ i y separa el total aportado de la ganancia por intereses.',
+    ],
+    assumptions: [
+      'Los aportes periódicos se realizan al final de cada período de capitalización y la tasa se mantiene constante.',
+    ],
+    limitations: [
+      'Es un cálculo matemático referencial: no descuenta impuestos, inflación ni comisiones.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: $1.000.000 al 10% anual con capitalización anual por 2 años',
+      inputs: ['Capital inicial: $1.000.000', 'Tasa anual: 10%', 'Plazo: 2 años, capitalización anual'],
+      development: [
+        'VF = $1.000.000 × (1 + 0,10)² = $1.000.000 × 1,21 = $1.210.000',
+        'Ganancia por intereses = $1.210.000 − $1.000.000 = $210.000',
+      ],
+      result: 'Monto final: $1.210.000; ganancia por intereses: $210.000 (21%).',
+    },
+  },
+  'deposito-a-plazo': {
+    summary:
+      'Simula el retorno de un depósito a plazo fijo o renovable en pesos o UF prorrateando la tasa mensual (base 30 días) o anual (base 360 días) por los días del depósito.',
+    calculationSteps: [
+      'Determina la tasa efectiva del período: (tasa ÷ 100) × (días ÷ 30) si la tasa es mensual, o × (días ÷ 360) si es anual.',
+      'Con k = 1 + renovaciones períodos, calcula el factor acumulado (1 + tasa efectiva)^k.',
+      'Multiplica el monto inicial por el factor para obtener el monto final y los intereses ganados en pesos y en UF.',
+    ],
+    assumptions: [
+      'En los depósitos renovables se mantiene la misma tasa y plazo en cada renovación.',
+    ],
+    limitations: [
+      'Usa la tasa que ingresa el usuario según la oferta de su banco; no incluye impuestos ni variaciones futuras de la UF.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: $1.000.000 a 30 días con tasa mensual de 0,5%',
+      inputs: ['Monto: $1.000.000 CLP', 'Tasa: 0,5% mensual', 'Plazo: 30 días, sin renovaciones'],
+      development: [
+        'Tasa efectiva del período = 0,5% × (30 ÷ 30) = 0,5%',
+        'Intereses = $1.000.000 × 0,005 = $5.000',
+      ],
+      result: 'Intereses ganados: $5.000; monto final a recibir: $1.005.000.',
+    },
+  },
 };

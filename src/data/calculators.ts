@@ -12,6 +12,12 @@ import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
 import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import { contextoHonorarios, formatTasa, type AnioHonorarios } from '@/lib/values/honorarios-anio';
+import {
+  IPC_FUENTE_URL,
+  IPC_METODOLOGIA_URL,
+  IPC_PERIODOS,
+  IPC_ULTIMO_MES,
+} from '@/lib/values/ipc-serie';
 
 // E-026: cifras de indemnización generadas desde las constantes (nunca a mano).
 const IND = {
@@ -1018,8 +1024,19 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
     inputs: [
       {
+        id: 'modo',
+        label: 'Dirección del cálculo',
+        type: 'select',
+        required: true,
+        defaultValue: 'bruto-a-liquido',
+        options: [
+          { value: 'bruto-a-liquido', label: 'De bruto a líquido (sé cuánto cobro en la boleta)' },
+          { value: 'liquido-a-bruto', label: 'De líquido a bruto (sé cuánto quiero recibir en mano)' },
+        ],
+      },
+      {
         id: 'montoBruto',
-        label: 'Monto bruto',
+        label: 'Monto (bruto o líquido según dirección)',
         type: 'number',
         unit: 'CLP',
         placeholder: '$100.000',
@@ -1593,12 +1610,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'vivienda',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-11-04',
     sources: [
       {
-        name: 'Banco Central de Chile',
-        url: 'https://www.bcentral.cl/areas/estadisticas',
-        note: 'Variación IPC para reajuste de arriendo',
+        name: 'INE — Calculadora oficial del IPC',
+        url: IPC_FUENTE_URL,
+        note: 'Variación del IPC entre meses (serie base anual 2023 = 100)',
+      },
+      {
+        name: 'INE — Uso de la Calculadora IPC (base anual 2023 = 100)',
+        url: IPC_METODOLOGIA_URL,
+        note: 'Metodología de reajuste monetario mensual, semestral, anual y acumulado',
       },
       {
         name: 'BCN — Ley 18.101',
@@ -1608,6 +1630,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
     keywords: [
       'reajuste arriendo',
+      'calculo ipc arriendo',
       'aumento arriendo',
       'IPC arriendo',
       'UF arriendo',
@@ -1619,6 +1642,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         id: 'arriendoActual',
         label: 'Arriendo Actual',
         type: 'number',
+        unit: 'CLP',
         placeholder: '$300.000',
         required: true,
         min: 0,
@@ -1631,20 +1655,49 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         defaultValue: false,
       },
       {
+        id: 'mesInicial',
+        label: 'Mes del último reajuste (serie oficial INE)',
+        type: 'select',
+        required: false,
+        defaultValue: '2025-09',
+        options: [
+          { value: '', label: 'Ingresar % de IPC manualmente' },
+          ...IPC_PERIODOS,
+        ],
+        tooltip:
+          'Si eliges mes inicial y mes final, se aplica la variación exacta de la serie oficial del INE (base 2023 = 100) sin prorrateo lineal.',
+      },
+      {
+        id: 'mesFinal',
+        label: 'Mes de término del reajuste (serie oficial INE)',
+        type: 'select',
+        required: false,
+        defaultValue: IPC_ULTIMO_MES,
+        options: [
+          { value: '', label: 'Ingresar % de IPC manualmente' },
+          ...IPC_PERIODOS,
+        ],
+      },
+      {
         id: 'variacionIPC',
-        label: 'Variación IPC Anual (%)',
+        label: 'Variación IPC Anual manual (%)',
         type: 'number',
-        placeholder: '4.5',
-        required: true,
+        unit: 'percent',
+        placeholder: '4,1',
+        required: false,
+        defaultValue: 0,
         min: 0,
         max: 100,
+        tooltip: 'Se usa solo si dejas en blanco los meses de la serie del INE.',
       },
       {
         id: 'mesesDesdeUltimoReajuste',
-        label: 'Meses desde último reajuste',
+        label: 'Meses desde último reajuste (modo manual)',
         type: 'number',
+        unit: 'months',
         placeholder: '12',
-        required: true,
+        required: false,
+        defaultValue: 12,
         min: 1,
         max: 60,
       },
@@ -6081,6 +6134,691 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿El tope cambia?',
         answer:
           'Sí: el tope en UF se actualiza anualmente por la Superintendencia de Pensiones (en 2026 quedó en 90 UF para AFP/salud y 135,2 UF para cesantía) y su valor en pesos varía con la UF del mes.',
+      },
+    ],
+  },
+  {
+    id: 'puntaje-nem-ranking',
+    name: 'Calculadora Puntaje NEM y Ranking',
+    description:
+      'Tu NEM es el promedio de tus promedios de 1° a 4° medio, aproximado a dos decimales, y se transforma a puntaje de 100 a 1.000 con la tabla oficial del DEMRE según tu modalidad de egreso. Tu ranking compara cada uno de esos promedios con los de tres generaciones anteriores de tu colegio, y en cada nivel es igual o mayor que tu NEM.',
+    slug: 'calculadora-puntaje-nem-ranking',
+    category: 'educacion',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'DEMRE — Notas de Enseñanza Media (NEM)',
+        url: 'https://demre.cl/paes/factores-seleccion/notas-ensenanza-media',
+        note: 'Cálculo del promedio NEM con dos decimales de 1° a 4° medio',
+      },
+      {
+        name: 'DEMRE — Tabla de transformación NEM (Admisión 2027)',
+        url: 'https://demre.cl/paes/factores-seleccion/tabla-transformacion-nem',
+        note: 'Tablas oficiales grupos A, B y C en escala de 100 a 1.000 puntos',
+      },
+      {
+        name: 'DEMRE — Puntaje ranking',
+        url: 'https://demre.cl/paes/factores-seleccion/puntaje-ranking',
+        note: 'Fórmula del ranking por nivel con PROM y MAX de tres generaciones anteriores',
+      },
+    ],
+    keywords: [
+      'calculadora nem',
+      'puntaje nem',
+      'calcular puntaje nem',
+      'puntaje ranking',
+      'tabla nem 2027',
+      'nem a puntaje paes',
+    ],
+    inputs: [
+      {
+        id: 'grupoNem',
+        label: 'Modalidad de egreso (tabla NEM)',
+        type: 'select',
+        required: true,
+        defaultValue: 'a',
+        options: [
+          { value: 'a', label: 'Grupo A: Científico-Humanista diurno' },
+          { value: 'b', label: 'Grupo B: CH adultos, vespertino, nocturno, exámenes libres o extranjero' },
+          { value: 'c', label: 'Grupo C: Técnico-Profesional o artística' },
+        ],
+      },
+      { id: 'prom1', label: 'Promedio 1° medio', type: 'number', unit: 'grade', placeholder: '6,2', required: true, min: 4, max: 7 },
+      { id: 'prom2', label: 'Promedio 2° medio', type: 'number', unit: 'grade', placeholder: '6,3', required: false, defaultValue: 0, min: 0, max: 7 },
+      { id: 'prom3', label: 'Promedio 3° medio', type: 'number', unit: 'grade', placeholder: '6,3', required: false, defaultValue: 0, min: 0, max: 7 },
+      { id: 'prom4', label: 'Promedio 4° medio', type: 'number', unit: 'grade', placeholder: '6,3', required: false, defaultValue: 0, min: 0, max: 7 },
+      {
+        id: 'promColegio',
+        label: 'Promedio histórico de tu colegio (nota 4,0–7,0 o puntaje)',
+        type: 'number',
+        unit: 'grade',
+        required: false,
+        min: 0,
+        max: 1000,
+        tooltip: 'Promedio de las 3 generaciones anteriores. Si no lo conoces, déjalo vacío y se usará ranking = NEM como estimación conservadora.',
+      },
+      {
+        id: 'maxColegio',
+        label: 'Máximo histórico de tu colegio (nota 4,0–7,0 o puntaje)',
+        type: 'number',
+        unit: 'grade',
+        required: false,
+        min: 0,
+        max: 1000,
+        tooltip: 'Promedio máximo de las 3 generaciones anteriores de tu colegio.',
+      },
+    ],
+    seoTitle: 'Calculadora puntaje NEM y ranking 2027',
+    seoDescription:
+      'Convierte tus notas de enseñanza media a puntaje NEM con la tabla oficial del DEMRE 2027 y estima tu puntaje ranking con la fórmula oficial.',
+    faq: [
+      {
+        question: '¿Cómo se calcula el promedio NEM?',
+        answer:
+          'Se suman los promedios anuales de 1° a 4° medio y se dividen por la cantidad de cursos cursados, aproximando el resultado a dos decimales. Por ejemplo, con 6,2; 6,3; 6,3 y 6,3 el promedio es 6,275, que se aproxima a 6,28 y equivale a 793 puntos en el grupo A.',
+      },
+      {
+        question: '¿Qué tabla NEM me corresponde?',
+        answer:
+          'El Grupo A aplica a enseñanza Humanístico-Científica diurna; el Grupo B a HC de adultos, vespertina, nocturna, exámenes libres o estudios en el extranjero; y el Grupo C a enseñanza Técnico-Profesional o artística.',
+      },
+      {
+        question: '¿Cómo estima la calculadora el puntaje ranking?',
+        answer:
+          'Para cada curso aplica la fórmula del DEMRE: si tu nota es menor o igual al promedio histórico de las tres generaciones anteriores de tu colegio, tu ranking de ese nivel es igual a tu NEM; si supera el promedio, sube linealmente hasta 1.000 puntos al alcanzar el máximo histórico. Si no conoces los datos de tu colegio, muestra tu puntaje NEM como estimación conservadora (nunca es el ranking oficial).',
+      },
+    ],
+  },
+  {
+    id: 'semana-corrida',
+    name: 'Calculadora de Semana Corrida (art. 45)',
+    description:
+      'Calcula el pago de los domingos y festivos para trabajadores con remuneración variable diaria (comisiones o trato): divide lo variable ganado en la semana por los días que legalmente debías trabajar y multiplica por los domingos y festivos.',
+    slug: 'calculadora-semana-corrida',
+    category: 'sueldo',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'Dirección del Trabajo — Cómo se calcula la semana corrida',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60203.html',
+        note: 'Fórmula del promedio diario variable por cada domingo y festivo',
+      },
+      {
+        name: 'BCN Ley Chile — Código del Trabajo, art. 45',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Derecho a remuneración por los días domingo y festivos',
+      },
+      {
+        name: 'Dirección del Trabajo — Remuneraciones consideradas en semana corrida',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-95845.html',
+        note: 'Solo remuneraciones variables principales y ordinarias; excluye pagos accesorios o extraordinarios',
+      },
+    ],
+    keywords: [
+      'semana corrida',
+      'calculadora semana corrida',
+      'cómo se calcula la semana corrida',
+      'artículo 45 código del trabajo',
+      'semana corrida comisiones',
+    ],
+    inputs: [
+      {
+        id: 'remuneracionVariableSemanal',
+        label: 'Remuneración variable ganada en la semana',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$100.000',
+        required: true,
+        min: 0,
+        tooltip: 'Solo la parte variable devengada día a día (comisiones, trato). No incluyas sueldo base, gratificación, aguinaldos ni bonos extraordinarios.',
+      },
+      {
+        id: 'diasDebioTrabajar',
+        label: 'Días que legalmente debías trabajar en la semana',
+        type: 'number',
+        unit: 'days',
+        placeholder: '5',
+        required: true,
+        defaultValue: 5,
+        min: 1,
+        max: 6,
+      },
+      {
+        id: 'domingosYFestivos',
+        label: 'Domingos y festivos de la semana',
+        type: 'number',
+        unit: 'days',
+        placeholder: '1',
+        required: true,
+        defaultValue: 1,
+        min: 0,
+        max: 7,
+        tooltip: 'En una semana sin feriados es 1 (el domingo). Si hubo un festivo hábil en tu jornada, suma ese día.',
+      },
+      {
+        id: 'semanasMes',
+        label: 'Semanas a proyectar en el mes',
+        type: 'number',
+        unit: 'count',
+        required: false,
+         min: 1,
+        max: 5,
+        tooltip: 'Si ingresas entre 2 y 5, estima el total mensual suponiendo semanas iguales.',
+      },
+      {
+        id: 'sueldoBaseSemanalOpcional',
+        label: 'Sueldo base semanal (opcional, solo informativo)',
+        type: 'number',
+        unit: 'CLP',
+        required: false,
+        min: 0,
+        tooltip: 'No entra al cálculo de la semana corrida; solo se suma para mostrarte el total semanal.',
+      },
+    ],
+    seoTitle: 'Calculadora de semana corrida (art. 45)',
+    seoDescription:
+      'Calcula tu semana corrida si ganas comisiones o trato: promedio diario variable por cada domingo y festivo, según la Dirección del Trabajo.',
+    faq: [
+      {
+        question: '¿Cómo se calcula la semana corrida?',
+        answer:
+          'Se suman las remuneraciones variables devengadas en la semana, se dividen por el número de días que el trabajador legalmente debió laborar en ese período semanal y el resultado se multiplica por los domingos y festivos de la semana. Por ejemplo, $100.000 en 5 días con un domingo da $20.000 de semana corrida.',
+      },
+      {
+        question: '¿Se incluye el sueldo base en el promedio de la semana corrida?',
+        answer:
+          'No. Si tienes sueldo mensual fijo más comisiones, el sueldo fijo ya remunera los días domingo y festivos, por lo que el promedio de la semana corrida se calcula exclusivamente con la parte variable.',
+      },
+      {
+        question: '¿Entran las gratificaciones, aguinaldos o bonos extraordinarios?',
+        answer:
+          'No. Según la Dirección del Trabajo, para el cálculo del promedio diario no se consideran pagos accesorios o extraordinarios como gratificaciones, aguinaldos ni bonificaciones extraordinarias.',
+      },
+    ],
+  },
+  {
+    id: 'ipc',
+    name: 'Calculadora de IPC',
+    description:
+      'Calcula la variación del Índice de Precios al Consumidor (IPC) entre dos meses y reajusta cualquier monto en pesos con la serie mensual oficial del INE (base anual 2023 = 100).',
+    slug: 'calculadora-ipc',
+    category: 'conversiones',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'INE — Calculadora oficial del IPC',
+        url: IPC_FUENTE_URL,
+        note: 'Herramienta oficial del Instituto Nacional de Estadísticas',
+      },
+      {
+        name: 'INE — Uso de la Calculadora IPC (base anual 2023 = 100)',
+        url: IPC_METODOLOGIA_URL,
+        note: 'Fórmula de variación y elección del mes inicial y final',
+      },
+    ],
+    keywords: [
+      'calculadora ipc',
+      'calcular ipc',
+      'reajuste ipc',
+      'variación ipc entre fechas',
+      'calculadora ipc ine',
+      'ipc acumulado',
+    ],
+    inputs: [
+      {
+        id: 'monto',
+        label: 'Monto a reajustar',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$100.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'mesInicial',
+        label: 'Mes inicial',
+        type: 'select',
+        required: true,
+        defaultValue: '2025-09',
+        options: IPC_PERIODOS,
+        tooltip: 'Para la variación de un mes, elige el mes inmediatamente anterior; para la acumulada del año, elige diciembre del año anterior (criterio INE).',
+      },
+      {
+        id: 'mesFinal',
+        label: 'Mes final',
+        type: 'select',
+        required: true,
+        defaultValue: IPC_ULTIMO_MES,
+        options: IPC_PERIODOS,
+      },
+    ],
+    seoTitle: 'Calculadora IPC Chile: variación entre meses y reajuste',
+    seoDescription:
+      'Calcula la variación del IPC entre dos meses y reajusta un monto en pesos con la serie oficial del INE (base 2023 = 100).',
+    faq: [
+      {
+        question: '¿Cuál es la fórmula para reajustar un monto por IPC?',
+        answer:
+          'La variación porcentual es (IPC final ÷ IPC inicial − 1) × 100, y el monto reajustado es monto × (IPC final ÷ IPC inicial), usando los índices de la serie oficial del INE base anual 2023 = 100.',
+      },
+      {
+        question: '¿Qué mes inicial debo elegir para la variación mensual o acumulada?',
+        answer:
+          'Según la guía de la Calculadora IPC del INE, para incluir la inflación del primer mes del período debes seleccionar como mes inicial el mes inmediatamente anterior. Para la variación acumulada del año en curso, el mes inicial es diciembre del año anterior.',
+      },
+      {
+        question: '¿Cuándo publica el INE el nuevo dato del IPC?',
+        answer:
+          'El INE publica el boletín mensual del IPC a las 08:00 horas dentro de los primeros ocho días de cada mes con el índice del mes anterior.',
+      },
+    ],
+  },
+  {
+    id: 'dias-habiles',
+    name: 'Calculadora de Días Hábiles en Chile',
+    description:
+      'Cuenta los días hábiles entre dos fechas o calcula la fecha de vencimiento al sumar un plazo en días hábiles, descontando feriados nacionales y eligiendo entre cómputo administrativo/laboral (lunes a viernes) o judicial (lunes a sábado).',
+    slug: 'calculadora-dias-habiles',
+    category: 'servicios',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'BCN Ley Chile — Ley 19.880, art. 25',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=210676',
+        note: 'Plazos administrativos: son inhábiles los sábados, domingos y festivos',
+      },
+      {
+        name: 'BCN Ley Chile — Código de Procedimiento Civil, arts. 59 y 66',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=22740',
+        note: 'Plazos judiciales: son hábiles los días no feriados (el sábado es hábil)',
+      },
+      {
+        name: 'BCN Ley Chile — Ley 2.977 sobre días feriados',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=23639',
+        note: 'Feriados legales en Chile',
+      },
+    ],
+    keywords: [
+      'calculadora días hábiles',
+      'días hábiles chile',
+      'contar días hábiles',
+      'sumar días hábiles a una fecha',
+      'plazo días hábiles ley 19880',
+    ],
+    inputs: [
+      {
+        id: 'modo',
+        label: 'Qué quieres calcular',
+        type: 'select',
+        required: true,
+        defaultValue: 'entre-fechas',
+        options: [
+          { value: 'entre-fechas', label: 'Contar días hábiles entre dos fechas' },
+          { value: 'sumar-dias', label: 'Sumar días hábiles a una fecha de inicio' },
+        ],
+      },
+      {
+        id: 'fechaInicio',
+        label: 'Fecha de inicio (AAAA-MM-DD)',
+        type: 'text',
+        placeholder: '2026-11-04',
+        required: true,
+        tooltip: 'El cómputo parte desde el día siguiente a la fecha de inicio (art. 25 Ley 19.880).',
+      },
+      {
+        id: 'fechaFin',
+        label: 'Fecha de término (AAAA-MM-DD, para contar entre fechas)',
+        type: 'text',
+        placeholder: '2026-11-30',
+        required: false,
+      },
+      {
+        id: 'diasASumar',
+        label: 'Días hábiles a sumar (si elegiste sumar días)',
+        type: 'number',
+        unit: 'days',
+        placeholder: '10',
+        required: false,
+        defaultValue: 10,
+        min: 1,
+        max: 10000,
+      },
+      {
+        id: 'incluirSabados',
+        label: '¿Contar los sábados como días hábiles? (cómputo judicial CPC)',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    seoTitle: 'Calculadora de días hábiles en Chile (con feriados)',
+    seoDescription:
+      'Cuenta días hábiles entre fechas o suma un plazo hábil descontando feriados de Chile. Con opción administrativa (lun–vie) o judicial (lun–sáb).',
+    faq: [
+      {
+        question: '¿El sábado es día hábil o inhábil en Chile?',
+        answer:
+          'Depende de la materia: en los procedimientos administrativos regidos por el artículo 25 de la Ley 19.880 son inhábiles los sábados, domingos y festivos. En cambio, en los plazos judiciales del Código de Procedimiento Civil (artículos 59 y 66) son hábiles todos los días no feriados, por lo que el sábado sí se cuenta.',
+      },
+      {
+        question: '¿Se cuenta el día en que se notifica o inicia el plazo?',
+        answer:
+          'No: conforme al artículo 25 de la Ley 19.880, los plazos de días se computan desde el día siguiente a aquel en que se notifica o publica el acto.',
+      },
+      {
+        question: '¿Qué feriados descuenta la calculadora?',
+        answer:
+          'Descuenta los feriados nacionales cargados en el calendario del sitio (2026 y 2027). Si el período cruza un feriado móvil de 2027 cuya fecha oficial aún está pendiente de confirmación, la calculadora muestra una advertencia expresa.',
+      },
+    ],
+  },
+  {
+    id: 'credito-consumo',
+    name: 'Simulador de Crédito de Consumo',
+    description:
+      'Calcula la cuota mensual con sistema francés, el total de intereses y el costo total de un crédito de consumo en pesos, y compara la tasa anual nominal con la Tasa Máxima Convencional (TMC) vigente publicada por la CMF.',
+    slug: 'calculadora-credito-consumo',
+    category: 'servicios',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'CMF — Tasas de Interés Corriente y Máxima Convencional',
+        url: 'https://www.cmfchile.cl/portal/principal/613/w3-propertyvalue-19272.html',
+        note: 'Certificado mensual publicado por la Comisión para el Mercado Financiero',
+      },
+      {
+        name: 'BCN Ley Chile — Ley 18.010 sobre operaciones de crédito de dinero',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=29438',
+        note: 'Art. 6 y siguientes: interés corriente y límite de la Tasa Máxima Convencional',
+      },
+    ],
+    keywords: [
+      'simulador crédito de consumo',
+      'calculadora crédito de consumo',
+      'calcular cuota crédito de consumo',
+      'tasa máxima convencional crédito consumo',
+      'cuota mensual crédito',
+    ],
+    inputs: [
+      {
+        id: 'montoCredito',
+        label: 'Monto del crédito',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$3.000.000',
+        required: true,
+        min: 1,
+      },
+      {
+        id: 'tasaMensual',
+        label: 'Tasa de interés mensual (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '1,8',
+        required: true,
+        min: 0,
+        max: 100,
+        tooltip: 'Tasa mensual informada en la oferta (por ejemplo 1,8%). La tasa anual nominal lineal se obtiene multiplicándola por 12.',
+      },
+      {
+        id: 'plazoMeses',
+        label: 'Plazo del crédito (meses)',
+        type: 'number',
+        unit: 'months',
+        placeholder: '24',
+        required: true,
+        defaultValue: 24,
+        min: 1,
+        max: 120,
+      },
+      {
+        id: 'gastosOperacionales',
+        label: 'Gastos operacionales / seguros asociados (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        required: false,
+        min: 0,
+      },
+    ],
+    seoTitle: 'Simulador de crédito de consumo: cuota y tasa máxima (TMC)',
+    seoDescription:
+      'Calcula la cuota mensual, intereses y costo total de tu crédito de consumo y verifica que la tasa no supere la Tasa Máxima Convencional de la CMF.',
+    faq: [
+      {
+        question: '¿Cómo se calcula la cuota mensual de un crédito de consumo?',
+        answer:
+          'Con la fórmula de amortización francesa de cuota fija: Cuota = P × i ÷ (1 − (1 + i)^−n), donde P es el monto solicitado, i la tasa de interés mensual en tanto por uno y n el número de meses.',
+      },
+      {
+        question: '¿Qué es la Tasa Máxima Convencional (TMC)?',
+        answer:
+          'Es el límite legal de interés que puede pactarse en una operación de crédito de dinero según la Ley 18.010. La CMF la publica mensualmente por tramo de monto en UF y plazo (por ejemplo, hasta 50 UF, entre 50 y 200 UF, y entre 200 y 5.000 UF).',
+      },
+      {
+        question: '¿La tasa anual mostrada equivale a la Carga Anual Equivalente?',
+        answer:
+          'No. La calculadora muestra la tasa anual nominal lineal (tasa mensual × 12) que utiliza la Ley 18.010 para comparar operaciones no reajustables en pesos con la TMC, además del costo total sumando los gastos que ingreses.',
+      },
+    ],
+  },
+  {
+    id: 'interes-compuesto',
+    name: 'Calculadora de Interés Compuesto',
+    description:
+      'Calcula el valor futuro de tu ahorro o inversión con capitalización mensual, trimestral, semestral o anual, incluyendo aportes periódicos mensuales y el desglose entre capital aportado e intereses ganados.',
+    slug: 'calculadora-interes-compuesto',
+    category: 'pension',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'CMF Educa — Qué es el interés compuesto y el ahorro',
+        url: 'https://www.cmfchile.cl/educa/621/w3-channel.html',
+        note: 'Portal de educación financiera de la Comisión para el Mercado Financiero',
+      },
+    ],
+    keywords: [
+      'calculadora interés compuesto',
+      'calcular interés compuesto',
+      'interés compuesto con aportes mensuales',
+      'simulador ahorro interés compuesto',
+    ],
+    inputs: [
+      {
+        id: 'capitalInicial',
+        label: 'Capital inicial',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.000.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'tasaAnual',
+        label: 'Tasa de interés anual (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '8,0',
+        required: true,
+        min: 0,
+        max: 100,
+      },
+      {
+        id: 'anos',
+        label: 'Plazo (años)',
+        type: 'number',
+        unit: 'years',
+        placeholder: '5',
+        required: true,
+        defaultValue: 5,
+        min: 1,
+        max: 100,
+      },
+      {
+        id: 'frecuencia',
+        label: 'Frecuencia de capitalización',
+        type: 'select',
+        required: true,
+        defaultValue: 'mensual',
+        options: [
+          { value: 'mensual', label: 'Mensual (12 veces al año)' },
+          { value: 'trimestral', label: 'Trimestral (4 veces al año)' },
+          { value: 'semestral', label: 'Semestral (2 veces al año)' },
+          { value: 'anual', label: 'Anual (1 vez al año)' },
+        ],
+      },
+      {
+        id: 'aporteMensual',
+        label: 'Aporte mensual adicional (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        required: false,
+        min: 0,
+      },
+    ],
+    seoTitle: 'Calculadora de interés compuesto en pesos (con aportes)',
+    seoDescription:
+      'Simula el crecimiento de tu ahorro con interés compuesto y aportes mensuales. Calcula capital aportado, intereses ganados y monto final.',
+    faq: [
+      {
+        question: '¿Cómo funciona el interés compuesto?',
+        answer:
+          'En cada período de capitalización los intereses ganados se suman al capital, por lo que en el período siguiente ganas intereses tanto sobre tu aporte inicial como sobre los intereses acumulados.',
+      },
+      {
+        question: '¿Cuál es la fórmula con aportes periódicos?',
+        answer:
+          'Con tasa por período i = (tasa anual ÷ m) y N = m × años períodos, el valor futuro es VF = C₀ × (1 + i)^N + A × ((1 + i)^N − 1) ÷ i, donde A es el aporte por período al cierre de cada capitalización.',
+      },
+      {
+        question: '¿El resultado descuenta impuestos o comisiones?',
+        answer:
+          'No. Es un cálculo matemático puro con la tasa que tú ingresas; no considera comisiones de administración, inflación ni impuestos.',
+      },
+    ],
+  },
+  {
+    id: 'deposito-a-plazo',
+    name: 'Simulador de Depósito a Plazo (DAP)',
+    description:
+      'Simula la ganancia de un depósito a plazo fijo o renovable en pesos o en UF a partir de la tasa mensual o anual informada por tu banco y los días de plazo.',
+    slug: 'calculadora-deposito-a-plazo',
+    category: 'conversiones',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'CMF Educa — Depósitos a plazo',
+        url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-1522.html',
+        note: 'Características de los depósitos a plazo fijos y renovables en Chile',
+      },
+      {
+        name: 'Banco Central de Chile — Indicadores diarios (UF)',
+        url: 'https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx',
+        note: 'Valor oficial de la UF para equivalencias',
+      },
+    ],
+    keywords: [
+      'simulador depósito a plazo',
+      'calculadora depósito a plazo',
+      'calcular intereses depósito a plazo',
+      'depósito a plazo en uf o pesos',
+      'dap 30 días',
+    ],
+    inputs: [
+      {
+        id: 'monto',
+        label: 'Monto a invertir',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.000.000',
+        required: true,
+        min: 1,
+      },
+      {
+        id: 'moneda',
+        label: 'Moneda del depósito',
+        type: 'select',
+        required: true,
+        defaultValue: 'CLP',
+        options: [
+          { value: 'CLP', label: 'Pesos chilenos (CLP)' },
+          { value: 'UF', label: 'Unidades de Fomento (UF)' },
+        ],
+      },
+      {
+        id: 'tasaPeriodo',
+        label: 'Tasa ofrecida por el banco (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '0,45',
+        required: true,
+        min: 0,
+        max: 100,
+        tooltip: 'Ingresa la tasa que te informa tu banco (por ejemplo 0,45% si es tasa mensual a 30 días, o 5,4% si es anual).',
+      },
+      {
+        id: 'tipoTasa',
+        label: 'Base de la tasa ingresada',
+        type: 'select',
+        required: true,
+        defaultValue: 'mensual',
+        options: [
+          { value: 'mensual', label: 'Tasa mensual (base 30 días)' },
+          { value: 'anual', label: 'Tasa anual (base 360 días)' },
+        ],
+      },
+      {
+        id: 'plazoDias',
+        label: 'Plazo del depósito (días)',
+        type: 'number',
+        unit: 'days',
+        placeholder: '30',
+        required: true,
+        defaultValue: 30,
+        min: 7,
+        max: 3650,
+      },
+      {
+        id: 'renovaciones',
+        label: 'Renovaciones automáticas (0 = fijo sin renovar)',
+        type: 'number',
+        unit: 'count',
+        required: false,
+        min: 0,
+        max: 120,
+      },
+    ],
+    seoTitle: 'Simulador de depósito a plazo (DAP): en pesos o UF',
+    seoDescription:
+      'Calcula cuánto ganas en un depósito a plazo fijo o renovable en pesos o UF según los días y la tasa mensual o anual de tu banco.',
+    faq: [
+      {
+        question: '¿Cómo se calculan los intereses de un depósito a plazo a 30 días?',
+        answer:
+          'Si tu banco te ofrece una tasa mensual en base a 30 días, la tasa efectiva del período es tasa mensual × (días ÷ 30) y los intereses son monto × tasa efectiva. Por ejemplo, $1.000.000 al 0,5% mensual por 30 días genera $5.000 de ganancia.',
+      },
+      {
+        question: '¿Cuál es el plazo mínimo de un depósito a plazo?',
+        answer:
+          'El plazo mínimo habitual para constituir un depósito a plazo es de 7 días. En los depósitos en UF el reajuste suele requerir plazos desde 90 días según las condiciones de cada banco.',
+      },
+      {
+        question: '¿Qué pasa si el depósito es renovable?',
+        answer:
+          'Al vencer cada período, si no retiras el dinero, el capital más los intereses ganados se reinvierten por un nuevo período de igual duración.',
       },
     ],
   },

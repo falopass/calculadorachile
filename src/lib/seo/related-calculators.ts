@@ -47,22 +47,73 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-simulador-apv',
   ],
 
-  // Estudios (E-033 a E-035, 04-11-2026): clúster escolar → PAES → financiamiento
+  // Estudios (E-033 a E-036, 04-11-2026): clúster escolar → NEM/ranking → PAES → financiamiento
   'calculadora-puntaje-ponderado-paes': [
+    'calculadora-puntaje-nem-ranking',
     'calculadora-promedio-notas',
     'calculadora-becas-gratuidad',
     'calculadora-credito-cae',
     'calculadora-escala-notas',
   ],
+  'calculadora-puntaje-nem-ranking': [
+    'calculadora-puntaje-ponderado-paes',
+    'calculadora-promedio-notas',
+    'calculadora-becas-gratuidad',
+    'calculadora-escala-notas',
+  ],
   'calculadora-promedio-notas': [
     'calculadora-escala-notas',
+    'calculadora-puntaje-nem-ranking',
     'calculadora-puntaje-ponderado-paes',
     'calculadora-becas-gratuidad',
   ],
   'calculadora-escala-notas': [
     'calculadora-promedio-notas',
+    'calculadora-puntaje-nem-ranking',
     'calculadora-puntaje-ponderado-paes',
     'calculadora-becas-gratuidad',
+  ],
+
+  // Sueldo / Laboral y Trámites (E-037 a E-043)
+  'calculadora-semana-corrida': [
+    'calculadora-sueldo-liquido',
+    'calculadora-horas-extra',
+    'calculadora-gratificacion-legal',
+    'calculadora-finiquito',
+  ],
+  'calculadora-ipc': [
+    'calculadora-reajuste-arriendo',
+    'calculadora-uf-clp',
+    'calculadora-utm-clp',
+    'calculadora-deposito-a-plazo',
+  ],
+  'calculadora-reajuste-arriendo': [
+    'calculadora-ipc',
+    'calculadora-uf-clp',
+    'calculadora-subsidio-arriendo',
+    'calculadora-credito-hipotecario',
+  ],
+  'calculadora-dias-habiles': [
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-finiquito',
+    'calculadora-licencia-medica',
+  ],
+  'calculadora-credito-consumo': [
+    'calculadora-credito-hipotecario',
+    'calculadora-credito-automotriz',
+    'calculadora-intereses-mora',
+    'calculadora-uf-clp',
+  ],
+  'calculadora-interes-compuesto': [
+    'calculadora-deposito-a-plazo',
+    'calculadora-simulador-apv',
+    'calculadora-uf-clp',
+  ],
+  'calculadora-deposito-a-plazo': [
+    'calculadora-interes-compuesto',
+    'calculadora-uf-clp',
+    'calculadora-ipc',
+    'calculadora-simulador-apv',
   ],
 
   // Empresas / patente (top clics)

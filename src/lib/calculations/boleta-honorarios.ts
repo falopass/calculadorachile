@@ -13,6 +13,12 @@ import { contextoHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BoletaHonorariosInput {
+  /**
+   * Dirección del cálculo. En 'bruto-a-liquido' (default) `montoBruto` es el
+   * bruto de la boleta; en 'liquido-a-bruto' `montoBruto` es el líquido
+   * deseado y el bruto se obtiene dividiendo por (1 − tasa).
+   */
+  modo?: 'bruto-a-liquido' | 'liquido-a-bruto';
   montoBruto: number;
   retencionAutomatica?: boolean;
   /** Año del calendario de tasas (Ley 21.133 — aumento gradual). */
@@ -32,6 +38,8 @@ export interface BoletaHonorariosInput {
 }
 
 export interface BoletaHonorariosResult {
+  /** Dirección usada: 'bruto-a-liquido' por defecto. */
+  modo: 'bruto-a-liquido' | 'liquido-a-bruto';
   montoBruto: number;
   /** Retención del SII (impuesto + cotizaciones futuras). */
   retencion: number;
@@ -74,6 +82,7 @@ export interface BoletaHonorariosResult {
  */
 export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaHonorariosResult {
   const {
+    modo = 'bruto-a-liquido',
     montoBruto,
     retencionAutomatica = true,
     ano = contextoHonorarios().anio,
@@ -90,34 +99,43 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
 
   const valorUF = input.valorUF ?? UF.valor;
 
+  // E-039: en 'liquido-a-bruto' el monto ingresado es el líquido deseado y el
+  // bruto de la boleta se obtiene dividiendo por (1 − tasa). Con retención
+  // manual (retencionAutomatica=false) el bruto a emitir es el mismo monto.
+  const bruto =
+    modo === 'liquido-a-bruto' && retencionAutomatica
+      ? Math.round(monto / (1 - tasaRetencion / 100))
+      : monto;
+
   // Retención efectiva (sin exención: no existe un monto exento en el SII).
-  const retencion = retencionAutomatica ? monto * (tasaRetencion / 100) : 0;
+  const retencion = retencionAutomatica ? bruto * (tasaRetencion / 100) : 0;
 
   // Monto líquido = bruto − retención. Las cotizaciones se financian con
   // la retención dentro del proceso de Operación Renta; no se descuentan
   // adicionalmente.
-  const montoLiquido = monto - retencion;
+  const montoLiquido = bruto - retencion;
 
   const distribucion =
     RETENCION_HONORARIOS_DISTRIBUCION[ano as AnioRetencionHonorarios] ??
     RETENCION_HONORARIOS_DISTRIBUCION[2026];
   const desgloseRetencion = {
-    impuestoRenta: Math.round(monto * (distribucion.impuesto_renta / 100)),
-    afp: Math.round(monto * (distribucion.afp / 100)),
-    salud: Math.round(monto * (distribucion.salud / 100)),
-    seguroInvalidezSobrevivencia: Math.round(monto * (distribucion.sis / 100)),
-    accidentesTrabajo: Math.round(monto * (distribucion.accidentes_trabajo / 100)),
+    impuestoRenta: Math.round(bruto * (distribucion.impuesto_renta / 100)),
+    afp: Math.round(bruto * (distribucion.afp / 100)),
+    salud: Math.round(bruto * (distribucion.salud / 100)),
+    seguroInvalidezSobrevivencia: Math.round(bruto * (distribucion.sis / 100)),
+    accidentesTrabajo: Math.round(bruto * (distribucion.accidentes_trabajo / 100)),
   };
 
   const ppmAsociado = calcularPPM
-    ? Math.round(monto * (distribucion.impuesto_renta / 100))
+    ? Math.round(bruto * (distribucion.impuesto_renta / 100))
     : 0;
 
-  const costoEmpleador = calcularCostoEmpleador ? monto : 0;
-  const montoUF = moneda === 'UF' ? Math.round((monto / valorUF) * 100) / 100 : undefined;
+  const costoEmpleador = calcularCostoEmpleador ? bruto : 0;
+  const montoUF = moneda === 'UF' ? Math.round((bruto / valorUF) * 100) / 100 : undefined;
 
   return {
-    montoBruto: Math.round(monto),
+    modo,
+    montoBruto: Math.round(bruto),
     retencion: Math.round(retencion),
     montoLiquido: Math.round(montoLiquido),
     tasaRetencion,
@@ -136,18 +154,31 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
 export function boletaHonorariosToResults(result: BoletaHonorariosResult): CalculatorResult[] {
   const results: CalculatorResult[] = [];
 
-  results.push({
-    label: 'Monto Líquido',
-    value: result.montoLiquido,
-    format: 'CLP',
-    highlight: true,
-  });
-
-  results.push({
-    label: 'Monto Bruto',
-    value: result.montoBruto,
-    format: 'CLP',
-  });
+  if (result.modo === 'liquido-a-bruto') {
+    results.push({
+      label: 'Monto Bruto (a emitir en la boleta)',
+      value: result.montoBruto,
+      format: 'CLP',
+      highlight: true,
+    });
+    results.push({
+      label: 'Monto Líquido (a recibir)',
+      value: result.montoLiquido,
+      format: 'CLP',
+    });
+  } else {
+    results.push({
+      label: 'Monto Líquido',
+      value: result.montoLiquido,
+      format: 'CLP',
+      highlight: true,
+    });
+    results.push({
+      label: 'Monto Bruto',
+      value: result.montoBruto,
+      format: 'CLP',
+    });
+  }
 
   {
     results.push({
