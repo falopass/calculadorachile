@@ -10,8 +10,8 @@ Prioridad del proyecto: **ship rápido, bajo costo y alta confiabilidad en cálc
 
 Estado actual del catálogo:
 
-- **54 calculadoras activas** en `src/data/calculators.ts` (46 indexables, 8 `noIndex`; `subsidio-unificado-empleo` es indexable desde el 20-10-2026: los parámetros del primer año los fijó el Decreto 273 exento de Hacienda, DO 01-10-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf, y el reglamento de la Ley 21.808 es el Decreto 75 del Ministerio del Trabajo, DO 30-09-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf).
-- **54 módulos de cálculo** con su test en `src/lib/calculations/` (más tests auxiliares `input-coerce` y `seguro-social`).
+- **64 calculadoras activas** en `src/data/calculators.ts` (56 indexables, 8 `noIndex`; `subsidio-unificado-empleo` es indexable desde el 20-10-2026: los parámetros del primer año los fijó el Decreto 273 exento de Hacienda, DO 01-10-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf, y el reglamento de la Ley 21.808 es el Decreto 75 del Ministerio del Trabajo, DO 30-09-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf).
+- **64 módulos de cálculo** con su test en `src/lib/calculations/` (más tests auxiliares `input-coerce` y `seguro-social`).
 - `bono-bodas-oro` fue **reactivado el 26-09-2026** con fórmula verificada (ChileAtiende ficha 5369): la ruta 410 anterior fue eliminada y el slug lo sirve la ruta dinámica normal.
 
 ## Stack real instalado
@@ -73,7 +73,7 @@ src/
 │   ├── ui/                          # UI base
 │   └── DisclaimerYMYL.tsx           # disclaimer YMYL
 ├── data/
-│   ├── calculators.ts               # catálogo activo: 54 calculadoras
+│   ├── calculators.ts               # catálogo activo: 64 calculadoras
 │   ├── articles.ts                  # blog
 │   ├── guias.ts                     # guías SEO/educativas
 │   └── seo-overrides.ts             # overrides canónicos de title/description
