@@ -229,8 +229,10 @@ export const CALCULATOR_CATEGORIES: Record<
     label: 'Educación',
     pluralLabel: 'Calculadoras de educación',
     description:
-      'Crédito con Aval del Estado (CAE), gratuidad, becas y financiamiento educacional en Chile.',
+      'Promedio de notas, escala de notas, puntaje ponderado PAES, CAE, gratuidad y becas para estudiar en Chile.',
     keywords: [
+      'promedio de notas',
+      'puntaje ponderado PAES',
       'CAE chile',
       'gratuidad universitaria',
       'beca bicentenario',

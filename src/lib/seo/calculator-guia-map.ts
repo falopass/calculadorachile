@@ -113,7 +113,18 @@ const CATEGORY_FALLBACK: Partial<Record<Calculator['category'], string>> = {
  *   2. CATEGORY_FALLBACK por categoría.
  *   3. `null`.
  */
+/**
+ * Calculadoras escolares sin guía pillar propia: no deben caer al
+ * fallback de categoría `educacion` (guía del CAE, que no las cubre).
+ */
+const SIN_GUIA_PILLAR = new Set([
+  'calculadora-puntaje-ponderado-paes',
+  'calculadora-promedio-notas',
+  'calculadora-escala-notas',
+]);
+
 export function getGuiaForCalculator(calc: Calculator): Guia | null {
+  if (SIN_GUIA_PILLAR.has(calc.slug)) return null;
   const explicitSlug = EXPLICIT_MAP[calc.slug];
   if (explicitSlug) {
     const found = guias.find((g) => g.slug === explicitSlug);

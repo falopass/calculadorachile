@@ -1023,6 +1023,94 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
         'Optaría a gratuidad (100% arancel y matrícula), Bicentenario y Juan Gómez Millas (tope $1.150.000).',
     },
   },
+  'puntaje-ponderado-paes': {
+    summary:
+      'Aplica la fórmula del DEMRE para la Admisión 2027: suma cada factor de selección (NEM, Ranking, Competencia Lectora, M1, electiva y M2) multiplicado por la ponderación de la carrera que ingresa el usuario. El NEM se convierte con la tabla oficial 2027 de su grupo.',
+    calculationSteps: [
+      'Calcula el promedio NEM como el promedio de los promedios anuales de 1° a 4° medio, aproximado a dos decimales (o usa el que ingresaste).',
+      'Convierte ese promedio a puntaje con la tabla de transformación NEM 2027 del grupo A, B o C.',
+      'Usa el puntaje ranking ingresado; si no lo ingresas, usa el puntaje NEM como estimación conservadora.',
+      'Toma la prueba electiva con mayor puntaje entre Historia y Ciencias Sociales y Ciencias.',
+      'Verifica que las ponderaciones sumen 100% y que M2, si se pondera, tenga al menos 5%.',
+      'Suma cada puntaje multiplicado por su ponderación.',
+    ],
+    assumptions: [
+      'Las ponderaciones son las que ingresas; las precargadas corresponden al ejemplo oficial del DEMRE, no a una carrera real.',
+      'El ranking calculado por el DEMRE usa el promedio y el máximo histórico de tu establecimiento, que no siempre conoces: sin ese dato se usa tu NEM.',
+    ],
+    limitations: [
+      'No considera puntajes mínimos de postulación, bonificaciones ni requisitos especiales de cada universidad.',
+      'Es una simulación: el puntaje oficial lo entrega el DEMRE el 04-01-2027.',
+      'El Nuevo Ranking rige desde el Proceso de Admisión 2028; esta calculadora usa la fórmula de la Admisión 2027.',
+    ],
+    workedExample: {
+      title: 'Ejemplo oficial del DEMRE',
+      inputs: [
+        'NEM 825 (15%), Ranking 870 (20%), Competencia Lectora 700 (10%)',
+        'M1 900 (35%), electiva 820 (10%), M2 840 (10%)',
+      ],
+      development: [
+        '825 × 0,15 + 870 × 0,20 + 700 × 0,10 = 123,75 + 174 + 70',
+        '900 × 0,35 + 820 × 0,10 + 840 × 0,10 = 315 + 82 + 84',
+      ],
+      result: 'Puntaje ponderado: 848,75 puntos.',
+    },
+  },
+  'promedio-notas': {
+    summary:
+      'Calcula el promedio simple o ponderado de hasta ocho notas en escala de 1,0 a 7,0 (Decreto 67/2018, art. 8) y, si las ponderaciones suman menos de 100%, la nota que se necesita en el porcentaje restante para alcanzar la nota objetivo.',
+    calculationSteps: [
+      'Considera solo las casillas con nota entre 1,0 y 7,0.',
+      'Sin ponderaciones: suma las notas y divide por la cantidad de notas.',
+      'Con ponderaciones: multiplica cada nota por su porcentaje y divide por la suma de porcentajes ingresados.',
+      'Aproxima el promedio a la décima o a la centésima, según elijas, y muestra también el valor exacto.',
+      'Si los porcentajes suman menos de 100%: nota necesaria = (nota objetivo − promedio exacto × % evaluado) ÷ % pendiente.',
+    ],
+    assumptions: [
+      'La aproximación desde 0,05 hacia arriba es la opción por defecto; el reglamento de tu establecimiento puede fijar otra.',
+      'Las ponderaciones son las que informa tu profesor o profesora (Decreto 67, art. 9).',
+    ],
+    limitations: [
+      'No calcula la promoción de curso, que además depende de la asistencia y de las asignaturas reprobadas.',
+      'Religión, Consejo de Curso y Orientación no cuentan para el promedio final anual (Decreto 67, art. 7): no las ingreses.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: tres notas con ponderación y una pendiente',
+      inputs: ['5,0 (30%)', '6,0 (30%)', '2,0 (20%)', 'Falta una prueba de 20%'],
+      development: [
+        'Promedio parcial = (5,0 × 30 + 6,0 × 30 + 2,0 × 20) ÷ 80 = 4,625',
+        'Aporte acumulado = 4,625 × 0,80 = 3,7',
+        'Nota necesaria para 4,0 = (4,0 − 3,7) ÷ 0,20 = 1,5',
+      ],
+      result: 'Promedio parcial 4,6 (exacto 4,625); necesita un 1,5 en la prueba de 20% para cerrar con 4,0.',
+    },
+  },
+  'escala-notas': {
+    summary:
+      'Convierte un puntaje en nota de 1,0 a 7,0 con una escala lineal en dos tramos: bajo el puntaje de aprobación (exigencia × puntaje máximo) la nota va de 1,0 a 4,0, y sobre él, de 4,0 a 7,0. La exigencia es editable (60% por defecto).',
+    calculationSteps: [
+      'Puntaje de aprobación = exigencia × puntaje máximo.',
+      'Si el puntaje es menor: nota = 1 + 3 × puntaje ÷ puntaje de aprobación.',
+      'Si es igual o mayor: nota = 4 + 3 × (puntaje − puntaje de aprobación) ÷ (puntaje máximo − puntaje de aprobación).',
+      'Aproxima la nota a un decimal desde 0,05 hacia arriba y muestra también la nota exacta.',
+    ],
+    assumptions: [
+      'La exigencia del 60% es una convención de uso frecuente; el Decreto 67 no la fija y cada establecimiento la define.',
+      'Escala de 1,0 a 7,0 con aprobación 4,0 (Decreto 67/2018, art. 8), editable si tu evaluación usa otra.',
+    ],
+    limitations: [
+      'Algunos docentes usan escalas no lineales o con bonificación: en ese caso el resultado puede diferir.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: prueba de 60 puntos al 60%',
+      inputs: ['Puntaje máximo: 60', 'Puntaje obtenido: 45', 'Exigencia: 60%'],
+      development: [
+        'Puntaje de aprobación = 0,60 × 60 = 36',
+        'Nota = 4 + 3 × (45 − 36) ÷ (60 − 36) = 4 + 27 ÷ 24 = 5,125',
+      ],
+      result: 'Nota 5,1 (exacta 5,125). Para el 4,0 se necesitan 36 puntos.',
+    },
+  },
   'subsidio-arriendo': {
     summary:
       'Convierte el arriendo a UF y calcula el aporte mensual: regular tope 4,2 UF (4,9 en zonas norte/sur/RM) sobre 170 UF hasta 8 años, o especial PM/PcD con 90% del arriendo sobre 213 UF; valida arriendo máximo, RSH 70% y tramo de ingreso familiar.',

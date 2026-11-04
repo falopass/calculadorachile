@@ -27,6 +27,7 @@ import SitiazoLink from './SitiazoLink';
 import { isCvlistoCtaCalculator } from '@/lib/cvlisto';
 import { isSitiazoCtaCalculator } from '@/lib/sitiazo';
 import { trackEvents } from '@/lib/analytics';
+import { parseNumberInput } from '@/lib/parse-number-input';
 
 export interface PremiumCalculatorShellProps {
   calculator: Calculator;
@@ -48,6 +49,23 @@ const ORGANISMO_BY_CATEGORY: Partial<Record<Calculator['category'], string>> = {
   educacion: 'Ingresa / CAE y el Mineduc',
   hogar: 'la Superintendencia de Servicios Sanitarios u organismo del servicio',
 };
+
+/** Organismo específico cuando el de la categoría no corresponde. */
+const ORGANISMO_BY_ID: Record<string, string> = {
+  'promedio-notas': 'tu establecimiento según su reglamento de evaluación',
+  'escala-notas': 'tu establecimiento según su reglamento de evaluación',
+  'puntaje-ponderado-paes': 'la Universidad de Chile (DEMRE) y la universidad a la que postulas',
+  'puntaje-nem-ranking': 'la Universidad de Chile (DEMRE) y la universidad a la que postulas',
+};
+
+/** Calculadoras cuyos resultados no son partes de un total (gráfico sin sentido). */
+const SIN_GRAFICO = new Set([
+  'promedio-notas',
+  'escala-notas',
+  'puntaje-ponderado-paes',
+  'puntaje-nem-ranking',
+  'dias-habiles',
+]);
 
 const CALC_DEBOUNCE_MS = 200;
 
@@ -159,12 +177,6 @@ function getInputSuffix(input: CalculatorInputType): string | undefined {
 
 const formatNumber = (value: number) => (value === 0 ? '' : value.toLocaleString('es-CL'));
 
-const parseNumber = (value: string) => {
-  const cleaned = value.replace(/\./g, '').replace(/,/g, '.');
-  const parsed = parseFloat(cleaned);
-  return Number.isFinite(parsed) ? parsed : 0;
-};
-
 /* ============================================
    Toggle booleano
    ============================================ */
@@ -218,6 +230,62 @@ function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
 }
 
 /* ============================================
+   Campo numérico con borrador de texto
+   --------------------------------------------
+   Mientras el usuario escribe se muestra el texto tal cual (para no
+   borrar la coma de "4," ni el "0" de "4,0"); el número se parsea en
+   cada tecla y se formatea al salir del campo.
+   ============================================ */
+
+function inputNeedsDecimal(input: CalculatorInputType): boolean {
+  return (
+    input.unit === 'percent' ||
+    input.unit === 'UF' ||
+    input.unit === 'UTM' ||
+    input.unit === 'grade' ||
+    /tasa|porcentaje|%/i.test(`${input.label} ${input.id}`)
+  );
+}
+
+function NumberField({
+  input,
+  value,
+  onChange,
+  error,
+}: {
+  input: CalculatorInputType;
+  value: number;
+  onChange: (id: string, value: string | number | boolean) => void;
+  error?: string;
+}) {
+  const [draft, setDraft] = useState<string | null>(null);
+  const needsDecimal = inputNeedsDecimal(input);
+  const display = draft ?? (value > 0 ? formatNumber(value) : '');
+  return (
+    <PremiumInputField
+      label={input.label}
+      type="text"
+      inputMode={needsDecimal ? 'decimal' : 'numeric'}
+      enterKeyHint="done"
+      autoComplete="off"
+      value={display}
+      onChange={(e) => {
+        setDraft(e.target.value);
+        onChange(input.id, parseNumberInput(e.target.value, needsDecimal));
+      }}
+      onBlur={() => setDraft(null)}
+      placeholder={input.placeholder}
+      required={input.required}
+      min={input.min}
+      max={input.max}
+      prefix={getInputPrefix(input)}
+      suffix={getInputSuffix(input)}
+      error={error}
+    />
+  );
+}
+
+/* ============================================
    Render input por tipo
    ============================================ */
 
@@ -230,15 +298,6 @@ function renderInput(
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const newValue = input.type === 'number' ? parseFloat(e.target.value) || 0 : e.target.value;
     onChange(input.id, newValue);
-  };
-
-  const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(input.id, parseNumber(e.target.value));
-  };
-
-  const handleNumberBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const v = value as number;
-    if (v > 0) e.target.value = formatNumber(v);
   };
 
   switch (input.type) {
@@ -265,34 +324,16 @@ function renderInput(
           placeholder={input.placeholder || 'Selecciona una opción'}
         />
       );
-    case 'number': {
-      // Decimales: tasas, UF/UTM y %; enteros: montos CLP típicos.
-      const needsDecimal =
-        input.unit === 'percent' ||
-        input.unit === 'UF' ||
-        input.unit === 'UTM' ||
-        /tasa|porcentaje|%/i.test(`${input.label} ${input.id}`);
+    case 'number':
       return (
-        <PremiumInputField
+        <NumberField
           key={input.id}
-          label={input.label}
-          type="text"
-          inputMode={needsDecimal ? 'decimal' : 'numeric'}
-          enterKeyHint="done"
-          autoComplete="off"
-          value={(value as number) > 0 ? formatNumber(value as number) : ''}
-          onChange={handleNumberChange}
-          onBlur={handleNumberBlur}
-          placeholder={input.placeholder}
-          required={input.required}
-          min={input.min}
-          max={input.max}
-          prefix={getInputPrefix(input)}
-          suffix={getInputSuffix(input)}
+          input={input}
+          value={value as number}
+          onChange={onChange}
           error={error}
         />
       );
-    }
     case 'text':
     default:
       return (
@@ -530,7 +571,10 @@ export default function PremiumCalculatorShell({
     touchedFields.current.clear();
   }, [calculator.inputs]);
 
-  const organismo = ORGANISMO_BY_CATEGORY[calculator.category] ?? 'el organismo oficial competente';
+  const organismo =
+    ORGANISMO_BY_ID[calculator.id] ??
+    ORGANISMO_BY_CATEGORY[calculator.category] ??
+    'el organismo oficial competente';
 
   const optionalInputs = calculator.inputs.filter(
     (i) => !i.required && i.defaultValue === undefined,
@@ -669,7 +713,7 @@ export default function PremiumCalculatorShell({
             results={results || []}
             title="Resultados"
             calculatorId={calculator.id}
-            showChart={true}
+            showChart={!SIN_GRAFICO.has(calculator.id)}
           />
           <DisclaimerYMYL organismo={organismo} className="mt-4" />
           {isCvlistoCtaCalculator(calculator.id) && (
