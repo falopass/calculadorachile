@@ -828,6 +828,81 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'puntaje-ponderado-paes': {
+      const { calculatePonderadoPaes, ponderadoPaesToResults } = await import('./ponderado-paes');
+      return (inputs) => {
+        const anuales = [inputs.prom1, inputs.prom2, inputs.prom3, inputs.prom4].map((v) =>
+          coerceNumber(v),
+        );
+        const promedioNem = coerceNumber(inputs.promedioNem);
+        const puntajes = [inputs.lectora, inputs.m1, inputs.m2, inputs.historia, inputs.ciencias].map(
+          (v) => coerceNumber(v),
+        );
+        // Sin NEM o sin ningún puntaje todavía: no mostrar error al cargar.
+        if ((promedioNem === 0 && anuales.every((n) => n === 0)) || puntajes.every((n) => n === 0)) {
+          return [];
+        }
+        const grupo = inputs.grupoNem === 'b' || inputs.grupoNem === 'c' ? inputs.grupoNem : 'a';
+        const result = calculatePonderadoPaes({
+          grupoNem: grupo,
+          promedioNem,
+          anuales,
+          ranking: coerceNumber(inputs.ranking),
+          lectora: puntajes[0],
+          m1: puntajes[1],
+          m2: puntajes[2],
+          historia: puntajes[3],
+          ciencias: puntajes[4],
+          pesos: {
+            nem: coerceNumber(inputs.pesoNem),
+            ranking: coerceNumber(inputs.pesoRanking),
+            lectora: coerceNumber(inputs.pesoLectora),
+            m1: coerceNumber(inputs.pesoM1),
+            m2: coerceNumber(inputs.pesoM2),
+            electiva: coerceNumber(inputs.pesoElectiva),
+          },
+        });
+        return ponderadoPaesToResults(result);
+      };
+    }
+
+    case 'promedio-notas': {
+      const { calculatePromedioNotas, promedioNotasToResults } = await import('./promedio-notas');
+      return (inputs) => {
+        // Acceso explícito por id: lo exige scripts/audit-ymyl-matrix.mjs.
+        const notas = [
+          inputs.nota1, inputs.nota2, inputs.nota3, inputs.nota4,
+          inputs.nota5, inputs.nota6, inputs.nota7, inputs.nota8,
+        ];
+        const pesos = [
+          inputs.peso1, inputs.peso2, inputs.peso3, inputs.peso4,
+          inputs.peso5, inputs.peso6, inputs.peso7, inputs.peso8,
+        ];
+        const result = calculatePromedioNotas({
+          notas: notas.map((v) => coerceNumber(v)),
+          pesos: pesos.map((v) => coerceNumber(v)),
+          redondeo: inputs.redondeo === 'centesima' ? 'centesima' : 'decima',
+          notaObjetivo: coerceNumber(inputs.notaObjetivo),
+        });
+        return promedioNotasToResults(result);
+      };
+    }
+
+    case 'escala-notas': {
+      const { calculateNotaEscala, notaEscalaToResults } = await import('./nota-minima-escala');
+      return (inputs) => {
+        const result = calculateNotaEscala({
+          puntajeMaximo: coerceNumber(inputs.puntajeMaximo),
+          puntajeObtenido: coerceNumber(inputs.puntajeObtenido),
+          exigencia: coerceNumber(inputs.exigencia),
+          notaMinima: coerceNumber(inputs.notaMinima),
+          notaMaxima: coerceNumber(inputs.notaMaxima),
+          notaAprobacion: coerceNumber(inputs.notaAprobacion),
+        });
+        return notaEscalaToResults(result);
+      };
+    }
+
     case 'subsidio-arriendo': {
       const { calculateSubsidioArriendo, subsidioArriendoToResults } =
         await import('./subsidio-arriendo');

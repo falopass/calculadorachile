@@ -13,6 +13,13 @@ describe('coerceNumber', () => {
     expect(coerceNumber('3.5')).toBe(3.5);
   });
 
+  it('interpreta strings con coma decimal en formato chileno', () => {
+    expect(coerceNumber('4,5')).toBe(4.5);
+    expect(coerceNumber('1.234,5')).toBe(1234.5);
+    expect(coerceNumber('0,25')).toBe(0.25);
+    expect(coerceNumber('1.234.567,89')).toBe(1234567.89);
+  });
+
   it('usa fallback en vacío/NaN', () => {
     expect(coerceNumber('', 7)).toBe(7);
     expect(coerceNumber(null, 3)).toBe(3);

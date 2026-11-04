@@ -59,10 +59,41 @@ export interface MindicadorValores {
 }
 
 /**
+ * Caché en memoria de corta duración + deduplicación de la promesa en
+ * vuelo. Durante `next build` muchas páginas llaman a esta función en
+ * paralelo; sin dedup cada una abre su propia conexión a mindicador.cl
+ * (y si el sitio responde ECONNRESET son decenas de reintentos).
+ * La Data Cache de Next no cubre ese caso porque el fetch falla antes
+ * de cachearse. 30 s alcanza para cubrir un build o una ráfaga de
+ * requests sin retener datos obsoletos en runtime.
+ */
+const MEMO_TTL_MS = 30_000;
+let cachedResult: { at: number; valores: MindicadorValores } | null = null;
+let inFlight: Promise<MindicadorValores> | null = null;
+
+/**
  * Fetch a Mindicador con timeout y manejo defensivo de errores.
  * Nunca lanza: si falla, devuelve `null` en cada campo.
+ * Llamadas concurrentes comparten una sola request y el resultado
+ * (incluido el vacío por error) se reutiliza durante MEMO_TTL_MS.
  */
 export async function fetchMindicadorValores(): Promise<MindicadorValores> {
+  if (cachedResult && Date.now() - cachedResult.at < MEMO_TTL_MS) {
+    return cachedResult.valores;
+  }
+  if (inFlight) return inFlight;
+  inFlight = requestMindicadorValores()
+    .then((valores) => {
+      cachedResult = { at: Date.now(), valores };
+      return valores;
+    })
+    .finally(() => {
+      inFlight = null;
+    });
+  return inFlight;
+}
+
+async function requestMindicadorValores(): Promise<MindicadorValores> {
   const empty: MindicadorValores = {
     uf: null,
     utm: null,

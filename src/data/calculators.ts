@@ -5441,7 +5441,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         id: 'nem',
         label: 'Promedio de notas de enseñanza media (NEM)',
         type: 'number',
-        unit: 'count',
+        unit: 'grade',
         placeholder: '5,5',
         required: false,
         min: 1,
@@ -5500,6 +5500,312 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Se pueden sumar becas y gratuidad en la misma carrera?',
         answer:
           'No: los beneficios de arancel no se acumulan en la misma carrera. Además, no se puede haber recibido becas de arancel Mineduc en dos oportunidades, y con gratuidad previa la beca solo aplica en una carrera distinta. Esta calculadora es orientativa: la asignación real depende del FUAS.',
+      },
+    ],
+  },
+  {
+    id: 'puntaje-ponderado-paes',
+    name: 'Simulador Puntaje Ponderado PAES',
+    description:
+      'Calcula tu puntaje ponderado para la Admisión 2027 con tus puntajes PAES, tu NEM convertido con la tabla oficial del DEMRE y tu ranking, usando las ponderaciones de tu carrera.',
+    slug: 'calculadora-puntaje-ponderado-paes',
+    category: 'educacion',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'DEMRE — Factores de selección (Admisión 2027)',
+        url: 'https://demre.cl/paes/factores-seleccion/',
+        note: 'Fórmula del puntaje ponderado y factores: NEM, Ranking, Lectora, M1, electiva y M2',
+      },
+      {
+        name: 'DEMRE — Tabla de transformación NEM',
+        url: 'https://demre.cl/paes/factores-seleccion/tabla-transformacion-nem',
+        note: 'Tablas grupos A, B y C del Proceso de Admisión 2027',
+      },
+      {
+        name: 'DEMRE — Puntaje ranking',
+        url: 'https://demre.cl/paes/factores-seleccion/puntaje-ranking',
+        note: 'Fórmula del ranking por nivel con PROM y MAX del establecimiento',
+      },
+      {
+        name: 'DEMRE — Calendario Proceso de Admisión 2027',
+        url: 'https://demre.cl/calendario/calendario-proceso-2027',
+        note: 'Resultados PAES y postulación desde el 04-01-2027',
+      },
+    ],
+    keywords: [
+      'puntaje ponderado',
+      'calculadora paes',
+      'simulador paes',
+      'calcular puntaje ponderado',
+      'puntaje nem',
+      'puntaje ranking',
+      'admisión 2027',
+    ],
+    inputs: [
+      {
+        id: 'grupoNem',
+        label: 'Modalidad de egreso (tabla NEM)',
+        type: 'select',
+        required: true,
+        defaultValue: 'a',
+        options: [
+          { value: 'a', label: 'Grupo A: Científico-Humanista diurno' },
+          { value: 'b', label: 'Grupo B: CH adultos, vespertino, nocturno, exámenes libres o extranjero' },
+          { value: 'c', label: 'Grupo C: Técnico-Profesional o artística' },
+        ],
+      },
+      {
+        id: 'promedioNem',
+        label: 'Promedio de notas de enseñanza media (NEM)',
+        type: 'number',
+        unit: 'grade',
+        placeholder: '6,28',
+        required: false,
+        defaultValue: 0,
+        min: 0,
+        max: 7,
+        tooltip: 'Promedio de 1° a 4° medio con dos decimales. Si no lo sabes, ingresa tus promedios anuales en Opciones avanzadas.',
+      },
+      { id: 'lectora', label: 'Puntaje Competencia Lectora', type: 'number', unit: 'count', placeholder: '700', required: false, defaultValue: 0, min: 0, max: 1000 },
+      { id: 'm1', label: 'Puntaje Matemática 1 (M1)', type: 'number', unit: 'count', placeholder: '700', required: false, defaultValue: 0, min: 0, max: 1000 },
+      { id: 'historia', label: 'Puntaje Historia y Ciencias Sociales', type: 'number', unit: 'count', placeholder: '0', required: false, defaultValue: 0, min: 0, max: 1000 },
+      { id: 'ciencias', label: 'Puntaje Ciencias', type: 'number', unit: 'count', placeholder: '0', required: false, defaultValue: 0, min: 0, max: 1000 },
+      { id: 'm2', label: 'Puntaje Matemática 2 (M2)', type: 'number', unit: 'count', placeholder: '0', required: false, defaultValue: 0, min: 0, max: 1000 },
+      { id: 'pesoNem', label: 'Ponderación NEM (%)', type: 'number', unit: 'percent', required: true, defaultValue: 15, min: 0, max: 100, tooltip: 'Las ponderaciones precargadas son las del ejemplo oficial del DEMRE: reemplázalas por las de tu carrera.' },
+      { id: 'pesoRanking', label: 'Ponderación Ranking (%)', type: 'number', unit: 'percent', required: false, defaultValue: 20, min: 0, max: 100 },
+      { id: 'pesoLectora', label: 'Ponderación Competencia Lectora (%)', type: 'number', unit: 'percent', required: false, defaultValue: 10, min: 0, max: 100 },
+      { id: 'pesoM1', label: 'Ponderación M1 (%)', type: 'number', unit: 'percent', required: false, defaultValue: 35, min: 0, max: 100 },
+      { id: 'pesoElectiva', label: 'Ponderación prueba electiva (%)', type: 'number', unit: 'percent', required: false, defaultValue: 10, min: 0, max: 100 },
+      { id: 'pesoM2', label: 'Ponderación M2 (%)', type: 'number', unit: 'percent', required: false, defaultValue: 10, min: 0, max: 100 },
+      {
+        id: 'ranking',
+        label: 'Puntaje ranking (si lo conoces)',
+        type: 'number',
+        unit: 'count',
+        required: false,
+        min: 0,
+        max: 1000,
+        tooltip: 'Si lo dejas vacío se usa tu puntaje NEM, que es una estimación conservadora.',
+      },
+      { id: 'prom1', label: 'Promedio 1° medio', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'prom2', label: 'Promedio 2° medio', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'prom3', label: 'Promedio 3° medio', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'prom4', label: 'Promedio 4° medio', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+    ],
+    seoTitle: 'Simulador puntaje ponderado PAES 2027',
+    seoDescription:
+      'Calcula tu puntaje ponderado PAES para la Admisión 2027 con tu NEM, ranking y las ponderaciones de tu carrera. Fórmula y tabla NEM oficiales del DEMRE.',
+    faq: [
+      {
+        question: '¿Cómo se calcula el puntaje ponderado?',
+        answer:
+          'Se multiplica el puntaje de cada factor de selección por la ponderación que la carrera le asigna y se suman los resultados. Por ejemplo, con NEM 825 (15%), Ranking 870 (20%), Lectora 700 (10%), M1 900 (35%), electiva 820 (10%) y M2 840 (10%), el ponderado es 848,75 puntos, el mismo ejemplo que publica el DEMRE.',
+      },
+      {
+        question: '¿Dónde encuentro las ponderaciones de mi carrera?',
+        answer:
+          'Cada universidad las define para cada carrera y el DEMRE publicó la oferta definitiva de carreras, vacantes y ponderaciones de la Admisión 2027 el 24-09-2026. Ingresa en el simulador los porcentajes exactos de la carrera que te interesa: deben sumar 100%.',
+      },
+      {
+        question: '¿Qué prueba electiva se considera si rendí Historia y Ciencias?',
+        answer:
+          'Si rendiste ambas pruebas electivas, se considera el puntaje más alto. Las carreras que exigen M2 la ponderan con al menos un 5%.',
+      },
+      {
+        question: '¿Cómo se convierte mi NEM a puntaje?',
+        answer:
+          'Tu NEM es el promedio de los promedios anuales de 1° a 4° medio, aproximado a dos decimales. Ese promedio se transforma a puntaje con la tabla oficial del DEMRE según tu modalidad de egreso: con 6,00 obtienes 713 puntos en el grupo A, 717 en el B y 715 en el C. Con 4,00 obtienes 100 y con 7,00, 1.000 puntos.',
+      },
+      {
+        question: '¿Por qué mi ranking puede ser mayor que mi NEM?',
+        answer:
+          'El ranking compara tus notas con las de las tres generaciones anteriores de tu establecimiento. Si tu promedio supera el promedio histórico de tu colegio, tu puntaje ranking sube por sobre tu NEM y llega a 1.000 si igualas o superas el máximo histórico. Para la Admisión 2027 se aplica la fórmula vigente; el Nuevo Ranking rige desde el Proceso de Admisión 2028.',
+      },
+      {
+        question: '¿Cuándo salen los resultados PAES de la Admisión 2027?',
+        answer:
+          'Según el calendario del DEMRE, los resultados de la PAES Regular se publican el 04-01-2027 a las 08:00, y la postulación a las carreras va desde ese día a las 09:00 hasta el 07-01-2027 a las 13:00.',
+      },
+    ],
+  },
+  {
+    id: 'promedio-notas',
+    name: 'Calculadora de Promedio de Notas',
+    description:
+      'Calcula tu promedio de notas simple o ponderado en escala de 1,0 a 7,0 y descubre qué nota necesitas en lo que falta para aprobar con 4,0.',
+    slug: 'calculadora-promedio-notas',
+    category: 'educacion',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'BCN Ley Chile — Decreto 67/2018 Mineduc',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1127255',
+        note: 'Art. 8: escala 1,0 a 7,0 y aprobación 4,0; art. 10: promoción con 4,5 y 5,0',
+      },
+      {
+        name: 'Mineduc — Texto del Decreto 67/2018 (PDF)',
+        url: 'https://especial.mineduc.cl/wp-content/uploads/sites/31/2020/08/Decreto-67_31-DIC-2018.pdf',
+        note: 'Art. 9: ponderaciones definidas por la planificación docente; art. 18 h: evaluación final máximo 30%',
+      },
+    ],
+    keywords: [
+      'calculadora promedio de notas',
+      'calcular promedio',
+      'promedio ponderado notas',
+      'promedio de notas chile',
+      'qué nota necesito para aprobar',
+    ],
+    inputs: [
+      { id: 'nota1', label: 'Nota 1', type: 'number', unit: 'grade', placeholder: '5,5', required: true, min: 1, max: 7 },
+      { id: 'peso1', label: 'Ponderación nota 1 (%)', type: 'number', unit: 'percent', required: false, defaultValue: 0, min: 0, max: 100 },
+      { id: 'nota2', label: 'Nota 2', type: 'number', unit: 'grade', placeholder: '6,0', required: false, defaultValue: 0, min: 0, max: 7 },
+      { id: 'peso2', label: 'Ponderación nota 2 (%)', type: 'number', unit: 'percent', required: false, defaultValue: 0, min: 0, max: 100 },
+      { id: 'nota3', label: 'Nota 3', type: 'number', unit: 'grade', required: false, defaultValue: 0, min: 0, max: 7 },
+      { id: 'peso3', label: 'Ponderación nota 3 (%)', type: 'number', unit: 'percent', required: false, defaultValue: 0, min: 0, max: 100 },
+      { id: 'nota4', label: 'Nota 4', type: 'number', unit: 'grade', required: false, defaultValue: 0, min: 0, max: 7 },
+      { id: 'peso4', label: 'Ponderación nota 4 (%)', type: 'number', unit: 'percent', required: false, defaultValue: 0, min: 0, max: 100 },
+      { id: 'nota5', label: 'Nota 5', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'peso5', label: 'Ponderación nota 5 (%)', type: 'number', unit: 'percent', required: false, min: 0, max: 100 },
+      { id: 'nota6', label: 'Nota 6', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'peso6', label: 'Ponderación nota 6 (%)', type: 'number', unit: 'percent', required: false, min: 0, max: 100 },
+      { id: 'nota7', label: 'Nota 7', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'peso7', label: 'Ponderación nota 7 (%)', type: 'number', unit: 'percent', required: false, min: 0, max: 100 },
+      { id: 'nota8', label: 'Nota 8', type: 'number', unit: 'grade', required: false, min: 0, max: 7 },
+      { id: 'peso8', label: 'Ponderación nota 8 (%)', type: 'number', unit: 'percent', required: false, min: 0, max: 100 },
+      {
+        id: 'redondeo',
+        label: 'Aproximación del promedio',
+        type: 'select',
+        required: false,
+        defaultValue: 'decima',
+        options: [
+          { value: 'decima', label: 'A la décima (5,45 → 5,5)' },
+          { value: 'centesima', label: 'A la centésima (5,454 → 5,45)' },
+        ],
+        tooltip: 'Cómo se aproxima el promedio lo define el reglamento de evaluación de tu colegio.',
+      },
+      {
+        id: 'notaObjetivo',
+        label: 'Nota que quieres alcanzar',
+        type: 'number',
+        unit: 'grade',
+        required: false,
+        min: 0,
+        max: 7,
+        tooltip: 'Se usa si tus ponderaciones suman menos de 100%. Si la dejas vacía se usa 4,0.',
+      },
+    ],
+    seoTitle: 'Calculadora de promedio de notas (1 a 7)',
+    seoDescription:
+      'Calcula tu promedio simple o ponderado en escala de 1,0 a 7,0 y qué nota necesitas para aprobar con 4,0. Basado en el Decreto 67 del Mineduc.',
+    faq: [
+      {
+        question: '¿Cómo se calcula el promedio de notas?',
+        answer:
+          'Si todas las notas valen lo mismo, se suman y se dividen por la cantidad de notas: (5,0 + 6,0 + 4,5) ÷ 3 = 5,17. Si tienen ponderaciones, cada nota se multiplica por su porcentaje y se suman los resultados: 5,0 × 30% + 6,0 × 30% + 4,5 × 40% = 5,1.',
+      },
+      {
+        question: '¿Cuál es la nota mínima para aprobar en Chile?',
+        answer:
+          'En la educación básica y media la escala va de 1,0 a 7,0, hasta con un decimal, y la calificación mínima de aprobación es 4,0, según el artículo 8 del Decreto 67 de 2018 del Mineduc.',
+      },
+      {
+        question: '¿Qué nota necesito en la prueba que me falta?',
+        answer:
+          'Ingresa tus notas con sus ponderaciones; si suman menos de 100%, la calculadora muestra la nota que necesitas en el porcentaje restante para llegar a 4,0 o a la nota que elijas. Si el resultado supera 7,0, con lo que falta no alcanzas esa nota.',
+      },
+      {
+        question: '¿Cuánto puede pesar el examen final?',
+        answer:
+          'Si la nota final de la asignatura es un promedio ponderado, la evaluación final no puede pesar más de un 30%, según el artículo 18 letra h del Decreto 67. La cantidad de notas y sus ponderaciones las define el docente de acuerdo con su planificación.',
+      },
+      {
+        question: '¿Repito de curso si tengo un ramo rojo?',
+        answer:
+          'No necesariamente: con una asignatura reprobada pasas de curso si tu promedio final anual es 4,5 o más, y con dos reprobadas, si es 5,0 o más (contando las reprobadas). Además necesitas al menos 85% de asistencia. Religión, Consejo de Curso y Orientación no cuentan para el promedio.',
+      },
+      {
+        question: '¿El 3,95 sube a 4,0?',
+        answer:
+          'Depende del reglamento de evaluación de tu establecimiento: el Decreto 67 fija la escala con un decimal, pero no cómo se aproxima. Por eso la calculadora te deja elegir la aproximación y siempre muestra también el promedio exacto.',
+      },
+    ],
+  },
+  {
+    id: 'escala-notas',
+    name: 'Calculadora Escala de Notas',
+    description:
+      'Convierte un puntaje a nota de 1,0 a 7,0 con la exigencia que elijas (60% por defecto) y calcula el puntaje mínimo para aprobar con 4,0.',
+    slug: 'calculadora-escala-notas',
+    category: 'educacion',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-04',
+    sources: [
+      {
+        name: 'BCN Ley Chile — Decreto 67/2018 Mineduc',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1127255',
+        note: 'Art. 8: escala 1,0 a 7,0 con un decimal y aprobación 4,0',
+      },
+      {
+        name: 'Mineduc — Texto del Decreto 67/2018 (PDF)',
+        url: 'https://especial.mineduc.cl/wp-content/uploads/sites/31/2020/08/Decreto-67_31-DIC-2018.pdf',
+        note: 'Art. 18: el reglamento de cada establecimiento define sus normas de evaluación',
+      },
+    ],
+    keywords: [
+      'escala de notas',
+      'calculadora escala de notas',
+      'nota mínima para aprobar',
+      'escala 60%',
+      'puntaje a nota',
+    ],
+    inputs: [
+      { id: 'puntajeMaximo', label: 'Puntaje máximo de la prueba', type: 'number', unit: 'count', placeholder: '60', required: true, min: 1 },
+      { id: 'puntajeObtenido', label: 'Puntaje obtenido', type: 'number', unit: 'count', placeholder: '42', required: false, defaultValue: 0, min: 0 },
+      {
+        id: 'exigencia',
+        label: 'Exigencia para el 4,0 (%)',
+        type: 'number',
+        unit: 'percent',
+        required: false,
+        defaultValue: 60,
+        min: 1,
+        max: 100,
+        tooltip: 'Porcentaje del puntaje que equivale a la nota 4,0. El 60% es lo más usado, pero lo define tu colegio o profesor.',
+      },
+      { id: 'notaMinima', label: 'Nota mínima de la escala', type: 'number', unit: 'grade', required: false, defaultValue: 1, min: 1, max: 7 },
+      { id: 'notaMaxima', label: 'Nota máxima de la escala', type: 'number', unit: 'grade', required: false, defaultValue: 7, min: 1, max: 7 },
+      { id: 'notaAprobacion', label: 'Nota de aprobación', type: 'number', unit: 'grade', required: false, defaultValue: 4, min: 1, max: 7 },
+    ],
+    seoTitle: 'Escala de notas: puntaje a nota (60%)',
+    seoDescription:
+      'Convierte tu puntaje a nota de 1,0 a 7,0 con exigencia del 60% o la que elijas, y calcula cuántos puntos necesitas para el 4,0. Gratis y al instante.',
+    faq: [
+      {
+        question: '¿Qué significa una escala al 60%?',
+        answer:
+          'Que necesitas el 60% del puntaje total para obtener un 4,0. En una prueba de 60 puntos, el 4,0 se logra con 36 puntos. Bajo ese puntaje la nota va de 1,0 a 4,0, y sobre él, de 4,0 a 7,0.',
+      },
+      {
+        question: '¿Cómo se calcula la nota con la escala?',
+        answer:
+          'Si tu puntaje es menor que el de aprobación: nota = 1 + 3 × puntaje ÷ puntaje de aprobación. Si es igual o mayor: nota = 4 + 3 × (puntaje − puntaje de aprobación) ÷ (puntaje máximo − puntaje de aprobación). Con 45 de 60 puntos al 60% obtienes 4 + 3 × 9 ÷ 24 = 5,1.',
+      },
+      {
+        question: '¿La exigencia del 60% es obligatoria por ley?',
+        answer:
+          'No. El Decreto 67 del Mineduc fija la escala de 1,0 a 7,0 y la aprobación con 4,0, pero no la exigencia: cada establecimiento la define en su reglamento de evaluación. Por eso puedes cambiarla en la calculadora (por ejemplo, 50% o 70%).',
+      },
+      {
+        question: '¿Cómo se aproxima la nota?',
+        answer:
+          'La calculadora muestra la nota con un decimal, aproximando desde la centésima 5 hacia arriba (5,05 → 5,1), y también la nota exacta. La forma oficial de aproximar la define el reglamento de tu establecimiento.',
       },
     ],
   },

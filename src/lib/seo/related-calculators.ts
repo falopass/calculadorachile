@@ -47,6 +47,24 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-simulador-apv',
   ],
 
+  // Estudios (E-033 a E-035, 04-11-2026): clúster escolar → PAES → financiamiento
+  'calculadora-puntaje-ponderado-paes': [
+    'calculadora-promedio-notas',
+    'calculadora-becas-gratuidad',
+    'calculadora-credito-cae',
+    'calculadora-escala-notas',
+  ],
+  'calculadora-promedio-notas': [
+    'calculadora-escala-notas',
+    'calculadora-puntaje-ponderado-paes',
+    'calculadora-becas-gratuidad',
+  ],
+  'calculadora-escala-notas': [
+    'calculadora-promedio-notas',
+    'calculadora-puntaje-ponderado-paes',
+    'calculadora-becas-gratuidad',
+  ],
+
   // Empresas / patente (top clics)
   'calculadora-patente-comercial': [
     'calculadora-iva',

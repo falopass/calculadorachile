@@ -20,6 +20,7 @@ export type CalculatorInputUnit =
   | 'days'
   | 'kWh'
   | 'count' // cantidad sin unidad (ej. nº de hijos)
+  | 'grade' // nota escolar 1,0–7,0 (acepta decimales)
   | 'm2'
   | 'm3';
 
