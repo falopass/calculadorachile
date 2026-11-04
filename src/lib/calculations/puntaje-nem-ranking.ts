@@ -16,7 +16,7 @@
 import { NEM_MAX, NEM_MIN, type GrupoNem } from '@/lib/values/nem-tablas-2027';
 import { PAES } from '@/lib/values/educacion';
 import type { CalculatorResult } from '@/types/calculator';
-import { promedioNem, puntajeNem, puntajeRanking, rankingNivel } from './ponderado-paes';
+import { promedioNem, puntajeNem, puntajeRanking } from './ponderado-paes';
 import { aproximar } from './promedio-notas';
 
 export interface PuntajeNemRankingInput {

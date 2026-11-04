@@ -13,8 +13,6 @@ import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios'
 import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import { contextoHonorarios, formatTasa, type AnioHonorarios } from '@/lib/values/honorarios-anio';
 import {
-  IPC_FUENTE_URL,
-  IPC_METODOLOGIA_URL,
   IPC_PERIODOS,
   IPC_ULTIMO_MES,
 } from '@/lib/values/ipc-serie';
@@ -1613,13 +1611,13 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     lastReviewed: '2026-11-04',
     sources: [
       {
-        name: 'INE — Calculadora oficial del IPC',
-        url: IPC_FUENTE_URL,
-        note: 'Variación del IPC entre meses (serie base anual 2023 = 100)',
+        name: 'INE — Índice de Precios al Consumidor (IPC)',
+        url: 'https://www.ine.gob.cl/estadisticas/economia/indices-de-precio-e-inflacion/indice-de-precios-al-consumidor',
+        note: 'Serie oficial mensual del IPC (base anual 2023 = 100)',
       },
       {
         name: 'INE — Uso de la Calculadora IPC (base anual 2023 = 100)',
-        url: IPC_METODOLOGIA_URL,
+        url: 'https://www.ine.gob.cl/docs/default-source/%C3%ADndice-de-precios-al-consumidor/metodologias/base-anual-2023-100/5---uso-calculadora-ipc.pdf',
         note: 'Metodología de reajuste monetario mensual, semestral, anual y acumulado',
       },
       {
@@ -6352,13 +6350,13 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     lastReviewed: '2026-11-04',
     sources: [
       {
-        name: 'INE — Calculadora oficial del IPC',
-        url: IPC_FUENTE_URL,
-        note: 'Herramienta oficial del Instituto Nacional de Estadísticas',
+        name: 'INE — Índice de Precios al Consumidor (IPC)',
+        url: 'https://www.ine.gob.cl/estadisticas/economia/indices-de-precio-e-inflacion/indice-de-precios-al-consumidor',
+        note: 'Publicación oficial mensual del Instituto Nacional de Estadísticas',
       },
       {
         name: 'INE — Uso de la Calculadora IPC (base anual 2023 = 100)',
-        url: IPC_METODOLOGIA_URL,
+        url: 'https://www.ine.gob.cl/docs/default-source/%C3%ADndice-de-precios-al-consumidor/metodologias/base-anual-2023-100/5---uso-calculadora-ipc.pdf',
         note: 'Fórmula de variación y elección del mes inicial y final',
       },
     ],
