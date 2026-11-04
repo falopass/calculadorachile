@@ -3,7 +3,7 @@
 Instrucciones para el revisor automático (Devin Review). Responde en español.
 
 ## Contexto
-Sitio YMYL de calculadoras laborales/tributarias/financieras chilenas (54 activas en
+Sitio YMYL de calculadoras laborales/tributarias/financieras chilenas (64 activas en
 `src/data/calculators.ts`, módulos en `src/lib/calculations/`). Un error en una fórmula,
 monto o fuente afecta decisiones económicas reales y la confianza/SEO.
 
