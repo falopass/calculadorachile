@@ -221,3 +221,28 @@ export function buildCvlistoBuscarTrabajoUrl(options: BuildCvlistoUrlOptions): s
   url.searchParams.set('utm_content', `${url.searchParams.get('utm_content')}_buscar_trabajo`);
   return url.toString();
 }
+
+/**
+ * Páginas profundas de CVListo enlazables desde el texto de artículos.
+ * Lista cerrada: un slug renombrado en CVListo se corrige solo aquí.
+ */
+export const CVLISTO_CONTENT_PAGES = {
+  'seguro-cesantia-cv': '/blog/seguro-cesantia-chile-2026-afc-y-cv',
+  'cv-despues-despido': '/blog/cv-despues-despido-que-poner-chile',
+  'despido-48-horas': '/blog/me-despidieron-adaptar-cv-48-horas-chile',
+  'que-piden-avisos': '/blog/que-piden-los-avisos-de-trabajo-en-chile-2026',
+  'ejemplos-cv': '/ejemplos-cv',
+} as const;
+
+export type CvlistoContentPage = keyof typeof CVLISTO_CONTENT_PAGES;
+
+/** URL de una página profunda de CVListo con la misma atribución UTM. */
+export function buildCvlistoContentUrl(
+  page: CvlistoContentPage,
+  options: BuildCvlistoUrlOptions,
+): string {
+  const url = new URL(buildCvlistoUrl(options));
+  url.pathname = CVLISTO_CONTENT_PAGES[page];
+  url.searchParams.set('utm_content', `${url.searchParams.get('utm_content')}_${page}`);
+  return url.toString();
+}

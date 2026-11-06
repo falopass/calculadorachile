@@ -26,7 +26,7 @@ import {
   JORNADA_LEGAL,
   SEGURO_CESANTIA_BENEFICIOS,
 } from '@/lib/values/constants';
-import { buildCvlistoBuscarTrabajoUrl } from '@/lib/cvlisto';
+import { buildCvlistoBuscarTrabajoUrl, buildCvlistoContentUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
 
@@ -47,6 +47,12 @@ function fechaLargaArticulo(iso: string): string {
   const [y, m, d] = iso.split('-').map(Number);
   return `${d} de ${MESES_ES_CL[m - 1]} de ${y}`;
 }
+
+// Enlaces editoriales a páginas profundas de CVListo (dentro del texto, no CTA).
+const cvlistoInline = (
+  page: Parameters<typeof buildCvlistoContentUrl>[0],
+  origen: string,
+) => buildCvlistoContentUrl(page, { origen, placement: 'blog_inline' });
 
 const CVLISTO_BUSCAR_TRABAJO_CHECKLIST = buildCvlistoBuscarTrabajoUrl({
   origen: 'cesantia',
@@ -786,6 +792,7 @@ const articleCatalog: ArticleDraft[] = [
 <li>Arma un presupuesto con pagos AFC confirmados, no con el saldo total de la cartola.</li>
 </ol>
 
+<p>Mientras se resuelve el pago del seguro, conviene tener el CV al día. CVListo explica <a href="${cvlistoInline('seguro-cesantia-cv', 'finiquito')}" target="_blank" rel="noopener noreferrer">cómo combinar el Seguro de Cesantía con la búsqueda de trabajo</a> sin dejar la postulación para después.</p>
 <h2>Fuentes y criterio editorial</h2>
 <p>Contenido verificado al 13 de julio de 2026 con la <a href="https://www.bcn.cl/leychile/navegar?idNorma=184979" target="_blank" rel="noopener">Ley 19.728 en LeyChile</a>, la respuesta vigente de la <a href="https://www.dt.gob.cl/portal/1628/w3-article-95307.html" target="_blank" rel="noopener">Dirección del Trabajo sobre imputación AFC</a>, el <a href="https://dt.gob.cl/legislacion/1624/w3-article-109220.html" target="_blank" rel="noopener">Ordinario 1916 de la DT</a>, el catálogo de <a href="https://www.afc.cl/empleadores/sus-certificados/" target="_blank" rel="noopener">certificados para empleadores de AFC</a>, la <a href="https://www.chileatiende.gob.cl/fichas/62932" target="_blank" rel="noopener">ficha oficial del Seguro de Cesantía</a> y la jurisprudencia publicada por el Poder Judicial. Noticias y foros se usaron para identificar controversias y preguntas reales; no sustituyen normas, dictámenes ni sentencias.</p>
 
@@ -965,6 +972,7 @@ ${tablaFcsHtml()}
 
 <p>Para ver todo el seguro en una página, entra al <a href="/cesantia">hub de cesantía</a>. Para entender qué paga cada fondo, revisa <a href="/blog/seguro-cesantia-finiquito-2026-afc">Seguro de Cesantía versus finiquito</a>. Si el empleador aún no paga o discutirás la causal, consulta la <a href="/guias/finiquito-laboral-chile">guía de finiquito</a> y no dejes correr el plazo judicial.</p>
 
+<p>El seguro cubre un tramo; la búsqueda empieza antes. Si no sabes cómo explicar el término del contrato en tu currículum, revisa <a href="${cvlistoInline('cv-despues-despido', 'default')}" target="_blank" rel="noopener noreferrer">qué poner en el CV después de un despido</a>.</p>
 <h2>Fuentes oficiales consultadas</h2>
 <p>Fechas de pago, saldo, requisitos, montos y BNE verificados al 29 de octubre de 2026; el resto del contenido, al 13 de julio de 2026. Fuentes: los <a href="https://www.afc.cl/mi-seguro-de-cesantia/requisitos-y-documentos/" target="_blank" rel="noopener">requisitos y documentos de AFC</a>, la página <a href="https://www.afc.cl/mi-seguro-de-cesantia/cobrar-seguro-de-cesantia/" target="_blank" rel="noopener">cobrar Seguro de Cesantía</a>, las <a href="https://www.afc.cl/mi-seguro-de-cesantia/fechas-y-medios-de-pago/" target="_blank" rel="noopener">fechas y medios de pago</a>, la <a href="https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro/" target="_blank" rel="noopener">simulación de cobro</a>, la solución para <a href="https://www.afc.cl/mi-seguro-de-cesantia/pagos-suspendidos/" target="_blank" rel="noopener">pagos suspendidos</a>, la ficha de <a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende sobre el Seguro de Cesantía</a>, los <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html" target="_blank" rel="noopener">montos del Fondo de Cesantía Solidario de la Superintendencia de Pensiones</a>, las <a href="https://bne.gob.cl/faq" target="_blank" rel="noopener">preguntas frecuentes de la BNE</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=184979" target="_blank" rel="noopener">Ley 19.728</a>. Las consultas de foros se usaron para detectar fallas frecuentes de documentos y cotizaciones posteriores; no para definir requisitos.</p>`,
   },
@@ -2367,6 +2375,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>Para simular, ingresa el bruto y tu AFP real en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>. Si tu liquidación contiene gratificación, Isapre o descuentos especiales, replica cada dato; no ajustes el resultado hasta que “se parezca” al depósito.</p>
 
+<p>Para comparar el mínimo legal con lo que ofrecen los avisos, CVListo publicó un <a href="${cvlistoInline('que-piden-avisos', 'sueldo')}" target="_blank" rel="noopener noreferrer">análisis de requisitos y rentas en avisos de trabajo en Chile</a>, agrupado por tipo de cargo.</p>
 <h2>Fuentes y fecha de comprobación</h2>
 <p>Contenido verificado al <strong>13 de noviembre de 2026</strong>. Las preguntas de foros y redes se usaron para detectar dudas sobre líquido, retroactividad y jornada parcial; no para fijar cifras.</p>
 <ul>
@@ -2474,6 +2483,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>Construye una estimación con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>, teniendo presente la limitación actual de fecha en vacaciones. Para casos de remuneración variable, continuidad laboral, fuero, cotizaciones impagas o causal discutida, la revisión profesional no es reemplazable por una simulación.</p>
 
+<p>Una vez firmado el finiquito, el siguiente paso suele ser volver a postular. CVListo tiene una guía para <a href="${cvlistoInline('despido-48-horas', 'finiquito')}" target="_blank" rel="noopener noreferrer">adaptar el CV en las primeras 48 horas tras un despido</a>.</p>
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo vigente</a>, las consultas de la DT sobre <a href="https://dt.gob.cl/portal/1628/w3-article-60613.html" target="_blank" rel="noopener">plazo para otorgar el finiquito</a> y <a href="https://dt.gob.cl/portal/1628/w3-article-60543.html" target="_blank" rel="noopener">formalidades de la carta</a>, el trámite oficial para <a href="https://dt.gob.cl/portal/1626/w3-article-117245.html" target="_blank" rel="noopener">ratificar con o sin reserva</a> y el método de la DT para vacaciones e indemnizaciones. Las experiencias compartidas en foros se usaron para identificar dudas sobre reserva, AFC y feriado; no como fuente legal.</p>`,
   },
@@ -5129,6 +5139,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <h2>Qué cambia en enero de 2027</h2>
 <p>El ingreso mínimo del subsidio ($529.000) se reajusta por primera vez en <strong>enero de 2027</strong> según el IPC, y un decreto fijará el nuevo valor (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/03/13/44399/01/2782286.pdf" target="_blank" rel="noopener">Ley 21.808, art. 8 y art. segundo transitorio</a>). Con eso cambiarán los tramos y los montos del subsidio. Los actualizaremos cuando se publique el decreto. Este valor es distinto del <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo legal de $553.553</a>, que tiene su propio reajuste en enero.</p>
 
+<p>El subsidio parte cuando consigues un empleo en el sector privado después de un período sin trabajo. Si estás en esa búsqueda, en CVListo hay <a href="${cvlistoInline('ejemplos-cv', 'default')}" target="_blank" rel="noopener noreferrer">ejemplos de CV por cargo</a> con lo que suelen pedir los avisos chilenos.</p>
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 20 de octubre de 2026 con:</p>
 <ul>

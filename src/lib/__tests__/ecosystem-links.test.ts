@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { buildCvlistoBuscarTrabajoUrl, buildCvlistoCartaUrl } from '../cvlisto';
 import {
-  buildSitiazoUrl,
-  isSitiazoCtaCalculator,
-} from '../sitiazo';
+  buildCvlistoBuscarTrabajoUrl,
+  buildCvlistoCartaUrl,
+  buildCvlistoContentUrl,
+} from '../cvlisto';
+import { buildSitiazoUrl, isSitiazoCtaCalculator } from '../sitiazo';
 
 describe('buildCvlistoCartaUrl', () => {
   it('apunta a la herramienta de carta con UTMs y sufijo _carta', () => {
@@ -19,9 +20,7 @@ describe('buildCvlistoCartaUrl', () => {
     expect(url.searchParams.get('utm_source')).toBe('calculachile');
     expect(url.searchParams.get('utm_medium')).toBe('referral');
     expect(url.searchParams.get('utm_campaign')).toBe('ecosistema_laboral');
-    expect(url.searchParams.get('utm_content')).toBe(
-      'finiquito_after_result_carta',
-    );
+    expect(url.searchParams.get('utm_content')).toBe('finiquito_after_result_carta');
     expect(url.searchParams.get('origen')).toBe('finiquito');
   });
 });
@@ -39,6 +38,19 @@ describe('buildCvlistoBuscarTrabajoUrl', () => {
   });
 });
 
+describe('buildCvlistoContentUrl', () => {
+  it('apunta a la página profunda con UTMs y sufijo de página', () => {
+    const url = new URL(
+      buildCvlistoContentUrl('ejemplos-cv', { origen: 'default', placement: 'blog_inline' }),
+    );
+    expect(url.origin).toBe('https://cvlisto.cl');
+    expect(url.pathname).toBe('/ejemplos-cv');
+    expect(url.searchParams.get('utm_source')).toBe('calculachile');
+    expect(url.searchParams.get('utm_campaign')).toBe('ecosistema_laboral');
+    expect(url.searchParams.get('utm_content')).toBe('default_blog_inline_ejemplos-cv');
+  });
+});
+
 describe('buildSitiazoUrl', () => {
   it('construye la URL de sitiazo.cl con UTMs de ecosistema pymes', () => {
     const url = new URL(buildSitiazoUrl('patente-comercial'));
@@ -46,9 +58,7 @@ describe('buildSitiazoUrl', () => {
     expect(url.searchParams.get('utm_source')).toBe('calculachile');
     expect(url.searchParams.get('utm_medium')).toBe('referral');
     expect(url.searchParams.get('utm_campaign')).toBe('ecosistema_pymes');
-    expect(url.searchParams.get('utm_content')).toBe(
-      'patente-comercial_after_result',
-    );
+    expect(url.searchParams.get('utm_content')).toBe('patente-comercial_after_result');
   });
 
   it('usa el placement en utm_content', () => {
@@ -57,9 +67,7 @@ describe('buildSitiazoUrl', () => {
   });
 
   it('acepta contentId de blog/guía como clave', () => {
-    const url = new URL(
-      buildSitiazoUrl('blog_patente-comercial-2027-calcular', 'blog_footer'),
-    );
+    const url = new URL(buildSitiazoUrl('blog_patente-comercial-2027-calcular', 'blog_footer'));
     expect(url.searchParams.get('utm_content')).toBe(
       'blog_patente-comercial-2027-calcular_blog_footer',
     );
