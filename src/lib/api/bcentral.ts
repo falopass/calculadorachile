@@ -4,11 +4,14 @@
 
 import { BCENTRAL_CODES } from './codigos';
 import type { BCentralSerieResponse, ValorBCentral } from './types';
+import { withDeadline } from './deadline';
 
 const BCENTRAL_API = 'https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx';
 
 // Timeout para no colgar el route handler si BCentral está lento.
 const FETCH_TIMEOUT_MS = 5_000;
+/** Plazo total (conexión + cuerpo) aunque el fetch ignore el signal. */
+const DEADLINE_MS = FETCH_TIMEOUT_MS + 1_000;
 
 // Credenciales desde variables de entorno
 const BCENTRAL_USER = process.env.BCENTRAL_USER || '';
@@ -30,6 +33,18 @@ function describeError(error: unknown): string {
  * @returns Array de valores con fecha y valor (vacío si la API falla)
  */
 export async function fetchBCentral(
+  codigo: string,
+  desde?: string,
+  hasta?: string,
+): Promise<ValorBCentral[]> {
+  return withDeadline(requestBCentral(codigo, desde, hasta), DEADLINE_MS, [], () =>
+    console.error(
+      `[BCentral] Sin respuesta en ${DEADLINE_MS} ms para ${codigo}; se usa el respaldo.`,
+    ),
+  );
+}
+
+async function requestBCentral(
   codigo: string,
   desde?: string,
   hasta?: string,
@@ -111,13 +126,8 @@ export async function fetchBCentral(
  * fecha futura respecto a hoy en America/Santiago; esas no son
  * el "valor actual".
  */
-export function pickLatestNotFuture(
-  values: ValorBCentral[],
-  today: string,
-): ValorBCentral | null {
-  const past = values.filter(
-    (v) => v.fecha <= today && Number.isFinite(v.valor),
-  );
+export function pickLatestNotFuture(values: ValorBCentral[], today: string): ValorBCentral | null {
+  const past = values.filter((v) => v.fecha <= today && Number.isFinite(v.valor));
   return past.length > 0 ? past[past.length - 1] : null;
 }
 

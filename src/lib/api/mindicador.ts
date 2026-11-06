@@ -10,8 +10,12 @@
 // Documentación: https://mindicador.cl/
 // ============================================
 
+import { withDeadline } from './deadline';
+
 const MINDICADOR_API = 'https://mindicador.cl/api';
 const FETCH_TIMEOUT_MS = 5_000;
+/** Plazo total (conexión + cuerpo) aunque el fetch ignore el signal. */
+const DEADLINE_MS = FETCH_TIMEOUT_MS + 1_000;
 
 /** Resumen compacto de un error de red: name + cause.code cuando existen. */
 function describeError(error: unknown): string {
@@ -82,7 +86,9 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
     return cachedResult.valores;
   }
   if (inFlight) return inFlight;
-  inFlight = requestMindicadorValores()
+  inFlight = withDeadline(requestMindicadorValores(), DEADLINE_MS, emptyValores(), () =>
+    console.error(`[Mindicador] Sin respuesta en ${DEADLINE_MS} ms; se usa el respaldo.`),
+  )
     .then((valores) => {
       cachedResult = { at: Date.now(), valores };
       return valores;
@@ -93,8 +99,8 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
   return inFlight;
 }
 
-async function requestMindicadorValores(): Promise<MindicadorValores> {
-  const empty: MindicadorValores = {
+function emptyValores(): MindicadorValores {
+  return {
     uf: null,
     utm: null,
     dolar: null,
@@ -102,6 +108,10 @@ async function requestMindicadorValores(): Promise<MindicadorValores> {
     asOf: null,
     fechas: { uf: null, utm: null, dolar: null },
   };
+}
+
+async function requestMindicadorValores(): Promise<MindicadorValores> {
+  const empty = emptyValores();
 
   let response: Response;
   try {
@@ -132,8 +142,7 @@ async function requestMindicadorValores(): Promise<MindicadorValores> {
     return empty;
   }
 
-  const safeNumber = (v: unknown) =>
-    typeof v === 'number' && Number.isFinite(v) ? v : null;
+  const safeNumber = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 
   return {
     uf: safeNumber(data.uf?.valor),
