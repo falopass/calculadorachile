@@ -41,6 +41,19 @@ describe('fetchMindicadorValores con un fetch que nunca responde', () => {
     await vi.advanceTimersByTimeAsync(6_000);
     await expect(result).resolves.toMatchObject({ uf: null, utm: null, dolar: null, euro: null });
   });
+
+  it('no abre otro fetch mientras el anterior sigue pendiente', async () => {
+    const { fetchMindicadorValores } = await import('../mindicador');
+    const first = fetchMindicadorValores();
+    await vi.advanceTimersByTimeAsync(6_000);
+    await first;
+    // Pasa el memo de 30 s: la siguiente llamada reutiliza el request colgado.
+    await vi.advanceTimersByTimeAsync(31_000);
+    const second = fetchMindicadorValores();
+    await vi.advanceTimersByTimeAsync(6_000);
+    await second;
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe('fetchBCentral con un fetch que nunca responde', () => {
@@ -67,5 +80,16 @@ describe('fetchBCentral con un fetch que nunca responde', () => {
     const result = fetchBCentral('F073.UFF.PRE.Z.D');
     await vi.advanceTimersByTimeAsync(6_000);
     await expect(result).resolves.toEqual([]);
+  });
+
+  it('no abre otro fetch para la misma serie mientras el anterior sigue pendiente', async () => {
+    const { fetchBCentral } = await import('../bcentral');
+    const first = fetchBCentral('F073.UFF.PRE.Z.D', '2026-11-01', '2026-11-06');
+    await vi.advanceTimersByTimeAsync(6_000);
+    await first;
+    const second = fetchBCentral('F073.UFF.PRE.Z.D', '2026-11-01', '2026-11-06');
+    await vi.advanceTimersByTimeAsync(6_000);
+    await expect(second).resolves.toEqual([]);
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 });

@@ -12,6 +12,8 @@ const BCENTRAL_API = 'https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx';
 const FETCH_TIMEOUT_MS = 5_000;
 /** Plazo total (conexión + cuerpo) aunque el fetch ignore el signal. */
 const DEADLINE_MS = FETCH_TIMEOUT_MS + 1_000;
+// Requests en curso por serie: una caída prolongada no acumula fetches.
+const pendingByKey = new Map<string, Promise<ValorBCentral[]>>();
 
 // Credenciales desde variables de entorno
 const BCENTRAL_USER = process.env.BCENTRAL_USER || '';
@@ -37,7 +39,13 @@ export async function fetchBCentral(
   desde?: string,
   hasta?: string,
 ): Promise<ValorBCentral[]> {
-  return withDeadline(requestBCentral(codigo, desde, hasta), DEADLINE_MS, [], () =>
+  const key = `${codigo}|${desde ?? ''}|${hasta ?? ''}`;
+  let source = pendingByKey.get(key);
+  if (!source) {
+    source = requestBCentral(codigo, desde, hasta).finally(() => pendingByKey.delete(key));
+    pendingByKey.set(key, source);
+  }
+  return withDeadline(source, DEADLINE_MS, [], () =>
     console.error(
       `[BCentral] Sin respuesta en ${DEADLINE_MS} ms para ${codigo}; se usa el respaldo.`,
     ),

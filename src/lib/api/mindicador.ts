@@ -74,6 +74,9 @@ export interface MindicadorValores {
 const MEMO_TTL_MS = 30_000;
 let cachedResult: { at: number; valores: MindicadorValores } | null = null;
 let inFlight: Promise<MindicadorValores> | null = null;
+// Request real a la fuente; sobrevive al plazo para que una caída
+// prolongada no abra un fetch nuevo en cada llamada.
+let pendingSource: Promise<MindicadorValores> | null = null;
 
 /**
  * Fetch a Mindicador con timeout y manejo defensivo de errores.
@@ -86,7 +89,10 @@ export async function fetchMindicadorValores(): Promise<MindicadorValores> {
     return cachedResult.valores;
   }
   if (inFlight) return inFlight;
-  inFlight = withDeadline(requestMindicadorValores(), DEADLINE_MS, emptyValores(), () =>
+  pendingSource ??= requestMindicadorValores().finally(() => {
+    pendingSource = null;
+  });
+  inFlight = withDeadline(pendingSource, DEADLINE_MS, emptyValores(), () =>
     console.error(`[Mindicador] Sin respuesta en ${DEADLINE_MS} ms; se usa el respaldo.`),
   )
     .then((valores) => {
