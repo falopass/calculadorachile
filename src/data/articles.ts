@@ -2483,7 +2483,6 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>Construye una estimación con la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>, teniendo presente la limitación actual de fecha en vacaciones. Para casos de remuneración variable, continuidad laboral, fuero, cotizaciones impagas o causal discutida, la revisión profesional no es reemplazable por una simulación.</p>
 
-<p>Una vez firmado el finiquito, el siguiente paso suele ser volver a postular. CVListo tiene una guía para <a href="${cvlistoInline('despido-48-horas', 'finiquito')}" target="_blank" rel="noopener noreferrer">adaptar el CV en las primeras 48 horas tras un despido</a>.</p>
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado al 13 de julio de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo vigente</a>, las consultas de la DT sobre <a href="https://dt.gob.cl/portal/1628/w3-article-60613.html" target="_blank" rel="noopener">plazo para otorgar el finiquito</a> y <a href="https://dt.gob.cl/portal/1628/w3-article-60543.html" target="_blank" rel="noopener">formalidades de la carta</a>, el trámite oficial para <a href="https://dt.gob.cl/portal/1626/w3-article-117245.html" target="_blank" rel="noopener">ratificar con o sin reserva</a> y el método de la DT para vacaciones e indemnizaciones. Las experiencias compartidas en foros se usaron para identificar dudas sobre reserva, AFC y feriado; no como fuente legal.</p>`,
   },

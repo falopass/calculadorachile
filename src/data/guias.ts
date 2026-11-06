@@ -24,6 +24,7 @@
 // ============================================
 
 import { guiaFeriados2027 } from './guia-feriados-2027';
+import { buildCvlistoContentUrl } from '@/lib/cvlisto';
 
 export interface GuiaSection {
   id: string;
@@ -545,6 +546,7 @@ export const guias: Guia[] = [
 
 <h3>Cómo usar las calculadoras sin delegar la decisión</h3>
 <p>La <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a> ordena años de servicio, aviso y conceptos pendientes. La de <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">indemnización</a> aísla la base y los recargos. La herramienta de <a href="/calculadoras/calculadora-vacaciones-proporcionales">vacaciones proporcionales</a> pide la fecha de término y pasa los días hábiles a corridos sumando sábados, domingos y feriados nacionales; contrasta el resultado con tu registro de vacaciones antes de firmar.</p>
+<p>Una vez firmado el finiquito, el siguiente paso suele ser volver a postular. CVListo tiene una guía para <a href="${buildCvlistoContentUrl('despido-48-horas', { origen: 'finiquito', placement: 'blog_inline' })}" target="_blank" rel="noopener noreferrer">adaptar el CV en las primeras 48 horas tras un despido</a>.</p>
 <p>Las preguntas de foros laborales se utilizaron para identificar errores reales —gratificación duplicada, seis meses redondeados, cuenta AFC completa y firma sin reserva—, pero las reglas de esta guía se comprobaron en Código del Trabajo, Dirección del Trabajo y AFC. Contenido revisado al 13 de julio de 2026.</p>
 
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Esta guía enseña a revisar un cálculo; no determina la causal ni reemplaza asesoría jurídica. Si hay despido discutido, cotizaciones impagas, tutela de derechos, fuero, embarazo, accidente laboral o montos relevantes, obtén orientación antes de que venza el plazo judicial.</p></div></aside>`,
