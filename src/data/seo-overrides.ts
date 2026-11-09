@@ -459,9 +459,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y JORNADA ---
   'calculadora-sueldo-part-time': {
-    seoTitle: 'Sueldo Part Time 30 Horas 2026: mínimo y valor hora',
+    seoTitle: 'Sueldo part time 2026: mínimo por hora, 20 y 30 horas', // 53 (+15 sufijo plantilla = 68)
     seoDescription:
-      'Con 30 horas o menos el mínimo se paga proporcional ($553.553 × horas ÷ 42); con más de 30 corresponde íntegro. Calcula el mínimo y el valor hora. DT.',
+      'Calcula el sueldo mínimo part time 2026 según tus horas: tabla de 18 a 36 horas, valor hora y la regla de las 30 horas, con fuentes de la Dirección del Trabajo.',
   },
 
   'calculadora-factor-hora-extra': {
