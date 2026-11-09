@@ -60,7 +60,7 @@ export default function OfficialValuesBlock() {
         </p>
 
         <h1 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-[var(--foreground)] md:text-5xl">
-          Calculadoras chilenas 2026
+          Calculadora online para Chile 2026
         </h1>
 
         <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--border)] md:grid-cols-4">
