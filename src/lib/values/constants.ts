@@ -12,6 +12,17 @@
 // ============================================
 
 import snapshot from './snapshot.json';
+
+/** Fecha de observación de un indicador (YYYY-MM-DD), no la del generate del snapshot. */
+function observedAsOf(
+  key: 'dolarObservado' | 'euro' | 'pesoArgentino' | 'uf' | 'utm',
+): string {
+  const map = (snapshot as { observedAsOf?: Partial<Record<string, string>> }).observedAsOf;
+  const obs = map?.[key];
+  if (obs && /^\d{4}-\d{2}-\d{2}$/.test(obs)) return obs;
+  return snapshot.asOf.split('T')[0];
+}
+
 import tmcSnapshot from './tmc-snapshot.json';
 
 export const INGRESO_MINIMO = {
@@ -50,7 +61,8 @@ export const UTM = {
 export const DOLAR = {
   observado: snapshot.dolarObservado,
   venta: Math.round(snapshot.dolarObservado * 1.0065 * 100) / 100,
-  fecha_actualizacion: snapshot.asOf.split('T')[0],
+  /** Día de la observación BCCh/CMF, no el `asOf` del job. */
+  fecha_actualizacion: observedAsOf('dolarObservado'),
 };
 
 /**
@@ -69,8 +81,30 @@ export const EURO = {
     typeof snapshotEuro === 'number' && snapshotEuro > 0
       ? snapshotEuro
       : Math.round(snapshot.dolarObservado * EUR_PREMIUM_VS_USD_FALLBACK * 100) / 100,
-  fecha_actualizacion: snapshot.asOf.split('T')[0],
+  /** Día de la observación BCCh, no el `asOf` del job. */
+  fecha_actualizacion: observedAsOf('euro'),
 };
+
+/**
+ * Tipo de cambio nominal ARS→CLP (pesos chilenos por 1 peso argentino).
+ * Serie BCCh F072.CLP.ARS.N.O.D — carácter **referencial** (no Diario Oficial).
+ * El lead de la calculadora solo muestra este valor si la fuente del snapshot
+ * no es `fallback` (ver E-050 / update-values).
+ */
+export const PESO_ARGENTINO = {
+  valor: (snapshot as { pesoArgentino?: number }).pesoArgentino ?? 0,
+  /** Día de la observación BCCh (serie F072), no el `asOf` del job. */
+  fecha_actualizacion: observedAsOf('pesoArgentino'),
+  /** Fuente del valor en snapshot.sources; `fallback` nunca se presenta como «hoy». */
+  fuente_snapshot:
+    ((snapshot as { sources?: { pesoArgentino?: string } }).sources?.pesoArgentino ??
+      'fallback') as string,
+  serie: 'F072.CLP.ARS.N.O.D' as const,
+  referencial: true as const,
+  fuente:
+    'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.ARS.N.O.D',
+};
+
 
 // ============================================
 // Constantes regulatorias (manuales)
@@ -526,6 +560,27 @@ export const IMPUESTO_SEGUNDA_CATEGORIA = {
 // UTA = 12 × UTM (derivado del snapshot)
 export const UTA_2026 = UTM.valor * 12;
 
+/**
+ * Valores UTM mensuales 2026 publicados por el SII (pesos).
+ * Fuente: https://www.sii.cl/valores_y_fechas/utm/utm2026.htm
+ * Verificado 2026-11-09. Usar para tablas/avisos del mes siguiente;
+ * el valor "de hoy" de la calculadora sigue saliendo del snapshot/vivo.
+ */
+export const UTM_SII_2026: Readonly<Record<number, number>> = {
+  1: 69751,
+  2: 69611,
+  3: 69889,
+  4: 69889,
+  5: 70588,
+  6: 71506,
+  7: 71649,
+  8: 71649,
+  9: 71721,
+  10: 72151,
+  11: 72440,
+  12: 72802,
+};
+
 // ============================================
 // Subsidio Habitacional DS49 / DS01
 // ============================================
@@ -924,31 +979,46 @@ export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
 // Aguinaldo / bonos 2026 (sector público — Ley 21.806)
 // ============================================
 /**
- * Montos de **tramo 1** (remuneración líquida de referencia ≤ $1.060.493)
- * usados por la calculadora de aguinaldo como base referencial.
+ * Aguinaldos / bonos del **sector público** (Ley 21.806 / Ley 21.724).
  *
  * Fiestas Patrias 2026 (pago con remuneración de septiembre):
  *  - Tramo 1: $91.682 (líquido ago ≤ $1.060.493)
- *  - Tramo 2: $63.645 (líquido ago superior; tope de elegibilidad suele
- *    alinear con remuneración bruta permanente ≤ $3.511.800 en el acuerdo/ley)
+ *  - Tramo 2: $63.645 (líquido ago superior; tope bruta permanente ≤ $3.511.800)
  *
- * Navidad 2026 (pago con remuneración de diciembre):
- *  - Tramo 1: $71.206 · Tramo 2: $37.666 (mismos umbrales de tramo)
+ * Navidad — `navidad` es el **monto de referencia Navidad 2025** (tramo 1
+ * $71.206; tramo 2 $37.666; umbral $1.060.493). Ley 21.806 art. 2 n°1
+ * modifica Ley 21.724 art. 2 (cambia «año 2024» → «año 2025»). **No** es
+ * el monto Navidad 2026 del sector público: ese lo fija la ley de reajuste,
+ * aún no publicada. Nunca presentar `navidad` como cifra 2026.
  *
- * Bono de escolaridad 2026: $89.164 total (2 cuotas de $44.582) — no es
- * “aguinaldo” stricto sensu; la calculadora lo expone como tipo `escolar`.
+ * Bono de escolaridad 2026: $89.164 total (2×$44.582).
  *
- * Pensionados IPS (ChileAtiende ficha 26553) es **otro régimen**:
- *  - Base FP 2026: $25.280 + $12.969 por carga al 31 ago 2026.
- * No uses estos montos SP para IPS ni viceversa.
- *
- * Fuentes: Ley 21.806 (D.O. 5 feb 2026); protocolo Hacienda/CUT-MSP;
- * ChileAtiende IPS ficha 26553 (pensionados).
+ * Pensionados IPS: ver `AGUINALDO_PENSIONADOS_IPS_2026` (otro régimen).
+ * Fuentes: https://www.bcn.cl/leychile/navegar?idNorma=1221118 ;
+ * DO CVE 2766382 https://www.diariooficial.interior.gob.cl/publicaciones/2026/02/05/44368-B/01/2766382.pdf
  */
 export const AGUINALDO_2026 = {
   fiestas_patrias: 91_682,
+  fiestas_patrias_tramo2: 63_645,
+  /** Monto de referencia Navidad 2025 (tramo 1). NO es Navidad 2026 SP. */
   navidad: 71_206,
+  navidad_tramo2_referencia_2025: 37_666,
+  umbral_liquido: 1_060_493,
+  tope_bruto_elegibilidad: 3_511_800,
   escolar: 89_164,
+  /** Flag para UI/tests: `navidad` es referencia 2025, no monto 2026. */
+  navidad_es_referencia_2025: true as const,
+};
+
+/**
+ * Aguinaldos IPS / pensionados (Ley 21.806 art. 5) — régimen distinto al SP.
+ * No mezclar con `AGUINALDO_2026`.
+ */
+export const AGUINALDO_PENSIONADOS_IPS_2026 = {
+  fiestas_patrias_base: 25_280,
+  fiestas_patrias_por_carga: 12_969,
+  navidad_base: 29_055,
+  navidad_por_carga: 16_415,
 };
 
 // ============================================

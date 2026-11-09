@@ -143,9 +143,10 @@ export function buildLiveValueTitle(
   if (!parts) return null;
 
   if (kind === 'utm') {
+    // E-049: mes + valor desde el indicador vivo (no se queda en "noviembre"
+    // cuando el 01-12 cambie la UTM). ≤60 caracteres con valores habituales.
     const mes = MESES_ES_CL[parts.month - 1];
-    const Mes = mes.charAt(0).toUpperCase() + mes.slice(1);
-    return `¿Cuánto es una UTM? ${Mes} ${parts.year}: ${formatCLP(value)}`;
+    return `UTM ${mes} ${parts.year}: ${formatCLP(value)} y conversión a pesos`;
   }
   const fecha = `${String(parts.day).padStart(2, '0')}-${String(parts.month).padStart(2, '0')}-${parts.year}`;
   if (kind === 'uf') {
@@ -167,7 +168,35 @@ export function buildLiveValueDescription(
   const parts = toSantiagoParts(date);
   if (!parts) return null;
   const mes = MESES_ES_CL[parts.month - 1];
-  return `Una UTM vale ${formatCLP(value)} en ${mes} de ${parts.year} (SII). Convierte UTM a pesos y pesos a UTM para multas, patentes y contratos. Gratis y sin registro.`;
+  // Base dinámica; el aviso del mes siguiente (si el SII ya lo publicó) lo
+  // agrega buildLiveValueDescriptionWithCalendar cuando hay tabla.
+  return `UTM de ${mes} de ${parts.year}: ${formatCLP(value)} (SII). Convierte UTM a pesos, multas, UTM vs UTA y UF, y qué mes usar.`;
+}
+
+/**
+ * Meta UTM con eventual mención del mes siguiente si está en la tabla SII
+ * del año (p. ej. diciembre ya publicado en noviembre).
+ */
+export function buildLiveValueDescriptionWithCalendar(
+  kind: LiveKind,
+  value: number,
+  date: Date,
+  calendar: Record<number, number> | null | undefined,
+): string | null {
+  const base = buildLiveValueDescription(kind, value, date);
+  if (!base || kind !== 'utm' || !calendar) return base;
+  const parts = toSantiagoParts(date);
+  if (!parts) return base;
+  const nextMonth = parts.month === 12 ? 1 : parts.month + 1;
+  const nextYear = parts.month === 12 ? parts.year + 1 : parts.year;
+  // Solo anunciamos el mes siguiente del mismo año calendario de la tabla.
+  if (nextYear !== parts.year) return base;
+  const nextVal = calendar[nextMonth];
+  if (!(nextVal > 0)) return base;
+  const nextName = MESES_ES_CL[nextMonth - 1];
+  const extra = ` ${nextName.charAt(0).toUpperCase() + nextName.slice(1)}: ${formatCLP(nextVal)}.`;
+  const combined = base + extra;
+  return combined.length <= 155 ? combined : base;
 }
 
 export { formatDDMMYYYY, toSantiagoParts };

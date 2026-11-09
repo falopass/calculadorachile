@@ -21,6 +21,7 @@ import { formatCLP } from '@/lib/formatters';
 import {
   buildLiveValueTitle,
   buildLiveValueDescription,
+  buildLiveValueDescriptionWithCalendar,
   isLiveValueFresh,
   toSantiagoParts,
   MESES_ES_CL,
@@ -28,6 +29,7 @@ import {
   formatDDMMYYYY,
   type LiveKind,
 } from '@/lib/seo/live-value-title';
+import { UTM_SII_2026 } from '@/lib/values/constants';
 import { getQuickAnswer } from '@/data/calculator-quick-answers';
 import { calculateUTMCLP } from '@/lib/calculations/utm-clp';
 import { calculateUFCLP } from '@/lib/calculations/uf-clp';
@@ -219,7 +221,15 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
         new Date(),
       );
       if (liveTitle) titleClean = liveTitle;
-      liveDesc = buildLiveValueDescription(kind, indicator.value, new Date(indicator.date));
+      liveDesc =
+        kind === 'utm'
+          ? buildLiveValueDescriptionWithCalendar(
+              kind,
+              indicator.value,
+              new Date(indicator.date),
+              UTM_SII_2026,
+            )
+          : buildLiveValueDescription(kind, indicator.value, new Date(indicator.date));
     }
   }
 

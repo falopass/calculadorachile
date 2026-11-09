@@ -41,6 +41,8 @@ export const FALLBACK_VALUES = {
   },
   /** Paridad EUR/CLP (Euro observado). */
   euro: fallbackEuro,
+  /** Solo interno: nunca renderizar como "valor de hoy" (E-050). */
+  pesoArgentino: (snapshot as { pesoArgentino?: number }).pesoArgentino ?? 0,
   /** ISO date del último valor (lo reportado por la fuente). */
   asOf: snapshot.asOf,
   /** Cuándo se generó el snapshot (build-time). */

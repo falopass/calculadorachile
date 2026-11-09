@@ -4739,7 +4739,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       'beneficios estudiantiles mineduc',
       'cuándo se llena el fuas',
     ],
-    relatedCalculators: ['calculadora-becas-gratuidad'],
+    relatedCalculators: ['calculadora-becas-gratuidad', 'calculadora-puntaje-ponderado-paes', 'calculadora-puntaje-nem-ranking'],
     faq: [
       {
         question: '¿Cuándo se llena el FUAS para la admisión 2027?',
@@ -4833,7 +4833,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 </table>
 <p>Algunos detalles que distinguen cada una: la BJGM aplica en <strong>cualquier institución acreditada al 31 de diciembre de 2025</strong>, no solo en universidades adscritas a la gratuidad, y el puntaje PAES se exime si ingresas por el programa <strong>PACE</strong>. La BNM II exige además que la institución esté acreditada por <strong>al menos 3 años</strong>. Y las becas tienen requisitos comunes: <strong>nacionalidad chilena</strong>, no tener título profesional o técnico ni licenciatura terminal, y <strong>no haber recibido becas de arancel Mineduc en dos oportunidades</strong>. Si ya tuviste gratuidad, una beca solo procede en una carrera distinta.</p>
 <p>La lectura práctica de la tabla es por combinaciones, no por filas sueltas: un mismo estudiante puede calificar a más de un beneficio a la vez. Quien está en el 60% y estudia una carrera universitaria en una institución adscrita con buen puntaje PAES puede tener gratuidad, Bicentenario y BJGM simultáneamente como opciones —aunque en la práctica los beneficios de arancel no se suman en la misma carrera. Lo relevante es que una sola postulación FUAS habilita la evaluación de todos.</p>
-<p>Nuestra <a href="/calculadoras/calculadora-becas-gratuidad">calculadora de becas y gratuidad</a> cruza exactamente estas reglas: con tu tramo socioeconómico, tipo de carrera, puntaje PAES y NEM te muestra a qué beneficios podrías optar y el tope anual de cada uno.</p>
+<p>Nuestra <a href="/calculadoras/calculadora-becas-gratuidad">calculadora de becas y gratuidad</a> cruza exactamente estas reglas: con tu tramo socioeconómico, tipo de carrera, puntaje PAES y NEM te muestra a qué beneficios podrías optar y el tope anual de cada uno. Para proyectar tu postulación, calcula antes tu <a href="/calculadoras/calculadora-puntaje-ponderado-paes">puntaje ponderado PAES</a> y tu <a href="/calculadoras/calculadora-puntaje-nem-ranking">puntaje NEM y ranking</a>.</p>
 
 <h2>Qué revisar antes de que cierre la ventana</h2>
 <ol class="steps">

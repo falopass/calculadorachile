@@ -621,6 +621,22 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'peso-argentino-clp': {
+      const { calculatePesoArgentinoClp, pesoArgentinoClpToResults } =
+        await import('./peso-argentino-clp');
+      return (inputs) => {
+        const result = calculatePesoArgentinoClp({
+          monto: coerceNumber(inputs.monto),
+          direccion: (inputs.direccion as 'ars_a_clp' | 'clp_a_ars') || 'ars_a_clp',
+          tasaPersonalizada:
+            inputs.tasaPersonalizada != null && String(inputs.tasaPersonalizada) !== ''
+              ? coerceNumber(inputs.tasaPersonalizada)
+              : undefined,
+        });
+        return pesoArgentinoClpToResults(result);
+      };
+    }
+
     case 'aguinaldo': {
       const { calculateAguinaldo, aguinaldoToResults } = await import('./aguinaldo');
       return (inputs) => {

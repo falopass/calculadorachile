@@ -32,9 +32,9 @@ export interface ContextoHonorarios {
   /** Año siguiente si está en el calendario; si no, null. */
   siguiente: AnioHonorarios | null;
   tasaSiguiente: number | null;
-  /** Diciembre y existe tasa del año siguiente: se muestran ambos años. */
+  /** Nov–dic (E-053) y existe tasa del año siguiente: se muestran ambos años. */
   modoCambioDeAnio: boolean;
-  /** Año preseleccionado en el selector (diciembre → año siguiente). */
+  /** Año preseleccionado en el selector (modo cambio → año siguiente). */
   anioSelector: AnioHonorarios;
 }
 
@@ -43,7 +43,8 @@ export function contextoHonorarios(date: Date = new Date()): ContextoHonorarios 
   const anio = anioEnCalendario(year);
   const sig = (anio + 1) as AnioHonorarios;
   const siguiente = sig in RETENCION_HONORARIOS_CALENDARIO && year === anio ? sig : null;
-  const modoCambioDeAnio = month === 12 && siguiente !== null;
+  // E-053: dual title/CTR desde noviembre (antes solo diciembre / E-028).
+  const modoCambioDeAnio = month >= 11 && siguiente !== null;
   return {
     anio,
     tasa: RETENCION_HONORARIOS_CALENDARIO[anio],

@@ -42,12 +42,12 @@ describe('calculateBoletaHonorarios', () => {
     expect(Math.round(84_000 / (1 - tasa))).toBe(100_000);
   });
 
-  it('E-028: año por fecha en Chile (diciembre → selector del año siguiente)', () => {
-    // 15-11-2026 12:00 Chile
+  it('E-028/E-053: año por fecha en Chile (nov–dic → dual + selector del año siguiente)', () => {
+    // 15-11-2026 12:00 Chile — E-053 activa modo cambio desde noviembre
     const nov = contextoHonorarios(new Date('2026-11-15T15:00:00Z'));
     expect(nov.anio).toBe(2026);
-    expect(nov.anioSelector).toBe(2026);
-    expect(nov.modoCambioDeAnio).toBe(false);
+    expect(nov.anioSelector).toBe(2027);
+    expect(nov.modoCambioDeAnio).toBe(true);
     // 01-12-2026 00:30 Chile (todavía 01-12 03:30 UTC)
     const dic = contextoHonorarios(new Date('2026-12-01T03:30:00Z'));
     expect(dic.modoCambioDeAnio).toBe(true);

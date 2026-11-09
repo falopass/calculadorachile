@@ -351,14 +351,14 @@ export const guias: Guia[] = [
       'tope 90 UF indemnización',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-09',
     readingTime: 22,
     relatedCalculators: [
       'calculadora-finiquito',
       'calculadora-indemnizacion-anos-servicio',
+      'calculadora-seguro-cesantia',
       'calculadora-vacaciones-proporcionales',
       'calculadora-gratificacion-legal',
-      'calculadora-intereses-mora',
     ],
     relatedArticles: [
       'seguro-cesantia-finiquito-2026-afc',
@@ -513,6 +513,14 @@ export const guias: Guia[] = [
 <p>El trabajador puede aceptar con una reserva específica y recibir las sumas no discutidas. No necesita el consentimiento del empleador para formular la reserva. Conviene identificar materias concretas: causal de despido, diferencia en base del artículo 172, feriado, nulidad por cotizaciones o descuento AFC.</p>
 <p>Una frase genérica puede generar una discusión posterior sobre su alcance. Tampoco es necesario reservar lo que ya se rechazó íntegramente, pero rechazar todo puede retrasar fondos no controvertidos. La decisión depende del documento y de la estrategia del caso.</p>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Finiquito electrónico</strong><p>La propuesta en Mi DT no se entiende aceptada por silencio. Si la aceptas con o sin reserva, el empleador debe efectuar el pago dentro del flujo electrónico. Si rechazas, el empleador aún debe disponer el finiquito por otra vía y las acciones judiciales siguen sujetas a sus plazos.</p></div></aside>`,
+      },
+      {
+        id: 'finiquito-y-seguro-cesantia',
+        title: 'Finiquito y Seguro de Cesantía: no son lo mismo',
+        level: 2,
+        html: `<p>El <strong>finiquito</strong> liquida lo que el empleador debe pagar al término (sueldo pendiente, feriado, indemnizaciones según causal). El <strong>Seguro de Cesantía (AFC)</strong> son giros de tu Cuenta Individual o del Fondo Solidario: es un derecho distinto, con requisitos propios.</p>
+<p>Antes del peak de fin de año: (1) estima el finiquito en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>; (2) simula los pagos AFC en la <a href="/calculadoras/calculadora-seguro-cesantia">calculadora de seguro de cesantía</a> o en el hub <a href="/cesantia">/cesantia</a>; (3) revisa el checklist en <a href="/blog/checklist-despues-despido-chile-2026">qué hacer si te despiden</a>.</p>
+<p>Fuentes: <a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ChileAtiende — Seguro de Cesantía</a> · <a href="https://www.dt.gob.cl/portal/1628/w3-article-60613.html" target="_blank" rel="noopener">DT — plazo del finiquito</a>.</p>`,
       },
       {
         id: 'errores-frecuentes',
@@ -1764,12 +1772,13 @@ export const guias: Guia[] = [
         level: 2,
         html: `<p>El <strong>aguinaldo</strong> es un bono especial del <strong>sector público</strong> y de <strong>pensionados</strong> de regímenes cubiertos (leyes de reajuste / fichas IPS). En el sector privado solo es exigible si está en el contrato o convenio colectivo. No confundir con la <strong>gratificación legal</strong>.</p>
 <table>
-<thead><tr><th>Beneficio 2026</th><th>Mes típico</th><th>Monto (fuentes oficiales)</th></tr></thead>
+<thead><tr><th>Beneficio</th><th>Mes típico</th><th>Monto (fuentes oficiales)</th></tr></thead>
 <tbody>
-<tr><td>Fiestas Patrias — sector público (Ley 21.806)</td><td>Septiembre</td><td><strong>$91.682</strong> o <strong>$63.645</strong> según líquido de agosto (umbral $1.060.493)</td></tr>
-<tr><td>Fiestas Patrias — pensionados IPS</td><td>Septiembre</td><td><strong>$25.280</strong> base + <strong>$12.969</strong> por carga (corte 31 ago 2026)</td></tr>
-<tr><td>Navidad — sector público</td><td>Diciembre</td><td><strong>$71.206</strong> / <strong>$37.666</strong> (mismos tramos de renta)</td></tr>
-<tr><td>Bono de escolaridad — sector público</td><td>Marzo y junio</td><td><strong>$89.164</strong> total (2 cuotas de $44.582)</td></tr>
+<tr><td>Fiestas Patrias 2026 — sector público (Ley 21.806)</td><td>Septiembre</td><td><strong>$91.682</strong> o <strong>$63.645</strong> según líquido de agosto (umbral $1.060.493)</td></tr>
+<tr><td>Fiestas Patrias 2026 — pensionados IPS</td><td>Septiembre</td><td><strong>$25.280</strong> base + <strong>$12.969</strong> por carga (corte 31 ago 2026)</td></tr>
+<tr><td>Navidad — sector público (<strong>referencia 2025</strong>)</td><td>Diciembre</td><td><strong>$71.206</strong> / <strong>$37.666</strong> (Ley 21.806 art. 2 n°1 modifica Ley 21.724 art. 2 / DO CVE 2766382). El monto Navidad 2026 del sector público lo fija la ley de reajuste, aún no publicada.</td></tr>
+<tr><td>Navidad 2026 — pensionados IPS</td><td>Diciembre</td><td><strong>$29.055</strong> base + <strong>$16.415</strong> por carga (<a href="https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ChileAtiende</a>)</td></tr>
+<tr><td>Bono de escolaridad 2026 — sector público</td><td>Marzo y junio</td><td><strong>$89.164</strong> total (2 cuotas de $44.582)</td></tr>
 </tbody>
 </table>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>No es obligatorio en sector privado</strong><p>El aguinaldo no es legalmente obligatorio para empresas privadas (a diferencia de la gratificación legal del 25%). Muchas pagan por costumbre o convenio colectivo. Si tu contrato lo menciona, sí es exigible.</p></div></aside>
@@ -2453,10 +2462,10 @@ export const guias: Guia[] = [
   // ============================================
   {
     slug: 'vacaciones-feriado-legal-chile',
-    title: 'Vacaciones en Chile 2026: feriado legal, días progresivos y acumulación',
-    intent: '¿Cuántos días de vacaciones me corresponden en Chile?',
+    title: 'Vacaciones progresivas y feriado legal en Chile',
+    intent: '¿Cómo se calculan las vacaciones progresivas en Chile?',
     description:
-      'Cuántos días de vacaciones te tocan: 15 días hábiles al año, más 1 día progresivo cada 3 años después de 10 trabajados. Acumulación y ejemplos.',
+      'Vacaciones progresivas: 1 día extra cada 3 años después de 10 trabajados (art. 68). Feriado legal de 15 días hábiles (20 en Magallanes/Aysén/Palena) y diferencia con el proporcional.',
     category: 'laboral',
     categoryLabel: 'Laboral y sueldo',
     keywords: [
@@ -2467,15 +2476,16 @@ export const guias: Guia[] = [
       'acumular vacaciones',
     ],
     publishedAt: '2026-10-16',
-    updatedAt: '2026-10-16',
+    updatedAt: '2026-11-09',
     readingTime: 6,
     sections: [
       {
         id: 'resumen',
         title: 'Resumen',
         level: 2,
-        html: `<p><em>Actualizado el 16 de octubre de 2026</em></p>
-<p>En Chile, si llevas más de un año de servicio te corresponden <strong>15 días hábiles de vacaciones al año</strong>, con remuneración íntegra. En las regiones de Magallanes y Aysén, y en la provincia de Palena, son 20 días hábiles (art. 67 del Código del Trabajo). Si tienes 10 años trabajados, sumas <strong>1 día más por cada 3 años nuevos</strong> con tu empleador actual (art. 68). Así lo explica la <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">Dirección del Trabajo</a>.</p>`,
+        html: `<p><em>Actualizado el 9 de noviembre de 2026</em></p>
+<p><strong>Respuesta directa:</strong> tras <strong>10 años de trabajo</strong>, sumas <strong>1 día de feriado progresivo por cada 3 años nuevos</strong> con tu empleador actual (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">art. 68 CT / DT</a>). El feriado legal base son <strong>15 días hábiles al año</strong> (art. 67; <strong>20</strong> en Magallanes, Aysén y Palena). No confundas las vacaciones progresivas con las <a href="#vacaciones-proporcionales">vacaciones proporcionales</a> al terminar el contrato.</p>
+<p>Detalle oficial del feriado legal: <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">DT, Ord. 2694/34</a>. Ir a <a href="#vacaciones-progresivas">cómo se calculan las vacaciones progresivas</a>.</p>`,
       },
       {
         id: 'dias-de-vacaciones-al-ano',
@@ -2493,12 +2503,13 @@ export const guias: Guia[] = [
         id: 'vacaciones-progresivas',
         title: 'Vacaciones progresivas: cómo se calculan',
         level: 2,
-        html: `<p>Para el feriado progresivo se deben cumplir dos requisitos (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>):</p>
+        html: `<p>Las <strong>vacaciones progresivas</strong> (feriado progresivo) no reemplazan los 15 días del art. 67: se <strong>suman</strong> a ese feriado legal. Requisitos (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>):</p>
 <ol>
 <li>Tener una <strong>base de 10 años trabajados</strong> (120 cotizaciones previsionales) con el empleador actual o con empleadores anteriores.</li>
 <li>Cumplir <strong>3 años nuevos con el empleador actual</strong>.</li>
 </ol>
-<p>Desde ahí se suma <strong>1 día cada 3 años nuevos</strong>, de forma permanente, mientras no cambies de empleador.</p>`,
+<p>Desde ahí se suma <strong>1 día hábil cada 3 años nuevos</strong>, de forma permanente, mientras no cambies de empleador. <strong>No existe un tope legal de «máximo 5 días progresivos»</strong>: el art. 68 no fija ese límite.</p>
+<p>Fórmula orientadora (mismo empleador): <code>días progresivos = floor((años trabajados − 10) ÷ 3)</code>. Debes acreditar los años <strong>antes</strong> de tomar el feriado; si no, pierdes el día de ese período (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">DT</a>).</p>`,
       },
       {
         id: 'ejemplos-progresivos',
@@ -2545,18 +2556,21 @@ export const guias: Guia[] = [
         id: 'vacaciones-proporcionales',
         title: 'Vacaciones proporcionales al terminar el contrato',
         level: 2,
-        html: `<p>Si tu contrato termina antes de que uses tus vacaciones, te corresponde una compensación en dinero por los días proporcionales. Calcúlala en la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> e inclúyela en tu <a href="/calculadoras/calculadora-finiquito">cálculo de finiquito</a>.</p>`,
+        html: `<p><strong>Vacaciones proporcionales ≠ vacaciones progresivas.</strong> Si tu contrato termina antes de usar el feriado, te corresponde una compensación en dinero por los días proporcionales del año en curso (regla DT: ~1,25 días hábiles por mes, proyectados a días corridos). Eso es independiente del feriado progresivo del art. 68.</p>
+<p>Calcúlalo en la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> e inclúyelo en tu <a href="/calculadoras/calculadora-finiquito">cálculo de finiquito</a>.</p>`,
       },
       {
         id: 'preguntas-frecuentes',
         title: 'Preguntas frecuentes',
         level: 2,
-        html: `<h3>¿Cuántos días de vacaciones son por año en Chile?</h3>
-<p>Son 15 días hábiles al año si tienes más de un año de servicio, o 20 en Magallanes, Aysén y Palena. A eso se suman los días progresivos que te correspondan.</p>
-<h3>¿Cómo se calculan las vacaciones progresivas?</h3>
-<p>Con 10 años trabajados como base, sumas 1 día por cada 3 años nuevos con tu empleador actual. De los empleadores anteriores solo cuentan hasta 10 años.</p>
+        html: `<h3>¿Cómo se calculan las vacaciones progresivas?</h3>
+<p>Con 10 años trabajados como base, sumas 1 día hábil por cada 3 años nuevos con tu empleador actual (art. 68). De empleadores anteriores solo puedes hacer valer hasta 10 años para completar esa base.</p>
+<h3>¿Cuántos días de vacaciones me tocan al año?</h3>
+<p>15 días hábiles (art. 67) o 20 en Magallanes, Aysén y Palena, más los días progresivos que te correspondan. No hay tope legal de 5 días progresivos.</p>
+<h3>¿Vacaciones proporcionales y progresivas son lo mismo?</h3>
+<p>No. Las proporcionales compensan el feriado no usado al terminar el contrato. Las progresivas son días extra del art. 68 por antigüedad. Usa la calculadora de proporcionales para el finiquito y esta guía para el progresivo.</p>
 <h3>¿Puedo acumular vacaciones?</h3>
-<p>Sí, de común acuerdo con tu empleador y hasta por dos períodos consecutivos.</p>
+<p>Sí, de común acuerdo con tu empleador y hasta por dos períodos consecutivos (art. 70).</p>
 <h3>¿El sábado cuenta como día de vacaciones?</h3>
 <p>No. Para el feriado legal, el sábado siempre es inhábil (art. 69 del Código del Trabajo).</p>`,
       },
@@ -2567,12 +2581,12 @@ export const guias: Guia[] = [
         html: `<ul>
 <li><a href="/calculadoras/calculadora-vacaciones-proporcionales">Calculadora de vacaciones proporcionales</a></li>
 <li><a href="/calculadoras/calculadora-finiquito">Calculadora de finiquito</a></li>
-<li><a href="/blog/aguinaldo-navidad-pensionados-2026">Aguinaldo de Navidad 2026</a></li>
+<li><a href="/guias/feriados-chile-2027">Feriados Chile 2027</a></li>
 </ul>`,
       },
     ],
     relatedCalculators: ['calculadora-vacaciones-proporcionales', 'calculadora-finiquito'],
-    relatedArticles: ['aguinaldo-navidad-pensionados-2026'],
+    relatedArticles: [],
     sources: [
       { label: 'DT, Ord. 2694/34 (arts. 67 a 70 del Código del Trabajo)', url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html' },
       { label: 'DT, ¿En qué consiste el derecho al feriado progresivo?', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html' },
