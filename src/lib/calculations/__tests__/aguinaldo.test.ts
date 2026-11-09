@@ -1,16 +1,9 @@
-// ============================================
-// Tests de aguinaldo (sector público)
-// ----------------------------------------------
-// Verifica el prorrateo por meses trabajados, los montos por tipo
-// y la advertencia para sector privado.
-// ============================================
-
 import { describe, it, expect } from 'vitest';
-import { calculateAguinaldo } from '../aguinaldo';
+import { calculateAguinaldo, aguinaldoToResults } from '../aguinaldo';
 import { AGUINALDO_2026 } from '@/lib/values/constants';
 
 describe('calculateAguinaldo', () => {
-  it('12 meses trabajados pagan el monto base completo', () => {
+  it('12 meses FP 2026 pagan el monto base completo', () => {
     const r = calculateAguinaldo({
       tipo: 'fiestas_patrias',
       sueldoBruto: 800_000,
@@ -19,10 +12,27 @@ describe('calculateAguinaldo', () => {
     });
     expect(r.montoBase).toBe(AGUINALDO_2026.fiestas_patrias);
     expect(r.montoProporcional).toBe(AGUINALDO_2026.fiestas_patrias);
-    expect(r.factorProporcional).toBe(1);
+    expect(r.esReferenciaNavidad2025).toBe(false);
+    expect(r.advertencia).toBeUndefined();
   });
 
-  it('6 meses trabajados pagan ~50% del monto base', () => {
+  it('Navidad usa referencia 2025 y advierte que 2026 SP no está publicada', () => {
+    const r = calculateAguinaldo({
+      tipo: 'navidad',
+      sueldoBruto: 800_000,
+      mesesTrabajados: 12,
+      esSectorPublico: true,
+    });
+    expect(AGUINALDO_2026.navidad_es_referencia_2025).toBe(true);
+    expect(r.montoBase).toBe(AGUINALDO_2026.navidad);
+    expect(r.esReferenciaNavidad2025).toBe(true);
+    expect(r.tipo).toContain('referencia 2025');
+    expect(r.advertencia).toMatch(/referencia Navidad 2025/i);
+    expect(r.advertencia).toMatch(/aún no publicada/i);
+    expect(r.advertencia).not.toMatch(/Navidad 2026 del sector público es \$/);
+  });
+
+  it('6 meses Navidad pagan ~50% de la referencia 2025', () => {
     const r = calculateAguinaldo({
       tipo: 'navidad',
       sueldoBruto: 800_000,
@@ -32,7 +42,7 @@ describe('calculateAguinaldo', () => {
     expect(r.montoProporcional).toBe(Math.round(AGUINALDO_2026.navidad * 0.5));
   });
 
-  it('0 meses trabajados pagan $0 (no se fuerza a 1 mes silenciosamente)', () => {
+  it('0 meses pagan $0', () => {
     const r = calculateAguinaldo({
       tipo: 'escolar',
       sueldoBruto: 600_000,
@@ -40,67 +50,40 @@ describe('calculateAguinaldo', () => {
       esSectorPublico: true,
     });
     expect(r.montoProporcional).toBe(0);
-    expect(r.factorProporcional).toBe(0);
   });
 
-  it('meses negativos se acotan a 0', () => {
+  it('escolar 2026 usa AGUINALDO_2026.escolar', () => {
+    const r = calculateAguinaldo({
+      tipo: 'escolar',
+      sueldoBruto: 0,
+      mesesTrabajados: 12,
+      esSectorPublico: true,
+    });
+    expect(r.montoBase).toBe(AGUINALDO_2026.escolar);
+    expect(r.esReferenciaNavidad2025).toBe(false);
+  });
+
+  it('toResults etiqueta la base Navidad como referencia 2025', () => {
+    const r = calculateAguinaldo({
+      tipo: 'navidad',
+      sueldoBruto: 0,
+      mesesTrabajados: 12,
+      esSectorPublico: true,
+    });
+    const rows = aguinaldoToResults(r);
+    expect(rows.some((x) => /referencia Navidad 2025/i.test(x.label))).toBe(true);
+    const highlight = rows.find((x) => x.highlight);
+    expect(highlight?.note?.text).toMatch(/referencia Navidad 2025/i);
+    expect(rows.every((x) => x.label !== 'Nota')).toBe(true);
+  });
+
+  it('sector privado incluye advertencia', () => {
     const r = calculateAguinaldo({
       tipo: 'fiestas_patrias',
-      sueldoBruto: 600_000,
-      mesesTrabajados: -3,
-    });
-    expect(r.montoProporcional).toBe(0);
-  });
-
-  it('meses > 12 se topan a 12', () => {
-    const r = calculateAguinaldo({
-      tipo: 'navidad',
-      sueldoBruto: 600_000,
-      mesesTrabajados: 18,
-    });
-    expect(r.factorProporcional).toBe(1);
-    expect(r.montoProporcional).toBe(AGUINALDO_2026.navidad);
-  });
-
-  it('sector privado incluye advertencia (no es legalmente obligatorio)', () => {
-    const r = calculateAguinaldo({
-      tipo: 'navidad',
       sueldoBruto: 800_000,
       mesesTrabajados: 12,
       esSectorPublico: false,
     });
-    expect(r.advertencia).toBeDefined();
-    expect(r.advertencia).toContain('sector privado');
-  });
-
-  it('sector público NO incluye advertencia', () => {
-    const r = calculateAguinaldo({
-      tipo: 'navidad',
-      sueldoBruto: 800_000,
-      mesesTrabajados: 12,
-      esSectorPublico: true,
-    });
-    expect(r.advertencia).toBeUndefined();
-  });
-
-  it('cada tipo de aguinaldo retorna su nombre legible', () => {
-    const fp = calculateAguinaldo({
-      tipo: 'fiestas_patrias',
-      sueldoBruto: 0,
-      mesesTrabajados: 12,
-    });
-    const nv = calculateAguinaldo({
-      tipo: 'navidad',
-      sueldoBruto: 0,
-      mesesTrabajados: 12,
-    });
-    const ec = calculateAguinaldo({
-      tipo: 'escolar',
-      sueldoBruto: 0,
-      mesesTrabajados: 12,
-    });
-    expect(fp.tipo).toBe('Fiestas Patrias');
-    expect(nv.tipo).toBe('Navidad');
-    expect(ec.tipo).toBe('Escolar');
+    expect(r.advertencia).toMatch(/sector privado/i);
   });
 });

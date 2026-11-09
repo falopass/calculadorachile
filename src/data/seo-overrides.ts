@@ -32,15 +32,14 @@ import { INDEMNIZACION } from '@/lib/values/constants';
 import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
+import { seoPesoArgentino } from '@/lib/calculations/peso-argentino-clp';
 
 const TOPE_GRAT = topeGratificacion();
 
 /**
- * E-028: title y meta de honorarios según la fecha en Chile. Normal:
- * "Calcular boleta de honorarios 2027: retención 16%". Diciembre (si el año
- * siguiente está en el calendario): "Boleta de honorarios 2026 y 2027:
- * retención 15,25% y 16%". Se usan como getters para evaluarse en cada
- * render (revalidate 3600) y no al cargar el módulo.
+ * E-028 + E-053: title/meta honorarios según fecha en Chile.
+ * Dic (si hay año siguiente): "Boleta de honorarios 2026-2027: retención SII".
+ * Tasas solo en la meta, desde RETENCION_HONORARIOS_CALENDARIO.
  */
 export function seoBoletaHonorarios(date: Date = new Date()): {
   seoTitle: string;
@@ -49,8 +48,8 @@ export function seoBoletaHonorarios(date: Date = new Date()): {
   const h = contextoHonorarios(date);
   if (h.modoCambioDeAnio && h.siguiente && h.tasaSiguiente !== null) {
     return {
-      seoTitle: `Boleta de honorarios ${h.anio} y ${h.siguiente}: retención ${formatTasa(h.tasa)} y ${formatTasa(h.tasaSiguiente)}`,
-      seoDescription: `Calcula tu boleta de honorarios ${h.anio} y ${h.siguiente}: retención de ${formatTasa(h.tasa)} y ${formatTasa(h.tasaSiguiente)} del SII según la fecha de emisión. De bruto a líquido y al revés.`,
+      seoTitle: `Boleta de honorarios ${h.anio}-${h.siguiente}: retención SII`,
+      seoDescription: `Calcula tu boleta de honorarios: retención ${formatTasa(h.tasa)} en ${h.anio} y ${formatTasa(h.tasaSiguiente)} desde el 01-01-${h.siguiente} (SII). Bruto a líquido con la tasa del año de emisión.`,
     };
   }
   return {
@@ -89,9 +88,10 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- BENEFICIOS LABORALES Y TÉRMINO DE CONTRATO ---
   'calculadora-finiquito': {
-    seoTitle: 'Calcular finiquito 2026: cálculo por causal en Chile', // 52
+    // E-026 estacional 09-11: CTR dic + puente cesantía
+    seoTitle: 'Calcular finiquito 2026: causal e indemnización', // 47
     seoDescription:
-      'Calcular finiquito 2026: cálculo de finiquito por causal con indemnización, vacaciones proporcionales y aviso previo. Ejemplos en pesos y fuentes DT.', // 149
+      'Calcula tu finiquito por causal y el seguro de cesantía antes del peak de diciembre. Indemnización, vacaciones proporcionales y simulador AFC.', // 142
   },
 
   'calculadora-indemnizacion-anos-servicio': {
@@ -136,9 +136,10 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- TRIBUTARIO Y HONORARIOS ---
   'vacaciones-feriado-legal-chile': {
-    seoTitle: 'Vacaciones progresivas y feriado legal en Chile 2026', // 52
+    // E-004: head term «vacaciones progresivas»
+    seoTitle: 'Vacaciones progresivas en Chile: cómo se calculan', // 49
     seoDescription:
-      'Cuántos días de vacaciones te tocan: 15 días hábiles al año, más 1 día progresivo cada 3 años después de 10 trabajados. Acumulación y ejemplos.', // 148
+      'Feriado progresivo: 1 día extra cada 3 años después de 10 trabajados (art. 68 CT). Ejemplos y diferencia con el feriado legal de 15 días.', // 137
   },
 
   'calculadora-iva': {
@@ -195,16 +196,27 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'UF de hoy y tabla de UF a pesos: 1, 24, 100, 200, 1.000, 2.500, 3.000 y 6.000 UF con el valor oficial del día y dónde ver la UF de una fecha.', // 141
   },
 
+  // E-049: si el valor vivo no está fresco, este fallback no menciona un mes fijo.
   'calculadora-utm-clp': {
-    seoTitle: 'UTM a Pesos Hoy 2026: valor oficial en CLP al mes', // 49
+    seoTitle: 'UTM a pesos: conversión con valor oficial SII', // 46
     seoDescription:
-      'Convierte UTM a pesos chilenos y CLP a UTM con el valor oficial del mes. Ideal multas, contratos, aranceles y patentes. Gratis SII.', // 132
+      'Convierte UTM a pesos y pesos a UTM con el valor oficial del mes (SII). Multas, UTM vs UTA y UF, y qué mes usar. Gratis.', // 118
+  },
+
+  'peso-argentino-a-chileno': {
+    // E-050: meta sin «hoy» si source=fallback o observación >3 días hábiles
+    get seoTitle() {
+      return seoPesoArgentino().seoTitle;
+    },
+    get seoDescription() {
+      return seoPesoArgentino().seoDescription;
+    },
   },
 
   'calculadora-conversor-divisas': {
-    seoTitle: 'Dólar y Euro a CLP Hoy: conversor Banco Central 2026', // 52
+    seoTitle: 'Dólar a pesos chilenos: valor BCCh y conversor', // 48
     seoDescription:
-      'Convierte dólares y euros a pesos chilenos con el tipo de cambio oficial del Banco Central de Chile. Actualizado hoy, gratis.', // 126
+      'Pasa dólares o euros a pesos chilenos con el tipo de cambio del Banco Central. Bidireccional, con ejemplos de 300 y 1.500 dólares.', // 130
   },
 
   // --- VIVIENDA Y BIENES RAÍCES ---

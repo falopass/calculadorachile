@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   isLiveValueFresh,
   buildLiveValueTitle,
+  buildLiveValueDescriptionWithCalendar,
 } from '../live-value-title';
 
 // "Ahora" de referencia: 23-09-2026 12:00 en America/Santiago (UTC-4 en sept).
@@ -145,7 +146,7 @@ describe('buildLiveValueTitle', () => {
       new Date('2026-09-01T12:00:00.000Z'),
       NOW,
     );
-    expect(title).toBe('¿Cuánto es una UTM? Septiembre 2026: $71.721');
+    expect(title).toBe('UTM septiembre 2026: $71.721 y conversión a pesos');
   });
 
   it('UF: fecha dd-mm-aaaa y dos decimales es-CL', () => {
@@ -166,5 +167,32 @@ describe('buildLiveValueTitle', () => {
       NOW,
     );
     expect(title).toBe('Dólar hoy 23-09-2026: $5.906,00 | Dólar a pesos');
+  });
+});
+
+describe('buildLiveValueDescriptionWithCalendar', () => {
+  it('agrega el mes siguiente si está en la tabla SII del mismo año', () => {
+    const desc = buildLiveValueDescriptionWithCalendar(
+      'utm',
+      72440,
+      new Date('2026-11-01T12:00:00.000Z'),
+      { 11: 72440, 12: 72802 },
+    );
+    expect(desc).toContain('$72.440');
+    expect(desc).toContain('Diciembre: $72.802');
+    expect(desc!.length).toBeLessThanOrEqual(155);
+  });
+
+  it('no anuncia febrero 2026 cuando la observación es de enero 2027', () => {
+    const desc = buildLiveValueDescriptionWithCalendar(
+      'utm',
+      70000,
+      new Date('2027-01-15T15:00:00.000Z'),
+      { 1: 69000, 2: 69611 },
+      2026,
+    );
+    expect(desc).toContain('$70.000');
+    expect(desc).not.toContain('Febrero');
+    expect(desc).not.toContain('69.611');
   });
 });

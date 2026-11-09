@@ -3,7 +3,7 @@
 // ============================================
 
 import type { Calculator } from '@/types/calculator';
-import { UTA_2026, UTM } from '@/lib/values/constants';
+import { UTA_2026, UTM, AGUINALDO_2026, AGUINALDO_PENSIONADOS_IPS_2026 } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
 import { INDEMNIZACION, RECARGO_ART_168, RECARGO_ART_171, UF } from '@/lib/values/constants';
@@ -285,12 +285,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'finiquito',
     name: 'Finiquito',
     description:
-      'Usa esta calculadora de finiquito para estimar en segundos lo que te deben pagar: la indemnización por años de servicio, las vacaciones proporcionales y el aviso previo según la causal de término, con las reglas de la Dirección del Trabajo.',
+      'Estima tu finiquito según la causal: indemnización por años de servicio, vacaciones proporcionales y aviso previo (reglas DT). El Seguro de Cesantía (AFC) es aparte: simúlalo en la calculadora de cesantía.',
     slug: 'calculadora-finiquito',
     category: 'beneficios',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-11-03',
+    lastReviewed: '2026-11-09',
     sources: [
       {
         name: 'DT — plazo y pago del finiquito',
@@ -325,9 +325,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
     keywords: [
       'finiquito',
+      'calcular finiquito',
       'calculadora finiquito',
       'indemnización por años de servicio',
       'vacaciones proporcionales',
+      'seguro de cesantía',
       'renuncia trabajo Chile',
     ],
     inputs: [
@@ -530,6 +532,21 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Cuándo se paga el aviso previo?',
         answer:
           'Si el empleador despide sin el aviso de 30 días, debe pagar indemnización sustitutiva de un mes de remuneración (Art. 162), con tope de 90 UF. Activa esa opción solo en ese caso.',
+      },
+      {
+        question: '¿Cómo se calcula el finiquito?',
+        answer:
+          'Suma lo que corresponda según la causal: sueldo pendiente, feriado proporcional o pendiente, y —si aplica el art. 161 y tienes un año o más— indemnización por años de servicio (30 días por año, tope 11 años y 90 UF). Si no hubo aviso de 30 días, puede sumarse la indemnización sustitutiva. Usa esta calculadora con tu causal; el Seguro de Cesantía no forma parte del finiquito.',
+      },
+      {
+        question: '¿Me descuentan AFC de la indemnización?',
+        answer:
+          'En despidos por art. 161, el empleador puede imputar solo el aporte del empleador a la Cuenta Individual de Cesantía (certificado AFC), no el 0,6% del trabajador. Esa imputación reduce la línea de años de servicio, no el feriado ni el sueldo pendiente. El cobro del Seguro de Cesantía es un trámite aparte en la AFC.',
+      },
+      {
+        question: '¿Cómo simulo el seguro de cesantía?',
+        answer:
+          'El finiquito y el Seguro de Cesantía son piezas distintas. Para estimar giros de la Cuenta Individual o del Fondo Solidario usa la calculadora de seguro de cesantía o el hub /cesantia; aquí solo liquidas lo que debe pagar el empleador al término.',
       },
     ],
   },
@@ -1046,7 +1063,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         label: 'Año de la boleta',
         type: 'select',
         required: true,
-        options: HON_ANIOS.map((a) => ({
+        options: HON_ANIOS.filter(
+          (a) => a <= HON.anio || (HON.modoCambioDeAnio && HON.siguiente === a),
+        ).map((a) => ({
           value: String(a),
           label: `${a} (${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])})`,
         })),
@@ -1117,7 +1136,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-11-03',
+    lastReviewed: '2026-11-09',
     sources: [
       {
         name: 'SII — Valores UTM y UTA 2026',
@@ -1182,6 +1201,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         // Generada desde el snapshot de la UTM; el SII define UTA = UTM × 12 (utm2026.htm).
         // Sin mes: el snapshot puede conservar una UTM anterior con fecha nueva si falla la fuente.
         answer: `La UTA (Unidad Tributaria Anual) equivale a 12 UTM, según el SII. Por ejemplo, con una UTM de ${formatCLP(UTM.valor)}, la UTA es ${formatCLP(UTA_2026)}. El valor vigente de la UTM aparece al inicio de esta página.`,
+      },
+      {
+        question: '¿Qué mes de la UTM debo usar?',
+        answer:
+          'Usa la UTM del mes en que se determina o paga la obligación, según lo diga la norma, la resolución o el contrato. El SII publica un valor por mes calendario que rige del primer al último día de ese mes. Si tu multa o trámite indica “UTM del mes de la infracción” o “del mes de pago”, sigue esa instrucción.',
+      },
+      {
+        question: '¿UTM, UTA y UF son lo mismo?',
+        answer:
+          'No. La UTM se reajusta cada mes y se usa en multas, patentes y tramos tributarios. La UTA es exactamente 12 UTM (SII). La UF se reajusta a diario y se usa sobre todo en créditos, arriendos y topes en UF. En esta página conviertes UTM; para UF usa la calculadora de UF a pesos.',
       },
     ],
   },
@@ -4176,15 +4205,20 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'Convierte entre dólares americanos, euros y pesos chilenos con tasas aproximadas actualizadas.',
     slug: 'calculadora-conversor-divisas',
     category: 'conversiones',
-    noIndex: true,
+    noIndex: false,
     featured: false,
     phase: 3,
     lastReviewed: '2026-07-04',
     sources: [
       {
-        name: 'Banco Central de Chile',
-        url: 'https://www.bcentral.cl/areas/estadisticas',
-        note: 'Tipo de cambio dólar y euro',
+        name: 'BCCh — Dólar observado',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_031_PARIDADES?idSerie=F073.TCO.PRE.Z.D',
+        note: 'Serie F073.TCO.PRE.Z.D (dólar observado)',
+      },
+      {
+        name: 'BCCh — Euro observado',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.EUR.N.O.D',
+        note: 'Serie F072.CLP.EUR.N.O.D (paridad EUR/CLP)',
       },
     ],
     keywords: ['dólar a peso', 'euro a peso', 'conversor divisas Chile', 'USD CLP', 'EUR CLP'],
@@ -4219,38 +4253,113 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+
+  {
+    id: 'peso-argentino-clp',
+    name: 'Peso argentino a chileno',
+    description:
+      'Convierte pesos argentinos a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.ARS.N.O.D, referencial).',
+    slug: 'peso-argentino-a-chileno',
+    category: 'conversiones',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-09',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal peso argentino',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.ARS.N.O.D',
+        note: 'Serie F072.CLP.ARS.N.O.D (CLP por 1 ARS), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'peso argentino a chileno',
+      'peso argentino a pesos chilenos',
+      '1000 pesos argentinos a pesos chilenos',
+      'peso chileno a argentino',
+      'convertir peso argentino',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '1000', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'ars_a_clp', label: 'Pesos argentinos → CLP' },
+          { value: 'clp_a_ars', label: 'CLP → pesos argentinos' },
+        ],
+      },
+    ],
+    seoTitle: 'Peso argentino a chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte pesos argentinos a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.ARS.N.O.D). Bidireccional y con ejemplos.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 peso argentino?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.ARS.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 1.000 pesos argentinos en Chile?',
+        answer:
+          'Multiplica 1.000 por el tipo de cambio nominal del BCCh (CLP por 1 ARS) mostrado en el resultado. Si la fuente es de respaldo o la observación tiene más de 3 días hábiles, se etiqueta como valor referencial de esa fecha, no como «hoy».',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio y bancos pueden cotizar otro precio de compra/venta.',
+      },
+      {
+        question: '¿Puedo convertir de pesos chilenos a argentinos?',
+        answer:
+          'Sí. Elige la dirección «CLP → pesos argentinos» e ingresa el monto en pesos chilenos.',
+      },
+    ],
+  },
+
   {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:
-      'Estima el aguinaldo de Fiestas Patrias o Navidad del sector público 2026 (tramo 1 Ley 21.806) o prorratea por meses. Pensionados IPS: ver montos oficiales en ChileAtiende.',
+      'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público (Ley 21.806), o una referencia de Navidad 2025. El monto Navidad 2026 del sector público aún no está publicado. Pensionados IPS: régimen distinto (ChileAtiende).',
     slug: 'calculadora-aguinaldo',
     category: 'beneficios',
-    noIndex: true,
+    noIndex: false,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-10',
+    lastReviewed: '2026-11-09',
     sources: [
       {
         name: 'Ley 21.806 (BCN)',
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=1221118',
-        note: 'Reajuste sector público 2026: aguinaldos FP y Navidad por tramos',
+        note: 'FP 2026 y escolar 2026; Navidad del art. 2 = referencia 2025',
       },
       {
-        name: 'ChileAtiende / IPS',
+        name: 'Diario Oficial CVE 2766382',
+        url: 'https://www.diariooficial.interior.gob.cl/publicaciones/2026/02/05/44368-B/01/2766382.pdf',
+        note: 'Texto Ley 21.806 (5 feb 2026)',
+      },
+      {
+        name: 'ChileAtiende — aguinaldo FP pensionados',
         url: 'https://www.chileatiende.gob.cl/fichas/26553-aguinaldo-de-fiestas-patrias-para-pensionados-ips',
-        note: 'Aguinaldo FP pensionados: $25.280 + $12.969 por carga (2026)',
+        note: 'IPS FP 2026: $25.280 + $12.969 por carga',
       },
       {
-        name: 'Ministerio de Hacienda',
-        url: 'https://www.hacienda.cl/noticias-y-eventos/noticias/gobierno-y-cut-mesa-del-sector-publico-firman-protocolo-de-acuerdo-por-reajuste',
-        note: 'Protocolo reajuste: tramos y montos de aguinaldos 2026',
+        name: 'ChileAtiende — aguinaldo Navidad pensionados',
+        url: 'https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips',
+        note: 'IPS Navidad 2026: $29.055 + $16.415 por carga',
       },
     ],
     keywords: [
       'aguinaldo',
       'aguinaldo fiestas patrias 2026',
-      'aguinaldo navidad 2026',
+      'aguinaldo navidad',
       'aguinaldo sector público',
       'aguinaldo pensionados IPS',
     ],
@@ -4261,9 +4370,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'select',
         required: true,
         options: [
-          { value: 'fiestas_patrias', label: 'Fiestas Patrias (SP tramo 1)' },
-          { value: 'navidad', label: 'Navidad (SP tramo 1)' },
-          { value: 'escolar', label: 'Bono escolaridad (total)' },
+          { value: 'fiestas_patrias', label: 'Fiestas Patrias 2026 (SP tramo 1)' },
+          { value: 'navidad', label: 'Navidad (referencia 2025, SP tramo 1)' },
+          { value: 'escolar', label: 'Bono escolaridad 2026 (total)' },
         ],
       },
       {
@@ -4288,12 +4397,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto es el aguinaldo de Fiestas Patrias 2026 en el sector público?',
         answer:
-          'Según la Ley 21.806, en septiembre 2026 el tramo 1 es $91.682 si la remuneración líquida de agosto es igual o inferior a $1.060.493, y el tramo 2 es $63.645 si supera ese umbral (con los topes de elegibilidad de la ley). Esta calculadora usa el tramo 1 como base y puede prorratear por meses. En el sector privado el aguinaldo no es obligatorio por ley general: depende del contrato o convenio colectivo.',
+          `Según la Ley 21.806, en septiembre 2026 el tramo 1 es $${AGUINALDO_2026.fiestas_patrias.toLocaleString('es-CL')} si la remuneración líquida de agosto es igual o inferior a $${AGUINALDO_2026.umbral_liquido.toLocaleString('es-CL')}, y el tramo 2 es $${AGUINALDO_2026.fiestas_patrias_tramo2.toLocaleString('es-CL')} si supera ese umbral (tope de elegibilidad $${AGUINALDO_2026.tope_bruto_elegibilidad.toLocaleString('es-CL')}). Esta calculadora usa el tramo 1 como base y puede prorratear por meses. En el sector privado el aguinaldo no es obligatorio por ley general.`,
+      },
+      {
+        question: '¿Cuánto es el aguinaldo de Navidad 2026 del sector público?',
+        answer:
+          `El monto de Navidad 2026 del sector público lo fija la ley de reajuste del sector público, aún no publicada. Esta calculadora solo ofrece el monto de referencia Navidad 2025 (tramo 1 $${AGUINALDO_2026.navidad.toLocaleString('es-CL')} / tramo 2 $${AGUINALDO_2026.navidad_tramo2_referencia_2025.toLocaleString('es-CL')}, umbral $${AGUINALDO_2026.umbral_liquido.toLocaleString('es-CL')}), que corresponde a la modificación de la Ley 21.724 por la Ley 21.806 (año 2025). No uses esa cifra como Navidad 2026.`,
       },
       {
         question: '¿Y los pensionados del IPS?',
         answer:
-          'Es otro beneficio. ChileAtiende informa $25.280 base más $12.969 por cada carga familiar acreditada al 31 de agosto de 2026, pagado con la pensión de septiembre. No uses el monto del sector público para pensionados ni al revés.',
+          `Es otro régimen (Ley 21.806 art. 5). Fiestas Patrias 2026: $${AGUINALDO_PENSIONADOS_IPS_2026.fiestas_patrias_base.toLocaleString('es-CL')} + $${AGUINALDO_PENSIONADOS_IPS_2026.fiestas_patrias_por_carga.toLocaleString('es-CL')} por carga. Navidad 2026: $${AGUINALDO_PENSIONADOS_IPS_2026.navidad_base.toLocaleString('es-CL')} + $${AGUINALDO_PENSIONADOS_IPS_2026.navidad_por_carga.toLocaleString('es-CL')} por carga. No mezcles estos montos con los del sector público.`,
       },
     ],
   },
@@ -4451,7 +4565,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-10-29',
+    lastReviewed: '2026-11-09',
     sources: [
       {
         name: 'ChileAtiende — Seguro de Cesantía',
@@ -4582,6 +4696,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Puede haber más de 5 pagos del Fondo Solidario?',
         answer:
           'La norma contempla hasta 2 pagos adicionales solo cuando el desempleo nacional supera en un punto el promedio de los últimos 4 años. Esta calculadora muestra los 5 pagos regulares.',
+      },
+      {
+        question: '¿El seguro de cesantía reemplaza al finiquito?',
+        answer:
+          'No. El finiquito liquida lo que el empleador debe pagar al término (indemnización, feriado, sueldo pendiente). El Seguro de Cesantía son giros de tu cuenta AFC o del Fondo Solidario. Calcula primero el finiquito y luego simula el seguro aquí o en /cesantia.',
       },
     ],
   },
@@ -5551,6 +5670,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Se pueden sumar becas y gratuidad en la misma carrera?',
         answer:
           'No: los beneficios de arancel no se acumulan en la misma carrera. Además, no se puede haber recibido becas de arancel Mineduc en dos oportunidades, y con gratuidad previa la beca solo aplica en una carrera distinta. Esta calculadora es orientativa: la asignación real depende del FUAS.',
+      },
+      {
+        question: '¿Cómo se relaciona con el puntaje PAES?',
+        answer:
+          'Varias becas y la gratuidad miran tu desempeño académico. Puedes estimar tu puntaje con el simulador de puntaje ponderado PAES y la calculadora de NEM y ranking, y luego volver a esta página para cruzar los beneficios.',
       },
     ],
   },

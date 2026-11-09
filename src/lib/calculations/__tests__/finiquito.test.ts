@@ -190,7 +190,7 @@ describe('calculateFiniquito', () => {
         causaTermino: 'necesidades_empresa',
         incluyeAvisoPrevio: true,
       });
-      expect(r.indemnizacionAvisoPrevio).toBeCloseTo(topeMensual, 0);
+      expect(r.indemnizacionAvisoPrevio).toBe(Math.round(topeMensual));
     });
   });
 

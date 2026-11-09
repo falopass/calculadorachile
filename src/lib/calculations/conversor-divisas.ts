@@ -11,9 +11,13 @@ export interface ConversorDivisasInput {
   direccion: 'a_clp' | 'desde_clp';
   /**
    * Tasa de cambio personalizada. Si se entrega, anula los valores
-   * por defecto del snapshot.
+   * por defecto del snapshot / live.
    */
   tasaPersonalizada?: number;
+  /** Dólar observado en vivo (misma fuente que el bloque visible). */
+  valorDolar?: number;
+  /** Euro observado en vivo (misma fuente que el bloque visible). */
+  valorEuro?: number;
 }
 
 export interface ConversorDivisasResult {
@@ -49,14 +53,26 @@ const NOMBRES_MONEDA: Record<ConversorDivisasInput['moneda'], string> = {
  * `DOLAR.observado` y `EURO.valor` (auto-actualizados diariamente)
  * en vez de un valor hardcodeado.
  */
-function obtenerTasaCambio(moneda: ConversorDivisasInput['moneda']): number {
-  // Si el snapshot del BCCh no tiene dólar, este fallback evita NaN.
-  const usd = DOLAR.observado && DOLAR.observado > 0 ? DOLAR.observado : 950;
+function obtenerTasaCambio(
+  moneda: ConversorDivisasInput['moneda'],
+  valorDolar?: number,
+  valorEuro?: number,
+): number {
+  // Prioridad: tasa live inyectada → snapshot compilado → fallback numérico.
+  const usd =
+    valorDolar && valorDolar > 0
+      ? valorDolar
+      : DOLAR.observado && DOLAR.observado > 0
+        ? DOLAR.observado
+        : 950;
   if (moneda === 'usd') return usd;
-  // Para EUR usamos el valor real del snapshot; si por algún motivo
-  // no está disponible, derivamos a partir del USD con el premium
-  // histórico.
-  if (EURO.valor && EURO.valor > 0) return EURO.valor;
+  const eur =
+    valorEuro && valorEuro > 0
+      ? valorEuro
+      : EURO.valor && EURO.valor > 0
+        ? EURO.valor
+        : null;
+  if (eur != null) return eur;
   return usd * EUR_PREMIUM_VS_USD_FALLBACK;
 }
 
@@ -75,13 +91,13 @@ function obtenerTasaCambio(moneda: ConversorDivisasInput['moneda']): number {
 export function calculateConversorDivisas(
   input: ConversorDivisasInput,
 ): ConversorDivisasResult {
-  const { monto, moneda, direccion, tasaPersonalizada } = input;
+  const { monto, moneda, direccion, tasaPersonalizada, valorDolar, valorEuro } = input;
 
   const montoValidado = Math.max(0, monto);
   const tasaCambio =
     tasaPersonalizada && tasaPersonalizada > 0
       ? tasaPersonalizada
-      : obtenerTasaCambio(moneda);
+      : obtenerTasaCambio(moneda, valorDolar, valorEuro);
 
   let resultado: number;
   let resultadoEnCLP: boolean;

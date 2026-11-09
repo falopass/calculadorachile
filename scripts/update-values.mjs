@@ -90,6 +90,11 @@ const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 async function fromMindicador() {
   const data = await safeFetchJSON('https://mindicador.cl/api');
   if (!data) return null;
+  const ymd = (f) => {
+    if (!f || typeof f !== 'string') return null;
+    // mindicador: "2026-11-06T04:00:00.000Z" → 2026-11-06
+    return f.split('T')[0];
+  };
   return {
     uf: num(data?.uf?.valor),
     utm: num(data?.utm?.valor),
@@ -97,6 +102,12 @@ async function fromMindicador() {
     euro: num(data?.euro?.valor),
     ipcMensual: num(data?.ipc?.valor),
     asOf: data?.uf?.fecha ?? data?.dolar?.fecha ?? data?.fecha ?? null,
+    dates: {
+      dolarObservado: ymd(data?.dolar?.fecha),
+      euro: ymd(data?.euro?.fecha),
+      uf: ymd(data?.uf?.fecha),
+      utm: ymd(data?.utm?.fecha),
+    },
   };
 }
 
@@ -129,24 +140,41 @@ async function fromBCentral() {
     const obs = data.Series.Obs.filter((o) => o.statusCode === 'OK');
     if (!obs.length) return null;
     const last = obs[obs.length - 1];
-    return num(parseFloat(String(last.value).replace(',', '.')));
+    const value = num(parseFloat(String(last.value).replace(',', '.')));
+    // Contrato BCCh: indexDateString en DD-MM-YYYY (igual que fetchBCentral).
+    const [day, month, year] = String(last.indexDateString ?? '').split('-');
+    const date =
+      /^\d{2}$/.test(day) && /^\d{2}$/.test(month) && /^\d{4}$/.test(year)
+        ? `${year}-${month}-${day}`
+        : null;
+    return value == null ? null : { value, date };
   };
 
   // Códigos oficiales BCentral
-  const [uf, utm, dolar, euro] = await Promise.all([
+  const [uf, utm, dolar, euro, ars] = await Promise.all([
     fetchSeries('F073.UFF.PRE.Z.D'),
     fetchSeries('F073.UTR.PRE.Z.M'),
     fetchSeries('F073.TCO.PRE.Z.D'),
     // Paridad EUR/CLP — serie diaria oficial.
     fetchSeries('F072.CLP.EUR.N.O.D'),
+    // ARS/CLP — nominal referencial (E-050).
+    fetchSeries('F072.CLP.ARS.N.O.D'),
   ]);
   return {
-    uf,
-    utm,
-    dolarObservado: dolar,
-    euro,
+    uf: uf?.value ?? null,
+    utm: utm?.value ?? null,
+    dolarObservado: dolar?.value ?? null,
+    euro: euro?.value ?? null,
+    pesoArgentino: ars?.value ?? null,
     ipcMensual: null, // BCentral expone IPC en otro endpoint; lo dejamos a Mindicador
     asOf: today.toISOString(),
+    dates: {
+      uf: uf?.date ?? null,
+      utm: utm?.date ?? null,
+      dolarObservado: dolar?.date ?? null,
+      euro: euro?.date ?? null,
+      pesoArgentino: ars?.date ?? null,
+    },
   };
 }
 
@@ -298,6 +326,7 @@ async function main() {
   const utm = pickFirst('utm', sourcesByPriority);
   const dolar = pickFirst('dolarObservado', sourcesByPriority);
   const euro = pickFirst('euro', sourcesByPriority);
+  const pesoArgentino = pickFirst('pesoArgentino', sourcesByPriority);
   const ipc = pickFirst('ipcMensual', sourcesByPriority);
 
   if (uf.value == null && utm.value == null && dolar.value == null) {
@@ -321,18 +350,32 @@ async function main() {
     // archivo no existe o no es valido aun; ok
   }
 
+  const prevObs = previous.observedAsOf ?? {};
+  const pickObs = (key) =>
+    bcentral?.dates?.[key] ?? mindicador?.dates?.[key] ?? prevObs[key] ?? null;
+
   const snapshot = {
     uf: uf.value ?? previous.uf ?? null,
     utm: utm.value ?? previous.utm ?? null,
     dolarObservado: dolar.value ?? previous.dolarObservado ?? null,
     euro: euro.value ?? previous.euro ?? null,
+    pesoArgentino: (typeof pesoArgentino !== 'undefined' ? pesoArgentino.value : null) ?? previous.pesoArgentino ?? null,
     ipcMensual: ipc.value ?? previous.ipcMensual ?? null,
     asOf,
+    /** Fecha de la observación por serie (YYYY-MM-DD), distinta del asOf del job. */
+    observedAsOf: {
+      uf: pickObs('uf'),
+      utm: pickObs('utm'),
+      dolarObservado: pickObs('dolarObservado'),
+      euro: pickObs('euro'),
+      pesoArgentino: pickObs('pesoArgentino'),
+    },
     sources: {
       uf: uf.source,
       utm: utm.source,
       dolarObservado: dolar.source,
       euro: euro.source,
+      pesoArgentino: pesoArgentino.source,
       ipcMensual: ipc.source,
     },
     generatedAt: new Date().toISOString(),

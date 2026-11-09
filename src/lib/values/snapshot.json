@@ -10,7 +10,14 @@
     "utm": "bcentral",
     "dolarObservado": "bcentral",
     "euro": "bcentral",
-    "ipcMensual": "mindicador"
+    "ipcMensual": "mindicador",
+    "pesoArgentino": "fallback"
   },
-  "generatedAt": "2026-11-08T17:59:35.861Z"
+  "generatedAt": "2026-11-08T17:59:35.861Z",
+  "pesoArgentino": 0.63,
+  "observedAsOf": {
+    "dolarObservado": "2026-11-06",
+    "euro": "2026-11-06",
+    "pesoArgentino": "2026-11-06"
+  }
 }

@@ -8,6 +8,8 @@ export interface ValuesContextType {
   uf: number;
   utm: number;
   dolar: { observado: number; venta: number };
+  /** Paridad EUR/CLP (Euro observado). */
+  euro: number;
   loading: boolean;
   source: ValuesSource;
   lastUpdated: string | null;
@@ -25,9 +27,9 @@ const ValuesContext = createContext<ValuesContextType | null>(null);
  * innecesarios en blog, legales y FAQ.
  */
 export function ValuesProvider({ children }: { children: ReactNode }) {
-  const { uf, utm, dolar, loading, lastUpdated, source, ufFecha } = useLiveValues();
+  const { uf, utm, dolar, euro, loading, lastUpdated, source, ufFecha } = useLiveValues();
   return (
-    <ValuesContext.Provider value={{ uf, utm, dolar, loading, source, lastUpdated, ufFecha }}>
+    <ValuesContext.Provider value={{ uf, utm, dolar, euro, loading, source, lastUpdated, ufFecha }}>
       {children}
     </ValuesContext.Provider>
   );
@@ -48,6 +50,7 @@ export function useValues(): ValuesContextType {
     uf: FALLBACK_VALUES.uf,
     utm: FALLBACK_VALUES.utm,
     dolar: { ...FALLBACK_VALUES.dolar },
+    euro: FALLBACK_VALUES.euro,
     loading: false,
     source: 'fallback',
     lastUpdated: FALLBACK_VALUES.asOf,

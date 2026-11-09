@@ -140,11 +140,11 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-gratificacion-legal',
   ],
   'calculadora-finiquito': [
-    'calculadora-sueldo-liquido',
-    'calculadora-vacaciones-proporcionales',
     'calculadora-indemnizacion-anos-servicio',
+    'calculadora-seguro-cesantia',
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-sueldo-liquido',
     'calculadora-gratificacion-legal',
-    'calculadora-horas-extra',
   ],
   'calculadora-vacaciones-proporcionales': [
     'calculadora-finiquito',
@@ -169,9 +169,16 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
   ],
   'calculadora-indemnizacion-anos-servicio': [
     'calculadora-finiquito',
+    'calculadora-seguro-cesantia',
     'calculadora-vacaciones-proporcionales',
     'calculadora-sueldo-liquido',
-    'calculadora-horas-extra',
+    'calculadora-gratificacion-legal',
+  ],
+  'calculadora-seguro-cesantia': [
+    'calculadora-finiquito',
+    'calculadora-indemnizacion-anos-servicio',
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-sueldo-liquido',
     'calculadora-gratificacion-legal',
   ],
   'calculadora-impuesto-segunda-categoria': [
