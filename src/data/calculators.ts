@@ -1063,7 +1063,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         label: 'Año de la boleta',
         type: 'select',
         required: true,
-        options: HON_ANIOS.map((a) => ({
+        options: HON_ANIOS.filter(
+          (a) => a <= HON.anio || (HON.modoCambioDeAnio && HON.siguiente === a),
+        ).map((a) => ({
           value: String(a),
           label: `${a} (${formatTasa(RETENCION_HONORARIOS_CALENDARIO[a])})`,
         })),
@@ -4209,9 +4211,14 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     lastReviewed: '2026-07-04',
     sources: [
       {
-        name: 'Banco Central de Chile',
-        url: 'https://www.bcentral.cl/areas/estadisticas',
-        note: 'Tipo de cambio dólar y euro',
+        name: 'BCCh — Dólar observado',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_031_PARIDADES?idSerie=F073.TCO.PRE.Z.D',
+        note: 'Serie F073.TCO.PRE.Z.D (dólar observado)',
+      },
+      {
+        name: 'BCCh — Euro observado',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.EUR.N.O.D',
+        note: 'Serie F072.CLP.EUR.N.O.D (paridad EUR/CLP)',
       },
     ],
     keywords: ['dólar a peso', 'euro a peso', 'conversor divisas Chile', 'USD CLP', 'EUR CLP'],

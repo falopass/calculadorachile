@@ -141,10 +141,12 @@ async function fromBCentral() {
     if (!obs.length) return null;
     const last = obs[obs.length - 1];
     const value = num(parseFloat(String(last.value).replace(',', '.')));
-    // indexDateDate suele venir como "2026-11-06"
-    const date = typeof last.indexDateDate === 'string'
-      ? last.indexDateDate.split('T')[0]
-      : null;
+    // Contrato BCCh: indexDateString en DD-MM-YYYY (igual que fetchBCentral).
+    const [day, month, year] = String(last.indexDateString ?? '').split('-');
+    const date =
+      /^\d{2}$/.test(day) && /^\d{2}$/.test(month) && /^\d{4}$/.test(year)
+        ? `${year}-${month}-${day}`
+        : null;
     return value == null ? null : { value, date };
   };
 

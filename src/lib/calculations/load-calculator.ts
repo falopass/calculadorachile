@@ -19,6 +19,10 @@ export type LiveCalculationValues = {
   valorUTM?: number;
   /** Fecha (AAAA-MM-DD) de `valorUF`, para mostrarla donde se usa la UF. */
   ufFecha?: string;
+  /** Dólar observado en vivo (misma fuente que el bloque visible del conversor). */
+  valorDolar?: number;
+  /** Euro observado en vivo. */
+  valorEuro?: number;
 };
 
 /**
@@ -616,6 +620,8 @@ export async function loadCalculationFn(
           monto: coerceNumber(inputs.monto),
           moneda: inputs.moneda as 'usd' | 'eur',
           direccion: inputs.direccion as 'a_clp' | 'desde_clp',
+          valorDolar: live?.valorDolar,
+          valorEuro: live?.valorEuro,
         });
         return conversorDivisasToResults(result);
       };

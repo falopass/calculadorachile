@@ -96,18 +96,11 @@ export function aguinaldoToResults(result: AguinaldoResult): CalculatorResult[] 
       value: result.montoProporcional,
       format: 'CLP',
       highlight: true,
+      ...(result.advertencia ? { note: { text: result.advertencia } } : {}),
     },
     { label: baseLabel, value: result.montoBase, format: 'CLP' },
     { label: 'Factor Proporcional', value: result.factorProporcional, format: 'number' },
     { label: 'Sueldo Bruto', value: result.sueldoBruto, format: 'CLP' },
   ];
-  if (result.advertencia) {
-    rows.push({
-      label: 'Nota',
-      value: 0,
-      format: 'number',
-      note: { text: result.advertencia },
-    });
-  }
   return rows;
 }

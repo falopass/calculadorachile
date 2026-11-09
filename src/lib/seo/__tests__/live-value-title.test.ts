@@ -182,4 +182,17 @@ describe('buildLiveValueDescriptionWithCalendar', () => {
     expect(desc).toContain('Diciembre: $72.802');
     expect(desc!.length).toBeLessThanOrEqual(155);
   });
+
+  it('no anuncia febrero 2026 cuando la observación es de enero 2027', () => {
+    const desc = buildLiveValueDescriptionWithCalendar(
+      'utm',
+      70000,
+      new Date('2027-01-15T15:00:00.000Z'),
+      { 1: 69000, 2: 69611 },
+      2026,
+    );
+    expect(desc).toContain('$70.000');
+    expect(desc).not.toContain('Febrero');
+    expect(desc).not.toContain('69.611');
+  });
 });

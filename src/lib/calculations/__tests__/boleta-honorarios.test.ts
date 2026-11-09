@@ -42,24 +42,51 @@ describe('calculateBoletaHonorarios', () => {
     expect(Math.round(84_000 / (1 - tasa))).toBe(100_000);
   });
 
-  it('E-028/E-053: año por fecha en Chile (nov–dic → dual + selector del año siguiente)', () => {
-    // 15-11-2026 12:00 Chile — E-053 activa modo cambio desde noviembre
+  it('E-028/E-053: default = año vigente hasta 01-01; dual + opción 2027 solo desde dic', () => {
+    // Nov-2026: título simple, selector 2026, tasa 15,25% (no adelantar 2027)
     const nov = contextoHonorarios(new Date('2026-11-15T15:00:00Z'));
     expect(nov.anio).toBe(2026);
-    expect(nov.anioSelector).toBe(2027);
-    expect(nov.modoCambioDeAnio).toBe(true);
-    // 01-12-2026 00:30 Chile (todavía 01-12 03:30 UTC)
+    expect(nov.anioSelector).toBe(2026);
+    expect(nov.modoCambioDeAnio).toBe(false);
+    expect(nov.siguiente).toBe(2027);
+    const rNov = calculateBoletaHonorarios({
+      montoBruto: 1_000_000,
+      ano: nov.anioSelector,
+    });
+    expect(rNov.tasaRetencion).toBe(15.25);
+    expect(rNov.retencion).toBe(152_500);
+
+    // 01-12-2026 00:30 Chile: dual title + opción 2027, default sigue 2026
     const dic = contextoHonorarios(new Date('2026-12-01T03:30:00Z'));
     expect(dic.modoCambioDeAnio).toBe(true);
-    expect(dic.anioSelector).toBe(2027);
-    // 31-12-2026 22:00 Chile = 01-01-2027 01:00 UTC: sigue siendo 2026 en Chile
+    expect(dic.anioSelector).toBe(2026);
+    expect(dic.siguiente).toBe(2027);
+    const rDic = calculateBoletaHonorarios({
+      montoBruto: 1_000_000,
+      ano: dic.anioSelector,
+    });
+    expect(rDic.tasaRetencion).toBe(15.25);
+    expect(rDic.retencion).toBe(152_500);
+
+    // 31-12-2026 22:00 Chile = 01-01-2027 01:00 UTC: sigue 2026 en Chile
     const fin = contextoHonorarios(new Date('2027-01-01T01:00:00Z'));
     expect(fin.anio).toBe(2026);
-    // 2027: tasa 16%
+    expect(fin.anioSelector).toBe(2026);
+    expect(fin.modoCambioDeAnio).toBe(true);
+
+    // Ene-2027: tasa 16%, sin dual
     const ene = contextoHonorarios(new Date('2027-01-10T15:00:00Z'));
     expect(ene.anio).toBe(2027);
+    expect(ene.anioSelector).toBe(2027);
     expect(ene.tasa).toBe(16);
     expect(ene.modoCambioDeAnio).toBe(false);
+    const rEne = calculateBoletaHonorarios({
+      montoBruto: 1_000_000,
+      ano: ene.anioSelector,
+    });
+    expect(rEne.tasaRetencion).toBe(16);
+    expect(rEne.retencion).toBe(160_000);
+
     // dic-2028: no hay 2029 en el calendario → sin modo cambio de año
     const dic28 = contextoHonorarios(new Date('2028-12-10T15:00:00Z'));
     expect(dic28.modoCambioDeAnio).toBe(false);

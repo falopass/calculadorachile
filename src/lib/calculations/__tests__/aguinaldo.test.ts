@@ -72,6 +72,9 @@ describe('calculateAguinaldo', () => {
     });
     const rows = aguinaldoToResults(r);
     expect(rows.some((x) => /referencia Navidad 2025/i.test(x.label))).toBe(true);
+    const highlight = rows.find((x) => x.highlight);
+    expect(highlight?.note?.text).toMatch(/referencia Navidad 2025/i);
+    expect(rows.every((x) => x.label !== 'Nota')).toBe(true);
   });
 
   it('sector privado incluye advertencia', () => {

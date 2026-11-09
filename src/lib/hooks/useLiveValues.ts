@@ -9,6 +9,8 @@ export interface LiveValues {
   uf: number;
   utm: number;
   dolar: { observado: number; venta: number };
+  /** Paridad EUR/CLP (Euro observado). */
+  euro: number;
   loading: boolean;
   error: string | null;
   lastUpdated: string | null;
@@ -21,11 +23,12 @@ export interface LiveValues {
     utm: ValuesSource;
     dolarObservado: ValuesSource;
     dolarVenta: ValuesSource;
+    euro?: ValuesSource;
   };
 }
 
 /**
- * Hook para obtener valores actualizados de UF / UTM / dólar.
+ * Hook para obtener valores actualizados de UF / UTM / dólar / euro.
  *
  * Bajo el capó pega a `/api/values`, que a su vez consulta BCentral
  * (si hay credenciales) y Mindicador.cl como fallback. Si ambas
@@ -42,6 +45,7 @@ export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
     uf: FALLBACK_VALUES.uf,
     utm: FALLBACK_VALUES.utm,
     dolar: { ...FALLBACK_VALUES.dolar },
+    euro: FALLBACK_VALUES.euro,
     loading: true,
     error: null,
     lastUpdated: null,
@@ -56,6 +60,7 @@ export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
         uf: number;
         utm: number;
         dolar: { observado: number; venta: number };
+        euro?: number;
         updatedAt: string;
         ufFecha?: string;
         source: ValuesSource;
@@ -65,6 +70,7 @@ export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
         uf: json.uf,
         utm: json.utm,
         dolar: json.dolar,
+        euro: json.euro && json.euro > 0 ? json.euro : FALLBACK_VALUES.euro,
         loading: false,
         error: null,
         lastUpdated: json.updatedAt,

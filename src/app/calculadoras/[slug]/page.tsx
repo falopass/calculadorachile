@@ -228,6 +228,7 @@ export async function generateMetadata({ params }: CalculatorPageProps): Promise
               indicator.value,
               new Date(indicator.date),
               UTM_SII_2026,
+              2026,
             )
           : buildLiveValueDescription(kind, indicator.value, new Date(indicator.date));
     }

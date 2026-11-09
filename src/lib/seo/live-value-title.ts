@@ -182,11 +182,15 @@ export function buildLiveValueDescriptionWithCalendar(
   value: number,
   date: Date,
   calendar: Record<number, number> | null | undefined,
+  /** Año al que pertenece `calendar` (ej. 2026 para UTM_SII_2026). */
+  calendarYear?: number,
 ): string | null {
   const base = buildLiveValueDescription(kind, value, date);
   if (!base || kind !== 'utm' || !calendar) return base;
   const parts = toSantiagoParts(date);
   if (!parts) return base;
+  // No anunciar un mes de otra tabla SII (ej. UTM 2027 con calendario 2026).
+  if (calendarYear != null && parts.year !== calendarYear) return base;
   const nextMonth = parts.month === 12 ? 1 : parts.month + 1;
   const nextYear = parts.month === 12 ? parts.year + 1 : parts.year;
   // Solo anunciamos el mes siguiente del mismo año calendario de la tabla.

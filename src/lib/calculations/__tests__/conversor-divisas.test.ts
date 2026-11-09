@@ -86,4 +86,30 @@ describe('calculateConversorDivisas', () => {
     expect(aClp.resultadoEnCLP).toBe(true);
     expect(desdeClp.resultadoEnCLP).toBe(false);
   });
+
+  it('usa las tasas live inyectadas (mismas que el bloque visible), no el snapshot', () => {
+    const liveDolar = DOLAR.observado + 25.5;
+    const liveEuro = EURO.valor + 30.25;
+    const usd = calculateConversorDivisas({
+      monto: 100,
+      moneda: 'usd',
+      direccion: 'a_clp',
+      valorDolar: liveDolar,
+      valorEuro: liveEuro,
+    });
+    expect(usd.tasaCambio).toBeCloseTo(liveDolar, 2);
+    expect(usd.resultado).toBe(Math.round(100 * liveDolar));
+    expect(usd.tasaCambio).not.toBeCloseTo(DOLAR.observado, 2);
+
+    const eur = calculateConversorDivisas({
+      monto: 50,
+      moneda: 'eur',
+      direccion: 'a_clp',
+      valorDolar: liveDolar,
+      valorEuro: liveEuro,
+    });
+    expect(eur.tasaCambio).toBeCloseTo(liveEuro, 2);
+    expect(eur.resultado).toBe(Math.round(50 * liveEuro));
+    expect(eur.tasaCambio).not.toBeCloseTo(EURO.valor, 2);
+  });
 });

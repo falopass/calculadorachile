@@ -38,7 +38,7 @@ const TOPE_GRAT = topeGratificacion();
 
 /**
  * E-028 + E-053: title/meta honorarios según fecha en Chile.
- * Nov–dic (si hay año siguiente): "Boleta de honorarios 2026-2027: retención SII".
+ * Dic (si hay año siguiente): "Boleta de honorarios 2026-2027: retención SII".
  * Tasas solo en la meta, desde RETENCION_HONORARIOS_CALENDARIO.
  */
 export function seoBoletaHonorarios(date: Date = new Date()): {

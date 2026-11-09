@@ -16,7 +16,7 @@ export function useCalculationFn(calculatorId: string): {
   calculateFn: CalculateFn | null;
   missing: boolean;
 } {
-  const { uf, utm, source, loading, ufFecha: ufFechaApi } = useValues();
+  const { uf, utm, dolar, euro, source, loading, ufFecha: ufFechaApi } = useValues();
   // Fecha de la UF inyectada: la del snapshot si /api/values cayó al respaldo
   // (o aún no responde); si no, la que informa la API para esa UF. Nunca se
   // supone "hoy": sin fecha informada, no se muestra fecha.
@@ -32,7 +32,7 @@ export function useCalculationFn(calculatorId: string): {
     setMissing(false);
   }, [calculatorId]);
 
-  // Carga perezosa del módulo + inyección de UF/UTM en vivo.
+  // Carga perezosa del módulo + inyección de UF/UTM/dólar/euro en vivo.
   useEffect(() => {
     let cancelled = false;
 
@@ -40,6 +40,8 @@ export function useCalculationFn(calculatorId: string): {
       valorUF: uf > 0 ? uf : undefined,
       valorUTM: utm > 0 ? utm : undefined,
       ufFecha,
+      valorDolar: dolar.observado > 0 ? dolar.observado : undefined,
+      valorEuro: euro > 0 ? euro : undefined,
     })
       .then((fn) => {
         if (cancelled) return;
@@ -60,7 +62,7 @@ export function useCalculationFn(calculatorId: string): {
     return () => {
       cancelled = true;
     };
-  }, [calculatorId, uf, utm, ufFecha]);
+  }, [calculatorId, uf, utm, ufFecha, dolar.observado, euro]);
 
   return { calculateFn, missing };
 }

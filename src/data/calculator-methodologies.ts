@@ -1409,4 +1409,55 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Intereses ganados: $5.000; monto final a recibir: $1.005.000.',
     },
   },
+
+  'conversor-divisas': {
+    summary:
+      'Convierte entre USD o EUR y pesos chilenos usando el tipo de cambio observado del Banco Central (o su respaldo) que se muestra en la página.',
+    calculationSteps: [
+      'Toma el monto ingresado y la dirección (divisa→CLP o CLP→divisa).',
+      'Aplica la tasa observada vigente para USD o EUR: la misma que muestra el bloque de valor en vivo; si no hay dato fresco, usa el snapshot de respaldo.',
+      'Multiplica (a CLP) o divide (desde CLP) y redondea solo para presentar el resultado.',
+    ],
+    assumptions: [
+      'La tasa aplicada es la del dólar o euro observado publicado por el Banco Central (series F073.TCO.PRE.Z.D y F072.CLP.EUR.N.O.D) o su fuente de respaldo.',
+    ],
+    limitations: [
+      'Es referencial: no corresponde a la cotización de compra/venta de un banco o casa de cambio.',
+      'No incluye comisiones, spreads ni impuestos de la operación cambiaria.',
+    ],
+  },
+  'peso-argentino-clp': {
+    summary:
+      'Convierte entre pesos argentinos y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.ARS.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 ARS del snapshot (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en ARS para obtener CLP, o lo divide para la dirección inversa.',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.ARS.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio o bancos.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
+  aguinaldo: {
+    summary:
+      'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público según la Ley 21.806, o una referencia de Navidad 2025; el régimen de pensionados IPS se cita aparte (ChileAtiende).',
+    calculationSteps: [
+      'Selecciona el monto base del tipo elegido (Fiestas Patrias 2026, escolaridad 2026 o Navidad referencia 2025) desde las constantes oficiales.',
+      'Prorratea por los meses trabajados informados cuando corresponde.',
+      'Advierte cuando el monto de Navidad es solo referencia 2025 porque el reajuste 2026 aún no está publicado.',
+    ],
+    assumptions: [
+      'Los montos de Fiestas Patrias y escolaridad 2026 provienen de la Ley 21.806; Navidad usa la referencia 2025 de esa misma ley.',
+      'El cálculo asume el tramo 1 del sector público salvo que se indique lo contrario en la interfaz.',
+    ],
+    limitations: [
+      'No determina elegibilidad individual ni el tramo exacto según remuneración líquida.',
+      'El aguinaldo de Navidad 2026 del sector público aún no está publicado; la cifra mostrada es referencia 2025.',
+      'Pensionados IPS tienen montos distintos publicados en ChileAtiende; esta estimadora no los calcula automáticamente.',
+    ],
+  },
 };
