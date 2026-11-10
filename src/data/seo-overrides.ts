@@ -123,17 +123,15 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-asignacion-familiar': {
-    seoTitle: 'Tramos asignación familiar 2026: monto por carga', // 49
+    seoTitle: 'Tramos asignación familiar 2026: monto por carga', // 48
     seoDescription:
-      'Calcula la asignación familiar 2026 por carga acreditada: tramos $22.601, $13.870 y $4.382 según ingreso imponible. SUSESO / DT.', // 130
+      'Tramos 2026: $22.601, $13.870 o $4.382 por carga (Ley 21.830). En 2027 se reajustan con el IMM; los valores salen en el decreto (hasta el 15-01).', // 145
   },
-
   'calculadora-aguinaldo': {
     seoTitle: 'Aguinaldo 2026: Fiestas Patrias y Navidad en Chile', // 50
     seoDescription:
-      'Montos del aguinaldo 2026 para pensionados IPS ($25.280) y sector público ($91.682). Requisitos, fechas de pago y sector privado.', // 130
+      'Fiestas Patrias 2026 e IPS Navidad ($29.055 + cargas). Navidad del sector público 2026 espera la ley de reajuste; hay referencia 2025.', // 134
   },
-
   // --- TRIBUTARIO Y HONORARIOS ---
   'vacaciones-feriado-legal-chile': {
     // E-004: head term «vacaciones progresivas»
@@ -419,9 +417,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'La cuarta cuota de contribuciones 2026 vence el lunes 30 de noviembre. Exención $61.711.570, tasas 0,893% y 1,042%, ejemplos y canales TGR.', // 140
   },
   'aguinaldo-navidad-pensionados-2026': {
-    seoTitle: 'Aguinaldo Navidad 2026 pensionados: $29.055 + cargas', // 55
+    seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:
-      'Aguinaldo de Navidad 2026 para pensionados IPS: $29.055 base + $16.415 por carga al 30 de noviembre (Ley 21.806). Se paga con la pensión de diciembre.', // 145
+      'Pensionados IPS: $29.055 + $16.415 por carga (Ley 21.806). El sector público 2026 espera la ley de reajuste. Bono de vacaciones, con fuente.', // 140
   },
   'patente-comercial-2027-calcular': {
     seoTitle: 'Patente comercial 2027: cálculo, cuota de enero y topes', // 55
@@ -563,6 +561,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   // GUÍAS PILLAR
   // ══════════════════════════════════════════════════════════════════════════
 
+  'licencia-medica-chile': {
+    seoTitle: 'Licencia médica en Chile: quién paga, plazos y cómo cobrar', // 58
+    seoDescription:
+      'Quién paga tu licencia (Compin, Caja o Isapre), desde qué día, plazos para entregarla, cuándo pagan y cómo reclamar si la rechazan. SUSESO y DT.', // 144
+  },
   'sueldo-liquido-chile': {
     seoTitle: 'Sueldo bruto vs líquido y total haberes', // 42 (+ | CalculaChile = 56)
     seoDescription:

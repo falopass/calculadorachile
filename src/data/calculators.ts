@@ -3011,7 +3011,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'familia',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-13',
+    lastReviewed: '2026-11-10',
     sources: [
       {
         name: 'BCN — Ley 21.830',
@@ -3022,6 +3022,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'SUSESO — Asignación Familiar',
         url: 'https://www.suseso.cl/606/w3-propertyvalue-571.html',
         note: 'Beneficiarios, causantes y reconocimiento',
+      },
+      {
+        name: 'SUSESO — Tabla de tramos (oficio 498133)',
+        url: 'https://www.suseso.gob.cl/606/w3-article-498133.html',
+        note: 'Tramos 2026; periodos de ingreso',
       },
     ],
     keywords: [
@@ -4327,13 +4332,13 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:
-      'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público (Ley 21.806), o una referencia de Navidad 2025. El monto Navidad 2026 del sector público aún no está publicado. Pensionados IPS: régimen distinto (ChileAtiende).',
+      'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público (Ley 21.806), o una referencia de Navidad 2025. El monto Navidad 2026 del sector público aún no está publicado. El bono de vacaciones del sector público es otro beneficio (anualidad 2026); esta calculadora no lo estima. Pensionados IPS: régimen distinto (ChileAtiende).',
     slug: 'calculadora-aguinaldo',
     category: 'beneficios',
     noIndex: false,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-11-09',
+    lastReviewed: '2026-11-10',
     sources: [
       {
         name: 'Ley 21.806 (BCN)',

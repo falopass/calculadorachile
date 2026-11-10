@@ -4062,12 +4062,12 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
     description:
       'Montos vigentes de la Asignación Familiar 2026, cómo leer los tramos de ingreso, quién paga el beneficio y qué revisar antes de reclamar por una carga.',
     date: '2026-08-12',
-    updatedAt: '2026-11-02',
+    updatedAt: '2026-11-10',
     category: 'familia',
     readingTime: 15,
     seoTitle: 'Asignación Familiar 2026: tramos, montos y pago por carga',
     seoDescription:
-      'Revisa los montos vigentes de la Asignación Familiar 2026: $22.601, $13.870 o $4.382 por carga, según tramo de ingreso y situación laboral.',
+      'Tramos 2026: $22.601, $13.870 o $4.382 por carga (Ley 21.830). En 2027 se reajustan con el IMM; los valores salen en el decreto (hasta el 15-01).',
     keywords: [
       'asignación familiar 2026 montos',
       'tramos asignación familiar 2026',
@@ -4119,6 +4119,10 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
         url: 'https://www.suseso.cl/620/alt-propertyvalue-596461.pdf',
       },
       {
+        label: 'SUSESO — Tabla de tramos (oficio 498133)',
+        url: 'https://www.suseso.gob.cl/606/w3-article-498133.html',
+      },
+      {
         label: 'SUSESO — Circular 3911, plataforma integrada de prestaciones familiares',
         url: 'https://www.suseso.cl/609/articles-773957_archivo_01.pdf',
       },
@@ -4132,8 +4136,9 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       },
     ],
     content: `<p class="article-lead">La Asignación Familiar 2026 no es un monto único para todos los hogares. Se paga por cada causante reconocido y cambia según el tramo de ingreso de la persona beneficiaria. Los valores publicados por ChileAtiende son <strong>$22.601, $13.870 o $4.382</strong> por carga; sobre el último umbral no corresponde pago monetario, aunque la acreditación de la carga puede seguir siendo relevante para otros beneficios.</p>
+<p>El 1 de enero de 2027 los tramos de ingreso se reajustan en la misma proporción que el ingreso mínimo mensual, según el artículo 6 de la Ley 21.830. Los valores exactos de 2027 salen en un decreto, a más tardar el 15 de enero de 2027. Mientras tanto, los montos de esta guía son los vigentes desde el 1 de mayo de 2026.</p>
 
-<p>Esta guía fue revisada el <strong>2 de noviembre de 2026</strong> con la ficha vigente de ChileAtiende y la normativa de la Superintendencia de Seguridad Social (SUSESO). Antes de calcular un total, hay que resolver cuatro preguntas: quién es la persona beneficiaria, cuántas cargas están acreditadas, qué tramo de ingreso se aplica y por qué vía se paga. Si falta una de esas piezas, multiplicar “monto por hijos” puede producir una expectativa equivocada.</p>
+<p>Esta guía fue revisada el <strong>10 de noviembre de 2026</strong> con la ficha vigente de ChileAtiende y la normativa de la Superintendencia de Seguridad Social (SUSESO). Antes de calcular un total, hay que resolver cuatro preguntas: quién es la persona beneficiaria, cuántas cargas están acreditadas, qué tramo de ingreso se aplica y por qué vía se paga. Si falta una de esas piezas, multiplicar “monto por hijos” puede producir una expectativa equivocada.</p>
 
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No confundas carga familiar con pago automático</strong><p>Que una persona esté a cargo de un hijo, hija u otro causante no significa que el pago aparecerá sin reconocimiento previo. El tramo, el ingreso considerado y la entidad pagadora deben quedar correctamente registrados. Una liquidación de sueldo sin el beneficio no siempre es un error de cálculo: puede faltar acreditar o actualizar antecedentes.</p></div></aside>
 
@@ -4148,6 +4153,10 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>La regla “por causante” también es importante. El monto no se paga una vez por familia sin importar el número de cargas reconocidas; se aplica por cada causante acreditado. Aun así, no corresponde sumar personas solo porque viven en el hogar. Deben estar reconocidas dentro del régimen y no existir una incompatibilidad o duplicidad de pago que corresponda resolver.</p>
 
 <div class="numeric-example"><div class="numeric-example__title">Ejemplo de lectura, no de reconocimiento</div><ul><li>Persona beneficiaria en el tramo de $13.870.</li><li>Dos causantes ya reconocidos por la entidad competente.</li><li>$13.870 × 2 = $27.740 como referencia mensual.</li><li>El resultado cambia si el tramo, número de cargas o modalidad de pago no coincide.</li></ul><span class="total">Verifica reconocimiento y tramo antes de proyectar un presupuesto</span></div>
+
+<h2>Qué cambia el 1 de enero de 2027</h2>
+<p>La Ley 21.830, artículo 6, dispone que, a contar del 1 de enero de 2027, se elevan en la misma proporción en que aumente el ingreso mínimo mensual del artículo 1 «los montos señalados en los artículos 2 y 3, así como los tramos de ingresos mensuales establecidos en los artículos 4 y 5». Un decreto supremo del Ministerio de Hacienda, suscrito también por el Ministro del Trabajo y Previsión Social, debe fijar los valores resultantes a más tardar el 15 de enero de 2027.</p>
+<p>El artículo 1 reajusta el ingreso mínimo de 18 a 65 años según el IPC acumulado entre el 1 de mayo y el 31 de diciembre de 2026. Ese IPC y el decreto todavía no existen, así que esta página no anticipa montos ni cortes de 2027. El artículo 6 habla de «tramos de ingresos mensuales» en los artículos 4 y 5; no adelantamos, ni para afirmarlo ni para negarlo, qué hará el decreto con los montos por carga vigentes ($22.601, $13.870 y $4.382). Hasta que se publique, la calculadora y la tabla siguen en valores 2026. El artículo 7 solo manda enviar un proyecto de ley para un reajuste que rija desde el 1 de julio de 2027; no fija montos.</p>
 
 <h2>Qué significa “por cada causante reconocido”</h2>
 
@@ -4193,8 +4202,13 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <p>La Asignación Familiar puede parecer una operación corta, pero depende de registros que una calculadora no ve. Los montos vigentes permiten estimar el orden de magnitud; el reconocimiento de la carga, el tramo y la modalidad de pago deciden si la estimación aparece realmente en una liquidación. Revisar esos tres puntos es más útil que buscar una cifra única para todo 2026.</p>
 
+<h2>Más preguntas sobre la asignación familiar</h2>
+<p><strong>¿La asignación familiar cambia el 1 de enero de 2027?</strong><br>Sí, en el sentido de que la Ley 21.830 ordena reajustar, en la misma proporción que el ingreso mínimo, los tramos de ingresos de los artículos 4 y 5 (y los montos de los artículos 2 y 3). Los valores resultantes los fija un decreto, a más tardar el 15 de enero de 2027.</p>
+<p><strong>¿Ya se conocen los montos de la asignación familiar 2027?</strong><br>No. Ni el IPC de mayo a diciembre de 2026 ni el decreto están publicados. Hasta entonces, esta guía usa solo los tramos y montos vigentes desde el 1 de mayo de 2026.</p>
+<p>Para no confundir este beneficio con el Aporte Familiar Permanente (conocido como Bono Marzo), revisa la <a href="/calculadoras/calculadora-aporte-familiar-permanente">calculadora de Aporte Familiar Permanente</a>. El ingreso mínimo que usa el reajuste de 2027 se explica en <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo 2026</a>. La asignación familiar no es imponible: puedes ver su efecto en el <a href="/calculadoras/calculadora-sueldo-liquido">cálculo de sueldo líquido</a>.</p>
+
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 2 de noviembre de 2026 con la <a href="https://www.chileatiende.gob.cl/tramites/25878" target="_blank" rel="noopener">ficha de Asignación Familiar de ChileAtiende</a>, su <a href="https://www.chileatiende.gob.cl/fichas/25878/1/pdf" target="_blank" rel="noopener">versión PDF</a>, el <a href="https://www.suseso.cl/620/alt-propertyvalue-596461.pdf" target="_blank" rel="noopener">compendio de normas de SUSESO</a>, la <a href="https://www.suseso.cl/609/articles-773957_archivo_01.pdf" target="_blank" rel="noopener">Circular 3911</a>, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830 en LeyChile</a> (art. 4, que fija los montos y tramos vigentes desde el 1 de mayo de 2026) y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=30355" target="_blank" rel="noopener">Ley 18.987 en LeyChile</a>. Los tramos y antecedentes individuales deben confirmarse con la entidad administradora correspondiente.</p>`,
+<p>Contenido verificado el 10 de noviembre de 2026 con la <a href="https://www.chileatiende.gob.cl/tramites/25878" target="_blank" rel="noopener">ficha de Asignación Familiar de ChileAtiende</a>, su <a href="https://www.chileatiende.gob.cl/fichas/25878/1/pdf" target="_blank" rel="noopener">versión PDF</a>, el <a href="https://www.suseso.cl/620/alt-propertyvalue-596461.pdf" target="_blank" rel="noopener">compendio de normas de SUSESO</a>, la <a href="https://www.suseso.gob.cl/606/w3-article-498133.html" target="_blank" rel="noopener">tabla de tramos de SUSESO (oficio 498133)</a>, la <a href="https://www.suseso.cl/609/articles-773957_archivo_01.pdf" target="_blank" rel="noopener">Circular 3911</a>, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830 en LeyChile</a> (art. 4, que fija los montos y tramos vigentes desde el 1 de mayo de 2026) y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=30355" target="_blank" rel="noopener">Ley 18.987 en LeyChile</a>. Los tramos y antecedentes individuales deben confirmarse con la entidad administradora correspondiente.</p>`,
   },
   {
     slug: 'contribuciones-cuarta-cuota-noviembre-2026',
@@ -4334,13 +4348,13 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
     description:
       'El aguinaldo de Navidad 2026 para pensionados es de $29.055, más $16.415 por cada carga familiar acreditada al 30 de noviembre (Ley 21.806). Quiénes lo reciben, cuándo se paga y ejemplos.',
     date: '2026-09-23',
-    updatedAt: '2026-10-16',
+    updatedAt: '2026-11-10',
     category: 'beneficios',
     readingTime: 13,
     relatedGuia: 'familia-pension-alimenticia-chile',
-    seoTitle: 'Aguinaldo de Navidad 2026: pensionados, públicos y privados',
+    seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público',
     seoDescription:
-      'Aguinaldo de Navidad 2026: pensionados reciben $29.055 más $16.415 por carga. Qué pasa en el sector público y cuándo es obligatorio en el privado.',
+      'Pensionados IPS: $29.055 + $16.415 por carga (Ley 21.806). El sector público 2026 espera la ley de reajuste. Bono de vacaciones, con fuente.',
     keywords: [
       'aguinaldo navidad pensionados 2026',
       'aguinaldo navidad 2026 monto',
@@ -4378,7 +4392,8 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       },
     ],
     content: `<p>Con diciembre llega el segundo aguinaldo del año para los pensionados de los regímenes previsionales cubiertos por ley. Para <strong>Navidad 2026</strong>, el artículo 5 de la <strong>Ley 21.806</strong> —la ley de reajuste del sector público publicada en el Diario Oficial el 5 de febrero de 2026— fija un monto base de <strong>$29.055</strong>, que se incrementa en <strong>$16.415</strong> por cada persona acreditada como causante de asignación familiar o maternal al <strong>30 de noviembre de 2026</strong>.</p>
-<p>Este artículo ordena quiénes lo reciben, cómo se calcula con cargas, qué diferencias hay con el aguinaldo del sector público y qué pasa en el sector privado. Fecha de corte: 23 de septiembre de 2026.</p>
+<p>Este artículo ordena quiénes lo reciben, cómo se calcula con cargas, qué diferencias hay con el aguinaldo del sector público y qué pasa en el sector privado. Fecha de corte: 10 de noviembre de 2026.</p>
+<p>El aguinaldo de Navidad 2026 del sector público todavía no tiene ley de reajuste publicada. Los $71.206 y $37.666 que se indican más abajo son la referencia 2025, no un monto oficial de Navidad 2026. El bono de vacaciones del sector público es un beneficio distinto, con otra anualidad.</p>
 
 <h2>Monto 2026 y corte de derecho</h2>
 <p>La regla es simple y está en la ley:</p>
@@ -4421,18 +4436,22 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>Una persona puede ser funcionaria del sector público y, a la vez, pensionada de alguno de los regímenes anteriores. En esa situación, la ficha de ChileAtiende indica que el beneficiario solo recibe la parte del aguinaldo de sector público que <strong>exceda</strong> lo que le corresponde como pensionado —no se acumulan ambos completos.</p>
 
 <h2>¿Y el aguinaldo de Navidad del sector público 2026?</h2>
-<p>Los trabajadores y trabajadoras del sector público tienen un aguinaldo distinto, fijado por la ley de reajuste de cada año. <strong>Para Navidad 2026 el monto todavía no está determinado</strong>: dependerá de la próxima ley de reajuste del sector público, que históricamente se tramita hacia fines de año.</p>
-<p>Como referencia —y marcada expresamente como referencia—, el aguinaldo de <strong>Navidad 2025</strong> fue de <strong>$71.206</strong> para quienes tenían una remuneración líquida de hasta $1.060.493 y de <strong>$37.666</strong> para quienes estaban sobre ese umbral (artículo 2 de la Ley 21.724, según la modificación introducida por el artículo 2 de la Ley 21.806). Cualquier cifra de Navidad 2026 para el sector público que circule antes de la nueva ley es una estimación, no un monto oficial.</p>
+<p>Los trabajadores y trabajadoras del sector público tienen un aguinaldo distinto, fijado por la ley de reajuste de cada año. Para Navidad 2026 el monto todavía no está determinado: depende de la próxima ley de reajuste del sector público, que al 10 de noviembre de 2026 no está publicada.</p>
+<p>Como referencia —y marcada expresamente como referencia 2025—, la Ley 21.806, artículo 2 n.º 1 (<a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/02/05/44368-B/01/2766382.pdf" target="_blank" rel="noopener">Diario Oficial del 5 de febrero de 2026, CVE 2766382</a>), modificó el artículo 2 de la Ley 21.724: reemplazó «año 2024» por «año 2025» y dejó los montos de $71.206, si la remuneración líquida de noviembre es igual o inferior a $1.060.493, y de $37.666, si supera esa cantidad. En la versión consolidada, el aguinaldo de Navidad «se pagará en diciembre de cada año», pero el marcador de año que actualizó la ley vigente es «año 2025». Hasta que se publique la siguiente ley de reajuste, estos valores no deben usarse como Navidad 2026. Cualquier cifra de Navidad 2026 del sector público que circule antes de esa ley es una estimación, no un monto oficial.</p>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1209939" target="_blank" rel="noopener">artículo 19</a> de la misma Ley 21.724 dispone que sólo tienen derecho a los beneficios de los artículos 2 (aguinaldo de Navidad), 8 (Fiestas Patrias) y 13 (bono de escolaridad) quienes tengan una remuneración bruta de carácter permanente, en el mes que corresponda, igual o inferior a $3.511.800, excluidas las bonificaciones, asignaciones o bonos asociados al desempeño individual, colectivo o institucional. Ese tope sí se aplica al aguinaldo de Navidad, aunque no esté escrito en el artículo 2. El bono de vacaciones tiene su propio tope de $3.511.800 en el artículo 23.</p>
+
+<h2>Bono de vacaciones del sector público</h2>
+<p>El bono de vacaciones es un beneficio distinto del aguinaldo de Navidad. La Ley 21.724, artículo 23, modificado por la Ley 21.806, artículo 2 n.º 10, concede «a contar del año 2026» un bono de vacaciones no imponible, que no constituye renta, «que se pagará a más tardar en el mes de enero de cada anualidad». El monto es de $112.915 si la remuneración líquida de noviembre de la respectiva anualidad es igual o inferior a $1.060.493, y de $56.457 si supera esa cantidad y no excede una remuneración bruta de $3.511.800.</p>
+<p>El marcador de año de ese artículo pasó de «año 2025» a «año 2026». Esos montos corresponden a la anualidad 2026 del artículo 23 (pago a más tardar en enero de esa anualidad, con la renta de noviembre que indica la norma). No son, por sí solos, el bono de enero de 2027: si esos valores se reiteran o se modifican para la próxima anualidad lo resolverá la siguiente ley de reajuste, que al 10 de noviembre de 2026 no está publicada.</p>
 
 <h2>Sector privado: no existe aguinaldo de ley</h2>
-<p>En el sector privado no hay una obligación legal general de pagar aguinaldo de Navidad. ChileAtiende lo resume así: solo es exigible cuando está pactado en el <strong>contrato individual</strong> o en un <strong>convenio o contrato colectivo</strong>. Si tu empresa lo paga por costumbre o por política interna, el monto y las condiciones son los del acuerdo, no una tarifa del Estado.</p>
-<p>Según la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, el empleador sí está obligado a pagarlo en estos casos:</p>
+<p>En el sector privado no hay una obligación legal general de pagar aguinaldo de Navidad. Solo es exigible cuando existe acuerdo entre las partes. Según la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, el empleador está obligado a pagarlo en estos casos:</p>
 <ol>
-<li>Está pactado por escrito en el <strong>contrato individual</strong> o en un <strong>anexo</strong>.</li>
-<li>Está pactado en un <strong>convenio o contrato colectivo</strong>.</li>
-<li>No está por escrito, pero <strong>se ha pagado reiteradamente</strong> en años anteriores. Esto genera una cláusula tácita y el empleador debe seguir pagándolo.</li>
+<li>Está pactado por escrito en el <strong>contrato individual de trabajo</strong> o en un <strong>anexo</strong>.</li>
+<li>Está pactado por escrito en un <strong>convenio o contrato colectivo</strong>.</li>
+<li>No está pactado por escrito, pero se ha pagado en forma reiterada en años anteriores. Eso genera una cláusula tácita y el empleador debe seguir pagándolo.</li>
 </ol>
-<p>Si te corresponde, el empleador debe respetar el monto, la forma y la fecha acordados, y no puede bajarlo. Puede pagarse en dinero, en una canasta familiar o en una combinación de ambos. Si no te lo pagan teniendo derecho, puedes presentar una denuncia en la Inspección del Trabajo.</p>
+<p>Si te corresponde, el empleador debe respetar el monto, la forma y la fecha acordados, y no puede rebajarlo de manera unilateral. Puede pagarse en dinero, en una canasta o en una combinación de ambos. Si no te lo pagan teniendo derecho, puedes presentar una denuncia en la Inspección del Trabajo.</p>
 
 <h2>Diferencias con el aguinaldo de Fiestas Patrias</h2>
 <p>Los pensionados cubiertos recibieron en septiembre un aguinaldo distinto: el de Fiestas Patrias 2026, de <strong>$25.280</strong> base más <strong>$12.969</strong> por carga acreditada al 31 de agosto. Los montos, el corte de fecha y la base legal son otros, aunque el mecanismo de pago es el mismo: automático y junto a la pensión del mes. La comparación lado a lado la desarrolla el artículo <a href="/blog/aguinaldo-fiestas-patrias-2026-pensionados-sector-publico">aguinaldo de Fiestas Patrias 2026 para pensionados y sector público</a>.</p>
@@ -4473,9 +4492,11 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <h2>Más preguntas sobre el aguinaldo de Navidad</h2>
 <p><strong>¿Cuándo se paga el aguinaldo de Navidad?</strong><br>A los pensionados se les paga junto con la pensión de diciembre, según <a href="https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ChileAtiende</a>.</p>
 <p><strong>¿Es obligatorio el aguinaldo de Navidad en una empresa privada?</strong><br>Solo si está en el contrato, en un anexo o en un convenio colectivo, o si se ha pagado reiteradamente. Así lo indica la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>.</p>
+<p><strong>¿Los $71.206 son el aguinaldo de Navidad 2026 del sector público?</strong><br>No. Esa cifra, junto a los $37.666 del segundo tramo, es la referencia 2025 que dejó la Ley 21.806 al reemplazar «año 2024» por «año 2025» en el artículo 2 de la Ley 21.724. El aguinaldo de Navidad 2026 del sector público lo fijará la próxima ley de reajuste, aún no publicada.</p>
+<p><strong>¿Cuánto es el bono de vacaciones del sector público?</strong><br>El texto vigente del artículo 23 de la Ley 21.724, actualizado por la Ley 21.806, fija $112.915 o $56.457 para la anualidad 2026, según la remuneración líquida de noviembre, con un tope bruto de $3.511.800, y se paga a más tardar en enero de esa anualidad. No anticipamos esos montos como el bono de enero de 2027.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Actualizado el 16 de octubre de 2026: sector privado según la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, "Conoce más sobre el aguinaldo".</p>
+<p>Actualizado el 10 de noviembre de 2026: sector privado según la <a href="https://www.dt.gob.cl/portal/1627/w3-article-128296.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, "Conoce más sobre el aguinaldo".</p>
 <p>Contenido verificado el 23 de septiembre de 2026 con la <a href="https://www.diariooficial.interior.gob.cl/publicaciones/2026/02/05/44368-B/01/2766382.pdf" target="_blank" rel="noopener">Ley 21.806 en el Diario Oficial</a>, su texto en <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Biblioteca del Congreso Nacional</a> y la <a href="https://chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips" target="_blank" rel="noopener">ficha ChileAtiende 30171 — Aguinaldo de Navidad para pensionados IPS</a>. Los montos de Navidad 2025 del sector público corresponden a la Ley 21.724 según la modificación de la Ley 21.806.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto, las cargas y la fecha de pago efectiva prevalecen en la liquidación de la entidad pagadora y en el texto de la ley. No es un dictamen del IPS ni asesoría previsional.</p></div></aside>
 <p>Para profundizar en beneficios familiares y cargas, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de familia</a>, la <a href="/calculadoras/calculadora-pgu">calculadora de la PGU</a> y la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>`,

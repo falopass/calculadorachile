@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import {
+  ASIGNACION_FAMILIAR_2026,
   INDEMNIZACION,
   INGRESO_MINIMO,
   RECARGO_ART_168,
@@ -1216,18 +1217,91 @@ const EDITORIAL: Record<string, EditorialContent> = {
       </Section>
     ),
   },
-  'asignacion-familiar': {
+  'aguinaldo': {
     bottom: (
-      <Section title="Tramos y montos 2026">
+      <Section title="Bono de vacaciones del sector público">
         <p className={pClass}>
-          Para entender cómo se leen los tramos de ingreso, quién paga el beneficio y qué revisar
-          antes de reclamar por una carga, lee{' '}
-          <Int href="/blog/asignacion-familiar-2026-tramos-montos">
-            Asignación Familiar 2026: tramos, montos y pago por carga
+          El bono de vacaciones del sector público es otro beneficio, distinto del aguinaldo de
+          Navidad (anualidad 2026). Esta calculadora no lo estima. El texto vigente está explicado
+          en el{' '}
+          <Int href="/blog/aguinaldo-navidad-pensionados-2026">
+            artículo de aguinaldo de Navidad 2026
           </Int>
           .
         </p>
+        <Faq
+          items={[
+            {
+              q: '¿Esta calculadora entrega el bono de vacaciones del sector público?',
+              a: (
+                <>
+                  No. El bono de vacaciones es distinto del aguinaldo de Navidad. El texto vigente
+                  (Ley 21.724, art. 23, anualidad 2026) está explicado en el{' '}
+                  <Int href="/blog/aguinaldo-navidad-pensionados-2026">artículo de Navidad</Int>. No
+                  uses los $112.915 o $56.457 como el bono de enero de 2027.
+                </>
+              ),
+            },
+          ]}
+        />
       </Section>
+    ),
+  },
+  'asignacion-familiar': {
+    bottom: (
+      <>
+        <Section title="Tramos y montos 2026">
+          <p className={pClass}>
+            El tramo no se fija con el sueldo de un mes suelto: se usa el promedio de ingresos del
+            periodo que corresponda. La{' '}
+            <Int href="/blog/asignacion-familiar-2026-tramos-montos">
+              guía de tramos y pago por carga
+            </Int>{' '}
+            explica esa regla y quién paga según la situación laboral.
+          </p>
+          <p className={pClass}>
+            Ejemplo 2026: 2 cargas en tramo A equivalen a 2 ×{' '}
+            {formatCLP(ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP)} ={' '}
+            {formatCLP(2 * ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP)}. No es una proyección
+            de 2027.
+          </p>
+        </Section>
+        <Section title="Qué cambia el 1 de enero de 2027">
+          <p className={pClass}>
+            La Ley 21.830, artículo 6, dispone que, a contar del 1 de enero de 2027, se elevan en
+            la misma proporción en que aumente el ingreso mínimo mensual del artículo 1 «los montos
+            señalados en los artículos 2 y 3, así como los tramos de ingresos mensuales establecidos
+            en los artículos 4 y 5». Un decreto supremo del Ministerio de Hacienda, suscrito también
+            por el Ministro del Trabajo y Previsión Social, debe fijar los valores resultantes a más
+            tardar el 15 de enero de 2027.
+          </p>
+          <p className={pClass}>
+            El artículo 1 reajusta el ingreso mínimo de 18 a 65 años según el IPC acumulado entre el
+            1 de mayo y el 31 de diciembre de 2026. Ese IPC y el decreto todavía no existen, así que
+            esta página no anticipa montos ni cortes de 2027. El artículo 6 habla de «tramos de
+            ingresos mensuales» en los artículos 4 y 5; no adelantamos, ni para afirmarlo ni para
+            negarlo, qué hará el decreto con los montos por carga vigentes (
+            {formatCLP(ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP)},{' '}
+            {formatCLP(ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP)} y{' '}
+            {formatCLP(ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP)}). Hasta que se publique, la
+            calculadora y la tabla siguen en valores 2026.
+          </p>
+        </Section>
+        <Section title="Preguntas frecuentes">
+          <Faq
+            items={[
+              {
+                q: '¿La asignación familiar cambia el 1 de enero de 2027?',
+                a: 'Sí, en el sentido de que la Ley 21.830 ordena reajustar, en la misma proporción que el ingreso mínimo, los tramos de ingresos de los artículos 4 y 5 (y los montos de los artículos 2 y 3). Los valores resultantes los fija un decreto, a más tardar el 15 de enero de 2027.',
+              },
+              {
+                q: '¿Ya se conocen los montos de la asignación familiar 2027?',
+                a: 'No. Ni el IPC de mayo a diciembre de 2026 ni el decreto están publicados. Hasta entonces, esta calculadora usa solo los tramos y montos vigentes desde el 1 de mayo de 2026.',
+              },
+            ]}
+          />
+        </Section>
+      </>
     ),
   },
   'vacaciones-proporcionales': {
