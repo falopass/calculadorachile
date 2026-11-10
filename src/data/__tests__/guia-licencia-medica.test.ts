@@ -47,6 +47,7 @@ describe('E-023/E-025: guía licencia médica', () => {
     expect(ids).toContain('preguntas-frecuentes');
     expect(html.match(/\/calculadoras\/calculadora-finiquito"/g)).toHaveLength(1);
     expect(html).toContain('Actualizado el 10 de noviembre de 2026');
+    expect(html).toContain('Alcance YMYL');
   });
 
   it('conserva el criterio de licencias continuadas (Vigía 18:49)', () => {
