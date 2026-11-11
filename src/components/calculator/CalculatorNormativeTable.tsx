@@ -1,4 +1,7 @@
 import React from 'react';
+import { ASIGNACION_FAMILIAR_2026 } from '@/lib/values/constants';
+import { formatCLP } from '@/lib/formatters';
+
 
 interface NormativeTableProps {
   calculatorId: string;
@@ -81,11 +84,30 @@ const NORMATIVE_DATA: Record<string, TableData> = {
     source: 'Superintendencia de Seguridad Social (SUSESO) · Ley 21.830',
     sourceUrl: 'https://www.suseso.cl',
     headers: ['Tramo de Ingreso', 'Renta Mensual Imponible', 'Valor por Carga Acreditada'],
+    // Umbrales y montos salen de ASIGNACION_FAMILIAR_2026 (Ley 21.830, desde el 01-05-2026).
+    // Misma lógica que calculateAsignacionFamiliar y el quick answer: tramo A/B/C «hasta» el
+    // tope inclusive; tramo D «sobre» el tope C.
     rows: [
-      ['Tramo A', 'Hasta $613.626', '$22.601 por carga'],
-      ['Tramo B', 'Entre $613.626 y $896.264', '$13.870 por carga'],
-      ['Tramo C', 'Entre $896.264 y $1.397.778', '$4.382 por carga'],
-      ['Tramo D', 'Superior a $1.397.778', '$0 (mantiene otras prestaciones)'],
+      [
+        'Tramo A',
+        `hasta ${formatCLP(ASIGNACION_FAMILIAR_2026.tramoA.ingresoMaximoCLP)}`,
+        formatCLP(ASIGNACION_FAMILIAR_2026.tramoA.montoPorCargaCLP),
+      ],
+      [
+        'Tramo B',
+        `hasta ${formatCLP(ASIGNACION_FAMILIAR_2026.tramoB.ingresoMaximoCLP)}`,
+        formatCLP(ASIGNACION_FAMILIAR_2026.tramoB.montoPorCargaCLP),
+      ],
+      [
+        'Tramo C',
+        `hasta ${formatCLP(ASIGNACION_FAMILIAR_2026.tramoC.ingresoMaximoCLP)}`,
+        formatCLP(ASIGNACION_FAMILIAR_2026.tramoC.montoPorCargaCLP),
+      ],
+      [
+        'Tramo D',
+        `sobre ${formatCLP(ASIGNACION_FAMILIAR_2026.tramoC.ingresoMaximoCLP)}`,
+        formatCLP(0),
+      ],
     ],
     note: 'Valores reajustados por ley. Si el beneficiario tiene causantes con invalidez, el monto de la asignación familiar se duplica.',
   },
@@ -108,8 +130,12 @@ const NORMATIVE_DATA: Record<string, TableData> = {
   },
 };
 
+export function getNormativeTable(calculatorId: string): TableData | undefined {
+  return NORMATIVE_DATA[calculatorId];
+}
+
 export default function CalculatorNormativeTable({ calculatorId }: NormativeTableProps) {
-  const data = NORMATIVE_DATA[calculatorId];
+  const data = getNormativeTable(calculatorId);
   if (!data) return null;
 
   return (

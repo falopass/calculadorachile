@@ -24,6 +24,7 @@
 // ============================================
 
 import { guiaFeriados2027 } from './guia-feriados-2027';
+import { guiaLicenciaMedica } from './guia-licencia-medica';
 import { buildCvlistoContentUrl } from '@/lib/cvlisto';
 
 export interface GuiaSection {
@@ -2594,6 +2595,8 @@ export const guias: Guia[] = [
       { label: 'gob.cl, Feriados 2026', url: 'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/' },
     ],
   },
+  // E-023 + E-025: guía de licencias médicas (texto 10-11-2026)
+  guiaLicenciaMedica,
   // E-027: generada desde src/lib/feriados.ts
   guiaFeriados2027,
 ];

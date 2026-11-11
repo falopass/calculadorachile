@@ -38,6 +38,9 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-gratificacion-legal': 'finiquito-laboral-chile',
   'calculadora-horas-extra': 'finiquito-laboral-chile',
 
+  // Licencias médicas
+  'calculadora-licencia-medica': 'licencia-medica-chile',
+
   // Conversores e indicadores
   'calculadora-uf-clp': 'uf-utm-indicadores-chile',
   'calculadora-utm-clp': 'uf-utm-indicadores-chile',

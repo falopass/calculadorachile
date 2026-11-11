@@ -397,7 +397,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       ];
       return {
         h1: 'Asignación familiar 2026: tramos y monto por carga',
-        lead: `La asignación familiar paga un monto fijo por cada carga reconocida según el tramo de ingreso: ${formatCLP(t.tramoA.montoPorCargaCLP)} en el tramo A, ${formatCLP(t.tramoB.montoPorCargaCLP)} en el B y ${formatCLP(t.tramoC.montoPorCargaCLP)} en el C. Sobre el tope del tramo C no hay derecho.`,
+        lead: `Desde el 1 de mayo de 2026 la asignación familiar es de ${formatCLP(t.tramoA.montoPorCargaCLP)}, ${formatCLP(t.tramoB.montoPorCargaCLP)} o ${formatCLP(t.tramoC.montoPorCargaCLP)} por cada carga reconocida, según el tramo de ingreso (Ley 21.830, artículo 4). Sobre ${formatCLP(t.tramoC.ingresoMaximoCLP)} no hay pago. El 1 de enero de 2027 los tramos de ingreso se reajustan en la misma proporción que el ingreso mínimo mensual; los valores exactos de 2027 los fija un decreto, a más tardar el 15 de enero de 2027. Esta calculadora sigue usando la tabla 2026 hasta que ese decreto se publique.`,
         example: {
           caption: 'Tramos y montos por carga vigentes desde el 1 de mayo de 2026 (Ley 21.830).',
           headers: ['Tramo', 'Ingreso mensual', 'Monto por carga'],
