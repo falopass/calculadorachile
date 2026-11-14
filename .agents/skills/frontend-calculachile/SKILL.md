@@ -72,3 +72,9 @@ El writer solicita estos gates; solo `verifier` los ejecuta y reporta.
 - Revisión visual mobile y desktop para cambios UI.
 - `npm run build` si cambian rutas, metadata, catálogo o integración server/client.
 - Confirma que siguen intactos light-only, Geist, Lucide, AdSense, disclaimers, schema y URLs públicas.
+
+## Referencia del corpus
+
+- Piso antes de entregar: `C:/Users/lenov/.agents/studio/canonical/frontend-references/corpus/piso.md`.
+- Por tema (índice en `corpus/LEEME.md`): `interfaz-producto.md`, `accesibilidad-responsive.md`, `design-system.md`.
+- Rutas de la máquina de Diego. El repertorio es opcional y no relaja YMYL, AdSense, light-only ni el stack bloqueado.
