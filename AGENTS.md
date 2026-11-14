@@ -1,260 +1,59 @@
 # AGENTS.md — CalculaChile
 
-> Referencia obligatoria para agentes y desarrolladores antes de tocar este repo.
+> Referencia obligatoria. Contrato normativo; detalle en `docs/`. **AGENTS.md manda** sobre skills y docs auxiliares.
 
-## Qué es este proyecto
+## Qué es
 
-**CalculaChile** (`calculadorachile.cl`) es un sitio chileno de calculadoras laborales, tributarias, previsionales y financieras. Es un producto **YMYL** (Your Money / Your Life): un error en una fórmula, monto o fuente puede afectar decisiones económicas reales y dañar confianza/SEO.
+**CalculaChile** (`calculadorachile.cl`) es un sitio chileno de calculadoras laborales, tributarias, previsionales y financieras. Es un producto **YMYL**: un error en una fórmula, monto o fuente afecta decisiones económicas reales y daña confianza/SEO. Prioridad: **ship rápido, bajo costo y alta confiabilidad en cálculos chilenos**. AdSense y tráfico orgánico son críticos.
 
-Prioridad del proyecto: **ship rápido, bajo costo y alta confiabilidad en cálculos chilenos**. AdSense y tráfico orgánico son críticos.
+Catálogo: **64 calculadoras** (56 indexables, 8 `noIndex`) y **64 módulos** con test en `src/lib/calculations/`. Estado: [`docs/catalogo.md`](docs/catalogo.md). Árbol y patrón: [`docs/estructura.md`](docs/estructura.md).
 
-Estado actual del catálogo:
+## Stack y comandos
 
-- **64 calculadoras activas** en `src/data/calculators.ts` (56 indexables, 8 `noIndex`; `subsidio-unificado-empleo` es indexable desde el 20-10-2026: los parámetros del primer año los fijó el Decreto 273 exento de Hacienda, DO 01-10-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf, y el reglamento de la Ley 21.808 es el Decreto 75 del Ministerio del Trabajo, DO 30-09-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf).
-- **64 módulos de cálculo** con su test en `src/lib/calculations/` (más tests auxiliares `input-coerce` y `seguro-social`).
-- `bono-bodas-oro` fue **reactivado el 26-09-2026** con fórmula verificada (ChileAtiende ficha 5369): la ruta 410 anterior fue eliminada y el slug lo sirve la ruta dinámica normal.
+Verifica `package.json` antes de asumir versiones. Next.js 15 (App Router), React 19, TypeScript 5, Tailwind 3, Vitest 3 + jsdom; Geist Sans/Mono; AdSense + GA4; datos de BCentral/Mindicador con fallback local; Cloudflare Workers vía OpenNext (Workers Builds desde `main`). Dependencias nuevas: necesidad demostrada; Three.js/GSAP/Lenis: decisión explícita. Stack y comandos: [`docs/entorno.md`](docs/entorno.md).
 
-## Stack real instalado
+Comandos: `npm run dev`, `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`, `npm run format:check`, `npm test`, `npm run test:run`, `npm run test:coverage`.
 
-Verifica siempre `package.json` antes de asumir versiones. A la fecha:
+## Regla de oro YMYL
 
-- **Framework**: Next.js 15.x con App Router.
-- **UI**: React 19, TypeScript 5, Tailwind CSS 3.
-- **Animaciones**: Framer Motion 12.x. No están instalados Three.js, GSAP ni Lenis.
-- **Íconos**: Lucide React.
-- **Testing**: Vitest 3 + jsdom.
-- **Fuentes activas**: Geist Sans + Geist Mono vía `next/font/google` en `src/app/layout.tsx`.
-- **Ads**: Google AdSense.
-- **Analytics**: Google Analytics 4.
-- **Datos económicos**: BCentral + Mindicador + fallback local.
-- **Imágenes dinámicas**: `canvas` para generación server-side donde aplica.
-- **Deploy**: Cloudflare Workers vía OpenNext (Workers Builds desde `main`).
+**Sin fuente oficial verificada, no se cambia una fórmula.** Fuentes típicas: Banco Central, SII, Dirección del Trabajo, Superintendencia de Pensiones, CMF, IPS/ChileAtiende, MINVU, BCN/Ley Chile. No hardcodees UF, UTM, IPC, dólar, euro, topes, tasas ni valores legales en componentes: usa `/api/values` y `src/lib/values/` (BCentral → Mindicador → fallback). Detalle: [`docs/valores-y-datos.md`](docs/valores-y-datos.md) y [`docs/seo-y-adsense.md`](docs/seo-y-adsense.md).
 
-No instales dependencias nuevas salvo necesidad real demostrada. En particular, no introduzcas Three.js/GSAP/Lenis para “rediseño” sin decisión explícita: no forman parte del stack actual.
+- No propongas ni agregues `LocalBusiness`. No elimines disclaimers YMYL, fuentes, autoría, breadcrumbs ni structured data sin reemplazo equivalente.
+- No muevas, elimines ni escondas placements de AdSense sin decisión explícita; en desarrollo el placeholder `ca-pub-XXXXXXX` desactiva el script real y no se "arregla".
+- El `slug` define la URL pública: no lo cambies sin plan SEO. Toda fórmula nueva o alterada requiere test relevante.
 
-## Comandos útiles
+## Estilo y accesibilidad
 
-```bash
-npm run dev             # servidor local
-npm run build           # build de producción Next.js
-npm start               # servir build de producción
-npm run lint            # ESLint según script del repo
-npm run typecheck       # TypeScript sin emitir
-npm run format:check    # Prettier check
-npm test                # Vitest watch mode
-npm run test:run        # Vitest una pasada
-npm run test:coverage   # Vitest con coverage
-```
+Light-only: `darkMode: 'class'` en `tailwind.config.ts` evita que clases `dark:` residuales se activen; no reintroduzcas dark mode ni Inter/Syne/DM Sans/Playfair/JetBrains. UI mobile-first y accesible (semántica, labels, foco visible, contraste). Formato chileno siempre desde `src/lib/formatters.ts` (`$1.000.000`). Framer Motion solo para microinteracciones existentes; sin animaciones pesadas en calculadoras core. Detalle: [`docs/estilo-y-ui.md`](docs/estilo-y-ui.md).
 
-## Estructura relevante
-
-```text
-src/
-├── app/
-│   ├── api/                         # API routes; /api/values vive aquí
-│   ├── blog/                        # artículos
-│   ├── buscar/                      # búsqueda del sitio
-│   ├── calculadoras/                # índice, rutas dinámicas y 410 retiradas
-│   ├── categoria/                   # páginas por categoría de calculadoras
-│   ├── guias/                       # guías pillar / contenido educativo
-│   ├── robots.ts                    # robots.txt
-│   ├── sitemap*.xml/route.ts        # sitemaps segmentados
-│   ├── layout.tsx                   # layout raíz, fuentes, AdSense, JSON-LD global
-│   └── page.tsx                     # home
-├── components/
-│   ├── ads/                         # componentes AdSense
-│   ├── analytics/                   # GA4
-│   ├── article/                     # componentes de artículos/guías
-│   ├── calculator/                  # shell, inputs, resultados, FAQ, related, etc.
-│   ├── home/                        # home
-│   ├── layout/                      # Header/Footer
-│   ├── search/                      # búsqueda
-│   ├── seo/                         # inyección JSON-LD
-│   ├── ui/                          # UI base
-│   └── DisclaimerYMYL.tsx           # disclaimer YMYL
-├── data/
-│   ├── calculators.ts               # catálogo activo: 64 calculadoras
-│   ├── articles.ts                  # blog
-│   ├── guias.ts                     # guías SEO/educativas
-│   └── seo-overrides.ts             # overrides canónicos de title/description
-├── lib/
-│   ├── api/                         # BCentral, Mindicador, tipos de API
-│   ├── calculations/                # módulos de cálculo + tests
-│   ├── calculatorCategories.ts      # 12 categorías canónicas
-│   ├── context/ValuesContext.tsx    # valores económicos globales
-│   ├── formatters.ts                # CLP/UF/UTM/porcentajes
-│   ├── hooks/                       # hooks compartidos, incl. useLiveValues
-│   ├── seo/                         # metadata, schema, sitemap helpers, author/editorial
-│   ├── site.ts                      # SITE_URL, SITE_NAME, absoluteUrl
-│   └── values/                      # constants, fallback, snapshots
-└── types/
-    └── calculator.ts                # contratos compartidos
-```
-
-## Patrón de calculadoras
-
-Una calculadora activa se compone de piezas conectadas por `calculator.id`:
-
-1. **Metadata/catálogo** en `src/data/calculators.ts`.
-   - Define `id`, `slug`, `name`, `description`, `category`, `inputs`, `faq`, `keywords`, `featured`, `phase`, `seoTitle`, `seoDescription`, `noIndex`.
-   - El `slug` define la URL pública. No lo cambies sin plan SEO.
-2. **Lógica pura** en `src/lib/calculations/<modulo>.ts`.
-   - Exporta la función de cálculo y el adaptador `*ToResults` a `CalculatorResult[]`.
-   - Mantén la lógica testeable, sin depender de React ni del DOM.
-3. **Conexión UI** en `src/app/calculadoras/[slug]/CalculatorPageClient.tsx`.
-   - Importa la función y registra `calculationFunctions[calculator.id]`.
-   - Algunos archivos tienen nombre distinto al `id`; la clave real de ejecución es `calculator.id`.
-4. **Test** en `src/lib/calculations/__tests__/<modulo>.test.ts`.
-   - Toda fórmula nueva o cambio de fórmula requiere test relevante.
-
-Las categorías canónicas viven en `src/lib/calculatorCategories.ts`. Actualmente son 12: `sueldo`, `impuestos`, `beneficios`, `conversiones`, `familia`, `vivienda`, `vehiculos`, `empresas`, `servicios`, `pension`, `educacion`, `hogar`.
-
-## Valores económicos y datos externos
-
-No hardcodees UF, UTM, IPC, dólar, euro, topes, tasas o valores legales en componentes.
-
-Fuentes y flujo actual:
-
-- `GET /api/values` en `src/app/api/values/route.ts` entrega UF, UTM, dólar observado/venta y euro.
-- Prioridad de datos: **BCentral → Mindicador → fallback local**.
-- Cache: `revalidate = 3600` y headers `s-maxage=3600, stale-while-revalidate=86400`.
-- Fallbacks y snapshots viven en `src/lib/values/`:
-  - `constants.ts` para constantes legales/financieras usadas por cálculos.
-  - `fallback.ts` para respaldo runtime.
-  - `snapshot.json` y `tmc-snapshot.json` para datos congelados.
-- Hooks/contexto: `ValuesContext` y `useLiveValues` cuando la UI necesita valores actuales.
-
-Credenciales BCentral (`BCENTRAL_USER`, `BCENTRAL_PASS`) van solo en las Variables and Secrets del Worker en Cloudflare. El repo debe funcionar sin ellas usando Mindicador/fallback.
-
-## SEO, YMYL y E-E-A-T
-
-Este sitio compite en búsquedas financieras/laborales chilenas. Trata SEO y confianza como parte del producto, no como decoración.
-
-- Metadata base: `src/lib/seo/metadata.ts` y `src/app/layout.tsx`.
-- Overrides específicos de title/description: **`src/data/seo-overrides.ts`**. Ese es el lugar canónico para ajustes CTR por página.
-- Mapeo calculadora ↔ guía pillar: `src/lib/seo/calculator-guia-map.ts`.
-- Sitemap helpers: `src/lib/seo/sitemap-helpers.ts` y rutas `src/app/sitemap*.xml/route.ts`.
-- Autoría/editorial: `src/lib/seo/author.ts` y `src/lib/seo/editorial.ts`.
-- JSON-LD implementado en `src/lib/seo/schema.ts`: `Organization`, `Person`, `WebSite` con `SearchAction`, `WebPage`/`AboutPage`/`ContactPage`, `BreadcrumbList`, `Article`/`BlogPosting`, `CollectionPage`/`ItemList`, `SoftwareApplication`, `HowTo`, `FAQPage`.
-- No propongas ni agregues `LocalBusiness`: CalculaChile es una plataforma web nacional, no un negocio local con atención física.
-- No elimines disclaimers YMYL, fuentes, autoría, breadcrumbs ni structured data sin reemplazo equivalente.
-
-Regla de oro: **sin fuente oficial verificada, no se cambia una fórmula**. Fuentes típicas: Banco Central de Chile, SII, Dirección del Trabajo, Superintendencia de Pensiones, CMF, IPS/ChileAtiende, MINVU, BCN/Ley Chile o normativa vigente aplicable.
-
-## AdSense y analytics
-
-- AdSense es monetización principal. Componentes en `src/components/ads/` y script global en `src/app/layout.tsx`.
-- En desarrollo/staging, `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXX` desactiva la carga real del script. No “arregles” ese placeholder.
-- No muevas, elimines ni escondas placements de ads por mejoras visuales sin una decisión explícita.
-- GA4 vive en `src/components/analytics/GAProvider` y helpers en `src/lib/analytics.ts`.
-
-## Estilo, UI y accesibilidad
-
-- El sitio está en **modo light-only**. `tailwind.config.ts` mantiene `darkMode: 'class'` para que clases `dark:` residuales no se activen por `prefers-color-scheme`. No reintroduzcas dark mode.
-- Usa las fuentes activas: Geist Sans y Geist Mono. No reintroduzcas Inter/Syne/DM Sans/Playfair/JetBrains como stack global.
-- Mantén UI mobile-first, accesible y rápida. Semántica HTML, labels, focus visible y contraste son mínimos.
-- Formato chileno siempre desde `src/lib/formatters.ts`: pesos como `$1.000.000`, UF/UTM con convención local.
-- Framer Motion está permitido para microinteracciones existentes. No agregues animaciones pesadas a calculadoras core.
-
-## Variables de entorno
-
-Nombres relevantes:
-
-```bash
-# Banco Central de Chile API
-BCENTRAL_USER=
-BCENTRAL_PASS=
-
-# Next.js / públicos
-NEXT_PUBLIC_SITE_URL=https://calculadorachile.cl
-NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXX
-NEXT_PUBLIC_GA_MEASUREMENT_ID=
-DEBUG=false
-```
-
-Secretos y valores reales de producción van en **Cloudflare → Workers & Pages → calculadorachile → Settings → Variables and Secrets (runtime) y Build variables (NEXT_PUBLIC_*)**, no en el repo. Nunca commitees `.env`, credenciales, dumps ni tokens.
-
-Nota: `BCENTRAL_*` solo existen en runtime (no en build); tras cada deploy, las 2 páginas con UF/UTM en el title muestran el title genérico hasta la primera revalidación (≤1 h).
+Base: `frontend-base`. Piso comprobable antes de entregar: `C:/Users/lenov/.agents/studio/canonical/frontend-references/corpus/piso.md` (16 reglas; vale con cualquier dirección). Referencias por tema en `corpus/LEEME.md`; aquí sirven `interfaz-producto.md`, `accesibilidad-responsive.md`, `design-system.md`. Rutas de la máquina de Diego. No relaja YMYL, AdSense ni light-only.
 
 ## Qué no tocar sin aprobación explícita
 
 - Fórmulas, topes, tasas o constantes financieras sin fuente oficial verificada.
-- Slugs, URLs públicas, canonicals, redirects, 410, robots o sitemaps. Romper rutas indexadas rompe tráfico orgánico.
+- Slugs, URLs públicas, canonicals, redirects, 410, robots o sitemaps: romper rutas indexadas rompe el tráfico orgánico.
 - AdSense: script global, placeholders, componentes o ubicación de placements.
-- Structured data SEO/YMYL: Organization/WebSite/Person/FAQ/HowTo/SoftwareApplication/Breadcrumbs. Excepción: se permite corregir propiedades inválidas según schema.org o las reglas de Google en los tipos existentes, sin agregar tipos nuevos ni quitar entidades.
-- Dark mode: el producto está light-only.
-- Nuevas dependencias de animación/3D/smooth scroll no instaladas.
-- Formato de moneda chilena.
-- Secretos o credenciales.
+- Structured data SEO/YMYL: solo corregir propiedades inválidas según schema.org/Google, sin tipos nuevos ni quitar entidades.
+- Dark mode, dependencias de animación/3D/smooth scroll no instaladas, formato de moneda chilena y secretos o credenciales. Detalle: [`docs/limites.md`](docs/limites.md).
 
-## Comprobaciones por riesgo o petición
+## Comprobaciones
 
-Ningún comando es obligatorio por defecto. Estas opciones se usan solo ante petición o riesgo concreto no resoluble por lectura; las fórmulas nuevas o alteradas conservan su prueba específica por el riesgo de cálculo. `verifier` independiente se reserva para riesgo alto; build y suite completa solo por petición o riesgo que un check menor no cubra.
+Ningún comando es obligatorio por defecto; solo por petición o riesgo no resoluble por lectura, y las fórmulas nuevas o alteradas conservan su prueba específica. Tabla por tipo de cambio: [`docs/verificacion.md`](docs/verificacion.md). `verifier` solo por riesgo alto y reporta sin editar; build y suite completa solo por petición o riesgo que un check menor no cubra. Si un check falla, quien implementa corrige la causa y repite solo ese check. Un PASS vigente no se repite mientras no cambien sus inputs.
 
-| Cambio | Comprobación si corresponde |
-|---|---|
-| Fórmula de cálculo | Test específico; typecheck solo si cambió el contrato TypeScript |
-| Nueva calculadora | Test de cálculo y auditoría del wiring; build solo por despliegue o fallo que no cubran esos checks |
-| Catálogo/categorías/rutas | Check de rutas afectadas; typecheck si cambió su contrato, build solo si hace falta observar generación |
-| SEO metadata/schema/sitemap | Inspección de salida/canonical afectados; build solo si se necesita comprobar generación estática |
-| `/api/values` o datos externos | Test o smoke focalizado del endpoint; typecheck si cambió su contrato |
-| UI/componente | Inspección de la superficie afectada; responsive cuando cambió layout, typecheck cuando cambió lógica TS |
-| Solo documentación | Releer el diff y las referencias afectadas |
+## Criterio operativo
 
-Si un check falla, quien implementa corrige la causa y repite solo ese check; un `verifier` independiente, si fue solicitado, reporta sin editar. Un PASS vigente no se repite mientras no cambien sus inputs.
+1. Lee este archivo, `docs/contexto.md` y `package.json` antes de tocar código o asumir stack.
+2. Ubica el patrón existente y cambia lo mínimo robusto. Distingue dato **verificado**, **inferido** y **supuesto**.
+3. Dinero, impuestos, laboral, previsión, SEO indexado, AdSense o secretos: cautela; confirma si hay dos caminos.
+4. No inventes cifras, fuentes, reseñas ni valores financieros. Posts: `docs/plan-editorial.md` + research; fórmulas: `docs/research/dossier-ymyl.md` + matriz.
+5. Tras el wiring de una calculadora, ejecuta `node scripts/audit-ymyl-matrix.mjs` para ese `id`; se espera 0 fantasmas salvo cosméticos documentados.
 
-## Documentación (mínima)
+## Agentes y entorno
 
-| Archivo | Uso |
-|---------|-----|
-| **`AGENTS.md`** (este) | Constitución del producto |
-| [`docs/contexto.md`](./docs/contexto.md) | Producto + YMYL + operación con Codex |
-| [`docs/plan-editorial.md`](./docs/plan-editorial.md) | Backlog de posts SEO/AdSense |
-| [`docs/research/`](./docs/research/) | `dossier-ymyl.md` · `inventario-seo.md` · `deep-research.md` |
+Inicia con `CalculaChile` como carpeta; sin clones locales; no uses `web-factory`, `pyme-template-intelligence` ni schema `LocalBusiness`. Root: arquitectura, integración y decisión final; máximo 4 agentes activos y 3 hijos, sin anidamiento. Builders implementan y scouts evidencian; writers en background con `WRITE_SCOPE`/`VALIDATION_COMMANDS`, scopes compartidos en secuencia y >1 writer con pregrant; quien implementa relee su cambio. `verifier` (`LOCAL_HEAVY_LOCK`) solo riesgo alto o petición; `mechanical-worker` no ejecuta; guards YOLO desactivados. Proveedores/credenciales/routers/aliases: configuración personal, nunca del repo. Frontend: `design-taste-frontend` en públicas/editoriales, `interface-design` en calculadoras/producto, una por superficie, con YMYL/SEO/AdSense/accesibilidad/DNA.
 
-## Devin y Codex
+Skills: [`docs/agentes-y-skills.md`](docs/agentes-y-skills.md). Secretos y variables: [`docs/entorno.md`](docs/entorno.md); secretos reales solo en Cloudflare (Variables and Secrets / Build variables), nunca en el repo. El repo funciona sin BCentral (Mindicador/fallback). No commitees `.env`, credenciales, dumps ni tokens.
 
-Inicia la tarea con `CalculaChile` como carpeta de trabajo para descubrir este archivo y las skills del repo. La arquitectura de agentes es la global final; el proyecto no registra clones locales. No hay workflow de pymes: no uses `web-factory`, `pyme-template-intelligence` ni schema `LocalBusiness`.
+## Repositorio y estado
 
-| Pieza | Path |
-|-------|------|
-| Contexto + arranque | `docs/contexto.md` |
-| Compatibilidad sin agentes locales | `.codex/config.toml` |
-| Skills versionadas | `.agents/skills/` |
-| Matriz fantasmas | `node scripts/audit-ymyl-matrix.mjs` |
-
-### Skills
-
-| Skill | Uso |
-|-------|-----|
-| `nueva-calculadora` | Alta / wiring end-to-end |
-| `auditoria-ymyl` | Fantasmas, fórmulas, golden tests |
-| `seo-adsense` | Metadata, noIndex, schema, AdSense seguro |
-| `contenido-editorial-ymyl` | Posts/guías con research y fuentes oficiales |
-| `ship-calculachile` | Cierre y validación proporcional al cambio |
-| `frontend-calculachile` | UI/UX anti-slop adaptada a YMYL, AdSense y stack actual |
-| `periodismo-editorial-chile` | Investigación, noticias y guías de 1.500+ palabras sin prosa IA genérica |
-
-**AGENTS.md manda** sobre skills y docs auxiliares.
-
-### Contrato de orquestación
-
-- Root conserva arquitectura, integración y decisión final. Hereda los nueve perfiles globales y el governor: hasta cuatro agentes activos y tres hijos; no hay delegación anidada.
-- `swe-worker` cubre trabajo acotado, `backend-builder` backend complejo y `frontend-builder` implementación visual; `scout`, `analyst` y `red-team` aportan evidencia. Los writers corren en background con `WRITE_SCOPE` y `VALIDATION_COMMANDS`; scopes compartidos van en secuencia y más de un writer requiere pregrant de escritura.
-- Root o el writer implementan y releen el cambio sin checks por defecto; `mechanical-worker` no ejecuta. `verifier` independiente bajo `LOCAL_HEAVY_LOCK` se reserva para riesgo alto o petición. Los guards de bloqueo local están desactivados por la decisión YOLO vigente.
-- Proveedores, credenciales, routers y aliases son configuración personal, nunca del repo. Grok/OpenCode pueden quedar como compatibilidad histórica, pero no gobiernan Devin.
-
-### Autoridad frontend
-
-Root decide arquitectura técnica. `design-taste-frontend` dirige páginas públicas/editoriales; `interface-design` dirige calculadoras y herramientas de producto. Ambas respetan YMYL, SEO, AdSense, accesibilidad y el DNA; se elige una por superficie. `frontend-builder` implementa y `frontend-director` se reserva para identidad o crítica visual difícil. La UI actual no congela un rediseño autorizado.
-
-## Criterio operativo para agentes
-
-1. Lee este archivo y `docs/contexto.md` antes de tocar código.
-2. Lee `package.json` antes de asumir stack o comandos.
-3. Ubica el patrón existente y cambia lo mínimo robusto.
-4. Distingue dato **verificado**, **inferido** y **supuesto**.
-5. Dinero, impuestos, laboral, previsión, SEO indexado, AdSense o secretos: cautela; confirma si hay dos caminos.
-6. No inventes cifras, fuentes, reseñas ni valores financieros.
-7. Posts: `docs/plan-editorial.md` + research. Fórmulas: `docs/research/dossier-ymyl.md` + matriz.
-8. Tras wiring de calculadora, ejecuta `node scripts/audit-ymyl-matrix.mjs` para ese `id`; el resultado esperado es 0 fantasmas (salvo cosméticos documentados).
+Remoto `github.com/falopass/calculadorachile`, rama `main`; push a `main` despliega por Workers Builds (Cloudflare + OpenNext, worker `calculadorachile`). Estado: [`docs/repositorio.md`](docs/repositorio.md).

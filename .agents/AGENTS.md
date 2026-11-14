@@ -1,9 +1,13 @@
-# Límites de ejecución para skills locales
+# Skills locales de CalculaChile
 
-Las skills de esta carpeta aportan contexto YMYL, SEO, editorial, frontend y criterios de aceptación. No crean agentes ni alteran el roster global.
+Aportan contexto YMYL, SEO, editorial, frontend y criterios de aceptación. **No son un contrato**: el `WRITE_SCOPE` y los `VALIDATION_COMMANDS` salen del `AGENTS.md` del proyecto, no de aquí.
 
-- Una skill no autoriza comandos por sí sola. Root asigna `WRITE_SCOPE` y `VALIDATION_COMMANDS` acotados; los writers de implementación pueden hacer un ciclo de autocorrección con ellos, mientras `mechanical-worker` no ejecuta.
-- Los writers corren en background con ownership disjunto; los cambios compartidos van en secuencia y más de un writer requiere pregrant de escritura.
-- Root o el implementador comprueba directamente lo ordinario. `verifier` bajo `LOCAL_HEAVY_LOCK` se reserva para riesgo concreto; build, navegador y servidor no son rutinarios. Instalaciones y consultas reales conservan sus autorizaciones.
-- Las skills no pueden auto-spawn, delegar, anidar agentes ni crear revisiones en loop.
-- En páginas públicas/editoriales dirige `design-taste-frontend`; en calculadoras y herramientas, `interface-design`. `frontend-director` se reserva para identidad o crítica difícil. Las skills de proyecto aportan hechos de CalculaChile.
+- `nueva-calculadora` — alta y wiring end-to-end
+- `auditoria-ymyl` — fantasmas, fórmulas y golden tests
+- `seo-adsense` — metadata, `noIndex`, schema y AdSense seguro
+- `contenido-editorial-ymyl` — posts y guías con fuentes oficiales
+- `periodismo-editorial-chile` — investigación y guías largas sin prosa genérica
+- `frontend-calculachile` — UI anti-slop adaptada a YMYL y AdSense
+- `ship-calculachile` — cierre y validación proporcional al cambio
+
+**Autoridad visual:** `design-taste-frontend` en páginas públicas y editoriales; `interface-design` en calculadoras y herramientas de producto. Una por superficie.
