@@ -1,17 +1,17 @@
 {
-  "uf": 41336.67,
+  "uf": 41343.55,
   "utm": 72440,
-  "dolarObservado": 992.48,
-  "euro": 1096.91,
-  "pesoArgentino": 0.64,
+  "dolarObservado": 999.1,
+  "euro": 1102.03,
+  "pesoArgentino": 0.65,
   "ipcMensual": -0.2,
-  "asOf": "2026-11-15T19:00:12.895Z",
+  "asOf": "2026-11-16T22:24:07.181Z",
   "observedAsOf": {
-    "uf": "2026-11-15",
+    "uf": "2026-11-16",
     "utm": "2026-11-01",
-    "dolarObservado": "2026-11-13",
-    "euro": "2026-11-13",
-    "pesoArgentino": "2026-11-13"
+    "dolarObservado": "2026-11-16",
+    "euro": "2026-11-16",
+    "pesoArgentino": "2026-11-16"
   },
   "sources": {
     "uf": "bcentral",
@@ -21,5 +21,5 @@
     "pesoArgentino": "bcentral",
     "ipcMensual": "mindicador"
   },
-  "generatedAt": "2026-11-15T19:00:26.307Z"
+  "generatedAt": "2026-11-16T22:24:17.046Z"
 }
