@@ -15,6 +15,7 @@
 | SIS | 1,62 % en constante vs 1,78 % informado por Previred para ago–oct 2026: sigue pendiente de decisión | pendiente heredado |
 | SEO on-page | Title, description, canonical y H1 únicos en las 6 URL muestreadas; JSON-LD completo en calculadoras (SoftwareApplication, HowTo, FAQPage, BreadcrumbList, Speakable) | verificado |
 | Peso de página | `/calculadoras` pesa **580 KB de HTML** (388 KB son payload RSC); home 282 KB; `/blog` 265 KB. Una calculadora pesa 118–141 KB | verificado (curl a producción) |
+| JS por página | En producción una calculadora descarga **2,23 MB de JS (640 KB gzip)**: el buscador del header arrastraba el texto completo de artículos, guías y catálogo a todas las páginas. Con este PR (build local): calculadora 0,87 MB (264 KB gzip), home 0,66 MB, blog 0,74 MB, `/calculadoras` 0,64 MB | verificado (suma de chunks referenciados por el HTML) |
 | TTFB | 0,25–0,40 s en calculadoras y blog; 0,74 s home; 1,24 s `/calculadoras` | verificado, una sola muestra |
 | GEO | `llms.txt` con catálogo completo por categoría (134 líneas), `quick-answers`, `/prensa` citable, `/api/values` público. Falta una página "valores de hoy" pensada para la consulta diaria | verificado |
 | Retención | Exportar/compartir resultado, `HistoryPanel`, hub `/cesantia`. No hay página de retorno diario ni estado compartible por URL | verificado |
@@ -46,6 +47,7 @@ Competidores revisados: calc.cl, tecalculo.cl, calculadoraenlinea.cl, comocalcul
 | P1 | Calculadora `capacidad-credito-hipotecario` | Evergreen alto volumen | Medio | B |
 | P1 | Guía pillar #39 Operación Renta 2027 + blog viaje de verano en auto | Estacional ene–abr | Alto | C |
 | P1 | Enlace compartible con el cálculo cargado (inputs en la URL; el canonical no cambia) | Compartir y recomendar | Bajo | raíz |
+| P0 | Sacar artículos, guías y catálogo del JS de cada página (hallazgo durante la implementación) | Velocidad móvil en todo el sitio | Bajo | raíz |
 | P1 | Reducir el payload de `/calculadoras` | Velocidad móvil | Bajo | raíz |
 | P2 | Auditoría de vigencia de constantes con vencimiento en 2027 | Confianza YMYL | Bajo | C |
 | P2 | `llms.txt`, quick-answers y enlazado interno de lo nuevo | GEO | Bajo | raíz |
