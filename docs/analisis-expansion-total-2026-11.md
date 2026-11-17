@@ -1,0 +1,53 @@
+# Análisis y plan — expansión total (2026-11-17)
+
+> Segundo pase tras el PR #84. Objetivo: más visitas y que vuelvan. Priorización impacto × esfuerzo.
+> Convención: **verificado** (medido en repo o en producción), **inferido**, **supuesto**.
+
+## 1. Estado medido
+
+| Área | Hallazgo | Tipo |
+|------|----------|------|
+| Catálogo | 67 calculadoras en `calculators.ts`, 62 indexables, 6 `noIndex`; `audit-ymyl-matrix`: 0 inputs fantasma, 0 fallos de gates AdSense | verificado |
+| Contenido | 42 artículos, 13 guías pillar + 2 guías de datos (feriados 2027, licencia médica) | verificado |
+| Datos | `snapshot.json` del 16-11-2026 (UF, UTM, dólar, euro, ARS desde BCentral); `/api/values` en producción responde con `stale:false` | verificado |
+| Sueldo mínimo | `INGRESO_MINIMO` es un valor fijo ($553.553). La Ley 21.830 art. 1 ordena reajuste por IPC desde el **01-01-2027**, con decreto de Hacienda a más tardar el 15-01-2027. Hoy no hay calendario por fecha: el cambio exige editar la constante a mano | verificado (BCN idNorma 1225354, DT Ord. 307/28) |
+| Vencimientos próximos | Topes FCS vigentes hasta 28-02-2027; `DESEMPLEO_INE` caduca el 27-11-2026; tope imponible 2027 (resolución SP de febrero); escalón 4,25 % empleador el 01-08-2027 (ya en calendario) | verificado en `constants.ts` |
+| SIS | 1,62 % en constante vs 1,78 % informado por Previred para ago–oct 2026: sigue pendiente de decisión | pendiente heredado |
+| SEO on-page | Title, description, canonical y H1 únicos en las 6 URL muestreadas; JSON-LD completo en calculadoras (SoftwareApplication, HowTo, FAQPage, BreadcrumbList, Speakable) | verificado |
+| Peso de página | `/calculadoras` pesa **580 KB de HTML** (388 KB son payload RSC); home 282 KB; `/blog` 265 KB. Una calculadora pesa 118–141 KB | verificado (curl a producción) |
+| TTFB | 0,25–0,40 s en calculadoras y blog; 0,74 s home; 1,24 s `/calculadoras` | verificado, una sola muestra |
+| GEO | `llms.txt` con catálogo completo por categoría (134 líneas), `quick-answers`, `/prensa` citable, `/api/values` público. Falta una página "valores de hoy" pensada para la consulta diaria | verificado |
+| Retención | Exportar/compartir resultado, `HistoryPanel`, hub `/cesantia`. No hay página de retorno diario ni estado compartible por URL | verificado |
+| PageSpeed | Sin medición: la API pública devolvió cuota agotada | no medido |
+
+## 2. Demanda no cubierta
+
+Competidores revisados: calc.cl, tecalculo.cl, calculadoraenlinea.cl, comocalcular.cl, haberes.cl, utmchile.cl, utilidad.cl, preciodolarhoy.cl, netfigure.co.
+
+| Intención | Quién la cubre | CalculaChile | Fuente oficial disponible |
+|-----------|----------------|--------------|---------------------------|
+| Impuestos por compras en Temu, AliExpress, Shein, Amazon | preciodolarhoy.cl, netfigure.co | No | Aduanas ("¿Cuánto impuesto se paga al importar?"), Ley 21.713 |
+| Real brasileño / sol peruano a peso chileno (viajes de verano) | xe.com, utilidad.cl | Solo dólar, euro y peso argentino | BCentral serie `F072.CLP.BRL.N.O.D` y equivalentes |
+| Fechas de prenatal, postnatal y postnatal parental | comocalcular.cl, haberes.cl | No | Código del Trabajo arts. 195 y 197 bis; DT |
+| Impuesto a la herencia | utmchile.cl, resuelvotuherencia.cl | No | Ley 16.271 art. 2; SII |
+| Cuánto crédito hipotecario dan según el sueldo | calc.cl, tecalculo.cl | Solo dividendo | No hay norma: la relación dividendo/renta es política de cada banco → supuesto editable |
+| Sueldo mínimo 2027 | — (pico en enero) | No | Ley 21.830; monto recién con el decreto |
+| Operación Renta 2027 | contando.cl, SII | Solo calculadora | SII (guía #39 del plan editorial) |
+
+## 3. Plan priorizado
+
+| Prio | Trabajo | Impacto | Esfuerzo | Carril |
+|------|---------|---------|----------|--------|
+| P0 | Calculadora `compras-internacionales` | Alto: Navidad, Cyber, todo el año | Medio | A |
+| P0 | Conversor real brasileño → peso chileno (y otras monedas de viaje con serie BCentral) | Alto estacional dic–mar | Medio | A |
+| P0 | Sueldo mínimo por calendario de fecha + blog #42 "sueldo mínimo enero 2027" | Alto en enero; evita dato vencido | Bajo | C |
+| P1 | Calculadora `prenatal-postnatal` | Evergreen | Medio | B |
+| P1 | Calculadora `impuesto-herencia` | Evergreen | Medio | B |
+| P1 | Calculadora `capacidad-credito-hipotecario` | Evergreen alto volumen | Medio | B |
+| P1 | Guía pillar #39 Operación Renta 2027 + blog viaje de verano en auto | Estacional ene–abr | Alto | C |
+| P1 | Página de valores de hoy (UF, UTM, dólar) para la visita diaria | Retención + GEO | Bajo | raíz |
+| P1 | Reducir el payload de `/calculadoras` | Velocidad móvil | Bajo | raíz |
+| P2 | Auditoría de vigencia de constantes con vencimiento en 2027 | Confianza YMYL | Bajo | C |
+| P2 | `llms.txt`, quick-answers y enlazado interno de lo nuevo | GEO | Bajo | raíz |
+
+Lo que no entra en este pase queda en [`backlog-ideas.md`](./backlog-ideas.md); el calendario en [`calendario-contenido-12m.md`](./calendario-contenido-12m.md).
