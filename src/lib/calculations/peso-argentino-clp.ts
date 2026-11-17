@@ -207,14 +207,14 @@ export function seoPesoArgentino(now: Date = new Date()): {
   );
   if (fresh) {
     return {
-      seoTitle: 'Peso argentino a chileno: tipo de cambio BCCh',
+      seoTitle: 'Peso argentino a chileno: conversor ARS↔CLP del BCCh',
       seoDescription:
-        'Convierte pesos argentinos a CLP con el tipo de cambio nominal del Banco Central (serie F072.CLP.ARS.N.O.D). Bidireccional y con ejemplos.',
+        'Convierte pesos argentinos a chilenos y al revés con el tipo de cambio nominal del Banco Central. Útil para presupuestar viajes y compras en Argentina.',
     };
   }
   const f = formatDDMMYYYY(PESO_ARGENTINO.fecha_actualizacion);
   return {
-    seoTitle: 'Peso argentino a chileno: tipo de cambio BCCh',
-    seoDescription: `Convierte ARS↔CLP con el tipo de cambio nominal referencial del BCCh (valor del ${f}, serie F072.CLP.ARS.N.O.D). Bidireccional.`,
+    seoTitle: 'Peso argentino a chileno: conversor ARS↔CLP del BCCh',
+    seoDescription: `Convierte ARS↔CLP con el tipo de cambio nominal referencial del BCCh (valor del ${f}). Útil para presupuestar viajes y compras en Argentina.`,
   };
 }

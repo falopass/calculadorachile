@@ -97,6 +97,10 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 | — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
+| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-2026-sector-publico` | 2026-11-16 | laboral | aguinaldo |
+| 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | 2026-11-16 | impuestos | boleta-honorarios, cotizacion-independientes |
+| 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
+| 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
@@ -122,7 +126,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~9~~ | blog | ~~Asignación familiar 2026: tramos y montos~~ | ~~`asignacion-familiar-2026-tramos-montos`~~ | satélite familia | familia | ~~2026-08-12~~ | sep–dic | ✅ |
 | 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
 | 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] · Ventana perdida (vence 30 sep); cubierto dentro de #29 | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
-| 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | DR[24] · satélite iva-boleta | impuestos | 2026-09-08 | continuo | **P2-continuo** |
+| ~~12~~ | blog | ~~Boleta honorarios retención 15,25%~~ | ~~`boleta-honorarios-retencion-15-25-2026`~~ | publicado 2026-11-16 | impuestos | ~~2026-09-08~~ | continuo | ✅ |
 | 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | satélite iva-boleta | impuestos | 2026-09-11 | ~día 12 | **P2-ventana** |
 | 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
@@ -147,9 +151,9 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~31~~ | blog\* | ~~Seguro de cesantía + finiquito (AFC)~~ | ~~`seguro-cesantia-finiquito-2026-afc`~~ | publicado 2026-07-10 + satélite cobro | laboral | ~~2026-11-13~~ | continuo | ✅ |
 | 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
 | 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
-| 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026-comercio` | — | laboral | 2026-12-01 | dic | **P2-ventana** |
-| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | Bloqueado: monto Navidad 2026 SP requiere nueva ley de reajuste (dic 2026) | laboral | 2026-12-04 | dic | **P2-ventana** |
-| 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026-anticipos` | — | laboral | 2026-12-08 | dic–ene | **P2-ventana** |
+| ~~34~~ | blog | ~~Feriado irrenunciable 25 dic 2026~~ | ~~`feriado-irrenunciable-25-diciembre-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-01~~ | dic | ✅ |
+| ~~35~~ | blog | ~~Aguinaldo Navidad sector público 2026~~ | ~~`aguinaldo-navidad-2026-sector-publico`~~ | publicado 2026-11-16 | laboral | ~~2026-12-04~~ | dic | ✅ |
+| ~~36~~ | blog | ~~Gratificación fin de año 2026~~ | ~~`gratificacion-fin-de-ano-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-08~~ | dic–ene | ✅ |
 | 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
 | **39** | **guía** | **Prep Operación Renta 2027 (checklist)** | `preparacion-operacion-renta-2027-checklist` | DR[20] · **única guía del plan** | impuestos | 2027-01-06 | ene–abr | **P2-ventana** |
 | 40 | blog | Permiso circulación 2027 | `permiso-circulacion-2027-calcular-plazo` | satélite vehículos | vehículos | 2027-01-13 | ene–mar | **P3** |
@@ -290,9 +294,9 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 | 31 | `seguro-cesantia-finiquito-2026-afc` | Inventario AFC |
 | 32 | `ppm-2026-calcular-independientes` | SII |
 | 33 | `plusvalia-venta-propiedad-2026-calcular` | Evergreen |
-| 34 | `feriado-irrenunciable-25-diciembre-2026-comercio` | Inventario |
-| 35 | `aguinaldo-navidad-sector-publico-2026` | Inventario / Ley 21.806 |
-| 36 | `gratificacion-fin-de-ano-2026-anticipos` | Inventario gratificación |
+| 34 | `feriado-irrenunciable-25-diciembre-2026` | Inventario |
+| 35 | `aguinaldo-navidad-2026-sector-publico` | Inventario / Ley 21.806 |
+| 36 | `gratificacion-fin-de-ano-2026` | Inventario gratificación |
 | 38 | `pension-alimenticia-2026-ejemplo-calculo` | Calc existe; sin DR |
 
 ### Prioridad 3 — ciclo 2027 / bajo volumen
@@ -365,13 +369,13 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                   11  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
-  Pendientes:                   37
-    blog:                       35
+  Publicados:                   15  (todos blog; +#4, #5, #8 y #9 el 2026-08-12; +#12, #34, #35 y #36 el 2026-11-16)
+  Pendientes:                   33
+    blog:                       31
     blog* (candidata guía):      2   (#47, #48)
     guía:                        1   (#39 Operación Renta)
     P1 restante:                 0
-    P2:                         31
+    P2:                         27
     P3:                          6
   Total publicados + pendientes: 48
 ```

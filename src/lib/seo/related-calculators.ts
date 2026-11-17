@@ -154,11 +154,24 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-gratificacion-legal',
   ],
   'calculadora-horas-extra': [
+    'calculadora-valor-hora-trabajo',
     'calculadora-sueldo-liquido',
     'calculadora-finiquito',
     'calculadora-gratificacion-legal',
     'calculadora-vacaciones-proporcionales',
     'calculadora-costo-empleado-pyme',
+  ],
+  'calculadora-trabajo-en-feriado': [
+    'calculadora-horas-extra',
+    'calculadora-sueldo-liquido',
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-gratificacion-legal',
+  ],
+  'calculadora-valor-hora-trabajo': [
+    'calculadora-horas-extra',
+    'calculadora-trabajo-en-feriado',
+    'calculadora-sueldo-liquido',
+    'calculadora-sueldo-part-time',
   ],
   'calculadora-gratificacion-legal': [
     'calculadora-sueldo-liquido',
@@ -209,7 +222,13 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-credito-hipotecario',
     'calculadora-costo-tag',
   ],
+  'calculadora-costo-viaje': [
+    'calculadora-costo-tag',
+    'calculadora-permiso-circulacion',
+    'calculadora-multas-transito',
+  ],
   'calculadora-costo-tag': [
+    'calculadora-costo-viaje',
     'calculadora-permiso-circulacion',
     'calculadora-multas-transito',
     'calculadora-credito-automotriz',

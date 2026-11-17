@@ -166,6 +166,59 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Monto total a percibir por 10 horas extra: $55.556 brutos imponibles.',
     },
   },
+  'trabajo-en-feriado': {
+    summary:
+      'Obtiene el valor día y el valor hora ordinaria con la fórmula de la DT y muestra el descanso compensatorio o el pago con recargo por las horas trabajadas en un festivo o domingo.',
+    calculationSteps: [
+      'Valor día = sueldo mensual ÷ 30.',
+      'Valor hora = sueldo ÷ 30 × 28 ÷ (jornada semanal × 4).',
+      'Aplica el recargo declarado, nunca inferior al 50% del art. 32.',
+      'Si se compensa con descanso, asigna un día por festivo trabajado (art. 38); si no, multiplica el valor hora con recargo por las horas.',
+    ],
+    assumptions: [
+      'Sueldo mensual fijo y jornada ordinaria semanal informada.',
+      'El usuario indica si su caso se compensa con descanso o se paga con recargo.',
+    ],
+    limitations: [
+      'No suma el recargo de 30% por domingo del comercio (art. 38 inc. 3) ni valida si el empleador está exceptuado del descanso.',
+      'Los feriados irrenunciables de la Ley 19.973 no pueden trabajarse en el comercio salvo excepciones legales.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 8 horas en un festivo pagadas con recargo legal',
+      inputs: ['Sueldo bruto: $900.000', 'Jornada: 42 horas semanales', 'Horas en el festivo: 8, recargo 50%'],
+      development: [
+        'Valor hora: $900.000 ÷ 30 × 28 ÷ 168 = $5.000',
+        'Valor hora con recargo: $5.000 × 1,5 = $7.500',
+        'Total: 8 × $7.500 = $60.000',
+      ],
+      result: 'Pago por el festivo trabajado: $60.000 brutos (o un día de descanso compensatorio si así corresponde).',
+    },
+  },
+  'valor-hora-trabajo': {
+    summary:
+      'Convierte el sueldo mensual en valor día, valor hora ordinaria y hora extra referencial con la fórmula publicada por la Dirección del Trabajo.',
+    calculationSteps: [
+      'Valor día = sueldo mensual ÷ 30.',
+      'Valor hora = sueldo ÷ 30 × 28 ÷ (jornada semanal × 4).',
+      'Hora extra referencial = valor hora × 1,5 (recargo mínimo art. 32).',
+      'Redondea cada resultado al peso.',
+    ],
+    assumptions: ['Sueldo mensual fijo bruto.', 'Jornada ordinaria semanal informada (42 h por defecto).'],
+    limitations: [
+      'No considera remuneraciones variables ni pactos de recargo mayores al 50%.',
+      'Para trabajadores con sueldo semanal, diario o por hora la DT usa otras fórmulas.',
+    ],
+    workedExample: {
+      title: 'Ejemplo DT: sueldo de $800.000 con jornada de 42 horas',
+      inputs: ['Sueldo bruto: $800.000', 'Jornada: 42 horas semanales'],
+      development: [
+        'Valor día: $800.000 ÷ 30 = $26.667',
+        'Valor hora: $800.000 ÷ 30 × 28 ÷ 168 = $4.444',
+        'Hora extra: $4.444,4 × 1,5 = $6.667',
+      ],
+      result: 'Hora ordinaria $4.444, día $26.667 y hora extra $6.667.',
+    },
+  },
   'vacaciones-proporcionales': {
     summary:
       'Estima días y remuneración de feriado proporcional según tiempo trabajado, días pendientes y remuneración declarada.',
@@ -629,6 +682,34 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
         'CLP = 1,125 × valor UTM mostrado',
       ],
       result: 'El pago estimado equivale a 1,125 UTM del mes aplicable.',
+    },
+  },
+  'costo-viaje': {
+    summary:
+      'Estima el gasto de un viaje en auto con datos que declara el usuario: litros según rendimiento, costo de combustible, peajes y reparto entre pasajeros.',
+    calculationSteps: [
+      'Distancia total = km del trayecto × 2 si es ida y vuelta.',
+      'Litros = distancia total ÷ rendimiento (km/l).',
+      'Costo combustible = litros × precio por litro ingresado.',
+      'Costo total = combustible + peajes/TAG (× 2 si es ida y vuelta); se divide por pasajeros y por km.',
+    ],
+    assumptions: [
+      'Rendimiento constante durante todo el trayecto.',
+      'Precio por litro y peajes informados por el usuario; no se usa ningún precio oficial fijo.',
+    ],
+    limitations: [
+      'No incluye desgaste, mantención, estacionamiento ni seguros.',
+      'El consumo real varía con carga, velocidad, pendiente y aire acondicionado.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: viaje de 450 km con tres pasajeros',
+      inputs: ['Distancia: 450 km, solo ida', 'Rendimiento: 12,5 km/l', 'Precio: $1.300 por litro, peajes $12.000'],
+      development: [
+        'Litros: 450 ÷ 12,5 = 36',
+        'Combustible: 36 × $1.300 = $46.800',
+        'Total: $46.800 + $12.000 = $58.800; por pasajero $19.600',
+      ],
+      result: 'Costo estimado del viaje: $58.800 ($131 por km).',
     },
   },
   'cuenta-luz': {
