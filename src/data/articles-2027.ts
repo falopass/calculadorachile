@@ -5,6 +5,9 @@
 // ============================================
 
 import type { Article } from './articles';
+import { formatCLP } from '@/lib/formatters';
+import { calculateCostoViaje } from '@/lib/calculations/costo-viaje';
+import { calculateCostoTag } from '@/lib/calculations/costo-tag';
 
 const LEY_21830 = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
 const INE_IPC = 'https://www.ine.gob.cl/estadisticas-por-tema/precios-e-inflacion/indice-de-precios-al-consumidor';
@@ -13,6 +16,38 @@ const INE_BOLETIN = (archivo: string) =>
 const INE_ABRIL = INE_BOLETIN('boletin-%C3%ADndice-de-precios-al-consumidor-abril-2026');
 const INE_OCTUBRE = INE_BOLETIN('boletin-%C3%ADndice-de-precios-al-consumidor-octubre-2026');
 const DT_60141 = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
+
+const ENAP_INFORME = 'https://www.enap.cl/files/get/3322';
+const BENCINA_EN_LINEA = 'https://www.bencinaenlinea.cl';
+const MOP_PEAJES = 'https://concesiones.mop.gob.cl/peajes-y-porticos/';
+const MOP_RUTA_68 = 'https://concesiones.mop.gob.cl/uploads/sites/4/2026/01/RUTA-68.pdf';
+const MOP_TALCA_CHILLAN = 'https://concesiones.mop.gob.cl/uploads/sites/4/2026/01/TALCA-CHILLAN.pdf';
+
+// Ejemplo rotulado del artículo de verano: el precio por litro NO es oficial.
+const VIAJE_KM = 120;
+const VIAJE_RENDIMIENTO = 12;
+const VIAJE_PRECIO_EJEMPLO = 1500;
+const VIAJE_PEAJE_TRAMO = 5000;
+const VIAJE_PASAJEROS = 4;
+const VIAJE = calculateCostoViaje({
+  distanciaKm: VIAJE_KM,
+  rendimientoKmL: VIAJE_RENDIMIENTO,
+  precioCombustible: VIAJE_PRECIO_EJEMPLO,
+  peajes: VIAJE_PEAJE_TRAMO,
+  pasajeros: VIAJE_PASAJEROS,
+  idaYVuelta: true,
+});
+// Alza ENAP del 11-11-2026 (gasolinas 93 y 97) aplicada a los litros del ejemplo.
+const VIAJE_ALZA_ENAP = Math.round((VIAJE.distanciaTotal / VIAJE_RENDIMIENTO) * 38.7);
+const TAG_TARIFA_EJEMPLO = 1000;
+const TAG_PASADAS = 40;
+const TAG = calculateCostoTag({ tarifaPorPaso: TAG_TARIFA_EJEMPLO, pasadasMes: TAG_PASADAS });
+
+const SII_IVA_BIENES = 'https://www.sii.cl/destacados/iva_bienes/';
+const ADUANA_DESDE_CUANDO = 'https://www.aduana.cl/desde-cuando-y-a-quien-aplica/aduana/2025-10-20/120230.html';
+const ADUANA_QUE_ES = 'https://www.aduana.cl/que-es-el-iva-digital/aduana/2025-10-20/160103.html';
+const ADUANA_BASE_CALCULO =
+  'https://www.aduana.cl/cuando-debo-pagar-impuestos-si-compro-online-desde-el-extranjero/aduana/2022-06-29/121824.html';
 
 const ext = (url: string, texto: string) =>
   `<a href="${url}" target="_blank" rel="noopener">${texto}</a>`;
@@ -192,5 +227,131 @@ export const ARTICULOS_2027: Article[] = [
 <p><strong>Si pagas o recibes una pensión de alimentos fijada en ingresos mínimos:</strong> la Ley 14.908 fija el piso de la pensión para un hijo en 40% del ingreso mínimo remuneracional, de modo que ese piso también sube desde enero. La <a href="/calculadoras/calculadora-pension-alimenticia">calculadora de pensión alimenticia</a> toma el valor vigente.</p>
 
 <p>La pregunta que queda abierta es la de julio. El reajuste de enero solo compensa la inflación de ocho meses; el artículo 7 obliga al Gobierno a presentar en junio de 2027 un proyecto para un nuevo reajuste desde el 1 de julio. Ese monto sí se discutirá en el Congreso y todavía no tiene propuesta.</p>`,
+  },
+  // Temporada verano 2027: viajar en auto
+  {
+    slug: 'cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag',
+    title: 'Cuánto cuesta viajar en auto este verano: bencina, peajes y TAG paso a paso',
+    description:
+      'Cómo calcular el costo real de un viaje en auto en Chile: litros según rendimiento, precio de la bencina en tu zona, peajes 2026 publicados por el MOP y TAG. Con ejemplo rotulado y calculadoras.',
+    date: '2026-11-17',
+    updatedAt: '2026-11-17',
+    category: 'vehiculos',
+    readingTime: 9,
+    relatedGuia: 'vehiculos-chile-permiso-multas',
+    embedCalculatorId: 'costo-viaje',
+    seoTitle: 'Cuánto cuesta viajar en auto: bencina, peajes y TAG',
+    seoDescription:
+      'Calcula el costo de un viaje en auto este verano: bencina según rendimiento y precio local, peajes MOP 2026 y TAG. Ejemplo paso a paso y cómo dividir el gasto entre pasajeros.',
+    keywords: [
+      'cuánto cuesta viajar en auto',
+      'costo viaje en auto chile',
+      'calcular bencina viaje',
+      'peajes ruta 5 2026',
+      'costo peajes vacaciones',
+      'viaje en auto verano 2027',
+    ],
+    relatedCalculators: ['calculadora-costo-viaje', 'calculadora-costo-tag', 'calculadora-permiso-circulacion', 'calculadora-credito-automotriz'],
+    faq: [
+      {
+        question: '¿Cómo calculo cuánta bencina gasto en un viaje?',
+        answer:
+          'Divide los kilómetros totales (ida y vuelta) por el rendimiento de tu auto en km por litro y multiplica por el precio del litro en tu zona. Un auto que rinde 12 km/l necesita 20 litros para 240 km. El precio del día por bencinera lo informa la Comisión Nacional de Energía en bencinaenlinea.cl.',
+      },
+      {
+        question: '¿Dónde veo el precio oficial de los peajes?',
+        answer:
+          'La Dirección General de Concesiones del MOP publica los tarifarios de cada concesión, por categoría de vehículo y horario. Los vigentes al 17-11-2026 son las tarifas 2026; las concesiones los actualizan cada año, por lo que conviene revisarlos antes de viajar en enero o febrero.',
+      },
+      {
+        question: '¿Existe un precio oficial único de la bencina?',
+        answer:
+          'No. ENAP informa cada semana cuánto cambia su precio mayorista, pero aclara que no fija el precio final: cada estación de servicio lo define. Por eso la calculadora pide que ingreses el precio que ves en tu zona.',
+      },
+    ],
+    sources: [
+      { label: 'ENAP, informe semanal de precios (11-11-2026)', url: ENAP_INFORME },
+      { label: 'CNE, Bencina en Línea (precios por estación)', url: BENCINA_EN_LINEA },
+      { label: 'MOP, Dirección General de Concesiones: peajes y pórticos', url: MOP_PEAJES },
+      { label: 'MOP, tarifas 2026 Ruta 68', url: MOP_RUTA_68 },
+      { label: 'MOP, tarifas 2026 Talca–Chillán (Ruta 5 Sur)', url: MOP_TALCA_CHILLAN },
+    ],
+    content: `<p class="article-lead">El costo de un viaje en auto se arma con tres cosas: la <strong>bencina</strong>, que depende de los kilómetros, del rendimiento del auto y del precio en tu zona; los <strong>peajes</strong> de carretera, que el MOP publica por concesión, y el <strong>TAG</strong> de las autopistas urbanas y de los pórticos sin barrera. Ninguno de los tres tiene un número único para todo Chile, pero los tres se pueden calcular antes de salir con datos oficiales.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Datos revisados el 17 de noviembre de 2026</strong><p>Los precios de la bencina cambian cada semana y los peajes se actualizan una vez al año. Las cifras de este artículo son las vigentes a esta fecha o ejemplos rotulados como tales. Antes de viajar, revisa el precio del día y el tarifario de tu ruta en los enlaces oficiales.</p></div></aside>
+
+<h2 id="formula">La fórmula en una línea</h2>
+
+<p>Costo del viaje = (kilómetros totales ÷ rendimiento en km/l) × precio del litro + peajes de ida + peajes de vuelta. Si viajan varias personas, se divide el total por el número de pasajeros. Es exactamente lo que hace la <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje en auto</a>.</p>
+
+<p>Los tres datos que más mueven el resultado son la distancia, el rendimiento y el precio. Vale la pena obtener cada uno bien:</p>
+
+<ul>
+<li><strong>Distancia.</strong> Usa la que entrega tu aplicación de mapas para la ruta que realmente vas a tomar, no la distancia en línea recta. Suma los desvíos que ya tengas planeados: ir a la playa todos los días desde la cabaña también cuenta.</li>
+<li><strong>Rendimiento.</strong> El dato del fabricante suele ser optimista. Si tu auto tiene computador de a bordo, usa el promedio en carretera. Si no, llena el estanque, anota el kilometraje, recorre al menos 200 km y vuelve a llenar: kilómetros recorridos ÷ litros cargados es tu rendimiento real. Con el auto cargado, aire acondicionado y subidas, el consumo aumenta.</li>
+<li><strong>Precio del litro.</strong> No hay un precio oficial único. La Comisión Nacional de Energía publica el precio informado por cada estación en ${ext(BENCINA_EN_LINEA, 'Bencina en Línea')}. Busca el precio en tu comuna y en el destino, porque en zonas extremas o rurales suele ser distinto.</li>
+</ul>
+
+<h2 id="ejemplo">Un ejemplo completo, con cifras de ejemplo</h2>
+
+<p>Supongamos un viaje de <strong>${VIAJE_KM} km por tramo, ida y vuelta</strong>, en un auto que rinde <strong>${VIAJE_RENDIMIENTO} km/l</strong>, con <strong>${formatCLP(VIAJE_PEAJE_TRAMO)} de peajes por tramo</strong> y <strong>${VIAJE_PASAJEROS} pasajeros</strong>. Para el precio usamos <strong>${formatCLP(VIAJE_PRECIO_EJEMPLO)} por litro</strong>. Ese precio es un <strong>ejemplo</strong> para hacer la cuenta, no el precio oficial de ninguna zona: reemplázalo por el que veas en Bencina en Línea.</p>
+
+<div class="table-wrap"><table>
+<caption>Ejemplo rotulado: viaje de ${VIAJE_KM} km por tramo (precio de bencina y peajes de ejemplo)</caption>
+<thead><tr><th scope="col">Concepto</th><th scope="col">Cálculo</th><th scope="col">Resultado</th></tr></thead>
+<tbody>
+<tr><td>Distancia total</td><td>${VIAJE_KM} km × 2</td><td>${VIAJE.distanciaTotal} km</td></tr>
+<tr><td>Litros</td><td>${VIAJE.distanciaTotal} ÷ ${VIAJE_RENDIMIENTO} km/l</td><td>${VIAJE.litros.toLocaleString('es-CL')} litros</td></tr>
+<tr><td>Bencina</td><td>${VIAJE.litros.toLocaleString('es-CL')} l × ${formatCLP(VIAJE_PRECIO_EJEMPLO)}</td><td>${formatCLP(VIAJE.costoCombustible)}</td></tr>
+<tr><td>Peajes</td><td>${formatCLP(VIAJE_PEAJE_TRAMO)} × 2 tramos</td><td>${formatCLP(VIAJE.costoPeajes)}</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td><strong>${formatCLP(VIAJE.costoTotal)}</strong></td></tr>
+<tr><td>Por pasajero</td><td>÷ ${VIAJE_PASAJEROS}</td><td>${formatCLP(VIAJE.costoPorPasajero)}</td></tr>
+<tr><td>Por kilómetro</td><td>÷ ${VIAJE.distanciaTotal} km</td><td>${formatCLP(VIAJE.costoPorKm)}</td></tr>
+</tbody>
+</table></div>
+
+<p>Dos lecturas útiles de esta tabla. Primero, la bencina pesa mucho más que los peajes en un viaje de esta distancia. Segundo, el cálculo no incluye desgaste del auto, neumáticos ni mantención.</p>
+
+<h2 id="precio-bencina">Por qué el precio de la bencina cambia cada semana</h2>
+
+<p>ENAP publica cada miércoles un informe con la variación de su precio mayorista para la semana siguiente. En el ${ext(ENAP_INFORME, 'informe del 11 de noviembre de 2026')}, anunció un alza de <strong>$38,7 por litro</strong> en las gasolinas de 93 y 97 octanos y de <strong>$41,9 por litro</strong> en el diésel desde el jueves 12 de noviembre. ENAP aclara en el mismo informe que no fija ni regula el precio final: cada distribuidor y estación lo define.</p>
+
+<p>Para un viaje, lo práctico es medir cuánto te afecta una variación de ese tamaño. En el ejemplo anterior, con ${VIAJE.litros.toLocaleString('es-CL')} litros, una diferencia de $38,7 por litro cambia el costo de la bencina en ${formatCLP(VIAJE_ALZA_ENAP)}. Es poco en un solo viaje, pero si vas a recorrer varios miles de kilómetros en el verano, cargar donde el litro está más barato sí hace diferencia.</p>
+
+<h2 id="peajes">Peajes: dónde ver la tarifa oficial de tu ruta</h2>
+
+<p>Las carreteras concesionadas cobran peajes en plazas troncales (sobre la ruta principal) y laterales (en accesos y salidas). La Dirección General de Concesiones del MOP publica un tarifario por concesión en ${ext(MOP_PEAJES, 'Peajes y pórticos')}, con la tarifa por categoría de vehículo y, en algunas rutas, por horario.</p>
+
+<p>Como referencia, en los tarifarios 2026 publicados por el MOP:</p>
+
+<ul>
+<li>En la ${ext(MOP_RUTA_68, 'Ruta 68 (Santiago–Valparaíso–Viña del Mar)')}, para autos y camionetas la plaza troncal figura en <strong>$2.700</strong> en horario normal y <strong>$4.000</strong> en horario punta, y las laterales en $1.100.</li>
+<li>En la concesión ${ext(MOP_TALCA_CHILLAN, 'Talca–Chillán de la Ruta 5 Sur')}, la plaza troncal para autos y camionetas figura en <strong>$3.300</strong> y las laterales en $800.</li>
+</ul>
+
+<p>Estas cifras son de los tarifarios 2026. Las concesiones reajustan sus tarifas una vez al año, normalmente a comienzos de enero, así que para un viaje en enero o febrero de 2027 revisa el tarifario actualizado. En viajes largos por la Ruta 5 pasas por varias concesiones: suma las plazas troncales de cada una en el sentido de tu viaje y no olvides que la vuelta se paga de nuevo.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Horario punta en la salida de vacaciones</strong><p>Varias concesiones aplican tarifa punta en fines de semana largos y en las salidas y regresos de Santiago. En la Ruta 68 la diferencia entre normal y punta es de $1.300 por plaza para un auto. Revisa en el tarifario qué días y horas cuentan como punta.</p></div></aside>
+
+<h2 id="tag">TAG: autopistas urbanas y pórticos sin barrera</h2>
+
+<p>En las autopistas urbanas de Santiago y en los pórticos de flujo libre no hay caseta: el cobro se hace con el dispositivo TAG y cada concesionaria factura por pasada según su tarifario, que suele distinguir horario base, punta y saturación. Si vives en una ciudad con autopistas urbanas, el TAG del viaje se mezcla con el de todo el mes.</p>
+
+<p>Para estimar el gasto mensual, la <a href="/calculadoras/calculadora-costo-tag">calculadora de presupuesto TAG</a> multiplica la tarifa por pasada que consultes en el tarifario de tu autopista por el número de pasadas, y suma cargos fijos si tu contrato los tiene. Como ejemplo con cifras inventadas para la cuenta: ${TAG_PASADAS} pasadas al mes a ${formatCLP(TAG_TARIFA_EJEMPLO)} cada una suman ${formatCLP(TAG.costoMensual)} al mes y ${formatCLP(TAG.costoAnual)} al año.</p>
+
+<p>Si no tienes TAG y vas a usar una autopista urbana o un pórtico sin barrera, revisa en el sitio de la concesionaria las alternativas para usuarios ocasionales antes de entrar. Circular sin un medio de pago habilitado genera cobros posteriores.</p>
+
+<h2 id="otros-costos">Lo que no entra en la cuenta, pero conviene recordar</h2>
+
+<ul>
+<li><strong>Estacionamiento en destino.</strong> En zonas de playa el estacionamiento pagado puede superar el costo diario de la bencina.</li>
+<li><strong>Revisión técnica y permiso de circulación.</strong> Viajar con la revisión vencida expone a multa. El permiso de circulación 2027 se paga en marzo; puedes estimarlo con la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a>.</li>
+<li><strong>Mantención antes de salir.</strong> Presión de neumáticos, aceite y refrigerante influyen en el rendimiento y en la seguridad.</li>
+<li><strong>Combustible en zonas aisladas.</strong> En carreteras australes o del altiplano hay tramos largos sin estaciones. Consulta en Bencina en Línea dónde están las estaciones de tu ruta.</li>
+</ul>
+
+<h2 id="dividir">Cómo dividir el gasto entre quienes viajan</h2>
+
+<p>La forma más simple es dividir bencina y peajes en partes iguales. Si alguien se suma solo a la ida o se baja antes, una alternativa justa es dividir por kilómetros: el costo por kilómetro del ejemplo (${formatCLP(VIAJE.costoPorKm)}) multiplicado por los kilómetros que hizo cada persona, repartido entre quienes iban en el auto en ese tramo. La <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje</a> entrega el costo por pasajero y por kilómetro.</p>`,
   },
 ];
