@@ -22,9 +22,17 @@ export const TRAMOS_HERENCIA_UTA: ReadonlyArray<{ hasta: number; tasa: number }>
 ];
 
 /** Parte exenta en UTA (art. 2 incs. 2 y 4). */
-export const EXENCION_HERENCIA_UTA: Record<ParentescoHerencia, number> = { directo: 50, colateral: 5, otro: 0 };
+export const EXENCION_HERENCIA_UTA: Record<ParentescoHerencia, number> = {
+  directo: 50,
+  colateral: 5,
+  otro: 0,
+};
 /** Recargo sobre el impuesto (art. 2 inc. 5). */
-export const RECARGO_HERENCIA: Record<ParentescoHerencia, number> = { directo: 0, colateral: 0.2, otro: 0.4 };
+export const RECARGO_HERENCIA: Record<ParentescoHerencia, number> = {
+  directo: 0,
+  colateral: 0.2,
+  otro: 0.4,
+};
 /** Rebaja Registro Nacional de Discapacidad (art. 2 inc. final, Ley 21.210). */
 export const REBAJA_DISCAPACIDAD = 0.3;
 export const TOPE_REBAJA_DISCAPACIDAD_UF = 8000;
@@ -59,7 +67,8 @@ export function calculateImpuestoHerencia(input: ImpuestoHerenciaInput): Impuest
   if (!Number.isFinite(asignacionLiquida) || asignacionLiquida < 0) {
     throw new Error('La asignación líquida debe ser un monto en pesos mayor o igual a cero.');
   }
-  if (!(parentesco in EXENCION_HERENCIA_UTA)) throw new Error('Selecciona el parentesco con el causante.');
+  if (!(parentesco in EXENCION_HERENCIA_UTA))
+    throw new Error('Selecciona el parentesco con el causante.');
 
   const valorUTA = valorUTM * 12;
   const asignacionUTA = asignacionLiquida / valorUTA;
@@ -76,7 +85,10 @@ export function calculateImpuestoHerencia(input: ImpuestoHerenciaInput): Impuest
   const recargo = RECARGO_HERENCIA[parentesco];
   const conRecargoUTM = escalaUTA * 12 * (1 + recargo);
   const rebajaUTM = input.discapacidad
-    ? Math.min(conRecargoUTM * REBAJA_DISCAPACIDAD, (TOPE_REBAJA_DISCAPACIDAD_UF * valorUF) / valorUTM)
+    ? Math.min(
+        conRecargoUTM * REBAJA_DISCAPACIDAD,
+        (TOPE_REBAJA_DISCAPACIDAD_UF * valorUF) / valorUTM,
+      )
     : 0;
   const impuestoUTM = Math.round((conRecargoUTM - rebajaUTM) * 100) / 100;
   const impuestoCLP = Math.round(impuestoUTM * valorUTM);
@@ -91,7 +103,8 @@ export function calculateImpuestoHerencia(input: ImpuestoHerenciaInput): Impuest
     rebajaUTM: Math.round(rebajaUTM * 100) / 100,
     impuestoUTM,
     impuestoCLP,
-    tasaEfectiva: asignacionLiquida > 0 ? Math.round((impuestoCLP / asignacionLiquida) * 10000) / 100 : 0,
+    tasaEfectiva:
+      asignacionLiquida > 0 ? Math.round((impuestoCLP / asignacionLiquida) * 10000) / 100 : 0,
   };
 }
 
@@ -117,11 +130,16 @@ export function impuestoHerenciaToResults(r: ImpuestoHerenciaResult): Calculator
       label: 'Impuesto según escala, antes de recargo (UTM)',
       value: r.impuestoEscalaUTM,
       format: 'UTM',
-      note: { text: 'Escala progresiva de 1 % a 25 % en UTA, aplicada desde el primer tramo.', source: { name: 'SII — cálculo del impuesto a la herencia', url: SII_URL } },
+      note: {
+        text: 'Escala progresiva de 1 % a 25 % en UTA, aplicada desde el primer tramo.',
+        source: { name: 'SII — cálculo del impuesto a la herencia', url: SII_URL },
+      },
     },
   ];
-  if (r.recargo > 0) results.push({ label: 'Recargo por parentesco', value: r.recargo * 100, format: 'percentage' });
-  if (r.rebajaUTM > 0) results.push({ label: 'Rebaja por discapacidad (UTM)', value: r.rebajaUTM, format: 'UTM' });
+  if (r.recargo > 0)
+    results.push({ label: 'Recargo por parentesco', value: r.recargo * 100, format: 'percentage' });
+  if (r.rebajaUTM > 0)
+    results.push({ label: 'Rebaja por discapacidad (UTM)', value: r.rebajaUTM, format: 'UTM' });
   results.push(
     { label: 'Tasa efectiva sobre tu asignación', value: r.tasaEfectiva, format: 'percentage' },
     { label: 'UTM usada', value: r.valorUTM, format: 'CLP' },

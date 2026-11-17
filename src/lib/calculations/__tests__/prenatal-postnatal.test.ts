@@ -16,24 +16,45 @@ describe('prenatal-postnatal (CT arts. 195, 196, 197 bis, 201)', () => {
   });
 
   it('parto atrasado prorroga el prenatal hasta el día anterior', () => {
-    const r = calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', fechaParto: '2027-03-20' });
+    const r = calculatePrenatalPostnatal({
+      fechaProbableParto: '2027-03-15',
+      fechaParto: '2027-03-20',
+    });
     expect(r.diasPrenatal).toBe(47);
     expect(r.finPrenatal).toBe('2027-03-19');
     expect(r.finPostnatal).toBe('2027-06-11');
   });
 
   it('parto adelantado acorta el prenatal; antes de su inicio no hay prenatal', () => {
-    expect(calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', fechaParto: '2027-03-01' }).diasPrenatal).toBe(28);
-    const r = calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', fechaParto: '2027-01-20' });
+    expect(
+      calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', fechaParto: '2027-03-01' })
+        .diasPrenatal,
+    ).toBe(28);
+    const r = calculatePrenatalPostnatal({
+      fechaProbableParto: '2027-03-15',
+      fechaParto: '2027-01-20',
+    });
     expect(r.diasPrenatal).toBe(0);
     expect(r.finPrenatal).toBeNull();
     expect(prenatalPostnatalToResults(r)[0].value).toBe(0);
   });
 
   it('prematuro o bajo peso: 126 días; múltiple: +7 por hijo; concurren → el mayor', () => {
-    expect(calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', prematuroOBajoPeso: true }).diasPostnatal).toBe(126);
-    expect(calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', numeroHijos: 3 }).diasPostnatal).toBe(98);
-    expect(calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', numeroHijos: 2, prematuroOBajoPeso: true }).diasPostnatal).toBe(126);
+    expect(
+      calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', prematuroOBajoPeso: true })
+        .diasPostnatal,
+    ).toBe(126);
+    expect(
+      calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', numeroHijos: 3 })
+        .diasPostnatal,
+    ).toBe(98);
+    expect(
+      calculatePrenatalPostnatal({
+        fechaProbableParto: '2027-03-15',
+        numeroHijos: 2,
+        prematuroOBajoPeso: true,
+      }).diasPostnatal,
+    ).toBe(126);
   });
 
   it('media jornada: 126 días de postnatal parental', () => {
@@ -51,6 +72,8 @@ describe('prenatal-postnatal (CT arts. 195, 196, 197 bis, 201)', () => {
   it('rechaza fechas inválidas', () => {
     expect(() => calculatePrenatalPostnatal({ fechaProbableParto: '15-03-2027' })).toThrow();
     expect(() => calculatePrenatalPostnatal({ fechaProbableParto: '2027-02-30' })).toThrow();
-    expect(() => calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', numeroHijos: 0 })).toThrow();
+    expect(() =>
+      calculatePrenatalPostnatal({ fechaProbableParto: '2027-03-15', numeroHijos: 0 }),
+    ).toThrow();
   });
 });

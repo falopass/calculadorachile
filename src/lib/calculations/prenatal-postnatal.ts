@@ -81,7 +81,10 @@ export function calculatePrenatalPostnatal(input: PrenatalPostnatalInput): Prena
   const inicioPrenatal = sumarDias(fpp, -DIAS_PRENATAL);
   // Prenatal corre hasta el día anterior al parto: se prorroga si el parto se atrasa
   // y se acorta si se adelanta (art. 196 inc. 2).
-  const diasPrenatal = Math.max(0, Math.round((parto.getTime() - inicioPrenatal.getTime()) / DIA_MS));
+  const diasPrenatal = Math.max(
+    0,
+    Math.round((parto.getTime() - inicioPrenatal.getTime()) / DIA_MS),
+  );
 
   // Prematuro y múltiple no se suman: rige el más largo (art. 196 inc. 6).
   const diasPostnatal = Math.max(

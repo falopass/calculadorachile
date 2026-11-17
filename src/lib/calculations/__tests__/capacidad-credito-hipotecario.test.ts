@@ -17,18 +17,30 @@ describe('capacidad-credito-hipotecario', () => {
 
   it('el dividendo del crédito máximo no supera el margen (ida y vuelta con credito-hipotecario)', () => {
     const r = calculateCapacidadCreditoHipotecario(base);
-    const ida = calculateCreditoHipotecario({ montoUF: r.creditoMaximoUF, plazoAnos: 25, tasaAnual: 4.5, valorUF: 40_000 });
+    const ida = calculateCreditoHipotecario({
+      montoUF: r.creditoMaximoUF,
+      plazoAnos: 25,
+      tasaAnual: 4.5,
+      valorUF: 40_000,
+    });
     expect(ida.dividendoMensualCLP).toBeLessThanOrEqual(500_000);
     expect(ida.dividendoMensualCLP).toBeGreaterThan(499_990);
   });
 
   it('porcentaje editable y otras deudas reducen el margen', () => {
-    expect(calculateCapacidadCreditoHipotecario({ ...base, porcentajeDividendo: 30 }).dividendoMaximoCLP).toBe(600_000);
-    expect(calculateCapacidadCreditoHipotecario({ ...base, otrasDeudasMensuales: 100_000 }).dividendoMaximoCLP).toBe(400_000);
+    expect(
+      calculateCapacidadCreditoHipotecario({ ...base, porcentajeDividendo: 30 }).dividendoMaximoCLP,
+    ).toBe(600_000);
+    expect(
+      calculateCapacidadCreditoHipotecario({ ...base, otrasDeudasMensuales: 100_000 })
+        .dividendoMaximoCLP,
+    ).toBe(400_000);
   });
 
   it('tasa 0 %: crédito = dividendo × meses', () => {
-    expect(calculateCapacidadCreditoHipotecario({ ...base, tasaAnual: 0 }).creditoMaximoUF).toBe(3750);
+    expect(calculateCapacidadCreditoHipotecario({ ...base, tasaAnual: 0 }).creditoMaximoUF).toBe(
+      3750,
+    );
   });
 
   it('financiamiento 90 % baja el pie necesario', () => {
@@ -38,8 +50,12 @@ describe('capacidad-credito-hipotecario', () => {
 
   it('valida entradas', () => {
     expect(() => calculateCapacidadCreditoHipotecario({ ...base, ingresoMensual: 0 })).toThrow();
-    expect(() => calculateCapacidadCreditoHipotecario({ ...base, otrasDeudasMensuales: 600_000 })).toThrow();
+    expect(() =>
+      calculateCapacidadCreditoHipotecario({ ...base, otrasDeudasMensuales: 600_000 }),
+    ).toThrow();
     expect(() => calculateCapacidadCreditoHipotecario({ ...base, plazoAnos: 25.5 })).toThrow();
-    expect(() => calculateCapacidadCreditoHipotecario({ ...base, porcentajeDividendo: 0 })).toThrow();
+    expect(() =>
+      calculateCapacidadCreditoHipotecario({ ...base, porcentajeDividendo: 0 }),
+    ).toThrow();
   });
 });
