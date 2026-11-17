@@ -26,7 +26,12 @@ import { getCalculatorBySlug } from '@/data/calculators';
 
 const calculator = getCalculatorBySlug('calculadora-compras-internacionales') as Calculator;
 const calculateFn = (inputs: Record<string, unknown>): CalculatorResult[] => [
-  { label: 'Total de prueba', value: Number(inputs.precioUSD) + 0.4242, highlight: true },
+  {
+    label: 'Total de prueba',
+    value: Number(inputs.precioUSD) + 0.4242,
+    format: 'number',
+    highlight: true,
+  },
 ];
 
 function setInputValue(input: HTMLInputElement, value: string) {
