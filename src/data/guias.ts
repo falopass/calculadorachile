@@ -25,6 +25,7 @@
 
 import { guiaFeriados2027 } from './guia-feriados-2027';
 import { guiaLicenciaMedica } from './guia-licencia-medica';
+import { guiaOperacionRenta2027 } from './guia-operacion-renta-2027';
 import { buildCvlistoContentUrl } from '@/lib/cvlisto';
 
 export interface GuiaSection {
@@ -2599,6 +2600,8 @@ export const guias: Guia[] = [
   guiaLicenciaMedica,
   // E-027: generada desde src/lib/feriados.ts
   guiaFeriados2027,
+  // Plan editorial #39: checklist Operación Renta 2027 (texto 17-11-2026)
+  guiaOperacionRenta2027,
 ];
 
 // ============================================
