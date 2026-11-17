@@ -341,6 +341,31 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>Si no tienes TAG y vas a usar una autopista urbana o un pórtico sin barrera, revisa en el sitio de la concesionaria las alternativas para usuarios ocasionales antes de entrar. Circular sin un medio de pago habilitado genera cobros posteriores.</p>
 
+<h2 id="antes-de-salir">Qué anotar antes de salir</h2>
+
+<p>Si el viaje es largo, cinco minutos de preparación evitan sorpresas. Una lista que sirve para cualquier ruta:</p>
+
+<ol>
+<li><strong>La ruta exacta y sus concesiones.</strong> En la aplicación de mapas, revisa por qué carreteras pasas. Cada concesión tiene su propio tarifario en el sitio del MOP; anota las plazas troncales en el sentido de tu viaje.</li>
+<li><strong>El horario de salida.</strong> Si sales en un día o franja de tarifa punta, usa esa tarifa en el cálculo. Salir unas horas antes o después puede bajar el peaje y el tiempo de viaje.</li>
+<li><strong>El precio del litro en tres puntos.</strong> Origen, mitad de camino y destino. Si hay diferencias grandes, planifica dónde cargar.</li>
+<li><strong>El rendimiento con carga.</strong> Con el auto lleno, maletas y aire acondicionado, descuenta entre 10% y 20% al rendimiento habitual como margen prudente. Es un supuesto nuestro para no quedar corto, no una cifra técnica.</li>
+<li><strong>Los pórticos urbanos del destino.</strong> Si vas a una ciudad con autopistas con TAG, revisa si tu dispositivo funciona ahí; los TAG son interoperables entre concesionarias, pero conviene confirmar que tu contrato esté vigente.</li>
+</ol>
+
+<h2 id="consumo">Cómo bajar el gasto en bencina en carretera</h2>
+
+<p>El consumo de un auto en carretera depende sobre todo de la velocidad y del peso. Algunas medidas que no requieren cálculos:</p>
+
+<ul>
+<li><strong>Velocidad constante.</strong> Acelerar y frenar de forma repetida consume más que mantener una velocidad pareja. El control crucero ayuda en tramos planos.</li>
+<li><strong>Menos peso y menos resistencia.</strong> Un portaequipaje sobre el techo aumenta la resistencia al aire. Si no lo usas, sácalo.</li>
+<li><strong>Neumáticos con la presión correcta.</strong> La presión recomendada para carga completa suele estar en la puerta del conductor o en el manual.</li>
+<li><strong>Aire acondicionado con criterio.</strong> En carretera, las ventanas abiertas también aumentan la resistencia; a alta velocidad, el aire acondicionado puede ser la mejor opción.</li>
+</ul>
+
+<p>Cada una de estas medidas cambia poco por sí sola. Juntas, en un viaje de varios cientos de kilómetros, se notan en el estanque. Para medir el efecto, repite el cálculo con el rendimiento que obtengas al volver.</p>
+
 <h2 id="otros-costos">Lo que no entra en la cuenta, pero conviene recordar</h2>
 
 <ul>
