@@ -379,4 +379,149 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>La forma más simple es dividir bencina y peajes en partes iguales. Si alguien se suma solo a la ida o se baja antes, una alternativa justa es dividir por kilómetros: el costo por kilómetro del ejemplo (${formatCLP(VIAJE.costoPorKm)}) multiplicado por los kilómetros que hizo cada persona, repartido entre quienes iban en el auto en ese tramo. La <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje</a> entrega el costo por pasajero y por kilómetro.</p>`,
   },
+  // Temporada Navidad 2026: compras internacionales
+  {
+    slug: 'impuestos-compras-temu-aliexpress-shein-navidad',
+    title: 'Compras en Temu, AliExpress y Shein para Navidad: qué impuestos pagas y cuándo',
+    description:
+      'Desde el 25 de octubre de 2025 las compras en plataformas extranjeras de hasta US$500 pagan IVA de 19%. Cuándo lo cobra la plataforma, cuándo se paga en Aduanas y qué cambia sobre US$500.',
+    date: '2026-11-17',
+    updatedAt: '2026-11-17',
+    category: 'impuestos',
+    readingTime: 8,
+    relatedGuia: 'iva-boleta-honorarios-chile',
+    seoTitle: 'Impuestos compras Temu, AliExpress y Shein: IVA y arancel',
+    seoDescription:
+      'Compras internacionales de hasta US$500 pagan IVA 19%, cobrado por la plataforma si está inscrita en el SII. Sobre US$500, IVA más arancel de 6%. Ejemplos y cómo calcularlo para Navidad.',
+    keywords: [
+      'impuesto compras temu',
+      'iva aliexpress chile',
+      'impuesto shein chile',
+      'compras internacionales iva 19%',
+      'compras sobre 500 dólares aduana',
+      'iva digital compras extranjero',
+    ],
+    relatedCalculators: ['calculadora-compras-internacionales', 'calculadora-conversor-divisas', 'calculadora-iva'],
+    faq: [
+      {
+        question: '¿Cuánto impuesto pago por una compra en Temu, AliExpress o Shein?',
+        answer:
+          'Si la compra es de hasta US$500, pagas IVA de 19%. Si la plataforma está inscrita en el SII, lo cobra al momento de pagar y la compra entra al país exenta de arancel. Si supera US$500, además del IVA pagas arancel aduanero de 6%, en la importación.',
+      },
+      {
+        question: '¿Sigue existiendo la franquicia de US$41?',
+        answer:
+          'No para compras hechas desde el 25 de octubre de 2025. Según Aduanas, solo las compras hechas antes de esa fecha, aunque llegaran después, mantenían la regla anterior que liberaba de impuestos a las compras de menos de US$41.',
+      },
+      {
+        question: '¿Cómo sé si la plataforma está inscrita en el SII?',
+        answer:
+          'El SII publica la nómina de plataformas y comercios extranjeros inscritos en su sitio de IVA a la venta remota de bienes. Si la plataforma está en la lista, el IVA debería aparecer en el total al pagar.',
+      },
+      {
+        question: '¿Qué pasa si la plataforma no cobró el IVA?',
+        answer:
+          'El impuesto se paga en la importación, según el procedimiento de Aduanas, normalmente a través de Correos de Chile o de la empresa de courier que trae el paquete. El SII advierte que comprar en plataformas inscritas hace más expedita la entrega.',
+      },
+    ],
+    sources: [
+      { label: 'SII, IVA a la venta remota de bienes (hasta US$500)', url: SII_IVA_BIENES },
+      { label: 'Aduanas, IVA digital: desde cuándo y a quién aplica', url: ADUANA_DESDE_CUANDO },
+      { label: 'Aduanas, ¿qué es el IVA digital?', url: ADUANA_QUE_ES },
+      { label: 'Aduanas, base de cálculo de arancel e IVA (valor CIF)', url: ADUANA_BASE_CALCULO },
+    ],
+    content: `<p class="article-lead">Si este año compras regalos de Navidad en Temu, AliExpress, Shein u otra tienda extranjera, el precio final ya no es el mismo que hace dos diciembres. Desde el <strong>25 de octubre de 2025</strong>, toda compra internacional de bienes de hasta <strong>US$500</strong> paga <strong>IVA de 19%</strong>, y la franquicia que liberaba las compras de menos de US$41 dejó de aplicarse. Lo que cambia según la plataforma es <em>quién</em> te cobra el impuesto y <em>cuándo</em>.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Revisado el 17 de noviembre de 2026</strong><p>Este artículo resume lo que publican el ${ext(SII_IVA_BIENES, 'SII')} y el ${ext(ADUANA_DESDE_CUANDO, 'Servicio Nacional de Aduanas')}. No reemplaza la información de cada plataforma sobre sus cargos de envío ni la de la empresa de courier.</p></div></aside>
+
+<h2 id="regla">La regla en tres casos</h2>
+
+<div class="table-wrap"><table>
+<caption>Impuestos de compras internacionales de bienes desde el 25-10-2025 (SII y Aduanas)</caption>
+<thead><tr><th scope="col">Caso</th><th scope="col">IVA 19%</th><th scope="col">Arancel aduanero</th><th scope="col">Cuándo se paga</th></tr></thead>
+<tbody>
+<tr><td>Hasta US$500, plataforma inscrita en el SII</td><td>Sí</td><td>Exenta</td><td>Al pagar la compra, incluido en el total</td></tr>
+<tr><td>Hasta US$500, plataforma no inscrita</td><td>Sí</td><td>Según Aduanas</td><td>En la importación, antes de recibir el paquete</td></tr>
+<tr><td>Más de US$500</td><td>Sí</td><td>6%</td><td>En la importación, según el procedimiento de Aduanas</td></tr>
+</tbody>
+</table></div>
+
+<p>La regla aplica a bienes nuevos o usados enviados al país por correo (Correos de Chile) o por courier, comprados por personas o empresas, según ${ext(ADUANA_DESDE_CUANDO, 'Aduanas')}. El SII publica la nómina de plataformas y comercios inscritos en su ${ext(SII_IVA_BIENES, 'sitio sobre IVA a la venta remota de bienes')}: antes de comprar, revisa si la tienda aparece ahí.</p>
+
+<h2 id="inscrita">Si la plataforma está inscrita</h2>
+
+<p>Es el caso más simple. La plataforma suma el 19% de IVA a la compra cuando el destino es Chile, lo declara y lo paga al SII, y al llegar el paquete la importación queda exenta de arancel y de IVA a la importación. El SII destaca que, si el IVA se cobró en la compra, la importación se realiza en forma más expedita.</p>
+
+<p>En la práctica, el precio que ves en el carrito antes de pagar debería incluir el IVA o mostrarlo como una línea aparte. Si ves un total sin impuesto en una plataforma que está en la nómina del SII, revisa la dirección de envío y el país configurado en tu cuenta.</p>
+
+<h2 id="no-inscrita">Si la plataforma no está inscrita</h2>
+
+<p>La compra se hace sin IVA, pero eso no significa que no lo pagues: el impuesto se cobra al importar el producto, según el procedimiento de Aduanas. Normalmente quien gestiona ese pago es Correos de Chile o la empresa de courier que trae el paquete, que te avisa del monto y puede cobrar un cargo por el servicio. Como ese cargo lo define cada empresa, no lo incluimos en los ejemplos.</p>
+
+<h2 id="sobre-500">Si la compra supera US$500</h2>
+
+<p>Sobre US$500, además del IVA corresponde arancel aduanero de 6%, y el pago se hace en la importación. Según ${ext(ADUANA_BASE_CALCULO, 'Aduanas')}, el arancel se paga sobre el valor CIF (precio del producto más flete y seguro) y el IVA sobre el valor CIF más el arancel. Por eso, en una compra grande, el impuesto total es algo mayor que 6% + 19%.</p>
+
+<p>Una idea que circula es dividir una compra grande en varios pedidos para quedar bajo US$500. Ten presente que la regla de Aduanas se refiere a la compra, y que dividir pedidos puede aumentar los cargos de envío. No hay un cálculo que sirva para todos: depende de la plataforma y del courier.</p>
+
+<h2 id="ejemplos">Ejemplos de cuentas</h2>
+
+<p>Los montos siguientes están en dólares para no depender del tipo de cambio del día. Para pasarlos a pesos, usa el dólar que te cobre tu tarjeta o el valor del día en el <a href="/calculadoras/calculadora-conversor-divisas">conversor de divisas</a>.</p>
+
+<div class="table-wrap"><table>
+<caption>Ejemplos ilustrativos (montos en US$, sin cargos de courier)</caption>
+<thead><tr><th scope="col">Compra</th><th scope="col">Arancel</th><th scope="col">IVA</th><th scope="col">Total con impuestos</th></tr></thead>
+<tbody>
+<tr><td>US$40 en plataforma inscrita</td><td>Exenta</td><td>US$7,60</td><td>US$47,60</td></tr>
+<tr><td>US$150 en plataforma inscrita</td><td>Exenta</td><td>US$28,50</td><td>US$178,50</td></tr>
+<tr><td>US$600 con flete y seguro incluidos</td><td>US$36,00 (6%)</td><td>US$120,84 (19% de US$636)</td><td>US$756,84</td></tr>
+</tbody>
+</table></div>
+
+<p>El primer ejemplo es el cambio más visible para quien compraba regalos pequeños: antes de octubre de 2025, una compra de US$40 entraba sin impuestos por la franquicia de US$41. Ahora paga lo mismo que una compra en Chile.</p>
+
+<p>Para hacer la cuenta con tu propio carrito, usa la <a href="/calculadoras/calculadora-compras-internacionales">calculadora de impuestos de compras internacionales</a>. Si solo quieres separar el IVA de un precio, la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> lo hace en ambos sentidos.</p>
+
+<h2 id="navidad">Checklist para compras de Navidad</h2>
+
+<ul>
+<li><strong>Revisa si la tienda está en la nómina del SII.</strong> Si está, el IVA va en el total y el paquete no debería tener cobros extra de impuestos al llegar.</li>
+<li><strong>Compara el precio final con el de tiendas en Chile.</strong> Con el IVA incluido, la diferencia con el comercio local se reduce, y la devolución de un producto comprado en el extranjero suele ser más lenta.</li>
+<li><strong>Calcula los plazos de envío.</strong> Diciembre es el mes con más envíos del año. Si el regalo es para el 24, revisa el plazo estimado antes de pagar.</li>
+<li><strong>Guarda el comprobante con el IVA.</strong> Si Aduanas o el courier te piden acreditar que pagaste el impuesto en la compra, ese comprobante lo demuestra.</li>
+<li><strong>Cuidado con cobros por mensaje.</strong> Si recibes un SMS o correo pidiendo pagar "impuestos" de un paquete por un enlace, verifica directamente en el sitio de Correos de Chile o del courier antes de pagar.</li>
+</ul>
+
+<h2 id="pesos">Cómo pasar la cuenta a pesos</h2>
+
+<p>Las plataformas extranjeras muestran el precio en dólares o lo convierten a pesos con su propio tipo de cambio. Si pagas con tarjeta de crédito, el banco aplica su tipo de cambio al facturar, que puede ser distinto del dólar observado del Banco Central. Por eso el monto en pesos de tu estado de cuenta casi nunca coincide exacto con el que viste en el carrito.</p>
+
+<p>Ejemplo con un tipo de cambio de <strong>$950 por dólar</strong>, que es un <strong>supuesto</strong> para la cuenta y no el valor del día: la compra de US$150 en plataforma inscrita, con IVA, suma US$178,50, es decir <strong>$169.575</strong>. Si la tienda no está inscrita, el IVA de US$28,50 (unos $27.075 al mismo cambio) se paga al recibir el paquete, más el cargo que cobre el courier por gestionarlo.</p>
+
+<p>Para el valor real, revisa el dólar del día en el <a href="/calculadoras/calculadora-conversor-divisas">conversor de divisas</a> y el tipo de cambio que informa tu banco.</p>
+
+<h2 id="permisos">Productos que pueden quedar retenidos por otras razones</h2>
+
+<p>Pagar el IVA no es lo único que revisa Aduanas. Algunos productos necesitan autorización de otros servicios para entrar al país, como alimentos, semillas o productos de origen animal o vegetal, que controla el SAG, y medicamentos o suplementos, que pueden requerir autorización sanitaria. Si un regalo entra en alguna de esas categorías, revisa en el sitio de Aduanas qué productos requieren permisos antes de comprarlo, porque un paquete retenido puede no llegar a tiempo para Navidad.</p>
+
+<h2 id="devoluciones">Devoluciones y compras para revender</h2>
+
+<p>Antes de pagar, lee la política de devoluciones de la plataforma. Devolver un producto al extranjero suele tener costo de envío y plazos largos, y no todas las tiendas reembolsan de la misma forma. Si el IVA se cobró en la compra, pregunta a la plataforma si el reembolso incluye ese impuesto; la respuesta depende de cada tienda y no la regula este artículo.</p>
+
+<p>Las reglas de este artículo son las de compras de personas para uso propio. Aduanas distingue las compras ocasionales sin carácter comercial de las importaciones para vender. Si compras en cantidad para revender en Chile, revisa con Aduanas o con un agente de aduanas el procedimiento de importación que corresponde, porque puede incluir otros trámites y obligaciones tributarias.</p>
+
+<h2 id="errores">Errores frecuentes en diciembre</h2>
+
+<ul>
+<li><strong>Calcular con la franquicia antigua.</strong> La regla de los US$41 ya no aplica a compras hechas desde el 25 de octubre de 2025.</li>
+<li><strong>Sumar 19% sobre el precio sin envío en una compra sobre US$500.</strong> En ese caso la base incluye flete y seguro, y el IVA se calcula después de sumar el arancel.</li>
+<li><strong>Pensar que una plataforma no inscrita es más barata.</strong> El IVA se paga igual, al recibir el paquete, y puede sumarse un cargo de gestión del courier.</li>
+<li><strong>No considerar el tipo de cambio de la tarjeta.</strong> Una diferencia de pocos pesos por dólar se nota en un carrito de varios regalos.</li>
+<li><strong>Comprar tarde.</strong> Los plazos de envío internacional se alargan en diciembre; un precio más bajo no sirve si el regalo llega después del 25.</li>
+</ul>
+
+<h2 id="servicios">¿Y las suscripciones digitales?</h2>
+
+<p>Netflix, Spotify, aplicaciones y otros servicios digitales prestados desde el extranjero pagan IVA desde 2020, por una regla distinta a la de los bienes físicos. Lo que cambió en octubre de 2025 es la compra de <strong>bienes</strong>: ropa, juguetes, electrónica y todo lo que llega en un paquete.</p>`,
+  },
 ];
