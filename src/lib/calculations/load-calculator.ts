@@ -266,6 +266,31 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'trabajo-en-feriado': {
+      const { calculateTrabajoEnFeriado, trabajoEnFeriadoToResults } = await import('./trabajo-en-feriado');
+      return (inputs) => {
+        const result = calculateTrabajoEnFeriado({
+          sueldoBruto: coerceNumber(inputs.sueldoBruto),
+          jornadaSemanal: coerceNumber(inputs.jornadaSemanal, 42),
+          horasTrabajadas: coerceNumber(inputs.horasTrabajadas),
+          recargo: coerceNumber(inputs.recargo, 50),
+          compensaConDescanso: coerceBool(inputs.compensaConDescanso, true),
+        });
+        return trabajoEnFeriadoToResults(result);
+      };
+    }
+
+    case 'valor-hora-trabajo': {
+      const { calculateValorHoraTrabajo, valorHoraTrabajoToResults } = await import('./valor-hora-trabajo');
+      return (inputs) =>
+        valorHoraTrabajoToResults(
+          calculateValorHoraTrabajo({
+            sueldoBruto: coerceNumber(inputs.sueldoBruto),
+            jornadaSemanal: coerceNumber(inputs.jornadaSemanal, 42),
+          }),
+        );
+    }
+
     case 'vacaciones-proporcionales': {
       const { calculateVacaciones, vacacionesToResults } = await import('./vacaciones');
       return (inputs) => {
@@ -495,6 +520,21 @@ export async function loadCalculationFn(
         });
         return multasTransitoToResults(result);
       };
+    }
+
+    case 'costo-viaje': {
+      const { calculateCostoViaje, costoViajeToResults } = await import('./costo-viaje');
+      return (inputs) =>
+        costoViajeToResults(
+          calculateCostoViaje({
+            distanciaKm: coerceNumber(inputs.distanciaKm),
+            rendimientoKmL: coerceNumber(inputs.rendimientoKmL),
+            precioCombustible: coerceNumber(inputs.precioCombustible),
+            peajes: coerceNumber(inputs.peajes, 0),
+            pasajeros: coerceNumber(inputs.pasajeros, 1),
+            idaYVuelta: coerceBool(inputs.idaYVuelta),
+          }),
+        );
     }
 
     case 'costo-tag': {

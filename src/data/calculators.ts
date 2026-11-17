@@ -863,6 +863,219 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'trabajo-en-feriado',
+    name: 'Trabajo en Feriado o Domingo 2026',
+    description:
+      'Calcula cuánto corresponde por trabajar un festivo o domingo: valor hora DT, recargo mínimo de 50% o día de descanso compensatorio (art. 38).',
+    slug: 'calculadora-trabajo-en-feriado',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-16',
+    seoTitle: 'Trabajar en feriado 2026: cuánto te deben pagar en Chile',
+    seoDescription:
+      'Calcula el pago por trabajar un festivo o domingo: valor hora DT con jornada 42 h, recargo mínimo 50% o día de descanso compensatorio (art. 38).',
+    sources: [
+      {
+        name: 'BCN — Código del Trabajo, art. 38',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436&idParte=8511869',
+        note: 'Descanso compensatorio por festivo y pago no inferior al art. 32',
+      },
+      {
+        name: 'DT — valor hora con sueldo mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        note: 'Sueldo ÷ 30 × 28 ÷ (jornada × 4); recargo 50% del art. 32',
+      },
+      {
+        name: 'DT — trabajo en domingo o festivo sin excepción',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60240.html',
+        note: 'Se paga como extraordinario el tiempo laborado',
+      },
+      {
+        name: 'DT — feriados irrenunciables del comercio (Ley 19.973)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html',
+        note: '1 may, 18 y 19 sep, 25 dic y 1 ene',
+      },
+    ],
+    keywords: [
+      'trabajar en feriado',
+      'cuánto me pagan por trabajar un feriado',
+      'pago feriado trabajado',
+      'trabajar domingo pago',
+      'feriado irrenunciable',
+      'descanso compensatorio festivo',
+      'recargo 50% feriado',
+    ],
+    inputs: [
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo bruto mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$900.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'jornadaSemanal',
+        label: 'Jornada semanal (horas)',
+        type: 'select',
+        required: false,
+        options: [
+          { value: '42', label: '42 h — vigente desde 26-04-2026 (default)' },
+          { value: '44', label: '44 h — vigente abr-2024 a abr-2026' },
+          { value: '45', label: '45 h — histórica (antes 2024)' },
+          { value: '40', label: '40 h — desde abr-2028 / pactada' },
+        ],
+        defaultValue: '42',
+        tooltip: 'La fórmula DT divide sueldo ÷ 30 × 28 por las horas de cuatro semanas.',
+      },
+      {
+        id: 'horasTrabajadas',
+        label: 'Horas trabajadas en el feriado o domingo',
+        type: 'number',
+        unit: 'count',
+        placeholder: '8',
+        required: true,
+        min: 0,
+        max: 24,
+      },
+      {
+        id: 'recargo',
+        label: 'Recargo pactado (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '50',
+        required: false,
+        min: 50,
+        max: 200,
+        defaultValue: 50,
+        tooltip: '50% (factor 1,5) es el mínimo del art. 32; un contrato o convenio puede pactar más.',
+      },
+      {
+        id: 'compensaConDescanso',
+        label: '¿Se compensa con un día de descanso?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Sí: regla del art. 38 para empresas exceptuadas (un día de descanso por festivo). No: se paga con recargo (pacto del art. 38 inc. 6 o trabajador sin excepción).',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuánto me pagan por trabajar un feriado?',
+        answer:
+          'Depende de tu régimen. Si tu empresa está exceptuada del descanso dominical (art. 38), por cada festivo trabajado te corresponde un día de descanso compensatorio; si ese descanso excede uno semanal y pactan pagarlo, el pago no puede ser inferior al de horas extra (recargo 50%). Si no estás exceptuado, la DT indica que las horas en festivo se pagan como extraordinarias. Con $900.000 y jornada de 42 h, la hora vale $5.000 y con recargo $7.500.',
+      },
+      {
+        question: '¿Trabajar un domingo o festivo se paga doble?',
+        answer:
+          'No existe un pago doble automático. El mínimo legal es el recargo de 50% del art. 32 (factor 1,5) cuando las horas son extraordinarias o se remunera el descanso compensatorio. Un contrato o convenio colectivo puede pactar un recargo mayor, por ejemplo 100%.',
+      },
+      {
+        question: '¿Cuáles son los feriados irrenunciables?',
+        answer:
+          'Según la Ley 19.973, el 1 de mayo, el 18 y 19 de septiembre, el 25 de diciembre y el 1 de enero son feriados obligatorios e irrenunciables para los trabajadores del comercio. La DT aclara que quienes tienen derecho a ellos no pueden trabajar esos días aunque se ofrezca un recargo. Hay excepciones (restaurantes, cines, bencineras, farmacias de turno, entre otros), que deben recibir esos descansos al menos una vez cada dos años.',
+      },
+      {
+        question: '¿Cómo se calcula el valor de la hora?',
+        answer:
+          'La DT usa sueldo mensual ÷ 30 × 28 ÷ (jornada semanal × 4). Con jornada de 42 horas equivale a sueldo ÷ 180. Ejemplo: $900.000 ÷ 180 = $5.000 por hora; con recargo de 50% son $7.500.',
+      },
+      {
+        question: '¿Y el recargo de 30% por domingo en el comercio?',
+        answer:
+          'El art. 38 establece que los trabajadores de comercio y servicios que atienden público reciben un recargo de al menos 30% por las horas ordinarias trabajadas en domingo. Esta calculadora no lo suma automáticamente: estima el pago con el recargo que ingreses (mínimo 50%) y el descanso compensatorio por festivo.',
+      },
+    ],
+  },
+  {
+    id: 'valor-hora-trabajo',
+    name: 'Valor Hora de Trabajo',
+    description:
+      'Calcula el valor de tu hora ordinaria, del día y de la hora extra a partir del sueldo mensual, con la fórmula de la Dirección del Trabajo.',
+    slug: 'calculadora-valor-hora-trabajo',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-16',
+    seoTitle: 'Valor hora de trabajo: calcula cuánto vale tu hora en Chile',
+    seoDescription:
+      'Calcula el valor de tu hora ordinaria, tu día y tu hora extra desde el sueldo mensual con la fórmula DT: sueldo ÷ 30 × 28 ÷ (jornada × 4).',
+    sources: [
+      {
+        name: 'DT — cálculo de horas extraordinarias con sueldo mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        note: 'Sueldo ÷ 30 × 28 ÷ 168 (42 h); ejemplo $800.000 → $4.444,4 por hora',
+      },
+      {
+        name: 'BCN — Código del Trabajo (art. 22 y 32)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Jornada ordinaria y recargo mínimo de 50% en horas extra',
+      },
+    ],
+    keywords: [
+      'valor hora trabajo',
+      'cuánto vale mi hora de trabajo',
+      'calcular valor hora sueldo',
+      'valor día trabajado',
+      'sueldo dividido 180',
+      'valor hora jornada 42 horas',
+    ],
+    inputs: [
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo bruto mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$800.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'jornadaSemanal',
+        label: 'Jornada semanal (horas)',
+        type: 'select',
+        required: false,
+        options: [
+          { value: '42', label: '42 h — vigente desde 26-04-2026 (default)' },
+          { value: '44', label: '44 h — vigente abr-2024 a abr-2026' },
+          { value: '45', label: '45 h — histórica (antes 2024)' },
+          { value: '40', label: '40 h — desde abr-2028 / pactada' },
+        ],
+        defaultValue: '42',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo calculo el valor de mi hora de trabajo?',
+        answer:
+          'Con sueldo mensual, la DT usa: sueldo ÷ 30 × 28 ÷ (jornada semanal × 4). Con jornada de 42 horas equivale a sueldo ÷ 180. Ejemplo DT: $800.000 ÷ 30 × 28 ÷ 168 = $4.444 por hora.',
+      },
+      {
+        question: '¿Cuánto vale un día de trabajo?',
+        answer:
+          'El valor día con sueldo mensual es el sueldo dividido por 30. Con $800.000, el día vale $26.667.',
+      },
+      {
+        question: '¿Cuánto vale la hora extra?',
+        answer:
+          'La hora extra se paga con un recargo mínimo de 50% sobre la hora ordinaria (art. 32 del Código del Trabajo). Con $800.000 y 42 horas: $4.444 × 1,5 = $6.667. Para calcular un mes completo de horas extra usa la calculadora de horas extra.',
+      },
+      {
+        question: '¿Por qué se multiplica por 28 y no por 30?',
+        answer:
+          'Porque la fórmula lleva el sueldo diario a cuatro semanas (28 días) y lo divide por las horas ordinarias de esas cuatro semanas (jornada semanal × 4). Así se obtiene el valor de una hora de la jornada pactada.',
+      },
+      {
+        question: '¿Qué cambia con la reducción a 40 horas?',
+        answer:
+          'Al bajar la jornada sin rebajar el sueldo, la hora vale más. Con $800.000: 44 h dan $4.242 por hora, 42 h $4.444 y 40 h $4.667.',
+      },
+    ],
+  },
+  {
     id: 'vacaciones-proporcionales',
     name: 'Vacaciones Proporcionales',
     description:
@@ -3655,6 +3868,126 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿Hay tarifas diferenciadas?',
         answer:
           'Sí, pero los horarios y categorías no son iguales en todas las concesiones. Algunos tarifarios distinguen base fuera de punta, punta o saturación; otros usan tramos o tarifas manuales. Verifica el documento específico de tu ruta.',
+      },
+    ],
+  },
+  {
+    id: 'costo-viaje',
+    name: 'Costo de Viaje en Auto',
+    description:
+      'Estima cuánto cuesta un viaje en auto: litros de combustible, bencina, peajes y TAG, costo total, por pasajero y por kilómetro.',
+    slug: 'calculadora-costo-viaje',
+    category: 'vehiculos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-16',
+    seoTitle: 'Costo de viaje en auto: calcula bencina y peajes',
+    seoDescription:
+      'Calcula cuánto gastas en bencina y peajes en un viaje en auto: litros, costo total, por pasajero y por km. Ideal para vacaciones y Fiestas Patrias.',
+    sources: [
+      {
+        name: 'CNE — estadísticas de hidrocarburos',
+        url: 'https://www.cne.cl/estadisticas/hidrocarburos/',
+        note: 'Nota metodológica: no existe un precio oficial único en bomba; el precio por litro lo ingresa el usuario',
+      },
+      {
+        name: 'MOP — peajes y pórticos de concesiones',
+        url: 'https://concesiones.mop.gob.cl/peajes-y-porticos/',
+        note: 'Referencia para revisar tarifas de peajes y TAG de la ruta; el monto lo ingresa el usuario',
+      },
+    ],
+    keywords: [
+      'costo viaje en auto',
+      'calcular bencina viaje',
+      'cuánto gasto en bencina',
+      'costo bencina por km',
+      'calculadora viaje peajes',
+      'viaje en auto vacaciones',
+      'dividir bencina entre pasajeros',
+    ],
+    inputs: [
+      {
+        id: 'distanciaKm',
+        label: 'Distancia del trayecto (km)',
+        type: 'number',
+        placeholder: '450',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'rendimientoKmL',
+        label: 'Rendimiento del auto (km por litro)',
+        type: 'number',
+        placeholder: '12,5',
+        required: true,
+        min: 0,
+        tooltip: 'Usa coma para decimales. Revisa el rendimiento real de tu auto en carretera.',
+      },
+      {
+        id: 'precioCombustible',
+        label: 'Precio del combustible por litro',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: 'Ingresa el precio de tu bencinera',
+        required: true,
+        min: 0,
+        tooltip: 'Los precios cambian por semana y por estación de servicio: ingresa el precio que ves en tu bencinera.',
+      },
+      {
+        id: 'peajes',
+        label: 'Peajes y TAG del trayecto',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        defaultValue: 0,
+        tooltip: 'Suma de peajes y pórticos de un trayecto; se duplica si marcas ida y vuelta.',
+      },
+      {
+        id: 'pasajeros',
+        label: 'Número de pasajeros (incluye conductor)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '1',
+        required: false,
+        min: 1,
+        max: 9,
+        defaultValue: 1,
+      },
+      {
+        id: 'idaYVuelta',
+        label: '¿Es ida y vuelta?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo calculo cuánta bencina gasto en un viaje?',
+        answer:
+          'Divide los kilómetros por el rendimiento de tu auto para obtener los litros y multiplícalos por el precio por litro. Ejemplo: 450 km ÷ 12,5 km/l = 36 litros; a $1.300 por litro son $46.800.',
+      },
+      {
+        question: '¿Por qué tengo que ingresar el precio de la bencina?',
+        answer:
+          'Porque no existe un precio oficial único en bomba: varía cada semana, por comuna y por estación de servicio. La CNE publica estadísticas y precios de referencia, pero el valor real es el de tu bencinera.',
+      },
+      {
+        question: '¿Cómo divido el costo del viaje entre pasajeros?',
+        answer:
+          'La calculadora divide el costo total (combustible más peajes) por el número de pasajeros, incluido el conductor. Con $58.800 entre 3 personas, cada una paga $19.600.',
+      },
+      {
+        question: '¿Cuánto cuesta viajar en vacaciones o Fiestas Patrias?',
+        answer:
+          'Depende de la distancia, el rendimiento y el precio del combustible. En temporada alta (verano, Semana Santa, Fiestas Patrias y fin de año) suma los peajes de la ruta y marca ida y vuelta para estimar el viaje completo.',
+      },
+      {
+        question: '¿El cálculo incluye desgaste, mantención o estacionamiento?',
+        answer:
+          'No. Solo estima combustible, peajes y TAG. El rendimiento real puede cambiar con la carga, el aire acondicionado, la velocidad y el tráfico.',
       },
     ],
   },
