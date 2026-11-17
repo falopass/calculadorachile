@@ -14,6 +14,8 @@ import { seoOverrides } from '@/data/seo-overrides';
 import { absoluteUrl } from '@/lib/site';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { getGuiaForCalculator } from '@/lib/seo/calculator-guia-map';
+import { getRelatedCalculators } from '@/lib/seo/related-calculators';
+import { getCategoryClusterLinks } from '@/lib/seo/category-clusters';
 import { getCurrentValues, type CurrentValues } from '@/lib/api/current-values';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
 import { LIVE_UF_QUICK_ANSWER_SLUGS, ufParaRespuestaRapida } from '@/lib/values/quick-answer-uf';
@@ -341,6 +343,10 @@ export default async function CalculatorPage({ params }: CalculatorPageProps) {
       guideReadingTime={relatedGuia?.readingTime}
       liveValue={liveValue}
       quickAnswer={quickAnswer}
+      clusterLinks={getCategoryClusterLinks(calculator)}
+      related={getRelatedCalculators(calculator, calculators, 6).map(
+        ({ id, slug, name, description, category }) => ({ id, slug, name, description, category }),
+      )}
     />
   );
 }

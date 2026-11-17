@@ -151,7 +151,7 @@ async function fromBCentral() {
   };
 
   // Códigos oficiales BCentral
-  const [uf, utm, dolar, euro, ars] = await Promise.all([
+  const [uf, utm, dolar, euro, ars, brl, pen] = await Promise.all([
     fetchSeries('F073.UFF.PRE.Z.D'),
     fetchSeries('F073.UTR.PRE.Z.M'),
     fetchSeries('F073.TCO.PRE.Z.D'),
@@ -159,6 +159,9 @@ async function fromBCentral() {
     fetchSeries('F072.CLP.EUR.N.O.D'),
     // ARS/CLP — nominal referencial (E-050).
     fetchSeries('F072.CLP.ARS.N.O.D'),
+    // Monedas de viaje — nominal referencial (CLP por 1 unidad).
+    fetchSeries('F072.CLP.BRL.N.O.D'),
+    fetchSeries('F072.CLP.PEN.N.O.D'),
   ]);
   return {
     uf: uf?.value ?? null,
@@ -166,6 +169,8 @@ async function fromBCentral() {
     dolarObservado: dolar?.value ?? null,
     euro: euro?.value ?? null,
     pesoArgentino: ars?.value ?? null,
+    realBrasileno: brl?.value ?? null,
+    solPeruano: pen?.value ?? null,
     ipcMensual: null, // BCentral expone IPC en otro endpoint; lo dejamos a Mindicador
     asOf: today.toISOString(),
     dates: {
@@ -174,6 +179,8 @@ async function fromBCentral() {
       dolarObservado: dolar?.date ?? null,
       euro: euro?.date ?? null,
       pesoArgentino: ars?.date ?? null,
+      realBrasileno: brl?.date ?? null,
+      solPeruano: pen?.date ?? null,
     },
   };
 }
@@ -327,6 +334,8 @@ async function main() {
   const dolar = pickFirst('dolarObservado', sourcesByPriority);
   const euro = pickFirst('euro', sourcesByPriority);
   const pesoArgentino = pickFirst('pesoArgentino', sourcesByPriority);
+  const realBrasileno = pickFirst('realBrasileno', sourcesByPriority);
+  const solPeruano = pickFirst('solPeruano', sourcesByPriority);
   const ipc = pickFirst('ipcMensual', sourcesByPriority);
 
   if (uf.value == null && utm.value == null && dolar.value == null) {
@@ -360,6 +369,8 @@ async function main() {
     dolarObservado: dolar.value ?? previous.dolarObservado ?? null,
     euro: euro.value ?? previous.euro ?? null,
     pesoArgentino: (typeof pesoArgentino !== 'undefined' ? pesoArgentino.value : null) ?? previous.pesoArgentino ?? null,
+    realBrasileno: realBrasileno.value ?? previous.realBrasileno ?? null,
+    solPeruano: solPeruano.value ?? previous.solPeruano ?? null,
     ipcMensual: ipc.value ?? previous.ipcMensual ?? null,
     asOf,
     /** Fecha de la observación por serie (YYYY-MM-DD), distinta del asOf del job. */
@@ -369,6 +380,8 @@ async function main() {
       dolarObservado: pickObs('dolarObservado'),
       euro: pickObs('euro'),
       pesoArgentino: pickObs('pesoArgentino'),
+      realBrasileno: pickObs('realBrasileno'),
+      solPeruano: pickObs('solPeruano'),
     },
     sources: {
       uf: uf.source,
@@ -376,6 +389,8 @@ async function main() {
       dolarObservado: dolar.source,
       euro: euro.source,
       pesoArgentino: pesoArgentino.source,
+      realBrasileno: realBrasileno.source,
+      solPeruano: solPeruano.source,
       ipcMensual: ipc.source,
     },
     generatedAt: new Date().toISOString(),

@@ -29,6 +29,7 @@ import {
 import { buildCvlistoBuscarTrabajoUrl, buildCvlistoContentUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
+import { ARTICULOS_2027 } from './articles-2027';
 
 /** Tabla HTML del Fondo de Cesantía Solidario generada desde la constante (E-021). */
 function tablaFcsHtml(): string {
@@ -6027,6 +6028,8 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/38913-aporte-familiar-permanente" target="_blank" rel="noopener">ficha del Aporte Familiar Permanente de ChileAtiende</a>.</p>`,
   },
+  // Carril contenido 2027 (src/data/articles-2027.ts)
+  ...ARTICULOS_2027,
 ];
 
 export const RETIRED_ARTICLE_REDIRECTS = {

@@ -4,8 +4,10 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, Calculator as CalculatorIcon, ArrowRight } from 'lucide-react';
-import { discoverableCalculators } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
+
+// Llega desde el servidor: importar el catálogo aquí lo mete entero en el JS de la home.
+export type SearchHeroItem = Pick<Calculator, 'id' | 'slug' | 'name' | 'description' | 'keywords'>;
 
 /**
  * SearchHero - Bloque 2 de la home.
@@ -44,7 +46,7 @@ const quickPhrases: Record<string, string> = {
   'calculadora-multas-transito': 'una multa de tránsito',
 };
 
-export default function SearchHero() {
+export default function SearchHero({ calculators }: { calculators: SearchHeroItem[] }) {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
@@ -52,22 +54,22 @@ export default function SearchHero() {
   const quickLinks = useMemo(
     () =>
       quickSlugs
-        .map((slug) => discoverableCalculators.find((c) => c.slug === slug))
-        .filter((c): c is Calculator => Boolean(c)),
-    [],
+        .map((slug) => calculators.find((c) => c.slug === slug))
+        .filter((c): c is SearchHeroItem => Boolean(c)),
+    [calculators],
   );
 
   const suggestions = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
 
-    return discoverableCalculators
+    return calculators
       .filter((c) => {
         const haystack = `${c.name} ${c.description} ${c.keywords?.join(' ') ?? ''}`.toLowerCase();
         return haystack.includes(q);
       })
       .slice(0, 6);
-  }, [query]);
+  }, [query, calculators]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();

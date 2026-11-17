@@ -15,7 +15,7 @@ import snapshot from './snapshot.json';
 
 /** Fecha de observación de un indicador (YYYY-MM-DD), no la del generate del snapshot. */
 function observedAsOf(
-  key: 'dolarObservado' | 'euro' | 'pesoArgentino' | 'uf' | 'utm',
+  key: 'dolarObservado' | 'euro' | 'pesoArgentino' | 'realBrasileno' | 'solPeruano' | 'uf' | 'utm',
 ): string {
   const map = (snapshot as { observedAsOf?: Partial<Record<string, string>> }).observedAsOf;
   const obs = map?.[key];
@@ -25,19 +25,78 @@ function observedAsOf(
 
 import tmcSnapshot from './tmc-snapshot.json';
 
+/**
+ * Ingreso mínimo mensual (IMM) por fecha de vigencia.
+ *
+ * Ley 21.830 art. 1: $553.553 desde el 01-05-2026; desde el 01-01-2027 se
+ * reajusta por el IPC acumulado (INE) entre el 01-05-2026 y el 31-12-2026, y
+ * el art. 6 exige un decreto de Hacienda a más tardar el 15-01-2027 con los
+ * montos resultantes. Al publicarse el decreto se agrega una línea con
+ * `vigente_desde: '2027-01-01'`; no se proyecta el monto antes.
+ * Fuente: BCN https://www.bcn.cl/leychile/navegar?idNorma=1225354
+ *
+ * `INGRESO_MINIMO` sigue exponiendo los mismos campos, pero cada uno lee el
+ * tramo vigente hoy en Chile (mismo patrón que `JORNADA_LEGAL.actual`).
+ */
+export interface TramoIngresoMinimo {
+  /** ISO AAAA-MM-DD, fecha de Chile continental. */
+  vigente_desde: string;
+  ley: string;
+  /** Mayores de 18 y hasta 65 años. */
+  mensual: number;
+  /** Menores de 18 y mayores de 65 años. */
+  menor_18_mayor_65: number;
+  /** Fines no remuneracionales. */
+  no_remuneracional: number;
+  /** Mensual ÷ 20 días. */
+  jornal: number;
+  /** Valor hora ordinaria con la jornada vigente en `hora_vigente_desde`. */
+  hora: number;
+  hora_vigente_desde: string;
+  /** Magallanes, Aysén (106% del nacional). */
+  zona_extrema: number;
+}
+
+export const CALENDARIO_INGRESO_MINIMO: readonly TramoIngresoMinimo[] = [
+  {
+    vigente_desde: '2026-05-01', // Ley 21.830 (DO 22-06-2026), DT w3-article-60141
+    ley: '21.830',
+    mensual: 553553,
+    menor_18_mayor_65: 412938,
+    no_remuneracional: 356815,
+    jornal: 27678, // 553553 / 20 días
+    // Valor hora ordinaria del IMM con jornada de 42 h (vigente desde 26-04-2026,
+    // Ley 21.561): 553.553 ÷ 30 × 28 ÷ 168 = 3.075,29.
+    // Fuente: DT, https://www.dt.gob.cl/portal/1628/w3-article-95182.html (act. 28-04-2026).
+    hora: 3075.29,
+    hora_vigente_desde: '2026-05-01', // ISO; IMM $553.553 (Ley 21.830, desde 01-05-2026) con jornada de 42 h (Ley 21.561, desde 26-04-2026)
+    zona_extrema: 586766,
+  },
+  // { vigente_desde: '2027-01-01', ... } ← montos del decreto de Hacienda (Ley 21.830 art. 6).
+];
+
+/** Tramo del ingreso mínimo vigente en la fecha (default: hoy en Chile). */
+export function getIngresoMinimoVigente(fecha: Date = new Date()): TramoIngresoMinimo {
+  const hoy = fechaISOChile(fecha);
+  let vigente = CALENDARIO_INGRESO_MINIMO[0];
+  for (const tramo of CALENDARIO_INGRESO_MINIMO) {
+    if (tramo.vigente_desde <= hoy) vigente = tramo;
+    else break;
+  }
+  return vigente;
+}
+
 export const INGRESO_MINIMO = {
-  mensual: 553553, // Ingreso mínimo mensual (desde 01/05/2026, Ley 21.830)
-  vigente_desde: '2026-05-01', // ISO; Ley 21.830 (DO 22-06-2026), DT w3-article-60141
-  ley: '21.830',
-  menor_18_mayor_65: 412938, // Menores de 18 y mayores de 65
-  no_remuneracional: 356815, // Fines no remuneracionales
-  jornal: 27678, // 553553 / 20 días
-  // Valor hora ordinaria del IMM con jornada de 42 h (vigente desde 26-04-2026,
-  // Ley 21.561): 553.553 ÷ 30 × 28 ÷ 168 = 3.075,29.
-  // Fuente: DT, https://www.dt.gob.cl/portal/1628/w3-article-95182.html (act. 28-04-2026).
-  hora: 3075.29,
-  hora_vigente_desde: '2026-05-01', // ISO; IMM $553.553 (Ley 21.830, desde 01-05-2026) con jornada de 42 h (Ley 21.561, desde 26-04-2026)
-  zona_extrema: 586766, // Magallanes, Aysén (106% del nacional)
+  get mensual() { return getIngresoMinimoVigente().mensual; },
+  get vigente_desde() { return getIngresoMinimoVigente().vigente_desde; },
+  get ley() { return getIngresoMinimoVigente().ley; },
+  get menor_18_mayor_65() { return getIngresoMinimoVigente().menor_18_mayor_65; },
+  get no_remuneracional() { return getIngresoMinimoVigente().no_remuneracional; },
+  get jornal() { return getIngresoMinimoVigente().jornal; },
+  get hora() { return getIngresoMinimoVigente().hora; },
+  get hora_vigente_desde() { return getIngresoMinimoVigente().hora_vigente_desde; },
+  get zona_extrema() { return getIngresoMinimoVigente().zona_extrema; },
+  calendario: CALENDARIO_INGRESO_MINIMO,
 };
 
 // ============================================
@@ -104,6 +163,29 @@ export const PESO_ARGENTINO = {
   fuente:
     'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.ARS.N.O.D',
 };
+
+/**
+ * Monedas de viaje BCCh (serie F072.CLP.<ISO>.N.O.D, CLP por 1 unidad, referencial).
+ * Mismo gate que PESO_ARGENTINO: `fallback`/`unknown` nunca se presenta como «hoy».
+ */
+function divisaViaje<S extends string>(key: 'realBrasileno' | 'solPeruano', serie: S) {
+  const snap = snapshot as {
+    realBrasileno?: number;
+    solPeruano?: number;
+    sources?: Partial<Record<string, string>>;
+  };
+  return {
+    valor: snap[key] ?? 0,
+    fecha_actualizacion: observedAsOf(key),
+    fuente_snapshot: (snap.sources?.[key] ?? 'fallback') as string,
+    serie,
+    referencial: true as const,
+    fuente: `https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=${serie}`,
+  };
+}
+
+export const REAL_BRASILENO = divisaViaje('realBrasileno', 'F072.CLP.BRL.N.O.D');
+export const SOL_PERUANO = divisaViaje('solPeruano', 'F072.CLP.PEN.N.O.D');
 
 
 // ============================================

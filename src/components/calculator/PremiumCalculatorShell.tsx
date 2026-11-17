@@ -13,6 +13,7 @@ import PremiumLoadingIndicator from './PremiumLoadingIndicator';
 import EmptyState from './EmptyState';
 import HistoryPanel from './HistoryPanel';
 import { useCalculationHistory } from '@/hooks/useCalculationHistory';
+import { buildShareQuery, parseShareQuery } from '@/lib/share-state';
 import {
   Calculator as CalculatorIcon,
   RotateCcw,
@@ -461,6 +462,18 @@ export default function PremiumCalculatorShell({
     clearHistory,
   } = useCalculationHistory(calculator.id);
 
+  // Enlace compartido: precarga los inputs que vienen en la URL.
+  useEffect(() => {
+    const shared = parseShareQuery(window.location.search, calculator.inputs);
+    if (Object.keys(shared).length > 0) setInputValues((prev) => ({ ...prev, ...shared }));
+  }, [calculator.inputs]);
+
+  const shareQuery = useMemo(
+    () =>
+      buildShareQuery(calculator.inputs, debouncedValues, buildInitialValues(calculator.inputs)),
+    [calculator.inputs, debouncedValues],
+  );
+
   // Debounce: no recalcular en cada tecla (mobile teclado + CPU).
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -496,6 +509,9 @@ export default function PremiumCalculatorShell({
   // Cálculo puro en efecto (sin setState dentro de useMemo).
   useEffect(() => {
     if (!hasSignificantValues) {
+      // Sin datos útiles no queda un resultado anterior a la vista.
+      setResults(null);
+      setHasCalculated(false);
       setIsCalculating(false);
       return;
     }
@@ -508,6 +524,8 @@ export default function PremiumCalculatorShell({
         Object.entries(fieldErrors).filter(([id]) => touchedFields.current.has(id)),
       );
       setErrors(visibleErrors);
+      // Un resultado calculado con otros datos no puede quedar junto a un error.
+      setResults(null);
       setIsCalculating(false);
       return;
     }
@@ -616,7 +634,7 @@ export default function PremiumCalculatorShell({
         <button
           type="button"
           onClick={() => setIsHistoryOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--border-hover)] transition-colors"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--border-hover)] transition-colors"
           title="Ver historial de cálculos"
           aria-label="Ver historial de cálculos anteriores"
         >
@@ -720,6 +738,7 @@ export default function PremiumCalculatorShell({
             results={results || []}
             title="Resultados"
             calculatorId={calculator.id}
+            shareQuery={shareQuery}
             showChart={!SIN_GRAFICO.has(calculator.id)}
           />
           <DisclaimerYMYL organismo={organismo} className="mt-4" />

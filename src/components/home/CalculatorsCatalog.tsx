@@ -5,10 +5,16 @@ import { Search, X } from 'lucide-react';
 import type { Calculator } from '@/types/calculator';
 import CalculatorCard from './CalculatorCard';
 
+// Solo lo que el catálogo pinta o filtra: el objeto completo (inputs, FAQ) infla el payload RSC.
+export type CatalogItem = Pick<
+  Calculator,
+  'id' | 'slug' | 'name' | 'description' | 'category' | 'keywords'
+>;
+
 interface Group {
   category: Calculator['category'];
   label: string;
-  items: Calculator[];
+  items: CatalogItem[];
 }
 
 interface CalculatorsCatalogProps {

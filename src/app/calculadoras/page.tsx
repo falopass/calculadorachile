@@ -14,7 +14,7 @@ import { discoverableCalculators } from '@/data/calculators';
 import type { Calculator } from '@/types/calculator';
 import { absoluteUrl } from '@/lib/site';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import CalculatorsCatalog from '@/components/home/CalculatorsCatalog';
+import CalculatorsCatalog, { type CatalogItem } from '@/components/home/CalculatorsCatalog';
 import JsonLd from '@/components/seo/JsonLd';
 import { collectionPageSchema, breadcrumbSchema } from '@/lib/seo/schema';
 import { CATEGORY_LABELS } from '@/lib/calculatorCategories';
@@ -46,12 +46,12 @@ export default function CalculadorasPage() {
   const url = absoluteUrl('/calculadoras');
 
   // Build-time: agrupo por categoría
-  const grouped = discoverableCalculators.reduce<Record<Calculator['category'], Calculator[]>>(
-    (acc, calc) => {
-      (acc[calc.category] ??= []).push(calc);
+  const grouped = discoverableCalculators.reduce<Record<Calculator['category'], CatalogItem[]>>(
+    (acc, { id, slug, name, description, category, keywords }) => {
+      (acc[category] ??= []).push({ id, slug, name, description, category, keywords });
       return acc;
     },
-    {} as Record<Calculator['category'], Calculator[]>,
+    {} as Record<Calculator['category'], CatalogItem[]>,
   );
 
   const categoryOrder = (Object.keys(grouped) as Calculator['category'][]).sort(

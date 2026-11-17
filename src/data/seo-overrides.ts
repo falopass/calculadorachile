@@ -37,6 +37,7 @@ import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import { seoPesoArgentino } from '@/lib/calculations/peso-argentino-clp';
+import { seoDivisaViaje } from '@/lib/calculations/divisa-viaje-clp';
 
 const TOPE_GRAT = topeGratificacion();
 
@@ -78,6 +79,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Ingresa tu sueldo bruto y ve tu líquido 2026 al instante: descuento de AFP, 7% de salud, seguro de cesantía e impuesto único con tramos del SII.', // 144
   },
 
+  'calculadora-impuesto-herencia': {
+    seoTitle: 'Impuesto a la herencia: calcula cuánto pagas',
+    seoDescription:
+      'Calcula el impuesto a la herencia por heredero: escala de 1 % a 25 %, exención de 50 UTA para hijos y cónyuge, recargos para hermanos y otros (Ley 16.271).',
+  },
   'calculadora-impuesto-segunda-categoria': {
     seoTitle: 'Impuesto 2ª Categoría 2026: calcula tu IUSC en pesos', // 52
     seoDescription:
@@ -204,6 +210,32 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Convierte UTM a pesos y pesos a UTM con el valor oficial del mes (SII). Multas, UTM vs UTA y UF, y qué mes usar. Gratis.', // 118
   },
 
+  'calculadora-compras-internacionales': {
+    seoTitle: 'Impuesto compras internacionales: Temu, Shein y más',
+    seoDescription:
+      'Calcula el IVA y el arancel de tus compras en Temu, AliExpress, Shein o Amazon: hasta US$500 solo IVA 19 %; sobre US$500, 6 % sobre CIF + IVA.',
+  },
+
+  'real-brasileno-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('BRL').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('BRL').seoDescription;
+    },
+  },
+
+  'sol-peruano-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('PEN').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('PEN').seoDescription;
+    },
+  },
+
   'peso-argentino-a-chileno': {
     // E-050: meta sin «hoy» si source=fallback o observación >3 días hábiles
     get seoTitle() {
@@ -221,6 +253,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // --- VIVIENDA Y BIENES RAÍCES ---
+  'calculadora-capacidad-credito-hipotecario': {
+    seoTitle: '¿Cuánto me prestan para una casa según mi sueldo?',
+    seoDescription:
+      'Calcula tu crédito hipotecario máximo según tu sueldo: dividendo que cabe en tu renta, monto en UF y pesos, valor de vivienda y pie. Porcentaje editable.',
+  },
   'calculadora-credito-hipotecario': {
     seoTitle: 'Crédito Hipotecario 2026: simula dividendo en UF', // 50
     seoDescription:
@@ -519,6 +556,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
+  'calculadora-prenatal-postnatal': {
+    seoTitle: 'Calculadora prenatal y postnatal: fechas exactas',
+    seoDescription:
+      'Calcula cuándo empieza y termina tu prenatal, postnatal y postnatal parental desde la fecha probable de parto: prematuro, parto múltiple y media jornada.',
+  },
   'calculadora-licencia-medica': {
     seoTitle: 'Licencia médica: ¿cuántos días pagan? Tabla y cálculo 2026', // 58
     seoDescription:

@@ -8,7 +8,7 @@ import type { Calculator as CalculatorType } from '@/types/calculator';
 
 export interface RelatedCalculatorsProps {
   /** Lista de calculadoras relacionadas */
-  calculators: CalculatorType[];
+  calculators: Pick<CalculatorType, 'id' | 'slug' | 'name' | 'description' | 'category'>[];
   /** Título de la sección */
   title?: string;
 }

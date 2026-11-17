@@ -16,6 +16,8 @@ export interface ExportMenuProps {
   mainResult?: { label: string; value: string };
   /** ID de la calculadora */
   calculatorId: string;
+  /** Query string con los inputs del cálculo (`?a=1`) */
+  shareQuery?: string;
 }
 
 /**
@@ -23,7 +25,14 @@ export interface ExportMenuProps {
  *
  * Soporta copiar al portapapeles, descargar PNG y compartir.
  */
-export default function ExportMenu({ title, results, mainResult, calculatorId }: ExportMenuProps) {
+export default function ExportMenu({
+  title,
+  results,
+  mainResult,
+  calculatorId,
+  shareQuery = '',
+}: ExportMenuProps) {
+  const shareUrl = () => `${window.location.origin}${window.location.pathname}${shareQuery}`;
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -142,7 +151,7 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
     const shareData = {
       title: `CalculaChile - ${title}`,
       text: mainResult ? `${mainResult.label}: ${mainResult.value}` : title,
-      url: window.location.href,
+      url: shareUrl(),
     };
 
     if (navigator.share) {
@@ -158,7 +167,7 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
     } else {
       // Fallback: copiar link
       try {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText(shareUrl());
         toast.success('Link copiado', 'URL copiada al portapapeles');
         trackEvents.resultShared(calculatorId, 'copy-link');
       } catch {
@@ -173,7 +182,7 @@ export default function ExportMenu({ title, results, mainResult, calculatorId }:
     const text = [
       `CalculaChile - ${title}`,
       mainResult ? `${mainResult.label}: ${mainResult.value}` : '',
-      window.location.href,
+      shareUrl(),
     ]
       .filter(Boolean)
       .join('\n');

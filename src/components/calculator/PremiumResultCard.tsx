@@ -18,6 +18,8 @@ export interface PremiumResultCardProps {
   animate?: boolean;
   /** ID de la calculadora para exportación */
   calculatorId?: string;
+  /** Query string con los inputs, para que el enlace compartido abra el mismo escenario */
+  shareQuery?: string;
   /** Mostrar gráfico de distribución */
   showChart?: boolean;
   /** Configuración del gráfico */
@@ -222,6 +224,7 @@ export default function PremiumResultCard({
   title, 
   animate = true,
   calculatorId,
+  shareQuery,
   showChart = true,
   chartConfig,
 }: PremiumResultCardProps) {
@@ -298,6 +301,7 @@ export default function PremiumResultCard({
                 results={exportResults}
                 mainResult={mainResult ? { label: mainResult.label, value: formatValue(mainResult.value, mainResult.format) } : undefined}
                 calculatorId={calculatorId}
+                shareQuery={shareQuery}
               />
             )}
           </div>

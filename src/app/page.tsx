@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import OfficialValuesBlock from '@/components/home/OfficialValuesBlock';
 import SearchHero from '@/components/home/SearchHero';
+import { discoverableCalculators } from '@/data/calculators';
 import PopularCalculators from '@/components/home/PopularCalculators';
 import CategoryCatalog from '@/components/home/CategoryCatalog';
 import TrustMethodSection from '@/components/home/TrustMethodSection';
@@ -53,7 +54,15 @@ export default function HomePage() {
   return (
     <>
       <OfficialValuesBlock />
-      <SearchHero />
+      <SearchHero
+        calculators={discoverableCalculators.map(({ id, slug, name, description, keywords }) => ({
+          id,
+          slug,
+          name,
+          description,
+          keywords,
+        }))}
+      />
       <PopularCalculators />
       <TrustMethodSection />
       <CategoryCatalog />

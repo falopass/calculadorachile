@@ -2193,6 +2193,136 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   // FASE 1 RESTANTE
   // ============================================
   {
+    id: 'capacidad-credito-hipotecario',
+    name: 'Capacidad de Crédito Hipotecario según Sueldo',
+    description:
+      'Estima cuánto crédito hipotecario te podrían prestar según tu sueldo: dividendo máximo, monto en UF y pesos, valor de vivienda alcanzable y pie necesario, con el porcentaje dividendo/renta editable.',
+    slug: 'calculadora-capacidad-credito-hipotecario',
+    category: 'vivienda',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'CMF Educa — capacidad de pago y crédito hipotecario',
+        url: 'https://www.cmfchile.cl/educa/621/w3-article-27502.html',
+        note: 'Varias instituciones recomiendan que el dividendo no supere el 25 % del ingreso; no es una norma legal: cada banco fija su política',
+      },
+      {
+        name: 'CMF Educa — créditos hipotecarios',
+        url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45015.html',
+      },
+      {
+        name: 'Banco Central — UF',
+        url: 'https://si3.bcentral.cl/indicadoressiete/secure/Indicadoresdiarios.aspx',
+      },
+    ],
+    keywords: [
+      'cuánto me prestan para una casa',
+      'crédito hipotecario según sueldo',
+      'capacidad de crédito hipotecario',
+      'cuánto crédito hipotecario puedo pedir',
+      'dividendo 25 % sueldo',
+      'renta para crédito hipotecario',
+    ],
+    inputs: [
+      {
+        id: 'ingresoMensual',
+        label: 'Ingreso líquido mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.800.000',
+        required: true,
+        min: 0,
+        tooltip: 'Tu sueldo líquido, o la suma con tu codeudor o complemento de renta si postulan juntos.',
+      },
+      {
+        id: 'otrasDeudasMensuales',
+        label: 'Cuotas mensuales de otras deudas',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        defaultValue: 0,
+        tooltip: 'Créditos de consumo, automotriz, tarjetas. Se descuentan del margen para el dividendo.',
+      },
+      {
+        id: 'porcentajeDividendo',
+        label: 'Dividendo máximo sobre el ingreso (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '25',
+        required: false,
+        min: 1,
+        max: 60,
+        defaultValue: 25,
+        tooltip: 'Política de cada banco, no una norma legal. La CMF menciona 25 % como recomendación habitual; algunos bancos aceptan más o menos.',
+      },
+      {
+        id: 'tasaAnual',
+        label: 'Tasa de interés anual (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '4,5',
+        required: true,
+        min: 0,
+        max: 20,
+        tooltip: 'Usa la tasa que te ofrece tu banco. Usa coma para decimales.',
+      },
+      {
+        id: 'plazoAnos',
+        label: 'Plazo (años)',
+        type: 'number',
+        unit: 'years',
+        placeholder: '25',
+        required: true,
+        min: 1,
+        max: 40,
+        defaultValue: 25,
+      },
+      {
+        id: 'porcentajeFinanciamiento',
+        label: 'Porcentaje que financia el banco (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '80',
+        required: false,
+        min: 1,
+        max: 100,
+        defaultValue: 80,
+        tooltip: 'Parte del valor de la vivienda que cubre el crédito; el resto es el pie. Depende del banco y de la vivienda.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuánto me prestan para una casa según mi sueldo?',
+        answer:
+          'Depende del porcentaje de tu sueldo que el banco acepta destinar al dividendo, de la tasa y del plazo. Con 25 %, un ingreso de $2.000.000 permite un dividendo de $500.000; a 4,5 % y 25 años eso equivale a un crédito de unas 2.249 UF si la UF vale $40.000.',
+      },
+      {
+        question: '¿Es obligatorio que el dividendo sea 25 % del sueldo?',
+        answer:
+          'No. Ninguna ley fija ese límite. La CMF indica que varias instituciones recomiendan que el dividendo no supere el 25 % del ingreso, pero cada banco aplica su propia política y también evalúa tus otras deudas, tu historial y tu estabilidad laboral.',
+      },
+      {
+        question: '¿Por qué se descuentan mis otras deudas?',
+        answer:
+          'Porque reducen tu capacidad de pago. La CMF recomienda calcularla restando a tus ingresos los gastos fijos y otros compromisos. La calculadora descuenta las cuotas que ingreses del dividendo máximo.',
+      },
+      {
+        question: '¿Cuánto pie necesito?',
+        answer:
+          'Si el banco financia el 80 % del valor de la vivienda, el pie es el 20 % restante. La calculadora muestra el valor de vivienda que alcanzas con tu crédito máximo y el pie que necesitarías.',
+      },
+      {
+        question: '¿El dividendo calculado incluye seguros?',
+        answer:
+          'No. El dividendo real suma los seguros de desgravamen e incendio y, si corresponde, sismo, por lo que conviene dejar un margen.',
+      },
+    ],
+  },
+  {
     id: 'credito-hipotecario',
     name: 'Simulador Crédito Hipotecario 2026',
     description:
@@ -4085,6 +4215,115 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   // FASE 3 — 10 Calculadoras Crecimiento
   // ============================================
   {
+    id: 'impuesto-herencia',
+    name: 'Calculadora Impuesto a la Herencia',
+    description:
+      'Calcula el impuesto a la herencia que paga cada heredero sobre su asignación líquida: escala progresiva de 1 % a 25 %, exención según parentesco, recargos y rebaja por discapacidad (Ley 16.271).',
+    slug: 'calculadora-impuesto-herencia',
+    category: 'impuestos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCN — Ley 16.271 sobre impuesto a las herencias, art. 2',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986',
+        note: 'Texto refundido DFL 1 de 2000 (Justicia): escala en UTA, exenciones de 50 y 5 UTA, recargos de 20 % y 40 %',
+      },
+      {
+        name: 'BCN — Ley 21.210, artículo cuarto N° 2',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1142667',
+        note: 'Agrega al art. 2 de la Ley 16.271 la rebaja de 30 % para inscritos en el Registro Nacional de Discapacidad, con tope anual de 8.000 UF',
+      },
+      {
+        name: 'SII — ¿Cómo se calcula el impuesto a la herencia?',
+        url: 'https://www.sii.cl/preguntas_frecuentes/herencias/001_160_6164.htm',
+        note: 'Tabla equivalente en UTM con deducción fija por tramo',
+      },
+      {
+        name: 'SII — tramos del impuesto a la herencia',
+        url: 'https://www.sii.cl/preguntas_frecuentes/herencias/001_160_0332.htm',
+      },
+    ],
+    keywords: [
+      'impuesto a la herencia',
+      'calcular impuesto herencia',
+      'impuesto herencia chile',
+      'cuánto se paga de herencia',
+      'exención herencia hijos',
+      'impuesto herencia hermanos',
+      'ley 16.271',
+    ],
+    inputs: [
+      {
+        id: 'asignacionLiquida',
+        label: 'Tu asignación líquida (lo que recibes tú)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$100.000.000',
+        required: true,
+        min: 0,
+        tooltip: 'Tu parte de la herencia después de descontar deudas, gastos y bajas generales. El impuesto se calcula por cada heredero, no sobre el total.',
+      },
+      {
+        id: 'parentesco',
+        label: 'Tu parentesco con quien falleció',
+        type: 'select',
+        required: true,
+        defaultValue: 'directo',
+        options: [
+          { value: 'directo', label: 'Cónyuge, conviviente civil, hijo, nieto, padre o abuelo' },
+          { value: 'colateral', label: 'Hermano, tío, sobrino o primo (2º a 4º grado)' },
+          { value: 'otro', label: 'Otro pariente o sin parentesco' },
+        ],
+      },
+      {
+        id: 'discapacidad',
+        label: '¿Estás inscrito en el Registro Nacional de Discapacidad?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'valorUTM',
+        label: 'UTM del mes del fallecimiento (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: 'Vacío = UTM del mes actual',
+        required: false,
+        min: 0,
+        tooltip: 'La ley usa la unidad tributaria vigente a la fecha del fallecimiento. Si lo dejas vacío, se usa la UTM del mes actual.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo se calcula el impuesto a la herencia?',
+        answer:
+          'Sobre la asignación líquida de cada heredero, con una escala progresiva en UTA: 1 % hasta 80 UTA, 2,5 % hasta 160, 5 % hasta 320, 7,5 % hasta 480, 10 % hasta 640, 15 % hasta 800, 20 % hasta 1.200 y 25 % sobre esa cifra. Cada tasa se aplica solo a la parte que cae en su tramo.',
+      },
+      {
+        question: '¿Cuánto está exento para los hijos?',
+        answer:
+          'El cónyuge, el conviviente civil, los hijos y sus descendientes, y los padres y abuelos tienen exentas las primeras 50 UTA de su asignación. Los hermanos, tíos, sobrinos y primos tienen exentas 5 UTA.',
+      },
+      {
+        question: '¿Qué recargo pagan hermanos o personas sin parentesco?',
+        answer:
+          'El impuesto sube 20 % para parientes colaterales de segundo a cuarto grado (hermanos, tíos, sobrinos, primos) y 40 % para parientes más lejanos o personas sin parentesco, que además no tienen exención.',
+      },
+      {
+        question: '¿Qué UTM se usa?',
+        answer:
+          'La vigente a la fecha del fallecimiento determina el impuesto en UTM. Al pagar, ese monto se convierte con la UTM del mes de pago.',
+      },
+      {
+        question: '¿Cuál es el plazo para pagar?',
+        answer:
+          'Dentro de dos años desde el fallecimiento, declarando y pagando al mismo tiempo (Ley 16.271, art. 50). Cada heredero declara y paga el impuesto de su propia asignación, aunque cualquiera de ellos puede pagar el de todos.',
+      },
+    ],
+  },
+  {
     id: 'impuesto-segunda-categoria',
     name: 'Impuesto Segunda Categoría 2026',
     description:
@@ -4662,6 +4901,252 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
 
   {
+    id: 'compras-internacionales',
+    name: 'Impuestos por compras internacionales',
+    description:
+      'Calcula el IVA y el arancel de tus compras en Temu, AliExpress, Shein, Amazon u otras tiendas del extranjero: régimen de hasta US$500 (Ley 21.713) y compras sobre US$500 con derecho de 6 % sobre el valor CIF.',
+    slug: 'calculadora-compras-internacionales',
+    category: 'impuestos',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'Aduanas — ¿Cuánto impuesto se paga al importar?',
+        url: 'https://www.aduana.cl/cuanto-impuesto-se-paga-al-importar/aduana/2018-12-12/233227.html',
+        note: 'Hasta US$500: IVA 19 %, exenta de arancel. Sobre US$500: 6 % sobre CIF + IVA 19 %',
+      },
+      {
+        name: 'SII — IVA a bienes comprados en el extranjero',
+        url: 'https://www.sii.cl/destacados/iva_bienes/index.html',
+        note: 'Ley 21.713: plataformas inscritas cobran el IVA al pagar, desde el 25-10-2025',
+      },
+      {
+        name: 'Aduanas — Desde cuándo y a quién aplica',
+        url: 'https://www.aduana.cl/desde-cuando-y-a-quien-aplica/aduana/2025-10-20/120230.html',
+        note: 'Vigencia desde el 25-10-2025 para envíos postales y courier',
+      },
+    ],
+    keywords: [
+      'impuesto compras internacionales',
+      'impuesto temu chile',
+      'impuesto aliexpress',
+      'iva compras extranjero',
+      'calculadora aduana',
+      'impuesto compras sobre 500 dolares',
+    ],
+    inputs: [
+      {
+        id: 'precioUSD',
+        label: 'Valor de los productos (US$)',
+        type: 'number',
+        placeholder: '120',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'envioUSD',
+        label: 'Costo de envío o flete (US$)',
+        type: 'number',
+        placeholder: '0',
+        min: 0,
+      },
+      {
+        id: 'seguroUSD',
+        label: 'Seguro (US$)',
+        type: 'number',
+        placeholder: '0',
+        min: 0,
+      },
+      {
+        id: 'plataformaInscrita',
+        label: '¿La tienda está inscrita en el SII?',
+        type: 'select',
+        required: true,
+        defaultValue: 'si',
+        options: [
+          { value: 'si', label: 'Sí (cobra el IVA al pagar)' },
+          { value: 'no', label: 'No o no lo sé' },
+        ],
+        tooltip:
+          'Temu, AliExpress, Shein, Amazon y otras grandes plataformas están inscritas. Revisa el listado del SII. Solo cambia el resultado en compras de hasta US$500.',
+      },
+      {
+        id: 'tratamientoArancel',
+        label: 'Arancel (compras sobre US$500)',
+        type: 'select',
+        defaultValue: 'general',
+        options: [
+          { value: 'general', label: 'General: 6 % sobre CIF' },
+          { value: 'preferencial', label: 'Con TLC y certificado de origen: 0 %' },
+        ],
+        tooltip:
+          'Un tratado de libre comercio puede rebajar o eliminar el derecho si acreditas el origen. Verifica tu caso con Aduanas.',
+      },
+    ],
+    seoTitle: 'Calculadora de impuestos por compras internacionales',
+    seoDescription:
+      'Calcula el IVA y el arancel de compras en Temu, AliExpress, Shein o Amazon: régimen hasta US$500 (Ley 21.713) y sobre US$500 con 6 % sobre CIF.',
+    faq: [
+      {
+        question: '¿Cuánto impuesto pago por una compra de menos de US$500?',
+        answer:
+          'Desde el 25 de octubre de 2025 pagas IVA de 19 % y quedas exento de arancel. Si la tienda está inscrita en el SII, el IVA se cobra al pagar; si no, se paga cuando el envío llega a Chile.',
+      },
+      {
+        question: '¿Qué impuestos se pagan sobre US$500?',
+        answer:
+          'Por regla general, un derecho aduanero de 6 % sobre el valor CIF (producto + flete + seguro) y luego IVA de 19 % sobre el CIF más el derecho. Según Aduanas, una compra con CIF de US$1.000 paga US$261,40.',
+      },
+      {
+        question: '¿Sigue existiendo la franquicia de US$41?',
+        answer:
+          'No. Con la Ley 21.713 las compras de bienes de hasta US$500 quedaron afectas a IVA desde el 25 de octubre de 2025.',
+      },
+      {
+        question: '¿Qué tipo de cambio se usa?',
+        answer:
+          'Aduanas liquida con el tipo de cambio vigente a la fecha de aceptación de la declaración. La calculadora muestra los pesos con el dólar observado del Banco Central como referencia, por lo que el monto final puede variar.',
+      },
+      {
+        question: '¿Incluye el cobro de Correos o del courier?',
+        answer:
+          'No. Las empresas de envío pueden cobrar por gestionar el trámite; ese cargo depende de cada empresa y no es un impuesto.',
+      },
+    ],
+  },
+
+  {
+    id: 'real-brasileno-clp',
+    name: 'Real brasileño a peso chileno',
+    description:
+      'Convierte reales brasileños a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.BRL.N.O.D, referencial).',
+    slug: 'real-brasileno-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal real brasileño',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.BRL.N.O.D',
+        note: 'Serie F072.CLP.BRL.N.O.D (CLP por 1 BRL), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'real brasileño a peso chileno',
+      'reales a pesos chilenos',
+      '100 reales en pesos chilenos',
+      'peso chileno a real',
+      'convertir reales brasileños',
+      'cambio real brasileño chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'brl_a_clp', label: 'Reales brasileños → CLP' },
+          { value: 'clp_a_brl', label: 'CLP → reales brasileños' },
+        ],
+      },
+    ],
+    seoTitle: 'Real brasileño a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte reales brasileños a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BRL.N.O.D). Bidireccional, útil para viajes a Brasil.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 real brasileño?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.BRL.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 reales en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 BRL) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
+    id: 'sol-peruano-clp',
+    name: 'Sol peruano a peso chileno',
+    description:
+      'Convierte soles peruanos a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.PEN.N.O.D, referencial).',
+    slug: 'sol-peruano-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal sol peruano',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.PEN.N.O.D',
+        note: 'Serie F072.CLP.PEN.N.O.D (CLP por 1 PEN), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'sol peruano a peso chileno',
+      'soles a pesos chilenos',
+      '100 soles en pesos chilenos',
+      'peso chileno a sol peruano',
+      'convertir soles peruanos',
+      'cambio sol peruano chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'pen_a_clp', label: 'Soles peruanos → CLP' },
+          { value: 'clp_a_pen', label: 'CLP → soles peruanos' },
+        ],
+      },
+    ],
+    seoTitle: 'Sol peruano a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte soles peruanos a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.PEN.N.O.D). Bidireccional, útil para viajes a Perú.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 sol peruano?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.PEN.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 soles en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 PEN) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:
@@ -5039,6 +5524,121 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         question: '¿El seguro de cesantía reemplaza al finiquito?',
         answer:
           'No. El finiquito liquida lo que el empleador debe pagar al término (indemnización, feriado, sueldo pendiente). El Seguro de Cesantía son giros de tu cuenta AFC o del Fondo Solidario. Calcula primero el finiquito y luego simula el seguro aquí o en /cesantia.',
+      },
+    ],
+  },
+  {
+    id: 'prenatal-postnatal',
+    name: 'Calculadora Prenatal y Postnatal',
+    description:
+      'Calcula las fechas de inicio y término del prenatal, postnatal y postnatal parental desde la fecha probable de parto o la fecha real, con parto prematuro, múltiple y media jornada.',
+    slug: 'calculadora-prenatal-postnatal',
+    category: 'familia',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCN — Código del Trabajo, arts. 195, 196, 197 bis y 201',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Duración del prenatal (6 semanas), postnatal (12 semanas; 18 si prematuro o bajo 1.500 g; +7 días por hijo en parto múltiple), postnatal parental y fuero',
+      },
+      {
+        name: 'Dirección del Trabajo — duración del descanso pre y postnatal',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-60107.html',
+      },
+      {
+        name: 'Dirección del Trabajo — postnatal parental',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-99747.html',
+      },
+      {
+        name: 'SUSESO — licencias maternales',
+        url: 'https://www.suseso.gob.cl/622/w3-propertyvalue-771708.html',
+        note: 'El prenatal comienza en la sexta semana anterior a la fecha probable de parto y el postnatal el día del parto',
+      },
+    ],
+    keywords: [
+      'calculadora prenatal',
+      'calculadora postnatal',
+      'cuándo empieza el prenatal',
+      'fecha postnatal parental',
+      'postnatal media jornada',
+      'prenatal postnatal chile',
+      'fuero maternal fecha',
+    ],
+    inputs: [
+      {
+        id: 'fechaProbableParto',
+        label: 'Fecha probable de parto (AAAA-MM-DD)',
+        type: 'text',
+        placeholder: '2027-03-15',
+        required: true,
+        tooltip: 'La que aparece en el certificado o control de embarazo. Formato año-mes-día.',
+      },
+      {
+        id: 'fechaParto',
+        label: 'Fecha real del parto, si ya ocurrió (AAAA-MM-DD)',
+        type: 'text',
+        placeholder: 'Déjalo vacío si aún no nace',
+        required: false,
+        tooltip: 'El postnatal se cuenta desde el día del parto: si se adelantó o se atrasó, ingrésala para ajustar las fechas.',
+      },
+      {
+        id: 'prematuroOBajoPeso',
+        label: '¿Parto antes de la semana 33 o bebé de menos de 1.500 g?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'numeroHijos',
+        label: 'Hijos nacidos en el parto',
+        type: 'number',
+        unit: 'count',
+        placeholder: '1',
+        required: false,
+        min: 1,
+        max: 8,
+        defaultValue: 1,
+      },
+      {
+        id: 'mediaJornada',
+        label: '¿Postnatal parental a media jornada (18 semanas)?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuándo empieza el prenatal?',
+        answer:
+          'Seis semanas (42 días) antes de la fecha probable de parto. Si el parto se atrasa, el prenatal se prorroga hasta el día anterior al parto; si se adelanta, el prenatal es más corto.',
+      },
+      {
+        question: '¿Cuánto dura el postnatal?',
+        answer:
+          'Doce semanas (84 días) desde el día del parto. Son 18 semanas si el parto ocurre antes de iniciada la semana 33 o el bebé pesa menos de 1.500 gramos, y se suman 7 días por cada hijo desde el segundo en partos múltiples. Si se dan ambas situaciones, rige la duración mayor.',
+      },
+      {
+        question: '¿Cuánto dura el postnatal parental?',
+        answer:
+          'Doce semanas a jornada completa a continuación del postnatal, o 18 semanas si vuelves a trabajar media jornada. Para la media jornada debes avisar al empleador por carta certificada, con copia a la Inspección del Trabajo, al menos 30 días antes de que termine el postnatal.',
+      },
+      {
+        question: '¿El padre puede usar el postnatal parental?',
+        answer:
+          'Sí, si ambos padres trabajan, la madre puede traspasarle semanas a partir de la séptima semana del postnatal parental. El padre debe avisar a su empleador al menos 10 días antes.',
+      },
+      {
+        question: '¿Hasta cuándo dura el fuero maternal?',
+        answer:
+          'Desde el embarazo hasta un año después de terminado el postnatal, sin contar el postnatal parental. Por regla general, hasta que el hijo cumple un año y 84 días.',
+      },
+      {
+        question: '¿La calculadora muestra el monto del subsidio?',
+        answer:
+          'No. El subsidio maternal depende de tus remuneraciones de los meses previos y de topes imponibles; consulta el monto con la entidad que paga tu licencia (Compin, Isapre o caja de compensación). Esta calculadora solo muestra las fechas legales.',
       },
     ],
   },
