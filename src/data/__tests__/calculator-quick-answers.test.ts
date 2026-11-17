@@ -24,9 +24,21 @@ const IDS = [
   'sueldo-casa-particular',
   'licencia-medica',
   'seguro-cesantia',
+  'semana-corrida',
+  'aguinaldo',
+  'plusvalia',
 ];
 
 describe('getQuickAnswer', () => {
+  it('semana-corrida: 150.000 en 5 días con 1 domingo → $30.000', () => {
+    expect(getQuickAnswer('semana-corrida', CTX)!.lead).toContain('corresponden $30.000');
+  });
+
+  it('aguinaldo y plusvalía: cifras desde constantes', () => {
+    expect(getQuickAnswer('aguinaldo', CTX)!.lead).toContain('$29.055 más $16.415 por carga');
+    expect(getQuickAnswer('plusvalia', CTX)!.lead).toContain('8.000 UF');
+  });
+
   it('IVA: neto 100.000 → IVA 19.000 y total 119.000', () => {
     const qa = getQuickAnswer('iva', CTX);
     expect(qa).not.toBeNull();

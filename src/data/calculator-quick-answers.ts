@@ -31,7 +31,11 @@ import {
   UTM,
   INDEMNIZACION,
   SEGURO_CESANTIA_BENEFICIOS,
+  AGUINALDO_2026,
+  AGUINALDO_PENSIONADOS_IPS_2026,
+  PLUSVALIA_INMOBILIARIA,
 } from '@/lib/values/constants';
+import { calculateSemanaCorrida, DT_SEMANA_CORRIDA_URL } from '@/lib/calculations/semana-corrida';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
 import { calculateCreditoCAE } from '@/lib/calculations/credito-cae';
 import { calculatePatenteComercial } from '@/lib/calculations/patente-comercial';
@@ -157,6 +161,7 @@ const AFC_SIMULE_URL = 'https://www.afc.cl/mi-seguro-de-cesantia/simule-su-cobro
 const CA_SEGURO_CESANTIA_URL = 'https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia';
 const SII_AUMENTO_GRADUAL_URL = 'https://www.sii.cl/destacados/boletas_honorarios/aumento_gradual.html';
 const SII_FAQ_TASA_ANIO_URL = 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_3611.htm';
+const BCN_LEY_21806_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1221118';
 const SP_FCS_URL = 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9925.html';
 
 /** Remuneración neta del ejemplo de licencia médica (igual que la metodología). */
@@ -1086,6 +1091,33 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         },
       };
     }
+
+    case 'semana-corrida': {
+      const r = calculateSemanaCorrida({
+        remuneracionVariableSemanal: 150_000,
+        diasDebioTrabajar: 5,
+        domingosYFestivos: 1,
+      });
+      return withLinks([
+        'La semana corrida paga los domingos y festivos a quien gana remuneración variable diaria (comisiones o trato): lo variable ganado en la semana se divide por los días que legalmente debías trabajar y se multiplica por los domingos y festivos (',
+        { text: 'DT', href: DT_SEMANA_CORRIDA_URL },
+        `). Con ${formatCLP(r.remuneracionVariableSemanal)} de comisiones en una semana de ${r.diasDebioTrabajar} días y un domingo, corresponden ${formatCLP(r.semanaCorrida)}. No se cuentan gratificaciones, aguinaldos ni bonos extraordinarios.`,
+      ]);
+    }
+
+    case 'aguinaldo': {
+      const ips = AGUINALDO_PENSIONADOS_IPS_2026;
+      return withLinks([
+        `En el sector privado el aguinaldo no es obligatorio por ley: depende del contrato, del convenio colectivo o de la empresa. En el sector público lo fija la ley de reajuste (`,
+        { text: 'Ley 21.806', href: BCN_LEY_21806_URL },
+        `): Fiestas Patrias 2026 es ${formatCLP(AGUINALDO_2026.fiestas_patrias)} en el tramo 1 y el monto de Navidad 2026 aún no está publicado (referencia 2025: ${formatCLP(AGUINALDO_2026.navidad)}). Los pensionados IPS reciben en Navidad 2026 ${formatCLP(ips.navidad_base)} más ${formatCLP(ips.navidad_por_carga)} por carga.`,
+      ]);
+    }
+
+    case 'plusvalia':
+      return {
+        lead: `Si vendes una vivienda habitacional como persona natural, el mayor valor está exento hasta ${PLUSVALIA_INMOBILIARIA.exencion_uf.toLocaleString('es-CL')} UF acumuladas en tu vida; sobre el exceso pagas un impuesto único sustitutivo del ${PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico}% o lo declaras en el Global Complementario. La ganancia es el precio de venta menos el de compra y las mejoras.`,
+      };
 
     default:
       return null;
