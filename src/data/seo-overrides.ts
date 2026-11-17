@@ -28,7 +28,11 @@
  */
 
 import { formatCLP } from '@/lib/formatters';
-import { INDEMNIZACION } from '@/lib/values/constants';
+import {
+  AGUINALDO_PENSIONADOS_IPS_2026,
+  INDEMNIZACION,
+  SEGURO_CESANTIA_BENEFICIOS,
+} from '@/lib/values/constants';
 import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
@@ -69,9 +73,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y REMUNERACIONES ---
   'calculadora-sueldo-liquido': {
-    seoTitle: 'Calcular sueldo líquido 2026: bruto a líquido', // 45
+    seoTitle: 'Calcular sueldo líquido 2026: de bruto a líquido', // 48
     seoDescription:
-      'Calcular sueldo líquido 2026: ingresa tu bruto y ve cuánto te descuentan de AFP, salud, seguro de cesantía e impuesto único.', // 124
+      'Ingresa tu sueldo bruto y ve tu líquido 2026 al instante: descuento de AFP, 7% de salud, seguro de cesantía e impuesto único con tramos del SII.', // 144
   },
 
   'calculadora-impuesto-segunda-categoria': {
@@ -89,9 +93,8 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   // --- BENEFICIOS LABORALES Y TÉRMINO DE CONTRATO ---
   'calculadora-finiquito': {
     // E-026 estacional 09-11: CTR dic + puente cesantía
-    seoTitle: 'Calcular finiquito 2026: causal e indemnización', // 47
-    seoDescription:
-      'Calcula tu finiquito por causal y el seguro de cesantía antes del peak de diciembre. Indemnización, vacaciones proporcionales y simulador AFC.', // 142
+    seoTitle: 'Calcular finiquito 2026: indemnización y vacaciones', // 51
+    seoDescription: `Calcula tu finiquito 2026 por causal: ${INDEMNIZACION.dias_por_año} días por año (tope ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF), vacaciones proporcionales y aviso previo. Ejemplos en pesos.`, // 138
   },
 
   'calculadora-indemnizacion-anos-servicio': {
@@ -105,21 +108,21 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-vacaciones-proporcionales': {
-    seoTitle: 'Vacaciones proporcionales: tabla por meses y pesos', // 50
+    seoTitle: 'Vacaciones proporcionales 2026: días y pesos por mes', // 52
     seoDescription:
-      'Calcula tus vacaciones proporcionales: 1,25 días hábiles por mes, pagados en días corridos. Tabla de 1 a 11 meses y ejemplo de 6 meses según la DT.', // 147
+      'Vacaciones en el finiquito: 1,25 días hábiles por mes, pagados en días corridos con fines de semana y feriados. Tabla de 1 a 11 meses (DT).', // 139
   },
 
   // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO
   'calculadora-gratificacion-legal': {
-    seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.mensual)} al mes`, // 43
+    seoTitle: `Gratificación legal ${TOPE_GRAT.anio}: tope de ${formatCLP(TOPE_GRAT.mensual)} al mes`, // 49
     seoDescription: `Tope de gratificación legal ${TOPE_GRAT.anio}: 4,75 ingresos mínimos al año, ${formatCLP(TOPE_GRAT.anual)} o ${formatCLP(TOPE_GRAT.mensual)} al mes. Calcula el 25% de tu sueldo${TOPE_GRAT.vigenteDesde === '2026-05-01' ? ' y revisa el cambio de 2027' : ''}.`, // 149 (con la frase del cambio)
   },
 
   'calculadora-horas-extra': {
-    seoTitle: 'Horas Extra 2026: calcula con jornada 42 horas', // 48
+    seoTitle: 'Calcular horas extra 2026: valor hora con jornada 42 h', // 54
     seoDescription:
-      'Calcula tus horas extra en Chile 2026 con jornada de 42 h (Ley 40 Horas), recargo del 50% y festivos. Factor oficial DT en pesos.', // 132
+      'Cuánto te pagan por hora extra en 2026: valor hora con jornada de 42 h (Ley 21.561) y recargo mínimo del 50%, con el total en pesos. Gratis.', // 140
   },
 
   'calculadora-asignacion-familiar': {
@@ -128,9 +131,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Tramos 2026: $22.601, $13.870 o $4.382 por carga (Ley 21.830). En 2027 se reajustan con el IMM; los valores salen en el decreto (hasta el 15-01).', // 145
   },
   'calculadora-aguinaldo': {
-    seoTitle: 'Aguinaldo 2026: Fiestas Patrias y Navidad en Chile', // 50
-    seoDescription:
-      'Fiestas Patrias 2026 e IPS Navidad ($29.055 + cargas). Navidad del sector público 2026 espera la ley de reajuste; hay referencia 2025.', // 134
+    // Ventana diciembre: monto IPS Navidad desde constantes; SP 2026 sin ley publicada.
+    seoTitle: 'Aguinaldo de Navidad 2026: monto IPS y sector público', // 53
+    seoDescription: `Navidad 2026 IPS: ${formatCLP(AGUINALDO_PENSIONADOS_IPS_2026.navidad_base)} + ${formatCLP(AGUINALDO_PENSIONADOS_IPS_2026.navidad_por_carga)} por carga. Sector público: el monto 2026 espera la ley de reajuste; calcula con la referencia 2025.`, // 135
   },
   // --- TRIBUTARIO Y HONORARIOS ---
   'vacaciones-feriado-legal-chile': {
@@ -492,8 +495,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   // E-022 (brief 2026-10-29): "simulador seguro de cesantía". No cambia name ni H1.
   'calculadora-seguro-cesantia': {
     seoTitle: 'Simulador seguro de cesantía 2026: cuenta AFC y Solidario', // 57
-    seoDescription:
-      'Simula tus pagos del seguro de cesantía: el 1.er pago de tu cuenta individual es el 70% de tu remuneración. Fondo Solidario, mínimos y máximos 2026.', // 148
+    seoDescription: `Cuánto te paga el seguro de cesantía: el 1.er giro de tu cuenta AFC es el ${SEGURO_CESANTIA_BENEFICIOS.cic.porcentajes[0]}% de tu remuneración promedio. Fondo Solidario, mínimos y máximos 2026.`, // 147
   },
 
   // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
