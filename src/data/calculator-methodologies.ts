@@ -862,6 +862,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Total estimado: $2.500.000 (de los cuales $1.500.000 los aporta el Fondo Solidario).',
     },
   },
+  'prenatal-postnatal': {
+    summary:
+      'Calcula las fechas legales del prenatal, postnatal y postnatal parental según el Código del Trabajo, desde la fecha probable de parto o la fecha real del parto.',
+    calculationSteps: [
+      'Inicio del prenatal = fecha probable de parto − 42 días (6 semanas).',
+      'El prenatal termina el día anterior al parto: se alarga si el parto se atrasa y se acorta si se adelanta.',
+      'Postnatal desde el día del parto: 84 días; 126 si nació antes de la semana 33 o con menos de 1.500 g; 84 + 7 por cada hijo desde el segundo en parto múltiple. Si concurren, se usa el mayor.',
+      'Postnatal parental desde el día siguiente al término del postnatal: 84 días a jornada completa o 126 a media jornada.',
+      'Aviso de media jornada: a más tardar 30 días antes del término del postnatal. Fuero: hasta un año después del término del postnatal.',
+    ],
+    assumptions: [
+      'Días corridos, incluidos fines de semana y festivos.',
+      'Sin licencias por enfermedad del embarazo ni postnatal suplementario, que modifican las fechas según indique el médico.',
+    ],
+    limitations: [
+      'No calcula el monto del subsidio maternal.',
+      'No modela el traspaso de semanas del postnatal parental al padre ni el permiso por enfermedad grave del hijo menor de un año.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: fecha probable de parto el 15-03-2027',
+      inputs: ['Fecha probable de parto: 15-03-2027', 'Parto de un hijo, sin prematurez', 'Postnatal parental a jornada completa'],
+      development: [
+        'Prenatal: 15-03-2027 − 42 días = 01-02-2027, hasta el 14-03-2027',
+        'Postnatal: 84 días desde el 15-03-2027, hasta el 06-06-2027',
+        'Postnatal parental: 84 días desde el 07-06-2027, hasta el 29-08-2027',
+      ],
+      result: 'Aviso para media jornada hasta el 07-05-2027; fuero hasta el 06-06-2028.',
+    },
+  },
   'licencia-medica': {
     summary:
       'Calcula el subsidio diario como la remuneración neta promedio de los 3 meses anteriores dividida por 30, con piso en el mínimo legal, y días pagados según la duración.',

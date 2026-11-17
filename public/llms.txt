@@ -84,6 +84,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [Subsidio Familiar (SUF)](https://calculadorachile.cl/calculadoras/calculadora-subsidio-familiar-suf): monto por carga acreditada y por persona con discapacidad.
 - [Bono $30.000 por hijo](https://calculadorachile.cl/calculadoras/calculadora-bono-30-mil-por-hijo): bono único por cada niño o niña (Ley 21.840).
 - [Bono Bodas de Oro](https://calculadorachile.cl/calculadoras/calculadora-bono-bodas-oro): requisitos y monto por cónyuge (Ley 20.506).
+- [Prenatal y postnatal](https://calculadorachile.cl/calculadoras/calculadora-prenatal-postnatal): fechas de prenatal, postnatal y postnatal parental, con prematuro, parto múltiple, media jornada y fuero.
 
 ### Educación
 

@@ -758,6 +758,20 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'prenatal-postnatal': {
+      const { calculatePrenatalPostnatal, prenatalPostnatalToResults } = await import('./prenatal-postnatal');
+      return (inputs) =>
+        prenatalPostnatalToResults(
+          calculatePrenatalPostnatal({
+            fechaProbableParto: String(inputs.fechaProbableParto ?? ''),
+            fechaParto: String(inputs.fechaParto ?? ''),
+            prematuroOBajoPeso: coerceBool(inputs.prematuroOBajoPeso),
+            numeroHijos: coerceNumber(inputs.numeroHijos, 1),
+            mediaJornada: coerceBool(inputs.mediaJornada),
+          }),
+        );
+    }
+
     case 'licencia-medica': {
       const { calculateLicenciaMedica, licenciaMedicaToResults } =
         await import('./licencia-medica');

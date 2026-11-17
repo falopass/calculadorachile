@@ -5043,6 +5043,121 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'prenatal-postnatal',
+    name: 'Calculadora Prenatal y Postnatal',
+    description:
+      'Calcula las fechas de inicio y término del prenatal, postnatal y postnatal parental desde la fecha probable de parto o la fecha real, con parto prematuro, múltiple y media jornada.',
+    slug: 'calculadora-prenatal-postnatal',
+    category: 'familia',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCN — Código del Trabajo, arts. 195, 196, 197 bis y 201',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Duración del prenatal (6 semanas), postnatal (12 semanas; 18 si prematuro o bajo 1.500 g; +7 días por hijo en parto múltiple), postnatal parental y fuero',
+      },
+      {
+        name: 'Dirección del Trabajo — duración del descanso pre y postnatal',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-60107.html',
+      },
+      {
+        name: 'Dirección del Trabajo — postnatal parental',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-99747.html',
+      },
+      {
+        name: 'SUSESO — licencias maternales',
+        url: 'https://www.suseso.gob.cl/622/w3-propertyvalue-771708.html',
+        note: 'El prenatal comienza en la sexta semana anterior a la fecha probable de parto y el postnatal el día del parto',
+      },
+    ],
+    keywords: [
+      'calculadora prenatal',
+      'calculadora postnatal',
+      'cuándo empieza el prenatal',
+      'fecha postnatal parental',
+      'postnatal media jornada',
+      'prenatal postnatal chile',
+      'fuero maternal fecha',
+    ],
+    inputs: [
+      {
+        id: 'fechaProbableParto',
+        label: 'Fecha probable de parto (AAAA-MM-DD)',
+        type: 'text',
+        placeholder: '2027-03-15',
+        required: true,
+        tooltip: 'La que aparece en el certificado o control de embarazo. Formato año-mes-día.',
+      },
+      {
+        id: 'fechaParto',
+        label: 'Fecha real del parto, si ya ocurrió (AAAA-MM-DD)',
+        type: 'text',
+        placeholder: 'Déjalo vacío si aún no nace',
+        required: false,
+        tooltip: 'El postnatal se cuenta desde el día del parto: si se adelantó o se atrasó, ingrésala para ajustar las fechas.',
+      },
+      {
+        id: 'prematuroOBajoPeso',
+        label: '¿Parto antes de la semana 33 o bebé de menos de 1.500 g?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'numeroHijos',
+        label: 'Hijos nacidos en el parto',
+        type: 'number',
+        unit: 'count',
+        placeholder: '1',
+        required: false,
+        min: 1,
+        max: 8,
+        defaultValue: 1,
+      },
+      {
+        id: 'mediaJornada',
+        label: '¿Postnatal parental a media jornada (18 semanas)?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuándo empieza el prenatal?',
+        answer:
+          'Seis semanas (42 días) antes de la fecha probable de parto. Si el parto se atrasa, el prenatal se prorroga hasta el día anterior al parto; si se adelanta, el prenatal es más corto.',
+      },
+      {
+        question: '¿Cuánto dura el postnatal?',
+        answer:
+          'Doce semanas (84 días) desde el día del parto. Son 18 semanas si el parto ocurre antes de iniciada la semana 33 o el bebé pesa menos de 1.500 gramos, y se suman 7 días por cada hijo desde el segundo en partos múltiples. Si se dan ambas situaciones, rige la duración mayor.',
+      },
+      {
+        question: '¿Cuánto dura el postnatal parental?',
+        answer:
+          'Doce semanas a jornada completa a continuación del postnatal, o 18 semanas si vuelves a trabajar media jornada. Para la media jornada debes avisar al empleador por carta certificada, con copia a la Inspección del Trabajo, al menos 30 días antes de que termine el postnatal.',
+      },
+      {
+        question: '¿El padre puede usar el postnatal parental?',
+        answer:
+          'Sí, si ambos padres trabajan, la madre puede traspasarle semanas a partir de la séptima semana del postnatal parental. El padre debe avisar a su empleador al menos 10 días antes.',
+      },
+      {
+        question: '¿Hasta cuándo dura el fuero maternal?',
+        answer:
+          'Desde el embarazo hasta un año después de terminado el postnatal, sin contar el postnatal parental. Por regla general, hasta que el hijo cumple un año y 84 días.',
+      },
+      {
+        question: '¿La calculadora muestra el monto del subsidio?',
+        answer:
+          'No. El subsidio maternal depende de tus remuneraciones de los meses previos y de topes imponibles; consulta el monto con la entidad que paga tu licencia (Compin, Isapre o caja de compensación). Esta calculadora solo muestra las fechas legales.',
+      },
+    ],
+  },
+  {
     id: 'licencia-medica',
     name: 'Calculadora Licencia Médica',
     description:

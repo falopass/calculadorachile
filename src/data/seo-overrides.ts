@@ -519,6 +519,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
+  'calculadora-prenatal-postnatal': {
+    seoTitle: 'Calculadora prenatal y postnatal: fechas exactas',
+    seoDescription:
+      'Calcula cuándo empieza y termina tu prenatal, postnatal y postnatal parental desde la fecha probable de parto: prematuro, parto múltiple y media jornada.',
+  },
   'calculadora-licencia-medica': {
     seoTitle: 'Licencia médica: ¿cuántos días pagan? Tabla y cálculo 2026', // 58
     seoDescription:

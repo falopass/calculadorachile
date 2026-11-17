@@ -1000,6 +1000,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       };
     }
 
+    case 'prenatal-postnatal':
+      return withLinks([
+        'El prenatal empieza 6 semanas (42 días) antes de la fecha probable de parto y el postnatal dura 12 semanas (84 días) desde el día del parto; luego vienen 12 semanas de postnatal parental, o 18 a media jornada (',
+        { text: 'Código del Trabajo, arts. 195 a 197 bis', href: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+        '). Si el bebé nace antes de la semana 33 o pesa menos de 1.500 g, el postnatal es de 18 semanas; en partos múltiples se suman 7 días por hijo desde el segundo.',
+      ]);
+
     case 'licencia-medica': {
       // E-020 (brief 2026-10-29): tabla de 1 a 15 días generada con
       // calculateLicenciaMedica; nunca montos escritos a mano.
