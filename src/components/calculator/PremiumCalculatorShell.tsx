@@ -509,6 +509,9 @@ export default function PremiumCalculatorShell({
   // Cálculo puro en efecto (sin setState dentro de useMemo).
   useEffect(() => {
     if (!hasSignificantValues) {
+      // Sin datos útiles no queda un resultado anterior a la vista.
+      setResults(null);
+      setHasCalculated(false);
       setIsCalculating(false);
       return;
     }
@@ -521,6 +524,8 @@ export default function PremiumCalculatorShell({
         Object.entries(fieldErrors).filter(([id]) => touchedFields.current.has(id)),
       );
       setErrors(visibleErrors);
+      // Un resultado calculado con otros datos no puede quedar junto a un error.
+      setResults(null);
       setIsCalculating(false);
       return;
     }
@@ -629,7 +634,7 @@ export default function PremiumCalculatorShell({
         <button
           type="button"
           onClick={() => setIsHistoryOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--border-hover)] transition-colors"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--foreground-secondary)] hover:text-[var(--foreground)] hover:border-[var(--border-hover)] transition-colors"
           title="Ver historial de cálculos"
           aria-label="Ver historial de cálculos anteriores"
         >
