@@ -4,33 +4,120 @@
 
 ## Calculadoras principales
 
+Catálogo completo de calculadoras indexables, agrupado por categoría (las mismas de https://calculadorachile.cl/calculadoras).
+
+### Sueldo y remuneraciones
+
 - [Sueldo líquido](https://calculadorachile.cl/calculadoras/calculadora-sueldo-liquido): de bruto a líquido con AFP, salud, seguro de cesantía e impuesto único.
-- [Finiquito](https://calculadorachile.cl/calculadoras/calculadora-finiquito): indemnización por años de servicio, aviso previo y vacaciones proporcionales.
-- [Horas extra](https://calculadorachile.cl/calculadoras/calculadora-horas-extra): valor de la hora extraordinaria con jornada de 42 horas y recargo 50%.
-- [Factor hora extra](https://calculadorachile.cl/calculadoras/calculadora-factor-hora-extra): factor legal sueldo × 0,0083333 con jornada de 42 horas.
+- [Licencia médica](https://calculadorachile.cl/calculadoras/calculadora-licencia-medica): subsidio diario desde la remuneración neta, mínimo legal y días pagados según la duración.
 - [Sueldo part time](https://calculadorachile.cl/calculadoras/calculadora-sueldo-part-time): mínimo legal para jornadas de 30 horas o menos y valor hora.
 - [Sueldo trabajadora de casa particular (nana)](https://calculadorachile.cl/calculadoras/calculadora-sueldo-casa-particular): mínimo legal puertas adentro o afuera, líquido y costo del empleador (1,11% indemnización a todo evento y 3% cesantía).
+- [Factor hora extra](https://calculadorachile.cl/calculadoras/calculadora-factor-hora-extra): factor legal sueldo × 0,0083333 con jornada de 42 horas.
 - [Tope imponible 90 UF](https://calculadorachile.cl/calculadoras/calculadora-tope-imponible-90-uf): base de cotización topada de AFP, salud y seguro de cesantía.
-- [Seguro de cesantía](https://calculadorachile.cl/calculadoras/calculadora-seguro-cesantia): giros AFC, montos y requisitos.
-- [Asignación familiar](https://calculadorachile.cl/calculadoras/calculadora-asignacion-familiar): tramos y monto por carga acreditada.
-- [Patente comercial](https://calculadorachile.cl/calculadoras/calculadora-patente-comercial): cálculo municipal sobre capital propio, topes 1 y 8.000 UTM.
+- [Semana corrida](https://calculadorachile.cl/calculadoras/calculadora-semana-corrida): pago de domingos y festivos con remuneración variable diaria (art. 45 del Código del Trabajo).
+
+### Beneficios laborales y término de contrato
+
+- [Finiquito](https://calculadorachile.cl/calculadoras/calculadora-finiquito): indemnización por años de servicio, aviso previo y vacaciones proporcionales según la causal.
+- [Indemnización por años de servicio](https://calculadorachile.cl/calculadoras/calculadora-indemnizacion-anos-servicio): 30 días por año, tope de 11 años y 90 UF, aviso previo y recargos del art. 168.
+- [Vacaciones proporcionales](https://calculadorachile.cl/calculadoras/calculadora-vacaciones-proporcionales): feriado proporcional al término del contrato, en días hábiles, días corridos y pesos.
+- [Horas extra](https://calculadorachile.cl/calculadoras/calculadora-horas-extra): valor de la hora extraordinaria con jornada de 42 horas y recargo 50%.
+- [Gratificación legal](https://calculadorachile.cl/calculadoras/calculadora-gratificacion-legal): 25% del sueldo con tope anual de 4,75 ingresos mínimos (art. 50).
+- [Seguro de cesantía](https://calculadorachile.cl/calculadoras/calculadora-seguro-cesantia): giros de la cuenta individual (CIC) y del Fondo de Cesantía Solidario, montos y requisitos.
+- [Aguinaldo](https://calculadorachile.cl/calculadoras/calculadora-aguinaldo): aguinaldo de Fiestas Patrias y de Navidad (sector público e IPS) con los montos ya publicados por ley.
+- [Intereses por mora laboral](https://calculadorachile.cl/calculadoras/calculadora-intereses-mora): intereses sobre pagos laborales impagos con la tasa máxima convencional.
+- [Aporte Familiar Permanente](https://calculadorachile.cl/calculadoras/calculadora-aporte-familiar-permanente): monto por carga o grupo familiar según tu situación.
+- [Subsidio Unificado de Empleo](https://calculadorachile.cl/calculadoras/calculadora-subsidio-unificado-empleo): aporte mensual para trabajador y empresa (Ley 21.808).
+- [Asignación por muerte](https://calculadorachile.cl/calculadoras/calculadora-asignacion-por-muerte): reembolso de gastos funerarios o cuota mortuoria según el régimen previsional.
+
+### Impuestos
+
 - [IVA](https://calculadorachile.cl/calculadoras/calculadora-iva): agregar o quitar el 19% entre neto y bruto.
-- [Boleta de honorarios](https://calculadorachile.cl/calculadoras/calculadora-boleta-honorarios): retención del 15,25% (Ley 21.133).
-- [Operación Renta](https://calculadorachile.cl/calculadoras/calculadora-operacion-renta): simulación de impuesto global complementario y devolución.
-- [Contribuciones de bienes raíces](https://calculadorachile.cl/calculadoras/calculadora-contribuciones): cuota según avalúo fiscal y reglas SII.
-- [Crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-credito-hipotecario): dividendo en UF y pesos.
-- [Crédito CAE](https://calculadorachile.cl/calculadoras/calculadora-credito-cae): cuota mensual con tasa 2% anual.
-- [Permiso de circulación](https://calculadorachile.cl/calculadoras/calculadora-permiso-circulacion): estimación según tasación fiscal.
-- [Pensión alimenticia](https://calculadorachile.cl/calculadoras/calculadora-pension-alimenticia): montos mínimos y tabla en UTM.
-- [UTM a pesos](https://calculadorachile.cl/calculadoras/calculadora-utm-clp): conversión con el valor oficial del mes.
+- [Boleta de honorarios](https://calculadorachile.cl/calculadoras/calculadora-boleta-honorarios): retención según el calendario de la Ley 21.133, de bruto a líquido y de líquido a bruto.
+- [Impuesto de segunda categoría](https://calculadorachile.cl/calculadoras/calculadora-impuesto-segunda-categoria): impuesto único mensual sobre el sueldo con los tramos del SII en UTM.
+- [Operación Renta](https://calculadorachile.cl/calculadoras/calculadora-operacion-renta): simulación de impuesto global complementario y devolución para independientes.
+- [Plusvalía por venta de propiedad](https://calculadorachile.cl/calculadoras/calculadora-plusvalia): impuesto a la ganancia de capital al vender un inmueble.
+- [PPM](https://calculadorachile.cl/calculadoras/calculadora-ppm): pagos provisionales mensuales según actividad e ingresos brutos.
+
+### Pensiones y ahorro
+
+- [Comparador de comisiones AFP](https://calculadorachile.cl/calculadoras/calculadora-comparador-afp): cuánto descuenta cada AFP al mes y cuánto ahorras al cambiarte.
+- [Simulador APV](https://calculadorachile.cl/calculadoras/calculadora-simulador-apv): ahorro previsional voluntario con beneficio tributario y rentabilidad compuesta.
+- [Interés compuesto](https://calculadorachile.cl/calculadoras/calculadora-interes-compuesto): valor futuro de un ahorro con aportes mensuales y distintas capitalizaciones.
+
+### Empresas y pymes
+
+- [Costo total de un empleado](https://calculadorachile.cl/calculadoras/calculadora-costo-empleado-pyme): costo mensual del empleador según tipo de contrato, con cotizaciones a su cargo.
+- [Patente comercial](https://calculadorachile.cl/calculadoras/calculadora-patente-comercial): cálculo municipal sobre capital propio, topes 1 y 8.000 UTM.
+
+### Conversores e indicadores
+
 - [UF a pesos](https://calculadorachile.cl/calculadoras/calculadora-uf-clp): conversión con el valor oficial del día.
+- [UTM a pesos](https://calculadorachile.cl/calculadoras/calculadora-utm-clp): conversión con el valor oficial del mes.
+- [Dólar y euro a pesos](https://calculadorachile.cl/calculadoras/calculadora-conversor-divisas): conversión con el dólar observado y el euro del Banco Central.
+- [Peso argentino a chileno](https://calculadorachile.cl/calculadoras/peso-argentino-a-chileno): ARS ↔ CLP con el tipo de cambio nominal referencial del Banco Central.
+- [IPC](https://calculadorachile.cl/calculadoras/calculadora-ipc): variación del IPC entre dos meses y reajuste de montos con la serie oficial del INE.
+- [Depósito a plazo](https://calculadorachile.cl/calculadoras/calculadora-deposito-a-plazo): ganancia de un depósito fijo o renovable en pesos o UF.
+
+### Vivienda
+
+- [Crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-credito-hipotecario): dividendo en UF y pesos con amortización francesa.
+- [Contribuciones de bienes raíces](https://calculadorachile.cl/calculadoras/calculadora-contribuciones): cuota según avalúo fiscal y reglas SII.
+- [Reajuste de arriendo](https://calculadorachile.cl/calculadoras/calculadora-reajuste-arriendo): reajuste del arriendo por variación de la UF o del IPC.
+- [Costo de notaría en compraventa](https://calculadorachile.cl/calculadoras/calculadora-costo-notaria): notaría, derechos del Conservador e impuestos al comprar un inmueble.
+- [Subsidio habitacional](https://calculadorachile.cl/calculadoras/calculadora-subsidio-habitacional): monto referencial en UF de DS49, DS01 y DS19 según tramo RSH y ahorro.
+- [Subsidio de arriendo](https://calculadorachile.cl/calculadoras/calculadora-subsidio-arriendo): aporte mensual del llamado regular o del especial para personas mayores y con discapacidad.
+
+### Vehículos
+
+- [Permiso de circulación](https://calculadorachile.cl/calculadoras/calculadora-permiso-circulacion): estimación según tasación fiscal y escala SII.
+- [Crédito automotriz](https://calculadorachile.cl/calculadoras/calculadora-credito-automotriz): cuota, pie, intereses y costo total de un crédito para auto.
+- [Multas de tránsito](https://calculadorachile.cl/calculadoras/calculadora-multas-transito): rangos legales en UTM y pesos, con reincidencia en infracciones graves o gravísimas.
+
+### Familia
+
+- [Pensión alimenticia](https://calculadorachile.cl/calculadoras/calculadora-pension-alimenticia): piso legal para menores y límite general de ingresos.
+- [Asignación familiar](https://calculadorachile.cl/calculadoras/calculadora-asignacion-familiar): tramos y monto por carga acreditada.
+- [Subsidio Familiar (SUF)](https://calculadorachile.cl/calculadoras/calculadora-subsidio-familiar-suf): monto por carga acreditada y por persona con discapacidad.
+- [Bono $30.000 por hijo](https://calculadorachile.cl/calculadoras/calculadora-bono-30-mil-por-hijo): bono único por cada niño o niña (Ley 21.840).
+- [Bono Bodas de Oro](https://calculadorachile.cl/calculadoras/calculadora-bono-bodas-oro): requisitos y monto por cónyuge (Ley 20.506).
+
+### Educación
+
+- [Crédito CAE](https://calculadorachile.cl/calculadoras/calculadora-credito-cae): cuota mensual con tasa 2% anual.
+- [Becas y gratuidad](https://calculadorachile.cl/calculadoras/calculadora-becas-gratuidad): beneficios de arancel a los que podrías optar en la admisión.
+- [Puntaje ponderado PAES](https://calculadorachile.cl/calculadoras/calculadora-puntaje-ponderado-paes): ponderado con PAES, NEM y ranking según las ponderaciones de tu carrera.
+- [Puntaje NEM y ranking](https://calculadorachile.cl/calculadoras/calculadora-puntaje-nem-ranking): conversión del promedio de enseñanza media a puntaje con la tabla del DEMRE.
+- [Promedio de notas](https://calculadorachile.cl/calculadoras/calculadora-promedio-notas): promedio simple o ponderado de 1,0 a 7,0 y nota necesaria para aprobar.
+- [Escala de notas](https://calculadorachile.cl/calculadoras/calculadora-escala-notas): puntaje a nota de 1,0 a 7,0 con la exigencia que elijas.
+
+### Hogar
+
+- [Cuenta de la luz](https://calculadorachile.cl/calculadoras/calculadora-cuenta-luz): estimación de la boleta BT1 según consumo en kWh, con cargo fijo e IVA.
+- [Subsidio eléctrico](https://calculadorachile.cl/calculadoras/calculadora-subsidio-electrico): descuento según integrantes del hogar en la convocatoria vigente.
+
+### Servicios y trámites
+
+- [Días hábiles](https://calculadorachile.cl/calculadoras/calculadora-dias-habiles): días hábiles entre dos fechas o vencimiento de un plazo, descontando feriados.
+- [Crédito de consumo](https://calculadorachile.cl/calculadoras/calculadora-credito-consumo): cuota, intereses y costo total, comparando la tasa con la TMC de la CMF.
 
 ## Guías
 
 - [Sueldo líquido en Chile](https://calculadorachile.cl/guias/sueldo-liquido-chile): cómo se calculan los descuentos legales.
 - [Finiquito laboral](https://calculadorachile.cl/guias/finiquito-laboral-chile): indemnizaciones, plazos y ejemplos.
+- [Vacaciones progresivas y feriado legal](https://calculadorachile.cl/guias/vacaciones-feriado-legal-chile): feriado de 15 días hábiles y días progresivos (art. 68).
+- [Licencia médica](https://calculadorachile.cl/guias/licencia-medica-chile): quién paga, desde qué día y cómo se cobra.
+- [Feriados 2027 en Chile](https://calculadorachile.cl/guias/feriados-chile-2027): calendario, irrenunciables y fines de semana largos.
 - [IVA y boleta de honorarios](https://calculadorachile.cl/guias/iva-boleta-honorarios-chile): guía SII.
+- [Empresas y pymes](https://calculadorachile.cl/guias/empresas-pymes-chile): costo empleador, regímenes tributarios, PPM y patente comercial.
+- [AFP, pensiones y reforma previsional](https://calculadorachile.cl/guias/afp-pension-chile): cotizaciones, PGU, Ley 21.735 y comisiones.
 - [UF, UTM e indicadores](https://calculadorachile.cl/guias/uf-utm-indicadores-chile): qué son y cómo convertir.
+- [Crédito hipotecario](https://calculadorachile.cl/guias/credito-hipotecario-chile): UF, tasa y CAE, evaluación bancaria, seguros y gastos.
+- [Comprar vivienda](https://calculadorachile.cl/guias/comprar-vivienda-chile): promesa, estudio de títulos, subsidios y escritura.
+- [Vehículos](https://calculadorachile.cl/guias/vehiculos-chile-permiso-multas): permiso de circulación, SOAP, multas y TAG.
+- [Pensión de alimentos y beneficios familiares](https://calculadorachile.cl/guias/familia-pension-alimenticia-chile): mediación, cobranza, Registro de Deudores y asignación familiar.
+- [Crédito CAE](https://calculadorachile.cl/guias/credito-cae-educacion-chile): financiamiento, pago, rebaja al 10% de la renta y suspensión por cesantía.
+- [Hogar y servicios básicos](https://calculadorachile.cl/guias/hogar-servicios-basicos-chile): luz, agua, gas, gastos comunes y reajuste de arriendo.
 
 ## Metodología y datos
 
