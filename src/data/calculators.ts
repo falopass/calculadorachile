@@ -991,6 +991,91 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'valor-hora-trabajo',
+    name: 'Valor Hora de Trabajo',
+    description:
+      'Calcula el valor de tu hora ordinaria, del día y de la hora extra a partir del sueldo mensual, con la fórmula de la Dirección del Trabajo.',
+    slug: 'calculadora-valor-hora-trabajo',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-16',
+    seoTitle: 'Valor hora de trabajo: calcula cuánto vale tu hora en Chile',
+    seoDescription:
+      'Calcula el valor de tu hora ordinaria, tu día y tu hora extra desde el sueldo mensual con la fórmula DT: sueldo ÷ 30 × 28 ÷ (jornada × 4).',
+    sources: [
+      {
+        name: 'DT — cálculo de horas extraordinarias con sueldo mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        note: 'Sueldo ÷ 30 × 28 ÷ 168 (42 h); ejemplo $800.000 → $4.444,4 por hora',
+      },
+      {
+        name: 'BCN — Código del Trabajo (art. 22 y 32)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Jornada ordinaria y recargo mínimo de 50% en horas extra',
+      },
+    ],
+    keywords: [
+      'valor hora trabajo',
+      'cuánto vale mi hora de trabajo',
+      'calcular valor hora sueldo',
+      'valor día trabajado',
+      'sueldo dividido 180',
+      'valor hora jornada 42 horas',
+    ],
+    inputs: [
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo bruto mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$800.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'jornadaSemanal',
+        label: 'Jornada semanal (horas)',
+        type: 'select',
+        required: false,
+        options: [
+          { value: '42', label: '42 h — vigente desde 26-04-2026 (default)' },
+          { value: '44', label: '44 h — vigente abr-2024 a abr-2026' },
+          { value: '45', label: '45 h — histórica (antes 2024)' },
+          { value: '40', label: '40 h — desde abr-2028 / pactada' },
+        ],
+        defaultValue: '42',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo calculo el valor de mi hora de trabajo?',
+        answer:
+          'Con sueldo mensual, la DT usa: sueldo ÷ 30 × 28 ÷ (jornada semanal × 4). Con jornada de 42 horas equivale a sueldo ÷ 180. Ejemplo DT: $800.000 ÷ 30 × 28 ÷ 168 = $4.444 por hora.',
+      },
+      {
+        question: '¿Cuánto vale un día de trabajo?',
+        answer:
+          'El valor día con sueldo mensual es el sueldo dividido por 30. Con $800.000, el día vale $26.667.',
+      },
+      {
+        question: '¿Cuánto vale la hora extra?',
+        answer:
+          'La hora extra se paga con un recargo mínimo de 50% sobre la hora ordinaria (art. 32 del Código del Trabajo). Con $800.000 y 42 horas: $4.444 × 1,5 = $6.667. Para calcular un mes completo de horas extra usa la calculadora de horas extra.',
+      },
+      {
+        question: '¿Por qué se multiplica por 28 y no por 30?',
+        answer:
+          'Porque la fórmula lleva el sueldo diario a cuatro semanas (28 días) y lo divide por las horas ordinarias de esas cuatro semanas (jornada semanal × 4). Así se obtiene el valor de una hora de la jornada pactada.',
+      },
+      {
+        question: '¿Qué cambia con la reducción a 40 horas?',
+        answer:
+          'Al bajar la jornada sin rebajar el sueldo, la hora vale más. Con $800.000: 44 h dan $4.242 por hora, 42 h $4.444 y 40 h $4.667.',
+      },
+    ],
+  },
+  {
     id: 'vacaciones-proporcionales',
     name: 'Vacaciones Proporcionales',
     description:

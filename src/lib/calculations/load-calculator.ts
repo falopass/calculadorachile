@@ -280,6 +280,17 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'valor-hora-trabajo': {
+      const { calculateValorHoraTrabajo, valorHoraTrabajoToResults } = await import('./valor-hora-trabajo');
+      return (inputs) =>
+        valorHoraTrabajoToResults(
+          calculateValorHoraTrabajo({
+            sueldoBruto: coerceNumber(inputs.sueldoBruto),
+            jornadaSemanal: coerceNumber(inputs.jornadaSemanal, 42),
+          }),
+        );
+    }
+
     case 'vacaciones-proporcionales': {
       const { calculateVacaciones, vacacionesToResults } = await import('./vacaciones');
       return (inputs) => {

@@ -194,6 +194,31 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Pago por el festivo trabajado: $60.000 brutos (o un día de descanso compensatorio si así corresponde).',
     },
   },
+  'valor-hora-trabajo': {
+    summary:
+      'Convierte el sueldo mensual en valor día, valor hora ordinaria y hora extra referencial con la fórmula publicada por la Dirección del Trabajo.',
+    calculationSteps: [
+      'Valor día = sueldo mensual ÷ 30.',
+      'Valor hora = sueldo ÷ 30 × 28 ÷ (jornada semanal × 4).',
+      'Hora extra referencial = valor hora × 1,5 (recargo mínimo art. 32).',
+      'Redondea cada resultado al peso.',
+    ],
+    assumptions: ['Sueldo mensual fijo bruto.', 'Jornada ordinaria semanal informada (42 h por defecto).'],
+    limitations: [
+      'No considera remuneraciones variables ni pactos de recargo mayores al 50%.',
+      'Para trabajadores con sueldo semanal, diario o por hora la DT usa otras fórmulas.',
+    ],
+    workedExample: {
+      title: 'Ejemplo DT: sueldo de $800.000 con jornada de 42 horas',
+      inputs: ['Sueldo bruto: $800.000', 'Jornada: 42 horas semanales'],
+      development: [
+        'Valor día: $800.000 ÷ 30 = $26.667',
+        'Valor hora: $800.000 ÷ 30 × 28 ÷ 168 = $4.444',
+        'Hora extra: $4.444,4 × 1,5 = $6.667',
+      ],
+      result: 'Hora ordinaria $4.444, día $26.667 y hora extra $6.667.',
+    },
+  },
   'vacaciones-proporcionales': {
     summary:
       'Estima días y remuneración de feriado proporcional según tiempo trabajado, días pendientes y remuneración declarada.',
