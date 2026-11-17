@@ -55,3 +55,26 @@ Competidores revisados: calc.cl, tecalculo.cl, calculadoraenlinea.cl, comocalcul
 > Descartado tras revisar el código: una página nueva de "valores de hoy". La home (`OfficialValuesBlock`), `/prensa` y las calculadoras de UF/UTM/dólar (título con el valor en vivo) ya responden esa consulta; una cuarta URL competiría con ellas.
 
 Lo que no entra en este pase queda en [`backlog-ideas.md`](./backlog-ideas.md); el calendario en [`calendario-contenido-12m.md`](./calendario-contenido-12m.md).
+
+## Decisiones que necesitan revisión (17-11-2026)
+
+### Datos sin fuente clara o con interpretación
+| Tema | Qué se hizo | Qué falta decidir |
+|------|-------------|-------------------|
+| Sueldo mínimo 2027 | No se cargó ningún monto. El blog #42 muestra el IPC parcial del INE (abril 112,18; octubre 114,13) y una tabla rotulada como ejercicio hipotético | Si prefieres quitar la tabla de escenarios hasta el decreto de Hacienda (plazo 15-01-2027) |
+| SIS | El código usa 1,62 %; Previred informa 1,78 % para agosto–octubre de 2026. No se cambió | Cuál rige y desde qué remuneración |
+| Compras internacionales: umbral US$500 | Se compara contra el valor de los productos; la base del impuesto sí incluye envío y seguro. Aduanas solo dice "compra hasta US$500" | Confirmar si el umbral considera el envío |
+| Compras internacionales: arancel en compras de hasta US$500 a plataformas no inscritas | Se modeló solo IVA, como indica Aduanas para ese tramo | Confirmar con Aduanas |
+| Compras internacionales: tipo de cambio | Dólar observado como referencia; Aduanas usa el tipo de cambio de la fecha de aceptación de la declaración | Aceptar la referencia o pedir el dólar al usuario |
+| Compras internacionales: TLC | Opción manual de 0 % de arancel; no verifica origen ni rebajas parciales | Mantenerla u ocultarla |
+| Real y sol | Valores iniciales del 17-11-2026 marcados como referencia hasta que corra el cron con credenciales reales del Banco Central | Ejecutar el cron y revisar que se actualicen |
+| Herencia: UTM | Usa la UTM actual si no se ingresa la del mes del fallecimiento; la ley fija la de esa fecha | Hacer obligatorio el campo o dejar el aviso |
+| Herencia: donaciones previas | No se acumulan | Agregar o dejar como límite declarado |
+| Prenatal/postnatal: subsidio en pesos | No se calcula; solo fechas | Ver backlog |
+| Capacidad hipotecaria | 25 % dividendo/renta (recomendación citada por CMF Educa, no norma), 80 % de financiamiento y tasa de 4,5 % son supuestos editables | Valores por defecto |
+| Blog de viaje en auto | Ejemplo con litro a $1.500, 12 km/l, peajes y TAG rotulados como supuestos | Aceptar o ajustar |
+| Blog de compras | Ejemplo con dólar a $950 rotulado como supuesto | Aceptar o ajustar |
+| Operación Renta 2027 | El SII no ha publicado fechas del Formulario 22 ni de devoluciones; la guía lo dice | Completar cuando se publiquen |
+
+### Monetización
+No se tocaron el script de AdSense, los componentes de anuncios, su ubicación, `robots`, los sitemaps ni las redirecciones. Las páginas nuevas usan las plantillas existentes. El enlace compartible agrega parámetros a la URL, pero el canonical sigue siendo la URL limpia.
