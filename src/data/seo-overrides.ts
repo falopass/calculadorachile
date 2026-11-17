@@ -78,6 +78,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Ingresa tu sueldo bruto y ve tu líquido 2026 al instante: descuento de AFP, 7% de salud, seguro de cesantía e impuesto único con tramos del SII.', // 144
   },
 
+  'calculadora-impuesto-herencia': {
+    seoTitle: 'Impuesto a la herencia: calcula cuánto pagas',
+    seoDescription:
+      'Calcula el impuesto a la herencia por heredero: escala de 1 % a 25 %, exención de 50 UTA para hijos y cónyuge, recargos para hermanos y otros (Ley 16.271).',
+  },
   'calculadora-impuesto-segunda-categoria': {
     seoTitle: 'Impuesto 2ª Categoría 2026: calcula tu IUSC en pesos', // 52
     seoDescription:

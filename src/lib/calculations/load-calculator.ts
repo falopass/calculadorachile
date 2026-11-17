@@ -566,6 +566,20 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'impuesto-herencia': {
+      const { calculateImpuestoHerencia, impuestoHerenciaToResults } = await import('./impuesto-herencia');
+      return (inputs) =>
+        impuestoHerenciaToResults(
+          calculateImpuestoHerencia({
+            asignacionLiquida: coerceNumber(inputs.asignacionLiquida),
+            parentesco: inputs.parentesco as import('./impuesto-herencia').ParentescoHerencia,
+            discapacidad: coerceBool(inputs.discapacidad),
+            valorUTM: coerceNumber(inputs.valorUTM, 0) || live?.valorUTM,
+            valorUF: live?.valorUF,
+          }),
+        );
+    }
+
     case 'impuesto-segunda-categoria': {
       const { calculateImpuestoSegundaCategoria, impuestoSegundaCategoriaToResults } =
         await import('./impuesto-segunda-categoria');

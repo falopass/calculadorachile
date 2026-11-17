@@ -481,6 +481,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       };
     }
 
+    case 'impuesto-herencia':
+      return withLinks([
+        'Cada heredero paga impuesto sobre su propia asignación líquida, con una escala progresiva de 1 % a 25 % en UTA (',
+        { text: 'Ley 16.271, art. 2', href: 'https://www.bcn.cl/leychile/navegar?idNorma=172986' },
+        '). Cónyuge, conviviente civil, hijos, nietos, padres y abuelos tienen exentas las primeras 50 UTA; hermanos, tíos, sobrinos y primos, 5 UTA con un recargo de 20 %; otras personas no tienen exención y pagan 40 % de recargo.',
+      ]);
+
     case 'impuesto-segunda-categoria': {
       const sueldos = [800_000, 1_500_000, 2_500_000];
       const rows = sueldos.map((sueldoBrutoMensual) => {

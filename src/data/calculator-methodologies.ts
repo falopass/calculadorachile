@@ -733,6 +733,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Estimación simple: $33.900 antes de otros cargos de la boleta.',
     },
   },
+  'impuesto-herencia': {
+    summary:
+      'Calcula el impuesto que paga cada heredero según el art. 2 de la Ley 16.271: escala progresiva en UTA sobre la asignación líquida, exención y recargo por parentesco y rebaja por discapacidad.',
+    calculationSteps: [
+      'UTA = UTM del mes del fallecimiento × 12; asignación en UTA = asignación líquida ÷ UTA.',
+      'Monto afecto = asignación − exención (50 UTA línea directa y cónyuge o conviviente civil; 5 UTA colaterales de 2º a 4º grado; 0 en otros casos).',
+      'Escala marginal sobre el afecto: 1 %, 2,5 %, 5 %, 7,5 %, 10 %, 15 %, 20 % y 25 % con cortes en 80, 160, 320, 480, 640, 800 y 1.200 UTA.',
+      'Recargo: +20 % colaterales de 2º a 4º grado; +40 % parientes más lejanos o sin parentesco.',
+      'Rebaja de 30 % si el heredero está en el Registro Nacional de Discapacidad, con tope de 8.000 UF. Impuesto en UTM redondeado a 2 decimales y convertido a pesos.',
+    ],
+    assumptions: [
+      'La asignación líquida ya descuenta deudas, gastos y bajas generales de la herencia.',
+      'Si no ingresas la UTM del fallecimiento se usa la del mes actual.',
+    ],
+    limitations: [
+      'No calcula el inventario ni la partición de bienes entre herederos.',
+      'No suma lo que el heredero recibió en vida del causante, que la ley acumula a la herencia (art. 23), ni otras exenciones de la ley.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: hijo que recibe 300 UTA',
+      inputs: ['Asignación líquida: 300 UTA', 'Parentesco: hijo', 'Sin discapacidad'],
+      development: [
+        'Afecto: 300 − 50 = 250 UTA',
+        'Escala: 80 × 1 % + 80 × 2,5 % + 90 × 5 % = 7,3 UTA',
+        '7,3 UTA × 12 = 87,6 UTM, sin recargo',
+      ],
+      result: 'Impuesto: 87,6 UTM, que se pagan con la UTM del mes de pago.',
+    },
+  },
   'impuesto-segunda-categoria': {
     summary:
       'Descuenta las cotizaciones obligatorias del sueldo imponible y aplica la tabla mensual del Impuesto Único a esa renta líquida imponible.',

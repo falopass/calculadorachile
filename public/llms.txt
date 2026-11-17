@@ -37,6 +37,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [IVA](https://calculadorachile.cl/calculadoras/calculadora-iva): agregar o quitar el 19% entre neto y bruto.
 - [Boleta de honorarios](https://calculadorachile.cl/calculadoras/calculadora-boleta-honorarios): retención según el calendario de la Ley 21.133, de bruto a líquido y de líquido a bruto.
 - [Impuesto de segunda categoría](https://calculadorachile.cl/calculadoras/calculadora-impuesto-segunda-categoria): impuesto único mensual sobre el sueldo con los tramos del SII en UTM.
+- [Impuesto a la herencia](https://calculadorachile.cl/calculadoras/calculadora-impuesto-herencia): impuesto por heredero según la Ley 16.271, con exención y recargo por parentesco.
 - [Operación Renta](https://calculadorachile.cl/calculadoras/calculadora-operacion-renta): simulación de impuesto global complementario y devolución para independientes.
 - [Plusvalía por venta de propiedad](https://calculadorachile.cl/calculadoras/calculadora-plusvalia): impuesto a la ganancia de capital al vender un inmueble.
 - [PPM](https://calculadorachile.cl/calculadoras/calculadora-ppm): pagos provisionales mensuales según actividad e ingresos brutos.

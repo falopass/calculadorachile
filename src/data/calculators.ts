@@ -4085,6 +4085,110 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   // FASE 3 — 10 Calculadoras Crecimiento
   // ============================================
   {
+    id: 'impuesto-herencia',
+    name: 'Calculadora Impuesto a la Herencia',
+    description:
+      'Calcula el impuesto a la herencia que paga cada heredero sobre su asignación líquida: escala progresiva de 1 % a 25 %, exención según parentesco, recargos y rebaja por discapacidad (Ley 16.271).',
+    slug: 'calculadora-impuesto-herencia',
+    category: 'impuestos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCN — Ley 16.271 sobre impuesto a las herencias, art. 2',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986',
+        note: 'Texto refundido DFL 1 de 2000 (Justicia): escala en UTA, exenciones de 50 y 5 UTA, recargos de 20 % y 40 %, rebaja de 30 % por discapacidad con tope de 8.000 UF',
+      },
+      {
+        name: 'SII — ¿Cómo se calcula el impuesto a la herencia?',
+        url: 'https://www.sii.cl/preguntas_frecuentes/herencias/001_160_6164.htm',
+        note: 'Tabla equivalente en UTM con deducción fija por tramo',
+      },
+      {
+        name: 'SII — tramos del impuesto a la herencia',
+        url: 'https://www.sii.cl/preguntas_frecuentes/herencias/001_160_0332.htm',
+      },
+    ],
+    keywords: [
+      'impuesto a la herencia',
+      'calcular impuesto herencia',
+      'impuesto herencia chile',
+      'cuánto se paga de herencia',
+      'exención herencia hijos',
+      'impuesto herencia hermanos',
+      'ley 16.271',
+    ],
+    inputs: [
+      {
+        id: 'asignacionLiquida',
+        label: 'Tu asignación líquida (lo que recibes tú)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$100.000.000',
+        required: true,
+        min: 0,
+        tooltip: 'Tu parte de la herencia después de descontar deudas, gastos y bajas generales. El impuesto se calcula por cada heredero, no sobre el total.',
+      },
+      {
+        id: 'parentesco',
+        label: 'Tu parentesco con quien falleció',
+        type: 'select',
+        required: true,
+        defaultValue: 'directo',
+        options: [
+          { value: 'directo', label: 'Cónyuge, conviviente civil, hijo, nieto, padre o abuelo' },
+          { value: 'colateral', label: 'Hermano, tío, sobrino o primo (2º a 4º grado)' },
+          { value: 'otro', label: 'Otro pariente o sin parentesco' },
+        ],
+      },
+      {
+        id: 'discapacidad',
+        label: '¿Estás inscrito en el Registro Nacional de Discapacidad?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+      {
+        id: 'valorUTM',
+        label: 'UTM del mes del fallecimiento (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: 'Vacío = UTM del mes actual',
+        required: false,
+        min: 0,
+        tooltip: 'La ley usa la unidad tributaria vigente a la fecha del fallecimiento. Si lo dejas vacío, se usa la UTM del mes actual.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo se calcula el impuesto a la herencia?',
+        answer:
+          'Sobre la asignación líquida de cada heredero, con una escala progresiva en UTA: 1 % hasta 80 UTA, 2,5 % hasta 160, 5 % hasta 320, 7,5 % hasta 480, 10 % hasta 640, 15 % hasta 800, 20 % hasta 1.200 y 25 % sobre esa cifra. Cada tasa se aplica solo a la parte que cae en su tramo.',
+      },
+      {
+        question: '¿Cuánto está exento para los hijos?',
+        answer:
+          'El cónyuge, el conviviente civil, los hijos y sus descendientes, y los padres y abuelos tienen exentas las primeras 50 UTA de su asignación. Los hermanos, tíos, sobrinos y primos tienen exentas 5 UTA.',
+      },
+      {
+        question: '¿Qué recargo pagan hermanos o personas sin parentesco?',
+        answer:
+          'El impuesto sube 20 % para parientes colaterales de segundo a cuarto grado (hermanos, tíos, sobrinos, primos) y 40 % para parientes más lejanos o personas sin parentesco, que además no tienen exención.',
+      },
+      {
+        question: '¿Qué UTM se usa?',
+        answer:
+          'La vigente a la fecha del fallecimiento determina el impuesto en UTM. Al pagar, ese monto se convierte con la UTM del mes de pago.',
+      },
+      {
+        question: '¿Cuál es el plazo para pagar?',
+        answer:
+          'Dentro de dos años desde el fallecimiento, declarando y pagando al mismo tiempo (Ley 16.271, art. 50). Cada heredero declara y paga el impuesto de su propia asignación, aunque cualquiera de ellos puede pagar el de todos.',
+      },
+    ],
+  },
+  {
     id: 'impuesto-segunda-categoria',
     name: 'Impuesto Segunda Categoría 2026',
     description:
