@@ -431,6 +431,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'En 2026 la retención de honorarios es 15,25%; sube a 16% en 2027 y 17% en 2028 (Ley 21.133). Cuánto cambia tu líquido y cuánto bruto emitir.', // 140
   },
+  'aguinaldo-navidad-2026-sector-publico': {
+    seoTitle: 'Aguinaldo Navidad 2026 sector público: monto y requisitos', // 57
+    seoDescription:
+      'Ley 21.724 vigente: $71.206 con líquida de noviembre hasta $1.060.493 y $37.666 sobre ese monto. Tope $3.511.800 y qué cambia con el reajuste 2026.', // 147
+  },
   'aguinaldo-navidad-pensionados-2026': {
     seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:

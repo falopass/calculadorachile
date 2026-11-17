@@ -97,6 +97,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 | — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
+| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-2026-sector-publico` | 2026-11-16 | laboral | aguinaldo |
 | 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | 2026-11-16 | impuestos | boleta-honorarios, cotizacion-independientes |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
@@ -151,7 +152,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
 | 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
 | ~~34~~ | blog | ~~Feriado irrenunciable 25 dic 2026~~ | ~~`feriado-irrenunciable-25-diciembre-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-01~~ | dic | ✅ |
-| 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | Bloqueado: monto Navidad 2026 SP requiere nueva ley de reajuste (dic 2026) | laboral | 2026-12-04 | dic | **P2-ventana** |
+| ~~35~~ | blog | ~~Aguinaldo Navidad sector público 2026~~ | ~~`aguinaldo-navidad-2026-sector-publico`~~ | publicado 2026-11-16 | laboral | ~~2026-12-04~~ | dic | ✅ |
 | ~~36~~ | blog | ~~Gratificación fin de año 2026~~ | ~~`gratificacion-fin-de-ano-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-08~~ | dic–ene | ✅ |
 | 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
 | **39** | **guía** | **Prep Operación Renta 2027 (checklist)** | `preparacion-operacion-renta-2027-checklist` | DR[20] · **única guía del plan** | impuestos | 2027-01-06 | ene–abr | **P2-ventana** |
@@ -293,9 +294,9 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 | 31 | `seguro-cesantia-finiquito-2026-afc` | Inventario AFC |
 | 32 | `ppm-2026-calcular-independientes` | SII |
 | 33 | `plusvalia-venta-propiedad-2026-calcular` | Evergreen |
-| 34 | `feriado-irrenunciable-25-diciembre-2026-comercio` | Inventario |
-| 35 | `aguinaldo-navidad-sector-publico-2026` | Inventario / Ley 21.806 |
-| 36 | `gratificacion-fin-de-ano-2026-anticipos` | Inventario gratificación |
+| 34 | `feriado-irrenunciable-25-diciembre-2026` | Inventario |
+| 35 | `aguinaldo-navidad-2026-sector-publico` | Inventario / Ley 21.806 |
+| 36 | `gratificacion-fin-de-ano-2026` | Inventario gratificación |
 | 38 | `pension-alimenticia-2026-ejemplo-calculo` | Calc existe; sin DR |
 
 ### Prioridad 3 — ciclo 2027 / bajo volumen
@@ -368,13 +369,13 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                   14  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
-  Pendientes:                   34
-    blog:                       32
+  Publicados:                   15  (todos blog; +#4, #5, #8 y #9 el 2026-08-12; +#12, #34, #35 y #36 el 2026-11-16)
+  Pendientes:                   33
+    blog:                       31
     blog* (candidata guía):      2   (#47, #48)
     guía:                        1   (#39 Operación Renta)
     P1 restante:                 0
-    P2:                         28
+    P2:                         27
     P3:                          6
   Total publicados + pendientes: 48
 ```

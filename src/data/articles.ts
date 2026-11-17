@@ -208,6 +208,106 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 
 const articleCatalog: ArticleDraft[] = [
   {
+    slug: 'aguinaldo-navidad-2026-sector-publico',
+    title: 'Aguinaldo de Navidad 2026 sector público: monto vigente, quiénes lo reciben y cuándo se paga',
+    description:
+      'La Ley 21.724 concede un aguinaldo de Navidad permanente al sector público: $71.206 si la remuneración líquida de noviembre es de hasta $1.060.493 y $37.666 si la supera. Requisitos, tope de $3.511.800 y qué puede cambiar con la ley de reajuste 2026.',
+    date: '2026-11-16',
+    category: 'laboral',
+    readingTime: 8,
+    relatedGuia: 'sueldo-liquido-chile',
+    keywords: [
+      'aguinaldo navidad 2026 sector público',
+      'aguinaldo navidad funcionarios públicos 2026',
+      'monto aguinaldo navidad 2026',
+      'ley 21.724 aguinaldo',
+      'aguinaldo navidad $71.206',
+      'cuándo pagan aguinaldo navidad 2026',
+    ],
+    relatedCalculators: ['calculadora-aguinaldo', 'calculadora-sueldo-liquido'],
+    content: `<p class="article-lead">Los funcionarios públicos de planta y a contrata tienen derecho a un <strong>aguinaldo de Navidad</strong> que se paga en diciembre. Según el texto vigente de la <strong>Ley 21.724</strong>, el monto es de <strong>$71.206</strong> para quienes tuvieron una remuneración líquida de noviembre igual o inferior a <strong>$1.060.493</strong>, y de <strong>$37.666</strong> para quienes la superaron. No es imponible ni tributable, y no lo recibe quien tenga remuneraciones brutas permanentes sobre <strong>$3.511.800</strong>.</p>
+<p>Hay una advertencia importante: esos montos son los que fija hoy la ley, pero cada año la ley de reajuste del sector público los ha actualizado. Al 16 de noviembre de 2026, la ley de reajuste de este año no está publicada en Ley Chile. Si se publica y cambia los montos, este artículo se actualizará con la nueva fuente.</p>
+<p>Este texto trata del aguinaldo de los trabajadores activos del sector público. El de jubilados y pensionados del IPS es un beneficio distinto, con otros montos y otro procedimiento: lo explicamos en el artículo sobre el <a href="/blog/aguinaldo-navidad-pensionados-2026">aguinaldo de Navidad 2026 para pensionados</a>.</p>
+
+<h2>Por qué hay un monto vigente para 2026</h2>
+<p>Hasta 2024 el aguinaldo de Navidad del sector público se concedía año a año en cada ley de reajuste. La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1209939" target="_blank" rel="noopener">Ley 21.724</a> cambió eso: su artículo 2 concede el aguinaldo a quienes trabajen en las entidades señaladas "al 1 de diciembre de cada anualidad", y la <a href="https://www.bcn.cl/historiadelaley/historia-de-la-ley/vista-expandida/8359/" target="_blank" rel="noopener">historia de la ley</a> en la Biblioteca del Congreso Nacional consigna que el beneficio pasó a tener carácter permanente.</p>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Ley 21.806</a> (Diario Oficial del 5 de febrero de 2026) modificó ese artículo: cambió la referencia de 2024 a 2025 y reemplazó los montos anteriores por los actuales.</p>
+<table>
+<thead><tr><th>Concepto</th><th>Texto anterior</th><th>Texto vigente (Ley 21.806)</th></tr></thead>
+<tbody>
+<tr><td>Umbral de remuneración líquida de noviembre</td><td>$1.025.622</td><td>$1.060.493</td></tr>
+<tr><td>Monto si la líquida es igual o inferior al umbral</td><td>$68.865</td><td><strong>$71.206</strong></td></tr>
+<tr><td>Monto si la líquida supera el umbral</td><td>$36.427</td><td><strong>$37.666</strong></td></tr>
+</tbody>
+</table>
+<p>Como la norma se aplica "a partir del año 2025" y "en diciembre de cada año", el texto vigente al 16 de noviembre de 2026 da derecho al aguinaldo de Navidad 2026 con esos montos. Lo que no se puede afirmar todavía es que esos serán los montos definitivos: si la ley de reajuste 2026 vuelve a modificar el artículo, como hizo la Ley 21.806, regirán los nuevos valores.</p>
+
+<h2>Quiénes lo reciben</h2>
+<p>El artículo 2 de la Ley 21.724 alcanza a las trabajadoras y los trabajadores que al <strong>1 de diciembre</strong> desempeñen cargos de planta o a contrata en las entidades regidas por la escala única (decreto ley 249 de 1974) y por otros estatutos que enumera. Entre ellos:</p>
+<ul>
+<li>Entidades regidas por la escala única del decreto ley 249 de 1974 y por los decretos leyes 3.058 de 1979 y 3.551 de 1981.</li>
+<li>Personal regido por el DFL 1 (G) de 1997 del Ministerio de Defensa, el DFL 2 (I) de 1968 del Ministerio del Interior y el estatuto del personal de la Policía de Investigaciones.</li>
+<li>Personal de los Tribunales Tributarios y Aduaneros, del Servicio de Biodiversidad y Áreas Silvestres Protegidas y del Servicio Nacional Forestal.</li>
+<li>Trabajadores de Astilleros y Maestranzas de la Armada, Fábricas y Maestranzas del Ejército y ENAER.</li>
+<li>Asistentes y profesionales de la educación de los Servicios Locales de Educación Pública.</li>
+<li>Trabajadores de empresas y entidades del Estado que no negocian colectivamente y cuyas remuneraciones se fijan por ley o decreto.</li>
+</ul>
+<p>Los artículos 3, 5 y 6 extienden el aguinaldo, en los mismos términos, a:</p>
+<ul>
+<li>Trabajadores de las universidades estatales (Ley 21.094).</li>
+<li>Directores, educadoras de párvulos y asistentes de jardines infantiles financiados por JUNJI vía transferencia de fondos.</li>
+<li>Trabajadores de sectores de la Administración traspasados a las municipalidades.</li>
+<li>Trabajadores de colegios particulares subvencionados (DFL 2 de 1998) y de liceos técnico-profesionales administrados según el decreto ley 3.166.</li>
+<li>Trabajadores de instituciones colaboradoras del Servicio Nacional de Menores o su continuador y de las Corporaciones de Asistencia Judicial.</li>
+</ul>
+<p>La lista exacta y sus condiciones están en el texto de la ley. Si trabajas a honorarios en un servicio público no tienes cargo de planta ni a contrata, por lo que el artículo 2 no te incluye. Revisa tu convenio y consulta a tu unidad de personal.</p>
+
+<h2>Cuánto te corresponde: la regla de noviembre</h2>
+<p>El monto depende de tu <strong>remuneración líquida de noviembre</strong>. La ley la define como el total de las remuneraciones de carácter permanente de ese mes, excluidas las bonificaciones, asignaciones y bonos asociados al desempeño individual, colectivo o institucional, con la sola deducción de impuestos y cotizaciones previsionales obligatorias.</p>
+<ol class="steps">
+<li><strong>Toma tu liquidación de noviembre.</strong> Considera solo las remuneraciones permanentes.</li>
+<li><strong>Excluye los bonos por desempeño.</strong> No cuentan para el umbral.</li>
+<li><strong>Descuenta impuesto y cotizaciones obligatorias.</strong> No descuentes préstamos, cuotas sindicales u otros descuentos voluntarios.</li>
+<li><strong>Compara con $1.060.493.</strong> Igual o menos: $71.206. Más: $37.666.</li>
+</ol>
+<div class="numeric-example"><div class="numeric-example__title">Dos casos hipotéticos con el texto vigente</div><ul><li>Técnico con remuneración líquida permanente de noviembre de $980.000: recibe $71.206.</li><li>Profesional con remuneración líquida permanente de noviembre de $1.400.000: recibe $37.666.</li><li>Profesional con remuneraciones brutas permanentes de $3.600.000: no recibe aguinaldo, porque supera el tope de $3.511.800.</li></ul><span class="total">El aguinaldo no tiene descuentos</span></div>
+
+<h2>El tope de $3.511.800</h2>
+<p>El artículo 19 de la Ley 21.724, modificado por la Ley 21.806, establece que solo tienen derecho al aguinaldo de Navidad quienes tengan remuneraciones brutas de carácter permanente iguales o inferiores a <strong>$3.511.800</strong> en el mes que corresponda, excluidas las bonificaciones, asignaciones o bonos asociados al desempeño. Aquí la referencia es la remuneración bruta, no la líquida.</p>
+
+<h2>Cuándo y cómo se paga</h2>
+<p>La ley dispone que el aguinaldo de Navidad "se pagará en diciembre de cada año". No fija un día: cada servicio lo paga, normalmente, junto con la remuneración de diciembre. En los casos de los artículos 3, 5 y 6 (universidades, jardines VTF, traspasados, colegios subvencionados, colaboradores y CAJ), el pago lo hace el respectivo empleador, que recibe los fondos del ministerio correspondiente.</p>
+<p>Otros detalles del texto vigente:</p>
+<ul>
+<li><strong>No es imponible ni tributable</strong> y no está afecto a descuento alguno (artículo 10).</li>
+<li><strong>Con licencia médica</strong> también se recibe: el monto se determina según la última remuneración mensual percibida (artículo 11).</li>
+<li><strong>Cobro indebido:</strong> quien perciba maliciosamente el aguinaldo debe restituir quintuplicada la cantidad recibida en exceso (artículo 12).</li>
+</ul>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Qué puede cambiar en diciembre</strong><p>Cada año el Gobierno y las organizaciones del sector público negocian el reajuste de remuneraciones, que se aprueba por ley. Si la ley de reajuste 2026 modifica el artículo 2 de la Ley 21.724, los montos de este artículo dejarán de ser los vigentes. Antes de contar con una cifra, revisa tu liquidación de diciembre o la información de tu servicio.</p></div></aside>
+
+<h2>Diferencias con otros aguinaldos de diciembre</h2>
+<table>
+<thead><tr><th>Beneficio</th><th>Quién</th><th>Base legal</th></tr></thead>
+<tbody>
+<tr><td>Aguinaldo de Navidad sector público</td><td>Funcionarios de planta y contrata al 1 de diciembre, y los trabajadores de los artículos 3, 5 y 6</td><td>Ley 21.724, art. 2 (texto vigente por Ley 21.806)</td></tr>
+<tr><td>Aguinaldo de Navidad pensionados</td><td>Pensionados IPS, PGU y otros regímenes</td><td>Ley de reajuste respectiva; ver <a href="/blog/aguinaldo-navidad-pensionados-2026">artículo de pensionados</a></td></tr>
+<tr><td>Aguinaldo en el sector privado</td><td>Solo si está pactado</td><td>Contrato, convenio colectivo o práctica reiterada</td></tr>
+</tbody>
+</table>
+<p>En el sector privado no existe un aguinaldo de Navidad obligatorio por ley. Si tu contrato lo establece, puedes estimarlo con la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 con el texto vigente de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1209939" target="_blank" rel="noopener">Ley 21.724</a> (artículos 2, 3, 5, 6, 7, 10, 11, 12 y 19), la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Ley 21.806</a> y la <a href="https://www.bcn.cl/historiadelaley/historia-de-la-ley/vista-expandida/8359/" target="_blank" rel="noopener">historia de la Ley 21.724</a> de la Biblioteca del Congreso Nacional.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los montos corresponden al texto legal vigente al 16 de noviembre de 2026 y pueden cambiar con la ley de reajuste 2026. Tu unidad de personal es la que determina el pago.</p></div></aside>
+<p>Para profundizar en cómo se calcula una remuneración líquida, revisa la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Ley 21.724 (texto vigente)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1209939' },
+      { label: 'Ley Chile — Ley 21.806', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1221118' },
+      { label: 'BCN — Historia de la Ley 21.724', url: 'https://www.bcn.cl/historiadelaley/historia-de-la-ley/vista-expandida/8359/' },
+    ],
+  },
+  {
     slug: 'boleta-honorarios-retencion-15-25-2026',
     title: 'Retención de boleta de honorarios 2026: 15,25 % y calendario hasta el 17 % de 2028',
     description:
