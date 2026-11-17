@@ -45,9 +45,11 @@ Competidores revisados: calc.cl, tecalculo.cl, calculadoraenlinea.cl, comocalcul
 | P1 | Calculadora `impuesto-herencia` | Evergreen | Medio | B |
 | P1 | Calculadora `capacidad-credito-hipotecario` | Evergreen alto volumen | Medio | B |
 | P1 | Guía pillar #39 Operación Renta 2027 + blog viaje de verano en auto | Estacional ene–abr | Alto | C |
-| P1 | Página de valores de hoy (UF, UTM, dólar) para la visita diaria | Retención + GEO | Bajo | raíz |
+| P1 | Enlace compartible con el cálculo cargado (inputs en la URL; el canonical no cambia) | Compartir y recomendar | Bajo | raíz |
 | P1 | Reducir el payload de `/calculadoras` | Velocidad móvil | Bajo | raíz |
 | P2 | Auditoría de vigencia de constantes con vencimiento en 2027 | Confianza YMYL | Bajo | C |
 | P2 | `llms.txt`, quick-answers y enlazado interno de lo nuevo | GEO | Bajo | raíz |
+
+> Descartado tras revisar el código: una página nueva de "valores de hoy". La home (`OfficialValuesBlock`), `/prensa` y las calculadoras de UF/UTM/dólar (título con el valor en vivo) ya responden esa consulta; una cuarta URL competiría con ellas.
 
 Lo que no entra en este pase queda en [`backlog-ideas.md`](./backlog-ideas.md); el calendario en [`calendario-contenido-12m.md`](./calendario-contenido-12m.md).

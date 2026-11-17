@@ -13,6 +13,7 @@ import PremiumLoadingIndicator from './PremiumLoadingIndicator';
 import EmptyState from './EmptyState';
 import HistoryPanel from './HistoryPanel';
 import { useCalculationHistory } from '@/hooks/useCalculationHistory';
+import { buildShareQuery, parseShareQuery } from '@/lib/share-state';
 import {
   Calculator as CalculatorIcon,
   RotateCcw,
@@ -461,6 +462,18 @@ export default function PremiumCalculatorShell({
     clearHistory,
   } = useCalculationHistory(calculator.id);
 
+  // Enlace compartido: precarga los inputs que vienen en la URL.
+  useEffect(() => {
+    const shared = parseShareQuery(window.location.search, calculator.inputs);
+    if (Object.keys(shared).length > 0) setInputValues((prev) => ({ ...prev, ...shared }));
+  }, [calculator.inputs]);
+
+  const shareQuery = useMemo(
+    () =>
+      buildShareQuery(calculator.inputs, debouncedValues, buildInitialValues(calculator.inputs)),
+    [calculator.inputs, debouncedValues],
+  );
+
   // Debounce: no recalcular en cada tecla (mobile teclado + CPU).
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -720,6 +733,7 @@ export default function PremiumCalculatorShell({
             results={results || []}
             title="Resultados"
             calculatorId={calculator.id}
+            shareQuery={shareQuery}
             showChart={!SIN_GRAFICO.has(calculator.id)}
           />
           <DisclaimerYMYL organismo={organismo} className="mt-4" />
