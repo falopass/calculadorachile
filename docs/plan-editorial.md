@@ -97,6 +97,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 | — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
+| 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
@@ -147,7 +148,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~31~~ | blog\* | ~~Seguro de cesantía + finiquito (AFC)~~ | ~~`seguro-cesantia-finiquito-2026-afc`~~ | publicado 2026-07-10 + satélite cobro | laboral | ~~2026-11-13~~ | continuo | ✅ |
 | 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
 | 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
-| 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026-comercio` | — | laboral | 2026-12-01 | dic | **P2-ventana** |
+| ~~34~~ | blog | ~~Feriado irrenunciable 25 dic 2026~~ | ~~`feriado-irrenunciable-25-diciembre-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-01~~ | dic | ✅ |
 | 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-sector-publico-2026` | Bloqueado: monto Navidad 2026 SP requiere nueva ley de reajuste (dic 2026) | laboral | 2026-12-04 | dic | **P2-ventana** |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026-anticipos` | — | laboral | 2026-12-08 | dic–ene | **P2-ventana** |
 | 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
@@ -365,13 +366,13 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                   11  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
-  Pendientes:                   37
-    blog:                       35
+  Publicados:                   12  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
+  Pendientes:                   36
+    blog:                       34
     blog* (candidata guía):      2   (#47, #48)
     guía:                        1   (#39 Operación Renta)
     P1 restante:                 0
-    P2:                         31
+    P2:                         30
     P3:                          6
   Total publicados + pendientes: 48
 ```

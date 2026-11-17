@@ -416,6 +416,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'La cuarta cuota de contribuciones 2026 vence el lunes 30 de noviembre. Exención $61.711.570, tasas 0,893% y 1,042%, ejemplos y canales TGR.', // 140
   },
+  'feriado-irrenunciable-25-diciembre-2026': {
+    seoTitle: 'Feriado irrenunciable 25 de diciembre 2026: quién trabaja', // 57
+    seoDescription:
+      'El viernes 25 de diciembre de 2026 el comercio cierra (Ley 19.973). Excepciones, multas, salida a las 20:00 el 24 y descanso compensatorio.', // 139
+  },
   'aguinaldo-navidad-pensionados-2026': {
     seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:
