@@ -684,6 +684,34 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'El pago estimado equivale a 1,125 UTM del mes aplicable.',
     },
   },
+  'costo-viaje': {
+    summary:
+      'Estima el gasto de un viaje en auto con datos que declara el usuario: litros según rendimiento, costo de combustible, peajes y reparto entre pasajeros.',
+    calculationSteps: [
+      'Distancia total = km del trayecto × 2 si es ida y vuelta.',
+      'Litros = distancia total ÷ rendimiento (km/l).',
+      'Costo combustible = litros × precio por litro ingresado.',
+      'Costo total = combustible + peajes/TAG (× 2 si es ida y vuelta); se divide por pasajeros y por km.',
+    ],
+    assumptions: [
+      'Rendimiento constante durante todo el trayecto.',
+      'Precio por litro y peajes informados por el usuario; no se usa ningún precio oficial fijo.',
+    ],
+    limitations: [
+      'No incluye desgaste, mantención, estacionamiento ni seguros.',
+      'El consumo real varía con carga, velocidad, pendiente y aire acondicionado.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: viaje de 450 km con tres pasajeros',
+      inputs: ['Distancia: 450 km, solo ida', 'Rendimiento: 12,5 km/l', 'Precio: $1.300 por litro, peajes $12.000'],
+      development: [
+        'Litros: 450 ÷ 12,5 = 36',
+        'Combustible: 36 × $1.300 = $46.800',
+        'Total: $46.800 + $12.000 = $58.800; por pasajero $19.600',
+      ],
+      result: 'Costo estimado del viaje: $58.800 ($131 por km).',
+    },
+  },
   'cuenta-luz': {
     summary: 'Estima una cuenta desde consumo eléctrico y cargos unitarios ingresados.',
     calculationSteps: [

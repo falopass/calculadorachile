@@ -522,6 +522,21 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'costo-viaje': {
+      const { calculateCostoViaje, costoViajeToResults } = await import('./costo-viaje');
+      return (inputs) =>
+        costoViajeToResults(
+          calculateCostoViaje({
+            distanciaKm: coerceNumber(inputs.distanciaKm),
+            rendimientoKmL: coerceNumber(inputs.rendimientoKmL),
+            precioCombustible: coerceNumber(inputs.precioCombustible),
+            peajes: coerceNumber(inputs.peajes, 0),
+            pasajeros: coerceNumber(inputs.pasajeros, 1),
+            idaYVuelta: coerceBool(inputs.idaYVuelta),
+          }),
+        );
+    }
+
     case 'costo-tag': {
       const { calculateCostoTag, costoTagToResults } = await import('./costo-tag');
       return (inputs) => {

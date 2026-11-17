@@ -222,7 +222,13 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-credito-hipotecario',
     'calculadora-costo-tag',
   ],
+  'calculadora-costo-viaje': [
+    'calculadora-costo-tag',
+    'calculadora-permiso-circulacion',
+    'calculadora-multas-transito',
+  ],
   'calculadora-costo-tag': [
+    'calculadora-costo-viaje',
     'calculadora-permiso-circulacion',
     'calculadora-multas-transito',
     'calculadora-credito-automotriz',

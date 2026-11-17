@@ -3872,6 +3872,126 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'costo-viaje',
+    name: 'Costo de Viaje en Auto',
+    description:
+      'Estima cuánto cuesta un viaje en auto: litros de combustible, bencina, peajes y TAG, costo total, por pasajero y por kilómetro.',
+    slug: 'calculadora-costo-viaje',
+    category: 'vehiculos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-16',
+    seoTitle: 'Costo de viaje en auto: calcula bencina y peajes',
+    seoDescription:
+      'Calcula cuánto gastas en bencina y peajes en un viaje en auto: litros, costo total, por pasajero y por km. Ideal para vacaciones y Fiestas Patrias.',
+    sources: [
+      {
+        name: 'CNE — estadísticas de hidrocarburos',
+        url: 'https://www.cne.cl/estadisticas/hidrocarburos/',
+        note: 'Nota metodológica: no existe un precio oficial único en bomba; el precio por litro lo ingresa el usuario',
+      },
+      {
+        name: 'MOP — peajes y pórticos de concesiones',
+        url: 'https://concesiones.mop.gob.cl/peajes-y-porticos/',
+        note: 'Referencia para revisar tarifas de peajes y TAG de la ruta; el monto lo ingresa el usuario',
+      },
+    ],
+    keywords: [
+      'costo viaje en auto',
+      'calcular bencina viaje',
+      'cuánto gasto en bencina',
+      'costo bencina por km',
+      'calculadora viaje peajes',
+      'viaje en auto vacaciones',
+      'dividir bencina entre pasajeros',
+    ],
+    inputs: [
+      {
+        id: 'distanciaKm',
+        label: 'Distancia del trayecto (km)',
+        type: 'number',
+        placeholder: '450',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'rendimientoKmL',
+        label: 'Rendimiento del auto (km por litro)',
+        type: 'number',
+        placeholder: '12,5',
+        required: true,
+        min: 0,
+        tooltip: 'Usa coma para decimales. Revisa el rendimiento real de tu auto en carretera.',
+      },
+      {
+        id: 'precioCombustible',
+        label: 'Precio del combustible por litro',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: 'Ingresa el precio de tu bencinera',
+        required: true,
+        min: 0,
+        tooltip: 'Los precios cambian por semana y por estación de servicio: ingresa el precio que ves en tu bencinera.',
+      },
+      {
+        id: 'peajes',
+        label: 'Peajes y TAG del trayecto',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        defaultValue: 0,
+        tooltip: 'Suma de peajes y pórticos de un trayecto; se duplica si marcas ida y vuelta.',
+      },
+      {
+        id: 'pasajeros',
+        label: 'Número de pasajeros (incluye conductor)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '1',
+        required: false,
+        min: 1,
+        max: 9,
+        defaultValue: 1,
+      },
+      {
+        id: 'idaYVuelta',
+        label: '¿Es ida y vuelta?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo calculo cuánta bencina gasto en un viaje?',
+        answer:
+          'Divide los kilómetros por el rendimiento de tu auto para obtener los litros y multiplícalos por el precio por litro. Ejemplo: 450 km ÷ 12,5 km/l = 36 litros; a $1.300 por litro son $46.800.',
+      },
+      {
+        question: '¿Por qué tengo que ingresar el precio de la bencina?',
+        answer:
+          'Porque no existe un precio oficial único en bomba: varía cada semana, por comuna y por estación de servicio. La CNE publica estadísticas y precios de referencia, pero el valor real es el de tu bencinera.',
+      },
+      {
+        question: '¿Cómo divido el costo del viaje entre pasajeros?',
+        answer:
+          'La calculadora divide el costo total (combustible más peajes) por el número de pasajeros, incluido el conductor. Con $58.800 entre 3 personas, cada una paga $19.600.',
+      },
+      {
+        question: '¿Cuánto cuesta viajar en vacaciones o Fiestas Patrias?',
+        answer:
+          'Depende de la distancia, el rendimiento y el precio del combustible. En temporada alta (verano, Semana Santa, Fiestas Patrias y fin de año) suma los peajes de la ruta y marca ida y vuelta para estimar el viaje completo.',
+      },
+      {
+        question: '¿El cálculo incluye desgaste, mantención o estacionamiento?',
+        answer:
+          'No. Solo estima combustible, peajes y TAG. El rendimiento real puede cambiar con la carga, el aire acondicionado, la velocidad y el tráfico.',
+      },
+    ],
+  },
+  {
     id: 'cuenta-luz',
     name: 'Calculadora Cuenta de Luz (Tarifa BT1)',
     description:
