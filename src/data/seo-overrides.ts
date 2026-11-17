@@ -37,6 +37,7 @@ import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import { seoPesoArgentino } from '@/lib/calculations/peso-argentino-clp';
+import { seoDivisaViaje } from '@/lib/calculations/divisa-viaje-clp';
 
 const TOPE_GRAT = topeGratificacion();
 
@@ -208,6 +209,16 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoTitle: 'Impuesto compras internacionales: Temu, Shein y más',
     seoDescription:
       'Calcula el IVA y el arancel de tus compras en Temu, AliExpress, Shein o Amazon: hasta US$500 solo IVA 19 %; sobre US$500, 6 % sobre CIF + IVA.',
+  },
+
+  'real-brasileno-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('BRL').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('BRL').seoDescription;
+    },
   },
 
   'peso-argentino-a-chileno': {

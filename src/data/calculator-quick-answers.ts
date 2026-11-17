@@ -1124,6 +1124,11 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         lead: 'Desde el 25 de octubre de 2025, una compra en el extranjero de hasta US$500 paga IVA de 19 % y no paga arancel: si la tienda está inscrita en el SII (Temu, AliExpress, Shein, Amazon, entre otras) lo cobra al pagar; si no, lo pagas al llegar el envío. Sobre US$500 pagas 6 % de derecho sobre el valor CIF y luego 19 % de IVA sobre el CIF más el derecho.',
       };
 
+    case 'real-brasileno-clp':
+      return {
+        lead: 'Para pasar reales brasileños a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.BRL.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
+      };
+
     default:
       return null;
   }

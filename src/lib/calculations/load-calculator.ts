@@ -683,6 +683,21 @@ export async function loadCalculationFn(
         return comprasInternacionalesToResults(result);
       };
     }
+    case 'real-brasileno-clp': {
+      const { calculateDivisaViajeClp, divisaViajeClpToResults } = await import('./divisa-viaje-clp');
+      return (inputs) => {
+        const result = calculateDivisaViajeClp({
+          codigo: 'BRL',
+          monto: coerceNumber(inputs.monto),
+          aClp: inputs.direccion !== 'clp_a_brl',
+          tasaPersonalizada:
+            inputs.tasaPersonalizada != null && String(inputs.tasaPersonalizada) !== ''
+              ? coerceNumber(inputs.tasaPersonalizada)
+              : undefined,
+        });
+        return divisaViajeClpToResults(result);
+      };
+    }
     case 'peso-argentino-clp': {
       const { calculatePesoArgentinoClp, pesoArgentinoClpToResults } =
         await import('./peso-argentino-clp');

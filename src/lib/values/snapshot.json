@@ -4,6 +4,8 @@
   "dolarObservado": 999.1,
   "euro": 1102.03,
   "pesoArgentino": 0.65,
+  "realBrasileno": 173.21,
+  "solPeruano": 293.2,
   "ipcMensual": -0.2,
   "asOf": "2026-11-16T22:24:07.181Z",
   "observedAsOf": {
@@ -11,7 +13,9 @@
     "utm": "2026-11-01",
     "dolarObservado": "2026-11-16",
     "euro": "2026-11-16",
-    "pesoArgentino": "2026-11-16"
+    "pesoArgentino": "2026-11-16",
+    "realBrasileno": "2026-11-17",
+    "solPeruano": "2026-11-17"
   },
   "sources": {
     "uf": "bcentral",
@@ -19,6 +23,8 @@
     "dolarObservado": "bcentral",
     "euro": "bcentral",
     "pesoArgentino": "bcentral",
+    "realBrasileno": "fallback",
+    "solPeruano": "fallback",
     "ipcMensual": "mindicador"
   },
   "generatedAt": "2026-11-16T22:24:17.046Z"

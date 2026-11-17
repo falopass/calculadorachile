@@ -4778,6 +4778,71 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
 
   {
+    id: 'real-brasileno-clp',
+    name: 'Real brasileño a peso chileno',
+    description:
+      'Convierte reales brasileños a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.BRL.N.O.D, referencial).',
+    slug: 'real-brasileno-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal real brasileño',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.BRL.N.O.D',
+        note: 'Serie F072.CLP.BRL.N.O.D (CLP por 1 BRL), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'real brasileño a peso chileno',
+      'reales a pesos chilenos',
+      '100 reales en pesos chilenos',
+      'peso chileno a real',
+      'convertir reales brasileños',
+      'cambio real brasileño chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'brl_a_clp', label: 'Reales brasileños → CLP' },
+          { value: 'clp_a_brl', label: 'CLP → reales brasileños' },
+        ],
+      },
+    ],
+    seoTitle: 'Real brasileño a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte reales brasileños a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BRL.N.O.D). Bidireccional, útil para viajes a Brasil.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 real brasileño?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.BRL.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 reales en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 BRL) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:

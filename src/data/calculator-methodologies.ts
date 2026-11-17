@@ -1544,6 +1544,22 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'El trato preferencial por TLC exige acreditar el origen; la calculadora no lo verifica.',
     ],
   },
+  'real-brasileno-clp': {
+    summary:
+      'Convierte entre reales brasileños y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BRL.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 BRL del snapshot diario (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en BRL para obtener CLP (redondeo al peso), o divide los CLP por la tasa para la dirección inversa (2 decimales).',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.BRL.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio, bancos o tarjetas.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
   aguinaldo: {
     summary:
       'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público según la Ley 21.806, o una referencia de Navidad 2025; el régimen de pensionados IPS se cita aparte (ChileAtiende).',
