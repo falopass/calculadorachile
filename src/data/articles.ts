@@ -208,6 +208,420 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 
 const articleCatalog: ArticleDraft[] = [
   {
+    slug: 'aguinaldo-navidad-2026-sector-publico',
+    title: 'Aguinaldo de Navidad 2026 sector público: monto vigente, quiénes lo reciben y cuándo se paga',
+    description:
+      'La Ley 21.724 concede un aguinaldo de Navidad permanente al sector público: $71.206 si la remuneración líquida de noviembre es de hasta $1.060.493 y $37.666 si la supera. Requisitos, tope de $3.511.800 y qué puede cambiar con la ley de reajuste 2026.',
+    date: '2026-11-16',
+    category: 'laboral',
+    readingTime: 8,
+    relatedGuia: 'sueldo-liquido-chile',
+    keywords: [
+      'aguinaldo navidad 2026 sector público',
+      'aguinaldo navidad funcionarios públicos 2026',
+      'monto aguinaldo navidad 2026',
+      'ley 21.724 aguinaldo',
+      'aguinaldo navidad $71.206',
+      'cuándo pagan aguinaldo navidad 2026',
+    ],
+    relatedCalculators: ['calculadora-aguinaldo', 'calculadora-sueldo-liquido'],
+    content: `<p class="article-lead">Los funcionarios públicos de planta y a contrata tienen derecho a un <strong>aguinaldo de Navidad</strong> que se paga en diciembre. Según el texto vigente de la <strong>Ley 21.724</strong>, el monto es de <strong>$71.206</strong> para quienes tuvieron una remuneración líquida de noviembre igual o inferior a <strong>$1.060.493</strong>, y de <strong>$37.666</strong> para quienes la superaron. No es imponible ni tributable, y no lo recibe quien tenga remuneraciones brutas permanentes sobre <strong>$3.511.800</strong>.</p>
+<p>Hay una advertencia importante: esos montos son los que fija hoy la ley, pero cada año la ley de reajuste del sector público los ha actualizado. Al 16 de noviembre de 2026, la ley de reajuste de este año no está publicada en Ley Chile. Si se publica y cambia los montos, este artículo se actualizará con la nueva fuente.</p>
+<p>Este texto trata del aguinaldo de los trabajadores activos del sector público. El de jubilados y pensionados del IPS es un beneficio distinto, con otros montos y otro procedimiento: lo explicamos en el artículo sobre el <a href="/blog/aguinaldo-navidad-pensionados-2026">aguinaldo de Navidad 2026 para pensionados</a>.</p>
+
+<h2>Por qué hay un monto vigente para 2026</h2>
+<p>Hasta 2024 el aguinaldo de Navidad del sector público se concedía año a año en cada ley de reajuste. La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1209939" target="_blank" rel="noopener">Ley 21.724</a> cambió eso: su artículo 2 concede el aguinaldo a quienes trabajen en las entidades señaladas "al 1 de diciembre de cada anualidad", y la <a href="https://www.bcn.cl/historiadelaley/historia-de-la-ley/vista-expandida/8359/" target="_blank" rel="noopener">historia de la ley</a> en la Biblioteca del Congreso Nacional consigna que el beneficio pasó a tener carácter permanente.</p>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Ley 21.806</a> (Diario Oficial del 5 de febrero de 2026) modificó ese artículo: cambió la referencia de 2024 a 2025 y reemplazó los montos anteriores por los actuales.</p>
+<table>
+<thead><tr><th>Concepto</th><th>Texto anterior</th><th>Texto vigente (Ley 21.806)</th></tr></thead>
+<tbody>
+<tr><td>Umbral de remuneración líquida de noviembre</td><td>$1.025.622</td><td>$1.060.493</td></tr>
+<tr><td>Monto si la líquida es igual o inferior al umbral</td><td>$68.865</td><td><strong>$71.206</strong></td></tr>
+<tr><td>Monto si la líquida supera el umbral</td><td>$36.427</td><td><strong>$37.666</strong></td></tr>
+</tbody>
+</table>
+<p>Como la norma se aplica "a partir del año 2025" y "en diciembre de cada año", el texto vigente al 16 de noviembre de 2026 da derecho al aguinaldo de Navidad 2026 con esos montos. Lo que no se puede afirmar todavía es que esos serán los montos definitivos: si la ley de reajuste 2026 vuelve a modificar el artículo, como hizo la Ley 21.806, regirán los nuevos valores.</p>
+
+<h2>Quiénes lo reciben</h2>
+<p>El artículo 2 de la Ley 21.724 alcanza a las trabajadoras y los trabajadores que al <strong>1 de diciembre</strong> desempeñen cargos de planta o a contrata en las entidades regidas por la escala única (decreto ley 249 de 1974) y por otros estatutos que enumera. Entre ellos:</p>
+<ul>
+<li>Entidades regidas por la escala única del decreto ley 249 de 1974 y por los decretos leyes 3.058 de 1979 y 3.551 de 1981.</li>
+<li>Personal regido por el DFL 1 (G) de 1997 del Ministerio de Defensa, el DFL 2 (I) de 1968 del Ministerio del Interior y el estatuto del personal de la Policía de Investigaciones.</li>
+<li>Personal de los Tribunales Tributarios y Aduaneros, del Servicio de Biodiversidad y Áreas Silvestres Protegidas y del Servicio Nacional Forestal.</li>
+<li>Trabajadores de Astilleros y Maestranzas de la Armada, Fábricas y Maestranzas del Ejército y ENAER.</li>
+<li>Asistentes y profesionales de la educación de los Servicios Locales de Educación Pública.</li>
+<li>Trabajadores de empresas y entidades del Estado que no negocian colectivamente y cuyas remuneraciones se fijan por ley o decreto.</li>
+</ul>
+<p>Los artículos 3, 5 y 6 extienden el aguinaldo, en los mismos términos, a:</p>
+<ul>
+<li>Trabajadores de las universidades estatales (Ley 21.094).</li>
+<li>Directores, educadoras de párvulos y asistentes de jardines infantiles financiados por JUNJI vía transferencia de fondos.</li>
+<li>Trabajadores de sectores de la Administración traspasados a las municipalidades.</li>
+<li>Trabajadores de colegios particulares subvencionados (DFL 2 de 1998) y de liceos técnico-profesionales administrados según el decreto ley 3.166.</li>
+<li>Trabajadores de instituciones colaboradoras del Servicio Nacional de Menores o su continuador y de las Corporaciones de Asistencia Judicial.</li>
+</ul>
+<p>La lista exacta y sus condiciones están en el texto de la ley. Si trabajas a honorarios en un servicio público no tienes cargo de planta ni a contrata, por lo que el artículo 2 no te incluye. Revisa tu convenio y consulta a tu unidad de personal.</p>
+
+<h2>Cuánto te corresponde: la regla de noviembre</h2>
+<p>El monto depende de tu <strong>remuneración líquida de noviembre</strong>. La ley la define como el total de las remuneraciones de carácter permanente de ese mes, excluidas las bonificaciones, asignaciones y bonos asociados al desempeño individual, colectivo o institucional, con la sola deducción de impuestos y cotizaciones previsionales obligatorias.</p>
+<ol class="steps">
+<li><strong>Toma tu liquidación de noviembre.</strong> Considera solo las remuneraciones permanentes.</li>
+<li><strong>Excluye los bonos por desempeño.</strong> No cuentan para el umbral.</li>
+<li><strong>Descuenta impuesto y cotizaciones obligatorias.</strong> No descuentes préstamos, cuotas sindicales u otros descuentos voluntarios.</li>
+<li><strong>Compara con $1.060.493.</strong> Igual o menos: $71.206. Más: $37.666.</li>
+</ol>
+<div class="numeric-example"><div class="numeric-example__title">Dos casos hipotéticos con el texto vigente</div><ul><li>Técnico con remuneración líquida permanente de noviembre de $980.000: recibe $71.206.</li><li>Profesional con remuneración líquida permanente de noviembre de $1.400.000: recibe $37.666.</li><li>Profesional con remuneraciones brutas permanentes de $3.600.000: no recibe aguinaldo, porque supera el tope de $3.511.800.</li></ul><span class="total">El aguinaldo no tiene descuentos</span></div>
+
+<h2>El tope de $3.511.800</h2>
+<p>El artículo 19 de la Ley 21.724, modificado por la Ley 21.806, establece que solo tienen derecho al aguinaldo de Navidad quienes tengan remuneraciones brutas de carácter permanente iguales o inferiores a <strong>$3.511.800</strong> en el mes que corresponda, excluidas las bonificaciones, asignaciones o bonos asociados al desempeño. Aquí la referencia es la remuneración bruta, no la líquida.</p>
+
+<h2>Cuándo y cómo se paga</h2>
+<p>La ley dispone que el aguinaldo de Navidad "se pagará en diciembre de cada año". No fija un día: cada servicio lo paga, normalmente, junto con la remuneración de diciembre. En los casos de los artículos 3, 5 y 6 (universidades, jardines VTF, traspasados, colegios subvencionados, colaboradores y CAJ), el pago lo hace el respectivo empleador, que recibe los fondos del ministerio correspondiente.</p>
+<p>Otros detalles del texto vigente:</p>
+<ul>
+<li><strong>No es imponible ni tributable</strong> y no está afecto a descuento alguno (artículo 10).</li>
+<li><strong>Con licencia médica</strong> también se recibe: el monto se determina según la última remuneración mensual percibida (artículo 11).</li>
+<li><strong>Cobro indebido:</strong> quien perciba maliciosamente el aguinaldo debe restituir quintuplicada la cantidad recibida en exceso (artículo 12).</li>
+</ul>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Qué puede cambiar en diciembre</strong><p>Cada año el Gobierno y las organizaciones del sector público negocian el reajuste de remuneraciones, que se aprueba por ley. Si la ley de reajuste 2026 modifica el artículo 2 de la Ley 21.724, los montos de este artículo dejarán de ser los vigentes. Antes de contar con una cifra, revisa tu liquidación de diciembre o la información de tu servicio.</p></div></aside>
+
+<h2>Diferencias con otros aguinaldos de diciembre</h2>
+<table>
+<thead><tr><th>Beneficio</th><th>Quién</th><th>Base legal</th></tr></thead>
+<tbody>
+<tr><td>Aguinaldo de Navidad sector público</td><td>Funcionarios de planta y contrata al 1 de diciembre, y los trabajadores de los artículos 3, 5 y 6</td><td>Ley 21.724, art. 2 (texto vigente por Ley 21.806)</td></tr>
+<tr><td>Aguinaldo de Navidad pensionados</td><td>Pensionados IPS, PGU y otros regímenes</td><td>Ley de reajuste respectiva; ver <a href="/blog/aguinaldo-navidad-pensionados-2026">artículo de pensionados</a></td></tr>
+<tr><td>Aguinaldo en el sector privado</td><td>Solo si está pactado</td><td>Contrato, convenio colectivo o práctica reiterada</td></tr>
+</tbody>
+</table>
+<p>En el sector privado no existe un aguinaldo de Navidad obligatorio por ley. Si tu contrato lo establece, puedes estimarlo con la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 con el texto vigente de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1209939" target="_blank" rel="noopener">Ley 21.724</a> (artículos 2, 3, 5, 6, 7, 10, 11, 12 y 19), la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1221118" target="_blank" rel="noopener">Ley 21.806</a> y la <a href="https://www.bcn.cl/historiadelaley/historia-de-la-ley/vista-expandida/8359/" target="_blank" rel="noopener">historia de la Ley 21.724</a> de la Biblioteca del Congreso Nacional.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los montos corresponden al texto legal vigente al 16 de noviembre de 2026 y pueden cambiar con la ley de reajuste 2026. Tu unidad de personal es la que determina el pago.</p></div></aside>
+<p>Para profundizar en cómo se calcula una remuneración líquida, revisa la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Ley 21.724 (texto vigente)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1209939' },
+      { label: 'Ley Chile — Ley 21.806', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1221118' },
+      { label: 'BCN — Historia de la Ley 21.724', url: 'https://www.bcn.cl/historiadelaley/historia-de-la-ley/vista-expandida/8359/' },
+    ],
+  },
+  {
+    slug: 'boleta-honorarios-retencion-15-25-2026',
+    title: 'Retención de boleta de honorarios 2026: 15,25 % y calendario hasta el 17 % de 2028',
+    description:
+      'En 2026 la retención de las boletas de honorarios es 15,25 %; sube a 16 % en 2027 y a 17 % en 2028 (Ley 21.133). Qué financia, cuánto cambia tu líquido año a año y cómo ajustar tus tarifas.',
+    date: '2026-11-16',
+    category: 'impuestos',
+    readingTime: 9,
+    relatedGuia: 'iva-boleta-honorarios-chile',
+    embedCalculatorId: 'boleta-honorarios',
+    keywords: [
+      'retención boleta honorarios 2026',
+      'boleta honorarios 15,25%',
+      'retención honorarios 2027 16%',
+      'retención honorarios 2028 17%',
+      'ley 21.133 calendario retención',
+      'cuánto me retienen boleta honorarios',
+    ],
+    relatedCalculators: ['calculadora-boleta-honorarios', 'calculadora-cotizacion-independientes'],
+    content: `<p class="article-lead">Si emites boletas de honorarios, en 2026 te retienen el <strong>15,25 %</strong> del monto bruto. No es el último cambio: la <strong>Ley 21.133</strong> fijó un calendario que lleva la retención a <strong>16 % en 2027</strong> y a <strong>17 % en 2028</strong>. Cada alza reduce lo que recibes al momento del pago, aunque esa plata no se pierde: financia tus cotizaciones de seguridad social y tu impuesto anual, y lo que sobra vuelve en la devolución de la Operación Renta.</p>
+<p>Este artículo se concentra en el calendario y en sus efectos prácticos: cuánto cambia el líquido año a año, cómo ajustar una tarifa y qué revisar antes de 2027. Para el paso a paso de emisión, gastos presuntos y anulaciones, revisa nuestra <a href="/blog/boleta-honorarios-completo">guía completa de boleta de honorarios</a>. Datos verificados al 16 de noviembre de 2026 en el SII y en la Subsecretaría de Previsión Social.</p>
+
+<h2>El calendario oficial: de 14,5 % a 17 %</h2>
+<p>El <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">Servicio de Impuestos Internos</a> informa que, según la Ley 21.133, desde el 1 de enero de 2026 la retención pasó de 14,5 % a 15,25 %, y que sube de forma escalonada hasta llegar a 17 % en 2028. La <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">Subsecretaría de Previsión Social</a> describe el mecanismo: desde 2020 la retención aumenta 0,75 puntos porcentuales por año durante ocho años y 1 punto el noveno año.</p>
+<table>
+<thead><tr><th>Año de emisión</th><th>Retención</th><th>Cambio respecto del año anterior</th></tr></thead>
+<tbody>
+<tr><td>2025</td><td>14,5 %</td><td>—</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>15,25 %</strong></td><td>+0,75 puntos</td></tr>
+<tr><td>2027</td><td>16 %</td><td>+0,75 puntos</td></tr>
+<tr><td>2028</td><td>17 %</td><td>+1 punto</td></tr>
+</tbody>
+</table>
+<p>La tasa que se aplica es la del año en que se emite la boleta. Una boleta emitida el 30 de diciembre de 2026 lleva 15,25 %; una emitida el 4 de enero de 2027, 16 %, aunque el servicio se haya prestado en diciembre. El SII indica que, si emites en sii.cl, la aplicación calcula automáticamente la retención vigente.</p>
+
+<h2>Por qué sube la retención</h2>
+<p>La Ley 21.133 incorporó a los trabajadores independientes que emiten boletas de honorarios a la seguridad social. En lugar de pagar cotizaciones mes a mes, el sistema funciona así, según la Subsecretaría de Previsión Social:</p>
+<ol class="steps">
+<li><strong>Durante el año</strong> quien te paga retiene el porcentaje vigente y lo entera al Fisco.</li>
+<li><strong>Antes de la Operación Renta</strong> el SII determina las cotizaciones que te corresponden con la información de las instituciones previsionales.</li>
+<li><strong>En la Operación Renta</strong> la Tesorería General de la República paga esas cotizaciones a tu AFP, salud y demás instituciones, con cargo al monto que tenías disponible para la devolución.</li>
+<li><strong>Lo que queda</strong>, después de impuesto y cotizaciones, se devuelve. Si no alcanza, puede quedar un saldo por pagar.</li>
+</ol>
+<p>La Subsecretaría lo resume así: con el alza de la retención, cada año aumenta también el monto de cotizaciones pagadas con esas retenciones. Una retención más alta no significa un impuesto más alto: significa que una parte mayor de tus obligaciones anuales se paga por adelantado.</p>
+
+<h2>Cuánto cambia tu líquido, año a año</h2>
+<div class="numeric-example"><div class="numeric-example__title">Boleta por $1.000.000 bruto</div><ul><li>2025 (14,5 %): retención $145.000, líquido $855.000.</li><li>2026 (15,25 %): retención $152.500, líquido $847.500.</li><li>2027 (16 %): retención $160.000, líquido $840.000.</li><li>2028 (17 %): retención $170.000, líquido $830.000.</li></ul><span class="total">Entre 2026 y 2028 el líquido baja $17.500 por cada millón bruto</span></div>
+<p>Si emites una boleta de $1.000.000 cada mes, el líquido anual pasa de $10.170.000 en 2026 a $9.960.000 en 2028: $210.000 menos en el bolsillo durante el año, que quedan como retención para la Operación Renta siguiente.</p>
+
+<h2>Si cobras un líquido fijo: cuánto bruto debes emitir</h2>
+<p>Muchos independientes acuerdan con el cliente un monto "líquido". En ese caso, cada alza obliga a emitir una boleta bruta mayor. La fórmula es dividir el líquido por (1 − tasa):</p>
+<table>
+<thead><tr><th>Año</th><th>Retención</th><th>Bruto para recibir $1.000.000 líquido</th></tr></thead>
+<tbody>
+<tr><td>2025</td><td>14,5 %</td><td>$1.169.591</td></tr>
+<tr><td>2026</td><td>15,25 %</td><td>$1.179.941</td></tr>
+<tr><td>2027</td><td>16 %</td><td>$1.190.476</td></tr>
+<tr><td>2028</td><td>17 %</td><td>$1.204.819</td></tr>
+</tbody>
+</table>
+<p>Valores redondeados al peso. Al emitir, la retención se calcula sobre el bruto y puede haber diferencias de un peso por redondeo. Si tu contrato fija un bruto, el cliente no paga más y tú recibes menos; si fija un líquido, el costo para el cliente sube cada enero. Conviene dejar escrito cuál de las dos cosas se pactó antes de que empiece 2027. La <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> hace la conversión en ambos sentidos.</p>
+
+<h2>Qué pasa con tus cotizaciones</h2>
+<p>Según la Subsecretaría de Previsión Social, los independientes cotizan anualmente sobre una renta imponible equivalente al <strong>80 % de sus honorarios brutos</strong> del año anterior. Esa renta imponible no puede ser inferior a cuatro ingresos mínimos mensuales ni superior a 12 veces el tope imponible mensual.</p>
+<p>En el período transitorio existen dos modalidades:</p>
+<ul>
+<li><strong>Cobertura completa:</strong> se cotiza sobre el 100 % de la renta imponible anual para salud, pensiones y los seguros sociales.</li>
+<li><strong>Cobertura parcial:</strong> para 2026, salud y pensiones se cotizan sobre el 80 % de la renta imponible anual; el seguro de accidentes del trabajo, el Seguro SANNA y el Seguro de Invalidez y Sobrevivencia se cotizan sobre el 100 %.</li>
+</ul>
+<p>La cobertura tiene un desfase que conviene entender: con los honorarios de 2026 se pagan cotizaciones en la Operación Renta 2027, y las prestaciones quedan vigentes entre el 1 de julio de 2027 y el 30 de junio de 2028. Para estimar cuánto se descontará de tu devolución, usa la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a>.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Un error frecuente</strong><p>El 15,25 % no se reparte mes a mes entre AFP, Fonasa y mutual. Es una retención única que se entera al Fisco y se imputa en la Operación Renta. El cálculo de cotizaciones lo hace el SII sobre la renta imponible anual, no sobre cada boleta.</p></div></aside>
+
+<h2>Quién retiene y quién no</h2>
+<p>Si quien recibe la boleta está obligado a retener, descuenta el porcentaje, te paga el líquido y entera la retención. Si no retiene, recibes el bruto y eres tú quien debe declarar y pagar el mismo porcentaje como pago provisional mensual (PPM) en el Formulario 29. En ambos casos la tasa de 2026 es 15,25 %. Las reglas sobre quién retiene, junto con el caso de las boletas de terceros, están desarrolladas en la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>
+
+<h2>Qué hacer antes de 2027</h2>
+<ol class="steps">
+<li><strong>Revisa tus contratos.</strong> Identifica si pactaste montos brutos o líquidos y cuál será el efecto de pasar a 16 %.</li>
+<li><strong>Actualiza tus tarifas.</strong> Si cobras un líquido fijo, en 2027 necesitas emitir cerca de 0,9 % más bruto que en 2026 para recibir lo mismo.</li>
+<li><strong>Proyecta tu Operación Renta 2027.</strong> Suma las retenciones de 2026 y compáralas con lo que te corresponde pagar de impuesto y cotizaciones. La devolución puede ser menor de lo que esperas si tus honorarios subieron.</li>
+<li><strong>Revisa tu cobertura.</strong> Si necesitas licencias médicas o protección maternal, verifica que tu cotización cubra el período en que la vas a usar.</li>
+<li><strong>Mantén orden mensual.</strong> Revisa en sii.cl tus boletas emitidas y las retenciones informadas por tus clientes.</li>
+</ol>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿El 17 % es el último aumento?</h3>
+<p>Según el SII y la Subsecretaría de Previsión Social, el 17 % de 2028 es la meta final del calendario de la Ley 21.133.</p>
+<h3>¿Puedo pedir que no me retengan?</h3>
+<p>Que se retenga o no depende de si quien recibe la boleta está obligado a retener, no de un acuerdo entre las partes. Si no hay retención, el mismo porcentaje se paga como PPM.</p>
+<h3>¿Me devuelven todo lo retenido?</h3>
+<p>No necesariamente. La devolución depende de tu impuesto anual y de las cotizaciones que se pagan con cargo a lo retenido. En muchos casos queda un saldo a favor, pero no está garantizado.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 en la <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">página del SII sobre la retención de boletas de honorarios 2026</a> y en las <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes de la Ley de Honorarios de la Subsecretaría de Previsión Social</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los ejemplos redondean al peso y no reemplazan la propuesta de declaración del SII ni asesoría tributaria. Edad, afiliación, pensión, ingresos como dependiente y regímenes especiales pueden cambiar tu resultado.</p></div></aside>
+<p>Para profundizar en IVA, retenciones y el caso de los independientes, revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>`,
+    sources: [
+      { label: 'SII — Boleta de honorarios 2026: retención 15,25 %', url: 'https://www.sii.cl/destacados/boletas_honorarios/' },
+      { label: 'Subsecretaría de Previsión Social — Ley de Honorarios, preguntas frecuentes', url: 'https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/' },
+    ],
+  },
+  {
+    slug: 'gratificacion-fin-de-ano-2026',
+    title: 'Gratificación de fin de año 2026: cómo se calcula, el tope de 4,75 IMM y qué pasa en diciembre',
+    description:
+      'La gratificación legal del artículo 50 del Código del Trabajo es el 25 % de lo devengado en el año con tope de 4,75 ingresos mínimos. Tope 2026 con el IMM de $553.553, anticipos mensuales, reliquidación y ejemplo con sueldo mínimo.',
+    date: '2026-11-16',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'sueldo-liquido-chile',
+    embedCalculatorId: 'gratificacion-legal',
+    keywords: [
+      'gratificación fin de año 2026',
+      'gratificación legal 2026',
+      'tope gratificación 4,75 IMM 2026',
+      'artículo 50 código del trabajo',
+      'gratificación sueldo mínimo 2026',
+      'reliquidación gratificación diciembre',
+    ],
+    relatedCalculators: ['calculadora-gratificacion-legal', 'calculadora-sueldo-liquido'],
+    content: `<p class="article-lead">Llega diciembre y aparece la pregunta de siempre: ¿me toca gratificación de fin de año? Para la mayoría de los trabajadores del sector privado la respuesta es que ya la están recibiendo, en cuotas, mes a mes. La gratificación legal del <strong>artículo 50 del Código del Trabajo</strong> equivale al <strong>25 % de lo devengado en el año, con un tope de 4,75 ingresos mínimos mensuales (IMM)</strong>. Con el IMM vigente de <strong>$553.553</strong>, el tope anual de 2026 es <strong>$2.629.377</strong> y el tope mensual de los anticipos es <strong>$219.115</strong>.</p>
+<p>Este artículo explica cómo funciona la gratificación con el texto vigente del Código del Trabajo y las respuestas de la Dirección del Trabajo (DT), con datos verificados al 16 de noviembre de 2026. No cubre bonos de Navidad pactados ni aguinaldos: esos dependen del contrato, no de la ley.</p>
+
+<h2>Gratificación no es aguinaldo</h2>
+<p>La confusión es frecuente. La <strong>gratificación legal</strong> es una obligación del empleador que cumple ciertos requisitos y se calcula sobre utilidades o sobre remuneraciones. El <strong>aguinaldo de Navidad</strong> en el sector privado es voluntario: solo es exigible si está en el contrato, en un instrumento colectivo o si se pagó de forma reiterada. Un pago de diciembre puede ser una cosa, la otra o ambas. Si quieres estimar un aguinaldo pactado, usa la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>
+
+<h2>Quién tiene derecho a gratificación</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 47 del Código del Trabajo</a> obliga a gratificar anualmente a sus trabajadores a los establecimientos mineros, industriales, comerciales o agrícolas, empresas y cualesquiera otros que persigan fines de lucro, y a las cooperativas, que cumplan dos condiciones:</p>
+<ol class="steps">
+<li><strong>Estar obligados a llevar libros de contabilidad.</strong></li>
+<li><strong>Obtener utilidades o excedentes líquidos en su giro.</strong></li>
+</ol>
+<p>Si el empleador cumple esos requisitos, la ley le da dos caminos. El del artículo 47 consiste en repartir entre los trabajadores, en proporción a lo devengado por cada uno, no menos del 30 % de las utilidades líquidas. El del artículo 50, que es el que usa la gran mayoría de las empresas porque se puede calcular de antemano, consiste en pagar el 25 % de lo devengado por cada trabajador en el ejercicio, con tope de 4,75 IMM. Al optar por el artículo 50, el empleador queda liberado de la obligación del artículo 47, sea cual sea la utilidad que obtenga.</p>
+<p>Quedan fuera, en principio, los empleadores sin fines de lucro (fundaciones, corporaciones), los que no llevan contabilidad completa y los que no tienen utilidades. Si tu contrato establece una gratificación garantizada, el empleador debe pagarla aunque no haya utilidades: ahí manda lo pactado, que nunca puede ser inferior a lo legal cuando corresponde la legal.</p>
+
+<h2>La fórmula del artículo 50, paso a paso</h2>
+<p>Según la <a href="https://www.dt.gob.cl/portal/1626/w3-article-99034.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, el cálculo sigue esta lógica:</p>
+<ol class="steps">
+<li><strong>Suma lo devengado en el año.</strong> Se consideran las remuneraciones mensuales del ejercicio comercial (sueldo, horas extra, comisiones y otros pagos que sean remuneración).</li>
+<li><strong>Calcula el 25 %.</strong> Ese es el monto bruto que te correspondería sin tope.</li>
+<li><strong>Calcula el tope.</strong> Multiplica 4,75 por el IMM vigente al 31 de diciembre del año que se gratifica.</li>
+<li><strong>Paga el menor de los dos.</strong> Si el 25 % supera el tope, recibes el tope.</li>
+</ol>
+<p>Ese tope anual es el mismo para todos los trabajadores de la empresa, sin importar cuánto ganen. Por eso, sobre cierto sueldo, la gratificación deja de crecer.</p>
+
+<h2>El IMM que se usa en 2026</h2>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a> fijó el ingreso mínimo mensual en <strong>$553.553</strong> desde el 1 de mayo de 2026 para trabajadores mayores de 18 y hasta 65 años, valor confirmado por la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>. La misma ley dispone que desde el 1 de enero de 2027 el IMM se reajuste según la variación del IPC informada por el INE entre mayo y diciembre de 2026.</p>
+<p>Esa fecha importa: el reajuste de enero de 2027 llega <strong>después</strong> del 31 de diciembre de 2026, de modo que no altera el tope de la gratificación 2026. Con el IMM de $553.553, el tope de 2026 queda así:</p>
+<table>
+<thead><tr><th>Concepto</th><th>Cálculo</th><th>Monto</th></tr></thead>
+<tbody>
+<tr><td>Tope anual 2026</td><td>4,75 × $553.553</td><td>$2.629.377</td></tr>
+<tr><td>Tope mensual equivalente</td><td>$2.629.377 ÷ 12</td><td>$219.115</td></tr>
+</tbody>
+</table>
+<p>Los montos se redondean al peso. El 25 % de un sueldo mensual alcanza el tope mensual cuando ese sueldo es de $876.459 o más (4,75 IMM ÷ 12 ÷ 0,25). Sobre esa cifra, la gratificación ya no aumenta.</p>
+
+<h2>Anticipos mensuales y reliquidación de fin de año</h2>
+<p>En la práctica casi nadie recibe la gratificación de una vez en abril. La mayoría de los contratos la paga como <strong>anticipo mensual</strong>: el 25 % del sueldo de cada mes, con tope de 4,75 IMM dividido por 12. Es el ítem "gratificación legal" de tu liquidación.</p>
+<p>Al cierre del ejercicio el empleador debe comparar lo anticipado con lo que realmente correspondía y pagar la diferencia, si la hay. Aquí entra un detalle de 2026: el IMM cambió en mayo. Entre enero y abril el tope mensual de los anticipos se calculaba con el IMM anterior, más bajo. Como la DT indica que el tope anual se determina con el IMM vigente al 31 de diciembre, un trabajador cuyo 25 % supera el tope puede tener una pequeña diferencia a su favor al reliquidar.</p>
+<p>La DT señala que la gratificación anual se paga una vez determinadas las utilidades, a más tardar en abril del año siguiente, junto con la declaración de renta de la empresa. Si tu empleador paga anticipos, revisa en tu liquidación de diciembre, o en la que corresponda según la práctica de la empresa, si aparece un ajuste de gratificación.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>¿Y si los anticipos superaron lo que correspondía?</strong><p>Puede pasar si la empresa paga gratificación del artículo 47 y al final del ejercicio no tuvo utilidades. Lo que pueda hacer el empleador en ese caso depende de cómo se pactaron los anticipos. Ante una diferencia que no entiendes, consulta a la Dirección del Trabajo antes de firmar un descuento.</p></div></aside>
+
+<h2>Ejemplo con sueldo mínimo</h2>
+<div class="numeric-example"><div class="numeric-example__title">Trabajadora con sueldo base igual al IMM, mayo a diciembre 2026</div><ul><li>Sueldo base mensual: $553.553.</li><li>25 % mensual: $138.388.</li><li>Tope mensual: $219.115. El 25 % está bajo el tope, así que recibe $138.388.</li><li>Remuneración imponible mensual: $553.553 + $138.388 = $691.941.</li><li>Gratificación de mayo a diciembre (8 meses): 8 × $138.388 = $1.107.104.</li></ul><span class="total">Gratificación mensual: $138.388</span></div>
+<p>Este ejemplo es hipotético y omite enero a abril porque el IMM de esos meses era distinto. Lo importante es la lógica: para quien gana el mínimo, la gratificación del artículo 50 equivale siempre al 25 % del sueldo, porque nunca llega al tope. La gratificación es imponible y tributable: se suma al sueldo para calcular AFP, salud, seguro de cesantía e impuesto. Para ver cuánto queda líquido, ingresa el total en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>
+<p>Ojo con un error común: el sueldo base no puede ser inferior al IMM. La gratificación se paga encima del mínimo, no para completarlo.</p>
+
+<h2>Ejemplo con un sueldo que supera el tope</h2>
+<div class="numeric-example"><div class="numeric-example__title">Trabajador con sueldo base de $1.200.000</div><ul><li>25 % mensual: $300.000.</li><li>Tope mensual: $219.115.</li><li>Como el 25 % supera el tope, recibe $219.115 al mes.</li><li>Si trabajó todo el año con anticipos al tope vigente en cada mes, al reliquidar se compara lo anticipado con el tope anual de $2.629.377.</li></ul><span class="total">Gratificación mensual desde mayo: $219.115</span></div>
+
+<h2>Si no trabajaste todo el año</h2>
+<p>El artículo 52 del Código del Trabajo establece que quien no alcanza a completar un año de servicios tiene derecho a la gratificación en proporción a los meses trabajados. La DT agrega que, en ese caso, el tope de 4,75 IMM también se calcula de forma proporcional al tiempo trabajado. Si entraste a la empresa en septiembre, por ejemplo, tu gratificación de 2026 se calcula sobre lo devengado entre septiembre y diciembre, con un tope proporcional a esos meses.</p>
+<p>Si terminas tu contrato antes de fin de año, la gratificación proporcional que no se haya anticipado debe incluirse en el finiquito.</p>
+<p>La DT también ha indicado que los períodos con licencia médica no se descuentan del cálculo proporcional del tope.</p>
+
+<h2>Qué revisar en tu liquidación de diciembre</h2>
+<ul>
+<li>Que la gratificación sea el 25 % del sueldo del mes o el tope mensual, el que sea menor.</li>
+<li>Que el tope usado desde mayo corresponda al IMM de $553.553 ($219.115 mensual).</li>
+<li>Si tu sueldo supera $876.459, que exista un ajuste de fin de año o de abril, cuando corresponda.</li>
+<li>Que la gratificación esté sumada a la base imponible para AFP, salud y seguro de cesantía.</li>
+<li>Que un eventual aguinaldo pactado aparezca como ítem separado y no reemplace la gratificación.</li>
+</ul>
+<p>Para verificar el cálculo con tus propios números, la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a> aplica el 25 % y el tope con el IMM vigente.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 con el texto vigente del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (artículos 47, 50 y 52) en Ley Chile, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a>, la consulta de la <a href="https://www.dt.gob.cl/portal/1626/w3-article-99034.html" target="_blank" rel="noopener">Dirección del Trabajo sobre gratificación</a> y la página de la DT sobre el <a href="https://www.dt.gob.cl/portal/1626/w3-article-60141.html" target="_blank" rel="noopener">ingreso mínimo mensual</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los ejemplos redondean al peso y no reemplazan una liquidación oficial ni un pronunciamiento de la Dirección del Trabajo.</p></div></aside>
+<p>Para profundizar en descuentos e impuesto sobre tu remuneración, revisa la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Código del Trabajo (arts. 47, 50 y 52)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+      { label: 'Ley Chile — Ley 21.830 (ingreso mínimo 2026)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354' },
+      { label: 'Dirección del Trabajo — Gratificación legal', url: 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html' },
+      { label: 'Dirección del Trabajo — Ingreso mínimo mensual', url: 'https://www.dt.gob.cl/portal/1626/w3-article-60141.html' },
+    ],
+  },
+  {
+    slug: 'feriado-irrenunciable-25-diciembre-2026',
+    title: 'Feriado irrenunciable del 25 de diciembre de 2026: quién descansa, quién trabaja y qué pasa con el 24',
+    description:
+      'El viernes 25 de diciembre de 2026 es feriado irrenunciable para los trabajadores del comercio (Ley 19.973). Excepciones, multas, horario del 24 de diciembre y descanso compensatorio para quienes sí trabajan.',
+    date: '2026-11-16',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'feriados-chile-2027',
+    keywords: [
+      'feriado irrenunciable 25 diciembre 2026',
+      'navidad 2026 comercio cerrado',
+      'trabajar el 25 de diciembre',
+      'ley 19.973 feriado irrenunciable',
+      'horario comercio 24 diciembre 2026',
+      'descanso compensatorio festivo',
+    ],
+    relatedCalculators: [
+      'calculadora-horas-extra',
+      'calculadora-sueldo-liquido',
+      'calculadora-aguinaldo',
+    ],
+    content: `<p class="article-lead">El <strong>viernes 25 de diciembre de 2026</strong> es feriado obligatorio e irrenunciable para los trabajadores dependientes del comercio. Si trabajas en una tienda, un supermercado o un mall, tu empleador no puede pedirte que vayas ese día, ni siquiera ofreciéndote un pago extra. Hay excepciones —restaurantes, cines, bencineras, farmacias de turno, aeropuertos, entre otras— y para esas personas la regla es distinta: descanso compensatorio y, al menos, un 25 de diciembre libre cada dos años con el mismo empleador.</p>
+<p>Este artículo revisa el texto vigente de la Ley 19.973 y de los artículos 24, 36 y 38 del Código del Trabajo, más las respuestas publicadas por la Dirección del Trabajo (DT). Fecha de corte: 16 de noviembre de 2026. No es una lista de horarios de tiendas: explica qué derechos tienes y qué puedes reclamar.</p>
+
+<h2>Qué dice la ley: el artículo 2 de la Ley 19.973</h2>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=230132" target="_blank" rel="noopener">Ley 19.973</a>, en su artículo 2 (modificado por las leyes 20.215, 20.629 y 20.918), declara que el 1 de mayo, el 18 y 19 de septiembre, el 25 de diciembre y el 1 de enero de cada año son feriados obligatorios e irrenunciables para todos los dependientes del comercio. "Irrenunciable" tiene un efecto práctico concreto: ni tú ni tu empleador pueden pactar que trabajes ese día. Un anexo de contrato, un acuerdo verbal o una promesa de "pago doble" no valen.</p>
+<p>La <a href="https://www.dt.gob.cl/portal/1628/w3-article-95017.html" target="_blank" rel="noopener">Dirección del Trabajo</a> lo dice de forma directa: los trabajadores con derecho a este descanso "no pueden trabajar en dichos días aun cuando se pretenda remunerarlos con un recargo, cualquiera que éste sea" (Dictamen 4754/57, de 14 de septiembre de 2015).</p>
+<p>En 2026 Navidad cae viernes, y el 1 de enero de 2027 también es viernes. Eso deja dos fines de semana largos seguidos para el comercio, con dos jueves —el 24 y el 31 de diciembre— que tienen sus propias reglas de horario.</p>
+
+<h2>Quiénes sí pueden trabajar el 25 de diciembre</h2>
+<p>La misma norma excluye del feriado irrenunciable a quienes se desempeñan en:</p>
+<ul>
+<li>Clubes y restaurantes.</li>
+<li>Establecimientos de entretenimiento: cines, espectáculos en vivo, discotecas, pubs y cabarets.</li>
+<li>Locales comerciales en aeródromos civiles públicos y aeropuertos.</li>
+<li>Casinos de juego y otros lugares de juego legalmente autorizados.</li>
+<li>Expendio de combustibles (bencineras).</li>
+<li>Farmacias de urgencia y farmacias que deban cumplir turnos fijados por la autoridad sanitaria.</li>
+<li>Tiendas de conveniencia de las bencineras, solo si junto con la venta directa elaboran y venden alimentos preparados que el cliente puede consumir en el mismo local.</li>
+</ul>
+<p>La lista es cerrada. Un supermercado, una tienda de ropa, una ferretería o un local de un mall que no esté en esas categorías debe cerrar o, si abre, no puede hacerlo con trabajadores dependientes.</p>
+<p>Fuera del comercio, la regla general es otra. El 25 de diciembre es festivo para todo el país y el artículo 35 del Código del Trabajo establece que los festivos son de descanso, salvo en las actividades que la ley autoriza a trabajar esos días. El artículo 38 enumera esas actividades: faenas que exigen continuidad (salud, energía, transporte), reparaciones impostergables, trabajo a bordo de naves, faenas portuarias, deportistas profesionales, plataformas digitales, entre otras. Un guardia, una enfermera de un hospital o un conductor de transporte público pueden tener turno el 25 sin que eso infrinja la Ley 19.973, porque esa ley protege específicamente a los dependientes del comercio.</p>
+
+
+<h2>Si trabajas en un rubro exceptuado: qué te corresponde</h2>
+<p>Estar exceptuado no significa perder todo derecho a Navidad. La ley fija dos garantías.</p>
+<h3>1. Un 25 de diciembre libre, al menos cada dos años</h3>
+<p>Los trabajadores exceptuados tienen derecho a los feriados irrenunciables "a lo menos, una vez cada dos años respecto de un mismo empleador", y pueden pactar con él la rotación del personal para cumplirlo. La DT lo traduce como "un año por medio". Si trabajaste el 25 de diciembre de 2025 en el mismo restaurante o la misma farmacia de turno, este 25 de diciembre de 2026 te corresponde libre.</p>
+<p>La regla se cuenta por cada feriado de la lista y respecto del mismo empleador. Si cambiaste de empleo durante 2026, el contador parte de nuevo con la nueva empresa.</p>
+<h3>2. Un día de descanso compensatorio</h3>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 38 del Código del Trabajo</a> obliga a las empresas exceptuadas del descanso dominical a otorgar un día de descanso a la semana por las actividades realizadas en domingo y "otro por cada festivo en que los trabajadores debieron prestar servicios". Trabajar el 25 genera un día libre adicional.</p>
+<p>Si en una misma semana se acumula más de un día de descanso por domingos y festivos trabajados, el mismo artículo permite que las partes acuerden pagar los días que exceden de uno semanal en lugar de darlos libres. En ese caso la remuneración no puede ser inferior a la de las horas extraordinarias del artículo 32, es decir, con un recargo mínimo de 50 % sobre el sueldo convenido.</p>
+
+<h2>El 24 y el 31 de diciembre: hasta las 20:00</h2>
+<p>El <strong>artículo 24 del Código del Trabajo</strong> regula la temporada navideña del comercio y es la regla que más se incumple en la práctica:</p>
+<ol class="steps">
+<li><strong>Jornada extendida limitada.</strong> El empleador puede extender la jornada ordinaria hasta en dos horas diarias durante nueve días anteriores a Navidad, elegidos dentro de los últimos quince días previos a la festividad.</li>
+<li><strong>Tope de las 23:00.</strong> Durante esos nueve días nadie puede trabajar más allá de las 23 horas.</li>
+<li><strong>Tope de las 20:00 el 24 de diciembre.</strong> El día inmediatamente anterior a Navidad, bajo ninguna circunstancia se trabaja más allá de las 20 horas. La misma regla rige el 31 de diciembre.</li>
+<li><strong>Las horas sobre la jornada se pagan como extra.</strong> Las horas que excedan la jornada máxima legal o la convenida, si es menor, se pagan como extraordinarias. Mientras el empleador use esta facultad, no procede pactar horas extra adicionales.</li>
+</ol>
+<p>En 2026 el 24 de diciembre es jueves. Si tu turno habitual termina a las 21:00, ese día debes salir a las 20:00. La salida anticipada no autoriza al empleador a descontarte la hora: es una prohibición legal, no un permiso que pidas tú.</p>
+
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: vendedora con jornada de 42 horas</div><ul><li>Jornada ordinaria de lunes a sábado, hasta las 19:00.</li><li>El empleador extiende su jornada en 2 horas, 9 días entre el 10 y el 23 de diciembre: sale a las 21:00 esos días.</li><li>Las horas que superen sus 42 horas semanales se pagan con recargo de 50 %.</li><li>Jueves 24: sale a más tardar a las 20:00.</li><li>Viernes 25: no trabaja; recibe su remuneración normal del día.</li></ul><span class="total">Calcula el recargo con la calculadora de horas extra</span></div>
+<p>Para convertir esas horas en pesos, la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> aplica el valor hora con la jornada de 42 horas vigente desde el 26 de abril de 2026 (Ley 21.561) y el recargo legal de 50 %.</p>
+
+<h2>¿Se paga el 25 de diciembre si no trabajo?</h2>
+<p>Sí. El feriado es un día de descanso legal y, si tienes sueldo mensual, no se descuenta: tu remuneración de diciembre es la misma que la de cualquier mes. Lo que no existe es un "bono de Navidad" o pago doble automático por el feriado. Si quieres revisar cuánto te llega en diciembre, la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> descuenta AFP, salud, seguro de cesantía e impuesto con las tasas vigentes.</p>
+<p>Quien trabaja con remuneración por día (jornal) o por turno debe revisar su contrato: la forma de pago del festivo depende de cómo se pactó la remuneración. Ante dudas, la DT responde consultas en su sitio.</p>
+<p>En el sector privado tampoco hay aguinaldo de Navidad obligatorio por ley: solo es exigible si está en el contrato, en un convenio colectivo o si se ha pagado de forma reiterada. Puedes estimarlo con la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a> y revisar el detalle en nuestro artículo sobre el <a href="/blog/aguinaldo-navidad-pensionados-2026">aguinaldo de Navidad 2026</a>.</p>
+
+<h2>Multas para el empleador</h2>
+<p>Las infracciones al artículo 2 de la Ley 19.973 y al artículo 24 del Código del Trabajo tienen la misma escala de multas a beneficio fiscal, que se aplica <strong>por cada trabajador afectado</strong>:</p>
+<table>
+<thead><tr><th>Tamaño del empleador</th><th>Multa por trabajador afectado</th></tr></thead>
+<tbody>
+<tr><td>Menos de 50 trabajadores</td><td>5 UTM</td></tr>
+<tr><td>50 o más trabajadores</td><td>10 UTM</td></tr>
+<tr><td>200 o más trabajadores</td><td>20 UTM</td></tr>
+</tbody>
+</table>
+<p>La multa se calcula en Unidades Tributarias Mensuales (UTM), cuyo valor en pesos cambia cada mes. Puedes convertirla con la <a href="/calculadoras/calculadora-utm-clp">calculadora de UTM a pesos</a>. Una tienda de un mall con 60 vendedores que abre el 25 con todo su personal arriesga 10 UTM por cada uno de ellos.</p>
+
+<h2>Qué hacer si te obligan a trabajar</h2>
+<ol class="steps">
+<li><strong>Confirma si tu rubro está exceptuado.</strong> Revisa la lista de la Ley 19.973. Si trabajas en una tienda común, el 25 es irrenunciable.</li>
+<li><strong>Si estás exceptuado, revisa el año anterior.</strong> Si trabajaste el 25 de diciembre de 2025 con el mismo empleador, este año te corresponde libre.</li>
+<li><strong>Guarda evidencia.</strong> Turnos publicados, mensajes con la instrucción y registros de asistencia sirven para la denuncia.</li>
+<li><strong>Denuncia en la Inspección del Trabajo.</strong> La DT indica que el camino es la denuncia ante la Inspección del Trabajo respectiva, que puede fiscalizar y aplicar la multa.</li>
+</ol>
+
+<h2>En resumen, para Navidad 2026</h2>
+<table>
+<thead><tr><th>Situación</th><th>Regla</th></tr></thead>
+<tbody>
+<tr><td>Dependiente del comercio (tienda, supermercado, mall)</td><td>No trabaja el viernes 25; no se puede pactar lo contrario.</td></tr>
+<tr><td>Restaurante, cine, bencinera, farmacia de turno, aeropuerto, casino</td><td>Puede trabajar; libre al menos una vez cada dos años con el mismo empleador.</td></tr>
+<tr><td>Rubro exceptuado que trabaja el 25</td><td>Día de descanso compensatorio (art. 38 CT).</td></tr>
+<tr><td>Comercio el jueves 24 y el jueves 31</td><td>Salida a más tardar a las 20:00 (art. 24 CT).</td></tr>
+<tr><td>Fuera del comercio</td><td>Festivo de descanso, salvo actividades del art. 38 CT.</td></tr>
+</tbody>
+</table>
+<p>El próximo feriado irrenunciable es el viernes 1 de enero de 2027, con las mismas reglas. El calendario completo del próximo año está en la <a href="/guias/feriados-chile-2027">guía de feriados 2027</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 con el texto vigente de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=230132" target="_blank" rel="noopener">Ley 19.973</a> y del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (artículos 24, 35, 36 y 38) en Ley Chile, y la consulta de la <a href="https://www.dt.gob.cl/portal/1628/w3-article-95017.html" target="_blank" rel="noopener">Dirección del Trabajo sobre feriados irrenunciables del comercio</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No reemplaza un dictamen de la Dirección del Trabajo ni asesoría legal. Ante un caso concreto, prevalece lo que resuelva la Inspección del Trabajo.</p></div></aside>
+<p>Para profundizar en remuneraciones y descuentos, revisa la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a> y la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Ley 19.973, artículo 2', url: 'https://www.bcn.cl/leychile/navegar?idNorma=230132' },
+      { label: 'Ley Chile — Código del Trabajo (arts. 24, 35, 36 y 38)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+      { label: 'Dirección del Trabajo — Feriados irrenunciables del comercio', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html' },
+    ],
+  },
+  {
     slug: 'embargos-cae-tgr-2026-cuentas-bienes-raices',
     title: 'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
     description:

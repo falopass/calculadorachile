@@ -419,6 +419,26 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'La cuarta cuota de contribuciones 2026 vence el lunes 30 de noviembre. Exención $61.711.570, tasas 0,893% y 1,042%, ejemplos y canales TGR.', // 140
   },
+  'feriado-irrenunciable-25-diciembre-2026': {
+    seoTitle: 'Feriado irrenunciable 25 de diciembre 2026: quién trabaja', // 57
+    seoDescription:
+      'El viernes 25 de diciembre de 2026 el comercio cierra (Ley 19.973). Excepciones, multas, salida a las 20:00 el 24 y descanso compensatorio.', // 139
+  },
+  'gratificacion-fin-de-ano-2026': {
+    seoTitle: 'Gratificación fin de año 2026: 25% y tope de 4,75 IMM', // 53
+    seoDescription:
+      'Gratificación legal 2026: 25% de lo devengado con tope anual de $2.629.377 (4,75 IMM de $553.553). Anticipos, reliquidación y ejemplo con sueldo mínimo.', // 152
+  },
+  'boleta-honorarios-retencion-15-25-2026': {
+    seoTitle: 'Boleta de honorarios 2026: retención 15,25% y alza a 17%', // 56
+    seoDescription:
+      'En 2026 la retención de honorarios es 15,25%; sube a 16% en 2027 y 17% en 2028 (Ley 21.133). Cuánto cambia tu líquido y cuánto bruto emitir.', // 140
+  },
+  'aguinaldo-navidad-2026-sector-publico': {
+    seoTitle: 'Aguinaldo Navidad 2026 sector público: monto y requisitos', // 57
+    seoDescription:
+      'Ley 21.724 vigente: $71.206 con líquida de noviembre hasta $1.060.493 y $37.666 sobre ese monto. Tope $3.511.800 y qué cambia con el reajuste 2026.', // 147
+  },
   'aguinaldo-navidad-pensionados-2026': {
     seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:
