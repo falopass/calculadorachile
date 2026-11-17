@@ -166,6 +166,34 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Monto total a percibir por 10 horas extra: $55.556 brutos imponibles.',
     },
   },
+  'trabajo-en-feriado': {
+    summary:
+      'Obtiene el valor día y el valor hora ordinaria con la fórmula de la DT y muestra el descanso compensatorio o el pago con recargo por las horas trabajadas en un festivo o domingo.',
+    calculationSteps: [
+      'Valor día = sueldo mensual ÷ 30.',
+      'Valor hora = sueldo ÷ 30 × 28 ÷ (jornada semanal × 4).',
+      'Aplica el recargo declarado, nunca inferior al 50% del art. 32.',
+      'Si se compensa con descanso, asigna un día por festivo trabajado (art. 38); si no, multiplica el valor hora con recargo por las horas.',
+    ],
+    assumptions: [
+      'Sueldo mensual fijo y jornada ordinaria semanal informada.',
+      'El usuario indica si su caso se compensa con descanso o se paga con recargo.',
+    ],
+    limitations: [
+      'No suma el recargo de 30% por domingo del comercio (art. 38 inc. 3) ni valida si el empleador está exceptuado del descanso.',
+      'Los feriados irrenunciables de la Ley 19.973 no pueden trabajarse en el comercio salvo excepciones legales.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 8 horas en un festivo pagadas con recargo legal',
+      inputs: ['Sueldo bruto: $900.000', 'Jornada: 42 horas semanales', 'Horas en el festivo: 8, recargo 50%'],
+      development: [
+        'Valor hora: $900.000 ÷ 30 × 28 ÷ 168 = $5.000',
+        'Valor hora con recargo: $5.000 × 1,5 = $7.500',
+        'Total: 8 × $7.500 = $60.000',
+      ],
+      result: 'Pago por el festivo trabajado: $60.000 brutos (o un día de descanso compensatorio si así corresponde).',
+    },
+  },
   'vacaciones-proporcionales': {
     summary:
       'Estima días y remuneración de feriado proporcional según tiempo trabajado, días pendientes y remuneración declarada.',

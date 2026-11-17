@@ -863,6 +863,134 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'trabajo-en-feriado',
+    name: 'Trabajo en Feriado o Domingo 2026',
+    description:
+      'Calcula cuánto corresponde por trabajar un festivo o domingo: valor hora DT, recargo mínimo de 50% o día de descanso compensatorio (art. 38).',
+    slug: 'calculadora-trabajo-en-feriado',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-16',
+    seoTitle: 'Trabajar en feriado 2026: cuánto te deben pagar en Chile',
+    seoDescription:
+      'Calcula el pago por trabajar un festivo o domingo: valor hora DT con jornada 42 h, recargo mínimo 50% o día de descanso compensatorio (art. 38).',
+    sources: [
+      {
+        name: 'BCN — Código del Trabajo, art. 38',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436&idParte=8511869',
+        note: 'Descanso compensatorio por festivo y pago no inferior al art. 32',
+      },
+      {
+        name: 'DT — valor hora con sueldo mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        note: 'Sueldo ÷ 30 × 28 ÷ (jornada × 4); recargo 50% del art. 32',
+      },
+      {
+        name: 'DT — trabajo en domingo o festivo sin excepción',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60240.html',
+        note: 'Se paga como extraordinario el tiempo laborado',
+      },
+      {
+        name: 'DT — feriados irrenunciables del comercio (Ley 19.973)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html',
+        note: '1 may, 18 y 19 sep, 25 dic y 1 ene',
+      },
+    ],
+    keywords: [
+      'trabajar en feriado',
+      'cuánto me pagan por trabajar un feriado',
+      'pago feriado trabajado',
+      'trabajar domingo pago',
+      'feriado irrenunciable',
+      'descanso compensatorio festivo',
+      'recargo 50% feriado',
+    ],
+    inputs: [
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo bruto mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$900.000',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'jornadaSemanal',
+        label: 'Jornada semanal (horas)',
+        type: 'select',
+        required: false,
+        options: [
+          { value: '42', label: '42 h — vigente desde 26-04-2026 (default)' },
+          { value: '44', label: '44 h — vigente abr-2024 a abr-2026' },
+          { value: '45', label: '45 h — histórica (antes 2024)' },
+          { value: '40', label: '40 h — desde abr-2028 / pactada' },
+        ],
+        defaultValue: '42',
+        tooltip: 'La fórmula DT divide sueldo ÷ 30 × 28 por las horas de cuatro semanas.',
+      },
+      {
+        id: 'horasTrabajadas',
+        label: 'Horas trabajadas en el feriado o domingo',
+        type: 'number',
+        unit: 'count',
+        placeholder: '8',
+        required: true,
+        min: 0,
+        max: 24,
+      },
+      {
+        id: 'recargo',
+        label: 'Recargo pactado (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '50',
+        required: false,
+        min: 50,
+        max: 200,
+        defaultValue: 50,
+        tooltip: '50% (factor 1,5) es el mínimo del art. 32; un contrato o convenio puede pactar más.',
+      },
+      {
+        id: 'compensaConDescanso',
+        label: '¿Se compensa con un día de descanso?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Sí: regla del art. 38 para empresas exceptuadas (un día de descanso por festivo). No: se paga con recargo (pacto del art. 38 inc. 6 o trabajador sin excepción).',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuánto me pagan por trabajar un feriado?',
+        answer:
+          'Depende de tu régimen. Si tu empresa está exceptuada del descanso dominical (art. 38), por cada festivo trabajado te corresponde un día de descanso compensatorio; si ese descanso excede uno semanal y pactan pagarlo, el pago no puede ser inferior al de horas extra (recargo 50%). Si no estás exceptuado, la DT indica que las horas en festivo se pagan como extraordinarias. Con $900.000 y jornada de 42 h, la hora vale $5.000 y con recargo $7.500.',
+      },
+      {
+        question: '¿Trabajar un domingo o festivo se paga doble?',
+        answer:
+          'No existe un pago doble automático. El mínimo legal es el recargo de 50% del art. 32 (factor 1,5) cuando las horas son extraordinarias o se remunera el descanso compensatorio. Un contrato o convenio colectivo puede pactar un recargo mayor, por ejemplo 100%.',
+      },
+      {
+        question: '¿Cuáles son los feriados irrenunciables?',
+        answer:
+          'Según la Ley 19.973, el 1 de mayo, el 18 y 19 de septiembre, el 25 de diciembre y el 1 de enero son feriados obligatorios e irrenunciables para los trabajadores del comercio. La DT aclara que quienes tienen derecho a ellos no pueden trabajar esos días aunque se ofrezca un recargo. Hay excepciones (restaurantes, cines, bencineras, farmacias de turno, entre otros), que deben recibir esos descansos al menos una vez cada dos años.',
+      },
+      {
+        question: '¿Cómo se calcula el valor de la hora?',
+        answer:
+          'La DT usa sueldo mensual ÷ 30 × 28 ÷ (jornada semanal × 4). Con jornada de 42 horas equivale a sueldo ÷ 180. Ejemplo: $900.000 ÷ 180 = $5.000 por hora; con recargo de 50% son $7.500.',
+      },
+      {
+        question: '¿Y el recargo de 30% por domingo en el comercio?',
+        answer:
+          'El art. 38 establece que los trabajadores de comercio y servicios que atienden público reciben un recargo de al menos 30% por las horas ordinarias trabajadas en domingo. Esta calculadora no lo suma automáticamente: estima el pago con el recargo que ingreses (mínimo 50%) y el descanso compensatorio por festivo.',
+      },
+    ],
+  },
+  {
     id: 'vacaciones-proporcionales',
     name: 'Vacaciones Proporcionales',
     description:

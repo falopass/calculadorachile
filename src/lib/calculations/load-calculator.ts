@@ -266,6 +266,20 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'trabajo-en-feriado': {
+      const { calculateTrabajoEnFeriado, trabajoEnFeriadoToResults } = await import('./trabajo-en-feriado');
+      return (inputs) => {
+        const result = calculateTrabajoEnFeriado({
+          sueldoBruto: coerceNumber(inputs.sueldoBruto),
+          jornadaSemanal: coerceNumber(inputs.jornadaSemanal, 42),
+          horasTrabajadas: coerceNumber(inputs.horasTrabajadas),
+          recargo: coerceNumber(inputs.recargo, 50),
+          compensaConDescanso: coerceBool(inputs.compensaConDescanso, true),
+        });
+        return trabajoEnFeriadoToResults(result);
+      };
+    }
+
     case 'vacaciones-proporcionales': {
       const { calculateVacaciones, vacacionesToResults } = await import('./vacaciones');
       return (inputs) => {

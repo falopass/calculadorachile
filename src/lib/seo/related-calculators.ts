@@ -160,6 +160,12 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-vacaciones-proporcionales',
     'calculadora-costo-empleado-pyme',
   ],
+  'calculadora-trabajo-en-feriado': [
+    'calculadora-horas-extra',
+    'calculadora-sueldo-liquido',
+    'calculadora-vacaciones-proporcionales',
+    'calculadora-gratificacion-legal',
+  ],
   'calculadora-gratificacion-legal': [
     'calculadora-sueldo-liquido',
     'calculadora-finiquito',
