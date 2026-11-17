@@ -33,7 +33,7 @@ export const RECARGO_HERENCIA: Record<ParentescoHerencia, number> = {
   colateral: 0.2,
   otro: 0.4,
 };
-/** Rebaja Registro Nacional de Discapacidad (art. 2 inc. final, Ley 21.210). */
+/** Rebaja Registro Nacional de Discapacidad (art. 2 inc. final, agregado por Ley 21.210 art. cuarto N° 2: LeyChile idNorma 1142667). */
 export const REBAJA_DISCAPACIDAD = 0.3;
 export const TOPE_REBAJA_DISCAPACIDAD_UF = 8000;
 

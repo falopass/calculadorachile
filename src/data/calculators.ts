@@ -4228,7 +4228,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         name: 'BCN — Ley 16.271 sobre impuesto a las herencias, art. 2',
         url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986',
-        note: 'Texto refundido DFL 1 de 2000 (Justicia): escala en UTA, exenciones de 50 y 5 UTA, recargos de 20 % y 40 %, rebaja de 30 % por discapacidad con tope de 8.000 UF',
+        note: 'Texto refundido DFL 1 de 2000 (Justicia): escala en UTA, exenciones de 50 y 5 UTA, recargos de 20 % y 40 %',
+      },
+      {
+        name: 'BCN — Ley 21.210, artículo cuarto N° 2',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1142667',
+        note: 'Agrega al art. 2 de la Ley 16.271 la rebaja de 30 % para inscritos en el Registro Nacional de Discapacidad, con tope anual de 8.000 UF',
       },
       {
         name: 'SII — ¿Cómo se calcula el impuesto a la herencia?',
