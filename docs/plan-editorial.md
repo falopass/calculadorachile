@@ -155,10 +155,10 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~35~~ | blog | ~~Aguinaldo Navidad sector público 2026~~ | ~~`aguinaldo-navidad-2026-sector-publico`~~ | publicado 2026-11-16 | laboral | ~~2026-12-04~~ | dic | ✅ |
 | ~~36~~ | blog | ~~Gratificación fin de año 2026~~ | ~~`gratificacion-fin-de-ano-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-08~~ | dic–ene | ✅ |
 | 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
-| **39** | **guía** | **Prep Operación Renta 2027 (checklist)** | `preparacion-operacion-renta-2027-checklist` | DR[20] · **única guía del plan** | impuestos | 2027-01-06 | ene–abr | **P2-ventana** |
+| ~~**39**~~ | **guía** | ~~**Prep Operación Renta 2027 (checklist)**~~ | ~~`preparacion-operacion-renta-2027-checklist`~~ | publicado 2026-11-17 en `guias.ts` · DR[20] | impuestos | ~~2027-01-06~~ | ene–abr | ✅ |
 | 40 | blog | Permiso circulación 2027 | `permiso-circulacion-2027-calcular-plazo` | satélite vehículos | vehículos | 2027-01-13 | ene–mar | **P3** |
 | 41 | blog | Intereses por mora | `intereses-mora-chile-2026-calcular` | — | finanzas | 2027-01-16 | continuo | **P3** |
-| 42 | blog | Sueldo mínimo 2027 | `sueldo-minimo-2027-reajuste-simular-liquido` | satélite sueldo | laboral | 2027-01-20 | ene | **P3** |
+| ~~42~~ | blog | ~~Sueldo mínimo 2027~~ | ~~`sueldo-minimo-2027-reajuste-simular-liquido`~~ | publicado 2026-11-17 | laboral | ~~2027-01-20~~ | ene | ✅ |
 | 43 | blog | Crédito hipotecario 2027 UF | `credito-hipotecario-2027-simular-dividendo` | satélite hipoteca | vivienda | 2027-01-23 | continuo | **P3** |
 | 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
 | ~~45~~ | blog | ~~Patente comercial 2027~~ | ~~`patente-comercial-2027-calcular`~~ | ~~satélite pymes~~ | empresas | ~~2026-09-23~~ | ene–mar | ✅ |
@@ -166,6 +166,8 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Bono $30.000 por hijo (Ley 21.840) | ~~`bono-30-mil-por-hijo-2026-quien-recibe-pago`~~ | publicado 2026-09-26 | familia | 2026-09-26 | sep–oct | ✅ |
 | — | blog | Bono Bodas de Oro octubre 2026 | ~~`bono-bodas-de-oro-octubre-2026-monto-requisitos`~~ | publicado 2026-09-26 | familia | 2026-09-26 | oct | ✅ |
 | — | blog | Sueldo part-time 30 horas 2026 | ~~`sueldo-part-time-30-horas-2026-minimo-proporcional`~~ | publicado 2026-09-26 | laboral | 2026-09-26 | continuo | ✅ |
+| — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
+| — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 
 **Conteo pendientes:** 32 filas activas (#2–#6, #8, #9, #16, #18, #29, #30, #31 y #45 en publicados).
 
