@@ -208,6 +208,103 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 
 const articleCatalog: ArticleDraft[] = [
   {
+    slug: 'gratificacion-fin-de-ano-2026',
+    title: 'Gratificación de fin de año 2026: cómo se calcula, el tope de 4,75 IMM y qué pasa en diciembre',
+    description:
+      'La gratificación legal del artículo 50 del Código del Trabajo es el 25 % de lo devengado en el año con tope de 4,75 ingresos mínimos. Tope 2026 con el IMM de $553.553, anticipos mensuales, reliquidación y ejemplo con sueldo mínimo.',
+    date: '2026-11-16',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'sueldo-liquido-chile',
+    embedCalculatorId: 'gratificacion-legal',
+    keywords: [
+      'gratificación fin de año 2026',
+      'gratificación legal 2026',
+      'tope gratificación 4,75 IMM 2026',
+      'artículo 50 código del trabajo',
+      'gratificación sueldo mínimo 2026',
+      'reliquidación gratificación diciembre',
+    ],
+    relatedCalculators: ['calculadora-gratificacion-legal', 'calculadora-sueldo-liquido'],
+    content: `<p class="article-lead">Llega diciembre y aparece la pregunta de siempre: ¿me toca gratificación de fin de año? Para la mayoría de los trabajadores del sector privado la respuesta es que ya la están recibiendo, en cuotas, mes a mes. La gratificación legal del <strong>artículo 50 del Código del Trabajo</strong> equivale al <strong>25 % de lo devengado en el año, con un tope de 4,75 ingresos mínimos mensuales (IMM)</strong>. Con el IMM vigente de <strong>$553.553</strong>, el tope anual de 2026 es <strong>$2.629.377</strong> y el tope mensual de los anticipos es <strong>$219.115</strong>.</p>
+<p>Este artículo explica cómo funciona la gratificación con el texto vigente del Código del Trabajo y las respuestas de la Dirección del Trabajo (DT), con datos verificados al 16 de noviembre de 2026. No cubre bonos de Navidad pactados ni aguinaldos: esos dependen del contrato, no de la ley.</p>
+
+<h2>Gratificación no es aguinaldo</h2>
+<p>La confusión es frecuente. La <strong>gratificación legal</strong> es una obligación del empleador que cumple ciertos requisitos y se calcula sobre utilidades o sobre remuneraciones. El <strong>aguinaldo de Navidad</strong> en el sector privado es voluntario: solo es exigible si está en el contrato, en un instrumento colectivo o si se pagó de forma reiterada. Un pago de diciembre puede ser una cosa, la otra o ambas. Si quieres estimar un aguinaldo pactado, usa la <a href="/calculadoras/calculadora-aguinaldo">calculadora de aguinaldo</a>.</p>
+
+<h2>Quién tiene derecho a gratificación</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 47 del Código del Trabajo</a> obliga a gratificar anualmente a sus trabajadores a los establecimientos mineros, industriales, comerciales o agrícolas, empresas y cualesquiera otros que persigan fines de lucro, y a las cooperativas, que cumplan dos condiciones:</p>
+<ol class="steps">
+<li><strong>Estar obligados a llevar libros de contabilidad.</strong></li>
+<li><strong>Obtener utilidades o excedentes líquidos en su giro.</strong></li>
+</ol>
+<p>Si el empleador cumple esos requisitos, la ley le da dos caminos. El del artículo 47 consiste en repartir entre los trabajadores, en proporción a lo devengado por cada uno, no menos del 30 % de las utilidades líquidas. El del artículo 50, que es el que usa la gran mayoría de las empresas porque se puede calcular de antemano, consiste en pagar el 25 % de lo devengado por cada trabajador en el ejercicio, con tope de 4,75 IMM. Al optar por el artículo 50, el empleador queda liberado de la obligación del artículo 47, sea cual sea la utilidad que obtenga.</p>
+<p>Quedan fuera, en principio, los empleadores sin fines de lucro (fundaciones, corporaciones), los que no llevan contabilidad completa y los que no tienen utilidades. Si tu contrato establece una gratificación garantizada, el empleador debe pagarla aunque no haya utilidades: ahí manda lo pactado, que nunca puede ser inferior a lo legal cuando corresponde la legal.</p>
+
+<h2>La fórmula del artículo 50, paso a paso</h2>
+<p>Según la <a href="https://www.dt.gob.cl/portal/1626/w3-article-99034.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, el cálculo sigue esta lógica:</p>
+<ol class="steps">
+<li><strong>Suma lo devengado en el año.</strong> Se consideran las remuneraciones mensuales del ejercicio comercial (sueldo, horas extra, comisiones y otros pagos que sean remuneración).</li>
+<li><strong>Calcula el 25 %.</strong> Ese es el monto bruto que te correspondería sin tope.</li>
+<li><strong>Calcula el tope.</strong> Multiplica 4,75 por el IMM vigente al 31 de diciembre del año que se gratifica.</li>
+<li><strong>Paga el menor de los dos.</strong> Si el 25 % supera el tope, recibes el tope.</li>
+</ol>
+<p>Ese tope anual es el mismo para todos los trabajadores de la empresa, sin importar cuánto ganen. Por eso, sobre cierto sueldo, la gratificación deja de crecer.</p>
+
+<h2>El IMM que se usa en 2026</h2>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a> fijó el ingreso mínimo mensual en <strong>$553.553</strong> desde el 1 de mayo de 2026 para trabajadores mayores de 18 y hasta 65 años, valor confirmado por la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>. La misma ley dispone que desde el 1 de enero de 2027 el IMM se reajuste según la variación del IPC informada por el INE entre mayo y diciembre de 2026.</p>
+<p>Esa fecha importa: el reajuste de enero de 2027 llega <strong>después</strong> del 31 de diciembre de 2026, de modo que no altera el tope de la gratificación 2026. Con el IMM de $553.553, el tope de 2026 queda así:</p>
+<table>
+<thead><tr><th>Concepto</th><th>Cálculo</th><th>Monto</th></tr></thead>
+<tbody>
+<tr><td>Tope anual 2026</td><td>4,75 × $553.553</td><td>$2.629.377</td></tr>
+<tr><td>Tope mensual equivalente</td><td>$2.629.377 ÷ 12</td><td>$219.115</td></tr>
+</tbody>
+</table>
+<p>Los montos se redondean al peso. El 25 % de un sueldo mensual alcanza el tope mensual cuando ese sueldo es de $876.459 o más (4,75 IMM ÷ 12 ÷ 0,25). Sobre esa cifra, la gratificación ya no aumenta.</p>
+
+<h2>Anticipos mensuales y reliquidación de fin de año</h2>
+<p>En la práctica casi nadie recibe la gratificación de una vez en abril. La mayoría de los contratos la paga como <strong>anticipo mensual</strong>: el 25 % del sueldo de cada mes, con tope de 4,75 IMM dividido por 12. Es el ítem "gratificación legal" de tu liquidación.</p>
+<p>Al cierre del ejercicio el empleador debe comparar lo anticipado con lo que realmente correspondía y pagar la diferencia, si la hay. Aquí entra un detalle de 2026: el IMM cambió en mayo. Entre enero y abril el tope mensual de los anticipos se calculaba con el IMM anterior, más bajo. Como la DT indica que el tope anual se determina con el IMM vigente al 31 de diciembre, un trabajador cuyo 25 % supera el tope puede tener una pequeña diferencia a su favor al reliquidar.</p>
+<p>La DT señala que la gratificación anual se paga una vez determinadas las utilidades, a más tardar en abril del año siguiente, junto con la declaración de renta de la empresa. Si tu empleador paga anticipos, revisa en tu liquidación de diciembre, o en la que corresponda según la práctica de la empresa, si aparece un ajuste de gratificación.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>¿Y si los anticipos superaron lo que correspondía?</strong><p>Puede pasar si la empresa paga gratificación del artículo 47 y al final del ejercicio no tuvo utilidades. Lo que pueda hacer el empleador en ese caso depende de cómo se pactaron los anticipos. Ante una diferencia que no entiendes, consulta a la Dirección del Trabajo antes de firmar un descuento.</p></div></aside>
+
+<h2>Ejemplo con sueldo mínimo</h2>
+<div class="numeric-example"><div class="numeric-example__title">Trabajadora con sueldo base igual al IMM, mayo a diciembre 2026</div><ul><li>Sueldo base mensual: $553.553.</li><li>25 % mensual: $138.388.</li><li>Tope mensual: $219.115. El 25 % está bajo el tope, así que recibe $138.388.</li><li>Remuneración imponible mensual: $553.553 + $138.388 = $691.941.</li><li>Gratificación de mayo a diciembre (8 meses): 8 × $138.388 = $1.107.104.</li></ul><span class="total">Gratificación mensual: $138.388</span></div>
+<p>Este ejemplo es hipotético y omite enero a abril porque el IMM de esos meses era distinto. Lo importante es la lógica: para quien gana el mínimo, la gratificación del artículo 50 equivale siempre al 25 % del sueldo, porque nunca llega al tope. La gratificación es imponible y tributable: se suma al sueldo para calcular AFP, salud, seguro de cesantía e impuesto. Para ver cuánto queda líquido, ingresa el total en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>
+<p>Ojo con un error común: el sueldo base no puede ser inferior al IMM. La gratificación se paga encima del mínimo, no para completarlo.</p>
+
+<h2>Ejemplo con un sueldo que supera el tope</h2>
+<div class="numeric-example"><div class="numeric-example__title">Trabajador con sueldo base de $1.200.000</div><ul><li>25 % mensual: $300.000.</li><li>Tope mensual: $219.115.</li><li>Como el 25 % supera el tope, recibe $219.115 al mes.</li><li>Si trabajó todo el año con anticipos al tope vigente en cada mes, al reliquidar se compara lo anticipado con el tope anual de $2.629.377.</li></ul><span class="total">Gratificación mensual desde mayo: $219.115</span></div>
+
+<h2>Si no trabajaste todo el año</h2>
+<p>El artículo 52 del Código del Trabajo establece que quien no alcanza a completar un año de servicios tiene derecho a la gratificación en proporción a los meses trabajados. La DT agrega que, en ese caso, el tope de 4,75 IMM también se calcula de forma proporcional al tiempo trabajado. Si entraste a la empresa en septiembre, por ejemplo, tu gratificación de 2026 se calcula sobre lo devengado entre septiembre y diciembre, con un tope proporcional a esos meses.</p>
+<p>Si terminas tu contrato antes de fin de año, la gratificación proporcional que no se haya anticipado debe incluirse en el finiquito.</p>
+<p>La DT también ha indicado que los períodos con licencia médica no se descuentan del cálculo proporcional del tope.</p>
+
+<h2>Qué revisar en tu liquidación de diciembre</h2>
+<ul>
+<li>Que la gratificación sea el 25 % del sueldo del mes o el tope mensual, el que sea menor.</li>
+<li>Que el tope usado desde mayo corresponda al IMM de $553.553 ($219.115 mensual).</li>
+<li>Si tu sueldo supera $876.459, que exista un ajuste de fin de año o de abril, cuando corresponda.</li>
+<li>Que la gratificación esté sumada a la base imponible para AFP, salud y seguro de cesantía.</li>
+<li>Que un eventual aguinaldo pactado aparezca como ítem separado y no reemplace la gratificación.</li>
+</ul>
+<p>Para verificar el cálculo con tus propios números, la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a> aplica el 25 % y el tope con el IMM vigente.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 con el texto vigente del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (artículos 47, 50 y 52) en Ley Chile, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a>, la consulta de la <a href="https://www.dt.gob.cl/portal/1626/w3-article-99034.html" target="_blank" rel="noopener">Dirección del Trabajo sobre gratificación</a> y la página de la DT sobre el <a href="https://www.dt.gob.cl/portal/1626/w3-article-60141.html" target="_blank" rel="noopener">ingreso mínimo mensual</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los ejemplos redondean al peso y no reemplazan una liquidación oficial ni un pronunciamiento de la Dirección del Trabajo.</p></div></aside>
+<p>Para profundizar en descuentos e impuesto sobre tu remuneración, revisa la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Código del Trabajo (arts. 47, 50 y 52)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+      { label: 'Ley Chile — Ley 21.830 (ingreso mínimo 2026)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354' },
+      { label: 'Dirección del Trabajo — Gratificación legal', url: 'https://www.dt.gob.cl/portal/1626/w3-article-99034.html' },
+      { label: 'Dirección del Trabajo — Ingreso mínimo mensual', url: 'https://www.dt.gob.cl/portal/1626/w3-article-60141.html' },
+    ],
+  },
+  {
     slug: 'feriado-irrenunciable-25-diciembre-2026',
     title: 'Feriado irrenunciable del 25 de diciembre de 2026: quién descansa, quién trabaja y qué pasa con el 24',
     description:

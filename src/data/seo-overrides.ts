@@ -421,6 +421,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'El viernes 25 de diciembre de 2026 el comercio cierra (Ley 19.973). Excepciones, multas, salida a las 20:00 el 24 y descanso compensatorio.', // 139
   },
+  'gratificacion-fin-de-ano-2026': {
+    seoTitle: 'Gratificación fin de año 2026: 25% y tope de 4,75 IMM', // 53
+    seoDescription:
+      'Gratificación legal 2026: 25% de lo devengado con tope anual de $2.629.377 (4,75 IMM de $553.553). Anticipos, reliquidación y ejemplo con sueldo mínimo.', // 152
+  },
   'aguinaldo-navidad-pensionados-2026': {
     seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:
