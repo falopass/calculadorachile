@@ -698,6 +698,21 @@ export async function loadCalculationFn(
         return divisaViajeClpToResults(result);
       };
     }
+    case 'sol-peruano-clp': {
+      const { calculateDivisaViajeClp, divisaViajeClpToResults } = await import('./divisa-viaje-clp');
+      return (inputs) => {
+        const result = calculateDivisaViajeClp({
+          codigo: 'PEN',
+          monto: coerceNumber(inputs.monto),
+          aClp: inputs.direccion !== 'clp_a_pen',
+          tasaPersonalizada:
+            inputs.tasaPersonalizada != null && String(inputs.tasaPersonalizada) !== ''
+              ? coerceNumber(inputs.tasaPersonalizada)
+              : undefined,
+        });
+        return divisaViajeClpToResults(result);
+      };
+    }
     case 'peso-argentino-clp': {
       const { calculatePesoArgentinoClp, pesoArgentinoClpToResults } =
         await import('./peso-argentino-clp');

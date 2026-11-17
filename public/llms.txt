@@ -58,6 +58,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [UTM a pesos](https://calculadorachile.cl/calculadoras/calculadora-utm-clp): conversión con el valor oficial del mes.
 - [Dólar y euro a pesos](https://calculadorachile.cl/calculadoras/calculadora-conversor-divisas): conversión con el dólar observado y el euro del Banco Central.
 - [Peso argentino a chileno](https://calculadorachile.cl/calculadoras/peso-argentino-a-chileno): ARS ↔ CLP con el tipo de cambio nominal referencial del Banco Central.
+- [Sol peruano a peso chileno](https://calculadorachile.cl/calculadoras/sol-peruano-a-peso-chileno): PEN ↔ CLP con el tipo de cambio nominal referencial del Banco Central.
 - [Real brasileño a peso chileno](https://calculadorachile.cl/calculadoras/real-brasileno-a-peso-chileno): BRL ↔ CLP con el tipo de cambio nominal referencial del Banco Central.
 - [Impuestos por compras internacionales](https://calculadorachile.cl/calculadoras/calculadora-compras-internacionales): IVA y arancel de compras en el extranjero (hasta US$500 y sobre US$500) según Aduanas y el SII.
 - [IPC](https://calculadorachile.cl/calculadoras/calculadora-ipc): variación del IPC entre dos meses y reajuste de montos con la serie oficial del INE.

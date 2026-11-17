@@ -221,6 +221,16 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     },
   },
 
+  'sol-peruano-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('PEN').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('PEN').seoDescription;
+    },
+  },
+
   'peso-argentino-a-chileno': {
     // E-050: meta sin «hoy» si source=fallback o observación >3 días hábiles
     get seoTitle() {

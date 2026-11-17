@@ -1129,6 +1129,11 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         lead: 'Para pasar reales brasileños a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.BRL.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
       };
 
+    case 'sol-peruano-clp':
+      return {
+        lead: 'Para pasar soles peruanos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.PEN.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
+      };
+
     default:
       return null;
   }
