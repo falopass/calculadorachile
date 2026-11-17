@@ -426,6 +426,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'Gratificación legal 2026: 25% de lo devengado con tope anual de $2.629.377 (4,75 IMM de $553.553). Anticipos, reliquidación y ejemplo con sueldo mínimo.', // 152
   },
+  'boleta-honorarios-retencion-15-25-2026': {
+    seoTitle: 'Boleta de honorarios 2026: retención 15,25% y alza a 17%', // 56
+    seoDescription:
+      'En 2026 la retención de honorarios es 15,25%; sube a 16% en 2027 y 17% en 2028 (Ley 21.133). Cuánto cambia tu líquido y cuánto bruto emitir.', // 140
+  },
   'aguinaldo-navidad-pensionados-2026': {
     seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:

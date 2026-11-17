@@ -208,6 +208,108 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 
 const articleCatalog: ArticleDraft[] = [
   {
+    slug: 'boleta-honorarios-retencion-15-25-2026',
+    title: 'Retención de boleta de honorarios 2026: 15,25 % y calendario hasta el 17 % de 2028',
+    description:
+      'En 2026 la retención de las boletas de honorarios es 15,25 %; sube a 16 % en 2027 y a 17 % en 2028 (Ley 21.133). Qué financia, cuánto cambia tu líquido año a año y cómo ajustar tus tarifas.',
+    date: '2026-11-16',
+    category: 'impuestos',
+    readingTime: 9,
+    relatedGuia: 'iva-boleta-honorarios-chile',
+    embedCalculatorId: 'boleta-honorarios',
+    keywords: [
+      'retención boleta honorarios 2026',
+      'boleta honorarios 15,25%',
+      'retención honorarios 2027 16%',
+      'retención honorarios 2028 17%',
+      'ley 21.133 calendario retención',
+      'cuánto me retienen boleta honorarios',
+    ],
+    relatedCalculators: ['calculadora-boleta-honorarios', 'calculadora-cotizacion-independientes'],
+    content: `<p class="article-lead">Si emites boletas de honorarios, en 2026 te retienen el <strong>15,25 %</strong> del monto bruto. No es el último cambio: la <strong>Ley 21.133</strong> fijó un calendario que lleva la retención a <strong>16 % en 2027</strong> y a <strong>17 % en 2028</strong>. Cada alza reduce lo que recibes al momento del pago, aunque esa plata no se pierde: financia tus cotizaciones de seguridad social y tu impuesto anual, y lo que sobra vuelve en la devolución de la Operación Renta.</p>
+<p>Este artículo se concentra en el calendario y en sus efectos prácticos: cuánto cambia el líquido año a año, cómo ajustar una tarifa y qué revisar antes de 2027. Para el paso a paso de emisión, gastos presuntos y anulaciones, revisa nuestra <a href="/blog/boleta-honorarios-completo">guía completa de boleta de honorarios</a>. Datos verificados al 16 de noviembre de 2026 en el SII y en la Subsecretaría de Previsión Social.</p>
+
+<h2>El calendario oficial: de 14,5 % a 17 %</h2>
+<p>El <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">Servicio de Impuestos Internos</a> informa que, según la Ley 21.133, desde el 1 de enero de 2026 la retención pasó de 14,5 % a 15,25 %, y que sube de forma escalonada hasta llegar a 17 % en 2028. La <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">Subsecretaría de Previsión Social</a> describe el mecanismo: desde 2020 la retención aumenta 0,75 puntos porcentuales por año durante ocho años y 1 punto el noveno año.</p>
+<table>
+<thead><tr><th>Año de emisión</th><th>Retención</th><th>Cambio respecto del año anterior</th></tr></thead>
+<tbody>
+<tr><td>2025</td><td>14,5 %</td><td>—</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>15,25 %</strong></td><td>+0,75 puntos</td></tr>
+<tr><td>2027</td><td>16 %</td><td>+0,75 puntos</td></tr>
+<tr><td>2028</td><td>17 %</td><td>+1 punto</td></tr>
+</tbody>
+</table>
+<p>La tasa que se aplica es la del año en que se emite la boleta. Una boleta emitida el 30 de diciembre de 2026 lleva 15,25 %; una emitida el 4 de enero de 2027, 16 %, aunque el servicio se haya prestado en diciembre. El SII indica que, si emites en sii.cl, la aplicación calcula automáticamente la retención vigente.</p>
+
+<h2>Por qué sube la retención</h2>
+<p>La Ley 21.133 incorporó a los trabajadores independientes que emiten boletas de honorarios a la seguridad social. En lugar de pagar cotizaciones mes a mes, el sistema funciona así, según la Subsecretaría de Previsión Social:</p>
+<ol class="steps">
+<li><strong>Durante el año</strong> quien te paga retiene el porcentaje vigente y lo entera al Fisco.</li>
+<li><strong>Antes de la Operación Renta</strong> el SII determina las cotizaciones que te corresponden con la información de las instituciones previsionales.</li>
+<li><strong>En la Operación Renta</strong> la Tesorería General de la República paga esas cotizaciones a tu AFP, salud y demás instituciones, con cargo al monto que tenías disponible para la devolución.</li>
+<li><strong>Lo que queda</strong>, después de impuesto y cotizaciones, se devuelve. Si no alcanza, puede quedar un saldo por pagar.</li>
+</ol>
+<p>La Subsecretaría lo resume así: con el alza de la retención, cada año aumenta también el monto de cotizaciones pagadas con esas retenciones. Una retención más alta no significa un impuesto más alto: significa que una parte mayor de tus obligaciones anuales se paga por adelantado.</p>
+
+<h2>Cuánto cambia tu líquido, año a año</h2>
+<div class="numeric-example"><div class="numeric-example__title">Boleta por $1.000.000 bruto</div><ul><li>2025 (14,5 %): retención $145.000, líquido $855.000.</li><li>2026 (15,25 %): retención $152.500, líquido $847.500.</li><li>2027 (16 %): retención $160.000, líquido $840.000.</li><li>2028 (17 %): retención $170.000, líquido $830.000.</li></ul><span class="total">Entre 2026 y 2028 el líquido baja $17.500 por cada millón bruto</span></div>
+<p>Si emites una boleta de $1.000.000 cada mes, el líquido anual pasa de $10.170.000 en 2026 a $9.960.000 en 2028: $210.000 menos en el bolsillo durante el año, que quedan como retención para la Operación Renta siguiente.</p>
+
+<h2>Si cobras un líquido fijo: cuánto bruto debes emitir</h2>
+<p>Muchos independientes acuerdan con el cliente un monto "líquido". En ese caso, cada alza obliga a emitir una boleta bruta mayor. La fórmula es dividir el líquido por (1 − tasa):</p>
+<table>
+<thead><tr><th>Año</th><th>Retención</th><th>Bruto para recibir $1.000.000 líquido</th></tr></thead>
+<tbody>
+<tr><td>2025</td><td>14,5 %</td><td>$1.169.591</td></tr>
+<tr><td>2026</td><td>15,25 %</td><td>$1.179.941</td></tr>
+<tr><td>2027</td><td>16 %</td><td>$1.190.476</td></tr>
+<tr><td>2028</td><td>17 %</td><td>$1.204.819</td></tr>
+</tbody>
+</table>
+<p>Valores redondeados al peso. Al emitir, la retención se calcula sobre el bruto y puede haber diferencias de un peso por redondeo. Si tu contrato fija un bruto, el cliente no paga más y tú recibes menos; si fija un líquido, el costo para el cliente sube cada enero. Conviene dejar escrito cuál de las dos cosas se pactó antes de que empiece 2027. La <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> hace la conversión en ambos sentidos.</p>
+
+<h2>Qué pasa con tus cotizaciones</h2>
+<p>Según la Subsecretaría de Previsión Social, los independientes cotizan anualmente sobre una renta imponible equivalente al <strong>80 % de sus honorarios brutos</strong> del año anterior. Esa renta imponible no puede ser inferior a cuatro ingresos mínimos mensuales ni superior a 12 veces el tope imponible mensual.</p>
+<p>En el período transitorio existen dos modalidades:</p>
+<ul>
+<li><strong>Cobertura completa:</strong> se cotiza sobre el 100 % de la renta imponible anual para salud, pensiones y los seguros sociales.</li>
+<li><strong>Cobertura parcial:</strong> para 2026, salud y pensiones se cotizan sobre el 80 % de la renta imponible anual; el seguro de accidentes del trabajo, el Seguro SANNA y el Seguro de Invalidez y Sobrevivencia se cotizan sobre el 100 %.</li>
+</ul>
+<p>La cobertura tiene un desfase que conviene entender: con los honorarios de 2026 se pagan cotizaciones en la Operación Renta 2027, y las prestaciones quedan vigentes entre el 1 de julio de 2027 y el 30 de junio de 2028. Para estimar cuánto se descontará de tu devolución, usa la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a>.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Un error frecuente</strong><p>El 15,25 % no se reparte mes a mes entre AFP, Fonasa y mutual. Es una retención única que se entera al Fisco y se imputa en la Operación Renta. El cálculo de cotizaciones lo hace el SII sobre la renta imponible anual, no sobre cada boleta.</p></div></aside>
+
+<h2>Quién retiene y quién no</h2>
+<p>Si quien recibe la boleta está obligado a retener, descuenta el porcentaje, te paga el líquido y entera la retención. Si no retiene, recibes el bruto y eres tú quien debe declarar y pagar el mismo porcentaje como pago provisional mensual (PPM) en el Formulario 29. En ambos casos la tasa de 2026 es 15,25 %. Las reglas sobre quién retiene, junto con el caso de las boletas de terceros, están desarrolladas en la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>
+
+<h2>Qué hacer antes de 2027</h2>
+<ol class="steps">
+<li><strong>Revisa tus contratos.</strong> Identifica si pactaste montos brutos o líquidos y cuál será el efecto de pasar a 16 %.</li>
+<li><strong>Actualiza tus tarifas.</strong> Si cobras un líquido fijo, en 2027 necesitas emitir cerca de 0,9 % más bruto que en 2026 para recibir lo mismo.</li>
+<li><strong>Proyecta tu Operación Renta 2027.</strong> Suma las retenciones de 2026 y compáralas con lo que te corresponde pagar de impuesto y cotizaciones. La devolución puede ser menor de lo que esperas si tus honorarios subieron.</li>
+<li><strong>Revisa tu cobertura.</strong> Si necesitas licencias médicas o protección maternal, verifica que tu cotización cubra el período en que la vas a usar.</li>
+<li><strong>Mantén orden mensual.</strong> Revisa en sii.cl tus boletas emitidas y las retenciones informadas por tus clientes.</li>
+</ol>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿El 17 % es el último aumento?</h3>
+<p>Según el SII y la Subsecretaría de Previsión Social, el 17 % de 2028 es la meta final del calendario de la Ley 21.133.</p>
+<h3>¿Puedo pedir que no me retengan?</h3>
+<p>Que se retenga o no depende de si quien recibe la boleta está obligado a retener, no de un acuerdo entre las partes. Si no hay retención, el mismo porcentaje se paga como PPM.</p>
+<h3>¿Me devuelven todo lo retenido?</h3>
+<p>No necesariamente. La devolución depende de tu impuesto anual y de las cotizaciones que se pagan con cargo a lo retenido. En muchos casos queda un saldo a favor, pero no está garantizado.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 16 de noviembre de 2026 en la <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">página del SII sobre la retención de boletas de honorarios 2026</a> y en las <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes de la Ley de Honorarios de la Subsecretaría de Previsión Social</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los ejemplos redondean al peso y no reemplazan la propuesta de declaración del SII ni asesoría tributaria. Edad, afiliación, pensión, ingresos como dependiente y regímenes especiales pueden cambiar tu resultado.</p></div></aside>
+<p>Para profundizar en IVA, retenciones y el caso de los independientes, revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>`,
+    sources: [
+      { label: 'SII — Boleta de honorarios 2026: retención 15,25 %', url: 'https://www.sii.cl/destacados/boletas_honorarios/' },
+      { label: 'Subsecretaría de Previsión Social — Ley de Honorarios, preguntas frecuentes', url: 'https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/' },
+    ],
+  },
+  {
     slug: 'gratificacion-fin-de-ano-2026',
     title: 'Gratificación de fin de año 2026: cómo se calcula, el tope de 4,75 IMM y qué pasa en diciembre',
     description:

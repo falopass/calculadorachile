@@ -97,6 +97,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | — | blog | Cómo cobrar Seguro de Cesantía AFC | `como-cobrar-seguro-cesantia-afc-2026` | 2026-07-10 | laboral | finiquito |
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 | — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
+| 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | 2026-11-16 | impuestos | boleta-honorarios, cotizacion-independientes |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 
@@ -124,7 +125,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~9~~ | blog | ~~Asignación familiar 2026: tramos y montos~~ | ~~`asignacion-familiar-2026-tramos-montos`~~ | satélite familia | familia | ~~2026-08-12~~ | sep–dic | ✅ |
 | 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
 | 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] · Ventana perdida (vence 30 sep); cubierto dentro de #29 | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
-| 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | DR[24] · satélite iva-boleta | impuestos | 2026-09-08 | continuo | **P2-continuo** |
+| ~~12~~ | blog | ~~Boleta honorarios retención 15,25%~~ | ~~`boleta-honorarios-retencion-15-25-2026`~~ | publicado 2026-11-16 | impuestos | ~~2026-09-08~~ | continuo | ✅ |
 | 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | satélite iva-boleta | impuestos | 2026-09-11 | ~día 12 | **P2-ventana** |
 | 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
@@ -367,13 +368,13 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                   13  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
-  Pendientes:                   35
-    blog:                       33
+  Publicados:                   14  (todos blog; +#4, #5, #8 y #9 el 2026-08-12)
+  Pendientes:                   34
+    blog:                       32
     blog* (candidata guía):      2   (#47, #48)
     guía:                        1   (#39 Operación Renta)
     P1 restante:                 0
-    P2:                         29
+    P2:                         28
     P3:                          6
   Total publicados + pendientes: 48
 ```
