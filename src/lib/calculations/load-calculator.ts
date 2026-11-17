@@ -327,6 +327,24 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'capacidad-credito-hipotecario': {
+      const { calculateCapacidadCreditoHipotecario, capacidadCreditoHipotecarioToResults } = await import(
+        './capacidad-credito-hipotecario'
+      );
+      return (inputs) =>
+        capacidadCreditoHipotecarioToResults(
+          calculateCapacidadCreditoHipotecario({
+            ingresoMensual: coerceNumber(inputs.ingresoMensual),
+            otrasDeudasMensuales: coerceNumber(inputs.otrasDeudasMensuales, 0),
+            porcentajeDividendo: coerceNumber(inputs.porcentajeDividendo, 25),
+            tasaAnual: coerceNumber(inputs.tasaAnual),
+            plazoAnos: coerceNumber(inputs.plazoAnos, 25),
+            porcentajeFinanciamiento: coerceNumber(inputs.porcentajeFinanciamiento, 80),
+            valorUF: live?.valorUF,
+          }),
+        );
+    }
+
     case 'credito-hipotecario': {
       const { calculateCreditoHipotecario, creditoHipotecarioToResults } =
         await import('./credito-hipotecario');
@@ -566,6 +584,20 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'impuesto-herencia': {
+      const { calculateImpuestoHerencia, impuestoHerenciaToResults } = await import('./impuesto-herencia');
+      return (inputs) =>
+        impuestoHerenciaToResults(
+          calculateImpuestoHerencia({
+            asignacionLiquida: coerceNumber(inputs.asignacionLiquida),
+            parentesco: inputs.parentesco as import('./impuesto-herencia').ParentescoHerencia,
+            discapacidad: coerceBool(inputs.discapacidad),
+            valorUTM: coerceNumber(inputs.valorUTM, 0) || live?.valorUTM,
+            valorUF: live?.valorUF,
+          }),
+        );
+    }
+
     case 'impuesto-segunda-categoria': {
       const { calculateImpuestoSegundaCategoria, impuestoSegundaCategoriaToResults } =
         await import('./impuesto-segunda-categoria');
@@ -802,6 +834,20 @@ export async function loadCalculationFn(
         });
         return seguroCesantiaToResults(result);
       };
+    }
+
+    case 'prenatal-postnatal': {
+      const { calculatePrenatalPostnatal, prenatalPostnatalToResults } = await import('./prenatal-postnatal');
+      return (inputs) =>
+        prenatalPostnatalToResults(
+          calculatePrenatalPostnatal({
+            fechaProbableParto: String(inputs.fechaProbableParto ?? ''),
+            fechaParto: String(inputs.fechaParto ?? ''),
+            prematuroOBajoPeso: coerceBool(inputs.prematuroOBajoPeso),
+            numeroHijos: coerceNumber(inputs.numeroHijos, 1),
+            mediaJornada: coerceBool(inputs.mediaJornada),
+          }),
+        );
     }
 
     case 'licencia-medica': {

@@ -37,6 +37,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [IVA](https://calculadorachile.cl/calculadoras/calculadora-iva): agregar o quitar el 19% entre neto y bruto.
 - [Boleta de honorarios](https://calculadorachile.cl/calculadoras/calculadora-boleta-honorarios): retención según el calendario de la Ley 21.133, de bruto a líquido y de líquido a bruto.
 - [Impuesto de segunda categoría](https://calculadorachile.cl/calculadoras/calculadora-impuesto-segunda-categoria): impuesto único mensual sobre el sueldo con los tramos del SII en UTM.
+- [Impuesto a la herencia](https://calculadorachile.cl/calculadoras/calculadora-impuesto-herencia): impuesto por heredero según la Ley 16.271, con exención y recargo por parentesco.
 - [Operación Renta](https://calculadorachile.cl/calculadoras/calculadora-operacion-renta): simulación de impuesto global complementario y devolución para independientes.
 - [Plusvalía por venta de propiedad](https://calculadorachile.cl/calculadoras/calculadora-plusvalia): impuesto a la ganancia de capital al vender un inmueble.
 - [PPM](https://calculadorachile.cl/calculadoras/calculadora-ppm): pagos provisionales mensuales según actividad e ingresos brutos.
@@ -67,6 +68,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 ### Vivienda
 
 - [Crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-credito-hipotecario): dividendo en UF y pesos con amortización francesa.
+- [Capacidad de crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-capacidad-credito-hipotecario): crédito máximo en UF según sueldo, otras deudas y porcentaje dividendo/renta editable.
 - [Contribuciones de bienes raíces](https://calculadorachile.cl/calculadoras/calculadora-contribuciones): cuota según avalúo fiscal y reglas SII.
 - [Reajuste de arriendo](https://calculadorachile.cl/calculadoras/calculadora-reajuste-arriendo): reajuste del arriendo por variación de la UF o del IPC.
 - [Costo de notaría en compraventa](https://calculadorachile.cl/calculadoras/calculadora-costo-notaria): notaría, derechos del Conservador e impuestos al comprar un inmueble.
@@ -87,6 +89,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [Subsidio Familiar (SUF)](https://calculadorachile.cl/calculadoras/calculadora-subsidio-familiar-suf): monto por carga acreditada y por persona con discapacidad.
 - [Bono $30.000 por hijo](https://calculadorachile.cl/calculadoras/calculadora-bono-30-mil-por-hijo): bono único por cada niño o niña (Ley 21.840).
 - [Bono Bodas de Oro](https://calculadorachile.cl/calculadoras/calculadora-bono-bodas-oro): requisitos y monto por cónyuge (Ley 20.506).
+- [Prenatal y postnatal](https://calculadorachile.cl/calculadoras/calculadora-prenatal-postnatal): fechas de prenatal, postnatal y postnatal parental, con prematuro, parto múltiple, media jornada y fuero.
 
 ### Educación
 

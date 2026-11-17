@@ -79,6 +79,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Ingresa tu sueldo bruto y ve tu líquido 2026 al instante: descuento de AFP, 7% de salud, seguro de cesantía e impuesto único con tramos del SII.', // 144
   },
 
+  'calculadora-impuesto-herencia': {
+    seoTitle: 'Impuesto a la herencia: calcula cuánto pagas',
+    seoDescription:
+      'Calcula el impuesto a la herencia por heredero: escala de 1 % a 25 %, exención de 50 UTA para hijos y cónyuge, recargos para hermanos y otros (Ley 16.271).',
+  },
   'calculadora-impuesto-segunda-categoria': {
     seoTitle: 'Impuesto 2ª Categoría 2026: calcula tu IUSC en pesos', // 52
     seoDescription:
@@ -248,6 +253,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // --- VIVIENDA Y BIENES RAÍCES ---
+  'calculadora-capacidad-credito-hipotecario': {
+    seoTitle: '¿Cuánto me prestan para una casa según mi sueldo?',
+    seoDescription:
+      'Calcula tu crédito hipotecario máximo según tu sueldo: dividendo que cabe en tu renta, monto en UF y pesos, valor de vivienda y pie. Porcentaje editable.',
+  },
   'calculadora-credito-hipotecario': {
     seoTitle: 'Crédito Hipotecario 2026: simula dividendo en UF', // 50
     seoDescription:
@@ -546,6 +556,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
+  'calculadora-prenatal-postnatal': {
+    seoTitle: 'Calculadora prenatal y postnatal: fechas exactas',
+    seoDescription:
+      'Calcula cuándo empieza y termina tu prenatal, postnatal y postnatal parental desde la fecha probable de parto: prematuro, parto múltiple y media jornada.',
+  },
   'calculadora-licencia-medica': {
     seoTitle: 'Licencia médica: ¿cuántos días pagan? Tabla y cálculo 2026', // 58
     seoDescription:

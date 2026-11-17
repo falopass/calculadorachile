@@ -433,6 +433,34 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Tasas especiales por actividad o mutualidad pueden variar.',
     ],
   },
+  'capacidad-credito-hipotecario': {
+    summary:
+      'Estima el crédito hipotecario máximo según el ingreso: calcula el dividendo que cabe en el porcentaje de renta que acepta el banco y lo convierte en monto de crédito con la amortización francesa del simulador hipotecario.',
+    calculationSteps: [
+      'Dividendo máximo = ingreso × porcentaje dividendo/renta − cuotas de otras deudas.',
+      'Dividendo en UF = dividendo máximo ÷ UF del día.',
+      'Crédito máximo = dividendo × (1 − (1 + i)^−n) ÷ i, con i = tasa anual ÷ 12 y n = años × 12 (si la tasa es 0 %, dividendo × n). Se trunca a 2 decimales.',
+      'Valor de vivienda = crédito ÷ porcentaje de financiamiento; pie = valor de vivienda − crédito.',
+    ],
+    assumptions: [
+      'El porcentaje dividendo/renta lo define cada banco; 25 % es la referencia que menciona la CMF, no una norma.',
+      'Tasa fija durante todo el plazo y dividendo sin seguros ni comisiones.',
+    ],
+    limitations: [
+      'No es una preaprobación: el banco también evalúa historial, antigüedad laboral, edad y deudas.',
+      'No incluye subsidios habitacionales ni gastos operacionales de la compra.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: ingreso de $2.000.000',
+      inputs: ['Ingreso: $2.000.000, sin otras deudas', 'Dividendo/renta: 25 %; tasa 4,5 %; 25 años', 'UF ilustrativa: $40.000; financiamiento 80 %'],
+      development: [
+        'Dividendo máximo: $2.000.000 × 25 % = $500.000 = 12,5 UF',
+        'Crédito: 12,5 × (1 − 1,00375^−300) ÷ 0,00375 = 2.248,87 UF',
+        'Vivienda: 2.248,87 ÷ 0,8 = 2.811,08 UF; pie 562,21 UF',
+      ],
+      result: 'Crédito máximo estimado: 2.248,87 UF (unos $89.954.800 con esa UF).',
+    },
+  },
   'credito-hipotecario': {
     summary:
       'Simula un dividendo mediante amortización financiera desde monto, pie, plazo y tasa declarados.',
@@ -733,6 +761,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Estimación simple: $33.900 antes de otros cargos de la boleta.',
     },
   },
+  'impuesto-herencia': {
+    summary:
+      'Calcula el impuesto que paga cada heredero según el art. 2 de la Ley 16.271: escala progresiva en UTA sobre la asignación líquida, exención y recargo por parentesco y rebaja por discapacidad.',
+    calculationSteps: [
+      'UTA = UTM del mes del fallecimiento × 12; asignación en UTA = asignación líquida ÷ UTA.',
+      'Monto afecto = asignación − exención (50 UTA línea directa y cónyuge o conviviente civil; 5 UTA colaterales de 2º a 4º grado; 0 en otros casos).',
+      'Escala marginal sobre el afecto: 1 %, 2,5 %, 5 %, 7,5 %, 10 %, 15 %, 20 % y 25 % con cortes en 80, 160, 320, 480, 640, 800 y 1.200 UTA.',
+      'Recargo: +20 % colaterales de 2º a 4º grado; +40 % parientes más lejanos o sin parentesco.',
+      'Rebaja de 30 % si el heredero está en el Registro Nacional de Discapacidad, con tope de 8.000 UF. Impuesto en UTM redondeado a 2 decimales y convertido a pesos.',
+    ],
+    assumptions: [
+      'La asignación líquida ya descuenta deudas, gastos y bajas generales de la herencia.',
+      'Si no ingresas la UTM del fallecimiento se usa la del mes actual.',
+    ],
+    limitations: [
+      'No calcula el inventario ni la partición de bienes entre herederos.',
+      'No suma lo que el heredero recibió en vida del causante, que la ley acumula a la herencia (art. 23), ni otras exenciones de la ley.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: hijo que recibe 300 UTA',
+      inputs: ['Asignación líquida: 300 UTA', 'Parentesco: hijo', 'Sin discapacidad'],
+      development: [
+        'Afecto: 300 − 50 = 250 UTA',
+        'Escala: 80 × 1 % + 80 × 2,5 % + 90 × 5 % = 7,3 UTA',
+        '7,3 UTA × 12 = 87,6 UTM, sin recargo',
+      ],
+      result: 'Impuesto: 87,6 UTM, que se pagan con la UTM del mes de pago.',
+    },
+  },
   'impuesto-segunda-categoria': {
     summary:
       'Descuenta las cotizaciones obligatorias del sueldo imponible y aplica la tabla mensual del Impuesto Único a esa renta líquida imponible.',
@@ -860,6 +917,35 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
         'Pago 1 sale completo del saldo CIC; pago 2 toma $300.000 del CIC y $300.000 del Fondo; el resto es Fondo.',
       ],
       result: 'Total estimado: $2.500.000 (de los cuales $1.500.000 los aporta el Fondo Solidario).',
+    },
+  },
+  'prenatal-postnatal': {
+    summary:
+      'Calcula las fechas legales del prenatal, postnatal y postnatal parental según el Código del Trabajo, desde la fecha probable de parto o la fecha real del parto.',
+    calculationSteps: [
+      'Inicio del prenatal = fecha probable de parto − 42 días (6 semanas).',
+      'El prenatal termina el día anterior al parto: se alarga si el parto se atrasa y se acorta si se adelanta.',
+      'Postnatal desde el día del parto: 84 días; 126 si nació antes de la semana 33 o con menos de 1.500 g; 84 + 7 por cada hijo desde el segundo en parto múltiple. Si concurren, se usa el mayor.',
+      'Postnatal parental desde el día siguiente al término del postnatal: 84 días a jornada completa o 126 a media jornada.',
+      'Aviso de media jornada: a más tardar 30 días antes del término del postnatal. Fuero: hasta un año después del término del postnatal.',
+    ],
+    assumptions: [
+      'Días corridos, incluidos fines de semana y festivos.',
+      'Sin licencias por enfermedad del embarazo ni postnatal suplementario, que modifican las fechas según indique el médico.',
+    ],
+    limitations: [
+      'No calcula el monto del subsidio maternal.',
+      'No modela el traspaso de semanas del postnatal parental al padre ni el permiso por enfermedad grave del hijo menor de un año.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: fecha probable de parto el 15-03-2027',
+      inputs: ['Fecha probable de parto: 15-03-2027', 'Parto de un hijo, sin prematurez', 'Postnatal parental a jornada completa'],
+      development: [
+        'Prenatal: 15-03-2027 − 42 días = 01-02-2027, hasta el 14-03-2027',
+        'Postnatal: 84 días desde el 15-03-2027, hasta el 06-06-2027',
+        'Postnatal parental: 84 días desde el 07-06-2027, hasta el 29-08-2027',
+      ],
+      result: 'Aviso para media jornada hasta el 07-05-2027; fuero hasta el 06-06-2028.',
     },
   },
   'licencia-medica': {

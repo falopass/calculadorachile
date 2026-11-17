@@ -481,6 +481,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       };
     }
 
+    case 'impuesto-herencia':
+      return withLinks([
+        'Cada heredero paga impuesto sobre su propia asignación líquida, con una escala progresiva de 1 % a 25 % en UTA (',
+        { text: 'Ley 16.271, art. 2', href: 'https://www.bcn.cl/leychile/navegar?idNorma=172986' },
+        '). Cónyuge, conviviente civil, hijos, nietos, padres y abuelos tienen exentas las primeras 50 UTA; hermanos, tíos, sobrinos y primos, 5 UTA con un recargo de 20 %; otras personas no tienen exención y pagan 40 % de recargo.',
+      ]);
+
     case 'impuesto-segunda-categoria': {
       const sueldos = [800_000, 1_500_000, 2_500_000];
       const rows = sueldos.map((sueldoBrutoMensual) => {
@@ -1000,6 +1007,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       };
     }
 
+    case 'prenatal-postnatal':
+      return withLinks([
+        'El prenatal empieza 6 semanas (42 días) antes de la fecha probable de parto y el postnatal dura 12 semanas (84 días) desde el día del parto; luego vienen 12 semanas de postnatal parental, o 18 a media jornada (',
+        { text: 'Código del Trabajo, arts. 195 a 197 bis', href: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+        '). Si el bebé nace antes de la semana 33 o pesa menos de 1.500 g, el postnatal es de 18 semanas; en partos múltiples se suman 7 días por hijo desde el segundo.',
+      ]);
+
     case 'licencia-medica': {
       // E-020 (brief 2026-10-29): tabla de 1 a 15 días generada con
       // calculateLicenciaMedica; nunca montos escritos a mano.
@@ -1113,6 +1127,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         `): Fiestas Patrias 2026 es ${formatCLP(AGUINALDO_2026.fiestas_patrias)} en el tramo 1 y el monto de Navidad 2026 aún no está publicado (referencia 2025: ${formatCLP(AGUINALDO_2026.navidad)}). Los pensionados IPS reciben en Navidad 2026 ${formatCLP(ips.navidad_base)} más ${formatCLP(ips.navidad_por_carga)} por carga.`,
       ]);
     }
+
+    case 'capacidad-credito-hipotecario':
+      return withLinks([
+        'Ninguna ley fija cuánto de tu sueldo puede ir al dividendo: cada banco tiene su política. La ',
+        { text: 'CMF', href: 'https://www.cmfchile.cl/educa/621/w3-article-27502.html' },
+        ' indica que varias instituciones recomiendan un dividendo de hasta 25 % del ingreso, descontando antes tus otras deudas. Con ese dividendo, la tasa y el plazo se obtiene el crédito máximo en UF.',
+      ]);
 
     case 'plusvalia':
       return {
