@@ -81,7 +81,7 @@ function buildSeoIntro(calculator: import('@/types/calculator').Calculator): str
     }
   })();
   const legalContext = calculator.faq?.[0]?.answer
-    ? calculator.faq[0].answer.split('. ').slice(0, 2).join('. ').trim()
+    ? calculator.faq[0].answer.split(/\. (?=[A-ZÁÉÍÓÚÑ¿¡«])/).slice(0, 2).join('. ').trim()
     : '';
 
   return `${baseDesc} Forma parte del catálogo de ${categoryText} de CalculaChile. Revisa la metodología, los supuestos, las limitaciones y las fuentes declaradas antes de usar la estimación.${legalContext ? ` ${legalContext}.` : ''}`;
