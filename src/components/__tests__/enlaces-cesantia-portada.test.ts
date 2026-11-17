@@ -2,6 +2,7 @@ import * as React from "react";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeAll, describe, expect, it, vi } from "vitest";
+import { discoverableCalculators } from "@/data/calculators";
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: () => {} }) }));
 
@@ -23,7 +24,8 @@ const GUIA = 'href="/blog/como-cobrar-seguro-cesantia-afc-2026"';
 
 describe("Portada: enlaces hacia el clúster cesantía", () => {
   it('portada: frase del buscador y bloque "Más buscadas" enlazan al clúster', () => {
-    const hero = renderToStaticMarkup(createElement(SearchHero));
+    const hero = renderToStaticMarkup(createElement(SearchHero, { calculators: discoverableCalculators }),
+    );
     expect(hero).toContain(SIMULADOR);
     expect(hero).toContain("tu seguro de cesantía");
     const popular = renderToStaticMarkup(createElement(PopularCalculators));
