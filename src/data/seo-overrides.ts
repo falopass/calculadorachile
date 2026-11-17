@@ -442,7 +442,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   'aguinaldo-navidad-pensionados-2026': {
     seoTitle: 'Aguinaldo Navidad 2026: pensionados IPS y sector público', // 56
     seoDescription:
-      'Pensionados IPS: $29.055 + $16.415 por carga (Ley 21.806). El sector público 2026 espera la ley de reajuste. Bono de vacaciones, con fuente.', // 140
+      'Pensionados IPS: $29.055 + $16.415 por carga (Ley 21.806). Sector público: $71.206 o $37.666 según el texto vigente. Bono de vacaciones, con fuente.', // 149
   },
   'patente-comercial-2027-calcular': {
     seoTitle: 'Patente comercial 2027: cálculo, cuota de enero y topes', // 55
