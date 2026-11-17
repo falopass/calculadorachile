@@ -327,6 +327,24 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'capacidad-credito-hipotecario': {
+      const { calculateCapacidadCreditoHipotecario, capacidadCreditoHipotecarioToResults } = await import(
+        './capacidad-credito-hipotecario'
+      );
+      return (inputs) =>
+        capacidadCreditoHipotecarioToResults(
+          calculateCapacidadCreditoHipotecario({
+            ingresoMensual: coerceNumber(inputs.ingresoMensual),
+            otrasDeudasMensuales: coerceNumber(inputs.otrasDeudasMensuales, 0),
+            porcentajeDividendo: coerceNumber(inputs.porcentajeDividendo, 25),
+            tasaAnual: coerceNumber(inputs.tasaAnual),
+            plazoAnos: coerceNumber(inputs.plazoAnos, 25),
+            porcentajeFinanciamiento: coerceNumber(inputs.porcentajeFinanciamiento, 80),
+            valorUF: live?.valorUF,
+          }),
+        );
+    }
+
     case 'credito-hipotecario': {
       const { calculateCreditoHipotecario, creditoHipotecarioToResults } =
         await import('./credito-hipotecario');

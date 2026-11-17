@@ -65,6 +65,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 ### Vivienda
 
 - [Crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-credito-hipotecario): dividendo en UF y pesos con amortización francesa.
+- [Capacidad de crédito hipotecario](https://calculadorachile.cl/calculadoras/calculadora-capacidad-credito-hipotecario): crédito máximo en UF según sueldo, otras deudas y porcentaje dividendo/renta editable.
 - [Contribuciones de bienes raíces](https://calculadorachile.cl/calculadoras/calculadora-contribuciones): cuota según avalúo fiscal y reglas SII.
 - [Reajuste de arriendo](https://calculadorachile.cl/calculadoras/calculadora-reajuste-arriendo): reajuste del arriendo por variación de la UF o del IPC.
 - [Costo de notaría en compraventa](https://calculadorachile.cl/calculadoras/calculadora-costo-notaria): notaría, derechos del Conservador e impuestos al comprar un inmueble.

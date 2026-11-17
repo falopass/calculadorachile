@@ -1128,6 +1128,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       ]);
     }
 
+    case 'capacidad-credito-hipotecario':
+      return withLinks([
+        'Ninguna ley fija cuánto de tu sueldo puede ir al dividendo: cada banco tiene su política. La ',
+        { text: 'CMF', href: 'https://www.cmfchile.cl/educa/621/w3-article-27502.html' },
+        ' indica que varias instituciones recomiendan un dividendo de hasta 25 % del ingreso, descontando antes tus otras deudas. Con ese dividendo, la tasa y el plazo se obtiene el crédito máximo en UF.',
+      ]);
+
     case 'plusvalia':
       return {
         lead: `Si vendes una vivienda habitacional como persona natural, el mayor valor está exento hasta ${PLUSVALIA_INMOBILIARIA.exencion_uf.toLocaleString('es-CL')} UF acumuladas en tu vida; sobre el exceso pagas un impuesto único sustitutivo del ${PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico}% o lo declaras en el Global Complementario. La ganancia es el precio de venta menos el de compra y las mejoras.`,

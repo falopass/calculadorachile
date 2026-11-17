@@ -2193,6 +2193,136 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   // FASE 1 RESTANTE
   // ============================================
   {
+    id: 'capacidad-credito-hipotecario',
+    name: 'Capacidad de Crédito Hipotecario según Sueldo',
+    description:
+      'Estima cuánto crédito hipotecario te podrían prestar según tu sueldo: dividendo máximo, monto en UF y pesos, valor de vivienda alcanzable y pie necesario, con el porcentaje dividendo/renta editable.',
+    slug: 'calculadora-capacidad-credito-hipotecario',
+    category: 'vivienda',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'CMF Educa — capacidad de pago y crédito hipotecario',
+        url: 'https://www.cmfchile.cl/educa/621/w3-article-27502.html',
+        note: 'Varias instituciones recomiendan que el dividendo no supere el 25 % del ingreso; no es una norma legal: cada banco fija su política',
+      },
+      {
+        name: 'CMF Educa — créditos hipotecarios',
+        url: 'https://www.cmfchile.cl/educa/621/w3-propertyvalue-45015.html',
+      },
+      {
+        name: 'Banco Central — UF',
+        url: 'https://si3.bcentral.cl/indicadoressiete/secure/Indicadoresdiarios.aspx',
+      },
+    ],
+    keywords: [
+      'cuánto me prestan para una casa',
+      'crédito hipotecario según sueldo',
+      'capacidad de crédito hipotecario',
+      'cuánto crédito hipotecario puedo pedir',
+      'dividendo 25 % sueldo',
+      'renta para crédito hipotecario',
+    ],
+    inputs: [
+      {
+        id: 'ingresoMensual',
+        label: 'Ingreso líquido mensual',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.800.000',
+        required: true,
+        min: 0,
+        tooltip: 'Tu sueldo líquido, o la suma con tu codeudor o complemento de renta si postulan juntos.',
+      },
+      {
+        id: 'otrasDeudasMensuales',
+        label: 'Cuotas mensuales de otras deudas',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        defaultValue: 0,
+        tooltip: 'Créditos de consumo, automotriz, tarjetas. Se descuentan del margen para el dividendo.',
+      },
+      {
+        id: 'porcentajeDividendo',
+        label: 'Dividendo máximo sobre el ingreso (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '25',
+        required: false,
+        min: 1,
+        max: 60,
+        defaultValue: 25,
+        tooltip: 'Política de cada banco, no una norma legal. La CMF menciona 25 % como recomendación habitual; algunos bancos aceptan más o menos.',
+      },
+      {
+        id: 'tasaAnual',
+        label: 'Tasa de interés anual (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '4,5',
+        required: true,
+        min: 0,
+        max: 20,
+        tooltip: 'Usa la tasa que te ofrece tu banco. Usa coma para decimales.',
+      },
+      {
+        id: 'plazoAnos',
+        label: 'Plazo (años)',
+        type: 'number',
+        unit: 'years',
+        placeholder: '25',
+        required: true,
+        min: 1,
+        max: 40,
+        defaultValue: 25,
+      },
+      {
+        id: 'porcentajeFinanciamiento',
+        label: 'Porcentaje que financia el banco (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '80',
+        required: false,
+        min: 1,
+        max: 100,
+        defaultValue: 80,
+        tooltip: 'Parte del valor de la vivienda que cubre el crédito; el resto es el pie. Depende del banco y de la vivienda.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuánto me prestan para una casa según mi sueldo?',
+        answer:
+          'Depende del porcentaje de tu sueldo que el banco acepta destinar al dividendo, de la tasa y del plazo. Con 25 %, un ingreso de $2.000.000 permite un dividendo de $500.000; a 4,5 % y 25 años eso equivale a un crédito de unas 2.249 UF si la UF vale $40.000.',
+      },
+      {
+        question: '¿Es obligatorio que el dividendo sea 25 % del sueldo?',
+        answer:
+          'No. Ninguna ley fija ese límite. La CMF indica que varias instituciones recomiendan que el dividendo no supere el 25 % del ingreso, pero cada banco aplica su propia política y también evalúa tus otras deudas, tu historial y tu estabilidad laboral.',
+      },
+      {
+        question: '¿Por qué se descuentan mis otras deudas?',
+        answer:
+          'Porque reducen tu capacidad de pago. La CMF recomienda calcularla restando a tus ingresos los gastos fijos y otros compromisos. La calculadora descuenta las cuotas que ingreses del dividendo máximo.',
+      },
+      {
+        question: '¿Cuánto pie necesito?',
+        answer:
+          'Si el banco financia el 80 % del valor de la vivienda, el pie es el 20 % restante. La calculadora muestra el valor de vivienda que alcanzas con tu crédito máximo y el pie que necesitarías.',
+      },
+      {
+        question: '¿El dividendo calculado incluye seguros?',
+        answer:
+          'No. El dividendo real suma los seguros de desgravamen e incendio y, si corresponde, sismo, por lo que conviene dejar un margen.',
+      },
+    ],
+  },
+  {
     id: 'credito-hipotecario',
     name: 'Simulador Crédito Hipotecario 2026',
     description:

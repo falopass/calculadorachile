@@ -226,6 +226,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   // --- VIVIENDA Y BIENES RAÍCES ---
+  'calculadora-capacidad-credito-hipotecario': {
+    seoTitle: '¿Cuánto me prestan para una casa según mi sueldo?',
+    seoDescription:
+      'Calcula tu crédito hipotecario máximo según tu sueldo: dividendo que cabe en tu renta, monto en UF y pesos, valor de vivienda y pie. Porcentaje editable.',
+  },
   'calculadora-credito-hipotecario': {
     seoTitle: 'Crédito Hipotecario 2026: simula dividendo en UF', // 50
     seoDescription:

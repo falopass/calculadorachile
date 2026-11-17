@@ -433,6 +433,34 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Tasas especiales por actividad o mutualidad pueden variar.',
     ],
   },
+  'capacidad-credito-hipotecario': {
+    summary:
+      'Estima el crédito hipotecario máximo según el ingreso: calcula el dividendo que cabe en el porcentaje de renta que acepta el banco y lo convierte en monto de crédito con la amortización francesa del simulador hipotecario.',
+    calculationSteps: [
+      'Dividendo máximo = ingreso × porcentaje dividendo/renta − cuotas de otras deudas.',
+      'Dividendo en UF = dividendo máximo ÷ UF del día.',
+      'Crédito máximo = dividendo × (1 − (1 + i)^−n) ÷ i, con i = tasa anual ÷ 12 y n = años × 12 (si la tasa es 0 %, dividendo × n). Se trunca a 2 decimales.',
+      'Valor de vivienda = crédito ÷ porcentaje de financiamiento; pie = valor de vivienda − crédito.',
+    ],
+    assumptions: [
+      'El porcentaje dividendo/renta lo define cada banco; 25 % es la referencia que menciona la CMF, no una norma.',
+      'Tasa fija durante todo el plazo y dividendo sin seguros ni comisiones.',
+    ],
+    limitations: [
+      'No es una preaprobación: el banco también evalúa historial, antigüedad laboral, edad y deudas.',
+      'No incluye subsidios habitacionales ni gastos operacionales de la compra.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: ingreso de $2.000.000',
+      inputs: ['Ingreso: $2.000.000, sin otras deudas', 'Dividendo/renta: 25 %; tasa 4,5 %; 25 años', 'UF ilustrativa: $40.000; financiamiento 80 %'],
+      development: [
+        'Dividendo máximo: $2.000.000 × 25 % = $500.000 = 12,5 UF',
+        'Crédito: 12,5 × (1 − 1,00375^−300) ÷ 0,00375 = 2.248,87 UF',
+        'Vivienda: 2.248,87 ÷ 0,8 = 2.811,08 UF; pie 562,21 UF',
+      ],
+      result: 'Crédito máximo estimado: 2.248,87 UF (unos $89.954.800 con esa UF).',
+    },
+  },
   'credito-hipotecario': {
     summary:
       'Simula un dividendo mediante amortización financiera desde monto, pie, plazo y tasa declarados.',
