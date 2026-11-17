@@ -1,19 +1,19 @@
 {
-  "uf": 41343.55,
+  "uf": 41350.42,
   "utm": 72440,
-  "dolarObservado": 999.1,
-  "euro": 1102.03,
+  "dolarObservado": 1001.17,
+  "euro": 1102,
   "pesoArgentino": 0.65,
   "realBrasileno": 173.21,
   "solPeruano": 293.2,
   "ipcMensual": -0.2,
-  "asOf": "2026-11-16T22:24:07.181Z",
+  "asOf": "2026-11-17T21:10:25.503Z",
   "observedAsOf": {
-    "uf": "2026-11-16",
+    "uf": "2026-11-17",
     "utm": "2026-11-01",
-    "dolarObservado": "2026-11-16",
-    "euro": "2026-11-16",
-    "pesoArgentino": "2026-11-16",
+    "dolarObservado": "2026-11-17",
+    "euro": "2026-11-17",
+    "pesoArgentino": "2026-11-17",
     "realBrasileno": "2026-11-17",
     "solPeruano": "2026-11-17"
   },
@@ -23,9 +23,9 @@
     "dolarObservado": "bcentral",
     "euro": "bcentral",
     "pesoArgentino": "bcentral",
-    "realBrasileno": "fallback",
-    "solPeruano": "fallback",
-    "ipcMensual": "mindicador"
+    "realBrasileno": "bcentral",
+    "solPeruano": "bcentral",
+    "ipcMensual": "unknown"
   },
-  "generatedAt": "2026-11-16T22:24:17.046Z"
+  "generatedAt": "2026-11-17T21:10:40.378Z"
 }
