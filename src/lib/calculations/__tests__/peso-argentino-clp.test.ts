@@ -39,6 +39,7 @@ import {
 
 afterEach(() => {
   resetPesoFixture();
+  vi.useRealTimers();
 });
 
 describe('calculatePesoArgentinoClp', () => {
@@ -102,6 +103,9 @@ describe('calculatePesoArgentinoClp', () => {
   });
 
   it('con bcentral y observación reciente el gate pasa y la etiqueta no usa «hoy»', () => {
+    vi.useFakeTimers();
+    // «Hoy» fijo: la observación del 10-11 está dentro de los 3 días hábiles.
+    vi.setSystemTime(new Date('2026-11-11T15:00:00Z'));
     pesoFixture.fuente_snapshot = 'bcentral';
     pesoFixture.fecha_actualizacion = '2026-11-10';
     const r = calculatePesoArgentinoClp({

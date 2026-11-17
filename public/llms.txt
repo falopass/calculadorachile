@@ -15,6 +15,8 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [Factor hora extra](https://calculadorachile.cl/calculadoras/calculadora-factor-hora-extra): factor legal sueldo × 0,0083333 con jornada de 42 horas.
 - [Tope imponible 90 UF](https://calculadorachile.cl/calculadoras/calculadora-tope-imponible-90-uf): base de cotización topada de AFP, salud y seguro de cesantía.
 - [Semana corrida](https://calculadorachile.cl/calculadoras/calculadora-semana-corrida): pago de domingos y festivos con remuneración variable diaria (art. 45 del Código del Trabajo).
+- [Valor hora de trabajo](https://calculadorachile.cl/calculadoras/calculadora-valor-hora-trabajo): valor del día y de la hora ordinaria desde el sueldo mensual con la fórmula de la Dirección del Trabajo.
+- [Trabajo en feriado o domingo](https://calculadorachile.cl/calculadoras/calculadora-trabajo-en-feriado): pago con recargo del 50% (art. 32) o compensación en descanso según el caso.
 
 ### Beneficios laborales y término de contrato
 
@@ -73,6 +75,7 @@ Catálogo completo de calculadoras indexables, agrupado por categoría (las mism
 - [Permiso de circulación](https://calculadorachile.cl/calculadoras/calculadora-permiso-circulacion): estimación según tasación fiscal y escala SII.
 - [Crédito automotriz](https://calculadorachile.cl/calculadoras/calculadora-credito-automotriz): cuota, pie, intereses y costo total de un crédito para auto.
 - [Multas de tránsito](https://calculadorachile.cl/calculadoras/calculadora-multas-transito): rangos legales en UTM y pesos, con reincidencia en infracciones graves o gravísimas.
+- [Costo de viaje en auto](https://calculadorachile.cl/calculadoras/calculadora-costo-viaje): combustible y peajes según distancia y rendimiento, total y por pasajero.
 
 ### Familia
 
