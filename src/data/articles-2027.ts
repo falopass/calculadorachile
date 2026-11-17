@@ -10,7 +10,8 @@ import { calculateCostoViaje } from '@/lib/calculations/costo-viaje';
 import { calculateCostoTag } from '@/lib/calculations/costo-tag';
 
 const LEY_21830 = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
-const INE_IPC = 'https://www.ine.gob.cl/estadisticas-por-tema/precios-e-inflacion/indice-de-precios-al-consumidor';
+const INE_IPC =
+  'https://www.ine.gob.cl/estadisticas-por-tema/precios-e-inflacion/indice-de-precios-al-consumidor';
 const INE_BOLETIN = (archivo: string) =>
   `https://www.ine.gob.cl/docs/default-source/%C3%ADndice-de-precios-al-consumidor/boletines/espa%C3%B1ol/2026/${archivo}.pdf`;
 const INE_ABRIL = INE_BOLETIN('boletin-%C3%ADndice-de-precios-al-consumidor-abril-2026');
@@ -21,7 +22,8 @@ const ENAP_INFORME = 'https://www.enap.cl/files/get/3322';
 const BENCINA_EN_LINEA = 'https://www.bencinaenlinea.cl';
 const MOP_PEAJES = 'https://concesiones.mop.gob.cl/peajes-y-porticos/';
 const MOP_RUTA_68 = 'https://concesiones.mop.gob.cl/uploads/sites/4/2026/01/RUTA-68.pdf';
-const MOP_TALCA_CHILLAN = 'https://concesiones.mop.gob.cl/uploads/sites/4/2026/01/TALCA-CHILLAN.pdf';
+const MOP_TALCA_CHILLAN =
+  'https://concesiones.mop.gob.cl/uploads/sites/4/2026/01/TALCA-CHILLAN.pdf';
 
 // Ejemplo rotulado del artículo de verano: el precio por litro NO es oficial.
 const VIAJE_KM = 120;
@@ -44,7 +46,8 @@ const TAG_PASADAS = 40;
 const TAG = calculateCostoTag({ tarifaPorPaso: TAG_TARIFA_EJEMPLO, pasadasMes: TAG_PASADAS });
 
 const SII_IVA_BIENES = 'https://www.sii.cl/destacados/iva_bienes/';
-const ADUANA_DESDE_CUANDO = 'https://www.aduana.cl/desde-cuando-y-a-quien-aplica/aduana/2025-10-20/120230.html';
+const ADUANA_DESDE_CUANDO =
+  'https://www.aduana.cl/desde-cuando-y-a-quien-aplica/aduana/2025-10-20/120230.html';
 const ADUANA_QUE_ES = 'https://www.aduana.cl/que-es-el-iva-digital/aduana/2025-10-20/160103.html';
 const ADUANA_BASE_CALCULO =
   'https://www.aduana.cl/cuando-debo-pagar-impuestos-si-compro-online-desde-el-extranjero/aduana/2022-06-29/121824.html';
@@ -56,7 +59,8 @@ export const ARTICULOS_2027: Article[] = [
   // Plan editorial #42
   {
     slug: 'sueldo-minimo-2027-reajuste-simular-liquido',
-    title: 'Sueldo mínimo enero 2027: cómo se calcula el reajuste por IPC y qué falta para conocer el monto',
+    title:
+      'Sueldo mínimo enero 2027: cómo se calcula el reajuste por IPC y qué falta para conocer el monto',
     description:
       'La Ley 21.830 reajusta el sueldo mínimo desde el 1 de enero de 2027 según el IPC acumulado entre mayo y diciembre de 2026. Qué dice la ley, cuánto va del IPC y cuándo se conocerá el monto oficial.',
     date: '2026-11-17',
@@ -148,7 +152,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>Estas son las variaciones que el INE publicó para los meses que cuentan para el reajuste. La columna de acumulado en el año sirve para cruzar los datos: entre abril (2,7%) y octubre (4,5%) hay la misma diferencia que muestran los índices.</p>
 
-<div class="table-wrap"><table>
+<div class="table-scroll"><table>
 <caption>IPC 2026, meses del periodo de la Ley 21.830 (INE, base 2023 = 100)</caption>
 <thead><tr><th scope="col">Mes</th><th scope="col">Variación mensual</th><th scope="col">Acumulado en el año</th><th scope="col">Estado</th></tr></thead>
 <tbody>
@@ -170,7 +174,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>La tabla siguiente no es una proyección. Muestra qué pasaría con el ingreso mínimo si noviembre y diciembre sumaran distintas variaciones, aplicando la cuenta de la sección anterior a los $553.553. Los montos están redondeados al peso y sirven para dimensionar, no para pagar sueldos.</p>
 
-<div class="table-wrap"><table>
+<div class="table-scroll"><table>
 <caption>Ejercicio hipotético: ingreso mínimo de enero de 2027 según el IPC de noviembre y diciembre (no oficial)</caption>
 <thead><tr><th scope="col">IPC noviembre + diciembre (supuesto)</th><th scope="col">Variación mayo–diciembre</th><th scope="col">Ingreso mínimo resultante</th><th scope="col">Alza mensual</th></tr></thead>
 <tbody>
@@ -203,7 +207,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2 id="calendario">Calendario de lo que falta</h2>
 
-<div class="table-wrap"><table>
+<div class="table-scroll"><table>
 <caption>Hitos del reajuste de enero de 2027</caption>
 <thead><tr><th scope="col">Fecha</th><th scope="col">Hito</th><th scope="col">Estado al 17-11-2026</th></tr></thead>
 <tbody>
@@ -251,7 +255,12 @@ export const ARTICULOS_2027: Article[] = [
       'costo peajes vacaciones',
       'viaje en auto verano 2027',
     ],
-    relatedCalculators: ['calculadora-costo-viaje', 'calculadora-costo-tag', 'calculadora-permiso-circulacion', 'calculadora-credito-automotriz'],
+    relatedCalculators: [
+      'calculadora-costo-viaje',
+      'calculadora-costo-tag',
+      'calculadora-permiso-circulacion',
+      'calculadora-credito-automotriz',
+    ],
     faq: [
       {
         question: '¿Cómo calculo cuánta bencina gasto en un viaje?',
@@ -296,7 +305,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>Supongamos un viaje de <strong>${VIAJE_KM} km por tramo, ida y vuelta</strong>, en un auto que rinde <strong>${VIAJE_RENDIMIENTO} km/l</strong>, con <strong>${formatCLP(VIAJE_PEAJE_TRAMO)} de peajes por tramo</strong> y <strong>${VIAJE_PASAJEROS} pasajeros</strong>. Para el precio usamos <strong>${formatCLP(VIAJE_PRECIO_EJEMPLO)} por litro</strong>. Ese precio es un <strong>ejemplo</strong> para hacer la cuenta, no el precio oficial de ninguna zona: reemplázalo por el que veas en Bencina en Línea.</p>
 
-<div class="table-wrap"><table>
+<div class="table-scroll"><table>
 <caption>Ejemplo rotulado: viaje de ${VIAJE_KM} km por tramo (precio de bencina y peajes de ejemplo)</caption>
 <thead><tr><th scope="col">Concepto</th><th scope="col">Cálculo</th><th scope="col">Resultado</th></tr></thead>
 <tbody>
@@ -401,7 +410,11 @@ export const ARTICULOS_2027: Article[] = [
       'compras sobre 500 dólares aduana',
       'iva digital compras extranjero',
     ],
-    relatedCalculators: ['calculadora-compras-internacionales', 'calculadora-conversor-divisas', 'calculadora-iva'],
+    relatedCalculators: [
+      'calculadora-compras-internacionales',
+      'calculadora-conversor-divisas',
+      'calculadora-iva',
+    ],
     faq: [
       {
         question: '¿Cuánto impuesto pago por una compra en Temu, AliExpress o Shein?',
@@ -436,7 +449,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2 id="regla">La regla en tres casos</h2>
 
-<div class="table-wrap"><table>
+<div class="table-scroll"><table>
 <caption>Impuestos de compras internacionales de bienes desde el 25-10-2025 (SII y Aduanas)</caption>
 <thead><tr><th scope="col">Caso</th><th scope="col">IVA 19%</th><th scope="col">Arancel aduanero</th><th scope="col">Cuándo se paga</th></tr></thead>
 <tbody>
@@ -468,7 +481,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>Los montos siguientes están en dólares para no depender del tipo de cambio del día. Para pasarlos a pesos, usa el dólar que te cobre tu tarjeta o el valor del día en el <a href="/calculadoras/calculadora-conversor-divisas">conversor de divisas</a>.</p>
 
-<div class="table-wrap"><table>
+<div class="table-scroll"><table>
 <caption>Ejemplos ilustrativos (montos en US$, sin cargos de courier)</caption>
 <thead><tr><th scope="col">Compra</th><th scope="col">Arancel</th><th scope="col">IVA</th><th scope="col">Total con impuestos</th></tr></thead>
 <tbody>

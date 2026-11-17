@@ -26,7 +26,8 @@ const RET_2027 = pct(RETENCION_HONORARIOS_CALENDARIO[2027]);
 export const guiaOperacionRenta2027: Guia = {
   slug: 'preparacion-operacion-renta-2027-checklist',
   title: 'Operación Renta 2027: checklist para prepararte desde ahora',
-  intent: '¿Qué tengo que revisar y juntar antes de la Operación Renta 2027 y qué fechas ya fijó el SII?',
+  intent:
+    '¿Qué tengo que revisar y juntar antes de la Operación Renta 2027 y qué fechas ya fijó el SII?',
   description:
     'Checklist de la Operación Renta 2027 (año tributario 2027, rentas de 2026): fechas de declaraciones juradas ya fijadas por el SII, qué falta publicar y qué revisar si eres dependiente, honorarios o pyme.',
   category: 'tributario',
@@ -186,7 +187,10 @@ export const guiaOperacionRenta2027: Guia = {
   ],
   relatedArticles: [],
   sources: [
-    { label: 'SII, Resolución Exenta N.º 135 de 2026 (declaraciones juradas AT 2027)', url: SII_RES_135 },
+    {
+      label: 'SII, Resolución Exenta N.º 135 de 2026 (declaraciones juradas AT 2027)',
+      url: SII_RES_135,
+    },
     { label: 'BCN, Ley sobre Impuesto a la Renta (arts. 47, 69, 88 y 97)', url: BCN_LIR },
     { label: 'SII, Operación Renta 2026', url: SII_RENTA_2026 },
   ],

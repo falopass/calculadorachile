@@ -701,6 +701,9 @@ body {
   margin: 0;
   box-shadow: none;
   border-radius: 0;
+  /* Dentro del scroll las celdas no parten palabras ni cifras. */
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 @media (min-width: 640px) {
