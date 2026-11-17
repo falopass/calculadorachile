@@ -4662,6 +4662,122 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
 
   {
+    id: 'compras-internacionales',
+    name: 'Impuestos por compras internacionales',
+    description:
+      'Calcula el IVA y el arancel de tus compras en Temu, AliExpress, Shein, Amazon u otras tiendas del extranjero: régimen de hasta US$500 (Ley 21.713) y compras sobre US$500 con derecho de 6 % sobre el valor CIF.',
+    slug: 'calculadora-compras-internacionales',
+    category: 'impuestos',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'Aduanas — ¿Cuánto impuesto se paga al importar?',
+        url: 'https://www.aduana.cl/cuanto-impuesto-se-paga-al-importar/aduana/2018-12-12/233227.html',
+        note: 'Hasta US$500: IVA 19 %, exenta de arancel. Sobre US$500: 6 % sobre CIF + IVA 19 %',
+      },
+      {
+        name: 'SII — IVA a bienes comprados en el extranjero',
+        url: 'https://www.sii.cl/destacados/iva_bienes/index.html',
+        note: 'Ley 21.713: plataformas inscritas cobran el IVA al pagar, desde el 25-10-2025',
+      },
+      {
+        name: 'Aduanas — Desde cuándo y a quién aplica',
+        url: 'https://www.aduana.cl/desde-cuando-y-a-quien-aplica/aduana/2025-10-20/120230.html',
+        note: 'Vigencia desde el 25-10-2025 para envíos postales y courier',
+      },
+    ],
+    keywords: [
+      'impuesto compras internacionales',
+      'impuesto temu chile',
+      'impuesto aliexpress',
+      'iva compras extranjero',
+      'calculadora aduana',
+      'impuesto compras sobre 500 dolares',
+    ],
+    inputs: [
+      {
+        id: 'precioUSD',
+        label: 'Valor de los productos (US$)',
+        type: 'number',
+        placeholder: '120',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'envioUSD',
+        label: 'Costo de envío o flete (US$)',
+        type: 'number',
+        placeholder: '0',
+        min: 0,
+      },
+      {
+        id: 'seguroUSD',
+        label: 'Seguro (US$)',
+        type: 'number',
+        placeholder: '0',
+        min: 0,
+      },
+      {
+        id: 'plataformaInscrita',
+        label: '¿La tienda está inscrita en el SII?',
+        type: 'select',
+        required: true,
+        defaultValue: 'si',
+        options: [
+          { value: 'si', label: 'Sí (cobra el IVA al pagar)' },
+          { value: 'no', label: 'No o no lo sé' },
+        ],
+        tooltip:
+          'Temu, AliExpress, Shein, Amazon y otras grandes plataformas están inscritas. Revisa el listado del SII. Solo cambia el resultado en compras de hasta US$500.',
+      },
+      {
+        id: 'tratamientoArancel',
+        label: 'Arancel (compras sobre US$500)',
+        type: 'select',
+        defaultValue: 'general',
+        options: [
+          { value: 'general', label: 'General: 6 % sobre CIF' },
+          { value: 'preferencial', label: 'Con TLC y certificado de origen: 0 %' },
+        ],
+        tooltip:
+          'Un tratado de libre comercio puede rebajar o eliminar el derecho si acreditas el origen. Verifica tu caso con Aduanas.',
+      },
+    ],
+    seoTitle: 'Calculadora de impuestos por compras internacionales',
+    seoDescription:
+      'Calcula el IVA y el arancel de compras en Temu, AliExpress, Shein o Amazon: régimen hasta US$500 (Ley 21.713) y sobre US$500 con 6 % sobre CIF.',
+    faq: [
+      {
+        question: '¿Cuánto impuesto pago por una compra de menos de US$500?',
+        answer:
+          'Desde el 25 de octubre de 2025 pagas IVA de 19 % y quedas exento de arancel. Si la tienda está inscrita en el SII, el IVA se cobra al pagar; si no, se paga cuando el envío llega a Chile.',
+      },
+      {
+        question: '¿Qué impuestos se pagan sobre US$500?',
+        answer:
+          'Por regla general, un derecho aduanero de 6 % sobre el valor CIF (producto + flete + seguro) y luego IVA de 19 % sobre el CIF más el derecho. Según Aduanas, una compra con CIF de US$1.000 paga US$261,40.',
+      },
+      {
+        question: '¿Sigue existiendo la franquicia de US$41?',
+        answer:
+          'No. Con la Ley 21.713 las compras de bienes de hasta US$500 quedaron afectas a IVA desde el 25 de octubre de 2025.',
+      },
+      {
+        question: '¿Qué tipo de cambio se usa?',
+        answer:
+          'Aduanas liquida con el tipo de cambio vigente a la fecha de aceptación de la declaración. La calculadora muestra los pesos con el dólar observado del Banco Central como referencia, por lo que el monto final puede variar.',
+      },
+      {
+        question: '¿Incluye el cobro de Correos o del courier?',
+        answer:
+          'No. Las empresas de envío pueden cobrar por gestionar el trámite; ese cargo depende de cada empresa y no es un impuesto.',
+      },
+    ],
+  },
+
+  {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:

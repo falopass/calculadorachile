@@ -1119,6 +1119,11 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         lead: `Si vendes una vivienda habitacional como persona natural, el mayor valor está exento hasta ${PLUSVALIA_INMOBILIARIA.exencion_uf.toLocaleString('es-CL')} UF acumuladas en tu vida; sobre el exceso pagas un impuesto único sustitutivo del ${PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico}% o lo declaras en el Global Complementario. La ganancia es el precio de venta menos el de compra y las mejoras.`,
       };
 
+    case 'compras-internacionales':
+      return {
+        lead: 'Desde el 25 de octubre de 2025, una compra en el extranjero de hasta US$500 paga IVA de 19 % y no paga arancel: si la tienda está inscrita en el SII (Temu, AliExpress, Shein, Amazon, entre otras) lo cobra al pagar; si no, lo pagas al llegar el envío. Sobre US$500 pagas 6 % de derecho sobre el valor CIF y luego 19 % de IVA sobre el CIF más el derecho.',
+      };
+
     default:
       return null;
   }

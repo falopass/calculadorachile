@@ -667,6 +667,22 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'compras-internacionales': {
+      const { calculateComprasInternacionales, comprasInternacionalesToResults } =
+        await import('./compras-internacionales');
+      return (inputs) => {
+        const result = calculateComprasInternacionales({
+          precioUSD: coerceNumber(inputs.precioUSD),
+          envioUSD: coerceNumber(inputs.envioUSD),
+          seguroUSD: coerceNumber(inputs.seguroUSD),
+          plataformaInscrita: inputs.plataformaInscrita !== 'no',
+          tratamientoArancel:
+            inputs.tratamientoArancel === 'preferencial' ? 'preferencial' : 'general',
+          valorDolar: live?.valorDolar,
+        });
+        return comprasInternacionalesToResults(result);
+      };
+    }
     case 'peso-argentino-clp': {
       const { calculatePesoArgentinoClp, pesoArgentinoClpToResults } =
         await import('./peso-argentino-clp');

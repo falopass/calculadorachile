@@ -204,6 +204,12 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Convierte UTM a pesos y pesos a UTM con el valor oficial del mes (SII). Multas, UTM vs UTA y UF, y qué mes usar. Gratis.', // 118
   },
 
+  'calculadora-compras-internacionales': {
+    seoTitle: 'Impuesto compras internacionales: Temu, Shein y más',
+    seoDescription:
+      'Calcula el IVA y el arancel de tus compras en Temu, AliExpress, Shein o Amazon: hasta US$500 solo IVA 19 %; sobre US$500, 6 % sobre CIF + IVA.',
+  },
+
   'peso-argentino-a-chileno': {
     // E-050: meta sin «hoy» si source=fallback o observación >3 días hábiles
     get seoTitle() {
