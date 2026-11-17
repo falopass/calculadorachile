@@ -17,7 +17,7 @@ import {
 import type { Calculator } from '@/types/calculator';
 
 export interface CalculatorCardProps {
-  calculator: Calculator;
+  calculator: Pick<Calculator, 'slug' | 'name' | 'description' | 'category'>;
   /** Para fade-in escalonado (opcional). */
   index?: number;
 }
