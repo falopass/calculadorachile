@@ -14,7 +14,10 @@ function runPipeline(series: Record<string, [string, string]>, previous: object)
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'update-values-'));
   fs.mkdirSync(path.join(dir, 'scripts'));
   fs.mkdirSync(path.join(dir, 'src/lib/values'), { recursive: true });
-  fs.copyFileSync(path.join(REPO, 'scripts/update-values.mjs'), path.join(dir, 'scripts/update-values.mjs'));
+  fs.copyFileSync(
+    path.join(REPO, 'scripts/update-values.mjs'),
+    path.join(dir, 'scripts/update-values.mjs'),
+  );
   fs.writeFileSync(path.join(dir, 'src/lib/values/snapshot.json'), JSON.stringify(previous));
   const preload = path.join(dir, 'mock-fetch.mjs');
   fs.writeFileSync(
@@ -28,10 +31,14 @@ globalThis.fetch = async (url) => {
   return { ok: true, json: async () => ({ Codigo: 0, Series: { Obs: [{ statusCode: 'OK', value, indexDateString }] } }) };
 };`,
   );
-  execFileSync(process.execPath, ['--import', preload, path.join(dir, 'scripts/update-values.mjs')], {
-    env: { ...process.env, BCENTRAL_USER: 'mock', BCENTRAL_PASS: 'mock' },
-    stdio: 'pipe',
-  });
+  execFileSync(
+    process.execPath,
+    ['--import', preload, path.join(dir, 'scripts/update-values.mjs')],
+    {
+      env: { ...process.env, BCENTRAL_USER: 'mock', BCENTRAL_PASS: 'mock' },
+      stdio: 'pipe',
+    },
+  );
   return JSON.parse(fs.readFileSync(path.join(dir, 'src/lib/values/snapshot.json'), 'utf8'));
 }
 
@@ -44,7 +51,11 @@ const BASE: Record<string, [string, string]> = {
 describe('update-values: monedas de viaje BRL/PEN', () => {
   it('guarda valor, fecha de observación y fuente bcentral', () => {
     const snap = runPipeline(
-      { ...BASE, 'F072.CLP.BRL.N.O.D': ['173.21', '17-11-2026'], 'F072.CLP.PEN.N.O.D': ['293.2', '17-11-2026'] },
+      {
+        ...BASE,
+        'F072.CLP.BRL.N.O.D': ['173.21', '17-11-2026'],
+        'F072.CLP.PEN.N.O.D': ['293.2', '17-11-2026'],
+      },
       {},
     );
     expect(snap.realBrasileno).toBe(173.21);

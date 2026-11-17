@@ -6,7 +6,11 @@ import type { CalculatorInput } from '@/types/calculator';
 type Values = Record<string, string | number | boolean>;
 
 /** `?a=1&b=x` con los inputs que difieren de su valor inicial; '' si no hay ninguno. */
-export function buildShareQuery(inputs: CalculatorInput[], values: Values, initial: Values): string {
+export function buildShareQuery(
+  inputs: CalculatorInput[],
+  values: Values,
+  initial: Values,
+): string {
   const params = new URLSearchParams();
   for (const input of inputs) {
     const value = values[input.id];

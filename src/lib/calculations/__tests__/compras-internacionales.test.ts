@@ -40,7 +40,11 @@ describe('compras-internacionales', () => {
   });
 
   it('≤ US$500 plataforma no inscrita: IVA al llegar, sin arancel', () => {
-    const r = calculateComprasInternacionales({ ...base, precioUSD: 50, plataformaInscrita: false });
+    const r = calculateComprasInternacionales({
+      ...base,
+      precioUSD: 50,
+      plataformaInscrita: false,
+    });
     expect(r.regimen).toBe('hasta500_no_inscrita');
     expect(r.derechoUSD).toBe(0);
     expect(r.ivaEnCompraUSD).toBe(0);
@@ -49,7 +53,8 @@ describe('compras-internacionales', () => {
 
   it('borde: US$500 exactos sigue en el régimen especial; US$500,01 pasa al general', () => {
     expect(
-      calculateComprasInternacionales({ ...base, precioUSD: 500, plataformaInscrita: true }).regimen,
+      calculateComprasInternacionales({ ...base, precioUSD: 500, plataformaInscrita: true })
+        .regimen,
     ).toBe('hasta500_inscrita');
     const r = calculateComprasInternacionales({
       ...base,

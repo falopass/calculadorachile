@@ -49,7 +49,8 @@ export interface ComprasInternacionalesResult {
 }
 
 const usd = (n: number) => Math.round(n * 100) / 100;
-const nonNeg = (n: number | undefined) => (Number.isFinite(n) && (n as number) > 0 ? (n as number) : 0);
+const nonNeg = (n: number | undefined) =>
+  Number.isFinite(n) && (n as number) > 0 ? (n as number) : 0;
 
 export function calculateComprasInternacionales(
   input: ComprasInternacionalesInput,
@@ -76,9 +77,9 @@ export function calculateComprasInternacionales(
   const totalImpuestosUSD = usd(derechoUSD + ivaUSD);
   const costoTotalUSD = usd(valorCifUSD + totalImpuestosUSD);
 
-  const valorDolar =
-    input.valorDolar && input.valorDolar > 0 ? input.valorDolar : DOLAR.observado;
-  if (!(valorDolar > 0)) throw new Error('No hay dólar observado disponible para convertir a pesos.');
+  const valorDolar = input.valorDolar && input.valorDolar > 0 ? input.valorDolar : DOLAR.observado;
+  if (!(valorDolar > 0))
+    throw new Error('No hay dólar observado disponible para convertir a pesos.');
 
   return {
     regimen,
@@ -104,7 +105,9 @@ const REGIMEN_TEXTO: Record<RegimenCompra, string> = {
     'Compra sobre US$500: derecho aduanero sobre el valor CIF (producto + flete + seguro) y luego IVA de 19 % sobre CIF + derecho.',
 };
 
-export function comprasInternacionalesToResults(r: ComprasInternacionalesResult): CalculatorResult[] {
+export function comprasInternacionalesToResults(
+  r: ComprasInternacionalesResult,
+): CalculatorResult[] {
   const enClp = (n: number) => Math.round(n * r.valorDolar);
   return [
     {

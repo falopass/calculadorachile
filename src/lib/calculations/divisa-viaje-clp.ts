@@ -14,8 +14,18 @@ import { businessDaysSince } from './peso-argentino-clp';
 export type CodigoDivisaViaje = 'BRL' | 'PEN';
 
 const DIVISAS = {
-  BRL: { constante: () => REAL_BRASILENO, nombre: 'reales brasileños', singular: 'real brasileño', pais: 'Brasil' },
-  PEN: { constante: () => SOL_PERUANO, nombre: 'soles peruanos', singular: 'sol peruano', pais: 'Perú' },
+  BRL: {
+    constante: () => REAL_BRASILENO,
+    nombre: 'reales brasileños',
+    singular: 'real brasileño',
+    pais: 'Brasil',
+  },
+  PEN: {
+    constante: () => SOL_PERUANO,
+    nombre: 'soles peruanos',
+    singular: 'sol peruano',
+    pais: 'Perú',
+  },
 } as const;
 
 export interface DivisaViajeClpInput {
@@ -91,14 +101,22 @@ export function calculateDivisaViajeClp(
 export function divisaViajeClpToResults(r: DivisaViajeClpResult): CalculatorResult[] {
   const c = DIVISAS[r.codigo].constante();
   return [
-    { label: 'Resultado', value: r.resultado, format: r.resultadoEnCLP ? 'CLP' : 'number', highlight: true },
+    {
+      label: 'Resultado',
+      value: r.resultado,
+      format: r.resultadoEnCLP ? 'CLP' : 'number',
+      highlight: true,
+    },
     {
       label: `Tipo de cambio usado (CLP por 1 ${r.codigo})`,
       value: r.tasaCambio,
       format: 'number',
       note: {
         text: r.etiquetaTasa,
-        source: { name: `BCCh — tipo de cambio nominal ${DIVISAS[r.codigo].singular}`, url: c.fuente },
+        source: {
+          name: `BCCh — tipo de cambio nominal ${DIVISAS[r.codigo].singular}`,
+          url: c.fuente,
+        },
       },
     },
   ];
