@@ -6,16 +6,16 @@ import PremiumCalculatorShell from '@/components/calculator/PremiumCalculatorShe
 import SeoStructuredData from '@/components/calculator/SeoStructuredData';
 import CalculatorPageLayout from '@/components/calculator/CalculatorPageLayout';
 import LiveValuesSection from '@/components/calculator/LiveValuesSection';
-import RelatedCalculators from '@/components/calculator/RelatedCalculators';
+import RelatedCalculators, {
+  type RelatedCalculatorsProps,
+} from '@/components/calculator/RelatedCalculators';
 import OfficialSources from '@/components/calculator/OfficialSources';
 import CalculatorMethodology from '@/components/calculator/CalculatorMethodology';
 import CalculatorNormativeTable from '@/components/calculator/CalculatorNormativeTable';
 import CalculatorEditorial from '@/components/calculator/CalculatorEditorial';
 import PremiumLoadingIndicator from '@/components/calculator/PremiumLoadingIndicator';
-import { calculators } from '@/data/calculators';
 import { useCalculationFn } from '@/lib/hooks/useCalculationFn';
-import { getRelatedCalculators } from '@/lib/seo/related-calculators';
-import { getCategoryClusterLinks } from '@/lib/seo/category-clusters';
+import type { ClusterLink } from '@/lib/seo/category-clusters';
 import type { LiveKind } from '@/lib/seo/live-value-title';
 import type { QuickAnswer } from '@/data/calculator-quick-answers';
 
@@ -48,6 +48,9 @@ interface CalculatorPageClientProps {
   liveValue?: LiveValueBlock;
   /** Contenido answer-first para calculadoras hero. */
   quickAnswer?: QuickAnswer | null;
+  // Se calculan en el servidor: importar el catálogo aquí lo mete entero en el JS del cliente.
+  clusterLinks: ClusterLink[];
+  related: RelatedCalculatorsProps['calculators'];
 }
 
 function buildSeoIntro(calculator: import('@/types/calculator').Calculator): string {
@@ -185,6 +188,8 @@ export default function CalculatorPageClient({
   guideReadingTime,
   liveValue,
   quickAnswer,
+  clusterLinks,
+  related,
 }: CalculatorPageClientProps) {
   const { calculateFn, missing } = useCalculationFn(calculator.id);
 
@@ -523,7 +528,7 @@ export default function CalculatorPageClient({
 
       {/* Enlazado interno semántico por clúster temático (100% de calculadoras cubiertas) */}
       {(() => {
-        const links = getCategoryClusterLinks(calculator);
+        const links = clusterLinks;
         if (!links || links.length === 0) return null;
         return (
           <section className="mt-8 md:mt-10" aria-label="Calculadoras y recursos relacionados">
@@ -613,11 +618,7 @@ export default function CalculatorPageClient({
         </section>
       )}
 
-      {(() => {
-        const related = getRelatedCalculators(calculator, calculators, 6);
-        if (related.length === 0) return null;
-        return <RelatedCalculators calculators={related} title="También te puede interesar" />;
-      })()}
+      <RelatedCalculators calculators={related} title="También te puede interesar" />
     </CalculatorPageLayout>
   );
 }

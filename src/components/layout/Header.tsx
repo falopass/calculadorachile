@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -15,7 +16,9 @@ import {
   Briefcase,
 } from 'lucide-react';
 
-import SiteSearch from '@/components/search/SiteSearch';
+// El buscador importa artículos, guías y catálogo completos: se descarga solo al abrirlo.
+// shortcut: al abrir aún baja ~1,3 MB de datos; pasar a un índice liviano si la búsqueda gana uso.
+const SiteSearch = dynamic(() => import('@/components/search/SiteSearch'), { ssr: false });
 
 const navLinks = [
   { href: '/calculadoras', label: 'Calculadoras', icon: LayoutGrid },
