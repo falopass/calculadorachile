@@ -1523,6 +1523,59 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No incluye comisiones ni spreads de la operación.',
     ],
   },
+  'compras-internacionales': {
+    summary:
+      'Calcula los impuestos de una compra a distancia en el extranjero según las reglas de Aduanas y el SII vigentes desde el 25-10-2025 (Ley 21.713): régimen especial hasta US$500 y régimen general sobre US$500.',
+    calculationSteps: [
+      'Suma producto, flete y seguro para obtener el valor CIF en US$.',
+      'Si el valor de los productos es de hasta US$500: IVA de 19 % sobre el CIF, sin arancel; si la tienda está inscrita en el SII se cobra al pagar, si no, al llegar a Chile.',
+      'Si supera US$500: derecho ad valorem de 6 % sobre el CIF (0 % con trato preferencial por TLC) y luego IVA de 19 % sobre CIF + derecho.',
+      'Redondea cada monto en US$ a 2 decimales y convierte a pesos con el dólar observado (redondeo al peso).',
+    ],
+    assumptions: [
+      'El umbral de US$500 se compara contra el valor de los productos de la compra.',
+      'En el régimen hasta US$500 el IVA se calcula sobre producto + flete + seguro.',
+      'La conversión a pesos usa el dólar observado del Banco Central como referencia.',
+    ],
+    limitations: [
+      'No incluye impuestos adicionales por tipo de mercancía (alcoholes, tabaco, joyas, bebidas, pirotecnia, vehículos) ni el recargo de 50 % a mercancías usadas.',
+      'No incluye cargos de gestión de Correos o del courier, que no son impuestos y varían por empresa.',
+      'El monto en pesos puede diferir del que liquida Aduanas, que usa el tipo de cambio vigente a la fecha de aceptación de la declaración.',
+      'El trato preferencial por TLC exige acreditar el origen; la calculadora no lo verifica.',
+    ],
+  },
+  'real-brasileno-clp': {
+    summary:
+      'Convierte entre reales brasileños y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BRL.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 BRL del snapshot diario (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en BRL para obtener CLP (redondeo al peso), o divide los CLP por la tasa para la dirección inversa (2 decimales).',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.BRL.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio, bancos o tarjetas.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
+  'sol-peruano-clp': {
+    summary:
+      'Convierte entre soles peruanos y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.PEN.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 PEN del snapshot diario (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en PEN para obtener CLP (redondeo al peso), o divide los CLP por la tasa para la dirección inversa (2 decimales).',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.PEN.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio, bancos o tarjetas.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
   aguinaldo: {
     summary:
       'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público según la Ley 21.806, o una referencia de Navidad 2025; el régimen de pensionados IPS se cita aparte (ChileAtiende).',

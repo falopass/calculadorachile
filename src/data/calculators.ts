@@ -4662,6 +4662,252 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
 
   {
+    id: 'compras-internacionales',
+    name: 'Impuestos por compras internacionales',
+    description:
+      'Calcula el IVA y el arancel de tus compras en Temu, AliExpress, Shein, Amazon u otras tiendas del extranjero: régimen de hasta US$500 (Ley 21.713) y compras sobre US$500 con derecho de 6 % sobre el valor CIF.',
+    slug: 'calculadora-compras-internacionales',
+    category: 'impuestos',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'Aduanas — ¿Cuánto impuesto se paga al importar?',
+        url: 'https://www.aduana.cl/cuanto-impuesto-se-paga-al-importar/aduana/2018-12-12/233227.html',
+        note: 'Hasta US$500: IVA 19 %, exenta de arancel. Sobre US$500: 6 % sobre CIF + IVA 19 %',
+      },
+      {
+        name: 'SII — IVA a bienes comprados en el extranjero',
+        url: 'https://www.sii.cl/destacados/iva_bienes/index.html',
+        note: 'Ley 21.713: plataformas inscritas cobran el IVA al pagar, desde el 25-10-2025',
+      },
+      {
+        name: 'Aduanas — Desde cuándo y a quién aplica',
+        url: 'https://www.aduana.cl/desde-cuando-y-a-quien-aplica/aduana/2025-10-20/120230.html',
+        note: 'Vigencia desde el 25-10-2025 para envíos postales y courier',
+      },
+    ],
+    keywords: [
+      'impuesto compras internacionales',
+      'impuesto temu chile',
+      'impuesto aliexpress',
+      'iva compras extranjero',
+      'calculadora aduana',
+      'impuesto compras sobre 500 dolares',
+    ],
+    inputs: [
+      {
+        id: 'precioUSD',
+        label: 'Valor de los productos (US$)',
+        type: 'number',
+        placeholder: '120',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'envioUSD',
+        label: 'Costo de envío o flete (US$)',
+        type: 'number',
+        placeholder: '0',
+        min: 0,
+      },
+      {
+        id: 'seguroUSD',
+        label: 'Seguro (US$)',
+        type: 'number',
+        placeholder: '0',
+        min: 0,
+      },
+      {
+        id: 'plataformaInscrita',
+        label: '¿La tienda está inscrita en el SII?',
+        type: 'select',
+        required: true,
+        defaultValue: 'si',
+        options: [
+          { value: 'si', label: 'Sí (cobra el IVA al pagar)' },
+          { value: 'no', label: 'No o no lo sé' },
+        ],
+        tooltip:
+          'Temu, AliExpress, Shein, Amazon y otras grandes plataformas están inscritas. Revisa el listado del SII. Solo cambia el resultado en compras de hasta US$500.',
+      },
+      {
+        id: 'tratamientoArancel',
+        label: 'Arancel (compras sobre US$500)',
+        type: 'select',
+        defaultValue: 'general',
+        options: [
+          { value: 'general', label: 'General: 6 % sobre CIF' },
+          { value: 'preferencial', label: 'Con TLC y certificado de origen: 0 %' },
+        ],
+        tooltip:
+          'Un tratado de libre comercio puede rebajar o eliminar el derecho si acreditas el origen. Verifica tu caso con Aduanas.',
+      },
+    ],
+    seoTitle: 'Calculadora de impuestos por compras internacionales',
+    seoDescription:
+      'Calcula el IVA y el arancel de compras en Temu, AliExpress, Shein o Amazon: régimen hasta US$500 (Ley 21.713) y sobre US$500 con 6 % sobre CIF.',
+    faq: [
+      {
+        question: '¿Cuánto impuesto pago por una compra de menos de US$500?',
+        answer:
+          'Desde el 25 de octubre de 2025 pagas IVA de 19 % y quedas exento de arancel. Si la tienda está inscrita en el SII, el IVA se cobra al pagar; si no, se paga cuando el envío llega a Chile.',
+      },
+      {
+        question: '¿Qué impuestos se pagan sobre US$500?',
+        answer:
+          'Por regla general, un derecho aduanero de 6 % sobre el valor CIF (producto + flete + seguro) y luego IVA de 19 % sobre el CIF más el derecho. Según Aduanas, una compra con CIF de US$1.000 paga US$261,40.',
+      },
+      {
+        question: '¿Sigue existiendo la franquicia de US$41?',
+        answer:
+          'No. Con la Ley 21.713 las compras de bienes de hasta US$500 quedaron afectas a IVA desde el 25 de octubre de 2025.',
+      },
+      {
+        question: '¿Qué tipo de cambio se usa?',
+        answer:
+          'Aduanas liquida con el tipo de cambio vigente a la fecha de aceptación de la declaración. La calculadora muestra los pesos con el dólar observado del Banco Central como referencia, por lo que el monto final puede variar.',
+      },
+      {
+        question: '¿Incluye el cobro de Correos o del courier?',
+        answer:
+          'No. Las empresas de envío pueden cobrar por gestionar el trámite; ese cargo depende de cada empresa y no es un impuesto.',
+      },
+    ],
+  },
+
+  {
+    id: 'real-brasileno-clp',
+    name: 'Real brasileño a peso chileno',
+    description:
+      'Convierte reales brasileños a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.BRL.N.O.D, referencial).',
+    slug: 'real-brasileno-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal real brasileño',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.BRL.N.O.D',
+        note: 'Serie F072.CLP.BRL.N.O.D (CLP por 1 BRL), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'real brasileño a peso chileno',
+      'reales a pesos chilenos',
+      '100 reales en pesos chilenos',
+      'peso chileno a real',
+      'convertir reales brasileños',
+      'cambio real brasileño chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'brl_a_clp', label: 'Reales brasileños → CLP' },
+          { value: 'clp_a_brl', label: 'CLP → reales brasileños' },
+        ],
+      },
+    ],
+    seoTitle: 'Real brasileño a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte reales brasileños a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BRL.N.O.D). Bidireccional, útil para viajes a Brasil.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 real brasileño?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.BRL.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 reales en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 BRL) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
+    id: 'sol-peruano-clp',
+    name: 'Sol peruano a peso chileno',
+    description:
+      'Convierte soles peruanos a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.PEN.N.O.D, referencial).',
+    slug: 'sol-peruano-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-17',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal sol peruano',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.PEN.N.O.D',
+        note: 'Serie F072.CLP.PEN.N.O.D (CLP por 1 PEN), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'sol peruano a peso chileno',
+      'soles a pesos chilenos',
+      '100 soles en pesos chilenos',
+      'peso chileno a sol peruano',
+      'convertir soles peruanos',
+      'cambio sol peruano chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'pen_a_clp', label: 'Soles peruanos → CLP' },
+          { value: 'clp_a_pen', label: 'CLP → soles peruanos' },
+        ],
+      },
+    ],
+    seoTitle: 'Sol peruano a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte soles peruanos a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.PEN.N.O.D). Bidireccional, útil para viajes a Perú.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 sol peruano?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.PEN.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 soles en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 PEN) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:

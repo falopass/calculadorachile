@@ -15,7 +15,7 @@ import snapshot from './snapshot.json';
 
 /** Fecha de observación de un indicador (YYYY-MM-DD), no la del generate del snapshot. */
 function observedAsOf(
-  key: 'dolarObservado' | 'euro' | 'pesoArgentino' | 'uf' | 'utm',
+  key: 'dolarObservado' | 'euro' | 'pesoArgentino' | 'realBrasileno' | 'solPeruano' | 'uf' | 'utm',
 ): string {
   const map = (snapshot as { observedAsOf?: Partial<Record<string, string>> }).observedAsOf;
   const obs = map?.[key];
@@ -104,6 +104,29 @@ export const PESO_ARGENTINO = {
   fuente:
     'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.ARS.N.O.D',
 };
+
+/**
+ * Monedas de viaje BCCh (serie F072.CLP.<ISO>.N.O.D, CLP por 1 unidad, referencial).
+ * Mismo gate que PESO_ARGENTINO: `fallback`/`unknown` nunca se presenta como «hoy».
+ */
+function divisaViaje<S extends string>(key: 'realBrasileno' | 'solPeruano', serie: S) {
+  const snap = snapshot as {
+    realBrasileno?: number;
+    solPeruano?: number;
+    sources?: Partial<Record<string, string>>;
+  };
+  return {
+    valor: snap[key] ?? 0,
+    fecha_actualizacion: observedAsOf(key),
+    fuente_snapshot: (snap.sources?.[key] ?? 'fallback') as string,
+    serie,
+    referencial: true as const,
+    fuente: `https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=${serie}`,
+  };
+}
+
+export const REAL_BRASILENO = divisaViaje('realBrasileno', 'F072.CLP.BRL.N.O.D');
+export const SOL_PERUANO = divisaViaje('solPeruano', 'F072.CLP.PEN.N.O.D');
 
 
 // ============================================
