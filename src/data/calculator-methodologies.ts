@@ -922,20 +922,24 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
   },
   'prenatal-postnatal': {
     summary:
-      'Calcula las fechas legales del prenatal, postnatal y postnatal parental según el Código del Trabajo, desde la fecha probable de parto o la fecha real del parto.',
+      'Calcula las fechas legales del prenatal, postnatal y postnatal parental. Con datos de ingresos e IPC, estima el subsidio maternal según el DFL N.º 44.',
     calculationSteps: [
       'Inicio del prenatal = fecha probable de parto − 42 días (6 semanas).',
       'El prenatal termina el día anterior al parto: se alarga si el parto se atrasa y se acorta si se adelanta.',
       'Postnatal desde el día del parto: 84 días; 126 si nació antes de la semana 33 o con menos de 1.500 g; 84 + 7 por cada hijo desde el segundo en parto múltiple. Si concurren, se usa el mayor.',
       'Postnatal parental desde el día siguiente al término del postnatal: 84 días a jornada completa o 126 a media jornada.',
       'Aviso de media jornada: a más tardar 30 días antes del término del postnatal. Fuero: hasta un año después del término del postnatal.',
+      'Base diaria: promedio mensual de la remuneración neta y/o subsidios de los 3 meses con ingresos más próximos al inicio de la licencia, dentro de los 6 meses previos, dividido por 30.',
+      'Tope diario: promedio de hasta 3 meses con ingresos dentro de los 6 meses anteriores al séptimo mes previo a la licencia, dividido por 30; luego aplica la variación acumulada del IPC y aumenta el resultado en 10%.',
+      'Usa el menor entre base y tope, sin bajar del 50% del ingreso mínimo para fines no remuneracionales dividido por 30. Para el parental a media jornada toma el 50% del subsidio, respetando el mismo mínimo. Redondea a pesos al mostrar el diario y al totalizar cada etapa.',
     ],
     assumptions: [
       'Días corridos, incluidos fines de semana y festivos.',
       'Sin licencias por enfermedad del embarazo ni postnatal suplementario, que modifican las fechas según indique el médico.',
     ],
     limitations: [
-      'No calcula el monto del subsidio maternal.',
+      'El monto se estima para trabajadoras dependientes del sector privado con un solo empleador y licencias continuas. No verifica requisitos de acceso ni calcula el imponible de cada mes.',
+      'El piso usa el calendario publicado de ingreso mínimo no remuneracional. No calcula montos anteriores al primer tramo disponible ni proyecta reajustes futuros.',
       'No modela el traspaso de semanas del postnatal parental al padre ni el permiso por enfermedad grave del hijo menor de un año.',
     ],
     workedExample: {

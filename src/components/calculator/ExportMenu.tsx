@@ -76,10 +76,26 @@ export default function ExportMenu({
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      const width = 400;
       const lineHeight = 28;
       const padding = 24;
       const headerHeight = 60;
+      const bodyFont = '14px Inter, sans-serif';
+      const valueFont = 'bold 14px Inter, sans-serif';
+      const headingFont = 'bold 18px Inter, sans-serif';
+      const mainFont = 'bold 16px Inter, sans-serif';
+      const measure = (text: string, font: string) => {
+        ctx.font = font;
+        return ctx.measureText(text).width;
+      };
+      const contentWidth = results.reduce(
+        (longest, { label, value }) =>
+          Math.max(longest, measure(label, bodyFont) + 16 + measure(value, valueFont)),
+        Math.max(
+          measure(title, headingFont),
+          mainResult ? measure(`${mainResult.label}: ${mainResult.value}`, mainFont) : 0,
+        ),
+      );
+      const width = Math.max(400, Math.ceil(contentWidth) + padding * 2);
       const height = headerHeight + results.length * lineHeight + padding * 2 + 40;
 
       canvas.width = width;
@@ -95,7 +111,7 @@ export default function ExportMenu({
 
       // Title
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 18px Inter, sans-serif';
+      ctx.font = headingFont;
       ctx.fillText(title, padding, 38);
 
       // Date
@@ -105,25 +121,25 @@ export default function ExportMenu({
 
       // Results
       ctx.fillStyle = '#0f172a';
-      ctx.font = '14px Inter, sans-serif';
+      ctx.font = bodyFont;
       let y = headerHeight + padding;
 
       if (mainResult) {
         ctx.fillStyle = '#6366f1';
-        ctx.font = 'bold 16px Inter, sans-serif';
+        ctx.font = mainFont;
         ctx.fillText(`${mainResult.label}: ${mainResult.value}`, padding, y);
         y += lineHeight + 8;
         ctx.fillStyle = '#0f172a';
-        ctx.font = '14px Inter, sans-serif';
+        ctx.font = bodyFont;
       }
 
       results.forEach((r) => {
         ctx.fillStyle = '#475569';
         ctx.fillText(r.label, padding, y);
         ctx.fillStyle = '#0f172a';
-        ctx.font = 'bold 14px Inter, sans-serif';
+        ctx.font = valueFont;
         ctx.fillText(r.value, width - padding - ctx.measureText(r.value).width, y);
-        ctx.font = '14px Inter, sans-serif';
+        ctx.font = bodyFont;
         y += lineHeight;
       });
 

@@ -883,16 +883,35 @@ export async function loadCalculationFn(
 
     case 'prenatal-postnatal': {
       const { calculatePrenatalPostnatal, prenatalPostnatalToResults } = await import('./prenatal-postnatal');
-      return (inputs) =>
-        prenatalPostnatalToResults(
+      const pesos = (valor: string) => {
+        if (/^(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(valor)) {
+          return Number(valor.replace(/\./g, '').replace(',', '.'));
+        }
+        // Evita interpretar un separador de miles a medio escribir como decimal.
+        return /^(?:0|[1-9]\d{3,})\.\d+$/.test(valor) ? Number(valor) : NaN;
+      };
+      return (inputs) => {
+        const reciente = String(inputs.promedioReciente ?? '').trim();
+        const historico = String(inputs.promedioHistorico ?? '').trim();
+        const ipc = String(inputs.ipcAcumulado ?? '').trim();
+        const promedioHistorico = pesos(historico);
+        return prenatalPostnatalToResults(
           calculatePrenatalPostnatal({
             fechaProbableParto: String(inputs.fechaProbableParto ?? ''),
             fechaParto: String(inputs.fechaParto ?? ''),
             prematuroOBajoPeso: coerceBool(inputs.prematuroOBajoPeso),
             numeroHijos: coerceNumber(inputs.numeroHijos, 1),
             mediaJornada: coerceBool(inputs.mediaJornada),
+            subsidio: reciente || historico || ipc
+              ? {
+                  promedioReciente: pesos(reciente),
+                  promedioHistorico,
+                  ipcAcumulado: !ipc && promedioHistorico === 0 ? 0 : coerceNumber(ipc, NaN),
+                }
+              : undefined,
           }),
         );
+      };
     }
 
     case 'licencia-medica': {

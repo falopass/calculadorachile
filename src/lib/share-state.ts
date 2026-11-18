@@ -13,6 +13,7 @@ export function buildShareQuery(
 ): string {
   const params = new URLSearchParams();
   for (const input of inputs) {
+    if (input.shareable === false) continue;
     const value = values[input.id];
     if (value === undefined || value === '' || value === initial[input.id]) continue;
     params.set(input.id, typeof value === 'boolean' ? (value ? '1' : '0') : String(value));
@@ -26,6 +27,7 @@ export function parseShareQuery(search: string, inputs: CalculatorInput[]): Valu
   const params = new URLSearchParams(search);
   const parsed: Values = {};
   for (const input of inputs) {
+    if (input.shareable === false) continue;
     const raw = params.get(input.id);
     if (raw === null) continue;
     if (input.type === 'number') {

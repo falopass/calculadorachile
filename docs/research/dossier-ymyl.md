@@ -450,6 +450,13 @@ Fuente: [DT — causales de término](https://www.dt.gob.cl/portal/1628/w3-artic
 
 ---
 
+### Subsidio maternal: prenatal, postnatal y postnatal parental
+
+- **Base:** remuneración mensual imponible descontadas cotizaciones personales e impuesto, sin pagos ocasionales, más subsidios devengados. Promedio de los tres meses con ingresos más cercanos dentro de los seis meses previos a la primera licencia, dividido por 30. [DFL 44, arts. 7, 8, 10 y 16](https://www.bcn.cl/leychile/navegar?idNorma=4252) · [SUSESO, Compendio, bases de cálculo](https://www.suseso.gob.cl/622/w3-propertyvalue-768468.html).
+- **Tope:** en los seis meses inmediatamente anteriores al séptimo mes previo a la licencia (meses −13 a −8), elegir los tres más próximos con ingresos. Dividir su suma por 90, 60 o 30 según haya tres, dos o un mes; con ninguno el tope es cero. Reajustar por la variación del IPC de los siete meses anteriores al mes precedente (índices −2 y −9) y multiplicar por 1,10. El cálculo parte de ingresos ya limitados al imponible de cada mes, no de un tope fijo en UF sobre el resultado. [SUSESO, Compendio, subsidios maternales](https://www.suseso.gob.cl/622/w3-propertyvalue-771668.html) · [Dictámenes 64773-2015](https://www-cloud.suseso.cl/612/w3-article-39153.html) y [47358-2024](https://www-cloud.suseso.cl/612/w3-article-726815.html).
+- **Pago diario:** menor entre base y tope, con piso de 1/60 del ingreso mínimo para fines no remuneracionales. El piso rige por día devengado y también en el parental a media jornada, después de reducir el subsidio al 50%. [DFL 44, art. 17](https://www.bcn.cl/leychile/navegar?idNorma=4252) · [SUSESO, dictámenes 22123-2012](https://www-cloud.suseso.cl/612/w3-article-37294.html) y [2088-2022](https://www-cloud.suseso.cl/612/w3-article-681549.html) · [Código del Trabajo, art. 197 bis](https://www.bcn.cl/leychile/navegar?idNorma=207436).
+- **Alcance:** trabajadora dependiente del sector privado con un empleador y licencias maternales continuas. El simulador pide promedios netos e IPC explícitos; el mínimo usa los tramos publicados en el calendario de valores. Redondea cada etapa a pesos, sin redondear el diario antes de multiplicar. No comprueba elegibilidad ni proyecta reajustes.
+
 ### H) Comparador de comisiones AFP
 
 **Riesgo YMYL si se calcula mal:** Medio
