@@ -237,7 +237,7 @@ export default function PremiumResultCard({
   // Obtener resultado principal para exportación
   const mainResult = results.find(r => r.highlight);
   const exportResults = results
-    .filter(r => !r.highlight)
+    .filter(r => r !== mainResult)
     .map(r => ({ label: r.label, value: formatValue(r.value, r.format) }));
 
   if (!results || results.length === 0) {
