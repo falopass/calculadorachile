@@ -166,8 +166,9 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
   it('no aplica un piso moderno a fechas fuera del calendario', () => {
     const r = calculatePrenatalPostnatal({ fechaProbableParto: '2026-05-15', subsidio }, calendario);
     expect(r.subsidio).toBeUndefined();
-    expect(r.avisoSubsidio).toContain('No contamos con el ingreso mínimo');
+    expect(r.avisoSubsidio?.texto).toContain('No contamos con el ingreso mínimo');
     expect(r.inicioPrenatal).toBe('2026-04-03');
+    expect(prenatalPostnatalToResults(r).some((row) => row.partial)).toBe(false);
   });
 
   it('conecta el formulario: fechas solas, pesos chilenos, IPC firmado y entradas incompletas', async () => {
