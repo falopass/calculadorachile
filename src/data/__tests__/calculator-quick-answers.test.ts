@@ -3,16 +3,34 @@ import { getQuickAnswer } from '../calculator-quick-answers';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
 import { HORAS_EXTRA, INGRESO_MINIMO, JORNADA_LEGAL, PENSION_ALIMENTOS, PERMISO_CIRCULACION, SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
 import { formatCLP } from '@/lib/formatters';
-import { calculators, discoverableCalculators } from '../calculators';
+import { calculators } from '../calculators';
 import { calculatePensionAlimenticia } from '@/lib/calculations/pension-alimenticia';
 import { calculateTrabajoEnFeriado } from '@/lib/calculations/trabajo-en-feriado';
 import { calculatePermisoCirculacion } from '@/lib/calculations/permiso-circulacion';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
-const IDS = discoverableCalculators.map((calculator) => calculator.id);
+const IDS = [
+  'boleta-honorarios', 'iva', 'credito-automotriz', 'vacaciones-proporcionales',
+  'asignacion-familiar', 'gratificacion-legal', 'impuesto-herencia',
+  'impuesto-segunda-categoria', 'sueldo-liquido', 'horas-extra',
+  'indemnizacion-anos-servicio', 'finiquito', 'utm-clp', 'uf-clp',
+  'contribuciones', 'credito-cae', 'patente-comercial', 'sueldo-part-time',
+  'factor-hora-extra', 'tope-imponible-90-uf', 'sueldo-casa-particular',
+  'prenatal-postnatal', 'licencia-medica', 'seguro-cesantia', 'semana-corrida',
+  'aguinaldo', 'capacidad-credito-hipotecario', 'plusvalia',
+  'compras-internacionales', 'real-brasileno-clp', 'sol-peruano-clp',
+  'trabajo-en-feriado', 'valor-hora-trabajo', 'costo-viaje', 'peso-argentino-clp',
+  'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'pension-alimenticia',
+];
 
 describe('getQuickAnswer', () => {
+  it('limita las respuestas a las existentes y las ocho prioritarias', () => {
+    for (const calculator of calculators.filter((calculator) => !IDS.includes(calculator.id))) {
+      expect(getQuickAnswer(calculator.id, CTX), calculator.id).toBeNull();
+    }
+  });
+
   it('no agrega respuestas a calculadoras no indexables', () => {
     for (const calculator of calculators.filter((calculator) => calculator.noIndex)) {
       expect(getQuickAnswer(calculator.id, CTX), calculator.id).toBeNull();
