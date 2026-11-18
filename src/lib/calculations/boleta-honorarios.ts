@@ -3,13 +3,11 @@
 // ============================================
 
 import {
-  BOLETA_HONORARIOS,
   UF,
-  RETENCION_HONORARIOS_CALENDARIO,
   RETENCION_HONORARIOS_DISTRIBUCION,
   type AnioRetencionHonorarios,
 } from '@/lib/values/constants';
-import { contextoHonorarios } from '@/lib/values/honorarios-anio';
+import { contextoHonorarios, getRetencionHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BoletaHonorariosInput {
@@ -22,7 +20,7 @@ export interface BoletaHonorariosInput {
   montoBruto: number;
   retencionAutomatica?: boolean;
   /** Año del calendario de tasas (Ley 21.133 — aumento gradual). */
-  ano?: 2025 | 2026 | 2027 | 2028;
+  ano?: number;
   /**
    * Si true, se expone desglose informativo de la retención.
    * Nunca descuenta cotizaciones adicionales al líquido.
@@ -68,7 +66,7 @@ export interface BoletaHonorariosResult {
  * Calcula la retención de boleta de honorarios.
  *
  * Bug histórico: la versión anterior descontaba cotizaciones (AFP 7%,
- * salud 7%, etc.) del bruto adicionales a la retención del 15,25%.
+ * salud 7%, etc.) del bruto adicionales a la retención anual.
  * Eso es doble contabilidad. Bajo la Ley 21.133 la retención YA
  * financia cotizaciones que se liquidan en la Operación Renta.
  * El trabajador recibe `bruto − retención`.
@@ -95,7 +93,7 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   const monto = Math.max(0, montoBruto);
 
   // Tasa según año (Ley 21.133) — calendario en constants.
-  const tasaRetencion = RETENCION_HONORARIOS_CALENDARIO[ano] ?? BOLETA_HONORARIOS.tasa_total;
+  const tasaRetencion = getRetencionHonorarios(ano);
 
   const valorUF = input.valorUF ?? UF.valor;
 

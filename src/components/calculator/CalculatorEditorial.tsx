@@ -1,3 +1,4 @@
+import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import {
@@ -20,6 +21,10 @@ import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
  * frecuentes como texto). No emite structured data: el schema FAQPage
  * sigue saliendo solo de `calculator.faq` vía SeoStructuredData.
  */
+
+const HON = contextoHonorarios();
+const FACTOR_HON = 1 - HON.tasa / 100;
+const factorHon = FACTOR_HON.toLocaleString('es-CL', { maximumFractionDigits: 4 });
 
 interface EditorialContent {
   /** Bloque destacado sobre la calculadora (opcional). */
@@ -807,23 +812,23 @@ const EDITORIAL: Record<string, EditorialContent> = {
     top: (
       <Section title="Cómo calcular la boleta de honorarios">
         <p className={pClass}>
-          <strong>De bruto a líquido:</strong> multiplica el bruto por 0,8475 (100% − 15,25%) (
+          <strong>De bruto a líquido:</strong> multiplica el bruto por {factorHon} (100% − {formatTasa(HON.tasa)}) (
           <Ext href={SII_RETENCION_2026}>SII</Ext>).
         </p>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
           <li>
-            $100.000 × 0,8475 = <strong>$84.750</strong> líquidos (retención $15.250)
+            $100.000 × {factorHon} = <strong>{formatCLP(100_000 * FACTOR_HON)}</strong> líquidos (retención {formatCLP(100_000 * HON.tasa / 100)})
           </li>
           <li>
-            $1.000.000 × 0,8475 = <strong>$847.500</strong> líquidos (retención $152.500)
+            $1.000.000 × {factorHon} = <strong>{formatCLP(1_000_000 * FACTOR_HON)}</strong> líquidos (retención {formatCLP(1_000_000 * HON.tasa / 100)})
           </li>
         </ul>
         <p className={pClass}>
-          <strong>De líquido a bruto:</strong> si acordaste un monto líquido, divídelo por 0,8475.
+          <strong>De líquido a bruto:</strong> si acordaste un monto líquido, divídelo por {factorHon}.
         </p>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--foreground-secondary)] md:text-base">
           <li>
-            $1.000.000 ÷ 0,8475 = <strong>$1.179.941</strong> brutos (retención $179.941)
+            $1.000.000 ÷ {factorHon} = <strong>{formatCLP(Math.round(1_000_000 / FACTOR_HON))}</strong> brutos (retención {formatCLP(Math.round(1_000_000 / FACTOR_HON) - 1_000_000)})
           </li>
         </ul>
       </Section>
@@ -858,17 +863,17 @@ const EDITORIAL: Record<string, EditorialContent> = {
                 q: '¿Cómo se hace el cálculo de boleta de honorarios?',
                 a: (
                   <>
-                    Multiplica el monto bruto por 0,8475 para obtener el líquido de 2026, o divide
-                    el líquido por 0,8475 para obtener el bruto. Ejemplo: $100.000 brutos dejan
-                    $84.750 líquidos (<Ext href={SII_RETENCION_2026}>SII</Ext>).
+                    Multiplica el monto bruto por {factorHon} para obtener el líquido de {HON.anio}, o divide
+                    el líquido por {factorHon} para obtener el bruto. Ejemplo: $100.000 brutos dejan
+                    {formatCLP(100_000 * FACTOR_HON)} líquidos (<Ext href={SII_RETENCION_2026}>SII</Ext>).
                   </>
                 ),
               },
               {
-                q: '¿Cuánto se retiene en una boleta de honorarios en 2026?',
+                q: `¿Cuánto se retiene en una boleta de honorarios en ${HON.anio}?`,
                 a: (
                   <>
-                    15,25% del monto bruto, entre el 1 de enero y el 31 de diciembre de 2026 (
+                    {formatTasa(HON.tasa)} del monto bruto, durante el año comercial {HON.anio} (
                     <Ext href={SII_RETENCION_2026}>SII</Ext>).
                   </>
                 ),

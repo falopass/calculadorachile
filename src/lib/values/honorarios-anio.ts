@@ -20,7 +20,11 @@ export function anioEnCalendario(anio: number): AnioHonorarios {
   return (ANIOS.includes(anio as AnioHonorarios) ? anio : ANIOS[0]) as AnioHonorarios;
 }
 
-/** "15,25%" / "16%". */
+export function getRetencionHonorarios(anio: number = partesSantiago(new Date()).year): number {
+  return RETENCION_HONORARIOS_CALENDARIO[anioEnCalendario(anio)];
+}
+
+/** Porcentaje en formato chileno. */
 export function formatTasa(tasa: number): string {
   return `${tasa.toLocaleString('es-CL', { maximumFractionDigits: 2 })}%`;
 }
@@ -54,9 +58,9 @@ export function contextoHonorarios(date: Date = new Date()): ContextoHonorarios 
   const modoCambioDeAnio = month === 12 && siguiente !== null;
   return {
     anio,
-    tasa: RETENCION_HONORARIOS_CALENDARIO[anio],
+    tasa: getRetencionHonorarios(anio),
     siguiente,
-    tasaSiguiente: siguiente ? RETENCION_HONORARIOS_CALENDARIO[siguiente] : null,
+    tasaSiguiente: siguiente ? getRetencionHonorarios(siguiente) : null,
     modoCambioDeAnio,
     // Siempre el año vigente: la tasa legal depende del año de emisión.
     anioSelector: anio,

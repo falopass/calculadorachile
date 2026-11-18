@@ -1,3 +1,4 @@
+import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
 // ============================================
 // Catálogo de calculadoras disponibles
 // ============================================
@@ -727,7 +728,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Es lo mismo que retención de boleta de honorarios?',
         answer:
-          'No. El IVA 19% grava ventas/servicios afectos. La retención de boleta de honorarios 2026 (15,25%) es otro régimen (Ley 21.133). Usa la calculadora de boleta de honorarios para ese caso.',
+          `No. El IVA 19% grava ventas/servicios afectos. La retención de boleta de honorarios 2026 (${tasaHonorarios(getRetencionHonorarios(2026))}) es otro régimen (Ley 21.133). Usa la calculadora de boleta de honorarios para ese caso.`,
       },
     ],
   },
@@ -1230,7 +1231,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         name: 'SII — Tasa de retención según el año de emisión (FAQ 001.140.3611)',
         url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_3611.htm',
-        note: '15,25% en el año comercial 2026 (FAQ actualizada el 08-04-2026)',
+        note: `${formatTasa(HON.tasa)} en el año comercial ${HON.anio} (SII, Ley 21.133)`,
       },
       {
         name: 'SII — Monto mínimo de una boleta de honorarios (FAQ 001.140.2667)',

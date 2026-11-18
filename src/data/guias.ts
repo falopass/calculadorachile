@@ -1,3 +1,5 @@
+import { contextoHonorarios, getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
+import { formatCLP as clpHonorarios } from '@/lib/formatters';
 // ============================================
 // Guías profundas (pillar content) — Chile 2026
 // ----------------------------------------------
@@ -27,6 +29,8 @@ import { guiaFeriados2027 } from './guia-feriados-2027';
 import { guiaLicenciaMedica } from './guia-licencia-medica';
 import { guiaOperacionRenta2027 } from './guia-operacion-renta-2027';
 import { buildCvlistoContentUrl } from '@/lib/cvlisto';
+
+const HON = contextoHonorarios();
 
 export interface GuiaSection {
   id: string;
@@ -741,14 +745,14 @@ export const guias: Guia[] = [
     title: 'IVA y boleta de honorarios en Chile 2026: guía tributaria',
     intent: '¿Cómo funcionan el IVA y las boletas de honorarios?',
     description:
-      'Guía completa del IVA (19%) y la boleta de honorarios en Chile 2026. Cuándo aplicar, cómo emitir, retención del 15,25% y obligaciones tributarias.',
+      `Guía completa del IVA (19%) y la boleta de honorarios en Chile 2026. Cuándo aplicar, cómo emitir, retención del ${tasaHonorarios(HON.tasa)} según año y obligaciones tributarias.`,
     category: 'tributario',
     categoryLabel: 'Impuestos y tributos',
     keywords: [
       'IVA chile 2026',
       '19% IVA',
       'boleta honorarios',
-      'retención 15.25%',
+      `retención ${tasaHonorarios(HON.tasa)}`,
       'ley 21.133',
       'SII',
       'impuesto valor agregado',
@@ -846,21 +850,21 @@ export const guias: Guia[] = [
         id: 'retencion-honorarios',
         title: 'Retención de la boleta de honorarios (Ley 21.133)',
         level: 2,
-        html: `<p>Desde el 1 de enero hasta el 31 de diciembre de 2026 la tasa es <strong>15,25%</strong> del honorario bruto. La Ley 21.133 la eleva a 16% en 2027 y 17% en 2028.</p>
+        html: `<p>En el año comercial ${HON.anio} la tasa es <strong>${tasaHonorarios(HON.tasa)}</strong> del honorario bruto. La Ley 21.133 la eleva a ${tasaHonorarios(getRetencionHonorarios(2027))} en 2027 y ${tasaHonorarios(getRetencionHonorarios(2028))} en 2028.</p>
 <p>El sistema distingue dos flujos. Si el receptor está obligado a retener, descuenta el porcentaje, paga el líquido y entera la retención. Si no retiene, el emisor recibe el bruto y debe declarar y pagar su PPM en el Formulario 29. No basta decir que “una persona natural nunca retiene” o que “toda empresa retiene”: selecciona la opción que corresponda al receptor.</p>
-<p>La <strong>Ley 21.133</strong> estableció un calendario progresivo de retención que sube del 14,5% en 2025 al 17% en 2028:</p>
+<p>La <strong>Ley 21.133</strong> estableció un calendario progresivo de retención que sube del ${tasaHonorarios(getRetencionHonorarios(2025))} en 2025 al ${tasaHonorarios(getRetencionHonorarios(2028))} en 2028:</p>
 <table>
 <thead><tr><th>Año</th><th>Retención o PPM</th><th>Cambio</th></tr></thead>
 <tbody>
-<tr><td>2025</td><td>14,50%</td><td>+0,75 punto</td></tr>
-<tr><td><strong>2026</strong></td><td><strong>15,25%</strong></td><td>+0,75 punto</td></tr>
-<tr><td>2027</td><td>16,00%</td><td>+0,75 punto</td></tr>
-<tr><td>2028</td><td>17,00%</td><td>+1 punto</td></tr>
+<tr><td>2025</td><td>${tasaHonorarios(getRetencionHonorarios(2025))}</td><td>+0,75 punto</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>${tasaHonorarios(getRetencionHonorarios(2026))}</strong></td><td>+0,75 punto</td></tr>
+<tr><td>2027</td><td>${tasaHonorarios(getRetencionHonorarios(2027))}</td><td>+0,75 punto</td></tr>
+<tr><td>2028</td><td>${tasaHonorarios(getRetencionHonorarios(2028))}</td><td>+1 punto</td></tr>
 </tbody>
 </table>
-<div class="numeric-example"><div class="numeric-example__title">Boleta bruta $1.000.000</div><ul><li>Retención: $1.000.000 × 15,25% = $152.500</li><li>Líquido cuando retiene el receptor: $847.500</li><li>Si no retiene: recibes $1.000.000 y reservas $152.500 para PPM</li></ul><span class="total">Disponible después de retención o reserva: $847.500</span></div>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No existe una división 10% + 5,25% por boleta</strong><p>El 15,25% es pago provisional. En la Operación Renta se consolida con impuesto anual y cotizaciones según ingresos, gastos, topes, afiliación y modalidad de cobertura. No puedes afirmar que $100.000 de este ejemplo ya son impuesto definitivo y $52.500 cotizaciones.</p></div></aside>
-<p>Si pactaste un líquido, el bruto es <code>líquido ÷ 0,8475</code>. Para recibir $500.000 líquidos debes emitir aproximadamente $589.971 brutos, sujeto al redondeo del SII.</p>`,
+<div class="numeric-example"><div class="numeric-example__title">Boleta bruta $1.000.000</div><ul><li>Retención: $1.000.000 × ${tasaHonorarios(HON.tasa)} = ${clpHonorarios(1_000_000 * HON.tasa / 100)}</li><li>Líquido cuando retiene el receptor: ${clpHonorarios(1_000_000 * (1 - HON.tasa / 100))}</li><li>Si no retiene: recibes $1.000.000 y reservas ${clpHonorarios(1_000_000 * HON.tasa / 100)} para PPM</li></ul><span class="total">Disponible después de retención o reserva: ${clpHonorarios(1_000_000 * (1 - HON.tasa / 100))}</span></div>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No existe una división 10% + 5,25% por boleta</strong><p>El ${tasaHonorarios(HON.tasa)} es pago provisional. En la Operación Renta se consolida con impuesto anual y cotizaciones según ingresos, gastos, topes, afiliación y modalidad de cobertura. No puedes afirmar que $100.000 de este ejemplo ya son impuesto definitivo y $52.500 cotizaciones.</p></div></aside>
+<p>Si pactaste un líquido, el bruto es <code>líquido ÷ ${(1 - HON.tasa / 100).toLocaleString('es-CL')}</code>. Para recibir $500.000 líquidos debes emitir aproximadamente ${clpHonorarios(Math.round(500_000 / (1 - HON.tasa / 100)))} brutos, sujeto al redondeo del SII.</p>`,
       },
       {
         id: 'exencion-honorarios',
@@ -873,7 +877,7 @@ export const guias: Guia[] = [
 <li><strong>Cobertura parcial:</strong> en 2026 calcula salud y pensiones sobre 80% de la renta imponible; ATEP, SANNA y SIS mantienen cobertura sobre la base completa definida para esos seguros. Puede aumentar la devolución, pero reduce prestaciones de salud y pensión.</li>
 </ul>
 <p>No todas las personas están obligadas en idénticos términos. El umbral oficial se expresa en honorarios anuales equivalentes a cinco ingresos mínimos mensuales y existen reglas por edad, pensión, afiliación y cotización simultánea. La guía anterior usaba “5 UTM mensuales” y “7,5 UTA”, parámetros que no corresponden a esta prueba.</p>
-<p>La retención se aplica al emitir aunque después resulte una excepción previsional. La situación final se resuelve en el F22, no modificando manualmente el 15,25% de cada boleta.</p>
+<p>La retención se aplica al emitir aunque después resulte una excepción previsional. La situación final se resuelve en el F22, no modificando manualmente el ${tasaHonorarios(HON.tasa)} de cada boleta.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Cobertura no es devolución</strong><p>Elegir solo por “cuánto me devuelven” puede reducir el monto de licencias médicas, protección maternal y ahorro previsional. Consulta el simulador de la Subsecretaría de Previsión Social antes de confirmar.</p></div></aside>`,
       },
       {
@@ -2003,7 +2007,7 @@ export const guias: Guia[] = [
       'patente comercial 2026',
       'PPM 1ra categoría',
       'IVA crédito débito',
-      'retención boleta honorarios 15.25',
+      `retención boleta honorarios ${tasaHonorarios(HON.tasa)}`,
       'contribuciones bienes raíces',
       'tasa primera categoría 25%',
       'mutual de seguridad ley 16.744',
@@ -2073,7 +2077,7 @@ export const guias: Guia[] = [
 </tbody>
 </table>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Régimen Pro PYME (14D)</strong><p>Las empresas con ventas anuales hasta 75.000 UF y capital efectivo de hasta 85.000 UF al inicio pueden acogerse al régimen 14D, que permite contabilidad simplificada, depreciación instantánea y tributación en base a ingresos efectivos. Es la opción más eficiente para la inmensa mayoría de PYMEs chilenas.</p></div></aside>
-<ul class="data-grid"><li><span class="data-grid__label">Tasa 1ra categoría 14D</span><span class="data-grid__value">25%</span></li><li><span class="data-grid__label">Tasa 1ra categoría 14A</span><span class="data-grid__value">27%</span></li><li><span class="data-grid__label">Tasa IVA</span><span class="data-grid__value">19%</span></li><li><span class="data-grid__label">Retención honorarios 2026</span><span class="data-grid__value">15,25%</span></li></ul>`,
+<ul class="data-grid"><li><span class="data-grid__label">Tasa 1ra categoría 14D</span><span class="data-grid__value">25%</span></li><li><span class="data-grid__label">Tasa 1ra categoría 14A</span><span class="data-grid__value">27%</span></li><li><span class="data-grid__label">Tasa IVA</span><span class="data-grid__value">19%</span></li><li><span class="data-grid__label">Retención honorarios ${HON.anio}</span><span class="data-grid__value">${tasaHonorarios(HON.tasa)}</span></li></ul>`,
       },
       {
         id: 'costo-empleador',
@@ -2143,12 +2147,12 @@ export const guias: Guia[] = [
 <tr><td>Comercio (sin régimen específico)</td><td>1,0%</td></tr>
 <tr><td>Transporte terrestre carga/pasajeros</td><td>0,3%</td></tr>
 <tr><td>Construcción</td><td>0,2%</td></tr>
-<tr><td>Profesionales 2da categoría</td><td>15,25% (calendario 21.133)</td></tr>
+<tr><td>Profesionales 2da categoría</td><td>${tasaHonorarios(HON.tasa)} (calendario 21.133)</td></tr>
 </tbody>
 </table>
 <div class="numeric-example"><div class="numeric-example__title">PYME comercial 14D — ventas $30.000.000/mes</div><ul><li>Ventas brutas con IVA: $30.000.000</li><li>Ventas netas: $30.000.000 ÷ 1,19 = $25.210.084</li><li>PPM (0,25%): $25.210.084 × 0,25% = $63.025</li></ul><span class="total">PPM a pagar al mes: $63.025</span></div>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Recargo / rebaja anual del PPM</strong><p>En abril de cada año, en la Operación Renta, se ajusta la tasa de PPM para los siguientes 12 meses según el resultado del ejercicio anterior. Si pagaste poco IDPC, la tasa baja. Si pagaste mucho, sube. Las empresas con utilidades en alza típicamente ven subidas de 0,1 a 0,2 puntos cada año.</p></div></aside>
-<p>Para profesionales independientes la tasa coincide con la <a href="/guias/iva-boleta-honorarios-chile">retención de boletas de honorarios</a> según el calendario Ley 21.133: 14,5% (2025), 15,25% (2026), 16% (2027), 17% (2028). Calcula tu PPM con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
+<p>Para profesionales independientes la tasa coincide con la <a href="/guias/iva-boleta-honorarios-chile">retención de boletas de honorarios</a> según el calendario Ley 21.133: 14,5% (2025), ${tasaHonorarios(getRetencionHonorarios(2026))} (2026), 16% (2027), 17% (2028). Calcula tu PPM con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</p>`,
       },
       {
         id: 'patente-comercial',
@@ -2195,13 +2199,13 @@ export const guias: Guia[] = [
 <thead><tr><th>Año</th><th>Retención</th><th>Sobre $1.000.000 bruto</th></tr></thead>
 <tbody>
 <tr><td>2025</td><td>14,5%</td><td>$145.000 retenidos</td></tr>
-<tr><td><strong>2026</strong></td><td><strong>15,25%</strong></td><td><strong>$152.500 retenidos</strong></td></tr>
+<tr><td><strong>2026</strong></td><td><strong>${tasaHonorarios(getRetencionHonorarios(2026))}</strong></td><td><strong>$152.500 retenidos</strong></td></tr>
 <tr><td>2027</td><td>16,0%</td><td>$160.000 retenidos</td></tr>
 <tr><td>2028</td><td>17,0%</td><td>$170.000 retenidos</td></tr>
 </tbody>
 </table>
-<p>La retención del 15,25% en 2026 financia <strong>internamente</strong>: 10% impuesto a la renta (PPM) + 2,18% salud + 0,62% AFP + 1,52% SIS + 0,93% accidentes del trabajo. El SII redistribuye automáticamente esos montos a las instituciones correspondientes en la Operación Renta de abril.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Independiente: no descuentes cotizaciones adicionales</strong><p>Bug común al emitir una boleta: descontar el bruto en 15,25% de retención + descuentos adicionales por AFP, salud y SIS. Eso es contabilidad doble. La retención YA financia las cotizaciones; el líquido que recibes es bruto − retención. Las cotizaciones se materializan en abril vía Operación Renta.</p></div></aside>
+<p>La retención es un anticipo que se imputa a las obligaciones anuales. No tiene una distribución fija entre impuesto, salud, AFP y seguros por cada boleta: el SII determina las cotizaciones y el impuesto en la Operación Renta según los antecedentes personales.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Independiente: no descuentes cotizaciones adicionales</strong><p>Bug común al emitir una boleta: descontar el bruto en ${tasaHonorarios(HON.tasa)} de retención + descuentos adicionales por AFP, salud y SIS. Eso es contabilidad doble. La retención YA financia las cotizaciones; el líquido que recibes es bruto − retención. Las cotizaciones se materializan en abril vía Operación Renta.</p></div></aside>
 <p>Calcula el líquido y el desglose interno de la retención con la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boletas</a> y la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotizaciones independientes</a>.</p>`,
       },
       {
@@ -2222,7 +2226,7 @@ export const guias: Guia[] = [
 <ul>
 <li>IVA débito y crédito (con factura electrónica al día).</li>
 <li>PPM según régimen.</li>
-<li>Retenciones de honorarios pagados (15,25% en 2026).</li>
+<li>Retenciones de honorarios pagados (${tasaHonorarios(getRetencionHonorarios(2026))} en 2026).</li>
 <li>Pago de cotizaciones previsionales del personal (PreviRed antes del día 13).</li>
 </ul>
 <h3>Trimestrales</h3>

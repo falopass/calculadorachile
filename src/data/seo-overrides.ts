@@ -1,3 +1,4 @@
+import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
 /**
  * ============================================================================
  * SEO OVERRIDES — CTR + posición (CalculaChile)
@@ -467,9 +468,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Gratificación legal 2026: 25% de lo devengado con tope anual de $2.629.377 (4,75 IMM de $553.553). Anticipos, reliquidación y ejemplo con sueldo mínimo.', // 152
   },
   'boleta-honorarios-retencion-15-25-2026': {
-    seoTitle: 'Boleta de honorarios 2026: retención 15,25% y alza a 17%', // 56
+    seoTitle: `Boleta de honorarios 2027: retención ${tasaHonorarios(getRetencionHonorarios(2027))} y alza a ${tasaHonorarios(getRetencionHonorarios(2028))}`, // 56
     seoDescription:
-      'En 2026 la retención de honorarios es 15,25%; sube a 16% en 2027 y 17% en 2028 (Ley 21.133). Cuánto cambia tu líquido y cuánto bruto emitir.', // 140
+      `Desde enero de 2027 la retención de honorarios es ${tasaHonorarios(getRetencionHonorarios(2027))}; llega a ${tasaHonorarios(getRetencionHonorarios(2028))} en 2028 (Ley 21.133). Cuánto cambia tu líquido y cuánto bruto emitir.`, // 140
   },
   'aguinaldo-navidad-2026-sector-publico': {
     seoTitle: 'Aguinaldo Navidad 2026 sector público: monto y requisitos', // 57
@@ -645,7 +646,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   'iva-boleta-honorarios-chile': {
     seoTitle: 'IVA y Boleta de Honorarios Chile 2026: guía SII', // 48
     seoDescription:
-      'IVA 19% y boleta de honorarios con retención 15,25% en 2026. Ejemplos y calculadoras gratis. Bases SII y Ley 21.133.', // 124
+      `IVA 19% y boleta de honorarios con retención ${tasaHonorarios(getRetencionHonorarios())} según año de emisión. Ejemplos y calculadoras gratis. Bases SII y Ley 21.133.`, // 124
   },
 
   'uf-utm-indicadores-chile': {

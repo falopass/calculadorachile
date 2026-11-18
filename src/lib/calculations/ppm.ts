@@ -2,10 +2,10 @@
 // Cálculo de Pagos Provisionales Mensuales (PPM) Chile 2026
 // ============================================
 
+import { getRetencionHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 import {
   UTM,
-  RETENCION_HONORARIOS_CALENDARIO,
   PPM_PRESUNCION,
 } from '@/lib/values/constants';
 
@@ -51,22 +51,7 @@ export interface PPMResult {
  * Base legal: Art. 84 LIR (1ra categoría) y Art. 88 LIR + Ley
  * 21.133 (retención honorarios = PPM 2da categoría).
  */
-const aniosCalendarioPPM = Object.keys(RETENCION_HONORARIOS_CALENDARIO)
-  .map(Number)
-  .sort((a, b) => a - b);
-const ANIO_PPM_VIGENTE = (() => {
-  const actual = new Date().getFullYear();
-  if (actual <= aniosCalendarioPPM[0]) return aniosCalendarioPPM[0];
-  if (actual >= aniosCalendarioPPM[aniosCalendarioPPM.length - 1])
-    return aniosCalendarioPPM[aniosCalendarioPPM.length - 1];
-  return actual;
-})();
-
-const TASAS_PPM: Record<PPMInput['actividad'], number> = {
-  profesional:
-    RETENCION_HONORARIOS_CALENDARIO[
-      ANIO_PPM_VIGENTE as keyof typeof RETENCION_HONORARIOS_CALENDARIO
-    ] ?? 15.25,
+const TASAS_PPM: Record<Exclude<PPMInput['actividad'], 'profesional'>, number> = {
   comercio: 1,
   transporte: 0.3,
   construccion: 0.2,
@@ -91,7 +76,7 @@ const PRESUNCION_PCT = PPM_PRESUNCION.porcentaje;
  *
  * Bug histórico:
  *  - Tasa profesionales era 10% (calendario antiguo). Ley 21.133
- *    actualiza a 14,5%/15,25%/16%/17% entre 2025-2028.
+ *    actualiza la tasa según el año de emisión.
  *  - Se aplicaba "deducción estándar 10%" para comercio/transporte/
  *    construcción que no existe en la ley. Se elimina: si no se
  *    entregan gastos, se usa la base bruta directa.
@@ -128,7 +113,7 @@ export function calculatePPM(input: PPMInput): PPMResult {
   }
 
   const baseTributable = Math.max(0, ingresos - gastos);
-  const tasaPPM = TASAS_PPM[actividad];
+  const tasaPPM = actividad === 'profesional' ? getRetencionHonorarios() : TASAS_PPM[actividad];
 
   const ppmAnual = Math.round(baseTributable * (tasaPPM / 100));
   const ppmMensual = Math.round(ppmAnual / 12);
