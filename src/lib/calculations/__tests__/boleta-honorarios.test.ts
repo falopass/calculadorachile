@@ -130,16 +130,27 @@ describe('calculateBoletaHonorarios', () => {
     expect(r.montoUF!).toBeGreaterThan(0);
   });
 
-  it('desglose retención suma aproximadamente la tasa total', () => {
-    const r = calculateBoletaHonorarios({ montoBruto: 1_000_000, ano: 2026 });
-    const sumaDesglose =
-      r.desgloseRetencion.impuestoRenta +
-      r.desgloseRetencion.afp +
-      r.desgloseRetencion.salud +
-      r.desgloseRetencion.seguroInvalidezSobrevivencia +
-      r.desgloseRetencion.accidentesTrabajo;
-    // Debe coincidir con la retención (15,25% del bruto), tolerancia $200 por redondeos.
-    expect(sumaDesglose).toBeCloseTo(r.retencion, -2);
+  it.each([2025, 2026, 2027, 2028, 2029, 2035])('desglose de %i suma la retención del año acotado', (ano) => {
+    const r = calculateBoletaHonorarios({ montoBruto: 1_000_000, ano, desgloseCotizaciones: true });
+    expect(r.desgloseRetencion).toBeDefined();
+    expect(r.mostrarDesglose).toBe(true);
+    const sumaDesglose = Object.values(r.desgloseRetencion!).reduce((sum, value) => sum + value, 0);
+    expect(sumaDesglose).toBe(r.retencion);
+  });
+
+  it.each([2023, 2024])('omite desglose sin distribución para %i', (ano) => {
+    const r = calculateBoletaHonorarios({ montoBruto: 1_000_000, ano, desgloseCotizaciones: true, calcularPPM: true });
+    expect(r.desgloseRetencion).toBeUndefined();
+    expect(r.mostrarDesglose).toBe(false);
+    expect(r.ppmAsociado).toBe(0);
+    expect(boletaHonorariosToResults(r).some((item) => item.label.startsWith('—'))).toBe(false);
+  });
+
+  it('omite desglose si el receptor no retiene', () => {
+    const r = calculateBoletaHonorarios({ montoBruto: 1_000_000, ano: 2027, desgloseCotizaciones: true, retencionAutomatica: false });
+    expect(r.retencion).toBe(0);
+    expect(r.desgloseRetencion).toBeUndefined();
+    expect(r.mostrarDesglose).toBe(false);
   });
 
   it('desgloseCotizaciones solo controla UI, no el líquido', () => {

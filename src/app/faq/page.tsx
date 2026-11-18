@@ -1,3 +1,4 @@
+import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
 // ============================================
 // FAQ — /faq
 // ----------------------------------------------
@@ -126,9 +127,9 @@ const faqGroups: FAQGroup[] = [
           'La calculadora separa neto, IVA y total usando la tasa general vigente. No determina si una operación, venta o servicio está afecto, exento o no gravado: esa calificación debe confirmarse con la normativa y el SII.',
       },
       {
-        question: '¿Cuánto retiene una boleta de honorarios en 2026?',
+        question: '¿Cuánto retiene una boleta de honorarios este año?',
         answer:
-          'En 2026 la retención de la boleta de honorarios es 15,25% del monto bruto. Es un pago provisional y no debe dividirse automáticamente entre impuesto y cotizaciones: la situación se determina en la Operación Renta según ingresos, gastos y reglas previsionales aplicables. Revisa la calculadora y la guía de honorarios antes de usarla para proyectar una devolución o pago.',
+          `En el año vigente en Chile la retención de la boleta de honorarios es ${tasaHonorarios(getRetencionHonorarios())} del monto bruto. Es un pago provisional y no debe dividirse automáticamente entre impuesto y cotizaciones: la situación se determina en la Operación Renta según ingresos, gastos y reglas previsionales aplicables. Revisa la calculadora y la guía de honorarios antes de usarla para proyectar una devolución o pago.`,
       },
       {
         question: '¿Cuándo debo declarar Operación Renta?',

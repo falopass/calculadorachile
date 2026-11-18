@@ -589,24 +589,6 @@ export const IVA = {
   tasa: 19,
 };
 
-export const BOLETA_HONORARIOS = {
-  tasa_base: 10,
-  tasa_adicional: 5.25,
-  /**
-   * Tasa de respaldo si el año no está en el calendario. El cálculo usa
-   * RETENCION_HONORARIOS_CALENDARIO[año]. (E-028: se quitó `exento_minimo`,
-   * una exención de 10 UTM que no existe en el SII.)
-   */
-  tasa_total: 15.25,
-  /** Calendario completo Ley 21.133 (retención honorarios / cotizaciones independientes). */
-  calendario: {
-    2025: 14.5,
-    2026: 15.25,
-    2027: 16,
-    2028: 17,
-  },
-};
-
 export const TOPE_IMPOSITIVO = {
   afp_salud: 90, // UF — 2026 (Superintendencia de Pensiones, Res. 237)
   seguro_cesantia: 135.2, // UF — 2026 (Res. Exenta N° 236, 10-02-2026)
@@ -1177,6 +1159,8 @@ export const TMC_2026_MAYO = {
  * Calendario de retención progresiva 2025-2028.
  */
 export const RETENCION_HONORARIOS_CALENDARIO = {
+  2023: 13,
+  2024: 13.75,
   2025: 14.5,
   2026: 15.25,
   2027: 16,
@@ -1480,7 +1464,7 @@ export const RETENCION_HONORARIOS_DISTRIBUCION = {
     accidentes_trabajo: 0.73,
   },
   2026: {
-    total: 15.25,
+    total: RETENCION_HONORARIOS_CALENDARIO[2026],
     impuesto_renta: 10.0,
     afp: 0.62,
     salud: 2.18,

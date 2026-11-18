@@ -1,3 +1,4 @@
+import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
 // ============================================
 // Blog — artículos cortos y prácticos
 // ----------------------------------------------
@@ -310,38 +311,39 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'boleta-honorarios-retencion-15-25-2026',
-    title: 'Retención de boleta de honorarios 2026: 15,25 % y calendario hasta el 17 % de 2028',
+    title: `Retención de boleta de honorarios 2027: ${tasaHonorarios(getRetencionHonorarios(2027))} y calendario hasta el ${tasaHonorarios(getRetencionHonorarios(2028))} de 2028`,
     description:
-      'En 2026 la retención de las boletas de honorarios es 15,25 %; sube a 16 % en 2027 y a 17 % en 2028 (Ley 21.133). Qué financia, cuánto cambia tu líquido año a año y cómo ajustar tus tarifas.',
+      `Desde enero de 2027 la retención de las boletas de honorarios es ${tasaHonorarios(getRetencionHonorarios(2027))} y sube a ${tasaHonorarios(getRetencionHonorarios(2028))} en 2028 (Ley 21.133). Qué financia, cuánto cambia tu líquido año a año y cómo ajustar tus tarifas.`,
     date: '2026-11-16',
+    updatedAt: '2026-11-18',
     category: 'impuestos',
     readingTime: 9,
     relatedGuia: 'iva-boleta-honorarios-chile',
     embedCalculatorId: 'boleta-honorarios',
     keywords: [
-      'retención boleta honorarios 2026',
-      'boleta honorarios 15,25%',
-      'retención honorarios 2027 16%',
-      'retención honorarios 2028 17%',
+      'retención boleta honorarios 2027',
+      `boleta honorarios ${tasaHonorarios(getRetencionHonorarios(2027))}`,
+      `retención honorarios 2027 ${tasaHonorarios(getRetencionHonorarios(2027))}`,
+      `retención honorarios 2028 ${tasaHonorarios(getRetencionHonorarios(2028))}`,
       'ley 21.133 calendario retención',
       'cuánto me retienen boleta honorarios',
     ],
     relatedCalculators: ['calculadora-boleta-honorarios', 'calculadora-cotizacion-independientes'],
-    content: `<p class="article-lead">Si emites boletas de honorarios, en 2026 te retienen el <strong>15,25 %</strong> del monto bruto. No es el último cambio: la <strong>Ley 21.133</strong> fijó un calendario que lleva la retención a <strong>16 % en 2027</strong> y a <strong>17 % en 2028</strong>. Cada alza reduce lo que recibes al momento del pago, aunque esa plata no se pierde: financia tus cotizaciones de seguridad social y tu impuesto anual, y lo que sobra vuelve en la devolución de la Operación Renta.</p>
-<p>Este artículo se concentra en el calendario y en sus efectos prácticos: cuánto cambia el líquido año a año, cómo ajustar una tarifa y qué revisar antes de 2027. Para el paso a paso de emisión, gastos presuntos y anulaciones, revisa nuestra <a href="/blog/boleta-honorarios-completo">guía completa de boleta de honorarios</a>. Datos verificados al 16 de noviembre de 2026 en el SII y en la Subsecretaría de Previsión Social.</p>
+    content: `<p class="article-lead">Si emites boletas de honorarios, desde el 1 de enero de 2027 te retendrán el <strong>${tasaHonorarios(getRetencionHonorarios(2027))}</strong> del monto bruto. No es el último cambio: la <strong>Ley 21.133</strong> fijó un calendario que lleva la retención a <strong>${tasaHonorarios(getRetencionHonorarios(2027))} en 2027</strong> y a <strong>${tasaHonorarios(getRetencionHonorarios(2028))} en 2028</strong>. Cada alza reduce lo que recibes al momento del pago, aunque esa plata no se pierde: financia tus cotizaciones de seguridad social y tu impuesto anual, y lo que sobra vuelve en la devolución de la Operación Renta.</p>
+<p>Este artículo se concentra en el calendario y en sus efectos prácticos: cuánto cambia el líquido año a año, cómo ajustar una tarifa y qué revisar para las emisiones de 2027. Para el paso a paso de emisión, gastos presuntos y anulaciones, revisa nuestra <a href="/blog/boleta-honorarios-completo">guía completa de boleta de honorarios</a>. Datos verificados al 18 de noviembre de 2026 en el SII y en la Subsecretaría de Previsión Social.</p>
 
-<h2>El calendario oficial: de 14,5 % a 17 %</h2>
-<p>El <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">Servicio de Impuestos Internos</a> informa que, según la Ley 21.133, desde el 1 de enero de 2026 la retención pasó de 14,5 % a 15,25 %, y que sube de forma escalonada hasta llegar a 17 % en 2028. La <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">Subsecretaría de Previsión Social</a> describe el mecanismo: desde 2020 la retención aumenta 0,75 puntos porcentuales por año durante ocho años y 1 punto el noveno año.</p>
+<h2>El calendario oficial: de ${tasaHonorarios(getRetencionHonorarios(2025))} a ${tasaHonorarios(getRetencionHonorarios(2028))}</h2>
+<p>El <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">Servicio de Impuestos Internos</a> informa que, según la Ley 21.133, desde el 1 de enero de 2026 la retención pasó de ${tasaHonorarios(getRetencionHonorarios(2025))} a ${tasaHonorarios(getRetencionHonorarios(2026))}, y que sube de forma escalonada hasta llegar a ${tasaHonorarios(getRetencionHonorarios(2028))} en 2028. La <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">Subsecretaría de Previsión Social</a> describe el mecanismo: desde 2020 la retención aumenta 0,75 puntos porcentuales por año durante ocho años y 1 punto el noveno año.</p>
 <table>
 <thead><tr><th>Año de emisión</th><th>Retención</th><th>Cambio respecto del año anterior</th></tr></thead>
 <tbody>
-<tr><td>2025</td><td>14,5 %</td><td>—</td></tr>
-<tr><td><strong>2026</strong></td><td><strong>15,25 %</strong></td><td>+0,75 puntos</td></tr>
-<tr><td>2027</td><td>16 %</td><td>+0,75 puntos</td></tr>
-<tr><td>2028</td><td>17 %</td><td>+1 punto</td></tr>
+<tr><td>2025</td><td>${tasaHonorarios(getRetencionHonorarios(2025))}</td><td>—</td></tr>
+<tr><td><strong>2026</strong></td><td><strong>${tasaHonorarios(getRetencionHonorarios(2026))}</strong></td><td>+0,75 puntos</td></tr>
+<tr><td>2027</td><td>${tasaHonorarios(getRetencionHonorarios(2027))}</td><td>+0,75 puntos</td></tr>
+<tr><td>2028</td><td>${tasaHonorarios(getRetencionHonorarios(2028))}</td><td>+1 punto</td></tr>
 </tbody>
 </table>
-<p>La tasa que se aplica es la del año en que se emite la boleta. Una boleta emitida el 30 de diciembre de 2026 lleva 15,25 %; una emitida el 4 de enero de 2027, 16 %, aunque el servicio se haya prestado en diciembre. El SII indica que, si emites en sii.cl, la aplicación calcula automáticamente la retención vigente.</p>
+<p>La tasa que se aplica es la del año en que se emite la boleta. Una boleta emitida el 30 de diciembre de 2026 lleva ${tasaHonorarios(getRetencionHonorarios(2026))}; una emitida el 4 de enero de 2027, ${tasaHonorarios(getRetencionHonorarios(2027))}, aunque el servicio se haya prestado en diciembre. El SII indica que, si emites en sii.cl, la aplicación calcula automáticamente la retención vigente.</p>
 
 <h2>Por qué sube la retención</h2>
 <p>La Ley 21.133 incorporó a los trabajadores independientes que emiten boletas de honorarios a la seguridad social. En lugar de pagar cotizaciones mes a mes, el sistema funciona así, según la Subsecretaría de Previsión Social:</p>
@@ -354,7 +356,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>La Subsecretaría lo resume así: con el alza de la retención, cada año aumenta también el monto de cotizaciones pagadas con esas retenciones. Una retención más alta no significa un impuesto más alto: significa que una parte mayor de tus obligaciones anuales se paga por adelantado.</p>
 
 <h2>Cuánto cambia tu líquido, año a año</h2>
-<div class="numeric-example"><div class="numeric-example__title">Boleta por $1.000.000 bruto</div><ul><li>2025 (14,5 %): retención $145.000, líquido $855.000.</li><li>2026 (15,25 %): retención $152.500, líquido $847.500.</li><li>2027 (16 %): retención $160.000, líquido $840.000.</li><li>2028 (17 %): retención $170.000, líquido $830.000.</li></ul><span class="total">Entre 2026 y 2028 el líquido baja $17.500 por cada millón bruto</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Boleta por $1.000.000 bruto</div><ul><li>2025 (${tasaHonorarios(getRetencionHonorarios(2025))}): retención $145.000, líquido $855.000.</li><li>2026 (${tasaHonorarios(getRetencionHonorarios(2026))}): retención $152.500, líquido $847.500.</li><li>2027 (${tasaHonorarios(getRetencionHonorarios(2027))}): retención $160.000, líquido $840.000.</li><li>2028 (${tasaHonorarios(getRetencionHonorarios(2028))}): retención $170.000, líquido $830.000.</li></ul><span class="total">Entre 2026 y 2028 el líquido baja $17.500 por cada millón bruto</span></div>
 <p>Si emites una boleta de $1.000.000 cada mes, el líquido anual pasa de $10.170.000 en 2026 a $9.960.000 en 2028: $210.000 menos en el bolsillo durante el año, que quedan como retención para la Operación Renta siguiente.</p>
 
 <h2>Si cobras un líquido fijo: cuánto bruto debes emitir</h2>
@@ -362,10 +364,10 @@ const articleCatalog: ArticleDraft[] = [
 <table>
 <thead><tr><th>Año</th><th>Retención</th><th>Bruto para recibir $1.000.000 líquido</th></tr></thead>
 <tbody>
-<tr><td>2025</td><td>14,5 %</td><td>$1.169.591</td></tr>
-<tr><td>2026</td><td>15,25 %</td><td>$1.179.941</td></tr>
-<tr><td>2027</td><td>16 %</td><td>$1.190.476</td></tr>
-<tr><td>2028</td><td>17 %</td><td>$1.204.819</td></tr>
+<tr><td>2025</td><td>${tasaHonorarios(getRetencionHonorarios(2025))}</td><td>$1.169.591</td></tr>
+<tr><td>2026</td><td>${tasaHonorarios(getRetencionHonorarios(2026))}</td><td>$1.179.941</td></tr>
+<tr><td>2027</td><td>${tasaHonorarios(getRetencionHonorarios(2027))}</td><td>$1.190.476</td></tr>
+<tr><td>2028</td><td>${tasaHonorarios(getRetencionHonorarios(2028))}</td><td>$1.204.819</td></tr>
 </tbody>
 </table>
 <p>Valores redondeados al peso. Al emitir, la retención se calcula sobre el bruto y puede haber diferencias de un peso por redondeo. Si tu contrato fija un bruto, el cliente no paga más y tú recibes menos; si fija un líquido, el costo para el cliente sube cada enero. Conviene dejar escrito cuál de las dos cosas se pactó antes de que empiece 2027. La <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> hace la conversión en ambos sentidos.</p>
@@ -379,34 +381,44 @@ const articleCatalog: ArticleDraft[] = [
 </ul>
 <p>La cobertura tiene un desfase que conviene entender: con los honorarios de 2026 se pagan cotizaciones en la Operación Renta 2027, y las prestaciones quedan vigentes entre el 1 de julio de 2027 y el 30 de junio de 2028. Para estimar cuánto se descontará de tu devolución, usa la <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a>.</p>
 
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Un error frecuente</strong><p>El 15,25 % no se reparte mes a mes entre AFP, Fonasa y mutual. Es una retención única que se entera al Fisco y se imputa en la Operación Renta. El cálculo de cotizaciones lo hace el SII sobre la renta imponible anual, no sobre cada boleta.</p></div></aside>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Un error frecuente</strong><p>El ${tasaHonorarios(getRetencionHonorarios(2027))} de 2027 no se reparte mes a mes entre AFP, Fonasa y mutual. Es una retención única que se entera al Fisco y se imputa en la Operación Renta. El cálculo de cotizaciones lo hace el SII sobre la renta imponible anual, no sobre cada boleta.</p></div></aside>
 
 <h2>Quién retiene y quién no</h2>
-<p>Si quien recibe la boleta está obligado a retener, descuenta el porcentaje, te paga el líquido y entera la retención. Si no retiene, recibes el bruto y eres tú quien debe declarar y pagar el mismo porcentaje como pago provisional mensual (PPM) en el Formulario 29. En ambos casos la tasa de 2026 es 15,25 %. Las reglas sobre quién retiene, junto con el caso de las boletas de terceros, están desarrolladas en la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>
+<p>Si quien recibe la boleta está obligado a retener, descuenta el porcentaje, te paga el líquido y entera la retención. Si no retiene, recibes el bruto y eres tú quien debe declarar y pagar el mismo porcentaje como pago provisional mensual (PPM) en el Formulario 29. En ambos casos la tasa de 2027 es ${tasaHonorarios(getRetencionHonorarios(2027))}. Las reglas sobre quién retiene, junto con el caso de las boletas de terceros, están desarrolladas en la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>
 
-<h2>Qué hacer antes de 2027</h2>
+<h2>Qué revisar para emitir en 2027</h2>
 <ol class="steps">
-<li><strong>Revisa tus contratos.</strong> Identifica si pactaste montos brutos o líquidos y cuál será el efecto de pasar a 16 %.</li>
+<li><strong>Revisa tus contratos.</strong> Identifica si pactaste montos brutos o líquidos y cuál será el efecto de pasar a ${tasaHonorarios(getRetencionHonorarios(2027))}.</li>
 <li><strong>Actualiza tus tarifas.</strong> Si cobras un líquido fijo, en 2027 necesitas emitir cerca de 0,9 % más bruto que en 2026 para recibir lo mismo.</li>
 <li><strong>Proyecta tu Operación Renta 2027.</strong> Suma las retenciones de 2026 y compáralas con lo que te corresponde pagar de impuesto y cotizaciones. La devolución puede ser menor de lo que esperas si tus honorarios subieron.</li>
 <li><strong>Revisa tu cobertura.</strong> Si necesitas licencias médicas o protección maternal, verifica que tu cotización cubra el período en que la vas a usar.</li>
 <li><strong>Mantén orden mensual.</strong> Revisa en sii.cl tus boletas emitidas y las retenciones informadas por tus clientes.</li>
 </ol>
 
+<h2>Cómo preparar un presupuesto de 2027 sin confundir bruto y líquido</h2>
+<p>Considera este caso hipotético: una diseñadora acuerda entregar un proyecto por $1.000.000 bruto y emite la boleta en enero de 2027. Con la tasa de ${tasaHonorarios(getRetencionHonorarios(2027))}, el receptor obligado a retener le paga $840.000 y entera $160.000 al Fisco. No hay un segundo descuento previsional sobre esos $840.000 al momento de emitir. Eso tampoco significa que la declaración anual vaya a terminar necesariamente con devolución: el anticipo y la obligación final son cálculos distintos.</p>
+<p>Si la misma diseñadora necesita recibir $1.000.000 disponible por ese trabajo, debe negociar un bruto de aproximadamente $1.190.476 para 2027. La diferencia no es un recargo de IVA ni una comisión del cliente. Es el efecto de reconstruir un monto antes de retención desde una meta líquida. Sumar simplemente ${tasaHonorarios(getRetencionHonorarios(2027))} al líquido no produce el mismo resultado: sobre un bruto de $1.160.000, la retención de $185.600 deja $974.400, menos del millón buscado.</p>
+<p>Para comparar propuestas, escribe en la cotización el año de emisión previsto, el monto bruto, la tasa de ese año y el líquido estimado. Si el trabajo cruza diciembre y enero, revisa el tratamiento de cada documento antes de facturar o emitir la boleta. No cambies una fecha para forzar otra tasa. El ejemplo de calendario sirve para presupuestar y revisar el documento, no para sustituir las reglas del SII sobre cuándo corresponde emitirlo.</p>
+<p>Quien recibe el bruto porque el cliente no está obligado a retener también necesita distinguir caja de ingreso disponible. En el ejemplo de un millón bruto de 2027, recibir el millón completo en la cuenta no elimina el PPM de $160.000. Reservar ese monto evita confundir un anticipo tributario pendiente con dinero libre para gastos personales. La declaración mensual y la posterior liquidación anual siguen siendo obligaciones diferentes.</p>
+<h2>Qué cambia en 2028 y qué no puedes deducir de la tasa</h2>
+<p>El calendario oficial llega a ${tasaHonorarios(getRetencionHonorarios(2028))} en 2028. Mantener el mismo millón bruto deja entonces $830.000 líquidos, $10.000 menos que en 2027. Si el acuerdo es por un millón líquido, el bruto aproximado sube desde $1.190.476 a $1.204.819. Son comparaciones nominales del mismo servicio: no incorporan inflación, reajustes de contrato ni cambios en tus costos.</p>
+<p>La última tasa del calendario no permite anticipar cuánto recibirás de devolución ni cuál será tu pensión. Para eso hacen falta antecedentes personales y las reglas aplicables a la declaración correspondiente. Conserva tus boletas, certificados de retención y comprobantes de PPM; compara después esos registros con la información propuesta por el SII. Si hay diferencias, identifica primero el documento y el período involucrado antes de concluir que la tasa fue aplicada incorrectamente.</p>
 <h2>Preguntas frecuentes</h2>
-<h3>¿El 17 % es el último aumento?</h3>
-<p>Según el SII y la Subsecretaría de Previsión Social, el 17 % de 2028 es la meta final del calendario de la Ley 21.133.</p>
+<h3>¿Desde cuándo se aplica el ${tasaHonorarios(getRetencionHonorarios(2027))}?</h3>
+<p>Desde el 1 de enero de 2027, según el calendario de la Ley 21.133 publicado por el SII. Hasta el 31 de diciembre de 2026 la tasa del calendario es ${tasaHonorarios(getRetencionHonorarios(2026))}. La siguiente etapa es ${tasaHonorarios(getRetencionHonorarios(2028))} desde enero de 2028.</p>
+<h3>¿El ${tasaHonorarios(getRetencionHonorarios(2028))} es el último aumento?</h3>
+<p>Según el SII y la Subsecretaría de Previsión Social, el ${tasaHonorarios(getRetencionHonorarios(2028))} de 2028 es la meta final del calendario de la Ley 21.133.</p>
 <h3>¿Puedo pedir que no me retengan?</h3>
 <p>Que se retenga o no depende de si quien recibe la boleta está obligado a retener, no de un acuerdo entre las partes. Si no hay retención, el mismo porcentaje se paga como PPM.</p>
 <h3>¿Me devuelven todo lo retenido?</h3>
 <p>No necesariamente. La devolución depende de tu impuesto anual y de las cotizaciones que se pagan con cargo a lo retenido. En muchos casos queda un saldo a favor, pero no está garantizado.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 16 de noviembre de 2026 en la <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">página del SII sobre la retención de boletas de honorarios 2026</a> y en las <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes de la Ley de Honorarios de la Subsecretaría de Previsión Social</a>.</p>
+<p>Contenido verificado el 18 de noviembre de 2026 en la <a href="https://www.sii.cl/destacados/boletas_honorarios/aumento_gradual.html" target="_blank" rel="noopener">calendario del SII sobre la retención de boletas de honorarios</a> y en las <a href="https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes de la Ley de Honorarios de la Subsecretaría de Previsión Social</a>.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los ejemplos redondean al peso y no reemplazan la propuesta de declaración del SII ni asesoría tributaria. Edad, afiliación, pensión, ingresos como dependiente y regímenes especiales pueden cambiar tu resultado.</p></div></aside>
 <p>Para profundizar en IVA, retenciones y el caso de los independientes, revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>.</p>`,
     sources: [
-      { label: 'SII — Boleta de honorarios 2026: retención 15,25 %', url: 'https://www.sii.cl/destacados/boletas_honorarios/' },
+      { label: `SII — Calendario de retención de honorarios, Ley 21.133`, url: 'https://www.sii.cl/destacados/boletas_honorarios/' },
       { label: 'Subsecretaría de Previsión Social — Ley de Honorarios, preguntas frecuentes', url: 'https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/' },
     ],
   },
@@ -3076,17 +3088,17 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
   },
   {
     slug: 'boleta-honorarios-completo',
-    title: 'Guía completa de boleta de honorarios en Chile 2026',
+    title: 'Guía completa de boleta de honorarios en Chile 2027',
     description:
-      'Todo sobre la boleta de honorarios: retención 15,25%, cómo emitirla, monto líquido y obligaciones tributarias para independientes.',
+      `Todo sobre la boleta de honorarios: retención ${tasaHonorarios(getRetencionHonorarios(2027))}, cómo emitirla, monto líquido y obligaciones tributarias para independientes.`,
     date: '2026-03-30',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-18',
     category: 'impuestos',
     readingTime: 14,
     relatedGuia: 'iva-boleta-honorarios-chile',
     keywords: [
       'boleta honorarios',
-      'retención 15.25%',
+      `retención ${tasaHonorarios(getRetencionHonorarios(2027))}`,
       'honorarios Chile',
       'independientes SII',
       'impuesto profesionales',
@@ -3097,28 +3109,28 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       'calculadora-operacion-renta',
       'calculadora-ppm',
     ],
-    content: `<p class="article-lead">En 2026 la retención de una boleta de honorarios es 15,25% del monto bruto. Ese porcentaje es un pago provisional de impuesto que ayuda a financiar cotizaciones en la Operación Renta; no se divide jurídicamente en “10% de impuesto” y “5,25% previsional”. La liquidación real se hace al año siguiente con todos los ingresos, gastos, retenciones y reglas previsionales.</p>
+    content: `<p class="article-lead">Desde enero de 2027 la retención de una boleta de honorarios es ${tasaHonorarios(getRetencionHonorarios(2027))} del monto bruto. Ese porcentaje es un pago provisional de impuesto que ayuda a financiar cotizaciones en la Operación Renta; no se divide jurídicamente en “10% de impuesto” y “5,25% previsional”. La liquidación real se hace al año siguiente con todos los ingresos, gastos, retenciones y reglas previsionales.</p>
 
 <h2>Qué es una boleta de honorarios electrónica</h2>
 <p>Es el documento tributario utilizado por personas que obtienen rentas de segunda categoría por servicios prestados de manera independiente. Identifica al emisor, receptor, fecha, descripción, monto bruto, retención o pago provisional y monto líquido. Se genera en el sistema del Servicio de Impuestos Internos.</p>
 <p>Que exista una boleta no decide por sí solo si hay relación laboral. Si en los hechos existe subordinación y dependencia —horario impuesto, instrucciones, control, continuidad y otras señales—, usar honorarios puede encubrir un contrato de trabajo. La calificación depende de la realidad de la prestación, no solo del documento tributario.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Boleta de honorarios y boleta de ventas son documentos distintos</strong><p>La primera corresponde a rentas por servicios independientes de segunda categoría. La boleta de ventas y servicios documenta operaciones afectas o exentas de IVA de un negocio de primera categoría. No deben intercambiarse por conveniencia.</p></div></aside>
 
-<h2>Retención vigente en 2026: 15,25%</h2>
-<p>La Ley N.º 21.133 estableció un aumento gradual. El <a href="https://www.sii.cl/destacados/boletas_honorarios/" target="_blank" rel="noopener">SII confirmó</a> que desde el 1 de enero hasta el 31 de diciembre de 2026 la tasa es 15,25%:</p>
-<table><thead><tr><th>Año de emisión</th><th>Retención o PPM</th><th>Cambio anual</th></tr></thead><tbody><tr><td>2025</td><td>14,50%</td><td>+0,75 punto</td></tr><tr><td><strong>2026</strong></td><td><strong>15,25%</strong></td><td>+0,75 punto</td></tr><tr><td>2027</td><td>16,00%</td><td>+0,75 punto</td></tr><tr><td>2028</td><td>17,00%</td><td>+1,00 punto</td></tr></tbody></table>
-<div class="numeric-example"><div class="numeric-example__title">Boleta por $500.000 brutos en 2026</div><ul><li>Monto bruto: $500.000</li><li>Retención: $500.000 × 15,25% = $76.250</li><li>Líquido: $500.000 − $76.250 = $423.750</li></ul><span class="total">El receptor paga $423.750 y retiene $76.250</span></div>
+<h2>Retención desde enero de 2027: ${tasaHonorarios(getRetencionHonorarios(2027))}</h2>
+<p>La Ley N.º 21.133 estableció un aumento gradual. El <a href="https://www.sii.cl/destacados/boletas_honorarios/aumento_gradual.html" target="_blank" rel="noopener">SII informa</a> que desde el 1 de enero de 2027 hasta el 31 de diciembre de 2027 la tasa es ${tasaHonorarios(getRetencionHonorarios(2027))}:</p>
+<table><thead><tr><th>Año de emisión</th><th>Retención o PPM</th><th>Cambio anual</th></tr></thead><tbody><tr><td>2025</td><td>${tasaHonorarios(getRetencionHonorarios(2025))}</td><td>+0,75 punto</td></tr><tr><td><strong>2026</strong></td><td><strong>${tasaHonorarios(getRetencionHonorarios(2026))}</strong></td><td>+0,75 punto</td></tr><tr><td>2027</td><td>${tasaHonorarios(getRetencionHonorarios(2027))}</td><td>+0,75 punto</td></tr><tr><td>2028</td><td>${tasaHonorarios(getRetencionHonorarios(2028))}</td><td>+1,00 punto</td></tr></tbody></table>
+<div class="numeric-example"><div class="numeric-example__title">Boleta por $500.000 brutos en 2027</div><ul><li>Monto bruto: $500.000</li><li>Retención: $500.000 × ${tasaHonorarios(getRetencionHonorarios(2027))} = $80.000</li><li>Líquido: $500.000 − $80.000 = $420.000</li></ul><span class="total">El receptor paga $420.000 y retiene $80.000</span></div>
 <p>La cifra retenida no es el impuesto anual definitivo. Funciona como crédito o pago provisional. En la declaración anual se compara con el impuesto que resulte y con las cotizaciones obligatorias. Puede haber devolución, cero devolución o saldo por pagar.</p>
 
 <h2>El error de separar 10% y 5,25%</h2>
-<p>La tasa de 15,25% no contiene dos bolsillos predeterminados en cada boleta. Su aumento se diseñó para que las retenciones alcancen progresivamente a financiar protección social, pero la asignación efectiva ocurre en la Operación Renta según el régimen previsional y la situación de cada persona.</p>
+<p>La tasa de ${tasaHonorarios(getRetencionHonorarios(2027))} no contiene dos bolsillos predeterminados en cada boleta. Su aumento se diseñó para que las retenciones alcancen progresivamente a financiar protección social, pero la asignación efectiva ocurre en la Operación Renta según el régimen previsional y la situación de cada persona.</p>
 <p>Por eso una boleta de $500.000 no prueba que exactamente $50.000 sean impuesto y $26.250 cotizaciones. El impuesto anual depende del Global Complementario, gastos y otros ingresos. Las cotizaciones dependen de renta imponible anual, topes, afiliación, cobertura y excepciones.</p>
 
 <h2>Quién retiene y quién declara el PPM</h2>
 <p>Al emitir, el sistema ofrece dos alternativas:</p>
-<ol class="steps"><li><strong>El receptor retiene:</strong> una empresa o entidad obligada descuenta 15,25%, paga el líquido al emisor y entera la retención al Fisco. El emisor no declara ese PPM mensual.</li><li><strong>El emisor paga PPM:</strong> cuando el receptor no retiene, el independiente recibe el bruto y debe declarar y pagar 15,25% mediante Formulario 29.</li></ol>
+<ol class="steps"><li><strong>El receptor retiene:</strong> una empresa o entidad obligada descuenta ${tasaHonorarios(getRetencionHonorarios(2027))}, paga el líquido al emisor y entera la retención al Fisco. El emisor no declara ese PPM mensual.</li><li><strong>El emisor paga PPM:</strong> cuando el receptor no retiene, el independiente recibe el bruto y debe declarar y pagar ${tasaHonorarios(getRetencionHonorarios(2027))} mediante Formulario 29.</li></ol>
 <p>La <a href="https://www.sii.cl/preguntas_frecuentes/boleta_honorario_electr/001_120_0889.htm" target="_blank" rel="noopener">pregunta frecuente del SII actualizada en enero de 2026</a> describe ambas opciones. No es suficiente asumir que “persona natural nunca retiene” o que “toda empresa siempre retiene” sin revisar el tipo de receptor y la opción correcta del sistema.</p>
-<div class="numeric-example"><div class="numeric-example__title">Boleta sin retención del receptor</div><ul><li>Honorario bruto cobrado: $500.000</li><li>El cliente paga: $500.000</li><li>PPM a cargo del emisor: $76.250</li></ul><span class="total">Disponible después de reservar PPM: $423.750</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Boleta sin retención del receptor</div><ul><li>Honorario bruto cobrado: $500.000</li><li>El cliente paga: $500.000</li><li>PPM a cargo del emisor: $80.000</li></ul><span class="total">Disponible después de reservar PPM: $420.000</span></div>
 <p>Si recibes el bruto, no significa que ganaste más. Reserva el PPM antes de usar el dinero y verifica el vencimiento mensual del F29. Pagar tarde puede generar reajustes, intereses y multas.</p>
 
 <h2>Cuándo emitir la boleta</h2>
@@ -3130,9 +3142,9 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>Evita descripciones vacías como “servicios varios”. Una descripción útil facilita acreditar qué se hizo, en qué período y para qué cliente. No incluyas datos personales innecesarios o sensibles.</p>
 
 <h2>Cómo calcular desde un líquido acordado</h2>
-<p>Si acordaste recibir una suma líquida y el receptor retiene 15,25%, no debes dividir el líquido por 0,1525. La parte que recibes representa 84,75% del bruto:</p>
-<ul><li>Bruto = líquido ÷ 0,8475.</li><li>Retención = bruto × 0,1525.</li></ul>
-<div class="numeric-example"><div class="numeric-example__title">Quiero recibir $500.000 líquidos</div><ul><li>Bruto: $500.000 ÷ 0,8475 = $589.970,50</li><li>Retención: $589.970,50 × 15,25% = $89.970,50</li><li>Líquido: $500.000</li></ul><span class="total">Boleta bruta, redondeada: $589.971</span></div>
+<p>Si acordaste recibir una suma líquida y el receptor retiene ${tasaHonorarios(getRetencionHonorarios(2027))}, no debes dividir el líquido por 0,16. La parte que recibes representa 84% del bruto:</p>
+<ul><li>Bruto = líquido ÷ 0,84.</li><li>Retención = bruto × 0,16.</li></ul>
+<div class="numeric-example"><div class="numeric-example__title">Quiero recibir $500.000 líquidos</div><ul><li>Bruto: $500.000 ÷ 0,84 = $595.238,10</li><li>Retención: $595.238,10 × ${tasaHonorarios(getRetencionHonorarios(2027))} = $95.238,10</li><li>Líquido: $500.000</li></ul><span class="total">Boleta bruta, redondeada: $595.238</span></div>
 <p>El redondeo del sistema puede producir un peso de diferencia. Si cotizas un proyecto, especifica si el precio ofrecido es bruto o líquido; “$500.000 por el trabajo” es ambiguo.</p>
 
 <h2>Operación Renta: el desfase que debes entender</h2>
@@ -3146,7 +3158,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
 <h2>Cotizaciones obligatorias para independientes</h2>
 <p>La Ley N.º 21.133 vinculó la cotización anual de honorarios con la Operación Renta. La renta imponible anual se calcula, en términos generales, sobre 80% de las rentas brutas por honorarios del año anterior, con topes y reglas particulares. El SII determina montos y Tesorería transfiere a las instituciones previsionales.</p>
-<p>La cobertura puede involucrar pensión, salud, Seguro de Invalidez y Sobrevivencia, accidentes del trabajo y enfermedades profesionales, y Seguro SANNA. No corresponde afirmar que la diferencia entre 10% y 15,25% se reparte directamente entre AFP, Fonasa y mutual.</p>
+<p>La cobertura puede involucrar pensión, salud, Seguro de Invalidez y Sobrevivencia, accidentes del trabajo y enfermedades profesionales, y Seguro SANNA. No corresponde afirmar que la diferencia entre 10% y ${tasaHonorarios(getRetencionHonorarios(2027))} se reparte directamente entre AFP, Fonasa y mutual.</p>
 <p>La Subsecretaría de Previsión Social informa para 2026 dos opciones del período transitorio:</p>
 <ul><li><strong>Cobertura total:</strong> cotiza sobre 100% de la renta imponible anual para obtener cobertura completa.</li><li><strong>Cobertura parcial:</strong> en 2026 cotiza salud y pensiones sobre 80% de la renta imponible anual, con menor cobertura; ATEP, SANNA y SIS mantienen reglas de cobertura total sobre la base señalada.</li></ul>
 <p>La cobertura derivada de la Operación Renta se extiende normalmente desde el 1 de julio hasta el 30 de junio siguiente. La elección afecta licencias médicas, protección maternal y ahorro previsional; no debe decidirse solo para maximizar una devolución.</p>

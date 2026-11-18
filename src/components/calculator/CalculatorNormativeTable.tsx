@@ -1,3 +1,5 @@
+import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
+import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import React from 'react';
 import { ASIGNACION_FAMILIAR_2026 } from '@/lib/values/constants';
 import { formatCLP } from '@/lib/formatters';
@@ -57,14 +59,13 @@ const NORMATIVE_DATA: Record<string, TableData> = {
     source: 'Servicio de Impuestos Internos (SII) · Ley 21.133',
     sourceUrl: 'https://www.sii.cl/destacados/boletas_honorarios/',
     headers: ['Año Calendario', 'Tasa de Retención', 'Factor Líquido a Bruto', 'Estado'],
-    rows: [
-      ['2024', '13,75%', '0,8625', 'Histórico'],
-      ['2025', '14,50%', '0,8550', 'Histórico'],
-      ['2026', '15,25%', '0,8475', 'Vigente hoy'],
-      ['2027', '16,00%', '0,8400', 'Próximo tramo'],
-      ['2028 en adelante', '17,00%', '0,8300', 'Tasa final definitiva'],
-    ],
-    note: 'La retención sube cada año para financiar las cotizaciones de los trabajadores independientes. En 2025 fue de 14,5%, en 2026 es de 15,25%, en 2027 será de 16% y en 2028 llegará a 17% (SII, Ley 21.133).',
+    rows: Object.entries(RETENCION_HONORARIOS_CALENDARIO).map(([year, rate]) => [
+      year === '2028' ? '2028 en adelante' : year,
+      formatTasa(rate),
+      (1 - rate / 100).toLocaleString('es-CL', { minimumFractionDigits: 4 }),
+      Number(year) === contextoHonorarios().anio ? 'Vigente hoy' : Number(year) < contextoHonorarios().anio ? 'Histórico' : 'Próximo tramo',
+    ]),
+    note: 'Calendario de retención para financiar las obligaciones anuales de los trabajadores independientes (SII, Ley 21.133). Desde 2028 se mantiene la tasa final del calendario.',
   },
   'horas-extra': {
     title: 'Factores Oficiales de Horas Extraordinarias según Jornada Semanal',

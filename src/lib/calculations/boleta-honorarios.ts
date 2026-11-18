@@ -3,13 +3,11 @@
 // ============================================
 
 import {
-  BOLETA_HONORARIOS,
   UF,
-  RETENCION_HONORARIOS_CALENDARIO,
   RETENCION_HONORARIOS_DISTRIBUCION,
   type AnioRetencionHonorarios,
 } from '@/lib/values/constants';
-import { contextoHonorarios } from '@/lib/values/honorarios-anio';
+import { anioEnCalendario, contextoHonorarios, getRetencionHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BoletaHonorariosInput {
@@ -22,7 +20,7 @@ export interface BoletaHonorariosInput {
   montoBruto: number;
   retencionAutomatica?: boolean;
   /** Año del calendario de tasas (Ley 21.133 — aumento gradual). */
-  ano?: 2025 | 2026 | 2027 | 2028;
+  ano?: number;
   /**
    * Si true, se expone desglose informativo de la retención.
    * Nunca descuenta cotizaciones adicionales al líquido.
@@ -52,7 +50,7 @@ export interface BoletaHonorariosResult {
    * Desglose informativo de qué financia la retención del SII.
    * Estos montos NO se descuentan adicionalmente del líquido.
    */
-  desgloseRetencion: {
+  desgloseRetencion?: {
     impuestoRenta: number;
     afp: number;
     salud: number;
@@ -68,7 +66,7 @@ export interface BoletaHonorariosResult {
  * Calcula la retención de boleta de honorarios.
  *
  * Bug histórico: la versión anterior descontaba cotizaciones (AFP 7%,
- * salud 7%, etc.) del bruto adicionales a la retención del 15,25%.
+ * salud 7%, etc.) del bruto adicionales a la retención anual.
  * Eso es doble contabilidad. Bajo la Ley 21.133 la retención YA
  * financia cotizaciones que se liquidan en la Operación Renta.
  * El trabajador recibe `bruto − retención`.
@@ -95,7 +93,7 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   const monto = Math.max(0, montoBruto);
 
   // Tasa según año (Ley 21.133) — calendario en constants.
-  const tasaRetencion = RETENCION_HONORARIOS_CALENDARIO[ano] ?? BOLETA_HONORARIOS.tasa_total;
+  const tasaRetencion = getRetencionHonorarios(ano);
 
   const valorUF = input.valorUF ?? UF.valor;
 
@@ -116,17 +114,16 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   const montoLiquido = bruto - retencion;
 
   const distribucion =
-    RETENCION_HONORARIOS_DISTRIBUCION[ano as AnioRetencionHonorarios] ??
-    RETENCION_HONORARIOS_DISTRIBUCION[2026];
-  const desgloseRetencion = {
+    RETENCION_HONORARIOS_DISTRIBUCION[anioEnCalendario(ano) as AnioRetencionHonorarios];
+  const desgloseRetencion = distribucion && retencionAutomatica ? {
     impuestoRenta: Math.round(bruto * (distribucion.impuesto_renta / 100)),
     afp: Math.round(bruto * (distribucion.afp / 100)),
     salud: Math.round(bruto * (distribucion.salud / 100)),
     seguroInvalidezSobrevivencia: Math.round(bruto * (distribucion.sis / 100)),
     accidentesTrabajo: Math.round(bruto * (distribucion.accidentes_trabajo / 100)),
-  };
+  } : undefined;
 
-  const ppmAsociado = calcularPPM
+  const ppmAsociado = calcularPPM && distribucion
     ? Math.round(bruto * (distribucion.impuesto_renta / 100))
     : 0;
 
@@ -140,7 +137,7 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
     montoLiquido: Math.round(montoLiquido),
     tasaRetencion,
     ano,
-    mostrarDesglose: Boolean(desgloseCotizaciones),
+    mostrarDesglose: Boolean(desgloseCotizaciones && desgloseRetencion),
     desgloseRetencion,
     ppmAsociado,
     costoEmpleador,
@@ -188,7 +185,7 @@ export function boletaHonorariosToResults(result: BoletaHonorariosResult): Calcu
     });
 
     // Solo si el usuario pidió desglose informativo (no es descuento extra).
-    if (result.mostrarDesglose) {
+    if (result.mostrarDesglose && result.desgloseRetencion) {
       results.push({
         label: '— Impuesto Renta (est. dentro de retención)',
         value: result.desgloseRetencion.impuestoRenta,

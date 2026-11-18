@@ -1,3 +1,4 @@
+import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
 import type { Calculator } from '@/types/calculator';
 import { calculators } from '@/data/calculators';
 import { CALCULATOR_CATEGORIES } from '@/lib/calculatorCategories';
@@ -97,7 +98,7 @@ const SPECIFIC_CLUSTER_MAP: Record<string, ClusterLink[]> = {
     {
       href: '/guias/iva-boleta-honorarios-chile',
       label: 'Guía boleta e IVA',
-      desc: 'Retención 15,25% y obligaciones SII',
+      desc: `Retención ${tasaHonorarios(getRetencionHonorarios())} y obligaciones SII`,
     },
     {
       href: '/calculadoras/calculadora-sueldo-liquido',
@@ -137,7 +138,7 @@ const SPECIFIC_CLUSTER_MAP: Record<string, ClusterLink[]> = {
   ],
   iva: [
     { href: '/guias/iva-boleta-honorarios-chile', label: 'Guía tributaria IVA', desc: 'DL 825 y tasa 19%' },
-    { href: '/calculadoras/calculadora-boleta-honorarios', label: 'Boleta de honorarios', desc: 'Retención 15,25%' },
+    { href: '/calculadoras/calculadora-boleta-honorarios', label: 'Boleta de honorarios', desc: `Retención ${tasaHonorarios(getRetencionHonorarios())}` },
     { href: '/calculadoras/calculadora-ppm', label: 'Cálculo de PPM', desc: 'Pago mensual F29' },
     { href: '/calculadoras/calculadora-patente-comercial', label: 'Patente comercial', desc: 'Capital Propio y tasas' },
   ],

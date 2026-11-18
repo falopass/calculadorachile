@@ -5,8 +5,8 @@
 import {
   IMPUESTO_SEGUNDA_CATEGORIA_2026,
   UTM,
-  RETENCION_HONORARIOS_CALENDARIO,
 } from '@/lib/values/constants';
+import { contextoHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface OperacionRentaInput {
@@ -91,24 +91,7 @@ export function calculateOperacionRenta(input: OperacionRentaInput): OperacionRe
   const impuesto = Math.max(0, Math.round(impuestoUTA * valorUTA));
   const tasaEfectiva = rentaBruta > 0 ? (impuesto / rentaBruta) * 100 : 0;
 
-  // Retención sugerida según el calendario Ley 21.133.
-  //
-  // El calendario solo cubre 2025-2028. Si el año actual queda fuera
-  // del rango, usamos el año más cercano dentro del calendario.
-  const aniosCalendario = Object.keys(RETENCION_HONORARIOS_CALENDARIO)
-    .map(Number)
-    .sort((a, b) => a - b);
-  const anioActual = new Date().getFullYear();
-  const anioVigente =
-    anioActual <= aniosCalendario[0]
-      ? aniosCalendario[0]
-      : anioActual >= aniosCalendario[aniosCalendario.length - 1]
-        ? aniosCalendario[aniosCalendario.length - 1]
-        : anioActual;
-  const tasaRetencion =
-    RETENCION_HONORARIOS_CALENDARIO[
-      anioVigente as keyof typeof RETENCION_HONORARIOS_CALENDARIO
-    ] ?? 15.25;
+  const { anio: anioVigente, tasa: tasaRetencion } = contextoHonorarios();
   const retencionSugerida = Math.round(rentaBruta * (tasaRetencion / 100));
 
   return {

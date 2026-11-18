@@ -1,3 +1,4 @@
+import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorMethodology } from '@/types/calculator';
 import { formatCLP } from '@/lib/formatters';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
@@ -267,13 +268,13 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No determina obligación de cotizar, cobertura parcial ni resultado de Operación Renta.',
     ],
     workedExample: {
-      title: 'Ejemplo: Boleta de honorarios bruta de $500.000 con retención 15,25% (2026)',
+      title: `Ejemplo: Boleta de honorarios bruta de $500.000 con retención ${tasaHonorarios(getRetencionHonorarios(2026))} (2026)`,
       inputs: [
         'Monto bruto de la boleta: $500.000',
-        'Año de emisión: 2026 (tasa legal de retención 15,25% según Ley 21.133)',
+        `Año de emisión: 2026 (tasa legal de retención ${tasaHonorarios(getRetencionHonorarios(2026))} según Ley 21.133)`,
       ],
       development: [
-        'Retención legal SII (15,25%): $500.000 × 15,25% = $76.250',
+        `Retención legal SII (${tasaHonorarios(getRetencionHonorarios(2026))}): $500.000 × ${tasaHonorarios(getRetencionHonorarios(2026))} = $76.250`,
         'Monto líquido a recibir: $500.000 - $76.250 = $423.750',
         'Cálculo inverso (para recibir $500.000 líquido): Bruto = $500.000 / 0,8475 = $589.971',
       ],
