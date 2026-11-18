@@ -68,6 +68,7 @@ export interface PrenatalPostnatalResult {
   limiteAvisoMediaJornada: string;
   finFuero: string;
   subsidio?: SubsidioMaternalResult;
+  avisoSubsidio?: string;
 }
 
 function parseFecha(valor: string | undefined, campo: string): Date {
@@ -96,25 +97,21 @@ function calcularSubsidio(
   input: SubsidioMaternalInput,
   fechas: PrenatalPostnatalResult,
   calendario: CalendarioMinimo,
-): SubsidioMaternalResult {
+): SubsidioMaternalResult | string {
   const { promedioReciente, promedioHistorico, ipcAcumulado } = input;
   if (!Number.isFinite(promedioReciente) || promedioReciente <= 0) {
-    throw new Error('Ingresa un promedio neto reciente mayor a cero.');
+    return 'Ingresa un promedio neto reciente mayor a cero.';
   }
   if (!Number.isFinite(promedioHistorico) || promedioHistorico < 0) {
-    throw new Error(
-      'Ingresa el promedio neto para el tope, o 0 si no hubo ingresos en ese período.',
-    );
+    return 'Ingresa el promedio neto para el tope, o 0 si no hubo ingresos en ese período.';
   }
   if (!Number.isFinite(ipcAcumulado) || ipcAcumulado <= -100) {
-    throw new Error('Ingresa la variación acumulada del IPC en porcentaje (por ejemplo, 3,2).');
+    return 'Ingresa la variación acumulada del IPC en porcentaje (por ejemplo, 3,2).';
   }
 
   const primeraLicencia = fechas.diasPrenatal ? fechas.inicioPrenatal : fechas.inicioPostnatal;
   if (!calendario.length || primeraLicencia < calendario[0].vigente_desde) {
-    throw new Error(
-      'No contamos con el ingreso mínimo de esa fecha. Borra los datos de ingresos e IPC para calcular solo las fechas.',
-    );
+    return 'No contamos con el ingreso mínimo de esa fecha para estimar el subsidio.';
   }
 
   // DFL 44, arts. 8 y 16: el promedio histórico ya divide por 1, 2 o 3 meses con ingresos.
@@ -207,9 +204,11 @@ export function calculatePrenatalPostnatal(
     limiteAvisoMediaJornada: iso(sumarDias(finPostnatal, -DIAS_AVISO_MEDIA_JORNADA)),
     finFuero: iso(sumarUnAnio(finPostnatal)),
   };
-  return input.subsidio
-    ? { ...fechas, subsidio: calcularSubsidio(input.subsidio, fechas, calendario) }
-    : fechas;
+  if (!input.subsidio) return fechas;
+  const estimacion = calcularSubsidio(input.subsidio, fechas, calendario);
+  return typeof estimacion === 'string'
+    ? { ...fechas, avisoSubsidio: estimacion }
+    : { ...fechas, subsidio: estimacion };
 }
 
 const CT_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
@@ -226,6 +225,11 @@ function notaPeriodosSubsidio(r: PrenatalPostnatalResult): string {
 
 export function prenatalPostnatalToResults(r: PrenatalPostnatalResult): CalculatorResult[] {
   const f = formatFechaCL;
+  const periodos = notaPeriodosSubsidio(r);
+  const notaSubsidio = {
+    text: r.avisoSubsidio ? `${r.avisoSubsidio} ${periodos}` : periodos,
+    source: { name: 'SUSESO — Cálculo de subsidios maternales', url: SUSESO_SUBSIDIO_URL },
+  };
   const results: CalculatorResult[] = [
     {
       label: `Postnatal: ${f(r.inicioPostnatal)} al ${f(r.finPostnatal)}`,
@@ -252,20 +256,14 @@ export function prenatalPostnatalToResults(r: PrenatalPostnatalResult): Calculat
       value: r.diasPrenatal,
       format: 'days',
       highlight: true,
-      note: {
-        text: notaPeriodosSubsidio(r),
-        source: { name: 'SUSESO — Cálculo de subsidios maternales', url: SUSESO_SUBSIDIO_URL },
-      },
+      note: notaSubsidio,
     });
   } else {
     results.unshift({
       label: `Prenatal: el parto ocurrió antes del ${f(r.inicioPrenatal)}, fecha en que comenzaba`,
       value: 0,
       format: 'days',
-      note: {
-        text: notaPeriodosSubsidio(r),
-        source: { name: 'SUSESO — Cálculo de subsidios maternales', url: SUSESO_SUBSIDIO_URL },
-      },
+      note: notaSubsidio,
     });
   }
   results.push(

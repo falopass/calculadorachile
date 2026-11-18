@@ -164,9 +164,10 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
   });
 
   it('no aplica un piso moderno a fechas fuera del calendario', () => {
-    expect(() =>
-      calculatePrenatalPostnatal({ fechaProbableParto: '2026-05-15', subsidio }, calendario),
-    ).toThrow('No contamos con el ingreso mínimo');
+    const r = calculatePrenatalPostnatal({ fechaProbableParto: '2026-05-15', subsidio }, calendario);
+    expect(r.subsidio).toBeUndefined();
+    expect(r.avisoSubsidio).toContain('No contamos con el ingreso mínimo');
+    expect(r.inicioPrenatal).toBe('2026-04-03');
   });
 
   it('conecta el formulario: fechas solas, pesos chilenos, IPC firmado y entradas incompletas', async () => {
@@ -183,11 +184,12 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
     expect(
       calcular({ ...fechas, promedioReciente: '900000', promedioHistorico: '0' })[0].format,
     ).toBe('CLP');
-    expect(() => calcular({ ...fechas, promedioReciente: '900000', ipcAcumulado: '0' })).toThrow(
-      'promedio neto para el tope',
-    );
-    expect(() =>
-      calcular({ ...fechas, promedioReciente: '900000', promedioHistorico: '600000' }),
-    ).toThrow('variación acumulada del IPC');
+    const sinTope = calcular({ ...fechas, promedioReciente: '900000', ipcAcumulado: '0' });
+    expect(sinTope.every((row) => row.format === 'days')).toBe(true);
+    expect(sinTope[0].note?.text).toContain('promedio neto para el tope');
+    const sinIpc = calcular({ ...fechas, promedioReciente: '900000', promedioHistorico: '600000' });
+    expect(sinIpc.every((row) => row.format === 'days')).toBe(true);
+    expect(sinIpc[0].note?.text).toContain('variación acumulada del IPC');
+    expect(sinIpc[0].note?.text).toContain('promedio reciente, 08/2026 a 01/2027');
   });
 });
