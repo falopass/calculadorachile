@@ -34,6 +34,9 @@ import {
   AGUINALDO_2026,
   AGUINALDO_PENSIONADOS_IPS_2026,
   PLUSVALIA_INMOBILIARIA,
+  HORAS_EXTRA,
+  PENSION_ALIMENTOS,
+  PERMISO_CIRCULACION,
 } from '@/lib/values/constants';
 import { calculateSemanaCorrida, DT_SEMANA_CORRIDA_URL } from '@/lib/calculations/semana-corrida';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
@@ -1156,6 +1159,122 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       };
 
     default:
-      return null;
+      return Object.prototype.hasOwnProperty.call(ADDITIONAL_QUICK_ANSWERS, calculatorId)
+        ? ADDITIONAL_QUICK_ANSWERS[calculatorId]
+        : null;
   }
 }
+
+const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
+  'trabajo-en-feriado': {
+    lead: `El pago por trabajar un festivo depende de si corresponde descanso compensatorio o remuneración con recargo. La calculadora distingue ambas opciones: si se paga con recargo, aplica como mínimo un ${HORAS_EXTRA.recargo_normal}% sobre la hora ordinaria y lo multiplica por las horas trabajadas. Si se compensa con descanso, no suma un pago adicional.`,
+  },
+  'valor-hora-trabajo': {
+    lead: `El valor de tu hora ordinaria depende del sueldo mensual y de la jornada semanal pactada. La calculadora usa la fórmula de la Dirección del Trabajo y muestra también el valor día y la hora extra con recargo de ${HORAS_EXTRA.recargo_normal}%. Usa el sueldo bruto, no el líquido, y ajusta la jornada a tu contrato.`,
+  },
+  'pension-alimenticia': {
+    lead: `Para un menor, el piso legal de referencia es el ${PENSION_ALIMENTOS.minimo_imm_un_hijo}% del ingreso mínimo mensual; para dos o más, es el ${PENSION_ALIMENTOS.minimo_imm_dos_o_mas_por_hijo}% por cada uno. No es un porcentaje del sueldo. El límite general es el ${PENSION_ALIMENTOS.limite_general_ingreso}% de los ingresos del alimentante, con excepciones fundadas. El tribunal puede rebajar el piso si se acredita falta de medios: esta estimación no fija la pensión.`,
+  },
+  'permiso-circulacion': {
+    lead: `El permiso de un vehículo liviano se estima con la tasación fiscal del SII, no con su precio comercial. Se aplica la escala progresiva con la UTM de enero usada por el simulador, de ${formatCLP(PERMISO_CIRCULACION.utmEneroCLP)}, y el permiso mínimo cuando corresponde. La rebaja para eléctricos e híbridos exige figurar en la nómina elegible del SII. Confirma el monto por código SII o en tu municipalidad.`,
+  },
+  'costo-viaje': {
+    lead: 'El costo de un viaje en auto es la suma del combustible y los peajes o TAG. Para estimar el combustible, divide los kilómetros por el rendimiento en kilómetros por litro y multiplica por el precio del litro que pagarás. Si eliges ida y vuelta, se duplican distancia y peajes; el total se divide entre los pasajeros para repartir el gasto.',
+  },
+  'peso-argentino-clp': {
+    lead: 'Para convertir pesos argentinos a chilenos, multiplica el monto por la tasa en CLP por ARS; para convertir pesos chilenos a argentinos, divide por esa tasa. El sitio usa el tipo de cambio nominal referencial del Banco Central o la tasa personalizada que ingreses. No equivale necesariamente a la cotización de una casa de cambio o tarjeta ni garantiza una cotización del día.',
+  },
+  'operacion-renta': {
+    lead: 'El impuesto anual estimado se calcula sobre los ingresos menos los gastos, las cotizaciones obligatorias y el ahorro previsional ingresados. A esa renta tributable se aplica la tabla progresiva anual en UTA. La retención sugerida se muestra por separado: no es una devolución calculada ni reemplaza tu declaración ante el SII o la revisión de las deducciones permitidas.',
+  },
+  'dias-habiles': {
+    lead: 'Para contar días hábiles, excluye domingos y feriados nacionales; en el cómputo administrativo también se excluyen los sábados, mientras que en el judicial se incluyen. La calculadora no cuenta la fecha inicial y sí la final si es hábil. También permite sumar un plazo y advierte si faltan calendarios de feriados o hay feriados pendientes de confirmación. Verifica el régimen aplicable a tu trámite.',
+  },
+  'reajuste-arriendo': {
+    lead: 'El reajuste depende de cómo esté pactado el arriendo. Si está en UF, se convierte a pesos con el valor de la UF sin sumar otro reajuste por IPC. Si está en pesos y se reajusta por IPC, la calculadora usa la variación entre los meses seleccionados de la serie del INE. Revisa las condiciones de tu contrato antes de aplicar el resultado.',
+  },
+  'costo-empleado-pyme': {
+    lead: 'El costo mensual para el empleador suma los haberes imponibles y los aportes de cargo de la empresa; no vuelve a sumar los descuentos del trabajador. La calculadora distingue el tipo de contrato, la gratificación opcional y el período de cotización para evitar duplicar el SIS. Es una estimación de contratación, no una liquidación completa de remuneraciones.',
+  },
+  'credito-hipotecario': {
+    lead: 'El dividendo se estima con el monto a financiar en UF, la tasa y el plazo mediante amortización francesa. El capital a financiar descuenta el pie y el equivalente en pesos depende de la UF usada. La simulación de capital e intereses no es una oferta bancaria ni incluye seguros, CAE contractual o aprobación del crédito.',
+  },
+  'costo-notaria': {
+    lead: 'El costo estimado de un trámite notarial depende del tipo de escritura y del valor de la propiedad. La calculadora separa honorarios notariales, derechos registrales e impuesto de timbres cuando corresponde, y permite agregar un gasto notarial adicional. Es una referencia: solicita una cotización desglosada antes de firmar.',
+  },
+  'subsidio-habitacional': {
+    lead: 'El subsidio habitacional estimado depende del programa MINVU, el tramo, el ahorro y el valor de la vivienda en UF. La calculadora compara el ahorro y el precio con los límites del programa y muestra el déficit de financiamiento. Cumplir esos filtros no garantiza elegibilidad ni adjudicación: confirma los requisitos del llamado con SERVIU.',
+  },
+  'comparador-afp': {
+    lead: 'La comisión de una AFP se calcula sobre el sueldo imponible, limitado por el tope previsional. El comparador aplica las comisiones registradas para mostrar su costo mensual y anual y la diferencia frente a tu AFP actual. La proyección mantiene esos valores constantes: no compara rentabilidad de los fondos ni garantiza un ahorro futuro.',
+  },
+  'simulador-apv': {
+    lead: 'El ahorro acumulado en APV depende del aporte mensual, la rentabilidad supuesta y los años de ahorro. El simulador capitaliza los aportes y estima por separado el beneficio tributario del régimen B según la tasa marginal y el tope anual deducible. La rentabilidad ingresada no está garantizada y el beneficio no es igual para todos los sueldos.',
+  },
+  'intereses-mora': {
+    lead: 'La estimación de mora laboral reajusta primero la deuda por el IPC ingresado y luego calcula interés simple sobre el monto reajustado según la tasa anual y los días de atraso. El total suma deuda, reajuste e intereses. La tasa de respaldo es referencial: ingresa la TMC aplicable publicada por la CMF y el IPC del período para tu caso.',
+  },
+  'bono-bodas-oro': {
+    lead: 'El Bono Bodas de Oro se estima verificando los años de matrimonio y las condiciones de residencia, convivencia y Registro Social de Hogares que declaras. La calculadora muestra el monto por cónyuge y el total del matrimonio si se cumplen sus filtros. La concesión requiere validar antecedentes con el IPS; el resultado no acredita por sí solo el derecho al beneficio.',
+  },
+  'multas-transito': {
+    lead: 'El monto referencial de una multa de tránsito depende de la gravedad de la infracción y se expresa en UTM. La calculadora convierte el rango a pesos y aplica el incremento por reincidencia cuando corresponde a infracciones graves o gravísimas. El resultado es un rango orientativo, no la multa definitiva que determine el tribunal.',
+  },
+  'cuenta-luz': {
+    lead: 'La cuenta de luz estimada suma el cargo fijo y la energía consumida, y luego agrega el IVA. El modelo distribuye los kWh en tramos y ajusta por zona y tipo de tarifa seleccionados. Es una referencia con las tarifas del simulador, no una reproducción exacta de la boleta de tu distribuidora.',
+  },
+  ppm: {
+    lead: 'El simulador estima un PPM anual según la actividad y la base de ingresos menos los gastos considerados, y lo distribuye mensualmente. Para profesionales usa el calendario de retención de honorarios y, si no declaras gastos efectivos, la presunción con su tope. Es una estimación: verifica en el SII la tasa y la base aplicables a tu declaración.',
+  },
+  'conversor-divisas': {
+    lead: 'Para convertir dólares o euros a pesos chilenos, multiplica el monto por la tasa en pesos de la moneda elegida; para la conversión inversa, divide por esa tasa. El simulador permite usar una tasa personalizada. El resultado es orientativo: el precio efectivo puede variar por el margen de compra o venta y las comisiones de tu banco o casa de cambio.',
+  },
+  'aporte-familiar-permanente': {
+    lead: 'El Aporte Familiar Permanente se estima por carga o por grupo familiar, según la vía de acceso al beneficio. Ingresa tus cargas y la situación que tenías en la fecha de corte indicada en el formulario. La calculadora evita sumar ambas vías como pagos separados; confirma la nómina y el pago en la consulta oficial del IPS.',
+  },
+  'subsidio-unificado-empleo': {
+    lead: 'El Subsidio Unificado de Empleo se estima según la renta bruta, el grupo prioritario, el desempleo previo y la situación del hogar. El simulador separa el aporte al trabajador, el aporte a la empresa y el pago provisional. Los parámetros dependen del decreto pendiente indicado en el catálogo: el resultado es referencial y no confirma un pago ni la elegibilidad.',
+  },
+  'subsidio-familiar-suf': {
+    lead: 'El Subsidio Familiar se estima sumando los montos de las cargas acreditadas, con un monto distinto para las personas con discapacidad. El formulario comprueba el tramo del Registro Social de Hogares declarado, pero no valida la edad ni los ingresos de cada causante. El resultado no reemplaza la acreditación de requisitos y es incompatible con la asignación familiar.',
+  },
+  'subsidio-electrico': {
+    lead: 'El descuento estimado del Subsidio Eléctrico depende del número de integrantes del hogar y se distribuye en cuotas en la cuenta de luz. La calculadora revisa si declaras estar al día y cumplir el criterio de vulnerabilidad o de electrodependencia. No es un pago en efectivo ni confirma que el hogar figure en la nómina de beneficiarios.',
+  },
+  'bono-30-mil-por-hijo': {
+    lead: 'El bono de apoyo a la niñez se estima multiplicando el monto por los niños que cumplen las condiciones de cada vía de acceso. La calculadora distingue los casos sujetos al Registro Social de Hogares y el cuidado alternativo, y separa el pago posterior por nacimientos del período indicado. Es un beneficio automático y por una sola vez: la estimación no confirma la nómina oficial.',
+  },
+  'becas-gratuidad': {
+    lead: 'La posibilidad de acceder a gratuidad o becas de arancel depende de la situación socioeconómica, la institución, la carrera y los requisitos académicos de cada beneficio. El simulador compara los antecedentes declarados y muestra beneficios posibles, no una asignación. El resultado definitivo depende del FUAS y de la validación del Estado.',
+  },
+  'puntaje-ponderado-paes': {
+    lead: 'El puntaje ponderado se obtiene multiplicando cada puntaje por la ponderación que exige tu carrera y sumando los resultados. Ingresa los pesos reales de NEM, ranking y pruebas PAES; el NEM se convierte con la tabla DEMRE de tu modalidad. El resultado permite comparar postulaciones, pero no garantiza selección ni reemplaza los requisitos de la carrera.',
+  },
+  'promedio-notas': {
+    lead: 'El promedio simple suma las notas y divide por la cantidad de notas ingresadas. Si usas ponderaciones, cada nota aporta según su peso y el cálculo se ajusta a la suma de esos pesos. La calculadora también estima la nota necesaria en la evaluación pendiente para alcanzar tu objetivo; confirma las ponderaciones y el redondeo de tu establecimiento.',
+  },
+  'escala-notas': {
+    lead: 'Para convertir un puntaje a nota, la calculadora usa el puntaje máximo, la exigencia y las notas mínima, máxima y de aprobación que indiques. La escala se divide en un tramo bajo la aprobación y otro sobre ella, y muestra el puntaje mínimo para aprobar. Usa los parámetros definidos por tu docente: la exigencia del formulario no es una regla universal.',
+  },
+  'subsidio-arriendo': {
+    lead: 'El aporte mensual del subsidio de arriendo depende de la modalidad, el valor del arriendo, la zona, los ingresos y los integrantes del hogar. La calculadora aplica los topes del llamado regular o del especial para personas mayores y con discapacidad y muestra el copago estimado. No verifica todos los requisitos ni reemplaza la postulación y evaluación del MINVU.',
+  },
+  'asignacion-por-muerte': {
+    lead: 'El reembolso estimado por gastos funerarios es el menor entre el gasto declarado y el tope del régimen previsional seleccionado. La Asignación por Muerte usa el ingreso mínimo para fines no remuneracionales; la cuota mortuoria se expresa en UF. Selecciona el régimen de la persona fallecida y confirma con la entidad pagadora los requisitos y documentos.',
+  },
+  'puntaje-nem-ranking': {
+    lead: 'El puntaje NEM se obtiene transformando el promedio de enseñanza media con la tabla oficial del DEMRE correspondiente a tu modalidad. El ranking compara tus promedios por nivel con los antecedentes de generaciones anteriores del colegio. La calculadora entrega una estimación con los datos que ingreses: usa los antecedentes oficiales de tu establecimiento para una comparación válida.',
+  },
+  ipc: {
+    lead: 'Para reajustar un monto por IPC, divide el índice del mes final por el del mes inicial y multiplica el monto por ese factor. La diferencia respecto del monto original es el reajuste en pesos. La calculadora usa la serie mensual del INE: elige los meses del período que corresponde, no sumes las variaciones mensuales como si fueran un porcentaje acumulado.',
+  },
+  'credito-consumo': {
+    lead: 'La cuota mensual de un crédito de consumo depende del capital, la tasa mensual y el plazo. El simulador aplica amortización francesa y muestra intereses y costo total con los gastos operacionales declarados. También compara la tasa anual nominal con la TMC de referencia; no es una oferta bancaria ni sustituye la revisión de la CAE y las condiciones del contrato.',
+  },
+  'interes-compuesto': {
+    lead: 'Con interés compuesto, los intereses se incorporan al capital y también generan intereses en los períodos siguientes. El resultado depende del capital inicial, la tasa, el plazo, la frecuencia de capitalización y los aportes mensuales. La calculadora separa lo aportado de los intereses estimados: una tasa constante es un supuesto, no una rentabilidad garantizada.',
+  },
+  'deposito-a-plazo': {
+    lead: 'La ganancia de un depósito a plazo se estima con el monto, la tasa ofrecida por tu banco y los días del depósito. El simulador prorratea la tasa mensual o anual y, si agregas renovaciones, reinvierte capital e intereses suponiendo la misma tasa. Permite pesos o UF y no incluye impuestos ni comisiones; confirma las condiciones efectivas con el banco.',
+  },
+};

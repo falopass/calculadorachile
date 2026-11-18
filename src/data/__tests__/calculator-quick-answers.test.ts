@@ -1,35 +1,54 @@
 import { afterEach, describe, it, expect, vi } from 'vitest';
 import { getQuickAnswer } from '../calculator-quick-answers';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
-import { INGRESO_MINIMO, JORNADA_LEGAL, SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
+import { HORAS_EXTRA, INGRESO_MINIMO, JORNADA_LEGAL, PENSION_ALIMENTOS, PERMISO_CIRCULACION, SEGURO_CESANTIA_BENEFICIOS } from '@/lib/values/constants';
 import { formatCLP } from '@/lib/formatters';
+import { calculators, discoverableCalculators } from '../calculators';
+import { calculatePensionAlimenticia } from '@/lib/calculations/pension-alimenticia';
+import { calculateTrabajoEnFeriado } from '@/lib/calculations/trabajo-en-feriado';
+import { calculatePermisoCirculacion } from '@/lib/calculations/permiso-circulacion';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
-const IDS = [
-  'iva',
-  'credito-automotriz',
-  'vacaciones-proporcionales',
-  'asignacion-familiar',
-  'gratificacion-legal',
-  'impuesto-segunda-categoria',
-  'sueldo-liquido',
-  'horas-extra',
-  'finiquito',
-  'utm-clp',
-  'uf-clp',
-  'sueldo-part-time',
-  'factor-hora-extra',
-  'tope-imponible-90-uf',
-  'sueldo-casa-particular',
-  'licencia-medica',
-  'seguro-cesantia',
-  'semana-corrida',
-  'aguinaldo',
-  'plusvalia',
-];
+const IDS = discoverableCalculators.map((calculator) => calculator.id);
 
 describe('getQuickAnswer', () => {
+  it('no agrega respuestas a calculadoras no indexables', () => {
+    for (const calculator of calculators.filter((calculator) => calculator.noIndex)) {
+      expect(getQuickAnswer(calculator.id, CTX), calculator.id).toBeNull();
+    }
+  });
+
+  it.each(['', 'constructor', '__proto__'])('sin entrada válida (%s) devuelve null', (id) => {
+    expect(getQuickAnswer(id, CTX)).toBeNull();
+  });
+
+  it('recargos y permiso usan las mismas constantes que los módulos', () => {
+    const feriado = calculateTrabajoEnFeriado({ sueldoBruto: INGRESO_MINIMO.mensual, horasTrabajadas: 1 });
+    expect(feriado.recargo).toBe(HORAS_EXTRA.recargo_normal);
+    for (const id of ['trabajo-en-feriado', 'valor-hora-trabajo']) {
+      expect(getQuickAnswer(id, CTX)!.lead).toContain(`${feriado.recargo}%`);
+    }
+    const permiso = calculatePermisoCirculacion({ valorVehiculo: 0, electricoHibridoElegible: false });
+    expect(permiso.utmEneroCLP).toBe(PERMISO_CIRCULACION.utmEneroCLP);
+    expect(getQuickAnswer('permiso-circulacion', CTX)!.lead).toContain(formatCLP(permiso.utmEneroCLP));
+  });
+
+  it('pisos de alimentos coinciden con constantes y módulo, no con un porcentaje del sueldo', () => {
+    const lead = getQuickAnswer('pension-alimenticia', CTX)!.lead;
+    for (const numeroHijos of [1, 2]) {
+      const pension = calculatePensionAlimenticia({ sueldoBruto: 0, numeroHijos, tieneOtroIngreso: false });
+      const porcentaje = numeroHijos === 1
+        ? PENSION_ALIMENTOS.minimo_imm_un_hijo
+        : PENSION_ALIMENTOS.minimo_imm_dos_o_mas_por_hijo;
+      expect(pension.porcentajeMinimoPorHijo).toBe(porcentaje);
+      expect(lead).toContain(`${porcentaje}%`);
+    }
+    expect(lead).toContain(`${PENSION_ALIMENTOS.limite_general_ingreso}%`);
+    expect(lead).toContain('No es un porcentaje del sueldo');
+    expect(lead).toContain('excepciones fundadas');
+  });
+
   it('semana-corrida: 150.000 en 5 días con 1 domingo → $30.000', () => {
     expect(getQuickAnswer('semana-corrida', CTX)!.lead).toContain('corresponden $30.000');
   });
