@@ -38,6 +38,10 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-gratificacion-legal': 'finiquito-laboral-chile',
   'calculadora-horas-extra': 'finiquito-laboral-chile',
 
+  // Calendario de feriados
+  'calculadora-dias-habiles': 'feriados-chile-2027',
+  'calculadora-trabajo-en-feriado': 'feriados-chile-2027',
+
   // Licencias médicas
   'calculadora-licencia-medica': 'licencia-medica-chile',
 
@@ -49,7 +53,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   // Tributario
   'calculadora-iva': 'iva-boleta-honorarios-chile',
   'calculadora-boleta-honorarios': 'iva-boleta-honorarios-chile',
-  'calculadora-operacion-renta': 'iva-boleta-honorarios-chile',
+  'calculadora-operacion-renta': 'preparacion-operacion-renta-2027-checklist',
   'calculadora-ppm': 'iva-boleta-honorarios-chile',
 
   // Vivienda (nueva guía pillar)
