@@ -5,6 +5,7 @@ import { createRoot, type Root } from 'react-dom/client';
 import { act } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Calculator, CalculatorResult } from '@/types/calculator';
+import { loadCalculationFn } from '@/lib/calculations/load-calculator';
 
 Object.assign(globalThis, { React, IS_REACT_ACT_ENVIRONMENT: true });
 
@@ -46,6 +47,7 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
+    localStorage.clear();
     Element.prototype.scrollIntoView = vi.fn();
     container = document.createElement('div');
     document.body.appendChild(container);
@@ -81,5 +83,38 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     await escribirPrecio('0');
     expect(container.textContent).not.toContain('1000.4242');
     expect(container.textContent).toContain('El valor debe ser mayor a 0');
+  });
+
+  it('muestra el calendario durante el ingreso de datos sin guardar borradores', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const prenatal = getCalculatorBySlug('calculadora-prenatal-postnatal')!;
+    const calcularPrenatal = (await loadCalculationFn('prenatal-postnatal'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: prenatal,
+        calculateFn: calcularPrenatal,
+      }));
+    });
+
+    async function escribir(placeholder: string, value: string) {
+      const input = container.querySelector<HTMLInputElement>(`input[placeholder="${placeholder}"]`)!;
+      await act(async () => {
+        setInputValue(input, value);
+        vi.advanceTimersByTime(500);
+      });
+    }
+
+    const historial = () => localStorage.getItem('calculachile_history') ?? '[]';
+    await escribir('2027-03-15', '2027-03-15');
+    const soloFechas = historial();
+    expect(JSON.parse(soloFechas)).toHaveLength(1);
+    await escribir('Ej.: 900.000', '900000');
+    expect(container.textContent).toContain('42 84 84');
+    expect(historial()).toBe(soloFechas);
+    await escribir('Ej.: 800.000', '600000');
+    expect(historial()).toBe(soloFechas);
+    await escribir('Ej.: 2,5', '5');
+    expect(container.textContent).toContain('4851000');
+    expect(JSON.parse(historial())).toHaveLength(2);
   });
 });

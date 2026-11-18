@@ -60,6 +60,8 @@ export interface CalculatorResult {
   value: number;
   format: 'CLP' | 'UF' | 'UTM' | 'percentage' | 'days' | 'number';
   highlight?: boolean;
+  /** Señala un cálculo parcial que no se debe guardar en el historial. */
+  partial?: boolean;
   note?: CalculatorResultNote;
 }
 

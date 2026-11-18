@@ -250,22 +250,16 @@ export function prenatalPostnatalToResults(r: PrenatalPostnatalResult): Calculat
       highlight: true,
     },
   ];
-  if (r.finPrenatal) {
-    results.unshift({
-      label: `Prenatal: ${f(r.inicioPrenatal)} al ${f(r.finPrenatal)}`,
-      value: r.diasPrenatal,
-      format: 'days',
-      highlight: true,
-      note: notaSubsidio,
-    });
-  } else {
-    results.unshift({
-      label: `Prenatal: el parto ocurrió antes del ${f(r.inicioPrenatal)}, fecha en que comenzaba`,
-      value: 0,
-      format: 'days',
-      note: notaSubsidio,
-    });
-  }
+  results.unshift({
+    label: r.finPrenatal
+      ? `Prenatal: ${f(r.inicioPrenatal)} al ${f(r.finPrenatal)}`
+      : `Prenatal: el parto ocurrió antes del ${f(r.inicioPrenatal)}, fecha en que comenzaba`,
+    value: r.diasPrenatal,
+    format: 'days',
+    highlight: Boolean(r.finPrenatal),
+    partial: Boolean(r.avisoSubsidio),
+    note: notaSubsidio,
+  });
   results.push(
     {
       label: `Último día para avisar media jornada (carta certificada): ${f(r.limiteAvisoMediaJornada)}`,

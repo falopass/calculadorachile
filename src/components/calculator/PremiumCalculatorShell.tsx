@@ -553,19 +553,21 @@ export default function PremiumCalculatorShell({
         trackEvents.calculatorCompleted(calculator.id);
       }
 
-      const mainResult = calculated.find((r) => r.highlight);
-      addEntry({
-        calculatorId: calculator.id,
-        calculatorName: calculator.name,
-        inputs: debouncedValues as Record<string, unknown>,
-        results: calculated.map((r) => ({
-          label: r.label,
-          value: String(r.value),
-        })),
-        mainResult: mainResult
-          ? { label: mainResult.label, value: String(mainResult.value) }
-          : undefined,
-      });
+      if (!calculated.some((r) => r.partial)) {
+        const mainResult = calculated.find((r) => r.highlight);
+        addEntry({
+          calculatorId: calculator.id,
+          calculatorName: calculator.name,
+          inputs: debouncedValues as Record<string, unknown>,
+          results: calculated.map((r) => ({
+            label: r.label,
+            value: String(r.value),
+          })),
+          mainResult: mainResult
+            ? { label: mainResult.label, value: String(mainResult.value) }
+            : undefined,
+        });
+      }
 
       // Scroll solo la primera vez que hay resultado (evita saltos al tipear en mobile).
       if (!hasScrolledToResults.current && resultsRef.current) {
