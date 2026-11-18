@@ -34,6 +34,9 @@ import {
   AGUINALDO_2026,
   AGUINALDO_PENSIONADOS_IPS_2026,
   PLUSVALIA_INMOBILIARIA,
+  HORAS_EXTRA,
+  PENSION_ALIMENTOS,
+  PERMISO_CIRCULACION,
 } from '@/lib/values/constants';
 import { calculateSemanaCorrida, DT_SEMANA_CORRIDA_URL } from '@/lib/calculations/semana-corrida';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
@@ -1156,6 +1159,35 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       };
 
     default:
-      return null;
+      return Object.prototype.hasOwnProperty.call(ADDITIONAL_QUICK_ANSWERS, calculatorId)
+        ? ADDITIONAL_QUICK_ANSWERS[calculatorId]
+        : null;
   }
 }
+
+const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
+  'trabajo-en-feriado': {
+    lead: `El pago por trabajar un festivo depende de si corresponde descanso compensatorio o remuneración con recargo. La calculadora distingue ambas opciones: si se paga con recargo, aplica como mínimo un ${HORAS_EXTRA.recargo_normal}% sobre la hora ordinaria y lo multiplica por las horas trabajadas. Si se compensa con descanso, no suma un pago adicional.`,
+  },
+  'valor-hora-trabajo': {
+    lead: `El valor de tu hora ordinaria depende del sueldo mensual y de la jornada semanal pactada. La calculadora usa la fórmula de la Dirección del Trabajo y muestra también el valor día y la hora extra con recargo de ${HORAS_EXTRA.recargo_normal}%. Usa el sueldo bruto, no el líquido, y ajusta la jornada a tu contrato.`,
+  },
+  'pension-alimenticia': {
+    lead: `Para un menor, el piso legal de referencia es el ${PENSION_ALIMENTOS.minimo_imm_un_hijo}% del ingreso mínimo mensual; para dos o más, es el ${PENSION_ALIMENTOS.minimo_imm_dos_o_mas_por_hijo}% por cada uno. No es un porcentaje del sueldo. El límite general es el ${PENSION_ALIMENTOS.limite_general_ingreso}% de los ingresos del alimentante, con excepciones fundadas. El tribunal puede rebajar el piso si se acredita falta de medios: esta estimación no fija la pensión.`,
+  },
+  'permiso-circulacion': {
+    lead: `El permiso de un vehículo liviano se estima con la tasación fiscal del SII, no con su precio comercial. Se aplica la escala progresiva con la UTM de enero usada por el simulador, de ${formatCLP(PERMISO_CIRCULACION.utmEneroCLP)}, y el permiso mínimo cuando corresponde. La rebaja para eléctricos e híbridos exige figurar en la nómina elegible del SII. Confirma el monto por código SII o en tu municipalidad.`,
+  },
+  'costo-viaje': {
+    lead: 'El costo de un viaje en auto es la suma del combustible y los peajes o TAG. Para estimar el combustible, divide los kilómetros por el rendimiento en kilómetros por litro y multiplica por el precio del litro que pagarás. Si eliges ida y vuelta, se duplican distancia y peajes; el total se divide entre los pasajeros para repartir el gasto.',
+  },
+  'peso-argentino-clp': {
+    lead: 'Para convertir pesos argentinos a chilenos, multiplica el monto por la tasa en CLP por ARS; para convertir pesos chilenos a argentinos, divide por esa tasa. El sitio usa el tipo de cambio nominal referencial del Banco Central. No equivale necesariamente a la cotización de una casa de cambio o tarjeta ni garantiza una cotización del día.',
+  },
+  'operacion-renta': {
+    lead: 'El impuesto anual estimado se calcula sobre los ingresos menos los gastos, las cotizaciones obligatorias y el ahorro previsional ingresados. A esa renta tributable se aplica la tabla progresiva anual en UTA. La retención sugerida se muestra por separado: no es una devolución calculada ni reemplaza tu declaración ante el SII o la revisión de las deducciones permitidas.',
+  },
+  'dias-habiles': {
+    lead: 'Para contar días hábiles, excluye domingos y feriados nacionales; en el cómputo administrativo también se excluyen los sábados, mientras que en el judicial se incluyen. La calculadora no cuenta la fecha inicial y sí la final si es hábil. También permite sumar un plazo y advierte si faltan calendarios de feriados o hay feriados pendientes de confirmación. Verifica el régimen aplicable a tu trámite.',
+  },
+};
