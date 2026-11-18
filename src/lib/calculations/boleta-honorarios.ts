@@ -7,7 +7,7 @@ import {
   RETENCION_HONORARIOS_DISTRIBUCION,
   type AnioRetencionHonorarios,
 } from '@/lib/values/constants';
-import { contextoHonorarios, getRetencionHonorarios } from '@/lib/values/honorarios-anio';
+import { anioEnCalendario, contextoHonorarios, getRetencionHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface BoletaHonorariosInput {
@@ -50,7 +50,7 @@ export interface BoletaHonorariosResult {
    * Desglose informativo de qué financia la retención del SII.
    * Estos montos NO se descuentan adicionalmente del líquido.
    */
-  desgloseRetencion: {
+  desgloseRetencion?: {
     impuestoRenta: number;
     afp: number;
     salud: number;
@@ -114,17 +114,16 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
   const montoLiquido = bruto - retencion;
 
   const distribucion =
-    RETENCION_HONORARIOS_DISTRIBUCION[ano as AnioRetencionHonorarios] ??
-    RETENCION_HONORARIOS_DISTRIBUCION[2026];
-  const desgloseRetencion = {
+    RETENCION_HONORARIOS_DISTRIBUCION[anioEnCalendario(ano) as AnioRetencionHonorarios];
+  const desgloseRetencion = distribucion && retencionAutomatica ? {
     impuestoRenta: Math.round(bruto * (distribucion.impuesto_renta / 100)),
     afp: Math.round(bruto * (distribucion.afp / 100)),
     salud: Math.round(bruto * (distribucion.salud / 100)),
     seguroInvalidezSobrevivencia: Math.round(bruto * (distribucion.sis / 100)),
     accidentesTrabajo: Math.round(bruto * (distribucion.accidentes_trabajo / 100)),
-  };
+  } : undefined;
 
-  const ppmAsociado = calcularPPM
+  const ppmAsociado = calcularPPM && distribucion
     ? Math.round(bruto * (distribucion.impuesto_renta / 100))
     : 0;
 
@@ -138,7 +137,7 @@ export function calculateBoletaHonorarios(input: BoletaHonorariosInput): BoletaH
     montoLiquido: Math.round(montoLiquido),
     tasaRetencion,
     ano,
-    mostrarDesglose: Boolean(desgloseCotizaciones),
+    mostrarDesglose: Boolean(desgloseCotizaciones && desgloseRetencion),
     desgloseRetencion,
     ppmAsociado,
     costoEmpleador,
@@ -186,7 +185,7 @@ export function boletaHonorariosToResults(result: BoletaHonorariosResult): Calcu
     });
 
     // Solo si el usuario pidió desglose informativo (no es descuento extra).
-    if (result.mostrarDesglose) {
+    if (result.mostrarDesglose && result.desgloseRetencion) {
       results.push({
         label: '— Impuesto Renta (est. dentro de retención)',
         value: result.desgloseRetencion.impuestoRenta,
