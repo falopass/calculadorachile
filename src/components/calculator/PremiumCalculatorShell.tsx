@@ -353,7 +353,7 @@ function renderInput(
           type="text"
           value={typeof value === 'string' ? value : ''}
           inputMode={
-            input.unit === 'CLP' ? 'numeric' : input.unit === 'percent' ? 'decimal' : undefined
+            input.unit === 'CLP' || input.unit === 'percent' ? 'decimal' : undefined
           }
           prefix={input.unit ? UNIT_TO_PREFIX[input.unit] : undefined}
           suffix={input.unit ? UNIT_TO_SUFFIX[input.unit] : undefined}

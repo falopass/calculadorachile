@@ -192,4 +192,16 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
     expect(sinIpc[0].note?.text).toContain('variación acumulada del IPC');
     expect(sinIpc[0].note?.text).toContain('promedio reciente, 08/2026 a 01/2027');
   });
+
+  it('conserva la precisión de promedios con decimales en formato chileno', async () => {
+    const calcular = (await loadCalculationFn('prenatal-postnatal'))!;
+    const ingresos = { promedioReciente: '1.000.000,33', promedioHistorico: '2.000.000,33' };
+    expect(calcular({ ...fechas, ...ingresos, ipcAcumulado: '0' })[0]).toMatchObject({
+      format: 'CLP',
+      value: 7_000_002,
+    });
+    expect(
+      calcular({ ...fechas, ...ingresos, promedioReciente: '1.00,33', ipcAcumulado: '0' })[0].format,
+    ).toBe('days');
+  });
 });
