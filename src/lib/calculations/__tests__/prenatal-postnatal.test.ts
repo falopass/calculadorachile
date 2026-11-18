@@ -210,4 +210,14 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
       calcular({ ...fechas, ...ingresos, promedioReciente: '1.00,33', ipcAcumulado: '0' })[0].format,
     ).toBe('days');
   });
+
+  it('redondea hacia arriba un postnatal que termina exactamente en medio peso', () => {
+    const r = calculatePrenatalPostnatal({
+      ...fechas,
+      prematuroOBajoPeso: true,
+      subsidio: { ...subsidio, promedioReciente: 491_522.50 },
+    }, calendario);
+    expect(r.diasPostnatal).toBe(126);
+    expect(r.subsidio?.postnatal).toBe(2_064_395);
+  });
 });

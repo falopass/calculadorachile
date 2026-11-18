@@ -115,12 +115,11 @@ function calcularSubsidio(
   }
 
   // DFL 44, arts. 8 y 16: el promedio histórico ya divide por 1, 2 o 3 meses con ingresos.
-  const baseDiaria = promedioReciente / 30;
-  const topeDiario = (promedioHistorico / 30) * (1 + ipcAcumulado / 100) * 1.1;
-  const diarioBase = Math.min(baseDiaria, topeDiario);
+  const topeMensual = promedioHistorico * (1 + ipcAcumulado / 100) * 1.1;
+  const baseMensual = Math.min(promedioReciente, topeMensual);
   // Art. 17 y SUSESO 22123-2012: el piso también se aplica después de rebajar a media jornada.
-  const diario = (minimo: number, proporcion: number) =>
-    Math.max(diarioBase * proporcion, minimo / 60);
+  const mensualPonderado = (minimo: number, proporcion: number) =>
+    Math.max(baseMensual * proporcion, minimo / 2);
 
   function totalTramo(inicio: string, dias: number, proporcion = 1): number {
     const inicioMs = Date.parse(inicio);
@@ -131,10 +130,11 @@ function calcularSubsidio(
       const siguiente = calendario[i + 1];
       const hasta = siguiente ? Math.min(finMs, Date.parse(siguiente.vigente_desde)) : finMs;
       return (
-        suma + (Math.max(0, hasta - desde) / DIA_MS) * diario(tramo.no_remuneracional, proporcion)
+        suma + (Math.max(0, hasta - desde) / DIA_MS) * mensualPonderado(tramo.no_remuneracional, proporcion)
       );
     }, 0);
-    return Math.round(total);
+    // Divide al final para preservar los medios pesos al redondear por etapa.
+    return Math.round(total / 30);
   }
 
   const minimoInicial = calendario.reduce(
@@ -150,7 +150,7 @@ function calcularSubsidio(
   );
 
   return {
-    diarioInicial: Math.round(diario(minimoInicial, 1)),
+    diarioInicial: Math.round(mensualPonderado(minimoInicial, 1) / 30),
     prenatal,
     postnatal,
     parental,
