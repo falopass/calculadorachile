@@ -36,6 +36,8 @@ export interface CalculatorInput {
   max?: number;
   options?: { value: string; label: string }[];
   defaultValue?: string | number | boolean;
+  /** Si es false, el valor no viaja en enlaces compartidos. */
+  shareable?: boolean;
   /** Tooltip de ayuda contextual para campos complejos */
   tooltip?: string;
 }

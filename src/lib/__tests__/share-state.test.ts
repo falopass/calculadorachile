@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildShareQuery, parseShareQuery } from '../share-state';
 import type { CalculatorInput } from '@/types/calculator';
+import { getCalculatorBySlug } from '@/data/calculators';
 
 const inputs: CalculatorInput[] = [
   { id: 'sueldo', label: 'Sueldo', type: 'number', min: 0, max: 100_000_000 },
@@ -31,5 +32,19 @@ describe('share-state', () => {
     expect(parseShareQuery(search, inputs)).toEqual({});
     expect(parseShareQuery('?sueldo=-5', inputs)).toEqual({});
     expect(parseShareQuery('?sueldo=999999999999', inputs)).toEqual({});
+  });
+
+  it('comparte fechas sin enviar ni cargar los datos del subsidio maternal por URL', () => {
+    const calculator = getCalculatorBySlug('calculadora-prenatal-postnatal')!;
+    const dates = { fechaProbableParto: '2027-03-15' };
+    const query = buildShareQuery(
+      calculator.inputs,
+      { ...dates, promedioReciente: '900.000', promedioHistorico: '600.000', ipcAcumulado: '5' },
+      {},
+    );
+    expect(query).toBe('?fechaProbableParto=2027-03-15');
+    expect(
+      parseShareQuery(`${query}&promedioReciente=900000&promedioHistorico=600000&ipcAcumulado=5`, calculator.inputs),
+    ).toEqual(dates);
   });
 });
