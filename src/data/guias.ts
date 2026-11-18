@@ -864,7 +864,7 @@ export const guias: Guia[] = [
 </table>
 <div class="numeric-example"><div class="numeric-example__title">Boleta bruta $1.000.000</div><ul><li>Retención: $1.000.000 × ${tasaHonorarios(HON.tasa)} = ${clpHonorarios(1_000_000 * HON.tasa / 100)}</li><li>Líquido cuando retiene el receptor: ${clpHonorarios(1_000_000 * (1 - HON.tasa / 100))}</li><li>Si no retiene: recibes $1.000.000 y reservas ${clpHonorarios(1_000_000 * HON.tasa / 100)} para PPM</li></ul><span class="total">Disponible después de retención o reserva: ${clpHonorarios(1_000_000 * (1 - HON.tasa / 100))}</span></div>
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No existe una división 10% + 5,25% por boleta</strong><p>El ${tasaHonorarios(HON.tasa)} es pago provisional. En la Operación Renta se consolida con impuesto anual y cotizaciones según ingresos, gastos, topes, afiliación y modalidad de cobertura. No puedes afirmar que $100.000 de este ejemplo ya son impuesto definitivo y $52.500 cotizaciones.</p></div></aside>
-<p>Si pactaste un líquido, el bruto es <code>líquido ÷ ${(1 - HON.tasa / 100).toLocaleString('es-CL')}</code>. Para recibir $500.000 líquidos debes emitir aproximadamente ${clpHonorarios(Math.round(500_000 / (1 - HON.tasa / 100)))} brutos, sujeto al redondeo del SII.</p>`,
+<p>Si pactaste un líquido, el bruto es <code>líquido ÷ ${(1 - HON.tasa / 100).toLocaleString('es-CL', { maximumFractionDigits: 4 })}</code>. Para recibir $500.000 líquidos debes emitir aproximadamente ${clpHonorarios(Math.round(500_000 / (1 - HON.tasa / 100)))} brutos, sujeto al redondeo del SII.</p>`,
       },
       {
         id: 'exencion-honorarios',
