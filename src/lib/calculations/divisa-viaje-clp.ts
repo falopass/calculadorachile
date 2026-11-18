@@ -1,5 +1,5 @@
 // ============================================
-// Monedas de viaje ↔ CLP (real brasileño, sol peruano)
+// Monedas de viaje ↔ CLP (real brasileño, sol peruano y otras monedas)
 // --------------------------------------------
 // Mismo patrón y gate que peso-argentino-clp (E-050):
 // tasa BCCh F072.CLP.<ISO>.N.O.D (referencial); si
@@ -7,11 +7,17 @@
 // de 3 días hábiles, NO se presenta como «hoy».
 // ============================================
 
-import { REAL_BRASILENO, SOL_PERUANO } from '@/lib/values/constants';
+import {
+  REAL_BRASILENO,
+  SOL_PERUANO,
+  PESO_COLOMBIANO,
+  PESO_MEXICANO,
+  BOLIVIANO,
+} from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 import { businessDaysSince } from './peso-argentino-clp';
 
-export type CodigoDivisaViaje = 'BRL' | 'PEN';
+export type CodigoDivisaViaje = 'BRL' | 'PEN' | 'COP' | 'MXN' | 'BOB';
 
 const DIVISAS = {
   BRL: {
@@ -25,6 +31,24 @@ const DIVISAS = {
     nombre: 'soles peruanos',
     singular: 'sol peruano',
     pais: 'Perú',
+  },
+  COP: {
+    constante: () => PESO_COLOMBIANO,
+    nombre: 'pesos colombianos',
+    singular: 'peso colombiano',
+    pais: 'Colombia',
+  },
+  MXN: {
+    constante: () => PESO_MEXICANO,
+    nombre: 'pesos mexicanos',
+    singular: 'peso mexicano',
+    pais: 'México',
+  },
+  BOB: {
+    constante: () => BOLIVIANO,
+    nombre: 'bolivianos',
+    singular: 'boliviano',
+    pais: 'Bolivia',
   },
 } as const;
 

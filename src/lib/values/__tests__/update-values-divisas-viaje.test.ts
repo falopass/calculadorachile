@@ -77,3 +77,39 @@ describe('update-values: monedas de viaje BRL/PEN', () => {
     expect(snap.sources.solPeruano).toBe('unknown');
   });
 });
+
+describe.each([
+  { key: 'pesoColombiano', serie: 'F072.CLP.COP.N.O.D', value: 0.3 },
+  { key: 'pesoMexicano', serie: 'F072.CLP.MXN.N.O.D', value: 54.14 },
+  { key: 'boliviano', serie: 'F072.CLP.BOL.N.O.D', value: 85.19 },
+])('update-values: $key', ({ key, serie, value }) => {
+  it('guarda valor oficial, fecha observada y procedencia', () => {
+    const snap = runPipeline({ ...BASE, [serie]: [String(value), '18-11-2026'] }, {});
+    expect(snap[key]).toBe(value);
+    expect(snap.observedAsOf[key]).toBe('2026-11-18');
+    expect(snap.sources[key]).toBe('bcentral');
+  });
+
+  it('conserva valor y fecha anteriores si la API no entrega la serie', () => {
+    const snap = runPipeline(BASE, { [key]: value, observedAsOf: { [key]: '2026-11-10' } });
+    expect(snap[key]).toBe(value);
+    expect(snap.observedAsOf[key]).toBe('2026-11-10');
+    expect(snap.sources[key]).toBe('unknown');
+  });
+
+  it('sin dato previo no inventa valor ni fecha', () => {
+    const snap = runPipeline(BASE, {});
+    expect(snap[key]).toBeNull();
+    expect(snap.observedAsOf[key]).toBeNull();
+    expect(snap.sources[key]).toBe('unknown');
+  });
+
+  it('una respuesta no numérica conserva el respaldo y marca unknown', () => {
+    const snap = runPipeline({ ...BASE, [serie]: ['invalid', '18-11-2026'] }, {
+      [key]: value, observedAsOf: { [key]: '2026-11-10' },
+    });
+    expect(snap[key]).toBe(value);
+    expect(snap.observedAsOf[key]).toBe('2026-11-10');
+    expect(snap.sources[key]).toBe('unknown');
+  });
+});

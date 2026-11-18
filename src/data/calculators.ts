@@ -5148,6 +5148,201 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
   },
 
   {
+    id: 'peso-colombiano-clp',
+    name: 'Peso colombiano a peso chileno',
+    description:
+      'Convierte pesos colombianos a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.COP.N.O.D, referencial).',
+    slug: 'peso-colombiano-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-18',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal peso colombiano',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.COP.N.O.D',
+        note: 'Serie F072.CLP.COP.N.O.D (CLP por 1 COP), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'peso colombiano a peso chileno',
+      'pesos colombianos a pesos chilenos',
+      '100 pesos colombianos en pesos chilenos',
+      'peso chileno a peso colombiano',
+      'convertir pesos colombianos',
+      'cambio peso colombiano chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '10000', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'cop_a_clp', label: 'Pesos colombianos → CLP' },
+          { value: 'clp_a_cop', label: 'CLP → pesos colombianos' },
+        ],
+      },
+    ],
+    seoTitle: 'Peso colombiano a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte pesos colombianos a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.COP.N.O.D). Bidireccional, útil para viajes a Colombia.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 peso colombiano?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.COP.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 pesos colombianos en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 COP) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
+    id: 'peso-mexicano-clp',
+    name: 'Peso mexicano a peso chileno',
+    description:
+      'Convierte pesos mexicanos a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.MXN.N.O.D, referencial).',
+    slug: 'peso-mexicano-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-18',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal peso mexicano',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.MXN.N.O.D',
+        note: 'Serie F072.CLP.MXN.N.O.D (CLP por 1 MXN), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'peso mexicano a peso chileno',
+      'pesos mexicanos a pesos chilenos',
+      '100 pesos mexicanos en pesos chilenos',
+      'peso chileno a peso mexicano',
+      'convertir pesos mexicanos',
+      'cambio peso mexicano chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'mxn_a_clp', label: 'Pesos mexicanos → CLP' },
+          { value: 'clp_a_mxn', label: 'CLP → pesos mexicanos' },
+        ],
+      },
+    ],
+    seoTitle: 'Peso mexicano a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte pesos mexicanos a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.MXN.N.O.D). Bidireccional, útil para viajes a México.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 peso mexicano?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.MXN.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 pesos mexicanos en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 MXN) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
+    id: 'boliviano-clp',
+    name: 'Boliviano a peso chileno',
+    description:
+      'Convierte bolivianos a pesos chilenos (y al revés) con el tipo de cambio nominal diario del Banco Central de Chile (serie F072.CLP.BOL.N.O.D, referencial).',
+    slug: 'boliviano-a-peso-chileno',
+    category: 'conversiones',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-18',
+    sources: [
+      {
+        name: 'BCCh — Tipo de cambio nominal boliviano',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.BOL.N.O.D',
+        note: 'Serie F072.CLP.BOL.N.O.D (CLP por 1 BOB), carácter referencial',
+      },
+      {
+        name: 'BCCh — Tipos de cambios y paridades',
+        url: 'https://www.bcentral.cl/web/banco-central/areas/estadisticas/tipos-de-cambios-y-paridades',
+        note: 'Hub de tipos de cambio y paridades',
+      },
+    ],
+    keywords: [
+      'boliviano a peso chileno',
+      'bolivianos a pesos chilenos',
+      '100 bolivianos en pesos chilenos',
+      'peso chileno a boliviano',
+      'convertir bolivianos',
+      'cambio boliviano chile',
+    ],
+    inputs: [
+      { id: 'monto', label: 'Monto', type: 'number', placeholder: '100', required: true, min: 0 },
+      {
+        id: 'direccion',
+        label: 'Conversión',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'bob_a_clp', label: 'Bolivianos → CLP' },
+          { value: 'clp_a_bob', label: 'CLP → bolivianos' },
+        ],
+      },
+    ],
+    seoTitle: 'Boliviano a peso chileno: tipo de cambio BCCh',
+    seoDescription:
+      'Convierte bolivianos a CLP con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BOL.N.O.D). Bidireccional, útil para viajes a Bolivia.',
+    faq: [
+      {
+        question: '¿Cuántos pesos chilenos es 1 boliviano?',
+        answer:
+          'El valor cambia cada día hábil. Usamos la serie F072.CLP.BOL.N.O.D del Banco Central (referencial). Si la fuente del snapshot es de respaldo o la observación tiene más de 3 días hábiles, se muestra como valor referencial de esa fecha, no como el de hoy.',
+      },
+      {
+        question: '¿Cuánto es 100 bolivianos en pesos chilenos?',
+        answer:
+          'Multiplica el monto por el tipo de cambio nominal del BCCh (CLP por 1 BOB) que aparece en el resultado. La calculadora lo hace en ambas direcciones.',
+      },
+      {
+        question: '¿La tasa del Banco Central es la de las casas de cambio?',
+        answer:
+          'No necesariamente. El BCCh publica un tipo de cambio nominal referencial. Las casas de cambio, bancos y tarjetas pueden cotizar otro precio de compra o venta y cobrar comisiones.',
+      },
+    ],
+  },
+
+  {
     id: 'aguinaldo',
     name: 'Aguinaldo Fiestas Patrias / Navidad',
     description:

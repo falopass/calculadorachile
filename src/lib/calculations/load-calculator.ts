@@ -745,6 +745,51 @@ export async function loadCalculationFn(
         return divisaViajeClpToResults(result);
       };
     }
+    case 'peso-colombiano-clp': {
+      const { calculateDivisaViajeClp, divisaViajeClpToResults } = await import('./divisa-viaje-clp');
+      return (inputs) => {
+        const result = calculateDivisaViajeClp({
+          codigo: 'COP',
+          monto: coerceNumber(inputs.monto),
+          aClp: inputs.direccion !== 'clp_a_cop',
+          tasaPersonalizada:
+            inputs.tasaPersonalizada != null && String(inputs.tasaPersonalizada) !== ''
+              ? coerceNumber(inputs.tasaPersonalizada)
+              : undefined,
+        });
+        return divisaViajeClpToResults(result);
+      };
+    }
+    case 'peso-mexicano-clp': {
+      const { calculateDivisaViajeClp, divisaViajeClpToResults } = await import('./divisa-viaje-clp');
+      return (inputs) => {
+        const result = calculateDivisaViajeClp({
+          codigo: 'MXN',
+          monto: coerceNumber(inputs.monto),
+          aClp: inputs.direccion !== 'clp_a_mxn',
+          tasaPersonalizada:
+            inputs.tasaPersonalizada != null && String(inputs.tasaPersonalizada) !== ''
+              ? coerceNumber(inputs.tasaPersonalizada)
+              : undefined,
+        });
+        return divisaViajeClpToResults(result);
+      };
+    }
+    case 'boliviano-clp': {
+      const { calculateDivisaViajeClp, divisaViajeClpToResults } = await import('./divisa-viaje-clp');
+      return (inputs) => {
+        const result = calculateDivisaViajeClp({
+          codigo: 'BOB',
+          monto: coerceNumber(inputs.monto),
+          aClp: inputs.direccion !== 'clp_a_bob',
+          tasaPersonalizada:
+            inputs.tasaPersonalizada != null && String(inputs.tasaPersonalizada) !== ''
+              ? coerceNumber(inputs.tasaPersonalizada)
+              : undefined,
+        });
+        return divisaViajeClpToResults(result);
+      };
+    }
     case 'peso-argentino-clp': {
       const { calculatePesoArgentinoClp, pesoArgentinoClpToResults } =
         await import('./peso-argentino-clp');
