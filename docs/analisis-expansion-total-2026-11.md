@@ -12,7 +12,7 @@
 | Datos | `snapshot.json` del 16-11-2026 (UF, UTM, dólar, euro, ARS desde BCentral); `/api/values` en producción responde con `stale:false` | verificado |
 | Sueldo mínimo | `INGRESO_MINIMO` es un valor fijo ($553.553). La Ley 21.830 art. 1 ordena reajuste por IPC desde el **01-01-2027**, con decreto de Hacienda a más tardar el 15-01-2027. Hoy no hay calendario por fecha: el cambio exige editar la constante a mano | verificado (BCN idNorma 1225354, DT Ord. 307/28) |
 | Vencimientos próximos | Topes FCS vigentes hasta 28-02-2027; `DESEMPLEO_INE` caduca el 27-11-2026; tope imponible 2027 (resolución SP de febrero); escalón 4,25 % empleador el 01-08-2027 (ya en calendario) | verificado en `constants.ts` |
-| SIS | 1,62 % en constante vs 1,78 % informado por Previred para ago–oct 2026: sigue pendiente de decisión | pendiente heredado |
+| SIS | Desde ago-2026 el SIS (1,78 % según SP) va dentro del 3,5 % y el código no lo cobra aparte; 1,62 % solo rige antes de ago-2026. Residual: julio-2026 2,00 % (solo Previred) | cerrado 2026-11-18 ([cierre Q4 §5](research/cierre-plan-q4-2026.md)) |
 | SEO on-page | Title, description, canonical y H1 únicos en las 6 URL muestreadas; JSON-LD completo en calculadoras (SoftwareApplication, HowTo, FAQPage, BreadcrumbList, Speakable) | verificado |
 | Peso de página | `/calculadoras` pesa **580 KB de HTML** (388 KB son payload RSC); home 282 KB; `/blog` 265 KB. Una calculadora pesa 118–141 KB | verificado (curl a producción) |
 | JS por página | En producción una calculadora descarga **2,23 MB de JS (640 KB gzip)**: el buscador del header arrastraba el texto completo de artículos, guías y catálogo a todas las páginas. Con este PR (build local): calculadora 0,87 MB (264 KB gzip), home 0,66 MB, blog 0,74 MB, `/calculadoras` 0,64 MB | verificado (suma de chunks referenciados por el HTML) |
@@ -62,7 +62,7 @@ Lo que no entra en este pase queda en [`backlog-ideas.md`](./backlog-ideas.md); 
 | Tema | Qué se hizo | Qué falta decidir |
 |------|-------------|-------------------|
 | Sueldo mínimo 2027 | No se cargó ningún monto. El blog #42 muestra el IPC parcial del INE (abril 112,18; octubre 114,13) y una tabla rotulada como ejercicio hipotético | Si prefieres quitar la tabla de escenarios hasta el decreto de Hacienda (plazo 15-01-2027) |
-| SIS | El código usa 1,62 %; Previred informa 1,78 % para agosto–octubre de 2026. No se cambió | Cuál rige y desde qué remuneración |
+| SIS | Cerrado sin cambio de fórmula: el 1,78 % (SP) está dentro del 3,5 % desde ago-2026 | Nada; residual de julio-2026 en [cierre Q4 §5.1](research/cierre-plan-q4-2026.md) |
 | Compras internacionales: umbral US$500 | Se compara contra el valor de los productos; la base del impuesto sí incluye envío y seguro. Aduanas solo dice "compra hasta US$500" | Confirmar si el umbral considera el envío |
 | Compras internacionales: arancel en compras de hasta US$500 a plataformas no inscritas | Se modeló solo IVA, como indica Aduanas para ese tramo | Confirmar con Aduanas |
 | Compras internacionales: tipo de cambio | Dólar observado como referencia; Aduanas usa el tipo de cambio de la fecha de aceptación de la declaración | Aceptar la referencia o pedir el dólar al usuario |

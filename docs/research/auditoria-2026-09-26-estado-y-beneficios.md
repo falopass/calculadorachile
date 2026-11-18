@@ -76,7 +76,7 @@ Efecto: operación renta y APV calculan el impuesto con exención y tramos disti
 - Código (`SEGURO_SOCIAL_PREVISIONAL.calendario`): 1,0% (ago-2025) → **1,75% (ago-2026)** → … → 7,0% (2033).
 - El blog `cotizacion-empleador-3-5-agosto-2026-costo-pyme` (publicado en el repo) ya dice 3,5%: el código quedó atrás.
 - Afecta: `costo-empleado-pyme`, aportes del empleador en `sueldo-liquido`.
-- **SIS**: la ficha oficial cita "1,5% destinado al SIS" dentro del 8,5% total; Previred (indicadores septiembre 2026) publica **1,78%** para remuneraciones de agosto–octubre 2026 (2,00% en julio; 1,62% abril–junio); spensiones.cl aún publica 1,62%. El código usa 1,62% para las 7 AFP. **Dato a resolver antes de tocar el código** (fuente primaria: Previred mensual).
+- **SIS**: la ficha oficial cita "1,5% destinado al SIS" dentro del 8,5% total; Previred (indicadores septiembre 2026) publica **1,78%** para remuneraciones de agosto–octubre 2026 (2,00% en julio; 1,62% abril–junio); spensiones.cl aún publica 1,62%. El código usa 1,62% para las 7 AFP. **Cerrado 2026-11-18** sin cambio de fórmula: ver [cierre Q4 §5](cierre-plan-q4-2026.md).
 
 ### 1.5 Bono Bodas de Oro: reajuste octubre 2026 ya publicado
 
