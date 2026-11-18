@@ -838,10 +838,12 @@ export async function loadCalculationFn(
 
     case 'prenatal-postnatal': {
       const { calculatePrenatalPostnatal, prenatalPostnatalToResults } = await import('./prenatal-postnatal');
-      const pesos = (valor: string) =>
-        /^(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(valor)
-          ? Number(valor.replace(/\./g, '').replace(',', '.'))
-          : NaN;
+      const pesos = (valor: string) => {
+        if (/^(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(valor)) {
+          return Number(valor.replace(/\./g, '').replace(',', '.'));
+        }
+        return /^\d+\.\d+$/.test(valor) ? Number(valor) : NaN;
+      };
       return (inputs) => {
         const reciente = String(inputs.promedioReciente ?? '').trim();
         const historico = String(inputs.promedioHistorico ?? '').trim();

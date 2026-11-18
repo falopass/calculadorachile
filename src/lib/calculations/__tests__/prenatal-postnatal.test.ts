@@ -200,6 +200,12 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
       format: 'CLP',
       value: 7_000_002,
     });
+    expect(calcular({
+      ...fechas,
+      promedioReciente: '1000000.33',
+      promedioHistorico: '2000000.33',
+      ipcAcumulado: '0',
+    })[0]).toMatchObject({ format: 'CLP', value: 7_000_002 });
     expect(
       calcular({ ...fechas, ...ingresos, promedioReciente: '1.00,33', ipcAcumulado: '0' })[0].format,
     ).toBe('days');
