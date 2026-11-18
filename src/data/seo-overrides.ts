@@ -236,6 +236,36 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     },
   },
 
+  'peso-colombiano-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('COP').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('COP').seoDescription;
+    },
+  },
+
+  'peso-mexicano-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('MXN').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('MXN').seoDescription;
+    },
+  },
+
+  'boliviano-a-peso-chileno': {
+    // Mismo gate que E-050: sin «hoy» si source=fallback/unknown o observación >3 días hábiles
+    get seoTitle() {
+      return seoDivisaViaje('BOB').seoTitle;
+    },
+    get seoDescription() {
+      return seoDivisaViaje('BOB').seoDescription;
+    },
+  },
+
   'peso-argentino-a-chileno': {
     // E-050: meta sin «hoy» si source=fallback o observación >3 días hábiles
     get seoTitle() {

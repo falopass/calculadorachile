@@ -15,7 +15,17 @@ import snapshot from './snapshot.json';
 
 /** Fecha de observación de un indicador (YYYY-MM-DD), no la del generate del snapshot. */
 function observedAsOf(
-  key: 'dolarObservado' | 'euro' | 'pesoArgentino' | 'realBrasileno' | 'solPeruano' | 'uf' | 'utm',
+  key:
+    | 'dolarObservado'
+    | 'euro'
+    | 'pesoArgentino'
+    | 'realBrasileno'
+    | 'solPeruano'
+    | 'pesoColombiano'
+    | 'pesoMexicano'
+    | 'boliviano'
+    | 'uf'
+    | 'utm',
 ): string {
   const map = (snapshot as { observedAsOf?: Partial<Record<string, string>> }).observedAsOf;
   const obs = map?.[key];
@@ -168,10 +178,16 @@ export const PESO_ARGENTINO = {
  * Monedas de viaje BCCh (serie F072.CLP.<ISO>.N.O.D, CLP por 1 unidad, referencial).
  * Mismo gate que PESO_ARGENTINO: `fallback`/`unknown` nunca se presenta como «hoy».
  */
-function divisaViaje<S extends string>(key: 'realBrasileno' | 'solPeruano', serie: S) {
+function divisaViaje<S extends string>(
+  key: 'realBrasileno' | 'solPeruano' | 'pesoColombiano' | 'pesoMexicano' | 'boliviano',
+  serie: S,
+) {
   const snap = snapshot as {
     realBrasileno?: number;
     solPeruano?: number;
+    pesoColombiano?: number;
+    pesoMexicano?: number;
+    boliviano?: number;
     sources?: Partial<Record<string, string>>;
   };
   return {
@@ -186,6 +202,10 @@ function divisaViaje<S extends string>(key: 'realBrasileno' | 'solPeruano', seri
 
 export const REAL_BRASILENO = divisaViaje('realBrasileno', 'F072.CLP.BRL.N.O.D');
 export const SOL_PERUANO = divisaViaje('solPeruano', 'F072.CLP.PEN.N.O.D');
+export const PESO_COLOMBIANO = divisaViaje('pesoColombiano', 'F072.CLP.COP.N.O.D');
+export const PESO_MEXICANO = divisaViaje('pesoMexicano', 'F072.CLP.MXN.N.O.D');
+// BCCh identifica al boliviano (ISO BOB) con BOL en sus códigos de serie.
+export const BOLIVIANO = divisaViaje('boliviano', 'F072.CLP.BOL.N.O.D');
 
 
 // ============================================

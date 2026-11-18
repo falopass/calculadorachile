@@ -1155,6 +1155,21 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         lead: 'Para pasar soles peruanos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.PEN.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
       };
 
+    case 'peso-colombiano-clp':
+      return {
+        lead: 'Para pasar pesos colombianos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.COP.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
+      };
+
+    case 'peso-mexicano-clp':
+      return {
+        lead: 'Para pasar pesos mexicanos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.MXN.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
+      };
+
+    case 'boliviano-clp':
+      return {
+        lead: 'Para pasar bolivianos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.BOL.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
+      };
+
     default:
       return null;
   }

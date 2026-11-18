@@ -151,7 +151,7 @@ async function fromBCentral() {
   };
 
   // Códigos oficiales BCentral
-  const [uf, utm, dolar, euro, ars, brl, pen] = await Promise.all([
+  const [uf, utm, dolar, euro, ars, brl, pen, cop, mxn, bob] = await Promise.all([
     fetchSeries('F073.UFF.PRE.Z.D'),
     fetchSeries('F073.UTR.PRE.Z.M'),
     fetchSeries('F073.TCO.PRE.Z.D'),
@@ -162,6 +162,10 @@ async function fromBCentral() {
     // Monedas de viaje — nominal referencial (CLP por 1 unidad).
     fetchSeries('F072.CLP.BRL.N.O.D'),
     fetchSeries('F072.CLP.PEN.N.O.D'),
+    fetchSeries('F072.CLP.COP.N.O.D'),
+    fetchSeries('F072.CLP.MXN.N.O.D'),
+    // BCCh usa BOL para el boliviano (ISO BOB).
+    fetchSeries('F072.CLP.BOL.N.O.D'),
   ]);
   return {
     uf: uf?.value ?? null,
@@ -171,6 +175,9 @@ async function fromBCentral() {
     pesoArgentino: ars?.value ?? null,
     realBrasileno: brl?.value ?? null,
     solPeruano: pen?.value ?? null,
+    pesoColombiano: cop?.value ?? null,
+    pesoMexicano: mxn?.value ?? null,
+    boliviano: bob?.value ?? null,
     ipcMensual: null, // BCentral expone IPC en otro endpoint; lo dejamos a Mindicador
     asOf: today.toISOString(),
     dates: {
@@ -181,6 +188,9 @@ async function fromBCentral() {
       pesoArgentino: ars?.date ?? null,
       realBrasileno: brl?.date ?? null,
       solPeruano: pen?.date ?? null,
+      pesoColombiano: cop?.date ?? null,
+      pesoMexicano: mxn?.date ?? null,
+      boliviano: bob?.date ?? null,
     },
   };
 }
@@ -336,6 +346,9 @@ async function main() {
   const pesoArgentino = pickFirst('pesoArgentino', sourcesByPriority);
   const realBrasileno = pickFirst('realBrasileno', sourcesByPriority);
   const solPeruano = pickFirst('solPeruano', sourcesByPriority);
+  const pesoColombiano = pickFirst('pesoColombiano', sourcesByPriority);
+  const pesoMexicano = pickFirst('pesoMexicano', sourcesByPriority);
+  const boliviano = pickFirst('boliviano', sourcesByPriority);
   const ipc = pickFirst('ipcMensual', sourcesByPriority);
 
   if (uf.value == null && utm.value == null && dolar.value == null) {
@@ -371,6 +384,9 @@ async function main() {
     pesoArgentino: (typeof pesoArgentino !== 'undefined' ? pesoArgentino.value : null) ?? previous.pesoArgentino ?? null,
     realBrasileno: realBrasileno.value ?? previous.realBrasileno ?? null,
     solPeruano: solPeruano.value ?? previous.solPeruano ?? null,
+    pesoColombiano: pesoColombiano.value ?? previous.pesoColombiano ?? null,
+    pesoMexicano: pesoMexicano.value ?? previous.pesoMexicano ?? null,
+    boliviano: boliviano.value ?? previous.boliviano ?? null,
     ipcMensual: ipc.value ?? previous.ipcMensual ?? null,
     asOf,
     /** Fecha de la observación por serie (YYYY-MM-DD), distinta del asOf del job. */
@@ -382,6 +398,9 @@ async function main() {
       pesoArgentino: pickObs('pesoArgentino'),
       realBrasileno: pickObs('realBrasileno'),
       solPeruano: pickObs('solPeruano'),
+      pesoColombiano: pickObs('pesoColombiano'),
+      pesoMexicano: pickObs('pesoMexicano'),
+      boliviano: pickObs('boliviano'),
     },
     sources: {
       uf: uf.source,
@@ -391,6 +410,9 @@ async function main() {
       pesoArgentino: pesoArgentino.source,
       realBrasileno: realBrasileno.source,
       solPeruano: solPeruano.source,
+      pesoColombiano: pesoColombiano.source,
+      pesoMexicano: pesoMexicano.source,
+      boliviano: boliviano.source,
       ipcMensual: ipc.source,
     },
     generatedAt: new Date().toISOString(),

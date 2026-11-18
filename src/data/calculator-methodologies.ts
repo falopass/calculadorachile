@@ -1662,6 +1662,54 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'No incluye comisiones ni spreads de la operación.',
     ],
   },
+  'peso-colombiano-clp': {
+    summary:
+      'Convierte entre pesos colombianos y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.COP.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 COP del snapshot diario (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en COP para obtener CLP (redondeo al peso), o divide los CLP por la tasa para la dirección inversa (2 decimales).',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.COP.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio, bancos o tarjetas.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
+  'peso-mexicano-clp': {
+    summary:
+      'Convierte entre pesos mexicanos y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.MXN.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 MXN del snapshot diario (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en MXN para obtener CLP (redondeo al peso), o divide los CLP por la tasa para la dirección inversa (2 decimales).',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.MXN.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio, bancos o tarjetas.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
+  'boliviano-clp': {
+    summary:
+      'Convierte entre bolivianos y pesos chilenos con el tipo de cambio nominal diario del Banco Central (serie F072.CLP.BOL.N.O.D), de carácter referencial.',
+    calculationSteps: [
+      'Obtiene la tasa CLP por 1 BOB del snapshot diario (o una tasa personalizada si se inyecta).',
+      'Multiplica el monto en BOB para obtener CLP (redondeo al peso), o divide los CLP por la tasa para la dirección inversa (2 decimales).',
+      'Si la fuente es de respaldo o la observación supera 3 días hábiles, etiqueta el resultado como referencial de esa fecha, no como «hoy».',
+    ],
+    assumptions: [
+      'La tasa corresponde a la serie F072.CLP.BOL.N.O.D del Banco Central de Chile.',
+    ],
+    limitations: [
+      'El valor del BCCh es referencial y puede diferir de la cotización de casas de cambio, bancos o tarjetas.',
+      'No incluye comisiones ni spreads de la operación.',
+    ],
+  },
   aguinaldo: {
     summary:
       'Estima el aguinaldo de Fiestas Patrias 2026 o el bono de escolaridad del sector público según la Ley 21.806, o una referencia de Navidad 2025; el régimen de pensionados IPS se cita aparte (ChileAtiende).',
