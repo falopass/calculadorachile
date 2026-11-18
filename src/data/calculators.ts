@@ -5531,12 +5531,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'prenatal-postnatal',
     name: 'Calculadora Prenatal y Postnatal',
     description:
-      'Calcula las fechas de inicio y término del prenatal, postnatal y postnatal parental desde la fecha probable de parto o la fecha real, con parto prematuro, múltiple y media jornada.',
+      'Calcula las fechas del prenatal, postnatal y postnatal parental. Si eres trabajadora dependiente del sector privado, también puedes estimar el subsidio maternal en pesos.',
     slug: 'calculadora-prenatal-postnatal',
     category: 'familia',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-11-17',
+    lastReviewed: '2026-11-18',
     sources: [
       {
         name: 'BCN — Código del Trabajo, arts. 195, 196, 197 bis y 201',
@@ -5556,6 +5556,23 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         url: 'https://www.suseso.gob.cl/622/w3-propertyvalue-771708.html',
         note: 'El prenatal comienza en la sexta semana anterior a la fecha probable de parto y el postnatal el día del parto',
       },
+      {
+        name: 'BCN — DFL N.º 44, arts. 7, 8, 10, 16 y 17',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=4252',
+        note: 'Remuneración neta, cálculo diario, tope reajustado por IPC y mínimo legal',
+      },
+      {
+        name: 'SUSESO — Compendio: cálculo de subsidios maternales',
+        url: 'https://www.suseso.gob.cl/622/w3-propertyvalue-771668.html',
+      },
+      {
+        name: 'SUSESO — Dictamen 22123-2012: mínimo a media jornada',
+        url: 'https://www-cloud.suseso.cl/612/w3-article-37294.html',
+      },
+      {
+        name: 'INE — Calculadora IPC',
+        url: 'https://calculadoraipc.ine.gob.cl/',
+      },
     ],
     keywords: [
       'calculadora prenatal',
@@ -5565,6 +5582,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'postnatal media jornada',
       'prenatal postnatal chile',
       'fuero maternal fecha',
+      'calcular subsidio maternal',
     ],
     inputs: [
       {
@@ -5608,6 +5626,30 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: false,
         defaultValue: false,
       },
+      {
+        id: 'promedioReciente',
+        label: 'Promedio mensual neto reciente',
+        type: 'text',
+        unit: 'CLP',
+        placeholder: 'Ej.: 900.000',
+        tooltip: 'Promedia los 3 meses con remuneración neta y/o subsidios más próximos a la licencia, dentro de los 6 meses anteriores. Usa la remuneración sujeta a cotización (con el tope de cada mes), resta cotizaciones personales e impuestos y excluye pagos ocasionales.',
+      },
+      {
+        id: 'promedioHistorico',
+        label: 'Promedio mensual neto para el tope',
+        type: 'text',
+        unit: 'CLP',
+        placeholder: 'Ej.: 800.000',
+        tooltip: 'Usa los 3 meses con ingresos más próximos entre los 6 meses anteriores al séptimo mes previo a la licencia. Si hubo ingresos en solo 1 o 2 meses, promedia esos meses. Si no hubo, ingresa 0.',
+      },
+      {
+        id: 'ipcAcumulado',
+        label: 'Variación acumulada del IPC',
+        type: 'text',
+        unit: 'percent',
+        placeholder: 'Ej.: 2,5',
+        tooltip: 'En la calculadora del IPC del INE, compara el índice del noveno mes anterior a la licencia con el del segundo mes anterior. Copia la variación del período, incluso si es negativa. Si el promedio para el tope es 0, puedes dejarlo vacío.',
+      },
     ],
     faq: [
       {
@@ -5638,7 +5680,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿La calculadora muestra el monto del subsidio?',
         answer:
-          'No. El subsidio maternal depende de tus remuneraciones de los meses previos y de topes imponibles; consulta el monto con la entidad que paga tu licencia (Compin, Isapre o caja de compensación). Esta calculadora solo muestra las fechas legales.',
+          'Sí. La estimación opcional muestra el monto diario inicial y el total del prenatal, postnatal y postnatal parental para trabajadoras dependientes del sector privado con un solo empleador. Si solo buscas las fechas, deja vacíos los campos de ingresos e IPC. La entidad pagadora determina el monto definitivo.',
       },
     ],
   },

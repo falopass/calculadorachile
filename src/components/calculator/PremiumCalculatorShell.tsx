@@ -63,6 +63,7 @@ const ORGANISMO_BY_ID: Record<string, string> = {
   'credito-consumo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'interes-compuesto': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'deposito-a-plazo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
+  'prenatal-postnatal': 'la SUSESO o la entidad que paga tu licencia',
 };
 
 /** Calculadoras cuyos resultados no son partes de un total (gráfico sin sentido). */
@@ -73,6 +74,7 @@ const SIN_GRAFICO = new Set([
   'puntaje-nem-ranking',
   'dias-habiles',
   'ipc',
+  'prenatal-postnatal',
 ]);
 
 const CALC_DEBOUNCE_MS = 200;
@@ -349,10 +351,17 @@ function renderInput(
           key={input.id}
           label={input.label}
           type="text"
-          value={value as string}
+          value={typeof value === 'string' ? value : ''}
+          inputMode={
+            input.unit === 'CLP' ? 'numeric' : input.unit === 'percent' ? 'decimal' : undefined
+          }
+          prefix={input.unit ? UNIT_TO_PREFIX[input.unit] : undefined}
+          suffix={input.unit ? UNIT_TO_SUFFIX[input.unit] : undefined}
           onChange={handleChange}
           placeholder={input.placeholder}
           required={input.required}
+          helperText={input.unit ? input.tooltip : undefined}
+          tooltip={input.unit ? undefined : input.tooltip}
           error={error}
         />
       );
@@ -430,7 +439,7 @@ function hasSignificantInputValues(
     if (input.type === 'number') return (value as number) > 0;
     if (input.type === 'select') return value !== '' && value !== undefined;
     if (input.type === 'boolean') return value === true;
-    if (input.type === 'text') return (value as string).trim().length > 0;
+    if (input.type === 'text') return typeof value === 'string' && value.trim().length > 0;
     return false;
   });
 }
@@ -668,7 +677,9 @@ export default function PremiumCalculatorShell({
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
-                Opciones avanzadas ({optionalInputs.length})
+                {calculator.id === 'prenatal-postnatal'
+                  ? 'Fecha real del parto y subsidio maternal (opcional)'
+                  : `Opciones avanzadas (${optionalInputs.length})`}
               </span>
               <span className="hidden sm:inline text-xs text-[var(--foreground-muted)]">Mostrar/ocultar</span>
             </summary>
