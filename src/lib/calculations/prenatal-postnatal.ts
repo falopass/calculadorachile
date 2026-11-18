@@ -288,7 +288,7 @@ export function prenatalPostnatalToResults(r: PrenatalPostnatalResult): Calculat
         format: 'CLP',
         highlight: true,
         note: {
-          text: 'Para trabajadoras dependientes del sector privado con un solo empleador y licencias maternales continuas. No verifica si tienes derecho al subsidio ni proyecta reajustes del ingreso mínimo. No incluye sueldo por media jornada.',
+          text: 'Para trabajadoras dependientes del sector privado con un solo empleador y licencias maternales continuas. No verifica si tienes derecho al subsidio ni proyecta reajustes del ingreso mínimo. No incluye sueldo por media jornada. El enlace compartido conserva las fechas, no los datos del subsidio.',
           source: { name: 'DFL N.º 44, arts. 8, 16 y 17 (BCN)', url: DFL_44_URL },
         },
       },
