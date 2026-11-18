@@ -101,6 +101,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | 2026-11-16 | impuestos | boleta-honorarios, cotizacion-independientes |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
+| 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | 2026-11-18 | impuestos | iva, ppm, boleta-honorarios |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
@@ -128,7 +129,6 @@ Ordenado por **fecha de publicación sugerida**.
 | 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] · Ventana perdida (vence 30 sep); cubierto dentro de #29 | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
 | ~~12~~ | blog | ~~Boleta honorarios retención 15,25%~~ | ~~`boleta-honorarios-retencion-15-25-2026`~~ | publicado 2026-11-16 | impuestos | ~~2026-09-08~~ | continuo | ✅ |
 | 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
-| 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | satélite iva-boleta | impuestos | 2026-09-11 | ~día 12 | **P2-ventana** |
 | 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
 | 14 | blog | Subsidio crédito hipotecario MINVU | `subsidio-credito-hipotecario-minvu-dividendo-2026` | satélite hipoteca | vivienda | 2026-09-15 | sep–may 2027 | **P2-ventana** |
 | 15 | blog | Gratificación legal tope 4,75 IMM | `gratificacion-legal-tope-2026-ingreso-minimo` | evergreen blog | laboral | 2026-09-18 | sep–dic | **P2-ventana** |
@@ -283,7 +283,6 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 
 | # | Slug | Nota |
 |---|------|------|
-| 13 | `formulario-29-iva-mensual-plazos-2026` | Inventario F29; evergreen IVA |
 | 14 | `subsidio-credito-hipotecario-minvu-dividendo-2026` | Inventario MINVU; no es DR[28] |
 | 15 | `gratificacion-legal-tope-2026-ingreso-minimo` | Inventario + evergreen |
 | 17 | `uf-utm-convertir-chile-2026-usos` | Evergreen UF; valores live del sitio |
@@ -371,9 +370,9 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo:
-  Publicados:                   15  (todos blog; +#4, #5, #8 y #9 el 2026-08-12; +#12, #34, #35 y #36 el 2026-11-16)
-  Pendientes:                   33
-    blog:                       31
+  Publicados:                   16  (todos blog; +#4, #5, #8 y #9 el 2026-08-12; +#12, #34, #35 y #36 el 2026-11-16; +#13 el 2026-11-18)
+  Pendientes:                   32
+    blog:                       30
     blog* (candidata guía):      2   (#47, #48)
     guía:                        1   (#39 Operación Renta)
     P1 restante:                 0

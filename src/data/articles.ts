@@ -6028,6 +6028,160 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/38913-aporte-familiar-permanente" target="_blank" rel="noopener">ficha del Aporte Familiar Permanente de ChileAtiende</a>.</p>`,
   },
+  {
+    slug: 'formulario-29-iva-mensual-plazos-2026',
+    title: 'Formulario 29: plazos del IVA mensual en 2026 y qué incluye la declaración',
+    seoTitle: 'Formulario 29 2026: plazo día 12, 20 y 28 para declarar IVA',
+    description:
+      'Cuándo vence el Formulario 29 del SII: día 12, día 20 para facturadores electrónicos que pagan por internet y día 28 sin pago. Fechas de noviembre y diciembre 2026, IVA, PPM y multas por atraso.',
+    seoDescription:
+      'F29 2026: vence el día 12, el 20 si eres facturador electrónico y pagas en sii.cl, o el 28 sin pago. Fechas del calendario SII, IVA, PPM y multas.',
+    date: '2026-11-18',
+    updatedAt: '2026-11-18',
+    category: 'impuestos',
+    readingTime: 9,
+    keywords: [
+      'formulario 29',
+      'f29 plazo',
+      'f29 día 20',
+      'declaración mensual iva',
+      'plazo iva sii 2026',
+      'f29 sin movimiento',
+      'ppm formulario 29',
+      'multa f29 atrasado',
+    ],
+    relatedCalculators: ['calculadora-iva', 'calculadora-ppm', 'calculadora-boleta-honorarios'],
+    relatedGuia: 'iva-boleta-honorarios-chile',
+    embedCalculatorId: 'iva',
+    faq: [
+      {
+        question: '¿Hasta qué día se puede declarar el Formulario 29?',
+        answer:
+          'La regla general del SII es hasta el día 12 del mes siguiente al período que se declara. Si declaras y pagas por sii.cl y eres facturador electrónico de primera categoría o emisor de boletas de honorarios electrónicas, el plazo es el día 20. Las declaraciones por internet sin pago vencen el día 28. Si el día 12 o el 20 cae en sábado, domingo, feriado o 31 de diciembre, se corre al primer día hábil siguiente.',
+      },
+      {
+        question: '¿Qué es un F29 sin movimiento?',
+        answer:
+          'Es la declaración de un mes en que no hubo ventas, compras ni otros impuestos que informar. Igual debe presentarse si estás afecto a declarar, solo por internet en sii.cl, y su plazo es el día 28 del mes siguiente.',
+      },
+      {
+        question: '¿El PPM se paga en el mismo Formulario 29?',
+        answer:
+          'Sí. El F29 reúne el IVA, los pagos provisionales mensuales (PPM), las retenciones y otros impuestos mensuales. El PPM se calcula sobre los ingresos brutos del mes sin IVA, según el artículo 29 de la Ley sobre Impuesto a la Renta.',
+      },
+      {
+        question: '¿Qué pasa si declaro el F29 fuera de plazo?',
+        answer:
+          'El impuesto se reajusta por IPC y devenga interés penal por mora (artículo 53 del Código Tributario). Además hay multa: si se trata de impuestos de retención o recargo, como el IVA, es de 10% de lo adeudado, más 2% por cada mes o fracción de retardo, con tope de 30% (artículo 97 N° 11).',
+      },
+    ],
+    sources: [
+      {
+        label: 'SII — Plazos de declaración de IVA (pregunta frecuente 001.130.1060)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm',
+      },
+      {
+        label: 'SII — Guía del Formulario 29',
+        url: 'https://www.sii.cl/pagina/iva/guia_f29.htm',
+      },
+      {
+        label: 'SII — Calendario de IVA (PPM)',
+        url: 'https://misii.sii.cl/cgi_calendario/calendario.cgi',
+      },
+      {
+        label: 'SII — Base imponible del PPM (pregunta frecuente 001.130.1908)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm',
+      },
+      {
+        label: 'BCN — Código Tributario (DL 830), artículos 36, 53 y 97',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6374',
+      },
+    ],
+    content: `
+<p>El <strong>Formulario 29 (F29)</strong> es la declaración mensual que presentan ante el Servicio de Impuestos Internos (SII) las empresas, pymes y personas con inicio de actividades. Su plazo general vence el <strong>día 12 del mes siguiente</strong> al período que se declara: las ventas de octubre se declaran en noviembre, las de noviembre en diciembre. Pero no todos tienen la misma fecha. Según cómo declares y pagues, el vencimiento puede ser el día 12, el 20 o el 28, y se corre cuando cae en fin de semana o feriado.</p>
+<p>Esta nota explica cuál de esos plazos te toca, qué impuestos van dentro del F29, cómo se calcula lo que pagas y qué cuesta atrasarse. Las fechas vienen de la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">pregunta frecuente del SII sobre plazos de IVA</a> (actualizada el 17 de junio de 2025) y del <a href="https://misii.sii.cl/cgi_calendario/calendario.cgi" target="_blank" rel="noopener">calendario de IVA (PPM) del SII</a>, consultados el 18 de noviembre de 2026.</p>
+
+<h2>Los tres plazos del F29: día 12, día 20 y día 28</h2>
+<p>El SII distingue tres situaciones. La diferencia no está en el tamaño de la empresa, sino en el medio de declaración, si hay pago y si emites documentos electrónicos.</p>
+<table>
+<thead><tr><th>Situación</th><th>Vence</th><th>Quién</th></tr></thead>
+<tbody>
+<tr><td>Regla general, con pago</td><td>Día 12 del mes siguiente</td><td>Cualquier contribuyente que declara y paga, por internet o en papel</td></tr>
+<tr><td>Con pago por internet, contribuyente que cumple requisitos</td><td>Día 20 del mes siguiente</td><td>Facturadores electrónicos de primera categoría, o contribuyentes de segunda categoría que emiten boletas de honorarios electrónicas, que declaran y pagan en sii.cl</td></tr>
+<tr><td>Sin pago (incluye sin movimiento)</td><td>Día 28 del mes siguiente</td><td>Declaraciones por internet cuyo total a pagar es cero</td></tr>
+</tbody>
+</table>
+<p>Para el plazo del día 20, el SII exige las dos condiciones a la vez: <strong>declarar y pagar a través de sii.cl</strong> y estar en uno de esos dos grupos de emisores electrónicos. El SII también admite en este grupo a quienes, por su actividad, no están obligados a emitir documentación tributaria. Si pagas en un banco con formulario en papel, o no eres facturador electrónico, tu plazo es el día 12 aunque declares por internet.</p>
+<p>El día 28 aplica a la declaración <strong>sin pago</strong>: aquella en que el código 91 (total a pagar dentro del plazo) queda en cero. Eso pasa cuando el crédito fiscal del mes cubre todo el débito y no hay otros impuestos, o cuando el mes fue <strong>sin movimiento</strong>. El SII aclara que la declaración sin movimiento se presenta solo de forma electrónica.</p>
+
+<h2>Cuando el plazo cae en fin de semana o feriado</h2>
+<p>El artículo 36 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=6374" target="_blank" rel="noopener">Código Tributario</a> dispone que si el plazo de declaración y pago vence en día feriado, sábado o el 31 de diciembre, se prorroga hasta el <strong>primer día hábil siguiente</strong>. Por eso las fechas reales del calendario del SII no siempre coinciden con el 12 o el 20. En 2026, por ejemplo, el plazo general de marzo se movió al lunes 13 de abril, porque el 12 fue domingo, y el plazo del día 20 de junio pasó al lunes 22.</p>
+<p>Hay un matiz: esa prórroga no cuenta para calcular los reajustes. Si no pagas dentro del plazo prorrogado, el reajuste se determina como si el vencimiento hubiera sido el día original (artículo 53 del mismo código).</p>
+
+<h2>Fechas del F29 que quedan en 2026</h2>
+<p>Estas son las fechas que publica el calendario del SII para los dos vencimientos que quedan en el año. "Pago en línea" es el pago directo en sii.cl; el SII fija para el pago con mandato (cargo automático en cuenta, PEC) un día antes de cada una de estas fechas.</p>
+<table>
+<thead><tr><th>Período declarado</th><th>Regla general (con pago)</th><th>Día 20 (cumple requisitos)</th><th>Sin pago</th></tr></thead>
+<tbody>
+<tr><td>Octubre 2026</td><td>Jueves 12 de noviembre</td><td>Viernes 20 de noviembre</td><td>Sábado 28 de noviembre</td></tr>
+<tr><td>Noviembre 2026</td><td>Lunes 14 de diciembre</td><td>Lunes 21 de diciembre</td><td>Lunes 28 de diciembre</td></tr>
+</tbody>
+</table>
+<p>En diciembre los dos plazos con pago se corren: el 12 cae sábado y el 20 cae domingo. El IVA de diciembre de 2026 se declara en enero de 2027; al 18 de noviembre de 2026 el calendario del SII aún no publica esas fechas. Aplicando la regla general, el 12 de enero de 2027 es martes y el 20 es miércoles, así que no deberían moverse, pero confirma en el calendario oficial antes de esa fecha.</p>
+
+<h2>Qué se declara en el Formulario 29</h2>
+<p>Aunque se le conoce como "la declaración del IVA", el F29 es más amplio. Según la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29 del SII</a>, en él se declaran y pagan mensualmente:</p>
+<ul>
+<li><strong>IVA:</strong> el débito fiscal de tus ventas y servicios menos el crédito fiscal de tus compras con factura.</li>
+<li><strong>PPM:</strong> los pagos provisionales mensuales, un abono anticipado al impuesto a la renta que se liquida en la Operación Renta de abril.</li>
+<li><strong>Retenciones:</strong> por ejemplo, el impuesto único de segunda categoría retenido a trabajadores y las retenciones de boletas de honorarios recibidas.</li>
+<li><strong>Otros impuestos mensuales</strong> que correspondan a la actividad, como impuestos adicionales a ciertos productos.</li>
+</ul>
+<p>Si emites documentos electrónicos, el SII muestra una propuesta de F29 armada con tus facturas y boletas registradas. Sirve como punto de partida, pero la responsabilidad de revisar que esté completa, por ejemplo con compras pendientes de aceptar en el Registro de Compras, sigue siendo tuya.</p>
+
+<h2>Cómo se calcula el IVA a pagar</h2>
+<p>El IVA es de 19% sobre el valor neto. Lo que pagas en el F29 es la diferencia entre el IVA que cobraste y el que pagaste a proveedores. Un ejemplo con montos redondos para un mes:</p>
+<table>
+<thead><tr><th>Concepto</th><th>Neto</th><th>IVA 19%</th></tr></thead>
+<tbody>
+<tr><td>Ventas con factura y boleta</td><td>$5.000.000</td><td>$950.000 (débito fiscal)</td></tr>
+<tr><td>Compras con factura</td><td>$3.000.000</td><td>$570.000 (crédito fiscal)</td></tr>
+<tr><td><strong>IVA a pagar</strong></td><td></td><td><strong>$380.000</strong></td></tr>
+</tbody>
+</table>
+<p>Si el crédito supera al débito, no hay IVA a pagar y el saldo queda como remanente de crédito fiscal para el mes siguiente. Para separar el neto del IVA en cada documento puedes usar la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a>, que convierte montos netos a brutos y al revés.</p>
+
+<h2>El PPM dentro del F29</h2>
+<p>El PPM se calcula aplicando una tasa sobre los <strong>ingresos brutos del mes sin IVA</strong>. Así lo indica la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">pregunta frecuente del SII sobre la base del PPM</a>, que remite al artículo 29 de la Ley sobre Impuesto a la Renta. En el ejemplo anterior, la base sería $5.000.000, no $5.950.000.</p>
+<p>La tasa depende de tu régimen tributario y de tu historial: para la mayoría de las empresas el SII la recalcula según el impuesto del año anterior, y la que te corresponde aparece en la propuesta de F29. Si tu tasa fuera, por ejemplo, 1%, el PPM del mes sería $50.000 y el total del F29 sumaría $430.000. Puedes estimarlo con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>, ingresando tu tasa real.</p>
+<p>Los trabajadores independientes que emiten boletas de honorarios sin retención (porque el cliente es una persona natural) también enteran su pago provisional en el F29, con la misma tasa de la retención vigente. En 2026 esa tasa es 15,25%, como explicamos en la nota sobre la <a href="/blog/boleta-honorarios-retencion-15-25-2026">retención de boletas de honorarios 2026</a>.</p>
+
+<h2>Qué pasa si declaras o pagas atrasado</h2>
+<p>El Código Tributario fija tres costos que se suman al impuesto:</p>
+<ol>
+<li><strong>Reajuste por IPC</strong> (artículo 53): el impuesto se actualiza según la variación del IPC. Si pagas fuera de plazo pero dentro del mismo mes calendario del vencimiento, no hay reajuste.</li>
+<li><strong>Interés penal por mora</strong> (artículo 53): se calcula por cada día de retraso sobre el monto reajustado. El SII publica la tasa vigente en su sección de <a href="https://www.sii.cl/valores_y_fechas/index_valores_y_fechas.html" target="_blank" rel="noopener">valores y fechas</a>.</li>
+<li><strong>Multa</strong> (artículo 97): para el IVA y otros impuestos de retención o recargo, el retardo en enterarlos se sanciona con 10% de lo adeudado, que aumenta 2% por cada mes o fracción de mes de retardo, con un máximo de 30% (N° 11). Si el atraso es solo en presentar una declaración que es base de un impuesto, la multa es de 10% hasta los 5 meses y luego sube 2% por mes, también con tope de 30% (N° 2).</li>
+</ol>
+<p>En el ejemplo de $380.000 de IVA, la multa base por atraso sería de $38.000 antes de reajuste e intereses, y podría llegar a $114.000 si el retardo se prolonga. Atrasarse con un F29 sin pago o sin movimiento tiene una multa distinta, de una UTM a una UTA, porque no hay impuesto inmediato que pagar.</p>
+
+<h2>Checklist antes de presentar el F29</h2>
+<ol>
+<li><strong>Identifica tu plazo:</strong> día 12, día 20 o día 28, según si pagas en sii.cl, si eres emisor electrónico y si hay monto a pagar.</li>
+<li><strong>Revisa el calendario del SII</strong> del mes: si tu fecha cae en fin de semana o feriado, se corre al día hábil siguiente.</li>
+<li><strong>Cuadra ventas y compras</strong> con el Registro de Compras y Ventas; acepta o reclama las facturas recibidas que falten.</li>
+<li><strong>Calcula el IVA</strong> neto contra bruto con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> y verifica el remanente del mes anterior.</li>
+<li><strong>Estima el PPM</strong> sobre ventas sin IVA con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> y tu tasa de la propuesta.</li>
+<li><strong>Declara aunque no haya movimiento</strong>: un mes en cero también se presenta, a más tardar el día 28.</li>
+</ol>
+<p>El F29 no exige grandes cálculos, pero sí orden: la mayoría de los recargos aparecen por confundir el día 20 con un plazo que aplica a todos, o por olvidar declarar un mes sin ventas. Conocer cuál de las tres fechas te corresponde evita multas que, en un mes normal, pueden ser más altas que el costo de un contador.</p>
+<p>Para el panorama completo de IVA, boletas y PPM revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a> y la <a href="/blog/guia-iva-chile-2026">guía del IVA en Chile 2026</a>.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no reemplaza la asesoría de un contador. Las fechas pueden cambiar por resolución del SII o por feriados; confirma siempre en el calendario oficial antes de declarar.</p></div></aside>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 18 de noviembre de 2026 con la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">pregunta frecuente del SII sobre plazos de IVA</a>, el <a href="https://misii.sii.cl/cgi_calendario/calendario.cgi" target="_blank" rel="noopener">calendario de IVA (PPM) del SII</a>, la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29</a>, la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">pregunta frecuente sobre la base del PPM</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=6374" target="_blank" rel="noopener">Código Tributario en Ley Chile</a> (artículos 36, 53 y 97).</p>`,
+  },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
 ];
