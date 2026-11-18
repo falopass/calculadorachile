@@ -6115,7 +6115,7 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <p>El día 28 aplica a la declaración <strong>sin pago</strong>: aquella en que el código 91 (total a pagar dentro del plazo) queda en cero. Eso pasa cuando el crédito fiscal del mes cubre todo el débito y no hay otros impuestos, o cuando el mes fue <strong>sin movimiento</strong>. El SII aclara que la declaración sin movimiento se presenta solo de forma electrónica.</p>
 
 <h2>Cuando el plazo cae en fin de semana o feriado</h2>
-<p>El artículo 36 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=6374" target="_blank" rel="noopener">Código Tributario</a> dispone que si el plazo de declaración y pago vence en día feriado, sábado o el 31 de diciembre, se prorroga hasta el <strong>primer día hábil siguiente</strong>. Por eso las fechas reales del calendario del SII no siempre coinciden con el 12 o el 20. En 2026, por ejemplo, el plazo general de marzo se movió al lunes 13 de abril, porque el 12 fue domingo, y el plazo del día 20 de junio pasó al lunes 22.</p>
+<p>El artículo 36 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=6374" target="_blank" rel="noopener">Código Tributario</a> dispone que si el plazo de declaración y pago vence en día feriado, sábado o el 31 de diciembre, se prorroga hasta el <strong>primer día hábil siguiente</strong>. Por eso las fechas reales del calendario del SII no siempre coinciden con el 12 o el 20. En 2026, por ejemplo, el plazo general de marzo se movió al lunes 13 de abril, porque el 12 fue domingo, y el plazo del día 20 de junio pasó al lunes 22. Según el SII, esta prórroga aplica a las declaraciones con pago: el día 28 de las declaraciones sin pago se mantiene aunque caiga en fin de semana.</p>
 <p>Hay un matiz: esa prórroga no cuenta para calcular los reajustes. Si no pagas dentro del plazo prorrogado, el reajuste se determina como si el vencimiento hubiera sido el día original (artículo 53 del mismo código).</p>
 
 <h2>Fechas del F29 que quedan en 2026</h2>
@@ -6153,7 +6153,7 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 
 <h2>El PPM dentro del F29</h2>
 <p>El PPM se calcula aplicando una tasa sobre los <strong>ingresos brutos del mes sin IVA</strong>. Así lo indica la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">pregunta frecuente del SII sobre la base del PPM</a>, que remite al artículo 29 de la Ley sobre Impuesto a la Renta. En el ejemplo anterior, la base sería $5.000.000, no $5.950.000.</p>
-<p>La tasa depende de tu régimen tributario y de tu historial: para la mayoría de las empresas el SII la recalcula según el impuesto del año anterior, y la que te corresponde aparece en la propuesta de F29. Si tu tasa fuera, por ejemplo, 1%, el PPM del mes sería $50.000 y el total del F29 sumaría $430.000. Puedes estimarlo con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>, ingresando tu tasa real.</p>
+<p>La tasa depende de tu régimen tributario y de tu historial: para la mayoría de las empresas el SII la recalcula según el impuesto del año anterior, y la que te corresponde aparece en la propuesta de F29. Si tu tasa fuera, por ejemplo, 1%, el PPM del mes sería $50.000 y el total del F29 sumaría $430.000. Para el F29, la cuenta mensual es directa: ventas netas del mes por tu tasa. La <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> sirve para una estimación anual por tipo de actividad, con tasas de referencia; la tasa exacta de tu empresa es la de tu propuesta F29.</p>
 <p>Los trabajadores independientes que emiten boletas de honorarios sin retención (porque el cliente es una persona natural) también enteran su pago provisional en el F29, con la misma tasa de la retención vigente. En 2026 esa tasa es 15,25%, como explicamos en la nota sobre la <a href="/blog/boleta-honorarios-retencion-15-25-2026">retención de boletas de honorarios 2026</a>.</p>
 
 <h2>Qué pasa si declaras o pagas atrasado</h2>
@@ -6168,10 +6168,10 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <h2>Checklist antes de presentar el F29</h2>
 <ol>
 <li><strong>Identifica tu plazo:</strong> día 12, día 20 o día 28, según si pagas en sii.cl, si eres emisor electrónico y si hay monto a pagar.</li>
-<li><strong>Revisa el calendario del SII</strong> del mes: si tu fecha cae en fin de semana o feriado, se corre al día hábil siguiente.</li>
+<li><strong>Revisa el calendario del SII</strong> del mes: si tu fecha con pago (día 12 o día 20) cae en fin de semana o feriado, se corre al día hábil siguiente. El día 28 sin pago no se corre: en noviembre de 2026 vence el sábado 28.</li>
 <li><strong>Cuadra ventas y compras</strong> con el Registro de Compras y Ventas; acepta o reclama las facturas recibidas que falten.</li>
 <li><strong>Calcula el IVA</strong> neto contra bruto con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> y verifica el remanente del mes anterior.</li>
-<li><strong>Estima el PPM</strong> sobre ventas sin IVA con la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> y tu tasa de la propuesta.</li>
+<li><strong>Calcula el PPM</strong> multiplicando las ventas netas del mes, sin IVA, por la tasa de tu propuesta F29; para una estimación anual usa la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a>.</li>
 <li><strong>Declara aunque no haya movimiento</strong>: un mes en cero también se presenta, a más tardar el día 28.</li>
 </ol>
 <p>El F29 no exige grandes cálculos, pero sí orden: la mayoría de los recargos aparecen por confundir el día 20 con un plazo que aplica a todos, o por olvidar declarar un mes sin ventas. Conocer cuál de las tres fechas te corresponde evita multas que, en un mes normal, pueden ser más altas que el costo de un contador.</p>
