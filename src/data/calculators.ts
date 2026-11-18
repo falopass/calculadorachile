@@ -5570,8 +5570,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         url: 'https://www-cloud.suseso.cl/612/w3-article-37294.html',
       },
       {
-        name: 'INE — Calculadora IPC',
-        url: 'https://calculadoraipc.ine.gob.cl/',
+        name: 'INE — cómo calcular la variación del IPC',
+        url: 'https://www.ine.gob.cl/docs/default-source/%C3%ADndice-de-precios-al-consumidor/metodologias/base-anual-2023-100/5---uso-calculadora-ipc.pdf',
       },
     ],
     keywords: [
