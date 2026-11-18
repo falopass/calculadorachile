@@ -1182,7 +1182,7 @@ const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
     lead: 'El costo de un viaje en auto es la suma del combustible y los peajes o TAG. Para estimar el combustible, divide los kilómetros por el rendimiento en kilómetros por litro y multiplica por el precio del litro que pagarás. Si eliges ida y vuelta, se duplican distancia y peajes; el total se divide entre los pasajeros para repartir el gasto.',
   },
   'peso-argentino-clp': {
-    lead: 'Para convertir pesos argentinos a chilenos, multiplica el monto por la tasa en CLP por ARS; para convertir pesos chilenos a argentinos, divide por esa tasa. El sitio usa el tipo de cambio nominal referencial del Banco Central o la tasa personalizada que ingreses. No equivale necesariamente a la cotización de una casa de cambio o tarjeta ni garantiza una cotización del día.',
+    lead: 'Para convertir pesos argentinos a chilenos, multiplica el monto por la tasa en CLP por ARS; para convertir pesos chilenos a argentinos, divide por esa tasa. El sitio usa el tipo de cambio nominal referencial del Banco Central. No equivale necesariamente a la cotización de una casa de cambio o tarjeta ni garantiza una cotización del día.',
   },
   'operacion-renta': {
     lead: 'El impuesto anual estimado se calcula sobre los ingresos menos los gastos, las cotizaciones obligatorias y el ahorro previsional ingresados. A esa renta tributable se aplica la tabla progresiva anual en UTA. La retención sugerida se muestra por separado: no es una devolución calculada ni reemplaza tu declaración ante el SII o la revisión de las deducciones permitidas.',
