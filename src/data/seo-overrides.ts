@@ -115,7 +115,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-vacaciones-proporcionales': {
-    seoTitle: 'Vacaciones proporcionales 2026: días y pesos por mes', // 52
+    seoTitle: 'Vacaciones proporcionales: calcula días y pago',
     seoDescription:
       'Vacaciones en el finiquito: 1,25 días hábiles por mes, pagados en días corridos con fines de semana y feriados. Tabla de 1 a 11 meses (DT).', // 139
   },
@@ -170,6 +170,18 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoTitle: 'Operación Renta 2026: simula devolución e impuesto', // 50
     seoDescription:
       'Simula tu Operación Renta 2026: Global Complementario, rebaja por intereses hipotecarios y devolución o pago al SII. Guía gratis.', // 131
+  },
+
+  'calculadora-dias-habiles': {
+    seoTitle: 'Días hábiles en Chile: cuenta plazos sin feriados',
+    seoDescription:
+      'Cuenta días hábiles entre fechas o suma un plazo en Chile. Descuenta feriados nacionales y elige cómputo de lunes a viernes o de lunes a sábado.',
+  },
+
+  'calculadora-trabajo-en-feriado': {
+    seoTitle: 'Trabajo en feriado: calcula tu pago o descanso',
+    seoDescription:
+      'Calcula el pago por trabajar un feriado o domingo en Chile según tu jornada. Revisa el valor hora y el descanso compensatorio que corresponda.',
   },
 
   'calculadora-ppm': {
@@ -666,9 +678,14 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
   // E-027: guía nueva /guias/feriados-chile-2027 (H1 = guia.title).
   'feriados-chile-2027': {
-    seoTitle: 'Feriados 2027 en Chile: calendario e irrenunciables', // 51
+    seoTitle: 'Feriados 2027: irrenunciables y fines de semana largos',
     seoDescription:
       'Revisa los feriados de 2027 en Chile: fechas, día de la semana, cuáles son irrenunciables, los fines de semana largos y los feriados regionales.', // 144
+  },
+  'preparacion-operacion-renta-2027-checklist': {
+    seoTitle: 'Operación Renta 2027: checklist y documentos para el SII',
+    seoDescription:
+      'Prepara tu Operación Renta 2027 por ingresos de 2026: documentos, retenciones y declaraciones juradas. Fechas de F22 y devolución aún pendientes.',
   },
   'empresas-pymes-chile': {
     seoTitle: 'Empresas y pymes en Chile 2026: costos e impuestos', // 50
