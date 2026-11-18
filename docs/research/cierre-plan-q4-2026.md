@@ -1,3 +1,9 @@
+
+### 5.1 SIS: residuales tras el cierre (2026-11-18)
+
+- **Julio 2026 (una fuente):** Previred indicadores julio-2026 informa "Nueva Tasa del SIS Remuneraciones Julio: 2,00%" (junio-2026: 1,62%). `AFP[].sis` usa 1,62% para todo período previo a ago-2026, así que la opción "hasta julio 2026" de costo-empleado subestima el SIS de julio en 0,38 pp. No se cambió: la SP no publica la tasa de julio en su ficha y la regla del plan exige dos fuentes. Si aparece el oficio SP de julio, pasar a una tasa SIS por mes de remuneración (abr–jun 1,62%, jul 2,00%) con test.
+- **Honorarios:** la SP indica SIS 1,49% para independientes que cotizan vía retención, año tributario 2026; `RETENCION_HONORARIOS_DISTRIBUCION[2026].sis` usa 1,52%. Solo afecta el desglose informativo; la retención total (15,25%) no cambia. Pendiente de cruzar con la Subsecretaría de Previsión Social.
+- Fuentes Previred (PDF): [jun](https://www.previred.com/wp-content/uploads/2026/06/Indicadores-Previsionales-Previred-Junio-2026v2.pdf), [jul](https://www.previred.com/wp-content/uploads/2026/07/Indicadores-Previsionales-Previred-Julio-2026.pdf), [ago](https://www.previred.com/wp-content/uploads/2026/08/Indicadores-Previsionales-Previred-Agosto-2026.pdf), [sep](https://www.previred.com/wp-content/uploads/2026/09/Indicadores-Previsionales-Previred-Septiembre-2026.pdf), [oct](https://www.previred.com/wp-content/uploads/2026/10/Indicadores-Previsionales-Previred-Octubre-2026.pdf), [nov](https://www.previred.com/wp-content/uploads/2026/11/Indicadores-Previsionales-Previred-Noviembre-2026.pdf).
 # Cierre — Plan de calculadoras y correcciones Q4 2026
 
 | | |
@@ -72,7 +78,7 @@ Solo desde la evidencia del 26-09 (no re-fetchable en la sesión): FONASA tramos
 
 | Tema | Estado | Motivo / siguiente paso |
 |---|---|---|
-| **SIS (B2)** | Sin cambio (1,62%) | Desde ago-2026 el SIS va dentro del 2,5% del Seguro Social (ChileAtiende 130987), así que no se cobra aparte. El 1,78% de Previred es esa porción, no un cargo extra. `AFP[].sis` solo aplica a períodos previos a ago-2026 (Previred además informa 2,00% para julio 2026, no modelado). |
+| **SIS (B2)** | **Cerrado (2026-11-18): sin cambio de fórmula** | Desde remuneraciones de ago-2026 el SIS va dentro del 2,5% del Seguro Social y no se cobra aparte (`incluyeSIS`). SP: "desde agosto de 2026, la tasa vigente del SIS para empleadores [...] es de 1,78%" ([SP — SIS](https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html)); Previred ago-2026: CRP 0,90% + Expectativa de Vida 0,50% + SIS 2,00% = 3,40%; sep y oct: 0,90 + 0,72 + 1,78; nov: 0,90 + 0,71 + 1,79 (siempre 3,40% + 0,1% cuenta individual = 3,5%); [ChileAtiende 130987](https://www.chileatiende.gob.cl/fichas/130987-aportes-del-empleador-al-sistema-de-pensiones) y [145651](https://www.chileatiende.gob.cl/fichas/145651-seguro-de-invalidez-y-sobrevivencia-sis): el SIS está incluido en el 3,5%. El 1,78% es una porción del 2,5%, no un cargo extra; el costo empleador no cambia. Residuales en §5.1. |
 | **SUE (C3)** | Publicada con `noIndex` | Falta el decreto del art. 8 (parámetros: IMM del subsidio, PV y umbral 2,25 IMM). Cuando salga: re-verificar `SUBSIDIO_UNIFICADO_EMPLEO`, quitar `noIndex` y el TODO. |
 | **Becas fase 2 (C7b)** | Verificador de elegibilidad | No calcula el arancel de referencia por carrera, ni BET/BHP/BAR/BVP, ni becas regionales. Fase 2: tabla de aranceles de referencia 2027 cuando se publique. |
 | **Operación renta: UTA** | Limitación documentada | Usa UTM vigente × 12, no la UTA de diciembre del año comercial. |

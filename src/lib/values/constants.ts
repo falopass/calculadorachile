@@ -197,8 +197,9 @@ export const AFP = {
   // del 14-abr-2026, Superintendencia de Pensiones). Antes 1,15%.
   // Desde remuneraciones de agosto 2026 el SIS se financia dentro del
   // 2,5% del Seguro Social (Ley 21.735, ChileAtiende 130987); este valor
-  // solo aplica a períodos anteriores. Previred informa 1,78% para
-  // ago–oct 2026 como parte de ese 2,5%, no como cargo adicional.
+  // solo aplica a períodos anteriores. La SP fija el SIS en 1,78% desde
+  // ago-2026 como parte de ese 2,5%, no como cargo adicional
+  // (docs/research/cierre-plan-q4-2026.md §5).
   capital: { nombre: 'Capital', comision: 1.44, sis: 1.62 },
   cuprum: { nombre: 'Cuprum', comision: 1.44, sis: 1.62 },
   habitat: { nombre: 'Habitat', comision: 1.27, sis: 1.62 },

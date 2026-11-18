@@ -18,7 +18,7 @@
 ### Auditoría de vigencia
 - Fórmulas corregidas del plan Q4-2026 **ya aplicadas** (IUSC con rebajas, tabla UTA, aporte 3,5 %, PGU 75+, SUE indexable).
 - Matriz YM:YL 0 inputs fantasma; gates AdSense 0 fallos.
-- Riesgo residual: discrepancia SIS 1,62 % vs 1,78 % (B2 del plan Q4) sigue marcada como "verificar dos fuentes" — **pendiente, requiere decisión**.
+- SIS 1,62 % vs 1,78 % (B2 del plan Q4): **cerrado sin cambio de fórmula** — desde ago-2026 el SIS (1,78 % según SP) va dentro del 3,5 % del empleador; resuelto el 2026-11-18, ver [cierre Q4 §5](research/cierre-plan-q4-2026.md).
 
 ## 2. Huecos de demanda (Chile, verificado contra oferta de competidores)
 
@@ -57,6 +57,6 @@ Competidores relevantes: **Previred** (domina "indicadores previsionales"), **co
 
 ## 5. Decisiones que requieren revisión de Diego
 
-1. **SIS 1,78 % vs 1,62 %**: Previred reporta 1,78 % para remuneraciones ago–oct 2026; el plan Q4 pedía dos fuentes de acuerdo antes de cambiar. No se tocó. Verificar y decidir.
+1. **SIS 1,78 % vs 1,62 %**: cerrado (SP + Previred + ChileAtiende): el 1,78 % es la porción SIS del Seguro Social incluida en el 3,5 %, no un cargo aparte; resuelto el 2026-11-18, ver [cierre Q4 §5](research/cierre-plan-q4-2026.md). Queda como residual la tasa de julio-2026 (2,00 % según Previred, una fuente).
 2. **Precio de combustible en `costo-viaje`**: no hay API oficial de precio de bencina; la calculadora queda 100 % por input del usuario (con enlace sugerido a precios publicados). ¿Agregar precio referencial editable o dejarlo solo input?
 3. **`valor-hora` y `trabajo-en-feriado`** usan la fórmula DT documentada en haberes.cl/ordinario 4631 y el art. 32; revisar que el redondeo y el factor mínimo 1,5 queden como espera.

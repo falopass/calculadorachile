@@ -57,6 +57,7 @@ afectado.
   código (1,75%) contradice al blog.
 
 ### B2. SIS: resolver discrepancia antes de tocar
+> **Cerrado 2026-11-18** sin cambio de fórmula; resuelto el 2026-11-18, ver [cierre Q4 §5](research/cierre-plan-q4-2026.md).
 - Candidatos: 1,62% (spensiones.cl, valor arrastrado), **1,78% para remuneraciones ago–oct 2026**
   (Previred Indicadores sep-2026), 1,5% (mencionado en ficha 130987 como componente del 8,5% al 2033).
 - **Acción**: verificar en Previred (fuente mensual) y dejar la constante con vigencia mensual; no
