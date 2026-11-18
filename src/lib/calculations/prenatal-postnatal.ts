@@ -100,10 +100,10 @@ function calcularSubsidio(
 ): SubsidioMaternalResult | string {
   const { promedioReciente, promedioHistorico, ipcAcumulado } = input;
   if (!Number.isFinite(promedioReciente) || promedioReciente <= 0) {
-    return 'Ingresa un promedio neto reciente mayor a cero.';
+    return 'Ingresa un promedio neto reciente mayor a cero. Usa coma para los decimales.';
   }
   if (!Number.isFinite(promedioHistorico) || promedioHistorico < 0) {
-    return 'Ingresa el promedio neto para el tope, o 0 si no hubo ingresos en ese período.';
+    return 'Ingresa el promedio neto para el tope, o 0 si no hubo ingresos en ese período. Usa coma para los decimales.';
   }
   if (!Number.isFinite(ipcAcumulado) || ipcAcumulado <= -100) {
     return 'Ingresa la variación acumulada del IPC en porcentaje (por ejemplo, 3,2).';

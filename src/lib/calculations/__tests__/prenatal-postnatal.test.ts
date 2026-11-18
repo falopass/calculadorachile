@@ -209,6 +209,13 @@ describe('Subsidio maternal (DFL 44, arts. 8, 16 y 17)', () => {
     expect(
       calcular({ ...fechas, ...ingresos, promedioReciente: '1.00,33', ipcAcumulado: '0' })[0].format,
     ).toBe('days');
+    const milesIncompletos = calcular({
+      ...fechas, ...ingresos, promedioHistorico: '600.00', ipcAcumulado: '0',
+    });
+    expect(milesIncompletos[0]).toMatchObject({
+      format: 'days',
+      note: { text: expect.stringContaining('Usa coma para los decimales') },
+    });
   });
 
   it('redondea hacia arriba un postnatal que termina exactamente en medio peso', () => {

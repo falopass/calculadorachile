@@ -842,7 +842,8 @@ export async function loadCalculationFn(
         if (/^(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(valor)) {
           return Number(valor.replace(/\./g, '').replace(',', '.'));
         }
-        return /^\d+\.\d+$/.test(valor) ? Number(valor) : NaN;
+        // Evita interpretar un separador de miles a medio escribir como decimal.
+        return /^(?:0|[1-9]\d{3,})\.\d+$/.test(valor) ? Number(valor) : NaN;
       };
       return (inputs) => {
         const reciente = String(inputs.promedioReciente ?? '').trim();
