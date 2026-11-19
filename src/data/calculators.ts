@@ -2164,7 +2164,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'select',
         required: true,
         options: [
-          { value: 'hasta_julio_2026', label: 'Hasta julio 2026: 1% + SIS separado' },
+          { value: 'hasta_julio_2026', label: 'Agosto 2025–junio 2026: 1% + SIS 1,62%' },
+          { value: 'julio_2026', label: 'Julio 2026: 1% + SIS 2,00%' },
           { value: 'desde_agosto_2026', label: 'Desde agosto 2026: 3,5% total con SIS incluido' },
         ],
         defaultValue: 'hasta_julio_2026',
@@ -2179,7 +2180,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué aportes debe pagar el empleador?',
         answer:
-          'Hasta julio de 2026 paga 1% de la reforma previsional más SIS de 1,62%, además de cesantía y mutual. Desde agosto, la cotización previsional total sube a 3,5% e incluye el financiamiento SIS: no se debe sumar SIS otra vez. El 7% de salud se descuenta al trabajador, no es aporte patronal adicional.',
+          'Hasta junio de 2026 la referencia es 1% de la reforma previsional más SIS de 1,62%; en julio, el SIS separado sube a 2,00%. Se agregan cesantía y mutual. Desde agosto, la cotización previsional total sube a 3,5% e incluye el financiamiento SIS: no se debe sumar SIS otra vez. El 7% de salud se descuenta al trabajador, no es aporte patronal adicional.',
       },
       {
         question: '¿Qué significa el factor costo?',

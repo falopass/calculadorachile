@@ -438,7 +438,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Suma remuneración bruta y costos de cargo del empleador para estimar el costo mensual de contratación.',
     calculationSteps: [
       'Parte del sueldo imponible y haberes declarados.',
-      'Calcula cotizaciones y seguros de cargo empresarial.',
+      'Según el período, suma 1% de reforma y SIS separado (referencia hasta junio de 2026: 1,62%; julio: 2,00%), o 3,5% total con SIS incluido desde agosto de 2026.',
       'Agrega beneficios o costos adicionales informados.',
       'Suma los componentes y compara costo empresa con sueldo bruto.',
     ],
