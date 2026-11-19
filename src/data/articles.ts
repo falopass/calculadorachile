@@ -210,6 +210,126 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 
 const articleCatalog: ArticleDraft[] = [
   {
+    slug: 'indemnizacion-anos-servicio-tope-90-uf-2026',
+    title: 'Indemnización por años de servicio: cómo se aplica el tope de 90 UF',
+    description:
+      'Calcula la indemnización por años de servicio en Chile: qué sueldo se usa, cuándo se aplica el tope de 90 UF y cómo contar la antigüedad. Ejemplos en pesos.',
+    date: '2026-11-18',
+    category: 'laboral',
+    readingTime: 8,
+    relatedGuia: 'finiquito-laboral-chile',
+    relatedCalculators: ['calculadora-indemnizacion-anos-servicio', 'calculadora-finiquito'],
+    keywords: [
+      'indemnización por años de servicio',
+      'tope de 90 UF indemnización',
+      'cómo calcular indemnización por años de servicio',
+      'tope de 11 años indemnización',
+    ],
+    sources: [
+      {
+        label: 'BCN — Código del Trabajo (arts. 161 a 163, 172 y 177; art. 7 transitorio)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'Dirección del Trabajo — Cuándo corresponde la indemnización por años de servicio',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Tope de 90 UF de la base mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Pagos incluidos y excluidos de la base',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Remuneraciones variables (Dictamen 75/8)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-84625.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Aplicación del tope de 90 UF a contratos antiguos',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-86852.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Imputación de aportes al Seguro de Cesantía',
+        url: 'https://www.dt.gob.cl/consultas/1613/w3-article-95307.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Despido, finiquito y reserva de derechos',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html',
+      },
+      {
+        label: 'SII — Valores diarios de la UF en 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Las 90 UF son el máximo de todo el finiquito?',
+        answer:
+          'No. Las 90 UF limitan la remuneración mensual que sirve de base para calcular la indemnización legal por años de servicio y la sustitutiva del aviso previo. La indemnización por varios años puede superar 90 UF; el finiquito también puede incluir otros conceptos.',
+      },
+      {
+        question: '¿Se usa la UF del día del despido o la del día del pago?',
+        answer:
+          'Se usa la UF del último día del mes calendario anterior al pago, según el artículo 172 del Código del Trabajo. Para un pago en noviembre de 2026, corresponde la UF del 31 de octubre de 2026.',
+      },
+      {
+        question: '¿Se redondean seis meses exactos a un año más?',
+        answer:
+          'No. El artículo 163 exige una fracción superior a seis meses. Si trabajaste cinco años y seis meses exactos, cuentan cinco años; si superaste por un día los seis meses, cuentan seis, sujeto al tope y a los demás requisitos legales.',
+      },
+    ],
+    content: `
+<p>Si te despidieron por necesidades de la empresa y tu contrato duró al menos un año, la indemnización legal por años de servicio se calcula con una remuneración mensual por cada año indemnizable. El <strong>tope de 90 UF limita esa remuneración mensual, no el total a recibir</strong>. Existe un límite distinto para la antigüedad: en la regla general se pagan hasta 11 mensualidades.</p>
+<p>Para verificar la cifra de un finiquito necesitas tres datos: la base que corresponde según tus liquidaciones, las fechas de inicio y término del contrato y el mes en que se pagará la indemnización. Aquí aplicamos la regla general del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>, revisada en noviembre de 2026. Los sueldos y las antigüedades de los ejemplos son hipotéticos; el valor histórico de la Unidad de Fomento (UF) es el publicado por el SII.</p>
+
+<h2>Primero revisa si te corresponde</h2>
+<p>La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60593.html" target="_blank" rel="noopener">Dirección del Trabajo (DT)</a> indica que la indemnización del artículo 163 procede si el contrato duró <strong>un año o más</strong> y el empleador puso término al contrato por una causal del artículo 161: necesidades de la empresa, establecimiento o servicio, o desahucio del empleador en los casos en que la ley lo permite. La causal debe aparecer en la carta de despido; no se deduce a partir de la antigüedad ni de que se haya emitido un finiquito.</p>
+<p>Si renunciaste o firmaste un mutuo acuerdo, llevar más de un año no genera por sí solo esta indemnización legal. Aun así, un finiquito puede incluir montos adeudados, como vacaciones pendientes o remuneraciones devengadas. También puede haber un pago pactado. Si existe una cláusula de indemnización en tu contrato, anexo o instrumento colectivo, revisa en qué causales se activa y cómo se calcula: el artículo 163 respeta la indemnización convenida cuando es superior a la legal.</p>
+
+<h2>Qué remuneración se compara con las 90 UF</h2>
+<p>La base es la <strong>última remuneración mensual</strong> en el sentido del artículo 172. No equivale automáticamente al sueldo base del contrato ni al líquido depositado en tu cuenta. Se toma la remuneración antes de descontar cotizaciones del trabajador y se consideran los pagos que corresponda incluir por la prestación de servicios. Según la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, por ejemplo, se incluyen la gratificación pagada mes a mes y las asignaciones mensuales de colación y movilización. Se excluyen horas extraordinarias, asignación familiar y beneficios esporádicos o pagados una vez al año, como un aguinaldo anual.</p>
+<p>Si tienes <strong>remuneración variable</strong>, por ejemplo por comisiones, el artículo 172 indica usar el promedio de los últimos tres meses calendario. El <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-84625.html" target="_blank" rel="noopener">Dictamen 75/8 de la DT</a> aclara que se refiere a meses con remuneración completa anteriores al mes de término. Una mensualidad cubierta en parte por un subsidio de licencia médica no se toma como si todo hubiera sido remuneración. Antes de promediar, identifica los meses que corresponden y separa en cada liquidación lo que entra y lo que queda fuera. El tope se aplica sobre la base resultante, no a cada comisión por separado.</p>
+<p>Una manera de detectar una omisión es pedir el desglose de la base al empleador y compararla línea a línea con las liquidaciones. Si el finiquito usa solo el sueldo base, comprueba si faltan pagos mensuales. Si simplemente copia el total de haberes, comprueba si allí quedaron horas extras. Conviene hacer esa revisión incluso cuando ambas cifras parezcan cercanas: cada diferencia en la base puede repetirse en todas las mensualidades indemnizables, salvo que ambas bases queden por encima del tope.</p>
+
+<h2>Cómo funcionan los dos topes</h2>
+<p><strong>Tope en pesos:</strong> multiplica 90 por el valor de la UF del <strong>último día del mes anterior al pago</strong>, tal como indica el <a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">artículo 172, explicado por la DT</a>. Compara esa cifra con la base mensual y usa la menor. Si te despidieron en octubre y te pagan en noviembre, la fecha de referencia es el 31 de octubre. No uses la UF del día en que firmaste, la del día en que haces la simulación ni la del último día hábil si no coincide con el último día del mes.</p>
+<p><strong>Tope de antigüedad:</strong> el artículo 163 reconoce 30 días de remuneración por cada año de servicio continuo al mismo empleador y por la fracción <strong>superior a seis meses</strong>. Por eso cinco años y seis meses exactos se cuentan como cinco, mientras que cinco años, seis meses y un día se cuentan como seis. Esto no elimina el requisito inicial de un año de contrato: una persona con solo ocho meses de servicio no adquiere por redondeo el derecho a esta indemnización legal. En la regla general, el máximo son 330 días de remuneración, equivalentes a 11 mensualidades.</p>
+<p>El límite de antigüedad tiene una excepción histórica: el <a href="https://www.dt.gob.cl/consultas/1613/w3-article-60600.html" target="_blank" rel="noopener">artículo 7 transitorio</a> excluye del tope de 330 días a quienes fueron contratados antes del 14 de agosto de 1981 y tenían su contrato vigente al 1 de diciembre de 1990, si se cumplen las demás condiciones. La DT <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-86852.html" target="_blank" rel="noopener">aclara que el límite mensual de 90 UF sí se aplica</a> a la indemnización legal de esos contratos. Si tu contrato entra en ese régimen o tienes un pacto más favorable, no tomes el resultado de una simulación de la regla general como tu liquidación.</p>
+
+<h2>Ejemplos en pesos con y sin tope</h2>
+<p>Supón que el pago se hace en noviembre de 2026. El <a href="https://www.sii.cl/valores_y_fechas/uf/uf2026.htm" target="_blank" rel="noopener">SII registra una UF de $41.247,63 para el 31 de octubre de 2026</a>. Al multiplicarla por 90, el límite mensual es de <strong>$3.712.286,70</strong>. Los ejemplos siguientes suponen término por el artículo 161, sin pacto especial. Muestran solo la indemnización por años de servicio, antes de cualquier imputación del Seguro de Cesantía, y redondean el resultado al peso al final.</p>
+<table>
+<caption>Indemnización legal estimada para un pago en noviembre de 2026</caption>
+<thead><tr><th scope="col">Base mensual antes del tope</th><th scope="col">Antigüedad</th><th scope="col">Cálculo</th><th scope="col">Indemnización estimada</th></tr></thead>
+<tbody>
+<tr><td>$1.200.000</td><td>5 años y 6 meses exactos</td><td>$1.200.000 × 5</td><td>$6.000.000</td></tr>
+<tr><td>$4.500.000</td><td>5 años y 7 meses</td><td>$3.712.286,70 × 6</td><td>$22.273.720</td></tr>
+<tr><td>$4.500.000</td><td>13 años</td><td>$3.712.286,70 × 11</td><td>$40.835.154</td></tr>
+</tbody>
+</table>
+<p>En el primer caso no se reduce el sueldo por el tope de UF: solo importa no sumar un año por los seis meses exactos. En el segundo, la fracción sí agrega un año, pero ese año se paga con la misma base topeada que los demás. En el tercero actúan ambos límites: no se usan los $4.500.000 completos ni se pagan las 13 mensualidades. Si cambia el mes de pago, puede cambiar la cifra en pesos del segundo y tercer caso sin que cambie la antigüedad.</p>
+<p>La tabla también sirve para revisar el efecto de cada tope por separado. Si tu base mensual ya está por debajo de 90 UF, cambiar la fecha de la UF no debería reducirla mientras siga bajo el nuevo límite. Si lo que cambia es la antigüedad y ya alcanzaste los 330 días de remuneración, en la regla general esa diferencia no aumenta esta partida.</p>
+
+<h2>Por qué la indemnización y el total del finiquito pueden ser distintos</h2>
+<p>En un despido por necesidades de la empresa, si no se dio aviso con al menos 30 días de anticipación, corresponde además la <strong>indemnización sustitutiva del aviso previo</strong>. La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">DT confirma</a> que el mismo límite de 90 UF rige para la base de este pago. No es un año adicional de antigüedad: es una partida separada, equivalente a una remuneración mensual para estos efectos. El finiquito también puede incluir vacaciones pendientes o proporcionales y remuneraciones adeudadas.</p>
+<p>En un término por el artículo 161, el empleador puede imputar a la indemnización por años de servicio la parte de la Cuenta Individual de Cesantía formada con sus aportes, en los términos que <a href="https://www.dt.gob.cl/consultas/1613/w3-article-95307.html" target="_blank" rel="noopener">explica la Dirección del Trabajo</a>. La Administradora de Fondos de Cesantía (AFC) determina el monto; no se trata de descontar todo el saldo de tu cuenta ni de restar tus propias cotizaciones. Si aparece esta rebaja, pide el certificado que la respalda y compárala con la línea específica de indemnización por años de servicio, no con el total de haberes del finiquito.</p>
+
+<h2>Qué revisar antes de firmar</h2>
+<ol>
+<li><strong>Carta y contrato:</strong> comprueba la causal, las fechas de inicio y término y si hay un pacto de indemnización. Cuenta la fracción con las fechas, sobre todo si quedaste cerca de los seis meses.</li>
+<li><strong>Liquidaciones:</strong> verifica qué pagos entraron en la base y, si tu remuneración es variable, qué meses se promediaron. Evita sumar por segunda vez un concepto ya incluido.</li>
+<li><strong>Mes de pago:</strong> verifica la fecha de la UF usada en el tope. Si el cálculo se hizo antes de un cambio de mes pero el pago se hará después, vuelve a revisar la fecha de referencia.</li>
+<li><strong>Desglose del finiquito:</strong> distingue indemnización por años, aviso previo, vacaciones, remuneraciones adeudadas y eventual imputación de AFC. Si alguna partida no cuadra, pide que te expliquen cómo se obtuvo antes de aceptar la liquidación.</li>
+</ol>
+<p>La <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">calculadora de indemnización por años de servicio</a> permite estimar la regla general y separar los años de servicio del aviso previo. La herramienta usa su propia UF de referencia: si esa fecha no coincide con el último día del mes anterior al pago, verifica el tope manualmente con la UF de la fecha legal. Y si tu antigüedad supera los seis meses por días y no por un mes completo, comprueba el cómputo por fechas: la herramienta recibe años y meses, no días.</p>
+<p>Si te presentan un finiquito con una diferencia que no se resuelve al revisar el cálculo, la <a href="https://www.dt.gob.cl/portal/1626/w3-article-96287.html" target="_blank" rel="noopener">DT explica cómo dejar una reserva de derechos</a> sobre los conceptos discutidos. Para revisar el trámite, consulta los <a href="/guias/finiquito-laboral-chile#plazos-legales">plazos de la guía de finiquito laboral</a>.</p>
+
+<aside class="callout callout--warning"><div class="callout__body"><strong>Alcance de la estimación</strong><p>Este artículo es informativo y no reemplaza la asesoría laboral. Si hay una causal discutida, un pacto especial o dudas sobre la antigüedad reconocida, consulta a la Dirección del Trabajo o busca asesoría antes de firmar.</p></div></aside>
+`,
+  },
+  {
     slug: 'aguinaldo-navidad-2026-sector-publico',
     title: 'Aguinaldo de Navidad 2026 sector público: monto vigente, quiénes lo reciben y cuándo se paga',
     description:
