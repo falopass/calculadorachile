@@ -102,6 +102,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | 2026-11-18 | impuestos | iva, ppm, boleta-honorarios |
+| 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | 2026-11-19 | laboral | vacaciones-proporcionales, finiquito |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
@@ -144,7 +145,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 24 | blog | Cotización independientes 2026 | `cotizacion-independientes-2026-boleta` | DR[16] · satélite boleta | previsional | 2026-10-16 | oct–abr | **P2-ventana** |
 | 25 | blog | Reajuste arriendo UF/IPC 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | evergreen blog | vivienda | 2026-10-20 | continuo | **P2-continuo** |
 | 26 | blog | Subsidio habitacional DS01/DS49 | `subsidio-habitacional-ds01-ds49-ahorro-uf-2026` | DR[28] · satélite vivienda | vivienda | 2026-10-23 | continuo | **P2-continuo** |
-| 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | DR[11] · evergreen | laboral | 2026-10-27 | continuo | **P2-continuo** |
+| ~~27~~ | blog | ~~Vacaciones proporcionales 2026~~ | ~~`vacaciones-proporcionales-2026-calcular`~~ | publicado 2026-11-19 · DR[11] | laboral | ~~2026-10-27~~ | continuo | ✅ |
 | 28 | blog | Indemnización años servicio tope 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | satélite finiquito | laboral | 2026-10-30 | continuo | **P2-continuo** |
 | ~~29~~ | blog | ~~Contribuciones 4.ª cuota 30 nov~~ | ~~`contribuciones-cuarta-cuota-noviembre-2026`~~ | ~~DR[27]~~ | vivienda | ~~2026-09-23~~ | 30 nov | ✅ |
 | ~~30~~ | blog | ~~Aguinaldo Navidad pensionados 2026~~ | ~~`aguinaldo-navidad-pensionados-2026`~~ | — | pensión | ~~2026-09-23~~ | nov–dic | ✅ |
