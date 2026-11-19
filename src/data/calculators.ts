@@ -4057,7 +4057,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'number',
         unit: 'CLP',
         placeholder: 'Ingresa el precio de tu bencinera',
-        required: false,
+        required: true,
+        allowZero: true,
         min: 0,
         tooltip:
           'Consulta bencinaenlinea.cl de la CNE. El precio lo ingresas tú; no es una cifra oficial precargada.',
@@ -4078,7 +4079,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'number',
         unit: 'CLP',
         placeholder: 'Ingresa tu tarifa por kWh',
-        required: false,
+        required: true,
+        allowZero: true,
         min: 0,
         tooltip:
           'Revisa tu boleta o tarifa de carga y las referencias de CNE/SEC. Usa cargos variables aplicables al consumo adicional, no el cargo fijo.',

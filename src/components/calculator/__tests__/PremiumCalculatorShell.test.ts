@@ -106,6 +106,29 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     expect(calculate).toHaveBeenCalled();
     expect(container.textContent).toContain(String(difference));
     expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
+    expect(container.querySelector('details')).toBeNull();
+  });
+
+  it.each([2, 4])('exige el precio %s y retira resultados si se borra un cero explícito', async (index) => {
+    const values = ['1000', '10', '1200', '20', '200'];
+    values[index] = '';
+    const calculate = await renderElectrico(values);
+    expect(calculate).not.toHaveBeenCalled();
+    expect(container.querySelector('[data-show-chart]')).toBeNull();
+    const ev = getCalculatorBySlug('auto-electrico-vs-bencina')!;
+    const input = container.querySelector<HTMLInputElement>(`input[placeholder="${ev.inputs[index].placeholder}"]`)!;
+    await act(async () => {
+      setInputValue(input, '0');
+      vi.advanceTimersByTime(500);
+    });
+    expect(calculate).toHaveBeenCalled();
+    expect(container.querySelector('[data-show-chart]')).not.toBeNull();
+    await act(async () => {
+      setInputValue(input, '');
+      vi.advanceTimersByTime(500);
+    });
+    expect(container.querySelector('[data-show-chart]')).toBeNull();
+    expect(container.textContent).toContain('Este campo es requerido');
   });
 
   it('no grafica costos unitarios junto con mensuales, anuales y diferencias negativas', async () => {

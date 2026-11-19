@@ -266,13 +266,13 @@ function NumberField({
   error,
 }: {
   input: CalculatorInputType;
-  value: number;
+  value: number | '';
   onChange: (id: string, value: string | number | boolean) => void;
   error?: string;
 }) {
   const [draft, setDraft] = useState<string | null>(null);
   const needsDecimal = inputNeedsDecimal(input);
-  const display = draft ?? (value > 0 ? formatNumber(value) : '');
+  const display = draft ?? (value !== '' && (value > 0 || (input.allowZero && value === 0)) ? formatNumber(value) : '');
   return (
     <PremiumInputField
       label={input.label}
@@ -283,7 +283,7 @@ function NumberField({
       value={display}
       onChange={(e) => {
         setDraft(e.target.value);
-        onChange(input.id, parseNumberInput(e.target.value, needsDecimal));
+        onChange(input.id, input.allowZero && e.target.value.trim() === '' ? '' : parseNumberInput(e.target.value, needsDecimal));
       }}
       onBlur={() => setDraft(null)}
       placeholder={input.placeholder}
@@ -341,7 +341,7 @@ function renderInput(
         <NumberField
           key={input.id}
           input={input}
-          value={value as number}
+          value={value as number | ''}
           onChange={onChange}
           error={error}
         />
@@ -396,7 +396,7 @@ function buildInitialValues(
     if (input.defaultValue !== undefined) {
       initial[input.id] = input.defaultValue as string | number | boolean;
     } else if (input.type === 'number') {
-      initial[input.id] = 0;
+      initial[input.id] = input.allowZero ? '' : 0;
     } else if (input.type === 'boolean') {
       initial[input.id] = false;
     } else {
@@ -416,7 +416,7 @@ function collectFieldErrors(
     if (input.required && input.type !== 'boolean') {
       if (value === '' || value === undefined || value === null) {
         newErrors[input.id] = 'Este campo es requerido';
-      } else if (input.type === 'number' && (value as number) <= 0) {
+      } else if (input.type === 'number' && (value as number) <= 0 && !(input.allowZero && value === 0)) {
         newErrors[input.id] = 'El valor debe ser mayor a 0';
       } else if (input.type === 'select' && value === '') {
         newErrors[input.id] = 'Debes seleccionar una opción';
