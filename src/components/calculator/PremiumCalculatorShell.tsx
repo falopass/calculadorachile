@@ -68,6 +68,7 @@ const ORGANISMO_BY_ID: Record<string, string> = {
 
 /** Calculadoras cuyos resultados no son partes de un total (gráfico sin sentido). */
 const SIN_GRAFICO = new Set([
+  'auto-electrico-vs-bencina',
   'promedio-notas',
   'escala-notas',
   'puntaje-ponderado-paes',

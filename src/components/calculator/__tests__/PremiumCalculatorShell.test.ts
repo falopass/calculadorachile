@@ -16,8 +16,8 @@ vi.mock('next/link', () => ({
 
 // La tarjeta real depende de ToastProvider; aquí solo importa si el resultado sigue a la vista.
 vi.mock('../PremiumResultCard', () => ({
-  default: ({ results }: { results: CalculatorResult[] }) =>
-    React.createElement('div', null, results.map((r) => String(r.value)).join(' ')),
+  default: ({ results, showChart }: { results: CalculatorResult[]; showChart: boolean }) =>
+    React.createElement('div', { 'data-show-chart': String(showChart) }, results.map((r) => String(r.value)).join(' ')),
 }));
 
 // El historial conserva cálculos anteriores a propósito; queda fuera de esta prueba.
@@ -106,6 +106,12 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     expect(calculate).toHaveBeenCalled();
     expect(container.textContent).toContain(String(difference));
     expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
+  });
+
+  it('no grafica costos unitarios junto con mensuales, anuales y diferencias negativas', async () => {
+    await renderElectrico(['1000', '10', '1200', '20', '800']);
+    expect(container.querySelector('[data-show-chart="false"]')?.textContent).toContain('-480000');
+    expect(container.querySelector('[data-show-chart="true"]')).toBeNull();
   });
 
   it('retira el resultado anterior cuando el dato pasa a ser inválido', async () => {
