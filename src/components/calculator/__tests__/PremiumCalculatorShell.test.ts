@@ -231,6 +231,7 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
       }));
     });
     expect(container.textContent).toContain('0 6');
+    expect(localStorage.getItem('calculachile_history')).toBeNull();
     expect(container.textContent).toContain('sin contar medios días');
     expect(container.textContent).toContain('ej.: 3 = 1,5 días');
     const fields = container.querySelectorAll<HTMLInputElement>('input');

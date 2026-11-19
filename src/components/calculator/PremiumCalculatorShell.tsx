@@ -558,7 +558,8 @@ export default function PremiumCalculatorShell({
         trackEvents.calculatorCompleted(calculator.id);
       }
 
-      if (!calculated.some((r) => r.partial)) {
+      if (!calculated.some((r) => r.partial) &&
+          (calculator.id !== 'dias-administrativos' || touchedFields.current.size > 0)) {
         const mainResult = calculated.find((r) => r.highlight);
         addEntry({
           calculatorId: calculator.id,
