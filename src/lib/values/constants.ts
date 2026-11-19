@@ -247,6 +247,61 @@ export const AFP = {
   uno: { nombre: 'Uno', comision: 0.46, sis: 1.62 },
 };
 
+/**
+ * Tasa SIS que cotizan las y los trabajadores independientes (Ley 21.133)
+ * en la Operación Renta, por año tributario, sobre la renta imponible
+ * (80% de los honorarios brutos, con tope imponible).
+ *
+ * Se usa la tasa que aplica el SII, que determina el monto en la Operación Renta.
+ * - AT2025: SII, ejemplos de cálculo previsional Operación Renta 2025
+ *   (https://www.sii.cl/destacados/renta/2025/ejemplo_pamela_cotizaciones_2025.pdf):
+ *   SIS 1,50% sobre la base imponible.
+ * - AT2026: SII, Guía Práctica Renta 2026, p. 60 ("1,5% de la base imponible
+ *   de cotizaciones") y ejemplos p. 64 (1,50%)
+ *   (https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf).
+ *   La SP publica 1,49% para el AT2026
+ *   (https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html);
+ *   no se adopta por tener una sola fuente (ver docs/research/cierre-plan-q4-2026.md).
+ *
+ * Es un % de la base imponible anual, no del bruto de la boleta: no es
+ * comparable con `RETENCION_HONORARIOS_DISTRIBUCION[].sis` (reparto de la
+ * retención sobre el bruto, por año comercial).
+ *
+ * Distinto de `AFP[].sis` (cargo del empleador en dependientes). Las
+ * cotizaciones mensuales voluntarias de independientes usan la tasa
+ * mensual vigente (1,78% desde ago-2026, misma ficha SP), no esta tabla.
+ */
+export const SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO = {
+  2025: 1.5,
+  2026: 1.5,
+} as const;
+
+export type AnioTributarioSISIndependientes =
+  keyof typeof SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO;
+
+/**
+ * Tasa SIS de independientes para el año tributario indicado. Si el año
+ * aún no tiene tasa publicada, usa la última publicada (`anioAplicado`
+ * lo indica); antes del primer año con tasa usa ese primer año.
+ */
+export function getTasaSISIndependientes(anioTributario?: number): {
+  tasa: number;
+  anioAplicado: AnioTributarioSISIndependientes;
+} {
+  const anios = Object.keys(SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO)
+    .map(Number)
+    .sort((a, b) => a - b) as AnioTributarioSISIndependientes[];
+  const ultimo = anios[anios.length - 1];
+  let anioAplicado = ultimo;
+  if (anioTributario !== undefined && Number.isFinite(anioTributario)) {
+    anioAplicado = anios[0];
+    for (const anio of anios) {
+      if (anio <= anioTributario) anioAplicado = anio;
+    }
+  }
+  return { tasa: SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO[anioAplicado], anioAplicado };
+}
+
 /** SIS patronal separado (%), según el mes de remuneración.
  * SP Oficios 7429 (14-04-2026), 12677 (08-07-2026) y 12934 (10-07-2026).
  * https://www.previred.com/wp-content/uploads/2026/07/Indicadores-Previsionales-Previred-Julio-2026.pdf

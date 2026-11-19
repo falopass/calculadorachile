@@ -4698,7 +4698,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     noIndex: true,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-11-18',
     sources: [
       {
         name: 'Superintendencia de Pensiones — afiliados y cotizantes',
@@ -4709,6 +4709,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'SII — boletas y cotizaciones',
         url: 'https://www.sii.cl/destacados/boletas_honorarios/',
         note: 'Retenciones y cotizaciones de independientes',
+      },
+      {
+        name: 'SII — Guía Práctica de Declaración de Renta 2026',
+        url: 'https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf',
+        note: 'SIS 1,5% de la base imponible de cotizaciones (AT2026)',
+      },
+      {
+        name: 'SII — ejemplo de cálculo previsional Operación Renta 2025',
+        url: 'https://www.sii.cl/destacados/renta/2025/ejemplo_pamela_cotizaciones_2025.pdf',
+        note: 'SIS 1,50% sobre la base imponible (AT2025)',
       },
     ],
     keywords: [
@@ -4756,7 +4766,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto cotiza un independiente?',
         answer:
-          'Los independientes cotizan sobre el 80% de su renta bruta. AFP (10% + comisión), salud (7%) y la distribución legal vigente para SIS y seguro de accidentes. El total depende del año del calendario de cotizaciones.',
+          'Los independientes cotizan sobre el 80% de su renta bruta, con tope imponible: AFP (10% + comisión), salud (7%), seguro de accidentes y SIS. El SIS se calcula sobre la base imponible con la tasa que aplica el SII en la Operación Renta: 1,50% en 2025 y 2026; la calculadora usa la última tasa publicada.',
       },
     ],
   },

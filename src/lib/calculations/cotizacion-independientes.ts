@@ -9,13 +9,17 @@ import {
   TOPE_IMPOSITIVO,
   MUTUAL,
   SALUD,
+  getTasaSISIndependientes,
 } from '@/lib/values/constants';
+import { formatPercentage } from '@/lib/formatters';
 import type { CalculatorResult } from '@/types/calculator';
 
 export interface CotizacionIndependientesInput {
   rentaBrutaMensual: number;
   afp: keyof typeof AFP;
   salud: 'fonasa' | 'isapre';
+  /** Año tributario de la Operación Renta; por defecto, el último con tasa SIS publicada. */
+  anioTributario?: number;
 }
 
 export interface CotizacionIndependientesResult {
@@ -24,6 +28,9 @@ export interface CotizacionIndependientesResult {
   baseImponibleMensual: number;
   cotizacionAFP: number;
   cotizacionSalud: number;
+  cotizacionSIS: number;
+  tasaSIS: number;
+  anioTributarioSIS: number;
   cotizacionMutual: number;
   totalCotizaciones: number;
   topeImponibleMensual: number;
@@ -51,10 +58,10 @@ const MUTUAL_TASA = MUTUAL.total_referencial;
  * trabajadores independientes que emiten boletas de honorarios.
  *
  * Bugs históricos corregidos:
- *  - SIS no se cobra a independientes: el SIS es seguro de
- *    invalidez/sobrevivencia que solo cubre a trabajadores
- *    dependientes (D.L. 3500 Art. 59). Los independientes pagan
- *    íntegramente el 10% a su cuenta individual.
+ *  - El independiente sí paga SIS en la Operación Renta, sobre la
+ *    misma base imponible (Superintendencia de Pensiones, ficha SIS;
+ *    SII, ejemplos de cálculo previsional Operación Renta 2025). La
+ *    tasa es la del año tributario (`SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO`).
  *  - El tope imponible para independientes es el mismo tope
  *    general (87,8 UF en 2026), no se mantenía actualizado.
  *  - Se agrega cotización de mutualidad (Ley 16.744) que sí
@@ -68,7 +75,7 @@ const MUTUAL_TASA = MUTUAL.total_referencial;
 export function calculateCotizacionIndependientes(
   input: CotizacionIndependientesInput,
 ): CotizacionIndependientesResult {
-  const { rentaBrutaMensual, afp, salud } = input;
+  const { rentaBrutaMensual, afp, salud, anioTributario } = input;
 
   void salud; // Tasa de salud es 7% para FONASA e Isapre mínimo.
 
@@ -85,8 +92,7 @@ export function calculateCotizacionIndependientes(
   const baseImponibleMensual = baseImponibleAnual / 12;
   const aplicaTopeImponible = baseAnualSinTope > topeAnual;
 
-  // AFP: 10% obligatorio + comisión variable (sin SIS para indep,
-  // D.L. 3500 Art. 59).
+  // AFP: 10% obligatorio + comisión variable.
   const afpData = AFP[afp];
   if (!afpData) {
     throw new Error(`AFP "${String(afp)}" no encontrada`);
@@ -100,10 +106,16 @@ export function calculateCotizacionIndependientes(
     baseImponibleMensual * (SALUD.fonasa.tasa / 100),
   );
 
+  // SIS: tasa del año tributario sobre la base imponible (redondeo al peso).
+  const { tasa: tasaSIS, anioAplicado: anioTributarioSIS } =
+    getTasaSISIndependientes(anioTributario);
+  const cotizacionSIS = Math.round(baseImponibleMensual * (tasaSIS / 100));
+
   // Mutual de seguridad (Ley 16.744): 0,9% mínimo
   const cotizacionMutual = Math.round(baseImponibleMensual * (MUTUAL_TASA / 100));
 
-  const totalCotizaciones = cotizacionAFP + cotizacionSalud + cotizacionMutual;
+  const totalCotizaciones =
+    cotizacionAFP + cotizacionSalud + cotizacionSIS + cotizacionMutual;
 
   return {
     rentaBruta: Math.round(rentaBruta),
@@ -111,6 +123,9 @@ export function calculateCotizacionIndependientes(
     baseImponibleMensual: Math.round(baseImponibleMensual),
     cotizacionAFP,
     cotizacionSalud,
+    cotizacionSIS,
+    tasaSIS,
+    anioTributarioSIS,
     cotizacionMutual,
     totalCotizaciones,
     topeImponibleMensual: Math.round(topeImponibleMensual),
@@ -130,6 +145,11 @@ export function cotizacionIndependientesToResults(
     { label: 'Base Imponible Mensual (80%)', value: result.baseImponibleMensual, format: 'CLP' },
     { label: 'Cotización AFP (10% + comisión)', value: result.cotizacionAFP, format: 'CLP' },
     { label: 'Cotización Salud (7%)', value: result.cotizacionSalud, format: 'CLP' },
+    {
+      label: `Seguro de Invalidez y Sobrevivencia (SIS ${formatPercentage(result.tasaSIS, 2)} de la base imponible, Operación Renta ${result.anioTributarioSIS})`,
+      value: result.cotizacionSIS,
+      format: 'CLP',
+    },
     { label: 'Mutual de Seguridad (0,9%)', value: result.cotizacionMutual, format: 'CLP' },
   ];
 

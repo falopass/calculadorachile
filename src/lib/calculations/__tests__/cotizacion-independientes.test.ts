@@ -2,12 +2,21 @@
 // Tests de cotización-independientes (Ley 21.133)
 // ----------------------------------------------
 // Verifica que la base imponible sea 80% de la renta bruta anual,
-// con tope 90 UF mensuales, y que NO se cobre SIS al independiente.
+// con tope 90 UF mensuales, y que el SIS se cobre con la tasa del año
+// tributario según el SII (1,50% AT2025 y AT2026).
 // ============================================
 
 import { describe, it, expect } from 'vitest';
-import { calculateCotizacionIndependientes } from '../cotizacion-independientes';
-import { UF, AFP, TOPE_IMPOSITIVO } from '@/lib/values/constants';
+import {
+  calculateCotizacionIndependientes,
+  cotizacionIndependientesToResults,
+} from '../cotizacion-independientes';
+import {
+  UF,
+  AFP,
+  TOPE_IMPOSITIVO,
+  getTasaSISIndependientes,
+} from '@/lib/values/constants';
 
 describe('calculateCotizacionIndependientes', () => {
   it('base imponible mensual es 80% de la renta bruta', () => {
@@ -32,7 +41,7 @@ describe('calculateCotizacionIndependientes', () => {
     expect(r.baseImponibleMensual).toBe(Math.round(topeMensualCLP));
   });
 
-  it('AFP descuenta 10% obligatorio + comisión, sin SIS', () => {
+  it('AFP descuenta 10% obligatorio + comisión', () => {
     const r = calculateCotizacionIndependientes({
       rentaBrutaMensual: 1_000_000,
       afp: 'habitat',
@@ -41,8 +50,70 @@ describe('calculateCotizacionIndependientes', () => {
     // Base 800.000, AFP 10% + 1.27% = 11.27%
     const esperado = Math.round(800_000 * ((10 + AFP.habitat.comision) / 100));
     expect(r.cotizacionAFP).toBe(esperado);
-    // SIS NO se cobra a independientes (D.L. 3500 Art. 59).
-    expect((r as unknown as { cotizacionSIS?: number }).cotizacionSIS).toBeUndefined();
+  });
+
+  it('SIS usa por defecto la última tasa publicada (AT2026: 1,50%)', () => {
+    const r = calculateCotizacionIndependientes({
+      rentaBrutaMensual: 1_000_000,
+      afp: 'habitat',
+      salud: 'fonasa',
+    });
+    // 800.000 × 1,50% = 12.000
+    expect(r.tasaSIS).toBe(1.5);
+    expect(r.anioTributarioSIS).toBe(2026);
+    expect(r.cotizacionSIS).toBe(12_000);
+  });
+
+  it('SIS AT2026 coincide con el ejemplo de la Guía Práctica Renta 2026 del SII', () => {
+    // Honorarios $5.000.000 anuales → base $4.000.000, SIS $60.000.
+    const r = calculateCotizacionIndependientes({
+      rentaBrutaMensual: 5_000_000 / 12,
+      afp: 'habitat',
+      salud: 'fonasa',
+      anioTributario: 2026,
+    });
+    expect(r.cotizacionSIS * 12).toBe(60_000);
+  });
+
+  it('SIS AT2025 coincide con el ejemplo del SII (1,50% sobre la base)', () => {
+    // SII, ejemplo "Pamela" Operación Renta 2025: honorarios $3.000.000
+    // anuales → base $2.400.000, SIS $36.000 (= $3.000 mensuales).
+    const r = calculateCotizacionIndependientes({
+      rentaBrutaMensual: 250_000,
+      afp: 'habitat',
+      salud: 'fonasa',
+      anioTributario: 2025,
+    });
+    expect(r.tasaSIS).toBe(1.5);
+    expect(r.cotizacionSIS * 12).toBe(36_000);
+  });
+
+  it('SIS para un año sin tasa publicada usa la última publicada', () => {
+    expect(getTasaSISIndependientes(2027)).toEqual({ tasa: 1.5, anioAplicado: 2026 });
+    expect(getTasaSISIndependientes(2020)).toEqual({ tasa: 1.5, anioAplicado: 2025 });
+  });
+
+  it('SIS respeta el tope imponible', () => {
+    const r = calculateCotizacionIndependientes({
+      rentaBrutaMensual: 10_000_000,
+      afp: 'modelo',
+      salud: 'fonasa',
+    });
+    const topeMensualCLP = TOPE_IMPOSITIVO.afp_salud * UF.valor;
+    expect(r.cotizacionSIS).toBe(Math.round(topeMensualCLP * 0.015));
+  });
+
+  it('resultados muestran la línea SIS con tasa y año tributario', () => {
+    const r = calculateCotizacionIndependientes({
+      rentaBrutaMensual: 1_000_000,
+      afp: 'habitat',
+      salud: 'fonasa',
+    });
+    const fila = cotizacionIndependientesToResults(r).find((x) => x.label.includes('SIS'));
+    expect(fila?.label).toBe(
+      'Seguro de Invalidez y Sobrevivencia (SIS 1,50% de la base imponible, Operación Renta 2026)',
+    );
+    expect(fila?.value).toBe(12_000);
   });
 
   it('salud cotiza 7% sobre la base imponible', () => {
@@ -63,14 +134,14 @@ describe('calculateCotizacionIndependientes', () => {
     expect(r.cotizacionMutual).toBe(7_600);
   });
 
-  it('total cotizaciones suma AFP + salud + mutual', () => {
+  it('total cotizaciones suma AFP + salud + SIS + mutual', () => {
     const r = calculateCotizacionIndependientes({
       rentaBrutaMensual: 1_500_000,
       afp: 'modelo',
       salud: 'fonasa',
     });
     expect(r.totalCotizaciones).toBe(
-      r.cotizacionAFP + r.cotizacionSalud + r.cotizacionMutual,
+      r.cotizacionAFP + r.cotizacionSalud + r.cotizacionSIS + r.cotizacionMutual,
     );
   });
 
