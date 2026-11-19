@@ -22,6 +22,7 @@ const IDS = [
   'compras-internacionales', 'real-brasileno-clp', 'sol-peruano-clp',
   'trabajo-en-feriado', 'valor-hora-trabajo', 'costo-viaje', 'peso-argentino-clp',
   'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'dias-administrativos', 'pension-alimenticia',
+  'peso-colombiano-clp', 'peso-mexicano-clp', 'boliviano-clp',
 ];
 
 describe('getQuickAnswer', () => {
