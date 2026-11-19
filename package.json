@@ -17,7 +17,8 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css}\"",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "audit:editorial": "node scripts/audit-editorial-content.mjs"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.13",

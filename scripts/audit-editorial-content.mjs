@@ -1,24 +1,25 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import ts from 'typescript';
+import { fileURLToPath } from 'node:url';
+import { runnerImport } from 'vite';
 
-const ROOT = process.cwd();
+// Auditoría editorial sobre el contenido tal como se renderiza: carga
+// `articles` y `guias` en runtime (con el alias `@` de Next/Vitest), de modo
+// que las plantillas con valores dinámicos (UF, IMM, tasas por año) y los
+// artículos importados desde otros módulos quedan resueltos antes de medir.
+// Es un gate: cualquier fallo devuelve exit code 1.
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const MIN_WORDS = 1500;
 const SHINGLE_WARNING = 0.04;
 const SHINGLE_FAILURE = 0.08;
-const RETIRED_ARTICLE_SLUGS = new Set([
-  'guia-horas-extra-chile',
-  'vacaciones-proporcionales-guia',
-  'como-calcular-finiquito-chile',
-  'boleta-honorarios-completo',
-  'guia-iva-chile-2026',
-]);
 const OFFICIAL_HOSTS = [
   'afc.cl',
   'bcentral.cl',
   'bcn.cl',
   'chileatiende.gob.cl',
+  'cmfchile.cl',
   'dt.gob.cl',
   'ine.gob.cl',
   'ingresa.cl',
@@ -42,50 +43,16 @@ const GENERIC_PATTERNS = [
   /sin duda/giu,
 ];
 
-function parse(file) {
-  const source = fs.readFileSync(file, 'utf8');
-  return ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
-}
+const BROKEN_INTERPOLATION = /\b(?:undefined|NaN|Infinity)\b|\[object Object\]|\$\{/g;
 
-function property(object, name) {
-  if (!object || !ts.isObjectLiteralExpression(object)) return undefined;
-  return object.properties.find((item) => {
-    if (!ts.isPropertyAssignment(item)) return false;
-    const key = item.name;
-    return (ts.isIdentifier(key) || ts.isStringLiteral(key)) && key.text === name;
-  })?.initializer;
-}
-
-function stringValue(node) {
-  if (!node) return '';
-  if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
-    return node.text;
-  }
-  if (ts.isTemplateExpression(node)) {
-    throw new Error('No se admiten expresiones dinámicas dentro del contenido editorial.');
-  }
-  return '';
-}
-
-function arrayValue(node) {
-  return node && ts.isArrayLiteralExpression(node) ? node.elements : [];
-}
-
-function findArray(sourceFile, variableName) {
-  let result;
-  sourceFile.forEachChild((node) => {
-    if (!ts.isVariableStatement(node)) return;
-    for (const declaration of node.declarationList.declarations) {
-      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== variableName) {
-        continue;
-      }
-      if (declaration.initializer && ts.isArrayLiteralExpression(declaration.initializer)) {
-        result = declaration.initializer;
-      }
-    }
+async function loadModule(relativePath) {
+  const { module } = await runnerImport(path.join(ROOT, relativePath), {
+    configFile: false,
+    root: ROOT,
+    logLevel: 'error',
+    resolve: { alias: { '@': path.join(ROOT, 'src') } },
   });
-  if (!result) throw new Error(`No se encontró el arreglo ${variableName}.`);
-  return result.elements;
+  return module;
 }
 
 function decodeEntities(value) {
@@ -140,53 +107,44 @@ function genericHits(html) {
   );
 }
 
-function countObjectArray(node) {
-  return arrayValue(node).filter(ts.isObjectLiteralExpression).length;
+function brokenInterpolations(html) {
+  return [...plainText(html).matchAll(BROKEN_INTERPOLATION)].map((match) => match[0]);
 }
 
-function auditArticles() {
-  const file = path.join(ROOT, 'src', 'data', 'articles.ts');
-  const entries = findArray(parse(file), 'articleCatalog');
-  return entries
-    .filter(ts.isObjectLiteralExpression)
-    .filter((entry) => !RETIRED_ARTICLE_SLUGS.has(stringValue(property(entry, 'slug'))))
-    .map((entry) => {
-      const content = stringValue(property(entry, 'content'));
-      return {
-        type: 'blog',
-        slug: stringValue(property(entry, 'slug')),
-        title: stringValue(property(entry, 'title')),
-        words: wordCount(content),
-        externalLinks: externalLinks(content).size,
-        declaredSources: Math.max(
-          countObjectArray(property(entry, 'sources')),
-          officialLinks(content).size,
-        ),
-        genericHits: genericHits(content),
-        plain: plainText(content),
-      };
-    });
+function visibleStrings(value) {
+  if (typeof value === 'string') return [value];
+  if (Array.isArray(value)) return value.flatMap(visibleStrings);
+  if (value && typeof value === 'object') return Object.values(value).flatMap(visibleStrings);
+  return [];
 }
 
-function auditGuides() {
-  const file = path.join(ROOT, 'src', 'data', 'guias.ts');
-  const entries = findArray(parse(file), 'guias');
-  return entries.filter(ts.isObjectLiteralExpression).map((entry) => {
-    const sections = arrayValue(property(entry, 'sections'));
-    const content = sections
-      .filter(ts.isObjectLiteralExpression)
-      .map((section) => stringValue(property(section, 'html')))
-      .join('\n');
-    return {
-      type: 'guía',
-      slug: stringValue(property(entry, 'slug')),
-      title: stringValue(property(entry, 'title')),
-      words: wordCount(content),
-      externalLinks: externalLinks(content).size,
-      declaredSources: countObjectArray(property(entry, 'sources')),
-      genericHits: genericHits(content),
-      plain: plainText(content),
-    };
+function auditRow(type, item, content, sources) {
+  return {
+    type,
+    slug: item.slug,
+    title: item.title,
+    words: wordCount(content),
+    externalLinks: externalLinks(content).size,
+    declaredSources: Math.max(sources?.length ?? 0, officialLinks(content).size),
+    genericHits: genericHits(content),
+    brokenInterpolations: visibleStrings(item).flatMap(brokenInterpolations),
+    plain: plainText(content),
+  };
+}
+
+function auditArticles(articles) {
+  return articles.map((article) => {
+    if (typeof article.content !== 'string') {
+      throw new Error(`El artículo ${article.slug} no tiene contenido de texto.`);
+    }
+    return auditRow('blog', article, article.content, article.sources);
+  });
+}
+
+function auditGuides(guias) {
+  return guias.map((guia) => {
+    const content = guia.sections.map((section) => section.html).join('\n');
+    return auditRow('guía', guia, content, guia.sources);
   });
 }
 
@@ -204,7 +162,20 @@ function shingles(text, size = 5) {
   return result;
 }
 
-const rows = [...auditArticles(), ...auditGuides()].sort((a, b) => a.words - b.words);
+const { articles, RETIRED_ARTICLE_REDIRECTS: retiredRedirects } =
+  await loadModule('src/data/articles.ts');
+const { guias } = await loadModule('src/data/guias.ts');
+const rows = [...auditArticles(articles), ...auditGuides(guias)].sort((a, b) => a.words - b.words);
+const slugCounts = new Map();
+for (const row of rows) {
+  const key = `${row.type}:${row.slug}`;
+  slugCounts.set(key, (slugCounts.get(key) ?? 0) + 1);
+}
+const duplicateSlugs = [...slugCounts].filter(([, count]) => count > 1).map(([key]) => key);
+const withBrokenInterpolation = rows.filter((row) => row.brokenInterpolations.length > 0);
+const retiredStillPublished = articles
+  .map((article) => article.slug)
+  .filter((slug) => slug in retiredRedirects);
 const belowMinimum = rows.filter((row) => row.words < MIN_WORDS);
 const withoutSources = rows.filter((row) => row.declaredSources === 0);
 const rowShingles = rows.map((row) => ({ row, values: shingles(row.plain) }));
@@ -232,13 +203,6 @@ for (let left = 0; left < rowShingles.length; left += 1) {
 }
 
 const excessiveSimilarity = similarities.filter((pair) => pair.containment > SHINGLE_FAILURE);
-const retiredRedirects = {
-  'guia-horas-extra-chile': '/blog/horas-extra-jornada-42-horas-chile-2026',
-  'vacaciones-proporcionales-guia': '/calculadoras/calculadora-vacaciones-proporcionales',
-  'como-calcular-finiquito-chile': '/guias/finiquito-laboral-chile',
-  'boleta-honorarios-completo': '/guias/iva-boleta-honorarios-chile',
-  'guia-iva-chile-2026': '/calculadoras/calculadora-iva',
-};
 const redirectLeakFiles = [
   'src/data/guias.ts',
   'src/data/seo-overrides.ts',
@@ -268,6 +232,16 @@ if (process.argv.includes('--json')) {
         minimum: MIN_WORDS,
         rows: rows.map(({ plain, ...row }) => row),
         similarities,
+        failures: {
+          belowMinimum: belowMinimum.map((row) => row.slug),
+          withoutSources: withoutSources.map((row) => row.slug),
+          brokenInterpolation: withBrokenInterpolation.map((row) => row.slug),
+          duplicateSlugs,
+          excessiveSimilarity,
+          redirectLeaks,
+          missingRedirects: missingRedirects.map(([slug]) => slug),
+          retiredStillPublished,
+        },
       },
       null,
       2,
@@ -289,6 +263,12 @@ if (process.argv.includes('--json')) {
     `\nTotal: ${rows.length} piezas | Bajo ${MIN_WORDS}: ${belowMinimum.length} | Cumplen: ${rows.length - belowMinimum.length}`,
   );
   console.log(`Sin fuentes declaradas: ${withoutSources.length}`);
+  console.log(`Interpolaciones rotas: ${withBrokenInterpolation.length}`);
+  for (const row of withBrokenInterpolation) {
+    console.log(`FALLO interpolación: ${row.slug} (${row.brokenInterpolations.join(', ')})`);
+  }
+  console.log(`Slugs duplicados: ${duplicateSlugs.length}`);
+  console.log(`Artículos retirados aún publicados: ${retiredStillPublished.length}`);
   console.log(`Fugas de URLs retiradas: ${redirectLeaks.length}`);
   console.log(`Redirects faltantes: ${missingRedirects.length}`);
   for (const pair of similarities.sort((a, b) => b.containment - a.containment)) {
@@ -299,13 +279,19 @@ if (process.argv.includes('--json')) {
   }
 }
 
-if (
-  process.argv.includes('--strict') &&
-  (belowMinimum.length > 0 ||
-    withoutSources.length > 0 ||
-    excessiveSimilarity.length > 0 ||
-    redirectLeaks.length > 0 ||
-    missingRedirects.length > 0)
-) {
+const failed =
+  belowMinimum.length > 0 ||
+  withoutSources.length > 0 ||
+  withBrokenInterpolation.length > 0 ||
+  duplicateSlugs.length > 0 ||
+  excessiveSimilarity.length > 0 ||
+  redirectLeaks.length > 0 ||
+  missingRedirects.length > 0 ||
+  retiredStillPublished.length > 0;
+
+if (failed) {
+  if (!process.argv.includes('--json')) console.error('\nAuditoría editorial: FALLO');
   process.exitCode = 1;
+} else if (!process.argv.includes('--json')) {
+  console.log('\nAuditoría editorial: OK');
 }
