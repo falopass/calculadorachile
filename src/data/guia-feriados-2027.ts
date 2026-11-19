@@ -29,6 +29,8 @@ import {
 } from '@/lib/feriados';
 
 const DT_VACACIONES_ART_67_70 = 'https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html';
+const DT_DESCANSO_SEMANAL = 'https://www.dt.gob.cl/portal/1626/w3-article-99109.html';
+const DT_FESTIVO_DOMINGO = 'https://www.dt.gob.cl/portal/1628/w3-article-60263.html';
 const a = (href: string, text: string) =>
   `<a href="${href}" target="_blank" rel="noopener">${text}</a>`;
 
@@ -80,14 +82,14 @@ export const guiaFeriados2027: Guia = {
     'feriado 17 de septiembre 2027',
   ],
   publishedAt: '2026-11-03',
-  updatedAt: '2026-11-03',
-  readingTime: 5,
+  updatedAt: '2026-11-19',
+  readingTime: 7,
   sections: [
     {
       id: 'resumen',
       title: 'Resumen',
       level: 2,
-      html: `<p><em>Actualizado el 3 de noviembre de 2026</em></p>
+      html: `<p><em>Actualizado el 19 de noviembre de 2026</em></p>
 <p>En 2027 Chile tiene <strong>${publicados.length} feriados nacionales con fecha confirmada</strong> por ley, de los cuales <strong>${irrenunciables.length} son irrenunciables</strong> para los trabajadores del comercio, y <strong>${largos.length} fines de semana largos</strong> con esas fechas (${a(BCN_LEY_2977, 'Ley 2.977')}; ${a(DT_IRRENUNCIABLES, 'Dirección del Trabajo')}).</p>
 ${notaPendientes}`,
     },
@@ -112,6 +114,18 @@ ${filasCalendario}
 <p>No se aplican a quienes trabajan en clubes, restaurantes, cines, espectáculos en vivo, discotecas, pubs y cabarets, locales comerciales de aeropuertos y aeródromos civiles públicos, casinos y otros lugares de juego autorizados, bencineras y sus tiendas de conveniencia, ni farmacias de urgencia o de turno. Aun así, esos trabajadores tienen derecho a descansar en estos días una vez cada dos años con un mismo empleador, es decir, un año por medio (${a(DT_IRRENUNCIABLES, 'DT')}).</p>`,
     },
     {
+      id: 'trabajar-en-feriado',
+      title: '¿Qué pasa si trabajas en un feriado?',
+      level: 2,
+      html: `<p>Los feriados no obligan a descansar a todos por igual. La regla general del Código del Trabajo (art. 38) permite a ciertos trabajadores <strong>convenir con su empleador incluir domingos y festivos en su jornada</strong>; a cambio, el empleador debe otorgar <strong>un día de descanso en la semana por el domingo trabajado y otro día completo por cada festivo laborado</strong> (${a(DT_DESCANSO_SEMANAL, 'DT, Descanso semanal')}.</p>
+<p>Dos precisiones de la DT ordenan el cálculo:</p>
+<ul>
+<li>Si un <strong>feriado coincide con el domingo</strong> que ya debes trabajar, corresponde <strong>un solo día de descanso compensatorio</strong>, no dos: trabajaste un solo día inhábil (${a(DT_FESTIVO_DOMINGO, 'DT')}).</li>
+<li>El descanso compensatorio se origina por el <strong>solo hecho de prestar servicios</strong> ese día, cualquiera sea el número de horas; en jornadas inferiores a la semana completa no procede ese régimen (${a(DT_DESCANSO_SEMANAL, 'DT')}).</li>
+</ul>
+<p>Los feriados <strong>irrenunciables</strong> son la excepción: quienes tienen derecho a ellos no pueden trabajar esos días aunque se les ofrezca un recargo (ver <a href="#irrenunciables">feriados irrenunciables</a>). Para estimar el pago o el descanso de un festivo trabajado, usa la <a href="/calculadoras/calculadora-trabajo-en-feriado">calculadora de trabajo en feriado</a>.</p>`,
+    },
+    {
       id: 'fines-de-semana-largos',
       title: 'Fines de semana largos 2027',
       level: 2,
@@ -133,6 +147,29 @@ ${hayPendientes ? '<p>Esta tabla se actualizará cuando se confirmen las fechas 
 <li><strong>Día de las Iglesias Evangélicas y Protestantes (31 de octubre)</strong> se traslada a un viernes solo cuando cae martes o miércoles (${a(BCN_LEY_20299, 'Ley 20.299')}). En 2027 cae ${diaSemana('2027-10-31')}, así que no se mueve.</li>
 <li><strong>17 de septiembre</strong>: es feriado cuando el 18 y el 19 de septiembre caen sábado y domingo (${a(BCN_LEY_20983, 'Ley 20.983')}). En 2027 el 18 cae ${diaSemana('2027-09-18')}.</li>
 <li><strong>Día Nacional de los Pueblos Indígenas</strong>: se celebra el día del solsticio de invierno de cada año (${a(BCN_LEY_21357, 'Ley 21.357')}).</li>
+</ul>`,
+    },
+    {
+      id: 'como-se-publica',
+      title: 'Cómo se define el calendario de feriados cada año',
+      level: 2,
+      html: `<p>La mayoría de los feriados nacionales están fijados por ley con fecha cierta (1 de enero, 1 de mayo, 21 de mayo, 25 de diciembre), pero tres grupos dependen del año:</p>
+<ul>
+<li><strong>Semana Santa:</strong> el Viernes y el Sábado Santo se calculan con la Pascua de cada año (${a(BCN_LEY_2977, 'Ley 2.977')}).</li>
+<li><strong>Fiestas Patrias:</strong> el 18 y el 19 de septiembre son fijos, pero el 17 solo es feriado cuando el 18 y el 19 caen sábado y domingo (${a(BCN_LEY_20983, 'Ley 20.983')}).</li>
+<li><strong>Pueblos Indígenas:</strong> se celebra el solsticio de invierno, cuya fecha exacta varía unos días entre un año y otro (${a(BCN_LEY_21357, 'Ley 21.357')}).</li>
+</ul>
+<p>El Gobierno publica cada año el calendario oficial de feriados (${a(GOB_FERIADOS_2026, 'gob.cl')}) y la DT difunde las reglas de irrenunciabilidad y traslado. Esta guía solo incluye las fechas ya confirmadas por ley; las pendientes se agregan cuando se publiquen.</p>`,
+    },
+    {
+      id: 'que-cambia-2027',
+      title: 'Qué cambia en 2027 respecto de 2026',
+      level: 2,
+      html: `<p>El calendario de 2027 no es una copia de 2026. Tres diferencias conviene notar:</p>
+<ul>
+<li><strong>17 de septiembre.</strong> En 2027 sí es feriado: el 18 cae ${diaSemana('2027-09-18')} y el 19 ${diaSemana('2027-09-19')}, y la ${a(BCN_LEY_20983, 'Ley 20.983')} lo declara feriado en ese caso. En 2026 el 18 cayó viernes y el 19 sábado, así que el 17 no fue feriado.</li>
+<li><strong>Traslados al lunes.</strong> San Pedro y San Pablo (29 de junio) y Encuentro de Dos Mundos (12 de octubre) caen ${diaSemana('2027-06-29')} y ${diaSemana('2027-10-12')} en 2027, así que se observan el ${conDia('2027-06-28')} y el ${conDia('2027-10-11')} (${a(BCN_LEY_19668, 'Ley 19.668')}). En 2026 ambas fechas cayeron lunes y no hubo traslado.</li>
+<li><strong>Fechas pendientes.</strong> Semana Santa y el Día Nacional de los Pueblos Indígenas aún no tienen fecha oficial 2027; se publicarán cuando el Gobierno dé a conocer el calendario de feriados del año (${a(GOB_FERIADOS_2026, 'gob.cl')}).</li>
 </ul>`,
     },
     {
@@ -164,8 +201,13 @@ ${
   f17sep
     ? `<h3>¿El 17 de septiembre de 2027 es feriado?</h3>
 <p>Sí. El ${conDia(f17sep.fecha)} es feriado nacional porque el 18 y el 19 de septiembre caen sábado y domingo (${a(BCN_LEY_20983, 'Ley 20.983')}). No es uno de los feriados irrenunciables de la Ley 19.973.</p>`
-    : ''
-}`,
+    : ''}
+<h3>¿Cuántos feriados nacionales tiene Chile en 2027?</h3>
+<p>${publicados.length} con fecha confirmada por ley, más los que falten por publicar (Semana Santa y Pueblos Indígenas). ${irrenunciables.length} de ellos son irrenunciables para el comercio.</p>
+<h3>¿Cuál es el fin de semana largo más largo de 2027?</h3>
+<p>Con las fechas confirmadas, el más largo dura ${Math.max(...largos.map((l) => l.dias))} días. La tabla completa está en <a href="#fines-de-semana-largos">fines de semana largos 2027</a>.</p>
+<h3>¿Los feriados regionales se pagan como los nacionales?</h3>
+<p>Rigen solo en su territorio: para quien trabaja en esa región son feriado como cualquier otro, y fuera de él no aplican. La lista 2027 está en <a href="#feriados-regionales">feriados regionales</a>.</p>}`,
     },
   ],
   relatedCalculators: ['calculadora-vacaciones-proporcionales', 'calculadora-finiquito'],
@@ -181,6 +223,8 @@ ${
     { label: 'BCN, Ley 21.357 (Pueblos Indígenas)', url: BCN_LEY_21357 },
     { label: 'BCN, Ley 20.663 (Arica y Parinacota)', url: BCN_LEY_20663 },
     { label: 'BCN, Ley 20.768 (Chillán y Chillán Viejo)', url: BCN_LEY_20768 },
+    { label: 'DT, descanso semanal y compensatorio por domingo y festivos', url: DT_DESCANSO_SEMANAL },
+    { label: 'DT, feriado que coincide con el domingo trabajado', url: DT_FESTIVO_DOMINGO },
     { label: 'gob.cl, Feriados 2026 (feriados regionales)', url: GOB_FERIADOS_2026 },
   ],
 };

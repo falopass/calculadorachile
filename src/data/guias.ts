@@ -2482,14 +2482,14 @@ export const guias: Guia[] = [
       'acumular vacaciones',
     ],
     publishedAt: '2026-10-16',
-    updatedAt: '2026-11-09',
-    readingTime: 6,
+    updatedAt: '2026-11-19',
+    readingTime: 8,
     sections: [
       {
         id: 'resumen',
         title: 'Resumen',
         level: 2,
-        html: `<p><em>Actualizado el 9 de noviembre de 2026</em></p>
+        html: `<p><em>Actualizado el 19 de noviembre de 2026</em></p>
 <p><strong>Respuesta directa:</strong> tras <strong>10 años de trabajo</strong>, sumas <strong>1 día de feriado progresivo por cada 3 años nuevos</strong> con tu empleador actual (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">art. 68 CT / DT</a>). El feriado legal base son <strong>15 días hábiles al año</strong> (art. 67; <strong>20</strong> en Magallanes, Aysén y Palena). No confundas las vacaciones progresivas con las <a href="#vacaciones-proporcionales">vacaciones proporcionales</a> al terminar el contrato.</p>
 <p>Detalle oficial del feriado legal: <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">DT, Ord. 2694/34</a>. Ir a <a href="#vacaciones-progresivas">cómo se calculan las vacaciones progresivas</a>.</p>`,
       },
@@ -2527,9 +2527,13 @@ export const guias: Guia[] = [
 <tr><td>13</td><td>3</td><td>1</td><td>15 + 1 = <strong>16</strong></td></tr>
 <tr><td>16</td><td>6</td><td>2</td><td>15 + 2 = <strong>17</strong></td></tr>
 <tr><td>19</td><td>9</td><td>3</td><td>15 + 3 = <strong>18</strong></td></tr>
+<tr><td>22</td><td>12</td><td>4</td><td>15 + 4 = <strong>19</strong></td></tr>
+<tr><td>25</td><td>15</td><td>5</td><td>15 + 5 = <strong>20</strong></td></tr>
+<tr><td>28</td><td>18</td><td>6</td><td>15 + 6 = <strong>21</strong></td></tr>
+<tr><td>31</td><td>21</td><td>7</td><td>15 + 7 = <strong>22</strong></td></tr>
 </tbody>
 </table>
-<p>Cálculo: (años trabajados − 10) ÷ 3, sin decimales.</p>
+<p>Cálculo: (años trabajados − 10) ÷ 3, sin decimales. La regla no tiene techo: a los 31 años con el mismo empleador corresponden 7 días progresivos, y sigue sumando de a un día cada tres años mientras no cambies de empleador.</p>
 <p><strong>Importante:</strong> debes acreditar los años (por ejemplo, con tu certificado de cotizaciones) <strong>antes</strong> de tomar tus vacaciones. Si no lo haces, pierdes el día progresivo de ese año y no puedes cobrarlo después (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html" target="_blank" rel="noopener">DT, Ord. 2694/34</a>).</p>`,
       },
       {
@@ -2539,6 +2543,46 @@ export const guias: Guia[] = [
         html: `<p>Solo puedes hacer valer <strong>hasta 10 años</strong> trabajados para empleadores anteriores (art. 68). Esos años sirven para completar la base, pero los 3 años nuevos tienen que ser con tu empleador actual.</p>
 <p><strong>Si cambias de empleador, pierdes los días progresivos.</strong> El tiempo trabajado solo te sirve para completar la base de 10 años, y vuelves a ganar el primer día progresivo después de 3 años con el nuevo empleador (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>).</p>
 <p><em>Ejemplo:</em> trabajaste 12 años en otra empresa y llevas 4 en la actual. Cuentan 10 años como base y llevas 4 años nuevos, así que tienes 1 día progresivo: 15 + 1 = 16 días hábiles.</p>`,
+      },
+      {
+        id: 'acreditar-anos',
+        title: 'Cómo acreditar los años para las vacaciones progresivas',
+        level: 2,
+        html: `<p>Para hacer valer las vacaciones progresivas debes <strong>acreditar tus años de servicio antes de tomar el feriado</strong>; si no lo haces, pierdes el día progresivo de ese período (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>). La prueba habitual es el <strong>certificado de cotizaciones previsionales</strong>, que muestra tus cotizaciones mes a mes en el sistema previsional.</p>
+<p>La base de 10 años equivale a <strong>120 cotizaciones</strong>. Si cambiaste de empleador, junta las cotizaciones de todos tus empleadores anteriores: el art. 68 permite completarla, aunque para los días progresivos cuentan como máximo 10 años de empleadores anteriores. Si tu empleador no tiene tus cotizaciones al día, la DT admite acreditar la antigüedad con otros medios: certificado de la Inspección del Trabajo, instrumentos públicos, sentencias, convenios o escrituras (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60195.html" target="_blank" rel="noopener">DT</a>); conviene regularizar la situación previsional de todas formas.</p>`,
+      },
+      {
+        id: 'remuneracion-feriado',
+        title: 'La remuneración durante el feriado',
+        level: 2,
+        html: `<p>El feriado legal se paga con <strong>remuneración íntegra</strong> (art. 67 del Código del Trabajo). El artículo 71 precisa cómo se calcula según el sistema de pago del trabajador (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-113860.html" target="_blank" rel="noopener">DT, Ord. 5319</a>; <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-114322.html" target="_blank" rel="noopener">DT, Ord. 3589</a>):</p>
+<ul>
+<li><strong>Remuneración fija:</strong> la remuneración íntegra es el sueldo convenido.</li>
+<li><strong>Remuneraciones variables</strong> (tratos, comisiones, primas): es el <strong>promedio de lo ganado en los últimos tres meses trabajados</strong>.</li>
+<li><strong>Remuneración mixta</strong> (sueldo fijo más comisiones, bonos o trato): se suma el sueldo convenido al promedio de lo variable devengado en esos mismos tres meses.</li>
+</ul>
+<p>Además, el empleador debe pagar <strong>cualquier otra remuneración o beneficio devengado cuya fecha de pago caiga dentro del feriado</strong>, como un aguinaldo de Fiestas Patrias o de Navidad, o una asignación de escolaridad (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html" target="_blank" rel="noopener">DT, Ord. 4624</a>). Si tu sueldo es variable o mixto, revisa que el pago del feriado use el promedio de tres meses —y en el caso mixto que se sume al sueldo— y no solo el sueldo base.</p>`,
+      },
+      {
+        id: 'licencia-medica',
+        title: 'Vacaciones y licencia médica',
+        level: 2,
+        html: `<p>Si estando en feriado te enfermas y un médico te da licencia médica, el feriado <strong>se suspende mientras dura la licencia</strong> y se reanuda cuando te recuperas, o en la oportunidad que convengan las partes (<a href="https://dt.gob.cl/portal/1628/w3-article-60181.html" target="_blank" rel="noopener">DT, Dictamen 6256/279</a>). La razón es que el feriado busca reposo y distracción, mientras que la licencia médica busca el reposo por enfermedad: son fines distintos.</p>
+<p>En la práctica, los días de licencia no se descuentan del feriado legal: el beneficio queda en suspenso y retomas los días que te faltaban al terminar la licencia. Si la licencia se extiende más allá del período original de vacaciones, conviene dejar por escrito con el empleador cómo y cuándo se reanudan los días restantes.</p>`,
+      },
+      {
+        id: 'jornada-parcial',
+        title: 'Vacaciones en jornada parcial',
+        level: 2,
+        html: `<p>La jornada no cambia el feriado anual: <strong>toda trabajadora y trabajador con más de un año de servicio tiene derecho a los mismos 15 días hábiles</strong>, ya sea jornada completa, parcial, bisemanal o excepcional (<a href="https://www.dt.gob.cl/consultas/1613/w3-article-60177.html" target="_blank" rel="noopener">DT</a>; <a href="https://dt.gob.cl/legislacion/1624/w3-article-63196.html" target="_blank" rel="noopener">Ord. 339/27</a>). Tampoco se reduce por trabajar menos horas ni menos días a la semana.</p>
+<p>Para contarlos, el sábado siempre es inhábil. Si el último día de vacaciones cae en viernes y tu jornada pactada es de lunes a sábado, <strong>te reintegras el sábado siguiente</strong>, no el lunes. El feriado se da de preferencia en primavera o verano, según las necesidades del servicio, y en Magallanes, Aysén y Palena son 20 días hábiles.</p>`,
+      },
+      {
+        id: 'jornada-40-horas',
+        title: '¿La jornada de 40 horas cambia mis vacaciones?',
+        level: 2,
+        html: `<p>No. Las vacaciones se cuentan en <strong>días hábiles</strong>, no en horas: sigues con los mismos 15 días hábiles (20 en Magallanes, Aysén y Palena) más tus días progresivos, cualquiera sea tu jornada (<a href="https://www.dt.gob.cl/consultas/1613/w3-article-60177.html" target="_blank" rel="noopener">DT</a>). La reducción de la jornada completa que la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1190878" target="_blank" rel="noopener">Ley 21.561</a> programa para 2028 no agrega ni quita días de feriado.</p>
+<p>Lo que sí conviene revisar es la <strong>remuneración durante el feriado</strong>: se paga con la remuneración íntegra del período (art. 71), así que si tu sueldo cambia con la nueva jornada, ese es el monto que verás en la liquidación de vacaciones.</p>`,
       },
       {
         id: 'acumular-vacaciones',
@@ -2578,7 +2622,15 @@ export const guias: Guia[] = [
 <h3>¿Puedo acumular vacaciones?</h3>
 <p>Sí, de común acuerdo con tu empleador y hasta por dos períodos consecutivos (art. 70).</p>
 <h3>¿El sábado cuenta como día de vacaciones?</h3>
-<p>No. Para el feriado legal, el sábado siempre es inhábil (art. 69 del Código del Trabajo).</p>`,
+<p>No. Para el feriado legal, el sábado siempre es inhábil (art. 69 del Código del Trabajo).</p>
+<h3>¿Puedo perder mis vacaciones progresivas?</h3>
+<p>Sí, si no acreditas tus años antes de tomarlas: el día progresivo de ese período se pierde y no se puede cobrar después (art. 68 y doctrina de la DT).</p>
+<h3>¿Las vacaciones se pagan?</h3>
+<p>Sí, con remuneración íntegra: el sueldo fijo y, si hay remuneraciones variables, el promedio de lo variable devengado en los últimos tres meses trabajados (art. 71).</p>
+<h3>¿Puedo fraccionar mis vacaciones?</h3>
+<p>Sí, cuando tienes más de 10 días hábiles, de común acuerdo con tu empleador (art. 70).</p>
+<h3>¿Qué pasa con las vacaciones al renunciar?</h3>
+<p>Se pagan como vacaciones proporcionales por el tiempo trabajado: usa la calculadora de vacaciones proporcionales.</p>`,
       },
       {
         id: 'relacionadas',
@@ -2597,6 +2649,10 @@ export const guias: Guia[] = [
       { label: 'DT, Ord. 2694/34 (arts. 67 a 70 del Código del Trabajo)', url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-103605.html' },
       { label: 'DT, ¿En qué consiste el derecho al feriado progresivo?', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html' },
       { label: 'DT, Ord. 2802/145 (acumulación, fraccionamiento, sábado inhábil)', url: 'https://dt.gob.cl/legislacion/1624/w3-article-88844.html' },
+      { label: 'DT, remuneración íntegra durante el feriado (art. 71 CT, Ord. 5319)', url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-113860.html' },
+      { label: 'DT, Ord. 4624 (otros beneficios pagados durante el feriado)', url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html' },
+      { label: 'DT, licencia médica suspende el feriado (Dictamen 6256/279)', url: 'https://dt.gob.cl/portal/1628/w3-article-60181.html' },
+      { label: 'DT, feriado anual en cualquier jornada', url: 'https://www.dt.gob.cl/consultas/1613/w3-article-60177.html' },
       { label: 'gob.cl, Feriados 2026', url: 'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/' },
     ],
   },

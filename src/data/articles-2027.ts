@@ -62,8 +62,9 @@ export const ARTICULOS_2027: Article[] = [
     description:
       'Arma tu presupuesto de verano 2027 en moneda local: efectivo, tarjetas y conversores para Argentina, Brasil, Perú, Colombia, México y Bolivia.',
     date: '2026-11-19',
+    updatedAt: '2026-11-19',
     category: 'educacion-financiera',
-    readingTime: 7,
+    readingTime: 8,
     keywords: ['cuánto dinero llevar', 'verano 2027', 'presupuesto viaje desde Chile', 'efectivo o tarjeta en el extranjero'],
     relatedCalculators: [
       'peso-argentino-a-chileno',
@@ -139,6 +140,11 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2>Si vas en auto desde Chile</h2>
 <p>Calcula por separado combustible, peajes y estacionamiento. La <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje</a> ayuda a estimar combustible y peajes con distancia, rendimiento y precios que tú ingreses. El precio del combustible por litro y los peajes se ingresan en pesos chilenos (CLP): convierte cada precio extranjero a CLP con el conversor del país correspondiente antes de ingresarlo. No obtiene automáticamente tarifas extranjeras ni sustituye la revisión de documentación para cruzar la frontera. Evita sumar de nuevo los trayectos que ya incluiste en otra parte de la planilla.</p>
+
+<h2>Si el presupuesto no cuadra: qué ajustar primero</h2>
+<p>Cuando el total convertido supera lo que puedes destinar al viaje, no recortes todos los gastos por igual. Separa los compromisos ya pagados y los que aún puedes mover: una excursión opcional o una noche menos en una ciudad son más fáciles de ajustar que un vuelo o un alojamiento con penalización por cancelación. Pregunta al proveedor las condiciones antes de decidir.</p>
+<p>La reserva personal es la última partida en sacrificarse: si la eliminas, cualquier imprevisto (un traslado que falla, un medicamento, una comida no prevista) terminará financiado con deuda o con un cambio de tarjeta con comisiones. Si aún así no alcanza, revisa primero los gastos en moneda extranjera que puedes re-cotizar, porque una reserva hecha hace meses puede haber cambiado de precio en la moneda local.</p>
+<p>Vuelve a correr los números con los precios vigentes y con el conversor del país: un presupuesto que cuadraba en octubre puede no cuadrar en enero, tanto por los precios locales como por la referencia del tipo de cambio. Contenido verificado el 19 de noviembre de 2026 contra la publicación del Banco Central de Chile sobre tipos de cambio nominales.</p>
 
 <h2>Antes de cerrar la maleta</h2>
 <p>Revisa las reglas vigentes de declaración de dinero en las aduanas de Chile, del destino y de cualquier tránsito. Este artículo no publica umbrales ni promete exenciones o devoluciones de impuestos: deben confirmarse en la autoridad competente antes de salir. Tampoco confundas una obligación de declarar con el presupuesto recomendado para vacaciones.</p>
