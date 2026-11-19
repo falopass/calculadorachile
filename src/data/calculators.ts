@@ -93,7 +93,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'sueldo bruto a líquido',
       'sueldo líquido a bruto',
       'calcular sueldo bruto',
-      'cuánto bruto para X líquido',
+      'cuánto bruto para recibir un líquido',
       'descuentos legales Chile',
     ],
     inputs: [
