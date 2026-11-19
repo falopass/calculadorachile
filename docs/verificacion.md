@@ -15,6 +15,7 @@ Ningún comando es obligatorio por defecto. Estas opciones se usan solo ante pet
 | SEO metadata/schema/sitemap | Inspección de salida/canonical afectados; build solo si se necesita comprobar generación estática |
 | `/api/values` o datos externos | Test o smoke focalizado del endpoint; typecheck si cambió su contrato |
 | UI/componente | Inspección de la superficie afectada; responsive cuando cambió layout, typecheck cuando cambió lógica TS |
+| Artículo o guía nueva/editada | `npm run audit:editorial` (exit 1 si hay piezas bajo 1.500 palabras, sin fuentes, con interpolaciones rotas, similitud >8% o fugas/redirects de URLs retiradas) |
 | Solo documentación | Releer el diff y las referencias afectadas |
 
 Si un check falla, quien implementa corrige la causa y repite solo ese check; un `verifier` independiente, si fue solicitado, reporta sin editar. Un PASS vigente no se repite mientras no cambien sus inputs.
