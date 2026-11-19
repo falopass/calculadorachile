@@ -5,10 +5,12 @@
  * muchos teclados móviles solo muestran punto: un único punto seguido de
  * 1 o 2 dígitos se toma como decimal ("3.500" sigue siendo 3500).
  */
-export function parseNumberInput(value: string, allowDotDecimal = false): number {
+export function parseNumberInput(value: string, allowDotDecimal = false, rejectInvalid = false): number {
   const v = value.trim();
-  const dotIsDecimal = allowDotDecimal && !v.includes(',') && /^\d*\.\d{1,2}$/.test(v);
+  const dotIsDecimal = allowDotDecimal && !v.includes(',') &&
+    (rejectInvalid ? /^-?\d*\.\d{1,2}$/ : /^\d*\.\d{1,2}$/).test(v);
   const cleaned = dotIsDecimal ? v : v.replace(/\./g, '').replace(/,/g, '.');
+  if (rejectInvalid && !/^-?\d+(?:\.\d*)?$/.test(cleaned)) return NaN;
   const parsed = parseFloat(cleaned);
-  return Number.isFinite(parsed) ? parsed : 0;
+  return Number.isFinite(parsed) ? parsed : rejectInvalid ? NaN : 0;
 }

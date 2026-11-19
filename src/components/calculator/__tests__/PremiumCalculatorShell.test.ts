@@ -264,10 +264,13 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     expect(container.textContent).toContain('3 3');
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
     try {
-      await act(async () => { setInputValue(fields[0], '2.5'); });
-      await act(async () => { vi.advanceTimersByTime(500); });
-      expect(container.textContent).toContain('deben ser enteros no negativos');
-      expect(container.textContent).not.toContain('3 3');
+      for (const invalid of ['2.5', '½', 'texto']) {
+        await act(async () => { setInputValue(fields[0], invalid); });
+        await act(async () => { vi.advanceTimersByTime(500); });
+        expect(container.textContent).toContain('deben ser enteros no negativos');
+        expect(container.textContent).not.toContain('3 3');
+        expect(container.textContent).not.toContain('0 6');
+      }
     } finally {
       consoleError.mockRestore();
     }

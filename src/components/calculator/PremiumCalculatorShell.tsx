@@ -286,7 +286,7 @@ function NumberField({
       value={display}
       onChange={(e) => {
         setDraft(e.target.value);
-        onChange(input.id, input.allowZero && e.target.value.trim() === '' ? '' : parseNumberInput(e.target.value, needsDecimal));
+        onChange(input.id, input.allowZero && e.target.value.trim() === '' ? '' : parseNumberInput(e.target.value, needsDecimal, input.rejectInvalidNumber));
       }}
       onBlur={() => setDraft(null)}
       placeholder={input.placeholder}

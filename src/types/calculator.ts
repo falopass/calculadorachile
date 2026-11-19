@@ -32,6 +32,8 @@ export interface CalculatorInput {
   unit?: CalculatorInputUnit;
   /** Acepta punto decimal al pegar números, además de la coma chilena. */
   allowDotDecimal?: boolean;
+  /** Rechaza texto no numérico en vez de convertirlo a cero. */
+  rejectInvalidNumber?: boolean;
   placeholder?: string;
   required?: boolean;
   /** Permite cero explícito en un campo numérico requerido, sin aceptar vacío. */

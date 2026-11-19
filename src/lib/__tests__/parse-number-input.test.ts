@@ -20,4 +20,13 @@ describe('parseNumberInput', () => {
     expect(parseNumberInput('')).toBe(0);
     expect(parseNumberInput('abc')).toBe(0);
   });
+  it('rechaza texto inválido solo al activar la validación estricta', () => {
+    for (const value of ['½', 'texto', '2abc', '', '2,5,3']) {
+      expect(parseNumberInput(value, true, true)).toBeNaN();
+    }
+    expect(parseNumberInput('2.0', true, true)).toBe(2);
+    expect(parseNumberInput('-2.0', true, true)).toBe(-2);
+    expect(parseNumberInput('2,5', true, true)).toBe(2.5);
+    expect(parseNumberInput('½')).toBe(0);
+  });
 });
