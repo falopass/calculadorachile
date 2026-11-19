@@ -21,10 +21,10 @@ describe('formato chileno de días', () => {
 
   it('muestra medios días con coma en la tarjeta de resultados', () => {
     const html = renderToStaticMarkup(
-      <PremiumResultCard animate={false} showChart={false} results={[
+      React.createElement(PremiumResultCard, { animate: false, showChart: false, results: [
         { label: 'Días disponibles', value: 0.5, format: 'days', highlight: true },
         { label: 'Días usados', value: 6, format: 'days' },
-      ]} />,
+      ] }),
     );
     expect(html).toContain('0,5 días');
     expect(html).toContain('6 días');
