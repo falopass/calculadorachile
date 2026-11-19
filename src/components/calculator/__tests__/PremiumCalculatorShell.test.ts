@@ -129,6 +129,8 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
       }));
     });
     expect(container.textContent).toContain('0 6');
+    expect(container.textContent).toContain('sin contar medios días');
+    expect(container.textContent).toContain('ej.: 3 = 1,5 días');
     const fields = container.querySelectorAll<HTMLInputElement>('input');
     for (const [completos, medios, resultado] of [['2', '0', '2 4'], ['0', '3', '1.5 4.5']]) {
       await act(async () => {
