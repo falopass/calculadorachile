@@ -31,6 +31,7 @@ import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/valu
 import { formatCLP } from '@/lib/formatters';
 import {
   AGUINALDO_PENSIONADOS_IPS_2026,
+  getIngresoMinimoVigente,
   INDEMNIZACION,
 } from '@/lib/values/constants';
 import { anioSantiago } from '@/lib/values/fecha-santiago';
@@ -40,6 +41,7 @@ import { seoPesoArgentino } from '@/lib/calculations/peso-argentino-clp';
 import { seoDivisaViaje } from '@/lib/calculations/divisa-viaje-clp';
 
 const TOPE_GRAT = topeGratificacion();
+const IMM_MAYO_2026 = formatCLP(getIngresoMinimoVigente(new Date('2026-05-01T12:00:00Z')).mensual);
 
 /**
  * E-028 + E-053: title/meta honorarios según fecha en Chile.
@@ -121,8 +123,8 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO
   'calculadora-gratificacion-legal': {
-    seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.mensual)} al mes`,
-    seoDescription: `Calcula tu gratificación legal del 25% y comprueba si llega al tope de ${formatCLP(TOPE_GRAT.mensual)} al mes o ${formatCLP(TOPE_GRAT.anual)} al año (4,75 ingresos mínimos).`,
+    seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.anual)} al año`,
+    seoDescription: `Estima la gratificación del art. 50: 25% de tus remuneraciones, con tope anual de 4,75 ingresos mínimos. Equivalente mensual del tope: ${formatCLP(TOPE_GRAT.mensual)}.`,
   },
 
   'calculadora-horas-extra': {
@@ -531,9 +533,8 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #3 P1: IMM mayo 2026 ---
   'sueldo-minimo-2026-calcular-liquido': {
-    seoTitle: 'Sueldo mínimo Chile 2026: $553.553 brutos',
-    seoDescription:
-      'Desde mayo de 2026, el mínimo es $553.553 brutos para trabajadores de 18 a 65 años. Revisa los montos por edad y estima cuánto te queda líquido.',
+    seoTitle: `Sueldo mínimo Chile 2026: ${IMM_MAYO_2026} desde mayo`,
+    seoDescription: `De mayo a diciembre de 2026: ${IMM_MAYO_2026} brutos de sueldo mínimo general. Revisa los montos por edad y estima tu sueldo líquido.`,
   },
 
   // --- #6 P1: finiquito × IMM ---
@@ -607,7 +608,7 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   'calculadora-licencia-medica': {
     seoTitle: 'Licencia médica: ¿cuántos días me pagan?',
     seoDescription:
-      '¿Te dieron 3, 5, 7 u 11 días de licencia médica? Consulta la tabla de días pagados y estima el monto del subsidio según tu remuneración neta.',
+      '¿Te dieron 3, 5, 7 u 11 días de licencia médica? Ve la tabla de días pagados y estima el subsidio según tu remuneración neta promedio.',
   },
 
   'calculadora-aporte-familiar-permanente': {
