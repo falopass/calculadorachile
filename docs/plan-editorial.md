@@ -103,6 +103,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | 2026-11-18 | impuestos | iva, ppm, boleta-honorarios |
+| 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | 2026-11-19 | laboral | vacaciones-proporcionales, finiquito |
 | 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | 2026-11-18 | impuestos | impuesto-segunda-categoria, sueldo-liquido |
 | 28 | blog | Indemnización por años de servicio: tope de 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | 2026-11-18 | laboral | indemnizacion-anos-servicio, finiquito |
 | 49 | blog | Cómo cambiarse de AFP en Chile 2026: pasos y plazos | `cambio-afp-2026-como-hacerlo` | 2026-11-18 | pensión | comparador-afp |
@@ -148,7 +149,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~24~~ | blog | ~~Cotización independientes 2026~~ | ~~`cotizacion-independientes-2026-boleta`~~ | publicado 2026-11-19 en `articles-2027.ts` · DR[16] | previsional | ~~2026-10-16~~ | oct–abr | ✅ |
 | 25 | blog | Reajuste arriendo UF/IPC 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | evergreen blog | vivienda | 2026-10-20 | continuo | **P2-continuo** |
 | 26 | blog | Subsidio habitacional DS01/DS49 | `subsidio-habitacional-ds01-ds49-ahorro-uf-2026` | DR[28] · satélite vivienda | vivienda | 2026-10-23 | continuo | **P2-continuo** |
-| 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | DR[11] · evergreen | laboral | 2026-10-27 | continuo | **P2-continuo** |
+| ~~27~~ | blog | ~~Vacaciones proporcionales 2026~~ | ~~`vacaciones-proporcionales-2026-calcular`~~ | publicado 2026-11-19 · DR[11] | laboral | ~~2026-10-27~~ | continuo | ✅ |
 | ~~28~~ | blog | ~~Indemnización años servicio tope 90 UF~~ | ~~`indemnizacion-anos-servicio-tope-90-uf-2026`~~ | publicado 2026-11-18 · satélite finiquito | laboral | ~~2026-10-30~~ | continuo | ✅ |
 | ~~29~~ | blog | ~~Contribuciones 4.ª cuota 30 nov~~ | ~~`contribuciones-cuarta-cuota-noviembre-2026`~~ | ~~DR[27]~~ | vivienda | ~~2026-09-23~~ | 30 nov | ✅ |
 | ~~30~~ | blog | ~~Aguinaldo Navidad pensionados 2026~~ | ~~`aguinaldo-navidad-pensionados-2026`~~ | — | pensión | ~~2026-09-23~~ | nov–dic | ✅ |
@@ -173,11 +174,11 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 
-**Conteo pendientes:** 21 filas activas, sin las filas marcadas como publicadas.
+**Conteo pendientes:** 19 filas activas, sin las filas marcadas como publicadas.
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 19 |
+| **blog** | 17 |
 | **blog\*** (candidata guía) | 2 (#47, #48) |
 | **guía** | 0 |
 
@@ -186,7 +187,7 @@ Ordenado por **fecha de publicación sugerida**.
 | Subnivel | Uso | IDs |
 |----------|-----|-----|
 | **P2-ventana** | Antes del pico | #10, #11, #13–#15, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
-| **P2-continuo** | Sin deadline | #12, #17, #22, #25–#27, #33, #38, #47, #48, #50 |
+| **P2-continuo** | Sin deadline | #12, #17, #22, #25–#26, #33, #38, #47, #48, #50 |
 
 ---
 
@@ -373,14 +374,14 @@ Núcleo post-dedupe (catálogo A + CAE):
 Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
-Plan integrado operativo (recuento de las tablas tras publicar #21):
-  Filas en la tabla Publicados:  25
-  Filas activas en pendientes:  21
-    blog:                       19
+Plan integrado operativo (recuento de las tablas tras publicar #21, #23 y #27):
+  Filas en la tabla Publicados:  27
+  Filas activas en pendientes:  19
+    blog:                       17
     blog* (candidata guía):      2   (#47, #48)
     guía:                        0
     P1 restante:                 0
-    P2:                         17
+    P2:                         15
     P3:                          4
 ```
 

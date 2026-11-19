@@ -6547,6 +6547,141 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <p>Para profundizar en el contexto familiar y sus límites, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de pensión alimenticia y derechos familiares</a> y reproduce tus referencias en la <a href="/calculadoras/calculadora-pension-alimenticia">calculadora de pensión alimenticia</a>.</p>`,
   },
   {
+    slug: 'vacaciones-proporcionales-2026-calcular',
+    title: 'Vacaciones proporcionales 2026: cómo calcular los días y el pago',
+    description:
+      'Cómo calcular el feriado proporcional al terminar tu contrato en Chile: 1,25 días hábiles por mes, días corridos, remuneración íntegra y ejemplo paso a paso.',
+    date: '2026-11-19',
+    updatedAt: '2026-11-19',
+    category: 'laboral',
+    readingTime: 7,
+    keywords: [
+      'vacaciones proporcionales 2026',
+      'feriado proporcional',
+      'calcular vacaciones finiquito',
+      '1,25 días por mes',
+      'remuneración íntegra vacaciones',
+    ],
+    relatedCalculators: ['calculadora-vacaciones-proporcionales', 'calculadora-finiquito'],
+    relatedGuia: 'vacaciones-feriado-legal-chile',
+    embedCalculatorId: 'vacaciones-proporcionales',
+    faq: [
+      {
+        question: '¿Cuántos días de vacaciones proporcionales corresponden por mes?',
+        answer:
+          'En el régimen general de 15 días hábiles anuales, corresponden 1,25 días hábiles por mes trabajado (15 ÷ 12). Según la DT, se consideran también las fracciones de mes y después se suman los sábados, domingos y festivos comprendidos en el período contado desde el día siguiente al término del contrato.',
+      },
+      {
+        question: '¿Me pagan vacaciones proporcionales si renuncio?',
+        answer:
+          'Sí, como regla general. El artículo 73 contempla la compensación del feriado al dejar la empresa, también por renuncia. Hay una excepción en el artículo 44: en contratos de treinta días o menos, el feriado y demás derechos proporcionales se entienden incluidos en la remuneración convenida; esa regla no rige para prórrogas que, sumadas al período inicial, excedan de sesenta días. Debe distinguirse además el feriado completo pendiente del proporcional desde la contratación o última anualidad.',
+      },
+      {
+        question: '¿Se calculan con el sueldo líquido o con el bruto?',
+        answer:
+          'La base es la remuneración íntegra definida en el artículo 71, no el sueldo líquido. Con remuneración fija corresponde el sueldo; con remuneración variable, el promedio de los últimos tres meses trabajados; con remuneración mixta, el sueldo más ese promedio variable, según explica la DT.',
+      },
+      {
+        question: '¿Puedo cobrar 1,25 días cada mes sin terminar el contrato?',
+        answer:
+          'No como sustitución del feriado legal. El artículo 73 establece que el feriado del artículo 67 no puede compensarse en dinero mientras sigue vigente la relación laboral. El factor mensual permite calcular la indemnización proporcional al término del contrato.',
+      },
+    ],
+    sources: [
+      {
+        label: 'BCN — Código del Trabajo, artículos 67 a 73',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'DT — Cómo se calcula el feriado proporcional',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-60200.html',
+      },
+      {
+        label: 'DT — Remuneración íntegra, ORD. 4624',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html',
+      },
+      {
+        label: 'DT — Feriado progresivo',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html',
+      },
+      {
+        label: 'DT — Fracciones de día, ORD. 826/13',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html',
+      },
+      {
+        label: 'DT — Remuneración fija mensual y divisor 30',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60221.html',
+      },
+    ],
+    content: `
+<p>Las <strong>vacaciones proporcionales</strong> son la indemnización por el feriado que generaste y que debe compensarse cuando termina tu contrato antes de completar la anualidad correspondiente. No son un bono ni días corridos que se acumulen automáticamente cada mes: el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 73 del Código del Trabajo</a> las vincula al tiempo transcurrido desde la contratación o la última anualidad hasta el término de los servicios.</p>
+<p>Esta explicación, revisada al 19 de noviembre de 2026, aborda el régimen del Código del Trabajo y el procedimiento de la Dirección del Trabajo (DT). La pregunta práctica es cómo pasar de los meses trabajados a una suma que puedas contrastar con tu finiquito. No cubre estatutos especiales ni anuncia un cambio de fórmula para 2026: distingue días hábiles, días indemnizables y remuneración íntegra, porque mezclar esas tres cantidades cambia el resultado.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">🧮</span><div class="callout__body"><strong>Estima tus vacaciones pendientes</strong><p>Usa la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> para estimar días y monto. Contrasta el resultado con tus fechas, liquidaciones y los días inhábiles que efectivamente caen en el período. Revisa antes la excepción del <a href="https://www.bcn.cl/leychile/Navegar?idNorma=207436&amp;idParte=8511902" target="_blank" rel="noopener">artículo 44 para contratos de treinta días o menos</a>, cuyo feriado puede estar incluido en la remuneración convenida.</p><p>La calculadora usa el factor general de 15 días anuales y no permite seleccionar 20 días ni feriado progresivo. Si te corresponden más días, calcula aparte el factor como días anuales ÷ 12 y vuelve a contar los inhábiles; no ajustes solo el monto final.</p></div></aside>
+
+<h2>Qué se paga al terminar el contrato</h2>
+<p><strong>Excepción para contratos breves:</strong> el <a href="https://www.bcn.cl/leychile/Navegar?idNorma=207436&amp;idParte=8511902" target="_blank" rel="noopener">artículo 44 del Código del Trabajo</a> dispone que, en contratos de treinta días o menos, se entiende incluido en la remuneración convenida todo lo que corresponde por feriado y demás derechos proporcionales. Esta regla no rige para prórrogas que, sumadas al período inicial, excedan de sesenta días. Antes de calcular un pago separado al término, verifica si tu contrato cae en esta excepción.</p>
+<p>El artículo 73 distingue dos situaciones: si ya cumpliste los requisitos para el feriado y dejas la empresa, se compensa el descanso pendiente; si el contrato termina antes de completar el año que da derecho al feriado, corresponde la indemnización proporcional. Por eso, si llevas más de un año, no se calcula todo desde cero: separa las anualidades pendientes del período proporcional posterior a la última anualidad.</p>
+<p>La regla no depende de que exista un despido: el mismo artículo habla de dejar de pertenecer a la empresa por cualquier circunstancia. Una renuncia no elimina este concepto. Tampoco debe confundirse con la indemnización por años de servicio: son partidas distintas que conviene revisar por separado en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>
+
+<h2>De 15 días al año a 1,25 días por mes</h2>
+<p>El régimen general del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 67</a> contempla 15 días hábiles de feriado anual con remuneración íntegra. No es una regla universal: el mismo artículo establece 20 días hábiles para quienes prestan servicios en las regiones de Magallanes y de Aysén y en la provincia de Palena. Verifica tu régimen antes de usar el factor general.</p>
+<p>Según el <a href="https://dt.gob.cl/portal/1628/w3-article-60200.html" target="_blank" rel="noopener">procedimiento oficial de la Dirección del Trabajo</a>, primero se divide el feriado anual que corresponde por los 12 meses del año. En el caso general: <strong>15 ÷ 12 = 1,25 días hábiles por mes trabajado</strong>. Para fracciones de mes, la DT utiliza 1,25 ÷ 30, equivalente a aproximadamente 0,04167 días hábiles por día.</p>
+<ol class="steps">
+<li><strong>Identifica el período:</strong> desde la contratación o desde la última anualidad hasta el término del contrato.</li>
+<li><strong>Calcula los días hábiles:</strong> multiplica 1,25 por los meses y agrega la fracción correspondiente a los días adicionales.</li>
+<li><strong>Lleva el resultado al calendario:</strong> cuenta desde el día siguiente al término y agrega los inhábiles comprendidos en el período.</li>
+<li><strong>Valoriza:</strong> multiplica los días indemnizables por el valor diario de la remuneración íntegra.</li>
+</ol>
+
+<h2>Por qué se agregan sábados, domingos y festivos</h2>
+<p>Los 1,25 días son <strong>hábiles, no corridos</strong>. El artículo 69 considera siempre inhábil el sábado para efectos del feriado. La DT indica que, al proyectar los días hábiles desde el día siguiente al término del contrato, deben agregarse los sábados, domingos y festivos incluidos en ese lapso. No sirve aplicar un multiplicador fijo para todos los casos: las fechas cambian el resultado.</p>
+<p>También importan los decimales. El <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html" target="_blank" rel="noopener">dictamen 826/13 de la DT</a> aclara que, si queda una fracción después del último día hábil anterior a un fin de semana o festivo, esa fracción pasa al siguiente día hábil y los inhábiles intermedios se incluyen en el pago. Redondear antes de contar puede dejar fuera parte de la indemnización.</p>
+
+<h2>Base de cálculo: última remuneración íntegra</h2>
+<p>Para valorizar el feriado al término del contrato, usa la última remuneración íntegra que corresponda conforme al <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 71</a>. No equivale necesariamente al total de la última liquidación ni al líquido depositado. La <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html" target="_blank" rel="noopener">DT distingue según el sistema de remuneraciones</a>:</p>
+<ul>
+<li><strong>Fija:</strong> la remuneración íntegra está constituida por el sueldo.</li>
+<li><strong>Variable:</strong> corresponde al promedio de lo ganado en los últimos tres meses trabajados.</li>
+<li><strong>Mixta:</strong> se suma el sueldo al promedio de las remuneraciones variables de esos tres meses.</li>
+</ul>
+<p>El artículo 71 también contempla la remuneración del artículo 45 cuando corresponda. Si existen comisiones diferidas u otros beneficios, revisa su tratamiento y evita duplicarlos con el promedio: la DT explica esos casos en el mismo pronunciamiento. Para una remuneración fija mensual, el <a href="https://www.dt.gob.cl/portal/1628/w3-article-60221.html" target="_blank" rel="noopener">criterio de remuneración diaria de la DT</a> utiliza el divisor 30, aunque el mes tenga otra cantidad de días.</p>
+
+<h2>Ejemplo paso a paso: días hábiles y monto</h2>
+<p>Para no atribuir feriados sin verificar al calendario 2026, tomemos el <strong>ejemplo histórico publicado por la DT</strong> en su <a href="https://dt.gob.cl/portal/1628/w3-article-60200.html" target="_blank" rel="noopener">respuesta sobre feriado proporcional</a>: ingreso el 15 de marzo de 2021 y término el 17 de noviembre de 2021. Son 8 meses y 2 días. Agregamos como supuesto ilustrativo un sueldo fijo mensual de $900.000, sin otras partidas ni feriado progresivo.</p>
+<div class="numeric-example">
+<p><strong>1. Meses:</strong> 8 × 1,25 = 10 días hábiles.</p>
+<p><strong>2. Fracción:</strong> 2 × (1,25 ÷ 30) = 0,08333 días hábiles aproximadamente.</p>
+<p><strong>3. Calendario:</strong> desde el 18 de noviembre hasta el 2 de diciembre de 2021, la DT contabiliza 4 días inhábiles. El total es 14,08333 días indemnizables aproximadamente.</p>
+<p><strong>4. Valor diario supuesto:</strong> $900.000 ÷ 30 = $30.000.</p>
+<p><strong>5. Pago ilustrativo:</strong> (10 + 2 × 1,25 ÷ 30 + 4) × $30.000 = <strong>$422.500</strong>.</p>
+</div>
+<p>La DT presenta los días con dos decimales; aquí conservamos la precisión hasta el monto final. Los $900.000 no son un sueldo mínimo ni una cifra legal de 2026: son un supuesto para mostrar la operación. Para un término de contrato en 2026, hay que rehacer el conteo con las fechas y festivos aplicables, no copiar los cuatro inhábiles de este ejemplo.</p>
+
+<h2>¿Qué cambia si tienes feriado progresivo?</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 68</a> reconoce un día adicional por cada tres nuevos años de trabajo a quien tenga diez años trabajados, continuos o no; solo pueden hacerse valer hasta diez años con empleadores anteriores. La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT explica que los tres nuevos años deben cumplirse con el actual empleador</a>.</p>
+<p>Si ese derecho ya corresponde, el procedimiento de la DT incluye los días progresivos en el feriado anual antes de dividir por 12. No se mantiene automáticamente el factor 1,25. Revisa la antigüedad acreditada y el régimen aplicable antes de calcular; cambiar de empleador no conserva los días progresivos del trabajo anterior, según la misma respuesta oficial.</p>
+<p>La calculadora incrustada mantiene el factor general de 15 ÷ 12 y no incorpora automáticamente los días progresivos. Para tu revisión, reemplaza ese factor por el total de días anuales que te corresponda dividido por 12 y proyecta nuevamente el período en el calendario conforme al procedimiento de la DT.</p>
+
+<h2>Qué revisar antes de aceptar el cálculo</h2>
+<p>Empieza por reconstruir el saldo, no por multiplicar el sueldo. En una hoja separa las vacaciones ya utilizadas, las anualidades completas pendientes y el tramo desde la última anualidad hasta la separación. Así puedes identificar qué parte de la propuesta corresponde a cada período. Si el documento solo trae una suma bajo el título “vacaciones”, pide el detalle de fechas, días y valor diario: sin esa separación no podrás comprobar el procedimiento del artículo 73.</p>
+<p>Ten a mano contrato, fecha de ingreso, última anualidad, registro de vacaciones tomadas y liquidaciones. Compara por separado el saldo de feriado completo y el proporcional; después revisa el calendario y la base remuneracional. Los errores habituales son tratar días hábiles como corridos, omitir la fracción de mes o usar solo el sueldo fijo cuando existen variables.</p>
+<p>El resultado cero también necesita explicación. Que no queden vacaciones de una anualidad anterior no demuestra por sí solo que el tramo posterior no haya generado feriado proporcional. A la inversa, no agregues nuevamente un descanso ya utilizado. La operación debe partir de un saldo respaldado por registros y de las fechas pertinentes; la fórmula mensual de la DT no permite conocer, por sí sola, cuántos días tomaste.</p>
+<p>Para revisar el calendario, marca primero el día siguiente al término. Recorre los días hábiles hasta consumir el saldo y conserva las fracciones. Luego identifica los sábados, domingos y festivos intermedios. Este orden reproduce el <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html" target="_blank" rel="noopener">criterio del dictamen 826/13</a>; partir del total en pesos e intentar deducir después cuántos días representa puede esconder un error de conteo.</p>
+
+<h2>Cómo revisar comisiones sin usar solo la última liquidación</h2>
+<p>La explicación general del promedio supone al menos tres meses trabajados. Para el caso específico de remuneración mixta con dos meses completos de trabajo durante los cuales se generaron variables, el <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-103857.html" target="_blank" rel="noopener">ORD. 3343/49 de la DT</a> indica sumar las variables percibidas en ese período y dividirlas por 60 para obtener su valor diario; se multiplica por los días a compensar y se añade la proporción correspondiente al sueldo base. Para otros períodos inferiores a tres meses, consulta a la DT con tus liquidaciones: no extiendas automáticamente esa regla a casos distintos.</p>
+<p>El promedio de variables merece una comprobación propia. Como ejercicio hipotético de remuneración mixta, considera un sueldo de $600.000 y remuneraciones variables de $180.000, $240.000 y $300.000 en los últimos tres meses trabajados. El promedio variable es ($180.000 + $240.000 + $300.000) ÷ 3 = $240.000. La suma ilustrativa conforme al artículo 71 sería $840.000, antes de revisar otros conceptos que pudieran corresponder.</p>
+<p>Usar solamente los $300.000 del último mes daría una base distinta. Usar solamente el sueldo de $600.000 dejaría fuera el promedio. Ninguna de esas dos operaciones aplica la regla de remuneración mixta descrita por la <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html" target="_blank" rel="noopener">DT en el ORD. 4624</a>. Las cifras de este ejercicio son supuestas y no describen un caso real ni fijan una base mínima.</p>
+<p>La palabra “trabajados” también importa: la fuente no indica simplemente tomar los tres últimos depósitos bancarios. Reúne las liquidaciones y verifica a qué período corresponde cada comisión. Si se paga con desfase, el pronunciamiento de la DT distingue el promedio que sustituye las variables durante el feriado de los pagos diferidos devengados anteriormente que no se consideraron en él. No clasifiques un bono solo por el nombre que aparece en la liquidación; revisa cómo está pactado y a qué período pertenece.</p>
+<p>Si la diferencia con el empleador está en esa clasificación, conserva ambas operaciones por escrito: qué conceptos incluyó cada una, qué meses promedió y qué saldo de días utilizó. Esa información permite llevar una consulta concreta a la DT, en vez de discutir únicamente un monto final. La calculadora ayuda a ordenar una estimación, pero no resuelve por sí misma una controversia sobre la naturaleza de una remuneración o el registro de un descanso.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no reemplaza asesoría laboral. La estimación debe ajustarse a tu régimen, remuneraciones y antecedentes. Si hay diferencias en el finiquito, consulta a la Dirección del Trabajo antes de dar por correcto el monto.</p></div></aside>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido revisado el 19 de noviembre de 2026 con el Código del Trabajo en BCN (artículos 67 a 73) y las respuestas y dictámenes de la Dirección del Trabajo enlazados en cada sección. No se utiliza un calendario de festivos 2026 ni se afirma un cambio legal específico para ese año.</p>
+<p>Para profundizar, revisa la <a href="/guias/vacaciones-feriado-legal-chile">guía de vacaciones y feriado legal</a> y vuelve a la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> con tus antecedentes.</p>`,
+  },
+  {
     slug: 'apv-2026-simulador-ahorro-tributario',
     title: 'APV 2026: cómo ganar el beneficio tributario antes del 31 de diciembre',
     seoTitle: 'APV 2026: beneficio tributario si ahorras antes del 31 de diciembre',
