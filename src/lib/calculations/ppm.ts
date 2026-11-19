@@ -4,24 +4,10 @@
 
 import { getRetencionHonorarios } from '@/lib/values/honorarios-anio';
 import type { CalculatorResult } from '@/types/calculator';
-import {
-  UTM,
-  PPM_PRESUNCION,
-} from '@/lib/values/constants';
 
 export interface PPMInput {
-  /**
-   * Ingresos brutos del período. Para profesionales = honorarios brutos.
-   * Para 1ra categoría = ingresos por ventas/servicios.
-   */
+  /** Ingresos brutos anuales sin IVA; para profesionales, honorarios brutos. */
   ingresosBrutosAnuales: number;
-  /**
-   * Gastos efectivos del período. Si no se entregan, profesionales
-   * 2da categoría usan presunción 30% (Art. 50 LIR), tope 15 UTA.
-   * Comercio/transporte/construcción no tienen presunción genérica;
-   * deben declarar gastos reales.
-   */
-  gastosPresuntos?: number;
   actividad: 'profesional' | 'comercio' | 'transporte' | 'construccion';
 }
 
@@ -31,26 +17,8 @@ export interface PPMResult {
   ppmMensual: number;
   ppmAnual: number;
   actividad: string;
-  /** Indica si se aplicó la presunción 30% Art. 50 LIR. */
-  aplicoPresuncionGastos: boolean;
-  /** Tope de la presunción en CLP (15 UTA). */
-  topePresuncionCLP: number;
 }
 
-/**
- * Tasas de PPM por tipo de actividad.
- *
- * Para profesionales 2da categoría la tasa de PPM coincide con la
- * retención de honorarios (calendario Ley 21.133). Se usa el año
- * vigente del calendario, calculado dinámicamente.
- *
- * Para 1ra categoría las tasas iniciales son las que el SII fija al
- * inicio de actividades; luego se recalculan trimestralmente según
- * la diferencia con el impuesto del año anterior.
- *
- * Base legal: Art. 84 LIR (1ra categoría) y Art. 88 LIR + Ley
- * 21.133 (retención honorarios = PPM 2da categoría).
- */
 const TASAS_PPM: Record<Exclude<PPMInput['actividad'], 'profesional'>, number> = {
   comercio: 1,
   transporte: 0.3,
@@ -64,55 +32,11 @@ const NOMBRES_ACTIVIDAD: Record<PPMInput['actividad'], string> = {
   construccion: 'Construcción (1ra Categoría)',
 };
 
-/**
- * Tope y porcentaje de la presunción 30% para profesionales 2da
- * categoría. Definidos en `PPM_PRESUNCION` (Art. 50 inciso 3° LIR).
- */
-const TOPE_PRESUNCION_UTA = PPM_PRESUNCION.tope_uta;
-const PRESUNCION_PCT = PPM_PRESUNCION.porcentaje;
-
-/**
- * Calcula los Pagos Provisionales Mensuales (PPM).
- *
- * Bug histórico:
- *  - Tasa profesionales era 10% (calendario antiguo). Ley 21.133
- *    actualiza la tasa según el año de emisión.
- *  - Se aplicaba "deducción estándar 10%" para comercio/transporte/
- *    construcción que no existe en la ley. Se elimina: si no se
- *    entregan gastos, se usa la base bruta directa.
- *  - Profesionales: presunción 30% solo se aplica si no se declaran
- *    gastos efectivos, y queda topeada en 15 UTA.
- *
- * Base legal: Art. 50, 84 y 88 LIR; Ley 21.133.
- */
 export function calculatePPM(input: PPMInput): PPMResult {
-  const { ingresosBrutosAnuales, gastosPresuntos, actividad } = input;
+  const { ingresosBrutosAnuales, actividad } = input;
 
-  const ingresos = Math.max(0, ingresosBrutosAnuales);
-
-  // Tope presunción 15 UTA (solo aplica a profesionales)
-  const valorUTA = UTM.valor * 12;
-  const topePresuncionCLP = TOPE_PRESUNCION_UTA * valorUTA;
-
-  // Cálculo de gastos según actividad
-  let gastos: number;
-  let aplicoPresuncionGastos = false;
-
-  if (gastosPresuntos !== undefined && gastosPresuntos >= 0) {
-    // Gastos efectivos declarados por el usuario
-    gastos = Math.min(gastosPresuntos, ingresos);
-  } else if (actividad === 'profesional') {
-    // Profesionales: presunción 30%, tope 15 UTA (Art. 50 LIR)
-    const presuncion = ingresos * (PRESUNCION_PCT / 100);
-    gastos = Math.min(presuncion, topePresuncionCLP);
-    aplicoPresuncionGastos = true;
-  } else {
-    // 1ra categoría sin gastos declarados: base bruta directa
-    // (no existe presunción genérica del 10% en la ley).
-    gastos = 0;
-  }
-
-  const baseTributable = Math.max(0, ingresos - gastos);
+  // Base bruta sin IVA, sin deducir gastos: https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm
+  const baseTributable = Math.max(0, ingresosBrutosAnuales);
   const tasaPPM = actividad === 'profesional' ? getRetencionHonorarios() : TASAS_PPM[actividad];
 
   const ppmAnual = Math.round(baseTributable * (tasaPPM / 100));
@@ -124,8 +48,6 @@ export function calculatePPM(input: PPMInput): PPMResult {
     ppmMensual,
     ppmAnual,
     actividad: NOMBRES_ACTIVIDAD[actividad],
-    aplicoPresuncionGastos,
-    topePresuncionCLP: Math.round(topePresuncionCLP),
   };
 }
 
@@ -139,14 +61,6 @@ export function ppmToResults(result: PPMResult): CalculatorResult[] {
     { label: 'Base Tributable', value: result.baseTributable, format: 'CLP' },
     { label: 'Tasa PPM', value: result.tasaPPM, format: 'percentage' },
   ];
-
-  if (result.aplicoPresuncionGastos) {
-    results.push({
-      label: `Tope Presunción ${TOPE_PRESUNCION_UTA} UTA (Art. 50 LIR)`,
-      value: result.topePresuncionCLP,
-      format: 'CLP',
-    });
-  }
 
   return results;
 }
