@@ -98,17 +98,21 @@ describe('calculateSueldoCasaParticular', () => {
     expect(r.diferencia).toBe(53_553);
   });
 
-  it('julio 2026: reforma 1% y SIS 1,62% por separado', () => {
+  it.each([
+    ['2026-06-15T12:00:00', 1, 6_000, 9_720],
+    ['2026-07-15T12:00:00', 1, 6_000, 12_000],
+    ['2026-08-01T00:00:00', 3.5, 21_000, 0],
+  ])('remuneración %s: reforma y SIS según fecha', (fecha, tasa, reforma, sis) => {
     const r = calculateSueldoCasaParticular({
       modalidad: 'puertas-adentro',
       sueldoBruto: 600_000,
       afp: 'habitat',
       valorUF: UF_REF,
-      fecha: new Date('2026-07-15T12:00:00'),
+      fecha: new Date(fecha),
     });
-    expect(r.aportesEmpleador.tasaReforma).toBe(1);
-    expect(r.aportesEmpleador.reformaPrevisional).toBe(6_000);
-    expect(r.aportesEmpleador.sis).toBe(9_720);
+    expect(r.aportesEmpleador.tasaReforma).toBe(tasa);
+    expect(r.aportesEmpleador.reformaPrevisional).toBe(reforma);
+    expect(r.aportesEmpleador.sis).toBe(sis);
   });
 
   it('topes: 1,11% hasta 90 UF y cesantía hasta 135,2 UF', () => {

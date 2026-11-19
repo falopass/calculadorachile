@@ -6,6 +6,15 @@ import { calculatePPM } from '@/lib/calculations/ppm';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { INDEMNIZACION } from '@/lib/values/constants';
+import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
+import { calculateSueldoBrutoFromLiquido } from '@/lib/calculations/sueldo-liquido';
+
+const EJ_SUELDO_INVERSO = calculateSueldoBrutoFromLiquido(1_000_000, {
+  afp: 'habitat', saludTipo: 'fonasa', contratoIndefinido: true,
+});
+const EJ_HON_INVERSO = calculateBoletaHonorarios({
+  montoBruto: 500_000, modo: 'liquido-a-bruto', ano: 2026,
+});
 
 const EJ_PPM = calculatePPM({ ingresosBrutosAnuales: 24_000_000, actividad: 'comercio' });
 
@@ -44,6 +53,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Aplica AFP, salud y Seguro de Cesantía según las opciones seleccionadas y sus topes.',
       'Calcula el Impuesto Único sobre la base tributable y agrega los demás descuentos.',
       'Resta los descuentos al total de haberes para estimar el líquido.',
+      'En modo inverso, busca iterativamente el bruto cuyo líquido coincide con el objetivo, con tolerancia de un peso.',
     ],
     assumptions: [
       'Los datos corresponden a una liquidación mensual ordinaria.',
@@ -67,6 +77,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
         'Seguro de Cesantía: $1.000.000 × 0,60% = $6.000',
         'Total cotizaciones previsionales: $180.600',
         'Base tributable: $1.000.000 - $180.600 = $819.400 (exento de Impuesto Único)',
+        `Ejemplo inverso independiente: para ${formatCLP(1_000_000)} líquidos con AFP Habitat, Fonasa y contrato indefinido, sin bonos ni descuentos adicionales, la búsqueda estima ${formatCLP(EJ_SUELDO_INVERSO.bruto)} brutos y comprueba ${formatCLP(EJ_SUELDO_INVERSO.liquido)} líquidos.`,
       ],
       result: 'Sueldo líquido estimado a percibir: $819.400.',
     },
@@ -279,7 +290,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       development: [
         `Retención legal SII (${tasaHonorarios(getRetencionHonorarios(2026))}): $500.000 × ${tasaHonorarios(getRetencionHonorarios(2026))} = $76.250`,
         'Monto líquido a recibir: $500.000 - $76.250 = $423.750',
-        'Cálculo inverso (para recibir $500.000 líquido): Bruto = $500.000 / 0,8475 = $589.971',
+        `Cálculo inverso de honorarios (distinto del sueldo dependiente): para recibir ${formatCLP(500_000)} líquidos en 2026, el módulo divide por (1 − tasa de retención) y obtiene ${formatCLP(EJ_HON_INVERSO.montoBruto)} brutos.`,
       ],
       result: 'Monto líquido a transferir: $423.750 (con $76.250 retenidos para el SII).',
     },
@@ -427,7 +438,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Suma remuneración bruta y costos de cargo del empleador para estimar el costo mensual de contratación.',
     calculationSteps: [
       'Parte del sueldo imponible y haberes declarados.',
-      'Calcula cotizaciones y seguros de cargo empresarial.',
+      'Según el período, suma 1% de reforma y SIS separado (referencia hasta junio de 2026: 1,62%; julio: 2,00%), o 3,5% total con SIS incluido desde agosto de 2026.',
       'Agrega beneficios o costos adicionales informados.',
       'Suma los componentes y compara costo empresa con sueldo bruto.',
     ],
@@ -714,6 +725,43 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
         'CLP = 1,125 × valor UTM mostrado',
       ],
       result: 'El pago estimado equivale a 1,125 UTM del mes aplicable.',
+    },
+  },
+  'auto-electrico-vs-bencina': {
+    summary:
+      'Compara solo el costo de energía con precios y consumos ingresados por el usuario, no cifras oficiales precargadas.',
+    calculationSteps: [
+      'Bencina por km = precio por litro ÷ rendimiento en km/L.',
+      'Eléctrico por km = consumo en kWh/100 km ÷ 100 × precio por kWh.',
+      'Costo mensual de cada alternativa = costo por km sin redondear × km mensuales.',
+      'Diferencia mensual = bencina − eléctrico; diferencia anual = diferencia mensual sin redondear × 12.',
+      'Ahorro porcentual = diferencia mensual ÷ costo mensual de bencina × 100.',
+    ],
+    assumptions: [
+      'Precios declarados por el usuario: consulta bencinaenlinea.cl (CNE) y tu propia boleta o tarifa eléctrica, con referencias CNE/SEC.',
+      'Recorrido, rendimiento, consumo y precios constantes durante los 12 meses; la proyección anual no predice tarifas.',
+      'No se asume un porcentaje de pérdidas de carga; usa consumo desde la red si deseas incluirlas.',
+      'CLP, incluso costo por km, se redondea al entero al final de cada salida; el porcentaje a un decimal. No se usan valores ya redondeados en otros cálculos.',
+    ],
+    limitations: [
+      'No incluye compra, financiamiento, depreciación, mantención, seguros, permisos, peajes ni cargos fijos de electricidad.',
+      'Valores negativos de entrada se tratan como cero. Rendimiento cero genera costo de bencina cero; no representa un consumo válido.',
+      'Si el costo mensual de bencina es cero se muestra 0% por convención, no un ahorro calculable. Una diferencia negativa significa que el eléctrico cuesta más.',
+    ],
+    workedExample: {
+      title: 'Ejemplo ilustrativo: no son precios oficiales ni de mercado',
+      inputs: [
+        'Recorrido: 1.000 km/mes',
+        'Bencina: 10 km/L y $1.200/L (ilustrativos)',
+        'Eléctrico: 20 kWh/100 km y $200/kWh (ilustrativos)',
+      ],
+      development: [
+        'Bencina: 1.200 ÷ 10 = $120/km; mensual $120.000',
+        'Eléctrico: 20 ÷ 100 × 200 = $40/km; mensual $40.000',
+        'Diferencia: 120.000 − 40.000 = $80.000/mes; × 12 = $960.000/año',
+      ],
+      result:
+        'Ahorro energético ilustrativo: $80.000 al mes, equivalente a 66,7% respecto de bencina.',
     },
   },
   'costo-viaje': {

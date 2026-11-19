@@ -56,6 +56,244 @@ const ext = (url: string, texto: string) =>
   `<a href="${url}" target="_blank" rel="noopener">${texto}</a>`;
 
 export const ARTICULOS_2027: Article[] = [
+  {
+    slug: 'cuanto-dinero-llevar-viaje-verano-2027',
+    title: 'Cuánto dinero llevar a Argentina, Brasil, Perú, Colombia, México y Bolivia en verano 2027',
+    description:
+      'Arma tu presupuesto de verano 2027 en moneda local: efectivo, tarjetas y conversores para Argentina, Brasil, Perú, Colombia, México y Bolivia.',
+    date: '2026-11-19',
+    category: 'educacion-financiera',
+    readingTime: 7,
+    keywords: ['cuánto dinero llevar', 'verano 2027', 'presupuesto viaje desde Chile', 'efectivo o tarjeta en el extranjero'],
+    relatedCalculators: [
+      'peso-argentino-a-chileno',
+      'real-brasileno-a-peso-chileno',
+      'sol-peruano-a-peso-chileno',
+      'peso-colombiano-a-peso-chileno',
+      'peso-mexicano-a-peso-chileno',
+      'boliviano-a-peso-chileno',
+      'calculadora-costo-viaje',
+    ],
+    sources: [{
+      label: 'Banco Central de Chile: tipos de cambio nominales, pesos por unidad de moneda extranjera',
+      url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL',
+    }],
+    faq: [
+      {
+        question: '¿Cuánto efectivo llevo si el alojamiento ya está pagado?',
+        answer: 'Separa los gastos pendientes que el proveedor solo acepta en efectivo y una reserva para imprevistos. No vuelvas a sumar el alojamiento prepagado ni retires todo el presupuesto del viaje sin revisar cómo podrás pagar en destino.',
+      },
+      {
+        question: '¿El conversor muestra lo que cobrará mi tarjeta?',
+        answer: 'No. La conversión es una referencia, no una cotización de compra o venta ni una promesa del cargo final. Confirma con el emisor la moneda de facturación, el tipo de cambio aplicable y las comisiones.',
+      },
+      {
+        question: '¿Puedo usar el presupuesto de Argentina para los demás países?',
+        answer: 'No conviene trasladar un monto entre destinos solo convirtiendo monedas. Cotiza alojamiento, comidas, transporte y actividades en cada ciudad y convierte el total de su moneda local a pesos chilenos por separado.',
+      },
+    ],
+    content: `
+<p class="article-lead">Para saber cuánto dinero llevar a Argentina, Brasil, Perú, Colombia, México o Bolivia en el verano 2027, suma lo que todavía debes pagar en destino, separa una reserva y decide qué parte necesitarás en efectivo. No hay un monto diario universal: una reserva con comidas incluidas y un recorrido por varias ciudades necesitan presupuestos distintos.</p>
+
+<p>Esta pauta está pensada para viajes desde Chile entre diciembre de 2026 y marzo de 2027. Es un método de planificación, no una lista de precios turísticos ni una predicción cambiaria. No publicamos tarifas por país sin respaldo ni equivalencias fijas en pesos chilenos. Los conversores usan el valor de referencia del BCCh correspondiente a la fecha que muestran, desde una instantánea diaria de datos; no son cotizaciones en tiempo real ni necesariamente del día de tu consulta.</p>
+
+<h2>Cómo calcular el dinero que falta para el viaje</h2>
+<p>Parte por las cotizaciones de tus propias reservas, expresadas en la moneda en que se cobrarán. Anota alojamiento pendiente, alimentación no incluida, traslados, excursiones y compras previstas. Al lado de cada gasto, marca si está pagado, si admite tarjeta y cuándo se cobra. Una garantía o bloqueo de tarjeta no debe confundirse con un pago definitivo: pregunta al alojamiento cómo lo gestionará.</p>
+<p><strong>Presupuesto pendiente = alojamiento por pagar + alimentación + transporte + actividades + compras + reserva personal.</strong> Define esa reserva según los riesgos de tu itinerario, sin tratarla como una tarifa obligatoria. Si viajas acompañado, distingue los gastos compartidos de los individuales; dividir una habitación entre viajeros no significa dividir también las entradas o las comidas.</p>
+<p>Para estimar alimentación, arma un menú diario con precios que puedas consultar y multiplícalo por los días que realmente comerás fuera. Haz lo mismo con los trayectos de transporte y las actividades que quieres reservar. Guarda la fecha y las condiciones de cada cotización. Si falta un precio, déjalo identificado como pendiente: poner cero puede hacer parecer suficiente un presupuesto incompleto.</p>
+
+<h2>Conversores por país: calcula en la moneda del destino</h2>
+<p>El <a href="https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL" target="_blank" rel="noopener">Banco Central de Chile publica tipos de cambio nominales en pesos por unidad de moneda extranjera</a>. Úsalos como referencia de comparación, no como oferta de una casa de cambio. En cada calculadora revisa la fecha y la procedencia del dato antes de decidir; una referencia guardada no debe interpretarse como una cotización ejecutable del momento.</p>
+
+<h3>Argentina: presupuesto en pesos argentinos (ARS)</h3>
+<p>Separa las reservas cotizadas en otra moneda de los gastos que pagarás en pesos argentinos. Antes de cerrar un alojamiento o una excursión, pide que te confirmen la moneda, el importe final y las condiciones de pago. Evita construir el presupuesto suponiendo que todos los proveedores convertirán tus dólares de la misma forma.</p>
+<p>Suma lo pendiente en ARS y usa el <a href="/calculadoras/peso-argentino-a-chileno">conversor de peso argentino a peso chileno</a>. Para decidir entre efectivo y tarjeta, compara lo que recibirás o pagarás realmente, con los cargos incluidos. No damos por garantizado un tipo de cambio especial para turistas ni una ventaja permanente de un medio de pago.</p>
+
+<h3>Brasil: presupuesto en reales (BRL)</h3>
+<p>Cotiza en reales el alojamiento, los traslados y las actividades de la ciudad o playa elegida. Si un prestador propone un pago por aplicación o transferencia, confirma antes de reservar que puedes utilizarlo con tu cuenta y tus documentos. No bases todo el viaje en un método que todavía no has podido habilitar.</p>
+<p>Convierte el total con el <a href="/calculadoras/real-brasileno-a-peso-chileno">conversor de real brasileño a peso chileno</a>. Lleva identificadas alternativas para pagar el traslado de llegada y el alojamiento si falla tu método principal. Es una precaución de planificación, no una afirmación de que todos los comercios acepten o rechacen tarjetas extranjeras.</p>
+
+<h3>Perú: presupuesto en soles (PEN)</h3>
+<p>Arma una cuenta distinta para ciudad, excursiones y desplazamientos entre destinos. Si contratas un paquete, pide el detalle de lo incluido: comidas, entradas y traslados que no estén cubiertos deberán quedar en tu presupuesto pendiente. Confirma también la moneda del cobro si la publicidad y la reserva muestran monedas diferentes.</p>
+<p>Usa el <a href="/calculadoras/sol-peruano-a-peso-chileno">conversor de sol peruano a peso chileno</a> para dimensionar el total en CLP. Reserva efectivo para los gastos que tus proveedores confirmen que no podrás pagar con tarjeta, en vez de asumir una proporción fija válida para todo Perú.</p>
+
+<h3>Colombia: presupuesto en pesos colombianos (COP)</h3>
+<p>Anota siempre el código COP junto a los montos: tanto Chile como Colombia usan la palabra peso. Revisa los ceros y el separador de miles al copiar cotizaciones. Una confusión de moneda puede alterar mucho más el presupuesto que una diferencia pequeña entre alternativas de cambio.</p>
+<p>Ingresa el total en el <a href="/calculadoras/peso-colombiano-a-peso-chileno">conversor de peso colombiano a peso chileno</a>. Si visitas varias ciudades, separa los traslados largos de la movilidad cotidiana para no olvidar pasajes que todavía no están comprados. Consulta al alojamiento qué opciones tendrás para pagar al llegar.</p>
+
+<h3>México: presupuesto en pesos mexicanos (MXN)</h3>
+<p>Comprueba si la cotización está en MXN o en USD antes de compararla con otra. En un alojamiento con servicios incluidos, revisa cuáles quedan fuera del paquete y cómo se cobran los traslados. Una excursión opcional no debe desaparecer de la cuenta solo porque la estadía ya esté pagada.</p>
+<p>Convierte los gastos en MXN con el <a href="/calculadoras/peso-mexicano-a-peso-chileno">conversor de peso mexicano a peso chileno</a>. Mantén aparte cualquier gasto contratado en dólares; cambiar la etiqueta de moneda en una planilla no convierte el importe. Pide el total final al proveedor antes de comprometer el pago.</p>
+
+<h3>Bolivia: presupuesto en bolivianos (BOB)</h3>
+<p>Para recorridos organizados, solicita por escrito qué cubre el precio y qué deberás pagar durante la ruta. Confirma con el operador cómo se abonan los gastos pendientes y dónde podrás acceder a efectivo. No supongas que podrás resolver un retiro durante una excursión sin haberlo consultado.</p>
+<p>El <a href="/calculadoras/boliviano-a-peso-chileno">conversor de boliviano a peso chileno</a> sirve para comparar el presupuesto en BOB con tus ahorros en Chile. Contrasta esa referencia con la cotización real que te ofrezcan y conserva el comprobante de cambio. No presupuestes con una cotización informal que nadie se ha comprometido a entregar.</p>
+
+<h2>Efectivo o tarjeta: separa disponibilidad y costo</h2>
+<p>El presupuesto total no equivale al efectivo que debes llevar encima. Aparta los pagos que requieren billetes y revisa cómo repondrás dinero durante el viaje. Pregunta a tu banco por habilitación internacional, límites, moneda de facturación y cargos por compras o retiros. Consulta también cómo bloquear la tarjeta desde el extranjero y conserva esos datos fuera del teléfono principal.</p>
+<p>Si un terminal ofrece convertir la compra a pesos chilenos, revisa el importe y las condiciones antes de aceptar. Compara esa propuesta con las condiciones de tu emisor, sin dar por hecho que una opción siempre será más barata. Para los cajeros, revisa los cargos informados antes de confirmar y considera que puede haber costos de más de una entidad.</p>
+
+<h2>Dónde cambiar y qué comparar</h2>
+<p>Antes de viajar, consulta alternativas formales y verifica su autorización ante el regulador local que corresponda. Compara cuánto dinero local recibirás finalmente por el mismo monto entregado, después de comisiones. Pregunta si la cotización está disponible para la operación que quieres hacer y pide comprobante; un cartel o una publicación no bastan para conocer el costo final.</p>
+<p>No afirmamos que cambiar en Chile, en el aeropuerto o en el centro sea siempre mejor. Prioriza resolver la llegada de manera segura y luego compara alternativas sin transportar más efectivo del que necesitas. Las denominaciones que acepta cada proveedor y la disponibilidad de billetes también conviene confirmarlas, no presumirlas.</p>
+
+<h2>Si vas en auto desde Chile</h2>
+<p>Calcula por separado combustible, peajes y estacionamiento. La <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje</a> ayuda a estimar combustible y peajes con distancia, rendimiento y precios que tú ingreses. El precio del combustible por litro y los peajes se ingresan en pesos chilenos (CLP): convierte cada precio extranjero a CLP con el conversor del país correspondiente antes de ingresarlo. No obtiene automáticamente tarifas extranjeras ni sustituye la revisión de documentación para cruzar la frontera. Evita sumar de nuevo los trayectos que ya incluiste en otra parte de la planilla.</p>
+
+<h2>Antes de cerrar la maleta</h2>
+<p>Revisa las reglas vigentes de declaración de dinero en las aduanas de Chile, del destino y de cualquier tránsito. Este artículo no publica umbrales ni promete exenciones o devoluciones de impuestos: deben confirmarse en la autoridad competente antes de salir. Tampoco confundas una obligación de declarar con el presupuesto recomendado para vacaciones.</p>
+<p>Actualiza tus cotizaciones, vuelve a convertir los gastos pendientes y deja disponible el dinero de pagos que vencerán en Chile mientras estés fuera. La decisión final es concreta: cuánto falta por pagar, en qué moneda y con qué medio podrás hacerlo. Si alguna de esas respuestas sigue pendiente, resuélvela con el proveedor o el banco antes de comprar más efectivo.</p>`,
+  },
+  // Plan editorial #24
+  {
+    slug: 'cotizacion-independientes-2026-boleta',
+    title: 'Cotización de independientes: Operación Renta 2027 y retención del 16%',
+    description:
+      'Las boletas de 2026 financian cotizaciones en la Operación Renta 2027. Base del 80%, cobertura parcial del 90%, seguros, exenciones y diferencias con la retención del 16% de 2027.',
+    date: '2026-11-19',
+    updatedAt: '2026-11-19',
+    category: 'pension',
+    readingTime: 12,
+    relatedGuia: 'preparacion-operacion-renta-2027-checklist',
+    keywords: [
+      'cotización independientes 2026',
+      'cotizaciones honorarios Operación Renta 2027',
+      'boletas retención 16% 2027',
+      'cobertura parcial independientes 2027',
+      'Ley 21.133',
+    ],
+    relatedCalculators: ['calculadora-boleta-honorarios', 'calculadora-cotizacion-independientes'],
+    sources: [
+      {
+        label: 'SII — calendario de retención de boletas de honorarios',
+        url: 'https://www.sii.cl/destacados/boletas_honorarios/',
+      },
+      {
+        label: 'Subsecretaría de Previsión Social — Ley 21.133 y coberturas',
+        url: 'https://previsionsocial.gob.cl/wp-content/uploads/2026/05/05-FICHA-QUE-DICE-LA-LEY.pdf',
+      },
+      {
+        label: 'Subsecretaría de Previsión Social — preguntas frecuentes de honorarios',
+        url: 'https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/',
+      },
+      {
+        label: 'SII — gradualidad: 90% de la base en el año tributario 2027',
+        url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_8401.htm',
+      },
+      {
+        label: 'SP — cobertura y tasas del SIS para independientes',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html',
+      },
+      {
+        label: 'SP — tope imponible definitivo de 2026',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-16921.html',
+      },
+      {
+        label: 'SP — base anual y límite vigente al cierre del año de las rentas',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-10107.html',
+      },
+      {
+        label: 'SP — Compendio: independientes y cotización voluntaria de la Ley 21.735',
+        url: 'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3614.html',
+      },
+      {
+        label: 'SP — NCG 350: Seguro Social Previsional e independientes',
+        url: 'https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000350.pdf',
+      },
+      {
+        label: 'SII — guía práctica: salud, ahorro previsional y seguros',
+        url: 'https://www.sii.cl/servicios_online/renta/2024/guia_practica.pdf',
+      },
+      {
+        label: 'Consejo Consultivo Previsional — orden de pago y saldos insolutos',
+        url: 'https://previsionsocial.gob.cl/wp-content/uploads/2026/02/Documento_Independientes_CCP_VF.pdf',
+      },
+    ],
+    content: `
+<p>Si emites boletas de honorarios, la retención no es una devolución asegurada: también financia tu seguridad social. En abril de 2027 se liquidarán los ingresos de 2026, cuyas boletas llevan una retención del <strong>15,25%</strong>. El <strong>16%</strong> corresponde a las boletas emitidas desde el 1 de enero de 2027 y se conciliará en la Operación Renta 2028. Confundir esos dos calendarios puede dejarte esperando dinero que se destinará a cotizaciones.</p>
+
+<p>Esta explicación revisa la obligación de cotizar por honorarios, los seguros incluidos y la elección de cobertura para preparar la Operación Renta 2027. <strong>Fecha de corte: 19 de noviembre de 2026, Chile.</strong> Se apoya en documentos del SII, la Superintendencia de Pensiones y la Subsecretaría de Previsión Social. No adelanta fechas específicas de vencimiento o devolución del Formulario 22 de 2027: no se verificó un calendario oficial de ese proceso en las fuentes consultadas.</p>
+
+<h2>Dos años comerciales, dos declaraciones distintas</h2>
+
+<p>El ${ext('https://www.sii.cl/destacados/boletas_honorarios/', 'calendario del SII')} distingue el año en que se emite la boleta del año en que se presenta la declaración anual. La tasa de retención sube de 15,25% en 2026 a 16% en 2027. Ese porcentaje se aplica al honorario bruto de la boleta, no a la base previsional reducida. Tampoco representa una tasa única de AFP, salud y seguros: es una retención que después entra en la liquidación tributaria y previsional.</p>
+
+<p>Por eso, al revisar tu propuesta de renta de abril de 2027 debes buscar los honorarios percibidos durante 2026 y sus antecedentes, no aplicarles retroactivamente el 16%. Para presupuestar los pagos que recibirás durante 2027, en cambio, sí corresponde considerar la nueva retención. La <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> permite comparar bruto, retención y líquido seleccionando el año de emisión. Ese líquido describe lo que recibes por la boleta, no una pensión futura ni una devolución garantizada.</p>
+
+<h2>Quién debe cotizar y qué exenciones conviene revisar</h2>
+
+<p>La Ley 21.133 organiza la incorporación de quienes trabajan a honorarios a los regímenes de seguridad social. La ${ext('https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/', 'Subsecretaría de Previsión Social')} señala como obligados a quienes emiten boletas por <strong>cinco o más ingresos mínimos mensuales en el año calendario</strong>, cumplen la condición de edad y no están en las situaciones de excepción que describe. No basta mirar una boleta aislada o un mes sin actividad: hay que reconstruir el ingreso anual.</p>
+
+<p>La regla etaria tiene una fecha fija: están exentos por este concepto los hombres que tenían 55 años o más y las mujeres que tenían 50 años o más <strong>al 1 de enero de 2018</strong>. Cumplir esas edades ahora no crea automáticamente una exención. Es una diferencia decisiva para quien comienza a emitir boletas después de haber trabajado con contrato.</p>
+
+<p>También deben revisarse las situaciones de personas pensionadas y de afiliación a los regímenes del IPS, Dipreca o Capredena según las condiciones oficiales. Si percibes honorarios bajo el umbral anual, la Subsecretaría contempla cotización voluntaria. No publicamos un umbral en pesos para las rentas de 2026: antes de decidir si estás exento debes contrastar el ingreso mínimo aplicable al cierre del año y la propuesta del SII. Una exención de la obligación anual no equivale a tener cobertura médica o de accidentes sin cotizar.</p>
+
+<p>Tener contrato y emitir boletas al mismo tiempo tampoco te libera por sí solo. El SII considera las remuneraciones y los honorarios para determinar cuánto espacio queda bajo el límite imponible anual. Si ya cotizaste como dependiente hasta el máximo, la situación es distinta de la de alguien que trabajó con contrato solo algunos meses o por un sueldo menor al tope. Guarda los certificados de remuneraciones y cotizaciones: sirven para revisar esa combinación.</p>
+
+<h2>La base es el 80% de los honorarios, con un límite anual</h2>
+
+<p>La base imponible previsional corresponde al <strong>80% de los honorarios brutos anuales</strong>. No es el dinero líquido que quedó después de retener ni el saldo de tu cuenta bancaria. Tampoco se reemplaza por el gasto que declaras para determinar el impuesto a la renta: la base de cotizaciones tiene su propia regla. La ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-10107.html', 'Superintendencia de Pensiones')} explica que el límite superior es el tope imponible mensual multiplicado por doce, vigente al 31 de diciembre del año al que corresponden las rentas.</p>
+
+<p>Para 2026, la SP publicó un ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-16921.html', 'tope definitivo de 90 UF mensuales')} para AFP, salud y accidentes del trabajo. Su equivalente anual es <strong>1.080 UF</strong>, resultado de multiplicar 90 por doce. En la Operación Renta 2027 importan las rentas de 2026 y el límite de ese año; no corresponde sustituirlo automáticamente por un eventual tope de 2027. No fijamos aquí su conversión final a pesos porque la UF de cierre de 2026 aún es futura a la fecha de esta revisión.</p>
+
+<p>Si tienes ingresos altos o mezcla de sueldo y honorarios, no multipliques simplemente tu boleta por todas las tasas. Primero debes revisar la base anual y cuánto del límite consumieron las remuneraciones. La aplicación del tope evita tratar como imponible una parte de la renta que ya excede el máximo legal; el detalle final debe contrastarse con la información previsional utilizada por el SII.</p>
+
+<h2>Qué financian las cotizaciones: no es solo AFP y Fonasa</h2>
+
+<p>El ahorro para pensión contempla el <strong>10% de la renta imponible</strong> destinado a la cuenta individual, más la comisión de la AFP correspondiente. La salud considera el <strong>7% legal</strong> para Fonasa o Isapre. La ${ext('https://www.sii.cl/servicios_online/renta/2024/guia_practica.pdf', 'guía práctica del SII')} explica ambos componentes; sus montos, tasas de seguros y ejemplos de años anteriores no deben trasladarse como valores vigentes a 2027. Si el precio de tu plan de Isapre supera la cotización que se entera, la diferencia debe pagarse directamente a la institución.</p>
+
+<p>El <strong>Seguro de Invalidez y Sobrevivencia (SIS) sí incluye a independientes que cotizan</strong>. No debe confundirse con el ahorro para vejez ni omitirse porque en una liquidación de sueldo dependiente lo financia el empleador. La ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html', 'SP distingue expresamente las tasas por período y modalidad')}: informa 1,78% desde agosto de 2026 para la cotización vigente, pero señala 1,49% para independientes que cotizan mediante retención en el año tributario 2026. Esa diferencia impide presentar el 1,78% como tasa anual ya confirmada del F22 de 2027.</p>
+
+<p>También están el <strong>Seguro de Accidentes del Trabajo y Enfermedades Profesionales (ATEP), de la Ley 16.744</strong>, y el <strong>Seguro de Acompañamiento de Niños y Niñas (SANNA)</strong>. No usamos una tasa única para todos estos seguros: el monto debe revisarse según las reglas y antecedentes de la institución correspondiente. La ${ext('https://previsionsocial.gob.cl/wp-content/uploads/2026/05/05-FICHA-QUE-DICE-LA-LEY.pdf', 'ficha oficial de la Ley 21.133')} enumera SIS, ATEP, SANNA, salud y pensiones. Un presupuesto que solo sume AFP y salud deja fuera prestaciones y obligaciones reales.</p>
+
+<h2>Seguro Social de la reforma: no sumar el aporte patronal por defecto</h2>
+
+<p>La Ley 21.735 no permite copiar sin más el aporte del empleador a una persona que emite boletas. El ${ext('https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3614.html', 'Compendio de la SP')} distingue al independiente obligado de quien cotiza voluntariamente e indica que el primero puede enterar voluntariamente las cotizaciones del artículo 15 de esa ley. Eso no transforma el SIS obligatorio en un seguro opcional.</p>
+
+<p>La ${ext('https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000350.pdf', 'Norma de Carácter General 350 de la SP')} desarrolla esa distinción y advierte que existen además reglas obligatorias del artículo 17 y del artículo cuadragésimo sexto transitorio. Por tanto, no corresponde afirmar que toda disposición de la reforma es voluntaria ni agregar al ejemplo el escalón patronal de trabajadores dependientes como si fuera una obligación uniforme por honorarios. Antes de hacer un aporte adicional, revisa con tu AFP o el IPS la modalidad y el período aplicable; aquí no se anticipa una liquidación individual bajo esas reglas.</p>
+
+<h2>Cobertura parcial en Renta 2027: el 90% de otra base, no del bruto</h2>
+
+<p>La opción de cobertura parcial sigue contemplada para el año tributario 2027. La ${ext('https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_8401.htm', 'tabla de gradualidad del SII')} establece que la base optativa equivale al <strong>90% de la base imponible total</strong>. Para salud y pensiones eso significa aplicar el 90% sobre el 80% de los honorarios, respetando los límites que correspondan. No significa cotizar sobre el 90% de cada boleta ni recibir de vuelta el 10% restante de la retención.</p>
+
+<p>La reducción no se extiende a todo: <strong>SIS, ATEP y SANNA se cotizan con cobertura completa</strong>, según la ficha de Previsión Social. En cambio, una base menor para salud puede reducir los subsidios por incapacidad laboral y maternales. La comparación no debe limitarse a cuánto dinero queda disponible después de declarar. También hay que mirar con qué renta se calcularían las prestaciones si necesitas una licencia.</p>
+
+<p>La gradualidad llega al 100% en el año tributario 2028. En ese punto deja de existir una base reducida por esta opción. Antes de aceptar la propuesta de 2027, compara los detalles de ambas alternativas y no asumas que la diferencia de devolución será igual a la del año anterior: cambian la retención acumulada, la fracción de base y tus propios ingresos.</p>
+
+<h2>Cómo pasan las retenciones del F22 a las instituciones</h2>
+
+<p>El SII determina las cotizaciones con los antecedentes tributarios y la información de las instituciones previsionales. La TGR realiza el pago a las entidades correspondientes con cargo al monto disponible para devolución. No eres tú quien debe repartir manualmente cada retención entre AFP, salud y mutual al emitir una boleta. Al declarar el Formulario 22 debes revisar los honorarios, las retenciones informadas, las instituciones y la opción de cobertura.</p>
+
+<p>Según la regla anual descrita por la Subsecretaría, las cotizaciones pagadas en la Operación Renta 2027 dan cobertura desde el <strong>1 de julio de 2027 hasta el 30 de junio de 2028</strong>. La SP también describe ese período para el SIS. Es una proyección de la regla vigente, no un calendario de devolución del SII. El ahorro para pensiones, por su parte, se asocia al año en que se generaron las rentas.</p>
+
+<p>El orden de aplicación importa si los recursos son limitados. El ${ext('https://previsionsocial.gob.cl/wp-content/uploads/2026/02/Documento_Independientes_CCP_VF.pdf', 'Consejo Consultivo Previsional')} describe esta prioridad: SIS; accidentes del trabajo y enfermedades profesionales; SANNA; salud; pensiones y comisión de administración; y saldos insolutos de pensiones anteriores. El documento explica que durante la gradualidad pueden generarse saldos insolutos de pensiones. Por eso, una retención insuficiente no autoriza a concluir que todo quedó pagado ni que todos los seguros desaparecen automáticamente.</p>
+
+<p>Si el cálculo muestra diferencias, separa el impuesto anual del saldo previsional. Revisa el comprobante de cotizaciones y consulta con el SII y tu AFP cómo se determinó y regulariza el saldo específico; no lo reemplaces por un pago mensual supuesto ni confundas ese saldo con el precio pendiente de la Isapre. La Subsecretaría advierte que las cotizaciones mensuales voluntarias no se descuentan automáticamente de la obligación anual por honorarios. Conserva los respaldos antes de pagar dos veces el mismo concepto por una interpretación equivocada.</p>
+
+<h2>Ejemplo hipotético: honorarios brutos anuales de $12.000.000</h2>
+
+<p>Supongamos que una persona percibe <strong>$12.000.000 brutos durante 2026</strong>, no tiene remuneraciones dependientes, no está exenta y todos sus honorarios llevan la retención del 15,25%. Es un ejercicio aritmético, sin reajustes ni una propuesta real del SII. El monto está por debajo del tope y permite separar las bases sin necesitar una UF de cierre que aún no conocemos.</p>
+
+<ul>
+<li>Retención nominal acumulada: $12.000.000 × 15,25% = <strong>$1.830.000</strong>.</li>
+<li>Base imponible total: $12.000.000 × 80% = <strong>$9.600.000</strong>.</li>
+<li>Base reducida para salud y pensiones en Renta 2027: $9.600.000 × 90% = <strong>$8.640.000</strong>.</li>
+<li>Salud legal sobre base total: $9.600.000 × 7% = <strong>$672.000</strong>; sobre base parcial: $8.640.000 × 7% = <strong>$604.800</strong>.</li>
+<li>Ahorro de pensión, antes de comisión AFP: <strong>$960.000</strong> con base total o <strong>$864.000</strong> con base parcial.</li>
+</ul>
+
+<p>Faltan la comisión AFP, SIS, ATEP y SANNA; los seguros conservan la base completa aunque se elija cobertura parcial. Para SIS debe aplicarse la tasa anual que corresponda según la SP al proceso respectivo, no trasladar automáticamente una tasa mensual. Tampoco hemos determinado el impuesto anual ni otros créditos. En consecuencia, <strong>$1.830.000 no es una devolución proyectada</strong> y la resta entre retención, salud y ahorro no es un saldo final disponible.</p>
+
+<p>La <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a> sirve como apoyo orientativo, no como liquidación del F22. No uses su total como sustituto del cálculo oficial de SIS, SANNA ni de la opción parcial: revisa el alcance y cada componente. Para organizar documentos y el resto de tus ingresos, continúa con la <a href="/guias/preparacion-operacion-renta-2027-checklist">guía de preparación de la Operación Renta 2027</a>.</p>
+
+<h2>Qué revisar antes de aceptar la propuesta</h2>
+
+<p>Reúne el resumen anual de boletas, certificados de remuneraciones si trabajaste con contrato y antecedentes de AFP, Fonasa o Isapre y organismo de seguridad laboral. Al abrir la propuesta, contrasta el bruto anual y las retenciones antes de mirar la devolución. Luego revisa la base imponible, el tope utilizado y la opción de cobertura. Si hay una exención, asegúrate de que corresponda a tu situación y no a una edad interpretada con la fecha equivocada.</p>
+
+<p>Después del proceso, verifica la recepción de los pagos en las instituciones: la declaración y la cartola previsional no son el mismo documento. Si empiezas a emitir boletas en 2027, tampoco asumas cobertura inmediata por la mera retención de la primera boleta. La protección anual tiene un desfase; la Subsecretaría contempla pagos voluntarios para cubrir el período de inicio. El siguiente paso útil es revisar tu cobertura efectiva, no gastar una devolución que todavía no ha sido determinada.</p>
+
+<p><em>Contenido informativo: no reemplaza la declaración del SII ni asesoría tributaria o previsional individual. Los valores futuros, la tasa anual SIS aplicable a Renta 2027 y el calendario específico del proceso deben contrastarse con las publicaciones oficiales correspondientes.</em></p>`,
+  },
   // Plan editorial #42
   {
     slug: 'sueldo-minimo-2027-reajuste-simular-liquido',

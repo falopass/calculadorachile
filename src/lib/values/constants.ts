@@ -97,15 +97,33 @@ export function getIngresoMinimoVigente(fecha: Date = new Date()): TramoIngresoM
 }
 
 export const INGRESO_MINIMO = {
-  get mensual() { return getIngresoMinimoVigente().mensual; },
-  get vigente_desde() { return getIngresoMinimoVigente().vigente_desde; },
-  get ley() { return getIngresoMinimoVigente().ley; },
-  get menor_18_mayor_65() { return getIngresoMinimoVigente().menor_18_mayor_65; },
-  get no_remuneracional() { return getIngresoMinimoVigente().no_remuneracional; },
-  get jornal() { return getIngresoMinimoVigente().jornal; },
-  get hora() { return getIngresoMinimoVigente().hora; },
-  get hora_vigente_desde() { return getIngresoMinimoVigente().hora_vigente_desde; },
-  get zona_extrema() { return getIngresoMinimoVigente().zona_extrema; },
+  get mensual() {
+    return getIngresoMinimoVigente().mensual;
+  },
+  get vigente_desde() {
+    return getIngresoMinimoVigente().vigente_desde;
+  },
+  get ley() {
+    return getIngresoMinimoVigente().ley;
+  },
+  get menor_18_mayor_65() {
+    return getIngresoMinimoVigente().menor_18_mayor_65;
+  },
+  get no_remuneracional() {
+    return getIngresoMinimoVigente().no_remuneracional;
+  },
+  get jornal() {
+    return getIngresoMinimoVigente().jornal;
+  },
+  get hora() {
+    return getIngresoMinimoVigente().hora;
+  },
+  get hora_vigente_desde() {
+    return getIngresoMinimoVigente().hora_vigente_desde;
+  },
+  get zona_extrema() {
+    return getIngresoMinimoVigente().zona_extrema;
+  },
   calendario: CALENDARIO_INGRESO_MINIMO,
 };
 
@@ -165,9 +183,8 @@ export const PESO_ARGENTINO = {
   /** Día de la observación BCCh (serie F072), no el `asOf` del job. */
   fecha_actualizacion: observedAsOf('pesoArgentino'),
   /** Fuente del valor en snapshot.sources; `fallback` nunca se presenta como «hoy». */
-  fuente_snapshot:
-    ((snapshot as { sources?: { pesoArgentino?: string } }).sources?.pesoArgentino ??
-      'fallback') as string,
+  fuente_snapshot: ((snapshot as { sources?: { pesoArgentino?: string } }).sources?.pesoArgentino ??
+    'fallback') as string,
   serie: 'F072.CLP.ARS.N.O.D' as const,
   referencial: true as const,
   fuente:
@@ -207,7 +224,6 @@ export const PESO_MEXICANO = divisaViaje('pesoMexicano', 'F072.CLP.MXN.N.O.D');
 // BCCh identifica al boliviano (ISO BOB) con BOL en sus códigos de serie.
 export const BOLIVIANO = divisaViaje('boliviano', 'F072.CLP.BOL.N.O.D');
 
-
 // ============================================
 // Constantes regulatorias (manuales)
 // ============================================
@@ -217,7 +233,9 @@ export const AFP = {
   // del 14-abr-2026, Superintendencia de Pensiones). Antes 1,15%.
   // Desde remuneraciones de agosto 2026 el SIS se financia dentro del
   // 2,5% del Seguro Social (Ley 21.735, ChileAtiende 130987); este valor
-  // solo aplica a períodos anteriores. La SP fija el SIS en 1,78% desde
+  // es la referencia abr–jun; para el cargo patronal separado usar
+  // getSisEmpleadorSeparado(fecha): julio sube a 2,00% (SP 12677/12934).
+  // La SP fija el SIS en 1,78% desde
   // ago-2026 como parte de ese 2,5%, no como cargo adicional
   // (docs/research/cierre-plan-q4-2026.md §5).
   capital: { nombre: 'Capital', comision: 1.44, sis: 1.62 },
@@ -229,6 +247,17 @@ export const AFP = {
   uno: { nombre: 'Uno', comision: 0.46, sis: 1.62 },
 };
 
+/** SIS patronal separado (%), según el mes de remuneración.
+ * SP Oficios 7429 (14-04-2026), 12677 (08-07-2026) y 12934 (10-07-2026).
+ * https://www.previred.com/wp-content/uploads/2026/07/Indicadores-Previsionales-Previred-Julio-2026.pdf
+ * Desde agosto se financia dentro del escalón Ley 21.735 (ChileAtiende 130987).
+ */
+export function getSisEmpleadorSeparado(fecha: Date = new Date()): number {
+  if (getEscalonSeguroSocialPrevisional(fecha).incluyeSIS) return 0;
+  if (fecha.getTime() >= fechaLocal('2026-07-01').getTime()) return 2;
+  return AFP.uno.sis;
+}
+
 export const SALUD = {
   fonasa: {
     tasa: 7,
@@ -236,12 +265,21 @@ export const SALUD = {
      * Umbrales vigentes desde 01-05-2026 (fonasa.gob.cl/tramos).
      * La cotización legal es 7% única para todos los tramos; no existe
      * cotización diferenciada por tramo.
+     * Ley 18.469 art. 29 (Ley 19.650 art. 2 N° 3): B ≤ IMM; C ≤ 1,46 IMM.
+     * https://www.bcn.cl/leychile/navegar?idNorma=149846
      */
     tramos: {
       a: { nombre: 'A', descripcion: 'Sin ingresos / causantes de SUF' },
-      b: { nombre: 'B', ingresoMaximoCLP: 553553 },
-      c: { nombre: 'C', ingresoMinimoCLP: 553554, ingresoMaximoCLP: 808187 },
-      d: { nombre: 'D', ingresoMinimoCLP: 808188 },
+      b: { nombre: 'B', get ingresoMaximoCLP() { return INGRESO_MINIMO.mensual; } },
+      c: {
+        nombre: 'C',
+        get ingresoMinimoCLP() { return INGRESO_MINIMO.mensual + 1; },
+        get ingresoMaximoCLP() { return Math.floor(INGRESO_MINIMO.mensual * 1.46); },
+      },
+      d: {
+        nombre: 'D',
+        get ingresoMinimoCLP() { return Math.floor(INGRESO_MINIMO.mensual * 1.46) + 1; },
+      },
     },
   },
   isapre: {
@@ -433,9 +471,10 @@ export const SEGURO_SOCIAL_PREVISIONAL = {
  *   getEscalonSeguroSocialPrevisional(new Date('2026-08-01'))  // { tasa: 3.5, incluyeSIS: true }
  *   getEscalonSeguroSocialPrevisional(new Date('2034-01-01'))  // { tasa: 8.5, incluyeSIS: true }
  */
-export function getEscalonSeguroSocialPrevisional(
-  fecha: Date = new Date(),
-): { tasa: number; incluyeSIS: boolean } {
+export function getEscalonSeguroSocialPrevisional(fecha: Date = new Date()): {
+  tasa: number;
+  incluyeSIS: boolean;
+} {
   const t = fecha.getTime();
 
   // El calendario está ordenado cronológicamente. Buscamos el último
@@ -464,9 +503,7 @@ export function getEscalonSeguroSocialPrevisional(
  *   getSeguroSocialPrevisionalVigente(new Date('2026-08-01'))  // 3.5
  *   getSeguroSocialPrevisionalVigente(new Date('2034-01-01'))  // 8.5
  */
-export function getSeguroSocialPrevisionalVigente(
-  fecha: Date = new Date(),
-): number {
+export function getSeguroSocialPrevisionalVigente(fecha: Date = new Date()): number {
   return getEscalonSeguroSocialPrevisional(fecha).tasa;
 }
 
@@ -546,9 +583,7 @@ export function getJornadaLegalVigente(fecha: Date = new Date()): number {
 }
 
 /** Próximo cambio anunciado después de la fecha, o null si no hay. */
-export function getProximoCambioJornada(
-  fecha: Date = new Date(),
-): TramoJornadaLegal | null {
+export function getProximoCambioJornada(fecha: Date = new Date()): TramoJornadaLegal | null {
   const hoy = fechaISOChile(fecha);
   return CALENDARIO_JORNADA_LEGAL.find((t) => t.vigenteDesde > hoy) ?? null;
 }
@@ -638,7 +673,7 @@ export const IMPUESTO_SEGUNDA_CATEGORIA = {
     { desde: 70, hasta: 90, exento: 70, factor: 0.23, rebaja: 11.14 },
     { desde: 90, hasta: 120, exento: 90, factor: 0.304, rebaja: 17.8 },
     { desde: 120, hasta: 310, exento: 120, factor: 0.35, rebaja: 23.32 },
-    { desde: 310, hasta: Infinity, exento: 310, factor: 0.40, rebaja: 38.82 },
+    { desde: 310, hasta: Infinity, exento: 310, factor: 0.4, rebaja: 38.82 },
   ],
 };
 
@@ -762,9 +797,11 @@ export const BONO_BODAS_ORO = {
  * escalón se retorna el primero (monto de referencia más antiguo
  * conocido).
  */
-export function getMontoBodasOro(
-  fecha: Date = new Date(),
-): { desde: string; montoTotalCLP: number; montoPorConyugeCLP: number } {
+export function getMontoBodasOro(fecha: Date = new Date()): {
+  desde: string;
+  montoTotalCLP: number;
+  montoPorConyugeCLP: number;
+} {
   const t = fecha.getTime();
   let vigente = BONO_BODAS_ORO.calendario[0];
   for (const entrada of BONO_BODAS_ORO.calendario) {
@@ -1056,7 +1093,7 @@ export const IMPUESTO_SEGUNDA_CATEGORIA_2026 = {
     { limiteInferiorUTA: 70, limiteSuperiorUTA: 90, tasa: 0.23, factor: 11.14 },
     { limiteInferiorUTA: 90, limiteSuperiorUTA: 120, tasa: 0.304, factor: 17.8 },
     { limiteInferiorUTA: 120, limiteSuperiorUTA: 310, tasa: 0.35, factor: 23.32 },
-    { limiteInferiorUTA: 310, limiteSuperiorUTA: Infinity, tasa: 0.40, factor: 38.82 },
+    { limiteInferiorUTA: 310, limiteSuperiorUTA: Infinity, tasa: 0.4, factor: 38.82 },
   ],
 };
 
@@ -1141,17 +1178,13 @@ const tmcTramos = (tmcSnapshot as { tramos?: Record<string, number> }).tramos ??
 
 export const TMC_VIGENTE = {
   /** > 5.000 UF, plazo > 90 días. */
-  no_reajustables_mayor_5000uf:
-    tmcTramos.no_reajustables_mayor_5000uf_mayor_90d ?? 6.5,
+  no_reajustables_mayor_5000uf: tmcTramos.no_reajustables_mayor_5000uf_mayor_90d ?? 6.5,
   /** > 200 UF y ≤ 5.000 UF, plazo > 90 días — referencia hipotecaria/consumo. */
-  no_reajustables_mayor_200uf:
-    tmcTramos.no_reajustables_mayor_200uf_menor_5000uf_mayor_90d ?? 9.5,
+  no_reajustables_mayor_200uf: tmcTramos.no_reajustables_mayor_200uf_menor_5000uf_mayor_90d ?? 9.5,
   /** 50 - 200 UF, plazo > 90 días. */
-  no_reajustables_50_200uf:
-    tmcTramos.no_reajustables_50_200uf_mayor_90d ?? 22.5,
+  no_reajustables_50_200uf: tmcTramos.no_reajustables_50_200uf_mayor_90d ?? 22.5,
   /** ≤ 50 UF, plazo > 90 días — créditos de menor monto. */
-  no_reajustables_menor_50uf:
-    tmcTramos.no_reajustables_menor_50uf_mayor_90d ?? 38.4,
+  no_reajustables_menor_50uf: tmcTramos.no_reajustables_menor_50uf_mayor_90d ?? 38.4,
   /** Reajustables UF, plazo > 1 año. */
   reajustables_uf_mayor_1_anio: tmcTramos.reajustables_uf_mayor_1_anio ?? 5.2,
   /** Reajustables UF, plazo < 1 año. */
@@ -1375,7 +1408,13 @@ export const PERMISO_CIRCULACION = (() => {
   const anio = PERMISO_CIRCULACION_ANIO_VIGENTE;
   const vigente =
     tabla[anio] ??
-    tabla[Math.max(...Object.keys(tabla).map(Number).filter((n) => n <= anio))];
+    tabla[
+      Math.max(
+        ...Object.keys(tabla)
+          .map(Number)
+          .filter((n) => n <= anio),
+      )
+    ];
   return {
     tramos_utm: vigente.tramos_utm,
     utmEneroCLP: vigente.utmEneroCLP,
@@ -1453,7 +1492,6 @@ export const APV_REGIMEN_B = {
 // ============================================
 export const AFP_OBLIGATORIA_PCT = 10;
 
-
 // ============================================
 // Distribución de la retención de honorarios
 // (Ley 21.133 — calendario por año)
@@ -1509,8 +1547,7 @@ export const RETENCION_HONORARIOS_DISTRIBUCION = {
   },
 } as const;
 
-export type AnioRetencionHonorarios =
-  keyof typeof RETENCION_HONORARIOS_DISTRIBUCION;
+export type AnioRetencionHonorarios = keyof typeof RETENCION_HONORARIOS_DISTRIBUCION;
 
 // ============================================
 // Aranceles notariales (DFL 292/1931)
@@ -1718,14 +1755,34 @@ export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
     constante: 'UF (en vivo vía /api/values; respaldo snapshot.json)',
     verificadoAl: '2026-10-16',
     fuente: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
-    calculadoras: ['uf-clp', 'sueldo-liquido', 'finiquito', 'indemnizacion-anos-servicio', 'credito-hipotecario', 'credito-cae', 'tope-imponible-90-uf', 'reajuste-arriendo', 'simulador-apv'],
+    calculadoras: [
+      'uf-clp',
+      'sueldo-liquido',
+      'finiquito',
+      'indemnizacion-anos-servicio',
+      'credito-hipotecario',
+      'credito-cae',
+      'tope-imponible-90-uf',
+      'reajuste-arriendo',
+      'simulador-apv',
+    ],
   },
   utm: {
     valor: 'UTM',
     constante: 'UTM (en vivo vía /api/values; respaldo snapshot.json)',
     verificadoAl: '2026-10-16',
     fuente: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
-    calculadoras: ['utm-clp', 'impuesto-segunda-categoria', 'sueldo-liquido', 'boleta-honorarios', 'multas-transito', 'permiso-circulacion', 'ppm', 'patente-comercial', 'operacion-renta'],
+    calculadoras: [
+      'utm-clp',
+      'impuesto-segunda-categoria',
+      'sueldo-liquido',
+      'boleta-honorarios',
+      'multas-transito',
+      'permiso-circulacion',
+      'ppm',
+      'patente-comercial',
+      'operacion-renta',
+    ],
   },
   dolar: {
     valor: 'Dólar observado',
@@ -1739,21 +1796,43 @@ export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
     constante: 'INGRESO_MINIMO',
     verificadoAl: '2026-10-16',
     fuente: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html',
-    calculadoras: ['sueldo-part-time', 'gratificacion-legal', 'finiquito', 'costo-empleado-pyme', 'licencia-medica', 'pension-alimenticia', 'sueldo-casa-particular', 'asignacion-por-muerte'],
+    calculadoras: [
+      'sueldo-part-time',
+      'gratificacion-legal',
+      'finiquito',
+      'costo-empleado-pyme',
+      'licencia-medica',
+      'pension-alimenticia',
+      'sueldo-casa-particular',
+      'asignacion-por-muerte',
+    ],
   },
   comisionesAfp: {
     valor: 'Comisiones AFP',
     constante: 'AFP.*.comision',
     verificadoAl: '2026-10-16',
     fuente: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html',
-    calculadoras: ['sueldo-liquido', 'comparador-afp', 'costo-empleado-pyme', 'cotizacion-independientes', 'horas-extra', 'sueldo-casa-particular'],
+    calculadoras: [
+      'sueldo-liquido',
+      'comparador-afp',
+      'costo-empleado-pyme',
+      'cotizacion-independientes',
+      'horas-extra',
+      'sueldo-casa-particular',
+    ],
   },
   topeAfpSalud: {
     valor: 'Tope imponible AFP y salud (90 UF)',
     constante: 'TOPE_IMPOSITIVO.afp_salud',
     verificadoAl: '2026-10-16',
     fuente: 'https://spensiones.cl/portal/institucional/594/w3-article-16921.html',
-    calculadoras: ['sueldo-liquido', 'tope-imponible-90-uf', 'comparador-afp', 'cotizacion-independientes', 'sueldo-casa-particular'],
+    calculadoras: [
+      'sueldo-liquido',
+      'tope-imponible-90-uf',
+      'comparador-afp',
+      'cotizacion-independientes',
+      'sueldo-casa-particular',
+    ],
   },
   topeCesantia: {
     valor: 'Tope imponible seguro de cesantía (135,2 UF)',
@@ -1774,7 +1853,12 @@ export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
     constante: 'IMPUESTO_SEGUNDA_CATEGORIA',
     verificadoAl: '2026-10-16',
     fuente: 'https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm',
-    calculadoras: ['impuesto-segunda-categoria', 'sueldo-liquido', 'operacion-renta', 'simulador-apv'],
+    calculadoras: [
+      'impuesto-segunda-categoria',
+      'sueldo-liquido',
+      'operacion-renta',
+      'simulador-apv',
+    ],
   },
   seguroCesantiaTasas: {
     valor: 'Tasas del seguro de cesantía',
@@ -1836,7 +1920,8 @@ export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
     valor: 'Feriados nacionales 2026',
     constante: 'vacaciones.ts (lista de feriados 2026)',
     verificadoAl: '2026-10-16',
-    fuente: 'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/',
+    fuente:
+      'https://www.gob.cl/noticias/feriados-2026-revisa-cuantos-habra-y-cuales-son-irrenunciables/',
     calculadoras: ['vacaciones-proporcionales'],
   },
 };

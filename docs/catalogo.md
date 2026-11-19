@@ -11,7 +11,9 @@ Prioridad del proyecto: **ship rápido, bajo costo y alta confiabilidad en cálc
 
 Estado actual del catálogo:
 
-- **78 calculadoras activas** en `src/data/calculators.ts` (72 indexables, 6 `noIndex`; alta de `dias-administrativos` el 19-11-2026; `subsidio-unificado-empleo` es indexable desde el 20-10-2026: los parámetros del primer año los fijó el Decreto 273 exento de Hacienda, DO 01-10-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf, y el reglamento de la Ley 21.808 es el Decreto 75 del Ministerio del Trabajo, DO 30-09-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf).
-- **78 módulos de cálculo** con su test en `src/lib/calculations/` (más tests auxiliares `input-coerce` y `seguro-social`).
+- **79 calculadoras activas** en `src/data/calculators.ts` (73 indexables, 6 `noIndex`; alta de `dias-administrativos` el 19-11-2026; `subsidio-unificado-empleo` es indexable desde el 20-10-2026: los parámetros del primer año los fijó el Decreto 273 exento de Hacienda, DO 01-10-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/10/01/44563/01/2881073.pdf, y el reglamento de la Ley 21.808 es el Decreto 75 del Ministerio del Trabajo, DO 30-09-2026, https://www.diariooficial.interior.gob.cl/publicaciones/2026/09/30/44562/01/2880088.pdf).
+- **79 módulos de cálculo** con su test en `src/lib/calculations/` (más tests auxiliares `input-coerce` y `seguro-social`).
 - `dias-administrativos`: saldo anual y simulación de solicitud para funcionarios públicos y municipales; cupo verificado en DFL 29, art. 109, y Ley 18.883, art. 108. Indexable, con metodología, respuesta rápida y prueba de wiring.
 - `bono-bodas-oro` fue **reactivado el 26-09-2026** con fórmula verificada (ChileAtiende ficha 5369): la ruta 410 anterior fue eliminada y el slug lo sirve la ruta dinámica normal.
+
+- `auto-electrico-vs-bencina` (vehículos): comparación de costo energético por km y mensual con precios y consumos ingresados por el usuario, sin precios precargados. Diferencia mensual/anual firmada y porcentaje respecto de bencina; CLP al entero al final y porcentaje a un decimal. Fuentes de referencia: Bencina en Línea (CNE) y boleta/tarifas eléctricas (CNE/SEC); no compara costo total de propiedad.
