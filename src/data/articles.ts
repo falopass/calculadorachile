@@ -253,6 +253,13 @@ function partTime20() {
 
 const PT20 = partTime20();
 
+// Mínimos proporcionales de las jornadas parciales más comunes (≤ 30 h),
+// calculados con la misma función de la calculadora de sueldo part time.
+const PT_MINIMOS = [10, 15, 20, 25, 30].map((horas) => ({
+  horas,
+  minimo: calculateSueldoPartTime({ horasSemanales: horas }).minimoLegal,
+}));
+
 export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es de <strong>${formatCLP(INGRESO_MINIMO.mensual)} brutos al mes</strong> desde el ${formatFechaLarga(INGRESO_MINIMO.vigente_desde)} (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Ley ${INGRESO_MINIMO.ley}, Dirección del Trabajo</a>) y es el mismo monto para cada mes hasta el próximo reajuste. Con Fonasa y contrato indefinido quedan entre <strong>${liquidoSueldoMinimo('provida')}</strong> y <strong>${liquidoSueldoMinimo('uno')}</strong> líquidos, según tu AFP.</p>`;
 
 const articleCatalog: ArticleDraft[] = [
@@ -383,8 +390,9 @@ const articleCatalog: ArticleDraft[] = [
     description:
       'La Ley 21.724 concede un aguinaldo de Navidad permanente al sector público: $71.206 si la remuneración líquida de noviembre es de hasta $1.060.493 y $37.666 si la supera. Requisitos, tope de $3.511.800 y qué puede cambiar con la ley de reajuste 2026.',
     date: '2026-11-16',
+    updatedAt: '2026-11-19',
     category: 'laboral',
-    readingTime: 8,
+    readingTime: 9,
     relatedGuia: 'sueldo-liquido-chile',
     keywords: [
       'aguinaldo navidad 2026 sector público',
@@ -455,6 +463,17 @@ const articleCatalog: ArticleDraft[] = [
 </ul>
 
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Qué puede cambiar en diciembre</strong><p>Cada año el Gobierno y las organizaciones del sector público negocian el reajuste de remuneraciones, que se aprueba por ley. Si la ley de reajuste 2026 modifica el artículo 2 de la Ley 21.724, los montos de este artículo dejarán de ser los vigentes. Antes de contar con una cifra, revisa tu liquidación de diciembre o la información de tu servicio.</p></div></aside>
+
+<h2>Qué revisar antes de diciembre</h2>
+<p>El aguinaldo no se calcula sobre tu sueldo bruto del mes: depende de la remuneración líquida de noviembre y de los topes de la ley. Antes de que cierre el año, conviene hacer esta revisión con tu liquidación de noviembre:</p>
+<ol class="steps">
+<li><strong>Separa lo permanente de lo transitorio.</strong> La base son las remuneraciones de carácter permanente del mes; los bonos por desempeño individual, colectivo o institucional no cuentan para el umbral.</li>
+<li><strong>Calcula la líquida como la ley la define.</strong> Descuenta solo impuestos y cotizaciones previsionales obligatorias; los préstamos, cuotas sindicales y otros descuentos voluntarios no se restan.</li>
+<li><strong>Compara con $1.060.493.</strong> Si la líquida es igual o menor, el aguinaldo es $71.206; si la supera, $37.666.</li>
+<li><strong>Revisa el tope bruto.</strong> Si tus remuneraciones brutas permanentes superan $3.511.800, no hay aguinaldo aunque la líquida quede bajo el umbral.</li>
+<li><strong>Confirma la fecha de pago.</strong> La ley fija diciembre, no un día exacto: normalmente llega junto con la remuneración de ese mes, sin descuentos.</li>
+</ol>
+<p>Si llegas a diciembre con licencia médica, el artículo 11 de la Ley 21.724 dispone que también tienes derecho al aguinaldo, calculado con la última remuneración mensual percibida. Y si tu empleador no paga el aguinaldo o paga un monto distinto al que te corresponde, guarda tu liquidación de noviembre y de diciembre como respaldo antes de hacer el reclamo por el canal de tu institución.</p>
 
 <h2>Diferencias con otros aguinaldos de diciembre</h2>
 <table>
@@ -1883,9 +1902,9 @@ ${DESEMPLEO_INE_HTML}
     description:
       'En qué mes te toca la revisión técnica según el último dígito de la patente, qué dígitos faltan en 2026, si hay prórrogas y cómo sigue el calendario en 2027.',
     date: '2026-07-10',
-    updatedAt: '2026-10-20',
+    updatedAt: '2026-11-19',
     category: 'vehiculos',
-    readingTime: 14,
+    readingTime: 15,
     seoTitle: 'Revisión técnica 2026: calendario por patente y requisitos',
     seoDescription:
       'Calendario de revisión técnica 2026 por dígito de patente, consulta en PRT, multas y vínculo con el permiso de circulación. Fuentes ChileAtiende y MTT/PRT.',
@@ -1907,12 +1926,12 @@ ${DESEMPLEO_INE_HTML}
       {
         question: '¿Hay prórroga de la revisión técnica en 2026?',
         answer:
-          'Al 20 de octubre de 2026, no. La única prórroga de 2026, del Decreto 129 del MTT, cubrió los dígitos 4 y 5 en la Región de Coquimbo y la provincia del Huasco, y venció el 30 de septiembre de 2026.',
+          'Al 19 de noviembre de 2026, no. La única prórroga de 2026, del Decreto 129 del MTT, cubrió los dígitos 4 y 5 en la Región de Coquimbo y la provincia del Huasco, y venció el 30 de septiembre de 2026.',
       },
       {
         question: '¿Qué dígitos faltan en 2026?',
         answer:
-          'El 7, hasta el 31 de octubre, y el 8, en noviembre. Diciembre no tiene dígito asignado, pero las patentes terminadas en 9 pueden adelantar a diciembre la revisión que les corresponde en enero de 2027.',
+          'Al 19 de noviembre de 2026 solo queda noviembre para las patentes terminadas en 8; las del 7 ya pasaron su mes (octubre) y manda la vigencia de su certificado. Diciembre no tiene dígito, pero las patentes terminadas en 9 pueden adelantar a diciembre la revisión que les corresponde en enero de 2027.',
       },
       {
         question: '¿Puedo hacer la revisión técnica antes del mes que me toca?',
@@ -1940,7 +1959,7 @@ ${DESEMPLEO_INE_HTML}
           '15 días corridos para volver a la planta con las fallas corregidas y pagar una tarifa rebajada, según ChileAtiende. Ese plazo no te permite circular con la revisión vencida.',
       },
     ],
-    content: `<p>La revisión técnica anual se hace en el mes que corresponde al <strong>último dígito de la patente</strong>: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado. <strong>En lo que queda de 2026 les toca a las patentes terminadas en 7 (hasta el 31 de octubre) y en 8 (noviembre)</strong>, y la revisión se puede hacer también en el mes anterior al que corresponde sin que cambie su vigencia (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156, art. 7</a>). <strong>Al 20 de octubre de 2026 no hay prórrogas vigentes</strong>: la última, del Decreto 129 del MTT para Coquimbo y la provincia del Huasco, venció el 30 de septiembre de 2026.</p>
+    content: `<p>La revisión técnica anual se hace en el mes que corresponde al <strong>último dígito de la patente</strong>: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado. <strong>Al 19 de noviembre de 2026 les queda noviembre a las patentes terminadas en 8</strong>; las del 7 ya pasaron su mes (octubre), y la revisión se puede hacer también en el mes anterior al que corresponde sin que cambie su vigencia (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156, art. 7</a>). <strong>No hay prórrogas vigentes</strong>: la última, del Decreto 129 del MTT para Coquimbo y la provincia del Huasco, venció el 30 de septiembre de 2026.</p>
 
 <h2>Calendario de revisión técnica por dígito de patente</h2>
 <table>
@@ -1962,8 +1981,8 @@ ${DESEMPLEO_INE_HTML}
 <tr><td>4</td><td>Julio</td><td>Junio</td><td>Ya pasó · próxima: julio 2027</td></tr>
 <tr><td>5</td><td>Agosto</td><td>Julio</td><td>Ya pasó · próxima: agosto 2027</td></tr>
 <tr><td>6</td><td>Septiembre</td><td>Agosto</td><td>Ya pasó · próxima: septiembre 2027</td></tr>
-<tr><td>7</td><td>Octubre</td><td>Septiembre</td><td><strong>Te toca ahora (hasta el 31 de octubre)</strong></td></tr>
-<tr><td>8</td><td>Noviembre</td><td>Octubre</td><td>Noviembre (puedes adelantarla a octubre)</td></tr>
+<tr><td>7</td><td>Octubre</td><td>Septiembre</td><td>Su mes ya pasó · manda la vigencia de tu certificado</td></tr>
+<tr><td>8</td><td>Noviembre</td><td>Octubre</td><td><strong>Te toca ahora (noviembre)</strong></td></tr>
 <tr><td>—</td><td>Diciembre</td><td>—</td><td>Sin dígito asignado</td></tr>
 </tbody>
 </table>
@@ -1972,8 +1991,8 @@ ${DESEMPLEO_INE_HTML}
 
 <h2>Lo que queda de 2026</h2>
 <ul>
-<li><strong>Octubre:</strong> les corresponde a las patentes terminadas en <strong>7</strong> (hasta el 31 de octubre).</li>
-<li><strong>Noviembre:</strong> les corresponde a las patentes terminadas en <strong>8</strong>.</li>
+<li><strong>Octubre (patentes terminadas en 7):</strong> su mes ya pasó. Lo que manda es la fecha de vigencia de tu certificado; si está vencido, no circules con el vehículo hasta revisarlo.</li>
+<li><strong>Noviembre (patentes terminadas en 8):</strong> les toca ahora. También pueden adelantarla a octubre sin que cambie su vigencia.</li>
 <li><strong>Diciembre:</strong> no tiene dígito asignado. Como la revisión se puede hacer en el mes anterior al que corresponde, las patentes terminadas en <strong>9</strong>, que tienen enero, pueden hacerla en diciembre de 2026 sin que cambie su vigencia.</li>
 <li><strong>Si tu mes ya pasó:</strong> lo que manda es la fecha de vigencia de tu certificado, no la tabla. Si está vencido, no circules con el vehículo hasta revisarlo: conducir sin revisión técnica vigente es una <strong>infracción grave</strong> (<a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>). Puedes ver la sanción en pesos en la <a href="/calculadoras/calculadora-multas-transito">calculadora de multas de tránsito</a>.</li>
 <li><strong>Revisa tu estado gratis:</strong> consulta por patente en el <a href="https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado" target="_blank" rel="noopener">servicio oficial de ChileAtiende</a> o en <a href="https://www.prt.cl/Paginas/RevisionTecnica.aspx" target="_blank" rel="noopener">prt.cl</a>.</li>
@@ -1984,7 +2003,7 @@ ${DESEMPLEO_INE_HTML}
 <ul>
 <li><strong>Decreto 129 del MTT, publicado en el Diario Oficial el 28 de julio de 2026</strong> (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1226460" target="_blank" rel="noopener">Ley Chile</a>). Extendió <strong>hasta el 30 de septiembre de 2026</strong> la vigencia de los certificados de revisión técnica y de emisiones de los vehículos con patente terminada en <strong>4 y 5</strong> (julio y agosto), otorgados por plantas de la <strong>Región de Coquimbo y de la provincia del Huasco (Región de Atacama)</strong>, zonas declaradas de catástrofe por las lluvias (<a href="https://www.subtrans.gob.cl/mtt-aplaza-vigencia-de-certificado-de-revisiones-tecnicas-en-zonas-de-catastrofe/" target="_blank" rel="noopener">Subtrans</a>). <strong>Esta prórroga ya venció.</strong></li>
 </ul>
-<p>Al 20 de octubre de 2026 no hay otra prórroga vigente. Si el MTT publica una nueva, la agregaremos aquí con su decreto. Desconfía de prórrogas que circulan en redes sociales sin un decreto o resolución que las respalde.</p>
+<p>Al 19 de noviembre de 2026 no hay otra prórroga vigente. Si el MTT publica una nueva, la agregaremos aquí con su decreto. Desconfía de prórrogas que circulan en redes sociales sin un decreto o resolución que las respalde.</p>
 
 <h2>Puedes hacerla antes: el mes anterior</h2>
 <p>El artículo 7 del Decreto Supremo 156 permite hacer la revisión que corresponde según el último dígito <strong>también en el mes precedente, sin que eso afecte su vigencia</strong>. Por ejemplo, si tu patente termina en 5 (agosto), puedes hacerla en julio. La norma no contempla una ventana más amplia: si quieres adelantarla más, consulta a la planta antes de ir.</p>
@@ -2027,12 +2046,21 @@ ${DESEMPLEO_INE_HTML}
 <h2>Si te rechazan</h2>
 <p>La planta entrega un certificado de rechazo con las fallas detectadas. Tienes <strong>15 días corridos</strong> para volver a la planta, acreditar que corregiste los desperfectos y acceder a una <strong>tarifa rebajada</strong> (<a href="https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados" target="_blank" rel="noopener">ChileAtiende</a>). Ese plazo no te autoriza a circular con la revisión vencida.</p>
 
+<h2>Errores frecuentes al calcular tu fecha</h2>
+<ul>
+<li><strong>Confundir el dígito con el mes.</strong> El calendario asigna un mes a cada dígito, pero el dígito no es el mes: la patente que termina en 9 va en enero, no en septiembre.</li>
+<li><strong>Creer que marzo y diciembre son meses de revisión.</strong> No tienen dígito asignado: solo reciben a las patentes que se adelantan (marzo recibe al dígito 1 y diciembre al 9).</li>
+<li><strong>Guiarse solo por la tabla.</strong> Lo que manda es la fecha de vigencia del certificado; una prórroga la extiende.</li>
+<li><strong>Asumir que todo vehículo revisa una vez al año.</strong> Taxis, buses, transporte escolar, vehículos a gas y maquinaria tienen otra periodicidad.</li>
+<li><strong>Confiar en una prórroga de redes sociales.</strong> Solo vale la que está publicada como decreto o resolución del MTT.</li>
+</ul>
+
 <h2>Revisión técnica y permiso de circulación</h2>
 <p>La municipalidad no puede otorgar el permiso de circulación a un vehículo sin revisión técnica vigente o, cuando corresponde, sin certificado de homologación vigente (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1007469" target="_blank" rel="noopener">Ley de Tránsito, art. 89</a>). La revisión, el SOAP y el permiso tienen fechas propias: renovar uno no renueva los otros. Estima el permiso en la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a>.</p>
 <p>Sigue leyendo: <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso de circulación 2026</a>.</p>
 
 <h2>Fuentes y fecha de verificación</h2>
-<p>Contenido verificado al 20 de octubre de 2026:</p>
+<p>Contenido verificado al 19 de noviembre de 2026:</p>
 <ul>
 <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156 del MTT (revisiones técnicas), art. 7, versión vigente en Ley Chile</a>: calendario por dígito, mes precedente, periodicidades y facultad del MTT para modificar el calendario (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183&idParte=7139535" target="_blank" rel="noopener">artículo 7</a>).</li>
 <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1226460" target="_blank" rel="noopener">Decreto 129 del MTT, Diario Oficial del 28-07-2026</a> y <a href="https://www.subtrans.gob.cl/mtt-aplaza-vigencia-de-certificado-de-revisiones-tecnicas-en-zonas-de-catastrofe/" target="_blank" rel="noopener">noticia de Subtrans (27-07-2026)</a>: prórroga en Coquimbo y Huasco hasta el 30-09-2026.</li>
@@ -6095,9 +6123,9 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
     title: 'Part time de 20 horas en Chile: sueldo líquido, gratificación y reglas',
     description: `Con 20 horas semanales el mínimo legal es ${formatCLP(PT20.pt.minimoLegal)}. Cuánto queda líquido según tu AFP, con y sin gratificación, y qué reglas tiene el contrato part time.`,
     date: '2026-10-29',
-    updatedAt: '2026-10-29',
+    updatedAt: '2026-11-19',
     category: 'laboral',
-    readingTime: 6,
+    readingTime: 9,
     relatedGuia: 'sueldo-liquido-chile',
     embedCalculatorId: 'sueldo-part-time',
     seoTitle: `Cuánto gana un part time de 20 horas (${INGRESO_MINIMO.vigente_desde.slice(0, 4)})`,
@@ -6146,6 +6174,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       { label: 'Dirección del Trabajo — Derechos en jornada parcial', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60089.html' },
       { label: 'Dirección del Trabajo — Jornada diaria y colación en jornada parcial', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60085.html' },
       { label: 'Dirección del Trabajo — Ord. 339/27 sobre jornada parcial', url: 'https://dt.gob.cl/legislacion/1624/w3-article-63196.html' },
+      { label: 'Dirección del Trabajo — Gratificación legal y anticipos del 25%', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60162.html' },
       { label: 'Dirección del Trabajo — Feriado anual en cualquier jornada', url: 'https://dt.gob.cl/portal/1628/w3-article-60177.html' },
       { label: 'Dirección del Trabajo — Jornada de 42 horas', url: 'https://dt.gob.cl/portal/1626/w3-article-129225.html' },
       { label: 'Superintendencia de Pensiones — Comisiones de las AFP', url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9897.html' },
@@ -6180,6 +6209,17 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <p>Con 20 horas, si el empleador aplica esa rebaja, el tope queda en <strong>${formatCLP(PT20.topeAnual)} al año</strong>, o <strong>${formatCLP(PT20.topeMes)} al mes</strong>. Con el sueldo base mínimo, el 25% (${formatCLP(PT20.grat)}) queda bajo ese tope, así que la rebaja no cambia nada. Solo empieza a importar si tu sueldo base supera los ${formatCLP(PT20.umbral)} al mes.</p>
 <p>Calcula tu caso en la <a href="/calculadoras/calculadora-gratificacion-legal">calculadora de gratificación legal</a>.</p>
 
+<h2>La otra modalidad: el 30% de las utilidades (artículo 47)</h2>
+<p>La gratificación legal tiene dos modalidades. La del artículo 50 —el 25% de lo devengado en el año, con tope de 4,75 ingresos mínimos— es la que casi siempre se pacta en contratos individuales y en jornada parcial. La otra es el artículo 47: un 30% de las utilidades líquidas de la empresa. Son alternativas, no acumulables: si el empleador paga la del artículo 50, queda eximido de la del artículo 47 (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60162.html" target="_blank" rel="noopener">DT</a>).</p>
+<p>Si tu empleador paga anticipos mensuales del 25% de lo devengado, al cierre del ejercicio compara lo pagado —reajustado por IPC— contra la gratificación que corresponde por la fórmula, y la diferencia es la que debes recibir (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60162.html" target="_blank" rel="noopener">DT</a>). En jornada parcial el tope de 4,75 ingresos mínimos se reduce en la misma proporción que el sueldo mínimo, como se explicó arriba.</p>
+
+<h2>Semana corrida: el descanso también se paga</h2>
+<p>Si tu jornada de 20 horas está distribuida en cinco o seis días a la semana, tienes derecho a la <strong>semana corrida</strong> (artículo 45 del Código del Trabajo): la remuneración incluye el pago de los días de descanso. La DT precisa que en jornada parcial este beneficio procede solo cuando la jornada se distribuye en cinco o seis días; con menos días a la semana no corresponde (<a href="https://dt.gob.cl/legislacion/1624/w3-article-63196.html" target="_blank" rel="noopener">Ord. 339/27</a>). Conviene revisar que tu liquidación la incluya.</p>
+
+<h2>Si tus horas o tu sueldo varían mes a mes</h2>
+<p>Con horas extra pactadas o comisiones, el líquido cambia mes a mes. Las horas extra se pagan con un recargo sobre el valor hora ordinaria, y en jornada parcial su base no puede ser menor al ingreso mínimo proporcional (<a href="https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-156999.html" target="_blank" rel="noopener">DT</a>). Estima una hora extra en la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a>.</p>
+<p>Para el sueldo base del mes, la AFP y el impuesto se calculan sobre lo imponible del período: sueldo base, gratificación y horas extra. Con el sueldo base mínimo el impuesto sigue en $0, pero suben el 10% más la comisión de la AFP y el 7% de salud. Con la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> puedes comparar un mes con y sin horas extra antes de aceptar el turno.</p>
+
 <h2>Reglas del contrato part time</h2>
 <p>La ley no habla de "part time" ni de "media jornada" sino de <strong>jornada parcial</strong>: la que se pacta por 30 horas semanales o menos (artículo 40 bis del Código del Trabajo, <a href="https://www.dt.gob.cl/portal/1628/w3-article-60756.html" target="_blank" rel="noopener">DT</a>). Un contrato de 20 horas cumple esa condición, y estas son sus reglas:</p>
 <ol class="steps">
@@ -6191,8 +6231,19 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <li><strong>Indemnización por años de servicio.</strong> Se calcula con el promedio de lo que ganaste durante el contrato, o en sus últimos 11 años, reajustado por IPC. Si la regla general del artículo 163 te da más, se paga esa (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60089.html" target="_blank" rel="noopener">DT</a>). Estima tu caso en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</li>
 </ol>
 
+<h2>¿Y si trabajo menos de 20 horas?</h2>
+<p>La misma regla proporcional aplica: ingreso mínimo × horas ÷ ${PT20.jornada}. Con 10 horas semanales el mínimo es ${formatCLP(PT_MINIMOS[0].minimo)} y con 15 horas ${formatCLP(PT_MINIMOS[1].minimo)}. Por debajo de 30 horas semanales siempre corresponde el mínimo proporcional; recién desde 31 horas se paga el ingreso mínimo completo (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">DT</a>). La <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part time</a> calcula el mínimo de cualquier jornada que ingreses.</p>
+<p>Ojo con el valor hora: a menor jornada, el mismo sueldo base se reparte en menos horas, así que tu hora vale más. Eso también eleva el valor de las horas extra pactadas, porque su base no puede ser menor al ingreso mínimo proporcional de tu jornada. Si tu empleador te ofrece un sueldo base bajo ese mínimo, la Dirección del Trabajo lo fiscaliza: el piso es un derecho, no una sugerencia.</p>
+
 <h2>¿Y si son más de 20 horas?</h2>
 <p>Hasta 30 horas semanales el mínimo sigue siendo proporcional: ingreso mínimo × horas ÷ ${PT20.jornada}. Desde 31 horas y hasta ${PT20.jornada - 1} horas es una jornada intermedia, y corresponde el ingreso mínimo completo de ${formatCLP(INGRESO_MINIMO.mensual)}, no una parte (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60136.html" target="_blank" rel="noopener">DT</a>; <a href="https://www.dt.gob.cl/legislacion/1624/w3-propertyvalue-147716.html" target="_blank" rel="noopener">Ord. 355 de 2026</a>). La <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part time</a> tiene la tabla con el mínimo de cada jornada, y el caso de 30 horas está explicado en <a href="/blog/sueldo-part-time-30-horas-2026-minimo-proporcional">sueldo part time de 30 horas</a>.</p>
+<p>Estos son los mínimos proporcionales de las jornadas parciales más comunes, calculados con la misma regla (ingreso mínimo × horas ÷ ${PT20.jornada}):</p>
+<table>
+<thead><tr><th>Jornada semanal</th><th>Mínimo legal mensual</th></tr></thead>
+<tbody>
+${PT_MINIMOS.map((m) => `<tr><td>${m.horas} horas</td><td>${formatCLP(m.minimo)}</td></tr>`).join('\n')}
+</tbody>
+</table>
 
 <h2>La jornada completa que se usa para el cálculo</h2>
 <p>La jornada completa vigente es de <strong>${PT20.jornada} horas semanales desde el ${formatFechaLarga(PT20.tramo.vigenteDesde)}</strong>${PT20.proximo ? `, y baja a ${PT20.proximo.horas} horas el ${formatFechaLarga(PT20.proximo.vigenteDesde)}` : ''} (<a href="https://dt.gob.cl/portal/1626/w3-article-129225.html" target="_blank" rel="noopener">DT</a>; <a href="https://www.bcn.cl/leychile/navegar?idNorma=1190878" target="_blank" rel="noopener">Ley 21.561</a>).${PT20.proximo ? ' Como el mínimo de un part time se divide por la jornada completa, ese cambio subirá el mínimo de 20 horas.' : ''} Además, el ingreso mínimo se reajusta desde el 1 de enero de 2027 (<a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a>). Actualizaremos esta página con cada valor oficial.</p>
@@ -6200,7 +6251,7 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <p>Para entender cada descuento de tu liquidación, revisa la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido en Chile</a> y el post del <a href="/blog/sueldo-minimo-2026-calcular-liquido">sueldo mínimo 2026 y su líquido</a>.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 29 de octubre de 2026 con fichas y dictámenes de la Dirección del Trabajo, la Superintendencia de Pensiones, el SII y la BCN (lista de fuentes al pie).</p>`,
+<p>Contenido verificado el 19 de noviembre de 2026 con fichas y dictámenes de la Dirección del Trabajo, la Superintendencia de Pensiones, el SII y la BCN (lista de fuentes al pie).</p>`,
   },
   {
     slug: 'aporte-familiar-permanente-2026-cobro-plazo',
