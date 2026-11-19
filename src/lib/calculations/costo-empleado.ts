@@ -52,7 +52,7 @@ export interface CostoEmpleadoResult {
  */
 export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleadoResult {
   const sueldoBruto = Math.max(0, input.sueldoBruto);
-  const topeGratificacionMensual = (INGRESO_MINIMO.mensual * 4.75) / 12;
+  const topeGratificacionMensual = (INGRESO_MINIMO.mensual * GRATIFICACION.tope_475_inm) / 12;
   const gratificacion = input.agregarGratificacion
     ? Math.min(sueldoBruto * (GRATIFICACION.porcentaje / 100), topeGratificacionMensual)
     : 0;

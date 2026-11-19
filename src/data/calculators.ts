@@ -4,7 +4,7 @@ import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/valu
 // ============================================
 
 import type { Calculator } from '@/types/calculator';
-import { UTA_2026, UTM, AGUINALDO_2026, AGUINALDO_PENSIONADOS_IPS_2026 } from '@/lib/values/constants';
+import { UTA_2026, UTM, AGUINALDO_2026, AGUINALDO_PENSIONADOS_IPS_2026, INGRESO_MINIMO } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
 import { INDEMNIZACION, RECARGO_ART_168, RECARGO_ART_171, UF } from '@/lib/values/constants';
@@ -6144,7 +6144,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         label: 'Sueldo bruto mensual pactado (opcional)',
         type: 'number',
         unit: 'CLP',
-        placeholder: '$553.553',
+        placeholder: formatCLP(INGRESO_MINIMO.mensual),
         required: false,
         min: 0,
         tooltip:

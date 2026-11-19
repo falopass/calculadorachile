@@ -1,13 +1,32 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   CALENDARIO_INGRESO_MINIMO,
   INGRESO_MINIMO,
+  SALUD,
   getIngresoMinimoVigente,
 } from '@/lib/values/constants';
 
 // Ley 21.830 art. 1: $553.553 desde 01-05-2026; reajuste IPC desde 01-01-2027
 // con decreto de Hacienda (art. 6). El monto 2027 aún no está publicado.
 describe('getIngresoMinimoVigente (calendario Ley 21.830)', () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it('conserva los umbrales Fonasa vigentes al peso', () => {
+    vi.spyOn(INGRESO_MINIMO, 'mensual', 'get').mockReturnValue(553553);
+    expect(SALUD.fonasa.tramos.b.ingresoMaximoCLP).toBe(553553);
+    expect(SALUD.fonasa.tramos.c.ingresoMinimoCLP).toBe(553554);
+    expect(SALUD.fonasa.tramos.c.ingresoMaximoCLP).toBe(808187);
+    expect(SALUD.fonasa.tramos.d.ingresoMinimoCLP).toBe(808188);
+  });
+
+  it('Fonasa sigue el IMM sin dejar huecos entre tramos', () => {
+    vi.spyOn(INGRESO_MINIMO, 'mensual', 'get').mockReturnValue(600001);
+    expect(SALUD.fonasa.tramos.b.ingresoMaximoCLP).toBe(600001);
+    expect(SALUD.fonasa.tramos.c.ingresoMinimoCLP).toBe(600002);
+    expect(SALUD.fonasa.tramos.c.ingresoMaximoCLP).toBe(876001);
+    expect(SALUD.fonasa.tramos.d.ingresoMinimoCLP).toBe(876002);
+  });
+
   it('17-11-2026 → $553.553 desde 01-05-2026', () => {
     const t = getIngresoMinimoVigente(new Date('2026-11-17T12:00:00-03:00'));
     expect(t).toMatchObject({
