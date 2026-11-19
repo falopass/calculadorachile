@@ -53,8 +53,9 @@ export async function loadCalculationFn(
           descuentoCajaCompensacion: coerceNumber(inputs.descuentoCajaCompensacion, 0),
           calculoInverso: coerceBool(inputs.calculoInverso),
           valorUF: live?.valorUF,
+          valorUTM: live?.valorUTM,
         });
-        return sueldoLiquidoToResults(result);
+        return sueldoLiquidoToResults(result, coerceBool(inputs.calculoInverso));
       };
     }
 

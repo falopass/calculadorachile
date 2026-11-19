@@ -257,10 +257,17 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
   };
 }
 
-export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorResult[] {
+export function sueldoLiquidoToResults(result: SueldoLiquidoResult, calculoInverso = false): CalculatorResult[] {
   const r: CalculatorResult[] = [
-    { label: 'Sueldo Líquido', value: result.liquido, format: 'CLP', highlight: true },
-    { label: 'Sueldo Bruto', value: result.bruto, format: 'CLP' },
+    ...(calculoInverso
+      ? [
+          { label: 'Sueldo bruto necesario', value: result.bruto, format: 'CLP' as const, highlight: true },
+          { label: 'Sueldo Líquido', value: result.liquido, format: 'CLP' as const },
+        ]
+      : [
+          { label: 'Sueldo Líquido', value: result.liquido, format: 'CLP' as const, highlight: true },
+          { label: 'Sueldo Bruto', value: result.bruto, format: 'CLP' as const },
+        ]),
     { label: 'Total Descuentos', value: result.totalDescuentos, format: 'CLP' },
     { label: 'Factor de conversión', value: result.factorConversion, format: 'percentage' },
 
@@ -322,7 +329,7 @@ export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorR
 export function calculateSueldoBrutoFromLiquido(
   liquidoObjetivo: number,
   inputParcial: Omit<SueldoLiquidoInput, 'sueldoBruto' | 'calculoInverso'>,
-  precision: number = 100, // tolerancia en CLP
+  precision: number = 1, // tolerancia en CLP
 ): SueldoLiquidoResult {
   let lo = liquidoObjetivo;
   let hi = liquidoObjetivo * 2; // techo amplio: con descuentos máximos no superan ~50%
@@ -335,7 +342,7 @@ export function calculateSueldoBrutoFromLiquido(
   }
 
   for (let i = 0; i < 30; i++) {
-    const mid = (lo + hi) / 2;
+    const mid = Math.round((lo + hi) / 2);
     result = calculateSueldoLiquido({ ...inputParcial, sueldoBruto: mid });
     const diff = result.liquido - liquidoObjetivo;
     if (Math.abs(diff) <= precision) return result;

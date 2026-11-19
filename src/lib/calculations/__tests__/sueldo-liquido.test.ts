@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateSueldoLiquido, type SueldoLiquidoInput } from '../sueldo-liquido';
+import { loadCalculationFn } from '../load-calculator';
+import { getCalculatorBySlug } from '@/data/calculators';
 import {
   AFP,
   AFP_OBLIGATORIA_PCT,
@@ -10,6 +12,44 @@ import {
 } from '@/lib/values/constants';
 
 describe('calculateSueldoLiquido', () => {
+  describe('líquido a bruto', () => {
+    const opciones = {
+      afp: 'habitat' as const, saludTipo: 'fonasa' as const,
+      contratoIndefinido: true, valorUF: 40_000, valorUTM: 71_721,
+    };
+
+    it.each([0, 500_000, 1_000_000, 10_000_000])('reproduce el objetivo %i dentro de un peso', (objetivo) => {
+      const inverso = calculateSueldoLiquido({ ...opciones, sueldoBruto: objetivo, calculoInverso: true });
+      const directo = calculateSueldoLiquido({ ...opciones, sueldoBruto: inverso.bruto });
+      expect(Number.isInteger(inverso.bruto)).toBe(true);
+      expect(Math.abs(directo.liquido - objetivo)).toBeLessThanOrEqual(1);
+      if (objetivo === 10_000_000) {
+        expect(inverso.bruto).toBeGreaterThan(TOPE_IMPOSITIVO.seguro_cesantia * opciones.valorUF);
+        expect(inverso.descuentos.salud).toBe(Math.round(TOPE_IMPOSITIVO.afp_salud * opciones.valorUF * 0.07));
+        expect(inverso.descuentos.impuesto).toBeGreaterThan(0);
+      }
+    });
+
+    it('expone el selector primero y conserva todos los ids únicos', () => {
+      const calculator = getCalculatorBySlug('calculadora-sueldo-liquido')!;
+      expect(calculator.inputs[0].id).toBe('calculoInverso');
+      expect(calculator.inputs[0].defaultValue).toBe(false);
+      expect(new Set(calculator.inputs.map((i) => i.id)).size).toBe(calculator.inputs.length);
+    });
+
+    it('el adapter destaca el bruto inverso y usa UF/UTM de la UI', async () => {
+      const fn = (await loadCalculationFn('sueldo-liquido', opciones))!;
+      const results = fn({ ...opciones, sueldoBruto: '10000000', calculoInverso: 'true' });
+      const destacado = results.find((r) => r.highlight)!;
+      expect(destacado.label).toBe('Sueldo bruto necesario');
+      const directo = calculateSueldoLiquido({ ...opciones, sueldoBruto: destacado.value });
+      expect(Math.abs(directo.liquido - 10_000_000)).toBeLessThanOrEqual(1);
+      expect(results.find((r) => r.label === 'Sueldo Líquido')?.value).toBe(directo.liquido);
+      expect(fn({ ...opciones, sueldoBruto: '1000000', calculoInverso: 'false' }).find((r) => r.highlight)?.label).toBe('Sueldo Líquido');
+      expect(fn({ ...opciones, sueldoBruto: '', calculoInverso: true })[0].value).toBe(0);
+      expect(fn({ ...opciones, sueldoBruto: 'inválido', calculoInverso: true })[0].value).toBe(0);
+    });
+  });
   const inputBase: Omit<SueldoLiquidoInput, 'sueldoBruto'> = {
     afp: 'capital',
     saludTipo: 'fonasa',

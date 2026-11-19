@@ -5,6 +5,15 @@ import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { INDEMNIZACION } from '@/lib/values/constants';
+import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
+import { calculateSueldoBrutoFromLiquido } from '@/lib/calculations/sueldo-liquido';
+
+const EJ_SUELDO_INVERSO = calculateSueldoBrutoFromLiquido(1_000_000, {
+  afp: 'habitat', saludTipo: 'fonasa', contratoIndefinido: true,
+});
+const EJ_HON_INVERSO = calculateBoletaHonorarios({
+  montoBruto: 500_000, modo: 'liquido-a-bruto', ano: 2026,
+});
 
 // E-014: cifras del tope de gratificación generadas desde las constantes.
 const TOPE_GRAT = topeGratificacion();
@@ -41,6 +50,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Aplica AFP, salud y Seguro de Cesantía según las opciones seleccionadas y sus topes.',
       'Calcula el Impuesto Único sobre la base tributable y agrega los demás descuentos.',
       'Resta los descuentos al total de haberes para estimar el líquido.',
+      'En modo inverso, busca iterativamente el bruto cuyo líquido coincide con el objetivo, con tolerancia de un peso.',
     ],
     assumptions: [
       'Los datos corresponden a una liquidación mensual ordinaria.',
@@ -64,6 +74,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
         'Seguro de Cesantía: $1.000.000 × 0,60% = $6.000',
         'Total cotizaciones previsionales: $180.600',
         'Base tributable: $1.000.000 - $180.600 = $819.400 (exento de Impuesto Único)',
+        `Ejemplo inverso independiente: para ${formatCLP(1_000_000)} líquidos con AFP Habitat, Fonasa y contrato indefinido, sin bonos ni descuentos adicionales, la búsqueda estima ${formatCLP(EJ_SUELDO_INVERSO.bruto)} brutos y comprueba ${formatCLP(EJ_SUELDO_INVERSO.liquido)} líquidos.`,
       ],
       result: 'Sueldo líquido estimado a percibir: $819.400.',
     },
@@ -276,7 +287,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       development: [
         `Retención legal SII (${tasaHonorarios(getRetencionHonorarios(2026))}): $500.000 × ${tasaHonorarios(getRetencionHonorarios(2026))} = $76.250`,
         'Monto líquido a recibir: $500.000 - $76.250 = $423.750',
-        'Cálculo inverso (para recibir $500.000 líquido): Bruto = $500.000 / 0,8475 = $589.971',
+        `Cálculo inverso de honorarios (distinto del sueldo dependiente): para recibir ${formatCLP(500_000)} líquidos en 2026, el módulo divide por (1 − tasa de retención) y obtiene ${formatCLP(EJ_HON_INVERSO.montoBruto)} brutos.`,
       ],
       result: 'Monto líquido a transferir: $423.750 (con $76.250 retenidos para el SII).',
     },
