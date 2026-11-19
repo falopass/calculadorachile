@@ -97,6 +97,10 @@ export const ARTICULOS_2027: Article[] = [
         url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html',
       },
       {
+        label: 'SII — Guía Práctica de Declaración de Renta 2026 (SIS 1,5%)',
+        url: 'https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf',
+      },
+      {
         label: 'SP — tope imponible definitivo de 2026',
         url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-16921.html',
       },
@@ -154,7 +158,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>El ahorro para pensión contempla el <strong>10% de la renta imponible</strong> destinado a la cuenta individual, más la comisión de la AFP correspondiente. La salud considera el <strong>7% legal</strong> para Fonasa o Isapre. La ${ext('https://www.sii.cl/servicios_online/renta/2024/guia_practica.pdf', 'guía práctica del SII')} explica ambos componentes; sus montos, tasas de seguros y ejemplos de años anteriores no deben trasladarse como valores vigentes a 2027. Si el precio de tu plan de Isapre supera la cotización que se entera, la diferencia debe pagarse directamente a la institución.</p>
 
-<p>El <strong>Seguro de Invalidez y Sobrevivencia (SIS) sí incluye a independientes que cotizan</strong>. No debe confundirse con el ahorro para vejez ni omitirse porque en una liquidación de sueldo dependiente lo financia el empleador. La ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html', 'SP distingue expresamente las tasas por período y modalidad')}: informa 1,78% desde agosto de 2026 para la cotización vigente, pero señala 1,49% para independientes que cotizan mediante retención en el año tributario 2026. Esa diferencia impide presentar el 1,78% como tasa anual ya confirmada del F22 de 2027.</p>
+<p>El <strong>Seguro de Invalidez y Sobrevivencia (SIS) sí incluye a independientes que cotizan</strong>. No debe confundirse con el ahorro para vejez ni omitirse porque en una liquidación de sueldo dependiente lo financia el empleador. La ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html', 'SP distingue expresamente las tasas por período y modalidad')}: informa 1,78% desde agosto de 2026 para la cotización vigente, pero señala 1,49% para independientes que cotizan mediante retención en el año tributario 2026. La ${ext('https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf', 'Guía Práctica de Renta 2026 del SII')}, que determina el monto en la Operación Renta, usa 1,5% de la base imponible de cotizaciones. Esa diferencia impide presentar el 1,78% como tasa anual ya confirmada del F22 de 2027.</p>
 
 <p>También están el <strong>Seguro de Accidentes del Trabajo y Enfermedades Profesionales (ATEP), de la Ley 16.744</strong>, y el <strong>Seguro de Acompañamiento de Niños y Niñas (SANNA)</strong>. No usamos una tasa única para todos estos seguros: el monto debe revisarse según las reglas y antecedentes de la institución correspondiente. La ${ext('https://previsionsocial.gob.cl/wp-content/uploads/2026/05/05-FICHA-QUE-DICE-LA-LEY.pdf', 'ficha oficial de la Ley 21.133')} enumera SIS, ATEP, SANNA, salud y pensiones. Un presupuesto que solo sume AFP y salud deja fuera prestaciones y obligaciones reales.</p>
 
@@ -194,9 +198,9 @@ export const ARTICULOS_2027: Article[] = [
 <li>Ahorro de pensión, antes de comisión AFP: <strong>$960.000</strong> con base total o <strong>$864.000</strong> con base parcial.</li>
 </ul>
 
-<p>Faltan la comisión AFP, SIS, ATEP y SANNA; los seguros conservan la base completa aunque se elija cobertura parcial. Para SIS debe aplicarse la tasa anual que corresponda según la SP al proceso respectivo, no trasladar automáticamente una tasa mensual. Tampoco hemos determinado el impuesto anual ni otros créditos. En consecuencia, <strong>$1.830.000 no es una devolución proyectada</strong> y la resta entre retención, salud y ahorro no es un saldo final disponible.</p>
+<p>Faltan la comisión AFP, SIS, ATEP y SANNA; los seguros conservan la base completa aunque se elija cobertura parcial. Para SIS debe aplicarse la tasa anual del proceso respectivo (1,5% en la Operación Renta 2026 según el SII), no trasladar automáticamente una tasa mensual. Tampoco hemos determinado el impuesto anual ni otros créditos. En consecuencia, <strong>$1.830.000 no es una devolución proyectada</strong> y la resta entre retención, salud y ahorro no es un saldo final disponible.</p>
 
-<p>La <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a> sirve como apoyo orientativo, no como liquidación del F22. No uses su total como sustituto del cálculo oficial de SIS, SANNA ni de la opción parcial: revisa el alcance y cada componente. Para organizar documentos y el resto de tus ingresos, continúa con la <a href="/guias/preparacion-operacion-renta-2027-checklist">guía de preparación de la Operación Renta 2027</a>.</p>
+<p>La <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a> sirve como apoyo orientativo, no como liquidación del F22. Incluye el SIS con la última tasa anual publicada por el SII (1,5% de la base imponible, Operación Renta 2026), pero no SANNA ni la opción parcial: revisa el alcance y cada componente. Para organizar documentos y el resto de tus ingresos, continúa con la <a href="/guias/preparacion-operacion-renta-2027-checklist">guía de preparación de la Operación Renta 2027</a>.</p>
 
 <h2>Qué revisar antes de aceptar la propuesta</h2>
 
