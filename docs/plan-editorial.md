@@ -98,6 +98,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 | — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
 | 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-2026-sector-publico` | 2026-11-16 | laboral | aguinaldo |
+| 23 | blog | APV 2026: beneficio tributario antes del 31-dic | `apv-2026-simulador-ahorro-tributario` | 2026-11-18 | pensión | simulador-apv |
 | 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | 2026-11-16 | impuestos | boleta-honorarios, cotizacion-independientes |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
@@ -141,7 +142,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 19 | blog | Costo empleado PYME + cotización empleador | `costo-empleado-pyme-2026-cotizacion-empleador` | DR[19] · satélite pymes | empresas | 2026-10-02 | oct | **P2-ventana** |
 | ~~21~~ | blog | ~~Impuesto 2.ª categoría 2026: ejemplo~~ | ~~`impuesto-segunda-categoria-2026-ejemplo`~~ | publicado 2026-11-18 | impuestos | ~~2026-10-06~~ | continuo | ✅ |
 | 22 | blog | Comisiones AFP 2026: comparar descuento | `comisiones-afp-2026-comparar-descuento` | DR[14] · satélite AFP | pensión | 2026-10-09 | continuo | **P2-continuo** |
-| 23 | blog | APV 2026: ahorro y efecto tributario | `apv-2026-simulador-ahorro-tributario` | DR[17] | pensión | 2026-10-13 | oct–abr | **P2-ventana** |
+| ~~23~~ | blog | ~~APV 2026: ahorro y efecto tributario~~ | ~~`apv-2026-simulador-ahorro-tributario`~~ | publicado 2026-11-18 · DR[17] | pensión | ~~2026-10-13~~ | oct–abr | ✅ |
 | 50 | blog | Reforma tributaria Ley 21.713 (2026) | `reforma-tributaria-ley-21713-2026-personas-pymes` | DR[23] · **no** mega-guía | impuestos | 2026-10-14 | 2026 | **P2-continuo** |
 | ~~24~~ | blog | ~~Cotización independientes 2026~~ | ~~`cotizacion-independientes-2026-boleta`~~ | publicado 2026-11-19 en `articles-2027.ts` · DR[16] | previsional | ~~2026-10-16~~ | oct–abr | ✅ |
 | 25 | blog | Reajuste arriendo UF/IPC 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | evergreen blog | vivienda | 2026-10-20 | continuo | **P2-continuo** |

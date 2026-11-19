@@ -26,6 +26,10 @@ import {
   INGRESO_MINIMO,
   JORNADA_LEGAL,
   SEGURO_CESANTIA_BENEFICIOS,
+  UF,
+  UTM,
+  APV_REGIMEN_B,
+  IMPUESTO_SEGUNDA_CATEGORIA_2026,
 } from '@/lib/values/constants';
 import { buildCvlistoBuscarTrabajoUrl, buildCvlistoContentUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
@@ -69,6 +73,31 @@ const CVLISTO_BUSCAR_TRABAJO_RESUMEN = (() => {
   url.searchParams.set('utm_content', 'cesantia_blog_resumen_buscar_trabajo');
   return url.toString();
 })();
+
+// APV 2026 (#23): montos de referencia desde UF/UTM vigentes; los topes
+// legales se fijan con la UF y la UTM del 31 de diciembre del año del ahorro.
+const APV_TOPE_ANUAL_CLP = Math.round(APV_REGIMEN_B.tope_uf_anual * UF.valor);
+const APV_TOPE_MENSUAL_CLP = Math.round(50 * UF.valor);
+const APV_BONIFICACION_PCT = 0.15;
+const APV_BONIFICACION_TOPE_CLP = Math.round(6 * UTM.valor);
+const APV_AHORRO_TOPE_BONIFICACION_CLP = Math.round(
+  APV_BONIFICACION_TOPE_CLP / APV_BONIFICACION_PCT,
+);
+const APV_EJEMPLO_APORTE = 1_000_000;
+const APV_FILAS_TRAMOS = IMPUESTO_SEGUNDA_CATEGORIA_2026.tramos
+  .map(({ limiteInferiorUTA, limiteSuperiorUTA, tasa }) => {
+    const rango = Number.isFinite(limiteSuperiorUTA)
+      ? `${limiteInferiorUTA === 0 ? 'Hasta' : `Más de ${String(limiteInferiorUTA).replace('.', ',')} y hasta`} ${String(limiteSuperiorUTA).replace('.', ',')} UTA`
+      : `Más de ${limiteInferiorUTA} UTA`;
+    const tasaTexto =
+      tasa === 0 ? 'Exento' : formatPercentage(tasa * 100, (tasa * 1000) % 10 === 0 ? 0 : 1);
+    const bonificacion = Math.min(
+      APV_EJEMPLO_APORTE * APV_BONIFICACION_PCT,
+      APV_BONIFICACION_TOPE_CLP,
+    );
+    return `<tr><td>${rango}</td><td>${tasaTexto}</td><td>${formatCLP(Math.round(APV_EJEMPLO_APORTE * tasa))}</td><td>${formatCLP(bonificacion)}</td></tr>`;
+  })
+  .join('\n');
 
 /** Fecha AAAA-MM-DD → "29-10-2026". */
 function fechaCorta(iso: string): string {
@@ -6410,6 +6439,149 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 18 de noviembre de 2026 con la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">pregunta frecuente del SII sobre plazos de IVA</a>, el <a href="https://misii.sii.cl/cgi_calendario/calendario.cgi" target="_blank" rel="noopener">calendario de IVA (PPM) del SII</a>, la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29</a>, la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">pregunta frecuente sobre la base del PPM</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=6374" target="_blank" rel="noopener">Código Tributario en Ley Chile</a> (artículos 36, 53 y 97).</p>`,
+  },
+  {
+    slug: 'apv-2026-simulador-ahorro-tributario',
+    title: 'APV 2026: cómo ganar el beneficio tributario antes del 31 de diciembre',
+    seoTitle: 'APV 2026: beneficio tributario si ahorras antes del 31 de diciembre',
+    description: `Régimen A (bonificación de 15%, tope 6 UTM) o régimen B (rebaja de la base del impuesto, tope 600 UF): cuánto devuelve cada uno según tu tramo, por qué el depósito debe hacerse antes del 31 de diciembre de 2026 y cómo se recupera en la Operación Renta 2027.`,
+    seoDescription:
+      'APV 2026: depósito antes del 31-12 para la Operación Renta 2027. Régimen A con bonificación de 15% (tope 6 UTM) vs régimen B con rebaja de impuesto (tope 600 UF). Ejemplos por tramo.',
+    date: '2026-11-18',
+    updatedAt: '2026-11-18',
+    category: 'pension',
+    readingTime: 9,
+    keywords: [
+      'apv 2026',
+      'apv beneficio tributario',
+      'apv 31 de diciembre',
+      'apv regimen a o b',
+      'tope apv 600 uf',
+      'bonificacion fiscal apv',
+      'apv devolucion impuestos',
+      'apv operacion renta 2027',
+    ],
+    relatedCalculators: [
+      'calculadora-simulador-apv',
+      'calculadora-impuesto-segunda-categoria',
+      'calculadora-operacion-renta',
+      'calculadora-uf-clp',
+    ],
+    relatedGuia: 'afp-pension-chile',
+    embedCalculatorId: 'simulador-apv',
+    faq: [
+      {
+        question:
+          '¿Hasta cuándo puedo hacer APV para rebajar impuestos en la Operación Renta 2027?',
+        answer:
+          'Hasta el 31 de diciembre de 2026. La Ley sobre Impuesto a la Renta (artículo 42 bis) considera los depósitos efectuados en el año calendario, y la Operación Renta de abril de 2027 reliquida el impuesto de 2026. Un depósito hecho el 2 de enero de 2027 ya cuenta para la Operación Renta 2028.',
+      },
+      {
+        question: '¿Cuál es el tope del APV con beneficio tributario?',
+        answer:
+          'En régimen B, el descuento por planilla tiene un tope de 50 UF mensuales y el total anual, sumando planilla y depósitos directos, no puede superar 600 UF según el valor de la UF al 31 de diciembre. En régimen A la bonificación fiscal es de 15% de lo ahorrado, con un máximo de 6 UTM por año calendario. El artículo 20 L del DL 3.500 dispone que, sumando ambos regímenes, los aportes no pueden exceder 600 UF por año calendario.',
+      },
+      {
+        question: '¿Me conviene el régimen A o el B?',
+        answer:
+          'Como regla aritmética, si tu tasa marginal del impuesto es menor a 15% (tramo exento, 4%, 8% o 13,5%), la bonificación del régimen A entrega más por cada peso hasta su tope de 6 UTM. Desde el tramo de 23%, la rebaja del régimen B devuelve más. Pero la bonificación del A se recibe al pensionarse, y retirar fondos del B antes de pensionarse paga un impuesto único con recargo, así que también importa si podrías necesitar el dinero.',
+      },
+      {
+        question: '¿Cómo recupero el beneficio si hice el APV directo en la AFP o en un banco?',
+        answer:
+          'En régimen B, si el aporte no se descontó por planilla, el beneficio se pide en la declaración anual de renta: la institución informa el depósito al SII y la rebaja aparece en el Formulario 22 (en el año tributario 2026 fue el código 765 para dependientes y el 770 para independientes). El resultado es un menor impuesto o una devolución. En régimen A no hay devolución en abril: el SII calcula la bonificación y la Tesorería la deposita en tu cuenta de APV.',
+      },
+    ],
+    sources: [
+      {
+        label:
+          'Superintendencia de Pensiones — Beneficios tributarios y bonificación del Estado (APV y APVC)',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-5795.html',
+      },
+      {
+        label: 'Superintendencia de Pensiones — Ahorro Previsional Voluntario (APV)',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9929.html',
+      },
+      {
+        label: 'SII — Guía Práctica de Declaración de Renta 2026 (APV, págs. 30 a 33)',
+        url: 'https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf',
+      },
+      {
+        label: 'BCN — Ley sobre Impuesto a la Renta (DL 824), artículo 42 bis',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6368',
+      },
+      {
+        label: 'BCN — DL 3.500, artículos 20 L y 20 O',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=7147',
+      },
+    ],
+    content: `
+<p>El <strong>Ahorro Previsional Voluntario (APV)</strong> es el único ahorro para la pensión en que el Estado pone dinero o te cobra menos impuestos el mismo año. Pero el beneficio es por <strong>año calendario</strong>: lo que deposites hasta el <strong>31 de diciembre de 2026</strong> cuenta para la Operación Renta de abril de 2027, y lo que deposites desde el 1 de enero ya queda para la de 2028. Si estabas pensando en hacer un aporte este año, la fecha que importa es esa.</p>
+<p>Esta nota explica los dos regímenes tributarios, sus topes, cuánto devuelve cada uno según tu tramo de impuesto y qué hacer antes de fin de año. Las reglas vienen del <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">artículo 42 bis de la Ley sobre Impuesto a la Renta</a>, de los <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">artículos 20 L y 20 O del DL 3.500</a>, de la <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-5795.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a> y de la <a href="https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf" target="_blank" rel="noopener">Guía Práctica de Declaración de Renta 2026 del SII</a>, consultadas el 18 de noviembre de 2026.</p>
+
+<h2>Qué es el APV y dónde se contrata</h2>
+<p>Según la <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9929.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a>, el APV es un ahorro adicional a la cotización obligatoria de 10% en la AFP, pensado para aumentar la pensión o compensar lagunas. Se puede contratar en una AFP, un banco, una compañía de seguros de vida, una administradora de fondos mutuos, de fondos de inversión, de fondos para la vivienda, una administradora general de fondos o un intermediario de valores, siempre que el plan esté aprobado por la CMF. También existe el <strong>APV Colectivo (APVC)</strong>, que contrata el empleador y se financia con aportes de ambas partes.</p>
+<p>El APV no es lo mismo que la <strong>Cuenta 2</strong> (cuenta de ahorro voluntario de la AFP): según la Superintendencia, la Cuenta 2 permite hasta 24 giros al año y no tiene carácter de cotización previsional, así que su tratamiento tributario es distinto.</p>
+
+<h2>Régimen A y régimen B: las dos formas del beneficio</h2>
+<p>Al depositar, eliges uno de dos regímenes (artículo 20 L del DL 3.500). Puedes cambiar de régimen para los aportes siguientes, pero cada aporte queda con el régimen que elegiste al hacerlo.</p>
+<table>
+<thead><tr><th></th><th>Régimen A: bonificación fiscal</th><th>Régimen B: rebaja de impuestos</th></tr></thead>
+<tbody>
+<tr><td>Qué recibes</td><td>El Estado agrega 15% de lo ahorrado en el año</td><td>El aporte se descuenta de la base del impuesto único o del global complementario</td></tr>
+<tr><td>Tope anual</td><td>Bonificación máxima de 6 UTM (UTM vigente al 31 de diciembre del año del ahorro)</td><td>600 UF por año (UF al 31 de diciembre); por planilla, máximo 50 UF al mes</td></tr>
+<tr><td>Cuándo se materializa</td><td>La bonificación se deposita en una cuenta aparte y se usa para la pensión</td><td>Cada mes (descuento por planilla) o en la Operación Renta (depósito directo)</td></tr>
+<tr><td>Si retiras antes de pensionarte</td><td>El aporte no paga impuesto; la rentabilidad sí, y se devuelve a la Tesorería 15% de lo retirado desde la cuenta de bonificación</td><td>Lo retirado paga un impuesto único con recargo; la institución retiene 15% a cuenta</td></tr>
+</tbody>
+</table>
+<p>El artículo 20 L del DL 3.500 agrega que, sumando ambos regímenes, el total de aportes no puede exceder <strong>600 UF por año calendario</strong>. Con la UF del ${fechaLargaArticulo(UF.fecha_actualizacion)} (${formatCLP(UF.valor)}), 600 UF equivalen a unos <strong>${formatCLP(APV_TOPE_ANUAL_CLP)}</strong> y 50 UF a unos ${formatCLP(APV_TOPE_MENSUAL_CLP)}. El monto exacto se fija con la UF del 31 de diciembre de 2026. Como referencia, el SII calculó el tope del año tributario 2026 en $23.836.776, con la UF del 31 de diciembre de 2025.</p>
+<p>La bonificación del régimen A tiene además un límite propio: se calcula sobre el ahorro del año que no supere <strong>diez veces las cotizaciones obligatorias</strong> que hiciste ese mismo año (artículo 20 O del DL 3.500). Con la UTM de ${MESES_ES_CL[Number(UTM.fecha_actualizacion.slice(5, 7)) - 1]} de ${UTM.fecha_actualizacion.slice(0, 4)} (${formatCLP(UTM.valor)}), el tope de 6 UTM es de unos <strong>${formatCLP(APV_BONIFICACION_TOPE_CLP)}</strong>, y para alcanzarlo basta ahorrar 40 UTM en el año, unos ${formatCLP(APV_AHORRO_TOPE_BONIFICACION_CLP)}. Lo que ahorres por sobre eso en régimen A no recibe más bonificación.</p>
+
+<h2>Por qué la fecha es el 31 de diciembre</h2>
+<p>El artículo 42 bis de la Ley sobre Impuesto a la Renta mide el beneficio del régimen B por año: el tope anual se calcula con la UF del 31 de diciembre "del año respectivo" y cada depósito se valora con la UF del día en que se hizo. La Operación Renta 2027 reliquida el impuesto de los ingresos de 2026, así que solo entran los aportes hechos entre el 1 de enero y el 31 de diciembre de 2026. Lo mismo ocurre con la bonificación del régimen A, que el DL 3.500 calcula por año calendario.</p>
+<p>En 2026 el 31 de diciembre cae jueves. Cada institución tiene sus propios horarios y plazos de abono para transferencias y cargos, y un depósito que la institución registre en enero ya no cuenta para 2026. Si vas a aportar, hazlo con días de margen y guarda el comprobante con la fecha del depósito.</p>
+
+<h3>Por planilla o directo: dos caminos distintos</h3>
+<ul>
+<li><strong>Por planilla (descuento del empleador):</strong> el empleador rebaja el aporte de la base del impuesto único cada mes, con tope de 50 UF mensuales. El beneficio se ve de inmediato en la liquidación. Para que un aporte cuente en 2026 tiene que descontarse de una remuneración de 2026; si quieres sumar un aporte en diciembre, pregunta a tu empleador si alcanza a la liquidación de ese mes.</li>
+<li><strong>Directo en la AFP o institución:</strong> el aporte no cambia tu sueldo mensual. El beneficio se pide en la declaración anual de renta, reliquidando el impuesto. Según el SII, la institución informa el depósito y la rebaja aparece en el Formulario 22; en el año tributario 2026 fue el código 765 para trabajadores dependientes y el código 770 para independientes. Este camino es el que permite aportar a última hora sin pasar por el empleador.</li>
+</ul>
+
+<h2>Cuánto devuelve cada régimen según tu tramo</h2>
+<p>En el régimen B el beneficio es el impuesto que dejas de pagar: si el aporte no te cambia de tramo, es el aporte multiplicado por tu tasa marginal. En el régimen A es 15% del aporte, hasta el tope. Este es el ejemplo de un depósito directo de <strong>${formatCLP(APV_EJEMPLO_APORTE)}</strong> en 2026, tramo por tramo de la tabla anual del impuesto (artículo 52 de la Ley sobre Impuesto a la Renta, en UTA):</p>
+<table>
+<thead><tr><th>Renta tributable anual</th><th>Tasa marginal</th><th>Régimen B: menos impuesto</th><th>Régimen A: bonificación</th></tr></thead>
+<tbody>
+${APV_FILAS_TRAMOS}
+</tbody>
+</table>
+<p>La renta tributable es la remuneración después de descontar cotizaciones de AFP, salud y seguro de cesantía, no el sueldo bruto. Si el aporte te baja de tramo, el beneficio del régimen B es algo menor que el de la tabla, porque parte del aporte rebaja renta que tributaba a una tasa más baja. El SII publica un caso práctico en su guía de renta 2026: un trabajador con $15.600.000 de remuneraciones y un APV directo de $400.000 en régimen B rebajó su base a $15.200.000 y su impuesto anual quedó en $157.368.</p>
+<p>La lectura aritmética de la tabla es directa: <strong>con tasa marginal bajo 15%, la bonificación del régimen A entrega más por cada peso</strong> (hasta su tope); <strong>desde el tramo de 23%, el régimen B devuelve más</strong>. En el tramo exento el régimen B no devuelve nada, porque no hay impuesto que rebajar. Esto no es una recomendación: la bonificación del A queda en tu cuenta para la pensión, mientras que la rebaja del B se recibe como menor impuesto o devolución en abril, y retirar el B antes de pensionarte cuesta más.</p>
+
+<h2>Lo que cuesta retirar antes de pensionarte</h2>
+<p>El APV se puede retirar, pero el costo depende del régimen:</p>
+<ul>
+<li><strong>Régimen B:</strong> el monto retirado paga un impuesto único que se declara junto con el global complementario. Su tasa es la tasa efectiva que el retiro agrega a tu impuesto, multiplicada por 1,1 y más 3 puntos porcentuales (artículo 42 bis, número 3). La institución retiene 15% al momento del retiro, a cuenta de ese impuesto.</li>
+<li><strong>Régimen A:</strong> el capital que aportaste no paga impuesto al retirarlo, pero la rentabilidad sí, y la institución devuelve a la Tesorería 15% de lo retirado desde la cuenta de bonificación. La institución informa esa rentabilidad al SII para la declaración de renta.</li>
+</ul>
+<p>Los traspasos entre instituciones no se consideran retiro, así que puedes cambiar de administradora sin perder el beneficio. Antes de un retiro, pide a tu institución el detalle del régimen de cada aporte.</p>
+
+<h2>Checklist antes del 31 de diciembre de 2026</h2>
+<ol>
+<li><strong>Calcula tu tramo:</strong> estima tu renta tributable anual de 2026 con la <a href="/calculadoras/calculadora-impuesto-segunda-categoria">calculadora de impuesto de segunda categoría</a>.</li>
+<li><strong>Elige el régimen</strong> con la regla de la tabla: tasa marginal bajo 15%, el A suele entregar más; desde 23%, el B. Considera si podrías necesitar el dinero antes de pensionarte.</li>
+<li><strong>Revisa lo que ya aportaste en 2026</strong> por planilla, para no pasar el tope de 600 UF del régimen B ni ahorrar en el A por sobre lo que da bonificación.</li>
+<li><strong>Proyecta el ahorro</strong> con el <a href="/calculadoras/calculadora-simulador-apv">simulador APV</a>: muestra el saldo acumulado con rentabilidad compuesta y el beneficio tributario anual del régimen B. El simulador ubica tu tramo a partir del sueldo bruto, así que su beneficio es una aproximación.</li>
+<li><strong>Deposita con margen</strong> antes del 31 de diciembre y guarda el comprobante con la fecha.</li>
+<li><strong>En abril de 2027</strong>, revisa que la propuesta del Formulario 22 incluya tu APV directo. Puedes estimar el resultado con la <a href="/calculadoras/calculadora-operacion-renta">calculadora de Operación Renta</a> y prepararte con la <a href="/guias/preparacion-operacion-renta-2027-checklist">guía de Operación Renta 2027</a>.</li>
+</ol>
+<p>El APV no es urgente para todos: si estás en el tramo exento y podrías necesitar el dinero pronto, una cuenta de ahorro común puede servirte más. Pero si este año ya pagas impuesto y tienes un excedente, depositar antes del 31 de diciembre es la diferencia entre recibir el beneficio en abril de 2027 o esperar un año más.</p>
+<p>Para el panorama del sistema de pensiones, la cotización obligatoria y el ahorro voluntario, revisa la <a href="/guias/afp-pension-chile">guía de AFP y pensión en Chile</a>.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría tributaria ni de inversión. Los montos en pesos se calculan con UF y UTM de referencia; los topes reales se fijan con los valores del 31 de diciembre de 2026. La rentabilidad del APV no está garantizada. Antes de un aporte grande o un retiro, confirma el tratamiento con tu institución y el SII.</p></div></aside>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 18 de noviembre de 2026 con la página de <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-5795.html" target="_blank" rel="noopener">beneficios tributarios y bonificación del APV de la Superintendencia de Pensiones</a>, la <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9929.html" target="_blank" rel="noopener">ficha del APV de la misma Superintendencia</a>, la <a href="https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf" target="_blank" rel="noopener">Guía Práctica de Declaración de Renta 2026 del SII</a> (págs. 30 a 33), la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a> (artículos 42 bis y 52) y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">DL 3.500</a> (artículos 20 L y 20 O) en Ley Chile.</p>`,
   },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
