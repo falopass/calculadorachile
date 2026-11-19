@@ -141,7 +141,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 22 | blog | Comisiones AFP 2026: comparar descuento | `comisiones-afp-2026-comparar-descuento` | DR[14] · satélite AFP | pensión | 2026-10-09 | continuo | **P2-continuo** |
 | 23 | blog | APV 2026: ahorro y efecto tributario | `apv-2026-simulador-ahorro-tributario` | DR[17] | pensión | 2026-10-13 | oct–abr | **P2-ventana** |
 | 50 | blog | Reforma tributaria Ley 21.713 (2026) | `reforma-tributaria-ley-21713-2026-personas-pymes` | DR[23] · **no** mega-guía | impuestos | 2026-10-14 | 2026 | **P2-continuo** |
-| 24 | blog | Cotización independientes 2026 | `cotizacion-independientes-2026-boleta` | DR[16] · satélite boleta | previsional | 2026-10-16 | oct–abr | **P2-ventana** |
+| ~~24~~ | blog | ~~Cotización independientes 2026~~ | ~~`cotizacion-independientes-2026-boleta`~~ | publicado 2026-11-19 en `articles-2027.ts` · DR[16] | previsional | ~~2026-10-16~~ | oct–abr | ✅ |
 | 25 | blog | Reajuste arriendo UF/IPC 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | evergreen blog | vivienda | 2026-10-20 | continuo | **P2-continuo** |
 | 26 | blog | Subsidio habitacional DS01/DS49 | `subsidio-habitacional-ds01-ds49-ahorro-uf-2026` | DR[28] · satélite vivienda | vivienda | 2026-10-23 | continuo | **P2-continuo** |
 | 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | DR[11] · evergreen | laboral | 2026-10-27 | continuo | **P2-continuo** |
