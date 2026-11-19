@@ -37,6 +37,13 @@ import {
   HORAS_EXTRA,
   PENSION_ALIMENTOS,
   PERMISO_CIRCULACION,
+  IVA,
+  REAL_BRASILENO,
+  SOL_PERUANO,
+  PESO_COLOMBIANO,
+  PESO_MEXICANO,
+  BOLIVIANO,
+  PESO_ARGENTINO,
 } from '@/lib/values/constants';
 import { calculateSemanaCorrida, DT_SEMANA_CORRIDA_URL } from '@/lib/calculations/semana-corrida';
 import { calculateContribuciones } from '@/lib/calculations/contribuciones';
@@ -63,6 +70,9 @@ import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 import { calculateSeguroCesantia } from '@/lib/calculations/seguro-cesantia';
 import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
+import { DERECHO_AD_VALOREM_GENERAL, FUENTE_ADUANAS, UMBRAL_REGIMEN_ESPECIAL_USD } from '@/lib/calculations/compras-internacionales';
+import { PAES } from '@/lib/values/educacion';
+import { calculatePuntajeNemRanking } from '@/lib/calculations/puntaje-nem-ranking';
 
 export interface QuickAnswerLink {
   text: string;
@@ -136,6 +146,14 @@ const SII_UTM_URL = 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm';
 const BCN_CODIGO_TRABAJO_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=207436';
 const DT_ORD_596_URL = 'https://dt.gob.cl/legislacion/1624/w3-article-124097.html';
 const BCCH_INDICADORES_URL = 'https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx';
+
+function respuestaDivisa(nombre: string, serie: string): QuickAnswer {
+  return withLinks([
+    `Para pasar ${nombre} a pesos chilenos, multiplica el monto por el tipo de cambio nominal del `,
+    { text: 'Banco Central', href: BCCH_INDICADORES_URL },
+    ` (serie ${serie}); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial de la fecha informada: casas de cambio y tarjetas pueden cotizar otro precio y cobrar comisión.`,
+  ]);
+}
 const BCCH_UF_METODOLOGIA_URL = 'https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/UF.pdf';
 const BCCH_UF_SERIE_URL = 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF';
 const SII_UF_URL = 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm';
@@ -1151,39 +1169,60 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       ]);
 
     case 'plusvalia':
-      return {
-        lead: `Si vendes una vivienda habitacional como persona natural, el mayor valor está exento hasta ${PLUSVALIA_INMOBILIARIA.exencion_uf.toLocaleString('es-CL')} UF acumuladas en tu vida; sobre el exceso pagas un impuesto único sustitutivo del ${PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico}% o lo declaras en el Global Complementario. La ganancia es el precio de venta menos el de compra y las mejoras.`,
-      };
+      return withLinks([
+        `Si vendes una vivienda habitacional como persona natural, el mayor valor está exento hasta ${PLUSVALIA_INMOBILIARIA.exencion_uf.toLocaleString('es-CL')} UF acumuladas en tu vida; sobre el exceso pagas un impuesto único sustitutivo del ${PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico}% o lo declaras en el Global Complementario, según los requisitos del `,
+        { text: 'SII', href: 'https://www.sii.cl/destacados/renta/2026/personas/documents/pap_venta_bienes_raices_2026.pdf' },
+        '. La ganancia es el precio de venta menos el de compra y las mejoras.',
+      ]);
 
     case 'compras-internacionales':
-      return {
-        lead: 'Desde el 25 de octubre de 2025, una compra en el extranjero de hasta US$500 paga IVA de 19 % y no paga arancel: si la tienda está inscrita en el SII (Temu, AliExpress, Shein, Amazon, entre otras) lo cobra al pagar; si no, lo pagas al llegar el envío. Sobre US$500 pagas 6 % de derecho sobre el valor CIF y luego 19 % de IVA sobre el CIF más el derecho.',
-      };
+      return withLinks([
+        `Una compra en el extranjero cuyos productos valen hasta US$${UMBRAL_REGIMEN_ESPECIAL_USD} paga IVA de ${IVA.tasa} % y no paga arancel: si la tienda está inscrita en el `,
+        { text: 'SII', href: 'https://www.sii.cl/destacados/iva_bienes/index.html' },
+        ` lo cobra al pagar; si no, lo pagas al llegar el envío. Sobre US$${UMBRAL_REGIMEN_ESPECIAL_USD}, el derecho general es ${DERECHO_AD_VALOREM_GENERAL} % sobre el valor CIF (producto, flete y seguro) y luego ${IVA.tasa} % de IVA sobre CIF más derecho (`,
+        { text: 'Aduanas', href: FUENTE_ADUANAS },
+        '). Un TLC con origen acreditado puede rebajar el derecho; no se incluyen cargos de gestión del courier ni impuestos adicionales por mercancía.',
+      ]);
+
+    case 'conversor-divisas':
+      return withLinks([
+        'Para convertir dólares estadounidenses o euros a pesos chilenos, multiplica el monto por su tasa nominal en CLP; para convertir desde pesos, divide por esa tasa. La referencia es el dólar observado o el euro del ',
+        { text: 'Banco Central', href: BCCH_INDICADORES_URL },
+        ', o la fuente de respaldo informada. Casas de cambio y tarjetas pueden aplicar otra cotización y comisiones.',
+      ]);
+
+    case 'puntaje-ponderado-paes':
+      return withLinks([
+        'El puntaje ponderado PAES es la suma de cada puntaje multiplicado por el porcentaje que exige tu carrera: NEM, ranking, Competencia Lectora, M1, electiva y M2 cuando corresponda (',
+        { text: 'DEMRE', href: 'https://demre.cl/paes/factores-seleccion/' },
+        `). Si la carrera pondera M2, su peso mínimo es ${PAES.pesoMinimoM2} %. Ingresa las ponderaciones de tu carrera: las precargadas son un ejemplo, no aseguran la admisión.`,
+      ]);
+
+    case 'puntaje-nem-ranking': {
+      const r = calculatePuntajeNemRanking({ grupoNem: 'a', prom1: 6.2, prom2: 6.3, prom3: 6.3, prom4: 6.3 });
+      return withLinks([
+        'El puntaje NEM se obtiene convirtiendo tu promedio de enseñanza media con la tabla oficial de tu grupo del ',
+        { text: 'DEMRE', href: 'https://demre.cl/paes/factores-seleccion/tabla-transformacion-nem' },
+        `: por ejemplo, notas anuales 6,2; 6,3; 6,3 y 6,3 en el grupo A dan promedio ${r.promedioNem.toLocaleString('es-CL')} y ${r.puntajeNem} puntos. El `,
+        { text: 'ranking', href: 'https://demre.cl/paes/factores-seleccion/puntaje-ranking' },
+        ' depende además de los antecedentes históricos de tu colegio; sin ellos se usa el NEM como estimación conservadora, no como ranking oficial.',
+      ]);
+    }
 
     case 'real-brasileno-clp':
-      return {
-        lead: 'Para pasar reales brasileños a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.BRL.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
-      };
+      return respuestaDivisa('reales brasileños', REAL_BRASILENO.serie);
 
     case 'sol-peruano-clp':
-      return {
-        lead: 'Para pasar soles peruanos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.PEN.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
-      };
+      return respuestaDivisa('soles peruanos', SOL_PERUANO.serie);
 
     case 'peso-colombiano-clp':
-      return {
-        lead: 'Para pasar pesos colombianos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.COP.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
-      };
+      return respuestaDivisa('pesos colombianos', PESO_COLOMBIANO.serie);
 
     case 'peso-mexicano-clp':
-      return {
-        lead: 'Para pasar pesos mexicanos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.MXN.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
-      };
+      return respuestaDivisa('pesos mexicanos', PESO_MEXICANO.serie);
 
     case 'boliviano-clp':
-      return {
-        lead: 'Para pasar bolivianos a pesos chilenos, multiplica el monto por el tipo de cambio nominal del Banco Central (serie F072.CLP.BOL.N.O.D); para el camino inverso, divide los pesos por esa tasa. Es un valor referencial: casas de cambio y tarjetas suelen cotizar otro precio y cobrar comisión.',
-      };
+      return respuestaDivisa('bolivianos', BOLIVIANO.serie);
 
     default:
       return Object.prototype.hasOwnProperty.call(ADDITIONAL_QUICK_ANSWERS, calculatorId)
@@ -1208,9 +1247,7 @@ const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
   'costo-viaje': {
     lead: 'El costo de un viaje en auto es la suma del combustible y los peajes o TAG. Para estimar el combustible, divide los kilómetros por el rendimiento en kilómetros por litro y multiplica por el precio del litro que pagarás. Si eliges ida y vuelta, se duplican distancia y peajes; el total se divide entre los pasajeros para repartir el gasto.',
   },
-  'peso-argentino-clp': {
-    lead: 'Para convertir pesos argentinos a chilenos, multiplica el monto por la tasa en CLP por ARS; para convertir pesos chilenos a argentinos, divide por esa tasa. El sitio usa el tipo de cambio nominal referencial del Banco Central. No equivale necesariamente a la cotización de una casa de cambio o tarjeta ni garantiza una cotización del día.',
-  },
+  'peso-argentino-clp': respuestaDivisa('pesos argentinos', PESO_ARGENTINO.serie),
   'operacion-renta': {
     lead: 'El impuesto anual estimado se calcula sobre los ingresos menos los gastos, las cotizaciones obligatorias y el ahorro previsional ingresados. A esa renta tributable se aplica la tabla progresiva anual en UTA. La retención sugerida se muestra por separado: no es una devolución calculada ni reemplaza tu declaración ante el SII o la revisión de las deducciones permitidas.',
   },
