@@ -95,7 +95,7 @@ export const ARTICULOS_2027: Article[] = [
     content: `
 <p class="article-lead">Para saber cuánto dinero llevar a Argentina, Brasil, Perú, Colombia, México o Bolivia en el verano 2027, suma lo que todavía debes pagar en destino, separa una reserva y decide qué parte necesitarás en efectivo. No hay un monto diario universal: una reserva con comidas incluidas y un recorrido por varias ciudades necesitan presupuestos distintos.</p>
 
-<p>Esta pauta está pensada para viajes desde Chile entre diciembre de 2026 y marzo de 2027. Es un método de planificación, no una lista de precios turísticos ni una predicción cambiaria. No publicamos tarifas por país sin respaldo ni equivalencias fijas en pesos chilenos. Los enlaces a los conversores permiten hacer la cuenta con los valores disponibles al consultarlos.</p>
+<p>Esta pauta está pensada para viajes desde Chile entre diciembre de 2026 y marzo de 2027. Es un método de planificación, no una lista de precios turísticos ni una predicción cambiaria. No publicamos tarifas por país sin respaldo ni equivalencias fijas en pesos chilenos. Los conversores usan el valor de referencia del BCCh correspondiente a la fecha que muestran, desde una instantánea diaria de datos; no son cotizaciones en tiempo real ni necesariamente del día de tu consulta.</p>
 
 <h2>Cómo calcular el dinero que falta para el viaje</h2>
 <p>Parte por las cotizaciones de tus propias reservas, expresadas en la moneda en que se cobrarán. Anota alojamiento pendiente, alimentación no incluida, traslados, excursiones y compras previstas. Al lado de cada gasto, marca si está pagado, si admite tarjeta y cuándo se cobra. Una garantía o bloqueo de tarjeta no debe confundirse con un pago definitivo: pregunta al alojamiento cómo lo gestionará.</p>

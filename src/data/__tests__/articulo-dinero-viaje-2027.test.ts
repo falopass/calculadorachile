@@ -35,6 +35,8 @@ describe('presupuesto de viaje verano 2027', () => {
     expect(article.content).not.toMatch(/\$|\b\d+[.,]\d+\b|\d+\s*%/);
     expect(article.content).toContain('Presupuesto pendiente =');
     expect(article.content).toContain('fecha y la procedencia');
+    expect(article.content).toContain('valor de referencia del BCCh correspondiente a la fecha que muestran');
+    expect(article.content).toContain('no son cotizaciones en tiempo real');
     expect(article.content).toContain('no publica umbrales');
     expect(article.content).toContain('déjalo identificado como pendiente');
     expect(article.content).toContain('si falla tu método principal');
