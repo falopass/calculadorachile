@@ -1,27 +1,27 @@
 {
-  "uf": 41357.3,
+  "uf": 41364.17,
   "utm": 72440,
-  "dolarObservado": 996.68,
-  "euro": 1098.03,
-  "pesoArgentino": 0.64,
-  "realBrasileno": 172.5,
-  "solPeruano": 292.34,
+  "dolarObservado": 1002.07,
+  "euro": 1099.6,
+  "pesoArgentino": 0.65,
+  "realBrasileno": 171.83,
+  "solPeruano": 291.65,
   "pesoColombiano": 0.3,
-  "pesoMexicano": 54.14,
-  "boliviano": 85.19,
+  "pesoMexicano": 53.55,
+  "boliviano": 85.28,
   "ipcMensual": -0.2,
-  "asOf": "2026-11-18T20:46:41.163Z",
+  "asOf": "2026-11-19T20:52:01.616Z",
   "observedAsOf": {
-    "uf": "2026-11-18",
+    "uf": "2026-11-19",
     "utm": "2026-11-01",
-    "dolarObservado": "2026-11-18",
-    "euro": "2026-11-18",
-    "pesoArgentino": "2026-11-18",
-    "realBrasileno": "2026-11-18",
-    "solPeruano": "2026-11-18",
-    "pesoColombiano": "2026-11-18",
-    "pesoMexicano": "2026-11-18",
-    "boliviano": "2026-11-18"
+    "dolarObservado": "2026-11-19",
+    "euro": "2026-11-19",
+    "pesoArgentino": "2026-11-19",
+    "realBrasileno": "2026-11-19",
+    "solPeruano": "2026-11-19",
+    "pesoColombiano": "2026-11-19",
+    "pesoMexicano": "2026-11-19",
+    "boliviano": "2026-11-19"
   },
   "sources": {
     "uf": "bcentral",
@@ -36,5 +36,5 @@
     "boliviano": "bcentral",
     "ipcMensual": "unknown"
   },
-  "generatedAt": "2026-11-18T20:46:56.096Z"
+  "generatedAt": "2026-11-19T20:52:16.575Z"
 }
