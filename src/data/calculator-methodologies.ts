@@ -1531,6 +1531,25 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Variación IPC: 4,1%; monto reajustado: $104.077.',
     },
   },
+  'dias-administrativos': {
+    summary: 'Estima el saldo de permisos por motivos particulares con goce de remuneraciones: DFL 29 (texto refundido de la Ley 18.834), arts. 108 y 109, y Ley 18.883, arts. 107 y 108, para funcionarios municipales.',
+    calculationSteps: [
+      'Convierte el uso a unidades enteras de medio día: días completos × 2 + cantidad de medios días.',
+      'Resta el uso al cupo anual expresado en medios días y limita el saldo mínimo a cero. Divide por 2 para mostrar días, sin redondeos.',
+      'Si hay solicitud, verifica si cabe en el saldo y proyecta lo que quedaría, con mínimo cero. Si el uso ya excede el cupo, advierte la inconsistencia.',
+    ],
+    assumptions: ['Todo el uso ingresado corresponde al mismo año calendario y al permiso regulado por estas normas.'],
+    limitations: [
+      'El saldo es orientativo: la autoridad competente puede conceder o denegar el permiso. No sustituye el registro de personal.',
+      'No determina qué estatuto te rige ni contempla feriado legal, permisos especiales o sin goce. No calcula prorrateos ni incorpora saldos de otros años.',
+    ],
+    workedExample: {
+      title: 'Dos días completos y tres medios días usados',
+      inputs: ['Días completos usados: 2', 'Cantidad de medios días usados: 3', 'Solicitud: 2 días'],
+      development: ['Uso: (2 × 2 + 3) ÷ 2 = 3,5 días.', 'Saldo: 6 − 3,5 = 2,5 días. La solicitud de 2 días cabe en el saldo.'],
+      result: 'Quedarían 0,5 días si la autoridad autoriza la solicitud.',
+    },
+  },
   'dias-habiles': {
     summary:
       'Cuenta los días hábiles entre dos fechas o proyecta el día de vencimiento al sumar un plazo en días hábiles, aplicando el cómputo administrativo (Ley 19.880 art. 25: inhábiles sábados, domingos y festivos) o judicial (CPC arts. 59 y 66: inhábiles solo domingos y festivos).',

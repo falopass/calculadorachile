@@ -1204,6 +1204,20 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'dias-administrativos': {
+      const { calculateDiasAdministrativos, diasAdministrativosToResults } =
+        await import('./dias-administrativos');
+      return (inputs) => {
+        const result = calculateDiasAdministrativos({
+          diasCompletosUsados: coerceNumber(inputs.diasCompletosUsados, NaN),
+          mediosDiasUsados: coerceNumber(inputs.mediosDiasUsados, NaN),
+          diasSolicitados: inputs.diasSolicitados === 'saldo' || inputs.diasSolicitados === '' || inputs.diasSolicitados === undefined
+            ? undefined : coerceNumber(inputs.diasSolicitados, NaN),
+        });
+        return diasAdministrativosToResults(result);
+      };
+    }
+
     case 'dias-habiles': {
       const { calculateDiasHabiles, diasHabilesToResults } = await import('./dias-habiles');
       return (inputs) => {

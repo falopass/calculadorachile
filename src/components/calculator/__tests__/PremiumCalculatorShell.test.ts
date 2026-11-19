@@ -17,7 +17,7 @@ vi.mock('next/link', () => ({
 // La tarjeta real depende de ToastProvider; aquí solo importa si el resultado sigue a la vista.
 vi.mock('../PremiumResultCard', () => ({
   default: ({ results, showChart }: { results: CalculatorResult[]; showChart: boolean }) =>
-    React.createElement('div', { 'data-show-chart': String(showChart) }, results.map((r) => String(r.value)).join(' ')),
+    React.createElement('div', { 'data-show-chart': String(showChart), 'data-result-count': results.length }, results.map((r) => String(r.value)).join(' ')),
 }));
 
 // El historial conserva cálculos anteriores a propósito; queda fuera de esta prueba.
@@ -218,5 +218,86 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     await escribir('Ej.: 2,5', '5');
     expect(container.textContent).toContain('4851000');
     expect(JSON.parse(historial())).toHaveLength(2);
+  });
+
+  it('calcula días administrativos sin uso y con cero en cualquiera de los campos', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const administrativos = getCalculatorBySlug('calculadora-dias-administrativos')!;
+    const calcular = (await loadCalculationFn('dias-administrativos'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: administrativos,
+        calculateFn: calcular,
+      }));
+    });
+    expect(container.textContent).toContain('0 6');
+    expect(localStorage.getItem('calculachile_history')).toBeNull();
+    expect(container.textContent).toContain('sin contar medios días');
+    expect(container.textContent).toContain('ej.: 3 = 1,5 días');
+    const fields = container.querySelectorAll<HTMLInputElement>('input');
+    for (const [completos, medios, resultado] of [['2', '0', '2 4'], ['0', '3', '1.5 4.5']]) {
+      await act(async () => {
+        setInputValue(fields[0], completos);
+        setInputValue(fields[1], medios);
+      });
+      await act(async () => { vi.advanceTimersByTime(500); });
+      expect(container.textContent).toContain(resultado);
+      expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
+    }
+  });
+
+  it('conserva 2.0 como dos días y rechaza fracciones de uso administrativo', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const administrativos = getCalculatorBySlug('calculadora-dias-administrativos')!;
+    const calcular = (await loadCalculationFn('dias-administrativos'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: administrativos,
+        calculateFn: calcular,
+      }));
+    });
+    const fields = container.querySelectorAll<HTMLInputElement>('input');
+    for (const field of fields) {
+      await act(async () => { setInputValue(field, '2.0'); });
+      await act(async () => { vi.advanceTimersByTime(500); });
+    }
+    expect(container.textContent).toContain('3 3');
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      for (const invalid of ['2.5', '½', 'texto']) {
+        await act(async () => { setInputValue(fields[0], invalid); });
+        await act(async () => { vi.advanceTimersByTime(500); });
+        expect(container.textContent).toContain('deben ser enteros no negativos');
+        expect(container.textContent).not.toContain('3 3');
+        expect(container.textContent).not.toContain('0 6');
+      }
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
+
+  it('retira la evaluación de solicitud al volver a solo consultar saldo', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const administrativos = getCalculatorBySlug('calculadora-dias-administrativos')!;
+    const calcular = (await loadCalculationFn('dias-administrativos'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: administrativos, calculateFn: calcular,
+      }));
+    });
+    const select = container.querySelector<HTMLSelectElement>('select')!;
+    await act(async () => {
+      select.value = '0.5';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await act(async () => { vi.advanceTimersByTime(500); });
+    expect(container.querySelector('[data-result-count="4"]')?.textContent).toBe('0 6 0.5 5.5');
+    await act(async () => {
+      select.value = 'saldo';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await act(async () => { vi.advanceTimersByTime(500); });
+    expect(container.querySelector('[data-result-count="2"]')?.textContent).toBe('0 6');
+    expect(container.querySelector('[data-result-count="4"]')).toBeNull();
   });
 });

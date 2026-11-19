@@ -60,6 +60,7 @@ const ORGANISMO_BY_ID: Record<string, string> = {
   'semana-corrida': 'la Dirección del Trabajo',
   'ipc': 'el Instituto Nacional de Estadísticas (INE)',
   'dias-habiles': 'el órgano administrativo o tribunal competente',
+  'dias-administrativos': 'tu unidad de personal y la autoridad competente de tu institución o municipalidad',
   'credito-consumo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'interes-compuesto': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'deposito-a-plazo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
@@ -74,6 +75,7 @@ const SIN_GRAFICO = new Set([
   'puntaje-ponderado-paes',
   'puntaje-nem-ranking',
   'dias-habiles',
+  'dias-administrativos',
   'ipc',
   'prenatal-postnatal',
 ]);
@@ -250,6 +252,7 @@ function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
 
 function inputNeedsDecimal(input: CalculatorInputType): boolean {
   return (
+    input.allowDotDecimal === true ||
     ['kmMensuales', 'rendimientoKmL', 'precioBencina', 'consumoKwh100km', 'precioKwh'].includes(input.id) ||
     input.unit === 'percent' ||
     input.unit === 'UF' ||
@@ -283,7 +286,7 @@ function NumberField({
       value={display}
       onChange={(e) => {
         setDraft(e.target.value);
-        onChange(input.id, input.allowZero && e.target.value.trim() === '' ? '' : parseNumberInput(e.target.value, needsDecimal));
+        onChange(input.id, input.allowZero && e.target.value.trim() === '' ? '' : parseNumberInput(e.target.value, needsDecimal, input.rejectInvalidNumber));
       }}
       onBlur={() => setDraft(null)}
       placeholder={input.placeholder}
@@ -555,7 +558,8 @@ export default function PremiumCalculatorShell({
         trackEvents.calculatorCompleted(calculator.id);
       }
 
-      if (!calculated.some((r) => r.partial)) {
+      if (!calculated.some((r) => r.partial) &&
+          (calculator.id !== 'dias-administrativos' || touchedFields.current.size > 0)) {
         const mainResult = calculated.find((r) => r.highlight);
         addEntry({
           calculatorId: calculator.id,

@@ -45,7 +45,7 @@ const IDS = [
   'aguinaldo', 'capacidad-credito-hipotecario', 'plusvalia',
   'compras-internacionales', 'real-brasileno-clp', 'sol-peruano-clp',
   'trabajo-en-feriado', 'valor-hora-trabajo', 'costo-viaje', 'auto-electrico-vs-bencina', 'peso-argentino-clp',
-  'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'pension-alimenticia',
+  'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'dias-administrativos', 'pension-alimenticia',
   'conversor-divisas', 'puntaje-ponderado-paes', 'puntaje-nem-ranking',
   'peso-colombiano-clp', 'peso-mexicano-clp', 'boliviano-clp',
 ];
