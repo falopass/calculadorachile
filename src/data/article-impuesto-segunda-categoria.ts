@@ -6,7 +6,9 @@ const SII_BASE = 'https://www.sii.cl/normativa_legislacion/circulares/2020/circu
 const SII_RELIQUIDACION =
   'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_2712.htm';
 const SP_COTIZACIONES = 'https://www.spensiones.cl/portal/institucional/594/w3-article-12683.html';
-const SP_COMISIONES = 'https://www.spensiones.cl/apps/GetFile.php?id=001&namefile=CAFP2423.pdf';
+const SP_COMISIONES = 'https://www.spensiones.cl/portal/institucional/594/w3-article-2815.html';
+const PREVIRED_NOVIEMBRE =
+  'https://www.previred.com/wp-content/uploads/2026/11/Indicadores-Previsionales-Previred-Noviembre-2026.pdf';
 const CHILEATIENDE_FONASA = 'https://www.chileatiende.gob.cl/fichas/9715-afiliacion-a-fonasa';
 const DT_CESANTIA = 'https://www.dt.gob.cl/portal/1628/w3-article-95306.html';
 
@@ -35,7 +37,8 @@ export const articuloImpuestoSegundaCategoria: Article = {
     { label: 'SII — Circular 19: cotizaciones que pueden rebajarse', url: SII_BASE },
     { label: 'SII — Cuándo corresponde reliquidar el impuesto', url: SII_RELIQUIDACION },
     { label: 'Superintendencia de Pensiones — Cotizaciones previsionales', url: SP_COTIZACIONES },
-    { label: 'Superintendencia de Pensiones — Circular 2423: comisiones AFP', url: SP_COMISIONES },
+    { label: 'Superintendencia de Pensiones — Comisiones de las AFP', url: SP_COMISIONES },
+    { label: 'Previred — Indicadores previsionales de noviembre de 2026', url: PREVIRED_NOVIEMBRE },
     { label: 'ChileAtiende — Cotización a Fonasa', url: CHILEATIENDE_FONASA },
     { label: 'Dirección del Trabajo — Cotizaciones al Seguro de Cesantía', url: DT_CESANTIA },
   ],
@@ -69,7 +72,7 @@ export const articuloImpuestoSegundaCategoria: Article = {
 
 <h2>Ejemplo paso a paso: sueldo imponible de $2.000.000</h2>
 <p>Imagina un sueldo de noviembre con un solo empleador, contrato indefinido sujeto al Seguro de Cesantía, AFP Habitat y Fonasa. Para simplificar, toda la remuneración del ejemplo es afecta, las cotizaciones se calculan sobre el monto completo porque no alcanza los topes y no hay otros haberes ni rebajas especiales. El bruto imponible de $2.000.000 es un supuesto, no una cifra oficial de sueldos.</p>
-<p>El trabajador aporta <a href="${SP_COTIZACIONES}" target="_blank" rel="noopener">10% a la cuenta individual AFP</a>; en Habitat se suma una <a href="${SP_COMISIONES}" target="_blank" rel="noopener">comisión de 1,27%</a>. Se descuenta, además, el <a href="${CHILEATIENDE_FONASA}" target="_blank" rel="noopener">7% de Fonasa</a> y el <a href="${DT_CESANTIA}" target="_blank" rel="noopener">0,6% de cesantía a cargo del trabajador</a> del ejemplo. No se restan los aportes que paga el empleador con cargo propio.</p>
+<p>El trabajador aporta <a href="${SP_COTIZACIONES}" target="_blank" rel="noopener">10% a la cuenta individual AFP</a>; en Habitat se suma una <a href="${SP_COMISIONES}" target="_blank" rel="noopener">comisión de 1,27%</a>. Los <a href="${PREVIRED_NOVIEMBRE}" target="_blank" rel="noopener">indicadores de noviembre de 2026</a> registran el 11,27% total a cargo del trabajador para Habitat. Se descuenta, además, el <a href="${CHILEATIENDE_FONASA}" target="_blank" rel="noopener">7% de Fonasa</a> y el <a href="${DT_CESANTIA}" target="_blank" rel="noopener">0,6% de cesantía a cargo del trabajador</a> del ejemplo. No se restan los aportes que paga el empleador con cargo propio.</p>
 <div class="numeric-example">
 <div class="numeric-example__title">De la remuneración a la retención de noviembre</div>
 <ol>
