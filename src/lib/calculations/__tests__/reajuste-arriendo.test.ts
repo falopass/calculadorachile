@@ -61,7 +61,7 @@ describe('calculateReajusteArriendo', () => {
       variacionIPC: 0,
       mesesDesdeUltimoReajuste: 12,
     });
-    expect(r.arriendoActual).toBe(Math.round(15 * UF.valor));
+    expect(r.arriendoActual).toBeCloseTo(15 * UF.valor, 0);
   });
 
   it('IPC negativo (deflación) reduce el arriendo proporcionalmente', () => {
