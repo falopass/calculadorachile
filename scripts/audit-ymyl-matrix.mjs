@@ -4,6 +4,7 @@
  */
 import fs from 'fs';
 import path from 'path';
+import { parseCatalog } from './audit-ymyl-catalog.mjs';
 
 const root = process.cwd();
 const cat = fs.readFileSync(path.join(root, 'src/data/calculators.ts'), 'utf8');
@@ -23,33 +24,12 @@ const adapterSource = fs.readFileSync(adapterFilePath, 'utf8');
 const catN = cat.replace(/\r\n/g, '\n');
 const clientN = adapterSource.replace(/\r\n/g, '\n');
 
-const calcBlocks = [];
-// Each calculator object starts with 2-space indent `{` then `id:` at 4 spaces.
-const re =
-  /\n  \{\n    id: '([^']+)',\n    name: '([^']*)',[\s\S]*?\n    slug: '([^']+)',[\s\S]*?\n    category: '([^']+)',[\s\S]*?\n    inputs: \[([\s\S]*?)\n    \],/g;
-let m;
-while ((m = re.exec(catN))) {
-  const inputIds = [...m[5].matchAll(/id: '([^']+)'/g)].map((x) => x[1]);
-  const blockStart = m.index;
-  // Look ahead for metadata that may sit before or after inputs
-  const after = catN.slice(blockStart, blockStart + 5000);
-  const noIndex = /noIndex:\s*true/.test(after);
-  const lastReviewed = (after.match(/lastReviewed:\s*'([^']+)'/) || [])[1] || null;
-  const hasSources = /sources:\s*\[/.test(after);
-  const featured = /featured:\s*true/.test(after);
-  const phase = (after.match(/phase:\s*([123])/) || [])[1] || '?';
-  calcBlocks.push({
-    id: m[1],
-    name: m[2],
-    slug: m[3],
-    category: m[4],
-    inputs: inputIds,
-    noIndex,
-    lastReviewed,
-    hasSources,
-    featured,
-    phase,
-  });
+let calcBlocks;
+try {
+  calcBlocks = parseCatalog(catN);
+} catch (error) {
+  console.error(error.message);
+  process.exit(1);
 }
 
 const adapters = {};
@@ -241,17 +221,14 @@ for (const id of top) {
 
 // Gates de rescate AdSense. Se segmenta cada objeto por el siguiente `id`
 // para evitar atribuir `noIndex` o fuentes a la calculadora vecina.
-const rescueStarts = [...catN.matchAll(/\n  \{\n    id: '([^']+)'/g)];
 const methodologyIds = new Set(
   [...methodologySource.matchAll(/^  (?:'([^']+)'|([a-z][\w-]*)):\s*\{/gm)].map(
     (match) => match[1] || match[2],
   ),
 );
 
-const rescueRows = rescueStarts.map((match, index) => {
-  const next = rescueStarts[index + 1];
-  const end = next?.index ?? catN.indexOf('\n];', match.index);
-  const block = catN.slice(match.index, end);
+const rescueRows = calcBlocks.map((entry) => {
+  const block = entry.source;
   const urls = [...block.matchAll(/url:\s*'([^']+)'/g)].map((sourceMatch) => sourceMatch[1]);
   const hasSpecificSources =
     urls.length > 0 &&
@@ -265,10 +242,10 @@ const rescueRows = rescueStarts.map((match, index) => {
     });
 
   return {
-    id: match[1],
-    noIndex: /noIndex:\s*true/.test(block),
-    lastReviewed: (block.match(/lastReviewed:\s*'([^']+)'/) || [])[1] || '',
-    hasMethodology: methodologyIds.has(match[1]),
+    id: entry.id,
+    noIndex: entry.noIndex,
+    lastReviewed: entry.lastReviewed || '',
+    hasMethodology: methodologyIds.has(entry.id),
     hasSpecificSources,
   };
 });
