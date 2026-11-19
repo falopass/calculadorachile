@@ -2549,7 +2549,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuándo se paga el impuesto?',
         answer:
-          'El impuesto anual se paga en abril-mayo del año siguiente. Durante el año, pagas PPM (Pagos Provisionales Mensuales): 10% de boletas para profesionales. En la operación renta, los PPM pagados se restan del impuesto anual. Si pagaste de más, el SII te devuelve.',
+          'El impuesto anual se paga en abril-mayo del año siguiente. Durante el año, pagas PPM (Pagos Provisionales Mensuales): la tasa del calendario de honorarios vigente sobre los honorarios brutos cuando corresponde al emisor declarar y pagar en F29. En la operación renta, los PPM pagados se restan del impuesto anual. Si pagaste de más, el SII te devuelve.',
       },
     ],
   },
@@ -4408,7 +4408,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'ppm',
     name: 'PPM (Pagos Provisionales Mensuales)',
     description:
-      'Calcula tus pagos provisionales mensuales según actividad y ingresos brutos anuales.',
+      'Estima el PPM anual y su promedio mensual sobre ingresos brutos sin IVA, según actividad y tasas de referencia.',
     slug: 'calculadora-ppm',
     category: 'impuestos',
     featured: false,
@@ -4424,6 +4424,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'SII — guía Formulario 29',
         url: 'https://www.sii.cl/pagina/iva/guia_f29.htm',
         note: 'Declaración mensual de IVA y PPM',
+      },
+      {
+        name: 'SII — plazos del Formulario 29',
+        url: 'https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm',
+        note: 'Plazo general del día 12 y extensión al día 20 con requisitos',
       },
     ],
     keywords: [
@@ -4441,17 +4446,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         min: 0,
         tooltip:
-          'Ingresos brutos del año anterior. El SII usa este monto para calcular el PPM del año siguiente.',
-      },
-      {
-        id: 'gastosPresuntos',
-        label: 'Gastos Presuntos',
-        type: 'number',
-        placeholder: '$1.200.000',
-        required: false,
-        min: 0,
-        tooltip:
-          'Gastos estimados que reducen la base imponible. Por defecto, el SII acepta 10% para profesionales.',
+          'Ingresos brutos anuales sin IVA del período que quieres estimar. El resultado mensual es el PPM anual dividido por 12.',
       },
       {
         id: 'actividad',
@@ -4459,30 +4454,30 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'select',
         required: true,
         options: [
-          { value: 'profesional', label: 'Profesional (10%)' },
+          { value: 'profesional', label: `Profesional (${tasaHonorarios(getRetencionHonorarios())})` },
           { value: 'comercio', label: 'Comercio (1%)' },
-          { value: 'transporte', label: 'Transporte (0.5%)' },
-          { value: 'construccion', label: 'Construcción (0.2%)' },
+          { value: 'transporte', label: 'Transporte (0,3%)' },
+          { value: 'construccion', label: 'Construcción (0,2%)' },
         ],
         tooltip:
-          'La tasa depende de la actividad. Profesionales 10%, comercio 1%, transporte 0.5%, construcción 0.2%.',
+          'La estimación usa la tasa vigente del calendario de honorarios para profesionales; comercio 1%, transporte 0,3% y construcción 0,2% como referencias. Confirma tu tasa aplicable en el SII.',
       },
     ],
     faq: [
       {
         question: '¿Qué son los PPM?',
         answer:
-          'Los Pagos Provisionales Mensuales (PPM) son abonos mensuales al impuesto anual a la renta. Se calculan aplicando una tasa a los ingresos brutos del mes. La tasa varía según actividad: profesionales 10%, comercio 1%, transporte 0.5%, construcción 0.2%.',
+          'Los Pagos Provisionales Mensuales (PPM) son anticipos del impuesto anual a la renta, declarados y pagados mediante Formulario 29. Esta calculadora estima el PPM anual sobre ingresos brutos sin IVA y muestra su promedio mensual, sin deducir gastos. Usa el calendario de honorarios vigente para profesionales y tasas de referencia de 1% para comercio, 0,3% para transporte y 0,2% para construcción. Verifica tu tasa aplicable en el SII.',
       },
       {
         question: '¿Cómo se calcula el PPM?',
         answer:
-          'PPM = Ingresos Brutos Mensuales × Tasa. Si eres profesional y facturas $1.000.000, el PPM es $100.000 (10%). Este monto se paga mensualmente y se acredita al impuesto anual.',
+          'La calculadora multiplica los ingresos brutos anuales sin IVA por la tasa de la actividad y redondea a pesos. Luego divide el PPM anual por 12 y redondea el promedio mensual. Por ejemplo, comercio con $24.000.000 anuales al 1% da $240.000 de PPM anual y $20.000 de promedio mensual. No determina la obligación exacta de cada mes.',
       },
       {
         question: '¿Cuándo se paga el PPM?',
         answer:
-          'El PPM se paga entre el 1 y 12 de cada mes, declarando los ingresos del mes anterior. Se paga en línea en el sitio del SII o en bancos autorizados.',
+          'El PPM se declara y paga mediante Formulario 29. El plazo general es hasta el día 12 del mes siguiente al período declarado; llega al día 20 para facturadores electrónicos que declaran y pagan en sii.cl y para emisores de boletas de honorarios electrónicas que cumplen esos requisitos. Hay prórrogas por días inhábiles: consulta el calendario del SII para el vencimiento exacto.',
       },
       {
         question: '¿Puedo variar el PPM?',
