@@ -53,8 +53,9 @@ export async function loadCalculationFn(
           descuentoCajaCompensacion: coerceNumber(inputs.descuentoCajaCompensacion, 0),
           calculoInverso: coerceBool(inputs.calculoInverso),
           valorUF: live?.valorUF,
+          valorUTM: live?.valorUTM,
         });
-        return sueldoLiquidoToResults(result);
+        return sueldoLiquidoToResults(result, coerceBool(inputs.calculoInverso));
       };
     }
 
@@ -236,6 +237,7 @@ export async function loadCalculationFn(
           agregarGratificacion: coerceBool(inputs.agregarGratificacion),
           periodoCotizacion: inputs.periodoCotizacion as
             | 'hasta_julio_2026'
+            | 'julio_2026'
             | 'desde_agosto_2026',
         });
         return costoEmpleadoToResults(result);

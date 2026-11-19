@@ -146,7 +146,7 @@ export function cotizacionIndependientesToResults(
     { label: 'Cotización AFP (10% + comisión)', value: result.cotizacionAFP, format: 'CLP' },
     { label: 'Cotización Salud (7%)', value: result.cotizacionSalud, format: 'CLP' },
     {
-      label: `Seguro de Invalidez y Sobrevivencia (SIS ${formatPercentage(result.tasaSIS, 2)}, AT${result.anioTributarioSIS})`,
+      label: `Seguro de Invalidez y Sobrevivencia (SIS ${formatPercentage(result.tasaSIS, 2)} de la base imponible, Operación Renta ${result.anioTributarioSIS})`,
       value: result.cotizacionSIS,
       format: 'CLP',
     },

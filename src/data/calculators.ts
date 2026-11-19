@@ -11,6 +11,7 @@ import { INDEMNIZACION, RECARGO_ART_168, RECARGO_ART_171, UF } from '@/lib/value
 import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
+import { calculateSueldoBrutoFromLiquido } from '@/lib/calculations/sueldo-liquido';
 import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import { contextoHonorarios, formatTasa, type AnioHonorarios } from '@/lib/values/honorarios-anio';
 import {
@@ -34,6 +35,11 @@ const IND = {
 
 // E-014: FAQ del tope generada desde las constantes.
 const TOPE_GRATIFICACION = topeGratificacion();
+const SUELDO_INVERSO = calculateSueldoBrutoFromLiquido(1_000_000, {
+  afp: 'habitat',
+  saludTipo: 'fonasa',
+  contratoIndefinido: true,
+});
 
 // E-028: año, tasas y ejemplos de honorarios generados desde el calendario y la fecha (Chile).
 // Se calculan al cargar el módulo: ver la nota de redespliegue del 01-12 y el 01-01 en el PR.
@@ -85,12 +91,24 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'calculadora sueldo',
       'descuentos AFP',
       'sueldo bruto a líquido',
+      'sueldo líquido a bruto',
+      'calcular sueldo bruto',
+      'cuánto bruto para recibir un líquido',
       'descuentos legales Chile',
     ],
     inputs: [
       {
+        id: 'calculoInverso',
+        label: 'Calcular sueldo bruto desde el líquido',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Activa esta opción e ingresa el sueldo líquido deseado para estimar el bruto necesario según tu AFP, salud y descuentos.',
+      },
+      {
         id: 'sueldoBruto',
-        label: 'Sueldo Bruto (o líquido objetivo si inverso)',
+        label: 'Sueldo bruto / sueldo líquido deseado (modo inverso)',
         type: 'number',
         unit: 'CLP',
         placeholder: '$1.000.000',
@@ -218,15 +236,6 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: false,
         min: 0,
       },
-      {
-        id: 'calculoInverso',
-        label: '¿Cálculo inverso (líquido → bruto)?',
-        type: 'boolean',
-        required: false,
-        defaultValue: false,
-        tooltip:
-          'Estimación iterativa del bruto necesario para un líquido objetivo. Es aproximado: IUSC y topes no son lineales.',
-      },
     ],
     faq: [
       {
@@ -262,8 +271,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         question: '¿Puedo calcular de líquido a bruto?',
-        answer:
-          'Sí, nuestra calculadora permite calcular el sueldo bruto necesario para obtener un sueldo líquido objetivo. Esta función es útil para negociar remuneraciones o entender cuánto debes ganar bruto para recibir un cierto monto líquido.',
+        answer: `Sí. Activa «Calcular sueldo bruto desde el líquido», ingresa el sueldo líquido deseado y selecciona tu AFP, salud y contrato. Por ejemplo, para recibir ${formatCLP(1_000_000)} líquidos, con AFP Habitat, Fonasa y contrato indefinido, sin bonos ni descuentos adicionales, el módulo estima ${formatCLP(SUELDO_INVERSO.bruto)} brutos y reproduce ${formatCLP(SUELDO_INVERSO.liquido)} líquidos. La búsqueda es iterativa: considera cotizaciones, topes e impuesto, no un porcentaje fijo. Es una estimación para negociar remuneraciones; cambia al modificar tus antecedentes o los valores de referencia.`,
       },
       {
         question: '¿Se consideran bonos y asignaciones?',
@@ -2156,7 +2164,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'select',
         required: true,
         options: [
-          { value: 'hasta_julio_2026', label: 'Hasta julio 2026: 1% + SIS separado' },
+          { value: 'hasta_julio_2026', label: 'Agosto 2025–junio 2026: 1% + SIS 1,62%' },
+          { value: 'julio_2026', label: 'Julio 2026: 1% + SIS 2,00%' },
           { value: 'desde_agosto_2026', label: 'Desde agosto 2026: 3,5% total con SIS incluido' },
         ],
         defaultValue: 'hasta_julio_2026',
@@ -2171,7 +2180,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué aportes debe pagar el empleador?',
         answer:
-          'Hasta julio de 2026 paga 1% de la reforma previsional más SIS de 1,62%, además de cesantía y mutual. Desde agosto, la cotización previsional total sube a 3,5% e incluye el financiamiento SIS: no se debe sumar SIS otra vez. El 7% de salud se descuenta al trabajador, no es aporte patronal adicional.',
+          'Hasta junio de 2026 la referencia es 1% de la reforma previsional más SIS de 1,62%; en julio, el SIS separado sube a 2,00%. Se agregan cesantía y mutual. Desde agosto, la cotización previsional total sube a 3,5% e incluye el financiamiento SIS: no se debe sumar SIS otra vez. El 7% de salud se descuenta al trabajador, no es aporte patronal adicional.',
       },
       {
         question: '¿Qué significa el factor costo?',
@@ -4595,9 +4604,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         note: 'Retenciones y cotizaciones de independientes',
       },
       {
-        name: 'Superintendencia de Pensiones — Seguro de Invalidez y Sobrevivencia',
-        url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html',
-        note: 'Tasa SIS de independientes por año tributario (1,49% AT2026)',
+        name: 'SII — Guía Práctica de Declaración de Renta 2026',
+        url: 'https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf',
+        note: 'SIS 1,5% de la base imponible de cotizaciones (AT2026)',
       },
       {
         name: 'SII — ejemplo de cálculo previsional Operación Renta 2025',
@@ -4650,7 +4659,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto cotiza un independiente?',
         answer:
-          'Los independientes cotizan sobre el 80% de su renta bruta, con tope imponible: AFP (10% + comisión), salud (7%), seguro de accidentes y SIS. La tasa SIS depende del año tributario: 1,50% en el AT2025 y 1,49% en el AT2026 según la Superintendencia de Pensiones; la calculadora usa la última tasa publicada.',
+          'Los independientes cotizan sobre el 80% de su renta bruta, con tope imponible: AFP (10% + comisión), salud (7%), seguro de accidentes y SIS. El SIS se calcula sobre la base imponible con la tasa que aplica el SII en la Operación Renta: 1,50% en 2025 y 2026; la calculadora usa la última tasa publicada.',
       },
     ],
   },
