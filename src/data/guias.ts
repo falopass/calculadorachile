@@ -2549,7 +2549,7 @@ export const guias: Guia[] = [
         title: 'Cómo acreditar los años para las vacaciones progresivas',
         level: 2,
         html: `<p>Para hacer valer las vacaciones progresivas debes <strong>acreditar tus años de servicio antes de tomar el feriado</strong>; si no lo haces, pierdes el día progresivo de ese período (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60194.html" target="_blank" rel="noopener">DT</a>). La prueba habitual es el <strong>certificado de cotizaciones previsionales</strong>, que muestra tus cotizaciones mes a mes en el sistema previsional.</p>
-<p>La base de 10 años equivale a <strong>120 cotizaciones</strong>. Si cambiaste de empleador, junta las cotizaciones de todos tus empleadores anteriores: el art. 68 permite completarla, aunque para los días progresivos cuentan como máximo 10 años de empleadores anteriores. Si tu empleador no tiene tus cotizaciones al día, regulariza la situación previsional antes de pedir las vacaciones, porque sin cotizaciones no hay forma de acreditar la antigüedad.</p>`,
+<p>La base de 10 años equivale a <strong>120 cotizaciones</strong>. Si cambiaste de empleador, junta las cotizaciones de todos tus empleadores anteriores: el art. 68 permite completarla, aunque para los días progresivos cuentan como máximo 10 años de empleadores anteriores. Si tu empleador no tiene tus cotizaciones al día, la DT admite acreditar la antigüedad con otros medios: certificado de la Inspección del Trabajo, instrumentos públicos, sentencias, convenios o escrituras (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60195.html" target="_blank" rel="noopener">DT</a>); conviene regularizar la situación previsional de todas formas.</p>`,
       },
       {
         id: 'remuneracion-feriado',
