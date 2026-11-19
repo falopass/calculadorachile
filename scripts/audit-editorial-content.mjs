@@ -111,6 +111,13 @@ function brokenInterpolations(html) {
   return [...plainText(html).matchAll(BROKEN_INTERPOLATION)].map((match) => match[0]);
 }
 
+function visibleStrings(value) {
+  if (typeof value === 'string') return [value];
+  if (Array.isArray(value)) return value.flatMap(visibleStrings);
+  if (value && typeof value === 'object') return Object.values(value).flatMap(visibleStrings);
+  return [];
+}
+
 function auditRow(type, item, content, sources) {
   return {
     type,
@@ -120,10 +127,7 @@ function auditRow(type, item, content, sources) {
     externalLinks: externalLinks(content).size,
     declaredSources: Math.max(sources?.length ?? 0, officialLinks(content).size),
     genericHits: genericHits(content),
-    brokenInterpolations: [
-      ...brokenInterpolations(content),
-      ...brokenInterpolations(`${item.title} ${item.description}`),
-    ],
+    brokenInterpolations: visibleStrings(item).flatMap(brokenInterpolations),
     plain: plainText(content),
   };
 }
