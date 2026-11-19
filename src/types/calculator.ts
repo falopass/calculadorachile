@@ -32,6 +32,8 @@ export interface CalculatorInput {
   unit?: CalculatorInputUnit;
   placeholder?: string;
   required?: boolean;
+  /** Permite cero explícito en un campo numérico requerido, sin aceptar vacío. */
+  allowZero?: boolean;
   min?: number;
   max?: number;
   options?: { value: string; label: string }[];
