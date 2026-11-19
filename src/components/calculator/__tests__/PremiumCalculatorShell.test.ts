@@ -124,6 +124,10 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     expect(calculate).toHaveBeenCalled();
     expect(container.querySelector('[data-show-chart]')).not.toBeNull();
     await act(async () => {
+      input.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+    });
+    expect(input.value).toBe('0');
+    await act(async () => {
       setInputValue(input, '');
       vi.advanceTimersByTime(500);
     });

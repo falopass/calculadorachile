@@ -272,7 +272,7 @@ function NumberField({
 }) {
   const [draft, setDraft] = useState<string | null>(null);
   const needsDecimal = inputNeedsDecimal(input);
-  const display = draft ?? (value !== '' && (value > 0 || (input.allowZero && value === 0)) ? formatNumber(value) : '');
+  const display = draft ?? (input.allowZero && value === 0 ? '0' : value !== '' && value > 0 ? formatNumber(value) : '');
   return (
     <PremiumInputField
       label={input.label}
