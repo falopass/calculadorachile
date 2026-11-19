@@ -17,7 +17,7 @@ vi.mock('next/link', () => ({
 // La tarjeta real depende de ToastProvider; aquí solo importa si el resultado sigue a la vista.
 vi.mock('../PremiumResultCard', () => ({
   default: ({ results, showChart }: { results: CalculatorResult[]; showChart: boolean }) =>
-    React.createElement('div', { 'data-show-chart': String(showChart) }, results.map((r) => String(r.value)).join(' ')),
+    React.createElement('div', { 'data-show-chart': String(showChart), 'data-result-count': results.length }, results.map((r) => String(r.value)).join(' ')),
 }));
 
 // El historial conserva cálculos anteriores a propósito; queda fuera de esta prueba.
@@ -274,5 +274,30 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     } finally {
       consoleError.mockRestore();
     }
+  });
+
+  it('retira la evaluación de solicitud al volver a solo consultar saldo', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const administrativos = getCalculatorBySlug('calculadora-dias-administrativos')!;
+    const calcular = (await loadCalculationFn('dias-administrativos'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: administrativos, calculateFn: calcular,
+      }));
+    });
+    const select = container.querySelector<HTMLSelectElement>('select')!;
+    await act(async () => {
+      select.value = '0.5';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await act(async () => { vi.advanceTimersByTime(500); });
+    expect(container.querySelector('[data-result-count="4"]')?.textContent).toBe('0 6 0.5 5.5');
+    await act(async () => {
+      select.value = 'saldo';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await act(async () => { vi.advanceTimersByTime(500); });
+    expect(container.querySelector('[data-result-count="2"]')?.textContent).toBe('0 6');
+    expect(container.querySelector('[data-result-count="4"]')).toBeNull();
   });
 });
