@@ -16,8 +16,8 @@ vi.mock('next/link', () => ({
 
 // La tarjeta real depende de ToastProvider; aquí solo importa si el resultado sigue a la vista.
 vi.mock('../PremiumResultCard', () => ({
-  default: ({ results }: { results: CalculatorResult[] }) =>
-    React.createElement('div', null, results.map((r) => String(r.value)).join(' ')),
+  default: ({ results, showChart }: { results: CalculatorResult[]; showChart: boolean }) =>
+    React.createElement('div', { 'data-show-chart': String(showChart) }, results.map((r) => String(r.value)).join(' ')),
 }));
 
 // El historial conserva cálculos anteriores a propósito; queda fuera de esta prueba.
@@ -69,6 +69,77 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
       vi.advanceTimersByTime(500);
     });
   }
+
+  async function renderElectrico(values: string[]) {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const ev = getCalculatorBySlug('auto-electrico-vs-bencina')!;
+    const calculate = vi.fn((await loadCalculationFn(ev.id))!);
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, { calculator: ev, calculateFn: calculate }));
+    });
+    for (const [index, value] of values.entries()) {
+      const input = container.querySelector<HTMLInputElement>(`input[placeholder="${ev.inputs[index].placeholder}"]`)!;
+      await act(async () => {
+        setInputValue(input, value);
+        vi.advanceTimersByTime(500);
+      });
+    }
+    return calculate;
+  }
+
+  it.each(['.', ','])('acepta decimales con %s en la comparación de autos', async (separator) => {
+    const calculate = await renderElectrico(['1000.5', '12.5', '1200.5', '18.5', '200.5'].map(value => value.replace('.', separator)));
+    expect(calculate).toHaveBeenLastCalledWith(expect.objectContaining({
+      kmMensuales: 1000.5,
+      rendimientoKmL: 12.5,
+      precioBencina: 1200.5,
+      consumoKwh100km: 18.5,
+      precioKwh: 200.5,
+    }));
+  });
+
+  it.each([
+    { prices: ['1200', '0'], difference: 120000 },
+    { prices: ['0', '200'], difference: -40000 },
+  ])('acepta precios cero en la comparación: $prices', async ({ prices, difference }) => {
+    const calculate = await renderElectrico(['1000', '10', prices[0], '20', prices[1]]);
+    expect(calculate).toHaveBeenCalled();
+    expect(container.textContent).toContain(String(difference));
+    expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
+    expect(container.querySelector('details')).toBeNull();
+  });
+
+  it.each([2, 4])('exige el precio %s y retira resultados si se borra un cero explícito', async (index) => {
+    const values = ['1000', '10', '1200', '20', '200'];
+    values[index] = '';
+    const calculate = await renderElectrico(values);
+    expect(calculate).not.toHaveBeenCalled();
+    expect(container.querySelector('[data-show-chart]')).toBeNull();
+    const ev = getCalculatorBySlug('auto-electrico-vs-bencina')!;
+    const input = container.querySelector<HTMLInputElement>(`input[placeholder="${ev.inputs[index].placeholder}"]`)!;
+    await act(async () => {
+      setInputValue(input, '0');
+      vi.advanceTimersByTime(500);
+    });
+    expect(calculate).toHaveBeenCalled();
+    expect(container.querySelector('[data-show-chart]')).not.toBeNull();
+    await act(async () => {
+      input.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+    });
+    expect(input.value).toBe('0');
+    await act(async () => {
+      setInputValue(input, '');
+      vi.advanceTimersByTime(500);
+    });
+    expect(container.querySelector('[data-show-chart]')).toBeNull();
+    expect(container.textContent).toContain('Este campo es requerido');
+  });
+
+  it('no grafica costos unitarios junto con mensuales, anuales y diferencias negativas', async () => {
+    await renderElectrico(['1000', '10', '1200', '20', '800']);
+    expect(container.querySelector('[data-show-chart="false"]')?.textContent).toContain('-480000');
+    expect(container.querySelector('[data-show-chart="true"]')).toBeNull();
+  });
 
   it('retira el resultado anterior cuando el dato pasa a ser inválido', async () => {
     // Import diferido: los componentes usan el runtime JSX clásico y necesitan React global.

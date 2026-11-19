@@ -1097,7 +1097,7 @@ export const guias: Guia[] = [
       'calculadora-pgu',
       'calculadora-cotizacion-independientes',
     ],
-    relatedArticles: [],
+    relatedArticles: ['cambio-afp-2026-como-hacerlo'],
     sources: [
       {
         label: 'Superintendencia de Pensiones — nueva cotización del empleador',

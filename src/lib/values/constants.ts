@@ -320,12 +320,21 @@ export const SALUD = {
      * Umbrales vigentes desde 01-05-2026 (fonasa.gob.cl/tramos).
      * La cotización legal es 7% única para todos los tramos; no existe
      * cotización diferenciada por tramo.
+     * Ley 18.469 art. 29 (Ley 19.650 art. 2 N° 3): B ≤ IMM; C ≤ 1,46 IMM.
+     * https://www.bcn.cl/leychile/navegar?idNorma=149846
      */
     tramos: {
       a: { nombre: 'A', descripcion: 'Sin ingresos / causantes de SUF' },
-      b: { nombre: 'B', ingresoMaximoCLP: 553553 },
-      c: { nombre: 'C', ingresoMinimoCLP: 553554, ingresoMaximoCLP: 808187 },
-      d: { nombre: 'D', ingresoMinimoCLP: 808188 },
+      b: { nombre: 'B', get ingresoMaximoCLP() { return INGRESO_MINIMO.mensual; } },
+      c: {
+        nombre: 'C',
+        get ingresoMinimoCLP() { return INGRESO_MINIMO.mensual + 1; },
+        get ingresoMaximoCLP() { return Math.floor(INGRESO_MINIMO.mensual * 1.46); },
+      },
+      d: {
+        nombre: 'D',
+        get ingresoMinimoCLP() { return Math.floor(INGRESO_MINIMO.mensual * 1.46) + 1; },
+      },
     },
   },
   isapre: {

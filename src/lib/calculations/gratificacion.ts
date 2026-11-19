@@ -112,7 +112,7 @@ export function gratificacionToResults(result: GratificacionResult): CalculatorR
     },
     {
       label: 'Método Aplicado',
-      value: result.metodo === '25%' ? 25 : 4.75,
+      value: result.metodo === '25%' ? GRATIFICACION.porcentaje : GRATIFICACION.tope_475_inm,
       format: result.metodo === '25%' ? 'percentage' : 'number',
     },
   ];
