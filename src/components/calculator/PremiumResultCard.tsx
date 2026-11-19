@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { CalculatorResult } from '@/types/calculator';
-import { formatCLP, formatUF, formatUTM, formatPercentage } from '@/lib/formatters';
+import { formatCLP, formatUF, formatUTM, formatPercentage, formatDays } from '@/lib/formatters';
 import { Copy, Check, BarChart3, PieChart, TrendingUp, DollarSign, PiggyBank, Receipt } from 'lucide-react';
 import PremiumResultChart, { type ChartSegment } from './PremiumResultChart';
 import ExportMenu from './ExportMenu';
@@ -47,7 +47,7 @@ function formatValue(value: number, format: CalculatorResult['format']): string 
     case 'percentage':
       return formatPercentage(value);
     case 'days':
-      return `${value} días`;
+      return formatDays(value);
     case 'number':
     default:
       return value.toLocaleString('es-CL');

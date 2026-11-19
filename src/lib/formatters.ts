@@ -2,6 +2,10 @@
 // Formateadores para valores chilenos
 // ============================================
 
+export function formatDays(value: number): string {
+  return `${value.toLocaleString('es-CL', { useGrouping: false, maximumFractionDigits: 20 })} días`;
+}
+
 /**
  * Formatea un número como peso chileno (CLP)
  * @param value - Valor numérico a formatear
