@@ -15,7 +15,7 @@ import {
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
-export type PeriodoCotizacionEmpleador = 'hasta_julio_2026' | 'desde_agosto_2026';
+export type PeriodoCotizacionEmpleador = 'hasta_julio_2026' | 'julio_2026' | 'desde_agosto_2026';
 
 export interface CostoEmpleadoInput {
   sueldoBruto: number;
@@ -46,6 +46,8 @@ export interface CostoEmpleadoResult {
 /**
  * Entre agosto de 2025 y julio de 2026, el empleador paga 1% por la reforma
  * previsional y el SIS por separado (abr–jun 2026: 1,62%; julio: 2,00%).
+ * El valor legado hasta_julio_2026 representa ahora el tramo hasta junio;
+ * julio_2026 identifica el mes con reajuste de la prima SIS.
  * Desde remuneraciones de agosto de 2026, la cotización total del empleador
  * es 3,5% (ChileAtiende 130987): 2,5% al Seguro Social Previsional —que
  * incluye el SIS, ahora recaudado por el IPS—, 0,9% a la CRP y 0,1% a la
@@ -72,7 +74,9 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
   const fechaRemuneracion =
     input.periodoCotizacion === 'desde_agosto_2026'
       ? new Date('2026-08-01T12:00:00')
-      : new Date('2026-07-31T12:00:00');
+      : input.periodoCotizacion === 'julio_2026'
+        ? new Date('2026-07-31T12:00:00')
+        : new Date('2026-06-30T12:00:00');
   const escalon = getEscalonSeguroSocialPrevisional(fechaRemuneracion);
   const pensionReforma = totalHaberesImponibles * (escalon.tasa / 100);
   const sisSeparado = totalHaberesImponibles * (getSisEmpleadorSeparado(fechaRemuneracion) / 100);

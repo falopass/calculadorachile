@@ -236,6 +236,7 @@ export async function loadCalculationFn(
           agregarGratificacion: coerceBool(inputs.agregarGratificacion),
           periodoCotizacion: inputs.periodoCotizacion as
             | 'hasta_julio_2026'
+            | 'julio_2026'
             | 'desde_agosto_2026',
         });
         return costoEmpleadoToResults(result);
