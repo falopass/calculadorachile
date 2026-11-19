@@ -3624,6 +3624,101 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>Contenido verificado al 13 de julio de 2026 con el anuncio MINVU del <a href="https://www.minvu.gob.cl/noticia/minvu-anuncia-la-apertura-del-primer-llamado-de-2026-al-subsidio-para-sectores-medios/" target="_blank" rel="noopener">primer llamado DS1 de 2026</a>, las fichas permanentes de <a href="https://www.minvu.gob.cl/beneficio/vivienda/subsidio-habitacional-comprar-una-vivienda-de-hasta-1100-uf-ds1/" target="_blank" rel="noopener">DS1 Tramo 1</a> y <a href="https://www.minvu.gob.cl/beneficio/vivienda/subsidio-para-construir-una-vivienda-de-hasta-950-uf-ds49/" target="_blank" rel="noopener">construcción DS49</a>, la información para familias del <a href="https://www.minvu.gob.cl/beneficio/vivienda/informacion-para-familias-con-o-sin-subsidio-interesadas-en-incorporarse-a-proyectos-ds-19/" target="_blank" rel="noopener">programa DS19</a>, su <a href="https://www.minvu.gob.cl/nuevo-sistema-de-inscripcion-programa-de-integracion-social-y-territorial-ds19/" target="_blank" rel="noopener">sistema público de inscripción</a> y el anuncio del <a href="https://www.minvu.gob.cl/noticia/minvu-anuncia-la-proxima-apertura-del-llamado-al-subsidio-de-arriendo-de-2026/" target="_blank" rel="noopener">DS52 regular 2026</a>. Los comentarios de foros y redes se usaron para detectar fraudes, confusiones de fechas y problemas de financiamiento; los requisitos y cifras se tomaron de MINVU y SERVIU.</p>`,
   },
   {
+    slug: 'cambio-afp-2026-como-hacerlo',
+    title: 'Cómo cambiarse de AFP en Chile 2026: pasos y plazos',
+    description:
+      'Pide el cambio en la AFP de destino, revisa cuándo se traspasan tus fondos y qué verificar en tu primera liquidación. El trámite es gratis.',
+    date: '2026-11-18',
+    updatedAt: '2026-11-18',
+    category: 'previsional',
+    readingTime: 9,
+    relatedGuia: 'afp-pension-chile',
+    keywords: [
+      'cómo cambiarse de AFP en Chile',
+      'cambio de AFP online 2026',
+      'orden de traspaso AFP',
+      'cuánto demora el cambio de AFP',
+      'traspaso de fondos AFP',
+    ],
+    relatedCalculators: ['calculadora-comparador-afp'],
+    sources: [
+      {
+        label: 'Superintendencia de Pensiones — Traspaso a otra AFP',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9915.html',
+      },
+      {
+        label: 'Compendio de Pensiones — Traspasos por Internet',
+        url: 'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10415.html',
+      },
+      {
+        label: 'Compendio de Pensiones — Formulario Orden de Traspaso Irrevocable',
+        url: 'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3742.html',
+      },
+      {
+        label: 'Compendio de Pensiones — Canje de Traspasos',
+        url: 'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3732.html',
+      },
+      {
+        label: 'Superintendencia de Pensiones — Licitación para nuevos afiliados 2025–2027',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-16714.html',
+      },
+      {
+        label: 'Superintendencia de Pensiones — Infórmate y Decide',
+        url: 'https://www.spensiones.cl/infoydec',
+      },
+      {
+        label: 'Superintendencia de Pensiones — Régimen de Inversión de los Fondos Generacionales',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-17131.html',
+      },
+    ],
+    content: `<p class="article-lead">Para cambiarte de AFP en Chile, solicita el traspaso en la <strong>AFP a la que quieres llegar</strong>, por internet o en una sucursal. El trámite es gratuito y no tienes que retirar ni depositar tus ahorros: las administradoras se transfieren el saldo. Firmar la orden no significa que el dinero se mueva ese día. Si la aceptan, la fecha de la firma determina en qué parte del mes siguiente se traspasan los fondos.</p>
+<p>Esta guía sigue las instrucciones de la Superintendencia de Pensiones (SP), revisadas al 18 de noviembre de 2026. El calendario de abajo sirve para una orden aceptada. Si recién entraste al sistema por licitación, tienes una solicitud de pensión en curso o quieres mover también el APV, revisa esas condiciones antes de confirmar.</p>
+
+<h2>Antes de firmar: ¿puedes cambiarte ahora?</h2>
+<p>Si ya estás afiliado, por regla general puedes elegir otra administradora sin esperar una fecha anual. La excepción que conviene revisar primero es la permanencia por licitación de nuevos afiliados. Para quienes ingresan por primera vez al sistema entre el <strong>1 de octubre de 2025 y el 30 de septiembre de 2027</strong>, la AFP adjudicataria es AFP Uno. La permanencia general es de <strong>24 meses</strong>. No confundas el término de la licitación con el término de tu permanencia: revisa tu fecha de ingreso. Según la <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-16714.html">Superintendencia de Pensiones</a>, puedes cambiarte antes si la adjudicataria sube su comisión o si otra AFP ofrece una inferior.</p>
+<p>Volver a trabajar después de un período sin cotizar no es lo mismo que entrar por primera vez. Si tienes dudas sobre tu AFP actual o sobre el inicio de tu permanencia, confirma esos antecedentes con la administradora antes de iniciar la orden. Tener una AFP de destino escogida no levanta por sí solo una restricción de entrada.</p>
+
+<h2>Cómo pedir el cambio por internet o en sucursal</h2>
+<h3>Por internet: empieza en el sitio de la AFP de destino</h3>
+<ol class="steps">
+<li><strong>Entra al canal oficial de la AFP elegida.</strong> Busca el trámite de incorporación o traspaso. PreviRed no es el lugar para firmar la orden. Evita enlaces de anuncios o mensajes que no puedas verificar desde el sitio de la administradora.</li>
+<li><strong>Identifícate con la opción que ofrezca ese canal.</strong> El <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10415.html">Compendio de la SP sobre traspasos por internet</a> permite mecanismos remotos que pueden incluir ClaveÚnica. La ficha de la SP también describe la Clave de Seguridad para Traspaso de tu AFP actual. No des por hecho que tu clave normal de acceso sirve ni que debes ir a una oficina si el portal te ofrece otra forma de validarte.</li>
+<li><strong>Revisa las cuentas y el fondo de destino.</strong> Lee qué se moverá, qué quedará en la AFP de origen y los datos de contacto que usará la nueva entidad. Si tienes más de un empleador o cambiaste de trabajo hace poco, comprueba también los antecedentes laborales que aparezcan.</li>
+<li><strong>Lee el resumen y confirma la orden.</strong> Guarda la copia o comprobante que te entregue la AFP y anota el día de la firma. Si la sesión se cerró sin confirmación, consulta el estado de la solicitud antes de firmar otra.</li>
+</ol>
+<h3>En sucursal: lleva tu cédula a la AFP a la que quieres llegar</h3>
+<p>En la sucursal de destino se suscribe la Orden de Traspaso. La <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9915.html">ficha de traspaso de la SP</a> indica que en el trámite presencial también se firma un documento informativo sobre el costo de administración y una declaración jurada sobre la prohibición de compensación económica, y se adjunta una copia de la cédula. Pide copia de lo firmado y verifica que la orden recoja los fondos que elegiste. No necesitas pagarle a un intermediario ni aceptar regalos por trasladarte.</p>
+<p>Nunca compartas contraseñas ni códigos de verificación con alguien que te esté ofreciendo el cambio. Si te llega un aviso de traspaso que no reconoces, contacta por sus canales oficiales a la AFP que figura en el aviso, pide que revise el caso y guarda el número de atención. No respondas al mensaje con una foto de tu cédula.</p>
+
+<h2>Cuánto demora: la afiliación y el movimiento del saldo tienen fechas distintas</h2>
+<p>El <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3732.html">calendario de canje del Compendio de Pensiones</a> fija dos fechas de traspaso de fondos para las órdenes aceptadas:</p>
+<table>
+<thead><tr><th scope="col">Día en que firmas la orden</th><th scope="col">Día en que se traspasan los fondos</th></tr></thead>
+<tbody>
+<tr><td>Del 1 al 15 del mes</td><td>Día 1 del mes siguiente</td></tr>
+<tr><td>Del 16 al último día del mes</td><td>Día 15 del mes siguiente</td></tr>
+</tbody>
+</table>
+<p>Si el día previsto para mover los fondos cae en sábado, domingo o festivo, el canje pasa al día hábil siguiente. La <strong>afiliación</strong>, en cambio, rige desde el <strong>primer día del mes en que se traspasan los fondos</strong>, según el <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3742.html">formulario oficial de la orden</a>. Por eso, si firmas el 16 de noviembre y aceptan la orden, estarás afiliado a la nueva AFP desde el 1 de diciembre, aunque el canje corresponda al 15 de diciembre o al hábil siguiente si aplica. No cuentes un número fijo de días desde que hiciste clic.</p>
+<p>La AFP de destino debe comunicarte si aceptó la orden o si quedó nula, e indicarte desde cuándo estarás incorporado si procede. Omitir el fondo de destino de la cuenta obligatoria es un ejemplo de nulidad indicado en el formulario. Si pasa la fecha esperada y solo tienes un comprobante de ingreso, pide el estado de la orden y el motivo de cualquier rechazo antes de volver a solicitar el cambio.</p>
+<p>El corte tiene un efecto concreto: si firmas el 15 y tu colega el 16 del mismo mes, pueden quedar afiliados a sus nuevas AFP desde la misma fecha, pero ver el abono de sus ahorros en fechas distintas. Toma como referencia tu orden aceptada, no el día en que alguien más vio sus fondos en la cartola.</p>
+
+<h2>Qué se mueve con el traspaso y qué debes elegir</h2>
+<p>El saldo de cotizaciones obligatorias se mueve completo. Cambiar de AFP significa cambiar quién administra ese ahorro; cambiar de multifondo significa cambiar cómo se invierte. Puedes mantener el tipo de fondo que ya tenías si corresponde a tu situación. Si tu saldo está repartido y quieres alterar esa distribución, comprueba el destino de cada parte antes de confirmar. Un saldo mostrado en pesos en dos cartolas de fechas distintas no es una comparación directa: primero identifica el movimiento de traspaso y su fecha, en vez de leer cualquier diferencia como un cobro por cambiarte.</p>
+<p>Si tienes <strong>APV o Cuenta 2</strong>, no supongas que se moverán junto con el saldo obligatorio. Las reglas del <a href="https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-10415.html">traspaso electrónico</a> permiten seleccionar cuentas y, cuando corresponde, mover parte del saldo. Revisa qué aparece marcado y contrasta las comisiones de esos productos por separado. Si pensabas retirar dinero de la Cuenta 2 y eliges traspasarla, consulta antes la disponibilidad: el formulario prevé una restricción temporal de retiro para recursos voluntarios incluidos en la orden.</p>
+<p>En 2026 rigen los multifondos A a E. La SP publicó el <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-17131.html">régimen de los Fondos Generacionales</a> que los reemplazará desde el <strong>1 de abril de 2027</strong>. Esa transición no es lo mismo que pedir hoy un cambio de administradora. Si estás cerca de pensionarte, consulta qué opciones de fondo admite tu situación y coordina las fechas: el formulario oficial indica que una solicitud de pensión firmada en el mismo mes que la orden anula el traspaso.</p>
+
+<h2>Qué mirar en tu primera liquidación después del cambio</h2>
+<p>Si trabajas con contrato, <strong>la AFP nueva avisa al empleador</strong> desde qué mes corresponde pagarle las cotizaciones. La copia de tu orden no sustituye ese aviso. Cuando se procese la remuneración de ese período, revisa la AFP que figura en tu liquidación y, por separado, comprueba en la cartola que se haya acreditado el pago. La liquidación muestra lo descontado; la cartola permite verificar que llegó a la cuenta. Fíjate en el mes de remuneración y no solo en el día en que se pagó la cotización.</p>
+<p>Descargar una cartola de la AFP de origen antes de firmar te deja un respaldo para cotejar el saldo y los períodos ya pagados. Si falta un abono después del cambio, anota el mes, guarda la liquidación y pregunta a la AFP de destino con qué administradora corresponde revisar el pago. Si tienes más de un empleador, identifica cuál de ellos hizo el descuento: no basta con comprobar que llegó una de las cotizaciones. No vuelvas a pagar por tu cuenta una cotización descontada sin aclarar primero qué pasó.</p>
+<p>Si cotizas sin empleador, no esperes a que te llegue una liquidación para revisar el cambio. Usa la fecha de incorporación que informó la AFP de destino y conserva los comprobantes de tus propios pagos. Si tus cotizaciones se determinan en la Operación Renta, consulta a la AFP por el período que quieres revisar: el calendario de la tabla indica cuándo se mueve el saldo, no cuándo se abonarán las cotizaciones de tu declaración anual.</p>
+
+<h2>Cómo comparar antes de elegir, sin confundir sueldo con pensión</h2>
+<p>Toma la <strong>remuneración imponible</strong> de tu liquidación, no el líquido que recibiste en el banco, y usa el <a href="/calculadoras/calculadora-comparador-afp">comparador de AFP de CalculaChile</a> para estimar la diferencia de comisión. Si tu imponible cambia según el mes, prueba más de una liquidación representativa en vez de proyectar el último descuento a todo el año. La comisión afecta tu sueldo líquido: pagar menos por administración no significa que la diferencia se deposite en tu cuenta ni que tu pensión suba automáticamente.</p>
+<p>En <a href="https://www.spensiones.cl/infoydec">Infórmate y Decide</a> puedes contrastar comisiones, rentabilidad real para el mismo fondo y período, y calidad de servicio. La rentabilidad pasada no asegura la futura. Si usas con frecuencia un canal de atención o estás preparando un trámite de pensión, comprueba cómo lo atendería la AFP elegida, además de mirar cuánto cobra.</p>
+<p>Si todavía no eliges destino, parte por la <a href="/blog/comparativa-comisiones-afp-2026">comparativa de comisiones AFP</a> y confirma las tasas actuales en la SP. Si ya decidiste, guarda la orden y marca el mes de la primera cotización que tendrás que verificar. Para profundizar, consulta la <a href="/guias/afp-pension-chile">guía de AFP y pensiones en Chile</a>. Esta información orienta el trámite general y no reemplaza la confirmación de tu AFP para un caso particular.</p>`,
+  },
+  {
     slug: 'comparativa-comisiones-afp-2026',
     title: 'Comparativa de comisiones AFP 2026: cuál te conviene',
     seoTitle: 'Comisiones AFP 2026 Chile: la más barata y la más cara',
@@ -3672,7 +3767,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
       {
         question: '¿Cómo me cambio de AFP en Chile?',
         answer:
-          'El trámite es gratuito y se realiza con la AFP de destino, no en PreviRed. Puede hacerse virtualmente con la Clave de Seguridad para Traspaso entregada por la AFP actual, o presencialmente suscribiendo la Orden de Traspaso y los documentos exigidos. Después conviene verificar que las cotizaciones ingresen correctamente.',
+          'El trámite es gratuito y se realiza con la AFP de destino, no en PreviRed. Puedes suscribir la Orden de Traspaso en el portal de destino con la autenticación que ofrezca o presencialmente en una sucursal. Después conviene verificar que las cotizaciones ingresen correctamente.',
       },
     ],
     content: `<p class="article-lead">Elegir AFP no es escoger entre siete cuentas idénticas. La comisión afecta el sueldo líquido de forma conocida; la rentabilidad afecta un saldo acumulado mucho mayor, pero es variable; y la calidad de servicio importa al pedir certificados, resolver rezagos o pensionarse. Esta comparación usa tasas oficiales de julio de 2026 y no promete cuál administradora tendrá mejores resultados futuros.</p>
@@ -3719,8 +3814,7 @@ ${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 <p>La restricción no obliga a afiliados antiguos a trasladarse. Tampoco significa que la autoridad haya declarado a Uno como la de mayor rentabilidad: la licitación de nuevos afiliados se relaciona con la comisión.</p>
 
 <h2>Cómo cambiarse realmente de AFP</h2>
-<p>El trámite no se realiza en PreviRed. La Superintendencia establece estas vías:</p>
-<ol class="steps"><li>Compara comisión, rentabilidad y servicio en la fuente oficial.</li><li>Para el canal virtual, solicita a tu AFP actual la Clave de Seguridad para Traspaso.</li><li>Ingresa al canal de la AFP de destino y suscribe la Orden de Traspaso.</li><li>Completa el documento informativo de costo y la declaración jurada exigida.</li><li>Para vía presencial, acude a una agencia de la AFP de destino con identificación.</li><li>Guarda comprobantes y verifica que las cotizaciones posteriores se acrediten correctamente.</li></ol>
+<p>El cambio se solicita en la AFP de destino, no en PreviRed. En nuestra <a href="/blog/cambio-afp-2026-como-hacerlo">guía paso a paso para cambiarte de AFP</a> puedes revisar las formas de identificarte, el calendario de traspaso y cómo comprobar el primer pago de cotizaciones después del cambio.</p>
 <p>El traspaso es gratuito. No entregues claves a vendedores ni aceptes regalos o pagos por cambiarte: la orden incorpora una declaración sobre prohibición de compensación económica. Confirma siempre que estás en un dominio oficial.</p>
 
 <h2>Qué ocurre con el saldo</h2>
