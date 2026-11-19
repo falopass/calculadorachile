@@ -322,7 +322,7 @@ export const guias: Guia[] = [
 <p>El 10% obligatorio es el mismo en todas las AFP. Solo cambia la comisión variable y la rentabilidad histórica del fondo. Para 2026, AFP Uno tiene la comisión más baja (0,46%) y ProVida la más alta (1,45%). Compara con la <a href="/calculadoras/calculadora-comparador-afp">calculadora comparadora de AFP</a>.</p>
 
 <h3>¿El finiquito se calcula con sueldo bruto o líquido?</h3>
-<p>Con sueldo bruto, considerando promedio de los últimos 3 meses si la remuneración es variable. La indemnización por años de servicio se calcula sobre la remuneración mensual incluyendo gratificación pero excluyendo colación y movilización (artículo 172 del Código del Trabajo). Lee la <a href="/guias/finiquito-laboral-chile">guía completa del finiquito</a>.</p>
+<p>Para la indemnización por años de servicio se usa la remuneración mensual del artículo 172 antes de descuentos, no el sueldo líquido ni necesariamente el total imponible. Si la remuneración es variable, se promedian los últimos tres meses calendario completos. La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">Dirección del Trabajo</a> incluye la gratificación, colación y movilización cuando se pagan mensualmente. Lee la <a href="/guias/finiquito-laboral-chile">guía completa del finiquito</a>.</p>
 
 <h3>¿Qué pasa con el aporte adicional del empleador (Ley 21.735)?</h3>
 <p>No se descuenta del trabajador. Es un costo del empleador que va al sistema solidario. Desde agosto de 2026 es 3,5% del imponible e incluye el SIS (antes era 1,0% con el SIS pagado por separado). No afecta tu sueldo líquido.</p>
@@ -478,7 +478,7 @@ export const guias: Guia[] = [
 <tr><td>Comisión variable</td><td>Promedio últimos 3 meses</td><td>Promedio últimos 3 meses</td></tr>
 <tr><td>Gratificación mensual</td><td>Puede integrar por periodicidad</td><td>No integra la base según DT</td></tr>
 <tr><td>Horas extra</td><td>Se excluyen</td><td>No forman la remuneración íntegra ordinaria</td></tr>
-<tr><td>Colación y movilización</td><td>Revisar naturaleza; normalmente no son remuneración</td><td>No se incorporan como sueldo</td></tr>
+<tr><td>Colación y movilización</td><td>Se incluyen si se pagan mensualmente, según la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">Dirección del Trabajo</a></td><td>No se incorporan como sueldo</td></tr>
 <tr><td>Bono anual</td><td>Se excluye por esporádico</td><td>No se prorratea automáticamente</td></tr>
 </tbody></table>
 <h3>Tope de 90 UF</h3>
