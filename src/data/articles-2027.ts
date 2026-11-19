@@ -76,7 +76,7 @@ export const ARTICULOS_2027: Article[] = [
     ],
     sources: [{
       label: 'Banco Central de Chile: tipos de cambio nominales, pesos por unidad de moneda extranjera',
-      url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.ARS.N.O.D',
+      url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL',
     }],
     faq: [
       {
@@ -103,7 +103,7 @@ export const ARTICULOS_2027: Article[] = [
 <p>Para estimar alimentación, arma un menú diario con precios que puedas consultar y multiplícalo por los días que realmente comerás fuera. Haz lo mismo con los trayectos de transporte y las actividades que quieres reservar. Guarda la fecha y las condiciones de cada cotización. Si falta un precio, déjalo identificado como pendiente: poner cero puede hacer parecer suficiente un presupuesto incompleto.</p>
 
 <h2>Conversores por país: calcula en la moneda del destino</h2>
-<p>El <a href="https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL?idSerie=F072.CLP.ARS.N.O.D" target="_blank" rel="noopener">Banco Central de Chile publica tipos de cambio nominales en pesos por unidad de moneda extranjera</a>. Úsalos como referencia de comparación, no como oferta de una casa de cambio. En cada calculadora revisa la fecha y la procedencia del dato antes de decidir; una referencia guardada no debe interpretarse como una cotización ejecutable del momento.</p>
+<p>El <a href="https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL" target="_blank" rel="noopener">Banco Central de Chile publica tipos de cambio nominales en pesos por unidad de moneda extranjera</a>. Úsalos como referencia de comparación, no como oferta de una casa de cambio. En cada calculadora revisa la fecha y la procedencia del dato antes de decidir; una referencia guardada no debe interpretarse como una cotización ejecutable del momento.</p>
 
 <h3>Argentina: presupuesto en pesos argentinos (ARS)</h3>
 <p>Separa las reservas cotizadas en otra moneda de los gastos que pagarás en pesos argentinos. Antes de cerrar un alojamiento o una excursión, pide que te confirmen la moneda, el importe final y las condiciones de pago. Evita construir el presupuesto suponiendo que todos los proveedores convertirán tus dólares de la misma forma.</p>

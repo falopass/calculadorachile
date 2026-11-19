@@ -13,6 +13,7 @@ describe('presupuesto de viaje verano 2027', () => {
     expect(article.sources.length).toBeGreaterThan(0);
     for (const source of article.sources) {
       expect(new URL(source.url).hostname).toBe('si3.bcentral.cl');
+      expect(new URL(source.url).search).toBe('');
       expect(article.content).toContain(source.url);
     }
     expect(article.faq?.length).toBeGreaterThan(0);
