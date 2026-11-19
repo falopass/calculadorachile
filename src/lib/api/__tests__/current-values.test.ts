@@ -41,7 +41,7 @@ describe('fecha normalizada + vigencia/título', () => {
       ),
     ).toBe(true);
     expect(buildLiveValueTitle('uf', 40999.93, new Date(fecha), NOW)).toBe(
-      'UF hoy 23-09-2026: $40.999,93 | Tabla UF a pesos',
+      'Valor UF hoy: $40.999,93 (23-09-2026) | UF a pesos',
     );
   });
 
@@ -55,7 +55,7 @@ describe('fecha normalizada + vigencia/título', () => {
       ),
     ).toBe(true);
     expect(buildLiveValueTitle('utm', 71721, new Date(fecha), NOW)).toBe(
-      'UTM septiembre 2026: $71.721 y conversión a pesos',
+      'UTM de septiembre 2026: $71.721 (SII)',
     );
   });
 

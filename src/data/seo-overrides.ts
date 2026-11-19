@@ -32,7 +32,6 @@ import { formatCLP } from '@/lib/formatters';
 import {
   AGUINALDO_PENSIONADOS_IPS_2026,
   INDEMNIZACION,
-  SEGURO_CESANTIA_BENEFICIOS,
 } from '@/lib/values/constants';
 import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
@@ -75,9 +74,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y REMUNERACIONES ---
   'calculadora-sueldo-liquido': {
-    seoTitle: 'Calcular sueldo líquido 2026: de bruto a líquido', // 48
+    seoTitle: 'Calcula tu sueldo líquido en Chile 2026',
     seoDescription:
-      'Ingresa tu sueldo bruto y ve tu líquido 2026 al instante: descuento de AFP, 7% de salud, seguro de cesantía e impuesto único con tramos del SII.', // 144
+      '¿Cuánto recibirás en mano? Convierte tu sueldo bruto a líquido y desglosa los descuentos de AFP, salud, seguro de cesantía e impuesto único.',
   },
 
   'calculadora-impuesto-herencia': {
@@ -92,9 +91,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-comparador-afp': {
-    seoTitle: 'Comisiones AFP 2026: compara y elige la más barata', // 52
+    seoTitle: '¿Cuál es la AFP más barata? Compara las 7',
     seoDescription:
-      'Compara las 7 AFP 2026: Uno desde 0,46% vs ProVida 1,45%. Ve cuánto descuentan al mes y cuánto ahorras al cambiar. Dato oficial SP.', // 135
+      'Compara las comisiones de las 7 AFP en Chile. Ingresa tu sueldo bruto para ver cuánto te descuentan al mes y cuánto podrías ahorrar si te cambias.',
   },
 
   // --- BENEFICIOS LABORALES Y TÉRMINO DE CONTRATO ---
@@ -115,15 +114,15 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-vacaciones-proporcionales': {
-    seoTitle: 'Vacaciones proporcionales: calcula días y pago',
+    seoTitle: 'Vacaciones proporcionales: días y pago',
     seoDescription:
-      'Vacaciones en el finiquito: 1,25 días hábiles por mes, pagados en días corridos con fines de semana y feriados. Tabla de 1 a 11 meses (DT).', // 139
+      '¿Trabajaste 6 meses? Revisa cuántos días hábiles de vacaciones te corresponden por mes y calcula cuánto se paga en tu finiquito en días corridos.',
   },
 
   // título y meta generados: cambian solos cuando se actualice INGRESO_MINIMO
   'calculadora-gratificacion-legal': {
-    seoTitle: `Gratificación legal ${TOPE_GRAT.anio}: tope de ${formatCLP(TOPE_GRAT.mensual)} al mes`, // 49
-    seoDescription: `Tope de gratificación legal ${TOPE_GRAT.anio}: 4,75 ingresos mínimos al año, ${formatCLP(TOPE_GRAT.anual)} o ${formatCLP(TOPE_GRAT.mensual)} al mes. Calcula el 25% de tu sueldo${TOPE_GRAT.vigenteDesde === '2026-05-01' ? ' y revisa el cambio de 2027' : ''}.`, // 149 (con la frase del cambio)
+    seoTitle: `Tope de gratificación ${TOPE_GRAT.anio}: ${formatCLP(TOPE_GRAT.mensual)} al mes`,
+    seoDescription: `Calcula tu gratificación legal del 25% y comprueba si llega al tope de ${formatCLP(TOPE_GRAT.mensual)} al mes o ${formatCLP(TOPE_GRAT.anual)} al año (4,75 ingresos mínimos).`,
   },
 
   'calculadora-horas-extra': {
@@ -133,9 +132,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-asignacion-familiar': {
-    seoTitle: 'Tramos asignación familiar 2026: monto por carga', // 48
+    seoTitle: 'Asignación familiar 2026: tramos y montos',
     seoDescription:
-      'Tramos 2026: $22.601, $13.870 o $4.382 por carga (Ley 21.830). En 2027 se reajustan con el IMM; los valores salen en el decreto (hasta el 15-01).', // 145
+      'Consulta la tabla de tramos de ingreso 2026 y estima cuánto te corresponde por cada carga familiar reconocida según tu ingreso mensual promedio.',
   },
   'calculadora-aguinaldo': {
     // Ventana diciembre: monto IPS Navidad desde constantes; SP 2026 sin ley publicada.
@@ -151,9 +150,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-iva': {
-    seoTitle: 'Calcular IVA Chile 2026: agrega o quita el 19%', // 46
+    seoTitle: 'Calculadora IVA Chile: neto, IVA 19% y bruto',
     seoDescription:
-      'Calcula el IVA en Chile (19%, tasa del SII): pasa de neto a bruto o saca el IVA de un total. Ej.: $100.000 neto = $119.000 con IVA. Gratis.', // 141
+      'Ingresa un precio neto para sumar el IVA del 19%, o un total con IVA para saber cuánto es el neto. Obtén los tres montos en pesos chilenos.',
   },
 
   'calculadora-boleta-honorarios': {
@@ -211,16 +210,16 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- CONVERSIONES E INDICADORES ECONÓMICOS ---
   'calculadora-uf-clp': {
-    seoTitle: 'UF a pesos hoy: conversor y tabla de montos', // 43, sin sufijo (title.absolute)
+    seoTitle: 'UF a pesos: valor UF y tabla de conversiones',
     seoDescription:
-      'UF de hoy y tabla de UF a pesos: 1, 24, 100, 200, 1.000, 2.500, 3.000 y 6.000 UF con el valor oficial del día y dónde ver la UF de una fecha.', // 141
+      'Convierte UF a pesos chilenos y al revés. Ve cuánto son 3.000 UF en la tabla de equivalencias y dónde consultar el valor oficial para otra fecha.',
   },
 
   // E-049: si el valor vivo no está fresco, este fallback no menciona un mes fijo.
   'calculadora-utm-clp': {
-    seoTitle: 'UTM a pesos: conversión con valor oficial SII', // 46
+    seoTitle: 'UTM a pesos: valor mensual (SII) y conversor',
     seoDescription:
-      'Convierte UTM a pesos y pesos a UTM con el valor oficial del mes (SII). Multas, UTM vs UTA y UF, y qué mes usar. Gratis.', // 118
+      'Consulta el valor mensual de la UTM y convierte entre UTM y pesos chilenos. Revisa qué valor del mes usar para multas y trámites.',
   },
 
   'calculadora-compras-internacionales': {
@@ -468,9 +467,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'revision-tecnica-chile-2026-calendario-patente': {
-    seoTitle: 'Calendario revisión técnica 2026 por dígito', // 43
+    seoTitle: 'Revisión técnica 2026: calendario por patente',
     seoDescription:
-      '¿En qué mes te toca la revisión técnica? Tabla 2026 por último dígito de patente, meses que quedan del año, prórrogas vigentes y qué hacer si se te pasó.', // 153
+      'Busca el último dígito de tu patente en la tabla de 2026 para saber en qué mes te toca la revisión técnica. Revisa qué hacer si se te pasó.',
   },
 
   'cotizacion-empleador-3-5-agosto-2026-costo-pyme': {
@@ -532,9 +531,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #3 P1: IMM mayo 2026 ---
   'sueldo-minimo-2026-calcular-liquido': {
-    seoTitle: 'Sueldo mínimo en Chile: $553.553 y enero 2027', // 45
+    seoTitle: 'Sueldo mínimo Chile 2026: $553.553 brutos',
     seoDescription:
-      '¿Cuánto es el sueldo mínimo en Chile? $553.553 brutos desde mayo de 2026 (Ley 21.830). El 1 de enero de 2027 se reajusta por IPC: así se calcula.', // 145
+      'Desde mayo de 2026, el mínimo es $553.553 brutos para trabajadores de 18 a 65 años. Revisa los montos por edad y estima cuánto te queda líquido.',
   },
 
   // --- #6 P1: finiquito × IMM ---
@@ -572,9 +571,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y JORNADA ---
   'calculadora-sueldo-part-time': {
-    seoTitle: 'Sueldo part time 2026: mínimo por hora, 20 y 30 horas', // 53 (+15 sufijo plantilla = 68)
+    seoTitle: 'Sueldo part time 2026: 20 y 30 horas en Chile',
     seoDescription:
-      'Calcula el sueldo mínimo part time 2026 según tus horas: tabla de 18 a 36 horas, valor hora y la regla de las 30 horas, con fuentes de la Dirección del Trabajo.',
+      '¿Cuánto se gana con 20 o 30 horas semanales? Calcula el sueldo mínimo mensual part time y el valor por hora, y revisa cuándo aplica el mínimo íntegro.',
   },
 
   'calculadora-factor-hora-extra': {
@@ -594,8 +593,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   // --- BENEFICIOS Y SEGURIDAD SOCIAL ---
   // E-022 (brief 2026-10-29): "simulador seguro de cesantía". No cambia name ni H1.
   'calculadora-seguro-cesantia': {
-    seoTitle: 'Simulador seguro de cesantía 2026: cuenta AFC y Solidario', // 57
-    seoDescription: `Cuánto te paga el seguro de cesantía: el 1.er giro de tu cuenta AFC es el ${SEGURO_CESANTIA_BENEFICIOS.cic.porcentajes[0]}% de tu remuneración promedio. Fondo Solidario, mínimos y máximos 2026.`, // 147
+    seoTitle: 'Simulador seguro de cesantía: giros AFC',
+    seoDescription:
+      'Estima cuánto podrías recibir por giro del seguro de cesantía según tu contrato, sueldo y cotizaciones. Compara tu cuenta AFC con el Fondo Solidario.',
   },
 
   // E-020 (brief 2026-10-29): "si me dan 10 días de licencia cuántos me pagan".
@@ -605,9 +605,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Calcula las fechas de tu prenatal, postnatal y postnatal parental. Estima el monto del subsidio maternal en pesos según las reglas de la SUSESO.',
   },
   'calculadora-licencia-medica': {
-    seoTitle: 'Licencia médica: ¿cuántos días pagan? Tabla y cálculo 2026', // 58
+    seoTitle: 'Licencia médica: ¿cuántos días me pagan?',
     seoDescription:
-      'Si la licencia dura 10 días o menos, no se pagan los 3 primeros; desde 11 días se paga desde el día 1. Tabla de 1 a 15 días y quién paga. SUSESO.', // 145
+      '¿Te dieron 3, 5, 7 u 11 días de licencia médica? Consulta la tabla de días pagados y estima el monto del subsidio según tu remuneración neta.',
   },
 
   'calculadora-aporte-familiar-permanente': {
