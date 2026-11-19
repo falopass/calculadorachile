@@ -117,4 +117,27 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     expect(container.textContent).toContain('4851000');
     expect(JSON.parse(historial())).toHaveLength(2);
   });
+
+  it('calcula días administrativos sin uso y con cero en cualquiera de los campos', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const administrativos = getCalculatorBySlug('calculadora-dias-administrativos')!;
+    const calcular = (await loadCalculationFn('dias-administrativos'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: administrativos,
+        calculateFn: calcular,
+      }));
+    });
+    expect(container.textContent).toContain('0 6');
+    const fields = container.querySelectorAll<HTMLInputElement>('input');
+    for (const [completos, medios, resultado] of [['2', '0', '2 4'], ['0', '3', '1.5 4.5']]) {
+      await act(async () => {
+        setInputValue(fields[0], completos);
+        setInputValue(fields[1], medios);
+      });
+      await act(async () => { vi.advanceTimersByTime(500); });
+      expect(container.textContent).toContain(resultado);
+      expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
+    }
+  });
 });

@@ -7737,15 +7737,15 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     keywords: ['días administrativos', 'sector público', 'medios días administrativos', 'saldo días administrativos', 'permisos funcionarios municipales'],
     inputs: [
       { id: 'diasCompletosUsados', label: 'Días completos usados este año calendario',
-        type: 'number', unit: 'days', min: 0, defaultValue: 0, required: true,
+        type: 'number', unit: 'days', min: 0, defaultValue: 0,
         tooltip: 'Ingresa solo los días completos; registra los medios días en el siguiente campo.' },
       { id: 'mediosDiasUsados', label: 'Cantidad de medios días usados este año calendario',
-        type: 'number', unit: 'count', min: 0, defaultValue: 0, required: true,
+        type: 'number', unit: 'count', min: 0, defaultValue: 0,
         tooltip: 'Cada medio día cuenta como 0,5 días. Por ejemplo, ingresa 3 si usaste tres medios días.' },
       { id: 'diasSolicitados', label: 'Días que quieres solicitar ahora (opcional)',
-        type: 'select', defaultValue: '',
+        type: 'select', defaultValue: 'saldo',
         options: [
-          { value: '', label: 'Solo consultar saldo' },
+          { value: 'saldo', label: 'Solo consultar saldo' },
           ...Array.from({ length: CUPO_DIAS_ADMINISTRATIVOS * 2 + 1 }, (_, medios) => ({
             value: String(medios / 2),
             label: `${(medios / 2).toLocaleString('es-CL')} días`,

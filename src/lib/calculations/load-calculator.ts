@@ -1194,7 +1194,7 @@ export async function loadCalculationFn(
         const result = calculateDiasAdministrativos({
           diasCompletosUsados: coerceNumber(inputs.diasCompletosUsados, NaN),
           mediosDiasUsados: coerceNumber(inputs.mediosDiasUsados, NaN),
-          diasSolicitados: inputs.diasSolicitados === '' || inputs.diasSolicitados === undefined
+          diasSolicitados: inputs.diasSolicitados === 'saldo' || inputs.diasSolicitados === '' || inputs.diasSolicitados === undefined
             ? undefined : coerceNumber(inputs.diasSolicitados, NaN),
         });
         return diasAdministrativosToResults(result);
