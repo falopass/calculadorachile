@@ -106,6 +106,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | 2026-11-18 | impuestos | impuesto-segunda-categoria, sueldo-liquido |
 | 28 | blog | Indemnización por años de servicio: tope de 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | 2026-11-18 | laboral | indemnizacion-anos-servicio, finiquito |
 | 49 | blog | Cómo cambiarse de AFP en Chile 2026: pasos y plazos | `cambio-afp-2026-como-hacerlo` | 2026-11-18 | pensión | comparador-afp |
+| 38 | blog | Pensión alimenticia 2026: ejemplo de cálculo | `pension-alimenticia-2026-ejemplo-calculo` | 2026-11-19 | familia | pension-alimenticia |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
@@ -157,7 +158,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~34~~ | blog | ~~Feriado irrenunciable 25 dic 2026~~ | ~~`feriado-irrenunciable-25-diciembre-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-01~~ | dic | ✅ |
 | ~~35~~ | blog | ~~Aguinaldo Navidad sector público 2026~~ | ~~`aguinaldo-navidad-2026-sector-publico`~~ | publicado 2026-11-16 | laboral | ~~2026-12-04~~ | dic | ✅ |
 | ~~36~~ | blog | ~~Gratificación fin de año 2026~~ | ~~`gratificacion-fin-de-ano-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-08~~ | dic–ene | ✅ |
-| 38 | blog | Pensión alimenticia 2026: ejemplo | `pension-alimenticia-2026-ejemplo-calculo` | satélite familia | familia | 2026-12-15 | continuo | **P2-continuo** |
+| ~~38~~ | blog | ~~Pensión alimenticia 2026: ejemplo~~ | `pension-alimenticia-2026-ejemplo-calculo` | publicado 2026-11-19 · satélite familia | familia | ~~2026-12-15~~ | continuo | ✅ |
 | ~~**39**~~ | **guía** | ~~**Prep Operación Renta 2027 (checklist)**~~ | ~~`preparacion-operacion-renta-2027-checklist`~~ | publicado 2026-11-17 en `guias.ts` · DR[20] | impuestos | ~~2027-01-06~~ | ene–abr | ✅ |
 | 40 | blog | Permiso circulación 2027 | `permiso-circulacion-2027-calcular-plazo` | satélite vehículos | vehículos | 2027-01-13 | ene–mar | **P3** |
 | 41 | blog | Intereses por mora | `intereses-mora-chile-2026-calcular` | — | finanzas | 2027-01-16 | continuo | **P3** |

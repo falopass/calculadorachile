@@ -34,8 +34,25 @@ import {
 import { buildCvlistoBuscarTrabajoUrl, buildCvlistoContentUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
+import { calculatePensionAlimenticia } from '@/lib/calculations/pension-alimenticia';
 import { articuloImpuestoSegundaCategoria } from './article-impuesto-segunda-categoria';
 import { ARTICULOS_2027 } from './articles-2027';
+
+const ALIMENTOS_EJEMPLO = calculatePensionAlimenticia({
+  sueldoBruto: 1_000_000,
+  numeroHijos: 2,
+  tieneOtroIngreso: false,
+});
+const ALIMENTOS_UN_MENOR = calculatePensionAlimenticia({
+  sueldoBruto: 1_000_000,
+  numeroHijos: 1,
+  tieneOtroIngreso: false,
+});
+const ALIMENTOS_BAJOS_INGRESOS = calculatePensionAlimenticia({
+  sueldoBruto: 300_000,
+  numeroHijos: 2,
+  tieneOtroIngreso: false,
+});
 
 /** Tabla HTML del Fondo de Cesantía Solidario generada desde la constante (E-021). */
 function tablaFcsHtml(): string {
@@ -6439,6 +6456,95 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 18 de noviembre de 2026 con la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">pregunta frecuente del SII sobre plazos de IVA</a>, el <a href="https://misii.sii.cl/cgi_calendario/calendario.cgi" target="_blank" rel="noopener">calendario de IVA (PPM) del SII</a>, la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29</a>, la <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">pregunta frecuente sobre la base del PPM</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=6374" target="_blank" rel="noopener">Código Tributario en Ley Chile</a> (artículos 36, 53 y 97).</p>`,
+  },
+  // #38 — Satélite de familia: referencias legales, no pensión sugerida.
+  {
+    slug: 'pension-alimenticia-2026-ejemplo-calculo',
+    title: 'Pensión alimenticia 2026: ejemplo de cálculo en Chile',
+    description:
+      'Ejemplo con dos menores y sueldo de $1.000.000: piso del IMM, límite general del 50%, vigencia 2026 y diferencias con una pensión fijada en UTM.',
+    date: '2026-11-19',
+    updatedAt: '2026-11-19',
+    category: 'familia',
+    readingTime: 9,
+    keywords: ['pensión alimenticia 2026', 'mínimo pensión alimenticia', 'calcular pensión alimenticia', 'pensión dos hijos', 'Ley 14.908'],
+    relatedCalculators: ['calculadora-pension-alimenticia'],
+    relatedGuia: 'familia-pension-alimenticia-chile',
+    embedCalculatorId: 'pension-alimenticia',
+    sources: [
+      { label: 'BCN — Ley 14.908, texto refundido en DFL 1 de 2000 (artículos 3, 5, 6 y 7)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986&idParte=8720734' },
+      { label: 'BCN — Ley 19.741, artículo 1 número 3: mínimos del IMM', url: 'https://www.bcn.cl/leychile/navegar?idNorma=187930' },
+      { label: 'BCN — Ley 21.389, artículo 1: UTM y excepción al límite general', url: 'https://www.bcn.cl/leychile/Navegar?idNorma=1168463' },
+      { label: 'BCN — Ley 21.830, artículo 1: IMM desde mayo de 2026', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354' },
+      { label: 'Dirección del Trabajo — Valor del ingreso mínimo mensual', url: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html' },
+      { label: 'BCN — Ley 21.751, artículo 1: IMM desde enero de 2026', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1214530' },
+    ],
+    faq: [
+      {
+        question: '¿La pensión alimenticia es el 40% del sueldo?',
+        answer: 'No. Para un menor, el artículo 3 de la Ley 14.908 establece un piso presunto del 40% del ingreso mínimo remuneracional que corresponda según la edad del alimentante, no de su sueldo. Para dos o más menores, la referencia es 30% del IMM por cada uno. El juez puede rebajar el piso si se acredita falta de medios.',
+      },
+      {
+        question: '¿Cuánto da el ejemplo para dos hijos menores en 2026?',
+        answer: `Con el IMM usado por la calculadora (${formatCLP(ALIMENTOS_EJEMPLO.ingresoMinimoVigente)}), el piso referencial es ${formatCLP(ALIMENTOS_EJEMPLO.pisoLegalPorHijo)} por menor y ${formatCLP(ALIMENTOS_EJEMPLO.pisoLegalTotal)} en total. Con ingresos hipotéticos de $1.000.000, el límite general es $500.000. Son referencias separadas, no una pensión recomendada ni una resolución judicial.`,
+      },
+      {
+        question: '¿El límite del 50% es absoluto?',
+        answer: 'No. El artículo 7 de la Ley 14.908 permite superarlo por razones fundadas, considerando especialmente el interés superior del niño, niña o adolescente y un reparto equitativo entre todos los alimentarios. La calculadora muestra el límite general, pero no decide si corresponde una excepción.',
+      },
+      {
+        question: '¿El piso en pesos reemplaza una pensión fijada en UTM?',
+        answer: 'No. La Ley 21.389 establece que la resolución debe expresar la pensión en UTM. Para cumplir una resolución vigente se debe atender a su monto, período y modalidad de pago; no sustituirla por el piso referencial de este ejemplo.',
+      },
+    ],
+    content: `
+<p>Con un ingreso hipotético de <strong>$1.000.000 mensuales y dos hijos menores</strong>, la calculadora muestra un piso legal total referencial de <strong>${formatCLP(ALIMENTOS_EJEMPLO.pisoLegalTotal)}</strong> y un límite general de <strong>${formatCLP(ALIMENTOS_EJEMPLO.limiteGeneralIngresos)}</strong>. No son dos alternativas para escoger ni una recomendación de pago. El primer monto depende del ingreso mínimo mensual (IMM); el segundo, de las rentas declaradas del alimentante. La pensión concreta requiere evaluar las circunstancias de la familia.</p>
+<p>Este ejemplo, revisado el <strong>19 de noviembre de 2026</strong>, explica los artículos 3 y 7 de la Ley 14.908 y las modificaciones de la Ley 21.389. Usa las mismas constantes y función que la <a href="/calculadoras/calculadora-pension-alimenticia">calculadora de pensión alimenticia</a>. Está pensado para menores de edad y un alimentante adulto en el tramo general del IMM. No permite deducir cuánto ordenará pagar un tribunal a partir del sueldo solamente.</p>
+
+<h2>Qué ingreso mínimo corresponde usar en 2026</h2>
+<p>El año tiene dos valores relevantes. El artículo 1 de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1214530" target="_blank" rel="noopener">Ley 21.751</a> fijó el IMM en <strong>$539.000 desde el 1 de enero de 2026</strong> para trabajadores mayores de 18 y hasta 65 años. Luego, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1225354" target="_blank" rel="noopener">Ley 21.830</a> lo elevó a <strong>$553.553 a contar del 1 de mayo de 2026</strong>, valor corroborado por la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Dirección del Trabajo</a>. Por eso no corresponde aplicar el monto de enero a todo el año.</p>
+<p>El desarrollo numérico de este artículo corresponde al tramo que comienza en mayo de 2026: la calculadora utiliza ${formatCLP(ALIMENTOS_EJEMPLO.ingresoMinimoVigente)}, desde el ${formatFechaLarga(INGRESO_MINIMO.vigente_desde)} según la Ley ${INGRESO_MINIMO.ley}. La Ley 21.830 contempla otro reajuste a partir de enero de 2027; estas cifras no deben proyectarse como montos de ese año. Si revisas un período anterior, primero identifica el IMM que regía entonces.</p>
+<p>La edad que importa para elegir el ingreso mínimo remuneracional es la del <strong>alimentante</strong>, es decir, quien debe dar alimentos. La ley contempla un valor distinto para menores de 18 y mayores de 65 años. El simulador usa el tramo general y no solicita la edad: si tu situación está fuera de ese tramo, el ejemplo no representa el piso aplicable a tu caso. Tampoco corresponde usar el ingreso mínimo para fines no remuneracionales como base de este cálculo.</p>
+
+<h2>El mínimo no es un porcentaje del sueldo del padre o madre</h2>
+<p>El artículo 3 de la Ley 14.908 presume que el padre o madre tiene medios para otorgar alimentos a un menor. Sobre esa presunción establece el mínimo del <strong>40% del ingreso mínimo remuneracional para un menor</strong> y del <strong>30% del mismo ingreso por cada menor cuando son dos o más</strong>. La regla está documentada en el <a href="https://www.bcn.cl/leychile/navegar?idNorma=187930" target="_blank" rel="noopener">artículo 1 número 3 de la Ley 19.741</a>, que reemplazó ese artículo.</p>
+<p>La distinción cambia la cuenta. Un sueldo más alto no modifica por sí solo ese piso basado en el IMM; sí puede ser relevante al evaluar la capacidad económica y el monto concreto de la pensión. Del mismo modo, que el piso sea una referencia legal no significa que satisfaga todas las necesidades del niño o niña. No es una tarifa que permita dar por resuelta la discusión sobre alimentación, vivienda, salud o educación.</p>
+<p>Además, el propio artículo 3 admite que el juez rebaje prudencialmente el mínimo si el alimentante justifica que carece de medios para pagarlo. No basta con seleccionar un sueldo bajo en una calculadora: acreditar esa situación y resolver sus consecuencias corresponde al procedimiento judicial. El resultado del simulador conserva esa advertencia en lugar de presentar una cifra como obligación definitiva.</p>
+
+<h2>Ejemplo paso a paso: sueldo de $1.000.000 y dos menores</h2>
+<p>Supongamos un padre o madre dentro del tramo general de edad del IMM, con sueldo bruto mensual de <strong>$1.000.000</strong>, sin otros ingresos declarados y con <strong>dos hijos menores</strong>. El sueldo y la composición familiar son supuestos didácticos, no datos estadísticos ni exigencias legales. Para reproducirlos, ingresa ese sueldo, indica dos menores y responde que no existen otros ingresos en el simulador.</p>
+<div class="numeric-example"><div class="numeric-example__title">Referencias para dos menores, con el IMM desde mayo de 2026</div><ol>
+<li><strong>Identificar la base:</strong> IMM de ${formatCLP(ALIMENTOS_EJEMPLO.ingresoMinimoVigente)}, no el sueldo de $1.000.000.</li>
+<li><strong>Elegir el porcentaje:</strong> al ser dos menores, corresponde el ${ALIMENTOS_EJEMPLO.porcentajeMinimoPorHijo}% del IMM por cada uno.</li>
+<li><strong>Calcular por menor:</strong> ${formatCLP(ALIMENTOS_EJEMPLO.ingresoMinimoVigente)} × 0,30 = $166.065,90; redondeado al peso, ${formatCLP(ALIMENTOS_EJEMPLO.pisoLegalPorHijo)}.</li>
+<li><strong>Calcular el total:</strong> $166.065,90 × 2 = $332.131,80; redondeado al peso, ${formatCLP(ALIMENTOS_EJEMPLO.pisoLegalTotal)}.</li>
+<li><strong>Comparar separadamente las rentas:</strong> $1.000.000 × 0,50 = ${formatCLP(ALIMENTOS_EJEMPLO.limiteGeneralIngresos)} como límite general.</li>
+</ol><span class="total">Piso total referencial: ${formatCLP(ALIMENTOS_EJEMPLO.pisoLegalTotal)}</span></div>
+<p>La función calcula primero con decimales y redondea cada resultado mostrado al peso más cercano. No suma montos ya redondeados para obtener el total: multiplica el piso sin redondear por el número de menores. En este caso ambos caminos coinciden al peso, pero la precisión explica por qué conviene comparar las salidas de la herramienta y no reconstruirlas desde una captura parcial.</p>
+<p>El piso total del ejemplo queda bajo el límite general. Esa comparación no demuestra que cualquier cifra situada entre ambos montos sea adecuada, ni que deba fijarse exactamente el mínimo. Faltan antecedentes sobre necesidades y capacidad económica de las partes. La utilidad del ejercicio es separar dos referencias que suelen confundirse al intentar hacer el cálculo con una sola multiplicación del sueldo.</p>
+
+<h2>Qué cambia si hay un solo menor</h2>
+<p>Si mantienes el mismo ingreso hipotético, pero seleccionas un menor, la base sigue siendo el IMM y cambia el porcentaje a 40%. La operación es ${formatCLP(ALIMENTOS_UN_MENOR.ingresoMinimoVigente)} × 0,40 = $221.421,20, que el simulador presenta como <strong>${formatCLP(ALIMENTOS_UN_MENOR.pisoLegalTotal)}</strong>. El límite general continúa en ${formatCLP(ALIMENTOS_UN_MENOR.limiteGeneralIngresos)}, porque las rentas declaradas no cambiaron.</p>
+<p>No corresponde calcular el primer hijo al 40% y agregar el segundo al 30%. Para dos o más menores, la referencia del artículo 3 es 30% por cada uno. Tampoco sería correcto tomar el piso correspondiente a un menor y dividirlo entre hermanos: eso usaría una regla distinta de la que aplica la ley y de la implementada en la calculadora.</p>
+
+<h2>El 50% de las rentas es un límite general con excepciones</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=172986&idParte=8720735" target="_blank" rel="noopener">artículo 7 de la Ley 14.908</a> establece el límite general de la mitad de las rentas del alimentante. La <a href="https://www.bcn.cl/leychile/Navegar?idNorma=1168463" target="_blank" rel="noopener">Ley 21.389, artículo 1 número 6</a>, incorporó la posibilidad de superarlo por razones fundadas, atendiendo especialmente al interés superior del niño, niña o adolescente y al reparto equitativo entre todos los alimentarios.</p>
+<p>Para ver por qué no debe tratarse como un recorte automático, cambia solamente el ingreso hipotético a <strong>$300.000</strong> y conserva los dos menores. El piso del IMM sigue siendo ${formatCLP(ALIMENTOS_BAJOS_INGRESOS.pisoLegalTotal)}, pero la mitad de los ingresos baja a <strong>${formatCLP(ALIMENTOS_BAJOS_INGRESOS.limiteGeneralIngresos)}</strong>. La herramienta advierte que el piso supera el límite general y que se requiere evaluación judicial de capacidad de pago.</p>
+<p>La calculadora no reemplaza entonces el piso por el límite, ni ordena pagar ambos, ni decide cuál excepción procede. La tensión entre las referencias requiere antecedentes y una decisión fundada. Por eso una persona con ingresos bajos no debería interpretar el resultado como autorización para rebajar unilateralmente una pensión ya fijada, y quien recibe alimentos tampoco debería leer el piso como garantía de una resolución idéntica en todos los casos.</p>
+
+<h2>Qué ingresos y antecedentes quedan fuera del ejercicio</h2>
+<p>El simulador suma el sueldo bruto y el otro ingreso que declares si marcas esa opción. No verifica documentos, no calcula descuentos previsionales y no determina judicialmente qué partidas integran las rentas. En este ejercicio no hay otros ingresos, por lo que la suma coincide con el sueldo ingresado. Si existen arriendos, honorarios u otras entradas, el antecedente debe ser revisado y no omitido solo porque el ejemplo sea más sencillo sin él.</p>
+<p>El artículo 5 de la Ley 14.908 contempla antecedentes para determinar patrimonio y capacidad económica; la Ley 21.389 amplió las posibilidades de obtener información de organismos públicos y privados. Esa revisión documental es distinta de completar un formulario. Como preparación práctica, reúne tus liquidaciones, antecedentes tributarios y respaldo de ingresos, junto con los comprobantes de los gastos que necesites explicar. La calculadora ayuda a ordenar la conversación, no a sustituir esa prueba.</p>
+
+<h2>Una pensión fijada en UTM no se paga recalculando este piso</h2>
+<p>La Ley 21.389 modificó los artículos 3 y 6 para que la resolución exprese la pensión en <strong>unidades tributarias mensuales (UTM)</strong> y disponga su pago mensual y anticipado. También exige señalar el período de pago y especificar las circunstancias económicas consideradas y la proporción de contribución a gastos extraordinarios. Esas condiciones no aparecen resueltas en el ejemplo, que solo entrega referencias en pesos.</p>
+<p>Si ya tienes una resolución, revisa su monto en UTM, las instrucciones de pago y el período correspondiente. No sustituyas esa obligación por el resultado del simulador aunque el IMM haya cambiado. El piso ligado al ingreso mínimo y la expresión de una pensión concreta en UTM cumplen funciones distintas: confundirlos puede llevar a pagar menos de lo debido o a reclamar un monto que no corresponde a lo ordenado.</p>
+<p>Antes de usar el resultado, comprueba entonces el período del IMM, la edad del alimentante, cuántos menores comprende la consulta y si declaraste todos los ingresos pertinentes. Conserva por separado las necesidades y antecedentes económicos que el formulario no pregunta. Si el piso supera la mitad de las rentas, o existe una resolución que necesitas modificar, busca orientación jurídica para evaluar tu situación; ninguna salida de esta herramienta modifica por sí misma lo resuelto.</p>
+
+<aside class="callout callout--warning"><div class="callout__body"><strong>Referencia educativa, no asesoría jurídica</strong><p>Los ingresos y casos familiares son hipotéticos. Los mínimos, sus excepciones y el límite general provienen de la normativa citada. El tribunal determina la pensión según los antecedentes del caso; la herramienta no recomienda una suma ni reemplaza una resolución judicial.</p></div></aside>
+<h2>Fuentes y fecha de revisión</h2>
+<p>Revisión documental: 19 de noviembre de 2026. Se consultaron la Ley 14.908 y las leyes modificatorias 19.741 y 21.389 en BCN para mínimos, capacidad económica, UTM y límite general; las leyes 21.751 y 21.830 para los períodos del IMM de 2026; y la ficha de la Dirección del Trabajo para corroborar el monto desde mayo. Las multiplicaciones y redondeos son elaboración propia, obtenidos con la función de la calculadora a partir de esas reglas.</p>
+<p>Para profundizar en el contexto familiar y sus límites, revisa la <a href="/guias/familia-pension-alimenticia-chile">guía de pensión alimenticia y derechos familiares</a> y reproduce tus referencias en la <a href="/calculadoras/calculadora-pension-alimenticia">calculadora de pensión alimenticia</a>.</p>`,
   },
   {
     slug: 'apv-2026-simulador-ahorro-tributario',
