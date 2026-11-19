@@ -98,6 +98,16 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     }));
   });
 
+  it.each([
+    { prices: ['1200', '0'], difference: 120000 },
+    { prices: ['0', '200'], difference: -40000 },
+  ])('acepta precios cero en la comparación: $prices', async ({ prices, difference }) => {
+    const calculate = await renderElectrico(['1000', '10', prices[0], '20', prices[1]]);
+    expect(calculate).toHaveBeenCalled();
+    expect(container.textContent).toContain(String(difference));
+    expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
+  });
+
   it('retira el resultado anterior cuando el dato pasa a ser inválido', async () => {
     // Import diferido: los componentes usan el runtime JSX clásico y necesitan React global.
     const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
