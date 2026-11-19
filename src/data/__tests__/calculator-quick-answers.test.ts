@@ -7,6 +7,10 @@ import { calculators } from '../calculators';
 import { calculatePensionAlimenticia } from '@/lib/calculations/pension-alimenticia';
 import { calculateTrabajoEnFeriado } from '@/lib/calculations/trabajo-en-feriado';
 import { calculatePermisoCirculacion } from '@/lib/calculations/permiso-circulacion';
+import { IVA, REAL_BRASILENO, SOL_PERUANO, PESO_COLOMBIANO, PESO_MEXICANO, BOLIVIANO, PESO_ARGENTINO, PLUSVALIA_INMOBILIARIA } from '@/lib/values/constants';
+import { DERECHO_AD_VALOREM_GENERAL, FUENTE_ADUANAS, UMBRAL_REGIMEN_ESPECIAL_USD } from '@/lib/calculations/compras-internacionales';
+import { calculatePuntajeNemRanking } from '@/lib/calculations/puntaje-nem-ranking';
+import { PAES } from '@/lib/values/educacion';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
@@ -22,9 +26,62 @@ const IDS = [
   'compras-internacionales', 'real-brasileno-clp', 'sol-peruano-clp',
   'trabajo-en-feriado', 'valor-hora-trabajo', 'costo-viaje', 'peso-argentino-clp',
   'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'pension-alimenticia',
+  'conversor-divisas', 'puntaje-ponderado-paes', 'puntaje-nem-ranking',
+  'peso-colombiano-clp', 'peso-mexicano-clp', 'boliviano-clp',
 ];
 
 describe('getQuickAnswer', () => {
+  it.each([
+    ['real-brasileno-clp', REAL_BRASILENO.serie],
+    ['sol-peruano-clp', SOL_PERUANO.serie],
+    ['peso-colombiano-clp', PESO_COLOMBIANO.serie],
+    ['peso-mexicano-clp', PESO_MEXICANO.serie],
+    ['boliviano-clp', BOLIVIANO.serie],
+    ['peso-argentino-clp', PESO_ARGENTINO.serie],
+  ])('%s usa la serie constante y enlaza al Banco Central', (id, serie) => {
+    const qa = getQuickAnswer(id, CTX)!;
+    expect(qa.lead).toContain(serie);
+    expect(qa.lead).toContain('referencial');
+    expect(qa.lead).toContain('comisión');
+    expect(qa.leadParts).toContainEqual({ text: 'Banco Central', href: 'https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx' });
+  });
+
+  it('compras usa umbral, IVA y arancel del módulo y fuentes oficiales', () => {
+    const qa = getQuickAnswer('compras-internacionales', CTX)!;
+    expect(qa.lead).toContain(`US$${UMBRAL_REGIMEN_ESPECIAL_USD}`);
+    expect(qa.lead).toContain(`${IVA.tasa} %`);
+    expect(qa.lead).toContain(`${DERECHO_AD_VALOREM_GENERAL} %`);
+    expect(qa.lead).toContain('origen acreditado');
+    expect(qa.leadParts).toContainEqual({ text: 'Aduanas', href: FUENTE_ADUANAS });
+    expect(qa.leadParts).toContainEqual({ text: 'SII', href: 'https://www.sii.cl/destacados/iva_bienes/index.html' });
+  });
+
+  it('admisión usa las constantes y el ejemplo calculado con la tabla NEM', () => {
+    const nem = calculatePuntajeNemRanking({ grupoNem: 'a', prom1: 6.2, prom2: 6.3, prom3: 6.3, prom4: 6.3 });
+    const qa = getQuickAnswer('puntaje-nem-ranking', CTX)!;
+    expect(qa.lead).toContain(`${nem.puntajeNem} puntos`);
+    expect(qa.lead).toContain(nem.promedioNem.toLocaleString('es-CL'));
+    expect(qa.lead).toContain('no como ranking oficial');
+    expect(getQuickAnswer('puntaje-ponderado-paes', CTX)!.lead).toContain(`${PAES.pesoMinimoM2} %`);
+  });
+
+  it.each(['conversor-divisas', 'plusvalia', 'puntaje-ponderado-paes', 'puntaje-nem-ranking'])('%s conserva el texto concatenado y fuentes oficiales', (id) => {
+    const qa = getQuickAnswer(id, CTX)!;
+    expect(qa.leadParts!.map((p) => typeof p === 'string' ? p : p.text).join('')).toBe(qa.lead);
+    const links = qa.leadParts!.filter((p) => typeof p !== 'string');
+    expect(links.length).toBeGreaterThan(0);
+    for (const link of links) expect(link.href).toMatch(/^https:\/\/(si3.bcentral.cl|www.sii.cl|demre.cl)\//);
+  });
+
+  it('divisas solo anuncia las monedas soportadas y plusvalía conserva sus constantes', () => {
+    const lead = getQuickAnswer('conversor-divisas', CTX)!.lead;
+    expect(lead).toContain('dólares estadounidenses o euros');
+    expect(lead).toContain('divide');
+    expect(lead).toContain('comisiones');
+    const plusvalia = getQuickAnswer('plusvalia', CTX)!.lead;
+    expect(plusvalia).toContain(`${PLUSVALIA_INMOBILIARIA.exencion_uf.toLocaleString('es-CL')} UF`);
+    expect(plusvalia).toContain(`${PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico}%`);
+  });
   it('limita las respuestas a las existentes y las ocho prioritarias', () => {
     for (const calculator of calculators.filter((calculator) => !IDS.includes(calculator.id))) {
       expect(getQuickAnswer(calculator.id, CTX), calculator.id).toBeNull();
