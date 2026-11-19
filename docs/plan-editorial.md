@@ -173,11 +173,11 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 
-**Conteo pendientes:** 21 filas activas, sin las filas marcadas como publicadas.
+**Conteo pendientes:** 19 filas activas, sin las filas marcadas como publicadas.
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 19 |
+| **blog** | 17 |
 | **blog\*** (candidata guía) | 2 (#47, #48) |
 | **guía** | 0 |
 
@@ -186,7 +186,7 @@ Ordenado por **fecha de publicación sugerida**.
 | Subnivel | Uso | IDs |
 |----------|-----|-----|
 | **P2-ventana** | Antes del pico | #10, #11, #13–#15, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
-| **P2-continuo** | Sin deadline | #12, #17, #22, #25–#27, #33, #38, #47, #48, #50 |
+| **P2-continuo** | Sin deadline | #12, #17, #22, #25–#26, #33, #38, #47, #48, #50 |
 
 ---
 
@@ -373,14 +373,14 @@ Núcleo post-dedupe (catálogo A + CAE):
 Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
-Plan integrado operativo (recuento de las tablas tras publicar #21):
-  Filas en la tabla Publicados:  25
-  Filas activas en pendientes:  21
-    blog:                       19
+Plan integrado operativo (recuento de las tablas tras publicar #21, #23 y #27):
+  Filas en la tabla Publicados:  27
+  Filas activas en pendientes:  19
+    blog:                       17
     blog* (candidata guía):      2   (#47, #48)
     guía:                        0
     P1 restante:                 0
-    P2:                         17
+    P2:                         15
     P3:                          4
 ```
 
