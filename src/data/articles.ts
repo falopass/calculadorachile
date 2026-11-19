@@ -6222,7 +6222,7 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
       {
         question: '¿Me pagan vacaciones proporcionales si renuncio?',
         answer:
-          'Sí. El artículo 73 del Código del Trabajo contempla la compensación del feriado al dejar la empresa, también por renuncia. Debe distinguirse el feriado completo pendiente del proporcional generado desde la contratación o la última anualidad.',
+          'Sí, como regla general. El artículo 73 contempla la compensación del feriado al dejar la empresa, también por renuncia. Hay una excepción en el artículo 44: en contratos de treinta días o menos, el feriado y demás derechos proporcionales se entienden incluidos en la remuneración convenida; esa regla no rige para prórrogas que, sumadas al período inicial, excedan de sesenta días. Debe distinguirse además el feriado completo pendiente del proporcional desde la contratación o última anualidad.',
       },
       {
         question: '¿Se calculan con el sueldo líquido o con el bruto?',
@@ -6268,6 +6268,7 @@ ${PT20.filas.map((f) => `<tr><td>${f.nombre} (${formatPercentage(f.comision, 2)}
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">🧮</span><div class="callout__body"><strong>Estima tus vacaciones pendientes</strong><p>Usa la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a> para estimar días y monto. Contrasta el resultado con tus fechas, liquidaciones y los días inhábiles que efectivamente caen en el período.</p></div></aside>
 
 <h2>Qué se paga al terminar el contrato</h2>
+<p><strong>Excepción para contratos breves:</strong> el <a href="https://www.bcn.cl/leychile/Navegar?idNorma=207436&amp;idParte=8511902" target="_blank" rel="noopener">artículo 44 del Código del Trabajo</a> dispone que, en contratos de treinta días o menos, se entiende incluido en la remuneración convenida todo lo que corresponde por feriado y demás derechos proporcionales. Esta regla no rige para prórrogas que, sumadas al período inicial, excedan de sesenta días. Antes de calcular un pago separado al término, verifica si tu contrato cae en esta excepción.</p>
 <p>El artículo 73 distingue dos situaciones: si ya cumpliste los requisitos para el feriado y dejas la empresa, se compensa el descanso pendiente; si el contrato termina antes de completar el año que da derecho al feriado, corresponde la indemnización proporcional. Por eso, si llevas más de un año, no se calcula todo desde cero: separa las anualidades pendientes del período proporcional posterior a la última anualidad.</p>
 <p>La regla no depende de que exista un despido: el mismo artículo habla de dejar de pertenecer a la empresa por cualquier circunstancia. Una renuncia no elimina este concepto. Tampoco debe confundirse con la indemnización por años de servicio: son partidas distintas que conviene revisar por separado en la <a href="/calculadoras/calculadora-finiquito">calculadora de finiquito</a>.</p>
 
