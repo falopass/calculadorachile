@@ -229,6 +229,54 @@ export const AFP = {
   uno: { nombre: 'Uno', comision: 0.46, sis: 1.62 },
 };
 
+/**
+ * Tasa SIS que cotizan las y los trabajadores independientes (Ley 21.133)
+ * en la Operación Renta, por año tributario, sobre la renta imponible
+ * (80% de los honorarios brutos, con tope imponible).
+ *
+ * Fuentes:
+ * - AT2025: SII, ejemplos de cálculo previsional Operación Renta 2025
+ *   (https://www.sii.cl/destacados/renta/2025/ejemplo_pamela_cotizaciones_2025.pdf):
+ *   SIS 1,50% sobre la base imponible.
+ * - AT2026: Superintendencia de Pensiones, ficha SIS
+ *   (https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html):
+ *   "la tasa SIS a considerar para el año tributario 2026 es de 1,49%".
+ *
+ * Distinto de `AFP[].sis` (cargo del empleador en dependientes). Las
+ * cotizaciones mensuales voluntarias de independientes usan la tasa
+ * mensual vigente (1,78% desde ago-2026, misma ficha SP), no esta tabla.
+ */
+export const SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO = {
+  2025: 1.5,
+  2026: 1.49,
+} as const;
+
+export type AnioTributarioSISIndependientes =
+  keyof typeof SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO;
+
+/**
+ * Tasa SIS de independientes para el año tributario indicado. Si el año
+ * aún no tiene tasa publicada, usa la última publicada (`anioAplicado`
+ * lo indica); antes del primer año con tasa usa ese primer año.
+ */
+export function getTasaSISIndependientes(anioTributario?: number): {
+  tasa: number;
+  anioAplicado: AnioTributarioSISIndependientes;
+} {
+  const anios = Object.keys(SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO)
+    .map(Number)
+    .sort((a, b) => a - b) as AnioTributarioSISIndependientes[];
+  const ultimo = anios[anios.length - 1];
+  let anioAplicado = ultimo;
+  if (anioTributario !== undefined && Number.isFinite(anioTributario)) {
+    anioAplicado = anios[0];
+    for (const anio of anios) {
+      if (anio <= anioTributario) anioAplicado = anio;
+    }
+  }
+  return { tasa: SIS_INDEPENDIENTES_POR_ANIO_TRIBUTARIO[anioAplicado], anioAplicado };
+}
+
 export const SALUD = {
   fonasa: {
     tasa: 7,

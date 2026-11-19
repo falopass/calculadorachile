@@ -4582,7 +4582,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     noIndex: true,
     featured: false,
     phase: 3,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-11-18',
     sources: [
       {
         name: 'Superintendencia de Pensiones — afiliados y cotizantes',
@@ -4593,6 +4593,16 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'SII — boletas y cotizaciones',
         url: 'https://www.sii.cl/destacados/boletas_honorarios/',
         note: 'Retenciones y cotizaciones de independientes',
+      },
+      {
+        name: 'Superintendencia de Pensiones — Seguro de Invalidez y Sobrevivencia',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html',
+        note: 'Tasa SIS de independientes por año tributario (1,49% AT2026)',
+      },
+      {
+        name: 'SII — ejemplo de cálculo previsional Operación Renta 2025',
+        url: 'https://www.sii.cl/destacados/renta/2025/ejemplo_pamela_cotizaciones_2025.pdf',
+        note: 'SIS 1,50% sobre la base imponible (AT2025)',
       },
     ],
     keywords: [
@@ -4640,7 +4650,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuánto cotiza un independiente?',
         answer:
-          'Los independientes cotizan sobre el 80% de su renta bruta. AFP (10% + comisión), salud (7%) y la distribución legal vigente para SIS y seguro de accidentes. El total depende del año del calendario de cotizaciones.',
+          'Los independientes cotizan sobre el 80% de su renta bruta, con tope imponible: AFP (10% + comisión), salud (7%), seguro de accidentes y SIS. La tasa SIS depende del año tributario: 1,50% en el AT2025 y 1,49% en el AT2026 según la Superintendencia de Pensiones; la calculadora usa la última tasa publicada.',
       },
     ],
   },
