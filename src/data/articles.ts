@@ -30,6 +30,7 @@ import {
 import { buildCvlistoBuscarTrabajoUrl, buildCvlistoContentUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
+import { articuloImpuestoSegundaCategoria } from './article-impuesto-segunda-categoria';
 import { ARTICULOS_2027 } from './articles-2027';
 
 /** Tabla HTML del Fondo de Cesantía Solidario generada desde la constante (E-021). */
@@ -209,6 +210,7 @@ const PT20 = partTime20();
 export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es de <strong>${formatCLP(INGRESO_MINIMO.mensual)} brutos al mes</strong> desde el ${formatFechaLarga(INGRESO_MINIMO.vigente_desde)} (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Ley ${INGRESO_MINIMO.ley}, Dirección del Trabajo</a>) y es el mismo monto para cada mes hasta el próximo reajuste. Con Fonasa y contrato indefinido quedan entre <strong>${liquidoSueldoMinimo('provida')}</strong> y <strong>${liquidoSueldoMinimo('uno')}</strong> líquidos, según tu AFP.</p>`;
 
 const articleCatalog: ArticleDraft[] = [
+  articuloImpuestoSegundaCategoria,
   {
     slug: 'indemnizacion-anos-servicio-tope-90-uf-2026',
     title: 'Indemnización por años de servicio: cómo se aplica el tope de 90 UF',

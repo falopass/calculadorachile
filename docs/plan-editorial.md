@@ -102,6 +102,7 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | 2026-11-18 | impuestos | iva, ppm, boleta-honorarios |
+| 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | 2026-11-18 | impuestos | impuesto-segunda-categoria, sueldo-liquido |
 | 28 | blog | Indemnización por años de servicio: tope de 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | 2026-11-18 | laboral | indemnizacion-anos-servicio, finiquito |
 | 49 | blog | Cómo cambiarse de AFP en Chile 2026: pasos y plazos | `cambio-afp-2026-como-hacerlo` | 2026-11-18 | pensión | comparador-afp |
 
@@ -138,7 +139,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 17 | blog | UF y UTM: convertir y usos 2026 | `uf-utm-convertir-chile-2026-usos` | satélite `uf-utm-indicadores` | conversiones | 2026-09-25 | continuo | **P2-continuo** |
 | ~~18~~ | blog | ~~Aporte Familiar Permanente 2026 (9 meses)~~ | ~~`aporte-familiar-permanente-2026-cobro-plazo`~~ | pageview | familia | ~~2026-09-29~~ | oct–nov | ✅ |
 | 19 | blog | Costo empleado PYME + cotización empleador | `costo-empleado-pyme-2026-cotizacion-empleador` | DR[19] · satélite pymes | empresas | 2026-10-02 | oct | **P2-ventana** |
-| 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | satélite sueldo | impuestos | 2026-10-06 | continuo | **P2-continuo** |
+| ~~21~~ | blog | ~~Impuesto 2.ª categoría 2026: ejemplo~~ | ~~`impuesto-segunda-categoria-2026-ejemplo`~~ | publicado 2026-11-18 | impuestos | ~~2026-10-06~~ | continuo | ✅ |
 | 22 | blog | Comisiones AFP 2026: comparar descuento | `comisiones-afp-2026-comparar-descuento` | DR[14] · satélite AFP | pensión | 2026-10-09 | continuo | **P2-continuo** |
 | 23 | blog | APV 2026: ahorro y efecto tributario | `apv-2026-simulador-ahorro-tributario` | DR[17] | pensión | 2026-10-13 | oct–abr | **P2-ventana** |
 | 50 | blog | Reforma tributaria Ley 21.713 (2026) | `reforma-tributaria-ley-21713-2026-personas-pymes` | DR[23] · **no** mega-guía | impuestos | 2026-10-14 | 2026 | **P2-continuo** |
@@ -170,11 +171,11 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 
-**Conteo pendientes:** 22 filas activas, sin las filas marcadas como publicadas.
+**Conteo pendientes:** 21 filas activas, sin las filas marcadas como publicadas.
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 20 |
+| **blog** | 19 |
 | **blog\*** (candidata guía) | 2 (#47, #48) |
 | **guía** | 0 |
 
@@ -183,7 +184,7 @@ Ordenado por **fecha de publicación sugerida**.
 | Subnivel | Uso | IDs |
 |----------|-----|-----|
 | **P2-ventana** | Antes del pico | #10, #11, #13–#15, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
-| **P2-continuo** | Sin deadline | #12, #17, #21, #22, #25–#27, #33, #38, #47, #48, #50 |
+| **P2-continuo** | Sin deadline | #12, #17, #22, #25–#27, #33, #38, #47, #48, #50 |
 
 ---
 
@@ -370,14 +371,14 @@ Núcleo post-dedupe (catálogo A + CAE):
 Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
-Plan integrado operativo (recuento de las tablas tras publicar #49):
-  Filas en la tabla Publicados:  24
-  Filas activas en pendientes:  22
-    blog:                       20
+Plan integrado operativo (recuento de las tablas tras publicar #21):
+  Filas en la tabla Publicados:  25
+  Filas activas en pendientes:  21
+    blog:                       19
     blog* (candidata guía):      2   (#47, #48)
     guía:                        0
     P1 restante:                 0
-    P2:                         18
+    P2:                         17
     P3:                          4
 ```
 
