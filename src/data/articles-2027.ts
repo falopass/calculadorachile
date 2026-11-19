@@ -56,6 +56,156 @@ const ext = (url: string, texto: string) =>
   `<a href="${url}" target="_blank" rel="noopener">${texto}</a>`;
 
 export const ARTICULOS_2027: Article[] = [
+  // Plan editorial #24
+  {
+    slug: 'cotizacion-independientes-2026-boleta',
+    title: 'Cotización de independientes: Operación Renta 2027 y retención del 16%',
+    description:
+      'Las boletas de 2026 financian cotizaciones en la Operación Renta 2027. Base del 80%, cobertura parcial del 90%, seguros, exenciones y diferencias con la retención del 16% de 2027.',
+    date: '2026-11-19',
+    updatedAt: '2026-11-19',
+    category: 'pension',
+    readingTime: 12,
+    relatedGuia: 'preparacion-operacion-renta-2027-checklist',
+    keywords: [
+      'cotización independientes 2026',
+      'cotizaciones honorarios Operación Renta 2027',
+      'boletas retención 16% 2027',
+      'cobertura parcial independientes 2027',
+      'Ley 21.133',
+    ],
+    relatedCalculators: ['calculadora-boleta-honorarios', 'calculadora-cotizacion-independientes'],
+    sources: [
+      {
+        label: 'SII — calendario de retención de boletas de honorarios',
+        url: 'https://www.sii.cl/destacados/boletas_honorarios/',
+      },
+      {
+        label: 'Subsecretaría de Previsión Social — Ley 21.133 y coberturas',
+        url: 'https://previsionsocial.gob.cl/wp-content/uploads/2026/05/05-FICHA-QUE-DICE-LA-LEY.pdf',
+      },
+      {
+        label: 'Subsecretaría de Previsión Social — preguntas frecuentes de honorarios',
+        url: 'https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/',
+      },
+      {
+        label: 'SII — gradualidad: 90% de la base en el año tributario 2027',
+        url: 'https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_8401.htm',
+      },
+      {
+        label: 'SP — cobertura y tasas del SIS para independientes',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html',
+      },
+      {
+        label: 'SP — tope imponible definitivo de 2026',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-16921.html',
+      },
+      {
+        label: 'SP — base anual y límite vigente al cierre del año de las rentas',
+        url: 'https://www.spensiones.cl/portal/institucional/594/w3-article-10107.html',
+      },
+      {
+        label: 'SP — Compendio: independientes y cotización voluntaria de la Ley 21.735',
+        url: 'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3614.html',
+      },
+      {
+        label: 'SP — NCG 350: Seguro Social Previsional e independientes',
+        url: 'https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000350.pdf',
+      },
+      {
+        label: 'SII — guía práctica: salud, ahorro previsional y seguros',
+        url: 'https://www.sii.cl/servicios_online/renta/2024/guia_practica.pdf',
+      },
+      {
+        label: 'Consejo Consultivo Previsional — orden de pago y saldos insolutos',
+        url: 'https://previsionsocial.gob.cl/wp-content/uploads/2026/02/Documento_Independientes_CCP_VF.pdf',
+      },
+    ],
+    content: `
+<p>Si emites boletas de honorarios, la retención no es una devolución asegurada: también financia tu seguridad social. En abril de 2027 se liquidarán los ingresos de 2026, cuyas boletas llevan una retención del <strong>15,25%</strong>. El <strong>16%</strong> corresponde a las boletas emitidas desde el 1 de enero de 2027 y se conciliará en la Operación Renta 2028. Confundir esos dos calendarios puede dejarte esperando dinero que se destinará a cotizaciones.</p>
+
+<p>Esta explicación revisa la obligación de cotizar por honorarios, los seguros incluidos y la elección de cobertura para preparar la Operación Renta 2027. <strong>Fecha de corte: 19 de noviembre de 2026, Chile.</strong> Se apoya en documentos del SII, la Superintendencia de Pensiones y la Subsecretaría de Previsión Social. No adelanta fechas específicas de vencimiento o devolución del Formulario 22 de 2027: no se verificó un calendario oficial de ese proceso en las fuentes consultadas.</p>
+
+<h2>Dos años comerciales, dos declaraciones distintas</h2>
+
+<p>El ${ext('https://www.sii.cl/destacados/boletas_honorarios/', 'calendario del SII')} distingue el año en que se emite la boleta del año en que se presenta la declaración anual. La tasa de retención sube de 15,25% en 2026 a 16% en 2027. Ese porcentaje se aplica al honorario bruto de la boleta, no a la base previsional reducida. Tampoco representa una tasa única de AFP, salud y seguros: es una retención que después entra en la liquidación tributaria y previsional.</p>
+
+<p>Por eso, al revisar tu propuesta de renta de abril de 2027 debes buscar los honorarios percibidos durante 2026 y sus antecedentes, no aplicarles retroactivamente el 16%. Para presupuestar los pagos que recibirás durante 2027, en cambio, sí corresponde considerar la nueva retención. La <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> permite comparar bruto, retención y líquido seleccionando el año de emisión. Ese líquido describe lo que recibes por la boleta, no una pensión futura ni una devolución garantizada.</p>
+
+<h2>Quién debe cotizar y qué exenciones conviene revisar</h2>
+
+<p>La Ley 21.133 organiza la incorporación de quienes trabajan a honorarios a los regímenes de seguridad social. La ${ext('https://previsionsocial.gob.cl/ley-honorarios/preguntas-frecuentes/', 'Subsecretaría de Previsión Social')} señala como obligados a quienes emiten boletas por <strong>cinco o más ingresos mínimos mensuales en el año calendario</strong>, cumplen la condición de edad y no están en las situaciones de excepción que describe. No basta mirar una boleta aislada o un mes sin actividad: hay que reconstruir el ingreso anual.</p>
+
+<p>La regla etaria tiene una fecha fija: están exentos por este concepto los hombres que tenían 55 años o más y las mujeres que tenían 50 años o más <strong>al 1 de enero de 2018</strong>. Cumplir esas edades ahora no crea automáticamente una exención. Es una diferencia decisiva para quien comienza a emitir boletas después de haber trabajado con contrato.</p>
+
+<p>También deben revisarse las situaciones de personas pensionadas y de afiliación a los regímenes del IPS, Dipreca o Capredena según las condiciones oficiales. Si percibes honorarios bajo el umbral anual, la Subsecretaría contempla cotización voluntaria. No publicamos un umbral en pesos para las rentas de 2026: antes de decidir si estás exento debes contrastar el ingreso mínimo aplicable al cierre del año y la propuesta del SII. Una exención de la obligación anual no equivale a tener cobertura médica o de accidentes sin cotizar.</p>
+
+<p>Tener contrato y emitir boletas al mismo tiempo tampoco te libera por sí solo. El SII considera las remuneraciones y los honorarios para determinar cuánto espacio queda bajo el límite imponible anual. Si ya cotizaste como dependiente hasta el máximo, la situación es distinta de la de alguien que trabajó con contrato solo algunos meses o por un sueldo menor al tope. Guarda los certificados de remuneraciones y cotizaciones: sirven para revisar esa combinación.</p>
+
+<h2>La base es el 80% de los honorarios, con un límite anual</h2>
+
+<p>La base imponible previsional corresponde al <strong>80% de los honorarios brutos anuales</strong>. No es el dinero líquido que quedó después de retener ni el saldo de tu cuenta bancaria. Tampoco se reemplaza por el gasto que declaras para determinar el impuesto a la renta: la base de cotizaciones tiene su propia regla. La ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-10107.html', 'Superintendencia de Pensiones')} explica que el límite superior es el tope imponible mensual multiplicado por doce, vigente al 31 de diciembre del año al que corresponden las rentas.</p>
+
+<p>Para 2026, la SP publicó un ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-16921.html', 'tope definitivo de 90 UF mensuales')} para AFP, salud y accidentes del trabajo. Su equivalente anual es <strong>1.080 UF</strong>, resultado de multiplicar 90 por doce. En la Operación Renta 2027 importan las rentas de 2026 y el límite de ese año; no corresponde sustituirlo automáticamente por un eventual tope de 2027. No fijamos aquí su conversión final a pesos porque la UF de cierre de 2026 aún es futura a la fecha de esta revisión.</p>
+
+<p>Si tienes ingresos altos o mezcla de sueldo y honorarios, no multipliques simplemente tu boleta por todas las tasas. Primero debes revisar la base anual y cuánto del límite consumieron las remuneraciones. La aplicación del tope evita tratar como imponible una parte de la renta que ya excede el máximo legal; el detalle final debe contrastarse con la información previsional utilizada por el SII.</p>
+
+<h2>Qué financian las cotizaciones: no es solo AFP y Fonasa</h2>
+
+<p>El ahorro para pensión contempla el <strong>10% de la renta imponible</strong> destinado a la cuenta individual, más la comisión de la AFP correspondiente. La salud considera el <strong>7% legal</strong> para Fonasa o Isapre. La ${ext('https://www.sii.cl/servicios_online/renta/2024/guia_practica.pdf', 'guía práctica del SII')} explica ambos componentes; sus montos, tasas de seguros y ejemplos de años anteriores no deben trasladarse como valores vigentes a 2027. Si el precio de tu plan de Isapre supera la cotización que se entera, la diferencia debe pagarse directamente a la institución.</p>
+
+<p>El <strong>Seguro de Invalidez y Sobrevivencia (SIS) sí incluye a independientes que cotizan</strong>. No debe confundirse con el ahorro para vejez ni omitirse porque en una liquidación de sueldo dependiente lo financia el empleador. La ${ext('https://www.spensiones.cl/portal/institucional/594/w3-article-10100.html', 'SP distingue expresamente las tasas por período y modalidad')}: informa 1,78% desde agosto de 2026 para la cotización vigente, pero señala 1,49% para independientes que cotizan mediante retención en el año tributario 2026. Esa diferencia impide presentar el 1,78% como tasa anual ya confirmada del F22 de 2027.</p>
+
+<p>También están el <strong>Seguro de Accidentes del Trabajo y Enfermedades Profesionales (ATEP), de la Ley 16.744</strong>, y el <strong>Seguro de Acompañamiento de Niños y Niñas (SANNA)</strong>. No usamos una tasa única para todos estos seguros: el monto debe revisarse según las reglas y antecedentes de la institución correspondiente. La ${ext('https://previsionsocial.gob.cl/wp-content/uploads/2026/05/05-FICHA-QUE-DICE-LA-LEY.pdf', 'ficha oficial de la Ley 21.133')} enumera SIS, ATEP, SANNA, salud y pensiones. Un presupuesto que solo sume AFP y salud deja fuera prestaciones y obligaciones reales.</p>
+
+<h2>Seguro Social de la reforma: no sumar el aporte patronal por defecto</h2>
+
+<p>La Ley 21.735 no permite copiar sin más el aporte del empleador a una persona que emite boletas. El ${ext('https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3614.html', 'Compendio de la SP')} distingue al independiente obligado de quien cotiza voluntariamente e indica que el primero puede enterar voluntariamente las cotizaciones del artículo 15 de esa ley. Eso no transforma el SIS obligatorio en un seguro opcional.</p>
+
+<p>La ${ext('https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000350.pdf', 'Norma de Carácter General 350 de la SP')} desarrolla esa distinción y advierte que existen además reglas obligatorias del artículo 17 y del artículo cuadragésimo sexto transitorio. Por tanto, no corresponde afirmar que toda disposición de la reforma es voluntaria ni agregar al ejemplo el escalón patronal de trabajadores dependientes como si fuera una obligación uniforme por honorarios. Antes de hacer un aporte adicional, revisa con tu AFP o el IPS la modalidad y el período aplicable; aquí no se anticipa una liquidación individual bajo esas reglas.</p>
+
+<h2>Cobertura parcial en Renta 2027: el 90% de otra base, no del bruto</h2>
+
+<p>La opción de cobertura parcial sigue contemplada para el año tributario 2027. La ${ext('https://www.sii.cl/preguntas_frecuentes/declaracion_renta/001_140_8401.htm', 'tabla de gradualidad del SII')} establece que la base optativa equivale al <strong>90% de la base imponible total</strong>. Para salud y pensiones eso significa aplicar el 90% sobre el 80% de los honorarios, respetando los límites que correspondan. No significa cotizar sobre el 90% de cada boleta ni recibir de vuelta el 10% restante de la retención.</p>
+
+<p>La reducción no se extiende a todo: <strong>SIS, ATEP y SANNA se cotizan con cobertura completa</strong>, según la ficha de Previsión Social. En cambio, una base menor para salud puede reducir los subsidios por incapacidad laboral y maternales. La comparación no debe limitarse a cuánto dinero queda disponible después de declarar. También hay que mirar con qué renta se calcularían las prestaciones si necesitas una licencia.</p>
+
+<p>La gradualidad llega al 100% en el año tributario 2028. En ese punto deja de existir una base reducida por esta opción. Antes de aceptar la propuesta de 2027, compara los detalles de ambas alternativas y no asumas que la diferencia de devolución será igual a la del año anterior: cambian la retención acumulada, la fracción de base y tus propios ingresos.</p>
+
+<h2>Cómo pasan las retenciones del F22 a las instituciones</h2>
+
+<p>El SII determina las cotizaciones con los antecedentes tributarios y la información de las instituciones previsionales. La TGR realiza el pago a las entidades correspondientes con cargo al monto disponible para devolución. No eres tú quien debe repartir manualmente cada retención entre AFP, salud y mutual al emitir una boleta. Al declarar el Formulario 22 debes revisar los honorarios, las retenciones informadas, las instituciones y la opción de cobertura.</p>
+
+<p>Según la regla anual descrita por la Subsecretaría, las cotizaciones pagadas en la Operación Renta 2027 dan cobertura desde el <strong>1 de julio de 2027 hasta el 30 de junio de 2028</strong>. La SP también describe ese período para el SIS. Es una proyección de la regla vigente, no un calendario de devolución del SII. El ahorro para pensiones, por su parte, se asocia al año en que se generaron las rentas.</p>
+
+<p>El orden de aplicación importa si los recursos son limitados. El ${ext('https://previsionsocial.gob.cl/wp-content/uploads/2026/02/Documento_Independientes_CCP_VF.pdf', 'Consejo Consultivo Previsional')} describe esta prioridad: SIS; accidentes del trabajo y enfermedades profesionales; SANNA; salud; pensiones y comisión de administración; y saldos insolutos de pensiones anteriores. El documento explica que durante la gradualidad pueden generarse saldos insolutos de pensiones. Por eso, una retención insuficiente no autoriza a concluir que todo quedó pagado ni que todos los seguros desaparecen automáticamente.</p>
+
+<p>Si el cálculo muestra diferencias, separa el impuesto anual del saldo previsional. Revisa el comprobante de cotizaciones y consulta con el SII y tu AFP cómo se determinó y regulariza el saldo específico; no lo reemplaces por un pago mensual supuesto ni confundas ese saldo con el precio pendiente de la Isapre. La Subsecretaría advierte que las cotizaciones mensuales voluntarias no se descuentan automáticamente de la obligación anual por honorarios. Conserva los respaldos antes de pagar dos veces el mismo concepto por una interpretación equivocada.</p>
+
+<h2>Ejemplo hipotético: honorarios brutos anuales de $12.000.000</h2>
+
+<p>Supongamos que una persona percibe <strong>$12.000.000 brutos durante 2026</strong>, no tiene remuneraciones dependientes, no está exenta y todos sus honorarios llevan la retención del 15,25%. Es un ejercicio aritmético, sin reajustes ni una propuesta real del SII. El monto está por debajo del tope y permite separar las bases sin necesitar una UF de cierre que aún no conocemos.</p>
+
+<ul>
+<li>Retención nominal acumulada: $12.000.000 × 15,25% = <strong>$1.830.000</strong>.</li>
+<li>Base imponible total: $12.000.000 × 80% = <strong>$9.600.000</strong>.</li>
+<li>Base reducida para salud y pensiones en Renta 2027: $9.600.000 × 90% = <strong>$8.640.000</strong>.</li>
+<li>Salud legal sobre base total: $9.600.000 × 7% = <strong>$672.000</strong>; sobre base parcial: $8.640.000 × 7% = <strong>$604.800</strong>.</li>
+<li>Ahorro de pensión, antes de comisión AFP: <strong>$960.000</strong> con base total o <strong>$864.000</strong> con base parcial.</li>
+</ul>
+
+<p>Faltan la comisión AFP, SIS, ATEP y SANNA; los seguros conservan la base completa aunque se elija cobertura parcial. Para SIS debe aplicarse la tasa anual que corresponda según la SP al proceso respectivo, no trasladar automáticamente una tasa mensual. Tampoco hemos determinado el impuesto anual ni otros créditos. En consecuencia, <strong>$1.830.000 no es una devolución proyectada</strong> y la resta entre retención, salud y ahorro no es un saldo final disponible.</p>
+
+<p>La <a href="/calculadoras/calculadora-cotizacion-independientes">calculadora de cotización de independientes</a> sirve como apoyo orientativo, no como liquidación del F22. No uses su total como sustituto del cálculo oficial de SIS, SANNA ni de la opción parcial: revisa el alcance y cada componente. Para organizar documentos y el resto de tus ingresos, continúa con la <a href="/guias/preparacion-operacion-renta-2027-checklist">guía de preparación de la Operación Renta 2027</a>.</p>
+
+<h2>Qué revisar antes de aceptar la propuesta</h2>
+
+<p>Reúne el resumen anual de boletas, certificados de remuneraciones si trabajaste con contrato y antecedentes de AFP, Fonasa o Isapre y organismo de seguridad laboral. Al abrir la propuesta, contrasta el bruto anual y las retenciones antes de mirar la devolución. Luego revisa la base imponible, el tope utilizado y la opción de cobertura. Si hay una exención, asegúrate de que corresponda a tu situación y no a una edad interpretada con la fecha equivocada.</p>
+
+<p>Después del proceso, verifica la recepción de los pagos en las instituciones: la declaración y la cartola previsional no son el mismo documento. Si empiezas a emitir boletas en 2027, tampoco asumas cobertura inmediata por la mera retención de la primera boleta. La protección anual tiene un desfase; la Subsecretaría contempla pagos voluntarios para cubrir el período de inicio. El siguiente paso útil es revisar tu cobertura efectiva, no gastar una devolución que todavía no ha sido determinada.</p>
+
+<p><em>Contenido informativo: no reemplaza la declaración del SII ni asesoría tributaria o previsional individual. Los valores futuros, la tasa anual SIS aplicable a Renta 2027 y el calendario específico del proceso deben contrastarse con las publicaciones oficiales correspondientes.</em></p>`,
+  },
   // Plan editorial #42
   {
     slug: 'sueldo-minimo-2027-reajuste-simular-liquido',
