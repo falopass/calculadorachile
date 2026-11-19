@@ -85,6 +85,37 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     expect(container.textContent).toContain('El valor debe ser mayor a 0');
   });
 
+  it('permite activar líquido a bruto desde el primer control visible', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const sueldo = getCalculatorBySlug('calculadora-sueldo-liquido')!;
+    const calcular = vi.fn((await loadCalculationFn('sueldo-liquido'))!);
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, { calculator: sueldo, calculateFn: calcular }));
+    });
+    const opcion = Array.from(container.querySelectorAll('label')).find((label) =>
+      label.textContent === 'Calcular sueldo bruto desde el líquido',
+    )!;
+    expect(opcion.closest('details')).toBeNull();
+    await act(async () => {
+      opcion.parentElement!.querySelector('button')!.click();
+      setInputValue(container.querySelector('input')!, '1000000');
+      const selects = container.querySelectorAll('select');
+      selects[0].value = 'habitat';
+      selects[0].dispatchEvent(new Event('change', { bubbles: true }));
+      selects[1].value = 'fonasa';
+      selects[1].dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await act(async () => { vi.advanceTimersByTime(500); });
+    const resultados = calcular.mock.results.at(-1)!.value as CalculatorResult[];
+    const bruto = resultados.find((r) => r.highlight)!;
+    expect(bruto.label).toBe('Sueldo bruto necesario');
+    expect(bruto.value).toBeGreaterThan(1_000_000);
+    expect(container.textContent).toContain(String(bruto.value));
+    await escribirPrecio('0');
+    expect(container.textContent).not.toContain(String(bruto.value));
+    expect(container.textContent).toContain('El valor debe ser mayor a 0');
+  });
+
   it('muestra el calendario durante el ingreso de datos sin guardar borradores', async () => {
     const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
     const prenatal = getCalculatorBySlug('calculadora-prenatal-postnatal')!;
