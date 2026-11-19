@@ -15,14 +15,14 @@ describe('calendario SII de honorarios', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2027-01-01T02:59:59Z'));
     expect(getRetencionHonorarios()).toBe(15.25);
-    expect(calculatePPM({ ingresosBrutosAnuales: 1_000_000, actividad: 'profesional', gastosPresuntos: 0 }).tasaPPM).toBe(15.25);
+    expect(calculatePPM({ ingresosBrutosAnuales: 1_000_000, actividad: 'profesional' }).tasaPPM).toBe(15.25);
     vi.setSystemTime(new Date('2027-01-01T03:00:00Z'));
     expect(getRetencionHonorarios()).toBe(16);
     expect(contextoHonorarios().anio).toBe(2027);
     const boleta = calculateBoletaHonorarios({ montoBruto: 1_000_000 });
     expect(boleta.retencion).toBe(160_000);
     expect(boleta.montoLiquido).toBe(840_000);
-    const ppm = calculatePPM({ ingresosBrutosAnuales: 1_000_000, actividad: 'profesional', gastosPresuntos: 0 });
+    const ppm = calculatePPM({ ingresosBrutosAnuales: 1_000_000, actividad: 'profesional' });
     expect(ppm.tasaPPM).toBe(16);
     expect(ppm.ppmAnual).toBe(160_000);
     const renta = calculateOperacionRenta({ ingresosAnuales: 1_000_000, gastosAnuales: 0, cotizacionesObligatorias: 0 });
