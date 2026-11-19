@@ -70,6 +70,34 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
     });
   }
 
+  async function renderElectrico(values: string[]) {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const ev = getCalculatorBySlug('auto-electrico-vs-bencina')!;
+    const calculate = vi.fn((await loadCalculationFn(ev.id))!);
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, { calculator: ev, calculateFn: calculate }));
+    });
+    for (const [index, value] of values.entries()) {
+      const input = container.querySelector<HTMLInputElement>(`input[placeholder="${ev.inputs[index].placeholder}"]`)!;
+      await act(async () => {
+        setInputValue(input, value);
+        vi.advanceTimersByTime(500);
+      });
+    }
+    return calculate;
+  }
+
+  it.each(['.', ','])('acepta decimales con %s en la comparación de autos', async (separator) => {
+    const calculate = await renderElectrico(['1000.5', '12.5', '1200.5', '18.5', '200.5'].map(value => value.replace('.', separator)));
+    expect(calculate).toHaveBeenLastCalledWith(expect.objectContaining({
+      kmMensuales: 1000.5,
+      rendimientoKmL: 12.5,
+      precioBencina: 1200.5,
+      consumoKwh100km: 18.5,
+      precioKwh: 200.5,
+    }));
+  });
+
   it('retira el resultado anterior cuando el dato pasa a ser inválido', async () => {
     // Import diferido: los componentes usan el runtime JSX clásico y necesitan React global.
     const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');

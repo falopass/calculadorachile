@@ -249,6 +249,7 @@ function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
 
 function inputNeedsDecimal(input: CalculatorInputType): boolean {
   return (
+    ['kmMensuales', 'rendimientoKmL', 'precioBencina', 'consumoKwh100km', 'precioKwh'].includes(input.id) ||
     input.unit === 'percent' ||
     input.unit === 'UF' ||
     input.unit === 'UTM' ||
