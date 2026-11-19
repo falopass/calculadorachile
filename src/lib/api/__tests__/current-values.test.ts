@@ -1,11 +1,66 @@
-import { describe, it, expect } from 'vitest';
-import { fechaIndicadorSantiago, normalizeIndicatorDate } from '../current-values';
+import { PHASE_PRODUCTION_BUILD, PHASE_PRODUCTION_SERVER } from 'next/constants';
+import { afterEach, describe, it, expect, vi } from 'vitest';
+import { fechaIndicadorSantiago, getCurrentValues, normalizeIndicatorDate } from '../current-values';
+import { fetchAllCurrentValues } from '../bcentral';
+import { fetchMindicadorValores } from '../mindicador';
+import { FALLBACK_VALUES } from '@/lib/values/fallback';
 import {
   isLiveValueFresh,
   buildLiveValueTitle,
 } from '@/lib/seo/live-value-title';
 
 const NOW = new Date('2026-09-23T16:00:00.000Z'); // 23-09 12:00 Santiago
+
+vi.mock('../bcentral', () => ({ fetchAllCurrentValues: vi.fn() }));
+vi.mock('../mindicador', () => ({ fetchMindicadorValores: vi.fn() }));
+
+describe('getCurrentValues', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetAllMocks();
+  });
+
+  it('usa el snapshot sin consultar proveedores durante el prerender del build', async () => {
+    vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_BUILD);
+
+    const current = await getCurrentValues();
+
+    expect(fetchAllCurrentValues).not.toHaveBeenCalled();
+    expect(fetchMindicadorValores).not.toHaveBeenCalled();
+    expect(current.values).toMatchObject({
+      uf: FALLBACK_VALUES.uf,
+      utm: FALLBACK_VALUES.utm,
+      dolar: FALLBACK_VALUES.dolar,
+      euro: FALLBACK_VALUES.euro,
+      source: 'fallback',
+    });
+    expect(current.indicatorSources).toEqual({ uf: 'fallback', utm: 'fallback', dolar: 'fallback' });
+  });
+
+  it('conserva los proveedores y su prioridad al ejecutar el servidor', async () => {
+    vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_SERVER);
+    vi.mocked(fetchAllCurrentValues).mockResolvedValue({
+      uf: 40999.93,
+      utm: null,
+      dolar: { observado: null, venta: null },
+      euro: null,
+      fechas: { uf: '2026-09-23', utm: null, dolar: null },
+    });
+    vi.mocked(fetchMindicadorValores).mockResolvedValue({
+      uf: 40901.94,
+      utm: 71721,
+      dolar: null,
+      euro: null,
+      asOf: NOW.toISOString(),
+      fechas: { uf: NOW.toISOString(), utm: NOW.toISOString(), dolar: null },
+    });
+
+    const current = await getCurrentValues();
+
+    expect(current.values).toMatchObject({ uf: 40999.93, utm: 71721, dolar: FALLBACK_VALUES.dolar });
+    expect(current.indicatorSources).toEqual({ uf: 'bcentral', utm: 'mindicador', dolar: 'fallback' });
+  });
+});
 
 describe('normalizeIndicatorDate', () => {
   it('fecha BCentral "solo día" → mediodía UTC del mismo día', () => {
