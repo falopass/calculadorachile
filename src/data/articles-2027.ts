@@ -535,6 +535,7 @@ export const ARTICULOS_2027: Article[] = [
 </ul>
 
 <h2 id="dividir">Cómo dividir el gasto entre quienes viajan</h2>
+<p>Si el viaje cruza la frontera, compara el presupuesto con los conversores de <a href="/calculadoras/peso-argentino-a-chileno">peso argentino</a>, <a href="/calculadoras/boliviano-a-peso-chileno">boliviano</a> y <a href="/calculadoras/sol-peruano-a-peso-chileno">sol peruano</a>. Para otros destinos de la región también puedes convertir <a href="/calculadoras/real-brasileno-a-peso-chileno">reales brasileños</a>, <a href="/calculadoras/peso-colombiano-a-peso-chileno">pesos colombianos</a> o <a href="/calculadoras/peso-mexicano-a-peso-chileno">pesos mexicanos</a>. Son referencias de cambio, no precios finales ni cotizaciones de casas de cambio.</p>
 
 <p>La forma más simple es dividir bencina y peajes en partes iguales. Si alguien se suma solo a la ida o se baja antes, una alternativa justa es dividir por kilómetros: el costo por kilómetro del ejemplo (${formatCLP(VIAJE.costoPorKm)}) multiplicado por los kilómetros que hizo cada persona, repartido entre quienes iban en el auto en ese tramo. La <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje</a> entrega el costo por pasajero y por kilómetro.</p>`,
   },
@@ -646,6 +647,7 @@ export const ARTICULOS_2027: Article[] = [
 <p>Para hacer la cuenta con tu propio carrito, usa la <a href="/calculadoras/calculadora-compras-internacionales">calculadora de impuestos de compras internacionales</a>. Si solo quieres separar el IVA de un precio, la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> lo hace en ambos sentidos.</p>
 
 <h2 id="navidad">Checklist para compras de Navidad</h2>
+<p>Si comparas precios publicados en monedas latinoamericanas, conviértelos a pesos chilenos con los conversores de <a href="/calculadoras/peso-colombiano-a-peso-chileno">peso colombiano</a>, <a href="/calculadoras/peso-mexicano-a-peso-chileno">peso mexicano</a>, <a href="/calculadoras/boliviano-a-peso-chileno">boliviano</a>, <a href="/calculadoras/peso-argentino-a-chileno">peso argentino</a>, <a href="/calculadoras/real-brasileno-a-peso-chileno">real brasileño</a> o <a href="/calculadoras/sol-peruano-a-peso-chileno">sol peruano</a>. La conversión es referencial: no incluye comisiones de pago, envío ni impuestos de importación.</p>
 
 <ul>
 <li><strong>Revisa si la tienda está en la nómina del SII.</strong> Si está, el IVA va en el total y el paquete no debería tener cobros extra de impuestos al llegar.</li>
