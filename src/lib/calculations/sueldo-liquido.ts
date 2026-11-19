@@ -13,6 +13,7 @@ import {
   UF,
   MUTUAL,
   getEscalonSeguroSocialPrevisional,
+  getSisEmpleadorSeparado,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
@@ -207,11 +208,10 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
   const baseEmpleador = Math.min(totalIngresosImponibles, tope);
   // Ley 21.735: desde remuneraciones de ago-2026 el escalón (3,5%)
   // ya incluye el financiamiento del SIS; antes el SIS se paga aparte.
-  const escalonReforma = getEscalonSeguroSocialPrevisional(input.fecha ?? new Date());
+  const fechaRemuneracion = input.fecha ?? new Date();
+  const escalonReforma = getEscalonSeguroSocialPrevisional(fechaRemuneracion);
   const reformaPrevisional = baseEmpleador * (escalonReforma.tasa / 100);
-  const sisEmpleador = escalonReforma.incluyeSIS
-    ? 0
-    : baseEmpleador * (AFP[afp].sis / 100);
+  const sisEmpleador = baseEmpleador * (getSisEmpleadorSeparado(fechaRemuneracion) / 100);
   const cesantiaEmpleador =
     Math.min(totalIngresosImponibles, topeCLP(TOPE_IMPOSITIVO.seguro_cesantia, valorUF)) *
     ((contratoIndefinido
@@ -247,9 +247,7 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
       reformaPrevisional: Math.round(reformaPrevisional),
       tasaReforma: escalonReforma.tasa,
       incluyeSIS: escalonReforma.incluyeSIS,
-      total: Math.round(
-        sisEmpleador + cesantiaEmpleador + mutualEmpleador + reformaPrevisional,
-      ),
+      total: Math.round(sisEmpleador + cesantiaEmpleador + mutualEmpleador + reformaPrevisional),
     },
     totalIngresos,
     totalDescuentos: Math.round(totalDescuentos),
@@ -257,10 +255,17 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
   };
 }
 
-export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorResult[] {
+export function sueldoLiquidoToResults(result: SueldoLiquidoResult, calculoInverso = false): CalculatorResult[] {
   const r: CalculatorResult[] = [
-    { label: 'Sueldo Líquido', value: result.liquido, format: 'CLP', highlight: true },
-    { label: 'Sueldo Bruto', value: result.bruto, format: 'CLP' },
+    ...(calculoInverso
+      ? [
+          { label: 'Sueldo bruto necesario', value: result.bruto, format: 'CLP' as const, highlight: true },
+          { label: 'Sueldo Líquido', value: result.liquido, format: 'CLP' as const },
+        ]
+      : [
+          { label: 'Sueldo Líquido', value: result.liquido, format: 'CLP' as const, highlight: true },
+          { label: 'Sueldo Bruto', value: result.bruto, format: 'CLP' as const },
+        ]),
     { label: 'Total Descuentos', value: result.totalDescuentos, format: 'CLP' },
     { label: 'Factor de conversión', value: result.factorConversion, format: 'percentage' },
 
@@ -271,10 +276,18 @@ export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorR
   ];
 
   if (result.descuentos.prestamoEmpleador > 0) {
-    r.push({ label: 'Préstamo empleador', value: result.descuentos.prestamoEmpleador, format: 'CLP' });
+    r.push({
+      label: 'Préstamo empleador',
+      value: result.descuentos.prestamoEmpleador,
+      format: 'CLP',
+    });
   }
   if (result.descuentos.descuentoSindical > 0) {
-    r.push({ label: 'Descuento sindical', value: result.descuentos.descuentoSindical, format: 'CLP' });
+    r.push({
+      label: 'Descuento sindical',
+      value: result.descuentos.descuentoSindical,
+      format: 'CLP',
+    });
   }
   if (result.descuentos.descuentoCajaCompensacion > 0) {
     r.push({
@@ -288,7 +301,8 @@ export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorR
   const ia = result.ingresosAdicionales;
   if (ia.bonoMovilizacion > 0)
     r.push({ label: 'Bono movilización', value: ia.bonoMovilizacion, format: 'CLP' });
-  if (ia.bonoColacion > 0) r.push({ label: 'Bono colación', value: ia.bonoColacion, format: 'CLP' });
+  if (ia.bonoColacion > 0)
+    r.push({ label: 'Bono colación', value: ia.bonoColacion, format: 'CLP' });
   if (ia.bonoPerdidaCaja > 0)
     r.push({ label: 'Bono pérdida de caja', value: ia.bonoPerdidaCaja, format: 'CLP' });
   if (ia.comisiones > 0) r.push({ label: 'Comisiones', value: ia.comisiones, format: 'CLP' });
@@ -307,10 +321,22 @@ export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorR
     format: 'CLP',
   });
   if (result.aportesEmpleador.sis > 0) {
-    r.push({ label: 'SIS (paga empleador, no descuenta al trabajador)', value: result.aportesEmpleador.sis, format: 'CLP' });
+    r.push({
+      label: 'SIS (paga empleador, no descuenta al trabajador)',
+      value: result.aportesEmpleador.sis,
+      format: 'CLP',
+    });
   }
-  r.push({ label: 'Seguro cesantía empleador', value: result.aportesEmpleador.seguroCesantia, format: 'CLP' });
-  r.push({ label: 'Mutual de seguridad (empleador)', value: result.aportesEmpleador.mutual, format: 'CLP' });
+  r.push({
+    label: 'Seguro cesantía empleador',
+    value: result.aportesEmpleador.seguroCesantia,
+    format: 'CLP',
+  });
+  r.push({
+    label: 'Mutual de seguridad (empleador)',
+    value: result.aportesEmpleador.mutual,
+    format: 'CLP',
+  });
 
   return r;
 }
@@ -322,7 +348,7 @@ export function sueldoLiquidoToResults(result: SueldoLiquidoResult): CalculatorR
 export function calculateSueldoBrutoFromLiquido(
   liquidoObjetivo: number,
   inputParcial: Omit<SueldoLiquidoInput, 'sueldoBruto' | 'calculoInverso'>,
-  precision: number = 100, // tolerancia en CLP
+  precision: number = 1, // tolerancia en CLP
 ): SueldoLiquidoResult {
   let lo = liquidoObjetivo;
   let hi = liquidoObjetivo * 2; // techo amplio: con descuentos máximos no superan ~50%
@@ -335,7 +361,7 @@ export function calculateSueldoBrutoFromLiquido(
   }
 
   for (let i = 0; i < 30; i++) {
-    const mid = (lo + hi) / 2;
+    const mid = Math.round((lo + hi) / 2);
     result = calculateSueldoLiquido({ ...inputParcial, sueldoBruto: mid });
     const diff = result.liquido - liquidoObjetivo;
     if (Math.abs(diff) <= precision) return result;
