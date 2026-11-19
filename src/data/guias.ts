@@ -281,7 +281,7 @@ export const guias: Guia[] = [
 </tbody>
 </table>
 <div class="numeric-example"><div class="numeric-example__title">Comprobación — bruto $610.000 (AFP Habitat 11,27%, FONASA 7%, cesantía 0,6%)</div><ul><li><strong>AFP (11,27%)</strong>: <code>$68.747</code></li><li><strong>Salud FONASA (7%)</strong>: <code>$42.700</code></li><li><strong>Cesantía (0,6%)</strong>: <code>$3.660</code></li><li><strong>Total descuentos</strong>: $115.107</li><li><strong>Impuesto único</strong>: $0 (base bajo 13,5 UTM, exento)</li></ul><span class="total">Líquido: $494.893 — por eso $610.000 brutos no alcanzan para $500.000 líquidos; se necesitan ≈ $616.300</span></div>
-<p>Nuestra calculadora hace este cálculo iterativo automáticamente cuando activas la opción "cálculo inverso". Para una negociación salarial, lleva ambas cifras (bruto y líquido) calculadas con tu AFP específica para evitar sorpresas.</p>`,
+<p>Nuestra calculadora hace este cálculo iterativo automáticamente cuando activas la opción "Calcular sueldo bruto desde el líquido" al inicio del formulario. Ingresa el sueldo líquido deseado. Para una negociación salarial, lleva ambas cifras (bruto y líquido) calculadas con tu AFP específica para evitar sorpresas.</p>`,
       },
       {
         id: 'errores-comunes',
