@@ -2049,7 +2049,7 @@ ${DESEMPLEO_INE_HTML}
 <h2>Errores frecuentes al calcular tu fecha</h2>
 <ul>
 <li><strong>Confundir el dígito con el mes.</strong> El calendario asigna un mes a cada dígito, pero el dígito no es el mes: la patente que termina en 9 va en enero, no en septiembre.</li>
-<li><strong>Creer que marzo y diciembre son meses de revisión.</strong> No tienen dígito asignado: solo reciben a las patentes que se adelantan (marzo recibe al dígito 1 y diciembre al 9).</li>
+<li><strong>Creer que marzo y diciembre son meses de revisión.</strong> En el calendario anual no tienen dígito asignado: esos meses atienden a las patentes que se adelantan (marzo al dígito 1 y diciembre al 9), pero eso no impide una revisión atrasada u otra periodicidad en esas fechas.</li>
 <li><strong>Guiarse solo por la tabla.</strong> Lo que manda es la fecha de vigencia del certificado; una prórroga la extiende.</li>
 <li><strong>Asumir que todo vehículo revisa una vez al año.</strong> Taxis, buses, transporte escolar, vehículos a gas y maquinaria tienen otra periodicidad.</li>
 <li><strong>Confiar en una prórroga de redes sociales.</strong> Solo vale la que está publicada como decreto o resolución del MTT.</li>
