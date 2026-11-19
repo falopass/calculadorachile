@@ -2559,8 +2559,9 @@ export const guias: Guia[] = [
 <ul>
 <li><strong>Remuneración fija:</strong> la remuneración íntegra es el sueldo convenido.</li>
 <li><strong>Remuneraciones variables</strong> (tratos, comisiones, primas): es el <strong>promedio de lo ganado en los últimos tres meses trabajados</strong>.</li>
+<li><strong>Remuneración mixta</strong> (sueldo fijo más comisiones, bonos o trato): se suma el sueldo convenido al promedio de lo variable devengado en esos mismos tres meses.</li>
 </ul>
-<p>Además, el empleador debe pagar <strong>cualquier otra remuneración o beneficio devengado cuya fecha de pago caiga dentro del feriado</strong>, como un aguinaldo de Fiestas Patrias o de Navidad, o una asignación de escolaridad (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html" target="_blank" rel="noopener">DT, Ord. 4624</a>). Si tu sueldo es variable, revisa que el pago del feriado use ese promedio de tres meses y no solo el sueldo base.</p>`,
+<p>Además, el empleador debe pagar <strong>cualquier otra remuneración o beneficio devengado cuya fecha de pago caiga dentro del feriado</strong>, como un aguinaldo de Fiestas Patrias o de Navidad, o una asignación de escolaridad (<a href="https://www.dt.gob.cl/legislacion/1624/w3-article-107236.html" target="_blank" rel="noopener">DT, Ord. 4624</a>). Si tu sueldo es variable o mixto, revisa que el pago del feriado use el promedio de tres meses —y en el caso mixto que se sume al sueldo— y no solo el sueldo base.</p>`,
       },
       {
         id: 'licencia-medica',
@@ -2625,7 +2626,7 @@ export const guias: Guia[] = [
 <h3>¿Puedo perder mis vacaciones progresivas?</h3>
 <p>Sí, si no acreditas tus años antes de tomarlas: el día progresivo de ese período se pierde y no se puede cobrar después (art. 68 y doctrina de la DT).</p>
 <h3>¿Las vacaciones se pagan?</h3>
-<p>Sí, con remuneración íntegra: el sueldo fijo o, si tienes remuneraciones variables, el promedio de los últimos tres meses trabajados (art. 71).</p>
+<p>Sí, con remuneración íntegra: el sueldo fijo y, si hay remuneraciones variables, el promedio de lo variable devengado en los últimos tres meses trabajados (art. 71).</p>
 <h3>¿Puedo fraccionar mis vacaciones?</h3>
 <p>Sí, cuando tienes más de 10 días hábiles, de común acuerdo con tu empleador (art. 70).</p>
 <h3>¿Qué pasa con las vacaciones al renunciar?</h3>
