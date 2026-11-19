@@ -30,6 +30,8 @@ export interface CalculatorInput {
   type: 'number' | 'text' | 'select' | 'boolean';
   /** Unidad de medida (sólo para inputs numéricos). */
   unit?: CalculatorInputUnit;
+  /** Acepta punto decimal al pegar números, además de la coma chilena. */
+  allowDotDecimal?: boolean;
   placeholder?: string;
   required?: boolean;
   min?: number;

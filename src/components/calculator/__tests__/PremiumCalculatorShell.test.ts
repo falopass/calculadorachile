@@ -140,4 +140,31 @@ describe('PremiumCalculatorShell: resultados obsoletos', () => {
       expect(container.textContent).not.toContain('El valor debe ser mayor a 0');
     }
   });
+
+  it('conserva 2.0 como dos días y rechaza fracciones de uso administrativo', async () => {
+    const { default: PremiumCalculatorShell } = await import('../PremiumCalculatorShell');
+    const administrativos = getCalculatorBySlug('calculadora-dias-administrativos')!;
+    const calcular = (await loadCalculationFn('dias-administrativos'))!;
+    await act(async () => {
+      root.render(React.createElement(PremiumCalculatorShell, {
+        calculator: administrativos,
+        calculateFn: calcular,
+      }));
+    });
+    const fields = container.querySelectorAll<HTMLInputElement>('input');
+    for (const field of fields) {
+      await act(async () => { setInputValue(field, '2.0'); });
+      await act(async () => { vi.advanceTimersByTime(500); });
+    }
+    expect(container.textContent).toContain('3 3');
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      await act(async () => { setInputValue(fields[0], '2.5'); });
+      await act(async () => { vi.advanceTimersByTime(500); });
+      expect(container.textContent).toContain('deben ser enteros no negativos');
+      expect(container.textContent).not.toContain('3 3');
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
 });

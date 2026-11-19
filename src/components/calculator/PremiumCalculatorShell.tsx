@@ -251,6 +251,7 @@ function BooleanToggle({ label, value, onChange, error }: BooleanToggleProps) {
 
 function inputNeedsDecimal(input: CalculatorInputType): boolean {
   return (
+    input.allowDotDecimal === true ||
     input.unit === 'percent' ||
     input.unit === 'UF' ||
     input.unit === 'UTM' ||
