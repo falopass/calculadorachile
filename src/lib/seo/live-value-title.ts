@@ -137,7 +137,7 @@ export function buildLiveValueTitle(
   kind: LiveKind,
   value: number,
   date: Date,
-  _now: Date,
+  now: Date,
 ): string | null {
   const parts = toSantiagoParts(date);
   if (!parts) return null;
@@ -146,11 +146,12 @@ export function buildLiveValueTitle(
     // E-049: mes + valor desde el indicador vivo (no se queda en "noviembre"
     // cuando el 01-12 cambie la UTM). ≤60 caracteres con valores habituales.
     const mes = MESES_ES_CL[parts.month - 1];
-    return `UTM ${mes} ${parts.year}: ${formatCLP(value)} y conversión a pesos`;
+    return `UTM de ${mes} ${parts.year}: ${formatCLP(value)} (SII)`;
   }
   const fecha = `${String(parts.day).padStart(2, '0')}-${String(parts.month).padStart(2, '0')}-${parts.year}`;
   if (kind === 'uf') {
-    return `UF hoy ${fecha}: ${formatCLP2(value)} | Tabla UF a pesos`;
+    const label = fecha === formatDDMMYYYY(now) ? 'Valor UF hoy' : 'Valor UF';
+    return `${label}: ${formatCLP2(value)} (${fecha}) | UF a pesos`;
   }
   return `Dólar hoy ${fecha}: ${formatCLP2(value)} | Dólar a pesos`;
 }
@@ -170,7 +171,7 @@ export function buildLiveValueDescription(
   const mes = MESES_ES_CL[parts.month - 1];
   // Base dinámica; el aviso del mes siguiente (si el SII ya lo publicó) lo
   // agrega buildLiveValueDescriptionWithCalendar cuando hay tabla.
-  return `UTM de ${mes} de ${parts.year}: ${formatCLP(value)} (SII). Convierte UTM a pesos, multas, UTM vs UTA y UF, y qué mes usar.`;
+  return `UTM de ${mes} de ${parts.year}: ${formatCLP(value)} (SII). Convierte UTM a pesos y revisa qué mes usar para multas y trámites.`;
 }
 
 /**
