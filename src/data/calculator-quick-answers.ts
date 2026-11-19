@@ -545,7 +545,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         valorUF: ctx.uf,
         valorUTM: ctx.utm,
       });
-      const brutos = [500_000, 553_553, 610_000, 750_000, 800_000, 1_200_000];
+      const brutos = [500_000, INGRESO_MINIMO.mensual, 610_000, 750_000, 800_000, 1_200_000];
       const rows = brutos.map((sueldoBruto) => {
         const r = calculateSueldoLiquido({
           sueldoBruto,
@@ -580,7 +580,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'horas-extra': {
-      const sueldos = [553_553, 800_000, 1_200_000];
+      const sueldos = [INGRESO_MINIMO.mensual, 800_000, 1_200_000];
       const rows = sueldos.map((sueldoBruto) => {
         const r = calculateHorasExtra({
           sueldoBruto,
@@ -667,7 +667,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
 
     case 'finiquito': {
       const casos: [number, number][] = [
-        [553_553, 2],
+        [INGRESO_MINIMO.mensual, 2],
         [800_000, 5],
         [1_200_000, 8],
       ];
@@ -958,7 +958,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'factor-hora-extra': {
-      const sueldos = [553_553, 800_000, 1_200_000, 2_000_000];
+      const sueldos = [INGRESO_MINIMO.mensual, 800_000, 1_200_000, 2_000_000];
       const rows = sueldos.map((sueldoBase) => {
         const r = calculateFactorHoraExtra({ sueldoBase });
         return [

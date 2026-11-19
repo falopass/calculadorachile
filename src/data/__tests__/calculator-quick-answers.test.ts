@@ -14,6 +14,26 @@ import { PAES } from '@/lib/values/educacion';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
+describe('ejemplos con ingreso mínimo', () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it.each([
+    ['sueldo-liquido', 1],
+    ['horas-extra', 0],
+    ['finiquito', 0],
+    ['factor-hora-extra', 0],
+  ] as const)('%s lee el IMM vigente', (id, fila) => {
+    vi.spyOn(INGRESO_MINIMO, 'mensual', 'get').mockReturnValue(600001);
+    expect(getQuickAnswer(id, CTX)!.example!.rows[fila][0]).toBe(formatCLP(600001));
+  });
+
+  it('mantiene el placeholder de casa particular igual al IMM', () => {
+    const calculator = calculators.find((c) => c.id === 'sueldo-casa-particular')!;
+    expect(calculator.inputs.find((input) => input.id === 'sueldoBruto')!.placeholder)
+      .toBe(formatCLP(INGRESO_MINIMO.mensual));
+  });
+});
+
 const IDS = [
   'boleta-honorarios', 'iva', 'credito-automotriz', 'vacaciones-proporcionales',
   'asignacion-familiar', 'gratificacion-legal', 'impuesto-herencia',
