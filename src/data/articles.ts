@@ -227,6 +227,126 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 
 const articleCatalog: ArticleDraft[] = [
   {
+    slug: 'indemnizacion-anos-servicio-tope-90-uf-2026',
+    title: 'Indemnización por años de servicio: cómo se aplica el tope de 90 UF',
+    description:
+      'Calcula la indemnización por años de servicio en Chile: qué sueldo se usa, cuándo se aplica el tope de 90 UF y cómo contar la antigüedad. Ejemplos en pesos.',
+    date: '2026-11-18',
+    category: 'laboral',
+    readingTime: 8,
+    relatedGuia: 'finiquito-laboral-chile',
+    relatedCalculators: ['calculadora-indemnizacion-anos-servicio', 'calculadora-finiquito'],
+    keywords: [
+      'indemnización por años de servicio',
+      'tope de 90 UF indemnización',
+      'cómo calcular indemnización por años de servicio',
+      'tope de 11 años indemnización',
+    ],
+    sources: [
+      {
+        label: 'BCN — Código del Trabajo (arts. 161 a 163, 172 y 177; art. 7 transitorio)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'Dirección del Trabajo — Cuándo corresponde la indemnización por años de servicio',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Tope de 90 UF de la base mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60604.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Pagos incluidos y excluidos de la base',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Remuneraciones variables (Dictamen 75/8)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-84625.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Aplicación del tope de 90 UF a contratos antiguos',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-86852.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Imputación de aportes al Seguro de Cesantía',
+        url: 'https://www.dt.gob.cl/consultas/1613/w3-article-95307.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Despido, finiquito y reserva de derechos',
+        url: 'https://www.dt.gob.cl/portal/1626/w3-article-96287.html',
+      },
+      {
+        label: 'SII — Valores diarios de la UF en 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Las 90 UF son el máximo de todo el finiquito?',
+        answer:
+          'No. Las 90 UF limitan la remuneración mensual que sirve de base para calcular la indemnización legal por años de servicio y la sustitutiva del aviso previo. La indemnización por varios años puede superar 90 UF; el finiquito también puede incluir otros conceptos.',
+      },
+      {
+        question: '¿Se usa la UF del día del despido o la del día del pago?',
+        answer:
+          'Se usa la UF del último día del mes calendario anterior al pago, según el artículo 172 del Código del Trabajo. Para un pago en noviembre de 2026, corresponde la UF del 31 de octubre de 2026.',
+      },
+      {
+        question: '¿Se redondean seis meses exactos a un año más?',
+        answer:
+          'No. El artículo 163 exige una fracción superior a seis meses. Si trabajaste cinco años y seis meses exactos, cuentan cinco años; si superaste por un día los seis meses, cuentan seis, sujeto al tope y a los demás requisitos legales.',
+      },
+    ],
+    content: `
+<p>Si te despidieron por necesidades de la empresa y tu contrato duró al menos un año, la indemnización legal por años de servicio se calcula con una remuneración mensual por cada año indemnizable. El <strong>tope de 90 UF limita esa remuneración mensual, no el total a recibir</strong>. Existe un límite distinto para la antigüedad: en la regla general se pagan hasta 11 mensualidades.</p>
+<p>Para verificar la cifra de un finiquito necesitas tres datos: la base que corresponde según tus liquidaciones, las fechas de inicio y término del contrato y el mes en que se pagará la indemnización. Aquí aplicamos la regla general del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>, revisada en noviembre de 2026. Los sueldos y las antigüedades de los ejemplos son hipotéticos; el valor histórico de la Unidad de Fomento (UF) es el publicado por el SII.</p>
+
+<h2>Primero revisa si te corresponde</h2>
+<p>La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60593.html" target="_blank" rel="noopener">Dirección del Trabajo (DT)</a> indica que la indemnización del artículo 163 procede si el contrato duró <strong>un año o más</strong> y el empleador puso término al contrato por una causal del artículo 161: necesidades de la empresa, establecimiento o servicio, o desahucio del empleador en los casos en que la ley lo permite. La causal debe aparecer en la carta de despido; no se deduce a partir de la antigüedad ni de que se haya emitido un finiquito.</p>
+<p>Si renunciaste o firmaste un mutuo acuerdo, llevar más de un año no genera por sí solo esta indemnización legal. Aun así, un finiquito puede incluir montos adeudados, como vacaciones pendientes o remuneraciones devengadas. También puede haber un pago pactado. Si existe una cláusula de indemnización en tu contrato, anexo o instrumento colectivo, revisa en qué causales se activa y cómo se calcula: el artículo 163 respeta la indemnización convenida cuando es superior a la legal.</p>
+
+<h2>Qué remuneración se compara con las 90 UF</h2>
+<p>La base es la <strong>última remuneración mensual</strong> en el sentido del artículo 172. No equivale automáticamente al sueldo base del contrato ni al líquido depositado en tu cuenta. Se toma la remuneración antes de descontar cotizaciones del trabajador y se consideran los pagos que corresponda incluir por la prestación de servicios. Según la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, por ejemplo, se incluyen la gratificación pagada mes a mes y las asignaciones mensuales de colación y movilización. Se excluyen horas extraordinarias, asignación familiar y beneficios esporádicos o pagados una vez al año, como un aguinaldo anual.</p>
+<p>Si tienes <strong>remuneración variable</strong>, por ejemplo por comisiones, el artículo 172 indica usar el promedio de los últimos tres meses calendario. El <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-84625.html" target="_blank" rel="noopener">Dictamen 75/8 de la DT</a> aclara que se refiere a meses con remuneración completa anteriores al mes de término. Una mensualidad cubierta en parte por un subsidio de licencia médica no se toma como si todo hubiera sido remuneración. Antes de promediar, identifica los meses que corresponden y separa en cada liquidación lo que entra y lo que queda fuera. El tope se aplica sobre la base resultante, no a cada comisión por separado.</p>
+<p>Una manera de detectar una omisión es pedir el desglose de la base al empleador y compararla línea a línea con las liquidaciones. Si el finiquito usa solo el sueldo base, comprueba si faltan pagos mensuales. Si simplemente copia el total de haberes, comprueba si allí quedaron horas extras. Conviene hacer esa revisión incluso cuando ambas cifras parezcan cercanas: cada diferencia en la base puede repetirse en todas las mensualidades indemnizables, salvo que ambas bases queden por encima del tope.</p>
+
+<h2>Cómo funcionan los dos topes</h2>
+<p><strong>Tope en pesos:</strong> multiplica 90 por el valor de la UF del <strong>último día del mes anterior al pago</strong>, tal como indica el <a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">artículo 172, explicado por la DT</a>. Compara esa cifra con la base mensual y usa la menor. Si te despidieron en octubre y te pagan en noviembre, la fecha de referencia es el 31 de octubre. No uses la UF del día en que firmaste, la del día en que haces la simulación ni la del último día hábil si no coincide con el último día del mes.</p>
+<p><strong>Tope de antigüedad:</strong> el artículo 163 reconoce 30 días de remuneración por cada año de servicio continuo al mismo empleador y por la fracción <strong>superior a seis meses</strong>. Por eso cinco años y seis meses exactos se cuentan como cinco, mientras que cinco años, seis meses y un día se cuentan como seis. Esto no elimina el requisito inicial de un año de contrato: una persona con solo ocho meses de servicio no adquiere por redondeo el derecho a esta indemnización legal. En la regla general, el máximo son 330 días de remuneración, equivalentes a 11 mensualidades.</p>
+<p>El límite de antigüedad tiene una excepción histórica: el <a href="https://www.dt.gob.cl/consultas/1613/w3-article-60600.html" target="_blank" rel="noopener">artículo 7 transitorio</a> excluye del tope de 330 días a quienes fueron contratados antes del 14 de agosto de 1981 y tenían su contrato vigente al 1 de diciembre de 1990, si se cumplen las demás condiciones. La DT <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-86852.html" target="_blank" rel="noopener">aclara que el límite mensual de 90 UF sí se aplica</a> a la indemnización legal de esos contratos. Si tu contrato entra en ese régimen o tienes un pacto más favorable, no tomes el resultado de una simulación de la regla general como tu liquidación.</p>
+
+<h2>Ejemplos en pesos con y sin tope</h2>
+<p>Supón que el pago se hace en noviembre de 2026. El <a href="https://www.sii.cl/valores_y_fechas/uf/uf2026.htm" target="_blank" rel="noopener">SII registra una UF de $41.247,63 para el 31 de octubre de 2026</a>. Al multiplicarla por 90, el límite mensual es de <strong>$3.712.286,70</strong>. Los ejemplos siguientes suponen término por el artículo 161, sin pacto especial. Muestran solo la indemnización por años de servicio, antes de cualquier imputación del Seguro de Cesantía, y redondean el resultado al peso al final.</p>
+<table>
+<caption>Indemnización legal estimada para un pago en noviembre de 2026</caption>
+<thead><tr><th scope="col">Base mensual antes del tope</th><th scope="col">Antigüedad</th><th scope="col">Cálculo</th><th scope="col">Indemnización estimada</th></tr></thead>
+<tbody>
+<tr><td>$1.200.000</td><td>5 años y 6 meses exactos</td><td>$1.200.000 × 5</td><td>$6.000.000</td></tr>
+<tr><td>$4.500.000</td><td>5 años y 7 meses</td><td>$3.712.286,70 × 6</td><td>$22.273.720</td></tr>
+<tr><td>$4.500.000</td><td>13 años</td><td>$3.712.286,70 × 11</td><td>$40.835.154</td></tr>
+</tbody>
+</table>
+<p>En el primer caso no se reduce el sueldo por el tope de UF: solo importa no sumar un año por los seis meses exactos. En el segundo, la fracción sí agrega un año, pero ese año se paga con la misma base topeada que los demás. En el tercero actúan ambos límites: no se usan los $4.500.000 completos ni se pagan las 13 mensualidades. Si cambia el mes de pago, puede cambiar la cifra en pesos del segundo y tercer caso sin que cambie la antigüedad.</p>
+<p>La tabla también sirve para revisar el efecto de cada tope por separado. Si tu base mensual ya está por debajo de 90 UF, cambiar la fecha de la UF no debería reducirla mientras siga bajo el nuevo límite. Si lo que cambia es la antigüedad y ya alcanzaste los 330 días de remuneración, en la regla general esa diferencia no aumenta esta partida.</p>
+
+<h2>Por qué la indemnización y el total del finiquito pueden ser distintos</h2>
+<p>En un despido por necesidades de la empresa, si no se dio aviso con al menos 30 días de anticipación, corresponde además la <strong>indemnización sustitutiva del aviso previo</strong>. La <a href="https://www.dt.gob.cl/portal/1628/w3-article-60604.html" target="_blank" rel="noopener">DT confirma</a> que el mismo límite de 90 UF rige para la base de este pago. No es un año adicional de antigüedad: es una partida separada, equivalente a una remuneración mensual para estos efectos. El finiquito también puede incluir vacaciones pendientes o proporcionales y remuneraciones adeudadas.</p>
+<p>En un término por el artículo 161, el empleador puede imputar a la indemnización por años de servicio la parte de la Cuenta Individual de Cesantía formada con sus aportes, en los términos que <a href="https://www.dt.gob.cl/consultas/1613/w3-article-95307.html" target="_blank" rel="noopener">explica la Dirección del Trabajo</a>. La Administradora de Fondos de Cesantía (AFC) determina el monto; no se trata de descontar todo el saldo de tu cuenta ni de restar tus propias cotizaciones. Si aparece esta rebaja, pide el certificado que la respalda y compárala con la línea específica de indemnización por años de servicio, no con el total de haberes del finiquito.</p>
+
+<h2>Qué revisar antes de firmar</h2>
+<ol>
+<li><strong>Carta y contrato:</strong> comprueba la causal, las fechas de inicio y término y si hay un pacto de indemnización. Cuenta la fracción con las fechas, sobre todo si quedaste cerca de los seis meses.</li>
+<li><strong>Liquidaciones:</strong> verifica qué pagos entraron en la base y, si tu remuneración es variable, qué meses se promediaron. Evita sumar por segunda vez un concepto ya incluido.</li>
+<li><strong>Mes de pago:</strong> verifica la fecha de la UF usada en el tope. Si el cálculo se hizo antes de un cambio de mes pero el pago se hará después, vuelve a revisar la fecha de referencia.</li>
+<li><strong>Desglose del finiquito:</strong> distingue indemnización por años, aviso previo, vacaciones, remuneraciones adeudadas y eventual imputación de AFC. Si alguna partida no cuadra, pide que te expliquen cómo se obtuvo antes de aceptar la liquidación.</li>
+</ol>
+<p>La <a href="/calculadoras/calculadora-indemnizacion-anos-servicio">calculadora de indemnización por años de servicio</a> permite estimar la regla general y separar los años de servicio del aviso previo. La herramienta usa su propia UF de referencia: si esa fecha no coincide con el último día del mes anterior al pago, verifica el tope manualmente con la UF de la fecha legal. Y si tu antigüedad supera los seis meses por días y no por un mes completo, comprueba el cómputo por fechas: la herramienta recibe años y meses, no días.</p>
+<p>Si te presentan un finiquito con una diferencia que no se resuelve al revisar el cálculo, la <a href="https://www.dt.gob.cl/portal/1626/w3-article-96287.html" target="_blank" rel="noopener">DT explica cómo dejar una reserva de derechos</a> sobre los conceptos discutidos. Para revisar el trámite, consulta los <a href="/guias/finiquito-laboral-chile#plazos-legales">plazos de la guía de finiquito laboral</a>.</p>
+
+<aside class="callout callout--warning"><div class="callout__body"><strong>Alcance de la estimación</strong><p>Este artículo es informativo y no reemplaza la asesoría laboral. Si hay una causal discutida, un pacto especial o dudas sobre la antigüedad reconocida, consulta a la Dirección del Trabajo o busca asesoría antes de firmar.</p></div></aside>
+`,
+  },
+  {
     slug: 'aguinaldo-navidad-2026-sector-publico',
     title: 'Aguinaldo de Navidad 2026 sector público: monto vigente, quiénes lo reciben y cuándo se paga',
     description:
@@ -1951,14 +2071,14 @@ ${DESEMPLEO_INE_HTML}
       {
         question: '¿Cuánto sube realmente el costo frente a julio de 2026?',
         answer:
-          'En julio el bloque previsional patronal suma 2,62%: 1% de la reforma más SIS vigente de 1,62%. En agosto pasa a 3,5%, por lo que la diferencia comparable es 0,88% de la base imponible topada. Sobre $1.000.000, el aumento es $8.800 al mes, no $35.000.',
+          'En julio el bloque previsional patronal suma 3%: 1% de la reforma más SIS vigente de 2,00%. En agosto pasa a 3,5%, por lo que la diferencia comparable es 0,5 puntos porcentuales de la base imponible topada. Sobre $1.000.000, el aumento es $5.000 al mes, no $35.000.',
       },
     ],
     content: `<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El 3,5% ya incluye el SIS</strong><p>Desde las remuneraciones de agosto de 2026 no corresponde sumar “3,5% de reforma” más otro 1,62% o 1,5% de Seguro de Invalidez y Sobrevivencia. El <strong>3,5% es el total previsional de cargo del empleador</strong> para esta etapa e incorpora el SIS dentro de su componente de 2,5% destinado al Seguro Social.</p></div></aside>
 
 <p>El titular “la cotización del empleador sube a 3,5%” puede producir dos errores opuestos. Algunas empresas creen que deben descontarlo del sueldo; otras agregan el 3,5% completo a un presupuesto que ya contiene SIS. La Ley 21.735 no autoriza ninguna de esas operaciones. Es una cotización patronal, calculada sobre remuneración imponible, y desde agosto reorganiza dentro del mismo 3,5% un seguro que la empresa ya financiaba.</p>
 
-<p>La forma correcta de presupuestar es comparar períodos equivalentes. Para la remuneración de julio de 2026, el empleador paga 1% de la reforma más el SIS vigente de 1,62%, totalizando 2,62% en este bloque. Para la remuneración de agosto, paga 3,5% total. Por tanto, el aumento mensual comparable es <strong>0,88 puntos porcentuales</strong> de la base imponible topada.</p>
+<p>La forma correcta de presupuestar es comparar períodos equivalentes. Para la remuneración de julio de 2026, el empleador paga 1% de la reforma más el SIS vigente de 2,00%, totalizando 3% en este bloque. Para la remuneración de agosto, paga 3,5% total. Por tanto, el aumento mensual comparable es <strong>0,5 puntos porcentuales</strong> de la base imponible topada.</p>
 
 <h2>Qué cambia y cuándo se paga</h2>
 <p>La reforma previsional fue publicada el 26 de marzo de 2025. Su aporte patronal comenzó con 1% sobre las remuneraciones de agosto de 2025 y aumenta por etapas hasta llegar al total definido por la ley. El segundo hito entra en las <strong>remuneraciones devengadas en agosto de 2026</strong>, no en cualquier pago bancario efectuado durante ese mes.</p>
@@ -1966,9 +2086,9 @@ ${DESEMPLEO_INE_HTML}
 <table>
 <thead><tr><th>Período de remuneración</th><th>Aporte reforma</th><th>SIS separado</th><th>Total previsional empleador</th></tr></thead>
 <tbody>
-<tr><td>Julio de 2026</td><td>1,00%</td><td>1,62%</td><td><strong>2,62%</strong></td></tr>
+<tr><td>Julio de 2026</td><td>1,00%</td><td>2,00%</td><td><strong>3,00%</strong></td></tr>
 <tr><td>Agosto de 2026 a julio de 2027</td><td>Integrado en el total</td><td>No se suma aparte</td><td><strong>3,50%</strong></td></tr>
-<tr><td>Diferencia comparable</td><td colspan="2">3,50% − 2,62%</td><td><strong>0,88%</strong></td></tr>
+<tr><td>Diferencia comparable</td><td colspan="2">3,50% − 3,00%</td><td><strong>0,50%</strong></td></tr>
 </tbody>
 </table>
 
@@ -1985,31 +2105,31 @@ ${DESEMPLEO_INE_HTML}
 <li><strong>2,5%</strong> ingresa al Fondo Autónomo de Protección Previsional para financiar el SIS y la compensación por diferencias de expectativa de vida.</li>
 </ul>
 
-<p>Ese último 2,5% puede desglosarse comunicacionalmente en 1,5% para SIS y 1% para compensación por expectativa de vida. Para la contabilidad de costo, lo decisivo es que ambos están dentro del 3,5%. El SIS deja de aparecer como el 1,62% separado que regía desde abril de 2026.</p>
+<p>Ese último 2,5% puede desglosarse comunicacionalmente en 1,5% para SIS y 1% para compensación por expectativa de vida. Para la contabilidad de costo, lo decisivo es que ambos están dentro del 3,5%. El SIS deja de aparecer como cargo separado: fue 1,62% entre abril y junio de 2026 y 2,00% en julio, según los Oficios SP N°12677 y N°12934 y los indicadores de Previred.</p>
 
 <p>La CRP tampoco debe describirse simplemente como dinero “perdido” o un impuesto general. La ley la estructura como una cotización registrada y con reintegro en la pensión, con reajustes e intereses, bajo sus requisitos. Explicar su destino no cambia quién la paga: el empleador.</p>
 
 <h2>Ejemplo 1: remuneración imponible de $800.000</h2>
 <p>El ejemplo asume un mes completo, base imponible bajo el tope de 90 UF y una persona sujeta a la obligación. No incluye cesantía, accidentes del trabajo ni otras partidas patronales.</p>
 
-<div class="numeric-example"><div class="numeric-example__title">Julio 2026: bloque previsional patronal</div><ul><li>Reforma: $800.000 × 1% = $8.000</li><li>SIS: $800.000 × 1,62% = $12.960</li></ul><span class="total">Total julio: $20.960</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Julio 2026: bloque previsional patronal</div><ul><li>Reforma: $800.000 × 1% = $8.000</li><li>SIS: $800.000 × 2,00% = $16.000</li></ul><span class="total">Total julio: $24.000</span></div>
 
 <div class="numeric-example"><div class="numeric-example__title">Agosto 2026: 3,5% total</div><ul><li>Cuenta individual 0,1%: $800</li><li>CRP 0,9%: $7.200</li><li>Seguro Social 2,5%: $20.000</li></ul><span class="total">Total agosto: $28.000</span></div>
 
-<p>La diferencia es <strong>$7.040 mensuales</strong>: $800.000 × 0,88%. Si se mantuvieran durante doce meses la misma base y las mismas tasas, el bloque de 3,5% sumaría $336.000 anuales y el aumento frente a una referencia constante de 2,62% sería $84.480. Eso es una proyección, no el gasto efectivo de todo 2026, porque el nuevo tramo comienza en agosto.</p>
+<p>La diferencia es <strong>$4.000 mensuales</strong>: $800.000 × 0,5%. Si se mantuvieran durante doce meses la misma base y las mismas tasas, el bloque de 3,5% sumaría $336.000 anuales y el aumento frente a una referencia constante de 3% sería $48.000. Eso es una proyección, no el gasto efectivo de todo 2026, porque el nuevo tramo comienza en agosto.</p>
 
 <h2>Ejemplo 2: remuneración imponible de $1.500.000</h2>
-<div class="numeric-example"><div class="numeric-example__title">Comparación julio–agosto</div><ul><li>Julio: $1.500.000 × 2,62% = $39.300</li><li>Agosto: $1.500.000 × 3,5% = $52.500</li><li>Aumento: $1.500.000 × 0,88% = $13.200</li></ul><span class="total">Costo previsional agosto: $52.500 · aumento mensual: $13.200</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Comparación julio–agosto</div><ul><li>Julio: $1.500.000 × 3% = $45.000</li><li>Agosto: $1.500.000 × 3,5% = $52.500</li><li>Aumento: $1.500.000 × 0,5% = $7.500</li></ul><span class="total">Costo previsional agosto: $52.500 · aumento mensual: $7.500</span></div>
 
-<p>Decir que el “costo extra” es $52.500 sería incorrecto: antes de agosto la empresa ya destinaba $39.300 a reforma y SIS. Los $52.500 son el costo total del bloque desde agosto; el incremento marginal es $13.200.</p>
+<p>Decir que el “costo extra” es $52.500 sería incorrecto: en julio la empresa ya destinaba $45.000 a reforma y SIS. Los $52.500 son el costo total del bloque desde agosto; el incremento marginal es $7.500.</p>
 
 <h2>Ejemplo 3: una nómina PYME</h2>
 <p>Para una nómina cuya suma de remuneraciones imponibles topadas sea $10.000.000:</p>
 
 <ul>
-<li>Total comparable en julio: $10.000.000 × 2,62% = <strong>$262.000</strong>.</li>
+<li>Total comparable en julio: $10.000.000 × 3% = <strong>$300.000</strong>.</li>
 <li>Total desde agosto: $10.000.000 × 3,5% = <strong>$350.000</strong>.</li>
-<li>Mayor provisión mensual: $10.000.000 × 0,88% = <strong>$88.000</strong>.</li>
+<li>Mayor provisión mensual: $10.000.000 × 0,5% = <strong>$50.000</strong>.</li>
 </ul>
 
 <p>La base agregada debe construirse trabajador por trabajador. No apliques un único porcentaje al gasto total del banco si allí mezclaste honorarios, asignaciones no imponibles, reembolsos, finiquitos o remuneraciones por encima del tope.</p>
@@ -2067,7 +2187,7 @@ ${DESEMPLEO_INE_HTML}
 
 <h2>Errores detectados en preguntas y comunidades</h2>
 <ul>
-<li><strong>“Sube de 1% a 3,5%, entonces el costo aumenta 2,5 puntos”.</strong> Omite que en julio también se pagaba SIS 1,62%; la diferencia comparable es 0,88 puntos.</li>
+<li><strong>“Sube de 1% a 3,5%, entonces el costo aumenta 2,5 puntos”.</strong> Omite que en julio también se pagaba SIS 2,00%; la diferencia comparable es 0,5 puntos.</li>
 <li><strong>“El SIS sigue aparte porque aparece en mi fórmula histórica”.</strong> Desde agosto está incorporado en el 3,5%.</li>
 <li><strong>“Se descuenta 3,5% al trabajador”.</strong> Contradice el carácter patronal de la cotización.</li>
 <li><strong>“Se aplica al total de transferencias de sueldos”.</strong> La base es la remuneración imponible topada, no el líquido ni todos los desembolsos.</li>
@@ -2080,7 +2200,8 @@ ${DESEMPLEO_INE_HTML}
 <ul>
 <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1212060" target="_blank" rel="noopener">BCN LeyChile — Ley 21.735</a>, creación del sistema mixto y Seguro Social Previsional.</li>
 <li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización de cargo del empleador</a>, gradualidad y destino final.</li>
-<li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9908.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización previsional obligatoria</a>, SIS 1,62% desde abril de 2026, tope 90 UF, plazos y mora.</li>
+<li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9908.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización previsional obligatoria</a>, tope 90 UF, plazos y mora.</li>
+<li><a href="https://www.previred.com/wp-content/uploads/2026/07/Indicadores-Previsionales-Previred-Julio-2026.pdf" target="_blank" rel="noopener">Previred — Indicadores julio de 2026</a>, SIS 2,00% para remuneraciones de julio, pagaderas en agosto. SP Oficios Ordinarios <a href="https://ayuda.talana.com/hc/es-419/article_attachments/53334402731283" target="_blank" rel="noopener">N°12677, 8 de julio de 2026</a> y <a href="https://ayuda.talana.com/hc/es-419/article_attachments/53367602904339" target="_blank" rel="noopener">N°12934, 10 de julio de 2026</a> (copias alojadas en Talana), instrucción y ratificación del 2,00%.</li>
 <li><a href="https://previsionsocial.gob.cl/wp-content/uploads/2025/08/Nota-Tecnica-Reforma-de-Pensiones-Ley-N%C2%B021.735.pdf" target="_blank" rel="noopener">Subsecretaría de Previsión Social — Nota técnica de la reforma</a>, tabla de agosto de 2026: 0,1% + 0,9% + 2,5%.</li>
 <li><a href="https://www.chileatiende.gob.cl/preguntas-frecuentes/nueva-cotizacion-empleadores" target="_blank" rel="noopener">ChileAtiende — Preguntas frecuentes para empleadores</a>, operación en Previred y casos excluidos.</li>
 <li><a href="https://hacienda.gov.cl/noticias-y-eventos/noticias/implementacion-de-la-reforma-previsional-nueva-cotizacion-del-empleador-regira" target="_blank" rel="noopener">Ministerio de Hacienda — Implementación y calendario</a>.</li>
