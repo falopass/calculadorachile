@@ -37,5 +37,7 @@ describe('presupuesto de viaje verano 2027', () => {
     expect(article.content).toContain('no publica umbrales');
     expect(article.content).toContain('déjalo identificado como pendiente');
     expect(article.content).toContain('si falla tu método principal');
+    expect(article.content).toContain('El precio del combustible por litro y los peajes se ingresan en pesos chilenos (CLP)');
+    expect(article.content).toContain('convierte cada precio extranjero a CLP');
   });
 });
