@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateSueldoLiquido, type SueldoLiquidoInput } from '../sueldo-liquido';
+import { loadCalculationFn } from '../load-calculator';
+import { getCalculatorBySlug } from '@/data/calculators';
 import {
   AFP,
   AFP_OBLIGATORIA_PCT,
@@ -10,6 +12,44 @@ import {
 } from '@/lib/values/constants';
 
 describe('calculateSueldoLiquido', () => {
+  describe('líquido a bruto', () => {
+    const opciones = {
+      afp: 'habitat' as const, saludTipo: 'fonasa' as const,
+      contratoIndefinido: true, valorUF: 40_000, valorUTM: 71_721,
+    };
+
+    it.each([0, 500_000, 1_000_000, 10_000_000])('reproduce el objetivo %i dentro de un peso', (objetivo) => {
+      const inverso = calculateSueldoLiquido({ ...opciones, sueldoBruto: objetivo, calculoInverso: true });
+      const directo = calculateSueldoLiquido({ ...opciones, sueldoBruto: inverso.bruto });
+      expect(Number.isInteger(inverso.bruto)).toBe(true);
+      expect(Math.abs(directo.liquido - objetivo)).toBeLessThanOrEqual(1);
+      if (objetivo === 10_000_000) {
+        expect(inverso.bruto).toBeGreaterThan(TOPE_IMPOSITIVO.seguro_cesantia * opciones.valorUF);
+        expect(inverso.descuentos.salud).toBe(Math.round(TOPE_IMPOSITIVO.afp_salud * opciones.valorUF * 0.07));
+        expect(inverso.descuentos.impuesto).toBeGreaterThan(0);
+      }
+    });
+
+    it('expone el selector primero y conserva todos los ids únicos', () => {
+      const calculator = getCalculatorBySlug('calculadora-sueldo-liquido')!;
+      expect(calculator.inputs[0].id).toBe('calculoInverso');
+      expect(calculator.inputs[0].defaultValue).toBe(false);
+      expect(new Set(calculator.inputs.map((i) => i.id)).size).toBe(calculator.inputs.length);
+    });
+
+    it('el adapter destaca el bruto inverso y usa UF/UTM de la UI', async () => {
+      const fn = (await loadCalculationFn('sueldo-liquido', opciones))!;
+      const results = fn({ ...opciones, sueldoBruto: '10000000', calculoInverso: 'true' });
+      const destacado = results.find((r) => r.highlight)!;
+      expect(destacado.label).toBe('Sueldo bruto necesario');
+      const directo = calculateSueldoLiquido({ ...opciones, sueldoBruto: destacado.value });
+      expect(Math.abs(directo.liquido - 10_000_000)).toBeLessThanOrEqual(1);
+      expect(results.find((r) => r.label === 'Sueldo Líquido')?.value).toBe(directo.liquido);
+      expect(fn({ ...opciones, sueldoBruto: '1000000', calculoInverso: 'false' }).find((r) => r.highlight)?.label).toBe('Sueldo Líquido');
+      expect(fn({ ...opciones, sueldoBruto: '', calculoInverso: true })[0].value).toBe(0);
+      expect(fn({ ...opciones, sueldoBruto: 'inválido', calculoInverso: true })[0].value).toBe(0);
+    });
+  });
   const inputBase: Omit<SueldoLiquidoInput, 'sueldoBruto'> = {
     afp: 'capital',
     saludTipo: 'fonasa',
@@ -29,9 +69,7 @@ describe('calculateSueldoLiquido', () => {
         fecha: new Date('2026-07-15'),
       });
       const base = Math.min(bruto, TOPE_IMPOSITIVO.afp_salud * UF.valor);
-      const afpEsperado = Math.round(
-        base * ((AFP_OBLIGATORIA_PCT + AFP.capital.comision) / 100),
-      );
+      const afpEsperado = Math.round(base * ((AFP_OBLIGATORIA_PCT + AFP.capital.comision) / 100));
       const saludEsperado = Math.round(base * (SALUD.fonasa.tasa / 100));
       const cesantiaEsperado = Math.round(
         Math.min(bruto, TOPE_IMPOSITIVO.seguro_cesantia * UF.valor) *
@@ -292,37 +330,44 @@ describe('calculateSueldoLiquido', () => {
   describe('aporte empleador Ley 21.735', () => {
     const valorUFPin = 40_000; // tope 90 UF = $3.600.000, base $1.000.000 queda bajo el tope
 
-    it('remuneración sep-2026: reforma 3,5% y SIS incluido (sis = 0)', () => {
-      const r = calculateSueldoLiquido({
-        ...inputBase,
-        sueldoBruto: 1_000_000,
-        valorUF: valorUFPin,
-        fecha: new Date('2026-09-15'),
-      });
-      const base = 1_000_000;
-      expect(r.aportesEmpleador.tasaReforma).toBe(3.5);
-      expect(r.aportesEmpleador.incluyeSIS).toBe(true);
-      expect(r.aportesEmpleador.reformaPrevisional).toBe(Math.round(base * 0.035));
-      expect(r.aportesEmpleador.sis).toBe(0);
-      expect(r.aportesEmpleador.total).toBe(
-        r.aportesEmpleador.reformaPrevisional +
-          r.aportesEmpleador.seguroCesantia +
-          r.aportesEmpleador.mutual,
-      );
-    });
+    it.each(['2026-08-01T00:00:00', '2026-09-15T12:00:00'])(
+      'remuneración %s: reforma 3,5%% y SIS incluido (sis = 0)',
+      (fecha) => {
+        const r = calculateSueldoLiquido({
+          ...inputBase,
+          sueldoBruto: 1_000_000,
+          valorUF: valorUFPin,
+          fecha: new Date(fecha),
+        });
+        const base = 1_000_000;
+        expect(r.aportesEmpleador.tasaReforma).toBe(3.5);
+        expect(r.aportesEmpleador.incluyeSIS).toBe(true);
+        expect(r.aportesEmpleador.reformaPrevisional).toBe(Math.round(base * 0.035));
+        expect(r.aportesEmpleador.sis).toBe(0);
+        expect(r.aportesEmpleador.total).toBe(
+          r.aportesEmpleador.reformaPrevisional +
+            r.aportesEmpleador.seguroCesantia +
+            r.aportesEmpleador.mutual,
+        );
+      },
+    );
 
-    it('remuneración jul-2026: reforma 1,0% y SIS separado 1,62%', () => {
+    it.each([
+      ['2026-06-30T23:59:59', 16_200],
+      ['2026-07-01T00:00:00', 20_000],
+      ['2026-07-31T23:59:59', 20_000],
+    ])('remuneración %s: reforma 1,0%% y SIS separado %i', (fecha, sis) => {
       const r = calculateSueldoLiquido({
         ...inputBase,
         sueldoBruto: 1_000_000,
         valorUF: valorUFPin,
-        fecha: new Date('2026-07-15'),
+        fecha: new Date(fecha),
       });
       const base = 1_000_000;
       expect(r.aportesEmpleador.tasaReforma).toBe(1.0);
       expect(r.aportesEmpleador.incluyeSIS).toBe(false);
       expect(r.aportesEmpleador.reformaPrevisional).toBe(Math.round(base * 0.01));
-      expect(r.aportesEmpleador.sis).toBe(Math.round(base * 0.0162));
+      expect(r.aportesEmpleador.sis).toBe(sis);
       expect(r.aportesEmpleador.total).toBe(
         r.aportesEmpleador.reformaPrevisional +
           r.aportesEmpleador.sis +

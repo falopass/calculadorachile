@@ -56,7 +56,7 @@ import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateGratificacion } from '@/lib/calculations/gratificacion';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateImpuestoSegundaCategoria } from '@/lib/calculations/impuesto-segunda-categoria';
-import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
+import { calculateSueldoLiquido, calculateSueldoBrutoFromLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateHorasExtra } from '@/lib/calculations/horas-extra';
 import { calculateFiniquito } from '@/lib/calculations/finiquito';
 import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
@@ -538,6 +538,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
     }
 
     case 'sueldo-liquido': {
+      const inverso = calculateSueldoBrutoFromLiquido(1_000_000, {
+        afp: 'habitat',
+        saludTipo: 'fonasa',
+        contratoIndefinido: true,
+        valorUF: ctx.uf,
+        valorUTM: ctx.utm,
+      });
       const brutos = [500_000, 553_553, 610_000, 750_000, 800_000, 1_200_000];
       const rows = brutos.map((sueldoBruto) => {
         const r = calculateSueldoLiquido({
@@ -557,6 +564,11 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       });
       return {
         h1: 'Calcular sueldo líquido: calculadora de bruto a líquido',
+        shortAnswers: [{
+          question: '¿Cómo calcular sueldo bruto desde el líquido?',
+          answer: `Activa «Calcular sueldo bruto desde el líquido». Para ${formatCLP(1_000_000)} líquidos, con AFP Habitat, Fonasa y contrato indefinido, sin bonos ni descuentos adicionales, se estiman ${formatCLP(inverso.bruto)} brutos; la comprobación entrega ${formatCLP(inverso.liquido)} líquidos. Se consideran los topes e impuesto mediante búsqueda iterativa.`,
+          sources: [{ text: 'SII — Impuesto único de segunda categoría', href: 'https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm' }],
+        }],
         lead: 'El sueldo líquido es el bruto menos las cotizaciones del trabajador: 10% de AFP más la comisión de tu AFP, 7% de salud, 0,6% de seguro de cesantía en contrato indefinido y el impuesto único si la renta supera el tramo exento.',
         example: {
           caption:
