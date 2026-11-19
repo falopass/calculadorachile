@@ -223,9 +223,15 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-costo-tag',
   ],
   'calculadora-costo-viaje': [
+    'auto-electrico-vs-bencina',
     'calculadora-costo-tag',
     'calculadora-permiso-circulacion',
     'calculadora-multas-transito',
+  ],
+  'auto-electrico-vs-bencina': [
+    'calculadora-costo-viaje',
+    'calculadora-cuenta-luz',
+    'calculadora-credito-automotriz',
   ],
   'calculadora-costo-tag': [
     'calculadora-costo-viaje',

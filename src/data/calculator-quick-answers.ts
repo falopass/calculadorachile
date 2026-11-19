@@ -1193,6 +1193,9 @@ const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
   'permiso-circulacion': {
     lead: `El permiso de un vehículo liviano se estima con la tasación fiscal del SII, no con su precio comercial. Se aplica la escala progresiva con la UTM de enero usada por el simulador, de ${formatCLP(PERMISO_CIRCULACION.utmEneroCLP)}, y el permiso mínimo cuando corresponde. La rebaja para eléctricos e híbridos exige figurar en la nómina elegible del SII. Confirma el monto por código SII o en tu municipalidad.`,
   },
+  'auto-electrico-vs-bencina': {
+    lead: 'Compara solo energía: divide el precio de bencina por el rendimiento en km/L y compara con el consumo eléctrico en kWh/100 km dividido por 100 y multiplicado por tu tarifa por kWh. Multiplica cada costo por tus km mensuales. La diferencia es bencina menos eléctrico: negativa significa que el eléctrico cuesta más. Los precios los ingresas tú; consulta bencinaenlinea.cl (CNE) y tu boleta o tarifa eléctrica (CNE/SEC). No incluye compra ni mantención del auto.',
+  },
   'costo-viaje': {
     lead: 'El costo de un viaje en auto es la suma del combustible y los peajes o TAG. Para estimar el combustible, divide los kilómetros por el rendimiento en kilómetros por litro y multiplica por el precio del litro que pagarás. Si eliges ida y vuelta, se duplican distancia y peajes; el total se divide entre los pasajeros para repartir el gasto.',
   },

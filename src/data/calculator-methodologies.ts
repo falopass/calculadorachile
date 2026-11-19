@@ -713,6 +713,43 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'El pago estimado equivale a 1,125 UTM del mes aplicable.',
     },
   },
+  'auto-electrico-vs-bencina': {
+    summary:
+      'Compara solo el costo de energía con precios y consumos ingresados por el usuario, no cifras oficiales precargadas.',
+    calculationSteps: [
+      'Bencina por km = precio por litro ÷ rendimiento en km/L.',
+      'Eléctrico por km = consumo en kWh/100 km ÷ 100 × precio por kWh.',
+      'Costo mensual de cada alternativa = costo por km sin redondear × km mensuales.',
+      'Diferencia mensual = bencina − eléctrico; diferencia anual = diferencia mensual sin redondear × 12.',
+      'Ahorro porcentual = diferencia mensual ÷ costo mensual de bencina × 100.',
+    ],
+    assumptions: [
+      'Precios declarados por el usuario: consulta bencinaenlinea.cl (CNE) y tu propia boleta o tarifa eléctrica, con referencias CNE/SEC.',
+      'Recorrido, rendimiento, consumo y precios constantes durante los 12 meses; la proyección anual no predice tarifas.',
+      'No se asume un porcentaje de pérdidas de carga; usa consumo desde la red si deseas incluirlas.',
+      'CLP, incluso costo por km, se redondea al entero al final de cada salida; el porcentaje a un decimal. No se usan valores ya redondeados en otros cálculos.',
+    ],
+    limitations: [
+      'No incluye compra, financiamiento, depreciación, mantención, seguros, permisos, peajes ni cargos fijos de electricidad.',
+      'Valores negativos de entrada se tratan como cero. Rendimiento cero genera costo de bencina cero; no representa un consumo válido.',
+      'Si el costo mensual de bencina es cero se muestra 0% por convención, no un ahorro calculable. Una diferencia negativa significa que el eléctrico cuesta más.',
+    ],
+    workedExample: {
+      title: 'Ejemplo ilustrativo: no son precios oficiales ni de mercado',
+      inputs: [
+        'Recorrido: 1.000 km/mes',
+        'Bencina: 10 km/L y $1.200/L (ilustrativos)',
+        'Eléctrico: 20 kWh/100 km y $200/kWh (ilustrativos)',
+      ],
+      development: [
+        'Bencina: 1.200 ÷ 10 = $120/km; mensual $120.000',
+        'Eléctrico: 20 ÷ 100 × 200 = $40/km; mensual $40.000',
+        'Diferencia: 120.000 − 40.000 = $80.000/mes; × 12 = $960.000/año',
+      ],
+      result:
+        'Ahorro energético ilustrativo: $80.000 al mes, equivalente a 66,7% respecto de bencina.',
+    },
+  },
   'costo-viaje': {
     summary:
       'Estima el gasto de un viaje en auto con datos que declara el usuario: litros según rendimiento, costo de combustible, peajes y reparto entre pasajeros.',
