@@ -223,12 +223,18 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
     'calculadora-costo-tag',
   ],
   'calculadora-costo-viaje': [
+    'auto-electrico-vs-bencina',
     'calculadora-costo-tag',
     'calculadora-permiso-circulacion',
     'calculadora-multas-transito',
     'peso-colombiano-a-peso-chileno',
     'peso-mexicano-a-peso-chileno',
     'boliviano-a-peso-chileno',
+  ],
+  'auto-electrico-vs-bencina': [
+    'calculadora-costo-viaje',
+    'calculadora-cuenta-luz',
+    'calculadora-credito-automotriz',
   ],
   'calculadora-costo-tag': [
     'calculadora-costo-viaje',

@@ -30,7 +30,7 @@ src/
 │   ├── ui/                          # UI base
 │   └── DisclaimerYMYL.tsx           # disclaimer YMYL
 ├── data/
-│   ├── calculators.ts               # catálogo activo: 64 calculadoras
+│   ├── calculators.ts               # catálogo activo: 78 calculadoras
 │   ├── articles.ts                  # blog
 │   ├── guias.ts                     # guías SEO/educativas
 │   └── seo-overrides.ts             # overrides canónicos de title/description

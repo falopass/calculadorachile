@@ -98,12 +98,15 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 | 6 | blog | Finiquito 2026 con sueldo mínimo | `finiquito-2026-ejemplo-sueldo-minimo` | 2026-07-10 | laboral | finiquito |
 | — | blog | Embargos CAE TGR 2026 (cuentas e inmuebles) | `embargos-cae-tgr-2026-cuentas-bienes-raices` | 2026-07-10 | educación | credito-cae |
 | 35 | blog | Aguinaldo Navidad sector público 2026 | `aguinaldo-navidad-2026-sector-publico` | 2026-11-16 | laboral | aguinaldo |
+| 23 | blog | APV 2026: beneficio tributario antes del 31-dic | `apv-2026-simulador-ahorro-tributario` | 2026-11-18 | pensión | simulador-apv |
 | 12 | blog | Boleta honorarios retención 15,25% | `boleta-honorarios-retencion-15-25-2026` | 2026-11-16 | impuestos | boleta-honorarios, cotizacion-independientes |
 | 36 | blog | Gratificación fin de año 2026 | `gratificacion-fin-de-ano-2026` | 2026-11-16 | laboral | gratificacion-legal, sueldo |
 | 34 | blog | Feriado irrenunciable 25 dic 2026 | `feriado-irrenunciable-25-diciembre-2026` | 2026-11-16 | laboral | horas-extra, sueldo, aguinaldo |
 | 13 | blog | Formulario 29 + IVA mensual | `formulario-29-iva-mensual-plazos-2026` | 2026-11-18 | impuestos | iva, ppm, boleta-honorarios |
 | 27 | blog | Vacaciones proporcionales 2026 | `vacaciones-proporcionales-2026-calcular` | 2026-11-19 | laboral | vacaciones-proporcionales, finiquito |
+| 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | 2026-11-18 | impuestos | impuesto-segunda-categoria, sueldo-liquido |
 | 28 | blog | Indemnización por años de servicio: tope de 90 UF | `indemnizacion-anos-servicio-tope-90-uf-2026` | 2026-11-18 | laboral | indemnizacion-anos-servicio, finiquito |
+| 49 | blog | Cómo cambiarse de AFP en Chile 2026: pasos y plazos | `cambio-afp-2026-como-hacerlo` | 2026-11-18 | pensión | comparador-afp |
 
 **Notas:** #37 unificado al CAE ya en prod · #7 unifica IPS+SP · evergreen viejos en `articles.ts` no se listan aquí.  
 **Puente CVListo (2026-07-10):** CTA en calcs laborales + hub `/cesantia` + checklist despido + blogs AFC.  
@@ -138,10 +141,9 @@ Ordenado por **fecha de publicación sugerida**.
 | 17 | blog | UF y UTM: convertir y usos 2026 | `uf-utm-convertir-chile-2026-usos` | satélite `uf-utm-indicadores` | conversiones | 2026-09-25 | continuo | **P2-continuo** |
 | ~~18~~ | blog | ~~Aporte Familiar Permanente 2026 (9 meses)~~ | ~~`aporte-familiar-permanente-2026-cobro-plazo`~~ | pageview | familia | ~~2026-09-29~~ | oct–nov | ✅ |
 | 19 | blog | Costo empleado PYME + cotización empleador | `costo-empleado-pyme-2026-cotizacion-empleador` | DR[19] · satélite pymes | empresas | 2026-10-02 | oct | **P2-ventana** |
-| 21 | blog | Impuesto 2.ª categoría 2026: ejemplo | `impuesto-segunda-categoria-2026-ejemplo` | satélite sueldo | impuestos | 2026-10-06 | continuo | **P2-continuo** |
-| 49 | blog | Cambio de AFP 2026: cómo hacerlo | `cambio-afp-2026-como-hacerlo` | DR[14] · hermano #22 | pensión | 2026-10-07 | continuo | **P2-continuo** |
+| ~~21~~ | blog | ~~Impuesto 2.ª categoría 2026: ejemplo~~ | ~~`impuesto-segunda-categoria-2026-ejemplo`~~ | publicado 2026-11-18 | impuestos | ~~2026-10-06~~ | continuo | ✅ |
 | 22 | blog | Comisiones AFP 2026: comparar descuento | `comisiones-afp-2026-comparar-descuento` | DR[14] · satélite AFP | pensión | 2026-10-09 | continuo | **P2-continuo** |
-| 23 | blog | APV 2026: ahorro y efecto tributario | `apv-2026-simulador-ahorro-tributario` | DR[17] | pensión | 2026-10-13 | oct–abr | **P2-ventana** |
+| ~~23~~ | blog | ~~APV 2026: ahorro y efecto tributario~~ | ~~`apv-2026-simulador-ahorro-tributario`~~ | publicado 2026-11-18 · DR[17] | pensión | ~~2026-10-13~~ | oct–abr | ✅ |
 | 50 | blog | Reforma tributaria Ley 21.713 (2026) | `reforma-tributaria-ley-21713-2026-personas-pymes` | DR[23] · **no** mega-guía | impuestos | 2026-10-14 | 2026 | **P2-continuo** |
 | ~~24~~ | blog | ~~Cotización independientes 2026~~ | ~~`cotizacion-independientes-2026-boleta`~~ | publicado 2026-11-19 en `articles-2027.ts` · DR[16] | previsional | ~~2026-10-16~~ | oct–abr | ✅ |
 | 25 | blog | Reajuste arriendo UF/IPC 2026 | `reajuste-arriendo-uf-ipc-2026-ejemplo` | evergreen blog | vivienda | 2026-10-20 | continuo | **P2-continuo** |
@@ -171,20 +173,20 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 
-**Conteo pendientes:** 32 filas activas (#2–#6, #8, #9, #16, #18, #29, #30, #31 y #45 en publicados).
+**Conteo pendientes:** 21 filas activas, sin las filas marcadas como publicadas.
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 35 |
+| **blog** | 19 |
 | **blog\*** (candidata guía) | 2 (#47, #48) |
-| **guía** | **1** (#39) |
+| **guía** | 0 |
 
 ### Sub-orden P2
 
 | Subnivel | Uso | IDs |
 |----------|-----|-----|
 | **P2-ventana** | Antes del pico | #10, #11, #13–#15, #19, #23, #24, #29–#30, #32, #34–#36, **#39 (guía)** |
-| **P2-continuo** | Sin deadline | #12, #17, #21, #22, #25–#27, #33, #38, #47–#50 |
+| **P2-continuo** | Sin deadline | #12, #17, #22, #25–#27, #33, #38, #47, #48, #50 |
 
 ---
 
@@ -322,7 +324,7 @@ Pendientes de **A** sin sección clara `DR[n]` dedicada. Prioridad de investigac
 | 6 | DR[12] |
 | 11, 29 | DR[27] |
 | 12 | DR[24] |
-| 22, 49 | DR[14] *(comparar vs cómo cambiar)* |
+| 22 | DR[14] *(comparar comisiones; #49 publicado cubre el trámite)* |
 | 23 | DR[17] |
 | 24 | DR[16] |
 | 26 | DR[28] |
@@ -371,16 +373,15 @@ Núcleo post-dedupe (catálogo A + CAE):
 Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
-Plan integrado operativo:
-  Publicados:                   16  (todos blog; +#4, #5, #8 y #9 el 2026-08-12; +#12, #34, #35 y #36 el 2026-11-16; +#13 el 2026-11-18)
-  Pendientes:                   32
-    blog:                       30
+Plan integrado operativo (recuento de las tablas tras publicar #21):
+  Filas en la tabla Publicados:  25
+  Filas activas en pendientes:  21
+    blog:                       19
     blog* (candidata guía):      2   (#47, #48)
-    guía:                        1   (#39 Operación Renta)
+    guía:                        0
     P1 restante:                 0
-    P2:                         27
-    P3:                          6
-  Total publicados + pendientes: 48
+    P2:                         17
+    P3:                          4
 ```
 
 
