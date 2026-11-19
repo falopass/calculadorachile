@@ -12,10 +12,17 @@ const baseInput = {
 };
 
 describe('calculateCostoEmpleado', () => {
-  it('hasta julio suma 1% de reforma y SIS 1,62% por separado', () => {
+  it('sin remuneración no cobra SIS ni reforma', () => {
+    const result = calculateCostoEmpleado({ ...baseInput, sueldoBruto: 0 });
+    expect(result.aportesEmpleador.sisSeparado).toBe(0);
+    expect(result.aportesEmpleador.pensionReforma).toBe(0);
+    expect(result.costoTotalMensual).toBe(0);
+  });
+
+  it('julio suma 1% de reforma y SIS 2,00% por separado', () => {
     const result = calculateCostoEmpleado(baseInput);
     expect(result.aportesEmpleador.pensionReforma).toBe(10_000);
-    expect(result.aportesEmpleador.sisSeparado).toBe(16_200);
+    expect(result.aportesEmpleador.sisSeparado).toBe(20_000);
   });
 
   it('desde agosto usa 3,5% total y no duplica SIS', () => {
@@ -46,9 +53,7 @@ describe('calculateCostoEmpleado', () => {
       sueldoBruto: 3_000_000,
       agregarGratificacion: true,
     });
-    expect(result.gratificacion).toBe(
-      Math.round((INGRESO_MINIMO.mensual * 4.75) / 12),
-    );
+    expect(result.gratificacion).toBe(Math.round((INGRESO_MINIMO.mensual * 4.75) / 12));
   });
 
   it('el período desde agosto aumenta el costo sin duplicar componentes', () => {
@@ -58,6 +63,6 @@ describe('calculateCostoEmpleado', () => {
       periodoCotizacion: 'desde_agosto_2026',
     });
     expect(despues.costoTotalMensual).toBeGreaterThan(antes.costoTotalMensual);
-    expect(despues.costoTotalMensual - antes.costoTotalMensual).toBe(8_800);
+    expect(despues.costoTotalMensual - antes.costoTotalMensual).toBe(5_000);
   });
 });

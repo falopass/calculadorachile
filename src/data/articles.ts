@@ -1934,14 +1934,14 @@ ${DESEMPLEO_INE_HTML}
       {
         question: '¿Cuánto sube realmente el costo frente a julio de 2026?',
         answer:
-          'En julio el bloque previsional patronal suma 2,62%: 1% de la reforma más SIS vigente de 1,62%. En agosto pasa a 3,5%, por lo que la diferencia comparable es 0,88% de la base imponible topada. Sobre $1.000.000, el aumento es $8.800 al mes, no $35.000.',
+          'En julio el bloque previsional patronal suma 3%: 1% de la reforma más SIS vigente de 2,00%. En agosto pasa a 3,5%, por lo que la diferencia comparable es 0,5 puntos porcentuales de la base imponible topada. Sobre $1.000.000, el aumento es $5.000 al mes, no $35.000.',
       },
     ],
     content: `<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El 3,5% ya incluye el SIS</strong><p>Desde las remuneraciones de agosto de 2026 no corresponde sumar “3,5% de reforma” más otro 1,62% o 1,5% de Seguro de Invalidez y Sobrevivencia. El <strong>3,5% es el total previsional de cargo del empleador</strong> para esta etapa e incorpora el SIS dentro de su componente de 2,5% destinado al Seguro Social.</p></div></aside>
 
 <p>El titular “la cotización del empleador sube a 3,5%” puede producir dos errores opuestos. Algunas empresas creen que deben descontarlo del sueldo; otras agregan el 3,5% completo a un presupuesto que ya contiene SIS. La Ley 21.735 no autoriza ninguna de esas operaciones. Es una cotización patronal, calculada sobre remuneración imponible, y desde agosto reorganiza dentro del mismo 3,5% un seguro que la empresa ya financiaba.</p>
 
-<p>La forma correcta de presupuestar es comparar períodos equivalentes. Para la remuneración de julio de 2026, el empleador paga 1% de la reforma más el SIS vigente de 1,62%, totalizando 2,62% en este bloque. Para la remuneración de agosto, paga 3,5% total. Por tanto, el aumento mensual comparable es <strong>0,88 puntos porcentuales</strong> de la base imponible topada.</p>
+<p>La forma correcta de presupuestar es comparar períodos equivalentes. Para la remuneración de julio de 2026, el empleador paga 1% de la reforma más el SIS vigente de 2,00%, totalizando 3% en este bloque. Para la remuneración de agosto, paga 3,5% total. Por tanto, el aumento mensual comparable es <strong>0,5 puntos porcentuales</strong> de la base imponible topada.</p>
 
 <h2>Qué cambia y cuándo se paga</h2>
 <p>La reforma previsional fue publicada el 26 de marzo de 2025. Su aporte patronal comenzó con 1% sobre las remuneraciones de agosto de 2025 y aumenta por etapas hasta llegar al total definido por la ley. El segundo hito entra en las <strong>remuneraciones devengadas en agosto de 2026</strong>, no en cualquier pago bancario efectuado durante ese mes.</p>
@@ -1949,9 +1949,9 @@ ${DESEMPLEO_INE_HTML}
 <table>
 <thead><tr><th>Período de remuneración</th><th>Aporte reforma</th><th>SIS separado</th><th>Total previsional empleador</th></tr></thead>
 <tbody>
-<tr><td>Julio de 2026</td><td>1,00%</td><td>1,62%</td><td><strong>2,62%</strong></td></tr>
+<tr><td>Julio de 2026</td><td>1,00%</td><td>2,00%</td><td><strong>3,00%</strong></td></tr>
 <tr><td>Agosto de 2026 a julio de 2027</td><td>Integrado en el total</td><td>No se suma aparte</td><td><strong>3,50%</strong></td></tr>
-<tr><td>Diferencia comparable</td><td colspan="2">3,50% − 2,62%</td><td><strong>0,88%</strong></td></tr>
+<tr><td>Diferencia comparable</td><td colspan="2">3,50% − 3,00%</td><td><strong>0,50%</strong></td></tr>
 </tbody>
 </table>
 
@@ -1968,31 +1968,31 @@ ${DESEMPLEO_INE_HTML}
 <li><strong>2,5%</strong> ingresa al Fondo Autónomo de Protección Previsional para financiar el SIS y la compensación por diferencias de expectativa de vida.</li>
 </ul>
 
-<p>Ese último 2,5% puede desglosarse comunicacionalmente en 1,5% para SIS y 1% para compensación por expectativa de vida. Para la contabilidad de costo, lo decisivo es que ambos están dentro del 3,5%. El SIS deja de aparecer como el 1,62% separado que regía desde abril de 2026.</p>
+<p>Ese último 2,5% puede desglosarse comunicacionalmente en 1,5% para SIS y 1% para compensación por expectativa de vida. Para la contabilidad de costo, lo decisivo es que ambos están dentro del 3,5%. El SIS deja de aparecer como cargo separado: fue 1,62% entre abril y junio de 2026 y 2,00% en julio, según los Oficios SP N°12677 y N°12934 y los indicadores de Previred.</p>
 
 <p>La CRP tampoco debe describirse simplemente como dinero “perdido” o un impuesto general. La ley la estructura como una cotización registrada y con reintegro en la pensión, con reajustes e intereses, bajo sus requisitos. Explicar su destino no cambia quién la paga: el empleador.</p>
 
 <h2>Ejemplo 1: remuneración imponible de $800.000</h2>
 <p>El ejemplo asume un mes completo, base imponible bajo el tope de 90 UF y una persona sujeta a la obligación. No incluye cesantía, accidentes del trabajo ni otras partidas patronales.</p>
 
-<div class="numeric-example"><div class="numeric-example__title">Julio 2026: bloque previsional patronal</div><ul><li>Reforma: $800.000 × 1% = $8.000</li><li>SIS: $800.000 × 1,62% = $12.960</li></ul><span class="total">Total julio: $20.960</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Julio 2026: bloque previsional patronal</div><ul><li>Reforma: $800.000 × 1% = $8.000</li><li>SIS: $800.000 × 2,00% = $16.000</li></ul><span class="total">Total julio: $24.000</span></div>
 
 <div class="numeric-example"><div class="numeric-example__title">Agosto 2026: 3,5% total</div><ul><li>Cuenta individual 0,1%: $800</li><li>CRP 0,9%: $7.200</li><li>Seguro Social 2,5%: $20.000</li></ul><span class="total">Total agosto: $28.000</span></div>
 
-<p>La diferencia es <strong>$7.040 mensuales</strong>: $800.000 × 0,88%. Si se mantuvieran durante doce meses la misma base y las mismas tasas, el bloque de 3,5% sumaría $336.000 anuales y el aumento frente a una referencia constante de 2,62% sería $84.480. Eso es una proyección, no el gasto efectivo de todo 2026, porque el nuevo tramo comienza en agosto.</p>
+<p>La diferencia es <strong>$4.000 mensuales</strong>: $800.000 × 0,5%. Si se mantuvieran durante doce meses la misma base y las mismas tasas, el bloque de 3,5% sumaría $336.000 anuales y el aumento frente a una referencia constante de 3% sería $48.000. Eso es una proyección, no el gasto efectivo de todo 2026, porque el nuevo tramo comienza en agosto.</p>
 
 <h2>Ejemplo 2: remuneración imponible de $1.500.000</h2>
-<div class="numeric-example"><div class="numeric-example__title">Comparación julio–agosto</div><ul><li>Julio: $1.500.000 × 2,62% = $39.300</li><li>Agosto: $1.500.000 × 3,5% = $52.500</li><li>Aumento: $1.500.000 × 0,88% = $13.200</li></ul><span class="total">Costo previsional agosto: $52.500 · aumento mensual: $13.200</span></div>
+<div class="numeric-example"><div class="numeric-example__title">Comparación julio–agosto</div><ul><li>Julio: $1.500.000 × 3% = $45.000</li><li>Agosto: $1.500.000 × 3,5% = $52.500</li><li>Aumento: $1.500.000 × 0,5% = $7.500</li></ul><span class="total">Costo previsional agosto: $52.500 · aumento mensual: $7.500</span></div>
 
-<p>Decir que el “costo extra” es $52.500 sería incorrecto: antes de agosto la empresa ya destinaba $39.300 a reforma y SIS. Los $52.500 son el costo total del bloque desde agosto; el incremento marginal es $13.200.</p>
+<p>Decir que el “costo extra” es $52.500 sería incorrecto: en julio la empresa ya destinaba $45.000 a reforma y SIS. Los $52.500 son el costo total del bloque desde agosto; el incremento marginal es $7.500.</p>
 
 <h2>Ejemplo 3: una nómina PYME</h2>
 <p>Para una nómina cuya suma de remuneraciones imponibles topadas sea $10.000.000:</p>
 
 <ul>
-<li>Total comparable en julio: $10.000.000 × 2,62% = <strong>$262.000</strong>.</li>
+<li>Total comparable en julio: $10.000.000 × 3% = <strong>$300.000</strong>.</li>
 <li>Total desde agosto: $10.000.000 × 3,5% = <strong>$350.000</strong>.</li>
-<li>Mayor provisión mensual: $10.000.000 × 0,88% = <strong>$88.000</strong>.</li>
+<li>Mayor provisión mensual: $10.000.000 × 0,5% = <strong>$50.000</strong>.</li>
 </ul>
 
 <p>La base agregada debe construirse trabajador por trabajador. No apliques un único porcentaje al gasto total del banco si allí mezclaste honorarios, asignaciones no imponibles, reembolsos, finiquitos o remuneraciones por encima del tope.</p>
@@ -2050,7 +2050,7 @@ ${DESEMPLEO_INE_HTML}
 
 <h2>Errores detectados en preguntas y comunidades</h2>
 <ul>
-<li><strong>“Sube de 1% a 3,5%, entonces el costo aumenta 2,5 puntos”.</strong> Omite que en julio también se pagaba SIS 1,62%; la diferencia comparable es 0,88 puntos.</li>
+<li><strong>“Sube de 1% a 3,5%, entonces el costo aumenta 2,5 puntos”.</strong> Omite que en julio también se pagaba SIS 2,00%; la diferencia comparable es 0,5 puntos.</li>
 <li><strong>“El SIS sigue aparte porque aparece en mi fórmula histórica”.</strong> Desde agosto está incorporado en el 3,5%.</li>
 <li><strong>“Se descuenta 3,5% al trabajador”.</strong> Contradice el carácter patronal de la cotización.</li>
 <li><strong>“Se aplica al total de transferencias de sueldos”.</strong> La base es la remuneración imponible topada, no el líquido ni todos los desembolsos.</li>
@@ -2063,7 +2063,8 @@ ${DESEMPLEO_INE_HTML}
 <ul>
 <li><a href="https://www.bcn.cl/leychile/navegar?idNorma=1212060" target="_blank" rel="noopener">BCN LeyChile — Ley 21.735</a>, creación del sistema mixto y Seguro Social Previsional.</li>
 <li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización de cargo del empleador</a>, gradualidad y destino final.</li>
-<li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9908.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización previsional obligatoria</a>, SIS 1,62% desde abril de 2026, tope 90 UF, plazos y mora.</li>
+<li><a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9908.html" target="_blank" rel="noopener">Superintendencia de Pensiones — Cotización previsional obligatoria</a>, tope 90 UF, plazos y mora.</li>
+<li><a href="https://www.previred.com/wp-content/uploads/2026/07/Indicadores-Previsionales-Previred-Julio-2026.pdf" target="_blank" rel="noopener">Previred — Indicadores julio de 2026</a>, SIS 2,00% para remuneraciones de julio, pagaderas en agosto. SP Oficios Ordinarios <a href="https://ayuda.talana.com/hc/es-419/article_attachments/53334402731283" target="_blank" rel="noopener">N°12677, 8 de julio de 2026</a> y <a href="https://ayuda.talana.com/hc/es-419/article_attachments/53367602904339" target="_blank" rel="noopener">N°12934, 10 de julio de 2026</a> (copias alojadas en Talana), instrucción y ratificación del 2,00%.</li>
 <li><a href="https://previsionsocial.gob.cl/wp-content/uploads/2025/08/Nota-Tecnica-Reforma-de-Pensiones-Ley-N%C2%B021.735.pdf" target="_blank" rel="noopener">Subsecretaría de Previsión Social — Nota técnica de la reforma</a>, tabla de agosto de 2026: 0,1% + 0,9% + 2,5%.</li>
 <li><a href="https://www.chileatiende.gob.cl/preguntas-frecuentes/nueva-cotizacion-empleadores" target="_blank" rel="noopener">ChileAtiende — Preguntas frecuentes para empleadores</a>, operación en Previred y casos excluidos.</li>
 <li><a href="https://hacienda.gov.cl/noticias-y-eventos/noticias/implementacion-de-la-reforma-previsional-nueva-cotizacion-del-empleador-regira" target="_blank" rel="noopener">Ministerio de Hacienda — Implementación y calendario</a>.</li>

@@ -11,6 +11,7 @@ import {
   SALUD,
   SEGURO_CESANTIA,
   getEscalonSeguroSocialPrevisional,
+  getSisEmpleadorSeparado,
 } from '@/lib/values/constants';
 import type { CalculatorResult } from '@/types/calculator';
 
@@ -44,7 +45,7 @@ export interface CostoEmpleadoResult {
 
 /**
  * Entre agosto de 2025 y julio de 2026, el empleador paga 1% por la reforma
- * previsional y el SIS vigente por separado (1,62% desde abril de 2026).
+ * previsional y el SIS por separado (abr–jun 2026: 1,62%; julio: 2,00%).
  * Desde remuneraciones de agosto de 2026, la cotización total del empleador
  * es 3,5% (ChileAtiende 130987): 2,5% al Seguro Social Previsional —que
  * incluye el SIS, ahora recaudado por el IPS—, 0,9% a la CRP y 0,1% a la
@@ -59,10 +60,8 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
   const totalHaberesImponibles = sueldoBruto + gratificacion;
   const afp = AFP[input.afp] ?? AFP.uno;
 
-  const descuentoAFP =
-    totalHaberesImponibles * ((AFP_OBLIGATORIA_PCT + afp.comision) / 100);
-  const tasaSalud =
-    input.saludTipo === 'fonasa' ? SALUD.fonasa.tasa : SALUD.isapre.tasa_minima;
+  const descuentoAFP = totalHaberesImponibles * ((AFP_OBLIGATORIA_PCT + afp.comision) / 100);
+  const tasaSalud = input.saludTipo === 'fonasa' ? SALUD.fonasa.tasa : SALUD.isapre.tasa_minima;
   const descuentoSalud = totalHaberesImponibles * (tasaSalud / 100);
   const descuentoCesantia = input.contratoIndefinido
     ? totalHaberesImponibles * (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100)
@@ -70,15 +69,13 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
 
   // El período seleccionado se traduce a una fecha representativa para
   // consultar el calendario oficial Ley 21.735 (sube cada 1° de agosto).
-  const escalon = getEscalonSeguroSocialPrevisional(
+  const fechaRemuneracion =
     input.periodoCotizacion === 'desde_agosto_2026'
       ? new Date('2026-08-01T12:00:00')
-      : new Date('2026-07-31T12:00:00'),
-  );
+      : new Date('2026-07-31T12:00:00');
+  const escalon = getEscalonSeguroSocialPrevisional(fechaRemuneracion);
   const pensionReforma = totalHaberesImponibles * (escalon.tasa / 100);
-  const sisSeparado = escalon.incluyeSIS
-    ? 0
-    : totalHaberesImponibles * (afp.sis / 100);
+  const sisSeparado = totalHaberesImponibles * (getSisEmpleadorSeparado(fechaRemuneracion) / 100);
   const seguroCesantia = input.contratoIndefinido
     ? totalHaberesImponibles * (SEGURO_CESANTIA.contrato_indefinido.empleador / 100)
     : totalHaberesImponibles * (SEGURO_CESANTIA.contrato_plazo_fijo.empleador / 100);
@@ -111,7 +108,12 @@ export function calculateCostoEmpleado(input: CostoEmpleadoInput): CostoEmpleado
 export function costoEmpleadoToResults(result: CostoEmpleadoResult): CalculatorResult[] {
   const aportes = result.aportesEmpleador;
   return [
-    { label: 'Costo mensual estimado', value: result.costoTotalMensual, format: 'CLP', highlight: true },
+    {
+      label: 'Costo mensual estimado',
+      value: result.costoTotalMensual,
+      format: 'CLP',
+      highlight: true,
+    },
     { label: 'Costo anual estimado', value: result.costoTotalAnual, format: 'CLP' },
     { label: 'Haberes imponibles', value: result.totalHaberesImponibles, format: 'CLP' },
     { label: 'Gratificación agregada', value: result.gratificacion, format: 'CLP' },
