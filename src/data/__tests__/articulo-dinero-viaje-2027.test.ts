@@ -9,6 +9,7 @@ describe('presupuesto de viaje verano 2027', () => {
 
   it('publica una sola entrada con alcance y fuentes explícitos', () => {
     expect(articles.filter((item) => item.slug === slug)).toHaveLength(1);
+    expect(article.category).toBe('educacion-financiera');
     expect(article.content).toContain('diciembre de 2026 y marzo de 2027');
     expect(article.sources.length).toBeGreaterThan(0);
     for (const source of article.sources) {

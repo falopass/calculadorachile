@@ -62,7 +62,7 @@ export const ARTICULOS_2027: Article[] = [
     description:
       'Arma tu presupuesto de verano 2027 en moneda local: efectivo, tarjetas y conversores para Argentina, Brasil, Perú, Colombia, México y Bolivia.',
     date: '2026-11-19',
-    category: 'finanzas',
+    category: 'educacion-financiera',
     readingTime: 7,
     keywords: ['cuánto dinero llevar', 'verano 2027', 'presupuesto viaje desde Chile', 'efectivo o tarjeta en el extranjero'],
     relatedCalculators: [
