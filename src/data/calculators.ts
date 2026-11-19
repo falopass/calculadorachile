@@ -4,6 +4,7 @@ import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/valu
 // ============================================
 
 import type { Calculator } from '@/types/calculator';
+import { CUPO_DIAS_ADMINISTRATIVOS } from '@/lib/calculations/dias-administrativos';
 import { UTA_2026, UTM, AGUINALDO_2026, AGUINALDO_PENSIONADOS_IPS_2026 } from '@/lib/values/constants';
 import { calculatorMethodologies } from '@/data/calculator-methodologies';
 import { formatCLP } from '@/lib/formatters';
@@ -7718,6 +7719,55 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         answer:
           'El INE publica el boletín mensual del IPC a las 08:00 horas dentro de los primeros ocho días de cada mes con el índice del mes anterior.',
       },
+    ],
+  },
+  {
+    id: 'dias-administrativos',
+    name: 'Calculadora de días administrativos',
+    description:
+      'Consulta tus días administrativos usados y disponibles en el año calendario y simula una solicitud de permiso con goce de remuneraciones para funcionarios del sector público y municipales. El saldo no implica autorización.',
+    slug: 'calculadora-dias-administrativos',
+    category: 'servicios',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-19',
+    seoTitle: 'Calculadora de días administrativos: saldo y medios días',
+    sources: [
+      { name: 'BCN — DFL 29, texto refundido Ley 18.834, arts. 108 y 109',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=236392',
+        note: 'Cupo anual, fraccionamiento y facultad de conceder o denegar el permiso.' },
+      { name: 'BCN — Ley 18.883, arts. 107 y 108', url: 'https://www.bcn.cl/leychile/navegar?idNorma=30256',
+        note: 'Permisos para funcionarios municipales y facultad del alcalde.' },
+    ],
+    keywords: ['días administrativos', 'sector público', 'medios días administrativos', 'saldo días administrativos', 'permisos funcionarios municipales'],
+    inputs: [
+      { id: 'diasCompletosUsados', label: 'Días completos usados este año calendario',
+        type: 'number', unit: 'days', min: 0, defaultValue: 0, required: true,
+        tooltip: 'Ingresa solo los días completos; registra los medios días en el siguiente campo.' },
+      { id: 'mediosDiasUsados', label: 'Cantidad de medios días usados este año calendario',
+        type: 'number', unit: 'count', min: 0, defaultValue: 0, required: true,
+        tooltip: 'Cada medio día cuenta como 0,5 días. Por ejemplo, ingresa 3 si usaste tres medios días.' },
+      { id: 'diasSolicitados', label: 'Días que quieres solicitar ahora (opcional)',
+        type: 'select', defaultValue: '',
+        options: [
+          { value: '', label: 'Solo consultar saldo' },
+          ...Array.from({ length: CUPO_DIAS_ADMINISTRATIVOS * 2 + 1 }, (_, medios) => ({
+            value: String(medios / 2),
+            label: `${(medios / 2).toLocaleString('es-CL')} días`,
+          })),
+        ] },
+    ],
+    faq: [
+      { question: '¿Cuántos días administrativos puedo solicitar?',
+        answer: `Hasta ${CUPO_DIAS_ADMINISTRATIVOS} días hábiles por motivos particulares en el año calendario, con goce de remuneraciones, bajo el DFL 29 (texto refundido de la Ley 18.834), art. 109, o la Ley 18.883, art. 108, para funcionarios municipales. Verifica con personal cuál es tu estatuto aplicable.` },
+      { question: '¿Se pueden pedir medios días?',
+        answer: 'Sí. Ambas normas permiten fraccionar estos permisos por días o medios días. Ingresa la cantidad de medios días usados, no su equivalente decimal: tres medios días son 1,5 días.' },
+      { question: '¿Tener saldo significa que deben autorizar mi solicitud?',
+        answer: 'No. El DFL 29, art. 108, permite al jefe superior, Secretario Regional Ministerial o Director Regional competente conceder o denegar discrecionalmente el permiso. En municipalidades, esa facultad corresponde al alcalde (Ley 18.883, art. 107).' },
+      { question: '¿Qué año y permisos considera esta calculadora?',
+        answer: 'Considera solo el uso que declares para el mismo año calendario. No calcula feriado legal, permisos sin goce ni otros permisos especiales. No aplica prorrateos por fecha de ingreso ni suma saldos de otros años: consulta a personal para revisar tu situación.' },
+      { question: '¿Qué pasa si informo un uso mayor al cupo?',
+        answer: 'El saldo disponible se muestra en cero y aparece una advertencia para revisar los datos con la unidad de personal. No es una validación del registro oficial ni una autorización para ausentarte.' },
     ],
   },
   {

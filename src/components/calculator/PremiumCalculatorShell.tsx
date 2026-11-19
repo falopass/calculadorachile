@@ -60,6 +60,7 @@ const ORGANISMO_BY_ID: Record<string, string> = {
   'semana-corrida': 'la Dirección del Trabajo',
   'ipc': 'el Instituto Nacional de Estadísticas (INE)',
   'dias-habiles': 'el órgano administrativo o tribunal competente',
+  'dias-administrativos': 'tu unidad de personal y la autoridad competente de tu institución o municipalidad',
   'credito-consumo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'interes-compuesto': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'deposito-a-plazo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
@@ -73,6 +74,7 @@ const SIN_GRAFICO = new Set([
   'puntaje-ponderado-paes',
   'puntaje-nem-ranking',
   'dias-habiles',
+  'dias-administrativos',
   'ipc',
   'prenatal-postnatal',
 ]);

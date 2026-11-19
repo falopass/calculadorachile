@@ -1202,6 +1202,9 @@ const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
   'operacion-renta': {
     lead: 'El impuesto anual estimado se calcula sobre los ingresos menos los gastos, las cotizaciones obligatorias y el ahorro previsional ingresados. A esa renta tributable se aplica la tabla progresiva anual en UTA. La retención sugerida se muestra por separado: no es una devolución calculada ni reemplaza tu declaración ante el SII o la revisión de las deducciones permitidas.',
   },
+  'dias-administrativos': {
+    lead: 'Para consultar tu saldo de días administrativos, descuenta del cupo anual los días completos y medios días ya usados en el mismo año calendario. El DFL 29, art. 109, y la Ley 18.883, art. 108, permiten solicitar hasta seis días hábiles con goce de remuneraciones, fraccionables por días o medios días. Que una solicitud quepa en el saldo no implica autorización: la autoridad competente puede concederla o denegarla.',
+  },
   'dias-habiles': {
     lead: 'Para contar días hábiles, excluye domingos y feriados nacionales; en el cómputo administrativo también se excluyen los sábados, mientras que en el judicial se incluyen. La calculadora no cuenta la fecha inicial y sí la final si es hábil. También permite sumar un plazo y advierte si faltan calendarios de feriados o hay feriados pendientes de confirmación. Verifica el régimen aplicable a tu trámite.',
   },

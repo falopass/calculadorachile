@@ -21,7 +21,7 @@ const IDS = [
   'aguinaldo', 'capacidad-credito-hipotecario', 'plusvalia',
   'compras-internacionales', 'real-brasileno-clp', 'sol-peruano-clp',
   'trabajo-en-feriado', 'valor-hora-trabajo', 'costo-viaje', 'peso-argentino-clp',
-  'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'pension-alimenticia',
+  'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'dias-administrativos', 'pension-alimenticia',
 ];
 
 describe('getQuickAnswer', () => {

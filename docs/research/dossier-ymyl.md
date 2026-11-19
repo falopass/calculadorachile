@@ -29,6 +29,19 @@
 
 ## 1. Ficha por calculadora
 
+### Días administrativos — `dias-administrativos` (revisión 2026-11-19)
+
+**Verificado en BCN/Ley Chile:** [DFL 29, texto refundido de la Ley 18.834, arts. 108 y 109](https://www.bcn.cl/leychile/navegar?idNorma=236392) y [Ley 18.883, arts. 107 y 108](https://www.bcn.cl/leychile/navegar?idNorma=30256).
+
+- DFL 29, art. 109, inciso primero; Ley 18.883, art. 108, inciso primero: «Los funcionarios podrán solicitar permisos para ausentarse de sus labores por motivos particulares hasta por seis días hábiles en el año calendario, con goce de remuneraciones. Estos permisos podrán fraccionarse por días o medios días.»
+- DFL 29, art. 108: «El jefe superior de la institución, el Secretario Regional Ministerial o el Director Regional de los servicios nacionales desconcentrados, según corresponda, podrá conceder o denegar discrecionalmente dichos permisos.»
+- Ley 18.883, art. 107: «El alcalde podrá conceder o denegar discrecionalmente dichos permisos.»
+- Precisión de cita: el cupo está en el **art. 109 del DFL 29**, no en su art. 108; el texto original de la Ley 18.834 lo sitúa en el art. 104. Se usa la numeración del texto refundido.
+
+**Cálculo:** cupo constante de 6 días en `dias-administrativos.ts`. Unidades enteras de medio día: uso = completos × 2 + medios; disponible = máximo(0, 12 − uso). Solicitud opcional en múltiplos de 0,5; se compara en medios días y se proyecta saldo con mínimo cero. Sin redondeo. Uso sobre el cupo genera advertencia; entradas negativas, no enteras en uso o solicitudes fuera del paso generan error. No determina autorización, prorrateos, acumulación ni permisos especiales. El cupo es por año calendario.
+
+**Matriz catálogo → adapter → módulo:** `diasCompletosUsados`, `mediosDiasUsados`, `diasSolicitados` → `load-calculator.ts` → `calculateDiasAdministrativos`. Sin inputs cosméticos. Tests golden, bordes, validación y wiring: `src/lib/calculations/__tests__/dias-administrativos.test.ts`.
+
 ### A) Sueldo líquido (dependiente)
 
 **Riesgo YMYL si se calcula mal:** Alto
