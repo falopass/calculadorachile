@@ -633,7 +633,6 @@ export async function loadCalculationFn(
       return (inputs) => {
         const result = calculatePPM({
           ingresosBrutosAnuales: coerceNumber(inputs.ingresosBrutosAnuales),
-          gastosPresuntos: coerceNumber(inputs.gastosPresuntos, 0) || undefined,
           actividad: inputs.actividad as
             | 'profesional'
             | 'comercio'

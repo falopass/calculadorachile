@@ -2,9 +2,12 @@ import { getRetencionHonorarios, formatTasa as tasaHonorarios } from '@/lib/valu
 import type { CalculatorMethodology } from '@/types/calculator';
 import { formatCLP } from '@/lib/formatters';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
+import { calculatePPM } from '@/lib/calculations/ppm';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
 import { calculateIndemnizacion } from '@/lib/calculations/indemnizacion';
 import { INDEMNIZACION } from '@/lib/values/constants';
+
+const EJ_PPM = calculatePPM({ ingresosBrutosAnuales: 24_000_000, actividad: 'comercio' });
 
 // E-014: cifras del tope de gratificación generadas desde las constantes.
 const TOPE_GRAT = topeGratificacion();
@@ -848,22 +851,23 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
   },
   ppm: {
     summary:
-      'Calcula un pago provisional mensual aplicando la tasa declarada a los ingresos del período.',
+      'Estima el PPM anual y su promedio mensual sobre ingresos brutos sin IVA, sin deducir gastos.',
     calculationSteps: [
-      'Toma los ingresos netos o base informada.',
-      'Convierte la tasa porcentual a factor decimal.',
-      'Multiplica la base por la tasa y presenta el PPM estimado.',
+      'Toma los ingresos brutos anuales sin IVA; si son negativos, usa cero.',
+      'Usa la tasa vigente del calendario de honorarios para profesionales, o las referencias de comercio 1%, transporte 0,3% y construcción 0,2%.',
+      'Multiplica la base anual por la tasa y redondea a pesos. Divide el resultado por 12 y redondea el promedio mensual.',
     ],
-    assumptions: ['La tasa ingresada es la que corresponde al contribuyente y período.'],
+    assumptions: ['Los ingresos corresponden al período anual que se desea estimar. No se deducen gastos.'],
     limitations: [
-      'No determina automáticamente la tasa obligatoria ni el régimen tributario.',
+      'No determina automáticamente la tasa obligatoria ni el régimen tributario. Confirma tu tasa aplicable en el SII.',
+      'El promedio mensual no reemplaza la declaración de los ingresos efectivos de cada mes mediante F29.',
       'El PPM es un anticipo y no equivale al impuesto anual definitivo.',
     ],
     workedExample: {
-      title: 'Ejemplo: PPM de 0,25%',
-      inputs: ['Ingresos base: $1.000.000', 'Tasa informada: 0,25%'],
-      development: ['PPM = $1.000.000 × 0,0025'],
-      result: 'PPM estimado: $2.500.',
+      title: 'Ejemplo: comercio al 1%',
+      inputs: ['Ingresos brutos anuales sin IVA: $24.000.000', 'Actividad: comercio (1%)'],
+      development: ['PPM anual = $24.000.000 × 0,01', 'Promedio mensual = PPM anual ÷ 12'],
+      result: `PPM anual estimado: ${formatCLP(EJ_PPM.ppmAnual)}. Promedio mensual: ${formatCLP(EJ_PPM.ppmMensual)}.`,
     },
   },
   'bono-bodas-oro': {

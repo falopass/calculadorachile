@@ -185,9 +185,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-ppm': {
-    seoTitle: 'Cálculo de PPM 2026: tasa Pro Pyme y General SII', // 48
+    seoTitle: 'Calculadora de PPM: estimación anual y mensual',
     seoDescription:
-      'Calcula tu Pago Provisional Mensual (PPM) 2026: tasa según régimen Pro Pyme Transparente (0,2%) o General. Ventas netas y F29 SII.', // 132
+      'Estima tu PPM anual y promedio mensual sobre ingresos brutos sin IVA, según actividad. Tasas de referencia y plazos del Formulario 29 del SII.',
   },
 
   // --- EMPRESAS Y PYMES ---
