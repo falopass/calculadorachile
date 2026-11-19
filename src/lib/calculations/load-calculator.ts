@@ -542,6 +542,21 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'auto-electrico-vs-bencina': {
+      const { calculateAutoElectricoVsBencina, autoElectricoVsBencinaToResults } =
+        await import('./auto-electrico-vs-bencina');
+      return (inputs) =>
+        autoElectricoVsBencinaToResults(
+          calculateAutoElectricoVsBencina({
+            kmMensuales: coerceNumber(inputs.kmMensuales),
+            rendimientoKmL: coerceNumber(inputs.rendimientoKmL),
+            precioBencina: coerceNumber(inputs.precioBencina),
+            consumoKwh100km: coerceNumber(inputs.consumoKwh100km),
+            precioKwh: coerceNumber(inputs.precioKwh),
+          }),
+        );
+    }
+
     case 'costo-viaje': {
       const { calculateCostoViaje, costoViajeToResults } = await import('./costo-viaje');
       return (inputs) =>

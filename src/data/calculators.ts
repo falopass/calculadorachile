@@ -4012,6 +4012,113 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'auto-electrico-vs-bencina',
+    name: 'Auto eléctrico vs bencina: costo por km',
+    description:
+      'Compara el costo de energía por km y al mes de un auto eléctrico y uno a bencina con tus precios y consumos. Calcula la diferencia mensual y anual.',
+    slug: 'auto-electrico-vs-bencina',
+    category: 'vehiculos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-19',
+    seoTitle: 'Auto eléctrico vs bencina: costo por km y ahorro mensual',
+    seoDescription:
+      'Compara bencina y electricidad por kilómetro y al mes. Ingresa tus precios, rendimiento y consumo para estimar la diferencia mensual, anual y porcentual.',
+    sources: [
+      {
+        name: 'CNE — estadísticas de hidrocarburos y precios de combustibles',
+        url: 'https://www.cne.cl/estadisticas/hidrocarburos/',
+        note: 'Para el precio de tu estación consulta bencinaenlinea.cl (CNE); la calculadora no carga precios ni usa un precio oficial fijo.',
+      },
+      {
+        name: 'CNE — tarificación eléctrica',
+        url: 'https://www.cne.cl/tarificacion/electrica/',
+        note: 'Referencia de tarifas: ingresa el precio por kWh de tu boleta o tarifa aplicable; no se asume un precio universal.',
+      },
+    ],
+    keywords: [
+      'auto eléctrico vs bencina',
+      'costo por km eléctrico',
+      'ahorro auto eléctrico',
+      'costo carga auto eléctrico',
+      'comparar bencina electricidad',
+    ],
+    inputs: [
+      {
+        id: 'kmMensuales',
+        label: 'Kilómetros recorridos al mes (km)',
+        type: 'number',
+        placeholder: 'Ingresa tu recorrido mensual',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'rendimientoKmL',
+        label: 'Rendimiento a bencina (km/L)',
+        type: 'number',
+        placeholder: 'Ingresa el rendimiento real',
+        required: true,
+        min: 0,
+      },
+      {
+        id: 'precioBencina',
+        label: 'Precio de bencina ($/L)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: 'Ingresa el precio de tu bencinera',
+        required: true,
+        allowZero: true,
+        min: 0,
+        tooltip:
+          'Consulta bencinaenlinea.cl de la CNE. El precio lo ingresas tú; no es una cifra oficial precargada.',
+      },
+      {
+        id: 'consumoKwh100km',
+        label: 'Consumo eléctrico (kWh/100 km)',
+        type: 'number',
+        placeholder: 'Ingresa el consumo del eléctrico',
+        required: true,
+        min: 0,
+        tooltip:
+          'Usa el consumo desde la red si quieres incluir pérdidas de carga; no se agrega un porcentaje supuesto.',
+      },
+      {
+        id: 'precioKwh',
+        label: 'Precio de electricidad ($/kWh)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: 'Ingresa tu tarifa por kWh',
+        required: true,
+        allowZero: true,
+        min: 0,
+        tooltip:
+          'Revisa tu boleta o tarifa de carga y las referencias de CNE/SEC. Usa cargos variables aplicables al consumo adicional, no el cargo fijo.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo se compara el costo por km?',
+        answer:
+          'Bencina: precio por litro dividido por rendimiento en km/L. Eléctrico: consumo en kWh/100 km dividido por 100 y multiplicado por tu precio por kWh. Ambos precios los ingresas tú; no hay precios precargados.',
+      },
+      {
+        question: '¿Dónde encuentro los precios de referencia?',
+        answer:
+          'Consulta bencinaenlinea.cl de la Comisión Nacional de Energía para tu estación. Para electricidad revisa tu propia boleta o tarifa de carga y las referencias de tarifas de CNE/SEC; los cargos fijos no son un precio por kWh.',
+      },
+      {
+        question: '¿Qué significa una diferencia negativa?',
+        answer:
+          'La diferencia es bencina menos eléctrico. Si es positiva, el eléctrico ahorra energía en pesos; si es negativa, cuesta más. El porcentaje usa el costo mensual de bencina como base; si es cero, se muestra 0% por convención. No es un ahorro calculable en ese caso.',
+      },
+      {
+        question: '¿Incluye compra del auto, mantención y pérdidas de carga?',
+        answer:
+          'No compara el costo total de propiedad: excluye compra, financiamiento, mantención, seguros, permisos, peajes y cargos fijos. No agrega pérdidas de carga automáticamente; ingresa consumo desde la red si quieres incluirlas. Los costos se redondean al peso al final, incluso por km; la diferencia anual usa la diferencia mensual sin redondear multiplicada por 12.',
+      },
+    ],
+  },
+  {
     id: 'costo-viaje',
     name: 'Costo de Viaje en Auto',
     description:
