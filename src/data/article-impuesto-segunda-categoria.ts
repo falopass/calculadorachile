@@ -27,7 +27,7 @@ export const articuloImpuestoSegundaCategoria: Article = {
     'renta líquida imponible',
     'impuesto al sueldo',
   ],
-  relatedCalculators: ['impuesto-segunda-categoria', 'sueldo-liquido'],
+  relatedCalculators: ['calculadora-impuesto-segunda-categoria', 'calculadora-sueldo-liquido'],
   relatedGuia: 'sueldo-liquido-chile',
   sources: [
     { label: 'SII — Tablas de Impuesto Único de Segunda Categoría 2026', url: SII_TABLAS },

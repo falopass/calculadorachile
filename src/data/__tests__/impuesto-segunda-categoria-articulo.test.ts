@@ -12,7 +12,11 @@ describe('artículo sobre el impuesto único de segunda categoría', () => {
     const article = getArticleBySlug(slug)!;
     const calculator = getCalculatorBySlug(calculatorSlug)!;
 
-    expect(article.relatedCalculators).toContain(calculator.id);
+    expect(article.relatedCalculators).toEqual([calculatorSlug, 'calculadora-sueldo-liquido']);
+    for (const relatedSlug of article.relatedCalculators) {
+      expect(getCalculatorBySlug(relatedSlug)).toBeDefined();
+      expect(getCalculatorBySlug(relatedSlug)?.noIndex).not.toBe(true);
+    }
     expect(article.content).toContain(`href="/calculadoras/${calculator.slug}"`);
     expect(article.sources.map(({ url }) => url)).toContain(
       'https://www.sii.cl/normativa_legislacion/circulares/2026/circu39.pdf',
