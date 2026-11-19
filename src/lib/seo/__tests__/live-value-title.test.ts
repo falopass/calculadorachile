@@ -146,7 +146,7 @@ describe('buildLiveValueTitle', () => {
       new Date('2026-09-01T12:00:00.000Z'),
       NOW,
     );
-    expect(title).toBe('UTM septiembre 2026: $71.721 y conversión a pesos');
+    expect(title).toBe('UTM de septiembre 2026: $71.721 (SII)');
   });
 
   it('UF: fecha dd-mm-aaaa y dos decimales es-CL', () => {
@@ -156,7 +156,17 @@ describe('buildLiveValueTitle', () => {
       new Date('2026-09-23T03:00:00.000Z'),
       NOW,
     );
-    expect(title).toBe('UF hoy 23-09-2026: $40.901,94 | Tabla UF a pesos');
+    expect(title).toBe('Valor UF hoy: $40.901,94 (23-09-2026) | UF a pesos');
+  });
+
+  it('UF: no dice hoy si el dato fresco corresponde a otro día en Santiago', () => {
+    const title = buildLiveValueTitle(
+      'uf',
+      40901.94,
+      new Date('2026-09-23T02:00:00.000Z'),
+      NOW,
+    );
+    expect(title).toBe('Valor UF: $40.901,94 (22-09-2026) | UF a pesos');
   });
 
   it('dólar: fecha dd-mm-aaaa y dos decimales es-CL', () => {
@@ -179,6 +189,7 @@ describe('buildLiveValueDescriptionWithCalendar', () => {
       { 11: 72440, 12: 72802 },
     );
     expect(desc).toContain('$72.440');
+    expect(desc).toContain('Convierte UTM a pesos y revisa qué mes usar para multas y trámites.');
     expect(desc).toContain('Diciembre: $72.802');
     expect(desc!.length).toBeLessThanOrEqual(155);
   });
