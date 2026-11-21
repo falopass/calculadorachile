@@ -48,6 +48,7 @@ const IDS = [
   'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'dias-administrativos', 'pension-alimenticia',
   'conversor-divisas', 'puntaje-ponderado-paes', 'puntaje-nem-ranking',
   'peso-colombiano-clp', 'peso-mexicano-clp', 'boliviano-clp',
+  'comparador-afp',
 ];
 
 describe('getQuickAnswer', () => {
