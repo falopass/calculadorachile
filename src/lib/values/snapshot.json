@@ -1,5 +1,5 @@
 {
-  "uf": 41371.05,
+  "uf": 41377.93,
   "utm": 72440,
   "dolarObservado": 1008.79,
   "euro": 1107.59,
@@ -10,9 +10,9 @@
   "pesoMexicano": 53.05,
   "boliviano": 86.37,
   "ipcMensual": -0.2,
-  "asOf": "2026-11-20T20:37:42.509Z",
+  "asOf": "2026-11-21T19:36:22.536Z",
   "observedAsOf": {
-    "uf": "2026-11-20",
+    "uf": "2026-11-21",
     "utm": "2026-11-01",
     "dolarObservado": "2026-11-20",
     "euro": "2026-11-20",
@@ -36,5 +36,5 @@
     "boliviano": "bcentral",
     "ipcMensual": "mindicador"
   },
-  "generatedAt": "2026-11-20T20:37:43.101Z"
+  "generatedAt": "2026-11-21T19:36:23.622Z"
 }
