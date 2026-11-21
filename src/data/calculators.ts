@@ -3156,12 +3156,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Cuál es la AFP más barata?',
         answer:
-          'En 2026, AFP Uno tiene la comisión más baja (0.49%), seguida de Modelo (0.58%). Las más caras son ProVida (1.45%), Cuprum y Capital (1.44%). La diferencia parece pequeña pero impacta significativamente en tu pensión final.',
+          'En 2026, AFP Uno tiene la comisión más baja (0.46%), seguida de Modelo (0.58%). Las más caras son ProVida (1.45%), Cuprum y Capital (1.44%). La diferencia parece pequeña pero impacta significativamente en tu pensión final.',
       },
       {
         question: '¿Cómo afecta la comisión a mi pensión?',
         answer:
-          'La comisión se cobra mensualmente sobre tu sueldo imponible. Con sueldo de $800.000, AFP Uno cobra $3.920 mensuales y ProVida cobra $11.600. En 25 años, esa diferencia de $7.680 mensuales puede significar 5-10% más de pensión.',
+          'La comisión se cobra mensualmente sobre tu sueldo imponible. Con sueldo de $800.000, AFP Uno cobra $3.680 mensuales y ProVida cobra $11.600. En 25 años, esa diferencia de $7.920 mensuales puede significar 5-10% más de pensión.',
       },
       {
         question: '¿Puedo cambiarme de AFP?',

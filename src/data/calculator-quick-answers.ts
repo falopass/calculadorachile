@@ -68,7 +68,7 @@ import { calculateTopeImponible } from '@/lib/calculations/tope-imponible-90-uf'
 import { calculateSueldoCasaParticular } from '@/lib/calculations/sueldo-casa-particular';
 import { calculateLicenciaMedica } from '@/lib/calculations/licencia-medica';
 import { calculateSeguroCesantia } from '@/lib/calculations/seguro-cesantia';
-import { RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
+import { AFP, RETENCION_HONORARIOS_CALENDARIO } from '@/lib/values/constants';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import { DERECHO_AD_VALOREM_GENERAL, FUENTE_ADUANAS, UMBRAL_REGIMEN_ESPECIAL_USD } from '@/lib/calculations/compras-internacionales';
 import { PAES } from '@/lib/values/educacion';
@@ -325,6 +325,31 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           caption:
             'Vehículo de $15.000.000, pie de $3.000.000 (20%), tasa anual nominal de 12%, sin seguro vehicular. La tasa real depende de la cotización.',
           headers: ['Plazo', 'Cuota mensual', 'Intereses totales', 'Costo total (pie + cuotas)'],
+          rows,
+        },
+      };
+    }
+
+    case 'comparador-afp': {
+      const orden = Object.values(AFP).sort((a, b) => a.comision - b.comision);
+      const rows = orden.map((a) => [
+        a.nombre,
+        formatPercentage(a.comision, 2),
+        formatCLP(Math.round(1_000_000 * (a.comision / 100))),
+      ]);
+      return {
+        h1: 'Comparador de comisiones AFP 2026: ¿cuál es la más barata?',
+        ...withLinks([
+          `La AFP más barata de Chile es AFP ${orden[0].nombre}, con una comisión de ${formatPercentage(orden[0].comision, 2)} del sueldo imponible, seguida de AFP ${orden[1].nombre} con ${formatPercentage(orden[1].comision, 2)}. Las más caras son ${orden.at(-1)!.nombre} (${formatPercentage(orden.at(-1)!.comision, 2)}) y ${orden.at(-2)!.nombre} junto a ${orden.at(-3)!.nombre} (${formatPercentage(orden.at(-2)!.comision, 2)}). Son las comisiones vigentes publicadas por la `,
+          {
+            text: 'Superintendencia de Pensiones',
+            href: 'https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9893.html',
+          },
+          '. La cotización obligatoria del 10% es la misma en todas las AFP: lo que varía es la comisión, que se descuenta además de ese 10%.',
+        ]),
+        example: {
+          caption: 'Comisión mensual de cada AFP sobre un sueldo imponible de $1.000.000.',
+          headers: ['AFP', 'Comisión', 'Costo mensual'],
           rows,
         },
       };
