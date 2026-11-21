@@ -19,8 +19,9 @@ describe('post sueldo mínimo: aviso y FAQ desde INGRESO_MINIMO.mensual', () => 
   const monto = formatCLP(INGRESO_MINIMO.mensual);
 
   it('el aviso de arriba usa la constante', () => {
-    expect(post.content.startsWith('<aside class="callout callout--info">')).toBe(true);
-    const aviso = post.content.slice(0, post.content.indexOf('</aside>'));
+    const inicioAviso = post.content.indexOf('<aside class="callout callout--info">');
+    expect(inicioAviso).toBeGreaterThanOrEqual(0);
+    const aviso = post.content.slice(inicioAviso, post.content.indexOf('</aside>', inicioAviso));
     expect(aviso).toContain(`<strong>${monto}</strong>`);
   });
 
@@ -31,8 +32,10 @@ describe('post sueldo mínimo: aviso y FAQ desde INGRESO_MINIMO.mensual', () => 
     expect(faq).toContain(`multiplicar ${monto} por las horas semanales`);
   });
 
-  it('no anuncia montos de 2027', () => {
-    const aviso = post.content.slice(0, post.content.indexOf('</aside>'));
-    expect(aviso).not.toMatch(/2027/);
+  it('la respuesta directa abre el contenido y no anuncia montos de 2027', () => {
+    const respuesta = post.content.slice(0, post.content.indexOf('</p>'));
+    expect(respuesta.startsWith('<p>')).toBe(true);
+    expect(respuesta).toContain(`${monto} brutos al mes`);
+    expect(respuesta).not.toMatch(/2027/);
   });
 });
