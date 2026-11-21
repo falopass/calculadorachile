@@ -978,9 +978,11 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       const cambio = proximo
         ? ` y baja a ${proximo.horas} horas el ${fechaLargaISO(proximo.vigenteDesde)} (Ley 21.561)`
         : ' (Ley 21.561)';
+      const r20 = calculateSueldoPartTime({ horasSemanales: 20 });
+      const r30 = calculateSueldoPartTime({ horasSemanales: 30 });
       return {
-        h1: 'Sueldo part time 30 horas: mínimo legal y valor hora',
-        lead: `Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
+        h1: 'Sueldo part time 20 y 30 horas 2026: mínimo legal y valor hora',
+        lead: `Un part time de 20 horas gana como mínimo ${formatCLP(r20.minimoLegal)} al mes y uno de 30 horas ${formatCLP(r30.minimoLegal)}, con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)}. Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
         example: {
           caption: `Mínimo legal y valor hora con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)}, vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)} (Ley ${INGRESO_MINIMO.ley}). La jornada completa vigente es de ${jornadaVigente.horas} horas desde el ${fechaLargaISO(jornadaVigente.vigenteDesde)}${cambio}. Hasta 30 horas el mínimo es proporcional; desde 31 y hasta ${jornadaVigente.horas - 1} horas corresponde el mínimo íntegro.`,
           headers: ['Jornada semanal', 'Tipo de jornada', 'Mínimo legal mensual', 'Valor hora'],

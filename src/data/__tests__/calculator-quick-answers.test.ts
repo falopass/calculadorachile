@@ -281,6 +281,15 @@ describe('getQuickAnswer', () => {
       expect(row[2]).toBe(formatCLP(INGRESO_MINIMO.mensual));
     });
 
+    it('lead responde directo: 20 h y 30 h con montos 2026', () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2026-10-29T12:00:00-03:00'));
+      if (INGRESO_MINIMO.mensual !== 553_553) return; // cambia con el IMM 2027
+      const qa = getQuickAnswer('sueldo-part-time', CTX)!;
+      expect(qa.lead).toContain('$263.597');
+      expect(qa.lead).toContain('$395.395');
+    });
+
     it('con IMM $553.553 al 29-10-2026: 20 h = $263.597 y caption con 42 h vigentes', () => {
       vi.useFakeTimers();
       vi.setSystemTime(new Date('2026-10-29T12:00:00-03:00'));
