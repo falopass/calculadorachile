@@ -104,6 +104,17 @@ export interface QuickAnswer {
     headers: string[];
     rows: string[][];
   };
+  /**
+   * Tabla corta en la parte superior (bajo el lead y las respuestas
+   * cortas), para responder una consulta concreta de un vistazo.
+   * Generada con las funciones puras del repo; nunca montos a mano.
+   */
+  topTable?: {
+    title: string;
+    caption: string;
+    headers: string[];
+    rows: string[][];
+  };
 }
 
 interface QuickAnswerContext {
@@ -1115,6 +1126,18 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           { text: 'SUSESO, Compendio', href: SUSESO_QUIEN_PAGA_URL },
           ').',
         ]),
+        // Consulta GSC: "si tengo 3/5/7/8/10/11 días de licencia cuántos me
+        // pagan". Filas generadas con calculateLicenciaMedica.
+        topTable: {
+          title: '¿Si tengo 3, 5, 7, 8, 10 u 11 días de licencia, cuántos me pagan?',
+          caption:
+            'Con 10 días de licencia o menos, los 3 primeros días no se pagan (carencia). Con 11 días o más, se pagan todos desde el día 1.',
+          headers: ['Días de licencia', 'Días que te pagan'],
+          rows: [3, 5, 7, 8, 10, 11].map((d) => [
+            `${d} días`,
+            `${pagados(d)}`,
+          ]),
+        },
         example: {
           caption: `Días pagados y subsidio estimado con una remuneración neta de ${formatCLP(LICENCIA_EJEMPLO_NETA)} (${formatCLP(Math.round(base.montoDiario))} por día). Con 10 días te pagan ${pagados(10)}; con 11, te pagan ${pagados(11)}.`,
           headers: ['Días de licencia', 'Días pagados', 'Subsidio estimado'],
