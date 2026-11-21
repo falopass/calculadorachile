@@ -39,9 +39,25 @@ import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import { seoPesoArgentino } from '@/lib/calculations/peso-argentino-clp';
 import { seoDivisaViaje } from '@/lib/calculations/divisa-viaje-clp';
+import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 
 const TOPE_GRAT = topeGratificacion();
-const IMM_MAYO_2026 = formatCLP(getIngresoMinimoVigente(new Date('2026-05-01T12:00:00Z')).mensual);
+const IMM_MAYO_2026_NUM = getIngresoMinimoVigente(new Date('2026-05-01T12:00:00Z')).mensual;
+const IMM_MAYO_2026 = formatCLP(IMM_MAYO_2026_NUM);
+
+// Líquido de referencia del IMM con la misma función de la calculadora
+// (Fonasa, contrato indefinido, AFP extrema), nunca escrito a mano.
+const liquidoInm2026 = (afp: 'uno' | 'provida'): string =>
+  formatCLP(
+    calculateSueldoLiquido({
+      sueldoBruto: IMM_MAYO_2026_NUM,
+      afp,
+      saludTipo: 'fonasa',
+      contratoIndefinido: true,
+    }).liquido,
+  );
+const LIQ_IMM_PROVIDA = liquidoInm2026('provida');
+const LIQ_IMM_UNO = liquidoInm2026('uno');
 
 /**
  * E-028 + E-053: title/meta honorarios según fecha en Chile.
@@ -533,8 +549,8 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- #3 P1: IMM mayo 2026 ---
   'sueldo-minimo-2026-calcular-liquido': {
-    seoTitle: `Sueldo mínimo Chile 2026: ${IMM_MAYO_2026} desde mayo`,
-    seoDescription: `De mayo a diciembre de 2026: ${IMM_MAYO_2026} brutos de sueldo mínimo general. Revisa los montos por edad y estima tu sueldo líquido.`,
+    seoTitle: `Sueldo mínimo Chile 2026: ${IMM_MAYO_2026} bruto`,
+    seoDescription: `Sueldo mínimo Chile 2026: ${IMM_MAYO_2026} brutos desde mayo (Ley 21.830). Líquido con Fonasa e indefinido: ${LIQ_IMM_PROVIDA}–${LIQ_IMM_UNO}. Tramos por edad.`,
   },
 
   // --- #6 P1: finiquito × IMM ---

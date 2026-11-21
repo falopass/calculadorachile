@@ -2746,13 +2746,12 @@ ${DESEMPLEO_INE_HTML}
     description:
       'Desde el 1 de mayo de 2026 el ingreso mínimo mensual es $553.553 (18–65 años, Ley 21.830). Tramos por edad, descuentos legales y cómo estimar el sueldo líquido con la calculadora.',
     date: '2026-07-11',
-    updatedAt: '2026-11-13',
+    updatedAt: '2026-11-21',
     category: 'laboral',
     readingTime: 14,
     relatedGuia: 'sueldo-liquido-chile',
-    seoTitle: 'Sueldo mínimo en Chile 2026: $553.553 desde mayo',
-    seoDescription:
-      '¿Cuánto es el sueldo mínimo en Chile? $553.553 brutos desde el 1 de mayo de 2026 (Ley 21.830). Montos para menores y mayores de 65, y cuánto queda líquido.',
+    seoTitle: `Sueldo mínimo Chile 2026: ${formatCLP(INGRESO_MINIMO.mensual)} bruto`,
+    seoDescription: `Sueldo mínimo Chile 2026: ${formatCLP(INGRESO_MINIMO.mensual)} brutos desde mayo (Ley 21.830). Líquido con Fonasa e indefinido: ${liquidoSueldoMinimo('provida')}–${liquidoSueldoMinimo('uno')}. Tramos por edad.`,
     keywords: [
       'sueldo mínimo 2026',
       'ingreso mínimo mensual 2026',
@@ -2820,9 +2819,9 @@ ${DESEMPLEO_INE_HTML}
           'Como regla general, no. La Dirección del Trabajo señala que la gratificación legal o convencional pagada mensualmente no puede usarse para enterar el sueldo base mínimo. Hay una excepción acotada para contratos de 30 días o menos y ciertas prórrogas que no exceden 60 días.',
       },
     ],
-    content: `<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>${formatCLP(INGRESO_MINIMO.mensual)}</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
+    content: `${SUELDO_MINIMO_RESPUESTA_DIRECTA}
 
-${SUELDO_MINIMO_RESPUESTA_DIRECTA}
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Valor vigente con efecto retroactivo</strong><p>El ingreso mínimo mensual es <strong>${formatCLP(INGRESO_MINIMO.mensual)}</strong> desde el <strong>1 de mayo de 2026</strong> para trabajadores mayores de 18 y hasta 65 años, aunque la Ley 21.830 fue publicada el 22 de junio. Si mayo o junio se pagaron con el mínimo anterior, corresponde reliquidar las diferencias y regularizar las cotizaciones asociadas.</p></div></aside>
 
 <p>El sueldo mínimo no es el monto que necesariamente llega a la cuenta bancaria. Es un piso legal para el sueldo o la remuneración aplicable, antes de cotizaciones y descuentos. También puede ser solo una parte del total si la persona recibe gratificación, bonos, horas extra o asignaciones. Por eso dos trabajadores con el mismo sueldo base de $553.553 pueden tener líquidos distintos sin que uno de los cálculos sea automáticamente ilegal.</p>
 
