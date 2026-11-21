@@ -318,6 +318,19 @@ describe('getQuickAnswer', () => {
       expect(qa.example!.caption).toContain('Con 10 días te pagan 7; con 11, te pagan 11.');
     });
 
+    it('tabla superior: 3/5/7/8/10/11 días vs días pagados', () => {
+      const qa = getQuickAnswer('licencia-medica', CTX)!;
+      expect(qa.topTable!.headers).toEqual(['Días de licencia', 'Días que te pagan']);
+      expect(qa.topTable!.rows).toEqual([
+        ['3 días', '0'],
+        ['5 días', '2'],
+        ['7 días', '4'],
+        ['8 días', '5'],
+        ['10 días', '7'],
+        ['11 días', '11'],
+      ]);
+    });
+
     it('h1 propio y lead con fuentes DT y SUSESO', () => {
       const qa = getQuickAnswer('licencia-medica', CTX)!;
       expect(qa.h1).toBe('Calculadora de licencia médica: cuánto y cuántos días te pagan');

@@ -316,6 +316,61 @@ export default function CalculatorPageClient({
         </div>
       )}
 
+      {quickAnswer?.topTable && (
+        <section className="mb-6 max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6">
+          <h2 className="text-base font-semibold text-[var(--foreground)]">
+            {quickAnswer.topTable.title}
+          </h2>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full text-sm">
+              <caption className="caption-bottom pt-3 text-left text-xs text-[var(--foreground-muted)]">
+                {quickAnswer.topTable.caption}
+              </caption>
+              <thead>
+                <tr className="border-b border-[var(--border)]">
+                  {quickAnswer.topTable.headers.map((h) => (
+                    <th
+                      key={h}
+                      scope="col"
+                      className="py-2 pr-4 text-left font-semibold text-[var(--foreground)] last:pr-0"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {quickAnswer.topTable.rows.map((row, i) => (
+                  <tr
+                    key={i}
+                    className="border-b border-[var(--border)] last:border-0"
+                  >
+                    {row.map((cell, j) =>
+                      j === 0 ? (
+                        <th
+                          key={j}
+                          scope="row"
+                          className="py-2 pr-4 text-left font-medium text-[var(--foreground-secondary)]"
+                        >
+                          {cell}
+                        </th>
+                      ) : (
+                        <td
+                          key={j}
+                          className="py-2 pr-4 tabular-nums text-[var(--foreground)] last:pr-0"
+                        >
+                          {cell}
+                        </td>
+                      ),
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       {liveValue && (
         <section
           className="mb-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6"
