@@ -58,7 +58,6 @@ const ext = (url: string, texto: string) =>
 export const ARTICULOS_2027: Article[] = [
   {
     slug: 'cuanto-dinero-llevar-viaje-verano-2027',
-    embedCalculatorId: 'conversor-divisas',
     title: 'Cuánto dinero llevar a Argentina, Brasil, Perú, Colombia, México y Bolivia en verano 2027',
     description:
       'Arma tu presupuesto de verano 2027 en moneda local: efectivo, tarjetas y conversores para Argentina, Brasil, Perú, Colombia, México y Bolivia.',

@@ -2281,7 +2281,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'aguinaldo-fiestas-patrias-2026-pensionados-sector-publico',
-    embedCalculatorId: 'aguinaldo',
     title: 'Aguinaldo de Fiestas Patrias 2026: montos para pensionados IPS y sector público',
     description:
       'Montos oficiales del aguinaldo de Fiestas Patrias 2026: pensionados IPS ($25.280 + cargas) y funcionarios del sector público ($91.682 / $63.645). Fechas de corte, ejemplos y diferencias con la gratificación.',
@@ -3027,7 +3026,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'como-calcular-finiquito-chile',
-    embedCalculatorId: 'finiquito',
     title: 'Cómo calcular tu finiquito en Chile 2026 paso a paso',
     description:
       'Guía paso a paso para calcular tu finiquito: indemnización, vacaciones proporcionales y gratificación. Con ejemplos en CLP y bases legales.',
@@ -3125,7 +3123,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'guia-iva-chile-2026',
-    embedCalculatorId: 'iva',
     title: 'Guía del IVA en Chile 2026: cómo calcularlo correctamente',
     description:
       'Guía completa sobre el IVA en Chile: qué es, cómo se calcula, quién lo paga, exenciones y cuándo aplica el 19%. Con ejemplos prácticos en CLP.',
@@ -3299,7 +3296,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'boleta-honorarios-completo',
-    embedCalculatorId: 'boleta-honorarios',
     title: 'Guía completa de boleta de honorarios en Chile 2027',
     description:
       `Todo sobre la boleta de honorarios: retención ${tasaHonorarios(getRetencionHonorarios(2027))}, cómo emitirla, monto líquido y obligaciones tributarias para independientes.`,
@@ -3397,7 +3393,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'guia-horas-extra-chile',
-    embedCalculatorId: 'horas-extra',
     title: 'Guía completa de horas extra en Chile 2026',
     description:
       'Todo sobre horas extraordinarias en Chile: recargo 50%, tope máximo, cómo calcular el valor hora extra y qué dice el Código del Trabajo.',
@@ -3589,7 +3584,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'vacaciones-proporcionales-guia',
-    embedCalculatorId: 'vacaciones-proporcionales',
     title: 'Guía de vacaciones proporcionales en Chile 2026',
     description:
       'Cómo calcular tus vacaciones proporcionales al finiquito: días que te corresponden, valor por día y pago en el finiquito.',
@@ -5091,7 +5085,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'aguinaldo-navidad-pensionados-2026',
-    embedCalculatorId: 'aguinaldo',
     title: 'Aguinaldo de Navidad 2026: montos para pensionados, sector público y privado',
     description:
       'El aguinaldo de Navidad 2026 para pensionados es de $29.055, más $16.415 por cada carga familiar acreditada al 30 de noviembre (Ley 21.806). Quiénes lo reciben, cuándo se paga y ejemplos.',
