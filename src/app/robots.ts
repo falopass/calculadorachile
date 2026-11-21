@@ -24,6 +24,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'OAI-SearchBot',
         allow: '/',
+        disallow: ['/api/'],
       },
       // Nota: No agregamos reglas separadas para Googlebot/Bingbot
       // si las reglas son idénticas a `*`. Mantener menos directivas
