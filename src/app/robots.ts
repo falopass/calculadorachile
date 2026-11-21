@@ -18,6 +18,14 @@ export default function robots(): MetadataRoute.Robots {
         // debe quedar permitido para que Googlebot renderice el JS del sitio.
         disallow: ['/api/'],
       },
+      // OAI-SearchBot es el crawler de ChatGPT Search: lo permitimos
+      // explicitamente (ademas de la regla `*`) para que el sitio pueda
+      // aparecer como fuente citada en respuestas de ChatGPT.
+      {
+        userAgent: 'OAI-SearchBot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
       // Nota: No agregamos reglas separadas para Googlebot/Bingbot
       // si las reglas son idénticas a `*`. Mantener menos directivas
       // facilita el debugging y evita conflictos cuando un crawler
