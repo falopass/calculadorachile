@@ -2278,7 +2278,7 @@ ${DESEMPLEO_INE_HTML}
     category: 'beneficios',
     readingTime: 14,
     relatedGuia: 'familia-pension-alimenticia-chile',
-    seoTitle: 'Aguinaldo Fiestas Patrias 2026: IPS $25.280 y sector público $91.682',
+    seoTitle: 'Aguinaldo FP 2026: IPS $25.280 y sector público $91.682', // 55
     seoDescription:
       'Aguinaldo septiembre 2026: pensionados IPS $25.280 + $12.969 por carga; sector público $91.682 o $63.645 según líquido de agosto. Fuentes ChileAtiende y Ley 21.806.',
     keywords: [
@@ -6734,7 +6734,7 @@ ${PT_MINIMOS.map((m) => `<tr><td>${m.horas} horas</td><td>${formatCLP(m.minimo)}
   {
     slug: 'apv-2026-simulador-ahorro-tributario',
     title: 'APV 2026: cómo ganar el beneficio tributario antes del 31 de diciembre',
-    seoTitle: 'APV 2026: beneficio tributario si ahorras antes del 31 de diciembre',
+    seoTitle: 'APV 2026: beneficio tributario antes del 31 de diciembre', // 56
     description: `Régimen A (bonificación de 15%, tope 6 UTM) o régimen B (rebaja de la base del impuesto, tope 600 UF): cuánto devuelve cada uno según tu tramo, por qué el depósito debe hacerse antes del 31 de diciembre de 2026 y cómo se recupera en la Operación Renta 2027.`,
     seoDescription:
       'APV 2026: depósito antes del 31-12 para la Operación Renta 2027. Régimen A con bonificación de 15% (tope 6 UTM) vs régimen B con rebaja de impuesto (tope 600 UF). Ejemplos por tramo.',
