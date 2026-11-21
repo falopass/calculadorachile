@@ -768,6 +768,13 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       // Ejemplo con el valor fresco si existe; si no, el valor de contexto
       // (comportamiento previo). El lead nunca usa el snapshot.
       const valorUTM = ctx.utmFresca?.value ?? ctx.utm;
+      // H1 con el valor del mes en curso (búsquedas "utm <mes> <año>" en GSC).
+      // Solo con el valor fresco en vivo; sin él queda el H1 estático.
+      const utmParts = ctx.utmFresca ? toSantiagoParts(new Date(ctx.utmFresca.date)) : null;
+      const h1 =
+        ctx.utmFresca && utmParts
+          ? `UTM de ${MESES_ES_CL[utmParts.month - 1]} de ${utmParts.year}: ${formatCLP(ctx.utmFresca.value)}`
+          : 'Conversor UTM a pesos';
       const montos = [0.5, 1, 2, 3, 5, 10, 12, 20, 50, 100];
       const rows = montos.map((monto) => {
         const r = calculateUTMCLP({
@@ -783,7 +790,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1: 'Conversor UTM a pesos',
+        h1,
         ...withLinks(buildUTMLeadParts(ctx.utmFresca)),
         example: {
           caption: `Equivalencias con UTM de ${formatCLP(valorUTM)}${mesUTMEjemplo(ctx)}. El valor se reajusta cada mes según el IPC.`,

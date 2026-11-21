@@ -18,6 +18,12 @@ describe('E-016 respuesta directa: UTM', () => {
       text: 'SII',
       href: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
     });
+    expect(qa!.h1).toBe('UTM de octubre de 2026: $72.151');
+  });
+
+  it('sin UTM fresca el H1 no muestra monto', () => {
+    const qa = getQuickAnswer('utm-clp', { ...CTX, utmFresca: null });
+    expect(qa!.h1).toBe('Conversor UTM a pesos');
   });
 
   it('noviembre 2026: rige del 1 al 30 y UTA $869.280', () => {
