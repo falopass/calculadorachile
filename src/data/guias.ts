@@ -1301,7 +1301,11 @@ export const guias: Guia[] = [
     sources: [
       {
         label: 'MINVU — segundo llamado DS1 2026',
-        url: 'https://www.minvu.gob.cl/postulacion/segundo-llamado-nacional-2026-para-postular-al-subsidio-para-sectores-medios-d-s-1/',
+        url: 'https://www.minvu.gob.cl/programa-para-sectores-medios-compra-o-construccion-de-vivienda-segundo-llamado-2026-y-llamado-especial-tramo-4/',
+      },
+      {
+        label: 'MINVU — llamado especial DS1 Tramo 4',
+        url: 'https://www.minvu.gob.cl/postulacion/llamado-nacional-en-condiciones-especiales-para-el-tramo-4-subsidio-de-sectores-medios-d-s-1/',
       },
       {
         label: 'MINVU — proyectos DS19 2026',
