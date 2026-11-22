@@ -1434,4 +1434,7 @@ const ADDITIONAL_QUICK_ANSWERS: Record<string, QuickAnswer> = {
   'dias-habiles': {
     lead: 'Para contar días hábiles, excluye domingos y feriados nacionales; en el cómputo administrativo también se excluyen los sábados, mientras que en el judicial se incluyen. La calculadora no cuenta la fecha inicial y sí la final si es hábil. También permite sumar un plazo y advierte si faltan calendarios de feriados o hay feriados pendientes de confirmación. Verifica el régimen aplicable a tu trámite.',
   },
+  'validador-rut': {
+    lead: 'Para validar un RUT, ingrésalo con o sin puntos y con guion: el verificador recalcula el dígito con el algoritmo módulo 11 (factores 2 a 7 de derecha a izquierda) y lo compara con el que escribiste. Si no coincide, te muestra el dígito que corresponde y el RUT con formato estándar. Un dígito correcto solo confirma la regla matemática, no que el RUT esté asignado en el Registro Civil.',
+  },
 };

@@ -1862,4 +1862,29 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Precio final: $69.993; ahorro: $29.997 (descuento efectivo 30%).',
     },
   },
+  'validador-rut': {
+    summary:
+      'Valida un RUT chileno y calcula su dígito verificador con el algoritmo módulo 11, el mismo que usa el Registro Civil para el rol único nacional.',
+    calculationSteps: [
+      'Normaliza la entrada quitando puntos, espacios y pasando el dígito final a mayúscula; el guion es opcional.',
+      'Multiplica cada dígito del cuerpo, de derecha a izquierda, por factores cíclicos del 2 al 7 y suma los productos.',
+      'Calcula el dígito esperado como 11 menos el resto de la suma dividida por 11; un resultado de 11 corresponde a 0 y 10 corresponde a K.',
+      'Compara el dígito esperado con el ingresado y devuelve el RUT con formato estándar (puntos de miles y guion).',
+    ],
+    assumptions: [
+      'El cuerpo del RUT tiene entre 7 y 9 dígitos, el rango que usan personas naturales y jurídicas en Chile.',
+    ],
+    limitations: [
+      'Valida solo la regla matemática del dígito verificador: no consulta el Registro Civil ni confirma que el RUT exista o esté vigente.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: RUT 12.345.678-5',
+      inputs: ['Entrada: 12.345.678-5'],
+      development: [
+        'Productos con factores 2–7 desde la derecha: 8×2 + 7×3 + 6×4 + 5×5 + 4×6 + 3×7 + 2×2 + 1×3 = 16 + 21 + 24 + 25 + 24 + 21 + 4 + 3 = 138',
+        '138 dividido por 11 tiene resto 6, por lo que el dígito esperado es 11 − 6 = 5.',
+      ],
+      result: 'El dígito que corresponde al cuerpo 12345678 es 5: el RUT ingresado es válido y se muestra como 12.345.678-5.',
+    },
+  },
 };

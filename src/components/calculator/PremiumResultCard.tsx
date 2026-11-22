@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { CalculatorResult } from '@/types/calculator';
 import { formatCLP, formatUF, formatUTM, formatPercentage, formatDays } from '@/lib/formatters';
-import { Copy, Check, BarChart3, PieChart, TrendingUp, DollarSign, PiggyBank, Receipt } from 'lucide-react';
+import { Copy, Check, BarChart3, PieChart, TrendingUp, DollarSign, PiggyBank, Receipt, FileText } from 'lucide-react';
 import PremiumResultChart, { type ChartSegment } from './PremiumResultChart';
 import ExportMenu from './ExportMenu';
 
@@ -36,8 +36,10 @@ export interface PremiumResultCardProps {
 /**
  * Formatea un valor según su tipo
  */
-function formatValue(value: number, format: CalculatorResult['format']): string {
+function formatValue(value: number, format: CalculatorResult['format'], textValue?: string): string {
   switch (format) {
+    case 'text':
+      return textValue ?? value.toLocaleString('es-CL');
     case 'CLP':
       return formatCLP(value);
     case 'UF':
@@ -64,6 +66,7 @@ const RESULT_ICONS = {
   'percentage': TrendingUp,
   'days': PiggyBank,
   'number': PiggyBank,
+  'text': FileText,
 };
 
 /**
@@ -112,7 +115,7 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
   const IconComponent = RESULT_ICONS[result.format] || PiggyBank;
 
   const handleCopy = async () => {
-    const textToCopy = `${result.label}: ${formatValue(result.value, result.format)}`;
+    const textToCopy = `${result.label}: ${formatValue(result.value, result.format, result.textValue)}`;
     await navigator.clipboard.writeText(textToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -163,7 +166,7 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
               }
             `}
           >
-            {formatValue(result.value, result.format)}
+            {formatValue(result.value, result.format, result.textValue)}
           </span>
         )}
 
@@ -242,14 +245,14 @@ export default function PremiumResultCard({
   const mainResult = results.find(r => r.highlight);
   const exportResults = results
     .filter(r => r !== mainResult && !r.advisory)
-    .map(r => ({ label: r.label, value: formatValue(r.value, r.format) }));
+    .map(r => ({ label: r.label, value: formatValue(r.value, r.format, r.textValue) }));
 
   if (!results || results.length === 0) {
     return null;
   }
 
   const handleCopyAll = async () => {
-    const text = results.map(r => `${r.label}: ${formatValue(r.value, r.format)}`).join('\n');
+    const text = results.map(r => `${r.label}: ${formatValue(r.value, r.format, r.textValue)}`).join('\n');
     await navigator.clipboard.writeText(text);
   };
 
@@ -303,7 +306,7 @@ export default function PremiumResultCard({
               <ExportMenu
                 title={title}
                 results={exportResults}
-                mainResult={mainResult ? { label: mainResult.label, value: formatValue(mainResult.value, mainResult.format) } : undefined}
+                mainResult={mainResult ? { label: mainResult.label, value: formatValue(mainResult.value, mainResult.format, mainResult.textValue) } : undefined}
                 calculatorId={calculatorId}
                 shareQuery={shareQuery}
               />
@@ -322,7 +325,7 @@ export default function PremiumResultCard({
             centerValue={mainResult ? {
               value: mainResult.value,
               label: mainResult.label,
-              format: (v: number) => formatValue(v, mainResult.format),
+              format: (v: number) => formatValue(v, mainResult.format, mainResult.textValue),
             } : undefined}
           />
         </div>

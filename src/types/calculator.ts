@@ -64,7 +64,9 @@ export interface CalculatorResultNote {
 export interface CalculatorResult {
   label: string;
   value: number;
-  format: 'CLP' | 'UF' | 'UTM' | 'percentage' | 'days' | 'number';
+  format: 'CLP' | 'UF' | 'UTM' | 'percentage' | 'days' | 'number' | 'text';
+  /** Texto mostrado cuando `format` es 'text' (validadores, códigos, dígitos K). */
+  textValue?: string;
   highlight?: boolean;
   /** Señala un cálculo parcial que no se debe guardar en el historial. */
   partial?: boolean;
