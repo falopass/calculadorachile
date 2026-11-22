@@ -1119,6 +1119,68 @@ export const PGU_2026 = {
 };
 
 // ============================================
+// Beneficio por Años Cotizados (BAC) — Reforma de Pensiones
+// ============================================
+/**
+ * Beneficio por Años Cotizados (BAC).
+ *
+ * Fuente: ChileAtiende — ficha 130450
+ * https://chileatiende.gob.cl/fichas/130450-beneficio-por-anos-cotizados
+ * "0,1 UF por cada 12 meses cotizados, con un tope de 2,5 UF mensuales
+ * (equivale a 25 años)... mujeres al menos 120 meses (10 años) y
+ * hombres 240 meses (20 años)... máximo 300 meses continuos o
+ * discontinuos... 65 años o más... pensionadas por vejez o invalidez
+ * en AFP o compañías de seguros de vida."
+ * Gradualidad mujeres (Norma de Carácter General N° 350, 12-09-2025,
+ * Superintendencia de Pensiones): +12 meses cada 24 meses desde
+ * enero de 2028 hasta 180 meses en enero de 2036.
+ */
+export const BENEFICIO_ANOS_COTIZADOS = {
+  /** UF pagadas mensualmente por cada 12 meses cotizados completos. */
+  ufPorAno: 0.1,
+  /** Tope del beneficio en UF mensuales (equivale a 25 años). */
+  topeUF: 2.5,
+  /** Máximo de meses de cotizaciones computables (continuos o discontinuos). */
+  mesesMaximos: 300,
+  /** Edad mínima general del beneficio. */
+  edadMinima: 65,
+  /** Meses de cotizaciones mínimos exigidos a los hombres. */
+  mesesMinimosHombre: 240,
+  /**
+   * Calendario del mínimo de meses exigidos a las mujeres: 120 hasta
+   * dic-2027; luego +12 cada 24 meses hasta 180 en ene-2036.
+   */
+  mesesMinimosMujer: [
+    { desde: '2026-01-01', meses: 120 },
+    { desde: '2028-01-01', meses: 132 },
+    { desde: '2030-01-01', meses: 144 },
+    { desde: '2032-01-01', meses: 156 },
+    { desde: '2034-01-01', meses: 168 },
+    { desde: '2036-01-01', meses: 180 },
+  ],
+};
+
+/**
+ * Meses de cotizaciones mínimos exigidos a las mujeres según la fecha
+ * de referencia (calendario NCG 350 de la Superintendencia).
+ */
+export function mesesMinimosMujerBAC(fecha: Date = new Date()): {
+  desde: string;
+  meses: number;
+} {
+  const t = fecha.getTime();
+  let vigente = BENEFICIO_ANOS_COTIZADOS.mesesMinimosMujer[0];
+  for (const entrada of BENEFICIO_ANOS_COTIZADOS.mesesMinimosMujer) {
+    if (fechaLocal(entrada.desde).getTime() <= t) {
+      vigente = entrada;
+    } else {
+      break;
+    }
+  }
+  return vigente;
+}
+
+// ============================================
 // Asignación Familiar 2026 (Ley 21.751)
 // ============================================
 export const ASIGNACION_FAMILIAR_2026 = {
@@ -1942,6 +2004,13 @@ export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
     verificadoAl: '2026-10-16',
     fuente: 'https://spensiones.cl/portal/institucional/594/w3-article-16886.html',
     calculadoras: ['pgu'],
+  },
+  beneficioAnosCotizados: {
+    valor: 'Beneficio por Años Cotizados (0,1 UF por 12 meses, tope 2,5 UF, mínimos y gradualidad)',
+    constante: 'BENEFICIO_ANOS_COTIZADOS',
+    verificadoAl: '2026-11-22',
+    fuente: 'https://chileatiende.gob.cl/fichas/130450-beneficio-por-anos-cotizados',
+    calculadoras: ['beneficio-anos-cotizados'],
   },
   asignacionFamiliar: {
     valor: 'Tramos de asignación familiar',

@@ -912,6 +912,37 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Bono único estimado: $482.295 para el matrimonio.',
     },
   },
+  'beneficio-anos-cotizados': {
+    summary:
+      'Verifica los requisitos del Beneficio por Años Cotizados (BAC) y estima el aporte mensual: 0,1 UF por cada 12 meses cotizados, tope 2,5 UF.',
+    calculationSteps: [
+      'Verifica los requisitos copulativos: 65 años o más, pensión de vejez o invalidez en AFP/seguros (D.L. 3.500) y no ser titular de pensión de retiro en Capredena o Dipreca.',
+      'Compara los meses cotizados con el mínimo exigido: 240 para hombres; para mujeres, el escalón vigente a la fecha (120 hasta dic-2027, subiendo a 180 en ene-2036).',
+      'Computa a lo más 300 meses (25 años) de cotizaciones, continuas o discontinuas.',
+      'Multiplica los años completos de 12 meses por 0,1 UF (tope 2,5 UF) y convierte a pesos con la UF vigente.',
+    ],
+    assumptions: [
+      'Los meses cotizados declarados corresponden a los registrados en el Fondo Autónomo de Protección Previsional.',
+      'La situación de pensión declarada es la real (vejez/invalidez en D.L. 3.500; sin pensión de retiro Capredena/Dipreca).',
+    ],
+    limitations: [
+      'No consulta el registro real de cotizaciones de la AFP ni el Fondo Autónomo de Protección Previsional.',
+      'No considera el beneficio especial para trabajadores con cotizaciones por trabajos pesados ni los meses que la ley excluye del cómputo.',
+      'El monto en pesos depende de la UF del día; el pago efectivo lo determina el IPS.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: hombre con 25 años cotizados',
+      inputs: [
+        'Sexo: hombre, 68 años, pensionado en AFP',
+        'Meses cotizados: 300',
+      ],
+      development: [
+        'Años computables = 300 ÷ 12 = 25',
+        'Beneficio = 25 × 0,1 UF = 2,5 UF (tope alcanzado)',
+      ],
+      result: 'Aporte mensual estimado: 2,5 UF (~$99.000 según UF de referencia).',
+    },
+  },
   'aporte-familiar-permanente': {
     summary:
       'Multiplica $66.834 por cada carga con derecho a SUF/Asignación Familiar o Maternal al 31-12-2025; si no hay cargas y el grupo estaba en Chile Solidario/SSyOO, un solo aporte.',
