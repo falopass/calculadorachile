@@ -4046,7 +4046,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'plusvalia-dfl2-vs-comun-chile',
-    embedCalculatorId: 'calculadora-plusvalia',
+    embedCalculatorId: 'plusvalia',
     title: 'Plusvalía DFL2 vs común: ¿cuándo pagas impuesto al vender?',
     description:
       'Cómo tributa la ganancia al vender un inmueble en Chile: requisitos del cupo vitalicio de 8.000 UF, costo reajustado, mejoras y diferencias reales del DFL2.',
