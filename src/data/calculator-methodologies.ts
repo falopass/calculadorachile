@@ -1872,7 +1872,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Compara el dígito esperado con el ingresado y devuelve el RUT con formato estándar (puntos de miles y guion).',
     ],
     assumptions: [
-      'El cuerpo del RUT tiene entre 7 y 9 dígitos, el rango que usan personas naturales y jurídicas en Chile.',
+      'El cuerpo del RUT tiene entre 1 y 8 dígitos, el rango del tipo RUT del esquema de facturación electrónica del SII.',
     ],
     limitations: [
       'Valida solo la regla matemática del dígito verificador: no consulta el Registro Civil ni confirma que el RUT exista o esté vigente.',

@@ -8595,9 +8595,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     lastReviewed: '2026-11-22',
     sources: [
       {
-        name: 'BCN Ley Chile — Ley 20.494',
-        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1025995',
-        note: 'Normas sobre cédula de identidad y rol único nacional (RUN)',
+        name: 'BCN Ley Chile — Ley 4.808',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=24928',
+        note: 'Ley orgánica del Registro Civil: rol único nacional y cédula de identidad',
       },
       {
         name: 'Registro Civil — Cálculo del dígito verificador',
@@ -8620,6 +8620,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         type: 'text',
         placeholder: '12.345.678-5',
         required: true,
+        // El RUT es dato personal: no viaja en enlaces compartidos.
+        shareable: false,
         tooltip:
           'Puedes escribirlo con o sin puntos y con o sin guion (ej. 12345678-5 o 123456785). Si el dígito que ingresas no coincide, te mostramos el que corresponde.',
       },
