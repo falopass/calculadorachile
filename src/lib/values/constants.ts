@@ -1004,14 +1004,15 @@ export const BONO_APOYO_NINEZ = {
 /**
  * Portal Beneficios Estudiantiles Mineduc (verificado 26-09-2026):
  * https://portal.beneficiosestudiantiles.cl/gratuidad
- * FUAS admisión 2027: del 1 al 22 de octubre de 2026.
+ * FUAS admisión 2027: del 1 al 22 de octubre de 2026, con
+ * extensión hasta el 6 de noviembre (verificado 22-11-2026).
  * Gratuidad: 60% de menores ingresos. Becas: Bicentenario y Juan
  * Gómez Millas 70% (≥510 pts PAES, PACE exime), Excelencia
  * Académica 80% (top 10% NEM del establecimiento), Nuevo Milenio
  * 70% con NEM ≥5,0; Nuevo Milenio II primer año 50%.
  */
 export const BECAS_EDUCACION_SUPERIOR_2027 = {
-  fuas: { desde: '2026-10-01', hasta: '2026-10-22' },
+  fuas: { desde: '2026-10-01', hasta: '2026-10-22', extensionHasta: '2026-11-06' },
   puntajePaesBecas: 510,
   nemMinimoTecnico: 5.0,
   gratuidad: { percentil: 60 },

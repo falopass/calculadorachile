@@ -7106,9 +7106,9 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       'Estima gratuidad, Beca Bicentenario, Juan Gómez Millas, Excelencia Académica y Nuevo Milenio según tu nivel socioeconómico, PAES y NEM.',
     faq: [
       {
-        question: '¿Cuándo se llena el FUAS para la admisión 2027?',
+        question: '¿Cuándo se llenó el FUAS para la admisión 2027?',
         answer:
-          'El Formulario Único de Acreditación Socioeconómica (FUAS) para la admisión 2027 se llena del 1 al 22 de octubre de 2026. Es obligatorio para optar a gratuidad y becas; los resultados de asignación, apelación y renovación se entregan desde el 15-10-2026.',
+          'El primer período fue del 1 al 22 de octubre de 2026, con extensión hasta el 6 de noviembre. Hitos del proceso: nivel socioeconómico el 17-12-2026, preselección el 15-01-2027, asignación el 10-03-2027 y apelación del 10 al 25 de marzo.',
       },
       {
         question: '¿Qué cubre la gratuidad y quién puede optar?',

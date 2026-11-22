@@ -5480,32 +5480,37 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'fuas-2027-postulacion-gratuidad-becas-octubre-2026',
-    title: 'FUAS 2027: postulación a gratuidad y becas del 1 al 22 de octubre de 2026',
+    title: 'FUAS 2027: resultados, apelación y fechas del proceso (admisión 2027)',
     description:
-      'El FUAS para la admisión 2027 se completa del 1 al 22 de octubre de 2026 con RUT y contraseña o ClaveÚnica. Qué beneficios se postulan, requisitos de gratuidad y becas, y fechas clave.',
+      'El FUAS admisión 2027 cerró su postulación (1 de octubre al 6 de noviembre de 2026). Fechas oficiales: nivel socioeconómico el 17-12-2026, preselección el 15-01-2027, asignación el 10-03-2027 y apelación del 10 al 25 de marzo de 2027.',
     date: '2026-09-26',
-    updatedAt: '2026-09-26',
+    updatedAt: '2026-11-22',
     category: 'educacion',
     readingTime: 6,
     relatedGuia: 'credito-cae-educacion-chile',
     embedCalculatorId: 'becas-gratuidad',
-    seoTitle: 'FUAS 2027: del 1 al 22 de octubre para gratuidad y becas',
+    seoTitle: 'FUAS 2027: resultados y fechas oficiales del proceso',
     seoDescription:
-      'Postula a gratuidad, becas y créditos para la admisión 2027 con el FUAS entre el 1 y el 22 de octubre de 2026. Requisitos, fechas y qué cubre cada beneficio.',
+      'Fechas oficiales del FUAS admisión 2027: nivel socioeconómico 17-12-2026, preselección 15-01-2027, asignación 10-03-2027 y apelación 10-25 de marzo. Qué cubre gratuidad y cada beca.',
     keywords: [
       'fuas 2027',
       'postulación gratuidad 2027',
-      'fuas octubre 2026',
+      'resultados fuas 2027',
       'becas educación superior 2027',
       'beneficios estudiantiles mineduc',
-      'cuándo se llena el fuas',
+      'cuándo salen los resultados del fuas',
     ],
     relatedCalculators: ['calculadora-becas-gratuidad', 'calculadora-puntaje-ponderado-paes', 'calculadora-puntaje-nem-ranking'],
     faq: [
       {
-        question: '¿Cuándo se llena el FUAS para la admisión 2027?',
+        question: '¿Cuándo se llenó el FUAS para la admisión 2027?',
         answer:
-          'Del 1 al 22 de octubre de 2026, en el sitio oficial del FUAS (postulacion.beneficiosestudiantiles.cl/fuas o fuas.cl), con tu RUT y contraseña o con ClaveÚnica.',
+          'El primer período fue del 1 al 22 de octubre de 2026, con extensión hasta el 6 de noviembre de 2026, en el sitio oficial (postulacion.beneficiosestudiantiles.cl/fuas o fuas.cl).',
+      },
+      {
+        question: '¿Cuándo salen los resultados del FUAS 2027?',
+        answer:
+          'El nivel socioeconómico se publica el 17 de diciembre de 2026, la preselección de gratuidad y becas el 15 de enero de 2027 y los resultados de asignación el 10 de marzo de 2027, con apelación del 10 al 25 de marzo, en resultados.beneficiosestudiantiles.cl.',
       },
       {
         question: '¿Qué se postula con el FUAS?',
@@ -5530,6 +5535,14 @@ ${DESEMPLEO_INE_HTML}
     ],
     sources: [
       {
+        label: 'Mineduc — Postulación FUAS admisión 2027',
+        url: 'https://postulacion.beneficiosestudiantiles.cl/fuas/',
+      },
+      {
+        label: 'Ayuda Mineduc — FUAS Asignación 2027',
+        url: 'https://www.ayudamineduc.cl/ficha/fuas-asignacion-2027',
+      },
+      {
         label: 'ChileAtiende — Gratuidad en la educación superior',
         url: 'https://www.chileatiende.gob.cl/fichas/43203-gratuidad-en-la-educacion-superior',
       },
@@ -5546,26 +5559,36 @@ ${DESEMPLEO_INE_HTML}
         url: 'https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-nuevo-milenio-bnm',
       },
     ],
-    content: `<p class="article-lead">Del <strong>1 al 22 de octubre de 2026</strong> está abierta la postulación a la <strong>gratuidad, las becas y los créditos</strong> para la admisión 2027 de la educación superior. El único trámite que habilita todo es el <strong>FUAS</strong> (Formulario Único de Acreditación Socioeconómica): no se postula beneficio por beneficio — se completa un solo formulario y con esos datos, más la información que ya tiene el Estado, se determina a qué puedes optar.</p>
+    content: `<p class="article-lead">La postulación del <strong>FUAS</strong> (Formulario Único de Acreditación Socioeconómica) para la admisión 2027 cerró: fue del <strong>1 al 22 de octubre de 2026</strong>, con extensión hasta el <strong>6 de noviembre de 2026</strong>. Quienes lo completaron ahora siguen el proceso por sus hitos oficiales: nivel socioeconómico, preselección, asignación y apelación. Aquí están las fechas publicadas por el Mineduc y qué significa cada una.</p>
 
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Fechas clave</strong><p>FUAS admisión 2027: del 1 al 22 de octubre de 2026. Nivel socioeconómico del hogar: el Mineduc lo publica en diciembre. Resultados de asignación, apelación y renovación de la admisión 2026: desde el 15 de octubre de 2026 en el sitio de Beneficios Estudiantiles.</p></div></aside>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>Fechas oficiales del proceso FUAS 2027</strong><p>Nivel socioeconómico: <strong>17 de diciembre de 2026</strong>. Preselección de gratuidad, becas y renovantes: <strong>15 de enero de 2027</strong>. Resultados de asignación: <strong>10 de marzo de 2027</strong>. Período de apelación: <strong>del 10 al 25 de marzo de 2027</strong>. Los resultados se publican en <strong>resultados.beneficiosestudiantiles.cl</strong>.</p></div></aside>
 
 <h2>Qué es el FUAS y por qué todo parte ahí</h2>
 <p>El FUAS es el formulario que acredita la situación socioeconómica de tu hogar para los beneficios estudiantiles del Estado. No es una postulación a una beca concreta: lo que declaras en él alimenta la evaluación que determina si cumples los requisitos de ingresos de la gratuidad y de cada beca. Por eso el consejo práctico es siempre el mismo: <strong>llénalo aunque no estés seguro de calificar</strong>. Sin FUAS no hay evaluación y sin evaluación no hay beneficio, cualquiera sea tu puntaje o tus notas.</p>
 <p>Un detalle que suele pasar desapercibido: el beneficio se otorga con los datos del FUAS <strong>más la información que ya tiene el Estado</strong>. El formulario no opera como una declaración aislada —el sistema cruza lo que declaras con los registros públicos—, así que conviene completarlo con datos reales y consistentes, no con estimaciones optimistas sobre los ingresos del hogar.</p>
-<p>El resultado de esa evaluación no es inmediato. El Mineduc publica el <strong>nivel socioeconómico en diciembre</strong>, dentro del proceso de admisión. Ese nivel —el tramo de ingresos en que queda clasificado tu hogar— es la variable que abre o cierra cada beneficio: la gratuidad pide estar dentro del 60% de menores ingresos, y las becas usan tramos del 50%, 70% u 80% según el programa.</p>
+<p>El resultado de esa evaluación no es inmediato. El Mineduc publica el <strong>nivel socioeconómico el 17 de diciembre de 2026</strong>. Ese nivel —el tramo de ingresos en que queda clasificado tu hogar— es la variable que abre o cierra cada beneficio: la gratuidad pide estar dentro del 60% de menores ingresos, y las becas usan tramos del 50%, 70% u 80% según el programa. Ojo: ese resultado informa tu nivel, <strong>no significa que el beneficio ya esté asignado</strong>.</p>
 
 <h2>Cómo y dónde completarlo</h2>
-<p>El FUAS se llena en línea en el sitio oficial del formulario: <strong>postulacion.beneficiosestudiantiles.cl/fuas</strong> (también accesible como fuas.cl). Para entrar necesitas tu <strong>RUT y contraseña</strong>, o tu <strong>ClaveÚnica</strong> si la tienes activada. El plazo es acotado —tres semanas, del 1 al 22 de octubre de 2026— y corresponde a la postulación para la <strong>admisión 2027</strong>.</p>
+<p>El FUAS se llenó en línea en el sitio oficial del formulario: <strong>postulacion.beneficiosestudiantiles.cl/fuas</strong> (también accesible como fuas.cl), con <strong>RUT y contraseña</strong> o con <strong>ClaveÚnica</strong>. La ventana fue del 1 al 22 de octubre de 2026, y el Ministerio habilitó un período de extensión hasta el <strong>6 de noviembre de 2026</strong> para quienes quedaron fuera del plazo inicial.</p>
 <ol class="steps">
 <li><strong>Reúne los datos del hogar.</strong> El formulario pregunta por los integrantes y su situación; tenlos a mano antes de empezar.</li>
 <li><strong>Entra con tu RUT o ClaveÚnica.</strong> Ambas credenciales sirven; usa la que tengas operativa.</li>
 <li><strong>Completa con datos reales.</strong> La información se cruza con los registros del Estado.</li>
-<li><strong>Envía dentro del plazo.</strong> La ventana cierra el 22 de octubre de 2026.</li>
-<li><strong>Revisa el resultado en diciembre.</strong> El nivel socioeconómico se publica en esa fecha y define a qué beneficios optas.</li>
+<li><strong>Revisa los hitos.</strong> Nivel socioeconómico el 17-12-2026, preselección el 15-01-2027, asignación el 10-03-2027.</li>
 </ol>
-<p>Como el proceso es por ventana, el riesgo real no es la complejidad del formulario sino el calendario: quien no lo completa entre el 1 y el 22 de octubre queda fuera de la evaluación de este período. Conviene llenarlo en los primeros días, cuando aún hay margen para corregir un dato si el sistema lo exige.</p>
-<p>Mientras corre la ventana de la admisión 2027, quienes ya están dentro del sistema tienen su propia fecha: los <strong>resultados de asignación, apelación y renovación de la admisión 2026</strong> se publican desde el <strong>15 de octubre de 2026</strong> en el sitio de Beneficios Estudiantiles. Son dos procesos paralelos sobre la misma plataforma —una renovación en curso y una postulación nueva— que conviven durante octubre.</p>
+<p>Con la ventana cerrada, lo que queda es seguir el calendario oficial. Un punto que conviene tener claro: para acceder a un beneficio de la admisión 2027 hay que <strong>matricularse en el transcurso del proceso</strong>, aunque no era necesario tener la matrícula al momento de postular. Y el Registro Social de Hogares (RSH) debe estar actualizado y coherente con lo declarado en el FUAS.</p>
+<h2>Resultados y próximas fechas oficiales</h2>
+<p>Según el calendario publicado por el Mineduc en el portal del FUAS y en Ayuda Mineduc, el proceso 2027 tiene estos hitos:</p>
+<table>
+<thead><tr><th>Hito</th><th>Fecha</th><th>Qué significa</th></tr></thead>
+<tbody>
+<tr><td>Nivel socioeconómico</td><td>17 de diciembre de 2026</td><td>Informa el tramo de tu hogar; no asigna aún ningún beneficio.</td></tr>
+<tr><td>Preselección</td><td>15 de enero de 2027</td><td>Resultados de preselección de gratuidad, becas y potenciales renovantes de beneficios.</td></tr>
+<tr><td>Asignación</td><td>10 de marzo de 2027</td><td>Resultados de asignación del primer período de postulación.</td></tr>
+<tr><td>Apelación</td><td>10 al 25 de marzo de 2027</td><td>Período para apelar los resultados de asignación.</td></tr>
+</tbody>
+</table>
+<p>Todos los resultados se publican en <strong>resultados.beneficiosestudiantiles.cl</strong>. La consulta es individual —cada postulante entra con sus propias credenciales— y las etapas siguientes del proceso se avisarán por los mismos canales oficiales.</p>
 
 <h2>La gratuidad: qué exige y qué cubre</h2>
 <p>La gratuidad es el beneficio más amplio: cubre el <strong>arancel y la matrícula</strong> durante la <strong>duración nominal</strong> de la carrera. Pero su lista de requisitos es precisa y conviene revisarla completa:</p>
@@ -5596,20 +5619,20 @@ ${DESEMPLEO_INE_HTML}
 <p>La lectura práctica de la tabla es por combinaciones, no por filas sueltas: un mismo estudiante puede calificar a más de un beneficio a la vez. Quien está en el 60% y estudia una carrera universitaria en una institución adscrita con buen puntaje PAES puede tener gratuidad, Bicentenario y BJGM simultáneamente como opciones —aunque en la práctica los beneficios de arancel no se suman en la misma carrera. Lo relevante es que una sola postulación FUAS habilita la evaluación de todos.</p>
 <p>Nuestra <a href="/calculadoras/calculadora-becas-gratuidad">calculadora de becas y gratuidad</a> cruza exactamente estas reglas: con tu tramo socioeconómico, tipo de carrera, puntaje PAES y NEM te muestra a qué beneficios podrías optar y el tope anual de cada uno. Para proyectar tu postulación, calcula antes tu <a href="/calculadoras/calculadora-puntaje-ponderado-paes">puntaje ponderado PAES</a> y tu <a href="/calculadoras/calculadora-puntaje-nem-ranking">puntaje NEM y ranking</a>.</p>
 
-<h2>Qué revisar antes de que cierre la ventana</h2>
+<h2>Qué hacer mientras avanza el proceso</h2>
 <ol class="steps">
-<li><strong>Verifica tu ClaveÚnica o contraseña.</strong> Es la llave de acceso; si no funciona, resuélvelo antes del 22 de octubre.</li>
-<li><strong>Completa el FUAS entre el 1 y el 22 de octubre.</strong> No hay postulación tardía dentro de este período.</li>
+<li><strong>Mantén vigente tu ClaveÚnica o contraseña.</strong> Es la llave para consultar cada resultado en el portal.</li>
+<li><strong>Actualiza tu Registro Social de Hogares.</strong> Debe ser coherente con lo declarado en el FUAS.</li>
 <li><strong>Comprueba si tu institución está adscrita a la gratuidad.</strong> Es requisito para ese beneficio, no para las becas.</li>
 <li><strong>Estima tus opciones.</strong> La calculadora de este sitio te muestra el escenario según tu tramo y tus métricas.</li>
-<li><strong>Agenda diciembre.</strong> Ese mes el Mineduc publica tu nivel socioeconómico, que confirma o descarta cada beneficio.</li>
+<li><strong>Agenda los hitos.</strong> 17 de diciembre (nivel socioeconómico), 15 de enero (preselección), 10 de marzo (asignación) y 10–25 de marzo (apelación).</li>
 </ol>
-<p>El FUAS es un trámite corto frente a lo que habilita: cubre la puerta de entrada a la gratuidad, a cinco becas con topes entre $600.000 y $1.150.000, y a los créditos. Perder la ventana significa esperar al siguiente proceso. Si ya estás dentro del sistema —renovando o apelando— los resultados de la admisión 2026 se consultan desde el 15 de octubre de 2026 en el sitio de Beneficios Estudiantiles.</p>
+<p>El FUAS es un trámite corto frente a lo que habilita: cubre la puerta de entrada a la gratuidad, a cinco becas con topes entre $600.000 y $1.150.000, y a los créditos. Si tu resultado no es el esperado, el período de apelación del <strong>10 al 25 de marzo de 2027</strong> es la instancia para revisarlo.</p>
 <p>La estructura completa del sistema apunta a una sola conclusión práctica: el FUAS no es un requisito opcional de quien cree que va a calificar, sino la puerta de evaluación de todos los beneficios estudiantiles. Llenarlo es la única forma de que el Estado determine tu nivel socioeconómico y lo cruce con los requisitos de cada programa — y quien no lo hace no aparece en esa evaluación, cualquiera sea su situación real.</p>
 <p>Para profundizar en las alternativas de financiamiento cuando no alcanzas estos beneficios, revisa la <a href="/guias/credito-cae-educacion-chile">guía del crédito CAE y la educación en Chile</a>.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 26 de septiembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/43203-gratuidad-en-la-educacion-superior" target="_blank" rel="noopener">ficha de gratuidad de ChileAtiende</a> y el portal de <a href="https://portal.beneficiosestudiantiles.cl/gratuidad" target="_blank" rel="noopener">Beneficios Estudiantiles del Mineduc</a>, incluidas las fichas de <a href="https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-juan-gomez-millas-bjgm" target="_blank" rel="noopener">Beca Juan Gómez Millas</a> y <a href="https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-nuevo-milenio-bnm" target="_blank" rel="noopener">Beca Nuevo Milenio</a>.</p>`,
+<p>Contenido verificado el 22 de noviembre de 2026 con el <a href="https://postulacion.beneficiosestudiantiles.cl/fuas/" target="_blank" rel="noopener">portal oficial de postulación del FUAS</a> y la ficha <a href="https://www.ayudamineduc.cl/ficha/fuas-asignacion-2027" target="_blank" rel="noopener">FUAS Asignación 2027 de Ayuda Mineduc</a> (fechas del proceso), la <a href="https://www.chileatiende.gob.cl/fichas/43203-gratuidad-en-la-educacion-superior" target="_blank" rel="noopener">ficha de gratuidad de ChileAtiende</a> y el portal de <a href="https://portal.beneficiosestudiantiles.cl/gratuidad" target="_blank" rel="noopener">Beneficios Estudiantiles del Mineduc</a>, incluidas las fichas de <a href="https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-juan-gomez-millas-bjgm" target="_blank" rel="noopener">Beca Juan Gómez Millas</a> y <a href="https://portal.beneficiosestudiantiles.cl/becas-y-creditos/beca-nuevo-milenio-bnm" target="_blank" rel="noopener">Beca Nuevo Milenio</a>.</p>`,
   },
   {
     slug: 'bono-30-mil-por-hijo-2026-quien-recibe-pago',
