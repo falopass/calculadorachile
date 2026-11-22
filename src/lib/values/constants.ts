@@ -1012,7 +1012,7 @@ export const BONO_APOYO_NINEZ = {
  * 70% con NEM ≥5,0; Nuevo Milenio II primer año 50%.
  */
 export const BECAS_EDUCACION_SUPERIOR_2027 = {
-  fuas: { desde: '2026-10-01', hasta: '2026-10-22' },
+  fuas: { desde: '2026-10-01', hasta: '2026-10-22', extensionHasta: '2026-11-06' },
   puntajePaesBecas: 510,
   nemMinimoTecnico: 5.0,
   gratuidad: { percentil: 60 },
