@@ -33,6 +33,7 @@ describe('porcentajeBienios', () => {
 describe('calculateSueldoDocente', () => {
   it('caso golden: 20 h básica + 24 h media, 3 bienios, Avanzado, BRP completo', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 20,
       horasMedia: 24,
       tramo: 'avanzado',
@@ -65,6 +66,7 @@ describe('calculateSueldoDocente', () => {
 
   it('44 h básica, Inicial, 1 bienio, sin BRP', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 44,
       horasMedia: 0,
       tramo: 'inicial',
@@ -88,6 +90,7 @@ describe('calculateSueldoDocente', () => {
 
   it('sin tramo: no paga asignación de tramo pero sí experiencia', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 30,
       horasMedia: 0,
       tramo: 'sin-tramo',
@@ -112,6 +115,7 @@ describe('calculateSueldoDocente', () => {
 
   it('mención sin título no paga', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 44,
       horasMedia: 0,
       tramo: 'temprano',
@@ -128,6 +132,7 @@ describe('calculateSueldoDocente', () => {
 
   it('alumnos prioritarios urbano ≥60%: 20% tramo + fijo', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 44,
       horasMedia: 0,
       tramo: 'temprano',
@@ -146,6 +151,7 @@ describe('calculateSueldoDocente', () => {
 
   it('prioritarios ≥80% sin tramo alto se trata como ≥60%', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 44,
       horasMedia: 0,
       tramo: 'inicial',
@@ -164,6 +170,7 @@ describe('calculateSueldoDocente', () => {
 
   it('rural 45–60%: 10% del tramo sin fijo', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 44,
       horasMedia: 0,
       tramo: 'experto2',
@@ -181,6 +188,7 @@ describe('calculateSueldoDocente', () => {
 
   it('suma de horas mayor a 44 se topa en 44', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 30,
       horasMedia: 30,
       tramo: 'inicial',
@@ -193,12 +201,34 @@ describe('calculateSueldoDocente', () => {
       contratoIndefinido: true,
     });
     expect(r.horasAplicadas).toBe(44);
+    // RBMN solo paga las 44 h efectivas: 30 básica + 14 media
+    expect(r.haberes.rbmn).toBe(30 * VMHC_2026.basica + 14 * VMHC_2026.media);
     // BRP topa en 30 h
     expect(r.haberes.brpTitulo).toBe(BRP_2026.titulo);
   });
 
+  it('particular subvencionado: sin asignación de experiencia municipal (art. 84)', () => {
+    const r = calculateSueldoDocente({
+      tipoEmpleador: 'particular',
+      horasBasica: 44,
+      horasMedia: 0,
+      tramo: 'inicial',
+      bienios: 5,
+      brpTitulo: true,
+      brpMencion: false,
+      concentracionPrioritarios: 'ninguno',
+      afp: 'capital',
+      saludTipo: 'fonasa',
+      contratoIndefinido: true,
+    });
+    expect(r.haberes.asignacionExperiencia).toBe(0);
+    // El componente de experiencia del tramo (art. 49) sí se extiende
+    expect(r.haberes.tramoExperiencia).toBeGreaterThan(0);
+  });
+
   it('0 horas produce haberes en 0 sin error', () => {
     const r = calculateSueldoDocente({
+      tipoEmpleador: 'municipal',
       horasBasica: 0,
       horasMedia: 0,
       tramo: 'inicial',

@@ -6,9 +6,11 @@
 //   (media HC y TP). Fuente: Dirección del Trabajo, consulta hora cronológica
 //   docente (dt.gob.cl art. 61527); Ley 21.806 (reajuste +2,0% dic-2025 y
 //   +1,4% jun-2026). RBMN = VMHC × horas de contrato (Estatuto Docente art. 35).
-// - Asignación de experiencia (bienios): 3,38% del RBMN el primer bienio y
-//   3,33% por cada bienio adicional, tope 50% a los 15 bienios
+// - Asignación de experiencia (bienios, art. 48): 3,38% del RBMN el primer
+//   bienio y 3,33% por cada bienio adicional, tope 50% a los 15 bienios
 //   (DFL 1/1996 Mineduc; ayudamineduc.cl / escalas municipales 2026).
+//   Solo aplica a municipal/SLEP: el art. 84 extiende a docentes de
+//   particulares subvencionados solo los arts. 49, 50, 54 y 55.
 // - Asignación por Tramo de Desarrollo Profesional (art. 49 Estatuto Docente):
 //   componente experiencia (misma fórmula de bienios) + componente de
 //   progresión (máx. para 44 h y 15 bienios, prorrateado) + componente fijo
@@ -83,7 +85,10 @@ export type EscenarioPrioritarios =
   | 'urbana60'
   | 'avanzada80';
 
+export type TipoEmpleadorDocente = 'municipal' | 'particular';
+
 export interface SueldoDocenteInput {
+  tipoEmpleador: TipoEmpleadorDocente;
   horasBasica: number;
   horasMedia: number;
   tramo: TramoDocente;
@@ -133,9 +138,11 @@ export function porcentajeBienios(bienios: number): number {
 const TRAMOS_ALTOS: TramoDocente[] = ['avanzado', 'experto1', 'experto2'];
 
 export function calculateSueldoDocente(input: SueldoDocenteInput): SueldoDocenteResult {
+  // La jornada con un mismo empleador no puede exceder 44 horas: las horas
+  // excedentes no generan RBMN ni haberes. Se aplican primero las de básica.
   const hBasica = Math.max(0, Math.min(input.horasBasica, JORNADA_MAX_HORAS));
-  const hMedia = Math.max(0, Math.min(input.horasMedia, JORNADA_MAX_HORAS));
-  const horas = Math.min(hBasica + hMedia, JORNADA_MAX_HORAS);
+  const hMedia = Math.max(0, Math.min(input.horasMedia, JORNADA_MAX_HORAS - hBasica));
+  const horas = hBasica + hMedia;
   const factorJornada = horas / JORNADA_MAX_HORAS;
 
   const rbmn = Math.round(hBasica * VMHC_2026.basica + hMedia * VMHC_2026.media);
@@ -143,8 +150,10 @@ export function calculateSueldoDocente(input: SueldoDocenteInput): SueldoDocente
   const pct = porcentajeBienios(input.bienios) / 100;
   const bienios = Math.max(0, Math.min(Math.trunc(input.bienios), BIENIOS_MAX));
 
-  // Asignación de experiencia (bienios), aplica a todo profesional de la educación.
-  const asignacionExperiencia = Math.round(rbmn * pct);
+  // Asignación de experiencia (bienios, art. 48): solo municipal/SLEP. A
+  // docentes de particulares subvencionados el art. 84 no se la extiende.
+  const asignacionExperiencia =
+    input.tipoEmpleador === 'municipal' ? Math.round(rbmn * pct) : 0;
 
   // Asignación por tramo (art. 49): solo docentes incorporados a Carrera Docente.
   const enCarrera = input.tramo !== 'sin-tramo';
@@ -241,11 +250,15 @@ export function sueldoDocenteToResults(result: SueldoDocenteResult): CalculatorR
     { label: 'Total haberes (sueldo bruto)', value: result.totalHaberes, format: 'CLP' },
     { label: 'Total descuentos', value: result.totalDescuentos, format: 'CLP' },
     { label: 'Sueldo base (RBMN)', value: result.haberes.rbmn, format: 'CLP' },
-    {
-      label: 'Asignación de experiencia (bienios)',
-      value: result.haberes.asignacionExperiencia,
-      format: 'CLP',
-    },
+    ...(result.haberes.asignacionExperiencia > 0
+      ? [
+          {
+            label: 'Asignación de experiencia (bienios)',
+            value: result.haberes.asignacionExperiencia,
+            format: 'CLP' as const,
+          },
+        ]
+      : []),
     {
       label: 'Asignación por tramo',
       value: result.asignacionTramo,

@@ -8702,6 +8702,19 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
     inputs: [
       {
+        id: 'tipoEmpleador',
+        label: 'Tipo de establecimiento',
+        type: 'select',
+        required: true,
+        defaultValue: 'municipal',
+        options: [
+          { value: 'municipal', label: 'Municipal o SLEP' },
+          { value: 'particular', label: 'Particular subvencionado o DL 3.166' },
+        ],
+        tooltip:
+          'En particular subvencionado no corre la asignación de experiencia por bienios (art. 84 del Estatuto Docente solo extiende tramo, prioritarios y BRP).',
+      },
+      {
         id: 'horasBasica',
         label: 'Horas semanales básica/parvularia/especial',
         type: 'number',

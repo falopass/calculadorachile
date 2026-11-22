@@ -1901,6 +1901,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
     assumptions: [
       'Mes completo de remuneración, sin licencias ni días sin goce.',
       'Los bienios ingresados están reconocidos por el sostenedor y el tramo es el asignado en el último proceso de reconocimiento.',
+      'La asignación de experiencia por bienios (art. 48) solo corre para municipal/SLEP; a docentes de particulares subvencionados el art. 84 les extiende solo tramo, alumnos prioritarios y BRP.',
       'La mención BRP solo se paga junto con el componente por título.',
       'El escenario "80% o más, tramo Avanzado/Experto" se trata como "60% o más" si el tramo es inferior.',
       'La suma de horas se topa en 44, el máximo legal con un mismo empleador.',
