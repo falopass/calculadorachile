@@ -1836,4 +1836,30 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Pensionados IPS tienen montos distintos publicados en ChileAtiende; esta estimadora no los calcula automáticamente.',
     ],
   },
+  porcentaje: {
+    summary:
+      'Resuelve las operaciones de porcentaje de uso general: el X% de un monto, qué porcentaje es A de B, la variación porcentual entre dos valores y el precio final con descuento o aumento.',
+    calculationSteps: [
+      '«El X% de un monto»: multiplica el monto por el porcentaje dividido en 100.',
+      '«Qué % es A de B»: divide A entre B y multiplica por 100.',
+      '«Variación porcentual»: (valor nuevo − valor inicial) ÷ valor inicial × 100, con signo.',
+      '«Precio con descuento»: precio × (1 − % ÷ 100); con segundo descuento se aplica en cadena, no se suma. «Precio con aumento»: precio × (1 + % ÷ 100).',
+    ],
+    assumptions: [
+      'Los montos se redondean a peso entero (CLP) y los porcentajes se muestran con un decimal.',
+      'En descuento, los porcentajes se acotan al rango 0–100%.',
+    ],
+    limitations: [
+      'Es aritmética de porcentajes: no verifica si el precio base de una oferta es real ni histórico (SERNAC exige informar precio anterior y rebajado).',
+    ],
+    workedExample: {
+      title: 'Ejemplo: $99.990 con 30% de descuento',
+      inputs: ['Valor A: $99.990', 'Porcentaje: 30%'],
+      development: [
+        'Descuento = $99.990 × 0,30 = $29.997',
+        'Precio final = $99.990 − $29.997 = $69.993',
+      ],
+      result: 'Precio final: $69.993; ahorro: $29.997 (descuento efectivo 30%).',
+    },
+  },
 };

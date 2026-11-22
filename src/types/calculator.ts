@@ -68,6 +68,8 @@ export interface CalculatorResult {
   highlight?: boolean;
   /** Señala un cálculo parcial que no se debe guardar en el historial. */
   partial?: boolean;
+  /** Aviso sin valor numérico: la tarjeta no muestra cifra ni lo exporta. */
+  advisory?: boolean;
   note?: CalculatorResultNote;
 }
 

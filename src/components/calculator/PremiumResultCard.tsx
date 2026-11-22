@@ -153,30 +153,34 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
       </div>
 
       <div className="flex shrink-0 items-center gap-2">
-        <span
-          className={`
-            font-mono font-medium whitespace-nowrap
-            ${result.highlight
-              ? 'text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] text-lg sm:text-xl'
-              : 'text-[var(--foreground)] dark:text-[var(--foreground-dark)] text-base'
-            }
-          `}
-        >
-          {formatValue(result.value, result.format)}
-        </span>
+        {!result.advisory && (
+          <span
+            className={`
+              font-mono font-medium whitespace-nowrap
+              ${result.highlight
+                ? 'text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] text-lg sm:text-xl'
+                : 'text-[var(--foreground)] dark:text-[var(--foreground-dark)] text-base'
+              }
+            `}
+          >
+            {formatValue(result.value, result.format)}
+          </span>
+        )}
 
         {/* Botón copiar */}
-        <button
-          onClick={handleCopy}
-          className="hidden sm:inline-flex opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
-          title="Copiar valor"
-        >
-          {copied ? (
-            <Check className="w-4 h-4 text-[var(--color-success-500)]" />
-          ) : (
-            <Copy className="w-4 h-4 text-[var(--foreground-secondary)]" />
-          )}
-        </button>
+        {!result.advisory && (
+          <button
+            onClick={handleCopy}
+            className="hidden sm:inline-flex opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-[var(--background-secondary)]/50 transition-all border border-[var(--border)]/50"
+            title="Copiar valor"
+          >
+            {copied ? (
+              <Check className="w-4 h-4 text-[var(--color-success-500)]" />
+            ) : (
+              <Copy className="w-4 h-4 text-[var(--foreground-secondary)]" />
+            )}
+          </button>
+        )}
       </div>
     </motion.div>
     {result.note && (
@@ -237,7 +241,7 @@ export default function PremiumResultCard({
   // Obtener resultado principal para exportación
   const mainResult = results.find(r => r.highlight);
   const exportResults = results
-    .filter(r => r !== mainResult)
+    .filter(r => r !== mainResult && !r.advisory)
     .map(r => ({ label: r.label, value: formatValue(r.value, r.format) }));
 
   if (!results || results.length === 0) {

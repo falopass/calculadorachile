@@ -65,6 +65,7 @@ const ORGANISMO_BY_ID: Record<string, string> = {
   'interes-compuesto': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'deposito-a-plazo': 'la Comisión para el Mercado Financiero (CMF) y tu entidad financiera',
   'prenatal-postnatal': 'la SUSESO o la entidad que paga tu licencia',
+  porcentaje: 'el SERNAC y el precio anunciado por la tienda',
 };
 
 /** Calculadoras cuyos resultados no son partes de un total (gráfico sin sentido). */
