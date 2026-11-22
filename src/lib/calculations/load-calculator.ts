@@ -1414,9 +1414,9 @@ export async function loadCalculationFn(
     }
 
     case 'validador-rut': {
-      const { validateRut, validadorRutToResults } = await import('./validador-rut');
+      const { calculateValidadorRut, validadorRutToResults } = await import('./validador-rut');
       return (inputs) => {
-        const result = validateRut({
+        const result = calculateValidadorRut({
           rut: typeof inputs.rut === 'string' ? inputs.rut : String(inputs.rut ?? ''),
         });
         return validadorRutToResults(result);

@@ -4,7 +4,8 @@
 // Algoritmo público del dígito verificador del RUT:
 // suma ponderada cíclica con factores 2–7 de derecha a
 // izquierda, DV = 11 − (suma mod 11); 11→'0', 10→'K'.
-// Base: Ley 20.494 (ROL único nacional) y Registro Civil.
+// Base: Ley 4.808 (ley orgánica del Registro Civil, RUN y cédula)
+// y la página oficial del Registro Civil sobre el dígito verificador.
 // No es contenido YMYL: no afecta montos ni obligaciones.
 // ============================================
 
@@ -53,7 +54,7 @@ export function formatearRut(cuerpo: string, digito: string): string {
   return `${conPuntos}-${digito}`;
 }
 
-export function validateRut(input: ValidadorRutInput): ValidadorRutResult {
+export function calculateValidadorRut(input: ValidadorRutInput): ValidadorRutResult {
   const limpio = (input.rut ?? '')
     .trim()
     .toUpperCase()
@@ -79,7 +80,8 @@ export function validateRut(input: ValidadorRutInput): ValidadorRutResult {
 
   const cuerpo = match[1];
   const digitoIngresado = match[2];
-  if (cuerpo.length < 7 || cuerpo.length > 9) {
+  // Rango del tipo RUT del esquema de facturación electrónica del SII (1–8 dígitos).
+  if (cuerpo.length < 1 || cuerpo.length > 8) {
     return { ...base, cuerpo, digitoIngresado, parseable: false, error: 'largo' };
   }
 
@@ -100,7 +102,7 @@ export function validadorRutToResults(result: ValidadorRutResult): CalculatorRes
       result.error === 'vacio'
         ? 'Ingresa un RUT para validarlo.'
         : result.error === 'largo'
-          ? 'El cuerpo del RUT debe tener entre 7 y 9 dígitos.'
+          ? 'El cuerpo del RUT debe tener entre 1 y 8 dígitos.'
           : 'Formato no reconocido: usa dígitos y guion (ej. 12.345.678-5).';
     return [
       {

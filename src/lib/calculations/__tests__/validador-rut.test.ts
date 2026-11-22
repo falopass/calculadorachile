@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   calcularDigitoVerificador,
   formatearRut,
-  validateRut,
+  calculateValidadorRut,
   validadorRutToResults,
 } from '../validador-rut';
 
@@ -36,9 +36,9 @@ describe('formatearRut', () => {
   });
 });
 
-describe('validateRut', () => {
+describe('calculateValidadorRut', () => {
   it('acepta RUT válido con puntos y guion', () => {
-    const r = validateRut({ rut: '12.345.678-5' });
+    const r = calculateValidadorRut({ rut: '12.345.678-5' });
     expect(r.parseable).toBe(true);
     expect(r.esValido).toBe(true);
     expect(r.digitoEsperado).toBe('5');
@@ -46,13 +46,13 @@ describe('validateRut', () => {
   });
 
   it('acepta RUT válido sin puntos y sin guion', () => {
-    const r = validateRut({ rut: '123456785' });
+    const r = calculateValidadorRut({ rut: '123456785' });
     expect(r.parseable).toBe(true);
     expect(r.esValido).toBe(true);
   });
 
   it('acepta dígito K en minúscula y con guion', () => {
-    const r = validateRut({ rut: '10.000.013-k' });
+    const r = calculateValidadorRut({ rut: '10.000.013-k' });
     expect(r.parseable).toBe(true);
     expect(r.esValido).toBe(true);
     expect(r.digitoEsperado).toBe('K');
@@ -60,7 +60,7 @@ describe('validateRut', () => {
   });
 
   it('rechaza dígito verificador incorrecto pero informa el esperado', () => {
-    const r = validateRut({ rut: '12.345.678-9' });
+    const r = calculateValidadorRut({ rut: '12.345.678-9' });
     expect(r.parseable).toBe(true);
     expect(r.esValido).toBe(false);
     expect(r.digitoIngresado).toBe('9');
@@ -68,31 +68,33 @@ describe('validateRut', () => {
   });
 
   it('tolera espacios', () => {
-    const r = validateRut({ rut: ' 12.345.678-5 ' });
+    const r = calculateValidadorRut({ rut: ' 12.345.678-5 ' });
     expect(r.parseable).toBe(true);
     expect(r.esValido).toBe(true);
   });
 
   it('rechaza entrada vacía', () => {
-    const r = validateRut({ rut: '   ' });
+    const r = calculateValidadorRut({ rut: '   ' });
     expect(r.parseable).toBe(false);
     expect(r.error).toBe('vacio');
   });
 
   it('rechaza letras distintas de K', () => {
-    const r = validateRut({ rut: '12.345.67A-5' });
+    const r = calculateValidadorRut({ rut: '12.345.67A-5' });
     expect(r.parseable).toBe(false);
     expect(r.error).toBe('formato');
   });
 
-  it('rechaza cuerpo demasiado corto', () => {
-    const r = validateRut({ rut: '123456-5' });
-    expect(r.parseable).toBe(false);
-    expect(r.error).toBe('largo');
+  it('acepta cuerpos cortos del rango del esquema SII (1–8 dígitos)', () => {
+    // '123456' es cuerpo válido de formato; su dígito esperado es 0, no 5.
+    const r = calculateValidadorRut({ rut: '123456-5' });
+    expect(r.parseable).toBe(true);
+    expect(r.esValido).toBe(false);
+    expect(r.digitoEsperado).toBe('0');
   });
 
   it('rechaza cuerpo demasiado largo', () => {
-    const r = validateRut({ rut: '1234567890-5' });
+    const r = calculateValidadorRut({ rut: '1234567890-5' });
     expect(r.parseable).toBe(false);
     expect(r.error).toBe('largo');
   });
@@ -100,7 +102,7 @@ describe('validateRut', () => {
 
 describe('validadorRutToResults', () => {
   it('destaca RUT válido e incluye dígito y formato', () => {
-    const rows = validadorRutToResults(validateRut({ rut: '12.345.678-5' }));
+    const rows = validadorRutToResults(calculateValidadorRut({ rut: '12.345.678-5' }));
     expect(rows[0].highlight).toBe(true);
     expect(rows[0].textValue).toBe('RUT válido');
     expect(rows.map((r) => r.textValue)).toContain('5');
@@ -108,13 +110,13 @@ describe('validadorRutToResults', () => {
   });
 
   it('en RUT inválido explica el dígito esperado', () => {
-    const rows = validadorRutToResults(validateRut({ rut: '12.345.678-9' }));
+    const rows = validadorRutToResults(calculateValidadorRut({ rut: '12.345.678-9' }));
     expect(rows[0].textValue).toBe('RUT inválido');
     expect(rows[0].note?.text).toContain('5');
   });
 
   it('con entrada no interpretable devuelve solo el mensaje de error', () => {
-    const rows = validadorRutToResults(validateRut({ rut: 'abc' }));
+    const rows = validadorRutToResults(calculateValidadorRut({ rut: 'abc' }));
     expect(rows).toHaveLength(1);
     expect(rows[0].highlight).toBe(true);
     expect(rows[0].textValue).toContain('Formato');
