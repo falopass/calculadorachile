@@ -569,7 +569,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-10-29',
+    lastReviewed: '2026-11-22',
     sources: [
       {
         name: 'Banco Central — indicadores diarios',
@@ -7794,7 +7794,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'conversiones',
     featured: true,
     phase: 1,
-    lastReviewed: '2026-11-04',
+    lastReviewed: '2026-11-22',
     sources: [
       {
         name: 'INE — Índice de Precios al Consumidor (IPC)',

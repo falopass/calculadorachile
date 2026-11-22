@@ -48,7 +48,7 @@ const IDS = [
   'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'dias-administrativos', 'pension-alimenticia',
   'conversor-divisas', 'puntaje-ponderado-paes', 'puntaje-nem-ranking',
   'peso-colombiano-clp', 'peso-mexicano-clp', 'boliviano-clp',
-  'comparador-afp',
+  'comparador-afp', 'ipc',
 ];
 
 describe('getQuickAnswer', () => {
@@ -208,7 +208,11 @@ describe('getQuickAnswer', () => {
     expect(fila1000[1]).toBe(formatCLP(Math.round(1000 * CTX.uf)));
     expect(fresca.lead.startsWith('Hoy 29-10-2026 la UF vale')).toBe(true);
     expect(fresca.example!.caption).toContain('UF del 29-10-2026');
-    expect(fresca.shortAnswers).toHaveLength(3);
+    expect(fresca.shortAnswers).toHaveLength(6);
+    const fila3000 = fresca.shortAnswers!.find((qa) => qa.question.includes('3.000'))!;
+    expect(fila3000.answer).toContain(formatCLP(Math.round(3000 * CTX.uf)));
+    const fila200 = fresca.shortAnswers!.find((qa) => qa.question.includes('200 UF'))!;
+    expect(fila200.answer).toContain(formatCLP(Math.round(200 * CTX.uf)));
 
     const vieja = getQuickAnswer('uf-clp', { ...CTX, ufFecha: '2026-10-25T03:00:00.000Z', ufFresca: false })!;
     expect(vieja.lead).not.toContain('Hoy');

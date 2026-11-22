@@ -73,6 +73,14 @@ import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import { DERECHO_AD_VALOREM_GENERAL, FUENTE_ADUANAS, UMBRAL_REGIMEN_ESPECIAL_USD } from '@/lib/calculations/compras-internacionales';
 import { PAES } from '@/lib/values/educacion';
 import { calculatePuntajeNemRanking } from '@/lib/calculations/puntaje-nem-ranking';
+import {
+  IPC_FECHA_PUBLICACION,
+  IPC_FUENTE_URL,
+  IPC_METODOLOGIA_URL,
+  IPC_ULTIMO_MES,
+  ipcIndiceMes,
+  variacionIpcEntreMeses,
+} from '@/lib/values/ipc-serie';
 
 export interface QuickAnswerLink {
   text: string;
@@ -803,6 +811,17 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       return {
         h1,
         ...withLinks(buildUTMLeadParts(ctx.utmFresca)),
+        shortAnswers: [
+          {
+            question: '¿Y la UF?',
+            answer:
+              'La UF es la otra unidad de cuenta reajustable de Chile: cambia todos los días según el IPC y se usa en créditos hipotecarios, arriendos y contratos. Para convertir UF a pesos con el valor del día, usa el conversor UF a pesos.',
+            sources: [
+              { text: 'Conversor UF a pesos', href: '/calculadoras/calculadora-uf-clp' },
+              { text: 'Banco Central, metodología de la UF', href: BCCH_UF_METODOLOGIA_URL },
+            ],
+          },
+        ],
         example: {
           caption: `Equivalencias con UTM de ${formatCLP(valorUTM)}${mesUTMEjemplo(ctx)}. El valor se reajusta cada mes según el IPC.`,
           headers: ['Monto en UTM', 'Equivalente en pesos'],
@@ -865,6 +884,27 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
             ],
           },
           {
+            question: '¿Cuánto son 3.000 UF en pesos?',
+            answer: `${formatCLP(aPesos(3_000))} ${conLaUF}. La equivalencia completa está en la tabla de esta página y cambia cada día con el valor oficial.`,
+            sources: [
+              { text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL },
+            ],
+          },
+          {
+            question: '¿Cuánto son 1.000 UF en pesos?',
+            answer: `${formatCLP(aPesos(1_000))} ${conLaUF}.`,
+            sources: [
+              { text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL },
+            ],
+          },
+          {
+            question: '¿Cuánto son 200 UF en pesos?',
+            answer: `${formatCLP(aPesos(200))} ${conLaUF}.`,
+            sources: [
+              { text: 'Banco Central, indicadores diarios', href: BCCH_INDICADORES_URL },
+            ],
+          },
+          {
             question: '¿Cuánto son 90 UF en pesos?',
             answer: `${formatCLP(aPesos(90))} ${conLaUF}. Si buscas el tope imponible en pesos, usa la calculadora de tope imponible.`,
             sources: [
@@ -882,6 +922,83 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           caption: `Tabla de UF a pesos ${fecha ? `con la UF del ${fecha}: ${formatCLP2(uf)}` : `con una UF de ${formatCLP2(uf)}`}${ctx.ufFresca ? ' (Banco Central de Chile)' : ''}. Montos redondeados al peso. La UF cambia todos los días.`,
           headers: ['Monto en UF', 'Equivalente en pesos'],
           rows,
+        },
+      };
+    }
+
+    case 'ipc': {
+      // Todas las cifras salen de IPC_SERIE_2023 (INE, base 2023 = 100);
+      // nunca escritas a mano.
+      const mesLargo = (clave: string) => {
+        const [y, m] = clave.split('-').map(Number);
+        return `${MESES_ES_CL[m - 1]} de ${y}`;
+      };
+      const ultimo = IPC_ULTIMO_MES;
+      const [ultY, ultM] = ultimo.split('-').map(Number);
+      const prev = ultM === 1 ? `${ultY - 1}-12` : `${ultY}-${String(ultM - 1).padStart(2, '0')}`;
+      const dicAnterior = `${ultY - 1}-12`;
+      const mismoMesAnioAntes = `${ultY - 1}-${String(ultM).padStart(2, '0')}`;
+      const indiceTxt = ipcIndiceMes(ultimo)!.toLocaleString('es-CL', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      const varMensual = variacionIpcEntreMeses(prev, ultimo).variacionRedondeadaPct;
+      const varAcumulada = variacionIpcEntreMeses(dicAnterior, ultimo).variacionRedondeadaPct;
+      const varInteranual = variacionIpcEntreMeses(mismoMesAnioAntes, ultimo).variacionRedondeadaPct;
+      const fechaBoletin = fechaLargaISO(IPC_FECHA_PUBLICACION);
+      const factorEjemplo = ipcIndiceMes(ultimo)! / ipcIndiceMes(dicAnterior)!;
+      const montosEjemplo = [100_000, 500_000, 1_000_000];
+      const leadParts: QuickAnswerPart[] = [
+        `El último IPC publicado por el INE es el de ${mesLargo(ultimo)} (índice ${indiceTxt}, boletín del ${fechaBoletin}): la variación interanual a ese mes es ${formatPercentage(varInteranual)} y la acumulada del año, ${formatPercentage(varAcumulada)}. Reajusta un monto entre dos meses con la misma `,
+        { text: 'serie oficial del INE base 2023 = 100', href: IPC_FUENTE_URL },
+        '.',
+      ];
+      return {
+        h1: 'Calculadora IPC Chile: variación entre meses y monto reajustado',
+        ...withLinks(leadParts),
+        topTable: {
+          title: 'Variaciones de referencia del IPC',
+          caption: `Serie oficial del INE, base anual 2023 = 100. El INE publica la variación con un decimal.`,
+          headers: ['Período', 'Variación del IPC'],
+          rows: [
+            [`Último mes (${mesLargo(prev)} → ${mesLargo(ultimo)})`, formatPercentage(varMensual)],
+            [`Acumulada ${ultY} (diciembre de ${ultY - 1} → ${mesLargo(ultimo)})`, formatPercentage(varAcumulada)],
+            [`Interanual (${mesLargo(mismoMesAnioAntes)} → ${mesLargo(ultimo)})`, formatPercentage(varInteranual)],
+          ],
+        },
+        shortAnswers: [
+          {
+            question: '¿Cómo se calcula el reajuste por IPC?',
+            answer:
+              'La variación porcentual es (IPC final ÷ IPC inicial − 1) × 100, y el monto reajustado es monto × (IPC final ÷ IPC inicial), con los índices de la serie oficial del INE base 2023 = 100. El INE publica la variación con un decimal.',
+            sources: [
+              { text: 'INE, uso de la Calculadora IPC', href: IPC_METODOLOGIA_URL },
+              { text: 'INE, calculadora oficial del IPC', href: IPC_FUENTE_URL },
+            ],
+          },
+          {
+            question: '¿Qué mes inicial elijo para un reajuste de arriendo o contrato?',
+            answer:
+              'Según la guía del INE, para incluir la inflación del primer mes del período el mes inicial es el inmediatamente anterior; para la variación acumulada del año, diciembre del año anterior. Si el contrato fija otro mes, usa el que indique el contrato.',
+            sources: [{ text: 'INE, uso de la Calculadora IPC', href: IPC_METODOLOGIA_URL }],
+          },
+          {
+            question: '¿La UF también se reajusta con el IPC?',
+            answer:
+              'Sí: el Banco Central reajusta la UF cada día según la variación del IPC del mes anterior. Para convertir UF a pesos con el valor del día, usa el conversor UF a pesos.',
+            sources: [
+              { text: 'Conversor UF a pesos', href: '/calculadoras/calculadora-uf-clp' },
+              { text: 'Banco Central, metodología de la UF', href: BCCH_UF_METODOLOGIA_URL },
+            ],
+          },
+        ],
+        example: {
+          caption: `Reajuste por IPC entre diciembre de ${ultY - 1} y ${mesLargo(ultimo)} (serie INE base 2023 = 100). Montos redondeados al peso.`,
+          headers: [`Monto en diciembre de ${ultY - 1}`, `Equivalente en ${mesLargo(ultimo)}`],
+          rows: montosEjemplo.map((monto) => [
+            formatCLP(monto),
+            formatCLP(Math.round(monto * factorEjemplo)),
+          ]),
         },
       };
     }
