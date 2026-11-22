@@ -2747,12 +2747,12 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'plusvalia',
     name: 'Plusvalía por Venta de Propiedad',
     description:
-      'Calcula el impuesto por plusvalía al vender una propiedad. Tasa decreciente según años de tenencia. Exento después de 10 años.',
+      'Calcula el impuesto por plusvalía al vender una propiedad. Exención de hasta 8.000 UF (cupo vitalicio acumulado) para personas naturales; el exceso paga 10%.',
     slug: 'calculadora-plusvalia',
     category: 'impuestos',
     featured: true,
     phase: 2,
-    lastReviewed: '2026-07-04',
+    lastReviewed: '2026-11-22',
     sources: [
       {
         name: 'SII — venta de bienes raíces 2026',
@@ -2801,7 +2801,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         min: 0,
         tooltip:
-          'Años desde que compraste la propiedad. A mayor tenencia, menor impuesto (exento después de 10 años).',
+          'Años desde que compraste la propiedad. La ley exige más de 1 año de tenencia (4 en venta por pisos/subdivisión) para acceder al beneficio de las 8.000 UF.',
       },
       {
         id: 'mejoras',
@@ -2813,17 +2813,39 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         tooltip:
           'Inversiones en mejoras (no mantención) que reducen la ganancia imponible. Deben estar documentadas con facturas.',
       },
+      {
+        id: 'aplicaBeneficio',
+        label: '¿Tienes derecho al beneficio de 8.000 UF?',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'true', label: 'Sí — vendo como persona natural' },
+          { value: 'false', label: 'No — comerciante habitual u otro caso' },
+        ],
+        tooltip:
+          'El beneficio es para personas naturales (incluye terrenos y oficinas, no solo vivienda) cuyo inmueble se adquirió desde el 01-01-2004 y con más de 1 año de tenencia. No aplica si vendes bienes raíces de forma habitual (comerciante habitual).',
+      },
+      {
+        id: 'cupoExentoUsadoUF',
+        label: 'Cupo de 8.000 UF ya utilizado (UF)',
+        type: 'number',
+        placeholder: 'Ej: 6500',
+        required: false,
+        min: 0,
+        tooltip:
+          'El beneficio de 8.000 UF es un cupo único para toda la vida. Si en ventas anteriores ya exentaste ganancias, indica cuántas UF usaste (escribe solo el número, ej: 6500); solo queda disponible el saldo restante (Art. 17 N°8 letra b) LIR).',
+      },
     ],
     faq: [
       {
         question: '¿Qué es la plusvalía?',
         answer:
-          'La plusvalía es la ganancia obtenida al vender una propiedad por un precio superior al de compra. Se calcula como: precio de venta - precio de compra - mejoras. La Ley 21.210 establece un impuesto progresivo que disminuye con los años de tenencia.',
+          'La plusvalía es la ganancia obtenida al vender una propiedad por un precio superior al de compra. Se calcula como: precio de venta - precio de compra - mejoras. La Ley 21.210 permite exentar hasta 8.000 UF de mayor valor acumulado durante toda la vida para personas naturales que cumplen los requisitos; el exceso paga un impuesto único del 10%.',
       },
       {
         question: '¿Cuánto impuesto pago por vender una propiedad?',
         answer:
-          'La tasa depende de los años de tenencia: menos de 1 año paga 30%, 1-2 años 25%, 2-3 años 20%, 3-4 años 15%, 4-5 años 10%, 5-10 años 5%, más de 10 años exento. Por ejemplo, si ganas $40.000.000 y tuviste la propiedad 6 años, pagas 5% = $2.000.000.',
+          'Si vendes como persona natural y cumples los requisitos (inmueble adquirido desde 2004, más de 1 año de tenencia, no comerciante habitual), la ganancia está exenta hasta 8.000 UF acumuladas en toda tu vida; sobre el exceso se aplica un impuesto único del 10% (o se puede incluir en Global Complementario). Sin derecho al beneficio, la ganancia neta completa paga 10%. Ejemplo: si tu ganancia es de 9.000 UF y no has usado cupo, pagas 10% sobre 1.000 UF.',
       },
       {
         question: '¿Las mejoras reducen el impuesto?',
@@ -2838,7 +2860,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Hay exenciones adicionales?',
         answer:
-          'Sí. Está exenta la venta de tu vivienda principal (con ciertos requisitos), ventas entre cónyuges, y propiedades adquiridas antes de 2017 que se vendan con más de 10 años de tenencia. Consulta con un contador para tu caso específico.',
+          'El beneficio de 8.000 UF es un cupo único para toda la vida: si en ventas anteriores ya usaste parte de la exención, solo queda disponible el saldo restante. También existen reglas especiales para propiedades adquiridas antes del 1 de enero de 2004 y para el régimen DFL2. Consulta con un contador para tu caso específico.',
       },
     ],
   },

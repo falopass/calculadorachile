@@ -10,8 +10,21 @@ export interface PlusvaliaInput {
   precioVenta: number;
   anosTenencia: number;
   mejoras?: number;
-  /** Vivienda habitacional (única o segunda vivienda con destino habitacional). */
-  esViviendaHabitual?: boolean;
+  /**
+   * Persona natural con derecho al beneficio de 8.000 UF: inmueble
+   * adquirido desde el 01-01-2004, tenencia superior a 1 año (4 años
+   * en venta por pisos o subdivisión) y vendedor que no actúa como
+   * comerciante habitual de bienes raíces. Aplica a cualquier bien
+   * raíz (vivienda, oficina, terreno), no solo vivienda.
+   */
+  aplicaBeneficio?: boolean;
+  /**
+   * UF del cupo vitalicio de 8.000 UF ya utilizadas en ventas anteriores
+   * que hayan aplicado la exención. El cupo es acumulado durante toda la
+   * vida del contribuyente (Art. 17 N°8 letra b) LIR); solo queda
+   * disponible el saldo restante.
+   */
+  cupoExentoUsadoUF?: number;
 }
 
 export interface PlusvaliaResult {
@@ -21,8 +34,12 @@ export interface PlusvaliaResult {
   anosTenencia: number;
   gananciaBruta: number;
   gananciaNeta: number;
-  /** Tope de exención en UF para vivienda habitacional (8.000 UF). */
+  /** Tope de exención vitalicio en UF para persona natural (8.000 UF). */
   exencionUF: number;
+  /** Cupo ya utilizado en ventas anteriores, en UF. */
+  cupoExentoUsadoUF: number;
+  /** Cupo disponible para esta venta, en UF (8.000 - usado). */
+  exencionDisponibleUF: number;
   /** Ganancia exenta aplicada en CLP. */
   exencionAplicada: number;
   /** Ganancia gravada (neta - exención). */
@@ -30,15 +47,17 @@ export interface PlusvaliaResult {
   tasaPlusvalia: number;
   impuestoPlusvalia: number;
   exento: boolean;
-  esViviendaHabitual: boolean;
+  aplicaBeneficio: boolean;
+  /** Tenencia > 1 año, requisito del beneficio (4 años en venta por pisos/subdivisión). */
+  cumpleTenencia: boolean;
 }
 
 /**
  * Tope de exención por mayor valor en venta de bienes raíces:
  * 8.000 UF acumulados durante toda la vida del contribuyente
- * (vivienda habitacional, persona natural). Sobre el exceso aplica
- * el impuesto único sustitutivo del 10% (o se incluye en Global
- * Complementario, a elección del contribuyente).
+ * (persona natural, cualquier bien raíz que cumpla los requisitos).
+ * Sobre el exceso aplica el impuesto único sustitutivo del 10%
+ * (o se incluye en Global Complementario, a elección del contribuyente).
  *
  * Base legal: Art. 17 N°8 letra b) LIR, Ley 21.210 (2020).
  */
@@ -57,11 +76,14 @@ const TASA_IMPUESTO_UNICO = PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico;
  * decreciente por años de tenencia que no existe en la ley
  * chilena. La normativa real es:
  *
- *   - Persona natural, vivienda habitacional: exento hasta 8.000 UF
- *     de mayor valor acumulado en su vida; sobre el exceso, 10%
- *     impuesto único sustitutivo (o IGC).
- *   - Inmueble no habitacional / inversionista: 10% impuesto único
- *     sobre la ganancia neta (o IGC, a elección).
+ *   - Persona natural que cumple los requisitos del beneficio
+ *     (adquisición desde 2004, tenencia >1 año, no comerciante
+ *     habitual): exento hasta 8.000 UF de mayor valor acumulado
+ *     en su vida; sobre el exceso, 10% impuesto único sustitutivo
+ *     (o IGC). Aplica a viviendas, oficinas, terrenos, etc.
+ *   - Sin derecho al beneficio (ej. comerciante habitual o
+ *     tenencia <= 1 año): el mayor valor es renta y tributa vía
+ *     IGC o IDPC; el módulo solo entrega una referencia al 10%.
  *
  * Base legal: Art. 17 N°8 letra b) LIR, Ley 21.210.
  *
@@ -74,7 +96,8 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     precioVenta,
     anosTenencia,
     mejoras = 0,
-    esViviendaHabitual = true,
+    aplicaBeneficio = true,
+    cupoExentoUsadoUF = 0,
   } = input;
 
   // Validar rangos
@@ -89,17 +112,27 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
 
   const hayGanancia = gananciaNeta > 0;
 
-  // Exención: solo aplica para vivienda habitacional, hasta 8.000 UF de mayor valor.
-  const exencionEnCLP = TOPE_EXENCION_UF * UF.valor;
-  const exencionAplicada = esViviendaHabitual && hayGanancia
+  // Exención: solo para persona natural con derecho al beneficio,
+  // hasta 8.000 UF de mayor valor. El cupo es vitalicio y acumulado:
+  // se descuentan las UF ya exentas en ventas anteriores. Además la
+  // ley exige tenencia superior a 1 año (4 en venta por pisos o
+  // subdivisión). Art. 17 N°8 letra b) LIR.
+  const cumpleTenencia = anos > 1;
+  // Sin derecho al beneficio, el mayor valor es renta: se declara en
+  // IGC (persona natural) o IDPC. El 10% que sigue es solo referencia.
+  const beneficioCompleto = aplicaBeneficio && cumpleTenencia;
+  const cupoUsadoUF = Math.max(0, Math.min(cupoExentoUsadoUF, TOPE_EXENCION_UF));
+  const exencionDisponibleUF = TOPE_EXENCION_UF - cupoUsadoUF;
+  const exencionEnCLP = exencionDisponibleUF * UF.valor;
+  const exencionAplicada = beneficioCompleto && hayGanancia
     ? Math.min(gananciaNeta, exencionEnCLP)
     : 0;
 
   // Base imponible: ganancia gravada después de la exención.
   const baseImponible = hayGanancia ? Math.max(0, gananciaNeta - exencionAplicada) : 0;
 
-  // Si la vivienda es habitacional y la ganancia neta cabe completa en la
-  // exención, el contribuyente queda exento.
+  // Si la ganancia neta cabe completa en la exención disponible, el
+  // contribuyente queda exento.
   const exento = !hayGanancia || baseImponible === 0;
 
   // Tasa fija del impuesto único sustitutivo (10%).
@@ -118,12 +151,15 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     gananciaBruta: Math.round(gananciaBruta),
     gananciaNeta: Math.round(gananciaNeta),
     exencionUF: TOPE_EXENCION_UF,
+    cupoExentoUsadoUF: Math.round(cupoUsadoUF * 100) / 100,
+    exencionDisponibleUF: Math.round(exencionDisponibleUF * 100) / 100,
     exencionAplicada: Math.round(exencionAplicada),
     baseImponible: Math.round(baseImponible),
     tasaPlusvalia,
     impuestoPlusvalia,
     exento,
-    esViviendaHabitual,
+    aplicaBeneficio,
+    cumpleTenencia,
   };
 }
 
@@ -133,12 +169,25 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
 export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] {
   const results: CalculatorResult[] = [];
 
+  const beneficioCompleto = result.aplicaBeneficio && result.cumpleTenencia;
+
   results.push({
-    label: 'Impuesto a la Ganancia',
+    label: beneficioCompleto ? 'Impuesto a la Ganancia' : 'Impuesto referencial (10%)',
     value: result.impuestoPlusvalia,
     format: 'CLP',
     highlight: true,
   });
+
+  if (!beneficioCompleto && result.gananciaNeta > 0) {
+    results.push({
+      label: 'Atención tributaria',
+      value: result.gananciaNeta,
+      format: 'CLP',
+      note: {
+        text: 'Sin derecho al beneficio de 8.000 UF (comerciante habitual o tenencia ≤ 1 año), el mayor valor es renta y se declara en IGC (persona natural) o IDPC (empresa); el 10% mostrado es solo una referencia.',
+      },
+    });
+  }
 
   results.push({
     label: 'Ganancia Neta',
@@ -146,12 +195,19 @@ export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] 
     format: 'CLP',
   });
 
-  if (result.esViviendaHabitual) {
+  if (result.aplicaBeneficio) {
     results.push({
-      label: `Exención Vivienda Habitacional (${result.exencionUF} UF)`,
+      label: `Exención 8.000 UF (hasta ${result.exencionDisponibleUF} UF disponibles)`,
       value: result.exencionAplicada,
       format: 'CLP',
     });
+    if (result.cupoExentoUsadoUF > 0) {
+      results.push({
+        label: 'Cupo exento usado en ventas anteriores',
+        value: result.cupoExentoUsadoUF,
+        format: 'UF',
+      });
+    }
   }
 
   results.push({

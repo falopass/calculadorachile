@@ -411,7 +411,20 @@ export async function loadCalculationFn(
           precioVenta: coerceNumber(inputs.precioVenta),
           anosTenencia: coerceNumber(inputs.anosTenencia),
           mejoras: coerceNumber(inputs.mejoras, 0) || undefined,
-          esViviendaHabitual: coerceBool(inputs.esViviendaHabitual) || undefined,
+          aplicaBeneficio:
+            inputs.aplicaBeneficio === undefined || inputs.aplicaBeneficio === ''
+              ? undefined
+              : coerceBool(inputs.aplicaBeneficio),
+          // En UF el punto es separador de miles en formato chileno
+          // ('6.500' = 6500); sin coma presente se elimina antes de parsear.
+          cupoExentoUsadoUF: coerceNumber(
+            typeof inputs.cupoExentoUsadoUF === 'string' &&
+              inputs.cupoExentoUsadoUF.includes('.') &&
+              !inputs.cupoExentoUsadoUF.includes(',')
+              ? inputs.cupoExentoUsadoUF.replace(/\./g, '')
+              : inputs.cupoExentoUsadoUF,
+            0,
+          ) || undefined,
         });
         return plusvaliaToResults(result);
       };
