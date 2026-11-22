@@ -4046,7 +4046,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'plusvalia-dfl2-vs-comun-chile',
-    embedCalculatorId: 'plusvalia',
     title: 'Plusvalía DFL2 vs común: ¿cuándo pagas impuesto al vender?',
     description:
       'Cómo tributa la ganancia al vender un inmueble en Chile: requisitos del cupo vitalicio de 8.000 UF, costo reajustado, mejoras y diferencias reales del DFL2.',
@@ -5724,7 +5723,6 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'subsidio-unificado-empleo-ley-21808-octubre-2026',
-    embedCalculatorId: 'subsidio-unificado-empleo',
     title: 'Ley 21.808: de qué se trata el Subsidio Unificado de Empleo y cómo postular',
     description:
       'La Ley 21.808 crea el Subsidio Unificado de Empleo, vigente desde el 1 de octubre de 2026: quién puede recibirlo, cuánto paga, cómo postular en la Ventanilla Única Social y qué pasa con el BTM y el Subsidio al Empleo Joven.',
