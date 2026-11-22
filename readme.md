@@ -378,9 +378,9 @@ La configuración de Codex del producto se versiona junto con el repo:
 .agents/skills/        # workflows YMYL, calculadoras, SEO, editorial y ship
 ```
 
-`AGENTS.md` sigue siendo la constitución y prevalece sobre la configuración auxiliar. `.grok/` y `.opencode/` permanecen gitignored como compatibilidad local.
+`AGENTS.md` sigue siendo la constitución y prevalece sobre la configuración auxiliar. `.opencode/` permanece gitignored como compatibilidad local.
 
-Para que Codex descubra toda la configuración, abre o inicia la tarea desde `C:\code\ecosistema-chile\CalculaChile` y marca el repo como confiable. Si abres la carpeta padre `ecosistema-chile`, su `AGENTS.md` solo enruta hacia cada producto.
+Para que Codex descubra toda la configuración, abre o inicia la tarea desde `D:\Códigos\Ecosistema-Chile\CalculaChile` y marca el repo como confiable. Si abres la carpeta padre `Ecosistema-Chile`, su `AGENTS.md` solo enruta hacia cada producto.
 
 ---
 

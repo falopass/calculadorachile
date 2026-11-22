@@ -97,7 +97,7 @@ data/articles.ts                 → blog /blog/{slug}
 ## 4. Codex (arranque)
 
 ```powershell
-cd C:\code\ecosistema-chile\CalculaChile
+cd D:\Códigos\Ecosistema-Chile\CalculaChile
 codex
 ```
 
