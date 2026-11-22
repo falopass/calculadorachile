@@ -1887,4 +1887,40 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'El dígito que corresponde al cuerpo 12345678 es 5: el RUT ingresado es válido y se muestra como 12.345.678-5.',
     },
   },
+  'sueldo-docente': {
+    summary:
+      'Reconstruye la liquidación mensual de un profesional de la educación en Carrera Docente con los valores legales vigentes desde junio de 2026 (Ley 21.806): RBMN por nivel, asignación de experiencia por bienios, asignación de tramo, BRP y alumnos prioritarios; luego descuenta AFP, salud, cesantía e impuesto.',
+    calculationSteps: [
+      'Calcula la RBMN multiplicando el valor de la hora cronológica ($19.992 básica, $21.034 media) por las horas contratadas en cada nivel.',
+      'Suma la asignación de experiencia: 3,38% de la RBMN el primer bienio y 3,33% por cada bienio adicional, tope 50%.',
+      'Para docentes con tramo, agrega la asignación de tramo: componente de experiencia (misma fórmula) + progresión (máximo del tramo prorrateado por horas/44 y bienios/15) + componente fijo en Avanzado y Expertos.',
+      'Aplica la BRP por título y mención con tope de 30 horas semanales.',
+      'Si corresponde, suma la asignación por alta concentración de alumnos prioritarios (20% del tramo + monto fijo, o 10% en rural 45–60%).',
+      'Descuenta AFP (10% + comisión), salud (7% o plan Isapre), seguro de cesantía e Impuesto Único de Segunda Categoría sobre el total de haberes.',
+    ],
+    assumptions: [
+      'Mes completo de remuneración, sin licencias ni días sin goce.',
+      'Los bienios ingresados están reconocidos por el sostenedor y el tramo es el asignado en el último proceso de reconocimiento.',
+      'La mención BRP solo se paga junto con el componente por título.',
+      'El escenario "80% o más, tramo Avanzado/Experto" se trata como "60% o más" si el tramo es inferior.',
+      'La suma de horas se topa en 44, el máximo legal con un mismo empleador.',
+    ],
+    limitations: [
+      'No incluye asignación de responsabilidad directiva, zona extrema, ruralidad por decreto, bonos locales, asignación familiar, UMP, horas extraordinarias ni retroactivos.',
+      'No considera las reglas de permanencia y profundización que pueden suspender el tramo o reducir su componente fijo (arts. 19 F y 19 P del Estatuto Docente).',
+      'Es una referencia con valores legales publicados: la liquidación real puede incluir conceptos del sostenedor no contemplados.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 20 h básica + 24 h media, 3 bienios, tramo Avanzado, BRP completa',
+      inputs: ['Horas básica: 20', 'Horas media: 24', 'Bienios: 3', 'Tramo: Avanzado', 'BRP: título y mención'],
+      development: [
+        'RBMN = 20 × $19.992 + 24 × $21.034 = $904.656',
+        'Experiencia (asignación + tramo) = 10,04% × $904.656 = $90.827 cada una',
+        'Progresión = $131.142 × 3/15 = $26.228; componente fijo Avanzado = $136.111',
+        'BRP = $351.263 + $117.091 (tope 30 h alcanzado)',
+        'Total haberes = $1.717.003; con Fonasa y AFP Habitat, descuentos ≈ $331.099 (sin AFC)',
+      ],
+      result: 'Sueldo líquido estimado ≈ $1.385.904 (líquido depende de la UTM del mes por el impuesto).',
+    },
+  },
 };

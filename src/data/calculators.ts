@@ -8657,6 +8657,220 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+  {
+    id: 'sueldo-docente',
+    name: 'Sueldo Docente 2026 (Carrera Docente)',
+    description:
+      'Estima la liquidación mensual de un profesional de la educación en Carrera Docente: RBMN por nivel de enseñanza, asignación de experiencia por bienios, asignación de tramo, BRP por título y mención, y la asignación por alumnos prioritarios, con AFP, salud, cesantía e impuesto.',
+    slug: 'calculadora-sueldo-docente',
+    category: 'sueldo',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'Dirección del Trabajo — Hora cronológica docente',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-61527.html',
+        note: 'VMHC $19.992 básica y $21.034 media desde jun-2026 (Ley 21.806)',
+      },
+      {
+        name: 'Ayuda Mineduc — Asignación por tramo',
+        url: 'https://www.ayudamineduc.cl/ficha/asignacion-por-tramo-en-carrera-docente',
+        note: 'Art. 49 y 50 Estatuto Docente: componentes y montos jun-2026',
+      },
+      {
+        name: 'Ayuda Mineduc — BRP',
+        url: 'https://www.ayudamineduc.cl/ficha/bonificacion-de-reconocimiento-profesional-brp',
+        note: 'Ley 20.158: título y mención, tope 30 horas',
+      },
+      {
+        name: 'Ley Chile — Estatuto Docente (DFL 1 de 1996)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=60439',
+        note: 'Arts. 35, 49, 50 y 54',
+      },
+    ],
+    keywords: [
+      'sueldo docente',
+      'simulador sueldo docente 2026 chile',
+      'calculadora sueldo profesor',
+      'carrera docente',
+      'RBMN',
+      'asignación de tramo',
+      'BRP docente',
+      'aumento de sueldo docente 2026',
+      'cuánto gana un profesor en chile',
+    ],
+    inputs: [
+      {
+        id: 'horasBasica',
+        label: 'Horas semanales básica/parvularia/especial',
+        type: 'number',
+        unit: 'count',
+        placeholder: '44',
+        required: false,
+        min: 0,
+        max: 44,
+        defaultValue: 44,
+        allowZero: true,
+        tooltip:
+          'Horas cronológicas de contrato en niveles con VMHC $19.992 (jun-2026).',
+      },
+      {
+        id: 'horasMedia',
+        label: 'Horas semanales media o técnico-profesional',
+        type: 'number',
+        unit: 'count',
+        placeholder: '0',
+        required: false,
+        min: 0,
+        max: 44,
+        defaultValue: 0,
+        allowZero: true,
+        tooltip:
+          'Horas en enseñanza media HC o TP, con VMHC $21.034 (jun-2026). La suma de horas se topa en 44.',
+      },
+      {
+        id: 'tramo',
+        label: 'Tramo de desarrollo profesional',
+        type: 'select',
+        required: true,
+        defaultValue: 'inicial',
+        options: [
+          { value: 'sin-tramo', label: 'Sin tramo asignado' },
+          { value: 'acceso', label: 'Acceso' },
+          { value: 'inicial', label: 'Inicial' },
+          { value: 'temprano', label: 'Temprano' },
+          { value: 'avanzado', label: 'Avanzado' },
+          { value: 'experto1', label: 'Experto I' },
+          { value: 'experto2', label: 'Experto II' },
+        ],
+      },
+      {
+        id: 'bienios',
+        label: 'Bienios reconocidos (años de servicio ÷ 2)',
+        type: 'number',
+        unit: 'count',
+        placeholder: '0',
+        required: false,
+        min: 0,
+        max: 15,
+        defaultValue: 0,
+        allowZero: true,
+        tooltip:
+          'Cada bienio suma 3,38% el primero y 3,33% los siguientes sobre la RBMN, con tope de 50% a los 15 bienios.',
+      },
+      {
+        id: 'brpTitulo',
+        label: 'BRP por título profesional',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Bonificación de Reconocimiento Profesional (Ley 20.158), tope 30 horas semanales.',
+      },
+      {
+        id: 'brpMencion',
+        label: 'BRP complemento por mención',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip: 'Requiere el componente base por título.',
+      },
+      {
+        id: 'concentracionPrioritarios',
+        label: 'Concentración de alumnos prioritarios',
+        type: 'select',
+        required: true,
+        defaultValue: 'ninguno',
+        options: [
+          { value: 'ninguno', label: 'No aplica / menor a 45%' },
+          { value: 'rural45', label: 'Rural, entre 45% y 60%' },
+          { value: 'urbana60', label: '60% o más (o recinto penal)' },
+          { value: 'avanzada80', label: '80% o más, tramo Avanzado/Experto' },
+        ],
+        tooltip:
+          'Asignación art. 50 del Estatuto Docente según el porcentaje fijado por resolución en tu establecimiento.',
+      },
+      {
+        id: 'afp',
+        label: 'AFP',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'uno', label: 'Uno (0,46%)' },
+          { value: 'modelo', label: 'Modelo (0,58%)' },
+          { value: 'planvital', label: 'PlanVital (1,16%)' },
+          { value: 'habitat', label: 'Habitat (1,27%)' },
+          { value: 'capital', label: 'Capital (1,44%)' },
+          { value: 'cuprum', label: 'Cuprum (1,44%)' },
+          { value: 'provida', label: 'ProVida (1,45%)' },
+        ],
+      },
+      {
+        id: 'saludTipo',
+        label: 'Sistema de Salud',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'fonasa', label: 'FONASA (7%)' },
+          { value: 'isapre', label: 'Isapre (máx. 7% o plan)' },
+        ],
+      },
+      {
+        id: 'isapreMonto',
+        label: 'Plan Isapre (UF)',
+        type: 'number',
+        unit: 'UF',
+        placeholder: '3.5',
+        required: false,
+        min: 0,
+      },
+      {
+        id: 'contratoIndefinido',
+        label: '¿Contrato indefinido?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Indefinido: 0,6% de cesantía a tu cargo. Plazo fijo: 0% trabajador.',
+      },
+    ],
+    seoTitle: 'Calculadora sueldo docente 2026: Carrera Docente',
+    seoDescription:
+      'Simula tu sueldo docente en Chile: RBMN, bienios, tramo, BRP y asignación por alumnos prioritarios con valores oficiales jun-2026, más AFP, salud e impuesto.',
+    faq: [
+      {
+        question: '¿Cómo se calcula el sueldo base docente (RBMN)?',
+        answer:
+          'La Remuneración Básica Mínima Nacional es el valor de la hora cronológica multiplicado por las horas de contrato. Desde junio de 2026 vale $19.992 para prebásica, básica y especial, y $21.034 para media humanístico-científica y técnico-profesional. Para 44 horas en básica son $879.648 y en media $925.496.',
+      },
+      {
+        question: '¿Qué son los bienios y cuánto aumentan el sueldo?',
+        answer:
+          'Cada bienio (dos años de servicio) suma un porcentaje sobre la RBMN: 3,38% el primero y 3,33% cada uno adicional, con tope de 50% al llegar a 15 bienios (30 años). La asignación de tramo repite el mismo porcentaje como componente de experiencia.',
+      },
+      {
+        question: '¿Cuánto paga la BRP en 2026?',
+        answer:
+          'La Bonificación de Reconocimiento Profesional paga hasta $351.263 mensuales por título profesional y $117.091 por mención, a 30 o más horas semanales; con menos horas es proporcional (valores desde junio de 2026).',
+      },
+      {
+        question: '¿Qué incluye la asignación de tramo?',
+        answer:
+          'Tiene tres componentes: experiencia (mismo porcentaje que los bienios), progresión (monto máximo según tramo, prorrateado por horas y bienios) y un componente fijo solo para Avanzado, Experto I y Experto II. En Experto II con 44 horas y 15 bienios la progresión llega a $1.058.032 mensuales.',
+      },
+      {
+        question: '¿Qué no incluye esta estimación?',
+        answer:
+          'No incluye asignación de responsabilidad directiva, zona o ruralidad por Decreto, bonos locales del sostenedor, asignación familiar, UMP, horas extra, licencias ni retroactivos. Es una referencia con valores legales, no tu liquidación real.',
+      },
+      {
+        question: '¿A quiénes aplica Carrera Docente?',
+        answer:
+          'A los profesionales de la educación de establecimientos municipales, servicios locales (SLEP), particulares subvencionados y técnico-profesionales del DL 3.166. Si trabajas a honorarios o en JUNJI/Integra/VTF, tu régimen es distinto.',
+      },
+    ],
+  },
 ];
 
 export const calculators: Calculator[] = calculatorCatalog.map((calculator) => ({
