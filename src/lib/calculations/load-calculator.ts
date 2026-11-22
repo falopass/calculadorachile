@@ -990,8 +990,15 @@ export async function loadCalculationFn(
       } = await import('./subsidio-unificado-empleo');
       return (inputs) => {
         const grupo = inputs.grupoPrioritario;
+        const vinculo = inputs.tipoVinculo;
         const result = calculateSubsidioUnificadoEmpleo({
           rentaBruta: coerceNumber(inputs.rentaBruta),
+          tipoVinculo:
+            vinculo === 'independiente' ||
+            vinculo === 'sector-publico' ||
+            vinculo === 'pensionado'
+              ? vinculo
+              : 'dependiente',
           grupoPrioritario:
             grupo === 'joven-18-24' ||
             grupo === 'mujer-25-54' ||

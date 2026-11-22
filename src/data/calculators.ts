@@ -6378,6 +6378,27 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
     inputs: [
       {
+        id: 'tipoVinculo',
+        label: 'Tipo de trabajo',
+        type: 'select',
+        required: true,
+        defaultValue: 'dependiente',
+        options: [
+          {
+            value: 'dependiente',
+            label: 'Dependiente del sector privado (Código del Trabajo)',
+          },
+          { value: 'independiente', label: 'Independiente (honorarios)' },
+          { value: 'sector-publico', label: 'Sector público' },
+          {
+            value: 'pensionado',
+            label: 'Pensionado(a) por vejez, mayor de 65 años',
+          },
+        ],
+        tooltip:
+          'El subsidio es solo para el sector privado; los independientes reciben un pago anual único, no mensual. Si eres dependiente y empiezas a percibir honorarios, se suspende el pago mensual y el resto se paga en forma anual.',
+      },
+      {
         id: 'rentaBruta',
         label: 'Renta bruta mensual pactada',
         type: 'number',
@@ -6407,7 +6428,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         id: 'desempleoPrevio',
-        label: '¿Tuviste 6 meses de desempleo continuos u 8 discontinuos en los últimos 18 meses?',
+        label: '¿Tuviste 6 meses de desempleo continuos u 8 discontinuos en los 18 meses anteriores a tu postulación?',
         type: 'boolean',
         required: false,
         defaultValue: false,
@@ -6439,7 +6460,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué requisitos debe cumplir la persona trabajadora?',
         answer:
-          'Haber estado 6 meses de desempleo continuos u 8 discontinuos dentro de los 18 meses anteriores a la contratación, y pertenecer al 40% más vulnerable según RSH durante el primer año (este requisito no aplica a personas con discapacidad).',
+          'Haber estado 6 meses de desempleo continuos u 8 discontinuos dentro de los 18 meses anteriores a la postulación, y pertenecer al 40% más vulnerable según RSH durante el primer año (este requisito no aplica a personas con discapacidad).',
       },
       {
         question: '¿Cuánto dura el subsidio y cómo se paga?',

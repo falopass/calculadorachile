@@ -13,6 +13,7 @@ import {
 } from '../subsidio-unificado-empleo';
 
 const baseInput = {
+  tipoVinculo: 'dependiente' as const,
   grupoPrioritario: 'joven-18-24' as const,
   desempleoPrevio: true,
   rsh40: true,
@@ -56,7 +57,7 @@ describe('calculateSubsidioUnificadoEmpleo — montos', () => {
     expect(r.aporteEmpresa).toBe(10063);
   });
 
-  it('RB $1.200.000 (> 2,25 IMM) → sin subsidio', () => {
+  it('RB $1.200.000 (> 2,25 IMM en la postulación) → no califica', () => {
     const r = calculateSubsidioUnificadoEmpleo({
       ...baseInput,
       rentaBruta: 1200000,
@@ -64,6 +65,7 @@ describe('calculateSubsidioUnificadoEmpleo — montos', () => {
     expect(r.cumpleRequisitos).toBe(false);
     expect(r.aporteTrabajador).toBe(0);
     expect(r.aporteEmpresa).toBe(0);
+    expect(r.duracionMeses).toBe(0);
   });
 });
 
@@ -71,6 +73,7 @@ describe('calculateSubsidioUnificadoEmpleo — requisitos', () => {
   it('persona con discapacidad: 15 meses y no exige RSH 40%', () => {
     const r = calculateSubsidioUnificadoEmpleo({
       rentaBruta: 500000,
+      tipoVinculo: 'dependiente',
       grupoPrioritario: 'discapacidad',
       desempleoPrevio: true,
       rsh40: false,
@@ -107,6 +110,40 @@ describe('calculateSubsidioUnificadoEmpleo — requisitos', () => {
     expect(results[0].value).toBe(0);
     expect(results[0].note?.text).toContain('desempleo');
     expect(results[0].note?.source?.url).toContain('leychile');
+  });
+
+  it('sector público → no aplica (Ley 21.808, art. 1)', () => {
+    const r = calculateSubsidioUnificadoEmpleo({
+      ...baseInput,
+      tipoVinculo: 'sector-publico',
+      rentaBruta: 500000,
+    });
+    expect(r.cumpleRequisitos).toBe(false);
+    expect(r.aporteTrabajador).toBe(0);
+    expect(r.duracionMeses).toBe(0);
+    expect(r.motivosNoAplica.join(' ')).toContain('sector privado');
+  });
+
+  it('pensionado por vejez 65+ → no aplica', () => {
+    const r = calculateSubsidioUnificadoEmpleo({
+      ...baseInput,
+      tipoVinculo: 'pensionado',
+      grupoPrioritario: 'mayor-55',
+      rentaBruta: 500000,
+    });
+    expect(r.cumpleRequisitos).toBe(false);
+    expect(r.aporteTrabajador).toBe(0);
+  });
+
+  it('independiente → pago anual único, no mensual (art. 20)', () => {
+    const r = calculateSubsidioUnificadoEmpleo({
+      ...baseInput,
+      tipoVinculo: 'independiente',
+      rentaBruta: 500000,
+    });
+    expect(r.cumpleRequisitos).toBe(false);
+    expect(r.pagoProvisionalMensual).toBe(0);
+    expect(r.motivosNoAplica.join(' ')).toContain('pago anual');
   });
 
   it('sin RSH 40% (no PcD) → no aplica', () => {

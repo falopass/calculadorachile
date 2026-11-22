@@ -5723,6 +5723,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'subsidio-unificado-empleo-ley-21808-octubre-2026',
+    embedCalculatorId: 'subsidio-unificado-empleo',
     title: 'Ley 21.808: de qué se trata el Subsidio Unificado de Empleo y cómo postular',
     description:
       'La Ley 21.808 crea el Subsidio Unificado de Empleo, vigente desde el 1 de octubre de 2026: quién puede recibirlo, cuánto paga, cómo postular en la Ventanilla Única Social y qué pasa con el BTM y el Subsidio al Empleo Joven.',
