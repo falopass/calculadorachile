@@ -7,7 +7,10 @@
 // ============================================
 
 import { describe, it, expect } from 'vitest';
-import { calculateSubsidioUnificadoEmpleo } from '../subsidio-unificado-empleo';
+import {
+  calculateSubsidioUnificadoEmpleo,
+  subsidioUnificadoEmpleoToResults,
+} from '../subsidio-unificado-empleo';
 
 const baseInput = {
   grupoPrioritario: 'joven-18-24' as const,
@@ -87,13 +90,23 @@ describe('calculateSubsidioUnificadoEmpleo — requisitos', () => {
     expect(r.motivosNoAplica.length).toBeGreaterThan(0);
   });
 
-  it('sin desempleo previo → no aplica', () => {
+  it('sin desempleo previo → no aplica y aportes en 0 (Ley 21.808 art. 5)', () => {
     const r = calculateSubsidioUnificadoEmpleo({
       ...baseInput,
       desempleoPrevio: false,
       rentaBruta: 500000,
     });
     expect(r.cumpleRequisitos).toBe(false);
+    expect(r.aporteTrabajador).toBe(0);
+    expect(r.aporteEmpresa).toBe(0);
+    expect(r.pagoProvisionalMensual).toBe(0);
+    expect(r.totalEstimadoTrabajador).toBe(0);
+    expect(r.motivosNoAplica.join(' ')).toContain('desempleo');
+
+    const results = subsidioUnificadoEmpleoToResults(r);
+    expect(results[0].value).toBe(0);
+    expect(results[0].note?.text).toContain('desempleo');
+    expect(results[0].note?.source?.url).toContain('leychile');
   });
 
   it('sin RSH 40% (no PcD) → no aplica', () => {
