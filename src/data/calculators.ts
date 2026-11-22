@@ -8604,6 +8604,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         url: 'https://www.registrocivil.cl/principal/calculando-el-digito-verificador',
         note: 'Explicación oficial del dígito verificador del RUT',
       },
+      {
+        name: 'SII — Esquemas XML de Facturación Electrónica',
+        url: 'https://www.sii.cl/factura_electronica/schema_dte.zip',
+        note: 'El tipo RUTType del esquema DTE define el largo del cuerpo del RUT (1–8 dígitos)',
+      },
     ],
     keywords: [
       'validador de rut',
