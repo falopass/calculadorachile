@@ -13,14 +13,22 @@ export type GrupoPrioritarioSUE =
   | 'discapacidad'
   | 'ninguno';
 
+export type TipoVinculoSUE =
+  | 'dependiente'
+  | 'independiente'
+  | 'sector-publico'
+  | 'pensionado';
+
 export interface SubsidioUnificadoEmpleoInput {
   /** Renta bruta mensual pactada (CLP). */
   rentaBruta: number;
+  /** Tipo de vínculo laboral de la persona trabajadora. */
+  tipoVinculo: TipoVinculoSUE;
   /** Grupo prioritario de la persona trabajadora. */
   grupoPrioritario: GrupoPrioritarioSUE;
   /**
    * 6 meses de desempleo continuos u 8 discontinuos en los 18 meses
-   * anteriores a la contratación.
+   * anteriores a la postulación.
    */
   desempleoPrevio: boolean;
   /** Hogar dentro del 40% más vulnerable según RSH (no aplica a PcD). */
@@ -70,6 +78,19 @@ export function calculateSubsidioUnificadoEmpleo(
   ); // 13.225
 
   const motivosNoAplica: string[] = [];
+  if (input.tipoVinculo === 'sector-publico') {
+    motivosNoAplica.push(
+      'El subsidio beneficia solo a personas trabajadoras y empresas del sector privado (Ley 21.808, art. 1).',
+    );
+  } else if (input.tipoVinculo === 'pensionado') {
+    motivosNoAplica.push(
+      'Las personas mayores de 65 años pensionadas por vejez no pueden acceder al subsidio (Ley 21.808).',
+    );
+  } else if (input.tipoVinculo === 'independiente') {
+    motivosNoAplica.push(
+      'Las personas trabajadoras independientes reciben el subsidio en un solo pago anual en agosto, no en pagos mensuales; esta calculadora estima solo el caso dependiente (Ley 21.808, art. 20).',
+    );
+  }
   if (grupo === 'ninguno') {
     motivosNoAplica.push(
       'El subsidio exige pertenecer a un grupo prioritario (jóvenes 18–24, mujeres 25–54, personas desde 55 o personas con discapacidad inscritas en el RND).',
@@ -77,7 +98,7 @@ export function calculateSubsidioUnificadoEmpleo(
   }
   if (input.desempleoPrevio !== true) {
     motivosNoAplica.push(
-      'Se requiere 6 meses de desempleo continuos u 8 discontinuos en los 18 meses anteriores a la contratación.',
+      'Se requiere 6 meses de desempleo continuos u 8 discontinuos en los 18 meses anteriores a la postulación.',
     );
   }
   if (!esPcD && input.rsh40 !== true) {
