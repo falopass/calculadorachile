@@ -1423,6 +1423,41 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'sueldo-docente': {
+      const { calculateSueldoDocente, sueldoDocenteToResults } = await import('./sueldo-docente');
+      return (inputs) => {
+        const result = calculateSueldoDocente({
+          tipoEmpleador: (inputs.tipoEmpleador as 'municipal' | 'particular') ?? 'municipal',
+          horasBasica: coerceNumber(inputs.horasBasica, 0),
+          horasMedia: coerceNumber(inputs.horasMedia, 0),
+          tramo: inputs.tramo as
+            | 'sin-tramo'
+            | 'acceso'
+            | 'inicial'
+            | 'temprano'
+            | 'avanzado'
+            | 'experto1'
+            | 'experto2',
+          bienios: coerceNumber(inputs.bienios, 0),
+          brpTitulo: inputs.brpTitulo !== false && inputs.brpTitulo !== 'false',
+          brpMencion: coerceBool(inputs.brpMencion),
+          concentracionPrioritarios: inputs.concentracionPrioritarios as
+            | 'ninguno'
+            | 'rural45'
+            | 'urbana60'
+            | 'avanzada80',
+          afp: inputs.afp as 'capital' | 'cuprum' | 'habitat' | 'modelo' | 'planvital' | 'provida' | 'uno',
+          saludTipo: inputs.saludTipo as 'fonasa' | 'isapre',
+          isapreMonto: coerceNumber(inputs.isapreMonto, 0),
+          contratoIndefinido:
+            inputs.contratoIndefinido !== false && inputs.contratoIndefinido !== 'false',
+          valorUF: live?.valorUF,
+          valorUTM: live?.valorUTM,
+        });
+        return sueldoDocenteToResults(result);
+      };
+    }
+
     default:
       return null;
   }
