@@ -43,14 +43,21 @@ describe('calculatePorcentaje', () => {
       expect(result.porcentajeResultado).toBe(7.5);
     });
 
-    it('devuelve indefinido cuando B es 0', () => {
-      const result = calculatePorcentaje({
+    it('devuelve indefinido cuando B es 0 o falta', () => {
+      const cero = calculatePorcentaje({
         tipo: 'que-porcentaje',
         valorA: 15,
         valorB: 0,
       });
-      expect(result.indefinido).toBe(true);
-      expect(porcentajeToResults(result)).toHaveLength(0);
+      expect(cero.indefinido).toBe(true);
+      const falta = calculatePorcentaje({
+        tipo: 'que-porcentaje',
+        valorA: 15,
+      });
+      expect(falta.indefinido).toBe(true);
+      const aviso = porcentajeToResults(cero);
+      expect(aviso).toHaveLength(1);
+      expect(aviso[0].partial).toBe(true);
     });
 
     it('supera el 100% cuando A > B', () => {
@@ -84,13 +91,18 @@ describe('calculatePorcentaje', () => {
       expect(result.diferencia).toBe(-10000);
     });
 
-    it('devuelve indefinido cuando el valor inicial es 0', () => {
-      const result = calculatePorcentaje({
+    it('devuelve indefinido cuando el valor inicial es 0 o falta B', () => {
+      const cero = calculatePorcentaje({
         tipo: 'variacion',
         valorA: 0,
         valorB: 100,
       });
-      expect(result.indefinido).toBe(true);
+      expect(cero.indefinido).toBe(true);
+      const falta = calculatePorcentaje({
+        tipo: 'variacion',
+        valorA: 100,
+      });
+      expect(falta.indefinido).toBe(true);
     });
   });
 
@@ -118,6 +130,18 @@ describe('calculatePorcentaje', () => {
       expect(result.principal).toBe(72000);
       expect(result.diferencia).toBe(28000);
       expect(result.porcentajeResultado).toBe(28);
+    });
+
+    it('mantiene precio final + ahorro = precio original con .5', () => {
+      const result = calculatePorcentaje({
+        tipo: 'descuento',
+        valorA: 99,
+        porcentaje: 50,
+      });
+      expect(result.principal! + result.diferencia!).toBe(99);
+      // $99 con 50%: ahorro $50 y final $49 (no 49,5 + 49,5).
+      expect(result.diferencia).toBe(50);
+      expect(result.principal).toBe(49);
     });
 
     it('un descuento del 100% deja el precio en 0', () => {

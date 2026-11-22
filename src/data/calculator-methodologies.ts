@@ -1846,7 +1846,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       '«Precio con descuento»: precio × (1 − % ÷ 100); con segundo descuento se aplica en cadena, no se suma. «Precio con aumento»: precio × (1 + % ÷ 100).',
     ],
     assumptions: [
-      'Los montos se redondean a peso entero (CLP) y los porcentajes se muestran con hasta dos decimales.',
+      'Los montos se redondean a peso entero (CLP) y los porcentajes se muestran con un decimal.',
       'En descuento, los porcentajes se acotan al rango 0–100%.',
     ],
     limitations: [

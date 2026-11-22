@@ -65,14 +65,12 @@ export function calculatePorcentaje(input: PorcentajeInput): PorcentajeResult {
 
   switch (tipo) {
     case 'porcentaje-de': {
-      if (!input.porcentaje && input.porcentaje !== 0) {
-        return { ...base, indefinido: true };
-      }
       return { ...base, principal: Math.round(valorA * (porcentaje / 100)) };
     }
 
     case 'que-porcentaje': {
-      if (valorB === 0) return { ...base, indefinido: true };
+      if (input.valorB === undefined || valorB === 0)
+        return { ...base, indefinido: true };
       return {
         ...base,
         principal: redondeo((valorA / valorB) * 100),
@@ -81,7 +79,8 @@ export function calculatePorcentaje(input: PorcentajeInput): PorcentajeResult {
     }
 
     case 'variacion': {
-      if (valorA === 0) return { ...base, indefinido: true };
+      if (input.valorB === undefined || valorA === 0)
+        return { ...base, indefinido: true };
       const pct = ((valorB - valorA) / valorA) * 100;
       return {
         ...base,
@@ -92,33 +91,45 @@ export function calculatePorcentaje(input: PorcentajeInput): PorcentajeResult {
     }
 
     case 'descuento': {
+      // La base se redondea primero para que precio final + ahorro = precio original.
+      const precio = Math.round(valorA);
       const p1 = Math.min(Math.max(porcentaje, 0), 100);
       const p2 = Math.min(Math.max(descuentoAdicional, 0), 100);
-      const intermedio = valorA * (1 - p1 / 100);
-      const final = intermedio * (1 - p2 / 100);
-      const ahorro = valorA - final;
+      const intermedio = precio - Math.round(precio * (p1 / 100));
+      const final = intermedio - Math.round(intermedio * (p2 / 100));
+      const ahorro = precio - final;
       return {
         ...base,
-        principal: Math.round(final),
-        diferencia: Math.round(ahorro),
-        intermedio: p2 > 0 ? Math.round(intermedio) : undefined,
-        porcentajeResultado: valorA > 0 ? redondeo((ahorro / valorA) * 100) : 0,
+        principal: final,
+        diferencia: ahorro,
+        intermedio: p2 > 0 ? intermedio : undefined,
+        porcentajeResultado: precio > 0 ? redondeo((ahorro / precio) * 100) : 0,
       };
     }
 
     case 'aumento': {
-      const final = valorA * (1 + porcentaje / 100);
+      const precio = Math.round(valorA);
+      const final = Math.round(precio * (1 + porcentaje / 100));
       return {
         ...base,
-        principal: Math.round(final),
-        diferencia: Math.round(final - valorA),
+        principal: final,
+        diferencia: final - precio,
       };
     }
   }
 }
 
 export function porcentajeToResults(result: PorcentajeResult): CalculatorResult[] {
-  if (result.indefinido) return [];
+  // División por cero u operando faltante: aviso parcial, no se guarda en historial.
+  if (result.indefinido)
+    return [
+      {
+        label: 'No definido: revisa que los valores requeridos no sean cero',
+        value: 0,
+        format: 'number',
+        partial: true,
+      },
+    ];
   const results: CalculatorResult[] = [];
 
   switch (result.tipo) {
