@@ -2050,3 +2050,38 @@ export const VERIFICACION_VALORES: Record<string, VerificacionValor> = {
     calculadoras: ['vacaciones-proporcionales'],
   },
 };
+
+// ============================================
+// Retiro Programado — TITRP y tablas TM2020
+// ============================================
+/**
+ * Tasa de Interés Técnica de Retiro Programado (TITRP).
+ * Fuente: Circular N° 2425 (02-10-2026) y
+ * https://www.spensiones.cl/apps/tasas/tasdescto.php — 3,67% para
+ * retiros programados y rentas temporales a pagar desde octubre-2026.
+ * La SP la publica mensualmente (D.S. conjunto N° 47 de 2019);
+ * actualizar esta constante cuando cambie.
+ */
+export const TITRP = {
+  tasaAnual: 0.0367,
+  vigenteDesde: '2026-10-01',
+  circular: 'Circular N° 2425 SP',
+};
+
+/**
+ * Aporte del empleador a la cuenta individual del afiliado (Ley 21.735).
+ * Porcentaje de la remuneración imponible que entra a la cuenta AFP
+ * (resto del 8,5% va al Seguro Social y al SIS). Calendario oficial
+ * (Subsecretaría de Previsión Social, nota técnica Ley 21.735 y
+ * cronograma empleadores ago-2025).
+ */
+export const APORTE_EMPLEADOR_AFP = [
+  { desde: '2025-08-01', tasa: 0.001 },
+  { desde: '2027-08-01', tasa: 0.0025 },
+  { desde: '2028-08-01', tasa: 0.01 },
+  { desde: '2029-08-01', tasa: 0.017 },
+  { desde: '2030-08-01', tasa: 0.024 },
+  { desde: '2031-08-01', tasa: 0.031 },
+  { desde: '2032-08-01', tasa: 0.038 },
+  { desde: '2033-08-01', tasa: 0.045 },
+];

@@ -944,6 +944,44 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Aporte mensual estimado: 2,5 UF (~$99.000 según UF de referencia).',
     },
   },
+  'simulador-pension-afp': {
+    summary:
+      'Estima la pensión mensual por retiro programado (saldo ÷ CNU × 12, con tablas TM2020 y TITRP de la Superintendencia) y le suma los componentes de la reforma: PGU, BAC y CEV para mujeres de 65+.',
+    calculationSteps: [
+      'Proyecta el saldo a la edad de pensión: sueldo constante en términos reales, cotización del 10% más el aporte del empleador a la cuenta según el calendario de la Ley 21.735, capitalizando a la TITRP vigente.',
+      'Calcula el Capital Necesario Unitario (CNU) con la tabla de mortalidad TM2020 del sexo declarado (CB-H-2020 hombres, RV-M-2020 mujeres) con los factores de mejoramiento del Anexo N°9 de la NCG 306, descontando a la TITRP.',
+      'Pensión autofinanciada = saldo proyectado ÷ (CNU × 12).',
+      'Para mujeres de 65+, la CEV cubre la diferencia hasta igualar la pensión de un hombre de la misma edad y saldo (tabla CB-H-2020).',
+      'Suma la PGU según pensión base y edad, y el BAC (0,1 UF × años cotizados, tope 2,5 UF, mínimos de meses según sexo y fecha).',
+    ],
+    assumptions: [
+      'Retiro programado para una persona sin beneficiarios de sobrevivencia (con cónyuge o hijos beneficiarios el CNU sube y la pensión baja).',
+      'Rentabilidad real futura igual a la TITRP vigente (3,67% a octubre-2026); la SP la republica cada mes.',
+      'Las cotizaciones futuras se mantienen constantes en UF hasta la edad de pensión declarada.',
+      'La mujer cumple el requisito de al menos una cotización antes de los 50 años para acceder a la CEV.',
+    ],
+    limitations: [
+      'No calcula rentas vitalicias ni retiros con período garantizado.',
+      'No aplica el tope de 70% del sueldo promedio de los retiros anticipados.',
+      'No consulta el saldo real de la AFP ni el registro de cotizaciones del Fondo Autónomo de Protección Previsional.',
+      'Para quienes se pensionan desde ago-2025 sin 65 años al 31-07-2025, el BAC se financia con anualidad propia: se muestra el monto bruto del beneficio, no el efecto neto.',
+      'Los montos de PGU y la TITRP son los vigentes a la fecha del cálculo y pueden cambiar por reajustes o nueva regulación.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: hombre de 65 años con $100 millones y 20 años cotizados',
+      inputs: [
+        'Sexo: hombre, edad actual y de pensión: 65',
+        'Saldo AFP: $100.000.000',
+        'Meses cotizados: 240',
+      ],
+      development: [
+        'CNU (CB-H-2020 mejorada, TITRP 3,67%) ≈ 14,889',
+        'Pensión autofinanciada = $100.000.000 ÷ (14,889 × 12) ≈ $559.679',
+        'PGU estimada ≈ $231.732 + BAC = 20 × 0,1 UF ≈ 2 UF',
+      ],
+      result: 'Pensión total estimada: ~$871.411 mensuales (según UF de referencia).',
+    },
+  },
   'aporte-familiar-permanente': {
     summary:
       'Multiplica $66.834 por cada carga con derecho a SUF/Asignación Familiar o Maternal al 31-12-2025; si no hay cargas y el grupo estaba en Chile Solidario/SSyOO, un solo aporte.',

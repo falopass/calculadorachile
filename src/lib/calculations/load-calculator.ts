@@ -909,6 +909,23 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'simulador-pension-afp': {
+      const { calculateSimuladorPensionAfp, simuladorPensionAfpToResults } =
+        await import('./simulador-pension-afp');
+      return (inputs) => {
+        const result = calculateSimuladorPensionAfp({
+          sexo: inputs.sexo === 'mujer' ? 'mujer' : 'hombre',
+          edadActual: coerceNumber(inputs.edadActual),
+          edadPension: coerceNumber(inputs.edadPension, 65),
+          saldoAfp: coerceNumber(inputs.saldoAfp),
+          sueldoImponible: coerceNumber(inputs.sueldoImponible, 0),
+          mesesCotizados: coerceNumber(inputs.mesesCotizados, 0),
+          valorUF: live?.valorUF,
+        });
+        return simuladorPensionAfpToResults(result);
+      };
+    }
+
     case 'seguro-cesantia': {
       const { calculateSeguroCesantia, seguroCesantiaToResults } =
         await import('./seguro-cesantia');

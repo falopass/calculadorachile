@@ -5879,6 +5879,146 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'simulador-pension-afp',
+    name: 'Simulador de Pensión AFP con Reforma',
+    description:
+      'Estima tu pensión mensual por retiro programado (CNU y TITRP oficiales, tablas TM2020) más los componentes de la reforma: PGU, Beneficio por Años Cotizados y CEV para mujeres.',
+    slug: 'calculadora-simulador-pension-afp',
+    category: 'pension',
+    featured: true,
+    phase: 2,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'Superintendencia de Pensiones — Tasas de descuento (TITRP)',
+        url: 'https://www.spensiones.cl/apps/tasas/tasdescto.php',
+        note: 'Tasa de Interés Técnica de Retiro Programado vigente, publicada mensualmente (Circular N° 2425)',
+      },
+      {
+        name: 'Superintendencia de Pensiones — NCG N° 306 (Tablas TM2020)',
+        url: 'https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000306.pdf',
+        note: 'Tablas de mortalidad 2020 y factores de mejoramiento para el cálculo del CNU',
+      },
+      {
+        name: 'ChileAtiende — Pensión Garantizada Universal (PGU)',
+        url: 'https://chileatiende.gob.cl/fichas/130457-pension-garantizada-universal-pgu',
+        note: 'Montos y tramos de la PGU vigentes a febrero de 2026',
+      },
+      {
+        name: 'ChileAtiende — Compensación por diferencias de expectativa de vida (CEV)',
+        url: 'https://www.chileatiende.gob.cl/fichas/130452-compensacion-por-diferencias-de-expectativa-de-vida-cve-para-las-mujeres',
+        note: 'Beneficio automático para mujeres de 65 años o más pensionadas en AFP',
+      },
+    ],
+    keywords: [
+      'simulador pensión AFP',
+      'calcular pensión AFP',
+      'cuánto voy a recibir de pensión',
+      'retiro programado calculadora',
+      'pensión con reforma 2026',
+      'PGU BAC CEV simulador',
+    ],
+    inputs: [
+      {
+        id: 'sexo',
+        label: 'Sexo legal',
+        type: 'select',
+        required: true,
+        defaultValue: 'mujer',
+        options: [
+          { value: 'mujer', label: 'Mujer' },
+          { value: 'hombre', label: 'Hombre' },
+        ],
+        tooltip:
+          'Define la tabla de mortalidad del retiro programado (CB-H-2020 hombres, RV-M-2020 mujeres) y el acceso a la CEV.',
+      },
+      {
+        id: 'edadActual',
+        label: 'Edad actual',
+        type: 'number',
+        placeholder: '40',
+        required: true,
+        min: 18,
+        max: 110,
+        unit: 'years',
+      },
+      {
+        id: 'edadPension',
+        label: 'Edad a la que quieres pensionarte',
+        type: 'number',
+        placeholder: '65',
+        required: true,
+        min: 60,
+        max: 110,
+        unit: 'years',
+        defaultValue: 65,
+        tooltip: 'Edad legal de vejez: 65 hombres, 60 mujeres. A partir de 65 suman la PGU, el BAC y la CEV.',
+      },
+      {
+        id: 'saldoAfp',
+        label: 'Saldo en tu cuenta AFP (CLP)',
+        type: 'number',
+        placeholder: '50000000',
+        required: true,
+        min: 0,
+        allowZero: true,
+        tooltip: 'Lo que tienes acumulado hoy en tu cuenta de capitalización individual, incluyendo Bono de Reconocimiento si corresponde.',
+      },
+      {
+        id: 'sueldoImponible',
+        label: 'Sueldo imponible mensual actual (opcional)',
+        type: 'number',
+        placeholder: '1000000',
+        required: false,
+        min: 0,
+        tooltip:
+          'Si lo ingresas, proyectamos tu saldo hasta la edad de pensión con el 10% del trabajador más el aporte del empleador a tu cuenta según el calendario de la reforma.',
+      },
+      {
+        id: 'mesesCotizados',
+        label: 'Meses cotizados acumulados',
+        type: 'number',
+        placeholder: '240',
+        required: true,
+        min: 0,
+        unit: 'months',
+        allowZero: true,
+        tooltip:
+          'Total de meses cotizados al Fondo Autónomo de Protección Previsional (AFP, seguro social y sistema antiguo reconocido en el Bono de Reconocimiento). Se usa para el Beneficio por Años Cotizados (BAC).',
+      },
+    ],
+    seoTitle: 'Simulador de Pensión AFP 2026: retiro programado + PGU + BAC + CEV',
+    seoDescription:
+      'Estima tu pensión mensual con la reforma: retiro programado con CNU y TITRP oficiales, más PGU, Beneficio por Años Cotizados y CEV para mujeres.',
+    faq: [
+      {
+        question: '¿Cómo se calcula la pensión por retiro programado?',
+        answer:
+          'La pensión mensual es el saldo de tu cuenta dividido por el Capital Necesario Unitario (CNU) multiplicado por 12. El CNU depende de la tabla de mortalidad TM2020 de tu sexo y de la Tasa de Interés Técnica de Retiro Programado (TITRP) que publica mensualmente la Superintendencia de Pensiones.',
+      },
+      {
+        question: '¿Qué beneficios de la reforma se suman a mi pensión?',
+        answer:
+          'Desde los 65 años pueden sumar: la Pensión Garantizada Universal (PGU, hasta $250.275 según pensión base y edad), el Beneficio por Años Cotizados (BAC, 0,1 UF por cada 12 meses cotizados, tope 2,5 UF) y, para mujeres, la Compensación por diferencias de Expectativa de Vida (CEV), que iguala la pensión a la de un hombre con el mismo saldo y edad.',
+      },
+      {
+        question: '¿Qué es la CEV y quién la recibe?',
+        answer:
+          'La Compensación por diferencias de Expectativa de Vida compensa a las mujeres porque la ley les exige estirar el mismo ahorro durante más años de esperanza de vida. La reciben automáticamente las mujeres de 65 años o más pensionadas en AFP o compañías de seguros que hayan cotizado al menos un mes al Seguro Social o al sistema antiguo antes de los 50 años.',
+      },
+      {
+        question: '¿Por qué mi pensión real puede ser menor a la simulada?',
+        answer:
+          'El simulador asume retiro programado para una persona sin beneficiarios de sobrevivencia y rentabilidad igual a la TITRP. Con cónyuge o hijos beneficiarios el CNU aumenta y la pensión baja; con rentabilidad real distinta de la tasa técnica la pensión se reajusta cada año, y en retiros anticipados puede aplicar el tope del 70% del sueldo promedio.',
+      },
+      {
+        question: '¿Qué pasa con las cotizaciones futuras del empleador?',
+        answer:
+          'La Ley 21.735 sube la cotización del empleador de 8,5% total en 2033 en adelante. De ese aporte, la parte que entra a tu cuenta AFP sube gradualmente: 0,1% en 2025-2026 hasta 4,5% desde agosto de 2033 (y hasta 6% transcurridos 30 años). El simulador aplica ese calendario al proyectar tu saldo.',
+      },
+    ],
+  },
+  {
     id: 'aporte-familiar-permanente',
     name: 'Calculadora Aporte Familiar Permanente',
     description:
