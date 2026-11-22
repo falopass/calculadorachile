@@ -140,7 +140,11 @@ export function calculateSubsidioUnificadoEmpleo(
   const cumpleRequisitos =
     motivosNoAplica.length === 0 && aporteTrabajador > 0;
 
-  const duracionMeses = esPcD ? SUE.duracionMesesPcD : SUE.duracionMeses;
+  const duracionMeses = cumpleRequisitos
+    ? esPcD
+      ? SUE.duracionMesesPcD
+      : SUE.duracionMeses
+    : 0;
   const pagoProvisionalMensual = cumpleRequisitos
     ? Math.round(aporteTrabajador * 0.9)
     : 0;

@@ -6396,7 +6396,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
           },
         ],
         tooltip:
-          'El subsidio es solo para el sector privado; los independientes reciben un pago anual único, no mensual.',
+          'El subsidio es solo para el sector privado; los independientes reciben un pago anual único, no mensual. Si eres dependiente y empiezas a percibir honorarios, se suspende el pago mensual y el resto se paga en forma anual.',
       },
       {
         id: 'rentaBruta',

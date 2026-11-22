@@ -119,6 +119,7 @@ describe('calculateSubsidioUnificadoEmpleo — requisitos', () => {
     });
     expect(r.cumpleRequisitos).toBe(false);
     expect(r.aporteTrabajador).toBe(0);
+    expect(r.duracionMeses).toBe(0);
     expect(r.motivosNoAplica.join(' ')).toContain('sector privado');
   });
 
