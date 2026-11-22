@@ -893,6 +893,22 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'beneficio-anos-cotizados': {
+      const { calculateBeneficioAnosCotizados, beneficioAnosCotizadosToResults } =
+        await import('./beneficio-anos-cotizados');
+      return (inputs) => {
+        const result = calculateBeneficioAnosCotizados({
+          sexo: inputs.sexo === 'mujer' ? 'mujer' : 'hombre',
+          edad: coerceNumber(inputs.edad),
+          mesesCotizados: coerceNumber(inputs.mesesCotizados),
+          pensionadoAfp: coerceBool(inputs.pensionadoAfp),
+          pensionRetiroCapredenaDipreca: coerceBool(inputs.pensionRetiroCapredenaDipreca),
+          valorUF: live?.valorUF,
+        });
+        return beneficioAnosCotizadosToResults(result);
+      };
+    }
+
     case 'seguro-cesantia': {
       const { calculateSeguroCesantia, seguroCesantiaToResults } =
         await import('./seguro-cesantia');

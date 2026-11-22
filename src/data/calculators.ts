@@ -5633,6 +5633,121 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'beneficio-anos-cotizados',
+    name: 'Calculadora Beneficio por Años Cotizados (BAC)',
+    description:
+      'Estima el aporte mensual del Beneficio por Años Cotizados (BAC): 0,1 UF por cada 12 meses cotizados, tope 2,5 UF, según sexo, edad y meses cotizados.',
+    slug: 'calculadora-beneficio-anos-cotizados',
+    category: 'pension',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'ChileAtiende — Beneficio por Años Cotizados (BAC)',
+        url: 'https://chileatiende.gob.cl/fichas/130450-beneficio-por-anos-cotizados',
+        note: 'Monto, requisitos, máximo de 300 meses computables y gradualidad del mínimo para mujeres desde 2028',
+      },
+      {
+        name: 'Superintendencia de Pensiones — NCG N° 350',
+        url: 'https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000350.pdf',
+        note: 'Requisitos copulativos, cómputo proporcional de meses y tabla de aumento gradual del mínimo para mujeres',
+      },
+    ],
+    keywords: [
+      'beneficio por años cotizados',
+      'BAC pensión',
+      '0,1 UF por año cotizado',
+      'reforma de pensiones beneficios',
+      'cuánto paga el BAC',
+      'beneficio años cotizados requisitos',
+    ],
+    inputs: [
+      {
+        id: 'sexo',
+        label: 'Sexo legal',
+        type: 'select',
+        required: true,
+        defaultValue: 'mujer',
+        options: [
+          { value: 'mujer', label: 'Mujer' },
+          { value: 'hombre', label: 'Hombre' },
+        ],
+        tooltip:
+          'Define el mínimo de meses exigidos: hombres 240 meses (20 años); mujeres 120 meses (10 años), con aumento gradual desde enero de 2028 hasta 180 meses en 2036.',
+      },
+      {
+        id: 'edad',
+        label: 'Edad cumplida',
+        type: 'number',
+        placeholder: '65',
+        required: true,
+        min: 0,
+        max: 120,
+        unit: 'years',
+      },
+      {
+        id: 'mesesCotizados',
+        label: 'Meses cotizados (continuos o discontinuos)',
+        type: 'number',
+        placeholder: '240',
+        required: true,
+        min: 0,
+        unit: 'months',
+        tooltip:
+          'Suma todos tus meses cotizados en el Fondo Autónomo de Protección Previsional (AFP, seguro social y antiguo sistema reconocido en el Bono de Reconocimiento). Se computan máximo 300 meses.',
+      },
+      {
+        id: 'pensionadoAfp',
+        label: '¿Estás pensionada/o por vejez o invalidez en una AFP o compañía de seguros?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Incluye pensión parcial transitoria, parcial definitiva, total definitiva o de único dictamen según el D.L. N° 3.500.',
+      },
+      {
+        id: 'pensionRetiroCapredenaDipreca',
+        label: '¿Recibes pensión de retiro en Capredena o Dipreca?',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'Ser titular de pensión de retiro en esos regímenes excluye el beneficio. Las pensiones de montepío de Dipreca o Capredena no descartan.',
+      },
+    ],
+    seoTitle: 'Calculadora BAC 2026: Beneficio por Años Cotizados en UF y pesos',
+    seoDescription:
+      'Beneficio por Años Cotizados (BAC): 0,1 UF por cada 12 meses cotizados, tope 2,5 UF. Calcula tu aporte mensual según sexo, edad y meses cotizados.',
+    faq: [
+      {
+        question: '¿Cuánto paga el Beneficio por Años Cotizados?',
+        answer:
+          'Paga 0,1 UF mensuales por cada 12 meses cotizados, con un tope de 2,5 UF (equivalente a 25 años de cotizaciones). Se suma a la pensión que ya recibes y se entrega de forma automática, sin postulación.',
+      },
+      {
+        question: '¿Qué requisitos pide el BAC?',
+        answer:
+          'Tener 65 años o más, estar pensionada/o por vejez o invalidez en una AFP o compañía de seguros de vida (D.L. N° 3.500), no recibir pensión de retiro en Capredena o Dipreca, y registrar al menos 120 meses cotizados si eres mujer o 240 si eres hombre.',
+      },
+      {
+        question: '¿El mínimo de cotizaciones para mujeres cambia?',
+        answer:
+          'Sí. Hasta diciembre de 2027 son 120 meses (10 años). Desde enero de 2028 el requisito sube 12 meses cada 24 meses: 132 en 2028, 144 en 2030, 156 en 2032, 168 en 2034 y 180 meses (15 años) desde enero de 2036.',
+      },
+      {
+        question: '¿Cuentan las cotizaciones discontinuas o del antiguo sistema?',
+        answer:
+          'Sí. Los meses pueden ser continuos o discontinuos e incluyen cotizaciones del antiguo sistema reconocidas en el Bono de Reconocimiento, las de AFP y las del nuevo Seguro Social. Se computan hasta un máximo de 300 meses (25 años).',
+      },
+      {
+        question: '¿Desde cuándo se paga el BAC?',
+        answer:
+          'Comenzó en enero de 2026 para quienes ya estaban pensionadas con 65 años o más al 30-11-2025. Para quienes se pensionan desde diciembre de 2025, se paga junto con la primera pensión e incluye el retroactivo cuando corresponde.',
+      },
+    ],
+  },
+  {
     id: 'aporte-familiar-permanente',
     name: 'Calculadora Aporte Familiar Permanente',
     description:
