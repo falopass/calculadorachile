@@ -4,7 +4,7 @@
 // Índice general mensual verificado en la Base de
 // Datos Estadísticos del Banco Central de Chile
 // (serie IPC_G_2023) y en el Boletín Estadístico
-// INE N° 335 (08-10-2026, IPC de septiembre 2026).
+// INE N° 336 (06-11-2026, IPC de octubre 2026).
 //
 // Actualización: cuando el INE publique el boletín
 // mensual, agregar el mes nuevo a IPC_SERIE_2023 y
@@ -51,13 +51,14 @@ export const IPC_SERIE_2023: Record<string, number> = {
   '2026-07': 112.45,
   '2026-08': 113.15,
   '2026-09': 113.59,
+  '2026-10': 114.13,
 };
 
 /** Último mes publicado por el INE en la serie. */
-export const IPC_ULTIMO_MES = '2026-09';
+export const IPC_ULTIMO_MES = '2026-10';
 
 /** Fecha ISO del boletín que publicó `IPC_ULTIMO_MES`. */
-export const IPC_FECHA_PUBLICACION = '2026-10-08';
+export const IPC_FECHA_PUBLICACION = '2026-11-06';
 
 /** Calculadora oficial del IPC del INE. */
 export const IPC_FUENTE_URL = 'https://calculadoraipc.ine.cl/';

@@ -13,10 +13,10 @@ import {
 
 describe('IPC_SERIE_2023', () => {
   it('tiene el último mes publicado como último período ordenado', () => {
-    expect(IPC_ULTIMO_MES).toBe('2026-09');
+    expect(IPC_ULTIMO_MES).toBe('2026-10');
     expect(IPC_PERIODOS[IPC_PERIODOS.length - 1].value).toBe(IPC_ULTIMO_MES);
-    expect(IPC_PERIODOS[IPC_PERIODOS.length - 1].label).toBe('Septiembre 2026');
-    expect(IPC_SERIE_2023[IPC_ULTIMO_MES]).toBe(113.59);
+    expect(IPC_PERIODOS[IPC_PERIODOS.length - 1].label).toBe('Octubre 2026');
+    expect(IPC_SERIE_2023[IPC_ULTIMO_MES]).toBe(114.13);
   });
 });
 
@@ -32,7 +32,7 @@ describe('variacionIpcEntreMeses', () => {
 
   it('lanza error si un mes no existe en la serie', () => {
     expect(() => variacionIpcEntreMeses('2020-01', '2026-09')).toThrow();
-    expect(() => variacionIpcEntreMeses('2025-09', '2026-10')).toThrow();
+    expect(() => variacionIpcEntreMeses('2025-09', '2026-11')).toThrow();
   });
 });
 
@@ -106,7 +106,7 @@ describe('calculateIPC', () => {
       calculateIPC({ monto: 100_000, mesInicial: '2020-01', mesFinal: '2026-09' }),
     ).toThrow();
     expect(() =>
-      calculateIPC({ monto: 100_000, mesInicial: '2025-09', mesFinal: '2026-10' }),
+      calculateIPC({ monto: 100_000, mesInicial: '2025-09', mesFinal: '2026-11' }),
     ).toThrow();
   });
 });

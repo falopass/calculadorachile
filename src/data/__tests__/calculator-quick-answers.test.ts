@@ -11,6 +11,9 @@ import { IVA, REAL_BRASILENO, SOL_PERUANO, PESO_COLOMBIANO, PESO_MEXICANO, BOLIV
 import { DERECHO_AD_VALOREM_GENERAL, FUENTE_ADUANAS, UMBRAL_REGIMEN_ESPECIAL_USD } from '@/lib/calculations/compras-internacionales';
 import { calculatePuntajeNemRanking } from '@/lib/calculations/puntaje-nem-ranking';
 import { PAES } from '@/lib/values/educacion';
+import { calculateIPC } from '@/lib/calculations/ipc';
+import { IPC_ULTIMO_MES, variacionIpcEntreMeses, ipcIndiceMes } from '@/lib/values/ipc-serie';
+import { formatPercentage } from '@/lib/formatters';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
@@ -48,7 +51,7 @@ const IDS = [
   'operacion-renta', 'permiso-circulacion', 'dias-habiles', 'dias-administrativos', 'pension-alimenticia',
   'conversor-divisas', 'puntaje-ponderado-paes', 'puntaje-nem-ranking',
   'peso-colombiano-clp', 'peso-mexicano-clp', 'boliviano-clp',
-  'comparador-afp',
+  'comparador-afp', 'ipc',
 ];
 
 describe('getQuickAnswer', () => {
@@ -208,7 +211,11 @@ describe('getQuickAnswer', () => {
     expect(fila1000[1]).toBe(formatCLP(Math.round(1000 * CTX.uf)));
     expect(fresca.lead.startsWith('Hoy 29-10-2026 la UF vale')).toBe(true);
     expect(fresca.example!.caption).toContain('UF del 29-10-2026');
-    expect(fresca.shortAnswers).toHaveLength(3);
+    expect(fresca.shortAnswers).toHaveLength(6);
+    const fila3000 = fresca.shortAnswers!.find((qa) => qa.question.includes('3.000'))!;
+    expect(fila3000.answer).toContain(formatCLP(Math.round(3000 * CTX.uf)));
+    const fila200 = fresca.shortAnswers!.find((qa) => qa.question.includes('200 UF'))!;
+    expect(fila200.answer).toContain(formatCLP(Math.round(200 * CTX.uf)));
 
     const vieja = getQuickAnswer('uf-clp', { ...CTX, ufFecha: '2026-10-25T03:00:00.000Z', ufFresca: false })!;
     expect(vieja.lead).not.toContain('Hoy');
@@ -218,6 +225,28 @@ describe('getQuickAnswer', () => {
 
     const sinFecha = getQuickAnswer('uf-clp', CTX)!;
     expect(sinFecha.example!.caption).not.toMatch(/hoy|UF del/i);
+  });
+
+  it('ipc: variaciones del topTable contra la serie y ejemplo contra calculateIPC', () => {
+    const qa = getQuickAnswer('ipc', CTX)!;
+    expect(qa.topTable).toBeDefined();
+    const [ultY, ultM] = IPC_ULTIMO_MES.split('-').map(Number);
+    const prev = ultM === 1 ? `${ultY - 1}-12` : `${ultY}-${String(ultM - 1).padStart(2, '0')}`;
+    const dicAnterior = `${ultY - 1}-12`;
+    const interanual = `${ultY - 1}-${String(ultM).padStart(2, '0')}`;
+    const esperadas = [
+      variacionIpcEntreMeses(prev, IPC_ULTIMO_MES).variacionRedondeadaPct,
+      variacionIpcEntreMeses(dicAnterior, IPC_ULTIMO_MES).variacionRedondeadaPct,
+      variacionIpcEntreMeses(interanual, IPC_ULTIMO_MES).variacionRedondeadaPct,
+    ];
+    expect(qa.topTable!.rows).toHaveLength(3);
+    qa.topTable!.rows.forEach((row, i) => {
+      expect(row[1]).toBe(formatPercentage(esperadas[i]));
+    });
+    const r = calculateIPC({ monto: 100_000, mesInicial: dicAnterior, mesFinal: IPC_ULTIMO_MES });
+    expect(qa.example!.rows[0]).toEqual(['$100.000', formatCLP(r.montoReajustado)]);
+    expect(qa.lead).toContain(ipcIndiceMes(IPC_ULTIMO_MES)!.toLocaleString('es-CL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+    expect(qa.lead).toContain(formatPercentage(esperadas[2]));
   });
 
   it('gratificación (E-014): tope generado, fila del umbral y sin montos escritos a mano', () => {
