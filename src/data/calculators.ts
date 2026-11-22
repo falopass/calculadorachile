@@ -8583,6 +8583,80 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+  {
+    id: 'validador-rut',
+    name: 'Validador de RUT y Dígito Verificador',
+    description:
+      'Verifica si un RUT chileno es válido y calcula el dígito verificador que le corresponde con el algoritmo módulo 11. Acepta el RUT con o sin puntos y con guion, y devuelve el formato estándar.',
+    slug: 'validador-rut',
+    category: 'servicios',
+    featured: false,
+    phase: 3,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'BCN Ley Chile — Ley 4.808',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=24928',
+        note: 'Ley orgánica del Registro Civil: rol único nacional y cédula de identidad',
+      },
+      {
+        name: 'Registro Civil — Cálculo del dígito verificador',
+        url: 'https://www.registrocivil.cl/principal/calculando-el-digito-verificador',
+        note: 'Explicación oficial del dígito verificador del RUT',
+      },
+      {
+        name: 'SII — Esquemas XML de Facturación Electrónica',
+        url: 'https://www.sii.cl/factura_electronica/schema_dte.zip',
+        note: 'El tipo RUTType del esquema DTE define el largo del cuerpo del RUT (1–8 dígitos)',
+      },
+    ],
+    keywords: [
+      'validador de rut',
+      'dígito verificador rut',
+      'verificar rut chileno',
+      'calcular dígito verificador',
+      'rutificador',
+      'módulo 11 rut',
+    ],
+    inputs: [
+      {
+        id: 'rut',
+        label: 'RUT a validar',
+        type: 'text',
+        placeholder: '12.345.678-5',
+        required: true,
+        // El RUT es dato personal: no viaja en enlaces compartidos.
+        shareable: false,
+        tooltip:
+          'Puedes escribirlo con o sin puntos y con o sin guion (ej. 12345678-5 o 123456785). Si el dígito que ingresas no coincide, te mostramos el que corresponde.',
+      },
+    ],
+    seoTitle: 'Validador de RUT chileno: dígito verificador (módulo 11)',
+    seoDescription:
+      'Valida un RUT chileno y calcula su dígito verificador con el algoritmo módulo 11. Funciona con o sin puntos y guion, y entrega el RUT con formato estándar.',
+    faq: [
+      {
+        question: '¿Cómo se calcula el dígito verificador del RUT?',
+        answer:
+          'Con el algoritmo módulo 11: cada dígito del cuerpo se multiplica, de derecha a izquierda, por factores cíclicos del 2 al 7; la suma se divide por 11 y el dígito es 11 menos el resto. Si el resultado es 11 el dígito es 0 y si es 10 el dígito es K.',
+      },
+      {
+        question: '¿Qué significa que el dígito verificador sea K?',
+        answer:
+          'La K no es una letra cualquiera: es la marca que usa el sistema cuando el cálculo módulo 11 da 10. Se escribe con mayúscula y reemplaza al dígito final del RUT.',
+      },
+      {
+        question: '¿Un RUT válido significa que la persona existe?',
+        answer:
+          'No necesariamente: el dígito verificador solo comprueba que el número cumple la regla matemática del módulo 11. No confirma que el RUT esté asignado ni vigente en el Registro Civil.',
+      },
+      {
+        question: '¿Puedo usarlo para el RUT de una empresa?',
+        answer:
+          'Sí: el dígito verificador de los RUT de personas jurídicas se calcula con el mismo algoritmo módulo 11, por lo que el validador también sirve para RUT de empresas.',
+      },
+    ],
+  },
 ];
 
 export const calculators: Calculator[] = calculatorCatalog.map((calculator) => ({

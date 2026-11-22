@@ -6,7 +6,7 @@
 
 **CalculaChile** (`calculadorachile.cl`) es un sitio chileno de calculadoras laborales, tributarias, previsionales y financieras. Es un producto **YMYL**: un error en una fórmula, monto o fuente afecta decisiones económicas reales y daña confianza/SEO. Prioridad: **ship rápido, bajo costo y alta confiabilidad en cálculos chilenos**. AdSense y tráfico orgánico son críticos.
 
-Catálogo: **81 calculadoras** (75 indexables, 6 `noIndex`) y **81 módulos** con test en `src/lib/calculations/`. Estado: [`docs/catalogo.md`](docs/catalogo.md). Árbol y patrón: [`docs/estructura.md`](docs/estructura.md).
+Catálogo: **82 calculadoras** (76 indexables, 6 `noIndex`) y **82 módulos** con test en `src/lib/calculations/`. Estado: [`docs/catalogo.md`](docs/catalogo.md). Árbol y patrón: [`docs/estructura.md`](docs/estructura.md).
 
 ## Stack y comandos
 

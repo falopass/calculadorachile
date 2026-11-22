@@ -568,10 +568,10 @@ export default function PremiumCalculatorShell({
           inputs: debouncedValues as Record<string, unknown>,
           results: calculated.map((r) => ({
             label: r.label,
-            value: String(r.value),
+            value: r.textValue ?? String(r.value),
           })),
           mainResult: mainResult
-            ? { label: mainResult.label, value: String(mainResult.value) }
+            ? { label: mainResult.label, value: mainResult.textValue ?? String(mainResult.value) }
             : undefined,
         });
       }
