@@ -5,8 +5,8 @@
 
 import {
   APORTE_EMPLEADOR_AFP,
-  BENEFICIO_ANOS_COTIZADOS,
   TITRP,
+  TOPE_IMPOSITIVO,
   UF,
   fechaLocal,
 } from '@/lib/values/constants';
@@ -125,10 +125,10 @@ function tasaAporteEmpleador(fecha: Date): number {
 const MESES_POR_ANO = 12;
 
 /**
- * Proyecta el saldo a la edad de pensión: saldo actual más cotizaciones
- * mensuales (10% del trabajador + aporte del empleador a la cuenta
- * individual según Ley 21.735) capitalizadas a la TITRP en términos
- * reales (el sueldo se mantiene constante en UF).
+ * Proyecta el saldo a la edad de pensión: el saldo actual se capitaliza
+ * a la TITRP en términos reales y se suman las cotizaciones mensuales
+ * (10% del trabajador + aporte del empleador a la cuenta individual
+ * según Ley 21.735) cuando hay sueldo imponible declarado.
  */
 function proyectarSaldo(
   saldoHoy: number,
@@ -158,19 +158,25 @@ export function calculateSimuladorPensionAfp(
   const edad = Math.max(0, Math.round(input.edadPension));
   const edadActual = Math.max(0, Math.round(input.edadActual));
   const saldoHoy = Math.max(0, input.saldoAfp ?? 0);
-  const imponible = Math.max(0, input.sueldoImponible ?? 0);
-  const mesesCotizados = Math.max(0, Math.round(input.mesesCotizados ?? 0));
   const valorUF = input.valorUF && input.valorUF > 0 ? input.valorUF : UF.valor;
+  // Cotizar sobre más del tope imponible no genera aportes.
+  const imponible = Math.min(
+    Math.max(0, input.sueldoImponible ?? 0),
+    TOPE_IMPOSITIVO.afp_salud * valorUF,
+  );
+  const mesesCotizados = Math.max(0, Math.round(input.mesesCotizados ?? 0));
   const tasa = input.tasaInteres && input.tasaInteres > 0 ? input.tasaInteres : TITRP.tasaAnual;
   const fecha = input.fecha ?? new Date();
 
+  // Si la edad de pensión es menor que la edad actual, el escenario es
+  // pensionarse hoy.
   const mesesProyeccion = Math.max(0, (edad - edadActual) * MESES_POR_ANO);
   const anioPension = fecha.getFullYear() + Math.max(0, edad - edadActual);
   const fechaPension = new Date(fecha.getTime());
   fechaPension.setFullYear(fechaPension.getFullYear() + Math.max(0, edad - edadActual));
 
   const saldoProyectado =
-    imponible > 0 && mesesProyeccion > 0
+    mesesProyeccion > 0
       ? proyectarSaldo(saldoHoy, imponible, mesesProyeccion, fecha, tasa)
       : saldoHoy;
 
@@ -178,30 +184,47 @@ export function calculateSimuladorPensionAfp(
   const pensionMensual = Math.round(saldoProyectado / (MESES_POR_ANO * cnuAplicado));
 
   // CEV (mujeres 65+): compensa hasta igualar la pensión de un hombre
-  // de la misma edad y saldo (ChileAtiende ficha 130452).
+  // de la misma edad y saldo (ChileAtiende ficha 130452). La base de
+  // cálculo no supera 18 UF mensuales y la compensación no es inferior
+  // a 0,25 UF cuando es positiva.
   const cnuHombre = calcularCNU('hombre', edad, anioPension, tasa);
-  const pensionEquivalenteHombre = Math.round(saldoProyectado / (MESES_POR_ANO * cnuHombre));
+  const topeCev = 18 * valorUF;
+  const pensionEquivalenteHombre = Math.round(
+    saldoProyectado / (MESES_POR_ANO * cnuHombre),
+  );
   const cevAplica = input.sexo === 'mujer' && edad >= 65;
-  const cevMensual = cevAplica ? Math.max(0, pensionEquivalenteHombre - pensionMensual) : 0;
+  const diferenciaCev = cevAplica
+    ? Math.max(0, Math.min(pensionEquivalenteHombre, topeCev) - Math.min(pensionMensual, topeCev))
+    : 0;
+  const cevMensual =
+    diferenciaCev > 0 ? Math.max(diferenciaCev, Math.round(0.25 * valorUF)) : 0;
 
-  // PGU sobre la pensión autofinanciada (Ley 21.419).
-  const pgu = calculatePGU({
-    pensionActual: pensionMensual,
-    anosCotizados: Math.floor(mesesCotizados / 12),
-    esHombre: input.sexo === 'hombre',
-    edad,
-    fecha: fechaPension,
-  });
+  // Meses cotizados proyectados: quien sigue trabajando acumula meses
+  // hasta la edad de pensión (relevante para el BAC y el requisito de
+  // años de la PGU).
+  const mesesCotizadosProyectados =
+    imponible > 0 ? mesesCotizados + mesesProyeccion : mesesCotizados;
 
   // BAC (0,1 UF × años cotizados, tope 2,5 UF).
   const bac = calculateBeneficioAnosCotizados({
     sexo: input.sexo,
     edad,
-    mesesCotizados,
+    mesesCotizados: mesesCotizadosProyectados,
     pensionadoAfp: true,
     pensionRetiroCapredenaDipreca: false,
     fecha: fechaPension,
     valorUF,
+  });
+
+  // La pensión base de la PGU suma la autofinanciada y los beneficios
+  // de la reforma (BAC y CEV): más base, menos PGU.
+  const pensionBasePgu = pensionMensual + cevMensual + bac.beneficioCLP;
+  const pgu = calculatePGU({
+    pensionActual: pensionBasePgu,
+    anosCotizados: Math.floor(mesesCotizadosProyectados / 12),
+    esHombre: input.sexo === 'hombre',
+    edad,
+    fecha: fechaPension,
   });
 
   const pensionTotal = pensionMensual + cevMensual + pgu.pguMensual + bac.beneficioCLP;
@@ -290,7 +313,7 @@ export function simuladorPensionAfpToResults(
     },
     {
       label: 'Tasa técnica aplicada (TITRP)',
-      value: result.tasaInteres,
+      value: result.tasaInteres * 100,
       format: 'percentage',
     },
   );

@@ -75,9 +75,10 @@ describe('calculateSimuladorPensionAfp', () => {
     });
     expect(r.saldoProyectado).toBe(147042164);
     expect(r.pensionMensual).toBe(769787);
-    expect(r.pguMensual).toBe(250275);
+    // La pensión base de la PGU suma autofinanciada + BAC + CEV.
+    expect(r.pguMensual).toBe(206724);
     expect(r.bacMensual).toBe(100000); // tope 2,5 UF × 40.000
-    expect(r.pensionTotal).toBe(1120062);
+    expect(r.pensionTotal).toBe(1076511);
     expect(r.anioPension).toBe(2056);
   });
 
@@ -130,7 +131,7 @@ describe('calculateSimuladorPensionAfp', () => {
     expect(r.bacMensual).toBe(100000); // tope 2,5 UF
   });
 
-  it('sin sueldo imponible no proyecta cotizaciones', () => {
+  it('sin sueldo imponible no suma cotizaciones pero capitaliza el saldo', () => {
     const r = calculateSimuladorPensionAfp({
       sexo: 'hombre',
       edadActual: 40,
@@ -141,7 +142,46 @@ describe('calculateSimuladorPensionAfp', () => {
       valorUF: UF_TEST,
       fecha: FECHA,
     });
-    expect(r.saldoProyectado).toBe(10_000_000);
+    expect(r.saldoProyectado).toBe(24622235);
+  });
+
+  it('sueldo sobre el tope imponible (90 UF) no genera aportes extra', () => {
+    const tope = calculateSimuladorPensionAfp({
+      sexo: 'hombre',
+      edadActual: 60,
+      edadPension: 65,
+      saldoAfp: 0,
+      sueldoImponible: 90 * UF_TEST,
+      mesesCotizados: 0,
+      valorUF: UF_TEST,
+      fecha: FECHA,
+    });
+    const sobreTope = calculateSimuladorPensionAfp({
+      sexo: 'hombre',
+      edadActual: 60,
+      edadPension: 65,
+      saldoAfp: 0,
+      sueldoImponible: 200 * UF_TEST,
+      mesesCotizados: 0,
+      valorUF: UF_TEST,
+      fecha: FECHA,
+    });
+    expect(sobreTope.saldoProyectado).toBe(tope.saldoProyectado);
+  });
+
+  it('edad de pensión menor que la actual equivale a pensionarse hoy', () => {
+    const r = calculateSimuladorPensionAfp({
+      sexo: 'hombre',
+      edadActual: 70,
+      edadPension: 65,
+      saldoAfp: 100_000_000,
+      sueldoImponible: 0,
+      mesesCotizados: 240,
+      valorUF: UF_TEST,
+      fecha: FECHA,
+    });
+    expect(r.saldoProyectado).toBe(100_000_000);
+    expect(r.anioPension).toBe(2026);
   });
 });
 

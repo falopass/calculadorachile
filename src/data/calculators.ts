@@ -5961,6 +5961,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         placeholder: '50000000',
         required: true,
         min: 0,
+        allowZero: true,
         tooltip: 'Lo que tienes acumulado hoy en tu cuenta de capitalización individual, incluyendo Bono de Reconocimiento si corresponde.',
       },
       {
@@ -5981,6 +5982,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         min: 0,
         unit: 'months',
+        allowZero: true,
         tooltip:
           'Total de meses cotizados al Fondo Autónomo de Protección Previsional (AFP, seguro social y sistema antiguo reconocido en el Bono de Reconocimiento). Se usa para el Beneficio por Años Cotizados (BAC).',
       },
