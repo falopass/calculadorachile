@@ -30,7 +30,7 @@ function parse(body: string) {
 describe('YMYL catalog audit parser', () => {
   it('covers every real entry including dynamic boleta metadata', () => {
     const rows = parse(fs.readFileSync('src/data/calculators.ts', 'utf8'));
-    expect(rows).toHaveLength(79);
+    expect(rows).toHaveLength(81);
     expect(rows.find((row: { id: string }) => row.id === 'boleta-honorarios').inputs).toEqual([
       'modo',
       'montoBruto',

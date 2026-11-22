@@ -1372,6 +1372,30 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'porcentaje': {
+      const { calculatePorcentaje, porcentajeToResults } = await import('./porcentaje');
+      return (inputs) => {
+        const tipo = inputs.tipo;
+        const result = calculatePorcentaje({
+          tipo:
+            tipo === 'porcentaje-de' ||
+            tipo === 'que-porcentaje' ||
+            tipo === 'variacion' ||
+            tipo === 'aumento'
+              ? tipo
+              : 'descuento',
+          valorA: coerceNumber(inputs.valorA),
+          porcentaje: coerceNumber(inputs.porcentaje),
+          valorB: inputs.valorB === undefined ? undefined : coerceNumber(inputs.valorB),
+          descuentoAdicional:
+            inputs.descuentoAdicional === undefined
+              ? undefined
+              : coerceNumber(inputs.descuentoAdicional),
+        });
+        return porcentajeToResults(result);
+      };
+    }
+
     default:
       return null;
   }

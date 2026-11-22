@@ -742,6 +742,137 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'porcentaje',
+    name: 'Calculadora de Porcentaje y Descuentos',
+    description:
+      'Calcula porcentajes: el X% de un monto, qué porcentaje es A de B, variación porcentual y precios con descuento o aumento. Ideal para ofertas, rebajas, CyberDay y Black Friday.',
+    slug: 'calculadora-porcentaje',
+    category: 'hogar',
+    featured: true,
+    phase: 1,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'SERNAC — Cómo aprovechar las liquidaciones',
+        url: 'https://www.sernac.cl/portal/607/w3-article-1184.html',
+        note: 'Recomendaciones para comprar en ofertas',
+      },
+      {
+        name: 'SERNAC — Oferta, promoción y publicidad',
+        url: 'https://www.sernac.cl/portal/617/w3-article-58272.html',
+        note: 'Qué es una oferta según la Ley del Consumidor',
+      },
+    ],
+    seoTitle: 'Calculadora de Porcentaje y Descuentos Chile',
+    seoDescription:
+      'Calcula porcentajes al instante: X% de un monto, qué % es A de B, variación porcentual y precio final con descuentos sucesivos. Gratis, sin registro.',
+    keywords: [
+      'calculadora porcentaje',
+      'calculadora de porcentajes',
+      'calculadora descuento',
+      'calcular descuento',
+      'porcentaje de un número',
+      'variación porcentual',
+      'descuento porcentaje',
+      'cyberday descuentos',
+      'black friday chile',
+      'calcular porcentaje online',
+    ],
+    inputs: [
+      {
+        id: 'tipo',
+        label: 'Operación',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'descuento', label: 'Precio con descuento' },
+          { value: 'porcentaje-de', label: 'El X% de un monto' },
+          { value: 'que-porcentaje', label: 'Qué % es A de B' },
+          { value: 'variacion', label: 'Variación porcentual (de A a B)' },
+          { value: 'aumento', label: 'Precio con aumento' },
+        ],
+        defaultValue: 'descuento',
+        tooltip:
+          'Descuento y aumento usan Valor A como precio y el porcentaje. «Qué %» y «Variación» comparan Valor A con Valor B.',
+      },
+      {
+        id: 'valorA',
+        label: 'Valor A',
+        type: 'number',
+        placeholder: '$99.990',
+        required: true,
+        min: 0,
+        allowZero: true,
+        tooltip:
+          'Monto o precio original en descuento/aumento; el total en «X% de un monto»; el valor inicial en variación; la parte en «qué % es A de B».',
+      },
+      {
+        id: 'porcentaje',
+        label: 'Porcentaje (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '20',
+        min: 0,
+        max: 10000,
+        tooltip:
+          'Se usa en «X% de un monto», descuento y aumento. En descuento se acota a 0–100% si ingresas un valor fuera de rango.',
+      },
+      {
+        id: 'valorB',
+        label: 'Valor B',
+        type: 'number',
+        placeholder: '$129.990',
+        min: 0,
+        allowZero: true,
+        tooltip:
+          'Solo para «qué % es A de B» (el total) y «variación porcentual» (el valor nuevo).',
+      },
+      {
+        id: 'descuentoAdicional',
+        label: 'Segundo descuento (%)',
+        type: 'number',
+        unit: 'percent',
+        placeholder: '10',
+        min: 0,
+        max: 100,
+        tooltip:
+          'Opcional, solo en modo descuento. Se aplica después del primero: dos descuentos sucesivos no se suman.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo calculo el 20% de $50.000?',
+        answer:
+          'Multiplica $50.000 × 0,20 = $10.000. Elige «El X% de un monto», ingresa el monto y el porcentaje.',
+      },
+      {
+        question: '¿Cómo saco el precio final de un producto con 30% de descuento?',
+        answer:
+          'Elige «Precio con descuento»: precio final = precio × (1 − 0,30). Ejemplo: $99.990 con 30% queda en $69.993 y ahorras $29.997.',
+      },
+      {
+        question: '¿Dos descuentos de 20% y 10% equivalen a 30%?',
+        answer:
+          'No: se aplican en cadena. $100.000 con 20% queda en $80.000 y con 10% adicional en $72.000: el descuento efectivo es 28%. Ingresa el segundo descuento en el campo «Segundo descuento».',
+      },
+      {
+        question: '¿Cómo sé qué porcentaje es $15.000 de $200.000?',
+        answer:
+          'Elige «Qué % es A de B»: $15.000 ÷ $200.000 × 100 = 7,5%. Sirve para verificar si una rebaja anunciada es real.',
+      },
+      {
+        question: '¿Cómo mido si un precio subió o bajó respecto de antes?',
+        answer:
+          'Elige «Variación porcentual»: (valor nuevo − valor inicial) ÷ valor inicial × 100. Si el precio pasó de $40.000 a $50.000, la variación es +25%.',
+      },
+      {
+        question: '¿Las tiendas pueden inflar el precio antes de anunciar un descuento?',
+        answer:
+          'SERNAC exige que la oferta informe precio anterior y precio rebajado con condiciones claras. Si sospechas una rebaja falsa, puedes revisar el precio histórico y reclamar en sernac.cl.',
+      },
+    ],
+  },
+  {
     id: 'horas-extra',
     name: 'Horas Extra 2026',
     description:
