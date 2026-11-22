@@ -1427,7 +1427,8 @@ export async function loadCalculationFn(
       const { calculateSueldoDocente, sueldoDocenteToResults } = await import('./sueldo-docente');
       return (inputs) => {
         const result = calculateSueldoDocente({
-          horasBasica: coerceNumber(inputs.horasBasica, 44),
+          tipoEmpleador: (inputs.tipoEmpleador as 'municipal' | 'particular') ?? 'municipal',
+          horasBasica: coerceNumber(inputs.horasBasica, 0),
           horasMedia: coerceNumber(inputs.horasMedia, 0),
           tramo: inputs.tramo as
             | 'sin-tramo'
