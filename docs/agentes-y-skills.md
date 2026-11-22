@@ -23,21 +23,21 @@ Inicia la tarea con `CalculaChile` como carpeta de trabajo para descubrir este a
 | `seo-adsense` | Metadata, noIndex, schema, AdSense seguro |
 | `contenido-editorial-ymyl` | Posts/guías con research y fuentes oficiales |
 | `ship-calculachile` | Cierre y validación proporcional al cambio |
-| `frontend-calculachile` | UI/UX anti-slop adaptada a YMYL, AdSense y stack actual |
+| `frontend-calculachile` | Contexto de producto YMYL, AdSense y stack actual; no es una guía visual alternativa |
 | `periodismo-editorial-chile` | Investigación, noticias y guías de 1.500+ palabras sin prosa IA genérica |
 
 **AGENTS.md manda** sobre skills y docs auxiliares.
 
 ### Contrato de orquestación
 
-- Root conserva arquitectura, integración y decisión final. Hereda los nueve perfiles globales y el governor: hasta cuatro agentes activos y tres hijos; no hay delegación anidada.
-- `swe-worker` cubre trabajo acotado, `backend-builder` backend complejo y `frontend-builder` implementación visual; `scout`, `analyst` y `red-team` aportan evidencia. Los writers corren en background con `WRITE_SCOPE` y `VALIDATION_COMMANDS`; scopes compartidos van en secuencia y más de un writer requiere pregrant de escritura.
-- Root o el writer implementan y releen el cambio sin checks por defecto; `mechanical-worker` no ejecuta. `verifier` independiente bajo `LOCAL_HEAVY_LOCK` se reserva para riesgo alto o petición. Los guards de bloqueo local están desactivados por la decisión YOLO vigente.
-- Proveedores, credenciales, routers y aliases son configuración personal, nunca del repo. Grok/OpenCode pueden quedar como compatibilidad histórica, pero no gobiernan Devin.
+- Root conserva arquitectura, integración y decisión final: máximo 2 hijos, profundidad uno, ownership disjunto y un writer por recurso mutable.
+- Los builders implementan y los scouts aportan evidencia. Los writers trabajan en background con alcance de escritura y validaciones explícitas; los scopes compartidos van en secuencia.
+- Quien implementa relee el cambio sin checks por defecto; la verificación independiente se reserva para riesgo alto o petición. Los guards de bloqueo local están desactivados por la decisión YOLO vigente.
+- Proveedores, credenciales, routers y aliases son configuración personal, nunca del repo.
 
 ### Autoridad frontend
 
-Root decide arquitectura técnica. `design-taste-frontend` dirige páginas públicas/editoriales; `interface-design` dirige calculadoras y herramientas de producto. Ambas respetan YMYL, SEO, AdSense, accesibilidad y el DNA; se elige una por superficie. `frontend-builder` implementa y `frontend-director` se reserva para identidad o crítica visual difícil. La UI actual no congela un rediseño autorizado.
+Root decide arquitectura técnica. `frontend-base` es la única entrada para páginas públicas, editoriales, calculadoras y herramientas de producto, siempre con YMYL, SEO, AdSense, accesibilidad y DNA. La UI actual no congela un rediseño autorizado.
 
 
 ## Documentación (mínima)
