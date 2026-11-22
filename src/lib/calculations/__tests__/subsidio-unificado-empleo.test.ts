@@ -57,7 +57,7 @@ describe('calculateSubsidioUnificadoEmpleo — montos', () => {
     expect(r.aporteEmpresa).toBe(10063);
   });
 
-  it('RB $1.200.000 (> 2,25 IMM) → sin subsidio', () => {
+  it('RB $1.200.000 (> 2,25 IMM) → sin pago ese mes, pero cuenta la duración', () => {
     const r = calculateSubsidioUnificadoEmpleo({
       ...baseInput,
       rentaBruta: 1200000,
@@ -65,6 +65,8 @@ describe('calculateSubsidioUnificadoEmpleo — montos', () => {
     expect(r.cumpleRequisitos).toBe(false);
     expect(r.aporteTrabajador).toBe(0);
     expect(r.aporteEmpresa).toBe(0);
+    // El mes sin pago sí cuenta para la duración del beneficio.
+    expect(r.duracionMeses).toBe(12);
   });
 });
 
