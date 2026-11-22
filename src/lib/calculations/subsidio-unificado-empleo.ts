@@ -93,9 +93,12 @@ export function calculateSubsidioUnificadoEmpleo(
     );
   }
 
+  // Sin requisitos no hay subsidio: los aportes quedan en 0 y el
+  // motivo se expone en baseCalculo y en la nota del resultado.
+  const elegible = motivosNoAplica.length === 0;
   let aporteTrabajador = 0;
   let aporteEmpresa = 0;
-  if (rb > 0 && rb <= tope) {
+  if (elegible && rb > 0 && rb <= tope) {
     if (rb <= tramoA) {
       aporteTrabajador = (SUE.pvTrabajador / 100) * Math.min(rb, imm);
       aporteEmpresa = (SUE.pvEmpresa / 100) * rb;
@@ -154,6 +157,17 @@ export function subsidioUnificadoEmpleoToResults(
       value: result.aporteTrabajador,
       format: 'CLP',
       highlight: true,
+      ...(result.motivosNoAplica.length > 0
+        ? {
+            note: {
+              text: `No califica: ${result.motivosNoAplica.join(' ')}`,
+              source: {
+                name: 'Ley 21.808 — Biblioteca del Congreso Nacional',
+                url: 'https://www.bcn.cl/leychile/navegar?idNorma=1222281',
+              },
+            },
+          }
+        : {}),
     },
     {
       label: 'Pago provisional mensual (90%, reliquida anual)',
