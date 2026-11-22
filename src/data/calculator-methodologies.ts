@@ -919,7 +919,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Verifica los requisitos copulativos: 65 años o más, pensión de vejez o invalidez en AFP/seguros (D.L. 3.500) y no ser titular de pensión de retiro en Capredena o Dipreca.',
       'Compara los meses cotizados con el mínimo exigido: 240 para hombres; para mujeres, el escalón vigente a la fecha (120 hasta dic-2027, subiendo a 180 en ene-2036).',
       'Computa a lo más 300 meses (25 años) de cotizaciones, continuas o discontinuas.',
-      'Multiplica los años completos de 12 meses por 0,1 UF (tope 2,5 UF) y convierte a pesos con la UF vigente.',
+      'Divide los meses computables por 12 y multiplica por 0,1 UF (tope 2,5 UF): los meses que no completan un año pagan proporcional según NCG 350. Convierte a pesos con la UF vigente.',
     ],
     assumptions: [
       'Los meses cotizados declarados corresponden a los registrados en el Fondo Autónomo de Protección Previsional.',
@@ -928,6 +928,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
     limitations: [
       'No consulta el registro real de cotizaciones de la AFP ni el Fondo Autónomo de Protección Previsional.',
       'No considera el beneficio especial para trabajadores con cotizaciones por trabajos pesados ni los meses que la ley excluye del cómputo.',
+      'Para quienes se pensionan desde agosto de 2025 sin haber cumplido 65 años al 31-07-2025, el BAC se financia con una anualidad descontada de su propia cuenta: esta calculadora muestra el monto bruto del beneficio, no el efecto neto de esa anualidad.',
       'El monto en pesos depende de la UF del día; el pago efectivo lo determina el IPS.',
     ],
     workedExample: {

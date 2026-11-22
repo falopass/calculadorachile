@@ -34,7 +34,7 @@ export interface BeneficioAnosCotizadosResult {
   mesesMinimosExigidos: number;
   /** Meses efectivamente computados (máximo 300). */
   mesesComputables: number;
-  /** Años de 12 meses completos que pagan el beneficio. */
+  /** Años cotizados computados (con fracción; paga proporcional). */
   anosComputables: number;
   /** Beneficio mensual en UF (tope 2,5). */
   beneficioUF: number;
@@ -93,12 +93,16 @@ export function calculateBeneficioAnosCotizados(
 
   const aplica = motivosNoAplica.length === 0;
   const mesesComputables = Math.min(meses, B.mesesMaximos);
-  const anosComputables = aplica ? Math.floor(mesesComputables / 12) : 0;
-  const beneficioUF = aplica ? Math.min(anosComputables * B.ufPorAno, B.topeUF) : 0;
+  // NCG 350, cap. III.3.a: los meses que no completan un año pagan
+  // beneficio proporcional (meses cotizados ÷ 12).
+  const anosComputables = aplica ? mesesComputables / 12 : 0;
+  const beneficioUF = aplica
+    ? Math.round(Math.min(anosComputables * B.ufPorAno, B.topeUF) * 100) / 100
+    : 0;
   const beneficioCLP = Math.round(beneficioUF * valorUF);
 
   const baseCalculo = aplica
-    ? `${anosComputables} año(s) de 12 meses completos computables × ${B.ufPorAno} UF = ${beneficioUF.toLocaleString('es-CL')} UF mensuales ($${beneficioCLP.toLocaleString('es-CL')} con UF $${Math.round(valorUF).toLocaleString('es-CL')}).${meses > B.mesesMaximos ? ' Se aplicó el máximo de 300 meses computables.' : ''}`
+    ? `${mesesComputables} meses computables ÷ 12 = ${anosComputables.toLocaleString('es-CL', { maximumFractionDigits: 2 })} año(s) × ${B.ufPorAno} UF = ${beneficioUF.toLocaleString('es-CL')} UF mensuales ($${beneficioCLP.toLocaleString('es-CL')} con UF $${Math.round(valorUF).toLocaleString('es-CL')}).${meses > B.mesesMaximos ? ' Se aplicó el máximo de 300 meses computables.' : ''}`
     : motivosNoAplica.join(' ');
 
   return {
@@ -135,8 +139,8 @@ export function beneficioAnosCotizadosToResults(
       format: 'UF',
     });
     results.push({
-      label: 'Años cotizados computables (de 12 meses)',
-      value: result.anosComputables,
+      label: 'Años cotizados computados',
+      value: Math.round(result.anosComputables * 100) / 100,
       format: 'number',
     });
     results.push({

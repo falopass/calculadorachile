@@ -5650,8 +5650,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         name: 'Superintendencia de Pensiones — NCG N° 350',
-        url: 'https://www.spensiones.cl/portal/institucional/594/articles-16871_recurso_1.pdf',
-        note: 'Requisitos copulativos y tabla de aumento gradual del mínimo de cotizaciones para mujeres',
+        url: 'https://www.spensiones.cl/apps/GetFile.php?id=003&namefile=NCG-SP%2FNP0000350.pdf',
+        note: 'Requisitos copulativos, cómputo proporcional de meses y tabla de aumento gradual del mínimo para mujeres',
       },
     ],
     keywords: [

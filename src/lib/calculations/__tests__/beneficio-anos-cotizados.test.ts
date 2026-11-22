@@ -59,14 +59,15 @@ describe('calculateBeneficioAnosCotizados', () => {
     expect(r.baseCalculo).toContain('300 meses');
   });
 
-  it('solo cuentan años completos de 12 meses', () => {
+  it('los meses que no completan un año pagan proporcional (NCG 350)', () => {
     const r = calculateBeneficioAnosCotizados({
       ...baseInput,
-      mesesCotizados: 251, // 20 años + 11 meses
+      mesesCotizados: 246, // 20 años + 6 meses
     });
     expect(r.aplica).toBe(true);
-    expect(r.anosComputables).toBe(20);
-    expect(r.beneficioUF).toBeCloseTo(2.0);
+    expect(r.anosComputables).toBeCloseTo(20.5);
+    expect(r.beneficioUF).toBeCloseTo(2.05);
+    expect(r.beneficioCLP).toBe(82000); // 2,05 UF × $40.000
   });
 
   it('hombre con menos de 240 meses: no aplica', () => {
