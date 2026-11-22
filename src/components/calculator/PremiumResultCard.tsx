@@ -97,7 +97,10 @@ function generateChartSegments(results: CalculatorResult[]): ChartSegment[] {
   // Solo filas del mismo formato que el resultado principal:
   // mezclar conteos, % y CLP en un donut es engañoso (YMYL).
   const mainFormat = results.find((r) => r.highlight)?.format ?? 'CLP';
-  const sourceResults = results.filter((r) => !r.highlight && r.format === mainFormat);
+  // Las filas 'text' (veredictos, códigos) no son magnitudes: nunca van al gráfico.
+  const sourceResults = results.filter(
+    (r) => !r.highlight && r.format === mainFormat && r.format !== 'text',
+  );
 
   return sourceResults.slice(0, 6).map((result, index) => ({
     label: result.label,
@@ -159,7 +162,7 @@ function PremiumResultRow({ result, index }: { result: CalculatorResult; index: 
         {!result.advisory && (
           <span
             className={`
-              font-mono font-medium whitespace-nowrap
+              font-mono font-medium ${result.format === 'text' ? 'text-right break-words' : 'whitespace-nowrap'}
               ${result.highlight
                 ? 'text-[var(--color-primary-600)] dark:text-[var(--color-primary-400)] text-lg sm:text-xl'
                 : 'text-[var(--foreground)] dark:text-[var(--foreground-dark)] text-base'
