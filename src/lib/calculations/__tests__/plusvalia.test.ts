@@ -10,26 +10,26 @@ import { calculatePlusvalia } from '../plusvalia';
 import { UF } from '@/lib/values/constants';
 
 describe('calculatePlusvalia', () => {
-  it('vivienda habitacional con ganancia bajo 8.000 UF queda exenta', () => {
+  it('persona natural con derecho al beneficio y ganancia bajo 8.000 UF queda exenta', () => {
     const r = calculatePlusvalia({
       precioCompra: 200_000_000,
       precioVenta: 250_000_000,
       anosTenencia: 5,
-      esViviendaHabitual: true,
+      aplicaBeneficio: true,
     });
     expect(r.gananciaNeta).toBe(50_000_000);
     expect(r.exento).toBe(true);
     expect(r.impuestoPlusvalia).toBe(0);
   });
 
-  it('vivienda habitacional con ganancia sobre 8.000 UF tributa el exceso al 10%', () => {
+  it('persona natural con derecho al beneficio y ganancia sobre 8.000 UF tributa el exceso al 10%', () => {
     const exencionCLP = 8000 * UF.valor;
     const ganancia = exencionCLP + 50_000_000;
     const r = calculatePlusvalia({
       precioCompra: 100_000_000,
       precioVenta: 100_000_000 + ganancia,
       anosTenencia: 8,
-      esViviendaHabitual: true,
+      aplicaBeneficio: true,
     });
     expect(r.exento).toBe(false);
     expect(r.exencionAplicada).toBe(Math.round(exencionCLP));
@@ -46,7 +46,7 @@ describe('calculatePlusvalia', () => {
       precioCompra: 0,
       precioVenta: ganancia,
       anosTenencia: 2,
-      esViviendaHabitual: true,
+      aplicaBeneficio: true,
       cupoExentoUsadoUF: 6500,
     });
     expect(r.exencionDisponibleUF).toBe(1500);
@@ -61,7 +61,7 @@ describe('calculatePlusvalia', () => {
       precioCompra: 0,
       precioVenta: 50_000_000,
       anosTenencia: 5,
-      esViviendaHabitual: true,
+      aplicaBeneficio: true,
       cupoExentoUsadoUF: 8000,
     });
     expect(r.exencionDisponibleUF).toBe(0);
@@ -75,19 +75,32 @@ describe('calculatePlusvalia', () => {
       precioCompra: 0,
       precioVenta: 50_000_000,
       anosTenencia: 5,
-      esViviendaHabitual: true,
+      aplicaBeneficio: true,
       cupoExentoUsadoUF: 9000,
     });
     expect(r.exencionDisponibleUF).toBe(0);
     expect(r.cupoExentoUsadoUF).toBe(8000);
   });
 
-  it('inmueble no habitacional tributa 10% sin exención', () => {
+  it('tenencia de 1 año o menos no accede al beneficio (Art. 17 N°8 letra b)', () => {
+    const r = calculatePlusvalia({
+      precioCompra: 100_000_000,
+      precioVenta: 130_000_000,
+      anosTenencia: 1,
+      aplicaBeneficio: true,
+    });
+    expect(r.exencionAplicada).toBe(0);
+    expect(r.baseImponible).toBe(30_000_000);
+    expect(r.impuestoPlusvalia).toBe(3_000_000);
+    expect(r.exento).toBe(false);
+  });
+
+  it('sin derecho al beneficio tributa 10% sin exención', () => {
     const r = calculatePlusvalia({
       precioCompra: 100_000_000,
       precioVenta: 130_000_000,
       anosTenencia: 3,
-      esViviendaHabitual: false,
+      aplicaBeneficio: false,
     });
     expect(r.exencionAplicada).toBe(0);
     expect(r.gananciaNeta).toBe(30_000_000);
@@ -101,7 +114,7 @@ describe('calculatePlusvalia', () => {
       precioVenta: 150_000_000,
       anosTenencia: 5,
       mejoras: 10_000_000,
-      esViviendaHabitual: false,
+      aplicaBeneficio: false,
     });
     expect(r.gananciaNeta).toBe(40_000_000);
     expect(r.impuestoPlusvalia).toBe(4_000_000);
@@ -112,7 +125,7 @@ describe('calculatePlusvalia', () => {
       precioCompra: 200_000_000,
       precioVenta: 180_000_000,
       anosTenencia: 4,
-      esViviendaHabitual: false,
+      aplicaBeneficio: false,
     });
     expect(r.gananciaNeta).toBeLessThan(0);
     expect(r.impuestoPlusvalia).toBe(0);
@@ -124,13 +137,13 @@ describe('calculatePlusvalia', () => {
       precioCompra: 100_000_000,
       precioVenta: 130_000_000,
       anosTenencia: 1,
-      esViviendaHabitual: false,
+      aplicaBeneficio: false,
     });
     const r10 = calculatePlusvalia({
       precioCompra: 100_000_000,
       precioVenta: 130_000_000,
       anosTenencia: 10,
-      esViviendaHabitual: false,
+      aplicaBeneficio: false,
     });
     expect(r1.impuestoPlusvalia).toBe(r10.impuestoPlusvalia);
   });

@@ -2747,7 +2747,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     id: 'plusvalia',
     name: 'Plusvalía por Venta de Propiedad',
     description:
-      'Calcula el impuesto por plusvalía al vender una propiedad. Exención de hasta 8.000 UF (cupo vitalicio acumulado) para vivienda habitacional; el exceso paga 10%.',
+      'Calcula el impuesto por plusvalía al vender una propiedad. Exención de hasta 8.000 UF (cupo vitalicio acumulado) para personas naturales; el exceso paga 10%.',
     slug: 'calculadora-plusvalia',
     category: 'impuestos',
     featured: true,
@@ -2814,38 +2814,38 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
           'Inversiones en mejoras (no mantención) que reducen la ganancia imponible. Deben estar documentadas con facturas.',
       },
       {
-        id: 'esViviendaHabitual',
-        label: '¿Es vivienda habitacional?',
+        id: 'aplicaBeneficio',
+        label: '¿Tienes derecho al beneficio de 8.000 UF?',
         type: 'select',
         required: true,
         options: [
-          { value: 'true', label: 'Sí — vivienda con destino habitacional' },
-          { value: 'false', label: 'No — inversión u otro destino' },
+          { value: 'true', label: 'Sí — vendo como persona natural' },
+          { value: 'false', label: 'No — comerciante habitual u otro caso' },
         ],
         tooltip:
-          'La exención de 8.000 UF solo aplica a vivienda habitacional de persona natural. Para inmuebles de inversión la ganancia paga 10% completo.',
+          'El beneficio es para personas naturales (incluye terrenos y oficinas, no solo vivienda) cuyo inmueble se adquirió desde el 01-01-2004 y con más de 1 año de tenencia. No aplica si vendes bienes raíces de forma habitual (comerciante habitual).',
       },
       {
         id: 'cupoExentoUsadoUF',
         label: 'Cupo de 8.000 UF ya utilizado (UF)',
         type: 'number',
-        placeholder: '0',
+        placeholder: 'Ej: 6500',
         required: false,
         min: 0,
         tooltip:
-          'El beneficio de 8.000 UF es un cupo único para toda la vida. Si en ventas anteriores ya exentaste ganancias, indica cuántas UF usaste; solo queda disponible el saldo restante (Art. 17 N°8 letra b) LIR).',
+          'El beneficio de 8.000 UF es un cupo único para toda la vida. Si en ventas anteriores ya exentaste ganancias, indica cuántas UF usaste (escribe solo el número, ej: 6500); solo queda disponible el saldo restante (Art. 17 N°8 letra b) LIR).',
       },
     ],
     faq: [
       {
         question: '¿Qué es la plusvalía?',
         answer:
-          'La plusvalía es la ganancia obtenida al vender una propiedad por un precio superior al de compra. Se calcula como: precio de venta - precio de compra - mejoras. La Ley 21.210 permite exentar hasta 8.000 UF de mayor valor acumulado durante toda la vida para vivienda habitacional; el exceso paga un impuesto único del 10%.',
+          'La plusvalía es la ganancia obtenida al vender una propiedad por un precio superior al de compra. Se calcula como: precio de venta - precio de compra - mejoras. La Ley 21.210 permite exentar hasta 8.000 UF de mayor valor acumulado durante toda la vida para personas naturales que cumplen los requisitos; el exceso paga un impuesto único del 10%.',
       },
       {
         question: '¿Cuánto impuesto pago por vender una propiedad?',
         answer:
-          'Para vivienda habitacional la ganancia está exenta hasta 8.000 UF acumuladas en toda tu vida; sobre el exceso se aplica un impuesto único del 10% (o se puede incluir en Global Complementario). Para inmuebles no habitacionales la ganancia neta completa paga 10%. Ejemplo: si tu ganancia es de 9.000 UF y no has usado cupo, pagas 10% sobre 1.000 UF.',
+          'Si vendes como persona natural y cumples los requisitos (inmueble adquirido desde 2004, más de 1 año de tenencia, no comerciante habitual), la ganancia está exenta hasta 8.000 UF acumuladas en toda tu vida; sobre el exceso se aplica un impuesto único del 10% (o se puede incluir en Global Complementario). Sin derecho al beneficio, la ganancia neta completa paga 10%. Ejemplo: si tu ganancia es de 9.000 UF y no has usado cupo, pagas 10% sobre 1.000 UF.',
       },
       {
         question: '¿Las mejoras reducen el impuesto?',
