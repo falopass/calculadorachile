@@ -11,6 +11,9 @@ import { IVA, REAL_BRASILENO, SOL_PERUANO, PESO_COLOMBIANO, PESO_MEXICANO, BOLIV
 import { DERECHO_AD_VALOREM_GENERAL, FUENTE_ADUANAS, UMBRAL_REGIMEN_ESPECIAL_USD } from '@/lib/calculations/compras-internacionales';
 import { calculatePuntajeNemRanking } from '@/lib/calculations/puntaje-nem-ranking';
 import { PAES } from '@/lib/values/educacion';
+import { calculateIPC } from '@/lib/calculations/ipc';
+import { IPC_ULTIMO_MES, variacionIpcEntreMeses, ipcIndiceMes } from '@/lib/values/ipc-serie';
+import { formatPercentage } from '@/lib/formatters';
 
 const CTX = { uf: FALLBACK_VALUES.uf, utm: FALLBACK_VALUES.utm };
 
@@ -222,6 +225,28 @@ describe('getQuickAnswer', () => {
 
     const sinFecha = getQuickAnswer('uf-clp', CTX)!;
     expect(sinFecha.example!.caption).not.toMatch(/hoy|UF del/i);
+  });
+
+  it('ipc: variaciones del topTable contra la serie y ejemplo contra calculateIPC', () => {
+    const qa = getQuickAnswer('ipc', CTX)!;
+    expect(qa.topTable).toBeDefined();
+    const [ultY, ultM] = IPC_ULTIMO_MES.split('-').map(Number);
+    const prev = ultM === 1 ? `${ultY - 1}-12` : `${ultY}-${String(ultM - 1).padStart(2, '0')}`;
+    const dicAnterior = `${ultY - 1}-12`;
+    const interanual = `${ultY - 1}-${String(ultM).padStart(2, '0')}`;
+    const esperadas = [
+      variacionIpcEntreMeses(prev, IPC_ULTIMO_MES).variacionRedondeadaPct,
+      variacionIpcEntreMeses(dicAnterior, IPC_ULTIMO_MES).variacionRedondeadaPct,
+      variacionIpcEntreMeses(interanual, IPC_ULTIMO_MES).variacionRedondeadaPct,
+    ];
+    expect(qa.topTable!.rows).toHaveLength(3);
+    qa.topTable!.rows.forEach((row, i) => {
+      expect(row[1]).toBe(formatPercentage(esperadas[i]));
+    });
+    const r = calculateIPC({ monto: 100_000, mesInicial: dicAnterior, mesFinal: IPC_ULTIMO_MES });
+    expect(qa.example!.rows[0]).toEqual(['$100.000', formatCLP(r.montoReajustado)]);
+    expect(qa.lead).toContain(ipcIndiceMes(IPC_ULTIMO_MES)!.toLocaleString('es-CL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+    expect(qa.lead).toContain(formatPercentage(esperadas[2]));
   });
 
   it('gratificación (E-014): tope generado, fila del umbral y sin montos escritos a mano', () => {
