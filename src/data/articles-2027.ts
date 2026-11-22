@@ -153,6 +153,7 @@ export const ARTICULOS_2027: Article[] = [
   // Plan editorial #24
   {
     slug: 'cotizacion-independientes-2026-boleta',
+    embedCalculatorId: 'cotizacion-independientes',
     title: 'Cotización de independientes: Operación Renta 2027 y retención del 16%',
     description:
       'Las boletas de 2026 financian cotizaciones en la Operación Renta 2027. Base del 80%, cobertura parcial del 90%, seguros, exenciones y diferencias con la retención del 16% de 2027.',
@@ -307,6 +308,7 @@ export const ARTICULOS_2027: Article[] = [
   // Plan editorial #42
   {
     slug: 'sueldo-minimo-2027-reajuste-simular-liquido',
+    embedCalculatorId: 'sueldo-liquido',
     title:
       'Sueldo mínimo enero 2027: cómo se calcula el reajuste por IPC y qué falta para conocer el monto',
     description:
@@ -640,6 +642,7 @@ export const ARTICULOS_2027: Article[] = [
   // Temporada Navidad 2026: compras internacionales
   {
     slug: 'impuestos-compras-temu-aliexpress-shein-navidad',
+    embedCalculatorId: 'compras-internacionales',
     title: 'Compras en Temu, AliExpress y Shein para Navidad: qué impuestos pagas y cuándo',
     description:
       'Desde el 25 de octubre de 2025 las compras en plataformas extranjeras de hasta US$500 pagan IVA de 19%. Cuándo lo cobra la plataforma, cuándo se paga en Aduanas y qué cambia sobre US$500.',

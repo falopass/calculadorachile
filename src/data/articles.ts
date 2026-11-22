@@ -266,6 +266,7 @@ const articleCatalog: ArticleDraft[] = [
   articuloImpuestoSegundaCategoria,
   {
     slug: 'indemnizacion-anos-servicio-tope-90-uf-2026',
+    embedCalculatorId: 'indemnizacion-anos-servicio',
     title: 'Indemnización por años de servicio: cómo se aplica el tope de 90 UF',
     description:
       'Calcula la indemnización por años de servicio en Chile: qué sueldo se usa, cuándo se aplica el tope de 90 UF y cómo contar la antigüedad. Ejemplos en pesos.',
@@ -386,6 +387,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'aguinaldo-navidad-2026-sector-publico',
+    embedCalculatorId: 'aguinaldo',
     title: 'Aguinaldo de Navidad 2026 sector público: monto vigente, quiénes lo reciben y cuándo se paga',
     description:
       'La Ley 21.724 concede un aguinaldo de Navidad permanente al sector público: $71.206 si la remuneración líquida de noviembre es de hasta $1.060.493 y $37.666 si la supera. Requisitos, tope de $3.511.800 y qué puede cambiar con la ley de reajuste 2026.',
@@ -708,6 +710,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'feriado-irrenunciable-25-diciembre-2026',
+    embedCalculatorId: 'trabajo-en-feriado',
     title: 'Feriado irrenunciable del 25 de diciembre de 2026: quién descansa, quién trabaja y qué pasa con el 24',
     description:
       'El viernes 25 de diciembre de 2026 es feriado irrenunciable para los trabajadores del comercio (Ley 19.973). Excepciones, multas, horario del 24 de diciembre y descanso compensatorio para quienes sí trabajan.',
@@ -824,6 +827,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'embargos-cae-tgr-2026-cuentas-bienes-raices',
+    embedCalculatorId: 'credito-cae',
     title: 'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
     description:
       'Cómo la Tesorería cobró deudas CAE morosas en 2026: notificaciones, convenios, embargos de cuentas y bienes raíces, tramos de ingreso y debate legal. Fuentes TGR y guía práctica.',
@@ -1026,6 +1030,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'finiquito-2026-ejemplo-sueldo-minimo',
+    embedCalculatorId: 'finiquito',
     title: 'Finiquito 2026 con sueldo mínimo $553.553: ejemplos de despido y renuncia',
     description:
       'Cuánto puede dar un finiquito con sueldo base mínimo 2026 de $553.553: despido vs renuncia, gratificación mensual, vacaciones con calendario, descuento AFC y ejemplos auditables.',
@@ -1208,6 +1213,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'seguro-cesantia-finiquito-2026-afc',
+    embedCalculatorId: 'seguro-cesantia',
     title: 'Seguro de Cesantía y finiquito 2026: cuándo pueden descontar AFC de la indemnización',
     description:
       'Qué parte del Seguro de Cesantía puede imputar el empleador al finiquito, cuándo procede el descuento AFC, cómo revisar el certificado y qué ocurre si el despido se declara injustificado.',
@@ -1233,6 +1239,7 @@ const articleCatalog: ArticleDraft[] = [
       'cotizaciones cesantía indefinido plazo fijo',
     ],
     relatedCalculators: [
+      'calculadora-seguro-cesantia',
       'calculadora-finiquito',
       'calculadora-indemnizacion-anos-servicio',
       'calculadora-vacaciones-proporcionales',
@@ -1417,6 +1424,7 @@ const articleCatalog: ArticleDraft[] = [
   },
   {
     slug: 'como-cobrar-seguro-cesantia-afc-2026',
+    embedCalculatorId: 'seguro-cesantia',
     title: 'Cómo cobrar el seguro de cesantía en la AFC 2026: pasos, saldo y fecha de pago',
     description:
       'Pide el seguro en AFC desde el día siguiente al término. Si lo pides antes del día 30, el 1.er pago llega el jueves siguiente a ese día. Pasos y saldo.',
@@ -1593,6 +1601,7 @@ ${tablaFcsHtml()}
   },
   {
     slug: 'checklist-despues-despido-chile-2026',
+    embedCalculatorId: 'finiquito',
     title: 'Qué hacer si te despiden en Chile: checklist paso a paso 2026',
     description:
       'Qué hacer paso a paso tras un despido: finiquito, plazos, Seguro de Cesantía, presupuesto y cómo preparar el CV para volver a postular.',
@@ -1799,6 +1808,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'permiso-circulacion-segunda-cuota-agosto-2026',
+    embedCalculatorId: 'permiso-circulacion',
     title: 'Segunda cuota del permiso de circulación 2026: plazo hasta el 31 de agosto',
     description:
       'Si pagaste el permiso de circulación en dos cuotas, la segunda vence el 31 de agosto de 2026. Fechas, qué necesitas y cómo estimar el monto antes de ir a la municipalidad.',
@@ -1898,6 +1908,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'revision-tecnica-chile-2026-calendario-patente',
+    embedCalculatorId: 'permiso-circulacion',
     title: 'Calendario de revisión técnica 2026 por dígito de patente',
     description:
       'En qué mes te toca la revisión técnica según el último dígito de la patente, qué dígitos faltan en 2026, si hay prórrogas y cómo sigue el calendario en 2027.',
@@ -3188,6 +3199,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'todo-sobre-uf-chile',
+    embedCalculatorId: 'uf-clp',
     title: 'Todo sobre la UF en Chile: qué es y cómo se usa',
     description:
       'Guía completa sobre la Unidad de Fomento (UF) en Chile: qué es, cómo se actualiza, para qué se usa y cómo convertirla a pesos.',
@@ -3464,6 +3476,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'reajuste-arriendo-uf-2026',
+    embedCalculatorId: 'reajuste-arriendo',
     title: 'Reajuste de arriendo por UF e IPC en Chile 2026',
     seoTitle: 'Reajuste de Arriendo por UF 2026: cómo calcularlo en Chile',
     seoDescription:
@@ -3661,6 +3674,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'subsidios-minvu-2026-guia',
+    embedCalculatorId: 'subsidio-habitacional',
     title: 'Subsidios MINVU 2026: DS49, DS1, DS19 y arriendo',
     seoTitle: 'Subsidios MINVU 2026: DS49, DS1, DS19 y fechas',
     seoDescription:
@@ -3821,6 +3835,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'cambio-afp-2026-como-hacerlo',
+    embedCalculatorId: 'comparador-afp',
     title: 'Cómo cambiarse de AFP en Chile 2026: pasos y plazos',
     description:
       'Pide el cambio en la AFP de destino, revisa cuándo se traspasan tus fondos y qué verificar en tu primera liquidación. El trámite es gratis.',
@@ -3916,6 +3931,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'comparativa-comisiones-afp-2026',
+    embedCalculatorId: 'comparador-afp',
     title: 'Comparativa de comisiones AFP 2026: cuál te conviene',
     seoTitle: 'Comisiones AFP 2026 Chile: la más barata y la más cara',
     seoDescription:
@@ -4137,6 +4153,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'cae-renegociacion-condonacion-2026',
+    embedCalculatorId: 'credito-cae',
     title: 'CAE en 2026: rebajar cuota, suspender y regularizar mora',
     description:
       'Qué hacer con el CAE según estés al día, con cuota alta, cesante, moroso o en TGR: rebaja al 10%, suspensión, reprogramación y estado del FES.',
@@ -4245,6 +4262,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'tope-imponible-2026',
+    embedCalculatorId: 'tope-imponible-90-uf',
     title: 'Tope imponible 90 UF: qué es y por qué importa en 2026',
     seoTitle: 'Tope Imponible 2026 en Chile: AFP, salud y cesantía',
     seoDescription:
@@ -4363,6 +4381,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'subsidio-electrico-2026-resultados-descuento-cuenta',
+    embedCalculatorId: 'subsidio-electrico',
     title: 'Subsidio Eléctrico 2026: cómo revisar resultados y descuento en la cuenta de luz',
     description:
       'Revisa los resultados del Subsidio Eléctrico 2026, los montos según integrantes del hogar, las seis cuotas del descuento y qué hacer si no apareces como beneficiario.',
@@ -4493,6 +4512,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'bono-trabajo-mujer-sej-pago-anual-2026-sue',
+    embedCalculatorId: 'sueldo-liquido',
     title: 'BTM y SEJ 2026: pago anual de agosto y transición al SUE',
     description:
       'Qué revisan las beneficiarias del Bono al Trabajo de la Mujer y del Subsidio al Empleo Joven en el pago anual 2026, y cómo se relaciona con el nuevo SUE.',
@@ -4639,6 +4659,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'pgu-aumento-septiembre-2026-75-anos',
+    embedCalculatorId: 'pgu',
     title: 'PGU septiembre 2026: aumento para personas de 75 años o más',
     description:
       'Qué cambia en septiembre de 2026 para la PGU: quiénes de 75 años o más acceden al monto máximo, cuánto es, cuándo se aplica y qué casos deben consultarse.',
@@ -4776,6 +4797,7 @@ ${DESEMPLEO_INE_HTML}
   },
   {
     slug: 'asignacion-familiar-2026-tramos-montos',
+    embedCalculatorId: 'asignacion-familiar',
     title: 'Asignación Familiar 2026: tramos, montos y pago por cada carga',
     description:
       'Montos vigentes de la Asignación Familiar 2026, cómo leer los tramos de ingreso, quién paga el beneficio y qué revisar antes de reclamar por una carga.',
