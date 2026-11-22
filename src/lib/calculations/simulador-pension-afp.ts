@@ -184,17 +184,22 @@ export function calculateSimuladorPensionAfp(
   const pensionMensual = Math.round(saldoProyectado / (MESES_POR_ANO * cnuAplicado));
 
   // CEV (mujeres 65+): compensa hasta igualar la pensión de un hombre
-  // de la misma edad y saldo (ChileAtiende ficha 130452). La base de
-  // cálculo no supera 18 UF mensuales y la compensación no es inferior
-  // a 0,25 UF cuando es positiva.
+  // de la misma edad y saldo (ChileAtiende ficha 130452). El monto es
+  // el factor de corrección (diferencia relativa entre las pensiones)
+  // aplicado a una base de cálculo que no supera 18 UF mensuales; la
+  // compensación no es inferior a 0,25 UF cuando es positiva.
   const cnuHombre = calcularCNU('hombre', edad, anioPension, tasa);
-  const topeCev = 18 * valorUF;
+  const topeBaseCev = 18 * valorUF;
   const pensionEquivalenteHombre = Math.round(
     saldoProyectado / (MESES_POR_ANO * cnuHombre),
   );
   const cevAplica = input.sexo === 'mujer' && edad >= 65;
+  const factorCorreccion =
+    pensionMensual > 0
+      ? Math.max(0, pensionEquivalenteHombre / pensionMensual - 1)
+      : 0;
   const diferenciaCev = cevAplica
-    ? Math.max(0, Math.min(pensionEquivalenteHombre, topeCev) - Math.min(pensionMensual, topeCev))
+    ? Math.round(Math.min(pensionMensual, topeBaseCev) * factorCorreccion)
     : 0;
   const cevMensual =
     diferenciaCev > 0 ? Math.max(diferenciaCev, Math.round(0.25 * valorUF)) : 0;
