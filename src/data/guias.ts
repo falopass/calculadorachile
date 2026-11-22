@@ -762,7 +762,7 @@ export const guias: Guia[] = [
       'cotización independientes',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 20,
     relatedCalculators: [
       'calculadora-iva',
@@ -877,6 +877,7 @@ export const guias: Guia[] = [
 <li><strong>Cobertura completa:</strong> cotiza sobre 100% de la renta imponible anual y entrega cobertura completa entre julio de 2026 y junio de 2027.</li>
 <li><strong>Cobertura parcial:</strong> en 2026 calcula salud y pensiones sobre 80% de la renta imponible; ATEP, SANNA y SIS mantienen cobertura sobre la base completa definida para esos seguros. Puede aumentar la devolución, pero reduce prestaciones de salud y pensión.</li>
 </ul>
+<p>La opción de cotizar sobre base reducida existe solo hasta la <strong>Operación Renta 2027</strong> inclusive (rentas de 2026). Desde la Operación Renta 2028 la base de cotización será completa, según el calendario de la Subsecretaría de Previsión Social.</p>
 <p>No todas las personas están obligadas en idénticos términos. El umbral oficial se expresa en honorarios anuales equivalentes a cinco ingresos mínimos mensuales y existen reglas por edad, pensión, afiliación y cotización simultánea. La guía anterior usaba “5 UTM mensuales” y “7,5 UTA”, parámetros que no corresponden a esta prueba.</p>
 <p>La retención se aplica al emitir aunque después resulte una excepción previsional. La situación final se resuelve en el F22, no modificando manualmente el ${tasaHonorarios(HON.tasa)} de cada boleta.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Cobertura no es devolución</strong><p>Elegir solo por “cuánto me devuelven” puede reducir el monto de licencias médicas, protección maternal y ahorro previsional. Consulta el simulador de la Subsecretaría de Previsión Social antes de confirmar.</p></div></aside>`,
@@ -902,7 +903,7 @@ export const guias: Guia[] = [
 <h3>Checklist mensual</h3>
 <ol class="steps"><li>Clasifica la operación: factura afecta, factura exenta o boleta de honorarios.</li><li>Emite con fecha, RUT y descripción correctos.</li><li>Confirma quién retiene o paga PPM.</li><li>Declara F29 dentro del calendario SII aplicable a tu modalidad.</li><li>Concilia registro de compras/ventas, boletas y pagos.</li><li>Guarda respaldo de gastos efectivos o proyecta el 30% presunto.</li><li>Reserva caja para impuesto y cotizaciones; el líquido no es utilidad libre.</li></ol>
 <p>Calcula bruto y líquido con la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta</a>, IVA con la <a href="/calculadoras/calculadora-iva">calculadora de IVA</a> y el escenario anual con la <a href="/calculadoras/calculadora-operacion-renta">calculadora de Operación Renta</a>. Cada herramienta responde una etapa distinta.</p>
-<p>Contenido verificado al 13 de julio de 2026 con DL 825, SII, Ley 21.133 y Subsecretaría de Previsión Social. Preguntas de comunidades se usaron para detectar la falsa división de la retención, dudas bruto/líquido y boleteo subordinado; no como fuente tributaria.</p>
+<p>Contenido verificado al 21 de noviembre de 2026 con DL 825, SII, Ley 21.133 y Subsecretaría de Previsión Social. Preguntas de comunidades se usaron para detectar la falsa división de la retención, dudas bruto/líquido y boleteo subordinado; no como fuente tributaria.</p>
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Una sociedad, exportación de servicios, cliente extranjero, plataforma digital o combinación de sueldo y honorarios puede requerir análisis específico. Prevalecen tu régimen, documentos y las instrucciones vigentes del SII.</p></div></aside>`,
       },
     ],
@@ -932,7 +933,7 @@ export const guias: Guia[] = [
       'tabla amortización francesa',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 20,
     relatedCalculators: [
       'calculadora-credito-hipotecario',
@@ -1061,7 +1062,7 @@ export const guias: Guia[] = [
 <ol class="steps"><li>Compara ofertas con igual monto, plazo, moneda y fecha.</li><li>Lee tasa, CAE, costo total, seguros y gastos por separado.</li><li>Confirma tasación y aprobación jurídica de la propiedad.</li><li>Simula UF alta y pérdida parcial de ingreso.</li><li>Revisa cláusula de prepago, mora, seguros y alzamiento.</li><li>No firmes promesa sin salida por rechazo o tasación insuficiente.</li></ol>
 <p>Verifica que banco, cooperativa, compañía de seguros o administrador de mutuos figure en los registros de la CMF cuando corresponda. Un ejecutivo legítimo puede pedir antecedentes financieros para evaluar, pero no necesita tu ClaveÚnica, clave bancaria ni códigos de autorización. Tampoco transfieras “gastos de aprobación” a una cuenta personal: exige canal institucional y comprobante con el concepto.</p>
 <p>La aprobación tiene etapas. Una simulación pública no revisa tus ingresos; una preevaluación no aprueba la garantía; y la aprobación comercial puede quedar condicionada al estudio de títulos, tasación, seguros y firma. Pregunta qué condiciones siguen pendientes y hasta qué fecha se mantiene la tasa ofrecida. Si la escritura difiere de la cotización, detén la firma y pide explicación por escrito.</p>
-<p>Contenido revisado al 13 de julio de 2026. Una simulación no constituye aprobación ni oferta; prevalecen cotización, pólizas y escritura.</p>`,
+<p>Contenido revisado al 21 de noviembre de 2026. Una simulación no constituye aprobación ni oferta; prevalecen cotización, pólizas y escritura.</p>`,
       },
     ],
   },
@@ -1090,7 +1091,7 @@ export const guias: Guia[] = [
       'aporte adicional empleador',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 20,
     relatedCalculators: [
       'calculadora-comparador-afp',
@@ -1152,7 +1153,7 @@ export const guias: Guia[] = [
 </table>
 <p>Las tasas publicadas por la <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-2815.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a> muestran cuánto cobra cada administradora sobre la remuneración imponible. En un imponible de $1.000.000, la diferencia mensual entre 0,46% y 1,45% es $9.900. Es un costo verificable, pero no basta para anticipar la pensión: servicio, trámites y rentabilidad deben compararse en el mismo fondo y período, nunca mezclando un Fondo A con un Fondo E.</p>
 <p>Quienes ingresan por primera vez al sistema son asignados a la AFP adjudicataria de la licitación vigente durante el período legal correspondiente. Por eso, “elegir la más barata” no siempre es una acción inmediata para una persona recién afiliada. La cartola y el certificado de afiliación permiten comprobar dónde están llegando las cotizaciones.</p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El aporte patronal no se descuenta del líquido</strong><p>El SIS y la nueva cotización previsional son de cargo del empleador. Hasta julio de 2026, el SIS vigente es 1,62% y la nueva cotización suma 1%. Desde las remuneraciones de agosto cambia la estructura: el total legal llega a 3,5%, SIS incluido. Sumarlos nuevamente produciría un costo duplicado.</p></div></aside>`,
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>El aporte patronal no se descuenta del líquido</strong><p>Desde las remuneraciones de agosto de 2026 el costo previsional de cargo del empleador es 3,5% total, SIS incluido: 0,1% a cuenta individual, 0,9% a la Cotización con Rentabilidad Protegida y 2,5% al Seguro Social Previsional, que financia la compensación a mujeres y el SIS licitado (1,78% para empleadores). Sumar la nueva cotización y el SIS por separado produciría un costo duplicado.</p></div></aside>`,
       },
       {
         id: 'topes-y-tipos-cuenta',
@@ -1191,11 +1192,11 @@ export const guias: Guia[] = [
         id: 'pgu-2026',
         title: 'PGU: Pensión Garantizada Universal',
         level: 2,
-        html: `<p>La <strong>PGU</strong> es un beneficio estatal para personas desde los 65 años que cumplen requisitos de focalización, residencia y pensión base. A julio de 2026, los valores oficiales informados por <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ChileAtiende</a> son:</p>
-<ul class="data-grid"><li><span class="data-grid__label">Máximo entre 65 y 74 años</span><span class="data-grid__value">$231.732</span></li><li><span class="data-grid__label">Máximo desde 75 años (sep-2026)</span><span class="data-grid__value">$250.275</span></li><li><span class="data-grid__label">Pensión base para máximo completo</span><span class="data-grid__value">Hasta $789.139</span></li><li><span class="data-grid__label">Límite superior de pensión base</span><span class="data-grid__value">$1.252.602</span></li></ul>
+        html: `<p>La <strong>PGU</strong> es un beneficio estatal para personas desde los 65 años que cumplen requisitos de focalización, residencia y pensión base. A noviembre de 2026, los valores oficiales informados por <a href="https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ChileAtiende</a> son:</p>
+<ul class="data-grid"><li><span class="data-grid__label">Máximo entre 65 y 74 años</span><span class="data-grid__value">$231.732</span></li><li><span class="data-grid__label">Máximo desde 75 años</span><span class="data-grid__value">$250.275</span></li><li><span class="data-grid__label">Pensión base para máximo completo</span><span class="data-grid__value">Hasta $789.139</span></li><li><span class="data-grid__label">Límite superior de pensión base</span><span class="data-grid__value">$1.252.602</span></li></ul>
 <p>Si la pensión base es igual o inferior a $789.139, corresponde el máximo del tramo de edad, siempre que se cumplan los demás requisitos. Entre $789.139 y $1.252.602 el monto disminuye; desde el límite superior no corresponde PGU. “Pensión base” es un concepto legal calculado por el IPS y no necesariamente coincide con el depósito mensual que la persona ve en su cuenta.</p>
 <p>La focalización tampoco se resuelve mirando solo el tramo del Registro Social de Hogares: el requisito es no integrar el 10% más rico de la población y el IPS evalúa antecedentes del grupo familiar conforme a la ley. También se exige residencia en Chile por al menos 20 años desde los 20 años de edad —continuos o discontinuos— y cuatro de los últimos cinco años anteriores a la solicitud, salvo reglas especiales aplicables.</p>
-<p>El aumento a $250.275 se implementa por edades: ya alcanza a quienes tienen 82 años o más; desde septiembre de 2026 se extiende a las personas de 75 años o más y desde septiembre de 2027, a quienes tengan 65 años o más. Se puede solicitar aunque la persona continúe trabajando. La <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a> sirve para aproximar el componente por pensión base, pero no reemplaza la evaluación del IPS.</p>`,
+<p>El aumento a $250.275 se implementa por edades: ya alcanza a quienes tienen 75 años o más desde septiembre de 2026, y desde septiembre de 2027 se extenderá a todas las personas de 65 años o más. Se puede solicitar aunque la persona continúe trabajando. La <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a> sirve para aproximar el componente por pensión base, pero no reemplaza la evaluación del IPS.</p>`,
       },
       {
         id: 'reforma-2025',
@@ -1206,11 +1207,11 @@ export const guias: Guia[] = [
 <thead><tr><th>Remuneración</th><th>Costo previsional de cargo del empleador</th><th>Distribución relevante</th></tr></thead>
 <tbody>
 <tr><td>Hasta julio de 2026</td><td>1% nuevo + SIS vigente de 1,62%</td><td>0,1% a cuenta individual y 0,9% al FAPP; SIS separado</td></tr>
-<tr><td>Desde agosto de 2026</td><td>3,5% total, SIS incluido</td><td>0,1% individual; 1% compensación a mujeres; 0,9% cotización con rentabilidad protegida; 1,5% SIS</td></tr>
+<tr><td><strong>Desde agosto de 2026 (vigente)</strong></td><td><strong>3,5% total, SIS incluido</strong></td><td><strong>0,1% individual; 0,9% cotización con rentabilidad protegida; 2,5% al Seguro Social Previsional (financia compensación a mujeres y SIS, licitado en 1,78% para empleadores)</strong></td></tr>
 <tr><td>Etapa final en 2033</td><td>8,5% total, SIS incluido</td><td>6% a cuentas individuales y 2,5% al Seguro Social Previsional</td></tr>
 </tbody>
 </table>
-<p>Para una remuneración imponible de $1.000.000, el costo de julio es $26.200: $10.000 de nueva cotización y $16.200 de SIS. En agosto, el total es $35.000. El aumento efectivo entre ambos meses es $8.800, no $18.800. Esta distinción importa en liquidaciones, presupuestos de contratación y calculadoras de costo empresa.</p>
+<p>Para una remuneración imponible de $1.000.000, el costo de julio de 2026 fue $26.200: $10.000 de nueva cotización y $16.200 de SIS. Desde agosto, el total es $35.000. El aumento efectivo entre ambos meses fue $8.800, no $18.800. Esta distinción importa en liquidaciones, presupuestos de contratación y calculadoras de costo empresa. Además, desde agosto de 2026 el SIS se recauda por el IPS y se transfiere al Fondo Autónomo de Protección Previsional.</p>
 <p>La cotización con rentabilidad protegida genera un registro a nombre del trabajador y se devuelve en la pensión bajo las reglas legales; no debe describirse como dinero líquido disponible. La <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html" target="_blank" rel="noopener">Superintendencia de Pensiones</a> publica la distribución y su calendario oficial.</p>
 <h3>Beneficio por Años Cotizados</h3>
 <p>Desde enero de 2026, el BAC agrega <strong>0,1 UF mensuales por cada 12 meses cotizados</strong>, con tope de 25 años, equivalente a un máximo de 2,5 UF mensuales. En la etapa inicial exige al menos 10 años cotizados para mujeres y 20 para hombres. El mínimo femenino aumenta gradualmente desde 2028 hasta llegar a 15 años en 2036. Se paga automáticamente a personas de 65 años o más pensionadas bajo las modalidades cubiertas por la ley; no se solicita como un bono aislado.</p>
@@ -1250,13 +1251,13 @@ export const guias: Guia[] = [
 <ol class="steps">
 <li><strong>Descarga cartola y certificado:</strong> confirma AFP, saldo, fondo, remuneración imponible y meses pagados.</li>
 <li><strong>Busca lagunas:</strong> cruza períodos trabajados con liquidaciones y pagos previsionales. Una deuda del empleador no se arregla cambiando el supuesto de la calculadora.</li>
-<li><strong>Distingue julio de agosto:</strong> desde agosto de 2026 el 3,5% patronal ya incluye SIS. Revisa que la liquidación o el cálculo de costo empresa no lo sume dos veces.</li>
+<li><strong>Cotización patronal vigente:</strong> desde agosto de 2026 el 3,5% ya incluye el SIS. Revisa que la liquidación o el cálculo de costo empresa no lo sume dos veces.</li>
 <li><strong>Actualiza los beneficios:</strong> consulta PGU, BAC y compensación en ChileAtiende o IPS con edad e historial real. Sus montos pueden interactuar.</li>
 <li><strong>No persigas rentabilidad mensual:</strong> compara fondos en horizontes equivalentes y considera la transición a fondos generacionales de abril de 2027.</li>
 <li><strong>Revisa beneficiarios:</strong> matrimonio, convivencia civil, hijos y otras situaciones pueden cambiar pensiones de sobrevivencia y el cálculo al pensionarse.</li>
 <li><strong>Simula un rango:</strong> compara retirarte a la edad legal con postergar, mantener o aumentar aportes. No presentes como promesa el escenario más favorable.</li>
 </ol>
-<p>Esta guía usa información oficial disponible al 13 de julio de 2026. Tasas, topes y montos previsionales cambian por fecha. Para una decisión irreversible —pensionarse, contratar renta vitalicia o retirar APV— solicita una oferta o certificado vigente y conserva el documento usado.</p>`,
+<p>Esta guía usa información oficial disponible al 21 de noviembre de 2026. Tasas, topes y montos previsionales cambian por fecha. Para una decisión irreversible —pensionarse, contratar renta vitalicia o retirar APV— solicita una oferta o certificado vigente y conserva el documento usado.</p>`,
       },
     ],
   },
@@ -1285,7 +1286,7 @@ export const guias: Guia[] = [
       'promesa compraventa vivienda',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 22,
     relatedCalculators: [
       'calculadora-subsidio-habitacional',
@@ -1299,8 +1300,12 @@ export const guias: Guia[] = [
     relatedArticles: ['reajuste-arriendo-uf-2026', 'todo-sobre-uf-chile'],
     sources: [
       {
-        label: 'MINVU — llamado DS1 2026',
-        url: 'https://www.minvu.gob.cl/noticia/minvu-anuncia-la-apertura-del-primer-llamado-de-2026-al-subsidio-para-sectores-medios/',
+        label: 'MINVU — segundo llamado DS1 2026',
+        url: 'https://www.minvu.gob.cl/programa-para-sectores-medios-compra-o-construccion-de-vivienda-segundo-llamado-2026-y-llamado-especial-tramo-4/',
+      },
+      {
+        label: 'MINVU — llamado especial DS1 Tramo 4',
+        url: 'https://www.minvu.gob.cl/postulacion/llamado-nacional-en-condiciones-especiales-para-el-tramo-4-subsidio-de-sectores-medios-d-s-1/',
       },
       {
         label: 'MINVU — proyectos DS19 2026',
@@ -1373,7 +1378,7 @@ export const guias: Guia[] = [
         id: 'subsidios-habitacionales',
         title: 'Subsidios 2026: programa, llamado y proyecto no son lo mismo',
         level: 2,
-        html: `<p>Los programas permanentes se activan mediante llamados con fechas, ahorro y condiciones específicas. A julio de 2026, el primer llamado nacional DS1 cerró el 30 de junio; publicar “postula ahora” sin convocatoria abierta sería engañoso.</p>
+        html: `<p>Los programas permanentes se activan mediante llamados con fechas, ahorro y condiciones específicas. A noviembre de 2026, el <a href="https://www.minvu.gob.cl/postulacion/segundo-llamado-nacional-2026-para-postular-al-subsidio-para-sectores-medios-d-s-1/" target="_blank" rel="noopener">segundo llamado nacional DS1</a> está abierto hasta el 27 de noviembre (postulación presencial desde el 17 y en línea desde el 18), junto a un llamado especial para el nuevo Tramo 4 con 5.000 cupos.</p>
 <table>
 <thead><tr><th>DS1 adquisición 2026</th><th>Zona regular</th><th>Ahorro del llamado</th><th>RSH general</th></tr></thead>
 <tbody>
@@ -1382,8 +1387,8 @@ export const guias: Guia[] = [
 <tr><td>Tramo 3</td><td>Vivienda hasta 2.200 UF</td><td>80 UF</td><td>RSH; tope de ingreso si supera 90%</td></tr>
 </tbody>
 </table>
-<p>En zonas norte, extremo sur, Chiloé, Palena, Juan Fernández y Rapa Nui los máximos pueden subir hasta 2.600 UF según tramo. La cuenta de ahorro debía tener 12 meses y el saldo estar disponible al 29 de mayo. Que el primer llamado no exigiera preaprobación no significa que el crédito posterior esté garantizado.</p>
-<p>DS49 se orienta a familias vulnerables y puede permitir compra sin crédito en las modalidades convocadas; sus topes y ahorro dependen del llamado y zona. DS19 no es una postulación individual abierta al “90%”: son proyectos de integración seleccionados, con cupos y precios para grupos distintos. En 2026 las entidades desarrolladoras postulan proyectos hasta agosto; una familia debe verificar que el proyecto y la unidad estén efectivamente incorporados.</p>
+<p>En zonas norte, extremo sur, Chiloé, Palena, Juan Fernández y Rapa Nui los máximos pueden subir hasta 2.600 UF según tramo. La cuenta de ahorro debe cumplir la antigüedad y saldo exigidos por cada llamado; que un llamado no exija preaprobación no significa que el crédito posterior esté garantizado.</p>
+<p>DS49 se orienta a familias vulnerables y puede permitir compra sin crédito en las modalidades convocadas; sus topes y ahorro dependen del llamado y zona. DS19 no es una postulación individual abierta al “90%”: son proyectos de integración seleccionados, con cupos y precios para grupos distintos; una familia debe verificar que el proyecto y la unidad estén efectivamente incorporados. El Tramo 4 del segundo llamado permite comprar vivienda nueva o usada de hasta 4.000 UF —4.500 UF en zonas extremas— con un aporte MINVU de 400 UF y ahorro mínimo de 200 UF.</p>
 <p>El Subsidio al Dividendo (Ley 21.748, ampliada por la Ley 21.836 en 2026) tampoco es DS1: se asigna mediante entidad financiera para vivienda nueva de hasta 6.000 UF, con rebaja de 60 puntos base en la tasa, vigente hasta mayo de 2028 o hasta 80.000 subsidios. Consulta el estado real en la Ventanilla Única Social y usa la <a href="/calculadoras/calculadora-subsidio-habitacional">calculadora de subsidio</a> solo como orientación; los montos exactos dependen de resolución, precio y zona.</p>`,
       },
       {
@@ -1399,7 +1404,7 @@ export const guias: Guia[] = [
         id: 'contribuciones',
         title: 'Contribuciones, aseo y costo tributario futuro',
         level: 2,
-        html: `<p>El Impuesto Territorial se calcula sobre avalúo fiscal afecto, no precio comercial. En el primer semestre de 2026, la exención habitacional fue $60.030.710; hasta un avalúo de $214.395.361 se aplicó tasa anual de 0,893% sobre la parte afecta y al exceso, 1,042%. Avalúos y exenciones se reajustan semestralmente, así que al comprar en julio debe consultarse el certificado vigente.</p>
+        html: `<p>El Impuesto Territorial se calcula sobre avalúo fiscal afecto, no precio comercial. En el segundo semestre de 2026, la exención habitacional es $61.711.570; hasta un avalúo de $220.398.431 se aplica tasa anual de 0,893% sobre la parte afecta y al exceso, 1,042%. Avalúos y exenciones se reajustan semestralmente, así que al comprar debe consultarse el certificado vigente.</p>
 <p>Se paga en abril, junio, septiembre y noviembre. La cuota puede incluir sobretasa fiscal, recargo de sitio no edificado o aseo municipal. Una propiedad exenta de contribuciones no necesariamente está exenta de aseo. Estacionamiento y bodega pueden tener roles y tratamiento separados.</p>
 <p>Pide certificado de deuda y acuerda prorrateo de la cuota según fecha de entrega. La <a href="/calculadoras/calculadora-contribuciones">calculadora de contribuciones</a> aproxima la tasa, pero el giro SII/TGR incorpora avalúo, exención, destino y sobretasas reales.</p>
 <p>Si en el futuro vendes con ganancia, el mayor valor tiene reglas de costo reajustado, partes relacionadas, fecha de adquisición y cupo acumulado de 8.000 UF para determinadas personas naturales. No es una exención automática por “vivienda habitual”. Revisa la <a href="/blog/plusvalia-dfl2-vs-comun-chile">guía tributaria de plusvalía</a> antes de proyectar el neto de venta.</p>`,
@@ -1431,7 +1436,7 @@ export const guias: Guia[] = [
 <h3>Checklist de cierre</h3>
 <ol class="steps"><li>Presupuesto con UF estresada y gastos permanentes.</li><li>Inspección física y documentos municipales.</li><li>Estudio de títulos y certificados recientes.</li><li>Promesa condicionada a financiamiento y títulos.</li><li>Subsidio verificado en resolución o proyecto, no en publicidad.</li><li>Deudas de contribuciones, aseo y gastos comunes resueltas.</li><li>Escritura cotejada antes de firmar.</li><li>Inscripción y entrega trazables.</li></ol>
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Fraude de instrucciones de pago</strong><p>Confirma cualquier cambio de cuenta por un canal independiente con banco, notaría o parte contractual. No uses enlaces enviados por terceros para ingresar ClaveÚnica o banca. Una dirección de correo parecida no acredita al destinatario de cientos de UF.</p></div></aside>
-<p>Información revisada al 13 de julio de 2026. Cada propiedad y llamado de subsidio requiere documentos vigentes; esta guía no reemplaza el estudio jurídico de la operación.</p>`,
+<p>Información revisada al 21 de noviembre de 2026. Cada propiedad y llamado de subsidio requiere documentos vigentes; esta guía no reemplaza el estudio jurídico de la operación.</p>`,
       },
     ],
   },
@@ -1460,7 +1465,7 @@ export const guias: Guia[] = [
       'comprar auto usado multas',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 20,
     relatedCalculators: [
       'calculadora-permiso-circulacion',
@@ -1602,7 +1607,7 @@ export const guias: Guia[] = [
 <p>Una “cuota desde” puede esconder un cuotón final, seguro financiado o precio al contado distinto. Compara el mismo vehículo y pie en todas las ofertas. Si hay compra inteligente, registra cuánto deberás pagar, refinanciar o cubrir con la devolución del auto al final, incluidos kilometraje y estado exigidos.</p>
 <p>La <a href="/calculadoras/calculadora-credito-automotriz">calculadora de crédito automotriz</a> permite reproducir cuotas cuando ingresas la tasa y cargos reales. La depreciación no sigue un porcentaje universal: estima valor de reventa con publicaciones comparables, pero presupone un margen por negociación, kilometraje y condición.</p>
 <aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">✓</span><div class="callout__body"><strong>Checklist anual</strong><p>Guarda permiso, SOAP, revisión y padrón; agenda segunda cuota si corresponde; revisa multas y TAG antes de vender; compara pólizas por cobertura y deducible; y reserva mensualmente para mantención y neumáticos. Las fechas del documento prevalecen sobre un calendario genérico.</p></div></aside>
-<p>Información revisada al 13 de julio de 2026. Tarifas, UTM, peajes y condiciones de seguros cambian; usa el certificado o tabla vigente el día del trámite.</p>`,
+<p>Información revisada al 21 de noviembre de 2026. Tarifas, UTM, peajes y condiciones de seguros cambian; usa el certificado o tabla vigente el día del trámite.</p>`,
       },
     ],
   },
@@ -1632,7 +1637,7 @@ export const guias: Guia[] = [
       'tribunales familia',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 20,
     relatedCalculators: [
       'calculadora-pension-alimenticia',
@@ -1800,7 +1805,7 @@ export const guias: Guia[] = [
 <p>La pareja debe estar casada, no separada ni divorciada, convivir en el mismo hogar —con regla para hogares de larga estadía—, pertenecer al 80% más vulnerable según RSH y acreditar cuatro de los últimos cinco años de residencia en Chile. No basta con cumplir 50 años de matrimonio.</p>
 <p>Para beneficios de personas mayores, evita mezclar programas:</p>
 <ul>
-<li><strong>PGU:</strong> a julio de 2026 el máximo es $231.732 para 65–81 años y $250.275 desde 82 años; desde septiembre de 2026 el monto mayor se extiende a 75+ y desde septiembre de 2027 a todos los 65+. Tiene requisitos de residencia, focalización y pensión base.</li>
+<li><strong>PGU:</strong> a noviembre de 2026 el máximo es $231.732 para 65–74 años y $250.275 desde 75 años; desde septiembre de 2027 el monto mayor se extenderá a todos los 65+. Tiene requisitos de residencia, focalización y pensión base.</li>
 <li><strong>Bono por Hijo:</strong> incrementa la pensión de mujeres que cumplen requisitos; no es un pago en efectivo al nacer.</li>
 <li><strong>Asignación Familiar:</strong> una persona beneficiaria de PGU puede tener causantes descendientes que vivan a su cargo bajo las reglas del sistema, pero quien recibe PGU no puede ser causante de otra Asignación Familiar.</li>
 </ul>
@@ -1818,7 +1823,7 @@ export const guias: Guia[] = [
 <li><strong>Si cambió el ingreso:</strong> revisa el promedio usado por Asignación Familiar y exige reliquidación desde mayo de 2026 cuando corresponda.</li>
 <li><strong>Si un trámite es sensible:</strong> usa Oficina Judicial Virtual, ChileAtiende, SUSESO o municipalidad. No entregues ClaveÚnica a supuestos gestores.</li>
 </ol>
-<p>Información revisada al 13 de julio de 2026. Esta guía explica reglas generales y no reemplaza una resolución judicial ni asesoría sobre una causa concreta.</p>`,
+<p>Información revisada al 21 de noviembre de 2026. Esta guía explica reglas generales y no reemplaza una resolución judicial ni asesoría sobre una causa concreta.</p>`,
       },
     ],
   },
@@ -1845,9 +1850,10 @@ export const guias: Guia[] = [
       'tasa CAE 2%',
       'contingencia ingreso 10%',
       'INGRESA',
+      'FUAS 2027',
     ],
     publishedAt: '2026-05-15',
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-11-21',
     readingTime: 21,
     relatedCalculators: [
       'calculadora-credito-cae',
@@ -1895,8 +1901,8 @@ export const guias: Guia[] = [
         id: 'estado-2026',
         title: 'CAE 2026: qué está vigente hoy',
         level: 2,
-        html: `<p>El Crédito con Garantía Estatal sigue vigente en julio de 2026. Es una línea de crédito entregada por una institución financiera para financiar parte del arancel de educación superior, regulada por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a> y administrada por Comisión Ingresa. El aval del Estado y de la institución educacional protege al acreedor frente al incumplimiento; <strong>no convierte el crédito en beca ni elimina la obligación del estudiante</strong>.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Alerta para nuevos beneficiarios 2026</strong><p>Comisión Ingresa extendió el plazo final para agendar y firmar el contrato CAE 2026 hasta el <strong>14 de julio de 2026</strong> en creditocae.cl. Si no se firma, se entiende que el estudiante no requiere el crédito y deberá financiar el arancel de otra forma. El plazo es temporal: verifica el mensaje personal antes de actuar.</p></div></aside>
+        html: `<p>El Crédito con Garantía Estatal sigue vigente en noviembre de 2026. Es una línea de crédito entregada por una institución financiera para financiar parte del arancel de educación superior, regulada por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=240080" target="_blank" rel="noopener">Ley 20.027</a> y administrada por Comisión Ingresa. El aval del Estado y de la institución educacional protege al acreedor frente al incumplimiento; <strong>no convierte el crédito en beca ni elimina la obligación del estudiante</strong>.</p>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ciclo 2027: FUAS ya cerró</strong><p>La postulación a beneficios estudiantiles para el año académico 2027 —incluido el CAE— se realizó por FUAS entre el 1 y el 22 de octubre de 2026, con extensión hasta el 5 de noviembre. Los resultados de preasignación se publican en enero de 2027 en beneficiosestudiantiles.cl e ingresa.cl. Quien no postuló en ese período debe revisar si se habilita un segundo período FUAS a comienzos de 2027.</p></div></aside>
 <p>El proyecto que propone reemplazar el CAE por el FES no está vigente como ley. Mientras no exista una ley publicada y reglas de implementación, los contratos, pagos, beneficios y cobranzas del CAE siguen funcionando bajo el régimen actual.</p>`,
       },
       {
@@ -1912,7 +1918,7 @@ export const guias: Guia[] = [
         id: 'postulacion-renovacion',
         title: 'Postulación, asignación y renovación 2026',
         level: 2,
-        html: `<p>La postulación a gratuidad, becas y créditos se realiza mediante FUAS. Para beneficios 2026 hubo un primer período entre octubre y noviembre de 2025 y un segundo entre febrero y marzo de 2026; ambos cerraron. Después vienen nivel socioeconómico, preselección, matrícula, acreditación de antecedentes y asignación. Completar FUAS no asegura CAE ni obliga a usarlo.</p>
+        html: `<p>La postulación a gratuidad, becas y créditos se realiza mediante FUAS. Para beneficios del año académico 2027 el FUAS estuvo abierto del 1 al 22 de octubre de 2026, con extensión hasta el 5 de noviembre; los resultados de preasignación se publican en enero de 2027. Completar FUAS no asegura CAE ni obliga a usarlo.</p>
 <p>Para un nuevo beneficiario CAE, el flujo 2026 fue:</p>
 <ol class="steps"><li>Completar FUAS en plazo.</li><li>Revisar preselección y condiciones de la institución.</li><li>Matricularse con derecho al crédito.</li><li>Solicitar a la casa de estudios el monto anual requerido.</li><li>Revisar la asignación definitiva.</li><li>Firmar personalmente el contrato; si es menor de edad, firma su representante legal.</li></ol>
 <p>La renovación no es automática aunque el crédito pueda cubrir la duración de la malla. Cada año hay que matricularse con derecho al CAE y solicitar monto. Para 2026, el formulario de renovantes estuvo disponible desde el 16 de diciembre de 2025 al 25 de abril de 2026, con una extensión extraordinaria del 7 al 13 de mayo. Quien no lo envió debe pactar otra forma de pago con la institución, aunque cumpla requisitos académicos.</p>
@@ -1962,7 +1968,7 @@ export const guias: Guia[] = [
         id: 'fes-condonacion',
         title: 'Proyecto FES y condonación: propuesta no es beneficio vigente',
         level: 2,
-        html: `<p>El Boletín N° 17.169-04 propone un nuevo instrumento público de Financiamiento para la Educación Superior y un plan de reorganización y condonación para deudas CAE, Fondo Solidario y Corfo. El proyecto avanzó al Senado en segundo trámite constitucional, pero <strong>al 13 de julio de 2026 no constituye una ley publicada</strong>.</p>
+        html: `<p>El Boletín N° 17.169-04 propone un nuevo instrumento público de Financiamiento para la Educación Superior y un plan de reorganización y condonación para deudas CAE, Fondo Solidario y Corfo. El proyecto sigue en segundo trámite constitucional en el Senado —primer informe de la Comisión de Educación— y <strong>al 21 de noviembre de 2026 no constituye una ley publicada</strong>.</p>
 <p>Los sitios informativos del proyecto describen condonaciones iniciales, mensuales y por pago anticipado según situación académica, de pago y cuotas cumplidas. Esas fórmulas son parte del diseño legislativo y pueden modificarse, rechazarse o reemplazarse. No existe hoy una regla vigente de “50% después de cinco años”, “condonación total después de diez” ni eliminación automática del saldo al completar 240 cuotas.</p>
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>No dejes de pagar esperando el FES</strong><p>La mora puede hacer perder beneficios actuales y activar cobranza. Una eventual ley tendrá condiciones, fechas de corte y procedimiento propios. Hasta entonces, usa suspensión, rebaja al 10%, regularización o convenio según tu situación real.</p></div></aside>
 <p>Para verificar cambios, busca el boletín en los portales del Congreso y una eventual publicación en el Diario Oficial. Una declaración política, una aprobación en comisión o una calculadora de campaña no reemplazan el texto legal final.</p>`,
@@ -1981,10 +1987,11 @@ export const guias: Guia[] = [
         id: 'checklist-cae',
         title: 'Checklist 2026 para estudiantes y deudores',
         level: 2,
-        html: `<h3>Si estudias en 2026</h3><ul><li>Revisa asignación definitiva y arancel de referencia.</li><li>Confirma matrícula con derecho a CAE.</li><li>Verifica monto anual solicitado y copago.</li><li>Si eres nuevo beneficiario, comprueba de inmediato el plazo de firma extendido al 14 de julio.</li><li>Descarga contrato, comprobante y resultado.</li></ul>
+        html: `<h3>Si postulas a 2027</h3><ul><li>El FUAS del 1 de octubre al 5 de noviembre de 2026 ya cerró; resultados en enero de 2027.</li><li>Revisa si se habilita un segundo período FUAS a comienzos de 2027.</li><li>Si te asignan CAE: matricúlate con derecho al crédito, solicita el monto anual y firma el contrato dentro del plazo que informe Ingresa.</li><li>Guarda comprobante, resultado y contrato.</li></ul>
+<h3>Si estudias en 2026</h3><ul><li>Revisa asignación definitiva y arancel de referencia.</li><li>Confirma matrícula con derecho a CAE.</li><li>Verifica monto anual solicitado y copago.</li><li>Descarga contrato, comprobante y resultado.</li></ul>
 <h3>Si ya estás pagando</h3><ul><li>Identifica banco, cuota, vencimiento y estado de mora.</li><li>Si la cuota supera 10% de tu renta bruta promedio, solicita rebaja y renueva cada seis meses.</li><li>Si estás sin ingresos, solicita suspensión antes de superar 45 días de mora.</li><li>Guarda resolución de Ingresa y verifica la cuota aplicada por el banco.</li><li>Pide liquidación antes de prepagar.</li></ul>
 <h3>Si estás en mora</h3><ul><li>Determina si la deuda sigue en el banco o existe garantía pagada y deuda en TGR.</li><li>No entregues dinero a gestores que prometan condonación legislativa.</li><li>Pregunta por regularización o convenio en el acreedor correcto.</li><li>Conserva notificaciones judiciales y busca asesoría si hay cobranza.</li></ul>
-<p>Contenido verificado al 13 de julio de 2026 con Comisión Ingresa, FUAS, Beneficios Estudiantiles, TGR, la Ley 20.027 y el estado público del Boletín 17.169-04. Las experiencias de foros se usaron para detectar confusiones sobre copago, fecha de cobro, subsidio al 10% y mora; las reglas provienen de fuentes oficiales.</p>`,
+<p>Contenido verificado al 21 de noviembre de 2026 con Comisión Ingresa, FUAS, Beneficios Estudiantiles, TGR, la Ley 20.027 y el estado público del Boletín 17.169-04. Las experiencias de foros se usaron para detectar confusiones sobre copago, fecha de cobro, subsidio al 10% y mora; las reglas provienen de fuentes oficiales.</p>`,
       },
     ],
   },
