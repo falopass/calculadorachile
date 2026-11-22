@@ -139,9 +139,9 @@ describe('calculatePorcentaje', () => {
         porcentaje: 50,
       });
       expect(result.principal! + result.diferencia!).toBe(99);
-      // $99 con 50%: ahorro $50 y final $49 (no 49,5 + 49,5).
-      expect(result.diferencia).toBe(50);
-      expect(result.principal).toBe(49);
+      // $99 con 50%: se redondea el precio final (49,5 → 50) y el ahorro se deriva (49).
+      expect(result.principal).toBe(50);
+      expect(result.diferencia).toBe(49);
     });
 
     it('un descuento del 100% deja el precio en 0', () => {

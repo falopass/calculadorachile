@@ -95,8 +95,8 @@ export function calculatePorcentaje(input: PorcentajeInput): PorcentajeResult {
       const precio = Math.round(valorA);
       const p1 = Math.min(Math.max(porcentaje, 0), 100);
       const p2 = Math.min(Math.max(descuentoAdicional, 0), 100);
-      const intermedio = precio - Math.round(precio * (p1 / 100));
-      const final = intermedio - Math.round(intermedio * (p2 / 100));
+      const intermedio = Math.round(precio * (1 - p1 / 100));
+      const final = Math.round(intermedio * (1 - p2 / 100));
       const ahorro = precio - final;
       return {
         ...base,
@@ -128,6 +128,7 @@ export function porcentajeToResults(result: PorcentajeResult): CalculatorResult[
         value: 0,
         format: 'number',
         partial: true,
+        advisory: true,
       },
     ];
   const results: CalculatorResult[] = [];
