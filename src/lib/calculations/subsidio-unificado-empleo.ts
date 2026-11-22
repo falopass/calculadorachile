@@ -143,14 +143,13 @@ export function calculateSubsidioUnificadoEmpleo(
   const cumpleRequisitos =
     motivosNoAplica.length === 0 && aporteTrabajador > 0;
 
-  // Un mes sobre el tope no se paga pero sí cuenta para la duración;
-  // solo los requisitos personales o la falta de renta la anulan.
-  const duracionMeses =
-    motivosElegibilidad.length === 0 && rb > 0
-      ? esPcD
-        ? SUE.duracionMesesPcD
-        : SUE.duracionMeses
-      : 0;
+  // La renta ≤ 2,25 IMM también se exige en la postulación (Decreto 75,
+  // art. 13): sin requisitos cumplidos no hay beneficio ni duración.
+  const duracionMeses = cumpleRequisitos
+    ? esPcD
+      ? SUE.duracionMesesPcD
+      : SUE.duracionMeses
+    : 0;
   const pagoProvisionalMensual = cumpleRequisitos
     ? Math.round(aporteTrabajador * 0.9)
     : 0;
