@@ -38,6 +38,50 @@ describe('calculatePlusvalia', () => {
     expect(r.tasaPlusvalia).toBe(10);
   });
 
+  it('cupo vitalicio usado en ventas anteriores reduce la exención (Art. 17 N°8 letra b)', () => {
+    // El cupo de 8.000 UF es acumulado durante toda la vida: si ya se
+    // exentaron 6.500 UF en ventas previas, solo quedan 1.500 UF.
+    const ganancia = 2200 * UF.valor; // 2.200 UF como en el ejemplo del SII
+    const r = calculatePlusvalia({
+      precioCompra: 0,
+      precioVenta: ganancia,
+      anosTenencia: 2,
+      esViviendaHabitual: true,
+      cupoExentoUsadoUF: 6500,
+    });
+    expect(r.exencionDisponibleUF).toBe(1500);
+    expect(r.exento).toBe(false);
+    expect(r.exencionAplicada).toBe(Math.round(1500 * UF.valor));
+    expect(r.baseImponible).toBe(Math.round(700 * UF.valor));
+    expect(r.impuestoPlusvalia).toBe(Math.round(700 * UF.valor * 0.1));
+  });
+
+  it('cupo vitalicio agotado deja la ganancia completa gravada al 10%', () => {
+    const r = calculatePlusvalia({
+      precioCompra: 0,
+      precioVenta: 50_000_000,
+      anosTenencia: 5,
+      esViviendaHabitual: true,
+      cupoExentoUsadoUF: 8000,
+    });
+    expect(r.exencionDisponibleUF).toBe(0);
+    expect(r.exencionAplicada).toBe(0);
+    expect(r.baseImponible).toBe(50_000_000);
+    expect(r.impuestoPlusvalia).toBe(5_000_000);
+  });
+
+  it('cupo usado sobre 8.000 UF se trunca al tope (nunca negativo)', () => {
+    const r = calculatePlusvalia({
+      precioCompra: 0,
+      precioVenta: 50_000_000,
+      anosTenencia: 5,
+      esViviendaHabitual: true,
+      cupoExentoUsadoUF: 9000,
+    });
+    expect(r.exencionDisponibleUF).toBe(0);
+    expect(r.cupoExentoUsadoUF).toBe(8000);
+  });
+
   it('inmueble no habitacional tributa 10% sin exención', () => {
     const r = calculatePlusvalia({
       precioCompra: 100_000_000,

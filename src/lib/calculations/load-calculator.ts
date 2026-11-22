@@ -411,7 +411,11 @@ export async function loadCalculationFn(
           precioVenta: coerceNumber(inputs.precioVenta),
           anosTenencia: coerceNumber(inputs.anosTenencia),
           mejoras: coerceNumber(inputs.mejoras, 0) || undefined,
-          esViviendaHabitual: coerceBool(inputs.esViviendaHabitual) || undefined,
+          esViviendaHabitual:
+            inputs.esViviendaHabitual === undefined || inputs.esViviendaHabitual === ''
+              ? undefined
+              : coerceBool(inputs.esViviendaHabitual),
+          cupoExentoUsadoUF: coerceNumber(inputs.cupoExentoUsadoUF, 0) || undefined,
         });
         return plusvaliaToResults(result);
       };

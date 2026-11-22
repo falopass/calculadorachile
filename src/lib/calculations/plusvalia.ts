@@ -12,6 +12,13 @@ export interface PlusvaliaInput {
   mejoras?: number;
   /** Vivienda habitacional (única o segunda vivienda con destino habitacional). */
   esViviendaHabitual?: boolean;
+  /**
+   * UF del cupo vitalicio de 8.000 UF ya utilizadas en ventas anteriores
+   * que hayan aplicado la exención. El cupo es acumulado durante toda la
+   * vida del contribuyente (Art. 17 N°8 letra b) LIR); solo queda
+   * disponible el saldo restante.
+   */
+  cupoExentoUsadoUF?: number;
 }
 
 export interface PlusvaliaResult {
@@ -23,6 +30,10 @@ export interface PlusvaliaResult {
   gananciaNeta: number;
   /** Tope de exención en UF para vivienda habitacional (8.000 UF). */
   exencionUF: number;
+  /** Cupo ya utilizado en ventas anteriores, en UF. */
+  cupoExentoUsadoUF: number;
+  /** Cupo disponible para esta venta, en UF (8.000 - usado). */
+  exencionDisponibleUF: number;
   /** Ganancia exenta aplicada en CLP. */
   exencionAplicada: number;
   /** Ganancia gravada (neta - exención). */
@@ -75,6 +86,7 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     anosTenencia,
     mejoras = 0,
     esViviendaHabitual = true,
+    cupoExentoUsadoUF = 0,
   } = input;
 
   // Validar rangos
@@ -89,8 +101,12 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
 
   const hayGanancia = gananciaNeta > 0;
 
-  // Exención: solo aplica para vivienda habitacional, hasta 8.000 UF de mayor valor.
-  const exencionEnCLP = TOPE_EXENCION_UF * UF.valor;
+  // Exención: solo aplica para vivienda habitacional, hasta 8.000 UF de
+  // mayor valor. El cupo es vitalicio y acumulado: se descuentan las UF
+  // ya exentas en ventas anteriores (Art. 17 N°8 letra b) LIR).
+  const cupoUsadoUF = Math.max(0, Math.min(cupoExentoUsadoUF, TOPE_EXENCION_UF));
+  const exencionDisponibleUF = TOPE_EXENCION_UF - cupoUsadoUF;
+  const exencionEnCLP = exencionDisponibleUF * UF.valor;
   const exencionAplicada = esViviendaHabitual && hayGanancia
     ? Math.min(gananciaNeta, exencionEnCLP)
     : 0;
@@ -118,6 +134,8 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     gananciaBruta: Math.round(gananciaBruta),
     gananciaNeta: Math.round(gananciaNeta),
     exencionUF: TOPE_EXENCION_UF,
+    cupoExentoUsadoUF: Math.round(cupoUsadoUF * 100) / 100,
+    exencionDisponibleUF: Math.round(exencionDisponibleUF * 100) / 100,
     exencionAplicada: Math.round(exencionAplicada),
     baseImponible: Math.round(baseImponible),
     tasaPlusvalia,
@@ -148,10 +166,17 @@ export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] 
 
   if (result.esViviendaHabitual) {
     results.push({
-      label: `Exención Vivienda Habitacional (${result.exencionUF} UF)`,
+      label: `Exención Vivienda Habitacional (hasta ${result.exencionDisponibleUF} UF disponibles)`,
       value: result.exencionAplicada,
       format: 'CLP',
     });
+    if (result.cupoExentoUsadoUF > 0) {
+      results.push({
+        label: 'Cupo exento usado en ventas anteriores',
+        value: result.cupoExentoUsadoUF,
+        format: 'UF',
+      });
+    }
   }
 
   results.push({
