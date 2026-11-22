@@ -48,6 +48,8 @@ export interface PlusvaliaResult {
   impuestoPlusvalia: number;
   exento: boolean;
   aplicaBeneficio: boolean;
+  /** Tenencia > 1 año, requisito del beneficio (4 años en venta por pisos/subdivisión). */
+  cumpleTenencia: boolean;
 }
 
 /**
@@ -80,8 +82,8 @@ const TASA_IMPUESTO_UNICO = PLUSVALIA_INMOBILIARIA.tasa_impuesto_unico;
  *     en su vida; sobre el exceso, 10% impuesto único sustitutivo
  *     (o IGC). Aplica a viviendas, oficinas, terrenos, etc.
  *   - Sin derecho al beneficio (ej. comerciante habitual o
- *     tenencia <= 1 año): 10% impuesto único sobre la ganancia
- *     neta (o IGC, a elección).
+ *     tenencia <= 1 año): el mayor valor es renta y tributa vía
+ *     IGC o IDPC; el módulo solo entrega una referencia al 10%.
  *
  * Base legal: Art. 17 N°8 letra b) LIR, Ley 21.210.
  *
@@ -116,10 +118,13 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
   // ley exige tenencia superior a 1 año (4 en venta por pisos o
   // subdivisión). Art. 17 N°8 letra b) LIR.
   const cumpleTenencia = anos > 1;
+  // Sin derecho al beneficio, el mayor valor es renta: se declara en
+  // IGC (persona natural) o IDPC. El 10% que sigue es solo referencia.
+  const beneficioCompleto = aplicaBeneficio && cumpleTenencia;
   const cupoUsadoUF = Math.max(0, Math.min(cupoExentoUsadoUF, TOPE_EXENCION_UF));
   const exencionDisponibleUF = TOPE_EXENCION_UF - cupoUsadoUF;
   const exencionEnCLP = exencionDisponibleUF * UF.valor;
-  const exencionAplicada = aplicaBeneficio && cumpleTenencia && hayGanancia
+  const exencionAplicada = beneficioCompleto && hayGanancia
     ? Math.min(gananciaNeta, exencionEnCLP)
     : 0;
 
@@ -154,6 +159,7 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
     impuestoPlusvalia,
     exento,
     aplicaBeneficio,
+    cumpleTenencia,
   };
 }
 
@@ -163,12 +169,25 @@ export function calculatePlusvalia(input: PlusvaliaInput): PlusvaliaResult {
 export function plusvaliaToResults(result: PlusvaliaResult): CalculatorResult[] {
   const results: CalculatorResult[] = [];
 
+  const beneficioCompleto = result.aplicaBeneficio && result.cumpleTenencia;
+
   results.push({
-    label: 'Impuesto a la Ganancia',
+    label: beneficioCompleto ? 'Impuesto a la Ganancia' : 'Impuesto referencial (10%)',
     value: result.impuestoPlusvalia,
     format: 'CLP',
     highlight: true,
   });
+
+  if (!beneficioCompleto && result.gananciaNeta > 0) {
+    results.push({
+      label: 'Atención tributaria',
+      value: result.gananciaNeta,
+      format: 'CLP',
+      note: {
+        text: 'Sin derecho al beneficio de 8.000 UF (comerciante habitual o tenencia ≤ 1 año), el mayor valor es renta y se declara en IGC (persona natural) o IDPC (empresa); el 10% mostrado es solo una referencia.',
+      },
+    });
+  }
 
   results.push({
     label: 'Ganancia Neta',
