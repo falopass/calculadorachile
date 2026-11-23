@@ -32,9 +32,7 @@ import { formatCLP } from '@/lib/formatters';
 import {
   AGUINALDO_PENSIONADOS_IPS_2026,
   getIngresoMinimoVigente,
-  INDEMNIZACION,
 } from '@/lib/values/constants';
-import { anioSantiago } from '@/lib/values/fecha-santiago';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { contextoHonorarios, formatTasa } from '@/lib/values/honorarios-anio';
 import { seoPesoArgentino } from '@/lib/calculations/peso-argentino-clp';
@@ -116,19 +114,15 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- BENEFICIOS LABORALES Y TÉRMINO DE CONTRATO ---
   'calculadora-finiquito': {
-    // E-026 estacional 09-11: CTR dic + puente cesantía
-    seoTitle: 'Calcular finiquito 2026: indemnización y vacaciones', // 51
-    seoDescription: `Calcula tu finiquito 2026 por causal: ${INDEMNIZACION.dias_por_año} días por año (tope ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF), vacaciones proporcionales y aviso previo. Ejemplos en pesos.`, // 138
+    seoTitle: 'Calcular finiquito 2026: cálculo por causal en Chile', // 52
+    seoDescription:
+      'Calcular finiquito 2026: cálculo de finiquito por causal con indemnización, vacaciones proporcionales y aviso previo. Ejemplos en pesos y fuentes DT.', // 149
   },
 
   'calculadora-indemnizacion-anos-servicio': {
-    // E-026: 55 caracteres / meta 148 (con los valores vigentes).
-    get seoTitle() {
-      return seoIndemnizacion().seoTitle;
-    },
-    get seoDescription() {
-      return seoIndemnizacion().seoDescription;
-    },
+    seoTitle: 'Indemnización por Años 2026: tope legal 90 UF', // 48
+    seoDescription:
+      'Calcula tu indemnización por años de servicio en Chile: 30 días por año, tope 11 años y 90 UF imponible. Ideal finiquito. Gratis DT.', // 135
   },
 
   'calculadora-vacaciones-proporcionales': {
@@ -150,9 +144,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-asignacion-familiar': {
-    seoTitle: 'Asignación familiar 2026: tramos y montos',
+    seoTitle: 'Asignación Familiar 2026: tramos y monto por carga', // 53
     seoDescription:
-      'Consulta la tabla de tramos de ingreso 2026 y estima cuánto te corresponde por cada carga familiar reconocida según tu ingreso mensual promedio.',
+      'Calcula la asignación familiar 2026 por carga acreditada: tramos $22.601, $13.870 y $4.382 según ingreso imponible. SUSESO / DT.', // 130
   },
   'calculadora-aguinaldo': {
     // Ventana diciembre: monto IPS Navidad desde constantes; SP 2026 sin ley publicada.
@@ -168,9 +162,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
   },
 
   'calculadora-iva': {
-    seoTitle: 'Calculadora IVA Chile: neto, IVA 19% y bruto',
+    seoTitle: 'Calculadora IVA Chile: agrega o quita el 19%', // 44
     seoDescription:
-      'Ingresa un precio neto para sumar el IVA del 19%, o un total con IVA para saber cuánto es el neto. Obtén los tres montos en pesos chilenos.',
+      'Calcula el IVA en Chile (19%, tasa del SII): pasa de neto a bruto o saca el IVA de un total. Ej.: $100.000 neto = $119.000 con IVA. Gratis.', // 141
   },
 
   'calculadora-boleta-honorarios': {
@@ -233,11 +227,10 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Convierte UF a pesos chilenos y al revés. Ve cuánto son 3.000 UF en la tabla de equivalencias y dónde consultar el valor oficial para otra fecha.',
   },
 
-  // E-049: si el valor vivo no está fresco, este fallback no menciona un mes fijo.
   'calculadora-utm-clp': {
-    seoTitle: 'UTM a pesos: valor mensual (SII) y conversor',
+    seoTitle: 'UTM a Pesos Hoy 2026: valor oficial en CLP al mes', // 49
     seoDescription:
-      'Consulta el valor mensual de la UTM y convierte entre UTM y pesos chilenos. Revisa qué valor del mes usar para multas y trámites.',
+      'Convierte UTM a pesos chilenos y CLP a UTM con el valor oficial del mes. Ideal multas, contratos, aranceles y patentes. Gratis SII.', // 132
   },
 
   'calculadora-compras-internacionales': {
@@ -588,9 +581,9 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
 
   // --- SUELDO Y JORNADA ---
   'calculadora-sueldo-part-time': {
-    seoTitle: 'Sueldo part time 2026: 20 y 30 horas en Chile',
+    seoTitle: 'Sueldo Part Time 30 Horas 2026: mínimo y valor hora',
     seoDescription:
-      '¿Cuánto se gana con 20 o 30 horas semanales? Calcula el sueldo mínimo mensual part time y el valor por hora, y revisa cuándo aplica el mínimo íntegro.',
+      'Con 30 horas o menos el mínimo se paga proporcional ($553.553 × horas ÷ 42); con más de 30 corresponde íntegro. Calcula el mínimo y el valor hora. DT.',
   },
 
   'calculadora-factor-hora-extra': {
@@ -745,17 +738,6 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Guía verificada para comprar vivienda en Chile: promesa, estudio de títulos, subsidios 2026, contribuciones, gastos comunes, escritura e inscripción.',
   },
 };
-
-/** E-026: title con el año en curso (Chile) y meta desde las constantes. */
-export function seoIndemnizacion(date: Date = new Date()): {
-  seoTitle: string;
-  seoDescription: string;
-} {
-  return {
-    seoTitle: `Indemnización por años de servicio ${anioSantiago(date)}: cálculo y tope`,
-    seoDescription: `Calcula tu indemnización por años de servicio: ${INDEMNIZACION.dias_por_año} días por año, tope de ${INDEMNIZACION.tope_años} años y ${INDEMNIZACION.tope_uf_mensual} UF, aviso previo y recargos del art. 168. Con fuentes de la DT.`,
-  };
-}
 
 /**
  * ============================================================================

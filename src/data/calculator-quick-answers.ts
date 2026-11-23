@@ -677,7 +677,6 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
           ? `del ${formatDDMMYYYY(ufFechaObj)}`
           : 'de hoy';
       return {
-        h1: 'Indemnización por años de servicio: cuánto te corresponde y con qué tope',
         ...withLinks([
           `Si te despiden por necesidades de la empresa o desahucio (art. 161) y llevabas un año o más, te corresponden ${INDEMNIZACION.dias_por_año} días de tu última remuneración mensual por cada año de servicio y fracción superior a seis meses, con un máximo de ${INDEMNIZACION.tope_años} años (`,
           { text: 'Dirección del Trabajo', href: DT_INDEMNIZACION_URL },
@@ -787,13 +786,6 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       // Ejemplo con el valor fresco si existe; si no, el valor de contexto
       // (comportamiento previo). El lead nunca usa el snapshot.
       const valorUTM = ctx.utmFresca?.value ?? ctx.utm;
-      // H1 con el valor del mes en curso (búsquedas "utm <mes> <año>" en GSC).
-      // Solo con el valor fresco en vivo; sin él queda el H1 estático.
-      const utmParts = ctx.utmFresca ? toSantiagoParts(new Date(ctx.utmFresca.date)) : null;
-      const h1 =
-        ctx.utmFresca && utmParts
-          ? `UTM de ${MESES_ES_CL[utmParts.month - 1]} de ${utmParts.year}: ${formatCLP(ctx.utmFresca.value)}`
-          : 'Conversor UTM a pesos';
       const montos = [0.5, 1, 2, 3, 5, 10, 12, 20, 50, 100];
       const rows = montos.map((monto) => {
         const r = calculateUTMCLP({
@@ -809,7 +801,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
         ];
       });
       return {
-        h1,
+        h1: 'Conversor UTM a pesos',
         ...withLinks(buildUTMLeadParts(ctx.utmFresca)),
         shortAnswers: [
           {
@@ -1109,7 +1101,7 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
       const r20 = calculateSueldoPartTime({ horasSemanales: 20 });
       const r30 = calculateSueldoPartTime({ horasSemanales: 30 });
       return {
-        h1: 'Sueldo part time 20 y 30 horas 2026: mínimo legal y valor hora',
+        h1: 'Sueldo part time 30 horas: mínimo legal y valor hora',
         lead: `Un part time de 20 horas gana como mínimo ${formatCLP(r20.minimoLegal)} al mes y uno de 30 horas ${formatCLP(r30.minimoLegal)}, con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)} vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)}. Con una jornada de 30 horas o menos, el ingreso mínimo se paga proporcional (${formatCLP(INGRESO_MINIMO.mensual)} × horas ÷ ${JORNADA_LEGAL.actual}). Con más de 30 y menos de ${JORNADA_LEGAL.actual} horas corresponde el mínimo íntegro (${formatCLP(INGRESO_MINIMO.mensual)}).`,
         example: {
           caption: `Mínimo legal y valor hora con el ingreso mínimo de ${formatCLP(INGRESO_MINIMO.mensual)}, vigente desde el ${fechaLargaISO(INGRESO_MINIMO.vigente_desde)} (Ley ${INGRESO_MINIMO.ley}). La jornada completa vigente es de ${jornadaVigente.horas} horas desde el ${fechaLargaISO(jornadaVigente.vigenteDesde)}${cambio}. Hasta 30 horas el mínimo es proporcional; desde 31 y hasta ${jornadaVigente.horas - 1} horas corresponde el mínimo íntegro.`,
