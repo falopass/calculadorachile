@@ -6921,6 +6921,297 @@ ${APV_FILAS_TRAMOS}
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 18 de noviembre de 2026 con la página de <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-5795.html" target="_blank" rel="noopener">beneficios tributarios y bonificación del APV de la Superintendencia de Pensiones</a>, la <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9929.html" target="_blank" rel="noopener">ficha del APV de la misma Superintendencia</a>, la <a href="https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf" target="_blank" rel="noopener">Guía Práctica de Declaración de Renta 2026 del SII</a> (págs. 30 a 33), la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a> (artículos 42 bis y 52) y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">DL 3.500</a> (artículos 20 L y 20 O) en Ley Chile.</p>`,
   },
+  {
+    slug: 'total-haberes-vs-sueldo-bruto-liquidacion',
+    title: '¿Total haberes es lo mismo que sueldo bruto? Las diferencias en tu liquidación',
+    description: `Total haberes es la suma de todo lo ganado; el sueldo bruto (imponible) es la base de los descuentos. No siempre coinciden: hay haberes no imponibles. Qué es cada columna de la liquidación y cómo llega el sueldo a líquido.`,
+    date: '2026-11-22',
+    updatedAt: '2026-11-22',
+    category: 'laboral',
+    readingTime: 6,
+    relatedGuia: 'sueldo-liquido-chile',
+    seoTitle: '¿Total haberes es lo mismo que sueldo bruto? Liquidación explicada',
+    seoDescription:
+      'Total haberes suma todo lo que ganaste; el sueldo bruto imponible es la base de descuentos. Diferencias con haberes no imponibles, ejemplo de liquidación y cómo llegar al líquido.',
+    keywords: [
+      'total haberes es lo mismo que sueldo bruto',
+      'diferencia sueldo bruto y total haberes',
+      'haberes imponibles y no imponibles',
+      'cómo leer la liquidación de sueldo',
+      'sueldo base sueldo bruto sueldo líquido',
+    ],
+    relatedCalculators: [
+      'calculadora-sueldo-liquido',
+      'calculadora-sueldo-part-time',
+      'calculadora-horas-extra',
+    ],
+    faq: [
+      {
+        question: '¿Total haberes es lo mismo que sueldo bruto?',
+        answer:
+          'No siempre. El total haberes es la suma de todos los ítems ganados, incluidos los no imponibles (colación, movilización, asignaciones). El sueldo bruto que se usa para calcular descuentos es solo la parte imponible. Si tienes haberes no imponibles, el total haberes es mayor que el bruto imponible.',
+      },
+      {
+        question: '¿Cuál es la diferencia entre sueldo base y sueldo bruto?',
+        answer:
+          'El sueldo base es el monto fijo del contrato. El bruto imponible es el sueldo base más los demás haberes imponibles (gratificación, horas extra, comisiones, bonos). El sueldo base es un componente del bruto, no lo mismo.',
+      },
+      {
+        question: '¿La gratificación es parte del sueldo bruto?',
+        answer:
+          'Sí: la gratificación es un haber imponible, así que se suma al sueldo base para formar el bruto imponible sobre el que se calculan las cotizaciones y el impuesto.',
+      },
+      {
+        question: '¿Qué haberes no se descuentan?',
+        answer:
+          'Los haberes no imponibles, como asignaciones de colación y movilización dentro de los límites legales, no pagan cotizaciones ni impuesto: se suman directo al líquido después de los descuentos.',
+      },
+    ],
+    sources: [
+      {
+        label: 'Código del Trabajo — Remuneración y haberes (arts. 41 a 54)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'Dirección del Trabajo — Últimas remuneraciones para la indemnización (art. 172)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
+      },
+    ],
+    content: `<p class="article-lead">La respuesta corta: <strong>no, no siempre</strong>. En una liquidación chilena, el <strong>total haberes</strong> es la suma de todo lo que ganaste en el mes —imponible y no imponible—, mientras que el <strong>sueldo bruto</strong> que sirve para calcular descuentos es solo la parte imponible. Si tu liquidación incluye colación, movilización u otras asignaciones no imponibles, el total haberes es mayor que el bruto sobre el que se calcula tu líquido.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría laboral ni legal. Los ejemplos usan montos y porcentajes vigentes en noviembre de 2026; tu liquidación real depende de tu contrato, AFP, sistema de salud y pactos. Ante una discrepancia con tu liquidación, la referencia es tu contrato y la Dirección del Trabajo.</p></div></aside>
+
+<p>Esta nota desarma la estructura de la liquidación de sueldo: qué entra en cada columna, por qué el "total haberes" no siempre coincide con el "total imponible", y cómo se llega del bruto al líquido. Verificado el 22 de noviembre de 2026 con las fichas de la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60136.html" target="_blank" rel="noopener">Dirección del Trabajo</a>.</p>
+
+<h2>Las tres cifras que se confunden</h2>
+<p>En una liquidación aparecen varios montos que parecen intercambiables pero no lo son:</p>
+<ul>
+<li><strong>Sueldo base:</strong> el monto fijo pactado en el contrato por la jornada ordinaria. Es un componente, no el total.</li>
+<li><strong>Total haberes (o total devengado):</strong> la suma de todos los ítems ganados en el mes: sueldo base, gratificación, horas extra, comisiones, bonos y asignaciones, tanto imponibles como no imponibles.</li>
+<li><strong>Remuneración imponible ("bruto"):</strong> la parte de los haberes sobre la que se calculan cotizaciones e impuesto. Coincide con el total haberes solo cuando no hay haberes no imponibles.</li>
+</ul>
+<p>La diferencia práctica es directa: <strong>total haberes = imponible + no imponible</strong>. Si tu liquidación solo tiene sueldo base y gratificación, ambos números coinciden; si además hay colación o movilización, el total haberes sube sin mover el bruto imponible.</p>
+
+<h2>Haberes imponibles y no imponibles</h2>
+<p>La línea que separa a los haberes es la tributaria, no el nombre del ítem:</p>
+<ul>
+<li><strong>Imponibles:</strong> sueldo base, sobresueldo, gratificación, horas extraordinarias, comisiones, bonos de producción o desempeño, aguinaldos que la ley no exime. Todo esto forma el bruto sobre el que se descuentan AFP, salud, seguro de cesantía e impuesto.</li>
+<li><strong>No imponibles:</strong> asignaciones de colación y movilización (dentro de los límites razonables que fija la práctica y la ley), viáticos de gasto, asignaciones familiares o de pérdida de caja cuando corresponden por ley. Se suman al líquido después de los descuentos.</li>
+</ul>
+<p>El punto que más importa al leer la liquidación: <strong>los descuentos se calculan sobre el imponible, no sobre el total haberes</strong>. Una colación de $100.000 no aumenta tu descuento de AFP ni tu impuesto —llega íntegra al líquido—. Ojo: que no cotice no la excluye de todo —la Dirección del Trabajo sí la incluye en la base de la indemnización por años de servicio (art. 172) cuando es mensual—.</p>
+
+<h2>Del total haberes al líquido: el camino completo</h2>
+<p>La liquidación se lee en dos columnas: haberes (lo ganado) y descuentos (lo descontado). El recorrido es:</p>
+<div class="numeric-example"><div class="numeric-example__title">De haberes a líquido</div><ul>
+<li>Total haberes = imponible + no imponible.</li>
+<li>Descuentos = cotización AFP (10% + comisión) + salud (7%) + seguro de cesantía (0,6% del trabajador con contrato indefinido) + impuesto único, todo sobre el imponible con sus topes.</li>
+<li>Sueldo líquido = total haberes − descuentos.</li></ul>
+<span class="total">El líquido = total haberes menos descuentos legales y pactados</span></div>
+<p>Un ejemplo con el sueldo mínimo vigente desde mayo de 2026 ($553.553, jornada completa, Fonasa, AFP Provida, sin haberes no imponibles): el total haberes y el imponible coinciden en $553.553, y el líquido queda en torno a $448.000 tras los descuentos. Si el mismo trabajador tuviera además $60.000 de colación no imponible, su total haberes sería $613.553, el imponible seguiría en $553.553 y el líquido subiría a unos $508.000 —la colación llega completa porque no paga descuentos.</p>
+<p>Los topes importan: el imponible que alimenta AFP y salud tiene tope de <strong>90 UF</strong> y el del seguro de cesantía de <strong>135,2 UF</strong> en 2026, por lo que en sueldos altos el descuento efectivo baja en porcentaje. La <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> aplica esos topes y muestra el detalle por ítem.</p>
+
+<h2>Ejemplo con gratificación: el bruto crece sin tocar el sueldo base</h2>
+<p>La gratificación del artículo 50 del Código del Trabajo —la modalidad más común— es el 25% de la remuneración con un tope anual de 4,75 ingresos mínimos —unos $219.000 mensuales de tope con el IMM de $553.553, calculado como 4,75 × $553.553 ÷ 12. Un trabajador con sueldo base de $500.000 y gratificación completa ($125.000 mensuales, bajo el tope) tiene:</p>
+<ul>
+<li>Sueldo base: $500.000</li>
+<li>Total haberes: $625.000 (base + gratificación, todo imponible)</li>
+<li>Imponible ("bruto"): $625.000 — mismo número porque no hay haberes no imponibles</li>
+<li>Líquido estimado con Fonasa y AFP Provida: en torno a $505.000 tras los descuentos legales</li>
+</ul>
+<p>Si a ese mismo trabajador le agregan $80.000 de colación y $40.000 de movilización, el total haberes pasa a $745.000, el imponible sigue en $625.000 y el líquido sube cerca de $625.000: los $120.000 de asignaciones llegan íntegros. Es la demostración numérica de la regla: <strong>los haberes no imponibles engordan el total y el líquido sin engordar los descuentos</strong>.</p>
+
+<h2>Para qué se usa cada cifra</h2>
+<p>Cada monto de la liquidación alimenta cálculos distintos, y confundirlos cambia el resultado:</p>
+<ul>
+<li><strong>Imponible:</strong> base de cotizaciones (AFP, salud, cesantía, mutual), del impuesto único y de beneficios con tope. También es la referencia de indemnizaciones y del cálculo de vacaciones en la práctica.</li>
+<li><strong>Total haberes:</strong> lo que realmente recibiste antes de descuentos; es la cifra que describe tu ingreso devengado del mes.</li>
+<li><strong>Líquido:</strong> lo que llega a la cuenta. Sirve para presupuestar, pero no para estimar cotizaciones ni beneficios que miran el imponible.</li>
+<li><strong>Sueldo base:</strong> el piso contractual; las horas extra y muchos bonos se calculan sobre él.</li>
+</ul>
+<p>Por eso una liquidación "sana" se verifica con dos cruces: el imponible debe ser el total haberes menos los no imponibles, y el líquido debe ser el total haberes menos los descuentos. Si alguno no cuadra, el error está en la columna que se desvía.</p>
+
+<h2>Errores comunes al leer la liquidación</h2>
+<ul>
+<li><strong>Tomar el total haberes como base de descuentos:</strong> los descuentos solo miran el imponible; si el contador liquidó cotizaciones sobre la colación, hay un error.</li>
+<li><strong>Confundir sueldo base con bruto:</strong> el contrato puede pactar $500.000 de base y aun así el bruto del mes ser $700.000 por gratificación y horas extra.</li>
+<li><strong>Esperar que el líquido sea "el total haberes menos un porcentaje fijo":</strong> el porcentaje real cambia con tu AFP (comisión distinta), tu sistema de salud y los topes.</li>
+<li><strong>Olvidar los descuentos pactados:</strong> cuentas de ahorro, préstamos u órdenes judiciales también restan del líquido sin ser cotizaciones ni impuestos.</li>
+</ul>
+
+<h2>Los topes hacen que el porcentaje de descuento no sea fijo</h2>
+<p>Otra razón por la que el líquido no es "el total haberes menos un porcentaje fijo": las cotizaciones tienen topes en UF. En 2026, la base imponible de AFP y salud se topa en <strong>90 UF</strong> y la del seguro de cesantía en <strong>135,2 UF</strong>. Un sueldo de $4.000.000 y uno de $5.000.000 pagan los mismos pesos de AFP y salud —ambos están por encima de las 90 UF (~$3,7 millones)—, por lo que el descuento efectivo cae de ~19% a menos. Esa es también la razón por la que la calculadora de sueldo líquido pide la UF del día: el tope se mueve con el indicador.</p>
+<p>Y hay un descuento que no es tuyo: el <strong>aporte del empleador</strong> al seguro de cesantía (2,4% con contrato indefinido) y a la mutualidad sale de la columna del empleador, no de tus haberes. Aparece como costo de la empresa, no como descuento en tu liquidación —confundirlo con un descuento propio es el error más común al comparar ofertas.</p>
+<p>Finalmente, el impuesto único de segunda categoría se calcula sobre la <strong>renta tributable</strong> —el imponible menos las cotizaciones— y solo entra cuando esa base supera el tramo exento (unas 13,5 UTM, cerca de $978.000 mensuales en noviembre de 2026): un imponible de $1.100.000 deja una base de unos $890.000 y queda exento. En sueldos bajos y medios el impuesto no aparece, y nunca se calcula sobre los haberes no imponibles.</p>
+
+<h2>Los descuentos pactados también entran a la columna</h2>
+<p>Después de los descuentos legales, la liquidación puede tener <strong>descuentos pactados</strong>: cuotas de préstamos del empleador, aportes a cuentas de ahorro (Cuenta 2 de la AFP, APV), seguros complementarios, órdenes judiciales como pensión de alimentos o cuotas sindicales. Estos ítems restan del líquido pero <strong>no son cotizaciones ni impuestos</strong>: no se calculan sobre el imponible, no tienen tope legal de UF y dependen de acuerdos propios. Un "descuento" que no sea legal ni pactado no debería estar en la liquidación —la Dirección del Trabajo exige que toda rebaja tenga respaldo.</p>
+<p>Eso completa el mapa: haberes (imponibles y no imponibles) menos descuentos legales menos descuentos pactados igual líquido. Cualquier cifra que no entre en esa identidad merece una pregunta al área de remuneraciones.</p>
+
+<h2>Qué revisar en tu propia liquidación</h2>
+<ol class="steps">
+<li><strong>Ubica el total haberes</strong> y separa qué ítems son imponibles y cuáles no.</li>
+<li><strong>Verifica el imponible:</strong> debe ser el total haberes menos los no imponibles.</li>
+<li><strong>Revisa los descuentos:</strong> AFP + salud + cesantía + impuesto sobre el imponible (y los pactados, si hay).</li>
+<li><strong>Comprueba el líquido:</strong> total haberes − descuentos.</li>
+<li><strong>Ojo con el nombre "bruto":</strong> en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> el campo "Sueldo Bruto" pide solo el <strong>imponible</strong>, no el total haberes con no imponibles.</li>
+<li><strong>Simúlalo</strong> en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> para confirmar que los números cuadran.</li>
+</ol>
+<p>Para profundizar en cada componente —cotizaciones, topes, impuesto y casos de part time— la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido en Chile</a> desarrolla el cálculo completo con ejemplos.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 22 de noviembre de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (arts. 41 a 54, remuneraciones y haberes; art. 172, base de la indemnización) y la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">ficha de la Dirección del Trabajo sobre las últimas remuneraciones</a>.</p>`,
+  },
+  {
+    slug: 'uf-a-pesos-chilenos-2026-cuanto-es',
+    title: '¿Cuánto es la UF en pesos chilenos? Valores de referencia 2026',
+    description: `Tabla de UF a pesos con la UF de hoy: 90 UF, 200 UF, 1.000 UF y 3.000 UF en CLP, cómo se calcula la conversión y por qué el valor cambia cada día con el IPC.`,
+    date: '2026-11-22',
+    updatedAt: '2026-11-22',
+    category: 'finanzas',
+    readingTime: 5,
+    relatedGuia: 'uf-utm-indicadores-chile',
+    embedCalculatorId: 'uf-clp',
+    seoTitle: '¿Cuánto es 200, 1.000 o 3.000 UF en pesos chilenos?',
+    seoDescription:
+      'Con la UF a $41.384,81: 200 UF son $8.276.962, 1.000 UF son $41.384.810 y 3.000 UF son $124.154.430. Fórmula UF × valor del día y tabla de conversiones.',
+    keywords: [
+      '3000 uf a pesos chilenos',
+      '1000 uf a pesos chilenos',
+      '200 uf a pesos chilenos',
+      'cuánto es la uf en pesos',
+      'valor uf hoy',
+      'uf a clp',
+    ],
+    relatedCalculators: [
+      'calculadora-uf-clp',
+      'calculadora-tope-imponible-90-uf',
+      'calculadora-utm-clp',
+    ],
+    faq: [
+      {
+        question: '¿Cuánto es 3.000 UF en pesos chilenos?',
+        answer:
+          'Con la UF a $41.384,81, 3.000 UF equivalen a $124.154.430. La cifra cambia a diario: la conversión exacta es UF × valor del día en el Banco Central.',
+      },
+      {
+        question: '¿Cuánto es 1.000 UF en pesos?',
+        answer:
+          'A $41.384,81 por UF, 1.000 UF son $41.384.810. El valor se reajusta todos los días con la variación del IPC del mes anterior.',
+      },
+      {
+        question: '¿Cuánto es 200 UF en pesos chilenos?',
+        answer:
+          '200 UF equivalen a $8.276.962 con la UF a $41.384,81. Es un monto típico en multas, seguros y contratos expresados en UF.',
+      },
+      {
+        question: '¿Por qué la UF cambia de valor todos los días?',
+        answer:
+          'Porque la UF se reajusta diariamente según la variación del IPC del mes anterior, publicada por el Banco Central. No es un precio de mercado: es un índice que acompaña la inflación.',
+      },
+      {
+        question: '¿Cuál es la diferencia entre UF y UTM?',
+        answer:
+          'La UF se reajusta a diario con el IPC y se usa para contratos, créditos y topes; la UTM es una unidad tributaria que se reajusta una vez al mes y se usa en impuestos, multas y tramos del SII. A noviembre de 2026: UF $41.384,81 y UTM $72.440.',
+      },
+    ],
+    sources: [
+      {
+        label: 'Banco Central — Serie diaria de la UF',
+        url: 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF',
+      },
+      {
+        label: 'SII — Valores de la UF 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
+      },
+      {
+        label: 'Dirección del Trabajo — ORD. 1480 (tope de 90 UF)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-111687.html',
+      },
+      {
+        label: 'SII — Valores de UTM vigentes',
+        url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
+      },
+    ],
+    content: `<p class="article-lead">Con la UF a <strong>$41.384,81</strong>, las conversiones más buscadas quedan así: <strong>200 UF = $8.276.962</strong>, <strong>1.000 UF = $41.384.810</strong> y <strong>3.000 UF = $124.154.430</strong>. La cuenta es siempre la misma —UF × valor del día— pero el valor cambia a diario porque la unidad se reajusta con el IPC. Esta nota da la tabla de referencia y explica de dónde sale el número.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría financiera ni legal. Las cifras en pesos usan la UF publicada al 22 de noviembre de 2026 ($41.384,81); la unidad se reajusta a diario, así que para un contrato, pago o cálculo formal la referencia válida es el valor del día de la operación que publica el Banco Central.</p></div></aside>
+
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>La fórmula en una línea</strong><p>Pesos = UF × valor del día. Con la UF a $41.384,81: 200 UF = $8.276.962 · 1.000 UF = $41.384.810 · 3.000 UF = $124.154.430.</p></div></aside>
+
+<p>Los valores usados aquí corresponden a la UF publicada al 22 de noviembre de 2026. Como la unidad se mueve todos los días, para una cifra al día exacta usa la <a href="/calculadoras/calculadora-uf-clp">calculadora de UF a pesos</a>, que lee el valor vigente.</p>
+
+<h2>Tabla de referencia: UF a pesos</h2>
+<div class="numeric-example"><div class="numeric-example__title">Conversión con UF a $41.384,81</div><ul>
+<li>1 UF → $41.385</li>
+<li>5 UF → $206.924</li>
+<li>90 UF → $3.724.633 (el tope imponible de AFP y salud)</li>
+<li>200 UF → $8.276.962</li>
+<li>500 UF → $20.692.405</li>
+<li>1.000 UF → $41.384.810</li>
+<li>3.000 UF → $124.154.430</li></ul>
+<span class="total">Con la UF del 22 de noviembre de 2026; para otro día, multiplica por el valor vigente ese día</span></div>
+<p>Los montos más preguntados responden a usos concretos: las <strong>90 UF</strong> son el tope de la base imponible para cotizaciones de AFP y salud (la <a href="/calculadoras/calculadora-tope-imponible-90-uf">calculadora del tope imponible</a> lo aplica); los montos de 200 a 3.000 UF aparecen en primas de seguros, multas de contratos, garantías y presupuestos de proyectos.</p>
+
+<h2>De dónde sale el valor de la UF</h2>
+<p>La Unidad de Fomento no es un precio de mercado: es un <strong>índice que el Banco Central publica y reajusta a diario</strong> según la variación del IPC del mes anterior, repartida entre los días del mes siguiente. Por eso la UF "sube un poco todos los días" en vez de saltar una vez al mes: cada jornada suma una fracción del IPC informado por el INE.</p>
+<p>La consecuencia práctica es que una cifra en pesos calculada hoy queda desactualizada mañana —en porcentaje pequeño, pero a diario. En montos grandes la diferencia se nota: 3.000 UF cambian decenas de miles de pesos en una semana de inflación alta. Para operaciones formales (un pago, una liquidación, un contrato) la conversión válida es la del <strong>día de la operación</strong>, no la de una tabla fija.</p>
+<p>El valor oficial lo fija el Banco Central de Chile, que publica la <a href="https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF" target="_blank" rel="noopener">serie diaria de la UF</a> con anticipación del mes siguiente.</p>
+
+<h2>Para qué se usa la UF en la práctica</h2>
+<p>Las búsquedas de "tantas UF a pesos" casi siempre vienen de un trámite concreto. Estos son los usos que más pesan:</p>
+<ul>
+<li><strong>Créditos hipotecarios y dividendos:</strong> los bancos pactan el dividendo en UF para que acompañe la inflación; por eso el monto en pesos sube mes a mes aunque el número de UF sea el mismo. Un dividendo de 15 UF equivale a $620.772 con la UF de hoy.</li>
+<li><strong>Seguros:</strong> las primas y deducibles de muchos seguros están en UF (2 UF de deducible = $82.770).</li>
+<li><strong>Arriendos y garantías:</strong> el valor garantía de arriendos comerciales y algunas mensualidades se pacta en UF.</li>
+<li><strong>Multas y contratos:</strong> contratos de servicios, cláusulas de cumplimiento y multas administrativas fijan montos en UF para no perder valor con el tiempo.</li>
+<li><strong>Topes legales:</strong> el tope imponible de cotizaciones (90 UF, $3.724.633 hoy) y el del seguro de cesantía (135,2 UF, $5.595.626 hoy) se reajustan con la misma unidad.</li>
+<li><strong>El SII y el Tesoro:</strong> tasaciones, contribuciones y algunos tramos tributarios usan UF (los tramos de impuesto de segunda categoría usan UTM en vez de UF).</li>
+</ul>
+<p>En todos estos casos la lógica es idéntica: el monto en UF está fijo en el contrato o la ley, y lo que se mueve es el valor diario que el Banco Central publica. Por eso la pregunta correcta no es "cuánto es X UF" a secas, sino "cuánto es X UF <strong>al día de hoy</strong>".</p>
+
+<h2>Cómo se calcula el reajuste diario</h2>
+<p>El Banco Central toma la variación del IPC del mes anterior que informa el INE y la reparte en partes iguales entre los días del mes siguiente —entre el día 10 de un mes y el 9 del siguiente, para ser exactos. Si el IPC subió 0,3%, cada día la UF sube aproximadamente un 0,01%. En un año con inflación de un 4%, la UF termina subiendo ese mismo 4% en doce meses, pero en pequeños pasos diarios en vez de un salto.</p>
+<p>Por eso la UF del 22 de noviembre ($41.384,81) no es la misma que la del 1° de noviembre ni la que regirá en diciembre. La serie completa se publica por adelantado en el sitio del Banco Central, de modo que siempre se puede conocer el valor que regirá una fecha de pago futura cercana.</p>
+
+<h2>Casos prácticos: leer un monto en UF</h2>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos con UF a $41.384,81</div><ul>
+<li>Dividendo hipotecario de 15 UF → $620.772</li>
+<li>Prima de seguro de 3 UF mensuales → $124.154</li>
+<li>Multa contractual de 200 UF → $8.276.962</li>
+<li>Garantía de 1.000 UF → $41.384.810</li>
+<li>Proyecto o presupuesto de 3.000 UF → $124.154.430</li></ul>
+<span class="total">Si el documento o la ley fijan la fecha, se usa la UF de esa fecha; si nada la fija, la del día del pago</span></div>
+<p>Cuando el monto viene de un contrato hay que revisar qué UF manda: algunos fijan "la UF vigente a la fecha de pago", otros la de la firma o la del vencimiento. Y la ley puede fijar otra —el tope de 90 UF de la indemnización por años de servicio se convierte con la UF del último día del mes anterior al pago, según el <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-111687.html" target="_blank" rel="noopener">ORD. 1480 de la Dirección del Trabajo</a>—. En una deuda de 3.000 UF, una diferencia de un mes con inflación puede significar cientos de miles de pesos en el total.</p>
+
+<h2>UF y UTM: dos unidades que no se deben confundir</h2>
+<p>La consulta "cuánto es X UF en pesos" se cruza a menudo con la <strong>UTM</strong>, la unidad tributaria mensual del SII. Son índices distintos: la UF se reajusta <strong>a diario</strong> y manda en contratos, créditos, seguros y topes previsionales; la UTM se reajusta <strong>una vez al mes</strong> y manda en impuestos, multas y tramos del SII. A noviembre de 2026 la UTM está en <strong>$72.440</strong>, bastante por encima de la UF —confundirlas en una multa o un tramo cambia la cuenta por casi el doble.</p>
+<p>Para convertir UTM a pesos se usa la misma lógica (UTM × valor del mes) en la <a href="/calculadoras/calculadora-utm-clp">calculadora de UTM a CLP</a>.</p>
+
+<h2>Cómo convertir bien, paso a paso</h2>
+<div class="steps"><ol>
+<li><strong>Toma el monto en UF</strong> tal como aparece en el contrato, la multa o la cotización.</li>
+<li><strong>Busca el valor de la UF del día que corresponde</strong> —el del pago, el del vencimiento o el de hoy— en la <a href="https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF" target="_blank" rel="noopener">serie oficial del Banco Central</a> o la <a href="https://www.sii.cl/valores_y_fechas/uf/uf2026.htm" target="_blank" rel="noopener">tabla diaria del SII</a>; la calculadora muestra el valor vigente de hoy.</li>
+<li><strong>Multiplica sin redondear la UF:</strong> usa el valor con todos sus decimales y redondea solo el total final a pesos.</li>
+<li><strong>Verifica la unidad:</strong> si el documento dice UTM, no UF, la conversión es otra (UTM × valor del mes en la calculadora de UTM).</li></ol></div>
+
+<h2>¿La UF puede bajar de valor?</h2>
+<p>En teoría sí —si el IPC fuera negativo, la UF se reajustaría a la baja— pero en la práctica solo sube, porque Chile ha tenido inflación positiva todos los años recientes. En la década 2014–2024 la UF pasó de unos $24.000 a más de $39.000: quien pacta en UF acepta que el monto en pesos crecerá con el costo de la vida, y quien cobra en UF protege el valor real de su dinero.</p>
+<p>Esa es justamente la razón de ser de la unidad: nació en 1967 como "unidad de fomento" para que los contratos de largo plazo no perdieran valor con la inflación, y hoy es la medida estándar de todo lo que se paga en cuotas o se pacta a futuro en Chile.</p>
+
+<h2>Errores comunes al convertir UF a pesos</h2>
+<ul>
+<li><strong>Usar un valor viejo de una tabla fija:</strong> la UF se mueve a diario; la referencia válida es la del día de la operación.</li>
+<li><strong>Confundir UF con UTM:</strong> casi duplica el monto en 2026.</li>
+<li><strong>Redondear la UF antes de multiplicar:</strong> en 3.000 UF, un peso de diferencia en el valor diario son $3.000 en el total.</li>
+<li><strong>Asumir que "UF de contrato" es la de hoy:</strong> los contratos suelen fijar la UF de una fecha concreta (firma, pago, vencimiento); revisa qué fecha manda el documento.</li>
+</ul>
+
+<h2>Para la conversión exacta al día</h2>
+<p>La tabla de esta nota sirve como referencia rápida con la UF de $41.384,81. Para el monto al día —o la conversión inversa de pesos a UF— la <a href="/calculadoras/calculadora-uf-clp">calculadora UF ⇄ CLP</a> toma el indicador vigente del día y muestra ambos sentidos de la cuenta. Para entender qué es la UF, cómo se reajusta y en qué se diferencia de otros indicadores, revisa la <a href="/guias/uf-utm-indicadores-chile">guía de UF y UTM en Chile</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 22 de noviembre de 2026 con la <a href="https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF" target="_blank" rel="noopener">serie diaria de la UF del Banco Central de Chile</a>, la <a href="https://www.sii.cl/valores_y_fechas/uf/uf2026.htm" target="_blank" rel="noopener">tabla de UF del SII</a> y los <a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">valores de UTM del SII</a>.</p>`,
+  },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
 ];
