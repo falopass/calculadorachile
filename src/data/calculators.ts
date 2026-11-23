@@ -9024,6 +9024,207 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
     ],
   },
+  {
+    id: 'sueldo-minimo',
+    name: 'Sueldo Mínimo 2026',
+    description:
+      'Consulta el ingreso mínimo vigente en bruto, líquido estimado, valor hora y proporcional según horas semanales y tipo de trabajador.',
+    slug: 'calculadora-sueldo-minimo',
+    category: 'sueldo',
+    featured: false,
+    phase: 1,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'Dirección del Trabajo — Ingreso mínimo mensual',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html',
+        note: 'Montos vigentes desde 01-05-2026 (Ley 21.830)',
+      },
+      {
+        name: 'Dirección del Trabajo — Valor hora',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        note: 'Fórmula del valor hora ordinario con jornada de 42 h',
+      },
+      {
+        name: 'BCN Ley Chile — Ley 21.830',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1217571',
+        note: 'Reajuste del ingreso mínimo mensual',
+      },
+    ],
+    seoTitle: 'Sueldo mínimo en Chile 2026: bruto y líquido',
+    seoDescription:
+      'Cuánto es el sueldo mínimo en Chile 2026: bruto mensual, líquido estimado con descuentos, valor hora y proporcional por jornada parcial.',
+    keywords: [
+      'sueldo mínimo chile 2026',
+      'cuanto es el sueldo mínimo en chile',
+      'ingreso mínimo mensual',
+      'sueldo mínimo líquido',
+      'sueldo mínimo por hora',
+      'sueldo mínimo part time',
+      'a cuanto esta el sueldo mínimo',
+    ],
+    inputs: [
+      {
+        id: 'horasSemanales',
+        label: 'Horas semanales pactadas',
+        type: 'number',
+        placeholder: '42',
+        required: true,
+        min: 0,
+        max: 42,
+        tooltip:
+          'Con 30 horas o menos el mínimo puede pagarse proporcional; entre 30 y 42 corresponde el mínimo íntegro.',
+      },
+      {
+        id: 'tipoIngreso',
+        label: 'Tipo de ingreso mínimo',
+        type: 'select',
+        required: true,
+        defaultValue: 'general',
+        options: [
+          { value: 'general', label: 'General (18 a 65 años)' },
+          { value: 'menor18-mayor65', label: 'Menor de 18 o mayor de 65' },
+          {
+            value: 'no-remuneracional',
+            label: 'Fines no remuneracionales',
+          },
+          { value: 'zona-extrema', label: 'Zona extrema' },
+          { value: 'jornal', label: 'Jornal (valor diario)' },
+        ],
+      },
+      {
+        id: 'incluirLiquidoEstimado',
+        label: 'Mostrar líquido estimado',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Descuenta solo lo legal mínimo: 10% AFP, 7% salud y 0,6% seguro de cesantía.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cuánto es el sueldo mínimo en Chile 2026?',
+        answer:
+          'Desde el 1 de mayo de 2026 el ingreso mínimo mensual general es de $553.553 para trabajadores de 18 a 65 años (Ley 21.830).',
+      },
+      {
+        question: '¿Cuánto es el sueldo mínimo líquido?',
+        answer:
+          'Con los descuentos legales mínimos (10% AFP, 7% salud y 0,6% seguro de cesantía en contrato indefinido) el líquido estimado es de $456.128. La comisión variable de tu AFP puede bajarlo un poco más.',
+      },
+      {
+        question: '¿Cuánto es el sueldo mínimo por hora?',
+        answer:
+          'El valor hora ordinario del ingreso mínimo con jornada de 42 horas semanales es $3.075, según la fórmula oficial de la Dirección del Trabajo.',
+      },
+      {
+        question: '¿Y si trabajo part time?',
+        answer:
+          'Con jornada de 30 horas semanales o menos el mínimo puede pagarse proporcional a las horas (IMM × horas / 42). Con más de 30 horas corresponde el mínimo íntegro.',
+      },
+      {
+        question: '¿Hay otros montos de ingreso mínimo?',
+        answer:
+          'Sí: menores de 18 y mayores de 65 perciben $412.938, el ingreso con fines no remuneracionales es $356.815, la gratificación de zona extrema $586.766 y el sueldo jornal $27.678 por jornada.',
+      },
+    ],
+  },
+  {
+    id: 'revision-tecnica',
+    name: 'Revisión Técnica por Patente',
+    description:
+      'Mes que te corresponde la revisión técnica según el último dígito de la patente, con la regla permanente del Decreto Supremo 156 del MTT.',
+    slug: 'calculadora-revision-tecnica',
+    category: 'vehiculos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-22',
+    sources: [
+      {
+        name: 'BCN Ley Chile — DS 156 MTT, art. 7',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=10183',
+        note: 'Calendario por dígito y mes de adelanto',
+      },
+      {
+        name: 'ChileAtiende — Revisión técnica',
+        url: 'https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados',
+        note: 'Periodicidad por tipo de vehículo',
+      },
+      {
+        name: 'ChileAtiende — Consultar vigencia por patente',
+        url: 'https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado',
+        note: 'Estado oficial del certificado',
+      },
+    ],
+    seoTitle: 'Revisión técnica: qué mes te toca por patente',
+    seoDescription:
+      'Descubre en qué mes te toca la revisión técnica según el último dígito de tu patente y hasta qué mes puedes adelantarla.',
+    keywords: [
+      'calendario revisión técnica',
+      'revisión técnica por patente',
+      'revisión técnica por dígito',
+      'qué mes me toca revisión técnica',
+      'permiso de circulación revisión técnica',
+    ],
+    inputs: [
+      {
+        id: 'patente',
+        label: 'Patente (placa del vehículo)',
+        type: 'text',
+        placeholder: 'ABCD12',
+        required: true,
+        tooltip:
+          'Importa solo el último dígito. Las patentes chilenas terminan en un número del 0 al 9.',
+      },
+      {
+        id: 'tipoVehiculo',
+        label: 'Tipo de revisión',
+        type: 'select',
+        required: true,
+        defaultValue: 'particular-anual',
+        options: [
+          {
+            value: 'particular-anual',
+            label: 'Vehículo particular (revisión anual)',
+          },
+          {
+            value: 'vehiculo-nuevo',
+            label: 'Vehículo nuevo (primera revisión)',
+          },
+        ],
+        tooltip:
+          'Taxis, buses, camiones de carga, transporte escolar y vehículos a gas tienen otra periodicidad que esta calculadora no cubre.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Cómo sé en qué mes me toca la revisión técnica?',
+        answer:
+          'Por el último dígito de la patente: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado.',
+      },
+      {
+        question: '¿Puedo hacerla antes de mi mes?',
+        answer:
+          'Sí: la revisión se puede hacer el mes inmediatamente anterior al que corresponde sin que cambie su vigencia.',
+      },
+      {
+        question: '¿Mi mes ya pasó, qué hago?',
+        answer:
+          'Lo que manda es la fecha de vigencia de tu certificado, no la tabla. Si está vencido no puedes circular hasta revisarlo: conducir sin revisión técnica vigente es una infracción grave.',
+      },
+      {
+        question: '¿Aplica para taxis, buses o camiones?',
+        answer:
+          'No. Este calendario rige la revisión anual de vehículos particulares. Taxis, buses, camiones de carga, transporte escolar y vehículos a gas tienen otra periodicidad.',
+      },
+      {
+        question: '¿Y si mi auto es nuevo?',
+        answer:
+          'Los vehículos nuevos livianos y medianos hacen la primera revisión entre 36 y 48 meses desde la emisión del certificado, según el dígito de la patente (Decreto 104 del MTT, 2026). Revisa la fecha en tu certificado.',
+      },
+    ],
+  },
 ];
 
 export const calculators: Calculator[] = calculatorCatalog.map((calculator) => ({

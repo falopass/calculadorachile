@@ -1475,6 +1475,39 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'sueldo-minimo': {
+      const { calculateSueldoMinimo, sueldoMinimoToResults } =
+        await import('./sueldo-minimo');
+      return (inputs) => {
+        const result = calculateSueldoMinimo({
+          horasSemanales: coerceNumber(inputs.horasSemanales),
+          tipoIngreso: (inputs.tipoIngreso as
+            | 'general'
+            | 'menor18-mayor65'
+            | 'no-remuneracional'
+            | 'zona-extrema'
+            | 'jornal') ?? 'general',
+          incluirLiquidoEstimado: coerceBool(inputs.incluirLiquidoEstimado),
+        });
+        return sueldoMinimoToResults(result);
+      };
+    }
+
+    case 'revision-tecnica': {
+      const { calculateRevisionTecnica, revisionTecnicaToResults } =
+        await import('./revision-tecnica');
+      return (inputs) => {
+        const result = calculateRevisionTecnica({
+          patente: String(inputs.patente ?? ''),
+          tipoVehiculo:
+            inputs.tipoVehiculo === 'vehiculo-nuevo'
+              ? 'vehiculo-nuevo'
+              : 'particular-anual',
+        });
+        return revisionTecnicaToResults(result);
+      };
+    }
+
     default:
       return null;
   }

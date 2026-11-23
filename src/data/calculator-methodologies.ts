@@ -1962,4 +1962,56 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Sueldo líquido estimado ≈ $1.385.904 (líquido depende de la UTM del mes por el impuesto).',
     },
   },
+  'sueldo-minimo': {
+    summary:
+      'Muestra el ingreso mínimo vigente por tipo de trabajador, aplica la regla de proporcionalidad para jornadas parciales y estima el líquido con los descuentos legales mínimos.',
+    calculationSteps: [
+      'Lee el monto del tramo vigente en el calendario del ingreso mínimo (general, menor 18/mayor 65, no remuneracional, zona extrema o jornal).',
+      'Si la jornada es parcial (≤ 30 h): bruto = monto × horas / jornada máxima legal. Si es intermedia o completa: monto íntegro.',
+      'Líquido estimado = bruto − 10% AFP − 7% salud − 0,6% seguro de cesantía (contrato indefinido).',
+      'Valor hora referencial = (bruto / 30 × 28) / (horas × 4).',
+    ],
+    assumptions: [
+      'El sueldo jornal es un valor diario: no se le aplica proporcional ni líquido estimado.',
+      'El líquido estimado usa solo descuentos legales mínimos: sin comisión variable de AFP, sin plan Isapre sobre 7% y sin impuesto, porque el mínimo está bajo el tramo de segunda categoría.',
+      'La regla de proporcionalidad de la Dirección del Trabajo se aplica a todos los tramos mensuales.',
+    ],
+    limitations: [
+      'No calcula el sueldo real: bonos, gratificación, horas extra ni otros descuentos (prestaciones, sindicato, anticipos).',
+      'El jornal y el mínimo de zona extrema se muestran como referencia del tramo, no como liquidación.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: jornada completa general',
+      inputs: ['Horas semanales: 42', 'Tipo: general'],
+      development: [
+        'Bruto = $553.553 (IMM general desde 01-05-2026)',
+        'Líquido estimado = $553.553 × (1 − 0,176) = $456.128',
+      ],
+      result: 'Bruto $553.553, líquido estimado $456.128, valor hora $3.075.',
+    },
+  },
+  'revision-tecnica': {
+    summary:
+      'Indica el mes de revisión técnica anual según el último dígito de la patente y el mes en que se puede adelantar, según el art. 7 del DS 156 del MTT.',
+    calculationSteps: [
+      'Normaliza la patente y toma su último dígito.',
+      'Busca el mes en la tabla legal: 9 enero, 0 febrero, 1 abril, 2 mayo, 3 junio, 4 julio, 5 agosto, 6 septiembre, 7 octubre, 8 noviembre.',
+      'Muestra el mes anterior como alternativa válida de adelanto.',
+    ],
+    assumptions: [
+      'La patente chilena termina en un dígito del 0 al 9.',
+      'Rige para vehículos de revisión anual; marzo y diciembre no tienen dígito asignado.',
+    ],
+    limitations: [
+      'No aplica a taxis, buses, camiones de carga, transporte escolar ni vehículos a gas, que tienen otra periodicidad.',
+      'La vigencia real la fija el certificado: si tu mes pasó, manda esa fecha, no la tabla.',
+      'No considera prórrogas regionales que el MTT dicte para zonas o dígitos específicos.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: patente terminada en 8',
+      inputs: ['Patente: ABCD-18'],
+      development: ['Último dígito = 8', 'Tabla DS 156: 8 → noviembre'],
+      result: 'Mes correspondiente: noviembre; también puede ir en octubre.',
+    },
+  },
 };
