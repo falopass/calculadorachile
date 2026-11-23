@@ -7124,6 +7124,10 @@ ${APV_FILAS_TRAMOS}
         url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
       },
       {
+        label: 'Dirección del Trabajo — ORD. 1480 (tope de 90 UF)',
+        url: 'https://www.dt.gob.cl/legislacion/1624/w3-article-111687.html',
+      },
+      {
         label: 'SII — Valores de UTM vigentes',
         url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
       },
@@ -7177,7 +7181,7 @@ ${APV_FILAS_TRAMOS}
 <li>Garantía de 1.000 UF → $41.384.810</li>
 <li>Proyecto o presupuesto de 3.000 UF → $124.154.430</li></ul>
 <span class="total">Si el documento o la ley fijan la fecha, se usa la UF de esa fecha; si nada la fija, la del día del pago</span></div>
-<p>Cuando el monto viene de un contrato hay que revisar qué UF manda: algunos fijan "la UF vigente a la fecha de pago", otros la de la firma o la del vencimiento. Y la ley puede fijar otra —el tope de 90 UF de la indemnización por años de servicio se convierte con la UF del último día del mes anterior al pago, no la del día—. En una deuda de 3.000 UF, una diferencia de un mes con inflación puede significar cientos de miles de pesos en el total.</p>
+<p>Cuando el monto viene de un contrato hay que revisar qué UF manda: algunos fijan "la UF vigente a la fecha de pago", otros la de la firma o la del vencimiento. Y la ley puede fijar otra —el tope de 90 UF de la indemnización por años de servicio se convierte con la UF del último día del mes anterior al pago, según el <a href="https://www.dt.gob.cl/legislacion/1624/w3-article-111687.html" target="_blank" rel="noopener">ORD. 1480 de la Dirección del Trabajo</a>—. En una deuda de 3.000 UF, una diferencia de un mes con inflación puede significar cientos de miles de pesos en el total.</p>
 
 <h2>UF y UTM: dos unidades que no se deben confundir</h2>
 <p>La consulta "cuánto es X UF en pesos" se cruza a menudo con la <strong>UTM</strong>, la unidad tributaria mensual del SII. Son índices distintos: la UF se reajusta <strong>a diario</strong> y manda en contratos, créditos, seguros y topes previsionales; la UTM se reajusta <strong>una vez al mes</strong> y manda en impuestos, multas y tramos del SII. A noviembre de 2026 la UTM está en <strong>$72.440</strong>, bastante por encima de la UF —confundirlas en una multa o un tramo cambia la cuenta por casi el doble.</p>
