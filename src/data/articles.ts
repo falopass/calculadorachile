@@ -7116,8 +7116,12 @@ ${APV_FILAS_TRAMOS}
     ],
     sources: [
       {
-        label: 'Banco Central de Chile — Unidad de Fomento',
-        url: 'https://www.bcentral.cl',
+        label: 'Banco Central — Serie diaria de la UF',
+        url: 'https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF',
+      },
+      {
+        label: 'SII — Valores de la UF 2026',
+        url: 'https://www.sii.cl/valores_y_fechas/uf/uf2026.htm',
       },
       {
         label: 'SII — Valores de UTM vigentes',
@@ -7141,13 +7145,13 @@ ${APV_FILAS_TRAMOS}
 <li>500 UF → $20.692.405</li>
 <li>1.000 UF → $41.384.810</li>
 <li>3.000 UF → $124.154.430</li></ul>
-<span class="total">Multiplica cualquier monto en UF por $41.384,81 para obtener su valor en pesos hoy</span></div>
+<span class="total">Con la UF del 22 de noviembre de 2026; para otro día, multiplica por el valor vigente ese día</span></div>
 <p>Los montos más preguntados responden a usos concretos: las <strong>90 UF</strong> son el tope de la base imponible para cotizaciones de AFP y salud (la <a href="/calculadoras/calculadora-tope-imponible-90-uf">calculadora del tope imponible</a> lo aplica); los montos de 200 a 3.000 UF aparecen en primas de seguros, multas de contratos, garantías y presupuestos de proyectos.</p>
 
 <h2>De dónde sale el valor de la UF</h2>
 <p>La Unidad de Fomento no es un precio de mercado: es un <strong>índice que el Banco Central publica y reajusta a diario</strong> según la variación del IPC del mes anterior, repartida entre los días del mes siguiente. Por eso la UF "sube un poco todos los días" en vez de saltar una vez al mes: cada jornada suma una fracción del IPC informado por el INE.</p>
 <p>La consecuencia práctica es que una cifra en pesos calculada hoy queda desactualizada mañana —en porcentaje pequeño, pero a diario. En montos grandes la diferencia se nota: 3.000 UF cambian decenas de miles de pesos en una semana de inflación alta. Para operaciones formales (un pago, una liquidación, un contrato) la conversión válida es la del <strong>día de la operación</strong>, no la de una tabla fija.</p>
-<p>El valor oficial lo fija el <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central de Chile</a>, que publica la serie diaria con anticipación del mes siguiente.</p>
+<p>El valor oficial lo fija el Banco Central de Chile, que publica la <a href="https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF" target="_blank" rel="noopener">serie diaria de la UF</a> con anticipación del mes siguiente.</p>
 
 <h2>Para qué se usa la UF en la práctica</h2>
 <p>Las búsquedas de "tantas UF a pesos" casi siempre vienen de un trámite concreto. Estos son los usos que más pesan:</p>
@@ -7172,8 +7176,8 @@ ${APV_FILAS_TRAMOS}
 <li>Multa contractual de 200 UF → $8.276.962</li>
 <li>Garantía de 1.000 UF → $41.384.810</li>
 <li>Proyecto o presupuesto de 3.000 UF → $124.154.430</li></ul>
-<span class="total">Si el documento dice la fecha, se usa la UF de esa fecha; si no, la del día del pago</span></div>
-<p>Cuando el monto viene de un contrato hay que revisar qué UF manda: algunos fijan "la UF vigente a la fecha de pago", otros la de la firma o la del vencimiento. En una deuda de 3.000 UF, una diferencia de un mes con inflación puede significar cientos de miles de pesos en el total.</p>
+<span class="total">Si el documento o la ley fijan la fecha, se usa la UF de esa fecha; si nada la fija, la del día del pago</span></div>
+<p>Cuando el monto viene de un contrato hay que revisar qué UF manda: algunos fijan "la UF vigente a la fecha de pago", otros la de la firma o la del vencimiento. Y la ley puede fijar otra —la indemnización por años de servicio usa la UF del último día del mes anterior al pago, no la del día—. En una deuda de 3.000 UF, una diferencia de un mes con inflación puede significar cientos de miles de pesos en el total.</p>
 
 <h2>UF y UTM: dos unidades que no se deben confundir</h2>
 <p>La consulta "cuánto es X UF en pesos" se cruza a menudo con la <strong>UTM</strong>, la unidad tributaria mensual del SII. Son índices distintos: la UF se reajusta <strong>a diario</strong> y manda en contratos, créditos, seguros y topes previsionales; la UTM se reajusta <strong>una vez al mes</strong> y manda en impuestos, multas y tramos del SII. A noviembre de 2026 la UTM está en <strong>$72.440</strong>, bastante por encima de la UF —confundirlas en una multa o un tramo cambia la cuenta por casi el doble.</p>
@@ -7182,7 +7186,7 @@ ${APV_FILAS_TRAMOS}
 <h2>Cómo convertir bien, paso a paso</h2>
 <div class="steps"><ol>
 <li><strong>Toma el monto en UF</strong> tal como aparece en el contrato, la multa o la cotización.</li>
-<li><strong>Busca el valor de la UF del día que corresponde</strong> —el del pago, el del vencimiento o el de hoy— en la serie del Banco Central o en la calculadora.</li>
+<li><strong>Busca el valor de la UF del día que corresponde</strong> —el del pago, el del vencimiento o el de hoy— en la <a href="https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF" target="_blank" rel="noopener">serie oficial del Banco Central</a> o la <a href="https://www.sii.cl/valores_y_fechas/uf/uf2026.htm" target="_blank" rel="noopener">tabla diaria del SII</a>; la calculadora muestra el valor vigente de hoy.</li>
 <li><strong>Multiplica sin redondear la UF:</strong> usa el valor con todos sus decimales y redondea solo el total final a pesos.</li>
 <li><strong>Verifica la unidad:</strong> si el documento dice UTM, no UF, la conversión es otra (UTM × valor del mes en la calculadora de UTM).</li></ol></div>
 
@@ -7202,7 +7206,7 @@ ${APV_FILAS_TRAMOS}
 <p>La tabla de esta nota sirve como referencia rápida con la UF de $41.384,81. Para el monto al día —o la conversión inversa de pesos a UF— la <a href="/calculadoras/calculadora-uf-clp">calculadora UF ⇄ CLP</a> toma el indicador vigente del día y muestra ambos sentidos de la cuenta. Para entender qué es la UF, cómo se reajusta y en qué se diferencia de otros indicadores, revisa la <a href="/guias/uf-utm-indicadores-chile">guía de UF y UTM en Chile</a>.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 22 de noviembre de 2026 con la serie diaria de la UF del <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central de Chile</a> y los valores de UTM publicados por el <a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">SII</a>.</p>`,
+<p>Contenido verificado el 22 de noviembre de 2026 con la <a href="https://si3.bcentral.cl/Indicadoressiete/secure/Serie.aspx?gcode=UF" target="_blank" rel="noopener">serie diaria de la UF del Banco Central de Chile</a>, la <a href="https://www.sii.cl/valores_y_fechas/uf/uf2026.htm" target="_blank" rel="noopener">tabla de UF del SII</a> y los <a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">valores de UTM del SII</a>.</p>`,
   },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
