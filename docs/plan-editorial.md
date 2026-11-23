@@ -82,7 +82,6 @@ Contexto: [`contexto.md`](./contexto.md). Código: blog → `src/data/articles.t
 |--:|--------|--------|------|-------|---------|------|
 | 20 | blog | Segunda cuota permiso de circulación 2026 | `permiso-circulacion-segunda-cuota-agosto-2026` | 2026-07-09 | vehículos | permiso, multas |
 | 46 | blog | Revisión técnica 2026: calendario por patente | `revision-tecnica-chile-2026-calendario-patente` | 2026-07-10 | vehículos | permiso |
-| 47 | blog | Licencia médica 2026: cuánto paga y quién | `licencia-medica-2026-quien-paga-sil` | 2026-11-22 | laboral | licencia-medica, sueldo-liquido |
 | 1 | blog | Cotización empleador 3,5% desde agosto 2026 | `cotizacion-empleador-3-5-agosto-2026-costo-pyme` | 2026-07-15 | laboral | costo-empleado, sueldo |
 | 37→ | blog | CAE 2026: cuota, renegociación y condonación | `cae-renegociacion-condonacion-2026` | 2026-05-16 | educación | credito-cae |
 | 7 | blog | Aguinaldo Fiestas Patrias 2026 (IPS + SP) | `aguinaldo-fiestas-patrias-2026-pensionados-sector-publico` | 2026-07-10 | beneficios | aguinaldo |
@@ -135,7 +134,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 10 | blog | Feriados irrenunciables 18–19 sep 2026 | `feriados-irrenunciables-18-19-septiembre-2026-comercio` | — | laboral | 2026-09-03 | pre 18–19 sep | **P2-ventana** |
 | 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] · Ventana perdida (vence 30 sep); cubierto dentro de #29 | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
 | ~~12~~ | blog | ~~Boleta honorarios retención 15,25%~~ | ~~`boleta-honorarios-retencion-15-25-2026`~~ | publicado 2026-11-16 | impuestos | ~~2026-09-08~~ | continuo | ✅ |
-| ~~47~~ | blog\* | ~~Licencia médica 2026: quién paga y SIL~~ | ~~`licencia-medica-2026-quien-paga-sil`~~ | publicado 2026-11-22 · DR[7] | laboral | ~~2026-09-10~~ | continuo | ✅ |
+| 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
 | 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
 | 14 | blog | Subsidio crédito hipotecario MINVU | `subsidio-credito-hipotecario-minvu-dividendo-2026` | satélite hipoteca | vivienda | 2026-09-15 | sep–may 2027 | **P2-ventana** |
 | 15 | blog | Gratificación legal tope 4,75 IMM | `gratificacion-legal-tope-2026-ingreso-minimo` | evergreen blog | laboral | 2026-09-18 | sep–dic | **P2-ventana** |

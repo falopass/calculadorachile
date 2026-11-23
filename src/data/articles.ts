@@ -6922,155 +6922,6 @@ ${APV_FILAS_TRAMOS}
 <p>Contenido verificado el 18 de noviembre de 2026 con la página de <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-5795.html" target="_blank" rel="noopener">beneficios tributarios y bonificación del APV de la Superintendencia de Pensiones</a>, la <a href="https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9929.html" target="_blank" rel="noopener">ficha del APV de la misma Superintendencia</a>, la <a href="https://www.sii.cl/servicios_online/renta/guia_practica_renta_2026.pdf" target="_blank" rel="noopener">Guía Práctica de Declaración de Renta 2026 del SII</a> (págs. 30 a 33), la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a> (artículos 42 bis y 52) y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=7147" target="_blank" rel="noopener">DL 3.500</a> (artículos 20 L y 20 O) en Ley Chile.</p>`,
   },
   {
-    slug: 'licencia-medica-2026-quien-paga-sil',
-    title: 'Licencia médica 2026: cuánto paga, quién la paga y por cuántos días',
-    description: `Si te dan 5, 7 u 11 días de licencia, el subsidio cambia: hasta 10 días se paga desde el 4° día; con 11 o más, desde el primero. Quién paga (Fonasa, Isapre, CCAF, mutualidad), tabla por días y plazos.`,
-    date: '2026-11-22',
-    updatedAt: '2026-11-22',
-    category: 'laboral',
-    readingTime: 7,
-    relatedGuia: 'sueldo-liquido-chile',
-    embedCalculatorId: 'licencia-medica',
-    seoTitle: 'Licencia médica: cuánto pagan por 5, 7 u 11 días (2026)',
-    seoDescription:
-      'Hasta 10 días de licencia el subsidio corre desde el 4° día; con 11 o más, desde el primero. Tabla de montos por días, quién paga (Fonasa, Isapre, CCAF) y plazos de presentación.',
-    keywords: [
-      'si tengo 5 días de licencia médica cuántos me pagan',
-      'si tengo 7 días de licencia médica cuántos me pagan',
-      'cuánto paga la licencia médica',
-      'quién paga la licencia médica en chile',
-      'subsidio por incapacidad laboral',
-      'licencia médica 11 días',
-    ],
-    relatedCalculators: [
-      'calculadora-licencia-medica',
-      'calculadora-sueldo-liquido',
-      'calculadora-seguro-cesantia',
-    ],
-    faq: [
-      {
-        question: 'Si tengo 5 días de licencia médica, ¿cuántos me pagan?',
-        answer:
-          'Dos días: en licencias de 10 días o menos el subsidio corre desde el cuarto día, así que de 5 días se pagan los días 4 y 5. Los primeros 3 días son de carencia y el empleador no está obligado a pagarlos, salvo pacto o contrato.',
-      },
-      {
-        question: 'Si me dan 7 días de licencia, ¿cuántos me pagan?',
-        answer:
-          'Cuatro días (del 4° al 7°), porque la licencia no supera los 10 días y el subsidio parte el cuarto día. Con 11 días o más, en cambio, se pagan todos los días desde el primero.',
-      },
-      {
-        question: '¿Quién paga la licencia médica en Chile?',
-        answer:
-          'El Subsidio por Incapacidad Laboral lo paga la entidad que cubre al trabajador: la COMPIN para afiliados a Fonasa, la Isapre para sus cotizantes, la Caja de Compensación cuando corresponde y la mutualidad si el origen es laboral. El empleador no paga el subsidio, solo tramita la licencia.',
-      },
-      {
-        question: '¿Cuánto es lo mínimo que paga una licencia médica por día?',
-        answer:
-          'El subsidio diario no puede ser menor a 1/30 del 50% del ingreso mínimo para fines no remuneracionales. Con los valores vigentes desde mayo de 2026 ese piso es de $5.947 diarios.',
-      },
-      {
-        question: '¿Cuánto tiempo tengo para presentar la licencia médica?',
-        answer:
-          'El trabajador dependiente del sector privado tiene 2 días hábiles desde el inicio de la licencia para enviarla al empleador; el dependiente público, 3 días hábiles, y el trabajador independiente, 2 días hábiles ante la entidad pagadora.',
-      },
-    ],
-    sources: [
-      {
-        label: 'SUSESO — Subsidio por incapacidad laboral',
-        url: 'https://www.suseso.gob.cl/606/w3-propertyvalue-568.html',
-      },
-      {
-        label: 'Dirección del Trabajo — Licencias médicas',
-        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95288.html',
-      },
-      {
-        label: 'SUSESO — Pago de los días de carencia',
-        url: 'https://www.suseso.gob.cl/606/w3-article-19933.html',
-      },
-      {
-        label: 'ChileAtiende — Licencia médica para afiliados a Fonasa',
-        url: 'https://www.chileatiende.gob.cl/fichas/53052-licencia-medica-afiliados-a-fonasa',
-      },
-    ],
-    content: `<p class="article-lead">La pregunta real detrás de una licencia médica es simple: <strong>¿cuántos días me pagan?</strong> La regla que lo decide en Chile es el umbral de los 10 días. Una licencia de <strong>10 días o menos</strong> genera subsidio <strong>desde el cuarto día</strong> —los tres primeros son de carencia y el empleador no está obligado a pagarlos—; una de <strong>11 días o más</strong> se paga <strong>completa, desde el primer día</strong>. Por eso una licencia de 10 días paga 7 y una de 11 paga 11.</p>
-
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>La regla en una línea</strong><p>Licencia ≤ 10 días → subsidio desde el 4° día (se pagan días − 3). Licencia ≥ 11 días → subsidio desde el 1° día (se pagan todos).</p></div></aside>
-
-<p>Este artículo responde las consultas más frecuentes sobre cuánto paga una licencia médica en Chile: cuántos días se subsidían según la duración, quién paga el subsidio, cuál es el monto diario y qué pasa con los días de carencia. Las cifras corresponden a las reglas vigentes de la <a href="https://www.suseso.gob.cl/606/w3-propertyvalue-568.html" target="_blank" rel="noopener">SUSESO</a> y la <a href="https://www.dt.gob.cl/portal/1628/w3-article-95288.html" target="_blank" rel="noopener">Dirección del Trabajo</a>, verificadas el 22 de noviembre de 2026.</p>
-
-<h2>Cuántos días paga cada licencia</h2>
-<p>El <strong>Subsidio por Incapacidad Laboral (SIL)</strong> cubre los días de licencia autorizados, pero no siempre desde el día uno. La distinción central es la duración:</p>
-<div class="numeric-example"><div class="numeric-example__title">Días subsidiados según la duración</div><ul>
-<li>Licencia de 3 días → 0 días pagados (todo es carencia).</li>
-<li>Licencia de 5 días → 2 días pagados.</li>
-<li>Licencia de 7 días → 4 días pagados.</li>
-<li>Licencia de 10 días → 7 días pagados.</li>
-<li>Licencia de 11 días → 11 días pagados (desde el primer día).</li>
-<li>Licencia de 15 días → 15 días pagados.</li></ul>
-<span class="total">El corte está en el día 10: una licencia de 11 días paga 4 días más que una de 10</span></div>
-<p>El salto entre 10 y 11 días es el punto más confundido: una licencia de 10 días pierde los tres primeros, mientras que una de 11 los recupera todos. Para el bolsillo es la diferencia entre 7 y 11 días subsidiados por un solo día adicional de reposo indicado por el médico.</p>
-<p>Esta regla aplica al régimen general de licencias por enfermedad común. Las licencias de origen laboral (accidentes del trabajo y enfermedades profesionales, cubiertas por la Ley 16.744) siguen reglas distintas a través de la mutualidad, y las licencias maternales tienen su propio régimen.</p>
-
-<h2>Cuánto paga la licencia por día</h2>
-<p>El subsidio diario se calcula sobre la <strong>remuneración neta</strong>: el promedio de lo que recibiste de líquido (imponible menos cotizaciones e impuestos) en los tres meses calendario anteriores al mes en que parte la licencia, dividido por 30. Si trabajas para varios empleadores, se consideran todas las remuneraciones.</p>
-<p>Existe un piso legal: el monto diario no puede ser menor que <strong>1/30 del 50% del ingreso mínimo para fines no remuneracionales</strong>. Con el valor vigente desde mayo de 2026 ($356.815), ese mínimo es de <strong>$5.947 diarios</strong>. Si tu promedio neto calculado queda por debajo, se paga el piso.</p>
-<p>Como referencia, una persona con un sueldo líquido cercano al mínimo (neto de unos $448.000 con Fonasa y AFP Provida) recibiría aproximadamente $14.937 por día subsidiado: una licencia de 7 días pagaría unos $60.000 por los 4 días subsidiados, y una de 11 días, unos $164.000 completos. La <a href="/calculadoras/calculadora-licencia-medica">calculadora de licencia médica</a> hace la cuenta exacta con tu remuneración neta.</p>
-
-<h2>Quién paga el subsidio</h2>
-<p>El SIL no lo paga el empleador: lo paga la entidad de seguridad social que cubre al trabajador. El mapa es el siguiente:</p>
-<ul>
-<li><strong>Fonasa</strong> → la COMPIN (o la Caja de Compensación si el trabajador está afiliado a una).</li>
-<li><strong>Isapre</strong> → la propia Isapre.</li>
-<li><strong>Origen laboral</strong> (accidente o enfermedad profesional) → la mutualidad (IST, Achs, Mutual de Seguridad).</li>
-</ul>
-<p>El empleador tiene un rol distinto: recibe la licencia, la tramita y conserva la relación laboral. Lo que la ley no le exige —salvo pacto individual o colectivo— es pagar los <strong>tres días de carencia</strong> de las licencias de 10 días o menos. Muchos contratos y convenios sí los cubren, así que conviene revisar el propio contrato antes de darlos por perdidos. Los detalles están en la nota de la SUSESO sobre el <a href="https://www.suseso.gob.cl/606/w3-article-19933.html" target="_blank" rel="noopener">pago de los días de carencia</a>.</p>
-<p>Si el empleador no tramita la licencia, el trabajador puede hacerlo directamente ante la COMPIN, la Isapre o la CCAF con una <a href="https://www.chileatiende.gob.cl/fichas/1387-declaracion-jurada-para-tramitar-una-licencia-medica" target="_blank" rel="noopener">declaración jurada</a>.</p>
-
-<h2>Plazos para presentarla y revisar su estado</h2>
-<p>El plazo de presentación depende del tipo de trabajador: <strong>2 días hábiles</strong> para el dependiente del sector privado (la licencia va al empleador, no a la entidad pagadora), <strong>3 días hábiles</strong> para el dependiente público y <strong>2 días hábiles</strong> para el independiente, que la presenta directamente. Si se rechaza por fuera de plazo, la apelación se hace ante la SUSESO.</p>
-<p>Las licencias electrónicas se tramitan en línea y su estado se puede revisar en cualquier momento: para afiliados a Fonasa la consulta es permanente en la COMPIN, según la <a href="https://www.chileatiende.gob.cl/fichas/53052-licencia-medica-afiliados-a-fonasa" target="_blank" rel="noopener">ficha de ChileAtiende</a>.</p>
-<p>La duración máxima del subsidio es de <strong>52 semanas</strong>, prorrogables por otras 52 cuando la imposibilidad de trabajar persiste, según la <a href="https://www.suseso.cl/606/w3-article-39990.html" target="_blank" rel="noopener">SUSESO</a>.</p>
-
-<h2>Requisitos para que haya subsidio</h2>
-<p>Además de tener la licencia autorizada, el régimen general exige cobertura previsional: <strong>6 meses de afiliación</strong> y <strong>3 meses de cotización</strong> dentro de los 6 anteriores al inicio de la licencia (para contratados por día o turnos, basta 1 mes cotizado). Las licencias de menos de 11 días también exigen que no se hayan acumulado más de 6 licencias en el año en curso; superado ese tope, la séptima licencia corta de 10 días o menos solo subsidia desde el 4° día sin los beneficios del régimen general.</p>
-
-<h2>Un ejemplo con montos: sueldo líquido de $600.000</h2>
-<p>Con una remuneración neta promedio de $600.000, el subsidio diario es $20.000 ($600.000 ÷ 30). Aplicando la regla del umbral de 10 días:</p>
-<div class="numeric-example"><div class="numeric-example__title">Subsidio estimado con neto $600.000</div><ul>
-<li>Licencia de 3 días → $0 (los 3 días son carencia).</li>
-<li>Licencia de 5 días → $40.000 (2 días pagados).</li>
-<li>Licencia de 7 días → $80.000 (4 días pagados).</li>
-<li>Licencia de 10 días → $140.000 (7 días pagados).</li>
-<li>Licencia de 11 días → $220.000 (11 días pagados).</li>
-<li>Licencia de 15 días → $300.000; licencia de 30 días → $600.000.</li></ul>
-<span class="total">El salto de 10 a 11 días vale $80.000 en este ejemplo</span></div>
-<p>Con un sueldo más bajo la mecánica es la misma: con un neto de $448.000 (el líquido aproximado del sueldo mínimo con Fonasa y AFP Provida), el día subsidiado queda en $14.937 y una licencia de 11 días paga $164.304.</p>
-
-<h2>Los tres días de carencia, en detalle</h2>
-<p>Los primeros tres días de una licencia de 10 días o menos se llaman <strong>días de carencia</strong>: la ley no obliga al empleador a pagarlos ni al organismo de seguridad social a subsidiarlos. El punto práctico es que <strong>muchos contratos y convenios colectivos sí los cubren</strong> —es una cláusula habitual, no una excepción—, así que la primera fuente a revisar es el propio contrato.</p>
-<p>Cuando varias licencias cortas se suceden, cada una arrastra su propio período de carencia si no supera los 10 días: no es un descuento único al año, sino por licencia. Y si una licencia se extiende hasta superar los 10 días en total, el subsidio se recalcula desde el primer día de la licencia completa.</p>
-
-<h2>Si el empleador no tramita la licencia</h2>
-<p>La licencia no se pierde por un empleador que no la envía: el trabajador puede tramitarla él mismo ante la COMPIN, la Isapre o la Caja de Compensación con una <a href="https://www.chileatiende.gob.cl/fichas/1387-declaracion-jurada-para-tramitar-una-licencia-medica" target="_blank" rel="noopener">declaración jurada</a>. También conviene recordar que la licencia médica suspende el contrato pero no lo termina, y que las cotizaciones siguen cubiertas por la entidad pagadora durante el reposo.</p>
-
-<h2>Cuando la licencia no es por enfermedad común</h2>
-<p>La tabla de días pagados vale para el régimen general. Dos grandes excepciones cambian la cuenta: las <strong>licencias de origen laboral</strong> —accidente del trabajo o enfermedad profesional— las cubre la mutualidad bajo la Ley 16.744 con reglas propias, y las <strong>licencias maternales</strong> (prenatal, postnatal y postnatal parental) tienen régimen especial, con su propia base de cálculo y tope. En ambos casos el subsidio no espera al cuarto día.</p>
-<p>También hay reglas para situaciones menos frecuentes: licencias por accidente escolar, grave o a cuidado de hijo menor de un año, que se tramitan ante la misma entidad pero con requisitos distintos. Ante cualquiera de ellas, la fuente de verdad es la entidad pagadora (COMPIN, Isapre, CCAF o mutualidad), no el empleador.</p>
-
-<h2>Qué revisar cuando te den una licencia</h2>
-<ol class="steps">
-<li><strong>Cuenta los días:</strong> si son 10 o menos, subsidio desde el 4°; si son 11 o más, desde el 1°.</li>
-<li><strong>Entrégala a tiempo:</strong> 2 días hábiles al empleador si eres dependiente privado.</li>
-<li><strong>Calcula tu subsidio</strong> con tu promedio neto de los últimos 3 meses en la <a href="/calculadoras/calculadora-licencia-medica">calculadora de licencia médica</a>.</li>
-<li><strong>Revisa tu contrato:</strong> muchos cubren los 3 días de carencia que la ley no obliga a pagar.</li>
-<li><strong>Sigue su estado</strong> en la COMPIN, tu Isapre o tu CCAF.</li>
-</ol>
-<p>Para entender cómo la licencia se refleja en tu liquidación —y qué descuentos siguen aplicando mientras dura— revisa la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido en Chile</a>. Si la licencia termina en despido o finiquito, el <a href="/calculadoras/calculadora-seguro-cesantia">simulador del seguro de cesantía</a> muestra qué protección queda.</p>
-
-<h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 22 de noviembre de 2026 con la ficha del <a href="https://www.suseso.gob.cl/606/w3-propertyvalue-568.html" target="_blank" rel="noopener">Subsidio por Incapacidad Laboral de la SUSESO</a>, la página de <a href="https://www.dt.gob.cl/portal/1628/w3-article-95288.html" target="_blank" rel="noopener">licencias médicas de la Dirección del Trabajo</a>, la nota sobre <a href="https://www.suseso.gob.cl/606/w3-article-19933.html" target="_blank" rel="noopener">pago de los días de carencia</a>, la <a href="https://www.suseso.cl/606/w3-article-39990.html" target="_blank" rel="noopener">duración máxima del subsidio</a> y las fichas de ChileAtiende sobre <a href="https://www.chileatiende.gob.cl/fichas/53052-licencia-medica-afiliados-a-fonasa" target="_blank" rel="noopener">licencias de afiliados a Fonasa</a> y la <a href="https://www.chileatiende.gob.cl/fichas/1387-declaracion-jurada-para-tramitar-una-licencia-medica" target="_blank" rel="noopener">declaración jurada para tramitar una licencia</a>.</p>`,
-  },
-  {
     slug: 'total-haberes-vs-sueldo-bruto-liquidacion',
     title: '¿Total haberes es lo mismo que sueldo bruto? Las diferencias en tu liquidación',
     description: `Total haberes es la suma de todo lo ganado; el sueldo bruto (imponible) es la base de los descuentos. No siempre coinciden: hay haberes no imponibles. Qué es cada columna de la liquidación y cómo llega el sueldo a líquido.`,
@@ -7118,15 +6969,17 @@ ${APV_FILAS_TRAMOS}
     ],
     sources: [
       {
-        label: 'Dirección del Trabajo — Liquidaciones de sueldo',
-        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60792.html',
+        label: 'Código del Trabajo — Remuneración y haberes (arts. 41 a 54)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
       },
       {
-        label: 'Dirección del Trabajo — Remuneraciones',
-        url: 'https://www.dt.gob.cl/portal/1626/w3-article-60136.html',
+        label: 'Dirección del Trabajo — Últimas remuneraciones para la indemnización (art. 172)',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html',
       },
     ],
     content: `<p class="article-lead">La respuesta corta: <strong>no, no siempre</strong>. En una liquidación chilena, el <strong>total haberes</strong> es la suma de todo lo que ganaste en el mes —imponible y no imponible—, mientras que el <strong>sueldo bruto</strong> que sirve para calcular descuentos es solo la parte imponible. Si tu liquidación incluye colación, movilización u otras asignaciones no imponibles, el total haberes es mayor que el bruto sobre el que se calcula tu líquido.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría laboral ni legal. Los ejemplos usan montos y porcentajes vigentes en noviembre de 2026; tu liquidación real depende de tu contrato, AFP, sistema de salud y pactos. Ante una discrepancia con tu liquidación, la referencia es tu contrato y la Dirección del Trabajo.</p></div></aside>
 
 <p>Esta nota desarma la estructura de la liquidación de sueldo: qué entra en cada columna, por qué el "total haberes" no siempre coincide con el "total imponible", y cómo se llega del bruto al líquido. Verificado el 22 de noviembre de 2026 con las fichas de la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60136.html" target="_blank" rel="noopener">Dirección del Trabajo</a>.</p>
 
@@ -7145,7 +6998,7 @@ ${APV_FILAS_TRAMOS}
 <li><strong>Imponibles:</strong> sueldo base, sobresueldo, gratificación, horas extraordinarias, comisiones, bonos de producción o desempeño, aguinaldos que la ley no exime. Todo esto forma el bruto sobre el que se descuentan AFP, salud, seguro de cesantía e impuesto.</li>
 <li><strong>No imponibles:</strong> asignaciones de colación y movilización (dentro de los límites razonables que fija la práctica y la ley), viáticos de gasto, asignaciones familiares o de pérdida de caja cuando corresponden por ley. Se suman al líquido después de los descuentos.</li>
 </ul>
-<p>El punto que más importa al leer la liquidación: <strong>los descuentos se calculan sobre el imponible, no sobre el total haberes</strong>. Una colación de $100.000 no aumenta tu descuento de AFP ni tu impuesto —llega íntegra al líquido—, pero tampoco cuenta para el cálculo de indemnizaciones que se basan en la remuneración.</p>
+<p>El punto que más importa al leer la liquidación: <strong>los descuentos se calculan sobre el imponible, no sobre el total haberes</strong>. Una colación de $100.000 no aumenta tu descuento de AFP ni tu impuesto —llega íntegra al líquido—. Ojo: que no cotice no la excluye de todo —la Dirección del Trabajo sí la incluye en la base de la indemnización por años de servicio (art. 172) cuando es mensual—.</p>
 
 <h2>Del total haberes al líquido: el camino completo</h2>
 <p>La liquidación se lee en dos columnas: haberes (lo ganado) y descuentos (lo descontado). El recorrido es:</p>
@@ -7158,7 +7011,7 @@ ${APV_FILAS_TRAMOS}
 <p>Los topes importan: el imponible que alimenta AFP y salud tiene tope de <strong>90 UF</strong> y el del seguro de cesantía de <strong>135,2 UF</strong> en 2026, por lo que en sueldos altos el descuento efectivo baja en porcentaje. La <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> aplica esos topes y muestra el detalle por ítem.</p>
 
 <h2>Ejemplo con gratificación: el bruto crece sin tocar el sueldo base</h2>
-<p>La gratificación legal es el 25% de la remuneración con un tope anual de 4,75 ingresos mínimos —unos $219.000 mensuales de tope con el IMM de $553.553, calculado como 4,75 × $553.553 ÷ 12. Un trabajador con sueldo base de $500.000 y gratificación completa ($125.000 mensuales, bajo el tope) tiene:</p>
+<p>La gratificación del artículo 50 del Código del Trabajo —la modalidad más común— es el 25% de la remuneración con un tope anual de 4,75 ingresos mínimos —unos $219.000 mensuales de tope con el IMM de $553.553, calculado como 4,75 × $553.553 ÷ 12. Un trabajador con sueldo base de $500.000 y gratificación completa ($125.000 mensuales, bajo el tope) tiene:</p>
 <ul>
 <li>Sueldo base: $500.000</li>
 <li>Total haberes: $625.000 (base + gratificación, todo imponible)</li>
@@ -7186,9 +7039,9 @@ ${APV_FILAS_TRAMOS}
 </ul>
 
 <h2>Los topes hacen que el porcentaje de descuento no sea fijo</h2>
-<p>Otra razón por la que el líquido no es "el total haberes menos un porcentaje fijo": las cotizaciones tienen topes en UF. En 2026, la base imponible de AFP y salud se topa en <strong>90 UF</strong> y la del seguro de cesantía en <strong>135,2 UF</strong>. Un sueldo de $2.000.000 paga los mismos pesos de AFP y salud que uno de $3.000.000 una vez superado el tope, por lo que el descuento efectivo cae de ~19% a menos. Esa es también la razón por la que la calculadora de sueldo líquido pide la UF del día: el tope se mueve con el indicador.</p>
+<p>Otra razón por la que el líquido no es "el total haberes menos un porcentaje fijo": las cotizaciones tienen topes en UF. En 2026, la base imponible de AFP y salud se topa en <strong>90 UF</strong> y la del seguro de cesantía en <strong>135,2 UF</strong>. Un sueldo de $4.000.000 y uno de $5.000.000 pagan los mismos pesos de AFP y salud —ambos están por encima de las 90 UF (~$3,7 millones)—, por lo que el descuento efectivo cae de ~19% a menos. Esa es también la razón por la que la calculadora de sueldo líquido pide la UF del día: el tope se mueve con el indicador.</p>
 <p>Y hay un descuento que no es tuyo: el <strong>aporte del empleador</strong> al seguro de cesantía (2,4% con contrato indefinido) y a la mutualidad sale de la columna del empleador, no de tus haberes. Aparece como costo de la empresa, no como descuento en tu liquidación —confundirlo con un descuento propio es el error más común al comparar ofertas.</p>
-<p>Finalmente, el impuesto único de segunda categoría solo entra cuando el imponible supera el tramo exento (unas 13,5 UTM mensuales): en sueldos bajos y medios no aparece, y en sueldos altos es un descuento más sobre el mismo imponible, nunca sobre el total haberes completo si hay haberes no imponibles.</p>
+<p>Finalmente, el impuesto único de segunda categoría se calcula sobre la <strong>renta tributable</strong> —el imponible menos las cotizaciones— y solo entra cuando esa base supera el tramo exento (unas 13,5 UTM, cerca de $978.000 mensuales en noviembre de 2026): un imponible de $1.100.000 deja una base de unos $890.000 y queda exento. En sueldos bajos y medios el impuesto no aparece, y nunca se calcula sobre los haberes no imponibles.</p>
 
 <h2>Los descuentos pactados también entran a la columna</h2>
 <p>Después de los descuentos legales, la liquidación puede tener <strong>descuentos pactados</strong>: cuotas de préstamos del empleador, aportes a cuentas de ahorro (Cuenta 2 de la AFP, APV), seguros complementarios, órdenes judiciales como pensión de alimentos o cuotas sindicales. Estos ítems restan del líquido pero <strong>no son cotizaciones ni impuestos</strong>: no se calculan sobre el imponible, no tienen tope legal de UF y dependen de acuerdos propios. Un "descuento" que no sea legal ni pactado no debería estar en la liquidación —la Dirección del Trabajo exige que toda rebaja tenga respaldo.</p>
@@ -7200,149 +7053,156 @@ ${APV_FILAS_TRAMOS}
 <li><strong>Verifica el imponible:</strong> debe ser el total haberes menos los no imponibles.</li>
 <li><strong>Revisa los descuentos:</strong> AFP + salud + cesantía + impuesto sobre el imponible (y los pactados, si hay).</li>
 <li><strong>Comprueba el líquido:</strong> total haberes − descuentos.</li>
+<li><strong>Ojo con el nombre "bruto":</strong> en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> el campo "Sueldo Bruto" pide solo el <strong>imponible</strong>, no el total haberes con no imponibles.</li>
 <li><strong>Simúlalo</strong> en la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> para confirmar que los números cuadran.</li>
 </ol>
 <p>Para profundizar en cada componente —cotizaciones, topes, impuesto y casos de part time— la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido en Chile</a> desarrolla el cálculo completo con ejemplos.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 22 de noviembre de 2026 con las fichas de remuneraciones y liquidaciones de la <a href="https://www.dt.gob.cl/portal/1626/w3-article-60136.html" target="_blank" rel="noopener">Dirección del Trabajo</a> y las reglas de descuentos previsionales de los organismos competentes (AFP, salud y AFC).</p>`,
+<p>Contenido verificado el 22 de noviembre de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (arts. 41 a 54, remuneraciones y haberes; art. 172, base de la indemnización) y la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60585.html" target="_blank" rel="noopener">ficha de la Dirección del Trabajo sobre las últimas remuneraciones</a>.</p>`,
   },
   {
-    slug: 'sueldo-minimo-por-hora-2026',
-    title: 'Sueldo mínimo por hora en Chile 2026: cuánto vale y cómo se calcula',
-    description: `La hora ordinaria del sueldo mínimo de $553.553 con jornada de 42 horas vale $3.075. La fórmula oficial (sueldo ÷ 30 × 28 ÷ horas de 4 semanas), el valor para jornadas parciales y qué cambia en 2028.`,
+    slug: 'uf-a-pesos-chilenos-2026-cuanto-es',
+    title: '¿Cuánto es la UF en pesos chilenos? Valores de referencia 2026',
+    description: `Tabla de UF a pesos con la UF de hoy: 90 UF, 200 UF, 1.000 UF y 3.000 UF en CLP, cómo se calcula la conversión y por qué el valor cambia cada día con el IPC.`,
     date: '2026-11-22',
     updatedAt: '2026-11-22',
-    category: 'laboral',
+    category: 'finanzas',
     readingTime: 5,
-    relatedGuia: 'sueldo-liquido-chile',
-    embedCalculatorId: 'sueldo-part-time',
-    seoTitle: 'Sueldo mínimo por hora 2026: $3.075 con jornada de 42 horas',
+    relatedGuia: 'uf-utm-indicadores-chile',
+    embedCalculatorId: 'uf-clp',
+    seoTitle: '¿Cuánto es 200, 1.000 o 3.000 UF en pesos chilenos?',
     seoDescription:
-      'El valor hora del sueldo mínimo chileno es $3.075 en 2026 (IMM $553.553 ÷ 30 × 28 ÷ 168). Fórmula oficial de la DT, ejemplos part time y el cambio a 40 horas en 2028.',
+      'Con la UF a $41.384,81: 200 UF son $8.276.962, 1.000 UF son $41.384.810 y 3.000 UF son $124.154.430. Fórmula UF × valor del día y tabla de conversiones.',
     keywords: [
-      'sueldo minimo por hora',
-      'valor hora sueldo mínimo 2026',
-      'cuánto pagan la hora en chile',
-      'valor hora ordinaria chile',
-      'sueldo mínimo por hora part time',
+      '3000 uf a pesos chilenos',
+      '1000 uf a pesos chilenos',
+      '200 uf a pesos chilenos',
+      'cuánto es la uf en pesos',
+      'valor uf hoy',
+      'uf a clp',
     ],
     relatedCalculators: [
-      'calculadora-sueldo-part-time',
-      'calculadora-horas-extra',
-      'calculadora-sueldo-liquido',
+      'calculadora-uf-clp',
+      'calculadora-tope-imponible-90-uf',
+      'calculadora-utm-clp',
     ],
     faq: [
       {
-        question: '¿Cuánto es el sueldo mínimo por hora en Chile 2026?',
+        question: '¿Cuánto es 3.000 UF en pesos chilenos?',
         answer:
-          '$3.075 por hora ordinaria: el ingreso mínimo de $553.553 dividido por 30, multiplicado por 28 y dividido por las 168 horas de cuatro semanas de la jornada de 42 horas vigente desde el 26 de abril de 2026.',
+          'Con la UF a $41.384,81, 3.000 UF equivalen a $124.154.430. La cifra cambia a diario: la conversión exacta es UF × valor del día en el Banco Central.',
       },
       {
-        question: '¿Cuál es la fórmula para calcular el valor hora?',
+        question: '¿Cuánto es 1.000 UF en pesos?',
         answer:
-          'Valor hora = sueldo mensual ÷ 30 × 28 ÷ (4 × horas semanales de la jornada). Con jornada completa de 42 horas: sueldo ÷ 30 × 28 ÷ 168.',
+          'A $41.384,81 por UF, 1.000 UF son $41.384.810. El valor se reajusta todos los días con la variación del IPC del mes anterior.',
       },
       {
-        question: '¿El part time tiene otro valor hora mínimo?',
+        question: '¿Cuánto es 200 UF en pesos chilenos?',
         answer:
-          'No: el mínimo proporcional de las jornadas parciales (IMM × horas ÷ 42) produce el mismo valor hora de referencia de $3.075, porque proporcionaliza el mismo sueldo sobre menos horas.',
+          '200 UF equivalen a $8.276.962 con la UF a $41.384,81. Es un monto típico en multas, seguros y contratos expresados en UF.',
       },
       {
-        question: '¿El valor hora cambia cuando la jornada baje a 40 horas?',
+        question: '¿Por qué la UF cambia de valor todos los días?',
         answer:
-          'Sí: desde el 26 de abril de 2028 la jornada legal será de 40 horas y el divisor de la fórmula pasará a 160 horas, por lo que el mismo IMM producirá un valor hora más alto.',
+          'Porque la UF se reajusta diariamente según la variación del IPC del mes anterior, publicada por el Banco Central. No es un precio de mercado: es un índice que acompaña la inflación.',
+      },
+      {
+        question: '¿Cuál es la diferencia entre UF y UTM?',
+        answer:
+          'La UF se reajusta a diario con el IPC y se usa para contratos, créditos y topes; la UTM es una unidad tributaria que se reajusta una vez al mes y se usa en impuestos, multas y tramos del SII. A noviembre de 2026: UF $41.384,81 y UTM $72.440.',
       },
     ],
     sources: [
       {
-        label: 'Dirección del Trabajo — Valor hora ordinaria del ingreso mínimo',
-        url: 'https://www.dt.gob.cl/portal/1628/w3-article-95182.html',
+        label: 'Banco Central de Chile — Unidad de Fomento',
+        url: 'https://www.bcentral.cl',
       },
       {
-        label: 'Dirección del Trabajo — Ingreso mínimo mensual',
-        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html',
-      },
-      {
-        label: 'Dirección del Trabajo — Reducción de la jornada (Ley 21.561)',
-        url: 'https://dt.gob.cl/portal/1626/w3-article-129225.html',
+        label: 'SII — Valores de UTM vigentes',
+        url: 'https://www.sii.cl/valores_y_fechas/utm/utm2026.htm',
       },
     ],
-    content: `<p class="article-lead">La hora ordinaria del sueldo mínimo en Chile vale <strong>$3.075</strong> en 2026: el ingreso mínimo de <strong>$553.553</strong> vigente desde mayo, dividido por 30, multiplicado por 28 y repartido entre las <strong>168 horas</strong> que suman cuatro semanas de la jornada de 42 horas. Es el piso legal para cualquier trabajo pagado por hora con contrato.</p>
+    content: `<p class="article-lead">Con la UF a <strong>$41.384,81</strong>, las conversiones más buscadas quedan así: <strong>200 UF = $8.276.962</strong>, <strong>1.000 UF = $41.384.810</strong> y <strong>3.000 UF = $124.154.430</strong>. La cuenta es siempre la misma —UF × valor del día— pero el valor cambia a diario porque la unidad se reajusta con el IPC. Esta nota da la tabla de referencia y explica de dónde sale el número.</p>
 
-<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>La fórmula en una línea</strong><p>Valor hora = sueldo ÷ 30 × 28 ÷ (4 × horas semanales). Con el IMM 2026 y jornada de 42 h: $553.553 ÷ 30 × 28 ÷ 168 = $3.075.</p></div></aside>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría financiera ni legal. Las cifras en pesos usan la UF publicada al 22 de noviembre de 2026 ($41.384,81); la unidad se reajusta a diario, así que para un contrato, pago o cálculo formal la referencia válida es el valor del día de la operación que publica el Banco Central.</p></div></aside>
 
-<p>Este artículo explica de dónde sale ese valor, cómo aplicarlo a tu sueldo y qué pasa en los casos que más se preguntan: part time, zona extrema y el cambio de jornada que viene en 2028. Cifras verificadas el 22 de noviembre de 2026 con la <a href="https://www.dt.gob.cl/portal/1628/w3-article-95182.html" target="_blank" rel="noopener">tabla de valores de la Dirección del Trabajo</a>.</p>
+<aside class="callout callout--tip"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__body"><strong>La fórmula en una línea</strong><p>Pesos = UF × valor del día. Con la UF a $41.384,81: 200 UF = $8.276.962 · 1.000 UF = $41.384.810 · 3.000 UF = $124.154.430.</p></div></aside>
 
-<h2>La fórmula oficial del valor hora</h2>
-<p>La Dirección del Trabajo calcula la hora ordinaria con una fórmula de tres pasos: el sueldo mensual se convierte a valor diario (÷30), se lleva a cuatro semanas de referencia (×28, los días trabajados de un mes típico) y se reparte entre las horas de ese período (÷ por 4 veces la jornada semanal):</p>
-<div class="numeric-example"><div class="numeric-example__title">Valor hora del sueldo mínimo 2026</div><ul>
-<li>$553.553 ÷ 30 = $18.452 por día</li>
-<li>$18.452 × 28 = $516.649 por cuatro semanas</li>
-<li>$516.649 ÷ 168 h (42 h × 4) = $3.075 por hora</li></ul>
-<span class="total">$3.075 es el piso por hora ordinaria con el IMM vigente</span></div>
-<p>La misma fórmula sirve para cualquier sueldo: con un sueldo de $800.000 y jornada de 42 horas, el valor hora es $800.000 ÷ 30 × 28 ÷ 168 = $4.444. Ese valor hora es además la base del cálculo de las horas extraordinarias, que la pagan con recargo —la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> lo resuelve con tu jornada.</p>
+<p>Los valores usados aquí corresponden a la UF publicada al 22 de noviembre de 2026. Como la unidad se mueve todos los días, para una cifra al día exacta usa la <a href="/calculadoras/calculadora-uf-clp">calculadora de UF a pesos</a>, que lee el valor vigente.</p>
 
-<h2>Y el part time: mismo valor hora, sueldo más bajo</h2>
-<p>La jornada parcial (30 horas semanales o menos) permite pagar el ingreso mínimo <strong>en proporción</strong>: IMM × horas pactadas ÷ 42. Aplicado a la fórmula de la hora, el valor de referencia es el mismo $3.075, porque el sueldo baja en la misma proporción que las horas:</p>
-<div class="numeric-example"><div class="numeric-example__title">Mínimos y valor hora por jornada</div><ul>
-<li>30 horas → mínimo $395.395; valor hora $3.075</li>
-<li>20 horas → mínimo $263.597; valor hora $3.075</li>
-<li>42 horas (completa) → mínimo $553.553; valor hora $3.075</li></ul>
-<span class="total">El valor hora mínimo es el mismo; lo que cambia es el sueldo mensual</span></div>
-<p>La lectura práctica: un contrato de fin de semana o de pocas horas no puede pagar menos de $3.075 por hora pactada en promedio, y cualquier oferta que informe un valor hora puede compararse con ese piso. Para revisar una oferta concreta —horas pactadas, sueldo ofrecido, comparación con el mínimo— la <a href="/calculadoras/calculadora-sueldo-part-time">calculadora de sueldo part time</a> muestra el piso y el valor hora resultante.</p>
+<h2>Tabla de referencia: UF a pesos</h2>
+<div class="numeric-example"><div class="numeric-example__title">Conversión con UF a $41.384,81</div><ul>
+<li>1 UF → $41.385</li>
+<li>5 UF → $206.924</li>
+<li>90 UF → $3.724.633 (el tope imponible de AFP y salud)</li>
+<li>200 UF → $8.276.962</li>
+<li>500 UF → $20.692.405</li>
+<li>1.000 UF → $41.384.810</li>
+<li>3.000 UF → $124.154.430</li></ul>
+<span class="total">Multiplica cualquier monto en UF por $41.384,81 para obtener su valor en pesos hoy</span></div>
+<p>Los montos más preguntados responden a usos concretos: las <strong>90 UF</strong> son el tope de la base imponible para cotizaciones de AFP y salud (la <a href="/calculadoras/calculadora-tope-imponible-90-uf">calculadora del tope imponible</a> lo aplica); los montos de 200 a 3.000 UF aparecen en primas de seguros, multas de contratos, garantías y presupuestos de proyectos.</p>
 
-<h2>Zona extrema y otros valores del ingreso mínimo</h2>
-<p>El IMM tiene variantes que mueven el valor hora de referencia: en <strong>Magallanes y Aysén</strong> el mínimo es un 6% más alto ($586.766 mensuales), por lo que la hora ordinaria de referencia sube a unos $3.260. Para <strong>menores de 18 y mayores de 65</strong> el mínimo es $412.938, con un valor hora proporcional menor. El <strong>ingreso mínimo para fines no remuneracionales</strong> ($356.815) es otra medida, usada como piso de beneficios —no como sueldo—, y el <strong>jornal</strong> del ingreso mínimo es $27.678 por día.</p>
+<h2>De dónde sale el valor de la UF</h2>
+<p>La Unidad de Fomento no es un precio de mercado: es un <strong>índice que el Banco Central publica y reajusta a diario</strong> según la variación del IPC del mes anterior, repartida entre los días del mes siguiente. Por eso la UF "sube un poco todos los días" en vez de saltar una vez al mes: cada jornada suma una fracción del IPC informado por el INE.</p>
+<p>La consecuencia práctica es que una cifra en pesos calculada hoy queda desactualizada mañana —en porcentaje pequeño, pero a diario. En montos grandes la diferencia se nota: 3.000 UF cambian decenas de miles de pesos en una semana de inflación alta. Para operaciones formales (un pago, una liquidación, un contrato) la conversión válida es la del <strong>día de la operación</strong>, no la de una tabla fija.</p>
+<p>El valor oficial lo fija el <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central de Chile</a>, que publica la serie diaria con anticipación del mes siguiente.</p>
 
-<h2>Qué cambia con la jornada de 40 horas</h2>
-<p>La Ley 21.561 reduce la jornada ordinaria por tramos: <strong>42 horas desde el 26 de abril de 2026</strong> y <strong>40 horas desde el 26 de abril de 2028</strong>. El divisor de la fórmula acompaña a la jornada, así que el mismo sueldo produce una hora más cara cuando la jornada se acorta: con el IMM actual, el valor hora de 2028 sería $553.553 ÷ 30 × 28 ÷ 160 ≈ $3.229 si el mínimo no se reajustara antes —y se reajustará, porque el decreto anual actualiza el IMM cada 1 de mayo.</p>
-<p>Mientras tanto, la regla vigente es la de 42 horas: cualquier cálculo de hora ordinaria u hora extra este año usa el divisor 168. El detalle del calendario está en la <a href="https://dt.gob.cl/portal/1626/w3-article-129225.html" target="_blank" rel="noopener">ficha de la Ley 21.561 de la Dirección del Trabajo</a>.</p>
-
-<h2>El valor por día: el jornal del ingreso mínimo</h2>
-<p>Para trabajos pagados por día existe otra referencia oficial: el <strong>jornal</strong> del ingreso mínimo, que la misma tabla de la Dirección del Trabajo fija en <strong>$27.678 diarios</strong> para 2026 ($553.553 ÷ 20 días). Es el piso para jornales —trabajo pactado por día—, no para horas sueltas de un contrato mensual. Una oferta "por día" que pague menos de $27.678 en una jornada completa está bajo el mínimo legal.</p>
-
-<h2>La hora extra parte de esta misma base</h2>
-<p>Las horas extraordinarias no tienen un valor propio: se calculan sobre la hora ordinaria con el recargo legal. Partiendo del piso de $3.075, cada hora extra sobre el sueldo mínimo vale más que esa cifra —el recargo habitual es del 50%— y el factor exacto depende de la jornada pactada. La <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a> aplica la fórmula con la jornada que declares y entrega el valor por hora extra directamente.</p>
-
-<h2>Errores comunes al calcular el valor hora</h2>
+<h2>Para qué se usa la UF en la práctica</h2>
+<p>Las búsquedas de "tantas UF a pesos" casi siempre vienen de un trámite concreto. Estos son los usos que más pesan:</p>
 <ul>
-<li><strong>Dividir por las horas del contrato:</strong> la fórmula oficial usa ÷30 ×28 ÷ (4 × horas), no sueldo ÷ horas del mes; los resultados difieren.</li>
-<li><strong>Usar la jornada antigua de 45 horas:</strong> desde el 26 de abril de 2026 la jornada es de 42, así que el divisor correcto es 168, no 180.</li>
-<li><strong>Confundir el jornal con la hora:</strong> $27.678 es el piso por día completo; $3.075, por hora.</li>
-<li><strong>Asumir que el part time tiene otro valor hora:</strong> el mínimo proporcional mantiene la misma referencia de $3.075.</li>
-<li><strong>Olvidar la zona extrema:</strong> en Magallanes y Aysén el piso por hora es mayor porque el mínimo mensual es 6% más alto.</li>
+<li><strong>Créditos hipotecarios y dividendos:</strong> los bancos pactan el dividendo en UF para que acompañe la inflación; por eso el monto en pesos sube mes a mes aunque el número de UF sea el mismo. Un dividendo de 15 UF equivale a $620.772 con la UF de hoy.</li>
+<li><strong>Seguros:</strong> las primas y deducibles de muchos seguros están en UF (2 UF de deducible = $82.770).</li>
+<li><strong>Arriendos y garantías:</strong> el valor garantía de arriendos comerciales y algunas mensualidades se pacta en UF.</li>
+<li><strong>Multas y contratos:</strong> contratos de servicios, cláusulas de cumplimiento y multas administrativas fijan montos en UF para no perder valor con el tiempo.</li>
+<li><strong>Topes legales:</strong> el tope imponible de cotizaciones (90 UF, $3.724.633 hoy) y el del seguro de cesantía (135,2 UF, $5.595.626 hoy) se reajustan con la misma unidad.</li>
+<li><strong>El SII y el Tesoro:</strong> tasaciones, contribuciones y algunos tramos tributarios usan UF (los tramos de impuesto de segunda categoría usan UTM en vez de UF).</li>
 </ul>
-<p>Y el error de fondo: el valor hora del mínimo es <strong>piso, no referencia de mercado</strong>. Trabajos calificados pactan valores hora muy superiores; los $3.075 solo marcan el punto por debajo del cual ningún contrato puede caer en 2026.</p>
+<p>En todos estos casos la lógica es idéntica: el monto en UF está fijo en el contrato o la ley, y lo que se mueve es el valor diario que el Banco Central publica. Por eso la pregunta correcta no es "cuánto es X UF" a secas, sino "cuánto es X UF <strong>al día de hoy</strong>".</p>
 
-<h2>Cuánto vale la hora según tu sueldo</h2>
-<p>La misma fórmula aplicada a sueldos distintos da la referencia para comparar ofertas o revisar lo pactado:</p>
-<div class="numeric-example"><div class="numeric-example__title">Valor hora con jornada de 42 horas</div><ul>
-<li>Sueldo mínimo $553.553 → $3.075 por hora</li>
-<li>Sueldo $800.000 → $4.444 por hora</li>
-<li>Sueldo $2.000.000 → $11.111 por hora</li></ul>
-<span class="total">Valor hora = sueldo ÷ 30 × 28 ÷ 168 con la jornada vigente</span></div>
-<p>El ejercicio en reversa también funciona: si un contrato ofrece $4.000 la hora a 42 horas semanales, el sueldo mensual equivalente es $4.000 × 168 ÷ 28 × 30 = $720.000, por encima del mínimo proporcional que correspondería a esa jornada.</p>
+<h2>Cómo se calcula el reajuste diario</h2>
+<p>El Banco Central toma la variación del IPC del mes anterior que informa el INE y la reparte en partes iguales entre los días del mes siguiente —entre el día 10 de un mes y el 9 del siguiente, para ser exactos. Si el IPC subió 0,3%, cada día la UF sube aproximadamente un 0,01%. En un año con inflación de un 4%, la UF termina subiendo ese mismo 4% en doce meses, pero en pequeños pasos diarios en vez de un salto.</p>
+<p>Por eso la UF del 22 de noviembre ($41.384,81) no es la misma que la del 1° de noviembre ni la que regirá en diciembre. La serie completa se publica por adelantado en el sitio del Banco Central, de modo que siempre se puede conocer el valor que regirá una fecha de pago futura cercana.</p>
 
-<h2>¿Y si me pagan por hora sin contrato?</h2>
-<p>El piso de $3.075 protege la relación laboral; si hay prestación de servicios sin contrato de trabajo, no hay valor hora legal que ampare y la vía es el acuerdo entre las partes. La señal de alerta es la "boleta de honorarios encubierta": jornada fija, subordinación y pago por hora sin cotizaciones —la Dirección del Trabajo la trata como relación laboral y ahí el piso del mínimo vuelve a regir. Para comparar un ingreso por honorarios con uno dependiente, la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> muestra el líquido equivalente con la retención vigente.</p>
-<p>El valor hora también ordena otras conversaciones: saber que el piso es $3.075 permite evaluar si una pega de fin de semana, una jornada parcial o una oferta "por hora" está por encima del mínimo legal antes de firmar.</p>
+<h2>Casos prácticos: leer un monto en UF</h2>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplos con UF a $41.384,81</div><ul>
+<li>Dividendo hipotecario de 15 UF → $620.772</li>
+<li>Prima de seguro de 3 UF mensuales → $124.154</li>
+<li>Multa contractual de 200 UF → $8.276.962</li>
+<li>Garantía de 1.000 UF → $41.384.810</li>
+<li>Proyecto o presupuesto de 3.000 UF → $124.154.430</li></ul>
+<span class="total">Si el documento dice la fecha, se usa la UF de esa fecha; si no, la del día del pago</span></div>
+<p>Cuando el monto viene de un contrato hay que revisar qué UF manda: algunos fijan "la UF vigente a la fecha de pago", otros la de la firma o la del vencimiento. En una deuda de 3.000 UF, una diferencia de un mes con inflación puede significar cientos de miles de pesos en el total.</p>
 
-<h2>El valor hora se reajusta cada año con el IMM</h2>
-<p>El piso de $3.075 no es permanente: el ingreso mínimo se reajusta por ley cada 1 de mayo, y cada reajuste sube el valor hora en la misma proporción. En 2026 el tramo vigente es el de la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Ley 21.830</a> ($553.553); cuando se publique el reajuste de 2027, la fórmula no cambia pero sí el multiplicando —conviene recalcular el valor hora cada mayo, sobre todo para contratos pactados por hora.</p>
-<p>En resumen: jornada de 42 horas, divisor de 168 y piso de $3.075 son los tres números del cálculo en 2026, y los tres pueden moverse —la jornada por calendario legal, el divisor con ella y el piso con el reajuste anual del IMM.</p>
+<h2>UF y UTM: dos unidades que no se deben confundir</h2>
+<p>La consulta "cuánto es X UF en pesos" se cruza a menudo con la <strong>UTM</strong>, la unidad tributaria mensual del SII. Son índices distintos: la UF se reajusta <strong>a diario</strong> y manda en contratos, créditos, seguros y topes previsionales; la UTM se reajusta <strong>una vez al mes</strong> y manda en impuestos, multas y tramos del SII. A noviembre de 2026 la UTM está en <strong>$72.440</strong>, bastante por encima de la UF —confundirlas en una multa o un tramo cambia la cuenta por casi el doble.</p>
+<p>Para convertir UTM a pesos se usa la misma lógica (UTM × valor del mes) en la <a href="/calculadoras/calculadora-utm-clp">calculadora de UTM a CLP</a>.</p>
 
-<h2>Cómo usar el valor hora</h2>
-<ol class="steps">
-<li><strong>Calcula tu valor hora</strong> con sueldo ÷ 30 × 28 ÷ (4 × horas semanales).</li>
-<li><strong>Compáralo con el piso:</strong> si trabajas con contrato, no puede ser menor a $3.075 en 2026.</li>
-<li><strong>Úsalo para horas extra:</strong> es la base antes del recargo.</li>
-<li><strong>En part time,</strong> verifica primero el mínimo proporcional mensual en la <a href="/calculadoras/calculadora-sueldo-part-time">calculadora</a>.</li>
-</ol>
-<p>Para ver qué significa ese sueldo después de cotizaciones e impuesto, la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> y la <a href="/guias/sueldo-liquido-chile">guía del sueldo líquido</a> muestran el detalle completo por ítem.</p>
+<h2>Cómo convertir bien, paso a paso</h2>
+<div class="steps"><ol>
+<li><strong>Toma el monto en UF</strong> tal como aparece en el contrato, la multa o la cotización.</li>
+<li><strong>Busca el valor de la UF del día que corresponde</strong> —el del pago, el del vencimiento o el de hoy— en la serie del Banco Central o en la calculadora.</li>
+<li><strong>Multiplica sin redondear la UF:</strong> usa el valor con todos sus decimales y redondea solo el total final a pesos.</li>
+<li><strong>Verifica la unidad:</strong> si el documento dice UTM, no UF, la conversión es otra (UTM × valor del mes en la calculadora de UTM).</li></ol></div>
+
+<h2>¿La UF puede bajar de valor?</h2>
+<p>En teoría sí —si el IPC fuera negativo, la UF se reajustaría a la baja— pero en la práctica solo sube, porque Chile ha tenido inflación positiva todos los años recientes. En la década 2014–2024 la UF pasó de unos $24.000 a más de $39.000: quien pacta en UF acepta que el monto en pesos crecerá con el costo de la vida, y quien cobra en UF protege el valor real de su dinero.</p>
+<p>Esa es justamente la razón de ser de la unidad: nació en 1967 como "unidad de fomento" para que los contratos de largo plazo no perdieran valor con la inflación, y hoy es la medida estándar de todo lo que se paga en cuotas o se pacta a futuro en Chile.</p>
+
+<h2>Errores comunes al convertir UF a pesos</h2>
+<ul>
+<li><strong>Usar un valor viejo de una tabla fija:</strong> la UF se mueve a diario; la referencia válida es la del día de la operación.</li>
+<li><strong>Confundir UF con UTM:</strong> casi duplica el monto en 2026.</li>
+<li><strong>Redondear la UF antes de multiplicar:</strong> en 3.000 UF, un peso de diferencia en el valor diario son $3.000 en el total.</li>
+<li><strong>Asumir que "UF de contrato" es la de hoy:</strong> los contratos suelen fijar la UF de una fecha concreta (firma, pago, vencimiento); revisa qué fecha manda el documento.</li>
+</ul>
+
+<h2>Para la conversión exacta al día</h2>
+<p>La tabla de esta nota sirve como referencia rápida con la UF de $41.384,81. Para el monto al día —o la conversión inversa de pesos a UF— la <a href="/calculadoras/calculadora-uf-clp">calculadora UF ⇄ CLP</a> toma el indicador vigente del día y muestra ambos sentidos de la cuenta. Para entender qué es la UF, cómo se reajusta y en qué se diferencia de otros indicadores, revisa la <a href="/guias/uf-utm-indicadores-chile">guía de UF y UTM en Chile</a>.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 22 de noviembre de 2026 con la <a href="https://www.dt.gob.cl/portal/1628/w3-article-95182.html" target="_blank" rel="noopener">tabla de valores del ingreso mínimo de la Dirección del Trabajo</a> (valor hora ordinaria $3.075 con jornada de 42 h), la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">norma del ingreso mínimo mensual (Ley 21.830)</a> y la <a href="https://dt.gob.cl/portal/1626/w3-article-129225.html" target="_blank" rel="noopener">ficha de la reducción gradual de la jornada (Ley 21.561)</a>.</p>`,
+<p>Contenido verificado el 22 de noviembre de 2026 con la serie diaria de la UF del <a href="https://www.bcentral.cl" target="_blank" rel="noopener">Banco Central de Chile</a> y los valores de UTM publicados por el <a href="https://www.sii.cl/valores_y_fechas/utm/utm2026.htm" target="_blank" rel="noopener">SII</a>.</p>`,
   },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
