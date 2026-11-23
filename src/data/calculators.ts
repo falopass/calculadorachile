@@ -9047,7 +9047,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       },
       {
         name: 'BCN Ley Chile — Ley 21.830',
-        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1217571',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225354',
         note: 'Reajuste del ingreso mínimo mensual',
       },
     ],

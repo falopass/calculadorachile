@@ -41,6 +41,27 @@ describe('calculateSueldoMinimo', () => {
     expect(r.liquidoEstimado).toBe(Math.round(INGRESO_MINIMO.mensual * 0.824));
   });
 
+  it('tramo no remuneracional no se proporciona ni estima líquido', () => {
+    const r = calculateSueldoMinimo({
+      horasSemanales: 20,
+      tipoIngreso: 'no-remuneracional',
+    });
+    expect(r.bruto).toBe(INGRESO_MINIMO.no_remuneracional);
+    expect(r.liquidoEstimado).toBeNull();
+    expect(r.valorHora).toBe(0);
+    expect(r.esJornadaParcial).toBe(false);
+  });
+
+  it('menores de 18 no descuentan seguro de cesantía (Ley 19.728)', () => {
+    const r = calculateSueldoMinimo({
+      horasSemanales: 42,
+      tipoIngreso: 'menor18-mayor65',
+    });
+    expect(r.liquidoEstimado).toBe(
+      Math.round(INGRESO_MINIMO.menor_18_mayor_65 * 0.83),
+    );
+  });
+
   it('tipos: menor18/mayor65, no remuneracional, zona extrema y jornal', () => {
     const menor = calculateSueldoMinimo({
       horasSemanales: 42,
@@ -53,6 +74,7 @@ describe('calculateSueldoMinimo', () => {
       tipoIngreso: 'no-remuneracional',
     });
     expect(noRem.bruto).toBe(INGRESO_MINIMO.no_remuneracional);
+    expect(noRem.liquidoEstimado).toBeNull();
 
     const zona = calculateSueldoMinimo({
       horasSemanales: 42,

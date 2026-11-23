@@ -83,27 +83,38 @@ export function calculateSueldoMinimo(
             : INGRESO_MINIMO.mensual;
 
   const esJornal = tipo === 'jornal';
-  const esJornadaParcial = horas > 0 && horas <= 30;
-  const esJornadaIntermedia = horas > 30 && horas < jornadaMax;
+  // La proporcionalidad y los descuentos de previsión solo aplican a
+  // remuneraciones: el ingreso para fines no remuneracionales y la
+  // gratificación mínima de zona extrema son referencias del tramo, no un
+  // sueldo. El jornal es un valor diario.
+  const esRemuneracion = tipo === 'general' || tipo === 'menor18-mayor65';
+  const esJornadaParcial = esRemuneracion && horas > 0 && horas <= 30;
+  const esJornadaIntermedia =
+    esRemuneracion && horas > 30 && horas < jornadaMax;
 
-  const bruto = esJornal
-    ? montoBase // el jornal es un valor diario, no mensual
-    : esJornadaParcial || horas === 0
+  const bruto = esRemuneracion
+    ? esJornadaParcial || horas === 0
       ? Math.round((montoBase * horas) / jornadaMax)
-      : montoBase;
+      : montoBase
+    : montoBase;
 
-  const incluirLiquido = input.incluirLiquidoEstimado !== false && !esJornal;
+  const incluirLiquido =
+    input.incluirLiquidoEstimado !== false && esRemuneracion;
+  // AFC: los menores de 18 años están excluidos del seguro de cesantía
+  // (Ley 19.728, art. 2), así que ese tramo no descuenta el 0,6%.
   const tasaDescuentos =
     (AFP_OBLIGATORIA_PCT +
       SALUD.fonasa.tasa +
-      SEGURO_CESANTIA.contrato_indefinido.trabajador) /
+      (tipo === 'menor18-mayor65'
+        ? 0
+        : SEGURO_CESANTIA.contrato_indefinido.trabajador)) /
     100;
   const liquidoEstimado = incluirLiquido
     ? Math.round(bruto * (1 - tasaDescuentos))
     : null;
 
   const valorHora =
-    esJornal || horas === 0
+    !esRemuneracion || horas === 0
       ? 0
       : Math.round(((bruto / 30) * 28) / (horas * 4));
 
@@ -115,8 +126,10 @@ export function calculateSueldoMinimo(
     jornal: 'sueldo mínimo jornal (valor diario)',
   };
 
-  const baseCalculo = esJornal
-    ? `Valor diario de referencia: $${montoBase.toLocaleString('es-CL')} por jornada.`
+  const baseCalculo = !esRemuneracion
+    ? esJornal
+      ? `Valor diario de referencia: $${montoBase.toLocaleString('es-CL')} por jornada.`
+      : `Referencia del tramo (${nombreTipo[tipo]}): $${montoBase.toLocaleString('es-CL')}; no aplica proporcional ni descuentos de previsión.`
     : esJornadaParcial
       ? `Jornada parcial (${horas} h ≤ 30 h): $${montoBase.toLocaleString('es-CL')} × ${horas} / ${jornadaMax} = $${bruto.toLocaleString('es-CL')}.`
       : esJornadaIntermedia
@@ -144,9 +157,11 @@ export function sueldoMinimoToResults(
     {
       label: result.esJornal
         ? 'Sueldo mínimo por jornada'
-        : result.esJornadaParcial
-          ? 'Sueldo mínimo proporcional (bruto)'
-          : 'Sueldo mínimo bruto',
+        : result.liquidoEstimado === null
+          ? 'Ingreso de referencia del tramo'
+          : result.esJornadaParcial
+            ? 'Sueldo mínimo proporcional (bruto)'
+            : 'Sueldo mínimo bruto',
       value: result.bruto,
       format: 'CLP',
       highlight: true,

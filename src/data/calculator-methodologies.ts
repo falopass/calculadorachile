@@ -1972,9 +1972,8 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Valor hora referencial = (bruto / 30 × 28) / (horas × 4).',
     ],
     assumptions: [
-      'El sueldo jornal es un valor diario: no se le aplica proporcional ni líquido estimado.',
-      'El líquido estimado usa solo descuentos legales mínimos: sin comisión variable de AFP, sin plan Isapre sobre 7% y sin impuesto, porque el mínimo está bajo el tramo de segunda categoría.',
-      'La regla de proporcionalidad de la Dirección del Trabajo se aplica a todos los tramos mensuales.',
+      'La proporcionalidad y el líquido estimado solo se calculan en los tramos remuneracionales (general y menor 18/mayor 65); jornal, fines no remuneracionales y zona extrema se muestran como referencia del tramo.',
+      'El líquido estimado usa solo descuentos legales mínimos: sin comisión variable de AFP, sin plan Isapre sobre 7% y sin impuesto, porque el mínimo está bajo el tramo de segunda categoría. El tramo menor 18/mayor 65 no descuenta seguro de cesantía (Ley 19.728, art. 2).',
     ],
     limitations: [
       'No calcula el sueldo real: bonos, gratificación, horas extra ni otros descuentos (prestaciones, sindicato, anticipos).',
