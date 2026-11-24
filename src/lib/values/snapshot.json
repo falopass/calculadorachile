@@ -10,7 +10,7 @@
   "pesoMexicano": 53.12,
   "boliviano": 86.61,
   "ipcMensual": -0.2,
-  "asOf": "2026-11-24T00:09:27.162Z",
+  "asOf": "2026-11-24T22:39:19.361Z",
   "observedAsOf": {
     "uf": "2026-11-24",
     "utm": "2026-11-01",
@@ -34,7 +34,7 @@
     "pesoColombiano": "bcentral",
     "pesoMexicano": "bcentral",
     "boliviano": "bcentral",
-    "ipcMensual": "unknown"
+    "ipcMensual": "mindicador"
   },
-  "generatedAt": "2026-11-24T00:09:42.132Z"
+  "generatedAt": "2026-11-24T22:39:21.365Z"
 }
