@@ -60,7 +60,14 @@ export interface SueldoLiquidoResult {
   };
   descuentos: {
     afp: number;
+    /** Salud realmente pagada (Isapre: el mayor entre 7% y el plan en UF). */
     salud: number;
+    /**
+     * Cotización de salud deducible de la renta líquida imponible: siempre
+     * el 7% legal. El exceso de un plan Isapre sobre el 7% se paga, pero
+     * no reduce la base del IUSC (art. 42 N°1 LIR).
+     */
+    saludTributable: number;
     seguroCesantia: number;
     impuesto: number;
     prestamoEmpleador: number;
@@ -190,7 +197,11 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
   );
 
   // Base tributable: sueldo imponible menos cotizaciones obligatorias.
-  const baseTributable = totalIngresosImponibles - descAFP - descSalud - descCesantia;
+  // La cotización de salud deducible es el 7% legal aunque el plan Isapre
+  // cueste más: el exceso sale del bolsillo del trabajador, no del SII.
+  const descSaludTributable = Math.min(totalIngresosImponibles, topeCLP(TOPE_IMPOSITIVO.afp_salud, valorUF)) * (SALUD.fonasa.tasa / 100);
+  const baseTributable =
+    totalIngresosImponibles - descAFP - descSaludTributable - descCesantia;
   const impuesto = calcularImpuestoSegundaCategoria(baseTributable, valorUTM);
 
   const totalDescuentos =
@@ -236,6 +247,7 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
     descuentos: {
       afp: Math.round(descAFP),
       salud: Math.round(descSalud),
+      saludTributable: Math.round(descSaludTributable),
       seguroCesantia: Math.round(descCesantia),
       impuesto: Math.round(impuesto),
       prestamoEmpleador,

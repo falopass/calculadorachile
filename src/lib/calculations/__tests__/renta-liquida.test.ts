@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { calculateRentaLiquida, rentaLiquidaToResults } from '../renta-liquida';
 import { loadCalculationFn } from '../load-calculator';
 import { getCalculatorBySlug } from '@/data/calculators';
-import { AFP, AFP_OBLIGATORIA_PCT, SALUD, SEGURO_CESANTIA, TOPE_IMPOSITIVO } from '@/lib/values/constants';
+import { AFP, AFP_OBLIGATORIA_PCT, SALUD, SEGURO_CESANTIA, TOPE_IMPOSITIVO, IMPUESTO_SEGUNDA_CATEGORIA } from '@/lib/values/constants';
 
 const opciones = {
   afp: 'capital' as const,
@@ -55,6 +55,15 @@ describe('calculateRentaLiquida', () => {
     expect(r.rentaLiquidaMensual).toBe(1_000_000 - 114_400 - 70_000);
   });
 
+  it('isapre plan > 7%: solo el 7% reduce la renta líquida; el exceso sale del líquido a pagar', () => {
+    const r = calculateRentaLiquida({ sueldoBruto: 1_000_000, ...opciones, saludTipo: 'isapre', isapreMonto: 5 });
+    // Plan 5 UF = $200.000 se paga, pero la renta líquida deduce solo 7%.
+    expect(r.descuentoSalud).toBe(70_000);
+    expect(r.cotizacionesObligatorias).toBe(190_400);
+    expect(r.rentaLiquidaMensual).toBe(809_600);
+    expect(r.sueldoLiquidoAPagar).toBe(809_600 - (200_000 - 70_000));
+  });
+
   it('bruto 0: todo en cero', () => {
     const r = calculateRentaLiquida({ sueldoBruto: 0, ...opciones });
     expect(r.rentaLiquidaMensual).toBe(0);
@@ -75,5 +84,20 @@ describe('calculateRentaLiquida', () => {
     const fn = (await loadCalculationFn(calc.id, opciones))!;
     const results = fn({ sueldoBruto: '1000000', afp: 'capital', saludTipo: 'fonasa', isapreMonto: '0', contratoIndefinido: true });
     expect(results.find((x) => x.highlight)?.value).toBe(809_600);
+
+    // Sobre el tope 90 UF y con IUSC: si el adapter omitiera la UF o la UTM
+    // inyectadas, estos valores no cuadran.
+    const overTope = fn({ sueldoBruto: '10000000', afp: 'capital', saludTipo: 'fonasa', isapreMonto: '0', contratoIndefinido: true });
+    const tope = TOPE_IMPOSITIVO.afp_salud * opciones.valorUF; // 3.600.000
+    const afp = Math.round(tope * ((AFP_OBLIGATORIA_PCT + AFP.capital.comision) / 100));
+    const salud = Math.round(tope * (SALUD.fonasa.tasa / 100));
+    const cesantia = Math.round(TOPE_IMPOSITIVO.seguro_cesantia * opciones.valorUF * (SEGURO_CESANTIA.contrato_indefinido.trabajador / 100));
+    const rentaLiquida = 10_000_000 - afp - salud - cesantia;
+    const baseUTM = rentaLiquida / opciones.valorUTM;
+    const tramo = IMPUESTO_SEGUNDA_CATEGORIA.tramos.find((t) => baseUTM > t.desde && baseUTM <= t.hasta)!;
+    const impuesto = Math.round(Math.max(0, baseUTM * tramo.factor - tramo.rebaja) * opciones.valorUTM);
+    expect(impuesto).toBeGreaterThan(0);
+    expect(overTope.find((x) => x.highlight)?.value).toBe(rentaLiquida);
+    expect(overTope.find((x) => x.label === 'Impuesto 2ª Categoría (mensual)')?.value).toBe(impuesto);
   });
 });

@@ -332,14 +332,14 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     inputs: [
       {
         id: 'sueldoBruto',
-        label: 'Remuneración imponible mensual',
+        label: 'Sueldo base mensual (sin comisiones)',
         type: 'number',
         unit: 'CLP',
         placeholder: '$1.000.000',
         required: true,
         min: 0,
         tooltip:
-          'Haberes afectos a cotizaciones: sueldo base, sobresueldo, comisiones y demás imponibles. Sin bonos no imponibles como movilización o colación.',
+          'Sueldo base y sobresueldo afectos a cotizaciones, SIN comisiones: esas agrégalas en el campo siguiente. Sin bonos no imponibles como movilización o colación.',
       },
       {
         id: 'comisiones',
@@ -349,7 +349,8 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         placeholder: '$0',
         required: false,
         min: 0,
-        tooltip: 'Se suman a la remuneración imponible antes de descontar cotizaciones.',
+        tooltip:
+          'Se suman al sueldo base para formar la remuneración imponible antes de descontar cotizaciones. Déjalo en 0 si ya incluiste las comisiones en el sueldo base.',
       },
       {
         id: 'afp',
@@ -373,10 +374,10 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         options: [
           { value: 'fonasa', label: 'FONASA (7%)' },
-          { value: 'isapre', label: 'Isapre (máx. 7% o plan)' },
+          { value: 'isapre', label: 'Isapre (7% deducible)' },
         ],
         tooltip:
-          'FONASA descuenta 7% del imponible topado. Isapre: el mayor entre 7% y el precio del plan en UF.',
+          'FONASA: 7% del imponible topado. Isapre: solo el 7% legal reduce tu renta líquida imponible; el exceso del plan lo pagas, pero no lo descuenta el SII.',
       },
       {
         id: 'isapreMonto',
@@ -387,7 +388,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: false,
         min: 0,
         tooltip:
-          'Precio del plan en UF. Si supera el 7% legal, se descuenta el plan. Con FONASA puedes dejarlo en 0.',
+          'Precio del plan en UF. Un plan sobre 7% se paga completo (rebaja el líquido a pagar) pero solo el 7% reduce la renta líquida. Con FONASA puedes dejarlo en 0.',
       },
       {
         id: 'contratoIndefinido',
@@ -403,7 +404,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué es la renta líquida imponible?',
         answer:
-          'Es la remuneración imponible menos las cotizaciones obligatorias del trabajador: AFP (10% + comisión), salud (7% o el plan Isapre) y seguro de cesantía (0,6% en contrato indefinido). El SII la usa como base del Impuesto Único de Segunda Categoría y es la que informa tu empleador en la liquidación y en Operación Renta.',
+          'Es la remuneración imponible menos las cotizaciones obligatorias deducibles del trabajador: AFP (10% + comisión), salud (7% legal; el exceso de un plan Isapre no reduce la base) y seguro de cesantía (0,6% en contrato indefinido). El SII la usa como base del Impuesto Único de Segunda Categoría y es la que informa tu empleador en la liquidación y en Operación Renta.',
       },
       {
         question: '¿Renta líquida es lo mismo que sueldo líquido?',
@@ -418,7 +419,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué cotizaciones bajan la renta líquida?',
         answer:
-          'AFP (10% obligatorio más la comisión de tu AFP), salud (7% FONASA o el mayor entre 7% y el plan Isapre en UF) y seguro de cesantía del trabajador (0,6% en contrato indefinido). Las cotizaciones se calculan sobre el imponible con tope de 90 UF para AFP y salud, y de 135,2 UF para cesantía.',
+          'AFP (10% obligatorio más la comisión de tu AFP), salud (7% legal, igual en FONASA que en Isapre; un plan más caro se paga, pero el exceso no es deducible) y seguro de cesantía del trabajador (0,6% en contrato indefinido). Las cotizaciones se calculan sobre el imponible con tope de 90 UF para AFP y salud, y de 135,2 UF para cesantía.',
       },
     ],
   },
