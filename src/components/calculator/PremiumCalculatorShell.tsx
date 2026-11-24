@@ -619,11 +619,14 @@ export default function PremiumCalculatorShell({
     ORGANISMO_BY_CATEGORY[calculator.category] ??
     'el organismo oficial competente';
 
+  const isVisible = (i: (typeof calculator.inputs)[number]) =>
+    i.visibleWhen === undefined ||
+    inputValues[i.visibleWhen.inputId] === i.visibleWhen.value;
   const optionalInputs = calculator.inputs.filter(
-    (i) => !i.required && i.defaultValue === undefined,
+    (i) => !i.required && i.defaultValue === undefined && isVisible(i),
   );
   const essentialInputs = calculator.inputs.filter(
-    (i) => i.required || i.defaultValue !== undefined,
+    (i) => (i.required || i.defaultValue !== undefined) && isVisible(i),
   );
   const isRiskyCalc = RISKY_CALCULATOR_IDS.has(calculator.id);
 

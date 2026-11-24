@@ -6191,6 +6191,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         placeholder: '$900.000',
         required: false,
         min: 0,
+        visibleWhen: { inputId: 'tipoContrato', value: 'plazo-fijo' },
         tooltip:
           'Solo si tu contrato era a plazo fijo, obra o servicio: el Fondo de Cesantía Solidario usa el promedio de tus últimas 10 remuneraciones (art. 25 Ley 19.728). Déjalo en 0 si no aplica.',
       },

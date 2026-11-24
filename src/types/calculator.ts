@@ -46,6 +46,8 @@ export interface CalculatorInput {
   shareable?: boolean;
   /** Tooltip de ayuda contextual para campos complejos */
   tooltip?: string;
+  /** El campo solo se muestra cuando otro input tiene este valor. */
+  visibleWhen?: { inputId: string; value: string };
 }
 
 /** Nota aclaratoria que se muestra bajo una fila de resultado. */
