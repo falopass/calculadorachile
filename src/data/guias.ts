@@ -25,6 +25,7 @@ import { formatCLP as clpHonorarios } from '@/lib/formatters';
 // de calculadoras relacionadas y artículos de blog complementarios.
 // ============================================
 
+import { guiaAfpComisiones } from './guia-afp-comisiones';
 import { guiaFeriados2027 } from './guia-feriados-2027';
 import { guiaLicenciaMedica } from './guia-licencia-medica';
 import { guiaOperacionRenta2027 } from './guia-operacion-renta-2027';
@@ -2670,6 +2671,8 @@ export const guias: Guia[] = [
   guiaFeriados2027,
   // Plan editorial #39: checklist Operación Renta 2027 (texto 17-11-2026)
   guiaOperacionRenta2027,
+  // Guía pillar AFP comisiones (demanda GSC nov-2026)
+  guiaAfpComisiones,
 ];
 
 // ============================================
