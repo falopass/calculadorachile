@@ -24,7 +24,7 @@ const SP_ORDEN_TRASPASO =
 const SP_COMPENDIO_TRASPASO =
   'https://www.spensiones.cl/portal/compendio/596/w3-propertyvalue-3630.html';
 const BCN_DL3500 = 'https://www.bcn.cl/leychile/navegar?idNorma=6125';
-const CHILEATIENDE_AFP = 'https://www.chileatiende.gob.cl/fichas/3218';
+const CHILEATIENDE_AFP = 'https://www.chileatiende.gob.cl/fichas/7736';
 const SP_INFOAFP = 'https://www.spensiones.cl/infoafp';
 
 const ext = (href: string, text: string) =>
@@ -74,7 +74,7 @@ export const guiaAfpComisiones: Guia = {
       html: `<p><em>Publicado el 23 de noviembre de 2026.</em></p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Las comisiones de esta guía son las publicadas por la Superintendencia de Pensiones en su documento informativo vigente a noviembre de 2026. Es información de orientación: la comisión es solo uno de los factores para elegir AFP, junto a la rentabilidad de tu multifondo y el servicio. No es una recomendación financiera individual.</p></div></aside>
 <p>La AFP más barata de Chile a noviembre de 2026 es <strong>AFP Uno, con 0,46%</strong> de comisión mensual sobre la remuneración o renta imponible. Le sigue <strong>AFP Modelo con 0,58%</strong>. La más cara es ProVida, con 1,45% (${ext(SP_DOCUMENTO_TRASPASOS, 'Superintendencia de Pensiones, documento informativo de traspasos, noviembre 2026')}).</p>
-<p>En un sueldo imponible de ${formatCLP(SUELDO_EJEMPLO)}, estar en ProVida cuesta ${formatCLP(PROVIDA_MES)} al mes contra ${formatCLP(UNO_MES)} en Uno: una diferencia de <strong>${formatCLP(AHORRO_MES)} mensuales o ${formatCLP(AHORRO_ANO)} al año</strong> que queda en tu cuenta de capitalización individual. Compara tu caso con el ${int('/calculadoras/calculadora-comparador-afp', 'comparador de comisiones AFP')}.</p>`,
+<p>En un sueldo imponible de ${formatCLP(SUELDO_EJEMPLO)}, estar en ProVida cuesta ${formatCLP(PROVIDA_MES)} al mes contra ${formatCLP(UNO_MES)} en Uno: una diferencia de <strong>${formatCLP(AHORRO_MES)} mensuales o ${formatCLP(AHORRO_ANO)} al año</strong> en tu sueldo líquido. Ojo: bajar la comisión reduce el descuento, no aumenta la cotización obligatoria; el ahorro solo crece en tu cuenta si decides ahorrarlo (por ejemplo, como APV). Compara tu caso con el ${int('/calculadoras/calculadora-comparador-afp', 'comparador de comisiones AFP')}.</p>`,
     },
     {
       id: 'comisiones-2026',
@@ -115,7 +115,7 @@ export const guiaAfpComisiones: Guia = {
 <tr><td>ProVida</td><td>1,45%</td><td>${formatCLP(PROVIDA_MES)}</td><td>${formatCLP(PROVIDA_MES * 12)}</td></tr>
 </tbody>
 </table>
-<div class="numeric-example"><strong>Ejemplo.</strong> Cambiarse de la AFP más cara a la más barata con ese sueldo libera ${formatCLP(AHORRO_MES)} al mes: ${formatCLP(AHORRO_ANO)} al año y, si la diferencia se mantuviera, cerca de ${formatCLP(AHORRO_10_ANOS)} en diez años, antes de contar la rentabilidad que esa plata genera en tu cuenta.</div>
+<div class="numeric-example"><strong>Ejemplo.</strong> Cambiarse de la AFP más cara a la más barata con ese sueldo libera ${formatCLP(AHORRO_MES)} al mes en tu líquido: ${formatCLP(AHORRO_ANO)} al año y, si la diferencia se mantuviera, cerca de ${formatCLP(AHORRO_10_ANOS)} en diez años. Si además destinas ese ahorro a APV, suma además la rentabilidad que genere en tu cuenta.</div>
 <p>Tu caso exacto depende de tu imponible y de tu AFP actual: la ${int('/calculadoras/calculadora-comparador-afp', 'calculadora comparadora de AFP')} muestra el costo de las siete administradoras y el ahorro anual proyectado de cambiarse.</p>`,
     },
     {
@@ -150,7 +150,7 @@ export const guiaAfpComisiones: Guia = {
       title: 'Lo que el cambio de AFP no hace',
       level: 2,
       html: `<p>Cambiarse de AFP <strong>no cambia tu multifondo automáticamente ni borra lagunas</strong>: se traspasa tu saldo completo tal como está, y tus cotizaciones futuras se entern en la nueva administradora (${ext(BCN_DL3500, 'DL 3.500')}). Tampoco toca tu APV ni tus depósitos convenidos salvo que firmes el traspaso conjunto en el mismo acto.</p>
-<p>Cambiarse tampoco es retroactivo: el ahorro empieza el mes en que se materializa el traspaso, no antes. Y no es gratis "volver atrás" de inmediato: cada cambio vuelve a correr con los mismos plazos de traspaso.</p>`,
+<p>Cambiarse tampoco es retroactivo: el ahorro empieza el mes en que se materializa el traspaso, no antes. Y no puedes "volver atrás" de inmediato: el Compendio exige esperar hasta el mes siguiente a la materialización del traspaso para suscribir una nueva orden (${ext(SP_COMPENDIO_TRASPASO, 'Compendio, numerales 16 y 17')}).</p>`,
     },
     {
       id: 'casos',
@@ -175,7 +175,7 @@ export const guiaAfpComisiones: Guia = {
 <h3>¿Pierdo plata o cotizaciones al cambiarme?</h3>
 <p>No. Se traspasa todo tu saldo acumulado y tus cotizaciones futuras se entern en la AFP nueva. Lo único que cambia es quién administra la cuenta y cuánto cobra.</p>
 <h3>¿Cada cuánto puedo cambiarme de AFP?</h3>
-<p>Las veces que quieras; cada cambio demora como máximo 30 días en materializarse según la fecha de firma. Solo los nuevos afiliados deben quedarse 24 meses en la AFP de menor comisión.</p>
+<p>Las veces que quieras, pero no dos seguidas: una vez materializado un traspaso, la nueva orden solo puede suscribirse desde el mes siguiente (${ext(SP_COMPENDIO_TRASPASO, 'Compendio')}). Cada cambio demora además hasta 30 días según la fecha de firma. Solo los nuevos afiliados deben quedarse 24 meses en la AFP de menor comisión.</p>
 <h3>¿La comisión incluye el Seguro de Invalidez (SIS)?</h3>
 <p>No. Para dependientes, desde agosto de 2026 el SIS lo financia el empleador dentro de su aporte al Seguro Social. Independientes y voluntarios lo pagan aparte, además de la comisión.</p>`,
     },
@@ -209,6 +209,6 @@ export const guiaAfpComisiones: Guia = {
     { label: 'Superintendencia de Pensiones, traspaso a otra AFP', url: SP_TRASPASO },
     { label: 'Compendio de Normas del Sistema de Pensiones, Título III (traspaso)', url: SP_COMPENDIO_TRASPASO },
     { label: 'Decreto Ley 3.500 de 1980 (BCN)', url: BCN_DL3500 },
-    { label: 'ChileAtiende, cambio de AFP', url: CHILEATIENDE_AFP },
+    { label: 'ChileAtiende, escoger o cambiarse de AFP', url: CHILEATIENDE_AFP },
   ],
 };
