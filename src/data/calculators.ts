@@ -292,6 +292,138 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'renta-liquida',
+    name: 'Renta Líquida 2026',
+    description:
+      'Calcula tu renta líquida imponible: la remuneración imponible menos las cotizaciones obligatorias (AFP, salud y seguro de cesantía). Es la base del Impuesto Único de Segunda Categoría y la que se declara en Operación Renta.',
+    slug: 'calculadora-renta-liquida',
+    category: 'impuestos',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-24',
+    seoTitle: 'Renta líquida: calcula tu renta líquida imponible 2026',
+    seoDescription:
+      'Calcula tu renta líquida imponible en Chile: sueldo imponible menos AFP, salud y seguro de cesantía. Base del impuesto único de segunda categoría y de Operación Renta.',
+    sources: [
+      {
+        name: 'SII — Impuesto 2ª categoría',
+        url: 'https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/impuesto2026.htm',
+        note: 'La renta líquida es la base del IUSC mensual',
+      },
+      {
+        name: 'BCN — Ley de Impuesto a la Renta, art. 42 N°1',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=5989',
+        note: 'Renta neta de segunda categoría',
+      },
+      {
+        name: 'Previred — indicadores',
+        url: 'https://www.previred.com/wp-content/uploads/2026/10/Indicadores-Previsionales-Previred-Octubre-2026.pdf',
+        note: 'Comisiones AFP y topes imponibles',
+      },
+    ],
+    keywords: [
+      'renta líquida',
+      'renta líquida imponible',
+      'base imponible segunda categoría',
+      'renta neta segunda categoría',
+      'calcular renta líquida',
+      'renta líquida anual',
+    ],
+    inputs: [
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo base mensual (sin comisiones)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$1.000.000',
+        required: true,
+        min: 0,
+        tooltip:
+          'Sueldo base y sobresueldo afectos a cotizaciones, SIN comisiones: esas agrégalas en el campo siguiente. Sin bonos no imponibles como movilización o colación.',
+      },
+      {
+        id: 'comisiones',
+        label: 'Comisiones imponibles (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$0',
+        required: false,
+        min: 0,
+        tooltip:
+          'Se suman al sueldo base para formar la remuneración imponible antes de descontar cotizaciones. Déjalo en 0 si ya incluiste las comisiones en el sueldo base.',
+      },
+      {
+        id: 'afp',
+        label: 'AFP',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'uno', label: 'Uno (0,46%)' },
+          { value: 'modelo', label: 'Modelo (0,58%)' },
+          { value: 'planvital', label: 'PlanVital (1,16%)' },
+          { value: 'habitat', label: 'Habitat (1,27%)' },
+          { value: 'capital', label: 'Capital (1,44%)' },
+          { value: 'cuprum', label: 'Cuprum (1,44%)' },
+          { value: 'provida', label: 'ProVida (1,45%)' },
+        ],
+      },
+      {
+        id: 'saludTipo',
+        label: 'Sistema de Salud',
+        type: 'select',
+        required: true,
+        options: [
+          { value: 'fonasa', label: 'FONASA (7%)' },
+          { value: 'isapre', label: 'Isapre (deducible hasta 6,3 UF)' },
+        ],
+        tooltip:
+          'FONASA: 7% del imponible topado. Isapre: deduces lo que cotizas con tope del 7% del tope imponible (6,3 UF); el exceso lo pagas pero no lo descuenta el SII.',
+      },
+      {
+        id: 'isapreMonto',
+        label: 'Plan Isapre (UF)',
+        type: 'number',
+        unit: 'UF',
+        placeholder: '3.5',
+        required: false,
+        min: 0,
+        tooltip:
+          'Precio del plan en UF. Deduces lo cotizado hasta 6,3 UF (7% del tope imponible); el exceso solo rebaja el líquido a pagar. Con FONASA puedes dejarlo en 0.',
+      },
+      {
+        id: 'contratoIndefinido',
+        label: '¿Contrato indefinido?',
+        type: 'boolean',
+        required: false,
+        defaultValue: true,
+        tooltip:
+          'Indefinido: el trabajador cotiza 0,6% de cesantía. Plazo fijo/obra: 0% trabajador / 3% empleador.',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Qué es la renta líquida imponible?',
+        answer:
+          'Es la remuneración imponible menos las cotizaciones obligatorias deducibles del trabajador: AFP (10% + comisión), salud (7% FONASA, o en Isapre lo cotizado hasta 6,3 UF) y seguro de cesantía (0,6% en contrato indefinido). El SII la usa como base del Impuesto Único de Segunda Categoría y es la que informa tu empleador en la liquidación y en Operación Renta.',
+      },
+      {
+        question: '¿Renta líquida es lo mismo que sueldo líquido?',
+        answer:
+          'No. La renta líquida imponible solo descuenta las cotizaciones obligatorias. El sueldo líquido a pagar además rebaja el impuesto de segunda categoría y otros descuentos (préstamos, sindicato, caja de compensación) y suma haberes no imponibles como movilización y colación.',
+      },
+      {
+        question: '¿Cómo se calcula la renta líquida anual?',
+        answer:
+          'Se suma la renta líquida de los 12 meses. La calculadora la proyecta multiplicando la mensual por 12; si tu remuneración varía, la anual real difiere. La renta líquida anual es la base de la tabla anual del impuesto de Operación Renta.',
+      },
+      {
+        question: '¿Qué cotizaciones bajan la renta líquida?',
+        answer:
+          'AFP (10% obligatorio más la comisión de tu AFP), salud (7% en FONASA; en Isapre lo efectivamente cotizado hasta 6,3 UF, y el exceso no es deducible) y seguro de cesantía del trabajador (0,6% en contrato indefinido). Las cotizaciones se calculan sobre el imponible con tope de 90 UF para AFP y salud, y de 135,2 UF para cesantía.',
+      },
+    ],
+  },
+  {
     id: 'finiquito',
     name: 'Finiquito',
     description:

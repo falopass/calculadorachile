@@ -82,6 +82,41 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: 'Sueldo líquido estimado a percibir: $819.400.',
     },
   },
+  'renta-liquida': {
+    summary:
+      'Calcula la renta líquida imponible mensual: la remuneración imponible menos las cotizaciones obligatorias del trabajador, reutilizando el mismo motor del sueldo líquido.',
+    calculationSteps: [
+      'Suma la remuneración imponible (sueldo y comisiones imponibles declaradas).',
+      'Descuenta AFP (10% + comisión), salud deducible (7% FONASA; Isapre lo cotizado hasta 6,3 UF) y seguro de cesantía según contrato, con los topes en UF vigentes.',
+      'La diferencia es la renta líquida imponible del mes; se proyecta ×12 como referencia anual.',
+      'Reporta también el Impuesto Único de Segunda Categoría estimado sobre esa base.',
+    ],
+    assumptions: [
+      'Los montos ingresados corresponden a haberes imponibles de una liquidación mensual ordinaria.',
+      'La proyección anual supone doce remuneraciones iguales; gratificaciones, aguinaldos o meses distintos la modifican.',
+    ],
+    limitations: [
+      'No es el sueldo líquido a pagar: no descuenta el impuesto ni otros descuentos voluntarios ni suma haberes no imponibles.',
+      'Honorarios y pensiones tienen reglas distintas; esta calculadora cubre remuneraciones de trabajadores dependientes.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: remuneración imponible de $1.000.000 en AFP Capital y FONASA',
+      inputs: [
+        'Remuneración imponible: $1.000.000',
+        'AFP: Capital (10% + 1,44% = 11,44%)',
+        'Salud: FONASA (7%)',
+        'Contrato: Indefinido (cesantía 0,6%)',
+      ],
+      development: [
+        'Descuento AFP: $1.000.000 × 11,44% = $114.400',
+        'Descuento Salud: $1.000.000 × 7,00% = $70.000',
+        'Seguro de Cesantía: $1.000.000 × 0,60% = $6.000',
+        'Cotizaciones obligatorias: $190.400',
+        'Renta líquida: $1.000.000 − $190.400 = $809.600 (exenta de IUSC al estar bajo 13,5 UTM)',
+      ],
+      result: 'Renta líquida imponible mensual: $809.600; proyección anual referencial: $9.715.200.',
+    },
+  },
   finiquito: {
     summary:
       'Desglosa pagos pendientes, feriado e indemnizaciones según causal y antecedentes ingresados, sin decidir si la causal es jurídicamente correcta.',

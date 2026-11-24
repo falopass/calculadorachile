@@ -59,6 +59,23 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'renta-liquida': {
+      const { calculateRentaLiquida, rentaLiquidaToResults } = await import('./renta-liquida');
+      return (inputs) => {
+        const result = calculateRentaLiquida({
+          sueldoBruto: coerceNumber(inputs.sueldoBruto),
+          comisiones: coerceNumber(inputs.comisiones, 0),
+          afp: inputs.afp as 'capital' | 'cuprum' | 'habitat' | 'modelo' | 'planvital' | 'provida' | 'uno',
+          saludTipo: inputs.saludTipo as 'fonasa' | 'isapre',
+          isapreMonto: coerceNumber(inputs.isapreMonto, 0),
+          contratoIndefinido: inputs.contratoIndefinido !== false && inputs.contratoIndefinido !== 'false',
+          valorUF: live?.valorUF,
+          valorUTM: live?.valorUTM,
+        });
+        return rentaLiquidaToResults(result);
+      };
+    }
+
     case 'finiquito': {
       const { calculateFiniquito, finiquitoToResults } = await import('./finiquito');
       return (inputs) => {
