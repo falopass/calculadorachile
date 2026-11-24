@@ -6114,7 +6114,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     category: 'beneficios',
     featured: false,
     phase: 2,
-    lastReviewed: '2026-11-09',
+    lastReviewed: '2026-11-24',
     sources: [
       {
         name: 'ChileAtiende — Seguro de Cesantía',
@@ -6125,6 +6125,11 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         name: 'ChileAtiende — Fondo de Cesantía Solidario',
         url: 'https://www.chileatiende.gob.cl/fichas/36646-fondo-de-cesantia-solidario-fcs',
         note: 'Requisitos FCS: causal, 10 cotizaciones en 24 meses',
+      },
+      {
+        name: 'Ley 19.728 (BCN), arts. 24 y 25',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=184979',
+        note: 'FCS se activa si el saldo CIC no cubre los 5 pagos del Fondo; base: promedio últimas 10 remuneraciones',
       },
       {
         name: 'AFC — Beneficios del seguro',
@@ -6177,6 +6182,17 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         min: 0,
         tooltip:
           'Promedio de tus últimas remuneraciones: últimas 10 si tu contrato era indefinido, últimas 5 si era a plazo fijo u obra.',
+      },
+      {
+        id: 'remuneracionPromedioFCS',
+        label: 'Promedio de tus últimas 10 remuneraciones (solo plazo fijo)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$900.000',
+        required: false,
+        min: 0,
+        tooltip:
+          'Solo si tu contrato era a plazo fijo, obra o servicio: el Fondo de Cesantía Solidario usa el promedio de tus últimas 10 remuneraciones (art. 25 Ley 19.728). Déjalo en 0 si no aplica.',
       },
       {
         id: 'cotizaciones',

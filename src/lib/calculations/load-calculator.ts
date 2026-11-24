@@ -934,6 +934,7 @@ export async function loadCalculationFn(
           tipoContrato:
             inputs.tipoContrato === 'plazo-fijo' ? 'plazo-fijo' : 'indefinido',
           remuneracionPromedio: coerceNumber(inputs.remuneracionPromedio),
+          remuneracionPromedioFCS: coerceNumber(inputs.remuneracionPromedioFCS),
           cotizaciones: coerceNumber(inputs.cotizaciones),
           ultimas3Continuas: coerceBool(inputs.ultimas3Continuas),
           causalFCS: coerceBool(inputs.causalFCS),

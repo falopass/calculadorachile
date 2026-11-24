@@ -10,8 +10,17 @@ export type TipoContratoCesantia = 'indefinido' | 'plazo-fijo';
 
 export interface SeguroCesantiaInput {
   tipoContrato: TipoContratoCesantia;
-  /** Promedio de las últimas remuneraciones (10 si indefinido, 5 si plazo fijo). */
+  /**
+   * Promedio de las últimas remuneraciones para la CIC
+   * (10 si indefinido, 5 si plazo fijo).
+   */
   remuneracionPromedio: number;
+  /**
+   * Promedio de las últimas 10 remuneraciones, base del FCS
+   * (art. 25 Ley 19.728). Solo difiere del anterior en contratos a
+   * plazo fijo; si no se informa se usa `remuneracionPromedio`.
+   */
+  remuneracionPromedioFCS?: number;
   /** Cotizaciones pagadas; para el FCS, en los últimos 24 meses. */
   cotizaciones: number;
   /** Las últimas 3 cotizaciones continuas con el mismo empleador (FCS). */
@@ -39,7 +48,7 @@ export interface SeguroCesantiaResult {
   cotizaciones: number;
   cumpleCIC: boolean;
   cumpleFCS: boolean;
-  /** El saldo CIC alcanza para cubrir al menos 5 pagos completos. */
+  /** El saldo CIC alcanza para cubrir los 5 pagos del FCS (con pisos y topes). */
   cicCubre5Pagos: boolean;
   aplica: boolean;
   /** true cuando el primer pago es solo una estimación (sin saldo informado). */
@@ -67,15 +76,22 @@ function pctCIC(i: number): number {
  *
  * FCS (solo causales con derecho, 10 cotizaciones en 24 meses con las
  * últimas 3 continuas en el mismo empleador, y cuando el saldo CIC no
- * cubre 5 pagos): 5 pagos con porcentaje, mínimo y máximo por tramo,
- * financiados primero con el saldo CIC y complementados por el Fondo.
- * Montos FCS vigentes hasta el 28-02-2027 (Res. Ex. N°383 SP).
+ * alcanza para financiar los 5 pagos del Fondo, con sus pisos y topes —
+ * art. 24 c) Ley 19.728): 5 pagos con porcentaje, mínimo y máximo por
+ * tramo, financiados primero con el saldo CIC y complementados por el
+ * Fondo. Base FCS: promedio de las últimas 10 remuneraciones, también
+ * para plazo fijo (art. 25). Montos FCS vigentes hasta el 28-02-2027
+ * (Res. Ex. N°383 SP).
  */
 export function calculateSeguroCesantia(
   input: SeguroCesantiaInput,
 ): SeguroCesantiaResult {
   const tipo = input.tipoContrato === 'plazo-fijo' ? 'plazo-fijo' : 'indefinido';
   const promedio = Math.max(0, input.remuneracionPromedio ?? 0);
+  const promedioFCS = Math.max(
+    0,
+    input.remuneracionPromedioFCS || input.remuneracionPromedio || 0,
+  );
   const cotizaciones = Math.max(0, Math.round(input.cotizaciones ?? 0));
   const saldoInformado = Math.max(0, input.saldoCIC ?? 0);
 
@@ -114,10 +130,18 @@ export function calculateSeguroCesantia(
     }
   }
 
-  // ¿El saldo CIC cubre al menos 5 pagos completos?
-  let suma5 = 0;
-  for (let i = 0; i < 5; i++) suma5 += Math.round((pctCIC(i) / 100) * promedio);
-  const cicCubre5Pagos = saldoInformado >= suma5;
+  // Los 5 pagos del FCS (porcentaje del promedio de los últimos 10 meses,
+  // acotado por el mínimo y máximo de cada giro).
+  const tablaFCS =
+    tipo === 'indefinido' ? BENEFICIOS.fcs.indefinido : BENEFICIOS.fcs.plazoFijo;
+  const montosFCS = tablaFCS.porcentajes.map((pct, i) => {
+    const bruto = Math.round((pct / 100) * promedioFCS);
+    return Math.min(Math.max(bruto, tablaFCS.minimos[i]), tablaFCS.maximos[i]);
+  });
+
+  // ¿El saldo CIC cubre los 5 pagos del FCS? (art. 24 c) Ley 19.728)
+  const suma5FCS = montosFCS.reduce((acc, m) => acc + m, 0);
+  const cicCubre5Pagos = saldoInformado >= suma5FCS;
 
   // El FCS aplica solo si el saldo no cubre 5 pagos (o no se informó).
   const fcsAplica =
@@ -128,12 +152,9 @@ export function calculateSeguroCesantia(
   let esEstimacionSinSaldo = false;
 
   if (fcsAplica) {
-    // 5 pagos FCS con piso y tope; el saldo CIC financia primero.
-    const tabla =
-      tipo === 'indefinido' ? BENEFICIOS.fcs.indefinido : BENEFICIOS.fcs.plazoFijo;
+    // 5 pagos FCS; el saldo CIC financia primero.
     for (let i = 0; i < BENEFICIOS.fcs.pagos; i++) {
-      const bruto = Math.round((tabla.porcentajes[i] / 100) * promedio);
-      const total = Math.min(Math.max(bruto, tabla.minimos[i]), tabla.maximos[i]);
+      const total = montosFCS[i];
       const desdeCIC = Math.min(total, Math.max(0, saldoRestanteCIC));
       saldoRestanteCIC -= desdeCIC;
       pagos.push({
