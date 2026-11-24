@@ -29,6 +29,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   // Sueldo
   'calculadora-sueldo-liquido': 'sueldo-liquido-chile',
   'calculadora-impuesto-segunda-categoria': 'sueldo-liquido-chile',
+  'calculadora-renta-liquida': 'sueldo-liquido-chile',
   'calculadora-comparador-afp': 'afp-mas-barata-comisiones-chile',
 
   // Beneficios laborales / finiquito

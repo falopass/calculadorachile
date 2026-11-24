@@ -83,6 +83,8 @@ export interface SueldoLiquidoResult {
   totalIngresos: number;
   totalDescuentos: number;
   totalIngresosImponibles: number;
+  /** Renta líquida imponible mensual: imponible menos cotizaciones obligatorias (base del IUSC). */
+  baseTributable: number;
 }
 
 const topeCLP = (topeUF: number, valorUF: number) => topeUF * valorUF;
@@ -252,6 +254,7 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
     totalIngresos,
     totalDescuentos: Math.round(totalDescuentos),
     totalIngresosImponibles,
+    baseTributable: Math.round(baseTributable),
   };
 }
 
