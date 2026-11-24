@@ -181,7 +181,7 @@ export const guias: Guia[] = [
 
 <h3>2. Cotización de salud (7% mínimo)</h3>
 <p>El <strong>7% del imponible</strong> va a FONASA o al plan de Isapre. El plan de Isapre puede costar más del 7% legal: en ese caso el trabajador paga el mayor entre 7% y el costo del plan. El monto pactado en UF se transforma a pesos con el valor UF del último día del mes anterior al pago.</p>
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Plan de Isapre superior al 7%</strong><p>Si tu plan en UF cuesta más del 7% del imponible, pagas el costo total del plan. Esa diferencia adicional NO rebaja base tributable. Cambiar a un plan más barato o a FONASA puede aumentar tu sueldo líquido entre 1% y 6%.</p></div></aside>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Plan de Isapre superior al 7%</strong><p>Si tu plan en UF cuesta más del 7% del imponible, pagas el costo total del plan. Para el impuesto deduces lo cotizado hasta un tope de 6,3 UF (el 7% del tope imponible): solo lo que exceda ese tope no rebaja la base tributable. Cambiar a un plan más barato o a FONASA puede aumentar tu sueldo líquido entre 1% y 6%.</p></div></aside>
 
 <h3>3. Seguro de cesantía (0,6%)</h3>
 <p>Solo aplica a trabajadores con contrato indefinido. El trabajador aporta <strong>0,6%</strong> y el empleador <strong>2,4%</strong> (Ley 19.728). Para contratos a plazo fijo, el trabajador no aporta nada y el empleador paga 3,0%. El tope imponible para cesantía es <strong>135,2 UF</strong> mensuales en 2026, distinto y más alto que el tope de AFP/Salud.</p>
