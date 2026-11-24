@@ -262,7 +262,7 @@ const PT_MINIMOS = [10, 15, 20, 25, 30].map((horas) => ({
 }));
 
 // Ejemplo editorial del seguro de cesantía: contrato indefinido con saldo
-// CIC que alcanza para los 5 pagos (todo desde la cuenta individual) y otro
+// CIC que cubre justo los 5 pagos (todo desde la cuenta individual) y otro
 // con saldo insuficiente que activa el FCS. Montos calculados con la misma
 // función de la calculadora, nunca escritos a mano.
 const CESANTIA_EJ_CIC = calculateSeguroCesantia({
@@ -271,7 +271,7 @@ const CESANTIA_EJ_CIC = calculateSeguroCesantia({
   cotizaciones: 24,
   ultimas3Continuas: true,
   causalFCS: true,
-  saldoCIC: 2_000_000,
+  saldoCIC: 1_750_000,
 });
 const CESANTIA_EJ_FCS = calculateSeguroCesantia({
   tipoContrato: 'indefinido',
@@ -7311,7 +7311,7 @@ ${APV_FILAS_TRAMOS}
         url: 'https://www.afc.cl/',
       },
     ],
-    content: `<p class="article-lead">La respuesta corta: el seguro de cesantía paga el <strong>70% del promedio de tus últimas remuneraciones en el primer mes</strong> —sobre las últimas 10 remuneraciones si tu contrato era indefinido, sobre las últimas 5 si era a plazo fijo— y luego los pagos bajan en porcentaje fijo hasta agotar el saldo de tu cuenta. Si el saldo no alcanza para 5 pagos y cumples los requisitos, entra el <strong>Fondo de Cesantía Solidario</strong>, que garantiza 5 pagos con pisos y topes vigentes hasta el 28 de febrero de 2027.</p>
+    content: `<p class="article-lead">La respuesta corta: el seguro de cesantía paga el <strong>70% del promedio de tus últimas remuneraciones en el primer mes</strong> —sobre las últimas 10 remuneraciones si tu contrato era indefinido, sobre las últimas 5 si era a plazo fijo— y luego los pagos bajan en porcentaje fijo hasta agotar el saldo de tu cuenta. Si el saldo no alcanza para financiar los 5 pagos del Fondo y cumples los requisitos, entra el <strong>Fondo de Cesantía Solidario</strong>, que paga mientras sigas cesante con pisos y topes vigentes hasta el 28 de febrero de 2027.</p>
 
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría laboral ni legal. Los montos usan los porcentajes de la Ley 19.728 y los mínimos/máximos del FCS vigentes hasta el 28-02-2027 (Res. Ex. N°383 de la Superintendencia de Pensiones). Tu pago real depende del saldo exacto de tu Cuenta Individual de Cesantía, que puedes consultar en <a href="https://www.afc.cl/" target="_blank" rel="noopener">afc.cl</a>.</p></div></aside>
 
@@ -7321,9 +7321,9 @@ ${APV_FILAS_TRAMOS}
 <p>El seguro de cesantía chileno (Ley 19.728) paga desde dos bolsillos distintos, y confundirlos cambia por completo la estimación:</p>
 <ul>
 <li><strong>Cuenta Individual de Cesantía (CIC):</strong> tus propios ahorros —lo que se descontó de tu sueldo más el aporte del empleador—. Se cobra por <strong>cualquier causal</strong> de término (despido, renuncia, mutuo acuerdo), con un mínimo de 10 cotizaciones pagadas si el contrato era indefinido o de casa particular, y 5 si era a plazo fijo, obra o servicio.</li>
-<li><strong>Fondo de Cesantía Solidario (FCS):</strong> un fondo común que complementa cuando el saldo de tu CIC <strong>no alcanza para 5 pagos</strong>. Exige causal con derecho —necesidades de la empresa, quiebra, vencimiento del plazo, conclusión de la obra o caso fortuito/fuerza mayor—, 10 cotizaciones en los últimos 24 meses, las últimas 3 continuas con el mismo empleador e inscripción en la Bolsa Nacional de Empleo.</li>
+<li><strong>Fondo de Cesantía Solidario (FCS):</strong> un fondo común que complementa cuando el saldo de tu CIC <strong>no alcanza para financiar los 5 pagos del Fondo</strong>. Exige causal con derecho —necesidades de la empresa, quiebra, vencimiento del plazo, conclusión de la obra o caso fortuito/fuerza mayor—, 10 cotizaciones en los últimos 24 meses, las últimas 3 continuas con el mismo empleador e inscripción en la Bolsa Nacional de Empleo.</li>
 </ul>
-<p>La regla práctica: <strong>primero se gasta tu CIC y el Fondo solo completa lo que falta</strong> hasta los montos del FCS. Quien renuncia cobra solo de su CIC; quien es despedido por necesidades de la empresa puede además acceder al Fondo si su saldo es bajo.</p>
+<p>La regla práctica: <strong>primero se gasta tu CIC y el Fondo solo completa lo que falta</strong> hasta los montos del FCS. Los giros se mantienen mientras sigas cesante: se suspenden al encontrar un nuevo trabajo, y en períodos de desempleo alto —cuando la tasa nacional del INE supera en 1% el promedio de los últimos cuatro años— pueden sumarse 2 giros adicionales. Quien renuncia cobra solo de su CIC; quien es despedido por necesidades de la empresa puede además acceder al Fondo si su saldo es bajo.</p>
 
 <h2>Cuánto paga cada mes: la tabla de porcentajes</h2>
 <p>Cada pago es un porcentaje fijo del promedio de tus últimas remuneraciones (10 con contrato indefinido, 5 con plazo fijo), y el porcentaje baja con cada pago:</p>
@@ -7332,29 +7332,29 @@ ${APV_FILAS_TRAMOS}
 <li>Pago 4: <strong>40%</strong> · Pago 5: <strong>35%</strong> · Pago 6 en adelante: <strong>30%</strong></li>
 <li>Máximo 13 pagos; el último porcentaje (30%) se repite hasta agotar el saldo.</li></ul>
 <span class="total">Cada pago = % del promedio, hasta consumir el saldo CIC</span></div>
-<p>El número de pagos no es fijo: depende de cuánto saldo tienes. Con un promedio de $700.000 y un saldo CIC de $2.000.000, los pagos quedan así:</p>
+<p>El número de pagos no es fijo: depende de cuánto saldo tienes. Con un promedio de $700.000 y un saldo CIC de $1.750.000, los pagos quedan así:</p>
 <table><thead><tr><th>Pago</th><th>Total del mes</th><th>Desde tu CIC</th><th>Desde el Fondo</th></tr></thead><tbody>${filasPagosCesantia(CESANTIA_EJ_CIC.pagos)}</tbody></table>
-<p>Total cobrado: <strong>${formatCLP(CESANTIA_EJ_CIC.totalEstimado)}</strong> en ${CESANTIA_EJ_CIC.pagos.length} pagos. Como el saldo alcanzaba para cubrir 5 pagos completos, el Fondo Solidario no entra: todo sale de la cuenta individual.</p>
+<p>Total cobrado: <strong>${formatCLP(CESANTIA_EJ_CIC.totalEstimado)}</strong> en ${CESANTIA_EJ_CIC.pagos.length} pagos. Como el saldo alcanzaba justo para los 5 pagos, el Fondo Solidario no entra: todo sale de la cuenta individual. Con más saldo la cadena sigue a 30% mensual hasta agotarlo (máx. 13 giros); con menos, entra el Fondo.</p>
 
 <h2>Cuando el saldo no alcanza: entra el Fondo Solidario</h2>
 <p>Si tu saldo CIC no cubre 5 pagos completos y cumples los requisitos, el FCS garantiza 5 pagos mensuales con un piso y un tope por tramo. La tabla vigente hasta el 28 de febrero de 2027 es:</p>
 ${tablaFcsHtml()}
-<p>Ejemplo con promedio de $550.000 y solo $300.000 de saldo: el primer pago sale $385.000 —$300.000 de la CIC y $85.000 que pone el Fondo— y los siguientes se financian enteros por el FCS:</p>
+<p>Ejemplo con promedio de $550.000 y solo ${formatCLP(CESANTIA_EJ_FCS.pagos[0].desdeCIC)} de saldo: el primer pago sale ${formatCLP(CESANTIA_EJ_FCS.pagos[0].total)} —${formatCLP(CESANTIA_EJ_FCS.pagos[0].desdeCIC)} de la CIC y ${formatCLP(CESANTIA_EJ_FCS.pagos[0].desdeFCS)} que pone el Fondo— y los siguientes se financian enteros por el FCS:</p>
 <table><thead><tr><th>Pago</th><th>Total del mes</th><th>Desde tu CIC</th><th>Desde el Fondo</th></tr></thead><tbody>${filasPagosCesantia(CESANTIA_EJ_FCS.pagos)}</tbody></table>
-<p>Total cobrado: <strong>${formatCLP(CESANTIA_EJ_FCS.totalEstimado)}</strong>. Sin el Fondo, esa persona habría recibido solo los $300.000 de su saldo; el FCS casi quintuplica lo que llega al bolsillo. Por eso la causal de despido importa tanto: <strong>con necesidades de la empresa el Fondo responde; con renuncia voluntaria, no</strong>.</p>
+<p>Total cobrado: <strong>${formatCLP(CESANTIA_EJ_FCS.totalEstimado)}</strong>. Sin el Fondo, esa persona habría recibido solo sus ${formatCLP(CESANTIA_EJ_FCS.pagos[0].desdeCIC)} de saldo; el FCS casi quintuplica lo que llega al bolsillo. Por eso la causal de despido importa tanto: <strong>con necesidades de la empresa el Fondo responde; con renuncia voluntaria, no</strong>.</p>
 
 <h2>Requisitos según tu tipo de contrato</h2>
 <ul>
 <li><strong>Contrato indefinido y casa particular:</strong> 10 cotizaciones pagadas para cobrar la CIC, por cualquier causal. Para el FCS: causal con derecho + 10 cotizaciones en 24 meses + últimas 3 continuas con el mismo empleador.</li>
 <li><strong>Plazo fijo, obra o servicio:</strong> 5 cotizaciones para la CIC. En el FCS los porcentajes son otros (60%, 40%, 35%, 30%, 30%) y los mínimos/máximos también, como muestra la tabla de arriba.</li>
-<li><strong>Trabajador agrícola o portuario eventual:</strong> la CIC se puede cobrar por períodos de 90 días.</li>
+
 </ul>
 <p>El descuento que alimenta este seguro: con contrato indefinido te descuentan <strong>0,6%</strong> de tu imponible (tope de 135,2 UF en 2026) y el empleador aporta 2,4%; a plazo fijo no hay descuento del trabajador y el empleador aporta el 3% completo. Ese detalle ya aparece en tu liquidación —puedes verificarlo con la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a>.</p>
 
 <h2>Cómo simular tu caso, paso a paso</h2>
 <div class="steps"><ol>
 <li><strong>Define tu tipo de contrato</strong> en la <a href="/calculadoras/calculadora-seguro-cesantia">calculadora de seguro de cesantía</a>: indefinido o plazo fijo.</li>
-<li><strong>Calcula tu promedio de remuneraciones:</strong> las últimas 10 si eras indefinido, las últimas 5 si eras a plazo fijo (usa el imponible de tus liquidaciones).</li>
+<li><strong>Calcula tu promedio de remuneraciones imponibles</strong> (el de tus liquidaciones): la Cuenta Individual promedia las últimas 10 con contrato indefinido y las últimas 5 a plazo fijo; para el Fondo Solidario la base es el promedio de los últimos 10 meses.</li>
 <li><strong>Ingresa tus cotizaciones pagadas</strong> —las revisas en afc.cl o en tus liquidaciones— y si las últimas 3 fueron continuas con el mismo empleador.</li>
 <li><strong>Declara la causal de término:</strong> la calculadora aplica el FCS solo si corresponde (necesidades de la empresa, quiebra, vencimiento de plazo, fin de obra, caso fortuito).</li>
 <li><strong>Agrega tu saldo CIC si lo conoces:</strong> sin él, la calculadora solo estima el primer pago. El saldo exacto está en tu cartola de <a href="https://www.afc.cl/" target="_blank" rel="noopener">afc.cl</a>.</li>
@@ -7366,7 +7366,7 @@ ${tablaFcsHtml()}
 <li><strong>Creer que la renuncia no da derecho:</strong> sí da derecho a la CIC con las cotizaciones mínimas; lo que se pierde es el FCS.</li>
 <li><strong>Usar el sueldo líquido como base:</strong> el porcentaje se aplica sobre el promedio de <em>remuneraciones imponibles</em>, no sobre el líquido ni sobre el total haberes con asignaciones no imponibles.</li>
 <li><strong>Olvidar que el porcentaje baja:</strong> el segundo pago ya no es 70% sino 60%, y el tercero 45%. Planificar con el primer monto para todos los meses sobreestima el ingreso.</li>
-<li><strong>No inscribirse en la Bolsa Nacional de Empleo:</strong> es requisito del FCS; el registro se hace en <a href="https://www.chileatiende.gob.cl/fichas/36646-fondo-de-cesantia-solidario" target="_blank" rel="noopener">ChileAtiende</a>.</li>
+<li><strong>No inscribirse en la Bolsa Nacional de Empleo:</strong> es requisito del FCS; la cuenta se activa en el sitio de la <a href="https://www.bne.cl/" target="_blank" rel="noopener">BNE</a> una vez solicitado el beneficio.</li>
 </ul>
 
 <h2>El seguro no es el finiquito: van por separado</h2>
