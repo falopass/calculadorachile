@@ -55,13 +55,21 @@ describe('calculateRentaLiquida', () => {
     expect(r.rentaLiquidaMensual).toBe(1_000_000 - 114_400 - 70_000);
   });
 
-  it('isapre plan > 7%: solo el 7% reduce la renta líquida; el exceso sale del líquido a pagar', () => {
+  it('isapre plan dentro del tope 6,3 UF: deduce lo cotizado', () => {
     const r = calculateRentaLiquida({ sueldoBruto: 1_000_000, ...opciones, saludTipo: 'isapre', isapreMonto: 5 });
-    // Plan 5 UF = $200.000 se paga, pero la renta líquida deduce solo 7%.
-    expect(r.descuentoSalud).toBe(70_000);
-    expect(r.cotizacionesObligatorias).toBe(190_400);
-    expect(r.rentaLiquidaMensual).toBe(809_600);
-    expect(r.sueldoLiquidoAPagar).toBe(809_600 - (200_000 - 70_000));
+    // Plan 5 UF = $200.000 < tope 6,3 UF ($252.000): deducible completo.
+    expect(r.descuentoSalud).toBe(200_000);
+    expect(r.cotizacionesObligatorias).toBe(320_400);
+    expect(r.rentaLiquidaMensual).toBe(679_600);
+    expect(r.sueldoLiquidoAPagar).toBe(679_600);
+  });
+
+  it('isapre plan sobre el tope 6,3 UF: solo hasta el tope reduce la renta líquida', () => {
+    const r = calculateRentaLiquida({ sueldoBruto: 1_000_000, ...opciones, saludTipo: 'isapre', isapreMonto: 8 });
+    // Plan 8 UF = $320.000 se paga completo, pero la renta líquida deduce 6,3 UF.
+    expect(r.descuentoSalud).toBe(252_000);
+    expect(r.rentaLiquidaMensual).toBe(627_600);
+    expect(r.sueldoLiquidoAPagar).toBe(1_000_000 - 114_400 - 320_000 - 6_000);
   });
 
   it('bruto 0: todo en cero', () => {

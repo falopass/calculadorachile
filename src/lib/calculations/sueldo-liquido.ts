@@ -63,9 +63,10 @@ export interface SueldoLiquidoResult {
     /** Salud realmente pagada (Isapre: el mayor entre 7% y el plan en UF). */
     salud: number;
     /**
-     * Cotización de salud deducible de la renta líquida imponible: siempre
-     * el 7% legal. El exceso de un plan Isapre sobre el 7% se paga, pero
-     * no reduce la base del IUSC (art. 42 N°1 LIR).
+     * Cotización de salud deducible de la renta líquida imponible (art. 42
+     * N°1 LIR): FONASA el 7% del imponible topado; Isapre lo efectivamente
+     * cotizado con tope del 7% del tope imponible (6,3 UF). El exceso del
+     * plan sobre ese tope se paga, pero no reduce la base del IUSC.
      */
     saludTributable: number;
     seguroCesantia: number;
@@ -197,9 +198,13 @@ export function calculateSueldoLiquido(input: SueldoLiquidoInput): SueldoLiquido
   );
 
   // Base tributable: sueldo imponible menos cotizaciones obligatorias.
-  // La cotización de salud deducible es el 7% legal aunque el plan Isapre
-  // cueste más: el exceso sale del bolsillo del trabajador, no del SII.
-  const descSaludTributable = Math.min(totalIngresosImponibles, topeCLP(TOPE_IMPOSITIVO.afp_salud, valorUF)) * (SALUD.fonasa.tasa / 100);
+  // Salud deducible: lo efectivamente cotizado con tope del 7% del tope
+  // imponible (6,3 UF). El exceso de un plan Isapre sobre ese tope sale
+  // del bolsillo del trabajador, no del SII.
+  const descSaludTributable = Math.min(
+    descSalud,
+    topeCLP(TOPE_IMPOSITIVO.afp_salud, valorUF) * (SALUD.fonasa.tasa / 100),
+  );
   const baseTributable =
     totalIngresosImponibles - descAFP - descSaludTributable - descCesantia;
   const impuesto = calcularImpuestoSegundaCategoria(baseTributable, valorUTM);

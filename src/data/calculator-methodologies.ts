@@ -87,7 +87,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Calcula la renta líquida imponible mensual: la remuneración imponible menos las cotizaciones obligatorias del trabajador, reutilizando el mismo motor del sueldo líquido.',
     calculationSteps: [
       'Suma la remuneración imponible (sueldo y comisiones imponibles declaradas).',
-      'Descuenta AFP (10% + comisión), salud (7% legal deducible; el exceso de un plan Isapre no reduce la base) y seguro de cesantía según contrato, con los topes en UF vigentes.',
+      'Descuenta AFP (10% + comisión), salud deducible (7% FONASA; Isapre lo cotizado hasta 6,3 UF) y seguro de cesantía según contrato, con los topes en UF vigentes.',
       'La diferencia es la renta líquida imponible del mes; se proyecta ×12 como referencia anual.',
       'Reporta también el Impuesto Único de Segunda Categoría estimado sobre esa base.',
     ],

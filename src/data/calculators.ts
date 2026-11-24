@@ -374,10 +374,10 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: true,
         options: [
           { value: 'fonasa', label: 'FONASA (7%)' },
-          { value: 'isapre', label: 'Isapre (7% deducible)' },
+          { value: 'isapre', label: 'Isapre (deducible hasta 6,3 UF)' },
         ],
         tooltip:
-          'FONASA: 7% del imponible topado. Isapre: solo el 7% legal reduce tu renta líquida imponible; el exceso del plan lo pagas, pero no lo descuenta el SII.',
+          'FONASA: 7% del imponible topado. Isapre: deduces lo que cotizas con tope del 7% del tope imponible (6,3 UF); el exceso lo pagas pero no lo descuenta el SII.',
       },
       {
         id: 'isapreMonto',
@@ -388,7 +388,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         required: false,
         min: 0,
         tooltip:
-          'Precio del plan en UF. Un plan sobre 7% se paga completo (rebaja el líquido a pagar) pero solo el 7% reduce la renta líquida. Con FONASA puedes dejarlo en 0.',
+          'Precio del plan en UF. Deduces lo cotizado hasta 6,3 UF (7% del tope imponible); el exceso solo rebaja el líquido a pagar. Con FONASA puedes dejarlo en 0.',
       },
       {
         id: 'contratoIndefinido',
@@ -404,7 +404,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué es la renta líquida imponible?',
         answer:
-          'Es la remuneración imponible menos las cotizaciones obligatorias deducibles del trabajador: AFP (10% + comisión), salud (7% legal; el exceso de un plan Isapre no reduce la base) y seguro de cesantía (0,6% en contrato indefinido). El SII la usa como base del Impuesto Único de Segunda Categoría y es la que informa tu empleador en la liquidación y en Operación Renta.',
+          'Es la remuneración imponible menos las cotizaciones obligatorias deducibles del trabajador: AFP (10% + comisión), salud (7% FONASA, o en Isapre lo cotizado hasta 6,3 UF) y seguro de cesantía (0,6% en contrato indefinido). El SII la usa como base del Impuesto Único de Segunda Categoría y es la que informa tu empleador en la liquidación y en Operación Renta.',
       },
       {
         question: '¿Renta líquida es lo mismo que sueldo líquido?',
@@ -419,7 +419,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Qué cotizaciones bajan la renta líquida?',
         answer:
-          'AFP (10% obligatorio más la comisión de tu AFP), salud (7% legal, igual en FONASA que en Isapre; un plan más caro se paga, pero el exceso no es deducible) y seguro de cesantía del trabajador (0,6% en contrato indefinido). Las cotizaciones se calculan sobre el imponible con tope de 90 UF para AFP y salud, y de 135,2 UF para cesantía.',
+          'AFP (10% obligatorio más la comisión de tu AFP), salud (7% en FONASA; en Isapre lo efectivamente cotizado hasta 6,3 UF, y el exceso no es deducible) y seguro de cesantía del trabajador (0,6% en contrato indefinido). Las cotizaciones se calculan sobre el imponible con tope de 90 UF para AFP y salud, y de 135,2 UF para cesantía.',
       },
     ],
   },

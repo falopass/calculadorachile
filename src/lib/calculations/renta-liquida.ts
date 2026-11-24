@@ -35,18 +35,23 @@ export interface RentaLiquidaResult {
 
 export function calculateRentaLiquida(input: RentaLiquidaInput): RentaLiquidaResult {
   const r = calculateSueldoLiquido(input);
-  // Cotizaciones deducibles: salud usa el 7% legal (`saludTributable`);
-  // el exceso de un plan Isapre no baja la renta líquida imponible.
+  // Cotizaciones deducibles: salud usa `saludTributable` (lo cotizado,
+  // topado a 6,3 UF); el exceso de un plan Isapre sobre ese tope no baja
+  // la renta líquida imponible.
   const cotizaciones =
     r.descuentos.afp + r.descuentos.saludTributable + r.descuentos.seguroCesantia;
+  // Renta líquida desde montos ya redondeados: el desglose visible
+  // (imponible − cotizaciones) cuadra al peso con el resultado.
+  const rentaLiquidaMensual =
+    Math.round(r.totalIngresosImponibles) - Math.round(cotizaciones);
   return {
     totalImponible: Math.round(r.totalIngresosImponibles),
     cotizacionesObligatorias: Math.round(cotizaciones),
     descuentoAfp: r.descuentos.afp,
     descuentoSalud: r.descuentos.saludTributable,
     descuentoCesantia: r.descuentos.seguroCesantia,
-    rentaLiquidaMensual: r.baseTributable,
-    rentaLiquidaAnual: r.baseTributable * 12,
+    rentaLiquidaMensual,
+    rentaLiquidaAnual: rentaLiquidaMensual * 12,
     impuestoSegundaCategoria: r.descuentos.impuesto,
     sueldoLiquidoAPagar: r.liquido,
   };
