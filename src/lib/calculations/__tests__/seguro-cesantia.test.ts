@@ -87,7 +87,7 @@ describe('calculateSeguroCesantia — FCS', () => {
   });
 
   it('saldo que cubre los 5 pagos FCS no activa el Fondo', () => {
-    // promedio $2.000.000: 5 pagos FCS = 3.085.726 (topes); saldo mayor → solo CIC.
+    // promedio $2.000.000: 5 pagos FCS = 3.585.726 (topes); saldo mayor → solo CIC.
     const r = calculateSeguroCesantia({
       tipoContrato: 'indefinido',
       remuneracionPromedio: 2000000,
@@ -97,6 +97,20 @@ describe('calculateSeguroCesantia — FCS', () => {
     expect(r.cicCubre5Pagos).toBe(true);
     expect(r.pagos.every((p) => p.desdeFCS === 0)).toBe(true);
     expect(r.pagos[0].total).toBe(1400000);
+  });
+
+  it('saldo igual a la suma FCS justo alcanza → no activa el Fondo', () => {
+    // promedio $1.000.000: 5 pagos FCS = 2.500.000; saldo igual → solo CIC.
+    const r = calculateSeguroCesantia({
+      tipoContrato: 'indefinido',
+      remuneracionPromedio: 1000000,
+      saldoCIC: 2500000,
+      ...elegibleFCS,
+    });
+    expect(r.cicCubre5Pagos).toBe(true);
+    expect(r.pagos).toHaveLength(5);
+    expect(r.pagos.every((p) => p.desdeFCS === 0)).toBe(true);
+    expect(r.saldoRestanteCIC).toBe(0);
   });
 
   it('plazo fijo: el FCS usa el promedio de las últimas 10 remuneraciones (art. 25)', () => {

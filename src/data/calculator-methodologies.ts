@@ -1020,7 +1020,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Reparte cada pago FCS entre saldo CIC (primero) y complemento del Fondo.',
     ],
     assumptions: [
-      'El promedio declarado corresponde a las últimas 10 remuneraciones (indefinido) o 5 (plazo fijo/obra); para el FCS se usan siempre las últimas 10.',
+      'El promedio declarado corresponde a las últimas 10 remuneraciones (indefinido) o 5 (plazo fijo/obra); el FCS usa las últimas 10 y, si no se informa ese promedio, estima con el declarado.',
       'Las cotizaciones declaradas están efectivamente pagadas y continuas según lo indicado.',
     ],
     limitations: [

@@ -88,9 +88,13 @@ export function calculateSeguroCesantia(
 ): SeguroCesantiaResult {
   const tipo = input.tipoContrato === 'plazo-fijo' ? 'plazo-fijo' : 'indefinido';
   const promedio = Math.max(0, input.remuneracionPromedio ?? 0);
+  // Solo plazo fijo puede tener una base FCS distinta (10 vs 5 meses);
+  // en indefinido ambas bases son la de los últimos 10 meses.
   const promedioFCS = Math.max(
     0,
-    input.remuneracionPromedioFCS || input.remuneracionPromedio || 0,
+    (tipo === 'plazo-fijo' ? input.remuneracionPromedioFCS : 0) ||
+      input.remuneracionPromedio ||
+      0,
   );
   const cotizaciones = Math.max(0, Math.round(input.cotizaciones ?? 0));
   const saldoInformado = Math.max(0, input.saldoCIC ?? 0);
