@@ -1016,11 +1016,11 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
     calculationSteps: [
       'Verifica cotizaciones mínimas de la CIC (10 si indefinido, 5 si plazo fijo).',
       'Si hay saldo informado, aplica 70/60/45/40/35/30…% del promedio hasta agotarlo o llegar a 13 pagos.',
-      'Si el saldo no cubre 5 pagos y se cumplen los requisitos del FCS (causal con derecho, 10 cotizaciones en 24 meses, últimas 3 continuas), aplica los 5 pagos con mínimos y máximos vigentes al 28-02-2027.',
+      'Si el saldo no cubre los 5 pagos del Fondo (con sus mínimos y máximos) y se cumplen los requisitos del FCS (causal con derecho, 10 cotizaciones en 24 meses, últimas 3 continuas), aplica esos 5 pagos vigentes al 28-02-2027.',
       'Reparte cada pago FCS entre saldo CIC (primero) y complemento del Fondo.',
     ],
     assumptions: [
-      'El promedio declarado corresponde a las últimas 10 remuneraciones (indefinido) o 5 (plazo fijo/obra).',
+      'El promedio declarado corresponde a las últimas 10 remuneraciones (indefinido) o 5 (plazo fijo/obra); el FCS usa las últimas 10 y, si no se informa ese promedio, estima con el declarado.',
       'Las cotizaciones declaradas están efectivamente pagadas y continuas según lo indicado.',
     ],
     limitations: [

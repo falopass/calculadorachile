@@ -67,6 +67,79 @@ describe('calculateSeguroCesantia — FCS', () => {
     ]);
   });
 
+  it('saldo entre la suma CIC y la suma FCS sí activa el FCS (art. 24 c)', () => {
+    // promedio $300.000: 5 pagos CIC = 750.000 pero 5 pagos FCS = 1.075.718.
+    // Un saldo de $900.000 cubriría los 5 giros CIC y antes negaba el FCS;
+    // la ley lo compara contra los montos del Fondo, con pisos y topes.
+    const r = calculateSeguroCesantia({
+      tipoContrato: 'indefinido',
+      remuneracionPromedio: 300000,
+      saldoCIC: 900000,
+      ...elegibleFCS,
+    });
+    expect(r.cicCubre5Pagos).toBe(false);
+    expect(r.pagos.map((p) => p.total)).toEqual([
+      301201, 258171, 193629, 172115, 150602,
+    ]);
+    expect(r.pagos[0].desdeCIC).toBe(301201);
+    expect(r.pagos.reduce((acc, p) => acc + p.desdeFCS, 0)).toBe(175718);
+    expect(r.saldoRestanteCIC).toBe(0);
+  });
+
+  it('saldo que cubre los 5 pagos FCS no activa el Fondo', () => {
+    // promedio $2.000.000: 5 pagos FCS = 3.585.726 (topes); saldo mayor → solo CIC.
+    const r = calculateSeguroCesantia({
+      tipoContrato: 'indefinido',
+      remuneracionPromedio: 2000000,
+      saldoCIC: 4000000,
+      ...elegibleFCS,
+    });
+    expect(r.cicCubre5Pagos).toBe(true);
+    expect(r.pagos.every((p) => p.desdeFCS === 0)).toBe(true);
+    expect(r.pagos[0].total).toBe(1400000);
+  });
+
+  it('saldo igual a la suma FCS justo alcanza → no activa el Fondo', () => {
+    // promedio $1.000.000: 5 pagos FCS = 2.500.000; saldo igual → solo CIC.
+    const r = calculateSeguroCesantia({
+      tipoContrato: 'indefinido',
+      remuneracionPromedio: 1000000,
+      saldoCIC: 2500000,
+      ...elegibleFCS,
+    });
+    expect(r.cicCubre5Pagos).toBe(true);
+    expect(r.pagos).toHaveLength(5);
+    expect(r.pagos.every((p) => p.desdeFCS === 0)).toBe(true);
+    expect(r.saldoRestanteCIC).toBe(0);
+  });
+
+  it('saldo igual a la suma FCS con topes paga al ritmo CIC, no al del Fondo', () => {
+    // promedio $2.000.000: FCS topeado suma 3.585.726; el primer giro CIC
+    // ($1.400.000 sin tope) distingue de los $1.004.003 del calendario FCS.
+    const r = calculateSeguroCesantia({
+      tipoContrato: 'indefinido',
+      remuneracionPromedio: 2000000,
+      saldoCIC: 3585726,
+      ...elegibleFCS,
+    });
+    expect(r.cicCubre5Pagos).toBe(true);
+    expect(r.pagos.map((p) => p.total)).toEqual([1400000, 1200000, 900000, 85726]);
+    expect(r.pagos.every((p) => p.desdeFCS === 0)).toBe(true);
+  });
+
+  it('plazo fijo: el FCS usa el promedio de las últimas 10 remuneraciones (art. 25)', () => {
+    const r = calculateSeguroCesantia({
+      tipoContrato: 'plazo-fijo',
+      remuneracionPromedio: 400000, // promedio últimas 5 (base CIC)
+      remuneracionPromedioFCS: 1000000, // promedio últimas 10 (base FCS)
+      saldoCIC: 0,
+      ...elegibleFCS,
+    });
+    expect(r.pagos.map((p) => p.total)).toEqual([
+      600000, 400000, 350000, 300000, 300000,
+    ]);
+  });
+
   it('saldo CIC de $1.000.000 no cubre 5 pagos → FCS complementa desde el saldo', () => {
     const r = calculateSeguroCesantia({
       tipoContrato: 'indefinido',
