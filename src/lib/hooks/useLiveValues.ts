@@ -90,10 +90,15 @@ export function useLiveValues(options: {
           euro: json.euro && json.euro > 0 ? json.euro : FALLBACK_VALUES.euro,
           loading: false,
           error: null,
-          lastUpdated: json.updatedAt,
+          // Al conservar la UF del seed se conserva también su fecha y su
+          // fuente: el valor visible no se atribuye a la fuente de la
+          // respuesta más vieja.
+          lastUpdated: fetchedUfOlder ? prev.lastUpdated : json.updatedAt,
           ufFecha: fetchedUfOlder ? prev.ufFecha : json.ufFecha,
-          source: json.source,
-          freshness: json.freshness,
+          source: fetchedUfOlder ? prev.source : json.source,
+          freshness: fetchedUfOlder
+            ? { ...json.freshness, uf: prev.freshness?.uf ?? prev.source }
+            : json.freshness,
         };
       });
     } catch (error) {
