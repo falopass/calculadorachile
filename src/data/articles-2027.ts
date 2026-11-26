@@ -1131,9 +1131,9 @@ export const ARTICULOS_2027: Article[] = [
 <table>
 <thead><tr><th>Vehículo</th><th>Pago total o 1ª cuota</th><th>2ª cuota</th></tr></thead>
 <tbody>
-<tr><td>Autos, camionetas, motos, station wagons y furgones hasta 1.750 kg</td><td>1 feb – 31 mar 2027</td><td>Agosto (hasta el 31)</td></tr>
+<tr><td>Autos, camionetas, motos, station wagons, furgones y remolques hasta 1.750 kg</td><td>1 feb – 31 mar 2027</td><td>Agosto (hasta el 31)</td></tr>
 <tr><td>Taxis, buses y transporte colectivo de pasajeros</td><td>Mayo (hasta el 31)</td><td>Junio (hasta el 30)</td></tr>
-<tr><td>Camiones, tractocamiones, remolques de carga y maquinaria</td><td>Septiembre (hasta el 30)</td><td>Octubre (hasta el 31)</td></tr>
+<tr><td>Camiones, tractocamiones, remolques sobre 1.750 kg y maquinaria</td><td>Septiembre (hasta el 30)</td><td>Octubre (hasta el 31)</td></tr>
 </tbody>
 </table>
 <p>Tres precisiones del mismo artículo 15 que suelen generar dudas:</p>
@@ -1145,7 +1145,7 @@ export const ARTICULOS_2027: Article[] = [
 <aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El vencimiento es legal, no comercial</strong><p>El 31 de marzo de 2027 cae miércoles. Algunos municipios habilitan pago en línea desde enero, pero la fecha que cuenta es la de la ley: pagar "tarde pero dentro del portal" igual puede dejar deuda si venció el plazo del artículo 15.</p></div></aside>
 
 <h2>Vehículos comprados entre septiembre de 2026 y marzo de 2027</h2>
-<p>Los autos adquiridos entre el 1 de septiembre de 2026 y el 31 de marzo de 2027 pagan su primer permiso en <strong>una sola cuota</strong>, dentro del período ordinario. No hay fraccionamiento para ese primer pago: si compraste un auto en diciembre o enero, presupuesta el monto completo para marzo. El cálculo proporcional por meses de uso lo determina la municipalidad según la fecha de inscripción, no el mes de la compraventa en el contrato.</p>
+<p>Los autos adquiridos entre el 1 de septiembre de 2026 y el 31 de marzo de 2027 pagan su primer permiso en <strong>una sola cuota</strong>, dentro del período ordinario. No hay fraccionamiento para ese primer pago: si compraste un auto en diciembre o enero, presupuesta el monto completo desde ya. Ojo con un matiz práctico: "pagar dentro del período ordinario" no significa que puedas circular sin permiso hasta marzo — el vehículo debe inscribirse y regularizar su permiso al adquirirlo; la cuota única define <em>cómo</em> se paga ese primer impuesto, no una licencia para usar el auto sin él. El cálculo proporcional por meses de uso lo determina la municipalidad según la fecha de inscripción, no el mes de la compraventa en el contrato.</p>
 <p>Si compraste un usado, verifica antes de pagar que el permiso del año anterior esté al día: la deuda sigue al vehículo, no al antiguo dueño. Una promesa de "yo lo pago después" en el contrato no libera la obligación ante la municipalidad.</p>
 
 <h2>Eléctricos e híbridos enchufables: la rebaja baja a 50% en 2027</h2>
@@ -1166,16 +1166,15 @@ export const ARTICULOS_2027: Article[] = [
 <p>Para un vehículo ya inscrito, la municipalidad típicamente exige:</p>
 <ul>
 <li>Permiso de circulación del año anterior.</li>
-<li>Revisión técnica vigente (la que corresponda según el dígito de tu patente; el calendario 2027 se publica por resolución).</li>
+<li>Revisión técnica vigente (la que corresponda según el dígito de tu patente; el calendario 2027 se publica por resolución) <strong>o</strong> el certificado de homologación, cuando el vehículo lo requiera — ChileAtiende los presenta como alternativas según el caso, no como dos exigencias simultáneas.</li>
 <li>SOAP vigente.</li>
-<li>Certificado de homologación o revisión de gases cuando corresponda al tipo de vehículo.</li>
 <li>Sin multas del Juzgado de Policía Local pendientes ni deudas municipales asociadas.</li>
 </ul>
 <p>Para un vehículo nuevo se agrega la factura de compra y el trámite de primera inscripción, que puede hacerse en cualquier municipalidad —no necesariamente la de tu domicilio—. Si quieres cambiar de comuna en la renovación, el cambio se gestiona como parte del trámite de inscripción; consulta antes si tu municipio de destino lo permite en línea.</p>
 
 <h2>Cómo se calcula el valor del permiso</h2>
-<p>La municipalidad recauda, pero el impuesto sale de la <strong>tasación fiscal</strong> que el SII publica cada año por marca, modelo, versión y año del vehículo, más una escala progresiva de la Ley de Rentas Municipales con un mínimo legal. Por eso dos autos del mismo año pueden pagar distinto en la misma comuna —y por eso una diferencia entre comunas suele indicar tasación o deuda distinta, no un "precio municipal".</p>
-<p>La <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> de CalculaChile entrega una aproximación con los datos que ingreses: sirve para presupuestar, pero la cifra que manda es la liquidación municipal, que incluye reajustes, deudas anteriores y la categoría exacta que el registro tenga para tu patente. Si el modelo fue identificado incorrectamente en la inscripción, pide revisión con padrón y factura antes de pagar.</p>
+<p>La municipalidad recauda, pero el impuesto sale de la <strong>tasación fiscal</strong> que el SII publica cada año por marca, modelo, versión y año del vehículo, más una escala progresiva de la Ley de Rentas Municipales con un mínimo legal. Los vehículos de carga y transporte no siguen esa escala: para ellos el SII fija montos en UTM según la capacidad de carga, por lo que el cálculo de un camión no se estima con la lógica de un auto particular. Por eso dos autos del mismo año pueden pagar distinto en la misma comuna —y por eso una diferencia entre comunas suele indicar tasación o deuda distinta, no un "precio municipal".</p>
+<p>La <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> de CalculaChile entrega una aproximación con los datos que ingreses: sirve para presupuestar, pero estima con las reglas de su propia metodología —entre ellas la rebaja del tramo vigente al configurarla— y no elige el año de pago. Para un eléctrico, ajusta mentalmente al 50% del impuesto base en 2027. La cifra que manda es la liquidación municipal, que incluye reajustes, deudas anteriores y la categoría exacta que el registro tenga para tu patente. Si el modelo fue identificado incorrectamente en la inscripción, pide revisión con padrón y factura antes de pagar.</p>
 
 <h2>Si pagaste en dos cuotas: qué esperar en agosto de 2027</h2>
 <p>Para los vehículos del período de marzo, la segunda cuota vence el <strong>martes 31 de agosto de 2027</strong>. Es el mismo 50% reajustado por la variación del IPC entre febrero y junio de 2027, y se paga en la municipalidad donde pagaste la primera. El detalle del mecanismo está en nuestro artículo de la <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso 2026</a>: el procedimiento es el mismo, solo cambian las fechas y el reajuste de cada año.</p>
@@ -1191,7 +1190,7 @@ export const ARTICULOS_2027: Article[] = [
 <li>Creer que un auto comprado en diciembre puede pagar su primer permiso en dos cuotas: paga una sola.</li>
 <li>Asumir que un eléctrico sigue exento al 100%: desde febrero de 2027 paga el 50% del impuesto.</li>
 <li>Comprar un usado sin revisar la deuda del permiso: el saldo queda pegado a la patente.</li>
-<li>Usar enlaces de SMS o correos para pagar: entra escribiendo tú mismo el dominio de la municipalidad o el portal de Tesorería.</li>
+<li>Usar enlaces de SMS o correos para pagar: entra escribiendo tú mismo el dominio oficial de la municipalidad.</li>
 </ul>
 
 <h2>Checklist antes del 31 de marzo de 2027</h2>
@@ -1201,7 +1200,7 @@ export const ARTICULOS_2027: Article[] = [
 <li>Consulta deudas municipales o multas JPL pendientes asociadas a la patente.</li>
 <li>Liquida el valor estimado con la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> para presupuestar.</li>
 <li>Decide si pagas total o en dos cuotas antes de emitir el comprobante de marzo.</li>
-<li>Paga por el portal municipal o de Tesorería escribiendo el dominio tú mismo.</li>
+<li>Paga por el canal oficial que indique tu municipalidad (su portal de tránsito o el sistema de pago que ella haya convenido), escribiendo el dominio tú mismo.</li>
 <li>Descarga y guarda el permiso 2027 y el comprobante de pago.</li>
 <li>Si elegiste cuotas, agenda el 31 de agosto de 2027 en la misma municipalidad.</li>
 </ol>
