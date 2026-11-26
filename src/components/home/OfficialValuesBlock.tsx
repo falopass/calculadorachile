@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useLiveValues } from '@/lib/hooks/useLiveValues';
+import { useLiveValues, type LiveValues } from '@/lib/hooks/useLiveValues';
 import { INGRESO_MINIMO } from '@/lib/values/constants';
 
 /**
@@ -19,8 +19,8 @@ import { INGRESO_MINIMO } from '@/lib/values/constants';
  * No hardcodea montos: UF/UTM/dólar vienen del hook, el ingreso mínimo
  * de `INGRESO_MINIMO` (constante oficial del proyecto).
  */
-export default function OfficialValuesBlock() {
-  const { uf, utm, dolar, lastUpdated, source } = useLiveValues();
+export default function OfficialValuesBlock({ initial }: { initial?: Partial<LiveValues> }) {
+  const { uf, utm, dolar, lastUpdated, source } = useLiveValues({ initial });
 
   const updatedLabel = useMemo(() => {
     if (!lastUpdated) {

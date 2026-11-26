@@ -38,18 +38,29 @@ export interface LiveValues {
  * Por defecto **no hace polling** (UF cambia 1 vez al día). Si una
  * pantalla específica necesita refresco activo, pasar `pollIntervalMs`.
  */
-export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
-  const { pollIntervalMs = 0 } = options;
+export function useLiveValues(options: {
+  pollIntervalMs?: number;
+  /**
+   * Valores pre-hidratados por el servidor (SSR): el bloque renderiza el
+   * dato real en el HTML inicial en vez del respaldo empaquetado, y el
+   * fetch de montaje lo refresca igual que antes. Sin `initial`, el
+   * comportamiento es idéntico al anterior (fallback + fetch al montar).
+   */
+  initial?: Partial<LiveValues>;
+} = {}) {
+  const { pollIntervalMs = 0, initial } = options;
 
   const [data, setData] = useState<LiveValues>({
-    uf: FALLBACK_VALUES.uf,
-    utm: FALLBACK_VALUES.utm,
-    dolar: { ...FALLBACK_VALUES.dolar },
-    euro: FALLBACK_VALUES.euro,
+    uf: initial?.uf ?? FALLBACK_VALUES.uf,
+    utm: initial?.utm ?? FALLBACK_VALUES.utm,
+    dolar: initial?.dolar ? { ...initial.dolar } : { ...FALLBACK_VALUES.dolar },
+    euro: initial?.euro ?? FALLBACK_VALUES.euro,
     loading: true,
     error: null,
-    lastUpdated: null,
-    source: 'fallback',
+    lastUpdated: initial?.lastUpdated ?? null,
+    ufFecha: initial?.ufFecha,
+    source: initial?.source ?? 'fallback',
+    freshness: initial?.freshness,
   });
 
   const fetchValues = useCallback(async (signal?: AbortSignal) => {

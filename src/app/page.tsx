@@ -7,6 +7,7 @@ import PopularCalculators from '@/components/home/PopularCalculators';
 import CategoryCatalog from '@/components/home/CategoryCatalog';
 import TrustMethodSection from '@/components/home/TrustMethodSection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { getCurrentValues } from '@/lib/api/current-values';
 import { SITE_URL } from '@/lib/site';
 
 /**
@@ -51,15 +52,30 @@ export const metadata: Metadata = {
 };
 
 // Revalida cada hora: la portada prerenderizada incrusta los valores de
-// referencia del snapshot en el HTML; sin `revalidate`, Next la emite con
+// referencia en el HTML; sin `revalidate`, Next la emite con
 // `s-maxage=31536000` y CDN/browsers sirven indicadores de días atrás.
 // Mismo TTL que /api/values y las páginas de calculadora.
 export const revalidate = 3600;
 
-export default function HomePage() {
+export default async function HomePage() {
+  // SSR seed: la misma estrategia de /api/values (BCentral → Mindicador →
+  // snapshot), así el HTML pre-hidratación ya muestra el valor del día y
+  // no el snapshot empaquetado en el build.
+  const { values } = await getCurrentValues();
   return (
     <>
-      <OfficialValuesBlock />
+      <OfficialValuesBlock
+        initial={{
+          uf: values.uf,
+          utm: values.utm,
+          dolar: values.dolar,
+          euro: values.euro,
+          lastUpdated: values.updatedAt,
+          ufFecha: values.ufFecha,
+          source: values.source,
+          freshness: values.freshness,
+        }}
+      />
       <SearchHero
         calculators={discoverableCalculators.map(({ id, slug, name, description, keywords }) => ({
           id,
