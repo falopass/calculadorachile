@@ -29,6 +29,7 @@ import { guiaAfpComisiones } from './guia-afp-comisiones';
 import { guiaFeriados2027 } from './guia-feriados-2027';
 import { guiaLicenciaMedica } from './guia-licencia-medica';
 import { guiaOperacionRenta2027 } from './guia-operacion-renta-2027';
+import { guiaPpm } from './guia-ppm';
 import { buildCvlistoContentUrl } from '@/lib/cvlisto';
 
 const HON = contextoHonorarios();
@@ -2673,6 +2674,8 @@ export const guias: Guia[] = [
   guiaOperacionRenta2027,
   // Guía pillar AFP comisiones (demanda GSC nov-2026)
   guiaAfpComisiones,
+  // Guía PPM (demanda GSC nov-2026: consulta "ppm" sin top 10)
+  guiaPpm,
 ];
 
 // ============================================

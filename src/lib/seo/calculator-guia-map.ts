@@ -55,7 +55,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-iva': 'iva-boleta-honorarios-chile',
   'calculadora-boleta-honorarios': 'iva-boleta-honorarios-chile',
   'calculadora-operacion-renta': 'preparacion-operacion-renta-2027-checklist',
-  'calculadora-ppm': 'iva-boleta-honorarios-chile',
+  'calculadora-ppm': 'ppm-pagos-provisionales-mensuales-chile',
 
   // Vivienda (nueva guía pillar)
   'calculadora-credito-hipotecario': 'credito-hipotecario-chile',
