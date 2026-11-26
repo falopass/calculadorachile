@@ -122,8 +122,8 @@ async function requestMindicadorValores(): Promise<MindicadorValores> {
   let response: Response;
   try {
     response = await fetch(MINDICADOR_API, {
-      // Cache 1h en Data Cache de Next (mismo TTL que BCentral)
-      next: { revalidate: 3600 },
+      // Sin Data Cache de Next (mismo motivo que bcentral.ts): el route
+      // /api/values revalida por hora y el memo de 30 s deduplica ráfagas.
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       headers: {
         Accept: 'application/json',
