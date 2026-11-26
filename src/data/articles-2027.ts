@@ -790,4 +790,162 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>Netflix, Spotify, aplicaciones y otros servicios digitales prestados desde el extranjero pagan IVA desde 2020, por una regla distinta a la de los bienes físicos. Lo que cambió en octubre de 2025 es la compra de <strong>bienes</strong>: ropa, juguetes, electrónica y todo lo que llega en un paquete.</p>`,
   },
+  {
+    slug: 'cambiar-devolver-regalos-navidad-retracto-sernac',
+    seoTitle: 'Cambiar o devolver un regalo de Navidad: derechos',
+    title: 'Cambios y devoluciones de regalos de Navidad: derecho a retracto, ticket de cambio y garantía legal',
+    description:
+      'Qué derechos tienes para cambiar o devolver un regalo en Chile según SERNAC: retracto de 10 días solo en compras online, ticket de cambio en tienda física y garantía legal de 6 meses si el producto falla.',
+    date: '2026-11-26',
+    updatedAt: '2026-11-26',
+    category: 'educacion-financiera',
+    readingTime: 9,
+    keywords: [
+      'cambiar regalo navidad',
+      'devolución regalos chile',
+      'derecho a retracto compras online',
+      'ticket de cambio',
+      'garantía legal 6x3 sernac',
+      'cambios y devoluciones navidad',
+    ],
+    relatedCalculators: [
+      'calculadora-dias-habiles',
+      'calculadora-compras-internacionales',
+    ],
+    sources: [
+      {
+        label: 'SERNAC — Garantía legal: las 3 alternativas dentro de 6 meses',
+        url: 'https://www.sernac.cl/portal/618/w3-propertyvalue-8062.html',
+      },
+      {
+        label: 'SERNAC — Tus derechos en el comercio electrónico (derecho a retracto)',
+        url: 'https://www.sernac.cl/portal/604/w3-propertyvalue-20982.html',
+      },
+      {
+        label: 'Ley Chile — Ley 19.496 (DFL 3), artículo 3 bis: derecho a retracto',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1160403&idParte=10239814',
+      },
+      {
+        label: 'Ley Chile — Decreto 52, reglamento del derecho a retracto',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1206144',
+      },
+      {
+        label: 'SERNAC — Garantía legal en los regalos de Navidad',
+        url: 'https://www.sernac.cl/portal/604/w3-article-87910.html',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Puedo devolver un regalo comprado en una tienda física solo porque no me gustó?',
+        answer:
+          'No por ley. En compras presenciales no existe derecho a retracto: solo hay cambio por gusto o talla si el comercio ofreció una política voluntaria, normalmente con ticket de cambio, y en las condiciones que esa política indique.',
+      },
+      {
+        question: '¿Cuánto tiempo tengo para ejercer el derecho a retracto en una compra online?',
+        answer:
+          'Dentro de los 10 días siguientes a la recepción del producto en el domicilio declarado. Para servicios, dentro de los 10 días siguientes a la contratación. El producto debe devolverse sin uso, con su embalaje original en buen estado.',
+      },
+      {
+        question: '¿La tienda puede negarse al retracto?',
+        answer:
+          'Solo si informó la exclusión antes de la compra, de manera destacada y de fácil acceso, o si el bien entra en las excepciones del Decreto 52: productos que por su naturaleza no pueden devolverse o se deterioran rápido, bienes hechos a medida del consumidor y bienes de uso personal o higiene sellados.',
+      },
+      {
+        question: '¿Quién hace el trámite si el regalo lo compró otra persona?',
+        answer:
+          'Quien recibe el regalo puede ejercer los derechos presentando el ticket de cambio, la boleta o un comprobante de pago que acredite la compra, como el voucher o el estado de cuenta de la tarjeta. Pide a quien regaló alguno de esos documentos.',
+      },
+      {
+        question: '¿La garantía legal sirve si el regalo no me quedó la talla?',
+        answer:
+          'No. La garantía legal cubre productos defectuosos, incompletos o no aptos para su uso, no el gusto ni la talla. Para eso existe el ticket de cambio voluntario de la tienda o, en compras a distancia, el derecho a retracto.',
+      },
+      {
+        question: '¿Dónde reclamo si la empresa no responde?',
+        answer:
+          'Primero reclama directamente a la empresa. Si no resuelve, puedes ingresar el reclamo en el sitio de SERNAC (sernac.cl), que ofrece mediación, y como última instancia demandar ante el Juzgado de Policía Local correspondiente.',
+      },
+    ],
+    content: `<p class="article-lead">Si el regalo de Navidad no sirve, vino defectuoso o no era lo que esperabas, lo que puedes hacer depende de <strong>cómo se compró</strong>: el derecho a retracto de 10 días aplica solo a compras por internet, teléfono u otros medios a distancia; en tienda física el cambio por gusto o talla es una política voluntaria del comercio (el "ticket de cambio"); y si el producto falla, la garantía legal da 6 meses para pedir reparación gratuita, cambio o devolución del dinero, en la tienda física o online por igual.</p>
+<p>Este artículo revisa las tres reglas según el texto vigente de la Ley del Consumidor (Ley 19.496), el reglamento del derecho a retracto (Decreto 52 del Ministerio de Economía) y las fichas del SERNAC. Fecha de corte: 26 de noviembre de 2026. No cubre las políticas comerciales de cada tienda —cada una define sus plazos y condiciones de cambio voluntario— ni las devoluciones de plataformas extranjeras, que siguen sus propias reglas.</p>
+
+<h2>Primero: ¿qué regla aplica a tu caso?</h2>
+<p>Antes de ir a la tienda, identifica la situación. Las tres reglas se confunden todo el tiempo y no son intercambiables:</p>
+<table>
+<thead><tr><th>Situación</th><th>Regla que aplica</th><th>Plazo</th></tr></thead>
+<tbody>
+<tr><td>Compraron el regalo online, por teléfono o por catálogo, y no lo quieres</td><td>Derecho a retracto (art. 3 bis, Ley 19.496)</td><td>10 días desde que se recibió el producto</td></tr>
+<tr><td>Compraron en tienda física y quieres otra talla, otro color o otra cosa</td><td>Cambio voluntario ("ticket de cambio")</td><td>El que la tienda haya ofrecido</td></tr>
+<tr><td>El producto salió defectuoso, incompleto o no sirve para su uso</td><td>Garantía legal</td><td>6 meses desde la entrega</td></tr>
+</tbody>
+</table>
+<p>La distinción importa porque los requisitos son distintos: el retracto pide el producto sin uso y con embalaje; la garantía legal es justamente para productos que fallaron; y el ticket de cambio es la única vía para "no me gustó" en una compra presencial.</p>
+
+<h2>Derecho a retracto: 10 días, solo en compras a distancia</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1160403&idParte=10239814" target="_blank" rel="noopener">artículo 3 bis de la Ley 19.496</a> permite arrepentirse de una compra celebrada por medios electrónicos, o cuando se aceptó una oferta enviada por catálogos, avisos u otra forma de comunicación a distancia. En regalos de Navidad es la regla clave: gran parte de las compras de diciembre se hacen en línea.</p>
+<p>Los puntos que fija la norma y el SERNAC:</p>
+<ul>
+<li><strong>Plazo.</strong> 10 días desde la recepción del producto en el domicilio declarado al comprar. Para servicios, 10 días desde la contratación.</li>
+<li><strong>Estado del producto.</strong> Debe devolverse sin uso, con el embalaje original en buen estado, manuales y certificados de garantía. Una lavadora ya instalada o un computador usado más allá de la inspección razonable pierde el retracto.</li>
+<li><strong>Exclusiones informadas.</strong> El proveedor puede excluir el retracto si lo informó antes de la compra de manera destacada y de fácil acceso. Si no avisó, el derecho rige.</li>
+<li><strong>Excepciones del reglamento.</strong> El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1206144" target="_blank" rel="noopener">Decreto 52</a> lista los casos en que excepcionalmente no hay retracto: bienes que por su naturaleza no pueden devolverse, perecibles o que caducan en menos de 10 días, productos confeccionados a medida del consumidor y bienes de uso personal o higiene sellados.</li>
+<li><strong>Devolución del dinero.</strong> Ejercido el retracto, el proveedor debe restituir el precio pagado conforme a la ley; revisa con la tienda cómo y en qué plazo procesa el reembolso.</li>
+</ul>
+<p>Para Navidad 2026 la cuenta práctica es esta: si el regalo se recibió el 24 de diciembre, el retracto se puede ejercer dentro de los 10 días siguientes, es decir, en la primera semana de enero de 2027. No es una fecha límite de cambio de la tienda, es un plazo legal para arrepentirse de la compra completa.</p>
+
+<h2>Compra en tienda física: el ticket de cambio no es un derecho, es una promesa</h2>
+<p>En una compra presencial no existe derecho a retracto. Si la chaqueta no quedó la talla o el regalo no gustó, la ley no obliga al comercio a cambiarlo: el cambio "a todo evento" es una oferta voluntaria que la empresa puede dar o no dar, y si la da, debe respetar sus propias condiciones (plazo, estado del producto, documento requerido).</p>
+<p>Por eso el ticket de cambio es el documento estrella de diciembre. SERNAC lo describe como un acto voluntario de la empresa que permite cambiar el producto en un tiempo establecido, y es donde sí aplican el gusto o la talla. Además, sirve como comprobante de la compra para ejercer la garantía legal si el producto falla después.</p>
+<p>Recomendación concreta para quien regala: pide el ticket de cambio al comprar y entrégalo con el regalo. Sin ese papel, quien recibe un regalo comprado en tienda tiene pocas opciones cuando no le queda, porque no fue parte del contrato de compra.</p>
+<p>Una advertencia útil: los carteles o boletas que dicen "sin cambio ni devolución" en productos de oferta o liquidación <strong>no eliminan la garantía legal</strong>. SERNAC es explícito: esos letreros no valen para productos que salen defectuosos. Solo pierden la garantía los productos vendidos como "segunda selección" o "hechos con materiales usados", y únicamente si el comercio lo informó antes de la compra.</p>
+
+<h2>Garantía legal: 6 meses si el regalo viene malo</h2>
+<p>Si el regalo salió defectuoso —el juguete no enciende, al electrodoméstico le faltan piezas, la prenda vino con una falla—, la regla es otra y es mucho más fuerte. Según la <a href="https://www.sernac.cl/portal/618/w3-propertyvalue-8062.html" target="_blank" rel="noopener">ficha de garantía legal del SERNAC</a>, dentro de los primeros seis meses desde la entrega del producto, el consumidor elige entre tres alternativas:</p>
+<ul>
+<li><strong>Devolución del dinero.</strong></li>
+<li><strong>Cambio del producto.</strong></li>
+<li><strong>Reparación gratuita.</strong></li>
+</ul>
+<p>La elección es del consumidor, no de la tienda. Aplica a productos nuevos que salieron defectuosos, incompletos, no aptos para el uso destinado, o que ya fueron reparados y la falla persiste o aparece una nueva. Si eliges reparación, el tiempo que dura la reparación <strong>suspende</strong> el plazo de 6 meses: la garantía no corre mientras el producto está en el servicio técnico.</p>
+<p>Puntos que las tiendas no pueden exigir:</p>
+<ul>
+<li>No pueden condicionar la garantía a presentar la caja o el embalaje original, ni cobrar por no tenerlos.</li>
+<li>No pueden limitar el número o tipo de sucursales, ni los horarios, para ejercer el derecho.</li>
+<li>No pueden obligarte a pasar primero por un servicio técnico para "evaluar" si aceptan el reclamo.</li>
+</ul>
+<p>La garantía se ejerce contra el vendedor con las tres opciones. El fabricante y el importador también responden, pero solo por reparación o cambio del producto, no por devolución del dinero.</p>
+<p>Y al revés del retracto: la garantía legal <strong>no aplica</strong> cuando el producto simplemente no gustó o no quedó la talla. Usarla para "devolver porque no me tincó" desgasta el reclamo; para eso está el ticket de cambio o el retracto online.</p>
+
+<h2>Si el regalo lo compró otra persona: qué documento necesitas</h2>
+<p>Los derechos del consumidor se ejercen con un comprobante de la compra. SERNAC acepta como acreditación la boleta, el voucher del banco, el estado de cuenta de la tarjeta o el ticket de cambio. Si recibiste un regalo defectuoso y no tienes el comprobante, pídelo a quien lo compró: sin ese documento, la tienda puede negar el gestión.</p>
+<p>En compras online el comprobante suele ser la boleta electrónica que llegó al correo del comprador. Vale la pena que quien regala avise o reenvíe ese correo, sobre todo en electrónica y juguetes, donde la garantía legal es la vía probable.</p>
+
+<h2>Regalos comprados en plataformas extranjeras</h2>
+<p>Temu, AliExpress, Shein y similares no operan con el retracto chileno tal cual: cada plataforma tiene su propia política de devolución, con plazos y costos de envío internacional que suelen hacer la devolución lenta y cara. Antes de reclamar por esa vía, revisa la política de devoluciones de la plataforma. El detalle de cómo se cobran los impuestos de esas compras está en nuestro artículo sobre <a href="/blog/impuestos-compras-temu-aliexpress-shein-navidad">impuestos de compras internacionales en Temu, AliExpress y Shein</a>.</p>
+
+<h2>Plazos prácticos para esta Navidad</h2>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: regalo comprado online para el 24</div><ul><li>El producto llega al domicilio el 22 de diciembre.</li><li>Derecho a retracto: ejercible dentro de los 10 días siguientes a la recepción, si la tienda no lo excluyó al vender.</li><li>Si el producto falla al abrirse: garantía legal de 6 meses, con reparación, cambio o devolución a elección del consumidor.</li><li>Si solo no gustó: depende de la política de cambio que la tienda haya ofrecido.</li></ul><span class="total">Cuenta los días con la calculadora de días hábiles</span></div>
+<p>Ten presente que el retracto se cuenta en días corridos desde la recepción, no en días hábiles; la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> sirve para otros plazos (contratos, despidos, feriados), pero no para este cómputo legal.</p>
+
+<h2>Cómo reclamar si la tienda no responde</h2>
+<ol class="steps">
+<li><strong>Reúne el comprobante.</strong> Boleta, voucher, estado de cuenta o ticket de cambio. En retracto online, guarda además el registro del pedido y de la entrega.</li>
+<li><strong>Reclama primero a la empresa.</strong> Expón el caso y la opción que eliges (en garantía legal: reparación, cambio o devolución del dinero).</li>
+<li><strong>Ingresa el reclamo en SERNAC.</strong> En sernac.cl se presenta el reclamo ante la plataforma de reclamos; SERNAC ofrece mediación entre consumidor y empresa.</li>
+<li><strong>Demanda si no hay acuerdo.</strong> La última instancia es el Juzgado de Policía Local. La ley contempla además mecanismos colectivos a través del SERNAC para casos que afectan a muchos consumidores.</li>
+</ol>
+
+<h2>Errores frecuentes de enero</h2>
+<ul>
+<li><strong>Confundir retracto con garantía.</strong> El retracto es para arrepentirse de una compra a distancia dentro de 10 días; la garantía es para productos defectuosos dentro de 6 meses. Requisitos y resultados distintos.</li>
+<li><strong>Exigir cambio por gusto en tienda física como derecho.</strong> No lo es: depende de la política voluntaria del comercio.</li>
+<li><strong>Aceptar el letrero "sin cambio ni devolución" para un producto fallado.</strong> No vale: la garantía legal rige igual, incluso en liquidaciones.</li>
+<li><strong>Pagar o aceptar que cobren por no tener la caja.</strong> El embalaje original no es requisito para la garantía legal (sí lo es, en buen estado, para el retracto).</li>
+<li><strong>Dejar pasar los 10 días.</strong> En compras online el retracto vence rápido: la primera semana de enero es el momento de decidir.</li>
+</ul>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de noviembre de 2026 con las fichas del <a href="https://www.sernac.cl/portal/618/w3-propertyvalue-8062.html" target="_blank" rel="noopener">SERNAC sobre garantía legal</a> y de <a href="https://www.sernac.cl/portal/604/w3-propertyvalue-20982.html" target="_blank" rel="noopener">derechos en el comercio electrónico (retracto)</a>, el artículo 3 bis de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1160403" target="_blank" rel="noopener">Ley 19.496</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=1206144" target="_blank" rel="noopener">Decreto 52 del Ministerio de Economía</a> en Ley Chile.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No reemplaza la resolución del SERNAC ni un fallo judicial. Las políticas de cambio voluntario de cada comercio prevalecen en sus propios términos; ante un caso concreto, verifica siempre la fuente oficial.</p></div></aside>`,
+  },
 ];
