@@ -950,4 +950,128 @@ export const ARTICULOS_2027: Article[] = [
 <p>Contenido verificado el 26 de noviembre de 2026 con las fichas del <a href="https://www.sernac.cl/portal/618/w3-propertyvalue-8062.html" target="_blank" rel="noopener">SERNAC sobre garantía legal</a> y de <a href="https://www.sernac.cl/portal/604/w3-propertyvalue-20982.html" target="_blank" rel="noopener">derechos en el comercio electrónico (retracto)</a>, el artículo 3 bis de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1160403" target="_blank" rel="noopener">Ley 19.496</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=1206144" target="_blank" rel="noopener">Decreto 52 del Ministerio de Economía</a> en Ley Chile.</p>
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No reemplaza la resolución del SERNAC ni un fallo judicial. Las políticas de cambio voluntario de cada comercio prevalecen en sus propios términos; ante un caso concreto, verifica siempre la fuente oficial.</p></div></aside>`,
   },
+  {
+    slug: 'permisos-con-goce-de-sueldo-chile',
+    embedCalculatorId: 'dias-habiles',
+    title: 'Permisos con goce de sueldo en Chile: matrimonio, nacimiento, duelo y exámenes médicos',
+    description:
+      'Qué permisos pagados obliga la ley chilena: 5 días hábiles por matrimonio o unión civil, 5 días por nacimiento, 10 días por muerte de un hijo y medio día anual para exámenes preventivos. Texto vigente del Código del Trabajo y cómo pedirlos.',
+    date: '2026-11-26',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'vacaciones-feriado-legal-chile',
+    keywords: [
+      'permisos con goce de sueldo chile',
+      'permiso por matrimonio días',
+      'permiso por nacimiento padre',
+      'permiso por fallecimiento familiar',
+      'artículo 66 código del trabajo',
+      'permiso para exámenes médicos',
+    ],
+    relatedCalculators: [
+      'calculadora-dias-habiles',
+      'calculadora-vacaciones-proporcionales',
+      'calculadora-sueldo-liquido',
+    ],
+    faq: [
+      {
+        question: '¿El empleador puede negarse a darme un permiso del artículo 66?',
+        answer:
+          'No. Son derechos irrenunciables para cualquier trabajador con contrato, independiente del tiempo de servicio. Lo único que el empleador puede pedir es la acreditación que la propia ley exige (por ejemplo, el certificado de defunción fetal). Si se niega o te descuenta los días, el camino es la denuncia ante la Inspección del Trabajo.',
+      },
+      {
+        question: '¿Los días de permiso se descuentan de las vacaciones?',
+        answer:
+          'No. Los permisos por matrimonio, unión civil y duelo son adicionales al feriado anual: la ley lo dice expresamente. No se trata de días de feriado ni de horas administrativas, por lo que no reducen tus 15 días hábiles de vacaciones.',
+      },
+      {
+        question: '¿Los días "corridos" incluyen sábado, domingo y festivos?',
+        answer:
+          'Sí. La Dirección del Trabajo ha precisado que los 10 días por muerte de un hijo y los 7 por la del cónyuge o conviviente civil son días corridos: se cuentan sin interrupción desde el fallecimiento, incluyendo fines de semana y feriados. Los permisos de 7 y 4 días, en cambio, son días hábiles.',
+      },
+      {
+        question: '¿El "día administrativo" es un derecho legal?',
+        answer:
+          'No como tal. El Código del Trabajo no consagra un día administrativo remunerado: ese beneficio existe solo si está en tu contrato, en un convenio colectivo o en el reglamento interno de la empresa (los funcionarios públicos sí lo tienen por ley). Revisa tu contrato antes de pedirlo como derecho.',
+      },
+    ],
+    content: `<p class="article-lead">El Código del Trabajo chileno obliga al empleador a pagar varios permisos que mucha gente no pide porque cree que "salen de las vacaciones". No salen: por matrimonio o unión civil son 5 días hábiles continuos; por el nacimiento de un hijo, 5 días para el padre; por la muerte de un hijo, 10 días corridos; por la del cónyuge o conviviente civil, 7; por la de un hermano, padre o madre, 4 días hábiles. Todos son adicionales al feriado anual, valen desde el primer día de contrato y no pueden cambiarse por dinero.</p>
+<p>Este artículo revisa el texto vigente del Código del Trabajo (artículos 66, 66 bis, 195 y 207 bis) y las consultas publicadas por la Dirección del Trabajo (DT). Fecha de corte: 26 de noviembre de 2026. Ojo con el detalle: el artículo 66 cambió en 2026 —la ley que endureció el permiso por duelo entró en vigencia el 23 de julio— y buena parte de lo que circula en internet aún repite la escala antigua. Aquí va la vigente.</p>
+
+<h2>Matrimonio o unión civil: 5 días hábiles continuos</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 207 bis del Código del Trabajo</a> (agregado por la Ley 21.042, en 2017) da a todo trabajador que contrae matrimonio o celebra un acuerdo de unión civil <strong>cinco días hábiles continuos de permiso pagado</strong>, adicionales a las vacaciones e independientes del tiempo de servicio. Vale igual para el matrimonio civil que para el AUC y corre incluso si llevas una semana en la empresa.</p>
+<p>Tú eliges cuándo usarlo: el día de la celebración y los días hábiles inmediatamente anteriores o posteriores. Las obligaciones son dos y las fija la misma norma: avisar al empleador —preferentemente por escrito— con <strong>30 días de anticipación</strong> y presentar el certificado del Registro Civil dentro de los <strong>30 días siguientes</strong> a la celebración. Si no avisas a tiempo, la DT admite que el empleador programe la fecha, pero no que elimine el derecho.</p>
+
+<h2>Nacimiento o adopción: 5 días para el padre</h2>
+<p>El artículo 195 del Código del Trabajo entrega al padre <strong>cinco días de permiso pagado</strong> por el nacimiento de un hijo. A diferencia del permiso por matrimonio, aquí hay dos formas de usarlo y la ley te deja elegir:</p>
+<ul>
+<li><strong>Continuo:</strong> desde el momento del parto, excluyendo el descanso semanal.</li>
+<li><strong>Distribuido:</strong> repartido dentro del primer mes desde el nacimiento.</li>
+</ul>
+<p>Si no lo usas dentro de ese primer mes, se pierde: no se acumula ni se compensa. La <a href="https://www.bcn.cl/api-leyfacil/servicio/ObtenerGuiaPublicadaHTML?uri=permiso-laboral-por-nacimiento" target="_blank" rel="noopener">guía de Ley Fácil de la Biblioteca del Congreso Nacional</a> precisa que el permiso tiene carácter de licencia médica y cubre también a los padres adoptivos, siempre que se presente la sentencia definitiva de adopción. Además, puedes pedir al empleador —con 30 días de anticipación— tomar el feriado anual inmediatamente después de este permiso.</p>
+<p>La madre tiene un régimen distinto y más largo: seis semanas de prenatal, doce de postnatal y el permiso postnatal parental de doce semanas a jornada completa (o dieciocho a media jornada, con medio subsidio). Ese permiso parental se puede compartir: si la madre lo está usando, puede traspasar al padre hasta seis semanas a jornada completa, o doce semanas a media jornada si optó por la modalidad de dieciocho, siempre en el tramo final del período.</p>
+
+<h2>Duelo: la escala del artículo 66 (texto vigente 2026)</h2>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 66 del Código del Trabajo</a> regula el permiso pagado por fallecimiento de familiares cercanos. La escala vigente quedó así tras la modificación que entró en vigencia en julio de 2026:</p>
+<table>
+<thead><tr><th>Fallecimiento de</th><th>Permiso pagado</th></tr></thead>
+<tbody>
+<tr><td>Un hijo o una hija</td><td>10 días corridos</td></tr>
+<tr><td>Cónyuge o conviviente civil</td><td>7 días corridos</td></tr>
+<tr><td>Un hijo en período de gestación</td><td>7 días hábiles</td></tr>
+<tr><td>Hermano, padre o madre</td><td>4 días hábiles</td></tr>
+</tbody>
+</table>
+<p>Las reglas comunes son importantes y suelen ser el punto de conflicto:</p>
+<ul>
+<li><strong>Corren desde el día del fallecimiento.</strong> No puedes guardarlos para después; en defunción fetal parten desde que se acredita la muerte con el certificado correspondiente.</li>
+<li><strong>"Corridos" incluye fines de semana y festivos.</strong> La DT lo ha dicho en dictamen: los 10 y los 7 días corridos se contabilizan sin interrupción. Los de 7 y 4 días, al ser "hábiles", excluyen sábados, domingos y festivos —la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> sirve para ese cómputo—.</li>
+<li><strong>No dependen de la antigüedad.</strong> Son "independientemente del tiempo de servicio": aplican con un contrato vigente, indefinido o plazo fijo.</li>
+<li><strong>No se compensan en dinero.</strong> Ni durante la relación laboral ni al término; la ley lo prohíbe expresamente.</li>
+<li><strong>Protección extra por muerte de un hijo:</strong> un mes de fuero laboral desde el fallecimiento (si el contrato es plazo fijo o por obra, hasta el término de éste). El empleador no puede despedirte en ese período salvo las causales tasadas de la ley.</li>
+</ul>
+<p>La ley no exige presentar el certificado de defunción para hacer efectivo el permiso general —a diferencia de la defunción fetal, que sí lo requiere—, pero en la práctica conviene entregarlo para evitar disputas.</p>
+
+<h2>Exámenes preventivos: medio día al año</h2>
+<p>El <strong>artículo 66 bis</strong> otorga medio día de permiso, una vez al año, para realizarse exámenes de mamografía y próstata, pudiendo incluir otras prestaciones de medicina preventiva como el papanicolau. Aplica a contratos de más de treinta días (en plazo fijo, a partir del día 30 de celebrado), el tiempo de traslado razonable cuenta dentro del permiso y el período se considera trabajado para todos los efectos legales —tampoco se puede compensar en dinero—.</p>
+<p>Aquí el aviso es más corto: debes informar al empleador con <strong>una semana de anticipación</strong> y presentar después los comprobantes que acrediten que te hiciste el examen en la fecha indicada. Si un convenio colectivo ya contempla un permiso análogo, se entiende cumplida la obligación legal.</p>
+
+<h2>Lo que no está en la lista</h2>
+<p>Dos confusiones frecuentes. Primero: el llamado <strong>"día administrativo"</strong> no existe en el Código del Trabajo para el sector privado. Es un beneficio de contrato o convenio colectivo (en el sector público sí es legal); si tu contrato no lo trae, no puedes exigirlo, aunque sí negociarlo. Segundo: el <strong>permiso sin goce de sueldo</strong> no es un derecho: requiere acuerdo entre las partes y no suspende el contrato —las cotizaciones previsionales siguen obligatorias, algo que la DT ha reiterado—.</p>
+<p>El Código contempla además otros permisos remunerados que aquí no se detallan porque responden a situaciones distintas: emergencias como bombero voluntario, vocales de mesa en elecciones, actividades sindicales, licencias médicas y el descanso maternal completo. Para las vacaciones propiamente tales —15 días hábiles al año, más los progresivos por antigüedad— está la <a href="/guias/vacaciones-feriado-legal-chile">guía del feriado legal</a>.</p>
+
+<h2>Cómo pedir el permiso (y qué hacer si se niegan)</h2>
+<ol class="steps">
+<li><strong>Identifica la causal y los días.</strong> Revisa la tabla: matrimonio/AUC, nacimiento, duelo o examen preventivo, y si los días son hábiles o corridos.</li>
+<li><strong>Avisa con el plazo legal.</strong> 30 días para matrimonio/AUC, una semana para exámenes preventivos. Para nacimiento y duelo la ley no fija aviso previo: el hecho mismo gatilla el derecho.</li>
+<li><strong>Junta el comprobante.</strong> Certificado de matrimonio o AUC, de nacimiento o defunción, o el comprobante del examen médico.</li>
+<li><strong>Si el empleador se niega o descuenta días, denuncia.</strong> Ante la Inspección del Trabajo; la <a href="https://www.dt.gob.cl/portal/1628/w3-article-94883.html" target="_blank" rel="noopener">DT</a> responde consultas por escrito y sus dictámenes aclaran la interpretación.</li>
+</ol>
+
+<h2>Resumen de permisos pagados legales</h2>
+<table>
+<thead><tr><th>Causal</th><th>Días</th><th>Tipo de día</th><th>Norma</th></tr></thead>
+<tbody>
+<tr><td>Matrimonio o unión civil</td><td>5</td><td>Hábiles continuos</td><td>Art. 207 bis</td></tr>
+<tr><td>Nacimiento o adopción (padre)</td><td>5</td><td>Continuos o en el primer mes</td><td>Art. 195</td></tr>
+<tr><td>Muerte de un hijo</td><td>10</td><td>Corridos + fuero 1 mes</td><td>Art. 66</td></tr>
+<tr><td>Muerte del cónyuge o conviviente</td><td>7</td><td>Corridos</td><td>Art. 66</td></tr>
+<tr><td>Muerte de hijo en gestación</td><td>7</td><td>Hábiles</td><td>Art. 66</td></tr>
+<tr><td>Muerte de hermano, padre o madre</td><td>4</td><td>Hábiles</td><td>Art. 66</td></tr>
+<tr><td>Examen preventivo (mamografía, próstata, pap)</td><td>Medio día/año</td><td>Hábil</td><td>Art. 66 bis</td></tr>
+</tbody>
+</table>
+<p>En temporada de vacaciones estos permisos se suelen combinar con el feriado anual: el permiso por matrimonio seguido de vacaciones, o los días de nacimiento encadenados al feriado si lo pides con 30 días de anticipación. Son acumulables entre sí porque responden a hechos distintos.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de noviembre de 2026 con el texto vigente del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (artículos 66, 66 bis, 195 y 207 bis) en Ley Chile, las consultas de la Dirección del Trabajo sobre <a href="https://www.dt.gob.cl/portal/1628/w3-article-94883.html" target="_blank" rel="noopener">permiso por muerte de un hijo</a> y <a href="https://dt.gob.cl/portal/1628/w3-article-103884.html" target="_blank" rel="noopener">permiso por matrimonio o unión civil</a>, y la guía de <a href="https://www.bcn.cl/api-leyfacil/servicio/ObtenerGuiaPublicadaHTML?uri=permiso-laboral-por-nacimiento" target="_blank" rel="noopener">Ley Fácil BCN sobre permisos laborales por nacimiento, matrimonio y duelo</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No reemplaza un dictamen de la Dirección del Trabajo ni asesoría legal. Ante un caso concreto —especialmente si el empleador no reconoce el permiso—, prevalece lo que resuelva la Inspección del Trabajo.</p></div></aside>
+<p>Para profundizar en descansos, revisa la <a href="/guias/vacaciones-feriado-legal-chile">guía del feriado legal</a>, la <a href="/guias/feriados-chile-2027">guía de feriados 2027</a> y la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Código del Trabajo (arts. 66, 66 bis, 195 y 207 bis)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+      { label: 'Dirección del Trabajo — Permiso por muerte de un hijo', url: 'https://www.dt.gob.cl/portal/1628/w3-article-94883.html' },
+      { label: 'Dirección del Trabajo — Permiso por matrimonio o unión civil', url: 'https://dt.gob.cl/portal/1628/w3-article-103884.html' },
+      { label: 'BCN Ley Fácil — Permiso laboral por nacimiento, matrimonio, unión civil o duelo', url: 'https://www.bcn.cl/api-leyfacil/servicio/ObtenerGuiaPublicadaHTML?uri=permiso-laboral-por-nacimiento' },
+    ],
+  },
 ];
