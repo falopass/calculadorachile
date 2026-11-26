@@ -15,10 +15,11 @@ vi.mock('../bcentral', () => ({ fetchAllCurrentValues: vi.fn() }));
 vi.mock('../mindicador', () => ({ fetchMindicadorValores: vi.fn() }));
 
 const mockBucketGet = vi.fn();
+const mockBucketPut = vi.fn();
 vi.mock('@opennextjs/cloudflare', () => ({
   getCloudflareContext: () => ({
-    env: { NEXT_INC_CACHE_R2_BUCKET: { get: mockBucketGet, put: vi.fn() } },
-    ctx: { waitUntil: vi.fn() },
+    env: { NEXT_INC_CACHE_R2_BUCKET: { get: mockBucketGet, put: mockBucketPut } },
+    ctx: { waitUntil: (p: Promise<unknown>) => void p },
   }),
 }));
 
@@ -110,6 +111,30 @@ describe('getCurrentValues', () => {
 
     expect(current.values).toMatchObject({ uf: 40999.93, utm: 71721, dolar: FALLBACK_VALUES.dolar });
     expect(current.indicatorSources).toEqual({ uf: 'bcentral', utm: 'mindicador', dolar: 'fallback' });
+  });
+
+  it('persiste una respuesta mixta y no sobrescribe con todo respaldo', async () => {
+    vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_SERVER);
+
+    // Respuesta mixta (algún campo vivo) → sí se persiste en R2.
+    vi.mocked(fetchAllCurrentValues).mockResolvedValueOnce({
+      uf: 40999.93,
+      utm: null,
+      dolar: { observado: null, venta: null },
+      euro: null,
+      fechas: { uf: '2026-09-23', utm: null, dolar: null },
+    });
+    vi.mocked(fetchMindicadorValores).mockResolvedValueOnce(null);
+    await getCurrentValues({ live: true });
+    expect(mockBucketPut).toHaveBeenCalledTimes(1);
+    expect(mockBucketPut.mock.calls[0][0]).toBe('app-values/last-live.json');
+
+    // Todas las fuentes caídas → no pisa los últimos valores reales.
+    vi.mocked(fetchAllCurrentValues).mockResolvedValueOnce(null);
+    vi.mocked(fetchMindicadorValores).mockResolvedValueOnce(null);
+    const degraded = await getCurrentValues({ live: true });
+    expect(degraded.values.source).toBe('fallback');
+    expect(mockBucketPut).toHaveBeenCalledTimes(1);
   });
 });
 
