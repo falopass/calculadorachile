@@ -7432,7 +7432,7 @@ ${tablaFcsHtml()}
       {
         question: '¿Qué es el PPM en Chile?',
         answer:
-          'Los Pagos Provisionales Mensuales son anticipos del impuesto anual a la renta que se declaran y pagan en el Formulario 29. En abril, en la Operación Renta, se restan del impuesto definitivo: si pagaste de más, el SII devuelve la diferencia.',
+          'Los Pagos Provisionales Mensuales son anticipos del impuesto anual a la renta que se declaran y pagan en el Formulario 29. En abril, en la Operación Renta, se restan del impuesto definitivo: si pagaste de más, el SII devuelve la diferencia (para independientes obligados a cotizar, parte del saldo puede cubrir cotizaciones previsionales, por lo que la devolución efectiva puede ser menor).',
       },
       {
         question: '¿Cuál es la tasa de PPM en 2026?',
@@ -7446,7 +7446,7 @@ ${tablaFcsHtml()}
       {
         question: '¿Se puede suspender o variar el PPM?',
         answer:
-          'Sí. Si estimas que tu renta anual será menor a la proyectada, puedes pedir al SII una variación o suspensión del PPM, fundamentando con antecedentes. El SII acepta o rechaza la solicitud.',
+          'Sí, pero son trámites distintos: la variación del PPM reduce el abono si fundamentas que tu renta anual será menor; la suspensión total tiene condiciones propias que el SII publica por año. Mientras no haya resolución, el PPM sigue venciendo.',
       },
       {
         question: '¿Qué pasa si no pago el PPM?',
