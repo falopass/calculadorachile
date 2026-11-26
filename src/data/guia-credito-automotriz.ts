@@ -13,13 +13,12 @@ import type { Guia } from './guias';
 import { formatCLP } from '@/lib/formatters';
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 
-const SII_TIMBRES = 'https://www.sii.cl/ayudas/aprenda_sobre/3072-6-3079.html';
+const SII_TIMBRES = 'https://www.sii.cl/normativa_legislacion/timbres.pdf';
 const SII_TIMBRES_FAQ =
   'https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0354.htm';
 const BCN_LEY_20555 =
-  'https://www.bcn.cl/leychile/navegar?idNorma=229996';
-const CMF_CAE =
-  'https://www.cmfchile.gob.cl/portal/principal/613/w3-article-8879.html';
+  'https://www.bcn.cl/leychile/navegar?idNorma=1032865';
+const SERNAC_CAE = 'https://www.sernac.cl/portal/607/w3-article-2463.html';
 const ext = (href: string, text: string) =>
   `<a href="${href}" target="_blank" rel="noopener">${text}</a>`;
 const int = (href: string, text: string) => `<a href="${href}">${text}</a>`;
@@ -78,7 +77,7 @@ export const guiaCreditoAutomotriz: Guia = {
       id: 'como-funciona',
       title: 'Cómo funciona el crédito automotriz',
       level: 2,
-      html: `<p>El mecanismo es el de casi todo crédito de consumo chileno: te prestan un monto (el capital) y lo devuelves en cuotas idénticas mensuales. Cada cuota mezcla capital e interés: al inicio la mayor parte es interés y hacia el final casi todo es capital. Esa estructura se llama <strong>amortización francesa</strong> y es la que usan bancos, financieras de automotoras y cooperativas.</p>
+      html: `<p>El mecanismo es el de casi todo crédito de consumo chileno: te prestan un monto (el capital) y lo devuelves en cuotas idénticas mensuales. Cada cuota mezcla capital e interés: la primera cuota es la que más interés lleva, esa proporción baja mes a mes y hacia el final casi todo es capital. Esa estructura se llama <strong>amortización francesa</strong> y es la que usan bancos, financieras de automotoras y cooperativas.</p>
 <p>Los tres inputs que mueven la cuota:</p>
 <ul>
 <li><strong>Monto a financiar</strong> = precio del vehículo − pie. Todo lo que no pagas al contado se financia, incluidos a veces el seguro y la patente.</li>
@@ -104,8 +103,8 @@ export const guiaCreditoAutomotriz: Guia = {
       title: 'Tasa, CAE y por qué solo la CAE es comparable',
       level: 2,
       html: `<p>La tasa de interés dice cuánto cuesta el capital, pero el crédito trae más cargos: comisión de apertura, impuestos, seguros obligatorios, gastos de evaluación y notaría. La <strong>CAE (Carga Anual Equivalente)</strong> es el indicador diseñado por la CMF para capturar todo eso en un solo porcentaje anual. Dos ofertas con la misma tasa pueden tener CAE muy distintas.</p>
-<p>La ${ext(BCN_LEY_20555, 'Ley 20.555')} obliga a cada oferente a entregar una <strong>hoja de resumen estandarizada</strong> con la CAE, el valor de la cuota y el costo total del crédito, y la ${ext(CMF_CAE, 'CMF mantiene la definición y los comparadores')} de CAE por tipo de crédito para contrastar lo que te ofrecen con el mercado. Pedir la hoja de resumen en cada automotora o banco es el único atajo real para comparar.</p>
-<p>Un número que se cuela fuera de la CAE pero pesa igual: el <strong>impuesto de timbres y estampillas</strong>. La operación de crédito de dinero lo paga como un porcentaje sobre el capital: <strong>0,066% por cada mes o fracción entre emisión y vencimiento, con tope 0,8%</strong> (${ext(SII_TIMBRES_FAQ, 'SII, impuesto a los documentos de crédito')}). En el financiamiento de ${formatCLP(EJ.montoFinanciar)} a 36 meses son cerca de ${formatCLP(Math.round(EJ.montoFinanciar * 0.008))} adicionales que se suelen cargar al crédito o cobrar al inicio.</p>`,
+<p>La ${ext(BCN_LEY_20555, 'Ley 20.555')} obliga a cada oferente a entregar una <strong>hoja de resumen estandarizada</strong> con la CAE, el valor de la cuota y el costo total del crédito, y el ${ext(SERNAC_CAE, 'SERNAC explica cómo leer la CAE')} para contrastar lo que te ofrecen. Pedir la hoja de resumen en cada automotora o banco es el único atajo real para comparar.</p>
+<p>Un cargo que aparece detallado en la hoja de resumen y entra en la CAE: el <strong>impuesto de timbres y estampillas</strong>. La operación de crédito de dinero lo paga como un porcentaje sobre el capital: <strong>0,066% por cada mes o fracción entre emisión y vencimiento, con tope 0,8%</strong> (${ext(SII_TIMBRES_FAQ, 'SII, impuesto a los documentos de crédito')}). En el financiamiento de ${formatCLP(EJ.montoFinanciar)} a 36 meses son cerca de ${formatCLP(Math.round(EJ.montoFinanciar * 0.008))} adicionales que se suelen cargar al crédito o cobrar al inicio.</p>`,
     },
     {
       id: 'costos-y-seguros',
@@ -119,7 +118,7 @@ export const guiaCreditoAutomotriz: Guia = {
 <li><strong>Seguro vehicular / contra daños</strong>: algunas ofertas lo obligan mientras dure el crédito; se cobra por cuota o se financia.</li>
 <li><strong>Gastos notariales y de formalización</strong>, cuando el documento se firma ante notario.</li>
 </ul>
-<p>En el ejemplo, el seguro vehicular estimado agrega ${formatCLP(EJ.seguroMensual)} al mes —es decir, ${formatCLP(EJ.seguroMensual * EJ.plazoMeses)} en todo el plazo— y lleva el costo total a ${formatCLP(EJ.costoTotal)} sobre el auto de ${formatCLP(EJ.valorVehiculo)}. Si la oferta financia el seguro dentro del crédito, además pagas interés sobre él.</p>`,
+<p>En el ejemplo, el seguro vehicular estimado agrega ${formatCLP(EJ.seguroMensual)} al mes —es decir, ${formatCLP(EJ.seguroMensual * EJ.plazoMeses)} en todo el plazo— y lleva el subtotal de crédito más seguros a ${formatCLP(EJ.costoTotal)} —sin contar el pie de ${formatCLP(EJ.pie)} ni el impuesto de timbres— sobre el auto de ${formatCLP(EJ.valorVehiculo)}. Si la oferta financia el seguro dentro del crédito, además pagas interés sobre él.</p>`,
     },
     {
       id: 'plazo-costo-total',
@@ -133,10 +132,10 @@ export const guiaCreditoAutomotriz: Guia = {
       title: 'Cómo comparar ofertas paso a paso',
       level: 2,
       html: `<ol class="steps">
-<li><strong>Define el auto y el pie primero.</strong> Sin eso, cada cotización sale en otra base y no hay comparación posible.</li>
+<li><strong>Define el auto, el pie, el monto y el plazo primero.</strong> Sin eso, cada cotización sale en otra base y no hay comparación posible: una CAE menor con plazo mayor puede costar más en total.</li>
 <li><strong>Pide la hoja de resumen</strong> en cada automotora, banco y cooperativa (obligatoria por la Ley 20.555): anota CAE, valor cuota, costo total y seguros incluidos.</li>
 <li><strong>Ordena por CAE y costo total</strong>, no por la tasa ni por la cuota más baja.</li>
-<li><strong>Revisa qué está financiado</strong>: seguros, patente, accesorios y la misma comisión pueden ir dentro del crédito y aumentar el capital.</li>
+<li><strong>Revisa qué está financiado</strong>: seguros, patente, accesorios y la misma comisión pueden ir dentro del crédito y aumentar el capital. Ojo con las ofertas que bajan la cuota dejando un <strong>pago final elevado</strong> (cuota globo): el simulador asume cuotas iguales, así que la estructura real hay que leerla en la hoja de resumen.</li>
 <li><strong>Simula el escenario</strong> en el ${int('/calculadoras/calculadora-credito-automotriz', 'simulador de crédito automotriz')} para ver el efecto de pie, tasa y plazo antes de firmar.</li>
 </ol>
 <p>Si el auto también es compra racional (no solo financiamiento), el permiso de circulación y la revisión técnica son gastos fijos que sumarán cada año —están en la ${int('/guias/vehiculos-chile-permiso-multas', 'guía de permiso de circulación y multas')}.</p>`,
@@ -179,7 +178,7 @@ export const guiaCreditoAutomotriz: Guia = {
   relatedArticles: ['cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag'],
   sources: [
     { label: 'Ley 20.555, hoja de resumen y CAE (BCN)', url: BCN_LEY_20555 },
-    { label: 'CMF — Carga Anual Equivalente (CAE)', url: CMF_CAE },
+    { label: 'SERNAC — ¿Qué es la Carga Anual Equivalente (CAE)?', url: SERNAC_CAE },
     { label: 'SII — Impuesto de Timbres y Estampillas', url: SII_TIMBRES },
     { label: 'SII — Tasa del impuesto a documentos de crédito', url: SII_TIMBRES_FAQ },
   ],
