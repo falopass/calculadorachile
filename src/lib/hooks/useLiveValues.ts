@@ -97,7 +97,9 @@ export function useLiveValues(options: {
           ufFecha: fetchedUfOlder ? prev.ufFecha : json.ufFecha,
           source: fetchedUfOlder ? prev.source : json.source,
           freshness: fetchedUfOlder
-            ? { ...json.freshness, uf: prev.freshness?.uf ?? prev.source }
+            ? json.freshness
+              ? { ...json.freshness, uf: prev.freshness?.uf ?? prev.source }
+              : prev.freshness
             : json.freshness,
         };
       });
