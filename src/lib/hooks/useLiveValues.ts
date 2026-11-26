@@ -38,18 +38,29 @@ export interface LiveValues {
  * Por defecto **no hace polling** (UF cambia 1 vez al día). Si una
  * pantalla específica necesita refresco activo, pasar `pollIntervalMs`.
  */
-export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
-  const { pollIntervalMs = 0 } = options;
+export function useLiveValues(options: {
+  pollIntervalMs?: number;
+  /**
+   * Valores pre-hidratados por el servidor (SSR): el bloque renderiza el
+   * dato real en el HTML inicial en vez del respaldo empaquetado, y el
+   * fetch de montaje lo refresca igual que antes. Sin `initial`, el
+   * comportamiento es idéntico al anterior (fallback + fetch al montar).
+   */
+  initial?: Partial<LiveValues>;
+} = {}) {
+  const { pollIntervalMs = 0, initial } = options;
 
   const [data, setData] = useState<LiveValues>({
-    uf: FALLBACK_VALUES.uf,
-    utm: FALLBACK_VALUES.utm,
-    dolar: { ...FALLBACK_VALUES.dolar },
-    euro: FALLBACK_VALUES.euro,
+    uf: initial?.uf ?? FALLBACK_VALUES.uf,
+    utm: initial?.utm ?? FALLBACK_VALUES.utm,
+    dolar: initial?.dolar ? { ...initial.dolar } : { ...FALLBACK_VALUES.dolar },
+    euro: initial?.euro ?? FALLBACK_VALUES.euro,
     loading: true,
     error: null,
-    lastUpdated: null,
-    source: 'fallback',
+    lastUpdated: initial?.lastUpdated ?? null,
+    ufFecha: initial?.ufFecha,
+    source: initial?.source ?? 'fallback',
+    freshness: initial?.freshness,
   });
 
   const fetchValues = useCallback(async (signal?: AbortSignal) => {
@@ -66,17 +77,31 @@ export function useLiveValues(options: { pollIntervalMs?: number } = {}) {
         source: ValuesSource;
         freshness?: LiveValues['freshness'];
       };
-      setData({
-        uf: json.uf,
-        utm: json.utm,
-        dolar: json.dolar,
-        euro: json.euro && json.euro > 0 ? json.euro : FALLBACK_VALUES.euro,
-        loading: false,
-        error: null,
-        lastUpdated: json.updatedAt,
-        ufFecha: json.ufFecha,
-        source: json.source,
-        freshness: json.freshness,
+      setData((prev) => {
+        // La API puede servir una entrada cacheada con la UF del día
+        // anterior justo al cambiar de día; un seed SSR más fresco no se
+        // retrocede: prevalece el ufFecha mayor.
+        const fetchedUfOlder =
+          prev.ufFecha != null && json.ufFecha != null && json.ufFecha < prev.ufFecha;
+        return {
+          uf: fetchedUfOlder ? prev.uf : json.uf,
+          utm: json.utm,
+          dolar: json.dolar,
+          euro: json.euro && json.euro > 0 ? json.euro : FALLBACK_VALUES.euro,
+          loading: false,
+          error: null,
+          // Al conservar la UF del seed se conserva también su fecha y su
+          // fuente: el valor visible no se atribuye a la fuente de la
+          // respuesta más vieja.
+          lastUpdated: fetchedUfOlder ? prev.lastUpdated : json.updatedAt,
+          ufFecha: fetchedUfOlder ? prev.ufFecha : json.ufFecha,
+          source: fetchedUfOlder ? prev.source : json.source,
+          freshness: fetchedUfOlder
+            ? json.freshness
+              ? { ...json.freshness, uf: prev.freshness?.uf ?? prev.source }
+              : prev.freshness
+            : json.freshness,
+        };
       });
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
