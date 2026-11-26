@@ -50,6 +50,12 @@ export const metadata: Metadata = {
   },
 };
 
+// Revalida cada hora: la portada prerenderizada incrusta los valores de
+// referencia del snapshot en el HTML; sin `revalidate`, Next la emite con
+// `s-maxage=31536000` y CDN/browsers sirven indicadores de días atrás.
+// Mismo TTL que /api/values y las páginas de calculadora.
+export const revalidate = 3600;
+
 export default function HomePage() {
   return (
     <>
