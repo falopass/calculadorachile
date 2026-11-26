@@ -1252,7 +1252,7 @@ export const ARTICULOS_2027: Article[] = [
       },
     ],
     content: `<p class="article-lead">En 2027 la revisión técnica anual se hace en el mes que corresponde al <strong>último dígito de la patente</strong>: 9 en enero, 0 en febrero, 1 en abril, 2 en mayo, 3 en junio, 4 en julio, 5 en agosto, 6 en septiembre, 7 en octubre y 8 en noviembre. Marzo y diciembre no tienen dígito asignado, y puedes hacer la revisión también en el mes anterior al que corresponde sin que cambie su vigencia (<a href="https://www.bcn.cl/leychile/navegar?idNorma=10183" target="_blank" rel="noopener">Decreto Supremo 156, art. 7</a>). <strong>Al 26 de noviembre de 2026 no hay prórrogas anunciadas para 2027</strong>.</p>
-<p>Este es el calendario completo de 2027, con el mes de adelanto que permite la misma norma, las periodicidades que no son anuales, los documentos que pide la planta y dónde consultar gratis el estado real de tu certificado. Si tu patente termina en 8, tu mes de 2026 es noviembre (todavía corre), y si termina en 9 puedes adelantar en diciembre de 2026 la revisión que te corresponde en enero.</p>
+<p>Este es el calendario completo de 2027, con el mes de adelanto que permite la misma norma, las periodicidades que no son anuales, los documentos que pide la planta y dónde consultar gratis el estado real de tu certificado. Si tu patente termina en 8, su mes de 2026 era noviembre, y si termina en 9 podías adelantar en diciembre de 2026 la revisión que te corresponde en enero.</p>
 
 <h2>Calendario de revisión técnica 2027 por dígito de patente</h2>
 <table>
