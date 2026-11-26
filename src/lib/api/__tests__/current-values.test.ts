@@ -14,6 +14,14 @@ const NOW = new Date('2026-09-23T16:00:00.000Z'); // 23-09 12:00 Santiago
 vi.mock('../bcentral', () => ({ fetchAllCurrentValues: vi.fn() }));
 vi.mock('../mindicador', () => ({ fetchMindicadorValores: vi.fn() }));
 
+const mockBucketGet = vi.fn();
+vi.mock('@opennextjs/cloudflare', () => ({
+  getCloudflareContext: () => ({
+    env: { NEXT_INC_CACHE_R2_BUCKET: { get: mockBucketGet, put: vi.fn() } },
+    ctx: { waitUntil: vi.fn() },
+  }),
+}));
+
 describe('getCurrentValues', () => {
   afterEach(() => {
     vi.unstubAllEnvs();
@@ -39,12 +47,45 @@ describe('getCurrentValues', () => {
 
   it('sin `live`, un render estático ISR usa el snapshot sin llamar proveedores', async () => {
     vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_SERVER);
+    mockBucketGet.mockResolvedValue(null);
 
     const current = await getCurrentValues();
 
     expect(fetchAllCurrentValues).not.toHaveBeenCalled();
     expect(fetchMindicadorValores).not.toHaveBeenCalled();
     expect(current.values.source).toBe('fallback');
+  });
+
+  it('sin `live`, un render ISR sirve los últimos valores vivos guardados en R2', async () => {
+    vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_SERVER);
+    mockBucketGet.mockResolvedValue({
+      json: async () => ({
+        values: {
+          uf: 40999.93,
+          utm: 71721,
+          dolar: { observado: 999.5, venta: 1005.99 },
+          euro: 1100.1,
+          updatedAt: new Date().toISOString(),
+          ufFecha: '2026-09-23',
+          source: 'bcentral',
+          freshness: {
+            uf: 'bcentral',
+            utm: 'bcentral',
+            dolarObservado: 'bcentral',
+            dolarVenta: 'mindicador',
+            euro: 'bcentral',
+          },
+        },
+        dates: { uf: '2026-09-23T12:00:00.000Z' },
+        indicatorSources: { uf: 'bcentral', utm: 'bcentral', dolar: 'bcentral' },
+      }),
+    });
+
+    const current = await getCurrentValues();
+
+    expect(fetchAllCurrentValues).not.toHaveBeenCalled();
+    expect(fetchMindicadorValores).not.toHaveBeenCalled();
+    expect(current.values).toMatchObject({ uf: 40999.93, source: 'bcentral' });
   });
 
   it('conserva los proveedores y su prioridad al ejecutar el servidor', async () => {

@@ -303,6 +303,8 @@ export async function getCurrentValues(
     },
   };
 
-  if (useLiveSources) persistLastLiveValues(current);
+  // Persistir solo si hay al menos un campo vivo: un resultado íntegramente
+  // de respaldo no debe pisar los últimos valores reales guardados.
+  if (useLiveSources && !health.allFallback) persistLastLiveValues(current);
   return current;
 }
