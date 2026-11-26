@@ -944,7 +944,7 @@ const articleCatalog: ArticleDraft[] = [
 <p>La misma norma precisa que esos días «en ningún caso deberán considerarse festivos o feriados para los efectos legales, excepto en lo que se refiere al pago y protesto de letras de cambio». Es decir, el 31 de diciembre cierra el banco, pero no se transforma en un feriado para el resto del país.</p>
 
 <h2>Una regla que vuelve: del feriado bancario histórico a la Ley Fintec</h2>
-<p>El cierre del 31 de diciembre no es nuevo. Durante décadas la Ley General de Bancos ordenó que las sucursales no atendieran ese día, pensando en los procesos de cierre contable y de sistemas que las propias instituciones hacen al terminar el año. La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1187323" target="_blank" rel="noopener">Ley 21.521</a> —la «Ley Fintec» de 2023— eliminó esa disposición, y los bancos volvieron a atender el 31 de diciembre de 2023 y de 2024.</p>
+<p>El cierre del 31 de diciembre no es nuevo. Durante décadas la Ley General de Bancos ordenó que las sucursales no atendieran ese día, pensando en los procesos de cierre contable y de sistemas que las propias instituciones hacen al terminar el año. La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1187323" target="_blank" rel="noopener">Ley 21.521</a> —la «Ley Fintec» de 2023— eliminó esa disposición, por lo que el cierre del 31 de diciembre dejó de ser obligatorio mientras estuvo derogado.</p>
 <p>En diciembre de 2025 el Congreso aprobó la Ley 21.791, que repuso el cierre. La propia CMF lo comunicó el 24 de diciembre de 2025: «de acuerdo con lo dispuesto en la Ley N.º 21.791, el miércoles 31 de diciembre las sucursales bancarias no atenderán al público», y recomendó realizar los trámites presenciales con anticipación. Esa misma regla rige ahora para el jueves 31 de diciembre de 2026.</p>
 
 <h2>El calendario real de la última semana de 2026</h2>
@@ -956,7 +956,7 @@ const articleCatalog: ArticleDraft[] = [
 <li><strong>Jueves 31 de diciembre:</strong> feriado bancario. Sin atención presencial; para el resto de actividades es un día hábil.</li>
 <li><strong>Viernes 1 de enero de 2027:</strong> feriado legal e irrenunciable para el comercio.</li>
 </ul>
-<p>En la práctica, la ventana para resolver asuntos presenciales antes de que cambie el año son solo esos tres días: lunes 28, martes 29 y miércoles 30. La <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> permite contar plazos descontando feriados y fines de semana sobre ese calendario.</p>
+<p>En la práctica, la ventana para resolver asuntos presenciales antes de que cambie el año son solo esos tres días: lunes 28, martes 29 y miércoles 30. Una precisión: la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> descuenta solo feriados legales generales y fines de semana, por lo que el 31 de diciembre lo cuenta como hábil —correcto para plazos administrativos y judiciales, que el cierre bancario no suspende—. Para la ventana de atención presencial bancaria, la regla es la de esta lista: ventanilla hasta el miércoles 30.</p>
 
 <h2>Qué trámites conviene cerrar antes del 30 de diciembre</h2>
 <p>Todo lo que exige una sucursal abierta o un ejecutivo tiene fecha de vencimiento efectiva el miércoles 30. Los casos más frecuentes:</p>
@@ -964,7 +964,7 @@ const articleCatalog: ArticleDraft[] = [
 <li><strong>Obtener o renovar tarjetas, chequeras o documentos físicos</strong> que se retiran en sucursal.</li>
 <li><strong>Firmar operaciones presenciales:</strong> apertura de productos, mandatos, instrucciones notariales o trámites hipotecarios que dependan de una firma ante el banco.</li>
 <li><strong>Reclamos o requerimientos formales</strong> que la institución exige canalizar en ventanilla.</li>
-<li><strong>Depósitos de cheques con vencimiento cercano:</strong> el feriado bancario sí incide en el pago y protesto de letras de cambio, así que los documentos con vencimiento en esas fechas se rigen por el siguiente día hábil bancario.</li>
+<li><strong>Documentos de pago con vencimiento cercano:</strong> la ley solo trata el feriado bancario como feriado para el pago y protesto de letras de cambio; para cheques y otros trámites con plazo no hay una prórroga automática comparable, así que conviene depositarlos o presentarlos a más tardar el 30.</li>
 <li><strong>Operaciones de empresas con corte anual:</strong> cierres de caja, remesas, depósitos de fin de mes o pagos de nómina programados por la tesorería.</li>
 </ul>
 <p>Si el trámite queda para enero, el primer día hábil bancario de 2027 es el lunes 4 de enero, porque el viernes 1 es feriado legal y el sábado 2 tampoco hay atención presencial.</p>
