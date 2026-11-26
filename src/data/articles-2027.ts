@@ -60,14 +60,20 @@ const ext = (url: string, texto: string) =>
 export const ARTICULOS_2027: Article[] = [
   {
     slug: 'cuanto-dinero-llevar-viaje-verano-2027',
-    title: 'Cuánto dinero llevar a Argentina, Brasil, Perú, Colombia, México y Bolivia en verano 2027',
+    title:
+      'Cuánto dinero llevar a Argentina, Brasil, Perú, Colombia, México y Bolivia en verano 2027',
     description:
       'Arma tu presupuesto de verano 2027 en moneda local: efectivo, tarjetas y conversores para Argentina, Brasil, Perú, Colombia, México y Bolivia.',
     date: '2026-11-19',
     updatedAt: '2026-11-19',
     category: 'educacion-financiera',
     readingTime: 8,
-    keywords: ['cuánto dinero llevar', 'verano 2027', 'presupuesto viaje desde Chile', 'efectivo o tarjeta en el extranjero'],
+    keywords: [
+      'cuánto dinero llevar',
+      'verano 2027',
+      'presupuesto viaje desde Chile',
+      'efectivo o tarjeta en el extranjero',
+    ],
     relatedCalculators: [
       'peso-argentino-a-chileno',
       'real-brasileno-a-peso-chileno',
@@ -77,22 +83,28 @@ export const ARTICULOS_2027: Article[] = [
       'boliviano-a-peso-chileno',
       'calculadora-costo-viaje',
     ],
-    sources: [{
-      label: 'Banco Central de Chile: tipos de cambio nominales, pesos por unidad de moneda extranjera',
-      url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL',
-    }],
+    sources: [
+      {
+        label:
+          'Banco Central de Chile: tipos de cambio nominales, pesos por unidad de moneda extranjera',
+        url: 'https://si3.bcentral.cl/siete/ES/Siete/Cuadro/CAP_TIPO_CAMBIO/MN_TIPO_CAMBIO4/TCB_520_TIPO_CAMBIO_NOMINAL',
+      },
+    ],
     faq: [
       {
         question: '¿Cuánto efectivo llevo si el alojamiento ya está pagado?',
-        answer: 'Separa los gastos pendientes que el proveedor solo acepta en efectivo y una reserva para imprevistos. No vuelvas a sumar el alojamiento prepagado ni retires todo el presupuesto del viaje sin revisar cómo podrás pagar en destino.',
+        answer:
+          'Separa los gastos pendientes que el proveedor solo acepta en efectivo y una reserva para imprevistos. No vuelvas a sumar el alojamiento prepagado ni retires todo el presupuesto del viaje sin revisar cómo podrás pagar en destino.',
       },
       {
         question: '¿El conversor muestra lo que cobrará mi tarjeta?',
-        answer: 'No. La conversión es una referencia, no una cotización de compra o venta ni una promesa del cargo final. Confirma con el emisor la moneda de facturación, el tipo de cambio aplicable y las comisiones.',
+        answer:
+          'No. La conversión es una referencia, no una cotización de compra o venta ni una promesa del cargo final. Confirma con el emisor la moneda de facturación, el tipo de cambio aplicable y las comisiones.',
       },
       {
         question: '¿Puedo usar el presupuesto de Argentina para los demás países?',
-        answer: 'No conviene trasladar un monto entre destinos solo convirtiendo monedas. Cotiza alojamiento, comidas, transporte y actividades en cada ciudad y convierte el total de su moneda local a pesos chilenos por separado.',
+        answer:
+          'No conviene trasladar un monto entre destinos solo convirtiendo monedas. Cotiza alojamiento, comidas, transporte y actividades en cada ciudad y convierte el total de su moneda local a pesos chilenos por separado.',
       },
     ],
     content: `
@@ -942,7 +954,8 @@ export const ARTICULOS_2027: Article[] = [
   {
     slug: 'cambiar-devolver-regalos-navidad-retracto-sernac',
     seoTitle: 'Cambiar o devolver un regalo de Navidad: derechos',
-    title: 'Cambios y devoluciones de regalos de Navidad: derecho a retracto, ticket de cambio y garantía legal',
+    title:
+      'Cambios y devoluciones de regalos de Navidad: derecho a retracto, ticket de cambio y garantía legal',
     description:
       'Qué derechos tienes para cambiar o devolver un regalo en Chile según SERNAC: retracto de 10 días solo en compras online, ticket de cambio en tienda física y garantía legal de 6 meses si el producto falla.',
     date: '2026-11-26',
@@ -957,10 +970,7 @@ export const ARTICULOS_2027: Article[] = [
       'garantía legal 6x3 sernac',
       'cambios y devoluciones navidad',
     ],
-    relatedCalculators: [
-      'calculadora-dias-habiles',
-      'calculadora-compras-internacionales',
-    ],
+    relatedCalculators: ['calculadora-dias-habiles', 'calculadora-compras-internacionales'],
     sources: [
       {
         label: 'SERNAC — Garantía legal: las 3 alternativas dentro de 6 meses',
@@ -985,7 +995,8 @@ export const ARTICULOS_2027: Article[] = [
     ],
     faq: [
       {
-        question: '¿Puedo devolver un regalo comprado en una tienda física solo porque no me gustó?',
+        question:
+          '¿Puedo devolver un regalo comprado en una tienda física solo porque no me gustó?',
         answer:
           'En general no. En compras presenciales no existe derecho a retracto cuando pudiste ver y tomar el producto: ahí solo hay cambio por gusto o talla si el comercio ofreció una política voluntaria (ticket de cambio). La excepción: la ley también permite retracto en ventas celebradas en el establecimiento cuando el consumidor no tuvo acceso directo al bien antes de comprar.',
       },
@@ -1217,10 +1228,22 @@ export const ARTICULOS_2027: Article[] = [
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No reemplaza un dictamen de la Dirección del Trabajo ni asesoría legal. Ante un caso concreto —especialmente si el empleador no reconoce el permiso—, prevalece lo que resuelva la Inspección del Trabajo.</p></div></aside>
 <p>Para profundizar en descansos, revisa la <a href="/guias/vacaciones-feriado-legal-chile">guía del feriado legal</a>, la <a href="/guias/feriados-chile-2027">guía de feriados 2027</a> y la <a href="/calculadoras/calculadora-vacaciones-proporcionales">calculadora de vacaciones proporcionales</a>.</p>`,
     sources: [
-      { label: 'Ley Chile — Código del Trabajo (arts. 66, 66 bis, 195 y 207 bis)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
-      { label: 'Dirección del Trabajo — Permiso por muerte de un hijo', url: 'https://www.dt.gob.cl/portal/1628/w3-article-94883.html' },
-      { label: 'Dirección del Trabajo — Permiso por matrimonio o unión civil', url: 'https://dt.gob.cl/portal/1628/w3-article-103884.html' },
-      { label: 'BCN Ley Fácil — Permiso laboral por nacimiento, matrimonio, unión civil o duelo', url: 'https://www.bcn.cl/api-leyfacil/servicio/ObtenerGuiaPublicadaHTML?uri=permiso-laboral-por-nacimiento' },
+      {
+        label: 'Ley Chile — Código del Trabajo (arts. 66, 66 bis, 195 y 207 bis)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'Dirección del Trabajo — Permiso por muerte de un hijo',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-94883.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Permiso por matrimonio o unión civil',
+        url: 'https://dt.gob.cl/portal/1628/w3-article-103884.html',
+      },
+      {
+        label: 'BCN Ley Fácil — Permiso laboral por nacimiento, matrimonio, unión civil o duelo',
+        url: 'https://www.bcn.cl/api-leyfacil/servicio/ObtenerGuiaPublicadaHTML?uri=permiso-laboral-por-nacimiento',
+      },
     ],
   },
   // Plan editorial #40 — permiso de circulación 2027 (ventana ene–mar)
@@ -1359,16 +1382,26 @@ export const ARTICULOS_2027: Article[] = [
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto exacto, la liquidación atrasada y los requisitos documentales específicos los emite cada municipalidad y el SII; ante una diferencia, prevalece la liquidación oficial.</p></div></aside>
 <p>Para estimar tu monto usa la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a>, revisa el detalle de la <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota de agosto</a> y la <a href="/guias/vehiculos-chile-permiso-multas">guía de vehículos y multas</a>.</p>`,
     sources: [
-      { label: 'Ley Chile — DL 3.063 Rentas Municipales, art. 15', url: 'https://www.bcn.cl/leychile/navegar?idNorma=18967' },
-      { label: 'BCN Ley Fácil — Permiso de circulación', url: 'https://www.bcn.cl/leyfacil/recurso/permiso-de-circulacion' },
-      { label: 'Ley Chile — Ley 21.505 (electromovilidad)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1184572' },
+      {
+        label: 'Ley Chile — DL 3.063 Rentas Municipales, art. 15',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=18967',
+      },
+      {
+        label: 'BCN Ley Fácil — Permiso de circulación',
+        url: 'https://www.bcn.cl/leyfacil/recurso/permiso-de-circulacion',
+      },
+      {
+        label: 'Ley Chile — Ley 21.505 (electromovilidad)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1184572',
+      },
       { label: 'Servicio de Impuestos Internos', url: 'https://www.sii.cl' },
     ],
   },
   {
     slug: 'feriado-judicial-febrero-2027',
     embedCalculatorId: 'dias-habiles',
-    title: 'Feriado judicial en febrero de 2027: ya no existe, los tribunales funcionan y los plazos corren normal',
+    title:
+      'Feriado judicial en febrero de 2027: ya no existe, los tribunales funcionan y los plazos corren normal',
     description:
       'El feriado judicial fue suprimido por la Ley 20.774 y no aplica desde febrero de 2015. En febrero de 2027 los tribunales funcionan, los plazos civiles, laborales y penales corren con normalidad y el juez puede estar de vacaciones sin que eso suspenda tu causa.',
     date: '2026-11-26',
@@ -1472,13 +1505,34 @@ export const ARTICULOS_2027: Article[] = [
 <aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El cómputo exacto de un plazo depende del procedimiento y de la resolución que lo fija; confirma siempre el vencimiento en tu expediente o con un abogado antes de actuar.</p></div></aside>
 <p>Para el resto del calendario del año —feriados nacionales, irrenunciables y fines de semana largos— revisa la <a href="/guias/feriados-chile-2027">guía de feriados de Chile 2027</a>.</p>`,
     sources: [
-      { label: 'Ley Chile — Ley 20.774 (suprime feriado judicial)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1064893' },
-      { label: 'Ley Chile — Código Orgánico de Tribunales (arts. 313 y 315)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=25563' },
-      { label: 'Ley Chile — Código de Procedimiento Civil (arts. 64 y 66)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=22740' },
-      { label: 'Ley Chile — Código Procesal Penal (art. 14)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=176595' },
-      { label: 'Ley Chile — Código del Trabajo (art. 435)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
-      { label: 'BCN — Ficha: Fin del feriado judicial', url: 'https://obtienearchivo.bcn.cl/obtienearchivo?id=recursoslegales%2F10221.3%2F44980%2F2%2FFicha_feriado_judicial.pdf' },
-      { label: 'Corte Suprema — Compendio de autos acordados', url: 'https://autoacordados.pjud.cl/' },
+      {
+        label: 'Ley Chile — Ley 20.774 (suprime feriado judicial)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1064893',
+      },
+      {
+        label: 'Ley Chile — Código Orgánico de Tribunales (arts. 313 y 315)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=25563',
+      },
+      {
+        label: 'Ley Chile — Código de Procedimiento Civil (arts. 64 y 66)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=22740',
+      },
+      {
+        label: 'Ley Chile — Código Procesal Penal (art. 14)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=176595',
+      },
+      {
+        label: 'Ley Chile — Código del Trabajo (art. 435)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'BCN — Ficha: Fin del feriado judicial',
+        url: 'https://obtienearchivo.bcn.cl/obtienearchivo?id=recursoslegales%2F10221.3%2F44980%2F2%2FFicha_feriado_judicial.pdf',
+      },
+      {
+        label: 'Corte Suprema — Compendio de autos acordados',
+        url: 'https://autoacordados.pjud.cl/',
+      },
     ],
   },
   {
@@ -1642,13 +1696,183 @@ export const ARTICULOS_2027: Article[] = [
 </div>
 </aside>`,
     sources: [
-      { label: 'Ley Chile — Decreto Supremo 156 del MTT (revisiones técnicas)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=10183' },
-      { label: 'Ley Chile — Decreto 104 del MTT (primera revisión 36–48 meses)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225262' },
-      { label: 'ChileAtiende — Revisión técnica de vehículos motorizados', url: 'https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados' },
-      { label: 'ChileAtiende — Consultar el estado de la revisión técnica', url: 'https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado' },
-      { label: 'ChileAtiende — Permiso de circulación', url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion' },
-      { label: 'Ley Chile — Ley de Tránsito, art. 89', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1007469' },
-      { label: 'PRT — Consulta oficial de revisión técnica', url: 'https://www.prt.cl/Paginas/RevisionTecnica.aspx' },
+      {
+        label: 'Ley Chile — Decreto Supremo 156 del MTT (revisiones técnicas)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=10183',
+      },
+      {
+        label: 'Ley Chile — Decreto 104 del MTT (primera revisión 36–48 meses)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1225262',
+      },
+      {
+        label: 'ChileAtiende — Revisión técnica de vehículos motorizados',
+        url: 'https://www.chileatiende.gob.cl/fichas/23978-revision-tecnica-de-vehiculos-motorizados',
+      },
+      {
+        label: 'ChileAtiende — Consultar el estado de la revisión técnica',
+        url: 'https://www.chileatiende.gob.cl/fichas/86124-consultar-el-estado-de-la-revision-tecnica-de-un-vehiculo-motorizado',
+      },
+      {
+        label: 'ChileAtiende — Permiso de circulación',
+        url: 'https://www.chileatiende.gob.cl/fichas/9611-permiso-de-circulacion',
+      },
+      {
+        label: 'Ley Chile — Ley de Tránsito, art. 89',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1007469',
+      },
+      {
+        label: 'PRT — Consulta oficial de revisión técnica',
+        url: 'https://www.prt.cl/Paginas/RevisionTecnica.aspx',
+      },
     ],
+  },
+  {
+    slug: 'reforma-pensiones-2027-que-cambia',
+    title:
+      'Reforma de pensiones 2027: licitación de stock AFP, PGU para 65+ y lo que cambia en agosto',
+    description:
+      'Los tres hitos de la Ley 21.735 en 2027: primera licitación del 10% del stock de afiliados AFP, PGU al monto máximo para todas las personas de 65+ en septiembre y cotización del empleador de 4,25% en agosto.',
+    date: '2026-11-26',
+    updatedAt: '2026-11-26',
+    category: 'previsional',
+    readingTime: 10,
+    relatedGuia: 'afp-pension-chile',
+    seoTitle: 'Reforma de pensiones 2027: licitación de stock AFP y PGU para 65+',
+    seoDescription:
+      'Qué pasa con la reforma previsional en 2027: licitación del 10% del stock de afiliados AFP (llamado hasta agosto), PGU al monto máximo para 65+ desde septiembre y solicitud anticipada en junio.',
+    keywords: [
+      'reforma de pensiones 2027',
+      'licitación stock afiliados AFP 2027',
+      'PGU 65 años septiembre 2027',
+      'licitación AFP 10% afiliados',
+      'ley 21.735 hitos 2027',
+      'PGU solicitud anticipada junio 2027',
+    ],
+    relatedCalculators: [
+      'calculadora-comparador-afp',
+      'calculadora-simulador-pension-afp',
+      'calculadora-pgu',
+    ],
+    faq: [
+      {
+        question: '¿La licitación de stock me obliga a cambiarme de AFP?',
+        answer:
+          'No necesariamente. La Superintendencia seleccionará de forma aleatoria un 10% de los afiliados no pensionados y solo ese grupo verá traspasada la administración de su cuenta a la AFP adjudicataria, que se define por la comisión más baja ofertada. Si no quedas seleccionado, tu AFP sigue igual.',
+      },
+      {
+        question:
+          '¿Cuándo recibirán todas las personas de 65 años o más el monto máximo de la PGU?',
+        answer:
+          'Desde septiembre de 2027, según el calendario de ChileAtiende: el monto máximo ($250.275 más el reajuste por IPC) se extiende a quienes tengan 65 años o más y derecho a PGU. Hasta entonces el monto máximo aplica a los 75 años o más, y quienes tienen entre 65 y 74 acceden a un tope menor.',
+      },
+      {
+        question: '¿Quiénes pueden hacer la solicitud anticipada de la PGU en junio de 2027?',
+        answer:
+          'Las personas beneficiarias de leyes de reparación, pensiones de gracia y exoneradas de DIPRECA y CAPREDENA que en septiembre de 2027 tengan 65 años o más y cumplan los requisitos. Quienes hagan la solicitud anticipada podrían comenzar a recibir el beneficio desde septiembre.',
+      },
+      {
+        question: '¿La cotización del empleador de 4,25% se descuenta del sueldo?',
+        answer:
+          'No. El alza de 3,5% a 4,25% de la remuneración imponible desde agosto de 2027 es de cargo del empleador según el artículo cuarto transitorio de la Ley 21.735. No aparece como descuento en la liquidación del trabajador ni reduce el sueldo líquido.',
+      },
+    ],
+    sources: [
+      {
+        label: 'BCN LeyChile — Ley 21.735 (reforma de pensiones, artículo cuarto transitorio)',
+        url: LEY_21735,
+      },
+      {
+        label:
+          'Superintendencia de Pensiones — Consejo Asesor para la licitación de stock (calendario)',
+        url: 'https://www.spensiones.gob.cl/portal/institucional/594/w3-article-17005.html',
+      },
+      {
+        label: 'ChileAtiende — Reforma de Pensiones: hitos y fechas importantes',
+        url: 'https://www.chileatiende.gob.cl/reformadepensiones/fechas-clave',
+      },
+      {
+        label: 'ChileAtiende — Aumento de la Pensión Garantizada Universal (PGU)',
+        url: 'https://www.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu',
+      },
+      {
+        label: 'Gob.cl — Reforma de Pensiones: calendario completo',
+        url: 'https://www.gob.cl/noticias/que-viene-ahora-reforma-pensiones-conoce-calendario-informate-cuando-aumentan-jubilaciones/',
+      },
+    ],
+    content: `<p class="article-lead">El año 2027 concentra tres hitos de la reforma previsional de la ${ext(LEY_21735, 'Ley 21.735')}: la primera licitación del stock de afiliados de las AFP, la extensión del monto máximo de la Pensión Garantizada Universal a todas las personas de 65 años o más en septiembre, y el alza de la cotización de cargo del empleador a 4,25% en agosto. Las fechas ya están escritas en la ley y en los calendarios oficiales; esto es lo que cambia, para quién y cuándo.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Fecha de corte: 26 de noviembre de 2026</strong><p>Revisado contra la Ley 21.735, el calendario de licitación informado por la Superintendencia de Pensiones y las fechas clave de ChileAtiende. Las licitaciones y los procesos de solicitud pueden recibir regulación adicional durante 2027; actualizaremos esta página cuando se publique.</p></div></aside>
+
+<h2 id="licitacion-stock">Agosto: primera licitación del 10% del stock de afiliados</h2>
+
+<p>La reforma introduce un mecanismo nuevo: someter a licitación la administración de las cuentas de un grupo de afiliados ya existentes. El objetivo declarado es aumentar la competencia entre las administradoras y bajar las comisiones. Según el calendario informado por la ${ext('https://www.spensiones.gob.cl/portal/institucional/594/w3-article-17005.html', 'Superintendencia de Pensiones')}, el <strong>plazo máximo para realizar el primer llamado a licitación es agosto de 2027</strong>, la adjudicación de la cartera debería efectuarse en <strong>diciembre de 2027</strong> y el traspaso de los afiliados seleccionados se concretaría en <strong>junio de 2028</strong>.</p>
+
+<p>Cómo funciona el mecanismo, según lo informado por la Superintendencia:</p>
+
+<ul>
+<li><strong>Universo:</strong> el 10% de las personas afiliadas no pensionadas, seleccionadas de forma aleatoria. No es un sorteo voluntario ni un cambio que se solicita: la Superintendencia elige el grupo.</li>
+<li><strong>Qué se licita:</strong> la administración de las cuentas de ese grupo. La AFP que oferte la comisión más baja se adjudica la cartera por el período que fijen las bases.</li>
+<li><strong>Qué falta por regular:</strong> antes de las fechas, la Superintendencia debe definir las condiciones de participación, el detalle de la selección aleatoria y cómo se informará a las personas seleccionadas. Para eso creó un Consejo Asesor, que sesionó por primera vez en abril de 2026.</li>
+</ul>
+
+<p>Si quedas seleccionado, tu cuenta pasará a administrarse por la adjudicataria cuando se concrete el traspaso, pero no es un movimiento obligatorio: el afiliado seleccionado tiene un plazo de <strong>30 días desde que la Superintendencia le notifica su selección</strong> para manifestar su voluntad de mantenerse en su AFP de origen, informándolo por los medios electrónicos que habilitará la Superintendencia. Si no lo hace dentro de ese plazo, será traspasado a la AFP ganadora. Y aun después del traspaso, los afiliados del grupo licitado pueden cambiarse de AFP en cualquier momento por las reglas habituales (permanencia mínima, solicitud de pensión en curso o las excepciones que la ley permite). Un detalle relevante: quienes resulten seleccionados —sean traspasados o decidan quedarse— no podrán volver a entrar en los nueve procesos de licitación siguientes, salvo que la AFP ganadora suba su comisión dentro de 20 años. El detalle práctico de cambiarse está en la guía de <a href="/guias/afp-pension-chile">AFP y pensión</a>.</p>
+
+<h3>No confundir con la licitación de nuevos afiliados</h3>
+
+<p>Son dos mecanismos distintos. La licitación de <strong>nuevos afiliados</strong> ya está en marcha: quienes ingresan por primera vez al sistema entre el 1 de octubre de 2025 y el 30 de septiembre de 2027 se afilian obligatoriamente a la adjudicataria vigente (AFP Uno, con 0,46% de comisión), con permanencia general de 24 meses. La licitación de <strong>stock</strong>, en cambio, toma un 10% de las personas que ya están afiliadas y no están pensionadas. Una no reemplaza a la otra: la de stock es adicional y periódica.</p>
+
+<p>Para comparar lo que pagas hoy por administración, el <a href="/calculadoras/calculadora-comparador-afp">comparador de comisiones AFP</a> muestra las comisiones vigentes de las administradoras y proyecta cuánto ahorras en comisiones cambiándote a una más barata en los años que faltan para tu pensión, y la guía de <a href="/guias/afp-mas-barata-comisiones-chile">comisiones de las AFP</a> desarrolla el criterio de comparación.</p>
+
+<h2 id="pgu-65-mas">Septiembre: la PGU llega al monto máximo para todos los 65+</h2>
+
+<p>La Pensión Garantizada Universal se ha ido ampliando por tramos de edad. Hoy el monto máximo ($250.275, reajustado por IPC) aplica a las personas de 75 años o más desde septiembre de 2026, y quienes tienen entre 65 y 74 años acceden a un tope menor ($231.732 según la ficha de ChileAtiende). En <strong>septiembre de 2027</strong> el esquema se cierra: el monto máximo pasa a cubrir a <strong>todas las personas de 65 años o más</strong> que tengan derecho a la PGU, según el <a href="https://www.chileatiende.gob.cl/reformadepensiones/fechas-clave" target="_blank" rel="noopener">calendario de hitos de ChileAtiende</a>.</p>
+
+<p>Para quienes ya reciben PGU, los aumentos por tramo de edad se han aplicado de forma automática y el patrón ha sido que el aumento corre desde el mes del cumpleaños. Ojo, eso aplica al <strong>aumento</strong> de un beneficio existente: si accedes por primera vez con una solicitud ordinaria, el derecho se devenga desde el mes siguiente a la solicitud, no desde el mes en que cumples la edad. Confirma tu caso con la consulta por RUN y fecha de nacimiento que habilita ChileAtiende, o en la <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a>, que estima el monto según edad y pensión base.</p>
+
+<h3>Junio y septiembre: nuevos grupos entran a la PGU</h3>
+
+<p>El mismo calendario abre el beneficio a grupos que antes quedaban fuera del sistema de protección social de la vejez:</p>
+
+<ul>
+<li><strong>Junio de 2027 — solicitud anticipada:</strong> las personas beneficiarias de leyes de reparación, pensiones de gracia y exoneradas de DIPRECA y CAPREDENA que en septiembre de 2027 tengan 65 años o más podrán solicitar anticipadamente la PGU, si cumplen los requisitos. Quienes hagan la solicitud anticipada podrían comenzar a recibir el beneficio desde septiembre.</li>
+<li><strong>Septiembre de 2027 — montepiadas de DIPRECA y CAPREDENA:</strong> podrán solicitar un monto proporcional para alcanzar el valor que tenga la PGU en esa fecha.</li>
+<li><strong>Octubre de 2027 — beneficiarios de APSV:</strong> el IPS notificará a las personas de 65 años o más que reciben el Aporte Previsional Solidario de Vejez si les conviene renunciar a ese beneficio y solicitar la PGU (el mismo aviso ya se hizo en octubre de 2026 para los 75+).</li>
+</ul>
+
+<p>"Tener derecho" no es automático para estos grupos: la solicitud revisa requisitos como la residencia y las reglas de focalización. El monto máximo es un tope, no el valor que cada persona recibirá; el detalle del acceso por etapas está en la <a href="https://www.chileatiende.gob.cl/fichas/130457-aumento-de-la-pension-garantizada-universal-pgu" target="_blank" rel="noopener">ficha oficial del aumento de la PGU</a>.</p>
+
+<h2 id="cotizacion-empleador">Agosto: la cotización del empleador sube a 4,25%</h2>
+
+<p>El tercer hito también es de agosto: la cotización previsional de cargo del empleador pasa de 3,5% a <strong>4,25%</strong> de la remuneración imponible en las remuneraciones devengadas desde ese mes (letra c) del artículo cuarto transitorio). El desglose queda en 0,25% a capitalización individual, 1,5% a la Cotización con Rentabilidad Protegida registrada a favor del trabajador y 2,5% al seguro social y compensación por expectativa de vida. Es un costo del empleador: <strong>no se descuenta del sueldo líquido</strong> y tu liquidación no cambia por esta ley. El detalle de lo que mueve y lo que no en la remuneración está en el artículo sobre <a href="/blog/que-cambia-sueldo-2027-reajuste-cotizacion-empleador">lo que cambia en el sueldo en 2027</a>.</p>
+
+<h2 id="calendario">Calendario de la reforma en 2027</h2>
+
+<div class="table-scroll"><table>
+<caption>Hitos de la Ley 21.735 en 2027 y lo que sigue</caption>
+<thead><tr><th scope="col">Fecha</th><th scope="col">Hito</th><th scope="col">Estado al 26-11-2026</th></tr></thead>
+<tbody>
+<tr><td>Junio de 2027</td><td>Solicitud anticipada de PGU para nuevos grupos (reparación, gracia, exonerados DIPRECA/CAPREDENA) que en septiembre tengan 65 años o más</td><td>Fijado por calendario oficial</td></tr>
+<tr><td>A más tardar agosto de 2027</td><td>Primer llamado a licitación del 10% del stock de afiliados no pensionados</td><td>Plazo fijado por ley; regulación pendiente</td></tr>
+<tr><td>Agosto de 2027</td><td>Cotización de cargo del empleador sube de 3,5% a 4,25% de la remuneración imponible</td><td>Fijado por ley</td></tr>
+<tr><td>Septiembre de 2027</td><td>PGU al monto máximo ($250.275 + IPC) para todas las personas de 65+; inicio de solicitudes para nuevos grupos y montepiadas DIPRECA/CAPREDENA</td><td>Fijado por calendario oficial</td></tr>
+<tr><td>Octubre de 2027</td><td>El IPS notifica a beneficiarios de APSV de 65 años o más si les conviene cambiar a la PGU</td><td>Fijado por calendario oficial</td></tr>
+<tr><td>Diciembre de 2027</td><td>Adjudicación de la cartera licitada del stock de afiliados</td><td>Fecha estimada por la Superintendencia</td></tr>
+<tr><td>Junio de 2028</td><td>Traspaso efectivo de los afiliados seleccionados a la AFP adjudicataria</td><td>Fecha estimada por la Superintendencia</td></tr>
+</tbody>
+</table></div>
+
+<h2 id="que-conviene-hacer">Qué conviene revisar según tu caso</h2>
+
+<p><strong>Si estás afiliado y trabajando:</strong> no tienes trámite por la licitación de stock. Si te toca el 10% aleatorio, la Superintendencia lo informará por los canales que regule. Lo que sí conviene hoy es conocer cuánto pagas de comisión: el <a href="/calculadoras/calculadora-comparador-afp">comparador AFP</a> permite ver si tu administradora es de las caras o las baratas, porque ese es exactamente el criterio que usará la licitación.</p>
+
+<p><strong>Si tienes 64 años o vas a cumplir 65:</strong> revisa desde junio de 2027 si entras en la solicitud anticipada (solo si perteneces a los nuevos grupos) y verifica en septiembre tu acceso al monto máximo. El <a href="/calculadoras/calculadora-simulador-pension-afp">simulador de pensión AFP</a> proyecta tu pensión con los componentes de la reforma —PGU, Beneficio por Años Cotizados y CEV para mujeres— para que veas cómo se compone el total.</p>
+
+<p><strong>Si recibes una pensión de gracia, de reparación o eres exonerado de DIPRECA/CAPREDENA:</strong> tu entrada al sistema no es automática, requiere solicitud. Marca junio de 2027 para la solicitud anticipada (si en septiembre tienes 65 años o más) y septiembre para el inicio general, y prepara la documentación que acredite tu calidad de beneficiario. Si tu pensión es de <strong>montepío</strong> de DIPRECA o CAPREDENA, el trámite es distinto: podrás solicitar desde septiembre un monto proporcional que complementa tu pensión hasta el valor que tenga la PGU en esa fecha —no la PGU completa adicional a tu montepío—.</p>
+
+<p><strong>Si eres empleador:</strong> presupuesta el costo previsional con 4,25% desde agosto de 2027, no 3,5%. El 1,75% que va a favor del trabajador (capitalización + CRP) tampoco es deducible de su líquido: sale del costo laboral completo.</p>
+
+<p>En resumen: 2027 es el año en que la reforma deja de ser solo aporte y también se vuelve competencia (licitación de stock) y cobertura (PGU universal para 65+). Las fechas están en la ley; lo que falta por definirse son las bases de la licitación y la regulación del traspaso, que la Superintendencia irá publicando durante el año.</p>
+
+<p>Este artículo es orientación general: no sustituye la información de tu AFP, del IPS ni una asesoría previsional. Las simulaciones de las calculadoras son referenciales y usan los valores vigentes informados en cada una.</p>`,
   },
 ];
