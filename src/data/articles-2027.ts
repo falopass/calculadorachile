@@ -1114,7 +1114,7 @@ export const ARTICULOS_2027: Article[] = [
       {
         question: '¿Los tribunales cierran en febrero?',
         answer:
-          'No cierran. Los juzgados de letras tramitan causas todo el mes y la Corte Suprema fija cada diciembre, mediante auto acordado, cuántas salas suyas y de las Cortes de Apelaciones operan en febrero siguiente (art. 315 del Código Orgánico de Tribunales). Lo que sí ocurre es que jueces y funcionarios toman su feriado anual de un mes durante el año, muchas veces en verano, por lo que la atención puede ser más lenta.',
+          'No cierran. Los juzgados de letras tramitan causas todo el mes y la Corte Suprema puede dictar cada diciembre un auto acordado que determina cuántas salas suyas y de las Cortes de Apelaciones operan en febrero siguiente (art. 315 del Código Orgánico de Tribunales). Lo que sí ocurre es que jueces y funcionarios toman su feriado anual de un mes durante el año, muchas veces en verano, por lo que la atención puede ser más lenta.',
       },
       {
         question: '¿El feriado judicial afecta mi sueldo o mis vacaciones como trabajador?',
