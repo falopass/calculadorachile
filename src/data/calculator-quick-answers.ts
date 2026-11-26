@@ -53,6 +53,7 @@ import { calculateIVA } from '@/lib/calculations/iva';
 import { calculateBoletaHonorarios } from '@/lib/calculations/boleta-honorarios';
 import { calculateCreditoAutomotriz } from '@/lib/calculations/credito-automotriz';
 import { calculateVacaciones } from '@/lib/calculations/vacaciones';
+import { calculateFeriadoProgresivo } from '@/lib/calculations/feriado-progresivo';
 import { calculateGratificacion } from '@/lib/calculations/gratificacion';
 import { topeGratificacion } from '@/lib/values/gratificacion-tope';
 import { calculateImpuestoSegundaCategoria } from '@/lib/calculations/impuesto-segunda-categoria';
@@ -187,6 +188,7 @@ const BCN_LEY_21830_URL = 'https://www.bcn.cl/leychile/navegar?idNorma=1225354';
 /** Vigencia del IMM fijado por la Ley 21.830 (E-014). */
 const IMM_LEY_21830_DESDE = '2026-05-01';
 const DT_FERIADO_PROPORCIONAL_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60200.html';
+const DT_FERIADO_PROGRESIVO_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html';
 const DT_ORD_826_URL = 'https://www.dt.gob.cl/legislacion/1624/w3-article-94453.html';
 const DT_INDEMNIZACION_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60593.html';
 const DT_BASE_INDEMNIZACION_URL = 'https://www.dt.gob.cl/portal/1628/w3-article-60585.html';
@@ -440,6 +442,55 @@ export function getQuickAnswer(calculatorId: string, ctx: QuickAnswerContext): Q
             `Con ingreso mínimo (${formatCLP(INGRESO_MINIMO.mensual)})`,
             'Con $800.000',
           ],
+          rows,
+        },
+      };
+    }
+
+    case 'feriado-progresivo': {
+      const e = calculateFeriadoProgresivo({
+        aniosEmpleadorActual: 6,
+        aniosEmpleadoresAnteriores: 10,
+        sueldoBruto: 900_000,
+      });
+      const e13 = calculateFeriadoProgresivo({ aniosEmpleadorActual: 13 });
+      const rows = [3, 4, 5, 6, 7, 8, 9, 12, 15, 20].map((anios) => {
+        const r = calculateFeriadoProgresivo({
+          aniosEmpleadorActual: anios,
+          aniosEmpleadoresAnteriores: 10,
+        });
+        return [`${anios}`, `${r.diasProgresivos}`, `${r.feriadoAnualTotal}`];
+      });
+      return {
+        h1: 'Calculadora de feriado progresivo: días extra por antigüedad',
+        ...withLinks([
+          'El feriado progresivo suma 1 día hábil por cada 3 años nuevos trabajados para tu empleador actual, una vez que completas 10 años trabajados con uno o más empleadores, continuos o no (',
+          { text: 'Dirección del Trabajo', href: DT_FERIADO_PROGRESIVO_URL },
+          '; ',
+          { text: 'Código del Trabajo, art. 68', href: BCN_CODIGO_TRABAJO_URL },
+          `). Ejemplo: con 10 años anteriores y 6 años en tu empresa son ${e.diasProgresivos} días progresivos, ${e.feriadoAnualTotal} días hábiles de feriado anual en total.`,
+        ]),
+        shortAnswers: [
+          {
+            question: '¿Cuántos días de feriado progresivo me corresponden?',
+            answer: `Tras los 10 años de base, cada 3 años nuevos con el empleador actual suman 1 día hábil. Sin años anteriores, con 13 años en tu empresa son ${e13.diasProgresivos} día progresivo (${e13.feriadoAnualTotal} días anuales); con 10 años anteriores y 6 en la actual, ${e.diasProgresivos} días (${e.feriadoAnualTotal} anuales). No hay tope legal de días.`,
+            sources: [
+              { text: 'Dirección del Trabajo, feriado progresivo', href: DT_FERIADO_PROGRESIVO_URL },
+            ],
+          },
+          {
+            question: '¿Los años con otros empleadores cuentan?',
+            answer:
+              'Sí, pero solo para completar los 10 años de base y hasta ese tope; se acreditan con cotizaciones previsionales. Los días progresivos se generan únicamente con períodos de 3 años nuevos en el empleador actual, según la interpretación de la Dirección del Trabajo.',
+            sources: [
+              { text: 'Dirección del Trabajo, feriado progresivo', href: DT_FERIADO_PROGRESIVO_URL },
+            ],
+          },
+        ],
+        example: {
+          caption:
+            'Días progresivos con la base de 10 años ya completada (años anteriores = 10): cada 3 años nuevos con el empleador actual suman 1 día hábil sobre los 15 del feriado anual.',
+          headers: ['Años con empleador actual', 'Días progresivos', 'Feriado anual total'],
           rows,
         },
       };

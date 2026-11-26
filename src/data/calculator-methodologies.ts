@@ -1228,6 +1228,41 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       result: '10 horas extra ≈ $83.333 adicionales al sueldo.',
     },
   },
+  'feriado-progresivo': {
+    summary:
+      'Cuenta los días de feriado progresivo del artículo 68 del Código del Trabajo: 1 día hábil adicional por cada 3 años nuevos con el empleador actual, una vez completados 10 años trabajados con uno o más empleadores.',
+    calculationSteps: [
+      'Los años con empleadores anteriores se contabilizan hasta 10 para completar la base.',
+      'Se descuentan de los años con el empleador actual los que faltaban para llegar a 10.',
+      'Los años restantes con el empleador actual se dividen por 3 y se toma la parte entera: esos son los días progresivos.',
+      'El feriado anual total es 15 días hábiles más los días progresivos.',
+      'Con sueldo informado, el valor por día se estima como sueldo ÷ 30.',
+    ],
+    assumptions: [
+      'Los años con empleadores anteriores son acreditables con cotizaciones previsionales, según la interpretación de la Dirección del Trabajo.',
+      'Los períodos de 3 años que generan días se cumplen con el empleador actual, como exige la DT.',
+      'El feriado anual base es el general de 15 días hábiles del artículo 67.',
+    ],
+    limitations: [
+      'No considera estatutos especiales ni pactos colectivos más favorables.',
+      'El valor por día con remuneración variable requiere el promedio de los últimos 3 meses (art. 71); aquí se usa el sueldo mensual declarado.',
+    ],
+    workedExample: {
+      title: 'Ejemplo: 10 años anteriores y 6 en la empresa actual',
+      inputs: [
+        'Años con empleador actual: 6',
+        'Años con empleadores anteriores: 10',
+        'Sueldo: $900.000',
+      ],
+      development: [
+        'Base de 10 años ya completa con los años anteriores.',
+        'Años nuevos con el empleador: 6 ÷ 3 = 2 días progresivos.',
+        'Feriado anual: 15 + 2 = 17 días hábiles.',
+        'Valor por día: $900.000 ÷ 30 = $30.000.',
+      ],
+      result: '2 días progresivos (17 días anuales); referencial $60.000 si se indemnizan.',
+    },
+  },
   'subsidio-familiar-suf': {
     summary:
       'Suma el Subsidio Familiar según las cargas acreditadas: $22.601 por cada una y $45.202 por cada persona con discapacidad, montos vigentes desde el 01-05-2026.',
