@@ -12,7 +12,7 @@ import { getCurrentValues } from '@/lib/api/current-values';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const { values } = await getCurrentValues();
+  const { values } = await getCurrentValues({ live: true });
   return NextResponse.json(values, {
     headers: { 'Cache-Control': 'no-store' },
   });

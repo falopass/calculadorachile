@@ -124,6 +124,8 @@ async function requestMindicadorValores(): Promise<MindicadorValores> {
     response = await fetch(MINDICADOR_API, {
       // Sin Data Cache de Next (mismo motivo que bcentral.ts): el route
       // /api/values revalida por hora y el memo de 30 s deduplica ráfagas.
+      // `no-store` explícito porque en ISR Next aplicaría force-cache.
+      cache: 'no-store',
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       headers: {
         Accept: 'application/json',

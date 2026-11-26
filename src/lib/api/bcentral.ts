@@ -79,9 +79,11 @@ async function requestBCentral(
   let response: Response;
   try {
     response = await fetch(url, {
-      // Sin Data Cache de Next: el route /api/values ya revalida por hora
-      // y la caché incremental agrega una superficie de fallo (fetches a
-      // la fuente caían a fallback en el Worker pese a egress sano).
+      // Sin Data Cache de Next: el route /api/values ya revalida por hora.
+      // `no-store` explícito: en regeneración ISR Next marcaría el fetch
+      // como force-cache por defecto y caería en el incremental cache,
+      // que falla en el Worker (upstream quedaba en fallback).
+      cache: 'no-store',
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       headers: {
         Accept: 'application/json',

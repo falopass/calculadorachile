@@ -9,9 +9,11 @@
 //   3. Si Mindicador también falla, caemos a FALLBACK_VALUES estáticos.
 //
 // Cache:
-//   - `revalidate = 3600` para Next Data Cache.
-//   - `Cache-Control: s-maxage=3600, stale-while-revalidate=86400`
-//     para CDNs / browsers.
+//   - `force-dynamic`: la regeneración ISR no consultaba las fuentes en
+//     vivo (los fetch de contexto estático enrutan al Data Cache, que
+//     fallaba en el Worker) y la entrada salía con respaldo. La respuesta
+//     se sigue cacheando una hora en CDN vía `Cache-Control`/`CDN-Cache-Control`.
+//   - `memoGet` deduplica ráfagas a 30 s dentro del isolate.
 
 import { NextResponse } from 'next/server';
 import { getCurrentValues, type ValuesResponse } from '@/lib/api/current-values';
@@ -19,9 +21,7 @@ import { getCurrentValues, type ValuesResponse } from '@/lib/api/current-values'
 const ONE_HOUR = 60 * 60;
 const ONE_DAY = 24 * ONE_HOUR;
 
-// Next.js exige que `revalidate` sea un literal numérico parseable
-// estáticamente (no acepta expresiones).
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 function buildResponse(payload: ValuesResponse) {
   return NextResponse.json(payload, {
@@ -33,6 +33,6 @@ function buildResponse(payload: ValuesResponse) {
 }
 
 export async function GET() {
-  const { values } = await getCurrentValues();
+  const { values } = await getCurrentValues({ live: true });
   return buildResponse(values);
 }
