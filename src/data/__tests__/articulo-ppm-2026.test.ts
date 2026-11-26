@@ -39,7 +39,11 @@ describe('#32: post PPM 2026 (ppm-2026-calcular-independientes)', () => {
   it('distingue variación vs suspensión y aclara cotizaciones en la devolución', () => {
     expect(art.content).toContain('trámite distinto');
     expect(art.content).toContain('cotizaciones previsionales');
+    // Las respuestas FAQ se publican como dato estructurado: mismas precisiones que el cuerpo.
     const faqVaria = art.faq?.find((f) => f.question.includes('suspender'));
     expect(faqVaria?.answer).toContain('trámites distintos');
+    expect(faqVaria?.answer).toContain('mes siguiente a presentada la solicitud');
+    const faqDevol = art.faq?.find((f) => f.question.includes('Qué es el PPM'));
+    expect(faqDevol?.answer).toContain('cotizaciones previsionales');
   });
 });
