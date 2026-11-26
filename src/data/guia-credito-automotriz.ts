@@ -46,7 +46,7 @@ export const guiaCreditoAutomotriz: Guia = {
   title: 'Crédito automotriz en Chile 2026: cómo funciona, CAE, pie y costo total',
   intent: '¿Cómo funciona el crédito automotriz y cuánto termino pagando por el auto?',
   description:
-    'Guía del crédito automotriz en Chile: cuota francesa, pie, tasa vs CAE, impuesto de timbres y estampillas, seguros y cómo comparar ofertas con la hoja de resumen de la CMF.',
+    'Guía del crédito automotriz en Chile: cuota francesa, pie, tasa vs CAE, impuesto de timbres y estampillas, seguros y cómo comparar ofertas con la hoja de resumen obligatoria.',
   category: 'vehiculos',
   categoryLabel: 'Vehículos',
   keywords: [
@@ -69,7 +69,7 @@ export const guiaCreditoAutomotriz: Guia = {
       title: 'Resumen',
       level: 2,
       html: `<p><em>Publicado el 26 de noviembre de 2026.</em></p>
-<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Esta guía explica el mecanismo del crédito automotriz con fuentes oficiales (CMF, SII, BCN) verificadas en noviembre de 2026. Los números de ejemplo son ilustrativos: la CAE real de tu crédito es la que aparece en la hoja de resumen de cada oferta. Esto no es una recomendación de crédito.</p></div></aside>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Alcance YMYL</strong><p>Esta guía explica el mecanismo del crédito automotriz con fuentes oficiales (SERNAC, SII, BCN) verificadas en noviembre de 2026. Los números de ejemplo son ilustrativos: la CAE real de tu crédito es la que aparece en la hoja de resumen de cada oferta. Esto no es una recomendación de crédito.</p></div></aside>
 <p>Un <strong>crédito automotriz</strong> es un préstamo para comprar vehículo que se repaga en <strong>cuotas mensuales iguales</strong> (sistema francés) sobre el <strong>capital financiado: precio del auto menos el pie</strong>. Tres números definen el trato: la tasa de interés, el plazo y los costos asociados —que la <strong>CAE (Carga Anual Equivalente)</strong> junta en una sola cifra comparable entre ofertas.</p>
 <p>Ejemplo con números redondos: un auto de <strong>${formatCLP(EJ.valorVehiculo)}</strong> con pie del 20% (${formatCLP(EJ.pie)}) deja ${formatCLP(EJ.montoFinanciar)} a financiar. A 1,2% mensual (14,4% anual) en 36 cuotas, el dividendo del crédito sale <strong>${formatCLP(EJ.dividendoMensual)} al mes</strong> y los intereses del plazo suman <strong>${formatCLP(EJ.totalIntereses)}</strong>. Con un seguro vehicular estimado, el costo mensual sube a ${formatCLP(EJ.dividendoConSeguro)}. Simula tu caso en el ${int('/calculadoras/calculadora-credito-automotriz', 'simulador de crédito automotriz')}.</p>`,
     },
