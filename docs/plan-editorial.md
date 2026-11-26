@@ -154,7 +154,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~29~~ | blog | ~~Contribuciones 4.ª cuota 30 nov~~ | ~~`contribuciones-cuarta-cuota-noviembre-2026`~~ | ~~DR[27]~~ | vivienda | ~~2026-09-23~~ | 30 nov | ✅ |
 | ~~30~~ | blog | ~~Aguinaldo Navidad pensionados 2026~~ | ~~`aguinaldo-navidad-pensionados-2026`~~ | — | pensión | ~~2026-09-23~~ | nov–dic | ✅ |
 | ~~31~~ | blog\* | ~~Seguro de cesantía + finiquito (AFC)~~ | ~~`seguro-cesantia-finiquito-2026-afc`~~ | publicado 2026-07-10 + satélite cobro | laboral | ~~2026-11-13~~ | continuo | ✅ |
-| 32 | blog | PPM 2026 independientes y empresas | `ppm-2026-calcular-independientes` | satélite iva-boleta | impuestos | 2026-11-17 | nov–abr | **P2-ventana** |
+| ~~32~~ | blog | ~~PPM 2026 independientes y empresas~~ | ~~`ppm-2026-calcular-independientes`~~ | publicado 2026-11-25 | impuestos | ~~2026-11-17~~ | nov–abr | ✅ |
 | 33 | blog | Plusvalía venta propiedad 2026 | `plusvalia-venta-propiedad-2026-calcular` | evergreen blog | vivienda | 2026-11-20 | continuo | **P2-continuo** |
 | ~~34~~ | blog | ~~Feriado irrenunciable 25 dic 2026~~ | ~~`feriado-irrenunciable-25-diciembre-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-01~~ | dic | ✅ |
 | ~~35~~ | blog | ~~Aguinaldo Navidad sector público 2026~~ | ~~`aguinaldo-navidad-2026-sector-publico`~~ | publicado 2026-11-16 | laboral | ~~2026-12-04~~ | dic | ✅ |
