@@ -161,7 +161,7 @@ Ordenado por **fecha de publicación sugerida**.
 | ~~36~~ | blog | ~~Gratificación fin de año 2026~~ | ~~`gratificacion-fin-de-ano-2026`~~ | publicado 2026-11-16 | laboral | ~~2026-12-08~~ | dic–ene | ✅ |
 | ~~38~~ | blog | ~~Pensión alimenticia 2026: ejemplo~~ | `pension-alimenticia-2026-ejemplo-calculo` | publicado 2026-11-19 · satélite familia | familia | ~~2026-12-15~~ | continuo | ✅ |
 | ~~**39**~~ | **guía** | ~~**Prep Operación Renta 2027 (checklist)**~~ | ~~`preparacion-operacion-renta-2027-checklist`~~ | publicado 2026-11-17 en `guias.ts` · DR[20] | impuestos | ~~2027-01-06~~ | ene–abr | ✅ |
-| 40 | blog | Permiso circulación 2027 | `permiso-circulacion-2027-calcular-plazo` | satélite vehículos | vehículos | 2027-01-13 | ene–mar | **P3** |
+| ~~40~~ | blog | ~~Permiso circulación 2027~~ | ~~`permiso-circulacion-2027-calcular-plazo`~~ | publicado 2026-11-26 | vehículos | ~~2027-01-13~~ | ene–mar | ✅ |
 | 41 | blog | Intereses por mora | `intereses-mora-chile-2026-calcular` | — | finanzas | 2027-01-16 | continuo | **P3** |
 | ~~42~~ | blog | ~~Sueldo mínimo 2027~~ | ~~`sueldo-minimo-2027-reajuste-simular-liquido`~~ | publicado 2026-11-17 | laboral | ~~2027-01-20~~ | ene | ✅ |
 | 43 | blog | Crédito hipotecario 2027 UF | `credito-hipotecario-2027-simular-dividendo` | satélite hipoteca | vivienda | 2027-01-23 | continuo | **P3** |
