@@ -940,11 +940,11 @@ const articleCatalog: ArticleDraft[] = [
 <p>El <strong>artículo 24 del Código del Trabajo</strong> regula la temporada de fin de año del comercio y, además de la jornada extendida previa a Navidad, fija un tope para la víspera de Año Nuevo: el 31 de diciembre, bajo ninguna circunstancia se trabaja más allá de las 20 horas. La misma regla rige el 24 de diciembre.</p>
 <p>En 2026 el 31 de diciembre es jueves. Si tu turno habitual termina a las 21:00, ese día debes salir a las 20:00. La salida anticipada no autoriza al empleador a descontarte la hora: es una prohibición legal, no un permiso que pidas tú.</p>
 <p>Además, ese jueves los bancos no atienden presencialmente: la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1219578" target="_blank" rel="noopener">Ley 21.791</a>, publicada el 17 de diciembre de 2025, restableció que los bancos no atienden al público el 31 de diciembre de cada año. No es feriado legal para el resto de los trabajadores, pero los pagos y trámites en sucursal se corren al miércoles 30 de diciembre; las transferencias electrónicas y los cajeros automáticos funcionan con normalidad. Los vencimientos de letras de cambio no se adelantan: se trasladan al primer día hábil siguiente, el lunes 4 de enero de 2027.</p>
-<p>El descanso irrenunciable del 1 de enero corre hasta las 06:00 del sábado 2, según el criterio de la DT, salvo turnos rotativos que incidan en ese tramo.</p>
+<p>El descanso irrenunciable del 1 de enero corre hasta las 06:00 del sábado 2, según el <a href="https://www.dt.gob.cl/portal/1628/w3-article-95018.html" target="_blank" rel="noopener">criterio de la DT</a>, salvo turnos rotativos que incidan en ese tramo.</p>
 
 <h2>¿Se paga el 1 de enero si no trabajo?</h2>
 <p>Sí. El feriado es un día de descanso legal y, si tienes sueldo mensual, no se descuenta: tu remuneración de enero es la misma que la de cualquier mes. Lo que no existe es un "bono de Año Nuevo" o pago doble automático por el feriado. Si quieres revisar cuánto te llega en enero, la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> descuenta AFP, salud, seguro de cesantía e impuesto con las tasas vigentes.</p>
-<p>Quien trabaja con remuneración por día (jornal) tiene derecho al pago del festivo si cumple la semana corrida del artículo 45 del Código del Trabajo: haber trabajado todos los días pactados de la semana. Si no los cumple, la forma de pago del festivo depende de cómo se pactó la remuneración; ante dudas, la DT responde consultas en su sitio.</p>
+<p>Quien trabaja con remuneración por día (jornal) tiene derecho al pago del festivo por la semana corrida del artículo 45 del Código del Trabajo, que exige haber trabajado los días pactados de la semana o haber faltado por causa no imputable al trabajador. Una inasistencia no elimina por sí sola el derecho, solo puede reducir el promedio. Si la remuneración se pactó por turno, la forma de pago del festivo depende del contrato; ante dudas, la DT responde consultas en su sitio.</p>
 
 <h2>Multas para el empleador</h2>
 <p>Las infracciones al artículo 2 de la Ley 19.973 y al artículo 24 del Código del Trabajo tienen la misma escala de multas a beneficio fiscal, que se aplica <strong>por cada trabajador afectado</strong>:</p>
@@ -952,7 +952,7 @@ const articleCatalog: ArticleDraft[] = [
 <thead><tr><th>Tamaño del empleador</th><th>Multa por trabajador afectado</th></tr></thead>
 <tbody>
 <tr><td>Menos de 50 trabajadores</td><td>5 UTM</td></tr>
-<tr><td>50 o más trabajadores</td><td>10 UTM</td></tr>
+<tr><td>De 50 a 199 trabajadores</td><td>10 UTM</td></tr>
 <tr><td>200 o más trabajadores</td><td>20 UTM</td></tr>
 </tbody>
 </table>
@@ -988,6 +988,7 @@ const articleCatalog: ArticleDraft[] = [
       { label: 'Ley Chile — Código del Trabajo (arts. 24, 35, 36 y 38)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
       { label: 'Dirección del Trabajo — Feriados irrenunciables del comercio', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html' },
       { label: 'Ley Chile — Ley 21.791 (feriado bancario 31 de diciembre)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1219578' },
+      { label: 'Dirección del Trabajo — Descanso semanal y feriados trabajados', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95018.html' },
     ],
   },
   {
