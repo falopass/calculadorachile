@@ -83,7 +83,12 @@ export function calculateFeriadoProgresivo(input: FeriadoProgresivoInput): Feria
 
   const aniosAnterioresContables = Math.min(ANIOS_BASE_FERIADO_PROGRESIVO, aniosAnteriores);
   const aniosRestantesBase = Math.max(0, ANIOS_BASE_FERIADO_PROGRESIVO - aniosAnterioresContables);
-  const aniosNuevosEmpleador = Math.max(0, aniosActual - aniosRestantesBase);
+  // Se redondea a nanosegundos: con años decimales la resta puede dejar
+  // un tramo completo apenas bajo el entero (p.ej. 8,1 + 4,9 → 2,9999…).
+  const aniosNuevosEmpleador = Math.max(
+    0,
+    Math.round((aniosActual - aniosRestantesBase) * 1e9) / 1e9,
+  );
   const diasProgresivos = Math.floor(aniosNuevosEmpleador / ANIOS_POR_DIA_PROGRESIVO);
   const feriadoAnualBase = input.regionAustral ? FERIADO_ANUAL_BASE_AUSTRAL : FERIADO_ANUAL_BASE;
   const feriadoAnualTotal = feriadoAnualBase + diasProgresivos;

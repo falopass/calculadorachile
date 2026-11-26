@@ -1235,7 +1235,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
       'Los años con empleadores anteriores se contabilizan hasta 10 para completar la base.',
       'Se descuentan de los años con el empleador actual los que faltaban para llegar a 10.',
       'Los años restantes con el empleador actual se dividen por 3 y se toma la parte entera: esos son los días progresivos.',
-      'El feriado anual total es 15 días hábiles más los días progresivos.',
+      'El feriado anual total es 15 días hábiles —20 en Magallanes, Aysén y Palena— más los días progresivos.',
       'Con sueldo informado, el valor por día se estima como sueldo ÷ 30.',
     ],
     assumptions: [

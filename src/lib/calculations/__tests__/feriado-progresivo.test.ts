@@ -86,6 +86,14 @@ describe('calculateFeriadoProgresivo', () => {
     expect(r.montoDiasProgresivos).toBe(60000);
   });
 
+  it('tramo completo con decimales: 8,1 anteriores + 4,9 actuales → 1 día', () => {
+    const r = calculateFeriadoProgresivo({
+      aniosEmpleadorActual: 4.9,
+      aniosEmpleadoresAnteriores: 8.1,
+    });
+    expect(r.diasProgresivos).toBe(1);
+  });
+
   it('zona austral: base de 20 días en vez de 15', () => {
     const r = calculateFeriadoProgresivo({
       aniosEmpleadorActual: 13,

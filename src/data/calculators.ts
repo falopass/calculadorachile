@@ -1572,7 +1572,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
       {
         question: '¿Existe un máximo de días progresivos?',
         answer:
-          'No. El artículo 68 del Código del Trabajo no fija tope: cada 3 años nuevos con el mismo empleador agrega 1 día hábil adicional sobre los 15 días anuales del artículo 67.',
+          'No. El artículo 68 del Código del Trabajo no fija tope: cada 3 años nuevos con el mismo empleador agrega 1 día hábil adicional sobre los 15 días anuales del artículo 67 (20 en Magallanes, Aysén y la provincia de Palena).',
       },
       {
         question: '¿Los días progresivos se pagan si termino el contrato?',
