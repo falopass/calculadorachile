@@ -1223,6 +1223,148 @@ export const ARTICULOS_2027: Article[] = [
       { label: 'BCN Ley Fácil — Permiso laboral por nacimiento, matrimonio, unión civil o duelo', url: 'https://www.bcn.cl/api-leyfacil/servicio/ObtenerGuiaPublicadaHTML?uri=permiso-laboral-por-nacimiento' },
     ],
   },
+  // Plan editorial #40 — permiso de circulación 2027 (ventana ene–mar)
+  {
+    slug: 'permiso-circulacion-2027-calcular-plazo',
+    embedCalculatorId: 'permiso-circulacion',
+    title: 'Permiso de circulación 2027: cuándo se paga, plazos y cuotas por tipo de vehículo',
+    description:
+      'Calendario del permiso de circulación 2027: autos hasta el 31 de marzo, taxis y buses en mayo, carga en septiembre. Segunda cuota de agosto, eléctricos al 50% y requisitos para renovar.',
+    date: '2026-11-26',
+    updatedAt: '2026-11-26',
+    category: 'vehiculos',
+    readingTime: 12,
+    seoTitle: 'Permiso de circulación 2027: fechas, plazos y cuotas',
+    seoDescription:
+      'Calendario 2027 del permiso de circulación: pago hasta el 31 de marzo para autos, cuotas, SOAP, revisión técnica y rebaja del 50% para eléctricos. Fuente: Ley de Rentas Municipales y SII.',
+    keywords: [
+      'permiso de circulación 2027',
+      'cuándo se paga el permiso de circulación',
+      'permiso circulación 2027 plazo',
+      'segunda cuota permiso circulación 2027',
+      'calendario permiso de circulación',
+      'renovar permiso de circulación',
+    ],
+    relatedCalculators: [
+      'calculadora-permiso-circulacion',
+      'calculadora-multas-transito',
+      'calculadora-costo-tag',
+    ],
+    relatedGuia: 'vehiculos-chile-permiso-multas',
+    faq: [
+      {
+        question: '¿Hasta cuándo se paga el permiso de circulación 2027?',
+        answer:
+          'Para autos, camionetas, motos y furgones, hasta el miércoles 31 de marzo de 2027 (la renovación abre el 1 de febrero). Taxis y buses pagan en mayo; camiones, remolques de carga y maquinaria, en septiembre.',
+      },
+      {
+        question: '¿Puedo pagar el permiso 2027 en dos cuotas?',
+        answer:
+          'Sí, si no tienes deudas municipales pendientes. La primera cuota (50%) se paga dentro del plazo ordinario —hasta el 31 de marzo para autos— y la segunda en agosto para esos vehículos (junio para taxis/buses, octubre para carga), reajustada por el IPC del período legal.',
+      },
+      {
+        question: '¿Qué cambia en 2027 para los autos eléctricos?',
+        answer:
+          'La rebaja del impuesto para eléctricos, híbridos enchufables y cero emisiones baja de 75% a 50% desde el 1 de febrero de 2027: en el permiso 2027 pagarán la mitad del impuesto, no un cuarto como en 2026. El SII aplica el descuento automáticamente.',
+      },
+      {
+        question: '¿Qué pasa si no pago el permiso a tiempo?',
+        answer:
+          'El vehículo queda con deuda municipal reajustable con intereses, y circular con el permiso vencido es una infracción de tránsito que puede terminar en multa o retiro de circulación. Para regularizar pide la liquidación atrasada a la municipalidad; no estimes el recargo por tu cuenta.',
+      },
+    ],
+    content: `<p class="article-lead">El permiso de circulación 2027 de autos, camionetas, motos y furgones se paga entre el 1 de febrero y el miércoles 31 de marzo de 2027. Puedes pagarlo de una vez o en dos cuotas —la segunda vence el 31 de agosto— y este año trae un cambio relevante: los eléctricos e híbridos enchufables pasan a pagar el 50% del impuesto, no el 25% como en 2026.</p>
+<p>Este calendario viene del artículo 15 de la Ley de Rentas Municipales (DL 3.063), no de un aviso municipal: los plazos son por ley y se repiten cada año con las mismas ventanas. Las fechas concretas de portales de pago en línea las confirma cada municipalidad —y la Tesorería General para el pago electrónico centralizado—, pero el vencimiento legal es el que aparece abajo. Fecha de corte: 26 de noviembre de 2026.</p>
+
+<h2>Calendario 2027 por tipo de vehículo</h2>
+<table>
+<thead><tr><th>Vehículo</th><th>Pago total o 1ª cuota</th><th>2ª cuota</th></tr></thead>
+<tbody>
+<tr><td>Autos, camionetas, motos, station wagons, furgones y remolques hasta 1.750 kg</td><td>1 feb – 31 mar 2027</td><td>Agosto (hasta el 31)</td></tr>
+<tr><td>Taxis, buses y transporte colectivo de pasajeros</td><td>Mayo (hasta el 31)</td><td>Junio (hasta el 30)</td></tr>
+<tr><td>Camiones, tractocamiones, remolques sobre 1.750 kg y maquinaria</td><td>Septiembre (hasta el 30)</td><td>Octubre (hasta el 31)</td></tr>
+</tbody>
+</table>
+<p>Tres precisiones del mismo artículo 15 que suelen generar dudas:</p>
+<ul>
+<li><strong>La segunda cuota no es optativa ni nueva:</strong> solo existe si pagaste la primera en el plazo ordinario eligiendo el fraccionamiento. Quien pagó el total no tiene cuota pendiente en agosto.</li>
+<li><strong>Ambas cuotas se pagan en la misma municipalidad.</strong> No puedes pagar la segunda en otra comuna porque el portal te resulte más cómodo.</li>
+<li><strong>La segunda cuota se reajusta por IPC.</strong> Para autos, el artículo ordena actualizarla según la variación del IPC entre febrero y junio, por lo que el comprobante de agosto será algo mayor que la mitad de marzo. No apliques el IPC acumulado del año ni un porcentaje inventado: la cifra válida es la de la liquidación municipal.</li>
+</ul>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>El vencimiento es legal, no comercial</strong><p>El 31 de marzo de 2027 cae miércoles. Algunos municipios habilitan pago en línea desde enero, pero la fecha que cuenta es la de la ley: pagar "tarde pero dentro del portal" igual puede dejar deuda si venció el plazo del artículo 15.</p></div></aside>
+
+<h2>Vehículos comprados entre septiembre de 2026 y marzo de 2027</h2>
+<p>Los autos adquiridos entre el 1 de septiembre de 2026 y el 31 de marzo de 2027 pagan su primer permiso en <strong>una sola cuota</strong>, dentro del período ordinario. No hay fraccionamiento para ese primer pago: si compraste un auto en diciembre o enero, presupuesta el monto completo desde ya. Ojo con un matiz práctico: "pagar dentro del período ordinario" no significa que puedas circular sin permiso hasta marzo — el vehículo debe inscribirse y obtener su permiso al adquirirlo para poder circular; la cuota única define <em>cómo</em> se paga ese primer impuesto, no una licencia para usar el auto sin él. Son dos trámites distintos que conviene no confundir: el permiso del año de compra (necesario ya) y la renovación anual de marzo siguiente, que pagarás con el resto de los vehículos. El cálculo proporcional por meses de uso lo determina la municipalidad según la fecha de inscripción, no el mes de la compraventa en el contrato.</p>
+<p>Si compraste un usado, verifica antes de pagar que el permiso del año anterior esté al día: la deuda sigue al vehículo, no al antiguo dueño. Una promesa de "yo lo pago después" en el contrato no libera la obligación ante la municipalidad.</p>
+
+<h2>Eléctricos e híbridos enchufables: la rebaja baja a 50% en 2027</h2>
+<p>La Ley 21.505 de electromovilidad estableció una rebaja escalonada del impuesto para vehículos eléctricos, híbridos con recarga exterior y otros calificados como cero emisiones por el Ministerio de Energía, con año de fabricación 2021 en adelante. El tramo que corre desde el <strong>1 de febrero de 2027 y hasta el 31 de enero de 2029</strong> deja la rebaja en <strong>50%</strong>: estos vehículos pagan la mitad del impuesto en el permiso 2027.</p>
+<table>
+<thead><tr><th>Período de pago</th><th>Rebaja</th><th>Pagan del impuesto</th></tr></thead>
+<tbody>
+<tr><td>1 feb 2023 – 31 ene 2025</td><td>100%</td><td>0%</td></tr>
+<tr><td>1 feb 2025 – 31 ene 2027</td><td>75%</td><td>25%</td></tr>
+<tr><td><strong>1 feb 2027 – 31 ene 2029</strong></td><td><strong>50%</strong></td><td><strong>50%</strong></td></tr>
+<tr><td>1 feb 2029 – 31 ene 2031</td><td>25%</td><td>75%</td></tr>
+<tr><td>Desde el 1 feb 2031</td><td>0%</td><td>100%</td></tr>
+</tbody>
+</table>
+<p>El descuento lo calcula el propio SII en la tasación, no hay que solicitarlo. Un híbrido autorrecargable que no se enchufa no accede al beneficio. Si comparas un eléctrico usado con uno a bencina, calcula el permiso con la rebaja del año en que vas a pagar —depende de la fecha de pago, no del año del auto—.</p>
+
+<h2>Qué necesitas para renovar el permiso 2027</h2>
+<p>Para un vehículo ya inscrito, la municipalidad típicamente exige:</p>
+<ul>
+<li>Permiso de circulación del año anterior.</li>
+<li>Revisión técnica vigente (la que corresponda según el dígito de tu patente; el calendario 2027 se publica por resolución) <strong>o</strong> el certificado de homologación, cuando el vehículo lo requiera — ChileAtiende los presenta como alternativas según el caso, no como dos exigencias simultáneas.</li>
+<li>SOAP vigente.</li>
+<li>Sin multas del Juzgado de Policía Local pendientes ni deudas municipales asociadas.</li>
+</ul>
+<p>Para un vehículo nuevo se agrega la factura de compra y el trámite de primera inscripción, que puede hacerse en cualquier municipalidad —no necesariamente la de tu domicilio—. Si quieres cambiar de comuna en la renovación, el cambio se gestiona como parte del trámite de inscripción; consulta antes si tu municipio de destino lo permite en línea.</p>
+
+<h2>Cómo se calcula el valor del permiso</h2>
+<p>La municipalidad recauda, pero el impuesto sale de la <strong>tasación fiscal</strong> que el SII publica cada año por marca, modelo, versión y año del vehículo, más una escala progresiva de la Ley de Rentas Municipales con un mínimo legal. Los vehículos de carga y transporte no siguen esa escala: para ellos el SII fija montos en UTM por categoría —el permiso de un taxi es de 1 UTM al año, sin considerar ninguna "capacidad" —y si el taxi es eléctrico elegible, la rebaja de electromovilidad también aplica sobre esa tarifa base, por lo que en 2027 pagaría la mitad—, así que el cálculo de un camión o un taxi no se estima con la lógica de un auto particular. Por eso dos autos del mismo año pueden pagar distinto en la misma comuna —y por eso una diferencia entre comunas suele indicar tasación o deuda distinta, no un "precio municipal".</p>
+<p>La <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> de CalculaChile entrega una aproximación con los datos que ingreses: sirve para presupuestar, pero estima con las reglas de su propia metodología —entre ellas la rebaja del tramo vigente al configurarla— y no elige el año de pago. Para un eléctrico o híbrido enchufable elegible (año de fabricación 2021 en adelante), ajusta mentalmente al 50% del impuesto base en 2027; un eléctrico anterior a 2021 no tiene rebaja. La cifra que manda es la liquidación municipal, que incluye reajustes, deudas anteriores y la categoría exacta que el registro tenga para tu patente. Si el modelo fue identificado incorrectamente en la inscripción, pide revisión con padrón y factura antes de pagar.</p>
+
+<h2>Si pagaste en dos cuotas: qué esperar en agosto de 2027</h2>
+<p>Para los vehículos del período de marzo, la segunda cuota vence el <strong>martes 31 de agosto de 2027</strong>. Es el mismo 50% reajustado por la variación del IPC entre febrero y junio de 2027, y se paga en la municipalidad donde pagaste la primera. El detalle del mecanismo está en nuestro artículo de la <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota del permiso 2026</a>: el procedimiento es el mismo, solo cambian las fechas y el reajuste de cada año.</p>
+
+<h2>Qué pasa si dejas vencer el plazo</h2>
+<p>La deuda queda asociada al vehículo y la municipalidad aplica reajustes e intereses legales; reaparecerá al intentar renovar el año siguiente o al transferir. Circular con el permiso vencido es además una infracción que puede terminar en multa y retiro del vehículo de circulación por resolución del Juzgado de Policía Local. Son dos obligaciones distintas: la multa de tránsito no estima el saldo municipal ni viceversa.</p>
+<p>Si retiraste el vehículo de circulación definitivamente —siniestro, desarme—, el artículo 15 permite avisarlo por escrito a la unidad municipal que otorgó el permiso antes del vencimiento de la próxima renovación. Solo ese aviso formal exime de los períodos siguientes; dejar el auto guardado sin trámite no elimina la deuda.</p>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li>Pagar la segunda cuota en una comuna distinta a la primera.</li>
+<li>Esperar que la segunda cuota sea idéntica a la de marzo (lleva reajuste IPC).</li>
+<li>Creer que un auto comprado en diciembre puede pagar su primer permiso en dos cuotas: paga una sola.</li>
+<li>Asumir que un eléctrico sigue exento al 100%: desde febrero de 2027 paga el 50% del impuesto.</li>
+<li>Comprar un usado sin revisar la deuda del permiso: el saldo queda pegado a la patente.</li>
+<li>Usar enlaces de SMS o correos para pagar: entra escribiendo tú mismo el dominio oficial de la municipalidad.</li>
+</ul>
+
+<h2>Checklist antes del 31 de marzo de 2027</h2>
+<ol class="steps">
+<li>Revisa la revisión técnica: qué mes le toca a tu dígito de patente y que esté vigente.</li>
+<li>Verifica el SOAP vigente para la fecha de pago.</li>
+<li>Consulta deudas municipales o multas JPL pendientes asociadas a la patente.</li>
+<li>Liquida el valor estimado con la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a> para presupuestar.</li>
+<li>Decide si pagas total o en dos cuotas antes de emitir el comprobante de marzo.</li>
+<li>Paga por el canal oficial que indique tu municipalidad (su portal de tránsito o el sistema de pago que ella haya convenido), escribiendo el dominio tú mismo.</li>
+<li>Descarga y guarda el permiso 2027 y el comprobante de pago.</li>
+<li>Si elegiste cuotas, agenda el 31 de agosto de 2027 en la misma municipalidad.</li>
+</ol>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de noviembre de 2026 con el <a href="https://www.bcn.cl/leychile/navegar?idNorma=18967" target="_blank" rel="noopener">artículo 15 del Decreto Ley 3.063 de Rentas Municipales</a>, la guía de <a href="https://www.bcn.cl/leyfacil/recurso/permiso-de-circulacion" target="_blank" rel="noopener">Ley Fácil de la BCN sobre permiso de circulación</a>, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1184572" target="_blank" rel="noopener">Ley 21.505 de electromovilidad</a> y el calendario de rebajas para vehículos cero emisiones publicado por el <a href="https://www.sii.cl" target="_blank" rel="noopener">Servicio de Impuestos Internos</a>. Los días de semana de cada vencimiento corresponden al calendario 2027.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El monto exacto, la liquidación atrasada y los requisitos documentales específicos los emite cada municipalidad y el SII; ante una diferencia, prevalece la liquidación oficial.</p></div></aside>
+<p>Para estimar tu monto usa la <a href="/calculadoras/calculadora-permiso-circulacion">calculadora de permiso de circulación</a>, revisa el detalle de la <a href="/blog/permiso-circulacion-segunda-cuota-agosto-2026">segunda cuota de agosto</a> y la <a href="/guias/vehiculos-chile-permiso-multas">guía de vehículos y multas</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — DL 3.063 Rentas Municipales, art. 15', url: 'https://www.bcn.cl/leychile/navegar?idNorma=18967' },
+      { label: 'BCN Ley Fácil — Permiso de circulación', url: 'https://www.bcn.cl/leyfacil/recurso/permiso-de-circulacion' },
+      { label: 'Ley Chile — Ley 21.505 (electromovilidad)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1184572' },
+      { label: 'Servicio de Impuestos Internos', url: 'https://www.sii.cl' },
+    ],
+  },
   {
     slug: 'feriado-judicial-febrero-2027',
     embedCalculatorId: 'dias-habiles',
