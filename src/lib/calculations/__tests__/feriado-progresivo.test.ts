@@ -86,10 +86,11 @@ describe('calculateFeriadoProgresivo', () => {
     expect(r.montoDiasProgresivos).toBe(60000);
   });
 
-  it('tramo completo con decimales: 8,1 anteriores + 4,9 actuales → 1 día', () => {
+  it('tramo completo con decimales: 8,2 anteriores + 4,8 actuales → 1 día', () => {
+    // Sin el redondeo a 1e-9 la resta da 2,9999… y floor entrega 0.
     const r = calculateFeriadoProgresivo({
-      aniosEmpleadorActual: 4.9,
-      aniosEmpleadoresAnteriores: 8.1,
+      aniosEmpleadorActual: 4.8,
+      aniosEmpleadoresAnteriores: 8.2,
     });
     expect(r.diasProgresivos).toBe(1);
   });
