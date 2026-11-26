@@ -883,6 +883,118 @@ const articleCatalog: ArticleDraft[] = [
     ],
   },
   {
+    slug: 'feriado-bancario-31-diciembre-2026',
+    embedCalculatorId: 'dias-habiles',
+    title: 'Feriado bancario del 31 de diciembre de 2026: los bancos no atienden y el último día hábil es el miércoles 30',
+    description:
+      'La Ley 21.791 restableció el feriado bancario: el jueves 31 de diciembre de 2026 las sucursales no atenderán al público. Último día hábil bancario: miércoles 30 de diciembre. Qué pasa con plazos, transferencias y trámites.',
+    date: '2026-11-26',
+    category: 'finanzas',
+    readingTime: 8,
+    relatedGuia: 'feriados-chile-2027',
+    seoTitle: 'Feriado bancario 31 de diciembre 2026: último día hábil es el 30',
+    seoDescription:
+      'El jueves 31 de diciembre de 2026 los bancos no atienden presencialmente (Ley 21.791). Último día hábil: miércoles 30-dic. Qué pasa con transferencias, cheques y trámites.',
+    keywords: [
+      'feriado bancario 31 de diciembre 2026',
+      'bancos cerrados 31 diciembre',
+      'último día hábil bancario 2026',
+      'ley 21.791 feriado bancario',
+      'bancos 31 de diciembre chile',
+      'día hábil bancario diciembre',
+    ],
+    relatedCalculators: [
+      'calculadora-dias-habiles',
+      'calculadora-uf-clp',
+      'calculadora-sueldo-liquido',
+    ],
+    faq: [
+      {
+        question: '¿El 31 de diciembre de 2026 es feriado para todos?',
+        answer:
+          'No. Es un cierre solo para las sucursales bancarias: por la Ley 21.791, los bancos no atienden presencialmente al público el 31 de diciembre. Para el resto de los trabajadores y del comercio es un día hábil normal; no es un feriado legal como el 25 de diciembre o el 1 de enero.',
+      },
+      {
+        question: '¿Cuál es el último día hábil bancario de 2026?',
+        answer:
+          'El miércoles 30 de diciembre de 2026. El jueves 31 las sucursales están cerradas por ley y los sábados tampoco hay atención presencial, salvo autorización de la CMF. Todo trámite de ventanilla debe quedar listo a más tardar el 30.',
+      },
+      {
+        question: '¿Funcionan la app, la banca en línea y los cajeros el 31?',
+        answer:
+          'La ley ordena solo el cierre de la atención presencial. Las transferencias electrónicas, la banca por internet, las aplicaciones y los cajeros automáticos no dependen de la ventanilla y operan con normalidad; aun así, conviene anticipar operaciones que puedan requerir un ejecutivo o una aprobación presencial.',
+      },
+      {
+        question: '¿Qué pasa si un plazo o un documento vence el 31 de diciembre?',
+        answer:
+          'La ley establece que ese día no se considera feriado para los efectos legales, excepto para el pago y protesto de letras de cambio. Para contratos, declaraciones y otros vencimientos, el 31 de diciembre sigue siendo un día hábil aunque los bancos estén cerrados; conviene verificar cada plazo con su regla específica.',
+      },
+      {
+        question: '¿Los bancos atienden los sábados?',
+        answer:
+          'La misma Ley 21.791 dispone que los bancos no atienden presencialmente al público los sábados de cada semana, salvo autorización de la Comisión para el Mercado Financiero (CMF). Si un sábado específico habilita atención, la CMF lo informa.',
+      },
+    ],
+    content: `<p class="article-lead">El <strong>jueves 31 de diciembre de 2026</strong> ningún banco abrirá sus puertas en Chile. La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1219578" target="_blank" rel="noopener">Ley 21.791</a>, publicada en el Diario Oficial el 17 de diciembre de 2025, restableció el llamado «feriado bancario»: ese día las sucursales no atienden presencialmente al público. El <strong>último día hábil bancario del año es el miércoles 30 de diciembre</strong>, la fecha límite real para cualquier trámite de ventanilla.</p>
+<p>Este artículo revisa el texto de la Ley 21.791, la Ley General de Bancos que modifica y la información publicada por la Comisión para el Mercado Financiero (CMF). Fecha de corte: 26 de noviembre de 2026. No cubre los horarios comerciales ni el feriado irrenunciable del 1 de enero: aquí solo va la regla bancaria.</p>
+
+<h2>Qué ordena la Ley 21.791</h2>
+<p>La ley agregó un inciso al artículo 38 de la Ley General de Bancos (el texto refundido fijado por el <a href="https://www.bcn.cl/leychile/navegar?idNorma=83135" target="_blank" rel="noopener">DFL N.º 3, de 1997</a>): «los bancos no atenderán presencialmente al público el 31 de diciembre de cada año, ni los días sábados de cada semana, salvo autorización de la Comisión». La norma fue promulgada el 10 de diciembre de 2025 y publicada una semana después.</p>
+<p>Dos detalles del texto importan para el usuario. Primero, la palabra «presencialmente»: el cierre es de la ventanilla, no del sistema financiero. Segundo, la ley deja una puerta abierta: la CMF puede autorizar atención excepcional, algo que en la práctica se reserva para situaciones especiales y no debe darse por sentado.</p>
+<p>La misma norma precisa que esos días «en ningún caso deberán considerarse festivos o feriados para los efectos legales, excepto en lo que se refiere al pago y protesto de letras de cambio». Es decir, el 31 de diciembre cierra el banco, pero no se transforma en un feriado para el resto del país.</p>
+
+<h2>Una regla que vuelve: del feriado bancario histórico a la Ley Fintec</h2>
+<p>El cierre del 31 de diciembre no es nuevo. Durante décadas la Ley General de Bancos ordenó que las sucursales no atendieran ese día, pensando en los procesos de cierre contable y de sistemas que las propias instituciones hacen al terminar el año. La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1187323" target="_blank" rel="noopener">Ley 21.521</a> —la «Ley Fintec» de 2023— eliminó esa disposición, por lo que el cierre del 31 de diciembre dejó de ser obligatorio mientras estuvo derogado.</p>
+<p>En diciembre de 2025 el Congreso aprobó la Ley 21.791, que repuso el cierre. La propia CMF lo comunicó el 24 de diciembre de 2025: «de acuerdo con lo dispuesto en la Ley N.º 21.791, el miércoles 31 de diciembre las sucursales bancarias no atenderán al público», y recomendó realizar los trámites presenciales con anticipación. Esa misma regla rige ahora para el jueves 31 de diciembre de 2026.</p>
+
+<h2>El calendario real de la última semana de 2026</h2>
+<p>La última semana de diciembre de 2026 encadena dos cierres distintos que conviene no confundir:</p>
+<ul>
+<li><strong>Viernes 25 de diciembre:</strong> feriado legal, además irrenunciable para el comercio (Ley 19.973). Bancos y comercio cerrados.</li>
+<li><strong>Sábado 26 y domingo 27:</strong> fin de semana normal; sin atención bancaria presencial (los sábados están cerrados por la misma Ley 21.791).</li>
+<li><strong>Lunes 28, martes 29 y miércoles 30:</strong> días hábiles bancarios con atención normal de sucursales.</li>
+<li><strong>Jueves 31 de diciembre:</strong> feriado bancario. Sin atención presencial; para el resto de actividades es un día hábil.</li>
+<li><strong>Viernes 1 de enero de 2027:</strong> feriado legal e irrenunciable para el comercio.</li>
+</ul>
+<p>En la práctica, la ventana para resolver asuntos presenciales antes de que cambie el año son solo esos tres días: lunes 28, martes 29 y miércoles 30. Una precisión: la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> descuenta los feriados legales generales —y los sábados solo en el cómputo administrativo/laboral; en el judicial el sábado no feriado sí cuenta—, por lo que el 31 de diciembre lo cuenta como hábil en ambos modos —correcto para plazos administrativos y judiciales, que el cierre bancario no suspende—. Para la ventana de atención presencial bancaria, la regla es la de esta lista: ventanilla hasta el miércoles 30.</p>
+
+<h2>Qué trámites conviene cerrar antes del 30 de diciembre</h2>
+<p>Todo lo que exige una sucursal abierta o un ejecutivo tiene fecha de vencimiento efectiva el miércoles 30. Los casos más frecuentes:</p>
+<ul>
+<li><strong>Obtener o renovar tarjetas, chequeras o documentos físicos</strong> que se retiran en sucursal.</li>
+<li><strong>Firmar operaciones presenciales:</strong> apertura de productos, mandatos, instrucciones notariales o trámites hipotecarios que dependan de una firma ante el banco.</li>
+<li><strong>Reclamos o requerimientos formales</strong> que la institución exige canalizar en ventanilla.</li>
+<li><strong>Documentos de pago con vencimiento cercano:</strong> la ley solo trata el feriado bancario como feriado para el pago y protesto de letras de cambio; para cheques y otros trámites con plazo no hay una prórroga automática comparable, así que conviene depositarlos o presentarlos a más tardar el 30.</li>
+<li><strong>Operaciones de empresas con corte anual:</strong> cierres de caja, remesas, depósitos de fin de mes o pagos de nómina programados por la tesorería.</li>
+</ul>
+<p>Si el trámite queda para enero, el primer día hábil bancario de 2027 es el lunes 4 de enero, porque el viernes 1 es feriado legal y el sábado 2 tampoco hay atención presencial.</p>
+
+<h2>Lo que sigue funcionando el 31 de diciembre</h2>
+<p>La ley solo cierra la puerta física. La banca digital no se detiene:</p>
+<ul>
+<li>Transferencias electrónicas de fondos entre bancos.</li>
+<li>Pago de cuentas, tarjetas y servicios por internet o aplicación.</li>
+<li>Cajeros automáticos y puntos de autoservicio.</li>
+<li>Compras con tarjetas de débito y crédito.</li>
+</ul>
+<p>La advertencia práctica es distinta: aunque el canal funcione, cualquier operación que necesite la aprobación de una persona —un aumento de límite, un desbloqueo presencial, una carta de referencia— esperará hasta el siguiente día hábil. La CMF recomendó exactamente eso cuando restableció la regla: hacer los trámites presenciales «con la debida anticipación».</p>
+
+<h2>No confundir con el feriado del 1 de enero</h2>
+<p>Son dos reglas distintas que se tocan en el calendario. El <strong>31 de diciembre</strong> es feriado bancario: afecta solo a las sucursales y solo por la Ley General de Bancos. El <strong>1 de enero</strong> es feriado legal general y, además, irrenunciable para los trabajadores del comercio según la <a href="https://www.bcn.cl/leychile/navegar?idNorma=230132" target="_blank" rel="noopener">Ley 19.973</a>: ese día no trabaja el comercio, con las excepciones de siempre (restaurantes, combustible, farmacias de turno, casinos, aeropuertos). El detalle de ese feriado está en el artículo del <a href="/blog/feriado-irrenunciable-25-diciembre-2026">feriado irrenunciable de diciembre</a> y en la <a href="/guias/feriados-chile-2027">guía de feriados de Chile 2027</a>.</p>
+<p>En resumen: el jueves 31 de diciembre de 2026 el país trabaja, pero el banco no. Cualquier firma, retiro o trámite de ventanilla debe resolverse el miércoles 30 a más tardar; el resto se mueve al lunes 4 de enero de 2027.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de noviembre de 2026 con el texto de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1219578" target="_blank" rel="noopener">Ley 21.791</a> publicado en el Diario Oficial, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=83135" target="_blank" rel="noopener">Ley General de Bancos (DFL N.º 3 de 1997, art. 38)</a>, la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1187323" target="_blank" rel="noopener">Ley 21.521 (Ley Fintec)</a> en Ley Chile y el comunicado de la <a href="https://www.cmfchile.cl/portal/prensa/615/w3-article-102258.html" target="_blank" rel="noopener">CMF sobre el feriado bancario</a> del 24 de diciembre de 2025.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. Los horarios específicos de cada institución los confirma la propia CMF o el banco; ante una obligación con plazo legal, prevalece la norma que rija ese plazo.</p></div></aside>
+<p>Para planificar plazos sobre el calendario, revisa la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> y la <a href="/guias/feriados-chile-2027">guía de feriados 2027</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Ley 21.791 (feriado bancario)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1219578' },
+      { label: 'Ley Chile — Ley General de Bancos, DFL N.º 3 de 1997 (art. 38)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=83135' },
+      { label: 'Ley Chile — Ley 21.521 (Ley Fintec)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1187323' },
+      { label: 'CMF — Feriado bancario (comunicado 24-dic-2025)', url: 'https://www.cmfchile.cl/portal/prensa/615/w3-article-102258.html' },
+    ],
+  },
+  {
     slug: 'embargos-cae-tgr-2026-cuentas-bienes-raices',
     embedCalculatorId: 'credito-cae',
     title: 'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
