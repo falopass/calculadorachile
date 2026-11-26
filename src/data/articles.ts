@@ -7446,7 +7446,7 @@ ${tablaFcsHtml()}
       {
         question: '¿Se puede suspender o variar el PPM?',
         answer:
-          'Sí, pero son trámites distintos: la variación del PPM reduce el abono si fundamentas que tu renta anual será menor; la suspensión total tiene condiciones propias que el SII publica por año. Mientras no haya resolución, el PPM sigue venciendo.',
+          'Sí, pero son trámites distintos: la variación del PPM reduce el abono si fundamentas que tu renta anual será menor; la suspensión total tiene requisitos propios que el SII fija por resolución cada año y, cumplidos, rige desde el mes siguiente a presentada la solicitud.',
       },
       {
         question: '¿Qué pasa si no pago el PPM?',
@@ -7514,7 +7514,7 @@ ${tablaFcsHtml()}
 <p>Ojo con otro punto: el impuesto anual se calcula sobre la renta después de gastos. El profesional que no declara gastos efectivos puede deducir el <strong>${PPM_PRESUNCION.porcentaje}% de presunción de gastos</strong> con tope de ${PPM_PRESUNCION.tope_uta} UTA (art. 50 de la Ley de Impuesto a la Renta), lo que suele dejar el impuesto final por debajo de lo retenido durante el año —la razón por la que muchos independientes reciben devolución cada abril.</p>
 
 <h2>Cómo variar o suspender el PPM</h2>
-<p>Si tus ingresos del año van a ser menores a lo proyectado —por ejemplo, dejaste de emitir boletas o la empresa bajó sus ventas— puedes solicitar al SII una <strong>variación del PPM</strong> para bajar el abono. La solicitud se fundamenta con antecedentes (declaraciones, presupuestos, contratos) y el SII acepta o rechaza. La <strong>suspensión total</strong> de los PPM es un trámite distinto, con condiciones propias que el SII publica por año; no basta con pedir la variación. Mientras no haya resolución, el PPM sigue venciendo con la tasa vigente.</p>
+<p>Si tus ingresos del año van a ser menores a lo proyectado —por ejemplo, dejaste de emitir boletas o la empresa bajó sus ventas— puedes solicitar al SII una <strong>variación del PPM</strong> para bajar el abono. La solicitud se fundamenta con antecedentes (declaraciones, presupuestos, contratos) y el SII acepta o rechaza. La <strong>suspensión total</strong> de los PPM es un trámite distinto, con requisitos propios que el SII fija por resolución cada año; no basta con pedir la variación. Cumplidos los requisitos, la suspensión rige desde el mes siguiente a presentada la solicitud al SII.</p>
 
 <h2>En la Operación Renta: de abono a saldo final</h2>
 <p>En abril se declara el impuesto definitivo del año anterior. El F22 liquida el impuesto real y le resta todos los PPM y retenciones del año: si abonaste más que el impuesto, el SII <strong>devuelve</strong> la diferencia en mayo —ojo: para independientes obligados a cotizar, parte del saldo cubre las cotizaciones previsionales del año, por lo que la devolución efectiva puede ser menor—; si pagaste menos, pagas el saldo. Por eso el PPM no es un "impuesto extra": es el mismo impuesto pagado por adelantado.</p>
