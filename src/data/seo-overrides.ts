@@ -483,6 +483,12 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
       'Busca el último dígito de tu patente en la tabla de 2026 para saber en qué mes te toca la revisión técnica. Revisa qué hacer si se te pasó.',
   },
 
+  'revision-tecnica-chile-2027-calendario-patente': {
+    seoTitle: 'Revisión técnica 2027: calendario por dígito de patente',
+    seoDescription:
+      'Busca el último dígito de tu patente y mira el mes que te toca la revisión técnica en 2027. Calendario completo, mes de adelanto y consulta gratis.',
+  },
+
   'cotizacion-empleador-3-5-agosto-2026-costo-pyme': {
     seoTitle: 'Cotización empleador 3,5% agosto 2026: costo empresa Chile', // 58
     seoDescription:
