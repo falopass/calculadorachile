@@ -23,7 +23,7 @@ describe('getCurrentValues', () => {
   it('usa el snapshot sin consultar proveedores durante el prerender del build', async () => {
     vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_BUILD);
 
-    const current = await getCurrentValues();
+    const current = await getCurrentValues({ live: true });
 
     expect(fetchAllCurrentValues).not.toHaveBeenCalled();
     expect(fetchMindicadorValores).not.toHaveBeenCalled();
@@ -35,6 +35,16 @@ describe('getCurrentValues', () => {
       source: 'fallback',
     });
     expect(current.indicatorSources).toEqual({ uf: 'fallback', utm: 'fallback', dolar: 'fallback' });
+  });
+
+  it('sin `live`, un render estático ISR usa el snapshot sin llamar proveedores', async () => {
+    vi.stubEnv('NEXT_PHASE', PHASE_PRODUCTION_SERVER);
+
+    const current = await getCurrentValues();
+
+    expect(fetchAllCurrentValues).not.toHaveBeenCalled();
+    expect(fetchMindicadorValores).not.toHaveBeenCalled();
+    expect(current.values.source).toBe('fallback');
   });
 
   it('conserva los proveedores y su prioridad al ejecutar el servidor', async () => {
@@ -55,7 +65,7 @@ describe('getCurrentValues', () => {
       fechas: { uf: NOW.toISOString(), utm: NOW.toISOString(), dolar: null },
     });
 
-    const current = await getCurrentValues();
+    const current = await getCurrentValues({ live: true });
 
     expect(current.values).toMatchObject({ uf: 40999.93, utm: 71721, dolar: FALLBACK_VALUES.dolar });
     expect(current.indicatorSources).toEqual({ uf: 'bcentral', utm: 'mindicador', dolar: 'fallback' });
