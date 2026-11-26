@@ -1477,6 +1477,111 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
     ],
   },
   {
+    id: 'feriado-progresivo',
+    name: 'Calculadora Feriado Progresivo',
+    description:
+      'Calcula cuántos días de feriado progresivo te corresponden: 1 día hábil extra por cada 3 años nuevos con tu empleador, tras completar 10 años trabajados.',
+    slug: 'calculadora-feriado-progresivo',
+    category: 'beneficios',
+    featured: false,
+    phase: 2,
+    lastReviewed: '2026-11-25',
+    sources: [
+      {
+        name: 'DT — Feriado progresivo',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60194.html',
+        note: '10 años de trabajo (uno o más empleadores) y 1 día por cada 3 años nuevos',
+      },
+      {
+        name: 'BCN — Código del Trabajo, art. 68',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+        note: 'Texto refundido del feriado progresivo',
+      },
+    ],
+    keywords: [
+      'feriado progresivo',
+      'días progresivos vacaciones',
+      'calculadora feriado progresivo',
+      'cuántos días de feriado me corresponden',
+      'artículo 68 Código del Trabajo',
+      'días adicionales por antigüedad',
+    ],
+    inputs: [
+      {
+        id: 'aniosEmpleadorActual',
+        label: 'Años trabajados con tu empleador actual',
+        type: 'number',
+        unit: 'count',
+        placeholder: '13',
+        required: true,
+        allowDotDecimal: true,
+        min: 0,
+        max: 60,
+        tooltip:
+          'Los períodos de 3 años que generan días progresivos deben trabajarse para el empleador actual.',
+      },
+      {
+        id: 'aniosEmpleadoresAnteriores',
+        label: 'Años con empleadores anteriores',
+        type: 'number',
+        unit: 'count',
+        placeholder: '0',
+        required: false,
+        defaultValue: 0,
+        allowDotDecimal: true,
+        min: 0,
+        max: 60,
+        tooltip:
+          'Acreditables con cotizaciones previsionales. Solo cuentan hasta 10 años para completar la base y deben acreditarse antes de tomar el feriado básico del período.',
+      },
+      {
+        id: 'regionAustral',
+        label: 'Trabajo en Magallanes, Aysén o provincia de Palena',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'En esas regiones el feriado anual básico es de 20 días hábiles (art. 67) en vez de 15.',
+      },
+      {
+        id: 'sueldoBruto',
+        label: 'Sueldo bruto mensual (opcional)',
+        type: 'number',
+        unit: 'CLP',
+        placeholder: '$900.000',
+        required: false,
+        min: 0,
+        tooltip:
+          'Para estimar el valor por día de feriado (sueldo ÷ 30) si los días se indemnizan.',
+      },
+    ],
+    seoTitle: 'Calculadora Feriado Progresivo 2026: días por antigüedad',
+    seoDescription:
+      'Calcula tus días de feriado progresivo en Chile: tras 10 años trabajados sumas 1 día hábil por cada 3 años nuevos con tu empleador (art. 68).',
+    faq: [
+      {
+        question: '¿Cuántos días de feriado progresivo me corresponden?',
+        answer:
+          'Tras completar 10 años trabajados —con uno o más empleadores, continuos o no— sumas 1 día hábil adicional por cada 3 años nuevos trabajados para tu empleador actual. Por ejemplo, con 10 años anteriores y 6 años en tu empresa: 2 días progresivos, 17 días hábiles de feriado anual en total.',
+      },
+      {
+        question: '¿Los años con otros empleadores cuentan?',
+        answer:
+          'Sí, pero solo para completar los 10 años de base y hasta ese tope; se acreditan con cotizaciones previsionales. Los días progresivos se generan solo con períodos de 3 años nuevos en tu empleador actual, según la interpretación de la Dirección del Trabajo.',
+      },
+      {
+        question: '¿Existe un máximo de días progresivos?',
+        answer:
+          'No. El artículo 68 del Código del Trabajo no fija tope: cada 3 años nuevos con el mismo empleador agrega 1 día hábil adicional sobre los 15 días anuales del artículo 67 (20 en Magallanes, Aysén y la provincia de Palena).',
+      },
+      {
+        question: '¿Los días progresivos se pagan si termino el contrato?',
+        answer:
+          'Sí, el feriado progresivo también se indemniza al término (art. 73). Como referencia, el valor por día es la remuneración ÷ 30; con remuneración variable se usa el promedio de los últimos 3 meses. Esta calculadora usa el sueldo mensual declarado.',
+      },
+    ],
+  },
+  {
     id: 'boleta-honorarios',
     name: HON.modoCambioDeAnio
       ? `Boleta de Honorarios ${HON.anio} y ${HON.siguiente}`

@@ -324,6 +324,23 @@ export async function loadCalculationFn(
       };
     }
 
+    case 'feriado-progresivo': {
+      const { calculateFeriadoProgresivo, feriadoProgresivoToResults } =
+        await import('./feriado-progresivo');
+      return (inputs) => {
+        const result = calculateFeriadoProgresivo({
+          aniosEmpleadorActual: coerceNumber(inputs.aniosEmpleadorActual),
+          aniosEmpleadoresAnteriores: coerceNumber(
+            inputs.aniosEmpleadoresAnteriores,
+            0,
+          ),
+          sueldoBruto: coerceNumber(inputs.sueldoBruto) || undefined,
+          regionAustral: coerceBool(inputs.regionAustral),
+        });
+        return feriadoProgresivoToResults(result);
+      };
+    }
+
     case 'boleta-honorarios': {
       const { calculateBoletaHonorarios, boletaHonorariosToResults } =
         await import('./boleta-honorarios');
