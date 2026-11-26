@@ -29,6 +29,7 @@ import { guiaAfpComisiones } from './guia-afp-comisiones';
 import { guiaFeriados2027 } from './guia-feriados-2027';
 import { guiaLicenciaMedica } from './guia-licencia-medica';
 import { guiaOperacionRenta2027 } from './guia-operacion-renta-2027';
+import { guiaCreditoAutomotriz } from './guia-credito-automotriz';
 import { buildCvlistoContentUrl } from '@/lib/cvlisto';
 
 const HON = contextoHonorarios();
@@ -2673,6 +2674,8 @@ export const guias: Guia[] = [
   guiaOperacionRenta2027,
   // Guía pillar AFP comisiones (demanda GSC nov-2026)
   guiaAfpComisiones,
+  // Guía crédito automotriz (demanda GSC nov-2026: "simulador credito automotriz" sin top 10)
+  guiaCreditoAutomotriz,
 ];
 
 // ============================================

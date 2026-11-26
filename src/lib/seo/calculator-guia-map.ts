@@ -70,7 +70,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-permiso-circulacion': 'vehiculos-chile-permiso-multas',
   'calculadora-multas-transito': 'vehiculos-chile-permiso-multas',
   'calculadora-costo-tag': 'vehiculos-chile-permiso-multas',
-  'calculadora-credito-automotriz': 'vehiculos-chile-permiso-multas',
+  'calculadora-credito-automotriz': 'credito-automotriz-chile',
 
   // Empresas
   'calculadora-patente-comercial': 'empresas-pymes-chile',
