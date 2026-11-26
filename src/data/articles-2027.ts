@@ -996,7 +996,7 @@ export const ARTICULOS_2027: Article[] = [
       },
     ],
     content: `<p class="article-lead">El Código del Trabajo chileno obliga al empleador a pagar varios permisos que mucha gente no pide porque cree que "salen de las vacaciones". No salen: por matrimonio o unión civil son 5 días hábiles continuos; por el nacimiento de un hijo, 5 días para el padre; por la muerte de un hijo, 10 días corridos; por la del cónyuge o conviviente civil, 7; por la de un hermano, padre o madre, 4 días hábiles. Todos son adicionales al feriado anual, valen desde el primer día de contrato y no pueden cambiarse por dinero.</p>
-<p>Este artículo revisa el texto vigente del Código del Trabajo (artículos 66, 66 bis, 195 y 207 bis) y las consultas publicadas por la Dirección del Trabajo (DT). Fecha de corte: 26 de noviembre de 2026. Ojo con el detalle: la escala de días del artículo 66 data de la Ley 21.441 (2022), y la Ley 21.797 le sumó en julio de 2026 un mes de fuero laboral para los casos más graves —buena parte de lo que circula en internet aún repite la escala antigua de 7 y 3 días—. Aquí va la vigente.</p>
+<p>Este artículo revisa el texto vigente del Código del Trabajo (artículos 66, 66 bis, 195 y 207 bis) y las consultas publicadas por la Dirección del Trabajo (DT). Fecha de corte: 26 de noviembre de 2026. Ojo con el detalle: la escala de días del artículo 66 viene de las leyes 21.371 (2021) y 21.441 (2022), y la Ley 21.797 (2026) reforzó el fuero laboral asociado —buena parte de lo que circula en internet aún repite la escala antigua de 7 y 3 días—. Aquí va la vigente.</p>
 
 <h2>Matrimonio o unión civil: 5 días hábiles continuos</h2>
 <p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 207 bis del Código del Trabajo</a> (agregado por la Ley 21.042, en 2017) da a todo trabajador que contrae matrimonio o celebra un acuerdo de unión civil <strong>cinco días hábiles continuos de permiso pagado</strong>, adicionales a las vacaciones e independientes del tiempo de servicio. Vale igual para el matrimonio civil que para el AUC y corre incluso si llevas una semana en la empresa.</p>
@@ -1012,7 +1012,7 @@ export const ARTICULOS_2027: Article[] = [
 <p>La madre tiene un régimen distinto y más largo: seis semanas de prenatal, doce de postnatal y el permiso postnatal parental de doce semanas a jornada completa (o dieciocho a media jornada, con medio subsidio). Ese permiso parental se puede compartir: si la madre lo está usando, puede traspasar al padre —siempre que ambos sean trabajadores— hasta seis semanas a jornada completa, o doce semanas a media jornada si optó por la modalidad de dieciocho, siempre en el tramo final del período.</p>
 
 <h2>Duelo: la escala del artículo 66 (texto vigente 2026)</h2>
-<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 66 del Código del Trabajo</a> regula el permiso pagado por fallecimiento de familiares cercanos. La escala vigente quedó así tras la modificación que entró en vigencia en julio de 2026:</p>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 66 del Código del Trabajo</a> regula el permiso pagado por fallecimiento de familiares cercanos. La escala vigente según el texto actual de Ley Chile es esta:</p>
 <table>
 <thead><tr><th>Fallecimiento de</th><th>Permiso pagado</th></tr></thead>
 <tbody>
@@ -1028,7 +1028,7 @@ export const ARTICULOS_2027: Article[] = [
 <li><strong>"Corridos" incluye fines de semana y festivos.</strong> La DT lo ha dicho en dictamen: los 10 y los 7 días corridos se contabilizan sin interrupción. Los de 7 y 4 días, en cambio, son "hábiles": cuentan los días en que normalmente prestas servicios —incluido el sábado si tu jornada lo considera— y no el descanso semanal ni los festivos.</li>
 <li><strong>No dependen de la antigüedad.</strong> Son "independientemente del tiempo de servicio": aplican con un contrato vigente, indefinido o plazo fijo.</li>
 <li><strong>No se compensan en dinero.</strong> Ni durante la relación laboral ni al término; la ley lo prohíbe expresamente.</li>
-<li><strong>Protección extra por muerte del hijo, del cónyuge o del conviviente civil:</strong> un mes de fuero laboral desde el fallecimiento (si el contrato es plazo fijo o por obra, hasta el término de éste). El empleador no puede despedirte en ese período salvo las causales tasadas de la ley.</li>
+<li><strong>Protección extra por muerte del hijo, del cónyuge o del conviviente civil:</strong> un mes de fuero laboral desde el fallecimiento —en contrato plazo fijo u obra, hasta el término del contrato si éste vence antes—. Mientras rige, el empleador no puede despedirte sin autorización judicial previa, aun invocando una causal legal.</li>
 </ul>
 <p>La ley no exige presentar el certificado de defunción para hacer efectivo el permiso general —a diferencia de la defunción fetal, que sí lo requiere—, pero en la práctica conviene entregarlo para evitar disputas.</p>
 
