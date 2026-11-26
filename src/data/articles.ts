@@ -296,10 +296,16 @@ export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es
 // Ejemplos editoriales de PPM: montos calculados con la misma función
 // de la calculadora (tasa honorarios del calendario Ley 21.133 y tasas
 // referenciales por actividad), nunca escritos a mano.
-const PPM_EJ_PROFESIONAL = calculatePPM({
-  ingresosBrutosAnuales: 12_000_000,
-  actividad: 'profesional',
-});
+// El ejemplo del profesional usa la tasa fijada a 2026 explícitamente:
+// calculatePPM usa el año en curso y este artículo describe 2026, así
+// que la cuenta se hace con la misma fórmula (base × tasa, /12) pero
+// con getRetencionHonorarios(2026) para que no cambie al recompilar.
+const PPM_TASA_2026 = getRetencionHonorarios(2026);
+const PPM_EJ_PROFESIONAL = {
+  tasaPPM: PPM_TASA_2026,
+  ppmAnual: Math.round((12_000_000 * PPM_TASA_2026) / 100),
+  ppmMensual: Math.round((12_000_000 * PPM_TASA_2026) / 100 / 12),
+};
 const PPM_EJ_COMERCIO = calculatePPM({
   ingresosBrutosAnuales: 24_000_000,
   actividad: 'comercio',
@@ -7488,7 +7494,7 @@ ${tablaFcsHtml()}
 <tr><td>Transporte</td><td>0,3% referencial</td><td>Tasa que fija el SII por actividad</td></tr>
 <tr><td>Construcción</td><td>0,2% referencial</td><td>Tasa que fija el SII por actividad</td></tr>
 </tbody></table>
-<p>La tasa de honorarios sube un tramo cada año por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133</a>: fue 14,5% en 2025, es <strong>${tasaHonorarios(getRetencionHonorarios(2026))} en 2026</strong> y llegará a ${tasaHonorarios(getRetencionHonorarios(2027))} en 2027 y 17% en 2028. Las tasas de primera categoría señaladas son las referencias que usa la calculadora; el porcentaje aplicable exacto lo determina el SII según tu actividad, y los contribuyentes del régimen Pro Pyme general tributan con una tasa de PPM del 0,2% sobre los ingresos brutos.</p>
+<p>La tasa de honorarios sube un tramo cada año por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133</a>: fue 14,5% en 2025, es <strong>${tasaHonorarios(getRetencionHonorarios(2026))} en 2026</strong> y llegará a ${tasaHonorarios(getRetencionHonorarios(2027))} en 2027 y 17% en 2028. Las tasas de primera categoría señaladas son las referencias que usa la calculadora; el porcentaje aplicable exacto lo determina el SII según tu actividad, y la tasa de PPM del régimen Pro Pyme general depende del tramo de ingresos del año anterior según las tablas del SII.</p>
 
 <h2>Ejemplos de cálculo en pesos</h2>
 <div class="numeric-example"><div class="numeric-example__title">PPM anual y promedio mensual por actividad</div><ul>
@@ -7508,10 +7514,10 @@ ${tablaFcsHtml()}
 <p>Ojo con otro punto: el impuesto anual se calcula sobre la renta después de gastos. El profesional que no declara gastos efectivos puede deducir el <strong>${PPM_PRESUNCION.porcentaje}% de presunción de gastos</strong> con tope de ${PPM_PRESUNCION.tope_uta} UTA (art. 50 de la Ley de Impuesto a la Renta), lo que suele dejar el impuesto final por debajo de lo retenido durante el año —la razón por la que muchos independientes reciben devolución cada abril.</p>
 
 <h2>Cómo variar o suspender el PPM</h2>
-<p>Si tus ingresos del año van a ser menores a lo proyectado —por ejemplo, dejaste de emitir boletas o la empresa bajó sus ventas— puedes pedir al SII una <strong>variación del PPM</strong> para bajar o suspender los pagos. La solicitud se fundamenta con antecedentes (declaraciones, presupuestos, contratos) y el SII acepta o rechaza. No es automático: mientras no haya resolución, el PPM sigue venciendo con la tasa vigente.</p>
+<p>Si tus ingresos del año van a ser menores a lo proyectado —por ejemplo, dejaste de emitir boletas o la empresa bajó sus ventas— puedes solicitar al SII una <strong>variación del PPM</strong> para bajar el abono. La solicitud se fundamenta con antecedentes (declaraciones, presupuestos, contratos) y el SII acepta o rechaza. La <strong>suspensión total</strong> de los PPM es un trámite distinto, con condiciones propias que el SII publica por año; no basta con pedir la variación. Mientras no haya resolución, el PPM sigue venciendo con la tasa vigente.</p>
 
 <h2>En la Operación Renta: de abono a saldo final</h2>
-<p>En abril se declara el impuesto definitivo del año anterior. El F22 liquida el impuesto real y le resta todos los PPM y retenciones del año: si abonaste más que el impuesto, el SII <strong>devuelve</strong> la diferencia en mayo; si pagaste menos, pagas el saldo. Por eso el PPM no es un "impuesto extra": es el mismo impuesto pagado por adelantado.</p>
+<p>En abril se declara el impuesto definitivo del año anterior. El F22 liquida el impuesto real y le resta todos los PPM y retenciones del año: si abonaste más que el impuesto, el SII <strong>devuelve</strong> la diferencia en mayo —ojo: para independientes obligados a cotizar, parte del saldo cubre las cotizaciones previsionales del año, por lo que la devolución efectiva puede ser menor—; si pagaste menos, pagas el saldo. Por eso el PPM no es un "impuesto extra": es el mismo impuesto pagado por adelantado.</p>
 
 <h2>Errores comunes con el PPM</h2>
 <ul>
@@ -7526,7 +7532,7 @@ ${tablaFcsHtml()}
 <p>La <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> entrega el abono anual y su promedio mensual según actividad. Para entender cómo se cruza con la retención de boletas y el IVA mensual, revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>, y para el pago mes a mes del IVA y otros impuestos, la nota <a href="/blog/formulario-29-iva-mensual-plazos-2026">Formulario 29: plazos de IVA mensual 2026</a>.</p>
 
 <h2>Fuentes consultadas</h2>
-<p>Contenido verificado el 25 de noviembre de 2026 con las <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">preguntas frecuentes del SII sobre la base imponible de los PPM</a>, la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29</a>, los <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">plazos del F29</a>, la <a href="https://www.sii.cl/siieduca/aprende-con-nosotros/contribuyentes-de-tipo-profesionales-y-trabajadores-independientes.html" target="_blank" rel="noopener">página del SII sobre profesionales e independientes</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133 en Ley Chile</a>.</p>`,
+<p>Contenido verificado el 25 de noviembre de 2026 con las <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">preguntas frecuentes del SII sobre la base imponible de los PPM</a>, la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29</a>, los <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">plazos del F29</a>, la <a href="https://www.sii.cl/siieduca/aprende-con-nosotros/contribuyentes-de-tipo-profesionales-y-trabajadores-independientes.html" target="_blank" rel="noopener">página del SII sobre profesionales e independientes</a> (se cita solo por el criterio de quién declara; la tasa que allí aparece es histórica —la vigente es la del calendario de la Ley 21.133) y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133 en Ley Chile</a>.</p>`,
   },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
