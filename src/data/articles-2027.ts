@@ -18,7 +18,7 @@ const INE_ABRIL = INE_BOLETIN('boletin-%C3%ADndice-de-precios-al-consumidor-abri
 const INE_OCTUBRE = INE_BOLETIN('boletin-%C3%ADndice-de-precios-al-consumidor-octubre-2026');
 const DT_60141 = 'https://www.dt.gob.cl/portal/1628/w3-article-60141.html';
 const LEY_21735 = 'https://www.bcn.cl/leychile/navegar?idNorma=1212060';
-const LEY_21561 = 'https://www.bcn.cl/leychile/navegar?idNorma=1190878';
+const LEY_21561 = 'https://www.bcn.cl/leychile/navegar?idNorma=1191554';
 
 const ENAP_INFORME = 'https://www.enap.cl/files/get/3322';
 const BENCINA_EN_LINEA = 'https://www.bencinaenlinea.cl';
@@ -559,7 +559,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <ul>
 <li><strong>El mínimo de menores de 18 y mayores de 65 años</strong> ($412.938 vigente) y el ingreso mínimo para fines no remuneracionales ($356.815), que se usa entre otras cosas en el piso diario de los subsidios por licencia médica.</li>
-<li><strong>Los tramos de ingreso de la asignación familiar y del subsidio familiar</strong>, según el artículo 6 de la ley. Quien hoy está cerca del límite de un tramo puede cambiar de tramo y recibir un monto distinto por carga. La <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a> usa los tramos vigentes.</li>
+<li><strong>Los tramos de ingreso de la asignación familiar y del subsidio familiar</strong>, según el artículo 6 de la ley. En la asignación familiar, quien hoy está cerca del límite de un tramo puede cambiar de tramo y recibir un monto distinto por carga. La <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a> usa los tramos vigentes.</li>
 <li><strong>El piso de las jornadas parciales</strong> de 30 horas o menos, que es proporcional al mínimo, y la remuneración mínima de las trabajadoras de casa particular.</li>
 </ul>
 
@@ -590,7 +590,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p>Lo más importante para el trabajador es lo que <strong>no</strong> pasa: esta cotización no se descuenta del sueldo líquido. Es un costo del empleador, igual que el mutual o el seguro de accidentes. Lo que sí cambia para ti es que una parte mayor de ese aporte queda registrada a tu favor: 0,25% va directo a tu cuenta de capitalización individual y 1,5% es CRP, que se reintegra en tu pensión con su rentabilidad protegida. Tu liquidación seguirá mostrando los mismos descuentos de siempre —10% de AFP más la comisión de la administradora, 7% de salud y, en contrato indefinido, 0,6% de seguro de cesantía— y tu líquido no baja por esta ley.</p>
 
-<p>Para el empleador el efecto es directo en el costo laboral: por cada $1.000.000 de remuneración imponible, el aporte patronal sube $7.500 mensuales frente al esquema de 3,5%. La <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo de un empleado</a> permite proyectar ese costo total, y el detalle de la etapa vigente está en el artículo sobre la <a href="/blog/cotizacion-empleador-3-5-agosto-2026-costo-pyme">cotización del empleador de 3,5%</a>.</p>
+<p>Para el empleador el efecto es directo en el costo laboral: por cada $1.000.000 de remuneración imponible, el aporte patronal sube $7.500 mensuales frente al esquema de 3,5%. La <a href="/calculadoras/calculadora-costo-empleado-pyme">calculadora de costo de un empleado</a> permite revisar la composición de ese costo con los parámetros vigentes, y el detalle de la etapa actual está en el artículo sobre la <a href="/blog/cotizacion-empleador-3-5-agosto-2026-costo-pyme">cotización del empleador de 3,5%</a>.</p>
 
 <h2 id="lo-que-no-cambia">Lo que no cambia en 2027</h2>
 
@@ -599,7 +599,7 @@ export const ARTICULOS_2027: Article[] = [
 <ul>
 <li><strong>La jornada no baja a 40 horas.</strong> La ${ext(LEY_21561, 'Ley 21.561')} (la "ley de 40 horas") reduce la jornada en etapas: pasó de 45 a 44 horas en 2024 y a <strong>42 horas el 26 de abril de 2026</strong>. La última baja, a 40 horas, rige recién el <strong>26 de abril de 2028</strong>. Durante todo 2027 la jornada máxima legal sigue siendo 42 horas semanales, con la exigencia vigente de distribuirla por escrito según la Dirección del Trabajo.</li>
 <li><strong>Los descuentos del trabajador no cambian.</strong> El 10% de AFP, el 7% de salud y el 0,6% de seguro de cesantía no tienen modificaciones programadas para 2027.</li>
-<li><strong>El tope imponible no se redefine por ley.</strong> Sigue reajustándose mes a mes por UF como hasta ahora, sin intervención editorial ni legal nueva.</li>
+<li><strong>El tope imponible no tiene un cambio legal nuevo programado para 2027.</strong> Se mantiene el mecanismo vigente de los años anteriores.</li>
 </ul>
 
 <h2 id="calendario">Calendario completo del sueldo en 2027</h2>
@@ -623,11 +623,13 @@ export const ARTICULOS_2027: Article[] = [
 
 <p><strong>Si recibes asignación familiar:</strong> revisa tu tramo en enero con los nuevos límites de ingreso. Un reajuste de tramos puede moverte a un tramo distinto aunque tu renta no cambie.</p>
 
-<p><strong>Si tu gratificación topa con el límite legal:</strong> el tope de 4,75 ingresos mínimos se calcula con el valor de diciembre de 2027, que incluirá los dos reajustes del año. Vale la pena simularlo cuando salgan los montos.</p>
+<p><strong>Si tu gratificación topa con el límite legal:</strong> el tope de 4,75 ingresos mínimos se calcula con el valor de diciembre de 2027, que incluirá el reajuste de enero y, si el Congreso lo aprueba, el reajuste de julio. Vale la pena simularlo cuando salgan los montos.</p>
 
 <p><strong>Si eres empleador:</strong> presupuesta desde agosto un costo previsional de 4,25% por trabajador, no 3,5%, y cuida no duplicar el seguro social: los 2,5% destinados al seguro ya están dentro de la cotización. Y prepara enero con el monto del ingreso mínimo como variable, no con una estimación.</p>
 
-<p>En resumen: 2027 no es un año de un solo reajuste, sino de dos movimientos del ingreso mínimo más un hito previsional que sale del bolsillo del empleador. Las fechas ya están en la ley; los montos se irán confirmando entre enero y junio, y aquí los actualizaremos apenas sean oficiales.</p>`,
+<p>En resumen: 2027 no es un año de un solo reajuste, sino del reajuste automático de enero, la negociación de un segundo reajuste para julio y un hito previsional que sale del bolsillo del empleador. Las fechas ya están en la ley; los montos se irán confirmando entre enero y junio, y aquí los actualizaremos apenas sean oficiales.</p>
+
+<p>Este artículo es orientación general: no sustituye tu liquidación de sueldo, tu contrato ni una asesoría laboral o previsional. Las simulaciones de las calculadoras son referenciales y usan los valores vigentes informados en cada una.</p>`,
   },
   // Temporada verano 2027: viajar en auto
   {
