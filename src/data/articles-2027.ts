@@ -838,17 +838,17 @@ export const ARTICULOS_2027: Article[] = [
       {
         question: '¿Puedo devolver un regalo comprado en una tienda física solo porque no me gustó?',
         answer:
-          'No por ley. En compras presenciales no existe derecho a retracto: solo hay cambio por gusto o talla si el comercio ofreció una política voluntaria, normalmente con ticket de cambio, y en las condiciones que esa política indique.',
+          'En general no. En compras presenciales no existe derecho a retracto cuando pudiste ver y tomar el producto: ahí solo hay cambio por gusto o talla si el comercio ofreció una política voluntaria (ticket de cambio). La excepción: la ley también permite retracto en ventas celebradas en el establecimiento cuando el consumidor no tuvo acceso directo al bien antes de comprar.',
       },
       {
         question: '¿Cuánto tiempo tengo para ejercer el derecho a retracto en una compra online?',
         answer:
-          'Dentro de los 10 días siguientes a la recepción del producto en el domicilio declarado. Para servicios, dentro de los 10 días siguientes a la contratación. El producto debe devolverse sin uso, con su embalaje original en buen estado.',
+          'Dentro de los 10 días siguientes a la recepción del producto en el domicilio declarado (90 días si el proveedor nunca envió la confirmación escrita del contrato). Para servicios, 10 días desde la contratación y siempre antes de que empiece la prestación. El producto debe devolverse sin uso y, por regla general, con su embalaje original en buen estado.',
       },
       {
         question: '¿La tienda puede negarse al retracto?',
         answer:
-          'Solo si informó la exclusión antes de la compra, de manera destacada y de fácil acceso, o si el bien entra en las excepciones del Decreto 52: productos que por su naturaleza no pueden devolverse o se deterioran rápido, bienes hechos a medida del consumidor y bienes de uso personal o higiene sellados.',
+          'Solo si informó la exclusión antes de la compra, de manera destacada y de fácil acceso, o si el bien entra en las excepciones del Decreto 52: productos que por su naturaleza no pueden devolverse o se deterioran rápido, bienes hechos a medida del consumidor, y bienes de uso personal cuyo sello de higiene fue abierto tras la entrega cuando eso genera un riesgo sanitario.',
       },
       {
         question: '¿Quién hace el trámite si el regalo lo compró otra persona?',
@@ -876,7 +876,7 @@ export const ARTICULOS_2027: Article[] = [
 <tbody>
 <tr><td>Compraron el regalo online, por teléfono o por catálogo, y no lo quieres</td><td>Derecho a retracto (art. 3 bis, Ley 19.496)</td><td>10 días desde que se recibió el producto</td></tr>
 <tr><td>Compraron en tienda física y quieres otra talla, otro color o otra cosa</td><td>Cambio voluntario ("ticket de cambio")</td><td>El que la tienda haya ofrecido</td></tr>
-<tr><td>El producto salió defectuoso, incompleto o no sirve para su uso</td><td>Garantía legal</td><td>6 meses desde la entrega</td></tr>
+<tr><td>El producto salió defectuoso, incompleto o no sirve para su uso</td><td>Garantía legal</td><td>6 meses desde la entrega (perecibles: el plazo impreso, máx. 7 días)</td></tr>
 </tbody>
 </table>
 <p>La distinción importa porque los requisitos son distintos: el retracto pide el producto sin uso y con embalaje; la garantía legal es justamente para productos que fallaron; y el ticket de cambio es la única vía para "no me gustó" en una compra presencial.</p>
@@ -885,10 +885,11 @@ export const ARTICULOS_2027: Article[] = [
 <p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1160403&idParte=10239814" target="_blank" rel="noopener">artículo 3 bis de la Ley 19.496</a> permite arrepentirse de una compra celebrada por medios electrónicos, o cuando se aceptó una oferta enviada por catálogos, avisos u otra forma de comunicación a distancia. En regalos de Navidad es la regla clave: gran parte de las compras de diciembre se hacen en línea.</p>
 <p>Los puntos que fija la norma y el SERNAC:</p>
 <ul>
-<li><strong>Plazo.</strong> 10 días desde la recepción del producto en el domicilio declarado al comprar. Para servicios, 10 días desde la contratación.</li>
-<li><strong>Estado del producto.</strong> Debe devolverse sin uso, con el embalaje original en buen estado, manuales y certificados de garantía. Una lavadora ya instalada o un computador usado más allá de la inspección razonable pierde el retracto.</li>
-<li><strong>Exclusiones informadas.</strong> El proveedor puede excluir el retracto si lo informó antes de la compra de manera destacada y de fácil acceso. Si no avisó, el derecho rige.</li>
-<li><strong>Excepciones del reglamento.</strong> El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1206144" target="_blank" rel="noopener">Decreto 52</a> lista los casos en que excepcionalmente no hay retracto: bienes que por su naturaleza no pueden devolverse, perecibles o que caducan en menos de 10 días, productos confeccionados a medida del consumidor y bienes de uso personal o higiene sellados.</li>
+<li><strong>Plazo.</strong> 10 días desde la recepción del producto en el domicilio declarado al comprar. Para servicios, 10 días desde la contratación, y siempre antes de que comience la prestación. Si el proveedor no envió la confirmación escrita del contrato, el plazo para ponerle término se extiende a 90 días.</li>
+<li><strong>Estado del producto.</strong> Debe devolverse sin uso, con el embalaje original en buen estado, manuales y certificados de garantía. Una lavadora ya instalada o un computador usado más allá de la inspección razonable pierde el retracto. Si la tienda informó previamente la posibilidad, la ley permite restituir el valor del embalaje faltante en vez del embalaje mismo.</li>
+<li><strong>Exclusiones informadas.</strong> El proveedor puede excluir el retracto solo si lo informó antes de la compra, de manera destacada y de fácil acceso. Un aviso genérico posterior o escondido no basta.</li>
+<li><strong>Excepciones del reglamento.</strong> El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1206144" target="_blank" rel="noopener">Decreto 52</a> lista los casos en que excepcionalmente no hay retracto: bienes que por su naturaleza no pueden devolverse, perecibles o que caducan en menos de 10 días, productos confeccionados a medida del consumidor, y bienes de uso personal cuyo sello de higiene el consumidor abrió o retiró tras la entrega cuando eso genera un riesgo sanitario.</li>
+<li><strong>Compra presencial sin acceso directo.</strong> En ciertos casos el retracto también cubre compras celebradas en el establecimiento cuando el consumidor no tuvo posibilidad de acceder directamente al bien antes de la compra (letra c del art. 3 bis).</li>
 <li><strong>Devolución del dinero.</strong> Ejercido el retracto, el proveedor debe restituir el precio pagado conforme a la ley; revisa con la tienda cómo y en qué plazo procesa el reembolso.</li>
 </ul>
 <p>Para Navidad 2026 la cuenta práctica es esta: si el regalo se recibió el 24 de diciembre, el retracto se puede ejercer dentro de los 10 días siguientes, es decir, en la primera semana de enero de 2027. No es una fecha límite de cambio de la tienda, es un plazo legal para arrepentirse de la compra completa.</p>
@@ -913,7 +914,8 @@ export const ARTICULOS_2027: Article[] = [
 <li>No pueden limitar el número o tipo de sucursales, ni los horarios, para ejercer el derecho.</li>
 <li>No pueden obligarte a pasar primero por un servicio técnico para "evaluar" si aceptan el reclamo.</li>
 </ul>
-<p>La garantía se ejerce contra el vendedor con las tres opciones. El fabricante y el importador también responden, pero solo por reparación o cambio del producto, no por devolución del dinero.</p>
+<p>La garantía se ejerce contra el vendedor con las tres opciones. El fabricante y el importador también responden, pero solo por reparación o cambio del producto, no por devolución del dinero; y el cambio o la devolución se les pide directamente cuando el vendedor no está disponible, por ejemplo por término de giro.</p>
+<p>Una precisión de plazo: para productos perecibles y de uso o consumo breve, la garantía legal corre por el plazo impreso en el producto o su envoltorio; si no figura, el máximo es de siete días. La regla de los 6 meses es para el resto de los bienes nuevos.</p>
 <p>Y al revés del retracto: la garantía legal <strong>no aplica</strong> cuando el producto simplemente no gustó o no quedó la talla. Usarla para "devolver porque no me tincó" desgasta el reclamo; para eso está el ticket de cambio o el retracto online.</p>
 
 <h2>Si el regalo lo compró otra persona: qué documento necesitas</h2>
@@ -924,8 +926,8 @@ export const ARTICULOS_2027: Article[] = [
 <p>Temu, AliExpress, Shein y similares no operan con el retracto chileno tal cual: cada plataforma tiene su propia política de devolución, con plazos y costos de envío internacional que suelen hacer la devolución lenta y cara. Antes de reclamar por esa vía, revisa la política de devoluciones de la plataforma. El detalle de cómo se cobran los impuestos de esas compras está en nuestro artículo sobre <a href="/blog/impuestos-compras-temu-aliexpress-shein-navidad">impuestos de compras internacionales en Temu, AliExpress y Shein</a>.</p>
 
 <h2>Plazos prácticos para esta Navidad</h2>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: regalo comprado online para el 24</div><ul><li>El producto llega al domicilio el 22 de diciembre.</li><li>Derecho a retracto: ejercible dentro de los 10 días siguientes a la recepción, si la tienda no lo excluyó al vender.</li><li>Si el producto falla al abrirse: garantía legal de 6 meses, con reparación, cambio o devolución a elección del consumidor.</li><li>Si solo no gustó: depende de la política de cambio que la tienda haya ofrecido.</li></ul><span class="total">Cuenta los días con la calculadora de días hábiles</span></div>
-<p>Ten presente que el retracto se cuenta en días corridos desde la recepción, no en días hábiles; la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> sirve para otros plazos (contratos, despidos, feriados), pero no para este cómputo legal.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: regalo comprado online para el 24</div><ul><li>El producto llega al domicilio el 22 de diciembre.</li><li>Derecho a retracto: ejercible dentro de los 10 días corridos siguientes a la recepción —vence en la primera semana de enero—, si la tienda no lo excluyó al vender.</li><li>Si el producto falla al abrirse: garantía legal de 6 meses, con reparación, cambio o devolución a elección del consumidor.</li><li>Si solo no gustó: depende de la política de cambio que la tienda haya ofrecido.</li></ul></div>
+<p>Ten presente que el retracto se cuenta en días corridos desde la recepción, no en días hábiles: no lo calcules excluyendo domingos ni feriados, o llegarás a una fecha posterior al vencimiento legal. La <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> sirve para otros plazos (contratos, despidos, feriados), pero no para este cómputo legal.</p>
 
 <h2>Cómo reclamar si la tienda no responde</h2>
 <ol class="steps">
