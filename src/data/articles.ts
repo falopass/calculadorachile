@@ -944,7 +944,7 @@ const articleCatalog: ArticleDraft[] = [
 
 <h2>¿Se paga el 1 de enero si no trabajo?</h2>
 <p>Sí. El feriado es un día de descanso legal y, si tienes sueldo mensual, no se descuenta: tu remuneración de enero es la misma que la de cualquier mes. Lo que no existe es un "bono de Año Nuevo" o pago doble automático por el feriado. Si quieres revisar cuánto te llega en enero, la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> descuenta AFP, salud, seguro de cesantía e impuesto con las tasas vigentes.</p>
-<p>Quien trabaja con remuneración por día (jornal) tiene derecho al pago del festivo por la semana corrida del artículo 45 del Código del Trabajo, que exige haber trabajado los días pactados de la semana o haber faltado por causa no imputable al trabajador. Una inasistencia no elimina por sí sola el derecho, solo puede reducir el promedio. Si la remuneración se pactó por turno, la forma de pago del festivo depende del contrato; ante dudas, la DT responde consultas en su sitio.</p>
+<p>Quien cobra por día o por turno —remuneración por tiempo inferior a un mes— tiene derecho al pago del festivo por la semana corrida del artículo 45 del Código del Trabajo, que exige haber trabajado los días pactados de la semana o haber faltado por causa no imputable al trabajador. Una inasistencia no elimina por sí sola el derecho, solo puede reducir el promedio. Ante dudas sobre el pacto, la DT responde consultas en su sitio.</p>
 
 <h2>Multas para el empleador</h2>
 <p>Las infracciones al artículo 2 de la Ley 19.973 y al artículo 24 del Código del Trabajo tienen la misma escala de multas a beneficio fiscal, que se aplica <strong>por cada trabajador afectado</strong>:</p>
@@ -988,7 +988,7 @@ const articleCatalog: ArticleDraft[] = [
       { label: 'Ley Chile — Código del Trabajo (arts. 24, 35, 36 y 38)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
       { label: 'Dirección del Trabajo — Feriados irrenunciables del comercio', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html' },
       { label: 'Ley Chile — Ley 21.791 (feriado bancario 31 de diciembre)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1219578' },
-      { label: 'Dirección del Trabajo — Descanso semanal y feriados trabajados', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95018.html' },
+      { label: 'Dirección del Trabajo — Inicio y término del feriado irrenunciable del comercio', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95018.html' },
     ],
   },
   {
