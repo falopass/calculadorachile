@@ -173,6 +173,7 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Sueldo part-time 30 horas 2026 | ~~`sueldo-part-time-30-horas-2026-minimo-proporcional`~~ | publicado 2026-09-26 | laboral | 2026-09-26 | continuo | ✅ |
 | — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
+| — | blog | Feriado irrenunciable 1 de enero 2027 | ~~`feriado-irrenunciable-1-enero-2027`~~ | publicado 2026-11-26 · investigación Navidad/Año Nuevo | laboral | 2026-11-26 | dic–ene | ✅ |
 
 **Conteo pendientes:** 19 filas activas, sin las filas marcadas como publicadas.
 

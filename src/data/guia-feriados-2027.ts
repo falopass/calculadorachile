@@ -110,7 +110,7 @@ ${filasCalendario}
       title: 'Feriados irrenunciables 2027',
       level: 2,
       html: `<p>Son feriados obligatorios e irrenunciables para los trabajadores del comercio el 1 de enero, el 1 de mayo, el 18 y 19 de septiembre y el 25 de diciembre (${a(BCN_LEY_19973, 'Ley 19.973, art. 2')}). En 2027 caen así: ${listaY(irrenunciables.map((f) => conDia(f.fecha)))}.</p>
-<p>Quienes tienen derecho a ellos <strong>no pueden trabajar esos días, aunque se les ofrezca un recargo</strong> (${a(DT_IRRENUNCIABLES, 'DT')}).</p>
+<p>Quienes tienen derecho a ellos <strong>no pueden trabajar esos días, aunque se les ofrezca un recargo</strong> (${a(DT_IRRENUNCIABLES, 'DT')}). El detalle del primero del año, con sus excepciones y el tope de las 20:00 del 31 de diciembre, está en el artículo sobre el <a href="/blog/feriado-irrenunciable-1-enero-2027">feriado irrenunciable del 1 de enero de 2027</a>.</p>
 <p>No se aplican a quienes trabajan en clubes, restaurantes, cines, espectáculos en vivo, discotecas, pubs y cabarets, locales comerciales de aeropuertos y aeródromos civiles públicos, casinos y otros lugares de juego autorizados, bencineras y sus tiendas de conveniencia, ni farmacias de urgencia o de turno. Aun así, esos trabajadores tienen derecho a descansar en estos días una vez cada dos años con un mismo empleador, es decir, un año por medio (${a(DT_IRRENUNCIABLES, 'DT')}).</p>`,
     },
     {

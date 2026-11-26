@@ -514,6 +514,11 @@ export const seoOverrides: Record<string, { seoTitle: string; seoDescription: st
     seoDescription:
       'El viernes 25 de diciembre de 2026 el comercio cierra (Ley 19.973). Excepciones, multas, salida a las 20:00 el 24 y descanso compensatorio.', // 139
   },
+  'feriado-irrenunciable-1-enero-2027': {
+    seoTitle: 'Feriado irrenunciable 1 de enero 2027: quién trabaja', // 55
+    seoDescription:
+      'El viernes 1 de enero de 2027 el comercio cierra (Ley 19.973). Excepciones, multas, salida a las 20:00 el 31 y descanso compensatorio.', // 139
+  },
   'gratificacion-fin-de-ano-2026': {
     seoTitle: 'Gratificación fin de año 2026: 25% y tope de 4,75 IMM', // 53
     seoDescription:

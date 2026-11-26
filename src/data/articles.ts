@@ -883,6 +883,113 @@ const articleCatalog: ArticleDraft[] = [
     ],
   },
   {
+    slug: 'feriado-irrenunciable-1-enero-2027',
+    embedCalculatorId: 'trabajo-en-feriado',
+    title: 'Feriado irrenunciable del 1 de enero de 2027: quién descansa, quién trabaja y qué pasa con el 31',
+    description:
+      'El viernes 1 de enero de 2027 es feriado irrenunciable para los trabajadores del comercio (Ley 19.973). Excepciones, multas, horario del 31 de diciembre y descanso compensatorio para quienes sí trabajan.',
+    date: '2026-11-26',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'feriados-chile-2027',
+    keywords: [
+      'feriado irrenunciable 1 de enero 2027',
+      'año nuevo 2027 comercio cerrado',
+      'trabajar el 1 de enero',
+      'ley 19.973 feriado irrenunciable',
+      'horario comercio 31 diciembre 2026',
+      'descanso compensatorio festivo',
+    ],
+    relatedCalculators: [
+      'calculadora-trabajo-en-feriado',
+      'calculadora-horas-extra',
+      'calculadora-sueldo-liquido',
+    ],
+    content: `<p class="article-lead">El <strong>viernes 1 de enero de 2027</strong> es feriado obligatorio e irrenunciable para los trabajadores dependientes del comercio. Si trabajas en una tienda, un supermercado o un mall, tu empleador no puede pedirte que vayas ese día, ni siquiera ofreciéndote un pago extra. Hay excepciones —restaurantes, cines, bencineras, farmacias de turno, aeropuertos, entre otras— y para esas personas la regla es distinta: descanso compensatorio y, al menos, un 1 de enero libre cada dos años con el mismo empleador.</p>
+<p>Este artículo revisa el texto vigente de la Ley 19.973 y de los artículos 24, 35, 36 y 38 del Código del Trabajo, más las respuestas publicadas por la Dirección del Trabajo (DT). Fecha de corte: 26 de noviembre de 2026. No es una lista de horarios de tiendas: explica qué derechos tienes y qué puedes reclamar.</p>
+
+<h2>Qué dice la ley: el artículo 2 de la Ley 19.973</h2>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=230132" target="_blank" rel="noopener">Ley 19.973</a>, en su artículo 2 (modificado por las leyes 20.215, 20.629 y 20.918), declara que el 1 de mayo, el 18 y 19 de septiembre, el 25 de diciembre y el 1 de enero de cada año son feriados obligatorios e irrenunciables para todos los dependientes del comercio. "Irrenunciable" tiene un efecto práctico concreto: ni tú ni tu empleador pueden pactar que trabajes ese día. Un anexo de contrato, un acuerdo verbal o una promesa de "pago doble" no valen.</p>
+<p>La <a href="https://www.dt.gob.cl/portal/1628/w3-article-95017.html" target="_blank" rel="noopener">Dirección del Trabajo</a> lo dice de forma directa: los trabajadores con derecho a este descanso "no pueden trabajar en dichos días aun cuando se pretenda remunerarlos con un recargo, cualquiera que éste sea" (Dictamen 4754/57, de 14 de septiembre de 2015).</p>
+<p>En 2027 el 1 de enero cae viernes, lo que deja un fin de semana largo de tres días (viernes 1, sábado 2 y domingo 3) para el comercio, justo una semana después del feriado irrenunciable del <a href="/blog/feriado-irrenunciable-25-diciembre-2026">viernes 25 de diciembre de 2026</a>.</p>
+
+<h2>Quiénes sí pueden trabajar el 1 de enero</h2>
+<p>La misma norma excluye del feriado irrenunciable a quienes se desempeñan en:</p>
+<ul>
+<li>Clubes y restaurantes.</li>
+<li>Establecimientos de entretenimiento: cines, espectáculos en vivo, discotecas, pubs y cabarets.</li>
+<li>Locales comerciales en aeródromos civiles públicos y aeropuertos.</li>
+<li>Casinos de juego y otros lugares de juego legalmente autorizados.</li>
+<li>Expendio de combustibles (bencineras).</li>
+<li>Farmacias de urgencia y farmacias que deban cumplir turnos fijados por la autoridad sanitaria.</li>
+<li>Tiendas de conveniencia de las bencineras, solo si junto con la venta directa elaboran y venden alimentos preparados que el cliente puede consumir en el mismo local.</li>
+</ul>
+<p>La lista es cerrada. Un supermercado, una tienda de ropa, una ferretería o un local de un mall que no esté en esas categorías debe cerrar o, si abre, no puede hacerlo con trabajadores dependientes.</p>
+<p>Fuera del comercio, la regla general es otra. El 1 de enero es festivo para todo el país y el artículo 35 del Código del Trabajo establece que los festivos son de descanso, salvo en las actividades que la ley autoriza a trabajar esos días. El artículo 38 enumera esas actividades: faenas que exigen continuidad (salud, energía, transporte), reparaciones impostergables, trabajo a bordo de naves, faenas portuarias, deportistas profesionales, plataformas digitales, entre otras. Un guardia, una enfermera de un hospital o un conductor de transporte público pueden tener turno el 1 de enero sin que eso infrinja la Ley 19.973, porque esa ley protege específicamente a los dependientes del comercio.</p>
+
+<h2>Si trabajas en un rubro exceptuado: qué te corresponde</h2>
+<p>Estar exceptuado no significa perder todo derecho a Año Nuevo. La ley fija dos garantías.</p>
+<h3>1. Un 1 de enero libre, al menos cada dos años</h3>
+<p>Los trabajadores exceptuados tienen derecho a los feriados irrenunciables "a lo menos, una vez cada dos años respecto de un mismo empleador", y pueden pactar con él la rotación del personal para cumplirlo. La DT lo traduce como "un año por medio". Si trabajaste el jueves 1 de enero de 2026 en el mismo restaurante o la misma farmacia de turno, este viernes 1 de enero de 2027 te corresponde libre.</p>
+<p>La regla se cuenta por cada feriado de la lista y respecto del mismo empleador. Si cambiaste de empleo durante 2026, el contador parte de nuevo con la nueva empresa.</p>
+<h3>2. Un día de descanso compensatorio</h3>
+<p>El <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">artículo 38 del Código del Trabajo</a> obliga a las empresas exceptuadas del descanso dominical a otorgar un día de descanso a la semana por las actividades realizadas en domingo y "otro por cada festivo en que los trabajadores debieron prestar servicios". Trabajar el 1 de enero genera un día libre adicional.</p>
+<p>Si en una misma semana se acumula más de un día de descanso por domingos y festivos trabajados, el mismo artículo permite que las partes acuerden pagar los días que exceden de uno semanal en lugar de darlos libres. En ese caso la remuneración no puede ser inferior a la de las horas extraordinarias del artículo 32, es decir, con un recargo mínimo de 50 % sobre el sueldo convenido.</p>
+
+<h2>El jueves 31 de diciembre: hasta las 20:00</h2>
+<p>El <strong>artículo 24 del Código del Trabajo</strong> regula la temporada de fin de año del comercio y, además de la jornada extendida previa a Navidad, fija un tope para la víspera de Año Nuevo: el 31 de diciembre, bajo ninguna circunstancia se trabaja más allá de las 20 horas. La misma regla rige el 24 de diciembre.</p>
+<p>En 2026 el 31 de diciembre es jueves. Si tu turno habitual termina a las 21:00, ese día debes salir a las 20:00. La salida anticipada no autoriza al empleador a descontarte la hora: es una prohibición legal, no un permiso que pidas tú.</p>
+<p>Además, ese jueves los bancos no atienden presencialmente: la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1219578" target="_blank" rel="noopener">Ley 21.791</a>, publicada el 17 de diciembre de 2025, restableció que los bancos no atienden al público el 31 de diciembre de cada año. No es feriado legal para el resto de los trabajadores, pero los pagos y trámites en sucursal se corren al miércoles 30 de diciembre; las transferencias electrónicas y los cajeros automáticos funcionan con normalidad.</p>
+
+<h2>¿Se paga el 1 de enero si no trabajo?</h2>
+<p>Sí. El feriado es un día de descanso legal y, si tienes sueldo mensual, no se descuenta: tu remuneración de enero es la misma que la de cualquier mes. Lo que no existe es un "bono de Año Nuevo" o pago doble automático por el feriado. Si quieres revisar cuánto te llega en enero, la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> descuenta AFP, salud, seguro de cesantía e impuesto con las tasas vigentes.</p>
+<p>Quien trabaja con remuneración por día (jornal) o por turno debe revisar su contrato: la forma de pago del festivo depende de cómo se pactó la remuneración. Ante dudas, la DT responde consultas en su sitio.</p>
+
+<h2>Multas para el empleador</h2>
+<p>Las infracciones al artículo 2 de la Ley 19.973 y al artículo 24 del Código del Trabajo tienen la misma escala de multas a beneficio fiscal, que se aplica <strong>por cada trabajador afectado</strong>:</p>
+<table>
+<thead><tr><th>Tamaño del empleador</th><th>Multa por trabajador afectado</th></tr></thead>
+<tbody>
+<tr><td>Menos de 50 trabajadores</td><td>5 UTM</td></tr>
+<tr><td>50 o más trabajadores</td><td>10 UTM</td></tr>
+<tr><td>200 o más trabajadores</td><td>20 UTM</td></tr>
+</tbody>
+</table>
+<p>La multa se calcula en Unidades Tributarias Mensuales (UTM), cuyo valor en pesos cambia cada mes. Puedes convertirla con la <a href="/calculadoras/calculadora-utm-clp">calculadora de UTM a pesos</a>. Una tienda de un mall con 60 vendedores que abre el 1 de enero con todo su personal arriesga 10 UTM por cada uno de ellos.</p>
+
+<h2>Qué hacer si te obligan a trabajar</h2>
+<ol class="steps">
+<li><strong>Confirma si tu rubro está exceptuado.</strong> Revisa la lista de la Ley 19.973. Si trabajas en una tienda común, el 1 de enero es irrenunciable.</li>
+<li><strong>Si estás exceptuado, revisa el año anterior.</strong> Si trabajaste el 1 de enero de 2026 con el mismo empleador, este año te corresponde libre.</li>
+<li><strong>Guarda evidencia.</strong> Turnos publicados, mensajes con la instrucción y registros de asistencia sirven para la denuncia.</li>
+<li><strong>Denuncia en la Inspección del Trabajo.</strong> La DT indica que el camino es la denuncia ante la Inspección del Trabajo respectiva, que puede fiscalizar y aplicar la multa.</li>
+</ol>
+
+<h2>En resumen, para Año Nuevo 2027</h2>
+<table>
+<thead><tr><th>Situación</th><th>Regla</th></tr></thead>
+<tbody>
+<tr><td>Dependiente del comercio (tienda, supermercado, mall)</td><td>No trabaja el viernes 1 de enero; no se puede pactar lo contrario.</td></tr>
+<tr><td>Restaurante, cine, bencinera, farmacia de turno, aeropuerto, casino</td><td>Puede trabajar; libre al menos una vez cada dos años con el mismo empleador.</td></tr>
+<tr><td>Rubro exceptuado que trabaja el 1 de enero</td><td>Día de descanso compensatorio (art. 38 CT).</td></tr>
+<tr><td>Comercio el jueves 31 de diciembre</td><td>Salida a más tardar a las 20:00 (art. 24 CT).</td></tr>
+<tr><td>Fuera del comercio</td><td>Festivo de descanso, salvo actividades del art. 38 CT.</td></tr>
+</tbody>
+</table>
+<p>El siguiente feriado irrenunciable del comercio después del 1 de enero es el sábado 1 de mayo de 2027. El calendario completo del próximo año está en la <a href="/guias/feriados-chile-2027">guía de feriados 2027</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de noviembre de 2026 con el texto vigente de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=230132" target="_blank" rel="noopener">Ley 19.973</a> y del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a> (artículos 24, 35, 36 y 38) en Ley Chile, y la consulta de la <a href="https://www.dt.gob.cl/portal/1628/w3-article-95017.html" target="_blank" rel="noopener">Dirección del Trabajo sobre feriados irrenunciables del comercio</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. No reemplaza un dictamen de la Dirección del Trabajo ni asesoría legal. Ante un caso concreto, prevalece lo que resuelva la Inspección del Trabajo.</p></div></aside>
+<p>Para profundizar en remuneraciones y descuentos, revisa la <a href="/guias/sueldo-liquido-chile">guía de sueldo líquido</a> y la <a href="/calculadoras/calculadora-horas-extra">calculadora de horas extra</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Ley 19.973, artículo 2', url: 'https://www.bcn.cl/leychile/navegar?idNorma=230132' },
+      { label: 'Ley Chile — Código del Trabajo (arts. 24, 35, 36 y 38)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+      { label: 'Dirección del Trabajo — Feriados irrenunciables del comercio', url: 'https://www.dt.gob.cl/portal/1628/w3-article-95017.html' },
+      { label: 'Ley Chile — Ley 21.791 (feriado bancario 31 de diciembre)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1219578' },
+    ],
+  },
+  {
     slug: 'embargos-cae-tgr-2026-cuentas-bienes-raices',
     embedCalculatorId: 'credito-cae',
     title: 'Embargos por deuda CAE 2026: TGR, cuentas bancarias y bienes raíces (qué se sabe)',
