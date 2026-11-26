@@ -77,17 +77,24 @@ export function useLiveValues(options: {
         source: ValuesSource;
         freshness?: LiveValues['freshness'];
       };
-      setData({
-        uf: json.uf,
-        utm: json.utm,
-        dolar: json.dolar,
-        euro: json.euro && json.euro > 0 ? json.euro : FALLBACK_VALUES.euro,
-        loading: false,
-        error: null,
-        lastUpdated: json.updatedAt,
-        ufFecha: json.ufFecha,
-        source: json.source,
-        freshness: json.freshness,
+      setData((prev) => {
+        // La API puede servir una entrada cacheada con la UF del día
+        // anterior justo al cambiar de día; un seed SSR más fresco no se
+        // retrocede: prevalece el ufFecha mayor.
+        const fetchedUfOlder =
+          prev.ufFecha != null && json.ufFecha != null && json.ufFecha < prev.ufFecha;
+        return {
+          uf: fetchedUfOlder ? prev.uf : json.uf,
+          utm: json.utm,
+          dolar: json.dolar,
+          euro: json.euro && json.euro > 0 ? json.euro : FALLBACK_VALUES.euro,
+          loading: false,
+          error: null,
+          lastUpdated: json.updatedAt,
+          ufFecha: fetchedUfOlder ? prev.ufFecha : json.ufFecha,
+          source: json.source,
+          freshness: json.freshness,
+        };
       });
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
