@@ -1763,7 +1763,7 @@ export const ARTICULOS_2027: Article[] = [
         question:
           '¿Cuándo recibirán todas las personas de 65 años o más el monto máximo de la PGU?',
         answer:
-          'Desde septiembre de 2027, según el calendario de ChileAtiende: el monto máximo ($250.275 más el reajuste por IPC) se extiende a quienes tengan 65 años o más y derecho a PGU. Hasta entonces el monto máximo aplica a los 75 años o más, y quienes tienen entre 65 y 81 acceden a un tope menor.',
+          'Desde septiembre de 2027, según el calendario de ChileAtiende: el monto máximo ($250.275 más el reajuste por IPC) se extiende a quienes tengan 65 años o más y derecho a PGU. Hasta entonces el monto máximo aplica a los 75 años o más, y quienes tienen entre 65 y 74 acceden a un tope menor.',
       },
       {
         question: '¿Quiénes pueden hacer la solicitud anticipada de la PGU en junio de 2027?',
@@ -1815,7 +1815,7 @@ export const ARTICULOS_2027: Article[] = [
 <li><strong>Qué falta por regular:</strong> antes de las fechas, la Superintendencia debe definir las condiciones de participación, el detalle de la selección aleatoria y cómo se informará a las personas seleccionadas. Para eso creó un Consejo Asesor, que sesionó por primera vez en abril de 2026.</li>
 </ul>
 
-<p>Si quedas seleccionado, tu cuenta pasará a administrarse por la adjudicataria cuando se concrete el traspaso, pero no es un movimiento obligatorio: el afiliado seleccionado tiene un plazo de <strong>30 días</strong> para manifestar su voluntad de mantenerse en su AFP de origen, informándolo por los medios electrónicos que habilitará la Superintendencia. Si no lo hace dentro de ese plazo, será traspasado a la AFP ganadora. Y aun después del traspaso, los afiliados del grupo licitado pueden cambiarse de AFP en cualquier momento por las reglas habituales (permanencia mínima, solicitud de pensión en curso o las excepciones que la ley permite). Un detalle relevante: quienes resulten seleccionados —sean traspasados o decidan quedarse— no podrán volver a entrar en los nueve procesos de licitación siguientes, salvo que la AFP ganadora suba su comisión dentro de 20 años. El detalle práctico de cambiarse está en la guía de <a href="/guias/afp-pension-chile">AFP y pensión</a>.</p>
+<p>Si quedas seleccionado, tu cuenta pasará a administrarse por la adjudicataria cuando se concrete el traspaso, pero no es un movimiento obligatorio: el afiliado seleccionado tiene un plazo de <strong>30 días desde que la Superintendencia le notifica su selección</strong> para manifestar su voluntad de mantenerse en su AFP de origen, informándolo por los medios electrónicos que habilitará la Superintendencia. Si no lo hace dentro de ese plazo, será traspasado a la AFP ganadora. Y aun después del traspaso, los afiliados del grupo licitado pueden cambiarse de AFP en cualquier momento por las reglas habituales (permanencia mínima, solicitud de pensión en curso o las excepciones que la ley permite). Un detalle relevante: quienes resulten seleccionados —sean traspasados o decidan quedarse— no podrán volver a entrar en los nueve procesos de licitación siguientes, salvo que la AFP ganadora suba su comisión dentro de 20 años. El detalle práctico de cambiarse está en la guía de <a href="/guias/afp-pension-chile">AFP y pensión</a>.</p>
 
 <h3>No confundir con la licitación de nuevos afiliados</h3>
 
@@ -1851,7 +1851,7 @@ export const ARTICULOS_2027: Article[] = [
 <caption>Hitos de la Ley 21.735 en 2027 y lo que sigue</caption>
 <thead><tr><th scope="col">Fecha</th><th scope="col">Hito</th><th scope="col">Estado al 26-11-2026</th></tr></thead>
 <tbody>
-<tr><td>Junio de 2027</td><td>Solicitud anticipada de PGU para nuevos grupos (reparación, gracia, exonerados DIPRECA/CAPREDENA) que cumplen 65 años en septiembre</td><td>Fijado por calendario oficial</td></tr>
+<tr><td>Junio de 2027</td><td>Solicitud anticipada de PGU para nuevos grupos (reparación, gracia, exonerados DIPRECA/CAPREDENA) que en septiembre tengan 65 años o más</td><td>Fijado por calendario oficial</td></tr>
 <tr><td>A más tardar agosto de 2027</td><td>Primer llamado a licitación del 10% del stock de afiliados no pensionados</td><td>Plazo fijado por ley; regulación pendiente</td></tr>
 <tr><td>Agosto de 2027</td><td>Cotización de cargo del empleador sube de 3,5% a 4,25% de la remuneración imponible</td><td>Fijado por ley</td></tr>
 <tr><td>Septiembre de 2027</td><td>PGU al monto máximo ($250.275 + IPC) para todas las personas de 65+; inicio de solicitudes para nuevos grupos y montepiadas DIPRECA/CAPREDENA</td><td>Fijado por calendario oficial</td></tr>
@@ -1867,7 +1867,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <p><strong>Si tienes 64 años o vas a cumplir 65:</strong> revisa desde junio de 2027 si entras en la solicitud anticipada (solo si perteneces a los nuevos grupos) y verifica en septiembre tu acceso al monto máximo. El <a href="/calculadoras/calculadora-simulador-pension-afp">simulador de pensión AFP</a> proyecta tu pensión con los componentes de la reforma —PGU, Beneficio por Años Cotizados y CEV para mujeres— para que veas cómo se compone el total.</p>
 
-<p><strong>Si recibes una pensión de gracia, de reparación o eres exonerado de DIPRECA/CAPREDENA:</strong> tu entrada al sistema no es automática, requiere solicitud. Marca junio de 2027 para la solicitud anticipada (si cumples 65 años en septiembre) y septiembre para el inicio general, y prepara la documentación que acredite tu calidad de beneficiario. Si tu pensión es de <strong>montepío</strong> de DIPRECA o CAPREDENA, el trámite es distinto: podrás solicitar desde septiembre un monto proporcional que complementa tu pensión hasta el valor que tenga la PGU en esa fecha —no la PGU completa adicional a tu montepío—.</p>
+<p><strong>Si recibes una pensión de gracia, de reparación o eres exonerado de DIPRECA/CAPREDENA:</strong> tu entrada al sistema no es automática, requiere solicitud. Marca junio de 2027 para la solicitud anticipada (si en septiembre tienes 65 años o más) y septiembre para el inicio general, y prepara la documentación que acredite tu calidad de beneficiario. Si tu pensión es de <strong>montepío</strong> de DIPRECA o CAPREDENA, el trámite es distinto: podrás solicitar desde septiembre un monto proporcional que complementa tu pensión hasta el valor que tenga la PGU en esa fecha —no la PGU completa adicional a tu montepío—.</p>
 
 <p><strong>Si eres empleador:</strong> presupuesta el costo previsional con 4,25% desde agosto de 2027, no 3,5%. El 1,75% que va a favor del trabajador (capitalización + CRP) tampoco es deducible de su líquido: sale del costo laboral completo.</p>
 
