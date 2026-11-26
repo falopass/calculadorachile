@@ -843,7 +843,7 @@ export const ARTICULOS_2027: Article[] = [
       {
         question: '¿Cuánto tiempo tengo para ejercer el derecho a retracto en una compra online?',
         answer:
-          'Dentro de los 10 días siguientes a la recepción del producto en el domicilio declarado (90 días si el proveedor nunca envió la confirmación escrita del contrato). Para servicios, 10 días desde la contratación y siempre antes de que empiece la prestación. El producto debe devolverse sin uso y, por regla general, con su embalaje original en buen estado.',
+          'Dentro de los 10 días siguientes a la recepción del producto en el domicilio declarado (90 días si el proveedor nunca envió la confirmación escrita del contrato). Para servicios, 10 días desde la contratación —o 90 días sin confirmación escrita— y siempre antes de que empiece la prestación. El producto debe devolverse sin uso y, por regla general, con su embalaje original en buen estado.',
       },
       {
         question: '¿La tienda puede negarse al retracto?',
@@ -875,7 +875,7 @@ export const ARTICULOS_2027: Article[] = [
 <thead><tr><th>Situación</th><th>Regla que aplica</th><th>Plazo</th></tr></thead>
 <tbody>
 <tr><td>Compraron el regalo online, por teléfono o por catálogo, y no lo quieres</td><td>Derecho a retracto (art. 3 bis, Ley 19.496)</td><td>10 días desde que se recibió el producto</td></tr>
-<tr><td>Compraron en tienda física y quieres otra talla, otro color o otra cosa</td><td>Cambio voluntario ("ticket de cambio")</td><td>El que la tienda haya ofrecido</td></tr>
+<tr><td>Compraron en tienda física, con acceso directo al producto, y quieres otra talla, otro color o otra cosa</td><td>Cambio voluntario ("ticket de cambio")</td><td>El que la tienda haya ofrecido</td></tr>
 <tr><td>El producto salió defectuoso, incompleto o no sirve para su uso</td><td>Garantía legal</td><td>6 meses desde la entrega (perecibles: el plazo impreso, máx. 7 días)</td></tr>
 </tbody>
 </table>
@@ -886,16 +886,16 @@ export const ARTICULOS_2027: Article[] = [
 <p>Los puntos que fija la norma y el SERNAC:</p>
 <ul>
 <li><strong>Plazo.</strong> 10 días desde la recepción del producto en el domicilio declarado al comprar. Para servicios, 10 días desde la contratación, y siempre antes de que comience la prestación. Si el proveedor no envió la confirmación escrita del contrato, el plazo para ponerle término se extiende a 90 días.</li>
-<li><strong>Estado del producto.</strong> Debe devolverse sin uso, con el embalaje original en buen estado, manuales y certificados de garantía. Una lavadora ya instalada o un computador usado más allá de la inspección razonable pierde el retracto. Si la tienda informó previamente la posibilidad, la ley permite restituir el valor del embalaje faltante en vez del embalaje mismo.</li>
+<li><strong>Estado del producto.</strong> Debe devolverse sin uso, con el embalaje original en buen estado, manuales y certificados de garantía. Una lavadora ya instalada o un computador usado más allá de la inspección razonable pierde el retracto. Si la tienda informó previamente que cobraría el embalaje faltante y su valor, la ley permite restituir ese valor en vez del embalaje mismo.</li>
 <li><strong>Exclusiones informadas.</strong> El proveedor puede excluir el retracto solo si lo informó antes de la compra, de manera destacada y de fácil acceso. Un aviso genérico posterior o escondido no basta.</li>
 <li><strong>Excepciones del reglamento.</strong> El <a href="https://www.bcn.cl/leychile/navegar?idNorma=1206144" target="_blank" rel="noopener">Decreto 52</a> lista los casos en que excepcionalmente no hay retracto: bienes que por su naturaleza no pueden devolverse, perecibles o que caducan en menos de 10 días, productos confeccionados a medida del consumidor, y bienes de uso personal cuyo sello de higiene el consumidor abrió o retiró tras la entrega cuando eso genera un riesgo sanitario.</li>
 <li><strong>Compra presencial sin acceso directo.</strong> En ciertos casos el retracto también cubre compras celebradas en el establecimiento cuando el consumidor no tuvo posibilidad de acceder directamente al bien antes de la compra (letra c del art. 3 bis).</li>
 <li><strong>Devolución del dinero.</strong> Ejercido el retracto, el proveedor debe restituir el precio pagado conforme a la ley; revisa con la tienda cómo y en qué plazo procesa el reembolso.</li>
 </ul>
-<p>Para Navidad 2026 la cuenta práctica es esta: si el regalo se recibió el 24 de diciembre, el retracto se puede ejercer dentro de los 10 días siguientes, es decir, en la primera semana de enero de 2027. No es una fecha límite de cambio de la tienda, es un plazo legal para arrepentirse de la compra completa.</p>
+<p>Para Navidad 2026 la cuenta práctica es esta: si el regalo se recibió el 24 de diciembre, el décimo día corrido cae el sábado 3 de enero de 2027: ese es el vencimiento del retracto, no una fecha aproximada. No es una fecha límite de cambio de la tienda, es un plazo legal para arrepentirse de la compra completa.</p>
 
 <h2>Compra en tienda física: el ticket de cambio no es un derecho, es una promesa</h2>
-<p>En una compra presencial no existe derecho a retracto. Si la chaqueta no quedó la talla o el regalo no gustó, la ley no obliga al comercio a cambiarlo: el cambio "a todo evento" es una oferta voluntaria que la empresa puede dar o no dar, y si la da, debe respetar sus propias condiciones (plazo, estado del producto, documento requerido).</p>
+<p>En la compra presencial común —en la que pudiste ver y tomar el producto— no existe derecho a retracto (la excepción legal es la compra sin acceso directo al bien, descrita más arriba). Si la chaqueta no quedó la talla o el regalo no gustó, la ley no obliga al comercio a cambiarlo: el cambio "a todo evento" es una oferta voluntaria que la empresa puede dar o no dar, y si la da, debe respetar sus propias condiciones (plazo, estado del producto, documento requerido).</p>
 <p>Por eso el ticket de cambio es el documento estrella de diciembre. SERNAC lo describe como un acto voluntario de la empresa que permite cambiar el producto en un tiempo establecido, y es donde sí aplican el gusto o la talla. Además, sirve como comprobante de la compra para ejercer la garantía legal si el producto falla después.</p>
 <p>Recomendación concreta para quien regala: pide el ticket de cambio al comprar y entrégalo con el regalo. Sin ese papel, quien recibe un regalo comprado en tienda tiene pocas opciones cuando no le queda, porque no fue parte del contrato de compra.</p>
 <p>Una advertencia útil: los carteles o boletas que dicen "sin cambio ni devolución" en productos de oferta o liquidación <strong>no eliminan la garantía legal</strong>. SERNAC es explícito: esos letreros no valen para productos que salen defectuosos. Solo pierden la garantía los productos vendidos como "segunda selección" o "hechos con materiales usados", y únicamente si el comercio lo informó antes de la compra.</p>
@@ -914,7 +914,7 @@ export const ARTICULOS_2027: Article[] = [
 <li>No pueden limitar el número o tipo de sucursales, ni los horarios, para ejercer el derecho.</li>
 <li>No pueden obligarte a pasar primero por un servicio técnico para "evaluar" si aceptan el reclamo.</li>
 </ul>
-<p>La garantía se ejerce contra el vendedor con las tres opciones. El fabricante y el importador también responden, pero solo por reparación o cambio del producto, no por devolución del dinero; y el cambio o la devolución se les pide directamente cuando el vendedor no está disponible, por ejemplo por término de giro.</p>
+<p>La garantía se ejerce contra el vendedor con las tres opciones. El fabricante y el importador también responden, pero solo por reparación o cambio del producto, no por devolución del dinero; y es a ellos a quienes se puede pedir directamente la reparación o el cambio cuando el vendedor no está disponible, por ejemplo por término de giro.</p>
 <p>Una precisión de plazo: para productos perecibles y de uso o consumo breve, la garantía legal corre por el plazo impreso en el producto o su envoltorio; si no figura, el máximo es de siete días. La regla de los 6 meses es para el resto de los bienes nuevos.</p>
 <p>Y al revés del retracto: la garantía legal <strong>no aplica</strong> cuando el producto simplemente no gustó o no quedó la talla. Usarla para "devolver porque no me tincó" desgasta el reclamo; para eso está el ticket de cambio o el retracto online.</p>
 
@@ -926,7 +926,7 @@ export const ARTICULOS_2027: Article[] = [
 <p>Temu, AliExpress, Shein y similares no operan con el retracto chileno tal cual: cada plataforma tiene su propia política de devolución, con plazos y costos de envío internacional que suelen hacer la devolución lenta y cara. Antes de reclamar por esa vía, revisa la política de devoluciones de la plataforma. El detalle de cómo se cobran los impuestos de esas compras está en nuestro artículo sobre <a href="/blog/impuestos-compras-temu-aliexpress-shein-navidad">impuestos de compras internacionales en Temu, AliExpress y Shein</a>.</p>
 
 <h2>Plazos prácticos para esta Navidad</h2>
-<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: regalo comprado online para el 24</div><ul><li>El producto llega al domicilio el 22 de diciembre.</li><li>Derecho a retracto: ejercible dentro de los 10 días corridos siguientes a la recepción —vence en la primera semana de enero—, si la tienda no lo excluyó al vender.</li><li>Si el producto falla al abrirse: garantía legal de 6 meses, con reparación, cambio o devolución a elección del consumidor.</li><li>Si solo no gustó: depende de la política de cambio que la tienda haya ofrecido.</li></ul></div>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: regalo comprado online para el 24</div><ul><li>El producto llega al domicilio el 22 de diciembre.</li><li>Derecho a retracto: ejercible dentro de los 10 días corridos siguientes a la recepción —vence el jueves 1 de enero de 2027—, si la tienda no lo excluyó al vender.</li><li>Si el producto falla al abrirse: garantía legal de 6 meses, con reparación, cambio o devolución a elección del consumidor.</li><li>Si solo no gustó: depende de la política de cambio que la tienda haya ofrecido.</li></ul></div>
 <p>Ten presente que el retracto se cuenta en días corridos desde la recepción, no en días hábiles: no lo calcules excluyendo domingos ni feriados, o llegarás a una fecha posterior al vencimiento legal. La <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> sirve para otros plazos (contratos, despidos, feriados), pero no para este cómputo legal.</p>
 
 <h2>Cómo reclamar si la tienda no responde</h2>
@@ -942,7 +942,7 @@ export const ARTICULOS_2027: Article[] = [
 <li><strong>Confundir retracto con garantía.</strong> El retracto es para arrepentirse de una compra a distancia dentro de 10 días; la garantía es para productos defectuosos dentro de 6 meses. Requisitos y resultados distintos.</li>
 <li><strong>Exigir cambio por gusto en tienda física como derecho.</strong> No lo es: depende de la política voluntaria del comercio.</li>
 <li><strong>Aceptar el letrero "sin cambio ni devolución" para un producto fallado.</strong> No vale: la garantía legal rige igual, incluso en liquidaciones.</li>
-<li><strong>Pagar o aceptar que cobren por no tener la caja.</strong> El embalaje original no es requisito para la garantía legal (sí lo es, en buen estado, para el retracto).</li>
+<li><strong>Pagar o aceptar que cobren por no tener la caja.</strong> El embalaje original no es requisito para la garantía legal. Para el retracto sí se pide en buen estado, salvo que la tienda haya informado antes de la compra que cobraría el embalaje faltante y cuánto vale.</li>
 <li><strong>Dejar pasar los 10 días.</strong> En compras online el retracto vence rápido: la primera semana de enero es el momento de decidir.</li>
 </ul>
 
