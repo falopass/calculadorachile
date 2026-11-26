@@ -55,7 +55,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-iva': 'iva-boleta-honorarios-chile',
   'calculadora-boleta-honorarios': 'iva-boleta-honorarios-chile',
   'calculadora-operacion-renta': 'preparacion-operacion-renta-2027-checklist',
-  'calculadora-ppm': 'ppm-pagos-provisionales-mensuales-chile',
+  'calculadora-ppm': 'iva-boleta-honorarios-chile',
 
   // Vivienda (nueva guía pillar)
   'calculadora-credito-hipotecario': 'credito-hipotecario-chile',
@@ -70,7 +70,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   'calculadora-permiso-circulacion': 'vehiculos-chile-permiso-multas',
   'calculadora-multas-transito': 'vehiculos-chile-permiso-multas',
   'calculadora-costo-tag': 'vehiculos-chile-permiso-multas',
-  'calculadora-credito-automotriz': 'vehiculos-chile-permiso-multas',
+  'calculadora-credito-automotriz': 'credito-automotriz-chile',
 
   // Empresas
   'calculadora-patente-comercial': 'empresas-pymes-chile',
