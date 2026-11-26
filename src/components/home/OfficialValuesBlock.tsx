@@ -33,6 +33,9 @@ export default function OfficialValuesBlock({ initial }: { initial?: Partial<Liv
         day: '2-digit',
         month: 'short',
         year: 'numeric',
+        // Zona fija: SSR (UTC) y el navegador del visitante deben
+        // renderizar el mismo día o React detecta mismatch de hidratación.
+        timeZone: 'America/Santiago',
       });
     } catch {
       return 'fecha no disponible';
