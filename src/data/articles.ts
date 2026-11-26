@@ -30,12 +30,14 @@ import {
   UTM,
   APV_REGIMEN_B,
   IMPUESTO_SEGUNDA_CATEGORIA_2026,
+  PPM_PRESUNCION,
 } from '@/lib/values/constants';
 import { buildCvlistoBuscarTrabajoUrl, buildCvlistoContentUrl } from '@/lib/cvlisto';
 import { calculateSueldoLiquido } from '@/lib/calculations/sueldo-liquido';
 import { calculateSeguroCesantia } from '@/lib/calculations/seguro-cesantia';
 import { calculateSueldoPartTime } from '@/lib/calculations/sueldo-part-time';
 import { calculatePensionAlimenticia } from '@/lib/calculations/pension-alimenticia';
+import { calculatePPM } from '@/lib/calculations/ppm';
 import { articuloImpuestoSegundaCategoria } from './article-impuesto-segunda-categoria';
 import { ARTICULOS_2027 } from './articles-2027';
 
@@ -290,6 +292,26 @@ const filasPagosCesantia = (pagos: typeof CESANTIA_EJ_CIC.pagos) =>
     .join('\n');
 
 export const SUELDO_MINIMO_RESPUESTA_DIRECTA = `<p>El sueldo mínimo en Chile es de <strong>${formatCLP(INGRESO_MINIMO.mensual)} brutos al mes</strong> desde el ${formatFechaLarga(INGRESO_MINIMO.vigente_desde)} (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60141.html" target="_blank" rel="noopener">Ley ${INGRESO_MINIMO.ley}, Dirección del Trabajo</a>) y es el mismo monto para cada mes hasta el próximo reajuste. Con Fonasa y contrato indefinido quedan entre <strong>${liquidoSueldoMinimo('provida')}</strong> y <strong>${liquidoSueldoMinimo('uno')}</strong> líquidos, según tu AFP.</p>`;
+
+// Ejemplos editoriales de PPM: montos calculados con la misma función
+// de la calculadora (tasa honorarios del calendario Ley 21.133 y tasas
+// referenciales por actividad), nunca escritos a mano.
+const PPM_EJ_PROFESIONAL = calculatePPM({
+  ingresosBrutosAnuales: 12_000_000,
+  actividad: 'profesional',
+});
+const PPM_EJ_COMERCIO = calculatePPM({
+  ingresosBrutosAnuales: 24_000_000,
+  actividad: 'comercio',
+});
+const PPM_EJ_TRANSPORTE = calculatePPM({
+  ingresosBrutosAnuales: 18_000_000,
+  actividad: 'transporte',
+});
+const PPM_EJ_CONSTRUCCION = calculatePPM({
+  ingresosBrutosAnuales: 30_000_000,
+  actividad: 'construccion',
+});
 
 const articleCatalog: ArticleDraft[] = [
   articuloImpuestoSegundaCategoria,
@@ -7374,6 +7396,137 @@ ${tablaFcsHtml()}
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 24 de noviembre de 2026 con la <a href="https://www.chileatiende.gob.cl/fichas/62932-seguro-de-cesantia" target="_blank" rel="noopener">ficha del Seguro de Cesantía de ChileAtiende</a> (porcentajes 70/60/45/40/35/30%, cotizaciones mínimas y pagos de la CIC), la <a href="https://www.chileatiende.gob.cl/fichas/36646-fondo-de-cesantia-solidario" target="_blank" rel="noopener">ficha del Fondo de Cesantía Solidario</a> (requisitos y montos con piso/tope vigentes hasta el 28-02-2027 según Res. Ex. N°383 de la Superintendencia de Pensiones), la <a href="https://www.bcn.cl/leychile/navegar?idNorma=184979" target="_blank" rel="noopener">Ley 19.728</a> en Ley Chile y <a href="https://www.afc.cl/" target="_blank" rel="noopener">afc.cl</a>.</p>`,
+  },
+  {
+    slug: 'ppm-2026-calcular-independientes',
+    title: 'PPM 2026: qué son los Pagos Provisionales Mensuales y cómo calcularlos',
+    description: `Qué es el PPM, quién lo paga y cómo se calcula: tasa del ${tasaHonorarios(getRetencionHonorarios(2026))} para boletas de honorarios en 2026 y tasas referenciales por actividad, con ejemplos en pesos y plazos del Formulario 29.`,
+    date: '2026-11-25',
+    updatedAt: '2026-11-25',
+    category: 'impuestos',
+    readingTime: 7,
+    relatedGuia: 'iva-boleta-honorarios-chile',
+    embedCalculatorId: 'ppm',
+    seoTitle: 'PPM 2026: tasa, cálculo y plazos del F29 en Chile',
+    seoDescription: `El PPM son los pagos mensuales a cuenta del impuesto anual. En 2026 la tasa de honorarios es ${tasaHonorarios(getRetencionHonorarios(2026))}; comercio, transporte y construcción usan tasas referenciales. Ejemplos y plazos.`,
+    keywords: [
+      'ppm',
+      'pagos provisionales mensuales',
+      'ppm independientes',
+      'ppm sii',
+      'calcular ppm 2026',
+      'tasa ppm honorarios',
+    ],
+    relatedCalculators: [
+      'calculadora-ppm',
+      'calculadora-boleta-honorarios',
+      'calculadora-iva',
+    ],
+    faq: [
+      {
+        question: '¿Qué es el PPM en Chile?',
+        answer:
+          'Los Pagos Provisionales Mensuales son anticipos del impuesto anual a la renta que se declaran y pagan en el Formulario 29. En abril, en la Operación Renta, se restan del impuesto definitivo: si pagaste de más, el SII devuelve la diferencia.',
+      },
+      {
+        question: '¿Cuál es la tasa de PPM en 2026?',
+        answer: `Para boletas de honorarios la tasa es ${tasaHonorarios(getRetencionHonorarios(2026))} según el calendario de la Ley 21.133. Para primera categoría se usan tasas referenciales de 1% en comercio, 0,3% en transporte y 0,2% en construcción; la tasa exacta de cada actividad la fija el SII.`,
+      },
+      {
+        question: '¿Cuándo se paga el PPM?',
+        answer:
+          'En el Formulario 29, dentro del mes siguiente al período declarado. El plazo general es el día 12; llega al día 20 para quienes declaran y pagan por internet cumpliendo los requisitos del SII.',
+      },
+      {
+        question: '¿Se puede suspender o variar el PPM?',
+        answer:
+          'Sí. Si estimas que tu renta anual será menor a la proyectada, puedes pedir al SII una variación o suspensión del PPM, fundamentando con antecedentes. El SII acepta o rechaza la solicitud.',
+      },
+      {
+        question: '¿Qué pasa si no pago el PPM?',
+        answer:
+          'Se generan intereses y multas, y en la Operación Renta tendrás que pagar el impuesto completo de una vez porque no tendrás los abonos mensuales.',
+      },
+    ],
+    sources: [
+      {
+        label: 'SII — Base imponible de los PPM',
+        url: 'https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm',
+      },
+      {
+        label: 'SII — Guía del Formulario 29',
+        url: 'https://www.sii.cl/pagina/iva/guia_f29.htm',
+      },
+      {
+        label: 'SII — Plazos para declarar y pagar el Formulario 29',
+        url: 'https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm',
+      },
+      {
+        label: 'SII — Profesionales y trabajadores independientes',
+        url: 'https://www.sii.cl/siieduca/aprende-con-nosotros/contribuyentes-de-tipo-profesionales-y-trabajadores-independientes.html',
+      },
+      {
+        label: 'BCN — Ley 21.133 (calendario de retención de honorarios)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1128420',
+      },
+    ],
+    content: `<p class="article-lead">El <strong>PPM</strong> (Pago Provisional Mensual) es un anticipo del impuesto anual a la renta que se declara y paga cada mes en el <strong>Formulario 29</strong>. Para una boleta de honorarios emitida en 2026 la tasa es <strong>${tasaHonorarios(getRetencionHonorarios(2026))}</strong>; para primera categoría se usan tasas referenciales de <strong>1% en comercio, 0,3% en transporte y 0,2% en construcción</strong>. Todo lo pagado durante el año se descuenta del impuesto definitivo en la Operación Renta de abril.</p>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Importante</strong><p>Este artículo es informativo y no es asesoría tributaria. Las tasas de primera categoría son referencias usadas por la calculadora: la tasa exacta de cada actividad la fija el SII por resolución y puede cambiar año a año, así que confírmala en sii.cl antes de declarar.</p></div></aside>
+
+<p>Para una estimación inmediata usa la <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> embebida arriba: ingresas tus ingresos brutos anuales sin IVA y tu actividad, y obtiene el PPM anual y su promedio mensual.</p>
+
+<h2>Qué son los PPM y para qué existen</h2>
+<p>Los Pagos Provisionales Mensuales son <strong>pagos a cuenta</strong>: en vez de pagar todo el impuesto a la renta una vez al año en abril, el contribuyente va abonando mes a mes una fracción calculada sobre sus ingresos. En la Operación Renta el SII calcula el impuesto real del año y le resta los PPM ya pagados: si pagaste de más, hay devolución; si pagaste de menos, se paga la diferencia.</p>
+<p>El mecanismo cumple dos funciones: le ordena el flujo de caja al contribuyente (nunca enfrenta un solo pago gigante) y le asegura al fisco un ingreso mensual. Por eso la obligación no es opcional mientras estés en el régimen que corresponde: no pagar el PPM genera <strong>intereses y multas</strong>, y en abril no tendrás abonos que restar del impuesto anual.</p>
+
+<h2>Tasas de PPM en 2026</h2>
+<p>La tasa depende de la actividad y del régimen:</p>
+<table><thead><tr><th>Actividad / régimen</th><th>Tasa 2026</th><th>Base legal</th></tr></thead><tbody>
+<tr><td>Honorarios e independientes (2ª categoría)</td><td>${tasaHonorarios(getRetencionHonorarios(2026))}</td><td>Calendario de retención, Ley 21.133</td></tr>
+<tr><td>Comercio (1ª categoría)</td><td>1% referencial</td><td>Tasa que fija el SII por actividad</td></tr>
+<tr><td>Transporte</td><td>0,3% referencial</td><td>Tasa que fija el SII por actividad</td></tr>
+<tr><td>Construcción</td><td>0,2% referencial</td><td>Tasa que fija el SII por actividad</td></tr>
+</tbody></table>
+<p>La tasa de honorarios sube un tramo cada año por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133</a>: fue 14,5% en 2025, es <strong>${tasaHonorarios(getRetencionHonorarios(2026))} en 2026</strong> y llegará a ${tasaHonorarios(getRetencionHonorarios(2027))} en 2027 y 17% en 2028. Las tasas de primera categoría señaladas son las referencias que usa la calculadora; el porcentaje aplicable exacto lo determina el SII según tu actividad, y los contribuyentes del régimen Pro Pyme general tributan con una tasa de PPM del 0,2% sobre los ingresos brutos.</p>
+
+<h2>Ejemplos de cálculo en pesos</h2>
+<div class="numeric-example"><div class="numeric-example__title">PPM anual y promedio mensual por actividad</div><ul>
+<li>Profesional con $12.000.000 de honorarios brutos al ${tasaHonorarios(PPM_EJ_PROFESIONAL.tasaPPM)} → PPM anual ${formatCLP(PPM_EJ_PROFESIONAL.ppmAnual)}, promedio mensual ${formatCLP(PPM_EJ_PROFESIONAL.ppmMensual)}</li>
+<li>Comercio con $24.000.000 al 1% → PPM anual ${formatCLP(PPM_EJ_COMERCIO.ppmAnual)}, promedio mensual ${formatCLP(PPM_EJ_COMERCIO.ppmMensual)}</li>
+<li>Transporte con $18.000.000 al 0,3% → PPM anual ${formatCLP(PPM_EJ_TRANSPORTE.ppmAnual)}, promedio mensual ${formatCLP(PPM_EJ_TRANSPORTE.ppmMensual)}</li>
+<li>Construcción con $30.000.000 al 0,2% → PPM anual ${formatCLP(PPM_EJ_CONSTRUCCION.ppmAnual)}, promedio mensual ${formatCLP(PPM_EJ_CONSTRUCCION.ppmMensual)}</li></ul>
+<span class="total">La base es siempre el ingreso bruto sin IVA, sin deducir gastos</span></div>
+<p>La cuenta es simple: <strong>ingresos brutos × tasa</strong>. Lo que no es simple es la base —se declaran los ingresos brutos del mes sin IVA y sin deducir gastos— ni la tasa exacta de tu actividad, que conviene confirmar en el SII antes de presentar el F29.</p>
+
+<h2>Quién lo paga y cuándo vence</h2>
+<p>Pagan PPM los contribuyentes de primera categoría (empresas y personas con negocio) y los de segunda categoría cuando nadie les retiene —por ejemplo, el profesional que emite boleta a una <strong>persona natural</strong>, caso en que él mismo declara y paga el PPM en su F29 con la misma tasa del año. Cuando la boleta va a una empresa u otro obligado a retener, es el pagador quien retiene y entera el monto al fisco.</p>
+<p>El pago se hace en el Formulario 29 dentro del mes siguiente al período declarado: la regla general es hasta el <strong>día 12</strong>, y el plazo se extiende hasta el <strong>día 20</strong> para facturadores electrónicos y emisores de boleta electrónica que declaran y pagan en sii.cl. Los fines de semana y feriados corren el vencimiento al día hábil siguiente; el calendario mensual del SII publica la fecha exacta de cada período.</p>
+
+<h2>PPM y retención de honorarios: no son dos cobros</h2>
+<p>Una confusión frecuente es pensar que la retención de la boleta y el PPM son impuestos distintos. Son <strong>el mismo anticipo por dos vías</strong>: si el pagador retuvo, esa retención es tu pago provisional; si nadie retuvo (boleta a persona natural), tú declaras el PPM por tu cuenta en el F29. En ambos casos el monto se abona al impuesto anual de segunda categoría en abril. Para el detalle de la retención del año —${tasaHonorarios(getRetencionHonorarios(2026))} en 2026— está la nota <a href="/blog/boleta-honorarios-retencion-15-25-2026">boleta de honorarios: retención ${tasaHonorarios(getRetencionHonorarios(2026))} en 2026</a>.</p>
+<p>Ojo con otro punto: el impuesto anual se calcula sobre la renta después de gastos. El profesional que no declara gastos efectivos puede deducir el <strong>${PPM_PRESUNCION.porcentaje}% de presunción de gastos</strong> con tope de ${PPM_PRESUNCION.tope_uta} UTA (art. 50 de la Ley de Impuesto a la Renta), lo que suele dejar el impuesto final por debajo de lo retenido durante el año —la razón por la que muchos independientes reciben devolución cada abril.</p>
+
+<h2>Cómo variar o suspender el PPM</h2>
+<p>Si tus ingresos del año van a ser menores a lo proyectado —por ejemplo, dejaste de emitir boletas o la empresa bajó sus ventas— puedes pedir al SII una <strong>variación del PPM</strong> para bajar o suspender los pagos. La solicitud se fundamenta con antecedentes (declaraciones, presupuestos, contratos) y el SII acepta o rechaza. No es automático: mientras no haya resolución, el PPM sigue venciendo con la tasa vigente.</p>
+
+<h2>En la Operación Renta: de abono a saldo final</h2>
+<p>En abril se declara el impuesto definitivo del año anterior. El F22 liquida el impuesto real y le resta todos los PPM y retenciones del año: si abonaste más que el impuesto, el SII <strong>devuelve</strong> la diferencia en mayo; si pagaste menos, pagas el saldo. Por eso el PPM no es un "impuesto extra": es el mismo impuesto pagado por adelantado.</p>
+
+<h2>Errores comunes con el PPM</h2>
+<ul>
+<li><strong>Confundir la tasa de honorarios con la del año anterior:</strong> el calendario sube cada año; en 2026 es ${tasaHonorarios(getRetencionHonorarios(2026))}, no 14,5%.</li>
+<li><strong>Declarar sobre el líquido:</strong> la base es el ingreso bruto sin IVA, antes de cualquier descuento de cotizaciones.</li>
+<li><strong>Creer que boleta a persona natural no paga:</strong> el emisor declara y paga el PPM en su propio F29 cuando nadie le retiene.</li>
+<li><strong>Olvidar el plazo:</strong> el F29 vence cada mes, aunque el monto sea cero —declarar fuera de plazo genera multa.</li>
+<li><strong>Asumir la tasa referencial como definitiva:</strong> la calculadora usa 1%, 0,3% y 0,2% como referencia; la tasa aplicable la confirma el SII.</li>
+</ul>
+
+<h2>Para estimar tu PPM</h2>
+<p>La <a href="/calculadoras/calculadora-ppm">calculadora de PPM</a> entrega el abono anual y su promedio mensual según actividad. Para entender cómo se cruza con la retención de boletas y el IVA mensual, revisa la <a href="/guias/iva-boleta-honorarios-chile">guía de IVA y boleta de honorarios</a>, y para el pago mes a mes del IVA y otros impuestos, la nota <a href="/blog/formulario-29-iva-mensual-plazos-2026">Formulario 29: plazos de IVA mensual 2026</a>.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 25 de noviembre de 2026 con las <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1908.htm" target="_blank" rel="noopener">preguntas frecuentes del SII sobre la base imponible de los PPM</a>, la <a href="https://www.sii.cl/pagina/iva/guia_f29.htm" target="_blank" rel="noopener">guía del Formulario 29</a>, los <a href="https://www.sii.cl/preguntas_frecuentes/impuestos_mensuales/001_130_1060.htm" target="_blank" rel="noopener">plazos del F29</a>, la <a href="https://www.sii.cl/siieduca/aprende-con-nosotros/contribuyentes-de-tipo-profesionales-y-trabajadores-independientes.html" target="_blank" rel="noopener">página del SII sobre profesionales e independientes</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133 en Ley Chile</a>.</p>`,
   },
   // Carril contenido 2027 (src/data/articles-2027.ts)
   ...ARTICULOS_2027,
