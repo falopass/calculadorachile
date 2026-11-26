@@ -956,7 +956,7 @@ const articleCatalog: ArticleDraft[] = [
 <li><strong>Jueves 31 de diciembre:</strong> feriado bancario. Sin atención presencial; para el resto de actividades es un día hábil.</li>
 <li><strong>Viernes 1 de enero de 2027:</strong> feriado legal e irrenunciable para el comercio.</li>
 </ul>
-<p>En la práctica, la ventana para resolver asuntos presenciales antes de que cambie el año son solo esos tres días: lunes 28, martes 29 y miércoles 30. Una precisión: la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> descuenta solo feriados legales generales y fines de semana, por lo que el 31 de diciembre lo cuenta como hábil —correcto para plazos administrativos y judiciales, que el cierre bancario no suspende—. Para la ventana de atención presencial bancaria, la regla es la de esta lista: ventanilla hasta el miércoles 30.</p>
+<p>En la práctica, la ventana para resolver asuntos presenciales antes de que cambie el año son solo esos tres días: lunes 28, martes 29 y miércoles 30. Una precisión: la <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> descuenta los feriados legales generales —y los sábados solo en el cómputo administrativo/laboral; en el judicial el sábado no feriado sí cuenta—, por lo que el 31 de diciembre lo cuenta como hábil en ambos modos —correcto para plazos administrativos y judiciales, que el cierre bancario no suspende—. Para la ventana de atención presencial bancaria, la regla es la de esta lista: ventanilla hasta el miércoles 30.</p>
 
 <h2>Qué trámites conviene cerrar antes del 30 de diciembre</h2>
 <p>Todo lo que exige una sucursal abierta o un ejecutivo tiene fecha de vencimiento efectiva el miércoles 30. Los casos más frecuentes:</p>
