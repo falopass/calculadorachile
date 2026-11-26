@@ -1217,4 +1217,120 @@ export const ARTICULOS_2027: Article[] = [
       { label: 'Servicio de Impuestos Internos', url: 'https://www.sii.cl' },
     ],
   },
+  {
+    slug: 'feriado-judicial-febrero-2027',
+    embedCalculatorId: 'dias-habiles',
+    title: 'Feriado judicial en febrero de 2027: ya no existe, los tribunales funcionan y los plazos corren normal',
+    description:
+      'El feriado judicial fue suprimido por la Ley 20.774 y no aplica desde febrero de 2015. En febrero de 2027 los tribunales funcionan, los plazos civiles, laborales y penales corren con normalidad y el juez puede estar de vacaciones sin que eso suspenda tu causa.',
+    date: '2026-11-26',
+    category: 'laboral',
+    readingTime: 8,
+    relatedGuia: 'feriados-chile-2027',
+    seoTitle: 'Feriado judicial febrero 2027: fue suprimido, los plazos corren',
+    seoDescription:
+      'No hay feriado judicial en febrero de 2027: la Ley 20.774 lo eliminó en 2014. Los tribunales funcionan y los plazos procesales corren todo el mes. Qué cambió y qué revisar si tienes causa.',
+    keywords: [
+      'feriado judicial febrero 2027',
+      'feriado judicial 2027 chile',
+      'hay feriado judicial en febrero',
+      'plazos judiciales febrero',
+      'tribunales cierran en febrero',
+      'ley 20.774 feriado judicial',
+    ],
+    relatedCalculators: [
+      'calculadora-dias-habiles',
+      'calculadora-dias-administrativos',
+      'calculadora-trabajo-en-feriado',
+    ],
+    faq: [
+      {
+        question: '¿Hay feriado judicial en febrero de 2027?',
+        answer:
+          'No. El feriado judicial fue suprimido por la Ley 20.774, publicada en el Diario Oficial el 4 de septiembre de 2014, y dejó de aplicarse en febrero de 2015. Desde entonces, todos los tribunales del país funcionan durante febrero y los plazos procesales corren con normalidad.',
+      },
+      {
+        question: '¿Los plazos judiciales se suspenden en febrero?',
+        answer:
+          'No. Desde 2015 los plazos corren todo el año, incluido febrero. En juicios civiles se excluyen solo los feriados legales (domingos y festivos; los sábados cuentan como hábiles según el art. 66 del Código de Procedimiento Civil), y febrero de 2027 no tiene feriados legales nacionales. Un plazo fatal que venza en febrero se pierde igual que en cualquier otro mes.',
+      },
+      {
+        question: '¿Los tribunales cierran en febrero?',
+        answer:
+          'No cierran. Los juzgados de letras tramitan causas todo el mes y la Corte Suprema puede dictar cada diciembre un auto acordado que determina cuántas salas suyas y de las Cortes de Apelaciones operan en febrero siguiente (art. 315 del Código Orgánico de Tribunales). Lo que sí ocurre es que jueces y funcionarios toman su feriado anual de un mes durante el año, muchas veces en verano, por lo que la atención puede ser más lenta.',
+      },
+      {
+        question: '¿El feriado judicial afecta mi sueldo o mis vacaciones como trabajador?',
+        answer:
+          'No. El feriado judicial nunca fue un feriado laboral: era un receso interno del Poder Judicial. Como trabajador, febrero es un mes normal: tu feriado legal de 15 días hábiles se rige por el Código del Trabajo y no tiene relación con el calendario de los tribunales.',
+      },
+      {
+        question: '¿La Tesorería también tiene feriado en febrero?',
+        answer:
+          'Es una institución distinta con un régimen propio: la Tesorería General de la República publica en tgr.cl su calendario de atención y de plazos de pago de febrero (contribuciones, multas, patentes). Ese régimen no depende del Poder Judicial ni del feriado judicial.',
+      },
+    ],
+    content: `<p class="article-lead">Si buscas si hay <strong>feriado judicial en febrero de 2027</strong>, la respuesta directa es <strong>no</strong>: ese receso fue suprimido por la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1064893" target="_blank" rel="noopener">Ley 20.774</a> y dejó de aplicarse en febrero de 2015. En febrero de 2027 los tribunales de todo el país funcionan, las causas se tramitan y los plazos procesales corren con normalidad, incluidos los plazos fatales que pueden cerrar un recurso para siempre.</p>
+<p>Este artículo explica qué era el feriado judicial, qué cambió la Ley 20.774, cómo se cuentan los plazos durante febrero y qué revisar si tienes una causa abierta o un trámite en un tribunal. Fecha de corte: 26 de noviembre de 2026. No cubre el régimen de atención de la Tesorería General de la República en febrero, que es una norma distinta y también se menciona al final.</p>
+
+<h2>El feriado judicial fue suprimido: qué hizo la Ley 20.774</h2>
+<p>Hasta 2014, febrero era un mes de receso casi total para parte del sistema judicial. La <a href="https://obtienearchivo.bcn.cl/obtienearchivo?id=recursoslegales%2F10221.3%2F44980%2F2%2FFicha_feriado_judicial.pdf" target="_blank" rel="noopener">ficha de la Biblioteca del Congreso Nacional</a> lo describe así: la Corte Suprema y las Cortes de Apelaciones funcionaban solo con las llamadas "salas de verano", los juzgados de letras con competencia civil suspendían su funcionamiento y magistrados y funcionarios tomaban vacaciones durante todo el mes. Los tribunales de garantía, los orales en lo penal y los de familia, trabajo, tributarios y ambientales ya estaban excluidos y seguían operando.</p>
+<p>La <a href="https://www.bcn.cl/leychile/navegar?idNorma=1064893" target="_blank" rel="noopener">Ley 20.774</a>, publicada en el Diario Oficial el 4 de septiembre de 2014, terminó con ese esquema. Su objeto declarado en el propio texto es "dar continuidad al servicio de administración de justicia en todos los tribunales ordinarios del país": a partir de febrero de 2015 el feriado judicial ya no se aplica en <strong>ningún</strong> tribunal del Poder Judicial. Los juzgados civiles deben seguir tramitando las causas durante febrero.</p>
+<p>La reforma nació de un diagnóstico conocido: febrero concentraba el receso justo cuando no todos los servicios podían detenerse. Ya antes de 2015 la justicia penal —tribunales de garantía y orales en lo penal— funcionaba todo el mes, igual que los Tribunales de Familia, del Trabajo, Tributarios y Aduaneros y Ambientales, porque sus propias leyes los habían excluido del feriado. Lo que la Ley 20.774 hizo fue extender esa continuidad a la Corte Suprema, las Cortes de Apelaciones y los juzgados de letras con competencia civil, que eran los que aún se tomaban el mes.</p>
+<p>La ley también reordenó las vacaciones del personal judicial. El artículo 313 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=25563" target="_blank" rel="noopener">Código Orgánico de Tribunales</a> quedó con un "feriado anual de un mes" para jueces y funcionarios, pero ya no amarrado a febrero: pueden tomarlo en cualquier época del año e incluso dividirlo. Para que las vacaciones no dejen tribunales desguarnecidos, el juez y el secretario de un mismo juzgado de letras no pueden tomar feriado al mismo tiempo, y tampoco pueden hacerlo simultáneamente dos o más miembros de un tribunal colegiado ni dos o más jueces de una misma comuna o agrupación de comunas cuando eso perjudique el servicio.</p>
+
+<h2>Plazos en febrero de 2027: corren normal</h2>
+<p>Este es el punto que más daño hace cuando se confunde. Como ya no existe feriado judicial, <strong>ningún plazo judicial o administrativo se suspende por el solo hecho de ser febrero</strong>. Un vencimiento que cae en febrero de 2027 se pierde igual que uno de junio.</p>
+<ul>
+<li><strong>Juicios civiles.</strong> Los plazos de días se suspenden solo en feriados legales —salvo que el tribunal ordene expresamente contarlos, como permite la misma norma— (art. 66 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=22740" target="_blank" rel="noopener">Código de Procedimiento Civil</a>): se excluyen domingos y festivos, y los sábados cuentan como hábiles. Los plazos fatales (art. 64) no se perdonan: vencido el plazo, se pierde el recurso.</li>
+<li><strong>Juicios laborales.</strong> El Código del Trabajo lo regula expresamente: los términos de días del procedimiento laboral se suspenden durante los feriados (art. 435 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>), con el mismo cómputo de lunes a sábado.</li>
+<li><strong>Juicios de familia.</strong> Aplican la regla civil en forma supletoria: los plazos de días corren de lunes a sábado excluyendo feriados.</li>
+<li><strong>Juicios penales.</strong> Todos los días son hábiles para los plazos (art. 14 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=176595" target="_blank" rel="noopener">Código Procesal Penal</a>); solo si el último día cae en feriado se amplía al siguiente hábil.</li>
+<li><strong>Procedimientos administrativos.</strong> Se rigen por la Ley 19.880, que excluye sábados, domingos y festivos. Tampoco reconocen febrero como mes especial.</li>
+</ul>
+<p>Y aquí el dato práctico para 2027: febrero <strong>no tiene ningún feriado legal nacional</strong> en Chile. Los 28 días del mes son computables según la regla de cada procedimiento, sin interrupción de mitad de mes ni "salas de verano". El calendario completo de feriados del año está en la <a href="/guias/feriados-chile-2027">guía de feriados de Chile 2027</a>.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: plazo civil de 5 días notificado en enero</div><ul><li>Una parte es notificada de una resolución el jueves 28 de enero de 2027 con un plazo de 5 días.</li><li>El plazo corre desde el día siguiente: viernes 29, sábado 30, lunes 1, martes 2 y miércoles 3 de febrero (domingo 31 se excluye como feriado legal).</li><li>Vence a la medianoche del <strong>miércoles 3 de febrero de 2027</strong>. Que el juez esté de vacaciones o que "antes había feriado judicial" no lo extiende.</li></ul></div>
+
+<h2>Lo que sí sigue existiendo en febrero</h2>
+<p>Que el feriado judicial se haya eliminado no significa que febrero sea un mes idéntico a los demás dentro del Poder Judicial. Tres cosas continúan:</p>
+<p><strong>Salas habilitadas por auto acordado.</strong> El artículo 315 del Código Orgánico de Tribunales habilita a la Corte Suprema a dictar cada diciembre un auto acordado que determina cuántas salas suyas y de las Cortes de Apelaciones funcionarán en febrero siguiente. Esas salas pueden conocer de las apelaciones en que otra sala haya decretado orden de no innovar. Los autos acordados se publican en el compendio de la Corte Suprema (<a href="https://autoacordados.pjud.cl/" target="_blank" rel="noopener">autoacordados.pjud.cl</a>); si se dicta uno para febrero de 2027, corresponde a diciembre de 2026.</p>
+<p><strong>Vacaciones del personal.</strong> Muchos jueces y funcionarios siguen tomando su mes de feriado anual en verano por costumbre y por calendario escolar. En la práctica eso puede hacer algunos trámites más lentos o cambiar al juez que ve tu causa (el secretario subroga), pero no suspende plazos ni cierra la repartición.</p>
+<p><strong>Audiencias y resoluciones programadas.</strong> La agenda de febrero se llena igual que la de otros meses: los juzgados pueden fijar audiencias, dictar resoluciones y practicar notificaciones. Si te citan a una audiencia en febrero, la inasistencia tiene las mismas consecuencias que en cualquier mes.</p>
+<p><strong>Suspensión del procedimiento de común acuerdo.</strong> La propia Ley 20.774 dejó una válvula distinta al feriado: las partes de un juicio civil pueden suspender el procedimiento de común acuerdo hasta dos veces por instancia, con un máximo de 90 días en cada instancia, y también ante la Corte Suprema si hay recursos de queja o casación pendientes. Es una suspensión pactada y formal —no automática por calendario— y se pide al tribunal.</p>
+
+<h2>Si tienes una causa o trámite en febrero de 2027</h2>
+<ol class="steps">
+<li><strong>Asume que el tribunal está abierto.</strong> Revisa tu causa en la Oficina Judicial Virtual (oficinajudicial.pjud.cl) como cualquier otro mes: las notificaciones y resoluciones se emiten igual.</li>
+<li><strong>Recomputa tus vencimientos sin contar febrero como suspendido.</strong> La <a href="/calculadoras/calculadora-dias-habiles">calculadora de días hábiles</a> descuenta feriados y, si activas la opción de cómputo judicial ("¿Contar los sábados como días hábiles?"), cuenta de lunes a sábado; para plazos fatales o procesales, confirma el cómputo con tu abogado porque cada procedimiento tiene reglas propias.</li>
+<li><strong>Si tu abogado está de vacaciones, el plazo corre igual.</strong> El feriado del profesional no detiene el cómputo; coordina reemplazo o revisión del expediente antes de enero.</li>
+<li><strong>Para trámites ante la Tesorería, revisa su calendario aparte.</strong> La TGR publica en tgr.cl su propio régimen de atención y plazos de febrero; confunde mucho porque se le llama también "feriado", pero es otra institución y otra norma.</li>
+</ol>
+
+<h2>Distinciones que se confunden en la búsqueda</h2>
+<p><strong>No es un feriado laboral.</strong> El feriado judicial nunca fue un día de descanso para trabajadores: era un receso interno de los tribunales. Si trabajas en comercio o cualquier empresa, febrero es un mes hábil normal. Tu feriado legal de vacaciones (15 días hábiles por año trabajado) es una institución del Código del Trabajo y no se toca aquí.</p>
+<p><strong>No es el feriado bancario.</strong> El 31 de diciembre los bancos no atienden por la Ley 21.791, una regla anual de un solo día. No tiene relación con febrero ni con los tribunales.</p>
+<p><strong>No es el régimen de la Tesorería.</strong> La TGR rige su atención y sus plazos de pago de febrero por una norma propia (contribuciones, patentes, multas). Si tu trámite es tributario o municipal, la referencia es tgr.cl, no el Poder Judicial.</p>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Dejar un recurso "para marzo porque en febrero no corre".</strong> Corre desde 2015: un plazo fatal perdido en febrero no tiene vuelta.</li>
+<li><strong>Creer que la causa se congela si el juez está de vacaciones.</strong> El secretario subroga y la tramitación continúa; las notificaciones siguen llegando.</li>
+<li><strong>Mezclar febrero judicial con el régimen de Tesorería.</strong> Son normas distintas: los tribunales no suspenden; lo que la TGR disponga para febrero se publica aparte en tgr.cl.</li>
+<li><strong>Descontar sábados al contar plazos civiles.</strong> En procedimiento civil y laboral el sábado es día hábil para el cómputo; solo se excluyen domingos y festivos.</li>
+</ul>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 26 de noviembre de 2026 con el texto vigente de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1064893" target="_blank" rel="noopener">Ley 20.774</a> (que suprime el feriado judicial), los artículos 313 y 315 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=25563" target="_blank" rel="noopener">Código Orgánico de Tribunales</a>, los artículos 64 y 66 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=22740" target="_blank" rel="noopener">Código de Procedimiento Civil</a>, el artículo 14 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=176595" target="_blank" rel="noopener">Código Procesal Penal</a>, la <a href="https://obtienearchivo.bcn.cl/obtienearchivo?id=recursoslegales%2F10221.3%2F44980%2F2%2FFicha_feriado_judicial.pdf" target="_blank" rel="noopener">ficha "Fin del feriado judicial" de la BCN</a> y el <a href="https://autoacordados.pjud.cl/" target="_blank" rel="noopener">compendio de autos acordados de la Corte Suprema</a>.</p>
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo. El cómputo exacto de un plazo depende del procedimiento y de la resolución que lo fija; confirma siempre el vencimiento en tu expediente o con un abogado antes de actuar.</p></div></aside>
+<p>Para el resto del calendario del año —feriados nacionales, irrenunciables y fines de semana largos— revisa la <a href="/guias/feriados-chile-2027">guía de feriados de Chile 2027</a>.</p>`,
+    sources: [
+      { label: 'Ley Chile — Ley 20.774 (suprime feriado judicial)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=1064893' },
+      { label: 'Ley Chile — Código Orgánico de Tribunales (arts. 313 y 315)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=25563' },
+      { label: 'Ley Chile — Código de Procedimiento Civil (arts. 64 y 66)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=22740' },
+      { label: 'Ley Chile — Código Procesal Penal (art. 14)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=176595' },
+      { label: 'Ley Chile — Código del Trabajo (art. 435)', url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436' },
+      { label: 'BCN — Ficha: Fin del feriado judicial', url: 'https://obtienearchivo.bcn.cl/obtienearchivo?id=recursoslegales%2F10221.3%2F44980%2F2%2FFicha_feriado_judicial.pdf' },
+      { label: 'Corte Suprema — Compendio de autos acordados', url: 'https://autoacordados.pjud.cl/' },
+    ],
+  },
 ];

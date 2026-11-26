@@ -174,6 +174,7 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Costo de viajar en auto en verano (bencina, peajes, TAG) | ~~`cuanto-cuesta-viajar-en-auto-verano-bencina-peajes-tag`~~ | publicado 2026-11-17 | vehículos | 2026-11-17 | dic–feb | ✅ |
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 | — | blog | Feriado irrenunciable 1 de enero 2027 | ~~`feriado-irrenunciable-1-enero-2027`~~ | publicado 2026-11-26 · investigación Navidad/Año Nuevo | laboral | 2026-11-26 | dic–ene | ✅ |
+| — | blog | Feriado judicial febrero 2027 (suprimido, plazos corren) | ~~`feriado-judicial-febrero-2027`~~ | publicado 2026-11-26 · investigación vacaciones verano | laboral | 2026-11-26 | ene–feb | ✅ |
 
 **Conteo pendientes:** 19 filas activas, sin las filas marcadas como publicadas.
 
