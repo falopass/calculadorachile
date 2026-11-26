@@ -7,7 +7,6 @@ import PopularCalculators from '@/components/home/PopularCalculators';
 import CategoryCatalog from '@/components/home/CategoryCatalog';
 import TrustMethodSection from '@/components/home/TrustMethodSection';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { getCurrentValues } from '@/lib/api/current-values';
 import { SITE_URL } from '@/lib/site';
 
 /**
@@ -57,25 +56,14 @@ export const metadata: Metadata = {
 // Mismo TTL que /api/values y las páginas de calculadora.
 export const revalidate = 3600;
 
-export default async function HomePage() {
-  // SSR seed: la misma estrategia de /api/values (BCentral → Mindicador →
-  // snapshot), así el HTML pre-hidratación ya muestra el valor del día y
-  // no el snapshot empaquetado en el build.
-  const { values } = await getCurrentValues();
+export default function HomePage() {
+  // Sin SSR seed de valores: el bloque hidrata en vivo desde /api/values
+  // (el hook ya maneja el anti-retroceso de UF). Fetch a fuentes corre
+  // solo en contexto dinámico de route handlers; en un render estático
+  // ISR los fetch `no-store` marcarían la página como dinámica.
   return (
     <>
-      <OfficialValuesBlock
-        initial={{
-          uf: values.uf,
-          utm: values.utm,
-          dolar: values.dolar,
-          euro: values.euro,
-          lastUpdated: values.updatedAt,
-          ufFecha: values.ufFecha,
-          source: values.source,
-          freshness: values.freshness,
-        }}
-      />
+      <OfficialValuesBlock />
       <SearchHero
         calculators={discoverableCalculators.map(({ id, slug, name, description, keywords }) => ({
           id,

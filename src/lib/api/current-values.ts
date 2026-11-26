@@ -144,8 +144,16 @@ export function fechaIndicadorSantiago(date: string | undefined): string | undef
  * El prerender solo usa el snapshot: Next espera las revalidaciones del
  * fetch-cache aunque la aplicación ya haya devuelto el respaldo.
  */
-export async function getCurrentValues(): Promise<CurrentValues> {
-  const useLiveSources = process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD;
+export async function getCurrentValues(
+  opts: { live?: boolean } = {},
+): Promise<CurrentValues> {
+  // En un render estático ISR los fetch a las fuentes no corren en vivo
+  // (Next los enruta al Data Cache, que en el Worker caía a respaldo):
+  // las páginas prerenderizadas quedan con el snapshot y el cliente
+  // hidrata desde /api/values. Los route handlers (`live: true`, contexto
+  // dinámico) sí consultan las fuentes en cada request.
+  const useLiveSources =
+    (opts.live ?? false) && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD;
   const bcentral = useLiveSources
     ? await fetchAllCurrentValues().catch((error) => {
         console.error('[/api/values] BCentral error:', error);
