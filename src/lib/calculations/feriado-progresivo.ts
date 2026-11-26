@@ -22,6 +22,8 @@ import type { CalculatorResult } from '@/types/calculator';
 
 /** Días hábiles de feriado anual básico (art. 67). */
 export const FERIADO_ANUAL_BASE = 15;
+/** Días hábiles de feriado anual en Magallanes, Aysén y Palena (art. 67). */
+export const FERIADO_ANUAL_BASE_AUSTRAL = 20;
 /** Años trabajados necesarios para empezar a generar días progresivos. */
 export const ANIOS_BASE_FERIADO_PROGRESIVO = 10;
 /** Años nuevos con el empleador actual por cada día adicional. */
@@ -42,6 +44,12 @@ export interface FeriadoProgresivoInput {
    * progresivos si se indemnizan.
    */
   sueldoBruto?: number;
+  /**
+   * Opcional. true si el trabajo se desempeña en Magallanes, Aysén o la
+   * provincia de Palena: el feriado anual básico es de 20 días hábiles
+   * (art. 67) en vez de 15.
+   */
+  regionAustral?: boolean;
 }
 
 export interface FeriadoProgresivoResult {
@@ -55,7 +63,9 @@ export interface FeriadoProgresivoResult {
   aniosNuevosEmpleador: number;
   /** Días hábiles adicionales por año. */
   diasProgresivos: number;
-  /** 15 + días progresivos. */
+  /** Feriado anual básico aplicado (15, o 20 en zona austral). */
+  feriadoAnualBase: number;
+  /** feriadoAnualBase + días progresivos. */
   feriadoAnualTotal: number;
   /** Años que faltan para el próximo día progresivo (0 si cumple 3 exactos). */
   aniosParaProximoDia: number;
@@ -75,14 +85,27 @@ export function calculateFeriadoProgresivo(input: FeriadoProgresivoInput): Feria
   const aniosRestantesBase = Math.max(0, ANIOS_BASE_FERIADO_PROGRESIVO - aniosAnterioresContables);
   const aniosNuevosEmpleador = Math.max(0, aniosActual - aniosRestantesBase);
   const diasProgresivos = Math.floor(aniosNuevosEmpleador / ANIOS_POR_DIA_PROGRESIVO);
-  const feriadoAnualTotal = FERIADO_ANUAL_BASE + diasProgresivos;
+  const feriadoAnualBase = input.regionAustral ? FERIADO_ANUAL_BASE_AUSTRAL : FERIADO_ANUAL_BASE;
+  const feriadoAnualTotal = feriadoAnualBase + diasProgresivos;
 
+  // Si aún falta para la base de 10 años, el próximo día exige además
+  // completar un período de 3 años nuevos con el empleador actual.
+  const aniosPendientesBase = Math.max(
+    0,
+    ANIOS_BASE_FERIADO_PROGRESIVO - aniosAnterioresContables - aniosActual,
+  );
   const resto = aniosNuevosEmpleador % ANIOS_POR_DIA_PROGRESIVO;
   const aniosParaProximoDia =
-    resto === 0 ? ANIOS_POR_DIA_PROGRESIVO : ANIOS_POR_DIA_PROGRESIVO - resto;
+    aniosPendientesBase > 0
+      ? aniosPendientesBase + ANIOS_POR_DIA_PROGRESIVO
+      : resto === 0
+        ? ANIOS_POR_DIA_PROGRESIVO
+        : ANIOS_POR_DIA_PROGRESIVO - resto;
 
   const valorDiaFeriado = sueldo > 0 ? Math.round(sueldo / 30) : 0;
-  const montoDiasProgresivos = Math.round(valorDiaFeriado * diasProgresivos);
+  // Referencial: se conservan los decimales hasta el total, como en
+  // vacaciones.ts (art. 71).
+  const montoDiasProgresivos = Math.round((sueldo / 30) * diasProgresivos);
 
   const baseCalculo =
     aniosNuevosEmpleador <= 0
@@ -96,6 +119,7 @@ export function calculateFeriadoProgresivo(input: FeriadoProgresivoInput): Feria
     aniosRestantesBase,
     aniosNuevosEmpleador,
     diasProgresivos,
+    feriadoAnualBase,
     feriadoAnualTotal,
     aniosParaProximoDia,
     valorDiaFeriado,
@@ -121,7 +145,7 @@ export function feriadoProgresivoToResults(result: FeriadoProgresivoResult): Cal
       highlight: true,
     },
     {
-      label: 'Feriado anual total (15 + progresivos)',
+      label: `Feriado anual total (${result.feriadoAnualBase} + progresivos)`,
       value: result.feriadoAnualTotal,
       format: 'days',
     },

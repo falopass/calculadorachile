@@ -1241,7 +1241,7 @@ export const calculatorMethodologies: Record<string, CalculatorMethodology> = {
     assumptions: [
       'Los años con empleadores anteriores son acreditables con cotizaciones previsionales, según la interpretación de la Dirección del Trabajo.',
       'Los períodos de 3 años que generan días se cumplen con el empleador actual, como exige la DT.',
-      'El feriado anual base es el general de 15 días hábiles del artículo 67.',
+      'El feriado anual base es el general de 15 días hábiles del artículo 67; con el toggle de Magallanes, Aysén o Palena se usa la base de 20.',
     ],
     limitations: [
       'No considera estatutos especiales ni pactos colectivos más favorables.',

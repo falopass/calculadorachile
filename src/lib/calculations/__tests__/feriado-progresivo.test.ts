@@ -54,6 +54,8 @@ describe('calculateFeriadoProgresivo', () => {
     });
     expect(r.diasProgresivos).toBe(0);
     expect(r.feriadoAnualTotal).toBe(15);
+    // Faltan 3 para la base + 3 años nuevos = 6 para el primer día.
+    expect(r.aniosParaProximoDia).toBe(6);
   });
 
   it('justo 10 años actuales, sin anteriores → 0 días (base apenas cumplida)', () => {
@@ -82,6 +84,25 @@ describe('calculateFeriadoProgresivo', () => {
     });
     expect(r.valorDiaFeriado).toBe(30000);
     expect(r.montoDiasProgresivos).toBe(60000);
+  });
+
+  it('zona austral: base de 20 días en vez de 15', () => {
+    const r = calculateFeriadoProgresivo({
+      aniosEmpleadorActual: 13,
+      regionAustral: true,
+    });
+    expect(r.diasProgresivos).toBe(1);
+    expect(r.feriadoAnualBase).toBe(20);
+    expect(r.feriadoAnualTotal).toBe(21);
+  });
+
+  it('monto referencial conserva decimales hasta el total', () => {
+    const r = calculateFeriadoProgresivo({
+      aniosEmpleadorActual: 6,
+      aniosEmpleadoresAnteriores: 10,
+      sueldoBruto: 900010,
+    });
+    expect(r.montoDiasProgresivos).toBe(60001);
   });
 
   it('inputs negativos se tratan como 0', () => {

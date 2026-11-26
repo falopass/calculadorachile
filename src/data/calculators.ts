@@ -1514,6 +1514,7 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         unit: 'count',
         placeholder: '13',
         required: true,
+        allowDotDecimal: true,
         min: 0,
         max: 60,
         tooltip:
@@ -1527,10 +1528,20 @@ const calculatorCatalog: Omit<Calculator, 'methodology'>[] = [
         placeholder: '0',
         required: false,
         defaultValue: 0,
+        allowDotDecimal: true,
         min: 0,
         max: 60,
         tooltip:
-          'Acreditables con cotizaciones previsionales. Solo cuentan hasta 10 años para completar la base.',
+          'Acreditables con cotizaciones previsionales. Solo cuentan hasta 10 años para completar la base y deben acreditarse antes de tomar el feriado básico del período.',
+      },
+      {
+        id: 'regionAustral',
+        label: 'Trabajo en Magallanes, Aysén o provincia de Palena',
+        type: 'boolean',
+        required: false,
+        defaultValue: false,
+        tooltip:
+          'En esas regiones el feriado anual básico es de 20 días hábiles (art. 67) en vez de 15.',
       },
       {
         id: 'sueldoBruto',

@@ -335,6 +335,7 @@ export async function loadCalculationFn(
             0,
           ),
           sueldoBruto: coerceNumber(inputs.sueldoBruto) || undefined,
+          regionAustral: coerceBool(inputs.regionAustral),
         });
         return feriadoProgresivoToResults(result);
       };
