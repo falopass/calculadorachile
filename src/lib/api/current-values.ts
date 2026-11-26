@@ -10,6 +10,7 @@
 // ============================================
 
 import { PHASE_PRODUCTION_BUILD } from 'next/constants';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { fetchAllCurrentValues } from './bcentral';
 import { fetchMindicadorValores } from './mindicador';
 import { FALLBACK_VALUES } from '@/lib/values/fallback';
@@ -107,6 +108,51 @@ export interface CurrentValues {
 }
 
 /**
+ * Últimos valores en vivo persistidos por los route handlers en el bucket
+ * R2 del incremental cache. Los renders estáticos ISR no pueden llamar a
+ * las fuentes (el fetch enruta al Data Cache, que falla en el Worker),
+ * pero el binding R2 sí responde en ese contexto: así el SSR muestra
+ * valores frescos sin tocar la red.
+ */
+const LAST_LIVE_KEY = 'app-values/last-live.json';
+/** Edad máxima de lo persistido para usarlo en SSR (ms). */
+const LAST_LIVE_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+
+async function readLastLiveValues(): Promise<CurrentValues | null> {
+  try {
+    const bucket = getCloudflareContext().env.NEXT_INC_CACHE_R2_BUCKET;
+    const object = await bucket?.get(LAST_LIVE_KEY);
+    if (!object) return null;
+    const stored = (await object.json()) as CurrentValues;
+    const updatedAtMs = Date.parse(stored?.values?.updatedAt ?? '');
+    if (!Number.isFinite(updatedAtMs)) return null;
+    if (Date.now() - updatedAtMs > LAST_LIVE_MAX_AGE_MS) return null;
+    // `updatedAt` queda como la hora de origen del dato, no la del render.
+    stored.values.health = getValuesHealth(
+      stored.values.freshness,
+      FALLBACK_VALUES.asOf,
+    );
+    return stored;
+  } catch {
+    return null;
+  }
+}
+
+function persistLastLiveValues(current: CurrentValues): void {
+  try {
+    const { env, ctx } = getCloudflareContext();
+    const put = env.NEXT_INC_CACHE_R2_BUCKET?.put(
+      LAST_LIVE_KEY,
+      JSON.stringify(current),
+      { httpMetadata: { contentType: 'application/json' } },
+    );
+    if (put) ctx.waitUntil(put);
+  } catch {
+    // Fuera de contexto Cloudflare (tests, build): persistir es best-effort.
+  }
+}
+
+/**
  * Normaliza una fecha de indicador para compararla en America/Santiago.
  *
  * BCentral entrega solo el día (`YYYY-MM-DD`); `new Date('2026-09-23')`
@@ -149,11 +195,15 @@ export async function getCurrentValues(
 ): Promise<CurrentValues> {
   // En un render estático ISR los fetch a las fuentes no corren en vivo
   // (Next los enruta al Data Cache, que en el Worker caía a respaldo):
-  // las páginas prerenderizadas quedan con el snapshot y el cliente
-  // hidrata desde /api/values. Los route handlers (`live: true`, contexto
-  // dinámico) sí consultan las fuentes en cada request.
-  const useLiveSources =
-    (opts.live ?? false) && process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD;
+  // las páginas prerenderizadas usan los últimos valores vivos guardados
+  // en R2 por los route handlers (o el snapshot si aún no hay) y el
+  // cliente hidrata desde /api/values.
+  const isBuild = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD;
+  const useLiveSources = (opts.live ?? false) && !isBuild;
+  if (!useLiveSources && !isBuild) {
+    const stored = await readLastLiveValues();
+    if (stored) return stored;
+  }
   const bcentral = useLiveSources
     ? await fetchAllCurrentValues().catch((error) => {
         console.error('[/api/values] BCentral error:', error);
@@ -221,7 +271,7 @@ export async function getCurrentValues(
     pickDate(uf.source, bcentral?.fechas.uf, mindicador?.fechas.uf),
   );
 
-  return {
+  const current: CurrentValues = {
     values: {
       uf: uf.value,
       utm: utm.value,
@@ -252,4 +302,9 @@ export async function getCurrentValues(
       dolar: dolarObs.source,
     },
   };
+
+  // Persistir solo si hay al menos un campo vivo: un resultado íntegramente
+  // de respaldo no debe pisar los últimos valores reales guardados.
+  if (useLiveSources && !health.allFallback) persistLastLiveValues(current);
+  return current;
 }
