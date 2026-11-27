@@ -135,7 +135,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 11 | blog | Contribuciones 3.ª cuota 30 sep | `contribuciones-tercera-cuota-septiembre-2026` | DR[27] · Ventana perdida (vence 30 sep); cubierto dentro de #29 | vivienda | 2026-09-05 | 30 sep | **P2-ventana** |
 | ~~12~~ | blog | ~~Boleta honorarios retención 15,25%~~ | ~~`boleta-honorarios-retencion-15-25-2026`~~ | publicado 2026-11-16 | impuestos | ~~2026-09-08~~ | continuo | ✅ |
 | 47 | blog\* | Licencia médica 2026: quién paga y SIL | `licencia-medica-2026-quien-paga-sil` | DR[7] · *candidata guía* | laboral | 2026-09-10 | continuo | **P2-continuo** |
-| 48 | blog\* | Contrato indefinido / plazo / honorarios | `contrato-indefinido-plazo-fijo-honorarios-2026` | DR[8] · *candidata guía* | laboral | 2026-09-12 | continuo | **P2-continuo** |
+| ~~48~~ | blog | ~~Contrato indefinido / plazo / honorarios~~ | `contrato-indefinido-plazo-fijo-honorarios-2026` | publicado 2026-11-27 · DR[8] | laboral | ~~2026-09-12~~ | continuo | ✅ |
 | 14 | blog | Subsidio crédito hipotecario MINVU | `subsidio-credito-hipotecario-minvu-dividendo-2026` | satélite hipoteca | vivienda | 2026-09-15 | sep–may 2027 | **P2-ventana** |
 | 15 | blog | Gratificación legal tope 4,75 IMM | `gratificacion-legal-tope-2026-ingreso-minimo` | evergreen blog | laboral | 2026-09-18 | sep–dic | **P2-ventana** |
 | ~~16~~ | blog | ~~Subsidio Unificado al Empleo (Ley 21.808)~~ | ~~`subsidio-unificado-empleo-ley-21808-octubre-2026`~~ | DR[13] | empleo | ~~2026-09-22~~ | sep–nov | ✅ |
@@ -165,7 +165,7 @@ Ordenado por **fecha de publicación sugerida**.
 | 41 | blog | Intereses por mora | `intereses-mora-chile-2026-calcular` | — | finanzas | 2027-01-16 | continuo | **P3** |
 | ~~42~~ | blog | ~~Sueldo mínimo 2027~~ | ~~`sueldo-minimo-2027-reajuste-simular-liquido`~~ | publicado 2026-11-17 | laboral | ~~2027-01-20~~ | ene | ✅ |
 | 43 | blog | Crédito hipotecario 2027 UF | `credito-hipotecario-2027-simular-dividendo` | satélite hipoteca | vivienda | 2027-01-23 | continuo | **P3** |
-| 44 | blog | Costo notaría compraventa 2027 | `costo-notaria-compraventa-2027-estimar` | DR[30] | vivienda | 2027-01-27 | continuo | **P3** |
+| ~~44~~ | blog | ~~Costo notaría compraventa 2027~~ | `costo-notaria-compraventa-2027-estimar` | publicado 2026-11-27 · DR[30] | vivienda | ~~2027-01-27~~ | continuo | ✅ |
 | ~~45~~ | blog | ~~Patente comercial 2027~~ | ~~`patente-comercial-2027-calcular`~~ | ~~satélite pymes~~ | empresas | ~~2026-09-23~~ | ene–mar | ✅ |
 | — | blog | FUAS 2027: postulación gratuidad y becas | ~~`fuas-2027-postulacion-gratuidad-becas-octubre-2026`~~ | publicado 2026-09-26 | educación | 2026-09-26 | oct | ✅ |
 | — | blog | Bono $30.000 por hijo (Ley 21.840) | ~~`bono-30-mil-por-hijo-2026-quien-recibe-pago`~~ | publicado 2026-09-26 | familia | 2026-09-26 | sep–oct | ✅ |
@@ -176,7 +176,7 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Feriado irrenunciable 1 de enero 2027 | ~~`feriado-irrenunciable-1-enero-2027`~~ | publicado 2026-11-26 · investigación Navidad/Año Nuevo | laboral | 2026-11-26 | dic–ene | ✅ |
 | — | blog | Feriado judicial febrero 2027 (suprimido, plazos corren) | ~~`feriado-judicial-febrero-2027`~~ | publicado 2026-11-26 · investigación vacaciones verano | laboral | 2026-11-26 | ene–feb | ✅ |
 
-**Conteo pendientes:** 19 filas activas, sin las filas marcadas como publicadas.
+**Conteo pendientes:** 17 filas activas, sin las filas marcadas como publicadas.
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
