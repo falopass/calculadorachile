@@ -177,12 +177,12 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Feriado judicial febrero 2027 (suprimido, plazos corren) | ~~`feriado-judicial-febrero-2027`~~ | publicado 2026-11-26 · investigación vacaciones verano | laboral | 2026-11-26 | ene–feb | ✅ |
 | — | blog | Bonos y beneficios que se pagan en diciembre 2026 | ~~`bonos-beneficios-diciembre-2026-pagos-ips`~~ | publicado 2026-11-27 · investigación Navidad/Año Nuevo | beneficios | 2026-11-27 | dic | ✅ |
 
-**Conteo pendientes:** 17 filas activas, sin las filas marcadas como publicadas.
+**Conteo pendientes:** 14 filas activas, sin las filas marcadas como publicadas.
 
 | Formato en pendientes | Cantidad |
 |-----------------------|----------|
-| **blog** | 17 |
-| **blog\*** (candidata guía) | 2 (#47, #48) |
+| **blog** | 13 |
+| **blog\*** (candidata guía) | 1 (#47) |
 | **guía** | 0 |
 
 ### Sub-orden P2
@@ -356,7 +356,7 @@ Objetivo del producto = **pageviews AdSense**, no solo fit calculadora. La restr
 
 **Qué queda fuera a propósito (no #51+ por ahora):** DR[2] licencia conducir, DR[4] multas como post, DR[10] fuero, DR[15] retiros, DR[29] RSH — ver sección “sin lugar”.
 
-**Ritmo:** 37 pendientes / ~24 semanas ≈ **1,5 posts/semana**. Sigue sostenible si se prioriza P2-ventana → P2-continuo (#47–#50 entran en el bulk continuo de sep–oct).
+**Ritmo:** 14 pendientes / ~24 semanas ≈ **1,5 posts/semana**. Sigue sostenible si se prioriza P2-ventana → P2-continuo (#47–#50 entran en el bulk continuo de sep–oct).
 
 ---
 
@@ -379,9 +379,9 @@ Extensión AdSense (decisión 2026-07-10):
 
 Plan integrado operativo (recuento de las tablas tras publicar #21, #23 y #27):
   Filas en la tabla Publicados:  27
-  Filas activas en pendientes:  19
-    blog:                       17
-    blog* (candidata guía):      2   (#47, #48)
+  Filas activas en pendientes:  14
+    blog:                       13
+    blog* (candidata guía):      1   (#47)
     guía:                        0
     P1 restante:                 0
     P2:                         15
