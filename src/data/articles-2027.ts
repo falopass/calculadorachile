@@ -1892,15 +1892,19 @@ export const ARTICULOS_2027: Article[] = [
       'autorización notarial menor de edad viaje',
       'documentos para viajar con hijos',
     ],
-    relatedCalculators: ['conversor-divisas', 'costo-viaje', 'compras-internacionales'],
+    relatedCalculators: [
+      'calculadora-conversor-divisas',
+      'calculadora-costo-viaje',
+      'calculadora-compras-internacionales',
+    ],
     sources: [
       {
-        label: 'ChileAtiende — Recomendaciones para viajar al extranjero',
-        url: 'https://www.chileatiende.gob.cl/fichas/36445-recomendaciones-para-viajar-al-extranjero',
+        label: 'Cancillería / Consulado.gob.cl — Cuando viaja un/a menor de edad',
+        url: 'https://www.consulado.gob.cl/cuando-viaja-un-menor-de-edad',
       },
       {
         label: 'BCN LeyChile — Ley 16.618 de Menores (art. 49 y 49 bis)',
-        url: 'https://www.bcn.cl/leychile/navegar?idNorma=172986',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=28581',
       },
       {
         label:
@@ -1912,7 +1916,7 @@ export const ARTICULOS_2027: Article[] = [
       {
         question: '¿Si viajo con mi hijo necesito autorización del otro padre?',
         answer:
-          'Sí. Si el menor viaja con un solo padre y ningún juez le confió el cuidado personal, el padre que no acompaña debe autorizar ante notario. Si un tribunal le confió el cuidado personal a quien viaja, la autorización la presta solo esa persona; conviene llevar la sentencia o avenimiento que lo acredita.',
+          'Sí. Si el menor viaja con un solo padre y ningún juez le confió el cuidado personal, el padre que no acompaña debe autorizar ante notario. Si un tribunal le confió el cuidado personal a quien viaja, la autorización la presta esa persona —y, cuando hay un régimen de visitas regulado por sentencia o avenimiento, también el padre o madre a cuyo favor se estableció—; conviene llevar la sentencia que lo acredita.',
       },
       {
         question: '¿Sirve una carta firmada a mano o firmada en línea?',
@@ -1922,7 +1926,7 @@ export const ARTICULOS_2027: Article[] = [
       {
         question: '¿La autorización sirve para cualquier viaje posterior?',
         answer:
-          'Solo dentro del período para el que fue extendida. Si el documento no indica plazo ni destino, vale únicamente para el viaje en que se presenta. Autorizar «cualquier viaje futuro» sin fecha no equivale a un permiso permanente.',
+          'Solo dentro del período para el que fue extendida. Si la autorización judicial o notarial no indica plazo de duración, ChileAtiende fija para efectos migratorios un máximo de 90 días contados desde su otorgamiento. Autorizar «cualquier viaje futuro» sin fecha no equivale a un permiso permanente.',
       },
       {
         question: '¿Qué pasa si el otro padre no quiere autorizar o no se ubica?',
@@ -1936,7 +1940,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2 id="quien-autoriza">Quién debe autorizar según con quién viaja el menor</h2>
 
-<p>La regla está en el artículo 49 de la ${ext('https://www.bcn.cl/leychile/navegar?idNorma=172986', 'Ley 16.618 de Menores')}: la salida de un menor del país necesita el permiso de quienes deben otorgarlo, y el permiso <strong>no es necesario si el menor sale en compañía de la persona o personas que deben prestarlo</strong>. Traducido a los casos de la vida real, según ${ext('https://www.chileatiende.gob.cl/fichas/36445-recomendaciones-para-viajar-al-extranjero', 'ChileAtiende')}:</p>
+<p>La regla está en el artículo 49 de la ${ext('https://www.bcn.cl/leychile/navegar?idNorma=28581', 'Ley 16.618 de Menores')}: la salida de un menor del país necesita el permiso de quienes deben otorgarlo, y el permiso <strong>no es necesario si el menor sale en compañía de la persona o personas que deben prestarlo</strong>. Traducido a los casos de la vida real, según la ${ext('https://www.consulado.gob.cl/cuando-viaja-un-menor-de-edad', 'guía consular de Cancillería')}:</p>
 
 <table>
 <caption>Autorización requerida según el caso</caption>
@@ -1964,7 +1968,7 @@ export const ARTICULOS_2027: Article[] = [
 <li>La carta o documento de autorización de viaje, indicando el destino y el período.</li>
 </ul>
 
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ojo con el plazo</strong><p>Las autorizaciones —judiciales, por escritura pública, notariales o consulares— <strong>valen solo para el período para el cual fueron extendidas</strong>. Si el documento no indica plazo ni destino, rige para ese único viaje. Y hay una consecuencia legal poco conocida: si el menor no vuelve al país dentro del plazo concedido sin justificación, el juez puede decretar la suspensión de las pensiones alimenticias del caso.</p></div></aside>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ojo con el plazo</strong><p>Las autorizaciones —judiciales, por escritura pública, notariales o consulares— <strong>valen solo para el período para el cual fueron extendidas</strong>. Si el documento no indica plazo de duración, se concede para efectos migratorios un plazo máximo de <strong>90 días desde su otorgamiento</strong>. Y hay una consecuencia legal poco conocida: si el menor no vuelve al país dentro del plazo concedido sin justificación, el juez puede decretar la suspensión de las pensiones alimenticias del caso.</p></div></aside>
 
 <h3>Cuando el otro padre no autoriza o no se ubica</h3>
 
@@ -1972,7 +1976,7 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2 id="documentos-viaje">El documento de viaje del menor: cédula o pasaporte</h2>
 
-<p>La autorización no reemplaza el documento de identidad del niño. Para destinos dentro de Sudamérica asociados a los convenios que Chile mantiene (Argentina, Bolivia, Brasil, Colombia, Ecuador, Paraguay, Perú y Uruguay), los chilenos podemos viajar solo con la <strong>cédula de identidad vigente</strong>; para el resto de los destinos se necesita <strong>pasaporte</strong>. Ambos documentos se tramitan en el Registro Civil —o en línea con ClaveÚnica para renovaciones— y es buena idea revisar la vigencia con anticipación: en temporada alta la demanda de citas sube. Confirma en la ficha de ChileAtiende el requisito exacto de tu destino, porque algunas rutas aceptan solo pasaporte aunque el destino sea sudamericano.</p>
+<p>La autorización no reemplaza el documento de identidad del niño. Para destinos dentro de Sudamérica asociados a los convenios que Chile mantiene (Argentina, Bolivia, Brasil, Colombia, Ecuador, Paraguay, Perú y Uruguay), los chilenos podemos viajar solo con la <strong>cédula de identidad vigente</strong>; para el resto de los destinos se necesita <strong>pasaporte</strong>. Ambos documentos se tramitan presencialmente en el Registro Civil —la cita se puede agendar en línea con ClaveÚnica, pero retirar y renovar el documento exige acudir a la oficina— y es buena idea revisar la vigencia con anticipación: en temporada alta la demanda de citas sube. Confirma en la ficha de ChileAtiende el requisito exacto de tu destino, porque algunas rutas aceptan solo pasaporte aunque el destino sea sudamericano.</p>
 
 <h2 id="que-presenta-pdi">Qué muestra la PDI en el control de salida</h2>
 
@@ -1980,17 +1984,17 @@ export const ARTICULOS_2027: Article[] = [
 
 <ol>
 <li>El <strong>documento de viaje del menor</strong> (cédula o pasaporte, según destino).</li>
-<li>La <strong>autorización</strong> cuando corresponde: el original, y es recomendable llevar fotocopias simples porque algunos puntos de control las retienen.</li>
+<li>La <strong>autorización</strong> cuando corresponde: el <strong>original más tres copias notariales</strong> según la guía consular (las fotocopias simples alcanzan para el certificado de nacimiento o libreta de familia y el certificado de defunción).</li>
 <li>El documento que acredita la <strong>filiación</strong> (libreta de familia o certificado de nacimiento) cuando el menor viaja con sus padres, o el <strong>certificado de defunción</strong> si aplica.</li>
 </ol>
 
-<p>Una autorización formal en regla es la diferencia entre embarcar o perder el vuelo: el control no admite una promesa verbal, una carta firmada a mano ni un mensaje del otro padre. Si vas a hacer la notaría en los días previos, confirma además la dirección y horario con tu notaría: muchas tramitan este tipo de escritura privada con el menor y los antecedentes completos, y en algunas exigen comparecencia del menor.</p>
+<p>Una autorización formal en regla es la diferencia entre embarcar o perder el vuelo: el control no admite una promesa verbal, una carta firmada a mano ni un mensaje del otro padre. Además, la misma autorización se vuelve a exigir al regresar a Chile: la guía consular recomienda pedir los permisos <strong>en triplicado</strong> y conservar al menos un original hasta el regreso. Si vas a hacer la notaría en los días previos, confirma dirección y horario con tu notaría: muchas tramitan este tipo de escritura privada con los antecedentes completos, y en algunas exigen comparecencia del menor.</p>
 
 <h2 id="checklist">Checklist antes de viajar</h2>
 
 <ul>
 <li><strong>Documento del menor:</strong> cédula vigente (Sudamérica convenio) o pasaporte. Revisa fechas de expiración.</li>
-<li><strong>Autorización:</strong> notarial o judicial según el caso, con destino y plazo indicados, en original + copias.</li>
+<li><strong>Autorización:</strong> notarial o judicial según el caso, con destino y plazo indicados, en original + tres copias notariales (la autorización judicial basta en fotocopia simple).</li>
 <li><strong>Filiación:</strong> libreta de familia o certificado de nacimiento (se descarga en Registro Civil en línea).</li>
 <li><strong>Casos especiales:</strong> certificado de defunción si el otro padre falleció; sentencia o avenimiento si hay cuidado personal judicial.</li>
 <li><strong>Entrada al destino:</strong> reglas de migración, visado o seguro de viaje que exige el país —esto se confirma en el consulado de destino, no en la autorización chilena.</li>
