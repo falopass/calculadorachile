@@ -1979,7 +1979,7 @@ export const ARTICULOS_2027: Article[] = [
 <tr><td>SUF</td><td>Beneficiarios del Subsidio Familiar</td><td>$22.601 por carga ($45.202 con discapacidad)</td><td>Fecha asignada a cada persona</td></tr>
 <tr><td>Asignación familiar</td><td>Cargas reconocidas de dependientes y pensionados</td><td>$22.601 / $13.870 / $4.382 según tramo</td><td>Con sueldo o pensión de diciembre</td></tr>
 <tr><td>Asignación familiar independientes</td><td>Independientes con causantes reconocidos al 31-12-2026</td><td>Según tramo, por cada causante</td><td>Una vez al año, en diciembre</td></tr>
-<tr><td>Subsidio eléctrico</td><td>Beneficiarios de la 5ª convocatoria</td><td>Cuota de $2.891 / $3.758 / $5.204 según integrantes</td><td>En la cuenta de luz de diciembre</td></tr>
+<tr><td>Subsidio eléctrico</td><td>Beneficiarios de la 5ª convocatoria</td><td>Cuota de $2.891 / $3.758 / $5.204 según integrantes</td><td>4ª cuota de referencia; la boleta exacta depende de la distribuidora</td></tr>
 </tbody>
 </table></div>
 
