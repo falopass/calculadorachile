@@ -1968,7 +1968,7 @@ export const ARTICULOS_2027: Article[] = [
 <li>La carta o documento de autorización de viaje, indicando el destino y el período.</li>
 </ul>
 
-<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ojo con el plazo</strong><p>Las autorizaciones —judiciales, por escritura pública, notariales o consulares— <strong>valen solo para el período para el cual fueron extendidas</strong>. Si el documento no indica plazo de duración, se concede para efectos migratorios un plazo máximo de <strong>90 días desde su otorgamiento</strong>. Y hay una consecuencia legal poco conocida: si el menor no vuelve al país dentro del plazo concedido sin justificación, el juez puede decretar la suspensión de las pensiones alimenticias del caso.</p></div></aside>
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ojo con el plazo</strong><p>Las autorizaciones —judiciales, por escritura pública, notariales o consulares— <strong>valen solo para el período para el cual fueron extendidas</strong>. Si una autorización <strong>judicial o notarial</strong> no indica plazo de duración, se concede para efectos migratorios un plazo máximo de <strong>90 días desde su otorgamiento</strong>. Y hay una consecuencia legal poco conocida: si el menor no vuelve al país dentro del plazo concedido sin justificación, el juez puede decretar la suspensión de las pensiones alimenticias del caso.</p></div></aside>
 
 <h3>Cuando el otro padre no autoriza o no se ubica</h3>
 
