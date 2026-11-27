@@ -2152,4 +2152,284 @@ export const ARTICULOS_2027: Article[] = [
       },
     ],
   },
+  {
+    slug: 'bonos-beneficios-diciembre-2026-pagos-ips',
+    title:
+      'Bonos y beneficios que se pagan en diciembre de 2026: aguinaldo, PGU, SUF y calendario IPS',
+    description:
+      'Qué pagos llegan en diciembre de 2026: aguinaldo de Navidad ($29.055 pensionados, $71.206/$37.666 sector público), PGU, SUF, asignación familiar anual de independientes y subsidio eléctrico, con fechas y fuentes.',
+    date: '2026-11-27',
+    updatedAt: '2026-11-27',
+    category: 'beneficios',
+    readingTime: 11,
+    seoTitle: 'Pagos diciembre 2026: aguinaldo, PGU, SUF y calendario IPS',
+    seoDescription:
+      'Calendario de beneficios de diciembre 2026: aguinaldo Navidad pensionados y sector público, PGU, SUF, asignación familiar anual de independientes y subsidio eléctrico. Montos y cómo revisar tu fecha.',
+    keywords: [
+      'pagos diciembre 2026',
+      'bonos diciembre 2026 chile',
+      'calendario de pagos ips diciembre',
+      'aguinaldo navidad 2026',
+      'pgu diciembre 2026',
+      'asignacion familiar independientes pago anual',
+      'beneficios ips diciembre 2026',
+    ],
+    relatedCalculators: [
+      'calculadora-pgu',
+      'calculadora-asignacion-familiar',
+      'calculadora-aguinaldo',
+    ],
+    faq: [
+      {
+        question: '¿Qué bonos se pagan en diciembre de 2026?',
+        answer:
+          'En diciembre de 2026 se paga el aguinaldo de Navidad para pensionados ($29.055 + $16.415 por carga acreditada al 30-11), el aguinaldo del sector público ($71.206 o $37.666 según remuneración), los beneficios mensuales del IPS (PGU, PBSI, SUF, asignación familiar), la asignación familiar anual de los trabajadores independientes y la cuota de diciembre del subsidio eléctrico.',
+      },
+      {
+        question: '¿Cómo sé qué día me pagan en diciembre?',
+        answer:
+          'El IPS asigna a cada persona su propia fecha de pago; no hay un día único. Se consulta con el RUT en la ficha de ChileAtiende "fecha de pago de una pensión o beneficio" (trámite 5212) o en la app IPS en línea. Conviene revisarla a comienzos de diciembre, porque el calendario del mes incorpora los feriados.',
+      },
+      {
+        question: '¿Hay un "bono de Navidad" del Gobierno en 2026?',
+        answer:
+          'No. A la fecha de corte de este artículo no existe ningún anuncio oficial de un bono de Navidad 2026 adicional a los beneficios de ley. Lo que sí se paga en diciembre es el aguinaldo de Navidad para pensionados y para el sector público, fijado por las leyes 21.806 y 21.724.',
+      },
+      {
+        question: '¿El aguinaldo de Navidad tiene descuentos?',
+        answer:
+          'No. Según la Ley 21.806, el aguinaldo no es imponible ni tributable y no tiene descuentos de ningún tipo: no se descuentan cotizaciones previsionales ni de salud, y no se considera renta para impuestos.',
+      },
+      {
+        question:
+          'Soy independiente con cargas familiares: ¿cuándo me pagan la asignación familiar?',
+        answer:
+          'Los trabajadores independientes con causantes reconocidos por el IPS reciben la asignación familiar y maternal una vez al año, en diciembre, por cada causante reconocido al 31 de diciembre del año correspondiente, según la Subsecretaría de Previsión Social.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende, aguinaldo de Navidad para pensionados IPS (ficha 30171)',
+        url: 'https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips',
+      },
+      {
+        label: 'ChileAtiende, fecha de pago de una pensión u otros beneficios (trámite 5212)',
+        url: 'https://www.chileatiende.gob.cl/tramites/5212',
+      },
+      {
+        label: 'ChileAtiende, pagos por cobrar del IPS (ficha 114831)',
+        url: 'https://www.chileatiende.gob.cl/fichas/114831-pagos-por-cobrar-del-instituto-de-prevision-social-ips',
+      },
+      {
+        label: 'ChileAtiende, Pensión Garantizada Universal PGU (ficha 102077)',
+        url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu',
+      },
+      {
+        label: 'ChileAtiende, Subsidio Familiar SUF (ficha 33112)',
+        url: 'https://www.chileatiende.gob.cl/fichas/33112-subsidio-familiar-suf',
+      },
+      {
+        label: 'BCN LeyChile, Ley 21.806 (reajuste sector público 2026; aguinaldo)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1221118',
+      },
+      {
+        label: 'BCN LeyChile, Ley 21.791 (feriado bancario 31 de diciembre)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1219578',
+      },
+      {
+        label:
+          'SUSESO, asignación familiar de trabajadores independientes (pago anual en diciembre)',
+        url: 'https://www.suseso.gob.cl/619/articles-736060_archivo_01.pdf',
+      },
+    ],
+    content: `<p class="article-lead">Diciembre es el mes con más pagos del año para los beneficiarios del sistema previsional chileno: además de la pensión o el sueldo de siempre, cae el aguinaldo de Navidad, la asignación familiar anual de los independientes y la cuota mensual del subsidio eléctrico. Este artículo ordena qué se paga, cuánto es y cómo revisar tu fecha exacta. Fecha de corte: <strong>27 de noviembre de 2026</strong>.</p>
+<p>El alcance es deliberado: cubre los pagos que llegan en diciembre por ley o por calendario del IPS, sin repetir el detalle de los aguinaldos, que ya tienen sus propios artículos. Tampoco hay un "bono de Navidad" del Gobierno anunciado para 2026 —lo explicamos más abajo— y el aguinaldo del sector privado no existe como obligación legal general, con excepciones que sí están en la ley.</p>
+
+<h2>Resumen: los pagos de diciembre 2026</h2>
+<div class="table-scroll"><table>
+<caption>Beneficios que se pagan en diciembre de 2026</caption>
+<thead><tr><th scope="col">Pago</th><th scope="col">Quiénes</th><th scope="col">Monto</th><th scope="col">Cuándo</th></tr></thead>
+<tbody>
+<tr><td>Aguinaldo de Navidad pensionados</td><td>Pensionados IPS, Dipreca, Capredena, mutualidades y otros regímenes listados al 30-11-2026</td><td>$29.055 + $16.415 por carga (salvo carga con pensión de sobrevivencia, excepto orfandad)</td><td>Con la pensión de diciembre</td></tr>
+<tr><td>Aguinaldo sector público</td><td>Funcionarios cubiertos por la ley de reajuste al 1-12-2026</td><td>$71.206 (líquido nov ≤ $1.060.493) o $37.666 (líquido sobre ese monto; tope bruto $3.511.800)</td><td>En diciembre, según cada servicio</td></tr>
+<tr><td>PGU</td><td>Beneficiarios de la Pensión Garantizada Universal</td><td>Hasta $231.732 (65–74) o $250.275 (75+)</td><td>Fecha asignada a cada persona</td></tr>
+<tr><td>SUF</td><td>Beneficiarios del Subsidio Familiar</td><td>$22.601 por carga ($45.202 con discapacidad)</td><td>Fecha asignada a cada persona</td></tr>
+<tr><td>Asignación familiar</td><td>Cargas reconocidas de dependientes y pensionados</td><td>$22.601 / $13.870 / $4.382 según tramo</td><td>Con sueldo o pensión de diciembre</td></tr>
+<tr><td>Asignación familiar independientes</td><td>Independientes con causantes reconocidos al 31-12-2026</td><td>Según tramo, por cada causante</td><td>Una vez al año, en diciembre</td></tr>
+<tr><td>Subsidio eléctrico</td><td>Beneficiarios de la 5ª convocatoria</td><td>Cuota de $2.891 / $3.758 / $5.204 según integrantes</td><td>4ª cuota de referencia; la boleta exacta depende de la distribuidora</td></tr>
+</tbody>
+</table></div>
+
+<h2>Aguinaldo de Navidad: quiénes lo reciben y cuánto es</h2>
+<p>El aguinaldo de Navidad es el pago estrella de diciembre y tiene dos versiones que conviene no mezclar, porque dependen de regímenes distintos.</p>
+<p><strong>Pensionados.</strong> Quienes estaban pensionados al <strong>30 de noviembre de 2026</strong> en los regímenes cubiertos —PGU, PBSI, Subsidio de Discapacidad, ex cajas de previsión, Ley 16.744 (mutualidades), pensiones de reparación Valech y Rettig, y Dipreca o Capredena, entre otros— reciben <strong>$29.055</strong>, más <strong>$16.415</strong> por cada persona acreditada como causante de asignación familiar o maternal a esa misma fecha. Es automático, viene dentro del pago de la pensión de diciembre y la ley es explícita: <strong>no es imponible, no es tributable y no tiene descuentos</strong>. La lista completa de regímenes, la excepción de las cargas con pensión de sobrevivencia y los ejemplos de cálculo están en el artículo del <a href="/blog/aguinaldo-navidad-pensionados-2026">aguinaldo de Navidad 2026 para pensionados</a>.</p>
+<p><strong>Sector público.</strong> Los funcionarios incluidos en la ley de reajuste —el derecho se evalúa al <strong>1 de diciembre</strong>— reciben <strong>$71.206</strong> si su remuneración líquida de noviembre fue igual o inferior a $1.060.493, o <strong>$37.666</strong> si la superó, siempre que su remuneración bruta permanente no exceda $3.511.800. El aguinaldo del sector público es permanente desde la Ley 21.724: ya no depende de que cada ley de reajuste lo repita. El detalle de umbrales y exclusiones está en el artículo del <a href="/blog/aguinaldo-navidad-2026-sector-publico">aguinaldo de Navidad 2026 del sector público</a>.</p>
+<p><strong>Sector privado.</strong> No existe un aguinaldo de Navidad obligatorio general: solo es exigible si está pactado en el contrato individual, en un convenio colectivo o se ha pagado de forma reiterada en años anteriores. La excepción son los trabajadores cubiertos por la misma ley aunque su empleador sea privado, como los de los colegios particulares subvencionados o las Fábricas y Maestranzas de las Fuerzas Armadas —la lista completa está en el artículo del sector público—. Lo que sí revisa el fin de año en las empresas privadas es la <a href="/blog/gratificacion-fin-de-ano-2026">gratificación anual</a>.</p>
+
+<h2>Pensiones y beneficios del IPS: cada persona tiene su fecha</h2>
+<p>La Pensión Garantizada Universal, la PBSI, el Subsidio de Discapacidad, las pensiones de ex cajas de previsión y el SUF se pagan todos los meses, pero <strong>no existe una fecha única</strong>: el IPS le asigna a cada beneficiario un día de pago propio, que se mantiene mes a mes salvo que el calendario del mes lo mueva por feriados. Eso significa que dos personas con la PGU pueden cobrar en días distintos, y que la fecha que vale en diciembre es la que aparece en la consulta con RUT, no la del vecino.</p>
+<p>Los montos vigentes en diciembre de 2026 son los del reajuste de febrero de este año: la <strong>PGU llega hasta $231.732</strong> para personas de 65 a 74 años y <strong>hasta $250.275</strong> desde los 75 años (el monto máximo se abrió a los 75+ en septiembre de 2026, según la Ley 21.735; antes aplicaba solo a los 82+). El "hasta" importa: la PGU completa solo aplica con pensión base hasta $789.139; sobre ese piso se reduce hasta desaparecer en $1.252.602. Para estimar tu PGU según tu pensión base, usa la <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a>.</p>
+<p>El <strong>SUF</strong> paga <strong>$22.601 por cada carga familiar acreditada</strong> y <strong>$45.202</strong> cuando la carga es una persona con discapacidad (montos vigentes desde el 1 de mayo de 2026, Ley 21.830). Es incompatible con la asignación familiar: no se pueden cobrar ambos por la misma carga.</p>
+<p>La <strong>asignación familiar</strong> de dependientes llega dentro del sueldo de diciembre y la de pensionados dentro de la pensión: <strong>$22.601, $13.870 o $4.382 por carga</strong> según el tramo de ingreso. Los tramos y la tabla completa están en el artículo de la <a href="/blog/asignacion-familiar-2026-tramos-montos">asignación familiar 2026</a> y se pueden proyectar en la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>
+<p>Un caso que solo aparece en diciembre: los <strong>trabajadores independientes</strong> que solicitaron y obtuvieron el reconocimiento de sus causantes ante el IPS reciben la asignación familiar y maternal <strong>una vez al año, en diciembre</strong>, por cada causante reconocido al <strong>31 de diciembre</strong> del año correspondiente, según la información de la Subsecretaría de Previsión Social publicada por la SUSESO. Es el único beneficio familiar con esa lógica anual, y es la razón por la que un independiente puede recibir en diciembre un depósito grande que junta todo el año.</p>
+
+<h2>El feriado bancario del 31 de diciembre y los pagos de fin de mes</h2>
+<p>El <strong>31 de diciembre de 2026 es feriado bancario</strong> por la Ley 21.791: los bancos no atienden presencialmente ese día y el último día hábil bancario del año es el <strong>miércoles 30 de diciembre</strong>. El detalle de qué cierra y qué sigue funcionando (cajeros, transferencias, web) está en el artículo del <a href="/blog/feriado-bancario-31-diciembre-2026">feriado bancario de fin de año</a>.</p>
+<p>Para los beneficios del IPS el efecto práctico es doble. Si tu pago es por <strong>depósito o CuentaRUT</strong>, el abono se procesa según el calendario del mes; lo que cambia es el día en que puedes retirarlo o usarlo en comercio, no la existencia del pago. Si tu pago es <strong>presencial en BancoEstado</strong> y tu fecha cae sobre el 31, la sucursal no atiende ese día, así que revisa en la consulta con RUT qué día quedó tu pago en el calendario de diciembre: no se puede cobrar antes de la fecha asignada. Quienes cobran en Caja Los Héroes —una caja de compensación, no un banco— deben confirmar su propio calendario, porque el feriado legal solo obliga a los bancos. En cualquier caso, la referencia que manda es la fecha asignada por el IPS, que la institución publica a comienzos del mes.</p>
+
+<h2>Subsidio eléctrico: la cuota de diciembre en la cuenta de luz</h2>
+<p>La quinta convocatoria del subsidio eléctrico distribuye el beneficio en <strong>seis cuotas desde septiembre de 2026</strong>, y diciembre corresponde a la cuarta cuota del calendario de referencia: <strong>$2.891</strong> para hogares de un integrante, <strong>$3.758</strong> para hogares de 2 a 3 y <strong>$5.204</strong> para hogares de 4 o más. No es un depósito: se descuenta directamente en la boleta de electricidad de quienes quedaron seleccionados —el momento exacto en que aparece depende del calendario de facturación de cada distribuidora— (al día en el pago y dentro del 40% más vulnerable del Registro Social de Hogares, u hogares con persona electrodependiente registrada). El detalle de la convocatoria está en el artículo del <a href="/blog/subsidio-electrico-2026-resultados-descuento-cuenta">subsidio eléctrico 2026</a>.</p>
+
+<h2>Lo que NO se paga en diciembre (y dónde está la confusión)</h2>
+<p><strong>"Bono de Navidad" del Gobierno.</strong> Al 27 de noviembre de 2026 no existe ningún anuncio oficial de un bono de Navidad adicional para beneficios sociales. Circula cada año como rumor; lo que sí está en la ley es el aguinaldo para pensionados y sector público descrito arriba. Desconfía de publicaciones que den un monto sin citar una ley o un decreto.</p>
+<p><strong>Aporte Familiar Permanente (ex Bono Marzo).</strong> Su nombre lo dice: es un aporte de marzo. El proceso 2026 pagó a partir de febrero y marzo por las cargas que al 31-12-2025 daban derecho a SUF o asignación familiar, y por los grupos familiares en Chile Solidario o SSyOO. No hay edición en diciembre; lo que sí puede existir son <strong>aportes de años anteriores sin cobrar</strong>, que se recuperan en el trámite de pagos por cobrar del IPS (hay nueve meses para cobrar desde que se genera el documento).</p>
+<p><strong>Bono de vacaciones del sector público.</strong> También es de ley, pero su pago vence "a más tardar en el mes de enero de cada anualidad": pertenece al calendario de enero, no al de diciembre.</p>
+
+<h2>Cómo revisar tu fecha exacta y si tienes pagos pendientes</h2>
+<ol class="steps">
+<li><strong>Consulta tu fecha con tu RUT.</strong> En la ficha de ChileAtiende "fecha de pago de una pensión u otros beneficios" (trámite 5212) o en la app y sitio IPS en línea ves tu día de pago y tu forma de cobro para diciembre.</li>
+<li><strong>Revisa pagos por cobrar.</strong> Si algún beneficio quedó sin retirar, la consulta de pagos por cobrar del IPS (ficha 114831) muestra lo pendiente y permite solicitarlo con ClaveÚnica, por transferencia o retiro en BancoEstado o Los Héroes.</li>
+<li><strong>Anticipa el feriado bancario.</strong> Si cobras presencialmente en BancoEstado, no planifiques el retiro para el 31: las sucursales no atienden. Revisa en la consulta con RUT qué día hábil quedó tu pago.</li>
+<li><strong>Confirma tu canal.</strong> Si tienes CuentaRUT vigente y usada en los últimos seis meses, el IPS puede pagarte por ahí en lugar de una caja presencial; cámbialo con tiempo, porque la nueva modalidad puede tardar entre 30 y 60 días en quedar habilitada.</li>
+<li><strong>Verifica las cargas.</strong> El incremento del aguinaldo usa el corte rígido del 30-11: un reconocimiento posterior no lo suma. Distinto es el dinero ya devengado de la asignación familiar, que no se pierde y se puede cobrar después ante el IPS.</li>
+</ol>
+
+<h2>Calcula lo que te corresponde</h2>
+<ul>
+<li><a href="/calculadoras/calculadora-pgu">Calculadora de PGU</a>: estima tu PGU según pensión base y edad.</li>
+<li><a href="/calculadoras/calculadora-asignacion-familiar">Calculadora de asignación familiar</a>: proyecta el monto por tramo y carga.</li>
+<li><a href="/calculadoras/calculadora-aguinaldo">Calculadora de aguinaldo</a>: estima el aguinaldo en el sector privado cuando está pactado.</li>
+</ul>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo con fecha de corte del 27 de noviembre de 2026. Los montos citados corresponden a leyes y fichas oficiales vigentes a esa fecha; la fecha de pago individual de cada beneficiario la define el IPS y debe confirmarse en la consulta con RUT. No es asesoría previsional ni laboral.</p></div></aside>`,
+  },
+  {
+    slug: 'viajar-al-extranjero-con-menores-autorizacion-documentos',
+    title:
+      'Viajar al extranjero con menores: autorización notarial y documentos para salir de Chile',
+    description:
+      'Qué autorización necesita un menor de 18 años para salir de Chile según quién viaja con él, cómo se otorga ante notario o juzgado de familia y qué pide la PDI en frontera.',
+    date: '2026-11-27',
+    updatedAt: '2026-11-27',
+    category: 'familia',
+    readingTime: 9,
+    keywords: [
+      'autorización viaje menor extranjero',
+      'permiso salida de menores del país',
+      'viajar al extranjero con menores Chile',
+      'autorización notarial menor de edad viaje',
+      'documentos para viajar con hijos',
+    ],
+    relatedCalculators: [
+      'calculadora-conversor-divisas',
+      'calculadora-costo-viaje',
+      'calculadora-compras-internacionales',
+    ],
+    sources: [
+      {
+        label: 'Cancillería / Consulado.gob.cl — Cuando viaja un/a menor de edad',
+        url: 'https://www.consulado.gob.cl/cuando-viaja-un-menor-de-edad',
+      },
+      {
+        label: 'BCN LeyChile — Ley 16.618 de Menores (art. 49 y 49 bis)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=28581',
+      },
+      {
+        label:
+          'ChileAtiende — Asesoría jurídica para la autorización de salida de niños, niñas y adolescentes',
+        url: 'https://www.chileatiende.gob.cl/fichas/76194-asesoria-juridica-para-solicitar-la-autorizacion-para-las-salidas-de-ninos-ninas-o-adolescentes-del-pais',
+      },
+    ],
+    faq: [
+      {
+        question: '¿Si viajo con mi hijo necesito autorización del otro padre?',
+        answer:
+          'Sí. Si el menor viaja con un solo padre y ningún juez le confió el cuidado personal, el padre que no acompaña debe autorizar ante notario. Si un tribunal le confió el cuidado personal a quien viaja, la autorización la presta esa persona —y, cuando hay un régimen de visitas regulado por sentencia o avenimiento, también el padre o madre a cuyo favor se estableció—; conviene llevar la sentencia que lo acredita.',
+      },
+      {
+        question: '¿Sirve una carta firmada a mano o firmada en línea?',
+        answer:
+          'No. El artículo 49 de la Ley 16.618 exige escritura pública o escritura privada autorizada por un notario. Una carta simple, un correo o una firma electrónica sin notario no cumplen el requisito en el control fronterizo.',
+      },
+      {
+        question: '¿La autorización sirve para cualquier viaje posterior?',
+        answer:
+          'Solo dentro del período para el que fue extendida. Si la autorización judicial o notarial no indica plazo de duración, ChileAtiende fija para efectos migratorios un máximo de 90 días contados desde su otorgamiento. Autorizar «cualquier viaje futuro» sin fecha no equivale a un permiso permanente.',
+      },
+      {
+        question: '¿Qué pasa si el otro padre no quiere autorizar o no se ubica?',
+        answer:
+          'El permiso lo puede otorgar el juzgado de familia del domicilio del menor. El tribunal evalúa si el viaje beneficia al niño y fija el tiempo que concede; la Corporación de Asistencia Judicial puede representar a quienes cumplen sus criterios. Hágalo con tiempo: no es un trámite del día anterior.',
+      },
+    ],
+    content: `<p class="article-lead">Para que un menor de 18 años salga de Chile, la ley exige una autorización formal de quienes ejercen el cuidado sobre él, y la forma exacta depende de quién viaja con el niño. Si viaja con ambos padres basta acreditar la filiación; si va con uno, con terceros o solo, se necesita el permiso notarial —o judicial— correspondiente. La PDI controla esto en la frontera.</p>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Fecha de revisión: 27 de noviembre de 2026</strong><p>Verificado contra la ficha de ChileAtiende sobre recomendaciones de viaje y el artículo 49 de la Ley 16.618. La autorización es un requisito para <strong>salir</strong> del país; los requisitos de <strong>entrada</strong> al destino (visado, seguro, reglas de migración) los fija cada país y conviene confirmarlos en el consulado correspondiente.</p></div></aside>
+
+<h2 id="quien-autoriza">Quién debe autorizar según con quién viaja el menor</h2>
+
+<p>La regla está en el artículo 49 de la ${ext('https://www.bcn.cl/leychile/navegar?idNorma=28581', 'Ley 16.618 de Menores')}: la salida de un menor del país necesita el permiso de quienes deben otorgarlo, y el permiso <strong>no es necesario si el menor sale en compañía de la persona o personas que deben prestarlo</strong>. Traducido a los casos de la vida real, según la ${ext('https://www.consulado.gob.cl/cuando-viaja-un-menor-de-edad', 'guía consular de Cancillería')}:</p>
+
+<table>
+<caption>Autorización requerida según el caso</caption>
+<thead><tr><th scope="col">El menor viaja...</th><th scope="col">Qué se presenta en frontera</th></tr></thead>
+<tbody>
+<tr><td><strong>Solo, o con terceros</strong> (abuelos, tíos, un adulto que no sea su padre o madre)</td><td>Autorización de <strong>ambos padres</strong>, otorgada ante notario</td></tr>
+<tr><td><strong>Con uno de los padres</strong></td><td>Autorización del padre que <strong>no acompaña</strong>, otorgada ante notario</td></tr>
+<tr><td><strong>Con ambos padres</strong></td><td>No hace falta autorización; se acredita la filiación con la <strong>libreta de familia o el certificado de nacimiento</strong> donde figuren los nombres</td></tr>
+<tr><td><strong>Con un padre, y el otro falleció</strong></td><td>Libreta de familia o certificado de nacimiento <strong>y el certificado de defunción</strong></td></tr>
+<tr><td><strong>Con quien tiene el cuidado personal judicial</strong></td><td>Autorización solo de esa persona (conviene llevar la sentencia o avenimiento); si además hay derecho de relación regulado por sentencia, la autorización debe incluir también al padre o madre a cuyo favor se estableció</td></tr>
+</tbody>
+</table>
+
+<p>Hay un matiz importante sobre el cuidado personal: cuando ningún juez le ha confiado la tuición del hijo a alguno de los padres ni a un tercero, el menor no puede salir sin la autorización de <strong>ambos padres</strong> —o del que lo haya reconocido, en su caso—. Confiada la tuición por el juez a uno de los padres o a un tercero, la autorización la presta quien la tiene. Y si el derecho de relación directa y regular (visitas) fue regulado por sentencia o avenimiento aprobado por el tribunal, también se requiere la autorización del padre o madre a cuyo favor se estableció ese régimen.</p>
+
+<h2 id="como-se-otorga">Cómo se otorga la autorización: notario, Registro Civil o juez</h2>
+
+<p>El artículo 49 deja clara la forma: el permiso se presta <strong>por escritura pública o por escritura privada autorizada por un notario público</strong>. En las comunas que no son asiento de notario, ese rol de ministro de fe lo cumple el oficial del Servicio de Registro Civil e Identificación. Un detalle práctico: <strong>no existe una vía 100% en línea</strong> para este trámite —las autorizaciones de viaje de menores están entre los actos que los servicios de firma notarial electrónica no pueden tramitar—, así que el documento se gestiona presencialmente en una notaría, y quienes residen en el extranjero pueden acudir al consulado de Chile correspondiente.</p>
+
+<p>Para la autorización ante notario, la notaría suele pedir los antecedentes que describen las guías de ChileAtiende:</p>
+
+<ul>
+<li>Cédulas de identidad de quienes autorizan y del menor.</li>
+<li>Libreta de familia o certificado de nacimiento del menor (el certificado se puede descargar en línea en el portal del Registro Civil).</li>
+<li>La carta o documento de autorización de viaje, indicando el destino y el período.</li>
+</ul>
+
+<aside class="callout callout--warning"><span class="callout__icon" aria-hidden="true">⚠️</span><div class="callout__body"><strong>Ojo con el plazo</strong><p>Las autorizaciones —judiciales, por escritura pública, notariales o consulares— <strong>valen solo para el período para el cual fueron extendidas</strong>. Si una autorización <strong>judicial o notarial</strong> no indica plazo de duración, se concede para efectos migratorios un plazo máximo de <strong>90 días desde su otorgamiento</strong>. Y hay una consecuencia legal poco conocida: si el menor no vuelve al país dentro del plazo concedido sin justificación, el juez puede decretar la suspensión de las pensiones alimenticias del caso.</p></div></aside>
+
+<h3>Cuando el otro padre no autoriza o no se ubica</h3>
+
+<p>Si quien debe prestar la autorización se niega sin motivo o no puede ser ubicado, el permiso lo puede otorgar el <strong>juzgado de familia</strong> correspondiente al domicilio del menor (la Ley 16.618 habla del juez de letras de menores del lugar de residencia; hoy esos casos los ven los tribunales de familia). El tribunal cita a quien no autorizó a una audiencia —y si no está ubicado, intenta dar con su paradero—, evalúa si el viaje es conveniente y beneficioso para el niño y fija el tiempo por el que concede la autorización. La ${ext('https://www.chileatiende.gob.cl/fichas/76194-asesoria-juridica-para-solicitar-la-autorizacion-para-las-salidas-de-ninos-ninas-o-adolescentes-del-pais', 'Corporación de Asistencia Judicial')} ofrece asesoría y patrocinio en estos casos a quienes cumplen sus criterios. Es un proceso que toma tiempo: no se deja para la semana del viaje.</p>
+
+<h2 id="documentos-viaje">El documento de viaje del menor: cédula o pasaporte</h2>
+
+<p>La autorización no reemplaza el documento de identidad del niño. Para destinos dentro de Sudamérica asociados a los convenios que Chile mantiene (Argentina, Bolivia, Brasil, Colombia, Ecuador, Paraguay, Perú y Uruguay), los chilenos podemos viajar solo con la <strong>cédula de identidad vigente</strong>; para el resto de los destinos se necesita <strong>pasaporte</strong>. Ambos documentos se tramitan presencialmente en el Registro Civil —la cita se puede agendar en línea con ClaveÚnica, pero retirar y renovar el documento exige acudir a la oficina— y es buena idea revisar la vigencia con anticipación: en temporada alta la demanda de citas sube. Confirma en la ficha de ChileAtiende el requisito exacto de tu destino, porque algunas rutas aceptan solo pasaporte aunque el destino sea sudamericano.</p>
+
+<h2 id="que-presenta-pdi">Qué muestra la PDI en el control de salida</h2>
+
+<p>En el aeropuerto o paso fronterizo, la Policía de Investigaciones (PDI) revisa el conjunto:</p>
+
+<ol>
+<li>El <strong>documento de viaje del menor</strong> (cédula o pasaporte, según destino).</li>
+<li>La <strong>autorización</strong> cuando corresponde: el <strong>original más tres copias notariales</strong> según la guía consular (las fotocopias simples alcanzan para el certificado de nacimiento o libreta de familia y el certificado de defunción).</li>
+<li>El documento que acredita la <strong>filiación</strong> (libreta de familia o certificado de nacimiento) cuando el menor viaja con sus padres, o el <strong>certificado de defunción</strong> si aplica.</li>
+</ol>
+
+<p>Una autorización formal en regla es la diferencia entre embarcar o perder el vuelo: el control no admite una promesa verbal, una carta firmada a mano ni un mensaje del otro padre. Además, la misma autorización se vuelve a exigir al regresar a Chile: la guía consular recomienda pedir los permisos <strong>en triplicado</strong> y conservar al menos un original hasta el regreso. Si vas a hacer la notaría en los días previos, confirma dirección y horario con tu notaría: muchas tramitan este tipo de escritura privada con los antecedentes completos, y en algunas exigen comparecencia del menor.</p>
+
+<h2 id="checklist">Checklist antes de viajar</h2>
+
+<ul>
+<li><strong>Documento del menor:</strong> cédula vigente (Sudamérica convenio) o pasaporte. Revisa fechas de expiración.</li>
+<li><strong>Autorización:</strong> notarial o judicial según el caso, con destino y plazo indicados, en original + tres copias notariales (la autorización judicial basta en fotocopia simple).</li>
+<li><strong>Filiación:</strong> libreta de familia o certificado de nacimiento (se descarga en Registro Civil en línea).</li>
+<li><strong>Casos especiales:</strong> certificado de defunción si el otro padre falleció; sentencia o avenimiento si hay cuidado personal judicial.</li>
+<li><strong>Entrada al destino:</strong> reglas de migración, visado o seguro de viaje que exige el país —esto se confirma en el consulado de destino, no en la autorización chilena.</li>
+</ul>
+
+<p>Si todavía estás armando el presupuesto del viaje, el artículo sobre <a href="/blog/cuanto-dinero-llevar-viaje-verano-2027">cuánto dinero llevar a los destinos más comunes del verano</a> y la <a href="/calculadoras/calculadora-costo-viaje">calculadora de costo de viaje</a> te ayudan a estimar combustible, peajes y efectivo. Para profundizar en el régimen de permisos laborales si necesitas días antes o después del viaje, revisa la <a href="/guias/vacaciones-feriado-legal-chile">guía de feriado legal</a>.</p>
+
+<p>Este artículo es orientación general basada en la Ley 16.618 y las fichas de ChileAtiende, revisado el 27 de noviembre de 2026. Los requisitos concretos de tu viaje —notaría que tramita, formulario de autorización que acepta, reglas de migración del destino— se confirman con la notaría, el consulado correspondiente y, si el otro padre se opone, el juzgado de familia.</p>`,
+  },
 ];
