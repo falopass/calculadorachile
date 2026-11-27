@@ -1992,6 +1992,36 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 27 de noviembre de 2026 con la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60764.html" target="_blank" rel="noopener">Dirección del Trabajo sobre contratos de trabajo y honorarios</a>, la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60792.html" target="_blank" rel="noopener">DT sobre duración y renovación del contrato a plazo fijo</a>, la <a href="https://www.afc.cl/empleadores/pagos-y-dudas-sobre-cotizaciones/cotizaciones-cuanto-y-como-se-paga/" target="_blank" rel="noopener">AFC sobre tasas y tope de cotización del seguro de cesantía</a>, la <a href="https://www.afc.cl/afc-informa/noticias/como-saber-el-saldo-de-mi-seguro-de-cesantia/" target="_blank" rel="noopener">AFC sobre el abono del empleador en plazo fijo</a>, la <a href="https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html" target="_blank" rel="noopener">página del SII sobre cotizaciones previsionales de honorarios</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>.</p>`,
+    sources: [
+      {
+        label: 'Dirección del Trabajo — Contratos de trabajo y honorarios',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60764.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Duración y renovación del contrato a plazo fijo',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60792.html',
+      },
+      {
+        label: 'AFC — Cotizaciones del seguro de cesantía: cuánto y cómo se paga',
+        url: 'https://www.afc.cl/empleadores/pagos-y-dudas-sobre-cotizaciones/cotizaciones-cuanto-y-como-se-paga/',
+      },
+      {
+        label: 'AFC — Abono del empleador en contrato a plazo fijo',
+        url: 'https://www.afc.cl/afc-informa/noticias/como-saber-el-saldo-de-mi-seguro-de-cesantia/',
+      },
+      {
+        label: 'SII — Cotizaciones previsionales de trabajadores a honorarios',
+        url: 'https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html',
+      },
+      {
+        label: 'BCN LeyChile — Código del Trabajo',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'BCN LeyChile — Ley 21.133 (jornada máxima de 42 horas)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1123845',
+      },
+    ],
   },
   {
     slug: 'costo-notaria-compraventa-2027-estimar',
@@ -2103,5 +2133,23 @@ export const ARTICULOS_2027: Article[] = [
 
 <h2>Fuentes consultadas</h2>
 <p>Contenido verificado el 27 de noviembre de 2026 con las <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm" target="_blank" rel="noopener">preguntas frecuentes del SII sobre el impuesto de timbres y estampillas</a>, los <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm" target="_blank" rel="noopener">formularios 24 y 24.1 del SII</a>, la <a href="https://conservador.cl/portal/inscripcion_propiedad" target="_blank" rel="noopener">página de inscripción de propiedad del Conservador de Bienes Raíces de Santiago</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6362" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a> para el tratamiento del mayor valor.</p>`,
+    sources: [
+      {
+        label: 'SII — Impuesto de timbres y estampillas (preguntas frecuentes)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm',
+      },
+      {
+        label: 'SII — Formularios 24 y 24.1 (timbres y estampillas)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm',
+      },
+      {
+        label: 'Conservador de Bienes Raíces de Santiago — Inscripción de propiedad',
+        url: 'https://conservador.cl/portal/inscripcion_propiedad',
+      },
+      {
+        label: 'BCN LeyChile — Ley sobre Impuesto a la Renta',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6362',
+      },
+    ],
   },
 ];
