@@ -1876,6 +1876,157 @@ export const ARTICULOS_2027: Article[] = [
 <p>Este artículo es orientación general: no sustituye la información de tu AFP, del IPS ni una asesoría previsional. Las simulaciones de las calculadoras son referenciales y usan los valores vigentes informados en cada una.</p>`,
   },
   {
+    slug: 'bonos-beneficios-diciembre-2026-pagos-ips',
+    title:
+      'Bonos y beneficios que se pagan en diciembre de 2026: aguinaldo, PGU, SUF y calendario IPS',
+    description:
+      'Qué pagos llegan en diciembre de 2026: aguinaldo de Navidad ($29.055 pensionados, $71.206/$37.666 sector público), PGU, SUF, asignación familiar anual de independientes y subsidio eléctrico, con fechas y fuentes.',
+    date: '2026-11-27',
+    updatedAt: '2026-11-27',
+    category: 'beneficios',
+    readingTime: 11,
+    seoTitle: 'Pagos diciembre 2026: aguinaldo, PGU, SUF y calendario IPS',
+    seoDescription:
+      'Calendario de beneficios de diciembre 2026: aguinaldo Navidad pensionados y sector público, PGU, SUF, asignación familiar anual de independientes y subsidio eléctrico. Montos y cómo revisar tu fecha.',
+    keywords: [
+      'pagos diciembre 2026',
+      'bonos diciembre 2026 chile',
+      'calendario de pagos ips diciembre',
+      'aguinaldo navidad 2026',
+      'pgu diciembre 2026',
+      'asignacion familiar independientes pago anual',
+      'beneficios ips diciembre 2026',
+    ],
+    relatedCalculators: [
+      'calculadora-pgu',
+      'calculadora-asignacion-familiar',
+      'calculadora-aguinaldo',
+    ],
+    faq: [
+      {
+        question: '¿Qué bonos se pagan en diciembre de 2026?',
+        answer:
+          'En diciembre de 2026 se paga el aguinaldo de Navidad para pensionados ($29.055 + $16.415 por carga acreditada al 30-11), el aguinaldo del sector público ($71.206 o $37.666 según remuneración), los beneficios mensuales del IPS (PGU, PBSI, SUF, asignación familiar), la asignación familiar anual de los trabajadores independientes y la cuota de diciembre del subsidio eléctrico.',
+      },
+      {
+        question: '¿Cómo sé qué día me pagan en diciembre?',
+        answer:
+          'El IPS asigna a cada persona su propia fecha de pago; no hay un día único. Se consulta con el RUT en la ficha de ChileAtiende "fecha de pago de una pensión o beneficio" (trámite 5212) o en la app IPS en línea. Conviene revisarla a comienzos de diciembre, porque el calendario del mes incorpora los feriados.',
+      },
+      {
+        question: '¿Hay un "bono de Navidad" del Gobierno en 2026?',
+        answer:
+          'No. A la fecha de corte de este artículo no existe ningún anuncio oficial de un bono de Navidad 2026 adicional a los beneficios de ley. Lo que sí se paga en diciembre es el aguinaldo de Navidad para pensionados y para el sector público, fijado por las leyes 21.806 y 21.724.',
+      },
+      {
+        question: '¿El aguinaldo de Navidad tiene descuentos?',
+        answer:
+          'No. Según la Ley 21.806, el aguinaldo no es imponible ni tributable y no tiene descuentos de ningún tipo: no se descuentan cotizaciones previsionales ni de salud, y no se considera renta para impuestos.',
+      },
+      {
+        question:
+          'Soy independiente con cargas familiares: ¿cuándo me pagan la asignación familiar?',
+        answer:
+          'Los trabajadores independientes con causantes reconocidos por el IPS reciben la asignación familiar y maternal una vez al año, en diciembre, por cada causante reconocido al 31 de diciembre del año correspondiente, según la Subsecretaría de Previsión Social.',
+      },
+    ],
+    sources: [
+      {
+        label: 'ChileAtiende, aguinaldo de Navidad para pensionados IPS (ficha 30171)',
+        url: 'https://www.chileatiende.gob.cl/fichas/30171-aguinaldo-de-navidad-para-pensionados-ips',
+      },
+      {
+        label: 'ChileAtiende, fecha de pago de una pensión u otros beneficios (trámite 5212)',
+        url: 'https://www.chileatiende.gob.cl/tramites/5212',
+      },
+      {
+        label: 'ChileAtiende, pagos por cobrar del IPS (ficha 114831)',
+        url: 'https://www.chileatiende.gob.cl/fichas/114831-pagos-por-cobrar-del-instituto-de-prevision-social-ips',
+      },
+      {
+        label: 'ChileAtiende, Pensión Garantizada Universal PGU (ficha 102077)',
+        url: 'https://www.chileatiende.gob.cl/fichas/102077-pension-garantizada-universal-pgu',
+      },
+      {
+        label: 'ChileAtiende, Subsidio Familiar SUF (ficha 33112)',
+        url: 'https://www.chileatiende.gob.cl/fichas/33112-subsidio-familiar-suf',
+      },
+      {
+        label: 'BCN LeyChile, Ley 21.806 (reajuste sector público 2026; aguinaldo)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1221118',
+      },
+      {
+        label: 'BCN LeyChile, Ley 21.791 (feriado bancario 31 de diciembre)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1219578',
+      },
+      {
+        label:
+          'SUSESO, asignación familiar de trabajadores independientes (pago anual en diciembre)',
+        url: 'https://www.suseso.gob.cl/619/articles-736060_archivo_01.pdf',
+      },
+    ],
+    content: `<p class="article-lead">Diciembre es el mes con más pagos del año para los beneficiarios del sistema previsional chileno: además de la pensión o el sueldo de siempre, cae el aguinaldo de Navidad, la asignación familiar anual de los independientes y la cuota mensual del subsidio eléctrico. Este artículo ordena qué se paga, cuánto es y cómo revisar tu fecha exacta. Fecha de corte: <strong>27 de noviembre de 2026</strong>.</p>
+<p>El alcance es deliberado: cubre los pagos que llegan en diciembre por ley o por calendario del IPS, sin repetir el detalle de los aguinaldos, que ya tienen sus propios artículos. Tampoco hay un "bono de Navidad" del Gobierno anunciado para 2026 —lo explicamos más abajo— y el aguinaldo del sector privado no existe como obligación legal general, con excepciones que sí están en la ley.</p>
+
+<h2>Resumen: los pagos de diciembre 2026</h2>
+<div class="table-scroll"><table>
+<caption>Beneficios que se pagan en diciembre de 2026</caption>
+<thead><tr><th scope="col">Pago</th><th scope="col">Quiénes</th><th scope="col">Monto</th><th scope="col">Cuándo</th></tr></thead>
+<tbody>
+<tr><td>Aguinaldo de Navidad pensionados</td><td>Pensionados IPS, Dipreca, Capredena, mutualidades y otros regímenes listados al 30-11-2026</td><td>$29.055 + $16.415 por carga (salvo carga con pensión de sobrevivencia, excepto orfandad)</td><td>Con la pensión de diciembre</td></tr>
+<tr><td>Aguinaldo sector público</td><td>Funcionarios cubiertos por la ley de reajuste al 1-12-2026</td><td>$71.206 (líquido nov ≤ $1.060.493) o $37.666 (líquido sobre ese monto; tope bruto $3.511.800)</td><td>En diciembre, según cada servicio</td></tr>
+<tr><td>PGU</td><td>Beneficiarios de la Pensión Garantizada Universal</td><td>Hasta $231.732 (65–74) o $250.275 (75+)</td><td>Fecha asignada a cada persona</td></tr>
+<tr><td>SUF</td><td>Beneficiarios del Subsidio Familiar</td><td>$22.601 por carga ($45.202 con discapacidad)</td><td>Fecha asignada a cada persona</td></tr>
+<tr><td>Asignación familiar</td><td>Cargas reconocidas de dependientes y pensionados</td><td>$22.601 / $13.870 / $4.382 según tramo</td><td>Con sueldo o pensión de diciembre</td></tr>
+<tr><td>Asignación familiar independientes</td><td>Independientes con causantes reconocidos al 31-12-2026</td><td>Según tramo, por cada causante</td><td>Una vez al año, en diciembre</td></tr>
+<tr><td>Subsidio eléctrico</td><td>Beneficiarios de la 5ª convocatoria</td><td>Cuota de $2.891 / $3.758 / $5.204 según integrantes</td><td>4ª cuota de referencia; la boleta exacta depende de la distribuidora</td></tr>
+</tbody>
+</table></div>
+
+<h2>Aguinaldo de Navidad: quiénes lo reciben y cuánto es</h2>
+<p>El aguinaldo de Navidad es el pago estrella de diciembre y tiene dos versiones que conviene no mezclar, porque dependen de regímenes distintos.</p>
+<p><strong>Pensionados.</strong> Quienes estaban pensionados al <strong>30 de noviembre de 2026</strong> en los regímenes cubiertos —PGU, PBSI, Subsidio de Discapacidad, ex cajas de previsión, Ley 16.744 (mutualidades), pensiones de reparación Valech y Rettig, y Dipreca o Capredena, entre otros— reciben <strong>$29.055</strong>, más <strong>$16.415</strong> por cada persona acreditada como causante de asignación familiar o maternal a esa misma fecha. Es automático, viene dentro del pago de la pensión de diciembre y la ley es explícita: <strong>no es imponible, no es tributable y no tiene descuentos</strong>. La lista completa de regímenes, la excepción de las cargas con pensión de sobrevivencia y los ejemplos de cálculo están en el artículo del <a href="/blog/aguinaldo-navidad-pensionados-2026">aguinaldo de Navidad 2026 para pensionados</a>.</p>
+<p><strong>Sector público.</strong> Los funcionarios incluidos en la ley de reajuste —el derecho se evalúa al <strong>1 de diciembre</strong>— reciben <strong>$71.206</strong> si su remuneración líquida de noviembre fue igual o inferior a $1.060.493, o <strong>$37.666</strong> si la superó, siempre que su remuneración bruta permanente no exceda $3.511.800. El aguinaldo del sector público es permanente desde la Ley 21.724: ya no depende de que cada ley de reajuste lo repita. El detalle de umbrales y exclusiones está en el artículo del <a href="/blog/aguinaldo-navidad-2026-sector-publico">aguinaldo de Navidad 2026 del sector público</a>.</p>
+<p><strong>Sector privado.</strong> No existe un aguinaldo de Navidad obligatorio general: solo es exigible si está pactado en el contrato individual, en un convenio colectivo o se ha pagado de forma reiterada en años anteriores. La excepción son los trabajadores cubiertos por la misma ley aunque su empleador sea privado, como los de los colegios particulares subvencionados o las Fábricas y Maestranzas de las Fuerzas Armadas —la lista completa está en el artículo del sector público—. Lo que sí revisa el fin de año en las empresas privadas es la <a href="/blog/gratificacion-fin-de-ano-2026">gratificación anual</a>.</p>
+
+<h2>Pensiones y beneficios del IPS: cada persona tiene su fecha</h2>
+<p>La Pensión Garantizada Universal, la PBSI, el Subsidio de Discapacidad, las pensiones de ex cajas de previsión y el SUF se pagan todos los meses, pero <strong>no existe una fecha única</strong>: el IPS le asigna a cada beneficiario un día de pago propio, que se mantiene mes a mes salvo que el calendario del mes lo mueva por feriados. Eso significa que dos personas con la PGU pueden cobrar en días distintos, y que la fecha que vale en diciembre es la que aparece en la consulta con RUT, no la del vecino.</p>
+<p>Los montos vigentes en diciembre de 2026 son los del reajuste de febrero de este año: la <strong>PGU llega hasta $231.732</strong> para personas de 65 a 74 años y <strong>hasta $250.275</strong> desde los 75 años (el monto máximo se abrió a los 75+ en septiembre de 2026, según la Ley 21.735; antes aplicaba solo a los 82+). El "hasta" importa: la PGU completa solo aplica con pensión base hasta $789.139; sobre ese piso se reduce hasta desaparecer en $1.252.602. Para estimar tu PGU según tu pensión base, usa la <a href="/calculadoras/calculadora-pgu">calculadora de PGU</a>.</p>
+<p>El <strong>SUF</strong> paga <strong>$22.601 por cada carga familiar acreditada</strong> y <strong>$45.202</strong> cuando la carga es una persona con discapacidad (montos vigentes desde el 1 de mayo de 2026, Ley 21.830). Es incompatible con la asignación familiar: no se pueden cobrar ambos por la misma carga.</p>
+<p>La <strong>asignación familiar</strong> de dependientes llega dentro del sueldo de diciembre y la de pensionados dentro de la pensión: <strong>$22.601, $13.870 o $4.382 por carga</strong> según el tramo de ingreso. Los tramos y la tabla completa están en el artículo de la <a href="/blog/asignacion-familiar-2026-tramos-montos">asignación familiar 2026</a> y se pueden proyectar en la <a href="/calculadoras/calculadora-asignacion-familiar">calculadora de asignación familiar</a>.</p>
+<p>Un caso que solo aparece en diciembre: los <strong>trabajadores independientes</strong> que solicitaron y obtuvieron el reconocimiento de sus causantes ante el IPS reciben la asignación familiar y maternal <strong>una vez al año, en diciembre</strong>, por cada causante reconocido al <strong>31 de diciembre</strong> del año correspondiente, según la información de la Subsecretaría de Previsión Social publicada por la SUSESO. Es el único beneficio familiar con esa lógica anual, y es la razón por la que un independiente puede recibir en diciembre un depósito grande que junta todo el año.</p>
+
+<h2>El feriado bancario del 31 de diciembre y los pagos de fin de mes</h2>
+<p>El <strong>31 de diciembre de 2026 es feriado bancario</strong> por la Ley 21.791: los bancos no atienden presencialmente ese día y el último día hábil bancario del año es el <strong>miércoles 30 de diciembre</strong>. El detalle de qué cierra y qué sigue funcionando (cajeros, transferencias, web) está en el artículo del <a href="/blog/feriado-bancario-31-diciembre-2026">feriado bancario de fin de año</a>.</p>
+<p>Para los beneficios del IPS el efecto práctico es doble. Si tu pago es por <strong>depósito o CuentaRUT</strong>, el abono se procesa según el calendario del mes; lo que cambia es el día en que puedes retirarlo o usarlo en comercio, no la existencia del pago. Si tu pago es <strong>presencial en BancoEstado</strong> y tu fecha cae sobre el 31, la sucursal no atiende ese día, así que revisa en la consulta con RUT qué día quedó tu pago en el calendario de diciembre: no se puede cobrar antes de la fecha asignada. Quienes cobran en Caja Los Héroes —una caja de compensación, no un banco— deben confirmar su propio calendario, porque el feriado legal solo obliga a los bancos. En cualquier caso, la referencia que manda es la fecha asignada por el IPS, que la institución publica a comienzos del mes.</p>
+
+<h2>Subsidio eléctrico: la cuota de diciembre en la cuenta de luz</h2>
+<p>La quinta convocatoria del subsidio eléctrico distribuye el beneficio en <strong>seis cuotas desde septiembre de 2026</strong>, y diciembre corresponde a la cuarta cuota del calendario de referencia: <strong>$2.891</strong> para hogares de un integrante, <strong>$3.758</strong> para hogares de 2 a 3 y <strong>$5.204</strong> para hogares de 4 o más. No es un depósito: se descuenta directamente en la boleta de electricidad de quienes quedaron seleccionados —el momento exacto en que aparece depende del calendario de facturación de cada distribuidora— (al día en el pago y dentro del 40% más vulnerable del Registro Social de Hogares, u hogares con persona electrodependiente registrada). El detalle de la convocatoria está en el artículo del <a href="/blog/subsidio-electrico-2026-resultados-descuento-cuenta">subsidio eléctrico 2026</a>.</p>
+
+<h2>Lo que NO se paga en diciembre (y dónde está la confusión)</h2>
+<p><strong>"Bono de Navidad" del Gobierno.</strong> Al 27 de noviembre de 2026 no existe ningún anuncio oficial de un bono de Navidad adicional para beneficios sociales. Circula cada año como rumor; lo que sí está en la ley es el aguinaldo para pensionados y sector público descrito arriba. Desconfía de publicaciones que den un monto sin citar una ley o un decreto.</p>
+<p><strong>Aporte Familiar Permanente (ex Bono Marzo).</strong> Su nombre lo dice: es un aporte de marzo. El proceso 2026 pagó a partir de febrero y marzo por las cargas que al 31-12-2025 daban derecho a SUF o asignación familiar, y por los grupos familiares en Chile Solidario o SSyOO. No hay edición en diciembre; lo que sí puede existir son <strong>aportes de años anteriores sin cobrar</strong>, que se recuperan en el trámite de pagos por cobrar del IPS (hay nueve meses para cobrar desde que se genera el documento).</p>
+<p><strong>Bono de vacaciones del sector público.</strong> También es de ley, pero su pago vence "a más tardar en el mes de enero de cada anualidad": pertenece al calendario de enero, no al de diciembre.</p>
+
+<h2>Cómo revisar tu fecha exacta y si tienes pagos pendientes</h2>
+<ol class="steps">
+<li><strong>Consulta tu fecha con tu RUT.</strong> En la ficha de ChileAtiende "fecha de pago de una pensión u otros beneficios" (trámite 5212) o en la app y sitio IPS en línea ves tu día de pago y tu forma de cobro para diciembre.</li>
+<li><strong>Revisa pagos por cobrar.</strong> Si algún beneficio quedó sin retirar, la consulta de pagos por cobrar del IPS (ficha 114831) muestra lo pendiente y permite solicitarlo con ClaveÚnica, por transferencia o retiro en BancoEstado o Los Héroes.</li>
+<li><strong>Anticipa el feriado bancario.</strong> Si cobras presencialmente en BancoEstado, no planifiques el retiro para el 31: las sucursales no atienden. Revisa en la consulta con RUT qué día hábil quedó tu pago.</li>
+<li><strong>Confirma tu canal.</strong> Si tienes CuentaRUT vigente y usada en los últimos seis meses, el IPS puede pagarte por ahí en lugar de una caja presencial; cámbialo con tiempo, porque la nueva modalidad puede tardar entre 30 y 60 días en quedar habilitada.</li>
+<li><strong>Verifica las cargas.</strong> El incremento del aguinaldo usa el corte rígido del 30-11: un reconocimiento posterior no lo suma. Distinto es el dinero ya devengado de la asignación familiar, que no se pierde y se puede cobrar después ante el IPS.</li>
+</ol>
+
+<h2>Calcula lo que te corresponde</h2>
+<ul>
+<li><a href="/calculadoras/calculadora-pgu">Calculadora de PGU</a>: estima tu PGU según pensión base y edad.</li>
+<li><a href="/calculadoras/calculadora-asignacion-familiar">Calculadora de asignación familiar</a>: proyecta el monto por tramo y carga.</li>
+<li><a href="/calculadoras/calculadora-aguinaldo">Calculadora de aguinaldo</a>: estima el aguinaldo en el sector privado cuando está pactado.</li>
+</ul>
+
+<aside class="callout callout--info"><span class="callout__icon" aria-hidden="true">ℹ️</span><div class="callout__body"><strong>Disclaimer YMYL</strong><p>Artículo informativo con fecha de corte del 27 de noviembre de 2026. Los montos citados corresponden a leyes y fichas oficiales vigentes a esa fecha; la fecha de pago individual de cada beneficiario la define el IPS y debe confirmarse en la consulta con RUT. No es asesoría previsional ni laboral.</p></div></aside>`,
+  },
+  {
     slug: 'viajar-al-extranjero-con-menores-autorizacion-documentos',
     title:
       'Viajar al extranjero con menores: autorización notarial y documentos para salir de Chile',

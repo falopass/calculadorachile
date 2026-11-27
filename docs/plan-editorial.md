@@ -175,6 +175,7 @@ Ordenado por **fecha de publicación sugerida**.
 | — | blog | Impuestos compras Temu, AliExpress y Shein (Navidad) | ~~`impuestos-compras-temu-aliexpress-shein-navidad`~~ | publicado 2026-11-17 | impuestos | 2026-11-17 | nov–dic | ✅ |
 | — | blog | Feriado irrenunciable 1 de enero 2027 | ~~`feriado-irrenunciable-1-enero-2027`~~ | publicado 2026-11-26 · investigación Navidad/Año Nuevo | laboral | 2026-11-26 | dic–ene | ✅ |
 | — | blog | Feriado judicial febrero 2027 (suprimido, plazos corren) | ~~`feriado-judicial-febrero-2027`~~ | publicado 2026-11-26 · investigación vacaciones verano | laboral | 2026-11-26 | ene–feb | ✅ |
+| — | blog | Bonos y beneficios que se pagan en diciembre 2026 | ~~`bonos-beneficios-diciembre-2026-pagos-ips`~~ | publicado 2026-11-27 · investigación Navidad/Año Nuevo | beneficios | 2026-11-27 | dic | ✅ |
 
 **Conteo pendientes:** 19 filas activas, sin las filas marcadas como publicadas.
 
