@@ -1876,6 +1876,291 @@ export const ARTICULOS_2027: Article[] = [
 <p>Este artículo es orientación general: no sustituye la información de tu AFP, del IPS ni una asesoría previsional. Las simulaciones de las calculadoras son referenciales y usan los valores vigentes informados en cada una.</p>`,
   },
   {
+    slug: 'contrato-indefinido-plazo-fijo-honorarios-2026',
+    embedCalculatorId: 'sueldo-liquido',
+    title:
+      'Contrato indefinido vs plazo fijo vs honorarios 2026: qué cambia en cotizaciones, vacaciones y cesantía',
+    description:
+      'Las tres formas de trabajar en Chile tienen reglas distintas: el plazo fijo solo se renueva una vez y no puede pasar de 1 año (2 para profesionales y técnicos titulados), los honorarios quedan fuera del Código del Trabajo pero cotizan por Operación Renta, y solo los contratos tienen feriado legal y jornada máxima.',
+    date: '2026-11-27',
+    category: 'laboral',
+    readingTime: 9,
+    relatedGuia: 'sueldo-liquido-chile',
+    seoTitle:
+      'Contrato indefinido, plazo fijo u honorarios: diferencias 2026 en Chile',
+    seoDescription:
+      'Plazo fijo solo se renueva una vez y máx. 1 año; honorarios no tiene feriado legal pero cotiza en Operación Renta. Cotizaciones, seguro de cesantía, vacaciones y 42 horas comparados.',
+    keywords: [
+      'contrato indefinido plazo fijo honorarios diferencias',
+      'plazo fijo pasa a indefinido cuándo',
+      'honorarios tienen vacaciones chile',
+      'seguro de cesantía contrato plazo fijo',
+      'honorarios cotizaciones obligatorias 2026',
+      '42 horas aplica a honorarios',
+    ],
+    relatedCalculators: [
+      'calculadora-sueldo-liquido',
+      'calculadora-boleta-honorarios',
+      'calculadora-seguro-cesantia',
+      'calculadora-costo-empleado-pyme',
+    ],
+    faq: [
+      {
+        question: '¿Cuándo un contrato a plazo fijo pasa a ser indefinido?',
+        answer:
+          'Cuando se renueva por segunda vez, o cuando la suma de los contratos a plazo supera 1 año (hasta 2 años para gerentes y personas con profesión u oficio técnico titulado). También si el trabajador sigue prestando servicios después del vencimiento con conocimiento del empleador (art. 159 del Código del Trabajo).',
+      },
+      {
+        question: '¿Quién paga el seguro de cesantía en un contrato a plazo fijo?',
+        answer:
+          'Todo lo paga el empleador: 3% de la remuneración imponible. En el contrato indefinido se reparte: el trabajador aporta 0,6% y el empleador 2,4%. El tope imponible del seguro es de 135,2 UF mensuales, vigente desde el 1 de febrero de 2026.',
+      },
+      {
+        question: '¿Los honorarios tienen feriado legal, licencia e indemnización?',
+        answer:
+          'No por regla general: la relación a honorarios se rige por las normas civiles y comerciales, no por el Código del Trabajo. No hay feriado legal ni indemnización por años de servicio. Lo que sí existe desde la Ley 21.133 es la obligación de cotizar a la seguridad social vía Operación Renta, lo que da acceso a licencias médicas y pensiones.',
+      },
+      {
+        question: '¿La jornada de 42 horas aplica a trabajadores a honorarios?',
+        answer:
+          'No. La reducción de la jornada máxima a 42 horas semanales (Ley 21.561, aplicable desde el 26 de abril de 2026) rige para trabajadores dependientes del sector privado bajo Código del Trabajo. Una boleta de honorarios no tiene jornada legal: el tiempo de trabajo es lo que pacten las partes.',
+      },
+      {
+        question: '¿Si trabajo a honorarios pero cumplo horario y dependencia, soy trabajador dependiente?',
+        answer:
+          'La Dirección del Trabajo y los tribunales pueden calificar la relación por la realidad y no por el papel: si hay subordinación, dependencia y prestación personal, la relación es laboral aunque se facture con boletas. Es el llamado "falso independiente" y puede dar derecho a todas las prestaciones del Código del Trabajo.',
+      },
+    ],
+    content: `<p class="article-lead">Indefinido, plazo fijo y honorarios no son tres nombres para lo mismo: cambian <strong>quién paga el seguro de cesantía</strong>, si hay <strong>feriado legal</strong>, qué pasa cuando termina la relación y hasta qué jornada máxima aplica. Esta guía compara las tres modalidades con las reglas vigentes al 27 de noviembre de 2026, para que puedas leer un contrato o una boleta sabiendo qué esperar.</p>
+<p>La distinción de fondo es una sola: el <strong>contrato de trabajo</strong> (indefinido o a plazo) presume una relación de subordinación y dependencia regulada por el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>. La boleta de honorarios, en cambio, pertenece al mundo civil: hay un servicio independiente, sin subordinación, y las prestaciones laborales no aplican salvo que la realidad de la relación diga otra cosa (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60764.html" target="_blank" rel="noopener">Dirección del Trabajo</a>).</p>
+
+<h2>Tabla comparativa: qué tiene cada modalidad</h2>
+<div class="table-scroll"><table>
+<caption>Contrato indefinido vs plazo fijo vs honorarios en Chile 2026</caption>
+<thead><tr><th scope="col">Materia</th><th scope="col">Indefinido</th><th scope="col">Plazo fijo / obra o faena</th><th scope="col">Honorarios</th></tr></thead>
+<tbody>
+<tr><td>Régimen</td><td>Código del Trabajo</td><td>Código del Trabajo</td><td>Normas civiles; salvo excepciones, no laboral</td></tr>
+<tr><td>Término</td><td>Sin fecha: termina por causal (despido, renuncia, mutuo acuerdo)</td><td>Plazo fijo: se renueva solo una vez y en total no puede pasar de 1 año (2 para gerentes y profesionales/técnicos titulados); obra o faena: dura lo que dure la obra pactada</td><td>Según lo pactado; no hay regla laboral de duración</td></tr>
+<tr><td>Seguro de cesantía (AFC)</td><td>Trabajador 0,6% + empleador 2,4%</td><td>Empleador 3% íntegro</td><td>No cotiza AFC</td></tr>
+<tr><td>Feriado legal (vacaciones)</td><td>15 días hábiles al año (20 en Aysén, Magallanes y Palena)</td><td>Igual regla, proporcional si dura menos; en contratos de hasta 30 días el feriado ya va incluido en la remuneración</td><td>No aplica</td></tr>
+<tr><td>Indemnización por años de servicio</td><td>Sí, según causal (tope 11 años y 90 UF la base)</td><td>Sí en algunas causales (despido por necesidades de la empresa)</td><td>No aplica</td></tr>
+<tr><td>Jornada máxima</td><td>42 horas semanales desde el 26-04-2026 (Ley 21.561)</td><td>Igual: 42 horas</td><td>No aplica; el tiempo lo pactan las partes</td></tr>
+<tr><td>Cotizaciones previsionales</td><td>Obligatorias mes a mes, las retiene el empleador</td><td>Ídem</td><td>Obligatorias vía Operación Renta desde la Ley 21.133</td></tr>
+<tr><td>Cómo se liquida el pago</td><td>Liquidación de sueldo mensual</td><td>Liquidación de sueldo mensual</td><td>Boleta de honorarios con retención del 15,25% en 2026 (16% en 2027)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Contrato indefinido: el estándar completo</h2>
+<p>Es la modalidad por defecto y la que acumula todas las prestaciones del Código del Trabajo. No tiene fecha de término: solo se extingue por las causales tasadas de la ley (renuncia, mutuo acuerdo, caducidad, conclusión del trabajo, vencimiento del plazo, fuerza mayor, despido unilateral del empleador por causales del art. 159 a 161). En la práctica eso se traduce en dos protecciones grandes:</p>
+<ul>
+<li><strong>Indemnización por años de servicio</strong> cuando el empleador termina por necesidades de la empresa o desahucio: un mes de sueldo por año trabajado y por fracción superior a seis meses, con tope de 11 años, y la base no puede superar las 90 UF.</li>
+<li><strong>Seguro de cesantía mixto:</strong> el trabajador aporta 0,6% del imponible a su cuenta individual y el empleador 2,4% (1,6% a la cuenta individual + 0,8% al Fondo de Cesantía Solidario), sobre un tope de 135,2 UF mensuales vigente desde febrero de 2026 (<a href="https://www.afc.cl/empleadores/pagos-y-dudas-sobre-cotizaciones/cotizaciones-cuanto-y-como-se-paga/" target="_blank" rel="noopener">AFC</a>).</li>
+</ul>
+<p>Para estimar el líquido de un sueldo con contrato, la <a href="/calculadoras/calculadora-sueldo-liquido">calculadora de sueldo líquido</a> descuenta AFP, salud, seguro de cesantía e impuesto único según corresponda.</p>
+
+<h2>Contrato a plazo fijo: duración acotada y cesantía de cargo del empleador</h2>
+<p>El plazo fijo tiene las mismas obligaciones laborales del indefinido —cotizaciones, feriado proporcional, jornada— pero con dos diferencias importantes:</p>
+<p><strong>Duración.</strong> Solo puede celebrarse hasta por <strong>un año</strong>, y solo puede renovarse una vez: la suma de ambos períodos no puede exceder ese año. Como excepción, para gerentes o personas que tengan profesión u oficio técnicos titulados, la duración puede llegar a <strong>dos años</strong> (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60792.html" target="_blank" rel="noopener">Dirección del Trabajo</a>). Si se pacta una segunda renovación o se sigue trabajando después del vencimiento con conocimiento del empleador, el contrato se transforma por ley en indefinido (art. 159 N° 4 del Código del Trabajo). También se presume indefinido cuando dos o más contratos a plazo fijo discontinuos suman más de 12 meses de servicios dentro de un lapso de 15.</p>
+<p><strong>Seguro de cesantía.</strong> Aquí el trabajador no aporta nada: el empleador paga el <strong>3% íntegro</strong> de la remuneración imponible: 2,8% a la Cuenta Individual de Cesantía y 0,2% al Fondo de Cesantía Solidario (<a href="https://www.afc.cl/afc-informa/noticias/como-saber-el-saldo-de-mi-seguro-de-cesantia/" target="_blank" rel="noopener">AFC</a>). Para cobrarlo se exigen al menos 5 cotizaciones continuas o discontinuas en vez de las 10 del indefinido. Puedes estimar los giros con el <a href="/calculadoras/calculadora-seguro-cesantia">simulador de seguro de cesantía</a>.</p>
+<p><strong>Indemnización.</strong> El plazo fijo no tiene derecho automático a indemnización por años de servicio si el empleador lo termina por caducidad —el contrato simplemente vence—, pero si el término es anticipado por necesidades de la empresa sí puede corresponder el pago según las mismas reglas del indefinido.</p>
+
+<h2>Honorarios: fuera del Código del Trabajo, pero no fuera del sistema</h2>
+<p>La relación a honorarios se rige por el Código Civil y las normas mercantiles: el trabajador presta un servicio independiente, emite boleta y no tiene feriado legal, ni horario máximo, ni indemnización, ni aguinaldo obligatorio. La Dirección del Trabajo es clara en que los derechos del Código del Trabajo se aplican solo a la relación laboral (<a href="https://www.dt.gob.cl/portal/1628/w3-article-60764.html" target="_blank" rel="noopener">dt.gob.cl</a>).</p>
+<p>Lo que cambió con la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1128420" target="_blank" rel="noopener">Ley 21.133</a> es la cotización: desde la Operación Renta 2019 los trabajadores a honorarios deben cotizar obligatoriamente a previsión, salud, seguro de accidentes del trabajo, seguro de acompañamiento de niños y SANNA, con un mecanismo de retención de la boleta que sube año a año: <strong>15,25% en 2026, 16% en 2027 y 17% en 2028</strong> (calendario de la ley, vía <a href="https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html" target="_blank" rel="noopener">SII</a>). La <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boleta de honorarios</a> muestra el líquido tras esa retención.</p>
+<p>Eso implica dos diferencias prácticas frente al contrato:</p>
+<ul>
+<li><strong>El pago es anual, no mensual.</strong> Las cotizaciones se calculan sobre el 80% del total de honorarios del año en la declaración anual; lo retenido durante el año es solo un pago provisional.</li>
+<li><strong>Hay cobertura, pero distinta.</strong> Las cotizaciones dan acceso a licencias médicas y previsión, pero el cálculo se hace sobre la base anual de honorarios, no sobre una remuneración imponible mensual.</li>
+</ul>
+<p>La jornada de 42 horas tampoco aplica: la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1190878" target="_blank" rel="noopener">Ley 21.561</a> modificó el Código del Trabajo, que solo rige a dependientes. Un honorario puede pactar las horas que quiera; si en la práctica hay horario fijo y subordinación, vuelve la discusión del falso independiente.</p>
+
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: misma renta de $1.000.000, tres escenarios</div><ul><li><strong>Indefinido:</strong> cotizaciones del trabajador ≈ 10% AFP + 7% salud + 0,6% AFC sobre el imponible; líquido cercano a $820.000 según AFP. Con feriado legal, posible indemnización y AFC.</li><li><strong>Plazo fijo:</strong> el descuento AFC del trabajador desaparece (lo paga el empleador), así que el líquido sube levemente respecto del indefinido. Pero el vínculo caduca: máximo 1 año total salvo profesionales/técnicos titulados (2 años).</li><li><strong>Honorarios:</strong> boleta por $1.000.000 con retención 15,25% → $847.500 en el mes. Sin feriado ni AFC, y el saldo de cotizaciones se ajusta en la Operación Renta siguiente.</li></ul></div>
+
+<h2>Qué revisar antes de firmar o emitir</h2>
+<ol class="steps">
+<li><strong>Pregunta por la modalidad real.</strong> "Te pagamos por boleta pero con horario de oficina" no es honorarios: es una relación laboral encubierta que la DT y los tribunales califican por los hechos, no por el nombre del documento.</li>
+<li><strong>Si es plazo fijo, cuenta las renovaciones.</strong> Una sola renovación permitida y tope de 1 año (2 para profesionales/técnicos titulados). Después de eso, el contrato se vuelve indefinido por ley.</li>
+<li><strong>Si es honorarios, considera el costo de no tener AFC ni feriado.</strong> Suma la retención del 15,25% y compara contra el líquido de un contrato equivalente con la <a href="/calculadoras/calculadora-boleta-honorarios">calculadora de boletas</a> y la de <a href="/calculadoras/calculadora-sueldo-liquido">sueldo líquido</a>.</li>
+<li><strong>Si eres empleador, el costo total también cambia.</strong> El costo de un plazo fijo incluye el 3% de AFC completo; el de un indefinido, 2,4%. El <a href="/calculadoras/calculadora-costo-empleado-pyme">simulador de costo de empleado pyme</a> ayuda a comparar escenarios.</li>
+</ol>
+
+<h2>Casos que se confunden</h2>
+<p><strong>"Plazo fijo no tiene finiquito."</strong> Falso: al vencer se firma finiquito como cualquier término de contrato, con vacaciones proporcionales pendientes. Lo que no hay automáticamente es indemnización por años de servicio cuando el contrato simplemente caduca.</p>
+<p><strong>"Honorarios no paga impuestos."</strong> Falso: la retención de la boleta es un pago provisional que se reliquida en la Operación Renta; los honorarios tributan como cualquier renta.</p>
+<p><strong>"A los 3 años de plazo fijo eres indefinido."</strong> La regla no es por años corridos: es por número de renovaciones (máximo una) y duración total (1 año; 2 años para gerentes y profesionales/técnicos titulados). Una sucesión de contratos cortos por obra o faena distinta puede encadenarse sin convertirse si cada una corresponde realmente a un servicio determinado — pero la DT fiscaliza que no sea un artificio.</p>
+<p><strong>"El seguro de cesantía es igual en todos los contratos."</strong> No: en plazo fijo el trabajador no aporta y del 3% del empleador 2,8% va a la cuenta individual y 0,2% al Fondo Solidario; en indefinido se reparte distinto y 0,8% va al Fondo, que es el que permite giros del FCS cuando la cuenta se acaba.</p>
+
+<p>Este artículo es orientación general, no asesoría laboral ni tributaria: la calificación de tu contrato, las cotizaciones y las prestaciones exactas se confirman con la Dirección del Trabajo, la AFC y el SII.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 27 de noviembre de 2026 con la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60764.html" target="_blank" rel="noopener">Dirección del Trabajo sobre contratos de trabajo y honorarios</a>, la <a href="https://www.dt.gob.cl/portal/1628/w3-article-60792.html" target="_blank" rel="noopener">DT sobre duración y renovación del contrato a plazo fijo</a>, la <a href="https://www.afc.cl/empleadores/pagos-y-dudas-sobre-cotizaciones/cotizaciones-cuanto-y-como-se-paga/" target="_blank" rel="noopener">AFC sobre tasas y tope de cotización del seguro de cesantía</a>, la <a href="https://www.afc.cl/afc-informa/noticias/como-saber-el-saldo-de-mi-seguro-de-cesantia/" target="_blank" rel="noopener">AFC sobre el abono del empleador en plazo fijo</a>, la <a href="https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html" target="_blank" rel="noopener">página del SII sobre cotizaciones previsionales de honorarios</a> y el <a href="https://www.bcn.cl/leychile/navegar?idNorma=207436" target="_blank" rel="noopener">Código del Trabajo</a>.</p>`,
+    sources: [
+      {
+        label: 'Dirección del Trabajo — Contratos de trabajo y honorarios',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60764.html',
+      },
+      {
+        label: 'Dirección del Trabajo — Duración y renovación del contrato a plazo fijo',
+        url: 'https://www.dt.gob.cl/portal/1628/w3-article-60792.html',
+      },
+      {
+        label: 'AFC — Cotizaciones del seguro de cesantía: cuánto y cómo se paga',
+        url: 'https://www.afc.cl/empleadores/pagos-y-dudas-sobre-cotizaciones/cotizaciones-cuanto-y-como-se-paga/',
+      },
+      {
+        label: 'AFC — Abono del empleador en contrato a plazo fijo',
+        url: 'https://www.afc.cl/afc-informa/noticias/como-saber-el-saldo-de-mi-seguro-de-cesantia/',
+      },
+      {
+        label: 'SII — Cotizaciones previsionales de trabajadores a honorarios',
+        url: 'https://www.sii.cl/destacados/renta/2025/cotizaciones_previsionales_informacion_general.html',
+      },
+      {
+        label: 'BCN LeyChile — Código del Trabajo',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=207436',
+      },
+      {
+        label: 'BCN LeyChile — Ley 21.561 (jornada máxima de 42 horas)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=1190878',
+      },
+    ],
+  },
+  {
+    slug: 'costo-notaria-compraventa-2027-estimar',
+    embedCalculatorId: 'costo-notaria',
+    title:
+      'Cuánto cuesta escriturar una compraventa en Chile 2027: notaría, Conservador e impuesto al mutuo',
+    description:
+      'Comprar una propiedad no termina en el precio: hay escritura pública, inscripción en el Conservador de Bienes Raíces y, si hay crédito, impuesto de timbres y estampillas de 0,066% por mes o fracción con tope de 0,8%. Qué paga cada parte y qué documentos pedir.',
+    date: '2026-11-27',
+    category: 'vivienda',
+    readingTime: 8,
+    relatedGuia: 'comprar-vivienda-chile',
+    seoTitle: 'Costo notaría y escrituración de compraventa 2027: guía de gastos',
+    seoDescription:
+      'Escritura pública + inscripción CBR + impuesto timbres (0,066% mensual, tope 0,8%) en compraventa de inmueble. Qué paga comprador y vendedor, en qué orden y con qué respaldos.',
+    keywords: [
+      'cuánto cuesta escriturar una compraventa',
+      'costo notaría compraventa 2027',
+      'impuesto de timbres mutuo hipotecario',
+      'inscripción conservador bienes raíces compraventa',
+      'gastos escrituración vivienda chile',
+      'derechos conservador compraventa',
+    ],
+    relatedCalculators: [
+      'calculadora-costo-notaria',
+      'calculadora-plusvalia',
+      'calculadora-capacidad-credito-hipotecario',
+    ],
+    faq: [
+      {
+        question: '¿La escritura de compraventa la paga el comprador o el vendedor?',
+        answer:
+          'La práctica habitual es que el comprador paga los derechos notariales de la escritura y la inscripción en el Conservador, porque es quien inscribe su dominio; el vendedor paga los impuestos que gravan la transferencia (plusvalía si corresponde, certificados de su dominio vigente). Pero el reparto se puede pactar distinto en la promesa: lo que manda es lo firmado.',
+      },
+      {
+        question: '¿Cuánto es el impuesto de timbres y estampillas del mutuo hipotecario?',
+        answer:
+          'Para documentos de mutuo o crédito pagaderos a plazo, la tasa general es de 0,066% por cada mes o fracción del plazo, con tope de 0,8% del capital prestado. Se declara y paga con los formularios 24 y 24.1 del SII.',
+      },
+      {
+        question: '¿La firma de la escritura ya me hace dueño?',
+        answer:
+          'No. La escritura pública formaliza la compraventa, pero la tradición del dominio requiere inscribir el contrato en el Registro de Propiedad del Conservador de Bienes Raíces competente. Por eso el pago del precio suele coordinarse con esa inscripción.',
+      },
+      {
+        question: '¿Hay un arancel único de notarías y Conservadores?',
+        answer:
+          'No en la práctica: los derechos notariales y de inscripción dependen del acto, el monto, el inmueble y el conservador competente. Por eso se recomienda pedir una provisión desglosada antes de pagar y una liquidación con devolución del saldo no usado al finalizar.',
+      },
+      {
+        question: '¿Qué otros costos suele olvidar la gente al comprar vivienda?',
+        answer:
+          'Además de notaría y Conservador: el estudio de títulos (certificados de dominio vigente, hipotecas, gravámenes, contribuciones), el impuesto al mutuo si hay crédito, el gasto de tasación del banco, los honorarios del corredor si los hay, y la primera cuota de contribuciones si queda prorrateada.',
+      },
+    ],
+    content: `<p class="article-lead">El precio de una compraventa no es el único desembolso: entre la promesa y la inscripción hay <strong>notaría, Conservador de Bienes Raíces e impuestos</strong> que pueden sumar varios puntos del valor de la operación. Esta guía ordena qué se paga, en qué momento y quién lo paga habitualmente en Chile, con el detalle verificado al 27 de noviembre de 2026.</p>
+<p>El flujo estándar de una compraventa inmobiliaria es: <strong>promesa → escritura pública → pago de tributos e impuestos → inscripción en el Registro de Propiedad del Conservador</strong>. La <a href="/guias/comprar-vivienda-chile">guía completa de compra de vivienda</a> cubre el proceso entero; aquí nos concentramos en el tramo que más costos concentra: de la firma a la inscripción.</p>
+
+<h2>Los tres costos que no debes olvidar</h2>
+<div class="table-scroll"><table>
+<caption>Componentes del costo de escrituración de una compraventa</caption>
+<thead><tr><th scope="col">Ítem</th><th scope="col">Quién lo cobra</th><th scope="col">Quién lo paga habitualmente</th><th scope="col">Orden de magnitud</th></tr></thead>
+<tbody>
+<tr><td>Escritura pública y derechos notariales</td><td>Notario</td><td>Comprador</td><td>Arancel según acto y notaría; se pide provisión desglosada</td></tr>
+<tr><td>Inscripción en Registro de Propiedad</td><td>Conservador de Bienes Raíces</td><td>Comprador</td><td>Según acto e inscripciones; no hay tarifa única nacional</td></tr>
+<tr><td>Impuesto de timbres y estampillas (solo si hay mutuo o documento a plazo)</td><td>SII / Tesorería</td><td>Deudor (comprador con crédito)</td><td>0,066% por mes o fracción, tope 0,8% del capital</td></tr>
+<tr><td>Certificados y estudio de títulos</td><td>CBR, SII, municipalidad, corredor</td><td>Variable; suele costearlos quien encarga el estudio</td><td>Varios documentos de valor menor cada uno</td></tr>
+<tr><td>Impuesto a la plusvalía (si corresponde)</td><td>SII</td><td>Vendedor</td><td>Según mayor valor, cupo de 8.000 UF y régimen elegido</td></tr>
+</tbody>
+</table></div>
+
+<h2>La escritura pública y la notaría</h2>
+<p>La compraventa de un bien raíz debe otorgarse por <strong>escritura pública</strong>: el notario da fe de la firma, revisa la capacidad de las partes y deja el contrato en su protocolo. Ese servicio tiene derechos notariales que dependen del acto y de cada notaría; no existe una tabla única obligatoria que cubra todos los casos, por eso la recomendación estándar es <strong>pedir una provisión de fondos desglosada</strong> antes de pagar: debe decir quién cobra, sobre qué base y si incluye IVA.</p>
+<p>En la misma visita suelen gestionarse certificados menores (dominio vigente, hipotecas y gravámenes, prohibiciones) que sirven para el estudio de títulos. Una provisión seria distingue los derechos notariales de los reembolsos a terceros (Conservador, municipalidad, impuestos).</p>
+
+<h2>El Conservador de Bienes Raíces: la inscripción que hace efectivo el dominio</h2>
+<p>Firmar la escritura no te convierte por sí solo en dueño. La <strong>tradición del dominio se produce con la inscripción</strong> de la compraventa en el Registro de Propiedad del Conservador de Bienes Raíces de la comuna o agrupación donde está el inmueble (<a href="https://conservador.cl/portal/inscripcion_propiedad" target="_blank" rel="noopener">Conservador de Santiago</a>). Por eso la coordinación del pago suele hacerse contra esa inscripción: el vendedor no cobra hasta que el dominio queda inscrito a nombre del comprador, y para eso existen mecanismos como la cuenta vista, la carta de crédito o el vale vista retenido.</p>
+<p>Los derechos del Conservador varían por acto e inscripciones: una escritura que lleva dominio, hipoteca y prohibiciones simultáneas no cuesta lo mismo que una compraventa al contado sin anotaciones. Al igual que con la notaría, pide la provisión desglosada y la liquidación final con devolución de lo no usado.</p>
+
+<h2>Impuesto de timbres y estampillas del mutuo hipotecario</h2>
+<p>Si la compra se financia con crédito, el mutuo paga <strong>Impuesto de Timbres y Estampillas</strong>: para documentos de mutuo o crédito pagaderos a plazo, la tasa general es de <strong>0,066% por cada mes o fracción del plazo del crédito, con tope de 0,8%</strong> del capital prestado (<a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm" target="_blank" rel="noopener">preguntas frecuentes del SII</a>). En un mutuo con banco el impuesto lo declara el acreedor en el mes siguiente al documento, y su costo se traspasa al comprador-deudor (arts. 9 N.º 3 y 15 N.º 3 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=7137" target="_blank" rel="noopener">Decreto Ley 3.475</a>): se gestiona con los <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm" target="_blank" rel="noopener">formularios 24 y 24.1 del SII</a>.</p>
+<div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: mutuo de $120.000.000 a 20 años</div><ul><li>Plazo: 240 meses → tasa 0,066% × 240 = 15,84%, pero aplica el <strong>tope del 0,8%</strong>.</li><li>Impuesto: 0,8% × $120.000.000 = <strong>$960.000</strong>.</li><li>Lo declara el banco en el mes siguiente al documento con el F24/F24.1 y lo recobra del deudor.</li></ul></div>
+<p>Un mutuo a 20 o 25 años siempre pega en el tope del 0,8%: en la práctica el impuesto del crédito largo es simplemente el 0,8% del capital. Para estimar el dividendo de ese mismo crédito, sirve la <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a>; y para ver cuánto permite pagar el sueldo, la de <a href="/calculadoras/calculadora-capacidad-credito-hipotecario">capacidad de crédito</a>.</p>
+
+<h2>El impuesto a la plusvalía, que no es del comprador</h2>
+<p>Un costo que confunde la mesa de negociación es el <strong>impuesto al mayor valor</strong> por la venta: lo paga el vendedor, no el comprador, y se calcula sobre la ganancia reajustada respecto del costo tributario, con el cupo vitalicio de 8.000 UF como ingreso no renta para personas naturales que cumplen los requisitos (art. 17 N° 8 letra b) de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a>). La <a href="/calculadoras/calculadora-plusvalia">calculadora de plusvalía</a> y el <a href="/blog/plusvalia-dfl2-vs-comun-chile">artículo sobre DFL2 y propiedad común</a> desarrollan ese cálculo.</p>
+<p>Para el comprador importa porque una venta que arrastra impuestos sin calcular puede complicar la inscripción o el pago: conviene que la escritura deje claro quién declara y con qué antecedentes.</p>
+
+<h2>En qué orden ocurren los pagos</h2>
+<ol class="steps">
+<li><strong>Promesa:</strong> puede costar una escritura simple o pública según lo acordado; la reserva se imputa al precio si se firma o se pierde/devuelve según la cláusula.</li>
+<li><strong>Estudio de títulos:</strong> certificados de dominio vigente, hipotecas y gravámenes, prohibiciones, expropiaciones, contribuciones al día y, si hay sociedad, escrituras y poderes. El banco repite el estudio si hay mutuo.</li>
+<li><strong>Escritura pública:</strong> se pagan derechos notariales al firmar.</li>
+<li><strong>Impuesto del mutuo:</strong> si hay crédito, F24/F24.1 por el 0,066% mensual con tope 0,8%.</li>
+<li><strong>Inscripción CBR:</strong> derechos del Conservador; la tradición del dominio se completa al inscribir.</li>
+<li><strong>Post-inscripción:</strong> aviso al avalúo/municipio, prorrateo de contribuciones si se pactó y archivo de la escritura autorizada con sus copias.</li>
+</ol>
+
+<h2>Errores frecuentes al presupuestar</h2>
+<ul>
+<li><strong>Presupuestar solo el precio.</strong> Notaría, CBR, certificados, timbres, tasación del banco, corredor y primera cuota de contribuciones se suman al pie; para una compra con crédito suelen mover varios millones extra.</li>
+<li><strong>Confundir firma con dominio.</strong> La compraventa no transfiere la propiedad hasta la inscripción; coordinar pago e inscripción es la práctica segura.</li>
+<li><strong>Pagar sin provisión desglosada.</strong> Los derechos varían por acto: sin desglose no se sabe qué es notaría, qué es Conservador y qué es reembolso.</li>
+<li><strong>Olvidar el impuesto del mutuo.</strong> El 0,8% del capital del crédito es un ítem real del costo de financiamiento, aparte de los intereses.</li>
+<li><strong>Mezclar plusvalía con timbres.</strong> La plusvalía la paga el vendedor sobre su ganancia; el impuesto de timbres lo paga el comprador-deudor por el crédito.</li>
+</ul>
+
+<p>Para un escenario aproximado de gastos antes de pedir provisión, la <a href="/calculadoras/calculadora-costo-notaria">calculadora de costo de notaría</a> entrega referencias. Es un estimador: los montos finales los fija la provisión de tu notario y tu Conservador.</p>
+
+<p>Este artículo es orientación general, no asesoría legal, notarial ni tributaria: la provisión real la fija tu notario y tu Conservador, y el impuesto de la venta se declara según tu situación en el SII.</p>
+
+<h2>Fuentes consultadas</h2>
+<p>Contenido verificado el 27 de noviembre de 2026 con las <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm" target="_blank" rel="noopener">preguntas frecuentes del SII sobre el impuesto de timbres y estampillas</a>, los <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm" target="_blank" rel="noopener">formularios 24 y 24.1 del SII</a>, la <a href="https://conservador.cl/portal/inscripcion_propiedad" target="_blank" rel="noopener">página de inscripción de propiedad del Conservador de Bienes Raíces de Santiago</a> y la <a href="https://www.bcn.cl/leychile/navegar?idNorma=6368" target="_blank" rel="noopener">Ley sobre Impuesto a la Renta</a> para el tratamiento del mayor valor.</p>`,
+    sources: [
+      {
+        label: 'SII — Impuesto de timbres y estampillas (preguntas frecuentes)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm',
+      },
+      {
+        label: 'SII — Formularios 24 y 24.1 (timbres y estampillas)',
+        url: 'https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm',
+      },
+      {
+        label: 'Conservador de Bienes Raíces de Santiago — Inscripción de propiedad',
+        url: 'https://conservador.cl/portal/inscripcion_propiedad',
+      },
+      {
+        label: 'BCN LeyChile — Decreto Ley 3.475 (impuesto de timbres y estampillas)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=7137',
+      },
+      {
+        label: 'BCN LeyChile — Ley sobre Impuesto a la Renta',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=6368',
+      },
+    ],
+  },
+  {
     slug: 'bonos-beneficios-diciembre-2026-pagos-ips',
     title:
       'Bonos y beneficios que se pagan en diciembre de 2026: aguinaldo, PGU, SUF y calendario IPS',

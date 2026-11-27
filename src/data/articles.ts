@@ -7773,6 +7773,7 @@ const OFFICIAL_SOURCE_HOSTS = [
   'bcn.cl',
   'chileatiende.gob.cl',
   'cmfchile.cl',
+  'conservador.cl',
   'dt.gob.cl',
   'ine.gob.cl',
   'ingresa.cl',
