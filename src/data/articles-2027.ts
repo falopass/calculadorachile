@@ -2104,7 +2104,7 @@ export const ARTICULOS_2027: Article[] = [
 <p>Los derechos del Conservador varían por acto e inscripciones: una escritura que lleva dominio, hipoteca y prohibiciones simultáneas no cuesta lo mismo que una compraventa al contado sin anotaciones. Al igual que con la notaría, pide la provisión desglosada y la liquidación final con devolución de lo no usado.</p>
 
 <h2>Impuesto de timbres y estampillas del mutuo hipotecario</h2>
-<p>Si la compra se financia con crédito, el mutuo paga <strong>Impuesto de Timbres y Estampillas</strong>: para documentos de mutuo o crédito pagaderos a plazo, la tasa general es de <strong>0,066% por cada mes o fracción del plazo del crédito, con tope de 0,8%</strong> del capital prestado (<a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm" target="_blank" rel="noopener">preguntas frecuentes del SII</a>). En un mutuo con banco el impuesto lo declara el acreedor en el mes siguiente al documento, y su costo se traspasa al comprador-deudor: se gestiona con los <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm" target="_blank" rel="noopener">formularios 24 y 24.1 del SII</a>.</p>
+<p>Si la compra se financia con crédito, el mutuo paga <strong>Impuesto de Timbres y Estampillas</strong>: para documentos de mutuo o crédito pagaderos a plazo, la tasa general es de <strong>0,066% por cada mes o fracción del plazo del crédito, con tope de 0,8%</strong> del capital prestado (<a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_1689.htm" target="_blank" rel="noopener">preguntas frecuentes del SII</a>). En un mutuo con banco el impuesto lo declara el acreedor en el mes siguiente al documento, y su costo se traspasa al comprador-deudor (arts. 9 N.º 3 y 15 N.º 3 del <a href="https://www.bcn.cl/leychile/navegar?idNorma=7137" target="_blank" rel="noopener">Decreto Ley 3.475</a>): se gestiona con los <a href="https://www.sii.cl/preguntas_frecuentes/otros_impuestos/001_390_0369.htm" target="_blank" rel="noopener">formularios 24 y 24.1 del SII</a>.</p>
 <div class="numeric-example"><div class="numeric-example__title">Ejemplo hipotético: mutuo de $120.000.000 a 20 años</div><ul><li>Plazo: 240 meses → tasa 0,066% × 240 = 15,84%, pero aplica el <strong>tope del 0,8%</strong>.</li><li>Impuesto: 0,8% × $120.000.000 = <strong>$960.000</strong>.</li><li>Lo declara el banco en el mes siguiente al documento con el F24/F24.1 y lo recobra del deudor.</li></ul></div>
 <p>Un mutuo a 20 o 25 años siempre pega en el tope del 0,8%: en la práctica el impuesto del crédito largo es simplemente el 0,8% del capital. Para estimar el dividendo de ese mismo crédito, sirve la <a href="/calculadoras/calculadora-credito-hipotecario">calculadora de crédito hipotecario</a>; y para ver cuánto permite pagar el sueldo, la de <a href="/calculadoras/calculadora-capacidad-credito-hipotecario">capacidad de crédito</a>.</p>
 
@@ -2149,6 +2149,10 @@ export const ARTICULOS_2027: Article[] = [
       {
         label: 'Conservador de Bienes Raíces de Santiago — Inscripción de propiedad',
         url: 'https://conservador.cl/portal/inscripcion_propiedad',
+      },
+      {
+        label: 'BCN LeyChile — Decreto Ley 3.475 (impuesto de timbres y estampillas)',
+        url: 'https://www.bcn.cl/leychile/navegar?idNorma=7137',
       },
       {
         label: 'BCN LeyChile — Ley sobre Impuesto a la Renta',

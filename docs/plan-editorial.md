@@ -356,7 +356,7 @@ Objetivo del producto = **pageviews AdSense**, no solo fit calculadora. La restr
 
 **Qué queda fuera a propósito (no #51+ por ahora):** DR[2] licencia conducir, DR[4] multas como post, DR[10] fuero, DR[15] retiros, DR[29] RSH — ver sección “sin lugar”.
 
-**Ritmo:** 14 pendientes / ~24 semanas ≈ **1,5 posts/semana**. Sigue sostenible si se prioriza P2-ventana → P2-continuo (#47–#50 entran en el bulk continuo de sep–oct).
+**Ritmo:** 14 pendientes / ~24 semanas ≈ **0,6 posts/semana**. Sigue sostenible si se prioriza P2-ventana → P2-continuo (#47–#50 entran en el bulk continuo de sep–oct).
 
 ---
 
@@ -378,7 +378,7 @@ Extensión AdSense (decisión 2026-07-10):
   #47–#50 desde DR huérfanos:    4
 
 Plan integrado operativo (recuento de las tablas tras publicar #21, #23 y #27):
-  Filas en la tabla Publicados:  27
+  Filas en la tabla Publicados:  28
   Filas activas en pendientes:  14
     blog:                       13
     blog* (candidata guía):      1   (#47)
